@@ -7,6 +7,7 @@ export default function Home() {
     <main className={styles.main}>
       <h2>Mathematics is Awesome</h2>
       <div>{port}</div>
+      <div></div>
     </main>
   )
 }
