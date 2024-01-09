@@ -4,6 +4,7 @@ import RootLayout from './layout'
 import GenericTable from '@/app/components/generic-table/GenericTable';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import '../table.css'
+import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 
 
 
@@ -59,6 +60,7 @@ export default function TablePage({ category, table, selectedItem }) {
        
      <>
     <div className='table-container'>
+        <MyNavbar></MyNavbar>
     
     <GenericTable tableData={selectedItem}></GenericTable>
     <br></br>

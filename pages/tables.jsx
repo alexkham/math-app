@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { capitalizeWords } from '@/app/utils/utils-functions';
 import './tables.css'
+import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 
 
 export async function getStaticProps() {
@@ -36,10 +37,44 @@ export default function tables({filesData}) {
   
   return (
     <>
+    
      <div className='tables-main'>
+     <MyNavbar></MyNavbar>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
     <SelectTable2Steps 
     categoryOptions={categoryOptions}
      filesData={filesData}></SelectTable2Steps>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+    
+    
+   
     </div>
     </>
   )

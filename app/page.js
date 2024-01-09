@@ -20,14 +20,14 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <div>First Significant Line</div>
-      {/* <MyNavbar></MyNavbar> */}
+      
+     
       <br></br>
       <br></br>
       <br></br>
       <br></br>
       <Link href={'/tables'}>
-       <button>Tables</button>
+       <button>Go to Tables Page</button>
        </Link>
      <br></br>
      <br></br>
