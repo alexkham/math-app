@@ -1,0 +1,380 @@
+[
+{
+    "tableTitle": "Key Trigonometric Values",
+    "rows": [
+      {
+        "Angle (degrees)": "0°",
+        "Sine (sin)": "0",
+        "Cosine (cos)": "1",
+        "Tangent (tan)": "0",
+        "Cosecant (csc)": "Undefined",
+        "Secant (sec)": "1",
+        "Cotangent (cot)": "Undefined"
+      },
+      {
+        "Angle (degrees)": "30°",
+        "Sine (sin)": "1/2",
+        "Cosine (cos)": "√3/2",
+        "Tangent (tan)": "1/√3",
+        "Cosecant (csc)": "2",
+        "Secant (sec)": "2√3/3",
+        "Cotangent (cot)": "√3"
+      },
+      {
+        "Angle (degrees)": "45°",
+        "Sine (sin)": "√2/2",
+        "Cosine (cos)": "√2/2",
+        "Tangent (tan)": "1",
+        "Cosecant (csc)": "√2",
+        "Secant (sec)": "√2",
+        "Cotangent (cot)": "1"
+      },
+      {
+        "Angle (degrees)": "60°",
+        "Sine (sin)": "√3/2",
+        "Cosine (cos)": "1/2",
+        "Tangent (tan)": "√3",
+        "Cosecant (csc)": "2√3/3",
+        "Secant (sec)": "2",
+        "Cotangent (cot)": "1/√3"
+      },
+      {
+        "Angle (degrees)": "90°",
+        "Sine (sin)": "1",
+        "Cosine (cos)": "0",
+        "Tangent (tan)": "Undefined",
+        "Cosecant (csc)": "1",
+        "Secant (sec)": "Undefined",
+        "Cotangent (cot)": "0"
+      },
+      {
+        "Angle (degrees)": "120°",
+        "Sine (sin)": "√3/2",
+        "Cosine (cos)": "-1/2",
+        "Tangent (tan)": "-√3",
+        "Cosecant (csc)": "2√3/3",
+        "Secant (sec)": "-2",
+        "Cotangent (cot)": "-1/√3"
+      },
+      {
+        "Angle (degrees)": "135°",
+        "Sine (sin)": "√2/2",
+        "Cosine (cos)": "-√2/2",
+        "Tangent (tan)": "-1",
+        "Cosecant (csc)": "√2",
+        "Secant (sec)": "-√2",
+        "Cotangent (cot)": "-1"
+      },
+      {
+        "Angle (degrees)": "150°",
+        "Sine (sin)": "1/2",
+        "Cosine (cos)": "-√3/2",
+        "Tangent (tan)": "-1/√3",
+        "Cosecant (csc)": "2",
+        "Secant (sec)": "-2√3/3",
+        "Cotangent (cot)": "-√3"
+      },
+      {
+        "Angle (degrees)": "180°",
+        "Sine (sin)": "0",
+        "Cosine (cos)": "-1",
+        "Tangent (tan)": "0",
+        "Cosecant (csc)": "Undefined",
+        "Secant (sec)": "-1",
+        "Cotangent (cot)": "Undefined"
+      },
+      {
+        "Angle (degrees)": "210°",
+        "Sine (sin)": "-1/2",
+        "Cosine (cos)": "-√3/2",
+        "Tangent (tan)": "1/√3",
+        "Cosecant (csc)": "-2",
+        "Secant (sec)": "-2√3/3",
+        "Cotangent (cot)": "√3"
+      },
+      {
+        "Angle (degrees)": "225°",
+        "Sine (sin)": "-√2/2",
+        "Cosine (cos)": "-√2/2",
+        "Tangent (tan)": "1",
+        "Cosecant (csc)": "-√2",
+        "Secant (sec)": "-√2",
+        "Cotangent (cot)": "1"
+      },
+      {
+        "Angle (degrees)": "240°",
+        "Sine (sin)": "-√3/2",
+        "Cosine (cos)": "-1/2",
+        "Tangent (tan)": "√3",
+        "Cosecant (csc)": "-2√3/3",
+        "Secant (sec)": "-2",
+        "Cotangent (cot)": "1/√3"
+      },
+      {
+        "Angle (degrees)": "270°",
+        "Sine (sin)": "-1",
+        "Cosine (cos)": "0",
+        "Tangent (tan)": "Undefined",
+        "Cosecant (csc)": "-1",
+        "Secant (sec)": "Undefined",
+        "Cotangent (cot)": "0"
+      },
+      {
+        "Angle (degrees)": "300°",
+        "Sine (sin)": "-√3/2",
+        "Cosine (cos)": "1/2",
+        "Tangent (tan)": "-√3",
+        "Cosecant (csc)": "-2√3/3",
+        "Secant (sec)": "2",
+        "Cotangent (cot)": "-1/√3"
+      },
+      {
+        "Angle (degrees)": "315°",
+        "Sine (sin)": "-√2/2",
+        "Cosine (cos)": "√2/2",
+        "Tangent (tan)": "-1",
+        "Cosecant (csc)": "-√2",
+        "Secant (sec)": "√2",
+        "Cotangent (cot)": "-1"
+      },
+      {
+        "Angle (degrees)": "330°",
+        "Sine (sin)": "-1/2",
+        "Cosine (cos)": "√3/2",
+        "Tangent (tan)": "-1/√3",
+        "Cosecant (csc)": "-2",
+        "Secant (sec)": "2√3/3",
+        "Cotangent (cot)": "-√3"
+      },
+      {
+        "Angle (degrees)": "360°",
+        "Sine (sin)": "0",
+        "Cosine (cos)": "1",
+        "Tangent (tan)": "0",
+        "Cosecant (csc)": "Undefined",
+        "Secant (sec)": "1",
+        "Cotangent (cot)": "Undefined"
+      }
+    ]
+  },
+  {
+    "tableTitle": "Angle Sum Difference  Formulas",
+    "rows": [
+      {
+        "Function": "Sine",
+        "Identity": "sin(α ± β) = sin α cos β ± cos α sin β"
+      },
+      {
+        "Function": "Cosine",
+        "Identity": "cos(α ± β) = cos α cos β ∓ sin α sin β"
+      },
+      {
+        "Function": "Tangent",
+        "Identity": "tan(α ± β) = (tan α ± tan β) / (1 ∓ tan α tan β)"
+      },
+      {
+        "Function": "Cosecant",
+        "Identity": "csc(α ± β) = (sec α sec β csc α csc β) / (sec α csc β ± csc α sec β)"
+      },
+      {
+        "Function": "Secant",
+        "Identity": "sec(α ± β) = (sec α sec β csc α csc β) / (csc α csc β ∓ sec α sec β)"
+      },
+      {
+        "Function": "Cotangent",
+        "Identity": "cot(α ± β) = (cot α cot β ∓ 1) / (cot β ± cot α)"
+      },
+      {
+        "Function": "Arcsine",
+        "Identity": "arcsin x ± arcsin y = arcsin(x√(1-y²) ± y√(1-x²))"
+      },
+      {
+        "Function": "Arccosine",
+        "Identity": "arccos x ± arccos y = arccos(xy ∓ √((1-x²)(1-y²)))"
+      },
+      {
+        "Function": "Arctangent",
+        "Identity": "arctan x ± arctan y = arctan((x ± y) / (1 ∓ xy))"
+      },
+      {
+        "Function": "Arccotangent",
+        "Identity": "arccot x ± arccot y = arccot((xy ∓ 1) / (y ± x))"
+      }
+    ]
+  },
+  {
+    "tableTitle": "Trigonometric Function Transformations",
+    "rows": [
+      {
+        "Shift by one quarter period": "sin(θ ± π/2) = ± cos θ",
+        "Shift by one half period": "sin(θ + π) = -sin θ",
+        "Shift by full periods": "sin(θ + k · 2π) = +sin θ",
+        "Period": "2π"
+      },
+      {
+        "Shift by one quarter period": "cos(θ ± π/2) = ∓ sin θ",
+        "Shift by one half period": "cos(θ + π) = -cos θ",
+        "Shift by full periods": "cos(θ + k · 2π) = +cos θ",
+        "Period": "2π"
+      },
+      {
+        "Shift by one quarter period": "csc(θ ± π/2) = ± sec θ",
+        "Shift by one half period": "csc(θ + π) = -csc θ",
+        "Shift by full periods": "csc(θ + k · 2π) = +csc θ",
+        "Period": "2π"
+      },
+      {
+        "Shift by one quarter period": "sec(θ ± π/2) = ∓ csc θ",
+        "Shift by one half period": "sec(θ + π) = -sec θ",
+        "Shift by full periods": "sec(θ + k · 2π) = +sec θ",
+        "Period": "2π"
+      },
+      {
+        "Shift by one quarter period": "tan(θ ± π/4) = (tan θ ± 1) / (1 ∓ tan θ)",
+        "Shift by one half period": "tan(θ + π/2) = -cot θ",
+        "Shift by full periods": "tan(θ + k · π) = +tan θ",
+        "Period": "π"
+      },
+      {
+        "Shift by one quarter period": "cot(θ ± π/4) = (cot θ ∓ 1) / (1 ± cot θ)",
+        "Shift by one half period": "cot(θ + π/2) = -tan θ",
+        "Shift by full periods": "cot(θ + k · π) = +cot θ",
+        "Period": "π"
+      }
+    ]
+  }
+  ,
+  {
+    "tableTitle": "Trigonometrical  Reflections",
+    "rows": [
+      {
+        "θ reflected in α=0": "sin(-θ) = -sin θ",
+        "θ reflected in α=π/4": "sin(π/2 - θ) = cos θ",
+        "θ reflected in α=π/2": "sin(π - θ) = +sin θ",
+        "θ reflected in α=3π/4": "sin(3π/2 - θ) = -cos θ",
+        "θ reflected in α=π": "sin(2π - θ) = -sin(θ) = sin(-θ)"
+      },
+      {
+        "θ reflected in α=0": "cos(-θ) = +cos θ",
+        "θ reflected in α=π/4": "cos(π/2 - θ) = sin θ",
+        "θ reflected in α=π/2": "cos(π - θ) = -cos θ",
+        "θ reflected in α=3π/4": "cos(3π/2 - θ) = -sin θ",
+        "θ reflected in α=π": "cos(2π - θ) = +cos(θ) = cos(-θ)"
+      },
+      {
+        "θ reflected in α=0": "tan(-θ) = -tan θ",
+        "θ reflected in α=π/4": "tan(π/2 - θ) = cot θ",
+        "θ reflected in α=π/2": "tan(π - θ) = -tan θ",
+        "θ reflected in α=3π/4": "tan(3π/2 - θ) = +cot θ",
+        "θ reflected in α=π": "tan(2π - θ) = -tan(θ) = tan(-θ)"
+      },
+      {
+        "θ reflected in α=0": "cot(-θ) = -cot θ",
+        "θ reflected in α=π/4": "cot(π/2 - θ) = tan θ",
+        "θ reflected in α=π/2": "cot(π - θ) = -cot θ",
+        "θ reflected in α=3π/4": "cot(3π/2 - θ) = +tan θ",
+        "θ reflected in α=π": "cot(2π - θ) = -cot(θ) = cot(-θ)"
+      },
+      {
+        "θ reflected in α=0": "sec(-θ) = +sec θ",
+        "θ reflected in α=π/4": "sec(π/2 - θ) = csc θ",
+        "θ reflected in α=π/2": "sec(π - θ) = -sec θ",
+        "θ reflected in α=3π/4": "sec(3π/2 - θ) = -csc θ",
+        "θ reflected in α=π": "sec(2π - θ) = +sec(θ) = sec(-θ)"
+      },
+      {
+        "θ reflected in α=0": "csc(-θ) = -csc θ",
+        "θ reflected in α=π/4": "csc(π/2 - θ) = sec θ",
+        "θ reflected in α=π/2": "csc(π - θ) = +csc θ",
+        "θ reflected in α=3π/4": "csc(3π/2 - θ) = -sec θ",
+        "θ reflected in α=π": "csc(2π - θ) = -csc(θ) = csc(-θ)"
+      }
+    ]
+  },
+  {
+    "tableTitle": "Double-Angle Identities",
+    "rows": [
+      {
+        "formula_title": "Sine Double-Angle",
+        "description": "Sine of double the angle.",
+        "formula": "\\sin(2\\theta) = 2\\sin(\\theta)\\cos(\\theta) = (\\sin(\\theta) + \\cos(\\theta))^2 - 1 = \\frac{2\\tan(\\theta)}{1 + \\tan^2(\\theta)}"
+        
+      },
+      {
+        "formula_title": "Cosine Double-Angle",
+        "description": "Cosine of double the angle.",
+        "formula": "\\cos(2\\theta) = \\cos^2(\\theta) - \\sin^2(\\theta) = 2\\cos^2(\\theta) - 1 = 1 - 2\\sin^2(\\theta) = \\frac{1 - \\tan^2(\\theta)}{1 + \\tan^2(\\theta)}"
+        
+      },
+      {
+        "formula_title": "Tangent Double-Angle",
+        "description": "Tangent of double the angle.",
+        "formula": "\\tan(2\\theta) = \\frac{2\\tan(\\theta)}{1 - \\tan^2(\\theta)}"
+       
+      },
+      {
+        "formula_title": "Cotangent Double-Angle",
+        "description": "Cotangent of double the angle.",
+        "formula": "\\cot(2\\theta) = \\frac{\\cot^2(\\theta) - 1}{2\\cot(\\theta)} = \\frac{1 - \\tan^2(\\theta)}{2\\tan(\\theta)}"
+        
+      },
+      {
+        "formula_title": "Secant Double-Angle",
+        "description": "Secant of double the angle.",
+        "formula": "\\sec(2\\theta) = \\frac{\\sec^2(\\theta)}{2 - \\sec^2(\\theta)} = \\frac{1 + \\tan^2(\\theta)}{1 - \\tan^2(\\theta)}"
+       
+      },
+      {
+        "formula_title": "Cosecant Double-Angle",
+        "description": "Cosecant of double the angle.",
+        "formula": "\\csc(2\\theta) = \\frac{\\sec(\\theta)\\csc(\\theta)}{2} = \\frac{1 + \\tan^2(\\theta)}{2\\tan(\\theta)}"
+        
+      }
+    ]
+  }
+  ,
+  {
+    "tableTitle": "Half-Angle Identities",
+    "rows": [
+      {
+        "formula_title": "Sine Half-Angle",
+        "description": "Sine of half the angle.",
+        "formula": "\\sin\\left(\\frac{\\theta}{2}\\right) = \\operatorname{sgn}\\left(\\sin\\frac{\\theta}{2}\\right)\\sqrt{\\frac{1 - \\cos(\\theta)}{2}}"
+        
+      },
+      {
+        "formula_title": "Cosine Half-Angle",
+        "description": "Cosine of half the angle.",
+        "formula": "\\cos\\left(\\frac{\\theta}{2}\\right) = \\operatorname{sgn}\\left(\\cos\\frac{\\theta}{2}\\right)\\sqrt{\\frac{1 + \\cos(\\theta)}{2}}"
+        
+      },
+      {
+        "formula_title": "Tangent Half-Angle",
+        "description": "Tangent of half the angle.",
+        "formula": "\\tan\\left(\\frac{\\theta}{2}\\right) = \\frac{1 - \\cos(\\theta)}{\\sin(\\theta)} = \\frac{\\sin(\\theta)}{1 + \\cos(\\theta)} = \\csc(\\theta) - \\cot(\\theta) = \\frac{\\tan(\\theta)}{1 + \\sec(\\theta)} = \\operatorname{sgn}(\\sin(\\theta))\\sqrt{\\frac{1 - \\cos(\\theta)}{1 + \\cos(\\theta)}} = \\frac{-1 + \\operatorname{sgn}(\\cos(\\theta))\\sqrt{1 + \\tan^2(\\theta)}}{\\tan(\\theta)}"
+        
+      },
+      {
+        "formula_title": "Cotangent Half-Angle",
+        "description": "Cotangent of half the angle.",
+        "formula": "\\cot\\left(\\frac{\\theta}{2}\\right) = \\frac{1 + \\cos(\\theta)}{\\sin(\\theta)} = \\frac{\\sin(\\theta)}{1 - \\cos(\\theta)} = \\csc(\\theta) + \\cot(\\theta) = \\operatorname{sgn}(\\sin(\\theta))\\sqrt{\\frac{1 + \\cos(\\theta)}{1 - \\cos(\\theta)}}"
+       
+      },
+      {
+        "formula_title": "Secant Half-Angle",
+        "description": "Secant of half the angle.",
+        "formula": "\\sec\\left(\\frac{\\theta}{2}\\right) = \\operatorname{sgn}\\left(\\cos\\frac{\\theta}{2}\\right)\\sqrt{\\frac{2}{1 + \\cos(\\theta)}}"
+        
+      },
+      {
+        "formula_title": "Cosecant Half-Angle",
+        "description": "Cosecant of half the angle.",
+        "formula": "\\csc\\left(\\frac{\\theta}{2}\\right) = \\operatorname{sgn}\\left(\\sin\\frac{\\theta}{2}\\right)\\sqrt{\\frac{2}{1 - \\cos(\\theta)}}"
+       
+      }
+    ]
+  }
+
+   
+  
+]
