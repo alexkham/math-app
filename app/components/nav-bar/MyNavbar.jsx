@@ -26,8 +26,8 @@ function fixNav(){
   };
   return (
     <>
-    <nav class="nav">
-  <div class="container">
+    <nav className="nav">
+  <div className="container">
     {/* <h1 class="logo"><a href="#">My website</a></h1> */}
     <ul>
       <li><Link href="/">Home</Link></li>
