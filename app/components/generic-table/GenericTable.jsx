@@ -24,6 +24,7 @@ const GenericTable = ({ tableData }) => {
           <thead>
             <tr>
               {columnHeaders.map((header, index) => (
+                
                 <th key={index}>{capitalizeWords(header.replace(/_/g, ' '))}</th>
               ))}
             </tr>
@@ -35,6 +36,7 @@ const GenericTable = ({ tableData }) => {
                   if (col === 'formula') {
                     return <td key={colIndex}><InlineMath math={row[col]} /></td>;
                   } else {
+                    if(row[col]!='')
                     return <td key={colIndex}>{row[col]}</td>;
                   }
                 })}
