@@ -47,6 +47,7 @@
   
   .tooltip-container:hover .tooltip, .tooltip-container:focus .tooltip {
     visibility: visible;
+    margin-bottom: 5px;
   }
 
   .flex-table-container {
@@ -92,6 +93,7 @@
   
   .flex-table-cell:hover{
     background-color: #ccc;
+    border: solid 0.5px black;
   }
 
   .z-container-outer{
