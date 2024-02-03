@@ -5,7 +5,9 @@ import GenericTable from '@/app/components/generic-table/GenericTable';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import '../table.css'
 import MyNavbar from '@/app/components/nav-bar/MyNavbar';
-
+import FlexTableDynamic from '@/app/components/z-table/FlexTableDynamic';
+import { cumulativeProbability,complementaryCumulativeProbability } from '@/app/utils/z-tables';
+import ZTableContainer from '@/app/components/z-table/ZTableContainer';
 
 
 // Function to generate static paths for each category and table
@@ -42,7 +44,7 @@ export async function getStaticProps({ params }) {
     console.error(`Failed to read file at `, error);
     selectedItem = null; 
   }
-
+  console.log("Category :"+category,"Table :"+table,"Selected Item :"+selectedItem)
   return {
     props: {
       category,
@@ -54,21 +56,38 @@ export async function getStaticProps({ params }) {
 
 
 export default function TablePage({ category, table, selectedItem }) {
+  const excludedTables = ['Z-Score Tables', 'Another Special Table'];
+
     
   return (
     
        
      <>
-    <div className='table-container'>
-        <MyNavbar></MyNavbar>
+     <MyNavbar></MyNavbar>
+   
+        
+      
+      {table==='Z-Score Tables' &&      
+      <div>
+     <ZTableContainer></ZTableContainer>
+     </div>
+     
+     } 
+
+
     
+   {!excludedTables.includes(table)  &&
+    <div className='table-container'>
     <GenericTable tableData={selectedItem}></GenericTable>
+    </div>
+        
+   }
     <br></br>
     <br></br>
     <br></br>
     <ScrollUpButton></ScrollUpButton>
-    </div>
 
+    
      
       </>
     

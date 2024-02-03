@@ -15,14 +15,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body >
         <MyNavbar></MyNavbar>
       {/* <nav className='nav-bar'>
           <GoHomeButton className={'fixed-button'}/>
           
           <GoBackButton className={'fixed-button'}/>
         </nav> */}
-        <div className='main'>
+        <div >
         {children}
         </div>
         <ScrollUpButton></ScrollUpButton>

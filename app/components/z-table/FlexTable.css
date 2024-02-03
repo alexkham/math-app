@@ -1,0 +1,108 @@
+.flex-table-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    overflow-x: auto;
+    padding: 150px;
+    margin-right: 100px;
+    
+  }
+  
+  .flex-table-header, .flex-table-row {
+    display: flex;
+    width: 100%;
+  }
+  
+  .flex-table-cell {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .header-cell {
+    font-weight: bold;
+  }
+  
+  .tooltip-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .tooltip-container:hover .tooltip, .tooltip-container:focus .tooltip {
+    visibility: visible;
+  }
+
+  .flex-table-container {
+    overflow: visible; /* This might cause layout shifts */
+  }
+
+  .flex-table-cell, .header-cell {
+    width: 50px; /* Adjust based on your content */
+    min-width: 60px; /* Ensures cell does not become too narrow */
+  }
+
+  .flex-table-cell, .header-cell {
+    flex: 1 0 auto; /* Adjust as needed */
+    min-width: 50px; /* Optional, for minimum cell width */
+  }
+
+  .table-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Or specific width */
+  }
+
+   /* .header-cell{
+    background-color: grey;
+  } */
+
+  .z-cell {
+    background-color: grey; /* Slightly different background color */
+  }
+
+  .header-cell {
+    background-color: #ffd814; /* Light grey background for visibility */
+    color: #333; /* Dark text color for contrast */
+    font-weight: bold; /* Make header text bold */
+    padding: 8px; /* Add padding for spacing */
+    border: 1px solid #ddd; /* Add border for definition */
+    text-align: center; /* Center the text */
+  }
+
+  .first-column{
+    background-color: #ccc;
+  }
+  
+  .flex-table-cell:hover{
+    background-color: #ccc;
+  }
+
+  .z-container-outer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+  }
+  
+  
+  
+  
+  
+  

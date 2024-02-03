@@ -11,6 +11,29 @@ const GenericTable = ({ tableData }) => {
     if (!tableData || !Array.isArray(tableData.rows) || tableData.rows.length === 0) {
       return <p>No data available</p>;
     }
+
+    const copyToClipboard = (text) => {
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Formula copied to clipboard');
+      }).catch(err => {
+        console.error('Could not copy text: ', err);
+      });
+    };
+
+    const copyFormulaAsSvg = (latex) => {
+      try {
+        const svgHtml = katex.renderToString(latex, {
+          throwOnError: false,
+          output: "svg"
+        });
+        navigator.clipboard.writeText(svgHtml).then(() => {
+          alert('Formula SVG copied to clipboard');
+        });
+      } catch (err) {
+        console.error('Could not render or copy SVG: ', err);
+      }
+    };
+    
   
     // Extract the column names from the first row for the table header
     const columnHeaders = Object.keys(tableData.rows[0]);
@@ -34,7 +57,10 @@ const GenericTable = ({ tableData }) => {
               <tr key={rowIndex}>
                 {columnHeaders.map((col, colIndex) => {
                   if (col === 'formula') {
-                    return <td key={colIndex}><InlineMath math={row[col]} /></td>;
+                    return <td key={colIndex}>
+                      <InlineMath math={row[col]} />
+                      {/* <button onClick={() => copyToClipboard(row[col])}>Copy</button> */}
+                      </td>;
                   } else {
                     if(row[col]!='')
                     return <td key={colIndex}>{row[col]}</td>;
