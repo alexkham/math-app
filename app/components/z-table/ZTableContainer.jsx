@@ -47,7 +47,7 @@ function ZTableContainer() {
     <div className='z-container-outer'>
     
     <SelectComponent 
-    label={"the Type of Z-table"}
+    label={" Type of Z-table"}
     options={tables}
     onChange={handleTableChange}></SelectComponent>
     
