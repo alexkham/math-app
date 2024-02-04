@@ -42,16 +42,16 @@ function ZTableContainer() {
  const handleTableChange = (e) => {
     setSelectedTable(e.target.value);
   }
-
+  
   return (
     <div className='z-container-outer'>
     
     <SelectComponent 
-    label={"Choose the Type of Z-table"}
+    label={"the Type of Z-table"}
     options={tables}
     onChange={handleTableChange}></SelectComponent>
     
-    {selectedTable && (
+    {selectedTable && z_tables[selectedTable] && (
         <>
         <h2 className='title'>{selectedTable}</h2>
         <FlexTableDynamic
