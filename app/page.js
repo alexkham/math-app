@@ -14,6 +14,8 @@ import Link from 'next/link';
 import MyNavbar from './components/nav-bar/MyNavbar';
 import FlexTableDynamic from './components/z-table/FlexTableDynamic';
 import ZTableContainer from './components/z-table/ZTableContainer';
+import ZScoreVisualizer from './components/z-table/ZScoreVisualizer';
+import { VennDiagram } from 'venn.js';
 
 
 export default function Home() {
@@ -58,16 +60,17 @@ export default function Home() {
      <br></br>
      <br></br>
      <br></br>
+     <ZScoreVisualizer></ZScoreVisualizer>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
      
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
      <br></br>
      <br></br>
      <br></br>

@@ -30,7 +30,13 @@ const z_tables = {
         endZ: 0,
         increment: 0.1,
         probabilityCalculation: complementaryCumulativeProbability
-    }
+    },
+    // "Cumulative (less than Z) Large Positive Values": {
+    //   startZ: 0,
+    //   endZ: 80,
+    //   increment: 10,
+    //   probabilityCalculation: cumulativeProbability, // Assuming you want cumulative for positive
+    // },
     // Add other table configurations as needed
   };
 

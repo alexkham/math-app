@@ -62,7 +62,7 @@ const GenericTable = ({ tableData }) => {
                       {/* <button onClick={() => copyToClipboard(row[col])}>Copy</button> */}
                       </td>;
                   } else {
-                    if(row[col]!='')
+                    // if(row[col]!='')
                     return <td key={colIndex}>{row[col]}</td>;
                   }
                 })}
