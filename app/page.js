@@ -60,7 +60,7 @@ export default function Home() {
      <br></br>
      <br></br>
      <br></br>
-     <ZScoreVisualizer></ZScoreVisualizer>
+     {/* <ZScoreVisualizer></ZScoreVisualizer> */}
      <br></br>
      <br></br>
      <br></br>
