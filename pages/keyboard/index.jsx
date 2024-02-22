@@ -4,7 +4,7 @@ import Head from 'next/head';
 import MultipleTypeWriter from '@/app/components/keyboards/MultipleTypeWriter';
 
 
-export default function () {
+export default function KeyboardPage() {
   return (
     <div>
          <Head>
