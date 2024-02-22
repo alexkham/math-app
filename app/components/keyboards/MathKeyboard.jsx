@@ -256,7 +256,7 @@ const MathKeyboard = ({ layout, styles, input, setInput, show, setShow }) => {
             {show && (
                 <div className='keyboard' style={{ ...styles.keyboard }}>
                     <div className="keyboard__keys" style={{ ...styles.keyboardKeys }}>
-                        {keylayout.map((keyObj, index) => (
+                        {keylayout?.map((keyObj, index) => (
                             <React.Fragment key={index}>
                                 {renderButton(keyObj)}
                             </React.Fragment>

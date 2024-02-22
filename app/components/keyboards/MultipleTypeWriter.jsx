@@ -5,13 +5,13 @@ import Keyboard from './Keyboard';
 import MathKeyboard from './MathKeyboard';
 import layout from './keyboardsData';
 import general from './general_operations.json';
-import data from './advanced_binary_operators.json'
+import data from './math_symbols_data'
 import { capitalizeWords } from '@/app/utils/utils-functions';
 
 const keyboard1Styles = {
   keyboard: {
     background: '#004134',
-    height: '200px',
+    height: '220px',
   },
   keyboardKeys: {
     padding: '5px',
@@ -26,7 +26,7 @@ function MultipleTypeWriter() {
   const [activeKeyboard, setActiveKeyboard] = useState(0);
   const [input, setInput] = useState("");
   const [keyboardTypes, setKeyboardTypes]=useState([]);
-  const [currentType,setCurrentType]=useState('advanced_binary_operators');
+  const [currentType,setCurrentType]=useState('');
  const [keylayout, setKeylayout] = useState([]);
  const [dataObj,setDataObj]=useState();
  const [symbols,setSymbols]=useState([])
@@ -70,52 +70,7 @@ function MultipleTypeWriter() {
     setInput('');
   };
 
-//   const showActiveKeyboard = (index) => {
-    
-//     setShowKeyboard(true);
-//     setActiveKeyboard(index);
 
-//     if(activeKeyboard!=='Regular'){
-//     const newType=keyboardTypes[index]
-//     setCurrentType(newType);
-    
-//     const newKeyLayout=dataObj[newType]
-//     console.log(newKeyLayout)
-//     console.log('New key layout')
-//     console.log(Array.isArray(newKeyLayout))
-
-//     const newSymbols=newKeyLayout?.map((key)=>key.symbol)
-//     console.log(newSymbols)
-//     setSymbols(newSymbols)}
-    
-
-//   };
-
-
-// const showActiveKeyboard = (index) => {
-//     const newType = keyboardTypes[index];
-//     setShowKeyboard(true);
-//     setActiveKeyboard(index);
-//     setCurrentType(newType);
-  
-//     if (newType !== 'Regular') {
-//       const newKeyLayout = dataObj[newType];
-//       console.log(newKeyLayout);
-//       console.log('New key layout');
-//       console.log(Array.isArray(newKeyLayout));
-//       setKeylayout(newKeyLayout)
-//       console.log(keylayout)
-  
-//       const newSymbols = newKeyLayout?.map((key) => key.symbol);
-//       console.log(newSymbols);
-//       // Use the newSymbols directly for immediate feedback
-//       setSymbols(newSymbols);
-//     } else {
-//       // Handle 'Regular' case, possibly resetting symbols or setting default
-//       setKeylayout([])
-//       setSymbols([]); // or setSymbols(defaultSymbolsForRegularKeyboard);
-//     }
-//   };
 const showActiveKeyboard = (index) => {
     const newType = keyboardTypes[index];
     setShowKeyboard(true);
@@ -157,24 +112,20 @@ const showActiveKeyboard = (index) => {
 
   return (
     <div className="App">
-        {/* {symbols.map((symbol, index)=>{
-            return(
-                <div key={index}>{symbol}</div>
-            )
-        })} */}
-        <span>{activeKeyboard},{currentType}</span>
-        {/* <span style={{backgroundColor:'red'}}>{activeKeyboard},{keyboardTypes[activeKeyboard]},{currentType}</span> */}
-        {keyboardTypes.map((key,index)=>{
-            return(<div key={index}>{capitalizeWords(key.replaceAll('_',' '))}</div>)
-        })}
-        <button title='Showing regular keyboard '
+       
+        
+        
+        <button className='btn-select'
+        title='Showing regular keyboard '
          onClick={() => showActiveKeyboard('Regular')}>
-            Show Regular Keyboard </button>
+            Regular Keyboard </button>
+           
         <div className='main-menu'>
       
       {keyboardTypes.map((key,index)=>{
         return(
             <button 
+            className='btn-select'
             key={index}
             onClick={() => showActiveKeyboard(index)}>
                 {capitalizeWords(key.replaceAll('_',' '))}</button>
@@ -185,6 +136,7 @@ const showActiveKeyboard = (index) => {
       </div>
       <div className='keyboard-group'>
         <textarea
+         placeholder='To type here you can use your PC keyboard or pick one on the left'
           ref={textareaRef}
           value={input}
           onChange={onChange}
@@ -199,6 +151,7 @@ const showActiveKeyboard = (index) => {
       </div>
       
       <div className='keyboards-container'>
+        <span className='keyboard-title'>{currentType?.replaceAll('_',' ')}</span>
       {activeKeyboard === 'Regular' ?
         <Keyboard
           layout={layout}
@@ -208,31 +161,13 @@ const showActiveKeyboard = (index) => {
           setShow={setShowKeyboard}
           styles={keyboard1Styles} /> :
         <MathKeyboard
-          layout={dataObj[currentType]}
+          layout={data[currentType]}
           input={input}
           setInput={setInput}
           show={showKeyboard}
           setShow={setShowKeyboard}
           styles={keyboard1Styles} />}
-        {/* <div>
-        <MathKeyboard
-          layout={general}
-          input={input}
-          setInput={setInput}
-          show={showKeyboard}
-          setShow={setShowKeyboard}
-          styles={keyboard1Styles} />
-          </div>
-
-          <div>
-        <MathKeyboard
-          layout={general}
-          input={input}
-          setInput={setInput}
-          show={showKeyboard}
-          setShow={setShowKeyboard}
-          styles={keyboard1Styles} />
-          </div> */}
+        
           <div>
       
           </div>

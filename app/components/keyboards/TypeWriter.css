@@ -11,6 +11,7 @@
     border-radius: 5px;
     margin-bottom: 10px;
     margin-right: 10px;
+    max-height: fit-content;
   }
   
   .keyboard--hidden {
@@ -106,7 +107,7 @@
   }
   
   .buttons-container {
-    margin-top: 160px;
+    margin-top: 60px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -221,4 +222,31 @@
 
   .main-menu{
     width: 50%;
+  }
+
+  .keyboard-title{
+    text-transform: capitalize;
+    font-size: large;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 100px;
+  }
+
+  .btn-select{
+    padding: 7px;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    margin:5px;
+    background-color: #bfbfbf;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    min-width: 150px;
+  }
+
+  .btn-select:active {
+    transform: scale(0.95) !important; /* Slightly scale down the button when clicked */
+  }
+  .btn-select:hover{
+    background-color:  #e6e6e6;
   }
