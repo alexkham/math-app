@@ -68,7 +68,7 @@
         {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
         {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
     ],
-    "basic_n_ary_operators": [
+    "basic_n-ary_operators": [
         {"symbol": "∑", "latex_code": "\\sum", "explanation": "Summation symbol"},
         {"symbol": "∫", "latex_code": "\\int", "explanation": "Integral symbol"},
         {"symbol": "∬", "latex_code": "\\iint", "explanation": "Double integral symbol"},
