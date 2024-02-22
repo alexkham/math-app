@@ -4,17 +4,22 @@ import Head from 'next/head';
 import MultipleTypeWriter from '@/app/components/keyboards/MultipleTypeWriter';
 
 
+
 export default function KeyboardPage() {
   return (
     <div>
          <Head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-      </Head>
-      
-
-        <h3>Mathematical Keyboard</h3>
-
+        </Head>    
+        
+          <div className='main-container'>
+            
+             
+              
+        <h3 className='title' style={{marginLeft:'20px'}}>Mathematical Keyboard</h3>
+        
         <MultipleTypeWriter></MultipleTypeWriter>
+        </div>
     </div>
   )
 }

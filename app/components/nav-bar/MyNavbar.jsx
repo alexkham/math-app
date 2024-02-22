@@ -2,7 +2,6 @@
 import React,{useEffect} from 'react'
 import './MyNavbar.css'
 import Link from 'next/link';
-import GoBackButton from '../GoBackButton';
 
 function MyNavbar() {
 
@@ -32,6 +31,7 @@ function fixNav(){
     <ul>
       <li><Link href="/">Home</Link></li>
       <li><Link href="/tables">Tables</Link></li>
+      <li><Link href="/keyboard">Mathematical Keyboard</Link></li>
       <li onClick={navigateBack} style={{cursor:'pointer'}}><a>GoBack</a></li>
      
       

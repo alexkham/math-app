@@ -11,7 +11,7 @@ import { capitalizeWords } from '@/app/utils/utils-functions';
 const keyboard1Styles = {
   keyboard: {
     background: '#004134',
-    height: '220px',
+    height: '230px',
   },
   keyboardKeys: {
     padding: '5px',
@@ -29,7 +29,7 @@ function MultipleTypeWriter() {
   const [currentType,setCurrentType]=useState('');
  const [keylayout, setKeylayout] = useState([]);
  const [dataObj,setDataObj]=useState();
- const [symbols,setSymbols]=useState([])
+//  const [symbols,setSymbols]=useState([])
   const textareaRef = useRef(null);
 
   useEffect(()=>{
@@ -85,12 +85,12 @@ const showActiveKeyboard = (index) => {
       // Use newKeyLayout directly for operations that need immediate access to the new data
       const newSymbols = newKeyLayout?.map((key) => key.symbol);
       console.log(newSymbols); // Directly using newSymbols here is fine
-      setSymbols(newSymbols); // State is set here
+    //   setSymbols(newSymbols); // State is set here
   
       // Any logic that depends on the updated state should be moved to an useEffect hook
     } else {
       setKeylayout([]);
-      setSymbols([]);
+    //   setSymbols([]);
     }
   };
   

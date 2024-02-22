@@ -66,7 +66,6 @@
         {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
         {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
         {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-        {"symbol": "caps", "latex_code": "\\bigcupplus", "explanation": "CapsLock"},
         {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
     ],
     "basic_n_ary_operators": [
@@ -90,7 +89,11 @@
         {"symbol": "⨂", "latex_code": "\\bigotimes", "explanation": "Tensor product"},
         {"symbol": "⨁", "latex_code": "\\bigoplus", "explanation": "Direct sum"},
         {"symbol": "⨄", "latex_code": "\\biguplus", "explanation": "Multiset sum"},
-        {"symbol": "⨃", "latex_code": "\\bigcupplus", "explanation": "Union with a plus"}
+        {"symbol": "⨃", "latex_code": "\\bigcupplus", "explanation": "Union with a plus"},
+        {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
     ],
     "math_letter_like_symbols": [
         {"symbol": "∀", "latex_code": "\\forall", "explanation": "For All (Universal Quantifier)"},
@@ -133,7 +136,11 @@
         {"symbol": "ℵ", "latex_code": "\\aleph", "explanation": "Aleph Number (Transfinite Numbers)"},
         {"symbol": "ℶ", "latex_code": "\\beth", "explanation": "Beth Number"},
         {"symbol": "ℷ", "latex_code": "\\gimel", "explanation": "Gimel Function"},
-        {"symbol": "ℸ", "latex_code": "\\dalet", "explanation": "Dalet Symbol"}
+        {"symbol": "ℸ", "latex_code": "\\dalet", "explanation": "Dalet Symbol"},
+        {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
     ],
     "relational_operators": [
         {"symbol": "=", "latex_code": "=", "explanation": "Equal to"},
@@ -178,7 +185,11 @@
         {"symbol": "⊢", "latex_code": "\\vdash", "explanation": "Proves, forces"},
         {"symbol": "⊣", "latex_code": "\\dashv", "explanation": "Double turnstile"},
         {"symbol": "⋈", "latex_code": "\\bowtie", "explanation": "Bowtie, join"},
-        {"symbol": "≍", "latex_code": "\\asymp", "explanation": "Equiangular to"}
+        {"symbol": "≍", "latex_code": "\\asymp", "explanation": "Equiangular to"},
+        {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
     ],
     "brackets": [
         {"symbol": "(", "latex_code": "\\left(", "explanation": "Left parenthesis"},
@@ -190,7 +201,11 @@
         {"symbol": "⟨", "latex_code": "\\left\\langle", "explanation": "Left angle bracket"},
         {"symbol": "⟩", "latex_code": "\\right\\rangle", "explanation": "Right angle bracket"},
         {"symbol": "|", "latex_code": "\\left|", "explanation": "Left vertical bar"},
-        {"symbol": "|", "latex_code": "\\right|", "explanation": "Right vertical bar"}
+        {"symbol": "|", "latex_code": "\\right|", "explanation": "Right vertical bar"},
+        {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
     ],
     "negation_symbols": [
         {"symbol": "≠", "latex_code": "\\neq", "explanation": "Not Equal To"},
@@ -234,7 +249,11 @@
         {"symbol": "⊭", "latex_code": "\\nvDash", "explanation": "Not True"},
         {"symbol": "⊮", "latex_code": "\\nVdash", "explanation": "Does Not Force"},
         {"symbol": "⊯", "latex_code": "\\nVDash", "explanation": "Negated Double Vertical Bar Double Right Turnstile"},
-        {"symbol": "∄", "latex_code": "\\nexists", "explanation": "There Does Not Exist"}
+        {"symbol": "∄", "latex_code": "\\nexists", "explanation": "There Does Not Exist"},
+        {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
         
     ],
     
@@ -312,7 +331,11 @@
             {"symbol": "↜", "latex_code": "\\leftsquigarrow", "explanation": "Leftwards Wave Arrow"},
             {"symbol": "↝", "latex_code": "\\rightsquigarrow", "explanation": "Rightwards Wave Arrow"},
             {"symbol": "⇜", "latex_code": "\\leftsquigarrow", "explanation": "Leftwards Squiggle Arrow"},
-            {"symbol": "⇝", "latex_code": "\\rightsquigarrow", "explanation": "Rightwards Squiggle Arrow"}
+            {"symbol": "⇝", "latex_code": "\\rightsquigarrow", "explanation": "Rightwards Squiggle Arrow"},
+            {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
         ],
         "greek_letters": [
             {
@@ -602,7 +625,11 @@
                 "alternate_representations": ["ω", "ω"],
                 "math_type_code": "<m:omega></m:omega>",
                 "html_entity_name": "omega"
-            }
+            },
+            {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
             
         ]
     
