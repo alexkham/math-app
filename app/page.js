@@ -16,12 +16,19 @@ import FlexTableDynamic from './components/z-table/FlexTableDynamic';
 import ZTableContainer from './components/z-table/ZTableContainer';
 import ZScoreVisualizer from './components/z-table/ZScoreVisualizer';
 import { VennDiagram } from 'venn.js';
+import BellCurveHighlighted from './components/z-table/BellCurveHighlighted';
+import BellCurveHighlighted2 from './components/z-table/BellCurveHighlighted2';
+import TypeWriter from './components/keyboards/TypeWriter';
+
 
 
 export default function Home() {
   const port=process.env.NEXT_PUBLIC_PORT;
   const optionsCategory=["category1","category2","category3","category4"]
   const optionsTitle=["title1","title2","title3","title4"]
+
+  const dataPoints = Array.from({ length: 800 }, (_, index) => ((index / 100) - 4).toFixed(2));
+  const zScores = [0.9]; // Example: Highlight up to z-score of 1.96
  
 
   return (
@@ -66,11 +73,38 @@ export default function Home() {
      <br></br>
      <br></br>
      <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
      
+
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     {/* <BellCurveHighlighted
+      pdf={pdf}
+      dataPoints={Array.from({ length: 800 }, (_, index) => ((index / 100) - 4).toFixed(2))}
+      zScores={[-1.96, 1.96]} // Range of zScores
+    /> */}
+
+     <br></br>
+     <br></br>
+     {/* <div>
+      <h1>Bell Curve Highlighted</h1>
+      <BellCurveHighlighted pdf={pdf} dataPoints={dataPoints} zScores={zScores} />
+    </div> */}
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     {/* <BellCurveHighlighted
+     dataPoints={dataPoints}
+     zScore={zScores}></BellCurveHighlighted> */}
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     {/* <BellCurveHighlighted2
+     dataPoints={dataPoints}
+     zScore={zScores}></BellCurveHighlighted2> */}
      <br></br>
      <br></br>
      <br></br>
@@ -84,17 +118,7 @@ export default function Home() {
      <br></br>
      <br></br>
      <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-    
+     {/* <TypeWriter></TypeWriter> */}
      <br></br>
      <br></br>
      <br></br>
