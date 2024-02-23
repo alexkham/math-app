@@ -59,7 +59,7 @@ function MultipleTypeWriter() {
       // Set to default layout or leave empty if 'Regular'
       setKeylayout([]);
     }
-  }, [activeKeyboard, data]);
+  }, [activeKeyboard]);
 
 
 
