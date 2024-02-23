@@ -110,7 +110,7 @@
   }
   
   .buttons-container {
-    margin-top: 40px;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -272,7 +272,7 @@
     text-transform: capitalize;
     font-size: large;
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 100px;
   }
 
