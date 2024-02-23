@@ -237,7 +237,7 @@ const MathKeyboard = ({ layout, styles, input, setInput, show, setShow }) => {
                            <button className="keyboard__key keyboard__key--wide keyboard__key--dark" style={{ ...styles.keyboardKey }} onClick={() => setShow(false)}>
                                <i className="material-icons">check_circle</i>
                            </button>
-                           <span className="tooltip-text">{key.explanation}</span>
+                           <span className="tooltip-text">{key.explanation?key.explanation:key.title}</span>
                        </div>;
             default:
                 // For symbols, pass the symbol directly and use tooltip
@@ -245,7 +245,7 @@ const MathKeyboard = ({ layout, styles, input, setInput, show, setShow }) => {
                            <button className="keyboard__key" style={{ ...styles.keyboardKey }} onClick={() => onKeyClick(key.symbol)}>
                                {key.symbol}
                            </button>
-                           <span className="tooltip-text">{key.explanation}</span>
+                           <span className="tooltip-text">{key.explanation?key.explanation:key.title}</span>
                        </div>;
         }
     };

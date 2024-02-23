@@ -29,6 +29,7 @@ function MultipleTypeWriter() {
   const [currentType,setCurrentType]=useState('');
  const [keylayout, setKeylayout] = useState([]);
  const [dataObj,setDataObj]=useState();
+ const [symbols, setSymbols]=useState([])
 //  const [symbols,setSymbols]=useState([])
   const textareaRef = useRef(null);
 
@@ -85,12 +86,12 @@ const showActiveKeyboard = (index) => {
       // Use newKeyLayout directly for operations that need immediate access to the new data
       const newSymbols = newKeyLayout?.map((key) => key.symbol);
       console.log(newSymbols); // Directly using newSymbols here is fine
-    //   setSymbols(newSymbols); // State is set here
+      setSymbols(newSymbols); // State is set here
   
       // Any logic that depends on the updated state should be moved to an useEffect hook
     } else {
       setKeylayout([]);
-    //   setSymbols([]);
+      setSymbols([]);
     }
   };
   
@@ -113,8 +114,7 @@ const showActiveKeyboard = (index) => {
   return (
     <div className="App">
        
-        
-        
+                
         <button className='btn-select'
         title='Showing regular keyboard '
          onClick={() => showActiveKeyboard('Regular')}>
@@ -124,12 +124,16 @@ const showActiveKeyboard = (index) => {
       
       {keyboardTypes.map((key,index)=>{
         return(
+            <div className="tooltip2">
             <button 
             className='btn-select'
             key={index}
             onClick={() => showActiveKeyboard(index)}>
                 {capitalizeWords(key.replaceAll('_',' '))}</button>
-
+                <span className="tooltip2-text2">
+                    {data[key]?.slice(0, -4).map((item) => item.symbol).join(', ')}
+                    </span>
+                       </div>
         )
       })}
       

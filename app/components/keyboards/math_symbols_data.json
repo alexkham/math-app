@@ -626,12 +626,1092 @@
                 "math_type_code": "<m:omega></m:omega>",
                 "html_entity_name": "omega"
             },
-            {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+            {
+                "symbol": "Α",
+                "title": "Alpha",
+                "latex_code": "\\Alpha",
+                "html_entity": "&Alpha;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+0391",
+                "mathml_representation": "<mi>Α</mi>",
+                "alternate_representations": ["Α", "Α"],
+                "math_type_code": "<m:Alpha></m:Alpha>",
+                "html_entity_name": "Alpha"
+            },
+            {
+                "symbol": "Β",
+                "title": "Beta",
+                "latex_code": "\\Beta",
+                "html_entity": "&Beta;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+0392",
+                "mathml_representation": "<mi>Β</mi>",
+                "alternate_representations": ["Β", "Β"],
+                "math_type_code": "<m:Beta></m:Beta>",
+                "html_entity_name": "Beta"
+            },
+            {
+                "symbol": "Γ",
+                "title": "Gamma",
+                "latex_code": "\\Gamma",
+                "html_entity": "&Gamma;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+0393",
+                "mathml_representation": "<mi>Γ</mi>",
+                "alternate_representations": ["Γ", "Γ"],
+                "math_type_code": "<m:Gamma></m:Gamma>",
+                "html_entity_name": "Gamma"
+            },
+            {
+                "symbol": "Δ",
+                "title": "Delta",
+                "latex_code": "\\Delta",
+                "html_entity": "&Delta;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+0394",
+                "mathml_representation": "<mi>Δ</mi>",
+                "alternate_representations": ["Δ", "Δ"],
+                "math_type_code": "<m:Delta></m:Delta>",
+                "html_entity_name": "Delta"
+            },
+            {
+                "symbol": "Ε",
+                "title": "Epsilon",
+                "latex_code": "\\Epsilon",
+                "html_entity": "&Epsilon;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+0395",
+                "mathml_representation": "<mi>Ε</mi>",
+                "alternate_representations": ["Ε", "Ε"],
+                "math_type_code": "<m:Epsilon></m:Epsilon>",
+                "html_entity_name": "Epsilon"
+            },
+            {
+                "symbol": "Ζ",
+                "title": "Zeta",
+                "latex_code": "\\Zeta",
+                "html_entity": "&Zeta;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+0396",
+                "mathml_representation": "<mi>Ζ</mi>",
+                "alternate_representations": ["Ζ", "Ζ"],
+                "math_type_code": "<m:Zeta></m:Zeta>",
+                "html_entity_name": "Zeta"
+            },
+            {
+                "symbol": "Η",
+                "title": "Eta",
+                "latex_code": "\\Eta",
+                "html_entity": "&Eta;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+0397",
+                "mathml_representation": "<mi>Η</mi>",
+                "alternate_representations": ["Η", "Η"],
+                "math_type_code": "<m:Eta></m:Eta>",
+                "html_entity_name": "Eta"
+            },
+            {
+                "symbol": "Θ",
+                "title": "Theta",
+                "latex_code": "\\Theta",
+                "html_entity": "&Theta;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+0398",
+                "mathml_representation": "<mi>Θ</mi>",
+                "alternate_representations": ["Θ", "Θ"],
+                "math_type_code": "<m:Theta></m:Theta>",
+                "html_entity_name": "Theta"
+            },
+            {
+                "symbol": "Ι",
+                "title": "Iota",
+                "latex_code": "\\Iota",
+                "html_entity": "&Iota;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+0399",
+                "mathml_representation": "<mi>Ι</mi>",
+                "alternate_representations": ["Ι", "Ι"],
+                "math_type_code": "<m:Iota></m:Iota>",
+                "html_entity_name": "Iota"
+            },
+            {
+                "symbol": "Κ",
+                "title": "Kappa",
+                "latex_code": "\\Kappa",
+                "html_entity": "&Kappa;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+039A",
+                "mathml_representation": "<mi>Κ</mi>",
+                "alternate_representations": ["Κ", "Κ"],
+                "math_type_code": "<m:Kappa></m:Kappa>",
+                "html_entity_name": "Kappa"
+            },
+            {
+                "symbol": "Λ",
+                "title": "Lambda",
+                "latex_code": "\\Lambda",
+                "html_entity": "&Lambda;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+039B",
+                "mathml_representation": "<mi>Λ</mi>",
+                "alternate_representations": ["Λ", "Λ"],
+                "math_type_code": "<m:Lambda></m:Lambda>",
+                "html_entity_name": "Lambda"
+            },
+            {
+                "symbol": "Μ",
+                "title": "Mu",
+                "latex_code": "\\Mu",
+                "html_entity": "&Mu;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+039C",
+                "mathml_representation": "<mi>Μ</mi>",
+                "alternate_representations": ["Μ", "Μ"],
+                "math_type_code": "<m:Mu></m:Mu>",
+                "html_entity_name": "Mu"
+            },
+            {
+                "symbol": "Ν",
+                "title": "Nu",
+                "latex_code": "\\Nu",
+                "html_entity": "&Nu;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+039D",
+                "mathml_representation": "<mi>Ν</mi>",
+                "alternate_representations": ["Ν", "Ν"],
+                "math_type_code": "<m:Nu></m:Nu>",
+                "html_entity_name": "Nu"
+            },
+            {
+                "symbol": "Ξ",
+                "title": "Xi",
+                "latex_code": "\\Xi",
+                "html_entity": "&Xi;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+039E",
+                "mathml_representation": "<mi>Ξ</mi>",
+                "alternate_representations": ["Ξ", "Ξ"],
+                "math_type_code": "<m:Xi></m:Xi>",
+                "html_entity_name": "Xi"
+            },
+            {
+                "symbol": "Ο",
+                "title": "Omicron",
+                "latex_code": "\\Omicron",
+                "html_entity": "&Omicron;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+039F",
+                "mathml_representation": "<mi>Ο</mi>",
+                "alternate_representations": ["Ο", "Ο"],
+                "math_type_code": "<m:Omicron></m:Omicron>",
+                "html_entity_name": "Omicron"
+            },
+            {
+                "symbol": "Π",
+                "title": "Pi",
+                "latex_code": "\\Pi",
+                "html_entity": "&Pi;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+03A0",
+                "mathml_representation": "<mi>Π</mi>",
+                "alternate_representations": ["Π", "Π"],
+                "math_type_code": "<m:Pi></m:Pi>",
+                "html_entity_name": "Pi"
+            },
+            {
+                "symbol": "Ρ",
+                "title": "Rho",
+                "latex_code": "\\Rho",
+                "html_entity": "&Rho;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+03A1",
+                "mathml_representation": "<mi>Ρ</mi>",
+                "alternate_representations": ["Ρ", "Ρ"],
+                "math_type_code": "<m:Rho></m:Rho>",
+                "html_entity_name": "Rho"
+            },
+            {
+                "symbol": "Σ",
+                "title": "Sigma",
+                "latex_code": "\\Sigma",
+                "html_entity": "&Sigma;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+03A3",
+                "mathml_representation": "<mi>Σ</mi>",
+                "alternate_representations": ["Σ", "Σ"],
+                "math_type_code": "<m:Sigma></m:Sigma>",
+                "html_entity_name": "Sigma"
+            },
+            {
+                "symbol": "Τ",
+                "title": "Tau",
+                "latex_code": "\\Tau",
+                "html_entity": "&Tau;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+03A4",
+                "mathml_representation": "<mi>Τ</mi>",
+                "alternate_representations": ["Τ", "Τ"],
+                "math_type_code": "<m:Tau></m:Tau>",
+                "html_entity_name": "Tau"
+            },
+            {
+                "symbol": "Υ",
+                "title": "Upsilon",
+                "latex_code": "\\Upsilon",
+                "html_entity": "&Upsilon;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+03A5",
+                "mathml_representation": "<mi>Υ</mi>",
+                "alternate_representations": ["Υ", "Υ"],
+                "math_type_code": "<m:Upsilon></m:Upsilon>",
+                "html_entity_name": "Upsilon"
+            },
+            {
+                "symbol": "Φ",
+                "title": "Phi",
+                "latex_code": "\\Phi",
+                "html_entity": "&Phi;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+03A6",
+                "mathml_representation": "<mi>Φ</mi>",
+                "alternate_representations": ["Φ", "Φ"],
+                "math_type_code": "<m:Phi></m:Phi>",
+                "html_entity_name": "Phi"
+            },
+            {
+                "symbol": "Χ",
+                "title": "Chi",
+                "latex_code": "\\Chi",
+                "html_entity": "&Chi;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+03A7",
+                "mathml_representation": "<mi>Χ</mi>",
+                "alternate_representations": ["Χ", "Χ"],
+                "math_type_code": "<m:Chi></m:Chi>",
+                "html_entity_name": "Chi"
+           },
+           {
+                "symbol": "Ψ",
+                "title": "Psi",
+                "latex_code": "\\Psi",
+                "html_entity": "&Psi;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+03A8",
+                "mathml_representation": "<mi>Ψ</mi>",
+                "alternate_representations": ["Ψ", "Ψ"],
+                "math_type_code": "<m:Psi></m:Psi>",
+                "html_entity_name": "Psi"
+            },
+            {
+                "symbol": "Ω",
+                "title": "Omega",
+                "latex_code": "\\Omega",
+                "html_entity": "&Omega;",
+                "category": "Greek Letters",
+                "unicode_code_point": "U+03A9",
+                "mathml_representation": "<mi>Ω</mi>",
+                "alternate_representations": ["Ω", "Ω"],
+                "math_type_code": "<m:Omega></m:Omega>",
+                "html_entity_name": "Omega"
+    }
+            ,
+        {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
         {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
         {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
         {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
             
-        ]
+        ],
+        "latin_letters":[
+            
+                {
+                    "symbol": "a",
+                    "title": "a",
+                    "latex_code": "\\a",
+                    "html_entity": "&a;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0061",
+                    "mathml_representation": "<mi>a</mi>",
+                    "alternate_representations": [
+                        "a",
+                        "a"
+                    ],
+                    "math_type_code": "<m:a></m:a>",
+                    "html_entity_name": "A"
+                },
+                {
+                    "symbol": "b",
+                    "title": "b",
+                    "latex_code": "\\b",
+                    "html_entity": "&b;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0062",
+                    "mathml_representation": "<mi>b</mi>",
+                    "alternate_representations": [
+                        "b",
+                        "b"
+                    ],
+                    "math_type_code": "<m:b></m:b>",
+                    "html_entity_name": "B"
+                },
+                {
+                    "symbol": "c",
+                    "title": "c",
+                    "latex_code": "\\c",
+                    "html_entity": "&c;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0063",
+                    "mathml_representation": "<mi>c</mi>",
+                    "alternate_representations": [
+                        "c",
+                        "c"
+                    ],
+                    "math_type_code": "<m:c></m:c>",
+                    "html_entity_name": "C"
+                },
+                {
+                    "symbol": "d",
+                    "title": "d",
+                    "latex_code": "\\d",
+                    "html_entity": "&d;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0064",
+                    "mathml_representation": "<mi>d</mi>",
+                    "alternate_representations": [
+                        "d",
+                        "d"
+                    ],
+                    "math_type_code": "<m:d></m:d>",
+                    "html_entity_name": "D"
+                },
+                {
+                    "symbol": "e",
+                    "title": "e",
+                    "latex_code": "\\e",
+                    "html_entity": "&e;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0065",
+                    "mathml_representation": "<mi>e</mi>",
+                    "alternate_representations": [
+                        "e",
+                        "e"
+                    ],
+                    "math_type_code": "<m:e></m:e>",
+                    "html_entity_name": "E"
+                },
+                {
+                    "symbol": "f",
+                    "title": "f",
+                    "latex_code": "\\f",
+                    "html_entity": "&f;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0066",
+                    "mathml_representation": "<mi>f</mi>",
+                    "alternate_representations": [
+                        "f",
+                        "f"
+                    ],
+                    "math_type_code": "<m:f></m:f>",
+                    "html_entity_name": "F"
+                },
+                {
+                    "symbol": "g",
+                    "title": "g",
+                    "latex_code": "\\g",
+                    "html_entity": "&g;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0067",
+                    "mathml_representation": "<mi>g</mi>",
+                    "alternate_representations": [
+                        "g",
+                        "g"
+                    ],
+                    "math_type_code": "<m:g></m:g>",
+                    "html_entity_name": "G"
+                },
+                {
+                    "symbol": "h",
+                    "title": "h",
+                    "latex_code": "\\h",
+                    "html_entity": "&h;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0068",
+                    "mathml_representation": "<mi>h</mi>",
+                    "alternate_representations": [
+                        "h",
+                        "h"
+                    ],
+                    "math_type_code": "<m:h></m:h>",
+                    "html_entity_name": "H"
+                },
+                {
+                    "symbol": "i",
+                    "title": "i",
+                    "latex_code": "\\i",
+                    "html_entity": "&i;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0069",
+                    "mathml_representation": "<mi>i</mi>",
+                    "alternate_representations": [
+                        "i",
+                        "i"
+                    ],
+                    "math_type_code": "<m:i></m:i>",
+                    "html_entity_name": "I"
+                },
+                {
+                    "symbol": "j",
+                    "title": "j",
+                    "latex_code": "\\j",
+                    "html_entity": "&j;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+006A",
+                    "mathml_representation": "<mi>j</mi>",
+                    "alternate_representations": [
+                        "j",
+                        "j"
+                    ],
+                    "math_type_code": "<m:j></m:j>",
+                    "html_entity_name": "J"
+                },
+                {
+                    "symbol": "k",
+                    "title": "k",
+                    "latex_code": "\\k",
+                    "html_entity": "&k;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+006B",
+                    "mathml_representation": "<mi>k</mi>",
+                    "alternate_representations": [
+                        "k",
+                        "k"
+                    ],
+                    "math_type_code": "<m:k></m:k>",
+                    "html_entity_name": "K"
+                },
+                {
+                    "symbol": "l",
+                    "title": "l",
+                    "latex_code": "\\l",
+                    "html_entity": "&l;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+006C",
+                    "mathml_representation": "<mi>l</mi>",
+                    "alternate_representations": [
+                        "l",
+                        "l"
+                    ],
+                    "math_type_code": "<m:l></m:l>",
+                    "html_entity_name": "L"
+                },
+                {
+                    "symbol": "m",
+                    "title": "m",
+                    "latex_code": "\\m",
+                    "html_entity": "&m;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+006D",
+                    "mathml_representation": "<mi>m</mi>",
+                    "alternate_representations": [
+                        "m",
+                        "m"
+                    ],
+                    "math_type_code": "<m:m></m:m>",
+                    "html_entity_name": "M"
+                },
+                {
+                    "symbol": "n",
+                    "title": "n",
+                    "latex_code": "\\n",
+                    "html_entity": "&n;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+006E",
+                    "mathml_representation": "<mi>n</mi>",
+                    "alternate_representations": [
+                        "n",
+                        "n"
+                    ],
+                    "math_type_code": "<m:n></m:n>",
+                    "html_entity_name": "N"
+                },
+                {
+                    "symbol": "o",
+                    "title": "o",
+                    "latex_code": "\\o",
+                    "html_entity": "&o;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+006F",
+                    "mathml_representation": "<mi>o</mi>",
+                    "alternate_representations": [
+                        "o",
+                        "o"
+                    ],
+                    "math_type_code": "<m:o></m:o>",
+                    "html_entity_name": "O"
+                },
+                {
+                    "symbol": "p",
+                    "title": "p",
+                    "latex_code": "\\p",
+                    "html_entity": "&p;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0070",
+                    "mathml_representation": "<mi>p</mi>",
+                    "alternate_representations": [
+                        "p",
+                        "p"
+                    ],
+                    "math_type_code": "<m:p></m:p>",
+                    "html_entity_name": "P"
+                },
+                {
+                    "symbol": "q",
+                    "title": "q",
+                    "latex_code": "\\q",
+                    "html_entity": "&q;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0071",
+                    "mathml_representation": "<mi>q</mi>",
+                    "alternate_representations": [
+                        "q",
+                        "q"
+                    ],
+                    "math_type_code": "<m:q></m:q>",
+                    "html_entity_name": "Q"
+                },
+                {
+                    "symbol": "r",
+                    "title": "r",
+                    "latex_code": "\\r",
+                    "html_entity": "&r;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0072",
+                    "mathml_representation": "<mi>r</mi>",
+                    "alternate_representations": [
+                        "r",
+                        "r"
+                    ],
+                    "math_type_code": "<m:r></m:r>",
+                    "html_entity_name": "R"
+                },
+                {
+                    "symbol": "s",
+                    "title": "s",
+                    "latex_code": "\\s",
+                    "html_entity": "&s;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0073",
+                    "mathml_representation": "<mi>s</mi>",
+                    "alternate_representations": [
+                        "s",
+                        "s"
+                    ],
+                    "math_type_code": "<m:s></m:s>",
+                    "html_entity_name": "S"
+                },
+                {
+                    "symbol": "t",
+                    "title": "t",
+                    "latex_code": "\\t",
+                    "html_entity": "&t;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0074",
+                    "mathml_representation": "<mi>t</mi>",
+                    "alternate_representations": [
+                        "t",
+                        "t"
+                    ],
+                    "math_type_code": "<m:t></m:t>",
+                    "html_entity_name": "T"
+                },
+                {
+                    "symbol": "u",
+                    "title": "u",
+                    "latex_code": "\\u",
+                    "html_entity": "&u;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0075",
+                    "mathml_representation": "<mi>u</mi>",
+                    "alternate_representations": [
+                        "u",
+                        "u"
+                    ],
+                    "math_type_code": "<m:u></m:u>",
+                    "html_entity_name": "U"
+                },
+                {
+                    "symbol": "v",
+                    "title": "v",
+                    "latex_code": "\\v",
+                    "html_entity": "&v;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0076",
+                    "mathml_representation": "<mi>v</mi>",
+                    "alternate_representations": [
+                        "v",
+                        "v"
+                    ],
+                    "math_type_code": "<m:v></m:v>",
+                    "html_entity_name": "V"
+                },
+                {
+                    "symbol": "w",
+                    "title": "w",
+                    "latex_code": "\\w",
+                    "html_entity": "&w;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0077",
+                    "mathml_representation": "<mi>w</mi>",
+                    "alternate_representations": [
+                        "w",
+                        "w"
+                    ],
+                    "math_type_code": "<m:w></m:w>",
+                    "html_entity_name": "W"
+                },
+                {
+                    "symbol": "x",
+                    "title": "x",
+                    "latex_code": "\\x",
+                    "html_entity": "&x;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0078",
+                    "mathml_representation": "<mi>x</mi>",
+                    "alternate_representations": [
+                        "x",
+                        "x"
+                    ],
+                    "math_type_code": "<m:x></m:x>",
+                    "html_entity_name": "X"
+                },
+                {
+                    "symbol": "y",
+                    "title": "y",
+                    "latex_code": "\\y",
+                    "html_entity": "&y;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0079",
+                    "mathml_representation": "<mi>y</mi>",
+                    "alternate_representations": [
+                        "y",
+                        "y"
+                    ],
+                    "math_type_code": "<m:y></m:y>",
+                    "html_entity_name": "Y"
+                },
+                {
+                    "symbol": "z",
+                    "title": "z",
+                    "latex_code": "\\z",
+                    "html_entity": "&z;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+007A",
+                    "mathml_representation": "<mi>z</mi>",
+                    "alternate_representations": [
+                        "z",
+                        "z"
+                    ],
+                    "math_type_code": "<m:z></m:z>",
+                    "html_entity_name": "Z"
+                },
+                {
+                    "symbol": "A",
+                    "title": "A",
+                    "latex_code": "\\A",
+                    "html_entity": "&A;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0041",
+                    "mathml_representation": "<mi>A</mi>",
+                    "alternate_representations": [
+                        "A",
+                        "A"
+                    ],
+                    "math_type_code": "<m:A></m:A>",
+                    "html_entity_name": "A"
+                },
+                {
+                    "symbol": "B",
+                    "title": "B",
+                    "latex_code": "\\B",
+                    "html_entity": "&B;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0042",
+                    "mathml_representation": "<mi>B</mi>",
+                    "alternate_representations": [
+                        "B",
+                        "B"
+                    ],
+                    "math_type_code": "<m:B></m:B>",
+                    "html_entity_name": "B"
+                },
+                {
+                    "symbol": "C",
+                    "title": "C",
+                    "latex_code": "\\C",
+                    "html_entity": "&C;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0043",
+                    "mathml_representation": "<mi>C</mi>",
+                    "alternate_representations": [
+                        "C",
+                        "C"
+                    ],
+                    "math_type_code": "<m:C></m:C>",
+                    "html_entity_name": "C"
+                },
+                {
+                    "symbol": "D",
+                    "title": "D",
+                    "latex_code": "\\D",
+                    "html_entity": "&D;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0044",
+                    "mathml_representation": "<mi>D</mi>",
+                    "alternate_representations": [
+                        "D",
+                        "D"
+                    ],
+                    "math_type_code": "<m:D></m:D>",
+                    "html_entity_name": "D"
+                },
+                {
+                    "symbol": "E",
+                    "title": "E",
+                    "latex_code": "\\E",
+                    "html_entity": "&E;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0045",
+                    "mathml_representation": "<mi>E</mi>",
+                    "alternate_representations": [
+                        "E",
+                        "E"
+                    ],
+                    "math_type_code": "<m:E></m:E>",
+                    "html_entity_name": "E"
+                },
+                {
+                    "symbol": "F",
+                    "title": "F",
+                    "latex_code": "\\F",
+                    "html_entity": "&F;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0046",
+                    "mathml_representation": "<mi>F</mi>",
+                    "alternate_representations": [
+                        "F",
+                        "F"
+                    ],
+                    "math_type_code": "<m:F></m:F>",
+                    "html_entity_name": "F"
+                },
+                {
+                    "symbol": "G",
+                    "title": "G",
+                    "latex_code": "\\G",
+                    "html_entity": "&G;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0047",
+                    "mathml_representation": "<mi>G</mi>",
+                    "alternate_representations": [
+                        "G",
+                        "G"
+                    ],
+                    "math_type_code": "<m:G></m:G>",
+                    "html_entity_name": "G"
+                },
+                {
+                    "symbol": "H",
+                    "title": "H",
+                    "latex_code": "\\H",
+                    "html_entity": "&H;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0048",
+                    "mathml_representation": "<mi>H</mi>",
+                    "alternate_representations": [
+                        "H",
+                        "H"
+                    ],
+                    "math_type_code": "<m:H></m:H>",
+                    "html_entity_name": "H"
+                },
+                {
+                    "symbol": "I",
+                    "title": "I",
+                    "latex_code": "\\I",
+                    "html_entity": "&I;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0049",
+                    "mathml_representation": "<mi>I</mi>",
+                    "alternate_representations": [
+                        "I",
+                        "I"
+                    ],
+                    "math_type_code": "<m:I></m:I>",
+                    "html_entity_name": "I"
+                },
+                {
+                    "symbol": "J",
+                    "title": "J",
+                    "latex_code": "\\J",
+                    "html_entity": "&J;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+004A",
+                    "mathml_representation": "<mi>J</mi>",
+                    "alternate_representations": [
+                        "J",
+                        "J"
+                    ],
+                    "math_type_code": "<m:J></m:J>",
+                    "html_entity_name": "J"
+                },
+                {
+                    "symbol": "K",
+                    "title": "K",
+                    "latex_code": "\\K",
+                    "html_entity": "&K;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+004B",
+                    "mathml_representation": "<mi>K</mi>",
+                    "alternate_representations": [
+                        "K",
+                        "K"
+                    ],
+                    "math_type_code": "<m:K></m:K>",
+                    "html_entity_name": "K"
+                },
+                {
+                    "symbol": "L",
+                    "title": "L",
+                    "latex_code": "\\L",
+                    "html_entity": "&L;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+004C",
+                    "mathml_representation": "<mi>L</mi>",
+                    "alternate_representations": [
+                        "L",
+                        "L"
+                    ],
+                    "math_type_code": "<m:L></m:L>",
+                    "html_entity_name": "L"
+                },
+                {
+                    "symbol": "M",
+                    "title": "M",
+                    "latex_code": "\\M",
+                    "html_entity": "&M;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+004D",
+                    "mathml_representation": "<mi>M</mi>",
+                    "alternate_representations": [
+                        "M",
+                        "M"
+                    ],
+                    "math_type_code": "<m:M></m:M>",
+                    "html_entity_name": "M"
+                },
+                {
+                    "symbol": "N",
+                    "title": "N",
+                    "latex_code": "\\N",
+                    "html_entity": "&N;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+004E",
+                    "mathml_representation": "<mi>N</mi>",
+                    "alternate_representations": [
+                        "N",
+                        "N"
+                    ],
+                    "math_type_code": "<m:N></m:N>",
+                    "html_entity_name": "N"
+                },
+                {
+                    "symbol": "O",
+                    "title": "O",
+                    "latex_code": "\\O",
+                    "html_entity": "&O;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+004F",
+                    "mathml_representation": "<mi>O</mi>",
+                    "alternate_representations": [
+                        "O",
+                        "O"
+                    ],
+                    "math_type_code": "<m:O></m:O>",
+                    "html_entity_name": "O"
+                },
+                {
+                    "symbol": "P",
+                    "title": "P",
+                    "latex_code": "\\P",
+                    "html_entity": "&P;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0050",
+                    "mathml_representation": "<mi>P</mi>",
+                    "alternate_representations": [
+                        "P",
+                        "P"
+                    ],
+                    "math_type_code": "<m:P></m:P>",
+                    "html_entity_name": "P"
+                },
+                {
+                    "symbol": "Q",
+                    "title": "Q",
+                    "latex_code": "\\Q",
+                    "html_entity": "&Q;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0051",
+                    "mathml_representation": "<mi>Q</mi>",
+                    "alternate_representations": [
+                        "Q",
+                        "Q"
+                    ],
+                    "math_type_code": "<m:Q></m:Q>",
+                    "html_entity_name": "Q"
+                },
+                {
+                    "symbol": "R",
+                    "title": "R",
+                    "latex_code": "\\R",
+                    "html_entity": "&R;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0052",
+                    "mathml_representation": "<mi>R</mi>",
+                    "alternate_representations": [
+                        "R",
+                        "R"
+                    ],
+                    "math_type_code": "<m:R></m:R>",
+                    "html_entity_name": "R"
+                },
+                {
+                    "symbol": "S",
+                    "title": "S",
+                    "latex_code": "\\S",
+                    "html_entity": "&S;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0053",
+                    "mathml_representation": "<mi>S</mi>",
+                    "alternate_representations": [
+                        "S",
+                        "S"
+                    ],
+                    "math_type_code": "<m:S></m:S>",
+                    "html_entity_name": "S"
+                },
+                {
+                    "symbol": "T",
+                    "title": "T",
+                    "latex_code": "\\T",
+                    "html_entity": "&T;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0054",
+                    "mathml_representation": "<mi>T</mi>",
+                    "alternate_representations": [
+                        "T",
+                        "T"
+                    ],
+                    "math_type_code": "<m:T></m:T>",
+                    "html_entity_name": "T"
+                },
+                {
+                    "symbol": "U",
+                    "title": "U",
+                    "latex_code": "\\U",
+                    "html_entity": "&U;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0055",
+                    "mathml_representation": "<mi>U</mi>",
+                    "alternate_representations": [
+                        "U",
+                        "U"
+                    ],
+                    "math_type_code": "<m:U></m:U>",
+                    "html_entity_name": "U"
+                },
+                {
+                    "symbol": "V",
+                    "title": "V",
+                    "latex_code": "\\V",
+                    "html_entity": "&V;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0056",
+                    "mathml_representation": "<mi>V</mi>",
+                    "alternate_representations": [
+                        "V",
+                        "V"
+                    ],
+                    "math_type_code": "<m:V></m:V>",
+                    "html_entity_name": "V"
+                },
+                {
+                    "symbol": "W",
+                    "title": "W",
+                    "latex_code": "\\W",
+                    "html_entity": "&W;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0057",
+                    "mathml_representation": "<mi>W</mi>",
+                    "alternate_representations": [
+                        "W",
+                        "W"
+                    ],
+                    "math_type_code": "<m:W></m:W>",
+                    "html_entity_name": "W"
+                },
+                {
+                    "symbol": "X",
+                    "title": "X",
+                    "latex_code": "\\X",
+                    "html_entity": "&X;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0058",
+                    "mathml_representation": "<mi>X</mi>",
+                    "alternate_representations": [
+                        "X",
+                        "X"
+                    ],
+                    "math_type_code": "<m:X></m:X>",
+                    "html_entity_name": "X"
+                },
+                {
+                    "symbol": "Y",
+                    "title": "Y",
+                    "latex_code": "\\Y",
+                    "html_entity": "&Y;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+0059",
+                    "mathml_representation": "<mi>Y</mi>",
+                    "alternate_representations": [
+                        "Y",
+                        "Y"
+                    ],
+                    "math_type_code": "<m:Y></m:Y>",
+                    "html_entity_name": "Y"
+                },
+                {
+                    "symbol": "Z",
+                    "title": "Z",
+                    "latex_code": "\\Z",
+                    "html_entity": "&Z;",
+                    "category": "Latin Letters",
+                    "unicode_code_point": "U+005A",
+                    "mathml_representation": "<mi>Z</mi>",
+                    "alternate_representations": [
+                        "Z",
+                        "Z"
+                    ],
+                    "math_type_code": "<m:Z></m:Z>",
+                    "html_entity_name": "Z"
+                },
+
+            {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+            {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+            {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+            {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+
+            ]
+
+        
     
     
 
