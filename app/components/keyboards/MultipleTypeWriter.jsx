@@ -124,10 +124,10 @@ const showActiveKeyboard = (index) => {
       
       {keyboardTypes.map((key,index)=>{
         return(
-            <div className="tooltip2">
+            <div  key={index} className="tooltip2">
             <button 
             className='btn-select'
-            key={index}
+           
             onClick={() => showActiveKeyboard(index)}>
                 {capitalizeWords(key.replaceAll('_',' '))}</button>
                 <span className="tooltip2-text2">
