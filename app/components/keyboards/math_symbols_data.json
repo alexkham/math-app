@@ -1,4 +1,457 @@
-{
+{    "common_binary_operators": [
+    {
+        "symbol": "+",
+        "title": "Plus",
+        "latex_code": "\\+",
+        "html_entity": "&plus;",
+        "unicode_escape_sequence": "\\u002B",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+002B",
+        "mathml_representation": "<mo>+</mo>",
+        "alternate_representations": [
+            "+",
+            "&plus;"
+        ],
+        "math_type_code": "<m:plus></m:plus>",
+        "html_entity_name": "Plus"
+    },
+    {
+        "symbol": "-",
+        "title": "Minus",
+        "latex_code": "\\-",
+        "html_entity": "&minus;",
+        "unicode_escape_sequence": "\\u002D",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+002D",
+        "mathml_representation": "<mo>-</mo>",
+        "alternate_representations": [
+            "-",
+            "&minus;"
+        ],
+        "math_type_code": "<m:minus></m:minus>",
+        "html_entity_name": "Minus"
+    },
+    {
+        "symbol": "*",
+        "title": "Asterisk",
+        "latex_code": "\\ast",
+        "html_entity": "&ast;",
+        "unicode_escape_sequence": "\\u002A",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+002A",
+        "mathml_representation": "<mo>*</mo>",
+        "alternate_representations": [
+            "*",
+            "&ast;"
+        ],
+        "math_type_code": "<m:asterisk></m:asterisk>",
+        "html_entity_name": "Asterisk"
+    },
+    {
+        "symbol": "/",
+        "title": "Slash",
+        "latex_code": "\\/",
+        "html_entity": "&sol;",
+        "unicode_escape_sequence": "\\u002F",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+002F",
+        "mathml_representation": "<mo>/</mo>",
+        "alternate_representations": [
+            "/",
+            "&sol;"
+        ],
+        "math_type_code": "<m:slash></m:slash>",
+        "html_entity_name": "Slash"
+    },
+    {
+        "symbol": "=",
+        "title": "Equals",
+        "latex_code": "\\=",
+        "html_entity": "&equals;",
+        "unicode_escape_sequence": "\\u003D",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+003D",
+        "mathml_representation": "<mo>=</mo>",
+        "alternate_representations": [
+            "=",
+            "&equals;"
+        ],
+        "math_type_code": "<m:equals></m:equals>",
+        "html_entity_name": "Equals"
+    },
+    {
+        "symbol": "≠",
+        "title": "Not Equal",
+        "latex_code": "\\neq",
+        "html_entity": "&ne;",
+        "unicode_escape_sequence": "\\u2260",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+2260",
+        "mathml_representation": "<mo>≠</mo>",
+        "alternate_representations": [
+            "≠",
+            "&ne;"
+        ],
+        "math_type_code": "<m:notequal></m:notequal>",
+        "html_entity_name": "Not Equal"
+    },
+    {
+        "symbol": "<",
+        "title": "Less Than",
+        "latex_code": "\\<",
+        "html_entity": "&lt;",
+        "unicode_escape_sequence": "\\u003C",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+003C",
+        "mathml_representation": "<mo><</mo>",
+        "alternate_representations": [
+            "<",
+            "&lt;"
+        ],
+        "math_type_code": "<m:lessthan></m:lessthan>",
+        "html_entity_name": "Less Than"
+    },
+    {
+        "symbol": ">",
+        "title": "Greater Than",
+        "latex_code": "\\>",
+        "html_entity": "&gt;",
+        "unicode_escape_sequence": "\\u003E",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+003E",
+        "mathml_representation": "<mo>></mo>",
+        "alternate_representations": [
+            ">",
+            "&gt;"
+        ],
+        "math_type_code": "<m:greaterthan></m:greaterthan>",
+        "html_entity_name": "Greater Than"
+    },
+    {
+        "symbol": "≤",
+        "title": "Less Than or Equal To",
+        "latex_code": "\\leq",
+        "html_entity": "&le;",
+        "unicode_escape_sequence": "\\u2264",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+2264",
+        "mathml_representation": "<mo>≤</mo>",
+        "alternate_representations": [
+            "≤",
+            "&le;"
+        ],
+        "math_type_code": "<m:lessthanorequalto></m:lessthanorequalto>",
+        "html_entity_name": "Less Than or Equal To"
+    },
+    {
+        "symbol": "≥",
+        "title": "Greater Than or Equal To",
+        "latex_code": "\\geq",
+        "html_entity": "&ge;",
+        "unicode_escape_sequence": "\\u2265",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+2265",
+        "mathml_representation": "<mo>≥</mo>",
+        "alternate_representations": [
+            "≥",
+            "&ge;"
+        ],
+        "math_type_code": "<m:greaterthanorequalto></m:greaterthanorequalto>",
+        "html_entity_name": "Greater Than or Equal To"
+    },
+    {
+        "symbol": "×",
+        "title": "Times",
+        "latex_code": "\\times",
+        "html_entity": "&times;",
+        "unicode_escape_sequence": "\\u00D7",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+00D7",
+        "mathml_representation": "<mo>×</mo>",
+        "alternate_representations": [
+            "×",
+            "&times;"
+        ],
+        "math_type_code": "<m:times></m:times>",
+        "html_entity_name": "Times"
+    },
+    {
+        "symbol": "÷",
+        "title": "Division Sign",
+        "latex_code": "\\div",
+        "html_entity": "&divide;",
+        "unicode_escape_sequence": "\\u00F7",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+00F7",
+        "mathml_representation": "<mo>÷</mo>",
+        "alternate_representations": [
+            "÷",
+            "&divide;"
+        ],
+        "math_type_code": "<m:divisionsign></m:divisionsign>",
+        "html_entity_name": "Division Sign"
+    },
+    {
+        "symbol": "±",
+        "title": "Plus Minus",
+        "latex_code": "\\pm",
+        "html_entity": "&plusmn;",
+        "unicode_escape_sequence": "\\u00B1",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+00B1",
+        "mathml_representation": "<mo>±</mo>",
+        "alternate_representations": [
+            "±",
+            "&plusmn;"
+        ],
+        "math_type_code": "<m:plusminus></m:plusminus>",
+        "html_entity_name": "Plus Minus"
+    },
+    {
+        "symbol": "∓",
+        "title": "Minus Plus",
+        "latex_code": "\\mp",
+        "html_entity": "&mnplus;",
+        "unicode_escape_sequence": "\\u2213",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+2213",
+        "mathml_representation": "<mo>∓</mo>",
+        "alternate_representations": [
+            "∓",
+            "&mnplus;"
+        ],
+        "math_type_code": "<m:minusplus></m:minusplus>",
+        "html_entity_name": "Minus Plus"
+    },
+    {
+        "symbol": "∧",
+        "title": "Logical And",
+        "latex_code": "\\wedge",
+        "html_entity": "&and;",
+        "unicode_escape_sequence": "\\u2227",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+2227",
+        "mathml_representation": "<mo>∧</mo>",
+        "alternate_representations": [
+            "∧",
+            "&and;"
+        ],
+        "math_type_code": "<m:logicaland></m:logicaland>",
+        "html_entity_name": "Logical And"
+    },
+    {
+        "symbol": "∨",
+        "title": "Logical Or",
+        "latex_code": "\\vee",
+        "html_entity": "&or;",
+        "unicode_escape_sequence": "\\u2228",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+2228",
+        "mathml_representation": "<mo>∨</mo>",
+        "alternate_representations": [
+            "∨",
+            "&or;"
+        ],
+        "math_type_code": "<m:logicalor></m:logicalor>",
+        "html_entity_name": "Logical Or"
+    },
+    {
+        "symbol": "⊕",
+        "title": "Circled Plus",
+        "latex_code": "\\oplus",
+        "html_entity": "&oplus;",
+        "unicode_escape_sequence": "\\u2295",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+2295",
+        "mathml_representation": "<mo>⊕</mo>",
+        "alternate_representations": [
+            "⊕",
+            "&oplus;"
+        ],
+        "math_type_code": "<m:circledplus></m:circledplus>",
+        "html_entity_name": "Circled Plus"
+    },
+    {
+        "symbol": "⊗",
+        "title": "Circled Times",
+        "latex_code": "\\otimes",
+        "html_entity": "&otimes;",
+        "unicode_escape_sequence": "\\u2297",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+2297",
+        "mathml_representation": "<mo>⊗</mo>",
+        "alternate_representations": [
+            "⊗",
+            "&otimes;"
+        ],
+        "math_type_code": "<m:circledtimes></m:circledtimes>",
+        "html_entity_name": "Circled Times"
+    },
+    {
+        "symbol": "∙",
+        "title": "Dot",
+        "latex_code": "\\cdot",
+        "html_entity": "&sdot;",
+        "unicode_escape_sequence": "\\u2219",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+2219",
+        "mathml_representation": "<mo>∙</mo>",
+        "alternate_representations": [
+            "∙",
+            "&sdot;"
+        ],
+        "math_type_code": "<m:dot></m:dot>",
+        "html_entity_name": "Dot"
+    },
+    {
+        "symbol": "∝",
+        "title": "Proportional To",
+        "latex_code": "\\propto",
+        "html_entity": "&prop;",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+221D",
+        "mathml_representation": "<mo>∝</mo>",
+        "alternate_representations": [
+            "∝",
+            "&prop;"
+        ],
+        "math_type_code": "<m:proportionalto></m:proportionalto>",
+        "html_entity_name": "Proportional To",
+        "unicode_escape_sequence": "\\u221D"
+    },
+    {
+        "symbol": "∘",
+        "title": "Function Composition",
+        "latex_code": "\\circ",
+        "html_entity": "&compfn;",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+2218",
+        "mathml_representation": "<mo>∘</mo>",
+        "alternate_representations": [
+            "∘",
+            "&compfn;"
+        ],
+        "math_type_code": "<m:functioncomposition></m:functioncomposition>",
+        "html_entity_name": "Function Composition",
+        "unicode_escape_sequence": "\\u2218"
+    },
+    {
+        "symbol": "∙",
+        "title": "Bullet Operator",
+        "latex_code": "\\bullet",
+        "html_entity": "&bull;",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+2219",
+        "mathml_representation": "<mo>∙</mo>",
+        "alternate_representations": [
+            "∙",
+            "&bull;"
+        ],
+        "math_type_code": "<m:bulletoperator></m:bulletoperator>",
+        "html_entity_name": "Bullet Operator",
+        "unicode_escape_sequence": "\\u2219"
+    },
+    {
+        "symbol": "∩",
+        "title": "Intersection",
+        "latex_code": "\\cap",
+        "html_entity": "&cap;",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+2229",
+        "mathml_representation": "<mo>∩</mo>",
+        "alternate_representations": [
+            "∩",
+            "&cap;"
+        ],
+        "math_type_code": "<m:intersection></m:intersection>",
+        "html_entity_name": "Intersection",
+        "unicode_escape_sequence": "\\u2229"
+    },
+    {
+        "symbol": "∪",
+        "title": "Union",
+        "latex_code": "\\cup",
+        "html_entity": "&cup;",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+222A",
+        "mathml_representation": "<mo>∪</mo>",
+        "alternate_representations": [
+            "∪",
+            "&cup;"
+        ],
+        "math_type_code": "<m:union></m:union>",
+        "html_entity_name": "Union",
+        "unicode_escape_sequence": "\\u222A"
+    },
+    {
+        "symbol": "⊎",
+        "title": "Multiset Union",
+        "latex_code": "\\uplus",
+        "html_entity": "&uplus;",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+228E",
+        "mathml_representation": "<mo>⊎</mo>",
+        "alternate_representations": [
+            "⊎",
+            "&uplus;"
+        ],
+        "math_type_code": "<m:multisetunion></m:multisetunion>",
+        "html_entity_name": "Multiset Union",
+        "unicode_escape_sequence": "\\u228E"
+    },
+    {
+        "symbol": "⊓",
+        "title": "Infimum",
+        "latex_code": "\\inf",
+        "html_entity": "&inf;",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+2293",
+        "mathml_representation": "<mo>⊓</mo>",
+        "alternate_representations": [
+            "⊓",
+            "&inf;"
+        ],
+        "math_type_code": "<m:infimum></m:infimum>",
+        "html_entity_name": "Infimum",
+        "unicode_escape_sequence": "\\u2293"
+    },
+    {
+        "symbol": "⊔",
+        "title": "Supremum",
+        "latex_code": "\\sup",
+        "html_entity": "&sup;",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+2294",
+        "mathml_representation": "<mo>⊔</mo>",
+        "alternate_representations": [
+            "⊔",
+            "&sup;"
+        ],
+        "math_type_code": "<m:supremum></m:supremum>",
+        "html_entity_name": "Supremum",
+        "unicode_escape_sequence": "\\u2294"
+    },
+    {
+        "symbol": "≮",
+        "title": "Not Less Than",
+        "latex_code": "\\nless",
+        "html_entity": "&nlt;",
+        "category": "Binary Operators",
+        "unicode_code_point": "U+226E",
+        "mathml_representation": "<mo>≮</mo>",
+        "alternate_representations": [
+            "≮",
+            "&nlt;"
+        ],
+        "math_type_code": "<m:notlessthan></m:notlessthan>",
+        "html_entity_name": "Not Less Than",
+        "unicode_escape_sequence": "\\u226E"
+    },
+    {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+    {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+    {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+    {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+],
     "advanced_binary_operators": [
         {"symbol": "∔", "latex_code": "\\dotplus", "explanation": "Dot plus"},
         {"symbol": "∸", "latex_code": "\\dotminus", "explanation": "Dot minus"},
