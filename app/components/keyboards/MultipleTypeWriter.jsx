@@ -158,7 +158,7 @@ const toggleMode = (newMode) => {
         <button className='btn-select'
         title='Showing regular keyboard '
          onClick={() => showActiveKeyboard('Regular')}>
-            Regular Keyboard </button>
+            QWERTY Keyboard </button>
            
         <div className='main-menu'>
       
