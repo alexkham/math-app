@@ -1,4 +1,48 @@
-{    "common_binary_operators": [
+{ 
+    "arithmetic_symbols": [
+      {"symbol": "+", "latex_code": "+", "explanation": "Addition"},
+      {"symbol": "−", "latex_code": "-", "explanation": "Subtraction"},
+      {"symbol": "×", "latex_code": "\\times", "explanation": "Multiplication"},
+      {"symbol": "÷", "latex_code": "\\div", "explanation": "Division"},
+      {"symbol": "=", "latex_code": "=", "explanation": "Equal to"},
+      {"symbol": "≠", "latex_code": "\\neq", "explanation": "Not equal to"},
+      {"symbol": "<", "latex_code": "<", "explanation": "Less than"},
+      {"symbol": ">", "latex_code": ">", "explanation": "Greater than"},
+      {"symbol": "≤", "latex_code": "\\leq", "explanation": "Less than or equal to"},
+      {"symbol": "≥", "latex_code": "\\geq", "explanation": "Greater than or equal to"},
+      {"symbol": "±", "latex_code": "\\pm", "explanation": "Plus-minus"},
+      {"symbol": "∓", "latex_code": "\\mp", "explanation": "Minus-plus"},
+      {"symbol": "%", "latex_code": "\\%", "explanation": "Percent"},
+      {"symbol": "‰", "latex_code": "\\permil", "explanation": "Per mille"},
+      {"symbol": "‱", "latex_code": "\\textpertenthousand", "explanation": "Per ten thousand sign"},
+      {"symbol": "√", "latex_code": "\\sqrt{}", "explanation": "Square root"},
+      {"symbol": "∛", "latex_code": "\\sqrt[3]{}", "explanation": "Cube root"},
+      {"symbol": "∜", "latex_code": "\\sqrt[4]{}", "explanation": "Fourth root"},
+      {"symbol": "^", "latex_code": "^", "explanation": "Exponentiation (power)"},
+      {"symbol": "log", "latex_code": "\\log", "explanation": "Logarithm base 10"},
+      {"symbol": "ln", "latex_code": "\\ln", "explanation": "Natural logarithm (base \\(e\\))"},
+      {"symbol": "e", "latex_code": "e", "explanation": "The base of the natural logarithm (\\(e\\))"},
+      {"symbol": "∞", "latex_code": "\\infty", "explanation": "Infinity"},
+    {"symbol": "π", "latex_code": "\\pi", "explanation": "Pi, the ratio of the circumference of a circle to its diameter"},
+    {"symbol": "φ", "latex_code": "\\varphi", "explanation": "Phi, the golden ratio"},
+    {"symbol": "!", "latex_code": "!", "explanation": "Factorial, the product of all positive integers up to a given number"},
+    {"symbol": "∑", "latex_code": "\\sum", "explanation": "Summation, the sum of a sequence of numbers"},
+    {"symbol": "∏", "latex_code": "\\prod", "explanation": "Product, the product of a sequence of numbers"},
+    {"symbol": "∂", "latex_code": "\\partial", "explanation": "Partial derivative symbol"},
+    {"symbol": "∆", "latex_code": "\\Delta", "explanation": "Delta, represents change or difference in mathematics"},
+     {"symbol": "∫", "latex_code": "\\int", "explanation": "Integral, represents the area under a curve"},
+     {"symbol": "∮", "latex_code": "\\oint", "explanation": "Contour integral, used in complex analysis"},
+      {"symbol": "(", "latex_code": "(", "explanation": "Left parenthesis for grouping"},
+      {"symbol": ")", "latex_code": ")", "explanation": "Right parenthesis for grouping"},
+      {"symbol": "[", "latex_code": "[", "explanation": "Left square bracket for grouping"},
+      {"symbol": "]", "latex_code": "]", "explanation": "Right square bracket for grouping"},
+      {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+    {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+    {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+    {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+    ]
+  ,
+  "basic_binary_operators": [
     {
         "symbol": "+",
         "title": "Plus",
@@ -516,10 +560,30 @@
         {"symbol": "∴", "latex_code": "\\therefore", "explanation": "Therefore"},
         {"symbol": "∵", "latex_code": "\\because", "explanation": "Because"},
         {"symbol": "∎", "latex_code": "\\blacksquare", "explanation": "End of Proof (Tombstone)"},
+        
+        
+        {"symbol": "△", "latex_code": "\\triangle", "explanation": "Triangle"},
+        {"symbol": "≅", "latex_code": "\\cong", "explanation": "Congruent (identical in form)"},
+        {"symbol": "∼", "latex_code": "\\sim", "explanation": "Similar (same shape, different size)"},
+        {"symbol": "○", "latex_code": "\\bigcirc", "explanation": "Circle"},
+        {"symbol": "⊙", "latex_code": "\\odot", "explanation": "Circled dot (often represents a circle with a center point)"},
+        {"symbol": "□", "latex_code": "\\square", "explanation": "Square"},
+        {"symbol": "◇", "latex_code": "\\diamond", "explanation": "Diamond"},
+        {"symbol": "▭", "latex_code": "\\rectangle", "explanation": "Rectangle"},
+        {"symbol": "⬟", "latex_code": "\\pentagon", "explanation": "Pentagon"},
+        {"symbol": "⬣", "latex_code": "\\hexagon", "explanation": "Hexagon"},
+        {"symbol": "ω", "latex_code": "\\omega", "explanation": "Omega (often used to represent a specific angle in trigonometry)"},
+        {"symbol": "Ω", "latex_code": "\\Omega", "explanation": "Ohm or Omega (can represent a large circle or completion)"},
+        {"symbol": "α", "latex_code": "\\alpha", "explanation": "Alpha (often used to represent angles in triangles and circles)"},
+        {"symbol": "β", "latex_code": "\\beta", "explanation": "Beta (also used for angles)"},
+        {"symbol": "γ", "latex_code": "\\gamma", "explanation": "Gamma (often represents an angle or a specific point)"},
+
+
         {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
         {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
         {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
         {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+
     ],
     "basic_n-ary_operators": [
         {"symbol": "∑", "latex_code": "\\sum", "explanation": "Summation symbol"},
@@ -2170,11 +2234,115 @@
             {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
             {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
 
-            ]
+            ],
+            
+                "set_theory_symbols": [
+                  {"symbol": "∈", "latex_code": "\\in", "explanation": "Element of"},
+                  {"symbol": "∉", "latex_code": "\\notin", "explanation": "Not element of"},
+                  {"symbol": "⊂", "latex_code": "\\subset", "explanation": "Subset of"},
+                  {"symbol": "⊄", "latex_code": "\\not\\subset", "explanation": "Not subset of"},
+                  {"symbol": "⊆", "latex_code": "\\subseteq", "explanation": "Subset or equal"},
+                  {"symbol": "⊇", "latex_code": "\\supseteq", "explanation": "Superset or equal"},
+                  {"symbol": "∪", "latex_code": "\\cup", "explanation": "Union"},
+                  {"symbol": "∩", "latex_code": "\\cap", "explanation": "Intersection"},
+                  {"symbol": "⊖", "latex_code": "\\setminus", "explanation": "Set minus"},
+                  {"symbol": "⊕", "latex_code": "\\oplus", "explanation": "Disjoint union"},
+                  {"symbol": "℘", "latex_code": "\\wp", "explanation": "Power set"},
+                  {"symbol": "∀", "latex_code": "\\forall", "explanation": "For all"},
+                  {"symbol": "∃", "latex_code": "\\exists", "explanation": "There exists"},
+                  {"symbol": "∃!", "latex_code": "\\exists!", "explanation": "There exists one and only one"},
+                  {"symbol": "⇒", "latex_code": "\\Rightarrow", "explanation": "Implies"},
+                  {"symbol": "⇐", "latex_code": "\\Leftarrow", "explanation": "Is implied by"},
+                  {"symbol": "⇔", "latex_code": "\\Leftrightarrow", "explanation": "If and only if"},
+                  {"symbol": "∼", "latex_code": "\\sim", "explanation": "Not"},
+                  {"symbol": "∧", "latex_code": "\\wedge", "explanation": "And"},
+                  {"symbol": "∨", "latex_code": "\\vee", "explanation": "Or"},
+                  {"symbol": "⊻", "latex_code": "\\veebar", "explanation": "Exclusive or"},
+                  {"symbol": "=", "latex_code": "=", "explanation": "Equality"},
+                  {"symbol": "≠", "latex_code": "\\neq", "explanation": "Inequality"},
+                  {"symbol": "∅", "latex_code": "\\emptyset", "explanation": "Empty set"},
+                  {"symbol": "ℝ", "latex_code": "\\mathbb{R}", "explanation": "Real numbers"},
+                  {"symbol": "ℕ", "latex_code": "\\mathbb{N}", "explanation": "Natural numbers"},
+                  {"symbol": "ℤ", "latex_code": "\\mathbb{Z}", "explanation": "Integers"},
+                  {"symbol": "ℚ", "latex_code": "\\mathbb{Q}", "explanation": "Rational numbers"},
+                  {"symbol": "ℂ", "latex_code": "\\mathbb{C}", "explanation": "Complex numbers"},
+                  {"symbol": "∆", "latex_code": "\\triangle", "explanation": "Symmetric difference"},
+                  {"symbol": "×", "latex_code": "\\times", "explanation": "Cartesian product"},
+                  {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+                  {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+                  {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+                  {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+
+                ],
+                
+                    "trigonometry_symbols": [
+                      {"symbol": "sin", "latex_code": "\\sin", "explanation": "Sine"},
+                      {"symbol": "cos", "latex_code": "\\cos", "explanation": "Cosine"},
+                      {"symbol": "tan", "latex_code": "\\tan", "explanation": "Tangent"},
+                      {"symbol": "csc", "latex_code": "\\csc", "explanation": "Cosecant"},
+                      {"symbol": "sec", "latex_code": "\\sec", "explanation": "Secant"},
+                      {"symbol": "cot", "latex_code": "\\cot", "explanation": "Cotangent"},
+                      {"symbol": "π", "latex_code": "\\pi", "explanation": "Pi, the ratio of the circumference of a circle to its diameter"},
+                      {"symbol": "θ", "latex_code": "\\theta", "explanation": "Theta, often used as the variable for an angle"},
+                      {"symbol": "sin⁻¹", "latex_code": "\\sin^{-1}", "explanation": "Inverse sine (arcsin)"},
+                      {"symbol": "cos⁻¹", "latex_code": "\\cos^{-1}", "explanation": "Inverse cosine (arccos)"},
+                      {"symbol": "tan⁻¹", "latex_code": "\\tan^{-1}", "explanation": "Inverse tangent (arctan)"},
+                      {"symbol": "csc⁻¹", "latex_code": "\\csc^{-1}", "explanation": "Inverse cosecant (arccsc)"},
+                      {"symbol": "sec⁻¹", "latex_code": "\\sec^{-1}", "explanation": "Inverse secant (arcsec)"},
+                      {"symbol": "cot⁻¹", "latex_code": "\\cot^{-1}", "explanation": "Inverse cotangent (arccot)"},
+                      {"symbol": "∠", "latex_code": "\\angle", "explanation": "Angle"},
+                      {"symbol": "∡", "latex_code": "\\measuredangle", "explanation": "Measured angle"},
+                      {"symbol": "∢", "latex_code": "\\sphericalangle", "explanation": "Spherical angle"},
+                      {"symbol": "∆", "latex_code": "\\Delta", "explanation": "Delta, represents change or difference, often used for angle in trigonometry"},
+                      {"symbol": "sinh", "latex_code": "\\sinh", "explanation": "Hyperbolic sine"},
+                    {"symbol": "cosh", "latex_code": "\\cosh", "explanation": "Hyperbolic cosine"},
+                    {"symbol": "tanh", "latex_code": "\\tanh", "explanation": "Hyperbolic tangent"},
+                    {"symbol": "csch", "latex_code": "\\csch", "explanation": "Hyperbolic cosecant"},
+                    {"symbol": "sech", "latex_code": "\\sech", "explanation": "Hyperbolic secant"},
+                    {"symbol": "coth", "latex_code": "\\coth", "explanation": "Hyperbolic cotangent"},
+                    {"symbol": "e", "latex_code": "e", "explanation": "Euler's number, the base of the natural logarithm"},
+                    {"symbol": "i", "latex_code": "i", "explanation": "Imaginary unit, satisfies i² = -1"},
+                    {"symbol": "φ", "latex_code": "\\varphi", "explanation": "Phi, often used for phase angle in wave functions"},
+                    {"symbol": "λ", "latex_code": "\\lambda", "explanation": "Lambda, often used for wavelength"},
+                    {"symbol": "ω", "latex_code": "\\omega", "explanation": "Omega, angular frequency of a wave"},
+                    {"symbol": "∑", "latex_code": "\\sum", "explanation": "Summation, sum of terms"},
+                    {"symbol": "∏", "latex_code": "\\prod", "explanation": "Product, product of terms"},
+                    {"symbol": "√", "latex_code": "\\sqrt{}", "explanation": "Square root"},
+                    {"symbol": "∛", "latex_code": "\\sqrt[3]{}", "explanation": "Cube root"},
+                    {"symbol": "|z|", "latex_code": "|z|", "explanation": "Magnitude of a complex number"},
+                    {"symbol": "π", "latex_code": "\\pi", "explanation": "Pi, the ratio of the circumference of a circle to its diameter"},
+                    {"symbol": "π/2", "latex_code": "\\frac{\\pi}{2}", "explanation": "Half pi, represents a right angle or 90 degrees"},
+                    {"symbol": "π/3", "latex_code": "\\frac{\\pi}{3}", "explanation": "One third of pi, represents 60 degrees"},
+                    {"symbol": "π/4", "latex_code": "\\frac{\\pi}{4}", "explanation": "Quarter pi, represents 45 degrees"},
+                    {"symbol": "π/6", "latex_code": "\\frac{\\pi}{6}", "explanation": "One sixth of pi, represents 30 degrees"},
+                    {"symbol": "2π", "latex_code": "2\\pi", "explanation": "Two pi, represents a full circle or 360 degrees"},
+                    {"symbol": "3π/2", "latex_code": "\\frac{3\\pi}{2}", "explanation": "Three halves of pi, represents 270 degrees or a three-quarter turn"},
+                    {"symbol": "2π/3", "latex_code": "\\frac{2\\pi}{3}", "explanation": "Two thirds of pi, represents 120 degrees"},
+                    {"symbol": "π/8", "latex_code": "\\frac{\\pi}{8}", "explanation": "One eighth of pi, represents 22.5 degrees"},
+                    {"symbol": "5π/6", "latex_code": "\\frac{5\\pi}{6}", "explanation": "Five sixths of pi, represents 150 degrees"},
+                    {"symbol": "π/12", "latex_code": "\\frac{\\pi}{12}", "explanation": "One twelfth of pi, represents 15 degrees"},
+                    {"symbol": "4π/3", "latex_code": "\\frac{4\\pi}{3}", "explanation": "Four thirds of pi, represents 240 degrees"},
+                    {"symbol": "5π/3", "latex_code": "\\frac{5\\pi}{3}", "explanation": "Five thirds of pi, represents 300 degrees"},
+                    {"symbol": "3π/4", "latex_code": "\\frac{3\\pi}{4}", "explanation": "Three quarters of pi, represents 135 degrees"},
+                    {"symbol": "7π/4", "latex_code": "\\frac{7\\pi}{4}", "explanation": "Seven quarters of pi, represents 315 degrees"},
+                    {"symbol": "7π/6", "latex_code": "\\frac{7\\pi}{6}", "explanation": "Seven sixths of pi, represents 210 degrees"},
+                    {"symbol": "11π/6", "latex_code": "\\frac{11\\pi}{6}", "explanation": "Eleven sixths of pi, represents 330 degrees"},
+                
+                    {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+                    {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+                    {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+                    {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+                
+
+                ]
+                  }
+                  
+              
+              
 
         
     
     
 
 
-}
+

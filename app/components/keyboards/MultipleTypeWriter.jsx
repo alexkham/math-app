@@ -11,7 +11,7 @@ import { capitalizeWords } from '@/app/utils/utils-functions';
 const keyboard1Styles = {
   keyboard: {
     background: '#004134',
-    height: '230px',
+    height: '220px',
   },
   keyboardKeys: {
     padding: '5px',
@@ -64,7 +64,9 @@ function MultipleTypeWriter() {
 
 
   const onChange = (e) => {
+   
     setInput(e.target.value);
+   
   };
 
   const resetInput = () => {
@@ -113,7 +115,8 @@ const showActiveKeyboard = (index) => {
 
   return (
     <div className="App">
-       
+        {/* <h3 style={{verticalAlign: 'sub',fontSize:'medium' }}> Chemical formula of Water is: H<span id="sub">2</span>O</h3>   */}
+      
                 
         <button className='btn-select'
         title='Showing regular keyboard '
@@ -138,15 +141,25 @@ const showActiveKeyboard = (index) => {
       })}
       
       </div>
+
       <div className='keyboard-group'>
+        {/* <div className='small-btns'>
+        <button>One</button>
+        <button>2</button>
+        <button>3</button>
+        </div> */}
         <textarea
+        
          placeholder='To type here you can use your PC keyboard or pick one on the left'
           ref={textareaRef}
           value={input}
           onChange={onChange}
           className="keyboard-input"
           style={{ position: 'absolute', top: '30px', right: '30px', width: '300px' }}
-        ></textarea>
+        >
+
+       
+        </textarea>
         <div className='buttons-container'>
         <button className='btn' onClick={copyToClipboard} style={{backgroundColor:'#037f61'}}>Copy</button>
         <button  className='btn' onClick={resetInput} style={{backgroundColor:'red'}}>Clear</button>
