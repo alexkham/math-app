@@ -4,20 +4,21 @@ import './TypeWriter.css';
 import Keyboard from './Keyboard';
 import MathKeyboard from './MathKeyboard';
 import layout from './keyboardsData';
-import general from './general_operations.json';
 import data from './math_symbols_data'
 import { capitalizeWords } from '@/app/utils/utils-functions';
+import { superscripts,subscripts } from './super_sub_scripts';
 
 const keyboard1Styles = {
   keyboard: {
     background: '#004134',
     height: '220px',
+    
   },
   keyboardKeys: {
     padding: '5px',
   },
   keyboardKey: {
-    height: '30px',
+    height: '25px',
   },
 };
 
@@ -29,7 +30,9 @@ function MultipleTypeWriter() {
   const [currentType,setCurrentType]=useState('');
  const [keylayout, setKeylayout] = useState([]);
  const [dataObj,setDataObj]=useState();
- const [symbols, setSymbols]=useState([])
+ const [symbols, setSymbols]=useState([]);
+ const [mode, setMode] = useState('regular'); // Options: 'normal', 'subscript', 'superscript'
+
 //  const [symbols,setSymbols]=useState([])
   const textareaRef = useRef(null);
 
@@ -63,11 +66,17 @@ function MultipleTypeWriter() {
 
 
 
-  const onChange = (e) => {
+//   const onChange = (e) => {
    
-    setInput(e.target.value);
+//     setInput(e.target.value);
    
-  };
+//   };
+
+const onChange = (e) => {
+    const char = e.target.value.slice(-1); // Get the last character entered
+    handleCharacterInput(char);
+};
+
 
   const resetInput = () => {
     setInput('');
@@ -113,10 +122,38 @@ const showActiveKeyboard = (index) => {
     }
   }, [showKeyboard, input, activeKeyboard]);
 
+  useEffect(()=>{
+    document.addEventListener('keydown',detectKeydown,true)
+  },[])
+
+  const detectKeydown=(e)=>{
+    console.log('Clicked :',e.key)
+  }
+
+
+  const handleCharacterInput = (char) => {
+    let transformedChar = char;
+
+    if (mode === 'subscript' && subscripts[char]) {
+        transformedChar = subscripts[char];
+    } else if (mode === 'superscript' && superscripts[char]) {
+        transformedChar = superscripts[char];
+    }
+
+    setInput(prevInput => prevInput + transformedChar);
+};
+
+const toggleMode = (newMode) => {
+    setMode(newMode); // newMode could be 'normal', 'subscript', or 'superscript'
+};
+
+
+
   return (
     <div className="App">
         {/* <h3 style={{verticalAlign: 'sub',fontSize:'medium' }}> Chemical formula of Water is: H<span id="sub">2</span>O</h3>   */}
-      
+        {/* <span>{subscripts['y']},{subscripts['(']}{superscripts['x']}</span>
+        <span>{mode}</span> */}
                 
         <button className='btn-select'
         title='Showing regular keyboard '
@@ -143,11 +180,13 @@ const showActiveKeyboard = (index) => {
       </div>
 
       <div className='keyboard-group'>
-        {/* <div className='small-btns'>
-        <button>One</button>
-        <button>2</button>
-        <button>3</button>
-        </div> */}
+        <div className='small-btns'>
+        <button onClick={()=>toggleMode('regular')}>regular mode {mode==='regular'? '✅':''}</button>
+        <button onClick={()=>toggleMode('subscript')}>subscript {mode==='subscript'? '✅':''}</button>
+        <button onClick={()=>toggleMode('superscript')}>superscript {mode==='superscript'? '✅':''}</button>
+        <span className='current-mode'>current mode : {mode} </span>
+        </div>
+        
         <textarea
         
          placeholder='To type here you can use your PC keyboard or pick one on the left'
@@ -163,12 +202,14 @@ const showActiveKeyboard = (index) => {
         <div className='buttons-container'>
         <button className='btn' onClick={copyToClipboard} style={{backgroundColor:'#037f61'}}>Copy</button>
         <button  className='btn' onClick={resetInput} style={{backgroundColor:'red'}}>Clear</button>
+        {/* <span className='keyboard-title'>{currentType?.replaceAll('_',' ')}</span> */}
         </div>
 
       </div>
       
       <div className='keyboards-container'>
-        <span className='keyboard-title'>{currentType?.replaceAll('_',' ')}</span>
+       
+        
       {activeKeyboard === 'Regular' ?
         <Keyboard
           layout={layout}
@@ -176,14 +217,18 @@ const showActiveKeyboard = (index) => {
           setInput={setInput}
           show={showKeyboard}
           setShow={setShowKeyboard}
-          styles={keyboard1Styles} /> :
+          styles={keyboard1Styles}
+          mode={mode} /> :
+          
+         
         <MathKeyboard
           layout={data[currentType]}
           input={input}
           setInput={setInput}
           show={showKeyboard}
           setShow={setShowKeyboard}
-          styles={keyboard1Styles} />}
+          styles={keyboard1Styles} />
+          }
         
           <div>
       

@@ -1,5 +1,6 @@
 'use client'
-import React, { Fragment ,useEffect} from 'react'
+import React, { Fragment ,useEffect} from 'react';
+import { superscripts,subscripts } from './super_sub_scripts';
 
 // const layout2 = [
 //     "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "backspace",
@@ -9,30 +10,64 @@ import React, { Fragment ,useEffect} from 'react'
 //     "space"
 // ];
 
-const Keyboard = ({ layout ,styles, input, setInput, show, setShow }) => {
+const Keyboard = ({ layout ,styles, input, setInput, show, setShow ,mode}) => {
     const [capsLock, setCapsLock] = React.useState(false)
     const [keylayout, setKeylayout] = React.useState(layout)
 
+    // const onKeyClick = (key) => {
+    //     console.log('Typing Mode : '+mode)
+    //     switch (key) {
+    //         case "backspace":
+    //             setInput(input.slice(0, -1))
+    //             break
+    //         case "caps":
+    //             break
+    //         case "enter":
+    //             setInput(input + "\n")
+    //             break
+    //         case "space":
+    //             setInput(input + " ")
+    //             break
+    //         case "done":
+    //             break
+    //         default:
+    //             setInput(input + key)
+    //             break
+    //     }
+    // }
+
     const onKeyClick = (key) => {
+        let finalKey = key; // Default to the key itself
+    
+        // Directly apply transformations based on the current mode
+        if (mode === 'subscript' && subscripts[key]) {
+            finalKey = subscripts[key];
+        } else if (mode === 'superscript' && superscripts[key]) {
+            finalKey = superscripts[key];
+        }
+    
         switch (key) {
             case "backspace":
-                setInput(input.slice(0, -1))
-                break
+                setInput(prevInput => prevInput.slice(0, -1));
+                break;
             case "caps":
-                break
+                setCapsLock(prevCapsLock => !prevCapsLock);
+                break;
             case "enter":
-                setInput(input + "\n")
-                break
+                setInput(prevInput => prevInput + "\n");
+                break;
             case "space":
-                setInput(input + " ")
-                break
+                setInput(prevInput => prevInput + " ");
+                break;
             case "done":
-                break
+                setShow(false);
+                break;
             default:
-                setInput(input + key)
-                break
+                setInput(prevInput => prevInput + finalKey);
+                break;
         }
-    }
+    };
+    
 
     const onCapsLock = () => {
         setKeylayout(keylayout.map((key) => {
@@ -95,3 +130,4 @@ const Keyboard = ({ layout ,styles, input, setInput, show, setShow }) => {
 }
 
 export default Keyboard
+

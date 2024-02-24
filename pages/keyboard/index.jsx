@@ -16,7 +16,7 @@ export default function KeyboardPage() {
             
              
               
-        <h3 className='title' style={{marginLeft:'20px'}}>Mathematical Keyboard</h3>
+        <h3 className='title' style={{marginLeft:'20px'}}>Mathematical  Keyboard</h3>
         
         <MultipleTypeWriter></MultipleTypeWriter>
         </div>
