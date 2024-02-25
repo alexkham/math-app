@@ -32,7 +32,7 @@ function fixNav(){
       <li><Link href="/">Home</Link></li>
       <li><Link href="/tables">Tables</Link></li>
       <li><Link href="/keyboard">Mathematical Keyboard</Link></li>
-      <li onClick={navigateBack} style={{cursor:'pointer'}}><a>GoBack</a></li>
+      <li onClick={navigateBack} style={{cursor:'pointer'}}><a>Go Back</a></li>
      
       
 
