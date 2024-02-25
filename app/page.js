@@ -15,6 +15,7 @@ import MyNavbar from './components/nav-bar/MyNavbar';
 import FlexTableDynamic from './components/z-table/FlexTableDynamic';
 import ZTableContainer from './components/z-table/ZTableContainer';
 import ZScoreVisualizer from './components/z-table/ZScoreVisualizer';
+import { pdf } from './utils/probability';
 import { VennDiagram } from 'venn.js';
 import BellCurveHighlighted from './components/z-table/BellCurveHighlighted';
 import BellCurveHighlighted2 from './components/z-table/BellCurveHighlighted2';
@@ -59,6 +60,7 @@ export default function Home() {
      <br></br>
      <br></br>
      <br></br>
+    
      <br></br>
      <br></br>
      <br></br>
@@ -95,9 +97,9 @@ export default function Home() {
      <br></br>
      <br></br>
      <br></br>
-     {/* <BellCurveHighlighted
+     <BellCurveHighlighted
      dataPoints={dataPoints}
-     zScore={zScores}></BellCurveHighlighted> */}
+     zScore={zScores}></BellCurveHighlighted>
      <br></br>
      <br></br>
      <br></br>
