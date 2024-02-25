@@ -96,10 +96,10 @@ export default function Home() {
      <br></br>
      <br></br>
      <br></br>
-     <br></br>
+     {/* <br></br>
      <BellCurveHighlighted
      dataPoints={dataPoints}
-     zScore={zScores}></BellCurveHighlighted>
+     zScore={zScores}></BellCurveHighlighted> */}
      <br></br>
      <br></br>
      <br></br>
