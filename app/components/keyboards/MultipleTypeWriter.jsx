@@ -155,12 +155,13 @@ const toggleMode = (newMode) => {
         {/* <span>{subscripts['y']},{subscripts['(']}{superscripts['x']}</span>
         <span>{mode}</span> */}
                 
+        
+           
+        <div className='main-menu'>
         <button className='btn-select'
         title='Showing regular keyboard '
          onClick={() => showActiveKeyboard('Regular')}>
             QWERTY Keyboard </button>
-           
-        <div className='main-menu'>
       
       {keyboardTypes.map((key,index)=>{
         return(
@@ -194,7 +195,7 @@ const toggleMode = (newMode) => {
           value={input}
           onChange={onChange}
           className="keyboard-input"
-          style={{ position: 'absolute', top: '30px', right: '30px', width: '300px' }}
+          style={{ position: 'absolute', top: '60px', right: '30px', width: '300px' }}
         >
 
        

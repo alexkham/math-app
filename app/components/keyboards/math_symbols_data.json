@@ -2334,8 +2334,56 @@
                     {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
                 
 
-                ]
-                  }
+                ],
+                
+                "combinatorics_symbols": [
+                    {"symbol": "!", "latex_code": "!", "explanation": "Factorial"},
+                    {"symbol": "P(n, k)", "latex_code": "P(n, k)", "explanation": "Permutations"},
+                    {"symbol": "C(n, k)", "latex_code": "\\binom{n}{k}", "explanation": "Combinations"},
+                    {"symbol": "nᵏ", "latex_code": "n^k", "explanation": "Power"},
+                   
+                    
+                    {"symbol": "S(n, k)", "latex_code": "S(n, k)", "explanation": "Stirling numbers of the second kind"},
+                    {"symbol": "B(n)", "latex_code": "B(n)", "explanation": "Bell numbers"},
+                    {"symbol": "ℙ(A)", "latex_code": "\\mathcal{P}(A)", "explanation": "Power set of A"},
+                    {"symbol": "|A|", "latex_code": "|A|", "explanation": "Cardinality of set A"},
+                    {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+                    {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+                    {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+                    {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+                
+                  ],
+                  "probability_symbols": [
+                    {"symbol": "P(A)", "latex_code": "P(A)", "explanation": "Probability of event A"},
+                    {"symbol": "P(A|B)", "latex_code": "P(A|B)", "explanation": "Conditional probability of A given B"},
+                    {"symbol": "P(A ∩ B)", "latex_code": "P(A \\cap B)", "explanation": "Probability of both A and B"},
+                    {"symbol": "P(A ∪ B)", "latex_code": "P(A \\cup B)", "explanation": "Probability of A or B"},
+                    {"symbol": "E(X)", "latex_code": "E(X)", "explanation": "Expected value of random variable X"},
+                    {"symbol": "Var(X)", "latex_code": "\\text{Var}(X)", "explanation": "Variance of random variable X"},
+                    {"symbol": "σ²", "latex_code": "\\sigma^2", "explanation": "Variance of a population"},
+                    {"symbol": "σ", "latex_code": "\\sigma", "explanation": "Standard deviation of a population"},
+                    {"symbol": "S²", "latex_code": "S^2", "explanation": "Sample variance"},
+                    {"symbol": "S", "latex_code": "S", "explanation": "Sample standard deviation"},
+                    {"symbol": "μ", "latex_code": "\\mu", "explanation": "Mean of a population"},
+                    {"symbol": "x̄", "latex_code": "\\bar{x}", "explanation": "Sample mean"},
+                    {"symbol": "n", "latex_code": "n", "explanation": "Sample size"},
+                    {"symbol": "N", "latex_code": "N", "explanation": "Population size"},
+                    {"symbol": "Z", "latex_code": "Z", "explanation": "Z-score"},
+                    {"symbol": "t", "latex_code": "t", "explanation": "t-score in t-distribution"},
+                    {"symbol": "χ²", "latex_code": "\\chi^2", "explanation": "Chi-squared statistic"},
+                    {"symbol": "F", "latex_code": "F", "explanation": "F statistic in F-distribution"},
+                    {"symbol": "ρ", "latex_code": "\\rho", "explanation": "Correlation coefficient"},
+                    {"symbol": "p-value", "latex_code": "\\text{p-value}", "explanation": "p-value, probability of observing the test result under the null hypothesis"},    
+                    {"symbol": "Z-score", "latex_code": "Z = \\frac{X - \\mu}{\\sigma}", "explanation": "Measure of how many standard deviations an element is from the mean. Calculated as Z = (X - μ) / σ, where X is the value, μ is the mean, and σ is the standard deviation."},                                    
+                    {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+                    {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+                    {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+                    {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+                
+                  ]
+            }
+                  
+                  
                   
               
               
