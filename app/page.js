@@ -20,7 +20,8 @@ import { VennDiagram } from 'venn.js';
 import BellCurveHighlighted from './components/z-table/BellCurveHighlighted';
 import BellCurveHighlighted2 from './components/z-table/BellCurveHighlighted2';
 import TypeWriter from './components/keyboards/TypeWriter';
-
+import { primes } from './api/db/sequences/primes';
+import PrimeTable from './components/sequences/PrimeTable';
 
 
 export default function Home() {
@@ -30,13 +31,16 @@ export default function Home() {
 
   const dataPoints = Array.from({ length: 800 }, (_, index) => ((index / 100) - 4).toFixed(2));
   const zScores = [0.9]; // Example: Highlight up to z-score of 1.96
- 
+  const primeNums=[...primes]
+  const prime=primeNums[primeNums.length-2]
 
   return (
     <div className='outer-container'>
+     
       
      
       <br></br>
+      <PrimeTable></PrimeTable>
       <br></br>
       <br></br>
       <br></br>
