@@ -40,7 +40,7 @@ export default function Home() {
       
      
       <br></br>
-      {/* <PrimeTable></PrimeTable> */}
+      <PrimeTable></PrimeTable>
       <br></br>
       <br></br>
       <br></br>

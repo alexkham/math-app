@@ -241,7 +241,8 @@
     opacity: 1;
     bottom: 125%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-120%);
+    transform: translateY(10%);
     
   }
   
@@ -259,7 +260,7 @@
    
     display: grid;
   grid-template-columns: repeat(3, 1fr); /* Creates 3 columns of equal width */
-  gap: 1px; /* Adjusts the gap between grid items */
+  gap: 10px; /* Adjusts the gap between grid items */
   width: 80%; /* Ensures the container takes full width of its parent */
   padding: 10px; /* Optional: Adds some padding around the grid */
   padding-right: 30px;
