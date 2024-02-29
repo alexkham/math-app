@@ -876,7 +876,7 @@ import './sequences.css';
 import TableWrapper from './TableWrapper';
 
 const PrimeTable = () => {
-    const first1000Primes = primes.slice(0, 1000).map((prime, index) => ({ index: index + 1, prime }));
+    const first1000Primes = primes.slice(0, 100).map((prime, index) => ({ index: index + 1, prime }));
     const titles = ["#", "Prime Number"];
 
     const [startIndex, setStartIndex] = useState('');
@@ -977,7 +977,7 @@ const PrimeTable = () => {
            { presentation===1&& 
            <div className='table-container'>
             
-                <h3 className='title'>First 1000 Prime Numbers</h3>
+                <h3 className='title'>First 100 Prime Numbers</h3>
                 <TableWrapper
                     data={first1000Primes}
                     titles={titles}
