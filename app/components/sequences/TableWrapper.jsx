@@ -278,6 +278,8 @@ const TableWrapper = ({ data, titles, tableStyle }) => {
   return (
     <div>
       <div className="search-bar">
+        <div className='input-container'> 
+        <label>Search by Value :</label>
         <input
           className='my-input'
           type="number"
@@ -286,6 +288,9 @@ const TableWrapper = ({ data, titles, tableStyle }) => {
           onChange={(e) => handlePrimeChange(e)}
           onBlur={handlePrimeBlur}
         />
+        </div>
+        <div className='input-container'> 
+        <label>Search by Index :</label>
         <input
           className='my-input'
           type="number"
@@ -294,6 +299,7 @@ const TableWrapper = ({ data, titles, tableStyle }) => {
           onChange={(e) => handleIndexChange(e)}
           onBlur={handleIndexBlur}
         />
+        </div>
        {(searchTermIndex||searchTermPrime)&&<button
         onClick={()=>resetAll()} style={{backgroundColor:'red'}}>
             Reset Search</button>}

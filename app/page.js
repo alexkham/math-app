@@ -40,13 +40,13 @@ export default function Home() {
       
      
       <br></br>
-      {/* <PrimeTable></PrimeTable> */}
+       <PrimeTable></PrimeTable>
       <br></br>
       <br></br>
       <br></br>
-      <Link href={'/tables'}>
+      {/* <Link href={'/tables'}>
        <button>Go to Tables Page</button>
-       </Link>
+       </Link> */}
      <br></br>
      <br></br>
      <br></br>

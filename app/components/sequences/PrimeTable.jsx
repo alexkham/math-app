@@ -870,7 +870,7 @@
 // export default PrimeTable;
 
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { primes } from '@/app/api/db/sequences/primes';
 import './sequences.css';
 import TableWrapper from './TableWrapper';
@@ -887,6 +887,7 @@ const PrimeTable = () => {
     const [primeCheckResult, setPrimeCheckResult] = useState('');
     const [primeIndex, setPrimeIndex] = useState('');
     const [primeAtIndex, setPrimeAtIndex] = useState('');
+    const [presentation,setPresentation]=useState(1);
 
     const filterPrimesByIndexRange = () => {
         if (!startIndex || !endIndex) {
@@ -938,10 +939,44 @@ const PrimeTable = () => {
         const isPrime = primes.includes(num);
         setPrimeCheckResult(isPrime ? `${num} is a prime number.` : `${num} is not a prime number.`);
     };
+    const resetPrimeAtIndexSearch=()=>{
+        setPrimeIndex('')
+        setPrimeAtIndex('')
+    }
+    const resetAll=()=>{
+        resetFields();
+        resetPrimeAtIndexSearch();
+        setPrimeCheck('');
+        setPrimeCheckResult('');
+
+
+    }
+
+    useEffect(()=>{
+        resetAll();
+    },[presentation])
+
+
 
     return (
+        <>
+        
+        <div className='button-group'>
+                <button onClick={()=>setPresentation(1)}>First 100 Primes</button>
+                <button onClick={()=>setPresentation(2)}>Find Primes by Index Range</button>
+                <button onClick={()=>setPresentation(3)}>Check if a Number is Prime</button>
+                <button onClick={()=>setPresentation(4)}>Get Prime by Index</button>
+            </div>
+           
+            
+       
         <div className='main-prime'>
-            <div className='table-container'>
+        <div className='left-container'>
+               
+               </div>
+           { presentation===1&& 
+           <div className='table-container'>
+            
                 <h3 className='title'>First 1000 Prime Numbers</h3>
                 <TableWrapper
                     data={first1000Primes}
@@ -949,59 +984,89 @@ const PrimeTable = () => {
                     tableStyle="my-table"
                 />
             </div>
-            <div className='right-container'>
-                <h3>Find Primes by Index Range</h3>
-                <input
-                className='my-input'
-                    type="number"
-                    placeholder="Start index"
-                    value={startIndex}
-                    onChange={e => setStartIndex(e.target.value)}
-                />
-                <input
-                className='my-input'
-                    type="number"
-                    placeholder="End index"
-                    value={endIndex}
-                    onChange={e => setEndIndex(e.target.value)}
-                />
-                <button onClick={filterPrimesByIndexRange}>Filter Primes</button>
-                <button onClick={resetFields} style={{ marginLeft: '10px' }}>Reset</button>
-                {error && <div className='error'>{error}</div>}
-                {filteredPrimes.length > 0 && (
-                    <TableWrapper
-                        data={filteredPrimes}
-                        titles={titles}
-                        tableStyle="my-table"
-                    />
-                )}
-            </div>
+            }
+            { presentation===2&&
             <div>
-            <div className='prime-check-container'>
-                <h3>Check if a Number is Prime</h3>
-                <input
-                                   className='my-input'
-                    type="number"
-                    placeholder="Enter a number"
-                   value={primeCheck}
-                                       onChange={e => setPrimeCheck(e.target.value)}
-                />
-                 <button onClick={handlePrimeCheck}>Check Prime</button>
-                {primeCheckResult && <div className='result'>{primeCheckResult}</div>}
-                </div>
-                <h3>Get Prime by Index</h3>
-                <input
-                    className='my-input'
-                    type="number"
-                    placeholder="Enter index"
-                    value={primeIndex}
-                    onChange={e => setPrimeIndex(e.target.value)}
-                />
-                <button onClick={handlePrimeIndexCheck}>Get Prime</button>
-                {primeAtIndex && <div className='result'>{primeAtIndex}</div>}
-                
+             <h3>Find Primes by Index Range</h3>
+             <div className='input-container'> 
+             <label>Start Index</label>
+             <input
+             className='my-input'
+                 type="number"
+                 placeholder="Start index"
+                 value={startIndex}
+                 onChange={e => setStartIndex(e.target.value)}
+             />
+             </div>
+             <div className='input-container'> 
+              <label>End Index</label>
+             <input
+             className='my-input'
+                 type="number"
+                 placeholder="End index"
+                 value={endIndex}
+                 onChange={e => setEndIndex(e.target.value)}
+             />
+             </div>
+             <button onClick={filterPrimesByIndexRange}>Filter Primes</button>
+             {(startIndex||endIndex) && <button onClick={resetFields} 
+             style={{ marginLeft: '10px',backgroundColor:'red' }}>Reset</button>}
+             {error && <div className='error'>{error}</div>}
+             {filteredPrimes.length > 0 && (
+                 <TableWrapper
+                     data={filteredPrimes}
+                     titles={titles}
+                     tableStyle="my-table"
+                 />
+             )}
             </div>
-        </div>
+            }
+            {presentation===3 &&
+            <div className='prime-check-container'>
+            <h3>Check if a Number is Prime</h3>
+            <input
+                               className='my-input'
+                type="number"
+                placeholder="Enter a number"
+               value={primeCheck}
+              onChange={e => setPrimeCheck(e.target.value)}
+            />
+             <button onClick={handlePrimeCheck}>Check Prime</button>
+             {primeCheck&&<button 
+             onClick={()=>setPrimeCheck('')}
+             style={{backgroundColor:'red'}}>Reset</button>}
+            {primeCheckResult && <div className='result'>{primeCheckResult}</div>}
+
+
+
+            </div>
+            
+            }
+
+           {presentation===4 &&
+            <div>
+            <h3>Get Prime by Index</h3>
+            <input
+                className='my-input'
+                type="number"
+                placeholder="Enter index"
+                value={primeIndex}
+                onChange={e => setPrimeIndex(e.target.value)}
+            />
+            <button onClick={handlePrimeIndexCheck}>Get Prime</button>
+           { primeIndex&&<button onClick={()=>resetPrimeAtIndexSearch()} 
+            style={{backgroundColor:'red'}}>Reset</button>}
+            {primeAtIndex && <div className='result'>{primeAtIndex}</div>}
+            </div>
+            }
+            
+            </div>   
+            <div className='right-container'>
+               
+            </div>
+            
+       
+        </>
     );
 };
 
