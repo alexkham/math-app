@@ -871,14 +871,18 @@
 
 'use client'
 import React, { useState, useEffect } from 'react';
-import { primes } from '@/app/api/db/sequences/primes';
+import { primes } from '@/app/api/db/sequences/prime';
 import './sequences.css';
 import TableWrapper from './TableWrapper';
 
+
+
+
 const PrimeTable = () => {
+    const initPrimes = primes.map((prime, index) => ({ index: index + 1, prime }));
     const first1000Primes = primes.slice(0, 100).map((prime, index) => ({ index: index + 1, prime }));
     const titles = ["#", "Prime Number"];
-
+    
     const [startIndex, setStartIndex] = useState('');
     const [endIndex, setEndIndex] = useState('');
     const [filteredPrimes, setFilteredPrimes] = useState([]);
@@ -889,7 +893,10 @@ const PrimeTable = () => {
     const [primeAtIndex, setPrimeAtIndex] = useState('');
     const [presentation,setPresentation]=useState(1);
 
+
+
     const filterPrimesByIndexRange = () => {
+        console.log('Filter primes worked')
         if (!startIndex || !endIndex) {
             setError('Please enter both start and end indexes.');
             return;
@@ -906,11 +913,17 @@ const PrimeTable = () => {
             setError('Ensure the start index is less than the end index and both are between 1 and 1000.');
             return;
         }
-
-        const filtered = first1000Primes.slice(start - 1, end);
+        
+        const filtered =initPrimes.slice(start - 1, end);
         setFilteredPrimes(filtered);
+        console.log(filtered)
         setError('');
     };
+
+    useEffect(()=>{
+        console.log('Filtered Primes changed')
+        console.log(filteredPrimes);
+    },[filteredPrimes])
 
     const resetFields = () => {
         setStartIndex('');
@@ -1008,7 +1021,7 @@ const PrimeTable = () => {
                  onChange={e => setEndIndex(e.target.value)}
              />
              </div>
-             <button onClick={filterPrimesByIndexRange}>Filter Primes</button>
+             <button onClick={()=>filterPrimesByIndexRange()}>Filter Primes</button>
              {(startIndex||endIndex) && <button onClick={resetFields} 
              style={{ marginLeft: '10px',backgroundColor:'red' }}>Reset</button>}
              {error && <div className='error'>{error}</div>}

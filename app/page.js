@@ -20,8 +20,9 @@ import { VennDiagram } from 'venn.js';
 import BellCurveHighlighted from './components/z-table/BellCurveHighlighted';
 import BellCurveHighlighted2 from './components/z-table/BellCurveHighlighted2';
 import TypeWriter from './components/keyboards/TypeWriter';
-import { primes } from './api/db/sequences/primes';
+import { primes } from './api/db/sequences/prime';
 import PrimeTable from './components/sequences/PrimeTable';
+import SequenceTable from './components/sequences/SequenceTable';
 
 
 export default function Home() {
@@ -40,13 +41,15 @@ export default function Home() {
       
      
       <br></br>
-       <PrimeTable></PrimeTable>
+      {/* <span>{primes[0]}</span> */}
+       {/* <PrimeTable></PrimeTable> */}
       <br></br>
       <br></br>
+      {/* <SequenceTable sequenceData={primes} sequenceTitle={'fibonacci'}></SequenceTable> */}
       <br></br>
-      {/* <Link href={'/tables'}>
+      <Link href={'/tables'}>
        <button>Go to Tables Page</button>
-       </Link> */}
+       </Link>
      <br></br>
      <br></br>
      <br></br>
