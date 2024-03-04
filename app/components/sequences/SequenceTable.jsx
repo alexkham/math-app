@@ -4,6 +4,7 @@ import './sequences.css';
 import TableWrapper from './TableWrapper';
 
 const SequenceTable = ({ sequenceData, sequenceTitle }) => {
+    const initSequence = sequenceData ? sequenceData.map((prime, index) => ({ index: index + 1, prime })) : [];
     const first100Sequence = sequenceData ? sequenceData.slice(0, 100).map((prime, index) => ({ index: index + 1, prime })) : [];
 
     const titles = ["#", `${sequenceTitle.charAt(0).toUpperCase() + sequenceTitle.slice(1)} Number`];
@@ -36,7 +37,7 @@ const SequenceTable = ({ sequenceData, sequenceTitle }) => {
             return;
         }
 
-        const filtered = sequenceData.slice(start - 1, end);
+        const filtered = initSequence.slice(start - 1, end);
         setFilteredSequence(filtered);
         setError('');
     };

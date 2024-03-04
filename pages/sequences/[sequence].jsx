@@ -1,7 +1,7 @@
 import MyNavbar from '@/app/components/nav-bar/MyNavbar'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
-import '../../../app/globals.css'
+import '../../app/globals.css'
 import fs from 'fs';
 import path from 'path';
 import SequenceTable from '@/app/components/sequences/SequenceTable';
