@@ -11,7 +11,7 @@ import { superscripts,subscripts } from './super_sub_scripts';
 const keyboard1Styles = {
   keyboard: {
     background: '#004134',
-    height: '230px',
+    height: '220px',
     
   },
   keyboardKeys: {
