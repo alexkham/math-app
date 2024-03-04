@@ -41,7 +41,7 @@ export default function Home() {
       
      
       <br></br>
-      {/* <span>{primes[0]}</span> */}
+      {/* <span>.{primes[0]}</span> */}
        {/* <PrimeTable></PrimeTable> */}
       <br></br>
       <br></br>
