@@ -2,7 +2,7 @@ button{
   max-height: 35px;
 }
 
-.main-prime {
+.main-prime ,.main-sequence {
     display: grid;
     grid-template-columns: 1.5fr  3fr  4fr; /* Adjust the first column to auto or 1fr and the second column to take up more space */
     gap: 20px; /* Optional: Adds some space between your table and the right content */

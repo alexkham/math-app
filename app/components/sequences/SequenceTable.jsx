@@ -95,8 +95,12 @@ const SequenceTable = ({ sequenceData, sequenceTitle }) => {
                 <button onClick={() => setPresentation(4)}>Get {sequenceTitle.charAt(0).toUpperCase() + sequenceTitle.slice(1)} Number by Index</button>
             </div>
             <div className='main-sequence'>
+                <div className='left-container'>
+
+                </div>
+                <div className='table-container'>
                 {presentation === 1 && (
-                    <div className='table-container'>
+                    <div >
                         <h3 className='title'>First 100 {sequenceTitle.charAt(0).toUpperCase() + sequenceTitle.slice(1)} Numbers</h3>
                         <TableWrapper data={first100Sequence} titles={titles} tableStyle="my-table" />
                     </div>
@@ -138,6 +142,10 @@ const SequenceTable = ({ sequenceData, sequenceTitle }) => {
                         {numberAtIndex && <div className='result'>{numberAtIndex}</div>}
                     </div>
                 )}
+                </div>
+                <div className='right-container'>
+
+                </div>
             </div>
         </>
     );

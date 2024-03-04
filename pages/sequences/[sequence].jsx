@@ -81,8 +81,7 @@ export default function Sequence({sequenceName,sequenceData}) {
         )
     })} */}
 
-    <br></br>
-    <br></br>
+   
    {sequenceData&& <SequenceTable sequenceData={sequenceData} sequenceTitle={sequenceName}></SequenceTable>}
     <br></br>
     {/* <span>{sequenceName}</span> */}
