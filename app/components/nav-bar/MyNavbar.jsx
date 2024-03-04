@@ -33,6 +33,7 @@ function fixNav(){
       <li><Link href="/tables">Tables</Link></li>
       <li><Link href="/keyboard">Mathematical Keyboard</Link></li>
       <li><Link href="/sequences/prime-numbers">Prime Numbers</Link></li>
+      <li><Link href="/sequences/fibonacci-numbers">Fibonacci Numbers</Link></li>
       <li onClick={navigateBack} style={{cursor:'pointer'}}><a>Go Back</a></li>
      
       
