@@ -37,27 +37,35 @@ export async function getStaticProps({ params }) {
     };
   };
 
-  export async function getStaticPaths() {
-    const sequencesDirPath = path.join(process.cwd(), 'app', 'api', 'db', 'sequences');
+//   export async function getStaticPaths() {
+//     const sequencesDirPath = path.join(process.cwd(), 'app', 'api', 'db', 'sequences');
 
-    const fileNames = fs.readdirSync(sequencesDirPath);
+//     const fileNames = fs.readdirSync(sequencesDirPath);
 
-    const paths = fileNames.map((fileName) => {
-        // Extract the sequenceName and numbers from the fileName
-        // Assuming fileName format is "sequenceName-numbers.json"
-        const match = fileName.match(/^(.+)-(\d+)\.json$/);
-        if (match) {
-            const [, sequenceName, numbers] = match; // Destructure to skip the full match
-            return {
-                params: { sequence: `${sequenceName}-${numbers}` }, // Construct the dynamic part
-            };
-        }
-        return null;
-    }).filter(Boolean); // Filter out any null values if a fileName didn't match the expected pattern
-     console.log(paths)
-    return { paths, fallback: false };
-}
+//     const paths = fileNames.map((fileName) => {
+//         // Extract the sequenceName and numbers from the fileName
+//         // Assuming fileName format is "sequenceName-numbers.json"
+//         const match = fileName.match(/^(.+)-(\d+)\.json$/);
+//         if (match) {
+//             const [, sequenceName, numbers] = match; // Destructure to skip the full match
+//             return {
+//                 params: { sequence: `${sequenceName}-${numbers}` }, // Construct the dynamic part
+//             };
+//         }
+//         return null;
+//     }).filter(Boolean); // Filter out any null values if a fileName didn't match the expected pattern
+//      console.log(paths)
+//     return { paths, fallback: false };
+// }
   
+export async function getStaticPaths() {
+    // Since you don't have a predefined list of categories and tables,
+    // you can use fallback: 'blocking' to generate them on-demand
+    return {
+      paths: [], // No predefined paths
+      fallback: 'blocking' // Generate paths on-demand
+    };
+  }
 
 export default function Sequence({sequenceName}) {
   return (
