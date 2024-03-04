@@ -17,9 +17,9 @@ export async function getStaticProps({ params }) {
 
 
 
-    const sequencesDirPath = path.join(process.cwd(), 'app', 'api', 'db', 'sequences');
-    const sequenceFilePath = path.join(sequencesDirPath, `${sequenceName}.json`);
-    const sequenceData = JSON.parse(fs.readFileSync(sequenceFilePath, 'utf8'));
+    // const sequencesDirPath = path.join(process.cwd(), 'app', 'api', 'db', 'sequences');
+    // const sequenceFilePath = path.join(sequencesDirPath, `${sequenceName}.json`);
+    // const sequenceData = JSON.parse(fs.readFileSync(sequenceFilePath, 'utf8'));
     // console.log(sequenceData)
   
     // // Now use `sequenceName` to load data from your files or database
@@ -32,7 +32,7 @@ export async function getStaticProps({ params }) {
       props: {
         // sequenceData,
         sequenceName,
-        sequenceData
+        // sequenceData
       },
     };
   };
@@ -59,7 +59,7 @@ export async function getStaticProps({ params }) {
 }
   
 
-export default function Sequence({sequenceName,sequenceData}) {
+export default function Sequence({sequenceName}) {
   return (
     <div className='outer-container'>
     <MyNavbar></MyNavbar>
@@ -75,8 +75,9 @@ export default function Sequence({sequenceName,sequenceData}) {
 
     <br></br>
     <br></br>
-   {sequenceData&& <SequenceTable sequenceData={sequenceData} sequenceTitle={sequenceName}></SequenceTable>}
+   {/* {sequenceData&& <SequenceTable sequenceData={sequenceData} sequenceTitle={sequenceName}></SequenceTable>} */}
     <br></br>
+    <span>{sequenceName}</span>
     <br></br>
     <br></br>
     <br></br>
