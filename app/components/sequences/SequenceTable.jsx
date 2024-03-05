@@ -101,7 +101,7 @@ const SequenceTable = ({ sequenceData, sequenceTitle }) => {
                 <div className='table-container'>
                 {presentation === 1 && (
                     <div >
-                        <h3 className='title'>First 100 {sequenceTitle.charAt(0).toUpperCase() + sequenceTitle.slice(1)} Numbers</h3>
+                        <h3 className='title'>First {first100Sequence.length} {sequenceTitle.charAt(0).toUpperCase() + sequenceTitle.slice(1)} Numbers</h3>
                         <TableWrapper data={first100Sequence} titles={titles} tableStyle="my-table" />
                     </div>
                 )}

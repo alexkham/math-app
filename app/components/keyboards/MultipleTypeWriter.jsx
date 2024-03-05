@@ -8,6 +8,7 @@ import data from './math_symbols_data'
 import { capitalizeWords } from '@/app/utils/utils-functions';
 import { superscripts,subscripts } from './super_sub_scripts';
 
+
 const keyboard1Styles = {
   keyboard: {
     background: '#004134',
@@ -32,7 +33,7 @@ function MultipleTypeWriter() {
  const [dataObj,setDataObj]=useState();
  const [symbols, setSymbols]=useState([]);
  const [mode, setMode] = useState('regular'); // Options: 'normal', 'subscript', 'superscript'
-
+ 
 //  const [symbols,setSymbols]=useState([])
   const textareaRef = useRef(null);
 
@@ -147,7 +148,15 @@ const toggleMode = (newMode) => {
     setMode(newMode); // newMode could be 'normal', 'subscript', or 'superscript'
 };
 
+const navigateBack = () => {
+  if (typeof window !== "undefined"){
+  window.history.back();}
+};
 
+const navigateHome = () => {
+  if (typeof window !== "undefined"){
+  window.location.href = '/';}
+};
 
   return (
     <div className="App">
@@ -158,10 +167,22 @@ const toggleMode = (newMode) => {
         
            
         <div className='main-menu'>
+        {/* <div className='small-btns'> */}
+        
+        <button className='nav-btn' onClick={()=>navigateHome()}>Home</button>
+       
+        <button  className='nav-btn'  onClick={()=>navigateBack()}>Go Back</button>
+        
+        {/* </div> */}
+        
+        
+        
+        <div>
         <button className='btn-select'
         title='Showing regular keyboard '
          onClick={() => showActiveKeyboard('Regular')}>
             QWERTY Keyboard </button>
+            </div>
       
       {keyboardTypes.map((key,index)=>{
         return(
@@ -177,6 +198,7 @@ const toggleMode = (newMode) => {
                        </div>
         )
       })}
+      
       
       </div>
 
