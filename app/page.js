@@ -16,7 +16,7 @@ import FlexTableDynamic from './components/z-table/FlexTableDynamic';
 import ZTableContainer from './components/z-table/ZTableContainer';
 import ZScoreVisualizer from './components/z-table/ZScoreVisualizer';
 import { pdf } from './utils/probability';
-import { VennDiagram } from 'venn.js';
+
 import BellCurveHighlighted from './components/z-table/BellCurveHighlighted';
 import BellCurveHighlighted2 from './components/z-table/BellCurveHighlighted2';
 import TypeWriter from './components/keyboards/TypeWriter';
