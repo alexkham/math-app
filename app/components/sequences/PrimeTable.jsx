@@ -874,7 +874,7 @@ import React, { useState, useEffect } from 'react';
 import { primes } from '@/app/api/db/sequences/prime';
 import './sequences.css';
 import TableWrapper from './TableWrapper';
-import article from '../../api/db/content/primes';
+import article from '../../api/db/content/prime';
 import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';

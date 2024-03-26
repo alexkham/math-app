@@ -1,4 +1,4 @@
-const article =`
+const markdown =`
 Prime numbers are the building blocks of the integers, 
 fascinating mathematicians for their unique properties and the pivotal
 role they play in various  mathematical fields. 
@@ -91,4 +91,4 @@ Prime numbers are a central topic in mathematics, offering a rich field of study
 
 `
 
-export default article;
+export default markdown;

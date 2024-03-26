@@ -2,8 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import './sequences.css';
 import TableWrapper from './TableWrapper';
+import ReactMarkdown from 'react-markdown';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import remarkGfm from 'remark-gfm'
 
-const SequenceTable = ({ sequenceData, sequenceTitle }) => {
+
+const SequenceTable = ({ sequenceData, sequenceTitle ,article}) => {
     const initSequence = sequenceData ? sequenceData.map((prime, index) => ({ index: index + 1, prime })) : [];
     const first100Sequence = sequenceData ? sequenceData.slice(0, 100).map((prime, index) => ({ index: index + 1, prime })) : [];
 
@@ -84,7 +89,7 @@ const SequenceTable = ({ sequenceData, sequenceTitle }) => {
 
     useEffect(() => {
         resetAll();
-    }, [presentation, sequenceData, sequenceTitle,resetAll]);
+    }, [presentation, sequenceData, sequenceTitle]);
 
     return (
         <>
@@ -144,7 +149,11 @@ const SequenceTable = ({ sequenceData, sequenceTitle }) => {
                 )}
                 </div>
                 <div className='right-container'>
-
+                <ReactMarkdown
+                    remarkPlugins={[remarkMath,remarkGfm]}
+                    rehypePlugins={[rehypeKatex]}>
+                    {article}
+                  </ReactMarkdown>
                 </div>
             </div>
         </>

@@ -65,9 +65,8 @@ flowchart TD
 
   const dataPoints = Array.from({ length: 800 }, (_, index) => ((index / 100) - 4).toFixed(2));
   const zScores = [0.9]; // Example: Highlight up to z-score of 1.96
-  const primeNums=[...primes]
-  const prime=primeNums[primeNums.length-2]
-
+  
+  
   return (
     <div className='outer-container'>
      
