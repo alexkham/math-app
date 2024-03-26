@@ -117,7 +117,7 @@ export async function getStaticProps({ params }) {
   //     // Handle the error, possibly by setting article to a default error message
   // }
 
-  const article = contentMap[sequenceName] || 'Content not found.';
+  const article = contentMap[sequenceName] || ' ';
 
   return {
       props: {
