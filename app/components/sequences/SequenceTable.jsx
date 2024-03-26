@@ -84,7 +84,7 @@ const SequenceTable = ({ sequenceData, sequenceTitle }) => {
 
     useEffect(() => {
         resetAll();
-    }, [presentation, sequenceData, sequenceTitle]);
+    }, [presentation, sequenceData, sequenceTitle,resetAll]);
 
     return (
         <>

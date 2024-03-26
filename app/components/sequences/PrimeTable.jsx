@@ -1105,7 +1105,7 @@ const PrimeTable = () => {
 
     useEffect(()=>{
         resetAll();
-    },[presentation])
+    },[presentation ,resetAll])
 
 
 
@@ -1211,7 +1211,7 @@ const PrimeTable = () => {
             </div>
             }
 
-            <div className='right-container'>
+            {/* <div className='right-container'>
             <ReactMarkdown
                 
                 children={article}
@@ -1219,7 +1219,17 @@ const PrimeTable = () => {
                 rehypePlugins={[rehypeKatex]}
                 />
                
+            </div> */}
+
+            <div className='right-container'>
+            <ReactMarkdown
+                remarkPlugins={[remarkMath,remarkGfm]}
+                rehypePlugins={[rehypeKatex]}
+            >
+                {article}
+            </ReactMarkdown>
             </div>
+
             
             </div>   
             
