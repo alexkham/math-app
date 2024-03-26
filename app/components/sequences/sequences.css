@@ -4,7 +4,7 @@ button{
 
 .main-prime ,.main-sequence {
     display: grid;
-    grid-template-columns: 1.5fr  3fr  4fr; /* Adjust the first column to auto or 1fr and the second column to take up more space */
+    grid-template-columns: 1fr  4fr  6fr; /* Adjust the first column to auto or 1fr and the second column to take up more space */
     gap: 20px; /* Optional: Adds some space between your table and the right content */
     width: 100%; /* Ensure it takes up the full width */
 }
@@ -23,10 +23,13 @@ button{
 
 .right-container {
     /* Optional styling for the right container */
-    padding: 20px;
+    padding: 50px;
    /* Helps visualize the container during development */
-    max-height: 600px;
+    
     border-left: solid grey 0.2px;
+    max-width: 600px;
+    margin-left: 20px;
+    background-color: #e5e5e5;
 }
 
 
