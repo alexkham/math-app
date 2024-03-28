@@ -871,7 +871,7 @@
 
 'use client'
 import React, { useState, useEffect } from 'react';
-import { primes } from '@/app/api/db/sequences/prime';
+//import { primes } from '@/app/api/db/sequences/prime';
 import './sequences.css';
 import TableWrapper from './TableWrapper';
 import article from '../../api/db/content/prime';

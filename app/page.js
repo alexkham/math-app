@@ -24,6 +24,7 @@ import { primes } from './api/db/sequences/prime';
 import PrimeTable from './components/sequences/PrimeTable';
 import SequenceTable from './components/sequences/SequenceTable';
 import MermaidDiagram from './components/mermaid-diagram/MermaidDiagram';
+import TrigoCalculator from './components/trigo-calculator/TrigoCalculator';
 //import combinatorics from './api/db/content/combinatorics'
 
 
@@ -108,6 +109,7 @@ flowchart TD
      <br></br>
      <br></br>
      <br></br>
+     <TrigoCalculator></TrigoCalculator>
      <br></br>
      <br></br>
      <br></br>

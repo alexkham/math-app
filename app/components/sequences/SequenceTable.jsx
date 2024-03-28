@@ -7,6 +7,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm'
 import 'katex/dist/katex.min.css'; 
+import { anton ,roboto_mono , poppins} from '@/app/fonts';
 
 
 const SequenceTable = ({ sequenceData, sequenceTitle ,article}) => {
@@ -149,12 +150,16 @@ const SequenceTable = ({ sequenceData, sequenceTitle ,article}) => {
                     </div>
                 )}
                 </div>
-                <div className='right-container'>
+                <div 
+                className='right-container'
+                style={{fontFamily:'anton'}}>
+                    <main className={poppins.className}>
                 <ReactMarkdown
                     remarkPlugins={[remarkMath,remarkGfm]}
                     rehypePlugins={[rehypeKatex]}>
                     {article}
                   </ReactMarkdown>
+                  </main>
                 </div>
             </div>
         </>
