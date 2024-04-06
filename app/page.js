@@ -60,6 +60,64 @@ flowchart TD
     S --> T["Requires detailed formulas based on the problem. Specific to the scenario."]
 
 `
+const sql=`
+graph TD
+    SQL((SQL Language))
+    SQL -->Cmd[Commands]
+    SQL -->|Keywords| Key[Keywords]
+    SQL -->|Operators| Opr[Operators]
+    SQL -->|Constraints| Con[Constraints]
+    SQL -->|Data Types| DT[Data Types]
+    SQL -->|Functions| Fun[Functions]
+    SQL -->|Clauses| Cls[Clauses]
+
+    Cmd --> DDL[DDL]
+    Cmd --> DML[DML]
+    Cmd --> DCL[DCL]
+    Cmd --> TCL[TCL]
+    DDL -->|CREATE, ALTER, DROP, TRUNCATE| DDL_details
+    DML -->|INSERT, UPDATE, DELETE, SELECT| DML_details
+    DCL -->|GRANT, REVOKE| DCL_details
+    TCL -->|COMMIT, ROLLBACK, SAVEPOINT| TCL_details
+
+    Key -->|FROM, WHERE, JOIN...| Key_details
+    Opr -->|Arithmetic, Comparison...| Opr_details
+    Con -->|PRIMARY KEY, FOREIGN KEY...| Con_details
+    DT -->|Numeric, Character...| DT_details
+    Fun -->|Aggregate, Scalar...| Fun_details
+    Cls -->|WHERE, ORDER BY...| Cls_details
+
+`
+const mindMap=`
+mindmap
+  root((SQL Language))
+    subbranch1{{"Commands"}}
+      subbranch1 --> DDL["DDL"]
+      subbranch1 --> DML["DML"]
+      subbranch1 --> DCL["DCL"]
+      subbranch1 --> TCL["TCL"]
+    subbranch2{{"Keywords"}}
+      subbranch2 --> Basic["Basic"]
+      subbranch2 --> Advanced["Advanced"]
+    subbranch3{{"Operators"}}
+      subbranch3 --> Arithmetic["Arithmetic"]
+      subbranch3 --> Comparison["Comparison"]
+      subbranch3 --> Logical["Logical"]
+    subbranch4{{"Constraints"}}
+      subbranch4 --> Others["Others"]
+      subbranch4 --> PK["PK"]
+      subbranch4 --> FK["FK"]
+    subbranch5{{"Data Types"}}
+      subbranch5 --> NumStr["Numeric/String"]
+      subbranch5 --> DateMisc["Date/Misc"]
+    subbranch6{{"Functions"}}
+      subbranch6 --> Aggregate["Aggregate"]
+      subbranch6 --> ScalarSys["Scalar/System"]
+    subbranch7{{"Clauses"}}
+      subbranch7 --> Conditions["Conditions"]
+      subbranch7 --> Ordering["Ordering"]
+
+`
   const port=process.env.NEXT_PUBLIC_PORT;
   const optionsCategory=["category1","category2","category3","category4"]
   const optionsTitle=["title1","title2","title3","title4"]
@@ -155,6 +213,7 @@ flowchart TD
      <br></br>
      <br></br>
      <br></br>
+     <MermaidDiagram chartDefinition={sql}></MermaidDiagram>
      <br></br>
      <br></br>
      <br></br>

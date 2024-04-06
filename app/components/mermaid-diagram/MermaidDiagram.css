@@ -29,8 +29,8 @@
   .mermaidDiagramContainer svg  {
     transform: scale(1.15); 
     transform-origin: top left; 
-    width: 1000px; 
-    height: 1000px;
+    width: 1200px; 
+    height: 1300px;
     margin-left: 30px;
     margin-top: -250px;
    
