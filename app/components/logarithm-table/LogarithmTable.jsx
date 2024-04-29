@@ -197,7 +197,11 @@ const handleCalculateClick = () => {
   // Store the log values in a state or variable
   const logTableValues = calculateLogValues();
 
-
+ const resetAll=()=>{
+    setInputValue('');
+    setCalculatedLog('');
+    setHighlightIndex({ baseIndex: null, decimalIndex: null, meanDiffIndex: null })
+ }
   
   return (
     <>
@@ -213,6 +217,7 @@ const handleCalculateClick = () => {
           placeholder="Enter a value"
         />
         <button onClick={handleCalculateClick}>Calculate</button>
+        <button style={{backgroundColor:'gray'}} onClick={resetAll}>Reset</button>
         </div>
         <br></br>
         <hr></hr>
