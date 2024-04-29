@@ -15,7 +15,7 @@ export default function LogarithmTablePage() {
   
    <br></br>
    <br></br>
-   <div style={{position:'absolute',top:'400px',width:'1200px'}}>
+   <div style={{position:'absolute',top:'100px',width:'1200px'}}>
    
    <LogarithmTable></LogarithmTable>
    </div>
