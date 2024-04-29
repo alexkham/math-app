@@ -154,7 +154,7 @@ const SequenceTable = ({ sequenceData, sequenceTitle ,article}) => {
                 className='right-container'
                 style={{fontFamily:'anton'}}>
                     <main className={inter.className}>
-                <ReactMarkdown
+                    <ReactMarkdown
                     remarkPlugins={[remarkMath,remarkGfm]}
                     rehypePlugins={[rehypeKatex]}>
                     {article}

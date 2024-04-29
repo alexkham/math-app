@@ -1,6 +1,7 @@
 import React from 'react'
 import MermaidDiagram from '@/app/components/mermaid-diagram/MermaidDiagram'
 import '../../app/components/mermaid-diagram/MermaidDiagram.css'
+import LogarithmTable from '@/app/components/logarithm-table/LogarithmTable'
 
 export default function CombinatoricsPage() {
     // const combinatorics=`
@@ -56,6 +57,23 @@ export default function CombinatoricsPage() {
     
     
      <MermaidDiagram  chartDefinition={combinatorics}></MermaidDiagram>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+    
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
      
     </div>
     

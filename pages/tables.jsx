@@ -5,6 +5,7 @@ import path from 'path';
 import { capitalizeWords } from '@/app/utils/utils-functions';
 import './tables.css'
 import MyNavbar from '@/app/components/nav-bar/MyNavbar';
+import LogarithmTable from '@/app/components/logarithm-table/LogarithmTable';
 
 
 export async function getStaticProps() {
@@ -23,7 +24,7 @@ export async function getStaticProps() {
   });
 
   const filesData = await Promise.all(filesDataPromises);
-
+  console.log(filesData)
   return {
     props: {
       filesData,
@@ -34,7 +35,7 @@ export async function getStaticProps() {
 
 export default function tables({filesData}) {
   const categoryOptions=filesData.map(file=>capitalizeWords(file.filename.split('_')[0]))
-  
+  categoryOptions.push("Arithmetics")
   return (
     <>
     
@@ -43,6 +44,8 @@ export default function tables({filesData}) {
      <br></br>
      <br></br>
      <br></br>
+     
+     
      <br></br>
     <SelectTable2Steps 
     categoryOptions={categoryOptions}
@@ -67,6 +70,9 @@ export default function tables({filesData}) {
      <br></br>
      <br></br>
      <br></br>
+     {/* <div style={{position:'absolute',top:'600px'}}>
+     <LogarithmTable></LogarithmTable> */}
+     {/* </div> */}
      <br></br>
      <br></br>
      <br></br>
