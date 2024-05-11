@@ -231,10 +231,10 @@ mindmap
      <br></br>
      <br></br>
      <br></br>
-          <div style={{position:'absolute',top:'100px',width:'1200px'}}>
+          {/* <div style={{position:'absolute',top:'100px',width:'1200px'}}>
      <NaturalLogarithmTable></NaturalLogarithmTable>
    
-      </div>
+      </div> */}
      
      <br></br>
      <br></br>
