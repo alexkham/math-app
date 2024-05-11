@@ -26,6 +26,7 @@ import SequenceTable from './components/sequences/SequenceTable';
 import MermaidDiagram from './components/mermaid-diagram/MermaidDiagram';
 import TrigoCalculator from './components/trigo-calculator/TrigoCalculator';
 import LogarithmTable from './components/logarithm-table/LogarithmTable';
+import NaturalLogarithmTable from './components/logarithm-table/NaturalLogarithmTable';
 //import combinatorics from './api/db/content/combinatorics'
 
 
@@ -230,6 +231,11 @@ mindmap
      <br></br>
      <br></br>
      <br></br>
+          <div style={{position:'absolute',top:'100px',width:'1200px'}}>
+     <NaturalLogarithmTable></NaturalLogarithmTable>
+   
+      </div>
+     
      <br></br>
      <br></br>
      <br></br>

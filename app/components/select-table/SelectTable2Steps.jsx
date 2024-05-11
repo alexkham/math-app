@@ -6,7 +6,7 @@ import '../../globals.css'
 
 export default function SelectTable2Steps({ categoryOptions, filesData }) {
   
-  const arithmeticTitles=["Logarithms"]
+  const arithmeticTitles=["Logarithms","Natural_Logarithms"]
 
   const [category, setCategory] = useState('');
   const [tableTitles, setTableTitles] = useState([]);
@@ -33,7 +33,8 @@ export default function SelectTable2Steps({ categoryOptions, filesData }) {
   };
 
   const handleTitleChange = (e) => {
-    setSelectedTitle(e.target.value);
+    const title=e.target.value;
+    setSelectedTitle(title);
   };
 
   const handleSelectionComplete = () => {
@@ -45,8 +46,9 @@ export default function SelectTable2Steps({ categoryOptions, filesData }) {
 
   return (
     <div className='main' >
+     
       <h3>Two Steps Table Select</h3>
-      {<span>{selectedTitle}</span>}
+      {/* {<span>{selectedTitle}</span>} */}
       <div className='select-container'>
       <SelectComponent
         label="Category"
@@ -67,7 +69,7 @@ export default function SelectTable2Steps({ categoryOptions, filesData }) {
         <SelectComponent
         label="Table"
         options={arithmeticTitles}
-        value={selectedTitle.replaceAll('-',' ')}
+        value={selectedTitle}
         onChange={handleTitleChange}
       />
 
