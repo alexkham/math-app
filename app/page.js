@@ -29,6 +29,7 @@ import LogarithmTable from './components/logarithm-table/LogarithmTable';
 import NaturalLogarithmTable from './components/logarithm-table/NaturalLogarithmTable';
 import Base2LogarithmTable from './components/logarithm-table/LogarithmBase2Table';
 import ExponentialTable from './components/logarithm-table/ExponentialTable';
+import PowerTable from './components/logarithm-table/PowerTable';
 //import combinatorics from './api/db/content/combinatorics'
 
 
@@ -241,12 +242,11 @@ mindmap
      <br></br>
      <br></br>
      <br></br>
-     <div style={{position:'absolute',top:'100px',width:'1200px'}}>
-     <ExponentialTable></ExponentialTable>
-   
+     {/* <div style={{position:'absolute',top:'100px',width:'1200px'}}>
+     <PowerTable></PowerTable>
       </div>
      
-     
+      */}
      <br></br>
      <br></br>
      <br></br>
