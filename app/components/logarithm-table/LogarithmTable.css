@@ -41,7 +41,7 @@
     border-radius: 6px;
     padding: 5px;
     position: absolute;
-    z-index: 1000;
+    z-index: 100000000;
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
@@ -59,6 +59,7 @@
   .flex-table-cell, .header-cell {
     width: 50px; /* Adjust based on your content */
     min-width: 60px; /* Ensures cell does not become too narrow */
+    z-index: 10;
   }
 
   .flex-table-cell, .header-cell {

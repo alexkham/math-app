@@ -6,7 +6,7 @@ import '../../globals.css'
 
 export default function SelectTable2Steps({ categoryOptions, filesData }) {
   
-  const arithmeticTitles=["Logarithms","Natural_Logarithms","Binary_Logarithms"]
+  const arithmeticTitles=["Logarithms","Natural_Logarithms","Binary_Logarithms","Exponential_Table"]
 
   const [category, setCategory] = useState('');
   const [tableTitles, setTableTitles] = useState([]);
