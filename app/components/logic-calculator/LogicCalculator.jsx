@@ -85,6 +85,8 @@ const LogicCalculator = () => {
   const [table, setTable] = useState([]);
   const [error, setError] = useState('');
   const inputRef = useRef(null);
+  const tableRef = useRef(null);
+
 
   useEffect(() => {
     inputRef.current.focus();
@@ -105,23 +107,65 @@ const LogicCalculator = () => {
     inputRef.current.focus();
   };
 
-  const handleGenerate = () => {
+//   const handleGenerate = () => {
+//     if (!expression.trim()) {
+//       setError('No input provided. Please enter a logical expression.');
+//       setTable([]);
+//       return;
+//     }
+
+//     try {
+//       const truthTable = generateTruthTable(expression);
+//       setTable(truthTable);
+//       setError('');
+//     } catch (err) {
+//       setError('Invalid expression. Please enter a valid logical expression.');
+//       setTable([]);
+//     }
+//   };
+// const handleGenerate = () => {
+//     if (!expression.trim()) {
+//       setError('No input provided. Please enter a logical expression.');
+//       setTable([]);
+//       return;
+//     }
+  
+//     try {
+//       const truthTable = generateTruthTable(expression);
+//       setTable(truthTable);
+//       setError('');
+//       if (tableRef.current) {
+//         tableRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+//       }
+//     } catch (err) {
+//       setError('Invalid expression. Please enter a valid logical expression.');
+//       setTable([]);
+//     }
+//   };
+
+const handleGenerate = () => {
     if (!expression.trim()) {
       setError('No input provided. Please enter a logical expression.');
       setTable([]);
       return;
     }
-
+  
     try {
       const truthTable = generateTruthTable(expression);
       setTable(truthTable);
       setError('');
+      if (tableRef.current) {
+        window.scrollTo({
+          top: tableRef.current.offsetTop - 50,
+          behavior: 'smooth',
+        });
+      }
     } catch (err) {
       setError('Invalid expression. Please enter a valid logical expression.');
       setTable([]);
     }
   };
-
+    
   const clearAll = () => {
     setExpression('');
     setTable([]);
@@ -203,7 +247,7 @@ const LogicCalculator = () => {
       </div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {table.length > 0 && (
-        <table border="1" style={{ margin: '20px auto', borderCollapse: 'collapse' }}>
+        <table  ref={tableRef} border="1" style={{ margin: '20px auto', borderCollapse: 'collapse' }}>
           <thead>
             <tr>
               {Object.keys(table[0]).map((key) => (
