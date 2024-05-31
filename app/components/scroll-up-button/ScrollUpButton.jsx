@@ -30,7 +30,12 @@ const ScrollUpButton = () => {
 
   return (
     isVisible && 
-      <button onClick={scrollToTop} style={{ position: 'fixed', bottom: '20px', right: '30px', zIndex: 1000, backgroundColor: 'blue', color: 'white' }}>
+      <button onClick={scrollToTop} 
+      style={{ position: 'fixed', bottom: '20px',
+       right: '30px', zIndex: 1000, 
+       backgroundColor: 'blue', color: 'white',
+       minHeight:'40px',padding:'15px',
+       borderRadius:'10px',fontSize:'large'}}>
         Scroll Back
       </button>
   );

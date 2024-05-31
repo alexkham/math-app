@@ -30,6 +30,7 @@ import NaturalLogarithmTable from './components/logarithm-table/NaturalLogarithm
 import Base2LogarithmTable from './components/logarithm-table/LogarithmBase2Table';
 import ExponentialTable from './components/logarithm-table/ExponentialTable';
 import PowerTable from './components/logarithm-table/PowerTable';
+import LogicCalculator from './components/logic-calculator/LogicCalculator';
 //import combinatorics from './api/db/content/combinatorics'
 
 
@@ -242,15 +243,18 @@ mindmap
      <br></br>
      <br></br>
      <br></br>
-     {/* <div style={{position:'absolute',top:'100px',width:'1200px'}}>
+      {/* <div style={{position:'absolute',top:'100px',width:'1200px'}}>
      <PowerTable></PowerTable>
-      </div>
+      </div>  */}
      
-      */}
+     
      <br></br>
      <br></br>
      <br></br>
-     <br></br>
+     {/* <h2>Z Score Visualizer</h2>
+     <ZScoreVisualizer></ZScoreVisualizer> */}
+     {/* <br></br>
+     <LogicCalculator></LogicCalculator> */}
      <br></br>
     </div>
   )

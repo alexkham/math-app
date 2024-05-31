@@ -1,0 +1,45 @@
+.tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position the tooltip above the button */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    padding: 10px;
+  }
+  
+  button:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .logic-operators{
+    border: solid black 0.5px;
+    border-radius: 5px;
+    padding:10px;
+    margin-top: 10px;
+  }
+  
+  .logic-operators button{
+    min-width: 40px;
+  }
+
+  .latin-letters{
+    border: solid black 0.5px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+
+  .latin-letters button{
+    min-width: 45px;
+  }
