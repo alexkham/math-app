@@ -6,7 +6,7 @@ import operatorDescriptions from './operatorDescriptions';
 import MarkdownComponent from '../MarkdownComponent';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import rehypeReact from 'rehype-react';
+// import rehypeReact from 'rehype-react';
 import { Roboto } from '@next/font/google';
 
 const markdown=`
