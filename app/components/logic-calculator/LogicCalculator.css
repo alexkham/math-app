@@ -26,6 +26,8 @@
     border-radius: 5px;
     padding:10px;
     margin-top: 10px;
+    min-height: 100px;
+    margin-bottom: 30px;
   }
   
   .logic-operators button{
@@ -42,4 +44,59 @@
 
   .latin-letters button{
     min-width: 40px;
+  }
+
+  .info-link {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+  }
+
+  #operator-info{
+    margin-top: 200px;
+    background-color: red;
+  }
+
+  .info-link {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  #operator-info {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    min-height: 500px;
+    text-align: left;
+    line-height: 1.8;
+  }
+  
+  #operator-info h2 {
+    margin-top: 0;
+    text-align: center;
+  }
+  
+  #operator-info ul {
+    padding-left: 20px;
+  }
+  
+  #operator-info button {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .btn-back{
+    padding: 10px;
+    min-width: 80px;
   }
