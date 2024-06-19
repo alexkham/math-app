@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 // import rehypeReact from 'rehype-react';
 import { Roboto } from '@next/font/google';
+import Link from 'next/link';
 
 const markdown=`
 # Understanding the Logical OR Operator (∨)
@@ -382,6 +383,21 @@ const handleGenerate = () => {
     <ReactMarkdown>{info}</ReactMarkdown>
     {/* <MarkdownComponent article={info}></MarkdownComponent>
     */}
+{/* 
+    { operatorDescriptions[selectedOperator].links&&operatorDescriptions[selectedOperator].links.length>0&&
+      <Link  
+    href={operatorDescriptions[selectedOperator].links[0]}>Read More </Link>} */}
+
+        {operatorDescriptions[selectedOperator].links && 
+        operatorDescriptions[selectedOperator].links.length > 0 && (
+          <Link
+            href={operatorDescriptions[selectedOperator].links[0]}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read More
+          </Link>
+        )}
     </div>
    
     <button className='btn-back' onClick={() => setSelectedOperator(null)}>Go Back</button>

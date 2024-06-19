@@ -45,6 +45,11 @@ In practice, logical conjunction is crucial for constructing complex conditional
 
 Logical conjunction's simplicity in concept but broad utility across various fields underscores its foundational role in logical reasoning, computational operations, and theoretical computer science, making it an indispensable element of modern technological processes and logical theory.
       `,
+
+      links:[
+          'https://en.wikipedia.org/wiki/Logical_conjunction',
+
+      ]
       
     },
 
@@ -102,7 +107,11 @@ A ∨ true = true
 
 In digital electronics, the OR gate is a basic building block used in circuits. It outputs true (1) if at least one of its inputs is true (1). This is critical in designing and implementing logic circuits that perform various functions in computers and other digital devices.
 
-`
+`,
+links:[
+   'https://en.wikipedia.org/wiki/Logical_disjunction'
+
+]
 
 },
 '¬':{
@@ -167,6 +176,13 @@ In digital electronics, the NOT gate is a fundamental building block. It takes a
 
     
 `,
+
+links:[
+  'https://en.wikipedia.org/wiki/Negation'
+
+]
+
+
 },
 '⊕':{
 description:`
@@ -243,7 +259,10 @@ XOR is a fundamental operation in cryptography. It is used in simple encryption 
 
 The exclusive OR (XOR) operator is a versatile and essential logical operation with unique properties and wide-ranging applications. Its ability to produce true only when inputs differ makes it invaluable in digital logic, cryptography, and various logical analyses.
    
-`
+`,
+links:[
+  'https://en.wikipedia.org/wiki/Exclusive_or'
+]
 },
 
 '→':{
@@ -305,7 +324,12 @@ Implication in natural language often aligns with the logical connective, but wi
 
 The implication (→) operator is a powerful logical connective that enables the formulation of conditional statements. Its properties, such as truth-preservation, contraposition, and transitivity, make it indispensable in logical reasoning, mathematical proofs, and various applications in computer science and digital logic. Understanding implication helps in constructing rigorous arguments and ensuring logical consistency.
 
-`
+`,
+
+links:[
+    'https://calcworkshop.com/logic/logical-implication/'
+
+]
 
 },
 '↔':{
@@ -377,7 +401,11 @@ In natural language, the biconditional often appears as phrases like "if and onl
 
 The biconditional (↔) operator is a powerful logical connective that enables the expression of equivalence between propositions. Its properties, such as symmetry, associativity, commutativity, and idempotence, make it indispensable in logical reasoning, mathematical proofs, and various applications in computer science and digital logic. Understanding biconditional helps in constructing rigorous arguments and ensuring logical consistency.
 
-    `
+    `,
+    links:[
+      'https://calcworkshop.com/logic/logical-implication/'
+  
+  ]
 },
 '(':{
 description:`
@@ -519,7 +547,10 @@ In programming, NAND is often used in low-level operations and hardware design. 
 The NAND (↑) operator is a powerful logical connective that negates the AND operation. Its properties, such as commutativity, non-associativity, and its relationship with De Morgan's laws, make it indispensable in logical reasoning, mathematical proofs, and various applications in computer science and digital logic. Understanding NAND helps in constructing complex logical expressions and ensuring logical consistency.
 
     
-`
+`,
+links:[
+  'https://en.wikipedia.org/wiki/NAND_logic'
+]
 },
 '↓':{
 description:`
@@ -592,7 +623,10 @@ In programming, NOR is often used in low-level operations and hardware design. U
 
 The NOR (↓) operator is a powerful logical connective that negates the OR operation. Its properties, such as commutativity, non-associativity, and its relationship with De Morgan's laws, make it indispensable in logical reasoning, mathematical proofs, and various applications in computer science and digital logic. Understanding NOR helps in constructing complex logical expressions and ensuring logical consistency.
     
-`
+`,
+links:[
+  'https://en.wikipedia.org/wiki/Logical_NOR'
+]
 }
 
 
