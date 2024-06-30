@@ -31,6 +31,7 @@ import Base2LogarithmTable from './components/logarithm-table/LogarithmBase2Tabl
 import ExponentialTable from './components/logarithm-table/ExponentialTable';
 import PowerTable from './components/logarithm-table/PowerTable';
 import LogicCalculator from './components/logic-calculator/LogicCalculator';
+import MatrixMultiplication from './components/matrix-multiplication/MatrixMultiplication';
 //import combinatorics from './api/db/content/combinatorics'
 
 
@@ -249,6 +250,7 @@ mindmap
      
      
      <br></br>
+     <MatrixMultiplication></MatrixMultiplication>
      <br></br>
      <br></br>
      {/* <h2>Z Score Visualizer</h2>
