@@ -1,0 +1,156 @@
+.main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  
+  .explanations {
+    margin-top: 3rem;
+  }
+  
+  .explanation {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .operatorTitle {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
+  }
+  
+  .markdownContent {
+    color: #34495e;
+    line-height: 1.6;
+  }
+  
+  .markdownContent h1,
+  .markdownContent h2,
+  .markdownContent h3,
+  .markdownContent h4,
+  .markdownContent h5,
+  .markdownContent h6 {
+    color: #2c3e50;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .markdownContent p {
+    margin-bottom: 1rem;
+  }
+  
+  .markdownContent ul,
+  .markdownContent ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  
+  .readMore {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .readMore:hover {
+    text-decoration: underline;
+  }
+  
+  .backToTop {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .backToTop:hover {
+    background-color: #2980b9;
+  }
+  
+  @media (max-width: 1200px) {
+    .main {
+      padding: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .main {
+      padding: 1rem;
+    }
+  
+    .title {
+      font-size: 2.2rem;
+    }
+  
+    .operatorTitle {
+      font-size: 1.6rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .main {
+      padding: 0.75rem;
+    }
+  
+    .title {
+      font-size: 2rem;
+    }
+  
+    .explanation {
+      padding: 1rem;
+    }
+  
+    .operatorTitle {
+      font-size: 1.4rem;
+    }
+  
+    .markdownContent {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .main {
+      padding: 0.5rem;
+    }
+  
+    .title {
+      font-size: 1.8rem;
+    }
+  
+    .explanation {
+      padding: 0.75rem;
+    }
+  
+    .operatorTitle {
+      font-size: 1.2rem;
+    }
+  
+    .markdownContent {
+      font-size: 0.85rem;
+    }
+  
+    .backToTop,
+    .readMore {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+    }
+  }

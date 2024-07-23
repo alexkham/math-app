@@ -1,0 +1,187 @@
+/* .container {
+    width: 100%;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .contentContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+  
+  .matrixSection {
+    width: 48%;
+  }
+  
+  .visualizationSection {
+    width: 48%;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  
+  .error {
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+  .matrixContainer {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .matrix {
+    border-collapse: separate;
+    border-spacing: 5px;
+  }
+  
+  .matrixInput {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .matrixInput.highlighted {
+    background-color: #ffeb3b;
+  }
+  
+  .result, .explanation {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  
+  .visualizationSection h3 {
+    margin-bottom: 20px;
+  } */
+
+
+  .container {
+    width: 100%;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .sizeSelector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1000;
+    padding: 10px 0;
+  }
+  
+  .radioLabel {
+    margin: 0 10px;
+  }
+  
+  .radioInput {
+    margin-right: 5px;
+  }
+  
+  .contentContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+  
+  .matrixSection {
+    width: 48%;
+  }
+  
+  .visualizationSection {
+    width: 48%;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .error {
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+  .matrixContainer {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .matrix {
+    border-collapse: separate;
+    border-spacing: 5px;
+  }
+  
+  .matrixCell {
+    position: relative;
+  }
+  
+  .cellLabel {
+    position: absolute;
+    top: -15px;
+    left: 0;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .matrixInput {
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .matrixInput.highlighted {
+    background-color: #ffeb3b;
+  }
+  
+  .result, .explanation {
+    margin-top: 20px;
+  }
+  
+  .explanation p {
+    margin: 5px 0;
+    white-space: pre-wrap;
+  }
