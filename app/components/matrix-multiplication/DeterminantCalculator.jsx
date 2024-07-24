@@ -1678,7 +1678,7 @@ const handleMatrixChange = (i, j, value) => {
         <div className={styles.visualizationSection}>
           <h3>Visualization</h3>
           {matrixSize === 3 && (
-            <button className={styles.button} onClick={calculateSarrusRule}>Calculate using Sarrus' Rule</button>
+            <button className={styles.button} onClick={calculateSarrusRule}>Calculate using Sarrus&apos; Rule</button>
           )}
           <div className={styles.explanation}>
             {matrixSize === 2 ? 
