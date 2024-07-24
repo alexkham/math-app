@@ -112,7 +112,7 @@ export default function GaussianEliminationCalculatorPage() {
 
         <section aria-label="Additional Information">
           <h2>About Matrix Equation Solving</h2>
-          <p>Gaussian elimination is a powerful method for solving systems of linear equations and matrix equations. It's also known as row reduction or the echelon method. Our calculator can handle various tasks, including:</p>
+          <p>Gaussian elimination is a powerful method for solving systems of linear equations and matrix equations. It is also known as row reduction or the echelon method. Our calculator can handle various tasks, including:</p>
           <ul>
             <li>Solving matrix equations</li>
             <li>Performing Gauss-Jordan elimination</li>
@@ -120,7 +120,7 @@ export default function GaussianEliminationCalculatorPage() {
             <li>Converting matrices to row echelon form</li>
             <li>Calculating inverse matrices (where applicable)</li>
           </ul>
-          <p>Whether you're a student learning linear algebra or a professional working with matrix calculations, our tool simplifies the process and provides clear, step-by-step explanations.</p>
+          <p>Whether you are a student learning linear algebra or a professional working with matrix calculations, our tool simplifies the process and provides clear, step-by-step explanations.</p>
         </section>
 
         <ScrollUpButton />
