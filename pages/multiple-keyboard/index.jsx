@@ -10,7 +10,7 @@ export default function MultiKeyboard() {
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
       </Head>
       
-      <h3>Mathematical Keyboard</h3>
+      <h3>Mathematical Keyboard </h3>
      
         <MultipleTypeWriter></MultipleTypeWriter>
         
