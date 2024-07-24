@@ -109,6 +109,7 @@ function MyNavbar() {
             <li><Link href="/sequences/fibonacci-numbers">Fibonacci Numbers</Link></li>
             <li><Link href="/logic/truth-tables">Truth Tables Generator</Link></li>
             <li><Link href="/visual-tools/matrix-multiplication">Matrix Multiplication</Link></li>
+            <li><Link href="/visual-tools/gauss-elimination">Gaussian Elimination </Link></li>
             <li onClick={navigateBack} style={{cursor:'pointer'}}><a>Go Back</a></li>
           </ul>
         </div>

@@ -97,6 +97,7 @@ export default function GaussianEliminationCalculatorPage() {
 
       <MyNavbar />
       <br></br>
+      <br></br>
 
       <main className="container">
         <h1 className="title" style={{marginBottom:'-20px'}}>Gaussian Elimination Calculator</h1>
