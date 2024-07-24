@@ -108,3 +108,45 @@
     padding: 10px 20px;
   }
 }
+
+
+.nav ul li {
+  position: relative;
+}
+
+.nav ul li ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.nav ul li:hover > ul,
+.nav ul li ul:hover {
+  display: block;
+}
+
+.nav ul li ul li {
+  white-space: nowrap;
+  min-width: 200px;
+}
+
+.nav ul li ul li a {
+  padding: 10px 15px;
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .nav ul li ul {
+    position: static;
+    display: none;
+    background-color: #f9f9f9;
+  }
+
+  .nav ul li ul.expanded {
+    display: block;
+  }
+}
