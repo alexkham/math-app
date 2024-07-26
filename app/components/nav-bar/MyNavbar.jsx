@@ -343,6 +343,7 @@ function MyNavbar() {
                 <ul>
                   <li><Link href="/visual-tools/matrix-multiplication">Matrix Multiplication</Link></li>
                   <li><Link href="/visual-tools/gauss-elimination">Gaussian Elimination</Link></li>
+                  <li><Link href="/visual-tools/determinant-calculator">Determinant Calculator</Link></li>
                 </ul>
               )}
             </li>

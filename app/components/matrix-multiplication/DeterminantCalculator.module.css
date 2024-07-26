@@ -1,83 +1,4 @@
-/* .container {
-    width: 100%;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .contentContainer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
-  }
-  
-  .matrixSection {
-    width: 48%;
-  }
-  
-  .visualizationSection {
-    width: 48%;
-  }
-  
-  .controls {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-right: 10px;
-  }
-  
-  .error {
-    color: red;
-    margin-bottom: 10px;
-  }
-  
-  .matrixContainer {
-    display: flex;
-    justify-content: flex-start;
-  }
-  
-  .matrix {
-    border-collapse: separate;
-    border-spacing: 5px;
-  }
-  
-  .matrixInput {
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    font-size: 18px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .matrixInput.highlighted {
-    background-color: #ffeb3b;
-  }
-  
-  .result, .explanation {
-    margin-top: 20px;
-    font-size: 18px;
-    line-height: 1.5;
-  }
-  
-  .visualizationSection h3 {
-    margin-bottom: 20px;
-  } */
-
-
-  .container {
+.container {
     width: 100%;
     padding: 20px;
     font-family: Arial, sans-serif;
@@ -116,6 +37,7 @@
   
   .visualizationSection {
     width: 48%;
+    margin-top: -30px;
   }
   
   .controls {
@@ -125,7 +47,7 @@
   }
   
   .button {
-    background-color: #4CAF50;
+    background-color:#007bff;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -136,6 +58,10 @@
     cursor: pointer;
     border-radius: 4px;
   }
+
+  .button:hover {
+    background-color: #0056b3;
+}
   
   .error {
     color: red;
@@ -144,7 +70,7 @@
   
   .matrixContainer {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
   }
   
   .matrix {
@@ -178,10 +104,210 @@
   }
   
   .result, .explanation {
-    margin-top: 20px;
+    margin-top: -20px;
   }
   
   .explanation p {
     margin: 5px 0;
     white-space: pre-wrap;
+  }
+
+  .sarrusVisualization{
+    margin-top: -20px;
+  }
+  
+  .sarrusMatrixContainer {
+    margin-top: 20px;
+  }
+  
+  .sarrusMatrix {
+    border-collapse: collapse;
+  }
+  
+  .sarrusMatrix td {
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: center;
+    width: 30px;
+  }
+  
+  .highlightCol1 {
+    background-color: #ffcccb;
+  }
+  
+  .highlightCol2 {
+    background-color: #cce5ff;
+  }
+  
+  .highlightPositiveDiagonal {
+    background-color: #d4edda;
+  }
+  
+  .highlightNegativeDiagonal {
+    background-color: #fff3cd;
+  }
+  
+  .highlightMainDiagonal {
+    background-color: #d4edda;
+  }
+  
+  .highlightSecondaryDiagonal {
+    background-color: #fff3cd;
+  }
+
+  .resetButton{
+    background-color: #f44336;
+    color: white;
+    padding:8px;
+    border: none;
+    border-radius: 3px;
+    min-width: 100px;
+  }
+
+  .resetButton:hover{
+     background-color:  #d32f2f;
+  }
+
+
+  .navButton {
+    padding: 5px 10px;
+    background-color:#007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .navButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .explanation {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 5px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .explanation p {
+    margin: 10px 0;
+    line-height: 1.2;
+    border-bottom: black solid 0.1px;
+  }
+  
+  .finalExplanation {
+    font-weight: bold;
+    color: #007bff
+  }
+  
+  .visualizationSection {
+    position: relative;
+  }
+  
+  .stepControls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .stepControls .button {
+    flex: 1;
+    margin: 0 5px;
+  }
+  
+  .stepControls .button:first-child {
+    margin-left: 0;
+  }
+  
+  .stepControls .button:last-child {
+    margin-right: 0;
+  }
+
+
+  /* radio buttons*/
+
+  .sizeSelector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bolder;
+  }
+  
+  .radioLabel {
+    position: relative;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .radioInput {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .radioLabel:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .radioInput:checked + .radioLabel {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .radioInput:focus + .radioLabel {
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.5);
+  }
+
+
+
+  @media (max-width: 768px) {
+    .contentContainer {
+      flex-direction: column;
+    }
+  
+    .matrixSection, .visualizationSection {
+      width: 100%;
+    }
+  
+    .controls {
+      flex-direction: column;
+    }
+  
+    .button {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+  
+    .matrixInput {
+      width: 30px;
+      height: 30px;
+      font-size: 12px;
+    }
+  
+    .sizeSelector {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .radioLabel {
+      margin: 5px 0;
+    }
+  
+    .stepControls {
+      flex-direction: column;
+    }
+  
+    .stepControls .button {
+      margin: 5px 0;
+    }
   }
