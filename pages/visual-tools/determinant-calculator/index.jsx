@@ -32,7 +32,7 @@ export default function DeterminantCalculatorPage() {
         <meta name="description" content="Use our free determinant calculator with step-by-step solutions. Easily calculate matrix determinants for 2x2, 3x3, and larger matrices." />
         <meta name="keywords" content="determinant calculator, matrix calculator with steps, matrix determinant, linear algebra calculator" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href="https://yourwebsite.com/determinant-calculator" />
+        <link rel="canonical" href="https://learnmathclass.com/visual-tools/determinant-calculator" />
       </Head>
       <MyNavbar />
       <br></br>
