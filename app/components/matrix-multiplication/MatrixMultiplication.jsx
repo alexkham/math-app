@@ -536,7 +536,7 @@ const MatrixMultiplication = () => {
   return (
     <div className={styles.container}>
       <div className={styles.buttonContainer}>
-        <button className={`${styles.button} ${styles.buttonSecondary}`} onClick={resetToInitial}>Reset to Initial</button>
+        <button className={`${styles.button} ${styles.resetButton}`} onClick={resetToInitial}>Reset to Initial</button>
         <button className={`${styles.button} ${styles.buttonTertiary}`} onClick={initializeToZero}>Initialize to Zero</button>
       </div>
       {error && <div className={styles.error}>{error}</div>}
@@ -595,7 +595,7 @@ const MatrixMultiplication = () => {
       <div className={styles.buttonContainer}>
         <button className={`${styles.button} ${styles.buttonPrimary}`} onClick={start} disabled={isRunning || step === totalSteps || error}>Start</button>
         <button className={`${styles.button} ${styles.buttonPrimary}`} onClick={pause} disabled={!isRunning}>Pause</button>
-        <button className={`${styles.button} ${styles.buttonSecondary}`} onClick={reset}>Reset</button>
+        <button className={`${styles.button} ${styles.resetButton}`} onClick={reset}>Reset</button>
         <button className={`${styles.button} ${styles.buttonPrimary}`} onClick={performStep} disabled={isRunning || step === totalSteps || error}>Step Forward</button>
         <button className={`${styles.button} ${styles.buttonPrimary}`} onClick={stepBack} disabled={isRunning || step === 0}>Step Back</button>
       </div>

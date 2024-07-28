@@ -46,7 +46,7 @@
     margin-bottom: 20px;
   }
   
-  .button {
+  /* .button {
     background-color:#007bff;
     border: none;
     color: white;
@@ -62,7 +62,27 @@
   .button:hover {
     background-color: #0056b3;
 }
+   */
+
+
+
+   .button {
+    padding: 8px 15px;
+    margin-right: 10px;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
   
+  .button:hover {
+    background-color: #1976d2;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+
   .error {
     color: red;
     margin-bottom: 10px;
@@ -245,7 +265,7 @@
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 18px;
+    font-size: 16px;
     color: #333;
   }
   

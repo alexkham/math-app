@@ -82,6 +82,7 @@ import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 import GaussJordanCalculator from '@/app/components/matrix-multiplication/GaussJordanCalculator';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import '../../pages.css';
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 
 export default function GaussianEliminationCalculatorPage() {
   return (
@@ -98,9 +99,11 @@ export default function GaussianEliminationCalculatorPage() {
       <MyNavbar />
       <br></br>
       <br></br>
+      <br></br>
+      <Breadcrumb></Breadcrumb>
 
       <main className="container">
-        <h1 className="title" style={{marginBottom:'-20px'}}>Gaussian Elimination Calculator</h1>
+        <h1 className="title" style={{marginBottom:'-20px',marginTop:'-20px'}}>Gaussian Elimination Calculator</h1>
         
         <section aria-label="Matrix Equation Solver">
           <h2 className='title' style={{marginBottom:'0px'}}>Solve Systems of Linear Equations</h2>

@@ -1,0 +1,105 @@
+{
+    "Linear Algebra Algorithms": {
+      "Basic Matrix Operations": {
+        "Matrix Addition/Subtraction": {
+            "url":"/matrix/addition"
+        },
+        "Matrix Multiplication": null,
+        "Scalar Multiplication": null,
+        "Transpose": null,
+        "Trace": null,
+        "Determinant Calculation": {
+          "Laplace Expansion": null,
+          "Using LU Decomposition": null,
+          "Gaussian Elimination method": null
+        }
+      },
+      "Solving Linear Systems": {
+        "Direct Methods": {
+          "Gaussian Elimination": null,
+          "Gauss-Jordan Elimination": null,
+          "Cramer's Rule": null
+        },
+        "Iterative Methods": {
+          "Jacobi Method": null,
+          "Gauss-Seidel Method": null,
+          "Successive Over-Relaxation (SOR)": null
+        },
+        "Matrix Inverse Methods": {
+          "Gauss-Jordan method": null,
+          "Using LU Decomposition": null
+        }
+      },
+      "Matrix Decompositions": {
+        "LU Decomposition": null,
+        "Cholesky Decomposition": null,
+        "QR Decomposition": null,
+        "Singular Value Decomposition (SVD)": null,
+        "Schur Decomposition": null
+      },
+      "Eigenvalues and Eigenvectors": {
+        "Power Method": null,
+        "Inverse Power Method": null,
+        "QR Algorithm": null,
+        "Rayleigh Quotient Iteration": null,
+        "Jacobi Eigenvalue Algorithm": null
+      },
+      "Vector Space Operations": {
+        "Gram-Schmidt Process": null,
+        "Projection": null,
+        "Orthogonalization": null,
+        "Basis Transformation": null,
+        "Subspace Algorithms": {
+          "Null Space Calculation": null,
+          "Range Space Calculation": null
+        }
+      },
+      "Numerical Linear Algebra": {
+        "Condition Number Calculation": null,
+        "Matrix Norms": null,
+        "Stability Analysis": null,
+        "Error Analysis": null
+      },
+      "Applications and Advanced Topics": {
+        "Least Squares Fitting": {
+          "Ordinary Least Squares": null,
+          "Weighted Least Squares": null,
+          "Total Least Squares": null
+        },
+        "Principal Component Analysis (PCA)": null,
+        "Linear Transformations": {
+          "Rotation": null,
+          "Scaling": null,
+          "Shearing": null
+        },
+        "Markov Chains": null,
+        "Graph Algorithms": {
+          "Adjacency Matrix Operations": null,
+          "Graph Laplacian": null
+        },
+        "Optimization Algorithms": {
+          "Linear Programming": null,
+          "Quadratic Programming": null
+        },
+        "Signal Processing Applications": {
+          "Discrete Fourier Transform": null,
+          "Discrete Cosine Transform": null
+        },
+        "Machine Learning Applications": {
+          "Linear Regression": null,
+          "Support Vector Machines": null
+        },
+        "Control Theory Applications": {
+          "State-Space Representation": null,
+          "Controllability and Observability": null
+        }
+      },
+      "Specialized Matrix Types and Operations": {
+        "Sparse Matrix Algorithms": null,
+        "Toeplitz Matrix Algorithms": null,
+        "Circulant Matrix Algorithms": null,
+        "Positive Definite Matrix Operations": null,
+        "Symmetric Matrix Algorithms": null
+      }
+    }
+  }
