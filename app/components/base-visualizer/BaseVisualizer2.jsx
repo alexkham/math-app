@@ -159,9 +159,9 @@ return (
             type="number"
             value={number}
             onChange={(e) => setNumber(e.target.value)}
-            placeholder="0-100"
+            placeholder="0-144"
             min="0"
-            max="100"
+            max="144"
           />
         </div>
         <div className={styles.inputGroup}>
