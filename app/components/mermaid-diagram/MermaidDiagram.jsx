@@ -1,224 +1,4 @@
-// // // // // // // // // 'use client'
-// // // // // // // // // import React, { useEffect, useRef } from 'react';
-// // // // // // // // // import mermaid from 'mermaid';
-// // // // // // // // // import './MermaidDiagram.css'
 
-// // // // // // // // // const MermaidDiagram = ({ chartDefinition }) => {
-// // // // // // // // //   const mermaidRef = useRef(null);
-
-// // // // // // // // //   useEffect(() => {
-// // // // // // // // //     // Ensure this runs only client-side
-// // // // // // // // //     if (typeof window !== "undefined") {
-// // // // // // // // //       mermaid.initialize({
-// // // // // // // // //         startOnLoad: false,
-// // // // // // // // //         theme: 'neutral', // or 'base', 'forest', etc., depending on your preference
-// // // // // // // // //         themeVariables: {
-// // // // // // // // //           // Custom color configurations
-// // // // // // // // //           primaryColor: 'red', // Example: Tomato for primary elements
-// // // // // // // // //           primaryBorderColor: 'gray', // Border color for primary elements
-// // // // // // // // //           lineColor: '#7155cc', // Color for lines (including arrow lines)
-// // // // // // // // //           textColor: 'blue', // Text color
-// // // // // // // // //           nodeBackgroundColor: '#5224bf', // Light yellow background for nodes
-// // // // // // // // //           clusterBkg: '#f0e68c', // Light khaki background for clusters
-// // // // // // // // //           // You might need to adjust secondaryColor or tertiaryColor depending on your diagram
-// // // // // // // // //         },
-// // // // // // // // //       });
-// // // // // // // // //       setTimeout(() => {
-// // // // // // // // //         mermaid.init(undefined, mermaidRef.current);
-// // // // // // // // //       }, 0);
-// // // // // // // // //     }
-// // // // // // // // //   }, [chartDefinition]);
-
-// // // // // // // // //   return <div className="mermaidDiagramContainer" ref={mermaidRef}>{chartDefinition}</div>;
-// // // // // // // // // };
-
-// // // // // // // // // export default MermaidDiagram;
-// // // // // // // // 'use client'
-// // // // // // // // import React, { useEffect, useRef } from 'react';
-// // // // // // // // import mermaid from 'mermaid';
-// // // // // // // // import './MermaidDiagram.css'
-
-// // // // // // // // const MermaidDiagram = ({ chartDefinition }) => {
-// // // // // // // //     const mermaidRef = useRef(null);
-  
-// // // // // // // //     // useEffect(() => {
-// // // // // // // //     //   if (typeof window !== "undefined") {
-// // // // // // // //     //     mermaid.initialize({
-// // // // // // // //     //       startOnLoad: false,
-// // // // // // // //     //       theme: 'default',
-// // // // // // // //     //       themeVariables:{
-// // // // // // // //     //         textColor:'blue',
-// // // // // // // //     //         fontSize:'50px',
-// // // // // // // //     //         lineColor: '#7155cc',
-
-// // // // // // // //     //       }
-// // // // // // // //     //     });
-// // // // // // // //     //     setTimeout(() => {
-// // // // // // // //     //       mermaid.init(undefined, mermaidRef.current);
-// // // // // // // //     //     }, 0);
-// // // // // // // //     //   }
-// // // // // // // //     // }, [chartDefinition]);
-
-
-// // // // // // // //     // useEffect(() => {
-// // // // // // // //     //     if (typeof window !== "undefined") {
-// // // // // // // //     //       mermaid.initialize({
-// // // // // // // //     //         startOnLoad: false,
-// // // // // // // //     //         theme: 'neutral',
-// // // // // // // //     //       });
-// // // // // // // //     //       setTimeout(() => {
-// // // // // // // //     //         mermaid.init(undefined, mermaidRef.current);
-      
-// // // // // // // //     //         // Adjust SVG size after Mermaid initialization
-// // // // // // // //     //         const svgElement = mermaidRef.current.querySelector('svg');
-// // // // // // // //     //         if (svgElement) {
-// // // // // // // //     //           svgElement.style.width = '100%';
-// // // // // // // //     //           svgElement.style.height = 'auto';
-// // // // // // // //     //         }
-// // // // // // // //     //       }, 0);
-// // // // // // // //     //     }
-// // // // // // // //     //   }, [chartDefinition]);
-      
-
-// // // // // // // //     // useEffect(() => {
-// // // // // // // //     //     if (typeof window !== "undefined") {
-// // // // // // // //     //       mermaid.initialize({
-// // // // // // // //     //         startOnLoad: false,
-// // // // // // // //     //         theme: 'base',
-// // // // // // // //     //         themeVariables: {
-             
-// // // // // // // //     //           textColor:'blue',
-// // // // // // // //     //           fontSize:"100px",
-
-// // // // // // // //     //         },
-// // // // // // // //     //       });
-// // // // // // // //     //       setTimeout(() => {
-// // // // // // // //     //         mermaid.init(undefined, mermaidRef.current);
-// // // // // // // //     //       }, 0);
-// // // // // // // //     //     }
-// // // // // // // //     //   }, [chartDefinition]);
-      
-// // // // // // // // // useEffect(() => {
-// // // // // // // // //         if (typeof window !== "undefined") {
-// // // // // // // // //           mermaid.initialize({
-// // // // // // // // //             startOnLoad: false,
-// // // // // // // // //             theme: 'neutral',
-// // // // // // // // //             themeVariables:{
-// // // // // // // // //                 textColor:'blue',
-// // // // // // // // //                 fontSize:'100px'
-// // // // // // // // //             }
-// // // // // // // // //           });
-// // // // // // // // //           setTimeout(() => {
-// // // // // // // // //             mermaid.init(undefined, mermaidRef.current);
-      
-// // // // // // // // //             // Example of directly manipulating the SVG to adjust node sizes
-// // // // // // // // //             const svgElement = mermaidRef.current.querySelector('svg');
-// // // // // // // // //             if (svgElement) {
-// // // // // // // // //               const nodes = svgElement.querySelectorAll('.node');
-// // // // // // // // //               nodes.forEach(node => {
-// // // // // // // // //                 // Directly manipulate node attributes or styles here
-// // // // // // // // //                 // For example, adjusting the font size or padding around text
-// // // // // // // // //                 const textElements = node.querySelectorAll('text');
-// // // // // // // // //                 textElements.forEach(text => {
-// // // // // // // // //                   text.style.fontSize = '50px'; // Increase text size
-// // // // // // // // //                 });
-// // // // // // // // //                 // This is just an illustrative example; specific attributes will vary
-// // // // // // // // //               });
-// // // // // // // // //             }
-// // // // // // // // //           }, 0);
-// // // // // // // // //         }
-// // // // // // // // //       }, [chartDefinition]);
-          
-// // // // // // // // useEffect(() => {
-// // // // // // // //     if (typeof window !== "undefined") {
-// // // // // // // //       mermaid.initialize({ 
-// // // // // // // //         startOnLoad: false,
-// // // // // // // //         theme:'default',
-// // // // // // // //         themeVariables:{
-// // // // // // // //             textColor:'blue',
-// // // // // // // //             fontSize:'56px',
-// // // // // // // //             lineColor: '#7155cc',
-
-// // // // // // // //         }
-// // // // // // // //      });
-// // // // // // // //       setTimeout(() => {
-// // // // // // // //         mermaid.init(undefined, mermaidRef.current);
-  
-// // // // // // // //         // Adjust font size for all text elements in the SVG
-// // // // // // // //         const textElements = mermaidRef.current.querySelectorAll('svg text');
-// // // // // // // //         textElements.forEach(text => {
-// // // // // // // //           text.style.fontSize = '46px'; // Or any other font size
-// // // // // // // //         });
-// // // // // // // //       }, 0);
-// // // // // // // //     }
-// // // // // // // //   }, []);
-  
-// // // // // // // //     return (
-// // // // // // // //       <div className="mermaidDiagramContainer" ref={mermaidRef}>
-// // // // // // // //         {chartDefinition}
-// // // // // // // //       </div>
-// // // // // // // //     );
-// // // // // // // //   };
-// // // // // // // //   export default MermaidDiagram;
-// // // // // // // 'use client'
-// // // // // // // import React, { useEffect, useRef } from 'react';
-// // // // // // // import mermaid from 'mermaid';
-// // // // // // // import './MermaidDiagram.css'
-
-// // // // // // // const MermaidDiagram = ({ 
-// // // // // // //   chartDefinition, 
-// // // // // // //   maxWidth = '600px', 
-// // // // // // //   fontSize = '14px',
-// // // // // // //   textColor = 'blue',
-// // // // // // //   lineColor = '#7155cc'
-// // // // // // // }) => {
-// // // // // // //   const mermaidRef = useRef(null);
-
-// // // // // // //   useEffect(() => {
-// // // // // // //     if (typeof window !== "undefined") {
-// // // // // // //       mermaid.initialize({ 
-// // // // // // //         startOnLoad: false,
-// // // // // // //         theme: 'default',
-// // // // // // //         themeVariables: {
-// // // // // // //           textColor: textColor,
-// // // // // // //           fontSize: fontSize,
-// // // // // // //           lineColor: lineColor,
-// // // // // // //         },
-// // // // // // //         flowchart: {
-// // // // // // //           useMaxWidth: true,
-// // // // // // //           htmlLabels: true,
-// // // // // // //           curve: 'basis',
-// // // // // // //         },
-// // // // // // //       });
-      
-// // // // // // //       setTimeout(() => {
-// // // // // // //         mermaid.init(undefined, mermaidRef.current);
-
-// // // // // // //         // Scale down the SVG
-// // // // // // //         const svgElement = mermaidRef.current.querySelector('svg');
-// // // // // // //         if (svgElement) {
-// // // // // // //           svgElement.style.width = '100%';
-// // // // // // //           svgElement.style.height = 'auto';
-// // // // // // //           svgElement.style.maxWidth = maxWidth;
-// // // // // // //         }
-
-// // // // // // //         // Adjust font size for all text elements in the SVG
-// // // // // // //         const textElements = mermaidRef.current.querySelectorAll('svg text');
-// // // // // // //         textElements.forEach(text => {
-// // // // // // //           text.style.fontSize = fontSize;
-// // // // // // //         });
-// // // // // // //       }, 0);
-// // // // // // //     }
-// // // // // // //   }, [chartDefinition, maxWidth, fontSize, textColor, lineColor]);
-
-// // // // // // //   return (
-// // // // // // //     <div className="mermaidDiagramContainer" ref={mermaidRef} style={{ maxWidth: maxWidth }}>
-// // // // // // //       {chartDefinition}
-// // // // // // //     </div>
-// // // // // // //   );
-// // // // // // // };
-
-// // // // // // // export default MermaidDiagram;
 // // // // // // 'use client'
 // // // // // // import React, { useEffect, useRef } from 'react';
 // // // // // // import mermaid from 'mermaid';
@@ -226,11 +6,12 @@
 
 // // // // // // const MermaidDiagram = ({ 
 // // // // // //   chartDefinition, 
-// // // // // //   nodeSpacing = 50,
-// // // // // //   rankSpacing = 50,
-// // // // // //   fontSize = 14,
-// // // // // //   edgeLabelsBackground = 'none',
-// // // // // //   diagramPadding = 8
+// // // // // //   nodeWidth = 50,
+// // // // // //   nodeHeight = 50,
+// // // // // //   fontSize = 24,
+// // // // // //   fontFamily = 'Arial, sans-serif',
+// // // // // //   maxWidth=1000,
+// // // // // //   maxHeight=600
 // // // // // // }) => {
 // // // // // //   const mermaidRef = useRef(null);
 
@@ -240,34 +21,46 @@
 // // // // // //         startOnLoad: false,
 // // // // // //         theme: 'default',
 // // // // // //         flowchart: {
-// // // // // //           nodeSpacing: nodeSpacing,
-// // // // // //           rankSpacing: rankSpacing,
+// // // // // //           nodeSpacing: 20,
+// // // // // //           rankSpacing: 20,
 // // // // // //           curve: 'basis',
 // // // // // //           useMaxWidth: true,
 // // // // // //         },
 // // // // // //         themeVariables: {
 // // // // // //           fontSize: `${fontSize}px`,
-// // // // // //           edgeLabelBackground: edgeLabelsBackground,
-// // // // // //         },
-// // // // // //         gantt: {
-// // // // // //           fontSize: fontSize,
-// // // // // //         },
-// // // // // //         sequence: {
-// // // // // //           diagramMarginY: diagramPadding,
-// // // // // //           boxMargin: diagramPadding,
-// // // // // //           noteMargin: diagramPadding,
-// // // // // //           messageMargin: diagramPadding,
+// // // // // //           fontFamily: fontFamily,
 // // // // // //         }
 // // // // // //       });
       
 // // // // // //       setTimeout(() => {
 // // // // // //         mermaid.init(undefined, mermaidRef.current);
+
+// // // // // //         // Adjust node sizes after rendering
+// // // // // //         const svgElement = mermaidRef.current.querySelector('svg');
+// // // // // //         if (svgElement) {
+// // // // // //           const nodes = svgElement.querySelectorAll('.node rect, .node circle, .node ellipse, .node polygon');
+// // // // // //           nodes.forEach(node => {
+// // // // // //             node.setAttribute('width', nodeWidth);
+// // // // // //             node.setAttribute('height', nodeHeight);
+// // // // // //           });
+
+// // // // // //           // Adjust text position
+// // // // // //           const texts = svgElement.querySelectorAll('.node text');
+// // // // // //           texts.forEach(text => {
+// // // // // //             text.setAttribute('font-size', `${fontSize}px`);
+// // // // // //             text.setAttribute('dy', '0.3em'); // Center text vertically
+// // // // // //           });
+
+// // // // // //           // Adjust the viewBox to fit the new node sizes
+// // // // // //           svgElement.setAttribute('width', '300px');
+// // // // // //           svgElement.setAttribute('height', '300px');
+// // // // // //         }
 // // // // // //       }, 0);
 // // // // // //     }
-// // // // // //   }, [chartDefinition, nodeSpacing, rankSpacing, fontSize, edgeLabelsBackground, diagramPadding]);
+// // // // // //   }, [chartDefinition, nodeWidth, nodeHeight, fontSize, fontFamily]);
 
 // // // // // //   return (
-// // // // // //     <div className="mermaidDiagramContainer" ref={mermaidRef}>
+// // // // // //     <div className="mermaidDiagramContainer" style={{width:`${maxWidth}`}} ref={mermaidRef}>
 // // // // // //       {chartDefinition}
 // // // // // //     </div>
 // // // // // //   );
@@ -276,365 +69,484 @@
 // // // // // // export default MermaidDiagram;
 // // // // // 'use client'
 // // // // // import React, { useEffect, useRef } from 'react';
-// // // // // import mermaid from 'mermaid';
-// // // // // import './MermaidDiagram.css';
 
-// // // // // const MermaidDiagram = ({ 
-// // // // //   chartDefinition, 
-// // // // //   nodeSpacing = 50,
-// // // // //   rankSpacing = 50,
-// // // // //   fontSize = 14,
-// // // // //   edgeLabelsBackground = 'none',
-// // // // //   diagramPadding = 8
+// // // // // const MermaidDiagramClient = ({
+// // // // //   chartDefinition,
+// // // // //   nodeWidth,
+// // // // //   nodeHeight,
+// // // // //   fontSize,
+// // // // //   fontFamily
 // // // // // }) => {
 // // // // //   const mermaidRef = useRef(null);
 
 // // // // //   useEffect(() => {
-// // // // //     if (typeof window !== "undefined") {
-// // // // //       mermaid.initialize({ 
+// // // // //     import('mermaid').then((mermaid) => {
+// // // // //       mermaid.default.initialize({
 // // // // //         startOnLoad: false,
 // // // // //         theme: 'default',
 // // // // //         flowchart: {
-// // // // //           nodeSpacing: nodeSpacing,
-// // // // //           rankSpacing: rankSpacing,
+// // // // //           nodeSpacing: 20,
+// // // // //           rankSpacing: 20,
 // // // // //           curve: 'basis',
 // // // // //           useMaxWidth: true,
 // // // // //         },
 // // // // //         themeVariables: {
 // // // // //           fontSize: `${fontSize}px`,
-// // // // //           edgeLabelBackground: edgeLabelsBackground,
-// // // // //         },
-// // // // //         gantt: {
-// // // // //           fontSize: fontSize,
-// // // // //         },
-// // // // //         sequence: {
-// // // // //           diagramMarginY: diagramPadding,
-// // // // //           boxMargin: diagramPadding,
-// // // // //           noteMargin: diagramPadding,
-// // // // //           messageMargin: diagramPadding,
+// // // // //           fontFamily: fontFamily,
 // // // // //         }
 // // // // //       });
-      
-// // // // //       setTimeout(() => {
-// // // // //         mermaid.init(undefined, mermaidRef.current);
-// // // // //       }, 0);
-// // // // //     }
-// // // // //   }, [chartDefinition, nodeSpacing, rankSpacing, fontSize, edgeLabelsBackground, diagramPadding]);
+
+// // // // //       mermaid.default.run({
+// // // // //         nodes: [mermaidRef.current]
+// // // // //       }).then(() => {
+// // // // //         // Apply custom styles after rendering
+// // // // //         const svgElement = mermaidRef.current.querySelector('svg');
+// // // // //         if (svgElement) {
+// // // // //           svgElement.style.maxWidth = '100%';
+// // // // //           svgElement.style.height = 'auto';
+
+// // // // //           const nodes = svgElement.querySelectorAll('.node rect, .node circle, .node ellipse, .node polygon');
+// // // // //           nodes.forEach(node => {
+// // // // //             node.setAttribute('width', nodeWidth);
+// // // // //             node.setAttribute('height', nodeHeight);
+// // // // //           });
+
+// // // // //           const texts = svgElement.querySelectorAll('.node text, .edgeLabel text');
+// // // // //           texts.forEach(text => {
+// // // // //             text.setAttribute('font-size', `${fontSize}px`);
+// // // // //             text.setAttribute('font-family', fontFamily);
+// // // // //           });
+// // // // //         }
+// // // // //       });
+// // // // //     });
+// // // // //   }, [chartDefinition, nodeWidth, nodeHeight, fontSize, fontFamily]);
+
+// // // // //   return <div ref={mermaidRef}>{chartDefinition}</div>;
+// // // // // };
+
+// // // // // export default MermaidDiagramClient;
+// // // // // 'use client'
+// // // // // import React, { useEffect, useRef } from 'react';
+// // // // // import dynamic from 'next/dynamic';
+
+// // // // // const MermaidDiagram = ({
+// // // // //   chartDefinition,
+// // // // //   width = '100%',
+// // // // //   height = 'auto',
+// // // // //   fontSize='24'
+// // // // // }) => {
+// // // // //   const mermaidRef = useRef(null);
+
+// // // // //   useEffect(() => {
+// // // // //     const renderDiagram = async () => {
+// // // // //       const mermaid = (await import('mermaid')).default;
+// // // // //       mermaid.initialize({
+// // // // //         startOnLoad: false,
+// // // // //         theme: 'default',
+// // // // //         flowchart: {
+// // // // //           useMaxWidth: true,
+// // // // //           htmlLabels: true,
+// // // // //           curve: 'basis'
+// // // // //         }
+// // // // //       });
+
+// // // // //       await mermaid.run({
+// // // // //         nodes: [mermaidRef.current]
+// // // // //       });
+// // // // //     };
+
+// // // // //     renderDiagram();
+// // // // //   }, [chartDefinition]);
 
 // // // // //   return (
-// // // // //     <div className="mermaidDiagramContainer" ref={mermaidRef}>
+// // // // //     <div ref={mermaidRef} style={{ width, height,fontSize }}>
 // // // // //       {chartDefinition}
 // // // // //     </div>
 // // // // //   );
 // // // // // };
 
-// // // // // export default MermaidDiagram;
+// // // // // export default dynamic(() => Promise.resolve(MermaidDiagram), { ssr: false });
 // // // // 'use client'
 // // // // import React, { useEffect, useRef } from 'react';
-// // // // import mermaid from 'mermaid';
-// // // // import './MermaidDiagram.css';
+// // // // import dynamic from 'next/dynamic';
 
-// // // // const MermaidDiagram = ({ 
-// // // //   chartDefinition, 
-// // // //   nodeSpacing = 50,
-// // // //   rankSpacing = 50,
-// // // //   fontSize = 14,
-// // // //   edgeLabelsBackground = 'none',
-// // // //   diagramPadding = 8
+// // // // const MermaidDiagram = ({
+// // // //   chartDefinition,
+// // // //   width = '100%',
+// // // //   height = 'auto',
+// // // //   fontSize = 24
 // // // // }) => {
 // // // //   const mermaidRef = useRef(null);
 
 // // // //   useEffect(() => {
-// // // //     if (typeof window !== "undefined") {
-// // // //       mermaid.initialize({ 
+// // // //     const renderDiagram = async () => {
+// // // //       const mermaid = (await import('mermaid')).default;
+// // // //       mermaid.initialize({
 // // // //         startOnLoad: false,
 // // // //         theme: 'default',
 // // // //         flowchart: {
-// // // //           nodeSpacing: nodeSpacing,
-// // // //           rankSpacing: rankSpacing,
-// // // //           curve: 'basis',
 // // // //           useMaxWidth: true,
+// // // //           htmlLabels: true,
+// // // //           curve: 'basis'
 // // // //         },
 // // // //         themeVariables: {
-// // // //           fontSize: `${fontSize}px`,
-// // // //           edgeLabelBackground: edgeLabelsBackground,
-// // // //         },
-// // // //         gantt: {
-// // // //           fontSize: fontSize,
-// // // //         },
-// // // //         sequence: {
-// // // //           diagramMarginY: diagramPadding,
-// // // //           boxMargin: diagramPadding,
-// // // //           noteMargin: diagramPadding,
-// // // //           messageMargin: diagramPadding,
+// // // //           fontSize: `${fontSize}px`
 // // // //         }
 // // // //       });
-      
-// // // //       setTimeout(() => {
-// // // //         mermaid.init(undefined, mermaidRef.current);
-// // // //       }, 0);
-// // // //     }
-// // // //   }, [chartDefinition, nodeSpacing, rankSpacing, fontSize, edgeLabelsBackground, diagramPadding]);
+
+// // // //       await mermaid.run({
+// // // //         nodes: [mermaidRef.current]
+// // // //       });
+
+// // // //       // Adjust font size for all text elements after rendering
+// // // //       const svgElement = mermaidRef.current.querySelector('svg');
+// // // //       if (svgElement) {
+// // // //         const textElements = svgElement.querySelectorAll('text');
+// // // //         textElements.forEach(text => {
+// // // //           text.style.fontSize = `${fontSize}px`;
+// // // //         });
+// // // //       }
+// // // //     };
+
+// // // //     renderDiagram();
+// // // //   }, [chartDefinition, fontSize]);
 
 // // // //   return (
-// // // //     <div className="mermaidDiagramContainer" ref={mermaidRef}>
+// // // //     <div ref={mermaidRef} style={{ width, height }}>
 // // // //       {chartDefinition}
 // // // //     </div>
 // // // //   );
 // // // // };
 
-// // // // export default MermaidDiagram;
+// // // // export default dynamic(() => Promise.resolve(MermaidDiagram), { ssr: false });
 // // // 'use client'
-// // // import React, { useEffect, useRef } from 'react';
-// // // import mermaid from 'mermaid';
-// // // import './MermaidDiagram.css';
+// // // import React, { useState, useEffect, useRef } from 'react';
+// // // import dynamic from 'next/dynamic';
 
-// // // const MermaidDiagram = ({ 
-// // //   chartDefinition, 
-// // //   nodeSpacing = 50,
-// // //   rankSpacing = 50,
-// // //   fontSize = 14,
-// // //   edgeLabelsBackground = 'none',
-// // //   diagramPadding = 8
+// // // const MermaidDiagram = ({
+// // //   chartDefinition,
+// // //   width = '100%',
+// // //   height = 'auto',
+// // //   initialFontSize = 24
 // // // }) => {
+// // //   const [fontSize, setFontSize] = useState(initialFontSize);
 // // //   const mermaidRef = useRef(null);
 
 // // //   useEffect(() => {
-// // //     if (typeof window !== "undefined") {
-// // //       mermaid.initialize({ 
+// // //     const renderDiagram = async () => {
+// // //       const mermaid = (await import('mermaid')).default;
+// // //       mermaid.initialize({
 // // //         startOnLoad: false,
 // // //         theme: 'default',
 // // //         flowchart: {
-// // //           nodeSpacing: nodeSpacing,
-// // //           rankSpacing: rankSpacing,
-// // //           curve: 'basis',
 // // //           useMaxWidth: true,
-// // //         },
-// // //         themeVariables: {
-// // //           fontSize: `${fontSize}px`,
-// // //           edgeLabelBackground: edgeLabelsBackground,
-// // //         },
-// // //         gantt: {
-// // //           fontSize: fontSize,
-// // //         },
-// // //         sequence: {
-// // //           diagramMarginY: diagramPadding,
-// // //           boxMargin: diagramPadding,
-// // //           noteMargin: diagramPadding,
-// // //           messageMargin: diagramPadding,
+// // //           htmlLabels: true,
+// // //           curve: 'basis'
 // // //         }
 // // //       });
+
+// // //       await mermaid.run({
+// // //         nodes: [mermaidRef.current]
+// // //       });
+
+// // //       applyFontSize();
+// // //     };
+
+// // //     renderDiagram();
+// // //   }, [chartDefinition, fontSize]);
+
+// // //   const applyFontSize = () => {
+// // //     const svgElement = mermaidRef.current.querySelector('svg');
+// // //     if (svgElement) {
+// // //       svgElement.style.fontSize = `${fontSize}px`;
+// // //       const textElements = svgElement.querySelectorAll('text');
+// // //       textElements.forEach(text => {
+// // //         text.setAttribute('font-size', `${fontSize}px`);
+// // //         text.style.fontSize = `${fontSize}px`;
+// // //       });
       
-// // //       setTimeout(() => {
-// // //         mermaid.init(undefined, mermaidRef.current);
-// // //       }, 0);
+// // //       const bbox = svgElement.getBBox();
+// // //       svgElement.setAttribute('viewBox', `0 0 ${bbox.width} ${bbox.height}`);
 // // //     }
-// // //   }, [chartDefinition, nodeSpacing, rankSpacing, fontSize, edgeLabelsBackground, diagramPadding]);
+// // //   };
+
+// // //   const handleFontSizeChange = (event) => {
+// // //     setFontSize(Number(event.target.value));
+// // //   };
 
 // // //   return (
-// // //     <div className="mermaidDiagramContainer" ref={mermaidRef}>
-// // //       <div className="mermaid">
+// // //     <div>
+// // //       <div>
+// // //         <label htmlFor="font-size-control">Font Size: </label>
+// // //         <input
+// // //           id="font-size-control"
+// // //           type="range"
+// // //           min="12"
+// // //           max="48"
+// // //           value={fontSize}
+// // //           onChange={handleFontSizeChange}
+// // //         />
+// // //         <span>{fontSize}px</span>
+// // //       </div>
+// // //       <div ref={mermaidRef} style={{ width, height, overflow: 'auto' }}>
 // // //         {chartDefinition}
 // // //       </div>
 // // //     </div>
 // // //   );
 // // // };
 
-// // // export default MermaidDiagram;
+// // // export default dynamic(() => Promise.resolve(MermaidDiagram), { ssr: false });
 // // 'use client'
-// // import React, { useEffect, useRef, useState } from 'react';
-// // import mermaid from 'mermaid';
-// // import './MermaidDiagram.css';
+// // import React, { useState, useEffect, useRef } from 'react';
+// // import dynamic from 'next/dynamic';
 
-// // const MermaidDiagram = ({ 
-// //   chartDefinition, 
-// //   nodeSpacing = 50,
-// //   rankSpacing = 50,
-// //   fontSize = 14,
-// //   edgeLabelsBackground = 'none',
-// //   diagramPadding = 8
+// // const MermaidDiagram = ({
+// //   chartDefinition,
+// //   width = '100%',
+// //   height = 'auto',
+// //   initialNodeWidth = 100,
+// //   initialNodeHeight = 50
 // // }) => {
+// //   const [nodeWidth, setNodeWidth] = useState(initialNodeWidth);
+// //   const [nodeHeight, setNodeHeight] = useState(initialNodeHeight);
 // //   const mermaidRef = useRef(null);
-// //   const [isClient, setIsClient] = useState(false);
 
 // //   useEffect(() => {
-// //     setIsClient(true);
-// //   }, []);
-
-// //   useEffect(() => {
-// //     if (isClient && typeof window !== "undefined") {
-// //       mermaid.initialize({ 
+// //     const renderDiagram = async () => {
+// //       const mermaid = (await import('mermaid')).default;
+// //       mermaid.initialize({
 // //         startOnLoad: false,
 // //         theme: 'default',
 // //         flowchart: {
-// //           nodeSpacing: nodeSpacing,
-// //           rankSpacing: rankSpacing,
-// //           curve: 'basis',
 // //           useMaxWidth: true,
-// //         },
-// //         themeVariables: {
-// //           fontSize: `${fontSize}px`,
-// //           edgeLabelBackground: edgeLabelsBackground,
-// //         },
-// //         gantt: {
-// //           fontSize: fontSize,
-// //         },
-// //         sequence: {
-// //           diagramMarginY: diagramPadding,
-// //           boxMargin: diagramPadding,
-// //           noteMargin: diagramPadding,
-// //           messageMargin: diagramPadding,
+// //           htmlLabels: true,
+// //           curve: 'basis'
 // //         }
 // //       });
-      
-// //       setTimeout(() => {
-// //         mermaid.init(undefined, mermaidRef.current);
-// //       }, 0);
+
+// //       await mermaid.run({
+// //         nodes: [mermaidRef.current]
+// //       });
+
+// //       adjustNodeSize();
+// //     };
+
+// //     renderDiagram();
+// //   }, [chartDefinition, nodeWidth, nodeHeight]);
+
+// //   const adjustNodeSize = () => {
+// //     const svgElement = mermaidRef.current.querySelector('svg');
+// //     if (svgElement) {
+// //       const nodes = svgElement.querySelectorAll('.node rect, .node circle, .node ellipse, .node polygon');
+// //       nodes.forEach(node => {
+// //         node.setAttribute('width', nodeWidth);
+// //         node.setAttribute('height', nodeHeight);
+// //       });
+
+// //       // Adjust text position
+// //       const texts = svgElement.querySelectorAll('.node text');
+// //       texts.forEach(text => {
+// //         text.setAttribute('dy', nodeHeight / 4);
+// //       });
+
+// //       // Recalculate SVG viewBox
+// //       const bbox = svgElement.getBBox();
+// //       svgElement.setAttribute('viewBox', `0 0 ${bbox.width} ${bbox.height}`);
 // //     }
-// //   }, [isClient, chartDefinition, nodeSpacing, rankSpacing, fontSize, edgeLabelsBackground, diagramPadding]);
+// //   };
+
+// //   const handleNodeWidthChange = (event) => {
+// //     setNodeWidth(Number(event.target.value));
+// //   };
+
+// //   const handleNodeHeightChange = (event) => {
+// //     setNodeHeight(Number(event.target.value));
+// //   };
 
 // //   return (
-// //     <div className="mermaidDiagramContainer" ref={mermaidRef}>
-// //       {isClient && (
-// //         <div className="mermaid">
-// //           {chartDefinition}
-// //         </div>
-// //       )}
+// //     <div>
+// //       <div>
+// //         <label htmlFor="node-width-control">Node Width: </label>
+// //         <input
+// //           id="node-width-control"
+// //           type="range"
+// //           min="50"
+// //           max="300"
+// //           value={nodeWidth}
+// //           onChange={handleNodeWidthChange}
+// //         />
+// //         <span>{nodeWidth}px</span>
+// //       </div>
+// //       <div>
+// //         <label htmlFor="node-height-control">Node Height: </label>
+// //         <input
+// //           id="node-height-control"
+// //           type="range"
+// //           min="30"
+// //           max="200"
+// //           value={nodeHeight}
+// //           onChange={handleNodeHeightChange}
+// //         />
+// //         <span>{nodeHeight}px</span>
+// //       </div>
+// //       <div ref={mermaidRef} style={{ width, height, overflow: 'auto' }}>
+// //         {chartDefinition}
+// //       </div>
 // //     </div>
 // //   );
 // // };
 
-// // export default MermaidDiagram;
-
+// // export default dynamic(() => Promise.resolve(MermaidDiagram), { ssr: false });
 // 'use client'
-// import React, { useEffect, useRef, useState } from 'react';
-// import mermaid from 'mermaid';
-// import './MermaidDiagram.css';
+// import React, { useState, useEffect, useRef } from 'react';
+// import dynamic from 'next/dynamic';
 
-// const MermaidDiagram = ({ 
-//   chartDefinition, 
-//   nodeSpacing = 50,
-//   rankSpacing = 50,
-//   fontSize = 14,
-//   edgeLabelsBackground = 'none',
-//   diagramPadding = 8
+// const MermaidDiagram = ({
+//   chartDefinition,
+//   width = '100%',
+//   height = 'auto',
+//   initialFontSize = 24,
+//   initialNodeWidth = 100,
+//   initialNodeHeight = 50
 // }) => {
+//   const [fontSize, setFontSize] = useState(initialFontSize);
+//   const [nodeWidth, setNodeWidth] = useState(initialNodeWidth);
+//   const [nodeHeight, setNodeHeight] = useState(initialNodeHeight);
 //   const mermaidRef = useRef(null);
-//   const [isClient, setIsClient] = useState(false);
 
 //   useEffect(() => {
-//     setIsClient(true);
-//   }, []);
-
-//   useEffect(() => {
-//     if (isClient && typeof window !== "undefined") {
-//       mermaid.initialize({ 
+//     const renderDiagram = async () => {
+//       const mermaid = (await import('mermaid')).default;
+//       mermaid.initialize({
 //         startOnLoad: false,
 //         theme: 'default',
 //         flowchart: {
-//           nodeSpacing: nodeSpacing,
-//           rankSpacing: rankSpacing,
-//           curve: 'basis',
 //           useMaxWidth: true,
-//         },
-//         themeVariables: {
-//           fontSize: `${fontSize}px`,
-//           edgeLabelBackground: edgeLabelsBackground,
-//         },
-//         gantt: {
-//           fontSize: fontSize,
-//         },
-//         sequence: {
-//           diagramMarginY: diagramPadding,
-//           boxMargin: diagramPadding,
-//           noteMargin: diagramPadding,
-//           messageMargin: diagramPadding,
+//           htmlLabels: true,
+//           curve: 'basis'
 //         }
 //       });
 
-//       setTimeout(() => {
-//         mermaid.contentLoaded();
-//         mermaid.init(undefined, mermaidRef.current);
-//       }, 0);
+//       await mermaid.run({
+//         nodes: [mermaidRef.current]
+//       });
+
+//       adjustDiagram();
+//     };
+
+//     renderDiagram();
+//   }, [chartDefinition, fontSize, nodeWidth, nodeHeight]);
+
+//   const adjustDiagram = () => {
+//     const svgElement = mermaidRef.current.querySelector('svg');
+//     if (svgElement) {
+//       // Adjust font size
+//       svgElement.style.fontSize = `${fontSize}px`;
+//       const textElements = svgElement.querySelectorAll('text');
+//       textElements.forEach(text => {
+//         text.setAttribute('font-size', `${fontSize}px`);
+//         text.style.fontSize = `${fontSize}px`;
+//       });
+
+//       // Adjust node size
+//       const nodes = svgElement.querySelectorAll('.node rect, .node circle, .node ellipse, .node polygon');
+//       nodes.forEach(node => {
+//         node.setAttribute('width', nodeWidth);
+//         node.setAttribute('height', nodeHeight);
+//       });
+
+//       // Adjust text position
+//       const nodeTexts = svgElement.querySelectorAll('.node text');
+//       nodeTexts.forEach(text => {
+//         text.setAttribute('dy', nodeHeight / 4);
+//       });
+
+//       // Recalculate SVG viewBox
+//       const bbox = svgElement.getBBox();
+//       svgElement.setAttribute('viewBox', `0 0 ${bbox.width} ${bbox.height}`);
 //     }
-//   }, [isClient, chartDefinition, nodeSpacing, rankSpacing, fontSize, edgeLabelsBackground, diagramPadding]);
+//   };
+
+//   const handleFontSizeChange = (event) => setFontSize(Number(event.target.value));
+//   const handleNodeWidthChange = (event) => setNodeWidth(Number(event.target.value));
+//   const handleNodeHeightChange = (event) => setNodeHeight(Number(event.target.value));
 
 //   return (
-//     <div className="mermaidDiagramContainer" ref={mermaidRef}>
-//       {isClient && (
-//         <div className="mermaid">
-//           {chartDefinition}
-//         </div>
-//       )}
+//     <div>
+//       <div>
+//         <label htmlFor="font-size-control">Font Size: </label>
+//         <input
+//           id="font-size-control"
+//           type="range"
+//           min="12"
+//           max="48"
+//           value={fontSize}
+//           onChange={handleFontSizeChange}
+//         />
+//         <span>{fontSize}px</span>
+//       </div>
+//       <div>
+//         <label htmlFor="node-width-control">Node Width: </label>
+//         <input
+//           id="node-width-control"
+//           type="range"
+//           min="50"
+//           max="300"
+//           value={nodeWidth}
+//           onChange={handleNodeWidthChange}
+//         />
+//         <span>{nodeWidth}px</span>
+//       </div>
+//       <div>
+//         <label htmlFor="node-height-control">Node Height: </label>
+//         <input
+//           id="node-height-control"
+//           type="range"
+//           min="30"
+//           max="200"
+//           value={nodeHeight}
+//           onChange={handleNodeHeightChange}
+//         />
+//         <span>{nodeHeight}px</span>
+//       </div>
+//       <div ref={mermaidRef} style={{ width, height, overflow: 'auto' }}>
+//         {chartDefinition}
+//       </div>
 //     </div>
 //   );
 // };
 
-// export default MermaidDiagram;
+// export default dynamic(() => Promise.resolve(MermaidDiagram), { ssr: false });
 'use client'
 import React, { useEffect, useRef } from 'react';
 import mermaid from 'mermaid';
-import './MermaidDiagram.css'
 
-const MermaidDiagram = ({ 
-  chartDefinition, 
-  nodeWidth = 30,
-  nodeHeight = 30,
-  fontSize = 10,
-  fontFamily = 'Arial, sans-serif',
-  maxWidth=500
-}) => {
+const MermaidDiagram = ({ chartDefinition, width = '100%', height = 'auto' }) => {
   const mermaidRef = useRef(null);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      mermaid.initialize({ 
-        startOnLoad: false,
-        theme: 'default',
-        flowchart: {
-          nodeSpacing: 20,
-          rankSpacing: 20,
-          curve: 'basis',
-          useMaxWidth: true,
-        },
-        themeVariables: {
-          fontSize: `${fontSize}px`,
-          fontFamily: fontFamily,
-        }
-      });
-      
-      setTimeout(() => {
-        mermaid.init(undefined, mermaidRef.current);
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      flowchart: {
+        nodeSpacing: 30,
+        rankSpacing: 50,
+        curve: 'basis'
+      },
+      themeVariables: {
+        fontSize: '24px',
+        nodeTextSize: '24px'
+      }
+    });
 
-        // Adjust node sizes after rendering
-        const svgElement = mermaidRef.current.querySelector('svg');
-        if (svgElement) {
-          const nodes = svgElement.querySelectorAll('.node rect, .node circle, .node ellipse, .node polygon');
-          nodes.forEach(node => {
-            node.setAttribute('width', nodeWidth);
-            node.setAttribute('height', nodeHeight);
-          });
+    mermaid.render('mermaid-diagram', chartDefinition).then(({ svg }) => {
+      if (mermaidRef.current) {
+        mermaidRef.current.innerHTML = svg;
+      }
+    });
+  }, [chartDefinition]);
 
-          // Adjust text position
-          const texts = svgElement.querySelectorAll('.node text');
-          texts.forEach(text => {
-            text.setAttribute('font-size', `${fontSize}px`);
-            text.setAttribute('dy', '0.3em'); // Center text vertically
-          });
-
-          // Adjust the viewBox to fit the new node sizes
-          svgElement.setAttribute('width', '300px');
-          svgElement.setAttribute('height', '300px');
-        }
-      }, 0);
-    }
-  }, [chartDefinition, nodeWidth, nodeHeight, fontSize, fontFamily]);
-
-  return (
-    <div className="mermaidDiagramContainer" style={{width:`${maxWidth}`}} ref={mermaidRef}>
-      {chartDefinition}
-    </div>
-  );
+  return <div ref={mermaidRef} style={{ width, height }} />;
 };
 
 export default MermaidDiagram;
