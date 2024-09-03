@@ -1,0 +1,105 @@
+.container {
+    font-family: Arial, sans-serif;
+    width: 960px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    /* Fixed height */
+   
+}
+
+.problem {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    height: 100px;
+   
+    
+}
+
+.header {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.content {
+    display: flex;
+    flex: 1;
+    border: 1px solid #ddd;
+    min-height: 400px;
+    /* Allow flex child to shrink */
+    height: 400px;
+
+}
+
+.stepContent,
+.explanations {
+    width: 50%;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+}
+
+.stepContent {
+    border: 1px solid #ddd;
+}
+
+.explanations {
+    height: 400px; /* This fixed height might be causing issues */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .explanationsInner {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+
+.stepContentInner,
+.explanationsInner {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.step {
+    margin-bottom: 10px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ddd;
+}
+
+.button {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.stepCount {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}

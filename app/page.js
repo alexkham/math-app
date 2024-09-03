@@ -3,7 +3,7 @@ import GenericTable from './components/generic-table/GenericTable';
 import MyAccordion from './components/my-accordion/MyAccordion';
 //import styles from './page.module.css'
 // import tableData from './api/db/tables/trigonometry_tables.json'
-import './globals.css'
+// import './globals.css'
 import SelectComponent from './components/select-component/SelectComponent';
 import SelectionPage from './components/SelectionPage';
 import  SelectionPageNavigate from './components/SelectionPageNavigate'
@@ -33,6 +33,9 @@ import PowerTable from './components/logarithm-table/PowerTable';
 import LogicCalculator from './components/logic-calculator/LogicCalculator';
 import MatrixMultiplication from './components/matrix-multiplication/MatrixMultiplication';
 import { parseSitemap } from '@/pages/api/sitemap';
+import HomePage from './components/home-page/HomePage';
+import { getMetaDescriptions } from './utils/getMetaDescriptions';
+import MathSolutionSlideshow from './components/examples/MathSolutionSlideShow';
 //import combinatorics from './api/db/content/combinatorics'
 
 
@@ -40,9 +43,64 @@ export function generateStaticParams() {
   return [{}]; // This ensures the page is statically generated
 }
 
+// async function getMetaDescriptions(urls) {
+//   const descriptions = {};
+//   for (const url of urls) {
+//     const response = await fetch(url);
+//     const html = await response.text();
+//     const match = html.match(/<meta name="description" content="([^"]+)"/);
+//     if (match) descriptions[url] = match[1];
+//   }
+//   return descriptions;
+// }
 
 
-export default function Home() {
+
+export default async function Home() {
+
+
+  const complexMathData ={
+
+    title:"First Complex Problem",
+
+    problem: "Explore and explain the following calculus concepts: limits, derivatives, integrals, and series. Provide detailed steps and explanations for each.",
+
+    solution: [
+    {
+      content: "Let's explore some advanced calculus concepts.",
+      explanation: "We'll start with limits, then move to derivatives, integrals, and series."
+    },
+    {
+      content: "First, let's consider the limit: $$\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$$",
+      explanation: "This is a famous limit that's fundamental in calculus. It shows that for small angles, $\\sin x \\approx x$."
+    },
+    {
+      content: "Next, let's look at a more complex limit: $$\\lim_{x \\to \\infty} \\left(1 + \\frac{1}{x}\\right)^x = e$$",
+      explanation: "This limit defines the mathematical constant $e$, which is approximately equal to $2.71828$."
+    },
+    {
+      content: "Now, let's consider a derivative with the chain rule: $$\\frac{d}{dx}[\\sin(x^2)] = 2x\\cos(x^2)$$",
+      explanation: "We apply the chain rule here: $\\frac{d}{dx}[\\sin(u)] = \\cos(u) \\cdot \\frac{du}{dx}$, where $u = x^2$."
+    },
+    {
+      content: "Let's move on to integrals. Here's a definite integral: $$\\int_0^\\pi \\sin x \\,dx = 2$$",
+      explanation: "This integral represents the area under one arch of the sine curve from 0 to $\\pi$."
+    },
+    {
+      content: "Now for a more complex integral: $$\\int \\frac{dx}{\\sqrt{1-x^2}} = \\arcsin x + C$$",
+      explanation: "This is the integral that gives us the inverse sine function, or arcsine."
+    },
+    {
+      content: "Let's look at a series. This is the Taylor series for $e^x$: $$e^x = \\sum_{n=0}^\\infty \\frac{x^n}{n!} = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\cdots$$",
+      explanation: "This series representation allows us to compute $e^x$ for any value of $x$."
+    },
+    {
+      content: "Finally, let's consider a complex equation involving multiple concepts: $$\\frac{d}{dx}\\left[\\int_0^x \\frac{\\sin t}{t} \\,dt\\right] = \\frac{\\sin x}{x}$$",
+      explanation: "This equation combines integration and differentiation, demonstrating the Fundamental Theorem of Calculus."
+    }
+  ]
+  
+};
 
 //   const withCode=`graph TD;
 // A[Click Me ] --> B((B));
@@ -150,11 +208,18 @@ export default function Home() {
   if (!categorizedUrls) {
     return <div>Loading...</div>;
   }
+  console.log('Categorized Urls : ', JSON.stringify(categorizedUrls, null, 2));
+
+
+  const allUrls = [...categorizedUrls.main, ...Object.values(categorizedUrls.categories).flat(), ...categorizedUrls.leaves];
+  const metaDescriptions = await getMetaDescriptions(categorizedUrls);
+  
+  console.log('Meta Descriptions:', metaDescriptions);
   
   return (
     <div className='outer-container'>
      
-      
+      <HomePage categorizedUrls={categorizedUrls} metaDescriptions={metaDescriptions}></HomePage>
      
       <br></br>
       {/* <span>.{primes[0]}</span> */}
@@ -172,7 +237,7 @@ export default function Home() {
      <br></br>
 
 
-     <div>
+     {/* <div>
       <h1>Welcome to My Site</h1>
       {categorizedUrls.main.length > 0 && (
         <div>
@@ -209,7 +274,7 @@ export default function Home() {
           </ul>
         </div>
       )}
-    </div>
+    </div> */}
 
 
 
@@ -243,32 +308,22 @@ export default function Home() {
      <br></br>
      <br></br>
      {/* <ZScoreVisualizer></ZScoreVisualizer> */}
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
+    
      
 
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
+     
      {/* <BellCurveHighlighted
       pdf={pdf}
       dataPoints={Array.from({ length: 800 }, (_, index) => ((index / 100) - 4).toFixed(2))}
       zScores={[-1.96, 1.96]} // Range of zScores
     /> */}
 
-     <br></br>
-     <br></br>
+    
      {/* <div>
       <h1>Bell Curve Highlighted</h1>
       <BellCurveHighlighted pdf={pdf} dataPoints={dataPoints} zScores={zScores} />
     </div> */}
-     <br></br>
-     <br></br>
-     <br></br>
+    
      {/* <br></br>
      <BellCurveHighlighted
      dataPoints={dataPoints}
@@ -284,27 +339,16 @@ export default function Home() {
      <br></br>
      <br></br>
      {/* <MermaidDiagram chartDefinition={sql}></MermaidDiagram> */}
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
+    
      {/* <TypeWriter></TypeWriter> */}
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
+    
           {/* <div style={{position:'absolute',top:'100px',width:'1200px'}}>
           <Base2LogarithmTable></Base2LogarithmTable>
    
       </div> */}
      
      <br></br>
+     {/* <MathSolutionSlideshow problemData={complexMathData}></MathSolutionSlideshow> */}
      <br></br>
      <br></br>
       {/* <div style={{position:'absolute',top:'100px',width:'1200px'}}>
@@ -313,7 +357,7 @@ export default function Home() {
      
      
      <br></br>
-     <MatrixMultiplication></MatrixMultiplication>
+     {/* <MatrixMultiplication></MatrixMultiplication> */}
      <br></br>
      <br></br>
      {/* <h2>Z Score Visualizer</h2>
@@ -321,6 +365,7 @@ export default function Home() {
      {/* <br></br>
      <LogicCalculator></LogicCalculator> */}
      <br></br>
+     
     </div>
   )
 }

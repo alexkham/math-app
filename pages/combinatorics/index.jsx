@@ -636,6 +636,10 @@ import styles from './Combinatorics.module.css';
 import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
+import Head from 'next/head';
+
+
+
 
 export async function getStaticProps() {
   const scenarios = [
@@ -739,7 +743,11 @@ export async function getStaticProps() {
 
 export default function CombinatoricsPage({ scenarios, combinatorics8 }) {
   return (
-
+    <>
+    <Head>
+      <title>Combinatorics Scenarios and Applications</title>
+      <meta name="description" content="Explore various combinatorics scenarios including permutations, combinations, partitions, and distributions. Learn formulas, see examples, and understand real-world applications with our comprehensive guide and interactive diagram." />
+     </Head>
     <div className={styles.container}>
       <MyNavbar></MyNavbar>
       <br></br>
@@ -822,5 +830,6 @@ export default function CombinatoricsPage({ scenarios, combinatorics8 }) {
       </section>
       <ScrollUpButton></ScrollUpButton>
     </div>
+    </>
   )
 }
