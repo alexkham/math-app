@@ -820,7 +820,7 @@ const HomePage = ({ categorizedUrls ,metaDescriptions}) => {
                 className={styles.heroImage}
                 width={1200}
                 height={600}
-                priority
+                loading='lazy'
               />
               <div className={styles.heroContent}>
                 <h2 className={styles.heroTitle}>{formatTitle(url)}</h2>
