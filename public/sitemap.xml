@@ -31,12 +31,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://learnmathclass.com/test</loc>
-    <lastmod>2024-09-03T20:36:38.033Z</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+ 
   <url>
     <loc>https://learnmathclass.com/logic/truth-tables</loc>
     <lastmod>2024-09-03T20:36:38.033Z</lastmod>
