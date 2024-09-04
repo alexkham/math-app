@@ -1311,7 +1311,7 @@ const HomePage = ({ categorizedUrls, metaDescriptions }) => {
             <div className={styles.categoryContent}>
               <h3 className={styles.categoryItemTitle}>{formatTitle(url)}</h3>
               <p className={styles.categoryItemDescription}>
-               {metaDescriptions[url]?.content || 'No description available at the Moment'}
+               {metaDescriptions[url] || 'No description available at the Moment'}
               </p>
               <div className={styles.linksGroup}>
                 <a href={url} className={styles.categoryItemLink}>Learn More</a>
