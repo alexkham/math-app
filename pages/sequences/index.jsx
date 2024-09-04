@@ -34,6 +34,21 @@ export async function getStaticProps() {
 export default function SequencesPage({sequences}) {
   return (
    <>
+    <Head>
+        <title>Mathematical Sequences | Learn Math Class</title>
+        <meta name="description" content="Discover various mathematical sequences including arithmetic, geometric, and more. Explore the patterns and properties of different number sequences in mathematics." />
+        <meta name="keywords" content="mathematical sequences, sequences, number patterns, arithmetic sequence, geometric sequence" />
+        <link rel="canonical" href="https://www.learnmathclass.com/sequences" />
+        <meta property="og:title" content="Mathematical Sequences | Learn Math Class" />
+        <meta property="og:description" content="Explore various mathematical sequences and number patterns. Learn about arithmetic, geometric, and other important sequences in mathematics." />
+        <meta property="og:url" content="https://www.learnmathclass.com/sequences" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://www.learnmathclass.com/images/sequences-og.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Mathematical Sequences | Learn Math Class" />
+        <meta name="twitter:description" content="Explore various mathematical sequences and number patterns. Learn about arithmetic, geometric, and other important sequences in mathematics." />
+        <meta name="twitter:image" content="https://www.learnmathclass.com/images/sequences-twitter.jpg" />
+      </Head>
    <MyNavbar></MyNavbar>
    <br></br>
    <br></br>

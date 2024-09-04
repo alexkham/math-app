@@ -36,6 +36,7 @@ import { parseSitemap } from '@/pages/api/sitemap';
 import HomePage from './components/home-page/HomePage';
 import { getMetaDescriptions } from './utils/getMetaDescriptions';
 import MathSolutionSlideshow from './components/examples/MathSolutionSlideShow';
+import metaDescriptions from './components/home-page/metaDescriptions'
 //import combinatorics from './api/db/content/combinatorics'
 
 
@@ -94,7 +95,16 @@ export default async function Home() {
     ...categorizedUrls.leaves
   ];
   
-  const metaDescriptions = await getMetaDescriptions(categorizedUrls);
+  // const metaDescriptions = await getMetaDescriptions(categorizedUrls);
+
+//  const  metaDescriptions= {
+//     'https://learnmathclass.com/combinatorics': 'Explore various combinatorics scenarios including permutations, combinations, partitions, and distributions. Learn formulas, see examples, and understand real-world applications with our comprehensive guide and interactive diagram.',
+//     'https://learnmathclass.com/logic/truth-tables': 'Generate dynamic truth tables for logical expressions with our interactive Logic Calculator. Learn about logical operators, Boolean algebra, and propositional logic.',
+//     'https://learnmathclass.com/visual-tools/base-converter': 'Visualize number base conversions with our interactive tool.', 
+//     'https://learnmathclass.com/visual-tools/determinant-calculator': 'Use our free determinant calculator with step-by-step solutions. Easily calculate matrix determinants for 2x2, 3x3, and larger matrices.',
+//     'https://learnmathclass.com/visual-tools/gauss-elimination': 'Use our free Gaussian elimination calculator to solve matrix equations, systems of linear equations, and perform Gauss-Jordan elimination. Step-by-step solutions provided.',
+//     'https://learnmathclass.com/visual-tools/matrix-multiplication': 'Interactive matrix multiplication animation tool. Visualize and understand matrix multiplication step by step.'
+//   }
 
 
 

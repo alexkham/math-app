@@ -1331,8 +1331,7 @@ const HomePage = ({ categorizedUrls, metaDescriptions }) => {
   return (
     <div className={styles.container} id='top'>
       <br></br>
-      <br></br>
-      <br></br>
+     
       <header className={styles.header}>
         <h1 className={styles.siteTitle}>Learn Mathematics Online</h1>
         <nav className={styles.nav} >

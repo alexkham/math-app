@@ -6,6 +6,7 @@ import { capitalizeWords } from '@/app/utils/utils-functions';
 import './tables.css'
 import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 import LogarithmTable from '@/app/components/logarithm-table/LogarithmTable';
+import Head from 'next/head';
 
 
 export async function getStaticProps() {
@@ -38,7 +39,21 @@ export default function tables({filesData}) {
   categoryOptions.push("Arithmetics")
   return (
     <>
-    
+     <Head>
+        <title>Mathematical Tables | Learn Math Class</title>
+        <meta name="description" content="Access multiple mathematical tables including arithmetic, logarithmic, and trigonometric functions. Essential reference for students and professionals in mathematics and related fields." />
+        <meta name="keywords" content="mathematical tables, arithmetic tables, logarithm tables, trigonometric tables, math reference" />
+        <link rel="canonical" href="https://www.learnmathclass.com/tables" />
+        <meta property="og:title" content="Mathematical Tables | Learn Math Class" />
+        <meta property="og:description" content="Comprehensive mathematical tables for arithmetic, logarithmic, and trigonometric functions. Essential reference for math students and professionals." />
+        <meta property="og:url" content="https://www.learnmathclass.com/tables" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://www.learnmathclass.com/images/math-tables-og.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Mathematical Tables | Learn Math Class" />
+        <meta name="twitter:description" content="Comprehensive mathematical tables for arithmetic, logarithmic, and trigonometric functions. Essential reference for math students and professionals." />
+        <meta name="twitter:image" content="https://www.learnmathclass.com/images/math-tables-twitter.jpg" />
+      </Head>
      <div className='tables-main'>
      <MyNavbar></MyNavbar>
      <br></br>
