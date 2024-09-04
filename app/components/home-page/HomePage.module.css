@@ -1,14 +1,17 @@
 .container {
   max-width: 1200px;
-  width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
   border-bottom: 2px solid #4d4dff;
@@ -19,11 +22,17 @@
   font-size: 2.5rem;
   font-weight: bold;
   color: #4d4dff;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .nav {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 15px;
+  letter-spacing: 0.03em;
 }
 
 .navLink {
@@ -47,8 +56,7 @@
   position: relative;
   overflow: hidden;
   height: 400px;
-  width: 90%;
-  
+  width: 100%;
 }
 
 .heroSlide {
@@ -74,14 +82,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* transition: all 0.3s ease-in-out;
-  transform: translate(-5%, -5%); */
-}
-
-.heroSlide:hover .heroImage {
-  width: 100%;
-  height: 100%;
-  transform: translate(0, 0);
 }
 
 .heroContent {
@@ -97,11 +97,15 @@
 .heroTitle {
   margin: 0 0 10px 0;
   font-size: 1.8rem;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
 }
 
 .heroDescription {
   margin: 0;
   font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
 }
 
 .heroLink {
@@ -120,8 +124,7 @@
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  padding-bottom: 35px;
- 
+  padding-bottom: 20px;
 }
 
 .slideButton:hover {
@@ -130,13 +133,12 @@
 
 .prevButton {
   left: 10px;
-  padding: 10px;
   padding-bottom: 35px;
-  
 }
 
 .nextButton {
   right: 10px;
+  padding-bottom: 35px;
 }
 
 .featuredSection {
@@ -189,7 +191,7 @@
   font-size: 1.2rem;
   font-weight: bold;
   margin: 0;
-  flex-grow: 1;
+  letter-spacing: 0.03em;
 }
 
 .newsCardContent {
@@ -204,6 +206,8 @@
   color: #666;
   margin-bottom: 15px;
   flex-grow: 1;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
 }
 
 .newsCardLink {
@@ -220,15 +224,16 @@
 
 .mainContent {
   display: flex;
+  flex-direction: column;
   gap: 30px;
 }
 
 .primaryContent {
-  flex: 3;
+  width: 100%;
 }
 
 .sidebar {
-  flex: 1;
+  width: 100%;
 }
 
 .categorySection {
@@ -236,10 +241,11 @@
 }
 
 .categoryTitle {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   border-bottom: 2px solid #4d4dff;
   padding-bottom: 5px;
   margin-bottom: 15px;
+  letter-spacing: 0.04em;
 }
 
 .categoryGrid {
@@ -247,42 +253,91 @@
   grid-template-columns: 1fr;
   gap: 20px;
 }
-
+/* 
 .categoryItem {
   display: flex;
+  flex-direction: column;
   background-color: white;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
+ 
+  width: 100%;
+  min-width: 800px;
+} */
+
+/* .categoryItem {
+  display: flex;
+  flex-direction: column;  
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  width: 80%;
+} */
+
+/* Base mobile styles */
+.categoryItem {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  width: 100%; /* Full width on mobile */
 }
+
+/* Desktop styles */
+@media (min-width: 768px) {
+  .categoryItem {
+    width: 80%; /* Adjusted width for desktop */
+    min-width: 800px; /* Minimum width to maintain layout integrity */
+    margin: 0 auto; /* Centering the item */
+  }
+
+  .categoryGrid {
+    grid-template-columns: repeat(2, 1fr); /* Optimizing grid layout for desktop */
+  }
+
+  .categoryContent {
+    padding: 20px; /* Adjust padding as needed for desktop */
+  }
+}
+
 
 .categoryItem:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .categoryImage {
-  width: 40%;
+  width: 100%;
+  height: 200px;
   object-fit: cover;
 }
 
 .categoryContent {
-  width: 60%;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
 }
 
 .categoryItemTitle {
   font-size: 1.2rem;
   margin: 0 0 10px 0;
+  letter-spacing: 0.03em;
 }
 
 .categoryItemDescription {
   font-size: 0.9rem;
   color: #666;
   margin-bottom: 10px;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
 }
 
 .linksGroup {
@@ -313,10 +368,11 @@
 }
 
 .sidebarTitle {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   border-bottom: 2px solid #4d4dff;
   padding-bottom: 5px;
   margin-bottom: 15px;
+  letter-spacing: 0.04em;
 }
 
 .sidebarList {
@@ -332,40 +388,77 @@
   text-decoration: none;
   color: #3a3aff;
   transition: color 0.3s ease;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
 }
 
 .sidebarLink:hover {
   color: #4d4dff;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
+  .categoryItem {
+    flex-direction: row;  /* Changes layout to horizontal on larger screens */
+    .categoryImage {
+      width: 40%;
+      height: auto;
+    }
+    .categoryContent {
+      width: 60%;
+    }
+  }
+}
+
+
+@media (min-width: 768px) {
   .header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .siteTitle {
+    margin-bottom: 0;
+    text-align: left;
   }
 
   .nav {
-    margin-top: 10px;
-  }
-
-  .heroSection {
-    height: 300px;
-  }
-
-  .categoryItem {
-    flex-direction: column;
-  }
-
-  .categoryImage,
-  .categoryContent {
-    width: 100%;
+    justify-content: flex-end;
   }
 
   .mainContent {
-    flex-direction: column;
+    flex-direction: row;
+  }
+
+  .primaryContent {
+    flex: 3;
   }
 
   .sidebar {
-    margin-top: 30px;
+    flex: 1;
+  }
+
+  .categoryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .categoryItem {
+    flex-direction: row;
+  }
+
+  .categoryImage {
+    width: 40%;
+    height: auto;
+  }
+
+  .categoryContent {
+    width: 60%;
+  }
+}
+
+@media (min-width: 768px) {
+  .categoryGrid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
