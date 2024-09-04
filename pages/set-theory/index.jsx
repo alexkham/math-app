@@ -662,8 +662,20 @@ export default function SetTheoryPage() {
     <br></br>
     <br></br>
     <br></br>
-    <br></br>
-   
+    <svg width="890" height="460" viewBox="0 0 890 260">
+  <circle cx="330" cy="30" r="91" fill='rgba(255, 206, 86, 0.5)' stroke="black" stroke-width="0.5"/>
+  <circle cx="440" cy="30" r="91" fill='rgba(201, 203, 207, 0.5)' stroke="black" stroke-width="0.5"/>
+  <circle cx="385" cy="120" r="91" fill='rgba(54, 162, 235, 0.5)' stroke="black" stroke-width="0.5"/>
+  
+  <text x="278" y="0" fill="black" fontSize="16">A</text>
+  <text x="462" y="0" fill="black" fontSize="16">B</text>
+  <text x="385" y="140" fill="black" fontSize="16">C</text>
+  
+  <text x="365" y="10" fill="black" fontSize="14">A ∩ B</text>
+  <text x="320" y="90" fill="black" fontSize="14">A ∩ C</text>
+  <text x="420" y="90" fill="black" fontSize="14">B ∩ C</text>
+  <text x="355" y="60" fill="black" fontSize="14">A ∩ B ∩ C</text>
+</svg>
     <br></br>
     <br></br>
     <br></br>

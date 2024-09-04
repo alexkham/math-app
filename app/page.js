@@ -259,7 +259,7 @@ export default async function Home() {
   // const metaDescriptions = await getMetaDescriptions(categorizedUrls);
   
   // console.log('Meta Descriptions:', metaDescriptions);
-  
+  console.log('Received metaDescriptions:', metaDescriptions);
   return (
     <div className='outer-container'>
      
