@@ -40,12 +40,12 @@ export default function KeyboardPage() {
         <meta name="keywords" content="mathematical keyboard, math symbols, interactive learning, math education" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
-        <link rel="canonical" href="https://yourdomain.com/keyboard" />
+        <link rel="canonical" href="https:/learnmathclass.com/keyboard" />
         <meta property="og:title" content="Mathematical Keyboard | Interactive Learning Tool" />
         <meta property="og:description" content="Explore our interactive Mathematical Keyboard. Perfect for students, educators, and math enthusiasts to practice and learn mathematical notation." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/keyboard" />
-        <meta property="og:image" content="https://yourdomain.com/images/math-keyboard-og.jpg" />
+        <meta property="og:url" content="https:/learnmathclass.com/keyboard" />
+        <meta property="og:image" content="https:/learnmathclass.com/images/math-keyboard-og.jpg" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
       </Head>
       

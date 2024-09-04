@@ -1,4 +1,5 @@
 export async function getMetaDescriptions(categorizedUrls) {
+  console.log("Inside getMetaDescriptions !!!!!!!!!!!!!!!!!!!!")
     const descriptions = {};
   
     const processUrl = async (fullUrl) => {
@@ -6,7 +7,9 @@ export async function getMetaDescriptions(categorizedUrls) {
         const response = await fetch(fullUrl);
         const html = await response.text();
         
-        const metaMatch = html.match(/<meta\s+name="description"\s+content="([^"]+)"/i);
+        // const metaMatch = html.match(/<meta\s+name="description"\s+content="([^"]+)"/i);
+        const metaMatch = html.match(/<meta[^>]*\bname=["']description["'][^>]*\bcontent=["']([^"']+)["'][^>]*>/i);
+
         
         if (metaMatch) {
           console.log(`Found description for ${fullUrl}: ${metaMatch[1]}`);
