@@ -733,20 +733,23 @@ export async function getStaticProps() {
   A --> M["CircularPermutations<br/>Circular arrangements"]
   `;
 
+  const metaDescription="Explore various combinatorics scenarios including permutations, combinations, partitions, and distributions. Learn formulas, see examples, and understand real-world applications with our comprehensive guide and interactive diagram."
+
   return {
     props: {
       scenarios,
-      combinatorics8
+      combinatorics8,
+      metaDescription
     },
   };
 }
 
-export default function CombinatoricsPage({ scenarios, combinatorics8 }) {
+export default function CombinatoricsPage({ scenarios, combinatorics8,metaDescription }) {
   return (
     <>
     <Head>
       <title>Combinatorics Scenarios and Applications</title>
-      <meta name="description" content="Explore various combinatorics scenarios including permutations, combinations, partitions, and distributions. Learn formulas, see examples, and understand real-world applications with our comprehensive guide and interactive diagram." />
+      <meta name="description" content={metaDescription} />
      </Head>
     <div className={styles.container}>
       <MyNavbar></MyNavbar>
