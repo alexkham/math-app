@@ -504,35 +504,7 @@ export default function SetTheoryPage() {
         
             This section demonstrates the fundamental operations on sets with graphical examples 
             to aid in understanding the concepts of intersection, union, difference, and symmetric difference between sets. 
-           
-            <svg width="780" height="240" xmlns="http://www.w3.org/2000/svg">
-    <!-- Universal Set (Background Rectangle) -->
-    <rect x="10" y="10" width="480" height="220" stroke="black" stroke-width="0.5" fill="none"/>
-    <text x="800" y="30" font-family="Arial" font-size="19" fill="black">U</text>
-
-    <!-- Circle A -->
-    <circle cx="160" cy="120" r="80" stroke="black" stroke-width="0.5" fill="none"/>
-    <text x="120" y="80" font-family="Arial" font-size="19" fill="black">A</text>
-
-    <!-- Complement of A -->
-    <defs>
-        <mask id="mask-A">
-            <!-- Everything in white (full opacity) will show through the mask -->
-            <rect x="0" y="0" width="520" height="240" fill="white"/>
-            <!-- Everything in black (no opacity) will be hidden -->
-            <circle cx="160" cy="120" r="80" fill="black"/>
-        </mask>
-    </defs>
-    <!-- Applying the mask to a rectangle that covers the universal set -->
-    <rect x="10" y="10" width="480" height="220" fill="blue" mask="url(#mask-A)"/>
-   
-
-    <!-- Legend -->
-    <rect x="540" y="50" width="20" height="20" fill="blue"/>
-    <text x="570" y="65" font-family="Arial" font-size="19" fill="black">A</text>
-    <text x="540" y="90" font-family="Arial" font-size="19" fill="black">Complement of A</text>
-</svg>
-
+    
 
             `,
             "after":`
@@ -610,6 +582,34 @@ export default function SetTheoryPage() {
     
     <br></br>
    
+         
+    {/* <svg width="780" height="240" xmlns="http://www.w3.org/2000/svg">
+    <!-- Universal Set (Background Rectangle) -->
+    <rect x="10" y="10" width="480" height="220" stroke="black" stroke-width="0.5" fill="none"/>
+    <text x="800" y="30" font-family="Arial" font-size="19" fill="black">U</text>
+
+    <!-- Circle A -->
+    <circle cx="160" cy="120" r="80" stroke="black" stroke-width="0.5" fill="none"/>
+    <text x="120" y="80" font-family="Arial" font-size="19" fill="black">A</text>
+
+    <!-- Complement of A -->
+    <defs>
+        <mask id="mask-A">
+            <!-- Everything in white (full opacity) will show through the mask -->
+            <rect x="0" y="0" width="520" height="240" fill="white"/>
+            <!-- Everything in black (no opacity) will be hidden -->
+            <circle cx="160" cy="120" r="80" fill="black"/>
+        </mask>
+    </defs>
+    <!-- Applying the mask to a rectangle that covers the universal set -->
+    <rect x="10" y="10" width="480" height="220" fill="blue" mask="url(#mask-A)"/>
+   
+
+    <!-- Legend -->
+    <rect x="540" y="50" width="20" height="20" fill="blue"/>
+    <text x="570" y="65" font-family="Arial" font-size="19" fill="black">A</text>
+    <text x="540" y="90" font-family="Arial" font-size="19" fill="black">Complement of A</text>
+</svg> */}
 
 
     <br></br>
@@ -640,13 +640,13 @@ export default function SetTheoryPage() {
     <br></br>
     <br></br>
     <br></br>
-    <svg width="890" height="260" viewBox="0 0 390 260">
+    {/* <svg width="890" height="260" viewBox="0 0 390 260">
     <circle cx="330" cy="130" r="91" fill='rgba(255, 206, 86, 0.5)' />
     <circle cx="440" cy="130" r="91" fill='rgba(201, 203, 207, 0.5)'  />
     <text x="278" y="130" fill="black" fontSize="16">A</text>
     <text x="462" y="130" fill="black" fontSize="16">B</text>
     <text x="365" y="130" fill="black" fontSize="16">A ∩ B</text>
-  </svg>
+  </svg> */}
     <br></br>
     <br></br>
     <br></br>
@@ -662,7 +662,7 @@ export default function SetTheoryPage() {
     <br></br>
     <br></br>
     <br></br>
-    <svg width="890" height="460" viewBox="0 0 890 260">
+    {/* <svg width="890" height="460" viewBox="0 0 890 260">
   <circle cx="330" cy="30" r="91" fill='rgba(255, 206, 86, 0.5)' stroke="black" stroke-width="0.5"/>
   <circle cx="440" cy="30" r="91" fill='rgba(201, 203, 207, 0.5)' stroke="black" stroke-width="0.5"/>
   <circle cx="385" cy="120" r="91" fill='rgba(54, 162, 235, 0.5)' stroke="black" stroke-width="0.5"/>
@@ -675,7 +675,7 @@ export default function SetTheoryPage() {
   <text x="320" y="90" fill="black" fontSize="14">A ∩ C</text>
   <text x="420" y="90" fill="black" fontSize="14">B ∩ C</text>
   <text x="355" y="60" fill="black" fontSize="14">A ∩ B ∩ C</text>
-</svg>
+</svg> */}
     <br></br>
     <br></br>
     <br></br>
@@ -699,11 +699,11 @@ export default function SetTheoryPage() {
     <br></br>
     <br></br>
     <br></br>
-    <SetTheoryVennDiagram></SetTheoryVennDiagram>
+    {/* <SetTheoryVennDiagram></SetTheoryVennDiagram>
     <br></br>
     <br></br>
     <SetTheoryVennDiagram2></SetTheoryVennDiagram2>
-    <br></br>
+    <br></br> */}
    
     <br></br>
     <br></br>
