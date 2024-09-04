@@ -4,6 +4,7 @@ import React from 'react'
 import path from 'path';
 import fs from 'fs';
 import Link from 'next/link';
+import Head from 'next/head';
 
 
 
