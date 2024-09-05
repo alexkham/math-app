@@ -14,6 +14,8 @@ import StableChartVenn from '@/app/components/diagrams/StableChartVenn';
 import SetTheoryVennDiagram from '@/app/components/diagrams/SetTheoryDiagram';
 import SetTheoryVennDiagram2 from '@/app/components/diagrams/SetTheoryDiagram2';
 import Head from 'next/head';
+import SecondaryNavbar from '@/app/components/nav-bar/SecondaryNavbar';
+import summaries from '@/app/api/db/tables/set-theory/summaries';
 
 export default function SetTheoryPage({tocItems}) {
 
@@ -584,12 +586,13 @@ export default function SetTheoryPage({tocItems}) {
         <meta name="twitter:image" content="https:/learnmathclass.com/images/set-theory-twitter.jpg" />
       </Head>
     <MyNavbar></MyNavbar>
+     
     <br></br>
     <br></br>
     <br></br>
     <Breadcrumb></Breadcrumb>
 
-    <h1 className='title' style={{marginTop:'-20px',marginBottom:'10px'}}>Set Theory:Basic Terminology amd Overview</h1>
+    <h1 className='title' style={{marginTop:'-20px',marginBottom:'10px'}}>Set Theory:Terminology and Basic Concepts</h1>
     <TableOfContents tocItems={tocItems} showNumbers={false} ></TableOfContents>
     <ContentBlocks tocItems={tocItems}></ContentBlocks>
     <br></br>
@@ -597,9 +600,25 @@ export default function SetTheoryPage({tocItems}) {
     <br></br>
     
     <br></br>
-   
-         
+{/*    
+    <svg width="840" height="240" xmlns="http://www.w3.org/2000/svg">
+    <rect x="200" y="0" width="640" height="240" fill="white" stroke="black" stroke-width="0.5"/>
+    <text x="720" y="20" font-family="Arial" font-size="19" fill="black" text-anchor="end">U</text>
+    <circle cx="360" cy="120" r="80" stroke="black" stroke-width="0.5" fill="blue"/>
+    <text x="360" y="120" font-family="Arial" font-size="19" fill="white" text-anchor="middle" dy="0.3em">A</text>
+    <circle cx="560" cy="120" r="80" stroke="black" stroke-width="0.5" fill="red"/>
+    <text x="560" y="120" font-family="Arial" font-size="19" fill="white" text-anchor="middle" dy="0.3em">B</text>
+</svg> */}
+
     
+{/* <svg width="740" height="240" xmlns="http://www.w3.org/2000/svg">
+    <rect x="100" y="0" width="640" height="240" fill="white" stroke="black" stroke-width="0.5"/>
+    <text x="720" y="20" font-family="Arial" font-size="19" fill="black" text-anchor="end">U</text>
+    <circle cx="460" cy="120" r="80" stroke="black" stroke-width="0.5" fill="blue"/>
+    <text x="460" y="160" font-family="Arial" font-size="19" fill="white" text-anchor="middle">B</text>
+    <circle cx="460" cy="100" r="40" stroke="black" stroke-width="0.5" fill="white"/>
+    <text x="460" y="120" font-family="Arial" font-size="19" fill="black" text-anchor="middle" dy="0.3em">A</text>
+</svg> */}
 
     <br></br>
     <br></br>
@@ -830,70 +849,8 @@ export async function getStaticProps() {
        
        `,
        "after": `
-       <div class="${styles.tableContainer}" id='table'>
-         <h2 class="${styles.tableTitle}">Section Summary</h2>
-         <table class="${styles.summaryTable}">
-           <thead>
-             <tr>
-               <th class="${styles.conceptColumn}">Concept</th>
-               <th class="${styles.notationColumn}">Symbol/Notation</th>
-               <th class="${styles.explanationColumn}">Explanation</th>
-             </tr>
-           </thead>
-           <tbody>
-             <tr>
-               <td>Enumerative Set Notation</td>
-               <td>{1, 2, 3}, {a, b, c}</td>
-               <td>Lists all elements of a set within curly braces.</td>
-             </tr>
-             <tr>
-               <td>Enumerative Set with Ellipsis</td>
-               <td>{1, 2, 3, ...}, {a, b, c, d, ...}</td>
-               <td>Lists some elements and uses '...' to indicate continuation, useful for large or infinite sets.</td>
-             </tr>
-             <tr>
-               <td>Descriptive Set Notation</td>
-               <td>{x | x is a positive even number}</td>
-               <td>Defines a set by specifying a condition that elements must satisfy.</td>
-             </tr>
-             <tr>
-               <td>Empty Set</td>
-               <td>∅, {}</td>
-               <td>Represents a set with no elements.</td>
-             </tr>
-             <tr>
-               <td>Belongs to</td>
-               <td>∈</td>
-               <td>'x ∈ A' means 'x' is an element of set 'A'.</td>
-             </tr>
-             <tr>
-               <td>Does not belong to</td>
-               <td>∉</td>
-               <td>'y ∉ B' means 'y' is not an element of set 'B'.</td>
-             </tr>
-             <tr>
-               <td>Subset</td>
-               <td>⊆</td>
-               <td>'A ⊆ B' means 'A' is a subset of 'B', meaning all elements of 'A' are in 'B'.</td>
-             </tr>
-             <tr>
-               <td>Proper Subset</td>
-               <td>⊂</td>
-               <td>'A ⊂ B' means 'A' is a proper subset of 'B', meaning 'A' is a subset of 'B' but not equal to 'B'.</td>
-             </tr>
-             <tr>
-               <td>Superset</td>
-               <td>⊇</td>
-               <td>'B ⊇ A' means 'B' is a superset of 'A', meaning all elements of 'A' are in 'B'.</td>
-             </tr>
-             <tr>
-               <td>Proper Superset</td>
-               <td>⊃</td>
-               <td>'B ⊃ A' means 'B' is a proper superset of 'A', meaning 'B' contains all elements of 'A' but is not equal to 'A'.</td>
-             </tr>
-           </tbody>
-         </table>
-       </div>
+     
+      ${summaries[0].table}
      `
        
 
@@ -952,53 +909,8 @@ export async function getStaticProps() {
 
          `,
          "after":`
-         <div class="${styles.tableContainer}" id='set-theory-summary'>
-         <h2 class="${styles.tableTitle}">Section Summary</h2>
-         <table class="${styles.summaryTable}">
-           <thead>
-             <tr>
-               <th className={styles.conceptColumn}>Concept</th>
-               <th className={styles.notationColumn}>Notation</th>
-               <th className={styles.explanationColumn}>Explanation</th>
-               <th className={styles.examplesColumn}>Examples</th>
-             </tr>
-           </thead>
-           <tbody>
-               <tr>
-               <td>Cardinality</td>
-               <td>|A|, card(A)</td>
-               <td>The size or number of elements in a set</td>
-               <td>|A| = 3 for A = {1, 2, 3}, |B| = 4 for B = {1, 'apple', 3.14, True}</td>
-             </tr>
-             <tr>
-               <td>Finite Sets</td>
-               <td>Regular Set Notation (enumerative or descriptive)</td>
-               <td>Sets with a countable number of elements</td>
-               <td>{Monday, ..., Sunday}, {A, ..., Z}</td>
-             </tr>
-             <tr>
-               <td>Infinite Sets</td>
-               <td>Regular Set Notation (enumerative or descriptive)</td>
-               <td>Sets with an uncountable number of elements</td>
-               <td>{x | x is a positive even number}, {1, 2, 3, ...}</td>
-             </tr>
-             <tr>
-               <td>Empty Set</td>
-               <td>∅ or {}</td>
-               <td>A set containing no elements</td>
-               <td>∅, {}</td>
-             </tr>
-             <tr>
-               <td>Universal Set</td>
-               <td>U or ξ</td>
-               <td>Set containing all objects within a specific context</td>
-               <td>U = {Monday, ..., Sunday} for days of the week, U = {A, ..., Z} for English alphabet</td>
-             </tr>
-           </tbody>
-         </table>
-         </div>
-       
-         `
+         ${summaries[1].table}
+          `
        },
           
        {
@@ -1088,11 +1000,15 @@ export async function getStaticProps() {
        A proper superset contains all elements of the subset plus additional elements.
        Example: 
        A is a proper superset of B but not a proper superset of C.
+       ${diagrams[12].svg}
+       **Diagram 3 ${diagrams[12].description}**
 
      **Disjoint Sets**
      Two sets are disjoint if they have no common elements.
      Example:
      A = {1, 2, 3} and C = {4, 5, 6} are disjoint.
+     "${diagrams[11].svg}"
+     **Diagram 4   ${diagrams[11].description}**
 
      **Complement**
      The complement of set A with respect to a universal set U includes all elements that are in U but not in A.
@@ -1104,71 +1020,7 @@ export async function getStaticProps() {
 
          `,
          "after":`
-         <div class="${styles.tableContainer}" id="relationships-between-sets-summary">
-         <h2 class="${styles.tableTitle}">Relationships Between Sets Summary</h2>
-         <table class="${styles.summaryTable}">
-           <thead>
-             <tr>
-               <th className={styles.conceptColumn}>Concept</th>
-               <th className={styles.notationColumn}>Notation</th>
-               <th className={styles.explanationColumn}>Explanation</th>
-               <th className={styles.examplesColumn}>Examples</th>
-             </tr>
-           </thead>
-           <tbody>
-             <tr>
-               <td>Equality of Sets</td>
-               <td>=</td>
-               <td>Two sets are equal if they contain exactly the same elements.</td>
-               <td>A = {1, 2, 3}, B = {3, 1, 2}; A = B</td>
-             </tr>
-             <tr>
-               <td>Inequality of Sets</td>
-               <td>≠</td>
-               <td>Two sets are unequal if at least one element is different between the sets.</td>
-               <td>A = {1, 2, 3}, C = {4, 5, 6}; A ≠ C</td>
-             </tr>
-             <tr>
-               <td>Basic Subsets</td>
-               <td>⊆</td>
-               <td>A subset is a set where every element of the subset is also an element of another set.</td>
-               <td>A = {1, 2}, B = {1, 2, 3, 4}; A ⊆ B</td>
-             </tr>
-             <tr>
-               <td>Proper Subsets</td>
-               <td>⊂</td>
-               <td>A proper subset of a set is not equal to the original set, containing fewer elements.</td>
-               <td>A = {1, 2}, B = {1, 2, 3, 4}; A ⊂ B</td>
-             </tr>
-             <tr>
-               <td>Basic Supersets</td>
-               <td>⊇</td>
-               <td>A superset includes every element of another set.</td>
-               <td>A = {1, 2, 3, 4}, B = {1, 2}; A ⊇ B</td>
-             </tr>
-             <tr>
-               <td>Proper Supersets</td>
-               <td>⊃</td>
-               <td>A proper superset contains all elements of the subset plus additional elements.</td>
-               <td>A = {1, 2, 3, 4}, B = {1, 2}; A ⊃ B</td>
-             </tr>
-             <tr>
-               <td>Disjoint Sets</td>
-               <td>N/A</td>
-               <td>Two sets are disjoint if they have no elements in common.</td>
-               <td>A = {1, 2, 3}, C = {4, 5, 6}; A and C are disjoint</td>
-             </tr>
-             <tr>
-               <td>Complement</td>
-               <td>A^c</td>
-               <td>The set of all elements not in the given set, relative to a universal set.</td>
-               <td>U = {1, 2, 3, 4, 5}, A = {1, 2, 3}; A^c = {4, 5}</td>
-             </tr>
-           </tbody>
-         </table>
-       </div>          
-
-
+          ${summaries[2].table}
          `
        }
        
@@ -1220,46 +1072,9 @@ export async function getStaticProps() {
 
          `,
          "after":`
-
-         <div class="${styles.tableContainer}" id="operations-on-sets-summary">
-           <h2 class="${styles.tableTitle}">Operations on Sets Summary</h2>
-           <table class="${styles.summaryTable}">
-             <thead>
-               <tr>
-                 <th className="${styles.conceptColumn}">Concept</th>
-                 <th className="${styles.notationColumn}">Notation</th>
-                 <th className="${styles.explanationColumn}">Explanation</th>
-                 <th className="${styles.examplesColumn}">Examples</th>
-               </tr>
-             </thead>
-             <tbody>
-               <tr>
-                 <td>Intersection</td>
-                 <td>A ∩ B</td>
-                 <td>The set of elements that are common to both sets A and B.</td>
-                 <td>If A = {1, 2, 3, 4} and B = {3, 4, 5, 6}, then A ∩ B = {3, 4}.</td>
-               </tr>
-               <tr>
-                 <td>Union</td>
-                 <td>A ∪ B</td>
-                 <td>The set of all elements that are in either set A or set B, or in both.</td>
-                 <td>If A = {1, 2, 3} and B = {4, 5, 3}, then A ∪ B = {1, 2, 3, 4, 5}.</td>
-               </tr>
-               <tr>
-                 <td>Difference</td>
-                 <td>A - B</td>
-                 <td>The set of elements that are in set A but not in set B.</td>
-                 <td>If A = {1, 2, 3, 4} and B = {3, 4, 5, 6}, then A - B = {1, 2}.</td>
-               </tr>
-               <tr>
-                 <td>Symmetric Difference</td>
-                 <td>A Δ B</td>
-                 <td>The set of elements that are in either of the sets A or B, but not in both.</td>
-                 <td>If A = {1, 2, 3} and B = {3, 4, 5}, then A Δ B = {1, 2, 4, 5}.</td>
-               </tr>
-             </tbody>
-           </table>
-         </div>            
+       
+          ${summaries[3].table}
+        
 
          `
        },

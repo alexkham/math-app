@@ -259,9 +259,43 @@
     <rect x="400" y="112" width="16" height="16" fill="blue"/>
     <text x="420" y="124" font-family="Arial" font-size="19" fill="black">A Δ B</text>
 </svg>
-  
-  
+    
   `
+},
+{
+  "title":"Disjoint Sets",
+  "description":"Disjoint sets on Venn diagram have no common area.",
+"svg":`
+
+<svg width="740" height="240" xmlns="http://www.w3.org/2000/svg">
+<rect x="100" y="0" width="640" height="240" fill="white" stroke="black" stroke-width="0.5"/>
+<text x="720" y="20" font-family="Arial" font-size="19" fill="black" text-anchor="end">U</text>
+<circle cx="360" cy="120" r="80" stroke="black" stroke-width="0.5" fill="blue"/>
+<text x="360" y="120" font-family="Arial" font-size="19" fill="white" text-anchor="middle" dy="0.3em">A</text>
+<circle cx="560" cy="120" r="80" stroke="black" stroke-width="0.5" fill="red"/>
+<text x="560" y="120" font-family="Arial" font-size="19" fill="white" text-anchor="middle" dy="0.3em">B</text>
+</svg>
+
+`
+
+},
+
+{
+
+  "title":"Subsets and Supersets",
+  "description":" Set A is a subset of set B and set B is a superset of A .",
+
+"svg":`
+<svg width="740" height="240" xmlns="http://www.w3.org/2000/svg">
+    <rect x="100" y="0" width="640" height="240" fill="white" stroke="black" stroke-width="0.5"/>
+    <text x="720" y="20" font-family="Arial" font-size="19" fill="black" text-anchor="end">U</text>
+    <circle cx="460" cy="120" r="80" stroke="black" stroke-width="0.5" fill="blue"/>
+    <text x="460" y="160" font-family="Arial" font-size="19" fill="white" text-anchor="middle">B</text>
+    <circle cx="460" cy="100" r="40" stroke="black" stroke-width="0.5" fill="white"/>
+    <text x="460" y="120" font-family="Arial" font-size="19" fill="black" text-anchor="middle" dy="0.3em">A</text>
+</svg>
+`
+
 }
 
 

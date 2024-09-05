@@ -637,6 +637,7 @@ import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import Head from 'next/head';
+import SecondaryNavbar from '@/app/components/nav-bar/SecondaryNavbar';
 
 
 
@@ -756,6 +757,7 @@ export default function CombinatoricsPage({ scenarios, combinatorics8,metaDescri
       <br></br>
       <br></br>
       <Breadcrumb></Breadcrumb>
+      <SecondaryNavbar></SecondaryNavbar>
       <h1 className={styles.title}>Combinatorics Scenarios</h1>
       <p className={styles.intro}>Explore various combinatorics scenarios and their applications in problem-solving.</p>
       

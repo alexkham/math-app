@@ -128,15 +128,25 @@ export async function getStaticProps({ params }) {
   };
 };
 
+export async function getStaticPaths() {
+  const paths = [
+    { params: { sequence: 'prime-numbers' } },
+    { params: { sequence: 'fibonacci-numbers' } }
+  ];
 
-  export async function getStaticPaths() {
-    // Since you don't have a predefined list of categories and tables,
-    // you can use fallback: 'blocking' to generate them on-demand
-    return {
-      paths: [], // No predefined paths
-      fallback: 'blocking' // Generate paths on-demand
-    };
-  }
+  return {
+    paths,
+    fallback: 'blocking' // or false if you want to 404 for non-existent paths
+  };
+}
+  // export async function getStaticPaths() {
+  //   // Since you don't have a predefined list of categories and tables,
+  //   // you can use fallback: 'blocking' to generate them on-demand
+  //   return {
+  //     paths: [], // No predefined paths
+  //     fallback: 'blocking' // Generate paths on-demand
+  //   };
+  // }
 
 export default function Sequence({sequenceName,sequenceData,article}) {
   return (

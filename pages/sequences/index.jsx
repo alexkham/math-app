@@ -5,34 +5,138 @@ import path from 'path';
 import fs from 'fs';
 import Link from 'next/link';
 import Head from 'next/head';
+import TableOfContents from '@/app/components/page-components/table-of-contents/TableOfContents';
+import SecondaryNavbar from '@/app/components/nav-bar/SecondaryNavbar';
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 
 
+// export async function getStaticProps() {
+//     const sequencesDirPath = path.join(process.cwd(), 'app', 'api', 'db', 'sequences');
+  
+//     // Read the directory contents
+//     const fileNames = fs.readdirSync(sequencesDirPath);
+  
+//     // Process the file names as needed for your application
+//     // For example, splitting them on '_' and getting the first part
+//     const sequenceNames = fileNames.map(fileName => {
+//       const parts = fileName.split('.');
+//       return parts[0]; // Assuming you want the first part before '_'
+//     });
 
-export async function getStaticProps() {
-    const sequencesDirPath = path.join(process.cwd(), 'app', 'api', 'db', 'sequences');
+    
+// const tocItems = [
+//   {
+//     title: "Introduction to Sequences",
+//     subItems: [
+//       { title: "Definition", content: "What sequences are in mathematics." },
+//       { title: "Importance", content: "Why learning about sequences is crucial." }
+//     ],
+//     content: ""
+//   },
+//   {
+//     title: "Common Types of Sequences",
+//     subItems: [
+//       {
+//         title: "Arithmetic Sequences",
+//         subItems: [
+//           { title: "Definition", content: "What arithmetic sequences are." },
+//           { title: "Positive Common Difference", content: "" },
+//           { title: "Negative Common Difference", content: "" },
+//           { title: "Zero Common Difference", content: "" }
+//         ],
+//         content: ""
+//       },
+//       {
+//         title: "Geometric Sequences",
+//         subItems: [
+//           { title: "Definition", content: "What geometric sequences are." },
+//           { title: "Positive Common Ratio", content: "" },
+//           { title: "Negative Common Ratio", content: "" }
+//         ],
+//         content: ""
+//       },
+//       {
+//         title: "Harmonic Sequences",
+//         subItems: [
+//           { title: "Definition", content: "What harmonic sequences are." },
+//           { title: "Basic Harmonic Sequence", content: "" }
+//         ],
+//         content: ""
+//       },
+//       {
+//         title: "Square and Cubic Number Sequences",
+//         subItems: [
+//           { title: "Definition", content: "What square and cubic number sequences are." },
+//           { title: "Square Number Sequence", content: "" },
+//           { title: "Cubic Number Sequence", content: "" }
+//         ],
+//         content: ""
+//       },
+//       {
+//         title: "Factorial Sequences",
+//         subItems: [
+//           { title: "Definition", content: "What factorial sequences are." },
+//           { title: "Basic Factorial Sequence", content: "" }
+//         ],
+//         content: ""
+//       }
+//     ],
+//     content: ""
+//   },
+//   {
+//     title: "Special Number Sequences",
+//     subItems: [
+//       {
+//         title: "Fibonacci Sequence",
+//         subItems: [
+//           { title: "Introduction", content: "Brief overview of the Fibonacci sequence." },
+//           { title: "Link", link: "/sequences/fibonacci" }
+//         ],
+//         content: ""
+//       },
+//       {
+//         title: "Prime Numbers",
+//         subItems: [
+//           { title: "Introduction", content: "Brief overview of what prime numbers are." },
+//           { title: "Link", link: "/sequences/prime-numbers" }
+//         ],
+//         content: ""
+//       }
+//     ],
+//     content: ""
+//   },
+//   {
+//     title: "Applications of Sequences",
+//     subItems: [
+//       { title: "Computer Science", content: "" },
+//       { title: "Physics", content: "" },
+//       { title: "Finance", content: "" }
+//     ],
+//     content: ""
+//   },
+//   {
+//     title: "Further Reading",
+//     subItems: [
+//       { title: "Books", content: "" },
+//       { title: "External Resources", content: "" }
+//     ],
+//     content: ""
+//   }
+// ];
+
   
-    // Read the directory contents
-    const fileNames = fs.readdirSync(sequencesDirPath);
-  
-    // Process the file names as needed for your application
-    // For example, splitting them on '_' and getting the first part
-    const sequenceNames = fileNames.map(fileName => {
-      const parts = fileName.split('.');
-      return parts[0]; // Assuming you want the first part before '_'
-    });
-  
-    // Pass the sequence names to your page component
-    return {
-      props: {
-        sequences: sequenceNames,
-      },
-    };
-  };
+//     // Pass the sequence names to your page component
+//     return {
+//       props: {
+//         sequences: sequenceNames,
+//       },
+//     };
+//   };
 
   
   
 
-export default function SequencesPage({sequences}) {
+export default function SequencesPage({sequences,tocItems}) {
   return (
    <>
     <Head>
@@ -51,13 +155,31 @@ export default function SequencesPage({sequences}) {
         <meta name="twitter:image" content="https://www.learnmathclass.com/images/sequences-twitter.jpg" />
       </Head>
    <MyNavbar></MyNavbar>
+    <br></br>
+    <br></br>
+    <br></br>
+    <div className='secondary-nav'>
+   <Breadcrumb></Breadcrumb>
+    <SecondaryNavbar></SecondaryNavbar>
+    </div>
+    <br></br>
+    <br></br>
+   <h1>Sequences Main Page</h1>
+  <TableOfContents tocItems={tocItems} showNumbers={false}></TableOfContents>
    <br></br>
    <br></br>
-  
    <br></br>
    <br></br>
-   <h2>Sequences Main Page</h2>
-   {sequences.map((word,index)=>{
+   <br></br>
+   <br></br>
+   <br></br>
+   <br></br>
+   <br></br>
+   <br></br>
+   <br></br>
+   <br></br>
+   <br></br>
+   {/* {sequences.map((word,index)=>{
     return(
         <>
         <Link href={`/sequences/${word}-numbers`} >
@@ -66,8 +188,144 @@ export default function SequencesPage({sequences}) {
         
         </>
     )
-   })}
+   })} */}
    <ScrollUpButton></ScrollUpButton>
    </>
   )
 }
+
+
+
+export async function getStaticProps() {
+  const sequencesDirPath = path.join(process.cwd(), 'app', 'api', 'db', 'sequences');
+
+  // Read the directory contents
+  const fileNames = fs.readdirSync(sequencesDirPath);
+
+  // Process the file names as needed for your application
+  // For example, splitting them on '_' and getting the first part
+  const sequenceNames = fileNames.map(fileName => {
+    const parts = fileName.split('.');
+    return parts[0]; // Assuming you want the first part before '_'
+  });
+
+  
+const tocItems = [
+{
+  title: "Introduction to Sequences",
+  subItems: [
+    { title: "Definition", content: "What sequences are in mathematics." },
+    { title: "Importance", content: "Why learning about sequences is crucial." }
+  ],
+  content: ""
+},
+{
+  title: "Common Types of Sequences",
+  subItems: [
+    {
+      title: "Arithmetic Sequences",
+      subItems: [
+        { title: "Definition", content: "What arithmetic sequences are." },
+        { title: "Positive Common Difference", content: "" },
+        { title: "Negative Common Difference", content: "" },
+        { title: "Zero Common Difference", content: "" }
+      ],
+      content: ""
+    },
+    {
+      title: "Geometric Sequences",
+      subItems: [
+        { title: "Definition", content: "What geometric sequences are." },
+        { title: "Positive Common Ratio", content: "" },
+        { title: "Negative Common Ratio", content: "" }
+      ],
+      content: ""
+    },
+    {
+      title: "Harmonic Sequences",
+      subItems: [
+        { title: "Definition", content: "What harmonic sequences are." },
+        { title: "Basic Harmonic Sequence", content: "" }
+      ],
+      content: ""
+    },
+    {
+      title: "Square and Cubic Number Sequences",
+      subItems: [
+        { title: "Definition", content: "What square and cubic number sequences are." },
+        { title: "Square Number Sequence", content: "" },
+        { title: "Cubic Number Sequence", content: "" }
+      ],
+      content: ""
+    },
+    {
+      title: "Factorial Sequences",
+      subItems: [
+        { title: "Definition", content: "What factorial sequences are." },
+        { title: "Basic Factorial Sequence", content: "" }
+      ],
+      content: ""
+    }
+  ],
+  content: ""
+},
+{
+  title: "Special Number Sequences",
+  subItems: [
+    {
+      title: "Fibonacci Sequence",
+      subItems: [
+        { title: "Introduction", content: "Brief overview of the Fibonacci sequence." },
+        { title: "Link", link: "/sequences/fibonacci" }
+      ],
+      content: ""
+    },
+    {
+      title: "Prime Numbers",
+      subItems: [
+        { title: "Introduction", content: "Brief overview of what prime numbers are." },
+        { title: "Link", link: "/sequences/prime-numbers" }
+      ],
+      content: ""
+    }
+  ],
+  content: ""
+},
+{
+  title: "Applications of Sequences",
+  subItems: [
+    { title: "Computer Science", content: "" },
+    { title: "Physics", content: "" },
+    { title: "Finance", content: "" }
+  ],
+  content: ""
+},
+{
+  title: "Further Reading",
+  subItems: [
+    { title: "Books", content: "" },
+    { title: "External Resources", content: "" }
+  ],
+  content: ""
+}
+];
+
+
+  // Pass the sequence names to your page component
+  return {
+    props: {
+      sequences: sequenceNames,
+      tocItems
+    },
+  };
+};
+
+
+
+
+
+// `A sequence in mathematics is defined as a list ( finite or infinite) of numbers (that are called terms)  arranged in a specific order. Sequences are typically described by 
+// a rule or formula that determines the term at every single position of the sequence. For example, the sequence of even numbers 2,4,6,8,… is determined by the formula n =2n, 
+// where 𝑛 n is the position of the term in the sequence.`
+
+
