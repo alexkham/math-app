@@ -69,9 +69,10 @@ const summaries=[
              </tr>
            </tbody>
          </table>
-       </div>
+       </div>      
+      `,
       
-      `
+      "link":"www.webdevdata.net"
     },
 
     {
@@ -124,9 +125,9 @@ const summaries=[
           </tr>
         </tbody>
       </table>
-      </div>
-      
-      `
+      </div>      
+      `,
+    
 
     },
 
@@ -192,9 +193,9 @@ const summaries=[
           </tr>
           <tr>
             <td>Complement</td>
-            <td>A^c</td>
+            <td>A<sup>c</sup></td>
             <td>The set of all elements not in the given set, relative to a universal set.</td>
-            <td>U = {1, 2, 3, 4, 5}, A = {1, 2, 3}; A^c = {4, 5}</td>
+            <td>U = {1, 2, 3, 4, 5}, A = {1, 2, 3}; A<sup>c</sup> = {4, 5}</td>
           </tr>
         </tbody>
       </table>
@@ -253,6 +254,101 @@ const summaries=[
         
         `
 
+
+    },
+
+  
+    {
+
+      
+      "title":"Summary of Set Operations Laws",
+      "description":"",
+      "category":"Set Operations",
+
+    "table":`
+    <div class="${styles.tableContainer}" id='set-laws-summary'>
+    <h2 class="${styles.tableTitle}">Summary of Foundational Laws in Set Theory</h2>
+    <table class="${styles.summaryTable}">
+      <thead>
+        <tr>
+          <th class="${styles.conceptColumn}">Law</th>
+          <th class="${styles.notationColumn}">Formulation</th>
+          <th class="${styles.explanationColumn}">Explanation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2">Commutative Law</td>
+          <td>A ∪ B = B ∪ A</td>
+          <td>Order of sets does not change the result for unions.</td>
+        </tr>
+        <tr>
+          <td>A ∩ B = B ∩ A</td>
+          <td>Order of sets does not change the result for intersections.</td>
+        </tr>
+        <tr>
+          <td rowspan="2">Associative Law</td>
+          <td>(A ∪ B) ∪ C = A ∪ (B ∪ C)</td>
+          <td>Grouping of sets does not change the result for unions.</td>
+        </tr>
+        <tr>
+          <td>(A ∩ B) ∩ C = A ∩ (B ∩ C)</td>
+          <td>Grouping of sets does not change the result for intersections.</td>
+        </tr>
+        <tr>
+          <td rowspan="2">Distributive Law</td>
+          <td>A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)</td>
+          <td>Union distributes over intersection.</td>
+        </tr>
+        <tr>
+          <td>A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)</td>
+          <td>Intersection distributes over union.</td>
+        </tr>
+        <tr>
+          <td rowspan="2">Identity Law</td>
+          <td>A ∪ ∅ = A</td>
+          <td>Union with the empty set leaves the set unchanged.</td>
+        </tr>
+        <tr>
+          <td>A ∩ U = A</td>
+          <td>Intersection with the universal set leaves the set unchanged.</td>
+        </tr>
+        <tr>
+          <td rowspan="2">Idempotent Law</td>
+          <td>A ∪ A = A</td>
+          <td>A union of a set with itself is the set itself.</td>
+        </tr>
+        <tr>
+          <td>A ∩ A = A</td>
+          <td>An intersection of a set with itself is the set itself.</td>
+        </tr>
+        <tr>
+          <td rowspan="2">Complement Law</td>
+          <td>A ∪ A<sup>c</sup> = U</td>
+          <td>Union of a set and its complement is the universal set.</td>
+        </tr>
+        <tr>
+          <td>A ∩ A<sup>c</sup> = ∅</td>
+          <td>Intersection of a set and its complement is the empty set.</td>
+        </tr>
+        <tr>
+          <td rowspan="2">De Morgan's Laws</td>
+          <td>(A ∪ B)<sup>c</sup> = A<sup>c</sup> ∩ B<sup>c</sup></td>
+          <td>The complement of a union of two sets is the intersection of their complements.</td>
+        </tr>
+        <tr>
+          <td>(A ∩ B)<sup>c</sup> = A<sup>c</sup> ∪ B<sup>c</sup></td>
+          <td>The complement of an intersection of two sets is the union of their complements.</td>
+        </tr>
+        <tr>
+          <td>Involution Law</td>
+          <td>(A<sup>c</sup>)<sup>c</sup> = A</td>
+          <td>Complement of the complement of a set is the set itself.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    `
 
     }
    

@@ -8,6 +8,7 @@ import Head from 'next/head';
 import TableOfContents from '@/app/components/page-components/table-of-contents/TableOfContents';
 import SecondaryNavbar from '@/app/components/nav-bar/SecondaryNavbar';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
+import ContentBlocks from '@/app/components/page-components/content-components/ContentBlocks';
 
 
 // export async function getStaticProps() {
@@ -160,12 +161,28 @@ export default function SequencesPage({sequences,tocItems}) {
     <br></br>
     <div className='secondary-nav'>
    <Breadcrumb></Breadcrumb>
-    <SecondaryNavbar></SecondaryNavbar>
+    <SecondaryNavbar
+     mode={"siblings"} 
+     alignment='left' 
+     title=' '
+     verticalPosition='15%'
+     backgroundColor='red'
+     height={'60px'}
+     width={'50px'}
+     
+     
+     
+    ></SecondaryNavbar>
     </div>
     <br></br>
+    <SecondaryNavbar mode='children'  verticalPosition='25%' 
+
+   ></SecondaryNavbar>
+   {/* width={'50px'} */}
     <br></br>
    <h1>Sequences Main Page</h1>
   <TableOfContents tocItems={tocItems} showNumbers={false}></TableOfContents>
+  <ContentBlocks tocItems={tocItems}></ContentBlocks>
    <br></br>
    <br></br>
    <br></br>
@@ -217,7 +234,16 @@ const tocItems = [
     { title: "Definition", content: "What sequences are in mathematics." },
     { title: "Importance", content: "Why learning about sequences is crucial." }
   ],
-  content: ""
+  content: `    
+      A **sequence** in mathematics is defined as a list ( finite or infinite) of numbers ( called terms)  arranged in a specific order. 
+      **Sequences** are typically described by a rule or formula that determines the term at every single position of the **sequence**.
+      For example, the **sequence** of even numbers 2,4,6,8,… is determined by the formula n =2n, where 𝑛  is the position of the term in the **sequence**.
+
+      On the other hand, the term **series** refers to a sum of the terms of a **sequence**. We get a **series** by adding up the elements of a sequence.
+      Similarly to **sequences**, **series** may be finite or infinite. For a finite **series**, the sum involves adding a fixed number of terms, such as 2+4+6+8.
+      An infinite **series** continues indefinitely, such as 2+4+6+8+…, and its sum may or may not converge to a specific value, depending on the sequence's characteristics.
+
+  `
 },
 {
   title: "Common Types of Sequences",

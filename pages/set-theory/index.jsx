@@ -1013,7 +1013,7 @@ export async function getStaticProps() {
      **Complement**
      The complement of set A with respect to a universal set U includes all elements that are in U but not in A.
      Example:
-     U = {1, 2, 3, 4, 5}; A = {1, 2, 3}; A^c = {4, 5}.
+     U = {1, 2, 3, 4, 5}; A = {1, 2, 3}; $A^c = {4, 5}$.
 
      This comprehensive section starts by establishing the fundamental notions of set membership, which is crucial for understanding all subsequent relationships and operations between sets. 
      This foundation is then expanded upon with various types of set relations, all illustrated with clear examples to enhance understanding.          
