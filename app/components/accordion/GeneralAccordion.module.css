@@ -22,13 +22,14 @@
     justify-content: space-between;
     align-items: center;
     font-size:large;
+    min-height: 50px;
   }
   
   .accordion__label:hover {
     background-color: #e7e7e7;
   }
   
-  .chevron {
+  /* .chevron {
     border-style: solid;
     border-width: 0.25em 0.25em 0 0;
     content: '';
@@ -43,7 +44,31 @@
   
   .accordion__section.open .chevron {
     transform: rotate(-45deg);
-  }
+  } */
+
+
+  /* ... (keep all other styles unchanged) ... */
+
+.chevron {
+  border-style: solid;
+  border-width: 0.25em 0.25em 0 0;
+  content: '';
+  display: inline-block;
+  height: 0.45em;
+  position: relative;
+  transform: rotate(135deg);
+  vertical-align: top;
+  width: 0.45em;
+  transition: transform 0.3s ease;
+  color:gray;
+  margin-right: 50px;
+}
+
+.accordion__section.open .chevron {
+  transform: rotate(-45deg);
+}
+
+/* ... (keep all other styles unchanged) ... */
   
   .accordion__content {
     max-height: 0;
@@ -111,3 +136,96 @@
     opacity: 1;
     padding: 10px;
   }
+
+  .accordion {
+    width: 100%;
+  }
+  
+  .accordion__section {
+    border: 1px solid #e0e0e0;
+    margin-bottom: 10px;
+  }
+  
+  .accordion__label {
+    background-color: #f5f5f5;
+    padding: 10px 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .accordion__content {
+    padding: 15px;
+    display: none;
+  }
+  
+  .accordion__section.open .accordion__content {
+    display: block;
+  }
+  .accordion__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+  }
+  
+  .accordion__section.open .accordion__content {
+    max-height: 2000px; /* Adjust this value as needed */
+    padding: 20px;
+    transition: max-height 0.3s ease-in, padding 0.3s ease-in;
+  }
+  
+  /* .chevron {
+    transition: transform 0.3s ease;
+  }
+  
+  .accordion__section.open .chevron {
+    transform: rotate(180deg);
+  } */
+  
+  .related_items {
+    margin-top: 15px;
+  }
+  
+  
+
+.accordion__before,
+.accordion__after {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f9f9;
+  padding: 15px 20px;
+  margin: 10px 0;
+  border-left: 3px solid #3498db;
+  border-radius: 0 4px 4px 0;
+  width: 80%;
+  margin-left: 100px;
+}
+
+.accordion__after {
+  border-left-color: #2ecc71;
+  width: 80%;
+  margin-left: 100px;
+}
+
+
+.chevronBottom {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  transition: transform 0.3s ease;
+}
+
+.accordion__section:not(.open) .chevronBottom {
+  display: none;
+}
+
+.accordion__section.open .chevronBottom {
+  transform: rotate(0deg);
+}
+
+
+
+
+  

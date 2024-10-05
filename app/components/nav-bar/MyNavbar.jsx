@@ -344,8 +344,8 @@ function MyNavbar() {
                   <li><Link href="/visual-tools/matrix-multiplication">Matrix Multiplication</Link></li>
                   <li><Link href="/visual-tools/gauss-elimination">Gaussian Elimination</Link></li>
                   <li><Link href="/visual-tools/determinant-calculator">Determinant Calculator</Link></li>
-                  <li><Link href="/visual-tools/base-converter">Base Converter Visualazer</Link></li>
-                  <li><Link href="/combinatorics/permutations/permutations-visualizer">Permutations Visualazer</Link></li>
+                  <li><Link href="/visual-tools/base-converter">Base Converter Visualizer</Link></li>
+                  <li><Link href="/combinatorics/permutations/permutations-visualizer">Permutations Visualizer</Link></li>
                 </ul>
               )}
             </li>

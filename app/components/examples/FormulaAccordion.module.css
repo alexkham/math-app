@@ -1,0 +1,11 @@
+.accordion__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+  }
+  
+  .accordion__section.open .accordion__content {
+    max-height: 2000px; /* Adjust this value as needed */
+    padding: 20px;
+    transition: max-height 0.3s ease-in, padding 0.3s ease-in;
+  }

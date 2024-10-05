@@ -296,6 +296,133 @@
 </svg>
 `
 
+},
+
+{
+
+  "title":"Addition vs Multiplication C ounting Principles",
+  "svg":`
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 650">
+  <!-- Title -->
+  <text x="400" y="30" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#333">Multiplication vs Addition Principles</text>
+
+  <!-- Multiplication Principle -->
+  <text x="400" y="70" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#333">Multiplication Principle</text>
+  
+  <!-- Step 1 -->
+  <circle cx="200" cy="120" r="30" fill="#ff6b6b"/>
+  <text x="200" y="125" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#fff">2</text>
+  <text x="200" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">Shirts</text>
+  
+  <!-- Step 2 -->
+  <circle cx="350" cy="120" r="30" fill="#4ecdc4"/>
+  <text x="350" y="125" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#fff">3</text>
+  <text x="350" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">Pants</text>
+  
+  <!-- Step 3 -->
+  <circle cx="500" cy="120" r="30" fill="#45b7d1"/>
+  <text x="500" y="125" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#fff">2</text>
+  <text x="500" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">Shoes</text>
+  
+  <!-- Multiplication symbol and result -->
+  <text x="275" y="125" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#333">×</text>
+  <text x="275" y="150" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">and</text>
+  <text x="425" y="125" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#333">×</text>
+  <text x="425" y="150" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">and</text>
+  <text x="575" y="125" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#333">=</text>
+  <circle cx="650" cy="120" r="30" fill="#333"/>
+  <text x="650" y="125" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#fff">12</text>
+  <text x="650" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">Outfits</text>
+
+  <!-- Multiplication Explanation -->
+  <text x="400" y="200" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">Multiply when choosing one from each category</text>
+
+  <!-- Addition Principle -->
+  <text x="400" y="260" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#333">Addition Principle</text>
+  
+  <!-- Option 1 -->
+  <rect x="200" y="300" width="60" height="40" fill="#ff6b6b"/>
+  <text x="230" y="325" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#fff">3</text>
+  <text x="230" y="360" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">Red cars</text>
+  
+  <!-- Option 2 -->
+  <rect x="370" y="300" width="60" height="40" fill="#4ecdc4"/>
+  <text x="400" y="325" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#fff">2</text>
+  <text x="400" y="360" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">Blue cars</text>
+  
+  <!-- Option 3 -->
+  <rect x="540" y="300" width="60" height="40" fill="#45b7d1"/>
+  <text x="570" y="325" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#fff">4</text>
+  <text x="570" y="360" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">Green cars</text>
+  
+  <!-- Addition symbol and result -->
+  <text x="310" y="325" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#333">+</text>
+  <text x="310" y="350" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">or</text>
+  <text x="480" y="325" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#333">+</text>
+  <text x="480" y="350" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">or</text>
+  <text x="650" y="325" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#333">=</text>
+  <rect x="680" y="300" width="60" height="40" fill="#333"/>
+  <text x="710" y="325" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#fff">9</text>
+  <text x="710" y="360" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">Total cars</text>
+
+  <!-- Addition Explanation -->
+  <text x="400" y="420" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">Add when choosing one from any category</text>
+</svg>
+  `
+},
+{
+
+  "title":"Addition Counting Principle",
+  "svg":`
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#333">Addition Principle: Pick ONE Ball</text>
+
+  <!-- Group 1: Red Balls -->
+  <circle cx="150" cy="100" r="20" fill="#ff6b6b"/>
+  <circle cx="200" cy="100" r="20" fill="#ff6b6b"/>
+  <circle cx="250" cy="100" r="20" fill="#ff6b6b"/>
+  <text x="150" y="105" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#fff">1</text>
+  <text x="200" y="105" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#fff">2</text>
+  <text x="250" y="105" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#fff">3</text>
+  <text x="200" y="140" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#333">3 Red Balls</text>
+
+  <!-- Group 2: Turquoise Balls -->
+  <circle cx="400" cy="100" r="20" fill="#4ecdc4"/>
+  <circle cx="450" cy="100" r="20" fill="#4ecdc4"/>
+  <text x="400" y="105" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#fff">1</text>
+  <text x="450" y="105" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#fff">2</text>
+  <text x="425" y="140" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#333">2 Turquoise Balls</text>
+
+  <!-- Group 3: Blue Balls -->
+  <circle cx="600" cy="100" r="20" fill="#45b7d1"/>
+  <circle cx="650" cy="100" r="20" fill="#45b7d1"/>
+  <circle cx="700" cy="100" r="20" fill="#45b7d1"/>
+  <circle cx="750" cy="100" r="20" fill="#45b7d1"/>
+  <text x="600" y="105" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#fff">1</text>
+  <text x="650" y="105" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#fff">2</text>
+  <text x="700" y="105" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#fff">3</text>
+  <text x="750" y="105" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#fff">4</text>
+  <text x="675" y="140" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#333">4 Blue Balls</text>
+
+  <!-- Addition symbols and "or" labels -->
+  <text x="325" y="110" font-family="Arial, sans-serif" font-size="30" text-anchor="middle" fill="#333">+</text>
+  <text x="325" y="140" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#333">or</text>
+  <text x="525" y="110" font-family="Arial, sans-serif" font-size="30" text-anchor="middle" fill="#333">+</text>
+  <text x="525" y="140" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#333">or</text>
+
+  <!-- Result -->
+  <text x="400" y="200" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#333">=</text>
+  <circle cx="400" cy="250" r="30" fill="#333"/>
+  <text x="400" y="258" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#fff">9</text>
+  <text x="400" y="300" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#333">Total Possibilities</text>
+
+  <!-- Explanation -->
+  <text x="400" y="350" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#333">Add when choosing one ball from any group</text>
+  <text x="400" y="380" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#333">3 + 2 + 4 = 9 possibilities</text>
+  <text x="400" y="410" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#333" font-weight="bold">We are picking ONE single ball from all groups</text>
+</svg>
+  `
 }
 
 

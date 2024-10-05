@@ -3,6 +3,12 @@ import styles from '../../../../components/page-components/content-components/Co
 const summaries=[
 
     {
+
+      "before":`Before content`,
+      "after":`After component 
+       
+      This is rich text
+      `,
       "title":"Set Notation Summary",
       "category":"Terminology and Basic Concepts",
       "table":`
@@ -72,7 +78,7 @@ const summaries=[
        </div>      
       `,
       
-      "link":"www.webdevdata.net"
+      
     },
 
     {
@@ -127,7 +133,7 @@ const summaries=[
       </table>
       </div>      
       `,
-    
+          
 
     },
 
