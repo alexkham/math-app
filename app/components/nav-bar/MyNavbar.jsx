@@ -327,6 +327,7 @@ function MyNavbar() {
             <li><Link href="/">Home</Link></li>
             <li><Link href="/tables">Tables</Link></li>
             <li><Link href="/keyboard">Mathematical Keyboard</Link></li>
+            <li><Link href="/calculators/statistics-calculator">Statistics Calculator</Link></li>
             <li>
               <a onClick={() => setIsSequencesExpanded(!isSequencesExpanded)}>Sequences ▼</a>
               {isSequencesExpanded && (

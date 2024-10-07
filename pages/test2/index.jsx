@@ -3,6 +3,8 @@ import React from 'react'
 import '../pages.css'
 import FormulaAccordion from '@/app/components/examples/FormulaAccordion';
 import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionWrapper';
+import StatisticsCalculator from '@/app/components/calculators/statistics/StatisticsCalculator';
+import explanations from '@/app/components/calculators/statistics/explanations';
 
 export default function TestPage2() {
     const dummyData = {
@@ -150,6 +152,17 @@ export default function TestPage2() {
     <p>------------------------------------------------------------------</p>
     <br/>
     <FormulaAccordionWrapper data={formulaList} groupByField={'category'}/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <StatisticsCalculator explanations={explanations}/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     <br/>
     <br/>
     <br/>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import RootLayout from './layout'
 import GenericTable from '@/app/components/generic-table/GenericTable';

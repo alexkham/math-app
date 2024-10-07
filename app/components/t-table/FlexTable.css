@@ -1,0 +1,122 @@
+.t-container-outer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .select-container {
+    margin-bottom: 20px;
+  }
+  
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .flex-table-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .flex-table-header,
+  .flex-table-row {
+    display: flex;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .flex-table-cell {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    min-width: 80px;
+  }
+  
+  /* .header-cell {
+    font-weight: bold;
+    background-color: #f0f0f0;
+  } */
+
+  .header-cell {
+    background-color: #ffd814; /* Light grey background for visibility */
+    color: #333; /* Dark text color for contrast */
+    font-weight: bold; /* Make header text bold */
+    padding: 8px; /* Add padding for spacing */
+    border: 1px solid #ddd; /* Add border for definition */
+    text-align: center; /* Center the text */
+  }
+
+  
+  .first-column {
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+  
+  .tooltip-container {
+    position: relative;
+  }
+  
+  .tooltip {
+    visibility: hidden;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    width: fit-content;
+  }
+  
+  .tooltip-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  @media (max-width: 768px) {
+    .t-container-outer {
+      padding: 10px;
+    }
+    
+    .flex-table-cell {
+      min-width: 60px;
+      font-size: 0.9em;
+    }
+  }
+  .select-container{
+   width: fit-content;
+  
+
+  }
+
+  .input-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .input-container input{
+    width: fit-content;
+  }
+  
