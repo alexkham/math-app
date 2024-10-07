@@ -3,6 +3,8 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { Book, Calculator, PieChart, Sigma, Percent } from 'lucide-react';
 import styles from './tables.module.css';
+import MyNavbar from '@/app/components/nav-bar/MyNavbar';
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 
 const categoryIcons = {
   'Algebra': Book,
@@ -20,7 +22,13 @@ export default function Tables({ categories }) {
         <meta name="description" content="Explore our comprehensive collection of mathematical tables including algebra, calculus, trigonometry, probability, and arithmetics." />
         <link rel="canonical" href="https://www.learnmathclass.com/tables" />
       </Head>
+      <MyNavbar/>
+      <br/>
+      <br/>
+      <br/>
+     
       <div className={styles.container}>
+      <Breadcrumb/>
         <h1 className={styles.title}>Mathematical Tables</h1>
         <div className={styles.grid}>
           {categories.map((category) => {

@@ -5,6 +5,7 @@ import { Bell, TrendingUp } from 'lucide-react';
 import styles from './probability.module.css';
 import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 
 const probabilityTables = [
   {
@@ -34,7 +35,9 @@ export default function ProbabilityTables() {
       <br/>
       <br/>
       <br/>
+     
       <div className={styles.container}>
+        <Breadcrumb/>
         <h1 className={styles.title}>Probability Tables</h1>
         <div className={styles.grid}>
           {probabilityTables.map((table) => {
