@@ -164,7 +164,7 @@ export default function TestPage2() {
     <br/>
     <br/>
     <br/>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" className="w-full h-auto">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 620" className="w-full h-auto">
       <defs>
         <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" style={{stopColor:"#0d3d56", stopOpacity:1}} />

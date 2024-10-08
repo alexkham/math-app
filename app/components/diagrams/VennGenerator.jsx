@@ -2939,7 +2939,7 @@ const VennGenerator = () => {
     label: 'U',
     fillColor: '#f0f0f080',
     borderColor: '#000000',
-    strokeWidth: 1,
+    strokeWidth: 0.3,
     width: 380,
     height: 280
   };
@@ -3188,6 +3188,7 @@ const VennGenerator = () => {
 
   return (
     <div className={styles.container}>
+     
       <div className={styles.upperContainer}>
         <div className={styles.controlGroupLeft}>
           <div className={styles.universeToggle}>
