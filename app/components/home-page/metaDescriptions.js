@@ -22,7 +22,11 @@ const metaDescriptions= {
     'https://learnmathclass.com/visual-tools/base-converter': 'Visualize number base conversions with our interactive tool.', 
     'https://learnmathclass.com/visual-tools/determinant-calculator': 'Use our free determinant calculator with step-by-step solutions. Easily calculate matrix determinants for 2x2, 3x3, and larger matrices.',
     'https://learnmathclass.com/visual-tools/gauss-elimination': 'Use our free Gaussian elimination calculator to solve matrix equations, systems of linear equations, and perform Gauss-Jordan elimination. Step-by-step solutions provided.',
-    'https://learnmathclass.com/visual-tools/matrix-multiplication': 'Interactive matrix multiplication animation tool. Visualize and understand matrix multiplication step by step.'
+    'https://learnmathclass.com/visual-tools/matrix-multiplication': 'Interactive matrix multiplication animation tool. Visualize and understand matrix multiplication step by step.',
+    'https://learnmathclass.com/calculators/statistics-calculator':'Master statistics with our free online calculator at Learn Math Class. Ideal for students and educators. Covers descriptive stats, probability, hypothesis testing, and more. Enhance your math skills today.',
+    'https://learnmathclass.com/combinatorics/permutations':'Learn about Permutations ',
+    'https://learnmathclass.com/linear-algebra':'Enter the magical world of vectors, matrices and linear equations'
+
   }
 
   export default metaDescriptions;

@@ -1,0 +1,81 @@
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" className="w-full h-auto">
+      <defs>
+        <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style={{stopColor:"#0d3d56", stopOpacity:1}} />
+          <stop offset="100%" style={{stopColor:"#1a5c7a", stopOpacity:1}} />
+        </linearGradient>
+      </defs>
+      
+      <rect width="100%" height="100%" fill="url(#bg-gradient)"/>
+      
+      <text x="10" y="25" fontFamily="Arial, sans-serif" fontSize="11" fill="white">
+        c₁v₁ + c₂v₂ = c₁[v₁₁ v₁₂] + c₂[v₂₁ v₂₂] = [c₁v₁₁+c₂v₂₁ c₁v₁₂+c₂v₂₂]
+      </text>
+      
+      <path d="M 100 50 L 100 170 M 300 50 L 300 170" stroke="white" strokeWidth="2" fill="none"/>
+      
+      <text x="80" y="110" fontFamily="Arial, sans-serif" fontSize="14" fill="white" textAnchor="end">A =</text>
+      
+      <text fontFamily="Arial, sans-serif" fontSize="11" fill="white">
+        <tspan x="120" y="70">a₁₁</tspan>
+        <tspan x="165" y="70">a₁₂</tspan>
+        <tspan x="210" y="70">a₁₃</tspan>
+        <tspan x="255" y="70">⋯</tspan>
+        <tspan x="280" y="70">a₁ₙ</tspan>
+        
+        <tspan x="120" y="95">a₂₁</tspan>
+        <tspan x="165" y="95">a₂₂</tspan>
+        <tspan x="210" y="95">a₂₃</tspan>
+        <tspan x="255" y="95">⋯</tspan>
+        <tspan x="280" y="95">a₂ₙ</tspan>
+        
+        <tspan x="120" y="120">a₃₁</tspan>
+        <tspan x="165" y="120">a₃₂</tspan>
+        <tspan x="210" y="120">a₃₃</tspan>
+        <tspan x="255" y="120">⋯</tspan>
+        <tspan x="280" y="120">a₃ₙ</tspan>
+        
+        <tspan x="200" y="145">⋮</tspan>
+        
+        <tspan x="120" y="170">aₘ₁</tspan>
+        <tspan x="165" y="170">aₘ₂</tspan>
+        <tspan x="210" y="170">aₘ₃</tspan>
+        <tspan x="255" y="170">⋯</tspan>
+        <tspan x="280" y="170">aₘₙ</tspan>
+      </text>
+      
+      <text x="210" y="190" fontFamily="Arial, sans-serif" fontSize="11" fill="white">
+        Ax = [a₁₁x₁+a₁₂x₂; a₂₁x₁+a₂₂x₂]
+      </text>
+      
+      <text x="210" y="210" fontFamily="Arial, sans-serif" fontSize="11" fill="white">
+        Av = λv
+      </text>
+      
+      {/* <text x="210" y="230" fontFamily="Arial, sans-serif" fontSize="11" fill="white">v = [</text>
+      <text x="230" y="245" fontFamily="Arial, sans-serif" fontSize="11" fill="white">v₁</text>
+      <text x="230" y="260" fontFamily="Arial, sans-serif" fontSize="11" fill="white">v₂</text>
+      <text x="230" y="275" fontFamily="Arial, sans-serif" fontSize="11" fill="white">v₃</text>
+      <text x="210" y="290" fontFamily="Arial, sans-serif" fontSize="11" fill="white">]</text> */}
+
+<text x="170" y="260" class="math vector" font-size="18" fill="white" text-anchor="end">v</text>
+  <text x="180" y="260" font-size="18" fill="white">=</text>
+  
+
+  <path d="M 230 230 L 225 230 Q 222 230 222 233 V 307 Q 222 310 225 310 L 230 310" fill="none" stroke="white" stroke-width="1"/>
+  
+  <text x="240" y="240" class="math" font-size="16" fill="white">v₁</text>
+  <text x="240" y="270" class="math" font-size="16" fill="white">v₂</text>
+  <text x="240" y="300" class="math" font-size="16" fill="white">v₃</text>
+  
+  
+  <path d="M 260 230 L 265 230 Q 268 230 268 233 V 307 Q 268 310 265 310 L 260 310" fill="none" stroke="white" stroke-width="1"/>
+      
+      <text x="10" y="210" fontFamily="Arial, sans-serif" fontSize="11" fill="white">
+        B = [b₁₁ b₁₂; b₂₁ b₂₂], x = [x₁; x₂]
+      </text>
+      
+      <text x="10" y="235" fontFamily="Arial, sans-serif" fontSize="11" fill="white">
+        u = [u₁; u₂], v = [v₁; v₂]
+      </text>
+    </svg>

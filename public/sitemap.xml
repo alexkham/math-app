@@ -3,115 +3,151 @@
   
   <url>
     <loc>https://learnmathclass.com/combinatorics</loc>
-    <lastmod>2024-09-13T15:19:12.919Z</lastmod>
+    <lastmod>2024-10-08T02:26:18.138Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://learnmathclass.com/keyboard</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learnmathclass.com/linear-algebra</loc>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://learnmathclass.com/sequences</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://learnmathclass.com/set-theory</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://learnmathclass.com/tables</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learnmathclass.com/calculators/statistics-calculator</loc>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://learnmathclass.com/combinatorics/permutations</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learnmathclass.com/linear-algebra/matrix-multiplication</loc>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://learnmathclass.com/logic/truth-tables</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://learnmathclass.com/sequences/fibonacci-numbers</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://learnmathclass.com/sequences/prime-numbers</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learnmathclass.com/tables/arithmetics</loc>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learnmathclass.com/tables/probability</loc>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://learnmathclass.com/visual-tools/base-converter</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://learnmathclass.com/visual-tools/determinant-calculator</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://learnmathclass.com/visual-tools/gauss-elimination</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://learnmathclass.com/visual-tools/matrix-multiplication</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://learnmathclass.com/combinatorics/permutations/permutations-visualizer</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://learnmathclass.com/tables/arithmetics/Binary_Logarithms</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <loc>https://learnmathclass.com/tables/arithmetics/binary-logarithms</loc>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://learnmathclass.com/tables/arithmetics/Exponential_Table</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <loc>https://learnmathclass.com/tables/arithmetics/exponential-table</loc>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://learnmathclass.com/tables/arithmetics/Logarithms</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <loc>https://learnmathclass.com/tables/arithmetics/logarithms</loc>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://learnmathclass.com/tables/arithmetics/Natural_Logarithms</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <loc>https://learnmathclass.com/tables/arithmetics/natural-logarithms</loc>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://learnmathclass.com/tables/[category]/layout</loc>
-    <lastmod>2024-09-13T15:19:12.920Z</lastmod>
+    <loc>https://learnmathclass.com/tables/probability/normal-distribution</loc>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learnmathclass.com/tables/probability/t-distribution</loc>
+    <lastmod>2024-10-08T02:26:18.139Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
