@@ -14,9 +14,13 @@ export default function LogarithmTablePage() {
   return (
     <div className='tables-main'>
       <MyNavbar />
-      <br /><br /><br /><br />
-      <Breadcrumb />
+      <br />
+      <br />
+      <br />
+      
+     
       <div style={{position:'absolute', top:'100px', width:'1200px'}}>
+      <Breadcrumb />
         <h1 className='title' style={{marginTop:'-20px'}}>Logarithm Table</h1>
         <LogarithmTable />
       </div>
