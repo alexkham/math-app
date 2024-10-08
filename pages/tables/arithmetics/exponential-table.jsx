@@ -4,6 +4,7 @@ import React from 'react'
 import '../table.css'
 import '../../../app/globals.css'
 import ExponentialTable from '@/app/components/logarithm-table/ExponentialTable'
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 
 export default function ExponentialTablePage() {
   return (
@@ -15,6 +16,7 @@ export default function ExponentialTablePage() {
   
    <br></br>
    <br></br>
+   <Breadcrumb/>
    <div style={{position:'absolute',top:'100px',width:'1200px'}}>
    
    <ExponentialTable></ExponentialTable>

@@ -71,6 +71,41 @@
   cursor: pointer;
 }
 
+.nav .container ul.expanded {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background-color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.nav .container ul.expanded li {
+  text-align: center;
+  margin: 0;
+  padding: 10px;
+  width: 100%;
+  border-bottom: 1px solid #444;
+}
+
+.nav .container ul.expanded li:last-child {
+  border-bottom: none;
+}
+
+.nav .container ul.expanded a {
+  color: white;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .nav .container ul.expanded {
+    display: flex;
+  }
+}
+
+
 @media screen and (max-width: 768px) {
   .nav ul {
     display: none;

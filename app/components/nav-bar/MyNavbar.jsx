@@ -341,10 +341,11 @@ function MyNavbar() {
             <li>
               <a onClick={() => setIsVisualToolsExpanded(!isVisualToolsExpanded)}>Visual Tools ▼</a>
               {isVisualToolsExpanded && (
-                <ul>
+                <ul className='ul'>
                   <li><Link href="/visual-tools/matrix-multiplication">Matrix Multiplication</Link></li>
                   <li><Link href="/visual-tools/gauss-elimination">Gaussian Elimination</Link></li>
                   <li><Link href="/visual-tools/determinant-calculator">Determinant Calculator</Link></li>
+                  <li><Link href="/visual-tools/matrix-transposition">Matrix Transposition Calculator</Link></li>
                   <li><Link href="/visual-tools/base-converter">Base Converter Visualizer</Link></li>
                   <li><Link href="/combinatorics/permutations/permutations-visualizer">Permutations Visualizer</Link></li>
                 </ul>

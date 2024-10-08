@@ -4,6 +4,7 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../table.css'
 import '../../../app/globals.css'
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 
 export default function LogarithmTablePage() {
   return (
@@ -15,6 +16,7 @@ export default function LogarithmTablePage() {
   
    <br></br>
    <br></br>
+   <Breadcrumb/>
    <div style={{position:'absolute',top:'100px',width:'1200px'}}>
    
    <LogarithmTable></LogarithmTable>

@@ -5,6 +5,7 @@ import React from 'react'
 import '../table.css'
 import '../../../app/globals.css'
 import Base2LogarithmTable from '@/app/components/logarithm-table/LogarithmBase2Table'
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 
 
 export default function BinaryLogarithmTablePage() {
@@ -17,6 +18,7 @@ export default function BinaryLogarithmTablePage() {
   
    <br></br>
    <br></br>
+   <Breadcrumb/>
    <div style={{position:'absolute',top:'100px',width:'1200px'}}>
    
    <Base2LogarithmTable></Base2LogarithmTable>

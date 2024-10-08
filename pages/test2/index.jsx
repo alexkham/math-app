@@ -5,6 +5,7 @@ import FormulaAccordion from '@/app/components/examples/FormulaAccordion';
 import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionWrapper';
 import StatisticsCalculator from '@/app/components/calculators/statistics/StatisticsCalculator';
 import explanations from '@/app/components/calculators/statistics/explanations';
+import MyNavbar2 from '@/app/components/nav-bar2/MyNavbar2';
 
 export default function TestPage2() {
     const dummyData = {
@@ -127,6 +128,10 @@ export default function TestPage2() {
 
   return (
     <>
+    <MyNavbar2/>
+    <br/>
+    <br/>
+    <br/>
     <h1>Test Page 2 </h1>
     <br/>
     <br/>
