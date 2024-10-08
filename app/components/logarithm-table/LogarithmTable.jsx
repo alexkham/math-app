@@ -216,8 +216,8 @@ const handleCalculateClick = () => {
           onChange={handleInputChange}
           placeholder="Enter a value"
         />
-        <button onClick={handleCalculateClick}>Calculate</button>
-        <button style={{backgroundColor:'gray'}} onClick={resetAll}>Reset</button>
+        <button className='calculate-btn' onClick={handleCalculateClick}>Calculate</button>
+        <button className='reset-btn' style={{backgroundColor:'gray'}} onClick={resetAll}>Reset</button>
         </div>
         <br></br>
         <hr></hr>

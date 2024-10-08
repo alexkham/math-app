@@ -12,7 +12,7 @@ const arithmeticTables = [
     name: 'Logarithms (Base 10)',
     description: 'Standard logarithmic table with explanations and usage guide.',
     icon: LogIn,
-    path: '/tables/arithmetics/logarithms'
+    path: '/tables/arithmetics/logarithm'
   },
   {
     name: 'Natural Logarithms',

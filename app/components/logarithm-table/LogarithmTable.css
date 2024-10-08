@@ -164,6 +164,27 @@
     flex-direction: row;
     justify-content: center;
   }
+  .calculate-btn{
+    background-color: blue;
+    color: white;
+    width: 100px;
+    height: 35px;
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+    margin-right: 5px;
+  }
+  .reset-btn{
+    background-color: #9a9aa7;
+    color: white;
+    width: 100px;
+    height: 35px;
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+    margin-right: 5px;
+
+  }
  
   
   
