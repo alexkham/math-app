@@ -10,3 +10,8 @@
       margin: 1rem 0;
     }
   }
+
+  .divy{
+    display: flex;
+    flex-direction: row;
+  }

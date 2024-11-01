@@ -9,6 +9,7 @@ import TableOfContents from '@/app/components/page-components/table-of-contents/
 import SecondaryNavbar from '@/app/components/nav-bar/SecondaryNavbar';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import ContentBlocks from '@/app/components/page-components/content-components/ContentBlocks';
+import '../pages.css'
 
 
 // export async function getStaticProps() {
@@ -165,8 +166,8 @@ export default function SequencesPage({sequences,tocItems}) {
      mode={"siblings"} 
      alignment='left' 
      title=' '
-     verticalPosition='15%'
-     backgroundColor='red'
+     verticalPosition='40%'
+     backgroundColor='blue'
      height={'60px'}
      width={'50px'}
      
@@ -180,7 +181,7 @@ export default function SequencesPage({sequences,tocItems}) {
    ></SecondaryNavbar>
    {/* width={'50px'} */}
     <br></br>
-   <h1>Sequences Main Page</h1>
+   <h1 className='title'>Sequences Main Page</h1>
   <TableOfContents tocItems={tocItems} showNumbers={false}></TableOfContents>
   <ContentBlocks tocItems={tocItems}></ContentBlocks>
    <br></br>

@@ -6,6 +6,35 @@ import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionW
 import StatisticsCalculator from '@/app/components/calculators/statistics/StatisticsCalculator';
 import explanations from '@/app/components/calculators/statistics/explanations';
 import MyNavbar2 from '@/app/components/nav-bar2/MyNavbar2';
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
+// import { Search, LayoutDashboard, FileText, Settings, X } from 'lucide-react';
+import { Search, SearchIcon, VariableIcon } from 'lucide-react';
+import UnitCircleTrigVisualizer from '@/app/components/trigo-calculator/UnitCircleVisualizer';
+import MatrixMultiplicationVisualizer from '@/app/components/matrix-multiplication/MatrixMultiplicationVisualizer';
+import combinatoricsFormulaList from '@/app/api/db/formulas/combinatorics/combinatoricsFormulas';
+import MovingBox from '@/app/components/page-components/section/MovingBox';
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents';
+import Sections from '@/app/components/page-components/section/Sections';
+import diagrams from '@/app/api/db/svg/combinatorics.js/svg';
+import SVGSlider from '@/app/components/svg/SVGSlider';
+import VariationsVisualizer from '@/app/components/combinatorics/VariationsVisualizer';
+import VariationsVisualizer2x3 from '@/app/components/combinatorics/VariationsVisualizer2x3';
+import VariationsVisualizer2x4 from '@/app/components/combinatorics/VariationsVisualizer2x4';
+import VariationsVisualizer3x2 from '@/app/components/combinatorics/VariationsVisualizer3x2';
+import VariationsVisualizer3x3 from '@/app/components/combinatorics/VariationsVisualizer3x3';
+import VerticalScrollingFormulaWidget from '@/app/components/examples/VerticalScrollingFormulaWidget';
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
+import ChevronTimeline from '@/app/components/timeline/ChevronTimeline';
+import FlexibleLayout from '@/app/components/layouts/FlexibleLayout';
+import JointProbabilityTable from '@/app/components/probability/JointProbabilityTable';
+import ControlPanel from '@/app/components/calculators/ControlPanel';
+import ControlPanel2 from '@/app/components/calculators/ControlPanel2';
+import CalculationsDisplay from '@/app/components/calculators/CalculationsDisplay';
+import ProbabilityCalculator from '@/app/components/calculators/probability/ProbabilityCalculator';
+import { mainSidebarMenu } from '@/app/components/nav-bar/mainSidebarMenu';
+import { Book, Calculator, PieChart, Sigma, Percent } from 'lucide-react';
+import CardsGroup from '@/app/components/cards/CardsGroup';
+
 
 export default function TestPage2() {
     const dummyData = {
@@ -125,18 +154,360 @@ export default function TestPage2() {
         }
       ];
 
+const CustomSvgIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+  );
+
+  const CustomSearch=()=>(
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+
+  )
+  
+
+
+
+      const sidebarItems = [
+  { id: 1, icon: CustomSearch, tooltip: 'Search', content: 'SearchComponent' },
+  // { id: 2, icon: LayoutDashboard, tooltip: 'Dashboard', content:' DashboardComponent' },
+  // { id: 3, icon: FileText, tooltip: 'Files', content: 'FilesComponent' },
+  // { id: 4, icon: Settings, tooltip: 'Settings', content: 'SettingsComponent' },
+  { id: 6, icon: CustomSvgIcon, tooltip: 'Settings', content:' SettingsComponent' },
+  // { id: 5, icon: Settings, tooltip: 'Settings2', content:  `Settings panel goes here.\n\nEmpty lines are preserved.
+
+  //      Indentation is also kept.` },
+];
+
+
+const matrix1 = [
+  [1, 2],
+  [3, 4]
+];
+
+const matrix2 = [
+  [5, 6],
+  [7, 8]
+];
+
+const sections = [
+  { id: 'introduction',background:'none', title: 'Introduction', content: 'This is the introduction to our amazing content.' },
+  { id: 'chapter1',background:'none', title: 'Chapter 1 this is very long title', content: 'Chapter 1 discusses the fundamentals of our topic.' },
+  { id: 'chapter2', title: 'Chapter 2', content: 'In Chapter 2, we delve deeper into advanced concepts.' },
+  { id: 'chapter3', title: 'Chapter 3', content: 'Chapter 3 explores practical applications of our subject matter.' },
+  { id: 'chapter4', title: 'Chapter 4 this one is even longer ', content: 'In Chapter 4, we examine case studies and real-world examples.' },
+  { id: 'conclusion', title: 'Conclusion',pageLink:"/combinatorics", content: `We wrap up with some final thoughts and future directions.
+    \n
+    
+    svhvhvhdvhhvhb` },
+   { id: 'section1',
+    title: 'Section 1',
+    background: '#f0f0f0',
+    icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>},
+          {
+            id: 'section2',
+            title: 'Section 2',
+            background: '#e0e0e0',
+            icon: <Search/> // Imported SVG component
+          },
+          {
+            id: 'section1',
+            title: 'Section 1',
+            background: '#f0f0f0',
+            icon: '/probability.jpg' // URL string
+          },
+];
+
+
+// const sections = [
+//   { id: 'section1', title: 'Section 1' },
+//   { id: 'section2', title: 'Section 2' },
+//   { id: 'section3', title: 'Section 3' },
+//   { id: 'section4', title: 'Section 4' },
+//   { id: 'section5', title: 'Section 5' },
+//   { id: 'section6', title: 'Section 6' },
+//   // Add more sections as needed
+// ];
+
+console.log('Combinatorics Formulas '+combinatoricsFormulaList);
+
+
+
+
+const menuStructure = [
+  {
+    id: 'home',
+    type: 'link',
+    label: 'Home',
+    href: '/'
+  },
+  {
+    id: 'placeholder',
+    type: 'link',
+    label: '',
+    href: ''
+  }
+  ,
+  {
+    id: 'sections',
+    type: 'megamenu',
+    label: 'Featured Topics',
+    href: '',
+    columns: [
+      {
+        items: [
+          { label: 'Combinatorics', href: '/combinatorics' },
+          { label: 'Set Theory', href: '/set-theory' },
+          { label: 'Sequences', href: '/sequences' },
+          { label: 'Linear Algebra', href: '/linear-algebra' },
+          { label: 'Probability', href: '/probability' },
+          { label: 'Logic', href: '/logic' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'placeholder',
+    type: 'link',
+    label: '',
+    href: ''
+  },
+ 
+  {
+    id: 'resources',
+    type: 'megamenu',
+    label: 'Resources',
+    href: '',
+    columns: [
+      {
+        title: 'Visual Tools',
+        href: '',
+        items: [
+          { label: 'Base Converter', href: '/visual-tools/base-converter' },
+          { label: 'Determinant Visual Calculator', href: '/visual-tools/determinant-calculator' },
+          { label: 'Gauss Elimination Calculator', href: '/visual-tools/gauss-eliminator' },
+          { label: 'Matrix Multiplication Visualizer', href: '/visual-tools/matrix-multiplication' },
+          { label: 'Matrix Transposition', href: '/visual-tools/matrix-transposition' }
+        ]
+      },
+      {
+        title: 'Calculators',
+        href: '',
+        items: [
+          { label: 'Statistics Calculator', href: '/calculators/statistics-calculator' },
+          
+        ]
+      },
+     
+      {
+        title: 'Tables',
+        href: '/tables',
+        items: [
+          { label: 'Probability', href: '/tables/probability' },
+          { label: 'Arithmetics', href: '/tables/arithmetics' }
+        ]
+      },
+      {
+        title: 'Other Tools',
+        href: '',
+        items: [
+          { label: 'Mathematical Keyboard', href: '/keyboard' },
+          
+        ]
+      }
+    ]
+  },
+ 
+  
+  {
+    id: 'placeholder',
+    type: 'link',
+    label: '',
+    href: ''
+  },
+];
+
+
+const calculationSections = [
+  {
+    id: 'selectAll',
+    title: 'Select All',
+    explanation: 'Select any combination of operations from all available categories',
+    buttons: []
+  },
+  {
+    id: 'unions',
+    title: 'Unions',
+    explanation: 'Calculate union probabilities between events A and B',
+    buttons: [
+      { id: 'AuB', label: 'P(A ∪ B)' },
+      { id: 'AuNotB', label: 'P(A ∪ B̄)' },
+      { id: 'NotAuB', label: 'P(Ā ∪ B)' },
+      { id: 'NotAuNotB', label: 'P(Ā ∪ B̄)' }
+    ]
+  },
+  {
+    id: 'conditional',
+    title: 'Conditional',
+    explanation: 'Calculate conditional probabilities between events A and B',
+    buttons: [
+      { id: 'AgivenB', label: 'P(A|B)' },
+      { id: 'AgivenNotB', label: 'P(A|B̄)' },
+      { id: 'BgivenA', label: 'P(B|A)' },
+      { id: 'BgivenNotA', label: 'P(B|Ā)' }
+    ]
+  },
+  {
+    id: 'independence',
+    title: 'Independence',
+    explanation: 'Test for independence between events A and B',
+    buttons: [
+      { id: 'indepTest', label: 'Independence Test' },
+      { id: 'correlation', label: 'Correlation Analysis' }
+    ]
+  },
+  {
+    id: 'odds',
+    title: 'Odds',
+    explanation: 'Calculate odds and ratios for events A and B',
+    buttons: [
+      { id: 'oddsA', label: 'Odds of A' },
+      { id: 'oddsB', label: 'Odds of B' },
+      { id: 'oddsRatio', label: 'Odds Ratio' }
+    ]
+  }
+];
+
+
+const mockProbabilities = {
+  aAndB: 0.25,
+  aAndNotB: 0.25,
+  notAAndB: 0.15,
+  notAAndNotB: 0.35
+};
+
+const mockSelectedOperations = [
+  'AuB',
+  'AgivenB',
+  'oddsA'
+];
+
+
+const cardItems = [
+  {
+    category: 'Algebra',
+    icon: Book,
+    // image: '/path/to/image.jpg', // Optional
+    subcategories: [
+      { name: 'Linear Equations', href: '/tables/algebra/linear-equations' },
+      { name: 'Quadratic Equations', href: '/tables/algebra/quadratic-equations' },
+    ]
+  },
+  {
+    category: 'Probability',
+    icon: Percent,
+    // No subcategories, will show simple link
+  },
+  {
+    category: 'Probability',
+    icon: Percent,
+    // No subcategories, will show simple link
+  },
+  {
+    category: 'Probability',
+    icon: Percent,
+    // No subcategories, will show simple link
+  },
+  {
+    category: 'Arithmetics',
+    icon: Calculator,
+    // image: '/combinatorics.jpg', // Will show image instead of icon
+    subcategories: [
+      { name: 'Addition', href: '/tables/arithmetics/addition' },
+      { name: 'Multiplication', href: '/tables/arithmetics/multiplication' },
+    ]
+  }
+];
+
 
   return (
     <>
-    <MyNavbar2/>
+    {/* <MyNavbar2/> */}
+    <GenericNavbar />
     <br/>
     <br/>
     <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+   
+    <br/>
+   <OperaSidebar 
+   side='right'
+   topOffset='60px' 
+    sidebarWidth='45px'
+     panelWidth='200px'
+     sidebarItems={mainSidebarMenu}
+     iconColor='white'
+     panelBackgroundColor='#f2f2f2'/> 
     <h1>Test Page 2 </h1>
+    <Search/>
     <br/>
+    {/* <MovingBox/> */}
+    <br/>
+    <br/>
+     <SectionTableOfContents sections={sections} title='In This Section' />
+    <br/>
+    {/* <div className='divy' style={{marginLeft:'10px',marginRight:'40px'}}>
+ <SVGSlider
+  diagrams={diagrams}
+  title="My SVG Slider"
+  // explanation="This slider showcases various SVG diagrams."
+  link="https://example.com/learn-more"/>
+ <div style={{width:'50%',height:'100%',backgroundColor:'lightgray'}}>
+  <div style={{display:'flex',flexDirection:'row'}}>
+ <VerticalScrollingFormulaWidget
+  formulaData={combinatoricsFormulaList}
+    moreFormulasLink={'/combinatorics'}
+    title='Combinatorics Formulas'
+ />
+    
+ <div  
+  style={{backgroundColor:' #3faddf',width:'50%',color:'white',
+  textAlign:'center',color:'white',padding:'50px',margin:'1px',borderRadius:'3px'}}>Some Div</div>
+ </div>
+ <div  
+  style={{backgroundColor:' #5e35b1',width:'100%',color:'white',
+  height:'140px',borderRadius:'5px',margin:'2px'}}>Some Div</div>
+ </div>
+ </div> */}
+    <br/>
+    {/* <div style={{backgroundColor:'red',width:'100%',height:'500px'}}>Slider</div> */}
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    {/* <CardsGroup items={cardItems}/> */}
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+   <Sections sections={sections}/> 
     <br/>
     <FormulaWidget data={dummyData}/>
     <br/>
+    <SearchIcon/>
     <br/>
     <br/>
     <FormulaAccordion data={gravitationalForce}/>
@@ -253,6 +624,241 @@ export default function TestPage2() {
     <br/>
     <br/>
     <br/>
+    <br/>
+    <div style={{marginLeft:'150px'}}>
+    <UnitCircleTrigVisualizer/>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+   
+<MatrixMultiplicationVisualizer matrix1={matrix1} matrix2={matrix2} />
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <FormulaAccordionWrapper data={combinatoricsFormulaList} groupByField={'category'}/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div className='divy' style={{marginLeft:'30px'}}>
+     <SVGSlider
+      diagrams={diagrams}
+      title="My SVG Slider"
+      explanation="This slider showcases various SVG diagrams."
+      link="https://example.com/learn-more"/>
+     <div style={{width:'100%',height:'100%',backgroundColor:'lightgray'}}>
+      <div style={{display:'flex',flexDirection:'row'}}>
+     <VerticalScrollingFormulaWidget
+      formulaData={combinatoricsFormulaList}
+        moreFormulasLink={'/combinatorics'}
+        title='Combinatorics Formulas'
+     />
+    
+     <div  
+      style={{backgroundColor:' #fb4834',width:'50%',color:'white',
+      textAlign:'center',color:'black',padding:'50px',margin:'1px',borderRadius:'3px'}}>Some Div</div>
+     </div>
+     <div  
+      style={{backgroundColor:' #5e35b1',width:'100%',color:'white',
+      height:'140px',borderRadius:'5px',margin:'2px'}}>Some Div</div>
+     </div>
+     </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <VariationsVisualizer/>
+    <br/>
+    <br/>
+    <br/>
+    <VariationsVisualizer2x3/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <VariationsVisualizer2x4/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <VariationsVisualizer3x2/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  <VariationsVisualizer3x3/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <VerticalScrollingFormulaWidget
+    formulaData={combinatoricsFormulaList}
+    moreFormulasLink={'/combinatorics'}/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <ChevronTimeline/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+       <div className='divy' style={{marginLeft:'10px',marginRight:'45px'}}>
+ <SVGSlider
+  diagrams={diagrams}
+  title="My SVG Slider"
+  explanation="This slider showcases various SVG diagrams."
+  link="https://example.com/learn-more"/>
+ <div style={{width:'70%',height:'100%',backgroundColor:'lightgray'}}>
+  <div style={{display:'flex',flexDirection:'row'}}>
+ <VerticalScrollingFormulaWidget
+  formulaData={combinatoricsFormulaList}
+    moreFormulasLink={'/combinatorics'}
+    title='Combinatorics Formulas'
+ />
+    
+ <div  
+  style={{backgroundColor:' #3faddf',width:'50%',color:'white',
+  textAlign:'center',color:'white',padding:'50px',margin:'1px',borderRadius:'3px'}}>Some Div</div>
+ </div>
+ <div  
+  style={{backgroundColor:' #5e35b1',width:'100%',color:'white',
+  height:'140px',borderRadius:'5px',margin:'2px'}}>Some Div</div>
+ </div>
+ </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <FlexibleLayout
+ 
+  svgSliderProps={{
+    diagrams: diagrams,
+    title: "Custom SVG Slider",
+    explanation: "Your explanation here",
+    link: "https://learnmathclass.com",
+    width:'500'
+    
+    // Any other props the SVGSlider accepts
+  }}
+  formulaWidgetProps={{
+    formulaData: combinatoricsFormulaList,
+    moreFormulasLink: '/combinatorics',
+    title: 'Your Formula Title',
+    // Any other props the VerticalScrollingFormulaWidget accepts
+  }}
+  topRightDivStyle={{
+   
+   
+    // Any other styles you want to apply
+  }}
+  topRightCardProps={{
+    title: "Card Title",
+    content: "This is the card content.",
+    icon: SearchIcon, // Optional
+    link: "/some-page" // Optional
+  }}
+  bottomDivStyle={{
+    // backgroundColor: 'green',
+    // height: '200px',
+    // Any other styles you want to apply
+    color:'orange'
+  }}
+
+  bottomCards={[
+    { title: "Card 1", content: "Content 1", link: "/link1" },
+    { title: "Card 2", content: "Content 2", link: "/link2" },
+    { title: "Card 3", content: "Content 3", link: "/link3" }
+  ]}
+>
+  <SVGSlider />
+  <VerticalScrollingFormulaWidget />
+</FlexibleLayout>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    {/* <div style={{transform:'scale(0.98)'}}> */}
+    <JointProbabilityTable/>
+    {/* </div> */}
+    
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <ControlPanel/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    {/* <div style={{width:'50%'}}> */}
+    <ControlPanel2 width='700px' sections={calculationSections}/>
+    {/* </div> */}
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <CalculationsDisplay
+     probabilities={mockProbabilities}
+     selectedOperations={mockSelectedOperations}
+     width="400px"/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div style={{width:'95%'}}>
+    <ProbabilityCalculator sections={calculationSections}/>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    
     <br/>
     <br/>
     <br/>

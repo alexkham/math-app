@@ -1,0 +1,36 @@
+/* .box {
+    width: 200px;
+    height: 300px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px 0;
+    transition: all 0.3s ease;
+  }
+  
+  .sticky {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+  } */
+
+  .box {
+    width: 80%;
+    max-width: 600px;
+    height: 300px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px auto;
+    transition: all 0.3s ease;
+  }
+  
+  .sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    margin: 0;
+    overflow-y: auto;
+  }

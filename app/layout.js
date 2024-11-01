@@ -3,7 +3,9 @@ import './globals.css'
 import GoHomeButton from './components/GoHomeButton'
 import GoBackButton from './components/GoBackButton'
 import ScrollUpButton from './components/scroll-up-button/ScrollUpButton'
-import MyNavbar from './components/nav-bar/MyNavbar'
+import MyNavbar from './components/nav-bar/MyNavbar';
+import { mainMenuStructure } from './components/nav-bar2/mainMenu'
+import GenericNavbar from './components/nav-bar2/GenericNavbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +18,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body >
-        <MyNavbar></MyNavbar>
+        <GenericNavbar />
+        {/* <MyNavbar></MyNavbar> */}
       {/* <nav className='nav-bar'>
           <GoHomeButton className={'fixed-button'}/>
           

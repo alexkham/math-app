@@ -29,6 +29,9 @@ import React from 'react'
 import StatisticsCalculator from '@/app/components/calculators/statistics/StatisticsCalculator'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import '../../pages.css'
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 
 export default function StatisticsCalculatorPage({ explanations }) {
   return (
@@ -44,13 +47,25 @@ export default function StatisticsCalculatorPage({ explanations }) {
     <meta property="og:url" content="https://learnmathclass.com/calculators/statistics-calculator" />
     <link rel="canonical" href="https://learnmathclass.com/calculators/statistics-calculator" />
     </Head>
-      <MyNavbar/>
+      <GenericNavbar/>
       <br/>
       <br/>
       <br/>
-      <h1 className='title'>Statistics Calculator</h1>
       <br/>
+      <OperaSidebar 
+        side='right'
+        topOffset='60px' 
+        sidebarWidth='45px'
+        panelWidth='200px'
+        
+        iconColor='white'
+        panelBackgroundColor='#f2f2f2'/> 
+      <Breadcrumb/>
+      <h1 className='title' style={{marginTop:'-20px',marginBottom:'-50px'}}>Statistics Calculator</h1>
+     
+      <div style={{transform:'scale(0.85)'}}>
       <StatisticsCalculator explanations={explanations}/>
+      </div>
       <br/>
       <br/>
       <br/>

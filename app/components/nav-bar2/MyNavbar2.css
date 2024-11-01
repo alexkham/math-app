@@ -7,15 +7,17 @@
 .navbar {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 10;
   right: 0;
   border-bottom: solid 1px grey;
   margin-left: 20px;
   margin-right: 20px;
   transition: all 0.3s ease-in-out;
   min-height: 60px;
-  background-color: white;
+  /* background-color: white; */
   z-index: 11000000001;
+  width: 100%;
+  padding-left: 50px;
 }
 
 .navbar-container {
@@ -235,4 +237,38 @@
     margin-left: 0;
     width: 100%;
   }
+}
+
+/* ... (existing styles) ... */
+
+/* .chevron-down {
+  display: inline-block;
+  margin-left: 5px;
+  font-size: 0.7em;
+  vertical-align: middle;
+}
+
+/* Optional: Animate the chevron on hover */
+/* .megamenu-item:hover .chevron-down {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+} */ 
+
+
+/* ... (existing styles) ... */
+
+.navbar-item {
+  display: flex;
+  align-items: center;
+}
+
+.chevron-down {
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  transition: transform 0.3s ease;
+}
+
+.megamenu-item:hover .chevron-down {
+  transform: rotate(180deg);
 }
