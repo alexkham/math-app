@@ -83,6 +83,8 @@ import GaussJordanCalculator from '@/app/components/matrix-multiplication/GaussJ
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import '../../pages.css';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 
 export default function GaussianEliminationCalculatorPage() {
   return (
@@ -96,10 +98,19 @@ export default function GaussianEliminationCalculatorPage() {
         <meta name="keywords" content="solve matrix equation, matrix equation calculator, solve a system of equations, gauss jordan elimination calculator, solve matrix calculator, solving a linear equation calculator, solving a system of linear equations calculator, gaussian elimination calculator, solve system of equations matrix calculator, echelon method calculator" />
       </Head>
 
-      <MyNavbar />
+    <GenericNavbar/>
       <br></br>
       <br></br>
       <br></br>
+      <br></br>
+      <OperaSidebar 
+      side='right'
+      topOffset='65px' 
+      sidebarWidth='45px'
+      panelWidth='200px'
+      
+      iconColor='white'
+      panelBackgroundColor='#f2f2f2'/> 
       <Breadcrumb></Breadcrumb>
 
       <main className="container">

@@ -24,6 +24,8 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import React from 'react';
 import '../../pages.css';
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 
 const MyNavbar = dynamic(() => import('@/app/components/nav-bar/MyNavbar'), { ssr: false });
 const ScrollUpButton = dynamic(() => import('@/app/components/scroll-up-button/ScrollUpButton'), { ssr: false });
@@ -44,10 +46,19 @@ export default function MatrixMultiplicationPage() {
         <meta property="og:image" content="https://yourwebsite.com/images/matrix-multiplication-og.jpg" />
         <link rel="canonical" href="https://learnmathclass.com/visual-tools/matrix-multiplication" />
       </Head>
-      <MyNavbar />
+      <GenericNavbar/>
       <br></br>
       <br></br>
       <br></br>
+      <br></br>
+      <OperaSidebar 
+      side='right'
+      topOffset='65px' 
+      sidebarWidth='45px'
+      panelWidth='200px'
+      
+      iconColor='white'
+      panelBackgroundColor='#f2f2f2'/> 
       <main className="container">
         <Breadcrumb />
         <h1 className="title">Matrix Multiplication Animation</h1>
