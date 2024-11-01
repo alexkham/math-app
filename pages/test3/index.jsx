@@ -59,7 +59,7 @@ const testSections = [
       content: [
         'Some Text',
         // `<div>`,
-      <VerticalScrollingFormulaWidget formulaData={combinatoricsFormulaList} />,
+      <VerticalScrollingFormulaWidget key={"formula-widget"} formulaData={combinatoricsFormulaList} />,
     //   `<h1>hello</h1>`,
    
     ]
