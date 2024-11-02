@@ -140,6 +140,8 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 //import operatorDescriptions from '@/app/components/logic-calculator/operatorDescriptions';
 import styles from './TruthTablesPage.module.css';
 import ReactMarkdown from 'react-markdown';
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 
 // 
 
@@ -182,12 +184,23 @@ const TruthTablesPage = ({ operatorDescriptions }) => {
         <meta name="twitter:description" content="Generate dynamic truth tables for logical expressions. Learn about logical operators and Boolean algebra with our interactive tool." />
         <meta name="twitter:image" content="https://learnmathclass.com/images/truth-table-generator.jpg" />
       </Head>
-      <MyNavbar />
+     <GenericNavbar/>
       <br></br>
       <br></br>
+      <br></br>
+      <OperaSidebar 
+      side='right'
+      topOffset='65px' 
+      sidebarWidth='45px'
+      panelWidth='200px'
+      
+      iconColor='white'
+      panelBackgroundColor='#f2f2f2'/> 
       <main className={styles.main}>
         <h1 className={styles.title}>Dynamic Truth Table Generator</h1>
+        <div style={{width:'97%'}}>
         <LogicCalculator />
+        </div>
         <div id="operator-explanations" className={styles.explanations}>
           {Object.entries(operatorDescriptions).map(([symbol, data]) => (
             <>
