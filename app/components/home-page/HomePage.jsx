@@ -184,7 +184,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, ChevronLeft, SquareChevronUp, Book } from 'lucide-react';
 import styles from './HomePage.module.css';
-import { formatTitle } from '@/app/utils/utils-functions';
+import { capitalizeWords, formatTitle } from '@/app/utils/utils-functions';
 import Image from 'next/image';
 import { lora, roboto } from '../../utils/fonts'
 
@@ -212,9 +212,9 @@ const HomePage = ({ categorizedUrls, metaDescriptions }) => {
   const heroUrls = allUrls.slice(0, 5);
   const featuredUrls = allUrls.slice(5, 9);
 
-  useEffect(() => {
-    console.log('Meta Descriptions :  ' + metaDescriptions)
-  })
+  // useEffect(() => {
+  //   console.log('Meta Descriptions :  ' + metaDescriptions)
+  // })
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -235,7 +235,7 @@ const HomePage = ({ categorizedUrls, metaDescriptions }) => {
         </div>
         <div className={styles.newsCardContent}>
           <p className={`${styles.newsDescription} body-text`}>
-            {metaDescriptions[url.trim()] || 'No description available at the Moment'}
+            {capitalizeWords(metaDescriptions[url.trim()]) || 'No description available at the Moment'}
           </p>
           <a href={url} className={`${styles.newsCardLink} body-text-small`}>Learn More</a>
         </div>

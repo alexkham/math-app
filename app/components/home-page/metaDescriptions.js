@@ -26,7 +26,10 @@ const metaDescriptions= {
     'https://learnmathclass.com/calculators/statistics-calculator':'Master statistics with our free online calculator at Learn Math Class. Ideal for students and educators. Covers descriptive stats, probability, hypothesis testing, and more. Enhance your math skills today.',
     'https://learnmathclass.com/combinatorics/permutations':'Learn about what Permutations are, different kinds of Permutations, ways to distinguish between them. Understand Permutations formulas and ways to calculate outcomes in every case. ',
     'https://learnmathclass.com/linear-algebra':'Enter the magical world of vectors, matrices and linear equations',
-    'https://learnmathclass.com/linear-algebra/matrix-multiplication':'Get Familiar with multiplication  of different kinds of matrices, basic rules and use cases'
+    'https://learnmathclass.com/linear-algebra/matrix-multiplication':'Get Familiar with multiplication  of different kinds of matrices, basic rules and use cases',
+    'https://learnmathclass.com/probability':`Learn Probability Concepts and Rules. Explore Formulas with Comprehensive Explanations.`,
+    'https://learnmathclass.com/converters':`Use Interactive Units Converters.Convert Degrees to Radians and vice versa `,
+    'https://learnmathclass.com/calculators':`Interactive calculators with step-by-step solutions for key mathematical concepts and formulas.`
 
   }
 
