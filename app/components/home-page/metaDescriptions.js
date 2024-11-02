@@ -29,7 +29,8 @@ const metaDescriptions= {
     'https://learnmathclass.com/linear-algebra/matrix-multiplication':'Get Familiar with multiplication  of different kinds of matrices, basic rules and use cases',
     'https://learnmathclass.com/probability':`Learn Probability Concepts and Rules. Explore Formulas with Comprehensive Explanations.`,
     'https://learnmathclass.com/converters':`Use Interactive Units Converters.Convert Degrees to Radians and vice versa `,
-    'https://learnmathclass.com/calculators':`Interactive calculators with step-by-step solutions for key mathematical concepts and formulas.`
+    'https://learnmathclass.com/calculators':`Interactive calculators with step-by-step solutions for key mathematical concepts and formulas.`,
+    'https://learnmathclass.com/visual-tools':`Explore main Concepts in different fields presented visually.`
 
   }
 
