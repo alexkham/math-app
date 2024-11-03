@@ -118,12 +118,12 @@ export default function TrigonometryCalculatorPage() {
   )
 }
 
-// export async function getStaticProps() {
-//   return {
-//     props: {},
-//     revalidate: 3600
-//   }
-// }
+export async function getStaticProps() {
+  return {
+    props: {},
+    revalidate: 3600
+  }
+}
 
 
 // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
