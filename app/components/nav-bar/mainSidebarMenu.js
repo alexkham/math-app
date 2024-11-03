@@ -44,6 +44,7 @@ const CustomConvert=()=>(
     ] },
   { id: 2, icon: CustomCalculator, tooltip: 'Calculators', content:[
     { text: 'Statistics Calculator', url: '/calculators/statistics-calculator' },
+    { text: 'Trigonometry Calculator', url: '/calculators/trigonometry-calculator' },
    
   ]},
   // { id: 3, icon: FileText, tooltip: 'Files', content: 'FilesComponent' },

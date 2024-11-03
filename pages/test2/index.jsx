@@ -34,6 +34,7 @@ import ProbabilityCalculator from '@/app/components/calculators/probability/Prob
 import { mainSidebarMenu } from '@/app/components/nav-bar/mainSidebarMenu';
 import { Book, Calculator, PieChart, Sigma, Percent } from 'lucide-react';
 import CardsGroup from '@/app/components/cards/CardsGroup';
+import UnitCircle from '@/app/components/trigo-calculator/UnitCircle';
 
 
 export default function TestPage2() {
@@ -457,7 +458,7 @@ const cardItems = [
     {/* <MovingBox/> */}
     <br/>
     <br/>
-     <SectionTableOfContents sections={sections} title='In This Section' />
+     {/* <SectionTableOfContents sections={sections} title='In This Section' /> */}
     <br/>
     {/* <div className='divy' style={{marginLeft:'10px',marginRight:'40px'}}>
  <SVGSlider
@@ -858,7 +859,9 @@ const cardItems = [
     <br/>
     <br/>
     <br/>
-    
+    {/* <div style={{transform:'scale(1.4)'}}> */}
+   <UnitCircle/>
+   {/* </div> */}
     <br/>
     <br/>
     <br/>

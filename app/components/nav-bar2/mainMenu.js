@@ -61,6 +61,7 @@ export const mainMenuStructure = [
           href: '/calculators',
           items: [
             { label: 'Statistics Calculator', href: '/calculators/statistics-calculator' },
+            { label: 'Trigonometry Calculator', href: '/calculators/trigonometry-calculator' },
             
           ]
         },

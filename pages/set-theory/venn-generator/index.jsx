@@ -4,6 +4,8 @@ import MyNavbar from '@/app/components/nav-bar/MyNavbar'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../pages.css'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 
 
 const StandardContainer = ({ children }) => (
@@ -25,12 +27,20 @@ const StandardContainer = ({ children }) => (
 export default function VennDiagramGeneratorPage() {
   return (
    <>
-   <MyNavbar/>
+   <GenericNavbar/>
   
    <br/>
    <br/>
    <br/>
    <br/>
+   <OperaSidebar
+        side='right'
+        topOffset='65px'
+        sidebarWidth='35px'
+        panelWidth='200px'
+        iconColor='white'
+        panelBackgroundColor='#f2f2f2'
+      />
    <Breadcrumb/>
    <h1 className='title' style={{marginTop:'-30px'}}>Venn Diagrams Generator</h1>
    <br/>
@@ -39,9 +49,9 @@ export default function VennDiagramGeneratorPage() {
         transformOrigin: 'top center',
         height: '110vh', // Increase the height to accommodate scaled content
       }}> */}
-      <StandardContainer>
+      {/* <StandardContainer> */}
    <VennGenerator/>
-   </StandardContainer>
+   {/* </StandardContainer> */}
    
    {/* </div> */}
    <ScrollUpButton/>

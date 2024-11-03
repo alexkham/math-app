@@ -6,6 +6,7 @@ import React from 'react'
 import VerticalScrollingFormulaWidget from '@/app/components/examples/VerticalScrollingFormulaWidget'
 import combinatoricsFormulaList from '@/app/api/db/formulas/combinatorics/combinatoricsFormulas'
 import AngleConverter from '@/app/components/converters/AngleConverter'
+import TrigoCalculator from '@/app/components/trigo-calculator/TrigoCalculator'
 
 
 
@@ -78,7 +79,7 @@ const testSections = [
     <div>Test3Page</div>
     <br></br>
     <br></br>
-    <SectionTableOfContents sections={testSections}/>
+    {/* <SectionTableOfContents sections={testSections}/> */}
     <br/>
     <br/>
     <br/>
@@ -90,6 +91,9 @@ const testSections = [
     <br/>
     <br/>
     <br/>
+    <div style={{transform:'scale(0.9)'}}>
+    <TrigoCalculator/>
+    </div>
     <br/>
     <br/>
 
