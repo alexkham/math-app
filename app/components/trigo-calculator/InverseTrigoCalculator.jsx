@@ -1243,7 +1243,7 @@ const InverseTrigoCalculator = ({ explanations }) => {
                                        <option value="degrees">Degrees</option>
                                    </select>
                                 
-                                   <a
+                                   <Link
                                        href="/converters/degree-radians" 
                                        style={{
                                            marginLeft: '150px',
@@ -1255,7 +1255,7 @@ const InverseTrigoCalculator = ({ explanations }) => {
                                        }}
                                    >
                                        Angle Converter →
-                                   </a>
+                                   </Link>
                                </div>
                                <div className='input-container'>
                                    <label htmlFor='decimal'>Select Precision Level : </label>

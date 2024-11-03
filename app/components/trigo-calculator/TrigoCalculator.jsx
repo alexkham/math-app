@@ -807,6 +807,7 @@
 import React, { useState } from 'react';
 import { capitalizeWords ,range} from '@/app/utils/utils-functions';
 import './TrigoCalculator.css';
+import Link from 'next/link';
 
 const buttonStyle1 = {
     backgroundColor: '#1d6bd8',
@@ -936,7 +937,7 @@ const TrigoCalculator = ({explanations}) => {
                   <option value={'radians'}>Radians</option>
                   <option value={'degrees'}>Degrees</option>
                 </select>
-                <a
+                <Link
                                        href="/converters/degree-radians" 
                                        style={{
                                            marginLeft: '150px',
@@ -948,7 +949,7 @@ const TrigoCalculator = ({explanations}) => {
                                        }}
                                    >
                                        Angle Converter →
-                                   </a>
+                                   </Link>
               </div>
               <div className='input-container'>
                 <label htmlFor='decimal'>Select Precision Level : </label>
