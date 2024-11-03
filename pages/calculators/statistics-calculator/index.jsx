@@ -54,7 +54,7 @@ export default function StatisticsCalculatorPage({ explanations }) {
       <br/>
       <OperaSidebar 
         side='right'
-        topOffset='60px' 
+        topOffset='65px' 
         sidebarWidth='45px'
         panelWidth='200px'
         
