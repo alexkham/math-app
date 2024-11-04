@@ -1,0 +1,173 @@
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+  
+  .card {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .header {
+    padding: 20px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .content {
+    padding: 20px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  
+  .circleContainer {
+    width: 450px;
+    flex-shrink: 0;
+    margin-left: 50px;
+  }
+  
+  .controlsContainer {
+    flex: 1;
+    padding: 0 20px;
+  }
+  
+  .statsPanel {
+    background-color: #f8fafc;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .statTitle {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .controls {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    align-items: center;
+  }
+  
+  .input {
+    width: 200px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    font-size: 14px;
+  }
+  
+  .button {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    background-color: #1d6bd8;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .button:hover {
+    background-color: lightgray;
+  }
+
+  .trigoTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    background-color: white;
+    border: 1px solid #ddd;
+  }
+  
+  .trigoTable th, .trigoTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .trigoTable th {
+    background-color: #1d6bd8;
+    font-weight: 500;
+    color: #eee;
+  }
+  
+  .copyButton {
+    padding: 2px 5px;
+    margin-left: 5px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+  }
+  
+  .copyButton:hover {
+    background-color: #ddd;
+  }
+
+  .explanationsContainer {
+    margin-top: 4px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .explanationsTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 16px;
+  }
+  
+  .explanationsList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .explanationItem {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: smaller;
+    font-weight: 500;
+  }
+  
+  .explanationNumber {
+    background-color: #1d6bd8;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  
+  .explanationItem p {
+    margin: 0;
+    line-height: 1.1;
+    color: #4a5568;
+  }

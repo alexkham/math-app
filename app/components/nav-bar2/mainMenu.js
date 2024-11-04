@@ -53,7 +53,8 @@ export const mainMenuStructure = [
             { label: 'Gauss Elimination Calculator', href: '/visual-tools/gauss-elimination' },
             { label: 'Matrix Multiplication Visualizer', href: '/visual-tools/matrix-multiplication' },
             { label: 'Matrix Transposition', href: '/visual-tools/matrix-transposition' },
-            { label: 'Permutations Visualizer', href: '/combinatorics/permutations/permutations-visualizer' }
+            { label: 'Permutations Visualizer', href: '/combinatorics/permutations/permutations-visualizer' },
+            { label: 'Unit Circle Visualizer', href: '/visual-tools/unit-circle' }
           ]
         },
         {

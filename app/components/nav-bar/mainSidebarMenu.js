@@ -41,6 +41,7 @@ const CustomConvert=()=>(
         { text: 'Matrix Multiplication Visualizer', url: '/visual-tools/matrix-multiplication' },
         { text: 'Matric Transposition', url: '/visual-tools/matrix-transposition' },
         { text: 'Permutations Visualizer', url: '/combinatorics/permutations/permutations-visualizer' },
+        { text: 'Unit Circle Visualizer', url: '/visual-tools/unit-circle' },
     ] },
   { id: 2, icon: CustomCalculator, tooltip: 'Calculators', content:[
     { text: 'Statistics Calculator', url: '/calculators/statistics-calculator' },

@@ -455,7 +455,7 @@ const cardItems = [
      iconColor='white'
      panelBackgroundColor='#f2f2f2'/> 
     <h1>Test Page 2 </h1>
-    <Search/>
+    {/* <Search/> */}
     <br/>
     {/* <MovingBox/> */}
     <br/>
@@ -508,19 +508,19 @@ const cardItems = [
     <br/>
    <Sections sections={sections}/> 
     <br/>
-    <FormulaWidget data={dummyData}/>
+    {/* <FormulaWidget data={dummyData}/> */}
     <br/>
-    <SearchIcon/>
-    <br/>
-    <br/>
-    <FormulaAccordion data={gravitationalForce}/>
+    {/* <SearchIcon/> */}
     <br/>
     <br/>
+    {/* <FormulaAccordion data={gravitationalForce}/> */}
     <br/>
-    <FormulaWidget data={pythagoreanTheorem}/>
     <br/>
     <br/>
-    <FormulaAccordion data={quadraticFormula}/>
+    {/* <FormulaWidget data={pythagoreanTheorem}/> */}
+    <br/>
+    <br/>
+    {/* <FormulaAccordion data={quadraticFormula}/> */}
     <br/>
     <br/>
     <br/>
@@ -530,12 +530,12 @@ const cardItems = [
     <br/>
     <p>------------------------------------------------------------------</p>
     <br/>
-    <FormulaAccordionWrapper data={formulaList} groupByField={'category'}/>
+    {/* <FormulaAccordionWrapper data={formulaList} groupByField={'category'}/> */}
     <br/>
     <br/>
     <br/>
     <br/>
-    <StatisticsCalculator explanations={explanations}/>
+    {/* <StatisticsCalculator explanations={explanations}/> */}
     <br/>
     <br/>
     <br/>
@@ -645,7 +645,7 @@ const cardItems = [
     <br/>
     <br/>
     <br/>
-    <FormulaAccordionWrapper data={combinatoricsFormulaList} groupByField={'category'}/>
+    {/* <FormulaAccordionWrapper data={combinatoricsFormulaList} groupByField={'category'}/> */}
     <br/>
     <br/>
     <br/>
@@ -861,7 +861,7 @@ const cardItems = [
     <br/>
     <br/>
     <br/>
-    {/* <div style={{transform:'scale(1.4)'}}> */}
+    {/* <div style={{transform:'scale(1.2)'}}> */}
    <UnitCircle/>
    {/* </div> */}
     <br/>
