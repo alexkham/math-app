@@ -28,7 +28,7 @@ export default function ConvertersPage() {
             icon: CustomTriangle,
             href:'/calculators/trigonometry-calculator',
             // No subcategories, will show simple link
-            content:"Calculate Basic Trigonometric functions for any angle in degrees or radiands "
+            content:"Calculate Basic Trigonometric functions for any angle in degrees or radiands and Inverse trigonometric functions "
           },
     ]
   return (
