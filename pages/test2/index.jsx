@@ -35,6 +35,8 @@ import { mainSidebarMenu } from '@/app/components/nav-bar/mainSidebarMenu';
 import { Book, Calculator, PieChart, Sigma, Percent } from 'lucide-react';
 import CardsGroup from '@/app/components/cards/CardsGroup';
 import UnitCircle from '@/app/components/trigo-calculator/UnitCircle';
+import MultiplicationTable from '@/app/components/tables/MultiplicationTable';
+import CompleteMultiplicationTable from '@/app/components/tables/CompleteMultiplicationTable';
 
 
 export default function TestPage2() {
@@ -862,6 +864,19 @@ const cardItems = [
     {/* <div style={{transform:'scale(1.4)'}}> */}
    <UnitCircle/>
    {/* </div> */}
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <MultiplicationTable/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <CompleteMultiplicationTable/>
     <br/>
     <br/>
     <br/>

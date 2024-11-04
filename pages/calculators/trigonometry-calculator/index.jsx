@@ -138,7 +138,7 @@ import TrigoCalculator from '@/app/components/trigo-calculator/TrigoCalculator'
 import InverseTrigoCalculator from '@/app/components/trigo-calculator/InverseTrigoCalculator'
 import CalculatorSwitcher from '@/app/components/calculators/CalculatorSwitcher'
 
-export default function TrigonometryCalculatorPage({ explanations }) {
+export default function TrigonometryCalculatorPage({ explanations ,inverseTrigoExplanations}) {
   const metadata = {
     title: "Online Trigonometry Calculator | Learn Math Class",
     description: "Free online trigonometry calculator for calculating sine, cosine, tangent, and their inverse functions. Convert between degrees and radians, with detailed explanations of trigonometric concepts.",
@@ -198,7 +198,7 @@ export default function TrigonometryCalculatorPage({ explanations }) {
       </Head>
 
       <GenericNavbar/>
-      <br/>
+    
       <br/>
       <br/>
       <OperaSidebar
@@ -216,14 +216,15 @@ export default function TrigonometryCalculatorPage({ explanations }) {
       <h1 className='title' style={{marginBottom:'-20px', marginTop:'-30px'}}>Trigonometry Calculator</h1>
       <br/>
       <br/>
-      {/* <CalculatorSwitcher scale={'0.9'}> */}
-      <div style={{transform:'scale(0.9)'}}>
+      <CalculatorSwitcher standardExplanations={explanations} inverseExplanations={inverseTrigoExplanations} scale={'0.9'}/>
+      {/* <div style={{transform:'scale(0.9)'}}>
         <TrigoCalculator explanations={explanations}/>
-        </div>
+        </div> */}
         {/* <InverseTrigoCalculator explanations={inverseTrigoExplanations}/> */}
       {/* </CalculatorSwitcher> */}
       <br/>
       <br/>
+      {/* <CalculatorSwitcher/> */}
       <br/>
       <br/>
       <br/>
