@@ -3311,7 +3311,7 @@ const UnitCircle = () => {
               </div>
               <div className={styles.explanationItem}>
                 <span className={styles.explanationNumber}>4.</span>
-                <p>Use 'Copy' buttons in the table to copy individual trigonometric values.</p>
+                <p>Use &apos;Copy&apos; buttons in the table to copy individual trigonometric values.</p>
               </div>
               <div className={styles.explanationItem}>
                 <span className={styles.explanationNumber}>5.</span>
