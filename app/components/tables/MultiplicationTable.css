@@ -1,0 +1,144 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.flex-table-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow-x: none;
+    padding: 20px;
+}
+
+.flex-table-header, .flex-table-row {
+    display: flex;
+    width: 100%;
+}
+
+.flex-table-cell {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.header-cell {
+    font-weight: bold;
+    background-color: #ffd814;
+    color: #333;
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.tooltip-container {
+    position: relative;
+}
+
+.tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 100000000;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tooltip-container:hover .tooltip {
+    visibility: visible;
+    margin-bottom: 5px;
+}
+
+.first-column {
+    background-color: #ccc;
+    position: sticky;
+    left: 0;
+    z-index: 20;
+}
+
+.flex-table-cell:hover {
+    background-color: #ccc;
+    border: solid 0.5px black;
+    border-radius: 2px;
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 10px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 140px;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+.sticky-header {
+    position: sticky;
+    top: 160px;
+    background-color: #ffd814;
+    z-index: 99;
+    width: 100%;
+}
+
+.highlight {
+    background-color: yellow;
+}
+
+.my-input {
+    width: 300px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: #333;
+    border: 1px solid #2196F3;
+    border-radius: 0.25rem;
+    background-color: #f7f7f7;
+    outline: none;
+    text-align: center;
+}
+
+.title {
+    text-align: center;
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #2563eb;
+    color: white;
+    cursor: pointer;
+}
+
+.result-container {
+    text-align: center;
+    margin: 10px 0;
+    width: 100%;
+}

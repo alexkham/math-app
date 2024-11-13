@@ -1,5 +1,5 @@
 import React from 'react'
-import probabilityFormulaList from '@/app/api/db/formulas/probability/probabilityFormulasList'
+import trigonometryFormulaList from '@/app/api/db/formulas/trigonometry/trigonometryFormulas'
 import MyNavbar from '@/app/components/nav-bar/MyNavbar'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import '../../pages.css'
@@ -11,7 +11,7 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 export default function ProbabilityFormulasPage() {
   return (
     <>
-    <GenericNavbar/>
+   <GenericNavbar/>
     <br/>
     <br/>
     <br/>
@@ -25,9 +25,9 @@ export default function ProbabilityFormulasPage() {
       iconColor='white'
       panelBackgroundColor='#f2f2f2'/> 
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'20px',marginBottom:'-50px'}}>Probability Formulas</h1>
+    <h1 className='title' style={{marginTop:'-10px',marginBottom:'10px'}}>Trigonometry Formulas</h1>
     <div style={{transform:'scale(0.95)'}}>
-    <FormulaAccordionWrapper data={probabilityFormulaList} groupByField={['category']}/>
+    <FormulaAccordionWrapper data={trigonometryFormulaList} groupByField={['category']}/>
     </div>
     <br/>
     <ScrollUpButton/>

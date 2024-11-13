@@ -46,6 +46,7 @@ const CustomConvert=()=>(
   { id: 2, icon: CustomCalculator, tooltip: 'Calculators', content:[
     { text: 'Statistics Calculator', url: '/calculators/statistics-calculator' },
     { text: 'Trigonometry Calculator', url: '/calculators/trigonometry-calculator' },
+    { text: 'Quadratic Equations  Calculator', url: '/calculators/quadratic-equations' },
    
   ]},
   // { id: 3, icon: FileText, tooltip: 'Files', content: 'FilesComponent' },

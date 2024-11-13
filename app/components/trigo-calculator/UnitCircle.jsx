@@ -3067,20 +3067,20 @@ const UnitCircle = () => {
                 ))}
               </g>
 
-              <text x={center - leftShift + radius/2} y={center - radius/2} 
-                    fontSize="14" fill="#666" textAnchor="middle">
+              <text x={center - leftShift + radius/2-10} y={center - radius/2+10} 
+                    fontSize="20" fill="black" textAnchor="middle" >
                 I 
               </text>
-              <text x={center - leftShift - radius/2} y={center - radius/2} 
-                    fontSize="14" fill="#666" textAnchor="middle">
+              <text x={center - leftShift - radius/2+10} y={center - radius/2+10} 
+                    fontSize="20" fill="black" textAnchor="middle">
                  II 
               </text>
-              <text x={center - leftShift - radius/2} y={center + radius/2} 
-                    fontSize="14" fill="#666" textAnchor="middle">
+              <text x={center - leftShift - radius/2+10} y={center + radius/2-10} 
+                    fontSize="20" fill="black" textAnchor="middle">
                 III 
               </text>
-              <text x={center - leftShift + radius/2} y={center + radius/2} 
-                    fontSize="14" fill="#666" textAnchor="middle">
+              <text x={center - leftShift + radius/2-10} y={center + radius/2-10} 
+                    fontSize="20" fill="black" textAnchor="middle">
                 IV 
               </text>
 

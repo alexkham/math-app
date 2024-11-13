@@ -21,12 +21,14 @@ export const mainMenuStructure = [
       columns: [
         {
           items: [
+            { label: 'Algebra', href: '/algebra' },
+            { label: 'Trigonometry', href: '/trigonometry' },
             { label: 'Combinatorics', href: '/combinatorics' },
             { label: 'Set Theory', href: '/set-theory' },
             { label: 'Sequences', href: '/sequences' },
             { label: 'Linear Algebra', href: '/linear-algebra' },
             { label: 'Probability', href: '/probability' },
-            { label: 'Logic', href: '/logic' }
+            { label: 'Mathematical Logic', href: '/logic' }
           ]
         }
       ]
@@ -63,6 +65,7 @@ export const mainMenuStructure = [
           items: [
             { label: 'Statistics Calculator', href: '/calculators/statistics-calculator' },
             { label: 'Trigonometry Calculator', href: '/calculators/trigonometry-calculator' },
+            { label: 'Quadratic Equations Calculator', href: '/calculators/quadratic-equations' },
             
           ]
         },

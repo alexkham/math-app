@@ -15,6 +15,15 @@ export default function ConvertersPage() {
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-right"><path d="M22 18a2 2 0 0 1-2 2H3c-1.1 0-1.3-.6-.4-1.3L20.4 4.3c.9-.7 1.6-.4 1.6.7Z"/></svg>
     )
 
+
+    const CustomAlgebra=()=>(
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-variable"><path d="M8 21s-4-3-4-9 4-9 4-9"/><path d="M16 3s4 3 4 9-4 9-4 9"/><line x1="15" x2="9" y1="9" y2="15"/><line x1="9" x2="15" y1="9" y2="15"/></svg>
+    )
+
+    const CustomList=()=>(
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-ordered"><path d="M10 12h11"/><path d="M10 18h11"/><path d="M10 6h11"/><path d="M4 10h2"/><path d="M4 6h1v4"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+    )
+
     const cardItems=[
         {
             category: 'Statistics Calculator',
@@ -30,6 +39,36 @@ export default function ConvertersPage() {
             // No subcategories, will show simple link
             content:"Calculate Basic Trigonometric functions for any angle in degrees or radiands and Inverse trigonometric functions "
           },
+          {
+            id: "algebra-calculators",
+            category: "Algebra Calculators",
+            content: "Access powerful algebraic calculation tools",
+            icon:CustomAlgebra,
+            // href: "/calculators",
+            subcategories: [
+              {
+                name: "Quadratic Equations Calculator",
+                href: "/calculators/quadratic-equations"
+              }
+            ]
+          },
+          {
+            id: "sequences-calculators",
+            category: "Sequences Calculators",
+            content: "Use Calculators to learn about most important sequences in math",
+            icon:CustomList,
+            // href: "/calculators",
+            subcategories: [
+              {
+                name: "Prime Numbers Calculator",
+                href: "/sequences/prime-numbers"
+              },
+              {
+                name: "Fibonacci Calculator",
+                href: "/sequences/fibonacci-numbers"
+              }
+            ]
+          }
     ]
   return (
     <>
@@ -37,9 +76,10 @@ export default function ConvertersPage() {
     <br/>
     <br/>
     <br/>
+    <br/>
    
     <Breadcrumb/>
-    <h1 className='title' >Calculators</h1>
+    <h1 className='title' style={{marginTop:'-20px',marginBottom:'-20px'}} >Calculators</h1>
     <br/>
     <OperaSidebar 
    side='right'

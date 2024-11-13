@@ -7,7 +7,7 @@
   resolved "https://registry.npmjs.org/@aashutoshrathi/word-wrap/-/word-wrap-1.2.6.tgz"
   integrity sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==
 
-"@babel/runtime@^7.15.4", "@babel/runtime@^7.23.2", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.15.4", "@babel/runtime@^7.23.2", "@babel/runtime@^7.24.1", "@babel/runtime@^7.9.2":
   version "7.24.1"
   resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.24.1.tgz"
   integrity sha512-+BIznRzyqBf+2wCTxcKE3wDjfGeCoVE61KSHGpkzqrLi8qxqFwBeUFyId2cxkTmm55fzDGnm0+yCxaxygrLUnQ==
@@ -189,6 +189,15 @@
   dependencies:
     tslib "^2.4.0"
 
+"@tanem/svg-injector@^10.1.68":
+  version "10.1.68"
+  resolved "https://registry.npmjs.org/@tanem/svg-injector/-/svg-injector-10.1.68.tgz"
+  integrity sha512-UkJajeR44u73ujtr5GVSbIlELDWD/mzjqWe54YMK61ljKxFcJoPd9RBSaO7xj02ISCWUqJW99GjrS+sVF0UnrA==
+  dependencies:
+    "@babel/runtime" "^7.23.2"
+    content-type "^1.0.5"
+    tslib "^2.6.2"
+
 "@types/d3-scale-chromatic@^3.0.0":
   version "3.0.3"
   resolved "https://registry.npmjs.org/@types/d3-scale-chromatic/-/d3-scale-chromatic-3.0.3.tgz"
@@ -269,7 +278,7 @@
   resolved "https://registry.npmjs.org/@types/ms/-/ms-0.7.34.tgz"
   integrity sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==
 
-"@types/prop-types@*":
+"@types/prop-types@*", "@types/prop-types@^15.7.12":
   version "15.7.13"
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.13.tgz"
   integrity sha512-hCZTSvwbzWGvhqxp/RqVqwU999pBf2vp7hzIjiYOsl8wqOmUxkQ6ddw1cV3l8811+kdUFus/q4d1Y3E3SyEifA==
@@ -761,6 +770,11 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz"
   integrity sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==
+
+content-type@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/content-type/-/content-type-1.0.5.tgz"
+  integrity sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==
 
 contour_plot@^0.0.1:
   version "0.0.1"
@@ -2432,7 +2446,7 @@ json5@^1.0.2:
 
 jstat@^1.9.6:
   version "1.9.6"
-  resolved "https://registry.yarnpkg.com/jstat/-/jstat-1.9.6.tgz#60e801b0d4c26e37aab0f375d1859fe9d60e10c0"
+  resolved "https://registry.npmjs.org/jstat/-/jstat-1.9.6.tgz"
   integrity sha512-rPBkJbK2TnA8pzs93QcDDPlKcrtZWuuCo2dVR0TFLOJSxhqfWOVCSp8aV3/oSbn+4uY4yw1URtLpHQedtmXfug==
 
 "jsx-ast-utils@^2.4.1 || ^3.0.0", jsx-ast-utils@^3.3.5:
@@ -3652,7 +3666,7 @@ raf-schd@^4.0.2:
 
 react-beautiful-dnd@^13.1.1:
   version "13.1.1"
-  resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-13.1.1.tgz#b0f3087a5840920abf8bb2325f1ffa46d8c4d0a2"
+  resolved "https://registry.npmjs.org/react-beautiful-dnd/-/react-beautiful-dnd-13.1.1.tgz"
   integrity sha512-0Lvs4tq2VcrEjEgDXHjT98r+63drkKEgqyxdA7qD3mvKwga6a5SscbdLPO2IExotU1jW8L0Ksdl0Cj2AF67nPQ==
   dependencies:
     "@babel/runtime" "^7.9.2"
@@ -3732,6 +3746,16 @@ react-simple-keyboard@^3.7.84:
   version "3.7.103"
   resolved "https://registry.npmjs.org/react-simple-keyboard/-/react-simple-keyboard-3.7.103.tgz"
   integrity sha512-3dCtbhTCF1Ee01hOrr5e4yK4x7D2E0uiDLiewMJ6wsaNe7bNsm61aTZxHeenSPss0a1/96qyNZ6sGgFwTQoEaw==
+
+react-svg@^16.1.34:
+  version "16.1.34"
+  resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-16.1.34.tgz#50598db37d3b550372559d2c74eb6c203ad1ea24"
+  integrity sha512-L4ak1qNFLgzVbHm0xQEpHoIOqb3um/B0ybahd3U2TKoGZxb0JaPVI5lsAhvSng2P1kcsYEok2Z7RpcKx7arJGw==
+  dependencies:
+    "@babel/runtime" "^7.24.1"
+    "@tanem/svg-injector" "^10.1.68"
+    "@types/prop-types" "^15.7.12"
+    prop-types "^15.8.1"
 
 react@^18:
   version "18.2.0"
@@ -4270,7 +4294,7 @@ tsconfig-paths@^3.15.0:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
-tslib@^2.4.0:
+tslib@^2.4.0, tslib@^2.6.2:
   version "2.6.2"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.6.2.tgz"
   integrity sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==
