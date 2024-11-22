@@ -142,6 +142,7 @@ import styles from './TruthTablesPage.module.css';
 import ReactMarkdown from 'react-markdown';
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 
 // 
 
@@ -188,6 +189,7 @@ const TruthTablesPage = ({ operatorDescriptions }) => {
       <br></br>
       <br></br>
       <br></br>
+      <br></br>
       <OperaSidebar 
       side='right'
       topOffset='65px' 
@@ -196,6 +198,7 @@ const TruthTablesPage = ({ operatorDescriptions }) => {
       
       iconColor='white'
       panelBackgroundColor='#f2f2f2'/> 
+      <Breadcrumb/>
       <main className={styles.main}>
         <h1 className={styles.title}>Dynamic Truth Table Generator</h1>
         <div style={{width:'97%'}}>

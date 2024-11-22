@@ -22,6 +22,7 @@ export const mainMenuStructure = [
         {
           items: [
             { label: 'Algebra', href: '/algebra' },
+            { label: 'Calculus', href: '/calculus' },
             { label: 'Trigonometry', href: '/trigonometry' },
             { label: 'Combinatorics', href: '/combinatorics' },
             { label: 'Set Theory', href: '/set-theory' },
@@ -66,6 +67,7 @@ export const mainMenuStructure = [
             { label: 'Statistics Calculator', href: '/calculators/statistics-calculator' },
             { label: 'Trigonometry Calculator', href: '/calculators/trigonometry-calculator' },
             { label: 'Quadratic Equations Calculator', href: '/calculators/quadratic-equations' },
+            { label: 'Factoring Calculator', href: '/calculators/factoring-calculator' },
             
           ]
         },

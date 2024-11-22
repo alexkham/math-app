@@ -16,6 +16,11 @@ import FactoringCalculator from '@/app/components/calculators/algebra/FactoringC
 import generateQuadraticExplanations from '@/app/components/solvers/quadraticExplanations';
 import FractionCircle from '@/app/components/fractions/FractionCircle';
 import FractionRectangle from '@/app/components/fractions/FractionRectangle';
+import SWOTAnalysis from '@/app/components/infographics/SWOTAnalysis';
+import VectorSpace from '@/app/components/linear-algebra/VectorSpace';
+import VectorSpace3D from '@/app/components/linear-algebra/3DVectorSpace';
+import VectorVisualization from '@/app/components/vectors/VectorVisualization';
+import VectorVisualizationSVG from '@/app/components/vectors/VectorVisualizationSvg';
 
 export default function Test4Page() {
 
@@ -145,6 +150,68 @@ export default function Test4Page() {
       ]; 
 
 
+      const SWOTdata = [
+       
+        {
+            title: 'STRENGTHS',
+            items: [
+                'Lorem ipsum dolor sit amet',
+                'Sed eiusmod tempor incidunt',
+                'Sed eiusmod tempor incidunt',
+                '',
+                'Sed eiusmod tempor incidunt',
+                'Sed eiusmod tempor incidunt',
+                'Ut enim ad minim veniam'
+            ],
+            bgColor: 'yellow'
+        },
+        {
+            title: 'WEAKNESS',
+            items: [
+                'Lorem ipsum dolor sit amet',
+                'Sed eiusmod tempor incidunt',
+                'Sed eiusmod tempor incidunt',
+                'Sed eiusmod tempor incidunt',
+                'Sed eiusmod tempor incidunt',
+                'Ut enim ad minim veniam'
+            ],
+            bgColor: 'blue',
+            color:'white'
+        },
+        {
+            title: 'OPPORTUNITIES',
+            items: [
+                'Lorem ipsum dolor sit amet',
+                'Sed eiusmod tempor incidunt',
+                'Sed eiusmod tempor incidunt',
+                'Sed eiusmod tempor incidunt',
+                'Sed eiusmod tempor incidunt',
+                'Ut enim ad minim veniam'
+            ],
+            bgColor: 'red'
+        },
+        {
+            title: 'THREATS ',
+            items: [
+                `Lorem ipsum dolor sit amet baruch 
+                
+                \nhello `,
+              
+                'Sed eiusmod tempor incidunt',
+                'Sed eiusmod tempor incidunt',
+                'Sed eiusmod tempor incidunt',
+                'Sed eiusmod tempor incidunt',
+                'Sed eiusmod tempor incidunt',
+                'Ut enim ad minim veniam'
+            ],
+            bgColor: 'green',
+            color:'#efebeb'
+        }
+    ];
+    
+   
+
+
   return (
     <>
     <div>Test4Page</div>
@@ -237,6 +304,33 @@ export default function Test4Page() {
     <br/>
     <br/>
     <br/>
+   <div style={{transform:'scale(0.6)'}}>
+    <SWOTAnalysis sections={SWOTdata} title='Some other tilte' center='sopme other center'/>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <VectorSpace/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div style={{transform:'scale(0.8)'}}>
+    <VectorSpace3D/>
+    </div>
+    <br/>
+    <br/>
+    <VectorVisualization/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    {/* <div style={{transform:'scale(2)'}}> */}
+    <VectorVisualizationSVG/>
+    {/* </div> */}
     <br/>
     <br/>
     {/* <UnitCircle/> */}

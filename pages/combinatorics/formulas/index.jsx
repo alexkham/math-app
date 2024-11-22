@@ -76,6 +76,7 @@ import React from 'react'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import '../../pages.css'
 import Head from 'next/head'
+import FormulasTOC from '@/app/components/examples/FormulaTOC'
 
 export default function CombinatoricsFormulasPage({ combinatoricsFormulaList, keyWords }) {
   return (
@@ -93,9 +94,11 @@ export default function CombinatoricsFormulasPage({ combinatoricsFormulaList, ke
       <br/>
       <br/>
       <br/>
+      <br/>
       
         <Breadcrumb />
         <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}} >Combinatorics Formulas</h1>
+        <FormulasTOC data={combinatoricsFormulaList}/>
         <FormulaAccordionWrapper data={combinatoricsFormulaList} groupByField={['category']} />
       
       <ScrollUpButton />

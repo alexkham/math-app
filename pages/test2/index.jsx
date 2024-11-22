@@ -460,7 +460,7 @@ const cardItems = [
     {/* <MovingBox/> */}
     <br/>
     <br/>
-     {/* <SectionTableOfContents sections={sections} title='In This Section' /> */}
+     <SectionTableOfContents sections={sections} title='In This Section' />
     <br/>
     {/* <div className='divy' style={{marginLeft:'10px',marginRight:'40px'}}>
  <SVGSlider

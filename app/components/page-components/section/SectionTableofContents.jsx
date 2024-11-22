@@ -1,202 +1,4 @@
-// // // // // // // // // // // // // // // // // import React, { useState, useEffect, useRef } from 'react';
-// // // // // // // // // // // // // // // // // import styles from './SectionTableOfContents.module.css';
 
-// // // // // // // // // // // // // // // // // const SectionTableOfContents = ({ sections }) => {
-// // // // // // // // // // // // // // // // //   const [isSticky, setIsSticky] = useState(false);
-// // // // // // // // // // // // // // // // //   const boxRef = useRef(null);
-
-// // // // // // // // // // // // // // // // //   useEffect(() => {
-// // // // // // // // // // // // // // // // //     const handleScroll = () => {
-// // // // // // // // // // // // // // // // //       if (boxRef.current) {
-// // // // // // // // // // // // // // // // //         const boxRect = boxRef.current.getBoundingClientRect();
-// // // // // // // // // // // // // // // // //         setIsSticky(boxRect.top + boxRect.height <= 0);
-// // // // // // // // // // // // // // // // //       }
-// // // // // // // // // // // // // // // // //     };
-
-// // // // // // // // // // // // // // // // //     window.addEventListener('scroll', handleScroll);
-// // // // // // // // // // // // // // // // //     return () => window.removeEventListener('scroll', handleScroll);
-// // // // // // // // // // // // // // // // //   }, []);
-
-// // // // // // // // // // // // // // // // //   return (
-// // // // // // // // // // // // // // // // //     <div ref={boxRef} className={`${styles.box} ${isSticky ? styles.sticky : ''}`}>
-// // // // // // // // // // // // // // // // //       <h2 className={styles.title}>Table of Contents</h2>
-// // // // // // // // // // // // // // // // //       <ul className={`${styles.list} ${isSticky ? styles.stickyList : styles.initialList}`}>
-// // // // // // // // // // // // // // // // //         {sections.map((section, index) => (
-// // // // // // // // // // // // // // // // //           <li key={index} className={styles.item}>
-// // // // // // // // // // // // // // // // //             <a href={`#${section.id}`}>{section.title}</a>
-// // // // // // // // // // // // // // // // //           </li>
-// // // // // // // // // // // // // // // // //         ))}
-// // // // // // // // // // // // // // // // //       </ul>
-// // // // // // // // // // // // // // // // //     </div>
-// // // // // // // // // // // // // // // // //   );
-// // // // // // // // // // // // // // // // // };
-
-// // // // // // // // // // // // // // // // // export default SectionTableOfContents;
-
-// // // // // // // // // // // // // // // // import React, { useState, useEffect, useRef } from 'react';
-// // // // // // // // // // // // // // // // import PropTypes from 'prop-types';
-// // // // // // // // // // // // // // // // import styles from './SectionTableOfContents.module.css';
-
-// // // // // // // // // // // // // // // // const SectionTableOfContents = ({ sections = [] }) => {
-// // // // // // // // // // // // // // // //   const [isSticky, setIsSticky] = useState(false);
-// // // // // // // // // // // // // // // //   const boxRef = useRef(null);
-
-// // // // // // // // // // // // // // // //   useEffect(() => {
-// // // // // // // // // // // // // // // //     const handleScroll = () => {
-// // // // // // // // // // // // // // // //       if (boxRef.current) {
-// // // // // // // // // // // // // // // //         const boxRect = boxRef.current.getBoundingClientRect();
-// // // // // // // // // // // // // // // //         setIsSticky(boxRect.top + boxRect.height <= 0);
-// // // // // // // // // // // // // // // //       }
-// // // // // // // // // // // // // // // //     };
-
-// // // // // // // // // // // // // // // //     window.addEventListener('scroll', handleScroll);
-// // // // // // // // // // // // // // // //     return () => window.removeEventListener('scroll', handleScroll);
-// // // // // // // // // // // // // // // //   }, []);
-
-// // // // // // // // // // // // // // // //   const defaultSections = [
-// // // // // // // // // // // // // // // //     { id: 'default1', title: 'Default Section 1' },
-// // // // // // // // // // // // // // // //     { id: 'default2', title: 'Default Section 2' },
-// // // // // // // // // // // // // // // //     { id: 'default3', title: 'Default Section 3' },
-// // // // // // // // // // // // // // // //   ];
-
-// // // // // // // // // // // // // // // //   const displaySections = sections.length > 0 ? sections : defaultSections;
-
-// // // // // // // // // // // // // // // //   return (
-// // // // // // // // // // // // // // // //     <div ref={boxRef} className={`${styles.box} ${isSticky ? styles.sticky : ''}`}>
-// // // // // // // // // // // // // // // //       <h2 className={styles.title}>Table of Contents</h2>
-// // // // // // // // // // // // // // // //       <ul className={`${styles.list} ${isSticky ? styles.stickyList : styles.initialList}`}>
-// // // // // // // // // // // // // // // //         {displaySections.map((section, index) => (
-// // // // // // // // // // // // // // // //           <li key={section.id || index} className={styles.item}>
-// // // // // // // // // // // // // // // //             <a href={`#${section.id}`}>{section.title}</a>
-// // // // // // // // // // // // // // // //           </li>
-// // // // // // // // // // // // // // // //         ))}
-// // // // // // // // // // // // // // // //       </ul>
-// // // // // // // // // // // // // // // //     </div>
-// // // // // // // // // // // // // // // //   );
-// // // // // // // // // // // // // // // // };
-
-// // // // // // // // // // // // // // // // SectionTableOfContents.propTypes = {
-// // // // // // // // // // // // // // // //   sections: PropTypes.arrayOf(
-// // // // // // // // // // // // // // // //     PropTypes.shape({
-// // // // // // // // // // // // // // // //       id: PropTypes.string.isRequired,
-// // // // // // // // // // // // // // // //       title: PropTypes.string.isRequired,
-// // // // // // // // // // // // // // // //     })
-// // // // // // // // // // // // // // // //   ),
-// // // // // // // // // // // // // // // // };
-
-// // // // // // // // // // // // // // // // export default SectionTableOfContents;
-// // // // // // // // // // // // // // // // import React, { useState, useEffect, useRef } from 'react';
-// // // // // // // // // // // // // // // // import PropTypes from 'prop-types';
-// // // // // // // // // // // // // // // // import styles from './SectionTableOfContents.module.css';
-
-// // // // // // // // // // // // // // // // const SectionTableOfContents = ({ sections = [] }) => {
-// // // // // // // // // // // // // // // //   const [isSticky, setIsSticky] = useState(false);
-// // // // // // // // // // // // // // // //   const boxRef = useRef(null);
-
-// // // // // // // // // // // // // // // //   useEffect(() => {
-// // // // // // // // // // // // // // // //     const handleScroll = () => {
-// // // // // // // // // // // // // // // //       if (boxRef.current) {
-// // // // // // // // // // // // // // // //         const boxRect = boxRef.current.getBoundingClientRect();
-// // // // // // // // // // // // // // // //         setIsSticky(boxRect.top + boxRect.height <= 0);
-// // // // // // // // // // // // // // // //       }
-// // // // // // // // // // // // // // // //     };
-
-// // // // // // // // // // // // // // // //     window.addEventListener('scroll', handleScroll);
-// // // // // // // // // // // // // // // //     return () => window.removeEventListener('scroll', handleScroll);
-// // // // // // // // // // // // // // // //   }, []);
-
-// // // // // // // // // // // // // // // //   return (
-// // // // // // // // // // // // // // // //     <div ref={boxRef} className={`${styles.box} ${isSticky ? styles.sticky : ''}`}>
-// // // // // // // // // // // // // // // //       <h2 className={styles.title}>Table of Contents</h2>
-// // // // // // // // // // // // // // // //       {sections.length > 0 && (
-// // // // // // // // // // // // // // // //         <ul className={`${styles.list} ${isSticky ? styles.stickyList : styles.initialList}`}>
-// // // // // // // // // // // // // // // //           {sections.map((section) => (
-// // // // // // // // // // // // // // // //             <li key={section.id} className={styles.item}>
-// // // // // // // // // // // // // // // //               <a href={`#${section.id}`}>{section.title}</a>
-// // // // // // // // // // // // // // // //             </li>
-// // // // // // // // // // // // // // // //           ))}
-// // // // // // // // // // // // // // // //         </ul>
-// // // // // // // // // // // // // // // //       )}
-// // // // // // // // // // // // // // // //     </div>
-// // // // // // // // // // // // // // // //   );
-// // // // // // // // // // // // // // // // };
-
-// // // // // // // // // // // // // // // // SectionTableOfContents.propTypes = {
-// // // // // // // // // // // // // // // //   sections: PropTypes.arrayOf(
-// // // // // // // // // // // // // // // //     PropTypes.shape({
-// // // // // // // // // // // // // // // //       id: PropTypes.string.isRequired,
-// // // // // // // // // // // // // // // //       title: PropTypes.string.isRequired,
-// // // // // // // // // // // // // // // //     })
-// // // // // // // // // // // // // // // //   ),
-// // // // // // // // // // // // // // // // };
-
-// // // // // // // // // // // // // // // // export default SectionTableOfContents;
-// // // // // // // // // // // // // // // import React, { useState, useEffect, useRef } from 'react';
-// // // // // // // // // // // // // // // import PropTypes from 'prop-types';
-// // // // // // // // // // // // // // // import styles from './SectionTableOfContents.module.css';
-
-// // // // // // // // // // // // // // // const SectionTableOfContents = ({ sections = [] }) => {
-// // // // // // // // // // // // // // //   const [isSticky, setIsSticky] = useState(false);
-// // // // // // // // // // // // // // //   const boxRef = useRef(null);
-
-// // // // // // // // // // // // // // //   useEffect(() => {
-// // // // // // // // // // // // // // //     const handleScroll = () => {
-// // // // // // // // // // // // // // //       if (boxRef.current) {
-// // // // // // // // // // // // // // //         const boxRect = boxRef.current.getBoundingClientRect();
-// // // // // // // // // // // // // // //         setIsSticky(boxRect.top + boxRect.height <= 0);
-// // // // // // // // // // // // // // //       }
-// // // // // // // // // // // // // // //     };
-
-// // // // // // // // // // // // // // //     window.addEventListener('scroll', handleScroll);
-// // // // // // // // // // // // // // //     return () => window.removeEventListener('scroll', handleScroll);
-// // // // // // // // // // // // // // //   }, []);
-
-// // // // // // // // // // // // // // //   const handleLinkClick = (e, id) => {
-// // // // // // // // // // // // // // //     e.preventDefault();
-// // // // // // // // // // // // // // //     const element = document.getElementById(id);
-// // // // // // // // // // // // // // //     if (element) {
-// // // // // // // // // // // // // // //       const offset = 100; // Adjust this value based on your navbar height and desired extra space
-// // // // // // // // // // // // // // //       const elementPosition = element.getBoundingClientRect().top;
-// // // // // // // // // // // // // // //       const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-// // // // // // // // // // // // // // //       window.scrollTo({
-// // // // // // // // // // // // // // //         top: offsetPosition,
-// // // // // // // // // // // // // // //         behavior: "smooth"
-// // // // // // // // // // // // // // //       });
-// // // // // // // // // // // // // // //     }
-// // // // // // // // // // // // // // //   };
-
-// // // // // // // // // // // // // // //   return (
-// // // // // // // // // // // // // // //     <div ref={boxRef} className={`${styles.box} ${isSticky ? styles.sticky : ''}`}>
-// // // // // // // // // // // // // // //       <h2 className={styles.title}>Table of Contents</h2>
-// // // // // // // // // // // // // // //       {sections.length > 0 && (
-// // // // // // // // // // // // // // //         <ul className={`${styles.list} ${isSticky ? styles.stickyList : styles.initialList}`}>
-// // // // // // // // // // // // // // //           {sections.map((section) => (
-// // // // // // // // // // // // // // //             <li key={section.id} className={styles.item}>
-// // // // // // // // // // // // // // //               <a 
-// // // // // // // // // // // // // // //                 href={`#${section.id}`} 
-// // // // // // // // // // // // // // //                 onClick={(e) => handleLinkClick(e, section.id)}
-// // // // // // // // // // // // // // //               >
-// // // // // // // // // // // // // // //                 {section.title}
-// // // // // // // // // // // // // // //               </a>
-// // // // // // // // // // // // // // //             </li>
-// // // // // // // // // // // // // // //           ))}
-// // // // // // // // // // // // // // //         </ul>
-// // // // // // // // // // // // // // //       )}
-// // // // // // // // // // // // // // //     </div>
-// // // // // // // // // // // // // // //   );
-// // // // // // // // // // // // // // // };
-
-// // // // // // // // // // // // // // // SectionTableOfContents.propTypes = {
-// // // // // // // // // // // // // // //   sections: PropTypes.arrayOf(
-// // // // // // // // // // // // // // //     PropTypes.shape({
-// // // // // // // // // // // // // // //       id: PropTypes.string.isRequired,
-// // // // // // // // // // // // // // //       title: PropTypes.string.isRequired,
-// // // // // // // // // // // // // // //     })
-// // // // // // // // // // // // // // //   ),
-// // // // // // // // // // // // // // // };
-
-// // // // // // // // // // // // // // // export default SectionTableOfContents;
 // // // // // // // // // // // // // // import React, { useState, useEffect, useRef } from 'react';
 // // // // // // // // // // // // // // import PropTypes from 'prop-types';
 // // // // // // // // // // // // // // import styles from './SectionTableOfContents.module.css';
@@ -3172,15 +2974,19 @@ const SectionTableOfContents = ({ sections = [], title = '' }) => {
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto:wght@400;500&display=swap');
 
         .toc-container {
-          width: 90%;
+          width: 80%;
           max-width: 1200px;
           margin: 1px auto;
-          padding: 20px;
+          /* padding: 10px; */
+          padding-right:10px;
+          padding-left:5px;
+          padding-bottom:10px;
           background-color: #f8f9fa;
-          border: 1px solid #e9ecef;
+          border: 1px solid #efede9;
           border-radius: 8px;
           box-shadow: 0 2px 4px rgba(0,0,0,0.1);
           font-family: 'Roboto', sans-serif;
+          /* background-color:'red' */
         }
 
         .toc-title {
@@ -3266,6 +3072,7 @@ const SectionTableOfContents = ({ sections = [], title = '' }) => {
           display: flex;
           flex-direction: column;
           gap: 8px;
+          
         }
 
         .subsection-link {
@@ -3303,6 +3110,7 @@ const SectionTableOfContents = ({ sections = [], title = '' }) => {
           padding-top: 70px;
           scrollbar-width: none;
           -ms-overflow-style: none;
+          
         }
 
         .sticky::-webkit-scrollbar {

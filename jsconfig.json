@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     }
+  },
+  "exclude": ["node_modules"],
+  "typeAcquisition": {
+    "exclude": ["react-beautiful-dnd"]
   }
 }

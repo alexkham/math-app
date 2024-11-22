@@ -7,6 +7,7 @@ import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionW
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import FormulasTOC from '@/app/components/examples/FormulaTOC'
 
 export default function ProbabilityFormulasPage() {
   return (
@@ -26,11 +27,12 @@ export default function ProbabilityFormulasPage() {
       panelBackgroundColor='#f2f2f2'/> 
     <Breadcrumb/>
     <h1 className='title' style={{marginTop:'-10px',marginBottom:'10px'}}>Trigonometry Formulas</h1>
+    <FormulasTOC  data={trigonometryFormulaList}/>
     <div style={{transform:'scale(0.95)'}}>
     <FormulaAccordionWrapper data={trigonometryFormulaList} groupByField={['category']}/>
     </div>
     <br/>
-    <ScrollUpButton/>
+    <ScrollUpButton />
     </>
   )
 }

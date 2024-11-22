@@ -49,6 +49,10 @@ export default function ConvertersPage() {
               {
                 name: "Quadratic Equations Calculator",
                 href: "/calculators/quadratic-equations"
+              },
+              {
+                name: "Factoring Calculator",
+                href: "/calculators/factoring-calculator"
               }
             ]
           },

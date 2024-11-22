@@ -4,28 +4,28 @@ import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import React from 'react';
 import '../pages.css'
 import VerticalScrollingFormulaWidget from '@/app/components/examples/VerticalScrollingFormulaWidget';
-import algebraFormulasList from '@/app/api/db/formulas/algebra/algebraFormulas';
+import logicFormulasList from '@/app/api/db/formulas/logic/logicFormulasList';
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents';
-import { SectionIcon } from 'lucide-react';
+
 import Sections from '@/app/components/page-components/section/Sections';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 
-export default function AlgebraPage() {
+export default function LogicPage() {
   
 
-  const algebraSections = [
+  const logicSections = [
    
     {
       id: 'formulas',
-      title: 'Algebra Formulas',
+      title: 'Mathematical Logic Formulas',
       content:"Explore ",
       content: [
-        'Explore Algebra formulas with explanations and examples',
+        'Explore Mathematical Logic formulas with explanations and examples',
         " ",
         <VerticalScrollingFormulaWidget 
-        key={"formula-widget"}
-         formulaData={algebraFormulasList}
-         moreFormulasLink='/algebra/formulas'
+        key={"formula-widget2"}
+         formulaData={logicFormulasList}
+         moreFormulasLink='/logic/formulas'
         //  title='See them all'
           />,
    
@@ -52,8 +52,8 @@ export default function AlgebraPage() {
       panelBackgroundColor='#f2f2f2'/> 
     <Breadcrumb/>
    
-    <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>Algebra</h1>
-    <SectionTableOfContents sections={algebraSections}/>
+    <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>Mathematical Logic</h1>
+    <SectionTableOfContents sections={logicSections}/>
     <br/>
     <br/>
     <br/>
@@ -62,7 +62,7 @@ export default function AlgebraPage() {
     <br/>
     <br/>
     <br/>
-    <Sections  sections={algebraSections}/>
+    <Sections  sections={logicSections}/>
     <br/>
     <br/>
     <br/>
