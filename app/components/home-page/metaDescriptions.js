@@ -18,6 +18,23 @@ const metaDescriptions= {
     Discover patterns in number sequences and their significance in mathematics and nature.
     `
     ,
+    'https://learnmathclass.com/algebra':`
+    Browse algebraic formulas with illustrations, extensive explanations and examples divided by categories:radical rules, exponent rules, logarithm laws and more.
+   
+    `
+    ,'https://learnmathclass.com/calculus':`
+    Learn calculus with illustrated formula widgets covering different topics of it such as :differentiation, integration, limint and more
+   
+    `
+    ,'https://learnmathclass.com/logic':`
+    Explore the fundamental principles of mathematical logic, including propositional and predicate logic, formal systems, and their role in proofs, algorithms, and abstract reasoning.
+    
+    `,
+    'https://learnmathclass.com/trigonometry':`
+    Delve into the key formulas of trigonometry, covering angles, sine, cosine, tangent, and their applications to solve triangles and analyze periodic patterns.
+   
+    `
+    ,
       'https://learnmathclass.com/logic/truth-tables': 'Generate dynamic truth tables for logical expressions with our interactive Logic Calculator. Learn about logical operators, Boolean algebra, and propositional logic.',
     'https://learnmathclass.com/visual-tools/base-converter': 'Visualize number base conversions with our interactive tool.', 
     'https://learnmathclass.com/visual-tools/determinant-calculator': 'Use our free determinant calculator with step-by-step solutions. Easily calculate matrix determinants for 2x2, 3x3, and larger matrices.',
@@ -25,7 +42,7 @@ const metaDescriptions= {
     'https://learnmathclass.com/visual-tools/matrix-multiplication': 'Interactive matrix multiplication animation tool. Visualize and understand matrix multiplication step by step.',
     'https://learnmathclass.com/calculators/statistics-calculator':'Master statistics with our free online calculator at Learn Math Class. Ideal for students and educators. Covers descriptive stats, probability, hypothesis testing, and more. Enhance your math skills today.',
     'https://learnmathclass.com/combinatorics/permutations':'Learn about what Permutations are, different kinds of Permutations, ways to distinguish between them. Understand Permutations formulas and ways to calculate outcomes in every case. ',
-    'https://learnmathclass.com/linear-algebra':'Enter the magical world of vectors, matrices and linear equations',
+    'https://learnmathclass.com/linear-algebra':'Enter the magical world of vectors, matrices and systems of linear equations',
     'https://learnmathclass.com/linear-algebra/matrix-multiplication':'Get Familiar with multiplication  of different kinds of matrices, basic rules and use cases',
     'https://learnmathclass.com/probability':`Learn Probability Concepts and Rules. Explore Formulas with Comprehensive Explanations.`,
     'https://learnmathclass.com/converters':`Use Interactive Units Converters.Convert Degrees to Radians and vice versa `,

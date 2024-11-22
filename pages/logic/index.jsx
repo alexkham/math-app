@@ -9,6 +9,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 
 import Sections from '@/app/components/page-components/section/Sections';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
+import IntroSection from '@/app/components/page-components/section/IntroContentSection';
 
 export default function LogicPage() {
   
@@ -34,6 +35,23 @@ export default function LogicPage() {
     },
   ];
   
+  const introContent = {
+    id: "intro",
+    title: "Introduction to Mathematical Logic Section",
+    content:`
+    Mathematical logic studies the principles of reasoning and provides a rigorous framework to analyze the structure of statements and arguments. It begins with the basics of **propositional logic**, where statements are combined using logical operators like **and**, **or**, and **not**, to form compound statements and evaluate their truth.
+
+A deeper layer is **predicate logic**, which extends propositional logic by introducing quantifiers like **for all** and **there exists**, allowing reasoning about objects and their properties. Central to this is the concept of **logical validity**, which examines whether conclusions follow from premises regardless of specific interpretations.
+
+Mathematical logic also explores **formal systems**, which consist of axioms, rules of inference, and symbols for constructing proofs. Key topics include **set theory**, the foundation of mathematics, and **model theory**, which studies the relationship between formal languages and their interpretations.
+
+Another significant area is **computability theory**, which asks fundamental questions about what problems can be solved by algorithms, and **proof theory**, which investigates the nature and structure of mathematical proofs.
+
+Applications of mathematical logic are vast, influencing fields like **computer science**, where it underpins algorithms and programming languages, and **philosophy**, where it sharpens reasoning. It develops skills in abstraction, critical thinking, and formal reasoning, making it a cornerstone of mathematical rigor.
+    `
+
+  };
+  
 
   return (
     <>
@@ -54,14 +72,13 @@ export default function LogicPage() {
    
     <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>Mathematical Logic</h1>
     <SectionTableOfContents sections={logicSections}/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+    <IntroSection 
+  id={introContent.id}
+  title={introContent.title}
+  content={introContent.content}
+  backgroundColor="#f2f2f2"
+  textColor="#06357a"
+/>
     <Sections  sections={logicSections}/>
     <br/>
     <br/>

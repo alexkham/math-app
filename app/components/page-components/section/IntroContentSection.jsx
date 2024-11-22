@@ -19,7 +19,7 @@ const IntroSection = ({
         padding: '2rem',
         margin: 0,
         fontFamily: 'Times New Roman, Times, serif',
-        lineHeight: 1.2,
+        lineHeight: 1.5,
         width:'80%',
        marginLeft:'auto',
        marginRight:'55px'
@@ -28,7 +28,7 @@ const IntroSection = ({
       <div style={{
         maxWidth: '800px',
         margin: '0 auto',
-        fontSize: '1rem'
+        fontSize: '1.05rem'
       }}>
        
        
