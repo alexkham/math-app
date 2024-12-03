@@ -38,6 +38,7 @@
     "rehype-react": "^8.0.0",
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
+    "sass": "^1.81.0",
     "sharp": "^0.33.5",
     "three": "^0.170.0"
   },

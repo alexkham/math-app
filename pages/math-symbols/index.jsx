@@ -1,6 +1,123 @@
-{ 
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
+// import React from 'react'
+// import '../pages.css'
+// import DataWrapper from '@/app/components/generic-table/DataWrapper'
+// import symbolsData from '../../app/components/keyboards/math_symbols.json';
+// import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
+
+
+// export default function MathSymbolsPage() {
+//   return (
+//     <>
+//     <GenericNavbar/>
+//     <br/>
+//     <br/>
+//     <br/>
+//     <br/>
+//     <Breadcrumb/>
+//     <OperaSidebar 
+//       side='right'
+//       topOffset='65px' 
+//       sidebarWidth='45px'
+//       panelWidth='200px'
+      
+//       iconColor='white'
+//       panelBackgroundColor='#f2f2f2'/> 
+//     <h1 className='title' style={{marginTop:'-30px'}}>Mathematical Symbols</h1>
+//     <br/>
+//     <br/>
+//     <div className='title'
+//        style={{
+//         margin:'auto',
+        
+//         width:'80%'}}>
+//     <DataWrapper data={symbolsData}/>
+//     </div>
+//     <ScrollUpButton/>
+//     </>
+//   )
+// }
+
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
+import React from 'react';
+import Head from 'next/head';
+import '../pages.css';
+import DataWrapper from '@/app/components/generic-table/DataWrapper';
+import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
+
+export default function MathSymbolsPage({ symbolsData, meta }) {
+  return (
+    <>
+      <Head>
+        <title>{meta.title}</title>
+        <meta name="description" content={meta.description} />
+        <meta name="keywords" content={meta.keywords.join(', ')} />
+        <meta name="author" content={meta.author} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="canonical" href={meta.canonical} />
+      </Head>
+      <GenericNavbar />
+      <br />
+      <br />
+      <br />
+      <br />
+      <Breadcrumb />
+      <OperaSidebar
+        side="right"
+        topOffset="65px"
+        sidebarWidth="45px"
+        panelWidth="200px"
+        iconColor="white"
+        panelBackgroundColor="#f2f2f2"
+      />
+      <h1 className="title" style={{ marginTop: '-30px' }}>
+        {meta.pageHeading}
+      </h1>
+      <br />
+      <br />
+      <div
+        className="title"
+        style={{
+          margin: 'auto',
+          width: '80%',
+        }}
+      >
+        <DataWrapper data={symbolsData} />
+      </div>
+      <ScrollUpButton />
+    </>
+  );
+}
+
+// Include data and metadata in getStaticProps
+export async function getStaticProps() {
+ 
+  const meta = {
+    title: 'Math Symbols | Mathematical Symbols Chart',
+    description:
+      'Explore a comprehensive list of mathematical symbols, including LaTeX codes, charts, and explanations. Perfect for math enthusiasts, students, and educators.',
+    keywords: [
+      'math symbols',
+      'mathematical symbols',
+      'LaTeX',
+      'LaTeX code',
+      'math symbols list',
+      'math symbols chart',
+    ],
+    author: 'LearnMathClass',
+    canonical: 'https://www.learnmathclass.com/math-symbols',
+    pageHeading: 'Mathematical Symbols',
+  };
+
+
+  const symbolsData ={ 
     "arithmetic_symbols": [
-      {"symbol": "+", "latex_code": "+", "explanation": "Addition" , "content":"some "},
+      {"symbol": "+", "latex_code": "+", "explanation": "Addition" },
       {"symbol": "−", "latex_code": "-", "explanation": "Subtraction"},
       {"symbol": "×", "latex_code": "\\times", "explanation": "Multiplication"},
       {"symbol": "÷", "latex_code": "\\div", "explanation": "Division"},
@@ -36,10 +153,7 @@
       {"symbol": ")", "latex_code": ")", "explanation": "Right parenthesis for grouping"},
       {"symbol": "[", "latex_code": "[", "explanation": "Left square bracket for grouping"},
       {"symbol": "]", "latex_code": "]", "explanation": "Right square bracket for grouping"},
-      {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-    {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-    {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-    {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+   
     ]
   ,
   "basic_binary_operators": [
@@ -57,7 +171,8 @@
             "&plus;"
         ],
         "math_type_code": "<m:plus></m:plus>",
-        "html_entity_name": "Plus"
+        "html_entity_name": "Plus",
+         "explanation": "Addition operation between two numbers."
     },
     {
         "symbol": "-",
@@ -73,7 +188,8 @@
             "&minus;"
         ],
         "math_type_code": "<m:minus></m:minus>",
-        "html_entity_name": "Minus"
+        "html_entity_name": "Minus",
+        "explanation": "Subtraction operation between two numbers."
     },
     {
         "symbol": "*",
@@ -89,7 +205,8 @@
             "&ast;"
         ],
         "math_type_code": "<m:asterisk></m:asterisk>",
-        "html_entity_name": "Asterisk"
+        "html_entity_name": "Asterisk",
+         "explanation": "Multiplication or a wildcard symbol."
     },
     {
         "symbol": "/",
@@ -105,7 +222,8 @@
             "&sol;"
         ],
         "math_type_code": "<m:slash></m:slash>",
-        "html_entity_name": "Slash"
+        "html_entity_name": "Slash",
+        "explanation": "Denotes division or separates terms."
     },
     {
         "symbol": "=",
@@ -121,7 +239,8 @@
             "&equals;"
         ],
         "math_type_code": "<m:equals></m:equals>",
-        "html_entity_name": "Equals"
+        "html_entity_name": "Equals",
+        "explanation": "Indicates equality between two expressions or assignment."
     },
     {
         "symbol": "≠",
@@ -137,7 +256,8 @@
             "&ne;"
         ],
         "math_type_code": "<m:notequal></m:notequal>",
-        "html_entity_name": "Not Equal"
+        "html_entity_name": "Not Equal",
+        "explanation": "Indicates that two expressions are not equal."
     },
     {
         "symbol": "<",
@@ -153,7 +273,8 @@
             "&lt;"
         ],
         "math_type_code": "<m:lessthan></m:lessthan>",
-        "html_entity_name": "Less Than"
+        "html_entity_name": "Less Than",
+        "explanation": "Indicates that the left value is smaller than the right."
     },
     {
         "symbol": ">",
@@ -169,7 +290,8 @@
             "&gt;"
         ],
         "math_type_code": "<m:greaterthan></m:greaterthan>",
-        "html_entity_name": "Greater Than"
+        "html_entity_name": "Greater Than",
+        "explanation": "Indicates that the left value is larger than the right."
     },
     {
         "symbol": "≤",
@@ -185,7 +307,8 @@
             "&le;"
         ],
         "math_type_code": "<m:lessthanorequalto></m:lessthanorequalto>",
-        "html_entity_name": "Less Than or Equal To"
+        "html_entity_name": "Less Than or Equal To",
+        "explanation": "Left value is less than or equal to the right."
     },
     {
         "symbol": "≥",
@@ -201,7 +324,8 @@
             "&ge;"
         ],
         "math_type_code": "<m:greaterthanorequalto></m:greaterthanorequalto>",
-        "html_entity_name": "Greater Than or Equal To"
+        "html_entity_name": "Greater Than or Equal To",
+        "explanation": "Left value is greater than or equal to the right."
     },
     {
         "symbol": "×",
@@ -217,7 +341,8 @@
             "&times;"
         ],
         "math_type_code": "<m:times></m:times>",
-        "html_entity_name": "Times"
+        "html_entity_name": "Times",
+         "explanation": "Denotes multiplication between two quantities."
     },
     {
         "symbol": "÷",
@@ -233,7 +358,8 @@
             "&divide;"
         ],
         "math_type_code": "<m:divisionsign></m:divisionsign>",
-        "html_entity_name": "Division Sign"
+        "html_entity_name": "Division Sign",
+        "explanation": "Represents division between two numbers."
     },
     {
         "symbol": "±",
@@ -249,7 +375,8 @@
             "&plusmn;"
         ],
         "math_type_code": "<m:plusminus></m:plusminus>",
-        "html_entity_name": "Plus Minus"
+        "html_entity_name": "Plus Minus",
+        "explanation": "Plus Minus."
     },
     {
         "symbol": "∓",
@@ -265,7 +392,8 @@
             "&mnplus;"
         ],
         "math_type_code": "<m:minusplus></m:minusplus>",
-        "html_entity_name": "Minus Plus"
+        "html_entity_name": "Minus Plus",
+        "explanation": "Minus Plus."
     },
     {
         "symbol": "∧",
@@ -281,7 +409,8 @@
             "&and;"
         ],
         "math_type_code": "<m:logicaland></m:logicaland>",
-        "html_entity_name": "Logical And"
+        "html_entity_name": "Logical And",
+         "explanation": "Logical conjunction; true if both operands are true."
     },
     {
         "symbol": "∨",
@@ -297,7 +426,8 @@
             "&or;"
         ],
         "math_type_code": "<m:logicalor></m:logicalor>",
-        "html_entity_name": "Logical Or"
+        "html_entity_name": "Logical Or",
+         "explanation": "Logical disjunction; true if at least one operand is true."
     },
     {
         "symbol": "⊕",
@@ -313,7 +443,8 @@
             "&oplus;"
         ],
         "math_type_code": "<m:circledplus></m:circledplus>",
-        "html_entity_name": "Circled Plus"
+        "html_entity_name": "Circled Plus",
+        "explanation": "Represents direct sum or exclusive OR."
     },
     {
         "symbol": "⊗",
@@ -329,7 +460,8 @@
             "&otimes;"
         ],
         "math_type_code": "<m:circledtimes></m:circledtimes>",
-        "html_entity_name": "Circled Times"
+        "html_entity_name": "Circled Times",
+         "explanation": "Denotes tensor product."
     },
     {
         "symbol": "∙",
@@ -345,7 +477,8 @@
             "&sdot;"
         ],
         "math_type_code": "<m:dot></m:dot>",
-        "html_entity_name": "Dot"
+        "html_entity_name": "Dot",
+         "explanation": "Represents multiplication, especially scalar product."
     },
     {
         "symbol": "∝",
@@ -361,7 +494,8 @@
         ],
         "math_type_code": "<m:proportionalto></m:proportionalto>",
         "html_entity_name": "Proportional To",
-        "unicode_escape_sequence": "\\u221D"
+        "unicode_escape_sequence": "\\u221D",
+        "explanation": "Indicates proportionality between two quantities."
     },
     {
         "symbol": "∘",
@@ -377,7 +511,8 @@
         ],
         "math_type_code": "<m:functioncomposition></m:functioncomposition>",
         "html_entity_name": "Function Composition",
-        "unicode_escape_sequence": "\\u2218"
+        "unicode_escape_sequence": "\\u2218",
+         "explanation": "Denotes the composition of two functions."
     },
     {
         "symbol": "∙",
@@ -393,7 +528,8 @@
         ],
         "math_type_code": "<m:bulletoperator></m:bulletoperator>",
         "html_entity_name": "Bullet Operator",
-        "unicode_escape_sequence": "\\u2219"
+        "unicode_escape_sequence": "\\u2219",
+        "explanation": "Used for multiplication or as a list marker."
     },
     {
         "symbol": "∩",
@@ -409,7 +545,8 @@
         ],
         "math_type_code": "<m:intersection></m:intersection>",
         "html_entity_name": "Intersection",
-        "unicode_escape_sequence": "\\u2229"
+        "unicode_escape_sequence": "\\u2229",
+         "explanation": "Represents common elements of sets."
     },
     {
         "symbol": "∪",
@@ -425,7 +562,8 @@
         ],
         "math_type_code": "<m:union></m:union>",
         "html_entity_name": "Union",
-        "unicode_escape_sequence": "\\u222A"
+        "unicode_escape_sequence": "\\u222A",
+        "explanation": "Represents all elements from both sets."
     },
     {
         "symbol": "⊎",
@@ -441,7 +579,8 @@
         ],
         "math_type_code": "<m:multisetunion></m:multisetunion>",
         "html_entity_name": "Multiset Union",
-        "unicode_escape_sequence": "\\u228E"
+        "unicode_escape_sequence": "\\u228E",
+         "explanation": "Union where elements' multiplicities are summed."
     },
     {
         "symbol": "⊓",
@@ -457,7 +596,8 @@
         ],
         "math_type_code": "<m:infimum></m:infimum>",
         "html_entity_name": "Infimum",
-        "unicode_escape_sequence": "\\u2293"
+        "unicode_escape_sequence": "\\u2293",
+        "explanation": "Greatest element less than or equal to all elements."
     },
     {
         "symbol": "⊔",
@@ -473,7 +613,8 @@
         ],
         "math_type_code": "<m:supremum></m:supremum>",
         "html_entity_name": "Supremum",
-        "unicode_escape_sequence": "\\u2294"
+        "unicode_escape_sequence": "\\u2294",
+        "explanation": "Least element greater than or equal to all elements."
     },
     {
         "symbol": "≮",
@@ -489,12 +630,10 @@
         ],
         "math_type_code": "<m:notlessthan></m:notlessthan>",
         "html_entity_name": "Not Less Than",
-        "unicode_escape_sequence": "\\u226E"
+        "unicode_escape_sequence": "\\u226E",
+        "explanation": "Indicates the left value is not less than the right."
     },
-    {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-    {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-    {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-    {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+   
 ],
     "advanced_binary_operators": [
         {"symbol": "∔", "latex_code": "\\dotplus", "explanation": "Dot plus"},
@@ -537,11 +676,11 @@
         {"symbol": "⨆", "latex_code": "\\bigcup", "explanation": "N-ary union operator"},
         {"symbol": "⨄", "latex_code": "\\biguplus", "explanation": "N-ary union plus"},
         {"symbol": "⨃", "latex_code": "\\bigcupplus", "explanation": "Union with a plus"},
-        {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-        {"symbol": "caps", "latex_code": "\\bigcupplus", "explanation": "CapsLock"},
-        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+        // {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+        // {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+        // {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+        // {"symbol": "caps", "latex_code": "\\bigcupplus", "explanation": "CapsLock"},
+        // {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
     ],
     "geometry_symbols": [
         {"symbol": "∟", "latex_code": "\\rightangle", "explanation": "Right Angle"},
@@ -579,10 +718,10 @@
         {"symbol": "γ", "latex_code": "\\gamma", "explanation": "Gamma (often represents an angle or a specific point)"},
 
 
-        {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+        // {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+        // {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+        // {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+        // {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
 
     ],
     "basic_n-ary_operators": [
@@ -607,10 +746,7 @@
         {"symbol": "⨁", "latex_code": "\\bigoplus", "explanation": "Direct sum"},
         {"symbol": "⨄", "latex_code": "\\biguplus", "explanation": "Multiset sum"},
         {"symbol": "⨃", "latex_code": "\\bigcupplus", "explanation": "Union with a plus"},
-        {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+       
     ],
     "math_letter_like_symbols": [
         {"symbol": "∀", "latex_code": "\\forall", "explanation": "For All (Universal Quantifier)"},
@@ -654,10 +790,7 @@
         {"symbol": "ℶ", "latex_code": "\\beth", "explanation": "Beth Number"},
         {"symbol": "ℷ", "latex_code": "\\gimel", "explanation": "Gimel Function"},
         {"symbol": "ℸ", "latex_code": "\\dalet", "explanation": "Dalet Symbol"},
-        {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+       
     ],
     "relational_operators": [
         {"symbol": "=", "latex_code": "=", "explanation": "Equal to"},
@@ -703,10 +836,7 @@
         {"symbol": "⊣", "latex_code": "\\dashv", "explanation": "Double turnstile"},
         {"symbol": "⋈", "latex_code": "\\bowtie", "explanation": "Bowtie, join"},
         {"symbol": "≍", "latex_code": "\\asymp", "explanation": "Equiangular to"},
-        {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+       
     ],
     "brackets": [
         {"symbol": "(", "latex_code": "\\left(", "explanation": "Left parenthesis"},
@@ -727,10 +857,7 @@
         {"symbol": "‖", "latex_code": "\\right\\|", "explanation": "Right double vertical bar"},
         {"symbol": "⟦", "latex_code": "\\left\\llbracket", "explanation": "Left double bracket"},
         {"symbol": "⟧", "latex_code": "\\right\\rrbracket", "explanation": "Right double bracket"},
-        {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+        
     ],
     "negation_symbols": [
         {"symbol": "≠", "latex_code": "\\neq", "explanation": "Not Equal To"},
@@ -775,10 +902,7 @@
         {"symbol": "⊮", "latex_code": "\\nVdash", "explanation": "Does Not Force"},
         {"symbol": "⊯", "latex_code": "\\nVDash", "explanation": "Negated Double Vertical Bar Double Right Turnstile"},
         {"symbol": "∄", "latex_code": "\\nexists", "explanation": "There Does Not Exist"},
-        {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+       
         
     ],
     
@@ -856,11 +980,7 @@
             {"symbol": "↜", "latex_code": "\\leftsquigarrow", "explanation": "Leftwards Wave Arrow"},
             {"symbol": "↝", "latex_code": "\\rightsquigarrow", "explanation": "Rightwards Wave Arrow"},
             {"symbol": "⇜", "latex_code": "\\leftsquigarrow", "explanation": "Leftwards Squiggle Arrow"},
-            {"symbol": "⇝", "latex_code": "\\rightsquigarrow", "explanation": "Rightwards Squiggle Arrow"},
-            {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+       
         ],
         "greek_letters": [
             {
@@ -1440,10 +1560,7 @@
                 "html_entity_name": "Omega"
     }
             ,
-        {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-        {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-        {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-        {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+        
             
         ],
         "latin_letters":[
@@ -2229,10 +2346,10 @@
                     "html_entity_name": "Z"
                 },
 
-            {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-            {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-            {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-            {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+            // {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+            // {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+            // {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+            // {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
 
             ],
             
@@ -2268,10 +2385,10 @@
                   {"symbol": "ℂ", "latex_code": "\\mathbb{C}", "explanation": "Complex numbers"},
                   {"symbol": "∆", "latex_code": "\\triangle", "explanation": "Symmetric difference"},
                   {"symbol": "×", "latex_code": "\\times", "explanation": "Cartesian product"},
-                  {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-                  {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-                  {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-                  {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+                //   {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
+                //   {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
+                //   {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
+                //   {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
 
                 ],
                 
@@ -2328,10 +2445,7 @@
                     {"symbol": "7π/6", "latex_code": "\\frac{7\\pi}{6}", "explanation": "Seven sixths of pi, represents 210 degrees"},
                     {"symbol": "11π/6", "latex_code": "\\frac{11\\pi}{6}", "explanation": "Eleven sixths of pi, represents 330 degrees"},
                 
-                    {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-                    {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-                    {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-                    {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+                  
                 
 
                 ],
@@ -2347,10 +2461,7 @@
                     {"symbol": "B(n)", "latex_code": "B(n)", "explanation": "Bell numbers"},
                     {"symbol": "ℙ(A)", "latex_code": "\\mathcal{P}(A)", "explanation": "Power set of A"},
                     {"symbol": "|A|", "latex_code": "|A|", "explanation": "Cardinality of set A"},
-                    {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-                    {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-                    {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-                    {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+                   
                 
                   ],
                   "probability_symbols": [
@@ -2375,10 +2486,7 @@
                     {"symbol": "ρ", "latex_code": "\\rho", "explanation": "Correlation coefficient"},
                     {"symbol": "p-value", "latex_code": "\\text{p-value}", "explanation": "p-value, probability of observing the test result under the null hypothesis"},    
                     {"symbol": "Z-score", "latex_code": "Z = \\frac{X - \\mu}{\\sigma}", "explanation": "Measure of how many standard deviations an element is from the mean. Calculated as Z = (X - μ) / σ, where X is the value, μ is the mean, and σ is the standard deviation."},                                    
-                    {"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-                    {"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-                    {"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-                    {"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
+                    
                 
                   ]
             }
@@ -2394,3 +2502,12 @@
 
 
 
+
+
+  return {
+    props: {
+      symbolsData,
+      meta, // Pass SEO metadata
+    },
+  };
+}

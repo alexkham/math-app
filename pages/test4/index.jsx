@@ -21,6 +21,12 @@ import VectorSpace from '@/app/components/linear-algebra/VectorSpace';
 import VectorSpace3D from '@/app/components/linear-algebra/3DVectorSpace';
 import VectorVisualization from '@/app/components/vectors/VectorVisualization';
 import VectorVisualizationSVG from '@/app/components/vectors/VectorVisualizationSvg';
+import VectorVisualizer2D from '@/app/components/vectors/Vector2DVisualisation';
+import vectorThemes from '@/app/components/vectors/vectorThemes';
+import ExpandableTable from '@/app/components/generic-table/ExpandableTable';
+import TriangleSVGComponent from '@/app/components/svg/shapes/TriangleSVG';
+import DataWrapper from '@/app/components/generic-table/DataWrapper';
+import math_symbols_Data from '../../app/components/keyboards/math_symbols_data.json'
 
 export default function Test4Page() {
 
@@ -208,7 +214,57 @@ export default function Test4Page() {
             color:'#efebeb'
         }
     ];
-    
+
+    const darkTheme = {
+      background: "#1a1a2e",
+      gridColor: "#2d3748",
+      axisColor: "#cbd5e0",
+      vectorColor: "#4299e1",
+      labelColor: "#e2e8f0",
+      fontFamily: "'Inter', sans-serif"
+    };
+
+    const tableData = [
+      {
+        id: 1,
+        name: "John Doe",
+        email: "john@example.com",
+        role: "Developer",
+        content: {
+          profile: "Full-stack developer with 5 years experience\nSkills: React, Node.js, Python",
+          projects: "Current: E-commerce Platform\nCompleted: CRM System, Mobile App",
+          performance: "Rating: 4.8\nCompleted 95% of tasks on time"
+        }
+      },
+      {
+        id: 2,
+        name: "John Doe x²",
+        email: "john@example.com ⋒",
+        role: "Developer",
+        content: {
+          profile: "Full-stack developer with 5 years experience\nSkills: React, Node.js, Python",
+          projects: "Current: E-commerce Platform\nCompleted: CRM System, Mobile App",
+          performance: "Rating: 4.8\nCompleted 95% of tasks on time"
+        }
+      },
+      {
+        id: 3,
+        name: "John Doe",
+        email: "john@example.com",
+        role: "Developer",
+        content: {
+          profile: "Full-stack developer with 5 years experience\nSkills: React, Node.js, Python",
+          projects: "Current: E-commerce Platform\nCompleted: CRM System, Mobile App",
+          performance: "Some performance issues"
+        }
+      },
+      {
+        id: 4,
+        name: "Jane Smith",
+        email: "jane@example.com",
+        content: "Some simple content here like $x^2$"
+      }
+    ];
    
 
 
@@ -332,6 +388,60 @@ export default function Test4Page() {
     <VectorVisualizationSVG/>
     {/* </div> */}
     <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div style={{transform:'scale(1.1)', marginLeft:'150px'}}>
+    <VectorVisualizer2D  vectorCoordinates={[1, 3]} axisRange={5}
+     gridDivisions={10}
+     theme={vectorThemes.arctic}/>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.classicLight}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.darkModern}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.purplePastel}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.oceanTheme}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.mintTheme}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.highContrast}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.matrix}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.sunset}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.space}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.arctic}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.neon}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.desert}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.cyberpunk}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.retroWave}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.forest}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.monochrome}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.volcano}/>
+<VectorVisualizer2D vectorCoordinates={[1, 3]} axisRange={5} gridDivisions={10} theme={vectorThemes.frost}/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div style={{width:'50%'}}>
+    <ExpandableTable data={tableData} 
+    copyableFields={['name','email']}
+    
+    nestedCopyableFields={['profile','projects','performance']}/>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <TriangleSVGComponent/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div className='title' style={{width:'60%'}}>
+    <DataWrapper data={math_symbols_Data}/>
+    </div>
     <br/>
     {/* <UnitCircle/> */}
     
