@@ -33,6 +33,10 @@ const metaDescriptions= {
     'https://learnmathclass.com/trigonometry':`
     Delve into the key formulas of trigonometry, covering angles, sine, cosine, tangent, and their applications to solve triangles and analyze periodic patterns.
    
+    `,
+    'https://learnmathclass.com/math-symbols':`
+    Explore tens of mathematical symbols with explanations used in formulas and equations divided by categories and groups. 
+   
     `
     ,
       'https://learnmathclass.com/logic/truth-tables': 'Generate dynamic truth tables for logical expressions with our interactive Logic Calculator. Learn about logical operators, Boolean algebra, and propositional logic.',
