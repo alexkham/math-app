@@ -98,12 +98,12 @@ export default function PolynomialCalculatorPage({ keyWords, instructions }) {
         <meta name="description" content="Free online polynomial calculator. Add and subtract polynomials easily, step by step solution, random polynomial generator." />
         <meta name="keywords" content={keyWords.join(', ')} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="canonical" href="https://www.learnmathclass.com/calculators/polynomial" />
+        <link rel="canonical" href="https://www.learnmathclass.com/calculators/polynomial-calculator" />
 
         {/* Open Graph metadata */}
         <meta property="og:title" content="Polynomial Calculator | Math Calculator" />
         <meta property="og:description" content="Free online polynomial calculator. Add and subtract polynomials easily, step by step solution, random polynomial generator." />
-        <meta property="og:url" content="https://www.learnmathclass.com/calculators/polynomial" />
+        <meta property="og:url" content="https://www.learnmathclass.com/calculators/polynomial-calculator" />
         <meta property="og:type" content="website" />
         
         {/* Twitter Card metadata */}
