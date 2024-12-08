@@ -27,6 +27,10 @@ import ExpandableTable from '@/app/components/generic-table/ExpandableTable';
 import TriangleSVGComponent from '@/app/components/svg/shapes/TriangleSVG';
 import DataWrapper from '@/app/components/generic-table/DataWrapper';
 import math_symbols_Data from '../../app/components/keyboards/math_symbols_data.json'
+import SyntheticDivisionCalculator from '@/app/components/polynomials/SyntheticDivisionCalculator';
+import SquareOfSum from '@/app/components/polynomials/SquareOfSum';
+import PolynomialCalculator from '@/app/components/polynomials/PolynomialCalculator';
+import ExplanationDetails from '@/app/components/ExplanationDetails';
 
 export default function Test4Page() {
 
@@ -265,6 +269,17 @@ export default function Test4Page() {
         content: "Some simple content here like $x^2$"
       }
     ];
+
+
+
+    const instructions = [
+      'Input your quadratic formula coefficients for x², x and constant term',
+      'Use <strong>+/-</strong> buttons to toggle between positive/negative values',
+      'Empty fields are treated as zero in the quadratic equations',
+      'Hit <strong>Solve</strong> to get your complete solution'
+    ];
+    
+
    
 
 
@@ -273,7 +288,7 @@ export default function Test4Page() {
     <div>Test4Page</div>
     <br/>
     <br/>
-    <br/>
+  
     <br/>
     <br/>
     {/* <div style={{transform:'scale(0.9)'}}>
@@ -422,12 +437,12 @@ export default function Test4Page() {
     <br/>
     <br/>
     <br/>
-    <div style={{width:'50%'}}>
+    {/* <div style={{width:'50%'}}>
     <ExpandableTable data={tableData} 
     copyableFields={['name','email']}
     
     nestedCopyableFields={['profile','projects','performance']}/>
-    </div>
+    </div> */}
     <br/>
     <br/>
     <br/>
@@ -437,11 +452,33 @@ export default function Test4Page() {
     <br/>
     <br/>
     <br/>
+    <SyntheticDivisionCalculator/>
     <br/>
     <br/>
-    <div className='title' style={{width:'60%'}}>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <PolynomialCalculator/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    {/* <SquareOfSum/> */}
+    <br/>
+    <br/>
+    <ExplanationDetails 
+  title="How to use this calculator"
+  instructions={instructions}
+/>
+    <br/>
+    {/* <div className='title' style={{width:'60%'}}>
     <DataWrapper data={math_symbols_Data}/>
-    </div>
+    </div> */}
     <br/>
     {/* <UnitCircle/> */}
     

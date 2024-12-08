@@ -35,7 +35,7 @@ const metaDescriptions= {
    
     `,
     'https://learnmathclass.com/math-symbols':`
-    Explore tens of mathematical symbols with explanations used in formulas and equations divided by categories and groups. 
+    Explore tens of copiable mathematical symbols with explanations used in formulas and equations divided by categories and groups. 
    
     `
     ,

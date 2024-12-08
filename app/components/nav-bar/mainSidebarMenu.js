@@ -48,6 +48,7 @@ const CustomConvert=()=>(
     { text: 'Trigonometry Calculator', url: '/calculators/trigonometry-calculator' },
     { text: 'Quadratic Equations  Calculator', url: '/calculators/quadratic-equations' },
     { text: 'Factoring Calculator', url: '/calculators/factoring-calculator' },
+    { text: 'Polynomial Calculator', url: '/calculators/polynomial-calculator' },
    
   ]},
   // { id: 3, icon: FileText, tooltip: 'Files', content: 'FilesComponent' },
