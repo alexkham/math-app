@@ -80,17 +80,143 @@ export const getStaticProps = async () => {
     'Click \"Calculate\" to see the result'
   ];
 
+  const operationExplanations = {
+    addition: {
+      text: "To add polynomials, we combine like terms by adding coefficients of terms with the same degree. Let's look at different cases:",
+      sections: [
+        {
+          title: "General Form:",
+          content: `Given two polynomials:
+  $$P(x) = a_nx^n + a_{n-1}x^{n-1} + ... + a_1x + a_0$$
+  $$Q(x) = b_mx^m + b_{m-1}x^{m-1} + ... + b_1x + b_0$$`
+        },
+        {
+          title: "Case 1: Equal Degrees (n = m)",
+          content: `Adding terms with matching degrees:
+  $$(a_nx^n + a_{n-1}x^{n-1} + ... + a_1x + a_0)$$
+  $$ + (b_nx^n + b_{n-1}x^{n-1} + ... + b_1x + b_0)$$
+  $$= (a_n + b_n)x^n + (a_{n-1} + b_{n-1})x^{n-1} + ... + (a_0 + b_0)$$`
+        },
+        {
+          title: "Case 2: Different Degrees (n > m)",
+          content: `Higher degree terms remain unchanged:
+  $$(a_nx^n + ... + a_mx^m + ... + a_1x + a_0)$$
+  $$ + (b_mx^m + ... + b_1x + b_0)$$
+  $$= a_nx^n + ... + (a_m + b_m)x^m + ... + (a_0 + b_0)$$`
+        },
+        {
+          title: "Example:",
+          content: `$$(2x^3 + 3x^2 + x + 1) + (4x^2 + 2x + 3)$$
+  $$= 2x^3 + 7x^2 + 3x + 4$$`
+        }
+      ],
+      note: "Terms appear in descending order of degree. Terms with zero coefficients (like $0x^2$) are automatically omitted."
+    },
+    subtraction: {
+      text: "To subtract polynomials, we distribute the minus sign to all terms of the second polynomial and then combine like terms.",
+      sections: [
+        {
+          title: "General Form:",
+          content: `Given two polynomials:
+  $$P(x) = a_nx^n + a_{n-1}x^{n-1} + ... + a_1x + a_0$$
+  $$Q(x) = b_mx^m + b_{m-1}x^{m-1} + ... + b_1x + b_0$$`
+        },
+        {
+          title: "Case 1: Equal Degrees (n = m)",
+          content: `Subtracting corresponding terms:
+  $$(a_nx^n + a_{n-1}x^{n-1} + ... + a_1x + a_0)$$
+  $$ - (b_nx^n + b_{n-1}x^{n-1} + ... + b_1x + b_0)$$
+  $$= (a_n - b_n)x^n + (a_{n-1} - b_{n-1})x^{n-1} + ... + (a_0 - b_0)$$`
+        },
+        {
+          title: "Case 2: Different Degrees (n > m)",
+          content: `Higher degree terms remain unchanged:
+  $$(a_nx^n + ... + a_mx^m + ... + a_1x + a_0)$$
+  $$ - (b_mx^m + ... + b_1x + b_0)$$
+  $$= a_nx^n + ... + (a_m - b_m)x^m + ... + (a_0 - b_0)$$`
+        },
+        {
+          title: "Example:",
+          content: `$$(2x^3 + 3x^2 + x + 1) - (4x^2 + 2x + 3)$$
+  $$= 2x^3 - x^2 - x - 2$$`
+        }
+      ],
+      note: "Remember: When distributing the minus sign, all terms change signs: $+b$ becomes $-b$, and $-b$ becomes $+b$."
+    }
+  };
+
+//   const operationExplanations = {
+//     addition: {
+//       text: "To add polynomials, we combine like terms by adding coefficients of terms with the same degree. Let's look at different cases:",
+//       example: `Let's say we have polynomials $$P(x) = a_nx^n + a_{n-1}x^{n-1} + ... + a_1x + a_0$$ and $$Q(x) = b_mx^m + b_{m-1}x^{m-1} + ... + b_1x + b_0$$
+  
+//   When degrees are equal ($n = m$):
+//   $$(a_nx^n + a_{n-1}x^{n-1} + ... + a_1x + a_0) + (b_nx^n + b_{n-1}x^{n-1} + ... + b_1x + b_0)$$
+//   $$= (a_n + b_n)x^n + (a_{n-1} + b_{n-1})x^{n-1} + ... + (a_1 + b_1)x + (a_0 + b_0)$$
+  
+//   When degrees differ ($n > m$):
+//   $$(a_nx^n + a_{n-1}x^{n-1} + ... + a_1x + a_0) + (b_mx^m + b_{m-1}x^{m-1} + ... + b_1x + b_0)$$
+//   $$= a_nx^n + a_{n-1}x^{n-1} + ... + (a_m + b_m)x^m + ... + (a_1 + b_1)x + (a_0 + b_0)$$
+  
+//   For example: $$(2x^3 + 3x^2 + x + 1) + (4x^2 + 2x + 3) = 2x^3 + 7x^2 + 3x + 4$$`,
+//       note: "Terms appear in descending order of degree. Terms with zero coefficients (like $0x^2$) are automatically omitted."
+//     },
+//     subtraction: {
+//       text: "To subtract polynomials, we distribute the minus sign to all terms of the second polynomial and then combine like terms. This is equivalent to adding the negative of the second polynomial.",
+//       example: `For polynomials $$P(x) = a_nx^n + a_{n-1}x^{n-1} + ... + a_1x + a_0$$ and \n$$Q(x) = b_mx^m + b_{m-1}x^{m-1} + ... + b_1x + b_0$$
+  
+//   When degrees are equal ($n = m$):
+//   $$(a_nx^n + a_{n-1}x^{n-1} + ... + a_1x + a_0) - (b_nx^n + b_{n-1}x^{n-1} + ... + b_1x + b_0)$$
+//   $$= (a_n - b_n)x^n + (a_{n-1} - b_{n-1})x^{n-1} + ... + (a_1 - b_1)x + (a_0 - b_0)$$
+  
+//   When degrees differ ($n > m$):
+//   $$(a_nx^n + a_{n-1}x^{n-1} + ... + a_1x + a_0) - (b_mx^m + b_{m-1}x^{m-1} + ... + b_1x + b_0)$$
+//   $$= a_nx^n + a_{n-1}x^{n-1} + ... + (a_m - b_m)x^m + ... + (a_1 - b_1)x + (a_0 - b_0)$$
+  
+//   For example: $$(2x^3 + 3x^2 + x + 1) - (4x^2 + 2x + 3) = 2x^3 - x^2 - x - 2$$`,
+//       note: "Remember: subtracting $P - Q$ is the same as adding $P + (-Q)$. When distributing the minus sign, all terms in $Q$ change signs: $-(b_nx^n)$ becomes $-b_nx^n$, $-(+b_{n-1}x^{n-1})$ becomes $-b_{n-1}x^{n-1}$, and $-(-b_kx^k)$ becomes $+b_kx^k$."
+//     }
+//   };
+
+//   const operationExplanations = {
+//     addition: {
+//       text: "Adding polynomials combines like terms: we add coefficients of terms with the same degree. Any term without a match (different degree) remains as is.",
+//       example: "($2x^2$ + $3x$ + 1) + (x^2 - x + 4) = 3x^2 + 2x + 5",
+//       note: "Note: Zero terms disappear automatically: $x^2 + 0x + 2$ is shown as $x^2 + 2$"
+//     },
+//     subtraction: {
+//       text: "Subtracting polynomials is similar to addition but we subtract coefficients of like terms. It's the same as adding the negative of the second polynomial.",
+//       example: "$$(3x^2 + 2x - 1) - (x^2 + 4x + 2) = 2x^2 - 2x - 3$$",
+//       note: "Note: Terms in the second polynomial change signs: $P - (x^2 + 2)$ becomes $P + (-x^2 - 2)$"
+//     }
+//   };
+
+
+//   const operationExplanations = {
+//     addition: {
+//       text: "Adding polynomials combines like terms: we add coefficients of terms with the same degree. Any term without a match (different degree) remains as is.",
+//       example: "For example: `(2x^2 + 3x + 1) + (x^2 - x + 4) = 3x^2 + 2x + 5`",
+//       note: "Note: Zero terms disappear automatically: `x^2 + 0x + 2` is shown as `x^2 + 2`"
+//     },
+//     subtraction: {
+//       text: "Subtracting polynomials is similar to addition but we subtract coefficients of like terms. It's the same as adding the negative of the second polynomial.",
+//       example: "For example: `(3x^2 + 2x - 1) - (x^2 + 4x + 2) = 2x^2 - 2x - 3`",
+//       note: "Note: Terms in the second polynomial change signs: `P - (x^2 + 2)` becomes `P + (-x^2 - 2)`"
+//     }
+//   };
+
   return {
     props: {
       keyWords,
-      instructions
+      instructions,
+      operationExplanations
     },
     // Revalidate every 24 hours
     revalidate: 86400
   }
 }
 
-export default function PolynomialCalculatorPage({ keyWords, instructions }) {
+export default function PolynomialCalculatorPage({ keyWords, instructions,operationExplanations }) {
   return (
     <>
       <Head>
@@ -127,9 +253,11 @@ export default function PolynomialCalculatorPage({ keyWords, instructions }) {
         panelBackgroundColor='#f2f2f2'
       /> 
 
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'-20px'}}>Polynomial Calculator</h1>
-      <div style={{width:'95%',margin:'auto'}}>
-        <PolynomialCalculator instructions={instructions}/>
+      <h1 className='title' style={{marginTop:'-30px',marginBottom:'-10px'}}>Polynomial Calculator</h1>
+      <div >
+        <PolynomialCalculator 
+        instructions={instructions}
+        operationExplanations={operationExplanations}/>
       </div>
       <br/>
       <br/>
