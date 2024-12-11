@@ -97,7 +97,7 @@ export const mainMenuStructure = [
           items: [
             { label: 'Basic Math', href: '/tables/arithmetics' },
             { label: 'Probability', href: '/tables/probability' },
-            { label: 'Mathematica Symbols', href: '/math-symbols' },
+            { label: 'Mathematical Symbols', href: '/math-symbols' },
            
           ]
         },
