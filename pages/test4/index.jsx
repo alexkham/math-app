@@ -31,6 +31,9 @@ import SyntheticDivisionCalculator from '@/app/components/polynomials/SyntheticD
 import SquareOfSum from '@/app/components/polynomials/SquareOfSum';
 import PolynomialCalculator from '@/app/components/polynomials/PolynomialCalculator';
 import ExplanationDetails from '@/app/components/ExplanationDetails';
+import { color } from 'framer-motion';
+import VerticalButtonGroup from '@/app/components/VerticalButtonGroup';
+
 
 export default function Test4Page() {
 
@@ -280,7 +283,18 @@ export default function Test4Page() {
     ];
     
 
-   
+    const menuItems = [
+      {
+        title: "Dashboard",
+        // icon: <Home />,
+        link: "/dashboard"
+      },
+      {
+        title: "Settings",
+        link: "/settings"  // Example without icon
+      }
+    ];
+    
 
 
   return (
@@ -288,7 +302,7 @@ export default function Test4Page() {
     <div>Test4Page</div>
     <br/>
     <br/>
-  
+    
     <br/>
     <br/>
     {/* <div style={{transform:'scale(0.9)'}}>
@@ -299,6 +313,14 @@ export default function Test4Page() {
     <br/>
     <br/>
     <br/>
+    <VerticalButtonGroup 
+      items={menuItems}
+      width="120px"       
+      backgroundColor ='red'
+      color = 'white'
+      isSticky={true}
+      verticalOffset='200px'
+      />
     <br/>
    <GenericProbabilityTree data={threeLeveData}/>
     <br/>
@@ -362,6 +384,13 @@ export default function Test4Page() {
     <br/>
     <br/>
     <br/>
+    {/* <VerticalButtonGroup 
+      items={menuItems}
+      width="120px"       
+      backgroundColor ='red'
+      color = 'white'
+      isSticky={true}
+      /> */}
     <br/>
     {/* <div style={{transform:'scale(1.5)', display:"flex",flexDirection:'row',
       alignItems:'center',justifyContent:'center'}}> */}
@@ -471,10 +500,63 @@ export default function Test4Page() {
     {/* <SquareOfSum/> */}
     <br/>
     <br/>
-    <ExplanationDetails 
+    {/* <ExplanationDetails 
   title="How to use this calculator"
   instructions={instructions}
-/>
+/> */}
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div>
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mrow>
+    <mo stretchy="true" style={{height:'8em'}}>[</mo>
+    <mtable>
+      <mtr>
+        <mtd><msub><mi>a</mi><mn>11</mn></msub></mtd>
+        <mtd><msub><mi>a</mi><mn>12</mn></msub></mtd>
+        <mtd><msub><mi>a</mi><mn>13</mn></msub></mtd>
+      </mtr>
+      <mtr>
+        <mtd><msub><mi>a</mi><mn>21</mn></msub></mtd>
+        <mtd><msub><mi>a</mi><mn>22</mn></msub></mtd>
+        <mtd><msub><mi>a</mi><mn>23</mn></msub></mtd>
+      </mtr>
+      <mtr>
+        <mtd style={{color:'red'}}><msub><mi>a</mi><mn>31</mn></msub></mtd>
+        <mtd><msub><mi>a</mi><mn>32</mn></msub></mtd>
+        <mtd><msub><mi>a</mi><mn>33</mn></msub></mtd>
+      </mtr>
+    </mtable>
+    <mo stretchy="true" style={{height:'8em'}}>]</mo>
+  </mrow>
+</math>
+
+</div>
+
+   
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    {/* <VerticalButtonGroup 
+      items={menuItems}
+      width="120px"       
+      backgroundColor ='red'
+      color = 'white'
+      isSticky={true}
+      /> */}
+    <br/>
+    <br/>
     <br/>
     {/* <div className='title' style={{width:'60%'}}>
     <DataWrapper data={math_symbols_Data}/>

@@ -1750,7 +1750,7 @@ const ExpandableTable = ({
             <th className={styles.iconCell}></th>
             {mainFields.map((field) => (
               <th key={field} className={styles.headerCell}>
-                {processContent(field)}
+                {processContent(field.replaceAll('_',' '))}
               </th>
             ))}
           </tr>

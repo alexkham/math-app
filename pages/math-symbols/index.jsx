@@ -49,8 +49,22 @@ import Head from 'next/head';
 import '../pages.css';
 import DataWrapper from '@/app/components/generic-table/DataWrapper';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
+import VerticalButtonGroup from '@/app/components/VerticalButtonGroup';
 
 export default function MathSymbolsPage({ symbolsData, meta }) {
+
+    const menuItems = [
+        {
+          title: "Linear Algebra",
+          // icon: <Home />,
+          link: "/math-symbols/linear-algebra"
+        },
+        // {
+        //   title: "Settings",
+        //   link: "/settings"  // Example without icon
+        // }
+      ];
+      
   return (
     <>
       <Head>
@@ -64,9 +78,11 @@ export default function MathSymbolsPage({ symbolsData, meta }) {
       <GenericNavbar />
       <br />
       <br />
+     
       <br />
       <br />
       <Breadcrumb />
+      
       <OperaSidebar
         side="right"
         topOffset="65px"
@@ -79,6 +95,14 @@ export default function MathSymbolsPage({ symbolsData, meta }) {
         {meta.pageHeading}
       </h1>
       <br />
+      <VerticalButtonGroup 
+      items={menuItems}
+      width="130px"       
+      backgroundColor ='#0070f3'
+      color = 'white'
+      isSticky={true}
+      verticalOffset='250px'
+      />
       <br />
       <div
         className="title"
@@ -108,6 +132,7 @@ export async function getStaticProps() {
       'LaTeX code',
       'math symbols list',
       'math symbols chart',
+     
     ],
     author: 'LearnMathClass',
     canonical: 'https://www.learnmathclass.com/math-symbols',
@@ -2494,15 +2519,7 @@ export async function getStaticProps() {
                   
                   
               
-              
-
-        
-    
-    
-
-
-
-
+   
 
   return {
     props: {
