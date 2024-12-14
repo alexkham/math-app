@@ -12,10 +12,10 @@
   },
   "dependencies": {
     "@react-three/fiber": "^8.17.10",
-    "big.js": "^6.2.2",
     "chart.js": "^4.4.4",
     "chartjs-chart-venn": "^4.3.1",
     "chartjs-plugin-annotation": "^3.0.1",
+    "decimal.js": "^10.4.3",
     "framer-motion": "^11.9.0",
     "globby": "^14.0.2",
     "gojs": "^3.0.8",
