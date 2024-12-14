@@ -7,6 +7,7 @@ import VerticalScrollingFormulaWidget from '@/app/components/examples/VerticalSc
 import combinatoricsFormulaList from '@/app/api/db/formulas/combinatorics/combinatoricsFormulas'
 import AngleConverter from '@/app/components/converters/AngleConverter'
 import TrigoCalculator from '@/app/components/trigo-calculator/TrigoCalculator'
+import RootCalculator from '@/app/components/calculators/arithmetics/RootCalculator'
 
 
 
@@ -67,6 +68,37 @@ const testSections = [
       // pageLink: '/main2'
     },
   ];
+
+
+  const explanations = {
+    square: {
+      text: "A square root of a number is a value that, when multiplied by itself, gives the number. For example, the square root of 25 is 5, because 5 × 5 = 25.",
+      links: [
+        {
+          title: "Learn More About Square Roots",
+          link: "https://example.com/square-roots"
+        }
+      ]
+    },
+    cube: {
+      text: "A cube root of a number is a value that, when multiplied by itself twice, gives the number. For example, the cube root of 27 is 3, because 3 × 3 × 3 = 27.",
+      // links: [
+      //   {
+      //     title: "Cube Roots Explained",
+      //     link: "https://example.com/cube-roots"
+      //   }
+      // ]
+    },
+    nth: {
+      text: "An nth root of a number is a value that, when multiplied by itself n-1 times, gives the number. For example, the 4th root of 16 is 2, because 2 × 2 × 2 × 2 = 16.",
+      links: [
+        {
+          title: "Understanding Nth Roots",
+          link: "https://example.com/nth-roots"
+        }
+      ]
+    }
+  };
   
 
   return (
@@ -79,7 +111,7 @@ const testSections = [
     <div>Test3Page</div>
     <br></br>
     <br></br>
-    <SectionTableOfContents sections={testSections}/>
+    {/* <SectionTableOfContents sections={testSections}/> */}
     <br/>
     <br/>
     <br/>
@@ -91,16 +123,22 @@ const testSections = [
     <br/>
     <br/>
     <br/>
-    <div style={{transform:'scale(0.9)'}}>
+    {/* <div style={{transform:'scale(0.9)'}}>
     <TrigoCalculator/>
+    </div> */}
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div style={{transform:'scale(0.8)'}}>
+    <RootCalculator explanations={explanations}/>
     </div>
-    <br/>
-    <br/>
-
 
     <br/>
     <br/>
-    <ScrollUpButton/>
+    <ScrollUpButton />
     </>
   )
 }
