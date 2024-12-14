@@ -8,6 +8,7 @@ import combinatoricsFormulaList from '@/app/api/db/formulas/combinatorics/combin
 import AngleConverter from '@/app/components/converters/AngleConverter'
 import TrigoCalculator from '@/app/components/trigo-calculator/TrigoCalculator'
 import RootCalculator from '@/app/components/calculators/arithmetics/RootCalculator'
+import VectorCalculator from '@/app/components/vectors/VectorCalculator'
 
 
 
@@ -129,6 +130,7 @@ const testSections = [
     <br/>
     <br/>
     <br/>
+    <VectorCalculator/>
     <br/>
     <br/>
     <br/>
@@ -136,6 +138,12 @@ const testSections = [
     <RootCalculator explanations={explanations}/>
     </div>
 
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     <br/>
     <br/>
     <ScrollUpButton />
