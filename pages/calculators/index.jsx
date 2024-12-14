@@ -24,9 +24,27 @@ export default function ConvertersPage() {
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-ordered"><path d="M10 12h11"/><path d="M10 18h11"/><path d="M10 6h11"/><path d="M4 10h2"/><path d="M4 6h1v4"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
     )
 
+    const CustomArithmetic=()=>(
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-diff"><path d="M12 3v14"/><path d="M5 10h14"/><path d="M5 21h14"/></svg>
+    )
+
    
 
     const cardItems=[
+      {
+        id: "arithmetic-calculators",
+        category: "Arithmetic Calculators",
+        content: "Perform Basic and Advanced Arithmetic Operations ",
+        icon:CustomArithmetic,
+        // href: "/calculators",
+        subcategories: [
+          {
+            name: "Root Calculator",
+            href: "/calculators/root-calculator"
+          },
+         
+        ]
+      },
         {
             category: 'Statistics Calculator',
             icon: CustomStats,

@@ -67,6 +67,7 @@ export const mainMenuStructure = [
             { label: 'Statistics Calculator', href: '/calculators/statistics-calculator' },
             { label: 'Trigonometry Calculator', href: '/calculators/trigonometry-calculator' },
             { label: 'Quadratic Equations Calculator', href: '/calculators/quadratic-equations' },
+            { label: 'Root Calculator', href: '/calculators/root-calculator' },
             { label: 'Factoring Calculator', href: '/calculators/factoring-calculator' },
             { label: 'Polynomial Calculator', href: '/calculators/polynomial-calculator' },
             
