@@ -1,6 +1,6 @@
 import { 
     Roboto, Open_Sans, Lato, Montserrat, Poppins, 
-    Raleway, Nunito, Ubuntu, Merriweather, 
+    Raleway, Ubuntu, Merriweather, 
     Playfair_Display, Lora, Roboto_Slab, PT_Serif, 
     Crimson_Text, Libre_Baskerville, Arvo, Josefin_Sans, 
     Oswald, Bebas_Neue, Anton, Lobster, Pacifico, 
@@ -8,7 +8,7 @@ import {
     Source_Code_Pro, Fira_Code, Space_Mono, Inconsolata,
     Work_Sans, Inter, Noto_Sans, Quicksand, Karla,
     Merriweather_Sans, Exo_2, Bitter, Cabin, Rubik,
-    Archivo, Barlow, Mulish, DM_Sans, Nunito_Sans,
+    Archivo, Barlow, Mulish, DM_Sans,
     IBM_Plex_Sans, Noto_Serif, Cormorant_Garamond, Spectral,
     Alegreya, Vollkorn, Cardo, Crimson_Pro, Domine, Zilla_Slab
   } from 'next/font/google';
@@ -20,7 +20,7 @@ import {
   export const montserrat = Montserrat({ subsets: ['latin'], weight: ['400'] });
   export const poppins = Poppins({ subsets: ['latin'], weight: ['400'] });
   export const raleway = Raleway({ subsets: ['latin'], weight: ['400'] });
-  export const nunito = Nunito({ subsets: ['latin'], weight: ['400'] });
+  // export const nunito = Nunito({ subsets: ['latin'], weight: ['400'] });
 //   export const sourceSansPro = Source_Sans_Pro({ subsets: ['latin'], weight: ['400'] });
   export const ubuntu = Ubuntu({ subsets: ['latin'], weight: ['400'] });
   export const workSans = Work_Sans({ subsets: ['latin'], weight: ['400'] });
@@ -36,7 +36,7 @@ import {
   export const barlow = Barlow({ subsets: ['latin'], weight: ['400'] });
   export const mulish = Mulish({ subsets: ['latin'], weight: ['400'] });
   export const dmSans = DM_Sans({ subsets: ['latin'], weight: ['400'] });
-  export const nunitoSans = Nunito_Sans({ subsets: ['latin'], weight: ['400'] });
+  
   export const ibmPlexSans = IBM_Plex_Sans({ subsets: ['latin'], weight: ['400'] });
   
   // Serif fonts
