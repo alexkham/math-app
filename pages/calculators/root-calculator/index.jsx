@@ -83,9 +83,10 @@ import React from 'react';
 import '../../pages.css';
 import RootCalculator from '@/app/components/calculators/arithmetics/RootCalculator';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
+import ExplanationDetails from '@/app/components/ExplanationDetails';
 
 export default function RootCalculatorPage(props) {  // Changed to receive props
-  const { explanations, keyWords } = props;  // Destructure props
+  const { explanations, keyWords,detailInstructions } = props;  // Destructure props
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -147,9 +148,14 @@ export default function RootCalculatorPage(props) {  // Changed to receive props
         iconColor='white'
         panelBackgroundColor='#f2f2f2'
       />
-      <h1 className='title' style={{marginTop:'-20px'}}>Root Calculator</h1>
+      <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>Root Calculator</h1>
+      <div style={{marginBottom:'-20px'}}>
+      <ExplanationDetails instructions={detailInstructions}
+      title='How to use Root Calculator'/>
+      </div>
       <div style={{transform:'scale(0.80)'}}>
-        <RootCalculator explanations={explanations}/>
+        <RootCalculator explanations={explanations}
+        />
       </div>
       <br/>
       <br/>
@@ -182,10 +188,21 @@ export async function getStaticProps() {
     'cubic root calculator'
   ];
 
+
+  const detailInstructions = [
+    
+    "Select root type: square, cube, or nth root",
+    "For nth root, specify the value of n",
+    "Click Calculate to see the result",
+    "Use Reset to clear all fields and start over",
+    "Hover over ? icons for additional help"
+  ];
+
   return {
     props: {
       explanations,
-      keyWords
+      keyWords,
+      detailInstructions,
     },
     revalidate: 86400
   };
