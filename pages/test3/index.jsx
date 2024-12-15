@@ -9,6 +9,7 @@ import AngleConverter from '@/app/components/converters/AngleConverter'
 import TrigoCalculator from '@/app/components/trigo-calculator/TrigoCalculator'
 import RootCalculator from '@/app/components/calculators/arithmetics/RootCalculator'
 import VectorCalculator from '@/app/components/vectors/VectorCalculator'
+import LogarithmCalculator from '@/app/components/calculators/arithmetics/LogarithmCalculator'
 
 
 
@@ -100,7 +101,60 @@ const testSections = [
       ]
     }
   };
+
+
+//  const logarithmExplanations = {
+//     standard: {
+//       text: "Logarithms with standard bases are commonly used in mathematics and science. Base 2 logarithms are used in computer science and information theory, natural logarithms (base e) in calculus and growth/decay problems, and base 10 logarithms in engineering and scientific notation.",
+//       links: [
+//         {
+//           title: "Understanding Standard Logarithms",
+//           link: "https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs"
+//         }
+//       ]
+//     },
+//     custom: {
+//       text: "A logarithm with custom base b of a number x (written as logb(x)) finds the exponent needed to raise b to get x. For example, log3(27) = 3 because 3³ = 27.",
+//       links: [
+//         {
+//           title: "Learn About Custom Base Logarithms",
+//           link: "https://www.mathsisfun.com/algebra/logarithms.html"
+//         }
+//       ]
+//     }
+//    };
   
+
+
+ const logarithmExplanations = {
+  standard: {
+    text: "A logarithm calculates what exponent is needed for a base to reach a given number. If bx = N, then logb(N) = x. For example, log₂(8) = 3 because 2³ = 8. The most common bases are: base 2 (binary logarithm), base e (natural logarithm), and base 10 (common logarithm).",
+    links: [
+      {
+        title: "Properties of Logarithms",
+        link: "https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-prop/a/properties-of-logarithms"
+      }
+    ]
+  },
+  custom: {
+    text: "For any positive numbers M and b (where b ≠ 1), the equation logb(M) = y means that b^y = M. The base b must be positive and not equal to 1, while M must be positive. The logarithm finds the exponent needed to reach M using base b.",
+    links: [
+      {
+        title: "Advanced Logarithm Rules",
+        link: "https://www.mathsisfun.com/algebra/logarithm-rules.html"
+      }
+    ]
+  }
+ };
+
+
+ const detailInstructionsLogarithms = [
+  "Enter the number for which you want to find the logarithm",
+  "Choose between standard bases (2, e, 10) or enter a custom base",
+  "For custom base, enter any positive number except 1",
+  "Click Calculate to compute the result",
+  "For standard bases: log₂ is used in computing, log₁₀ for scientific notation, loge for natural calculations"
+ ];
 
   return (
     <>
@@ -142,6 +196,9 @@ const testSections = [
     <br/>
     <br/>
     <br/>
+    <div style={{transform:'scale(0.8)'}}>
+    <LogarithmCalculator explanations={logarithmExplanations}/>
+    </div>
     <br/>
     <br/>
     <br/>

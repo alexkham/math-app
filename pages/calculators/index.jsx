@@ -42,6 +42,10 @@ export default function ConvertersPage() {
             name: "Root Calculator",
             href: "/calculators/root-calculator"
           },
+          {
+            name: "Logarithmic Calculator",
+            href: "/calculators/log-calculator"
+          },
          
         ]
       },
