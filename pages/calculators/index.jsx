@@ -46,6 +46,10 @@ export default function ConvertersPage() {
             name: "Logarithmic Calculator",
             href: "/calculators/log-calculator"
           },
+          {
+            name: "Exponent Calculator",
+            href: "/calculators/exponent-calculator"
+          },
          
         ]
       },

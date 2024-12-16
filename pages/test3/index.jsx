@@ -10,6 +10,7 @@ import TrigoCalculator from '@/app/components/trigo-calculator/TrigoCalculator'
 import RootCalculator from '@/app/components/calculators/arithmetics/RootCalculator'
 import VectorCalculator from '@/app/components/vectors/VectorCalculator'
 import LogarithmCalculator from '@/app/components/calculators/arithmetics/LogarithmCalculator'
+import ExponentCalculator from '@/app/components/calculators/arithmetics/ExponentCalculator'
 
 
 
@@ -156,6 +157,29 @@ const testSections = [
   "For standard bases: log₂ is used in computing, log₁₀ for scientific notation, loge for natural calculations"
  ];
 
+
+ const exponentExplanations = {
+  square: {
+    text: "Square is the result of multiplying a number by itself...",
+    links: [
+      { title: "Learn about square numbers", link: "/square-numbers" },
+      { title: "Square number properties", link: "/properties" }
+    ]
+  },
+  cube: {
+    text: "Cube is the result of multiplying a number by itself twice...",
+    links: [
+      { title: "Understanding cube numbers", link: "/cube-numbers" }
+    ]
+  },
+  custom: {
+    text: "Custom powers allow you to raise a number to any power...",
+    links: [
+      { title: "Exponents explained", link: "/exponents" }
+    ]
+  }
+};
+
   return (
     <>
     <GenericNavbar/>
@@ -188,19 +212,22 @@ const testSections = [
     <br/>
     <br/>
     <br/>
-    <div style={{transform:'scale(0.8)'}}>
+    {/* <div style={{transform:'scale(0.8)'}}>
     <RootCalculator explanations={explanations}/>
-    </div>
+    </div> */}
 
     <br/>
     <br/>
     <br/>
     <br/>
-    <div style={{transform:'scale(0.8)'}}>
+    {/* <div style={{transform:'scale(0.8)'}}>
     <LogarithmCalculator explanations={logarithmExplanations}/>
-    </div>
+    </div> */}
     <br/>
     <br/>
+    <br/>
+    <br/>
+    <ExponentCalculator explanations={exponentExplanations}/>
     <br/>
     <br/>
     <ScrollUpButton />

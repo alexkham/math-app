@@ -69,6 +69,7 @@ export const mainMenuStructure = [
             { label: 'Quadratic Equations Calculator', href: '/calculators/quadratic-equations' },
             { label: 'Root Calculator', href: '/calculators/root-calculator' },
             { label: 'Logarithmic Calculator', href: '/calculators/log-calculator' },
+            { label: 'Exponent Calculator', href: '/calculators/exponent-calculator' },
             { label: 'Factoring Calculator', href: '/calculators/factoring-calculator' },
             { label: 'Polynomial Calculator', href: '/calculators/polynomial-calculator' },
             
