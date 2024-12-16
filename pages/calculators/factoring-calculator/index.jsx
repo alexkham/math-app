@@ -88,7 +88,7 @@ export default function FactoringCalculatorPage() {
         side='right'
         topOffset='65px'
         sidebarWidth='45px'
-        panelWidth='200px'
+        panelWidth='300px'
         iconColor='white'
         panelBackgroundColor='#f2f2f2'
       />
