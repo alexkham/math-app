@@ -694,7 +694,8 @@ function RootCalculator({ explanations, detailInstructions }) {
                 <ul className={styles.linksList}>
                   {explanations[rootType].links.map((link, index) => (
                     <li key={index}>
-                      <a href={link.link} target="_blank" rel="noopener noreferrer" className={styles.explanationLink}>
+                      <a href={link.link} rel="noopener noreferrer" className={styles.explanationLink}>
+                      {/* target="_blank" use for external links */}
                         {link.title}
                       </a>
                     </li>

@@ -11,6 +11,10 @@ import RootCalculator from '@/app/components/calculators/arithmetics/RootCalcula
 import VectorCalculator from '@/app/components/vectors/VectorCalculator'
 import LogarithmCalculator from '@/app/components/calculators/arithmetics/LogarithmCalculator'
 import ExponentCalculator from '@/app/components/calculators/arithmetics/ExponentCalculator'
+import SquareRootsTable from '@/app/components/tables/SquareRootsTable'
+import GenericSquareRootsTable from '@/app/components/tables/GenericSquareRootsTable'
+import {LogIn, Activity} from 'lucide-react'
+import NewCardGroup from '@/app/components/cards/NewCardGroup'
 
 
 
@@ -180,6 +184,29 @@ const testSections = [
   }
 };
 
+
+
+
+
+// Example data structure
+const cardsData = [
+  {
+    name: 'Logarithms (Base 10)',
+    description: 'Standard logarithmic table with explanations and usage guide.',
+    icon: LogIn,
+    path: '/tables/arithmetics/logarithm'
+  },
+  {
+    name: 'Natural Logarithms',
+    description: 'Logarithms with base e, fundamental in calculus and natural sciences.',
+    icon: Activity,
+    path: '/tables/arithmetics/natural-logarithms'
+  },
+  // ... more cards
+];
+
+
+
   return (
     <>
     <GenericNavbar/>
@@ -228,6 +255,23 @@ const testSections = [
     <br/>
     <br/>
     <ExponentCalculator explanations={exponentExplanations}/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div style={{transform:'scale(0.9)'}}>
+    <SquareRootsTable/>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <NewCardGroup cards={cardsData}/>
+   
+    <br/>
     <br/>
     <br/>
     <ScrollUpButton />

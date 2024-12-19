@@ -33,6 +33,8 @@ import PolynomialCalculator from '@/app/components/polynomials/PolynomialCalcula
 import ExplanationDetails from '@/app/components/ExplanationDetails';
 import { color } from 'framer-motion';
 import VerticalButtonGroup from '@/app/components/VerticalButtonGroup';
+import VerticalBlocks from '@/app/components/page-components/vertical-blocks/VerticalBlocks';
+import SquareRootVisualizer from '@/app/components/visualizations/SquareRootVisualizer';
 
 
 export default function Test4Page() {
@@ -294,7 +296,93 @@ export default function Test4Page() {
         link: "/settings"  // Example without icon
       }
     ];
+
+
+    const mockData = [
+      {
+        id: 1,
+        symbol: '∑',
+        latex_code: '\\sum',
+        explanation: `Summation
+        
+        Got it. Instead of a grid with all fields, need vertical layout with just two fields (title and explanation) specified through props.\n I'll modify the component.
+        
+        $$x^2$$
+        
+        `,
+        content: {
+          usage: 'Used to denote sum of a sequence',
+          example: 'Sum from i=1 to n: ∑(i)',
+          notes: 'Common in calculus and series'
+        }
+      },
+      {
+        id: 2,
+        symbol: '∫',
+        latex_code: '\\int',
+        explanation: 'Integral',
+        content: 'Represents integration $x^2$ in calculus'
+      },
+      {
+        id: 3,
+        symbol: '∀',
+        latex_code: '\\forall',
+        explanation: 'For All',
+        content: {
+          usage: 'Universal quantifier in logic',
+          meaning: 'Indicates that something is true for all cases',
+          contexts: 'Mathematical proofs, set theory'
+        }
+      }
+    ];
     
+   
+    const explanationsRoots = {
+      general: {
+        content: `This interactive visualization helps you understand square roots through a visual grid representation. 
+    
+    The blue squares show perfect squares (1, 4, 9, 16, etc.), growing darker as the numbers get smaller. The red frame shows any square root you select - both perfect and irrational.
+    
+    To use:
+    1. Enter a number (0-100) or use the slider
+    2. Watch the red frame adjust to show the square root
+    3. Look at where it falls between perfect squares
+    4. The tooltips show the exact square root value`,
+        links: [
+          { text: "Introduction to Square Roots", url: "https://www.mathsisfun.com/square-root.html" },
+          { text: "Visual Square Root Guide", url: "https://www.mathwarehouse.com/square-root/" }
+        ]
+      },
+      perfect: {
+        content: `A perfect square is a number that has an integer (whole number) square root. For example:
+        • 1 is a perfect square (√1 = 1)
+        • 4 is a perfect square (√4 = 2)
+        • 9 is a perfect square (√9 = 3)
+        • 16 is a perfect square (√16 = 4)
+    
+    In our visualization, perfect squares appear along the diagonal of the grid, marked with their values. The blue shading shows the area of each perfect square, making it easy to see how they grow.`,
+        links: [
+          { text: "Perfect Squares and Properties", url: "https://www.cuemath.com/numbers/perfect-square/" },
+          { text: "Square Numbers Pattern", url: "https://nrich.maths.org/2471" }
+        ]
+      },
+      irrational: {
+        content: `Most numbers are not perfect squares and have irrational square roots. The red frame helps visualize these:
+    
+    For example, √7:
+    - Lies between √4 = 2 and √9 = 3
+    - The red frame shows exactly where it falls
+    - You can see it's closer to √9 than to √4
+    
+    This helps understand why √7 ≈ 2.646:
+    - It's more than 2.5 (halfway between 2 and 3)
+    - The frame's position shows the exact decimal value`,
+        // links: [
+        //   { text: "Understanding Irrational Numbers", url: "https://www.mathsisfun.com/irrational-numbers.html" },
+        //   { text: "Square Roots and Real Numbers", url: "https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:rational-exponents-radicals" }
+        // ]
+      }
+    };
 
 
   return (
@@ -302,7 +390,14 @@ export default function Test4Page() {
     <div>Test4Page</div>
     <br/>
     <br/>
-    
+    <VerticalBlocks 
+     data={mockData}
+     titleField={'symbol'} 
+     explanationField={'explanation'}
+     backgroundColor='yellow'
+     textColor='white'
+     width='600px'
+   />
     <br/>
     <br/>
     {/* <div style={{transform:'scale(0.9)'}}>
@@ -313,14 +408,14 @@ export default function Test4Page() {
     <br/>
     <br/>
     <br/>
-    <VerticalButtonGroup 
+    {/* <VerticalButtonGroup 
       items={menuItems}
       width="120px"       
       backgroundColor ='red'
       color = 'white'
       isSticky={true}
       verticalOffset='200px'
-      />
+      /> */}
     <br/>
    <GenericProbabilityTree data={threeLeveData}/>
     <br/>
@@ -557,6 +652,9 @@ export default function Test4Page() {
       /> */}
     <br/>
     <br/>
+    <div style={{transform:'scale(0.85)'}}>
+    <SquareRootVisualizer explanations={explanationsRoots}/>
+    </div>
     <br/>
     {/* <div className='title' style={{width:'60%'}}>
     <DataWrapper data={math_symbols_Data}/>

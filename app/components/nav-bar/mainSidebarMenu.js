@@ -36,6 +36,7 @@ const CustomConvert=()=>(
   { id: 1, icon: CustomVisual, tooltip: 'Visual Tools', 
     content: [
         { text: 'Base Converter', url: '/visual-tools/base-converter' },
+        { text: 'Square Root Visualizer', url: '/visual-tools/square-root' },
         { text: 'Determinant Visual Calculator', url: '/visual-tools/determinant-calculator' },
         { text: 'Gauss Elinination Calculator', url: '/visual-tools/gauss-elimination' },
         { text: 'Matrix Multiplication Visualizer', url: '/visual-tools/matrix-multiplication' },

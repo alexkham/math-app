@@ -34,13 +34,31 @@ const CustomTrigo=()=>(
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pi"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 7h10"/><path d="M10 7v10"/><path d="M16 17a2 2 0 0 1-2-2V7"/></svg>
 )
 
+const CustomAlgebra=()=>(
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-variable"><path d="M8 21s-4-3-4-9 4-9 4-9"/><path d="M16 3s4 3 4 9-4 9-4 9"/><line x1="15" x2="9" y1="9" y2="15"/><line x1="9" x2="15" y1="9" y2="15"/></svg>
+)
+
+
     const cardItems=[
         {
             category: 'Visual Base Converter',
             icon: CustomBase,
             href:'/visual-tools/base-converter',
             // No subcategories, will show simple link
-            content:"Upload dataset from file or manually and calculate up to 18 different stats with explanations "
+            content:"Explore the concept of base and convert numbers from one base to another "
+          },
+
+          {
+            category: 'Algebra Visualizers',
+            icon: CustomAlgebra,
+            href:'/visual-tools/base-converter',
+            // No subcategories, will show simple link
+            content:"Explore Different Concepts of Algebra Visually",
+            subcategories: [
+                { name: 'Square Root Visualizer', href: '/visual-tools/square-root' },
+               
+              ]
+
           },
           {
             category: 'Linear Algebra Visualizers',
@@ -97,7 +115,7 @@ const CustomTrigo=()=>(
    side='right'
    topOffset='65px' 
     sidebarWidth='45px'
-     panelWidth='200px'
+     panelWidth='300px'
     
      iconColor='white'
      panelBackgroundColor='#f2f2f2'/> 

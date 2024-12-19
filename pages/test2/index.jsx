@@ -37,6 +37,7 @@ import CardsGroup from '@/app/components/cards/CardsGroup';
 import UnitCircle from '@/app/components/trigo-calculator/UnitCircle';
 import MultiplicationTable from '@/app/components/tables/MultiplicationTable';
 import CompleteMultiplicationTable from '@/app/components/tables/CompleteMultiplicationTable';
+import GenericSquareRootsTable from '@/app/components/tables/GenericSquareRootsTable';
 
 
 export default function TestPage2() {
@@ -460,7 +461,7 @@ const cardItems = [
     {/* <MovingBox/> */}
     <br/>
     <br/>
-     <SectionTableOfContents sections={sections} title='In This Section' />
+     {/* <SectionTableOfContents sections={sections} title='In This Section' /> */}
     <br/>
     {/* <div className='divy' style={{marginLeft:'10px',marginRight:'40px'}}>
  <SVGSlider
@@ -877,6 +878,11 @@ const cardItems = [
     <br/>
     <br/>
     <CompleteMultiplicationTable/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <GenericSquareRootsTable/>
     <br/>
     <br/>
     <br/>

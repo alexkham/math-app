@@ -169,6 +169,10 @@ export async function getStaticProps() {
   const explanations = {
     square: {
       text: "A square root of a number is a value that, when multiplied by itself, gives the number. For example, the square root of 25 is 5, because 5 × 5 = 25.",
+      links: [
+        { title: "Square Root Visualizer", link: "/visual-tools/square-root" },
+        { title: "Perfect Squares and Roots Table", link: "/tables/arithmetics/perfect-squares" }
+      ],
     },
     cube: {
       text: "A cube root of a number is a value that, when multiplied by itself twice, gives the number. For example, the cube root of 27 is 3, because 3 × 3 × 3 = 27.",
