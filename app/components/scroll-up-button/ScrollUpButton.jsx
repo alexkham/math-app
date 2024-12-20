@@ -82,7 +82,7 @@ const ScrollUpButton = () => {
             position: 'fixed',
             bottom: '20px',
             right: '20px',
-            zIndex: 1000,
+            zIndex: 100000,
             backgroundColor: '#4d4dff', // Adjust color as needed
             width: '50px',
             height: '50px',

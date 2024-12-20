@@ -31,6 +31,7 @@
 
 .explanationContainer {
   width: 33.333%;
+  min-width: 400px;
   font-family: 'Inter', sans-serif;
   background-color: #ffffff;
   padding: 2rem;

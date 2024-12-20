@@ -175,7 +175,13 @@ For example:
 
 Remember that when squaring a negative number, the result is always positive because negative × negative = positive.
 
-This calculator can handle both integer and decimal numbers, and will display the result in standard notation for manageable numbers or scientific notation ($1.234e+10$) for very large or small results.`
+This calculator can handle both integer and decimal numbers, and will display the result in standard notation for manageable numbers or scientific notation ($1.234e+10$) for very large or small results.`,
+links:[
+
+  {title:"Explore Exponents Table Page ",
+    link:"/tables/arithmetics/exponential-table"}
+  
+]
     },
     cube: {
       text: `Cubing a number means multiplying it by itself three times. In mathematical notation, this is written as $x^3$.
@@ -200,13 +206,13 @@ Some examples:
 - $3^{-2} = \\frac{1}{3^2} = \\frac{1}{9} ≈ 0.1111$
 - $5^{2.5} = 5^2 × \\sqrt{5} ≈ 55.9017$
 
-Important rules:
-- Positive numbers can be raised to any power
-- Negative numbers can only be raised to integer powers (whole numbers)
-- For negative bases with even powers, the result is positive
-- For negative bases with odd powers, the result is negative
-- Zero raised to a positive power is always 0
-- Zero raised to zero or negative powers is undefined
+**Important rules**:
+• Positive numbers can be raised to any power
+• Negative numbers can only be raised to integer powers (whole numbers)
+• For negative bases with even powers, the result is positive
+• For negative bases with odd powers, the result is negative
+• Zero raised to a positive power is always 0
+• Zero raised to zero or negative powers is undefined
 
 The calculator uses high-precision arithmetic and will automatically format results in scientific notation when they become very large ($2^{100} = 1.2676e+30$) or very small ($2^{-50} = 8.8818e-16$).`
     }
