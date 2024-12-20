@@ -176,6 +176,10 @@ export async function getStaticProps() {
     },
     cube: {
       text: "A cube root of a number is a value that, when multiplied by itself twice, gives the number. For example, the cube root of 27 is 3, because 3 × 3 × 3 = 27.",
+      links: [
+       
+        { title: "Perfect Cubes and Cube Roots Table", link: "/tables/arithmetics/perfect-cubes" }
+      ],
     },
     nth: {
       text: "An nth root of a number is a value that, when multiplied by itself n-1 times, gives the number. For example, the 4th root of 16 is 2, because 2 × 2 × 2 × 2 = 16.",
