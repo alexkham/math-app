@@ -228,6 +228,10 @@
     padding: 4px;
     line-height: 1;
   }
+
+  /* .resetButtonCube{
+    margin-top: -10px;
+  } */
   
   .resetButton:hover {
     color: #333;

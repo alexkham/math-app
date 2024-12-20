@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import { LogIn, Activity, Binary, TrendingUp,Radical } from 'lucide-react';
+import { LogIn, Activity, Binary, TrendingUp,Radical,SquareRadical } from 'lucide-react';
 import styles from './arithmetics.module.css';
 import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
@@ -37,10 +37,16 @@ const arithmeticTables = [
   },
 
   {
-    name: 'Perfect Squares and Roots Table',
+    name: 'Perfect Squares and Square Roots Table',
     description: 'Explore perfect squares and their roots from 1 to 10000',
     icon: Radical,
     path: '/tables/arithmetics/perfect-squares'
+  },
+  {
+    name: 'Perfect Cubes and Cube Roots Table',
+    description: 'Explore perfect cubes and their roots from 1 to 1000000',
+    icon: SquareRadical,
+    path: '/tables/arithmetics/perfect-cubes'
   }
 ];
 

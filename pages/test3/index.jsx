@@ -15,6 +15,7 @@ import SquareRootsTable from '@/app/components/tables/SquareRootsTable'
 import GenericSquareRootsTable from '@/app/components/tables/GenericSquareRootsTable'
 import {LogIn, Activity} from 'lucide-react'
 import NewCardGroup from '@/app/components/cards/NewCardGroup'
+import CubeRootsTable from '@/app/components/tables/CubeRootsTable'
 
 
 
@@ -271,6 +272,12 @@ const cardsData = [
     <br/>
     <NewCardGroup cards={cardsData}/>
    
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <CubeRootsTable/>
     <br/>
     <br/>
     <br/>
