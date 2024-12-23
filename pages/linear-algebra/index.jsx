@@ -222,6 +222,7 @@ export default function LinearAlgebraPage({
         
         {/* Canonical URL */}
         <link rel="canonical" href={canonicalUrl} />
+        <link rel="canonical" href="https://www.learnmathclass.com/linear-algebra" />
         
         {/* Open Graph Tags */}
         <meta property="og:title" content={pageTitle} />
