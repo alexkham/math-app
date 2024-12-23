@@ -1,0 +1,176 @@
+{
+    "C Standard Library": {
+      "General Purpose": {
+        "Assertions and Diagnostics": {
+          "<assert.h>": {
+            "url": "/",
+            "explanation": "Diagnostics and assertions."
+          }
+        },
+        "Character Handling": {
+          "<ctype.h>": {
+            "url": "/headers/ctype",
+            "explanation": "Character classification and conversion."
+          }
+        },
+        "Error Reporting": {
+          "<errno.h>": {
+            "url": "/headers/errno",
+            "explanation": "Error reporting."
+          }
+        
+        },
+        "Integer and Type Limits": {
+          "<limits.h>": {
+            "url": "/headers/limits",
+            "explanation": "Defines the limits of integral types."
+          },
+          "<stddef.h>": {
+            "url": "/headers/stddef",
+            "explanation": "Common definitions and types (e.g., size_t, ptrdiff_t)."
+          },
+          "<stdint.h>": {
+            "url": "/headers/stdint",
+            "explanation": "Fixed-width integer types."
+          }
+        },
+        "Localization": {
+          "<locale.h>": {
+            "url": "/headers/locale",
+            "explanation": "Localization."
+          }
+        },
+        "Non-Local Jumps": {
+          "<setjmp.h>": {
+            "url": "/headers/setjmp",
+            "explanation": "Non-local jumps."
+          }
+        },
+        "Signal Handling": {
+          "<signal.h>": {
+            "url": "/headers/signal",
+            "explanation": "Signal handling."
+          }
+        },
+        "Variable Argument Handling": {
+          "<stdarg.h>": {
+            "url": "/headers/stdarg",
+            "explanation": "Variable argument handling."
+          }
+        }
+      },
+      "Input/Output and Strings": {
+        "Input/Output Operations": {
+          "<stdio.h>": {
+            "url": "/headers/stdio",
+            "explanation": "Input/output operations."
+          }
+        },
+        "Memory and String Operations": {
+          "<string.h>": {
+            "url": "/headers/string",
+            "explanation": "String handling and memory manipulation."
+          }
+        },
+        "General Utilities": {
+          "<stdlib.h>": {
+            "url": "/headers/stdlib",
+            "explanation": "General utilities like memory management and conversions."
+          }
+        },
+        "Date and Time": {
+          "<time.h>": {
+            "url": "/headers/time",
+            "explanation": "Date and time functions."
+          }
+        },
+        "Wide Characters": {
+          "<wchar.h>": {
+            "url": "/headers/wchar",
+            "explanation": "Wide character handling."
+          },
+          "<wctype.h>": {
+            "url": "/headers/wctype",
+            "explanation": "Wide character classification and conversion."
+          }
+        }
+      },
+      "Mathematics": {
+        "Basic Math Functions": {
+          "<math.h>": {
+            "url": "/headers/math",
+            "explanation": "Mathematical functions."
+          }
+        },
+        "Floating Point Environment": {
+          "<fenv.h>": {
+            "url": "/headers/fenv",
+            "explanation": "Floating-point environment."
+          },
+          "<float.h>": {
+            "url": "/headers/float",
+            "explanation": "Defines floating-point limits."
+          }
+        },
+        "Complex Number Arithmetic": {
+          "<complex.h>": {
+            "url": "/headers/complex",
+            "explanation": "Complex number arithmetic."
+          }
+        },
+        "Type-Generic Math Functions": {
+          "<tgmath.h>": {
+            "url": "/headers/tgmath",
+            "explanation": "Type-generic macros for mathematical functions."
+          }
+        }
+      },
+      "Advanced and Specialized Headers": {
+        "Alternative Operator Spellings": {
+          "<iso646.h>": {
+            "url": "/headers/iso646",
+            "explanation": "Alternative spellings for operators like 'and' for '&&'."
+          }
+        },
+        "Alignment Specifications": {
+          "<stdalign.h>": {
+            "url": "/headers/stdalign",
+            "explanation": "Alignment specifications."
+          }
+        },
+        "Atomic Operations": {
+          "<stdatomic.h>": {
+            "url": "/headers/stdatomic",
+            "explanation": "Atomic operations."
+          }
+        },
+        "Boolean Type": {
+          "<stdbool.h>": {
+            "url": "/headers/stdbool",
+            "explanation": "Boolean type (`true`, `false`, `_Bool`)."
+          }
+        },
+        "Unicode Handling": {
+          "<uchar.h>": {
+            "url": "/headers/uchar",
+            "explanation": "Unicode character handling."
+          }
+        }
+      },
+      "Multithreading": {
+        "Thread Management": {
+          "<threads.h>": {
+            "url": "/headers/threads",
+            "explanation": "Multithreading utilities."
+          }
+        },
+        "Non-returning Functions": {
+          "<stdnoreturn.h>": {
+            "url": "/headers/stdnoreturn",
+            "explanation": "Specifies functions that do not return."
+          }
+        }
+      }
+    }
+  }
+  

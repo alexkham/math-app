@@ -71,12 +71,12 @@
 
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionWrapper'
-import MyNavbar from '@/app/components/nav-bar/MyNavbar'
 import React from 'react'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import '../../pages.css'
 import Head from 'next/head'
 import FormulasTOC from '@/app/components/examples/FormulaTOC'
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 
 export default function CombinatoricsFormulasPage({ combinatoricsFormulaList, keyWords }) {
   return (
@@ -90,7 +90,7 @@ export default function CombinatoricsFormulasPage({ combinatoricsFormulaList, ke
         <meta name="author" content="Learn Math Class" />
         <meta name="robots" content="index, follow" />
       </Head>
-      <MyNavbar />
+     <GenericNavbar/>
       <br/>
       <br/>
       <br/>

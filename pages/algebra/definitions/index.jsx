@@ -1,0 +1,299 @@
+// // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// // import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// // import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
+// // import React from 'react';
+// // import '../../pages.css'
+// // import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionWrapper';
+// // import algebraTermsList from '@/app/api/db/definitions/algebra/algebraDefinitions';
+// // import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
+
+// // export default function AlgebraDefinitionsPage() {
+    
+
+// //     const keyWords=['algebra terminology','algebra terms','algebra definitions',
+// //         'algebra definition and examples','algebra vocabulary']
+
+// //   return (
+// //     <>
+// //     <GenericNavbar/>
+// //     <br/>
+// //     <br/>
+// //     <br/>
+// //     <br/>
+// //     <Breadcrumb/>
+// //     <OperaSidebar 
+// //       side='right'
+// //       topOffset='65px' 
+// //       sidebarWidth='45px'
+// //       panelWidth='300px'
+      
+// //       iconColor='white'
+// //       panelBackgroundColor='#f2f2f2'/> 
+// //     <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Algebra Terms and Definitions</h1>
+// //     <FormulaAccordionWrapper
+// //     groupByField={'category'}
+// //     data={algebraTermsList}
+// //     type='Definition'/>
+// //     <br/>
+// //     <br/>
+// //     <br/>
+// //     <ScrollUpButton/>
+    
+    
+// //     </>
+// //   )
+// // }
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
+// import React from 'react'
+// import '../../pages.css'
+// import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionWrapper'
+// import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
+// import Head from 'next/head'
+
+// // Static page generation
+// export async function getStaticProps() {
+//   // Import data at build time instead of runtime
+//   const { default: algebraTermsList } = await import('@/app/api/db/definitions/algebra/algebraDefinitions')
+  
+//   // Move keywords to server-side for better SEO
+//   const keyWords = [
+//     'algebra terminology',
+//     'algebra terms',
+//     'algebra definitions',
+//     'algebra definition and examples',
+//     'algebra vocabulary'
+//   ]
+
+//   const pageUrl = 'https://www.learnmathclass.com/algebra/definitions'
+  
+//   return {
+//     props: {
+//       algebraTermsList,
+//       keyWords,
+//       pageUrl,
+//     }
+//   }
+// }
+
+// export default function AlgebraDefinitionsPage({ algebraTermsList, keyWords, pageUrl }) {
+//   const structuredData = {
+//     "@context": "https://schema.org",
+//     "@type": "WebPage",
+//     "name": "Algebra Terms and Definitions",
+//     "description": "Comprehensive list of algebra terms, definitions and examples for students and educators.",
+//     "keywords": keyWords.join(", "),
+//     "url": pageUrl,
+//     "inLanguage": "en-US"
+//   }
+
+//   return (
+//     <>
+//       <Head>
+//         <title>Algebra Terms and Definitions | Learn Math Class</title>
+//         <meta name="description" content="Complete guide to algebra terminology, definitions, and examples. Perfect for students learning algebra fundamentals and mathematical concepts." />
+//         <meta name="keywords" content={keyWords.join(", ")} />
+//         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        
+//         {/* Canonical URL */}
+//         <link rel="canonical" href={pageUrl} />
+        
+//         {/* Open Graph tags for social sharing */}
+//         <meta property="og:title" content="Algebra Terms and Definitions | Learn Math Class" />
+//         <meta property="og:description" content="Complete guide to algebra terminology, definitions, and examples." />
+//         <meta property="og:type" content="website" />
+//         <meta property="og:url" content={pageUrl} />
+        
+//         {/* Twitter Card tags */}
+//         <meta name="twitter:card" content="summary" />
+//         <meta name="twitter:title" content="Algebra Terms and Definitions" />
+//         <meta name="twitter:description" content="Complete guide to algebra terminology, definitions, and examples." />
+        
+//         {/* Structured data for SEO */}
+//         <script 
+//           type="application/ld+json"
+//           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+//         />
+//       </Head>
+
+//       <GenericNavbar />
+//       <br />
+//       <br />
+//       <br />
+//       <br />
+//       <Breadcrumb />
+//       <OperaSidebar
+//         side='right'
+//         topOffset='65px'
+//         sidebarWidth='45px'
+//         panelWidth='300px'
+//         iconColor='white'
+//         panelBackgroundColor='#f2f2f2'
+//       />
+
+//       <main>
+//         <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
+//           Algebra Terms and Definitions
+//         </h1>
+//         <FormulaAccordionWrapper
+//           groupByField={'category'}
+//           data={algebraTermsList}
+//           type='Definition'
+//         />
+//         <br />
+//         <br />
+//         <br />
+//         <ScrollUpButton />
+//       </main>
+//     </>
+//   )
+// }
+
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
+import React from 'react'
+import '../../pages.css'
+import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionWrapper'
+import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+
+export async function getStaticProps() {
+  const { default: algebraTermsList } = await import('@/app/api/db/definitions/algebra/algebraDefinitions')
+  
+  const keyWords = [
+    'algebra terminology',
+    'algebra terms',
+    'algebra definitions',
+    'algebra definition and examples',
+    'algebra vocabulary'
+  ]
+
+  // Define the canonical URL
+  const baseUrl = 'https://www.learnmathclass.com'
+  const path = '/algebra/definitions'
+  const canonicalUrl = `${baseUrl}${path}`
+  
+  const lastModified = new Date().toISOString() // Update this when content changes
+  
+  return {
+    props: {
+      algebraTermsList,
+      keyWords,
+      canonicalUrl,
+      lastModified,
+    }
+  }
+}
+
+export default function AlgebraDefinitionsPage({ 
+  algebraTermsList, 
+  keyWords, 
+  canonicalUrl,
+  lastModified 
+}) {
+  const router = useRouter()
+
+  // Redirect if URL has query parameters or trailing slash
+  React.useEffect(() => {
+    if (router.asPath !== '/algebra/definitions') {
+      router.push('/algebra/definitions')
+    }
+  }, [router])
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Algebra Terms and Definitions",
+    "description": "Comprehensive list of algebra terms, definitions and examples for students and educators.",
+    "keywords": keyWords.join(", "),
+    "url": canonicalUrl,
+    "dateModified": lastModified,
+    "inLanguage": "en-US",
+    "mainEntity": {
+      "@type": "Article",
+      "name": "Algebra Terms and Definitions",
+      "dateModified": lastModified,
+      "author": {
+        "@type": "Organization",
+        "name": "Learn Math Class"
+      }
+    }
+  }
+
+  const pageTitle = "Algebra Terms and Definitions | Learn Math Class"
+  const pageDescription = "Complete guide to algebra terminology, definitions, and examples. Perfect for students learning algebra fundamentals and mathematical concepts."
+
+  return (
+    <>
+      <Head>
+        {/* Essential Meta Tags */}
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="keywords" content={keyWords.join(", ")} />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        
+        {/* Canonical URL - Critical for SEO */}
+        <link rel="canonical" href={canonicalUrl} />
+        
+        {/* Open Graph Tags */}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:site_name" content="Learn Math Class" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="article:modified_time" content={lastModified} />
+        
+        {/* Twitter Card Tags */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        
+        {/* Additional Meta Tags */}
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="revisit-after" content="7 days" />
+        
+        {/* Structured Data */}
+        <script 
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </Head>
+
+      <GenericNavbar />
+      <br />
+      <br />
+      <br />
+      <br />
+      <Breadcrumb />
+      <OperaSidebar
+        side='right'
+        topOffset='65px'
+        sidebarWidth='45px'
+        panelWidth='300px'
+        iconColor='white'
+        panelBackgroundColor='#f2f2f2'
+      />
+
+      <main>
+        <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
+          Algebra Terms and Definitions
+        </h1>
+        <FormulaAccordionWrapper
+          groupByField={'category'}
+          data={algebraTermsList}
+          type='Definition'
+        />
+        <br />
+        <br />
+        <br />
+        <ScrollUpButton />
+      </main>
+    </>
+  )
+}

@@ -68,6 +68,9 @@ The skills developed in algebra, such as **logical reasoning**, **abstraction**,
    
     <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>Algebra</h1>
     <SectionTableOfContents sections={algebraSections}/>
+    <br/>
+    <br/>
+    <br/>
     <IntroSection 
   id={introContent.id}
   title={introContent.title}

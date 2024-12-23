@@ -2,7 +2,8 @@
     "Linear Algebra Algorithms": {
       "Basic Matrix Operations": {
         "Matrix Addition/Subtraction": {
-            "url":"/matrix/addition"
+            "url":"/matrix/addition",
+            "explanation": "Add or subtract corresponding elements of two matrices"
         },
         "Matrix Multiplication": null,
         "Scalar Multiplication": null,

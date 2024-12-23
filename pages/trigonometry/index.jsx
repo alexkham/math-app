@@ -26,7 +26,7 @@ export default function TrigonometryPage() {
         <VerticalScrollingFormulaWidget 
         key={"formula-widget"}
          formulaData={trigonometryFormulaList}
-         moreFormulasLink='/algebra/formulas'
+         moreFormulasLink='/trigonometry/formulas'
         //  title='See them all'
           />,
    
@@ -82,7 +82,7 @@ Trigonometry teaches students how to connect abstract mathematical concepts with
       side='right'
       topOffset='65px' 
       sidebarWidth='45px'
-      panelWidth='200px'
+      panelWidth='300px'
       
       iconColor='white'
       panelBackgroundColor='#f2f2f2'/> 
