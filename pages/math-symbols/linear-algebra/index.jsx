@@ -50,7 +50,7 @@ import '../../pages.css'
 import DataWrapper from '@/app/components/generic-table/DataWrapper';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 
-export default function MathSymbolsPage({ symbolsData, meta }) {
+export default function MathSymbolsLinearAlgebraPage({ symbolsData, meta }) {
   return (
     <>
       <Head>

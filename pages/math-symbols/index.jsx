@@ -59,6 +59,11 @@ export default function MathSymbolsPage({ symbolsData, meta }) {
           // icon: <Home />,
           link: "/math-symbols/linear-algebra"
         },
+        {
+            title: "Mathematical Logic",
+            // icon: <Home />,
+            link: "/math-symbols/math-logic"
+          },
         // {
         //   title: "Settings",
         //   link: "/settings"  // Example without icon
