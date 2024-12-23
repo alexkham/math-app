@@ -10,6 +10,7 @@ import { SectionIcon } from 'lucide-react';
 import Sections from '@/app/components/page-components/section/Sections';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import IntroSection from '@/app/components/page-components/section/IntroContentSection';
+import algebraTermsList from '@/app/api/db/definitions/algebra/algebraDefinitions';
 
 export default function AlgebraPage() {
   
@@ -27,6 +28,24 @@ export default function AlgebraPage() {
         key={"formula-widget"}
          formulaData={algebraFormulasList}
          moreFormulasLink='/algebra/formulas'
+        //  title='See them all'
+          />,
+   
+    ]
+      
+    },
+    {
+      id: 'definitions',
+      title: 'Algebra Terms and Definitions',
+      content:"Explore ",
+      content: [
+        'Browse Algebra terminology including main concepts and their definitions with examples',
+        " ",
+        <VerticalScrollingFormulaWidget 
+        key={"definitions-widget"}
+         formulaData={algebraTermsList}
+         moreFormulasLink='/algebra/definitions'
+         type='definition'
         //  title='See them all'
           />,
    

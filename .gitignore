@@ -39,3 +39,7 @@ next-env.d.ts
 
 #pages
 pages/test/index.jsx
+pages/test/index2.jsx
+pages/test/index3.jsx
+pages/test/index4.jsx
+pages/test/index5.jsx
