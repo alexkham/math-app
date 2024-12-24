@@ -6,7 +6,7 @@ import '../pages.css'
 import VerticalScrollingFormulaWidget from '@/app/components/examples/VerticalScrollingFormulaWidget';
 import logicFormulasList from '@/app/api/db/formulas/logic/logicFormulasList';
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents';
-
+import logicTermsList from '@/app/api/db/definitions/logic/logicDefinitions';
 import Sections from '@/app/components/page-components/section/Sections';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import IntroSection from '@/app/components/page-components/section/IntroContentSection';
@@ -33,6 +33,21 @@ export default function LogicPage() {
     ]
       
     },
+    {
+      id: 'definitions',
+      title: 'Logic Terms and Definitions',
+      content:[
+
+        <VerticalScrollingFormulaWidget 
+        key={"definitions"}
+         formulaData={logicTermsList}
+         moreFormulasLink='/logic/definitions'
+         type='definition'
+        //  title='See them all'
+          />,
+
+      ]
+    }
   ];
   
   const introContent = {
@@ -72,6 +87,9 @@ Applications of mathematical logic are vast, influencing fields like **computer 
    
     <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>Mathematical Logic</h1>
     <SectionTableOfContents sections={logicSections}/>
+    <br/>
+<br/>
+<br/>
     <IntroSection 
   id={introContent.id}
   title={introContent.title}
@@ -79,6 +97,7 @@ Applications of mathematical logic are vast, influencing fields like **computer 
   backgroundColor="#f2f2f2"
   textColor="#06357a"
 />
+
     <Sections  sections={logicSections}/>
     <br/>
     <br/>
