@@ -1,150 +1,17 @@
-// // // import LogicCalculator from '@/app/components/logic-calculator/LogicCalculator'
-// // // import MyNavbar from '@/app/components/nav-bar/MyNavbar'
-// // // import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
-// // // import React from 'react'
-// // // import '../../pages.css'
 
-// // // export default function TruthTablesPage() {
-// // //   return (
-// // //     <>
-// // //     <MyNavbar></MyNavbar>
-// // //     <br></br>
-// // //     <br></br>
-// // //     <br></br>
-// // //     <div style={{margin:'20px'}}>
-// // //     <h1 className='title'>Dynamic Truth Table Generator</h1>
-// // //     <LogicCalculator></LogicCalculator>
-// // //     </div>
-// // //     <br></br>
-// // //     <ScrollUpButton></ScrollUpButton>
-// // //     </>
-// // //   )
-// // // }
-// // import { GetStaticProps } from 'next';
-// // import Head from 'next/head';
-// // import MyNavbar from '@/app/components/nav-bar/MyNavbar';
-// // import LogicCalculator from '@/app/components/logic-calculator/LogicCalculator';
-// // import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
-// // import operatorDescriptions from '../../../app/components/logic-calculator/operatorDescriptions';
-// // import styles from './TruthTablesPage.module.css';
-// // import ReactMarkdown from 'react-markdown';
-
-// // export const getStaticProps = async () => {
-// //   console.log(operatorDescriptions)
-// //   return {
-// //     props: {
-// //       operatorDescriptions,
-// //     },
-// //   };
-// // };
-
-// // const TruthTablesPage = ({ operatorDescriptions }) => {
-// //   console.log('operatorDescriptions:', operatorDescriptions); // Add this line for debugging
-
-// //   return (
-// //     <>
-// //       <Head>
-// //         <title>Dynamic Truth Table Generator | Logic Calculator</title>
-// //         <meta name="description" content="Generate dynamic truth tables for logical expressions with our interactive Logic Calculator. Learn about logical operators and Boolean algebra." />
-// //         <meta name="viewport" content="width=device-width, initial-scale=1" />
-// //       </Head>
-// //       <MyNavbar />
-// //       <main className={styles.main}>
-// //         <h1 className={styles.title}>Dynamic Truth Table Generator</h1>
-// //         <LogicCalculator />
-// //         {operatorDescriptions && typeof operatorDescriptions === 'object' && (
-// //           <div id="operator-explanations" className={styles.explanations}>
-// //             {Object.entries(operatorDescriptions).map(([symbol, data]) => (
-// //               <section key={symbol} id={data.name || symbol} className={styles.explanation}>
-// //                 <h2>{symbol} Operator {data.name && `(${data.name})`}</h2>
-// //                 <ReactMarkdown>{data.description}</ReactMarkdown>
-// //                 {data.links && data.links.length > 0 && (
-// //                   <a href={data.links[0]} target="_blank" rel="noopener noreferrer" className={styles.readMore}>
-// //                     Read More
-// //                   </a>
-// //                 )}
-// //               </section>
-// //             ))}
-// //           </div>
-// //         )}
-// //       </main>
-// //       <ScrollUpButton />
-// //     </>
-// //   );
-// // };
-
-// // export default TruthTablesPage;
-// import { GetStaticProps } from 'next';
-// import Head from 'next/head';
-// import MyNavbar from '@/app/components/nav-bar/MyNavbar';
-// import LogicCalculator from '@/app/components/logic-calculator/LogicCalculator';
-// import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
-// import operatorDescriptions from '@/app/components/logic-calculator/operatorDescriptions';
-// import styles from './TruthTablesPage.module.css';
-// import ReactMarkdown from 'react-markdown';
-
-// export const getStaticProps = async () => {
-//   console.log('Server-side operatorDescriptions:', operatorDescriptions);
-//   return {
-//     props: {
-//       operatorDescriptions: JSON.parse(JSON.stringify(operatorDescriptions)),
-//     },
-//   };
-// };
-
-// const TruthTablesPage = ({ operatorDescriptions }) => {
-//   console.log('Client-side operatorDescriptions:', operatorDescriptions);
-
-//   return (
-//     <>
-//       <Head>
-//         <title>Dynamic Truth Table Generator | Logic Calculator</title>
-//         <meta name="description" content="Generate dynamic truth tables for logical expressions with our interactive Logic Calculator. Learn about logical operators and Boolean algebra." />
-//         <meta name="viewport" content="width=device-width, initial-scale=1" />
-//       </Head>
-//       <MyNavbar />
-//       <main className={styles.main}>
-//         <h1 className={styles.title}>Dynamic Truth Table Generator</h1>
-//         <LogicCalculator />
-//         <br></br>
-//         <br></br>
-//         <br></br>
-//         <br></br>
-//         <br></br>
-//         <div id="operator-explanations" className={styles.explanations}>
-//           {Object.entries(operatorDescriptions).map(([symbol, data]) => (
-//             <section key={symbol} id={symbol} className={styles.explanation}>
-              
-//               <h2>{symbol} Operator {data.name && `(${data.name})`}</h2>
-//               <ReactMarkdown>{data.description}</ReactMarkdown>
-//               {data.links && data.links.length > 0 && (
-//                 <a href={data.links[0]} target="_blank" rel="noopener noreferrer" className={styles.readMore}>
-//                   Read More
-//                 </a>
-//               )}
-//             </section>
-//           ))}
-//         </div>
-//       </main>
-//       <ScrollUpButton />
-//     </>
-//   );
-// };
-
-// export default TruthTablesPage;
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 import LogicCalculator from '@/app/components/logic-calculator/LogicCalculator';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
-//import operatorDescriptions from '@/app/components/logic-calculator/operatorDescriptions';
+
 import styles from './TruthTablesPage.module.css';
 import ReactMarkdown from 'react-markdown';
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 
-// 
+
 
 export const getStaticProps = async () => {
   const operatorDescriptions = await import('@/app/components/logic-calculator/operatorDescriptions');
