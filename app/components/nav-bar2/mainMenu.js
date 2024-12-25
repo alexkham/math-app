@@ -49,7 +49,7 @@ export const mainMenuStructure = [
       columns: [
         {
           title: 'Visual Tools',
-          href: '',
+          href: '/visual-tools',
           items: [
             { label: 'Base Converter', href: '/visual-tools/base-converter' },
             { label: 'Square Root Visualizer', href: '/visual-tools/square-root' },

@@ -1,4 +1,19 @@
 User-agent: *
-Allow: /
+
+Allow: https://www.learnmathclass.com/
+Disallow: https://learnmathclass.com/
+
+# Allow common file types
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.gif$
+Allow: /*.svg$
+
+# Block query parameters and duplicates
+Disallow: /*?*
+Disallow: /*&*
+Disallow: /*#*
 
 Sitemap: https://learnmathclass.com/sitemap.xml

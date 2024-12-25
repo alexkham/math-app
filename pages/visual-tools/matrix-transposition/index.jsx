@@ -39,17 +39,17 @@ export default function MatrixTranspositionCalculatorPage({ keyWords = [], descr
         <meta name="description" content={description} />
         <meta name="keywords" content={keyWords.join(", ")} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href="https://learnmathclass.com/matrix-transposition-calculator" />
+        <link rel="canonical" href="https://learnmathclass.com/visual-tools/matrix-transposition" />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://learnmathclass.com/matrix-transposition-calculator" />
+        <meta property="og:url" content="https://learnmathclass.com/visual-tools/matrix-transposition" />
         <meta property="og:title" content="Matrix Transposition Calculator | LearnMathClass.com" />
         <meta property="og:description" content={description} />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://learnmathclass.com/matrix-transposition-calculator" />
+        <meta property="twitter:url" content="https://learnmathclass.com/visual-tools/matrix-transposition" />
         <meta property="twitter:title" content="Matrix Transposition Calculator | LearnMathClass.com" />
         <meta property="twitter:description" content={description} />
       </Head>

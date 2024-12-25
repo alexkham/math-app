@@ -53,14 +53,14 @@ export default function FactoringCalculatorPage() {
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.learnmathclass.com/factoring-calculator" />
+        <meta property="og:url" content="https://www.learnmathclass.com/calculators/factoring-calculator" />
         <meta property="og:title" content="Free Online Factoring Calculator - Learn Math Class" />
         <meta property="og:description" content="Free online factoring calculator. Factor numbers, polynomials, and expressions step by step. Find prime factorization and complete factoring solutions instantly." />
         <meta property="og:image" content="https://www.learnmathclass.com/images/factoring-calculator.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://www.learnmathclass.com/factoring-calculator" />
+        <meta property="twitter:url" content="https://www.learnmathclass.com/calculators/factoring-calculator" />
         <meta property="twitter:title" content="Free Online Factoring Calculator - Learn Math Class" />
         <meta property="twitter:description" content="Free online factoring calculator. Factor numbers, polynomials, and expressions step by step. Find prime factorization and complete factoring solutions instantly." />
         <meta property="twitter:image" content="https://www.learnmathclass.com/images/factoring-calculator.png" />
@@ -72,7 +72,7 @@ export default function FactoringCalculatorPage() {
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
         {/* Links */}
-        <link rel="canonical" href="https://www.learnmathclass.com/factoring-calculator" />
+        <link rel="canonical" href="https://www.learnmathclass.com/calculators/factoring-calculator" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/images/icon-192x192.png" />
         <link rel="manifest" href="/manifest.json" />
