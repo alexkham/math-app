@@ -143,8 +143,8 @@ import { ChevronRight } from 'lucide-react';
 const VerticalButtonGroup = ({ 
   items = [], 
   width = '250px',
-  backgroundColor = '#e6f0ff',
-  color = '#0066ff',
+  backgroundColor = '#f3f4f6',
+  color = '#448af4',
   isSticky = false,
   verticalOffset = '20px'
 }) => {

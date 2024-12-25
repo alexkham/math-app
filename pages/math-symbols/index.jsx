@@ -69,6 +69,11 @@ export default function MathSymbolsPage({ symbolsData, meta }) {
             // icon: <Home />,
             link: "/math-symbols/calculus"
           },
+          {
+            title: "Trigonometry",
+            // icon: <Home />,
+            link: "/math-symbols/trigonometry"
+          },
         // {
         //   title: "Settings",
         //   link: "/settings"  // Example without icon
@@ -97,7 +102,7 @@ export default function MathSymbolsPage({ symbolsData, meta }) {
         side="right"
         topOffset="65px"
         sidebarWidth="45px"
-        panelWidth="200px"
+        panelWidth="300px"
         iconColor="white"
         panelBackgroundColor="#f2f2f2"
       />
@@ -108,8 +113,8 @@ export default function MathSymbolsPage({ symbolsData, meta }) {
       <VerticalButtonGroup 
       items={menuItems}
       width="130px"       
-      backgroundColor ='#0070f3'
-      color = 'white'
+    //   backgroundColor ='#0070f3'
+    //   color = 'white'
       isSticky={true}
       verticalOffset='250px'
       />
