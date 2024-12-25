@@ -64,6 +64,11 @@ export default function MathSymbolsPage({ symbolsData, meta }) {
             // icon: <Home />,
             link: "/math-symbols/math-logic"
           },
+          {
+            title: "Calculus",
+            // icon: <Home />,
+            link: "/math-symbols/calculus"
+          },
         // {
         //   title: "Settings",
         //   link: "/settings"  // Example without icon
