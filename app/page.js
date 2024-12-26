@@ -1,9 +1,7 @@
 import ButtonGroup from './components/button-group/ButtonGroup';
 import GenericTable from './components/generic-table/GenericTable';
 import MyAccordion from './components/my-accordion/MyAccordion';
-//import styles from './page.module.css'
-// import tableData from './api/db/tables/trigonometry_tables.json'
-// import './globals.css'
+
 import SelectComponent from './components/select-component/SelectComponent';
 import SelectionPage from './components/SelectionPage';
 import  SelectionPageNavigate from './components/SelectionPageNavigate'
@@ -37,10 +35,11 @@ import HomePage from './components/home-page/HomePage';
 import { getMetaDescriptions } from './utils/getMetaDescriptions';
 import MathSolutionSlideshow from './components/examples/MathSolutionSlideShow';
 import metaDescriptions from './components/home-page/metaDescriptions'
-//import combinatorics from './api/db/content/combinatorics'
+
 import GeneralAccordion from './components/accordion/GeneralAccordionComponent';
 import GeneralAccordionWrapper from './components/accordion/GeneralAccordionWrapper';
 import summaries from './api/db/tables/set-theory/summaries';
+import Head from 'next/head';
 
 
 export function generateStaticParams() {
@@ -85,6 +84,26 @@ export default async function Home() {
 
   return (
     <div className='outer-container'>
+      <Head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Learn Math Class: Free Online Math Learning Resources & Calculators</title>
+    
+    <meta name="description" content="Learn mathematics online with our free resources, interactive calculators, and step-by-step solutions. Covering algebra, geometry, trigonometry, statistics, and more." />
+    
+    <meta property="og:title" content="Learn Math Class - Free Online Math Learning Resources" />
+    <meta property="og:description" content="Master mathematics with our comprehensive online learning platform. Interactive tools, practice problems, and detailed explanations for all math levels." />
+    <meta property="og:url" content="https://www.learnmathclass.com" />
+    <meta property="og:type" content="website" />
+    
+    <link rel="canonical" href="https://www.learnmathclass.com" />
+    
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="math learning, online math, math calculator, math practice, algebra, geometry, trigonometry, statistics" />
+    
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+</Head>
      
       <HomePage categorizedUrls={categorizedUrls} metaDescriptions={metaDescriptions}></HomePage>
      
