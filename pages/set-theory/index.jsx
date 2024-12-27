@@ -16,6 +16,7 @@ import SetTheoryVennDiagram2 from '@/app/components/diagrams/SetTheoryDiagram2';
 import Head from 'next/head';
 import SecondaryNavbar from '@/app/components/nav-bar/SecondaryNavbar';
 import summaries from '@/app/api/db/tables/set-theory/summaries';
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 
 export default function SetTheoryPage({tocItems}) {
 
@@ -27,7 +28,7 @@ export default function SetTheoryPage({tocItems}) {
         <title>Set Theory: Basic Terminology and Overview | Math Concepts</title>
         <meta name="description" content="Fundamental concepts of Set Theory explained, covering definitions, notations, relationships between sets, and operations. Essential knowledge for mathematics students and enthusiasts." />
         <meta name="keywords" content="Set Theory, Mathematics, Cardinality, Subsets, Set Operations, Mathematical Sets" />
-        <link rel="canonical" href="https:/learnmathclass.com/set-theory" />
+        <link rel="canonical" href="https://www.learnmathclass.com/set-theory" />
         <meta property="og:title" content="Set Theory: Basic Terminology and Overview" />
         <meta property="og:description" content="Comprehensive guide to Set Theory fundamentals, including definitions, notations, set relationships, and operations. Ideal for math students and enthusiasts." />
         <meta property="og:url" content="https:/learnmathclass.com/set-theory" />
@@ -38,8 +39,10 @@ export default function SetTheoryPage({tocItems}) {
         <meta name="twitter:description" content="Comprehensive guide to Set Theory fundamentals, including definitions, notations, set relationships, and operations. Ideal for math students and enthusiasts." />
         <meta name="twitter:image" content="https:/learnmathclass.com/images/set-theory-twitter.jpg" />
       </Head>
-    <MyNavbar></MyNavbar>
+    {/* <MyNavbar></MyNavbar> */}
+    <GenericNavbar/>
      
+    <br></br>
     <br></br>
     <br></br>
     <br></br>
