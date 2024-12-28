@@ -79,6 +79,17 @@ export default function MathSymbolsPage({ symbolsData, meta }) {
             // icon: <Home />,
             link: "/math-symbols/set-theory"
           },
+
+          {
+            title: "Combinatorics",
+            // icon: <Home />,
+            link: "/math-symbols/combinatorics"
+          },
+          {
+            title: "Probability",
+            // icon: <Home />,
+            link: "/math-symbols/probability"
+          },
         // {
         //   title: "Settings",
         //   link: "/settings"  // Example without icon
@@ -111,24 +122,25 @@ export default function MathSymbolsPage({ symbolsData, meta }) {
         iconColor="white"
         panelBackgroundColor="#f2f2f2"
       />
-      <h1 className="title" style={{ marginTop: '0px',marginBottom:'-30px' }}>
+      <h1 className="title" style={{ marginTop: '0px',marginBottom:'0px' }}>
         {meta.pageHeading}
       </h1>
-      <br />
+      
       <VerticalButtonGroup 
       items={menuItems}
       width="130px"       
     //   backgroundColor ='#0070f3'
     //   color = 'white'
       isSticky={true}
-      verticalOffset='250px'
+      verticalOffset='150px'
       />
-      <br />
+     
       <div
         className="title"
         style={{
           margin: 'auto',
           width: '80%',
+        
         }}
       >
         <DataWrapper data={symbolsData} />
