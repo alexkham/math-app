@@ -74,6 +74,11 @@ export default function MathSymbolsPage({ symbolsData, meta }) {
             // icon: <Home />,
             link: "/math-symbols/trigonometry"
           },
+          {
+            title: "Set Theory",
+            // icon: <Home />,
+            link: "/math-symbols/set-theory"
+          },
         // {
         //   title: "Settings",
         //   link: "/settings"  // Example without icon

@@ -33,7 +33,7 @@ export default function MathSymbolsTrigonometryPage({ symbolsData, meta }) {
         iconColor="white"
         panelBackgroundColor="#f2f2f2"
       />
-      <h1 className="title" style={{ marginTop: '-30px' }}>
+      <h1 className="title" style={{ marginTop: '0px' }}>
         {meta.pageHeading}
       </h1>
       <br />
