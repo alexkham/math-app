@@ -207,6 +207,10 @@
 }
 
 @media (max-width: 640px) {
+  .tableContainer{
+    overflow-x: scroll;
+    
+  }
   .tabList {
     flex-wrap: wrap;
   }

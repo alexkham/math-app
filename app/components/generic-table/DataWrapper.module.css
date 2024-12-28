@@ -157,6 +157,7 @@
   }
   
   @media (max-width: 640px) {
+    
     .topControls {
       flex-wrap: wrap;
     }
