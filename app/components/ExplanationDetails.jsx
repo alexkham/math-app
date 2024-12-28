@@ -18,12 +18,12 @@ const ExplanationDetails = ({ title = "How to use", instructions, links, externa
       {`
         @media screen and (max-width: 768px) {
           details {
-            width: 300px !important;
+            width: 250px !important;
             padding: 8px 15px !important;
             font-size: 12px !important;
             height:50px;
-            zIndex:1000000; 
-            opacity:1;           
+            z-index:1000000 !important; 
+                   
           }
         }
       `}
