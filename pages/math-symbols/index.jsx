@@ -1,46 +1,3 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-// import React from 'react'
-// import '../pages.css'
-// import DataWrapper from '@/app/components/generic-table/DataWrapper'
-// import symbolsData from '../../app/components/keyboards/math_symbols.json';
-// import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
-
-
-// export default function MathSymbolsPage() {
-//   return (
-//     <>
-//     <GenericNavbar/>
-//     <br/>
-//     <br/>
-//     <br/>
-//     <br/>
-//     <Breadcrumb/>
-//     <OperaSidebar 
-//       side='right'
-//       topOffset='65px' 
-//       sidebarWidth='45px'
-//       panelWidth='200px'
-      
-//       iconColor='white'
-//       panelBackgroundColor='#f2f2f2'/> 
-//     <h1 className='title' style={{marginTop:'-30px'}}>Mathematical Symbols</h1>
-//     <br/>
-//     <br/>
-//     <div className='title'
-//        style={{
-//         margin:'auto',
-        
-//         width:'80%'}}>
-//     <DataWrapper data={symbolsData}/>
-//     </div>
-//     <ScrollUpButton/>
-//     </>
-//   )
-// }
-
-
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
@@ -125,14 +82,17 @@ export default function MathSymbolsPage({ symbolsData, meta }) {
       <h1 className="title" style={{ marginTop: '0px',marginBottom:'0px' }}>
         {meta.pageHeading}
       </h1>
-      
+      <br/>
+      <br/>
+      <br/>
+      <div style={{display:'flex',flexDirection:'row',alignItems: 'flex-start' }}>
       <VerticalButtonGroup 
       items={menuItems}
       width="130px"       
     //   backgroundColor ='#0070f3'
     //   color = 'white'
       isSticky={true}
-      verticalOffset='150px'
+      verticalOffset='200px'
       />
      
       <div
@@ -144,6 +104,7 @@ export default function MathSymbolsPage({ symbolsData, meta }) {
         }}
       >
         <DataWrapper data={symbolsData} />
+      </div>
       </div>
       <ScrollUpButton />
     </>
