@@ -10,6 +10,7 @@ import SecondaryNavbar from '@/app/components/nav-bar/SecondaryNavbar';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import ContentBlocks from '@/app/components/page-components/content-components/ContentBlocks';
 import '../pages.css'
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 
 
 // export async function getStaticProps() {
@@ -156,7 +157,8 @@ export default function SequencesPage({sequences,tocItems}) {
         <meta name="twitter:description" content="Explore various mathematical sequences and number patterns. Learn about arithmetic, geometric, and other important sequences in mathematics." />
         <meta name="twitter:image" content="https://www.learnmathclass.com/images/sequences-twitter.jpg" />
       </Head>
-   <MyNavbar></MyNavbar>
+   <GenericNavbar/>
+    <br></br>
     <br></br>
     <br></br>
     <br></br>
