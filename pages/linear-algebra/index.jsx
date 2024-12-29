@@ -113,13 +113,18 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Head from 'next/head'
 
 export async function getStaticProps() {
-  const { default: linearAlgebraFormulasList } = await import('@/app/api/db/formulas/linear-algebra/linearAlgebraFormulas')
+  const { default: linearAlgebraFormulasList } = await import('@/app/api/db/formulas/linear-algebra/linearAlgebraFormulas');
+  const { default: linearAlgebraTermsList } = await import('@/app/api/db/definitions/linear-algebra/linearAlgebraDefinitions')
   
   // Static content that can be used for SEO
   const sectionContent = {
     formulas: {
       title: 'Linear Algebra Formulas',
       description: 'Explore Linear Algebra formulas with explanations and examples'
+    },
+    definitions: {
+      title: 'Linear Algebra Terms and Definitions',
+      description: 'Browse Linear Algebra terminology including main concepts and their definitions with examples.'
     }
   }
 
@@ -158,7 +163,8 @@ Ultimately, linear algebra provides a foundation for solving abstract and applie
       keyWords,
       canonicalUrl,
       lastModified,
-      linearAlgebraFormulasList
+      linearAlgebraFormulasList,
+      linearAlgebraTermsList
     }
   }
 }
@@ -169,7 +175,8 @@ export default function LinearAlgebraPage({
   keyWords,
   canonicalUrl,
   lastModified,
-  linearAlgebraFormulasList
+  linearAlgebraFormulasList,
+  linearAlgebraTermsList
 }) {
   // Reconstruct sections with React components
   const linearAlgebraSections = [
@@ -183,6 +190,20 @@ export default function LinearAlgebraPage({
           key="formula-widget"
           formulaData={linearAlgebraFormulasList}
           moreFormulasLink='/linear-algebra/formulas'
+        />
+      ]
+    },
+    {
+      id: 'definitions',
+      title: sectionContent.definitions.title,
+      content: [
+        sectionContent.definitions.description,
+        " ",
+        <VerticalScrollingFormulaWidget 
+          key="definitions-widget"
+          formulaData={linearAlgebraTermsList}
+          moreFormulasLink='/linear-algebra/definitions'
+          type='definition'
         />
       ]
     }
