@@ -1,18 +1,14 @@
 User-agent: *
-# Allow everything by default
 Allow: /
 
-# Block query parameters and duplicates
+# Block system/template pages
+Disallow: */layout
+Disallow: /template/
+Disallow: /system/
+
+# Block query parameters and duplicates 
 Disallow: /*?*
 Disallow: /*&*
 Disallow: /*#*
 
-# Allow common file types (no need to explicitly allow these if Allow: / is present)
-Allow: /*.js
-Allow: /*.css
-Allow: /*.png
-Allow: /*.jpg
-Allow: /*.gif
-Allow: /*.svg
-
-Sitemap: https://learnmathclass.com/sitemap.xml
+Sitemap: https://www.learnmathclass.com/sitemap.xml
