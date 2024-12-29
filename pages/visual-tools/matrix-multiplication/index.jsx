@@ -1,25 +1,4 @@
-// import MyNavbar from '@/app/components/nav-bar/MyNavbar'
-// import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
-// import React from 'react'
-// import '../../pages.css'
-// import MatrixMultiplication from '@/app/components/matrix-multiplication/MatrixMultiplication'
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 
-// export default function MatrixMultiplicationPage() {
-//   return (
-//     <>
-//     <MyNavbar></MyNavbar>
-//     <br></br>
-//     <br></br>
-//     <br></br>
-//     <Breadcrumb></Breadcrumb>
-//     <h1 className='title'>Matrix Multiplication Animation </h1>
-//     <MatrixMultiplication></MatrixMultiplication>
-
-//     <ScrollUpButton></ScrollUpButton>    
-//     </>
-//   )
-// }
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import React from 'react';
@@ -41,10 +20,10 @@ export default function MatrixMultiplicationPage() {
         <meta name="description" content="Interactive matrix multiplication animation tool. Visualize and understand matrix multiplication step by step." />
         <meta property="og:title" content="Matrix Multiplication Animation" />
         <meta property="og:description" content="Interactive matrix multiplication animation tool. Visualize and understand matrix multiplication step by step." />
-        <meta property="og:url" content="https://learnmathclass.com/visual-tools/matrix-multiplication" />
+        <meta property="og:url" content="https://www.learnmathclass.com/visual-tools/matrix-multiplication" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://yourwebsite.com/images/matrix-multiplication-og.jpg" />
-        <link rel="canonical" href="https://learnmathclass.com/visual-tools/matrix-multiplication" />
+     
+        <link rel="canonical" href="https://www.learnmathclass.com/visual-tools/matrix-multiplication" />
       </Head>
       <GenericNavbar/>
       <br></br>

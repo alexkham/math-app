@@ -17,7 +17,7 @@ export default function GaussianEliminationCalculatorPage() {
         <meta name="description" content="Use our free Gaussian elimination calculator to solve matrix equations, systems of linear equations, and perform Gauss-Jordan elimination. Step-by-step solutions provided." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://learnmathclass.com/visual-tools/gauss-elimination" />
+        <link rel="canonical" href="https://www.learnmathclass.com/visual-tools/gauss-elimination" />
         <meta name="keywords" content="solve matrix equation, matrix equation calculator, solve a system of equations, gauss jordan elimination calculator, solve matrix calculator, solving a linear equation calculator, solving a system of linear equations calculator, gaussian elimination calculator, solve system of equations matrix calculator, echelon method calculator" />
       </Head>
 

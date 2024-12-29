@@ -13,12 +13,12 @@ export default function KeyboardPage(props) {
         <meta name="keywords" content="mathematical keyboard, math symbols, interactive learning, math education" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
-        <link rel="canonical" href="https://learnmathclass.com/keyboard" />
+        <link rel="canonical" href="https://www.learnmathclass.com/keyboard" />
         <meta property="og:title" content="Mathematical Keyboard | Interactive Learning Tool" />
         <meta property="og:description" content={props.metaDescription} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://learnmathclass.com/keyboard" />
-        <meta property="og:image" content="https://learnmathclass.com/images/math-keyboard-og.jpg" />
+        <meta property="og:url" content="https://www.learnmathclass.com/keyboard" />
+        <meta property="og:image" content="https://www.learnmathclass.com/images/math-keyboard-og.jpg" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
       </Head>
       
