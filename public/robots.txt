@@ -1,11 +1,6 @@
 User-agent: *
 Allow: /
 
-# Block system/template pages
-Disallow: */layout
-Disallow: /template/
-Disallow: /system/
-
 # Block query parameters and duplicates 
 Disallow: /*?*
 Disallow: /*&*
