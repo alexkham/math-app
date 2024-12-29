@@ -1,6 +1,14 @@
-.container {
+.pageLayout {
+    display: flex;
+    gap: 20px;
     width: 100%;
-    max-width: 500px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .container {
+    width: 55%;
     background: #ffffff;
     border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -8,21 +16,36 @@
     border: 1px solid #e1e1e1;
   }
   
-  .select {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 1px solid #d1d1d1;
-    border-radius: 8px;
+  .buttonGroup {
+    display: flex;
+    gap: 0.25rem;
     margin-bottom: 1.5rem;
-    background: #ffffff;
-    color: #1a1a1a;
-    font-weight: 500;
-    cursor: pointer;
   }
   
-  .select:hover {
+  .operatorButton {
+    flex: 1 1 calc(16.666% - 0.25rem);
+    padding: 0.5rem 0.25rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border: 2px solid #d1d1d1;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  
+  .operatorButton:hover {
+    background: #f8f9fa;
     border-color: #2563eb;
+  }
+  
+  .operatorButton.active {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 1px #2563eb;
   }
   
   .table {
@@ -78,4 +101,80 @@
   
   .true {
     color: #2563eb;
+  }
+  
+  .explanationContainer {
+    width: 40%;
+    margin-right: 50px;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+    align-self: flex-start;
+  }
+  
+  .explanationContent {
+    color: #2d3748;
+  }
+  
+  .explanationText {
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .explanationLinks {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1rem;
+  }
+  
+  .linksTitle {
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    color: #4a5568;
+  }
+  
+  .linksList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .linksList li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .explanationLink {
+    color: #3182ce;
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+  
+  .explanationLink:hover {
+    text-decoration: underline;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .pageLayout {
+      flex-direction: column;
+      padding: 1rem;
+    }
+  
+    .container, .explanationContainer {
+      width: 100%;
+      margin-right: 0;
+    }
+  
+    .buttonGroup {
+      flex-direction: column;
+    }
+  
+    .operatorButton {
+      width: 100%;
+    }
   }

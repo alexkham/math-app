@@ -1,19 +1,18 @@
 User-agent: *
-
-Allow: https://www.learnmathclass.com/
-Disallow: https://learnmathclass.com/
-
-# Allow common file types
-Allow: /*.js$
-Allow: /*.css$
-Allow: /*.png$
-Allow: /*.jpg$
-Allow: /*.gif$
-Allow: /*.svg$
+# Allow everything by default
+Allow: /
 
 # Block query parameters and duplicates
 Disallow: /*?*
 Disallow: /*&*
 Disallow: /*#*
+
+# Allow common file types (no need to explicitly allow these if Allow: / is present)
+Allow: /*.js
+Allow: /*.css
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.gif
+Allow: /*.svg
 
 Sitemap: https://learnmathclass.com/sitemap.xml
