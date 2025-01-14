@@ -41,7 +41,7 @@ export default function ProbabilityTables() {
         side='right'
         topOffset='60px' 
         sidebarWidth='45px'
-        panelWidth='200px'
+        panelWidth='300px'
         
         iconColor='white'
         panelBackgroundColor='#f2f2f2'/> 
