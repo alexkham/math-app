@@ -102,6 +102,7 @@ export const mainMenuStructure = [
             { label: 'Basic Math', href: '/tables/arithmetics' },
             { label: 'Probability', href: '/tables/probability' },
             { label: 'Mathematical Symbols', href: '/math-symbols' },
+            { label: 'Truth Tables', href: '/tables/truth-tables' },
            
           ]
         },

@@ -62,6 +62,7 @@ const CustomConvert=()=>(
         { text: 'Probability Tables', url: '/tables/probability' },
         { text: 'Arithmetics Tables', url: '/tables/arithmetics' },
         { text: 'Mathematical Symbols', url: '/math-symbols' },
+        { text: 'Truth Tables', url: '/tables/truth-tables' },
         
     ] },
   { id: 4, icon: CustomKeyboard, tooltip: 'Mathematical Keyboard', 
