@@ -14,7 +14,8 @@ const categoryIcons = {
   'Trigonometry': PieChart,
   'Probability': Percent,
   'Arithmetics': Calculator,
-  'Math-Symbols':Section
+  'Math-Symbols':Section,
+  'Truth-Tables':'T'
 };
 
 
@@ -130,7 +131,8 @@ export async function getStaticProps() {
     // 'Trigonometry': '/trigonometry',
     'Probability': '/tables/probability',
     'Arithmetics': '/tables/arithmetics',
-    'Math-Symbols': '/math-symbols'
+    'Math-Symbols': '/math-symbols',
+    'Truth-Tables':'/tables/truth-tables'
   };
   
   const categories = 
@@ -140,7 +142,8 @@ export async function getStaticProps() {
     // 'Trigonometry',
      'Probability',
       'Arithmetics',
-      'Math-Symbols'
+      'Math-Symbols',
+      'Truth-Tables'
    ];
   return { props: { categories, categoryLinks } };
 }
