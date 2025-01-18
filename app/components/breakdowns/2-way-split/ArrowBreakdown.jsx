@@ -886,7 +886,7 @@ const ArrowSplitBreakdown = ({
             />
           </svg> */}
 
-<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" overflow="hidden">
+         {/* <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" overflow="hidden">
             <path 
               d="M10 75 10 55C10 45 20 35 30 35L40 35 40 30 50 40 40 50 40 45 30 45C25 45 20 50 20 55L20 75Z" 
               stroke="#042433" 
@@ -894,7 +894,9 @@ const ArrowSplitBreakdown = ({
               fill={rightArrowColor}
               fillRule="evenodd"
             />
-          </svg>
+          </svg> */}
+
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-chevron-right"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m10 8 4 4-4 4"/></svg>
         </div>
         
         <div style={mergedStyles.rightContent}>

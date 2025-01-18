@@ -458,6 +458,8 @@ export default function Test4Page() {
     <GenericCircularButtonGroup sections={fiveSections} titleColor='white' centerContent="Menu"/>
     <br/>
     <br/>
+
+    <GenericCircularButtonGroup sections={threeSections}/>
     <br/>
     <br/>
     <div style={{transform:'scale(0.85)'}}>

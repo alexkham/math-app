@@ -13,7 +13,64 @@ import TruthTable from '@/app/components/logic-calculator/truth-tables/TruthTabl
 
 
 export default function Test5Page() {
+
+   const mockData = {
+    basic: {
+      title: "Framework Comparison",
+      leftTitle: "React",
+      rightTitle: "Vue",
+      left: [
+        "Component-based",
+        "Virtual DOM",
+        "Rich ecosystem",
+        "Facebook backed"
+      ],
+      right: [
+        "Gentle learning curve",
+        "Built-in state management",
+        "Template system",
+        "Progressive framework"
+      ]
+    },
   
+    minimal: {
+      left: [
+        "Option A",
+        "Option B",
+        "Option C"
+      ],
+      right: [
+        "Option 1",
+        "Option 2",
+        "Option 3"
+      ]
+    },
+  
+    detailed: {
+      title: "Development Approach",
+      leftTitle: "Monolith",
+      rightTitle: "Microservices",
+      left: [
+        "Simpler deployment",
+        "Better consistency",
+        "Easier testing",
+        "Lower complexity",
+        "Faster development initially"
+      ],
+      right: [
+        "Better scalability",
+        "Independent deployments",
+        "Technology flexibility",
+        "Smaller teams",
+        "Easier maintenance"
+      ]
+    }
+  };
+  
+  // Usage examples:
+  // <TableSplitBreakdown content={mockData.basic} />
+  // <TableSplitBreakdown content={mockData.minimal} />
+  // <TableSplitBreakdown content={mockData.detailed} />
 
   const truthExplanations = {
     AND: {
@@ -41,6 +98,44 @@ export default function Test5Page() {
       links: [{ title: "XNOR Operations", link: "/learn/xnor" }]
     }
   };
+
+
+  const sampleData = {
+    title: "Framework Comparison",
+    leftTitle: "React",
+    rightTitle: "Vue",
+    left: [
+      "Simple string item",
+      {
+        title: "Advanced Features",
+        link: "https://react.dev/features",
+        content: [
+          "Virtual DOM",
+          "Server Components",
+          "Suspense"
+        ]
+      },
+      {
+        title: "Ecosystem",
+        content: [
+          "NPM Packages: 100K+",
+          "Active community"
+        ]
+      }
+    ],
+    right: [
+      "Basic string item",
+      {
+        title: "Core Features",
+        link: "https://vuejs.org/guide",
+        content: [
+          "Reactivity System",
+          "Template Syntax",
+          "Composition API"
+        ]
+      }
+    ]
+   };
   return (
     <>
     <h1>Test 5 page </h1>
@@ -59,7 +154,12 @@ export default function Test5Page() {
     <br/>
     <br/>
     <br/>
-    <TableSplitBreakdown/>
+    <TableSplitBreakdown  content={mockData.basic}/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <TableSplitBreakdown  content={sampleData}/>
     <br/>
     <br/>
     <br/>

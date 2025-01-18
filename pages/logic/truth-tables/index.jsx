@@ -86,6 +86,8 @@ const TruthTablesPage = ({ operatorDescriptions }) => {
                 </a>
               )}
               <br></br>
+              {<a href={'/tables/truth-tables'}  className={styles.readMore}>Check Truth Tables for Basic Logical Operators</a>}
+              <br></br>
               <a href="#top" className={styles.backToTop}>Back to Top</a>
             </section>
             </>
