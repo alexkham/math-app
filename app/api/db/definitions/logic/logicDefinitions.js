@@ -1,4 +1,16 @@
 const logicTermsList = [
+  {
+    name: "Bound Variable",
+    formula: "A variable that is tied to a quantifier or binding operator and has a defined scope.",
+    fields: [],
+    category: "Logic Basics"
+  },
+  {
+    name: "Unbound Variable",
+    formula: "A variable that is not tied to any quantifier or binding operator, remaining free or undefined in its context.",
+    fields: [],
+    category: "Logic Basics"
+  },
     {
       name: "Proposition",
       formula: "A declarative statement that is either true or false.",

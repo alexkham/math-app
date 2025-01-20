@@ -174,17 +174,37 @@ import Sections from '@/app/components/page-components/section/Sections'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Head from 'next/head'
+import { createContentHtml } from '@/app/utils/utils-functions'
 
 export async function getStaticProps() {
   const { default: calculusFormulasList } = await import('@/app/api/db/formulas/calculus/calculusFormulasList')
+  const { default: calculusTermsList } = await import('@/app/api/db/definitions/calculus/calculusDefinitions')
   
   // Static content that can be used for SEO
   const sectionContent = {
     formulas: {
-      leftContentHtml: '<div style="background-color:#ebf5ff;height:250px;padding:20px;">Visit Calculus formulas page.</div>',
+      leftContentHtml: createContentHtml({ 
+        description: 'The Calculus Formulas page features fundamental laws and theorems across Limits, Derivatives, Integrals, and Integration Techniques. Each entry includes step-by-step explanations, key variables, worked examples, and real-world applications - from basic limit laws and differentiation rules to advanced integration methods and improper integrals.',
+        link: '/calculus/definitions',
+        linkText: 'View All Definitions',
+        height:'350px',
+        backgroundColor:'#fdfdea',
+      }),
       layout: 'horizontal',
       title: 'Calculus Formulas',
-    }
+    },
+     definitions: {
+          title: 'Calculus Terms and Definitions',
+          description: 'Browse Calculus terminology including main concepts and their definitions with examples',
+          rightContentHtml: createContentHtml({ 
+            description: 'The Calculus Terms and Definitions page provides a comprehensive collection of essential calculus concepts organized across multiple categories including Functions, Differentiation, Integration, Geometry, Motion and Dynamics, and Vector Calculus. From fundamental concepts like derivatives and integrals to advanced topics in vector analysis and differential equations, each term is clearly defined to support understanding of calculus principles and their applications.',
+            link: '/calculus/definitions',
+            linkText: 'View All Definitions',
+            height:'350px',
+            backgroundColor:'#fdfdea',
+          }),
+          layout: 'horizontal'
+        }
   }
 
   const introContent = {
@@ -224,7 +244,8 @@ Applications of calculus extend throughout science, engineering, and economics. 
       keyWords,
       canonicalUrl,
       lastModified,
-      calculusFormulasList
+      calculusFormulasList,
+      calculusTermsList
     }
   }
 }
@@ -235,7 +256,8 @@ export default function CalculusPage({
   keyWords,
   canonicalUrl,
   lastModified,
-  calculusFormulasList
+  calculusFormulasList,
+  calculusTermsList
 }) {
   // Reconstruct sections with React components
   const calculusSections = [
@@ -258,6 +280,29 @@ export default function CalculusPage({
           layout: 'horizontal', 
           position: 'right',
           width: 2 
+        }
+      ]
+    },
+    {
+      id: 'definitions',
+      title: sectionContent.definitions.title,
+      content: [
+        { 
+          content: <VerticalScrollingFormulaWidget 
+            key="definitions-widget"
+            formulaData={calculusTermsList}
+            moreFormulasLink='/calculus/definitions'
+            type='definition'
+          />, 
+          layout: 'horizontal', 
+          position: 'left',
+          width: 2
+        },
+        { 
+          content: sectionContent.definitions.rightContentHtml,
+          layout: 'horizontal', 
+          position: 'right',
+          width: 1.5 
         }
       ]
     }

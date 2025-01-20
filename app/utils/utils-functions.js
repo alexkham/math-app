@@ -40,5 +40,44 @@ export const range=(start, end)=> {
   return result;}
 
 
+  // export const createContentHtml = ({
+  //   description = '',
+  //   backgroundColor = '#ebf5ff',
+  //   height = '250px',
+  //   padding = '20px',
+  //   width = 'auto'
+  //  } = {}) => {
+  //   return `<div style="background-color:${backgroundColor};height:${height};padding:${padding};width:${width};">${description}</div>`
+  //  }
 
-  
+//   export const createContentHtml = ({
+//     description = '',
+//     backgroundColor = '#ebf5ff',
+//     height = '250px',
+//     padding = '20px',
+//     width = 'auto',
+//     link = ''
+// } = {}) => {
+//     const content = link 
+//         ? `<div>${description}<br/><br/><a className={'link'} href="${link}" style="color:#2563eb;text-decoration:none;font-weight:600;background-color:#ffffff;padding:10px;border-radius:4px;border:0.5px solid #2563eb">Go to  Page</a></div>`
+//         : description;
+
+//     return `<div style="background-color:${backgroundColor};height:${height};padding:${padding};width:${width};display:flex;flex-direction:column;justify-content:space-between;align-items:space-between;">${content}</div>`
+// }
+
+
+export const createContentHtml = ({
+  description = '',
+  backgroundColor = '#ebf5ff',
+  height = '250px',
+  padding = '20px',
+  width = 'auto',
+  link = ''
+} = {}) => {
+  const content = link
+    ? `<div style="height:100%">${description}</div><a className={'link'} href="${link}" style="color:#2563eb;text-decoration:none;font-weight:600;background-color:#ffffff;padding:5px;padding-left:15px;border-radius:4px;border:0.5px solid #2563eb; width:30%;">Go to Page</a>`
+    : description;
+
+  return `<div style="background-color:${backgroundColor};height:${height};padding:${padding};width:${width};display:flex;flex-direction:column;justify-content:space-between;">${content}</div>`
+}
+
