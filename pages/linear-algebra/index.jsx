@@ -246,7 +246,8 @@ export default function LinearAlgebraPage({
       link:'/linear-algebra/matrix',
       content: [
         sectionContent.matrices.description,
-       <MyList data={sectionContent.matrices.list}/>,
+       <MyList data={sectionContent.matrices.list}
+       key={249}/>,
        
       ]
     }
