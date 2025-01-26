@@ -25,6 +25,11 @@
   min-height: 400px;
   margin-bottom: 0px;
  }
+ .sectionContent a{
+  text-decoration: none;
+  color:#3498db;
+  font-weight: bold;
+ }
  
  .sectionTitle {
   font-size: 28px;

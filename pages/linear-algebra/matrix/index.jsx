@@ -410,7 +410,7 @@ These foundational features play crucial roles across linear algebra, connecting
     <br/>
      <OperaSidebar 
            side='right'
-           topOffset='65px' 
+           topOffset='55px' 
            sidebarWidth='45px'
            panelWidth='300px'
            iconColor='white'

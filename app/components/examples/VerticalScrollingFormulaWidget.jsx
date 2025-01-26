@@ -43,6 +43,7 @@ const VerticalScrollingFormulaWidget = ({
   backgroundColor = '#6d95db',
   headerColor = '#407de5',
   footerColor = '#2162d0',
+  width='100%',
   type='formula'
 }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -90,7 +91,7 @@ const VerticalScrollingFormulaWidget = ({
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%', borderRadius: '3px', overflow: 'hidden' }}>
+    <div style={{ position: 'relative', width: width, borderRadius: '3px', overflow: 'hidden',margin:'auto' }}>
       <div style={{ 
         backgroundColor: headerColor, 
         height: '35px', 
@@ -100,7 +101,8 @@ const VerticalScrollingFormulaWidget = ({
         color: 'white',
         fontWeight: '500',
         margin: '1px',
-        borderRadius: '3px'
+        borderRadius: '3px',
+       
       }}>
         {title}
       </div>

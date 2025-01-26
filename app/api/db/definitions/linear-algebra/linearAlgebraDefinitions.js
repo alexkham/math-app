@@ -4,10 +4,17 @@ const linearAlgebraTermsList = [
     //vectors
     {
         name: "Vector",
-        formula: "An object with both magnitude and direction.",
-        fields: [],
-        category: "Vectors Basic Terms"
-    },
+        formula: "A mathematical object that has both magnitude ($|\\vec{v}|$) and direction in space.",
+        fields: {
+          "definition": "$$\\vec{v} = \\begin{bmatrix} v_1 \\\\ v_2 \\\\ \\vdots \\\\ v_n \\end{bmatrix} \\quad \\text{or} \\quad \\vec{v} = \\begin{bmatrix} v_1 & v_2 & \\cdots & v_n \\end{bmatrix}$$",
+          "components": "Each element $v_i$ represents displacement along the corresponding axis",
+          "examples": `2D vector: $\\vec{v} = \\begin{bmatrix} 2 \\\\ 3 \\end{bmatrix}$ represents 2 units along x-axis, 3 along y-axis
+      
+      3D vector: $\\vec{v} = \\begin{bmatrix} 1 \\\\ -2 \\\\ 4 \\end{bmatrix}$ represents displacements along x, y, and z axes`,
+          "notation": "Denoted by arrow overhead ($\\vec{v}$) or bold ($\\mathbf{v}$)"
+        },
+        category: "Vectors"
+      },
     {
         name: "Components",
         formula: "The individual elements of a vector, e.g., (v1, v2, ..., vn).",
@@ -15,17 +22,36 @@ const linearAlgebraTermsList = [
         category: "Vectors Basic Terms"
     },
     {
-        name: "Magnitude/Norm",
-        formula: "The length of a vector, denoted as ||v||.",
-        fields: [],
-        category: "Vectors Basic Terms"
-    },
-    {
+        name: "Vector Magnitude (Norm)",
+        formula: "Length of a vector, denoted as $|\\vec{v}|$ or $\\|\\vec{v}\\|$",
+        fields: {
+          "definition": "For an n-dimensional vector: $$|\\vec{v}| = \\sqrt{\\sum_{i=1}^n v_i^2}$$",
+          "common cases": `2D vector: $|\\vec{v}| = \\sqrt{v_1^2 + v_2^2}$
+       
+       3D vector: $|\\vec{v}| = \\sqrt{v_1^2 + v_2^2 + v_3^2}$`,
+          "properties": "Always non-negative: $|\\vec{v}| \\geq 0$, equals zero only for zero vector",
+          "examples": `For $\\vec{v} = \\begin{bmatrix} 3 \\\\ 4 \\end{bmatrix}$:
+       $|\\vec{v}| = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$`
+        },
+        category: "Vectors"
+       },
+       {
         name: "Unit Vector",
-        formula: "A vector with a magnitude of 1.",
-        fields: [],
-        category: "Vectors Basic Terms"
-    },
+        formula: "Vector with magnitude of 1: $|\\vec{u}| = 1$",
+        fields: {
+          "definition": "Obtained by normalizing a vector: $$\\vec{u} = \\frac{\\vec{v}}{|\\vec{v}|}$$",
+//          "standard basis": `Standard unit vectors in $\\mathbb{R}^3$:
+// $$\\hat{i} = \\begin{bmatrix} 1 \\\\ 0 \\\\ 0 \\end{bmatrix}, \\quad
+// \\hat{j} = \\begin{bmatrix} 0 \\\\ 1 \\\\ 0 \\end{bmatrix}, \\quad
+// \\hat{k} = \\begin{bmatrix} 0 \\\\ 0 \\\\ 1 \\end{bmatrix}$$`,
+"standard basis": `Standard unit vectors in $\\mathbb{R}^3$:
+$$\\hat{i} = \\begin{bmatrix} 1 \\\\ 0 \\\\ 0 \\end{bmatrix}, \\quad \\hat{j} = \\begin{bmatrix} 0 \\\\ 1 \\\\ 0 \\end{bmatrix}, \\quad \\hat{k} = \\begin{bmatrix} 0 \\\\ 0 \\\\ 1 \\end{bmatrix}$$`,
+          "examples": `Normalizing $\\vec{v} = \\begin{bmatrix} 3 \\\\ 4 \\end{bmatrix}$:
+       $$\\vec{u} = \\frac{1}{5}\\begin{bmatrix} 3 \\\\ 4 \\end{bmatrix} = \\begin{bmatrix} 0.6 \\\\ 0.8 \\end{bmatrix}$$`,
+          "properties": "Unit vectors preserve direction while normalizing magnitude"
+        },
+        category: "Vectors"
+       },
     {
         name: "Zero Vector (Null Vector)",
         formula: "A vector where all components are zero: $\\vec{0}$ or $\\mathbf{0}$",
@@ -68,10 +94,17 @@ const linearAlgebraTermsList = [
     },
     {
         name: "Linear Combination",
-        formula: "A combination of vectors using scalar multiplication and addition.",
-        fields: [],
-        category: "Vector Operations"
-    },
+        formula: "A vector $\\vec{v}$ is a linear combination of vectors $\\{\\vec{v_1}, \\vec{v_2}, ..., \\vec{v_n}\\}$ if it can be written as $\\vec{v} = c_1\\vec{v_1} + c_2\\vec{v_2} + ... + c_n\\vec{v_n}$ for some scalars $c_1, c_2, ..., c_n$",
+        fields: {
+          "geometric": `The set of all possible linear combinations forms:
+       - A line if one nonzero vector
+       - A plane if two linearly independent vectors
+       - A space if three linearly independent vectors`,
+          "examples": `Vector $\\vec{v} = \\begin{bmatrix} 5 \\\\ 7 \\end{bmatrix}$ as linear combination:
+       $$\\vec{v} = 2\\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix} + 3\\begin{bmatrix} 1 \\\\ 1 \\end{bmatrix}$$`
+        },
+        category: "Vectors"
+       },
     {
         name: "Dot Product (Inner Product)",
         formula: "The sum of the products of corresponding components,  $u·v = Σui * vi$.",
@@ -85,65 +118,141 @@ const linearAlgebraTermsList = [
         category: "Vector Operations"
     },
     {
-        name: "Projection",
-        formula: "The shadow of one vector onto another.",
-        fields: [],
-        category: "Vector Operations"
-    },
-    {
+        name: "Vector Projection",
+        formula: "Orthogonal projection of vector $\\vec{v}$ onto vector $\\vec{u}$ is the vector component of $\\vec{v}$ parallel to $\\vec{u}$, given by: $\\text{proj}_{\\vec{u}}\\vec{v} = \\frac{\\vec{v} \\cdot \\vec{u}}{|\\vec{u}|^2}\\vec{u}$",
+        fields: {
+          "formula expanded": `For vectors $\\vec{v}$ and $\\vec{u}$:
+       $$\\text{proj}_{\\vec{u}}\\vec{v} = \\frac{\\vec{v} \\cdot \\vec{u}}{\\vec{u} \\cdot \\vec{u}}\\vec{u} = (\\vec{v} \\cdot \\hat{u})\\hat{u}$$`,
+          "geometric": `The projection decomposes $\\vec{v}$ into:
+       - Parallel component: $\\text{proj}_{\\vec{u}}\\vec{v}$ (along $\\vec{u}$)
+       - Perpendicular component: $\\vec{v} - \\text{proj}_{\\vec{u}}\\vec{v}$`,
+          "examples": `For $\\vec{v} = \\begin{bmatrix} 3 \\\\ 4 \\end{bmatrix}$ onto $\\vec{u} = \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix}$:
+       $$\\text{proj}_{\\vec{u}}\\vec{v} = \\begin{bmatrix} 3 \\\\ 0 \\end{bmatrix}$$`
+        },
+        category: "Vectors"
+       },
+       {
         name: "Linearly Independent Vectors",
-        formula: "Vectors that cannot be expressed as a linear combination of others.",
-        fields: [],
-        category: "Vectors Linear Dependence and Independence"
-    },
-    {
+        formula: "A set of vectors $\\{\\vec{v_1}, \\vec{v_2}, ..., \\vec{v_n}\\}$ is linearly independent if the equation $c_1\\vec{v_1} + c_2\\vec{v_2} + ... + c_n\\vec{v_n} = \\vec{0}$ is satisfied only when all $c_i = 0$",
+        fields: {
+          "geometric": `In $\\mathbb{R}^2$:
+       - Two vectors are linearly independent if neither is a scalar multiple of the other
+       - In $\\mathbb{R}^3$, three vectors are linearly independent if none lies in the plane formed by the other two`,
+          "examples": `Linearly independent vectors:
+       $$\\vec{v_1} = \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix}, \\quad \\vec{v_2} = \\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix}$$
+       
+       Linearly dependent vectors:
+       $$\\vec{v_1} = \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix}, \\quad \\vec{v_2} = \\begin{bmatrix} 2 \\\\ 4 \\end{bmatrix}$$`
+        },
+        category: "Vectors"
+       },
+       {
         name: "Linearly Dependent Vectors",
-        formula: "Vectors that can be expressed as a linear combination of others.",
-        fields: [],
-        category: "Vectors Linear Dependence and Independence"
-    },
-    {
+        formula: "A set of vectors $\\{\\vec{v_1}, \\vec{v_2}, ..., \\vec{v_n}\\}$ is linearly dependent if there exist scalars $c_1, c_2, ..., c_n$, not all zero, such that $c_1\\vec{v_1} + c_2\\vec{v_2} + ... + c_n\\vec{v_n} = \\vec{0}$",
+        fields: {
+          "geometric": `In $\\mathbb{R}^2$:
+       - Two vectors are linearly dependent if one is a scalar multiple of the other
+       - In $\\mathbb{R}^3$, three vectors are linearly dependent if one lies in the plane formed by the other two`,
+          "examples": `$$\\vec{v_1} = \\begin{bmatrix} 2 \\\\ 4 \\end{bmatrix}, \\quad \\vec{v_2} = \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix}$$
+       Here $2\\vec{v_2} = \\vec{v_1}$, making them linearly dependent`
+        },
+        category: "Vectors"
+       },
+       {
         name: "Vector Space",
-        formula: "A set of vectors closed under addition and scalar multiplication.",
-        fields: [],
-        category: "Vector Spaces"
-    },
-    {
-        name: "Subspace",
-        formula: "A subset of a vector space that is also a vector space.",
-        fields: [],
-        category: "Vector Spaces"
-    },
-    {
+        formula: "A set $V$ with vectors $\\vec{u}, \\vec{v} \\in V$ and scalars $c$ is a vector space if it's closed under addition ($\\vec{u} + \\vec{v} \\in V$) and scalar multiplication ($c\\vec{v} \\in V$), and satisfies the vector space axioms",
+        fields: {
+          "axioms": `For all $\\vec{u}, \\vec{v}, \\vec{w} \\in V$ and scalars $c,d$:
+       - Commutativity: $\\vec{u} + \\vec{v} = \\vec{v} + \\vec{u}$
+       - Associativity: $(\\vec{u} + \\vec{v}) + \\vec{w} = \\vec{u} + (\\vec{v} + \\vec{w})$
+       - Zero vector: $\\exists \\vec{0}$ such that $\\vec{v} + \\vec{0} = \\vec{v}$
+       - Additive inverse: $\\exists -\\vec{v}$ such that $\\vec{v} + (-\\vec{v}) = \\vec{0}$
+       - Distributivity: $c(\\vec{u} + \\vec{v}) = c\\vec{u} + c\\vec{v}$`,
+          "examples": `Common vector spaces:
+       - $\\mathbb{R}^n$: n-dimensional real vectors
+       - Matrices of fixed size
+       - Polynomials of degree ≤ n`
+        },
+        category: "Vectors"
+       },
+       {
+        name: "Vector Subspace",
+        formula: "A subset $W$ of a vector space $V$ is a subspace if it's closed under addition and scalar multiplication: for all $\\vec{u}, \\vec{v} \\in W$ and scalar $c$, both $\\vec{u} + \\vec{v} \\in W$ and $c\\vec{v} \\in W$",
+        fields: {
+          "properties": `Any subspace must:
+       - Contain zero vector
+       - Be closed under linear combinations
+       - Form a vector space itself`,
+          "examples": `Common subspaces of $\\mathbb{R}^3$:
+       - Any plane through origin
+       - Any line through origin
+       - The zero subspace $\\{\\vec{0}\\}$`
+        },
+        category: "Vectors"
+       },
+       {
         name: "Span",
-        formula: "The set of all linear combinations of a given set of vectors.",
-        fields: [],
-        category: "Vector Spaces"
-    },
-    {
+        formula: "The span of vectors $\\{\\vec{v_1}, \\vec{v_2}, ..., \\vec{v_n}\\}$ is the set of all their linear combinations: $\\text{span}\\{\\vec{v_1}, \\vec{v_2}, ..., \\vec{v_n}\\} = \\{c_1\\vec{v_1} + c_2\\vec{v_2} + ... + c_n\\vec{v_n} | c_i \\in \\mathbb{R}\\}$",
+        fields: {
+          "geometric": `Span represents:
+       - A line through origin (one vector)
+       - A plane through origin (two linearly independent vectors)
+       - All of $\\mathbb{R}^3$ (three linearly independent vectors)`,
+          "examples": `$$\\text{span}\\left\\{\\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix}\\right\\} = \\mathbb{R}^2$$
+       $$\\text{span}\\left\\{\\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix}, \\begin{bmatrix} 2 \\\\ 4 \\end{bmatrix}\\right\\} = \\text{line through origin}$$`
+        },
+        category: "Vectors"
+       },
+       {
         name: "Basis",
-        formula: "A set of linearly independent vectors that span a vector space.",
-        fields: [],
-        category: "Vector Spaces"
-    },
-    {
+        formula: "A basis of a vector space $V$ is a linearly independent set of vectors that spans $V$. For any vector $\\vec{v} \\in V$, there exists a unique representation $\\vec{v} = c_1\\vec{v_1} + c_2\\vec{v_2} + ... + c_n\\vec{v_n}$",
+        fields: {
+          "properties": `- Contains minimum number of vectors needed to span space
+       - Linearly independent and spans entire space
+       - Number of vectors = dimension of space`,
+          "examples": `Standard basis for $\\mathbb{R}^3$:
+       $$\\left\\{\\begin{bmatrix} 1 \\\\ 0 \\\\ 0 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\\\ 0 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 0 \\\\ 1 \\end{bmatrix}\\right\\}$$`
+        },
+        category: "Vectors"
+       },
+       {
         name: "Dimension",
-        formula: "The number of vectors in a basis.",
-        fields: [],
-        category: "Vector Spaces"
-    },
-    {
+        formula: "The dimension of a vector space $V$ is the number of vectors in any basis of $V$, denoted $\\dim(V)$",
+        fields: {
+          "properties": `- Independent of choice of basis
+       - Equal to maximum number of linearly independent vectors
+       - $\\dim(\\mathbb{R}^n) = n$`,
+          "examples": `- $\\dim(\\mathbb{R}^2) = 2$ (plane)
+       - $\\dim(\\mathbb{R}^3) = 3$ (space)
+       - $\\dim(\\{\\vec{0}\\}) = 0$ (zero space)
+       - $\\dim(\\text{line}) = 1$`
+        },
+        category: "Vectors"
+       },
+       {
         name: "Orthogonal Vectors",
-        formula: "Vectors with a dot product of 0.",
-        fields: [],
-        category: "Vectors Orthogonality"
-    },
-    {
-        name: "Orthonormal Basis",
-        formula: "A set of orthogonal vectors that are also unit vectors.",
-        fields: [],
-        category: "Vectors Orthogonality"
-    },
+        formula: "Two vectors $\\vec{u}$ and $\\vec{v}$ are orthogonal if their dot product is zero: $\\vec{u} \\cdot \\vec{v} = 0$",
+        fields: {
+          "geometric": "Orthogonal vectors are perpendicular to each other, forming a 90° angle",
+          "examples": `$$\\vec{u} = \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix}, \\quad \\vec{v} = \\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix}$$
+       $$\\vec{u} \\cdot \\vec{v} = 1(0) + 0(1) = 0$$`
+        },
+        category: "Vectors"
+       },
+       {
+        name: "Orthonormal Vectors",
+        formula: "A set of vectors is orthonormal if they are orthogonal to each other and each has unit length: $\\vec{u_i} \\cdot \\vec{u_j} = \\delta_{ij}$ where $\\delta_{ij}$ is the Kronecker delta",
+        fields: {
+          "properties": ` Orthogonal to each other
+ Each vector has magnitude equal to 1
+ Form an orthonormal basis if they span the space`,
+          "examples": `Standard basis vectors are orthonormal:
+       $$\\hat{i} = \\begin{bmatrix} 1 \\\\ 0 \\\\ 0 \\end{bmatrix}, \\quad
+       \\hat{j} = \\begin{bmatrix} 0 \\\\ 1 \\\\ 0 \\end{bmatrix}, \\quad
+       \\hat{k} = \\begin{bmatrix} 0 \\\\ 0 \\\\ 1 \\end{bmatrix}$$`
+        },
+        category: "Vectors"
+       },
     {
         name: "Gram-Schmidt Process",
         formula: "A method to convert a set of vectors into an orthonormal set.",
@@ -156,12 +265,7 @@ const linearAlgebraTermsList = [
         fields: [],
         category: "Vectors Geometric Interpretations"
     },
-    {
-        name: "Vector Projection",
-        formula: "The component of one vector along another vector.",
-        fields: [],
-        category: "Vectors Geometric Interpretations"
-    },
+   
     {
         name: "Linear Transformation",
         formula: "A mapping that preserves vector addition and scalar multiplication.",

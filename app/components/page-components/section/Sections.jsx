@@ -149,7 +149,7 @@
 // export default Sections;
 
 
-import React from 'react';
+import React,{useEffect} from 'react';
 import { processContent } from '@/app/utils/contentProcessor';
 import styles from './Sections.module.css';
 
@@ -230,11 +230,31 @@ const Sections = ({ sections }) => {
    }
  };
 
+ useEffect(() => {
+  if (window.location.hash) {
+    const id = window.location.hash.substring(1);
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        const headerOffset = 100; // Match your header height
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100); // Small delay to ensure DOM is ready
+  }
+}, []);
+
  return (
    <div className={styles.sectionsContainer}>
      {flattenedSections.map((section, index) => (
        <section key={section.id} id={section.id} className={styles.section}>
          <div className={styles.sectionContent}>
+         
            <h2 className={styles.sectionTitle}>{section.title}</h2>
            {section.image && (
              <div className={styles.sectionImage}>

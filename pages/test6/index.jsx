@@ -2,6 +2,7 @@ import Sections from '@/app/components/page-components/section/Sections';
 import React from 'react'
 import ToolsSlider from '@/app/components/sliders/ToolsSlider';
 import MathContainer from '@/app/components/math-content/MathContainer';
+import MyList from '@/app/components/page-components/lists/MyList';
 
 export default function Test6Page() {
 
@@ -138,6 +139,11 @@ $$I_3 = \begin{pmatrix}
 
 
       `
+
+      const listData=[
+        {item: 'First item', math: 'Here is equation $$x^2$$'},
+        {item: 'Second item', math: 'Another equation $$E=mc^2$$'}
+      ]
       
   return (
     <>
@@ -147,8 +153,21 @@ $$I_3 = \begin{pmatrix}
      */}
     <br/>
     <br/>
+    <MyList data={listData}
+    math={true}/>
     <br/>
     <br/>
+    <MyList 
+  data={[
+    {item: 'First item', math: 'Here is equation $$x^2$$'},
+    {item: 'Second item', math: 'Another equation $$E=mc^2$$'}
+  ]}
+  type="number"
+  math={true}
+  mathProps={{
+    theme: 'dark',
+    width: '100%'
+  }}></MyList>
     <br/>
     <MathContainer/>
     <br/>

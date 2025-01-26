@@ -111,6 +111,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Head from 'next/head'
+import MyList from '@/app/components/page-components/lists/MyList'
 
 export async function getStaticProps() {
   const { default: linearAlgebraFormulasList } = await import('@/app/api/db/formulas/linear-algebra/linearAlgebraFormulas');
@@ -120,11 +121,24 @@ export async function getStaticProps() {
   const sectionContent = {
     formulas: {
       title: 'Linear Algebra Formulas',
-      description: 'Explore Linear Algebra formulas with explanations and examples'
+     
+      description: 'Navigate through an essential collection of linear algebra formulas that power mathematical analysis and transformations. This guide presents key formulas across vector operations, matrix calculations, eigenvalues, and linear transformations - each equipped with clear notation, detailed explanations, and practical examples. You will find precise mathematical representations, component breakdowns, and specific use cases for over 15 fundamental formula categories. The organized structure helps you quickly locate and understand the tools you need, whether for solving equations, analyzing transformations, or applying linear algebra concepts in real-world scenarios. Perfect for students needing formula clarification, researchers requiring quick mathematical reference, or practitioners applying linear algebra in their work.'
     },
     definitions: {
       title: 'Linear Algebra Terms and Definitions',
-      description: 'Browse Linear Algebra terminology including main concepts and their definitions with examples.'
+      description: `Discover essential linear algebra definitions that form the mathematical foundation for understanding vectors, matrices, and their relationships. This guide breaks down key terms from basic vector concepts like magnitude and direction to advanced matrix classifications and properties. Each definition includes precise mathematical notation, clear explanations, and visual examples to help grasp the concept. Whether you're learning about vector spaces, exploring matrix types like triangular and symmetric matrices, or studying transformations, this organized reference makes complex linear algebra terminology accessible. The page serves as both a learning tool and a quick reference for students and practitioners, featuring interactive mathematical notation and practical examples throughout.`,
+    },
+    matrices: {
+      title: 'Matrices',
+      description: `Explore matrices in linear algebra through our detailed guide.Starting with matrix definitions and notations, the page explains matrix structure, elements, and indexing. You will learn to distinguish between different matrix types - from basic row and column matrices to more complex square matrices. The guide also covers essential matrix properties and dives into special cases of square matrices like diagonal and triangular forms. Each topic features clear mathematical notation and visual examples to reinforce your understanding of these fundamental concepts.`,
+      list:[`[Definitions and Notations](!/linear-algebra/matrix#definition) - Explains how matrices are written using different types of brackets (square, parentheses, vertical bars) and introduces basic matrix notation conventions.
+      `,
+      `[Elements, Structure and Indexing](!/linear-algebra/matrix#indexing) - Covers how matrix elements are organized in rows and columns, explains the 1-based indexing system, and demonstrates how to reference specific elements using row and column indices.`,
+      `[Types of Matrices](!/linear-algebra/matrix#classification) - Describes different classifications of matrices based on their shape (column, row, rectangular, and square matrices) and content type (numeric, variable/symbolic, mixed, and zero matrices).`,
+      `[Matrix Properties](!/linear-algebra/matrix#properties) - Introduces essential characteristics like size/dimension, rank, determinant, eigenvalues/eigenvectors, and trace, explaining their importance in matrix operations and transformations.`,
+      `[Square Matrices and Special Cases](!/linear-algebra/matrix#special) - Focuses on unique types of square matrices, including those with special diagonal patterns (diagonal, upper triangular, lower triangular) and element relationships (symmetric, skew-symmetric, identity, scalar).`,
+    
+    ]
     }
   }
 
@@ -136,6 +150,8 @@ export async function getStaticProps() {
 This field begins with vectors—quantities that have both magnitude and direction—and their operations, such as addition and scaling. It extends to matrices, which are grid-like arrangements of numbers used to represent systems of equations or transformations. Learning how to manipulate matrices and understand their properties is a key part of linear algebra.
 
 Students also explore vector spaces, the environments in which vectors live, and subspaces, which reveal structure and constraints within these spaces. Concepts like linear independence, span, and basis give insight into how vectors relate and interact. The study of linear transformations, which describe how vectors change under operations like rotations or scaling, helps build a deeper understanding of the subject.
+
+To help students navigate these foundational concepts, we created a dedicated Matrix Theory section that provides an in-depth exploration of matrices - from basic definitions and notations to various matrix types and properties. This interactive guide covers matrix structure, indexing, special cases of square matrices, and key matrix properties, with clear mathematical notation and visual examples throughout. The section serves as both a comprehensive learning resource and a quick reference for understanding these essential building blocks of linear algebra.
 
 Eigenvalues and eigenvectors, pivotal concepts in linear algebra, allow students to uncover hidden properties of transformations. Techniques like solving systems of equations, matrix decomposition, and understanding projections or orthogonality are practical outcomes of this study.
 
@@ -183,28 +199,55 @@ export default function LinearAlgebraPage({
     {
       id: 'formulas',
       title: sectionContent.formulas.title,
+      link:'/linear-algebra/formulas',
       content: [
         sectionContent.formulas.description,
-        " ",
+       `
+       
+       `,
         <VerticalScrollingFormulaWidget 
           key="formula-widget"
           formulaData={linearAlgebraFormulasList}
           moreFormulasLink='/linear-algebra/formulas'
+          panelWidth={'600px'}
+          width='600px'
+          // backgroundColor='orange'
         />
       ]
     },
     {
       id: 'definitions',
       title: sectionContent.definitions.title,
+      link:'/linear-algebra/definitions',
       content: [
-        sectionContent.definitions.description,
-        " ",
-        <VerticalScrollingFormulaWidget 
-          key="definitions-widget"
-          formulaData={linearAlgebraTermsList}
-          moreFormulasLink='/linear-algebra/definitions'
-          type='definition'
-        />
+        {
+          content: sectionContent.definitions.description,
+          layout: 'horizontal',
+          position: 'left', 
+          width: 1
+        },
+      
+        {
+          content: <VerticalScrollingFormulaWidget
+            key="definitions-widget"
+            formulaData={linearAlgebraTermsList}
+            moreFormulasLink='/linear-algebra/definitions'
+            type='definition'
+          />,
+          layout: 'horizontal',
+          position: 'right',
+          width: 1
+        }
+      ]
+     },
+    {
+      id: 'matrix',
+      title: sectionContent.matrices.title,
+      link:'/linear-algebra/matrix',
+      content: [
+        sectionContent.matrices.description,
+       <MyList data={sectionContent.matrices.list}/>,
+       
       ]
     }
   ]
