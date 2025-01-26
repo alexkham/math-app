@@ -30,6 +30,7 @@ export default function MatrixPage() {
            Matrices are typically written using one of three types of brackets: square brackets [ ], parentheses ( ), or vertical bars | |. 
            The elements within the matrix are denoted with lowercase letters and two indices representing their position in the matrix.`,
           <MathContainer
+          key={34}
           content='**Using different capital letters**:
             $$A = \begin{pmatrix}
             1 & 2 \\
@@ -67,6 +68,7 @@ export default function MatrixPage() {
           content:[
             `The horizontal lines in a matrix are called rows, and vertical lines are columns. By convention, rows are enumerated from top to bottom, starting with 1, and this number becomes the first index of matrix elements.`,
             <MathContainer
+            key={35}
             content='
             **Row example**:
 
@@ -80,6 +82,7 @@ Elements in row 1 (red) are referred to as $a_{1j}$ where j is the column number
             '/>,
             `The vertical lines in a matrix are called columns. By convention, columns are numbered from left to right starting with 1, and this number becomes the second index of matrix elements.`,
             <MathContainer
+            key={0}
             content='
             **Column example**:
 
@@ -95,6 +98,7 @@ Elements in column 2 (blue) are denoted as $a_{i2}$ where i is the row number.
             `
             A matrix of size m×n (read as "m by n") has m rows and n columns. The first number always refers to rows, second to columns.`,
             <MathContainer
+            key={33}
             content='
             **Size examples**:
 
@@ -111,6 +115,7 @@ $$C = \begin{pmatrix}
             '/>,
             `Any element in a matrix is uniquely identified by it's row and column indices $(i,j)$. The element $a_{ij}$ is located at the intersection of row i and column j.`,
             <MathContainer
+            key={36}
             content='
             **Element indexing**:
 
@@ -124,6 +129,7 @@ a_{31} & a_{32} & a_{33}
 First index (2) indicates row number
 Second index (2) indicates column number`,
 <MathContainer
+key={2}
 content='
 **Different indices example**:
 
@@ -151,9 +157,11 @@ Elements indices are essential for defining matrix operations like addition and 
            
             **Based on the shape of the matrix we define 4 types**:`,
           <MyList
+          key={4}
           boxed={true} color={'blue'} compact={true} type={'dot'} width={'500px'}
           data={[`**Column matrices (m×1)**: `,]} />,
           <MathContainer
+          key={5}
           width='500px'
           content='$$\text{Column matrix: } 
 A_{3\times1} = \begin{pmatrix}
@@ -162,18 +170,22 @@ a_{21} \\
 a_{31}
 \end{pmatrix}$$'/>,
 <MyList
+key={6}
 boxed={true} color={'blue'} compact={true} type={'dot'} width={'500px'}
 data={[`**Row matrices (1×n)**: `,]} />,
 <MathContainer
+key={7}
 width='500px'
 content='$$\text{Row matrix: }
 B_{1\times3} = \begin{pmatrix}
 b_{11} & b_{12} & b_{13}
 \end{pmatrix}$$'/>,
 <MyList
+key={8}
 boxed={true} color={'blue'} compact={true} type={'dot'} width={'500px'}
 data={[`**General rectangular matrix (m×n where m≠n)**: `,]} />,
 <MathContainer
+key={9}
 width='500px'
 content='$$\text{General rectangular: }
 C_{2\times3} = \begin{pmatrix}
@@ -181,9 +193,11 @@ c_{11} & c_{12} & c_{13} & c_{14} \\
 c_{21} & c_{22} & c_{23} & c_{24}
 \end{pmatrix}$$'/>,
 <MyList
+key={10}
 boxed={true} color={'blue'} compact={true} type={'dot'} width={'500px'}
 data={[`**Square matrix (m×n where m=n)**: `,]} />,
 <MathContainer
+key={11}
 width='500px'
 content='$$\text{Square Matrix : }
 A_3 = \begin{pmatrix}
@@ -194,6 +208,7 @@ a_{31} & a_{32} & a_{33}
 `
 **In terms of content type we distinguish**: `,
 <MyList
+key={12}
 boxed={true} color={'yellow'} compact={true} type={'dot'} 
 data={[
     `**Numeric matrices**:
@@ -201,12 +216,14 @@ data={[
 
 ]}/>,
 <MathContainer
+key={13}
 
 content='$$A = \begin{pmatrix}
 2 & -3 & 4 \\
 0 & 5 & 1
 \end{pmatrix}$$'/>,
 <MyList
+key={14}
 boxed={true} color={'yellow'} compact={true} type={'dot'} 
 data={[
     `** Variable/Symbolic matrices**:
@@ -214,12 +231,14 @@ data={[
 
 ]}/>,
 <MathContainer
+key={15}
 
 content='$$B = \begin{pmatrix}
 x & y & z \\
 a & b & c
 \end{pmatrix}$$'/>,
 <MyList
+key={16}
 boxed={true} color={'yellow'} compact={true} type={'dot'} 
 data={[
     `** Mixed matrices**:
@@ -227,12 +246,14 @@ data={[
 
 ]}/>,
 <MathContainer
+key={17}
 
 content='$$C = \begin{pmatrix}
 1 & x & 0 \\
 y & 2 & \pi
 \end{pmatrix}$$'/>,
 <MyList
+key={18}
 boxed={true} color={'yellow'} compact={true} type={'dot'} 
 data={[
     `**Zero (Null) matrices**:
@@ -240,6 +261,7 @@ data={[
 
 ]}/>,
 <MathContainer
+key={19}
 
 content='$$O = \begin{pmatrix}
 0 & 0 & 0 \\
@@ -255,6 +277,7 @@ content='$$O = \begin{pmatrix}
 **Matrix Properties Overview**:
 `,
  <MyList 
+ key={20}
  boxed={true} color={'gray'} compact={true} type={'dot'} 
   data={[`**Size/Dimension**:
      Number of rows (m) and columns (n) determines what matrices can be multiplied and what operations are possible.`,
@@ -286,6 +309,7 @@ These foundational features play crucial roles across linear algebra, connecting
             **Diagonal patterns**:
             `,
             <MyList
+            key={21}
             boxed={true} color={'blue'} compact={true} type={'dot'} width={'500px'}
             data={[
                 `**Diagonal**:
@@ -298,6 +322,7 @@ These foundational features play crucial roles across linear algebra, connecting
             />,
             `**By element relationships**:`,
             <MyList
+            key={22}
             boxed={true} color={'yellow'} compact={true} type={'dot'} width={'500px'}
             data={[
                `**Symmetric**:
@@ -318,6 +343,7 @@ These foundational features play crucial roles across linear algebra, connecting
             `**These special cases are particularly important because they**:
            `,
             <MyList
+            key={23}
             boxed={true} color={'gray'} compact={false}  width={'500px'}
             data={[
                 `Simplify matrix operations`,

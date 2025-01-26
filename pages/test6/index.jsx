@@ -155,13 +155,13 @@ $$I_3 = \begin{pmatrix}
     <br/>
     <br/>
     <br/>
-    // Basic usage
+   
 <MathContainer 
   theme="glass" 
   content="Here's math: $E = mc^2$" 
 />
 
-// With size constraints
+
 <MathContainer 
   theme="dark"
   width="500px"
@@ -169,7 +169,7 @@ $$I_3 = \begin{pmatrix}
   content="Long content with math..." 
 />
 
-// With custom styles
+
 <MathContainer 
   theme="clean"
   backgroundColor="#f0f4f8"
@@ -182,7 +182,7 @@ $$I_3 = \begin{pmatrix}
   content="Custom styled content..." 
 />
 
-// For code-like formatting
+
 <MathContainer 
   theme="dark"
   whiteSpace="pre"
