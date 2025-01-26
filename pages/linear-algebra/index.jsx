@@ -278,7 +278,7 @@ export default function LinearAlgebraPage({
       <br/>
       <OperaSidebar 
         side='right'
-        topOffset='65px' 
+        topOffset='55px' 
         sidebarWidth='45px'
         panelWidth='300px'
         iconColor='white'
@@ -291,6 +291,8 @@ export default function LinearAlgebraPage({
           Linear Algebra
         </h1>
         <SectionTableOfContents sections={linearAlgebraSections}/>
+        <br/>
+        <br/>
         
         <IntroSection 
           id={introContent.id}

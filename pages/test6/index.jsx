@@ -1,6 +1,7 @@
 import Sections from '@/app/components/page-components/section/Sections';
 import React from 'react'
 import ToolsSlider from '@/app/components/sliders/ToolsSlider';
+import MathContainer from '@/app/components/math-content/MathContainer';
 
 export default function Test6Page() {
 
@@ -113,14 +114,127 @@ export default function Test6Page() {
           // pageLink: '/main2'
         },
       ];
+
+      const identityMatrix=`
+    content="**Identity Matrix**:
+
+The general form of the identity matrix is:
+
+$$I_n = \begin{pmatrix} 
+1 & 0 & 0 & \cdots & 0 \\\\ 
+0 & 1 & 0 & \cdots & 0 \\\\ 
+0 & 0 & 1 & \cdots & 0 \\\\ 
+\vdots & \vdots & \vdots & \ddots & \vdots \\\\ 
+0 & 0 & 0 & \cdots & 1 
+\end{pmatrix}$$
+
+An example of a 3x3 identity matrix is:
+
+$$I_3 = \begin{pmatrix} 
+1 & 0 & 0 \\\\ 
+0 & 1 & 0 \\\\ 
+0 & 0 & 1 
+\end{pmatrix}$$"
+
+
+      `
       
   return (
     <>
     <div>Test6Page</div>
 
-    <Sections sections={testSections}/>
-    
-    
+    {/* <Sections sections={testSections}/>
+     */}
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <MathContainer/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    // Basic usage
+<MathContainer 
+  theme="glass" 
+  content="Here's math: $E = mc^2$" 
+/>
+
+// With size constraints
+<MathContainer 
+  theme="dark"
+  width="500px"
+  height="300px"
+  content="Long content with math..." 
+/>
+
+// With custom styles
+<MathContainer 
+  theme="clean"
+  backgroundColor="#f0f4f8"
+  color="#2d3748"
+  maxHeight="400px"
+  additionalStyles={{
+    borderLeft: '4px solid #4299e1',
+    transition: 'all 0.2s ease'
+  }}
+  content="Custom styled content..." 
+/>
+
+// For code-like formatting
+<MathContainer 
+  theme="dark"
+  whiteSpace="pre"
+  wordWrap="normal"
+  overflowX="scroll"
+  content="Long single line with math..." 
+/>
+    <br/>
+    <br/>
+    <br/>
+    <MathContainer 
+  theme="chalk"
+  content="**Basic matrix operations**:
+$$A = \begin{pmatrix} 
+a_{11} & a_{12} \\ 
+a_{21} & a_{22}
+\end{pmatrix}$$
+
+Eigenvalue decomposition:
+$$AX = \lambda X$$
+
+With the characteristic equation:
+$$det(A - \lambda I) = 0$$
+
+Quick example with values:
+$$\begin{pmatrix} 
+4 & 2 \\ 
+1 & 3
+\end{pmatrix}
+\begin{pmatrix}
+x \\ y
+\end{pmatrix} = 
+\lambda \begin{pmatrix}
+x \\ y
+\end{pmatrix}$$"
+/>
+
+<MathContainer 
+  theme="dark"
+  content="Rank-nullity theorem: 
+$$rank(A) + nullity(A) = n$$
+
+For any linear transformation $T: V \to W$:
+$$dim(V) = dim(ker(T)) + dim(im(T))$$"
+/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <MathContainer content={identityMatrix}/>
+    <br/>
+    <br/>
     
     </>
   )

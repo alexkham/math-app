@@ -57,6 +57,7 @@ function FormulaAccordion({ data, width = '1000px', idPrefix = '' ,type='Formula
           <br/>
           <br/>
           <br/>
+         <br/>
           <h1 className={styles.accordion__label} onClick={toggleSection}>
             {capitalizeWords(data.name?.replaceAll('_', ' ') || 'Untitled')}
             <span className={styles.chevron}></span>

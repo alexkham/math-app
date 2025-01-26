@@ -30,10 +30,18 @@ const FormulaAccordionWrapper = ({ data, groupByField,type='Formula' }) => {
     }, {});
   }, [data, searchTerm, groupByField]);
 
-  const clearSearch = () => {
-    setSearchTerm('');
-  };
+  // const clearSearch = () => {
+  //   setSearchTerm('');
+  // };
 
+  const clearSearch = () => {
+    const hash = window.location.hash;
+    setSearchTerm('');
+    if (hash) {
+      setTimeout(() => window.location.hash = hash, 100);
+    }
+  };
+ 
   useEffect(() => {
     const hash = window.location.hash.substring(1);
     if (hash) {
@@ -52,6 +60,38 @@ const FormulaAccordionWrapper = ({ data, groupByField,type='Formula' }) => {
       }, 100);
     }
   }, []);
+
+
+  const handleAnchorClick = () => {
+    setSearchTerm('');
+  };
+  
+  // Add to component event listener
+  useEffect(() => {
+    document.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A' && e.target.getAttribute('href')?.startsWith('#')) {
+        handleAnchorClick();
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const links = document.querySelectorAll('a[href*="#"]');
+    links.forEach(link => {
+      link.addEventListener('click', () => setSearchTerm(''));
+    });
+  }, []);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (searchTerm) {
+        setSearchTerm('');
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [searchTerm]);
+
 
   return (
     <div className={wrapperStyles.wrapper}>

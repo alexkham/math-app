@@ -240,3 +240,9 @@
   width: 80%;
   margin-left: 100px;
 }
+
+.formula a {
+  text-decoration: none;
+  color: #0066cc;
+  font-weight: bold;
+}

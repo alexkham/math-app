@@ -144,6 +144,7 @@ const SectionTableOfContents = ({ sections = [], title = '' }) => {
           color: #343a40;
           font-family: 'Poppins', sans-serif;
           font-weight: 600;
+         
         }
 
         .toc-grid {
@@ -164,6 +165,7 @@ const SectionTableOfContents = ({ sections = [], title = '' }) => {
           transition: all 0.2s ease;
           min-height: 45px;
           height: fit-content;
+         
         }
 
         .toc-link {
@@ -177,6 +179,7 @@ const SectionTableOfContents = ({ sections = [], title = '' }) => {
           font-size: 16px;
           line-height: 1.4;
           width: 100%;
+          justify-content: center; 
         }
 
         .section-title {
