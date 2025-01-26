@@ -132,3 +132,7 @@
     width: 100%;
   }
  }
+
+ .section {
+  scroll-padding-top: 150px; /* Adjust to your header height */
+}

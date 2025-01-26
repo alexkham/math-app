@@ -236,7 +236,7 @@ const Sections = ({ sections }) => {
     setTimeout(() => {
       const element = document.getElementById(id);
       if (element) {
-        const headerOffset = 100; // Match your header height
+        const headerOffset = 200; // Match your header height
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
         
