@@ -29,8 +29,8 @@ export async function getStaticProps() {
         description: 'Visit Probability formulas page',
         leftContentHtml: createContentHtml({ 
           description: 'This page presents essential probability formulas organized by categories, ranging from basic principles to advanced distributions. Each formula includes detailed explanations, example calculations, and practical use cases, making it a helpful resource for students and practitioners working with probability theory and statistical analysis.', 
-          link: '/probability/formulas',
-          linkText: 'View All Formulas',
+          // link: '/probability/formulas',
+          // linkText: 'View All Formulas',
           height:'350px',
           backgroundColor:'#fdfdea',
           
@@ -42,8 +42,8 @@ export async function getStaticProps() {
         description: 'Browse Probability terminology including main concepts and their definitions with examples',
         rightContentHtml: createContentHtml({ 
           description: 'Browse Probability terminology including main concepts and their definitions with examples .A structured guide to probability theory terms and concepts, progressing from foundational definitions through set theory, random variables, and complex distributions. The content covers both theoretical aspects and practical applications, making probability concepts more accessible for study and reference.',
-          link: '/probability/definitions',
-          linkText: 'View All Definitions',
+          // link: '/probability/definitions',
+          // linkText: 'View All Definitions',
           height:'350px',
           backgroundColor:'#fdfdea',
         }),
@@ -104,6 +104,7 @@ export default function ProbabilityPage({
     {
       id: 'formulas',
       title: sectionContent.formulas.title,
+      link:'/ptobability/formulas',
       content: [
         { 
           content: sectionContent.formulas.leftContentHtml,
@@ -126,6 +127,7 @@ export default function ProbabilityPage({
     {
       id: 'definitions',
       title: sectionContent.definitions.title,
+      link:'/probability/definitions',
       content: [
         { 
           content: <VerticalScrollingFormulaWidget 
@@ -216,7 +218,7 @@ export default function ProbabilityPage({
       <br/>
       <OperaSidebar 
         side='right'
-        topOffset='65px' 
+        topOffset='55px' 
         sidebarWidth='45px'
         panelWidth='200px'
         iconColor='white'

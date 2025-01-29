@@ -570,6 +570,7 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Head from 'next/head';
 import { createContentHtml } from '@/app/utils/utils-functions'
+import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
 
 
 
@@ -586,8 +587,8 @@ export async function getStaticProps() {
       description: 'Visit Algebra formulas page',
       leftContentHtml: createContentHtml({ 
         description: 'The Algebra Formulas page provides a comprehensive collection of essential algebraic formulas and rules covering four key areas: Exponent and Power Rules covering basic operations with powers, Radical and Root Operations for understanding and manipulating square roots and nth roots, Logarithmic Properties dealing with logarithm operations and transformations, and Binomial Expressions and Theorems for expanding and working with polynomial terms. Each formula includes detailed explanations, examples, and practical applications.', 
-        link: '/algebra/formulas',
-        linkText: 'View All Formulas',
+        // link: '/algebra/formulas',
+        // linkText: 'View All Formulas',
         height:'350px',
         backgroundColor:'#fdfdea',
         
@@ -599,8 +600,8 @@ export async function getStaticProps() {
       description: 'Browse Algebra terminology including main concepts and their definitions with examples',
       rightContentHtml: createContentHtml({ 
         description: 'The Algebra Terms and Definitions page offers a structured glossary of fundamental algebraic concepts organized in three main categories: Roots, Logarithms, and Exponents. It includes clear definitions for essential terms and operations in each category, from basic concepts like square roots and exponents to more advanced topics like nested radicals, complex logarithms, and exponential functions. Each term is precisely defined to help build a solid foundation in algebraic understanding.',
-        link: '/algebra/definitions',
-        linkText: 'View All Definitions',
+        // link: '/algebra/definitions',
+        // linkText: 'View All Definitions',
         height:'350px',
         backgroundColor:'#fdfdea',
       }),
@@ -633,7 +634,28 @@ The skills developed in algebra, such as **logical reasoning**, **abstraction**,
   ]
 
   const canonicalUrl = 'https://www.learnmathclass.com/algebra'
-  const lastModified = new Date().toISOString()
+  const lastModified = new Date().toISOString();
+
+  const definitionsCategoryExplanations = {
+    "Roots": "Core concepts and operations with roots. Key terms include Square Root (x where x² = n), Cube Root (x where x³ = n), Radical Symbol (√), Perfect Squares/Cubes, and methods of simplification. Covers both real and imaginary roots, radical expressions, and related operations.",
+    
+    "Logarithms": "Functions that determine the exponent needed for a base to reach a number. Includes Natural Logarithm (base e), Common Logarithm (base 10), Binary Logarithm (base 2), and their properties. Covers logarithmic functions, equations, identities and transformations.",
+    
+    "Exponents": "Rules and operations involving powers. Features basic concepts like Base and Power, Laws of Exponents, Exponential Functions (a^x), and applications in growth/decay. Includes special cases like Zero, Negative, and Fractional exponents."
+   };
+
+   const formulasCategoryExplanations = {
+    "Exponent Rules": "Core rules for manipulating exponents. Key principles include Product Rule ($x^m * x^n = x^{m+n}$), Quotient Rule ($x^m/x^n = x^{m-n}$), Power Rule $((x^m)^n = x^{mn})$, and special cases for zero and negative exponents.",
+    
+    "Radical Rules": "Rules for manipulating radicals and roots. Features Product Rule for radicals (√(xy) = √x * √y), Quotient Rule (√(x/y) = √x/√y), Power Rule $(√(x^n) = x^{n/2})$, and rationalization techniques. Includes properties for handling even/odd roots and nested radicals.",
+   
+    "Logarithm Laws": "Fundamental rules for logarithmic manipulation. Includes definition $(y = log_b x ⟺ b^y = x)$, Product Rule $(log(MN) = log M + log N)$, Quotient Rule $(log(M/N) = log M - log N)$, and Change of Base formula.",
+   
+    "Binomial Rules": "Rules for expanding and factoring binomial expressions. Features Binomial Theorem $((x+y)^n$ expansion), special products like square of binomial $(x+y)^2 = x^2 + 2xy + y^2$, and cube of binomial $(x+y)^3 = x^3 + 3x^2y + 3xy^2 + y^3$."
+   };
+   
+  
+   
   
   return {
     props: {
@@ -643,7 +665,9 @@ The skills developed in algebra, such as **logical reasoning**, **abstraction**,
       canonicalUrl,
       lastModified,
       algebraFormulasList,
-      algebraTermsList
+      algebraTermsList,
+      definitionsCategoryExplanations,
+      formulasCategoryExplanations
     }
   }
 }
@@ -655,7 +679,9 @@ export default function AlgebraPage({
   canonicalUrl,
   lastModified,
   algebraFormulasList,
-  algebraTermsList
+  algebraTermsList,
+  definitionsCategoryExplanations,
+  formulasCategoryExplanations
 }) {
 
   
@@ -663,9 +689,12 @@ export default function AlgebraPage({
     {
       id: 'formulas',
       title: sectionContent.formulas.title,
+      link:'/algebra/formulas',
       content: [
         { 
-          content: sectionContent.formulas.leftContentHtml,
+          content:  <CategoriesList data={algebraFormulasList} 
+          baseUrl='/algebra/formulas'
+          categoryExplanations={formulasCategoryExplanations}/>,
           layout: 'horizontal', 
           position: 'left',
           width: 1.5 
@@ -685,6 +714,7 @@ export default function AlgebraPage({
     {
       id: 'definitions',
       title: sectionContent.definitions.title,
+      link:'/algebra/definitions',
       content: [
         { 
           content: <VerticalScrollingFormulaWidget 
@@ -698,7 +728,9 @@ export default function AlgebraPage({
           width: 2
         },
         { 
-          content: sectionContent.definitions.rightContentHtml,
+          content:  <CategoriesList data={algebraTermsList} 
+          baseUrl='/algebra/definitions'
+          categoryExplanations={definitionsCategoryExplanations}/>,
           layout: 'horizontal', 
           position: 'right',
           width: 1.5 
@@ -775,7 +807,7 @@ export default function AlgebraPage({
       <br/>
       <OperaSidebar 
         side='right'
-        topOffset='65px' 
+        // topOffset='65px' 
         sidebarWidth='45px'
         panelWidth='200px'
         iconColor='white'
@@ -787,6 +819,9 @@ export default function AlgebraPage({
         <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>
           Algebra
         </h1>
+       
+       
+
         <SectionTableOfContents sections={algebraSections}/>
         <br/>
         <br/>

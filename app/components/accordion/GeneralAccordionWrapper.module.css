@@ -26,12 +26,12 @@
     position: sticky;
     top: 50px;
     z-index: 100;
-    background:#b3b3b3;
+    background:#e6e6e6;
     padding: 15px 20px;
     border: 1px solid #e5e7eb;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    opacity: 0.5;
+    opacity: 1;
    }
    
    .searchInput {

@@ -3,6 +3,7 @@ import React from 'react'
 import ToolsSlider from '@/app/components/sliders/ToolsSlider';
 import MathContainer from '@/app/components/math-content/MathContainer';
 import MyList from '@/app/components/page-components/lists/MyList';
+import TruthTable from '@/app/components/logic-calculator/truth-tables/TruthTable';
 
 export default function Test6Page() {
 
@@ -143,14 +144,164 @@ $$I_3 = \begin{pmatrix}
       const listData=[
         {item: 'First item', math: 'Here is equation $$x^2$$'},
         {item: 'Second item', math: 'Another equation $$E=mc^2$$'}
-      ]
-      
+      ];
+
+
+      // First, define operators with input requirements
+// const conjunctionOperators = {
+//   'BASIC': {
+//     symbol: '∧',
+//     func: (a, b) => a && b,
+//     inputs: 2
+//   },
+//   'COMPOUND': {
+//     symbol: '(∧)',
+//     func: (a, b) => a && b,
+//     inputs: 2
+//   },
+//   'WITH_NOT': {
+//     symbol: '¬∧',
+//     func: (a, b) => !(a && b),
+//     inputs: 2
+//   },
+//   'WITH_OR': {
+//     symbol: '∧∨',
+//     func: (a, b) => a && b,
+//     inputs: 2
+//   },
+//   'SELF': {
+//     symbol: 'P∧P',
+//     func: (a) => a && a,
+//     inputs: 1
+//   }
+// };
+    
+
+// const conjunctionOperators = {
+//   'BASIC': { symbol: '∧', func: (a, b) => a && b },
+//   'THREE_VAR': { symbol: '∧∧', func: (a, b) => a && b },
+//   'COMPOUND': { symbol: '(∧)', func: (a, b) => a && b },
+//   'WITH_OR': { symbol: '∧∨', func: (a, b) => (a && b) || b },
+//   'WITH_NOT': { symbol: '¬∧', func: (a, b) => !(a && b) },
+//   'SELF': { symbol: 'P∧P', func: (a, b) => a && a },
+//   'WITH_TRUE': { symbol: '∧T', func: (a, b) => a && true },
+//   'WITH_FALSE': { symbol: '∧F', func: (a, b) => a && false },
+//   'MULTI_GROUP': { symbol: '(∧)(∧)', func: (a, b) => (a && a) && (b && b) }
+// };
+
+
+// operations/conjunctionCases.js
+const conjunctionCases = {
+  'SIMPLE_AND': { 
+    symbol: 'P ∧ Q', 
+    func: (a, b) => a && b 
+  },
+  'AND_OR_RIGHT': { 
+    symbol: 'P ∧ (Q ∨ R)', 
+    func: (a, b, c) => a && (b || c) 
+  },
+  'AND_OR_LEFT': { 
+    symbol: '(P ∧ Q) ∨ R', 
+    func: (a, b, c) => (a && b) || c 
+  },
+  'TRIPLE_AND': { 
+    symbol: 'P ∧ Q ∧ R', 
+    func: (a, b, c) => a && b && c 
+  },
+  'NOT_AND': { 
+    symbol: '¬(P ∧ Q)', 
+    func: (a, b) => !(a && b) 
+  },
+  'AND_SELF': { 
+    symbol: 'P ∧ P', 
+    func: (a) => a && a 
+  },
+  'AND_CONSTANT': { 
+    symbol: 'P ∧ True', 
+    func: (a) => a && true 
+  },
+  'AND_GROUPS': { 
+    symbol: '(P ∧ Q) ∧ (R ∧ S)', 
+    func: (a, b, c, d) => (a && b) && (c && d) 
+  },
+  'AND_IMPLIES': { 
+    symbol: '(P ∧ Q) → R', 
+    func: (a, b, c) => !(a && b) || c 
+  }
+ };
+
+ const implicationOperators = {
+  'P→Q': { symbol: 'P→Q', func: (a, b) => !a || b },
+  'Q→P': { symbol: 'Q→P', func: (a, b) => !b || a },
+  '¬P→Q': { symbol: '¬P→Q', func: (a, b) => a || b },
+  'P→¬Q': { symbol: 'P→¬Q', func: (a, b) => !a || !b },
+  '¬P→¬Q': { symbol: '¬P→¬Q', func: (a, b) => a || !b },
+  '¬Q→¬P': { symbol: '¬Q→¬P', func: (a, b) => b || !a }
+};
+
+// const tautologies = {
+//   '¬(P∧¬P)': { 
+//     symbol: '¬(P∧¬P)', 
+//     func: (a) => !(a && !a),
+//     title: 'Law of Non-Contradiction'
+//   },
+//   'P∨¬P': {
+//     symbol: 'P∨¬P',
+//     func: (a) => a || !a,
+//     title: 'Law of Excluded Middle'
+//   },
+//   'P↔¬¬P': {
+//     symbol: 'P↔¬¬P',
+//     func: (a) => a === !!a,
+//     title: 'Double Negation'
+//   },
+//   'P→(Q→P)': {
+//     symbol: 'P→(Q→P)',
+//     func: (a,b) => !a || (!b || a),
+//     title: 'Implication Tautology'
+//   }
+//  }
+
+const tautologies = {
+  '¬(P∧¬P)': { symbol: '¬(P∧¬P)', func: (a) => !(a && !a), title: 'Law of Non-Contradiction' },
+  'P∨¬P': { symbol: 'P∨¬P', func: (a) => a || !a, title: 'Law of Excluded Middle' },
+  'P↔¬¬P': { symbol: 'P↔¬¬P', func: (a) => a === !!a, title: 'Double Negation' },
+  'P→(Q→P)': { symbol: 'P→(Q→P)', func: (a,b) => !a || (!b || a), title: 'Implication Tautology' },
+  '(P→Q)↔(¬Q→¬P)': { symbol: '(P→Q)↔(¬Q→¬P)', func: (a,b) => (!a || b) === (b || !a), title: 'Contrapositive' },
+  '(P∧Q)→P': { symbol: '(P∧Q)→P', func: (a,b) => !(a && b) || a, title: 'Conjunction Elimination' },
+  'P→(P∨Q)': { symbol: 'P→(P∨Q)', func: (a,b) => !a || (a || b), title: 'Disjunction Introduction' },
+  '(P∧Q)↔¬(¬P∨¬Q)': { symbol: '(P∧Q)↔¬(¬P∨¬Q)', func: (a,b) => (a && b) === !((!a || !b)), title: 'DeMorgan Law' },
+  '(P↔Q)↔((P→Q)∧(Q→P))': { symbol: '(P↔Q)↔((P→Q)∧(Q→P))', func: (a,b) => (a === b) === ((!a || b) && (!b || a)), title: 'Equivalence Definition' },
+  // '((P→Q)∧(Q→R))→(P→R)': { symbol: '((P→Q)∧(Q→R))→(P→R)', func: (a,b,c) => !(!(!a || b) && (!b || c)) || (!a || c), title: 'Syllogism' }
+ }
+
+ const contradictions = {
+  'P∧¬P': { symbol: 'P∧¬P', func: (a) => a && !a, title: 'Self-Contradiction' },
+  '(P∨Q)∧¬P∧¬Q': { symbol: '(P∨Q)∧¬P∧¬Q', func: (a,b) => (a || b) && !a && !b, title: 'Disjunctive Contradiction' },
+  'P∧Q∧¬(P∧Q)': { symbol: 'P∧Q∧¬(P∧Q)', func: (a,b) => a && b && !(a && b), title: 'Conjunction Contradiction' },
+  '(P↔Q)∧(P↔¬Q)': { symbol: '(P↔Q)∧(P↔¬Q)', func: (a,b) => (a === b) && (a === !b), title: 'Equivalence Contradiction' },
+  'P∧Q∧(¬P∨¬Q)': { symbol: 'P∧Q∧(¬P∨¬Q)', func: (a,b) => a && b && (!a || !b), title: 'Mixed Contradiction' },
+  '(P→Q)∧P∧¬Q': { symbol: '(P→Q)∧P∧¬Q', func: (a,b) => (!a || b) && a && !b, title: 'Implication Contradiction' },
+  'P∧(Q∧¬Q)': { symbol: 'P∧(Q∧¬Q)', func: (a,b) => a && (b && !b), title: 'Nested Contradiction' }
+}
+
   return (
     <>
     <div>Test6Page</div>
 
     {/* <Sections sections={testSections}/>
      */}
+    <br/>
+    <br/>
+    <TruthTable operators={implicationOperators}/>
+    <br/>
+    <br/>
+    <br/>
+    <TruthTable operators={tautologies} />
+    <br/>
+    <br/>
+    <br/>
+    <TruthTable operators={contradictions} />
     <br/>
     <br/>
     <MyList data={listData}

@@ -160,6 +160,7 @@ import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionW
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
 
 export async function getStaticProps() {
   const { default: algebraTermsList } = await import('@/app/api/db/definitions/algebra/algebraDefinitions')
@@ -178,6 +179,15 @@ export async function getStaticProps() {
   const canonicalUrl = `${baseUrl}${path}`
   
   const lastModified = new Date().toISOString() // Update this when content changes
+  const definitionsCategoryExplanations = {
+    "Roots": "Core concepts and operations with roots. Key terms include Square Root (x where x² = n), Cube Root (x where x³ = n), Radical Symbol (√), Perfect Squares/Cubes, and methods of simplification. Covers both real and imaginary roots, radical expressions, and related operations.",
+    
+    "Logarithms": "Functions that determine the exponent needed for a base to reach a number. Includes Natural Logarithm (base e), Common Logarithm (base 10), Binary Logarithm (base 2), and their properties. Covers logarithmic functions, equations, identities and transformations.",
+    
+    "Exponents": "Rules and operations involving powers. Features basic concepts like Base and Power, Laws of Exponents, Exponential Functions (a^x), and applications in growth/decay. Includes special cases like Zero, Negative, and Fractional exponents."
+   };
+   
+   
   
   return {
     props: {
@@ -185,6 +195,7 @@ export async function getStaticProps() {
       keyWords,
       canonicalUrl,
       lastModified,
+      definitionsCategoryExplanations
     }
   }
 }
@@ -193,7 +204,8 @@ export default function AlgebraDefinitionsPage({
   algebraTermsList, 
   keyWords, 
   canonicalUrl,
-  lastModified 
+  lastModified ,
+  definitionsCategoryExplanations
 }) {
   const router = useRouter()
 
@@ -273,7 +285,7 @@ export default function AlgebraDefinitionsPage({
       <Breadcrumb />
       <OperaSidebar
         side='right'
-        topOffset='65px'
+        topOffset='55px'
         sidebarWidth='45px'
         panelWidth='300px'
         iconColor='white'
@@ -284,6 +296,9 @@ export default function AlgebraDefinitionsPage({
         <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
           Algebra Terms and Definitions
         </h1>
+        <CategoriesList data={algebraTermsList} 
+        baseUrl='/algebra/definitions'
+        categoryExplanations={definitionsCategoryExplanations}/>
         <FormulaAccordionWrapper
           groupByField={'category'}
           data={algebraTermsList}

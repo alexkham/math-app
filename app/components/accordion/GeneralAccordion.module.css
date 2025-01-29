@@ -226,6 +226,118 @@
 }
 
 
+/* 
+
+.accordion__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.accordion__button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #4169E1;
+  box-shadow: 0 2px 4px rgba(65,105,225,0.4);
+  transition: all 0.2s;
+  margin-right: 15px;
+}
+
+.accordion__section.open .accordion__button {
+  transform: scale(0.95);
+}
+
+.accordion__buttonText {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.accordion__chevron {
+  transform: rotate(0deg);
+  transition: transform 0.3s;
+}
+
+.accordion__section.open .accordion__chevron {
+  transform: rotate(180deg);
+}
+
+.accordion__title {
+  margin: 0;
+  flex: 1;
+  font-size: 1.2rem;
+  color: #2C3E50;
+}
 
 
+
+   */
+
+
+   .accordion__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 12px;
+    background: #e6e6e6;
+    border-radius: 8px;
+    cursor: pointer;
+  }
   
+  .accordion__button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: #4169E1;
+    box-shadow: 0 2px 4px rgba(65,105,225,0.2);
+    transition: all 0.2s;
+    margin-right: 12px;
+    width: 120px;
+    justify-content: center;
+  }
+  
+  .accordion__buttonText {
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .accordion__chevron {
+    width: 50px;
+    height: 20px;
+    stroke-width: 3;
+  }
+  
+  .accordion__title {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #2C3E50;
+    font-weight: 500;
+  }
+  
+  .accordion__section.open .accordion__button {
+    transform: scale(0.98);
+  }
+  
+  .accordion__section.open .accordion__chevron {
+    transform: rotate(180deg);
+  }
+
+  .accordion__buttonText::after {
+    content: "Open";
+  }
+  
+  .accordion__section.open .accordion__buttonText::after {
+    content: "Close";
+  }

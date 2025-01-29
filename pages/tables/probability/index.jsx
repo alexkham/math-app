@@ -39,7 +39,7 @@ export default function ProbabilityTables() {
       <br/>
       <OperaSidebar 
         side='right'
-        topOffset='60px' 
+        // topOffset='60px' 
         sidebarWidth='45px'
         panelWidth='300px'
         

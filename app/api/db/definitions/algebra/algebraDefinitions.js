@@ -1,136 +1,372 @@
 const algebraTermsList = [
-    {
-      name: "Square Root",
-      formula: "A value that, when multiplied by itself, gives the original number.",
-      fields: [],
-      category: "Roots"
+  {
+    name: "Square Root",
+    formula: "For a number n, its square root is x where x² = n. Denoted as $\\sqrt{n}$ or $n^{1/2}$",
+    fields: {
+      "properties": `
+      - Two values: positive and negative
+   - Real only if n ≥ 0
+   - (√n)² = n for n ≥ 0
+   - √(a·b) = √a·√b
+   - √(a/b) = √a/√b for b > 0`,
+      "examples": `Common square roots:
+   √4 = ±2
+   √9 = ±3
+   √2 ≈ 1.4142 (irrational)
+   √0 = 0
+   √(-1) = i (imaginary)`
     },
-    {
-      name: "Cube Root",
-      formula: "A value that, when used in a multiplication three times, equals the original number.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+   },
+   {
+    name: "Cube Root",
+    formula: "For a number n, its cube root is x where x³ = n. Denoted as $\\sqrt[3]{n}$ or $n^{1/3}$",
+    fields: {
+      "properties": `
+      - Only one real value
+  - Exists for all real numbers
+  - (∛n)³ = n
+  - ∛(a·b) = ∛a·∛b
+  - ∛(a³) = a`,
+      "examples": `Common cube roots:
+  ∛8 = 2
+  ∛27 = 3
+  ∛(-8) = -2
+  ∛1 = 1
+  ∛0 = 0`
     },
-    {
-      name: "Radical Symbol",
-      formula: "The symbol used to represent roots. For cube roots or higher, it includes an index.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+  },
+  {
+    name: "Radical Symbol",
+    formula: "√ for square root, $\\sqrt[n]{x}$ for nth root where n is the index and x is the radicand",
+    fields: {
+      "properties": `
+      - Index defaults to 2 if omitted
+  - Index n means nth root
+  - Radicand is expression under radical
+  - Can be nested (compound radicals)`,
+      "examples": `Different radical notations:
+  √x = square root
+  ∛x = cube root
+  $\\sqrt[4]{x}$ = fourth root
+  $\\sqrt[n]{x}$ = nth root`,
+      "rules": "Index n must be positive integer ≥ 2"
     },
-    {
-      name: "Radicand",
-      formula: "The number or expression inside the radical sign.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+  },
+  {
+    name: "Radicand",
+    formula: "The expression x under the radical sign in $\\sqrt[n]{x}$. The value we're finding the root of",
+    fields: {
+      "properties": `
+      - Can be any real number for odd roots
+   - Must be non-negative for even roots
+   - Can be variable expression
+   - Can contain other radicals`,
+      "examples": `In these expressions, radicand is:
+   √16: 16
+   ∛(-27): -27
+   $\\sqrt{x+2}$: x+2
+   $\\sqrt[4]{81}$: 81`
     },
-    {
-      name: "Index (or Degree)",
-      formula: "The small number indicating the degree of the root, written above and to the left of the radical.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+   },
+   {
+    name: "Index (or Degree)",
+    formula: "The value n in $\\sqrt[n]{x}$ indicating which root to take (square, cube, fourth, etc)",
+    fields: {
+      "properties": `
+      - Must be positive integer ≥ 2
+  - Determines number of roots
+  - Even index: requires non-negative radicand
+  - Odd index: allows negative radicand`,
+      "examples": `Common indices:
+  2 (√): square root
+  3 (∛): cube root
+  4: fourth root
+  n: nth root`
     },
-    {
-      name: "Principal Root",
-      formula: "The non-negative root of a number.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+  },
+  {
+    name: "Principal Root",
+    formula: "For an even root, the non-negative root out of all possible values. For odd roots, the real root",
+    fields: {
+      "properties": `
+      - Always unique
+  - Used by default for radical symbol
+  - Non-negative for even roots
+  - Same sign as radicand for odd roots`,
+      "examples": `Principal roots:
+  √4 = 2 (not -2)
+  ∛(-8) = -2
+  $\\sqrt[4]{16}$ = 2
+  $\\sqrt{x^2}$ = |x|`
     },
-    {
-      name: "Perfect Square",
-      formula: "A number that is the square of an integer.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+  },
+  {
+    name: "Perfect Square",
+    formula: "A number n = k² where k is an integer. Also called square number",
+    fields: {
+      "properties": `
+      - Always non-negative
+   - Integer square root
+   - Square ends in 0,1,4,5,6,9
+   - Distance between consecutive grows by 2`,
+      "examples": `First perfect squares:
+   0 = 0²
+   1 = 1²
+   4 = 2²
+   9 = 3²
+   16 = 4²
+   25 = 5²`
     },
-    {
-      name: "Perfect Cube",
-      formula: "A number that is the cube of an integer.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+   },
+   {
+    name: "Perfect Cube",
+    formula: "A number n = k³ where k is an integer. Also called cubic number",
+    fields: {
+      "properties": `- Can be negative
+  - Integer cube root
+  - Alternates between odd/even
+  - Growing gaps between consecutive`,
+      "examples": `First perfect cubes:
+  -8 = (-2)³
+  -1 = (-1)³
+  0 = 0³
+  1 = 1³
+  8 = 2³
+  27 = 3³`
     },
-    {
-      name: "Nth Root",
-      formula: "A number that, when raised to the nth power, equals a given number.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+  },
+  {
+    name: "Nth Root",
+    formula: "Value x where $x^n = a$, denoted as $\\sqrt[n]{a}$ or $a^{1/n}$",
+    fields: {
+      "properties": `
+      - n must be positive integer
+  - Even n requires a ≥ 0
+  - Odd n allows any real a
+  - Principal root is default`,
+      "examples": `Common nth roots:
+  $\\sqrt[4]{16} = 2$
+  $\\sqrt[5]{32} = 2$
+  $\\sqrt[6]{64} = 2$`
     },
-    {
-      name: "Radical Expression",
-      formula: "An expression involving a radical.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+  },
+  {
+    name: "Radical Expression",
+    formula: "Mathematical expression containing one or more radicals $\\sqrt[n]{x}$. Can include coefficients, variables, and operations",
+    fields: {
+      "properties": `
+      - Contains at least one radical
+   - May have coefficients
+   - Can include variables
+   - Can be simplified`,
+      "examples": `Radical expressions:
+   $2\\sqrt{3}$
+   $\\sqrt{x} + \\sqrt{y}$
+   $3\\sqrt[3]{2x}$
+   $\\frac{\\sqrt{8}}{\\sqrt{2}}$`
     },
-    {
-      name: "Simplifying Radicals",
-      formula: "The process of expressing a radical in its simplest form.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+   },
+   {
+    name: "Simplifying Radicals",
+    formula: "Converting radical to equivalent form with smallest possible radicand and rational coefficients outside",
+    fields: {
+      "properties": `
+      - Factor radicand
+  - Remove perfect nth powers
+  - Combine like radicals
+  - Rationalize denominators`,
+      "examples": `Steps to simplify:
+  $\\sqrt{12} = \\sqrt{4 \\cdot 3} = \\sqrt{4}\\sqrt{3} = 2\\sqrt{3}$
+  $\\sqrt[3]{54} = \\sqrt[3]{27 \\cdot 2} = 3\\sqrt[3]{2}$`
     },
-    {
-      name: "Nested Radicals",
-      formula: "Radicals within radicals.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+  },
+  {
+    name: "Nested Radicals",
+    formula: "Expression containing radicals inside other radicals: $\\sqrt{a + \\sqrt{b}}$",
+    fields: {
+      "properties": `
+      - Multiple radical layers
+  - Can often be simplified
+  - Harder to manipulate
+  - Special denesting methods`,
+      "examples": `Nested forms:
+  $\\sqrt{5 + \\sqrt{24}}$
+  $\\sqrt{3 + \\sqrt{1 + \\sqrt{2}}}$
+  $\\sqrt[3]{2 + \\sqrt{5}}$`
     },
-    {
-      name: "Surd",
-      formula: "A radical expression that cannot be simplified into a rational number.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+  },
+  {
+    name: "Surd",
+    formula: "An irrational root of a rational number. A radical that cannot be simplified to a rational number",
+    fields: {
+      "properties": `
+      - Irrational number
+   - Cannot be further simplified
+   - Root of rational number
+   - Contains no imaginary parts`,
+      "examples": `Common surds:
+   $\\sqrt{2}$
+   $\\sqrt{3}$
+   $\\sqrt[3]{5}$
+   $2\\sqrt{7}$ (mixed surd)`
     },
-    {
-      name: "Radical Equation",
-      formula: "An equation where the variable is under a radical.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+   },
+   {
+    name: "Radical Equation",
+    formula: "Equation containing variable(s) under radical sign: $\\sqrt{x} = a$ or $\\sqrt{f(x)} = g(x)$",
+    fields: {
+      "properties": `
+      - Check for extraneous solutions
+  - Square both sides carefully
+  - Domain restrictions apply
+  - May have multiple steps`,
+      "examples": `Solving $\\sqrt{x-1} = 2$:
+  $\\sqrt{x-1} = 2$
+  $(\\sqrt{x-1})^2 = 2^2$
+  $x-1 = 4$
+  $x = 5$`
     },
-    {
-      name: "Fractional Exponents",
-      formula: "Roots expressed as exponents.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+  },
+  {
+    name: "Fractional Exponents",
+    formula: "Root expressions written as powers: $x^{\\frac{1}{n}} = \\sqrt[n]{x}$ and $x^{\\frac{m}{n}} = (\\sqrt[n]{x})^m$",
+    fields: {
+      "properties": `
+      - Numerator = power
+  - Denominator = root
+  - Follow exponent rules
+  - Equivalent to radicals`,
+      "examples": `$x^{\\frac{1}{2}} = \\sqrt{x}$
+  $x^{\\frac{1}{3}} = \\sqrt[3]{x}$
+  $x^{\\frac{2}{3}} = (\\sqrt[3]{x})^2$`
     },
-    {
-      name: "Rationalizing the Denominator",
-      formula: "The process of removing a radical from a denominator.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+  },
+  {
+    name: "Rationalizing the Denominator",
+    formula: "Multiplying numerator and denominator by radical term to eliminate radicals in denominator: $\\frac{a}{\\sqrt{b}} \\cdot \\frac{\\sqrt{b}}{\\sqrt{b}} = \\frac{a\\sqrt{b}}{b}$",
+    fields: {
+      "methods": `
+      - Single radical: multiply by itself
+   - Binomial with radical: multiply by conjugate
+   - Higher order roots: use appropriate root`,
+      "examples": `$\\frac{1}{\\sqrt{2}} = \\frac{\\sqrt{2}}{2}$
+   
+   $\\frac{1}{\\sqrt{3} + \\sqrt{2}} = \\frac{\\sqrt{3} - \\sqrt{2}}{(\\sqrt{3} + \\sqrt{2})(\\sqrt{3} - \\sqrt{2})}$`
     },
-    {
-      name: "Irrational Root",
-      formula: "A root that cannot be expressed as a fraction.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+   },
+   {
+    name: "Irrational Root",
+    formula: "A root that yields an irrational number - cannot be expressed as p/q where p,q are integers, q≠0",
+    fields: {
+      "properties": `
+      - Non-terminating, non-repeating decimal
+  - Cannot be written as ratio of integers
+  - Often proved irrational by contradiction`,
+      "examples": `Common irrational roots:
+  $\\sqrt{2} ≈ 1.4142135...$
+  $\\sqrt{3} ≈ 1.7320508...$
+  $\\sqrt[3]{2} ≈ 1.2599210...$`
     },
-    {
-      name: "Root Approximation",
-      formula: "Techniques to estimate roots when exact calculation is difficult.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+  },
+  {
+    name: "Root Approximation",
+    formula: "Methods to find approximate values of roots: Newton's method: $x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}$",
+    fields: {
+      "methods": `
+      - Newton's method
+  - Binary search
+  - Calculator estimation
+  - Numerical algorithms`,
+      "examples": `$\\sqrt{2}$ approximation:
+  1.4 → 1.414 → 1.4142 → 1.41421
+  
+  Newton's method for $\\sqrt{a}$:
+  $x_{n+1} = \\frac{1}{2}(x_n + \\frac{a}{x_n})$`
     },
-    {
-      name: "Conjugate Pair",
-      formula: "Used in rationalizing denominators, especially with complex radicals.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+  },
+  {
+    name: "Conjugate Pair",
+    formula: "For expression a + √b, its conjugate is a - √b. Product is a² - b. Used to rationalize denominators",
+    fields: {
+      "properties": `
+      - Product removes radicals
+   - Sum × difference formula
+   - Preserves value when multiplying num/denom`,
+      "examples": `Conjugate pairs:
+   $a + \\sqrt{b}$ and $a - \\sqrt{b}$
+   $\\sqrt{2} + \\sqrt{3}$ and $\\sqrt{2} - \\sqrt{3}$
+   $(a + \\sqrt{b})(a - \\sqrt{b}) = a^2 - b$`
     },
-    {
-      name: "Logarithmic Connection",
-      formula: "Relationship between roots and logarithms.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+   },
+   {
+    name: "Logarithmic Connection",
+    formula: "$\\sqrt[n]{a} = e^{\\frac{\\ln(a)}{n}}$ and $\\sqrt[n]{a} = b \\iff a = b^n$",
+    fields: {
+      "properties": `
+      - Roots as exponentials
+  - Natural log connection
+  - Change of base formula
+  - Solving using logs`,
+      "examples": `$\\sqrt{x} = e^{\\frac{\\ln(x)}{2}}$
+  $\\sqrt[3]{x} = e^{\\frac{\\ln(x)}{3}}$
+  $\\ln(\\sqrt{x}) = \\frac{1}{2}\\ln(x)$`
     },
-    {
-      name: "Higher-Order Roots",
-      formula: "Generalization of square and cube roots.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+  },
+  {
+    name: "Higher-Order Roots",
+    formula: "nth root where n > 3: $\\sqrt[n]{a}$ is value x where x^n = a",
+    fields: {
+      "properties": `
+      - n can be any positive integer
+  - Even n requires a ≥ 0
+  - Odd n allows any real a
+  - Multiple complex roots`,
+      "examples": `Fourth root: $\\sqrt[4]{16} = 2$
+  Fifth root: $\\sqrt[5]{32} = 2$
+  General: $\\sqrt[n]{a^n} = |a|$ for even n`
     },
-    {
-      name: "Imaginary Root",
-      formula: "Roots of negative numbers in the real number system, represented using i.",
-      fields: [],
-      category: "Roots"
+    category: "Roots"
+  },
+  {
+    name: "Imaginary Root",
+    formula: "For negative real number -a, its square root is i√a where i = √(-1). Higher even roots also yield imaginary results",
+    fields: {
+      "properties": `
+      - Occur when taking even roots of negatives
+   - Involve imaginary unit i
+   - Come in conjugate pairs
+   - Real when n is odd`,
+      "examples": `$\\sqrt{-4} = 2i$
+   $\\sqrt{-9} = 3i$
+   $\\sqrt[4]{-16} = \\sqrt{2}(1 + i)$
+   
+   Powers of i:
+   $i^2 = -1$
+   $i^3 = -i$
+   $i^4 = 1$`
     },
+    category: "Roots"
+   },
 
 
 

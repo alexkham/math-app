@@ -121,7 +121,7 @@ export default function LogicDefinitionsPage({
       <Breadcrumb />
       <OperaSidebar
         side='right'
-        topOffset='65px'
+        topOffset='55px'
         sidebarWidth='45px'
         panelWidth='300px'
         iconColor='white'

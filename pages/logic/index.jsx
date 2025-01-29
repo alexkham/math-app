@@ -400,10 +400,10 @@ export async function getStaticProps() {
      description: 'Visit Mathematical Logic formulas page',
      leftContentHtml: createContentHtml({
        description: 'The Mathematical Logic Formulas page presents essential logical laws, rules, and principles organized in five main categories: Logical Equivalences, De Morgans Laws, Logical Laws, Quantifier Rules, and Inference Rules. It covers fundamental concepts from basic logical operations like conjunction and disjunction to advanced topics like quantifiers and inference rules. Each formula includes detailed explanations, symbolic notation, real-world examples, and practical applications.',
-       link: '/logic/formulas',
+      //  link: '/logic/formulas',
        linkText: 'View All Formulas',
        height: '350px',
-       backgroundColor: '#fdfdea',
+       backgroundColor: 'none',
      }),
      layout: 'horizontal',
    },
@@ -412,10 +412,10 @@ export async function getStaticProps() {
      description: 'Browse Logic terminology including main concepts and their definitions with examples',
      rightContentHtml: createContentHtml({
        description: 'The Logic Terms and Definitions page presents key concepts and terminology organized in multiple categories including Logic Basics, Reasoning, Formal Logic, Proof Methods, Logical Principles, and Structures. It covers fundamental concepts like propositions and predicates, reasoning methods, formal systems, and proof techniques. Each term is clearly defined to help understand the building blocks of mathematical logic and logical reasoning.',
-       link: '/logic/definitions',
+      //  link: '/logic/definitions',
        linkText: 'View All Definitions',
        height: '350px',
-       backgroundColor: '#fdfdea',
+       backgroundColor: 'none',
      }),
      layout: 'horizontal'
    }
@@ -505,6 +505,7 @@ export default function LogicPage({
    {
      id: 'formulas',
      title: sectionContent.formulas.title,
+     link:`/logic/formulas`,
      content: [
        {
          content: sectionContent.formulas.leftContentHtml,
@@ -527,6 +528,7 @@ export default function LogicPage({
    {
      id: 'definitions',
      title: sectionContent.definitions.title,
+     link:`/logic/definitions`,
      content: [
        {
          content: <VerticalScrollingFormulaWidget
@@ -569,7 +571,7 @@ export default function LogicPage({
      <br/>
      <OperaSidebar
        side='right'
-       topOffset='65px'
+       topOffset='55px'
        sidebarWidth='45px'
        panelWidth='200px'
        iconColor='white'

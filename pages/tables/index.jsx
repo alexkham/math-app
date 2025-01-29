@@ -88,7 +88,7 @@ export default function Tables({ categories ,categoryLinks }) {
       <br/>
       <OperaSidebar 
         side='right'
-        topOffset='60px' 
+        // topOffset='60px' 
         sidebarWidth='45px'
         panelWidth='200px'
         iconColor='white'
