@@ -6,6 +6,10 @@ import MyList from '@/app/components/page-components/lists/MyList';
 import TruthTable from '@/app/components/logic-calculator/truth-tables/TruthTable';
 import ThreeWaysCircularSplitBreakdown from '@/app/components/breakdowns/2-ways/3WaysSplit';
 import PowerTable from '@/app/components/tables/PowerTable';
+import MatrixCalculator from '@/app/components/calculators/matrix/MatrixCalculator';
+import Matrix from '@/app/components/calculators/matrix/Matrix';
+import MatrixAnimation from '@/app/components/matrices/MatrixAnimation';
+import MatrixExpressionVisualizer from '@/app/components/matrix-multiplication/MatrixExpressionVisualizer';
 
 export default function Test6Page() {
 
@@ -316,7 +320,11 @@ const centerStyles = {
   color: 'white'
 };
 
-
+const matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
 
   return (
     <>
@@ -325,7 +333,20 @@ const centerStyles = {
     {/* <Sections sections={testSections}/>
      */}
     <br/>
-    <PowerTable/>
+   
+    <br/>
+    
+    <br/>
+    <br/>
+    <Matrix matrix={matrix}/>
+    <br/>
+    <br/>
+   <MatrixCalculator/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    {/* <PowerTable/> */}
     <br/>
     {/* <ThreeWaysCircularSplitBreakdown
     content={threeWaysContent}/> */}

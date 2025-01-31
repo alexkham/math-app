@@ -179,7 +179,10 @@ This calculator can handle both integer and decimal numbers, and will display th
 links:[
 
   {title:"Explore Exponents Table Page ",
-    link:"/tables/arithmetics/exponential-table"}
+    link:"/tables/arithmetics/exponential-table"},
+    {title:"See Table of Integer Numbers Exponents (Powers) ",
+      link:"/tables/arithmetics/powers-table"}
+    
   
 ]
     },
@@ -250,7 +253,7 @@ export default function ExponentCalculatorPage({ detailInstructions, explanation
       <Breadcrumb/>
       <OperaSidebar
         side='right'
-        topOffset='65px'
+        // topOffset='65px'
         sidebarWidth='45px'
         panelWidth='300px'
         iconColor='white'

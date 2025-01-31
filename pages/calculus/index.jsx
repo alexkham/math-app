@@ -185,8 +185,8 @@ export async function getStaticProps() {
     formulas: {
       leftContentHtml: createContentHtml({ 
         description: 'The Calculus Formulas page features fundamental laws and theorems across Limits, Derivatives, Integrals, and Integration Techniques. Each entry includes step-by-step explanations, key variables, worked examples, and real-world applications - from basic limit laws and differentiation rules to advanced integration methods and improper integrals.',
-        link: '/calculus/definitions',
-        linkText: 'View All Definitions',
+        // link: '/calculus/definitions',
+        // linkText: 'View All Definitions',
         height:'350px',
         backgroundColor:'#fdfdea',
       }),
@@ -198,8 +198,8 @@ export async function getStaticProps() {
           description: 'Browse Calculus terminology including main concepts and their definitions with examples',
           rightContentHtml: createContentHtml({ 
             description: 'The Calculus Terms and Definitions page provides a comprehensive collection of essential calculus concepts organized across multiple categories including Functions, Differentiation, Integration, Geometry, Motion and Dynamics, and Vector Calculus. From fundamental concepts like derivatives and integrals to advanced topics in vector analysis and differential equations, each term is clearly defined to support understanding of calculus principles and their applications.',
-            link: '/calculus/definitions',
-            linkText: 'View All Definitions',
+            // link: '/calculus/definitions',
+            // linkText: 'View All Definitions',
             height:'350px',
             backgroundColor:'#fdfdea',
           }),
@@ -264,6 +264,7 @@ export default function CalculusPage({
     {
       id: 'formulas',
       title: sectionContent.formulas.title,
+      link:'/calculus/formulas',
       content: [
         { 
           content: sectionContent.formulas.leftContentHtml,
@@ -286,6 +287,7 @@ export default function CalculusPage({
     {
       id: 'definitions',
       title: sectionContent.definitions.title,
+      link:'/calculus/definitions',
       content: [
         { 
           content: <VerticalScrollingFormulaWidget 
