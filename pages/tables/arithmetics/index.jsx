@@ -30,10 +30,16 @@ const arithmeticTables = [
     path: '/tables/arithmetics/binary-logarithms'
   },
   {
-    name: 'Exponential Table',
+    name: 'Exponential Table for Natural Logarithm (e)',
     description: 'Table of exponential values, crucial for growth and decay calculations.',
     icon: TrendingUp,
     path: '/tables/arithmetics/exponential-table'
+  },
+  {
+    name: 'Powers of Integer Numbers',
+    description: 'Explore Exponents Chart for numbers from 1 to 10',
+    icon: TrendingUp,
+    path: '/tables/arithmetics/powers-table'
   },
 
   {

@@ -245,6 +245,16 @@
     padding: 10px;
     border-radius: 5px;
   }
+  .searchButton1{
+    margin-top: 0px;
+    background-color: #4d4dff;
+    color: white;
+    border:none;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 30px;
+  }
+
 
   .searchButton:hover{
     margin-top: 0px;

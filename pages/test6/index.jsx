@@ -4,6 +4,8 @@ import ToolsSlider from '@/app/components/sliders/ToolsSlider';
 import MathContainer from '@/app/components/math-content/MathContainer';
 import MyList from '@/app/components/page-components/lists/MyList';
 import TruthTable from '@/app/components/logic-calculator/truth-tables/TruthTable';
+import ThreeWaysCircularSplitBreakdown from '@/app/components/breakdowns/2-ways/3WaysSplit';
+import PowerTable from '@/app/components/tables/PowerTable';
 
 export default function Test6Page() {
 
@@ -285,12 +287,67 @@ const tautologies = {
   'P∧(Q∧¬Q)': { symbol: 'P∧(Q∧¬Q)', func: (a,b) => a && (b && !b), title: 'Nested Contradiction' }
 }
 
+
+
+
+const threeWaysContent = {
+  title: "Comparison",
+  firstTitle: "First Option",
+  secondTitle: "Second Option",
+  thirdTitle: "Third Option",
+  first: [
+    {
+      title: "Main Feature",
+      content: ["Detail 1", "Detail 2"]
+    }
+  ],
+  second: ["Simple item"],
+  third: [
+    {
+      title: "Feature",
+      link: "https://example.com",
+      content: ["Linked content"]
+    }
+  ]
+};
+
+const centerStyles = {
+  backgroundColor: '#4a5568',
+  color: 'white'
+};
+
+
+
   return (
     <>
     <div>Test6Page</div>
 
     {/* <Sections sections={testSections}/>
      */}
+    <br/>
+    <PowerTable/>
+    <br/>
+    {/* <ThreeWaysCircularSplitBreakdown
+    content={threeWaysContent}/> */}
+    <br/>
+    <br/>
+    <div style={{transform:'scale(0.8)'}}>
+    <ThreeWaysCircularSplitBreakdown
+  title="Main Title"
+  content={{
+    firstTitle: "First Option",
+    secondTitle: "Second Option", 
+    thirdTitle: "Third Option",
+    first: [{title: "Main Feature", content: ["Detail 1", "Detail 2"]}],
+    second: ["Simple item"],
+    third: [{title: "Feature", link: "https://example.com", content: ["Linked content"]}]
+  }}
+  centerContent="Optional"
+/>
+
+</div>
+    <br/>
+    <br/>
     <br/>
     <br/>
     <TruthTable operators={implicationOperators}/>
