@@ -329,6 +329,14 @@ export default function OperaSidebar({
     setActiveItem(activeItem === itemId ? null : itemId);
   };
 
+
+  // const handleItemClick = (itemId) => {
+  //   console.log('Any click works');  // Add this
+  //   console.log('Item clicked:', {
+  //     itemId,
+  //     content: sidebarItems.find(item => item.id === itemId)?.content
+  //   });}
+
   return (
     <div className={styles.container}>
       <div className={styles.sidebar} style={sidebarStyle}>
