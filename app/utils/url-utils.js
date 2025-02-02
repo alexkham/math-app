@@ -114,33 +114,61 @@
 //   export { normalizeUrl };
 
 
+// const normalizeUrl = (url) => {
+//     if (!url) return '';
+//     if (url.startsWith('/')) return url;
+   
+//     let urlToProcess = url;
+//     if (!url.startsWith('http://') && !url.startsWith('https://')) {
+//       urlToProcess = 'https://' + url;
+//     }
+   
+//     try {
+//       const urlObj = new URL(urlToProcess);
+//       if (urlObj.hostname.includes('learnmathclass.com')) {
+//         return urlObj.pathname + urlObj.search + urlObj.hash;
+//       }
+      
+//       if (!urlObj.hostname.startsWith('www.')) {
+//         const newUrl = new URL(urlObj.toString());
+//         newUrl.hostname = 'www.' + urlObj.hostname;
+//         return newUrl.toString();
+//       }
+//       return urlObj.toString();
+//     } catch (e) {
+//       console.error('Error normalizing URL:', url, e);
+//       const pathMatch = url.match(/[\/]([^\/].*)$/);
+//       return pathMatch ? '/' + pathMatch[1] : url;
+//     }
+//    };
+
+
+//     export { normalizeUrl };
+
 const normalizeUrl = (url) => {
     if (!url) return '';
     if (url.startsWith('/')) return url;
    
     let urlToProcess = url;
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      urlToProcess = 'https://' + url;
+    if (!urlToProcess.startsWith('http://') && !urlToProcess.startsWith('https://')) {
+      urlToProcess = 'https://www.learnmathclass.com' + url;
     }
    
     try {
       const urlObj = new URL(urlToProcess);
+   
       if (urlObj.hostname.includes('learnmathclass.com')) {
-        return urlObj.pathname + urlObj.search + urlObj.hash;
+        const wwwUrl = new URL(urlToProcess);
+        if (!wwwUrl.hostname.startsWith('www.')) {
+          wwwUrl.hostname = 'www.' + wwwUrl.hostname;
+        }
+        return wwwUrl.toString();
       }
-      
-      if (!urlObj.hostname.startsWith('www.')) {
-        const newUrl = new URL(urlObj.toString());
-        newUrl.hostname = 'www.' + urlObj.hostname;
-        return newUrl.toString();
-      }
-      return urlObj.toString();
+      return urlToProcess;
     } catch (e) {
-      console.error('Error normalizing URL:', url, e);
-      const pathMatch = url.match(/[\/]([^\/].*)$/);
-      return pathMatch ? '/' + pathMatch[1] : url;
+      console.error('Error:', e);
+      return url;
     }
    };
-
-
-    export { normalizeUrl };
+   
+   export { normalizeUrl };
