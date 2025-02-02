@@ -16,6 +16,7 @@ import GenericSquareRootsTable from '@/app/components/tables/GenericSquareRootsT
 import {LogIn, Activity} from 'lucide-react'
 import NewCardGroup from '@/app/components/cards/NewCardGroup'
 import CubeRootsTable from '@/app/components/tables/CubeRootsTable'
+import CardsGroup from '@/app/components/cards/CardsGroup'
 
 
 
@@ -232,83 +233,178 @@ const cardsData = [
 ];
 
 
-const cardItems=[
+// const cardItems=[
+//   {
+//     id: "arithmetic-calculators",
+//     category: "Arithmetic Calculators",
+//     content: "Perform Basic and Advanced Arithmetic Operations ",
+//     icon:CustomArithmetic,
+//     // href: "/calculators",
+//     subcategories: [
+//       {
+//         name: "Root Calculator",
+//         path: "/calculators/root-calculator"
+//       },
+//       {
+//         name: "Logarithmic Calculator",
+//         href: "/calculators/log-calculator"
+//       },
+//       {
+//         name: "Exponent Calculator",
+//         href: "/calculators/exponent-calculator"
+//       },
+     
+//     ]
+//   },
+//     {
+//         category: 'Statistics Calculator',
+//         icon: CustomStats,
+//         href:'/calculators/statistics-calculator',
+//         // No subcategories, will show simple link
+//         content:"Upload dataset from file or manually and calculate up to 18 different stats with explanations "
+//       },
+//       {
+//         category: 'Trigonometry Calculator',
+//         icon: CustomTriangle,
+//         href:'/calculators/trigonometry-calculator',
+//         // No subcategories, will show simple link
+//         content:"Calculate Basic Trigonometric functions for any angle in degrees or radiands and Inverse trigonometric functions "
+//       },
+//       {
+//         id: "algebra-calculators",
+//         category: "Algebra Calculators",
+//         content: "Access powerful algebraic calculation tools",
+//         icon:CustomAlgebra,
+//         // href: "/calculators",
+//         subcategories: [
+//           {
+//             name: "Quadratic Equations Calculator",
+//             href: "/calculators/quadratic-equations"
+//           },
+//           {
+//             name: "Factoring Calculator",
+//             href: "/calculators/factoring-calculator"
+//           },
+//           {
+//             name: "Polynomial Calculator",
+//             href: "/calculators/polynomial-calculator"
+//           }
+//         ]
+//       },
+//       {
+//         id: "sequences-calculators",
+//         category: "Sequences Calculators",
+//         content: "Use Calculators to learn about most important sequences in math",
+//         icon:CustomList,
+//         // href: "/calculators",
+//         subcategories: [
+//           {
+//             name: "Prime Numbers Calculator",
+//             href: "/sequences/prime-numbers"
+//           },
+//           {
+//             name: "Fibonacci Calculator",
+//             href: "/sequences/fibonacci-numbers"
+//           }
+//         ]
+//       }
+// ]
+
+const cardItems = [
   {
-    id: "arithmetic-calculators",
-    category: "Arithmetic Calculators",
-    content: "Perform Basic and Advanced Arithmetic Operations ",
-    icon:CustomArithmetic,
-    // href: "/calculators",
+    name: "arithmetic-calculators",
+    description: "Perform Basic and Advanced Arithmetic Operations",
+    backgroundColor:'red',
+    textColor:"white",
+    footerColor:'yellow',
+    icon: CustomArithmetic,
+    path: "/calculators",
     subcategories: [
       {
-        name: "Root Calculator",
-        href: "/calculators/root-calculator"
+        name: "Root Calculator", 
+        path: "/calculators/root-calculator"
       },
       {
         name: "Logarithmic Calculator",
-        href: "/calculators/log-calculator"
+        path: "/calculators/log-calculator"
       },
       {
         name: "Exponent Calculator",
-        href: "/calculators/exponent-calculator"
-      },
-     
+        path: "/calculators/exponent-calculator"
+      }
     ]
   },
-    {
-        category: 'Statistics Calculator',
-        icon: CustomStats,
-        href:'/calculators/statistics-calculator',
-        // No subcategories, will show simple link
-        content:"Upload dataset from file or manually and calculate up to 18 different stats with explanations "
+  {
+    name: 'Statistics Calculator',
+    icon: CustomStats,
+    path: '/calculators/statistics-calculator',
+    description: "Upload dataset from file or manually and calculate up to 18 different stats with explanations"
+  },
+  {
+    name: 'Trigonometry Calculator',
+    icon: CustomTriangle, 
+    path: '/calculators/trigonometry-calculator',
+    description: "Calculate Basic Trigonometric functions for any angle in degrees or radiands and Inverse trigonometric functions"
+  },
+  {
+    name: "algebra-calculators",
+    description: "Access powerful algebraic calculation tools",
+    icon: CustomAlgebra,
+    path: "/calculators",
+    subcategories: [
+      {
+        name: "Quadratic Equations Calculator",
+        path: "/calculators/quadratic-equations"
       },
       {
-        category: 'Trigonometry Calculator',
-        icon: CustomTriangle,
-        href:'/calculators/trigonometry-calculator',
-        // No subcategories, will show simple link
-        content:"Calculate Basic Trigonometric functions for any angle in degrees or radiands and Inverse trigonometric functions "
+        name: "Factoring Calculator",
+        path: "/calculators/factoring-calculator"
       },
       {
-        id: "algebra-calculators",
-        category: "Algebra Calculators",
-        content: "Access powerful algebraic calculation tools",
-        icon:CustomAlgebra,
-        // href: "/calculators",
-        subcategories: [
-          {
-            name: "Quadratic Equations Calculator",
-            href: "/calculators/quadratic-equations"
-          },
-          {
-            name: "Factoring Calculator",
-            href: "/calculators/factoring-calculator"
-          },
-          {
-            name: "Polynomial Calculator",
-            href: "/calculators/polynomial-calculator"
-          }
-        ]
-      },
-      {
-        id: "sequences-calculators",
-        category: "Sequences Calculators",
-        content: "Use Calculators to learn about most important sequences in math",
-        icon:CustomList,
-        // href: "/calculators",
-        subcategories: [
-          {
-            name: "Prime Numbers Calculator",
-            href: "/sequences/prime-numbers"
-          },
-          {
-            name: "Fibonacci Calculator",
-            href: "/sequences/fibonacci-numbers"
-          }
-        ]
+        name: "Polynomial Calculator",
+        path: "/calculators/polynomial-calculator" 
       }
-]
+    ]
+  },
+  {
+    name: "sequences-calculators",
+    description: "Use Calculators to learn about most important sequences in math",
+    icon: CustomList,
+    path: "/calculators",
+    subcategories: [
+      {
+        name: "Prime Numbers Calculator",
+        path: "/sequences/prime-numbers"
+      },
+      {
+        name: "Fibonacci Calculator",
+        path: "/sequences/fibonacci-numbers"
+      }
+    ]
+  }
+ ]
 
+
+const cards = [
+  {
+    name: "users",
+    description: "Manage user accounts and permissions",
+    path: "/users",
+   
+    // icon: UserIcon,
+    icon:CustomList,
+    backgroundColor: "#f0f9ff",
+    textColor: "#0369a1",
+    footerColor: "red"
+  },
+  {
+    name: "products",
+    description: "View and manage products",
+    path: "/products",
+    // icon: BoxIcon
+    // Will use default colors from your CSS
+  }
+];
 
   return (
     <>
@@ -372,13 +468,19 @@ const cardItems=[
     <br/>
     <br/>
     <br/>
-    <NewCardGroup cards={cardsData}/>
+    {/* <NewCardGroup cards={cardsData}/> */}
    
     <br/>
+    {/* <NewCardGroup cards={cards}/> */}
+    <br/>
+    <br/>
+    <br/>
+    <NewCardGroup cards={cardItems}/>
     <br/>
     <br/>
     {/* <NewCardGroup cards={cardItems}/> */}
     <br/>
+    <CardsGroup items={cardItems}/>
     <br/>
     <CubeRootsTable/>
     <br/>

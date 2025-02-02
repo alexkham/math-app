@@ -80,7 +80,7 @@ Trigonometry teaches students how to connect abstract mathematical concepts with
     <br/>
     <OperaSidebar 
       side='right'
-      topOffset='65px' 
+      // topOffset='65px' 
       sidebarWidth='45px'
       panelWidth='300px'
       

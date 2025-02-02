@@ -1,0 +1,135 @@
+.container{
+    margin: auto;
+    margin-left: 30px;
+}
+
+.dimensions {
+    margin-bottom: 1rem;
+  }
+  
+  .dimensionGroup {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-start;
+    margin-left: 0.5rem;
+  }
+  
+  .dimensionControl {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .dimensionControl label {
+    color: #1e40af;
+    font-weight: 600;
+    min-width: 50px;
+  }
+  
+  .inputGroup {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  .dimensionInput {
+    width: 45px;
+    padding: 0.35rem;
+    text-align: center;
+    border: 2px solid #93c5fd;
+    border-radius: 4px;
+    color: #1e40af;
+    font-size: 0.9rem;
+  }
+  
+  .adjustButton {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dbeafe;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #1e40af;
+  }
+  
+  .adjustButton:hover:not(:disabled) {
+    background-color: #93c5fd;
+  }
+
+  .matrixWrapper{
+    transform: scale(0.85);
+    margin-top: 20px;
+  }
+
+
+  /* Controls layout */
+.controls {
+    display: flex;
+    gap: 1.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #ddd;
+  }
+  
+  .leftGroup, .rightGroup {
+    display: flex;
+    gap: 1rem;
+    margin-right:30px;
+  }
+  
+  /* Common button styles */
+  .basicBtn, .operationBtn {
+    height: 28px;
+    padding: 0 12px;
+    font-size: 13px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: 500;
+    background: #f8f9fa;
+    border: 1px solid #d3d4d5;
+    color: #212529;
+  }
+  
+  /* Basic button states */
+  .basicBtn:hover, .operationBtn:hover {
+    background: #e9ecef;
+    border-color: #c1c2c3;
+  }
+  
+  .basicBtn:active, .operationBtn:active {
+    background: #dfe2e5;
+    transform: translateY(1px);
+  }
+  
+  /* Special buttons */
+  .basicBtn {  /* Reset All */
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+  }
+  
+  .basicBtn:hover {
+    background: #c82333;
+    border-color: #bd2130;
+  }
+  
+  .basicBtn:nth-child(3) { /* Generate Random */
+    background: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
+  }
+  
+  .basicBtn:nth-child(3):hover {
+    background: #0b5ed7;
+    border-color: #0a58ca;
+  }
+
+
+
+
+
+
+  

@@ -10,26 +10,26 @@ import { useRouter } from 'next/router'
 import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
 
 export async function getStaticProps() {
-  const { default: calculusTermsList } = await import('@/app/api/db/definitions/calculus/calculusDefinitions')
+  const { default: trigonometryTermsList } = await import('@/app/api/db/definitions/trigonometry/trigonometryDefinitions')
   
   const keyWords = [
-    'calculus terminology',
-    'calculus terms',
-    'calculus definitions',
-    'calculus definition and examples',
-    'calculus vocabulary'
+    'trigonometry terminology',
+    'trigonometry terms',
+    'trigonometry definitions',
+    'trigonometry definition and examples',
+    'trigonometry vocabulary'
   ]
 
   // Define the canonical URL
   const baseUrl = 'https://www.learnmathclass.com'
-  const path = '/calculus/definitions'
+  const path = '/trigonometry/definitions'
   const canonicalUrl = `${baseUrl}${path}`
   
   const lastModified = new Date().toISOString() // Update this when content changes
   
   return {
     props: {
-      calculusTermsList,
+      trigonometryTermsList,
       keyWords,
       canonicalUrl,
       lastModified,
@@ -37,8 +37,8 @@ export async function getStaticProps() {
   }
 }
 
-export default function AlgebraDefinitionsPage({ 
-  calculusTermsList, 
+export default function TrigonometryDefinitionsPage({ 
+  trigonometryTermsList, 
   keyWords, 
   canonicalUrl,
   lastModified 
@@ -47,23 +47,23 @@ export default function AlgebraDefinitionsPage({
 
   // Redirect if URL has query parameters or trailing slash
   React.useEffect(() => {
-    if (router.asPath !== '/calculus/definitions') {
-      router.push('/calculus/definitions')
+    if (router.asPath !== '/trigonometry/definitions') {
+      router.push('/trigonometry/definitions')
     }
   }, [router])
 
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Calculus Terms and Definitions",
-    "description": "Comprehensive list of calculus terms, definitions and examples for students and educators.",
+    "name": "Trigonometry Terms and Definitions",
+    "description": "Comprehensive list of trigonometry terms, definitions and examples for students and educators.",
     "keywords": keyWords.join(", "),
     "url": canonicalUrl,
     "dateModified": lastModified,
     "inLanguage": "en-US",
     "mainEntity": {
       "@type": "Article",
-      "name": "Calculus Terms and Definitions",
+      "name": "Trigonometry Terms and Definitions",
       "dateModified": lastModified,
       "author": {
         "@type": "Organization",
@@ -72,8 +72,12 @@ export default function AlgebraDefinitionsPage({
     }
   }
 
-  const pageTitle = "Calculus Terms and Definitions | Learn Math Class"
-  const pageDescription = "Complete guide to calculus terminology, definitions, and examples. Perfect for students learning algebra fundamentals and mathematical concepts."
+  const pageTitle = "Trigonometry Terms and Definitions | Learn Math Class"
+  const pageDescription = "Complete guide to trigonometryterminology, definitions, and examples. Perfect for students learning trigonometry fundamentals and mathematical concepts."
+
+
+  const termsList=trigonometryTermsList.map((item)=>item.name);
+  console.log('Trigonometry terms:'+termsList)
 
   return (
     <>
@@ -130,15 +134,15 @@ export default function AlgebraDefinitionsPage({
 
       <main>
         <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
-          Calculus Terms and Definitions
+          Trigonometry Terms and Definitions
         </h1>
         <CategoriesList
-        data={calculusTermsList}
-        baseUrl='/calculus/definitions'
+        data={trigonometryTermsList}
+        baseUrl='/trigonometry/definitions'
         />
         <FormulaAccordionWrapper
           groupByField={'category'}
-          data={calculusTermsList}
+          data={trigonometryTermsList}
           type='Definition'
         />
         <br />

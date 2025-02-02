@@ -10,6 +10,8 @@ import MatrixCalculator from '@/app/components/calculators/matrix/MatrixCalculat
 import Matrix from '@/app/components/calculators/matrix/Matrix';
 import MatrixAnimation from '@/app/components/matrices/MatrixAnimation';
 import MatrixExpressionVisualizer from '@/app/components/matrix-multiplication/MatrixExpressionVisualizer';
+import Matrix2 from '@/app/components/calculators/matrix/Matrix2';
+import MatrixCalculator2 from '@/app/components/calculators/matrix/MatrixCalculator2';
 
 export default function Test6Page() {
 
@@ -323,7 +325,12 @@ const centerStyles = {
 const matrix = [
   [1, 2, 3],
   [4, 5, 6],
-  [7, 8, 9]
+  [7, 8, 9],
+  [7, 8, 9],
+  [7, 8, 9],
+  [7, 8, 9],
+  [7, 8, 9],
+  [7, 8, 9],
 ];
 
   return (
@@ -335,10 +342,12 @@ const matrix = [
     <br/>
    
     <br/>
+    <MatrixCalculator2/>
     
     <br/>
+    {/* <Matrix2 matrix={matrix} name='A' labelPosition='left' />
     <br/>
-    <Matrix matrix={matrix}/>
+    <Matrix matrix={matrix}/> */}
     <br/>
     <br/>
    <MatrixCalculator/>
