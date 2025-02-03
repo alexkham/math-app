@@ -340,7 +340,10 @@ const CategoriesList = ({
                   display: 'inline-block',
                   color: '#2563eb',
                   textDecoration: 'none',
-                  fontSize: '16px'
+                  fontSize: '16px',
+                  backgroundColor:'#e7f1ff',
+                  padding:'10px',
+                  borderRadius:'4px'
                 }}
               >
                 Go to {category} section →

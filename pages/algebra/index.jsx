@@ -571,6 +571,7 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Head from 'next/head';
 import { createContentHtml } from '@/app/utils/utils-functions'
 import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
+import SecondaryNavbar from '@/app/components/nav-bar/SecondaryNavbar'
 
 
 
@@ -807,14 +808,14 @@ export default function AlgebraPage({
       <br/>
       <OperaSidebar 
         side='right'
-        // topOffset='65px' 
+        topOffset='95px' 
         sidebarWidth='45px'
         panelWidth='200px'
         iconColor='white'
         panelBackgroundColor='#f2f2f2'
       /> 
       <Breadcrumb/>
-     
+     <SecondaryNavbar verticalPosition='17.5%' alignment='top' backgroundColor='#1f2937' height={'20px'} />
       <main>
         <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>
           Algebra

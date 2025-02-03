@@ -9,6 +9,7 @@ import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionW
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
 
 export async function getStaticProps() {
   const { default: linearAlgebraTermsList } = await import('@/app/api/db/definitions/linear-algebra/linearAlgebraDefinitions')
@@ -19,7 +20,35 @@ export async function getStaticProps() {
     'linear algebra definitions',
     'linear algebra definition and examples',
     'linear algebra vocabulary'
-  ]
+  ];
+
+  const definitionsCategoryExplanations = {
+    "Vector Operations": "Core vector arithmetic and geometric operations including addition, multiplication, dot/cross products that form the foundation for manipulating vectors.",
+ 
+    "Vectors Basic Terms": "Fundamental concepts that define vectors and their components, including basic properties and representations in space.",
+ 
+    "Vectors": "Primary vector concepts covering structure, magnitude, direction and fundamental types like unit and zero vectors.",
+ 
+    "Vectors Orthogonality": "Concepts related to perpendicular vectors and methods to create orthogonal/orthonormal vector sets.",
+ 
+    "Vectors Geometric Interpretations": "Geometric meaning and visualization of vectors through angles, directions, and spatial relationships.",
+ 
+    "Vectors Transformations": "Operations that change vectors while preserving certain properties, including linear transformations and their matrix representations.",
+ 
+    "Vectors Applications": "Practical uses of vectors in describing physical quantities, gradients, and positions.",
+ 
+    "Matrix Operations": "Basic arithmetic operations with matrices including addition, multiplication, and scalar operations.",
+ 
+    "Matrix Properties": "Key characteristics of matrices like determinant, rank, trace, and eigenvalues that describe their behavior.",
+ 
+    "Matrix Transformations": "Operations that convert matrices into special forms or decompose them into simpler components.",
+ 
+    "Matrix Applications": "Practical uses of matrices in solving systems and representing data.",
+ 
+    "Special Matrices": "Matrices with unique properties like diagonal, triangular, orthogonal forms that have specific applications.",
+ 
+    "Matrices Basic Terms": "Essential concepts defining matrices, their structure, and basic classifications."
+ }
 
   // Define the canonical URL
   const baseUrl = 'https://www.learnmathclass.com'
@@ -34,6 +63,7 @@ export async function getStaticProps() {
       keyWords,
       canonicalUrl,
       lastModified,
+      definitionsCategoryExplanations
     }
   }
 }
@@ -42,7 +72,8 @@ export default function LinearAlgebraDefinitionsPage({
   linearAlgebraTermsList, 
   keyWords, 
   canonicalUrl,
-  lastModified 
+  lastModified ,
+  definitionsCategoryExplanations
 }) {
   const router = useRouter()
 
@@ -133,6 +164,9 @@ export default function LinearAlgebraDefinitionsPage({
         <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
          Linear Algebra Terms and Definitions
         </h1>
+        <CategoriesList data={linearAlgebraTermsList}
+        baseUrl='/linear-algebra/definitions'
+        categoryExplanations={definitionsCategoryExplanations}/>
         <FormulaAccordionWrapper
           groupByField={'category'}
           data={linearAlgebraTermsList}

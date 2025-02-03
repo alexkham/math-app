@@ -161,6 +161,7 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
+import SecondaryNavbar from '@/app/components/nav-bar/SecondaryNavbar'
 
 export async function getStaticProps() {
   const { default: algebraTermsList } = await import('@/app/api/db/definitions/algebra/algebraDefinitions')
@@ -296,6 +297,7 @@ export default function AlgebraDefinitionsPage({
         <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
           Algebra Terms and Definitions
         </h1>
+        {/* <SecondaryNavbar alignment='left' mode='siblings' title='Similar Pages'/> */}
         <CategoriesList data={algebraTermsList} 
         baseUrl='/algebra/definitions'
         categoryExplanations={definitionsCategoryExplanations}/>

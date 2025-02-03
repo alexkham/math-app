@@ -12,6 +12,8 @@ import MatrixAnimation from '@/app/components/matrices/MatrixAnimation';
 import MatrixExpressionVisualizer from '@/app/components/matrix-multiplication/MatrixExpressionVisualizer';
 import Matrix2 from '@/app/components/calculators/matrix/Matrix2';
 import MatrixCalculator2 from '@/app/components/calculators/matrix/MatrixCalculator2';
+import TreeStructure from '@/app/components/tree-structure/TreeItem';
+import TreeStructure2 from '@/app/components/tree-structure/TreeItem2';
 
 export default function Test6Page() {
 
@@ -333,12 +335,146 @@ const matrix = [
   [7, 8, 9],
 ];
 
+
+const matrixOperations = {
+  "Matrix Operations": {
+    "1. Unary Matrix Operations": {
+      "Transpose": {
+        explanation: "Flips the matrix over its diagonal, swapping rows and columns",
+        url: "#transpose"
+      },
+      "Conjugate": {
+        explanation: "Applies complex conjugation to each element of the matrix",
+        url: "#conjugate"
+      },
+      "Conjugate Transpose": {
+        explanation: "Takes the complex conjugate and then transposes the matrix",
+        url: "#conjugate-transpose"
+      },
+      "Negation": {
+        explanation: "Multiplies each matrix element by -1",
+        url: "#negation"
+      },
+      "Trace": {
+        explanation: "Sum of diagonal elements of a square matrix",
+        url: "#trace"
+      },
+      "Determinant": {
+        explanation: "Maps a square matrix to a scalar representing invertibility and volume scaling",
+        url: "#determinant"
+      },
+      "Inverse": {
+        explanation: "Produces a matrix such that A A^(-1) = I (only for invertible matrices)",
+        url: "#inverse"
+      },
+      "Adjugate": {
+        explanation: "Transpose of the cofactor matrix, used to find matrix inverses",
+        url: "#adjugate"
+      },
+      "Norm": {
+        explanation: "Measures the 'size' or 'magnitude' of a matrix",
+        url: "#norm"
+      },
+      "Matrix Exponential": {
+        explanation: "Defined via a power series, important in differential equations",
+        url: "#matrix-exponential"
+      },
+      "Rank": {
+        explanation: "The dimension of the row or column space, indicating linearly independent rows/columns",
+        url: "#rank"
+      },
+      "Pseudo-Inverse": {
+        explanation: "Generalization of the inverse for non-square or singular matrices",
+        url: "#pseudo-inverse"
+      }
+    },
+    "2. Binary Matrix Operations": {
+      "Matrix Addition": {
+        explanation: "Adds corresponding elements of matrices of the same size",
+        url: "#matrix-addition"
+      },
+      "Matrix Subtraction": {
+        explanation: "Subtracts corresponding elements of matrices of the same size",
+        url: "#matrix-subtraction"
+      },
+      "Scalar Multiplication": {
+        explanation: "Multiplies each element of matrix A by a scalar c",
+        url: "#scalar-multiplication"
+      },
+      "Scalar Addition": {
+        explanation: "Adds a scalar to each element of the matrix",
+        url: "#scalar-addition"
+      },
+      "Matrix Multiplication": {
+        explanation: "Combines rows of A with columns of B",
+        url: "#matrix-multiplication"
+      },
+      "Hadamard Product": {
+        explanation: "Multiplies corresponding elements of two matrices",
+        url: "#hadamard-product"
+      },
+      "Kronecker Product": {
+        explanation: "Tensor product that produces a large block matrix",
+        url: "#kronecker-product"
+      }
+    },
+    "3. Special Matrix Operations": {
+      "LU Decomposition": {
+        explanation: "Factorizes a matrix into lower triangular (L) and upper triangular (U) matrices",
+        url: "#lu-decomposition"
+      },
+      "QR Decomposition": {
+        explanation: "Decomposes a matrix into orthogonal (Q) and upper triangular (R) matrices",
+        url: "#qr-decomposition"
+      },
+      "Cholesky Decomposition": {
+        explanation: "Decomposes a positive-definite matrix into lower triangular matrix and its transpose",
+        url: "#cholesky-decomposition"
+      },
+      "Singular Value Decomposition": {
+        explanation: "Factorizes matrix into orthogonal matrices U, V and diagonal matrix Σ",
+        url: "#svd"
+      },
+      "Jordan Canonical Form": {
+        explanation: "Represents a matrix in block diagonal form to simplify linear transformations",
+        url: "#jordan-form"
+      },
+      "Diagonalization": {
+        explanation: "Expresses a matrix as a product of diagonal and invertible matrices if diagonalizable",
+        url: "#diagonalization"
+      },
+      "Projection": {
+        explanation: "Projects vectors onto a subspace using projection matrices",
+        url: "#projection"
+      },
+      "Eigenvalue Decomposition": {
+        explanation: "Decomposes matrix using eigenvalues (Λ) and eigenvectors (V)",
+        url: "#eigenvalue-decomposition"
+      }
+    }
+  }
+};
+
+
+
   return (
     <>
     <div>Test6Page</div>
 
     {/* <Sections sections={testSections}/>
      */}
+    <br/>
+    <br/>
+    <br/>
+    <TreeStructure data={matrixOperations} expandTopLevel={true} />
+    <br/>
+    <br/>
+    <br/>
+    <TreeStructure2
+     data={matrixOperations} 
+     expandTopLevel={true} 
+     viewMode="parsed" 
+    ></TreeStructure2>
     <br/>
    
     <br/>
