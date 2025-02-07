@@ -79,6 +79,7 @@ import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import TruthTable from '@/app/components/logic-calculator/truth-tables/TruthTable'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import '../../pages.css'
+import VerticalButtonGroup from '@/app/components/VerticalButtonGroup'
 
 export const metadata = {
   title: 'Truth Tables',
@@ -90,6 +91,16 @@ export const metadata = {
 }
 
 export default function TruthTablesPage({ keyWords, truthExplanations }) {
+
+  const menuItems=[
+
+    {
+      title: "Implications",
+      // icon: <Home />,
+      link: "/tables/truth-tables/implications"
+    },
+
+  ]
   return (
     <>
       <GenericNavbar/>
@@ -105,8 +116,18 @@ export default function TruthTablesPage({ keyWords, truthExplanations }) {
           panelWidth='300px'
           iconColor='white'
           panelBackgroundColor='#f2f2f2'/> 
-      <h1 className='title' style={{marginTop:'-30px', marginBottom:'-10px'}}>Truth Tables</h1>  
+      <h1 className='title' style={{marginTop:'-30px', marginBottom:'-10px'}}>Truth Tables</h1> 
+      <VerticalButtonGroup 
+      items={menuItems}
+      width="100px"       
+    //   backgroundColor ='#0070f3'
+    //   color = 'white'
+      isSticky={true}
+      verticalOffset='200px'
+      />
+      <div style={{marginLeft:'20px'}}>
       <TruthTable explanations={truthExplanations}/> 
+      </div>
       <br/> 
       <br/>
       <ScrollUpButton/> 
