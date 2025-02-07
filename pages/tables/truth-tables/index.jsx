@@ -144,7 +144,8 @@ export async function getStaticProps() {
       text: "XNOR returns true when inputs match - both true or both false. It acts as a logical equality checker between binary values. This behavior makes XNOR essential in comparison operations and error detection where we need to verify matching states. XNOR effectively tests for logical equivalence between inputs. It serves as the foundation for detecting bit parity and ensuring data consistency.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" }],
     }
-  }
+  };
+  
 
   return {
     props: {

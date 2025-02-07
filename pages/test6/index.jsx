@@ -14,6 +14,8 @@ import Matrix2 from '@/app/components/calculators/matrix/Matrix2';
 import MatrixCalculator2 from '@/app/components/calculators/matrix/MatrixCalculator2';
 import TreeStructure from '@/app/components/tree-structure/TreeItem';
 import TreeStructure2 from '@/app/components/tree-structure/TreeItem2';
+import MatrixGenerator from '@/app/components/matrices/MatrixGenerator';
+import CoOccurrenceMatrix from '@/app/components/matrices/CoOccurenceMatrix';
 
 export default function Test6Page() {
 
@@ -464,6 +466,14 @@ const matrixOperations = {
     {/* <Sections sections={testSections}/>
      */}
     <br/>
+    <br/>
+    <div style={{transform:'scale(0.9)'}}>
+    <CoOccurrenceMatrix/>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <MatrixGenerator/>
     <br/>
     <br/>
     <TreeStructure data={matrixOperations} expandTopLevel={true} />

@@ -157,10 +157,10 @@ export default function Test4Page() {
       
       
       const fiveSections = [
-        { id: '1', title: 'First', color: 'red', url: '/first' },
-        { id: '2', title: 'Second', color: 'blue', url: '/second' },
+        { id: '1', title: 'First', color: 'red', url: '/first' ,content:[{"title":'Some title', text: "Content text with **bold** $x^2$ formatting",}]},
+        { id: '2', title: 'Second', color: 'blue', url: '/second',content:[{"title":'Some title', text: "Content text with **bold** formatting",}] },
         { id: '3', title: 'Third', color: 'green', url: '/third' },
-        { id: '4', title: 'Fourth', color: 'yellow', url: '/fourth' },
+        { id: '4', title: 'Fourth', color: 'yellow', url: '/fourth',content:[{"title":'Some title', text: "Content text with **bold** formatting",}] },
         { id: '5', title: 'Fifth', color: 'purple', url: '/fifth' }
       ]; 
 
@@ -451,11 +451,11 @@ export default function Test4Page() {
     <br/>
     <br/>
     <br/>
-    <GenericCircularButtonGroup sections={threeSections} titleColor='white' />
+    <GenericCircularButtonGroup sections={threeSections} titleColor='black' />
     <br/>
     <br/>
     <br/>
-    <GenericCircularButtonGroup sections={fiveSections} titleColor='white' centerContent="Menu"/>
+    <GenericCircularButtonGroup sections={fiveSections} titleColor='black' centerContent="Menu"/>
     <br/>
     <br/>
 
