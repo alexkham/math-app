@@ -8,50 +8,50 @@ import DataWrapper from '@/app/components/generic-table/DataWrapper';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import VerticalButtonGroup from '@/app/components/VerticalButtonGroup';
 
-export default function MathSymbolsPage({ symbolsData, meta }) {
+export default function MathSymbolsPage({ symbolsData, meta,menuItems }) {
 
-    const menuItems = [
-        {
-          title: "Linear Algebra",
-          // icon: <Home />,
-          link: "/math-symbols/linear-algebra"
-        },
-        {
-            title: "Mathematical Logic",
-            // icon: <Home />,
-            link: "/math-symbols/math-logic"
-          },
-          {
-            title: "Calculus",
-            // icon: <Home />,
-            link: "/math-symbols/calculus"
-          },
-          {
-            title: "Trigonometry",
-            // icon: <Home />,
-            link: "/math-symbols/trigonometry"
-          },
-          {
-            title: "Set Theory",
-            // icon: <Home />,
-            link: "/math-symbols/set-theory"
-          },
+    // const menuItems = [
+    //     {
+    //       title: "Linear Algebra",
+    //       // icon: <Home />,
+    //       link: "/math-symbols/linear-algebra"
+    //     },
+    //     {
+    //         title: "Mathematical Logic",
+    //         // icon: <Home />,
+    //         link: "/math-symbols/math-logic"
+    //       },
+    //       {
+    //         title: "Calculus",
+    //         // icon: <Home />,
+    //         link: "/math-symbols/calculus"
+    //       },
+    //       {
+    //         title: "Trigonometry",
+    //         // icon: <Home />,
+    //         link: "/math-symbols/trigonometry"
+    //       },
+    //       {
+    //         title: "Set Theory",
+    //         // icon: <Home />,
+    //         link: "/math-symbols/set-theory"
+    //       },
 
-          {
-            title: "Combinatorics",
-            // icon: <Home />,
-            link: "/math-symbols/combinatorics"
-          },
-          {
-            title: "Probability",
-            // icon: <Home />,
-            link: "/math-symbols/probability"
-          },
-        // {
-        //   title: "Settings",
-        //   link: "/settings"  // Example without icon
-        // }
-      ];
+    //       {
+    //         title: "Combinatorics",
+    //         // icon: <Home />,
+    //         link: "/math-symbols/combinatorics"
+    //       },
+    //       {
+    //         title: "Probability",
+    //         // icon: <Home />,
+    //         link: "/math-symbols/probability"
+    //       },
+    //     // {
+    //     //   title: "Settings",
+    //     //   link: "/settings"  // Example without icon
+    //     // }
+    //   ];
       
   return (
     <>
@@ -113,6 +113,50 @@ export default function MathSymbolsPage({ symbolsData, meta }) {
 
 // Include data and metadata in getStaticProps
 export async function getStaticProps() {
+
+    const menuItems = [
+        {
+          title: "Linear Algebra",
+          // icon: <Home />,
+          link: "/math-symbols/linear-algebra"
+        },
+        {
+            title: "Mathematical Logic",
+            // icon: <Home />,
+            link: "/math-symbols/math-logic"
+          },
+          {
+            title: "Calculus",
+            // icon: <Home />,
+            link: "/math-symbols/calculus"
+          },
+          {
+            title: "Trigonometry",
+            // icon: <Home />,
+            link: "/math-symbols/trigonometry"
+          },
+          {
+            title: "Set Theory",
+            // icon: <Home />,
+            link: "/math-symbols/set-theory"
+          },
+
+          {
+            title: "Combinatorics",
+            // icon: <Home />,
+            link: "/math-symbols/combinatorics"
+          },
+          {
+            title: "Probability",
+            // icon: <Home />,
+            link: "/math-symbols/probability"
+          },
+        // {
+        //   title: "Settings",
+        //   link: "/settings"  // Example without icon
+        // }
+      ];
+      
  
   const meta = {
     title: 'Math Symbols | Mathematical Symbols Chart',
@@ -2518,6 +2562,7 @@ export async function getStaticProps() {
     props: {
       symbolsData,
       meta, // Pass SEO metadata
+      menuItems
     },
   };
 }

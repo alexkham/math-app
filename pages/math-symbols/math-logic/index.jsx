@@ -7,8 +7,9 @@ import Head from 'next/head';
 import '../../pages.css'
 import DataWrapper from '@/app/components/generic-table/DataWrapper';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
+import VerticalButtonGroup from '@/app/components/VerticalButtonGroup';
 
-export default function MathSymbolsLogicPage({ symbolsData, meta }) {
+export default function MathSymbolsLogicPage({ symbolsData, meta ,menuItems}) {
   return (
     <>
       <Head>
@@ -38,14 +39,25 @@ export default function MathSymbolsLogicPage({ symbolsData, meta }) {
       </h1>
       <br />
       <br />
+      <div style={{display:'flex',flexDirection:'row',alignItems: 'flex-start' }}>
+     
+      <VerticalButtonGroup 
+      items={menuItems}
+      width="130px"       
+    //   backgroundColor ='#0070f3'
+    //   color = 'white'
+      isSticky={true}
+      verticalOffset='200px'
+      />
       <div
         className="title"
         style={{
           margin: 'auto',
-          width: '80%',
+          width: '85%',
         }}
       >
         <DataWrapper data={symbolsData} />
+      </div>
       </div>
       <ScrollUpButton />
     </>
@@ -54,6 +66,50 @@ export default function MathSymbolsLogicPage({ symbolsData, meta }) {
 
 // Include data and metadata in getStaticProps
 export async function getStaticProps() {
+
+  const menuItems = [
+    {
+      title: "Linear Algebra",
+      // icon: <Home />,
+      link: "/math-symbols/linear-algebra"
+    },
+    // {
+    //     title: "Mathematical Logic",
+    //     // icon: <Home />,
+    //     link: "/math-symbols/math-logic"
+    //   },
+      {
+        title: "Calculus",
+        // icon: <Home />,
+        link: "/math-symbols/calculus"
+      },
+      {
+        title: "Trigonometry",
+        // icon: <Home />,
+        link: "/math-symbols/trigonometry"
+      },
+      {
+        title: "Set Theory",
+        // icon: <Home />,
+        link: "/math-symbols/set-theory"
+      },
+
+      {
+        title: "Combinatorics",
+        // icon: <Home />,
+        link: "/math-symbols/combinatorics"
+      },
+      {
+        title: "Probability",
+        // icon: <Home />,
+        link: "/math-symbols/probability"
+      },
+    // {
+    //   title: "Settings",
+    //   link: "/settings"  // Example without icon
+    // }
+  ];
+  
  
   const meta = {
     title: 'Mathematical Logic Symbols | Mathematicsl Logic Symbols Chart',
@@ -177,6 +233,7 @@ export async function getStaticProps() {
     props: {
       symbolsData,
       meta, // Pass SEO metadata
+      menuItems
     },
   };
 }
