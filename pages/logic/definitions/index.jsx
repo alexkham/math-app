@@ -8,6 +8,7 @@ import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionW
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
 
 export async function getStaticProps() {
   const { default: logicTermsList } = await import('@/app/api/db/definitions/logic/logicDefinitions')
@@ -132,6 +133,9 @@ export default function LogicDefinitionsPage({
         <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
           Logic Terms and Definitions
         </h1>
+        <CategoriesList
+        data={logicTermsList}
+        baseUrl='/logic/definitions'/>
         <FormulaAccordionWrapper
           groupByField={'category'}
           data={logicTermsList}

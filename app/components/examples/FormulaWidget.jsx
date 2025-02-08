@@ -168,7 +168,7 @@ const FormulaWidget = ({ data, title = data.name || '' ,type='Formula'}) => {
                   defaultChecked={index === 0}
                 />
                 <label htmlFor={`tab-${widgetId}-${index}`} className={styles.tabLabel}>
-                  {renderMathContent(field)}
+                  {renderMathContent(field.replaceAll('_',' '))}
                 </label>
                 <div className={styles.tabContent}>
                   {processContent(description)}

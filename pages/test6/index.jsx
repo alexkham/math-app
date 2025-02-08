@@ -16,6 +16,7 @@ import TreeStructure from '@/app/components/tree-structure/TreeItem';
 import TreeStructure2 from '@/app/components/tree-structure/TreeItem2';
 import MatrixGenerator from '@/app/components/matrices/MatrixGenerator';
 import CoOccurrenceMatrix from '@/app/components/matrices/CoOccurenceMatrix';
+import FourPanel from '@/app/components/page-components/lists/FourPanel';
 
 export default function Test6Page() {
 
@@ -457,7 +458,12 @@ const matrixOperations = {
   }
 };
 
-
+const fourWaysData = [
+  { title: "Section 1", content: "Content for section 1" },
+  { title: "Section 2", content: "Content for section 2" },
+  { title: "Section 3", content: "Content for section 3" },
+  { title: "Section 4", content: "Content for section 4" }
+];
 
   return (
     <>
@@ -465,6 +471,10 @@ const matrixOperations = {
 
     {/* <Sections sections={testSections}/>
      */}
+    <br/>
+    <br/>
+    <FourPanel data={fourWaysData} theme='sunset'/>
+    <br/>
     <br/>
     <br/>
     <div style={{transform:'scale(0.9)'}}>

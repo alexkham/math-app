@@ -2,34 +2,61 @@
     padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
-   }
-   
-   .content {
+  }
+  
+  /* .content {
     display: grid;
-    grid-template-columns: 400px 1fr;
-    gap: 3rem;
-   }
-   
-   .leftPanel {
+    grid-template-columns: 3fr 2fr;
+    gap: 10rem;
+  } */
+
+
+  /* .content {
+    display: grid;
+    grid-template-columns: 500px 700px;
+    justify-content: space-between;
+    gap: 0;
+  } */
+  
+  /* .leftPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 10rem;
+  } */
+
+  .content {
+    display: grid;
+    grid-template-columns: minmax(450px, 1fr) minmax(600px, 2fr);
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+
+  .leftPanel {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-   }
-   
-   .controls {
+    min-width: 450px;
+    margin-left: -20px;
+  }
+  
+  .controls {
     display: flex;
     gap: 1rem;
-   }
-   
-   .controls select {
+  }
+  
+  .controls select {
     padding: 0.5rem;
     border: 1px solid #e2e8f0;
     border-radius: 0.375rem;
-    min-width: 120px;
+    min-width: 150px;
     cursor: pointer;
-   }
-   
-   .matrixDisplay {
+    margin-right: 10px;
+  }
+  
+  .matrixDisplay {
     font-family: monospace;
     font-size: 1.25rem;
     display: flex;
@@ -39,102 +66,139 @@
     padding: 2rem;
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-   }
-   
-   .matrixContent {
+    margin-top: -20px;
+  }
+  
+  .matrixContent {
     display: flex;
     flex-direction: column;
     gap: 0.1rem;
-   }
-   
-   .matrixRow {
+  }
+  
+  .matrixRow {
     display: flex;
     gap: .15rem;
     height: 2rem;
     align-items: center;
-   }
-   
-   .cell {
+  }
+  
+  .cell {
     width: 2rem;
     height: 2rem;
-    text-align: right;
-    /* font-weight: 300; */
-    /* margin-right: 1px; */
-    /* background-color: red; */
     text-align: center;
-    text-justify: center;
     color: #2563eb;
-    /* padding-left: 5px; */
     background-color: #f2f2f2;
-    /* padding-top: 2px; */
     margin-top: 2px;
-   }
-   
-   .explanationSection {
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Highlighting styles */
+  .cell.highlighted {
+    background-color: #fef3c7;
+    border: 1px solid #fcd34d;
+    color: #92400e;
+    font-weight: 600;
+  }
+  
+  .cell.positive {
+    background-color: #dcfce7;
+    border: 1px solid #86efac;
+    color: #166534;
+  }
+  
+  .cell.negative {
+    background-color: #fee2e2;
+    border: 1px solid #fca5a5;
+    color: #991b1b;
+  }
+  
+  .cell.zero {
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    color: #4b5563;
+  }
+  
+  /* .explanationSection {
     background-color: #f8fafc;
     padding: 2rem;
     border-radius: 0.5rem;
     border: 1px solid #e2e8f0;
     margin-top: -4rem;
-   }
-   
-   .title {
+    margin-left: 150px;
+    
+  } */
+
+  .explanationSection {
+    background-color: #f8fafc;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e2e8f0;
+    margin-top: -4rem;
+    margin-left: 150px;
+    /* Remove margin-left: 150px; as we're using grid layout properly now */
+  }
+  
+  .title {
     font-size: 1.5rem;
     font-weight: 600;
     color: #1e293b;
     margin: 0 0 1.5rem;
     margin-left: 50px;
-   }
-   
-   .description {
+  }
+  
+  .description {
     color: #334155;
     line-height: 1.6;
     margin-bottom: 1.5rem;
-   }
-   
-   .description :global(.katex) {
+  }
+  
+  .description :global(.katex) {
     font-size: 1.1em;
-   }
-   
-   .properties h4 {
+  }
+  
+  .properties h4 {
     font-size: 1.1rem;
     color: #475569;
     margin: 0 0 1rem;
-   }
-   
-   .properties ul {
+  }
+  
+  .properties ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-   }
-   
-   .properties li {
+  }
+  
+  .properties li {
     padding: 0.5rem 0;
     color: #334155;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-   }
-   
-   .properties li:before {
+  }
+  
+  .properties li:before {
     content: "•";
     color: #3b82f6;
     font-weight: bold;
-   }
-   
-   .link {
+  }
+  
+  .link {
     display: inline-block;
     margin-top: 1.5rem;
     color: #2563eb;
     text-decoration: none;
     font-weight: 500;
-   }
-   
-   .link:hover {
+  }
+  
+  .link:hover {
     text-decoration: underline;
-   }
-   
-   .clearBtn {
+  }
+  
+  .clearBtn {
     padding: 0.5rem 1rem;
     background-color: #dc2626;
     color: white;
@@ -142,8 +206,227 @@
     border-radius: 0.375rem;
     cursor: pointer;
     transition: background-color 0.2s;
-   }
-   
-   .clearBtn:hover {
+    margin-left: 20px;
+  }
+  
+  .clearBtn:hover {
     background-color: #b91c1c;
-   }
+  }
+
+
+
+
+  /* Add these new styles to your CSS */
+
+/* Base highlight classes for symmetric and skew-symmetric pairs */
+.cell.highlight-group-0 {
+    background-color: #dbeafe;
+    border: 1px solid #93c5fd;
+    color: #1e40af;
+  }
+  
+  .cell.highlight-group-1 {
+    background-color: #dcfce7;
+    border: 1px solid #86efac;
+    color: #166534;
+  }
+  
+  .cell.highlight-group-2 {
+    background-color: #fef3c7;
+    border: 1px solid #fcd34d;
+    color: #92400e;
+  }
+  
+  .cell.highlight-group-3 {
+    background-color: #fbcfe8;
+    border: 1px solid #f9a8d4;
+    color: #831843;
+  }
+  
+  .cell.highlight-group-4 {
+    background-color: #e0e7ff;
+    border: 1px solid #a5b4fc;
+    color: #3730a3;
+  }
+  
+  /* Keep your existing highlight class for other matrix types */
+  .cell.highlighted {
+    background-color: #fef3c7;
+    border: 1px solid #fcd34d;
+    color: #92400e;
+    font-weight: 600;
+  }
+
+
+
+
+  .pair0 {
+    background-color: rgba(144, 202, 249, 0.5);
+    border: 1px solid rgba(66, 165, 245, 0.6);
+  }
+  
+  .pair1 {
+    background-color: rgba(129, 199, 132, 0.5);
+    border: 1px solid rgba(67, 160, 71, 0.6);
+  }
+  
+  .pair2 {
+    background-color: rgba(255, 183, 77, 0.5);
+    border: 1px solid rgba(255, 152, 0, 0.6);
+  }
+  
+  .pair3 {
+    background-color: rgba(240, 98, 146, 0.5);
+    border: 1px solid rgba(236, 64, 122, 0.6);
+  }
+  
+  .pair4 {
+    background-color: rgba(186, 104, 200, 0.5);
+    border: 1px solid rgba(171, 71, 188, 0.6);
+  }
+  
+  .highlightDiagonal {
+    background-color: rgba(253, 216, 53, 0.5);
+    border: 1px solid rgba(251, 192, 45, 0.6);
+  }
+  
+  .highlighted {
+    background-color: rgba(255, 235, 59, 0.3);
+    border: 1px solid rgba(251, 192, 45, 0.5);
+  }
+
+
+
+
+  .instructions {
+    display: block;
+    margin-bottom: -0.5rem;
+    padding: 0.5rem;
+    background-color: #e1effe;
+    border: 1px solid #93c5fd;
+    border-radius: 0.375rem;
+    color: #1e40af;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    line-height: 1rem;
+    margin-top: -40px;
+    width: 100%;
+    min-width: 600px;
+   
+  }
+  
+  .controlGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .controlGroup label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e40af;
+  }
+  
+  .controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    align-items: end;
+  }
+  
+  .controls select {
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    background-color: white;
+    color: #1e293b;
+    font-size: 0.875rem;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .controls select:hover {
+    border-color: #cbd5e1;
+  }
+  
+  .controls select:focus {
+    outline: none;
+    border-color: #93c5fd;
+    ring: 2px;
+    ring-color: #93c5fd;
+  }
+
+
+  .container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .content {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 3rem;
+  }
+  
+  .leftPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-height: 700px;
+    min-width: 450px;
+  }
+  
+  /* .instructions {
+    display: block;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #e1effe;
+    border: 1px solid #93c5fd;
+    border-radius: 0.375rem;
+    color: #1e40af;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    width: 400px;
+  } */
+  
+  /* .controlGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  } */
+  
+  /* .controlGroup label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #4b5563;
+  }
+   */
+  .controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    align-items: end;
+  }
+  
+  .controls select {
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    background-color: white;
+    color: #1e40af;
+    font-size: 0.875rem;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .controls select:hover {
+    border-color: #cbd5e1;
+  }
+  
+  .controls select:focus {
+    outline: none;
+    border-color: #93c5fd;
+    ring: 2px;
+    ring-color: #93c5fd;
+  }

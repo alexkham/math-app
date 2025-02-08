@@ -188,6 +188,7 @@
   position: relative;
   z-index: 1;
   font-size: 0.9rem;
+  text-transform: capitalize;
 }
 
 .tabLabel:hover {
