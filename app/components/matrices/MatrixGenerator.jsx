@@ -1800,7 +1800,7 @@ const MatrixGenerator = ({ explanations = defaultExplanations }) => {
           <span className={styles.instructions}>
             Select a matrix size and type to see different matrix structures. 
             The highlighted elements show the special characteristics of each matrix type.
-             Click 'Clear' to reset  the current matrix.
+             Click  `&apos;`Clear`&apos;` to reset  the current matrix.
           </span>
   
           <div className={styles.controls}>
