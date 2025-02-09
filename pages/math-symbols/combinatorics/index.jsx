@@ -28,7 +28,7 @@ export default function MathSymbolsCombinatoricsPage({ symbolsData, meta,menuIte
       <Breadcrumb />
       <OperaSidebar
         side="right"
-        topOffset="65px"
+        // topOffset="65px"
         sidebarWidth="45px"
         panelWidth="300px"
         iconColor="white"
