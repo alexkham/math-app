@@ -142,7 +142,7 @@ export default function RootCalculatorPage(props) {  // Changed to receive props
       <Breadcrumb/>
       <OperaSidebar
         side='right'
-        topOffset='65px'
+        // topOffset='65px'
         sidebarWidth='45px'
         panelWidth='300px'
         iconColor='white'

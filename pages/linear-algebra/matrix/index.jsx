@@ -352,53 +352,13 @@ These foundational features play crucial roles across linear algebra, connecting
                 `Help understand matrix transformations`,
             ]}
             />,
-        `Also need to mention that those classifications are not absolute and mutually exclusive.Often times happens that very same matrix may belong to different categories in different breakdowns simultaneously which creates very interesting combinations of properties and behaviors.This poses great challenge and gives a taste for further deeper studies of square matrices.  `
+        `Also need to mention that those classifications are not absolute and mutually exclusive.Often times happens that very same matrix may belong to different categories in different breakdowns simultaneously which creates very interesting combinations of properties and behaviors.This poses great challenge and gives a taste for further deeper studies of square matrices.To learn more about different types of square matrices and reciprocal relations between them [visit this page](!/linear-algebra/matrix/types).   `
         ]
         }
        ];
 
 
-      // const sectionsContent = [
-       
-      //   {
-      //     id: "definition", 
-      //     title: "Definition of a Matrix",
-      //     link:`/linear-algebra`,
-      //     content: "A matrix is [defined](!/algebra/definitions) as a rectangular arrangement of elements consisting of m rows and n columns, denoted as a matrix of order m × n. The convention is to always list the number of rows first, followed by the number of columns."
-      //   },
-      //   {
-      //     id: "notation",
-      //     title: "Matrix Notation and Conventions", 
-      //     content: "When working with matrices, certain conventions must be followed: Matrices are enclosed in curved or square brackets. Curly brackets and straight lines are not permitted. Commas are generally not used within matrices, except for single-row matrices to enhance readability. Matrices are typically labeled with uppercase letters, while individual elements within the matrix are denoted with lowercase letters and two indices."
-      //   },
-      //   {
-      //     id: "indexing",
-      //     title: "Element Indexing",
-      //     content: "Each element in a matrix is identified by two indices: i represents the row number, j represents the column number. For example, in matrix A, the element A12 refers to the element in the first row and second column, while A21 refers to the second row and first column."
-      //   },
-      //   {
-      //     id: "representation",
-      //     title: "General Matrix Representation",
-      //     content: "A general matrix can be represented as follows: Order: m × n, Elements: aij where i ranges from 1 to m and j ranges from 1 to n. This notation helps in identifying the position of each element within the matrix."
-      //   },
-      //   {
-      //     id: "groups",
-      //     title: "Matrix Groups and Fields",
-      //     content: "When discussing matrices, it is important to specify the group from which the elements are drawn. Commonly, this group is a field, denoted as F. The notation for a matrix can be expressed as: Fm × n - indicating the order of the matrix and the field of elements. Examples include R2 × 4 for real numbers and Z3 × 4 for integers."
-      //   },
-      //   {
-      //     id: "special",
-      //     title: "Special Cases of Matrices",
-      //     content: "It is crucial to differentiate between matrices and numbers, especially in the case of 1 × 1 matrices. A 1 × 1 matrix is not equivalent to a single number; it is a distinct mathematical structure."
-      //   }
-      //  ]
-
-
-       const list=['Returns 0 if the function is successfully registered, non-zero if it fails'
-        ,
-        '**Two**',
-        '**Three**'
-       ]
+   
     
 
   return (
@@ -410,7 +370,7 @@ These foundational features play crucial roles across linear algebra, connecting
     <br/>
      <OperaSidebar 
            side='right'
-           topOffset='55px' 
+          //  topOffset='55px' 
            sidebarWidth='45px'
            panelWidth='300px'
            iconColor='white'

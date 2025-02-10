@@ -477,13 +477,13 @@ const fourWaysData = [
     <br/>
     <br/>
     <br/>
-    <div style={{transform:'scale(0.9)'}}>
+    <div style={{transform:'scale(0.8)'}}>
     <CoOccurrenceMatrix/>
     </div>
     <br/>
     <br/>
     <br/>
-    <MatrixGenerator/>
+    {/* <MatrixGenerator/> */}
     <br/>
     <br/>
     <TreeStructure data={matrixOperations} expandTopLevel={true} />
@@ -506,7 +506,7 @@ const fourWaysData = [
     <Matrix matrix={matrix}/> */}
     <br/>
     <br/>
-   <MatrixCalculator/>
+   {/* <MatrixCalculator/> */}
     <br/>
     <br/>
     <br/>
@@ -551,6 +551,7 @@ const fourWaysData = [
     math={true}/>
     <br/>
     <br/>
+    <h1>Math List</h1>
     <MyList 
   data={[
     {item: 'First item', math: 'Here is equation $$x^2$$'},

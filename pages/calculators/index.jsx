@@ -119,7 +119,7 @@ export default function ConvertersPage() {
     <br/>
     <OperaSidebar 
    side='right'
-   topOffset='65px' 
+  //  topOffset='65px' 
     sidebarWidth='45px'
      panelWidth='300px'
     

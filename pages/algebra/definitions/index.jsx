@@ -286,7 +286,7 @@ export default function AlgebraDefinitionsPage({
       <Breadcrumb />
       <OperaSidebar
         side='right'
-        topOffset='55px'
+        // topOffset='55px'
         sidebarWidth='45px'
         panelWidth='300px'
         iconColor='white'
