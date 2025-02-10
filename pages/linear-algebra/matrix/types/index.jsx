@@ -117,13 +117,21 @@ export default function MatrixTypesPage({
                 key={1}/>
             ]
         },
+        // {
+        //     id: `zero`,
+        //     title: `Zero Matrix`,
+        //     content: [
+        //         `Matrix where $a_{ij} = 0$ for all $i,j$ $ \\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`,
+        //         <MyList data={zeroRelationships}
+        //         key={2}/>
+        //     ]
+        // },
         {
-            id: `zero`,
-            title: `Zero Matrix`,
+            id: 'zero',
+            title: 'Zero Matrix',
             content: [
                 `Matrix where $a_{ij} = 0$ for all $i,j$ $ \\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`,
-                <MyList data={zeroRelationships}
-                key={2}/>
+                <MyList data={zeroRelationships} key={2}/>
             ]
         },
         {
