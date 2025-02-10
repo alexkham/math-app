@@ -416,7 +416,7 @@ const cards = [
     <div>Test3Page</div>
     <br></br>
     <br></br>
-    {/* <SectionTableOfContents sections={testSections}/> */}
+    <SectionTableOfContents sections={testSections}/>
     <br/>
     <br/>
     <br/>

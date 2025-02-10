@@ -10,6 +10,7 @@ import { SectionIcon } from 'lucide-react';
 import Sections from '@/app/components/page-components/section/Sections';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import IntroSection from '@/app/components/page-components/section/IntroContentSection';
+import trigonometryTermsList from '@/app/api/db/definitions/trigonometry/trigonometryDefinitions';
 
 export default function TrigonometryPage() {
   
@@ -27,6 +28,24 @@ export default function TrigonometryPage() {
         key={"formula-widget"}
          formulaData={trigonometryFormulaList}
          moreFormulasLink='/trigonometry/formulas'
+        //  title='See them all'
+          />,
+   
+    ]
+      
+    },
+    {
+      id: 'definitions',
+      title: 'Trigonometry Terms and Definitions',
+      content:"Explore ",
+      content: [
+        'Explore Trigonometry formulas with explanations and examples',
+        " ",
+        <VerticalScrollingFormulaWidget 
+        key={"definitons-widget"}
+         formulaData={trigonometryTermsList}
+         moreFormulasLink='/trigonometry/definitions'
+         type='definition'
         //  title='See them all'
           />,
    

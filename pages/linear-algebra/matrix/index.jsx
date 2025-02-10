@@ -353,7 +353,14 @@ These foundational features play crucial roles across linear algebra, connecting
             ]}
             />,
         `Also need to mention that those classifications are not absolute and mutually exclusive.Often times happens that very same matrix may belong to different categories in different breakdowns simultaneously which creates very interesting combinations of properties and behaviors.This poses great challenge and gives a taste for further deeper studies of square matrices.To learn more about different types of square matrices and reciprocal relations between them [visit this page](!/linear-algebra/matrix/types).   `
-        ]
+        ],
+        // subsections:[
+        //   {
+        //     id:'reciprocal',
+        //     title:'Reciprocal Relations between different types',
+        //     link:'/linear-algebra/matrix/types'
+        //   }
+        // ]
         }
        ];
 
