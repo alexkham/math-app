@@ -103,7 +103,7 @@ const Sections = ({ sections,leftMargin='220px' }) => {
 
 
  return (
-   <div className={styles.sectionsContainer} style={{marginLeft:leftMargin}} >
+   <div className={styles.sectionsContainer} style={{marginLeft:leftMargin}} suppressHydrationWarning={true} >
      {flattenedSections.map((section, index) => (
        <section key={section.id} id={section.id} className={styles.section}>
          <div className={styles.sectionContent}>
