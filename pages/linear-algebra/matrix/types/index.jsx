@@ -121,7 +121,7 @@ export default function MatrixTypesPage({
             id: `zero`,
             title: `Zero Matrix`,
             content: [
-                `Matrix where $a_{ij} = 0$ for all $i,j$ $ \\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`,
+                `Matrix where $a_{ij} = 0$ for all $i,j$ $\\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`,
                 <MyList data={zeroRelationships}
                 key={2}/>
             ]
@@ -139,7 +139,7 @@ export default function MatrixTypesPage({
             id: `diagonal`,
             title: `Diagonal Matrix`,
             content: [
-                `Matrix where $a_{ij} = 0$ for all $i \\neq j$ $ \\begin{pmatrix} d_1 & 0 & \\cdots & 0 \\\\ 0 & d_2 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & d_n \\end{pmatrix} $`,
+                `Matrix where $a_{ij} = 0$ for all $i \\neq j$ $\\begin{pmatrix} d_1 & 0 & \\cdots & 0 \\\\ 0 & d_2 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & d_n \\end{pmatrix} $`,
                 <MyList data={diagonalRelationships}
                 key={4}/>
             ]
@@ -148,7 +148,7 @@ export default function MatrixTypesPage({
             id: `symmetric`,
             title: `Symmetric Matrix`,
             content: [
-                `Matrix where $a_{ij} = a_{ji}$ for all $i,j$ $ \\begin{pmatrix} a_{11} & a_{12} & \\cdots & a_{1n} \\\\ a_{12} & a_{22} & \\cdots & a_{2n} \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ a_{1n} & a_{2n} & \\cdots & a_{nn} \\end{pmatrix} $`,
+                `Matrix where $a_{ij} = a_{ji}$ for all $i,j$ $\\begin{pmatrix} a_{11} & a_{12} & \\cdots & a_{1n} \\\\ a_{12} & a_{22} & \\cdots & a_{2n} \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ a_{1n} & a_{2n} & \\cdots & a_{nn} \\end{pmatrix} $`,
                 <MyList data={symmetricRelationships}
                 key={5}/>
             ]
@@ -157,7 +157,7 @@ export default function MatrixTypesPage({
             id: `skew-symmetric`,
             title: `Skew-Symmetric Matrix`,
             content: [
-                `Matrix where $a_{ij} = -a_{ji}$ for all $i,j$ $ \\begin{pmatrix} 0 & a_{12} & \\cdots & a_{1n} \\\\ -a_{12} & 0 & \\cdots & a_{2n} \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ -a_{1n} & -a_{2n} & \\cdots & 0 \\end{pmatrix} $`,
+                `Matrix where $a_{ij} = -a_{ji}$ for all $i,j$ $\\begin{pmatrix} 0 & a_{12} & \\cdots & a_{1n} \\\\ -a_{12} & 0 & \\cdots & a_{2n} \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ -a_{1n} & -a_{2n} & \\cdots & 0 \\end{pmatrix} $`,
                 <MyList data={skewSymmetricRelationships}
                 key={6}/>
             ]
@@ -166,7 +166,7 @@ export default function MatrixTypesPage({
             id: `upper_triangular`,
             title: `Upper Triangular Matrix`,
             content: [
-                `Matrix where $a_{ij} = 0$ for all $i > j$ $ \\begin{pmatrix} u_{11} & u_{12} & \\cdots & u_{1n} \\\\ 0 & u_{22} & \\cdots & u_{2n} \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & u_{nn} \\end{pmatrix} $`,
+                `Matrix where $a_{ij} = 0$ for all $i > j$ $\\begin{pmatrix} u_{11} & u_{12} & \\cdots & u_{1n} \\\\ 0 & u_{22} & \\cdots & u_{2n} \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & u_{nn} \\end{pmatrix} $`,
                 <MyList data={upperTriangularRelationships}
                 key={7}/>
             ]
@@ -175,7 +175,7 @@ export default function MatrixTypesPage({
             id: `lower_triangular`,
             title: `Lower Triangular Matrix`,
             content: [
-                `Matrix where $a_{ij} = 0$ for all $i < j$ $ \\begin{pmatrix} l_{11} & 0 & \\cdots & 0 \\\\ l_{21} & l_{22} & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ l_{n1} & l_{n2} & \\cdots & l_{nn} \\end{pmatrix} $`,
+                `Matrix where $a_{ij} = 0$ for all $i < j$ $\\begin{pmatrix} l_{11} & 0 & \\cdots & 0 \\\\ l_{21} & l_{22} & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ l_{n1} & l_{n2} & \\cdots & l_{nn} \\end{pmatrix} $`,
                 <MyList data={lowerTriangularRelationships}
                 key={8}/>
             ]
