@@ -18,7 +18,9 @@ export default function MatrixTypesPage({
     symmetricRelationships,
     skewSymmetricRelationships,
     upperTriangularRelationships ,
-    lowerTriangularRelationships}) {
+    lowerTriangularRelationships,
+    zeroMatrix
+}) {
 
    
 
@@ -117,24 +119,17 @@ export default function MatrixTypesPage({
                 key={1}/>
             ]
         },
-        // {
-        //     id: `zero`,
-        //     title: `Zero Matrix`,
-        //     content: [
-        //         `Matrix where $a_{ij} = 0$ for all $i,j$ $ \\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`,
-        //         <MyList data={zeroRelationships}
-        //         key={2}/>
-        //     ]
-        // },
         {
-            id: 'zero',
-            title: 'Zero Matrix',
+            id: `zero`,
+            title: `Zero Matrix`,
             content: [
-                `Matrix where $a_{ij} = 0$ for all $i,j$`,
-                ` $ \\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`,
-                <MyList data={zeroRelationships} key={2}/>
+                // `Matrix where $a_{ij} = 0$ for all $i,j$ $ \\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`,
+                zeroMatrix,
+                <MyList data={zeroRelationships}
+                key={2}/>
             ]
         },
+     
         {
             id: `scalar`,
             title: `Scalar Matrix`,
@@ -260,6 +255,8 @@ export default function MatrixTypesPage({
 
 export async function getStaticProps(){
 
+    const zeroMatrix=`Matrix where $a_{ij} = 0$ for all $i,j$ $ \\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`
+
     const identityRelationships = [
         `✅ **Always Identity**: The identity matrix is itself by definition - this is not a relationship but a self-evident fact since $I$ consists of 1s on diagonal and 0s elsewhere`,
         `❌ **Can never be Zero**: The identity matrix must have 1s on its diagonal, while the zero matrix must have all elements as 0, making it impossible for an identity matrix to be a zero matrix`,
@@ -355,7 +352,8 @@ export async function getStaticProps(){
             symmetricRelationships,
             skewSymmetricRelationships,
             upperTriangularRelationships ,
-            lowerTriangularRelationships
+            lowerTriangularRelationships,
+            zeroMatrix
 
 
         }
