@@ -124,9 +124,38 @@ export default function MatrixTypesPage({
             id: `zero`,
             title: `Zero Matrix`,
             content: [
-                // `Matrix where $a_{ij} = 0$ for all $i,j$ $ \\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`,
+                `Matrix where $a_{ij} = 0$ for all $i,j$ $ \\\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`,
             //    <MathContainer content={zeroMatrix} key={1}/>,
-            `$ \\begin{pmatrix} 1 & 0 & \\cdots & 0 \\\\ 0 & 1 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 1 \\end{pmatrix} $`,
+            // `$\\begin{pmatrix} 1 & 0 & \\cdots & 0 \\\\ 0 & 1 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 1 \\end{pmatrix}$`,
+//             `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150">
+//   <!-- Parentheses -->
+//   <path d="M 8 5 Q 6 15 8 25" fill="none" stroke="black" stroke-width="0.3"/>
+//   <path d="M 32 5 Q 34 15 32 25" fill="none" stroke="black" stroke-width="0.3"/>
+  
+//   <!-- First row -->
+//   <text x="12" y="10" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
+//   <text x="18" y="10" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
+//   <text x="24" y="10" font-family="Times New Roman" font-size="4" text-anchor="middle">⋯</text>
+//   <text x="28" y="10" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
+  
+//   <!-- Second row -->
+//   <text x="12" y="15" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
+//   <text x="18" y="15" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
+//   <text x="24" y="15" font-family="Times New Roman" font-size="4" text-anchor="middle">⋯</text>
+//   <text x="28" y="15" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
+  
+//   <!-- Vertical dots -->
+//   <text x="12" y="20" font-family="Times New Roman" font-size="4" text-anchor="middle">⋮</text>
+//   <text x="18" y="20" font-family="Times New Roman" font-size="4" text-anchor="middle">⋮</text>
+//   <text x="24" y="20" font-family="Times New Roman" font-size="4" text-anchor="middle">⋱</text>
+//   <text x="28" y="20" font-family="Times New Roman" font-size="4" text-anchor="middle">⋮</text>
+  
+//   <!-- Last row -->
+//   <text x="12" y="25" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
+//   <text x="18" y="25" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
+//   <text x="24" y="25" font-family="Times New Roman" font-size="4" text-anchor="middle">⋯</text>
+//   <text x="28" y="25" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
+// </svg>`,
                 <MyList data={zeroRelationships}
                 key={2}/>
             ]
