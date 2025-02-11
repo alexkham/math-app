@@ -124,7 +124,9 @@ export default function MatrixTypesPage({
             id: `zero`,
             title: `Zero Matrix`,
             content: [
-                `Matrix where $a_{ij} = 0$ for all $i,j$ $ \\\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`,
+                // `Matrix where $a_{ij} = 0$ for all $i,j$ ${String.raw`\begin{pmatrix} 0 & 0 & \cdots & 0 \\ 0 & 0 & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & 0 \end{pmatrix}`}`
+                `Matrix where $a_{ij} = 0$ for all $i,j$ $ \\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`,
+                <span style={{ display: "none" }} key="dummy"></span> ,
             //    <MathContainer content={zeroMatrix} key={1}/>,
             // `$\\begin{pmatrix} 1 & 0 & \\cdots & 0 \\\\ 0 & 1 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 1 \\end{pmatrix}$`,
 //             `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150">
