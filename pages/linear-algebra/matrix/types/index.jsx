@@ -9,6 +9,7 @@ import Explanations from '@/app/components/Explanations'
 import { processContent } from '@/app/utils/contentProcessor'
 import Sections from '@/app/components/page-components/section/Sections'
 import MyList from '@/app/components/page-components/lists/MyList'
+import MathContainer from '@/app/components/math-content/MathContainer'
 
 export default function MatrixTypesPage({ 
     identityRelationships,
@@ -124,7 +125,7 @@ export default function MatrixTypesPage({
             title: `Zero Matrix`,
             content: [
                 // `Matrix where $a_{ij} = 0$ for all $i,j$ $ \\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`,
-                zeroMatrix,
+               <MathContainer content={zeroMatrix}/>,
                 <MyList data={zeroRelationships}
                 key={2}/>
             ]
@@ -232,7 +233,7 @@ export default function MatrixTypesPage({
     right: '70px',
     top: '160px'  // This aligns with the matrix header level
   }}>
-   {processContent(`This table shows reciprocal relations between \n different types of square matrices.\n Click on Types of matricfes to see detailed \n explanations`)}
+   {processContent(`This table shows reciprocal \n relations between different types of \nsquare matrices.\n Click on Types of matricfes \nto see detailed explanations`)}
   </span>      
 </div>
 <br/>
