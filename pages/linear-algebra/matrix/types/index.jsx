@@ -125,7 +125,7 @@ export default function MatrixTypesPage({
             id: `identity`,
             title: `Identity Matrix`,
             content: [
-                `Matrix where $a_{ij} = 1$ if $i = j$ and $a_{ij} = 0$ if $i \\neq j$ $ \\begin{pmatrix} 1 & 0 & \\cdots & 0 \\\\ 0 & 1 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 1 \\end{pmatrix} $`,
+                `Matrix where $a_{ij} = 1$ if $i = j$ and $a_{ij} = 0$ if $i \\neq j$ \n $ \\begin{pmatrix} 1 & 0 & \\cdots & 0 \\\\ 0 & 1 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 1 \\end{pmatrix} $`,
                 <MyList data={identityRelationships}
                 key={1}/>
             ]
@@ -178,7 +178,7 @@ export default function MatrixTypesPage({
             id: `scalar`,
             title: `Scalar Matrix`,
             content: [
-                `Matrix where $a_{ij} = k$ if $i = j$ and $a_{ij} = 0$ if $i \\neq j$ $ \\begin{pmatrix} k & 0 & \\cdots & 0 \\\\ 0 & k & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & k \\end{pmatrix} $`,
+                `Matrix where $a_{ij} = k$ if $i = j$ and $a_{ij} = 0$ if $i \\neq j$ \n $ \\begin{pmatrix} k & 0 & \\cdots & 0 \\\\ 0 & k & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & k \\end{pmatrix} $`,
                 <MyList  data={scalarRelationships}
                 key={3}/>
             ]
@@ -187,7 +187,7 @@ export default function MatrixTypesPage({
             id: `diagonal`,
             title: `Diagonal Matrix`,
             content: [
-                `Matrix where $a_{ij} = 0$ for all $i \\neq j$ $\\begin{pmatrix} d_1 & 0 & \\cdots & 0 \\\\ 0 & d_2 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & d_n \\end{pmatrix} $`,
+                `Matrix where $a_{ij} = 0$ for all $i \\neq j$ \n $\\begin{pmatrix} d_1 & 0 & \\cdots & 0 \\\\ 0 & d_2 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & d_n \\end{pmatrix} $`,
                 <MyList data={diagonalRelationships}
                 key={4}/>
             ]
