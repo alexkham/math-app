@@ -126,8 +126,7 @@ export default function MatrixTypesPage({
             content: [
                 // `Matrix where $a_{ij} = 0$ for all $i,j$ $ \\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`,
             //    <MathContainer content={zeroMatrix} key={1}/>,
-           `Matrix where $a_{ij} = 0$ for all $i , j$`,
-          ` $ \\begin{pmatrix} 1 & 0 & \\cdots & 0 \\\\ 0 & 1 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 1 \\end{pmatrix} $`,
+            `Matrix where $a_{ij} = 1$ if $i = j$ and $a_{ij} = 0$ if $i \\neq j$ $ \\begin{pmatrix} 1 & 0 & \\cdots & 0 \\\\ 0 & 1 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 1 \\end{pmatrix} $`,
                 <MyList data={zeroRelationships}
                 key={2}/>
             ]
