@@ -473,6 +473,13 @@ const fourWaysData = [
      */}
     <br/>
     <br/>
+  <div>
+  <div style={{position: 'relative', paddingBottom: '56.25%'}}> <iframe style={{width: '50%', height: '50%', position: 'absolute', left: 0, top: 0}} src="https://embed.app.guidde.com/playbooks/cGGvdWsZgi6v79w4ynWzmo" title="square matrix types generator" frameBorder={0} referrerPolicy="unsafe-url" allowFullScreen="true" allow="clipboard-write" sandbox="allow-popups allow-popups-to-escape-sandbox allow-scripts allow-forms allow-same-origin allow-presentation" /> </div>
+  <p style={{display: 'none'}} />
+</div>
+
+    <br/>
+    <br/>
     <FourPanel data={fourWaysData} theme='sunset'/>
     <br/>
     <br/>
