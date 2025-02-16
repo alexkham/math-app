@@ -177,6 +177,7 @@ As a foundational element of matrix algebra, the identity matrix is essential fo
               `**For a better overview of the relationships between different types of square matrices, visit this** [page](!/linear-algebra/matrix/types).`,
               `\nBeing square matrix with elements of the main diagonal equal to **1** and all the rest equal to **0**, **identity matrix** also qualifies for: `,
               `\n**Diagonal Matrix**: The identity matrix has elements aᵢⱼ = 0 for all i ≠ j and aᵢᵢ = 1, which fits the definition of diagonal matrix requiring all non-diagonal elements to be zero.
+              This [diagram](!/linear-algebra/matrix/types/diagonal-matrix#special_matrices) shows the exact nature of relations between diagonal and identity matrices (and other types ) visually.
 
 **Scalar Matrix**: The identity matrix has equal elements λ = 1 on its main diagonal and zeros elsewhere, matching the form λI of scalar matrices.
 
