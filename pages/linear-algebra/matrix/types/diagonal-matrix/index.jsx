@@ -236,7 +236,7 @@ Diagonal matrices are crucial in **eigenvalue decomposition**, where a matrix is
                   panelBackgroundColor='#f2f2f2'
                 /> 
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Identity Matrix</h1>
+    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Diagonal Matrix</h1>
 
       <SectionTableOfContents sections={diagonalSections}/>
       <br/>

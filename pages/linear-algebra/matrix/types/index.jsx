@@ -339,7 +339,8 @@ export async function getStaticProps(){
         `✅ **Always Diagonal**: By definition, all off-diagonal elements are 0`,
         `✅ **Is Symmetric**: Since $a_{ij} = a_{ji} = 0$ for all $i \\neq j$`,
         `❔ **May Be Skew-symmetric**: Only when all diagonal entries are 0 (zero matrix case)`,
-        `✅ **Is Upper/Lower Triangular**: All elements below and above diagonal are 0`
+        `✅ **Is Upper/Lower Triangular**: All elements below and above diagonal are 0`,
+        `\nRead more about [diagonal matrices](!/linear-algebra/matrix/types/diagonal-matrix).`
       ];
 
       const symmetricRelationships = [
