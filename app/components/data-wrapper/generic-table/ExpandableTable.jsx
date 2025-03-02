@@ -1,5 +1,4 @@
 
-
 import React, { useState } from 'react';
 import styles from './ExpandableTable.module.css';
 import { ChevronDown, ChevronRight } from 'lucide-react';
@@ -15,21 +14,18 @@ const ExpandableTable = ({
   const [activeTab, setActiveTab] = useState({});
   const [copiedStates, setCopiedStates] = useState({});
   
-  
   // Validate and sanitize input data
   const sanitizedData = data.map(row => ({
     id: row?.id || Math.random().toString(36).substr(2, 9),
     ...row
   }));
 
-  // Use included fields instead of excludedi
+  // Use included fields instead of excluded
   const mainFields = includedFields.length > 0 
     ? includedFields.filter(field => !['content', 'id'].includes(field))
     : Object.keys(sanitizedData[0] || {}).filter(key => !['content', 'id'].includes(key));
 
   const handleCopy = async (content, fieldName, rowId) => {
-    console.log(copiedStates);
-   
     if (!content) return;
     try {
       await navigator.clipboard.writeText(content);
@@ -52,6 +48,11 @@ const ExpandableTable = ({
   const toggleRow = (id) => {
     if (expandedRowId === id) {
       setExpandedRowId(null);
+      setActiveTab(prev => {
+        const newState = { ...prev };
+        delete newState[id];
+        return newState;
+      });
     } else {
       setExpandedRowId(id);
       const rowContent = sanitizedData.find(row => row.id === id)?.content;
@@ -64,19 +65,13 @@ const ExpandableTable = ({
     }
   };
 
-  const handleTabClick = (rowId, tab) => {
-    setActiveTab(prev => ({
-      ...prev,
-      [rowId]: tab
-    }));
-  };
-
   const isExpandable = (row) => {
     return row?.content != null;
   };
 
-  const shouldHaveTabs = (content) => {
-    return typeof content === 'object' && content !== null;
+  // New helper function to check if a content field should have a copy button
+  const shouldShowNestedCopyButton = (key) => {
+    return nestedCopyableFields.includes(key);
   };
 
   if (!sanitizedData.length || !mainFields.length) {
@@ -91,7 +86,7 @@ const ExpandableTable = ({
             <th className={styles.iconCell}></th>
             {mainFields.map((field) => (
               <th key={field} className={styles.headerCell}>
-                {processContent(field.replaceAll('_',' '))}
+                {processContent(field.replace(/_/g, ' '))}
               </th>
             ))}
           </tr>
@@ -128,7 +123,6 @@ const ExpandableTable = ({
                           onClick={() => handleCopy(row[field]?.toString(), field, row.id)}
                         >
                           {copiedStates[`${row.id}-${field}`] ? '✓' : 'Copy'}
-                          {/* {copy?'✓':'Copy'} */}
                         </button>
                       )}
                     </div>
@@ -138,14 +132,14 @@ const ExpandableTable = ({
               {isExpandable(row) && expandedRowId === row.id && (
                 <tr>
                   <td colSpan={mainFields.length + 1} className={styles.expandedContent}>
-                    {shouldHaveTabs(row.content) ? (
+                    {typeof row.content === 'object' && row.content !== null ? (
                       <div className={styles.tabContainer}>
                         <div className={styles.tabList}>
                           {Object.keys(row.content).map((tab) => (
                             <button
                               key={tab}
                               className={`${styles.tabButton} ${activeTab[row.id] === tab ? styles.activeTab : ''}`}
-                              onClick={() => handleTabClick(row.id, tab)}
+                              onClick={() => setActiveTab(prev => ({ ...prev, [row.id]: tab }))}
                             >
                               {processContent(tab)}
                             </button>
@@ -160,7 +154,7 @@ const ExpandableTable = ({
                               <div className={styles.contentValue}>
                                 <div className={styles.cellContent}>
                                   <span>{processContent(row.content[tab]?.toString() || '')}</span>
-                                  {nestedCopyableFields.includes(tab) && row.content[tab] && (
+                                  {shouldShowNestedCopyButton(tab) && row.content[tab] && (
                                     <button
                                       className={`${styles.copyButton} ${copiedStates[`${row.id}-${tab}`] ? styles.copied : ''}`}
                                       onClick={() => handleCopy(
@@ -182,7 +176,7 @@ const ExpandableTable = ({
                       <div className={styles.simpleContent}>
                         <div className={styles.cellContent}>
                           <span>{processContent(row.content?.toString() || '')}</span>
-                          {nestedCopyableFields.includes('content') && row.content && (
+                          {shouldShowNestedCopyButton('content') && row.content && (
                             <button
                               className={`${styles.copyButton} ${copiedStates[`${row.id}-content`] ? styles.copied : ''}`}
                               onClick={() => handleCopy(row.content.toString(), 'content', row.id)}

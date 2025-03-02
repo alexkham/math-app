@@ -19,7 +19,7 @@ export default function DiagonalMatrixPage() {
         id: "intro",
         title: "Introduction",
         content:`The **diagonal matrix** is one of fundamental types of **square matrix** where all elements outside the main diagonal are zero. This simple structure makes diagonal matrices particularly important in linear algebra computations and applications.
-        Diagonal matrices form a broader category that includes scalar matrices (where all diagonal entries are equal) and the identity matrix (where all diagonal entries are 1), while simultaneously qualifying as both upper and lower triangular matrices since all elements above and below the main diagonal are zero.
+        Diagonal matrices form a broader category that includes [scalar matrices](!/linear-algebra/matrix/types/scalar-matrix) (where all diagonal entries are equal) and the identity matrix (where all diagonal entries are 1), while simultaneously qualifying as both upper and lower triangular matrices since all elements above and below the main diagonal are zero.
 Diagonal matrices are crucial in **eigenvalue decomposition**, where a matrix is factored into its eigenvalues (which appear on the diagonal) and eigenvectors. They simplify many matrix operations - multiplication becomes element-wise on the diagonal, determinants are products of diagonal entries, and inverses (when they exist) are found by reciprocating each diagonal element.
 `
     }
@@ -56,7 +56,7 @@ Diagonal matrices are crucial in **eigenvalue decomposition**, where a matrix is
                 `\n**Zero Matrix**: Where all elements (including diagonal) are 0.
                 [Identity Matrix](!/linear-algebra/matrix/types/identity-matrix): Where all diagonal elements are **1** and other equal to **0**.
                 **Scalar Matrix**: When all diagonal elements are equal to some scalar λ and other equal to **0**.`,
-             
+                `<span id="diagram"></span>`,
                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 280">
     <!-- Diagonal Matrix (largest ellipse) -->
     <ellipse cx="175" cy="140" rx="154" ry="112" 

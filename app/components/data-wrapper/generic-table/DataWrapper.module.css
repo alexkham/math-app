@@ -1,0 +1,221 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 600px;
+    padding: 16px;
+    
+  }
+  
+  .topControls {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    gap: 6px;
+    flex-wrap: wrap;
+   
+  }
+  
+  .searchWrapper {
+    position: relative;
+    flex: 1;
+    max-width: 300px;
+    
+  }
+  
+  .searchBar {
+    padding: 8px 40px 8px 12px !important;
+    width: 100%  !important;
+    font-size: 16px  !important;
+    border: 1px solid #ccc   !important;
+    border-radius: 4px  !important;
+  }
+  
+  .clearSearchButton {
+    position: absolute;
+    top: 50%;
+    right: 1px;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    color: #aaa;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .clearSearchButton:hover {
+    color: #333;
+  }
+  
+  .controlButton {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .selectButton {
+    background-color:#2c5282;
+    color: white;
+    margin-left: 50px;
+  }
+  
+  .selectButton:hover {
+    background-color: #005bb5;
+  }
+  
+  .clearButton {
+    background-color: #e63946;
+    color: white;
+  }
+  
+  .clearButton:hover {
+    background-color: #b02234;
+  }
+  
+  .chevronButton {
+    display: flex  !important;
+    align-items: center  !important;
+    gap: 4px  !important;
+    background: none  !important;
+    border: solid 1px #b3b3b3;
+    font-size: 14px;
+    cursor: pointer;
+    color: #2c5282;
+    padding: 8px;
+  }
+  
+  .chevronButton:hover {
+    color: #005bb5;
+  }
+  
+  .sectionButtons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
+   display: none;
+  }
+  
+  .sectionButtons.show {
+    max-height: 500px;
+    display: flex;
+  }
+  
+  .sectionButtons.hide {
+    max-height: 0;
+  }
+  
+  .sectionButton {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .sectionButton.active {
+    background-color: #0070f3;
+    color: white;
+  }
+  
+  .sectionButton:hover {
+    background-color: #eaeaea;
+    color: gray;
+  }
+  
+  .sectionText {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .closeButton {
+    margin-left: 8px;
+    color: inherit;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  .closeButton:hover {
+    color: #ff4d4d;
+  }
+  
+  .tableWrapper {
+    margin-top: 16px;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  @media (max-width: 640px) {
+    
+    .topControls {
+      flex-wrap: wrap;
+    }
+  
+    .searchBar {
+      font-size: 14px;
+    }
+  
+    .controlButton {
+      font-size: 12px;
+      padding: 6px 8px;
+    }
+  
+    .chevronButton {
+      font-size: 12px;
+    }
+  
+    .sectionButton {
+      font-size: 12px;
+    }
+  }
+
+
+/* headers */
+
+
+/* Add these styles to your DataWrapper.module.css file */
+
+.sectionContainer {
+  margin-bottom: 1.5rem;
+}
+
+.sectionContainer:last-child {
+  margin-bottom: 0;
+}
+
+.sectionHeader {
+  background-color: #2c5282; /* Tasteful dark blue */
+  color: #ebf8ff; /* Light blue text for contrast */
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #2a4365;
+  border-bottom: none;
+  font-size: 1.25rem; /* Larger text */
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  margin-left: 0rem; /* Left margin as requested */
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  padding-left: 70px;
+}
+
+/* When no data is found */
+.noData {
+  padding: 2rem;
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+}
+  

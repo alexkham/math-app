@@ -125,7 +125,7 @@ export default function TruthTablesPage({ keyWords, truthExplanations }) {
       isSticky={true}
       verticalOffset='200px'
       />
-      <div style={{marginLeft:'20px'}}>
+      <div style={{marginLeft:'40px',transform:'scale(0.9)'}}>
       <TruthTable explanations={truthExplanations}/> 
       </div>
       <br/> 

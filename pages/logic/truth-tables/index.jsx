@@ -68,7 +68,7 @@ const TruthTablesPage = ({ operatorDescriptions }) => {
       <Breadcrumb/>
       <main className={styles.main}>
         <h1 className={styles.title}>Dynamic Truth Table Generator</h1>
-        <div style={{width:'97%'}}>
+        <div style={{transform:'scale(0.9)'}}>
         <LogicCalculator />
         </div>
         <div id="operator-explanations" className={styles.explanations}>
