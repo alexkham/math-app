@@ -54,6 +54,7 @@ const CustomConvert=()=>(
     { text: 'Exponent Calculator', url: '/calculators/exponent-calculator' },
     { text: 'Factoring Calculator', url: '/calculators/factoring-calculator' },
     { text: 'Polynomial Calculator', url: '/calculators/polynomial-calculator' },
+    { text: 'Logical Equivalence Validator', url: '/logic/propositional-logic/equivalence-validator' },
    
   ]},
   // { id: 3, icon: FileText, tooltip: 'Files', content: 'FilesComponent' },

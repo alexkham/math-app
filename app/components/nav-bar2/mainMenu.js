@@ -74,6 +74,7 @@ export const mainMenuStructure = [
             { label: 'Exponent Calculator', href: '/calculators/exponent-calculator' },
             { label: 'Factoring Calculator', href: '/calculators/factoring-calculator' },
             { label: 'Polynomial Calculator', href: '/calculators/polynomial-calculator' },
+            { label: 'Logical Equivalence Validator', href: '/logic/propositional-logic/equivalence-validator' },
             
           ]
         },
