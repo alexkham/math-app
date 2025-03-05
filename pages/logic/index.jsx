@@ -54,13 +54,19 @@ export async function getStaticProps() {
 `**Semantics**:
  How we determine truth values using truth tables, and identifying tautologies (always true) and contradictions (always false)`,
 `**Equivalences**:
- Laws like De Morgan's laws, distributive laws, and other equivalences that allow for simplification`,
+ Laws like De Morgan's laws, distributive laws, and other equivalences that allow for simplification.
+ However, not all logical equivalences are laws. Some are specific derivations that are still true but are not considered "fundamental" enough to be named as laws.
+ All laws are logical equivalences, but not all logical equivalences are laws.
+Laws are fundamental, while other equivalences may be derived, conditional, or context-dependent.
+ Learn more about [basic laws](!/logic/propositional-logic/laws) of propositional logic and other [equivalences](!/logic/propositional-logic/equivalences).`,
 `**Inference Rules**:
  Formal rules such as modus ponens, modus tollens, and others that allow for step-by-step proofs`,
 `**Normal Forms**:
  Standard ways to represent logical formulas, like conjunctive normal form (CNF) and disjunctive normal form (DNF)`,
 `**Proof Techniques**:
  Methods like proof by contradiction, direct proof, and truth tables to establish the validity of arguments`,
+ `**Truth tables**:
+ Truth tables are primarily used in sentential logic to determine the truth values of logical expressions based on their components.`,
 `**Applications**:
  Propositional logic is indeed widely used in computer science (for circuit design, program verification), artificial intelligence (knowledge representation, automated reasoning), philosophy (formal analysis of arguments), and many other fields`,
     ],

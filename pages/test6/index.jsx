@@ -19,6 +19,9 @@ import CoOccurrenceMatrix from '@/app/components/matrices/CoOccurenceMatrix';
 import FourPanel from '@/app/components/page-components/lists/FourPanel';
 import MatrixComparisonTable from '@/app/components/matrices/matrix-comparison/MatrixComparisonTable';
 import DataWrapper2 from '@/app/components/data-wrapper/generic-table/DataWrapper';
+import MathProofFlow from '@/app/components/examples/MathProofFlow';
+import LogicalEquivalenceChecker from '@/app/components/logic-calculator/EquivalenceChecker';
+import LogicalEquivalenceVerifier from '@/app/components/logic-calculator/EquivalenceChecker';
 
 export default function Test6Page() {
 
@@ -742,6 +745,17 @@ const config = {
 };
 
 
+const proofSteps = [
+  "Let's prove that the sum of the first n natural numbers is $\\frac{n(n+1)}{2}$.",
+  "We define $S_n = 1 + 2 + 3 + ... + n$ as the sum we want to find.",
+  "Observe that we can write $S_n$ in reverse order: $S_n = n + (n-1) + ... + 2 + 1$.",
+  "Adding these two equations: $$2S_n = (1+n) + (2+(n-1)) + ... + (n+1)$$",
+  "Each term in parentheses equals $(n+1)$, and there are $n$ such terms.",
+  "Therefore, $2S_n = n(n+1)$.",
+  "Dividing both sides by 2, we get $S_n = \\frac{n(n+1)}{2}$.",
+  "Thus, the sum of the first $n$ natural numbers is $\\frac{n(n+1)}{2}$. **Q.E.D.**"
+];
+
 
   return (
     <>
@@ -749,6 +763,19 @@ const config = {
 
     {/* <Sections sections={testSections}/>
      */}
+    <br/>
+    <br/>
+    <br/>
+    <LogicalEquivalenceVerifier/>
+    <br/>
+    <br/>
+    <div style={{width:'30%'}}>
+    <MathProofFlow steps={proofSteps} showNumbers={false}
+    theme='blueprint'
+     />
+    </div>
+    <br/>
+    <br/>
     <br/>
     <br/>
     <div style={{transform:'scale(0.9)'}}>

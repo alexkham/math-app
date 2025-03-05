@@ -11,6 +11,7 @@
   .title {
     text-align: center;
     margin-bottom: 20px;
+    text-transform: capitalize;
   }
   
   .list {
@@ -51,4 +52,9 @@
     height: 100vh;
     margin: 0;
     overflow-y: auto;
+    text-transform: capitalize;
+  }
+
+  .toc-item{
+    text-transform: capitalize;
   }
