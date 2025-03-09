@@ -166,6 +166,7 @@ const SectionTableOfContents = ({ sections = [], title = '' }) => {
           min-height: 45px;
           height: fit-content;
          
+         
         }
 
         .toc-link {
@@ -176,8 +177,8 @@ const SectionTableOfContents = ({ sections = [], title = '' }) => {
           text-decoration: none;
           color: #007bff;
           font-weight: 500;
-          font-size: 16px;
-          line-height: 1.4;
+          font-size: 15px;
+          line-height: 1.2;
           width: 100%;
           justify-content: center; 
         }
