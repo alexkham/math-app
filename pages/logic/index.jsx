@@ -325,7 +325,11 @@ export default function LogicPage({
        <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>
          Mathematical Logic
        </h1>
-       <SectionTableOfContents sections={logicSections}/>
+       <SectionTableOfContents sections={logicSections}
+       showSecondaryNav={true}
+       secondaryNavMode="children"  // or "siblings"
+       secondaryNavTitle="More in this Section" 
+       />
        <br/>
        <br/>
        <br/>
