@@ -43,6 +43,11 @@ export default function ImplicationsTruthTablesPage({ keyWords, implicationExpla
           // icon: <Home />,
           link: "/tables/truth-tables/tautologies"
         },
+        {
+          title: "Contradictions",
+          // icon: <Home />,
+          link: "/tables/truth-tables/contradictions"
+        },
     
        
       ]
@@ -88,28 +93,40 @@ export async function getStaticProps() {
   
   const implicationExplanations = {
     'P→Q': {
-      text: "Material implication P→Q (if P then Q) is defined as ¬P∨Q in propositional logic. Truth table follows from this definition: implication is false only when antecedent P is true and consequent Q is false. This reflects logical consequence - when premise holds, conclusion must follow. In terms of truth values: T→F = F, while all other combinations yield T. Formula: P→Q ≡ ¬P∨Q demonstrates equivalence between implication and disjunction with negated antecedent.",
-      links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" }]
+      text: "Material [implication](!/logic/propositional-logic/implication) P→Q (if P then Q) is defined as ¬P∨Q in propositional logic. Truth table follows from this definition: [implication](!/logic/propositional-logic/implication) is false only when antecedent P is true and consequent Q is false. This reflects logical consequence - when premise holds, conclusion must follow. In terms of truth values: T→F = F, while all other combinations yield T. Formula: P→Q ≡ ¬P∨Q demonstrates equivalence between [implication](!/logic/propositional-logic/implication) and disjunction with negated antecedent.",
+      links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
+        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+      ]
     },
     'Q→P': {
-      text: "Converse implication Q→P (if Q then P) reverses antecedent and consequent. While P→Q means &quot;if P then Q&quot;, Q→P expresses &quot;if Q then P&quot;. These are not logically equivalent as shown by different truth tables. The converse demonstrates implication&apos;s non-symmetry - a key principle in propositional logic. Formula: Q→P ≡ ¬Q∨P. Understanding converse helps identify logical fallacies in argumentation.",
-      links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" }]
+      text: "Converse [implication](!/logic/propositional-logic/implication) Q→P (if Q then P) reverses antecedent and consequent. While P→Q means &quot;if P then Q&quot;, Q→P expresses &quot;if Q then P&quot;. These are not logically equivalent as shown by different truth tables. The converse demonstrates [implication](!/logic/propositional-logic/implication)&apos;s asymmetry - a key principle in propositional logic. Formula: Q→P ≡ ¬Q∨P. Understanding converse helps identify logical fallacies in argumentation.",
+      links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
+        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+      ]
     },
     '¬P→Q': {
-      text: "Negated antecedent implication ¬P→Q means 'if not P then Q'. This form shows how negating premise affects logical relationship. Formula: ¬P→Q ≡ P∨Q (by material implication definition and double negation). Truth table reveals: when P is false (¬P is true), Q must be true for valid implication. Common in proof by contradiction where we assume negation of premise.",
-      links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" }]
+      text: "Negated antecedent [implication](!/logic/propositional-logic/implication) ¬P→Q means 'if not P then Q'. This form shows how negating premise affects logical relationship. Formula: ¬P→Q ≡ P∨Q (by material [implication](!/logic/propositional-logic/implication) definition and double negation). Truth table reveals: when P is false (¬P is true), Q must be true for valid [implication](!/logic/propositional-logic/implication). Common in proof by contradiction where we assume negation of premise.",
+      links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
+        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+      ]
     },
     'P→¬Q': {
-      text: "Negated consequent implication P→¬Q means &quot;if P then not Q&quot;. Formula: P→¬Q ≡ ¬P∨¬Q. Truth table shows this form&apos;s use in expressing negative conclusions from positive premises. Critical in exclusive relationships where one condition precludes another. Common in mathematical proofs showing mutual exclusivity.",
-      links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" }]
+      text: "Negated consequent [implication](!/logic/propositional-logic/implication) P→¬Q means &quot;if P then not Q&quot;. Formula: P→¬Q ≡ ¬P∨¬Q. Truth table shows this form&apos;s use in expressing negative conclusions from positive premises. Critical in exclusive relationships where one condition precludes another. Common in mathematical proofs showing mutual exclusivity.",
+      links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
+        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+      ]
     },
     '¬P→¬Q': {
-      text: "Double negation implication ¬P→¬Q means &quot;if not P then not Q&quot;. Formula: ¬P→¬Q ≡ P∨¬Q. Not equivalent to original P→Q, demonstrating how negation placement fundamentally alters logical relationships. Truth table shows distinct behavior from basic implication. Important in contrapositive reasoning and proof strategies.",
-      links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" }]
+      text: "Double negation [implication](!/logic/propositional-logic/implication) ¬P→¬Q means &quot;if not P then not Q&quot;. Formula: ¬P→¬Q ≡ P∨¬Q. Not equivalent to original P→Q, demonstrating how negation placement fundamentally alters logical relationships. Truth table shows distinct behavior from basic [implication](!/logic/propositional-logic/implication). Important in contrapositive reasoning and proof strategies.",
+      links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
+        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+      ]
     },
     '¬Q→¬P': {
-      text: "Contrapositive ¬Q→¬P is logically equivalent to original implication P→Q. Formula: ¬Q→¬P ≡ Q∨¬P ≡ ¬P∨Q ≡ P→Q. Truth table proves this equivalence. Fundamental theorem in propositional logic: statement is logically equivalent to its contrapositive. Essential in proof techniques where proving contrapositive is easier than direct proof.",
-      links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" }]
+      text: "Contrapositive ¬Q→¬P is logically equivalent to original [implication](!/logic/propositional-logic/implication) P→Q. Formula: ¬Q→¬P ≡ Q∨¬P ≡ ¬P∨Q ≡ P→Q. Truth table proves this equivalence. Fundamental theorem in propositional logic: statement is logically equivalent to its contrapositive. Essential in proof techniques where proving contrapositive is easier than direct proof.",
+      links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
+        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+      ]
     }
    };
 //    const implicationOperators = {

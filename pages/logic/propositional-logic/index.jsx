@@ -226,6 +226,7 @@ A proposition $𝑄$ is a logical consequence of $𝑃$ (denoted $𝑃⊨𝑄$) 
 \t\t\t\t\t\t$𝑃=$ "It is raining."
 \t\t\t\t\t\t$𝑄=$ "The ground is wet."
 If $𝑃$ is true, then $𝑄$ logically follows (assuming no weird circumstances).
+Read more about logical [implications](!/logic/propositional-logic/implication).
 ## 4. Independence:
 
 A proposition is independent of another if neither one logically determines the truth value of the other.

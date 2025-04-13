@@ -18,7 +18,7 @@ export const metadata = {
   }
 }
 
-export default function ImplicationsTruthTablesPage({ keyWords, tautologyExplanations ,menuItems}) {
+export default function TautologiesTruthTablesPage({ keyWords, tautologyExplanations ,menuItems}) {
 
      
 
@@ -175,6 +175,11 @@ export async function getStaticProps() {
       title: "Implications",
       // icon: <Home />,
       link: "/tables/truth-tables/implications"
+    },
+    {
+      title: "Contradictions",
+      // icon: <Home />,
+      link: "/tables/truth-tables/contradictions"
     },
 
   ]
