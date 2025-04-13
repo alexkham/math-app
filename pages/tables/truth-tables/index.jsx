@@ -127,7 +127,7 @@ export default function TruthTablesPage({ keyWords, truthExplanations }) {
           panelWidth='300px'
           iconColor='white'
           panelBackgroundColor='#f2f2f2'/> 
-      <h1 className='title' style={{marginTop:'-30px', marginBottom:'-10px'}}>Truth Tables</h1> 
+      <h1 className='title' style={{marginTop:'-30px', marginBottom:'-60px'}}>Truth Tables</h1> 
       <VerticalButtonGroup 
       items={menuItems}
       width="100px"       
@@ -136,7 +136,7 @@ export default function TruthTablesPage({ keyWords, truthExplanations }) {
       isSticky={true}
       verticalOffset='200px'
       />
-      <div style={{marginLeft:'20px',transform:'scale(0.95)',marginTop:'-80px'}}>
+      <div style={{marginLeft:'20px',transform:'scale(0.95)',marginTop:'-60px'}}>
       <TruthTable explanations={truthExplanations}/> 
       </div>
       <br/> 

@@ -138,7 +138,7 @@ export default function TautologiesTruthTablesPage({ keyWords, tautologyExplanat
           panelWidth='300px'
           iconColor='white'
           panelBackgroundColor='#f2f2f2'/> 
-      <h1 className='title' style={{marginTop:'-30px', marginBottom:'-10px'}}>Tautologies Truth Tables</h1> 
+      <h1 className='title' style={{marginTop:'-30px', marginBottom:'-60px'}}>Tautologies Truth Tables</h1> 
       <VerticalButtonGroup 
       items={menuItems}
       width="100px"       
@@ -148,7 +148,7 @@ export default function TautologiesTruthTablesPage({ keyWords, tautologyExplanat
       verticalOffset='200px'
       />
 
-      <div style={{marginLeft:'20px',transform:'scale(0.95)',marginTop:'-40px'}}>
+      <div style={{marginLeft:'20px',transform:'scale(0.95)',marginTop:'-60px'}}>
       <TruthTable operators={tautologyOperators} explanations={tautologyExplanations}/> 
       </div>
       <br/> 

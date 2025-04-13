@@ -66,7 +66,7 @@ export default function ImplicationsTruthTablesPage({ keyWords, implicationExpla
           panelWidth='300px'
           iconColor='white'
           panelBackgroundColor='#f2f2f2'/> 
-      <h1 className='title' style={{marginTop:'-30px', marginBottom:'-30px'}}>Implications Truth Tables</h1> 
+      <h1 className='title' style={{marginTop:'-30px', marginBottom:'-60px'}}>Implications Truth Tables</h1> 
       <VerticalButtonGroup 
       items={menuItems}
       width="100px"       
@@ -76,7 +76,7 @@ export default function ImplicationsTruthTablesPage({ keyWords, implicationExpla
       verticalOffset='200px'
       />
       
-      <div style={{marginLeft:'20px',transform:'scale(0.95)',marginTop:'-30px'}}>
+      <div style={{marginLeft:'20px',transform:'scale(0.95)',marginTop:'-60px'}}>
       <TruthTable operators={implicationOperators} explanations={implicationExplanations}/> 
       </div>
       <br/> 
