@@ -230,7 +230,10 @@ export default function ProbabilityPage({
         <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>
           Probability
         </h1>
-        <SectionTableOfContents sections={probabilitySections}/>
+        <SectionTableOfContents sections={probabilitySections}
+         showSecondaryNav={true}
+         secondaryNavMode="children"  // or "siblings"
+         secondaryNavTitle="More in this Section" />
         <br/>
         <br/>
         <IntroSection 

@@ -95,6 +95,12 @@ export default function TruthTablesPage({ keyWords, truthExplanations }) {
   const menuItems=[
 
     {
+      title: "Tautologies",
+      // icon: <Home />,
+      link: "/tables/truth-tables/tautologies"
+    },
+
+    {
       title: "Implications",
       // icon: <Home />,
       link: "/tables/truth-tables/implications"
@@ -125,7 +131,7 @@ export default function TruthTablesPage({ keyWords, truthExplanations }) {
       isSticky={true}
       verticalOffset='200px'
       />
-      <div style={{marginLeft:'40px',transform:'scale(0.9)'}}>
+      <div style={{marginLeft:'20px',transform:'scale(0.9)'}}>
       <TruthTable explanations={truthExplanations}/> 
       </div>
       <br/> 

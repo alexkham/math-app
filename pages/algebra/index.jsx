@@ -572,6 +572,10 @@ import Head from 'next/head';
 import { createContentHtml } from '@/app/utils/utils-functions'
 import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
 import SecondaryNavbar from '@/app/components/nav-bar/SecondaryNavbar'
+import { fetchSiteNavLinks } from '@/app/utils/navLinks'
+import StaticSectionTableOfContents from '@/app/components/page-components/section/StaticSectionTableOfContent'
+import SEOFriendlySectionTableOfContents from '@/app/components/page-components/section/SEOFriendlyTableofContents'
+import SectionTableOfContents2 from '@/app/components/page-components/section/SectionTableofContents2'
 
 
 
@@ -580,7 +584,15 @@ export async function getStaticProps() {
   const { default: algebraFormulasList } = await import('@/app/api/db/formulas/algebra/algebraFormulas')
   const { default: algebraTermsList } = await import('@/app/api/db/definitions/algebra/algebraDefinitions')
   
- 
+/*nav links try  */
+const currentPath = '/algebra';
+  
+const childrenNav = await fetchSiteNavLinks(currentPath, 'children');
+const siblingsNav = await fetchSiteNavLinks(currentPath, 'siblings');
+
+console.log('Children Nav:', childrenNav);
+console.log('Siblings Nav:', siblingsNav);
+ /* */
 
   const sectionContent = {
     formulas: {
@@ -620,7 +632,9 @@ The study of algebra introduces **polynomials**, expressions composed of variabl
 
 **Functions** are another key concept in algebra, providing a way to describe how quantities depend on each other. **Linear functions**, **quadratic functions**, and **exponential relationships** reveal patterns and behaviors that are essential for deeper mathematical understanding. Algebra also emphasizes the properties of numbers and operations, such as **commutativity** and **distributivity**, which underpin all calculations.
 
-The skills developed in algebra, such as **logical reasoning**, **abstraction**, and **problem-solving**, are invaluable. They find applications in diverse fields, from **science and engineering** to **economics and data analysis**, forming a crucial foundation for advanced mathematical studies.`
+The skills developed in algebra, such as **logical reasoning**, **abstraction**, and **problem-solving**, are invaluable. They find applications in diverse fields, from **science and engineering** to **economics and data analysis**, forming a crucial foundation for advanced mathematical studies.
+
+`
   }
 
   const keyWords = [
@@ -668,7 +682,8 @@ The skills developed in algebra, such as **logical reasoning**, **abstraction**,
       algebraFormulasList,
       algebraTermsList,
       definitionsCategoryExplanations,
-      formulasCategoryExplanations
+      formulasCategoryExplanations,
+      childrenNav
     }
   }
 }
@@ -682,7 +697,8 @@ export default function AlgebraPage({
   algebraFormulasList,
   algebraTermsList,
   definitionsCategoryExplanations,
-  formulasCategoryExplanations
+  formulasCategoryExplanations,
+  childrenNav
 }) {
 
   
@@ -815,15 +831,38 @@ export default function AlgebraPage({
         panelBackgroundColor='#f2f2f2'
       /> 
       <Breadcrumb/>
-     <SecondaryNavbar verticalPosition='17.5%' alignment='top' backgroundColor='#1f2937' height={'20px'} />
+     {/* <SecondaryNavbar verticalPosition='17.5%' alignment='top' backgroundColor='#1f2937' height={'20px'} /> */}
       <main>
         <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>
           Algebra
         </h1>
        
-       
+       {/* <StaticSectionTableOfContents
+       sections={algebraSections}
+       showSecondaryNav={true}
+       secondaryNavMode="children"  // or "siblings"
+       secondaryNavTitle="More in this Section" 
+       navLinks={childrenNav}/> */}
 
-        <SectionTableOfContents sections={algebraSections}/>
+       {/* <SEOFriendlySectionTableOfContents
+       sections={algebraSections}
+       showSecondaryNav={true}
+       secondaryNavMode="children"  // or "siblings"
+       secondaryNavTitle="More in this Section" 
+       navLinks={childrenNav}/> */}
+
+       <SectionTableOfContents2
+       sections={algebraSections}
+       showSecondaryNav={true}
+       secondaryNavMode="children"  // or "siblings"
+       secondaryNavTitle="More in this Section" 
+       navLinks={childrenNav}/>
+
+        {/* <SectionTableOfContents sections={algebraSections}
+         showSecondaryNav={true}
+         secondaryNavMode="children"  // or "siblings"
+         secondaryNavTitle="More in this Section" 
+         navLinks={childrenNav}/> */}
         <br/>
         <br/>
         <br/>

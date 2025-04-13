@@ -18,7 +18,7 @@
     min-width: 650px;
   }
   
-  .buttonGroup {
+  /* .buttonGroup {
     display: flex;
     gap: 0.25rem;
     margin-bottom: 1.5rem;
@@ -36,6 +36,29 @@
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
+  } */
+
+
+  .buttonGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .operatorButton {
+    flex: 0 1 calc(13.333% - 0.25rem); /* Reduced by 20% from 16.666% */
+    padding: 0.4rem 0.2rem; /* Reduced by 20% from 0.5rem 0.25rem */
+    font-size: 0.8rem; /* Reduced by 20% from 1rem */
+    font-weight: 500;
+    border: 2px solid #d1d1d1;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    margin-bottom: 0.25rem;
   }
   
   .operatorButton:hover {
@@ -64,16 +87,30 @@
     border-bottom: 2px solid #d1d1d1;
   }
   
+  /* .tableHeader th {
+    padding: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 0.95rem;
+  } */
+
   .tableHeader th {
     padding: 1rem;
     font-weight: 600;
     color: #1a1a1a;
     font-size: 0.95rem;
+    border-right : 1px solid #bbb; /* Add prominent vertical borders */
+    border-bottom: 1px solid #bbb;
   }
   
   .tableHeader th:last-child {
+    border-right: none; /* Remove border from last column */
     background: #f8f9fa;
   }
+  
+  /* .tableHeader th:last-child {
+    background: #f8f9fa;
+  } */
   
   .tableRow td {
     padding: 1rem;
@@ -156,6 +193,15 @@
     text-decoration: none;
     font-size: 1.1rem;
   }
+
+  .explanationText a{
+    
+      color: #3182ce;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: bold;
+    
+  }
   
   .explanationLink:hover {
     text-decoration: underline;
@@ -180,3 +226,12 @@
       width: 100%;
     }
   }
+
+
+  /* .noWrap {
+    white-space: nowrap;
+    min-width: fit-content;
+    padding: 1rem 0.5rem;
+    overflow: visible;
+  } */
+

@@ -41,14 +41,14 @@ const VerticalButtonGroup = ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            padding: '12px 16px',
+            padding: '12px 12px',
             border: `1px solid ${color}`,
             borderRadius: '8px',
             color: color,
             textDecoration: 'none',
             backgroundColor: backgroundColor,
             maxHeight: '40px',
-            fontSize: '14px'
+            fontSize: '15px'
           }}
         >
           <div style={{

@@ -108,7 +108,10 @@ Trigonometry teaches students how to connect abstract mathematical concepts with
     <Breadcrumb/>
    
     <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>Trigonometry</h1>
-    <SectionTableOfContents sections={trigonometrySections}/>
+    <SectionTableOfContents sections={trigonometrySections}
+    showSecondaryNav={true}
+    secondaryNavMode="children"  // or "siblings"
+    secondaryNavTitle="More in this Section" />
     <br/>
     <IntroSection 
   id={introContent.id}

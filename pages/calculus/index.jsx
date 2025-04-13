@@ -390,7 +390,10 @@ export default function CalculusPage({
         <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>
           Calculus
         </h1>
-        <SectionTableOfContents sections={calculusSections}/>
+        <SectionTableOfContents sections={calculusSections}
+         showSecondaryNav={true}
+         secondaryNavMode="children"  // or "siblings"
+         secondaryNavTitle="More in this Section" />
         <br/>
         <IntroSection 
           id={introContent.id}

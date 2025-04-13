@@ -6,6 +6,7 @@ import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import TruthTable from '@/app/components/logic-calculator/truth-tables/TruthTable'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import '../../../pages.css'
+import VerticalButtonGroup from '@/app/components/VerticalButtonGroup'
 
 export const metadata = {
   title: 'Implications Truth Tables',
@@ -26,6 +27,25 @@ export default function ImplicationsTruthTablesPage({ keyWords, implicationExpla
         '¬P→¬Q': { symbol: '¬P→¬Q', func: (a, b) => a || !b },
         '¬Q→¬P': { symbol: '¬Q→¬P', func: (a, b) => b || !a }
       };
+
+
+      const menuItems=[
+
+        {
+          title: "Basic Propositions",
+          // icon: <Home />,
+          link: "/tables/truth-tables"
+        },
+    
+
+        {
+          title: "Tautologies",
+          // icon: <Home />,
+          link: "/tables/truth-tables/tautologies"
+        },
+    
+       
+      ]
   return (
     <>
       <GenericNavbar/>
@@ -41,8 +61,19 @@ export default function ImplicationsTruthTablesPage({ keyWords, implicationExpla
           panelWidth='300px'
           iconColor='white'
           panelBackgroundColor='#f2f2f2'/> 
-      <h1 className='title' style={{marginTop:'-30px', marginBottom:'-10px'}}>Implications Truth Tables</h1>  
+      <h1 className='title' style={{marginTop:'-30px', marginBottom:'-30px'}}>Implications Truth Tables</h1> 
+      <VerticalButtonGroup 
+      items={menuItems}
+      width="100px"       
+    //   backgroundColor ='#0070f3'
+    //   color = 'white'
+      isSticky={true}
+      verticalOffset='200px'
+      />
+      
+      <div style={{marginLeft:'20px',transform:'scale(0.95)',marginTop:'-30px'}}>
       <TruthTable operators={implicationOperators} explanations={implicationExplanations}/> 
+      </div>
       <br/> 
       <br/>
       <ScrollUpButton/> 
@@ -65,7 +96,7 @@ export async function getStaticProps() {
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" }]
     },
     '¬P→Q': {
-      text: "Negated antecedent implication ¬P→Q means &quot;if not P then Q&quot;. This form shows how negating premise affects logical relationship. Formula: ¬P→Q ≡ P∨Q (by material implication definition and double negation). Truth table reveals: when P is false (¬P is true), Q must be true for valid implication. Common in proof by contradiction where we assume negation of premise.",
+      text: "Negated antecedent implication ¬P→Q means 'if not P then Q'. This form shows how negating premise affects logical relationship. Formula: ¬P→Q ≡ P∨Q (by material implication definition and double negation). Truth table reveals: when P is false (¬P is true), Q must be true for valid implication. Common in proof by contradiction where we assume negation of premise.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" }]
     },
     'P→¬Q': {

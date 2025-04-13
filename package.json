@@ -42,7 +42,8 @@
     "remark-math": "^6.0.0",
     "sass": "^1.81.0",
     "sharp": "^0.33.5",
-    "three": "^0.170.0"
+    "three": "^0.170.0",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@types/react-beautiful-dnd": "^13.1.8",

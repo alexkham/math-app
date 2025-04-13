@@ -332,7 +332,7 @@ Use this tool to evaluate [truth tables](!/logic/truth-tables).
                 panelBackgroundColor='#f2f2f2'
               />
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-30px'}}>Tautology</h1>
+    <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Tautology</h1>
     <br/>
     <SectionTableOfContents sections={tautologySections}/>
     <br/>

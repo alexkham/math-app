@@ -334,7 +334,10 @@ export default function LinearAlgebraPage({
         <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>
           Linear Algebra
         </h1>
-        <SectionTableOfContents sections={linearAlgebraSections}/>
+        <SectionTableOfContents sections={linearAlgebraSections}
+         showSecondaryNav={true}
+         secondaryNavMode="children"  // or "siblings"
+         secondaryNavTitle="More in this Section" />
         <br/>
         <br/>
         
