@@ -5,7 +5,7 @@ import { ChevronRight } from 'lucide-react';
 
 const VerticalButtonGroup = ({
   items = [],
-  width = '250px',
+  width = '300px',
   backgroundColor = '#f3f4f6',
   color = '#448af4',
   isSticky = false,
@@ -48,7 +48,8 @@ const VerticalButtonGroup = ({
             textDecoration: 'none',
             backgroundColor: backgroundColor,
             maxHeight: '40px',
-            fontSize: '15px'
+            fontSize: '15px',
+            width:'130px'
           }}
         >
           <div style={{
