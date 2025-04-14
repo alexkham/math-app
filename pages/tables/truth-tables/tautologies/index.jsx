@@ -177,6 +177,11 @@ export async function getStaticProps() {
       link: "/tables/truth-tables/implications"
     },
     {
+      title: "Biconditionals",
+      // icon: <Home />,
+      link: "/tables/truth-tables/biconditionals"
+    },
+    {
       title: "Contradictions",
       // icon: <Home />,
       link: "/tables/truth-tables/contradictions"

@@ -36,6 +36,12 @@ export default function ImplicationsTruthTablesPage({ keyWords, implicationExpla
           // icon: <Home />,
           link: "/tables/truth-tables"
         },
+
+        {
+          title: "Biconditionals",
+          // icon: <Home />,
+          link: "/tables/truth-tables/biconditionals"
+        },
     
 
         {

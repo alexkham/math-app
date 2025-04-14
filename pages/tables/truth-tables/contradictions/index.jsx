@@ -193,6 +193,12 @@ export async function getStaticProps() {
     },
 
     {
+      title: "Biconditionals",
+      // icon: <Home />,
+      link: "/tables/truth-tables/biconditionals"
+    },
+
+    {
         title: "Tautologies",
         // icon: <Home />,
         link: "/tables/truth-tables/tautologies"

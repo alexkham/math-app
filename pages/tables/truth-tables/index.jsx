@@ -90,28 +90,33 @@ export const metadata = {
   }
 }
 
-export default function TruthTablesPage({ keyWords, truthExplanations }) {
+export default function TruthTablesPage({ keyWords, truthExplanations , menuItems }) {
 
-  const menuItems=[
+  // const menuItems=[
 
-    {
-      title: "Tautologies",
-      // icon: <Home />,
-      link: "/tables/truth-tables/tautologies"
-    },
+  //   {
+  //     title: "Tautologies",
+  //     // icon: <Home />,
+  //     link: "/tables/truth-tables/tautologies"
+  //   },
 
-    {
-      title: "Implications",
-      // icon: <Home />,
-      link: "/tables/truth-tables/implications"
-    },
-    {
-      title: "Contradictions",
-      // icon: <Home />,
-      link: "/tables/truth-tables/contradictions"
-    },
+  //   {
+  //     title: "Implications",
+  //     // icon: <Home />,
+  //     link: "/tables/truth-tables/implications"
+  //   },
+  //   {
+  //     title: "Biconditionals",
+  //     // icon: <Home />,
+  //     link: "/tables/truth-tables/biconditionals"
+  //   },
+  //   {
+  //     title: "Contradictions",
+  //     // icon: <Home />,
+  //     link: "/tables/truth-tables/contradictions"
+  //   },
 
-  ]
+  // ]
   return (
     <>
       <GenericNavbar/>
@@ -127,7 +132,7 @@ export default function TruthTablesPage({ keyWords, truthExplanations }) {
           panelWidth='300px'
           iconColor='white'
           panelBackgroundColor='#f2f2f2'/> 
-      <h1 className='title' style={{marginTop:'-30px', marginBottom:'-60px'}}>Truth Tables</h1> 
+      <h1 className='title' style={{marginTop:'-30px', marginBottom:'-60px'}}>Basic Logic Connectives Truth Tables</h1> 
       <VerticalButtonGroup 
       items={menuItems}
       width="100px"       
@@ -149,6 +154,33 @@ export default function TruthTablesPage({ keyWords, truthExplanations }) {
 export async function getStaticProps() {
   const keyWords = ['truth table','and truth table','or truth table','xor truth table',
     'nand truth table','nor truth table', 'xnor truth table'
+  ]
+
+
+  const menuItems=[
+
+    {
+      title: "Tautologies",
+      // icon: <Home />,
+      link: "/tables/truth-tables/tautologies"
+    },
+
+    {
+      title: "Implications",
+      // icon: <Home />,
+      link: "/tables/truth-tables/implications"
+    },
+    {
+      title: "Biconditionals",
+      // icon: <Home />,
+      link: "/tables/truth-tables/biconditionals"
+    },
+    {
+      title: "Contradictions",
+      // icon: <Home />,
+      link: "/tables/truth-tables/contradictions"
+    },
+
   ]
   
   const truthExplanations = {
@@ -194,7 +226,8 @@ export async function getStaticProps() {
   return {
     props: {
       keyWords,
-      truthExplanations
+      truthExplanations,
+      menuItems
     }
   }
 }
