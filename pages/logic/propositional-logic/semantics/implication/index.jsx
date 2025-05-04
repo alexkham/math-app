@@ -20,7 +20,7 @@ export default function ImplicationPage() {
     const properties=[
         `**Reflexivity**:
 $p→p$ is always true for any proposition $𝑝$.
-This follows from the [truth table](!/logic/propositional-logic/implication#truth_table) since whenever 
+This follows from the [truth table](!/logic/propositional-logic/semantics/implication#truth_table) since whenever 
 $𝑝$ and $𝑞$ are the same-$𝑝→𝑞$ is always true.`,
 `**Transitivity**:
 If $𝑝→𝑞$ and $𝑞→𝑟$, then $𝑝→𝑟$.
@@ -68,7 +68,7 @@ But "If you are a woman, then you are a mother" ($𝑞→𝑝$) is not necessari
 ## Definition:
             Logical implication ($𝑝→𝑞$) is a conditional statement meaning "if $p$, then $𝑞$." It asserts that whenever $𝑝$ (the antecedent or hypothesis) is true, $𝑞$ (the consequent or conclusion) must also be true.
             **An implication expresses a dependency between two propositions, where the truth of the antecedent guarantees the truth of the the consequent**. 
-            However, if $𝑝$ is false, the implication is still considered to be true regardless of $𝑞$. This is very important point that follows directly from the definition. We will see the meaning of it while dealing with implication [truth table](!/logic/propositional-logic/implication#truth_table). 
+            However, if $𝑝$ is false, the implication is still considered to be true regardless of $𝑞$. This is very important point that follows directly from the definition. We will see the meaning of it while dealing with implication [truth table](!/logic/propositional-logic/semantics/implication#truth_table). 
 ## Notation:
             `,
             <MyList data={notation}

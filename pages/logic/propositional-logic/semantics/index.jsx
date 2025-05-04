@@ -169,9 +169,10 @@ export default function LogicPage({
     content:`Logical equivalences are statements in propositional logic that always have the same truth value regardless of the truth values of their individual components. 
    If two propositions $A$ and $𝐵$ are logically equivalent, we write:$A≡B$.      
 This means that for every possible truth assignment,$A$ and $𝐵$ yield the same truth value.
-Logical equivalences form the foundation of [propositional logic laws](!/logic/propositional-logic#laws). Each law in Boolean algebra is a logical equivalence that helps us simplify, manipulate, or prove logical expressions.
+Logical equivalences form the foundation of [propositional logic laws](!/logic/propositional-logic#laws). Each logical law is a logical equivalence that helps us simplify, manipulate, or prove logical expressions.
 However, not all logical equivalences are laws. Some are specific derivations that are still true but are not considered "fundamental" enough to be named as laws.
 Logical equivalences are essential in **mathematical logic**, shaping both **syntax** and **semantics**. Syntactically, they allow transformations between logically identical formulas, crucial for **normal forms** like CNF and DNF. Semantically, they ensure truth preservation across interpretations, making them fundamental in [truth tables](!/logic/truth-tables) and **model theory**. In **proof techniques**, equivalences justify valid transformations within formal systems, aiding in **inferences** and **proof simplifications**. By bridging **truth conditions** with **formal derivations**, logical equivalences unify reasoning in propositional logic, predicate logic, and beyond.
+Check our [equivalence validator](!/logic/propositional-logic/semantics/equivalence-validator) tool to polish your practical understanding of logical equivalences.
 
 `
   },

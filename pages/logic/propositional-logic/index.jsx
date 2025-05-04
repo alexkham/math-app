@@ -270,7 +270,7 @@ Two propositions $𝑃$ and $𝑄$ are logically equivalent (denoted $𝑃≡�
 **Example**:
 \t\t\t\t\t\t$𝑃∨𝑄≡𝑄∨𝑃$
 (Commutativity of disjunction)
-Read more about [equivalence](!/logic/propositional-logic#equivalences).
+Read more about [equivalence](!/logic/propositional-logic/semantics/equivalences).
 ## 2.Consistency & Inconsistency:
 
 A set of propositions is consistent if it is possible for all of them to be true at the same time.
@@ -293,15 +293,15 @@ A proposition is independent of another if neither one logically determines the 
 "It is raining" and "The stock market is up" are independent because knowing one does not tell us anything about the other.
 ## 5.Validity & Invalidity:
 
-A proposition is valid if it is true in all possible interpretations (i.e., a [tautology](!/logic/propositional-logic#contigency)).
-A proposition is invalid if it is not true in all interpretations (i.e., it is either a [contingency or a contradiction](!/logic/propositional-logic#contigency)).
+A proposition is valid if it is true in all possible interpretations (i.e., a [tautology](!/logic/propositional-logic/semantics/tautology)).
+A proposition is invalid if it is not true in all interpretations (i.e., it is either a [contingency or a contradiction](!/logic/propositional-logic/semantics/contradiction)).
 
 Validity is an important concept in logic because valid statements are universally true, meaning they hold regardless of the truth values of their components.
 
 ## 6.Satisfiability & Unsatisfiability:
 
-A proposition is satisfiable if there is at least one interpretation where it is true (i.e., a [tautology or a contingency](!/logic/propositional-logic#contigency)).
-A proposition is unsatisfiable if it is false in all possible interpretations (i.e., a [contradiction](!/logic/propositional-logic#contigency)).
+A proposition is satisfiable if there is at least one interpretation where it is true (i.e., a [tautology or a contingency](!/logic/propositional-logic/semantics/tautology)).
+A proposition is unsatisfiable if it is false in all possible interpretations (i.e., a [contradiction](!/logic/propositional-logic/semantics/contradiction)).
             `
           },
    
