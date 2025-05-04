@@ -139,6 +139,13 @@ export async function getStaticProps() {
       `[Square Matrices and Special Cases](!/linear-algebra/matrix#special) - Focuses on unique types of square matrices, including those with special diagonal patterns (diagonal, upper triangular, lower triangular) and element relationships (symmetric, skew-symmetric, identity, scalar).`,
     
     ]
+    },
+    symbols:{
+      title:'Linear Algebra Symbols Reference',
+      description:`Our [Linear Algebra Symbols page](!/math-symbols/linear-algebra) presents a well-organized collection of notation fundamental to matrix theory and vector spaces. This reference serves as a valuable resource for students and practitioners working with linear systems.
+The page features symbols categorized by their mathematical applications, including matrix operations (A⊤, det(A), tr(A)), vector spaces (ℝⁿ, ⟨v,w⟩, ∥v∥), and eigenvalue concepts (Av=λv). It covers advanced topics like matrix decompositions (LU, QR, SVD) and linear transformations, alongside practical notation for representing matrices and vectors in LaTeX.
+Every symbol includes its proper mathematical notation, corresponding LaTeX code for typesetting, and a brief explanation of its mathematical significance—making this an indispensable reference for anyone working with linear algebra in academic research or applications.RetryClaude can make mistakes. Please double-check responses.`,
+link:'/math-symbols/linear-algebra'
     }
   }
 
@@ -249,6 +256,19 @@ export default function LinearAlgebraPage({
        <MyList data={sectionContent.matrices.list}
        key={249}/>,
        
+      ]
+    },
+    {
+      id: 'symbols',
+      title: sectionContent.symbols.title, // Give it a proper title
+      link: sectionContent.symbols.link, // Optional
+      content: [
+        {
+          content:sectionContent.symbols.description,
+          layout: 'horizontal',
+          position: 'center', // or 'left' if you prefer
+          width: 8 // full width
+        }
       ]
     }
   ]

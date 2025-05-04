@@ -204,6 +204,13 @@ export async function getStaticProps() {
             backgroundColor:'#fdfdea',
           }),
           layout: 'horizontal'
+        },
+        symbols:{
+          title:'Calculus Symbols Reference',
+          description:`Our [Calculus Symbols page](!/math-symbols/calculus) offers a detailed catalog of notation used in differential and integral calculus. This comprehensive resource organizes symbols by their mathematical functions to help students and professionals navigate the language of calculus.
+The reference covers essential notation across categories including differentiation (f'(x), df/dx, ∇f), integration (∫, ∬, ∮), limits (limₓ→c), and infinite series (∑). Advanced topics include vector calculus notation for divergence and curl, differential operators like the Laplacian (∇²f), and specialized notation for curvature and differential equations.
+Each symbol is presented with its proper LaTeX representation and a concise explanation of its meaning, making this an essential resource for anyone working with calculus concepts in academic or professional settings.`,
+          link:'/math-symbols/calculus'
         }
   }
 
@@ -307,7 +314,21 @@ export default function CalculusPage({
           width: 1.5 
         }
       ]
-    }
+    },
+    {
+      id: 'symbols',
+      title: sectionContent.symbols.title,
+      link:sectionContent.symbols.link,
+      content: [
+        {
+          content:sectionContent.symbols.description,
+          layout: 'horizontal',
+          position: 'center', // or 'left' if you prefer
+          width: 8 // full width
+        }
+       
+      ]
+    },
   ]
 
   const structuredData = {

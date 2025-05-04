@@ -22,6 +22,7 @@ import DataWrapper2 from '@/app/components/data-wrapper/generic-table/DataWrappe
 import MathProofFlow from '@/app/components/examples/MathProofFlow';
 import LogicalEquivalenceChecker from '@/app/components/logic-calculator/EquivalenceChecker';
 import LogicalEquivalenceVerifier from '@/app/components/logic-calculator/EquivalenceChecker';
+import PropositionTreeBuilder from '@/app/components/logic-calculator/proposition-tree/PropositionTreeBuilder';
 
 export default function Test6Page() {
 
@@ -766,7 +767,7 @@ const proofSteps = [
     <br/>
     <br/>
     <br/>
-    <LogicalEquivalenceVerifier/>
+    {/* <LogicalEquivalenceVerifier/> */}
     <br/>
     <br/>
     <div style={{width:'30%'}}>
@@ -835,8 +836,8 @@ const proofSteps = [
     <br/>
     {/* <PowerTable/> */}
     <br/>
-    {/* <ThreeWaysCircularSplitBreakdown
-    content={threeWaysContent}/> */}
+    <ThreeWaysCircularSplitBreakdown
+    content={threeWaysContent}/>
     <br/>
     <br/>
     <div style={{transform:'scale(0.8)'}}>
@@ -969,6 +970,14 @@ $$dim(V) = dim(ker(T)) + dim(im(T))$$"
     <br/>
     <br/>
     <MathContainer content={identityMatrix}/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <PropositionTreeBuilder/>
+    <br/>
+    <br/>
+    <br/>
     <br/>
     <br/>
     

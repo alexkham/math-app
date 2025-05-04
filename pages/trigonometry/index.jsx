@@ -52,6 +52,16 @@ export default function TrigonometryPage() {
     ]
       
     },
+    {
+      id:'symbols',
+      title:'Trigonometry Symbols Reference',
+      link:'/math-symbols/trigonometry',
+      content:[
+    `Our [Trigonometry Symbols page](!/math-symbols/trigonometry) offers a comprehensive collection of notation used in trigonometric mathematics. This reference serves as a valuable resource for students and educators working with angular relationships and periodic functions.
+The guide organizes symbols into functional categories including basic trigonometric functions (sin(θ), cos(θ), tan(θ)), their inverse functions (sin⁻¹(x), cos⁻¹(x)), and fundamental identities such as the Pythagorean identity sin²(θ) + cos²(θ) = 1. It extends to practical applications like the Law of Sines and Cosines for triangle calculations, unit circle relationships, and hyperbolic functions.
+Advanced sections cover complex number representations using trigonometric forms, Euler's formula, and important sum and difference identities—all presented with precise LaTeX code for academic writing and mathematical typesetting.RetryClaude can make mistakes. Please double-check responses. 3.7 Sonnet`
+      ]
+    }
   ];
   
 

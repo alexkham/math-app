@@ -2,13 +2,24 @@ import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import React from 'react'
-import '../../../pages.css'
+import '../../../../pages.css'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import Sections from '@/app/components/page-components/section/Sections'
 import ExpandableTable from '@/app/components/data-wrapper/generic-table/ExpandableTable'
+import { renderAcademicBlockHTML } from '@/app/utils/academicBlocks'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 
 export default function TautologyPage() {
+
+  // const theoremHTML = renderAcademicBlockHTML("Theorem 1.2 (Existence and Uniqueness).\nA system of linear equations has either no solutions, exactly one solution, or infinitely many solutions.", 
+  //   "definition");
+  const theoremHTML = renderAcademicBlockHTML(
+    "Theorem 1.2 (Existence and Uniqueness).\nA system of linear equations has either no solutions, exactly one solution, or infinitely many solutions.",
+    "definition"
+  );
+
+  const content="Theorem 1.2 (Existence and Uniqueness).\nA system of linear equations has either no solutions, exactly one solution, or infinitely many solutions."
 
     const tautologies = [
         {
@@ -157,6 +168,17 @@ export default function TautologyPage() {
         }
        ];
 
+
+       const introContent = {
+        id: "intro",
+        title: "Introduction",
+        content:`Tautologies represent a fundamental concept in propositional logic, embodying logical certainty. A tautology is a formula that evaluates to true under all possible interpretations of its variables. The classic example is P ∨ ¬P (the law of excluded middle), which states that either a proposition or its negation must be true – an inescapable truth.
+
+Unlike regular propositions whose truth depends on specific circumstances, tautologies are guaranteed to be true, providing absolute certainty in logical systems. This property makes tautologies essential in logical reasoning, serving as the foundation for valid arguments, logical equivalences, and formal proofs.
+
+This page explores tautologies comprehensively, examining their properties, relationship to contradictions, and their crucial role in establishing the framework of logical deduction and mathematical reasoning.`
+      }
+
     const tautologySections=[
             {
             id:'definition',
@@ -177,7 +199,7 @@ Alternatively, a **tautology can be denoted** explicitly as:
 
 which means **"P is provable"** or **"P is always true"**.  
 
-In some texts, tautologies are also expressed using [equivalence](!/logic/propositional-logic/equivalences) sign like this: 
+In some texts, tautologies are also expressed using [equivalence](!/logic/propositional-logic/semantics/equivalences) sign like this: 
 
 \t\t\t\t\t\t$P \\equiv \\top$
 
@@ -188,7 +210,7 @@ to explicitly state that a proposition $\( P \)$ is always true (equivalent to t
             id:'tautology_vs_equivalence',
             title:'Tautology vs Equivalence',
             content:`## Are all equivalences tautologies?
-            As the definition of [equivalence](!/logic/propositional-logic/equivalences) states, two propositions $𝐴$ and $𝐵$ are logically equivalent if they always have the same truth value in every possible scenario. This means that their truth tables are identical. This is a **bilateral relationship** meaning both expressions evaluate to **true** together or **false** together in all cases. It does not matter if they are true or false, the key here is that they are **the same (equal)**.
+            As the definition of [equivalence](!/logic/propositional-logic/semantics/equivalences) states, two propositions $𝐴$ and $𝐵$ are logically equivalent if they always have the same truth value in every possible scenario. This means that their truth tables are identical. This is a **bilateral relationship** meaning both expressions evaluate to **true** together or **false** together in all cases. It does not matter if they are true or false, the key here is that they are **the same (equal)**.
 **Example**:
 
 \t\t\t\t\t\t$(𝑃→𝑄)≡(¬𝑃∨𝑄)$
@@ -198,7 +220,7 @@ As long as the equivalence is valid -the overall bilateral expression as a whole
 So the final answer to that question is **YES** , as long as equivalence is valid- it is a tautology.
 
 ## Are all tautologies logical equivalences?
-According to [definition](!/logic/propositional-logic/tautology#definition), a tautology is about a **single proposition that is always true**, while [equivalence](!/logic/propositional-logic/equivalences) is a relationship between two propositions that always have the same truth value.
+According to [definition](!/logic/propositional-logic/tautology#definition), a tautology is about a **single proposition that is always true**, while [equivalence](!/logic/propositional-logic/semantics/equivalences) is a relationship between two propositions that always have the same truth value.
 A tautology must always evaluate to true, but it does not necessarily have to express a relationship between two statements.In fact, there are numerous tautologies that are unilateral expressions that evaluate to true in all possible valuations but don't express a relationship of equality between two propositions.
 **Examples**:
 Law of Excluded Middle:
@@ -216,9 +238,9 @@ Tautological but doesn't equate different propositions.
 
 \t\t\t\t\t\t$P → (Q → (P ∧ Q))$
 
-All those are tautologies that do not fall under the definition of [equivalence](!/logic/propositional-logic/equivalences).
+All those are tautologies that do not fall under the definition of [equivalence](!/logic/propositional-logic/semantics/equivalences).
 
-This distinction means that while every valid [equivalence](!/logic/propositional-logic/equivalences) is a tautology, not each tautology is [equivalence](!/logic/propositional-logic/equivalences) because some tautologies do not express a two-sided relationship between two propositions.
+This distinction means that while every valid [equivalence](!/logic/propositional-logic/semantics/equivalences) is a tautology, not each tautology is [equivalence](!/logic/propositional-logic/semantics/equivalences) because some tautologies do not express a two-sided relationship between two propositions.
 This means that the set of all logical equivalences is a subset of the set of all tautologies.
 
 
@@ -255,7 +277,7 @@ This means that the set of all logical equivalences is a subset of the set of al
             title:'Logic Laws as Tautologies',
             
             content:`As discussed in previous [section](!/logic/propositional-logic/tautology#tautology_vs_equivalence), valid equivalence is bilateral statement evaluating to true and in this way it is a **tautology**.
-            Since all [propositional logic laws](!/logic/propositional-logic/laws) are either [equivalences](!/logic/propositional-logic/equivalences) or directly tautological statements, we conclude that all propositional logic laws are tautologies.
+            Since all [propositional logic laws](!/logic/propositional-logic/laws) are either [equivalences](!/logic/propositional-logic/semantics/equivalences) or directly tautological statements, we conclude that all propositional logic laws are tautologies.
 ## Propositional Logic Laws as Equivalences
            Many fundamental laws of propositional logic are expressed as equivalences, meaning both sides of the equation always yield the same truth value. Since the equivalence itself must always hold, it is a **tautology**.
            **Examples**:
@@ -310,7 +332,60 @@ Use this tool to evaluate [truth tables](!/logic/truth-tables).
                 Use this [tool](!/logic/truth-tables) to generate truth tables dynamically and evaluate those expressions.`
             ]
           },
-        //     {
+            {
+            id:'tautology_vs_contradiction',
+            title:'Tautology vs Contradiction',
+            content:[`While a tautology affirms itself under every possible interpretation, its logical counterpart — the contradiction — fails under all of them. These two aren’t just opposites in outcome; they’re structurally bound by negation.`, 
+              <div key={2} dangerouslySetInnerHTML={{ __html: renderAcademicBlockHTML(
+                `The negation of a tautology is always a contradiction, and the negation of a contradiction is always a tautology.`, "theorem") }} />
+              ,
+             `This is not just an abstract symmetry — it's a fundamental mechanism in logical systems.
+This reciprocal relationship plays out in reasoning strategies: to show something is necessarily true (a tautology), one might show that its negation leads to a contradiction — a technique known as reductio ad absurdum. The tension between the two is constructive: from the impossibility of one, we often infer the necessity of the other.
+Take for example the classic tautology 'P ∨ ¬P'. Its truth table confirms that it's always true, regardless of whether 'P' is true or false. Now consider the negation: '¬(P ∨ ¬P)'. No matter what truth value you assign to 'P', this formula is always false — a contradiction. In practice, this duality underpins proof techniques, logic solvers, and model checkers. If a system can show that assuming '¬φ' leads to a contradiction, it immediately concludes that 'φ' must be a tautology — turning logical failure into proof.`,
+`
+<svg width="500" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" 
+     style="display: block; margin: 0 auto; fill:none; stroke:none; fill-rule:evenodd; clip-rule:evenodd; stroke-linecap:round; stroke-linejoin:round; stroke-miterlimit:1.5;">
+  <defs>
+    <!-- Arrow markers -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#777777" />
+    </marker>
+  </defs>
+  
+  <!-- Left node (green/tautology) with checkmark -->
+  <circle cx="125" cy="150" r="60" fill="#3cc583" stroke="#ffffff" stroke-width="2" />
+  <!-- Checkmark icon -->
+  <path d="M 90 150 L 115 175 L 160 120" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Right node (red/contradiction) with X -->
+  <circle cx="375" cy="150" r="60" fill="#e55753" stroke="#ffffff" stroke-width="2" />
+  <!-- X icon -->
+  <path d="M 335 110 L 415 190 M 415 110 L 335 190" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Upper arrow (flatter curve) -->
+  <path d="M185 110 C225 90, 275 90, 315 110" stroke="#777777" stroke-width="0.8" fill="none" marker-end="url(#arrowhead)" />
+  <!-- Upper arrow negation label -->
+  <text x="250" y="80" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#444444">negation (¬)</text>
+  
+  <!-- Lower arrow (flatter curve) -->
+  <path d="M315 190 C275 210, 225 210, 185 190" stroke="#777777" stroke-width="0.8" fill="none" marker-end="url(#arrowhead)" />
+  <!-- Lower arrow negation label -->
+  <text x="250" y="220" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#444444">negation (¬)</text>
+  
+  <!-- Labels -->
+  <text x="125" y="230" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#3cc583">Tautology</text>
+  <text x="375" y="230" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#e55753">Contradiction</text>
+</svg>
+`,
+
+
+`<table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse;width:80%;margin:auto"><thead><tr style="background-color:#f2f2f2"><th style="width:20%;padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Property</th><th style="width:40%;padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Tautology</th><th style="width:40%;padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Contradiction</th></tr></thead><tbody><tr><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Definition</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Always true under every interpretation</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Always false under every interpretation</td></tr><tr style="background-color:#f9f9f9"><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Symbolic Trait</td><td style="padding:12px;text-align:left;border:1px solid #ddd">⊨ φ (φ is valid)</td><td style="padding:12px;text-align:left;border:1px solid #ddd">⊨ ¬φ for every φ (negation of tautology)</td></tr><tr><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Truth Table</td><td style="padding:12px;text-align:left;border:1px solid #ddd">All rows are <span style="background-color:#f0f0f0;padding:2px 4px;border-radius:3px;font-family:monospace">T</span></td><td style="padding:12px;text-align:left;border:1px solid #ddd">All rows are <span style="background-color:#f0f0f0;padding:2px 4px;border-radius:3px;font-family:monospace">F</span></td></tr><tr style="background-color:#f9f9f9"><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Negation</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Becomes a contradiction</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Becomes a tautology</td></tr><tr><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Role in Proofs</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Represents logical necessity</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Used to derive absurdity in indirect proofs</td></tr><tr style="background-color:#f9f9f9"><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Example</td><td style="padding:12px;text-align:left;border:1px solid #ddd"><span style="font-family:monospace">'P ∨ ¬P'</span></td><td style="padding:12px;text-align:left;border:1px solid #ddd"><span style="font-family:monospace">'P ∧ ¬P'</span></td></tr><tr><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Practical Use</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Validates general rules, laws of logic</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Signals inconsistency, contradiction in assumptions</td></tr><tr style="background-color:#f9f9f9"><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Evaluation Outcome</td><td style="padding:12px;text-align:left;border:1px solid #ddd">True in all models</td><td style="padding:12px;text-align:left;border:1px solid #ddd">False in all models</td></tr><tr><td style="padding:12px;text-align:left;border:1px solid #ddd;font-weight:700">Logical Status</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Universally affirmed</td><td style="padding:12px;text-align:left;border:1px solid #ddd">Universally rejected</td></tr></tbody></table>
+`  ,
+``     
+
+]
+          },
+          //     {
         //     id:'',
         //     title:'',
         //     content:``
@@ -335,6 +410,17 @@ Use this tool to evaluate [truth tables](!/logic/truth-tables).
     <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Tautology</h1>
     <br/>
     <SectionTableOfContents sections={tautologySections}/>
+    <br/>
+    <br/>
+    <br/>
+    <IntroSection
+         id={introContent.id}
+         title={introContent.title} 
+         content={introContent.content}
+         backgroundColor="#f2f2f2"
+         textColor="#06357a"
+       />
+    <br/>
     <br/>
  <Sections sections={tautologySections}/>
     <br/>

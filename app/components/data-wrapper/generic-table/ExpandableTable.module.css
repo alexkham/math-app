@@ -66,6 +66,11 @@
   text-wrap: wrap;
 }
 
+.cellContent span span span a {
+  text-decoration: none;
+  color: red;
+}
+
 .copyButton {
   min-width: 60px;
   padding: 4px 12px;
@@ -227,4 +232,13 @@
   .iconCell {
     padding: 8px 12px;
   }
+}
+
+.tableContainer a {
+  color: blue;
+  text-decoration: underline;
+}
+
+.tableContainer a:hover {
+  color: darkblue;
 }

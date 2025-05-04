@@ -44,6 +44,7 @@ const CustomConvert=()=>(
         { text: 'Permutations Visualizer', url: '/combinatorics/permutations/permutations-visualizer' },
         { text: 'Unit Circle Visualizer', url: '/visual-tools/unit-circle' },
         { text: 'Matrix Types Generator', url: '/visual-tools/matrix-types' },
+        { text: 'Syntax Tree Builder', url: '/logic/propositional-logic/syntax/tree-builder' },
     ] },
   { id: 2, icon: CustomCalculator, tooltip: 'Calculators', content:[
     { text: 'Statistics Calculator', url: '/calculators/statistics-calculator' },

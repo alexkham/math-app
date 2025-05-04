@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { themes } from './themes';
+import { processContent } from '@/app/utils/contentProcessor';
 
 const FourPanel = ({ data, theme = 'ocean', onThemeChange }) => {
   const selectedTheme = themes[theme].colors;
@@ -83,7 +84,7 @@ const FourPanel = ({ data, theme = 'ocean', onThemeChange }) => {
               {panel.title}
             </h3>
             <div>
-              {panel.content}
+              {processContent(panel.content)}
             </div>
           </div>
         ))}

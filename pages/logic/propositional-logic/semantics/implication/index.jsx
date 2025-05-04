@@ -2,13 +2,20 @@ import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import React from 'react'
-import '../../../pages.css'
+import '../../../../pages.css'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import Sections from '@/app/components/page-components/section/Sections'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import MyList from '@/app/components/page-components/lists/MyList'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 
 export default function ImplicationPage() {
+
+  const introContent = {
+    id: "intro",
+    title: "Overview of Logical Implication Page",
+    content: `This page offers a structured exploration of logical implication, a core concept in propositional logic. It begins by defining implication formally and introducing common notations. A detailed truth table demonstrates how the implication $p\\rightarrow q$ evaluates across all possible truth values. The page then outlines key properties of implication, including reflexivity, transitivity, contraposition, and material implication. To address frequent points of confusion, a section on common misconceptions clarifies ideas like vacuous truth and the asymmetry of implication. Finally, the page highlights the role of implication in mathematical proofs, showing how it is used in direct reasoning, contrapositive arguments, and proof by contradiction. Together, these sections form a clear foundation for understanding conditional logic in both theoretical and applied contexts.`
+  }
 
     const properties=[
         `**Reflexivity**:
@@ -113,6 +120,35 @@ But "If you are a woman, then you are a mother" ($𝑞→𝑝$) is not necessari
             boxed={true} color={'blue'} compact={true} type={'dot'} width='500px'/>
         ]
           },
+          {
+            id: 'misconceptions',
+            title: 'Common Misconceptions About Implication',
+            content: [
+              `A frequent source of confusion in propositional logic is the truth value of the implication statement $p \\rightarrow q$ when $p$ is false. According to the truth table, the implication is considered true regardless of the truth value of $q$. This phenomenon is known as **vacuous truth**.`,
+              
+              `The rationale behind this definition is that an implication is only false in the specific case where the hypothesis ($p$) is true and the conclusion ($q$) is false. If the hypothesis is not satisfied, then the implication is not violated, and thus the overall statement is true.`,
+              
+              `**Example**: "If I win the lottery, then I will buy a new car." If I do not win the lottery, the statement remains valid regardless of whether I buy a car.`,
+              
+              `Another common misunderstanding is to assume that $p \\rightarrow q$ is equivalent to $q \\rightarrow p$. This is incorrect: implication is not symmetric, and such an inference does not hold logically.`
+            ]
+          },
+          {
+            id: 'proofs',
+            title: 'Implication in Mathematical Proofs',
+            content: [
+              `Logical implication plays a foundational role in mathematical reasoning. In a **direct proof**, one assumes the antecedent ($p$) and demonstrates that the consequent ($q$) logically follows, thereby confirming the truth of $p \\rightarrow q$.`,
+              
+              `Another essential technique is **proof by contraposition**, which leverages the equivalence of $p \\rightarrow q$ and $\\neg q \\rightarrow \\neg p$. In many cases, this approach is more straightforward than a direct proof.`,
+              
+              `**Example**: To prove "If $n^2$ is even, then $n$ is even," one may instead prove the contrapositive: "If $n$ is odd, then $n^2$ is odd."`,
+              
+              `Logical implication also underpins **proof by contradiction**, where the assumption of $p$ being true and $q$ being false leads to a contradiction. This contradiction implies that the original implication $p \\rightarrow q$ must be valid.`
+            ]
+          },
+
+          
+          
     //   {
     //         id:'',
     //         title:'',
@@ -138,10 +174,20 @@ But "If you are a woman, then you are a mother" ($𝑞→𝑝$) is not necessari
     <Breadcrumb/>
     <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Logical Implication (Conditional Statement)</h1>
     <br/>
-    <SectionTableOfContents sections={implicationSections}/>
+    <SectionTableOfContents sections={implicationSections}
+     showSecondaryNav={true}
+     secondaryNavMode="siblings"
+     secondaryNavTitle="More in this Section"/>
     <br/>
     <br/>
     <br/>
+    <IntroSection
+         id={introContent.id}
+         title={introContent.title} 
+         content={introContent.content}
+         backgroundColor="#f2f2f2"
+         textColor="#06357a"
+       />
     <Sections sections={implicationSections}/>
     <br/>
     <ScrollUpButton/>

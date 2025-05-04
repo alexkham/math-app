@@ -1376,9 +1376,10 @@ import React from 'react';
 import { InlineMath, BlockMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
 import Link from 'next/link';
+import { renderAcademicBlockHTML } from './academicBlocks';
 
 
- const processContent2 = (content) => {
+ const processContent2 = (content,styles = null) => {
   if (!content) return null;
   
   // First process SVGs
@@ -1413,7 +1414,26 @@ import Link from 'next/link';
   
   const processPart = (part, index) => {
     if (!part) return null;
-  
+    
+
+    if (part.startsWith('__ACADEMIC_BLOCK__') && part.includes('__TYPE:')) {
+      try {
+        const typeMatch = part.match(/__TYPE:([^_]+)__/);
+        const contentMatch = part.match(/__CONTENT:([^]+)__END__/);
+        
+        if (typeMatch && contentMatch) {
+          const blockType = typeMatch[1];
+          const content = contentMatch[1];
+          return <div key={`academic-${index}`} dangerouslySetInnerHTML={{ 
+            __html: renderAcademicBlockHTML(content, blockType) 
+          }} />;
+        }
+      } catch (e) {
+        console.error('Error processing academic block:', e);
+      }
+      return part;
+    }
+    
     // Process SVG placeholders first
     if (part.startsWith('__SVG_PLACEHOLDER_')) {
       const svgIndex = parseInt(part.match(/__SVG_PLACEHOLDER_(\d+)__/)[1]);
@@ -1429,7 +1449,8 @@ import Link from 'next/link';
      const linkMatch = part.match(/\[(.+?)\]\((!)?(.+?)\)/);
      if (linkMatch) {
        const [, text, sameTab, url] = linkMatch;
-       return <a key={`link-${index}`} href={url} {...(!sameTab && { target: "_blank", rel: "noopener noreferrer" })}>{text}</a>;
+      //  return <a  key={`link-${index}`} href={url} {...(!sameTab && { target: "_blank", rel: "noopener noreferrer" })}>{text}</a>;
+      return <a key={`link-${index}`} href={url} className={styles?.markdownLink || "markdown-link"} data-markdown-link="true" {...(!sameTab && { target: "_blank", rel: "noopener noreferrer" })}>{text}</a>;
      }
     } else if (part.startsWith('@[') && part.endsWith(']@')) {
       return <span key={`code-${index}`} style={{
@@ -1442,6 +1463,27 @@ import Link from 'next/link';
         fontWeight: 300
       }}>{part.slice(2, -2)}</span>;
     }
+    else if (part.startsWith('@table:[') && part.endsWith(']@')) {
+      const markdownTable = part.slice(8, -2).trim();
+      const rows = markdownTable.split('\n').map(row => 
+        row.trim().split('|').slice(1, -1).map(cell => cell.trim())
+      );
+      
+      return (
+        <table key={`table-${index}`} border="1" cellPadding="6" style={{ borderCollapse: 'collapse', margin: '1em 0' }}>
+          <thead>
+            <tr>{rows[0].map((cell, i) => <th key={`th-${i}`}>{cell}</th>)}</tr>
+          </thead>
+          <tbody>
+            {rows.slice(1).map((row, rowIndex) => (
+              <tr key={`tr-${rowIndex}`}>
+                {row.map((cell, cellIndex) => <td key={`td-${rowIndex}-${cellIndex}`}>{cell}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    }
     return part;
   };
   
@@ -1450,7 +1492,8 @@ import Link from 'next/link';
     const trimmedLine = line.replace(/^\t+/, '');
   
     // Updated regex to include SVG placeholders and code blocks
-    const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|__HTML_PLACEHOLDER_\d+__|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@)/g);
+    // const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|__HTML_PLACEHOLDER_\d+__|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@)/g);
+    const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@|@academic\[.+?\]@)/);
     const processedParts = parts.filter(Boolean).map((part, partIndex) => processPart(part, `${lineIndex}-${partIndex}`));
   
     if (trimmedLine.startsWith('- ')) {
@@ -1498,7 +1541,7 @@ import Link from 'next/link';
   return hasListItems ? <ul>{elements}</ul> : <>{elements}</>;
   };
 
-export const processContent = (content) => {
+export const processContent = (content,styles = null) => {
   if (!content) return null;
 
   const svgs = [];
@@ -1518,6 +1561,19 @@ export const processContent = (content) => {
   const elements = [];
 
   const processPart = (part, index) => {
+    if (part.startsWith('@academic[') && part.endsWith(']@')) {
+      const academicContent = part.slice(10, -2);
+      const splitIndex = academicContent.indexOf(':');
+      if (splitIndex > 0) {
+        const blockType = academicContent.substring(0, splitIndex);
+        const content = academicContent.substring(splitIndex + 1);
+        return <div key={`academic-${index}`} dangerouslySetInnerHTML={{ 
+          __html: renderAcademicBlockHTML(content.trim(), blockType.trim()) 
+        }} />;
+      }
+      return part;
+    }
+
     if (part.startsWith('__SVG_PLACEHOLDER_')) {
       const svgIndex = parseInt(part.match(/__SVG_PLACEHOLDER_(\d+)__/)[1]);
       return <div key={`svg-${index}`} dangerouslySetInnerHTML={{ __html: svgs[svgIndex] }} />;
@@ -1578,6 +1634,39 @@ export const processContent = (content) => {
     } else if (part.trim().startsWith('<') && part.trim().endsWith('>')) {
       return <div key={`html-${index}`} dangerouslySetInnerHTML={{ __html: part }} />;
     }
+    else if (part.startsWith('@[') && part.endsWith(']@')) {
+      return <span key={`code-${index}`} style={{
+        backgroundColor: 'rgba(175, 184, 193, 0.2)',
+        padding: '0.2em 0.4em',
+        borderRadius: '6px',
+        fontFamily: 'ui-monospace, monospace',
+        fontSize: '95%',
+        color: 'black',
+        fontWeight: 300
+      }}>{part.slice(2, -2)}</span>;
+    }
+    else if (part.startsWith('@table:[') && part.endsWith(']@')) {
+      const markdownTable = part.slice(8, -2).trim();
+      const rows = markdownTable.split('\n').map(row => 
+        row.trim().split('|').slice(1, -1).map(cell => cell.trim())
+      );
+      
+      return (
+        <table key={`table-${index}`} border="1" cellPadding="6" style={{ borderCollapse: 'collapse', margin: '1em 0' }}>
+          <thead>
+            <tr>{rows[0].map((cell, i) => <th key={`th-${i}`}>{cell}</th>)}</tr>
+          </thead>
+          <tbody>
+            {rows.slice(1).map((row, rowIndex) => (
+              <tr key={`tr-${rowIndex}`}>
+                {row.map((cell, cellIndex) => <td key={`td-${rowIndex}-${cellIndex}`}>{cell}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    }
+    
     return part;
   };
 
@@ -1597,7 +1686,9 @@ export const processContent = (content) => {
       return;
     }
     
-    const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\))/);
+    // const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\))/);
+    // const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@)/);
+    const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@|@academic\[.+?\]@)/);
     const processedParts = parts.map((part, partIndex) => processPart(part, `${lineIndex}-${partIndex}`));
 
     if (trimmedLine.startsWith('- ')) {

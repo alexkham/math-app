@@ -1,0 +1,657 @@
+/* .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  .inputSection {
+    margin-bottom: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+  }
+  .inputContainer {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+  .propositionInput {
+    flex: 1;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 2px solid #d0d0d0;
+    border-radius: 4px;
+    outline: none;
+    font-family: monospace;
+  }
+  .propositionInput:focus {
+    border-color: #2563eb;
+  }
+  .propositionInput.error {
+    border-color: #dc2626;
+  }
+  .buttonContainer {
+    display: flex;
+    margin-left: 1rem;
+  }
+  .analyzeButton {
+    padding: 0.75rem 1.5rem;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .analyzeButton:hover {
+    background-color: #1d4ed8;
+  }
+  .functionButton {
+    padding: 0.75rem;
+    margin-right: 0.5rem;
+    background-color: #f3f4f6;
+    color: #4b5563;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 1rem;
+  }
+  .functionButton:hover:not(:disabled) {
+    background-color: #e5e7eb;
+  }
+  .functionButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .clearButton {
+    padding: 0.75rem;
+    margin-right: 0.5rem;
+    background-color: #f3f4f6;
+    color: #dc2626;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 1rem;
+  }
+  .clearButton:hover {
+    background-color: #fee2e2;
+  }
+  .errorMessage {
+    color: #dc2626;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  .charactersRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background-color: #f8fafc;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+  }
+  .charButton {
+    padding: 0.5rem 0.75rem;
+    background-color: #dcfce7;
+    border: 1px solid #86efac;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #166534;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .charButton:hover {
+    background-color: #bbf7d0;
+    transform: translateY(-1px);
+  }
+  .operatorsGuide {
+    margin-top: 1rem;
+  }
+  .operatorsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .operatorButton {
+    padding: 0.5rem 0.75rem;
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .operatorButton:hover {
+    background-color: #e5e7eb;
+  }
+  .resultsContainer {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .resultSection {
+    flex: 1;
+    min-width: 300px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+  }
+  .treeContainer {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8fafc;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    min-height: 300px;
+    overflow: auto;
+  }
+  .verticalTreeDisplay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  .treeNode {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+    min-width: 40px;
+    justify-content: center;
+  }
+  .operatorNode {
+    background-color: #dbeafe;
+    border: 1px solid #93c5fd;
+    color: #1e40af;
+  }
+  .variableNode {
+    background-color: #dcfce7;
+    border: 1px solid #86efac;
+    color: #166534;
+  }
+  .operatorName {
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+    opacity: 0.7;
+  }
+  .treeNodeWrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .treeNodeWithChildren {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .branchContainer {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+  .branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .branchLine {
+    width: 1px;
+    height: 1.5rem;
+    background-color: #94a3b8;
+  }
+  .truthTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  .truthTable th,
+  .truthTable td {
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px solid #d1d5db;
+  }
+  .truthTable th {
+    background-color: #f3f4f6;
+    font-weight: 600;
+  }
+  .truthTable tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+  .trueValue {
+    color: #2563eb;
+    font-weight: 500;
+  }
+  .falseValue {
+    color: #dc2626;
+    font-weight: 500;
+  }
+  .noData {
+    color: #6b7280;
+    text-align: center;
+    padding: 2rem;
+  }
+  .tautologyBadge,
+  .contradictionBadge,
+  .contingencyBadge {
+    display: inline-block;
+    margin-left: 1rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  .tautologyBadge {
+    background-color: #dcfce7;
+    color: #166534;
+  }
+  .contradictionBadge {
+    background-color: #fee2e2;
+    color: #b91c1c;
+  }
+  .contingencyBadge {
+    background-color: #dbeafe;
+    color: #1e40af;
+  }
+  @media (max-width: 768px) {
+    .resultsContainer {
+      flex-direction: column;
+    }
+    
+    .resultSection {
+      min-width: 100%;
+    }
+  } */
+
+
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  .inputSection {
+    margin-bottom: 1rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+  }
+  .controlsRow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .inputContainer {
+    flex: 0.9;
+    display: flex;
+  }
+  .keyboardContainer {
+    flex: 0.3;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .propositionInput {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    border: 2px solid #d0d0d0;
+    border-radius: 4px;
+    outline: none;
+    font-family: monospace;
+    height: 2rem;
+  }
+  .propositionInput:focus {
+    border-color: #2563eb;
+  }
+  .propositionInput.error {
+    border-color: #dc2626;
+  }
+  .buttonContainer {
+    display: flex;
+    margin-left: 0.5rem;
+  }
+  .analyzeButton {
+    padding: 0.4rem 0.8rem;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.8rem;
+    height: 2rem;
+  }
+  .analyzeButton:hover {
+    background-color: #1d4ed8;
+  }
+  .functionButton {
+    padding: 0.4rem;
+    margin-right: 0.3rem;
+    background-color: #f3f4f6;
+    color: #4b5563;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.8rem;
+    height: 2rem;
+    width: 2rem;
+  }
+  .functionButton:hover:not(:disabled) {
+    background-color: #e5e7eb;
+  }
+  .functionButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .clearButton {
+    padding: 0.4rem;
+    margin-right: 0.3rem;
+    background-color: #f3f4f6;
+    color: #dc2626;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.8rem;
+    height: 2rem;
+    width: 2rem;
+  }
+  .clearButton:hover {
+    background-color: #fee2e2;
+  }
+  .errorMessage {
+    color: #dc2626;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  /* .charactersRow, .operatorsRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  } */
+
+  .charactersRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .operatorsRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 0.3rem;
+  }
+
+  .charButton {
+    padding: 0.3rem 0.5rem;
+    background-color: #dcfce7;
+    border: 1px solid #86efac;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #166534;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .charButton:hover {
+    background-color: #bbf7d0;
+    transform: translateY(-1px);
+  }
+  .operatorsRow {
+    margin-top: 0.3rem;
+  }
+  .operatorButton {
+    padding: 0.3rem 0.5rem;
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .operatorButton:hover {
+    background-color: #e5e7eb;
+  }
+  .resultsContainer {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .resultSection {
+    flex: 1;
+    min-width: 300px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+  }
+  .treeContainer {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8fafc;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    min-height: 300px;
+    overflow: auto;
+    width: 100%;
+  }
+  .verticalTreeDisplay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    min-width: 100%;
+  }
+  .treeNode {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+    min-width: 60px;
+    justify-content: center;
+    text-align: center;
+    font-family: monospace;
+    white-space: nowrap;
+  }
+  .operatorNode {
+    background-color: #dbeafe;
+    border: 1px solid #93c5fd;
+    color: #1e40af;
+  }
+  .variableNode {
+    background-color: #dcfce7;
+    border: 1px solid #86efac;
+    color: #166534;
+  }
+  .operatorName {
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+    opacity: 0.7;
+  }
+  .treeNodeWrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .treeNodeWithChildren {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  .branchContainer {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 1rem;
+    width: max-content;
+  }
+  .branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .branchLine {
+    width: 1px;
+    height: 1.5rem;
+    background-color: #94a3b8;
+  }
+  .truthTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  .truthTable th,
+  .truthTable td {
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px solid #d1d5db;
+  }
+  .truthTable th {
+    background-color: #f3f4f6;
+    font-weight: 600;
+  }
+  .truthTable tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+  .trueValue {
+    color: #2563eb;
+    font-weight: 500;
+  }
+  .falseValue {
+    color: #dc2626;
+    font-weight: 500;
+  }
+  .noData {
+    color: #6b7280;
+    text-align: center;
+    padding: 2rem;
+  }
+  .tautologyBadge,
+  .contradictionBadge,
+  .contingencyBadge {
+    display: inline-block;
+    margin-left: 1rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  .tautologyBadge {
+    background-color: #dcfce7;
+    color: #166534;
+  }
+  .contradictionBadge {
+    background-color: #fee2e2;
+    color: #b91c1c;
+  }
+  .contingencyBadge {
+    background-color: #dbeafe;
+    color: #1e40af;
+  }
+  @media (max-width: 768px) {
+    .controlsRow {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .inputContainer, .keyboardContainer {
+      flex: 1;
+      width: 100%;
+    }
+    .resultsContainer {
+      flex-direction: column;
+    }
+    .resultSection {
+      min-width: 100%;
+    }
+  }
+
+  /*added functionality :tooltips and copy button*/
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltipText {
+    visibility: hidden;
+    width: 120px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.75rem;
+  }
+  
+  .tooltip .tooltipText::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+  }
+  
+  .tooltip:hover .tooltipText {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .copyButton {
+    padding: 0.4rem;
+    background-color: #f3f4f6;
+    color: #4b5563;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.8rem;
+    height: 2rem;
+    width: 2rem;
+    margin-left: 0.3rem;
+  }
+  
+  .copyButton:hover {
+    background-color: #e5e7eb;
+  }

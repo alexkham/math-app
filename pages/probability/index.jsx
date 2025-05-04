@@ -48,6 +48,13 @@ export async function getStaticProps() {
           backgroundColor:'#fdfdea',
         }),
         layout: 'horizontal'
+      },
+      symbols:{
+        title:'Probability Symbols Reference',
+        description:`Our [Probability Symbols page](!/math-symbols/probability) delivers a systematic reference for notation used in probability theory and statistics. This collection serves as an essential guide for students and professionals working with statistical concepts.
+The reference organizes symbols into practical categories including probability notations (P(A), P(A|B)), random variables and distributions (f_X(x), F_X(x)), and common distribution families (Bin(n,p), N(μ,σ²)). It extends to advanced topics like statistical measures (E(X), Var(X)), hypothesis testing parameters (H₀, α, p-value), and information theory metrics (H(X), I(X;Y)).
+Specialized sections cover moment generating functions (M_X(t)), key probability inequalities (Markov's, Chebyshev's), Bayesian methods, and regression analysis notation—all presented with precise LaTeX formatting to support academic writing and research in probability and statistics.`,
+link:'/math-symbols/probability'
       }
     }
   
@@ -145,6 +152,19 @@ export default function ProbabilityPage({
           layout: 'horizontal', 
           position: 'right',
           width: 1.5 
+        }
+      ]
+    },
+    {
+      id: 'symbols',
+      title: sectionContent.symbols.title, // Give it a proper title
+      link: sectionContent.symbols.link, // Optional
+      content: [
+        {
+          content:sectionContent.symbols.description,
+          layout: 'horizontal',
+          position: 'center', // or 'left' if you prefer
+          width: 8 // full width
         }
       ]
     }

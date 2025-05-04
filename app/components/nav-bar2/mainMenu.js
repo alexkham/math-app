@@ -59,7 +59,8 @@ export const mainMenuStructure = [
             { label: 'Matrix Transposition', href: '/visual-tools/matrix-transposition' },
             { label: 'Matrix Types Generator', href: '/visual-tools/matrix-types' },
             { label: 'Permutations Visualizer', href: '/combinatorics/permutations/permutations-visualizer' },
-            { label: 'Unit Circle Visualizer', href: '/visual-tools/unit-circle' }
+            { label: 'Unit Circle Visualizer', href: '/visual-tools/unit-circle' },
+            { label: 'Syntax Tree Builder', href: '/logic/propositional-logic/syntax/tree-builder' }
           ]
         },
         {

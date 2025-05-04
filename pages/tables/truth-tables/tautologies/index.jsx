@@ -187,7 +187,8 @@ export async function getStaticProps() {
       link: "/tables/truth-tables/contradictions"
     },
 
-  ]
+  ];
+  const validatorLink="/logic/propositional-logic/semantics/equivalence-validator"
 
 
   
@@ -195,69 +196,69 @@ export async function getStaticProps() {
   
   const tautologyExplanations = {
     'P ∨ ¬P': {
-      text: "This [tautology](!/logic/propositional-logic/tautology) expresses that a proposition or its negation must always be true, capturing the principle of bivalence in classical logic. The expression evaluates to true for both possible truth values of P. It is a fundamental truth in propositional logic, showing that every statement must either hold or not hold, with no third option. This [tautology](!/logic/propositional-logic/tautology) is essential in establishing completeness and soundness in logical systems.",
+      text: "This [tautology](!/logic/propositional-logic/semantics/tautology) expresses that a proposition or its negation must always be true, capturing the principle of bivalence in classical logic. The expression evaluates to true for both possible truth values of P. It is a fundamental truth in propositional logic, showing that every statement must either hold or not hold, with no third option. This [tautology](!/logic/propositional-logic/semantics/tautology) is essential in establishing completeness and soundness in logical systems.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: validatorLink }
       ]
     },
     '(P → Q) ∨ (Q → P)': {
-      text: "This proposition is a [tautology](!/logic/propositional-logic/tautology) because, for any two propositions P and Q, at least one of the implications holds under every truth assignment. It demonstrates that between any two propositions, either the first implies the second or the second implies the first. This universality makes it a useful tool in comparing and ordering propositions in formal logic.",
+      text: "This proposition is a [tautology](!/logic/propositional-logic/semantics/tautology) because, for any two propositions P and Q, at least one of the implications holds under every truth assignment. It demonstrates that between any two propositions, either the first implies the second or the second implies the first. This universality makes it a useful tool in comparing and ordering propositions in formal logic.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: validatorLink }
       ]
     },
     '(P ∧ Q) → P': {
-      text: "This [tautology](!/logic/propositional-logic/tautology) reflects that if both P and Q are true, then P must be true. The expression captures the nature of logical conjunction — when both components are assumed, either can be inferred individually. The implication also holds vacuously when the antecedent is false. This formula is used frequently in formal proofs and deductive reasoning systems.",
+      text: "This [tautology](!/logic/propositional-logic/semantics/tautology) reflects that if both P and Q are true, then P must be true. The expression captures the nature of logical conjunction — when both components are assumed, either can be inferred individually. The implication also holds vacuously when the antecedent is false. This formula is used frequently in formal proofs and deductive reasoning systems.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: validatorLink }
       ]
     },
     '((P → Q) ∧ (Q → R)) → (P → R)': {
-      text: "This formula is a [tautology](!/logic/propositional-logic/tautology) expressing the transitivity of implication. If P implies Q and Q implies R, then it must follow that P implies R. The formula is true under all combinations of truth values for P, Q, and R. It is foundational in formal deduction and is widely used in mathematical proofs where multi-step reasoning is required.",
+      text: "This formula is a [tautology](!/logic/propositional-logic/semantics/tautology) expressing the transitivity of implication. If P implies Q and Q implies R, then it must follow that P implies R. The formula is true under all combinations of truth values for P, Q, and R. It is foundational in formal deduction and is widely used in mathematical proofs where multi-step reasoning is required.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: validatorLink }
       ]
     },
     '((P → Q) ∧ P) → Q': {
-      text: "This [tautology](!/logic/propositional-logic/tautology) captures the principle of modus ponens: from the implication P→Q and the affirmation of P, Q necessarily follows. It is a basic but powerful tool in formal proof systems and deductive logic. The formula evaluates to true in all possible combinations of P and Q, confirming its status as a [tautology](!/logic/propositional-logic/tautology).",
+      text: "This [tautology](!/logic/propositional-logic/semantics/tautology) captures the principle of modus ponens: from the implication P→Q and the affirmation of P, Q necessarily follows. It is a basic but powerful tool in formal proof systems and deductive logic. The formula evaluates to true in all possible combinations of P and Q, confirming its status as a [tautology](!/logic/propositional-logic/semantics/tautology).",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: validatorLink }
       ]
     },
     'P → (Q → P)': {
-      text: "This expression states that if P is true, then regardless of the truth value of Q, the implication Q→P holds. This [tautology](!/logic/propositional-logic/tautology) illustrates that a true statement remains true even in the context of additional assumptions. It holds in all cases and is used frequently in formal systems, particularly in structuring nested implications.",
+      text: "This expression states that if P is true, then regardless of the truth value of Q, the implication Q→P holds. This [tautology](!/logic/propositional-logic/semantics/tautology) illustrates that a true statement remains true even in the context of additional assumptions. It holds in all cases and is used frequently in formal systems, particularly in structuring nested implications.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: validatorLink }
       ]
     },
     '(P → (Q ∨ R)) → ((P → Q) ∨ (P → R))': {
-      text: "This [tautology](!/logic/propositional-logic/tautology) expresses that if P implies a disjunction, then it must imply at least one of the disjuncts. The formula is logically valid under every truth value assignment. It is useful in constructive logic and formal reasoning, particularly when decomposing compound implications into simpler components.",
+      text: "This [tautology](!/logic/propositional-logic/semantics/tautology) expresses that if P implies a disjunction, then it must imply at least one of the disjuncts. The formula is logically valid under every truth value assignment. It is useful in constructive logic and formal reasoning, particularly when decomposing compound implications into simpler components.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: validatorLink }
       ]
     },
     '((P ∨ Q) ∧ ¬P) → Q': {
-      text: "This [tautology](!/logic/propositional-logic/tautology) reflects the pattern of disjunctive syllogism. If either P or Q is true, and P is known to be false, then Q must be true. The formula is logically valid in all cases and is frequently used in propositional proofs that rely on elimination of alternatives.",
+      text: "This [tautology](!/logic/propositional-logic/semantics/tautology) reflects the pattern of disjunctive syllogism. If either P or Q is true, and P is known to be false, then Q must be true. The formula is logically valid in all cases and is frequently used in propositional proofs that rely on elimination of alternatives.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: validatorLink }
       ]
     },
     '(P ↔ Q) → ((P → Q) ∧ (Q → P)': {
-      text: "This formula is a [tautology](!/logic/propositional-logic/tautology) that defines the structure of logical equivalence. It shows that if P is logically equivalent to Q, then P implies Q and Q implies P. This bidirectional implication is essential in constructing definitions and proving equivalences between statements in formal logic.",
+      text: "This formula is a [tautology](!/logic/propositional-logic/semantics/tautology) that defines the structure of logical equivalence. It shows that if P is logically equivalent to Q, then P implies Q and Q implies P. This bidirectional implication is essential in constructing definitions and proving equivalences between statements in formal logic.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: validatorLink }
       ]
     },
     '(P → Q) ↔ (¬Q → ¬P)': {
-      text: "This expression demonstrates that a statement ([tautology](!/logic/propositional-logic/tautology)) is logically equivalent to its contrapositive. The formula is true in all cases and is foundational in classical logic and mathematical proof strategies. The equivalence allows one to prove a statement by proving its contrapositive, which is often simpler or more direct.",
+      text: "This expression demonstrates that a statement ([tautology](!/logic/propositional-logic/semantics/tautology)) is logically equivalent to its contrapositive. The formula is true in all cases and is foundational in classical logic and mathematical proof strategies. The equivalence allows one to prove a statement by proving its contrapositive, which is often simpler or more direct.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: validatorLink }
       ]
     },
     '(P ↔ Q) → ((P → Q) ∧ (Q → P))': {
-  text: "This [tautology](!/logic/propositional-logic/tautology) demonstrates that logical equivalence (↔) can be expressed as the conjunction of two implications. If P is equivalent to Q, then P implies Q and Q implies P. This formal representation of biconditional logic is foundational in mathematical proofs and logical analysis, establishing that equivalence requires mutual implication in both directions.",
+  text: "This [tautology](!/logic/propositional-logic/semantics/tautology) demonstrates that logical equivalence (↔) can be expressed as the conjunction of two implications. If P is equivalent to Q, then P implies Q and Q implies P. This formal representation of biconditional logic is foundational in mathematical proofs and logical analysis, establishing that equivalence requires mutual implication in both directions.",
   links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-    { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+    { title: "Check our logic equivalence validator", link: validatorLink }
   ]
 }
   };

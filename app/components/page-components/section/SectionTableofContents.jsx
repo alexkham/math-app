@@ -5659,23 +5659,50 @@ const SectionTableOfContents = ({
   }, [showSecondaryNav, useProvidedLinks]);
 
   // Process links for secondary navigation - only for API-based mode
-  useEffect(() => {
-    if (useProvidedLinks || !showSecondaryNav || !pathname || Object.keys(urlStructure).length === 0) return;
+  // useEffect(() => {
+  //   if (useProvidedLinks || !showSecondaryNav || !pathname || Object.keys(urlStructure).length === 0) return;
     
-    let path = pathname;
-    let newLinks = [];
+  //   let path = pathname;
+  //   let newLinks = [];
 
-    if (secondaryNavMode === 'children') {
-      newLinks = urlStructure[path] || [];
-    } else if (secondaryNavMode === 'siblings') {
-      newLinks = (urlStructure['/'] || []).filter(link => '/' + link !== pathname);
-      path = '/';
-    }
+  //   if (secondaryNavMode === 'children') {
+  //     newLinks = urlStructure[path] || [];
+  //   } else if (secondaryNavMode === 'siblings') {
+  //     newLinks = (urlStructure['/'] || []).filter(link => '/' + link !== pathname);
+  //     path = '/';
+  //   }
 
-    newLinks = newLinks.filter(link => !link.includes('[') && !link.includes(']'));
-    setSecondaryNavLinks(newLinks);
-    setCurrentPath(path);
-  }, [urlStructure, pathname, secondaryNavMode, showSecondaryNav, useProvidedLinks]);
+  //   newLinks = newLinks.filter(link => !link.includes('[') && !link.includes(']'));
+  //   setSecondaryNavLinks(newLinks);
+  //   setCurrentPath(path);
+  // }, [urlStructure, pathname, secondaryNavMode, showSecondaryNav, useProvidedLinks]);
+
+ // Process links for secondary navigation - only for API-based mode
+useEffect(() => {
+  if (useProvidedLinks || !showSecondaryNav || !pathname || Object.keys(urlStructure).length === 0) return;
+  
+  let path = pathname;
+  let newLinks = [];
+
+  if (secondaryNavMode === 'children') {
+    newLinks = urlStructure[path] || [];
+  } else if (secondaryNavMode === 'siblings') {
+    // Get the parent path by removing the last segment
+    const pathParts = pathname.split('/').filter(Boolean);
+    pathParts.pop(); // Remove the last segment (current page)
+    const parentPath = pathParts.length === 0 ? '/' : '/' + pathParts.join('/');
+    
+    // Get all children of the parent path (siblings of current page)
+    newLinks = urlStructure[parentPath] || [];
+    
+    // Set the path to the parent path for proper URL construction
+    path = parentPath;
+  }
+
+  newLinks = newLinks.filter(link => !link.includes('[') && !link.includes(']'));
+  setSecondaryNavLinks(newLinks);
+  setCurrentPath(path);
+}, [urlStructure, pathname, secondaryNavMode, showSecondaryNav, useProvidedLinks]);
 
   const handleLinkClick = (e, id, parentId = null) => {
     e.preventDefault();

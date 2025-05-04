@@ -153,7 +153,7 @@ const ExpandableTable = ({
                             >
                               <div className={styles.contentValue}>
                                 <div className={styles.cellContent}>
-                                  <span>{processContent(row.content[tab]?.toString() || '')}</span>
+                                  <span  className={styles.innerContent}>{processContent(row.content[tab]?.toString() || '')}</span>
                                   {shouldShowNestedCopyButton(tab) && row.content[tab] && (
                                     <button
                                       className={`${styles.copyButton} ${copiedStates[`${row.id}-${tab}`] ? styles.copied : ''}`}
@@ -175,7 +175,7 @@ const ExpandableTable = ({
                     ) : (
                       <div className={styles.simpleContent}>
                         <div className={styles.cellContent}>
-                          <span>{processContent(row.content?.toString() || '')}</span>
+                          <span className={styles.innerContent}>{processContent(row.content?.toString() || '')}</span>
                           {shouldShowNestedCopyButton('content') && row.content && (
                             <button
                               className={`${styles.copyButton} ${copiedStates[`${row.id}-content`] ? styles.copied : ''}`}

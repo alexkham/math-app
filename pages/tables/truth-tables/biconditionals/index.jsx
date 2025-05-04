@@ -195,49 +195,49 @@ export async function getStaticProps() {
     'P ↔ Q': {
       text: "This formula represents the most basic biconditional relationship in propositional logic. It states that P and Q must have the same truth value - both true or both false. The biconditional is equivalent to the conjunction of two implications (P→Q) ∧ (Q→P), demonstrating that logical equivalence requires mutual implication. This fundamental relation is used to establish definitions and equivalences in formal logical systems.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/semantics/equivalence-validator" }
       ]
     },
     '(P ↔ Q) ↔ (¬P ↔ ¬Q)': {
-      text: "This [tautology](!/logic/propositional-logic/tautology) demonstrates that a biconditional relationship is preserved under negation. If P is equivalent to Q, then not-P is equivalent to not-Q, and vice versa. This illustrates an important symmetry in classical logic, showing that logical equivalence is preserved when we negate both sides of an equivalence. The expression is true for all possible truth values of P and Q, confirming its status as a tautology.",
+      text: "This [tautology](!/logic/propositional-logic/semantics/tautology) demonstrates that a biconditional relationship is preserved under negation. If P is equivalent to Q, then not-P is equivalent to not-Q, and vice versa. This illustrates an important symmetry in classical logic, showing that logical equivalence is preserved when we negate both sides of an equivalence. The expression is true for all possible truth values of P and Q, confirming its status as a [tautology](!/logic/propositional-logic/semantics/tautology).",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/semantics/equivalence-validator" }
       ]
     },
     '(P ↔ Q) ↔ ((P → Q) ∧ (Q → P))': {
-      text: "This [tautology](!/logic/propositional-logic/tautology) demonstrates that logical equivalence (↔) can be expressed as the conjunction of two implications. If P is equivalent to Q, then P implies Q and Q implies P. This formal representation of biconditional logic is foundational in mathematical proofs and logical analysis, establishing that equivalence requires mutual implication in both directions.",
+      text: "This [tautology](!/logic/propositional-logic/semantics/tautology) demonstrates that logical equivalence (↔) can be expressed as the conjunction of two implications. If P is equivalent to Q, then P implies Q and Q implies P. This formal representation of biconditional logic is foundational in mathematical proofs and logical analysis, establishing that equivalence requires mutual implication in both directions.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/semantics/equivalence-validator" }
       ]
     },
     '((P ↔ Q) ∧ (Q ↔ R)) ↔ (P ↔ R)': {
-      text: "This [tautology](!/logic/propositional-logic/tautology) illustrates the transitivity property of logical equivalence. If P is equivalent to Q, and Q is equivalent to R, then P must be equivalent to R. This principle is central to constructing chains of equivalent statements in formal proofs and mathematical reasoning. The formula is valid for all possible combinations of truth values, confirming its status as a fundamental logical truth.",
+      text: "This [tautology](!/logic/propositional-logic/semantics/tautology) illustrates the transitivity property of logical equivalence. If P is equivalent to Q, and Q is equivalent to R, then P must be equivalent to R. This principle is central to constructing chains of equivalent statements in formal proofs and mathematical reasoning. The formula is valid for all possible combinations of truth values, confirming its status as a fundamental logical truth.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/semantics/equivalence-validator" }
       ]
     },
     '(P ↔ Q) → ((P → Q) ∧ (Q → P))': {
-      text: "This [tautology](!/logic/propositional-logic/tautology) demonstrates that logical equivalence (↔) implies the conjunction of two implications. If P is equivalent to Q, then P implies Q and Q implies P. This formal representation of biconditional logic is foundational in mathematical proofs and logical analysis, establishing that equivalence requires mutual implication in both directions.",
+      text: "This [tautology](!/logic/propositional-logic/semantics/tautology) demonstrates that logical equivalence (↔) implies the conjunction of two implications. If P is equivalent to Q, then P implies Q and Q implies P. This formal representation of biconditional logic is foundational in mathematical proofs and logical analysis, establishing that equivalence requires mutual implication in both directions.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/semantics/equivalence-validator" }
       ]
     },
     '(P → Q) ↔ (¬Q → ¬P)': {
-      text: "This expression demonstrates that a conditional statement is logically equivalent to its contrapositive. The formula is a [tautology](!/logic/propositional-logic/tautology) that is true in all cases and is foundational in classical logic and mathematical proof strategies. The equivalence allows one to prove a statement by proving its contrapositive, which is often simpler or more direct. This principle is frequently used in indirect proofs and logical reasoning.",
+      text: "This expression demonstrates that a conditional statement is logically equivalent to its contrapositive. The formula is a [tautology](!/logic/propositional-logic/semantics/tautology) that is true in all cases and is foundational in classical logic and mathematical proof strategies. The equivalence allows one to prove a statement by proving its contrapositive, which is often simpler or more direct. This principle is frequently used in indirect proofs and logical reasoning.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/semantics/equivalence-validator" }
       ]
     },
     'P ↔ ¬¬P': {
-      text: "This [tautology](!/logic/propositional-logic/tautology) illustrates the double negation principle in classical logic. It states that a proposition P is logically equivalent to its double negation (not not P). This principle distinguishes classical logic from intuitionistic logic, where double negation elimination is not universally accepted. The formula is true for all possible truth values of P, confirming its status as a fundamental logical truth.",
+      text: "This [tautology](!/logic/propositional-logic/semantics/tautology) illustrates the double negation principle in classical logic. It states that a proposition P is logically equivalent to its double negation (not not P). This principle distinguishes classical logic from intuitionistic logic, where double negation elimination is not universally accepted. The formula is true for all possible truth values of P, confirming its status as a fundamental logical truth.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/semantics/equivalence-validator" }
       ]
     },
     '(P ∧ Q) ↔ ¬(¬P ∨ ¬Q)': {
-      text: "This [tautology](!/logic/propositional-logic/tautology) expresses one of De Morgan's laws in the form of a biconditional. It demonstrates that the conjunction of two propositions is logically equivalent to the negation of the disjunction of their negations. This equivalence is fundamental in simplifying logical expressions and is widely used in circuit design, formal proofs, and mathematical reasoning. The formula is valid for all possible combinations of truth values.",
+      text: "This [tautology](!/logic/propositional-logic/semantics/tautology) expresses one of De Morgan's laws in the form of a biconditional. It demonstrates that the conjunction of two propositions is logically equivalent to the negation of the disjunction of their negations. This equivalence is fundamental in simplifying logical expressions and is widely used in circuit design, formal proofs, and mathematical reasoning. The formula is valid for all possible combinations of truth values.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/semantics/equivalence-validator" }
       ]
     }
   };

@@ -71,6 +71,15 @@ Laws are fundamental, while other equivalences may be derived, conditional, or c
  Propositional logic is indeed widely used in computer science (for circuit design, program verification), artificial intelligence (knowledge representation, automated reasoning), philosophy (formal analysis of arguments), and many other fields`,
     ],
     conclusion:`The study of propositional logic establishes the foundation for more complex logical systems while providing essential tools for formal reasoning across numerous disciplines.`
+   },
+   symbols:{
+    title:'Logic Symbols Reference',
+    link:'/math-symbols/math-logic',
+    description:`Our [Mathematical Logic Symbols](!/math-symbols/math-logic) page provides a comprehensive collection of symbols essential for working with formal logic systems. This reference includes detailed categorization of symbols across multiple domains of mathematical logic.
+Explore symbols organized by functional categories including logical operations (¬, ∧, ∨), quantifiers (∀, ∃), set operations (∈, ⊆, ∩), relation symbols (=, ≠, ≤), and specialized notation systems. The page features both basic symbols like implication (→) and biconditional (↔), as well as advanced concepts from temporal modal logic (□, ◇), type theory and lambda calculus (λ, ≡).
+Each symbol is presented with its corresponding LaTeX code and a brief explanation of its meaning and usage, making this an invaluable resource for students, educators, and professionals working with mathematical proofs, set theory, or formal logic systems.
+    `
+
    }
  }
 
@@ -285,6 +294,19 @@ export default function LogicPage({
          
           <ToolsSlider tools={tools} key={'slider'}/>
         </div>,
+        layout: 'horizontal',
+        position: 'center', // or 'left' if you prefer
+        width: 8 // full width
+      }
+    ]
+  },
+  {
+    id: 'symbols',
+    title: sectionContent.symbols.title, // Give it a proper title
+    link: sectionContent.symbols.link, // Optional
+    content: [
+      {
+        content:sectionContent.symbols.description,
         layout: 'horizontal',
         position: 'center', // or 'left' if you prefer
         width: 8 // full width
