@@ -291,7 +291,10 @@ In formal logic, these properties make biconditionals a powerful tool for **proo
     <br/>
     <br/>
     {/* <div style={{display:'flex',flexDirection:'row',maxWidth:'1300px'}}> */}
-    <SectionTableOfContents sections={equivalencesSections}/>
+    <SectionTableOfContents sections={equivalencesSections}
+     showSecondaryNav={true}
+     secondaryNavMode="siblings"
+     secondaryNavTitle="Similar Pages"/>
 
     {/* </div> */}
     <br/>

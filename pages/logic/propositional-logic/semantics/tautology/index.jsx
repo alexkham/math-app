@@ -409,7 +409,10 @@ Take for example the classic tautology 'P ∨ ¬P'. Its truth table confirms tha
     <Breadcrumb/>
     <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Tautology</h1>
     <br/>
-    <SectionTableOfContents sections={tautologySections}/>
+    <SectionTableOfContents sections={tautologySections}
+     showSecondaryNav={true}
+     secondaryNavMode="siblings"
+     secondaryNavTitle="Similar Pages"/>
     <br/>
     <br/>
     <br/>

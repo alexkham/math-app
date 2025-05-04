@@ -327,7 +327,10 @@ This duality plays a crucial role in logical analysis. Tautologies provide the f
     <Breadcrumb/>
     <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Contradiction</h1>
     <br/>
-    <SectionTableOfContents sections={tautologySections}/>
+    <SectionTableOfContents sections={tautologySections}
+     showSecondaryNav={true}
+     secondaryNavMode="siblings"
+     secondaryNavTitle="Similar Pages"/>
     <br/>
     <br/>
     <br/>

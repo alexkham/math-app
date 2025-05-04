@@ -177,7 +177,7 @@ But "If you are a woman, then you are a mother" ($𝑞→𝑝$) is not necessari
     <SectionTableOfContents sections={implicationSections}
      showSecondaryNav={true}
      secondaryNavMode="siblings"
-     secondaryNavTitle="More in this Section"/>
+     secondaryNavTitle="Similar Pages"/>
     <br/>
     <br/>
     <br/>
