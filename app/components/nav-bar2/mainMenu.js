@@ -93,6 +93,7 @@ export const mainMenuStructure = [
             href: '/converters',
             items: [
               { label: 'Angle Converter', href: '/converters/degree-radians' },
+              { label: 'Normal Forms Converter', href: '/logic/propositional-logic/syntax/normal-forms' },
               
               
             ]

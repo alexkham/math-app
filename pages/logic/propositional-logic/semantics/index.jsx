@@ -193,7 +193,7 @@ If a proposition is valid, it means there is no possible scenario where it is fa
 \t\t\t\t\t\t$𝑝∨¬𝑝$
 (Law of the Excluded Middle) is valid because it’s always true.
 
-## 2. **Contradiction** 
+## 2. [Contradiction](!/logic/propositional-logic/semantics/contradiction) 
 A proposition that is **always false**, no matter what. 
 **Example**:     
 \t\t\t\t\t\t$p \\land \\neg p$   
@@ -209,7 +209,7 @@ A proposition that is **sometimes true and sometimes false**, depending on the v
 \t\t\t\t\t\t$p \\lor q$   
 (If **p** is "It will rain" and **q** is "It will snow," this can be true or false depending on the weather.)
 **Satisfiability and Contingencies**
-A proposition is satisfiable if there is at least one interpretation where it is true.Otherwise it would be **contradiction**.
+A proposition is satisfiable if there is at least one interpretation where it is true.Otherwise it would be [contradiction](!/logic/propositional-logic/semantics/contradiction).
 A contingent proposition (one that is sometimes true and sometimes false) is always satisfiable because it has at least one true case.
 
 $𝑝∨𝑞$ is satisfiable because it’s true in cases where either $𝑝$ or $𝑞$ is true.
@@ -229,13 +229,13 @@ $𝑝∨𝑞$ is satisfiable because it’s true in cases where either $𝑝$ or
     id: 'implication',
     title: 'Logical Implication',
     link: '/logic/propositional-logic/semantics/implication',
-    content: `Logical implication is a core semantic construct in propositional logic, expressing conditional relationships between propositions. On this page, we introduce the formal definition of implication ($p \\rightarrow q$), along with common notation styles used in logic and mathematics.
+    content: `Logical [implication](!/logic/propositional-logic/semantics/implication) is a core semantic construct in propositional logic, expressing conditional relationships between propositions. On this page, we introduce the formal definition of implication ($p \\rightarrow q$), along with common notation styles used in logic and mathematics.
   
-  A truth table illustrates how implication behaves under all combinations of truth values for its components. From there, several key properties are discussed, including reflexivity, transitivity, contraposition, and the equivalence to the disjunction form ($\\neg p \\lor q$). These properties are essential for both understanding logical behavior and applying simplification techniques in formal proofs.
+  A [truth table](!/logic/propositional-logic/semantics/implication#truth_table) illustrates how implication behaves under all combinations of truth values for its components. From there, several key properties are discussed, including reflexivity, transitivity, contraposition, and the equivalence to the disjunction form ($\\neg p \\lor q$). These properties are essential for both understanding logical behavior and applying simplification techniques in formal proofs.
   
   To aid learners, the page also addresses common misconceptions—such as the counterintuitive truth of implications with false antecedents—and provides clarification on why implication is not a symmetric relationship.
   
-  Finally, the practical role of implication in proof strategies is outlined, emphasizing its use in direct reasoning, contrapositive arguments, and proofs by contradiction. Altogether, this resource provides a well-rounded foundation for understanding how conditional statements function within the semantic framework of propositional logic.`
+  Finally, the practical role of [implication](!/logic/propositional-logic/semantics/implication) in proof strategies is outlined, emphasizing its use in direct reasoning, contrapositive arguments, and proofs by contradiction. Altogether, this resource provides a well-rounded foundation for understanding how conditional statements function within the semantic framework of propositional logic.`
   }
   
   //  {

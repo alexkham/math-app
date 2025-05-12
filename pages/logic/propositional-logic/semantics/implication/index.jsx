@@ -8,8 +8,62 @@ import Sections from '@/app/components/page-components/section/Sections'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import MyList from '@/app/components/page-components/lists/MyList'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import ExpandableTable from '@/app/components/generic-table/ExpandableTable'
 
 export default function ImplicationPage() {
+
+
+   const implicationLaws = [
+    {
+      id: 1,
+      law: "Contrapositive Law",
+      formula: "(p → q) ≡ (¬q → ¬p)",
+      explanation: "If p implies q, then not q implies not p."
+    },
+    {
+      id: 2,
+      law: "Implication as OR",
+      formula: "p → q ≡ ¬p ∨ q",
+      explanation: "A conditional statement can be rewritten as a disjunction."
+    },
+    {
+      id: 3,
+      law: "Inverse Law for Implication",
+      formula: "(p → q) ≢ (¬p → ¬q)",
+      explanation: "Just because p→q is true, it doesn't mean ¬p→¬q is true."
+    },
+    {
+      id: 4,
+      law: "Equivalence Breakdown",
+      formula: "p ↔ q ≡ (p → q) ∧ (q → p)",
+      explanation: "Biconditional means both directions of implication must be true."
+    },
+    {
+      id: 5,
+      law: "Monotonicity of OR",
+      formula: "p → (p ∨ q)",
+      explanation: "Adding a term to an OR doesn't make it false."
+    },
+    {
+      id: 6,
+      law: "Monotonicity of AND",
+      formula: "(p ∧ q) → p",
+      explanation: "Removing a term from an AND doesn't make it true."
+    },
+    {
+      id: 7,
+      law: "Resolution",
+      formula: "(p ∨ q), (¬p ∨ r) ⊢ (q ∨ r)",
+      explanation: "If we have p∨q and ¬p∨r, we can conclude q∨r."
+    },
+    {
+      id: 8,
+      law: "Peirce's Law",
+      formula: "((p → q) → p) → p",
+      explanation: "Valid in classical logic but not in intuitionistic logic."
+    }
+  ];
+  
 
   const introContent = {
     id: "intro",
@@ -20,8 +74,9 @@ export default function ImplicationPage() {
     const properties=[
         `**Reflexivity**:
 $p→p$ is always true for any proposition $𝑝$.
-This follows from the [truth table](!/logic/propositional-logic/semantics/implication#truth_table) since whenever 
-$𝑝$ and $𝑞$ are the same-$𝑝→𝑞$ is always true.`,
+This follows from the [truth table](!/logic/propositional-logic/semantics/implication#tt_self) because whenever 
+the **antecedent** and the **consequent** are the same-$𝑝→𝑝$ is always true since implication is only false when the antecedent is true and the consequent is false, and that simply can not happen here.
+The expression is always true ([tautology](!/logic/propositional-logic/semantics/tautology)).`,
 `**Transitivity**:
 If $𝑝→𝑞$ and $𝑞→𝑟$, then $𝑝→𝑟$.
 Example:
@@ -105,6 +160,10 @@ But "If you are a woman, then you are a mother" ($𝑞→𝑝$) is not necessari
           `The counterintuitive aspect is that P → Q is true whenever P is false, regardless of Q's value. This is called **"vacuous truth"**. A helpful way to understand this is with a promise analogy: "If it rains, I'll bring an umbrella." If it doesn't rain, the promise remains unbroken whether I bring an umbrella or not.
           Promise may be broken only if it has been given. In case it had been never given (last 2 rows, when $P$ is equal to false)- it can not be broken and the whole statement evaluates to true.`,
           `And to conclude this discussion, **the rule of thumb with logical implication is that whenever the hypotesis is false-the overall expression evaluates to true.**`,
+          `<br id='tt_self'></br>`,
+          `A special case worth noting is $p \\rightarrow p$, where the **antecedent** and the **consequent** are the same proposition. This implication is always true  (it is a [tautology](!/logic/propositional-logic/semantics/tautology)), as seen directly in the truth table:`,
+`<table  border='1' cellpadding='10' cellspacing='0' style='border-collapse: collapse; width: 100%; margin: 15px 0;'><tr style='background-color: #eef2f7;'><th style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>P</th><th style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>P</th><th style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>P → P</th><th style='padding: 10px; text-align: left; border: 1px solid #bdc9d9;'>Explanation</th></tr><tr><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>T</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>T</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9; color: #2e7d32;'>T</td><td style='padding: 10px; border: 1px solid #bdc9d9;'>When P is true, P → P is true.</td></tr><tr style='background-color: #f8f9fa;'><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>F</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>F</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9; color: #2e7d32;'>T</td><td style='padding: 10px; border: 1px solid #bdc9d9;'>When P is false, P → P is still true.</td></tr></table>`
+,`<br ></br>`,
           `See more truth tables for expressions involving implications [here](!/tables/truth-tables/implications).`,
           'Or use this interactive [truth table generator](!/logic/truth-tables) to evaluate your own expressions.'
         ]
@@ -117,12 +176,12 @@ But "If you are a woman, then you are a mother" ($𝑞→𝑝$) is not necessari
             `,
             <MyList data={properties}
             key={2}
-            boxed={true} color={'blue'} compact={true} type={'dot'} width='500px'/>
+            boxed={true} color={'blue'} compact={true} type={'dot'} />
         ]
           },
           {
             id: 'misconceptions',
-            title: 'Common Misconceptions About Implication',
+            title: 'Common Misconceptions',
             content: [
               `A frequent source of confusion in propositional logic is the truth value of the implication statement $p \\rightarrow q$ when $p$ is false. According to the truth table, the implication is considered true regardless of the truth value of $q$. This phenomenon is known as **vacuous truth**.`,
               
@@ -146,6 +205,23 @@ But "If you are a woman, then you are a mother" ($𝑞→𝑝$) is not necessari
               `Logical implication also underpins **proof by contradiction**, where the assumption of $p$ being true and $q$ being false leads to a contradiction. This contradiction implies that the original implication $p \\rightarrow q$ must be valid.`
             ]
           },
+          {
+            id: 'implication_laws',
+            title: 'Implication in Logic Laws',
+            content: [
+              `Implication plays a central role in many formal [laws of propositional logic](!/logic/propositional-logic/laws). These laws describe how implication interacts with other logical operations and how it can be transformed or reasoned about in proofs.`,
+              `Some of these equivalences help simplify expressions, while others are foundational rules used in direct proofs, proof by contraposition, and resolution strategies.`,
+              `<br/>`,
+              <ExpandableTable 
+                data={implicationLaws}
+                key={3}
+                copyableFields="formula"
+              />,
+              `These rules are particularly useful for transforming, simplifying, or interpreting logical statements involving conditional relationships.`,
+              `Read more about [laws of propositional logic](!/logic/propositional-logic/laws) on dedicated page.`
+            ]
+          }
+          
 
           
           

@@ -79,6 +79,7 @@ const CustomConvert=()=>(
   { id: 5, icon: CustomConvert, tooltip: 'Converters', 
     content: [
         { text: 'Angle Converter', url: '/converters/degree-radians' },
+        { text: 'Normal Forms Converter', url: '/logic/propositional-logic/syntax/normal-forms' },
        
     ] },
   { id: 6, icon: CustomWrench, tooltip: 'Other Tools', 

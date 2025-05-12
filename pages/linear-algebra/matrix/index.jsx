@@ -402,7 +402,10 @@ These foundational features play crucial roles across linear algebra, connecting
         />
         <br/>
         <br/>
-        <Sections sections={sectionsContent}/>
+        <Sections sections={sectionsContent}
+         showSecondaryNav={true}
+         secondaryNavMode="children"
+         secondaryNavTitle="Similar Pages"/>
         <br/>
         <br/>
        

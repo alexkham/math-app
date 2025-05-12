@@ -369,7 +369,10 @@ export default function LinearAlgebraPage({
           textColor="#34383c"
         />
         
-        <Sections sections={linearAlgebraSections}/>
+        <Sections sections={linearAlgebraSections}
+        showSecondaryNav={true}
+        secondaryNavMode="children"
+        secondaryNavTitle="Similar Pages"/>
         <br/>
         <br/>
         <br/>

@@ -1991,7 +1991,313 @@ const logicTermsList = [
              - Type systems`
       },
       category: "Proof Methods"
-     }
+     },
+
+     {
+          name: "Absorption",
+          formula: "A logical law stating that $P \\land (P \\lor Q) \\equiv P$ and $P \\lor (P \\land Q) \\equiv P$. Also known as the absorption laws in Boolean algebra.",
+          fields: {
+            "properties": `
+             - Simplifies redundant expressions
+             - Preserves truth values
+             - Commutative variants exist
+             - Applies to both conjunction and disjunction`,
+            "examples": `
+             Conjunction Form:
+             $P \\land (P \\lor Q) \\equiv P$
+             "It's raining AND (it's raining OR it's cold)" simplifies to "It's raining"
+             
+             Disjunction Form:
+             $P \\lor (P \\land Q) \\equiv P$
+             "It's raining OR (it's raining AND it's cold)" simplifies to "It's raining"`,
+            "applications": `
+             - Boolean algebra simplification
+             - Logic circuit optimization
+             - Propositional logic simplification
+             - Set theory operations`
+          },
+          category: "Logical Principles"
+        },
+        {
+          name: "Assignment, Valuation",
+          formula: "A function $v: Vars \\to D$ that assigns values from domain $D$ to variables in a logical expression, or more generally, an interpretation that maps symbols to their semantic values.",
+          fields: {
+            "properties": `
+             - Maps variables to values
+             - Determines truth value of formulas
+             - Can be partial or total
+             - Domain-dependent`,
+            "components": `
+             - Variable assignment function
+             - Truth value computation
+             - Model specification
+             - Interpretation mapping`,
+            "examples": `
+             Propositional Assignment:
+             $v(P) = true, v(Q) = false$
+             Then $v(P \\land Q) = false$
+             
+             Arithmetic Assignment:
+             $v(x) = 3, v(y) = 5$
+             Then $v(x + y = 8) = true$`,
+            "applications": `
+             - Truth table construction
+             - Model checking
+             - Satisfiability testing
+             - Expression evaluation`
+          },
+          category: "Formal Logic"
+        },
+        {
+          name: "Bijection",
+          formula: "A function $f: A \\to B$ that is both injective (one-to-one) and surjective (onto). For every element $b \\in B$, there exists exactly one element $a \\in A$ such that $f(a) = b$.",
+          fields: {
+            "properties": `
+             - One-to-one correspondence
+             - Has inverse function
+             - Preserves cardinality
+             - Maps between sets of equal size`,
+            "examples": `
+             Identity Function:
+             $f(x) = x$ is a bijection from $\\mathbb{R}$ to $\\mathbb{R}$
+             
+             Exponential Function:
+             $f(x) = e^x$ is a bijection from $\\mathbb{R}$ to $\\mathbb{R}^+$
+             
+             Set Bijection:
+             $f: \\{1,2,3\\} \\to \\{a,b,c\\}$ where $f(1)=a, f(2)=b, f(3)=c$`,
+            "applications": `
+             - Set theory cardinality
+             - Isomorphisms in algebra
+             - Cryptography
+             - Combinatorics`,
+            "verification": `
+             - Check injectivity: $f(x_1) = f(x_2) \\Rightarrow x_1 = x_2$
+             - Check surjectivity: $\\forall y \\in B, \\exists x \\in A: f(x) = y$
+             - Construct inverse function`
+          },
+          category: "Foundations"
+        },
+        {
+          name: "Calculus",
+          formula: "A formal system or method of reasoning in logic and mathematics. In logic, refers to various symbolic calculation systems like propositional calculus, predicate calculus, or lambda calculus.",
+          fields: {
+            "types": `
+             - Propositional calculus
+             - Predicate calculus
+             - Lambda calculus
+             - Modal calculus
+             - Process calculus`,
+            "components": `
+             - Syntax rules
+             - Formation rules
+             - Inference rules
+             - Axioms or axiom schemas`,
+            "examples": `
+             Propositional Calculus:
+             Axioms: $P \\to (Q \\to P)$
+             Rules: Modus Ponens
+             
+             Lambda Calculus:
+             Terms: variables, abstraction $(\\lambda x.M)$, application $(M N)$
+             Rules: α-conversion, β-reduction`,
+            "applications": `
+             - Formal logic
+             - Programming language theory
+             - Mathematical proof systems
+             - Computer science foundations`
+          },
+          category: "Formal Logic"
+        },
+        {
+          name: "Cardinality",
+          formula: "The measure of the size of a set, denoted $|A|$ or $card(A)$. For finite sets, it's the number of elements. For infinite sets, it distinguishes different sizes of infinity.",
+          fields: {
+            "types": `
+             - Finite cardinality: $|A| = n$ for some $n \\in \\mathbb{N}$
+             - Countably infinite: $|A| = \\aleph_0$ (aleph-null)
+             - Uncountably infinite: $|A| > \\aleph_0$`,
+            "properties": `
+             - $|A \\cup B| = |A| + |B| - |A \\cap B|$ (finite sets)
+             - $|A \\times B| = |A| \\times |B|$
+             - $|P(A)| = 2^{|A|}$ (power set)
+             - Cantor's theorem: $|A| < |P(A)|$`,
+            "examples": `
+             Finite Sets:
+             $|\\{1,2,3\\}| = 3$
+             
+             Infinite Sets:
+             $|\\mathbb{N}| = \\aleph_0$ (natural numbers)
+             $|\\mathbb{R}| = 2^{\\aleph_0}$ (real numbers)
+             $|P(\\mathbb{N})| = 2^{\\aleph_0}$`,
+            "applications": `
+             - Set theory
+             - Combinatorics
+             - Measure theory
+             - Database theory`
+          },
+          category: "Foundations"
+        },
+        {
+          name: "Class",
+          formula: "In set theory and logic, a collection of objects or elements that may be too large to form a set. Used to handle collections that would lead to paradoxes if considered as sets (like the class of all sets).",
+          fields: {
+            "properties": `
+             - May be proper (not a set)
+             - Can contain sets as elements
+             - Avoids set-theoretic paradoxes
+             - Used in axiomatic set theory`,
+            "types": `
+             - Proper classes: too large to be sets
+             - Small classes: actually sets
+             - Universal class: contains all objects
+             - Complement classes`,
+            "examples": `
+             Russell's Paradox Avoidance:
+             Class R = {x | x ∉ x} (class of all sets that don't contain themselves)
+             
+             Class of All Sets:
+             V = {x | x = x} (cannot be a set in standard ZFC)
+             
+             Set vs Class:
+             {1,2,3} is a set
+             {x | x is a set} is a proper class`,
+            "applications": `
+             - Foundation of set theory
+             - Category theory
+             - Mathematical logic
+             - Type theory`
+          },
+          category: "Foundations"
+        },
+        {
+          name: "Clause",
+          formula: "In logic, a disjunction of literals (atomic formulas or their negations). In propositional logic, a clause has the form $L_1 \\lor L_2 \\lor ... \\lor L_n$ where each $L_i$ is a literal.",
+          fields: {
+            "properties": `
+             - Disjunction of literals
+             - Basic unit in CNF
+             - Used in resolution
+             - Can be empty (contradiction)`,
+            "types": `
+             - Unit clause: single literal
+             - Positive clause: no negated literals
+             - Negative clause: all literals negated
+             - Horn clause: at most one positive literal`,
+            "examples": `
+             Simple Clause:
+             $P \\lor \\neg Q \\lor R$
+             
+             Unit Clause:
+             $P$ (just one literal)
+             
+             Empty Clause:
+             $\\square$ (contradiction)
+             
+             Horn Clause:
+             $\\neg P \\lor \\neg Q \\lor R$ (at most one positive literal)`,
+            "applications": `
+             - Resolution theorem proving
+             - SAT solvers
+             - Logic programming
+             - Automated reasoning`
+          },
+          category: "Formal Logic"
+        },
+        {
+          name: "Closed formula (Sentence)",
+          formula: "A formula with no free variables. All variables are bound by quantifiers or other binding operators. A sentence can be evaluated to true or false without additional context.",
+          fields: {
+            "properties": `
+             - No free variables
+             - Truth value determined
+             - Context independent
+             - Can be proven or disproven`,
+            "examples": `
+             Predicate Logic Sentences:
+             $\\forall x (P(x) \\to Q(x))$ - all variables bound
+             $\\exists y \\forall x (R(x,y))$ - all variables quantified
+             
+             Mathematical Sentences:
+             $\\forall n \\in \\mathbb{N} (n + 0 = n)$
+             $\\exists x \\in \\mathbb{R} (x^2 = 2)$
+             
+             Not Sentences (have free variables):
+             $P(x) \\land Q(y)$ - x and y are free
+             $x + y = 5$ - x and y are free`,
+            "verification": `
+             - Check all variables are bound
+             - Verify quantifier scope
+             - Ensure no free occurrences
+             - Context-free evaluation`
+          },
+          category: "Formal Logic"
+        },
+        {
+          name: "Closed term (Ground term)",
+          formula: "A term containing no variables, only constants and function symbols. Ground terms represent specific objects in the domain without any unspecified parameters.",
+          fields: {
+            "properties": `
+             - Contains no variables
+             - Fully specified
+             - Represents specific objects
+             - Can be evaluated concretely`,
+            "examples": `
+             Arithmetic Ground Terms:
+             $2 + 3$ (no variables)
+             $f(a, b)$ where a, b are constants
+             $sin(\\pi/2)$ (mathematical constant)
+             
+             Logical Ground Terms:
+             John (constant)
+             mother(Mary) where Mary is constant
+             add(succ(zero), succ(zero))
+             
+             Not Ground Terms:
+             $x + 2$ (contains variable x)
+             $f(x, y)$ (contains variables x, y)`,
+            "applications": `
+             - Term rewriting systems
+             - Logic programming facts
+             - Automated theorem proving
+             - Database queries`
+          },
+          category: "Formal Logic"
+        },
+        {
+          name: "Compactness",
+          formula: "A fundamental property of first-order logic stating that if every finite subset of a set of sentences Γ has a model, then the entire set Γ has a model. Formally: if Γ ⊨ φ, then there exists finite Γ₀ ⊆ Γ such that Γ₀ ⊨ φ.",
+          fields: {
+            "properties": `
+             - Finite character property
+             - Applies to first-order logic
+             - Not true for second-order logic
+             - Fundamental metalogical result`,
+            "consequences": `
+             - Löwenheim-Skolem theorems
+             - Existence of non-standard models
+             - Model construction techniques
+             - Upward/downward model transfer`,
+            "examples": `
+             Non-standard Analysis:
+             {x>n | n∈ℕ} ∪ standard axioms of ℝ
+             This has a model with infinitely large numbers
+             
+             Graph Theory:
+             {Gₙ: "graph has cycles of length >n" | n∈ℕ}
+             By compactness, some graph has arbitrarily long cycles
+             
+             Field Theory:
+             {pₙ=0 | pₙ prime} ∪ field axioms
+             Result: fields with characteristic 0 exist`,
+            "applications": `
+             - Model theory
+             - Non-standard analysis
+             - Algebraic logic
+             - Proof theory`
+          },
+          category: "Formal Logic"
+        }
     
   ];
   
