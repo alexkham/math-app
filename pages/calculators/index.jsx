@@ -50,6 +50,11 @@ export default function ConvertersPage() {
             name: "Exponent Calculator",
             href: "/calculators/exponent-calculator"
           },
+
+          {
+            name: "Percentage Calculator",
+            href: "/calculators/percentage-calculator"
+          },
          
         ]
       },

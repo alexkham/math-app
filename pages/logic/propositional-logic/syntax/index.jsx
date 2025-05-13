@@ -36,7 +36,8 @@ list:[
   
   `[The formation rules that specify how complex expressions are constructed from simpler ones.](!/logic/propositional-logic/syntax#formation)\n`,
 
-  `Well-Formed Formulas (WFFs) and Normal Forms.\n`
+  `[Well-Formed Formulas (WFFs)](!/logic/propositional-logic/syntax#wff).\n`,
+  `Normal Forms`
   
 ],
 description2:`Additionally, visual tools such as syntax trees help to represent the internal structure of complex formulas, and methods like structural induction are used to formally prove properties about these syntactic structures — for example, showing that all well-formed formulas are finite in depth.
@@ -99,6 +100,13 @@ Precedence and associativity conventions are introduced only later, as practical
 
 This construction algorithm defines the internal structure of propositional expressions. It establishes that every formula is built in a finite number of steps, starting from atomic propositions and proceeding through regulated applications of connectives. These principles of formation are the foundation upon which the method of structural induction is later based, since they determine the way complex formulas are composed from simpler components.
 `
+  },
+  wff:{
+    description:`
+      In propositional logic, a Well-Formed Formula (WFF) is any syntactically valid expression constructed from [propositional alphabet](!/logic/propositional-logic/syntax#alphabet) elements according to specific grammar [formation rules](!/logic/propositional-logic/syntax#formation). These expressions are the foundational elements of the logical system, allowing us to represent and reason about truth-functional statements.
+
+Once a formula is well-formed, we can then examine or transform it into various normal forms, which are standardized representations of logical formulas. This transformation does not change the formula's meaning (i.e. its semantics), but it does organize the formula in a way that is more amenable to analysis, algorithmic manipulation, or implementation in digital logic circuits. 
+    `
   }
  }
 
@@ -232,7 +240,17 @@ boxed={true} color={'blue'} compact={true} type={'dot'} width={'650px'} />
       sectionContent.formation.description
 
     ]
-   }
+   },
+
+   {
+    id:'wff',
+    title:'Well Formed Formulas (WFF)',
+    content:[
+      sectionContent.wff.description
+
+    ]
+   },
+
   
  ]
 

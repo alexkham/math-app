@@ -45,6 +45,7 @@ const CustomConvert=()=>(
         { text: 'Unit Circle Visualizer', url: '/visual-tools/unit-circle' },
         { text: 'Matrix Types Generator', url: '/visual-tools/matrix-types' },
         { text: 'Syntax Tree Builder', url: '/logic/propositional-logic/syntax/tree-builder' },
+        { text: 'Fractions Visualizer', url: '/visual-tools/fractions-visualizer' },
     ] },
   { id: 2, icon: CustomCalculator, tooltip: 'Calculators', content:[
     { text: 'Statistics Calculator', url: '/calculators/statistics-calculator' },
@@ -56,6 +57,7 @@ const CustomConvert=()=>(
     { text: 'Factoring Calculator', url: '/calculators/factoring-calculator' },
     { text: 'Polynomial Calculator', url: '/calculators/polynomial-calculator' },
     { text: 'Logical Equivalence Validator', url: '/logic/propositional-logic/equivalence-validator' },
+    { text: 'Percentage Calculator', url: '/calculators/percentage-calculator' },
    
   ]},
   // { id: 3, icon: FileText, tooltip: 'Files', content: 'FilesComponent' },

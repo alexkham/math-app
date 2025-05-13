@@ -60,7 +60,8 @@ export const mainMenuStructure = [
             { label: 'Matrix Types Generator', href: '/visual-tools/matrix-types' },
             { label: 'Permutations Visualizer', href: '/combinatorics/permutations/permutations-visualizer' },
             { label: 'Unit Circle Visualizer', href: '/visual-tools/unit-circle' },
-            { label: 'Syntax Tree Builder', href: '/logic/propositional-logic/syntax/tree-builder' }
+            { label: 'Syntax Tree Builder', href: '/logic/propositional-logic/syntax/tree-builder' },
+            { label: 'Fractions Visualizer', href: '/visual-tools/fractions-visualizer' }
           ]
         },
         {
@@ -76,6 +77,7 @@ export const mainMenuStructure = [
             { label: 'Factoring Calculator', href: '/calculators/factoring-calculator' },
             { label: 'Polynomial Calculator', href: '/calculators/polynomial-calculator' },
             { label: 'Logical Equivalence Validator', href: '/logic/propositional-logic/equivalence-validator' },
+            { label: 'Percentage Calculator', href: '/calculators/percentage-calculator' },
             
           ]
         },

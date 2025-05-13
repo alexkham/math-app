@@ -35,6 +35,8 @@ import { color } from 'framer-motion';
 import VerticalButtonGroup from '@/app/components/VerticalButtonGroup';
 import VerticalBlocks from '@/app/components/page-components/vertical-blocks/VerticalBlocks';
 import SquareRootVisualizer from '@/app/components/visualizations/SquareRootVisualizer';
+import FractionCircleApp from '@/app/components/fractions/FractionCircle';
+import PercentageCalculator from '@/app/components/calculators/arithmetics/PercentageCalculator';
 
 
 export default function Test4Page() {
@@ -462,21 +464,21 @@ export default function Test4Page() {
     <GenericCircularButtonGroup sections={threeSections}/>
     <br/>
     <br/>
-    <div style={{transform:'scale(0.85)'}}>
+    {/* <div style={{transform:'scale(0.85)'}}>
     <QuadraticSolver generateQuadraticExplanations={generateQuadraticExplanations}/>
-    </div>
+    </div> */}
     <br/>
     <br/>
     <br/>
     <br/>
-    <div style={{transform:'scale(0.9)'}}>
+    {/* <div style={{transform:'scale(0.9)'}}>
     <FactorizationCalculator/>
-    </div>
+    </div> */}
     <br/>
     <br/>
     <br/>
     <br/>
-    <FactoringCalculator/>
+    {/* <FactoringCalculator/> */}
     <br/>
     <br/>
     <br/>
@@ -495,6 +497,9 @@ export default function Test4Page() {
     {/* </div> */}
     <br/>
     <br/>
+    <br/>
+    <br/>
+    <FractionCircleApp/>
     <br/>
     <br/>
     <FractionRectangle numerator={10} denominator={40} />  
@@ -643,6 +648,12 @@ export default function Test4Page() {
     <br/>
     <br/>
     <br/>
+    <PercentageCalculator/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     <br/>
     <br/>
     {/* <VerticalButtonGroup 
@@ -654,9 +665,9 @@ export default function Test4Page() {
       /> */}
     <br/>
     <br/>
-    <div style={{transform:'scale(0.85)'}}>
+    {/* <div style={{transform:'scale(0.85)'}}>
     <SquareRootVisualizer explanations={explanationsRoots}/>
-    </div>
+    </div> */}
     <br/>
     {/* <div className='title' style={{width:'60%'}}>
     <DataWrapper data={math_symbols_Data}/>

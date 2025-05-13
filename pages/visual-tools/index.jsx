@@ -192,6 +192,7 @@ export default function VisualToolsPage() {
             content: "Explore Different Concepts of Algebra Visually",
             subcategories: [
                 { name: 'Square Root Visualizer', href: '/visual-tools/square-root' },
+                { name: 'Fractions Visualizer', href: '/visual-tools/fractions-visualizer' },
             ]
         },
         {
@@ -253,7 +254,7 @@ export default function VisualToolsPage() {
             <br/>
             <OperaSidebar 
                 side='right'
-                topOffset='65px' 
+                topOffset='55px' 
                 sidebarWidth='45px'
                 panelWidth='300px'
                 iconColor='white'

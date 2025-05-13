@@ -28,7 +28,7 @@ export default function GaussianEliminationCalculatorPage() {
       <br></br>
       <OperaSidebar 
       side='right'
-      topOffset='65px' 
+      topOffset='55px' 
       sidebarWidth='45px'
       panelWidth='200px'
       
