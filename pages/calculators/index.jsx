@@ -55,6 +55,16 @@ export default function ConvertersPage() {
             name: "Percentage Calculator",
             href: "/calculators/percentage-calculator"
           },
+          {
+            name: "Modulo Calculator",
+            href: "/calculators/modulo-calculator"
+          },
+
+          {
+            name: "Factorial Calculator",
+            href: "/calculators/factorial-calculator"
+          },
+         
          
         ]
       },

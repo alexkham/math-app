@@ -37,7 +37,7 @@ list:[
   `[The formation rules that specify how complex expressions are constructed from simpler ones.](!/logic/propositional-logic/syntax#formation)\n`,
 
   `[Well-Formed Formulas (WFFs)](!/logic/propositional-logic/syntax#wff).\n`,
-  `Normal Forms`
+  `[Normal Forms](!/logic/propositional-logic/syntax#normal_forms)`
   
 ],
 description2:`Additionally, visual tools such as syntax trees help to represent the internal structure of complex formulas, and methods like structural induction are used to formally prove properties about these syntactic structures — for example, showing that all well-formed formulas are finite in depth.
@@ -104,17 +104,48 @@ This construction algorithm defines the internal structure of propositional expr
   wff:{
     description:`
       In propositional logic, a Well-Formed Formula (WFF) is any syntactically valid expression constructed from [propositional alphabet](!/logic/propositional-logic/syntax#alphabet) elements according to specific grammar [formation rules](!/logic/propositional-logic/syntax#formation). These expressions are the foundational elements of the logical system, allowing us to represent and reason about truth-functional statements.
+      Once the [formation rules](!/logic/propositional-logic/syntax#formation) were followed correctly and no other symbols except those from the [propositional alphabet](!/logic/propositional-logic/syntax#alphabet) were used, the expression should be a valid WFF. But we still need to validate it to ensure it adheres strictly to the syntactic rules of propositional logic. This involves checking the structural correctness of the formula — things like how operators are used, how subformulas are arranged, and whether the formula can be interpreted unambiguously.
+We don't rebuild the formula but rather analyze its structure. This means verifying that parentheses are balanced, operators appear in valid configurations, and no extraneous or malformed expressions are present. The validation process can be summarized by the following practical checks:  
 
-Once a formula is well-formed, we can then examine or transform it into various normal forms, which are standardized representations of logical formulas. This transformation does not change the formula's meaning (i.e. its semantics), but it does organize the formula in a way that is more amenable to analysis, algorithmic manipulation, or implementation in digital logic circuits. 
+
+    `,
+    table:`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>WFF Validation Rules</title><style>body{font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;background-color:#e2e3e5;padding:20px}table{border-collapse:collapse;width:100%;max-width:900px;margin:0 auto;background-color:#fff;box-shadow:0 0 10px rgba(0,0,0,.1)}td,th{border:1px solid #dee2e6;padding:12px 16px;text-align:left;vertical-align:top}th{background-color:#e2e3e5;color:gray}tr:nth-child(even){background-color:#f1f3f5}tr:hover{background-color:#e9ecef}</style></head><body><h2 style="text-align:center">Rules for Validating Well-Formed Formulas (WFFs)</h2><table><thead><tr><th>Rule</th><th>Valid Example</th><th>Invalid Example</th></tr></thead><tbody><tr><td>1. Parentheses are balanced and properly nested</td><td>(P ∨ Q)</td><td>(P ∨ Q or P ∨ Q)</td></tr><tr><td>2. Only allowed symbols are used (propositional letters, connectives, and parentheses)</td><td>¬(P ∧ Q)</td><td>¬(P & Q) or P1 ∧ Q</td></tr><tr><td>3. Unary connective ¬ is applied directly to a valid subformula</td><td>¬P or ¬(P ∧ Q)</td><td>P¬, ¬∧P, or ¬()</td></tr><tr><td>4. Binary connectives (∧, ∨, →, ↔) occur between two valid WFFs</td><td>(P → Q)</td><td>(→ P Q) or (P ∧)</td></tr><tr><td>5. Atomic propositions appear as standalone symbols</td><td>P, (P ∧ Q)</td><td>PQ or P¬Q</td></tr><tr><td>6. No two connectives appear consecutively without valid operands</td><td>(¬P ∧ Q)</td><td>(P ∧ ∨ Q)</td></tr><tr><td>7. The full string forms one complete formula (no leftovers)</td><td>((P ∧ Q) ∨ R)</td><td>((P ∧ Q) ∨ R) ∧</td></tr></tbody></table></body></html>`,
+    description2:`
+    Each rule in the table identifies a specific structural constraint. If any one of these constraints is violated, the formula cannot be considered well-formed, regardless of whether it uses the correct symbols.
+
+    This validation process can also be performed using a syntax tree, which visually represents the hierarchical structure of the formula. If the formula can be fully parsed into a well-formed tree—with each operator applied to the correct number and type of subformulas—it is syntactically valid. You can experiment with this using the our [Syntax Tree Builder](!/logic/propositional-logic/syntax/tree-builder) , which helps visualize whether a formula conforms to the WFF rules.
+
+    Once a formula is well-formed, we can then examine or transform it into various [normal forms](!/logic/propositional-logic/syntax#normal_forms), which are standardized representations of logical formulas. This transformation does not change the formula's meaning (i.e. its semantics), but it does organize the formula in a way that is more amenable to analysis, algorithmic manipulation, or implementation in digital logic circuits. `
+  
+    
+  },
+  normal_forms:{
+    description:` **What Are Normal Forms?**     
+In propositional logic, normal forms are standardized ways of rewriting logical formulas. They ensure that formulas follow a uniform structure while preserving logical equivalence — meaning they represent the same truth function as the original formula.
+1. **Conjunctive Normal Form (CNF)**
+A formula is in CNF if it is a conjunction of one or more clauses, where each clause is a disjunction of literals. For example:
+
+\t\t\t\t$(P∨¬Q)∧(R∨S∨T)$
+
+This form is particularly useful in satisfiability checking (e.g., for SAT solvers) and logic proof systems.
+
+2. **Disjunctive Normal Form (DNF)**
+A formula is in DNF if it is a disjunction of one or more terms, where each term is a conjunction of literals. For example:
+
+\t\t\t\t$(P∧¬Q)∨(R∧S)$
+
+DNF is frequently used when constructing logical functions from truth tables or for analyzing the structure of logical consequences.
+
     `
+
   }
  }
 
  const introContent = {
    id: "intro",
    title: "Introduction to Propositional Logic Syntax",
-   content: `In formal logic, syntax refers to the structural rules that determine how logical expressions are properly formed. Much like grammar in natural language, syntax focuses purely on the arrangement of symbols — not their meaning. In contrast, semantics is concerned with the interpretation and truth value of these expressions, while proof systems operate within this structure to establish logical conclusions. Syntax itself answers a simpler but essential question: is the statement written in a correct and recognizable way, regardless of whether it is true or false.
-This section introduces the basic elements of propositional logic syntax, beginning with the alphabet of atomic propositions and the connectives used to combine them. It outlines how well-formed formulas (WFFs) are built according to formation rules and explains the importance of parentheses in maintaining clarity. Along the way, tools like syntax trees for visualizing expression structure and structural induction for proving properties about formulas will also be discussed, all of which together form the foundation for working with logical systems in a precise and systematic way.
+   content: `In formal logic, syntax refers to the structural [formation rules](!/logic/propositional-logic/syntax#formation) that determine how logical expressions are properly formed. Much like grammar in natural language, syntax focuses purely on the arrangement of [symbols](!/logic/propositional-logic/syntax#alphabet) — not their meaning. In contrast, [semantics](!/logic/propositional-logic/semantics) is concerned with the interpretation and truth value of these expressions, while proof systems operate within this structure to establish logical conclusions. Syntax itself answers a simpler but essential question: is the statement written in a correct and recognizable way, regardless of whether it is true or false.
+This section introduces the basic elements of propositional logic syntax, beginning with the [alphabet](!/logic/propositional-logic/syntax#alphabet) of atomic propositions and the connectives used to combine them. It outlines how [well-formed formulas (WFFs)](!/logic/propositional-logic/syntax#wff) are built according to [formation rules](!/logic/propositional-logic/syntax#formation) and explains the importance of parentheses in maintaining clarity. Along the way, tools like syntax trees for visualizing expression structure and structural induction for proving properties about formulas will also be discussed, all of which together form the foundation for working with logical systems in a precise and systematic way.
 `
  }
 
@@ -246,7 +277,17 @@ boxed={true} color={'blue'} compact={true} type={'dot'} width={'650px'} />
     id:'wff',
     title:'Well Formed Formulas (WFF)',
     content:[
-      sectionContent.wff.description
+      sectionContent.wff.description,
+      sectionContent.wff.table,
+      sectionContent.wff.description2
+
+    ]
+   },
+   {
+    id:'normal_forms',
+    title:'Normal Forms',
+    content:[
+     sectionContent.normal_forms.description
 
     ]
    },

@@ -56,8 +56,10 @@ const CustomConvert=()=>(
     { text: 'Exponent Calculator', url: '/calculators/exponent-calculator' },
     { text: 'Factoring Calculator', url: '/calculators/factoring-calculator' },
     { text: 'Polynomial Calculator', url: '/calculators/polynomial-calculator' },
-    { text: 'Logical Equivalence Validator', url: '/logic/propositional-logic/equivalence-validator' },
+    { text: 'Logical Equivalence Validator', url: '/logic/propositional-logic/semantics/equivalence-validator' },
     { text: 'Percentage Calculator', url: '/calculators/percentage-calculator' },
+    { text: 'Modulo Calculator', url: '/calculators/modulo-calculator' },
+    { text: 'Factorial Calculator', url: '/calculators/factorial-calculator' },
    
   ]},
   // { id: 3, icon: FileText, tooltip: 'Files', content: 'FilesComponent' },

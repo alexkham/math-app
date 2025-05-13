@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import Big from 'big.js';
-import styles from './LogarithmCalculator14.module.css';
+import styles from './FactorialCalculator.module.css';
 
 function FactorialCalculator() {
   const [value, setValue] = useState('');

@@ -37,6 +37,8 @@ import VerticalBlocks from '@/app/components/page-components/vertical-blocks/Ver
 import SquareRootVisualizer from '@/app/components/visualizations/SquareRootVisualizer';
 import FractionCircleApp from '@/app/components/fractions/FractionCircle';
 import PercentageCalculator from '@/app/components/calculators/arithmetics/PercentageCalculator';
+import ModuloCalculator from '@/app/components/calculators/modulo/ModuloCalculator';
+import FactorialCalculator from '@/app/components/calculators/arithmetics/FactorialCalculator';
 
 
 export default function Test4Page() {
@@ -652,6 +654,14 @@ export default function Test4Page() {
     <br/>
     <br/>
     <br/>
+    <br/>
+    <br/>
+    <br/>
+    <FactorialCalculator/>
+    <br/>
+    <br/>
+    <br/>
+    <ModuloCalculator/>
     <br/>
     <br/>
     <br/>
