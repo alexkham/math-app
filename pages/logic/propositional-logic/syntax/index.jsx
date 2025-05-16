@@ -135,6 +135,7 @@ A formula is in DNF if it is a disjunction of one or more terms, where each term
 \t\t\t\t$(P∧¬Q)∨(R∧S)$
 
 DNF is frequently used when constructing logical functions from truth tables or for analyzing the structure of logical consequences.
+Learn more about normal forms and practice your skills and understanding of this topic by using our interactive [normal form converter](!/logic/propositional-logic/syntax/normal-forms) .
 
     `
 

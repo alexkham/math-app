@@ -39,6 +39,7 @@ import FractionCircleApp from '@/app/components/fractions/FractionCircle';
 import PercentageCalculator from '@/app/components/calculators/arithmetics/PercentageCalculator';
 import ModuloCalculator from '@/app/components/calculators/modulo/ModuloCalculator';
 import FactorialCalculator from '@/app/components/calculators/arithmetics/FactorialCalculator';
+import FractionCalculator from '@/app/components/calculators/fraction-calculator/FractionCalculator';
 
 
 export default function Test4Page() {
@@ -663,6 +664,13 @@ export default function Test4Page() {
     <br/>
     <ModuloCalculator/>
     <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div style={{transform:'scale(0.9)'}}>
+    <FractionCalculator/>
+    </div>
     <br/>
     <br/>
     <br/>

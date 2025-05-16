@@ -8,9 +8,11 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Sections from '@/app/components/page-components/section/Sections'
 import ExpandableTable from '@/app/components/data-wrapper/generic-table/ExpandableTable'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Head from 'next/head';
 
 
-export default function TautologyPage() {
+export async function getStaticProps(){
+
 
   const contradictions = [
     {
@@ -159,6 +161,8 @@ export default function TautologyPage() {
     }
   ];
 
+
+  
   const introContent = {
     id: "intro",
     title: "Introduction",
@@ -166,15 +170,14 @@ export default function TautologyPage() {
 
 Unlike ordinary propositions that may be true or false depending on circumstances, contradictions are guaranteed to be false, providing absolute certainty in logical analysis. This property makes contradictions invaluable in proof techniques, particularly in reductio ad absurdum (proof by contradiction), where we demonstrate that assuming the opposite of what we want to prove leads to a logical impossibility.
 
-This page explores contradictions in detail, examining their properties, relationship to tautologies, and applications in logical reasoning and formal proofs.`
+This page explores contradictions in detail, examining their properties, relationship to [tautologies](!/logic/propositional-logic/semantics/tautology), and applications in logical reasoning and formal proofs.`
   }
- 
 
-    const tautologySections=[
-            {
-            id:'definition',
-            title:'Definition and Notation',
-            content:`A **contradiction** is a proposition that is always false, regardless of the truth values of its components. In [propositional logic](!/logic/propositional-logic), a contradiction is a formula that evaluates to false under all possible truth assignments.
+  const contradictionContent={
+      
+    definition:{
+      title:'Definition and Notation',
+      description:`A **contradiction** is a proposition that is always false, regardless of the truth values of its components. In [propositional logic](!/logic/propositional-logic), a contradiction is a formula that evaluates to false under all possible truth assignments.
 
 **Example**:
 
@@ -200,12 +203,10 @@ In some texts, contradictions are also expressed using [equivalence](!/logic/pro
 
 to explicitly state that a proposition $\( P \)$ is always false (equivalent to false).
 `
-          },
-           
-          {
-            id:'contradictions_as_laws',
-            title:'Contradictions as Logic Laws',
-            content:`As discussed in previous [section](!/logic/propositional-logic/semantics/contradiction#definition), a contradiction is a proposition that always evaluates to false. Some contradictions are so fundamental that they represent core principles of propositional logic.
+    },
+    laws:{
+      title:'Contradictions as Logic Laws',
+      description:`As discussed in previous [section](!/logic/propositional-logic/semantics/contradiction#definition), a contradiction is a proposition that always evaluates to false. Some contradictions are so fundamental that they represent core principles of propositional logic.
           
           ## Negations of Logical Laws as Contradictions
           When we negate certain fundamental laws of propositional logic, we obtain expressions that are always false, making them **contradictions**.
@@ -237,70 +238,124 @@ to explicitly state that a proposition $\( P \)$ is always false (equivalent to 
           
           Use this tool to evaluate [truth tables](!/logic/truth-tables).
           `
+
+    },
+    other:{
+      title:'Contradictions that are not laws',
+      description: `While some contradictions are negations of fundamental logical laws, not all **contradictions** represent the negation of logical laws. A law in logic is a fundamental principle that defines how logical operations behave, often used in formal proofs and reasoning systems.
+          
+      However, some **contradictions** are simply valid logical statements that always evaluate to false without being the direct negation of a fundamental principle.
+      
+      These non-law contradictions may still be useful in proofs, particularly in proof by contradiction methods (reductio ad absurdum), but they do not represent the negation of core logical rules like De Morgan's Laws or the Law of Excluded Middle. Instead, they are often the result of specific logical constructions or transformations that yield contradictory results.
+      
+            `,
+            description2: `
+     Use this [tool](!/logic/truth-tables) to generate truth tables dynamically and evaluate these contradictions.`
+    },
+    contradiction_vs_tautology:{
+      title:'Contradiction vs Tautology',
+      description: `In propositional logic, tautologies and contradictions represent opposite ends of logical certainty. 
+      While [tautology](!/logic/propositional-logic/semantics/tautology) is a logical formula that always evaluates to true, no matter what truth values are assigned to its variables, a contradiction, in contrast, is always false regardless of its variables' values.
+      These concepts are perfect mirrors of each other - applying negation to a [tautology](!/logic/propositional-logic/semantics/tautology) produces a contradiction, and negating a contradiction creates a [tautology](!/logic/propositional-logic/semantics/tautology). 
+      This relationship is not just a curiosity but forms the foundation of logical reasoning. Tautologies tell us what must be true in all possible worlds, while contradictions show us what cannot be true under any circumstances. Together, they establish the boundaries of logical possibility and impossibility, providing the framework for all logical deduction in propositional logic.`,
+      svg:    
+      `<svg width="500" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" 
+style="display: block; margin: 0 auto; fill:none; stroke:none; fill-rule:evenodd; clip-rule:evenodd; stroke-linecap:round; stroke-linejoin:round; stroke-miterlimit:1.5;">
+<defs>
+<!-- Arrow markers -->
+<marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+<path d="M0,0 L10,3.5 L0,7 Z" fill="#777777" />
+</marker>
+</defs>
+
+<!-- Left node (green/tautology) with checkmark -->
+<circle cx="125" cy="150" r="60" fill="#3cc583" stroke="#ffffff" stroke-width="2" />
+<!-- Checkmark icon -->
+<path d="M 90 150 L 115 175 L 160 120" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+
+<!-- Right node (red/contradiction) with X -->
+<circle cx="375" cy="150" r="60" fill="#e55753" stroke="#ffffff" stroke-width="2" />
+<!-- X icon -->
+<path d="M 335 110 L 415 190 M 415 110 L 335 190" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+
+<!-- Upper arrow (flatter curve) -->
+<path d="M185 110 C225 90, 275 90, 315 110" stroke="#777777" stroke-width="0.8" fill="none" marker-end="url(#arrowhead)" />
+<!-- Upper arrow negation label -->
+<text x="250" y="80" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#444444">negation (¬)</text>
+
+<!-- Lower arrow (flatter curve) -->
+<path d="M315 190 C275 210, 225 210, 185 190" stroke="#777777" stroke-width="0.8" fill="none" marker-end="url(#arrowhead)" />
+<!-- Lower arrow negation label -->
+<text x="250" y="220" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#444444">negation (¬)</text>
+
+<!-- Labels -->
+<text x="125" y="230" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#3cc583">Tautology</text>
+<text x="375" y="230" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#e55753">Contradiction</text>
+</svg>`,
+     description2:       
+     `These two related and opposite concepts exist in perfect duality through negation as shown in the diagram – the negation of any [tautology](!/logic/propositional-logic/semantics/tautology) produces a contradiction, and negating any contradiction creates a [tautology](!/logic/propositional-logic/semantics/tautology). This relationship reveals a fundamental symmetry in logical reasoning.
+     
+     This duality plays a crucial role in logical analysis. Tautologies provide the foundation for valid arguments and proofs, as they represent statements that must necessarily be true. Contradictions enable powerful proof techniques like reductio ad absurdum, where we disprove statements by showing they lead to contradictions. Together, they establish the boundary conditions of logical reasoning – what must be true and what cannot be true – providing the fixed points around which all logical deduction revolves in propositional logic.`
+     
+
+    }
+
+  }
+
+
+
+  return{
+    props:{
+
+      contradictions,
+      introContent,
+      contradictionContent
+
+    }
+  }
+}
+
+
+export default function TautologyPage({contradictions , introContent ,contradictionContent}) {
+
+ const keyWords=['logic','propositional logic','contradiction',
+  'tautology','tautology and contradiction','tautology and contradiction']
+
+ 
+
+    const contradictionSections=[
+            {
+            id:'definition',
+            title: contradictionContent.definition.title,
+            content:contradictionContent.definition.description
+          },
+           
+          {
+            id:'contradictions_as_laws',
+            title:contradictionContent.laws.title,
+            content:contradictionContent.laws.description
           },
           {
             id:'other_contradictions',
-            title:'Contradictions that are not laws',
+            title:contradictionContent.other.title,
             content:[
-                `While some contradictions are negations of fundamental logical laws, not all **contradictions** represent the negation of logical laws. A law in logic is a fundamental principle that defines how logical operations behave, often used in formal proofs and reasoning systems.
-          
-          However, some **contradictions** are simply valid logical statements that always evaluate to false without being the direct negation of a fundamental principle.
-          
-          These non-law contradictions may still be useful in proofs, particularly in proof by contradiction methods (reductio ad absurdum), but they do not represent the negation of core logical rules like De Morgan's Laws or the Law of Excluded Middle. Instead, they are often the result of specific logical constructions or transformations that yield contradictory results.
-          
-                `,
+              contradictionContent.other.description ,
                 <ExpandableTable data={contradictions}
                 key={1}
                 copyableFields={'expression'}/>,
-                `
-                Use this [tool](!/logic/truth-tables) to generate truth tables dynamically and evaluate these contradictions.`
+                contradictionContent.other.description2 ,
+               
             ]
           },
                 {
             id:'contradiction_vs_tautology',
-            title:'Contradiction vs Tautology',
+            title:contradictionContent.contradiction_vs_tautology.title,
             content:[
-              `In propositional logic, tautologies and contradictions represent opposite ends of logical certainty. 
-              While [tautology](!/logic/propositional-logic/semantics/tautology) is a logical formula that always evaluates to true, no matter what truth values are assigned to its variables, a contradiction, in contrast, is always false regardless of its variables' values.
-              These concepts are perfect mirrors of each other - applying negation to a [tautology](!/logic/propositional-logic/semantics/tautology) produces a contradiction, and negating a contradiction creates a [tautology](!/logic/propositional-logic/semantics/tautology). 
-              This relationship is not just a curiosity but forms the foundation of logical reasoning. Tautologies tell us what must be true in all possible worlds, while contradictions show us what cannot be true under any circumstances. Together, they establish the boundaries of logical possibility and impossibility, providing the framework for all logical deduction in propositional logic.`,
-              `<svg width="500" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" 
-     style="display: block; margin: 0 auto; fill:none; stroke:none; fill-rule:evenodd; clip-rule:evenodd; stroke-linecap:round; stroke-linejoin:round; stroke-miterlimit:1.5;">
-  <defs>
-    <!-- Arrow markers -->
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <path d="M0,0 L10,3.5 L0,7 Z" fill="#777777" />
-    </marker>
-  </defs>
-  
-  <!-- Left node (green/tautology) with checkmark -->
-  <circle cx="125" cy="150" r="60" fill="#3cc583" stroke="#ffffff" stroke-width="2" />
-  <!-- Checkmark icon -->
-  <path d="M 90 150 L 115 175 L 160 120" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-  
-  <!-- Right node (red/contradiction) with X -->
-  <circle cx="375" cy="150" r="60" fill="#e55753" stroke="#ffffff" stroke-width="2" />
-  <!-- X icon -->
-  <path d="M 335 110 L 415 190 M 415 110 L 335 190" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-  
-  <!-- Upper arrow (flatter curve) -->
-  <path d="M185 110 C225 90, 275 90, 315 110" stroke="#777777" stroke-width="0.8" fill="none" marker-end="url(#arrowhead)" />
-  <!-- Upper arrow negation label -->
-  <text x="250" y="80" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#444444">negation (¬)</text>
-  
-  <!-- Lower arrow (flatter curve) -->
-  <path d="M315 190 C275 210, 225 210, 185 190" stroke="#777777" stroke-width="0.8" fill="none" marker-end="url(#arrowhead)" />
-  <!-- Lower arrow negation label -->
-  <text x="250" y="220" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#444444">negation (¬)</text>
-  
-  <!-- Labels -->
-  <text x="125" y="230" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#3cc583">Tautology</text>
-  <text x="375" y="230" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#e55753">Contradiction</text>
-</svg>`,
-`These two related and opposite concepts exist in perfect duality through negation as shown in the diagram – the negation of any [tautology](!/logic/propositional-logic/semantics/tautology) produces a contradiction, and negating any contradiction creates a [tautology](!/logic/propositional-logic/semantics/tautology). This relationship reveals a fundamental symmetry in logical reasoning.
 
-This duality plays a crucial role in logical analysis. Tautologies provide the foundation for valid arguments and proofs, as they represent statements that must necessarily be true. Contradictions enable powerful proof techniques like reductio ad absurdum, where we disprove statements by showing they lead to contradictions. Together, they establish the boundary conditions of logical reasoning – what must be true and what cannot be true – providing the fixed points around which all logical deduction revolves in propositional logic.`
-
+              contradictionContent.contradiction_vs_tautology.description,
+              contradictionContent.contradiction_vs_tautology.svg,
+              contradictionContent.contradiction_vs_tautology.description2,
+  
             ]
           },
         //     {
@@ -311,6 +366,62 @@ This duality plays a crucial role in logical analysis. Tautologies provide the f
     ]
   return (
     <>
+     <Head>
+      <title>Contradiction in Propositional Logic | Learn Math Class</title>
+      <meta name="description" content="Learn about contradictions in propositional logic, their relationship to tautologies, and how they represent logical impossibilities. Explore examples, notation, and applications in logical reasoning." />
+      <meta name="keywords" content="contradiction, propositional logic, logical fallacy, law of non-contradiction, tautology, logical reasoning, formal proofs, reductio ad absurdum, proof by contradiction" />
+      
+      {/* Canonical URL */}
+      <link rel="canonical" href="https://www.learnmathclass.com/logic/propositional-logic/semantics/contradiction" />
+      
+      {/* Open Graph / Facebook */}
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://www.learnmathclass.com/logic/propositional-logic/semantics/contradiction" />
+      <meta property="og:title" content="Contradiction in Propositional Logic | Learn Math Class" />
+      <meta property="og:description" content="Explore contradictions in propositional logic - logical formulas that always evaluate to false regardless of their variables' truth values." />
+      <meta property="og:image" content="https://www.learnmathclass.com/images/og-contradiction.jpg" />
+      
+      {/* Twitter */}
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:url" content="https://www.learnmathclass.com/logic/propositional-logic/semantics/contradiction" />
+      <meta property="twitter:title" content="Contradiction in Propositional Logic | Learn Math Class" />
+      <meta property="twitter:description" content="Explore contradictions in propositional logic - logical formulas that always evaluate to false regardless of their variables' truth values." />
+      <meta property="twitter:image" content="https://www.learnmathclass.com/images/twitter-contradiction.jpg" />
+      
+      {/* Mobile responsiveness */}
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      
+      {/* Structured data (JSON-LD) for rich results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Contradiction in Propositional Logic",
+            "description": "Learn about contradictions in propositional logic, their relationship to tautologies, and how they represent logical impossibilities.",
+            "author": {
+              "@type": "Organization",
+              "name": "Learn Math Class"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Learn Math Class",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.learnmathclass.com/logo.png"
+              }
+            },
+            "datePublished": "2023-01-15",
+            "dateModified": "2023-05-20",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://www.learnmathclass.com/logic/propositional-logic/semantics/contradiction"
+            }
+          })
+        }}
+      />
+    </Head>
     <GenericNavbar/>
     <br/>
     <br/>
@@ -327,7 +438,7 @@ This duality plays a crucial role in logical analysis. Tautologies provide the f
     <Breadcrumb/>
     <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Contradiction</h1>
     <br/>
-    <SectionTableOfContents sections={tautologySections}
+    <SectionTableOfContents sections={contradictionSections}
      showSecondaryNav={true}
      secondaryNavMode="siblings"
      secondaryNavTitle="Similar Pages"/>
@@ -342,7 +453,7 @@ This duality plays a crucial role in logical analysis. Tautologies provide the f
          textColor="#06357a"
        />
     <br/>
- <Sections sections={tautologySections}/>
+ <Sections sections={contradictionSections}/>
     <br/>
     <br/>
     <ScrollUpButton/>
