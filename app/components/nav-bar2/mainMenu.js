@@ -80,6 +80,7 @@ export const mainMenuStructure = [
             { label: 'Percentage Calculator', href: '/calculators/percentage-calculator' },
             { label: 'Modulo Calculator', href: '/calculators/modulo-calculator' },
             { label: 'Factorial Calculator', href: '/calculators/factorial-calculator' },
+            { label: 'Fraction Calculator', href: '/calculators/fraction-calculator' },
             
           ]
         },

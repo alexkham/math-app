@@ -60,6 +60,7 @@ const CustomConvert=()=>(
     { text: 'Percentage Calculator', url: '/calculators/percentage-calculator' },
     { text: 'Modulo Calculator', url: '/calculators/modulo-calculator' },
     { text: 'Factorial Calculator', url: '/calculators/factorial-calculator' },
+    { text: 'Fraction Calculator', url: '/calculators/fraction-calculator' },
    
   ]},
   // { id: 3, icon: FileText, tooltip: 'Files', content: 'FilesComponent' },

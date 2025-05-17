@@ -64,6 +64,11 @@ export default function ConvertersPage() {
             name: "Factorial Calculator",
             href: "/calculators/factorial-calculator"
           },
+          {
+            name: "Fraction Calculator",
+            href: "/calculators/fraction-calculator"
+          },
+         
          
          
         ]
