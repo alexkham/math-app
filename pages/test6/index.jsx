@@ -23,6 +23,8 @@ import MathProofFlow from '@/app/components/examples/MathProofFlow';
 import LogicalEquivalenceChecker from '@/app/components/logic-calculator/EquivalenceChecker';
 import LogicalEquivalenceVerifier from '@/app/components/logic-calculator/EquivalenceChecker';
 import PropositionTreeBuilder from '@/app/components/logic-calculator/proposition-tree/PropositionTreeBuilder';
+import DegreeRadianConversionDemo from '@/app/components/tables/conversion-tables/DegreeRadianConversion';
+import DegreeRadianConvertionTable from '@/app/components/tables/conversion-tables/DegreeRadianConversion';
 
 export default function Test6Page() {
 
@@ -978,6 +980,11 @@ $$dim(V) = dim(ker(T)) + dim(im(T))$$"
     <br/>
     <br/>
     <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <DegreeRadianConvertionTable/>
     <br/>
     <br/>
     

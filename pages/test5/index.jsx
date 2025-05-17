@@ -10,6 +10,7 @@ import CombinatoricsVisualization from '@/app/components/combinatorics/Combinato
 import ArrowSplitBreakdown from '@/app/components/breakdowns/2-way-split/ArrowBreakdown';
 import TableSplitBreakdown from '@/app/components/breakdowns/2-way-split/TableSplit';
 import TruthTable from '@/app/components/logic-calculator/truth-tables/TruthTable';
+import ContentBlocks from '@/app/components/page-components/content-components/ContentBlocks';
 
 
 export default function Test5Page() {
@@ -136,6 +137,37 @@ export default function Test5Page() {
       }
     ]
    };
+
+   const mockTocItems = [
+    {
+      title: "Introduction",
+      content: "This is the introduction section with some **bold text** and a [link to Google](https://google.com).\n\nHere's another paragraph with some math: $E = mc^2$.\n\n- List item 1\n- List item 2\n\tIndented list item"
+    },
+    {
+      title: "Mathematical Concepts",
+      before: "<p class='note'>This section covers advanced topics</p>",
+      content: "Here we'll explore some complex equations:\n\n$$\\int_{0}^{\\infty} e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}$$\n\nAnd an inline equation: $a^2 + b^2 = c^2$",
+      after: "<p class='note'>End of mathematical concepts</p>"
+    },
+    {
+      title: "Diagrams and Visualizations",
+      content:[ "Here's a simple diagram:\n\n",
+        "<svg width='200' height='100'><circle cx='50' cy='50' r='40' stroke='black' stroke-width='2' fill='red'/></svg>",
+        "\n\nAnd some additional text after the diagram."]
+    },
+    {
+      title: "HTML Example",
+      content: "<div style='padding: 10px; border: 1px solid #ccc; border-radius: 4px;'><h3>Custom HTML Content</h3><p>This is rendered using dangerouslySetInnerHTML</p></div>"
+    },
+    {
+      title: "Conclusion with Math Expression",
+      content: "In conclusion, we've learned that $\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$\n\n- Summary point 1\n- Summary point 2"
+    }
+  ];
+
+
+
+
   return (
     <>
     <h1>Test 5 page </h1>
@@ -143,6 +175,7 @@ export default function Test5Page() {
     expandTopLevel={true}/> */}
     <br/>
     <br/>
+    <div id='toc'>toc</div>
     <br/>
     <br/>
     <ArrowSplitBreakdown/>
@@ -195,6 +228,15 @@ export default function Test5Page() {
     <br/>
     <h1>End</h1>
     <br/>
+    <br/>
+    <br/>
+   
+    <br/>
+    <br/>
+    <br/>
+    <div style={{marginLeft:'100px',marginRight:'100px'}}>
+    <ContentBlocks tocItems={mockTocItems}/>
+    </div>
     <br/>
     <br/>
     {/* <CombinatoricsVisualization itemCount={5}/> */}
