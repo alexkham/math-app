@@ -13,6 +13,7 @@ import TruthTable from '@/app/components/logic-calculator/truth-tables/TruthTabl
 import ContentBlocks from '@/app/components/page-components/content-components/ContentBlocks';
 
 
+
 export default function Test5Page() {
 
    const mockData = {
@@ -240,6 +241,12 @@ export default function Test5Page() {
     <br/>
     <br/>
     {/* <CombinatoricsVisualization itemCount={5}/> */}
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    {/* <ProofCalculator/> */}
     <br/>
     <br/>
     <ScrollUpButton></ScrollUpButton>

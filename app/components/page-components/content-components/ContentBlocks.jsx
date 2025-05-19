@@ -269,6 +269,7 @@ import { InlineMath, BlockMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
 import styles from './ContentBlocks.module.css';
 import { lora700, poppins500 } from '@/app/utils/fonts';
+import { processContent } from '@/app/utils/contentProcessor';
 
 const createSlug = (text) => {
   const cleanText = text.replace(/\s*\(.*?\)\s*/g, '').trim();
@@ -301,27 +302,27 @@ const parseHTMLContent = (content) => {
   return content;
 };
 
-const processContent = (content) => {
-  // If content is an array, process each item separately and return an array of elements
-  if (Array.isArray(content)) {
-    return content.map((item, index) => {
-      if (typeof item === 'string') {
-        if (item.trim().startsWith('<svg') && item.trim().endsWith('</svg>')) {
-          return <div key={`svg-${index}`} dangerouslySetInnerHTML={{ __html: item }} />;
-        } else if (item.trim().startsWith('<') && item.trim().endsWith('>')) {
-          return <div key={`html-${index}`} dangerouslySetInnerHTML={{ __html: item }} />;
-        } else {
-          return processSingleStringContent(item, index);
-        }
-      } else {
-        return item; // If it's already a React element, return as is
-      }
-    });
-  }
+// const processContent = (content) => {
+//   // If content is an array, process each item separately and return an array of elements
+//   if (Array.isArray(content)) {
+//     return content.map((item, index) => {
+//       if (typeof item === 'string') {
+//         if (item.trim().startsWith('<svg') && item.trim().endsWith('</svg>')) {
+//           return <div key={`svg-${index}`} dangerouslySetInnerHTML={{ __html: item }} />;
+//         } else if (item.trim().startsWith('<') && item.trim().endsWith('>')) {
+//           return <div key={`html-${index}`} dangerouslySetInnerHTML={{ __html: item }} />;
+//         } else {
+//           return processSingleStringContent(item, index);
+//         }
+//       } else {
+//         return item; // If it's already a React element, return as is
+//       }
+//     });
+//   }
   
-  // Otherwise, process it as a single string
-  return processSingleStringContent(content);
-};
+//   // Otherwise, process it as a single string
+//   return processSingleStringContent(content);
+// };
 
 const processSingleStringContent = (content, outerIndex = 0) => {
   if (typeof content !== 'string') return content;

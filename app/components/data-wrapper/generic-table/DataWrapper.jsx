@@ -183,7 +183,8 @@ export default function DataWrapper2({
     copyableFields: [], // Fields that can be copied
     nestedCopyableFields: [], // Content fields that can be copied
     searchableFields: [] // Fields to search in
-  }
+  },
+  searchable=true
 }) {
   const [selectedSections, setSelectedSections] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -264,7 +265,7 @@ export default function DataWrapper2({
   return (
     <div className={styles.container}>
       {/* Controls Section */}
-      <div className={styles.topControls}>
+      {searchable&&<div className={styles.topControls}>
         <div className={styles.searchWrapper}>
           <input
             type="text"
@@ -303,7 +304,7 @@ export default function DataWrapper2({
           {isDropdownOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           {isDropdownOpen ? 'Hide Categories' : 'Show Categories'}
         </button>
-      </div>
+      </div>}
 
       {/* Dropdown Section */}
       <div
