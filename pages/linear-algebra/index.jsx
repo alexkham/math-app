@@ -112,10 +112,35 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Head from 'next/head'
 import MyList from '@/app/components/page-components/lists/MyList'
+import ToolsSlider from '@/app/components/sliders/ToolsSlider'
 
 export async function getStaticProps() {
   const { default: linearAlgebraFormulasList } = await import('@/app/api/db/formulas/linear-algebra/linearAlgebraFormulas');
   const { default: linearAlgebraTermsList } = await import('@/app/api/db/definitions/linear-algebra/linearAlgebraDefinitions')
+  
+  
+  const tools=[
+     
+     // {
+    //   title: "Unit Circle2",
+    //   description: "2Interactive trigonometry tool",
+    //   image: "/images/calculus.jpg",
+    //   link: "/tools/unit-circle1"
+    // },
+     // {
+    //   title: "Unit Circle2",
+    //   description: "2Interactive trigonometry tool",
+    //   image: "/images/calculus.jpg",
+    //   link: "/tools/unit-circle1"
+    // },
+     // {
+    //   title: "Unit Circle2",
+    //   description: "2Interactive trigonometry tool",
+    //   image: "/images/calculus.jpg",
+    //   link: "/tools/unit-circle1"
+    // },
+
+  ]
   
   // Static content that can be used for SEO
   const sectionContent = {
@@ -270,7 +295,28 @@ export default function LinearAlgebraPage({
           width: 8 // full width
         }
       ]
-    }
+    },   
+
+      {
+        id: 'tools',
+        title: sectionContent.symbols.title, // Give it a proper title
+        link: '', // Optional
+        content: [
+                 {
+                   content: 
+                    
+                     <ToolsSlider tools={tools} key={'slider'}/>
+                   ,
+                   layout: 'horizontal',
+                   position: 'center', // or 'left' if you prefer
+                   width: 8 // full width
+                 }
+               ]
+      },
+  
+
+     
+    
   ]
 
   const structuredData = {
@@ -375,6 +421,7 @@ export default function LinearAlgebraPage({
         secondaryNavTitle="Similar Pages"/>
         <br/>
         <br/>
+        
         <br/>
         <ScrollUpButton/>
       </main>

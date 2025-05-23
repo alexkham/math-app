@@ -200,7 +200,22 @@ export default function LogicPage({
       image: "/tools/truth-tables.jpg",
       link: "/tables/truth-tables"
     },
-    // {
+    {
+      title: "Normal Forms Converter",
+      description: "Convert logical expressions to normal forms (both DNF and CNF) with truth table illustration using our interactive tool",
+      image: "/tools/normal-form.jpg",
+      link: "/logic/propositional-logic/syntax/normal-forms"
+    },
+    {
+      title: "Syntax Tree Builder",
+      description: "Use interactive Syntax Tree Builder to learn propositional logic syntax rules visually",
+      image: "/tools/tree-builder.jpg",
+      link: " /logic/propositional-logic/syntax/tree-builder"
+    },
+
+   
+
+     // {
     //   title: "Unit Circle2",
     //   description: "2Interactive trigonometry tool",
     //   image: "/images/calculus.jpg",
@@ -290,10 +305,10 @@ export default function LogicPage({
     // link: '/logic/tools', // Optional
     content: [
       {
-        content: <div>
+        content: 
          
           <ToolsSlider tools={tools} key={'slider'}/>
-        </div>,
+        ,
         layout: 'horizontal',
         position: 'center', // or 'left' if you prefer
         width: 8 // full width

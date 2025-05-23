@@ -235,9 +235,9 @@ export default function Test5Page() {
     <br/>
     <br/>
     <br/>
-    <div style={{marginLeft:'100px',marginRight:'100px'}}>
+    {/* <div style={{marginLeft:'100px',marginRight:'100px'}}>
     <ContentBlocks tocItems={mockTocItems}/>
-    </div>
+    </div> */}
     <br/>
     <br/>
     {/* <CombinatoricsVisualization itemCount={5}/> */}
