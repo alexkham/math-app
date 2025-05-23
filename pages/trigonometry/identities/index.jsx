@@ -44,7 +44,25 @@ export async function getStaticProps(){
       Knowing how to flip between functions is critical in isolating variables and solving identities.
       Reciprocal identities let you flip between familiar and less familiar functions, extend your solving toolbox, and reduce redundancy in learning.
       `        
-    }
+    },
+    pythagorean:{
+      title:``,
+      before:``,
+      after:``,
+    },
+
+    // pythagorean:{
+    //   title:``,
+    //   before:``,
+    //   after:``,
+    // },
+
+
+    // pythagorean:{
+    //   title:``,
+    //   before:``,
+    //   after:``,
+    // }
   }
   
     const trigIdentitiesData = {
