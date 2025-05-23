@@ -13,7 +13,39 @@ import Sections from '@/app/components/page-components/section/Sections'
 
 export async function getStaticProps(){
 
+  const keyWords=[
+    'trigonometric identities','trig identities','trigonometry','verifying trig identities','simplifying trig identities',
+    'proving trigonometric identities'
+  ]
 
+  const sectionsContent={
+    definition:{
+      title:'Definition-based Identities',
+      before: `Definition-based identities derive from the fundamental relationships between trigonometric functions based on their right-triangle definitions.
+      Those may be well illustrated by [unit circle](!/visual-tools/unit-circle).
+      
+      \n`,     
+
+      after:  `\nDefinition-based identities are fundamental relationships derived directly from how trigonometric functions are defined in a right triangle. They establish the basic connections between these functions and serve as building blocks for more complex identities.
+      To get better feeling and understanding of basic definition-based identities use our visual intteractive [unit circle](!/visual-tools/unit-circle) tool.
+      `
+ 
+    },
+    reciprocal:{
+      title:'Reciprocal Identities',
+      before:  `In mathematics, the **reciprocal** of a number or expression is 1 divided by that number.
+      So, for any non-zero value $𝑥$, the reciprocal is $\\frac{1}{x}$ .
+      A reciprocal identity expresses the relationship between a trigonometric function and its multiplicative inverse — basically, how each function "flips".​
+      Each basic trigonometric function (sine, cosine, tangent) has a reciprocal counterpart.
+              
+              `,
+      after: `
+      Reciprocal identities help simplify rational trigonometric expressions, especially in algebra-heavy problems or when combining functions.
+      Knowing how to flip between functions is critical in isolating variables and solving identities.
+      Reciprocal identities let you flip between familiar and less familiar functions, extend your solving toolbox, and reduce redundancy in learning.
+      `        
+    }
+  }
   
     const trigIdentitiesData = {
           "Definition-based Identities": [
@@ -535,7 +567,125 @@ export async function getStaticProps(){
       formula: "cot(a)cot(b) = [cos(a − b) + cos(a + b)] / [cos(a − b) − cos(a + b)]",
       explanation: "Derived using cotangent in terms of cosine and sine"
     }
-  ]
+  ],
+
+  "Sum-to-Product Identities": [
+    {
+      id: 86,
+      law: "Sum-to-Product for sin(a) + sin(b)",
+      formula: "sin(a) + sin(b) = 2sin[(a + b)/2]cos[(a − b)/2]",
+      explanation: "Converts sum of sines into product of sine and cosine"
+    },
+    {
+      id: 87,
+      law: "Sum-to-Product for sin(a) − sin(b)",
+      formula: "sin(a) − sin(b) = 2cos[(a + b)/2]sin[(a − b)/2]",
+      explanation: "Converts difference of sines into product"
+    },
+    {
+      id: 88,
+      law: "Sum-to-Product for cos(a) + cos(b)",
+      formula: "cos(a) + cos(b) = 2cos[(a + b)/2]cos[(a − b)/2]",
+      explanation: "Converts sum of cosines into product"
+    },
+    {
+      id: 89,
+      law: "Sum-to-Product for cos(a) − cos(b)",
+      formula: "cos(a) − cos(b) = −2sin[(a + b)/2]sin[(a − b)/2]",
+      explanation: "Converts difference of cosines into negative product of sines"
+    },
+    {
+      id: 90,
+      law: "Sum-to-Product for tan(a) + tan(b)",
+      formula: "tan(a) + tan(b) = sin(a + b) / [cos(a)cos(b)]",
+      explanation: "Derived by expressing tangent in terms of sine and cosine"
+    },
+    {
+      id: 91,
+      law: "Sum-to-Product for tan(a) − tan(b)",
+      formula: "tan(a) − tan(b) = sin(a − b) / [cos(a)cos(b)]",
+      explanation: "Difference of tangents expressed as sine over product of cosines"
+    }
+  ],
+
+
+  // "Inverse Trigonometric Identities": [
+  //   {
+  //     id: 92,
+  //     law: "sin⁻¹(x)",
+  //     formula: "sin⁻¹(−x) = −sin⁻¹(x)",
+  //     explanation: "Odd function; valid for x ∈ [−1, 1]"
+  //   },
+  //   {
+  //     id: 93,
+  //     law: "cos⁻¹(x)",
+  //     formula: "cos⁻¹(−x) = π − cos⁻¹(x)",
+  //     explanation: "Reflective identity; x ∈ [−1, 1]"
+  //   },
+  //   {
+  //     id: 94,
+  //     law: "tan⁻¹(x)",
+  //     formula: "tan⁻¹(−x) = −tan⁻¹(x)",
+  //     explanation: "Odd function; valid for all real x"
+  //   },
+  //   {
+  //     id: 95,
+  //     law: "cot⁻¹(x)",
+  //     formula: "cot⁻¹(−x) = π − cot⁻¹(x)",
+  //     explanation: "Symmetry identity for cotangent inverse; x ∈ ℝ"
+  //   },
+  //   {
+  //     id: 96,
+  //     law: "sec⁻¹(x)",
+  //     formula: "sec⁻¹(−x) = π − sec⁻¹(x)",
+  //     explanation: "Valid for |x| ≥ 1"
+  //   },
+  //   {
+  //     id: 97,
+  //     law: "csc⁻¹(x)",
+  //     formula: "csc⁻¹(−x) = −csc⁻¹(x)",
+  //     explanation: "Odd function; valid for |x| ≥ 1"
+  //   }
+  // ]
+
+  // "Inverse Trigonometric Identities": [
+  //   {
+  //     id: 92,
+  //     law: "sin⁻¹(sin(x)) = x",
+  //     formula: "sin⁻¹(sin(x)) = x",
+  //     explanation: "Valid only if x is in [−π/2, π/2]"
+  //   },
+  //   {
+  //     id: 93,
+  //     law: "cos⁻¹(cos(x)) = x",
+  //     formula: "cos⁻¹(cos(x)) = x",
+  //     explanation: "Valid only if x is in [0, π]"
+  //   },
+  //   {
+  //     id: 94,
+  //     law: "tan⁻¹(tan(x)) = x",
+  //     formula: "tan⁻¹(tan(x)) = x",
+  //     explanation: "Valid only if x is in (−π/2, π/2)"
+  //   },
+  //   {
+  //     id: 95,
+  //     law: "sin(sin⁻¹(x)) = x",
+  //     formula: "sin(sin⁻¹(x)) = x",
+  //     explanation: "Valid only if x is in [−1, 1]"
+  //   },
+  //   {
+  //     id: 96,
+  //     law: "cos(cos⁻¹(x)) = x",
+  //     formula: "cos(cos⁻¹(x)) = x",
+  //     explanation: "Valid only if x is in [−1, 1]"
+  //   },
+  //   {
+  //     id: 97,
+  //     law: "tan(tan⁻¹(x)) = x",
+  //     formula: "tan(tan⁻¹(x)) = x",
+  //     explanation: "Valid for all real x"
+  //   }
+  // ]
       
         // "Angle Sum and Difference Identities": [
         //   { id: 13, law: "Sine Sum", formula: "sin(a + b) = sin(a)cos(b) + cos(a)sin(b)", explanation: "Sine of a sum expands to product terms", topic: "Angle Sum/Diff" },
@@ -570,13 +720,14 @@ export async function getStaticProps(){
 
             trigIdentitiesData,
             config,
+            sectionsContent
             // reciprocalId
 
         }
     }
 }
 
-export default function TrigoIdentitiesPage({trigIdentitiesData ,config }) {
+export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,sectionsContent}) {
 
   const introContent={
     id:'intro',
@@ -595,13 +746,10 @@ $\\ast$ Transform expressions to more useful forms for integration or differenti
 
     {
       id:'definition',
-      title:'Definition-based Identities',
+      title:sectionsContent.definition.title,
       link:'',
       content:[
-        `Definition-based identities derive from the fundamental relationships between trigonometric functions based on their right-triangle definitions.
-        Those may be well illustrated by [unit circle](!/visual-tools/unit-circle).
-        
-        \n`,
+        sectionsContent.definition.before,
          
          <div style={{marginLeft:'50px',marginRight:'50px'}}>
     <ExpandableTable data={trigIdentitiesData["Definition-based Identities"]}
@@ -609,34 +757,23 @@ $\\ast$ Transform expressions to more useful forms for integration or differenti
      copyableFields={["formula"]}
      includedFields={ ["law", "formula", "explanation"]} />
      </div> ,
-     `\nDefinition-based identities are fundamental relationships derived directly from how trigonometric functions are defined in a right triangle. They establish the basic connections between these functions and serve as building blocks for more complex identities.
-     To get better feeling and understanding of basic definition-based identities use our visual intteractive [unit circle](!/visual-tools/unit-circle) tool.
-     `
-
+     sectionsContent.definition.after
+   
       ]
     },
     {
       id:'reciprocal',
-      title:'Reciprocal Identities',
+      title:sectionsContent.reciprocal.title,
       link:'',
       content:[
-        `In mathematics, the **reciprocal** of a number or expression is 1 divided by that number.
-So, for any non-zero value $𝑥$, the reciprocal is $\\frac{1}{x}$ .
-A reciprocal identity expresses the relationship between a trigonometric function and its multiplicative inverse — basically, how each function "flips".​
-Each basic trigonometric function (sine, cosine, tangent) has a reciprocal counterpart.
-        
-        `,
+         sectionsContent.reciprocal.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable data={trigIdentitiesData["Reciprocal Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
-         `
-         Reciprocal identities help simplify rational trigonometric expressions, especially in algebra-heavy problems or when combining functions.
-         Knowing how to flip between functions is critical in isolating variables and solving identities.
-         Reciprocal identities let you flip between familiar and less familiar functions, extend your solving toolbox, and reduce redundancy in learning.
-         `
+        sectionsContent.reciprocal.after
         
       ]
     },
@@ -859,7 +996,44 @@ Each basic trigonometric function (sine, cosine, tangent) has a reciprocal count
         
         
       ]
-    }
+    },
+
+      {
+      id:'sum-product',
+      title:'Sum-to-Product Identities',
+      link:'',
+      content:[
+
+
+        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <ExpandableTable data={trigIdentitiesData["Sum-to-Product Identities"]}
+         displayColumns={ ["law", "formula", "explanation"]}
+         copyableFields={["formula"]}
+         includedFields={ ["law", "formula", "explanation"]} />
+         </div> ,
+
+        
+        
+      ]
+    },
+
+    //  {
+    //   id:'inverse',
+    //   title:'Inverse Trigonometric Identities',
+    //   link:'',
+    //   content:[
+
+    //     <div style={{marginLeft:'50px',marginRight:'50px'}}>
+    //     <ExpandableTable data={trigIdentitiesData["Inverse Trigonometric Identities"]}
+    //      displayColumns={ ["law", "formula", "explanation"]}
+    //      copyableFields={["formula"]}
+    //      includedFields={ ["law", "formula", "explanation"]} />
+    //      </div> ,
+
+        
+    //   ]
+    // }
+
 
 
      // {
