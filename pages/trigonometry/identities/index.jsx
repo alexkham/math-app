@@ -418,7 +418,46 @@ export async function getStaticProps(){
               formula: "cot(θ/2) = ±√[(1 + cos(θ)) / (1 − cos(θ))]",
               explanation: "Reciprocal of the square root tangent identity"
             }
-          ]
+          ],
+
+          "Triple Angle Identities": [
+              {
+                id: 68,
+                law: "Triple Angle for Sine",
+                formula: "sin(3θ) = 3sin(θ) − 4sin³(θ)",
+                explanation: "Expanded using angle addition identity"
+              },
+              {
+                id: 69,
+                law: "Triple Angle for Cosine",
+                formula: "cos(3θ) = 4cos³(θ) − 3cos(θ)",
+                explanation: "Expanded using angle addition identity"
+              },
+              {
+                id: 70,
+                law: "Triple Angle for Tangent",
+                formula: "tan(3θ) = (3tan(θ) − tan³(θ)) / (1 − 3tan²(θ))",
+                explanation: "Derived from tangent sum identity"
+              },
+              {
+                id: 71,
+                law: "Triple Angle for Cotangent",
+                formula: "cot(3θ) = (cot³(θ) − 3cot(θ)) / (3cot²(θ) − 1)",
+                explanation: "Derived from reciprocal of tangent triple angle"
+              },
+              {
+                id: 72,
+                law: "Triple Angle for Secant",
+                formula: "sec(3θ) = 1 / (4cos³(θ) − 3cos(θ))",
+                explanation: "Reciprocal of cosine triple angle"
+              },
+              {
+                id: 73,
+                law: "Triple Angle for Cosecant",
+                formula: "csc(3θ) = 1 / (3sin(θ) − 4sin³(θ))",
+                explanation: "Reciprocal of sine triple angle"
+              }
+            ]
       
         // "Angle Sum and Difference Identities": [
         //   { id: 13, law: "Sine Sum", formula: "sin(a + b) = sin(a)cos(b) + cos(a)sin(b)", explanation: "Sine of a sum expands to product terms", topic: "Angle Sum/Diff" },
@@ -694,7 +733,22 @@ Each basic trigonometric function (sine, cosine, tangent) has a reciprocal count
       ]
     },
 
-      // {
+      {
+      id:'triple',
+      title:'Triple Angle Identities',
+      link:'',
+      content:[
+        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <ExpandableTable data={trigIdentitiesData["Triple Angle Identities"]}
+         displayColumns={ ["law", "formula", "explanation"]}
+         copyableFields={["formula"]}
+         includedFields={ ["law", "formula", "explanation"]} />
+         </div> ,
+
+      ]
+    },
+
+     // {
     //   id:'',
     //   title:'',
     //   link:'',
