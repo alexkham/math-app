@@ -576,6 +576,7 @@ import { fetchSiteNavLinks } from '@/app/utils/navLinks'
 import StaticSectionTableOfContents from '@/app/components/page-components/section/StaticSectionTableOfContent'
 import SEOFriendlySectionTableOfContents from '@/app/components/page-components/section/SEOFriendlyTableofContents'
 import SectionTableOfContents2 from '@/app/components/page-components/section/SectionTableofContents2'
+import ToolsSlider from '@/app/components/sliders/ToolsSlider'
 
 
 
@@ -590,9 +591,34 @@ const currentPath = '/algebra';
 const childrenNav = await fetchSiteNavLinks(currentPath, 'children');
 const siblingsNav = await fetchSiteNavLinks(currentPath, 'siblings');
 
-console.log('Children Nav:', childrenNav);
-console.log('Siblings Nav:', siblingsNav);
+// console.log('Children Nav:', childrenNav);
+// console.log('Siblings Nav:', siblingsNav);
  /* */
+
+
+ const tools=[
+  {
+    title: "Quadratic Equation Solver",
+    description: "Solve quadratic equations and see the solution steps explained",
+    image: "/tools/quadratic-solver.jpg",
+    link: "/calculators/quadratic-equations"
+  },
+
+  {
+    title: "Polynomial Calculator",
+    description: "Add or Subtract polynomials using interactive calculator with explanations",
+    image: "/tools/polynomial-calculator.jpg",
+    link: "/calculators/polynomial-calculator"
+  },
+
+
+  // {
+  //   title: "Determinant Visual Calculator with Steps",
+  //   description: "Use visualinteractive Determinant Calculator with step-by-step explanations",
+  //   image: "/tools/determinant-calculator.jpg",
+  //   link: "/visual-tools/determinant-calculator"
+  // },
+ ]
 
   const sectionContent = {
     formulas: {
@@ -683,7 +709,8 @@ The skills developed in algebra, such as **logical reasoning**, **abstraction**,
       algebraTermsList,
       definitionsCategoryExplanations,
       formulasCategoryExplanations,
-      childrenNav
+      childrenNav,
+      tools
     }
   }
 }
@@ -698,7 +725,8 @@ export default function AlgebraPage({
   algebraTermsList,
   definitionsCategoryExplanations,
   formulasCategoryExplanations,
-  childrenNav
+  childrenNav,
+  tools
 }) {
 
   
@@ -753,7 +781,25 @@ export default function AlgebraPage({
           width: 1.5 
         }
       ]
-    }
+    },
+
+     {
+            id: 'tools',
+            title: 'Tools', // Give it a proper title
+            link: '', // Optional
+            content: [
+                     {
+                       content: 
+                        
+                         <ToolsSlider tools={tools} key={'slider'}/>
+                       ,
+                       layout: 'horizontal',
+                       position: 'center', // or 'left' if you prefer
+                       width: 8 // full width
+                     }
+                   ]
+          },
+      
   ]
 
   const structuredData = {
@@ -876,6 +922,7 @@ export default function AlgebraPage({
         <Sections sections={algebraSections}/>
         <br/>
         <br/>
+        {/* <ToolsSlider/> */}
         <br/>
         <ScrollUpButton/>
       </main>

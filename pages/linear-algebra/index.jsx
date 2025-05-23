@@ -35,6 +35,27 @@ export async function getStaticProps() {
       link: "/visual-tools/gauss-elimination"
     },
 
+     {
+      title: "Matrix Multiplication Animated",
+      description: "Check our interactive widget to learn the process of matrix multiplication explained step after step",
+      image: "/tools/matrix-multiplication-animation.jpg",
+      link: "/visual-tools/matrix-multiplication"
+    },
+
+      {
+      title: "Matrix Transposition Visualizer",
+      description: "Learn the principles of matrix transposition using this interactive visual tool",
+      image: "/tools/matrix-transposition.jpg",
+      link: "/visual-tools/matrix-transposition"
+    },
+
+     {
+      title: "Matrix Types Generator",
+      description: "Learn different types of square matrices and their special features with this interactive visual tool",
+      image: "/tools/matrix-types.jpg",
+      link: "/visual-tools/matrix-types"
+    },
+
 
     
      // {

@@ -457,7 +457,85 @@ export async function getStaticProps(){
                 formula: "csc(3θ) = 1 / (3sin(θ) − 4sin³(θ))",
                 explanation: "Reciprocal of sine triple angle"
               }
-            ]
+            ],
+
+            "Power-Reducing Identities": [
+    {
+      id: 74,
+      law: "Power-Reducing for Sine",
+      formula: "sin²(θ) = (1 − cos(2θ)) / 2",
+      explanation: "Reduces power of sine using double angle"
+    },
+    {
+      id: 75,
+      law: "Power-Reducing for Cosine",
+      formula: "cos²(θ) = (1 + cos(2θ)) / 2",
+      explanation: "Reduces power of cosine using double angle"
+    },
+    {
+      id: 76,
+      law: "Power-Reducing for Tangent",
+      formula: "tan²(θ) = (1 − cos(2θ)) / (1 + cos(2θ))",
+      explanation: "Derived from sin²/cos² power-reduced forms"
+    },
+    {
+      id: 77,
+      law: "Power-Reducing for Cotangent",
+      formula: "cot²(θ) = (1 + cos(2θ)) / (1 − cos(2θ))",
+      explanation: "Reciprocal form of tangent power-reduction"
+    },
+    {
+      id: 78,
+      law: "Power-Reducing for Secant",
+      formula: "sec²(θ) = 2 / (1 + cos(2θ))",
+      explanation: "Derived by inverting cos² power identity"
+    },
+    {
+      id: 79,
+      law: "Power-Reducing for Cosecant",
+      formula: "csc²(θ) = 2 / (1 − cos(2θ))",
+      explanation: "Derived by inverting sin² power identity"
+    }
+  ],
+
+  "Product-to-Sum Identities": [
+    {
+      id: 80,
+      law: "Product-to-Sum for sin(a)sin(b)",
+      formula: "sin(a)sin(b) = ½[cos(a − b) − cos(a + b)]",
+      explanation: "Converts product of sines into sum of cosines"
+    },
+    {
+      id: 81,
+      law: "Product-to-Sum for cos(a)cos(b)",
+      formula: "cos(a)cos(b) = ½[cos(a − b) + cos(a + b)]",
+      explanation: "Converts product of cosines into sum of cosines"
+    },
+    {
+      id: 82,
+      law: "Product-to-Sum for sin(a)cos(b)",
+      formula: "sin(a)cos(b) = ½[sin(a + b) + sin(a − b)]",
+      explanation: "Converts product of sine and cosine into sum of sines"
+    },
+    {
+      id: 83,
+      law: "Product-to-Sum for cos(a)sin(b)",
+      formula: "cos(a)sin(b) = ½[sin(a + b) − sin(a − b)]",
+      explanation: "Converts product of cosine and sine into difference of sines"
+    },
+    {
+      id: 84,
+      law: "Product-to-Sum for tan(a)tan(b)",
+      formula: "tan(a)tan(b) = [cos(a − b) − cos(a + b)] / [cos(a − b) + cos(a + b)]",
+      explanation: "Derived using tangent in terms of sine and cosine"
+    },
+    {
+      id: 85,
+      law: "Product-to-Sum for cot(a)cot(b)",
+      formula: "cot(a)cot(b) = [cos(a − b) + cos(a + b)] / [cos(a − b) − cos(a + b)]",
+      explanation: "Derived using cotangent in terms of cosine and sine"
+    }
+  ]
       
         // "Angle Sum and Difference Identities": [
         //   { id: 13, law: "Sine Sum", formula: "sin(a + b) = sin(a)cos(b) + cos(a)sin(b)", explanation: "Sine of a sum expands to product terms", topic: "Angle Sum/Diff" },
@@ -747,6 +825,42 @@ Each basic trigonometric function (sine, cosine, tangent) has a reciprocal count
 
       ]
     },
+
+       {
+      id:'power-reducing',
+      title:'Power-Reducing Identities',
+      link:'',
+      content:[
+
+        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <ExpandableTable data={trigIdentitiesData["Power-Reducing Identities"]}
+         displayColumns={ ["law", "formula", "explanation"]}
+         copyableFields={["formula"]}
+         includedFields={ ["law", "formula", "explanation"]} />
+         </div> ,
+       
+        
+      ]
+    },
+
+      {
+      id:'product-sum',
+      title:'Product-to-Sum Identities',
+      link:'',
+      content:[
+
+        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <ExpandableTable data={trigIdentitiesData["Product-to-Sum Identities"]}
+         displayColumns={ ["law", "formula", "explanation"]}
+         copyableFields={["formula"]}
+         includedFields={ ["law", "formula", "explanation"]} />
+         </div> ,
+
+        
+        
+      ]
+    }
+
 
      // {
     //   id:'',
