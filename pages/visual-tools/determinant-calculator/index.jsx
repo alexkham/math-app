@@ -1,22 +1,4 @@
-// import MyNavbar from '@/app/components/nav-bar/MyNavbar'
-// import React from 'react'
-// import '../../pages.css'
-// import DeterminantCalculator from '@/app/components/matrix-multiplication/DeterminantCalculator'
-// import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 
-// export default function DeterminantCalculatorPage() {
-//   return (
-//    <>
-//    <MyNavbar></MyNavbar>
-//    <br></br>
-//    <br></br>
-//    <br></br>
-//    <h1 className='title' style={{marginBottom:'20px',marginTop:'20px'}}>Determinant Calculator with Steps</h1>
-//    <DeterminantCalculator></DeterminantCalculator>
-//    <ScrollUpButton></ScrollUpButton>
-//    </>
-//   )
-// }
 import MyNavbar from '@/app/components/nav-bar/MyNavbar'
 import React from 'react'
 import '../../pages.css'
@@ -25,6 +7,7 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import Head from 'next/head'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 
 export default function DeterminantCalculatorPage() {
   return (
@@ -41,16 +24,17 @@ export default function DeterminantCalculatorPage() {
       <br></br>
       <br></br>
       <br></br>
+      <Breadcrumb/>
       <OperaSidebar 
       side='right'
-      topOffset='65px' 
+      topOffset='55px' 
       sidebarWidth='45px'
       panelWidth='200px'
       
       iconColor='white'
       panelBackgroundColor='#f2f2f2'/> 
       <main className="container mx-auto px-4 py-8">
-        <h1 className="title" style={{marginBottom:'20px',marginTop:'20px'}}>Determinant Calculator with Steps</h1>
+        <h1 className="title" style={{marginBottom:'20px',marginTop:'-20px'}}>Determinant Calculator with Steps</h1>
         <div style={{width:'95%'}}>
         <DeterminantCalculator />
         </div>
