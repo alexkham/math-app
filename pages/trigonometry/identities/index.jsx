@@ -46,11 +46,166 @@ export async function getStaticProps(){
       `        
     },
     pythagorean:{
-      title:``,
-      before:``,
-      after:``,
+      title:'Pythagorean Identities',
+      before:`Pythagorean Identities are based on the Pythagorean theorem applied to the [unit circle](!/visual-tools/unit-circle). 
+      They express fundamental relationships that always equal 1 or have the form "1 + something²". The core identity sin²(θ) + cos²(θ) = 1 comes directly from the unit circle where any point (cos θ, sin θ) satisfies x² + y² = 1. The other two identities are derived by dividing this fundamental relationship by cos² or sin². 
+      
+      `,
+      after:`
+      
+      Being familiar with these identities is a crucial skill because they allow converting between different trigonometric functions and are essential for simplifying complex trigonometric expressions.`,
+    },
+     triangle:{
+      title:'Triangle Geometry Identities',
+      before:`Triangle Geometry Identities are fundamental relationships that apply to any triangle, not just right triangles. They're special because they connect angles and side lengths in general triangles, extending beyond basic trigonometry. The Law of Sines relates ratios of sides to opposite angles, while the Law of Cosines generalizes the Pythagorean theorem for non-right triangles.
+      
+      `,
+      after:`
+
+      These identities are crucial for solving real-world problems involving triangulation, navigation, and engineering where you need to find unknown sides or angles in any triangle configuration.
+      `,
     },
 
+
+     even_odd:{
+      title:"Even-Odd Identities",
+      before:`Even-Odd Identities describe the symmetry properties of trigonometric functions when the angle is negated. They're special because they classify functions as either even (symmetric about the y-axis) or odd (symmetric about the origin). Cosine and secant are even functions, meaning f(-θ) = f(θ), while sine, tangent, cosecant, and cotangent are odd functions, meaning f(-θ) = -f(θ). 
+      
+      `,
+      after:`
+      
+      These identities are important for simplifying expressions with negative angles, understanding function behavior, and solving equations where angle direction matters.
+      `,
+    },
+
+    
+    co_function:{
+      title:`Co-Function Identities`,
+      before:`Co-Function Identities express the relationship between trigonometric functions and their "co-functions" (complementary functions). They're special because they show how trig functions of complementary angles (angles that add to 90°) are related. For example, sine of an angle equals cosine of its complement. These identities exist because in a right triangle, the two acute angles are complementary, so one angle's opposite side becomes the other angle's adjacent side.
+      
+      `,
+      after:`
+      
+      Co-Function identities are important for converting between different trig functions and simplifying expressions involving complementary angles.
+      `,
+    },
+
+    
+
+    periodicity:{
+      title:'Periodicity Identities',
+      before:`Periodicity Identities describe how trigonometric functions repeat their values at regular intervals. They're special because they capture the cyclical nature of trigonometric functions - sine and cosine repeat every 2π (full circle), while tangent and cotangent repeat every π (half circle). These identities exist because trigonometric functions are based on circular motion and angles, which naturally cycle.
+      
+      `,
+      after:`
+      
+       Understanding periodicity identities is crucial for solving equations with multiple solutions, understanding wave behavior, and working with any angle by reducing it to a standard interval.
+      `,
+    },
+    
+     shift:{
+      title:`Shift Identities`,
+      before:`Shift Identities show how trigonometric functions behave when the angle is shifted by specific amounts like π or π/2. They're special because they reveal the phase relationships between different trig functions - for example, how sine becomes cosine when shifted by π/2. These identities exist because of the geometric relationships on the unit circle where shifting an angle corresponds to rotating the point.
+      
+      `,
+      after:`
+      Shift identities are important for understanding wave phase shifts, converting between trig functions, and analyzing periodic phenomena where timing or phase differences matter.
+      `,
+    },
+
+     sum:{
+      title:'Angle Sum Identities',
+      before:`Angle Sum Identities express trigonometric functions of the sum of two angles in terms of the individual angles' functions. They're special because they break down complex angle combinations into manageable parts using products and sums of simpler functions. These identities exist due to the geometric properties of rotating and combining angles on the unit circle. 
+      
+      `,
+      after:`
+
+      These identities are fundamental for calculus, solving trigonometric equations, proving other identities, and applications in physics where multiple rotations or oscillations combine, such as in wave interference and vector analysis.
+      `,
+    },
+
+     difference:{
+      title:'Angle Difference Identities',
+      before:`Angle Difference Identities express trigonometric functions of the difference between two angles in terms of the individual angles' functions. They're special because they complement the sum identities, providing the complete toolkit for breaking down angle combinations. These identities exist from the same geometric principles as sum identities but with opposite rotation directions on the unit circle. 
+      
+      `,
+      after:`
+      Angle Difference identities are essential for solving trigonometric equations, deriving other identities, and applications involving relative motion, phase differences, or when one oscillation opposes another in physics and engineering problems.
+      `,
+    },
+
+    double:{
+      title: 'Double Angle Identities',
+      before:`Double Angle Identities are specialized cases of angle sum formulas where both angles are identical (θ + θ = 2θ). What makes them unique is their simplified, elegant forms that directly relate single-angle functions to double-angle functions. They emerge naturally from setting a = b in the sum identities, creating powerful shortcuts. 
+      
+      `,
+      after:`
+      
+      These identities are vital for integration in calculus, solving equations with multiple angle relationships, and analyzing phenomena with frequency doubling, such as harmonics in music, optical frequency conversion, and engineering systems with gear ratios.
+      `,
+    },
+
+    
+    half:{
+      title:`Half Angle Identities`,
+      before:`Half Angle Identities work in reverse of double angle formulas, expressing functions of θ/2 in terms of functions of θ. Their uniqueness lies in providing square root forms and rational expressions that eliminate half-angles from equations. They arise by algebraically rearranging double angle identities and often involve ± signs requiring careful quadrant analysis.
+      
+      `,
+      after:`
+
+      These identities are indispensable for integration techniques, solving equations with fractional angles, and applications involving bisection problems, such as cutting angles in half for construction, optics with half-wave plates, and signal processing with subharmonics.
+      `,
+    },
+
+    triple:{
+      title:`Triple Angle Identities`,
+      before:`Triple Angle Identities extend angle multiplication to express functions of 3θ in terms of functions of θ. They're distinctive for producing cubic polynomial relationships, creating elegant algebraic forms like sin(3θ) = 3sin(θ) - 4sin³(θ). These identities emerge from repeatedly applying angle sum formulas or using complex number methods.
+      
+      `,
+      after:`
+      
+      Those identities are valuable in advanced calculus, solving higher-order trigonometric equations, and specialized applications like three-phase electrical systems, crystallography with threefold symmetry, and acoustics where third harmonics play crucial roles in sound quality and instrument timbre.
+      `,
+    },
+
+    
+    power_reducing:{
+      title:'Power-Reducing Identities',
+      before:`Power-Reducing Identities convert higher powers of trigonometric functions into expressions with lower powers and multiple angles. They're special because they eliminate troublesome squared and higher-power terms by expressing them using first-power functions of double angles. 
+      
+      `,
+      after:`
+      
+      These identities stem from rearranging double angle formulas to isolate the squared terms. They're essential in calculus integration where powers create complexity, Fourier analysis for breaking down periodic functions, and signal processing where reducing power terms simplifies frequency domain analysis and filtering operations.
+      `,
+    },
+    
+
+     product_sum:{
+      title:'Product-to-Sum Identities',
+      before:`Product-to-Sum Identities transform products of trigonometric functions into sums or differences of simpler trigonometric expressions. They're special because they convert multiplication (which is complex) into addition (which is simpler), essentially "unpacking" products into linear combinations. These identities arise from algebraically manipulating angle sum and difference formulas.
+      
+      `,
+      after:`
+      
+      These identities are crucial in signal processing for analyzing beat frequencies, Fourier analysis for decomposing complex waveforms, acoustics for understanding interference patterns, and integration techniques where products are harder to handle than sums.
+      `,
+    },
+
+
+     sum_product:{
+      title:`Sum-to-Product Identities`,
+      before:`Sum-to-Product Identities convert sums and differences of trigonometric functions into products of simpler expressions. They're special because they perform the reverse operation of product-to-sum identities, transforming linear combinations into multiplicative forms. These identities emerge from reversing the algebraic manipulation of angle sum formulas. They're valuable for factoring trigonometric expressions, solving equations where products reveal common factors, analyzing wave interference where constructive and destructive patterns create amplitude modulation, and in acoustics for understanding how combined frequencies create beats and harmonics.
+      
+      `,
+      after:`
+      
+      
+      `,
+    },
+
+    
+    
     // pythagorean:{
     //   title:``,
     //   before:``,
@@ -729,8 +884,21 @@ export async function getStaticProps(){
         searchableFields: ["law", "formula", "explanation"]  // Allow searching by name, formula, or explanation
       };
 
-      // const reciprocalId=trigIdentitiesData["Reciprocal Identities"]
-      
+      const introContent={
+        id:'intro',
+        title:'Trigonometric Identities : Practical Guide',
+        content:`Trigonometric identities are equations involving trigonometric functions that are true for all values in their domains.
+        Knowing those identities and understanding them is  important because they:
+     ▪  Simplify complex expressions
+     ▪  Help solving equations not easily solvable in their original form
+     ▪  May be useful in proving mathematical theorems
+    ▪ Model periodic phenomena in physics, engineering, and other fields
+    ▪  Transform expressions to more useful forms for integration or differentiation
+
+
+
+    `
+      }    
       
 
     return{
@@ -738,27 +906,17 @@ export async function getStaticProps(){
 
             trigIdentitiesData,
             config,
-            sectionsContent
-            // reciprocalId
+            sectionsContent,
+            introContent
+            
 
         }
     }
 }
 
-export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,sectionsContent}) {
+export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,sectionsContent,introContent}) {
 
-  const introContent={
-    id:'intro',
-    title:'Trigonometric Identities : Practical Guide',
-    content:`Trigonometric identities are equations involving trigonometric functions that are true for all values in their domains.
-    Knowing those identities and understanding them is  important because they:
-$\\ast$ Simplify complex expressions
-$\\ast$ Help solving equations not easily solvable in their original form
-$\\ast$ May be useful in proving mathematical theorems
-$\\ast$ Model periodic phenomena in physics, engineering, and other fields
-$\\ast$ Transform expressions to more useful forms for integration or differentiation
-`
-  }
+ 
 
   const identitiesSections=[
 
@@ -797,9 +955,11 @@ $\\ast$ Transform expressions to more useful forms for integration or differenti
     },
      {
       id:'pythagorean',
-      title:'Pythagorean Identities',
+      title: sectionsContent.pythagorean.title,
       link:'',
       content:[
+
+        sectionsContent.pythagorean.before,
 
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable data={trigIdentitiesData["Pythagorean Identities"]}
@@ -807,14 +967,17 @@ $\\ast$ Transform expressions to more useful forms for integration or differenti
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
+          sectionsContent.pythagorean.after,
         
       ]
     },
      {
       id:'triangle',
-      title:'Triangle Geometry Identities',
+      title: sectionsContent.triangle.title,
       link:'',
       content:[
+
+        sectionsContent.triangle.before,
 
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable data={trigIdentitiesData["Triangle Geometry Identities"]}
@@ -823,38 +986,42 @@ $\\ast$ Transform expressions to more useful forms for integration or differenti
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
 
+         sectionsContent.triangle.after,
+
         
         
       ]
     },
       {
       id:'even-odd',
-      title:"Even-Odd Identities",
+      title:sectionsContent.even_odd.title,
       link:'',
       content:[
-
+          sectionsContent.even_odd.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable data={trigIdentitiesData["Even-Odd Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
+         sectionsContent.even_odd.after,
 
         
       ]
     },
      {
       id:'co-function',
-      title:'Co-Function Identities',
+      title: sectionsContent.co_function.title,
       link:'',
       content:[
-
+         sectionsContent.co_function.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable data={trigIdentitiesData["Co-Function Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
+         sectionsContent.co_function.after,
 
 
         
@@ -863,16 +1030,17 @@ $\\ast$ Transform expressions to more useful forms for integration or differenti
     },
       {
       id:'periodicity',
-      title:'Periodicity Identities',
+      title:sectionsContent.periodicity.title,
       link:'',
       content:[
-
+         sectionsContent.periodicity.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable data={trigIdentitiesData["Periodicity Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
+         sectionsContent.periodicity.after,
 
         
         
@@ -880,61 +1048,60 @@ $\\ast$ Transform expressions to more useful forms for integration or differenti
     },
      {
       id:'shift',
-      title:'Shift Identities',
+      title:sectionsContent.shift.title,
       link:'',
       content:[
-         
+         sectionsContent.shift.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable data={trigIdentitiesData["Shift Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
-
-
-        
+         sectionsContent.shift.after,        
         
       ]
     },
       {
       id:'sum',
-      title:'Angle Sum Identities',
+      title: sectionsContent.sum.title,
       link:'',
       content:[
 
-          
+          sectionsContent.sum.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable data={trigIdentitiesData["Angle Sum Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
+         sectionsContent.sum.after,
         
       ]
     },
       {
       id:'difference',
-      title:'Angle Difference Identities',
+      title: sectionsContent.difference.title,
       link:'',
       content:[
-
+        sectionsContent.difference.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable data={trigIdentitiesData["Angle Difference Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
-
+         sectionsContent.difference.after,
         
         
       ]
     },
       {
       id:'double',
-      title:'Double Angle Identities',
+      title:sectionsContent.double.title,
       link:'',
       content:[
-
+            sectionsContent.double.before,
 
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable data={trigIdentitiesData["Double Angle Identities"]}
@@ -942,6 +1109,8 @@ $\\ast$ Transform expressions to more useful forms for integration or differenti
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
+
+          sectionsContent.double.after,
 
 
        
@@ -951,9 +1120,10 @@ $\\ast$ Transform expressions to more useful forms for integration or differenti
 
      {
       id:'half',
-      title:'Half Angle Identities',
+      title:sectionsContent.half.title,
       link:'',
       content:[
+        sectionsContent.half.before,
 
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable data={trigIdentitiesData["Half Angle Identities"]}
@@ -961,38 +1131,41 @@ $\\ast$ Transform expressions to more useful forms for integration or differenti
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
-
+         sectionsContent.half.after,
         
       ]
     },
 
       {
       id:'triple',
-      title:'Triple Angle Identities',
+      title:sectionsContent.triple.title,
       link:'',
       content:[
+        sectionsContent.triple.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable data={trigIdentitiesData["Triple Angle Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
+         sectionsContent.triple.after,
 
       ]
     },
 
        {
       id:'power-reducing',
-      title:'Power-Reducing Identities',
+      title:sectionsContent.power_reducing.title,
       link:'',
       content:[
-
+         sectionsContent.power_reducing.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable data={trigIdentitiesData["Power-Reducing Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
+         sectionsContent.power_reducing.after,
        
         
       ]
@@ -1000,16 +1173,17 @@ $\\ast$ Transform expressions to more useful forms for integration or differenti
 
       {
       id:'product-sum',
-      title:'Product-to-Sum Identities',
+      title:sectionsContent.product_sum.title,
       link:'',
       content:[
-
+          sectionsContent.product_sum.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable data={trigIdentitiesData["Product-to-Sum Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
+         sectionsContent.product_sum.after,
 
         
         
@@ -1018,17 +1192,18 @@ $\\ast$ Transform expressions to more useful forms for integration or differenti
 
       {
       id:'sum-product',
-      title:'Sum-to-Product Identities',
+      title:sectionsContent.sum_product.title,
       link:'',
       content:[
 
-
+         sectionsContent.sum_product.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable data={trigIdentitiesData["Sum-to-Product Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
+         sectionsContent.sum_product.after,
 
         
         
@@ -1066,6 +1241,37 @@ $\\ast$ Transform expressions to more useful forms for integration or differenti
   ]
   return (
     <>
+    <head>
+  {/* Essential Meta Tags */}
+  <title>Trigonometric Identities: Complete Guide with Formulas | LearnMathClass</title>
+  <meta name="description" content="Master trigonometric identities with our comprehensive guide. Learn Pythagorean, angle sum, double angle, and all essential trig identities with formulas and explanations." />
+  <meta name="keywords" content="trigonometric identities, trig identities, trigonometry, verifying trig identities, simplifying trig identities, proving trigonometric identities" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+
+  {/* Canonical URL */}
+  <link rel="canonical" href="https://www.learnmathclass.com/trigonometry/identities" />
+
+  {/* Open Graph for Social Sharing */}
+  <meta property="og:title" content="Trigonometric Identities: Complete Guide with Formulas" />
+  <meta property="og:description" content="Master trigonometric identities with our comprehensive guide. Learn Pythagorean, angle sum, double angle, and all essential trig identities." />
+  <meta property="og:url" content="https://www.learnmathclass.com/trigonometry/identities" />
+  <meta property="og:type" content="article" />
+
+  {/* Basic Structured Data */}
+  <script type="application/ld+json">
+    {`{
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Trigonometric Identities: Complete Guide with Formulas",
+      "description": "Master trigonometric identities with our comprehensive guide. Learn Pythagorean, angle sum, double angle, and all essential trig identities.",
+      "url": "https://www.learnmathclass.com/trigonometry/identities"
+    }`}
+  </script>
+
+  {/* Favicon */}
+  <link rel="icon" href="/favicon.ico" />
+</head>
     <GenericNavbar/>
     <br/>
     <br/>
