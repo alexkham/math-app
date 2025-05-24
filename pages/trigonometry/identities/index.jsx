@@ -927,7 +927,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       content:[
         sectionsContent.definition.before,
          
-         <div style={{marginLeft:'50px',marginRight:'50px'}}>
+         <div key={51} style={{marginLeft:'50px',marginRight:'50px'}}>
     <ExpandableTable key={1}
     data={trigIdentitiesData["Definition-based Identities"]}
      displayColumns={ ["law", "formula", "explanation"]}
@@ -944,7 +944,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       link:'',
       content:[
          sectionsContent.reciprocal.before,
-        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <div key={51} style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable key={2}
         data={trigIdentitiesData["Reciprocal Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
@@ -963,7 +963,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
 
         sectionsContent.pythagorean.before,
 
-        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <div key={53} style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable key={3}
         data={trigIdentitiesData["Pythagorean Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
@@ -982,7 +982,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
 
         sectionsContent.triangle.before,
 
-        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <div key={54} style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable key={4}
         data={trigIdentitiesData["Triangle Geometry Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
@@ -1002,7 +1002,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       link:'',
       content:[
           sectionsContent.even_odd.before,
-        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <div key={55} style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable key={5}
         data={trigIdentitiesData["Even-Odd Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
@@ -1020,7 +1020,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       link:'',
       content:[
          sectionsContent.co_function.before,
-        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <div key={56} style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable key={6}
         data={trigIdentitiesData["Co-Function Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
@@ -1040,7 +1040,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       link:'',
       content:[
          sectionsContent.periodicity.before,
-        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <div key={57} style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable key={7}
         data={trigIdentitiesData["Periodicity Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
@@ -1059,7 +1059,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       link:'',
       content:[
          sectionsContent.shift.before,
-        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <div key={68} style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable key={8}
         data={trigIdentitiesData["Shift Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
@@ -1077,7 +1077,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       content:[
 
           sectionsContent.sum.before,
-        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <div key={69} style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable key={9}
         data={trigIdentitiesData["Angle Sum Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
@@ -1094,7 +1094,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       link:'',
       content:[
         sectionsContent.difference.before,
-        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <div key={60} style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable key={10}
         data={trigIdentitiesData["Angle Difference Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
@@ -1113,7 +1113,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       content:[
             sectionsContent.double.before,
 
-        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <div key={61} style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable key={11}
         data={trigIdentitiesData["Double Angle Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
@@ -1136,7 +1136,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       content:[
         sectionsContent.half.before,
 
-        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <div key={62} style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable key={12}
         data={trigIdentitiesData["Half Angle Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
@@ -1154,7 +1154,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       link:'',
       content:[
         sectionsContent.triple.before,
-        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <div key={63} style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable key={13}
         data={trigIdentitiesData["Triple Angle Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
@@ -1172,7 +1172,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       link:'',
       content:[
          sectionsContent.power_reducing.before,
-        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <div key={64} style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable key={14}
         data={trigIdentitiesData["Power-Reducing Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
@@ -1191,7 +1191,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       link:'',
       content:[
           sectionsContent.product_sum.before,
-        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <div key={65} style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable key={15}
         data={trigIdentitiesData["Product-to-Sum Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
@@ -1212,7 +1212,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       content:[
 
          sectionsContent.sum_product.before,
-        <div style={{marginLeft:'50px',marginRight:'50px'}}>
+        <div key={66} style={{marginLeft:'50px',marginRight:'50px'}}>
         <ExpandableTable key={16}
         data={trigIdentitiesData["Sum-to-Product Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
