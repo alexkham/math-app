@@ -10,6 +10,7 @@ import ExpandableTable from '@/app/components/generic-table/ExpandableTable'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents2'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
+import Head from 'next/head'
 
 export async function getStaticProps(){
 
@@ -416,7 +417,7 @@ export async function getStaticProps(){
       explanation: "Secant repeats every 2π"
     },
     {
-      id: 37,
+      id: 38,
       law: "Cosecant Periodicity",
       formula: "csc(θ + 2π) = csc(θ)",
       explanation: "Cosecant repeats every 2π"
@@ -1257,7 +1258,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
   ]
   return (
     <>
-    <head>
+    <Head>
   {/* Essential Meta Tags */}
   <title>Trigonometric Identities: Complete Guide with Formulas | LearnMathClass</title>
   <meta name="description" content="Master trigonometric identities with our comprehensive guide. Learn Pythagorean, angle sum, double angle, and all essential trig identities with formulas and explanations." />
@@ -1287,7 +1288,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
 
   {/* Favicon */}
   <link rel="icon" href="/favicon.ico" />
-</head>
+</Head>
     <GenericNavbar/>
     <br/>
     <br/>

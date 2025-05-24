@@ -9,6 +9,16 @@ import Sections from '@/app/components/page-components/section/Sections'
 import MyList from '@/app/components/page-components/lists/MyList'
 import ExpandableTable from '@/app/components/data-wrapper/generic-table/ExpandableTable'
 
+export async function getStaticProps(){
+
+
+  return {
+    props:{
+      
+    }
+  }
+}
+
 export default function EquivalencesPage() {
     const verify=[
         `**Truth Tables (Brute-Force Method)**:
