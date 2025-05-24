@@ -928,7 +928,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
         sectionsContent.definition.before,
          
          <div style={{marginLeft:'50px',marginRight:'50px'}}>
-    <ExpandableTable data={trigIdentitiesData["Definition-based Identities"]}
+    <ExpandableTable key={1}
+    data={trigIdentitiesData["Definition-based Identities"]}
      displayColumns={ ["law", "formula", "explanation"]}
      copyableFields={["formula"]}
      includedFields={ ["law", "formula", "explanation"]} />
@@ -944,7 +945,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       content:[
          sectionsContent.reciprocal.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable data={trigIdentitiesData["Reciprocal Identities"]}
+        <ExpandableTable key={2}
+        data={trigIdentitiesData["Reciprocal Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
@@ -962,7 +964,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
         sectionsContent.pythagorean.before,
 
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable data={trigIdentitiesData["Pythagorean Identities"]}
+        <ExpandableTable key={3}
+        data={trigIdentitiesData["Pythagorean Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
@@ -980,7 +983,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
         sectionsContent.triangle.before,
 
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable data={trigIdentitiesData["Triangle Geometry Identities"]}
+        <ExpandableTable key={4}
+        data={trigIdentitiesData["Triangle Geometry Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
@@ -999,7 +1003,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       content:[
           sectionsContent.even_odd.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable data={trigIdentitiesData["Even-Odd Identities"]}
+        <ExpandableTable key={5}
+        data={trigIdentitiesData["Even-Odd Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
@@ -1016,7 +1021,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       content:[
          sectionsContent.co_function.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable data={trigIdentitiesData["Co-Function Identities"]}
+        <ExpandableTable key={6}
+        data={trigIdentitiesData["Co-Function Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
@@ -1035,7 +1041,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       content:[
          sectionsContent.periodicity.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable data={trigIdentitiesData["Periodicity Identities"]}
+        <ExpandableTable key={7}
+        data={trigIdentitiesData["Periodicity Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
@@ -1053,7 +1060,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       content:[
          sectionsContent.shift.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable data={trigIdentitiesData["Shift Identities"]}
+        <ExpandableTable key={8}
+        data={trigIdentitiesData["Shift Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
@@ -1070,7 +1078,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
 
           sectionsContent.sum.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable data={trigIdentitiesData["Angle Sum Identities"]}
+        <ExpandableTable key={9}
+        data={trigIdentitiesData["Angle Sum Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
@@ -1086,7 +1095,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       content:[
         sectionsContent.difference.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable data={trigIdentitiesData["Angle Difference Identities"]}
+        <ExpandableTable key={10}
+        data={trigIdentitiesData["Angle Difference Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
@@ -1104,7 +1114,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
             sectionsContent.double.before,
 
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable data={trigIdentitiesData["Double Angle Identities"]}
+        <ExpandableTable key={11}
+        data={trigIdentitiesData["Double Angle Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
@@ -1126,7 +1137,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
         sectionsContent.half.before,
 
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable data={trigIdentitiesData["Half Angle Identities"]}
+        <ExpandableTable key={12}
+        data={trigIdentitiesData["Half Angle Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
@@ -1143,7 +1155,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       content:[
         sectionsContent.triple.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable data={trigIdentitiesData["Triple Angle Identities"]}
+        <ExpandableTable key={13}
+        data={trigIdentitiesData["Triple Angle Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
@@ -1160,7 +1173,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       content:[
          sectionsContent.power_reducing.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable data={trigIdentitiesData["Power-Reducing Identities"]}
+        <ExpandableTable key={14}
+        data={trigIdentitiesData["Power-Reducing Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
@@ -1178,7 +1192,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       content:[
           sectionsContent.product_sum.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable data={trigIdentitiesData["Product-to-Sum Identities"]}
+        <ExpandableTable key={15}
+        data={trigIdentitiesData["Product-to-Sum Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
@@ -1198,7 +1213,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
 
          sectionsContent.sum_product.before,
         <div style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable data={trigIdentitiesData["Sum-to-Product Identities"]}
+        <ExpandableTable key={16}
+        data={trigIdentitiesData["Sum-to-Product Identities"]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
