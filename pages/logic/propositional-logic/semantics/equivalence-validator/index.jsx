@@ -6,6 +6,21 @@ import '../../../../pages.css'
 import LogicalEquivalenceVerifier from '@/app/components/logic-calculator/EquivalenceChecker'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 
+
+
+export async function getStaticProps(){
+
+
+  return {
+    props:{
+      
+    }
+  }
+}
+
+
+
+
 export default function EquivalenceValidatorPage() {
   return (
     <>

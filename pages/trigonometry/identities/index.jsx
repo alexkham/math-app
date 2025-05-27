@@ -908,7 +908,8 @@ export async function getStaticProps(){
             trigIdentitiesData,
             config,
             sectionsContent,
-            introContent
+            introContent,
+            keyWords
             
 
         }
