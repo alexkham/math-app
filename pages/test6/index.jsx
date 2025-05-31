@@ -25,6 +25,8 @@ import LogicalEquivalenceVerifier from '@/app/components/logic-calculator/Equiva
 import PropositionTreeBuilder from '@/app/components/logic-calculator/proposition-tree/PropositionTreeBuilder';
 import DegreeRadianConversionDemo from '@/app/components/tables/conversion-tables/DegreeRadianConversion';
 import DegreeRadianConvertionTable from '@/app/components/tables/conversion-tables/DegreeRadianConversion';
+import CircularSplitBreakdown from '@/app/components/breakdowns/many/CircularSplit';
+import CircularDiagram from '@/app/components/breakdowns/circular-diagram/CircularDiagram';
 
 export default function Test6Page() {
 
@@ -760,6 +762,168 @@ const proofSteps = [
 ];
 
 
+// const rootRadicalSections = [
+//   {
+//     title: "Definition and Basic Rules",
+//     content: []
+//   },
+//   {
+//     title: "Product and Quotient Rules", 
+//     content: []
+//   },
+//   {
+//     title: "Power and Exponent Rules",
+//     content: []
+//   },
+//   {
+//     title: "Nested Root Rules",
+//     content: []
+//   },
+//   {
+//     title: "Simplification Rules",
+//     content: []
+//   },
+//   {
+//     title: "Rationalization Rules", 
+//     content: []
+//   },
+//   {
+//     title: "Special Value Rules",
+//     content: []
+//   },
+//   {
+//     title: "Domain and Sign Rules",
+//     content: []
+//   },
+//   {
+//     title: "Equation Solving Rules",
+//     content: []
+//   }
+// ];
+
+
+const rootRadicalSections = [
+  {
+    title: "Definition and Basic Rules",
+    content: [],
+    backgroundColor: '#3cc583'
+  },
+  {
+    title: "Equation Solving Rules",
+    content: [],
+    backgroundColor: '#7f64ea',
+    
+  },
+  {
+    title: "Domain and Sign Rules",
+    content: [],
+    backgroundColor: '#ba5de5'
+  },
+  {
+    title: "Product and Quotient Rules", 
+    content: [],
+    backgroundColor: '#de8431'
+  },
+  {
+    title: "Power and Exponent Rules",
+    content: [],
+    backgroundColor: '#e55753'
+  },
+  {
+    title: "Special Value Rules",
+    content: [],
+    backgroundColor: '#7f64ea'
+  },
+  {
+    title: "Rationalization Rules",
+    content: [],
+    backgroundColor: '#92bd39'
+  },
+  {
+    title: "Nested Root Rules",
+    content: [],
+    backgroundColor: '#de58a9'
+  },
+  {
+    title: "Simplification Rules",
+    content: [`content 
+      
+      
+      ghghggggggggggggggggggggggggggggggggg`],
+    backgroundColor: '#1eabda'
+  }
+ ];
+
+
+ const circularData = {
+  title: "Main Topic",
+  color: "#2563eb",
+  size: 45,
+  link: "https://example.com/main",
+  nested: [
+    { 
+      title: "Node 1", 
+      color: "#dc2626", 
+      size: 45,
+      link: "https://example.com/node1",
+      textBox: {
+        text: "Additional info 1",
+        width: 150,
+        height: 35,
+        className: 'text-box'
+      }
+    },
+    { 
+      title: "Node 2", 
+      color: "#16a34a", 
+      size: 30,
+      textBox: {
+        text: "Some text here",
+        className: 'fill-gray-50 stroke-gray-300'
+      }
+    },
+    { 
+      title: "Node 3", 
+      color: "#9333ea", 
+      size: 30,
+      textBox: {
+        text: "Some text here",
+        className: 'fill-gray-50 stroke-gray-300'
+      }
+    },
+    { 
+      title: "Node 4", 
+      color: "#ea580c", 
+      size: 30,
+      textBox: {
+        text: "More details",
+        className: 'fill-white stroke-gray-300'
+      }
+    },
+    { 
+      title: "Node 5", 
+      color: "#0891b2", 
+      size: 30,
+      textBox: {
+        text: "Extra information"
+      }
+    },
+    { 
+      title: "Node 6", 
+      color: "#4f46e5", 
+      size: 30
+    },
+    { 
+      title: "Node 7", 
+      color: "#b91c1c", 
+      size: 30,
+      textBox: {
+        text: "Last node info"
+      }
+    }
+  ]
+};
+
   return (
     <>
     <div>Test6Page</div>
@@ -986,6 +1150,20 @@ $$dim(V) = dim(ker(T)) + dim(im(T))$$"
     <br/>
     <DegreeRadianConvertionTable/>
     <br/>
+    <br/>
+    <br/>
+    <br/>
+    <CircularSplitBreakdown sections={rootRadicalSections}/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <CircularDiagram data={circularData}
+    showCircle={true}
+    radius={150}/>
     <br/>
     
     </>

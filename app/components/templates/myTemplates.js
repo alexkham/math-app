@@ -46,7 +46,7 @@ export async function getStaticProps(){
   
     },
 
-    
+
     obj5:{
   
       title:``,
@@ -57,3 +57,24 @@ export async function getStaticProps(){
     }
   
   }
+
+  const genericSections=[
+    {
+        id:'1',
+        title:'section1',
+        link:'',
+        content:''
+    },
+    {
+        id:'2',
+        title:'section2',
+        link:'',
+        content:''
+    },
+    {
+        id:'',
+        title:'',
+        link:'',
+        content:''
+    }
+]

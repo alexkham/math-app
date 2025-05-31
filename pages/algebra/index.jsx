@@ -610,7 +610,26 @@ const siblingsNav = await fetchSiteNavLinks(currentPath, 'siblings');
     image: "/tools/polynomial-calculator.jpg",
     link: "/calculators/polynomial-calculator"
   },
-
+  {
+    title: "Root Calculator",
+    description: "Calculate high precision values for quadratic, cubic and generic roots",
+    image: "/tools/root-calculator.jpg",
+    link: "/calculators/root-calculator"
+  },
+  
+  {
+    title: "Logarithm Calculator",
+    description: "Calculate logarithms for different bases and learn from explanations",
+    image: "/tools/logarithm-calculator.jpg",
+    link: "/calculators/log-calculator"
+  },
+  
+  {
+    title: "Exponent Calculator",
+    description: "Compute powers for standard and custom exponentsm: square, cube or any other integer and decimal power",
+    image: "/tools/exponent-calculator.jpg",
+    link: "/calculators/exponent-calculator"
+  },
 
   // {
   //   title: "Determinant Visual Calculator with Steps",
@@ -783,6 +802,115 @@ export default function AlgebraPage({
       ]
     },
 
+    {
+      id: 'powers_logs_roots',
+      title: 'Powers, Logarithms and Roots',
+      link:'',
+      content:[
+
+        ` Powers, roots, and logarithms are three closely interrelated concepts in mathematics.
+
+@academic[theorem: Let us consider simple formula : $a^n=b$]@.
+
+A [power](!/algebra/powers) is the result of repeated multiplication. For example, $a^n$ means multiplying $a$ by itself $n$ times,where $n$ is called the **exponent** and $b$ is the power (the result).
+
+A [root](!/algebra/roots) is the number that, when raised to a certain power, gives a specific result. The $n$-th root of $b$, written as $\\sqrt[n]{b}$, is the number that, when raised to the $n$-th power, gives $b$. In other words, $\\sqrt[n]{b}=a$ means $a^n=b$.
+
+A [logarithm](!/algebra/logarithms) is the exponent itself - it's the power that was used. Calculating a logarithm finds that **exponent** by answering: **"To what power must the base be raised to get a certain number?"** Or using mathematical notation: $\\log_a(b) = n$ means $a^n = b$.
+`,
+`
+
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background-color:#fafafa;padding:2rem}table{border-collapse:collapse;width:80%;margin:0 auto;background-color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05)}td,th{border:1px solid #e0e0e0;padding:.75rem 1rem;text-align:left}th{background-color:#f5f5f5;font-weight:600}td{font-size:.95rem}caption{font-size:1.25rem;font-weight:700;margin-bottom:1rem}</style></head><body><table><caption>Relationship Between Exponents, Roots, and Logarithms</caption><thead><tr><th>Concept</th><th>Expression</th><th>Meaning</th><th>Inverse Of</th></tr></thead><tbody><tr><td>Exponentiation</td><td><code>b<sup>c</sup> = a</code></td><td>Base <code>b</code> raised to exponent <code>c</code> gives <code>a</code></td><td>Logarithm, Root</td></tr><tr><td>Root</td><td><code>√<sub>n</sub>a = b</code></td><td><code>b</code> to the power of <code>n</code> gives <code>a</code></td><td>Exponentiation</td></tr><tr><td>Logarithm</td><td><code>log<sub>b</sub>(a) = c</code></td><td>The exponent <code>c</code> such that <code>b<sup>c</sup> = a</code></td><td>Exponentiation</td></tr></tbody></table></body></html>`,
+
+
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-300 -300 1400 950">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fafafa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8f8f8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="boxGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f9f9f9;stop-opacity:1" />
+    </linearGradient>
+    <filter id="softShadow">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.2"/>
+    </filter>
+    <filter id="boxShadow">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6366f1" stroke="none"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="-300" y="-300" width="1300" height="850" fill="url(#bgGradient)"/>
+  
+  <!-- Main circles and variables -->
+  <g>
+    <circle cx="200" cy="200" r="35" fill="url(#circleGradient)" stroke="#d1d5db" stroke-width="2" filter="url(#softShadow)"/>
+    <text x="200" y="212" font-family="Georgia, serif" font-size="38" text-anchor="middle" fill="#374151" font-weight="500">a</text>
+    
+    <circle cx="260" cy="160" r="25" fill="url(#circleGradient)" stroke="#d1d5db" stroke-width="2" filter="url(#softShadow)"/>
+    <text x="260" y="168" font-family="Georgia, serif" font-size="28" text-anchor="middle" fill="#374151" font-weight="500">n</text>
+    
+    <text x="300" y="212" font-family="Georgia, serif" font-size="38" text-anchor="middle" fill="#9ca3af" font-weight="300">=</text>
+    
+    <circle cx="370" cy="200" r="35" fill="url(#circleGradient)" stroke="#d1d5db" stroke-width="2" filter="url(#softShadow)"/>
+    <text x="370" y="212" font-family="Georgia, serif" font-size="38" text-anchor="middle" fill="#374151" font-weight="500">b</text>
+  </g>
+  
+  <!-- Connecting arrows -->
+  <g stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" opacity="0.85">
+    <line x1="170" y1="225" x2="90" y2="300" marker-end="url(#arrowhead)"/>
+    <line x1="260" y1="135" x2="260" y2="50" marker-end="url(#arrowhead)"/>
+    <line x1="400" y1="225" x2="475" y2="300" marker-end="url(#arrowhead)"/>
+  </g>
+  
+  <!-- Information boxes -->
+  <g>
+    <rect x="20" y="320" width="150" height="90" rx="8" fill="url(#boxGradient)" stroke="#e5e7eb" stroke-width="1.5" filter="url(#boxShadow)"/>
+    <rect x="185" y="-60" width="150" height="90" rx="8" fill="url(#boxGradient)" stroke="#e5e7eb" stroke-width="1.5" filter="url(#boxShadow)"/>
+    <rect x="400" y="320" width="150" height="70" rx="8" fill="url(#boxGradient)" stroke="#e5e7eb" stroke-width="1.5" filter="url(#boxShadow)"/>
+  </g>
+  
+  <!-- Text content -->
+  <g font-family="Georgia, serif" fill="#374151" text-anchor="middle">
+    <text x="95" y="345" font-size="16" font-weight="600" fill="#1f2937">Root</text>
+    <text x="95" y="365" font-size="15" fill="#4b5563">a = b<tspan dy="-6" font-size="11">1/n</tspan></text>
+    <text x="95" y="390" font-size="15" fill="#4b5563">a = <tspan dy="2">ⁿ√</tspan>b</text>
+    
+    <text x="260" y="-35" font-size="16" font-weight="600" fill="#1f2937">Logarithm</text>
+    <text x="260" y="-15" font-size="13" fill="#6b7280">(equals exponent)</text>
+    <text x="260" y="5" font-size="15" fill="#4b5563">n = log<tspan dy="3" font-size="11">a</tspan>(b)</text>
+    
+    <text x="475" y="345" font-size="16" font-weight="600" fill="#1f2937">Power</text>
+    <text x="475" y="365" font-size="15" fill="#4b5563">b = a<tspan dy="-6" font-size="11">n</tspan></text>
+  </g>
+</svg>`,
+`This diagram illustrates the fundamental mathematical relationships between three key operations: exponents, logarithms, and roots.
+At the center, you have three variables (x, y, z) connected by the equation $x^y = z$. The diagram shows how each operation is the inverse of another:
+**The three equivalent relationships:**
+- [Power](!/algebra/powers): $z = x^y$ (x raised to the power y equals z)
+- [Logarithm](!/algebra/logarithms): $y = log_x(z)$ (the logarithm base x of z equals y)
+- [Root](!/algebrs/roots):$x = \\sqrt[y]{z}$ (the y-th root of z equals x)
+
+**The key insight** is that these are all different ways of expressing the same mathematical relationship. If you know any two of the three values (x, y, z), you can find the third using the appropriate operation:
+- **If you know x and y, use exponentiation to find z**
+- **If you know x and z, use logarithms to find y**  
+- **If you know y and z, use roots to find x**
+`,
+`@academic[theorem:Examples :]@`,
+
+`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>body{font-family:'Segoe UI',sans-serif;background-color:#fdfdfd;padding:2rem}table{border-collapse:collapse;width:90%;margin:auto;background-color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.1);table-layout:fixed}td,th{border:1px solid #ccc;padding:.75rem;text-align:center;vertical-align:top;word-wrap:break-word}th{background-color:#f0f0f0;font-weight:600}caption{font-size:1.3rem;font-weight:700;margin-bottom:1rem}</style></head><body><table><caption>Exponents, Roots, and Powers</caption><thead><tr><th>Expression</th><th>Root<br>(Base recovered from result and exponent)</th><th>Exponent<br>(Equal to the logarithm: the power used)</th><th>Power<br>(Result of base raised to exponent)</th></tr></thead><tbody><tr><td>2<sup>3</sup> = 8</td><td>∛8 = 2</td><td>3</td><td>8</td></tr><tr><td>3<sup>2</sup> = 9</td><td>√9 = 3</td><td>2</td><td>9</td></tr><tr><td>4<sup>2</sup> = 16</td><td>√16 = 4</td><td>2</td><td>16</td></tr></tbody></table></body></html>`
+      ],
+    },
+
      {
             id: 'tools',
             title: 'Tools', // Give it a proper title
@@ -870,7 +998,7 @@ export default function AlgebraPage({
       <br/>
       <OperaSidebar 
         side='right'
-        topOffset='95px' 
+        topOffset='55px' 
         sidebarWidth='45px'
         panelWidth='200px'
         iconColor='white'
