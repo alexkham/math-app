@@ -303,6 +303,7 @@ export default function RootsPage({sectionsContent ,circularRulesData}) {
             content:[
               sectionsContent.rules.content,
               <CircularDiagram data={circularRulesData}
+              key={1}
               showCircle={true}
               radius={180}/>
 
