@@ -13,6 +13,26 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 export async function getStaticProps(){
 
 
+  const intro=`Here's a concise introduction to mathematical logarithms for your page:
+
+Logarithms represent the inverse operation of exponentiation, answering the question: "To what power must we raise a base to obtain a given number?" This elegant mathematical concept transforms multiplication into addition and division into subtraction, making complex calculations remarkably manageable.
+
+Logarithms are fundamental tools across numerous mathematical fields. In algebra, they solve exponential equations that would otherwise be intractable. Calculus relies on logarithmic functions for integration and differentiation, particularly through the natural logarithm's unique derivative property. In number theory, logarithms help analyze prime distribution and computational complexity.
+
+`
+
+
+const introContent = {
+  id: "intro",
+  title: "Introduction to Logarithms",
+  content: `Logarithms represent the inverse operation of exponentiation, answering the question: "To what power must we raise a base to obtain a given number?" This elegant mathematical concept transforms multiplication into addition and division into subtraction, making complex calculations remarkably manageable.
+
+Logarithms are fundamental tools across numerous mathematical fields. In algebra, they solve exponential equations that would otherwise be intractable. Calculus relies on logarithmic functions for integration and differentiation, particularly through the natural logarithm's unique derivative property. In number theory, logarithms help analyze prime distribution and computational complexity.`
+}
+
+
+
+
     const sectionsContent={
 
         definition:{
@@ -327,13 +347,14 @@ $𝑐$ is the exponent — the value the logarithm gives
       props:{
 
         sectionsContent,
+        introContent
 
         
       }
     }
   }
 
-export default function PowersPage({sectionsContent}) {
+export default function PowersPage({sectionsContent,introContent}) {
 
 
     const logarithmsSections=[
@@ -391,7 +412,13 @@ export default function PowersPage({sectionsContent}) {
      secondaryNavTitle="Similar Pages"/>
     <br/>
     <br/>
-    <IntroSection/>
+    <IntroSection 
+          id={introContent.id}
+          title={introContent.title}
+          content={introContent.content}
+          backgroundColor="#f2f2f2"
+          textColor="#06357a"
+        />
     <br/>
     <br/>
     <Sections sections={logarithmsSections}/>

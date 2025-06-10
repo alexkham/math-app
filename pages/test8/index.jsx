@@ -258,6 +258,15 @@ const newMockData = [
 ];
 
 
+const proofSteps = [
+  ` Write the sequence at the top of the page.
+  
+  `,
+  " If the sequence is atomic (a simple proposition), mark it as a valid elementary sentence.",
+  "If the sequence starts with a negation (¬), extract the sub-sequence without the negation and analyze it.",
+  " If the sequence is enclosed in parentheses, check whether it’s a compound sentence with a binary connective. Remove the outer parentheses and split the sequence into left and right parts.",
+  " Recursively repeat steps 2–4 for each sub-sequence. If any sub-sequence fails the rules, the whole expression is invalid. Otherwise, it’s a well-formed formula."
+];
 
 
 
@@ -329,6 +338,14 @@ const newMockData = [
       <br/>
       <NewCardGroup cards={newMockData}
       linkTitle='Explore'/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <div style={{width:'1000px'}}>
+      <MathProofFlow steps={proofSteps} title="Syntax Tree" theme='tailwind_alert_reversed' />
+      </div>
+      <br/>
       <br/>
     </div>
 

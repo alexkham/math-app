@@ -13,6 +13,22 @@ import CircularDiagram from '@/app/components/breakdowns/circular-diagram/Circul
 
 export async function getStaticProps(){
 
+  const intro=`Roots in mathematics represent the inverse operation of powers, answering the fundamental question: "What number, when raised to a given power, produces a specific result?"
+Roots are indispensable across mathematical disciplines. In algebra, they're crucial for solving quadratic and polynomial equations, while in geometry, they help calculate distances, areas, and volumes. Calculus extensively uses roots in integration techniques, particularly when dealing with radical functions and substitution methods. In trigonometry, roots appear in half-angle formulas and when solving trigonometric equations.
+Perhaps most importantly, roots provide the mathematical framework for understanding irrational numbers and expanding our number system beyond simple fractions. From the ancient Greeks' discovery of √2 to modern computational algorithms, roots continue to challenge and enrich mathematical thinking, serving as gateways to more advanced concepts in analysis, number theory, and applied mathematics.`
+
+
+   
+const introContent = {
+  id: "intro",
+  title: "Introduction to Roots",
+  content: `Roots in mathematics represent the inverse operation of powers, answering the fundamental question: "What number, when raised to a given power, produces a specific result?"
+Roots are indispensable across mathematical disciplines. In algebra, they're crucial for solving quadratic and polynomial equations, while in geometry, they help calculate distances, areas, and volumes. Calculus extensively uses roots in integration techniques, particularly when dealing with radical functions and substitution methods. In trigonometry, roots appear in half-angle formulas and when solving trigonometric equations.
+Perhaps most importantly, roots provide the mathematical framework for understanding irrational numbers and expanding our number system beyond simple fractions. From the ancient Greeks' discovery of √2 to modern computational algorithms, roots continue to challenge and enrich mathematical thinking, serving as gateways to more advanced concepts in analysis, number theory, and applied mathematics.`
+}
+
+
+
   const circularRulesData = {
     title: "Root and Radical Rules",
     color: "#2563eb",
@@ -226,7 +242,7 @@ In general, the n-th root of a number 𝑎 is a number 𝑏 such that:
       
         },
         rules:{
-          title:`Radical Roots`,
+          title:`Radical Rules`,
           content:`Root and radical rules are essential for working with expressions involving roots, whether square roots or higher-order radicals.  
 They begin with the [Definition and Basic Rules](!/algebra/roots/radical-rules), which explain what roots are and how they behave in key cases like squares or even vs. odd indices.  
 The [Product and Quotient Rules](!/algebra/roots/radical-rules) show how roots interact under multiplication and division, while the [Power and Exponent Rules](!/algebra/roots/radical-rules) help translate between radical and exponential forms.  
@@ -275,13 +291,14 @@ Finally, the [Equation Solving Rules](!/algebra/roots/radical-rules) guide you t
       props:{
 
         sectionsContent,
-        circularRulesData
+        circularRulesData,
+        introContent
         
       }
     }
   }
 
-export default function RootsPage({sectionsContent ,circularRulesData}) {
+export default function RootsPage({sectionsContent ,circularRulesData ,introContent}) {
 
 
     const powersSections=[
@@ -343,7 +360,13 @@ export default function RootsPage({sectionsContent ,circularRulesData}) {
      secondaryNavTitle="Similar Pages"/>
     <br/>
     <br/>
-    <IntroSection/>
+    <IntroSection 
+          id={introContent.id}
+          title={introContent.title}
+          content={introContent.content}
+          backgroundColor="#f2f2f2"
+          textColor="#06357a"
+        />
     <br/>
     <br/>
     <Sections sections={powersSections}/>

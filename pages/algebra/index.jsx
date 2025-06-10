@@ -664,7 +664,26 @@ const siblingsNav = await fetchSiteNavLinks(currentPath, 'siblings');
         backgroundColor:'#fdfdea',
       }),
       layout: 'horizontal'
+    },
+    identities: {
+      title: 'Algebraic Identities',
+       link:'/algebra/identities',
+       content:`Algebraic identities are fundamental equations that hold true for all values of their variables. These mathematical relationships serve as powerful tools for simplification, factorization, and solving complex equations.
+
+**Basic Binomial Identities** form the foundation, covering expansions of two-term expressions raised to various powers. These patterns reveal how coefficients follow predictable sequences (Pascal's triangle) and provide shortcuts for mental arithmetic.
+**General Binomial Expansions** extend these patterns through the binomial theorem, offering a systematic approach to expand any binomial to any power using combinatorial coefficients.
+**Multinomial Expansions** handle expressions with three or more terms, showing how cross-products multiply when expanding polynomials with multiple variables.
+**Difference of Squares and Higher Powers** focus on subtraction patterns, revealing elegant factorizations that break complex expressions into simpler multiplicative forms.
+**Sums and Differences of Powers** demonstrate how odd and even powers behave differently in factorization, with odd powers allowing both sum and difference factorizations while even powers typically only factor as differences.
+**Special Identities** capture unique relationships like Sophie Germain's identity and symmetric expressions, often appearing in advanced algebra and number theory.
+**Factoring Identities** provide practical tools for breaking down quadratic expressions into linear factors, essential for equation solving.
+**Basic Algebraic Properties** establish the fundamental rules governing polynomial multiplication and distribution.
+
+Mastering these identities is crucial for algebraic fluency. They allow rapid recognition of patterns, enabling quick simplification of complex expressions without lengthy calculations. Students who memorize these relationships can solve equations more efficiently, factor polynomials instantly, and approach calculus and higher mathematics with greater confidence and speed.`
     }
+
+
+    
   }
 
 
@@ -909,6 +928,16 @@ At the center, you have three variables (x, y, z) connected by the equation $x^y
 
 `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>body{font-family:'Segoe UI',sans-serif;background-color:#fdfdfd;padding:2rem}table{border-collapse:collapse;width:90%;margin:auto;background-color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.1);table-layout:fixed}td,th{border:1px solid #ccc;padding:.75rem;text-align:center;vertical-align:top;word-wrap:break-word}th{background-color:#f0f0f0;font-weight:600}caption{font-size:1.3rem;font-weight:700;margin-bottom:1rem}</style></head><body><table><caption>Exponents, Roots, and Powers</caption><thead><tr><th>Expression</th><th>Root<br>(Base recovered from result and exponent)</th><th>Exponent<br>(Equal to the logarithm: the power used)</th><th>Power<br>(Result of base raised to exponent)</th></tr></thead><tbody><tr><td>2<sup>3</sup> = 8</td><td>∛8 = 2</td><td>3</td><td>8</td></tr><tr><td>3<sup>2</sup> = 9</td><td>√9 = 3</td><td>2</td><td>9</td></tr><tr><td>4<sup>2</sup> = 16</td><td>√16 = 4</td><td>2</td><td>16</td></tr></tbody></table></body></html>`
       ],
+    },
+    {
+
+      id:'identities',
+      title:sectionContent.identities.title,
+      link:sectionContent.identities.link,
+      content:[
+        sectionContent.identities.content
+      ]
+
     },
 
      {

@@ -11,6 +11,14 @@ import ArrowSplitBreakdown from '@/app/components/breakdowns/2-way-split/ArrowBr
 import TableSplitBreakdown from '@/app/components/breakdowns/2-way-split/TableSplit';
 import TruthTable from '@/app/components/logic-calculator/truth-tables/TruthTable';
 import ContentBlocks from '@/app/components/page-components/content-components/ContentBlocks';
+import VectorCalculator from '@/app/components/calculators/vector-calculator/VectorCalculator';
+import MatrixCalculator from '@/app/components/calculators/matrix-calculator/MatrxCalculatorAll';
+import GraphCore from '@/app/components/graphs/GraphCore';
+import BellCurve from '@/app/components/z-table/BellCurve';
+import BellCurveHighlighted from '@/app/components/z-table/BellCurveHighlighted';
+import BellCurveHighlighted2 from '@/app/components/z-table/BellCurveHighlighted2';
+import ZScoreVisualizer from '@/app/components/z-table/ZScoreVisualizer';
+import FunctionGraphVisualizer from '@/app/components/graphs/FunctionGraphVisualizer';
 
 
 
@@ -243,10 +251,65 @@ export default function Test5Page() {
     {/* <CombinatoricsVisualization itemCount={5}/> */}
     <br/>
     <br/>
+    <VectorCalculator/>
     <br/>
     <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <MatrixCalculator/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div style={{width:'50%',height:'60%'}}>
+    <GraphCore width={1000}
+    theme='minimal'/>
+    </div>
     <br/>
     {/* <ProofCalculator/> */}
+    <br/>
+    <br/>
+    <br/>
+    <div style={{width:'70%'}}>
+    <GraphCore 
+          functions={['quadratic', 'cubic']}
+          xRange={[-3, 3]}
+          yRange={[-5, 5]}
+          theme="minimal"
+          aspectRatio={4/3}
+        />
+        </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    {/* <BellCurveHighlighted/> */}
+    {/* <BellCurveHighlighted2/> */}
+    <ZScoreVisualizer/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <BellCurveHighlighted2 
+  dataPoints={[-4, -3.5, -3, -2.5, -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4]} 
+  zScore={[1.5]} 
+/>
+    <br/>
+    <br/>
+    <br/>
+    <BellCurveHighlighted
+  dataPoints={[-4, -3.5, -3, -2.5, -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4]} 
+  zScore={[1.5]} 
+/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <FunctionGraphVisualizer/>
+    <br/>
+    <br/>
     <br/>
     <br/>
     <ScrollUpButton></ScrollUpButton>

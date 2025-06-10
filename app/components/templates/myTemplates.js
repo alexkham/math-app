@@ -6,6 +6,7 @@ export async function getStaticProps(){
 
     return {
       props:{
+        sectionsContent,
         
       }
     }
@@ -78,3 +79,10 @@ export async function getStaticProps(){
         content:''
     }
 ]
+
+
+const introContent = {
+  id: "intro",
+  title: "",
+  content: ``
+}

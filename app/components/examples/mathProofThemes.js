@@ -57,8 +57,8 @@ const themes = {
       arrow: {
         margin: '6px 0',
         color: '#4f46e5',
-        fontSize: '18px',
-        fontWeight: 'bold',
+        fontSize: '28px',
+        // fontWeight: '300',
       },
       emptyState: {
         textAlign: 'center',
@@ -68,6 +68,142 @@ const themes = {
         borderRadius: '8px',
       }
     },
+    tailwind_alert: {
+      container: {
+        fontFamily: 'system-ui, -apple-system, sans-serif',
+        maxWidth: '800px',
+        margin: '0 auto',
+        padding: '24px',
+        background: '#eff6ff',
+      },
+      title: {
+        textAlign: 'center',
+        fontSize: '26px',
+        fontWeight: '600',
+        margin: '0 0 28px 0',
+        color: '#1e47b6',
+      },
+      stepsContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '18px',
+      },
+      stepWrapper: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      },
+      stepCard: {
+        width: '100%',
+        backgroundColor: '#ffffff',
+        borderRadius: '8px',
+        padding: '20px',
+        boxShadow: '0 4px 6px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.1)',
+        display: 'flex',
+        alignItems: 'flex-start',
+        border: '0.5px solid #1e47b6',
+      },
+      stepNumber: {
+        backgroundColor: '#4f46e5',
+        color: 'white',
+        borderRadius: '50%',
+        width: '30px',
+        height: '30px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontWeight: '600',
+        marginRight: '16px',
+        flexShrink: 0,
+      },
+      stepContent: {
+        fontSize: '16px',
+        lineHeight: '1.6',
+        color: '#405ab3',
+      },
+      arrow: {
+        margin: '6px 0',
+        color: '#4f46e5',
+        fontSize: '28px',
+        // fontWeight: '300',
+      },
+      emptyState: {
+        textAlign: 'center',
+        padding: '24px',
+        color: '#718096',
+        border: '1px dashed #cbd5e0',
+        borderRadius: '8px',
+      }
+    },
+    tailwind_alert_reversed: {
+      container: {
+        fontFamily: 'system-ui, -apple-system, sans-serif',
+        maxWidth: '800px',
+        margin: '0 auto',
+        padding: '24px',
+        background: '#ffffff',
+      },
+      title: {
+        textAlign: 'center',
+        fontSize: '26px',
+        fontWeight: '600',
+        margin: '0 0 28px 0',
+        color: '#1e47b6',
+      },
+      stepsContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '18px',
+      },
+      stepWrapper: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      },
+      stepCard: {
+        width: '100%',
+        backgroundColor: '#eff6ff',
+        borderRadius: '8px',
+        padding: '20px',
+        boxShadow: '0 4px 6px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.1)',
+        display: 'flex',
+        alignItems: 'flex-start',
+        border: '0.5px solid #1e47b6',
+      },
+      stepNumber: {
+        backgroundColor: '#4f46e5',
+        color: 'white',
+        borderRadius: '50%',
+        width: '30px',
+        height: '30px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontWeight: '600',
+        marginRight: '16px',
+        flexShrink: 0,
+      },
+      stepContent: {
+        fontSize: '16px',
+        lineHeight: '1.6',
+        color: '#405ab3',
+      },
+      arrow: {
+        margin: '6px 0',
+        color: '#4f46e5',
+        fontSize: '28px',
+        // fontWeight: '300',
+      },
+      emptyState: {
+        textAlign: 'center',
+        padding: '24px',
+        color: '#718096',
+        border: '1px dashed #cbd5e0',
+        borderRadius: '8px',
+      }
+    },
+    
+    
     
     modern: {
       container: {
@@ -563,7 +699,7 @@ const themes = {
         maxWidth: '800px',
         margin: '0 auto',
         padding: '30px',
-        backgroundColor: '#fffdf7',
+        backgroundColor: '#ffffff',
         boxShadow: '0 4px 10px rgba(0,0,0,0.05)',
         borderRadius: '2px',
       },
@@ -588,7 +724,7 @@ const themes = {
       },
       stepCard: {
         width: '100%',
-        backgroundColor: '#fffef9',
+        backgroundColor: '#fffbeb',
         borderRadius: '2px',
         padding: '20px',
         boxShadow: '0 1px 4px rgba(0,0,0,0.05)',

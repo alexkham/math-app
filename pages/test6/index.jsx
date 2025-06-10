@@ -27,6 +27,8 @@ import DegreeRadianConversionDemo from '@/app/components/tables/conversion-table
 import DegreeRadianConvertionTable from '@/app/components/tables/conversion-tables/DegreeRadianConversion';
 import CircularSplitBreakdown from '@/app/components/breakdowns/many/CircularSplit';
 import CircularDiagram from '@/app/components/breakdowns/circular-diagram/CircularDiagram';
+import SectionsExplorer from '@/app/components/explorers/SectionExplorer';
+import DerivativeAnimation from '@/app/components/animations/DerivativeAnimation';
 
 export default function Test6Page() {
 
@@ -1160,10 +1162,32 @@ $$dim(V) = dim(ker(T)) + dim(im(T))$$"
     <br/>
     <br/>
     <br/>
+    <SectionsExplorer/>
+    <br/>
+    <br/>
+    <br/>
     <br/>
     <CircularDiagram data={circularData}
     showCircle={true}
     radius={150}/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <DerivativeAnimation/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     <br/>
     
     </>

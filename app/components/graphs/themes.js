@@ -1,0 +1,90 @@
+export const themes = {
+    dark: {
+      background: '#1a1a2e',
+      gridColor: '#2a2a3e',
+      axisColor: '#4a4a6a',
+      textColor: '#ffffff',
+      functionColor: '#00ff88',
+      controlsBg: '#0f0f23',
+      inputBg: '#2a2a3e',
+      inputBorder: '#4a4a6a',
+      buttonBg: '#4a4a6a',
+      accentColor: '#00ff88'
+    },
+    light: {
+      background: '#ffffff',
+      gridColor: '#e0e0e0',
+      axisColor: '#666666',
+      textColor: '#000000',
+      functionColor: '#0066cc',
+      controlsBg: '#f8f9fa',
+      inputBg: '#ffffff',
+      inputBorder: '#cccccc',
+      buttonBg: '#007bff',
+      accentColor: '#0066cc'
+    },
+    neon: {
+      background: '#0a0a0a',
+      gridColor: '#1a1a2a',
+      axisColor: '#ff00ff',
+      textColor: '#00ffff',
+      functionColor: '#ff0080',
+      controlsBg: '#000000',
+      inputBg: '#1a1a1a',
+      inputBorder: '#ff00ff',
+      buttonBg: '#ff00ff',
+      accentColor: '#00ffff'
+    },
+    retro: {
+      background: '#2d1b00',
+      gridColor: '#3d2b10',
+      axisColor: '#ff8800',
+      textColor: '#ffcc00',
+      functionColor: '#00ff00',
+      controlsBg: '#1d0b00',
+      inputBg: '#3d2b10',
+      inputBorder: '#ff8800',
+      buttonBg: '#ff8800',
+      accentColor: '#ffcc00'
+    },
+    ocean: {
+      background: '#001122',
+      gridColor: '#002244',
+      axisColor: '#0088cc',
+      textColor: '#ffffff',
+      functionColor: '#00ccff',
+      controlsBg: '#000811',
+      inputBg: '#002244',
+      inputBorder: '#0088cc',
+      buttonBg: '#0088cc',
+      accentColor: '#00ccff'
+    },
+    classic: {
+      background: '#ffffff',
+      gridColor: '#d0d0d0',
+      axisColor: '#000000',
+      textColor: '#000000',
+      functionColor: '#ff0000',
+      functionColor2: '#0066cc',
+      functionColor3: '#00aa00',
+      controlsBg: '#f5f5f5',
+      inputBg: '#ffffff',
+      inputBorder: '#999999',
+      buttonBg: '#4a90e2',
+      accentColor: '#333333'
+    },
+    minimal: {
+      background: '#fafafa',
+      gridColor: '#e8e8e8',
+      axisColor: '#333333',
+      textColor: '#333333',
+      functionColor:'#4b4bff',
+    //    '#4a7c7e',
+      functionColor2: '#a8d8a8',
+      controlsBg: '#ffffff',
+      inputBg: '#ffffff',
+      inputBorder: '#cccccc',
+      buttonBg: '#6c7b7f',
+      accentColor: '#4a7c7e'
+    }
+  };

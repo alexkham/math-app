@@ -981,6 +981,7 @@
 
 
 import React, { useState, useRef } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
 const DegreeRadianConversionTable = () => {
  const tableRef = useRef(null);
@@ -993,28 +994,52 @@ const DegreeRadianConversionTable = () => {
  };
 
  // Function to get pi form representation
- const getPiForm = (degrees) => {
-   if (degrees === 0) return '0';
-   if (degrees === 180) return 'π';
-   if (degrees === 360) return '2π';
+//  const getPiForm = (degrees) => {
+//    if (degrees === 0) return '0';
+//    if (degrees === 180) return 'π';
+//    if (degrees === 360) return '2π';
    
-   const gcd = (a, b) => b ? gcd(b, a % b) : a;
-   const numerator = degrees;
-   const denominator = 180;
-   const divisor = gcd(numerator, denominator);
+//    const gcd = (a, b) => b ? gcd(b, a % b) : a;
+//    const numerator = degrees;
+//    const denominator = 180;
+//    const divisor = gcd(numerator, denominator);
    
-   const simplifiedNumerator = numerator / divisor;
-   const simplifiedDenominator = denominator / divisor;
+//    const simplifiedNumerator = numerator / divisor;
+//    const simplifiedDenominator = denominator / divisor;
    
-   if (simplifiedNumerator === 1 && simplifiedDenominator === 1) return 'π';
-   if (simplifiedNumerator === 2 && simplifiedDenominator === 1) return '2π';
+//    if (simplifiedNumerator === 1 && simplifiedDenominator === 1) return 'π';
+//    if (simplifiedNumerator === 2 && simplifiedDenominator === 1) return '2π';
    
-   if (simplifiedNumerator === 1) {
-     return `π/${simplifiedDenominator}`;
-   } else {
-     return `${simplifiedNumerator}π/${simplifiedDenominator}`;
-   }
- };
+//    if (simplifiedNumerator === 1) {
+//      return `π/${simplifiedDenominator}`;
+//    } else {
+//      return `${simplifiedNumerator}π/${simplifiedDenominator}`;
+//    }
+//  };
+
+// Function to get pi form representation
+const getPiForm = (degrees) => {
+  if (degrees === 0) return '$0$';
+  if (degrees === 180) return '$\\pi$';
+  if (degrees === 360) return '$2\\pi$';
+  
+  const gcd = (a, b) => b ? gcd(b, a % b) : a;
+  const numerator = degrees;
+  const denominator = 180;
+  const divisor = gcd(numerator, denominator);
+  
+  const simplifiedNumerator = numerator / divisor;
+  const simplifiedDenominator = denominator / divisor;
+  
+  if (simplifiedNumerator === 1 && simplifiedDenominator === 1) return '$\\pi$';
+  if (simplifiedNumerator === 2 && simplifiedDenominator === 1) return '$2\\pi$';
+  
+  if (simplifiedNumerator === 1) {
+    return `$\\frac{\\pi}{${simplifiedDenominator}}$`;
+  } else {
+    return `$\\frac{${simplifiedNumerator}\\pi}{${simplifiedDenominator}}$`;
+  }
+};
 
  // Generate degrees from 0 to 360
  const degrees = Array.from({ length: 361 }, (_, i) => i);
@@ -1180,7 +1205,7 @@ const DegreeRadianConversionTable = () => {
 
  return (
    <div style={styles.container}>
-     <h1 style={styles.title}>Degree-Radian Conversion Table</h1>
+     {/* <h1 style={styles.title}>Degree-Radian Conversion Table</h1> */}
      
      <div style={styles.formula}>
        <strong>Degrees to Radians:</strong> rad = deg × (π/180)<br />
@@ -1252,9 +1277,16 @@ const DegreeRadianConversionTable = () => {
                  <td style={styles.td}>
                    {searchType === 'degrees' ? highlightMatch(degree + '°', searchQuery) : degree + '°'}
                  </td>
-                 <td style={styles.td}>
+                 {/* <td style={styles.td}>
                    {searchType === 'radians' ? highlightMatch(piForm, searchQuery) : piForm}
-                 </td>
+                 </td> */}
+
+                  <td style={styles.td}>
+                    {searchType === 'radians' ? 
+                      processContent(highlightMatch(piForm, searchQuery)) : 
+                      processContent(piForm)
+                    }
+                  </td>
                  <td style={styles.td}>
                    {searchType === 'radians' ? highlightMatch(radian.toFixed(4), searchQuery) : radian.toFixed(4)}
                  </td>

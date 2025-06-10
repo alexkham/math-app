@@ -207,34 +207,7 @@ export async function getStaticProps(){
   }
 ]
 ,
-  
-    // "Exponential Function Rules": [
-    //   {
-    //     id: 15,
-    //     law: "Exponential Product Rule",
-    //     formula: "b^x × b^y = b^(x+y)",
-    //     explanation: "Product of exponentials with same base adds exponents"
-    //   },
-    //   {
-    //     id: 16,
-    //     law: "Exponential Quotient Rule",
-    //     formula: "b^x / b^y = b^(x-y)",
-    //     explanation: "Quotient of exponentials with same base subtracts exponents"
-    //   },
-    //   {
-    //     id: 17,
-    //     law: "Power of Exponential Rule",
-    //     formula: "(b^x)^y = b^(xy)",
-    //     explanation: "Power of an exponential multiplies the exponents"
-    //   },
-    //   {
-    //     id: 18,
-    //     law: "Exponential with Different Bases",
-    //     formula: "a^x × b^x = (ab)^x",
-    //     explanation: "Product of exponentials with same exponent but different bases"
-    //   }
-    // ],
-     
+    
 
     "Exponential Function Rules": [
   {

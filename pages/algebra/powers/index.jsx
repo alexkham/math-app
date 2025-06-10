@@ -11,9 +11,32 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 
 
 export async function getStaticProps(){
+     
+  const intro=`Here's a concise introduction to mathematical powers for your page:
+
+Mathematical powers, also known as exponents, represent one of the most fundamental operations in mathematics. When we write x^n, we're expressing x multiplied by itself n times, creating a compact notation that unlocks remarkable mathematical relationships and patterns.
+
+Powers serve as the foundation for countless mathematical concepts across multiple disciplines. In algebra, they enable us to solve polynomial equations and model exponential growth. Calculus relies heavily on power functions for differentiation and integration rules, while the power rule itself forms a cornerstone of derivative calculations. In trigonometry, powers appear in series expansions and identities that define sine, cosine, and other functions.
+
+The exponential function e^x, built from the concept of powers, appears throughout natural phenomena and mathematical analysis.
+
+Understanding powers provides the mathematical vocabulary needed to express complex relationships simply and elegantly. From basic arithmetic to advanced calculus, from solving equations to modeling real-world phenomena, powers bridge elementary concepts with sophisticated mathematical thinking, making them indispensable tools for anyone studying mathematics and its applications.`
 
 
-    const sectionsContent={
+const introContent = {
+  id: "intro",
+  title: "Introduction to Powers",
+  content: `Mathematical powers, also known as exponents, represent one of the most fundamental operations in mathematics. When we write $x^n$, we're expressing $x$ multiplied by itself n times, creating a compact notation that unlocks remarkable mathematical relationships and patterns.
+
+Powers serve as the foundation for countless mathematical concepts across multiple disciplines. In algebra, they enable us to solve polynomial equations and model exponential growth. Calculus relies heavily on power functions for differentiation and integration rules, while the power rule itself forms a cornerstone of derivative calculations. In trigonometry, powers appear in series expansions and identities that define sine, cosine, and other functions.
+
+The exponential function $e^x$, built from the concept of powers, appears throughout natural phenomena and mathematical analysis.
+
+Understanding powers provides the mathematical vocabulary needed to express complex relationships simply and elegantly. From basic arithmetic to advanced calculus, from solving equations to modeling real-world phenomena, powers bridge elementary concepts with sophisticated mathematical thinking, making them indispensable tools for anyone studying mathematics and its applications.`
+}
+   
+
+const sectionsContent={
 
         definition:{
           title:`Definitions and Notations`,
@@ -189,12 +212,13 @@ And for bridging exponentials with logarithms, the [Logarithmic Power Relations]
       props:{
 
         sectionsContent,
+        introContent
         
       }
     }
   }
 
-export default function PowersPage({sectionsContent}) {
+export default function PowersPage({sectionsContent,introContent}) {
 
 
     const powersSections=[
@@ -249,7 +273,13 @@ export default function PowersPage({sectionsContent}) {
      secondaryNavTitle="Similar Pages"/>
     <br/>
     <br/>
-    <IntroSection/>
+    <IntroSection 
+          id={introContent.id}
+          title={introContent.title}
+          content={introContent.content}
+          backgroundColor="#f2f2f2"
+          textColor="#06357a"
+        />
     <br/>
     <br/>
     <Sections sections={powersSections}/>

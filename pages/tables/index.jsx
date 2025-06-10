@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import { Book, Calculator, PieChart, Sigma, Percent,Section } from 'lucide-react';
+import { Book, Calculator, PieChart, Sigma, Percent,Section ,DraftingCompass,BookOpenCheck } from 'lucide-react';
 import styles from './tables.module.css';
 import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
@@ -15,7 +15,8 @@ const categoryIcons = {
   'Probability': Percent,
   'Arithmetics': Calculator,
   'Math-Symbols':Section,
-  'Truth-Tables':'T'
+  'Truth-Tables':BookOpenCheck,
+  'Angle-Conversion-Table': DraftingCompass
 };
 
 
@@ -132,7 +133,8 @@ export async function getStaticProps() {
     'Probability': '/tables/probability',
     'Arithmetics': '/tables/arithmetics',
     'Math-Symbols': '/math-symbols',
-    'Truth-Tables':'/tables/truth-tables'
+    'Truth-Tables':'/tables/truth-tables',
+    'Angle-Conversion-Table':'/tables/angle-conversion'
   };
   
   const categories = 
@@ -143,7 +145,8 @@ export async function getStaticProps() {
      'Probability',
       'Arithmetics',
       'Math-Symbols',
-      'Truth-Tables'
+      'Truth-Tables',
+      'Angle-Conversion-Table'
    ];
   return { props: { categories, categoryLinks } };
 }

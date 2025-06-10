@@ -21,9 +21,12 @@ export async function getStaticProps(){
     "Definition and Basic Rules": [
       {
         id: 1,
-        law: "Definition of nth Root",
+        law: "Definition of $n$-th Root",
         formula: "$\\sqrt[n]{a} = b \\iff b^n = a$",
-        explanation: "The nth root asks what number raised to the nth power gives a"
+        explanation: "The nth root asks what number raised to the nth power gives a",
+        // content:{
+        //   text:'Hello',
+        // }
       },
       {
         id: 2,

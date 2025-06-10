@@ -112,6 +112,7 @@ export const mainMenuStructure = [
             { label: 'Probability', href: '/tables/probability' },
             { label: 'Mathematical Symbols', href: '/math-symbols' },
             { label: 'Truth Tables', href: '/tables/truth-tables' },
+            { label: 'Angle Conversion Table', href: '/tables/angle-conversion' },
            
           ]
         },
