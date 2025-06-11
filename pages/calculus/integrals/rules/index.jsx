@@ -223,15 +223,15 @@ export default function IntegralRulesPage() {
    <Breadcrumb/>
    <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>Integration Rules</h1>
    <br/>
-   <SectionTableOfContents/>
+   {/* <SectionTableOfContents/> */}
    <br/>
    <br/>
    <br/>
-   <IntroSection/>
+   {/* <IntroSection/> */}
    <br/>
    <br/>
    <br/>
-   <Sections/>
+   {/* <Sections/> */}
    <br/>
    <br/>
    <ScrollUpButton/>
