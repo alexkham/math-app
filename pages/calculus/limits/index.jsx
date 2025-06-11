@@ -40,9 +40,18 @@ Lets explore a simple function f(x)=x+2
   
   
     },
-    obj2:{
-      title:``,
-      content:``,
+    rules:{
+      title:`Limits Rules`,
+      link:'/calculus/limits/rules',
+      content:`Limit rules are the essential toolkit that transforms what seems like an impossible mathematical task—finding the exact behavior of functions at specific points—into a systematic, manageable process. These rules don't just provide mechanical steps; they reveal the elegant underlying structure of how functions behave, giving us confidence to tackle even the most complex expressions by breaking them down into familiar patterns.
+
+The **Basic Limit Laws** capture the intuitive idea that limits should behave like ordinary arithmetic. When you're finding the limit of a sum, you can find the limits of the pieces separately and add them together—limits respect the fundamental operations we use every day. These laws form the grammatical foundation that makes limit calculations possible, ensuring that the limit of complex expressions can be understood through their simpler components.
+
+**Power and Root Limits** extend this arithmetic harmony to exponential and radical expressions, showing that limits play nicely with powers and roots too. Perhaps most importantly, this category includes the direct substitution principle for polynomials and rational functions—the comforting rule that says "just plug in the number" works for most functions you'll encounter.
+
+**Special Theorems** come to the rescue when normal arithmetic fails. The Squeeze Theorem provides a clever workaround for tricky limits by trapping a difficult function between two easier ones, while composition rules help navigate the complexity of nested functions.
+
+Finally, **Trigonometric and Exponential Limits** represent the fundamental building blocks of calculus itself—specific, powerful results that define essential mathematical constants and enable the derivative formulas we rely on throughout calculus.`,
       before:``,
       after:``,
   
@@ -100,10 +109,10 @@ export default function LimitsPage({sectionsContent,introContent}) {
         ]
     },
     {
-        id:'2',
-        title:'section2',
-        link:'',
-        content:''
+        id:'rules',
+        title:sectionsContent.rules.title,
+        link:sectionsContent.rules.link,
+        content:sectionsContent.rules.content
     },
     {
         id:'',

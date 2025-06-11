@@ -31,9 +31,14 @@ export async function getStaticProps(){
       
       
         },
-        obj2:{
-          title:``,
-          content:``,
+        rules:{
+          title:`Integration Rules`,
+          link:'/calculus/integrals/rules',
+          content:`Integration represents one of the most challenging yet rewarding aspects of calculus, where finding antiderivatives requires both systematic knowledge and creative problem-solving. Unlike differentiation, which follows predictable patterns, integration often feels like detective work—you need the right tools and techniques to unlock each problem's unique solution.
+The **Basic Integration Rules** provide the essential foundation, mirroring the arithmetic-friendly nature we see in limits and derivatives. These rules handle the straightforward cases where integration behaves predictably with constants, sums, and simple powers. The power rule dominates this category, offering a mechanical process for most polynomial expressions, while the special case of 1/x introduces us to the logarithmic world that appears throughout calculus.
+**Trigonometric Integrals** reveal the intricate dance between trigonometric functions and their antiderivatives. While some, like sine and cosine, integrate elegantly into each other, others like tangent and secant produce surprising logarithmic results. This category showcases how integration can transform familiar functions into unexpected forms, requiring students to memorize these essential patterns.
+**Exponential and Logarithmic Integrals** demonstrate the remarkable self-similarity of exponential functions, where e^x persists through almost any process of integration. The reciprocal function pattern here—where f'(x)/f(x) always integrates to ln|f(x)|—provides one of the most useful recognition techniques in all of calculus.
+**Inverse Trigonometric Integrals** offer elegant solutions to seemingly complex radical expressions, while **Integration Techniques** provide the strategic methods—substitution, integration by parts, and partial fractions—that transform impossible-looking integrals into manageable problems.`,
           before:``,
           after:``,
       
@@ -93,10 +98,10 @@ export default function IntegralsPage({sectionsContent,introContent}) {
             content:''
         },
         {
-            id:'2',
-            title:'section2',
-            link:'',
-            content:''
+            id:'rules',
+            title:sectionsContent.rules.title,
+            link:sectionsContent.rules.link,
+            content:sectionsContent.rules.content
         },
         {
             id:'',
