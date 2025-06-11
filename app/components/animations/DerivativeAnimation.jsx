@@ -1045,7 +1045,7 @@ const DerivativeAnimation = () => {
 
       <div className="text-center mt-6 text-gray-600">
         <p className="mb-2">As Δx → 0, the secant line approaches the tangent line</p>
-        <p>The slope approaches $f'(x)$ = <span className="font-semibold text-green-600">-0.40</span></p>
+        <p>The slope approaches f&apos;(x) = <span className="font-semibold text-green-600">-0.40</span></p>
       </div>
     </div>
   );
