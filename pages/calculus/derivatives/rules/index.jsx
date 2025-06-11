@@ -227,8 +227,8 @@ export default function DerivativeRulesPage({sectionsContent,keyWords ,derivativ
         title:sectionsContent.basic.title,
         link:'',
         content:[
-          <div>
-          <ExpandableTable key={1}
+          <div key={1}>
+          <ExpandableTable 
           data={derivativeRulesData[sectionsContent.basic.title]}
            displayColumns={ ["law", "formula", "explanation"]}
            copyableFields={["formula"]}
@@ -243,8 +243,8 @@ export default function DerivativeRulesPage({sectionsContent,keyWords ,derivativ
         link:'',
         content:[
 
-          <div>
-          <ExpandableTable key={2}
+          <div key={2}>
+          <ExpandableTable 
           data={derivativeRulesData[sectionsContent.trigonometric.title]}
            displayColumns={ ["law", "formula", "explanation"]}
            copyableFields={["formula"]}
@@ -260,8 +260,8 @@ export default function DerivativeRulesPage({sectionsContent,keyWords ,derivativ
         link:'',
         content:[
 
-          <div>
-          <ExpandableTable key={3}
+          <div  key={3}>
+          <ExpandableTable
           data={derivativeRulesData[sectionsContent.exponential.title]}
            displayColumns={ ["law", "formula", "explanation"]}
            copyableFields={["formula"]}
@@ -277,8 +277,8 @@ export default function DerivativeRulesPage({sectionsContent,keyWords ,derivativ
       link:'',
       content:[
 
-        <div>
-        <ExpandableTable key={4}
+        <div  key={4}>
+        <ExpandableTable 
         data={derivativeRulesData[sectionsContent.logarithm.title]}
          displayColumns={ ["law", "formula", "explanation"]}
          copyableFields={["formula"]}
