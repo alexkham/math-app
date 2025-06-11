@@ -7,6 +7,8 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
+import { limitsDiagrams } from '@/app/api/db/diagrams/calculus/limits'
+import { basicFunctionsDiagrams } from '@/app/api/db/diagrams/functions/basics'
 
 
 
@@ -29,12 +31,14 @@ Beyond pure theory, limits have broad practical applications. They are essential
       content:``,
       before:`To better understand the concept of a limit, we need to revisit the basic definition of a mathematical function.
 In mathematics, a function is defined as an unambiguous rule that assigns to each input (or argument) exactly one output (or value).
-If fff is a function, we write:
-f(x)=rule for calculating the value of the function at x.f(x) = \text{rule for calculating the value of the function at } x.
-f(x)=rule for calculating the value of the function at x.
-The word “unambiguous” is used deliberately to emphasize that for each input xxx, the function f(x)f(x)f(x) yields exactly one value.
-The essence of this process is that each value of x is processed and mapped to some value of f(x).
-Lets explore a simple function f(x)=x+2
+**If** $f$ **is a function, we write**:
+
+$f(x)$=rule for calculating the value of the function at $x$.
+
+The word **“unambiguous”** is used deliberately to emphasize that for each input $x$, the function $f(x)$ yields exactly one value.
+The essence of this process is that each value of $x$ is processed and mapped to some value of $f(x)$.
+Lets explore a simple function $f(x)=x+2$ :
+
 `,
       after:``,
   
@@ -44,25 +48,23 @@ Lets explore a simple function f(x)=x+2
       title:`Limits Rules`,
       link:'/calculus/limits/rules',
       content:`Limit rules are the essential toolkit that transforms what seems like an impossible mathematical task—finding the exact behavior of functions at specific points—into a systematic, manageable process. These rules don't just provide mechanical steps; they reveal the elegant underlying structure of how functions behave, giving us confidence to tackle even the most complex expressions by breaking them down into familiar patterns.
-
-The **Basic Limit Laws** capture the intuitive idea that limits should behave like ordinary arithmetic. When you're finding the limit of a sum, you can find the limits of the pieces separately and add them together—limits respect the fundamental operations we use every day. These laws form the grammatical foundation that makes limit calculations possible, ensuring that the limit of complex expressions can be understood through their simpler components.
-
-**Power and Root Limits** extend this arithmetic harmony to exponential and radical expressions, showing that limits play nicely with powers and roots too. Perhaps most importantly, this category includes the direct substitution principle for polynomials and rational functions—the comforting rule that says "just plug in the number" works for most functions you'll encounter.
-
-**Special Theorems** come to the rescue when normal arithmetic fails. The Squeeze Theorem provides a clever workaround for tricky limits by trapping a difficult function between two easier ones, while composition rules help navigate the complexity of nested functions.
-
-Finally, **Trigonometric and Exponential Limits** represent the fundamental building blocks of calculus itself—specific, powerful results that define essential mathematical constants and enable the derivative formulas we rely on throughout calculus.`,
+The [Basic Limit Laws](!/calculus/limits/rules#basic) capture the intuitive idea that limits should behave like ordinary arithmetic. When you're finding the limit of a sum, you can find the limits of the pieces separately and add them together—limits respect the fundamental operations we use every day. These laws form the grammatical foundation that makes limit calculations possible, ensuring that the limit of complex expressions can be understood through their simpler components.
+[Power and Root Limits](!/calculus/limits/rules#powers) extend this arithmetic harmony to exponential and radical expressions, showing that limits play nicely with powers and roots too. Perhaps most importantly, this category includes the direct substitution principle for polynomials and rational functions—the comforting rule that says "just plug in the number" works for most functions you'll encounter.
+[Special Theorems](!/calculus/limits/rules#special) come to the rescue when normal arithmetic fails. The Squeeze Theorem provides a clever workaround for tricky limits by trapping a difficult function between two easier ones, while composition rules help navigate the complexity of nested functions.
+[Exponential and Logarithmic Limits](!/calculus/limits/rules#exponential) establish the foundational relationships that define the most important mathematical constants and enable advanced calculus techniques. These limits don't just provide computational tools—they actually define what we mean by e, the natural logarithm, and the derivative formulas for exponential and logarithmic functions. The limit definition of e emerges naturally from compound interest problems, while the fundamental exponential and logarithmic limits serve as the building blocks for differentiation rules that appear throughout calculus and beyond.
+Finally, [Trigonometric and Exponential Limits](!/calculus/limits/rules#trigonometric) represent the fundamental building blocks of calculus itself—specific, powerful results that define essential mathematical constants and enable the derivative formulas we rely on throughout calculus.`,
       before:``,
       after:``,
   
     },
   
-    obj3:{
+    notation:{
   
-      title:``,
+      title:`Notation Used for Limits`,
       content:``,
       before:``,
       after:``,
+      svg:``
   
     },
     obj4:{
@@ -105,21 +107,32 @@ export default function LimitsPage({sectionsContent,introContent}) {
         title:sectionsContent.concept.title,
         link:'',
         content:[
-            sectionsContent.concept.before
+            sectionsContent.concept.before,
+            basicFunctionsDiagrams["Linear Function with Points"].svg
         ]
     },
+
+    {
+      id:'notation',
+      title:sectionsContent.notation.title,
+      link:'',
+      content:[
+        limitsDiagrams.Notation_Breakdown.svg
+      ]
+  },
     {
         id:'rules',
         title:sectionsContent.rules.title,
         link:sectionsContent.rules.link,
         content:sectionsContent.rules.content
     },
-    {
-        id:'',
-        title:'',
-        link:'',
-        content:''
-    }
+  
+  //   {
+  //     id:'',
+  //     title:'',
+  //     link:'',
+  //     content:''
+  // }
 ]
   return (
    <>

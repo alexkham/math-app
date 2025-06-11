@@ -1,8 +1,67 @@
 
 
-
+//Empty
 export async function getStaticProps(){
 
+
+    return {
+      props:{
+        sectionsContent,
+        
+      }
+    }
+  }
+  
+
+  //With sectionsContent
+export async function getStaticProps(){
+
+    
+  const sectionsContent={
+
+    obj1:{
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+  
+    },
+    obj2:{
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
+  
+    obj3:{
+  
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
+    obj4:{
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
+
+
+    obj5:{
+  
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    }
+  
+  }
 
     return {
       props:{

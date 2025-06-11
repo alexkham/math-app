@@ -1,7 +1,19 @@
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 import React from 'react'
+import '../../../pages.css'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents';
+import IntroSection from '@/app/components/page-components/section/IntroContentSection';
+import Sections from '@/app/components/page-components/section/Sections';
+import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
+import ExpandableTable from '@/app/components/generic-table/ExpandableTable';
 
-export default function LimitsRulesData() {
 
+export async function getStaticProps(){
+
+
+    
     const limitRulesData = {
         "Basic Limit Laws": [
           {
@@ -163,8 +175,189 @@ export default function LimitsRulesData() {
         ]
        };
 
-       
+    
+  const sectionsContent={
+
+    basic:{
+      title:`Basic Limit Laws`,
+      content:``,
+      before:``,
+      after:``,
+  
+  
+    },
+    powers:{
+      title:`Power and Root Limits`,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
+  
+    special:{
+  
+      title:`Special Theorems`,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
+    trigonometric:{
+      title:`Trigonometric Limits`,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
+
+
+    exponential:{
+  
+      title:`Exponential and Logarithmic Limits`,
+      content:``,
+      before:``,
+      after:``,
+  
+    }
+  
+  }
+
+
+
+    return {
+      props:{
+        sectionsContent,
+        limitRulesData,
+        
+      }
+    }
+  }
+  
+
+export default function LimitsRulesData({sectionsContent,limitRulesData}) {
+
+    
+  const limitsRulesSections=[
+    {
+        id:'basic',
+        title:sectionsContent.basic.title,
+        link:'',
+        content:[
+
+           
+
+            <div key={1}>
+            <ExpandableTable 
+            data={limitRulesData[sectionsContent.basic.title]}
+             displayColumns={ ["law", "formula", "explanation"]}
+             copyableFields={["formula"]}
+             includedFields={ ["law", "formula", "explanation"]} />
+             </div> ,
+  
+
+        ]
+    },
+    {
+        id:'powers',
+        title:sectionsContent.powers.title,
+        link:'',
+        content:[
+
+
+            <div key={2}>
+            <ExpandableTable 
+            data={limitRulesData[sectionsContent.powers.title]}
+             displayColumns={ ["law", "formula", "explanation"]}
+             copyableFields={["formula"]}
+             includedFields={ ["law", "formula", "explanation"]} />
+             </div> ,
+  
+        ]
+    },
+    {
+        id:'special',
+        title:sectionsContent.special.title,
+        link:'',
+        content:[
+
+            <div key={3}>
+            <ExpandableTable 
+            data={limitRulesData[sectionsContent.special.title]}
+             displayColumns={ ["law", "formula", "explanation"]}
+             copyableFields={["formula"]}
+             includedFields={ ["law", "formula", "explanation"]} />
+             </div> ,
+  
+
+        ]
+    },
+    {
+        id:'trigonometric',
+        title:sectionsContent.trigonometric.title,
+        link:'',
+        content:[
+
+            <div key={4}>
+            <ExpandableTable 
+            data={limitRulesData[sectionsContent.trigonometric.title]}
+             displayColumns={ ["law", "formula", "explanation"]}
+             copyableFields={["formula"]}
+             includedFields={ ["law", "formula", "explanation"]} />
+             </div> ,
+  
+
+        ]
+    },
+    {
+        id:'exponential',
+        title:sectionsContent.exponential.title,
+        link:'',
+        content:[
+
+            <div key={5}>
+            <ExpandableTable 
+            data={limitRulesData[sectionsContent.exponential.title]}
+             displayColumns={ ["law", "formula", "explanation"]}
+             copyableFields={["formula"]}
+             includedFields={ ["law", "formula", "explanation"]} />
+             </div> ,
+  
+
+        ]
+    }
+]
+
+
   return (
-    <div>LimitsRulesData</div>
+    <>
+    <GenericNavbar/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <OperaSidebar 
+                side='right'
+                // topOffset='65px' 
+                sidebarWidth='45px'
+                panelWidth='200px'
+                iconColor='white'
+                panelBackgroundColor='#f2f2f2'
+              /> 
+    <Breadcrumb/>
+    <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>Limits Rules</h1>
+    <br/>
+    <SectionTableOfContents sections={limitsRulesSections}/>
+    <br/>
+    <br/>
+    <br/>
+    {/* <IntroSection/> */}
+    <br/>
+    <br/>
+    <Sections sections={limitsRulesSections}/>
+    <br/>
+    <br/>
+    <ScrollUpButton/>
+    
+    </>
   )
 }

@@ -1,5 +1,5 @@
 
-export const identitiesData={
+export const basicFunctionsDiagrams={
     "Linear Function with Points":{
         svg:`<svg width="500" height="500" viewBox="-250 -250 500 500" xmlns="http://www.w3.org/2000/svg">
   <defs>

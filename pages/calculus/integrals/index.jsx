@@ -23,10 +23,19 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-        obj1:{
-          title:``,
+        definition:{
+          title:`Definition of Integrals`,
           content:``,
-          before:``,
+          before:`Integration is inverse mathematical operation to differentiation.
+          Derivatives find rates of change while integrals reverse this process to recover original functions from their rates of change.
+**Integrals measure accumulation**—they answer "how much total change occurred?" while derivatives ask "how fast is it changing right now?"
+**Two main types:**
+- **Definite integrals** calculate actual quantities: area under curves, total distance from velocity, accumulated change over intervals
+- **Indefinite integrals** find antiderivatives: reversing differentiation
+**Core concept:** If you know the rate of change (derivative), integration recovers the original function. Like knowing velocity at every moment lets you calculate position.
+**Fundamental connection:** The Fundamental Theorem of Calculus links derivatives and integrals—they're inverse operations. This makes integration both a geometric tool (finding areas) and an algebraic tool (undoing differentiation).
+**Mathematical applications:** Finding areas between curves, solving differential equations, calculating volumes of revolution, determining arc lengths, analyzing series convergence, and optimization problems involving accumulated quantities.
+Integration transforms local information (rates, densities) into global information (totals, accumulations)—essential for understanding cumulative mathematical relationships.`,
           after:``,
       
       
@@ -92,10 +101,12 @@ export default function IntegralsPage({sectionsContent,introContent}) {
 
     const integralSections=[
         {
-            id:'1',
-            title:'section1',
+            id:'definition',
+            title:sectionsContent.definition.title,
             link:'',
-            content:''
+            content:[
+              sectionsContent.definition.before,
+            ]
         },
         {
             id:'rules',
@@ -103,12 +114,12 @@ export default function IntegralsPage({sectionsContent,introContent}) {
             link:sectionsContent.rules.link,
             content:sectionsContent.rules.content
         },
-        {
-            id:'',
-            title:'',
-            link:'',
-            content:''
-        }
+        // {
+        //     id:'',
+        //     title:'',
+        //     link:'',
+        //     content:''
+        // }
     ]
 
 

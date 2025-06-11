@@ -7,21 +7,12 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents';
 import IntroSection from '@/app/components/page-components/section/IntroContentSection';
 import Sections from '@/app/components/page-components/section/Sections';
+import ExpandableTable from '@/app/components/generic-table/ExpandableTable';
 
 
 export async function getStaticProps(){
 
-
-    return {
-      props:{
-        // sectionsContent,
-        
-      }
-    }
-  }
-
-export default function IntegralRulesPage() {
-
+    
     const integralRulesData = {
         "Basic Integration Rules": [
           {
@@ -118,6 +109,39 @@ export default function IntegralRulesPage() {
             explanation: "The integral of cosecant times cotangent is negative cosecant"
           }
         ],
+
+        "Inverse Trigonometric Integrals": [
+            {
+              id: 21,
+              law: "Arcsine Integral Form",
+              formula: "$\\int \\frac{1}{\\sqrt{1-x^2}} \\, dx = \\arcsin(x) + C$",
+              explanation: "Standard form that integrates to arcsine"
+            },
+            {
+              id: 22,
+              law: "Arctangent Integral Form",
+              formula: "$\\int \\frac{1}{1+x^2} \\, dx = \\arctan(x) + C$",
+              explanation: "Standard form that integrates to arctangent"
+            },
+            {
+              id: 23,
+              law: "Arcsecant Integral Form",
+              formula: "$\\int \\frac{1}{x\\sqrt{x^2-1}} ,dx =\arcsec|x| + C$",
+              explanation: "Standard form that integrates to arcsecant of absolute x"
+            },
+            {
+              id: 24,
+              law: "General Arcsine Form",
+              formula: "$\\int \\frac{1}{\\sqrt{a^2-x^2}} \\, dx = \\arcsin\\left(\\frac{x}{a}\\right) + C$",
+              explanation: "Generalized arcsine integral form with parameter a"
+            },
+            {
+              id: 25,
+              law: "General Arctangent Form",
+              formula: "$\\int \\frac{1}{a^2+x^2} \\, dx = \\frac{1}{a}\\arctan\\left(\\frac{x}{a}\\right) + C$",
+              explanation: "Generalized arctangent integral form with parameter a"
+            }
+          ],
        
         "Exponential and Logarithmic Integrals": [
           {
@@ -152,38 +176,7 @@ export default function IntegralRulesPage() {
           }
         ],
        
-        "Inverse Trigonometric Integrals": [
-          {
-            id: 21,
-            law: "Arcsine Integral Form",
-            formula: "$\\int \\frac{1}{\\sqrt{1-x^2}} \\, dx = \\arcsin(x) + C$",
-            explanation: "Standard form that integrates to arcsine"
-          },
-          {
-            id: 22,
-            law: "Arctangent Integral Form",
-            formula: "$\\int \\frac{1}{1+x^2} \\, dx = \\arctan(x) + C$",
-            explanation: "Standard form that integrates to arctangent"
-          },
-          {
-            id: 23,
-            law: "Arcsecant Integral Form",
-            formula: "$\\int \\frac{1}{x\\sqrt{x^2-1}} \\, dx = \\arcsec|x| + C$",
-            explanation: "Standard form that integrates to arcsecant of absolute x"
-          },
-          {
-            id: 24,
-            law: "General Arcsine Form",
-            formula: "$\\int \\frac{1}{\\sqrt{a^2-x^2}} \\, dx = \\arcsin\\left(\\frac{x}{a}\\right) + C$",
-            explanation: "Generalized arcsine integral form with parameter a"
-          },
-          {
-            id: 25,
-            law: "General Arctangent Form",
-            formula: "$\\int \\frac{1}{a^2+x^2} \\, dx = \\frac{1}{a}\\arctan\\left(\\frac{x}{a}\\right) + C$",
-            explanation: "Generalized arctangent integral form with parameter a"
-          }
-        ],
+       
        
         "Integration Techniques": [
           {
@@ -212,6 +205,175 @@ export default function IntegralRulesPage() {
           }
         ]
        };
+
+
+       const sectionsContent={
+
+        basic:{
+          title:`Basic Integration Rules`,
+          content:``,
+          before:``,
+          after:``,
+      
+      
+        },
+        trigonometric:{
+          title:`Trigonometric Integrals`,
+          content:``,
+          before:``,
+          after:``,
+      
+        },
+
+        inverse:{
+            title:`Inverse Trigonometric Integrals`,
+            content:``,
+            before:``,
+            after:``,
+        
+          },
+      
+        exponential:{
+      
+          title:`Exponential and Logarithmic Integrals`,
+          content:``,
+          before:``,
+          after:``,
+      
+        },
+       
+    
+    
+        techniques:{
+      
+          title:`Integration Techniques`,
+          content:``,
+          before:``,
+          after:``,
+      
+        },
+        
+        // obj5:{
+      
+        //     title:``,
+        //     content:``,
+        //     before:``,
+        //     after:``,
+        
+        //   },
+          
+        // obj5:{
+      
+        //     title:``,
+        //     content:``,
+        //     before:``,
+        //     after:``,
+        
+        //   }
+      
+      }
+    
+
+
+    return {
+      props:{
+        sectionsContent,
+        integralRulesData,
+        
+      }
+    }
+  }
+
+export default function IntegralRulesPage({sectionsContent, integralRulesData}) {
+
+    
+  const integralRulesSections=[
+    {
+        id:'basic',
+        title:sectionsContent.basic.title,
+        link:'',
+        content:[
+            <div key={1}>
+          <ExpandableTable 
+          data={integralRulesData[sectionsContent.basic.title]}
+           displayColumns={ ["law", "formula", "explanation"]}
+           copyableFields={["formula"]}
+           includedFields={ ["law", "formula", "explanation"]} />
+           </div> ,
+
+
+        ]
+    },
+    {
+        id:'trigonometric',
+        title:sectionsContent.trigonometric.title,
+        link:'',
+        content:[
+            <div key={2}>
+            <ExpandableTable 
+            data={integralRulesData[sectionsContent.trigonometric.title]}
+             displayColumns={ ["law", "formula", "explanation"]}
+             copyableFields={["formula"]}
+             includedFields={ ["law", "formula", "explanation"]} />
+             </div> ,
+  
+
+        ]
+    },
+    {
+        id:'inverse',
+        title:sectionsContent.inverse.title,
+        link:'',
+        content:[
+
+            <div key={3}>
+            <ExpandableTable 
+            data={integralRulesData[sectionsContent.inverse.title]}
+             displayColumns={ ["law", "formula", "explanation"]}
+             copyableFields={["formula"]}
+             includedFields={ ["law", "formula", "explanation"]} />
+             </div> ,
+  
+
+        ]
+    },
+    {
+        id:'exponential',
+        title:sectionsContent.exponential.title,
+        link:'',
+        content:[
+
+            <div key={4}>
+            <ExpandableTable 
+            data={integralRulesData[sectionsContent.exponential.title]}
+             displayColumns={ ["law", "formula", "explanation"]}
+             copyableFields={["formula"]}
+             includedFields={ ["law", "formula", "explanation"]} />
+             </div> ,
+  
+            
+        ]
+    },
+    {
+        id:'techniques',
+        title:sectionsContent.techniques.title,
+        link:'',
+        content:[
+
+            <div key={5}>
+            <ExpandableTable 
+            data={integralRulesData[sectionsContent.techniques.title]}
+             displayColumns={ ["law", "formula", "explanation"]}
+             copyableFields={["formula"]}
+             includedFields={ ["law", "formula", "explanation"]} />
+             </div> ,
+  
+            
+        ]
+    }
+]
+
+
   return (
    <>
    <GenericNavbar/>
@@ -219,11 +381,18 @@ export default function IntegralRulesPage() {
    <br/>
    <br/>
    <br/>
-   <OperaSidebar/>
+    <OperaSidebar 
+             side='right'
+             // topOffset='65px' 
+             sidebarWidth='45px'
+             panelWidth='200px'
+             iconColor='white'
+             panelBackgroundColor='#f2f2f2'
+           /> 
    <Breadcrumb/>
    <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>Integration Rules</h1>
    <br/>
-   {/* <SectionTableOfContents/> */}
+   <SectionTableOfContents sections={integralRulesSections}/>
    <br/>
    <br/>
    <br/>
@@ -231,7 +400,7 @@ export default function IntegralRulesPage() {
    <br/>
    <br/>
    <br/>
-   {/* <Sections/> */}
+   <Sections sections={integralRulesSections}/>
    <br/>
    <br/>
    <ScrollUpButton/>
