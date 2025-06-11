@@ -36,7 +36,13 @@ export async function getStaticProps(){
 **Fundamental connection:** The Fundamental Theorem of Calculus links derivatives and integrals—they're inverse operations. This makes integration both a geometric tool (finding areas) and an algebraic tool (undoing differentiation).
 **Mathematical applications:** Finding areas between curves, solving differential equations, calculating volumes of revolution, determining arc lengths, analyzing series convergence, and optimization problems involving accumulated quantities.
 Integration transforms local information (rates, densities) into global information (totals, accumulations)—essential for understanding cumulative mathematical relationships.`,
-          after:``,
+          after:`**Integration is the mathematical process of finding the accumulated total from a rate of change.**
+
+More precisely: Integration reverses differentiation by finding a function whose derivative equals the given function (indefinite integral) or by calculating the total accumulation over an interval (definite integral).
+
+**Core definition:** If F'(x) = f(x), then ∫f(x)dx = F(x) + C
+
+Integration transforms rates into totals, slopes into areas, and derivatives back into original functions.`,
       
       
         },
