@@ -35,7 +35,7 @@ export default function VennDiagramGeneratorPage() {
    <br/>
    <OperaSidebar
         side='right'
-        topOffset='65px'
+        // topOffset='55px'
         sidebarWidth='35px'
         panelWidth='200px'
         iconColor='white'
