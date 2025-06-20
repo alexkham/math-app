@@ -2,8 +2,8 @@ import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
-import React from 'react'
-import '../../pages.css'
+import React from 'react';
+import '../../pages.css';
 
 export default function SetTheoryRulesPage() {
 
