@@ -124,7 +124,7 @@ export default function ConditionalProbabilityTree() {
     <div style={styles.container}>
       <div style={styles.header}>
         <h1 style={styles.title}>Conditional Probability Tree Diagram</h1>
-        <p style={styles.subtitle}>Interactive visualization of P(B|A) - "Probability of B given A"</p>
+        <p style={styles.subtitle}>Interactive visualization of P(B|A) - Probability of B given A</p>
       </div>
       
       <div style={styles.controls}>
@@ -153,7 +153,7 @@ export default function ConditionalProbabilityTree() {
           />
         </div>
         <div style={styles.controlGroup}>
-          <label style={styles.label}>P(B|A') - B given not A</label>
+          <label style={styles.label}>P(B|A&apos;) - B given not A</label>
           <input
             type="number"
             step="0.01"
@@ -185,19 +185,19 @@ export default function ConditionalProbabilityTree() {
       
       <div style={styles.explanation}>
         <h3 style={styles.explanationTitle}>Understanding Conditional Probability</h3>
-        <p><strong>Conditional probability P(B|A)</strong> means "the probability of B happening, given that A has already happened."</p>
+        <p><strong>Conditional probability P(B|A)</strong> means the probability of B happening, given that A has already happened.</p>
         
         <div style={styles.formulaBox}>
           P(B|A) = P(A and B) / P(A)<br/><br/>
           Current values:<br/>
           • P(A) = {probA.toFixed(2)} ({(probA * 100).toFixed(0)}%)<br/>
           • P(B|A) = {probBGivenA.toFixed(2)} ({(probBGivenA * 100).toFixed(0)}%)<br/>
-          • P(B|A') = {probBGivenNotA.toFixed(2)} ({(probBGivenNotA * 100).toFixed(0)}%)<br/><br/>
+          • P(B|A&apos;) = {probBGivenNotA.toFixed(2)} ({(probBGivenNotA * 100).toFixed(0)}%)<br/><br/>
           <span style={styles.highlight}>P(A and B) = P(A) × P(B|A) = {probA.toFixed(2)} × {probBGivenA.toFixed(2)} = {probAAndB.toFixed(3)}</span><br/>
           <span style={styles.highlight}>P(B) total = {totalProbB.toFixed(3)} (law of total probability)</span>
         </div>
         
-        <p><strong>Key insight:</strong> The tree shows how knowing that A occurred changes the probability of B. Compare P(B|A) with P(B|A') to see the conditional effect.</p>
+        <p><strong>Key insight:</strong> The tree shows how knowing that A occurred changes the probability of B. Compare P(B|A) with P(B|A&apos;) to see the conditional effect.</p>
       </div>
     </div>
   );
