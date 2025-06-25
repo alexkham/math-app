@@ -335,10 +335,10 @@ export default function ConditionalProbabilityTable() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
+      {/* <div className={styles.header}>
         <h1>Conditional Probability with Contingency Tables</h1>
         <p>Understanding P(B|A) through cross-tabulation of frequencies</p>
-      </div>
+      </div> */}
       
       <div className={styles.controls}>
         <div className={styles.scenarioButtons}>

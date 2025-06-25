@@ -111,7 +111,7 @@ export default function ProbabilityPage({
     {
       id: 'formulas',
       title: sectionContent.formulas.title,
-      link:'/ptobability/formulas',
+      link:'/probability/formulas',
       content: [
         { 
           content: sectionContent.formulas.leftContentHtml,
