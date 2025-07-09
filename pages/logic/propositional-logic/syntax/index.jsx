@@ -151,15 +151,9 @@ This section introduces the basic elements of propositional logic syntax, beginn
  }
 
  const keyWords = [
-   '{{KEYWORD_1}}',
-   '{{KEYWORD_2}}',
-   '{{KEYWORD_3}}', 
-   '{{KEYWORD_4}}',
-   '{{KEYWORD_5}}',
-   '{{KEYWORD_6}}',
-   '{{KEYWORD_7}}',
-   '{{KEYWORD_8}}',
-   '{{KEYWORD_9}}'
+  'propositional logic', 'propositional calculus', 'sentential logic','propositional logic syntax',
+  'logic syntax','syntax'
+   
  ]
 
  const canonicalUrl = 'https://www.learnmathclass.com/logic/propositional-logic/syntax'
@@ -179,11 +173,11 @@ This section introduces the basic elements of propositional logic syntax, beginn
    "inLanguage": "en-US",
    "mainEntity": {
      "@type": "Article",
-     "name": "{{ARTICLE_NAME}}",
+     "name": "Propositional Logic Syntax",
      "dateModified": lastModified,
      "author": {
        "@type": "Organization",
-       "name": "{{ORGANIZATION_NAME}}"
+       "name": "Leanmathclass"
      }
    }
  }

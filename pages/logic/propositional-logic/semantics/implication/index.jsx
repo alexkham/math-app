@@ -9,6 +9,7 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import MyList from '@/app/components/page-components/lists/MyList'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import ExpandableTable from '@/app/components/generic-table/ExpandableTable'
+import Head from 'next/head'
 
 
 
@@ -260,6 +261,81 @@ export default function ImplicationPage({implicationLaws ,introContent ,properti
 
   return (
     <>
+    <Head>
+  <title>Logical Implication (Conditional Statement) | Learn Math Class</title>
+  <meta name="description" content="Learn logical implication in propositional logic. Complete guide covering definition, truth tables, properties, and applications in mathematical proofs." />
+  <meta name="keywords" content={keyWords.join(', ')} />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://www.learnmathclass.com/logic/propositional-logic/semantics/implication" />
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Logical Implication (Conditional Statement) | Learn Math Class" />
+  <meta property="og:description" content="Complete guide to logical implication in propositional logic with truth tables and examples." />
+  <meta property="og:url" content="https://www.learnmathclass.com/logic/propositional-logic/semantics/implication" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Logical Implication (Conditional Statement)",
+        "description": "Complete guide to logical implication in propositional logic with truth tables and examples.",
+        "author": {
+          "@type": "Organization",
+          "name": "Learn Math Class"
+        },
+        "mainEntityOfPage": "https://www.learnmathclass.com/logic/propositional-logic/semantics/implication",
+        "keywords": keyWords
+      })
+    }}
+  />
+
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.learnmathclass.com"
+          },
+          {
+            "@type": "ListItem", 
+            "position": 2,
+            "name": "Logic",
+            "item": "https://www.learnmathclass.com/logic"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3, 
+            "name": "Propositional Logic",
+            "item": "https://www.learnmathclass.com/logic/propositional-logic"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Semantics", 
+            "item": "https://www.learnmathclass.com/logic/propositional-logic/semantics"
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "name": "Implication",
+            "item": "https://www.learnmathclass.com/logic/propositional-logic/semantics/implication"
+          }
+        ]
+      })
+    }}
+  />
+</Head>
     <GenericNavbar/>
     <br/>
     <br/>
