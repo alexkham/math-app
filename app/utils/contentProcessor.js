@@ -121,7 +121,8 @@ import { renderAcademicBlockHTML } from './academicBlocks';
   
     // Updated regex to include SVG placeholders and code blocks
     // const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|__HTML_PLACEHOLDER_\d+__|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@)/g);
-    const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@|@academic\[.+?\]@)/);
+    // const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@|@academic\[.+?\]@)/);
+    const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@|@academic\[[\s\S]+?\]@)/);
     const processedParts = parts.filter(Boolean).map((part, partIndex) => processPart(part, `${lineIndex}-${partIndex}`));
   
     if (trimmedLine.startsWith('- ')) {
@@ -316,7 +317,8 @@ export const processContent = (content,styles = null) => {
     
     // const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\))/);
     // const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@)/);
-    const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@|@academic\[.+?\]@)/);
+    // const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@|@academic\[.+?\]@)/);
+    const parts = trimmedLine.split(/(__SVG_PLACEHOLDER_\d+__|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@|@academic\[[\s\S]+?\]@)/);
     const processedParts = parts.map((part, partIndex) => processPart(part, `${lineIndex}-${partIndex}`));
 
     if (trimmedLine.startsWith('- ')) {

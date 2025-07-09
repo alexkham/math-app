@@ -1,104 +1,4 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
-// import React from 'react'
-// import '../../pages.css'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 
-// export default function PropositionalLogicPage() {
-
-//   const keyWords=['propositional logic',
-   
-//     'propositional calculus',
-   
-//     'sentential logic'];
-
-
-//     const introContent={
-//         id:'intro',
-//         title:'Propositional Logic: An Overview',
-//         content: 
-// `Propositional logic examines statements that are either true or false, focusing on how these are combined using operators. It forms a foundational sub-field of mathematical logic alongside first-order logic, higher-order logic, and others. This formal system represents and analyzes statements with definite truth values.
-// **Syntax** defines the formal structure with propositions and logical connectives. 
-// **Semantics** determines truth values using truth tables, identifying tautologies and contradictions.
-// **Equivalences** include laws like De Morgan's and distributive laws for simplification.
-// **Inference Rules** such as modus ponens enable step-by-step proofs.
-// **Normal Forms** provide standard representation methods like CNF and DNF.
-// **Proof Techniques** include contradiction and direct proof methods to validate arguments.
-// This logical system finds applications across mathematics, computer science (circuit design, program verification), artificial intelligence (knowledge representation), philosophy, and many other fields.`
-
-
-//     }
-
-//     const propositionalLogicSections=[
-//         {
-//             id:"laws",
-//             title:"Basic laws of Propositional Logic",
-//             link:'/logic/propositional-logic/laws',
-//             content:        
-//                 `### Understanding Propositional Logic Laws
-// Propositional logic provides a powerful framework for formal reasoning, and at its core are several fundamental laws that help us manipulate logical expressions. 
-// On this [page](!/logic/propositional-logic/laws) we aggregated a summary of these laws and rules.
-// They may be  grouped into families based on their logical functions:
-//      **Basic Operators**: Identity, Domination, and Idempotent laws establish how basic operations behave with constants and themselves
-//      **Structural Laws**: Commutative, Associative, and Distributive laws govern how expressions can be rearranged
-//      **Transformation Rules**: Double Negation, De Morgan's Laws, and Absorption laws help convert between different logical forms
-//       **Semantic Principles**: Negation laws represent fundamental truths about contradictions and the law of excluded middle
-//       **Implications**: Contrapositive and Conditional laws help reason through logical implications
-//      **Special Operators**: Exclusive OR laws define the behavior of XOR operations
-//      **Advanced Principles**: Resolution, Monotonicity, and Peirce's Law provide powerful tools for formal proofs
-// Each law is presented with its formal notation, a plain-language explanation, and its relevant topic area (such as Equivalences, Semantics, Normal Forms, or Proof Techniques). This organization makes it easier to find specific laws when constructing proofs or simplifying expressions.
-// Whether you're working on simplifying complex logical statements, converting expressions to normal forms, or building formal proofs, these laws provide the essential toolkit for manipulating propositional logic expressions with confidence and precision.`
-
-            
-
-//         }
-//     ]
-//   return (
-//     <>
-//     <GenericNavbar/>
-//     <br/>
-//     <br/>
-//     <br/>
-//     <br/>
-//      <OperaSidebar
-//            side='right'
-//            topOffset='55px'
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          />
-//     <Breadcrumb/>
-//     <h1 className='title' style={{marginTop:'-20px',marginBottom:'30px'}}>Propositional Logic</h1>
-//     <SectionTableOfContents sections={propositionalLogicSections}/>
-//     <br/>
-//     <br/>
-//     <br/>
-//     <br/>
-//     <IntroSection
-//          id={introContent.id}
-//          title={introContent.title} 
-//          content={introContent.content}
-//          backgroundColor="#f2f2f2"
-//          textColor="#06357a"
-//        />
-//     <br/>
-//     <br/>
-//     <Sections sections={propositionalLogicSections}/>
-//     <br/>
-//     <br/>
-//     <br/>
-//     <ScrollUpButton/>
-    
-//     </>
-//   )
-// }
-
-// File: pages/logic/propositional-logic.js
 import React from 'react'
 import Head from 'next/head'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
@@ -304,6 +204,53 @@ A proposition is satisfiable if there is at least one interpretation where it is
 A proposition is unsatisfiable if it is false in all possible interpretations (i.e., a [contradiction](!/logic/propositional-logic/semantics/contradiction)).
             `
           },
+          {
+            id:'proofs',
+            title:`Proof System`,
+            content:`
+# Hilbert Proof System in Propositional Logic
+
+## A. Axioms (3 Schemas)
+
+### A1: **A → (B → A)**
+**Self-evidence axiom**: Any proposition implies that any other proposition implies the first one. This captures the idea that if something is true, it remains true regardless of what other assumptions you make.
+
+### A2: **(A → (B → C)) → ((A → B) → (A → C))**
+**Distribution axiom**: If A implies that B implies C, and A also implies B, then A must imply C directly. This enables chain reasoning and logical distribution.
+
+### A3: **(¬B → ¬A) → (A → B)**
+**Contrapositive axiom**: If the negation of B implies the negation of A, then A implies B. This establishes the logical equivalence between a statement and its contrapositive.
+
+## B. Premises
+
+### Definition
+Premises are the starting assumptions in a proof. They serve as the foundation from which conclusions are derived.
+
+### Types:
+1. **Logical premises**: The axiom schemas above, universally valid
+2. **Domain premises**: Specific assumptions given for a particular proof
+3. **Temporary premises**: Assumptions made for conditional or indirect proofs
+
+### Role in proofs:
+Premises establish the initial truth conditions. All subsequent steps must follow logically from these starting points using valid inference rules.
+
+## C. Inference Rules
+
+### Modus Ponens (MP)
+**Rule**: From A and A → B, derive B
+**Purpose**: The only inference rule needed in pure Hilbert systems. It allows you to detach the consequent of an implication when you have both the implication and its antecedent.
+
+### Substitution (Implicit)
+**Rule**: Replace variables in axiom schemas with any well-formed formulas
+**Purpose**: Generates specific instances of the general axiom patterns for use in particular proofs.
+
+### Proof Construction
+A proof is a finite sequence of formulas where each formula is either:
+- A premise (axiom or assumption)
+- Derived from previous formulas by Modus Ponens
+
+The system is complete (proves all tautologies) and sound (proves only tautologies).`
+          }
    
         
 

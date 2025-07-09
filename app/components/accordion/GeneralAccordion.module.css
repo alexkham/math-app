@@ -141,10 +141,10 @@
     width: 100%;
   }
   
-  .accordion__section {
+  /* .accordion__section {
     border: 1px solid #e0e0e0;
     margin-bottom: 10px;
-  }
+  } */
   
   .accordion__label {
     background-color: #f5f5f5;
@@ -285,10 +285,12 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 6px 12px;
-    background: #e6e6e6;
-    border-radius: 8px;
+    padding: 16px 12px;
+    background: #ffffff;
+    border-radius: 10px;
     cursor: pointer;
+    border: solid 1px #cccccc;
+    /* #4169e1 */
   }
   
   .accordion__button {

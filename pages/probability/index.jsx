@@ -10,10 +10,14 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Head from 'next/head';
 import { createContentHtml } from '@/app/utils/utils-functions'
+import MyList from '@/app/components/page-components/lists/MyList'
 
 export async function getStaticProps() {
   const { default: probabilityFormulasList } = await import('@/app/api/db/formulas/probability/probabilityFormulasList')
   const { default: probabilityTermsList } = await import('@/app/api/db/definitions/probability/probabilityDefinitions')
+  
+
+
   
   // Static content that can be used for SEO
   // const sectionContent = {
@@ -32,22 +36,48 @@ export async function getStaticProps() {
           // link: '/probability/formulas',
           // linkText: 'View All Formulas',
           height:'350px',
-          backgroundColor:'#fdfdea',
+          backgroundColor:'#f2f2f2',
           
         }),
         layout: 'horizontal',
       },
       definitions: {
         title: 'Probability Terms and Definitions',
-        description: 'Browse Probability terminology including main concepts and their definitions with examples',
+        description: '@academic[theorem:Browse Probability terminology including main concepts and their definitions with examples .A structured guide to probability theory terms and concepts, progressing from foundational definitions through set theory, random variables, and complex distributions. The content covers both theoretical aspects and practical applications, making probability concepts more accessible for study and reference.]@',
         rightContentHtml: createContentHtml({ 
           description: 'Browse Probability terminology including main concepts and their definitions with examples .A structured guide to probability theory terms and concepts, progressing from foundational definitions through set theory, random variables, and complex distributions. The content covers both theoretical aspects and practical applications, making probability concepts more accessible for study and reference.',
           // link: '/probability/definitions',
           // linkText: 'View All Definitions',
           height:'350px',
-          backgroundColor:'#fdfdea',
+          backgroundColor:'#f2f2f2',
         }),
         layout: 'horizontal'
+      },
+      concepts:{
+        title:'Main Concepts',
+        description:`@academic[theorem: The Sample Space (Ω), is the collection of all different results that the experiment may produce.]@
+        The sample space can be **finite** (for example, in the die‐rolling scenario or coin flipping) or **infinite** (for instance, selecting a real number).
+         Although in the case of a die roll the collection of possible outcomes may seem self‐evident, the sample space plays an important role in conducting more complex experiments. Typically, a researcher will take the sample space and partition it into subsets in order to draw various conclusions.
+         @academic[theorem:Probability Event is simply any subset of the sample space.]@
+         **Example:**
+   In case of die roll the sample space would be S = {1, 2, 3, 4, 5, 6}
+   **Some possible events:**
+ Event A = {2, 4, 6} (rolling an even number)
+ Event B = {5} (rolling exactly 5)
+ Event C = {1, 2, 3, 4, 5, 6} (any outcome - certain event)
+ Event D = {} (impossible event)
+ As the definition states and the example shows, probability event may include one or more outcomes.It is a set of results counting as one event.         
+ @academic[theorem:Probability is a function that assigns to each event in the sample space a real number in $[0,1]$ where total probability value of the entire sample space $𝑃(𝑆)=1$.]@
+ @academic[theorem:This number is calculated as a ratio $P(E) = \\frac{\\text{Number of favorable outcomes for event E}}{\\text{Total number of possible outcomes in the sample space S}}$]@
+ Probability function satisfies three basic [axioms](!/probability#axioms) of probability.
+ `
+         
+      },
+      axioms:{
+        title:`Basic Axioms of Probability`,
+        description:`The three Kolmogorov axioms provide a minimal yet complete framework for assigning consistent probabilities to events, laying the groundwork for all of probability theory.  From these principles flow essential rules—such as the addition rule for disjoint events, the definition of conditional probability, and Bayes’ theorem—as well as many useful corollaries that drive rigorous problem‐solving in statistics, science, and engineering.
+`
+
       },
       symbols:{
         title:'Probability Symbols Reference',
@@ -69,6 +99,22 @@ Probability also introduces **random variables**, which assign numerical values 
 Advanced topics include **distributions**, such as the **binomial**, **normal**, and **Poisson distributions**, which model specific types of random phenomena. These tools are essential for understanding patterns in **random processes** and making informed predictions.
 Probability is widely applied in science, engineering, finance, and everyday decision-making. It forms the basis for statistics, enabling data-driven insights and predictions, and supports fields like machine learning, risk analysis, and quantum mechanics. By studying probability, students develop skills to reason about uncertainty and draw conclusions from incomplete information.`
   }
+
+
+  const axiomsData = [
+    {
+      title: 'Non-negativity axiom',
+      text: 'For any event A, 0 ≤ P(A) ≤ 1.'
+    },
+    {
+      title: 'Normalization axiom',
+      text: '$P(S) = 1$, meaning the probabilities of all possible outcomes in S sum exactly to 1'
+    },
+    {
+      title: 'Countable additivity axiom',
+      text: 'If A₁, A₂, … are disjoint, then P(⋃ᵢ Aᵢ) = ∑ᵢ P(Aᵢ).'
+    }
+  ];
 
   const keyWords = [
     'probability',
@@ -92,7 +138,8 @@ Probability is widely applied in science, engineering, finance, and everyday dec
       canonicalUrl,
       lastModified,
       probabilityFormulasList,
-      probabilityTermsList
+      probabilityTermsList,
+      axiomsData
     }
   }
 }
@@ -104,7 +151,8 @@ export default function ProbabilityPage({
   canonicalUrl,
   lastModified,
   probabilityFormulasList,
-  probabilityTermsList
+  probabilityTermsList,
+  axiomsData
 }) {
   // Reconstruct sections with React components
   const probabilitySections = [
@@ -153,6 +201,35 @@ export default function ProbabilityPage({
           position: 'right',
           width: 1.5 
         }
+      ]
+    },
+    {
+      id: 'concepts',
+      title: sectionContent.concepts.title, 
+     
+      content: sectionContent.concepts.description
+    },
+    {
+      id: 'axioms',
+      title: sectionContent.axioms.title, 
+     
+      content: [
+        sectionContent.axioms.description,
+        <MyList
+        key={1}
+        data={axiomsData}
+        type="dot"     // • marker
+        boxed={true}
+        compact={false}
+        divided={false}
+        color="gray"
+        width="700px"
+        // math={true}
+        article={true}  // <-- treats each item as {title, text}
+        centered={false}
+       
+      />
+      
       ]
     },
     {

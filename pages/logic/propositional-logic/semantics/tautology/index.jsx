@@ -9,11 +9,16 @@ import Sections from '@/app/components/page-components/section/Sections'
 import ExpandableTable from '@/app/components/data-wrapper/generic-table/ExpandableTable'
 import { renderAcademicBlockHTML } from '@/app/utils/academicBlocks'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Head from 'next/head'
 
 
 
 
 export async function getStaticProps(){
+
+  const keyWords=['tautology','propositional logic','tautology examples','tautology definition',
+    'tautology in logic','tautology vs contradiction','logical laws'
+  ]
 
   const tautologies = [
     {
@@ -239,7 +244,7 @@ This means that the set of all logical equivalences is a subset of the set of al
 
 
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650" style="margin-left: 300px;">
   <!-- Background -->
   <rect width="500" height="200" fill="white" />
   
@@ -373,7 +378,8 @@ Use this tool to evaluate [truth tables](!/logic/truth-tables).
     props:{
       tautologies,
       introContent,
-      sectionsContent
+      sectionsContent,
+      keyWords
 
       
     }
@@ -381,7 +387,7 @@ Use this tool to evaluate [truth tables](!/logic/truth-tables).
 }
 
 
-export default function TautologyPage({tautologies ,introContent ,sectionsContent}) {
+export default function TautologyPage({tautologies ,introContent ,sectionsContent,keyWords}) {
 
   // const theoremHTML = renderAcademicBlockHTML("Theorem 1.2 (Existence and Uniqueness).\nA system of linear equations has either no solutions, exactly one solution, or infinitely many solutions.", 
   //   "definition");
@@ -392,163 +398,6 @@ export default function TautologyPage({tautologies ,introContent ,sectionsConten
 
   const content="Theorem 1.2 (Existence and Uniqueness).\nA system of linear equations has either no solutions, exactly one solution, or infinitely many solutions."
 
-    // const tautologies = [
-    //     {
-    //       id: "1",
-    //       name: "Self-Implication",
-    //       expression: "P → P",
-    //       explanation: "If P then P - a proposition always implies itself"
-    //     },
-    //     // {
-    //     //   id: "2",
-    //     //   name: "Law of Excluded Middle",
-    //     //   expression: "P ∨ ¬P",
-    //     //   explanation: "Either P or not P - one must be true"
-    //     // },
-    //     {
-    //       id: "3",
-    //       name: "Non-Contradiction",
-    //       expression: "¬(P ∧ ¬P)",
-    //       explanation: "Not both P and not P - contradictions cannot be true"
-    //     },
-    //     {
-    //       id: "4",
-    //       name: "Self-Equivalence",
-    //       expression: "P ↔ P",
-    //       explanation: "P if and only if P - a proposition is always equivalent to itself"
-    //     },
-    //     {
-    //       id: "5",
-    //       name: "Modus Ponens Form",
-    //       expression: "((P → Q) ∧ P) → Q",
-    //       explanation: "If P implies Q and P is true, then Q must be true"
-    //     },
-    //     {
-    //       id: "6",
-    //       name: "Hypothetical Syllogism",
-    //       expression: "((P → Q) ∧ (Q → R)) → (P → R)",
-    //       explanation: "If P implies Q and Q implies R, then P implies R"
-    //     },
-    //     {
-    //       id: "7",
-    //       name: "Weakening",
-    //       expression: "P → (Q → P)",
-    //       explanation: "If P is true, then it remains true regardless of Q"
-    //     },
-    //     {
-    //       id: "8",
-    //       name: "Proof by Contradiction Form",
-    //       expression: "(¬P → P) → P",
-    //       explanation: "If assuming not-P leads to P, then P must be true"
-    //     },
-    //     {
-    //       id: "9",
-    //       name: "Peirce's Law",
-    //       expression: "((P → Q) → P) → P",
-    //       explanation: "Classical logical principle not provable in intuitionistic logic"
-    //     },
-    //     {
-    //       id: "10",
-    //       name: "Disjunctive Weakening",
-    //       expression: "P ∨ (P → Q)",
-    //       explanation: "Either P is true or if P then Q - always true"
-    //     },
-    //     {
-    //       id: "11",
-    //       name: "Implication Disjunction",
-    //       expression: "(P → Q) ∨ (Q → P)",
-    //       explanation: "Either P implies Q or Q implies P - always true"
-    //     },
-    //     {
-    //       id: "12",
-    //       name: "Conjunction Implication",
-    //       expression: "(P → Q) → ((P ∧ R) → Q)",
-    //       explanation: "If P implies Q, then P and R together also imply Q"
-    //     },
-    //     {
-    //       id: "13",
-    //       name: "Conjunction Introduction Form",
-    //       expression: "P → (Q → (P ∧ Q))",
-    //       explanation: "If P and Q are both true, their conjunction is true"
-    //     },
-    //     {
-    //       id: "14",
-    //       name: "Modus Ponens Alternative Form",
-    //       expression: "(P ∧ (P → Q)) → Q",
-    //       explanation: "If P is true and P implies Q, then Q is true"
-    //     },
-    //     {
-    //       id: "15",
-    //       name: "Modus Tollens Form",
-    //       expression: "(¬Q ∧ (P → Q)) → ¬P",
-    //       explanation: "If Q is false and P implies Q, then P must be false"
-    //     },
-    //     {
-    //       id: "16",
-    //       name: "Self-Contradiction Implication",
-    //       expression: "(P → ¬P) → ¬P",
-    //       explanation: "If P implies its own negation, then P must be false"
-    //     },
-    //     {
-    //       id: "17",
-    //       name: "Implication Negation Equivalence",
-    //       expression: "¬(P → Q) ↔ (P ∧ ¬Q)",
-    //       explanation: "An implication is false only when its antecedent is true and consequent is false"
-    //     },
-    //     {
-    //       id: "18",
-    //       name: "Contradiction Implication",
-    //       expression: "(P → (Q ∧ ¬Q)) → ¬P",
-    //       explanation: "If P implies a contradiction, then P must be false"
-    //     },
-    //     {
-    //       id: "19",
-    //       name: "Double Negation Implication",
-    //       expression: "((P → Q) ∧ (P → ¬Q)) → ¬P",
-    //       explanation: "If P implies both Q and not-Q, then P must be false"
-    //     },
-    //     {
-    //       id: "20",
-    //       name: "Triple Negation Implication",
-    //       expression: "(P → Q) → ((P → ¬Q) → ¬P)",
-    //       explanation: "If P implies contradictory results, P must be false"
-    //     },
-    //     {
-    //       id: "21",
-    //       name: "Material Implication Alternative",
-    //       expression: "(P → Q) → (¬P ∨ Q)",
-    //       explanation: "If P implies Q, then either P is false or Q is true"
-    //     },
-    //     {
-    //       id: "22",
-    //       name: "Disjunctive Implication",
-    //       expression: "(P ∨ Q) → (¬P → Q)",
-    //       explanation: "If either P or Q is true, then not-P implies Q"
-    //     },
-    //     {
-    //       id: "23",
-    //       name: "Hypothetical Syllogism Disjunctive Form",
-    //       expression: "((P → Q) ∧ (R → S) ∧ (P ∨ R)) → (Q ∨ S)",
-    //       explanation: "Complex syllogism with disjunctive conclusion"
-    //     },
-    //     {
-    //       id: "24",
-    //       name: "Biconditional Expansion",
-    //       expression: "(P ↔ Q) ↔ ((P → Q) ∧ (Q → P))",
-    //       explanation: "P if and only if Q means P implies Q and Q implies P"
-    //     }
-    //    ];
-
-
-//        const introContent = {
-//         id: "intro",
-//         title: "Introduction",
-//         content:`Tautologies represent a fundamental concept in propositional logic, embodying logical certainty. A tautology is a formula that evaluates to true under all possible interpretations of its variables. The classic example is P ∨ ¬P (the law of excluded middle), which states that either a proposition or its negation must be true – an inescapable truth.
-
-// Unlike regular propositions whose truth depends on specific circumstances, tautologies are guaranteed to be true, providing absolute certainty in logical systems. This property makes tautologies essential in logical reasoning, serving as the foundation for valid arguments, logical equivalences, and formal proofs.
-
-// This page explores tautologies comprehensively, examining their properties, relationship to contradictions, and their crucial role in establishing the framework of logical deduction and mathematical reasoning.`
-//       }
 
     const tautologySections=[
             {
@@ -605,6 +454,39 @@ export default function TautologyPage({tautologies ,introContent ,sectionsConten
     ]
   return (
     <>
+    <Head>
+  <title>Tautology in Propositional Logic | Learn Math Class</title>
+  <meta name="description" content="Learn about tautologies in propositional logic. Understand definitions, examples, and relationships with contradictions and logical equivalences." />
+  <meta name="keywords" content={keyWords.join(', ')} />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://www.learnmathclass.com/logic/propositional-logic/semantics/tautology" />
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Tautology in Propositional Logic | Learn Math Class" />
+  <meta property="og:description" content="Learn about tautologies in propositional logic. Complete guide with definitions and examples." />
+  <meta property="og:url" content="https://www.learnmathclass.com/logic/propositional-logic/semantics/tautology" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Tautology in Propositional Logic",
+        "description": "Learn about tautologies in propositional logic. Complete educational guide.",
+        "author": {
+          "@type": "Organization",
+          "name": "Learn Math Class"
+        },
+        "mainEntityOfPage": "https://www.learnmathclass.com/logic/propositional-logic/semantics/tautology",
+        "keywords": keyWords
+      })
+    }}
+  />
+</Head>
     <GenericNavbar/>
     <br/>
     <br/>
