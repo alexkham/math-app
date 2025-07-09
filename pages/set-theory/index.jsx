@@ -188,7 +188,7 @@ export default function SetTheoryPage({tocItems}) {
     <br></br>
     <br></br>
     <br></br>
-    <SetTheoryVennDiagram2/>
+   
     <br></br>
     <br></br>
     <br></br>
