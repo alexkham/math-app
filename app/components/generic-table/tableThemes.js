@@ -91,7 +91,8 @@ const tableThemes = {
         borderRadius: '8px',
         overflow: 'hidden',
         backgroundColor: '#1a237e',
-        border: '1px solid #303f9f'
+        border: '1px solid rgb(33, 41, 91)',
+        //rgb(33, 41, 91)
       },
       title: {
         color: 'white',
@@ -119,7 +120,7 @@ const tableThemes = {
         backgroundColor: '#283593',
         color: '#e8eaf6',
         fontSize: '11px',
-        border: 'none'
+        border: '1px solid #3949ab'
       },
       trEven: {
         backgroundColor: '#3949ab'

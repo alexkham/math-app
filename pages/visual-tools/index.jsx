@@ -230,8 +230,10 @@ export default function VisualToolsPage() {
         'math visualizer',
         'math illustrations',
         'interactive math tools',
-        'math visualization',
-        'mathematical concepts visual'
+        'math concept visualization',
+        'math learning tools',
+        'visual math calculator',
+        'math animations'
     ]
 
     return (
@@ -269,4 +271,71 @@ export default function VisualToolsPage() {
             <ScrollUpButton/>
         </>
     )
+}
+
+export async function getStaticProps() {
+    const keyWords = [
+        'visual tools',
+        'math visualizer',
+        'math illustrations',
+        'interactive math tools',
+        'math concept visualization',
+        'math learning tools',
+        'visual math calculator',
+        'math animations'
+    ];
+
+    const cardItems = [
+        {
+            category: 'Visual Base Converter',
+            icon: CustomBase,
+            href: '/visual-tools/base-converter',
+            content: "Explore the concept of base and convert numbers from one base to another "
+        },
+        {
+            category: 'Algebra Visualizers',
+            icon: CustomAlgebra,
+            href: '/visual-tools/base-converter',
+            content: "Explore Different Concepts of Algebra Visually",
+            subcategories: [
+                { name: 'Square Root Visualizer', href: '/visual-tools/square-root' },
+                { name: 'Fractions Visualizer', href: '/visual-tools/fractions-visualizer' },
+            ]
+        },
+        {
+            category: 'Linear Algebra Visualizers',
+            icon: CustomMatrix,
+            content: "Explore Different Concepts of Linear Algebra Visually",
+            subcategories: [
+                { name: 'Matrix Multiplication Visualizer', href: '/visual-tools/matrix-multiplication' },
+                { name: 'Gauss Elimination Visual Calculator', href: '/visual-tools/gauss-elimination' },
+                { name: 'Determinat Visual Calculator', href: '/visual-tools/determinant-calculator' },
+                { name: 'Matrix Transposition Visualizer', href: '/visual-tools/matrix-transposition' },
+                { name: 'Matrix Types Generator', href: '/visual-tools/matrix-types' },
+            ]
+        },
+        {
+            category: 'Combinatorics Visualizers',
+            icon: CustomDices,
+            content: "Visual tools transform abstract combinatorics into intuitive, hands-on discoveries.",
+            subcategories: [
+                { name: 'Permutations Visualizer', href: '/combinatorics/permutations/permutations-visualizer' },
+            ]
+        },
+        {
+            category: 'Trigonometry Visualizers',
+            icon: CustomTrigo,
+            content: "See How Main Concepts of Trigonometry Visualized",
+            subcategories: [
+                { name: 'Unit Circle Visualizer', href: '/visual-tools/unit-circle' },
+            ]
+        },
+    ];
+
+    return {
+        props: {
+            keyWords,
+            cardItems
+        }
+    };
 }

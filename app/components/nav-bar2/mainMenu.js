@@ -6,12 +6,12 @@ export const mainMenuStructure = [
       label: 'Home',
       href: '/'
     },
-    {
-      id: 'placeholder',
-      type: 'link',
-      label: '',
-      href: ''
-    }
+    // {
+    //   id: 'placeholder',
+    //   type: 'link',
+    //   label: '',
+    //   href: ''
+    // }
     ,
     {
       id: 'sections',
@@ -34,12 +34,12 @@ export const mainMenuStructure = [
         }
       ]
     },
-    {
-      id: 'placeholder',
-      type: 'link',
-      label: '',
-      href: ''
-    },
+    // {
+    //   id: 'placeholder',
+    //   type: 'link',
+    //   label: '',
+    //   href: ''
+    // },
    
     {
       id: 'resources',
@@ -70,19 +70,30 @@ export const mainMenuStructure = [
           items: [
             { label: 'Statistics Calculator', href: '/calculators/statistics-calculator' },
             { label: 'Trigonometry Calculator', href: '/calculators/trigonometry-calculator' },
-            { label: 'Quadratic Equations Calculator', href: '/calculators/quadratic-equations' },
+           
             { label: 'Root Calculator', href: '/calculators/root-calculator' },
             { label: 'Logarithmic Calculator', href: '/calculators/log-calculator' },
             { label: 'Exponent Calculator', href: '/calculators/exponent-calculator' },
             { label: 'Factoring Calculator', href: '/calculators/factoring-calculator' },
             { label: 'Polynomial Calculator', href: '/calculators/polynomial-calculator' },
-            { label: 'Logical Equivalence Validator', href: '/logic/propositional-logic/semantics/equivalence-validator' },
+           
             { label: 'Percentage Calculator', href: '/calculators/percentage-calculator' },
             { label: 'Modulo Calculator', href: '/calculators/modulo-calculator' },
             { label: 'Factorial Calculator', href: '/calculators/factorial-calculator' },
             { label: 'Fraction Calculator', href: '/calculators/fraction-calculator' },
+            { label: 'Conditional Probability Calculator', href: '/probability/conditional-probability-calculator' },
             
           ]
+        },
+        {
+          title:"Solvers",
+          items:[
+            { label: 'Logical Equivalence Validator', href: '/logic/propositional-logic/semantics/equivalence-validator' },
+            { label: 'Quadratic Equations Solver', href: '/calculators/quadratic-equations' },
+            {label:'Linear Equations Solver',href:'/algebra/equations/linear/solver'}
+
+          ]
+
         },
         {
             title: 'Generators',
@@ -128,11 +139,11 @@ export const mainMenuStructure = [
     },
    
     
-    {
-      id: 'placeholder',
-      type: 'link',
-      label: '',
-      href: ''
-    },
+    // {
+    //   id: 'placeholder',
+    //   type: 'link',
+    //   label: '',
+    //   href: ''
+    // },
   ];
   

@@ -83,13 +83,21 @@ export default function MatrixTranspositionCalculatorPage({ keyWords = [], descr
 }
 
 export async function getStaticProps() {
-  const keyWords = ["matrix transposition", "transpose", "a transpose", "matrix transposition calculator"]
-  const description = "Use our Matrix Transposition Calculator to easily transpose matrices. Learn about matrix transposition and practice your linear algebra skills."
+  const keyWords = [
+    'matrix transposition',
+    'matrix transpose calculator',
+    'transpose matrix online',
+    'matrix transpose tool',
+    'matrix operations',
+    'linear algebra calculator'
+  ];
+
+  const description = 'Interactive matrix transposition calculator. Transpose matrices of any size with step-by-step visualization. Perfect for learning linear algebra operations.';
 
   return {
     props: {
       keyWords,
       description
-    },
-  }
+    }
+  };
 }

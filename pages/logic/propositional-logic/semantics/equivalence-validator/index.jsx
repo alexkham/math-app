@@ -11,8 +11,12 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=[ 'logic', 'propositional logic', 'logic equivalence','laws of logical equivalenece'
-    ,'biconditional','biconditional statement']
+  const keyWords=[ 'logical equivalence validator',
+  'propositional logic equivalence',
+  'logical formula equivalence',
+  'logic equivalence checker',
+  'propositional formula validator',
+  'truth table equivalence' ]
 
 
   return {

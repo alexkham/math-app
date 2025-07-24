@@ -129,8 +129,183 @@ export const probabilityConceptsData={
             {text:``,url:``},
         ]
     },
-    "identity name":{
-        svg:``,
+    "Sample Space":{
+        svg:`<svg viewBox="0 0 1200 800"  style="margin-left: 150px; margin-top: 0px;margin-bottom:-100px" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2c3e50">
+    Sample Space
+  </text>
+  
+
+  
+  <!-- Sample space rectangle -->
+  <rect x="150" y="80" width="450" height="320" fill="#ecf0f1" stroke="#2c3e50" stroke-width="3" rx="10"/>
+  
+  <!-- Omega symbol -->
+  <text x="180" y="120" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#2c3e50">Ω</text>
+  <text x="210" y="120" font-family="Arial, sans-serif" font-size="14" fill="#7f8c8d">(Sample Space)</text>
+  
+  <!-- Sample points scattered throughout -->
+  <circle cx="200" cy="140" r="3" fill="#e74c3c"/>
+  <circle cx="260" cy="160" r="3" fill="#e74c3c"/>
+  <circle cx="320" cy="150" r="3" fill="#e74c3c"/>
+  <circle cx="380" cy="170" r="3" fill="#e74c3c"/>
+  <circle cx="440" cy="160" r="3" fill="#e74c3c"/>
+  <circle cx="500" cy="150" r="3" fill="#e74c3c"/>
+  <circle cx="550" cy="140" r="3" fill="#e74c3c"/>
+  
+  <circle cx="220" cy="200" r="3" fill="#e74c3c"/>
+  <circle cx="280" cy="220" r="3" fill="#e74c3c"/>
+  <circle cx="340" cy="210" r="3" fill="#e74c3c"/>
+  <circle cx="400" cy="240" r="3" fill="#e74c3c"/>
+  <circle cx="460" cy="230" r="3" fill="#e74c3c"/>
+  <circle cx="520" cy="220" r="3" fill="#e74c3c"/>
+  <circle cx="570" cy="210" r="3" fill="#e74c3c"/>
+  
+  <circle cx="190" cy="260" r="3" fill="#e74c3c"/>
+  <circle cx="250" cy="280" r="3" fill="#e74c3c"/>
+  <circle cx="310" cy="270" r="3" fill="#e74c3c"/>
+  <circle cx="370" cy="300" r="3" fill="#e74c3c"/>
+  <circle cx="430" cy="290" r="3" fill="#e74c3c"/>
+  <circle cx="490" cy="280" r="3" fill="#e74c3c"/>
+  <circle cx="540" cy="270" r="3" fill="#e74c3c"/>
+  
+  <circle cx="210" cy="320" r="3" fill="#e74c3c"/>
+  <circle cx="270" cy="340" r="3" fill="#e74c3c"/>
+  <circle cx="330" cy="330" r="3" fill="#e74c3c"/>
+  <circle cx="390" cy="360" r="3" fill="#e74c3c"/>
+  <circle cx="450" cy="350" r="3" fill="#e74c3c"/>
+  <circle cx="510" cy="340" r="3" fill="#e74c3c"/>
+  <circle cx="560" cy="330" r="3" fill="#e74c3c"/>
+  
+  <circle cx="240" cy="380" r="3" fill="#e74c3c"/>
+  <circle cx="300" cy="370" r="3" fill="#e74c3c"/>
+  <circle cx="360" cy="380" r="3" fill="#e74c3c"/>
+  <circle cx="420" cy="370" r="3" fill="#e74c3c"/>
+  <circle cx="480" cy="380" r="3" fill="#e74c3c"/>
+  <circle cx="530" cy="370" r="3" fill="#e74c3c"/>
+  
+  <!-- Explanation box -->
+  <rect x="180" y="450" width="400" height="120" fill="white" stroke="#bdc3c7" stroke-width="2" rx="10"/>
+  
+
+  
+  <!-- Explanation items -->
+  <circle cx="200" cy="510" r="3" fill="#e74c3c"/>
+  <text x="215" y="515" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">
+    Each dot represents an elementary event (outcome)
+  </text>
+  
+  <text x="200" y="540" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">
+    Ω = {ω₁, ω₂, ω₃, ..., ωₙ} where each ωᵢ is an elementary event
+  </text>
+  
+  <text x="200" y="560" font-family="Arial, sans-serif" font-size="12" fill="#7f8c8d" font-style="italic">
+    The sample space contains all possible outcomes of an experiment
+  </text>
+</svg>`,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
+    "Zero Probability Paradox":{
+        svg:`<svg viewBox="0 0 800 600" style="margin-left: 50px; margin-top: 50px;" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #2c3e50; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 14px; fill: #34495e; }
+      .formula { font-family: 'Times New Roman', serif; font-size: 16px; fill: #e74c3c; font-weight: bold; }
+      .explanation { font-family: Arial, sans-serif; font-size: 12px; fill: #7f8c8d; }
+      .dot { fill: #e74c3c; }
+      .sample-space { fill: none; stroke: #2c3e50; stroke-width: 2; }
+      .arrow { stroke: #34495e; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .zero { fill: #e74c3c; font-family: Arial, sans-serif; font-size: 20px; font-weight: bold; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#34495e" />
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" class="title">The Zero Probability Paradox</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">Why Individual Outcomes Have Zero Probability</text>
+  
+  <!-- Sample Space -->
+  <rect x="50" y="80" width="300" height="200" class="sample-space" rx="10"/>
+  <text x="60" y="100" class="subtitle">Ω (Sample Space)</text>
+  
+  <!-- Individual dots (outcomes) -->
+  <circle cx="80" cy="120" r="3" class="dot"/>
+  <circle cx="120" cy="140" r="3" class="dot"/>
+  <circle cx="160" cy="115" r="3" class="dot"/>
+  <circle cx="200" cy="150" r="3" class="dot"/>
+  <circle cx="240" cy="125" r="3" class="dot"/>
+  <circle cx="280" cy="160" r="3" class="dot"/>
+  <circle cx="320" cy="135" r="3" class="dot"/>
+  <circle cx="100" cy="180" r="3" class="dot"/>
+  <circle cx="140" cy="190" r="3" class="dot"/>
+  <circle cx="180" cy="175" r="3" class="dot"/>
+  <circle cx="220" cy="195" r="3" class="dot"/>
+  <circle cx="260" cy="180" r="3" class="dot"/>
+  <circle cx="300" cy="200" r="3" class="dot"/>
+  <circle cx="110" cy="220" r="3" class="dot"/>
+  <circle cx="150" cy="230" r="3" class="dot"/>
+  <circle cx="190" cy="215" r="3" class="dot"/>
+  <circle cx="230" cy="235" r="3" class="dot"/>
+  <circle cx="270" cy="220" r="3" class="dot"/>
+  <circle cx="310" cy="240" r="3" class="dot"/>
+  <circle cx="90" cy="250" r="3" class="dot"/>
+  
+  <!-- Arrow pointing to a single dot -->
+  <line x1="380" y1="140" x2="330" y2="135" class="arrow"/>
+  <text x="390" y="135" class="explanation">Single outcome ωᵢ</text>
+  <text x="390" y="150" class="explanation">Area = 0</text>
+  
+  <!-- Classical Formula -->
+  <text x="450" y="100" class="subtitle">Classical Probability Formula:</text>
+  <text x="450" y="125" class="formula">P(A) = |A| / |Ω|</text>
+  
+  <!-- For single outcome -->
+  <text x="450" y="160" class="subtitle">For a single outcome ωᵢ:</text>
+  <text x="450" y="185" class="formula">P({ωᵢ}) = 1 / |Ω|</text>
+  
+  <!-- The problem -->
+  <text x="450" y="220" class="subtitle">But if each dot has zero area:</text>
+  <text x="450" y="245" class="formula">P({ωᵢ}) = 0 / ∞ = 0</text>
+  
+  <!-- Paradox -->
+  <rect x="50" y="320" width="700" height="100" fill="#fff2f2" stroke="#e74c3c" stroke-width="1" rx="5"/>
+  <text x="60" y="345" class="subtitle">The Paradox:</text>
+  <text x="60" y="365" class="explanation">• Each individual outcome has probability 0</text>
+  <text x="60" y="380" class="explanation">• Yet the sum of all individual probabilities must equal 1</text>
+  <text x="60" y="395" class="explanation">• This contradiction shows we cannot work with individual points!</text>
+  
+  <!-- Solution -->
+  <text x="50" y="460" class="title">Solution: Work with Sets of Outcomes</text>
+  
+  <!-- Event as a set -->
+  <ellipse cx="200" cy="520" rx="80" ry="40" fill="rgba(52, 152, 219, 0.3)" stroke="#3498db" stroke-width="2"/>
+  <text x="200" y="515" text-anchor="middle" class="subtitle">Event A</text>
+  <text x="200" y="530" text-anchor="middle" class="explanation">(Set of outcomes)</text>
+  
+  <!-- Dots inside the event -->
+  <circle cx="160" cy="505" r="3" class="dot"/>
+  <circle cx="180" cy="520" r="3" class="dot"/>
+  <circle cx="200" cy="510" r="3" class="dot"/>
+  <circle cx="220" cy="525" r="3" class="dot"/>
+  <circle cx="240" cy="515" r="3" class="dot"/>
+  
+  <!-- Formula for sets -->
+  <text x="350" y="510" class="formula">P(A) = |A| / |Ω| > 0</text>
+  <text x="350" y="530" class="explanation">Now we get meaningful probabilities!</text>
+  
+</svg>`,
         explanation:``,
         links:[
             {text:``,url:``},

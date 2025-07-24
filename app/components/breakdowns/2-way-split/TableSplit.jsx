@@ -151,22 +151,23 @@
 
 import React from 'react';
 import { themes } from './themes.js';
+import { processContent } from '@/app/utils/contentProcessor.js';
 
 const RenderItem = ({ item, styles, theme = 'default' }) => {
   const currentTheme = themes[theme] || themes.default;
   const finalStyles = styles || currentTheme;
 
   if (typeof item === 'string') {
-    return <div style={finalStyles.item}>{item}</div>;
+    return <div style={finalStyles.item}>{processContent(item)}</div>;
   }
 
   const { title, link, content } = item;
   
   const Content = () => (
     <>
-      {title && <h4 style={finalStyles.itemTitle}>{title}</h4>}
+      {title && <h4 style={finalStyles.itemTitle}>{processContent(title)}</h4>}
       {content && content.map((subItem, index) => (
-        <div key={index} style={finalStyles.itemContent}>{subItem}</div>
+        <div key={index} style={finalStyles.itemContent}>{processContent(subItem)}</div>
       ))}
     </>
   );
@@ -278,12 +279,12 @@ const TableSplitBreakdown = ({ content, styles, theme = 'default' }) => {
 
   return (
     <div style={finalStyles.container}>
-      {title && <h2 style={finalStyles.title}>{title}</h2>}
+      {title && <h2 style={finalStyles.title}>{processContent(title)}</h2>}
       <div style={finalStyles.splitContainer}>
         <div style={finalStyles.divider} />
         
         <div style={finalStyles.leftSide}>
-          {leftTitle && <h3 style={finalStyles.sideTitle}>{leftTitle}</h3>}
+          {leftTitle && <h3 style={finalStyles.sideTitle}>{processContent(leftTitle)}</h3>}
           {left.map((item, index) => (
             <RenderItem key={index} item={item} styles={finalStyles} theme={theme} />
           ))}
@@ -292,7 +293,7 @@ const TableSplitBreakdown = ({ content, styles, theme = 'default' }) => {
         <div style={finalStyles.vsBadge}>VS</div>
         
         <div style={finalStyles.rightSide}>
-          {rightTitle && <h3 style={finalStyles.sideTitle}>{rightTitle}</h3>}
+          {rightTitle && <h3 style={finalStyles.sideTitle}>{processContent(rightTitle)}</h3>}
           {right.map((item, index) => (
             <RenderItem key={index} item={item} styles={finalStyles} theme={theme} />
           ))}

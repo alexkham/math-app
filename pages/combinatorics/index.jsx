@@ -1,212 +1,326 @@
-
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import React from 'react'
+import '../pages.css'
+import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import GenericTable from '@/app/components/generic-table/GenericTable'
 import MermaidDiagram from '@/app/components/mermaid-diagram/MermaidDiagram'
-import '../../app/components/mermaid-diagram/MermaidDiagram.css'
-import styles from './Combinatorics.module.css';
-import MyNavbar from '@/app/components/nav-bar/MyNavbar';
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
-import Head from 'next/head';
-import SecondaryNavbar from '@/app/components/nav-bar/SecondaryNavbar';
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 
 
 
+export async function getStaticProps(){
 
-export async function getStaticProps() {
-  const scenarios = [
-    {
-      id: 'permutation',
-      name: 'Permutation (Full)',
-      description: "Arrangement of n distinct items in n places",
-      formula: "n!",
-      example: "For n=4: 4! = 24 arrangements",
-      useCase: "Arranging books on a shelf, determining race finish orders"
-    },
-    {
-      id: 'permutation-repetition',
-      name: 'Permutation with Repetition',
-      description: "Arrangement of n items where some are identical",
-      formula: "n! / (n1! * n2! * ... * nx!)",
-      example: "For n=4 with 2 A's and 2 B's: 4! / (2! * 2!) = 6 arrangements",
-      useCase: "Arranging letters in words with repeated letters"
-    },
-    {
-      id: 'permutation-without-repetition',
-      name: 'Permutation without Repetition',
-      description: "Picking r different items from n items where order matters",
-      formula: "P(n,r) = n! / (n-r)!",
-      example: "For n=5, r=3: 5! / (5-3)! = 60 arrangements",
-      useCase: "Selecting and arranging podium finishers from a group of runners"
-    },
-    {
-      id: 'combination',
-      name: 'Combination',
-      description: "Picking r different items from n items where order doesn't matter",
-      formula: "C(n,r) = n! / (r! * (n-r)!)",
-      example: "For n=5, r=3: 5! / (3! * 2!) = 10 combinations",
-      useCase: "Selecting a committee from a group of people"
-    },
-    {
-      id: 'partition-groups',
-      name: 'Partition into Groups',
-      description: "Dividing n distinct items into r distinguishable groups",
-      formula: "S(n,r) (Stirling number of the second kind)",
-      example: "For n=4, r=2: S(4,2) = 7 partitions",
-      useCase: "Dividing students into different classes"
-    },
-    {
-      id: 'distribution-cells',
-      name: 'Distribution into Cells',
-      description: "Distribution of n different items into r numbered cells",
-      formula: "r^n",
-      example: "For n=3, r=2: 2^3 = 8 distributions",
-      useCase: "Assigning tasks to specific days of the week"
-    },
-    {
-      id: 'weak-composition',
-      name: 'Weak Composition',
-      description: "Distribution of n identical items into r cells, empty cells allowed",
-      formula: "C(n+r-1, r-1)",
-      example: "For n=5, r=3: C(7,2) = 21 compositions",
-      useCase: "Distributing identical candies among children, allowing some to receive none"
-    },
-    {
-      id: 'strong-composition',
-      name: 'Strong Composition',
-      description: "Distribution of n identical items into r cells, no empty cells",
-      formula: "C(n-1, r-1)",
-      example: "For n=5, r=3: C(4,2) = 6 compositions",
-      useCase: "Distributing identical tasks among team members, ensuring everyone gets at least one"
-    },
-    {
-      id: 'circular-permutation',
-      name: 'Circular Permutation',
-      description: "Arranging n different items in a circle",
-      formula: "(n-1)!",
-      example: "For n=4: 3! = 6 arrangements",
-      useCase: "Seating arrangements around a circular table"
-    }
-  ];
+  
+const countingPrinciplesDiagram=`
+graph TD
+    A("<h3>Counting Principles in Combinatorics</h3>")
+    B("<h3>Addition Principle</h3>Count of disjoint events<br>is sum of individual counts")
+    C("<h3>Multiplication Principle</h3>Count of sequential events<br>is product of individual counts")
+    D("<h3>Permutations</h3>Ordered arrangements<br>of distinct objects")
+    E("<h3>Combinations</h3>Unordered selections<br>from a set of objects")
+    
+    A -->|"Disjoint events (OR)"| B
+    A -->|"Sequential events (AND)"| C
+    C -->|"Order matters"| D
+    C -->|"Order doesn't matter"| E
 
-  const combinatorics8 = `
-  flowchart TD
-  A([Combinatorics   ]) --> B{All items?}
-  B -->|Yes| C{Order matters?}
-  B -->|No| D{Order matters?}
-  C -->|Yes| E["Permutations<br/>All items, order matters"]
-  C -->|No| F["PermutationsWithRepetition<br/>All items, some identical"]
-  D -->|Yes| G["PermutationsWithoutRepetition<br/>Subset of items, order matters"]
-  D -->|No| H["Combinations<br/>Subset of items, order doesn't matter"]
-  A --> I["PartitionIntoSets<br/>Divide into distinct groups"]
-  A --> J["DistributionIntoSlots<br/>Allocate to ordered slots"]
-  A --> K["WeakCompositions<br/>Sum decomposition, empty allowed"]
-  A --> L["StrongCompositions<br/>Sum decomposition, no empty"]
-  A --> M["CircularPermutations<br/>Circular arrangements"]
-  `;
+    click A "/combinatorics#counting" "Go to Combinatorics overview"
+    click B "/combinatorics#counting" "Learn about Addition Principle"
+    click C "/combinatorics#counting" "Learn about Multiplication Principle"
+    click D "/combinatorics/permutations" "Learn about Permutations"
+    click E "/combinatorics/combinations" "Learn about Combinations"
+`
 
-  const metaDescription="Explore various combinatorics scenarios including permutations, combinations, partitions, and distributions. Learn formulas, see examples, and understand real-world applications with our comprehensive guide and interactive diagram."
-
-  return {
-    props: {
-      scenarios,
-      combinatorics8,
-      metaDescription
-    },
-  };
-}
-
-export default function CombinatoricsPage({ scenarios, combinatorics8,metaDescription }) {
-  return (
-    <>
-    <Head>
-      <title>Combinatorics Scenarios and Applications</title>
-      <meta name="description" content={metaDescription} />
-     </Head>
-    <div className={styles.container}>
-      <GenericNavbar/>
-      <br></br>
-      <br></br>
-      <br></br>
-      <Breadcrumb></Breadcrumb>
-      <SecondaryNavbar></SecondaryNavbar>
-      <h1 className={styles.title}>Combinatorics Scenarios</h1>
-      <p className={styles.intro}>Explore various combinatorics scenarios and their applications in problem-solving.</p>
+    const combinatoricsScenariosData = {
+        tableTitle: 'Basic Combinatorics Scenarios',
+        rows: [
+          {
+            scenario: 'Permutation (Full)',
+            description: 'Arrangement of n distinct elements into a linear sequence, with each element appearing exactly once.'
+          },
+          {
+            scenario: 'Permutation with Repetition',
+            description: 'Arrangement of a multiset of n positions in which certain element‐types may repeat, counting each distinct linear ordering.'
+          },
+          {
+            scenario: 'Permutation without Repetition',
+            description: 'Selection of r distinct elements from a set of size n followed by their arrangement into a linear sequence, with no element reused.'
+          },
+          {
+            scenario: 'Circular Permutation',
+            description: 'Arrangement of n distinct elements around a fixed circle, where configurations differing only by rotation are considered identical.'
+          },
+          {
+            scenario: 'Combination',
+            description: 'Selection of an unordered subset of size r from a set of n distinct elements, with no regard to sequence.'
+          },
+          {
+            scenario: 'Partition into Groups',
+            description: 'Division of n distinct elements into r unlabeled subsets, considering only which elements share the same subset and not the order or names of subsets.'
+          },
+          {
+            scenario: 'Distribution into Cells',
+            description: 'Assignment of each of n distinct elements to one of r labeled cells, producing an ordered mapping of elements to specific cells.'
+          },
+          {
+            scenario: 'Weak Composition',
+            description: 'Allocation of n identical units into r labeled cells, permitting some cells to receive zero units, and tracking only the counts per cell.'
+          },
+          {
+            scenario: 'Strong Composition',
+            description: 'Allocation of n identical units into r labeled cells, requiring that every cell receives at least one unit, with only the distribution counts recorded.'
+          }
+        ]
+      };
       
-      <h2 className={styles.sectionTitle}>Table of Contents</h2>
-      <ul className={styles.toc}>
-        {scenarios.map(scenario => (
-          <li key={scenario.id}>
-            <a href={`#${scenario.id}`}>{scenario.name}</a>
-          </li>
-        ))}
-        <li><a href="#diagram">Combinatorics Diagram</a></li>
-        <li><a href="#table">Combinatorics Table</a></li>
-      </ul>
+      const countingPrinciplesData = {
+        tableTitle: "Fundamental Counting Principles",
+        rows: [
+          {
+            feature: "Conjunction",
+            sum_addition_principle: '"OR"',
+            product_multiplication_principle: '"AND"'
+          },
+          {
+            feature: "Formula",
+            sum_addition_principle: "$m_1 + m_2 + \\cdots + m_k$",
+            product_multiplication_principle: "$m_1 \\times m_2 \\times \\cdots \\times m_k$"
+          },
+          {
+            feature: "Key Question",
+            sum_addition_principle: "How many ways to choose from different categories?",
+            product_multiplication_principle: "How many ways to complete a sequence of choices?"
+          },
+          {
+            feature: "Prerequisite",
+            sum_addition_principle: "Options must be mutually exclusive (disjoint)",
+            product_multiplication_principle: "Each step must be independent of others"
+          },
+          {
+            feature: "When to use",
+            sum_addition_principle: "Choose **one** option from several disjoint groups",
+            product_multiplication_principle: "Perform **all** steps, each with its own options"
+          },
+          {
+            feature: "Example",
+            sum_addition_principle: "3 cake flavors **OR** 4 ice-cream flavors **OR** 2 pie fillings = 3 + 4 + 2 = 9 desserts",
+            product_multiplication_principle: "5 scoop flavors **AND** 3 toppings = 5 \\times 3 = 15 cones"
+          },
+          {
+            feature: "Common feature",
+            sum_addition_principle: "Counts distinct possibilities by breaking a problem into simpler parts",
+            product_multiplication_principle: "Counts distinct possibilities by breaking a problem into simpler parts"
+          }
+        ]
+      };
+      
+    
+    const sectionsContent={
+  
+      counting:{
+        title:`2 Main Counting Principles`,
+        content:``,
+        before:`At its core, combinatorics rests on two “big-picture” rules from which almost every enumeration argument can be built or deduced:
+     **1. Sum (Addition) Rule (“OR”)**
+If a choice can be made by **one or another** of $k$ mutually exclusive methods—where Method 1 offers $m_1$ different options, Method 2 offers $m_2$, …, Method k offers $m_k$—then the total number of possibilities is
+@academic[example:$m_1 + m_2 + \\cdots + m_k.$]@
+This principle corresponds to an **“or”** situation: you pick **one OR** the other.
+ **Example (transport):**
+  You can travel **by bus OR by train OR by taxi**:
+   Bus routes: 2 options
+   Train lines: 3 options
+   Taxi services: 4 options
+  Total travel choices = $2 + 3 + 4 = 9$.
 
-      {scenarios.map(scenario => (
-        <section key={scenario.id} id={scenario.id} className={styles.section}>
-           <br></br>
-          <br></br>
-          <br></br>
-          <h2  className={styles.sectionTitle}>{scenario.name}</h2>
-          <p>{scenario.description}</p>
-          <p><strong>Formula:</strong> {scenario.formula}</p>
-          <p><strong>Example:</strong> {scenario.example}</p>
-          <p><strong>Use Case:</strong> {scenario.useCase}</p>
-          <p>For more details, see the <a href="#table">Combinatorics Table</a> and the <a href="#diagram">Combinatorics Diagram</a>.</p>
-        </section>
-      ))}
+**2. Product (Multiplication) Rule (“AND”)**
+If an outcome requires completing $k$ independent steps—where Step 1 has $m_1$ different options, Step 2 has $m_2$, …, Step k has $m_k$—and you must do **all** of them, then the total number of outcomes is
+@academic[example:$m_1 \\times m_2 \\times \\cdots \\times m_k.$]@
+This principle corresponds to an **“and”** situation: you choose **this AND** that.
+**Example (meal combo):**
+  You build a lunch by choosing a main course **AND** a drink **AND** a dessert:
+   Mains: 3 choices
+   Drinks: 2 choices
+   Desserts: 4 choices
+    Total meal combos = $3 \\times 2 \\times 4 = 24$.
 
-      <section id="diagram" className={styles.section}>
-        <br></br>
-        <br></br>
-        <br></br>
-        <h2 className={styles.sectionTitle}>Combinatorics Diagram</h2>
-        <MermaidDiagram 
-          chartDefinition={combinatorics8}
-          fontSize={34}
-          nodeHeight={160}
-          maxWidth={1200}
-          maxHeight={1000}
-          minScale={5} 
+In short, whenever you see **“or”** you **add** disjoint counts; whenever you see **“and”** you **multiply** independent choices.
+
+`,
+        after:``,
+    
+    
+      },
+      scenarios:{
+        title:`9 Basic Combinatorial Scenarios`,
+        content:``,
+        before:`In combinatorics, most counting problems can be classified into 9 basic templates or scenarios. Rather than approaching each problem as a unique puzzle, we can identify patterns and apply standardized methods. The following nine fundamental scenarios represent the core building blocks of combinatorial problem-solving. By recognizing which template applies to a given situation, we transform complex counting challenges into systematic applications of well-established formulas and techniques. This classification system not only simplifies problem-solving but also provides a structured framework for understanding the relationships between different types of combinatorial questions.
+        `,
+        after:`These nine scenarios form the foundation of combinatorial analysis. Each template addresses specific constraints about order, repetition, and grouping that appear repeatedly across mathematical applications. Mastering the ability to recognize which scenario applies to a problem—whether we're dealing with arrangements versus selections, labeled versus unlabeled groups, or strict versus flexible distributions—is the key to efficient combinatorial problem-solving. As you encounter new counting problems, always begin by identifying the underlying scenario, as this will immediately guide you toward the appropriate mathematical tools and formulas needed for the solution.
+        `,
+    
+      },
+    
+      permutations_vs_combinations:{
+    
+        title:`Permutations vs Combinations`,
+        content:``,
+        before:`As we discussed in previous section, there are two main [counting principles](!/combinatorics#counting) in combinatorics. However, there's more depth to this framework than initially appears. When we apply the multiplication principle to solve counting problems, we encounter a crucial distinction that leads to further classification.
+
+The multiplication principle handles sequential decision-making where we perform multiple steps, each with its own set of options. But within this category, we must ask a fundamental question: **"Does order matter?"** This single question divides multiplication-based problems into two distinct subcategories, each with its own mathematical approach and formulas.
+`,
+        after:`In cases order **does** matter—such as arranging people in a line or assigning ranks in a competition—we're dealing with [permutations](!/combinatorics/permutations). The sequence or position of elements affects the outcome, making different arrangements count as separate results.
+When order **doesn't** matter—such as selecting team members or choosing ingredients for a recipe—we're working with **combinations**. Here, we care only about which elements are chosen, not their arrangement or sequence.
+This branching creates a clear decision tree: start with the fundamental counting principles, apply the multiplication principle for sequential choices, then determine whether the specific ordering of those choices affects your final count.`,
+    
+      },
+      obj4:{
+        title:``,
+        content:``,
+        before:``,
+        after:``,
+    
+      },
+  
+  
+      obj5:{
+    
+        title:``,
+        content:``,
+        before:``,
+        after:``,
+    
+      }
+    
+    }
+
+    
+const introContent = {
+    id: "intro",
+    title: "Combinatorics: The Art of Counting",
+    content: `
+Combinatorics is the branch of mathematics that deals with counting, arrangement, and selection of objects. At its core, it answers fundamental questions: "In how many ways can this be done?" and "How many possibilities exist?" This field transforms seemingly simple counting problems into powerful mathematical tools that reveal hidden patterns and structures.
+
+Combinatorics serves as a bridge connecting multiple mathematical disciplines. It provides the foundation for [probability](!/probability) theory, where calculating favorable outcomes requires systematic counting techniques. The field draws heavily from [set theory](!/set-theory) when dealing with collections and their intersections, while its applications extend into **graph theory** through network analysis and path counting. **Number theory** benefits from combinatorial methods in partition problems and divisibility questions, and [linear algebra](!/linear-algebra) uses combinatorial principles in matrix theory and vector spaces.
+
+The problems combinatorics solves range from practical applications—like determining optimal seating arrangements or analyzing computer algorithms—to abstract mathematical questions about infinite structures. Whether you're calculating lottery odds, designing efficient networks, or exploring mathematical proofs, combinatorics provides the essential counting framework.
+
+In this section, we'll explore the fundamental counting principles, dive into permutations and combinations, and tackle real-world combinatorial scenarios that demonstrate the power and elegance of this mathematical art.`
+  }
+  
+      return {
+        props:{
+          sectionsContent,
+          introContent,
+          combinatoricsScenariosData,
+          countingPrinciplesData,
+          countingPrinciplesDiagram,
+          
+        }
+      }
+    }
+   
+
+export default function CombinatoricspAGE({sectionsContent,introContent,
+  combinatoricsScenariosData,countingPrinciplesData,countingPrinciplesDiagram}) {
+
+  
+    const combinatoricsSections=[
+        {
+            id:'counting',
+            title:sectionsContent.counting.title,
+            link:'',
+            content:[
+                sectionsContent.counting.before,
+                <GenericTable
+                key={2}
+                tableData={countingPrinciplesData} theme='lightBlue'
+                cellFontSize={'16px'}
+                headerFontSize={'18px'}
+                />
+               
+            ]
+        },
+         {
+            id:'permutations_vs_combinations',
+            title:sectionsContent.permutations_vs_combinations.title,
+            link:'',
+            content:[
+              sectionsContent.permutations_vs_combinations.before,
+              <div style={{display:'flex', alignItems:'center',justifyContent:'center',marginTop:'50px'}}>
+                 <MermaidDiagram chartDefinition={countingPrinciplesDiagram}
+                   width="500px"
+                   height="300px"
+                   scale={.9} />
+                   </div> ,   
+             sectionsContent.permutations_vs_combinations.after,       
+                 
+                 
+                
+
+            ]
+        },
+        {
+            id:'scenarios',
+            title:sectionsContent.scenarios.title,
+            link:'',
+            content:[
+              sectionsContent.scenarios.before,
+                <GenericTable 
+                key={1}
+                tableData={combinatoricsScenariosData} theme='navyBlue'
+                cellFontSize={'16px'}
+                headerFontSize={'18px'}/>,
+                sectionsContent.scenarios.after,
+            ]
+        },
+        // {
+        //     id:'',
+        //     title:'',
+        //     link:'',
+        //     content:''
+        // }
+    ]
+    
+
+  return (
+   <>
+   <GenericNavbar/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+    <OperaSidebar 
+           side='right'
+           topOffset='55px' 
+           sidebarWidth='45px'
+           panelWidth='200px'
+           iconColor='white'
+           panelBackgroundColor='#f2f2f2'
+         /> 
+   <Breadcrumb/>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Combinatorics</h1>
+   <br/>
+   <SectionTableOfContents sections={combinatoricsSections}/>
+   <br/>
+   <br/>
+   <br/>
+   <IntroSection 
+          id={introContent.id}
+          title={introContent.title}
+          content={introContent.content}
+          backgroundColor="#f2f2f2"
+          textColor="#06357a"
         />
-        <p>This diagram provides a visual overview of the relationships between different combinatorics scenarios. For detailed formulas and examples, refer to the <a href="#table">Combinatorics Table</a> below or the individual sections above.</p>
-      </section>
-
-      <section id="table" className={styles.section}>
-        <br></br>
-        <br></br>
-        <br></br>
-        <h2 className={styles.sectionTitle}>Combinatorics Table</h2>
-        <table className={styles.table}>
-          <thead className={styles.tableHead}>
-            <tr>
-              <th className={styles.tableHeader}>Scenario</th>
-              <th className={styles.tableHeader}>Description</th>
-              <th className={styles.tableHeader}>Formula</th>
-              <th className={styles.tableHeader}>Example</th>
-              <th className={styles.tableHeader}>Use Case</th>
-            </tr>
-          </thead>
-          <tbody>
-            {scenarios.map((scenario, index) => (
-              <tr key={index} className={styles.tableRow}>
-                <td className={`${styles.tableCell} ${styles.scenarioName}`}>
-                  <a href={`#${scenario.id}`}>{scenario.name}</a>
-                </td>
-                <td className={styles.tableCell}>{scenario.description}</td>
-                <td className={`${styles.tableCell} ${styles.formula}`}>{scenario.formula}</td>
-                <td className={styles.tableCell}>{scenario.example}</td>
-                <td className={styles.tableCell}>{scenario.useCase}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <p>For more detailed explanations of each scenario, click on the scenario names in the table or refer to the individual sections above. You can also check the <a href="#diagram">Combinatorics Diagram</a> for a visual representation.</p>
-      </section>
-      <ScrollUpButton></ScrollUpButton>
-    </div>
-    </>
+   <br/>
+   <br/>
+   <Sections sections={combinatoricsSections}/>
+   <br/>
+   <br/>
+   <ScrollUpButton/>
+   </>
   )
 }

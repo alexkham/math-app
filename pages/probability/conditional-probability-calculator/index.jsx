@@ -7,6 +7,10 @@ import React from 'react'
 import '../../pages.css'
 
 export default function ConditionalProbabilityCalculatorPage() {
+
+  const keyWords=['joint probability table','joint probability distribution table','contigency table',
+    'probability'
+  ]
   return (
     <>
     <GenericNavbar/>

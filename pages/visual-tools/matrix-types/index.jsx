@@ -204,10 +204,19 @@ export default function MatrixTypesPage({ keyWords, matrixTypesExplanations }) {
 
 export async function getStaticProps() {
   const keyWords = [
-    'matrix types', 'different types of matrices', 'kinds of matrix',
-    'identity matrix', 'zero matrix', 'diagonal matrix', 'symmetric matrix', 'skew symmetric matrix',
-    'scalar matrix', 'lower triangular matrix', 'upper triangular matrix'
-  ]
+    'matrix types', 
+    'different types of matrices',
+    'kinds of matrix',
+    'identity matrix',
+    'zero matrix', 
+    'diagonal matrix',
+    'symmetric matrix',
+    'skew symmetric matrix',
+    'scalar matrix', 
+    'lower triangular matrix', 
+    'upper triangular matrix',
+    'matrix generator'
+  ];
 
    const matrixTypesExplanations = {
     identity: {

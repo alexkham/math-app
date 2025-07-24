@@ -61,6 +61,8 @@ const CustomConvert=()=>(
     { text: 'Modulo Calculator', url: '/calculators/modulo-calculator' },
     { text: 'Factorial Calculator', url: '/calculators/factorial-calculator' },
     { text: 'Fraction Calculator', url: '/calculators/fraction-calculator' },
+    { text: 'Conditional Probability Calculator', url: '/probability/conditional-probability-calculator' },
+    { text: 'Linear Equations Solver', url: '/algebra/equations/linear/solver' },
    
   ]},
   // { id: 3, icon: FileText, tooltip: 'Files', content: 'FilesComponent' },

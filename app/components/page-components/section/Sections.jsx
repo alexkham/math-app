@@ -122,7 +122,7 @@ const Sections = ({ sections,leftMargin='220px' }) => {
            <div className={styles.sectionText}>
              {renderContent(section.content)}
            </div>
-           {section.link && <a href={section.link} className={styles.pageLink}>Go to  Page</a>}
+           {section.link && <a href={section.link} className={styles.pageLink}>Learn More</a>}
          </div>
          <div className={styles.sectionNavigation}>
            <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
