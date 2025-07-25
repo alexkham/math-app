@@ -76,10 +76,10 @@ const introContent = {
   }
   
 
-export default function PermutationsPage({sectionsContent,introContent}) {
+export default function CombinationsPage({sectionsContent,introContent}) {
 
   
-  const permutationsSections=[
+  const combinationsSections=[
     {
         id:'1',
         title:'section1',
@@ -121,7 +121,7 @@ export default function PermutationsPage({sectionsContent,introContent}) {
     <Breadcrumb/>
     <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>Permutations</h1>   
     <br/> 
-    <SectionTableOfContents sections={permutationsSections}/>
+    <SectionTableOfContents/>
     <br/> 
     <br/> 
     <IntroSection 
@@ -134,7 +134,7 @@ export default function PermutationsPage({sectionsContent,introContent}) {
     <br/> 
     <br/> 
     <br/> 
-    <Sections sections={permutationsSections}/>
+    <Sections/>
     <br/> 
     <br/>
     <ScrollUpButton/> 
