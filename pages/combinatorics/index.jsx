@@ -105,66 +105,125 @@ graph TD
     //     ]
     //   };
       
-    const combinatoricsScenariosData = {
-      tableTitle: 'Basic Combinatorics Scenarios',
-      rows: [
-        {
-          '#' : `1`,
-          scenario: '[Permutation (Full)](!/combinatorics/permutations#full)',
-          description: 'Arrangement of n distinct elements into a linear sequence, with each element appearing exactly once.',
-          essence: '[Permutation](!/combinatorics/permutations)'
-        },
-        {
-          '#': `2`,
-          scenario: '[Permutation with Repetition](!/combinatorics/permutations#with)',
-          description: 'Arrangement of a multiset of n positions in which certain element‐types may repeat, counting each distinct linear ordering.',
-          essence: '[Permutation](!/combinatorics/permutations)'
-        },
-        {
-          '#': `3`,
-          scenario: '[Partial Permutation without Repetition](!/combinatorics/permutations#without)',
-          description: 'Selection of r distinct elements from a set of size n followed by their arrangement into a linear sequence, with no element reused.',
-          essence: '[Permutation](!/combinatorics/permutations)'
-        },
-        {
-          '#': `4`,
-          scenario: '[Circular Permutation](!/combinatorics/permutations#circular)',
-          description: 'Arrangement of n distinct elements around a fixed circle, where configurations differing only by rotation are considered identical.',
-          essence: '[Permutation](!/combinatorics/permutations)'
-        },
-        {
-          '#': `5`,
-          scenario: '[Simple Combination](!/combinatorics/combinations#combinations)',
-          description: 'Selection of an unordered subset of size r from a set of n distinct elements, with no regard to sequence.',
-          essence: '[Combination](!/combinatorics/combinations)'
-        },
-        {
-          '#': `6`,
-          scenario: '[Partition into Groups](!/combinatorics/combinations#partition)',
-          description: 'Division of n distinct elements into r unlabeled subsets, considering only which elements share the same subset and not the order or names of subsets.',
-          essence: '[Combination](!/combinatorics/combinations)'
-        },
-        {
-          '#': `7`,
-          scenario: '[Distribution into Cells](!/combinatorics/combinations#distribution)',
-          description: 'Assignment of each of n distinct elements to one of r labeled cells, producing an ordered mapping of elements to specific cells.',
-          essence: '[Combination](!/combinatorics/combinations)'
-        },
-        {
-          '#': `8`,
-          scenario: '[Weak Composition](!/combinatorics/combinations#weak)',
-          description: 'Allocation of n identical units into r labeled cells, permitting some cells to receive zero units, and tracking only the counts per cell.',
-          essence: '[Combination](!/combinatorics/combinations)'
-        },
-        {
-          '#': `9`,
-          scenario: '[Strong Composition](!/combinatorics/combinations#strong)',
-          description: 'Allocation of n identical units into r labeled cells, requiring that every cell receives at least one unit, with only the distribution counts recorded.',
-          essence: '[Combination](!/combinatorics/combinations)'
-        }
-      ]
+  //   const combinatoricsScenariosData = {
+  //     tableTitle: 'Basic Combinatorics Scenarios',
+  //     rows: [
+  //       {
+  //         '#' : `1`,
+  //         scenario: '[Permutation (Full)](!/combinatorics/permutations#full)',
+  //         description: 'Arrangement of n distinct elements into a linear sequence, with each element appearing exactly once.',
+  //         essence: '[Permutation](!/combinatorics/permutations)'
+  //       },
+  //       {
+  //         '#': `2`,
+  //         scenario: '[Permutation with Repetition](!/combinatorics/permutations#with)',
+  //         description: 'Arrangement of a multiset of n positions in which certain element‐types may repeat, counting each distinct linear ordering.',
+  //         essence: '[Permutation](!/combinatorics/permutations)'
+  //       },
+  //       {
+  //         '#': `3`,
+  //         scenario: '[Partial Permutation without Repetition](!/combinatorics/permutations#without)',
+  //         description: 'Selection of r distinct elements from a set of size n followed by their arrangement into a linear sequence, with no element reused.',
+  //         essence: '[Permutation](!/combinatorics/permutations)'
+  //       },
+  //       {
+  //         '#': `4`,
+  //         scenario: '[Circular Permutation](!/combinatorics/permutations#circular)',
+  //         description: 'Arrangement of n distinct elements around a fixed circle, where configurations differing only by rotation are considered identical.',
+  //         essence: '[Permutation](!/combinatorics/permutations)'
+  //       },
+  //       {
+  //         '#': `5`,
+  //         scenario: '[Simple Combination](!/combinatorics/combinations#combinations)',
+  //         description: 'Selection of an unordered subset of size r from a set of n distinct elements, with no regard to sequence.',
+  //         essence: '[Combination](!/combinatorics/combinations)'
+  //       },
+  //       {
+  //         '#': `6`,
+  //         scenario: '[Partition into Groups](!/combinatorics/combinations#partition)',
+  //         description: 'Division of n distinct elements into r unlabeled subsets, considering only which elements share the same subset and not the order or names of subsets.',
+  //         essence: '[Combination](!/combinatorics/combinations)'
+  //       },
+  //       {
+  //         '#': `7`,
+  //         scenario: '[Distribution into Cells](!/combinatorics/combinations#distribution)',
+  //         description: 'Assignment of each of n distinct elements to one of r labeled cells, producing an ordered mapping of elements to specific cells.',
+  //         essence: '[Combination](!/combinatorics/combinations)'
+  //       },
+  //       {
+  //         '#': `8`,
+  //         scenario: '[Weak Composition](!/combinatorics/combinations#weak)',
+  //         description: 'Allocation of n identical units into r labeled cells, permitting some cells to receive zero units, and tracking only the counts per cell.',
+  //         essence: '[Combination](!/combinatorics/combinations)'
+  //       },
+  //       {
+  //         '#': `9`,
+  //         scenario: '[Strong Composition](!/combinatorics/combinations#strong)',
+  //         description: 'Allocation of n identical units into r labeled cells, requiring that every cell receives at least one unit, with only the distribution counts recorded.',
+  //         essence: '[Combination](!/combinatorics/combinations)'
+  //       }
+  //     ]
+  // };
+  const combinatoricsScenariosData = {
+    tableTitle: 'Basic Combinatorics Scenarios',
+    rows: [
+      {
+        '#' : `1`,
+        scenario: '[Permutation (Full)](!/combinatorics/permutations#full)',
+        description: 'Arrangement of n distinct elements into a linear sequence, with each element appearing exactly once.',
+        essence: '[Permutation](!/combinatorics/permutations)'
+      },
+      {
+        '#': `2`,
+        scenario: '[Permutation with Identical Items](!/combinatorics/permutations#identical)',
+        description: 'Arrangement of n elements where some elements are identical, counting only distinct linear orderings.',
+        essence: '[Permutation](!/combinatorics/permutations)'
+      },
+      {
+        '#': `3`,
+        scenario: '[Partial Permutation without Repetition](!/combinatorics/permutations#without)',
+        description: 'Selection of r distinct elements from a set of size n followed by their arrangement into a linear sequence, with no element reused.',
+        essence: '[Permutation](!/combinatorics/permutations)'
+      },
+      {
+        '#': `4`,
+        scenario: '[Permutation with Repetition](!/combinatorics/permutations#with-repetition)',
+        description: 'Arrangement of r positions chosen from n possible elements, allowing repeated use of elements in different positions.',
+        essence: '[Permutation](!/combinatorics/permutations)'
+      },
+      {
+        '#': `5`,
+        scenario: '[Circular Permutation](!/combinatorics/permutations#circular)',
+        description: 'Arrangement of n distinct elements around a fixed circle, where configurations differing only by rotation are considered identical.',
+        essence: '[Permutation](!/combinatorics/permutations)'
+      },
+      {
+        '#': `6`,
+        scenario: '[Simple Combination](!/combinatorics/combinations#combinations)',
+        description: 'Selection of an unordered subset of size r from a set of n distinct elements, with no regard to sequence.',
+        essence: '[Combination](!/combinatorics/combinations)'
+      },
+      {
+        '#': `7`,
+        scenario: '[Partition into Groups](!/combinatorics/combinations#partition)',
+        description: 'Division of n distinct elements into r unlabeled subsets, considering only which elements share the same subset and not the order or names of subsets.',
+        essence: '[Combination](!/combinatorics/combinations)'
+      },
+      {
+        '#': `8`,
+        scenario: '[Weak Composition](!/combinatorics/combinations#weak)',
+        description: 'Allocation of n identical units into r labeled cells, permitting some cells to receive zero units, and tracking only the counts per cell.',
+        essence: '[Combination](!/combinatorics/combinations)'
+      },
+      {
+        '#': `9`,
+        scenario: '[Strong Composition](!/combinatorics/combinations#strong)',
+        description: 'Allocation of n identical units into r labeled cells, requiring that every cell receives at least one unit, with only the distribution counts recorded.',
+        essence: '[Combination](!/combinatorics/combinations)'
+      }
+    ]
   };
-   
+  
     
     const countingPrinciplesData = {
         tableTitle: "Fundamental Counting Principles",
@@ -251,7 +310,7 @@ To summarize, whenever you see **“or”** you **add** disjoint counts; wheneve
     
       },
       scenarios:{
-        title:`9 Basic Combinatorial Scenarios`,
+        title:`Basic Combinatorial Scenarios`,
         content:``,
         before:`In combinatorics, most counting problems can be classified into 9 basic templates or scenarios. Rather than approaching each problem as a unique puzzle, we can identify patterns and apply standardized methods. The following nine fundamental scenarios represent the core building blocks of combinatorial problem-solving. By recognizing which template applies to a given situation, we transform complex counting challenges into systematic applications of well-established formulas and techniques. This classification system not only simplifies problem-solving but also provides a structured framework for understanding the relationships between different types of combinatorial questions.
         `,
@@ -275,7 +334,7 @@ To summarize, whenever you see **“or”** you **add** disjoint counts; wheneve
 The multiplication principle handles sequential decision-making where we perform multiple steps, each with its own set of options. But within this category, we must ask a fundamental question: **"Does order matter?"** This single question divides multiplication-based problems into two distinct subcategories, each with its own mathematical approach and formulas.
 `,
         after:`In cases order **does** matter—such as arranging people in a line or assigning ranks in a competition—we're dealing with [permutations](!/combinatorics/permutations). The sequence or position of elements affects the outcome, making different arrangements count as separate results.
-When order **doesn't** matter—such as selecting team members or choosing ingredients for a recipe—we're working with [Combinations](!/combinatorics/combinations). Here, we care only about which elements are chosen, not their arrangement or sequence.
+When order **doesn't** matter—such as selecting team members or choosing ingredients for a recipe—we're working with [combinations](!/combinatorics/combinations). Here, we care only about which elements are chosen, not their arrangement or sequence.
 This branching creates a clear decision tree: start with the fundamental counting principles, apply the multiplication principle for sequential choices, then determine whether the specific ordering of those choices affects your final count.`,
     
       },

@@ -1,7 +1,7 @@
 
-export const identitiesData={
+export const scenariosData={
     "Permutations (Full)":{
-        svg:`<svg width="600" height="270" viewBox="0 0 600 270" xmlns="http://www.w3.org/2000/svg">
+        svg:`<svg width="600" height="270" viewBox="0 0 500 170" style="margin-left:200px;" xmlns="http://www.w3.org/2000/svg">
   <!-- LEFT SIDE: 2 items permutation -->
   <!-- Original 2 balls at top left -->
   <circle cx="30" cy="8" r="8" fill="#ff6b6b"/>
@@ -1006,8 +1006,107 @@ export const identitiesData={
             {text:``,url:``},
         ]
     },
-    "identity name":{
-        svg:``,
+    "Permutations of ABC: STEP-by-Step":{
+        svg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850" style="margin-left:200px;margin-bottom:-150px;">
+  <!-- Background -->
+  <rect width="800" height="650" fill="none"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#333">Permutations of ABC: Step-by-Step</text>
+  
+  <!-- Initial elements -->
+  <circle cx="400" cy="80" r="25" fill="#ff6b6b"/>
+  <circle cx="500" cy="80" r="25" fill="#4ecdc4"/>
+  <circle cx="600" cy="80" r="25" fill="#45b7d1"/>
+  
+  <text x="400" y="88" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">A</text>
+  <text x="500" y="88" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">B</text>
+  <text x="600" y="88" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">C</text>
+  
+  <!-- First choice -->
+  <text x="50" y="180" font-family="Arial, sans-serif" font-size="20" fill="#333">First choice:</text>
+  
+  <line x1="400" y1="105" x2="300" y2="175" stroke="#ff6b6b" stroke-width="2"/>
+  <line x1="500" y1="105" x2="500" y2="175" stroke="#4ecdc4" stroke-width="2"/>
+  <line x1="600" y1="105" x2="700" y2="175" stroke="#45b7d1" stroke-width="2"/>
+  
+  <circle cx="300" cy="200" r="25" fill="#ff6b6b"/>
+  <circle cx="500" cy="200" r="25" fill="#4ecdc4"/>
+  <circle cx="700" cy="200" r="25" fill="#45b7d1"/>
+  
+  <text x="300" y="208" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">A</text>
+  <text x="500" y="208" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">B</text>
+  <text x="700" y="208" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">C</text>
+  
+  <text x="500" y="250" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#333">3 options to choose first ball</text>
+  
+  <!-- Second choice -->
+  <text x="50" y="300" font-family="Arial, sans-serif" font-size="20" fill="#333">Second choice:</text>
+  
+  <line x1="300" y1="225" x2="250" y2="295" stroke="#4ecdc4" stroke-width="2"/>
+  <line x1="300" y1="225" x2="350" y2="295" stroke="#45b7d1" stroke-width="2"/>
+  
+  <line x1="500" y1="225" x2="450" y2="295" stroke="#ff6b6b" stroke-width="2"/>
+  <line x1="500" y1="225" x2="550" y2="295" stroke="#45b7d1" stroke-width="2"/>
+  
+  <line x1="700" y1="225" x2="650" y2="295" stroke="#ff6b6b" stroke-width="2"/>
+  <line x1="700" y1="225" x2="750" y2="295" stroke="#4ecdc4" stroke-width="2"/>
+  
+  <circle cx="250" cy="320" r="25" fill="#4ecdc4"/>
+  <circle cx="350" cy="320" r="25" fill="#45b7d1"/>
+  <circle cx="450" cy="320" r="25" fill="#ff6b6b"/>
+  <circle cx="550" cy="320" r="25" fill="#45b7d1"/>
+  <circle cx="650" cy="320" r="25" fill="#ff6b6b"/>
+  <circle cx="750" cy="320" r="25" fill="#4ecdc4"/>
+  
+  <text x="250" y="328" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">B</text>
+  <text x="350" y="328" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">C</text>
+  <text x="450" y="328" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">A</text>
+  <text x="550" y="328" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">C</text>
+  <text x="650" y="328" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">A</text>
+  <text x="750" y="328" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">B</text>
+  
+  <text x="500" y="370" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#333">2 options to choose second ball</text>
+  
+  <!-- Third choice -->
+  <text x="50" y="420" font-family="Arial, sans-serif" font-size="20" fill="#333">Third choice:</text>
+  
+  <line x1="250" y1="345" x2="250" y2="415" stroke="#45b7d1" stroke-width="2"/>
+  <line x1="350" y1="345" x2="350" y2="415" stroke="#4ecdc4" stroke-width="2"/>
+  <line x1="450" y1="345" x2="450" y2="415" stroke="#45b7d1" stroke-width="2"/>
+  <line x1="550" y1="345" x2="550" y2="415" stroke="#ff6b6b" stroke-width="2"/>
+  <line x1="650" y1="345" x2="650" y2="415" stroke="#4ecdc4" stroke-width="2"/>
+  <line x1="750" y1="345" x2="750" y2="415" stroke="#ff6b6b" stroke-width="2"/>
+  
+  <circle cx="250" cy="440" r="25" fill="#45b7d1"/>
+  <circle cx="350" cy="440" r="25" fill="#4ecdc4"/>
+  <circle cx="450" cy="440" r="25" fill="#45b7d1"/>
+  <circle cx="550" cy="440" r="25" fill="#ff6b6b"/>
+  <circle cx="650" cy="440" r="25" fill="#4ecdc4"/>
+  <circle cx="750" cy="440" r="25" fill="#ff6b6b"/>
+  
+  <text x="250" y="448" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">C</text>
+  <text x="350" y="448" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">B</text>
+  <text x="450" y="448" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">C</text>
+  <text x="550" y="448" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">A</text>
+  <text x="650" y="448" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">B</text>
+  <text x="750" y="448" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">A</text>
+  
+  <text x="500" y="490" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#333">1 option left for the last ball</text>
+  
+  <!-- Final permutations -->
+  <text x="50" y="540" font-family="Arial, sans-serif" font-size="20" fill="#333">Final permutations:</text>
+  
+  <text x="250" y="540" font-family="Arial, sans-serif" font-size="16" fill="#333">ABC</text>
+  <text x="350" y="540" font-family="Arial, sans-serif" font-size="16" fill="#333">ACB</text>
+  <text x="450" y="540" font-family="Arial, sans-serif" font-size="16" fill="#333">BAC</text>
+  <text x="550" y="540" font-family="Arial, sans-serif" font-size="16" fill="#333">BCA</text>
+  <text x="650" y="540" font-family="Arial, sans-serif" font-size="16" fill="#333">CAB</text>
+  <text x="750" y="540" font-family="Arial, sans-serif" font-size="16" fill="#333">CBA</text>
+  
+  <!-- Formula -->
+  <text x="400" y="590" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#333">3! = 3 × 2 × 1 = 6 total permutations</text>
+</svg>`,
         explanation:``,
         links:[
             {text:``,url:``},

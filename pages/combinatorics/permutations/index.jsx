@@ -7,11 +7,63 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
+import { scenariosData } from '@/app/api/db/diagrams/combinatorics/scenarios'
+import GenericTable from '@/app/components/generic-table/GenericTable'
 
 
 
 export async function getStaticProps(){
 
+  const permutationsScenariosTableData = {
+    tableTitle: "Permutation Scenarios",
+    rows: [
+      {
+        "Scenario": "[Full permutation](!/combinatorics/permutations#full)",
+        "Order matters?": "Yes",
+        "Repetition?": "No",
+        "Identical items?": "No",
+        "Arrangement type": "Linear",
+        "Formula": "$n!$",
+        "Example": "Arrange 6 books in a row"
+      },
+      {
+        "Scenario": "[Partial permutation](!/combinatorics/permutations#without)",
+        "Order matters?": "Yes",
+        "Repetition?": "No",
+        "Identical items?": "No",
+        "Arrangement type": "Linear",
+        "Formula": "$\\frac{n!}{(n-r)!}$",
+        "Example": "Arrange 3 of 10 runners"
+      },
+      {
+        "Scenario": "[Permutation with repetition](!/combinatorics/permutations#with)",
+        "Order matters?": "Yes",
+        "Repetition?": "Yes",
+        "Identical items?": "No",
+        "Arrangement type": "Linear",
+        "Formula": "$n^r$",
+        "Example": "4-digit PIN code"
+      },
+      {
+        "Scenario": "[Permutation with identical items](!/combinatorics/permutations#identical)",
+        "Order matters?": "Yes",
+        "Repetition?": "N/A",
+        "Identical items?": "Yes",
+        "Arrangement type": "Linear",
+        "Formula": "$\\frac{n!}{n_1! \\, n_2! \\dots n_k!}$",
+        "Example": "Rearrange \"BALLOON\""
+      },
+      {
+        "Scenario": "[Circular permutation](!/combinatorics/permutations#circular)",
+        "Order matters?": "Yes",
+        "Repetition?": "No",
+        "Identical items?": "No",
+        "Arrangement type": "Circular",
+        "Formula": "$(n-1)!$",
+        "Example": "Seat 5 people around a table"
+      }
+    ]
+  };
 
   const decision=`To choose the correct permutation type, follow the decision tree by answering three key questions in order:
 
@@ -84,21 +136,237 @@ The table shows these three parameters as columns, making it easy to match your 
     </table>
 </body>
 </html>`
+
+const fullPermutationTable=`<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <table style="border-collapse: collapse; width: 100%; background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+        <thead>
+            <tr>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: left; font-weight: bold;">Property</th>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: center; font-weight: bold;">Full Permutation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Use all items</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Order matters</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Identical items</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #e74c3c; font-size: 18px; font-weight: bold;">✗</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Repetitions</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #e74c3c; font-size: 18px; font-weight: bold;">✗</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Linear arrangement</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+
+`
+
+const identicalTable=`
+  <!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <table style="border-collapse: collapse; width: 100%; background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+        <thead>
+            <tr>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: left; font-weight: bold;">Property</th>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: center; font-weight: bold;">Permutation with Identical Items</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Use all items</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Order matters</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Identical items</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Repetitions</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #e74c3c; font-size: 18px; font-weight: bold;">✗</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Linear arrangement</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+`
+
+const partialWithoutTable=`
+  <!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <table style="border-collapse: collapse; width: 100%; background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+        <thead>
+            <tr>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: left; font-weight: bold;">Property</th>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: center; font-weight: bold;">Partial Permutation without Repetition</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Use all items</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #e74c3c; font-size: 18px; font-weight: bold;">✗</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Order matters</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Identical items</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #e74c3c; font-size: 18px; font-weight: bold;">✗</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Repetitions</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #e74c3c; font-size: 18px; font-weight: bold;">✗</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Linear arrangement</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+`
+
+const permutationWithRepetitionTable=`
+  <!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <table style="border-collapse: collapse; width: 100%; background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+        <thead>
+            <tr>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: left; font-weight: bold;">Property</th>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: center; font-weight: bold;">Permutation with Repetition</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Use all items</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Order matters</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Identical items</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #e74c3c; font-size: 18px; font-weight: bold;">✗</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Repetitions</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Linear arrangement</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+`
+
+const circularTable=`
+  <!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <table style="border-collapse: collapse; width: 100%; background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+        <thead>
+            <tr>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: left; font-weight: bold;">Property</th>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: center; font-weight: bold;">Circular Permutation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Use all items</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Order matters</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Identical items</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #e74c3c; font-size: 18px; font-weight: bold;">✗</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Repetitions</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #e74c3c; font-size: 18px; font-weight: bold;">✗</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Linear arrangement</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #e74c3c; font-size: 18px; font-weight: bold;">✗</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+`
     
   const sectionsContent={
 
     full:{
       title:`Permutation (Full)`,
       content:``,
-      before:``,
+      before:`**Full Permutation** applies when you arrange all distinct items in a specific order with no repetitions allowed. 
+      
+      `,
       after:``,
+      between:`
+      **Full Permutation Examples**:
+Arranging all books in your collection on a shelf
+Determining order for all team members in a lineup
+Organizing all presentation topics in sequence
+Scheduling all planned meetings in order
+Arranging all menu courses for dinner
+Sequencing all workflow steps in a process
+Ordering all contest participants for judging
+Organizing all files in a directory structure
+
+`,
   
   
     },
-    with:{
-      title:`Permutation with Repetition`,
+    identical:{
+      title:`Permutation with Identical Items`,
       content:``,
-      before:``,
+      before:`**Permutation with Identical Items** applies when arranging all items where some identical elements appear multiple times in your collection. Classic examples include arranging all letters in words like "MISSISSIPPI" or organizing all colored balls when you have multiple balls of the same color.
+      
+      `,
       after:``,
   
     },
@@ -107,25 +375,94 @@ The table shows these three parameters as columns, making it easy to match your 
   
       title:`Partial Permutation without Repetition`,
       content:``,
-      before:``,
+      before:`**Partial Permutation without Repetition** applies when selecting and arranging only some items from a larger collection, with all items being distinct. Classic examples include choosing and ordering contestants from a group or selecting and arranging books from a library shelf.
+      
+      `,
       after:``,
   
     },
     circular:{
       title:`Circular Permutation`,
       content:``,
-      before:``,
+      before:`**Circular Permutation** applies when arranging items around a circle where rotations are considered identical arrangements. Classic examples include seating people around a round table or arranging objects in a circular pattern.
+      
+      `,
       after:``,
   
     },
 
 
-    obj5:{
+    with:{
   
-      title:``,
+      title:`Permutation with Repetition`,
       content:``,
-      before:``,
+      before:`**Permutation with Repetition** applies when arranging items where you can reuse the same element multiple times during the arrangement process. Classic examples include creating PIN codes where digits can repeat, or forming passwords where letters can be used multiple times.
+      
+      `,
       after:``,
+  
+    },
+    types:{
+  
+      title:`Types of Permutations`,
+      content:``,
+      before:`Although in all types of permutations the order of arrangement matters, the key differences between them arise from other considerations: Can items be repeated? Are some items identical? Is the arrangement linear or circular? The table below summarizes these distinctions, showing how different scenarios lead to different counting formulas.
+
+`,
+      after:`
+
+By addressing these additional questions, we can classify permutations into several types, each with its own counting method. Understanding these distinctions helps in correctly applying the appropriate formula for a given arrangement problem.
+`,
+  
+    },
+    logic:{
+  
+      title:`The Logic behind permutations`,
+      content:``,
+      before:`In combinatorics, we distinguish between several [types](!/combinatorics/permutations#types) of permutations based on different criteria, but they all share one key property: in every type, the order of arrangement matters ( and that is exactly what makes the difference between [permutations and variations](!/combinatorics#permutations_vs_combinations)).
+In all different scenarios, the mechanism for creating a permutation is similar, and it is important to understand it.
+When creating an arrangement, we must make two decisions:
+1. Which item to pick?
+2. Where to place it in the arrangement?
+
+Let us examine the simplest case. Imagine we need to arrange $n$ different items (all distinct) in a row, without repetition. We can break it down into steps:
+
+ **Step 1:** Choose an item for the first position. There are $n$ options.
+ **Step 2:** Choose an item for the second position. Now there are $n-1$ options.
+ **Step 3:** Choose an item for the third position. Now there are $n-2$ options.
+ … and so on, until
+ **Step $n$:** Only one item remains, so there is just 1 option.
+
+Each step reduces the number of choices (since repetition is not allowed). Because we must make all these choices in sequence, we apply the **multiplication principle**.
+
+Thus, to calculate the total number of permutations, we multiply:
+
+$n \\times (n-1) \\times (n-2) \\times \\dots \\times 1,$
+
+which is the definition of a factorial.
+
+For $n$ distinct objects, the number of permutations is:
+
+$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$
+
+**To summarize:**
+
+* We start with $n$ options.
+* Each choice reduces the number of remaining options by one.
+* We multiply the number of choices at each step.
+
+This gives us $n!$ total permutations.
+
+Here is an example of simple permutation: creating 3 letter string.
+
+`,
+      after:``,
+      between:`You can see how the principle explained before is applied here.
+      First, one of 3 letters is picked and for each scenario there are 2 different choices to select the second letter.Once the choice is made, only one letter left.     
+      
+      The result : $3\\times 2 \\times 1 = 6 (n!)$
+
+      `,
   
     }
   
@@ -149,43 +486,104 @@ Mastering these permutation types gives you the tools to solve ordering problems
         sectionsContent,
         introContent,
         permutationsTable,
-        permutationsDiagram
+        permutationsDiagram,
+        fullPermutationTable,
+        identicalTable,
+        permutationsScenariosTableData,
+        partialWithoutTable,
+        permutationWithRepetitionTable,
+        circularTable
         
       }
     }
   }
   
 
-export default function PermutationsPage({sectionsContent,introContent,permutationsDiagram,
-  permutationsTable}) {
+export default function PermutationsPage({sectionsContent,introContent,permutationsDiagram,fullPermutationTable,
+  identicalTable,permutationsTable ,permutationsScenariosTableData,partialWithoutTable,
+  permutationWithRepetitionTable,circularTable}) {
 
   
   const permutationsSections=[
+    {
+        id:'logic',
+        title:sectionsContent.logic.title,
+        link:'',
+        content:[
+          sectionsContent.logic.before,
+          scenariosData["Permutations of ABC: STEP-by-Step"].svg,
+          sectionsContent.logic.between,
+          scenariosData["Permutations (Full)"].svg
+          
+        ]
+    },
+   {
+        id:'types',
+        title:sectionsContent.types.title,
+        link:'',
+        content:[
+          sectionsContent.types.before,
+          <div style={{width:'90%',margin:'auto'}}>
+          <GenericTable
+                key={1}
+                tableData={permutationsScenariosTableData} theme='lightBlue'
+                cellFontSize={'14px'}
+                headerFontSize={'16px'}
+                />
+                </div>,
+                sectionsContent.types.after,
+        ]
+    },
     {
         id:'full',
         title:sectionsContent.full.title,
         link:'',
         content:[
           // <div style={{margin:'auto',width:'80%'}} dangerouslySetInnerHTML={{ __html: permutationsTable }} key="table" />
+          sectionsContent.full.before,
+        <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: fullPermutationTable }} key="table" />,
+      sectionsContent.full.between,
+      
         ]
     },
     {
-        id:'with',
-        title:sectionsContent.with.title,
+        id:'identical',
+        title:sectionsContent.identical.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.identical.before,
+          <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: identicalTable }} key="table" />,
+        ]
     },
     {
         id:'without',
         title:sectionsContent.without.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.without.before,
+          <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: partialWithoutTable }} key="table" />,
+
+        ]
     },
+      {
+    id:'with',
+    title:sectionsContent.with.title,
+    link:'',
+    content:[
+      sectionsContent.with.before,
+      <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html:permutationWithRepetitionTable }} key="table" />,
+
+    ]
+},
     {
       id:'circular',
       title:sectionsContent.circular.title,
       link:'',
-      content:''
+      content:[
+        sectionsContent.circular.before,
+        <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: circularTable }} key="table" />,
+
+      ]
   },
 //   {
 //     id:'',
