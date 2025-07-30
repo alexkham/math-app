@@ -34,7 +34,7 @@ const SectionTableOfContents = ({
   useEffect(() => {
     // Check for proper navLinks object structure
     if (navLinks && navLinks.links && Array.isArray(navLinks.links) && navLinks.links.length > 0) {
-      console.log('USING PROVIDED LINKS FROM PROPS');
+      // console.log('USING PROVIDED LINKS FROM PROPS');
       setUseProvidedLinks(true);
       
       // Filter and set the links

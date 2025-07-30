@@ -345,17 +345,17 @@ const circularTable=`
       before:`**Full Permutation** applies when you arrange all distinct items in a specific order with no repetitions allowed. 
       
       `,
-      after:``,
+      after:`
+      The intuition and logic we use for this kind of permutation has been explained pretty well in previous [section](!/combinatorics/permutations#logic) and it works basically for all [types](!/combinatorics/permutations#types) of permutations.
+      Just in case of full permutations (unlike in other [types](!/combinatorics/permutations#types)) no further modifications needed and the calculation is simple. 
+      The number of possible results is calculated by the formula :
+       @academic[example:$n!$\n Product of all **integers** [from](!/algebra) $n$ down to $1$.]@
+       Where $n$ is the number of items to arrange. 
+
+      `,
       between:`
-      **Full Permutation Examples**:
-Arranging all books in your collection on a shelf
-Determining order for all team members in a lineup
-Organizing all presentation topics in sequence
-Scheduling all planned meetings in order
-Arranging all menu courses for dinner
-Sequencing all workflow steps in a process
-Ordering all contest participants for judging
-Organizing all files in a directory structure
+     **Full Permutation — Examples**:
+Arranging all books on a shelf, deciding the lineup of all players in a team, organizing all photos in an album, setting the order of speakers in a presentation, ordering all tasks in a workflow, ranking all competitors in a contest, scheduling all meetings in a day, sorting all files in a folder.
 
 `,
   
@@ -367,7 +367,13 @@ Organizing all files in a directory structure
       before:`**Permutation with Identical Items** applies when arranging all items where some identical elements appear multiple times in your collection. Classic examples include arranging all letters in words like "MISSISSIPPI" or organizing all colored balls when you have multiple balls of the same color.
       
       `,
-      after:``,
+      after:`
+       To calculate the number of possible arrangements :
+      @academic[example:$\\binom{n}{n_{1},n_{2},\\dots,n_{k}} = \\frac{n!}{n_{1}!n_{2}!\\dots n_{k}!}$]@ 
+      Where multinomial coefficient: counts distinct arrangements of $n$ items split into groups of sizes $n_{1},n_{2},\\dots,n_{k}$.`,
+      between:`
+      **Permutation with Identical Items — Examples**:
+Rearranging letters in the word “BALLOON,” organizing colored balls where some colors repeat, sequencing identical files and unique ones in storage, arranging identical chairs and distinct tables in a layout, ordering repeated ingredients in a recipe list.`,
   
     },
   
@@ -378,7 +384,14 @@ Organizing all files in a directory structure
       before:`**Partial Permutation without Repetition** applies when selecting and arranging only some items from a larger collection, with all items being distinct. Classic examples include choosing and ordering contestants from a group or selecting and arranging books from a library shelf.
       
       `,
-      after:``,
+      after:`
+      The number of arrangements for Partial Permutation without Repetition is :
+       @academic[example:$\\frac{n!}{(n-r)!}$]@ 
+      Where $n!$ counts all arrangements, dividing by $(n-r)!$ removes the unused positions.`,
+      between:`
+      **Partial Permutation (without repetition) — Examples**:
+Selecting and ordering finalists from a group of contestants, arranging a subset of books on a display, picking and sequencing players for a relay team, choosing and ordering questions for an interview, organizing a limited set of tasks for a project phase.
+      `,
   
     },
     circular:{
@@ -387,7 +400,13 @@ Organizing all files in a directory structure
       before:`**Circular Permutation** applies when arranging items around a circle where rotations are considered identical arrangements. Classic examples include seating people around a round table or arranging objects in a circular pattern.
       
       `,
-      after:``,
+      after:`
+      The total number of possible circular arrangements is:
+      @academic[example:$(n-1)!$]@ 
+      If $n$ is a total number of items to arrange then fixing one item reduces circular arrangements to $(n-1)!$ linear ones.`,
+      between:`
+      **Circular Permutation — Examples**:
+Arranging guests around a round table, seating participants in a circular panel, ordering beads in a circular necklace, organizing tasks in a repeating cycle, setting positions for players in a circular game arrangement.`,
   
     },
 
@@ -399,7 +418,15 @@ Organizing all files in a directory structure
       before:`**Permutation with Repetition** applies when arranging items where you can reuse the same element multiple times during the arrangement process. Classic examples include creating PIN codes where digits can repeat, or forming passwords where letters can be used multiple times.
       
       `,
-      after:``,
+      after:`
+      Total number of permutations with repetitions possible and all items used is:
+     @academic[example:$n^{r}$]@
+     Where each of the $r$ positions can be filled in $n$ ways.
+`,
+between:`
+**Permutation with Repetition — Examples**:
+Generating PIN codes from digits, creating letter sequences for passwords, arranging beads in a bracelet where colors can repeat, composing license plate numbers, assigning seats with multiple people allowed in the same category.
+`,
   
     },
     types:{
@@ -431,9 +458,9 @@ Let us examine the simplest case. Imagine we need to arrange $n$ different items
  **Step 2:** Choose an item for the second position. Now there are $n-1$ options.
  **Step 3:** Choose an item for the third position. Now there are $n-2$ options.
  … and so on, until
- **Step $n$:** Only one item remains, so there is just 1 option.
+ **Step** $n$: Only one item remains, so there is just 1 option.
 
-Each step reduces the number of choices (since repetition is not allowed). Because we must make all these choices in sequence, we apply the **multiplication principle**.
+Each step reduces the number of choices (since repetition is not allowed). Because we must make all these choices in sequence, we apply the [multiplication principle](!/combinatorics#multi).
 
 Thus, to calculate the total number of permutations, we multiply:
 
@@ -442,9 +469,7 @@ $n \\times (n-1) \\times (n-2) \\times \\dots \\times 1,$
 which is the definition of a factorial.
 
 For $n$ distinct objects, the number of permutations is:
-
-$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$
-
+@academic[example:$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$]@
 **To summarize:**
 
 * We start with $n$ options.
@@ -460,7 +485,9 @@ Here is an example of simple permutation: creating 3 letter string.
       between:`You can see how the principle explained before is applied here.
       First, one of 3 letters is picked and for each scenario there are 2 different choices to select the second letter.Once the choice is made, only one letter left.     
       
-      The result : $3\\times 2 \\times 1 = 6 (n!)$
+      The result is:
+      @academic[example:$3\\times 2 \\times 1 = 6 (n!)$]@
+      Where $n$ is total number of items.
 
       `,
   
@@ -543,6 +570,7 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
           sectionsContent.full.before,
         <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: fullPermutationTable }} key="table" />,
       sectionsContent.full.between,
+      sectionsContent.full.after,
       
         ]
     },
@@ -553,6 +581,8 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
         content:[
           sectionsContent.identical.before,
           <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: identicalTable }} key="table" />,
+          sectionsContent.identical.between,
+          sectionsContent.identical.after,
         ]
     },
     {
@@ -562,6 +592,8 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
         content:[
           sectionsContent.without.before,
           <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: partialWithoutTable }} key="table" />,
+          sectionsContent.without.between,
+          sectionsContent.without.after,
 
         ]
     },
@@ -572,6 +604,8 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
     content:[
       sectionsContent.with.before,
       <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html:permutationWithRepetitionTable }} key="table" />,
+      sectionsContent.with.between,
+      sectionsContent.with.after,
 
     ]
 },
@@ -582,6 +616,8 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
       content:[
         sectionsContent.circular.before,
         <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: circularTable }} key="table" />,
+        sectionsContent.circular.between,
+        sectionsContent.circular.after,
 
       ]
   },
