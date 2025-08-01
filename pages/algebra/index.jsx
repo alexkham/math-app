@@ -29,8 +29,8 @@ export async function getStaticProps() {
 /*nav links try  */
 const currentPath = '/algebra';
   
-const childrenNav = await fetchSiteNavLinks(currentPath, 'children');
-const siblingsNav = await fetchSiteNavLinks(currentPath, 'siblings');
+// const childrenNav = await fetchSiteNavLinks(currentPath, 'children');
+// const siblingsNav = await fetchSiteNavLinks(currentPath, 'siblings');
 
 
 
@@ -191,7 +191,7 @@ The skills developed in algebra, such as **logical reasoning**, **abstraction**,
       algebraTermsList,
       definitionsCategoryExplanations,
       formulasCategoryExplanations,
-      childrenNav,
+      // childrenNav,
       tools
     }
   }
@@ -207,7 +207,7 @@ export default function AlgebraPage({
   algebraTermsList,
   definitionsCategoryExplanations,
   formulasCategoryExplanations,
-  childrenNav,
+  // childrenNav,
   tools
 }) {
 
@@ -498,12 +498,18 @@ At the center, you have three variables (x, y, z) connected by the equation $x^y
        secondaryNavTitle="More in this Section" 
        navLinks={childrenNav}/> */}
 
-       <SectionTableOfContents2
+       {/* <SectionTableOfContents2
        sections={algebraSections}
        showSecondaryNav={true}
        secondaryNavMode="children"  // or "siblings"
        secondaryNavTitle="More in this Section" 
-       navLinks={childrenNav}/>
+       navLinks={childrenNav}/> */}
+      
+       <SectionTableOfContents 
+  sections={algebraSections}
+  showSecondaryNav={true}
+  secondaryNavMode="children"
+  secondaryNavTitle="More in this Section" />
 
         {/* <SectionTableOfContents sections={algebraSections}
          showSecondaryNav={true}

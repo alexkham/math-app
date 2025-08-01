@@ -105,7 +105,8 @@ export function StrongComposition({ explanations }) {
       r: rNum,
       result: compositionResult,
       formula: '$C(' + numerator + ',' + denominator + ') = \\frac{' + numerator + '!}{' + denominator + '! \\times ' + (numerator - denominator) + '!}$',
-      calculation: numeratorFactorial.toLocaleString() + ' / (' + denominatorFactorial.toLocaleString() + ' × ' + remainderFactorial.toLocaleString() + ')'
+      // calculation: numeratorFactorial.toLocaleString() + ' / (' + denominatorFactorial.toLocaleString() + ' × ' + remainderFactorial.toLocaleString() + ')'
+      calculation: '$\\frac{' + numeratorFactorial.toLocaleString() + '}{' + denominatorFactorial.toLocaleString() + ' \\times ' + remainderFactorial.toLocaleString() + '}$'
     })
   }
 

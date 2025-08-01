@@ -71,8 +71,10 @@ export function PermutationWithoutRepetition({ explanations }) {
       n: nNum,
       r: rNum,
       result: permutationResult,
-      formula: `${nNum}! / (${nNum}-${rNum})! = ${nNum}! / ${nNum - rNum}!`,
-      calculation: `${nFactorial.toLocaleString()} / ${nMinusRFactorial.toLocaleString()}`
+      formula: `$\\frac{${nNum}!}{(${nNum}-${rNum})!} = \\frac{${nNum}!}{${nNum - rNum}!}$`,
+      calculation: `$\\frac{${nFactorial.toLocaleString()}}{${nMinusRFactorial.toLocaleString()}}$`
+      // formula: `${nNum}! / (${nNum}-${rNum})! = ${nNum}! / ${nNum - rNum}!`,
+      // calculation: `${nFactorial.toLocaleString()} / ${nMinusRFactorial.toLocaleString()}`
     })
   }
 
@@ -114,7 +116,7 @@ export function PermutationWithoutRepetition({ explanations }) {
             color: '#333',
             marginBottom: '30px',
             fontSize: '24px'
-          }}>Permutation Without Repetition</h2>
+          }}>Partial Permutation Without Repetition</h2>
 
           <div style={{ marginBottom: '25px' }}>
             <label style={{

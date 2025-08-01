@@ -113,7 +113,8 @@ export function PartitionIntoGroups({ explanations }) {
       sizes: sizes,
       result: multinomialResult,
       formula: '$\\binom{' + nNum + '}{' + sizesStr + '} = \\frac{' + nNum + '!}{' + denominatorStr + '}$',
-      calculation: nFactorial.toLocaleString() + ' / (' + factorials.map(f => f.toLocaleString()).join(' × ') + ')'
+      // calculation: nFactorial.toLocaleString() + ' / (' + factorials.map(f => f.toLocaleString()).join(' × ') + ')'
+      calculation: '$\\frac{' + nFactorial.toLocaleString() + '}{' + factorials.map(f => f.toLocaleString()).join(' \\times ') + '}$'
     })
   }
 
@@ -257,7 +258,7 @@ export function PartitionIntoGroups({ explanations }) {
             <button
               onClick={addGroup}
               style={{
-                background: '#28a745',
+                background: '#17a2b8',
                 color: 'white',
                 border: 'none',
                 borderRadius: '6px',

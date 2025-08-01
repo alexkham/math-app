@@ -3858,7 +3858,7 @@
 import { useState, useEffect } from 'react'
 import { processContent } from '@/app/utils/contentProcessor'
 
-export function PermutationWithRepetition({ explanations }) {
+export function PermutationWithIdentical({ explanations }) {
   const [totalObjects, setTotalObjects] = useState('')
   const [repetitions, setRepetitions] = useState([''])
   const [result, setResult] = useState(null)
@@ -3967,7 +3967,9 @@ export function PermutationWithRepetition({ explanations }) {
       totalObjects: n,
       repetitions: reps,
       result: result,
-      formula: `${n}! / (${reps.join('! × ')}!)`
+      // formula: `${n}! / (${reps.join('! × ')}!)`
+    formula: `$\\frac{${n}!}{${reps.map(r => `${r}!`).join(' \\times ')}}$`
+
     })
   }
 
@@ -4009,7 +4011,7 @@ export function PermutationWithRepetition({ explanations }) {
             color: '#333',
             marginBottom: '30px',
             fontSize: '24px'
-          }}>Permutation with Repetition</h2>
+          }}>Permutation with Identical Items</h2>
 
           <div style={{ marginBottom: '25px' }}>
             <label style={{
@@ -4132,7 +4134,7 @@ export function PermutationWithRepetition({ explanations }) {
               onClick={addRepetitionField}
               style={{
                 padding: '8px 16px',
-                backgroundColor: '#28a745',
+                backgroundColor: '#17a2b8',
                 color: '#fff',
                 border: 'none',
                 borderRadius: '6px',
@@ -4175,14 +4177,14 @@ export function PermutationWithRepetition({ explanations }) {
 
           {result && !error && (
             <div style={{
-              backgroundColor: '#d4edda',
+              backgroundColor: '#e7f3ff',
               padding: '20px',
               borderRadius: '8px',
-              border: '1px solid #28a745'
+              border: '1px solid #17a2b8'
             }}>
               <h3 style={{
                 margin: '0 0 15px 0',
-                color: '#155724',
+                color: '#0c5460',
                 fontSize: '18px'
               }}>Result:</h3>
               
@@ -4231,7 +4233,7 @@ export function PermutationWithRepetition({ explanations }) {
             padding: '20px',
             borderRadius: '8px',
             marginBottom: '20px',
-            borderLeft: '4px solid #28a745'
+            borderLeft: '4px solid #17a2b8'
           }}>
             <div style={{
               margin: '0 0 10px 0',

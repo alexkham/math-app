@@ -220,7 +220,13 @@ graph TD
         scenario: '[Strong Composition](!/combinatorics/combinations#strong)',
         description: 'Allocation of n identical units into r labeled cells, requiring that every cell receives at least one unit, with only the distribution counts recorded.',
         essence: '[Combination](!/combinatorics/combinations)'
-      }
+      },
+      {
+        '#': '10',
+        scenario: '[Distribution into Cells](!/combinatorics/combinations#distribution)',
+        description: 'Assignment of each of n distinct elements to one of r labeled cells, producing a mapping of elements to specific cells.',
+        essence: '[Combination](!/combinatorics/combinations)'
+      },
     ]
   };
   
@@ -315,9 +321,9 @@ To summarize, whenever you see **“or”** you **add** disjoint counts; wheneve
         before:`In combinatorics, most counting problems can be classified into 9 basic templates or scenarios. Rather than approaching each problem as a unique puzzle, we can identify patterns and apply standardized methods. The following nine fundamental scenarios represent the core building blocks of combinatorial problem-solving. By recognizing which template applies to a given situation, we transform complex counting challenges into systematic applications of well-established formulas and techniques. This classification system not only simplifies problem-solving but also provides a structured framework for understanding the relationships between different types of combinatorial questions.
         `,
         after:`We may divide all those scenarios into two broad groups: [permutations](!/combinatorics/permutations) and [combinations](!/combinatorics/combinations).
-        **Scenarios** $1–4$ **(Permutations)**:
+        **Scenarios** $1–5$ **(Permutations)**:
          These all involve arrangements of elements where **order matters**.
-         **Scenarios** $5–9$ (Combinations):
+         **Scenarios** $6–10$ **(Combinations)**:
          These involve selections or groupings where order **does not matter** (or where only counts per category matter).
 
         These nine scenarios form the foundation of combinatorial analysis. Each template addresses specific constraints about order, repetition, and grouping that appear repeatedly across mathematical applications. Mastering the ability to recognize which scenario applies to a problem—whether we're dealing with arrangements versus selections, labeled versus unlabeled groups, or strict versus flexible distributions—is the key to efficient combinatorial problem-solving. As you encounter new counting problems, always begin by identifying the underlying scenario, as this will immediately guide you toward the appropriate mathematical tools and formulas needed for the solution.

@@ -224,7 +224,7 @@ export const scenariosData={
     },
 
     "Circular Permutation":{
-        svg:`<svg width="600" height="270" viewBox="0 0 600 270" xmlns="http://www.w3.org/2000/svg">
+        svg:`<svg width="900" height="670" style="margin-left:100px;" viewBox="0 0 600 270" xmlns="http://www.w3.org/2000/svg">
   <!-- LEFT SIDE: 2 items circular permutation -->
   <!-- Original 2 balls at top left -->
   <circle cx="50" cy="15" r="6" fill="#ff6b6b"/>
@@ -1114,8 +1114,218 @@ export const scenariosData={
             {text:``,url:``},
         ]
     },
-    "identity name":{
-        svg:``,
+    "Permutations of 3 with 2 Identical Items":{
+        svg:`<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333">
+    Permutations: All Different vs. Some Identical Items
+  </text>
+  
+  <!-- Left side: All different items -->
+  <text x="300" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c5aa0">
+    Case 1: All Different Items
+  </text>
+  <text x="300" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#666">
+    3! = 6 permutations
+  </text>
+  
+  <!-- Initial set for left side -->
+  <g transform="translate(200, 120)">
+    <text x="100" y="15" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Initial Set:</text>
+    <circle cx="50" cy="35" r="15" fill="#e53e3e"/>
+    <circle cx="100" cy="35" r="15" fill="#38a169"/>
+    <circle cx="150" cy="35" r="15" fill="#3182ce"/>
+  </g>
+  
+  <!-- Right side: Some identical items -->
+  <text x="900" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#c53030">
+    Case 2: Some Identical Items
+  </text>
+  <text x="900" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#666">
+    3!/2! = 3 permutations
+  </text>
+  
+  <!-- Initial set for right side -->
+  <g transform="translate(800, 120)">
+    <text x="100" y="15" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Initial Set:</text>
+    <circle cx="50" cy="35" r="15" fill="#e53e3e"/>
+    <circle cx="100" cy="35" r="15" fill="#e53e3e"/>
+    <circle cx="150" cy="35" r="15" fill="#3182ce"/>
+  </g>
+  
+  <!-- Vertical separator line -->
+  <line x1="600" y1="170" x2="600" y2="750" stroke="#ddd" stroke-width="2"/>
+  
+  <!-- Left side permutations (all different) -->
+  <!-- Permutation 1: RGB -->
+  <g transform="translate(80, 200)">
+    <circle cx="30" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="80" cy="30" r="20" fill="#38a169"/>
+    <circle cx="130" cy="30" r="20" fill="#3182ce"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">RGB</text>
+  </g>
+  
+  <!-- Permutation 2: RBG -->
+  <g transform="translate(80, 270)">
+    <circle cx="30" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="80" cy="30" r="20" fill="#3182ce"/>
+    <circle cx="130" cy="30" r="20" fill="#38a169"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">RBG</text>
+  </g>
+  
+  <!-- Permutation 3: GRB -->
+  <g transform="translate(80, 340)">
+    <circle cx="30" cy="30" r="20" fill="#38a169"/>
+    <circle cx="80" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="130" cy="30" r="20" fill="#3182ce"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">GRB</text>
+  </g>
+  
+  <!-- Permutation 4: GBR -->
+  <g transform="translate(80, 410)">
+    <circle cx="30" cy="30" r="20" fill="#38a169"/>
+    <circle cx="80" cy="30" r="20" fill="#3182ce"/>
+    <circle cx="130" cy="30" r="20" fill="#e53e3e"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">GBR</text>
+  </g>
+  
+  <!-- Permutation 5: BRG -->
+  <g transform="translate(80, 480)">
+    <circle cx="30" cy="30" r="20" fill="#3182ce"/>
+    <circle cx="80" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="130" cy="30" r="20" fill="#38a169"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">BRG</text>
+  </g>
+  
+  <!-- Permutation 6: BGR -->
+  <g transform="translate(80, 550)">
+    <circle cx="30" cy="30" r="20" fill="#3182ce"/>
+    <circle cx="80" cy="30" r="20" fill="#38a169"/>
+    <circle cx="130" cy="30" r="20" fill="#e53e3e"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">BGR</text>
+  </g>
+  
+  <!-- Right side permutations (with identical items) -->
+  <!-- Valid Permutation 1: RRB -->
+  <g transform="translate(680, 200)">
+    <circle cx="30" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="80" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="130" cy="30" r="20" fill="#3182ce"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">RRB</text>
+  </g>
+  
+  <!-- Canceled Permutation: RBR (same as RRB) -->
+  <g transform="translate(680, 270)">
+    <circle cx="30" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="80" cy="30" r="20" fill="#3182ce"/>
+    <circle cx="130" cy="30" r="20" fill="#e53e3e"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">RBR</text>
+    <line x1="30" y1="10" x2="130" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <line x1="130" y1="10" x2="30" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <text x="250" y="35" font-family="Arial, sans-serif" font-size="12" fill="#e53e3e" font-weight="bold">- Canceled</text>
+  </g>
+  
+  <!-- Valid Permutation 2: BRR -->
+  <g transform="translate(680, 340)">
+    <circle cx="30" cy="30" r="20" fill="#3182ce"/>
+    <circle cx="80" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="130" cy="30" r="20" fill="#e53e3e"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">BRR</text>
+  </g>
+  
+  <!-- Valid Permutation 3: RBR -->
+  <g transform="translate(680, 410)">
+    <circle cx="30" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="80" cy="30" r="20" fill="#3182ce"/>
+    <circle cx="130" cy="30" r="20" fill="#e53e3e"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">RBR</text>
+  </g>
+  
+  <!-- Canceled Permutation: BRR (duplicate) -->
+  <g transform="translate(680, 480)">
+    <circle cx="30" cy="30" r="20" fill="#3182ce"/>
+    <circle cx="80" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="130" cy="30" r="20" fill="#e53e3e"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">BRR</text>
+    <line x1="30" y1="10" x2="130" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <line x1="130" y1="10" x2="30" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <text x="250" y="35" font-family="Arial, sans-serif" font-size="12" fill="#e53e3e" font-weight="bold">- Canceled</text>
+  </g>
+  
+  <!-- Canceled Permutation: RRB (duplicate) -->
+  <g transform="translate(680, 550)">
+    <circle cx="30" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="80" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="130" cy="30" r="20" fill="#3182ce"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">RRB</text>
+    <line x1="30" y1="10" x2="130" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <line x1="130" y1="10" x2="30" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <text x="250" y="35" font-family="Arial, sans-serif" font-size="12" fill="#e53e3e" font-weight="bold">- Canceled</text>
+  </g>
+  
+  <!-- Explanation boxes -->
+  <rect x="50" y="620" width="500" height="120" fill="#e6f3ff" stroke="#3182ce" stroke-width="2" rx="8"/>
+  <text x="70" y="645" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c5aa0">
+    All Different Items:
+  </text>
+  <text x="70" y="665" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • Each ball is unique (Red, Green, Blue)
+  </text>
+  <text x="70" y="685" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • Every arrangement creates a distinct permutation
+  </text>
+  <text x="70" y="705" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • Formula: n! = 3! = 6 permutations
+  </text>
+  <text x="70" y="725" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • All 6 arrangements are counted
+  </text>
+  
+  <rect x="650" y="620" width="500" height="120" fill="#fed7d7" stroke="#e53e3e" stroke-width="2" rx="8"/>
+  <text x="670" y="645" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#c53030">
+    Some Identical Items:
+  </text>
+  <text x="670" y="665" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • Two red balls are identical, one blue ball is unique
+  </text>
+  <text x="670" y="685" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • Swapping identical red balls gives same arrangement
+  </text>
+  <text x="670" y="705" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • Formula: n!/k! = 3!/2! = 3 permutations
+  </text>
+  <text x="670" y="725" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • Red X marks duplicate arrangements
+  </text>
+  
+  <!-- Arrow showing the reduction -->
+  <path d="M 550 400 Q 600 370 650 400" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="600" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">
+    Identical items reduce
+  </text>
+  <text x="600" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">
+    total permutations
+  </text>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+  
+  <!-- Legend -->
+  <g transform="translate(50, 760)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Legend:</text>
+    <text x="80" y="0" font-family="Arial, sans-serif" font-size="12" fill="#333">Valid permutation (no marking)</text>
+    <line x1="250" y1="-8" x2="280" y2="8" stroke="#e53e3e" stroke-width="2"/>
+    <line x1="280" y1="-8" x2="250" y2="8" stroke="#e53e3e" stroke-width="2"/>
+    <text x="290" y="0" font-family="Arial, sans-serif" font-size="12" fill="#333">Duplicate arrangement - Canceled</text>
+  </g>
+</svg>`,
         explanation:``,
         links:[
             {text:``,url:``},
@@ -1123,8 +1333,224 @@ export const scenariosData={
             {text:``,url:``},
         ]
     },
-    "identity name":{
-        svg:``,
+    "Permutations of 3 with 3 Identical Items":{
+        svg:`<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333">
+    Permutations: All Different vs. Some Identical Items
+  </text>
+  
+  <!-- Left side: All different items -->
+  <text x="300" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c5aa0">
+    Case 1: All Different Items
+  </text>
+  <text x="300" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#666">
+    3! = 6 permutations
+  </text>
+  
+  <!-- Initial set for left side -->
+  <g transform="translate(200, 120)">
+    <text x="100" y="15" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Initial Set:</text>
+    <circle cx="50" cy="35" r="15" fill="#e53e3e"/>
+    <circle cx="100" cy="35" r="15" fill="#38a169"/>
+    <circle cx="150" cy="35" r="15" fill="#3182ce"/>
+  </g>
+  
+  <!-- Right side: Some identical items -->
+  <text x="900" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#c53030">
+    Case 2: All Identical Items
+  </text>
+  <text x="900" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#666">
+    3!/3! = 1 permutation
+  </text>
+  
+  <!-- Initial set for right side -->
+  <g transform="translate(800, 120)">
+    <text x="100" y="15" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Initial Set:</text>
+    <circle cx="50" cy="35" r="15" fill="#e53e3e"/>
+    <circle cx="100" cy="35" r="15" fill="#e53e3e"/>
+    <circle cx="150" cy="35" r="15" fill="#e53e3e"/>
+  </g>
+  
+  <!-- Vertical separator line -->
+  <line x1="600" y1="170" x2="600" y2="750" stroke="#ddd" stroke-width="2"/>
+  
+  <!-- Left side permutations (all different) -->
+  <!-- Permutation 1: RGB -->
+  <g transform="translate(80, 200)">
+    <circle cx="30" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="80" cy="30" r="20" fill="#38a169"/>
+    <circle cx="130" cy="30" r="20" fill="#3182ce"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">RGB</text>
+  </g>
+  
+  <!-- Permutation 2: RBG -->
+  <g transform="translate(80, 270)">
+    <circle cx="30" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="80" cy="30" r="20" fill="#3182ce"/>
+    <circle cx="130" cy="30" r="20" fill="#38a169"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">RBG</text>
+  </g>
+  
+  <!-- Permutation 3: GRB -->
+  <g transform="translate(80, 340)">
+    <circle cx="30" cy="30" r="20" fill="#38a169"/>
+    <circle cx="80" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="130" cy="30" r="20" fill="#3182ce"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">GRB</text>
+  </g>
+  
+  <!-- Permutation 4: GBR -->
+  <g transform="translate(80, 410)">
+    <circle cx="30" cy="30" r="20" fill="#38a169"/>
+    <circle cx="80" cy="30" r="20" fill="#3182ce"/>
+    <circle cx="130" cy="30" r="20" fill="#e53e3e"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">GBR</text>
+  </g>
+  
+  <!-- Permutation 5: BRG -->
+  <g transform="translate(80, 480)">
+    <circle cx="30" cy="30" r="20" fill="#3182ce"/>
+    <circle cx="80" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="130" cy="30" r="20" fill="#38a169"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">BRG</text>
+  </g>
+  
+  <!-- Permutation 6: BGR -->
+  <g transform="translate(80, 550)">
+    <circle cx="30" cy="30" r="20" fill="#3182ce"/>
+    <circle cx="80" cy="30" r="20" fill="#38a169"/>
+    <circle cx="130" cy="30" r="20" fill="#e53e3e"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">BGR</text>
+  </g>
+  
+  <!-- Right side permutations (with all identical items) -->
+  <!-- Valid Permutation: RRR -->
+  <g transform="translate(680, 200)">
+    <circle cx="30" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="80" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="130" cy="30" r="20" fill="#e53e3e"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">RRR</text>
+  </g>
+  
+  <!-- Canceled Permutation: RRR (same as above) -->
+  <g transform="translate(680, 270)">
+    <circle cx="30" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="80" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="130" cy="30" r="20" fill="#e53e3e"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">RRR</text>
+    <line x1="30" y1="10" x2="130" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <line x1="130" y1="10" x2="30" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <text x="250" y="35" font-family="Arial, sans-serif" font-size="12" fill="#e53e3e" font-weight="bold">- Canceled</text>
+  </g>
+  
+  <!-- Canceled Permutation: RRR (same as above) -->
+  <g transform="translate(680, 340)">
+    <circle cx="30" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="80" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="130" cy="30" r="20" fill="#e53e3e"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">RRR</text>
+    <line x1="30" y1="10" x2="130" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <line x1="130" y1="10" x2="30" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <text x="250" y="35" font-family="Arial, sans-serif" font-size="12" fill="#e53e3e" font-weight="bold">- Canceled</text>
+  </g>
+  
+  <!-- Canceled Permutation: RRR (same as above) -->
+  <g transform="translate(680, 410)">
+    <circle cx="30" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="80" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="130" cy="30" r="20" fill="#e53e3e"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">RRR</text>
+    <line x1="30" y1="10" x2="130" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <line x1="130" y1="10" x2="30" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <text x="250" y="35" font-family="Arial, sans-serif" font-size="12" fill="#e53e3e" font-weight="bold">- Canceled</text>
+  </g>
+  
+  <!-- Canceled Permutation: RRR (same as above) -->
+  <g transform="translate(680, 480)">
+    <circle cx="30" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="80" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="130" cy="30" r="20" fill="#e53e3e"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">RRR</text>
+    <line x1="30" y1="10" x2="130" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <line x1="130" y1="10" x2="30" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <text x="250" y="35" font-family="Arial, sans-serif" font-size="12" fill="#e53e3e" font-weight="bold">- Canceled</text>
+  </g>
+  
+  <!-- Canceled Permutation: RRR (same as above) -->
+  <g transform="translate(680, 550)">
+    <circle cx="30" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="80" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="130" cy="30" r="20" fill="#e53e3e"/>
+    <text x="180" y="35" font-family="Arial, sans-serif" font-size="14" fill="#333">RRR</text>
+    <line x1="30" y1="10" x2="130" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <line x1="130" y1="10" x2="30" y2="50" stroke="#e53e3e" stroke-width="3"/>
+    <text x="250" y="35" font-family="Arial, sans-serif" font-size="12" fill="#e53e3e" font-weight="bold">- Canceled</text>
+  </g>
+  
+  <!-- Explanation boxes -->
+  <rect x="50" y="620" width="500" height="120" fill="#e6f3ff" stroke="#3182ce" stroke-width="2" rx="8"/>
+  <text x="70" y="645" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c5aa0">
+    All Different Items:
+  </text>
+  <text x="70" y="665" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • Each ball is unique (Red, Green, Blue)
+  </text>
+  <text x="70" y="685" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • Every arrangement creates a distinct permutation
+  </text>
+  <text x="70" y="705" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • Formula: n! = 3! = 6 permutations
+  </text>
+  <text x="70" y="725" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • All 6 arrangements are counted
+  </text>
+  
+  <rect x="650" y="620" width="500" height="120" fill="#fed7d7" stroke="#e53e3e" stroke-width="2" rx="8"/>
+  <text x="670" y="645" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#c53030">
+    All Identical Items:
+  </text>
+  <text x="670" y="665" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • All three red balls are identical
+  </text>
+  <text x="670" y="685" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • Any rearrangement gives the exact same result
+  </text>
+  <text x="670" y="705" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • Formula: n!/n! = 3!/3! = 1 permutation
+  </text>
+  <text x="670" y="725" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    • Only 1 distinct arrangement possible
+  </text>
+  
+  <!-- Arrow showing the reduction -->
+  <path d="M 550 400 Q 600 370 650 400" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="600" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">
+    Identical items reduce
+  </text>
+  <text x="600" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">
+    total permutations
+  </text>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+  
+  <!-- Legend -->
+  <g transform="translate(50, 760)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Legend:</text>
+    <text x="80" y="0" font-family="Arial, sans-serif" font-size="12" fill="#333">Valid permutation (no marking)</text>
+    <line x1="250" y1="-8" x2="280" y2="8" stroke="#e53e3e" stroke-width="2"/>
+    <line x1="280" y1="-8" x2="250" y2="8" stroke="#e53e3e" stroke-width="2"/>
+    <text x="290" y="0" font-family="Arial, sans-serif" font-size="12" fill="#333">Duplicate arrangement - Canceled</text>
+  </g>
+</svg>`,
         explanation:``,
         links:[
             {text:``,url:``},
@@ -1132,8 +1558,173 @@ export const scenariosData={
             {text:``,url:``},
         ]
     },
-    "identity name":{
-        svg:``,
+    "Partial Permutations withou Repetition":{
+        svg:`<svg viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="900" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333">
+    Partial Permutations: P(4,2)
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="400" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#666">
+    Selecting and arranging 2 items from 4 available items
+  </text>
+  
+  <!-- Formula -->
+  <text x="400" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c5aa0">
+    P(4,2) = 4!/(4-2)! = 4!/2! = 24/2 = 12 permutations
+  </text>
+  
+  <!-- Available items -->
+  <text x="400" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">
+    Available Items:
+  </text>
+  <g transform="translate(250, 140)">
+    <circle cx="50" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="120" cy="30" r="20" fill="#38a169"/>
+    <circle cx="190" cy="30" r="20" fill="#3182ce"/>
+    <circle cx="260" cy="30" r="20" fill="#d69e2e"/>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M 400 210 L 400 230" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="400" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">
+    Choose 2 and arrange them
+  </text>
+  
+  <!-- All 12 permutations -->
+  <text x="400" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">
+    All 12 Partial Permutations:
+  </text>
+  
+  <!-- First row: Starting with Red -->
+  <g transform="translate(100, 270)">
+    <text x="200" y="10" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#e53e3e">Starting with Red:</text>
+    
+    <!-- Red-Green -->
+    <g transform="translate(50, 25)">
+      <circle cx="20" cy="20" r="15" fill="#e53e3e"/>
+      <circle cx="50" cy="20" r="15" fill="#38a169"/>
+    </g>
+    
+    <!-- Red-Blue -->
+    <g transform="translate(150, 25)">
+      <circle cx="20" cy="20" r="15" fill="#e53e3e"/>
+      <circle cx="50" cy="20" r="15" fill="#3182ce"/>
+    </g>
+    
+    <!-- Red-Yellow -->
+    <g transform="translate(250, 25)">
+      <circle cx="20" cy="20" r="15" fill="#e53e3e"/>
+      <circle cx="50" cy="20" r="15" fill="#d69e2e"/>
+    </g>
+  </g>
+  
+  <!-- Second row: Starting with Green -->
+  <g transform="translate(100, 340)">
+    <text x="200" y="10" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#38a169">Starting with Green:</text>
+    
+    <!-- Green-Red -->
+    <g transform="translate(50, 25)">
+      <circle cx="20" cy="20" r="15" fill="#38a169"/>
+      <circle cx="50" cy="20" r="15" fill="#e53e3e"/>
+    </g>
+    
+    <!-- Green-Blue -->
+    <g transform="translate(150, 25)">
+      <circle cx="20" cy="20" r="15" fill="#38a169"/>
+      <circle cx="50" cy="20" r="15" fill="#3182ce"/>
+    </g>
+    
+    <!-- Green-Yellow -->
+    <g transform="translate(250, 25)">
+      <circle cx="20" cy="20" r="15" fill="#38a169"/>
+      <circle cx="50" cy="20" r="15" fill="#d69e2e"/>
+    </g>
+  </g>
+  
+  <!-- Third row: Starting with Blue -->
+  <g transform="translate(100, 410)">
+    <text x="200" y="10" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#3182ce">Starting with Blue:</text>
+    
+    <!-- Blue-Red -->
+    <g transform="translate(50, 25)">
+      <circle cx="20" cy="20" r="15" fill="#3182ce"/>
+      <circle cx="50" cy="20" r="15" fill="#e53e3e"/>
+    </g>
+    
+    <!-- Blue-Green -->
+    <g transform="translate(150, 25)">
+      <circle cx="20" cy="20" r="15" fill="#3182ce"/>
+      <circle cx="50" cy="20" r="15" fill="#38a169"/>
+    </g>
+    
+    <!-- Blue-Yellow -->
+    <g transform="translate(250, 25)">
+      <circle cx="20" cy="20" r="15" fill="#3182ce"/>
+      <circle cx="50" cy="20" r="15" fill="#d69e2e"/>
+    </g>
+  </g>
+  
+  <!-- Fourth row: Starting with Yellow -->
+  <g transform="translate(100, 480)">
+    <text x="200" y="10" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#d69e2e">Starting with Yellow:</text>
+    
+    <!-- Yellow-Red -->
+    <g transform="translate(50, 25)">
+      <circle cx="20" cy="20" r="15" fill="#d69e2e"/>
+      <circle cx="50" cy="20" r="15" fill="#e53e3e"/>
+    </g>
+    
+    <!-- Yellow-Green -->
+    <g transform="translate(150, 25)">
+      <circle cx="20" cy="20" r="15" fill="#d69e2e"/>
+      <circle cx="50" cy="20" r="15" fill="#38a169"/>
+    </g>
+    
+    <!-- Yellow-Blue -->
+    <g transform="translate(250, 25)">
+      <circle cx="20" cy="20" r="15" fill="#d69e2e"/>
+      <circle cx="50" cy="20" r="15" fill="#3182ce"/>
+    </g>
+  </g>
+  
+  <!-- Explanation section -->
+  <rect x="50" y="570" width="700" height="150" fill="#e6f3ff" stroke="#3182ce" stroke-width="2" rx="8"/>
+  <text x="70" y="595" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c5aa0">
+    Partial Permutations Explained:
+  </text>
+  
+  <text x="70" y="620" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    <tspan font-weight="bold">Step 1:</tspan> Choose the first position - 4 choices (any of the 4 colored balls)
+  </text>
+  
+  <text x="70" y="640" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    <tspan font-weight="bold">Step 2:</tspan> Choose the second position - 3 remaining choices
+  </text>
+  
+  <text x="70" y="660" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    <tspan font-weight="bold">Total:</tspan> 4 × 3 = 12 different ordered pairs
+  </text>
+  
+  <text x="70" y="690" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    <tspan font-weight="bold">Key point:</tspan> Order matters! Red-Green is different from Green-Red
+  </text>
+  
+  <text x="70" y="710" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    <tspan font-weight="bold">Formula:</tspan> P(n,r) = n!/(n-r)! where n=4 items available, r=2 items selected
+  </text>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+</svg>`,
         explanation:``,
         links:[
             {text:``,url:``},
@@ -1141,8 +1732,197 @@ export const scenariosData={
             {text:``,url:``},
         ]
     },
-    "identity name":{
-        svg:``,
+    "Permutations with Repetition":{
+        svg:`<svg viewBox="0 0 900 1000" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="900" height="1000" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="450" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333">
+    Permutations with Repetition
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="450" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#666">
+    Selecting 2 items from 4 available items (repetition allowed)
+  </text>
+  
+  <!-- Formula -->
+  <text x="450" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c5aa0">
+    n<tspan baseline-shift="super" font-size="14">r</tspan> = 4<tspan baseline-shift="super" font-size="14">2</tspan> = 16 permutations
+  </text>
+  
+  <!-- Available items -->
+  <text x="450" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">
+    Available Items (can be reused):
+  </text>
+  <g transform="translate(300, 140)">
+    <circle cx="50" cy="30" r="20" fill="#e53e3e"/>
+    <circle cx="120" cy="30" r="20" fill="#38a169"/>
+    <circle cx="190" cy="30" r="20" fill="#3182ce"/>
+    <circle cx="260" cy="30" r="20" fill="#d69e2e"/>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M 450 230 L 450 250" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="450" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">
+    Choose 2 (repetition allowed)
+  </text>
+  
+  <!-- All 16 permutations -->
+  <text x="450" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">
+    All 16 Permutations with Repetition:
+  </text>
+  
+  <!-- First row: Starting with Red -->
+  <g transform="translate(50, 300)">
+    <text x="400" y="10" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#e53e3e">Starting with Red:</text>
+    
+    <!-- RR -->
+    <g transform="translate(100, 25)">
+      <circle cx="20" cy="20" r="15" fill="#e53e3e"/>
+      <circle cx="50" cy="20" r="15" fill="#e53e3e"/>
+    </g>
+    
+    <!-- RG -->
+    <g transform="translate(200, 25)">
+      <circle cx="20" cy="20" r="15" fill="#e53e3e"/>
+      <circle cx="50" cy="20" r="15" fill="#38a169"/>
+    </g>
+    
+    <!-- RB -->
+    <g transform="translate(300, 25)">
+      <circle cx="20" cy="20" r="15" fill="#e53e3e"/>
+      <circle cx="50" cy="20" r="15" fill="#3182ce"/>
+    </g>
+    
+    <!-- RY -->
+    <g transform="translate(400, 25)">
+      <circle cx="20" cy="20" r="15" fill="#e53e3e"/>
+      <circle cx="50" cy="20" r="15" fill="#d69e2e"/>
+    </g>
+  </g>
+  
+  <!-- Second row: Starting with Green -->
+  <g transform="translate(50, 370)">
+    <text x="400" y="10" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#38a169">Starting with Green:</text>
+    
+    <!-- GR -->
+    <g transform="translate(100, 25)">
+      <circle cx="20" cy="20" r="15" fill="#38a169"/>
+      <circle cx="50" cy="20" r="15" fill="#e53e3e"/>
+    </g>
+    
+    <!-- GG -->
+    <g transform="translate(200, 25)">
+      <circle cx="20" cy="20" r="15" fill="#38a169"/>
+      <circle cx="50" cy="20" r="15" fill="#38a169"/>
+    </g>
+    
+    <!-- GB -->
+    <g transform="translate(300, 25)">
+      <circle cx="20" cy="20" r="15" fill="#38a169"/>
+      <circle cx="50" cy="20" r="15" fill="#3182ce"/>
+    </g>
+    
+    <!-- GY -->
+    <g transform="translate(400, 25)">
+      <circle cx="20" cy="20" r="15" fill="#38a169"/>
+      <circle cx="50" cy="20" r="15" fill="#d69e2e"/>
+    </g>
+  </g>
+  
+  <!-- Third row: Starting with Blue -->
+  <g transform="translate(50, 440)">
+    <text x="400" y="10" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#3182ce">Starting with Blue:</text>
+    
+    <!-- BR -->
+    <g transform="translate(100, 25)">
+      <circle cx="20" cy="20" r="15" fill="#3182ce"/>
+      <circle cx="50" cy="20" r="15" fill="#e53e3e"/>
+    </g>
+    
+    <!-- BG -->
+    <g transform="translate(200, 25)">
+      <circle cx="20" cy="20" r="15" fill="#3182ce"/>
+      <circle cx="50" cy="20" r="15" fill="#38a169"/>
+    </g>
+    
+    <!-- BB -->
+    <g transform="translate(300, 25)">
+      <circle cx="20" cy="20" r="15" fill="#3182ce"/>
+      <circle cx="50" cy="20" r="15" fill="#3182ce"/>
+    </g>
+    
+    <!-- BY -->
+    <g transform="translate(400, 25)">
+      <circle cx="20" cy="20" r="15" fill="#3182ce"/>
+      <circle cx="50" cy="20" r="15" fill="#d69e2e"/>
+    </g>
+  </g>
+  
+  <!-- Fourth row: Starting with Yellow -->
+  <g transform="translate(50, 510)">
+    <text x="400" y="10" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#d69e2e">Starting with Yellow:</text>
+    
+    <!-- YR -->
+    <g transform="translate(100, 25)">
+      <circle cx="20" cy="20" r="15" fill="#d69e2e"/>
+      <circle cx="50" cy="20" r="15" fill="#e53e3e"/>
+    </g>
+    
+    <!-- YG -->
+    <g transform="translate(200, 25)">
+      <circle cx="20" cy="20" r="15" fill="#d69e2e"/>
+      <circle cx="50" cy="20" r="15" fill="#38a169"/>
+    </g>
+    
+    <!-- YB -->
+    <g transform="translate(300, 25)">
+      <circle cx="20" cy="20" r="15" fill="#d69e2e"/>
+      <circle cx="50" cy="20" r="15" fill="#3182ce"/>
+    </g>
+    
+    <!-- YY -->
+    <g transform="translate(400, 25)">
+      <circle cx="20" cy="20" r="15" fill="#d69e2e"/>
+      <circle cx="50" cy="20" r="15" fill="#d69e2e"/>
+    </g>
+  </g>
+  
+  <!-- Explanation section -->
+  <rect x="50" y="580" width="800" height="160" fill="#e6f3ff" stroke="#3182ce" stroke-width="2" rx="8"/>
+  <text x="70" y="605" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c5aa0">
+    Permutations with Repetition Explained:
+  </text>
+  
+  <text x="70" y="630" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    <tspan font-weight="bold">Step 1:</tspan> Choose the first position - 4 choices (any color, can be reused)
+  </text>
+  
+  <text x="70" y="650" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    <tspan font-weight="bold">Step 2:</tspan> Choose the second position - 4 choices (still all colors available)
+  </text>
+  
+  <text x="70" y="670" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    <tspan font-weight="bold">Total:</tspan> 4 × 4 = 16 different ordered pairs
+  </text>
+  
+  <text x="70" y="700" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    <tspan font-weight="bold">Formula:</tspan> n<tspan baseline-shift="super" font-size="11">r</tspan> where n=4 items available, r=2 positions to fill
+  </text>
+  
+  <text x="70" y="720" font-family="Arial, sans-serif" font-size="14" fill="#333">
+    <tspan font-weight="bold">Note:</tspan> The diagonal (RR, GG, BB, YY) shows repetition is allowed
+  </text>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+</svg>`,
         explanation:``,
         links:[
             {text:``,url:``},
@@ -1150,8 +1930,95 @@ export const scenariosData={
             {text:``,url:``},
         ]
     },
-    "identity name":{
-        svg:``,
+    "Circular Permutation 2":{
+        svg:`<svg xmlns="http://www.w3.org/2000/svg" style="margin-left:150px" viewBox="0 0 1100 750">
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#333">Circular Permutations of ABC with Connected Balls</text>
+  
+  <!-- ABC Group -->
+  <text x="100" y="90" font-family="Arial, sans-serif" font-size="20" text-anchor="start" fill="#333">ABC group:</text>
+  
+  <!-- ABC arrangement 1 -->
+  <line x1="150" y1="150" x2="210" y2="150" stroke="#333" stroke-width="2"/>
+  <line x1="210" y1="150" x2="180" y2="200" stroke="#333" stroke-width="2"/>
+  <line x1="180" y1="200" x2="150" y2="150" stroke="#333" stroke-width="2"/>
+  <circle cx="150" cy="150" r="25" fill="#ff6b6b"/>
+  <circle cx="210" cy="150" r="25" fill="#4ecdc4"/>
+  <circle cx="180" cy="200" r="25" fill="#45b7d1"/>
+  <text x="150" y="157" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">A</text>
+  <text x="210" y="157" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">B</text>
+  <text x="180" y="207" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">C</text>
+  
+  <!-- ABC arrangement 2 -->
+  <line x1="350" y1="150" x2="410" y2="150" stroke="#333" stroke-width="2"/>
+  <line x1="410" y1="150" x2="380" y2="200" stroke="#333" stroke-width="2"/>
+  <line x1="380" y1="200" x2="350" y2="150" stroke="#333" stroke-width="2"/>
+  <circle cx="350" cy="150" r="25" fill="#4ecdc4"/>
+  <circle cx="410" cy="150" r="25" fill="#45b7d1"/>
+  <circle cx="380" cy="200" r="25" fill="#ff6b6b"/>
+  <text x="350" y="157" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">B</text>
+  <text x="410" y="157" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">C</text>
+  <text x="380" y="207" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">A</text>
+  
+  <!-- ABC arrangement 3 -->
+  <line x1="550" y1="150" x2="610" y2="150" stroke="#333" stroke-width="2"/>
+  <line x1="610" y1="150" x2="580" y2="200" stroke="#333" stroke-width="2"/>
+  <line x1="580" y1="200" x2="550" y2="150" stroke="#333" stroke-width="2"/>
+  <circle cx="550" cy="150" r="25" fill="#45b7d1"/>
+  <circle cx="610" cy="150" r="25" fill="#ff6b6b"/>
+  <circle cx="580" cy="200" r="25" fill="#4ecdc4"/>
+  <text x="550" y="157" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">C</text>
+  <text x="610" y="157" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">A</text>
+  <text x="580" y="207" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">B</text>
+  
+  <!-- ABC Group Explanation -->
+  <rect x="170" y="225" width="460" height="30" fill="#fffacd" stroke="#ddd" stroke-width="1" rx="5"/>
+  <text x="400" y="245" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333" font-weight="bold">These three arrangements are identical (just rotated clockwise)</text>
+  
+  <!-- ACB Group -->
+  <text x="100" y="290" font-family="Arial, sans-serif" font-size="20" text-anchor="start" fill="#333">ACB group:</text>
+  
+  <!-- ACB arrangement 1 -->
+  <line x1="150" y1="350" x2="210" y2="350" stroke="#333" stroke-width="2"/>
+  <line x1="210" y1="350" x2="180" y2="400" stroke="#333" stroke-width="2"/>
+  <line x1="180" y1="400" x2="150" y2="350" stroke="#333" stroke-width="2"/>
+  <circle cx="150" cy="350" r="25" fill="#ff6b6b"/>
+  <circle cx="210" cy="350" r="25" fill="#45b7d1"/>
+  <circle cx="180" cy="400" r="25" fill="#4ecdc4"/>
+  <text x="150" y="357" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">A</text>
+  <text x="210" y="357" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">C</text>
+  <text x="180" y="407" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">B</text>
+  
+  <!-- ACB arrangement 2 -->
+  <line x1="350" y1="350" x2="410" y2="350" stroke="#333" stroke-width="2"/>
+  <line x1="410" y1="350" x2="380" y2="400" stroke="#333" stroke-width="2"/>
+  <line x1="380" y1="400" x2="350" y2="350" stroke="#333" stroke-width="2"/>
+  <circle cx="350" cy="350" r="25" fill="#45b7d1"/>
+  <circle cx="410" cy="350" r="25" fill="#4ecdc4"/>
+  <circle cx="380" cy="400" r="25" fill="#ff6b6b"/>
+  <text x="350" y="357" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">C</text>
+  <text x="410" y="357" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">B</text>
+  <text x="380" y="407" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">A</text>
+  
+  <!-- ACB arrangement 3 -->
+  <line x1="550" y1="350" x2="610" y2="350" stroke="#333" stroke-width="2"/>
+  <line x1="610" y1="350" x2="580" y2="400" stroke="#333" stroke-width="2"/>
+  <line x1="580" y1="400" x2="550" y2="350" stroke="#333" stroke-width="2"/>
+  <circle cx="550" cy="350" r="25" fill="#4ecdc4"/>
+  <circle cx="610" cy="350" r="25" fill="#ff6b6b"/>
+  <circle cx="580" cy="400" r="25" fill="#45b7d1"/>
+  <text x="550" y="357" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">B</text>
+  <text x="610" y="357" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">A</text>
+  <text x="580" y="407" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">C</text>
+  
+  <!-- ACB Group Explanation -->
+  <rect x="170" y="425" width="460" height="30" fill="#fffacd" stroke="#ddd" stroke-width="1" rx="5"/>
+  <text x="400" y="445" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333" font-weight="bold">These three arrangements are identical (just rotated clockwise)</text>
+  
+  <!-- Final Explanation -->
+  <rect x="50" y="475" width="700" height="30" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2" rx="5"/>
+  <text x="400" y="495" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#333" font-weight="bold">In circular permutations, rotations are considered the same arrangement.</text>
+</svg>`,
         explanation:``,
         links:[
             {text:``,url:``},
@@ -1159,8 +2026,65 @@ export const scenariosData={
             {text:``,url:``},
         ]
     },
-    "identity name":{
-        svg:``,
+    "Circular Permutation 3":{
+        svg:`<svg xmlns="http://www.w3.org/2000/svg" style="margin-left:150px;" viewBox="0 0 1000 650">
+  <!-- Box with A, B, C balls -->
+  <rect x="320" y="20" width="160" height="80" fill="#f0f0f0" stroke="#333" stroke-width="2" rx="15" ry="15"/>
+  <circle cx="360" cy="60" r="20" fill="#ff6b6b"/>
+  <circle cx="400" cy="60" r="20" fill="#4ecdc4"/>
+  <circle cx="440" cy="60" r="20" fill="#45b7d1"/>
+  <text x="360" y="67" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#fff">A</text>
+  <text x="400" y="67" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#fff">B</text>
+  <text x="440" y="67" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#fff">C</text>
+  
+  <!-- Arrows -->
+  <line x1="360" y1="100" x2="210" y2="260" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="440" y1="100" x2="590" y2="260" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+    refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- Circular Permutations -->
+  <!-- ABC group -->
+  <circle cx="200" cy="320" r="50" fill="none" stroke="#333" stroke-width="2"/>
+  <circle cx="200" cy="270" r="15" fill="#ff6b6b"/>
+  <circle cx="243" cy="345" r="15" fill="#4ecdc4"/>
+  <circle cx="157" cy="345" r="15" fill="#45b7d1"/>
+  <text x="200" y="275" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#fff">A</text>
+  <text x="243" y="350" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#fff">B</text>
+  <text x="157" y="350" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#fff">C</text>
+
+  <!-- ACB group -->
+  <circle cx="600" cy="320" r="50" fill="none" stroke="#333" stroke-width="2"/>
+  <circle cx="600" cy="270" r="15" fill="#ff6b6b"/>
+  <circle cx="643" cy="345" r="15" fill="#45b7d1"/>
+  <circle cx="557" cy="345" r="15" fill="#4ecdc4"/>
+  <text x="600" y="275" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#fff">A</text>
+  <text x="643" y="350" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#fff">C</text>
+  <text x="557" y="350" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#fff">B</text>
+
+  <!-- Labels -->
+  <text x="200" y="410" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#333">ABC = BCA = CAB</text>
+  <text x="600" y="410" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#333">ACB = CBA = BAC</text>
+  
+  <!-- Explanation Boxes - Now 80px tall (was 60px) with same text positions -->
+  <!-- ABC Group Explanation -->
+  <rect x="50" y="430" width="300" height="80" fill="#fffacd" stroke="#333" stroke-width="1" rx="5" ry="5"/>
+  <text x="200" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333" font-weight="bold">These three arrangements are identical</text>
+  <text x="200" y="470" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">because in circular permutations,</text>
+  <text x="200" y="490" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">only relative order matters</text>
+  
+  <!-- ACB Group Explanation -->
+  <rect x="450" y="430" width="300" height="80" fill="#fffacd" stroke="#333" stroke-width="1" rx="5" ry="5"/>
+  <text x="600" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333" font-weight="bold">These three arrangements are identical</text>
+  <text x="600" y="470" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">because rotations of the same</text>
+  <text x="600" y="490" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">circular order are equivalent</text>
+</svg>`,
         explanation:``,
         links:[
             {text:``,url:``},

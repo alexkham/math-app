@@ -116,10 +116,7 @@ const diagrams={
    "description":"Description for Circular Permutation",
 
     "svg":`
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
-  <!-- Background -->
-  <rect width="800" height="500" fill="#f0f0f0"/>
-  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
   <!-- Title -->
   <text x="400" y="40" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#333">Circular Permutations of ABC with Connected Balls</text>
   
@@ -159,6 +156,10 @@ const diagrams={
   <text x="610" y="157" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">A</text>
   <text x="580" y="207" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">B</text>
   
+  <!-- ABC Group Explanation -->
+  <rect x="200" y="225" width="400" height="30" fill="#fffacd" stroke="#ddd" stroke-width="1" rx="5"/>
+  <text x="400" y="245" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333" font-weight="bold">These three arrangements are identical (just rotated clockwise)</text>
+  
   <!-- ACB Group -->
   <text x="100" y="290" font-family="Arial, sans-serif" font-size="20" text-anchor="start" fill="#333">ACB group:</text>
   
@@ -195,8 +196,13 @@ const diagrams={
   <text x="610" y="357" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">A</text>
   <text x="580" y="407" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#fff">C</text>
   
-  <!-- Explanation -->
-  <text x="400" y="470" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#333">In circular permutations, the starting position doesn't matter.</text>
+  <!-- ACB Group Explanation -->
+  <rect x="200" y="425" width="400" height="30" fill="#fffacd" stroke="#ddd" stroke-width="1" rx="5"/>
+  <text x="400" y="445" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333" font-weight="bold">These three arrangements are identical (just rotated clockwise)</text>
+  
+  <!-- Final Explanation -->
+  <rect x="220" y="455" width="360" height="30" fill="#e6f3ff" stroke="#4a90e2" stroke-width="2" rx="5"/>
+  <text x="400" y="475" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#333" font-weight="bold">In circular permutations, rotations are considered the same arrangement.</text>
 </svg>
     `,
     "before":`Before Content`,

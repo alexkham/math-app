@@ -14,6 +14,10 @@ import GenericTable from '@/app/components/generic-table/GenericTable'
 
 export async function getStaticProps(){
 
+  const keyWords=['permutations','combinatorial','combinatorics','formula for permutations',
+    'example of permutation', 'permutation and combination'
+  ]
+
   const permutationsScenariosTableData = {
     tableTitle: "Permutation Scenarios",
     rows: [
@@ -348,8 +352,17 @@ const circularTable=`
       after:`
       The intuition and logic we use for this kind of permutation has been explained pretty well in previous [section](!/combinatorics/permutations#logic) and it works basically for all [types](!/combinatorics/permutations#types) of permutations.
       Just in case of full permutations (unlike in other [types](!/combinatorics/permutations#types)) no further modifications needed and the calculation is simple. 
-      The number of possible results is calculated by the formula :
-       @academic[example:$n!$\n Product of all **integers** [from](!/algebra) $n$ down to $1$.]@
+      \n**Notation**:
+In combinatorics, we use specific notation to represent different types of permutations. 
+For arranging $r$ objects selected from $n$ distinct objects, the standard notation is $P(n,r)$ or $_nP_r$.
+When applied to full permutations, apparently $r=n$ (because we use all the items ), and the notation turns into :
+
+\t\t\t\t\t\t$P(n,n)$ or $_nP_n$ or simply $P(n)$.
+
+**Formula**:
+      The number of possible results is calculated by the formula :      
+@academic[example:&nbsp \t\t\t\t\t\t$P(n)=n!$]@
+ Product of all integers from $n$ down to $1$.
        Where $n$ is the number of items to arrange. 
 
       `,
@@ -358,6 +371,7 @@ const circularTable=`
 Arranging all books on a shelf, deciding the lineup of all players in a team, organizing all photos in an album, setting the order of speakers in a presentation, ordering all tasks in a workflow, ranking all competitors in a contest, scheduling all meetings in a day, sorting all files in a folder.
 
 `,
+formula:`@academic[example:&nbsp \t\t\t\t\t\t$P(n)=n!$]@`
   
   
     },
@@ -368,9 +382,15 @@ Arranging all books on a shelf, deciding the lineup of all players in a team, or
       
       `,
       after:`
+      **Notation:**
+      
+      \t\t\t\t\t\t$\\binom{n}{n_1, n_2, \\ldots, n_k}$ or $P(n; n_1, n_2, n_3, \\ldots, n_k)$ or $P_n^{n_1, n_2, n_3, \\ldots, n_k}$
+
        To calculate the number of possible arrangements :
       @academic[example:$\\binom{n}{n_{1},n_{2},\\dots,n_{k}} = \\frac{n!}{n_{1}!n_{2}!\\dots n_{k}!}$]@ 
-      Where multinomial coefficient: counts distinct arrangements of $n$ items split into groups of sizes $n_{1},n_{2},\\dots,n_{k}$.`,
+      Where multinomial coefficient: counts distinct arrangements of $n$ items split into groups of sizes $n_{1},n_{2},\\dots,n_{k}$.
+      
+      `,
       between:`
       **Permutation with Identical Items — Examples**:
 Rearranging letters in the word “BALLOON,” organizing colored balls where some colors repeat, sequencing identical files and unique ones in storage, arranging identical chairs and distinct tables in a layout, ordering repeated ingredients in a recipe list.`,
@@ -540,7 +560,8 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
           sectionsContent.logic.before,
           scenariosData["Permutations of ABC: STEP-by-Step"].svg,
           sectionsContent.logic.between,
-          scenariosData["Permutations (Full)"].svg
+          scenariosData["Permutations (Full)"].svg,
+         
           
         ]
     },
@@ -571,6 +592,9 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
         <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: fullPermutationTable }} key="table" />,
       sectionsContent.full.between,
       sectionsContent.full.after,
+      
+    
+      
       
         ]
     },
@@ -618,6 +642,9 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
         <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: circularTable }} key="table" />,
         sectionsContent.circular.between,
         sectionsContent.circular.after,
+        scenariosData["Circular Permutation"].svg,
+        scenariosData["Circular Permutation 2"].svg,
+        scenariosData["Circular Permutation 3"].svg
 
       ]
   },

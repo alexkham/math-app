@@ -72,8 +72,11 @@ export function Combination({ explanations }) {
       n: nNum,
       r: rNum,
       result: combinationResult,
-      formula: `${nNum}! / (${rNum}! × (${nNum}-${rNum})!) = ${nNum}! / (${rNum}! × ${nNum - rNum}!)`,
-      calculation: `${nFactorial.toLocaleString()} / (${rFactorial.toLocaleString()} × ${nMinusRFactorial.toLocaleString()})`
+      // formula: `${nNum}! / (${rNum}! × (${nNum}-${rNum})!) = ${nNum}! / (${rNum}! × ${nNum - rNum}!)`,
+      formula: `$\\frac{${nNum}!}{${rNum}! \\times (${nNum}-${rNum})!} = \\frac{${nNum}!}{${rNum}! \\times ${nNum - rNum}!}$`,
+
+      // calculation: `${nFactorial.toLocaleString()} / (${rFactorial.toLocaleString()} × ${nMinusRFactorial.toLocaleString()})`
+      calculation: `$\\frac{${nFactorial.toLocaleString()}}{${rFactorial.toLocaleString()} \\times ${nMinusRFactorial.toLocaleString()}}$`
     })
   }
 

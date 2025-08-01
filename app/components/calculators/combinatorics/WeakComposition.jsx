@@ -90,7 +90,8 @@ export function WeakComposition({ explanations }) {
       r: rNum,
       result: compositionResult,
       formula: '$C(' + numerator + ',' + denominator + ') = \\frac{' + numerator + '!}{' + denominator + '! \\times ' + nNum + '!}$',
-      calculation: numeratorFactorial.toLocaleString() + ' / (' + denominatorFactorial.toLocaleString() + ' × ' + nFactorial.toLocaleString() + ')'
+      // calculation: numeratorFactorial.toLocaleString() + ' / (' + denominatorFactorial.toLocaleString() + ' × ' + nFactorial.toLocaleString() + ')'
+      calculation: '$\\frac{' + numeratorFactorial.toLocaleString() + '}{' + denominatorFactorial.toLocaleString() + ' \\times ' + nFactorial.toLocaleString() + '}$'
     })
   }
 
