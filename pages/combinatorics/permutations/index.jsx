@@ -357,7 +357,9 @@ In combinatorics, we use specific notation to represent different types of permu
 For arranging $r$ objects selected from $n$ distinct objects, the standard notation is $P(n,r)$ or $_nP_r$.
 When applied to full permutations, apparently $r=n$ (because we use all the items ), and the notation turns into :
 
-\t\t\t\t\t\t$P(n,n)$ or $_nP_n$ or simply $P(n)$.
+\t\t\t\t\t\t$P(n,n)$\n\n\t\t\t\t\t\tor $_nP_n$\n\n\t\t\t\t\t\t or simply $P(n)$.
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
 
 **Formula**:
       The number of possible results is calculated by the formula :      
@@ -384,10 +386,14 @@ formula:`@academic[example:&nbsp \t\t\t\t\t\t$P(n)=n!$]@`
       after:`
       **Notation:**
       
-      \t\t\t\t\t\t$\\binom{n}{n_1, n_2, \\ldots, n_k}$ or $P(n; n_1, n_2, n_3, \\ldots, n_k)$ or $P_n^{n_1, n_2, n_3, \\ldots, n_k}$
+\t\t\t\t\t\t $\\binom{n}{n_1, n_2, \\ldots, n_k}$\n\n\t\t\t\t or $P(n; n_1, n_2, n_3, \\ldots, n_k)$\n\n\t\t\t\t or $P_n^{n_1, n_2, n_3, \\ldots, n_k}$
 
-       To calculate the number of possible arrangements :
-      @academic[example:$\\binom{n}{n_{1},n_{2},\\dots,n_{k}} = \\frac{n!}{n_{1}!n_{2}!\\dots n_{k}!}$]@ 
+      @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
+
+      **Formula**:
+
+       To calculate the number of possible arrangements 
+      @academic[example:&nbsp\t\t\t\t\t\t$\\binom{n}{n_{1},n_{2},\\dots,n_{k}} = \\frac{n!}{n_{1}!n_{2}!\\dots n_{k}!}$]@ 
       Where multinomial coefficient: counts distinct arrangements of $n$ items split into groups of sizes $n_{1},n_{2},\\dots,n_{k}$.
       
       `,
@@ -405,8 +411,23 @@ Rearranging letters in the word “BALLOON,” organizing colored balls where so
       
       `,
       after:`
-      The number of arrangements for Partial Permutation without Repetition is :
-       @academic[example:$\\frac{n!}{(n-r)!}$]@ 
+      **Notation**:
+
+Most common:
+\n\t\t\t\t\t\t$P(n,r)$
+
+ Alternative notations:
+\n\t\t\t\t\t\t$ {}^nP_r$
+
+\t\t\t\t\t\t$A_n^r$
+
+\t\t\t\t\t\t$\\text{nPr}$
+
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
+     
+ **Formula**:      
+      The number of arrangements for Partial Permutation without Repetition is 
+       @academic[example:&nbsp\t\t\t\t\t\t$P(n,r) = \\frac{n!}{(n-r)!}$]@ 
       Where $n!$ counts all arrangements, dividing by $(n-r)!$ removes the unused positions.`,
       between:`
       **Partial Permutation (without repetition) — Examples**:
@@ -421,8 +442,21 @@ Selecting and ordering finalists from a group of contestants, arranging a subset
       
       `,
       after:`
-      The total number of possible circular arrangements is:
-      @academic[example:$(n-1)!$]@ 
+      **Notation**:
+Circular permutation
+\n\t\t\t\t\t\t$P_{\\text{circ}}(n)$
+
+Alternative notations
+\n\t\t\t\t\t\t$C_n$
+\n\t\t\t\t\t\t$P_{\\text{cyclic}}(n)$
+\n\t\t\t\t\t\t$\\frac{n!}{n}$
+
+       @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
+      
+      **Formula**:
+
+      The total number of possible circular arrangements is
+      @academic[example:&nbsp\t\t\t\t\t\t$P_{\\text{circ}}(n) = (n-1)!$]@ 
       If $n$ is a total number of items to arrange then fixing one item reduces circular arrangements to $(n-1)!$ linear ones.`,
       between:`
       **Circular Permutation — Examples**:
@@ -439,8 +473,22 @@ Arranging guests around a round table, seating participants in a circular panel,
       
       `,
       after:`
+      **Notation**:
+
+Permutation with repetition (positions)
+
+\t\t\t\t\t\t$P_{\\text{rep}}(n,r)$
+
+Alternative notations:
+\n\t\t\t\t\t\t$\\overline{P}(n,r)$
+\n\t\t\t\t\t\t$P^{(r)}(n)$
+\n\t\t\t\t\t\t$ {}^nP^{(r)}_r$
+
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
+
+**Formula**:
       Total number of permutations with repetitions possible and all items used is:
-     @academic[example:$n^{r}$]@
+     @academic[example:&nbsp\t\t\t\t\t\t$P_{\\text{rep}}(n,r)=n^{r}$]@
      Where each of the $r$ positions can be filled in $n$ ways.
 `,
 between:`
@@ -489,7 +537,7 @@ $n \\times (n-1) \\times (n-2) \\times \\dots \\times 1,$
 which is the definition of a factorial.
 
 For $n$ distinct objects, the number of permutations is:
-@academic[example:$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$]@
+@academic[example:&nbsp\t\t\t\t\t\t$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$]@
 **To summarize:**
 
 * We start with $n$ options.
@@ -506,7 +554,7 @@ Here is an example of simple permutation: creating 3 letter string.
       First, one of 3 letters is picked and for each scenario there are 2 different choices to select the second letter.Once the choice is made, only one letter left.     
       
       The result is:
-      @academic[example:$3\\times 2 \\times 1 = 6 (n!)$]@
+      @academic[example:&nbsp\t\t\t\t\t\t$3\\times 2 \\times 1 = 6 (n!)$]@
       Where $n$ is total number of items.
 
       `,
