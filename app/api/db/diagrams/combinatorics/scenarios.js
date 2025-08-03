@@ -339,9 +339,9 @@ export const scenariosData={
             {text:``,url:``},
         ]
     },
-    "Permutations with Repetition":{
-        svg:``,
-        explanation:`<svg width="600" height="270" viewBox="0 0 600 270" xmlns="http://www.w3.org/2000/svg">
+    "Permutations with Identical Items":{
+        explanation:``,
+        svg:`<svg style="margin-top:50px; margin-bottom:0px;margin-left:150px;" width="800" height="370"  viewBox="0 0 600 270" xmlns="http://www.w3.org/2000/svg">
   <!-- LEFT SIDE: 3 items with 2 identical -->
   <!-- Original 3 balls at top left (2 red, 1 blue) -->
   <circle cx="40" cy="15" r="6" fill="#ff6b6b"/>
@@ -510,8 +510,8 @@ export const scenariosData={
   <text x="380" y="145" text-anchor="middle" font-family="Arial" font-size="10" fill="#666">Only 10 shown above</text>
   
   <!-- Bottom explanation box -->
-  <rect x="20" y="205" width="560" height="50" fill="#fef2f2" stroke="#ef4444" stroke-width="2" rx="8"/>
-  <text x="300" y="225" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#991b1b">Permutation with Repetition: Some items are identical</text>
+  <rect x="20" y="205" width="560" height="50" fill="#e7f3ff" stroke="#3b82f6" stroke-width="2" rx="8"/>
+  <text x="300" y="225" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#1e40af">Permutations with Identical Items</text>
   <text x="300" y="245" text-anchor="middle" font-family="Arial" font-size="14" fill="#374151">Formula: n! / (n₁! × n₂! × ... × nₖ!) where nᵢ = count of each identical type</text>
 </svg>`,
         links:[
@@ -521,7 +521,7 @@ export const scenariosData={
         ]
     },
     "Permutation without Repetition (Partial)":{
-        svg:`<svg width="600" height="270" viewBox="0 0 600 270" xmlns="http://www.w3.org/2000/svg" style="background: transparent;">
+        svg:`<svg width="800" height="470" style="margin-top:50px;margin-left:100px;" viewBox="0 0 600 270" xmlns="http://www.w3.org/2000/svg" style="background: transparent;">
   <!-- LEFT SIDE: Select 2 from 3 items -->
   <!-- Original 3 balls at top left -->
   <circle cx="30" cy="15" r="6" fill="#ff6b6b"/>
@@ -1558,8 +1558,8 @@ export const scenariosData={
             {text:``,url:``},
         ]
     },
-    "Partial Permutations withou Repetition":{
-        svg:`<svg viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg">
+    "Partial Permutations without Repetition":{
+        svg:`<svg viewBox="0 0 1000 1100" style="margin-bottom:-250px;margin-top:50px;" xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
   <rect width="800" height="900" fill="#f8f9fa"/>
   
@@ -1733,7 +1733,7 @@ export const scenariosData={
         ]
     },
     "Permutations with Repetition":{
-        svg:`<svg viewBox="0 0 900 1000" xmlns="http://www.w3.org/2000/svg">
+        svg:`<svg viewBox="0 0 1100 1200" style="margin-top:50px;margin-bottom:-250px;margin-left:150px;" xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
   <rect width="900" height="1000" fill="#f8f9fa"/>
   
@@ -2092,8 +2092,143 @@ export const scenariosData={
             {text:``,url:``},
         ]
     },
-    "identity name":{
-        svg:``,
+    "Permutations vs Combinations":{
+        svg:`<svg width="1000" height="600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600">
+    <!-- Title -->
+    <text x="500" y="30" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="black">Permutations (4P2) vs Combinations (4C2)</text>
+    
+    <!-- Initial balls -->
+    <circle cx="350" cy="80" r="30" fill="#ff7f7f"/>
+    <circle cx="450" cy="80" r="30" fill="#4ecdc4"/>
+    <circle cx="550" cy="80" r="30" fill="#45b7d1"/>
+    <circle cx="650" cy="80" r="30" fill="#ffd700"/>
+    <text x="350" y="87" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="white">A</text>
+    <text x="450" y="87" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="white">B</text>
+    <text x="550" y="87" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="white">C</text>
+    <text x="650" y="87" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="white">D</text>
+    
+    <!-- Arrows -->
+    <line x1="425" y1="120" x2="250" y2="160" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <line x1="575" y1="120" x2="750" y2="160" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <!-- Arrow marker definition -->
+    <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+        refX="0" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="black"/>
+        </marker>
+    </defs>
+    
+    <!-- Permutations (4P2) -->
+    <text x="250" y="180" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="black">Permutations (4P2)</text>
+    
+    <circle cx="100" cy="220" r="25" fill="#ff7f7f"/>
+    <circle cx="150" cy="220" r="25" fill="#4ecdc4"/>
+    <text x="100" y="227" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">A</text>
+    <text x="150" y="227" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">B</text>
+    
+    <circle cx="220" cy="220" r="25" fill="#ff7f7f"/>
+    <circle cx="270" cy="220" r="25" fill="#45b7d1"/>
+    <text x="220" y="227" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">A</text>
+    <text x="270" y="227" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">C</text>
+    
+    <circle cx="340" cy="220" r="25" fill="#ff7f7f"/>
+    <circle cx="390" cy="220" r="25" fill="#ffd700"/>
+    <text x="340" y="227" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">A</text>
+    <text x="390" y="227" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">D</text>
+    
+    <circle cx="100" cy="280" r="25" fill="#4ecdc4"/>
+    <circle cx="150" cy="280" r="25" fill="#ff7f7f"/>
+    <text x="100" y="287" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">B</text>
+    <text x="150" y="287" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">A</text>
+    
+    <circle cx="220" cy="280" r="25" fill="#4ecdc4"/>
+    <circle cx="270" cy="280" r="25" fill="#45b7d1"/>
+    <text x="220" y="287" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">B</text>
+    <text x="270" y="287" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">C</text>
+    
+    <circle cx="340" cy="280" r="25" fill="#4ecdc4"/>
+    <circle cx="390" cy="280" r="25" fill="#ffd700"/>
+    <text x="340" y="287" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">B</text>
+    <text x="390" y="287" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">D</text>
+    
+    <circle cx="100" cy="340" r="25" fill="#45b7d1"/>
+    <circle cx="150" cy="340" r="25" fill="#ff7f7f"/>
+    <text x="100" y="347" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">C</text>
+    <text x="150" y="347" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">A</text>
+    
+    <circle cx="220" cy="340" r="25" fill="#45b7d1"/>
+    <circle cx="270" cy="340" r="25" fill="#4ecdc4"/>
+    <text x="220" y="347" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">C</text>
+    <text x="270" y="347" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">B</text>
+    
+    <circle cx="340" cy="340" r="25" fill="#45b7d1"/>
+    <circle cx="390" cy="340" r="25" fill="#ffd700"/>
+    <text x="340" y="347" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">C</text>
+    <text x="390" y="347" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">D</text>
+    
+    <circle cx="100" cy="400" r="25" fill="#ffd700"/>
+    <circle cx="150" cy="400" r="25" fill="#ff7f7f"/>
+    <text x="100" y="407" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">D</text>
+    <text x="150" y="407" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">A</text>
+    
+    <circle cx="220" cy="400" r="25" fill="#ffd700"/>
+    <circle cx="270" cy="400" r="25" fill="#4ecdc4"/>
+    <text x="220" y="407" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">D</text>
+    <text x="270" y="407" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">B</text>
+    
+    <circle cx="340" cy="400" r="25" fill="#ffd700"/>
+    <circle cx="390" cy="400" r="25" fill="#45b7d1"/>
+    <text x="340" y="407" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">D</text>
+    <text x="390" y="407" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">C</text>
+    
+    <!-- Combinations (4C2) -->
+    <text x="750" y="180" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="black">Combinations (4C2)</text>
+    
+    <circle cx="650" cy="220" r="25" fill="#ff7f7f"/>
+    <circle cx="700" cy="220" r="25" fill="#4ecdc4"/>
+    <text x="650" y="227" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">A</text>
+    <text x="700" y="227" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">B</text>
+    
+    <circle cx="770" cy="220" r="25" fill="#ff7f7f"/>
+    <circle cx="820" cy="220" r="25" fill="#45b7d1"/>
+    <text x="770" y="227" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">A</text>
+    <text x="820" y="227" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">C</text>
+    
+    <circle cx="890" cy="220" r="25" fill="#ff7f7f"/>
+    <circle cx="940" cy="220" r="25" fill="#ffd700"/>
+    <text x="890" y="227" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">A</text>
+    <text x="940" y="227" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">D</text>
+    
+    <circle cx="650" cy="280" r="25" fill="#4ecdc4"/>
+    <circle cx="700" cy="280" r="25" fill="#45b7d1"/>
+    <text x="650" y="287" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">B</text>
+    <text x="700" y="287" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">C</text>
+    
+    <circle cx="770" cy="280" r="25" fill="#4ecdc4"/>
+    <circle cx="820" cy="280" r="25" fill="#ffd700"/>
+    <text x="770" y="287" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">B</text>
+    <text x="820" y="287" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">D</text>
+    
+    <circle cx="890" cy="280" r="25" fill="#45b7d1"/>
+    <circle cx="940" cy="280" r="25" fill="#ffd700"/>
+    <text x="890" y="287" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">C</text>
+    <text x="940" y="287" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">D</text>
+    
+    <!-- Explanations -->
+    <text x="250" y="460" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="black">Order matters</text>
+    <text x="250" y="485" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="black">AB and BA are different</text>
+    
+    <text x="750" y="340" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="black">Order doesn't matter</text>
+    <text x="750" y="365" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="black">AB and BA are the same</text>
+    
+    <!-- Total counts -->
+    <text x="250" y="520" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="black">Total: 4P2 = 4 × 3 = 12</text>
+    <text x="750" y="400" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="black">Total: 4C2 = 4!/(2!(4-2)!) = 6</text>
+    
+    <!-- Final note -->
+    <text x="500" y="570" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="black" font-weight="bold">Permutations consider order, Combinations don't</text>
+</svg>`,
         explanation:``,
         links:[
             {text:``,url:``},

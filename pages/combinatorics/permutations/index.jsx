@@ -655,6 +655,24 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
           <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: identicalTable }} key="table" />,
           sectionsContent.identical.between,
           sectionsContent.identical.after,
+           <div style={{
+                      textAlign: 'center',
+                      transform: 'scale(0.85)',
+                      transformOrigin: 'center',
+                      marginTop:'-30px'
+                    }} dangerouslySetInnerHTML={{ 
+                      __html: scenariosData["Permutations of 3 with 2 Identical Items"].svg 
+                    }} />,
+           <div style={{
+                      textAlign: 'center',
+                      transform: 'scale(0.85)',
+                      transformOrigin: 'center',
+                      marginTop:'-30px'
+                    }} dangerouslySetInnerHTML={{ 
+                      __html: scenariosData["Permutations of 3 with 3 Identical Items"].svg 
+                    }} />,
+                    
+          scenariosData["Permutations with Identical Items"].svg,
         ]
     },
     {
@@ -666,6 +684,8 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
           <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: partialWithoutTable }} key="table" />,
           sectionsContent.without.between,
           sectionsContent.without.after,
+          scenariosData["Partial Permutations without Repetition"].svg,
+          scenariosData["Permutation without Repetition (Partial)"].svg,
 
         ]
     },
@@ -678,6 +698,9 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
       <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html:permutationWithRepetitionTable }} key="table" />,
       sectionsContent.with.between,
       sectionsContent.with.after,
+      scenariosData["Permutations with Repetition"].svg,
+     
+      
 
     ]
 },
