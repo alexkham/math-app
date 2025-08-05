@@ -9,6 +9,7 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Sections from '@/app/components/page-components/section/Sections'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import { scenariosData } from '@/app/api/db/diagrams/combinatorics/scenarios'
+import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
 
 
 
@@ -497,6 +498,15 @@ combinationsScenariosTableData}) {
           <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html:simpleCombinationTable }} key="table" />,
           sectionsContent.combinations.between,
           sectionsContent.combinations.after,
+          <div key={2} style={{width:'100%',margin:'auto'}}>
+     <SvgDiagram
+   data={scenariosData["Combinations"]}
+  scale={'1'}
+//   width='1200px'
+  layout='horizontal'
+  splitRatio={'0.7'}
+ />
+ </div>
 
         ]
     },

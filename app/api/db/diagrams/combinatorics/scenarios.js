@@ -726,7 +726,8 @@ export const scenariosData={
         ]
     },
     "Combinations":{
-        svg:`<svg width="600" height="270" viewBox="0 0 600 270" xmlns="http://www.w3.org/2000/svg" style="background: transparent;">
+      title:`Simple Combinations Examples`,
+        svg:`<svg width="600" height="270" viewBox="0 0 600 270" style="margin-left:100px;" xmlns="http://www.w3.org/2000/svg" style="background: transparent;">
   <!-- LEFT SIDE: Choose 2 from 3 items -->
   <!-- Original 3 balls at top left -->
   <circle cx="30" cy="15" r="6" fill="#ff6b6b"/>
