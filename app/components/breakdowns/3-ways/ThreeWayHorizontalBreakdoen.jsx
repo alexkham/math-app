@@ -189,7 +189,7 @@
 // // // //       )}
 
 // // // //       <div style={{...finalStyles.section, ...finalStyles.secondSection}}>
-// // // //         {secondTitle && <h3 style={finalStyles.sideTitle}>{secondTitle}</h3>}
+// // // //         {secondTitle && <h3 style={finalStyles.sffideTitle}>{secondTitle}</h3>}
 // // // //         {second.map((item, index) => (
 // // // //           <RenderItem key={index} item={item} styles={finalStyles} />
 // // // //         ))}

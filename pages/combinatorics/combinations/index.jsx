@@ -519,6 +519,15 @@ combinationsScenariosTableData}) {
           <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: partitionTable }} key="table" />,
            sectionsContent.partition.between,
            sectionsContent.partition.after,
+               <div key={3} style={{width:'100%',margin:'auto'}}>
+     <SvgDiagram
+   data={scenariosData["Partition into Groups of Known Sizes"]}
+  scale={'1'}
+//   width='1200px'
+  layout='horizontal'
+  splitRatio={'0.7'}
+ />
+ </div>
         ]
     },
    
@@ -597,7 +606,10 @@ combinationsScenariosTableData}) {
     <Breadcrumb/>
     <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>Combinations</h1>   
     <br/> 
-    <SectionTableOfContents sections={combinationsSections}/>
+    <SectionTableOfContents sections={combinationsSections}
+    showSecondaryNav={true}
+         secondaryNavMode="children"  // or "siblings"
+         secondaryNavTitle="More in this Section" />
     <br/> 
     <br/> 
     <IntroSection 
