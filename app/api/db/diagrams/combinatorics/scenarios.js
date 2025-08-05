@@ -1,7 +1,7 @@
 
 export const scenariosData={
     "Permutations (Full)":{
-        svg:`<svg width="600" height="270" viewBox="0 0 500 170" style="margin-left:200px;" xmlns="http://www.w3.org/2000/svg">
+        svg:`<svg width="600" height="270" viewBox="0 0 600 270" style="margin-left:200px;" xmlns="http://www.w3.org/2000/svg">
   <!-- LEFT SIDE: 2 items permutation -->
   <!-- Original 2 balls at top left -->
   <circle cx="30" cy="8" r="8" fill="#ff6b6b"/>
@@ -215,7 +215,7 @@ export const scenariosData={
   <text x="300" y="225" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#1e40af">Permutation: Arrange ALL items, order matters</text>
   <text x="300" y="245" text-anchor="middle" font-family="Arial" font-size="14" fill="#374151">Take n distinct items → arrange them in every possible order → get n! arrangements</text>
 </svg>`,
-        explanation:``,
+        explanation:`**Here** is the \n[explanation](!/combinatorics)`,
         links:[
             {text:``,url:``},
             {text:``,url:``},
