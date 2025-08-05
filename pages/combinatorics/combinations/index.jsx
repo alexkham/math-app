@@ -540,6 +540,15 @@ combinationsScenariosTableData}) {
           <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: weakCompositionTable }} key="table" />,
           sectionsContent.weak.between,
           sectionsContent.weak.after,
+                     <div key={4} style={{width:'100%',margin:'auto'}}>
+     <SvgDiagram
+   data={scenariosData["Weak Composition"]}
+  scale={'1'}
+//   width='1200px'
+  layout='horizontal'
+  splitRatio={'0.7'}
+ />
+ </div>
         ]
     },
     {

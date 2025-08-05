@@ -2238,7 +2238,7 @@ export const scenariosData={
         ]
     },
      "Weak Composition":{
-        svg:`<svg width="700" height="700" viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg">
+        svg:`<svg width="700" height="750" viewBox="0 0 700 750" xmlns="http://www.w3.org/2000/svg">
   <!-- Title -->
   <text x="350" y="25" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#333">Distribute 3 identical coins into 3 labeled boxes</text>
   
@@ -2425,13 +2425,15 @@ export const scenariosData={
   <circle cx="307" cy="515" r="6" fill="#f39c12"/>
   
   <!-- Textbox -->
-  <rect x="50" y="580" width="600" height="100" fill="#f8f9fa" stroke="#34495e" stroke-width="2" rx="8"/>
+  <rect x="50" y="580" width="600" height="140" fill="#f8f9fa" stroke="#34495e" stroke-width="2" rx="8"/>
   
   <text x="350" y="610" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#2c3e50">Weak Composition</text>
   
   <text x="350" y="640" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#e74c3c">Formula: C(n+k-1, k-1) = C(3+3-1, 3-1) = C(5,2) = 10 ways</text>
   
-  <text x="80" y="665" text-anchor="start" font-family="Arial" font-size="14" fill="#34495e">• Boxes can be empty • Order of boxes matters • Only counts matter, not which specific coin goes where</text>
+  <text x="80" y="665" text-anchor="start" font-family="Arial" font-size="14" fill="#34495e">• Boxes can be empty</text>
+  <text x="80" y="685" text-anchor="start" font-family="Arial" font-size="14" fill="#34495e">• Order of boxes matters</text>
+  <text x="80" y="705" text-anchor="start" font-family="Arial" font-size="14" fill="#34495e">• Only counts matter, not which specific coin goes where</text>
 </svg>`,
         explanation:``,
         links:[
