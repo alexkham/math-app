@@ -674,10 +674,11 @@ By doing this, it becomes possible to talk about averages, variances and more, u
 * **Guiding decisions:** With those calculations in hand, you can compare different spreads of belief, choose actions that maximize your expected gain, or measure how risky a plan is.
 There are many different probability distributions—each with its own characteristic pattern—but they can be broadly classified into two main categories: **discrete distributions**, which assign probabilities to countable outcomes, and **continuous distributions**, which use density functions over intervals of real numbers.
 `,
-svg:`
+svg:
+`
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="622" height="400" viewBox="0 140 1044 324" style="margin-left: 200px; margin-top: -100px; fill:none;stroke:none;fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="622" height="400" style="margin-left:-20px;" viewBox="0 140 1044 324" style="margin-left: 200px; margin-top: -100px; fill:none;stroke:none;fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style class="text-font-style fontImports" data-font-family="Roboto">@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=block');</style>
 <g id="items" style="isolation: isolate">
 <g id="blend" style="mix-blend-mode: normal">
@@ -989,7 +990,18 @@ export default function ProbabilityPage({
       link:sectionContent.distributions.link,
       content:[
         sectionContent.distributions.before,
-        sectionContent.distributions.svg,
+
+        // sectionContent.distributions.svg,
+         <div style={{
+                    textAlign: 'center',
+                    transform: 'scale(0.98)',
+                    transformOrigin: 'center',
+                    marginTop:'50px',
+                    marginLeft:'-150px'
+                  }} dangerouslySetInnerHTML={{ 
+                    __html:   sectionContent.distributions.svg,
+                  }} />
+               
 
         
       ]
