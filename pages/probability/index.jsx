@@ -608,7 +608,7 @@ By treating events as sets, we gain access to the full power of [set theory](!/s
 `,
         before:`When we conceptualize probability, we naturally think of [sample spaces](!/probability#concepts) as collections of individual outcomes—dots scattered across our mathematical landscape.`,
         between:`However, this intuitive picture presents a fundamental challenge: if we treat each outcome as a geometric point, it has zero area by definition.
-        @academic[example:Consider !the classical probability formula:
+        @academic[example:Consider the classical probability formula:
          $P(E) = \\frac{\\text{Number of favorable outcomes for event E}}{\\text{Total number of possible outcomes in the sample space S}}$.
          If we literally counted individual points (dots), each with zero "probability mass," we'd face the paradox that every single outcome has probability zero, yet their sum must equal one.]@`,
         after:`To visualize these relationships between events-as-sets, we use [Venn diagrams](!/set-theory/venn-generator)—powerful tools that illustrate unions, intersections, complements, and other set operations that form the algebraic backbone of probability theory.`,
