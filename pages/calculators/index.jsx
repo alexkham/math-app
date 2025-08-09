@@ -28,6 +28,20 @@ export default function ConvertersPage() {
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-diff"><path d="M12 3v14"/><path d="M5 10h14"/><path d="M5 21h14"/></svg>
     )
 
+    const CustomCombinatorics=()=>(
+      // <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-combine-icon lucide-combine"><path d="M10 18H5a3 3 0 0 1-3-3v-1"/><path d="M14 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2"/><path d="M20 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2"/><path d="m7 21 3-3-3-3"/><rect x="14" y="14" width="8" height="8" rx="2"/><rect x="2" y="2" width="8" height="8" rx="2"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+       <rect x="4" y="4" width="4" height="4" rx="1"/>
+       <rect x="10" y="4" width="4" height="4" rx="1"/>
+       <rect x="16" y="4" width="4" height="4" rx="1"/>
+       <rect x="4" y="10" width="4" height="4" rx="1"/>
+       <rect x="10" y="10" width="4" height="4" rx="1"/>
+       <rect x="16" y="10" width="4" height="4" rx="1"/>
+       <rect x="4" y="16" width="4" height="4" rx="1"/>
+       <rect x="10" y="16" width="4" height="4" rx="1"/>
+       <rect x="16" y="16" width="4" height="4" rx="1"/>
+   </svg>
+    )
    
 
     const cardItems=[
@@ -124,7 +138,14 @@ export default function ConvertersPage() {
                 href: "/sequences/fibonacci-numbers"
               }
             ]
-          }
+          },
+           {
+            category: 'Combinatorics Calculator',
+            icon: CustomCombinatorics,
+            href:'/combinatorics/calculator',
+            // No subcategories, will show simple link
+            content:"Calculate Combinations and Permutations for different Combinatorial Scenarios and learn to differentiate them. "
+          },
     ]
   return (
     <>
