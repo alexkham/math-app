@@ -399,7 +399,7 @@ export default function ComplexNumberConverter() {
         <div style={{ fontSize: '14px', color: '#856404', lineHeight: '1.6' }}>
           <strong>Rectangular:</strong> z = a + bi (real and imaginary components)<br/>
           <strong>Polar:</strong> z = r∠θ = r(cos θ + i sin θ) (magnitude and angle)<br/>
-          <strong>Exponential:</strong> z = re^(iθ) (Euler's formula representation)
+          <strong>Exponential:</strong> z = re^(iθ) (Euler&apos;s formula representation)
         </div>
       </div>
     </div>
