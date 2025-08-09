@@ -2584,6 +2584,161 @@ export const scenariosData={
             {text:``,url:``},
             {text:``,url:``},
         ]
+    },
+      "Strong Composition":{
+        svg:`<svg width="750" height="500" viewBox="0 0 750 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="375" y="25" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#333">Distribute 5 identical coins into 3 labeled boxes (each box must get at least 1)</text>
+  
+  <!-- Original coins -->
+  <circle cx="280" cy="60" r="10" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="280" y="64" text-anchor="middle" font-family="Arial" font-size="7" fill="white">¢</text>
+  
+  <circle cx="310" cy="60" r="10" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="310" y="64" text-anchor="middle" font-family="Arial" font-size="7" fill="white">¢</text>
+  
+  <circle cx="340" cy="60" r="10" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="340" y="64" text-anchor="middle" font-family="Arial" font-size="7" fill="white">¢</text>
+  
+  <circle cx="370" cy="60" r="10" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="370" y="64" text-anchor="middle" font-family="Arial" font-size="7" fill="white">¢</text>
+  
+  <circle cx="400" cy="60" r="10" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="400" y="64" text-anchor="middle" font-family="Arial" font-size="7" fill="white">¢</text>
+  
+  <!-- Way 1: (3,1,1) -->
+  <rect x="50" y="100" width="210" height="80" fill="#f8f9fa" stroke="#34495e" stroke-width="2" rx="5"/>
+  <text x="155" y="120" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#666">Way 1: (3,1,1)</text>
+  
+  <rect x="70" y="130" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="95" y="144" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 1</text>
+  <circle cx="85" cy="155" r="5" fill="#f39c12"/>
+  <circle cx="95" cy="155" r="5" fill="#f39c12"/>
+  <circle cx="105" cy="155" r="5" fill="#f39c12"/>
+  
+  <rect x="130" y="130" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="155" y="144" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 2</text>
+  <circle cx="155" cy="155" r="5" fill="#f39c12"/>
+  
+  <rect x="190" y="130" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="215" y="144" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 3</text>
+  <circle cx="215" cy="155" r="5" fill="#f39c12"/>
+  
+  <!-- Way 2: (2,2,1) -->
+  <rect x="280" y="100" width="210" height="80" fill="#f8f9fa" stroke="#34495e" stroke-width="2" rx="5"/>
+  <text x="385" y="120" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#666">Way 2: (2,2,1)</text>
+  
+  <rect x="300" y="130" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="325" y="144" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 1</text>
+  <circle cx="315" cy="155" r="5" fill="#f39c12"/>
+  <circle cx="335" cy="155" r="5" fill="#f39c12"/>
+  
+  <rect x="360" y="130" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="385" y="144" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 2</text>
+  <circle cx="375" cy="155" r="5" fill="#f39c12"/>
+  <circle cx="395" cy="155" r="5" fill="#f39c12"/>
+  
+  <rect x="420" y="130" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="445" y="144" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 3</text>
+  <circle cx="445" cy="155" r="5" fill="#f39c12"/>
+  
+  <!-- Way 3: (1,3,1) -->
+  <rect x="510" y="100" width="210" height="80" fill="#f8f9fa" stroke="#34495e" stroke-width="2" rx="5"/>
+  <text x="615" y="120" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#666">Way 3: (1,3,1)</text>
+  
+  <rect x="530" y="130" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="555" y="144" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 1</text>
+  <circle cx="555" cy="155" r="5" fill="#f39c12"/>
+  
+  <rect x="590" y="130" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="615" y="144" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 2</text>
+  <circle cx="605" cy="155" r="5" fill="#f39c12"/>
+  <circle cx="615" cy="155" r="5" fill="#f39c12"/>
+  <circle cx="625" cy="155" r="5" fill="#f39c12"/>
+  
+  <rect x="650" y="130" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="675" y="144" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 3</text>
+  <circle cx="675" cy="155" r="5" fill="#f39c12"/>
+  
+  <!-- Way 4: (1,2,2) -->
+  <rect x="50" y="200" width="210" height="80" fill="#f8f9fa" stroke="#34495e" stroke-width="2" rx="5"/>
+  <text x="155" y="220" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#666">Way 4: (1,2,2)</text>
+  
+  <rect x="70" y="230" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="95" y="244" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 1</text>
+  <circle cx="95" cy="255" r="5" fill="#f39c12"/>
+  
+  <rect x="130" y="230" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="155" y="244" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 2</text>
+  <circle cx="145" cy="255" r="5" fill="#f39c12"/>
+  <circle cx="165" cy="255" r="5" fill="#f39c12"/>
+  
+  <rect x="190" y="230" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="215" y="244" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 3</text>
+  <circle cx="205" cy="255" r="5" fill="#f39c12"/>
+  <circle cx="225" cy="255" r="5" fill="#f39c12"/>
+  
+  <!-- Way 5: (1,1,3) -->
+  <rect x="280" y="200" width="210" height="80" fill="#f8f9fa" stroke="#34495e" stroke-width="2" rx="5"/>
+  <text x="385" y="220" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#666">Way 5: (1,1,3)</text>
+  
+  <rect x="300" y="230" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="325" y="244" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 1</text>
+  <circle cx="325" cy="255" r="5" fill="#f39c12"/>
+  
+  <rect x="360" y="230" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="385" y="244" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 2</text>
+  <circle cx="385" cy="255" r="5" fill="#f39c12"/>
+  
+  <rect x="420" y="230" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="445" y="244" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 3</text>
+  <circle cx="435" cy="255" r="5" fill="#f39c12"/>
+  <circle cx="445" cy="255" r="5" fill="#f39c12"/>
+  <circle cx="455" cy="255" r="5" fill="#f39c12"/>
+  
+  <!-- Way 6: (2,1,2) -->
+  <rect x="510" y="200" width="210" height="80" fill="#f8f9fa" stroke="#34495e" stroke-width="2" rx="5"/>
+  <text x="615" y="220" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#666">Way 6: (2,1,2)</text>
+  
+  <rect x="530" y="230" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="555" y="244" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 1</text>
+  <circle cx="545" cy="255" r="5" fill="#f39c12"/>
+  <circle cx="565" cy="255" r="5" fill="#f39c12"/>
+  
+  <rect x="590" y="230" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="615" y="244" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 2</text>
+  <circle cx="615" cy="255" r="5" fill="#f39c12"/>
+  
+  <rect x="650" y="230" width="50" height="40" fill="#ecf0f1" stroke="#666" stroke-width="1"/>
+  <text x="675" y="244" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Box 3</text>
+  <circle cx="665" cy="255" r="5" fill="#f39c12"/>
+  <circle cx="685" cy="255" r="5" fill="#f39c12"/>
+  
+  <!-- Textbox -->
+  <rect x="75" y="300" width="600" height="110" fill="#f8f9fa" stroke="#34495e" stroke-width="2" rx="8"/>
+  
+  <text x="375" y="325" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#2c3e50">Strong Composition</text>
+  
+  <text x="375" y="350" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#e74c3c">Formula: C(n-1, k-1) = C(5-1, 3-1) = C(4,2) = 6 ways</text>
+  
+  <text x="105" y="375" text-anchor="start" font-family="Arial" font-size="14" fill="#34495e">• No boxes can be empty</text>
+  <text x="105" y="395" text-anchor="start" font-family="Arial" font-size="14" fill="#34495e">• Each box must get at least 1 unit</text>
+</svg>`,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
+    "identity name":{
+        svg:``,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
     }
 
 }
