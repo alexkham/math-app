@@ -51,6 +51,7 @@ export const mainMenuStructure = [
           title: 'Visual Tools',
           href: '/visual-tools',
           items: [
+            { label: 'All Visual Tools', href: '/visual-tools' },
             { label: 'Base Converter', href: '/visual-tools/base-converter' },
             { label: 'Square Root Visualizer', href: '/visual-tools/square-root' },
             { label: 'Determinant Visual Calculator', href: '/visual-tools/determinant-calculator' },
@@ -68,6 +69,7 @@ export const mainMenuStructure = [
           title: 'Calculators',
           href: '/calculators',
           items: [
+            { label: 'All Calculators', href: '/calculators' },
             { label: 'Statistics Calculator', href: '/calculators/statistics-calculator' },
             { label: 'Trigonometry Calculator', href: '/calculators/trigonometry-calculator' },
            
@@ -109,6 +111,7 @@ export const mainMenuStructure = [
             title: 'Converters',
             href: '/converters',
             items: [
+              { label: 'All Converters', href: '/converters' },
               { label: 'Angle Converter', href: '/converters/degree-radians' },
               { label: 'Normal Forms Converter', href: '/logic/propositional-logic/syntax/normal-forms' },
               
@@ -120,6 +123,7 @@ export const mainMenuStructure = [
           title: 'Tables',
           href: '/tables',
           items: [
+            { label: 'All Tables', href: '/tables' },
             { label: 'Basic Math', href: '/tables/arithmetics' },
             { label: 'Probability', href: '/tables/probability' },
             { label: 'Mathematical Symbols', href: '/math-symbols' },
