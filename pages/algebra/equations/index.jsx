@@ -265,7 +265,7 @@ export default function EquationsPage({sectionsContent,introContent,
             link:'',
             content:[
                 sectionsContent.components.before,
-                <FourPanel data={equationComponents} theme='nightsky'/>,
+                <FourPanel  key={3} data={equationComponents} theme='nightsky'/>,
                 sectionsContent.components.after,
             ]
         },

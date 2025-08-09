@@ -401,10 +401,10 @@ export default function CombinatoricspAGE({sectionsContent,introContent,
             title:sectionsContent.counting.title,
             link:'',
             content:[
-               <div id='add'></div>,
+               <div key={'add'} id='add'></div>,
                 sectionsContent.counting.before,
                 countingPrinciplesDiagramsData["Addition Principle"].svg,
-                <div id='multi'></div>,
+                <div   key={'multi'} id='multi'></div>,
                 sectionsContent.counting.between,                
                 countingPrinciplesDiagramsData["Multiplication Principle"].svg,
                 sectionsContent.counting.after,
@@ -424,7 +424,7 @@ export default function CombinatoricspAGE({sectionsContent,introContent,
             link:'',
             content:[
               sectionsContent.permutations_vs_combinations.before,
-              <div style={{display:'flex', alignItems:'center',justifyContent:'center',marginTop:'50px'}}>
+              <div key={'mermaid'} style={{display:'flex', alignItems:'center',justifyContent:'center',marginTop:'50px'}}>
                  <MermaidDiagram chartDefinition={countingPrinciplesDiagram}
                    width="500px"
                    height="300px"

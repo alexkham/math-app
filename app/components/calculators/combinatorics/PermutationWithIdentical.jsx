@@ -957,7 +957,7 @@ export function PermutationWithIdentical({ explanations }) {
             }}>
               {explanations?.example ? processContent(explanations.example) : (
                 <>
-                  Arrange letters in "BOOK":<br/>
+                  Arrange letters in word BOOK:<br/>
                   • Total: 4 letters<br/>
                   • B appears 1 time<br/>
                   • O appears 2 times<br/>

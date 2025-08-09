@@ -477,7 +477,7 @@ combinationsScenariosTableData}) {
         link:'',
         content:[
           sectionsContent.types.before,
-          <div style={{width:'95%',margin:'auto'}}>
+          <div key={11} style={{width:'95%',margin:'auto'}}>
           <GenericTable
                 key={1}
                 tableData={combinationsScenariosTableData} theme='lightBlue'
@@ -581,7 +581,7 @@ combinationsScenariosTableData}) {
        
         // scenariosData["Distributing Different Items into Numbered Cells"].svg,
 
-        <div style={{
+        <div key={112}  style={{
             textAlign: 'center',
             transform: 'scale(0.7)',
             transformOrigin: 'center',

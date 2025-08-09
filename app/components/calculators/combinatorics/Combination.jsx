@@ -704,7 +704,7 @@ export function Combination({ explanations }) {
                   borderRadius: '4px'
                 }}>
                   <small style={{ color: '#155724' }}>
-                    There are {result.result.toLocaleString()} ways to select {result.r} items from {result.n} available items (order doesn't matter).
+                    There are {result.result.toLocaleString()} ways to select {result.r} items from {result.n} available items (order does not matter).
                   </small>
                 </div>
               )}

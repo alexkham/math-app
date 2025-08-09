@@ -619,7 +619,7 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
         link:'',
         content:[
           sectionsContent.types.before,
-          <div style={{width:'90%',margin:'auto'}}>
+          <div key={11} style={{width:'90%',margin:'auto'}}>
           <GenericTable
                 key={1}
                 tableData={permutationsScenariosTableData} theme='lightBlue'
@@ -655,7 +655,7 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
           <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: identicalTable }} key="table" />,
           sectionsContent.identical.between,
           sectionsContent.identical.after,
-           <div style={{
+           <div key={12} style={{
                       textAlign: 'center',
                       transform: 'scale(0.85)',
                       transformOrigin: 'center',
@@ -663,7 +663,7 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
                     }} dangerouslySetInnerHTML={{ 
                       __html: scenariosData["Permutations of 3 with 2 Identical Items"].svg 
                     }} />,
-           <div style={{
+           <div key={13} style={{
                       textAlign: 'center',
                       transform: 'scale(0.85)',
                       transformOrigin: 'center',

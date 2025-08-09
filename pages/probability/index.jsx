@@ -992,7 +992,7 @@ export default function ProbabilityPage({
         sectionContent.distributions.before,
 
         // sectionContent.distributions.svg,
-         <div style={{
+         <div key={'dist'} style={{
                     textAlign: 'center',
                     transform: 'scale(0.98)',
                     transformOrigin: 'center',
