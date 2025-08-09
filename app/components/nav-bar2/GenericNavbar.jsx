@@ -25,10 +25,11 @@
 //   );
 // }
 
-// function GenericNavbar({ menuStructure=mainMenuStructure }) {
+// function GenericNavbar({ menuStructure = mainMenuStructure }) {
 //   const [isNavActive, setIsNavActive] = useState(false);
 //   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 //   const [activeMegaMenu, setActiveMegaMenu] = useState(null);
+//   const [activeAccordions, setActiveAccordions] = useState(new Set());
 //   const timeoutRef = useRef(null);
 
 //   useEffect(() => {
@@ -48,16 +49,67 @@
 //   const handleMouseLeave = () => {
 //     timeoutRef.current = setTimeout(() => {
 //       setActiveMegaMenu(null);
+//       setActiveAccordions(new Set()); // Close all accordions when menu closes
 //     }, 300);
 //   };
 
 //   const closeMobileMenu = () => {
 //     setIsMobileMenuOpen(false);
 //     setActiveMegaMenu(null);
+//     setActiveAccordions(new Set());
 //   };
 
 //   const handleGoBack = () => {
 //     window.history.back();
+//   };
+
+//   const toggleAccordion = (sectionId) => {
+//     setActiveAccordions(prev => {
+//       const newSet = new Set(prev);
+//       if (newSet.has(sectionId)) {
+//         newSet.delete(sectionId);
+//       } else {
+//         newSet.add(sectionId);
+//       }
+//       return newSet;
+//     });
+//   };
+
+//   const organizeMenuColumns = (columns) => {
+//     const SECTIONS_PER_COLUMN = 3;
+    
+//     const allSections = [];
+    
+//     columns.forEach((column) => {
+//       if (column.items && column.items.length > 0) {
+//         if (column.title) {
+//           // Has title - make it one accordion section (never split)
+//           allSections.push({
+//             id: column.title.toLowerCase().replace(/\s+/g, '-'),
+//             title: column.title,
+//             items: column.items
+//           });
+//         } else {
+//           // No title - it's a flat list (like Featured Topics)
+//           allSections.push({
+//             id: `flat-section-${allSections.length}`,
+//             title: null,
+//             items: column.items,
+//             isFlat: true
+//           });
+//         }
+//       }
+//     });
+    
+//     // Organize into columns
+//     const accordionColumns = [];
+//     for (let i = 0; i < allSections.length; i += SECTIONS_PER_COLUMN) {
+//       accordionColumns.push({
+//         sections: allSections.slice(i, i + SECTIONS_PER_COLUMN)
+//       });
+//     }
+    
+//     return accordionColumns;
 //   };
 
 //   const renderMenuItem = (item) => {
@@ -70,6 +122,8 @@
 //         </li>
 //       );
 //     } else if (item.type === 'megamenu') {
+//       const accordionColumns = organizeMenuColumns(item.columns);
+      
 //       return (
 //         <li
 //           className="megamenu-item"
@@ -83,45 +137,50 @@
 //               <ChevronDown />
 //             </span>
 //           </Link>
-//           <div className={`megamenu ${activeMegaMenu === item.id ? 'active' : ''}`}>
-//             <div className="megamenu-content">
-//               {item.columns.map((column, columnIndex) => {
-//                 // Calculate how many sub-columns we need based on items count
-//                 const ITEMS_PER_COLUMN = 10; // Adjust this number based on your needs
-//                 const itemsCount = column.items.length;
-//                 const subColumnsCount = Math.ceil(itemsCount / ITEMS_PER_COLUMN);
-                
-//                 return (
-//                   <div className="megamenu-category" key={columnIndex}>
-//                     {column.title && (
-//                       <Link href={column.href || '#'}>
-//                         <h3 className='category-title'>{column.title}</h3>
-//                       </Link>
-//                     )}
-//                     <div className="megamenu-subcategories">
-//                       {[...Array(subColumnsCount)].map((_, subColumnIndex) => {
-//                         const startIdx = subColumnIndex * ITEMS_PER_COLUMN;
-//                         const endIdx = startIdx + ITEMS_PER_COLUMN;
-//                         const columnItems = column.items.slice(startIdx, endIdx);
-                        
-//                         return (
-//                           <div className="megamenu-column" key={subColumnIndex}>
-//                             <ul>
-//                               {columnItems.map((subItem, itemIndex) => (
-//                                 <li key={itemIndex}>
-//                                   <Link href={subItem.href} onClick={closeMobileMenu}>
-//                                     {subItem.label}
-//                                   </Link>
-//                                 </li>
-//                               ))}
-//                             </ul>
-//                           </div>
-//                         );
-//                       })}
-//                     </div>
-//                   </div>
-//                 );
-//               })}
+//           <div className={`megamenu-accordion ${activeMegaMenu === item.id ? 'active' : ''}`}>
+//             <div className="accordion-columns">
+//               {accordionColumns.map((column, columnIndex) => (
+//                 <div className="accordion-column" key={columnIndex}>
+//                   {column.sections.map((section) => (
+//                     section.isFlat ? (
+//                       // Flat list without accordion (like Featured Topics)
+//                       <div className="flat-section" key={section.id}>
+//                         <ul className="flat-items">
+//                           {section.items.map((item, itemIndex) => (
+//                             <li key={itemIndex}>
+//                               <Link href={item.href} onClick={closeMobileMenu}>
+//                                 {item.label}
+//                               </Link>
+//                             </li>
+//                           ))}
+//                         </ul>
+//                       </div>
+//                     ) : (
+//                       // Accordion section with title
+//                       <div className="accordion-section" key={section.id}>
+//                         <button 
+//                           className={`accordion-header ${activeAccordions.has(section.id) ? 'active' : ''}`}
+//                           onClick={() => toggleAccordion(section.id)}
+//                         >
+//                           {section.title}
+//                           <ChevronDown />
+//                         </button>
+//                         <div className={`accordion-content ${activeAccordions.has(section.id) ? 'active' : ''}`}>
+//                           <ul className="accordion-items">
+//                             {section.items.map((subItem, itemIndex) => (
+//                               <li key={itemIndex}>
+//                                 <Link href={subItem.href} onClick={closeMobileMenu}>
+//                                   {subItem.label}
+//                                 </Link>
+//                               </li>
+//                             ))}
+//                           </ul>
+//                         </div>
+//                       </div>
+//                     )
+//                   ))}
+//                 </div>
+//               ))}
 //             </div>
 //           </div>
 //         </li>
@@ -285,12 +344,30 @@ function GenericNavbar({ menuStructure = mainMenuStructure }) {
           onMouseEnter={() => handleMouseEnter(item.id)}
           onMouseLeave={handleMouseLeave}
         >
-          <Link href={item.href}>
+          <Link href={item.href} onClick={(e) => {
+            e.stopPropagation();
+            closeMobileMenu();
+          }}>
             <span className='navbar-item'>
               {item.label}
               <ChevronDown />
             </span>
           </Link>
+          <style jsx>{`
+            .chevron-button {
+              background: none;
+              border: none;
+              padding: 0;
+              margin: 0;
+              cursor: pointer;
+              color: inherit;
+              outline: none;
+            }
+            .chevron-button:focus {
+              outline: none;
+              box-shadow: none;
+            }
+          `}</style>
           <div className={`megamenu-accordion ${activeMegaMenu === item.id ? 'active' : ''}`}>
             <div className="accordion-columns">
               {accordionColumns.map((column, columnIndex) => (

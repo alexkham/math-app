@@ -1,16 +1,17 @@
-
+import React from 'react'
 
 //Empty
-// export async function getStaticProps(){
+
+ export async function getStaticProps(){
 
 
-//     return {
-//       props:{
-//         sectionsContent,
+   return {
+      props:{
+         sectionsContent,
         
-//       }
-//     }
-//   }
+       }
+    }
+   }
   
 
   //With sectionsContent

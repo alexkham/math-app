@@ -47,10 +47,10 @@ export default function CombinatoricsCalculator({ explanations = {}, initialScen
         textAlign: 'center',
         marginBottom: '40px'
       }}>
-        <h1 style={{
+        {/* <h1 style={{
           color: '#333',
           marginBottom: '10px'
-        }}>Combinatorics Calculator</h1>
+        }}>Combinatorics Calculator</h1> */}
         <p style={{
           color: '#666',
           fontSize: '16px'
