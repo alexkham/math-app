@@ -81,7 +81,7 @@
   top: calc(100% + 10px);
   left: calc(50% + 130px);
   transform: translateX(-50%);
-  background-color: white;
+  background-color: whitesmoke;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -89,11 +89,12 @@
   visibility: hidden;
   z-index: 100004;
   transition: opacity 0.2s ease, visibility 0.2s ease;
-  min-width: 900px;
+  min-width: 600px;
   max-height: 500px;
   overflow-y: auto;
   pointer-events: none;
   padding: 24px;
+  max-width: 1000px;
 }
 
 .megamenu-accordion.active,

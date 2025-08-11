@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
         <meta name="robots" content="noindex,follow" />
       </Head>
       <body >
-        <GenericNavbar />
+        {/* <GenericNavbar /> */}
         {/* <MyNavbar></MyNavbar> */}
       {/* <nav className='nav-bar'>
           <GoHomeButton className={'fixed-button'}/>

@@ -40,6 +40,7 @@ import GeneralAccordion from './components/accordion/GeneralAccordionComponent';
 import GeneralAccordionWrapper from './components/accordion/GeneralAccordionWrapper';
 import summaries from './api/db/tables/set-theory/summaries';
 import Head from 'next/head';
+import GenericNavbar from './components/nav-bar2/GenericNavbar';
 
 
 export function generateStaticParams() {
@@ -83,7 +84,7 @@ export default async function Home() {
   `
 
   return (
-    <div className='outer-container'>
+    <div className='outer-container' >
       <Head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -104,6 +105,7 @@ export default async function Home() {
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 </Head>
+<GenericNavbar/>
      
       <HomePage categorizedUrls={categorizedUrls} metaDescriptions={metaDescriptions}></HomePage>
      
@@ -113,6 +115,7 @@ export default async function Home() {
       <br></br>
       {/* <SequenceTable sequenceData={primes} sequenceTitle={'fibonacci'}></SequenceTable> */}
       <br></br>
+      
       {/* <Link href={'/tables'}>
        <button>Go to Tables Page</button>
        </Link> */}
