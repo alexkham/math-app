@@ -10,6 +10,8 @@ import Sections from '@/app/components/page-components/section/Sections'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import MermaidDiagram from '@/app/components/mermaid-diagram/MermaidDiagram'
 import { countingPrinciplesDiagramsData } from '@/app/api/db/diagrams/combinatorics/countingPrinciples'
+import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
+import { scenariosData } from '@/app/api/db/diagrams/combinatorics/scenarios'
 
 
 
@@ -430,7 +432,16 @@ export default function CombinatoricspAGE({sectionsContent,introContent,
                    height="300px"
                    scale={.9} />
                    </div> ,   
-             sectionsContent.permutations_vs_combinations.after,       
+             sectionsContent.permutations_vs_combinations.after,  
+             <div key={'perm_vs_comb'} style={{width:'100%',margin:'auto'}}>
+               <SvgDiagram
+   data={scenariosData["Permutations vs Combinations"]}
+  scale={'1'}
+//   width='1200px'
+  layout='horizontal'
+  splitRatio={'0.7'}
+ />
+ </div>, 
                  
                  
                 

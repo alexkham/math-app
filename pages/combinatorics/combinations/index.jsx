@@ -10,10 +10,16 @@ import Sections from '@/app/components/page-components/section/Sections'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import { scenariosData } from '@/app/api/db/diagrams/combinatorics/scenarios'
 import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
+import Head from 'next/head'
 
 
 
 export async function getStaticProps(){
+
+  const keyWords=[
+    'combinations','combination formula','permutation and combination','combinatorics',
+    'combinations vs permutations'
+  ]
 
     const combinationsScenariosTableData = {
         tableTitle: "Combination Scenarios",
@@ -451,6 +457,12 @@ Mastering these combination types equips you to handle selection and distributio
 
     return {
       props:{
+         seoData: {
+      title: `${sectionsContent.types.title} in Combinatorics | Learn Math Class`,
+      description: introContent.content.substring(0, 160),
+      keywords: keyWords.join(", "),
+      url: "/combinatorics/combinations"
+    },
         sectionsContent,
         introContent,
         simpleCombinationTable,
@@ -465,7 +477,7 @@ Mastering these combination types equips you to handle selection and distributio
   }
   
 
-export default function CombinationsPage({sectionsContent,introContent,simpleCombinationTable,
+export default function CombinationsPage({ seoData,sectionsContent,introContent,simpleCombinationTable,
   partitionTable,weakCompositionTable ,strongCompositionTable,distributionTable,
 combinationsScenariosTableData}) {
 
@@ -561,6 +573,15 @@ combinationsScenariosTableData}) {
           <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: strongCompositionTable }} key="table" />,
           sectionsContent.strong.between,
           sectionsContent.strong.after,
+            <div key={5} style={{width:'100%',margin:'auto'}}>
+     <SvgDiagram
+   data={scenariosData["Strong Composition"]}
+  scale={'1'}
+//   width='1200px'
+  layout='horizontal'
+  splitRatio={'0.7'}
+ />
+ </div>,
 
         ]
     },
@@ -573,6 +594,7 @@ combinationsScenariosTableData}) {
         <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: distributionTable }} key="table" />,
         sectionsContent.distribution.between,
         sectionsContent.distribution.after,
+       
     //     <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: distributionTable }} key="table" />,
     //     sectionsContent.distribution.between,
     //    <div style={{transform:'scale(0.8)'}}>
@@ -599,6 +621,50 @@ combinationsScenariosTableData}) {
 
   return (
     <>
+    <Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": seoData.title,
+        "description": seoData.description,
+        "keywords": seoData.keywords,
+        "url": `https://www.learnmathclass.com${seoData.url}`,
+        "dateModified": new Date().toISOString(),
+        "inLanguage": "en-US",
+        "mainEntity": {
+          "@type": "Article",
+          "name": "Combinations",
+          "dateModified": new Date().toISOString(),
+          "author": {
+            "@type": "Organization",
+            "name": "Learn Math Class"
+          }
+        }
+      })
+    }}
+  />
+</Head>
     <GenericNavbar/>
     <br/>
     <br/>
@@ -617,7 +683,7 @@ combinationsScenariosTableData}) {
     <br/> 
     <SectionTableOfContents sections={combinationsSections}
     showSecondaryNav={true}
-         secondaryNavMode="children"  // or "siblings"
+         secondaryNavMode="siblings"  // or "siblings"
          secondaryNavTitle="More in this Section" />
     <br/> 
     <br/> 
@@ -639,3 +705,4 @@ combinationsScenariosTableData}) {
     </>
   )
 }
+

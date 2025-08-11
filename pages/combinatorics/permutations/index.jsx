@@ -9,6 +9,7 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Sections from '@/app/components/page-components/section/Sections'
 import { scenariosData } from '@/app/api/db/diagrams/combinatorics/scenarios'
 import GenericTable from '@/app/components/generic-table/GenericTable'
+import Head from 'next/head'
 
 
 
@@ -578,6 +579,12 @@ Mastering these permutation types gives you the tools to solve ordering problems
 
     return {
       props:{
+         seoData: {
+      title: "Permutations in Combinatorics - Types, Formulas & Examples | Learn Math Class",
+      description: introContent.content.substring(0, 160),
+      keywords: keyWords.join(", "),
+      url: "/combinatorics/permutations"
+    },
         sectionsContent,
         introContent,
         permutationsTable,
@@ -594,7 +601,7 @@ Mastering these permutation types gives you the tools to solve ordering problems
   }
   
 
-export default function PermutationsPage({sectionsContent,introContent,permutationsDiagram,fullPermutationTable,
+export default function PermutationsPage({seoData,sectionsContent,introContent,permutationsDiagram,fullPermutationTable,
   identicalTable,permutationsTable ,permutationsScenariosTableData,partialWithoutTable,
   permutationWithRepetitionTable,circularTable}) {
 
@@ -732,6 +739,50 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
 
   return (
     <>
+    <Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": seoData.title,
+        "description": seoData.description,
+        "keywords": seoData.keywords,
+        "url": `https://www.learnmathclass.com${seoData.url}`,
+        "dateModified": new Date().toISOString(),
+        "inLanguage": "en-US",
+        "mainEntity": {
+          "@type": "Article",
+          "name": "Permutations",
+          "dateModified": new Date().toISOString(),
+          "author": {
+            "@type": "Organization",
+            "name": "Learn Math Class"
+          }
+        }
+      })
+    }}
+  />
+</Head>
     <GenericNavbar/>
     <br/>
     <br/>
@@ -748,7 +799,11 @@ export default function PermutationsPage({sectionsContent,introContent,permutati
     <Breadcrumb/>
     <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>Permutations</h1>   
     <br/> 
-    <SectionTableOfContents sections={permutationsSections}/>
+    <SectionTableOfContents sections={permutationsSections}
+     showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "siblings"
+         secondaryNavTitle="More in this Section"
+    />
     <br/> 
     <br/> 
     <IntroSection 
