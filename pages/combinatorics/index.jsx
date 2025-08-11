@@ -478,7 +478,10 @@ export default function CombinatoricspAGE({sectionsContent,introContent,
    <Breadcrumb/>
    <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Combinatorics</h1>
    <br/>
-   <SectionTableOfContents sections={combinatoricsSections}/>
+   <SectionTableOfContents sections={combinatoricsSections}
+    showSecondaryNav={true}
+         secondaryNavMode="children"  // or "siblings"
+         secondaryNavTitle="More in this Section"/>
    <br/>
    <br/>
    <br/>
