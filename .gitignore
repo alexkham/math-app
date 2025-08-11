@@ -52,3 +52,7 @@ pages/test*/
 /local-tests/
 
 /drafts/*
+
+
+#sitemap
+public/sitemap.xml
