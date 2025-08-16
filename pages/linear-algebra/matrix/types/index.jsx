@@ -280,7 +280,7 @@ export default function MatrixTypesPage({
   </span>      
 </div>
 <br/>
-<div style={{width:'100%'}}>
+<div style={{width:'80%',margin:'auto'}}>
 <Sections  sections={typesSections} leftMargin='50px'/>
 </div>
 

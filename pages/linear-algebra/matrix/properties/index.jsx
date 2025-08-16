@@ -24,7 +24,7 @@ export default function MatrixPropertiesPage() {
                       panelBackgroundColor='#f2f2f2'
                     /> 
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-10px',marginBottom:'30px'}}>Square Matrix Properties</h1>
+    <h1 className='title' style={{marginTop:'-10px',marginBottom:'30px'}}>Matrix Properties</h1>
     <MatrixComparisonTable categories={categories} matrixTypes={matrixTypes}/>
     <br/>
     <br/>

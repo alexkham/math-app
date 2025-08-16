@@ -57,7 +57,7 @@ Diagonal matrices are crucial in **eigenvalue decomposition**, where a matrix is
                 [Identity Matrix](!/linear-algebra/matrix/types/identity-matrix): Where all diagonal elements are **1** and other equal to **0**.
                 **Scalar Matrix**: When all diagonal elements are equal to some scalar λ and other equal to **0**.`,
                 `<span id="diagram"></span>`,
-               `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 280">
+               `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 280" style="margin-left:300px">
     <!-- Diagonal Matrix (largest ellipse) -->
     <ellipse cx="175" cy="140" rx="154" ry="112" 
              fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>

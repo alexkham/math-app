@@ -16,8 +16,8 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    obj1:{
-      title:``,
+    definition:{
+      title:`Definition and Notation`,
       content:``,
       before:``,
       after:``,
@@ -91,8 +91,8 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
     
   const genericSections=[
     {
-        id:'1',
-        title:'section1',
+        id:'definition',
+        title:sectionsContent.definition.title,
         link:'',
         content:''
     },
