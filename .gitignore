@@ -53,7 +53,9 @@ pages/test*/
 
 /drafts/*
 
-pages/**/_index.jsx
+pages/**/_index.jsx/
+
+#pages/linear-algebra/*/
 
 
 #sitemap
