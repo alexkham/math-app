@@ -56,39 +56,59 @@ import '../../pages.css'
  example: 'How many ways can 6 people sit around a circular table? $(6-1)! = 5! = 120$ ways',
  reasoning: `In a circle, we fix one object to eliminate rotational symmetry. This leaves $(n-1)$ objects to arrange in $(n-1)!$ ways. All rotations of a linear arrangement represent the same circular arrangement.
  
- Read more about [circular permutations](!/combinatorics/permutations#circular)
+ Read more about [circular permutations](!/combinatorics/permutations#circular).
  `,
 },
 Combination: {
  formula: '$C(n,r) = \\frac{n!}{r! \\times (n-r)!}$',
  description: 'Calculate the number of ways to pick $r$ different items from $n$ items where order doesn\'t matter. Each selection is a unique combination.',
  example: 'Selecting a 3-person committee from 5 people: $C(5,3) = \\frac{5!}{3! \\times 2!} = \\frac{120}{6 \\times 2} = 10$ combinations',
- reasoning: 'We start with $n!$ arrangements, divide by $r!$ to remove order within selected items, and divide by $(n-r)!$ to remove arrangements of unselected items. This leaves only unique selections.'
+ reasoning: `We start with $n!$ arrangements, divide by $r!$ to remove order within selected items, and divide by $(n-r)!$ to remove arrangements of unselected items. This leaves only unique selections.
+ 
+ Read more about [simple combinations](!/combinatorics/combinations#combinations).
+
+ `,
 },
 
 PartitionIntoGroups: {
  formula: '$\\binom{n}{n_1,n_2,\\ldots,n_r} = \\frac{n!}{n_1! \\times n_2! \\times \\cdots \\times n_r!}$',
  description: 'Calculate the number of ways to distribute $n$ distinct items into $r$ labeled groups of specified sizes. The sum of group sizes must equal $n$.',
  example: 'Dividing 10 students into 3 labeled groups (classroom: 3, playground: 4, gym: 3): $\\binom{10}{3,4,3} = \\frac{10!}{3! \\times 4! \\times 3!} = 4,200$ ways',
- reasoning: 'We start with $n!$ arrangements, then divide by each group size factorial to account for arrangements within each group being identical. This leaves only the distinct ways to form the specified groups.'
+ reasoning: `We start with $n!$ arrangements, then divide by each group size factorial to account for arrangements within each group being identical. This leaves only the distinct ways to form the specified groups.
+ 
+ Read more about [partition into groups](!/combinatorics/combinations#partition).
+ 
+ `,
 },
 WeakComposition: {
   formula: '$C(n+r-1, r-1) = \\frac{(n+r-1)!}{(r-1)! \\times n!}$',
   description: 'Calculate the number of ways to distribute $n$ identical items into $r$ cells where empty cells are allowed. This is equivalent to finding non-negative integer solutions.',
   example: 'Distributing 5 identical candies among 3 children (some can get none): $C(5+3-1, 3-1) = C(7,2) = 21$ compositions',
-  reasoning: 'We use the stars and bars method: arrange $n$ identical items and $r-1$ dividers. This gives $C(n+r-1, r-1)$ ways to choose positions for dividers among $n+r-1$ total positions.'
+  reasoning: `We use the stars and bars method: arrange $n$ identical items and $r-1$ dividers. This gives $C(n+r-1, r-1)$ ways to choose positions for dividers among $n+r-1$ total positions.
+  
+  Read more about [weak composition](!/combinatorics/combinations#weak).
+  
+  `,
 },
 StrongComposition: {
   formula: '$C(n-1, r-1) = \\frac{(n-1)!}{(r-1)! \\times (n-r)!}$',
   description: 'Calculate the number of ways to distribute $n$ identical items into $r$ cells where no cells can be empty. Each cell must receive at least one item.',
   example: 'Distributing 5 identical tasks among 3 team members (everyone gets at least one): $C(5-1, 3-1) = C(4,2) = 6$ compositions',
-  reasoning: 'We first give one item to each cell, leaving $n-r$ items to distribute freely. Then we use stars and bars with $n-r$ items and $r-1$ dividers, giving $C(n-1, r-1)$ arrangements.'
+  reasoning: `We first give one item to each cell, leaving $n-r$ items to distribute freely. Then we use stars and bars with $n-r$ items and $r-1$ dividers, giving $C(n-1, r-1)$ arrangements.
+  
+  Read more about [strong composition](!/combinatorics/combinations#strong)
+  
+  `,
 },
 DistributionIntoCells: {
   formula: '$r^n$',
   description: 'Calculate the number of ways to distribute $n$ different items into $r$ numbered cells. Each item can go into any cell.',
   example: 'Assigning 3 different tasks to 2 specific days of the week: $2^3 = 8$ distributions',
-  reasoning: 'Each of the $n$ items has $r$ choices of cells to go into. Since items are different and cells are numbered, each item independently chooses from $r$ options, giving $r \\times r \\times ... \\times r = r^n$ total distributions.'
+  reasoning: `Each of the $n$ items has $r$ choices of cells to go into. Since items are different and cells are numbered, each item independently chooses from $r$ options, giving $r \\times r \\times ... \\times r = r^n$ total distributions.
+  
+  Read more about [distribution into cells](!/combinatorics/combinations#distribution)
+  
+  `,
 }
 }
 

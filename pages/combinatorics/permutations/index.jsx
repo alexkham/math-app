@@ -368,6 +368,8 @@ When applied to full permutations, apparently $r=n$ (because we use all the item
  Product of all integers from $n$ down to $1$.
        Where $n$ is the number of items to arrange. 
 
+       @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=1) →@
+
       `,
       between:`
      **Full Permutation — Examples**:
@@ -397,7 +399,11 @@ formula:`@academic[example:&nbsp \t\t\t\t\t\t$P(n)=n!$]@`
       @academic[example:&nbsp\t\t\t\t\t\t$\\binom{n}{n_{1},n_{2},\\dots,n_{k}} = \\frac{n!}{n_{1}!n_{2}!\\dots n_{k}!}$]@ 
       Where multinomial coefficient: counts distinct arrangements of $n$ items split into groups of sizes $n_{1},n_{2},\\dots,n_{k}$.
       
-      `,
+       @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=2) →@
+      
+      
+      
+       `,
       between:`
       **Permutation with Identical Items — Examples**:
 Rearranging letters in the word “BALLOON,” organizing colored balls where some colors repeat, sequencing identical files and unique ones in storage, arranging identical chairs and distinct tables in a layout, ordering repeated ingredients in a recipe list.`,
@@ -429,7 +435,11 @@ Most common:
  **Formula**:      
       The number of arrangements for Partial Permutation without Repetition is 
        @academic[example:&nbsp\t\t\t\t\t\t$P(n,r) = \\frac{n!}{(n-r)!}$]@ 
-      Where $n!$ counts all arrangements, dividing by $(n-r)!$ removes the unused positions.`,
+      Where $n!$ counts all arrangements, dividing by $(n-r)!$ removes the unused positions.
+      
+       @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=3) →@
+      
+      `,
       between:`
       **Partial Permutation (without repetition) — Examples**:
 Selecting and ordering finalists from a group of contestants, arranging a subset of books on a display, picking and sequencing players for a relay team, choosing and ordering questions for an interview, organizing a limited set of tasks for a project phase.
@@ -458,7 +468,12 @@ Alternative notations
 
       The total number of possible circular arrangements is
       @academic[example:&nbsp\t\t\t\t\t\t$P_{\\text{circ}}(n) = (n-1)!$]@ 
-      If $n$ is a total number of items to arrange then fixing one item reduces circular arrangements to $(n-1)!$ linear ones.`,
+      If $n$ is a total number of items to arrange then fixing one item reduces circular arrangements to $(n-1)!$ linear ones.
+      
+       @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=5) →@
+    
+       
+      `,
       between:`
       **Circular Permutation — Examples**:
 Arranging guests around a round table, seating participants in a circular panel, ordering beads in a circular necklace, organizing tasks in a repeating cycle, setting positions for players in a circular game arrangement.`,
@@ -491,6 +506,11 @@ Alternative notations:
       Total number of permutations with repetitions possible and all items used is:
      @academic[example:&nbsp\t\t\t\t\t\t$P_{\\text{rep}}(n,r)=n^{r}$]@
      Where each of the $r$ positions can be filled in $n$ ways.
+
+
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=4) →@
+
+
 `,
 between:`
 **Permutation with Repetition — Examples**:

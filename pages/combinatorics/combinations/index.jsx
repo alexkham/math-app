@@ -293,7 +293,10 @@ The $\\binom{n}{r}$ notation is the most widely used in modern mathematics, but 
       The total number of simple combinations is 
 @academic[example:&nbsp\t\t\t\t\t\t$\\binom{n}{r} = \\frac{n!}{r!(n-r)!}$]@
 If $n$ is the total number of distinct items and $r$ is the number of items to select, then order doesn't matter and repetition isn't allowed.
-      `,
+
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=6) →@
+
+`,
       between:`
       **Simple Combination — Examples**:
 Choosing committee members from a club, selecting lottery numbers, picking a set of books to borrow from a library, forming a group of students for a project, selecting ingredients for a recipe from available options.`,
@@ -324,7 +327,11 @@ Unlike other combinations, permutations, etc., partitions don't have a universal
       The total number of partitions into groups is 
 @academic[example:&nbsp\t\t\t\t\t\t{A₁, A₂, ..., Aₖ}=$\\frac{n!}{n_1!n_2!\\dots n_k!}$]@ 
 If $n$ is the total number of distinct items to partition into $k$ groups of sizes $n_1, n_2, \\ldots, n_k$ respectively, where the groups are unlabeled and only the grouping matters.
-      `,
+     
+
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=7) →@
+
+`,
       between:  `
       **Partition into Groups — Examples**:
 Dividing students into study groups, splitting employees into project teams, grouping tasks into phases of a project, dividing guests into tables at an event, forming clusters of data points in analysis.`,
@@ -349,7 +356,12 @@ Dividing students into study groups, splitting employees into project teams, gro
       The total number of distributions into cells is 
 @academic[example:&nbsp\t\t\t\t\t\t$r^n$]@
 If $n$ is the total number of distinct items to assign and $r$ is the number of labeled containers, where each item can go into any container and containers can be empty.
-      `,
+      
+
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=10) →@
+
+
+`,
       between:`
       **Distribution into Cells — Examples**:
 Assigning students to classrooms, placing different files into labeled folders, allocating distinct products to specific storage bins, or assigning employees to designated offices. This setup focuses on mapping each unique item to a labeled container, making the outcome a clear one‑to‑one assignment.
@@ -377,7 +389,12 @@ This represents the number of ways to place n identical objects into r labeled b
       The total number of weak compositions is 
 @academic[example:&nbsp\t\t\t\t\t\t$\\left(\\binom{n}{r}\\right)=\\binom{n+r-1}{r-1}$]@   
 If $n$ is the total number of identical items to distribute into $r$ labeled containers, where empty containers are allowed and only the count in each container matters.
-      `,
+      
+
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=8) →@
+
+
+`,
       between:`
       **Weak Composition — Examples**:
 Distributing identical coins into numbered boxes, allocating identical resources to different departments, assigning identical tasks across several workers. Since this type of experiment is highly specific — focusing only on counts in labeled containers, even allowing some to remain empty — it is largely self‑explanatory and not as easy to find in common real‑world situations.
@@ -408,7 +425,12 @@ This represents the number of ways to place n identical objects into r labeled b
       The total number of strong compositions is 
 @academic[example:&nbsp\t\t\t\t\t\t$\\left\\langle\\binom{n}{r}\\right\\rangle=\\binom{n-1}{r-1}$]@     
 If $n$ is the total number of identical items to distribute into $r$ labeled containers, where each container must receive at least one item and only the count in each container matters.
-      `,
+     
+
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=9) →@
+
+
+`,
       between:`
      **Strong Composition — Examples**:
 Distributing identical items to departments where each department must receive at least one, allocating identical resources among teams ensuring none are left empty, dividing identical tasks across several workers with no one unassigned. Like weak composition, this type of experiment is quite specific — it focuses on counts in labeled containers with no empties allowed — making it largely self‑explanatory and less common in everyday situations.
