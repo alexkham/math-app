@@ -14,35 +14,50 @@ import '../../pages.css'
     formula: '$P(n) = n!$',
     description: 'Calculate the number of ways to arrange $n$ distinct objects in a sequence.',
     example: 'How many ways can you arrange 5 people in a line? $5! = 120$ ways',
-    reasoning: 'For the first position, you have $n$ choices. For the second position, you have $(n-1)$ choices, and so on. This gives us $n \\times (n-1) \\times (n-2) \\times \\cdots \\times 1 = n!$'
+    reasoning: `For the first position, you have $n$ choices. For the second position, you have $(n-1)$ choices, and so on. This gives us $n \\times (n-1) \\times (n-2) \\times \\cdots \\times 1 = n!$
+    
+    Read more about [full permutations](!/combinatorics/permutations#full) .
+    `,
   },
   
   PermutationWithIdentical: {
     formula: '$\\frac{n!}{n_1! \\times n_2! \\times \\cdots \\times n_k!}$',
     description: 'Calculate arrangements of $n$ objects where some objects are identical. $n_1, n_2, \\ldots, n_k$ are the counts of each type of identical object.',
     example: 'Arrange letters in "BOOK":\\n• Total: 4 letters\\n• B appears 1 time\\n• O appears 2 times\\n• K appears 1 time\\n• Result: $\\frac{4!}{1! \\times 2! \\times 1!} = \\frac{24}{2} = 12$ arrangements',
-    reasoning: 'We start with $n!$ total arrangements, then divide by the factorial of each repetition count to account for identical objects that don\'t create new arrangements when swapped.'
+    reasoning: `We start with $n!$ total arrangements, then divide by the factorial of each repetition count to account for identical objects that don\'t create new arrangements when swapped.
+    
+    Read more about [permutations with identical items](!/combinatorics/permutations#identical).
+    `,
   },
 
   PermutationWithoutRepetition: {
-    formula: `$P(n,r) = \\frac{n!}{(n-r)!}`,
+    formula: `$P(n,r) = \\frac{n!}{(n-r)!}$`,
     description: 'Calculate the number of ways to pick $r$ different items from $n$ items where order matters. Each selection creates a different arrangement.',
     example: 'Selecting and arranging podium finishers (1st, 2nd, 3rd) from 5 runners: $P(5,3) = \\frac{5!}{(5-3)!} = \\frac{120}{2} = 60$ arrangements',
-    reasoning: 'We start with $n!$ total arrangements, then divide by $(n-r)!$ to account for the remaining items we don\'t select. This gives us only the arrangements of the $r$ selected items in their specific positions.'
+    reasoning: `We start with $n!$ total arrangements, then divide by $(n-r)!$ to account for the remaining items we don\'t select. This gives us only the arrangements of the $r$ selected items in their specific positions.
+    
+    Read more about [partial permutations](!/combinatorics/permutations#without).
+    `,
   },
 
   PermutationWithRepetition: {
     formula: '$P(n,r) = n^r$',
     description: 'Calculate the number of ways to arrange $r$ positions using $n$ items where each item can be used multiple times.',
     example: 'Creating a 4-digit PIN using digits 0-9: $10^4 = 10,000$ possible PINs (each digit can be any of the 10 options)',
-    reasoning: 'For each of the $r$ positions, you have $n$ choices (since repetition is allowed). This gives us $n \\times n \\times \\cdots \\times n$ ($r$ times) = $n^r$'
+    reasoning: `For each of the $r$ positions, you have $n$ choices (since repetition is allowed). This gives us $n \\times n \\times \\cdots \\times n$ .
+    ($r$ times) = $n^r$.      
+    
+    Read more about permutations [with repetitions](!/combinatorics/permutations#with).`,
   },
 
   CircularPermutation: {
  formula: '$P_{circular}(n) = (n-1)!$',
  description: 'Calculate the number of ways to arrange $n$ distinct objects in a circle. In circular arrangements, rotations are considered identical.',
  example: 'How many ways can 6 people sit around a circular table? $(6-1)! = 5! = 120$ ways',
- reasoning: 'In a circle, we fix one object to eliminate rotational symmetry. This leaves $(n-1)$ objects to arrange in $(n-1)!$ ways. All rotations of a linear arrangement represent the same circular arrangement.'
+ reasoning: `In a circle, we fix one object to eliminate rotational symmetry. This leaves $(n-1)$ objects to arrange in $(n-1)!$ ways. All rotations of a linear arrangement represent the same circular arrangement.
+ 
+ Read more about [circular permutations](!/combinatorics/permutations#circular)
+ `,
 },
 Combination: {
  formula: '$C(n,r) = \\frac{n!}{r! \\times (n-r)!}$',

@@ -52,7 +52,7 @@ export const mainMenuStructure = [
           href: '/visual-tools',
           items: [
             { label: 'All Visual Tools', href: '/visual-tools' },
-            { label: 'Base Converter', href: '/visual-tools/base-converter' },
+            { label: 'Visual Base Converter', href: '/visual-tools/base-converter' },
             { label: 'Square Root Visualizer', href: '/visual-tools/square-root' },
             { label: 'Determinant Visual Calculator', href: '/visual-tools/determinant-calculator' },
             { label: 'Gauss Elimination Calculator', href: '/visual-tools/gauss-elimination' },
