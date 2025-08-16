@@ -1,0 +1,191 @@
+.flex-table-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    overflow-x: auto;
+    padding: 150px;
+    margin-right: 100px;
+    
+  }
+  
+  .flex-table-header, .flex-table-row {
+    display: flex;
+    width: 100%;
+  }
+  
+  .flex-table-cell {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .header-cell {
+    font-weight: bold;
+    position: sticky;
+    top:100;
+  }
+  
+  .tooltip-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 100000000;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .tooltip-container:hover .tooltip, .tooltip-container:focus .tooltip {
+    visibility: visible;
+    margin-bottom: 5px;
+  }
+
+  .flex-table-container {
+    overflow: visible; /* This might cause layout shifts */
+  }
+
+  .flex-table-cell, .header-cell {
+    width: 50px; /* Adjust based on your content */
+    min-width: 60px; /* Ensures cell does not become too narrow */
+    z-index: 10;
+  }
+
+  .flex-table-cell, .header-cell {
+    flex: 1 0 auto; /* Adjust as needed */
+    min-width: 50px; /* Optional, for minimum cell width */
+  }
+
+  .table-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Or specific width */
+  }
+
+   /* .header-cell{
+    background-color: grey;
+  } */
+
+  .z-cell {
+    background-color: grey; /* Slightly different background color */
+  }
+
+  .header-cell {
+    background-color: #ffd814; /* Light grey background for visibility */
+    color: #333; /* Dark text color for contrast */
+    font-weight: bold; /* Make header text bold */
+    padding: 8px; /* Add padding for spacing */
+    border: 1px solid #ddd; /* Add border for definition */
+    text-align: center; /* Center the text */
+  }
+
+  .first-column{
+    background-color: #ccc;
+  }
+  
+  .flex-table-cell:hover{
+    background-color: #ccc;
+    border: solid 0.5px black;
+    border-radius: 2px;
+  }
+
+  .z-container-outer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+  }
+  
+   .sticky {
+      position: sticky;
+      top: 0;
+       background: white;
+       padding: 20px;
+      z-index: 100;
+      /* margin-left: 100px;
+      margin-right: 100px; */
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      max-height: 150px;
+      height: 130px;
+      padding: 20px;
+      width: 1200px;
+      /* background-color: lightgray; */
+     
+   }
+
+ .sticky-header {
+       position: sticky;
+       top: 130px; 
+       background-color: white;
+       z-index: 99; 
+ }
+    
+
+.highlight {
+    background-color: yellow; 
+}
+
+.my-input {
+   
+    width:300px;
+    min-width: 300px;
+    padding: 0.5rem; /* Equivalent to "p-2" */
+    margin-bottom: 1.5rem; /* Equivalent to "mb-6" */
+    font-size: 0.875rem; /* Equivalent to "text-sm" */
+    color: #333; /* Equivalent to "text-gray-900" */
+    border: 1px solid #2196F3; /* Equivalent to "border-blue-300" */
+    border-radius: 0.25rem; /* Equivalent to "rounded-lg" */
+    background-color: #f7f7f7; /* Equivalent to "bg-gray-50" */
+    outline: none;
+    margin-top: 20px;
+  }
+  
+  .my-input:focus {
+    border-color: #2196F3; /* Equivalent to "focus:border-blue-500" */
+  }
+  .title{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .calculate-btn{
+    background-color: blue;
+    color: white;
+    width: 100px;
+    height: 35px;
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+    margin-right: 5px;
+  }
+  .reset-btn{
+    background-color: #9a9aa7;
+    color: white;
+    width: 100px;
+    height: 35px;
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+    margin-right: 5px;
+
+  }
+ 
+  
+  
+  

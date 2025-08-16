@@ -1,0 +1,114 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .clearButton,
+  .copyButton {
+    padding: 4px 8px;
+    font-size: 12px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .clearButton:hover,
+  .copyButton:hover {
+    background: #f0f0f0;
+    border-color: #b0b0b0;
+  }
+  
+  .clearButton:active,
+  .copyButton:active {
+    background: #e8e8e8;
+  }
+  
+  .inputContainer {
+    position: relative;
+  }
+  
+  .hiddenInput {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 10;
+    font-size: 16px;
+    padding: 16px;
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: text;
+  }
+  
+  .preview {
+    min-height: 60px;
+    padding: 16px;
+    font-size: 16px;
+    line-height: 1.5;
+    background: white;
+    cursor: text;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .preview:hover {
+    background: #fafafa;
+  }
+  
+  .preview.focused {
+    background: #fafafa;
+    box-shadow: inset 0 0 0 2px #007acc;
+  }
+  
+  .placeholder {
+    color: #999;
+    font-style: italic;
+    user-select: none;
+  }
+  
+  .cursor {
+    display: inline-block;
+    width: 1px;
+    height: 1em;
+    background: #007acc;
+    margin-left: 2px;
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  /* Math rendering styles */
+  .preview .katex {
+    font-size: 1.1em;
+  }
+  
+  .preview .katex-display {
+    margin: 0.5em 0;
+  }

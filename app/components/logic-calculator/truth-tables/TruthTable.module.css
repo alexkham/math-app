@@ -1,0 +1,237 @@
+.pageLayout {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-width: 1200px;
+  }
+  
+  .container {
+    width: 55%;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    padding: 1.5rem;
+    border: 1px solid #e1e1e1;
+    min-width: 650px;
+  }
+  
+  /* .buttonGroup {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .operatorButton {
+    flex: 1 1 calc(16.666% - 0.25rem);
+    padding: 0.5rem 0.25rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border: 2px solid #d1d1d1;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  } */
+
+
+  .buttonGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .operatorButton {
+    flex: 0 1 calc(13.333% - 0.25rem); /* Reduced by 20% from 16.666% */
+    padding: 0.4rem 0.2rem; /* Reduced by 20% from 0.5rem 0.25rem */
+    font-size: 0.8rem; /* Reduced by 20% from 1rem */
+    font-weight: 500;
+    border: 2px solid #d1d1d1;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    margin-bottom: 0.25rem;
+  }
+  
+  .operatorButton:hover {
+    background: #f8f9fa;
+    border-color: #2563eb;
+  }
+  
+  .operatorButton.active {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 1px #2563eb;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #ffffff;
+    border: 1px solid #d1d1d1;
+    border-radius: 8px;
+  }
+  
+  .tableHeader {
+    background: #ffffff;
+    border-bottom: 2px solid #d1d1d1;
+  }
+  
+  /* .tableHeader th {
+    padding: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 0.95rem;
+  } */
+
+  .tableHeader th {
+    padding: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 0.95rem;
+    border-right : 1px solid #bbb; /* Add prominent vertical borders */
+    border-bottom: 1px solid #bbb;
+  }
+  
+  .tableHeader th:last-child {
+    border-right: none; /* Remove border from last column */
+    background: #f8f9fa;
+  }
+  
+  /* .tableHeader th:last-child {
+    background: #f8f9fa;
+  } */
+  
+  .tableRow td {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1rem;
+    border-bottom: 1px solid #e1e1e1;
+    background: #ffffff;
+  }
+  
+  .tableRow:last-child td {
+    border-bottom: none;
+  }
+  
+  .tableRow:hover td {
+    background: #fafafa;
+  }
+  
+  .result {
+    font-weight: 600;
+    background: #f8f9fa !important;
+    border-left: 1px solid #e1e1e1;
+  }
+  
+  .false {
+    color: #dc2626;
+  }
+  
+  .true {
+    color: #2563eb;
+  }
+  
+  .explanationContainer {
+    width: 40%;
+    margin-right: 50px;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+    align-self: flex-start;
+  }
+  
+  .explanationContent {
+    color: #2d3748;
+  }
+  
+  .explanationText {
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .explanationLinks {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1rem;
+  }
+  
+  .linksTitle {
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    color: #4a5568;
+  }
+  
+  .linksList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .linksList li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .explanationLink {
+    color: #3182ce;
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+
+  .explanationText a{
+    
+      color: #3182ce;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: bold;
+    
+  }
+  
+  .explanationLink:hover {
+    text-decoration: underline;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .pageLayout {
+      flex-direction: column;
+      padding: 1rem;
+    }
+  
+    .container, .explanationContainer {
+      width: 100%;
+      margin-right: 0;
+    }
+  
+    .buttonGroup {
+      flex-direction: column;
+    }
+  
+    .operatorButton {
+      width: 100%;
+    }
+  }
+
+
+  /* .noWrap {
+    white-space: nowrap;
+    min-width: fit-content;
+    padding: 1rem 0.5rem;
+    overflow: visible;
+  } */
+

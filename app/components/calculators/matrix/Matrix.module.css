@@ -1,0 +1,72 @@
+/* components/Matrix/Matrix.module.css */
+.matrixContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .label {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  
+  .matrixWrapper {
+    display: flex;
+    align-items: stretch;
+  }
+  
+  .leftBracket,
+  .rightBracket {
+    font-size: 20px;
+    line-height: 1;
+    font-family: monospace;
+    display: flex;
+    align-items: center;
+    color: #333;
+  }
+  
+  .matrixContent {
+    padding: 10px 15px;
+  }
+  
+  .matrixRow {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .matrixRow:last-child {
+    margin-bottom: 0;
+  }
+  
+  .matrixInput,
+  .matrixCell {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .matrixInput {
+    padding: 0;
+  }
+  
+  .matrixCell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+  }
+  
+  .matrixInput::-webkit-inner-spin-button,
+  .matrixInput::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  .matrixInput {
+    -moz-appearance: textfield;
+  }

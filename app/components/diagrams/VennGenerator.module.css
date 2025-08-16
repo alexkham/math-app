@@ -1,0 +1,540 @@
+.container{
+  width: 100%;
+  
+}
+.upperContainer {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  grid-template-rows: 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 0px;
+  height: 300px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.controlGroupLeft {
+  display: flex;
+  flex-direction: column;
+  min-height: 350px;
+  height: 350px;
+  background-color: f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.universeToggle {
+  margin-bottom: 0px; 
+}
+
+.universeControlsContainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #e9ecef;
+  padding: 10px;
+  border-radius: 6px;
+  overflow-y: auto; /* In case content exceeds container height */
+  width: 100%;
+  height: 300px;
+  padding-top: 30px;
+  margin: auto;
+}
+
+
+.svg {
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding: 0.5rem;
+  background-color: #f8f9fa;
+  border-left: 1px solid #e9ecef;
+}
+
+
+.controls {
+  margin-top: 1rem;
+  width: 100%;
+  /* max-width: 64rem; */
+  
+}
+
+.controlGroup {
+  /* background-color: #f8f9fa; */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ 
+}
+
+.circleControlsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+ 
+}
+
+.circleControlsContainer > * {
+  /* flex: 1; */
+  min-width: 40%;
+  width: 45%;
+}
+
+.inputLine {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.label {
+  flex: 0 0 80px;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+  margin-right: 10px;
+  text-align: left;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  
+}
+
+.input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  min-width: 0;
+  max-width: 80px;
+}
+
+.checkbox {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  margin-top: 20px;
+}
+
+.colorInput {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.resetButton {
+  background-color: #e9ecef;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #495057;
+  transition: background-color 0.2s;
+}
+
+.resetButton:hover {
+  background-color: #ced4da;
+}
+
+.defaultButton {
+  background-color: #4a90e2;
+  color: white;
+}
+
+
+/* .downloadButton {
+  width: 80px;
+  height: 40px;
+  padding: 8px;
+  background-color: #4d4dff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.downloadButton:hover {
+  background-color: #3a3aff;
+} */
+
+.downloadButton {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: #4d4dff;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: -30px;
+}
+
+.downloadButton:hover {
+  background-color: #3a3aff;
+}
+
+
+
+.circleControlsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  
+  min-width: 100%;
+  width: 1000px;
+}
+
+.controlGroup {
+  display: flex;
+  flex-direction: row;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d1d5db;
+  width: 33%; /* Adjust this value to get the desired width */
+}
+
+.controlGroupContent {
+  flex: 1;
+  margin-right: 10px;
+ 
+}
+
+.inputGroup {
+  margin-bottom: 5px;
+ 
+  min-width: 180px;
+  
+}
+
+.label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+.input {
+  width: 100%;
+  padding: 4px 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.colorInputs {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.colorInput {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.numberInputs {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.positionControls {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items:center;
+ 
+}
+
+.positionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+ 
+  margin-top: -50px;
+}
+
+.positionButton {
+  padding: 4px;
+  background-color: #e5e7eb;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 10px;
+}
+
+.positionButton:hover {
+  background-color: #d1d5db;
+}
+
+.resetButton {
+  background-color: #e9ecef;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin-left: 4px;
+  cursor: pointer;
+  font-size: 10px;
+  color: #495057;
+  transition: background-color 0.2s;
+}
+
+.resetButton:hover {
+  background-color: #ced4da;
+}
+
+
+.intersectionControls {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.intersectionLabel {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.intersectionInputGroup {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.intersectionInput {
+  padding: 5px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.symbolButtonGroup {
+  display: flex;
+  gap: 5px;
+}
+
+.symbolButton {
+  padding: 5px 10px;
+  background-color: #e5e7eb;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.symbolButton:hover {
+  background-color: #d1d5db;
+}
+.intersectionHighlight {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.intersectionHighlight label {
+  margin-right: 10px;
+}
+
+.intersectionHighlight input[type="color"] {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+/* 
+.operationsControls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.operationControl {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 5px;
+} */
+
+.operationsControls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  
+}
+
+.operationControl {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  
+}
+
+
+.operationControl label {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.operationControl input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.operationControl input[type="color"] {
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.operationControl input[type="color"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.operationLabel {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.operationCheckbox {
+  margin-right: 0.5rem;
+}
+
+.operationInputs {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.operationInput {
+  flex-grow: 1;
+  padding: 0.25rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.operationColor {
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+
+
+/*tooltip*/
+
+.resetButtonWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.resetButton {
+  background-color: #e9ecef;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.resetButton:hover {
+  background-color: #ced4da;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+  pointer-events: none;
+  width: max-content;
+  z-index: 10000;
+  white-space: nowrap;
+  min-width: max-content;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.resetButtonWrapper:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}

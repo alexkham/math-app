@@ -1,0 +1,430 @@
+/* .container {
+    --main-button-color: #2c3e50;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .gridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .inputSection, .results, .explanations {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .inputToggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .toggleButton {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .toggleButton.active {
+    background-color: var(--main-button-color);
+    color: white;
+  }
+  
+  .inputGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .inputGroup {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input {
+    width: 70px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .removeButton {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .button, .calculateButton {
+    background-color: var(--main-button-color);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover, .calculateButton:hover {
+    background-color: #34495e;
+  }
+  
+  .calculateButton {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .fileUploadSection {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .radioGroup {
+    margin-bottom: 10px;
+  }
+  
+  .radioGroup label {
+    margin-right: 15px;
+  }
+  
+  .fileInput {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .results h2, .explanations h2 {
+    margin-top: 0;
+    color: #333;
+  }
+  
+  .results p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .infoIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--main-button-color);
+    color: white;
+    font-size: 12px;
+    margin-left: 2px;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+  
+  .tooltipContainer {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltipContainer:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .results span:last-child {
+    margin-left: auto;
+  }
+  
+  .explanationSection {
+    grid-column: 3;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+  } */
+
+
+  .container {
+    --main-button-color:#0d0894;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .gridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .inputSection, .results, .explanations {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .inputToggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .toggleButton {
+    background-color: lightgray;
+    border: none;
+    padding: 3px 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 30px;
+    border: solid gray 1px;
+    border-radius: 3px;
+    margin-left: 5px;
+    width: 100px;
+    height: 30px;
+  }
+  
+  .toggleButton.active {
+    background-color: var(--main-button-color);
+    color: white;
+  }
+  
+  .inputGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .inputGroup {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input {
+    width: 70px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .removeButton {
+    background-color: #e3220c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .button, .calculateButton {
+    background-color: var(--main-button-color);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover, .calculateButton:hover {
+    background-color: #34495e;
+  }
+  
+  .calculateButton {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .fileUploadSection {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .radioGroup {
+    margin-bottom: 10px;
+  }
+  
+  .radioGroup label {
+    margin-right: 15px;
+  }
+  
+  .fileInput {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .results h2, .explanations h2 {
+    margin-top: 0;
+    color: #333;
+  }
+  
+  .results p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: space-between;
+  }
+  
+  .results p > span:first-of-type {
+    margin-right: auto;
+  }
+  
+  .infoIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--main-button-color);
+    color: white;
+    font-size: 14px;
+    margin-left: 2px;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+
+  
+  .tooltipContainer {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+  }
+  
+  .tooltip {
+    visibility: hidden;
+    width: fit-content;
+    background-color: #555;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 5px 40px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltipContainer:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .results p > span:last-child {
+    margin-left: auto;
+    text-align: right;
+  }
+  
+  .explanationSection {
+    grid-column: 3;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .error {
+    background-color: #ffebee;
+    color: #d32f2f;
+    border: 0.5px solid #ef9a9a;
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 10px;
+  }
+  .uploadContainer{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .radioGroup {
+    display: flex;
+    gap: 20px;
+  }
+  .radioGroupColumn{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  
+  .radioOption {
+    display: flex;
+    align-items: center;
+  }
+  
+  .radioOption input {
+    margin-right: 5px;
+  }

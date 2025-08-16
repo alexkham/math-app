@@ -1,0 +1,139 @@
+.treeWrapper {
+    height: 100%;
+    min-height: 50px;
+    overflow-y: auto;
+  }
+  
+  .treeContainer {
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  .tree {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .tree ul {
+    list-style-type: none;
+    padding-left: 2rem;
+    position: relative;
+  }
+  
+  .tree ul::before {
+    content: "";
+    position: absolute;
+    left: 12px;
+    top: 0;
+    bottom: 0;
+    border-left: 2px solid #e0e4e8;
+  }
+  
+  .treeItem {
+    margin: 8px 0;
+    font-size: 20px;
+    color: #2c3e50;
+    position: relative;
+  }
+  
+  .treeItem::before {
+    content: "";
+    position: absolute;
+    left: -1.25rem;
+    top: 50%;
+    width: 1.25rem;
+    border-top: 2px solid #e0e4e8;
+  }
+  
+  .summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    
+  }
+  
+  /* .summary a{
+    background-color: red;
+    margin-bottom: 10px;
+  }
+
+
+  .summary div{
+    background-color: yellow;
+  } */
+
+
+  .text{
+    /* background-color: green; */
+    margin-top: 10px;
+    border-left: solid 4px #3498db;
+    padding-left: 20px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  .symbol {
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #3498db;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .symbol::before {
+    content: "+";
+  }
+  
+  details[open] > summary .symbol::before {
+    content: "-";
+  }
+  
+  .link {
+    color: #3498db;
+    position: relative;
+    text-decoration: none;
+    margin-bottom: 10px;
+  }
+  
+  .link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+  
+  .link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .title{
+    font-weight: bold;
+    color: #333333;
+  }
+
+
+  .actionLink {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 4px;
+    background: #e7f1ff;
+    align-self: flex-start;
+    margin-top: 4px;
+  }

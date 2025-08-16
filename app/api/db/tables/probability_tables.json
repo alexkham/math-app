@@ -1,0 +1,15 @@
+[
+    {
+        "tableTitle":"Z-Score Tables",
+        "rows":[
+
+            {
+                "formula_title": "Power Rule",
+                "description": "Derivative of a power of x",
+                "formula": "\\frac{d}{dx} x^n = nx^{n-1}",
+                "key": "n: any real number"
+              }
+
+        ]
+    }
+]

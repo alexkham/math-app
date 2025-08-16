@@ -1,0 +1,259 @@
+.tree {
+  --spacing: 1.5rem;
+  --radius: 15px;
+  --text-primary: #2a3f54;
+  --text-hover: #1a2f44;
+  --link-color: #3498db;
+  --link-hover: #2980b9;
+  --bg-hover: #f5f8fa;
+  --bg-active: #edf2f7;
+}
+
+.tree li {
+  display: block;
+  position: relative;
+  padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
+  margin: 10px;
+}
+
+.tree ul {
+  margin-left: calc(var(--radius) - var(--spacing));
+  padding-left: 0;
+}
+
+.tree ul li {
+  border-left: 2px solid #ddd;
+}
+
+.tree ul li:last-child {
+  border-color: transparent;
+}
+
+.tree ul li::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: calc(var(--spacing) / -2);
+  left: -2px;
+  width: calc(var(--spacing) + 2px);
+  height: calc(var(--spacing) + 1px);
+  border: solid #ddd;
+  border-width: 0 0 2px 2px;
+}
+
+.tree summary {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.tree summary:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-hover);
+}
+
+.tree details[open] > summary {
+  background-color: var(--bg-active);
+  margin-bottom: 0.5rem;
+}
+
+.tree summary::marker,
+.tree summary::-webkit-details-marker {
+  display: none;
+}
+
+.tree summary:focus {
+  outline: none;
+}
+
+.tree summary:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+
+.tree .symbol {
+  display: inline-block;
+  width: calc(2 * var(--radius));
+  height: calc(2 * var(--radius));
+  line-height: calc(2 * var(--radius));
+  border-radius: 50%;
+  background: #ddd;
+  text-align: center;
+  margin-right: 8px;
+  color: aliceblue;
+  background-color: var(--link-color);
+  font-weight: bolder;
+  font-size: large;
+  transition: background-color 0.2s ease;
+}
+
+.tree summary:hover .symbol {
+  background-color: var(--link-hover);
+}
+
+.tree details > summary .symbol::before {
+  content: '+';
+}
+
+.tree details[open] > summary .symbol::before {
+  content: '-';
+}
+
+.tree details > ul {
+  /* overflow: hidden; */
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+
+.tree details[open] > ul {
+  max-height: 1000px;
+}
+
+/* New styles for links */
+.tree a {
+  color: var(--link-color);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.tree a:hover {
+  color: var(--link-hover);
+  background-color: var(--bg-hover);
+}
+
+/* Enhanced list item styling */
+.tree li summary {
+  position: relative;
+}
+
+.tree li:hover > details > summary::before {
+  border-color: var(--link-color);
+}
+
+
+.tooltip-trigger {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+}
+
+.tooltip-trigger:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+/* new styles */
+
+/* 
+.tree-container {
+  font-family: system-ui, -apple-system, sans-serif;
+  padding: 1rem;
+}
+
+.tree {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.tree ul {
+  list-style-type: none;
+  padding-left: 1.5rem;
+}
+
+.tree li {
+  padding: 0.25rem 0;
+}
+
+.tooltip-trigger {
+  position: relative;
+  cursor: help;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #333;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  width: max-content;
+  max-width: 300px;
+  margin-left: 10px;
+  z-index: 1;
+  font-size: 0.875rem;
+}
+
+.tooltip-trigger:hover .tooltip {
+  visibility: visible;
+}
+
+details summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+.symbol::before {
+  content: '▶';
+  font-size: 0.75rem;
+  transition: transform 0.2s;
+}
+
+details[open] > summary .symbol::before {
+  transform: rotate(90deg);
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+} */

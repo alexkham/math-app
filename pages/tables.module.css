@@ -1,0 +1,136 @@
+.tablesMain {
+  font-family: Arial, sans-serif;
+  background-color: #f8fafc;
+  min-height: 100vh;
+  color: #333;
+}
+
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  text-align: center;
+  color: #3b82f6;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  text-align: center;
+  color: #5a6c7d;
+  margin-bottom: 2.5rem;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #e1e8ed;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.searchInput {
+  border: none;
+  outline: none;
+  width: 100%;
+  margin-left: 0.5rem;
+  font-size: 1rem;
+}
+
+.categoryGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.categoryCard {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  width: calc(33.333% - 1rem);
+  border: 1px solid #e1e8ed;
+}
+
+.categoryCard:hover {
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+
+.icon {
+  color: #3b82f6;
+}
+
+.categoryTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: gray;
+  margin: 0 1rem;
+  flex-grow: 1;
+}
+
+.tablesList {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.tablesList ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tablesList li {
+  margin-bottom: 0.5rem;
+}
+
+.tableLink {
+  color: #3b82f6;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.tableLink:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+  .categoryCard {
+    width: calc(50% - 0.75rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .categoryCard {
+    width: 100%;
+  }
+}

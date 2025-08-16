@@ -1,0 +1,135 @@
+/* LogicCalculator.module.css */
+.container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .latinLetters {
+    margin-bottom: 20px;
+  }
+  
+  .button {
+    padding: 10px;
+    margin: 2px;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff; /* Blue primary color */
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05);
+  }
+  
+  .logicOperators {
+    margin-bottom: 20px;
+  }
+  
+  .operatorContainer {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+  }
+  
+  .operatorButton {
+    padding: 10px;
+    background-color: #007bff; /* Blue primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .operatorButton:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05);
+  }
+  
+  .tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position the tooltip above the button */
+    left: 50%;
+    margin-left: -60px; /* Use half of the width to center the tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .operatorButton:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .infoLink {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+    margin-top: 5px;
+    display: block;
+  }
+  
+  .input {
+    width: 300px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  .table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    width: 80%;
+  }
+  
+  .tableHeader, .tableCell {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+  
+  .operatorInfo {
+    margin-top: 20px;
+  }
+  
+  .readMoreLink {
+    color: blue;
+    text-decoration: underline;
+  }
+  
+  .backButton {
+    background-color: #007bff; /* Blue primary color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 20px;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .backButton:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05);
+  }
+  

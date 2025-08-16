@@ -1,0 +1,400 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+
+.pageLayout {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  margin-top: -50px;
+  min-height: 1000px;
+}
+
+.container {
+  width: 66.666%;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e0e0e0;
+  background-color: #f1f3f5;
+  z-index: 0;
+ 
+  
+ 
+}
+
+.explanationContainer {
+  width: 33.333%;
+  min-width: 400px;
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+  align-self: flex-start;
+  margin: 0;
+  
+}
+
+.explanationContent {
+  color: #2d3748;
+}
+
+.explanationText {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.explanationLinks {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1rem;
+}
+
+.linksTitle {
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  color: #4a5568;
+}
+
+.linksList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.linksList li {
+  margin-bottom: 0.5rem;
+}
+
+.explanationLink {
+  color: #3182ce;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.explanationLink:hover {
+  text-decoration: underline;
+}
+
+.baseSelection {
+  margin-bottom: 2rem;
+}
+
+.baseSelection > label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  color: #1a202c;
+}
+
+.radio_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 820px;
+  height: 44px;
+  margin: 0 auto;
+  border: 1px solid #c0cde0;
+  border-radius: 6px;
+}
+
+.radio_container input[type="radio"] {
+  appearance: none;
+  display: none;
+}
+
+.radio_container label {
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.radio_container input[type="radio"]:checked + label {
+  background-color: #3182ce;
+  color: #ffffff;
+}
+
+.calculatorBodyWrapper {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+}
+
+.calculatorBody {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calcTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  margin-bottom: 1.5rem;
+  table-layout: fixed;
+}
+
+.baseCell {
+  vertical-align: bottom;
+  padding-right: 5px;
+  margin-right: -20px;
+  max-width: 160px;
+  width: 160px;
+}
+
+.baseCell > .inputWrapper > .tooltipTrigger {
+  margin-left: -15px;
+}
+
+.exponentCell {
+  vertical-align: top;
+  padding-bottom: 20px;
+  margin-left: -20px;
+  max-width: 120px;
+  width: 120px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: row;
+  min-width: 50px;
+  align-items: center;
+  width: fit-content;
+}
+
+.inputWrapper input {
+  width: 60px;
+}
+
+.exponentCell>.inputWrapper input{
+    min-height: 30px;
+}
+
+.exponentCell .inputWrapper input {
+    width: 80px;
+    padding: 10px;
+    margin-left: 10px;
+    margin-top: 5px;
+   
+  }
+
+  .baseCell .inputWrapper input {
+    width: 130px;
+    padding: 5px;
+   
+  }
+
+.valueInput {
+  width: 120px;
+  height: 44px;
+  font-size: 18px;
+  text-align: right;
+  border: 1px solid #c0cde0;
+  border-radius: 6px;
+  padding: 5px 12px;
+  margin-right: 20px;
+  transition: all 0.2s ease;
+  color: #2d3748;
+}
+
+.valueInput:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+}
+
+/* .resultCell {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2d3748;
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  min-height: 50px;
+} */
+
+
+.resultCell {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2d3748;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    min-height: 50px;
+    overflow-x: auto;
+    max-width: 200px;
+    white-space: nowrap;
+    min-width: 400px;
+  }
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 24px;
+}
+
+.calculateButton, .resetButton {
+  width: 35%;
+  max-width: 160px;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.calculateButton {
+  background-color: #3182ce;
+  color: white;
+}
+
+.resetButton {
+  background-color: #e53e3e;
+  color: white;
+}
+
+.calculateButton:hover, .resetButton:hover {
+  opacity: 0.9;
+}
+
+.tooltipTrigger {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  background-color: #3182ce;
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+  margin-left: 8px;
+  margin-top: 5px;
+  cursor: help;
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2d3748;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.tooltipTrigger:hover .tooltip {
+  opacity: 1;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #2d3748 transparent transparent transparent;
+}
+
+.inputError {
+  border-color: #ff4444 !important;
+}
+
+.errorMessage {
+  color: #ff4444;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .pageLayout {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .container, .explanationContainer {
+    width: 100%;
+  }
+
+  .container {
+    padding: 1.5rem;
+  }
+
+  .radio_container {
+    max-width: 100%;
+  }
+
+  .calcTable {
+    font-size: 14px;
+  }
+
+  .valueInput {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .calculateButton, .resetButton {
+    width: 100%;
+    max-width: none;
+    font-size: 14px;
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .explanationText {
+    font-size: 0.9rem;
+  }
+
+  .explanationLink {
+    font-size: 0.85rem;
+  }
+}
+
+.warningMessage {
+    color: #f59e0b;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    text-align: center;
+  }

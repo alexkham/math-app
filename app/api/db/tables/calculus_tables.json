@@ -1,0 +1,322 @@
+[
+    {
+      "tableTitle": "Basic Derivative Rules",
+      "rows": [
+        {
+          "formula_title": "Power Rule",
+          "description": "Derivative of a power of x",
+          "formula": "\\frac{d}{dx} x^n = nx^{n-1}",
+          "key": "n: any real number"
+        },
+        {
+          "formula_title": "Constant Rule",
+          "description": "Derivative of a constant",
+          "formula": "\\frac{d}{dx} c = 0",
+          "key": "c: constant value"
+        },
+        {
+          "formula_title": "Constant Multiple Rule",
+          "description": "Derivative of a constant times a function",
+          "formula": "\\frac{d}{dx} [cf(x)] = c \\cdot f'(x)",
+          "key": "c: constant value"
+        },
+        {
+          "formula_title": "Sum/Difference Rule",
+          "description": "Derivative of the sum or difference of two functions",
+          "formula": "\\frac{d}{dx} [f(x) \\pm g(x)] = f'(x) \\pm g'(x)",
+          "key": ""
+        }
+      ]
+    },
+    {
+      "tableTitle": "Trigonometric Functions",
+      "rows": [
+        {
+          "formula_title": "Derivative of Sine",
+          "description": "Derivative of the sine function",
+          "formula": "\\frac{d}{dx} \\sin(x) = \\cos(x)",
+          "key": ""
+        },
+        {
+          "formula_title": "Derivative of Cosine",
+          "description": "Derivative of the cosine function",
+          "formula": "\\frac{d}{dx} \\cos(x) = -\\sin(x)",
+          "key": ""
+        },
+        {
+          "formula_title": "Derivative of Tangent",
+          "description": "Derivative of the tangent function",
+          "formula": "\\frac{d}{dx} \\tan(x) = \\sec^2(x)",
+          "key": ""
+        },
+        {
+            "formula_title": "Derivative of Cotangent",
+            "description": "Derivative of the cotangent function",
+            "formula": "\\frac{d}{dx} \\cot(x) = -\\csc^2(x)",
+            "key": ""
+          },
+          {
+            "formula_title": "Derivative of Secant",
+            "description": "Derivative of the secant function",
+            "formula": "\\frac{d}{dx} \\sec(x) = \\sec(x)\\tan(x)",
+            "key": ""
+          },
+          {
+            "formula_title": "Derivative of Cosecant",
+            "description": "Derivative of the cosecant function",
+            "formula": "\\frac{d}{dx} \\csc(x) = -\\csc(x)\\cot(x)",
+            "key": ""
+          }
+          
+      ]
+    },
+    {
+        "tableTitle": "Derivative of Inverse Trigonometric Functions",
+        "rows": [
+          {
+            "formula_title": "Derivative of Inverse Sine (arcsin)",
+            "description": "Derivative of the arcsin function",
+            "formula": "\\frac{d}{dx} \\arcsin(x) = \\frac{1}{\\sqrt{1 - x^2}}",
+            "key": "Valid for |x| < 1"
+          },
+          {
+            "formula_title": "Derivative of Inverse Cosine (arccos)",
+            "description": "Derivative of the arccos function",
+            "formula": "\\frac{d}{dx} \\arccos(x) = -\\frac{1}{\\sqrt{1 - x^2}}",
+            "key": "Valid for |x| < 1"
+          },
+          {
+            "formula_title": "Derivative of Inverse Tangent (arctan)",
+            "description": "Derivative of the arctan function",
+            "formula": "\\frac{d}{dx} \\arctan(x) = \\frac{1}{1 + x^2}",
+            "key": ""
+          },
+          {
+            "formula_title": "Derivative of Inverse Cotangent (arccot)",
+            "description": "Derivative of the arccot function",
+            "formula": "\\frac{d}{dx} \\text{arccot}(x) = -\\frac{1}{1 + x^2}",
+            "key": ""
+          },
+          {
+            "formula_title": "Derivative of Inverse Secant (arcsec)",
+            "description": "Derivative of the arcsec function",
+            "formula": "\\frac{d}{dx} \\text{arcsec}(x) = \\frac{1}{|x| \\sqrt{x^2 - 1}}",
+            "key": "Valid for |x| > 1"
+          },
+          {
+            "formula_title": "Derivative of Inverse Cosecant (arccsc)",
+            "description": "Derivative of the arccsc function",
+            "formula": "\\frac{d}{dx} \\text{arccsc}(x) = -\\frac{1}{|x| \\sqrt{x^2 - 1}}",
+            "key": "Valid for |x| > 1"
+          }
+        ]
+      },
+    {
+      "tableTitle": "Exponential and Logarithmic Functions",
+      "rows": [
+        {
+          "formula_title": "Derivative of e^x",
+          "description": "Derivative of the exponential function",
+          "formula": "\\frac{d}{dx} e^x = e^x",
+          "key": "e: Euler's number"
+        },
+        {
+          "formula_title": "Derivative of ln(x)",
+          "description": "Derivative of the natural logarithm",
+          "formula": "\\frac{d}{dx} \\ln(x) = \\frac{1}{x}",
+          "key": "ln: natural logarithm"
+        },
+        {
+          "formula_title": "Derivative of a^x",
+          "description": "Derivative of a to the power x",
+          "formula": "\\frac{d}{dx} a^x = a^x \\ln(a)",
+          "key": "a: base of the exponential function"
+        },
+        {
+          "formula_title": "Derivative of log_a(x)",
+          "description": "Derivative of logarithm base a",
+          "formula": "\\frac{d}{dx} \\log_a(x) = \\frac{1}{x \\ln(a)}",
+          "key": "a: base of the logarithm"
+        }
+      ]
+    },
+    {
+      "tableTitle": "Product and Quotient Rules",
+      "rows": [
+        {
+          "formula_title": "Product Rule",
+          "description": "Derivative of the product of two functions",
+          "formula": "\\frac{d}{dx} [f(x)g(x)] = f'(x)g(x) + f(x)g'(x)"
+          
+        },
+        {
+          "formula_title": "Quotient Rule",
+          "description": "Derivative of the quotient of two functions",
+          "formula": "\\frac{d}{dx} \\left[\\frac{f(x)}{g(x)}\\right] = \\frac{f'(x)g(x) - f(x)g'(x)}{g(x)^2}"
+          
+        }
+      ]
+    },
+    {
+      "tableTitle": "Chain Rule",
+      "rows": [
+        {
+          "formula_title": "Chain Rule",
+          "description": "Derivative of a composite function",
+          "formula": "\\frac{d}{dx} f(g(x)) = f'(g(x)) \\cdot g'(x)"
+          
+        }
+      ]
+    },
+    {
+      "tableTitle": "Higher Order Derivatives",
+      "rows": [
+        {
+          "formula_title": "Second Order Derivative",
+          "description": "Second derivative of a function",
+          "formula": "\\frac{d^2}{dx^2} f(x)",
+          "key": ""
+        },
+        {
+          "formula_title": "Third Order Derivative",
+          "description": "Third derivative of a function",
+          "formula": "\\frac{d^3}{dx^3} f(x)",
+          "key": ""
+        },
+        {
+            "formula_title": "Fourth Order Derivative",
+            "description": "Fourth derivative of a function",
+            "formula": "\\frac{d^4}{dx^4} f(x)",
+            "key": ""
+          },
+          {
+            "formula_title": "Fifth Order Derivative",
+            "description": "Fifth derivative of a function",
+            "formula": "\\frac{d^5}{dx^5} f(x)",
+            "key": ""
+          },
+          {
+            "formula_title": "Sixth Order Derivative",
+            "description": "Sixth derivative of a function",
+            "formula": "\\frac{d^6}{dx^6} f(x)",
+            "key": ""
+          },
+          {
+            "formula_title": "Seventh Order Derivative",
+            "description": "Seventh derivative of a function",
+            "formula": "\\frac{d^7}{dx^7} f(x)",
+            "key": ""
+          },
+        {
+            "tableTitle": "N-th Order Derivative",
+            "rows": [
+              {
+                "formula_title": "N-th Order Derivative",
+                "description": "N-th derivative of a function",
+                "formula": "\\frac{d^n}{dx^n} f(x)",
+                "key": "n: order of the derivative"
+              }
+            ]
+          }
+          
+        
+      ]
+    },
+    {
+      "tableTitle": "Implicit Differentiation",
+      "rows": [
+        {
+          "formula_title": "Implicit Differentiation",
+          "description": "Derivative of a function defined implicitly",
+          "formula": "\\frac{d}{dx} [g(y) = f(x)]",
+          "key": "y: a function of x"
+        }
+      ]
+    },
+   
+      {
+        "tableTitle": "Derivative of Hyperbolic Functions",
+        "rows": [
+          {
+            "formula_title": "Derivative of Hyperbolic Sine (sinh)",
+            "description": "Derivative of the sinh function",
+            "formula": "\\frac{d}{dx} \\sinh(x) = \\cosh(x)"
+        
+          },
+          {
+            "formula_title": "Derivative of Hyperbolic Cosine (cosh)",
+            "description": "Derivative of the cosh function",
+            "formula": "\\frac{d}{dx} \\cosh(x) = \\sinh(x)"
+            
+          },
+          {
+            "formula_title": "Derivative of Hyperbolic Tangent (tanh)",
+            "description": "Derivative of the tanh function",
+            "formula": "\\frac{d}{dx} \\tanh(x) = \\text{sech}^2(x)"
+            
+          },
+          {
+            "formula_title": "Derivative of Hyperbolic Cotangent (coth)",
+            "description": "Derivative of the coth function",
+            "formula": "\\frac{d}{dx} \\coth(x) = -\\text{csch}^2(x)"
+            
+          },
+          {
+            "formula_title": "Derivative of Hyperbolic Secant (sech)",
+            "description": "Derivative of the sech function",
+            "formula": "\\frac{d}{dx} \\text{sech}(x) = -\\text{sech}(x)\\tanh(x)"
+            
+          },
+          {
+            "formula_title": "Derivative of Hyperbolic Cosecant (csch)",
+            "description": "Derivative of the csch function",
+            "formula": "\\frac{d}{dx} \\text{csch}(x) = -\\text{csch}(x)\\coth(x)"
+            
+          }
+        ]
+      },    
+      
+    
+    {
+      "tableTitle": "Applications of Derivatives",
+      "rows": [
+        {
+          "formula_title": "Finding Extrema",
+          "description": "Using derivatives to find maximum and minimum values",
+          "formula": "Procedures and methods"
+          
+        },
+        {
+          "formula_title": "Curve Sketching",
+          "description": "Using derivatives for sketching curves",
+          "formula": "Procedures and methods"
+        
+        },
+        {
+          "formula_title": "Related Rates Problems",
+          "description": "Using derivatives to solve related rates problems",
+          "formula": "Procedures and methods"
+          
+        }
+      ]
+    },
+    {
+      "tableTitle": "Notations and Symbols",
+      "rows": [
+        {
+          "formula_title": "Leibniz Notation",
+          "description": "Notation for derivatives",
+          "formula": "\\frac{df}{dx}, \\frac{d^2f}{dx^2}, ..."
+          
+        },
+        {
+          "formula_title": "Lagrange Notation",
+          "description": "Alternative notation for derivatives",
+          "formula": "f', f'', ..."
+          
+        }
+       
+      ]
+    }
+  ]
+  

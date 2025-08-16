@@ -1,0 +1,99 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .block {
+    display: flex;
+    align-items: center;
+  }
+  
+  .bracket {
+    font-family: 'Times New Roman', serif;
+    transform: scale(1.2, 2.75);
+    display: inline-block;
+    font-size: 24px;
+    color: gray;
+    margin-left: 5px;
+  }
+  
+  .matrix {
+    margin: 0 4px;
+    border-collapse: separate;
+    border-spacing: 4px;
+    table-layout: fixed;
+  }
+  
+  .cell {
+    padding: 4px;
+  }
+  
+  /* .cell input {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    border: none;
+    background: #f2f2f2;
+    border-radius: 4px;
+    padding: 0 4px;
+    border:none;
+    outline: none;
+  }
+
+  .cell input:focus{
+    background-color:none;
+    border: solid blue 1px !important;
+  } */
+  .cell:focus{
+    border:blue;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    padding: 8px;
+    border: 1px solid red;
+    border-radius: 4px;
+    background: rgba(255,0,0,0.1);
+  }
+
+
+  .cell input {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    border: none;
+    outline: none;
+    background: #f2f2f2;
+    border-radius: 4px;
+    padding: 0 4px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+   }
+   
+   .cell input:focus {
+    background: white;
+    border: 1px solid #2196f3 !important;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(33,150,243,0.1), 
+                inset 0 2px 4px rgba(0,0,0,0.05);
+   }
+
+
+   .leftLabel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .topLabel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .label {
+    font-size: 38px;
+    font-weight: 600;
+  }

@@ -1,0 +1,503 @@
+.container {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  
+  .main {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 8px 0;
+  }
+  
+  .subtitle {
+    color: #6b7280;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+  
+  .stepTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  
+  .operationTypeGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .operationTypeCard {
+    padding: 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    background-color: white;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+  }
+  
+  .operationTypeCard:hover {
+    border-color: #4285f4;
+    background-color: #f8f9ff;
+  }
+  
+  .operationTypeTitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 8px;
+  }
+  
+  .operationTypeDescription {
+    font-size: 1rem;
+    color: #6b7280;
+  }
+  
+  .dimensionsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .dimensionsInputGroup {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .dimensionInput {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .dimensionLabel {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #374151;
+  }
+  
+  .dimensionField {
+    width: 60px;
+    padding: 8px 12px;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  .dimensionField:focus {
+    outline: none;
+    border-color: #4285f4;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .inputHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .inputTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+  }
+  
+  .matrixGrid {
+    display: grid;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .matrixGridSingle {
+    grid-template-columns: 1fr;
+  }
+  
+  .matrixGridTwo {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .matrixGridMultiple {
+    grid-template-columns: 1fr;
+  }
+  
+  .matrixCard {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .matrixHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .matrixName {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #374151;
+  }
+  
+  .matrixDimensions {
+    font-size: 0.9rem;
+    color: #6b7280;
+    font-weight: 500;
+  }
+  
+  .matrixContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .matrixBracket {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #374151;
+    line-height: 1;
+  }
+  
+  .matrixContent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .matrixTable {
+    display: grid;
+    gap: 4px;
+    padding: 8px;
+  }
+  
+  .matrixCell {
+    width: 50px;
+    height: 35px;
+    padding: 4px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.85rem;
+    background-color: white;
+  }
+  
+  .matrixCell:focus {
+    outline: none;
+    border-color: #4285f4;
+  }
+  
+  .matrixCell.error {
+    border-color: #dc2626;
+    background-color: #fef2f2;
+  }
+  
+  .addMatrixContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  
+  .addMatrixButton {
+    padding: 8px 16px;
+    border: 2px dashed #4285f4;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #4285f4;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .addMatrixButton:hover {
+    background-color: #f0f7ff;
+  }
+  
+  .operationsSection {
+    margin-bottom: 24px;
+  }
+  
+  .operationsTitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 16px;
+  }
+  
+  .operationsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  
+  .operationButton {
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background-color: white;
+    color: #374151;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+  }
+  
+  .operationButton:hover:not(:disabled) {
+    border-color: #4285f4;
+    background-color: #f0f7ff;
+  }
+  
+  .operationButton.selected {
+    border-color: #4285f4;
+    background-color: #f0f7ff;
+    color: #4285f4;
+  }
+  
+  .operationButton:disabled {
+    background-color: #f3f4f6;
+    color: #9ca3af;
+    cursor: not-allowed;
+    border-color: #e5e7eb;
+  }
+  
+  .scalarInputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 12px;
+    background-color: #f0f7ff;
+    border-radius: 8px;
+    border: 1px solid #e0e7ff;
+  }
+  
+  .scalarLabel {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #374151;
+  }
+  
+  .scalarInput {
+    width: 80px;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 1rem;
+  }
+  
+  .scalarInput:focus {
+    outline: none;
+    border-color: #4285f4;
+  }
+  
+  .executeButton {
+    padding: 12px 32px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4285f4;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 24px;
+  }
+  
+  .executeButton:hover:not(:disabled) {
+    background-color: #3367d6;
+  }
+  
+  .executeButton:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+  }
+  
+  .resultsSection {
+    background-color: #f9fafb;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .resultsTitle {
+    margin: 0 0 16px 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1f2937;
+  }
+  
+  .resultsContent {
+    min-height: 80px;
+    background-color: white;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 1rem;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .resultMatrix {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .errorSection {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .errorTitle {
+    color: #dc2626;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0 0 8px 0;
+  }
+  
+  .errorList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .errorItem {
+    color: #dc2626;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+  }
+  
+  .errorItem:before {
+    content: "• ";
+    font-weight: bold;
+  }
+  
+  .button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .buttonSecondary {
+    border: 2px solid #6b7280;
+    background-color: transparent;
+    color: #6b7280;
+  }
+  
+  .buttonSecondary:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .buttonDanger {
+    border: 2px solid #dc2626;
+    background-color: transparent;
+    color: #dc2626;
+  }
+  
+  .buttonDanger:hover {
+    background-color: #fef2f2;
+  }
+  
+  .buttonPrimary {
+    border: none;
+    background-color: #4285f4;
+    color: white;
+  }
+  
+  .buttonPrimary:hover {
+    background-color: #3367d6;
+  }
+  
+  .removeButton {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #dc2626;
+    color: white;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  
+  .removeButton:hover {
+    background-color: #b91c1c;
+  }
+  
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #e5e7eb;
+    border-top: 2px solid #4285f4;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .matrixPreview {
+    font-size: 0.8rem;
+    color: #6b7280;
+    text-align: center;
+    margin-top: 8px;
+  }
+  
+  .dimensionConstraint {
+    font-size: 0.85rem;
+    color: #dc2626;
+    text-align: center;
+    margin-top: 8px;
+    font-weight: 500;
+  }
