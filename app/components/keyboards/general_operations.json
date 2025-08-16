@@ -1,8 +1,0 @@
-{
-    "general_operations":
-[{"symbol": "space", "latex_code": "\\bigcupplus", "explanation": "Space"},
-{"symbol": "enter", "latex_code": "\\bigcupplus", "explanation": "Enter"},
-{"symbol": "backspace", "latex_code": "\\bigcupplus", "explanation": "Backspace"},
-{"symbol": "caps", "latex_code": "\\bigcupplus", "explanation": "CapsLock"},
-{"symbol": "done", "latex_code": "\\bigcupplus", "explanation": "Close"}
-]}
