@@ -53,6 +53,8 @@ pages/test*/
 
 /drafts/*
 
+pages/*/_index.jsx
+
 
 #sitemap
 public/sitemap.xml
