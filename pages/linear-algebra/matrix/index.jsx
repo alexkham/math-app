@@ -153,6 +153,7 @@ Elements indices are essential for defining matrix operations like addition and 
         {
           id: "classification",
           title: "Types of Matrices",
+          link:'/linear-algebra/matrix/types',
           content: [`Matrices are classified based on various criteria such as their shape (square, rectangular), content type .Square matrices furthermore may be divided later into many special types based on element patterns (diagonal, triangular), or element properties (symmetric, skew-symmetric) and more. Each type has unique characteristics that determine it's behavior in matrix operations and properties.
            
             **Based on the shape of the matrix we define 4 types**:`,
@@ -273,6 +274,7 @@ content='$$O = \begin{pmatrix}
         {
           id: "properties",
           title: "Matrix Properties", 
+          link:'/linear-algebra/matrix/properties',
           content: [`Matrix properties are essential characteristics that define how matrices behave in operations and transformations. Understanding these properties helps predict operation results and solve matrix equations.
 **Matrix Properties Overview**:
 `,

@@ -13,7 +13,9 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+  const keyWords=['square matrix','nxn matrix','2x2 matrix','3x3 matrix','4x4 matrix',
+    'matrix diagonal','matrix','matrix trace','matrix determinant'
+  ]
 
     const sectionsContent={
 

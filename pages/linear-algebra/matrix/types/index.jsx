@@ -11,6 +11,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import MyList from '@/app/components/page-components/lists/MyList'
 import MathContainer from '@/app/components/math-content/MathContainer'
 import katex from "katex";
+import Head from 'next/head'
 
 
 const renderLatex = (latex) => {
@@ -22,6 +23,7 @@ const renderLatex = (latex) => {
 
 
 export default function MatrixTypesPage({ 
+     seoData,
     identityRelationships,
     zeroRelationships,
     scalarRelationships,
@@ -34,91 +36,6 @@ export default function MatrixTypesPage({
 }) {
 
    
-
-    // const identityRelationships = [
-    //     `✅ **Always Identity**: The identity matrix is itself by definition - this is not a relationship but a self-evident fact since $I$ consists of 1s on diagonal and 0s elsewhere`,
-    //     `❌ **Can never be Zero**: The identity matrix must have 1s on its diagonal, while the zero matrix must have all elements as 0, making it impossible for an identity matrix to be a zero matrix`,
-    //     `✅ **Is a Scalar Matrix**: Since a scalar matrix has form $kI$ where $k$ is a constant, identity matrix is simply a scalar matrix where $k=1$`,
-    //     `✅ **Always Diagonal**: By definition, identity matrix has all off-diagonal elements as 0, which is exactly what makes a matrix diagonal`,
-    //     `✅ **Is Symmetric**: An identity matrix satisfies $I^T = I$ since reflecting across diagonal doesn't change 1s and 0s positions`,
-    //     `❌ **Cannot be Skew-symmetric**: A skew-symmetric matrix requires $a_{ij} = -a_{ji}$ and diagonal elements must be 0, but identity has 1s on diagonal`,
-    //     `✅ **Is Upper/Lower Triangular**: Since all elements below AND above main diagonal are 0, identity matrix satisfies both upper and lower triangular definitions simultaneously`
-    //   ];
-
-
-    //   const zeroRelationships = [
-    //     `❌ **Never Identity**: A zero matrix has all elements as 0, while identity matrix requires 1s on the diagonal`,
-    //     `✅ **Always Zero**: By definition, all elements are 0`,
-    //     `✅ **Is Scalar**: Zero matrix is a special case of scalar matrix where $k=0$`,
-    //     `✅ **Is Diagonal**: All off-diagonal elements are 0, satisfying diagonal matrix definition`,
-    //     `✅ **Is Symmetric**: Reflecting zero matrix across diagonal still gives all zeros, so $O^T = O$`,
-    //     `✅ **Is Skew-symmetric**: Zero matrix satisfies $a_{ij} = -a_{ji}$ since $0 = -0$`,
-    //     `✅ **Is Upper/Lower Triangular**: All elements above and below diagonal are 0, satisfying both triangular definitions`
-    //   ];
-      
-    //   const scalarRelationships = [
-    //     `❔ **May Be Identity**: A scalar matrix becomes identity when $k=1$`,
-    //     `❔ **May Be Zero**: A scalar matrix becomes zero matrix when $k=0$`,
-    //     `✅ **Always Scalar**: By definition, it has same value $k$ on main diagonal and 0s elsewhere`,
-    //     `✅ **Always Diagonal**: All off-diagonal elements are 0, making it diagonal by definition`,
-    //     `✅ **Is Symmetric**: Since $a_{ij} = a_{ji} = 0$ for all $i \\neq j$, and diagonal elements are equal`,
-    //     `❔ **May Be Skew-symmetric**: Only becomes skew-symmetric when $k=0$ (zero matrix case)`,
-    //     `✅ **Is Upper/Lower Triangular**: All elements below and above diagonal are 0, satisfying both triangular definitions`
-    //    ];
-
-    //   const diagonalRelationships = [
-    //     `❔ **May Be Identity**: Becomes identity matrix when all diagonal entries are 1`,
-    //     `❔ **May Be Zero**: Becomes zero matrix when all diagonal entries are 0`,
-    //     `❔ **May Be Scalar**: Becomes scalar matrix when all diagonal entries are equal`,
-    //     `✅ **Always Diagonal**: By definition, all off-diagonal elements are 0`,
-    //     `✅ **Is Symmetric**: Since $a_{ij} = a_{ji} = 0$ for all $i \\neq j$`,
-    //     `❔ **May Be Skew-symmetric**: Only when all diagonal entries are 0 (zero matrix case)`,
-    //     `✅ **Is Upper/Lower Triangular**: All elements below and above diagonal are 0`
-    //   ];
-
-    //   const symmetricRelationships = [
-    //     `❔ **May Be Identity**: Only when it's a 1-diagonal matrix`,
-    //     `❔ **May Be Zero**: Only when all elements are 0`,
-    //     `❔ **May Be Scalar**: Only when all off-diagonal elements are 0 and diagonal elements are equal`,
-    //     `❔ **May Be Diagonal**: Only when all off-diagonal elements are 0`,
-    //     `✅ **Always Symmetric**: By definition, $a_{ij} = a_{ji}$ for all $i,j$`,
-    //     `❔ **May Be Skew-symmetric**: Only when all elements are 0 (zero matrix case)`,
-    //     `❔ **May Be Upper/Lower Triangular**: Only when all off-diagonal elements are 0`
-    //    ];
-
-
-    //    const skewSymmetricRelationships = [
-    //     `❌ **Never Identity**: Cannot have 1s on diagonal since diagonal elements must be 0`,
-    //     `❔ **May Be Zero**: When all elements are 0`,
-    //     `❔ **May Be Scalar**: Only when $k=0$ (zero matrix case)`,
-    //     `❔ **May Be Diagonal**: Only when all elements are 0`,
-    //     `❔ **May Be Symmetric**: Only when all elements are 0`,
-    //     `✅ **Always Skew-symmetric**: By definition, $a_{ij} = -a_{ji}$ and diagonal elements = 0`,
-    //     `❔ **May Be Upper/Lower Triangular**: Only when all elements are 0`
-    //   ];
-
-    //   const upperTriangularRelationships = [
-    //     `❔ **May Be Identity**: Only when diagonal elements are 1 and upper elements are 0`,
-    //     `❔ **May Be Zero**: Only when all elements are 0`,
-    //     `❔ **May Be Scalar**: Only when upper elements are 0 and diagonal elements are equal`,
-    //     `❔ **May Be Diagonal**: Only when all upper elements are 0`,
-    //     `❔ **May Be Symmetric**: Only when all upper elements match corresponding lower elements (which are 0)`,
-    //     `❔ **May Be Skew-symmetric**: Only when all elements are 0`,
-    //     `✅ **Always Upper Triangular**: By definition, all elements below diagonal are 0`,
-    //     `❌ **Never Lower Triangular**: Unless all non-diagonal elements are 0 (diagonal matrix case)`
-    //    ];
-
-    //    const lowerTriangularRelationships = [
-    //     `❔ **May Be Identity**: Only when diagonal elements are 1 and lower elements are 0`,
-    //     `❔ **May Be Zero**: Only when all elements are 0`,
-    //     `❔ **May Be Scalar**: Only when lower elements are 0 and diagonal elements are equal`,
-    //     `❔ **May Be Diagonal**: Only when all lower elements are 0`,
-    //     `❔ **May Be Symmetric**: Only when all lower elements match corresponding upper elements (which are 0)`,
-    //     `❔ **May Be Skew-symmetric**: Only when all elements are 0`,
-    //     `❌ **Never Upper Triangular**: Unless all non-diagonal elements are 0 (diagonal matrix case)`,
-    //     `✅ **Always Lower Triangular**: By definition, all elements above diagonal are 0`
-    //    ];
-
 
     const typesSections = [
         {
@@ -134,41 +51,10 @@ export default function MatrixTypesPage({
             id: `zero`,
             title: `Zero Matrix`,
             content: [
-                // `Matrix where $a_{ij} = 0$ for all $i,j$ ${String.raw`\begin{pmatrix} 0 & 0 & \cdots & 0 \\ 0 & 0 & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & 0 \end{pmatrix}`}`
-                // <div key={10} dangerouslySetInnerHTML={{ __html: renderLatex("Matrix where $a_{ij} = 0$ for all $i,j$ $ \\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $") }} />,
+              
                 `Matrix where $a_{ij} = 0$ for all $i,j$ \n $ \\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`,
                 <span style={{ display: "none" }} key="dummy"></span> ,
-            //    <MathContainer content={zeroMatrix} key={1}/>,
-            // `$\\begin{pmatrix} 1 & 0 & \\cdots & 0 \\\\ 0 & 1 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 1 \\end{pmatrix}$`,
-//             `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150">
-//   <!-- Parentheses -->
-//   <path d="M 8 5 Q 6 15 8 25" fill="none" stroke="black" stroke-width="0.3"/>
-//   <path d="M 32 5 Q 34 15 32 25" fill="none" stroke="black" stroke-width="0.3"/>
-  
-//   <!-- First row -->
-//   <text x="12" y="10" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
-//   <text x="18" y="10" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
-//   <text x="24" y="10" font-family="Times New Roman" font-size="4" text-anchor="middle">⋯</text>
-//   <text x="28" y="10" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
-  
-//   <!-- Second row -->
-//   <text x="12" y="15" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
-//   <text x="18" y="15" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
-//   <text x="24" y="15" font-family="Times New Roman" font-size="4" text-anchor="middle">⋯</text>
-//   <text x="28" y="15" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
-  
-//   <!-- Vertical dots -->
-//   <text x="12" y="20" font-family="Times New Roman" font-size="4" text-anchor="middle">⋮</text>
-//   <text x="18" y="20" font-family="Times New Roman" font-size="4" text-anchor="middle">⋮</text>
-//   <text x="24" y="20" font-family="Times New Roman" font-size="4" text-anchor="middle">⋱</text>
-//   <text x="28" y="20" font-family="Times New Roman" font-size="4" text-anchor="middle">⋮</text>
-  
-//   <!-- Last row -->
-//   <text x="12" y="25" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
-//   <text x="18" y="25" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
-//   <text x="24" y="25" font-family="Times New Roman" font-size="4" text-anchor="middle">⋯</text>
-//   <text x="28" y="25" font-family="Times New Roman" font-size="4" text-anchor="middle">0</text>
-// </svg>`,
+           
                 <MyList data={zeroRelationships}
                 key={2}/>
             ]
@@ -232,6 +118,50 @@ export default function MatrixTypesPage({
    
   return (
    <>
+   <Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": seoData.name,
+        "description": seoData.description,
+        "keywords": seoData.keywords,
+        "url": `https://www.learnmathclass.com${seoData.url}`,
+        "dateModified": new Date().toISOString(),
+        "inLanguage": "en-US",
+        "mainEntity": {
+          "@type": "Article",
+          "name": seoData.name,
+          "dateModified": new Date().toISOString(),
+          "author": {
+            "@type": "Organization",
+            "name": "Learn Math Class"
+          }
+        }
+      })
+    }}
+  />
+</Head>
    <GenericNavbar/>
    <br/>
    <br/>
@@ -283,12 +213,6 @@ export default function MatrixTypesPage({
 <div style={{width:'80%',margin:'auto'}}>
 <Sections  sections={typesSections} leftMargin='50px'/>
 </div>
-
-  
-  
-  
-
-
   <br/>
   <br/>
   <ScrollUpButton/>
@@ -298,6 +222,12 @@ export default function MatrixTypesPage({
 
 
 export async function getStaticProps(){
+
+    const keyWords=['types of matrix','identity matrix','zero matrix','scalar matrix',
+        'skew symmetric matrix','matrix','upper triangular matrix','lower triangular matrix',
+
+
+    ]
 
     const zeroMatrix=`Matrix where $a_{ij} = 0$ for all $i,j$ $ \\begin{pmatrix} 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & 0 \\end{pmatrix} $`
 
@@ -390,6 +320,13 @@ export async function getStaticProps(){
 
     return{
         props:{
+             seoData: {
+                title: "Matrix Types - Identity, Zero, Scalar & Triangular Matrices | Learn Math Class",
+                description: "Complete guide to matrix types including identity, zero, scalar, diagonal, symmetric, skew-symmetric, and triangular matrices with properties and relationships.",
+                keywords: keyWords.join(", "),
+                url: "/linear-algebra/matrix/types",
+                name: "Matrix Types"
+            },
             identityRelationships,
             zeroRelationships,
             scalarRelationships,
