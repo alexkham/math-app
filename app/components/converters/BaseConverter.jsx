@@ -506,10 +506,10 @@ const BaseConverter = () => {
                     aria-describedby="twos-complement-help"
                     style={{ marginRight: '8px' }}
                   />
-                  Use Two's Complement for negative numbers
+                  Use Two&apos;s Complement for negative numbers
                 </label>
                 <div id="twos-complement-help" style={{ fontSize: '0.8rem', color: '#bf6000', marginBottom: '8px' }}>
-                  Represents negative numbers using two's complement notation
+                  Represents negative numbers using two&apos;s complement notation
                 </div>
                 
                 {useTwosComplement && (
@@ -599,7 +599,7 @@ const BaseConverter = () => {
                 <li>Supports all bases from 2 to 36</li>
                 <li>Uses digits 0-9 and letters A-Z for bases above 10</li>
                 <li>Negative numbers: Default uses sign-magnitude (minus sign)</li>
-                <li>Two's complement option available for computer-style negative representation</li>
+                <li>Two&apos;s complement option available for computer-style negative representation</li>
                 <li>Input is case-insensitive</li>
               </ul>
             </section>

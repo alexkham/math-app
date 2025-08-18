@@ -2548,7 +2548,7 @@ const ExplanationPanel = ({ numerator, denominator, customContent = null }) => {
     <div style={panelStyles}>
       <h1 style={h1Style}>Understanding Your Fraction</h1>
       
-      <h2 style={h2Style}>What You're Seeing</h2>
+      <h2 style={h2Style}>What You&apos;re Seeing</h2>
       <p style={pStyle}>
         The circle visualization shows the fraction {numerator}/{denominator}, which represents {numerator} parts out of {denominator} equal parts.
         {isImproper && ` Since this is an improper fraction, it equals ${wholeNumber} whole circle${wholeNumber > 1 ? 's' : ''}${remainder > 0 ? ` plus ${remainder}/${denominator}` : ''}.`}

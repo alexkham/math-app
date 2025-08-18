@@ -205,7 +205,7 @@ export default function CalculusPage({
       content:[
         sectionContent.three_concepts.description,
        
-        <div dangerouslySetInnerHTML={{ __html:  sectionContent.three_concepts.svg }} />
+        <div key={'svg1'} dangerouslySetInnerHTML={{ __html:  sectionContent.three_concepts.svg }} />
       ]
 
     },
