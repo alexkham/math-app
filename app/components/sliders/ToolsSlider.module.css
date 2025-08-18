@@ -1,19 +1,19 @@
 /* ToolsSlider.module.css */
 .container {
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   background: #0f172a;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
   font-family: 'Cal Sans', system-ui, -apple-system;
-  height: 350px;
+  height: 400px;
 }
 
 .content {
   display: flex;
-  height: 350px;
+  height: 400px;
 }
 
 .info {
@@ -86,7 +86,7 @@
   object-fit: contain;
   opacity: 0.95;
   transition: opacity 0.3s ease;
-  margin-top: -20px;
+  margin-top: 10px;
  
 }
 
