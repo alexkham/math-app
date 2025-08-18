@@ -103,7 +103,7 @@
   width: 36px;
   height: 36px;
   padding: 8px;
-  background-color: rgba(255,255,255,0.15);
+  background-color: #59738e;
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -115,7 +115,7 @@
 }
 
 .controlButton:hover {
-  background: rgba(255,255,255,0.25);
+  background: lightgray;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }

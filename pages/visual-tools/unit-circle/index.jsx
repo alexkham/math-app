@@ -181,7 +181,13 @@ export default function UnitCirclePage({ title, description, keywords, canonical
                panelBackgroundColor='#f2f2f2'
            />
            <Breadcrumb/>
-           <h1 className='title' style={{marginTop:'-20px',marginBottom:'-20px'}}>Unit Circle Visualizer and Calculator</h1>
+           <br/>
+           <br/>
+           <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Unit Circle Visualizer and Calculator</h1>
+         <br/>
+         <br/>
+         <br/>
+         <br/>
            <UnitCircle/>
            <br/>
            <br/>
