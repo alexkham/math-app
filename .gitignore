@@ -60,3 +60,8 @@ pages/linear-algebra/*/
 
 #sitemap
 public/sitemap.xml
+
+
+#autiomations
+
+automations/*
