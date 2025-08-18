@@ -12,7 +12,8 @@ import Sections from '@/app/components/page-components/section/Sections'
 export async function getStaticProps(){
 
   const keyWords=['linear equations','equations','math equations','algebra equations',
-    'solving equations','mathematical equations','','',]
+    'solving equations','mathematical equations','linear equations examples',
+    'solving equations with variables on both sides',]
 
     
   const sectionsContent={
