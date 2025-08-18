@@ -9,6 +9,12 @@ import '../../../../pages.css'
 export default function LinearEquationSolverPage() {
 
 
+  const keyWords=['linear equations','solving equations','solving linear equations',
+    'graphing linear equations','algebra equations','solving equations with variables on both sides',
+    'linear equations examples','solving equations online','solutions of linear equations',
+    'linear equations examples','','']
+
+
     const linearEquationInstructions = {
         instructions: [
           "Enter any linear equation with one variable (x, y, z, etc.)",

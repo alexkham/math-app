@@ -14,48 +14,10 @@ import TreeStructure2 from '@/app/components/tree-structure/TreeItem2'
 
 export async function getStaticProps(){
 
-  // const equationTypesData = {
-  //   "Linear equations": {
-  //     "Definition": {
-  //       explanation: "degree 1 (e.g., 2x + 3 = 7)",
-  //       url: "/equations/linear"
-  //     },
-     
-  //   },
-  //   "Quadratic equations": {
-  //     "Definition": {
-  //       explanation: "degree 2 (e.g., x² + 5x + 6 = 0)",
-  //       url: "/equations/quadratic"
-  //     },
-    
-  //   },
-  //   "Cubic equations": {
-  //     "Definition": {
-  //       explanation: "degree 3 (e.g., x³ + 2x² - x + 1 = 0)",
-  //       url: "/equations/cubic"
-  //     },
-     
-  //   },
-  //   "Quartic equations": {
-  //     "Definition": {
-  //       explanation: "degree 4 (e.g., x⁴ + 2x³ - x + 1 = 0)",
-  //       url: "/equations/quartic"
-  //     }
-  //   },
-  //   "Quintic equations": {
-  //     "Definition": {
-  //       explanation: "degree 5 (e.g., x⁵ + 3x² - 7 = 0)",
-  //       url: "/equations/quintic"
-  //     }
-  //   },
-  //   "Higher degree equations": {
-  //     "Definition": {
-  //       explanation: "degree 7 and above (e.g., x⁷ + x³ - 1 = 0)",
-  //       url: "/equations/higher-degree"
-  //     }
-  //   }
-  //  };
+  const keyWords=['equations','algebra equations','math equations','linear equations',
+    'solving equations','mathematical equations','quadratic equations','types of equations']
 
+ 
   const equationTypesData = {
     "Linear equations": {
       "Definition": {

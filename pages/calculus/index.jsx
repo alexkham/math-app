@@ -52,7 +52,7 @@ What ties them all together is the Fundamental Theorem of Calculus, which states
 In essence, [limits](!/calculus/limits) allow us to rigorously define both change (via [derivatives](!calculus/derivatives)) and accumulation (via [integrals](!/calculus/integrals)), revealing a deep unity among these core ideas of calculus.`,
           svg:`<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="892" height="712" viewBox="50 80 692 500" style="margin-left:50px;fill:none;stroke:none;fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style class="text-font-style fontImports" data-font-family="Roboto">@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=block');</style>
+<svg width="792" height="612" style="margin-left:200px" viewBox="50 80 692 500" style="margin-left:50px;fill:none;stroke:none;fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style class="text-font-style fontImports" data-font-family="Roboto">@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=block');</style>
 <!-- Background -->
 <rect width="892" height="712" fill="url(#bg-gradient)"/>
 <defs>
@@ -204,7 +204,8 @@ export default function CalculusPage({
       title:sectionContent.three_concepts.title,
       content:[
         sectionContent.three_concepts.description,
-        sectionContent.three_concepts.svg
+       
+        <div dangerouslySetInnerHTML={{ __html:  sectionContent.three_concepts.svg }} />
       ]
 
     },
