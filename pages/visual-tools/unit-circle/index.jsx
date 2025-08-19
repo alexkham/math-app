@@ -177,11 +177,27 @@ svg2:`
   
     },
   
-    obj3:{
+    angles:{
   
-      title:``,
+      title:`Angle Measurements in the Unit Circle`,
       content:``,
-      before:``,
+      before:`The unit circle uses two primary systems for measuring angles: degrees and radians. Understanding both systems is essential because different applications favor different units.
+
+**Degrees**: The most familiar system, where a complete rotation around the circle equals 360°. This system divides the circle into 360 equal parts, making it intuitive for everyday use. In the unit circle, we start measuring from the positive x-axis (0°) and move counterclockwise.
+
+**Radians**: The mathematical standard, where a complete rotation equals 2π radians (approximately 6.28). One radian is defined as the angle created when the arc length equals the radius. Since our circle has radius 1, this means one radian corresponds to an arc length of 1 unit along the circle's circumference.
+
+The conversion between these systems is straightforward:
+
+$\\text{radians} = \\text{degrees} \\times \\frac{\\pi}{180}$
+
+$\\text{degrees} = \\text{radians} \\times \\frac{180}{\\pi}$
+
+**Why radians matter**: While degrees feel more natural, radians create cleaner mathematical relationships. In calculus and advanced mathematics, formulas involving trigonometric functions work more elegantly with radians. For example, the derivative of sin(x) is simply cos(x) when x is in radians, but requires additional conversion factors when x is in degrees.
+
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use degree to radians angle converter](!/converters/degree-radians) →@
+
+**Standard position**: Regardless of the unit system, angles in the unit circle are measured from the positive x-axis in a counterclockwise direction. This creates a consistent reference point for all calculations and makes it possible to extend trigonometry beyond the first quadrant.`,
       after:``,
   
     },
@@ -372,6 +388,14 @@ export default function UnitCirclePage({ title, description, keywords, canonical
           sectionsContent.why.between,
           sectionsContent.why.svg2,
           sectionsContent.why.after,
+        ]
+    },
+     {
+        id:'angles',
+        title:sectionsContent.angles.title,
+        link:'',
+        content:[
+          sectionsContent.angles.before
         ]
     },
     // {
