@@ -22,19 +22,158 @@ export async function getStaticProps() {
    
   const sectionsContent={
 
-    obj1:{
-      title:``,
+    definition:{
+      title:`What is Unit Circle?`,
       content:``,
-      before:``,
-      after:``,
+      before:`The unit circle is a mathematical abstraction model invented to give us an intuitive understanding of how trigonometric functions behave in the coordinate system with respect to different angles. Rather than being just another geometric shape, it serves as a visual and computational tool that transforms abstract trigonometric relationships into concrete, observable patterns.
+
+We create this circle by placing its center at the origin (0,0) of the coordinate plane and setting the radius to exactly 1. This positioning is crucial because when we take any point on the circle and drop perpendicular lines to the x and y axes, we automatically create a right triangle. The hypotenuse of this triangle is always the radius (which equals 1), while the legs are the x and y coordinates of the point.
+
+`,
+      after:`
+      This model allows us to see trigonometric functions as coordinates on a circle, making it possible to understand their behavior across all possible angles, not just the limited range we can explore with right triangles.`,
+      svg:`<svg viewBox="0 0 700 650" style="margin-left:300px; margin-bottom:-500px;" xmlns="http://www.w3.org/2000/svg">
+  <!-- Unit circle -->
+  <circle cx="150" cy="125" r="80" fill="none" stroke="black" stroke-width="1"/>
+  
+  <!-- Axes -->
+  <line x1="50" y1="125" x2="250" y2="125" stroke="black" stroke-width="1"/>
+  <line x1="150" y1="25" x2="150" y2="225" stroke="black" stroke-width="1"/>
+  
+  <!-- Origin point -->
+  <circle cx="150" cy="125" r="2" fill="black"/>
+  <text x="155" y="140" font-size="10" fill="black">O (0,0)</text>
+  
+  <!-- Angle arc at origin -->
+  <path d="M 167,125 A 17,17 0 0,0 165,115" fill="none" stroke="black" stroke-width="1"/>
+  <text x="175" y="118" font-size="10" fill="black">θ</text>
+  
+  <!-- Point on circle -->
+  <circle cx="214" cy="77" r="2" fill="black"/>
+  
+  <!-- Radius line -->
+  <line x1="150" y1="125" x2="214" y2="77" stroke="black" stroke-width="1"/>
+  <text x="165" y="95" font-size="10" fill="black">r = 1</text>
+  
+  <!-- Dotted projections -->
+  <line x1="214" y1="77" x2="214" y2="125" stroke="black" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="214" y1="77" x2="150" y2="77" stroke="black" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="150" y1="125" x2="150" y2="77" stroke="black" stroke-width="1" stroke-dasharray="3,3"/>
+  
+  <!-- Right triangle -->
+  <polygon points="150,125 214,125 214,77" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="3,3"/>
+  
+  <!-- Right angle indicator -->
+  <polygon points="204,125 204,115 214,115" fill="none" stroke="gray" stroke-width="1"/>
+  <text x="190" y="110" font-size="8" fill="gray">90°</text>
+  
+  <!-- Coordinate labels -->
+  <text x="202" y="140" font-size="10" fill="black">x</text>
+  <text x="220" y="100" font-size="10" fill="black">y</text>
+  
+  <!-- Axis labels -->
+  <text x="240" y="130" font-size="10" fill="black">x-axis</text>
+  <text x="155" y="20" font-size="10" fill="black">y-axis</text>
+</svg>`,
   
   
     },
-    obj2:{
-      title:``,
+    why:{
+      title:`Why Radius = 1? `,
       content:``,
-      before:``,
-      after:``,
+      before:`The choice of radius = 1 is not arbitrary—it's a deliberate simplification that eliminates unnecessary complexity from trigonometric calculations. Here's exactly why this matters:
+In any right triangle, we define trigonometric functions as ratios:\n
+
+
+$\\sin \\theta = \\frac{\\text{opposite side}}{\\text{hypotenuse}}$
+
+$\\cos \\theta = \\frac{\\text{adjacent side}}{\\text{hypotenuse}}$
+`,
+     
+between:`When we replace the hypotenuse with 1, the trigonometric functions drastically simplify:
+
+Starting with the basic definitions:
+
+$\\sin \\theta = \\frac{\\text{opposite side}}{\\text{hypotenuse}}$
+$\\cos \\theta = \\frac{\\text{adjacent side}}{\\text{hypotenuse}}$
+
+When hypotenuse = 1:
+
+$\\sin \\theta = \\frac{\\text{opposite side}}{1} = \\text{opposite side}$
+$\\cos \\theta = \\frac{\\text{adjacent side}}{1} = \\text{adjacent side}$
+
+
+`,
+after:`This means sine becomes simply the opposite side, and cosine becomes simply the adjacent side. The unit circle allows us to visualize these values directly as coordinates, eliminating the need for division calculations.
+`,
+      svg:`<svg viewBox="0 0 900 700" style="margin-left:400px;margin-top:-100px;margin-bottom:-300px;" xmlns="http://www.w3.org/2000/svg">
+  <!-- Triangle -->
+  <polygon points="50,250 250,250 250,100" fill="none" stroke="black" stroke-width="2"/>
+  
+  <!-- Right angle indicator -->
+  <polygon points="235,250 235,235 250,235" fill="none" stroke="black" stroke-width="1"/>
+  
+  <!-- Angle arc -->
+  <path d="M 80,250 A 30,30 0 0,0 77,233" fill="none" stroke="blue" stroke-width="2"/>
+  
+  <!-- Angle label -->
+  <text x="85" y="240" font-size="16" fill="blue">θ</text>
+  
+  <!-- Side labels -->
+  <text x="145" y="270" font-size="14" fill="red" text-anchor="middle">adjacent</text>
+  <text x="300" y="175" font-size="14" fill="green" text-anchor="middle">opposite</text>
+  <text x="105" y="165" font-size="14" fill="blue" text-anchor="middle">hypotenuse</text>
+  
+  <!-- Side highlighting -->
+  <line x1="50" y1="250" x2="250" y2="250" stroke="red" stroke-width="2" opacity="0.7"/>
+  <line x1="250" y1="250" x2="250" y2="100" stroke="green" stroke-width="2" opacity="0.7"/>
+  <line x1="50" y1="250" x2="250" y2="100" stroke="blue" stroke-width="2" opacity="0.7"/>
+  
+  <!-- Formulas with proper color coding -->
+  <text x="50" y="40" font-size="16" fill="black">sin θ = <tspan fill="green">opposite</tspan>/<tspan fill="blue">hypotenuse</tspan></text>
+  <text x="50" y="65" font-size="16" fill="black">cos θ = <tspan fill="red">adjacent</tspan>/<tspan fill="blue">hypotenuse</tspan></text>
+</svg>`,
+
+svg2:`
+<svg viewBox="0 0 900 700" style="margin-left:400px;margin-top:-300px;margin-bottom:-300px;" xmlns="http://www.w3.org/2000/svg">
+  <!-- Unit circle -->
+  <circle cx="200" cy="150" r="80" fill="none" stroke="black" stroke-width="1"/>
+  
+  <!-- Axes -->
+  <line x1="100" y1="150" x2="300" y2="150" stroke="black" stroke-width="1"/>
+  <line x1="200" y1="70" x2="200" y2="230" stroke="black" stroke-width="1"/>
+  
+  <!-- Triangle -->
+  <polygon points="200,150 264,150 264,104" fill="none" stroke="black" stroke-width="1"/>
+  
+  <!-- Right angle indicator -->
+  <polygon points="254,150 254,140 264,140" fill="none" stroke="black" stroke-width="1"/>
+  
+  <!-- Angle arc -->
+  <path d="M 220,150 A 20,20 0 0,0 215,138" fill="none" stroke="black" stroke-width="1"/>
+  <text x="225" y="143" font-size="12" fill="black">θ</text>
+  
+  <!-- Hypotenuse (radius = 1) -->
+  <line x1="200" y1="150" x2="264" y2="104" stroke="blue" stroke-width="2"/>
+  <text x="220" y="120" font-size="12" fill="blue">1</text>
+  
+  <!-- Adjacent (cos θ) -->
+  <line x1="200" y1="150" x2="264" y2="150" stroke="red" stroke-width="2"/>
+  <text x="232" y="165" font-size="12" fill="red">cos θ</text>
+  
+  <!-- Opposite (sin θ) -->
+  <line x1="264" y1="150" x2="264" y2="104" stroke="green" stroke-width="2"/>
+  <text x="275" y="127" font-size="12" fill="green">sin θ</text>
+  
+  <!-- Formulas -->
+  <text x="320" y="80" font-size="14" fill="black">When radius = 1:</text>
+  <text x="320" y="105" font-size="14" fill="black">sin θ = <tspan fill="green">opposite</tspan>/<tspan fill="blue">1</tspan> = <tspan fill="green">opposite</tspan></text>
+  <text x="320" y="125" font-size="14" fill="black">cos θ = <tspan fill="red">adjacent</tspan>/<tspan fill="blue">1</tspan> = <tspan fill="red">adjacent</tspan></text>
+  
+  <!-- Point -->
+  <circle cx="264" cy="104" r="2" fill="black"/>
+</svg>
+`
   
     },
   
@@ -214,23 +353,33 @@ export default function UnitCirclePage({ title, description, keywords, canonical
     
   const unitCircleSections=[
     {
-        id:'1',
-        title:'section1',
+        id:'definition',
+        title: sectionsContent.definition.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.definition.before,
+          sectionsContent.definition.svg,
+          sectionsContent.definition.after,
+        ]
     },
     {
-        id:'2',
-        title:'section2',
+        id:'why',
+        title:sectionsContent.why.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.why.before,
+          sectionsContent.why.svg,
+          sectionsContent.why.between,
+          sectionsContent.why.svg2,
+          sectionsContent.why.after,
+        ]
     },
-    {
-        id:'',
-        title:'',
-        link:'',
-        content:''
-    }
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // }
 ]
 
 

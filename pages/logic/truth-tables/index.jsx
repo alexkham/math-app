@@ -15,22 +15,31 @@ import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 
 export const getStaticProps = async () => {
   const operatorDescriptions = await import('@/app/components/logic-calculator/operatorDescriptions');
+  
+  const keyWords = ['truth table', 'logic calculator', 'Boolean algebra', 'propositional logic', 'logical operators', 'AND', 'OR', 'NOT', 'XOR', 'NAND', 'NOR'];
+
   return {
     props: {
+      seoData: {
+        title: "Dynamic Truth Table Generator | Logic Calculator | Learn Math Class",
+        description: "Generate dynamic truth tables for logical expressions with our interactive Logic Calculator. Learn about logical operators, Boolean algebra, and propositional logic.",
+        keywords: keyWords.join(", "),
+        url: "/logic/truth-tables",
+        name: "Dynamic Truth Table Generator"
+      },
       operatorDescriptions: operatorDescriptions.default,
+      keyWords
     },
   };
 };
 
 
+
+
 const TruthTablesPage = ({ operatorDescriptions }) => {
   return (
     <>
-      {/* <Head>
-        <title>Dynamic Truth Table Generator | Logic Calculator</title>
-        <meta name="description" content="Generate dynamic truth tables for logical expressions with our interactive Logic Calculator. Learn about logical operators and Boolean algebra." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head> */}
+     
        <Head>
         <title>Dynamic Truth Table Generator | Logic Calculator | LearnMathClass</title>
         <meta name="description" content="Generate dynamic truth tables for logical expressions with our interactive Logic Calculator. Learn about logical operators, Boolean algebra, and propositional logic." />
