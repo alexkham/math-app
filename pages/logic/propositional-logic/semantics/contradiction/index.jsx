@@ -14,6 +14,12 @@ import Head from 'next/head';
 export async function getStaticProps(){
 
 
+  
+ const keyWords=['logic','propositional logic','contradiction',
+  'tautology','tautology and contradiction','tautology and contradiction']
+
+
+
   const contradictions = [
     {
       id: "1",
@@ -309,17 +315,29 @@ style="display: block; margin: 0 auto; fill:none; stroke:none; fill-rule:evenodd
 
       contradictions,
       introContent,
-      contradictionContent
+      contradictionContent,
+       seoData: {
+      title: "Contradiction in Propositional Logic - Complete Guide | Learn Math Class",
+      description: "Learn about contradictions in propositional logic, their relationship to tautologies, and how they represent logical impossibilities. Explore examples, notation, and applications in logical reasoning.",
+      keywords: keyWords.join(", "),
+      url: "/logic/propositional-logic/semantics/contradiction",
+      name: "Contradiction in Propositional Logic"
+    },
+    keyWords
 
     }
   }
 }
 
-
-export default function TautologyPage({contradictions , introContent ,contradictionContent}) {
-
- const keyWords=['logic','propositional logic','contradiction',
-  'tautology','tautology and contradiction','tautology and contradiction']
+export default function ContradictionPage({
+  seoData,
+  contradictions,
+  introContent,
+  contradictionContent,
+  keyWords
+}) {
+//  const keyWords=['logic','propositional logic','contradiction',
+//   'tautology','tautology and contradiction','tautology and contradiction']
 
  
 
@@ -366,6 +384,50 @@ export default function TautologyPage({contradictions , introContent ,contradict
     ]
   return (
     <>
+    <Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": seoData.name,
+        "description": seoData.description,
+        "keywords": seoData.keywords,
+        "url": `https://www.learnmathclass.com${seoData.url}`,
+        "dateModified": new Date().toISOString(),
+        "inLanguage": "en-US",
+        "mainEntity": {
+          "@type": "Article",
+          "name": seoData.name,
+          "dateModified": new Date().toISOString(),
+          "author": {
+            "@type": "Organization",
+            "name": "Learn Math Class"
+          }
+        }
+      })
+    }}
+  />
+</Head>
      <Head>
       <title>Contradiction in Propositional Logic | Learn Math Class</title>
       <meta name="description" content="Learn about contradictions in propositional logic, their relationship to tautologies, and how they represent logical impossibilities. Explore examples, notation, and applications in logical reasoning." />
