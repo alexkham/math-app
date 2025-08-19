@@ -25,7 +25,7 @@ export async function getStaticProps() {
     definition:{
       title:`What is Unit Circle?`,
       content:``,
-      before:`The unit circle is a mathematical abstraction model invented to give us an intuitive understanding of how trigonometric functions behave in the coordinate system with respect to different angles. Rather than being just another geometric shape, it serves as a visual and computational tool that transforms abstract trigonometric relationships into concrete, observable patterns.
+      before:`The unit circle is a mathematical abstraction model invented to give us an intuitive understanding of how [trigonometric functions](!trigonometry) behave in the coordinate system with respect to different [angles](!/visual-tools/unit-circle#angles). Rather than being just another geometric shape, it serves as a visual and computational tool that transforms abstract [trigonometric relationships](!/trigonometry) into concrete, observable patterns.
 
 We create this circle by placing its center at the origin (0,0) of the coordinate plane and setting the radius to exactly 1. This positioning is crucial because when we take any point on the circle and drop perpendicular lines to the x and y axes, we automatically create a right triangle. The hypotenuse of this triangle is always the radius (which equals 1), while the legs are the x and y coordinates of the point.
 
