@@ -8,12 +8,64 @@ import React from 'react';
 import '../../pages.css'
 import Head from 'next/head'
 import { processContent } from '@/app/utils/contentProcessor'
+import SvgDiagram from '@/app/components/diagrams/svg-diagram/SvgDiagram'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import Sections from '@/app/components/page-components/section/Sections'
+
 
 export async function getStaticProps() {
    const keyWords = [
        "unit circle","trig circle","radian unit circle",
        "circle of trigonometry","circle unit trigonometry"
    ]
+
+   
+  const sectionsContent={
+
+    obj1:{
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+  
+    },
+    obj2:{
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
+  
+    obj3:{
+  
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
+    obj4:{
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
+
+
+    obj5:{
+  
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    }
+  
+  }
+
 
 
    const unitCircleSVG=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1650 -1650 3300 3300">
@@ -147,13 +199,41 @@ export async function getStaticProps() {
            title: 'Unit Circle Visualizer and Calculator | Learn Math Class',
            description: 'Interactive unit circle visualization tool. Calculate and visualize sine, cosine, tangent and other trigonometric functions in real-time.',
            keywords: keyWords,
-           canonicalUrl: 'https://www.learnmathclass.com/visual-tools/unit-circle'
+           canonicalUrl: 'https://www.learnmathclass.com/visual-tools/unit-circle',
+           unitCircleSVG,
+           sectionsContent,
        },
        revalidate: 3600
    }
 }
 
-export default function UnitCirclePage({ title, description, keywords, canonicalUrl }) {
+export default function UnitCirclePage({ title, description, keywords, canonicalUrl ,
+  unitCircleSVG , sectionsContent}) {
+
+
+    
+  const unitCircleSections=[
+    {
+        id:'1',
+        title:'section1',
+        link:'',
+        content:''
+    },
+    {
+        id:'2',
+        title:'section2',
+        link:'',
+        content:''
+    },
+    {
+        id:'',
+        title:'',
+        link:'',
+        content:''
+    }
+]
+
+
    return (
        <>
            <Head>
@@ -172,6 +252,7 @@ export default function UnitCirclePage({ title, description, keywords, canonical
            <br/>
            <br/>
            <br/>
+           <br/>
            <OperaSidebar
                side='right'
                topOffset='65px'
@@ -183,7 +264,7 @@ export default function UnitCirclePage({ title, description, keywords, canonical
            <Breadcrumb/>
            <br/>
            <br/>
-           <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Unit Circle Visualizer and Calculator</h1>
+           <h1 className='title' style={{marginTop:'0px',marginBottom:'-40px'}}>Unit Circle Visualizer and Calculator</h1>
          <br/>
          <br/>
          <br/>
@@ -191,13 +272,17 @@ export default function UnitCirclePage({ title, description, keywords, canonical
            <UnitCircle/>
            <br/>
            <br/>
+           <SectionTableOfContents sections={unitCircleSections}/>
            <br/>
            <br/>
            <br/>
+           <Sections sections={unitCircleSections}/>
            <br/>
-            
+          {/* <SvgDiagram data={{ svg: unitCircleSVG }}
+          scale={0.4}/> */}
            <br/>
            <br/>
+           
            <br/>
            <ScrollUpButton/>
        </>
