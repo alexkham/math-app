@@ -5,12 +5,79 @@ import React from 'react'
 import '../../pages.css'
 import FactorialCalculator from '@/app/components/calculators/arithmetics/FactorialCalculator'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
+import Head from 'next/head'
 
-export default function FactorialCalculatorPage() {
 
-    const keyWords=['factorial','factorial calculator']
+export async function getStaticProps() {
+  const keyWords = ['factorial','factorial calculator','factorial meaning',
+    'n factorial calculator','factorial n','0 factorial','1 factorial',
+    'factorial in mathematics','factorial in math','zero factorial','factorial calculator online'];
+
+  return {
+    props: {
+      seoData: {
+        title: "Factorial Calculator - Calculate n! Online | Learn Math Class",
+        description: "Free factorial calculator with step-by-step solutions. Calculate factorials, understand factorial meaning, and learn about 0! and factorial mathematics.",
+        keywords: keyWords.join(", "),
+        url: "/calculators/factorial-calculator",
+        name: "Factorial Calculator"
+      },
+      keyWords
+    }
+  }
+}
+
+export default function FactorialCalculatorPage({ seoData, keyWords }) {
+
+    // const keyWords=['factorial','factorial calculator','factorial meaning',
+    //   'n factorial calculator','factorial n','0 factorial','1 factorial',
+    // 'factorial in mathematics','factorial in math','zero factorial','factorial calculator online',]
   return (
    <>
+   <Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": seoData.name,
+        "description": seoData.description,
+        "keywords": seoData.keywords,
+        "url": `https://www.learnmathclass.com${seoData.url}`,
+        "dateModified": new Date().toISOString(),
+        "inLanguage": "en-US",
+        "mainEntity": {
+          "@type": "Article",
+          "name": seoData.name,
+          "dateModified": new Date().toISOString(),
+          "author": {
+            "@type": "Organization",
+            "name": "Learn Math Class"
+          }
+        }
+      })
+    }}
+  />
+</Head>
    <GenericNavbar/>
    <br/>
    <br/>
