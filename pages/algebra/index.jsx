@@ -124,6 +124,95 @@ const currentPath = '/algebra';
 **Basic Algebraic Properties** establish the fundamental rules governing polynomial multiplication and distribution.
 
 Mastering these identities is crucial for algebraic fluency. They allow rapid recognition of patterns, enabling quick simplification of complex expressions without lengthy calculations. Students who memorize these relationships can solve equations more efficiently, factor polynomials instantly, and approach calculus and higher mathematics with greater confidence and speed.`
+    },
+    equations:{
+      title:'Equations',
+      link:'/algebra/equations',
+      content:`### ✦ What Are Equations?
+
+An **equation** is a statement that says two mathematical expressions have the same value — it’s like a balance that holds true for certain numbers. Equations are everywhere in algebra, from simple ones like $x + 3 = 5$ to more complex forms involving several variables or even functions.
+
+They come in many varieties: you might hear about [linear](!/algebra/equations/linear), **quadratic**, or **cubic** equations, depending on the highest power of the variable, or **algebraic** and **transcendental**, depending on the kinds of operations involved. Some deal with just one variable, while others connect many. Some equations describe lines or curves, others describe change, like those in calculus.
+
+How we solve them — and even whether they have one solution, many, or none — depends on what kind of equation we’re dealing with.
+
+This page is just a quick stop. If you're curious about what makes an equation linear or not, how we actually solve them, or what those classifications really mean, check out the [equations](!/algebra/equations) page for a full breakdown.
+      
+      `
+    },
+    roots_exp_logs:{
+
+       svg:  `<svg xmlns="http://www.w3.org/2000/svg" style="margin-left:200px;" viewBox="-300 -300 1400 950">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fafafa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8f8f8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="boxGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f9f9f9;stop-opacity:1" />
+    </linearGradient>
+    <filter id="softShadow">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.2"/>
+    </filter>
+    <filter id="boxShadow">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6366f1" stroke="none"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="-300" y="-300" width="1300" height="850" fill="url(#bgGradient)"/>
+  
+  <!-- Main circles and variables -->
+  <g>
+    <circle cx="200" cy="200" r="35" fill="url(#circleGradient)" stroke="#d1d5db" stroke-width="2" filter="url(#softShadow)"/>
+    <text x="200" y="212" font-family="Georgia, serif" font-size="38" text-anchor="middle" fill="#374151" font-weight="500">a</text>
+    
+    <circle cx="260" cy="160" r="25" fill="url(#circleGradient)" stroke="#d1d5db" stroke-width="2" filter="url(#softShadow)"/>
+    <text x="260" y="168" font-family="Georgia, serif" font-size="28" text-anchor="middle" fill="#374151" font-weight="500">n</text>
+    
+    <text x="300" y="212" font-family="Georgia, serif" font-size="38" text-anchor="middle" fill="#9ca3af" font-weight="300">=</text>
+    
+    <circle cx="370" cy="200" r="35" fill="url(#circleGradient)" stroke="#d1d5db" stroke-width="2" filter="url(#softShadow)"/>
+    <text x="370" y="212" font-family="Georgia, serif" font-size="38" text-anchor="middle" fill="#374151" font-weight="500">b</text>
+  </g>
+  
+  <!-- Connecting arrows -->
+  <g stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" opacity="0.85">
+    <line x1="170" y1="225" x2="90" y2="300" marker-end="url(#arrowhead)"/>
+    <line x1="260" y1="135" x2="260" y2="50" marker-end="url(#arrowhead)"/>
+    <line x1="400" y1="225" x2="475" y2="300" marker-end="url(#arrowhead)"/>
+  </g>
+  
+  <!-- Information boxes -->
+  <g>
+    <rect x="20" y="320" width="150" height="90" rx="8" fill="url(#boxGradient)" stroke="#e5e7eb" stroke-width="1.5" filter="url(#boxShadow)"/>
+    <rect x="185" y="-60" width="150" height="90" rx="8" fill="url(#boxGradient)" stroke="#e5e7eb" stroke-width="1.5" filter="url(#boxShadow)"/>
+    <rect x="400" y="320" width="150" height="70" rx="8" fill="url(#boxGradient)" stroke="#e5e7eb" stroke-width="1.5" filter="url(#boxShadow)"/>
+  </g>
+  
+  <!-- Text content -->
+  <g font-family="Georgia, serif" fill="#374151" text-anchor="middle">
+    <text x="95" y="345" font-size="16" font-weight="600" fill="#1f2937">Root</text>
+    <text x="95" y="365" font-size="15" fill="#4b5563">a = b<tspan dy="-6" font-size="11">1/n</tspan></text>
+    <text x="95" y="390" font-size="15" fill="#4b5563">a = <tspan dy="2">ⁿ√</tspan>b</text>
+    
+    <text x="260" y="-35" font-size="16" font-weight="600" fill="#1f2937">Logarithm</text>
+    <text x="260" y="-15" font-size="13" fill="#6b7280">(equals exponent)</text>
+    <text x="260" y="5" font-size="15" fill="#4b5563">n = log<tspan dy="3" font-size="11">a</tspan>(b)</text>
+    
+    <text x="475" y="345" font-size="16" font-weight="600" fill="#1f2937">Power</text>
+    <text x="475" y="365" font-size="15" fill="#4b5563">b = a<tspan dy="-6" font-size="11">n</tspan></text>
+  </g>
+</svg>`
+
     }
 
 
@@ -281,81 +370,86 @@ A [root](!/algebra/roots) is the number that, when raised to a certain power, gi
 
 A [logarithm](!/algebra/logarithms) is the exponent itself - it's the power that was used. Calculating a logarithm finds that **exponent** by answering: **"To what power must the base be raised to get a certain number?"** Or using mathematical notation: $\\log_a(b) = n$ means $a^n = b$.
 `,
-`
+// `
 
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background-color:#fafafa;padding:2rem}table{border-collapse:collapse;width:80%;margin:0 auto;background-color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05)}td,th{border:1px solid #e0e0e0;padding:.75rem 1rem;text-align:left}th{background-color:#f5f5f5;font-weight:600}td{font-size:.95rem}caption{font-size:1.25rem;font-weight:700;margin-bottom:1rem}</style></head><body><table><caption>Relationship Between Exponents, Roots, and Logarithms</caption><thead><tr><th>Concept</th><th>Expression</th><th>Meaning</th><th>Inverse Of</th></tr></thead><tbody><tr><td>Exponentiation</td><td><code>b<sup>c</sup> = a</code></td><td>Base <code>b</code> raised to exponent <code>c</code> gives <code>a</code></td><td>Logarithm, Root</td></tr><tr><td>Root</td><td><code>√<sub>n</sub>a = b</code></td><td><code>b</code> to the power of <code>n</code> gives <code>a</code></td><td>Exponentiation</td></tr><tr><td>Logarithm</td><td><code>log<sub>b</sub>(a) = c</code></td><td>The exponent <code>c</code> such that <code>b<sup>c</sup> = a</code></td><td>Exponentiation</td></tr></tbody></table></body></html>`,
+// <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background-color:#fafafa;padding:2rem}table{border-collapse:collapse;width:80%;margin:0 auto;background-color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05)}td,th{border:1px solid #e0e0e0;padding:.75rem 1rem;text-align:left}th{background-color:#f5f5f5;font-weight:600}td{font-size:.95rem}caption{font-size:1.25rem;font-weight:700;margin-bottom:1rem}</style></head><body><table><caption>Relationship Between Exponents, Roots, and Logarithms</caption><thead><tr><th>Concept</th><th>Expression</th><th>Meaning</th><th>Inverse Of</th></tr></thead><tbody><tr><td>Exponentiation</td><td><code>b<sup>c</sup> = a</code></td><td>Base <code>b</code> raised to exponent <code>c</code> gives <code>a</code></td><td>Logarithm, Root</td></tr><tr><td>Root</td><td><code>√<sub>n</sub>a = b</code></td><td><code>b</code> to the power of <code>n</code> gives <code>a</code></td><td>Exponentiation</td></tr><tr><td>Logarithm</td><td><code>log<sub>b</sub>(a) = c</code></td><td>The exponent <code>c</code> such that <code>b<sup>c</sup> = a</code></td><td>Exponentiation</td></tr></tbody></table></body></html>
+
+// `,
 
 
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-300 -300 1400 950">
-  <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#fafafa;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#f8f8f8;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="boxGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#f9f9f9;stop-opacity:1" />
-    </linearGradient>
-    <filter id="softShadow">
-      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.2"/>
-    </filter>
-    <filter id="boxShadow">
-      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.15"/>
-    </filter>
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#6366f1" stroke="none"/>
-    </marker>
-  </defs>
+sectionContent.roots_exp_logs.svg,
+//   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-300 -300 1400 950">
+//   <defs>
+//     <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+//       <stop offset="0%" style="stop-color:#fafafa;stop-opacity:1" />
+//       <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:1" />
+//     </linearGradient>
+//     <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+//       <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+//       <stop offset="100%" style="stop-color:#f8f8f8;stop-opacity:1" />
+//     </linearGradient>
+//     <linearGradient id="boxGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+//       <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+//       <stop offset="100%" style="stop-color:#f9f9f9;stop-opacity:1" />
+//     </linearGradient>
+//     <filter id="softShadow">
+//       <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.2"/>
+//     </filter>
+//     <filter id="boxShadow">
+//       <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.15"/>
+//     </filter>
+//     <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+//       <polygon points="0 0, 10 3.5, 0 7" fill="#6366f1" stroke="none"/>
+//     </marker>
+//   </defs>
   
-  <!-- Background -->
-  <rect x="-300" y="-300" width="1300" height="850" fill="url(#bgGradient)"/>
+//   <!-- Background -->
+//   <rect x="-300" y="-300" width="1300" height="850" fill="url(#bgGradient)"/>
   
-  <!-- Main circles and variables -->
-  <g>
-    <circle cx="200" cy="200" r="35" fill="url(#circleGradient)" stroke="#d1d5db" stroke-width="2" filter="url(#softShadow)"/>
-    <text x="200" y="212" font-family="Georgia, serif" font-size="38" text-anchor="middle" fill="#374151" font-weight="500">a</text>
+//   <!-- Main circles and variables -->
+//   <g>
+//     <circle cx="200" cy="200" r="35" fill="url(#circleGradient)" stroke="#d1d5db" stroke-width="2" filter="url(#softShadow)"/>
+//     <text x="200" y="212" font-family="Georgia, serif" font-size="38" text-anchor="middle" fill="#374151" font-weight="500">a</text>
     
-    <circle cx="260" cy="160" r="25" fill="url(#circleGradient)" stroke="#d1d5db" stroke-width="2" filter="url(#softShadow)"/>
-    <text x="260" y="168" font-family="Georgia, serif" font-size="28" text-anchor="middle" fill="#374151" font-weight="500">n</text>
+//     <circle cx="260" cy="160" r="25" fill="url(#circleGradient)" stroke="#d1d5db" stroke-width="2" filter="url(#softShadow)"/>
+//     <text x="260" y="168" font-family="Georgia, serif" font-size="28" text-anchor="middle" fill="#374151" font-weight="500">n</text>
     
-    <text x="300" y="212" font-family="Georgia, serif" font-size="38" text-anchor="middle" fill="#9ca3af" font-weight="300">=</text>
+//     <text x="300" y="212" font-family="Georgia, serif" font-size="38" text-anchor="middle" fill="#9ca3af" font-weight="300">=</text>
     
-    <circle cx="370" cy="200" r="35" fill="url(#circleGradient)" stroke="#d1d5db" stroke-width="2" filter="url(#softShadow)"/>
-    <text x="370" y="212" font-family="Georgia, serif" font-size="38" text-anchor="middle" fill="#374151" font-weight="500">b</text>
-  </g>
+//     <circle cx="370" cy="200" r="35" fill="url(#circleGradient)" stroke="#d1d5db" stroke-width="2" filter="url(#softShadow)"/>
+//     <text x="370" y="212" font-family="Georgia, serif" font-size="38" text-anchor="middle" fill="#374151" font-weight="500">b</text>
+//   </g>
   
-  <!-- Connecting arrows -->
-  <g stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" opacity="0.85">
-    <line x1="170" y1="225" x2="90" y2="300" marker-end="url(#arrowhead)"/>
-    <line x1="260" y1="135" x2="260" y2="50" marker-end="url(#arrowhead)"/>
-    <line x1="400" y1="225" x2="475" y2="300" marker-end="url(#arrowhead)"/>
-  </g>
+//   <!-- Connecting arrows -->
+//   <g stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" opacity="0.85">
+//     <line x1="170" y1="225" x2="90" y2="300" marker-end="url(#arrowhead)"/>
+//     <line x1="260" y1="135" x2="260" y2="50" marker-end="url(#arrowhead)"/>
+//     <line x1="400" y1="225" x2="475" y2="300" marker-end="url(#arrowhead)"/>
+//   </g>
   
-  <!-- Information boxes -->
-  <g>
-    <rect x="20" y="320" width="150" height="90" rx="8" fill="url(#boxGradient)" stroke="#e5e7eb" stroke-width="1.5" filter="url(#boxShadow)"/>
-    <rect x="185" y="-60" width="150" height="90" rx="8" fill="url(#boxGradient)" stroke="#e5e7eb" stroke-width="1.5" filter="url(#boxShadow)"/>
-    <rect x="400" y="320" width="150" height="70" rx="8" fill="url(#boxGradient)" stroke="#e5e7eb" stroke-width="1.5" filter="url(#boxShadow)"/>
-  </g>
+//   <!-- Information boxes -->
+//   <g>
+//     <rect x="20" y="320" width="150" height="90" rx="8" fill="url(#boxGradient)" stroke="#e5e7eb" stroke-width="1.5" filter="url(#boxShadow)"/>
+//     <rect x="185" y="-60" width="150" height="90" rx="8" fill="url(#boxGradient)" stroke="#e5e7eb" stroke-width="1.5" filter="url(#boxShadow)"/>
+//     <rect x="400" y="320" width="150" height="70" rx="8" fill="url(#boxGradient)" stroke="#e5e7eb" stroke-width="1.5" filter="url(#boxShadow)"/>
+//   </g>
   
-  <!-- Text content -->
-  <g font-family="Georgia, serif" fill="#374151" text-anchor="middle">
-    <text x="95" y="345" font-size="16" font-weight="600" fill="#1f2937">Root</text>
-    <text x="95" y="365" font-size="15" fill="#4b5563">a = b<tspan dy="-6" font-size="11">1/n</tspan></text>
-    <text x="95" y="390" font-size="15" fill="#4b5563">a = <tspan dy="2">ⁿ√</tspan>b</text>
+//   <!-- Text content -->
+//   <g font-family="Georgia, serif" fill="#374151" text-anchor="middle">
+//     <text x="95" y="345" font-size="16" font-weight="600" fill="#1f2937">Root</text>
+//     <text x="95" y="365" font-size="15" fill="#4b5563">a = b<tspan dy="-6" font-size="11">1/n</tspan></text>
+//     <text x="95" y="390" font-size="15" fill="#4b5563">a = <tspan dy="2">ⁿ√</tspan>b</text>
     
-    <text x="260" y="-35" font-size="16" font-weight="600" fill="#1f2937">Logarithm</text>
-    <text x="260" y="-15" font-size="13" fill="#6b7280">(equals exponent)</text>
-    <text x="260" y="5" font-size="15" fill="#4b5563">n = log<tspan dy="3" font-size="11">a</tspan>(b)</text>
+//     <text x="260" y="-35" font-size="16" font-weight="600" fill="#1f2937">Logarithm</text>
+//     <text x="260" y="-15" font-size="13" fill="#6b7280">(equals exponent)</text>
+//     <text x="260" y="5" font-size="15" fill="#4b5563">n = log<tspan dy="3" font-size="11">a</tspan>(b)</text>
     
-    <text x="475" y="345" font-size="16" font-weight="600" fill="#1f2937">Power</text>
-    <text x="475" y="365" font-size="15" fill="#4b5563">b = a<tspan dy="-6" font-size="11">n</tspan></text>
-  </g>
-</svg>`,
+//     <text x="475" y="345" font-size="16" font-weight="600" fill="#1f2937">Power</text>
+//     <text x="475" y="365" font-size="15" fill="#4b5563">b = a<tspan dy="-6" font-size="11">n</tspan></text>
+//   </g>
+// </svg>`,
+
+
 `This diagram illustrates the fundamental mathematical relationships between three key operations: exponents, logarithms, and roots.
 At the center, you have three variables (x, y, z) connected by the equation $x^y = z$. The diagram shows how each operation is the inverse of another:
 **The three equivalent relationships:**
@@ -368,9 +462,14 @@ At the center, you have three variables (x, y, z) connected by the equation $x^y
 - **If you know x and z, use logarithms to find y**  
 - **If you know y and z, use roots to find x**
 `,
-`@academic[theorem:Examples :]@`,
 
-`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>body{font-family:'Segoe UI',sans-serif;background-color:#fdfdfd;padding:2rem}table{border-collapse:collapse;width:90%;margin:auto;background-color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.1);table-layout:fixed}td,th{border:1px solid #ccc;padding:.75rem;text-align:center;vertical-align:top;word-wrap:break-word}th{background-color:#f0f0f0;font-weight:600}caption{font-size:1.3rem;font-weight:700;margin-bottom:1rem}</style></head><body><table><caption>Exponents, Roots, and Powers</caption><thead><tr><th>Expression</th><th>Root<br>(Base recovered from result and exponent)</th><th>Exponent<br>(Equal to the logarithm: the power used)</th><th>Power<br>(Result of base raised to exponent)</th></tr></thead><tbody><tr><td>2<sup>3</sup> = 8</td><td>∛8 = 2</td><td>3</td><td>8</td></tr><tr><td>3<sup>2</sup> = 9</td><td>√9 = 3</td><td>2</td><td>9</td></tr><tr><td>4<sup>2</sup> = 16</td><td>√16 = 4</td><td>2</td><td>16</td></tr></tbody></table></body></html>`
+<div dangerouslySetInnerHTML={{__html: `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background-color:#fafafa;padding:2rem}table{border-collapse:collapse;width:80%;margin:0 auto;background-color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.05)}td,th{border:1px solid #e0e0e0;padding:.75rem 1rem;text-align:left}th{background-color:#f5f5f5;font-weight:600}td{font-size:.95rem}caption{font-size:1.25rem;font-weight:700;margin-bottom:1rem}</style></head><body><table><caption>Relationship Between Exponents, Roots, and Logarithms</caption><thead><tr><th>Concept</th><th>Expression</th><th>Meaning</th><th>Inverse Of</th></tr></thead><tbody><tr><td>Exponentiation</td><td><code>b<sup>c</sup> = a</code></td><td>Base <code>b</code> raised to exponent <code>c</code> gives <code>a</code></td><td>Logarithm, Root</td></tr><tr><td>Root</td><td><code>√<sub>n</sub>a = b</code></td><td><code>b</code> to the power of <code>n</code> gives <code>a</code></td><td>Exponentiation</td></tr><tr><td>Logarithm</td><td><code>log<sub>b</sub>(a) = c</code></td><td>The exponent <code>c</code> such that <code>b<sup>c</sup> = a</code></td><td>Exponentiation</td></tr></tbody></table></body></html>`}} />,
+`@academic[theorem:Examples :]@
+
+
+`,
+// `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>body{font-family:'Segoe UI',sans-serif;background-color:#fdfdfd;padding:2rem}table{border-collapse:collapse;width:90%;margin:auto;background-color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.1);table-layout:fixed}td,th{border:1px solid #ccc;padding:.75rem;text-align:center;vertical-align:top;word-wrap:break-word}th{background-color:#f0f0f0;font-weight:600}caption{font-size:1.3rem;font-weight:700;margin-bottom:1rem}</style></head><body><table><caption>Exponents, Roots, and Powers</caption><thead><tr><th>Expression</th><th>Root<br>(Base recovered from result and exponent)</th><th>Exponent<br>(Equal to the logarithm: the power used)</th><th>Power<br>(Result of base raised to exponent)</th></tr></thead><tbody><tr><td>2<sup>3</sup> = 8</td><td>∛8 = 2</td><td>3</td><td>8</td></tr><tr><td>3<sup>2</sup> = 9</td><td>√9 = 3</td><td>2</td><td>9</td></tr><tr><td>4<sup>2</sup> = 16</td><td>√16 = 4</td><td>2</td><td>16</td></tr></tbody></table></body></html>`
+<div dangerouslySetInnerHTML={{__html: `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>body{font-family:'Segoe UI',sans-serif;background-color:#fdfdfd;padding:2rem}table{border-collapse:collapse;width:90%;margin:auto;background-color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.1);table-layout:fixed}td,th{border:1px solid #ccc;padding:.75rem;text-align:center;vertical-align:top;word-wrap:break-word}th{background-color:#f0f0f0;font-weight:600}caption{font-size:1.3rem;font-weight:700;margin-bottom:1rem}</style></head><body><table><caption>Exponents, Roots, and Powers</caption><thead><tr><th>Expression</th><th>Root<br>(Base recovered from result and exponent)</th><th>Exponent<br>(Equal to the logarithm: the power used)</th><th>Power<br>(Result of base raised to exponent)</th></tr></thead><tbody><tr><td>2<sup>3</sup> = 8</td><td>∛8 = 2</td><td>3</td><td>8</td></tr><tr><td>3<sup>2</sup> = 9</td><td>√9 = 3</td><td>2</td><td>9</td></tr><tr><td>4<sup>2</sup> = 16</td><td>√16 = 4</td><td>2</td><td>16</td></tr></tbody></table></body></html>`}} />
       ],
     },
     {
@@ -380,6 +479,16 @@ At the center, you have three variables (x, y, z) connected by the equation $x^y
       link:sectionContent.identities.link,
       content:[
         sectionContent.identities.content
+      ]
+
+    },
+    {
+      id:'equations',
+      title:sectionContent.equations.title,
+      link:sectionContent.equations.link,
+      content:[
+           sectionContent.equations.content,
+
       ]
 
     },

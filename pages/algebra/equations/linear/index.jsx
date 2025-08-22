@@ -19,25 +19,34 @@ export async function getStaticProps(){
     
   const sectionsContent={
 
-    obj1:{
-      title:``,
+    definition:{
+      title:`What is Linear equation?`,
       content:``,
-      before:``,
+      before:`In algebra we define as a linear equation in one variable any mathematical expression that can be reduced to the form
+
+\t\t\t\t\t\t\t\t$ax + b = 0$
+
+where $a \\neq 0$.
+While this canonical form is often taken as the standard, it is important to understand that a linear equation does not always appear this way at first glance. It might involve parentheses, fractions, terms spread across both sides of the equals sign, or even look quite unlike a typical 
+$ax + b = 0$ equation — and yet still be linear.
+
+Being able to **recognize different forms** of linear equations and knowing how to **transform them into simpler or more familiar ones** is a fundamental skill in solving them. This process relies on a small set of **elementary operations** — things like adding or subtracting the same quantity from both sides, multiplying or dividing by nonzero numbers, or simplifying expressions. These operations don’t change the solution of the equation, but they let us manipulate its form freely, making it easier to solve. Understanding both the variety of forms and how to move between them is essential groundwork before tackling the solution itself.
+`,
       after:``,
   
   
     },
-    obj2:{
-      title:``,
+    forms:{
+      title:`Different forms of linear equations`,
       content:``,
       before:``,
       after:``,
   
     },
   
-    obj3:{
+    operations:{
   
-      title:``,
+      title:`Elementary Operations`,
       content:``,
       before:``,
       after:``,
@@ -100,23 +109,32 @@ export default function LinearEquationsPage({
     
   const linearEquationsSections=[
     {
-        id:'1',
-        title:'section1',
+        id:'definition',
+        title:sectionsContent.definition.title,
+        link:'',
+        content:[
+          sectionsContent.definition.before,
+        ]
+    },
+    {
+        id:'forms',
+        title:sectionsContent.forms.title,
         link:'',
         content:''
     },
     {
-        id:'2',
-        title:'section2',
+        id:'operations',
+        title:sectionsContent.operations.title,
         link:'',
         content:''
     },
-    {
-        id:'',
-        title:'',
-        link:'',
-        content:''
-    }
+     // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // }
+
 ]
 
   return (
