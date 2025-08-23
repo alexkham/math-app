@@ -158,10 +158,28 @@ Being able to [recognize different forms](!/algebra/equations/linear#forms) of l
       `,
   
     },
-    obj4:{
-      title:``,
-      content:``,
-      before:``,
+    function:{
+      title:`Linear Equation vs Linear Function`,
+      content:`
+      Essentially, both concepts (**Linear Equations** and **Linear Functions**)describe the **same underlying relationship** — but viewed from different perspectives:
+
+A **linear equation** in one variable (e.g., $ax + b = 0$) is primarily about finding **a specific value** of $x$ that makes the statement true — it’s **static** in that sense, focused on solving.
+
+A **linear function** (e.g., $f(x) = ax + b$) is about describing how $y$ (or $f(x)$) **changes with** $x$ — it is a **dynamic rule** for generating outputs from inputs.
+
+### Key Idea :
+
+@academic[example:A linear equation becomes a linear function when we stop asking ‘What value of $x$ makes this true?’ and instead ask ‘What value comes out when I plug $x$ in?’]@
+
+### How to Form the Link:
+
+* Take the linear equation $ax + b = 0$
+* Rearranged, it becomes $y = ax + b$ — now it defines a **linear function**.
+* The **solution** to the original equation corresponds to the **x-intercept** of the function: the point where $f(x) = 0$.
+
+      `,
+      before:`While linear equations focus on solving for a specific value that satisfies a condition, the same expression — once interpreted as a rule assigning outputs to inputs — becomes a linear function. In this way, $ax + b = 0$ and $f(x) = ax + b$ are two sides of the same coin: one algebraic, one functional. Understanding this connection deepens insight into both algebra and graphing.
+      `,
       after:``,
   
     },
@@ -246,12 +264,12 @@ export default function LinearEquationsPage({
             math={true}
             boxed={true}
             color="blue"
-            mathTheme="royalBlue"
+            mathTheme="grayCool"
             mathProps={{
             display: true,
             
             additionalStyles: { textAlign: "center" ,fontSize: "1.2rem",
-              maxWidth:"600px",margin:"auto",maxHeight:"100px"}
+              maxWidth:"400px",margin:"auto",maxHeight:"100px"}
             }}
           />
          </div>,
@@ -310,9 +328,13 @@ export default function LinearEquationsPage({
     },
      {
         id:'function',
-        title:'',
+        title:sectionsContent.function.title,
         link:'',
-        content:''
+        content:[
+
+          sectionsContent.function.before,
+          sectionsContent.function.content,
+        ]
     },
      {
         id:'solution',
