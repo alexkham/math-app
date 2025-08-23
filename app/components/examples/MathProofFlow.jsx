@@ -1,6 +1,5 @@
 
 
-
 import React from 'react';
 import { processContent } from '@/app/utils/contentProcessor';
 import themes from './mathProofThemes';
