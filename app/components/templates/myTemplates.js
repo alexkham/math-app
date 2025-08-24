@@ -93,5 +93,4 @@ const introContent = {
 }
 
 
-{% comment %} #link {% endcomment %}
- {% comment %} @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=4) →@ {% endcomment %}
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=4) →@ 
