@@ -255,6 +255,8 @@ You can observe these sign changes by using the interactive tool above. Set the 
 
 These angles, along with their equivalents in other quadrants, form the backbone of trigonometric calculations. Notice the pattern: 30° and 60° are complementary (they add to 90°), and their sine and cosine values are swapped. The 45° angle creates an isosceles right triangle, giving equal sine and cosine values.
 
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use trigonometry calculator](!/calculators/trigonometry) →@
+
 **Why These Angles Matter:**
 
 These values come from two fundamental right triangles: the 30-60-90 triangle and the 45-45-90 triangle. Because their side ratios involve simple square roots and fractions, calculations remain exact rather than requiring decimal approximations.
