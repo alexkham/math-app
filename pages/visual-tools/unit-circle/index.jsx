@@ -25,7 +25,7 @@ export async function getStaticProps() {
     definition:{
       title:`What is Unit Circle?`,
       content:``,
-      before:`The unit circle is a mathematical abstraction model invented to give us an intuitive understanding of how [trigonometric functions](!trigonometry) behave in the coordinate system with respect to different [angles](!/visual-tools/unit-circle#angles). Rather than being just another geometric shape, it serves as a visual and computational tool that transforms abstract [trigonometric relationships](!/trigonometry) into concrete, observable patterns.
+      before:`The unit circle is a mathematical abstraction model invented to give us an intuitive understanding of how [trigonometric functions](!/trigonometry) behave in the coordinate system with respect to different [angles](!/visual-tools/unit-circle#angles). Rather than being just another geometric shape, it serves as a visual and computational tool that transforms abstract [trigonometric relationships](!/trigonometry) into concrete, observable patterns.
 
 We create this circle by placing its center at the origin (0,0) of the coordinate plane and setting the radius to exactly 1. This positioning is crucial because when we take any point on the circle and drop perpendicular lines to the x and y axes, we automatically create a right triangle. The hypotenuse of this triangle is always the radius (which equals 1), while the legs are the x and y coordinates of the point.
 
@@ -197,19 +197,86 @@ $\\text{degrees} = \\text{radians} \\times \\frac{180}{\\pi}$
 
  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use degree to radians angle converter](!/converters/degree-radians) →@
 
+  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Check angle conversion table](!/tables/angle-conversion) →@
+
 **Standard position**: Regardless of the unit system, angles in the unit circle are measured from the positive x-axis in a counterclockwise direction. This creates a consistent reference point for all calculations and makes it possible to extend trigonometry beyond the first quadrant.`,
       after:``,
   
     },
-    obj4:{
-      title:``,
-      content:``,
+    quadrants:{
+      title:`The Four Quadrants: A Sign Language`,
+      content:`
+One of the most crucial concepts for mastering trigonometry is understanding how the signs of sine and cosine change as we move around the circle. The unit circle is divided into four quadrants, each with its own "personality":
+
+**Quadrant I (0° to 90° or 0 to π/2 radians):** Both x and y coordinates are positive, so both cosine and sine are positive. This is the "happy quadrant" where everything is positive and straightforward.
+
+**Quadrant II (90° to 180° or π/2 to π radians):** The x-coordinate becomes negative while y stays positive. This means cosine is negative but sine remains positive. Think "sine is still climbing, but cosine has crossed over to the negative side."
+
+**Quadrant III (180° to 270° or π to 3π/2 radians):** Both coordinates are negative, making both cosine and sine negative. This is the "opposite quadrant" from Quadrant I.
+
+**Quadrant IV (270° to 360° or 3π/2 to 2π radians):** The x-coordinate returns to positive while y becomes negative. Cosine is positive again, but sine has gone negative.
+
+You can observe these sign changes by using the interactive tool above. Set the angle to 45° (π/4 radians), then 135° (3π/4 radians), then 225° (5π/4 radians), and finally 315° (7π/4 radians). Watch how the values in the trigonometric table change signs as you move through each quadrant.
+
+
+`,
       before:``,
-      after:``,
+      after:`
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use degree to radians angle converter](!/converters/degree-radians) →@
+
+  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Check angle conversion table](!/tables/angle-conversion) →@
+`,
   
     },
 
 
+    special:{
+  
+      title:`Special Angles: The Essential Values`,
+      content:`Certain angles on the unit circle are particularly important because they produce exact, "clean" trigonometric values that appear frequently in mathematics and real-world applications. These special angles have trigonometric values that can be expressed as simple fractions involving square roots, rather than long decimal approximations.
+
+**The Key Angles:**
+
+**30° (π/6 radians)**: 
+ sin(30°) = 1/2
+ cos(30°) = √3/2
+
+**45° (π/4 radians)**:
+ sin(45°) = √2/2
+ cos(45°) = √2/2
+
+**60° (π/3 radians)**:
+ sin(60°) = √3/2
+ cos(60°) = 1/2
+
+**90° (π/2 radians)**:
+ sin(90°) = 1
+ cos(90°) = 0
+
+These angles, along with their equivalents in other quadrants, form the backbone of trigonometric calculations. Notice the pattern: 30° and 60° are complementary (they add to 90°), and their sine and cosine values are swapped. The 45° angle creates an isosceles right triangle, giving equal sine and cosine values.
+
+**Why These Angles Matter:**
+
+These values come from two fundamental right triangles: the 30-60-90 triangle and the 45-45-90 triangle. Because their side ratios involve simple square roots and fractions, calculations remain exact rather than requiring decimal approximations.
+
+**Extended Special Angles:**
+
+The unit circle extends these basic angles to all four quadrants:
+- **120° (2π/3)**, **135° (3π/4)**, **150° (5π/6)** in Quadrant II
+- **210° (7π/6)**, **225° (5π/4)**, **240° (4π/3)** in Quadrant III  
+- **300° (5π/3)**, **315° (7π/4)**, **330° (11π/6)** in Quadrant IV
+
+Try entering these angles in the interactive tool above. You'll notice that the absolute values of sine and cosine remain the same as their first-quadrant counterparts, but the signs change according to the quadrant rules we discussed earlier.`,
+      before:``,
+      after:`
+      
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use degree to radians angle converter](!/converters/degree-radians) →@
+
+  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Check angle conversion table](!/tables/angle-conversion) →@
+
+      `,
+  
+    },
     obj5:{
   
       title:``,
@@ -217,13 +284,28 @@ $\\text{degrees} = \\text{radians} \\times \\frac{180}{\\pi}$
       before:``,
       after:``,
   
-    }
+    },
+    obj5:{
   
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
+    obj5:{
+  
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    }  
   }
 
 
 
-   const unitCircleSVG=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1650 -1650 3300 3300">
+   const unitCircleSVG=`<svg xmlns="http://www.w3.org/2000/svg" style="margin-bottom:-100px;" viewBox="-1650 -1650 3300 3300">
   <!-- Background -->
   <rect x="-1650" y="-1650" width="3300" height="3300" fill="#f8f9fa" />
   
@@ -396,6 +478,30 @@ export default function UnitCirclePage({ title, description, keywords, canonical
         link:'',
         content:[
           sectionsContent.angles.before
+        ]
+    },
+      {
+        id:'quadrants',
+        title:sectionsContent.quadrants.title,
+        link:'',
+        content:[
+          
+          sectionsContent.quadrants.content,
+          <SvgDiagram data={{ svg: unitCircleSVG,
+             explanation: "This unit circle shows all four quadrants with degree markings every 30°. Notice how the signs of sine and cosine change in each quadrant - this is the foundation of trigonometric calculations.", }}
+          scale={0.7}
+          containerStyle={{marginBottom:'-300px'}} />,
+          sectionsContent.quadrants.after,
+        
+        ]
+    },
+     {
+        id:'special',
+        title:sectionsContent.special.title,
+        link:'',
+        content:[
+          sectionsContent.special.content,
+          sectionsContent.special.after,
         ]
     },
     // {

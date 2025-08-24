@@ -185,6 +185,26 @@ A **linear function** (e.g., $f(x) = ax + b$) is about describing how $y$ (or $f
     },
 
 
+    solving:{
+  
+      title:`Solving Linear Equations`,
+      content:`
+      
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use linear equations solver](!/algebra/equations/linear/solver) →@
+
+      `,
+      before:``,
+      after:``,
+  
+    },
+    simplify:{
+  
+      title:`Simplifying Linear Equations`,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
     obj5:{
   
       title:``,
@@ -321,8 +341,8 @@ export default function LinearEquationsPage({
         ]
     },
      {
-        id:'simplification',
-        title:'',
+        id:'simplify',
+        title:sectionsContent.simplify.title,
         link:'',
         content:''
     },
@@ -337,10 +357,13 @@ export default function LinearEquationsPage({
         ]
     },
      {
-        id:'solution',
-        title:'',
+        id:'solving',
+        title:sectionsContent.solving.title,
         link:'',
-        content:''
+        content:[
+         sectionsContent.solving.content,
+
+        ]
     }
 
      // {
