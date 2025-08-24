@@ -489,7 +489,7 @@ export default function UnitCirclePage({ title, description, keywords, canonical
         content:[
           
           sectionsContent.quadrants.content,
-          <SvgDiagram data={{ svg: unitCircleSVG,
+          <SvgDiagram key={'quadrants'} data={{ svg: unitCircleSVG,
              explanation: "This unit circle shows all four quadrants with degree markings every 30°. Notice how the signs of sine and cosine change in each quadrant - this is the foundation of trigonometric calculations.", }}
           scale={0.7}
           containerStyle={{marginBottom:'-300px'}} />,

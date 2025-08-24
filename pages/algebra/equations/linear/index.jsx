@@ -276,7 +276,7 @@ export default function LinearEquationsPage({
         content:[
 
           sectionsContent.forms.before,
-          <div style={{width:'90%',margin:'auto'}}>
+          <div key={'forms_list'} style={{width:'90%',margin:'auto'}}>
           <MyList
             key={'forms'}
             data={linearEquationFormsData}
@@ -320,7 +320,7 @@ export default function LinearEquationsPage({
         link:'',
         content:[
           sectionsContent.operations.before,
-           <div style={{width:'60%',margin:'auto'}}>
+           <div key={'elementary_operations_list'} style={{width:'60%',margin:'auto'}}>
           <MyList
             key={'forms'}
             data={elementaryOperationsData}
