@@ -1,7 +1,8 @@
 .container {
     min-height: 100vh;
-    background: linear-gradient(to bottom right, #E6F0FF, #EAE6FF);
+    /* background: linear-gradient(to bottom right, #E6F0FF, #EAE6FF); */
     padding: 2rem;
+    background-color: #eff6ff;
   }
   
   .title {

@@ -16,7 +16,8 @@ const categoryIcons = {
   'Arithmetics': Calculator,
   'Math-Symbols':Section,
   'Truth-Tables':BookOpenCheck,
-  'Angle-Conversion-Table': DraftingCompass
+  'Angle-Conversion-Table': DraftingCompass,
+  'Trigonometry-Tables': PieChart ,
 };
 
 
@@ -134,7 +135,9 @@ export async function getStaticProps() {
     'Arithmetics': '/tables/arithmetics',
     'Math-Symbols': '/math-symbols',
     'Truth-Tables':'/tables/truth-tables',
-    'Angle-Conversion-Table':'/tables/angle-conversion'
+    'Angle-Conversion-Table':'/tables/angle-conversion',
+    'Trigonometry-Tables':'/tables/trigonometry'
+
   };
   
   const categories = 
@@ -146,7 +149,9 @@ export async function getStaticProps() {
       'Arithmetics',
       'Math-Symbols',
       'Truth-Tables',
-      'Angle-Conversion-Table'
+      'Angle-Conversion-Table',
+      'Trigonometry-Tables',
+
    ];
   return { props: { categories, categoryLinks } };
 }
