@@ -80,6 +80,7 @@ import TruthTable from '@/app/components/logic-calculator/truth-tables/TruthTabl
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import '../../pages.css'
 import VerticalButtonGroup from '@/app/components/VerticalButtonGroup'
+import Head from 'next/head'
 
 export const metadata = {
   title: 'Truth Tables',
@@ -90,7 +91,7 @@ export const metadata = {
   }
 }
 
-export default function TruthTablesPage({ keyWords, truthExplanations , menuItems }) {
+export default function TruthTablesPage({ seoData, keyWords, truthExplanations, menuItems }) {
 
   // const menuItems=[
 
@@ -119,6 +120,50 @@ export default function TruthTablesPage({ keyWords, truthExplanations , menuItem
   // ]
   return (
     <>
+    <Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": seoData.name,
+        "description": seoData.description,
+        "keywords": seoData.keywords,
+        "url": `https://www.learnmathclass.com${seoData.url}`,
+        "dateModified": new Date().toISOString(),
+        "inLanguage": "en-US",
+        "mainEntity": {
+          "@type": "Article",
+          "name": seoData.name,
+          "dateModified": new Date().toISOString(),
+          "author": {
+            "@type": "Organization",
+            "name": "Learn Math Class"
+          }
+        }
+      })
+    }}
+  />
+</Head>
       <GenericNavbar/>
       <br/>
       <br/>
@@ -227,7 +272,14 @@ export async function getStaticProps() {
     props: {
       keyWords,
       truthExplanations,
-      menuItems
+      menuItems,
+       seoData: {
+      title: "Truth Tables - AND, OR, XOR, NAND, NOR Logic Gates | Learn Math Class",
+      description: "Complete truth tables for basic logic connectives including AND, OR, XOR, NAND, NOR, and XNOR gates with detailed explanations and examples.",
+      keywords: keyWords.join(", "),
+      url: "/tables/truth-tables",
+      name: "Truth Tables for Logic Connectives"
+    },
     }
   }
 }
