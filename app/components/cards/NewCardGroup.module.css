@@ -192,7 +192,8 @@
 .viewText {
   color: white;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 17px;
+
 }
 
 @media (max-width: 768px) {
