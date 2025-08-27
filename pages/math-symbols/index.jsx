@@ -6,7 +6,7 @@ import Head from 'next/head';
 import '../pages.css';
 import DataWrapper from '@/app/components/generic-table/DataWrapper';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
-import VerticalButtonGroup from '@/app/components/VerticalButtonGroup';
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
 
 export default function MathSymbolsPage({ symbolsData, meta,menuItems }) {
 
@@ -88,11 +88,11 @@ export default function MathSymbolsPage({ symbolsData, meta,menuItems }) {
       <div style={{display:'flex',flexDirection:'row',alignItems: 'flex-start' }}>
       <VerticalButtonGroup 
       items={menuItems}
-      width="130px"       
+      width="200px"       
     //   backgroundColor ='#0070f3'
     //   color = 'white'
       isSticky={true}
-      verticalOffset='200px'
+      verticalOffset='250px'
       />
      
       <div

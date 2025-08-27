@@ -79,7 +79,7 @@ import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import TruthTable from '@/app/components/logic-calculator/truth-tables/TruthTable'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import '../../pages.css'
-import VerticalButtonGroup from '@/app/components/VerticalButtonGroup'
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 import Head from 'next/head'
 
 export const metadata = {
@@ -180,11 +180,11 @@ export default function TruthTablesPage({ seoData, keyWords, truthExplanations, 
       <h1 className='title' style={{marginTop:'-30px', marginBottom:'-60px'}}>Basic Logic Connectives Truth Tables</h1> 
       <VerticalButtonGroup 
       items={menuItems}
-      width="100px"       
+      width="200px"       
     //   backgroundColor ='#0070f3'
     //   color = 'white'
       isSticky={true}
-      verticalOffset='200px'
+      verticalOffset='250px'
       />
       <div style={{marginLeft:'20px',transform:'scale(0.95)',marginTop:'-60px'}}>
       <TruthTable explanations={truthExplanations}/> 

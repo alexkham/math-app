@@ -7,7 +7,7 @@ import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import TruthTable from '@/app/components/logic-calculator/truth-tables/TruthTable'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import '../../../pages.css'
-import VerticalButtonGroup from '@/app/components/VerticalButtonGroup'
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
 export const metadata = {
   title: 'Biconditionals Truth Tables',
@@ -141,11 +141,12 @@ export default function BiconditionalsTruthTablesPage({ keyWords, biconditionalE
       <h1 className='title' style={{marginTop:'-10px', marginBottom:'-100px'}}>Biconditionals (Double Implications) Truth Tables</h1> 
       <VerticalButtonGroup 
       items={menuItems}
-      width="100px"       
+      width="200px"       
     //   backgroundColor ='#0070f3'
     //   color = 'white'
       isSticky={true}
-      verticalOffset='200px'
+      verticalOffset='250px'
+      theme=''
       />
 
       <div style={{marginLeft:'20px',transform:'scale(0.95)',marginTop:'-60px'}}>
@@ -160,7 +161,7 @@ export default function BiconditionalsTruthTablesPage({ keyWords, biconditionalE
 
 export async function getStaticProps() {
   const keyWords = ['truth table','logic biconditional','logical equivalence',
-    'double implication examples'
+    'double implication examples','propositional logic','logic'
   ]
 
   const menuItems=[

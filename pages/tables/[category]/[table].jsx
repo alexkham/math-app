@@ -7,6 +7,7 @@ import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 import FlexTableDynamic from '@/app/components/z-table/FlexTableDynamic';
 import { cumulativeProbability,complementaryCumulativeProbability } from '@/app/utils/z-tables';
 import ZTableContainer from '@/app/components/z-table/ZTableContainer';
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 
 
 // Function to generate static paths for each category and table
@@ -62,7 +63,8 @@ export default function TablePage({ category, table, selectedItem }) {
     
        
      <>
-     <MyNavbar></MyNavbar>
+     {/* <MyNavbar></MyNavbar> */}
+     <GenericNavbar/>
    
         
       

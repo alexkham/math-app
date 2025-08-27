@@ -321,18 +321,18 @@ export default function PageTemplate({sectionsContent , introContent,trigoTableD
    <br/>
    <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Special Angles</h1>
    <br/>
-    <div style={{width:'100%',margin:'auto',display:'flex',flexDirection:'row'}}>
+    <div style={{width:'80%',margin:'auto'}}>
         <GenericTable tableData={trigoTableData}
         cellFontSize={'16px'}
         headerFontSize={'18px'}
         theme='navyBlue'
         />
-        <LinksList links={navLinks}
+        {/* <LinksList links={navLinks}
                layout="vertical"
                theme="blue"
                width="200px"
                
-               />
+               /> */}
         </div>
    <br/>
    {/* <SectionTableOfContents sections={genericSections}/> */}

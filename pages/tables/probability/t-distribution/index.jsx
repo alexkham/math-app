@@ -4,11 +4,13 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import TTableContainer from '@/app/components/t-table/TTableContainer'
 import React from 'react'
 import '../../table.css'
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 
 export default function TTablePage() {
   return (
     <>
-    <MyNavbar/>
+    {/* <MyNavbar/> */}
+    <GenericNavbar/>
     <br/>
     <br/>
     <br/>

@@ -4,11 +4,13 @@ import ZTableContainer from '@/app/components/z-table/ZTableContainer'
 import React from 'react'
 import '../../../pages.css'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
+import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 
 export default function ZDistributionTablePage() {
   return (
     <>
-    <MyNavbar/>
+    {/* <MyNavbar/> */}
+    <GenericNavbar/>
     <br/>
     <br/>
     <br/>
