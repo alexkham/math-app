@@ -42,6 +42,25 @@ export default function ConvertersPage() {
        <rect x="16" y="16" width="4" height="4" rx="1"/>
    </svg>
     )
+
+    const CustomLinearAlgebra = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        {/* Matrix brackets */}
+        <path d="M3 4 L3 20 L5 20 L5 18 L5 6 L5 4 Z" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+        <path d="M19 4 L19 6 L19 18 L19 20 L21 20 L21 4 Z" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+        
+        {/* Matrix elements - 3x3 grid */}
+        <circle cx="8" cy="7" r="1.5"/>
+        <circle cx="12" cy="7" r="1.5"/>
+        <circle cx="16" cy="7" r="1.5"/>
+        <circle cx="8" cy="12" r="1.5"/>
+        <circle cx="12" cy="12" r="1.5"/>
+        <circle cx="16" cy="12" r="1.5"/>
+        <circle cx="8" cy="17" r="1.5"/>
+        <circle cx="12" cy="17" r="1.5"/>
+        <circle cx="16" cy="17" r="1.5"/>
+    </svg>
+)
    
 
     const cardItems=[
@@ -145,6 +164,21 @@ export default function ConvertersPage() {
             href:'/combinatorics/calculator',
             // No subcategories, will show simple link
             content:"Calculate Combinations and Permutations for different Combinatorial Scenarios and learn to differentiate them. "
+          },
+
+           {
+            category: 'Linear ALgebra Calculators',
+            icon: CustomLinearAlgebra,
+            // href:'/combinatorics/calculator',
+            // No subcategories, will show simple link
+            content:"Calculate Complex Numbers.",
+            subcategories:[
+              {
+                name:"Complex Numbers Calculator",
+                href:'/calculators/complex-numbers'
+
+              }
+            ]
           },
     ]
   return (
