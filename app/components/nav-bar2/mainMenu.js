@@ -84,6 +84,7 @@ export const mainMenuStructure = [
             { label: 'Factorial Calculator', href: '/calculators/factorial-calculator' },
             { label: 'Fraction Calculator', href: '/calculators/fraction-calculator' },
             { label: 'Combinatorics Calculator', href: '/combinatorics/calculator' },
+            { label: 'Complex Numbers Calculator', href: '/calculators/complex-numbers' },
             { label: 'Conditional Probability Calculator', href: '/probability/conditional-probability-calculator' },
             
           ]

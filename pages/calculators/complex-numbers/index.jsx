@@ -83,13 +83,6 @@ z = a + bi where a is real part, b is imaginary part
 • -2 + 5i  
 • 7 - 3i
 • 0 + 2i (pure imaginary)
-
-**Basic Properties:**
-• i² = -1
-• Real axis (horizontal)
-• Imaginary axis (vertical)
-
-
 `,
   
   operationGuides: {

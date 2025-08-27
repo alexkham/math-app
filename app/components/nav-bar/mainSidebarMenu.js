@@ -62,6 +62,7 @@ const CustomConvert=()=>(
     { text: 'Factorial Calculator', url: '/calculators/factorial-calculator' },
     { text: 'Fraction Calculator', url: '/calculators/fraction-calculator' },
     { text: 'Combinatorics Calculator', url: '/combinatorics/calculator' },
+    { text: 'Complex Numbers Calculator', url: '/calculators/complex-numbers' },
     { text: 'Conditional Probability Calculator', url: '/probability/conditional-probability-calculator' },
     { text: 'Linear Equations Solver', url: '/algebra/equations/linear/solver' },
    
