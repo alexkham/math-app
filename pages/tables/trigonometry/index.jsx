@@ -35,6 +35,17 @@ const tablesCardsData=[
 //   textColor: "color",       // Optional - text color
 //   footerColor: "color"      // Optional - footer background
 },
+{
+    name: "Inverse Trigonometric Functions",           // Required - card title
+  description: " Complete reference table showing domain, range, and principal values for all six inverse trig functions with common examples.",    // Required - card description  
+  path: "/tables/trigonometry/inverse",  
+},
+
+{
+    name: "Trigonometric Reduction Formulas",           // Required - card title
+  description: " Essential formulas for converting complex angle expressions into basic trigonometric functions of simple angles.",    // Required - card description  
+  path: "/tables/trigonometry/reduction",  
+}
 
 ]
 

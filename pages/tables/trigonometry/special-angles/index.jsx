@@ -325,7 +325,7 @@ export default function PageTemplate({sectionsContent , introContent,trigoTableD
         <GenericTable tableData={trigoTableData}
         cellFontSize={'16px'}
         headerFontSize={'18px'}
-        theme='navyBlue'
+        theme='lightBlue'
         />
         {/* <LinksList links={navLinks}
                layout="vertical"

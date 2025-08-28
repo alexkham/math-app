@@ -140,6 +140,7 @@ export default function BiconditionalsTruthTablesPage({ keyWords, biconditionalE
           panelBackgroundColor='#f2f2f2'/> 
       <h1 className='title' style={{marginTop:'-10px', marginBottom:'-100px'}}>Biconditionals (Double Implications) Truth Tables</h1> 
       <VerticalButtonGroup 
+      
       items={menuItems}
       width="200px"       
     //   backgroundColor ='#0070f3'
