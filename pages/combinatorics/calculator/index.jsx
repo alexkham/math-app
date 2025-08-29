@@ -6,9 +6,19 @@ import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import CombinatoricsCalculator from '@/app/components/calculators/combinatorics/CombinatoricsCalculator'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import '../../pages.css'
+import Head from 'next/head'
 
 
  export async function getStaticProps(){
+
+const keyWords = [
+    'combinatorics calculator', 'permutation calculator', 'combination calculator', 
+    'factorial calculator', 'counting problems', 'arrangements calculator', 
+    'selections calculator', 'circular permutations', 'weak composition', 'strong composition'
+  ]
+
+
+
       const explanationsMapping = {
   PermutationFull: {
     formula: '$P(n) = n!$',
@@ -116,13 +126,20 @@ DistributionIntoCells: {
    return {
       props:{
          explanationsMapping,
+          seoData: {
+        title: "Combinatorics Calculator - Permutations & Combinations | Learn Math Class",
+        description: "Free combinatorics calculator for permutations, combinations, and counting problems. Calculate factorials, arrangements, and selections with step-by-step solutions.",
+        keywords: keyWords.join(", "),
+        url: "/combinatorics/calculator",
+        name: "Combinatorics Calculator"
+      },
+      keyWords,
         
        }
     }
    }
 
-export default function CombinatoricsCalculatorPage({explanationsMapping}) {
-
+export default function CombinatoricsCalculatorPage({ seoData, explanationsMapping, keyWords }) {
      const searchParams = useSearchParams()
       const scenario = searchParams.get('scenario')
       const initialScenario = scenario ? parseInt(scenario) : 1
@@ -130,6 +147,50 @@ export default function CombinatoricsCalculatorPage({explanationsMapping}) {
 
   return (
    <>
+   <Head>
+ <title>{seoData.title}</title>
+ <meta name="description" content={seoData.description} />
+ <meta name="keywords" content={seoData.keywords} />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+ 
+ <meta property="og:title" content={seoData.title} />
+ <meta property="og:description" content={seoData.description} />
+ <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+ <meta property="og:type" content="article" />
+ <meta property="og:site_name" content="Learn Math Class" />
+ 
+ <meta name="twitter:card" content="summary" />
+ <meta name="twitter:title" content={seoData.title} />
+ <meta name="twitter:description" content={seoData.description} />
+ 
+ <meta name="robots" content="index, follow" />
+ 
+ <script 
+   type="application/ld+json"
+   dangerouslySetInnerHTML={{ 
+     __html: JSON.stringify({
+       "@context": "https://schema.org",
+       "@type": "WebPage",
+       "name": seoData.name,
+       "description": seoData.description,
+       "keywords": seoData.keywords,
+       "url": `https://www.learnmathclass.com${seoData.url}`,
+       "dateModified": new Date().toISOString(),
+       "inLanguage": "en-US",
+       "mainEntity": {
+         "@type": "Article",
+         "name": seoData.name,
+         "dateModified": new Date().toISOString(),
+         "author": {
+           "@type": "Organization",
+           "name": "Learn Math Class"
+         }
+       }
+     })
+   }}
+ />
+</Head>
    <GenericNavbar/>
    <br/>
    <br/>
