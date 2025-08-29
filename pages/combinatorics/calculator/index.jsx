@@ -31,7 +31,7 @@ import '../../pages.css'
   },
 
   PermutationWithoutRepetition: {
-    formula: `$P(n,r)$ = $\\frac{n!}{(n-r)!}$`,
+    formula: `$P(n,r)$ = $\frac{n!}{(n-r)!}$`,
     description: 'Calculate the number of ways to pick $r$ different items from $n$ items where order matters. Each selection creates a different arrangement.',
     example: 'Selecting and arranging podium finishers (1st, 2nd, 3rd) from 5 runners: $P(5,3) = \\frac{5!}{(5-3)!} = \\frac{120}{2} = 60$ arrangements',
     reasoning: `We start with $n!$ total arrangements, then divide by $(n-r)!$ to account for the remaining items we don\'t select. This gives us only the arrangements of the $r$ selected items in their specific positions.
