@@ -253,7 +253,7 @@ export default function InversePage({ seoData, sectionsContent, introContent,
     //   backgroundColor ='#0070f3'
     //   color = 'white'
       isSticky={true}
-      verticalOffset='250px'
+      verticalOffset='220px'
       theme='lightBlue'
       />
    {/* <GenericTable tableData={inverseTrigoTableData}/> */}

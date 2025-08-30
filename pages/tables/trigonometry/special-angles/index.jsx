@@ -10,6 +10,7 @@ import '../../../../../math-app/pages/pages.css'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import LinksList from '@/app/components/page-components/links/LinksList'
 import Head from 'next/head'
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
 
 export async function getStaticProps(){
@@ -252,6 +253,19 @@ export async function getStaticProps(){
 };
 
 
+const navigationGroups = [
+  {
+    title: "Other Trigonometric Tables",
+    items: [
+      // { title: "Special Angles", link: "/tables/trigonometry/special-angles" },
+      { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
+      { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
+      { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" }
+    ]
+  },
+]
+
+
    return {
       props:{
          sectionsContent,
@@ -265,12 +279,13 @@ export async function getStaticProps(){
       name: "Special Angles Trigonometry Table"
     },
     keyWords,
+    navigationGroups,
         
        }
     }
    }
 export default function PageTemplate({ seoData, sectionsContent, introContent, 
-  trigoTableData, keyWords }) {
+  trigoTableData, keyWords ,navigationGroups }) {
 
      const navLinks = [
     { title: 'Home', href: '/' },
@@ -370,9 +385,19 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Special Angles</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-200px'}}>Special Angles</h1>
    <br/>
-    <div style={{width:'80%',margin:'auto'}}>
+  <VerticalButtonGroup 
+      
+      items={navigationGroups}
+      width="250px"       
+    //   backgroundColor ='#0070f3'
+    //   color = 'white'
+      isSticky={true}
+      verticalOffset='220px'
+      theme='lightBlue'
+      />
+    <div style={{width:'70%',margin:'auto'}}>
         <GenericTable tableData={trigoTableData}
         cellFontSize={'16px'}
         headerFontSize={'18px'}

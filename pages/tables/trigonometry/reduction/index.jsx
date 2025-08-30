@@ -9,6 +9,7 @@ import React from 'react'
 import '../../../../../math-app/pages/pages.css'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import Head from 'next/head'
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
 
 export async function getStaticProps(){
@@ -168,6 +169,18 @@ const reductionFormulasTableData = {
   content: ``
 }
 
+const navigationGroups = [
+  {
+    title: "Other Trigonometric Tables",
+    items: [
+      { title: "Trigonometric Functions of Special Angles", link: "/tables/trigonometry/special-angles" },
+      { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
+      // { title: "Reduction Formulas", link: "/tables/trigonometry/reduction" },
+      { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" }
+    ]
+  },
+]
+
 
 
 
@@ -184,12 +197,13 @@ const reductionFormulasTableData = {
       name: "Trigonometric Reduction Formulas"
     },
     keyWords,
+    navigationGroups,
         
        }
     }
    }
 export default function ReductionPage({ seoData, sectionsContent, introContent, 
-  reductionFormulasTableData, keyWords }) {    
+  reductionFormulasTableData, keyWords ,navigationGroups}) {    
 
   const genericSections=[
     {
@@ -274,9 +288,19 @@ export default function ReductionPage({ seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Trigonometric Reduction Formulas</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-200px'}}>Trigonometric Reduction Formulas</h1>
    <br/>
-  <div style={{width:'80%',margin:'auto'}}>
+   <VerticalButtonGroup 
+      
+      items={navigationGroups}
+      width="250px"       
+    //   backgroundColor ='#0070f3'
+    //   color = 'white'
+      isSticky={true}
+      verticalOffset='220px'
+      theme='lightBlue'
+      />
+  <div style={{width:'70%',margin:'auto'}}>
         <GenericTable tableData={reductionFormulasTableData}
         cellFontSize={'16px'}
         headerFontSize={'18px'}

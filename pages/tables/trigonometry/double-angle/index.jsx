@@ -276,7 +276,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
     //   backgroundColor ='#0070f3'
     //   color = 'white'
       isSticky={true}
-      verticalOffset='200px'
+      verticalOffset='220px'
       theme='lightBlue'
       />
    <br/>
