@@ -1,4 +1,5 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import GenericTable from '@/app/components/generic-table/GenericTable'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -8,69 +9,79 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../../../math-app/pages/pages.css'
 import Head from 'next/head'
-
-import GenericTable from '@/app/components/generic-table/GenericTable'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
 
 export async function getStaticProps(){
 
 
-  const keyWords=['trigonpmetric functions','trigonometry','trigo',
-    'inverse trigonometric function','calculating inverse trig functions',
-    'cosine tangent sine','inverse trig','inverse of trig functions','trigonometric functions and inverses',
-    'inverse trigonometry function','inverse cosine','inverse sine']
+
+  
+  const keyWords=['trigonometry','trigonometric identity','half angle identity',
+    'half angle formula','cos half angle formula',
+    'half angle','multiple angles']
+
+const navigationGroups = [
+  {
+    title: "Other Trigonometric Tables",
+    items: [
+      { title: "Trigonometric Functions of Special Angles", link: "/tables/trigonometry/special-angles" },
+      { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
+      { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
+      { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
+    ]
+  },
+
+];
 
 
-    const inverseTrigoTableData = {
- tableTitle: "Inverse Trigonometric Functions - Domain, Range, and Principal Values",
+const halfAngleTableData = {
+ tableTitle: "Half Angle Identities",
  rows: [
    {
-     function: "arcsin(x)",
-     notation: "sin⁻¹(x)",
-     domain: "[-1, 1]",
-     range: "[-π/2, π/2]",
-     common_value: "arcsin(1/2) = π/6 = 30°"
+     function: "sin(θ/2)",
+     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 - \\cos\\theta}{2}}",
+     description: "Plus or minus depends on quadrant of θ/2 - derived from cosine double angle"
    },
    {
-     function: "arccos(x)",
-     notation: "cos⁻¹(x)", 
-     domain: "[-1, 1]",
-     range: "[0, π]",
-     common_value: "arccos(1/2) = π/3 = 60°"
+     function: "cos(θ/2)",
+     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 + \\cos\\theta}{2}}",
+     description: "Sign determined by which quadrant θ/2 falls in - always check the angle range"
    },
    {
-     function: "arctan(x)",
-     notation: "tan⁻¹(x)",
-     domain: "(-∞, ∞)",
-     range: "(-π/2, π/2)",
-     common_value: "arctan(1) = π/4 = 45°"
+     function: "tan(θ/2)",
+     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 - \\cos\\theta}{1 + \\cos\\theta}}",
+     description: "Square root form - can also be expressed as (1-cosθ)/sinθ or sinθ/(1+cosθ)"
    },
    {
-     function: "arccsc(x)",
-     notation: "csc⁻¹(x)",
-     domain: "(-∞, -1] ∪ [1, ∞)",
-     range: "[-π/2, 0) ∪ (0, π/2]",
-     common_value: "arccsc(2) = π/6 = 30°"
+     function: "tan(θ/2)",
+     formula: "\\displaystyle\\frac{1 - \\cos\\theta}{\\sin\\theta}",
+     description: "Alternative form - no ambiguous sign, more practical for calculations"
    },
    {
-     function: "arcsec(x)",
-     notation: "sec⁻¹(x)",
-     domain: "(-∞, -1] ∪ [1, ∞)",
-     range: "[0, π/2) ∪ (π/2, π]",
-     common_value: "arcsec(2) = π/3 = 60°"
+     function: "tan(θ/2)",
+     formula: "\\displaystyle\\frac{\\sin\\theta}{1 + \\cos\\theta}",
+     description: "Second alternative form - equivalent to previous, choose based on given information"
    },
    {
-     function: "arccot(x)",
-     notation: "cot⁻¹(x)",
-     domain: "(-∞, ∞)",
-     range: "(0, π)",
-     common_value: "arccot(1) = π/4 = 45°"
+     function: "csc(θ/2)",
+     formula: "\\displaystyle\\pm\\sqrt{\\frac{2}{1 - \\cos\\theta}}",
+     description: "Reciprocal of sine half-angle - undefined when cosθ = 1"
+   },
+   {
+     function: "sec(θ/2)",
+     formula: "\\displaystyle\\pm\\sqrt{\\frac{2}{1 + \\cos\\theta}}",
+     description: "Reciprocal of cosine half-angle - undefined when cosθ = -1"
+   },
+   {
+     function: "cot(θ/2)",
+     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 + \\cos\\theta}{1 - \\cos\\theta}}",
+     description: "Square root form of cotangent - also equals (1+cosθ)/sinθ or sinθ/(1-cosθ)"
    }
  ]
 };
 
-    const sectionsContent={
+const sectionsContent={
 
     obj1:{
       title:``,
@@ -123,18 +134,6 @@ export async function getStaticProps(){
   content: ``
 }
 
-const navigationGroups = [
-  {
-    title: "Other Trigonometric Tables",
-    items: [
-      { title: "Trigonometric Functions of Special Angles", link: "/tables/trigonometry/special-angles" },
-     
-      { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
-      { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
-      { title: "Half Angle Formulas", link: "/tables/trigonometry/half-angle" },
-    ]
-  },
-]
 
 
 
@@ -142,23 +141,23 @@ const navigationGroups = [
       props:{
          sectionsContent,
          introContent,
-         inverseTrigoTableData,
-          seoData: {
-      title: "Inverse Trigonometric Functions Table - Domain & Range | Learn Math Class",
-      description: "Complete table of inverse trigonometric functions including arcsin, arccos, arctan, arcsec, arccsc, and arccot with domains, ranges, and common values.",
+         halfAngleTableData,
+           seoData: {
+      title: "Half Angle Identities - Trigonometric Formulas Table | Learn Math Class",
+      description: "Complete table of half angle identities for sin, cos, tan, csc, sec, and cot. Learn trigonometric half angle formulas with explanations.",
       keywords: keyWords.join(", "),
-      url: "/tables/trigonometry/inverse",
-      name: "Inverse Trigonometric Functions"
+      url: "/tables/trigonometry/half-angle",
+      name: "Half Angle Identities"
     },
     keyWords,
-    navigationGroups,
+    navigationGroups
         
        }
     }
    }
 
-export default function InversePage({ seoData, sectionsContent, introContent, 
-  inverseTrigoTableData, keyWords ,navigationGroups }) {
+export default function PageTemplate({ seoData, sectionsContent, introContent,
+     halfAngleTableData, keyWords,navigationGroups }) {
 
     
   const genericSections=[
@@ -243,10 +242,9 @@ export default function InversePage({ seoData, sectionsContent, introContent,
          /> 
    <Breadcrumb/>
    <br/>
+   <br/>
    
-   <br/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-250px'}}>Inverse Trigonometric Functions</h1>
-   <br/>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-250px'}}>Half Angle Identities</h1>
     <VerticalButtonGroup 
       
       items={navigationGroups}
@@ -257,10 +255,9 @@ export default function InversePage({ seoData, sectionsContent, introContent,
       verticalOffset='220px'
       theme='lightBlue'
       />
-   {/* <GenericTable tableData={inverseTrigoTableData}/> */}
-   {/* <GenericTable tableData={inverseTrigoTableData}/> */}
-    <div style={{width:'70%',margin:'auto'}}>
-        <GenericTable tableData={inverseTrigoTableData}
+   <br/>
+      <div style={{width:'70%',margin:'auto'}}>
+        <GenericTable tableData={halfAngleTableData}
         cellFontSize={'16px'}
         headerFontSize={'18px'}
         theme='lightBlue'

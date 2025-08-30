@@ -27,7 +27,8 @@ const navigationGroups = [
     items: [
       { title: "Trigonometric Functions of Special Angles", link: "/tables/trigonometry/special-angles" },
       { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
-      { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" }
+      { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
+      { title: "Half Angle Formulas", link: "/tables/trigonometry/half-angle" },
     ]
   },
 
@@ -268,7 +269,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
    <br/>
    <br/>
    
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-200px'}}>Double Angle Identities</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-250px'}}>Double Angle Identities</h1>
     <VerticalButtonGroup 
       
       items={navigationGroups}
