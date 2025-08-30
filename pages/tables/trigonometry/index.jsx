@@ -45,6 +45,11 @@ const tablesCardsData=[
     name: "Trigonometric Reduction Formulas",           // Required - card title
   description: " Essential formulas for converting complex angle expressions into basic trigonometric functions of simple angles.",    // Required - card description  
   path: "/tables/trigonometry/reduction",  
+},
+{
+    name: "Double Angle Identities",           // Required - card title
+  description: "Formulas that express trigonometric functions of 2θ in terms of functions of θ. These break down compound angles into simpler components.",    // Required - card description  
+  path: "/tables/trigonometry/double-angle",  
 }
 
 ]
