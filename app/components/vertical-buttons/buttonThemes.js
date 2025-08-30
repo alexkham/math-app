@@ -777,6 +777,128 @@ export const buttonThemes = {
       color: '#a78bfa',
       hoverColor: '#c4b5fd'
     }
+  },
+  lightBlue: {
+  container: {
+    background:'#2196f3',
+    padding: '20px',
+    borderRadius: '12px',
+    boxShadow: '0 4px 16px rgba(59, 130, 246, 0.3)'
+  },
+  button: {
+    padding: '16px 20px',
+    marginBottom: '8px',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+    borderRadius: '8px',
+    color: '#ffffff',
+     background:'#2196f3',
+    fontSize: '15px',
+    fontWeight: '500'
+  },
+  buttonHover: {
+    backgroundColor:'#3f6eff',
+    borderColor: 'rgba(255, 255, 255, 0.4)',
+    boxShadow: '0 4px 12px rgba(255, 255, 255, 0.2)'
+  },
+  icon: {
+    color: '#ffffff'
+  },
+  chevron: {
+    color: 'rgba(255, 255, 255, 0.7)',
+    hoverColor: '#ffffff'
   }
+},
+
+brightCyan: {
+  container: {
+    background: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)',
+    padding: '20px',
+    borderRadius: '16px',
+    boxShadow: '0 8px 32px rgba(6, 182, 212, 0.3)'
+  },
+  button: {
+    padding: '18px 24px',
+    marginBottom: '12px',
+    border: 'none',
+    borderRadius: '12px',
+    color: '#ffffff',
+    background: 'rgba(255, 255, 255, 0.15)',
+    fontSize: '15px',
+    fontWeight: '500'
+  },
+  buttonHover: {
+    background: 'rgba(255, 255, 255, 0.25)',
+    borderColor: 'transparent',
+    boxShadow: '0 8px 25px rgba(255, 255, 255, 0.3)'
+  },
+  icon: {
+    color: '#ffffff'
+  },
+  chevron: {
+    color: 'rgba(255, 255, 255, 0.8)',
+    hoverColor: '#ffffff'
+  }
+},
+
+lightPastel: {
+  container: {
+    background: '#ffffff',
+    padding: '24px',
+    borderRadius: '20px',
+    boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)'
+  },
+  button: {
+    padding: '18px 24px',
+    marginBottom: '12px',
+    border: '2px solid #e0e7ff',
+    borderRadius: '14px',
+    color: '#4f46e5',
+    background: '#f8faff',
+    fontSize: '15px',
+    fontWeight: '500'
+  },
+  buttonHover: {
+    background: '#eef2ff',
+    borderColor: '#c7d2fe',
+    boxShadow: '0 8px 25px rgba(79, 70, 229, 0.15)'
+  },
+  icon: {
+    color: '#6366f1'
+  },
+  chevron: {
+    color: '#9ca3af',
+    hoverColor: '#4f46e5'
+  }
+},
+blueTable: {
+  container: {
+    background: '#3b82f6',
+    padding: '20px',
+    borderRadius: '12px',
+    boxShadow: '0 4px 16px rgba(59, 130, 246, 0.3)'
+  },
+  button: {
+    padding: '16px 20px',
+    marginBottom: '8px',
+    border: '1px solid #3b82f6',
+    borderRadius: '8px',
+    color: '#ffffff',
+    background: '#3b82f6',
+    fontSize: '15px',
+    fontWeight: '500'
+  },
+  buttonHover: {
+    background: '#2563eb',
+    borderColor: '#2563eb',
+    boxShadow: '0 4px 12px rgba(37, 99, 235, 0.3)'
+  },
+  icon: {
+    color: '#ffffff'
+  },
+  chevron: {
+    color: '#ffffff',
+    hoverColor: '#ffffff'
+  }
+},
 
 };

@@ -9,6 +9,7 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../../../math-app/pages/pages.css'
 import Head from 'next/head'
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
 
 export async function getStaticProps(){
@@ -20,7 +21,17 @@ export async function getStaticProps(){
     'double angle formula','cos double angle formula',
     'double angle','multiple angles']
 
+const navigationGroups = [
+  {
+    title: "Other Trigonometric Tables",
+    items: [
+      { title: "Trigonometric Functions of Special Angles", link: "/tables/trigonometry/special-angles" },
+      { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
+      { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" }
+    ]
+  },
 
+];
 
 // const doubleAngleTableData = {
 //  tableTitle: "Double Angle Identities of Main Trigonometric Functions",
@@ -163,12 +174,14 @@ const sectionsContent={
       name: "Double Angle Identities"
     },
     keyWords,
+    navigationGroups
         
        }
     }
    }
 
-export default function PageTemplate({ seoData, sectionsContent, introContent, doubleAngleTableData, keyWords }) {
+export default function PageTemplate({ seoData, sectionsContent, introContent,
+     doubleAngleTableData, keyWords,navigationGroups }) {
 
     
   const genericSections=[
@@ -254,9 +267,20 @@ export default function PageTemplate({ seoData, sectionsContent, introContent, d
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Double Angle Identities</h1>
+   
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-200px'}}>Double Angle Identities</h1>
+    <VerticalButtonGroup 
+      
+      items={navigationGroups}
+      width="250px"       
+    //   backgroundColor ='#0070f3'
+    //   color = 'white'
+      isSticky={true}
+      verticalOffset='200px'
+      theme='lightBlue'
+      />
    <br/>
-      <div style={{width:'80%',margin:'auto'}}>
+      <div style={{width:'70%',margin:'auto'}}>
         <GenericTable tableData={doubleAngleTableData}
         cellFontSize={'16px'}
         headerFontSize={'18px'}
