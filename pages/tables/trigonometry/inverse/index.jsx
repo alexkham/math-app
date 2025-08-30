@@ -10,6 +10,7 @@ import '../../../../../math-app/pages/pages.css'
 import Head from 'next/head'
 
 import GenericTable from '@/app/components/generic-table/GenericTable'
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
 
 export async function getStaticProps(){
@@ -122,6 +123,17 @@ export async function getStaticProps(){
   content: ``
 }
 
+const navigationGroups = [
+  {
+    title: "Other Trigonometric Tables",
+    items: [
+      { title: "Trigonometric Functions of Special Angles", link: "/tables/trigonometry/special-angles" },
+     
+      { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
+      { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" }
+    ]
+  },
+]
 
 
 
@@ -138,13 +150,14 @@ export async function getStaticProps(){
       name: "Inverse Trigonometric Functions"
     },
     keyWords,
+    navigationGroups,
         
        }
     }
    }
 
 export default function InversePage({ seoData, sectionsContent, introContent, 
-  inverseTrigoTableData, keyWords }) {
+  inverseTrigoTableData, keyWords ,navigationGroups }) {
 
     
   const genericSections=[
@@ -231,11 +244,21 @@ export default function InversePage({ seoData, sectionsContent, introContent,
    <br/>
    
    <br/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Inverse Trigonometric Functions</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-200px'}}>Inverse Trigonometric Functions</h1>
    <br/>
+    <VerticalButtonGroup 
+      
+      items={navigationGroups}
+      width="250px"       
+    //   backgroundColor ='#0070f3'
+    //   color = 'white'
+      isSticky={true}
+      verticalOffset='250px'
+      theme='lightBlue'
+      />
    {/* <GenericTable tableData={inverseTrigoTableData}/> */}
    {/* <GenericTable tableData={inverseTrigoTableData}/> */}
-    <div style={{width:'80%',margin:'auto'}}>
+    <div style={{width:'70%',margin:'auto'}}>
         <GenericTable tableData={inverseTrigoTableData}
         cellFontSize={'16px'}
         headerFontSize={'18px'}
