@@ -47,15 +47,22 @@ const tablesCardsData=[
   path: "/tables/trigonometry/reduction",  
 },
 {
+    name: "Half Angle Identities",           // Required - card title
+  description: "Formulas that express trigonometric functions of θ/2 in terms of functions of θ. These allow calculation of exact values for fractional angles and are crucial for integration and equation solving.",    // Required - card description  
+  path: "/tables/trigonometry/half-angle",  
+},
+
+{
     name: "Double Angle Identities",           // Required - card title
   description: "Formulas that express trigonometric functions of 2θ in terms of functions of θ. These break down compound angles into simpler components.",    // Required - card description  
   path: "/tables/trigonometry/double-angle",  
 },
 {
-    name: "Half Angle Identities",           // Required - card title
-  description: "Formulas that express trigonometric functions of θ/2 in terms of functions of θ. These allow calculation of exact values for fractional angles and are crucial for integration and equation solving.",    // Required - card description  
-  path: "/tables/trigonometry/half-angle",  
-}
+    name: "Triple Angle Identities",           // Required - card title
+  description: "Formulas that express trigonometric functions of 3θ in terms of functions of θ. These reveal cubic polynomial relationships and are used for solving complex equations and deriving Chebyshev polynomials.",    // Required - card description  
+  path: "/tables/trigonometry/triple-angle",  
+},
+
 
 ]
 

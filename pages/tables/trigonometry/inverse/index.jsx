@@ -130,8 +130,10 @@ const navigationGroups = [
       { title: "Trigonometric Functions of Special Angles", link: "/tables/trigonometry/special-angles" },
      
       { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
-      { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
+     
       { title: "Half Angle Formulas", link: "/tables/trigonometry/half-angle" },
+       { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
+       { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
     ]
   },
 ]
@@ -245,7 +247,7 @@ export default function InversePage({ seoData, sectionsContent, introContent,
    <br/>
    
    <br/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-250px'}}>Inverse Trigonometric Functions</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-280px'}}>Inverse Trigonometric Functions</h1>
    <br/>
     <VerticalButtonGroup 
       

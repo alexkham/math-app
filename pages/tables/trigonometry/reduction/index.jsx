@@ -176,8 +176,10 @@ const navigationGroups = [
       { title: "Trigonometric Functions of Special Angles", link: "/tables/trigonometry/special-angles" },
       { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
       // { title: "Reduction Formulas", link: "/tables/trigonometry/reduction" },
-      { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
        { title: "Half Angle Formulas", link: "/tables/trigonometry/half-angle" },
+      { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
+      
+        { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
     ]
   },
 ]
@@ -289,7 +291,7 @@ export default function ReductionPage({ seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-250px'}}>Trigonometric Reduction Formulas</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-280px'}}>Trigonometric Reduction Formulas</h1>
    <br/>
    <VerticalButtonGroup 
       

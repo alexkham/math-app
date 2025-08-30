@@ -17,9 +17,9 @@ export async function getStaticProps(){
 
 
   
-  const keyWords=['trigonometry','trigonometric identity','half angle identity',
-    'half angle formula','cos half angle formula',
-    'half angle','multiple angles']
+  const keyWords=['trigonometry','trigonometric identity','triple angle identity',
+    'triple angle formula','cos triple angle formula',
+    'triple angle','multiple angles']
 
 const navigationGroups = [
   {
@@ -28,60 +28,48 @@ const navigationGroups = [
       { title: "Trigonometric Functions of Special Angles", link: "/tables/trigonometry/special-angles" },
       { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
       { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
-       { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
-       { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
+      { title: "Half Angle Formulas", link: "/tables/trigonometry/half-angle" },
+      { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
     ]
   },
 
 ];
-
-
-const halfAngleTableData = {
- tableTitle: "Half Angle Identities",
+  
+const tripleAngleTableData = {
+ tableTitle: "Triple Angle Identities",
  rows: [
    {
-     function: "sin(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 - \\cos\\theta}{2}}",
-     description: "Plus or minus depends on quadrant of θ/2 - derived from cosine double angle"
+     function: "sin(3θ)",
+     formula: "3\\sin\\theta - 4\\sin^3\\theta",
+     description: "Cubic polynomial in sine - derived from angle addition formulas"
    },
    {
-     function: "cos(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 + \\cos\\theta}{2}}",
-     description: "Sign determined by which quadrant θ/2 falls in - always check the angle range"
+     function: "cos(3θ)",
+     formula: "4\\cos^3\\theta - 3\\cos\\theta",
+     description: "Cubic polynomial in cosine - fundamental for Chebyshev polynomials"
    },
    {
-     function: "tan(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 - \\cos\\theta}{1 + \\cos\\theta}}",
-     description: "Square root form - can also be expressed as (1-cosθ)/sinθ or sinθ/(1+cosθ)"
+     function: "tan(3θ)",
+     formula: "\\displaystyle\\frac{3\\tan\\theta - \\tan^3\\theta}{1 - 3\\tan^2\\theta}",
+     description: "Rational function - undefined when 3tan²θ = 1, i.e., tanθ = ±√3/3"
    },
    {
-     function: "tan(θ/2)",
-     formula: "\\displaystyle\\frac{1 - \\cos\\theta}{\\sin\\theta}",
-     description: "Alternative form - no ambiguous sign, more practical for calculations"
+     function: "csc(3θ)",
+     formula: "\\displaystyle\\frac{\\csc\\theta}{3 - 4\\sin^2\\theta}",
+     description: "Reciprocal form involving original cosecant - undefined when sin(3θ) = 0"
    },
    {
-     function: "tan(θ/2)",
-     formula: "\\displaystyle\\frac{\\sin\\theta}{1 + \\cos\\theta}",
-     description: "Second alternative form - equivalent to previous, choose based on given information"
+     function: "sec(3θ)",
+     formula: "\\displaystyle\\frac{\\sec\\theta}{4\\cos^2\\theta - 3}",
+     description: "Reciprocal form involving original secant - undefined when cos(3θ) = 0"
    },
    {
-     function: "csc(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{2}{1 - \\cos\\theta}}",
-     description: "Reciprocal of sine half-angle - undefined when cosθ = 1"
-   },
-   {
-     function: "sec(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{2}{1 + \\cos\\theta}}",
-     description: "Reciprocal of cosine half-angle - undefined when cosθ = -1"
-   },
-   {
-     function: "cot(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 + \\cos\\theta}{1 - \\cos\\theta}}",
-     description: "Square root form of cotangent - also equals (1+cosθ)/sinθ or sinθ/(1-cosθ)"
+     function: "cot(3θ)",
+     formula: "\\displaystyle\\frac{\\cot^3\\theta - 3\\cot\\theta}{3\\cot^2\\theta - 1}",
+     description: "Rational function in cotangent - undefined when tan(3θ) = 0"
    }
  ]
 };
-
 const sectionsContent={
 
     obj1:{
@@ -142,13 +130,13 @@ const sectionsContent={
       props:{
          sectionsContent,
          introContent,
-         halfAngleTableData,
+         tripleAngleTableData,
            seoData: {
-      title: "Half Angle Identities - Trigonometric Formulas Table | Learn Math Class",
-      description: "Complete table of half angle identities for sin, cos, tan, csc, sec, and cot. Learn trigonometric half angle formulas with explanations.",
+      title: "Triple Angle Identities - Trigonometric Formulas Table | Learn Math Class",
+      description: "Complete table of triple angle identities for sin, cos, tan, csc, sec, and cot. Learn trigonometric triple angle formulas with explanations.",
       keywords: keyWords.join(", "),
-      url: "/tables/trigonometry/half-angle",
-      name: "Half Angle Identities"
+      url: "/tables/trigonometry/triple-angle",
+      name: "Triple Angle Identities"
     },
     keyWords,
     navigationGroups
@@ -158,7 +146,7 @@ const sectionsContent={
    }
 
 export default function PageTemplate({ seoData, sectionsContent, introContent,
-     halfAngleTableData, keyWords,navigationGroups }) {
+     tripleAngleTableData, keyWords,navigationGroups }) {
 
     
   const genericSections=[
@@ -245,7 +233,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
    <br/>
    <br/>
    
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-280px'}}>Half Angle Identities</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-280px'}}>Triple Angle Identities</h1>
     <VerticalButtonGroup 
       
       items={navigationGroups}
@@ -258,7 +246,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
       />
    <br/>
       <div style={{width:'70%',margin:'auto'}}>
-        <GenericTable tableData={halfAngleTableData}
+        <GenericTable tableData={tripleAngleTableData}
         cellFontSize={'16px'}
         headerFontSize={'18px'}
         theme='lightBlue'
