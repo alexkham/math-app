@@ -180,6 +180,7 @@ const navigationGroups = [
       { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
       
         { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
+         { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
     ]
   },
 ]
@@ -291,7 +292,7 @@ export default function ReductionPage({ seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-280px'}}>Trigonometric Reduction Formulas</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-330px'}}>Trigonometric Reduction Formulas</h1>
    <br/>
    <VerticalButtonGroup 
       

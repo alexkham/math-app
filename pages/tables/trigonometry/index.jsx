@@ -63,6 +63,12 @@ const tablesCardsData=[
   path: "/tables/trigonometry/triple-angle",  
 },
 
+{
+    name: "Sum of Angles Identities",           // Required - card title
+  description: "Formulas for trigonometric functions of two added angles (α + β). Essential for combining separate angle measurements into single expressions.",    // Required - card description  
+  path: "/tables/trigonometry/sum-angle",  
+},
+
 
 ]
 

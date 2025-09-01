@@ -17,9 +17,9 @@ export async function getStaticProps(){
 
 
   
-  const keyWords=['trigonometry','trigonometric identity','half angle identity',
-    'half angle formula','cos half angle formula',
-    'half angle','multiple angles']
+  const keyWords=['trigonometry','trigonometric identity','sum of angles identity',
+    'sum of angles formula','cos sum of angles formula',
+    'sum of angles','multiple angles','sin sum of angles','cos sum of angles']
 
 const navigationGroups = [
   {
@@ -28,59 +28,84 @@ const navigationGroups = [
       { title: "Trigonometric Functions of Special Angles", link: "/tables/trigonometry/special-angles" },
       { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
       { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
-       { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
-       { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
-        { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
+      { title: "Half Angle Formulas", link: "/tables/trigonometry/half-angle" },
+      { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
+      { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
     ]
   },
 
 ];
+  
+// const tripleAngleTableData = {
+//  tableTitle: "Triple Angle Identities",
+//  rows: [
+//    {
+//      function: "sin(3θ)",
+//      formula: "3\\sin\\theta - 4\\sin^3\\theta",
+//      description: "Cubic polynomial in sine - derived from angle addition formulas"
+//    },
+//    {
+//      function: "cos(3θ)",
+//      formula: "4\\cos^3\\theta - 3\\cos\\theta",
+//      description: "Cubic polynomial in cosine - fundamental for Chebyshev polynomials"
+//    },
+//    {
+//      function: "tan(3θ)",
+//      formula: "\\displaystyle\\frac{3\\tan\\theta - \\tan^3\\theta}{1 - 3\\tan^2\\theta}",
+//      description: "Rational function - undefined when 3tan²θ = 1, i.e., tanθ = ±√3/3"
+//    },
+//    {
+//      function: "csc(3θ)",
+//      formula: "\\displaystyle\\frac{\\csc\\theta}{3 - 4\\sin^2\\theta}",
+//      description: "Reciprocal form involving original cosecant - undefined when sin(3θ) = 0"
+//    },
+//    {
+//      function: "sec(3θ)",
+//      formula: "\\displaystyle\\frac{\\sec\\theta}{4\\cos^2\\theta - 3}",
+//      description: "Reciprocal form involving original secant - undefined when cos(3θ) = 0"
+//    },
+//    {
+//      function: "cot(3θ)",
+//      formula: "\\displaystyle\\frac{\\cot^3\\theta - 3\\cot\\theta}{3\\cot^2\\theta - 1}",
+//      description: "Rational function in cotangent - undefined when tan(3θ) = 0"
+//    }
+//  ]
+// };
 
-
-const halfAngleTableData = {
- tableTitle: "Half Angle Identities",
- rows: [
-   {
-     function: "sin(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 - \\cos\\theta}{2}}",
-     description: "Plus or minus depends on quadrant of θ/2 - derived from cosine double angle"
-   },
-   {
-     function: "cos(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 + \\cos\\theta}{2}}",
-     description: "Sign determined by which quadrant θ/2 falls in - always check the angle range"
-   },
-   {
-     function: "tan(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 - \\cos\\theta}{1 + \\cos\\theta}}",
-     description: "Square root form - can also be expressed as (1-cosθ)/sinθ or sinθ/(1+cosθ)"
-   },
-   {
-     function: "tan(θ/2)",
-     formula: "\\displaystyle\\frac{1 - \\cos\\theta}{\\sin\\theta}",
-     description: "Alternative form - no ambiguous sign, more practical for calculations"
-   },
-   {
-     function: "tan(θ/2)",
-     formula: "\\displaystyle\\frac{\\sin\\theta}{1 + \\cos\\theta}",
-     description: "Second alternative form - equivalent to previous, choose based on given information"
-   },
-   {
-     function: "csc(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{2}{1 - \\cos\\theta}}",
-     description: "Reciprocal of sine half-angle - undefined when cosθ = 1"
-   },
-   {
-     function: "sec(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{2}{1 + \\cos\\theta}}",
-     description: "Reciprocal of cosine half-angle - undefined when cosθ = -1"
-   },
-   {
-     function: "cot(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 + \\cos\\theta}{1 - \\cos\\theta}}",
-     description: "Square root form of cotangent - also equals (1+cosθ)/sinθ or sinθ/(1-cosθ)"
-   }
- ]
+const sumAngleTableData = {
+  tableTitle: "Sum of Angles Identities",
+  rows: [
+    {
+      function: "sin(α + β)",
+      formula: "\\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta",
+      description: "Addition formula for sine - expands compound angles into basic functions"
+    },
+    {
+      function: "cos(α + β)",
+      formula: "\\cos\\alpha\\cos\\beta - \\sin\\alpha\\sin\\beta",
+      description: "Addition formula for cosine - note the subtraction in the expansion"
+    },
+    {
+      function: "tan(α + β)",
+      formula: "\\displaystyle\\frac{\\tan\\alpha + \\tan\\beta}{1 - \\tan\\alpha\\tan\\beta}",
+      description: "Addition formula for tangent - undefined when denominator equals zero"
+    },
+    {
+      function: "csc(α + β)",
+      formula: "\\displaystyle\\frac{\\csc\\alpha\\csc\\beta}{\\csc\\alpha\\cot\\beta + \\cot\\alpha\\csc\\beta}",
+      description: "Reciprocal of sine sum - derived from basic addition formula"
+    },
+    {
+      function: "sec(α + β)",
+      formula: "\\displaystyle\\frac{\\sec\\alpha\\sec\\beta}{\\sec\\alpha\\cot\\beta - \\tan\\alpha\\sec\\beta}",
+      description: "Reciprocal of cosine sum - complex form for advanced calculations"
+    },
+    {
+      function: "cot(α + β)",
+      formula: "\\displaystyle\\frac{\\cot\\alpha\\cot\\beta - 1}{\\cot\\beta + \\cot\\alpha}",
+      description: "Addition formula for cotangent - derived from tangent sum formula"
+    }
+  ]
 };
 
 const sectionsContent={
@@ -143,13 +168,13 @@ const sectionsContent={
       props:{
          sectionsContent,
          introContent,
-         halfAngleTableData,
+         sumAngleTableData,
            seoData: {
-      title: "Half Angle Identities - Trigonometric Formulas Table | Learn Math Class",
-      description: "Complete table of half angle identities for sin, cos, tan, csc, sec, and cot. Learn trigonometric half angle formulas with explanations.",
+      title: "Sum of Angles Identities - Trigonometric Formulas Table | Learn Math Class",
+      description: "Complete table of sum of angles identities for sin, cos, tan, csc, sec, and cot. Learn trigonometric formulas for sum of angles with explanations.",
       keywords: keyWords.join(", "),
-      url: "/tables/trigonometry/half-angle",
-      name: "Half Angle Identities"
+      url: "/tables/trigonometry/sum-angle",
+      name: "Sum of Angle Identities"
     },
     keyWords,
     navigationGroups
@@ -159,7 +184,7 @@ const sectionsContent={
    }
 
 export default function PageTemplate({ seoData, sectionsContent, introContent,
-     halfAngleTableData, keyWords,navigationGroups }) {
+     sumAngleTableData, keyWords,navigationGroups }) {
 
     
   const genericSections=[
@@ -246,7 +271,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
    <br/>
    <br/>
    
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-330px'}}>Half Angle Identities</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-330px'}}>Sum of Angles Identities</h1>
     <VerticalButtonGroup 
       
       items={navigationGroups}
@@ -259,7 +284,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
       />
    <br/>
       <div style={{width:'70%',margin:'auto'}}>
-        <GenericTable tableData={halfAngleTableData}
+        <GenericTable tableData={sumAngleTableData}
         cellFontSize={'16px'}
         headerFontSize={'18px'}
         theme='lightBlue'

@@ -76,6 +76,7 @@ const CustomConvert=()=>(
         { text: 'Mathematical Symbols', url: '/math-symbols' },
         { text: 'Truth Tables', url: '/tables/truth-tables' },
         { text: 'Angle Conversion Table', url: '/tables/angle-conversion' },
+        { text: 'Trigonometry Tables', url: '/tables/trigonometry' },
         
     ] },
   { id: 4, icon: CustomKeyboard, tooltip: 'Mathematical Keyboard', 
