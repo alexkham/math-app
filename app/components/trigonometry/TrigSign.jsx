@@ -329,7 +329,7 @@ const TrigSigns = () => {
             • csc θ = r/y, sec θ = r/x, cot θ = x/y
           </div>
           <div>
-            <strong>Memory Aid "ASTC":</strong><br/>
+            <strong>Memory Aid ASTC:</strong><br/>
             • Quadrant I: <strong>A</strong>ll positive<br/>
             • Quadrant II: <strong>S</strong>ine positive<br/>
             • Quadrant III: <strong>T</strong>angent positive<br/>
