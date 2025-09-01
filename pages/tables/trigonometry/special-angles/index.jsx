@@ -265,6 +265,7 @@ const navigationGroups = [
       { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
       { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
        { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
+        { title: "Difference of Angles Formulas", link: "/tables/trigonometry/difference-angle" },
       
 
     ]
@@ -391,7 +392,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-330px'}}>Special Angles</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-380px'}}>Special Angles</h1>
    <br/>
   <VerticalButtonGroup 
       

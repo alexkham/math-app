@@ -69,6 +69,12 @@ const tablesCardsData=[
   path: "/tables/trigonometry/sum-angle",  
 },
 
+{
+    name: "Difference of Angles Identities",           // Required - card title
+  description: "Identities that simplify trigonometric functions of subtracted angles (α - β). Used to separate combined measurements and find relationships between different angle values.",    // Required - card description  
+  path: "/tables/trigonometry/difference-angle",  
+},
+
 
 ]
 

@@ -17,9 +17,11 @@ export async function getStaticProps(){
 
 
   
-  const keyWords=['trigonometry','trigonometric identity','double angle identity',
-    'double angle formula','cos double angle formula',
-    'double angle','multiple angles']
+  const keyWords=['trigonometry','trigonometric identity','difference of angles identity',
+    'difference of angles formula','cos difference of angles formula',
+    'difference of angles','multiple angles','sin difference of angles',
+    'cos difference of angles','sum and difference formulas for sine and cosine',
+'trig sum and difference formulas','trigonometry sum and difference formulas']
 
 const navigationGroups = [
   {
@@ -29,83 +31,47 @@ const navigationGroups = [
       { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
       { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
       { title: "Half Angle Formulas", link: "/tables/trigonometry/half-angle" },
-      
-       { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
-        { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
-        { title: "Difference of Angles Formulas", link: "/tables/trigonometry/difference-angle" },
+      { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
+      { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
+      { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
     ]
   },
 
 ];
+  
 
-// const doubleAngleTableData = {
-//  tableTitle: "Double Angle Identities of Main Trigonometric Functions",
-//  rows: [
-//    {
-//      function: "sin(2θ)",
-//      formula: "2\\sin\\theta\\cos\\theta",
-//      description: "Product of sine and cosine doubled - fundamental for wave interference"
-//    },
-//    {
-//      function: "cos(2θ)",
-//      formula: "\\cos^2\\theta - \\sin^2\\theta",
-//      description: "Difference of squares form. Also equals 2cos²θ - 1 or 1 - 2sin²θ - three equivalent expressions"
-//    },
-//    {
-//      function: "tan(2θ)",
-//      formula: "\\frac{2\\tan\\theta}{1 - \\tan^2\\theta}",
-//      description: "Fraction form - undefined when tan²θ = 1 (at 45°, 135°, etc.)"
-//    },
-//    {
-//      function: "csc(2θ)",
-//      formula: "\\frac{\\sec\\theta\\csc\\theta}{2}",
-//      description: "Reciprocal relationship - product of original secant and cosecant halved"
-//    },
-//    {
-//      function: "sec(2θ)",
-//      formula: "\\frac{\\sec^2\\theta}{2\\cos^2\\theta - 1}",
-//      description: "Complex form involving both secant and cosine - used in advanced calculus"
-//    },
-//    {
-//      function: "cot(2θ)",
-//      formula: "\\frac{\\cot^2\\theta - 1}{2\\cot\\theta}",
-//      description: "Quotient form - becomes undefined when cotθ = 0 (at 90°, 270°, etc.)"
-//    }
-//  ]
-// };
-   
-const doubleAngleTableData = {
- tableTitle: "Double Angle Identities of Main Trigonometric Functions",
+const differenceAngleTableData = {
+ tableTitle: "Difference of Angles Identities",
  rows: [
    {
-     function: "sin(2θ)",
-     formula: "2\\sin\\theta\\cos\\theta",
-     description: "Product of sine and cosine doubled - fundamental for wave interference"
+     function: "sin(α - β)",
+     formula: "\\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta",
+     description: "Subtraction formula for sine - expands compound angles into basic functions"
    },
    {
-     function: "cos(2θ)",
-     formula: "\\cos^2\\theta - \\sin^2\\theta",
-     description: "Difference of squares form. Also equals 2cos²θ - 1 or 1 - 2sin²θ - three equivalent expressions"
+     function: "cos(α - β)",
+     formula: "\\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta",
+     description: "Subtraction formula for cosine - note the addition in the expansion"
    },
    {
-     function: "tan(2θ)",
-     formula: "\\displaystyle\\frac{2\\tan\\theta}{1 - \\tan^2\\theta}",
-     description: "Fraction form - undefined when tan²θ = 1 (at 45°, 135°, etc.)"
+     function: "tan(α - β)",
+     formula: "\\displaystyle\\frac{\\tan\\alpha - \\tan\\beta}{1 + \\tan\\alpha\\tan\\beta}",
+     description: "Subtraction formula for tangent - undefined when denominator equals zero"
    },
    {
-     function: "csc(2θ)",
-     formula: "\\displaystyle\\frac{\\sec\\theta\\csc\\theta}{2}",
-     description: "Reciprocal relationship - product of original secant and cosecant halved"
+     function: "csc(α - β)",
+     formula: "\\displaystyle\\frac{\\csc\\alpha\\csc\\beta}{\\csc\\alpha\\cot\\beta - \\cot\\alpha\\csc\\beta}",
+     description: "Reciprocal of sine difference - derived from basic subtraction formula"
    },
    {
-     function: "sec(2θ)",
-     formula: "\\displaystyle\\frac{\\sec^2\\theta}{2\\cos^2\\theta - 1}",
-     description: "Complex form involving both secant and cosine - used in advanced calculus"
+     function: "sec(α - β)",
+     formula: "\\displaystyle\\frac{\\sec\\alpha\\sec\\beta}{\\sec\\alpha\\cot\\beta + \\tan\\alpha\\sec\\beta}",
+     description: "Reciprocal of cosine difference - complex form for advanced calculations"
    },
    {
-     function: "cot(2θ)",
-     formula: "\\displaystyle\\frac{\\cot^2\\theta - 1}{2\\cot\\theta}",
-     description: "Quotient form - becomes undefined when cotθ = 0 (at 90°, 270°, etc.)"
+     function: "cot(α - β)",
+     formula: "\\displaystyle\\frac{\\cot\\alpha\\cot\\beta + 1}{\\cot\\beta - \\cot\\alpha}",
+     description: "Subtraction formula for cotangent - derived from tangent difference formula"
    }
  ]
 };
@@ -170,13 +136,13 @@ const sectionsContent={
       props:{
          sectionsContent,
          introContent,
-         doubleAngleTableData,
+         differenceAngleTableData,
            seoData: {
-      title: "Double Angle Identities - Trigonometric Formulas Table | Learn Math Class",
-      description: "Complete table of double angle identities for sin, cos, tan, csc, sec, and cot. Learn trigonometric double angle formulas with explanations.",
+      title: "Difference of Angles Identities - Trigonometric Formulas Table | Learn Math Class",
+      description: "Complete table of difference of angles identities for sin, cos, tan, csc, sec, and cot. Learn trigonometric formulas for difference of angles with explanations.",
       keywords: keyWords.join(", "),
-      url: "/tables/trigonometry/double-angle",
-      name: "Double Angle Identities"
+      url: "/tables/trigonometry/difference-angle",
+      name: "Difference of Angle Identities"
     },
     keyWords,
     navigationGroups
@@ -186,7 +152,7 @@ const sectionsContent={
    }
 
 export default function PageTemplate({ seoData, sectionsContent, introContent,
-     doubleAngleTableData, keyWords,navigationGroups }) {
+     differenceAngleTableData, keyWords,navigationGroups }) {
 
     
   const genericSections=[
@@ -273,7 +239,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
    <br/>
    <br/>
    
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-380px'}}>Double Angle Identities</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-380px'}}>Difference of Angles Identities</h1>
     <VerticalButtonGroup 
       
       items={navigationGroups}
@@ -286,7 +252,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
       />
    <br/>
       <div style={{width:'70%',margin:'auto'}}>
-        <GenericTable tableData={doubleAngleTableData}
+        <GenericTable tableData={differenceAngleTableData}
         cellFontSize={'16px'}
         headerFontSize={'18px'}
         theme='lightBlue'

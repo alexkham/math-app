@@ -31,6 +31,7 @@ const navigationGroups = [
       { title: "Half Angle Formulas", link: "/tables/trigonometry/half-angle" },
       { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
       { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
+       { title: "Difference of Angles Formulas", link: "/tables/trigonometry/difference-angle" },
     ]
   },
 
@@ -234,7 +235,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
    <br/>
    <br/>
    
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-330px'}}>Triple Angle Identities</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-380px'}}>Triple Angle Identities</h1>
     <VerticalButtonGroup 
       
       items={navigationGroups}
