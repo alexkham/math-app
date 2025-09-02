@@ -81,7 +81,88 @@ export default function TrigonometryPage() {
     ]
       
     },
+   
     {
+      id:'identities',
+      title:'Trigonometric Identities',
+      link:'/trigonometry/identities',
+      content:`Trigonometric identities form a rich and interconnected system rooted in geometric definitions and algebraic transformations. At the foundation lie the reciprocal and quotient identities, such as $\\tan(\\theta) = \\frac{\\sin(\\theta)}{\\cos(\\theta)}$ or $\\csc(\\theta) =\\frac{1}{\\sin(\\theta)}$, that emerge directly from the unit circle and right-triangle definitions of the trigonometric functions. Building upon this base are the symmetry-based identities—such as the even-odd and co-function properties—which reflect the inherent symmetries of the unit circle, including reflections across axes and rotations. For instance, $\\cos(-\\theta) = \\cos(\\theta)$ showcases cosine’s evenness, while $\\sin\\left(\\frac{\\pi}{2} - \\theta\\right) = \\cos(\\theta)$ exemplifies co-function symmetry.
+The Pythagorean identities, such as $\\sin^2(\\theta) + \\cos^2(\\theta) = 1$, are central to the structure and serve as a gateway to more complex relationships. Angle addition and subtraction formulas—like $\\sin(a + b) = \\sin(a)\\cos(b) + \\cos(a)\\sin(b)$—are derived through coordinate geometry or rotation matrices, enabling the construction of double-angle, half-angle, and multiple-angle identities, such as $\\cos(2\\theta) = 2\\cos^2(\\theta) - 1$.
+Product-to-sum identities, for example $\\sin(a)\\sin(b) = \\frac{1}{2}[\\cos(a - b) - \\cos(a + b)]$, reorganize these angle relationships for simplification in both theory and applications. Inverse trigonometric identities like $\\sin^{-1}(x) + \\cos^{-1}(x) = \\frac{\\pi}{2}$, along with hyperbolic analogs and Euler’s identity $e^{i\\theta} = \\cos(\\theta) + i\\sin(\\theta)$, extend trigonometry into broader mathematical contexts. Throughout this structure, many identities emerge as special cases of these general forms, demonstrating a coherent and logical progression.
+`
+    },
+
+    {
+      id:'functions',
+      title:'Trigonometric Functions',
+      link:'',
+      content:`Trigonometric functions are foundational and play crucial role not only in trigonometry but also in other fields of mathematics, especially [calculus](!/calculus).
+      We distinct several groups of trigonometric functions based on their complexity, purpose they serve and properties.
+
+      **1. Basic Trigonometric Functions**
+These are the core six functions derived from a right triangle or the [unit circle](!/visual-tools/unit-circle):
+•**Sine (sin)**
+•**Cosine (cos)**
+•**Tangent (tan)**
+•**Cosecant (csc) = 1/sin**
+•**Secant (sec) = 1/cos**
+•**Cotangent (cot) = 1/tan**
+
+**2. Inverse Trigonometric Functions**
+These functions return angles when given a ratio of sides:
+•**Arcsine (arcsin or sin⁻¹)**
+•**Arccosine (arccos or cos⁻¹)**
+•**Arctangent (arctan or tan⁻¹)**
+•**Arccosecant (arccsc or csc⁻¹)**
+•**Arcsecant (arcsec or sec⁻¹)**
+•**Arccotangent (arccot or cot⁻¹)**
+
+**3. Hyperbolic Trigonometric Functions**
+Analogous to the basic trig functions but related to hyperbolas instead of circles:
+•**Hyperbolic Sine (sinh)**
+•**Hyperbolic Cosine (cosh)**
+•**Hyperbolic Tangent (tanh)**
+•**Hyperbolic Cosecant (csch) = 1/sinh**
+•**Hyperbolic Secant (sech) = 1/cosh**
+•**Hyperbolic Cotangent (coth) = 1/tanh**
+
+**4. Inverse Hyperbolic Functions**
+Inverses of the hyperbolic functions:
+•**Inverse Hyperbolic Sine (arsinh or sinh⁻¹)**
+•**Inverse Hyperbolic Cosine (arcosh or cosh⁻¹)**
+•**Inverse Hyperbolic Tangent (artanh or tanh⁻¹)**
+•**Inverse Hyperbolic Cosecant (arcsch or csch⁻¹)**
+•**Inverse Hyperbolic Secant (arsech or sech⁻¹)**
+•**Inverse Hyperbolic Cotangent (arcoth or coth⁻¹)**
+
+**5. Circular Functions (Generalization)**
+Often synonymous with basic trigonometric functions but used in broader contexts like complex analysis, where they are extended to complex arguments:
+•**Circular Sine (sin)**
+•**Circular Cosine (cos)**
+•**Circular Tangent (tan)**
+
+**6. Complex Trigonometric Functions**
+These extend trigonometric functions to the complex domain using Euler's formula:
+•**sin(z) = (e^{iz} - e^{-iz}) / 2i**
+•**cos(z) = (e^{iz} + e^{-iz}) / 2**
+
+**7. Elliptic and Generalized Trigonometric Functions**
+These generalize trig functions for more complex contexts such as elliptic curves and non-Euclidean geometries:
+•**Jacobi Elliptic Functions (sn, cn, dn, etc.)**
+•**Generalized Trigonometric Functions (used in curved spaces)**
+
+**8. Trigonometric Polynomials**
+Used extensively in Fourier analysis:
+•**Linear combinations of sine and cosine functions**
+
+Despite the fact that trigonometric functions come in such a wide variety, when it comes to core trigonometry, the **basic six functions** (sine, cosine, tangent, and their reciprocals) are the real workhorses. They're the ones you'll use and see the most, especially in solving triangles, trigonometric equations, and simplifying trigonometric expressions. The rest are powerful tools, but the basics are your foundation.
+
+      `,
+      // after:``,
+      // content:``,
+    },
+
+     {
       id:'symbols',
       title:'Trigonometry Symbols Reference',
       link:'/math-symbols/trigonometry',
@@ -107,15 +188,6 @@ Advanced sections cover complex number representations using trigonometric forms
           }
         ]
       },
-    {
-      id:'identities',
-      title:'Trigonometric Identities',
-      link:'/trigonometry/identities',
-      content:`Trigonometric identities form a rich and interconnected system rooted in geometric definitions and algebraic transformations. At the foundation lie the reciprocal and quotient identities, such as $\\tan(\\theta) = \\frac{\\sin(\\theta)}{\\cos(\\theta)}$ or $\\csc(\\theta) =\\frac{1}{\\sin(\\theta)}$, that emerge directly from the unit circle and right-triangle definitions of the trigonometric functions. Building upon this base are the symmetry-based identities—such as the even-odd and co-function properties—which reflect the inherent symmetries of the unit circle, including reflections across axes and rotations. For instance, $\\cos(-\\theta) = \\cos(\\theta)$ showcases cosine’s evenness, while $\\sin\\left(\\frac{\\pi}{2} - \\theta\\right) = \\cos(\\theta)$ exemplifies co-function symmetry.
-The Pythagorean identities, such as $\\sin^2(\\theta) + \\cos^2(\\theta) = 1$, are central to the structure and serve as a gateway to more complex relationships. Angle addition and subtraction formulas—like $\\sin(a + b) = \\sin(a)\\cos(b) + \\cos(a)\\sin(b)$—are derived through coordinate geometry or rotation matrices, enabling the construction of double-angle, half-angle, and multiple-angle identities, such as $\\cos(2\\theta) = 2\\cos^2(\\theta) - 1$.
-Product-to-sum identities, for example $\\sin(a)\\sin(b) = \\frac{1}{2}[\\cos(a - b) - \\cos(a + b)]$, reorganize these angle relationships for simplification in both theory and applications. Inverse trigonometric identities like $\\sin^{-1}(x) + \\cos^{-1}(x) = \\frac{\\pi}{2}$, along with hyperbolic analogs and Euler’s identity $e^{i\\theta} = \\cos(\\theta) + i\\sin(\\theta)$, extend trigonometry into broader mathematical contexts. Throughout this structure, many identities emerge as special cases of these general forms, demonstrating a coherent and logical progression.
-`
-    },
 
   ];
   
