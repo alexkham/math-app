@@ -123,6 +123,7 @@ export async function getStaticProps(){
 
       These identities are fundamental for calculus, solving trigonometric equations, proving other identities, and applications in physics where multiple rotations or oscillations combine, such as in wave interference and vector analysis.
       `,
+      link:`/tables/trigonometry/sum-angle`,
     },
 
      difference:{
@@ -133,6 +134,7 @@ export async function getStaticProps(){
       after:`
       Angle Difference identities are essential for solving trigonometric equations, deriving other identities, and applications involving relative motion, phase differences, or when one oscillation opposes another in physics and engineering problems.
       `,
+      link:`/tables/trigonometry/difference-angle`,
     },
 
     double:{
@@ -144,6 +146,7 @@ export async function getStaticProps(){
       
       These identities are vital for integration in calculus, solving equations with multiple angle relationships, and analyzing phenomena with frequency doubling, such as harmonics in music, optical frequency conversion, and engineering systems with gear ratios.
       `,
+      link:`/tables/trigonometry/double-angle`,
     },
 
     
@@ -156,6 +159,7 @@ export async function getStaticProps(){
 
       These identities are indispensable for integration techniques, solving equations with fractional angles, and applications involving bisection problems, such as cutting angles in half for construction, optics with half-wave plates, and signal processing with subharmonics.
       `,
+      link:`/tables/trigonometry/half-angle`,
     },
 
     triple:{
@@ -167,6 +171,7 @@ export async function getStaticProps(){
       
       Those identities are valuable in advanced calculus, solving higher-order trigonometric equations, and specialized applications like three-phase electrical systems, crystallography with threefold symmetry, and acoustics where third harmonics play crucial roles in sound quality and instrument timbre.
       `,
+      link:`/tables/trigonometry/triple-angle`,
     },
 
     
@@ -1075,7 +1080,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       {
       id:'sum',
       title: sectionsContent.sum.title,
-      link:'',
+      link:sectionsContent.sum.link,
       content:[
 
           sectionsContent.sum.before,
@@ -1093,7 +1098,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       {
       id:'difference',
       title: sectionsContent.difference.title,
-      link:'',
+      link:sectionsContent.difference.link,
       content:[
         sectionsContent.difference.before,
         <div key={60} style={{marginLeft:'50px',marginRight:'50px'}}>
@@ -1109,9 +1114,27 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       ]
     },
       {
+      id:'half',
+      title:sectionsContent.half.title,
+      link:sectionsContent.half.link,
+      content:[
+        sectionsContent.half.before,
+
+        <div key={62} style={{marginLeft:'50px',marginRight:'50px'}}>
+        <ExpandableTable key={12}
+        data={trigIdentitiesData["Half Angle Identities"]}
+         displayColumns={ ["law", "formula", "explanation"]}
+         copyableFields={["formula"]}
+         includedFields={ ["law", "formula", "explanation"]} />
+         </div> ,
+         sectionsContent.half.after,
+        
+      ]
+    },
+      {
       id:'double',
       title:sectionsContent.double.title,
-      link:'',
+      link:sectionsContent.double.link,
       content:[
             sectionsContent.double.before,
 
@@ -1131,29 +1154,12 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       ]
     },
 
-     {
-      id:'half',
-      title:sectionsContent.half.title,
-      link:'',
-      content:[
-        sectionsContent.half.before,
-
-        <div key={62} style={{marginLeft:'50px',marginRight:'50px'}}>
-        <ExpandableTable key={12}
-        data={trigIdentitiesData["Half Angle Identities"]}
-         displayColumns={ ["law", "formula", "explanation"]}
-         copyableFields={["formula"]}
-         includedFields={ ["law", "formula", "explanation"]} />
-         </div> ,
-         sectionsContent.half.after,
-        
-      ]
-    },
+   
 
       {
       id:'triple',
       title:sectionsContent.triple.title,
-      link:'',
+      link:sectionsContent.triple.link,
       content:[
         sectionsContent.triple.before,
         <div key={63} style={{marginLeft:'50px',marginRight:'50px'}}>

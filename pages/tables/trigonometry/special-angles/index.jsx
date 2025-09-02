@@ -270,6 +270,14 @@ const navigationGroups = [
 
     ]
   },
+  {
+        title:"Relevant tools",
+        items:[
+            {title:"Interactive Unit Circle",link:"/visual-tools/unit-circle"},
+            {title:"Trigonometry Calculator",link:"/calculators/trigonometry-calculator"},
+            {title:"Angle Converter",link:"/converters/degree-radians"},
+        ]
+    }
 ]
 
 
@@ -392,9 +400,46 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-380px'}}>Special Angles</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Special Angles</h1>
    <br/>
-  <VerticalButtonGroup 
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: '15% 80%',
+      gap: '20px',
+      width: '100%'
+   }}>
+      {/* Left column - Sidebar */}
+      <div>
+         <VerticalButtonGroup 
+            items={navigationGroups}
+            width="250px"       
+            theme='lightBlue'
+            isSticky={true}
+            verticalOffset='60px'
+         />
+      </div>
+
+      {/* Right column - Table */}
+      <div>
+         <div style={{width:'90%',margin:'auto'}}>
+            <GenericTable tableData={trigoTableData}
+               cellFontSize={'16px'}
+               headerFontSize={'18px'}
+               theme='lightBlue'
+            />
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+          
+            
+         </div>
+      </div>
+   </div>
+  {/* <VerticalButtonGroup 
       
       items={navigationGroups}
       width="250px"       
@@ -410,13 +455,8 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
         headerFontSize={'18px'}
         theme='lightBlue'
         />
-        {/* <LinksList links={navLinks}
-               layout="vertical"
-               theme="blue"
-               width="200px"
-               
-               /> */}
-        </div>
+       
+        </div> */}
    <br/>
    {/* <SectionTableOfContents sections={genericSections}/> */}
    <br/>
