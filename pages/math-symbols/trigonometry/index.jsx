@@ -47,7 +47,7 @@ export default function MathSymbolsTrigonometryPage({ symbolsData, meta,menuItem
    //   backgroundColor ='#0070f3'
    //   color = 'white'
      isSticky={true}
-     verticalOffset='250px'
+     verticalOffset='100px'
      />
       <div
         className="title"
@@ -69,7 +69,9 @@ export async function getStaticProps() {
 
   
   const menuItems = [
-    {
+
+   { title:"Other tables",
+   items:[ {
       title: "Linear Algebra",
       // icon: <Home />,
       link: "/math-symbols/linear-algebra"
@@ -109,6 +111,17 @@ export async function getStaticProps() {
     //   title: "Settings",
     //   link: "/settings"  // Example without icon
     // }
+   ]},
+
+   {
+        title:"Relevant tools",
+        items:[
+            {title:"Interactive Unit Circle",link:"/visual-tools/unit-circle"},
+            {title:"Trigonometry Calculator",link:"/calculators/trigonometry-calculator"},
+            {title:"Angle Converter",link:"/converters/degree-radians"},
+        ]
+    }
+
   ];
   
  
