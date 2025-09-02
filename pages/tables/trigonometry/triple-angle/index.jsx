@@ -32,6 +32,7 @@ const navigationGroups = [
       { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
       { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
        { title: "Difference of Angles Formulas", link: "/tables/trigonometry/difference-angle" },
+        { title: "Negative Angle Formulas (Even-Odd Identities)", link: "/tables/trigonometry/negative-angle" },
     ],
    
    

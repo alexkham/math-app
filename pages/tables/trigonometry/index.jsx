@@ -74,6 +74,11 @@ const tablesCardsData=[
   description: "Identities that simplify trigonometric functions of subtracted angles (α - β). Used to separate combined measurements and find relationships between different angle values.",    // Required - card description  
   path: "/tables/trigonometry/difference-angle",  
 },
+{
+    name: "Negative Angle Formulas (Even-Odd Identities)",           // Required - card title
+  description: "Identities showing how trigonometric functions behave with negative angles, revealing their even or odd symmetry properties. These formulas demonstrate that some functions change sign with negative inputs while others remain unchanged.",    // Required - card description  
+  path: "/tables/trigonometry/negative-angle",  
+},
 
 
 ]

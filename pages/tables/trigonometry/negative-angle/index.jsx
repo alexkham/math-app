@@ -17,9 +17,11 @@ export async function getStaticProps(){
 
 
   
-  const keyWords=['trigonometry','trigonometric identity','double angle identity',
-    'double angle formula','cos double angle formula',
-    'double angle','multiple angles']
+  const keyWords=['trigonometry','trigonometric identity','negative angle identity',
+    'negative angle formula','cos negative angle formula',
+    'negative angle','multiple angles','even odd trigonometric functions',
+'even odd identity','negative angle formulas','negative angles in trigonometry',
+'trigonometric even odd identities','negative angles in trigonometry']
 
 const navigationGroups = [
   {
@@ -29,14 +31,15 @@ const navigationGroups = [
       { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
       { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
       { title: "Half Angle Formulas", link: "/tables/trigonometry/half-angle" },
-      
-       { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
-        { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
-        { title: "Difference of Angles Formulas", link: "/tables/trigonometry/difference-angle" },
-         { title: "Negative Angle Formulas (Even-Odd Identities)", link: "/tables/trigonometry/negative-angle" },
-    ]
+      { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
+      { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
+      { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
+       { title: "Difference of Angles Formulas", link: "/tables/trigonometry/difference-angle" },
+    ],
+   
+   
   },
-   {
+    {
         title:"Relevant tools",
         items:[
             {title:"Interactive Unit Circle",link:"/visual-tools/unit-circle"},
@@ -44,44 +47,88 @@ const navigationGroups = [
             {title:"Angle Converter",link:"/converters/degree-radians"},
         ]
     }
+
 ];
 
 
-const doubleAngleTableData = {
- tableTitle: "Double Angle Identities of Main Trigonometric Functions",
+const negativeAngleTableData = {
+ tableTitle: "Even and Odd Function Identities",
  rows: [
    {
-     function: "sin(2θ)",
-     formula: "2\\sin\\theta\\cos\\theta",
-     description: "Product of sine and cosine doubled - fundamental for wave interference"
+     function: "sin(-θ)",
+     formula: "-\\sin\\theta",
+     property: "Odd Function",
+     description: "Sine is antisymmetric - reflects through origin with sign change"
    },
    {
-     function: "cos(2θ)",
-     formula: "\\cos^2\\theta - \\sin^2\\theta",
-     description: "Difference of squares form. Also equals 2cos²θ - 1 or 1 - 2sin²θ - three equivalent expressions"
+     function: "cos(-θ)",
+     formula: "\\cos\\theta",
+     property: "Even Function", 
+     description: "Cosine is symmetric - reflects through y-axis without sign change"
    },
    {
-     function: "tan(2θ)",
-     formula: "\\displaystyle\\frac{2\\tan\\theta}{1 - \\tan^2\\theta}",
-     description: "Fraction form - undefined when tan²θ = 1 (at 45°, 135°, etc.)"
+     function: "tan(-θ)",
+     formula: "-\\tan\\theta",
+     property: "Odd Function",
+     description: "Tangent is antisymmetric - follows from sine/cosine properties"
    },
    {
-     function: "csc(2θ)",
-     formula: "\\displaystyle\\frac{\\sec\\theta\\csc\\theta}{2}",
-     description: "Reciprocal relationship - product of original secant and cosecant halved"
+     function: "csc(-θ)",
+     formula: "-\\csc\\theta",
+     property: "Odd Function",
+     description: "Cosecant inherits odd property from sine as its reciprocal"
    },
    {
-     function: "sec(2θ)",
-     formula: "\\displaystyle\\frac{\\sec^2\\theta}{2\\cos^2\\theta - 1}",
-     description: "Complex form involving both secant and cosine - used in advanced calculus"
+     function: "sec(-θ)",
+     formula: "\\sec\\theta",
+     property: "Even Function",
+     description: "Secant inherits even property from cosine as its reciprocal"
    },
    {
-     function: "cot(2θ)",
-     formula: "\\displaystyle\\frac{\\cot^2\\theta - 1}{2\\cot\\theta}",
-     description: "Quotient form - becomes undefined when cotθ = 0 (at 90°, 270°, etc.)"
+     function: "cot(-θ)",
+     formula: "-\\cot\\theta",
+     property: "Odd Function",
+     description: "Cotangent is antisymmetric - derived from cosine/sine ratio"
    }
  ]
 };
+  
+// const tripleAngleTableData = {
+//  tableTitle: "Triple Angle Identities",
+//  rows: [
+//    {
+//      function: "sin(3θ)",
+//      formula: "3\\sin\\theta - 4\\sin^3\\theta",
+//      description: "Cubic polynomial in sine - derived from angle addition formulas"
+//    },
+//    {
+//      function: "cos(3θ)",
+//      formula: "4\\cos^3\\theta - 3\\cos\\theta",
+//      description: "Cubic polynomial in cosine - fundamental for Chebyshev polynomials"
+//    },
+//    {
+//      function: "tan(3θ)",
+//      formula: "\\displaystyle\\frac{3\\tan\\theta - \\tan^3\\theta}{1 - 3\\tan^2\\theta}",
+//      description: "Rational function - undefined when 3tan²θ = 1, i.e., tanθ = ±√3/3"
+//    },
+//    {
+//      function: "csc(3θ)",
+//      formula: "\\displaystyle\\frac{\\csc\\theta}{3 - 4\\sin^2\\theta}",
+//      description: "Reciprocal form involving original cosecant - undefined when sin(3θ) = 0"
+//    },
+//    {
+//      function: "sec(3θ)",
+//      formula: "\\displaystyle\\frac{\\sec\\theta}{4\\cos^2\\theta - 3}",
+//      description: "Reciprocal form involving original secant - undefined when cos(3θ) = 0"
+//    },
+//    {
+//      function: "cot(3θ)",
+//      formula: "\\displaystyle\\frac{\\cot^3\\theta - 3\\cot\\theta}{3\\cot^2\\theta - 1}",
+//      description: "Rational function in cotangent - undefined when tan(3θ) = 0"
+//    }
+//  ]
+// };
+
 
 const sectionsContent={
 
@@ -143,13 +190,13 @@ const sectionsContent={
       props:{
          sectionsContent,
          introContent,
-         doubleAngleTableData,
+         negativeAngleTableData,
            seoData: {
-      title: "Double Angle Identities - Trigonometric Formulas Table | Learn Math Class",
-      description: "Complete table of double angle identities for sin, cos, tan, csc, sec, and cot. Learn trigonometric double angle formulas with explanations.",
+      title: "Negative Angle Identities - Trigonometric Formulas Table | Learn Math Class",
+      description: "Complete table of negative angle identities for sin, cos, tan, csc, sec, and cot. Learn trigonometric negative angle formulas with explanations.",
       keywords: keyWords.join(", "),
-      url: "/tables/trigonometry/double-angle",
-      name: "Double Angle Identities"
+      url: "/tables/trigonometry/negative-angle",
+      name: "Negative Angle Identities"
     },
     keyWords,
     navigationGroups
@@ -159,7 +206,7 @@ const sectionsContent={
    }
 
 export default function PageTemplate({ seoData, sectionsContent, introContent,
-     doubleAngleTableData, keyWords,navigationGroups }) {
+     negativeAngleTableData, keyWords,navigationGroups }) {
 
     
   const genericSections=[
@@ -246,8 +293,8 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
    <br/>
    <br/>
    
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Double Angle Identities</h1>
-     <div style={{
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Negative Angle Identities</h1>
+   <div style={{
       display: 'grid',
       gridTemplateColumns: '15% 80%',
       gap: '20px',
@@ -267,7 +314,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
       {/* Right column - Table */}
       <div>
          <div style={{width:'90%',margin:'auto'}}>
-            <GenericTable tableData={doubleAngleTableData}
+            <GenericTable tableData={negativeAngleTableData}
                cellFontSize={'16px'}
                headerFontSize={'18px'}
                theme='lightBlue'
@@ -284,25 +331,8 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
          </div>
       </div>
    </div>
-    
-    {/* <VerticalButtonGroup 
-      
-      items={navigationGroups}
-      width="250px"       
-    //   backgroundColor ='#0070f3'
-    //   color = 'white'
-      isSticky={true}
-      verticalOffset='220px'
-      theme='lightBlue'
-      />
-   <br/>
-      <div style={{width:'70%',margin:'auto'}}>
-        <GenericTable tableData={doubleAngleTableData}
-        cellFontSize={'16px'}
-        headerFontSize={'18px'}
-        theme='lightBlue'
-        />
-        </div> */}
+   
+   
    <br/>
    {/* <SectionTableOfContents sections={genericSections}/> */}
    <br/>
