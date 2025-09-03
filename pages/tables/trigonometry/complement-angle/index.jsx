@@ -1,4 +1,5 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import GenericTable from '@/app/components/generic-table/GenericTable'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -7,7 +8,6 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../../../math-app/pages/pages.css'
-import GenericTable from '@/app/components/generic-table/GenericTable'
 import Head from 'next/head'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
@@ -15,108 +15,93 @@ import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButto
 export async function getStaticProps(){
 
 
-    const keyWords=['trigonometric reduction formulas','trigonometry','trigo',
-        'trigonpmetric functions','reduction formula for trigonometric functions',
-        'trigonometric formulas','trigonometric reduction' ,'cosine tangent sine']
 
-    
-const reductionFormulasTableData = {
- tableTitle: "Trigonometric Reduction Formulas",
- rows: [
-   {
-     angle: "α",
-     sin: "sin α",
-     cos: "cos α", 
-     tan: "tan α",
-     csc: "csc α",
-     sec: "sec α",
-     cot: "cot α"
-   },
-   {
-     angle: "-α",
-     sin: "-sin α",
-     cos: "+cos α", 
-     tan: "-tan α",
-     csc: "-csc α",
-     sec: "+sec α",
-     cot: "-cot α"
-   },
-   {
-     angle: "90° - α",
-     sin: "+cos α",
-     cos: "+sin α",
-     tan: "+cot α",
-     csc: "+sec α",
-     sec: "+csc α",
-     cot: "+tan α"
-   },
-   {
-     angle: "90° + α",
-     sin: "+cos α",
-     cos: "-sin α",
-     tan: "-cot α",
-     csc: "+sec α",
-     sec: "-csc α",
-     cot: "-tan α"
-   },
-   {
-     angle: "180° - α",
-     sin: "+sin α",
-     cos: "-cos α",
-     tan: "-tan α",
-     csc: "+csc α",
-     sec: "-sec α",
-     cot: "-cot α"
-   },
-   {
-     angle: "180° + α",
-     sin: "-sin α",
-     cos: "-cos α",
-     tan: "+tan α",
-     csc: "-csc α",
-     sec: "-sec α",
-     cot: "+cot α"
-   },
-   {
-     angle: "270° - α",
-     sin: "-cos α",
-     cos: "-sin α",
-     tan: "+cot α",
-     csc: "-sec α",
-     sec: "-csc α",
-     cot: "+tan α"
-   },
-   {
-     angle: "270° + α",
-     sin: "-cos α",
-     cos: "+sin α",
-     tan: "-cot α",
-     csc: "-sec α",
-     sec: "+csc α",
-     cot: "-tan α"
-   },
-   {
-     angle: "360° - α",
-     sin: "-sin α",
-     cos: "+cos α",
-     tan: "-tan α",
-     csc: "-csc α",
-     sec: "+sec α",
-     cot: "-cot α"
-   },
-   {
-     angle: "360° + α",
-     sin: "+sin α",
-     cos: "+cos α",
-     tan: "+tan α",
-     csc: "+csc α",
-     sec: "+sec α",
-     cot: "+cot α"
-   }
- ]
+  
+  const keyWords=['trigonometry','trigonometric identity',
+    'complement identities',
+ 'cofunction identities',
+ 'complementary angle formulas',
+ 'cofunction formulas',
+
+ 'complement angle identities',
+ 'cofunction relationships',
+ 'complementary angles trigonometry',
+ 'trigonometry complement formulas',
+ 'complement trig identities'
+  ]
+
+const navigationGroups = [
+  {
+    title: "Other Trigonometric Tables",
+    items: [
+      { title: "Trigonometric Functions of Special Angles", link: "/tables/trigonometry/special-angles" },
+      { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
+      { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
+      { title: "Half Angle Formulas", link: "/tables/trigonometry/half-angle" },
+      { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
+       { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
+      { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
+       { title: "Difference of Angles Formulas", link: "/tables/trigonometry/difference-angle" },
+        { title: "Negative Angle Formulas (Even-Odd Identities)", link: "/tables/trigonometry/negative-angle" },
+    ],
+   
+   
+  },
+    {
+        title:"Relevant tools",
+        items:[
+            {title:"Interactive Unit Circle",link:"/visual-tools/unit-circle"},
+            {title:"Trigonometry Calculator",link:"/calculators/trigonometry-calculator"},
+            {title:"Angle Converter",link:"/converters/degree-radians"},
+        ]
+    }
+
+];
+
+const complementIdentitiesTableData = {
+  tableTitle: "Complement Identities (Cofunction Identities)",
+  rows: [
+    {
+      function: "sin(90° - θ)",
+      formula: "\\cos\\theta",
+      radian_form: "sin(π/2 - θ) = cos θ",
+      description: "Sine of complement equals cosine - fundamental cofunction relationship"
+    },
+    {
+      function: "cos(90° - θ)",
+      formula: "\\sin\\theta",
+      radian_form: "cos(π/2 - θ) = sin θ",
+      description: "Cosine of complement equals sine - shows function duality"
+    },
+    {
+      function: "tan(90° - θ)",
+      formula: "\\cot\\theta",
+      radian_form: "tan(π/2 - θ) = cot θ",
+      description: "Tangent of complement equals cotangent - reciprocal relationship"
+    },
+    {
+      function: "csc(90° - θ)",
+      formula: "\\sec\\theta",
+      radian_form: "csc(π/2 - θ) = sec θ",
+      description: "Cosecant of complement equals secant - follows from sine-cosine relationship"
+    },
+    {
+      function: "sec(90° - θ)",
+      formula: "\\csc\\theta",
+      radian_form: "sec(π/2 - θ) = csc θ",
+      description: "Secant of complement equals cosecant - follows from cosine-sine relationship"
+    },
+    {
+      function: "cot(90° - θ)",
+      formula: "\\tan\\theta",
+      radian_form: "cot(π/2 - θ) = tan θ",
+      description: "Cotangent of complement equals tangent - completes the cofunction pairs"
+    }
+  ]
 };
+  
 
-    const sectionsContent={
+const sectionsContent={
 
     obj1:{
       title:``,
@@ -169,33 +154,6 @@ const reductionFormulasTableData = {
   content: ``
 }
 
-const navigationGroups = [
-  {
-    title: "Other Trigonometric Tables",
-    items: [
-      { title: "Trigonometric Functions of Special Angles", link: "/tables/trigonometry/special-angles" },
-      { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
-      // { title: "Reduction Formulas", link: "/tables/trigonometry/reduction" },
-       { title: "Half Angle Formulas", link: "/tables/trigonometry/half-angle" },
-      { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
-      
-        { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
-         { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
-          { title: "Difference of Angles Formulas", link: "/tables/trigonometry/difference-angle" },
-           { title: "Negative Angle Formulas (Even-Odd Identities)", link: "/tables/trigonometry/negative-angle" },
-        { title: "Complement Angle Formulas", link: "/tables/trigonometry/complement-angle" },    
-    ]
-  },
-  {
-        title:"Relevant tools",
-        items:[
-            {title:"Interactive Unit Circle",link:"/visual-tools/unit-circle"},
-            {title:"Trigonometry Calculator",link:"/calculators/trigonometry-calculator"},
-            {title:"Angle Converter",link:"/converters/degree-radians"},
-        ]
-    }
-]
-
 
 
 
@@ -203,23 +161,25 @@ const navigationGroups = [
       props:{
          sectionsContent,
          introContent,
-         reductionFormulasTableData,
-         seoData: {
-      title: "Trigonometric Reduction Formulas Table - Reference Guide | Learn Math Class",
-      description: "Complete table of trigonometric reduction formulas for all angles. Reference guide for reducing trigonometric functions to first quadrant values.",
+         complementIdentitiesTableData,
+           seoData: {
+      title: "Complement Angle Identities - Trigonometric Formulas Table | Learn Math Class",
+      description: "Complete table of complement angle identities for sin, cos, tan, csc, sec, and cot. Learn trigonometric complement angle formulas with explanations.",
       keywords: keyWords.join(", "),
-      url: "/tables/trigonometry/reduction",
-      name: "Trigonometric Reduction Formulas"
+      url: "/tables/trigonometry/complement-angle",
+      name: "Complement Angle Identities"
     },
     keyWords,
-    navigationGroups,
+    navigationGroups
         
        }
     }
    }
-export default function ReductionPage({ seoData, sectionsContent, introContent, 
-  reductionFormulasTableData, keyWords ,navigationGroups}) {    
 
+export default function PageTemplate({ seoData, sectionsContent, introContent,
+     complementIdentitiesTableData, keyWords,navigationGroups }) {
+
+    
   const genericSections=[
     {
         id:'1',
@@ -303,9 +263,9 @@ export default function ReductionPage({ seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Trigonometric Reduction Formulas</h1>
-   <br/>
-    <div style={{
+   
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Complement Angle Identities</h1>
+   <div style={{
       display: 'grid',
       gridTemplateColumns: '15% 80%',
       gap: '20px',
@@ -325,7 +285,7 @@ export default function ReductionPage({ seoData, sectionsContent, introContent,
       {/* Right column - Table */}
       <div>
          <div style={{width:'90%',margin:'auto'}}>
-            <GenericTable tableData={reductionFormulasTableData}
+            <GenericTable tableData={complementIdentitiesTableData}
                cellFontSize={'16px'}
                headerFontSize={'18px'}
                theme='lightBlue'
@@ -342,7 +302,8 @@ export default function ReductionPage({ seoData, sectionsContent, introContent,
          </div>
       </div>
    </div>
-   {/* <VerticalButtonGroup 
+   
+    {/* <VerticalButtonGroup 
       
       items={navigationGroups}
       width="250px"       
@@ -351,9 +312,11 @@ export default function ReductionPage({ seoData, sectionsContent, introContent,
       isSticky={true}
       verticalOffset='220px'
       theme='lightBlue'
+     
       />
-  <div style={{width:'70%',margin:'auto'}}>
-        <GenericTable tableData={reductionFormulasTableData}
+  
+      <div style={{width:'70%',margin:'auto'}}>
+        <GenericTable tableData={tripleAngleTableData}
         cellFontSize={'16px'}
         headerFontSize={'18px'}
         theme='lightBlue'

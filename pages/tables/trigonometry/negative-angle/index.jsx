@@ -35,6 +35,7 @@ const navigationGroups = [
       { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
       { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
        { title: "Difference of Angles Formulas", link: "/tables/trigonometry/difference-angle" },
+      { title: "Complement Angle Formulas", link: "/tables/trigonometry/complement-angle" },  
     ],
    
    

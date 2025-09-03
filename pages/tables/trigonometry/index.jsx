@@ -79,6 +79,11 @@ const tablesCardsData=[
   description: "Identities showing how trigonometric functions behave with negative angles, revealing their even or odd symmetry properties. These formulas demonstrate that some functions change sign with negative inputs while others remain unchanged.",    // Required - card description  
   path: "/tables/trigonometry/negative-angle",  
 },
+{
+    name: "Complement Angle Formulas",           // Required - card title
+  description: "Identities that express trigonometric functions of complementary angles (90° - θ) in terms of the original angle θ. These formulas reveal the fundamental relationships between cofunctions, showing how sine and cosine, tangent and cotangent, and secant and cosecant are paired through complementary angles.",    // Required - card description  
+  path: "/tables/trigonometry/complement-angle",  
+},
 
 
 ]
