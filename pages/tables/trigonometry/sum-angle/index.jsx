@@ -33,7 +33,8 @@ const navigationGroups = [
       { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
        { title: "Difference of Angles Formulas", link: "/tables/trigonometry/difference-angle" },
         { title: "Negative Angle Formulas (Even-Odd Identities)", link: "/tables/trigonometry/negative-angle" },
-     { title: "Complement Angle Formulas", link: "/tables/trigonometry/complement-angle" },    
+     { title: "Complement Angle Formulas", link: "/tables/trigonometry/complement-angle" },   
+     { title: "Supplement Angle Formulas", link: "/tables/trigonometry/supplement-angle" }, 
     
     ]
   },

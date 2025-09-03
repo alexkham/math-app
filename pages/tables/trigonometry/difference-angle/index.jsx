@@ -36,6 +36,7 @@ const navigationGroups = [
       { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
        { title: "Negative Angle Formulas (Even-Odd Identities)", link: "/tables/trigonometry/negative-angle" },
         { title: "Complement Angle Formulas", link: "/tables/trigonometry/complement-angle" },
+        { title: "Supplement Angle Formulas", link: "/tables/trigonometry/supplement-angle" },
     ]
   },
 

@@ -17,9 +17,19 @@ export async function getStaticProps(){
 
 
   
-  const keyWords=['trigonometry','trigonometric identity','half angle identity',
-    'half angle formula','cos half angle formula',
-    'half angle','multiple angles']
+  const keyWords=['trigonometry','trigonometric identity',
+    'angles supplement','supplement identities',
+ 'supplementary angle formulas',
+ 'supplement angle identities',
+ 'trigonometric supplement',
+ 'supplementary angles trigonometry',
+ 'supplement trig identities',
+ 'supplementary angle relationships',
+ 'trigonometry supplement formulas',
+ 'supplement angle trigonometry',
+ 'supplementary trig formulas'
+
+  ]
 
 const navigationGroups = [
   {
@@ -28,16 +38,18 @@ const navigationGroups = [
       { title: "Trigonometric Functions of Special Angles", link: "/tables/trigonometry/special-angles" },
       { title: "Inverse Trigonometric Functions", link: "/tables/trigonometry/inverse" },
       { title: "Trigonometric Reduction Formulas", link: "/tables/trigonometry/reduction" },
-       { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
+      { title: "Half Angle Formulas", link: "/tables/trigonometry/half-angle" },
+      { title: "Double Angle Formulas", link: "/tables/trigonometry/double-angle" },
        { title: "Triple Angle Formulas", link: "/tables/trigonometry/triple-angle" },
-        { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
-         { title: "Difference of Angles Formulas", link: "/tables/trigonometry/difference-angle" },
-          { title: "Negative Angle Formulas (Even-Odd Identities)", link: "/tables/trigonometry/negative-angle" },
-      { title: "Complement Angle Formulas", link: "/tables/trigonometry/complement-angle" }, 
-      { title: "Supplement Angle Formulas", link: "/tables/trigonometry/supplement-angle" },    
-    ]
+      { title: "Sum of Angles Formulas", link: "/tables/trigonometry/sum-angle" },
+       { title: "Difference of Angles Formulas", link: "/tables/trigonometry/difference-angle" },
+        { title: "Negative Angle Formulas (Even-Odd Identities)", link: "/tables/trigonometry/negative-angle" },
+      { title: "Complement Angle Formulas", link: "/tables/trigonometry/complement-angle" },   
+    ],
+   
+   
   },
-  {
+    {
         title:"Relevant tools",
         items:[
             {title:"Interactive Unit Circle",link:"/visual-tools/unit-circle"},
@@ -47,53 +59,49 @@ const navigationGroups = [
     }
 
 ];
-
-
-const halfAngleTableData = {
- tableTitle: "Half Angle Identities",
+  
+const supplementIdentitiesTableData = {
+ tableTitle: "Supplement Angle Identities",
  rows: [
    {
-     function: "sin(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 - \\cos\\theta}{2}}",
-     description: "Plus or minus depends on quadrant of θ/2 - derived from cosine double angle"
+     function: "sin(180° - θ)",
+     formula: "\\sin\\theta",
+     radian_form: "sin(π - θ) = sin θ",
+     description: "Sine of supplement equals original sine - symmetric about 90°"
    },
    {
-     function: "cos(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 + \\cos\\theta}{2}}",
-     description: "Sign determined by which quadrant θ/2 falls in - always check the angle range"
+     function: "cos(180° - θ)",
+     formula: "-\\cos\\theta",
+     radian_form: "cos(π - θ) = -cos θ",
+     description: "Cosine of supplement equals negative cosine - reflection across y-axis"
    },
    {
-     function: "tan(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 - \\cos\\theta}{1 + \\cos\\theta}}",
-     description: "Square root form - can also be expressed as (1-cosθ)/sinθ or sinθ/(1+cosθ)"
+     function: "tan(180° - θ)",
+     formula: "-\\tan\\theta",
+     radian_form: "tan(π - θ) = -tan θ",
+     description: "Tangent of supplement equals negative tangent - follows from sine/cosine properties"
    },
    {
-     function: "tan(θ/2)",
-     formula: "\\displaystyle\\frac{1 - \\cos\\theta}{\\sin\\theta}",
-     description: "Alternative form - no ambiguous sign, more practical for calculations"
+     function: "csc(180° - θ)",
+     formula: "\\csc\\theta",
+     radian_form: "csc(π - θ) = csc θ",
+     description: "Cosecant of supplement equals original cosecant - reciprocal of sine behavior"
    },
    {
-     function: "tan(θ/2)",
-     formula: "\\displaystyle\\frac{\\sin\\theta}{1 + \\cos\\theta}",
-     description: "Second alternative form - equivalent to previous, choose based on given information"
+     function: "sec(180° - θ)",
+     formula: "-\\sec\\theta",
+     radian_form: "sec(π - θ) = -sec θ",
+     description: "Secant of supplement equals negative secant - reciprocal of cosine behavior"
    },
    {
-     function: "csc(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{2}{1 - \\cos\\theta}}",
-     description: "Reciprocal of sine half-angle - undefined when cosθ = 1"
-   },
-   {
-     function: "sec(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{2}{1 + \\cos\\theta}}",
-     description: "Reciprocal of cosine half-angle - undefined when cosθ = -1"
-   },
-   {
-     function: "cot(θ/2)",
-     formula: "\\displaystyle\\pm\\sqrt{\\frac{1 + \\cos\\theta}{1 - \\cos\\theta}}",
-     description: "Square root form of cotangent - also equals (1+cosθ)/sinθ or sinθ/(1-cosθ)"
+     function: "cot(180° - θ)",
+     formula: "-\\cot\\theta",
+     radian_form: "cot(π - θ) = -cot θ",
+     description: "Cotangent of supplement equals negative cotangent - derived from tangent property"
    }
  ]
 };
+
 
 const sectionsContent={
 
@@ -155,13 +163,13 @@ const sectionsContent={
       props:{
          sectionsContent,
          introContent,
-         halfAngleTableData,
+         supplementIdentitiesTableData,
            seoData: {
-      title: "Half Angle Identities - Trigonometric Formulas Table | Learn Math Class",
-      description: "Complete table of half angle identities for sin, cos, tan, csc, sec, and cot. Learn trigonometric half angle formulas with explanations.",
+      title: "Supplement Angle Identities - Trigonometric Formulas Table | Learn Math Class",
+      description: "Complete table of supplement angle identities for sin, cos, tan, csc, sec, and cot. Learn trigonometric supplement angle formulas with explanations.",
       keywords: keyWords.join(", "),
-      url: "/tables/trigonometry/half-angle",
-      name: "Half Angle Identities"
+      url: "/tables/trigonometry/supplement-angle",
+      name: "Supplement Angle Identities"
     },
     keyWords,
     navigationGroups
@@ -171,7 +179,7 @@ const sectionsContent={
    }
 
 export default function PageTemplate({ seoData, sectionsContent, introContent,
-     halfAngleTableData, keyWords,navigationGroups }) {
+     supplementIdentitiesTableData, keyWords,navigationGroups }) {
 
     
   const genericSections=[
@@ -258,8 +266,8 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
    <br/>
    <br/>
    
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Half Angle Identities</h1>
-    <div style={{
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Supplement Angle Identities</h1>
+   <div style={{
       display: 'grid',
       gridTemplateColumns: '15% 80%',
       gap: '20px',
@@ -279,7 +287,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
       {/* Right column - Table */}
       <div>
          <div style={{width:'90%',margin:'auto'}}>
-            <GenericTable tableData={halfAngleTableData}
+            <GenericTable tableData={supplementIdentitiesTableData}
                cellFontSize={'16px'}
                headerFontSize={'18px'}
                theme='lightBlue'
@@ -297,7 +305,6 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
       </div>
    </div>
    
-   
     {/* <VerticalButtonGroup 
       
       items={navigationGroups}
@@ -307,10 +314,11 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
       isSticky={true}
       verticalOffset='220px'
       theme='lightBlue'
+     
       />
-   <br/>
+  
       <div style={{width:'70%',margin:'auto'}}>
-        <GenericTable tableData={halfAngleTableData}
+        <GenericTable tableData={tripleAngleTableData}
         cellFontSize={'16px'}
         headerFontSize={'18px'}
         theme='lightBlue'
