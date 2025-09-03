@@ -84,6 +84,11 @@ const tablesCardsData=[
   description: "Identities that express trigonometric functions of complementary angles (90° - θ) in terms of the original angle θ. These formulas reveal the fundamental relationships between cofunctions, showing how sine and cosine, tangent and cotangent, and secant and cosecant are paired through complementary angles.",    // Required - card description  
   path: "/tables/trigonometry/complement-angle",  
 },
+{
+    name: "Supplement Angle Formulas",           // Required - card title
+  description: "Identities that show how trigonometric functions behave for supplementary angles (180° - θ). These formulas demonstrate which functions maintain their values and which change signs when reflected across the y-axis.",    // Required - card description  
+  path: "/tables/trigonometry/supplement-angle",  
+},
 
 
 ]
