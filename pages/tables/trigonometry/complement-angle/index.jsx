@@ -10,6 +10,8 @@ import React from 'react'
 import '../../../../../math-app/pages/pages.css'
 import Head from 'next/head'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
+import { complementData } from '@/app/api/db/diagrams/trigonometry/complement_supplement'
+import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
 
 
 export async function getStaticProps(){
@@ -104,10 +106,27 @@ const complementIdentitiesTableData = {
 
 const sectionsContent={
 
-    obj1:{
-      title:``,
+    definition:{
+      title:`Complementary Angles`,
       content:``,
-      before:``,
+      before:`In geometry, the terms complementary angles and complement of an angle are often used interchangeably, which can cause confusion. Strictly speaking, they refer to related but slightly different ideas, so it’s useful to make the distinction clear.
+     
+      **Complementary angles**: a pair of two angles that add up to 90∘.
+**Example**:
+ 30° and 60° are complementary angles.
+
+ **Complement of an angle**: the specific other angle that makes the sum 90°.Or, in another words, a **complementary angle** is what you add to original one to make a right angle.
+**Example**: 
+The complement of 30° is 60°.
+
+       The term **complement** in its strict mathematical sense only applies to acute angles (angles less than 90°).
+For an angle to have a complement, both the angle and its complement must be positive and their sum must equal 90°. 
+So:
+If θ is acute (0° < θ < 90°), then its complement (90° - θ) is also acute and positive
+If θ ≥ 90°, then (90° - θ) ≤ 0°, which isn't considered a valid angle complement
+
+This is why complement angles are typically discussed in the context of right triangles, where all angles are acute (except the right angle itself, which doesn't have a complement in the traditional sense).
+      `,
       after:``,
   
   
@@ -183,23 +202,37 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
     
   const genericSections=[
     {
-        id:'1',
-        title:'section1',
+        id:'definition',
+        title:sectionsContent.definition.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.definition.before,
+         <SvgDiagram 
+         key={'complement_diagram'}
+        data={complementData["Complementary Angles"]}
+        layout="horizontal" 
+        showTitle={true}
+        showFrame={true}
+        scale={1.0}
+        width="auto"
+        height="auto"
+        splitRatio={'0.6'}
+      />
+          
+        ]
     },
-    {
-        id:'2',
-        title:'section2',
-        link:'',
-        content:''
-    },
-    {
-        id:'',
-        title:'',
-        link:'',
-        content:''
-    }
+    // {
+    //     id:'2',
+    //     title:'section2',
+    //     link:'',
+    //     content:''
+    // },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // }
 ]
 
   return (
@@ -265,7 +298,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
    <br/>
    <br/>
    
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Complement Angle Identities</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Complement of an Angle Identities</h1>
    <div style={{
       display: 'grid',
       gridTemplateColumns: '15% 80%',
@@ -324,7 +357,9 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
         />
         </div> */}
    <br/>
-   {/* <SectionTableOfContents sections={genericSections}/> */}
+   <div style={{marginLeft:'60px'}}>
+   <SectionTableOfContents sections={genericSections}/>
+   </div>
    <br/>
    <br/>
    <br/>
@@ -337,7 +372,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
         /> */}
    <br/>
    <br/>
-   {/* <Sections sections={genericSections}/> */}
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>

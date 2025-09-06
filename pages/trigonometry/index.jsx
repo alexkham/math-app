@@ -15,6 +15,155 @@ import ToolsSlider from '@/app/components/sliders/ToolsSlider';
 
 export default function TrigonometryPage() {
 
+  const emptyUnitCircle=`<svg width="600" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="600" height="600" fill="#ffffff"/>
+  
+  <!-- Define center -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+  
+  <!-- Grid lines -->
+  <g stroke="#e0e0e0" stroke-width="1" opacity="0.5">
+    <!-- Vertical grid lines -->
+    <line x1="150" y1="50" x2="150" y2="550"/>
+    <line x1="200" y1="50" x2="200" y2="550"/>
+    <line x1="250" y1="50" x2="250" y2="550"/>
+    <line x1="350" y1="50" x2="350" y2="550"/>
+    <line x1="400" y1="50" x2="400" y2="550"/>
+    <line x1="450" y1="50" x2="450" y2="550"/>
+    <!-- Horizontal grid lines -->
+    <line x1="50" y1="150" x2="550" y2="150"/>
+    <line x1="50" y1="200" x2="550" y2="200"/>
+    <line x1="50" y1="250" x2="550" y2="250"/>
+    <line x1="50" y1="350" x2="550" y2="350"/>
+    <line x1="50" y1="400" x2="550" y2="400"/>
+    <line x1="50" y1="450" x2="550" y2="450"/>
+  </g>
+  
+  <!-- Axes -->
+  <line x1="50" y1="300" x2="550" y2="300" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="300" y1="550" x2="300" y2="50" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Axis labels -->
+  <text x="540" y="295" font-family="Arial, sans-serif" font-size="16" font-weight="bold">x</text>
+  <text x="305" y="65" font-family="Arial, sans-serif" font-size="16" font-weight="bold">y</text>
+  
+  <!-- Unit circle -->
+  <circle cx="300" cy="300" r="200" fill="none" stroke="#2c3e50" stroke-width="3"/>
+  
+  <!-- Center point -->
+  <circle cx="300" cy="300" r="3" fill="#e74c3c"/>
+  
+  <!-- Major angle markers and labels -->
+  <!-- 0° (1, 0) -->
+  <circle cx="500" cy="300" r="4" fill="#e74c3c"/>
+  <text x="510" y="305" font-family="Arial, sans-serif" font-size="14" font-weight="bold">0°</text>
+  <text x="510" y="320" font-family="Arial, sans-serif" font-size="12">(1, 0)</text>
+  
+  <!-- 30° (√3/2, 1/2) -->
+  <circle cx="473.2" cy="200" r="4" fill="#e74c3c"/>
+  <text x="480" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold">30°</text>
+  <text x="475" y="185" font-family="Arial, sans-serif" font-size="11">(√3/2, 1/2)</text>
+  
+  <!-- 45° (√2/2, √2/2) -->
+  <circle cx="441.4" cy="158.6" r="4" fill="#e74c3c"/>
+  <text x="450" y="155" font-family="Arial, sans-serif" font-size="14" font-weight="bold">45°</text>
+  <text x="445" y="145" font-family="Arial, sans-serif" font-size="11">(√2/2, √2/2)</text>
+  
+  <!-- 60° (1/2, √3/2) -->
+  <circle cx="400" cy="126.8" r="4" fill="#e74c3c"/>
+  <text x="405" y="120" font-family="Arial, sans-serif" font-size="14" font-weight="bold">60°</text>
+  <text x="405" y="110" font-family="Arial, sans-serif" font-size="11">(1/2, √3/2)</text>
+  
+  <!-- 90° (0, 1) -->
+  <circle cx="300" cy="100" r="4" fill="#e74c3c"/>
+  <text x="305" y="95" font-family="Arial, sans-serif" font-size="14" font-weight="bold">90°</text>
+  <text x="310" y="105" font-family="Arial, sans-serif" font-size="12">(0, 1)</text>
+  
+  <!-- 120° (-1/2, √3/2) -->
+  <circle cx="200" cy="126.8" r="4" fill="#e74c3c"/>
+  <text x="155" y="120" font-family="Arial, sans-serif" font-size="14" font-weight="bold">120°</text>
+  <text x="140" y="110" font-family="Arial, sans-serif" font-size="11">(-1/2, √3/2)</text>
+  
+  <!-- 135° (-√2/2, √2/2) -->
+  <circle cx="158.6" cy="158.6" r="4" fill="#e74c3c"/>
+  <text x="105" y="155" font-family="Arial, sans-serif" font-size="14" font-weight="bold">135°</text>
+  <text x="85" y="145" font-family="Arial, sans-serif" font-size="11">(-√2/2, √2/2)</text>
+  
+  <!-- 150° (-√3/2, 1/2) -->
+  <circle cx="126.8" cy="200" r="4" fill="#e74c3c"/>
+  <text x="75" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold">150°</text>
+  <text x="55" y="185" font-family="Arial, sans-serif" font-size="11">(-√3/2, 1/2)</text>
+  
+  <!-- 180° (-1, 0) -->
+  <circle cx="100" cy="300" r="4" fill="#e74c3c"/>
+  <text x="50" y="295" font-family="Arial, sans-serif" font-size="14" font-weight="bold">180°</text>
+  <text x="55" y="310" font-family="Arial, sans-serif" font-size="12">(-1, 0)</text>
+  
+  <!-- 210° (-√3/2, -1/2) -->
+  <circle cx="126.8" cy="400" r="4" fill="#e74c3c"/>
+  <text x="75" y="415" font-family="Arial, sans-serif" font-size="14" font-weight="bold">210°</text>
+  <text x="55" y="425" font-family="Arial, sans-serif" font-size="11">(-√3/2, -1/2)</text>
+  
+  <!-- 225° (-√2/2, -√2/2) -->
+  <circle cx="158.6" cy="441.4" r="4" fill="#e74c3c"/>
+  <text x="105" y="455" font-family="Arial, sans-serif" font-size="14" font-weight="bold">225°</text>
+  <text x="85" y="465" font-family="Arial, sans-serif" font-size="11">(-√2/2, -√2/2)</text>
+  
+  <!-- 240° (-1/2, -√3/2) -->
+  <circle cx="200" cy="473.2" r="4" fill="#e74c3c"/>
+  <text x="155" y="490" font-family="Arial, sans-serif" font-size="14" font-weight="bold">240°</text>
+  <text x="140" y="500" font-family="Arial, sans-serif" font-size="11">(-1/2, -√3/2)</text>
+  
+  <!-- 270° (0, -1) -->
+  <circle cx="300" cy="500" r="4" fill="#e74c3c"/>
+  <text x="305" y="515" font-family="Arial, sans-serif" font-size="14" font-weight="bold">270°</text>
+  <text x="310" y="525" font-family="Arial, sans-serif" font-size="12">(0, -1)</text>
+  
+  <!-- 300° (1/2, -√3/2) -->
+  <circle cx="400" cy="473.2" r="4" fill="#e74c3c"/>
+  <text x="405" y="490" font-family="Arial, sans-serif" font-size="14" font-weight="bold">300°</text>
+  <text x="405" y="500" font-family="Arial, sans-serif" font-size="11">(1/2, -√3/2)</text>
+  
+  <!-- 315° (√2/2, -√2/2) -->
+  <circle cx="441.4" cy="441.4" r="4" fill="#e74c3c"/>
+  <text x="450" y="455" font-family="Arial, sans-serif" font-size="14" font-weight="bold">315°</text>
+  <text x="445" y="465" font-family="Arial, sans-serif" font-size="11">(√2/2, -√2/2)</text>
+  
+  <!-- 330° (√3/2, -1/2) -->
+  <circle cx="473.2" cy="400" r="4" fill="#e74c3c"/>
+  <text x="480" y="415" font-family="Arial, sans-serif" font-size="14" font-weight="bold">330°</text>
+  <text x="475" y="425" font-family="Arial, sans-serif" font-size="11">(√3/2, -1/2)</text>
+  
+  <!-- Radius = 1 label -->
+  <text x="400" y="250" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50">r = 1</text>
+  
+  <!-- Scale marks on axes -->
+  <!-- X-axis marks -->
+  <line x1="400" y1="295" x2="400" y2="305" stroke="#333" stroke-width="2"/>
+  <text x="395" y="320" font-family="Arial, sans-serif" font-size="12">0.5</text>
+  <line x1="500" y1="295" x2="500" y2="305" stroke="#333" stroke-width="2"/>
+  <text x="498" y="320" font-family="Arial, sans-serif" font-size="12">1</text>
+  <line x1="200" y1="295" x2="200" y2="305" stroke="#333" stroke-width="2"/>
+  <text x="190" y="320" font-family="Arial, sans-serif" font-size="12">-0.5</text>
+  <line x1="100" y1="295" x2="100" y2="305" stroke="#333" stroke-width="2"/>
+  <text x="95" y="320" font-family="Arial, sans-serif" font-size="12">-1</text>
+  
+  <!-- Y-axis marks -->
+  <line x1="295" y1="200" x2="305" y2="200" stroke="#333" stroke-width="2"/>
+  <text x="310" y="205" font-family="Arial, sans-serif" font-size="12">0.5</text>
+  <line x1="295" y1="100" x2="305" y2="100" stroke="#333" stroke-width="2"/>
+  <text x="310" y="105" font-family="Arial, sans-serif" font-size="12">1</text>
+  <line x1="295" y1="400" x2="305" y2="400" stroke="#333" stroke-width="2"/>
+  <text x="310" y="405" font-family="Arial, sans-serif" font-size="12">-0.5</text>
+  <line x1="295" y1="500" x2="305" y2="500" stroke="#333" stroke-width="2"/>
+  <text x="310" y="505" font-family="Arial, sans-serif" font-size="12">-1</text>
+</svg>`
+
 
   const tools = [
     {
