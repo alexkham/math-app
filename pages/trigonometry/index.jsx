@@ -13,8 +13,15 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import trigonometryTermsList from '@/app/api/db/definitions/trigonometry/trigonometryDefinitions';
 import ToolsSlider from '@/app/components/sliders/ToolsSlider';
 
-export default function TrigonometryPage() {
 
+ export async function getStaticProps(){
+
+  const keyWords=['trigonometry','unit circle','trigonometric functions',
+    'trigonometric functions on the unit circle','6 trigonometric functions',
+    'basic trigonometry','right triangle','pythagorean relationship','pythagoras triangle']
+
+
+  
   const emptyUnitCircle=`<svg width="600" height="600" xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
   <rect width="600" height="600" fill="#ffffff"/>
@@ -165,86 +172,49 @@ export default function TrigonometryPage() {
 </svg>`
 
 
-  const tools = [
-    {
-      title: "Degree Radians Angle Converter",
-      description: "Convert between Degrees to Radians and back with our visual intuitive and interactive converter",
-      image: "/tools/angle-converter.jpg",
-      link: "/converters/degree-radians"
-    },
-    {
-      title: "Unit Circle",
-      description: "Explore Unit Circle for better understanding of main trigonometry concepts",
-      image: "/tools/unit-circle.jpg",
-      link: "/visual-tools/unit-circle"
-    },
-    {
-      title: "Trigonometry Calculator",
-      description: "Calculate the values of all main trigonometric functions for angles measured in degrees and radians",
-      image: "/tools/trigonometry-calculator.jpg",
-      link: "/calculators/trigonometry-calculator"
-    },
-    // {
-    //   title: "Unit Circle2",
-    //   description: "2Interactive trigonometry tool",
-    //   image: "/images/calculus.jpg",
-    //   link: "/tools/unit-circle1"
-    // },
-  ]
   
+  const sectionsContent={
 
-  const trigonometrySections = [
-   
-    {
-      id: 'formulas',
-      title: 'Trigonometry Formulas',
-      content:"Explore ",
-      content: [
-        'Explore Trigonometry formulas with explanations and examples',
-        " ",
-        <VerticalScrollingFormulaWidget 
-        key={"formula-widget"}
-         formulaData={trigonometryFormulaList}
-         moreFormulasLink='/trigonometry/formulas'
-        //  title='See them all'
-          />,
-   
-    ]
-      
+    formulas:{
+      title:`Trigonometry Formulas`,
+      link:'/trigonometry/formulas',
+      content:``,
+      before:``,
+      after:``,
+  
+  
     },
-    {
-      id: 'definitions',
-      title: 'Trigonometry Terms and Definitions',
-      content:"Explore ",
-      content: [
-        'Explore Trigonometry formulas with explanations and examples',
-        " ",
-        <VerticalScrollingFormulaWidget 
-        key={"definitons-widget"}
-         formulaData={trigonometryTermsList}
-         moreFormulasLink='/trigonometry/definitions'
-         type='definition'
-        //  title='See them all'
-          />,
-   
-    ]
-      
+    definitions:{
+      title:`Trigonometry Terms and Definitions`,
+       link:'/trigonometry/definitions',
+      content:``,
+      before:``,
+      after:``,
+  
     },
-   
-    {
-      id:'identities',
-      title:'Trigonometric Identities',
-      link:'/trigonometry/identities',
-      content:`Trigonometric identities form a rich and interconnected system rooted in geometric definitions and algebraic transformations. At the foundation lie the reciprocal and quotient identities, such as $\\tan(\\theta) = \\frac{\\sin(\\theta)}{\\cos(\\theta)}$ or $\\csc(\\theta) =\\frac{1}{\\sin(\\theta)}$, that emerge directly from the unit circle and right-triangle definitions of the trigonometric functions. Building upon this base are the symmetry-based identities—such as the even-odd and co-function properties—which reflect the inherent symmetries of the unit circle, including reflections across axes and rotations. For instance, $\\cos(-\\theta) = \\cos(\\theta)$ showcases cosine’s evenness, while $\\sin\\left(\\frac{\\pi}{2} - \\theta\\right) = \\cos(\\theta)$ exemplifies co-function symmetry.
-The Pythagorean identities, such as $\\sin^2(\\theta) + \\cos^2(\\theta) = 1$, are central to the structure and serve as a gateway to more complex relationships. Angle addition and subtraction formulas—like $\\sin(a + b) = \\sin(a)\\cos(b) + \\cos(a)\\sin(b)$—are derived through coordinate geometry or rotation matrices, enabling the construction of double-angle, half-angle, and multiple-angle identities, such as $\\cos(2\\theta) = 2\\cos^2(\\theta) - 1$.
-Product-to-sum identities, for example $\\sin(a)\\sin(b) = \\frac{1}{2}[\\cos(a - b) - \\cos(a + b)]$, reorganize these angle relationships for simplification in both theory and applications. Inverse trigonometric identities like $\\sin^{-1}(x) + \\cos^{-1}(x) = \\frac{\\pi}{2}$, along with hyperbolic analogs and Euler’s identity $e^{i\\theta} = \\cos(\\theta) + i\\sin(\\theta)$, extend trigonometry into broader mathematical contexts. Throughout this structure, many identities emerge as special cases of these general forms, demonstrating a coherent and logical progression.
-`
-    },
+  
+    identities:{
+  
+      title:``,
+      content:`Trigonometric identities form a rich and interconnected system rooted in geometric definitions and algebraic transformations. 
+     
+      At the foundation lie the [reciprocal](!/trigonometry/identities#reciprocal) and quotient identities, such as $\\tan(\\theta) = \\frac{\\sin(\\theta)}{\\cos(\\theta)}$ or $\\csc(\\theta) =\\frac{1}{\\sin(\\theta)}$, that emerge directly from the unit circle and right-triangle definitions of the trigonometric functions.
+     
+      Building upon this base are the symmetry-based identities—such as the [even-odd](!/trigonometry/identities#even-odd) and [co-function](!/trigonometry/identities#co-function) properties—which reflect the inherent symmetries of the unit circle, including reflections across axes and rotations. For instance, $\\cos(-\\theta) = \\cos(\\theta)$ showcases cosine’s evenness, while $\\sin\\left(\\frac{\\pi}{2} - \\theta\\right) = \\cos(\\theta)$ exemplifies co-function symmetry.
 
-    {
-      id:'functions',
-      title:'Trigonometric Functions',
-      link:'',
+      The Pythagorean identities, such as $\\sin^2(\\theta) + \\cos^2(\\theta) = 1$, are central to the structure and serve as a gateway to more complex relationships.
+
+Angle addition and subtraction formulas—like $\\sin(a + b) = \\sin(a)\\cos(b) + \\cos(a)\\sin(b)$—are derived through coordinate geometry or rotation matrices, enabling the construction of double-angle, half-angle, and multiple-angle identities, such as $\\cos(2\\theta) = 2\\cos^2(\\theta) - 1$.
+
+Product-to-sum identities, for example $\\sin(a)\\sin(b) = \\frac{1}{2}[\\cos(a - b) - \\cos(a + b)]$, reorganize these angle relationships for simplification in both theory and applications. 
+
+Inverse trigonometric identities like $\\sin^{-1}(x) + \\cos^{-1}(x) = \\frac{\\pi}{2}$, along with hyperbolic analogs and Euler’s identity $e^{i\\theta} = \\cos(\\theta) + i\\sin(\\theta)$, extend trigonometry into broader mathematical contexts. Throughout this structure, many identities emerge as special cases of these general forms, demonstrating a coherent and logical progression.`,
+      before:``,
+      after:``,
+  
+    },
+    functions:{
+      title:``,
       content:`Trigonometric functions are foundational and play crucial role not only in trigonometry but also in other fields of mathematics, especially [calculus](!/calculus).
       We distinct several groups of trigonometric functions based on their complexity, purpose they serve and properties.
 
@@ -304,43 +274,39 @@ These generalize trig functions for more complex contexts such as elliptic curve
 Used extensively in Fourier analysis:
 •**Linear combinations of sine and cosine functions**
 
-Despite the fact that trigonometric functions come in such a wide variety, when it comes to core trigonometry, the **basic six functions** (sine, cosine, tangent, and their reciprocals) are the real workhorses. They're the ones you'll use and see the most, especially in solving triangles, trigonometric equations, and simplifying trigonometric expressions. The rest are powerful tools, but the basics are your foundation.
-
-      `,
-      // after:``,
-      // content:``,
-    },
-
-     {
-      id:'symbols',
-      title:'Trigonometry Symbols Reference',
-      link:'/math-symbols/trigonometry',
-      content:[
-    `Our [Trigonometry Symbols page](!/math-symbols/trigonometry) offers a comprehensive collection of notation used in trigonometric mathematics. This reference serves as a valuable resource for students and educators working with angular relationships and periodic functions.
-The guide organizes symbols into functional categories including basic trigonometric functions (sin(θ), cos(θ), tan(θ)), their inverse functions (sin⁻¹(x), cos⁻¹(x)), and fundamental identities such as the Pythagorean identity sin²(θ) + cos²(θ) = 1. It extends to practical applications like the Law of Sines and Cosines for triangle calculations, unit circle relationships, and hyperbolic functions.
-Advanced sections cover complex number representations using trigonometric forms, Euler's formula, and important sum and difference identities—all presented with precise LaTeX code for academic writing and mathematical typesetting.RetryClaude can make mistakes. Please double-check responses. 3.7 Sonnet`
-      ]
-    },
-      {
-        id: 'tools',
-        title: 'Tools', // Give it a proper title
-        // link: '/logic/tools', // Optional
-        content: [
-          {
-            content: 
-             
-              <ToolsSlider tools={tools} key={'slider'}/>
-            ,
-            layout: 'horizontal',
-            position: 'center', // or 'left' if you prefer
-            width: 8 // full width
-          }
-        ]
-      },
-
-  ];
+Despite the fact that trigonometric functions come in such a wide variety, when it comes to core trigonometry, the **basic six functions** (sine, cosine, tangent, and their reciprocals) are the real workhorses. They're the ones you'll use and see the most, especially in solving triangles, trigonometric equations, and simplifying trigonometric expressions. The rest are powerful tools, but the basics are your foundation.`,
+      before:``,
+      after:``,
   
+    },
 
+
+    symbols:{
+  
+      title:``,
+      content: `Our [Trigonometry Symbols page](!/math-symbols/trigonometry) offers a comprehensive collection of notation used in trigonometric mathematics. This reference serves as a valuable resource for students and educators working with angular relationships and periodic functions.
+
+      The guide organizes symbols into functional categories including basic trigonometric functions (sin(θ), cos(θ), tan(θ)), their inverse functions (sin⁻¹(x), cos⁻¹(x)), and fundamental identities such as the Pythagorean identity sin²(θ) + cos²(θ) = 1. It extends to practical applications like the Law of Sines and Cosines for triangle calculations, unit circle relationships, and hyperbolic functions.
+
+      Advanced sections cover complex number representations using trigonometric forms, Euler's formula, and important sum and difference identities—all presented with precise LaTeX code for academic writing and mathematical typesetting.`,
+      before:``,
+      after:``,
+  
+    },
+  
+    obj5:{
+  
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    }
+  
+  }
+
+
+  
   const introContent = {
     id: "intro",
     title: "Introduction to Trigonometry",
@@ -373,7 +339,148 @@ Trigonometry teaches students how to connect abstract mathematical concepts with
 `
 
   };
+
   
+
+  const tools = [
+    {
+      title: "Degree Radians Angle Converter",
+      description: "Convert between Degrees to Radians and back with our visual intuitive and interactive converter",
+      image: "/tools/angle-converter.jpg",
+      link: "/converters/degree-radians"
+    },
+    {
+      title: "Unit Circle",
+      description: "Explore Unit Circle for better understanding of main trigonometry concepts",
+      image: "/tools/unit-circle.jpg",
+      link: "/visual-tools/unit-circle"
+    },
+    {
+      title: "Trigonometry Calculator",
+      description: "Calculate the values of all main trigonometric functions for angles measured in degrees and radians",
+      image: "/tools/trigonometry-calculator.jpg",
+      link: "/calculators/trigonometry-calculator"
+    },
+    // {
+    //   title: "Unit Circle2",
+    //   description: "2Interactive trigonometry tool",
+    //   image: "/images/calculus.jpg",
+    //   link: "/tools/unit-circle1"
+    // },
+  ]
+  
+  
+
+
+   return {
+      props:{
+         sectionsContent,
+         introContent,
+         tools,
+        
+       }
+    }
+   }
+  
+
+  
+  
+  
+
+
+
+export default function TrigonometryPage({sectionsContent,introContent,tools}) {
+
+
+
+  const trigonometrySections = [
+   
+    {
+      id: 'formulas',
+      title: sectionsContent.formulas.title,
+      link: sectionsContent.formulas.link,
+      content:"Explore ",
+      content: [
+        'Explore Trigonometry formulas with explanations and examples',
+        " ",
+        <VerticalScrollingFormulaWidget 
+        key={"formula-widget"}
+         formulaData={trigonometryFormulaList}
+         moreFormulasLink='/trigonometry/formulas'
+        //  title='See them all'
+          />,
+   
+    ]
+      
+    },
+    {
+      id: 'definitions',
+      title: sectionsContent.definitions.title,
+      link: sectionsContent.definitions.link,
+      content:"Explore ",
+      content: [
+        'Explore Trigonometry formulas with explanations and examples',
+        " ",
+        <VerticalScrollingFormulaWidget 
+        key={"definitons-widget"}
+         formulaData={trigonometryTermsList}
+         moreFormulasLink='/trigonometry/definitions'
+         type='definition'
+        //  title='See them all'
+          />,
+   
+    ]
+      
+    },
+   
+    {
+      id:'identities',
+      title:'Trigonometric Identities',
+      link:'/trigonometry/identities',
+      content:[
+        sectionsContent.identities.content,
+      ]
+    },
+
+    {
+      id:'functions',
+      title:'Trigonometric Functions',
+      link:'',
+      content:[
+        sectionsContent.functions.content,
+      ],
+      // after:``,
+      // content:``,
+    },
+
+     {
+      id:'symbols',
+      title:'Trigonometry Symbols Reference',
+      link:'/math-symbols/trigonometry',
+      content:[
+       sectionsContent.symbols.content,
+      ]
+    },
+      {
+        id: 'tools',
+        title: 'Tools', // Give it a proper title
+        // link: '/logic/tools', // Optional
+        content: [
+          {
+            content: 
+             
+              <ToolsSlider tools={tools} key={'slider'}/>
+            ,
+            layout: 'horizontal',
+            position: 'center', // or 'left' if you prefer
+            width: 8 // full width
+          }
+        ]
+      },
+
+  ];
+  
+
   
 
   return (

@@ -107,7 +107,7 @@ const complementIdentitiesTableData = {
 const sectionsContent={
 
     definition:{
-      title:`Complementary Angles`,
+      title:`The concept of Complementary Angles`,
       content:``,
       before:`In geometry, the terms complementary angles and complement of an angle are often used interchangeably, which can cause confusion. Strictly speaking, they refer to related but slightly different ideas, so it’s useful to make the distinction clear.
      
@@ -357,7 +357,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
         />
         </div> */}
    <br/>
-   <div style={{marginLeft:'60px'}}>
+   <div style={{marginLeft:'60px',marginTop:'-200px'}}>
    <SectionTableOfContents sections={genericSections}/>
    </div>
    <br/>
@@ -372,7 +372,9 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
         /> */}
    <br/>
    <br/>
+   <div style={{marginLeft:'60px'}}>
    <Sections sections={genericSections}/>
+    </div>
    <br/>
    <br/>
    <br/>

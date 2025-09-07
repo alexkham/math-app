@@ -1,0 +1,145 @@
+.container {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.leftColumn {
+  flex: 2;
+  min-width: 400px;
+}
+
+.rightColumn {
+  flex: 1;
+  min-width: 300px;
+}
+
+.svgContainer {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin: 20px 0;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.controls button {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #0066cc;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+.controls button:hover:not(:disabled) {
+  background: #0052a3;
+}
+
+.controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #ccc;
+}
+
+.downloadBtn {
+  padding: 8px 16px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin: 10px 0;
+}
+
+.downloadBtn:hover {
+  background: #218838;
+}
+
+.stageInfo {
+  font-size: 14px;
+  color: #666;
+  margin: 10px 0;
+}
+
+.description {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.description h4 {
+  margin-top: 0;
+  color: #333;
+}
+
+.description h5 {
+  color: #555;
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+.stageExplanation {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+}
+
+.formulas {
+  background: #f0f8ff;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.formulas h4 {
+  margin-top: 0;
+  color: #0066cc;
+}
+
+.formula {
+  margin: 15px 0;
+  padding: 10px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.formula.highlighted {
+  background: #ffffcc;
+  border-color: #ffa500;
+}
+
+.identity {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f0f0f0;
+  border: 2px solid #333;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  
+  .leftColumn,
+  .rightColumn {
+    min-width: unset;
+  }
+}
