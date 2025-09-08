@@ -199,12 +199,20 @@ import { createContentHtml } from '@/app/utils/utils-functions';
       content:``,
       before:``,
       after:``,
+       rightContentHtml: createContentHtml({ 
+            description: 'The Trigonometry Terms and Definitions page offers a comprehensive glossary of key concepts in trigonometry, organized by categories such as Angles, Triangles, Trigonometric Functions, Identities, Graphs, and Equations. From foundational terms like sine and cosine to advanced concepts like amplitude modulation and inverse identities, each entry is clearly defined to support a deeper understanding of trigonometric principles and their mathematical applications.',
+            // link: '/calculus/definitions',
+            // linkText: 'View All Definitions',
+            height:'320px',
+            backgroundColor:'#e2e3e5',
+          }),
+          layout: 'horizontal'
   
     },
   
     identities:{
   
-      title:``,
+      title:'Trigonometric Identities',
       content:`Trigonometric identities form a rich and interconnected system rooted in geometric definitions and algebraic transformations. 
      
       At the foundation lie the [reciprocal](!/trigonometry/identities#reciprocal) and quotient identities, such as $\\tan(\\theta) = \\frac{\\sin(\\theta)}{\\cos(\\theta)}$ or $\\csc(\\theta) =\\frac{1}{\\sin(\\theta)}$, that emerge directly from the unit circle and right-triangle definitions of the trigonometric functions.
@@ -220,6 +228,7 @@ Product-to-sum identities, for example $\\sin(a)\\sin(b) = \\frac{1}{2}[\\cos(a 
 Inverse trigonometric identities like $\\sin^{-1}(x) + \\cos^{-1}(x) = \\frac{\\pi}{2}$, along with hyperbolic analogs and Euler’s identity $e^{i\\theta} = \\cos(\\theta) + i\\sin(\\theta)$, extend trigonometry into broader mathematical contexts. Throughout this structure, many identities emerge as special cases of these general forms, demonstrating a coherent and logical progression.`,
       before:``,
       after:``,
+      link:'/trigonometry/identities',
   
     },
     functions:{
@@ -261,6 +270,30 @@ Whether you're analyzing waveforms, studying rotations, or decomposing functions
   
     },
   
+    unit_circle:{
+  
+      title:`Unit Circle`,
+      content:`The **unit circle** is one of the most powerful conceptual tools in trigonometry. It transforms the study of triangles into the study of circular motion, periodic behavior, and coordinate geometry—all within a single unified framework. By fixing a circle of radius 1 at the origin of the coordinate plane, we gain a clean, visual model that defines sine, cosine, and tangent not just for acute angles, but for **all real numbers** and even complex values.
+
+On the [Unit Circle page](!/visual-tools/unit-circle), we explore this model in detail using an **interactive visualizer** that allows users to trace angles, visualize coordinate projections, and see how trigonometric functions behave dynamically across all four quadrants. The unit circle demystifies why certain angles produce clean values, explains sign changes through quadrants, and shows how right triangle ratios extend naturally into the full coordinate plane.
+
+Key topics include:
+
+* The definition and structure of the unit circle
+* Why the radius is set to 1 (and how that simplifies trigonometric ratios)
+* Angle measurement systems (degrees vs. radians)
+* The role of quadrants in determining function signs
+* The importance of special angles (like 30°, 45°, and 60°)
+
+More than just a diagram, the unit circle acts as a **conceptual bridge** between geometry, algebra, and analysis. It provides the foundation for defining trigonometric functions analytically, extending them to calculus, complex numbers, and Fourier theory. If you want to truly understand trigonometry—not just memorize formulas—the unit circle is the place to start.
+
+Explore the page to see how angles, coordinates, and functions all come together in one unified model.
+`,
+      before:``,
+      after:``,
+      link:'/visual-tools/unit-circle'
+  
+    },
     obj5:{
   
       title:``,
@@ -268,7 +301,7 @@ Whether you're analyzing waveforms, studying rotations, or decomposing functions
       before:``,
       after:``,
   
-    }
+    },
   
   }
 
@@ -411,15 +444,34 @@ export default function TrigonometryPage({ seoData, sectionsContent, introConten
       link: sectionsContent.definitions.link,
       content:"Explore ",
       content: [
-        'Explore Trigonometry formulas with explanations and examples',
-        " ",
-        <VerticalScrollingFormulaWidget 
-        key={"definitons-widget"}
-         formulaData={trigonometryTermsList}
-         moreFormulasLink='/trigonometry/definitions'
-         type='definition'
-        //  title='See them all'
-          />,
+        // 'Explore Trigonometry formulas with explanations and examples',
+        // " ",
+        // <VerticalScrollingFormulaWidget 
+        // key={"definitons-widget"}
+        //  formulaData={trigonometryTermsList}
+        //  moreFormulasLink='/trigonometry/definitions'
+        //  type='definition'
+        // //  title='See them all'
+        //   />,
+
+         { 
+          content: <VerticalScrollingFormulaWidget 
+            key="definitions-widget"
+            formulaData={trigonometryTermsList}
+            moreFormulasLink='/calculus/definitions'
+            type='definition'
+            
+          />, 
+          layout: 'horizontal', 
+          position: 'left',
+          width: 2
+        },
+        { 
+          content: sectionsContent.definitions.rightContentHtml,
+          layout: 'horizontal', 
+          position: 'right',
+          width: 1.5 
+        }
    
     ]
       
@@ -427,8 +479,8 @@ export default function TrigonometryPage({ seoData, sectionsContent, introConten
    
     {
       id:'identities',
-      title:'Trigonometric Identities',
-      link:'/trigonometry/identities',
+      title:sectionsContent.identities.title,
+      link:sectionsContent.identities.link,
       content:[
         sectionsContent.identities.content,
       ]
@@ -443,6 +495,14 @@ export default function TrigonometryPage({ seoData, sectionsContent, introConten
       ],
       // after:``,
       // content:``,
+    },
+    {
+      id:'unit_circle',
+      title:sectionsContent.unit_circle.title,
+      link:sectionsContent.unit_circle.link,
+      content:[
+        sectionsContent.unit_circle.content,
+      ]
     },
 
      {
