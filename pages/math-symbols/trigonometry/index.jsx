@@ -121,6 +121,14 @@ export async function getStaticProps() {
             {title:"Angle Converter",link:"/converters/degree-radians"},
         ]
     }
+    ,
+    {
+      title:"Relevant Pages",
+      items:[
+        {title:"Trigonometry",link:'/trigonometry'},
+        {title:"Trigonometric Identities",link:'/trigonometry/identities'}
+      ]
+    }
 
   ];
   

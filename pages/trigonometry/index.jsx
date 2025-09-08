@@ -12,6 +12,8 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import IntroSection from '@/app/components/page-components/section/IntroContentSection';
 import trigonometryTermsList from '@/app/api/db/definitions/trigonometry/trigonometryDefinitions';
 import ToolsSlider from '@/app/components/sliders/ToolsSlider';
+import Head from 'next/head'
+import { createContentHtml } from '@/app/utils/utils-functions';
 
 
  export async function getStaticProps(){
@@ -181,6 +183,13 @@ import ToolsSlider from '@/app/components/sliders/ToolsSlider';
       content:``,
       before:``,
       after:``,
+       leftContentHtml: createContentHtml({ 
+              description: 'The Trigonometry Formulas page covers essential identities and relationships involving angles, ratios, and periodic functions. It includes fundamental formulas such as Pythagorean identities, angle sum and difference identities, double and half-angle formulas, product-to-sum transformations, and laws of sines and cosines. Each formula is presented with definitions, usage notes, and step-by-step examples for solving geometric and algebraic problems.',
+              // link: '/calculus/definitions',
+              // linkText: 'View All Definitions',
+              height:'300px',
+              backgroundColor:'#e2e3e5',
+            }),
   
   
     },
@@ -335,6 +344,14 @@ Trigonometry teaches students how to connect abstract mathematical concepts with
          sectionsContent,
          introContent,
          tools,
+          seoData: {
+      title: "Trigonometry - Functions, Identities & Formulas | Learn Math Class",
+      description: "Complete trigonometry guide covering functions, identities, formulas, and the unit circle. Learn sine, cosine, tangent with interactive tools and examples.",
+      keywords: keyWords.join(", "),
+      url: "/trigonometry",
+      name: "Trigonometry"
+    },
+    keyWords,
         
        }
     }
@@ -347,7 +364,7 @@ Trigonometry teaches students how to connect abstract mathematical concepts with
 
 
 
-export default function TrigonometryPage({sectionsContent,introContent,tools}) {
+export default function TrigonometryPage({ seoData, sectionsContent, introContent, tools, keyWords }) {
 
 
 
@@ -359,14 +376,31 @@ export default function TrigonometryPage({sectionsContent,introContent,tools}) {
       link: sectionsContent.formulas.link,
       content:"Explore ",
       content: [
-        'Explore Trigonometry formulas with explanations and examples',
-        " ",
-        <VerticalScrollingFormulaWidget 
-        key={"formula-widget"}
-         formulaData={trigonometryFormulaList}
-         moreFormulasLink='/trigonometry/formulas'
-        //  title='See them all'
-          />,
+        // 'Explore Trigonometry formulas with explanations and examples',
+        // " ",
+        // <VerticalScrollingFormulaWidget 
+        // key={"formula-widget"}
+        //  formulaData={trigonometryFormulaList}
+        //  moreFormulasLink='/trigonometry/formulas'
+        // //  title='See them all'
+        //   />,
+
+         { 
+          content: sectionsContent.formulas.leftContentHtml,
+          layout: 'horizontal', 
+          position: 'left',
+          width: 1.5 
+        },
+        { 
+          content: <VerticalScrollingFormulaWidget 
+            key="formula-widget"
+            formulaData={trigonometryFormulaList}
+            moreFormulasLink='/calculus/formulas'
+          />, 
+          layout: 'horizontal', 
+          position: 'right',
+          width: 2 
+        }
    
     ]
       
@@ -443,6 +477,50 @@ export default function TrigonometryPage({sectionsContent,introContent,tools}) {
 
   return (
     <>
+    <Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": seoData.name,
+        "description": seoData.description,
+        "keywords": seoData.keywords,
+        "url": `https://www.learnmathclass.com${seoData.url}`,
+        "dateModified": new Date().toISOString(),
+        "inLanguage": "en-US",
+        "mainEntity": {
+          "@type": "Article",
+          "name": seoData.name,
+          "dateModified": new Date().toISOString(),
+          "author": {
+            "@type": "Organization",
+            "name": "Learn Math Class"
+          }
+        }
+      })
+    }}
+  />
+</Head>
     <GenericNavbar/>
     <br/>
     <br/>
