@@ -56,6 +56,14 @@ const navigationGroups = [
             {title:"Trigonometry Calculator",link:"/calculators/trigonometry-calculator"},
             {title:"Angle Converter",link:"/converters/degree-radians"},
         ]
+    },
+     {
+        title:"Related pages",
+        items:[
+            {title:"Trigonometry",link:"/trigonometry"},
+            {title:"Trigonometric Identities",link:"/trigonometry/identities"},
+            {title:"Math Symbols used in Trigonometry",link:"/math-symbols/trigonometry"},
+        ]
     }
 
 ];

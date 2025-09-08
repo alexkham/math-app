@@ -126,7 +126,8 @@ export async function getStaticProps() {
       title:"Relevant Pages",
       items:[
         {title:"Trigonometry",link:'/trigonometry'},
-        {title:"Trigonometric Identities",link:'/trigonometry/identities'}
+        {title:"Trigonometric Identities",link:'/trigonometry/identities'},
+        {title:"Trigonometric Tables",link:'/tables/trigonometry'}
       ]
     }
 
