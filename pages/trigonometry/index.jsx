@@ -202,9 +202,9 @@ import ToolsSlider from '@/app/components/sliders/ToolsSlider';
      
       Building upon this base are the symmetry-based identities—such as the [even-odd](!/trigonometry/identities#even-odd) and [co-function](!/trigonometry/identities#co-function) properties—which reflect the inherent symmetries of the unit circle, including reflections across axes and rotations. For instance, $\\cos(-\\theta) = \\cos(\\theta)$ showcases cosine’s evenness, while $\\sin\\left(\\frac{\\pi}{2} - \\theta\\right) = \\cos(\\theta)$ exemplifies co-function symmetry.
 
-      The Pythagorean identities, such as $\\sin^2(\\theta) + \\cos^2(\\theta) = 1$, are central to the structure and serve as a gateway to more complex relationships.
+      The [Pythagorean](!/trigonometry/identities#pythagorean) identities, such as $\\sin^2(\\theta) + \\cos^2(\\theta) = 1$, are central to the structure and serve as a gateway to more complex relationships.
 
-Angle addition and subtraction formulas—like $\\sin(a + b) = \\sin(a)\\cos(b) + \\cos(a)\\sin(b)$—are derived through coordinate geometry or rotation matrices, enabling the construction of double-angle, half-angle, and multiple-angle identities, such as $\\cos(2\\theta) = 2\\cos^2(\\theta) - 1$.
+Angle [sum](!/trigonometry/identities#sum) and [difference](!/trigonometry/identities#difference) formulas—like $\\sin(a + b) = \\sin(a)\\cos(b) + \\cos(a)\\sin(b)$—are derived through coordinate geometry or rotation matrices, enabling the construction of [double-angle](!/trigonometry/identities#double), [half-angle](!/trigonometry/identities#half), and [triple-angle](!/trigonometry/identities#triple) identities, such as $\\cos(2\\theta) = 2\\cos^2(\\theta) - 1$.
 
 Product-to-sum identities, for example $\\sin(a)\\sin(b) = \\frac{1}{2}[\\cos(a - b) - \\cos(a + b)]$, reorganize these angle relationships for simplification in both theory and applications. 
 
@@ -215,66 +215,24 @@ Inverse trigonometric identities like $\\sin^{-1}(x) + \\cos^{-1}(x) = \\frac{\\
     },
     functions:{
       title:``,
-      content:`Trigonometric functions are foundational and play crucial role not only in trigonometry but also in other fields of mathematics, especially [calculus](!/calculus).
-      We distinct several groups of trigonometric functions based on their complexity, purpose they serve and properties.
+      content:`Trigonometric functions lie at the heart of trigonometry, originally emerging from the study of right triangles and the unit circle. Today, they serve as indispensable tools in mathematics, especially in calculus, analysis, and mathematical modeling of periodic phenomena.
 
-      **1. Basic Trigonometric Functions**
-These are the core six functions derived from a right triangle or the [unit circle](!/visual-tools/unit-circle):
-•**Sine (sin)**
-•**Cosine (cos)**
-•**Tangent (tan)**
-•**Cosecant (csc) = 1/sin**
-•**Secant (sec) = 1/cos**
-•**Cotangent (cot) = 1/tan**
+The most fundamental functions are the **sine**, **cosine**, and **tangent**, along with their reciprocals **cosecant**, **secant**, and **cotangent**. These form the core set of **basic trigonometric functions**. Other function families — such as inverse, hyperbolic, and complex extensions — also exist and are important in advanced contexts, but this section focuses primarily on the classical real-valued functions and their mathematical behavior.
 
-**2. Inverse Trigonometric Functions**
-These functions return angles when given a ratio of sides:
-•**Arcsine (arcsin or sin⁻¹)**
-•**Arccosine (arccos or cos⁻¹)**
-•**Arctangent (arctan or tan⁻¹)**
-•**Arccosecant (arccsc or csc⁻¹)**
-•**Arcsecant (arcsec or sec⁻¹)**
-•**Arccotangent (arccot or cot⁻¹)**
+This part of the trigonometry module is dedicated to exploring the **analytical structure** of trigonometric functions. On the child page, we will examine:
 
-**3. Hyperbolic Trigonometric Functions**
-Analogous to the basic trig functions but related to hyperbolas instead of circles:
-•**Hyperbolic Sine (sinh)**
-•**Hyperbolic Cosine (cosh)**
-•**Hyperbolic Tangent (tanh)**
-•**Hyperbolic Cosecant (csch) = 1/sinh**
-•**Hyperbolic Secant (sech) = 1/cosh**
-•**Hyperbolic Cotangent (coth) = 1/tanh**
+* **Definitions**: from geometric constructions to analytic formulations via power series and differential equations
+* **Properties**: including periodicity, symmetry, continuity, and boundedness
+* **Identities**: such as angle sum/difference formulas, double-angle identities, and Pythagorean relations
+* **Graphs and Transformations**: visual behaviors and effects of shifts, stretches, and reflections
+* **Equations**: solving trigonometric equations and analyzing their solutions
+* **Mathematical Applications**: their roles in Fourier analysis, differential equations, and linear algebra
 
-**4. Inverse Hyperbolic Functions**
-Inverses of the hyperbolic functions:
-•**Inverse Hyperbolic Sine (arsinh or sinh⁻¹)**
-•**Inverse Hyperbolic Cosine (arcosh or cosh⁻¹)**
-•**Inverse Hyperbolic Tangent (artanh or tanh⁻¹)**
-•**Inverse Hyperbolic Cosecant (arcsch or csch⁻¹)**
-•**Inverse Hyperbolic Secant (arsech or sech⁻¹)**
-•**Inverse Hyperbolic Cotangent (arcoth or coth⁻¹)**
+While more specialized trigonometric forms (e.g., inverse and hyperbolic functions) are acknowledged, they are treated in their own contexts where relevant.
 
-**5. Circular Functions (Generalization)**
-Often synonymous with basic trigonometric functions but used in broader contexts like complex analysis, where they are extended to complex arguments:
-•**Circular Sine (sin)**
-•**Circular Cosine (cos)**
-•**Circular Tangent (tan)**
+Whether you're analyzing waveforms, studying rotations, or decomposing functions into periodic components, a strong grasp of trigonometric functions provides a powerful mathematical toolkit.
 
-**6. Complex Trigonometric Functions**
-These extend trigonometric functions to the complex domain using Euler's formula:
-•**sin(z) = (e^{iz} - e^{-iz}) / 2i**
-•**cos(z) = (e^{iz} + e^{-iz}) / 2**
-
-**7. Elliptic and Generalized Trigonometric Functions**
-These generalize trig functions for more complex contexts such as elliptic curves and non-Euclidean geometries:
-•**Jacobi Elliptic Functions (sn, cn, dn, etc.)**
-•**Generalized Trigonometric Functions (used in curved spaces)**
-
-**8. Trigonometric Polynomials**
-Used extensively in Fourier analysis:
-•**Linear combinations of sine and cosine functions**
-
-Despite the fact that trigonometric functions come in such a wide variety, when it comes to core trigonometry, the **basic six functions** (sine, cosine, tangent, and their reciprocals) are the real workhorses. They're the ones you'll use and see the most, especially in solving triangles, trigonometric equations, and simplifying trigonometric expressions. The rest are powerful tools, but the basics are your foundation.`,
+`,
       before:``,
       after:``,
   
