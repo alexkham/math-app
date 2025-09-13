@@ -13,7 +13,10 @@ import BaseConverter from '@/app/components/converters/BaseConverter'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+  const keyWords=['base converter','base calculator','base to base converter',
+    'base to base converter','binary to 10 base','binary to base 10',
+    'binary to octal','binary to decimal','binary to hexadecimal','base 10 to base 8',
+    'base 10 to base 2','hexadecimal','binary','octal','decimal']
 
     const sectionsContent={
 
@@ -87,7 +90,7 @@ export async function getStaticProps(){
     }
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
+export default function BaseConverterPage({seoData,sectionsContent , introContent}) {
 
     
   const genericSections=[
