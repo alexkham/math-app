@@ -5496,7 +5496,7 @@ const BaseConverter = ({ explanations = baseConversionsExplanations }) => {
                     onChange={(e) => setUseTwosComplement(e.target.checked)}
                     style={{ marginRight: '6px' }}
                   />
-                  Use Two's Complement
+                  Use Two&apos;s Complement
                 </label>
                 
                 {useTwosComplement && (
@@ -5587,7 +5587,7 @@ const BaseConverter = ({ explanations = baseConversionsExplanations }) => {
                 <li>Supports all bases from 2 to 36</li>
                 <li>Uses digits 0-9 and letters A-Z for bases above 10</li>
                 <li>Negative numbers: Default uses sign-magnitude (minus sign)</li>
-                <li>Two's complement option available for computer-style negative representation</li>
+                <li>Two&apos;s complement option available for computer-style negative representation</li>
                 <li>Input is case-insensitive</li>
               </ul>
             </section>
