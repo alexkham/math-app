@@ -19,13 +19,119 @@ const CustomPi = () => (
   </svg>
 )
 
+// const BaseConverterIcon = () => (
+//   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+//     <rect width="4" height="16" x="6" y="4"/>
+//     <rect width="4" height="16" x="14" y="4"/>
+//   </svg>
+// )
+
+const BaseConverterIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="6" cy="6" r="3"/>
+    <circle cx="18" cy="6" r="3"/>
+    <circle cx="6" cy="18" r="3"/>
+    <circle cx="18" cy="18" r="3"/>
+    <path d="m9 6 6 0"/>
+    <path d="m9 18 6 0"/>
+    <path d="m6 9 0 6"/>
+    <path d="m18 9 0 6"/>
+    <text x="6" y="7" fontSize="4" textAnchor="middle" fill="currentColor">2</text>
+    <text x="18" y="7" fontSize="4" textAnchor="middle" fill="currentColor">8</text>
+    <text x="6" y="19" fontSize="4" textAnchor="middle" fill="currentColor">10</text>
+    <text x="18" y="19" fontSize="4" textAnchor="middle" fill="currentColor">16</text>
+  </svg>
+)
+
+// const BaseConverterIcon = () => (
+//   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+//     <rect x="2" y="2" width="8" height="8" rx="1"/>
+//     <rect x="14" y="2" width="8" height="8" rx="1"/>
+//     <rect x="2" y="14" width="8" height="8" rx="1"/>
+//     <rect x="14" y="14" width="8" height="8" rx="1"/>
+//     <text x="6" y="7.5" fontSize="6" textAnchor="middle" fill="currentColor" fontWeight="bold">2</text>
+//     <text x="18" y="7.5" fontSize="6" textAnchor="middle" fill="currentColor" fontWeight="bold">8</text>
+//     <text x="6" y="19.5" fontSize="5" textAnchor="middle" fill="currentColor" fontWeight="bold">10</text>
+//     <text x="18" y="19.5" fontSize="5" textAnchor="middle" fill="currentColor" fontWeight="bold">16</text>
+//   </svg>
+// )
+
+// const BaseConverterIcon = () => (
+//   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+//     <rect x="2" y="2" width="8" height="8"/>
+//     <rect x="14" y="2" width="8" height="8"/>
+//     <rect x="2" y="14" width="8" height="8"/>
+//     <rect x="14" y="14" width="8" height="8"/>
+//     <text x="6" y="8" fontSize="7" textAnchor="middle" fill="currentColor" fontWeight="bold">2</text>
+//     <text x="18" y="8" fontSize="7" textAnchor="middle" fill="currentColor" fontWeight="bold">8</text>
+//     <text x="6" y="20" fontSize="6" textAnchor="middle" fill="currentColor" fontWeight="bold">10</text>
+//     <text x="18" y="20" fontSize="6" textAnchor="middle" fill="currentColor" fontWeight="bold">16</text>
+//   </svg>
+// )
+
+
+// const BaseConverterIcon = () => (
+//   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+//     <text x="6" y="8" fontSize="8" textAnchor="middle" fill="currentColor" fontWeight="bold">2</text>
+//     <text x="18" y="8" fontSize="8" textAnchor="middle" fill="currentColor" fontWeight="bold">8</text>
+//     <text x="6" y="20" fontSize="6" textAnchor="middle" fill="currentColor" fontWeight="bold">10</text>
+//     <text x="18" y="20" fontSize="6" textAnchor="middle" fill="currentColor" fontWeight="bold">16</text>
+//   </svg>
+// )
+
+
+
+
+// const BaseConverterIcon = () => (
+//   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+//     <text x="6" y="10" fontSize="12" textAnchor="middle" fill="currentColor" fontWeight="bold">2</text>
+//     <text x="18" y="10" fontSize="12" textAnchor="middle" fill="currentColor" fontWeight="bold">8</text>
+//     <text x="6" y="22" fontSize="10" textAnchor="middle" fill="currentColor" fontWeight="bold">10</text>
+//     <text x="18" y="22" fontSize="10" textAnchor="middle" fill="currentColor" fontWeight="bold">16</text>
+//   </svg>
+// )
+
+// const LogicIcon = () => (
+//   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+//     <text x="4" y="10" fontSize="12" textAnchor="middle" fill="currentColor" fontWeight="bold">∧</text>
+//     <text x="12" y="10" fontSize="12" textAnchor="middle" fill="currentColor" fontWeight="bold">∨</text>
+//     <text x="20" y="10" fontSize="12" textAnchor="middle" fill="currentColor" fontWeight="bold">¬</text>
+//     <text x="8" y="20" fontSize="10" textAnchor="middle" fill="currentColor" fontWeight="bold">→</text>
+//     <text x="16" y="20" fontSize="10" textAnchor="middle" fill="currentColor" fontWeight="bold">↔</text>
+//   </svg>
+// )
+
+
+const LogicIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <text x="12" y="20" fontSize="25" textAnchor="middle" fill="currentColor" fontWeight="bold">⊕</text>
+    {/* <text x="12" y="10" fontSize="12" textAnchor="middle" fill="currentColor" fontWeight="bold">∧</text>
+    <text x="18" y="10" fontSize="10" textAnchor="middle" fill="currentColor" fontWeight="bold">Q</text>
+    <text x="12" y="20" fontSize="12" textAnchor="middle" fill="currentColor" fontWeight="bold">∨</text> */}
+  </svg>
+)
+
+
 const getStaticData = () => ({
   keywords: ["units converter", "mathematical units", "radians to degree", "degree to radians"],
   cardItems: [
     {
       category: "Angle Converter",
       href: "converters/degree-radians",
-      content: "Convert degrees to radians and radians to degrees. See explanations, conversion formulas and visual illustrations"
+      content: "Convert degrees to radians and radians to degrees. See explanations, conversion formulas and visual illustrations",
+      icon:CustomPi,
+    },
+    {
+      category: "Base Converter",
+      href: "converters/base-converter",
+      content: "Convert numbers between any bases from 2 to 36 . Includes quick conversion buttons for standard bases (binary, decimal, octal, hexadecimal), custom base support.",
+      icon: BaseConverterIcon
+    },
+    {
+      category: "Normal Forms Converters",
+      href: "/logic/propositional-logic/syntax/normal-forms",
+      content: "Convert propositional logic expressions to Disjunctive Normal Form (DNF) and Conjunctive Normal Form (CNF) with step-by-step explanations.",
+      icon: LogicIcon,
     }
   ],
   content: {
@@ -172,12 +278,14 @@ export default function ConvertersPage() {
       <br/>
       <br/>
       <div style={{transform:"scale(0.9)"}}>
-        <CardsGroup 
+        {/* <CardsGroup 
           items={cardItems.map(item => ({
             ...item,
             icon: CustomPi
           }))}
-        />
+        /> */}
+
+        <CardsGroup items={cardItems} />
       </div>
       <br/>
       <br/>

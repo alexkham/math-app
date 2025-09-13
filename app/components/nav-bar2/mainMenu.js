@@ -114,6 +114,7 @@ export const mainMenuStructure = [
             items: [
               { label: 'All Converters', href: '/converters' },
               { label: 'Angle Converter', href: '/converters/degree-radians' },
+              { label: 'Base Converter', href: '/converters/base-converter' },
               { label: 'Normal Forms Converter', href: '/logic/propositional-logic/syntax/normal-forms' },
               
               

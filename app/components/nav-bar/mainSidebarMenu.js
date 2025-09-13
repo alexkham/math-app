@@ -91,6 +91,7 @@ const CustomConvert=()=>(
     content: [
         { text: 'Angle Converter', url: '/converters/degree-radians' },
         { text: 'Normal Forms Converter', url: '/logic/propositional-logic/syntax/normal-forms' },
+        { text: 'Base Converter', url: '/converters/base-converter' },
        
     ] },
   { id: 6, icon: CustomWrench, tooltip: 'Other Tools', 
