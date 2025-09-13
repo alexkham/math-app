@@ -209,6 +209,25 @@ import { createContentHtml } from '@/app/utils/utils-functions';
           layout: 'horizontal'
   
     },
+    angles:{
+      title:'Angles',
+      content:`In some way, we can see an angle as a mathematical model that represents the amount of rotation between two rays sharing a common endpoint. It is one of the central concepts in trigonometry, alongside the right triangle and the unit circle. Angles provide the basis for defining trigonometric functions, which depend on rotational input to describe relationships between lengths, positions, and periodic behavior. Through this role, the angle becomes essential for understanding how these functions behave, both algebraically and geometrically.
+
+Measurement of angles is defined through two principal units — degrees and radians — and includes distinctions between positive and negative directionality, as well as values extending beyond a single rotation. The concept of coterminal angles arises naturally within this extended framework.
+
+Angular magnitudes are categorized based on their size: zero, acute, right, obtuse, straight, reflex, and full angles. These classifications serve as a basis for identifying structural properties in figures and for formulating general principles in planar analysis.
+
+Relationships between angles — such as complementarity, supplementarity, adjacency, and opposition — are defined by positional constraints and linear combinations.
+
+In geometric contexts, angles determine the internal structure of triangles and polygons, govern the behavior of circular segments, and appear in the formulation of central and inscribed arc measures. Within trigonometry, angles are treated as rotational parameters on the unit circle, where quadrant location and reference angles determine function values and signs. Standard angles play a central role in simplifying expressions and solving equations.
+
+These definitions extend to the behavior of trigonometric functions across their domains, including periodicity, symmetry, and transformation. The treatment also includes inverse functions and the role of angles in modeling cyclic and rotational phenomena in applied settings. The topic as a whole integrates measurement, classification, and function, providing a complete mathematical foundation for angular analysis.
+`,
+before:``,
+after:``,
+link:``,
+
+    },
   
     identities:{
   
@@ -223,7 +242,8 @@ import { createContentHtml } from '@/app/utils/utils-functions';
 
 Angle [sum](!/trigonometry/identities#sum) and [difference](!/trigonometry/identities#difference) formulas—like $\\sin(a + b) = \\sin(a)\\cos(b) + \\cos(a)\\sin(b)$—are derived through coordinate geometry or rotation matrices, enabling the construction of [double-angle](!/trigonometry/identities#double), [half-angle](!/trigonometry/identities#half), and [triple-angle](!/trigonometry/identities#triple) identities, such as $\\cos(2\\theta) = 2\\cos^2(\\theta) - 1$.
 
-Product-to-sum identities, for example $\\sin(a)\\sin(b) = \\frac{1}{2}[\\cos(a - b) - \\cos(a + b)]$, reorganize these angle relationships for simplification in both theory and applications. 
+[Product-to-sum](!trigonometry/identities#product-sum) identities, for example $\\sin(a)\\sin(b) = \\frac{1}{2}[\\cos(a - b) - \\cos(a + b)]$, reorganize these angle relationships for simplification in both theory and applications. 
+ Similarly, [sum-to-product](!trigonometry/identities#sum-product) identities, such as $\\sin(a) + \\sin(b) = 2\\sin\\left(\\frac{a + b}{2}\\right)\\cos\\left(\\frac{a - b}{2}\\right)$, transform sums and differences of trigonometric functions into products, enabling alternative approaches to complex trigonometric expressions.
 
 Inverse trigonometric identities like $\\sin^{-1}(x) + \\cos^{-1}(x) = \\frac{\\pi}{2}$, along with hyperbolic analogs and Euler’s identity $e^{i\\theta} = \\cos(\\theta) + i\\sin(\\theta)$, extend trigonometry into broader mathematical contexts. Throughout this structure, many identities emerge as special cases of these general forms, demonstrating a coherent and logical progression.`,
       before:``,
@@ -475,6 +495,15 @@ export default function TrigonometryPage({ seoData, sectionsContent, introConten
    
     ]
       
+    },
+    {
+      id:'angles',
+      title:sectionsContent.angles.title,
+      link:'',
+      content:[
+        sectionsContent.angles.content,
+      ]
+
     },
    
     {

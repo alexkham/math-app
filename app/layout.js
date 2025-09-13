@@ -12,28 +12,27 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Website for People Who Are Learning Mathematics',
-  description: 'Online Resource for Math Knowledge and Information Concerning Different Branches of  Mathematics',
+  description: 'Online Resource for Math Knowledge and Information Concerning Different Branches of Mathematics',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-       <Head>
+      <Head>
         <meta name="robots" content="noindex,follow" />
       </Head>
-      <body >
+      <body suppressHydrationWarning={true}>
         {/* <GenericNavbar /> */}
         {/* <MyNavbar></MyNavbar> */}
-      {/* <nav className='nav-bar'>
-          <GoHomeButton className={'fixed-button'}/>
-          
+        {/* <nav className='nav-bar'>
+          <GoHomeButton className={'fixed-button'}/>                     
           <GoBackButton className={'fixed-button'}/>
         </nav> */}
-        <div >
-        {children}
+        <div>
+          {children}
         </div>
         <ScrollUpButton></ScrollUpButton>
-        </body>
+      </body>
     </html>
   )
 }
