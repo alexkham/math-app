@@ -234,3 +234,47 @@
     }
   }
   
+
+
+  /*new styles*/
+
+  /* Matching the blue cube color scheme */
+.converterInfo {
+  background: #52b5e5;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 12px 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.infoIcon {
+  font-size: 15px;
+  color: #ffffff;
+}
+
+.infoText {
+  font-size: 13px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.converterLink {
+  color: #fff200;
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 3px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  transition: background 0.2s ease;
+}
+
+.converterLink:hover {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
