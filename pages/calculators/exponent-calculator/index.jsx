@@ -8,8 +8,30 @@ import ExplanationDetails from '@/app/components/ExplanationDetails';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import ExponentCalculator from '@/app/components/calculators/arithmetics/ExponentCalculator';
 import '../../pages.css';
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
 
 export async function getStaticProps() {
+
+
+  const navigationGroup=[
+  {title:'Other Calculators',
+    items:[
+      // {title:'Exponent Calculator',link:'/calculators/exponent-calculator'},
+      {title:'Root Calculator',link:'/calculators/root-calculator'},
+      {title:'Modulo Calculator',link:'/calculators/modulo-calculator'},
+      {title:'Logarithm Calculator',link:'/calculators/log-calculator'},
+      {title:'Percentage Calculator',link:'/calculators/percentage-calculator'},
+      {title:'Factorial Calculator',link:'/calculators/factorial-calculator'},
+      {title:'Fractions Calculator',link:'/calculators/fraction-calculator'},
+      {title:'Complex Numbers Calculator',link:'/calculators/complex-numbers'},
+      {title:'Trigonometry Calculator',link:'/calculators/trigonometry-calculator'},
+      {title:'Statistics Calculator',link:'/calculators/statistics-calculator'},
+    ]
+  }
+]
+
+
+
   const detailInstructions = [
     "Select the type of power operation you want to perform (Square, Cube, or Custom)",
     "Enter your base number in the first input field",
@@ -79,12 +101,13 @@ The calculator uses high-precision arithmetic and will automatically format resu
     props: {
       detailInstructions,
       explanations,
+      navigationGroup,
     },
     revalidate: 86400
   };
 }
 
-export default function ExponentCalculatorPage({ detailInstructions, explanations }) {
+export default function ExponentCalculatorPage({ detailInstructions, explanations, navigationGroup }) {
   return (
     <>
       <Head>
@@ -114,16 +137,56 @@ export default function ExponentCalculatorPage({ detailInstructions, explanation
         panelBackgroundColor='#f2f2f2'
       />
       
-      <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>Exponent Calculator</h1>
-      <div style={{marginBottom:'-20px'}}>
+      <h1 className='title' style={{marginTop:'-20px',marginBottom:'30px'}}>Exponent Calculator</h1>
+      <div style={{marginBottom:'20px'}}>
         <ExplanationDetails 
           instructions={detailInstructions}
           title='How to use Exponent Calculator'
         />
       </div>
-      <div style={{transform:'scale(0.85)'}}>
-        <ExponentCalculator explanations={explanations}/>
+      
+       <div style={{
+      display: 'grid',
+      gridTemplateColumns: '15% 80%',
+      gap: '20px',
+      width: '100%'
+   }}>
+      {/* Left column - Sidebar */}
+      <div>
+        <br/>
+       
+         <VerticalButtonGroup 
+            items={navigationGroup}
+            width="250px"       
+            theme='lightBlue'
+            isSticky={true}
+            verticalOffset='200px'
+         />
       </div>
+
+      {/* Right column - Table */}
+      <div>
+         <div style={{width:'100%',margin:'auto'}}>
+          <div style={{transform:'scale(0.95)'}}>
+        <ExponentCalculator explanations={explanations}/>
+      </div> 
+          
+           {/* <div style={{transform:'scale(0.90)'}}>
+        <RootCalculator explanations={explanations}
+        />
+      </div>  */}
+            <br/>
+            <br/>
+            <br/>
+           
+            
+         </div>
+      </div>
+   </div>
+     
+      {/* <div style={{transform:'scale(0.85)'}}>
+        <ExponentCalculator explanations={explanations}/>
+      </div> */}
       <br/>
       <br/>
       <br/>

@@ -33,8 +33,9 @@ import '../../pages.css'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
 
-export default function BaseConverter({ data }) {
+export default function BaseConverter({navigationGroup }) {
   return (
     <>
       <Head>
@@ -60,6 +61,13 @@ export default function BaseConverter({ data }) {
       <Breadcrumb></Breadcrumb>
       <h1 className='title' style={{marginTop:'-20px'}}>Base Conversion Visualizer</h1>
       <br></br>
+     <VerticalButtonGroup 
+            items={navigationGroup}
+            width="250px"       
+            theme='lightBlue'
+            isSticky={true}
+            verticalOffset='260px'
+         />
       <br></br>
       <BaseVisualizer2 />
      
@@ -70,11 +78,19 @@ export default function BaseConverter({ data }) {
 
 export async function getStaticProps() {
   // Example fetching data (replace with actual data fetching logic)
-  const data = { example: 'This is static data fetched at build time.' };
+  const navigationGroup=[
+    {
+      title:'Related Pages',
+      items:[
+        {title:'Base Converter',link:'/converters/base-converter'}
+      ]
+    }
+  ]
+
 
   return {
     props: {
-      data, // Passed to the component as props
+     navigationGroup,
     },
   };
 }

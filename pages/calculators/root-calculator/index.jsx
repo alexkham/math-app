@@ -1,78 +1,3 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-// import React from 'react';
-// import '../../pages.css'
-// import RootCalculator from '@/app/components/calculators/arithmetics/RootCalculator';
-// import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
-
-// export default function RootCalculatorPage() {
-
-  
-//     const explanations = {
-//         square: {
-//           text: "A square root of a number is a value that, when multiplied by itself, gives the number. For example, the square root of 25 is 5, because 5 × 5 = 25.",
-//         //   links: [
-//         //     {
-//         //       title: "Learn More About Square Roots",
-//         //       link: "https://example.com/square-roots"
-//         //     }
-//         //   ]
-//         },
-//         cube: {
-//           text: "A cube root of a number is a value that, when multiplied by itself twice, gives the number. For example, the cube root of 27 is 3, because 3 × 3 × 3 = 27.",
-//           // links: [
-//           //   {
-//           //     title: "Cube Roots Explained",
-//           //     link: "https://example.com/cube-roots"
-//           //   }
-//           // ]
-//         },
-//         nth: {
-//           text: "An nth root of a number is a value that, when multiplied by itself n-1 times, gives the number. For example, the 4th root of 16 is 2, because 2 × 2 × 2 × 2 = 16.",
-//         //   links: [
-//         //     {
-//         //       title: "Understanding Nth Roots",
-//         //       link: "https://example.com/nth-roots"
-//         //     }
-//         //   ]
-//         }
-//       };
-
-//       const keyWords=['root calculator','square root calculator'
-//         ,'sqrt calculator','calculate square root calculator',
-//         'calculator to find square root','square root value calculator',
-//         'cubic root calculator']
-      
-
-
-//   return (
-//    <>
-//    <GenericNavbar/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    <Breadcrumb/>
-//    <OperaSidebar 
-//         side='right'
-//         topOffset='65px' 
-//         sidebarWidth='45px'
-//         panelWidth='200px'
-        
-//         iconColor='white'
-//         panelBackgroundColor='#f2f2f2'/> 
-//    <h1 className='title' style={{marginTop:'-20px'}}>Root Calculator</h1>
-//    <div style={{transform:'scale(0.80)'}}>
-//    <RootCalculator explanations={explanations}/>
-//    </div>
-//    <br/>
-//    <br/>
-//    <br/>
-//    <ScrollUpButton/>
-//    </>
-//   )
-// }
 
 
 import Head from 'next/head';
@@ -84,9 +9,13 @@ import '../../pages.css';
 import RootCalculator from '@/app/components/calculators/arithmetics/RootCalculator';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import ExplanationDetails from '@/app/components/ExplanationDetails';
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
 
 export default function RootCalculatorPage(props) {  // Changed to receive props
-  const { explanations, keyWords,detailInstructions } = props;  // Destructure props
+  const { explanations, keyWords,detailInstructions,navigationGroup } = props;  // Destructure props
+
+
+
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -153,10 +82,48 @@ export default function RootCalculatorPage(props) {  // Changed to receive props
       <ExplanationDetails instructions={detailInstructions}
       title='How to use Root Calculator'/>
       </div>
-      <div style={{transform:'scale(0.80)'}}>
+
+
+       <div style={{
+      display: 'grid',
+      gridTemplateColumns: '15% 80%',
+      gap: '20px',
+      width: '100%'
+   }}>
+      {/* Left column - Sidebar */}
+      <div>
+        <br/>
+        <br/>
+        <br/>
+         <VerticalButtonGroup 
+            items={navigationGroup}
+            width="250px"       
+            theme='lightBlue'
+            isSticky={true}
+            verticalOffset='250px'
+         />
+      </div>
+
+      {/* Right column - Table */}
+      <div>
+         <div style={{width:'90%',margin:'auto'}}>
+           <div style={{transform:'scale(0.90)'}}>
         <RootCalculator explanations={explanations}
         />
+      </div> 
+            <br/>
+            <br/>
+            <br/>
+           
+            
+         </div>
       </div>
+   </div>
+      {/* <VerticalButtonGroup items={navigationGroup}/>
+      <div style={{transform:'scale(0.90)'}}>
+        <RootCalculator explanations={explanations}
+        />
+      </div> */}
       <br/>
       <br/>
       <br/>
@@ -166,6 +133,25 @@ export default function RootCalculatorPage(props) {  // Changed to receive props
 }
 
 export async function getStaticProps() {
+
+const navigationGroup=[
+  {title:'Other Calculators',
+    items:[
+      {title:'Exponent Calculator',link:'/calculators/exponent-calculator'},
+      // {title:'Root Calculator',link:'/calculators/root-calculator'},
+      {title:'Modulo Calculator',link:'/calculators/modulo-calculator'},
+      {title:'Logarithm Calculator',link:'/calculators/log-calculator'},
+      {title:'Percentage Calculator',link:'/calculators/percentage-calculator'},
+      {title:'Factorial Calculator',link:'/calculators/factorial-calculator'},
+      {title:'Fractions Calculator',link:'/calculators/fraction-calculator'},
+      {title:'Complex Numbers Calculator',link:'/calculators/complex-numbers'},
+      {title:'Trigonometry Calculator',link:'/calculators/trigonometry-calculator'},
+      {title:'Statistics Calculator',link:'/calculators/statistics-calculator'},
+    ]
+  }
+]
+
+
   const explanations = {
     square: {
       text: "A square root of a number is a value that, when multiplied by itself, gives the number. For example, the square root of 25 is 5, because 5 × 5 = 25.",
@@ -211,6 +197,7 @@ export async function getStaticProps() {
       explanations,
       keyWords,
       detailInstructions,
+      navigationGroup,
     },
     revalidate: 86400
   };
