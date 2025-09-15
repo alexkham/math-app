@@ -10,6 +10,26 @@ import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 import { capitalizeWords } from '@/app/utils/utils-functions';
 
+
+
+const BaseConverterIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="6" cy="6" r="3"/>
+    <circle cx="18" cy="6" r="3"/>
+    <circle cx="6" cy="18" r="3"/>
+    <circle cx="18" cy="18" r="3"/>
+    <path d="m9 6 6 0"/>
+    <path d="m9 18 6 0"/>
+    <path d="m6 9 0 6"/>
+    <path d="m18 9 0 6"/>
+    <text x="6" y="7" fontSize="4" textAnchor="middle" fill="currentColor">2</text>
+    <text x="18" y="7" fontSize="4" textAnchor="middle" fill="currentColor">8</text>
+    <text x="6" y="19" fontSize="4" textAnchor="middle" fill="currentColor">10</text>
+    <text x="18" y="19" fontSize="4" textAnchor="middle" fill="currentColor">16</text>
+  </svg>
+)
+
+
 const arithmeticTables = [
   {
     name: 'Logarithms (Base 10)',
@@ -53,7 +73,15 @@ const arithmeticTables = [
     description: 'Explore perfect cubes and their roots from 1 to 1000000',
     icon: SquareRadical,
     path: '/tables/arithmetics/perfect-cubes'
-  }
+  },
+  
+  {
+    name: 'Base Conversion Table',
+    description: 'Interactive table converting numbers 0-1000 between decimal, binary, octal, hexadecimal, and a custom base (2-36) with search functionality.',
+    icon: BaseConverterIcon,
+    path: '/tables/arithmetics/base-conversion'
+  },
+  
 ];
 
 export default function ArithmeticTables() {
