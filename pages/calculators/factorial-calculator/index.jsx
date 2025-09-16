@@ -6,12 +6,31 @@ import '../../pages.css'
 import FactorialCalculator from '@/app/components/calculators/arithmetics/FactorialCalculator'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import Head from 'next/head'
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
 
 export async function getStaticProps() {
   const keyWords = ['factorial','factorial calculator','factorial meaning',
     'n factorial calculator','factorial n','0 factorial','1 factorial',
     'factorial in mathematics','factorial in math','zero factorial','factorial calculator online'];
+
+const navigationGroup=[
+  {title:'Other Calculators',
+    items:[
+      {title:'Exponent Calculator',link:'/calculators/exponent-calculator'},
+      {title:'Root Calculator',link:'/calculators/root-calculator'},
+      {title:'Modulo Calculator',link:'/calculators/modulo-calculator'},
+      {title:'Logarithm Calculator',link:'/calculators/log-calculator'},
+      {title:'Percentage Calculator',link:'/calculators/percentage-calculator'},
+      // {title:'Factorial Calculator',link:'/calculators/factorial-calculator'},
+      {title:'Fractions Calculator',link:'/calculators/fraction-calculator'},
+      {title:'Complex Numbers Calculator',link:'/calculators/complex-numbers'},
+      {title:'Trigonometry Calculator',link:'/calculators/trigonometry-calculator'},
+      {title:'Statistics Calculator',link:'/calculators/statistics-calculator'},
+    ]
+  }
+]
+
 
   return {
     props: {
@@ -22,12 +41,13 @@ export async function getStaticProps() {
         url: "/calculators/factorial-calculator",
         name: "Factorial Calculator"
       },
-      keyWords
+      keyWords,
+      navigationGroup
     }
   }
 }
 
-export default function FactorialCalculatorPage({ seoData, keyWords }) {
+export default function FactorialCalculatorPage({ seoData, keyWords ,navigationGroup}) {
 
     // const keyWords=['factorial','factorial calculator','factorial meaning',
     //   'n factorial calculator','factorial n','0 factorial','1 factorial',
@@ -93,7 +113,55 @@ export default function FactorialCalculatorPage({ seoData, keyWords }) {
          />
    <Breadcrumb/>
    <h1 className='title' style={{marginTop:'-30px',marginBottom:'10px' }}>Factorial Calculator</h1>
-   <FactorialCalculator/>
+   
+     {/* <VerticalButtonGroup 
+            items={navigationGroup}
+            width="250px"       
+            theme='lightBlue'
+            isSticky={true}
+            verticalOffset='200px'
+         />
+   <FactorialCalculator/> */}
+
+     <div style={{
+      display: 'grid',
+      gridTemplateColumns: '10% 90%',
+      gap: '20px',
+      width: '100%'
+   }}>
+      {/* Left column - Sidebar */}
+      <div>
+        <br/>
+       
+         <VerticalButtonGroup 
+            items={navigationGroup}
+            width="250px"       
+            theme='lightBlue'
+            isSticky={true}
+            verticalOffset='200px'
+         />
+      </div>
+
+      {/* Right column - Table */}
+      <div>
+         <div style={{width:'100%',margin:'auto'}}>
+          <div style={{transform:'scale(0.95)'}}>
+        {/* <ExponentCalculator explanations={explanations}/> */}
+        <FactorialCalculator/>
+      </div> 
+          
+           {/* <div style={{transform:'scale(0.90)'}}>
+        <RootCalculator explanations={explanations}
+        />
+      </div>  */}
+            <br/>
+            <br/>
+            <br/>
+           
+            
+         </div>
+      </div>
+   </div>
    <br/>
    <br/>
    <br/>

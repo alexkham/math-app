@@ -9,11 +9,22 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import BaseConversionTable from '@/app/components/tables/conversion-tables/BaseConversionTable'
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
 
 export async function getStaticProps(){
 
   const keyWords=['','','','','']
+
+  const navigationGroup=[
+    {
+        title:'Related Tools',
+        items:[
+            {title:'Base Converter',link:'/converters/base-converter'},
+            {title:'Base Convertion Visualizer',link:'/visual-tools/base-converter'},
+        ]
+    }
+  ]
 
     const sectionsContent={
 
@@ -82,12 +93,13 @@ export async function getStaticProps(){
         url: "/url",
          name: "name"
       },
+      navigationGroup,
         
        }
     }
    }
 
-export default function BaseConversionTablePage({seoData,sectionsContent , introContent}) {
+export default function BaseConversionTablePage({seoData,sectionsContent , introContent,navigationGroup}) {
 
     
   const genericSections=[
@@ -175,7 +187,14 @@ export default function BaseConversionTablePage({seoData,sectionsContent , intro
    <br/>
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Base Conversion Table</h1>
    <br/>
+   <VerticalButtonGroup items={navigationGroup}
+   verticalOffset='200px'
+   isSticky={true}
+   width='250px'/>
+   <br/>
+   <div style={{width:'60%',margin:'auto',marginTop:'-200px'}}>
    <BaseConversionTable/>
+   </div>
    {/* <SectionTableOfContents sections={genericSections}/> */}
    <br/>
    <br/>

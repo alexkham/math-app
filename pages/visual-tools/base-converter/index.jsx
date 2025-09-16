@@ -69,7 +69,9 @@ export default function BaseConverter({navigationGroup }) {
             verticalOffset='260px'
          />
       <br></br>
+      <div style={{marginTop:'-100px'}}>
       <BaseVisualizer2 />
+      </div>
      
       <ScrollUpButton></ScrollUpButton>
     </>
@@ -82,7 +84,8 @@ export async function getStaticProps() {
     {
       title:'Related Pages',
       items:[
-        {title:'Base Converter',link:'/converters/base-converter'}
+        {title:'Base Converter',link:'/converters/base-converter'},
+        {title:'Base Convertion Table',link:'/tables/arithmetics/base-conversion'}
       ]
     }
   ]
