@@ -29,6 +29,10 @@ const BaseConverterIcon = () => (
   </svg>
 )
 
+const MultiplicationIcon=()=>(
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-asterisk-icon lucide-square-asterisk"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M12 8v8"/><path d="m8.5 14 7-4"/><path d="m8.5 10 7 4"/></svg>
+)
+
 
 const arithmeticTables = [
   {
@@ -75,6 +79,12 @@ const arithmeticTables = [
     path: '/tables/arithmetics/perfect-cubes'
   },
   
+  {
+    name: 'Multiplication Tables',
+    description: 'Interactive multiplication table generator for any multiplicand (1-999) with customizable table ranges (1-100), displaying multiplier, equation, and result with pagination and search functionality.',
+    icon: MultiplicationIcon,
+    path: '/tables/arithmetics/multiplication'
+  },
   {
     name: 'Base Conversion Table',
     description: 'Interactive table converting numbers 0-1000 between decimal, binary, octal, hexadecimal, and a custom base (2-36) with search functionality.',

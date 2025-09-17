@@ -8,27 +8,14 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
-import BaseConversionTable from '@/app/components/tables/conversion-tables/BaseConversionTable'
-import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
+import MultiplicationTables from '@/app/components/tables/MultiplicationTables'
 
 
 export async function getStaticProps(){
 
-  const keyWords=['binary to decimal','decimal to binary','binary to hexadecimal',
-    'hexadecimal to binary','binary number to decimal','convert bases',
-    'binary to octal','octal to binary','octal to hexadecimal','hexadecimal to octal',
-  'octal to decimal','decimal to octal', 'hexadecimal to decimal','decimal to hexadecimal'
-]
-
-  const navigationGroup=[
-    {
-        title:'Related Tools',
-        items:[
-            {title:'Base Converter',link:'/converters/base-converter'},
-            {title:'Base Convertion Visualizer',link:'/visual-tools/base-converter'},
-        ]
-    }
-  ]
+  const keyWords=['multiplication tables','multiplication chart',
+    'times table chart','8 times table','6 times table','7 times table','4 times table',
+    '4 times table','9 times table','3 times table','2 times table']
 
     const sectionsContent={
 
@@ -91,19 +78,18 @@ export async function getStaticProps(){
          sectionsContent,
          introContent,
           seoData: {
-        title: "Base Conversion Tables | Learn Math Class",
-        description: "Convert between number bases instantly - binary to decimal, decimal to binary, binary to hexadecimal, hexadecimal to binary, octal to decimal, decimal to octal. Free base conversion calculator and table.",
+        title: "Multiplication Tables | Learn Math Class",
+        description: "Interactive multiplication tables generator - Create 2 times table, 3 times table, 4 times table, 6 times table, 7 times table, 8 times table, 9 times table charts instantly. Free multiplication chart tool for math practice.",
         keywords: keyWords.join(", "),
-        url: "/tables/arithmetics/base-conversion",
+        url: "/tables/arithmetics/multiplication",
          name: "name"
       },
-      navigationGroup,
         
        }
     }
    }
 
-export default function BaseConversionTablePage({seoData,sectionsContent , introContent,navigationGroup}) {
+export default function MultiplicationTablesPage({seoData,sectionsContent , introContent}) {
 
     
   const genericSections=[
@@ -189,16 +175,11 @@ export default function BaseConversionTablePage({seoData,sectionsContent , intro
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Base Conversion Table</h1>
+   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Multiplication Tables</h1>
    <br/>
-   <VerticalButtonGroup items={navigationGroup}
-   verticalOffset='200px'
-   isSticky={true}
-   width='250px'/>
+   <MultiplicationTables/>
    <br/>
-   <div style={{width:'60%',margin:'auto',marginTop:'-200px'}}>
-   <BaseConversionTable/>
-   </div>
+   <br/>
    {/* <SectionTableOfContents sections={genericSections}/> */}
    <br/>
    <br/>

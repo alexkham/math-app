@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
 .container {
   min-height: 100vh;
   background: linear-gradient(to bottom right, #E6F0FF, #EAE6FF);
@@ -32,7 +34,7 @@
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  height: 160px;
+  height: 220px;
   width: calc(33.333% - 1rem);
   min-width: 300px;
   max-width: 380px;
@@ -56,17 +58,34 @@
 }
 
 .tableTitle {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  color: #1F2937;
+  color: #244ebe;
 }
 
 .description {
-  padding: 0 0.75rem 0.75rem;
+  /* padding: 0 0.75rem 0.75rem; */
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
   flex-grow: 1;
   color: #6B7280;
-  font-size: 0.815rem;
-  line-height: 1.2;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-weight: 500;
+   /* font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+    */
+     /* font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif; */
+
+      /* font-family: 'Source Sans Pro', 'Segoe UI', Tahoma, sans-serif; */
+
+       /* font-family: 'Nunito', 'Open Sans', sans-serif; */
+        /* font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif; */
+
+        font-family: 'Rubik', 'Segoe UI', sans-serif;
+
+   /* background-color: #f3f4f6;      */
+   
 }
 
 .cardFooter {
@@ -74,6 +93,8 @@
   padding: 0.4rem;
   text-align: center;
   font-weight: bold;
+  height: 40px;
+ 
 }
 
 .viewText {
