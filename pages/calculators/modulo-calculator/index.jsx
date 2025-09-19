@@ -9,8 +9,29 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
 export async function getStaticProps(){
+
+   
+const navigationGroup=[
+  {title:'Other Calculators',
+    items:[
+      {title:'Exponent Calculator',link:'/calculators/exponent-calculator'},
+      {title:'Root Calculator',link:'/calculators/root-calculator'},
+      // {title:'Modulo Calculator',link:'/calculators/modulo-calculator'},
+      {title:'Logarithm Calculator',link:'/calculators/log-calculator'},
+      {title:'Percentage Calculator',link:'/calculators/percentage-calculator'},
+      {title:'Factorial Calculator',link:'/calculators/factorial-calculator'},
+      {title:'Fractions Calculator',link:'/calculators/fraction-calculator'},
+      {title:'Complex Numbers Calculator',link:'/calculators/complex-numbers'},
+      {title:'Trigonometry Calculator',link:'/calculators/trigonometry-calculator'},
+      {title:'Statistics Calculator',link:'/calculators/statistics-calculator'},
+    ]
+  }
+]
+
+
     const moduloExplanations = {
         basic: {
           title: "Basic Modulo Operation",
@@ -89,12 +110,14 @@ export async function getStaticProps(){
             keyWords,
             description,
             title,
-            canonicalUrl: "https://www.learnmathclass.com/calculators/modulo-calculator"
+            canonicalUrl: "https://www.learnmathclass.com/calculators/modulo-calculator",
+            navigationGroup,
         }
     }
 }
 
-export default function ModuloCalculatorPage({moduloExplanations, keyWords, description, title, canonicalUrl}) {
+export default function ModuloCalculatorPage({moduloExplanations, keyWords, description,
+   title, canonicalUrl,navigationGroup}) {
   return (
     <>
       <Head>
@@ -149,9 +172,44 @@ export default function ModuloCalculatorPage({moduloExplanations, keyWords, desc
       /> 
       <Breadcrumb/>
       <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>Modulo Calculator</h1>
-      <div style={{transform:'scale(0.95)'}}>
-        <ModuloCalculator explanations={moduloExplanations}/>
+     
+        <div style={{
+      display: 'grid',
+      gridTemplateColumns: '10% 90%',
+      gap: '20px',
+      width: '100%'
+   }}>
+      {/* Left column - Sidebar */}
+      <div>
+        <br/>
+       
+         <VerticalButtonGroup 
+            items={navigationGroup}
+            width="250px"       
+            theme='lightBlue'
+            isSticky={true}
+            verticalOffset='200px'
+         />
       </div>
+
+      {/* Right column - Table */}
+      <div>
+         <div style={{width:'100%',margin:'auto'}}>
+          <div style={{transform:'scale(0.95)'}}>
+            <ModuloCalculator explanations={moduloExplanations}/>
+       
+      </div> 
+        
+            <br/>
+           
+            
+         </div>
+      </div>
+   </div>
+     
+      {/* <div style={{transform:'scale(0.95)'}}>
+        <ModuloCalculator explanations={moduloExplanations}/>
+      </div> */}
       <br/>
       <br/>
       <br/>
