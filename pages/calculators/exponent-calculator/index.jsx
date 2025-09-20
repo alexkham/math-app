@@ -145,7 +145,7 @@ export default function ExponentCalculatorPage({ detailInstructions, explanation
         />
       </div>
       
-       <div style={{
+  <div style={{
       display: 'grid',
       gridTemplateColumns: '15% 80%',
       gap: '20px',

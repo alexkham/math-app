@@ -8,8 +8,26 @@ import '../../pages.css';
 import LogarithmCalculator from '@/app/components/calculators/arithmetics/LogarithmCalculator';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import ExplanationDetails from '@/app/components/ExplanationDetails';
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
 
 export default function LogCalculatorPage({ logarithmExplanations, detailInstructionsLogarithms }) {
+
+  const navigationGroup=[
+  {title:'Other Calculators',
+    items:[
+      {title:'Exponent Calculator',link:'/calculators/exponent-calculator'},
+      {title:'Root Calculator',link:'/calculators/root-calculator'},
+      {title:'Modulo Calculator',link:'/calculators/modulo-calculator'},
+      {title:'Logarithm Calculator',link:'/calculators/log-calculator'},
+      {title:'Percentage Calculator',link:'/calculators/percentage-calculator'},
+      {title:'Factorial Calculator',link:'/calculators/factorial-calculator'},
+      // {title:'Fractions Calculator',link:'/calculators/fraction-calculator'},
+      {title:'Complex Numbers Calculator',link:'/calculators/complex-numbers'},
+      {title:'Trigonometry Calculator',link:'/calculators/trigonometry-calculator'},
+      {title:'Statistics Calculator',link:'/calculators/statistics-calculator'},
+    ]
+  }
+]
   return (
     <>
       <Head>
@@ -47,9 +65,48 @@ export default function LogCalculatorPage({ logarithmExplanations, detailInstruc
           title='How to use Logarithm Calculator'
         />
       </div>
+      <br/>
+       <div style={{
+      display: 'grid',
+      gridTemplateColumns: '15% 80%',
+      gap: '20px',
+      width: '100%'
+   }}>
+      {/* Left column - Sidebar */}
+      <div>
+        <br/>
+       
+         <VerticalButtonGroup 
+            items={navigationGroup}
+            width="250px"       
+            theme='lightBlue'
+            isSticky={true}
+            verticalOffset='200px'
+         />
+      </div>
+
+      {/* Right column - Table */}
+      <div>
+         <div style={{width:'100%',margin:'auto',marginLeft:'-50px'}}>
+          <div style={{transform:'scale(0.95)'}}>
+             <LogarithmCalculator explanations={logarithmExplanations}/>
+    
+      </div> 
+          
+        
+            <br/>
+            <br/>
+            <br/>
+           
+            
+         </div>
+      </div>
+   </div>
+
+      {/* <VerticalButtonGroup/>
       <div style={{transform:'scale(0.8)'}}>
         <LogarithmCalculator explanations={logarithmExplanations}/>
-      </div>
+      </div> */}
       <br/>
       <br/>
       <br/>

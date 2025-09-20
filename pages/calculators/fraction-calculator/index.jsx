@@ -6,9 +6,28 @@ import '../../pages.css'
 import FractionCalculator from '@/app/components/calculators/fraction-calculator/FractionCalculator'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import Head from 'next/head'
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
 
 export async function getStaticProps() {
+
+const navigationGroup=[
+  {title:'Other Calculators',
+    items:[
+      {title:'Exponent Calculator',link:'/calculators/exponent-calculator'},
+      {title:'Root Calculator',link:'/calculators/root-calculator'},
+      {title:'Modulo Calculator',link:'/calculators/modulo-calculator'},
+      {title:'Logarithm Calculator',link:'/calculators/log-calculator'},
+      {title:'Percentage Calculator',link:'/calculators/percentage-calculator'},
+      {title:'Factorial Calculator',link:'/calculators/factorial-calculator'},
+      // {title:'Fractions Calculator',link:'/calculators/fraction-calculator'},
+      {title:'Complex Numbers Calculator',link:'/calculators/complex-numbers'},
+      {title:'Trigonometry Calculator',link:'/calculators/trigonometry-calculator'},
+      {title:'Statistics Calculator',link:'/calculators/statistics-calculator'},
+    ]
+  }
+]
+
   const keyWords = ['fractions calculator','calculate the fraction','fractions',
     'decimal to fraction','adding fractions','multiplying fractions','dividing fractions',
     'fraction to decimal','adding and subtracting fractions','fraction and decimal calculator',
@@ -23,12 +42,13 @@ export async function getStaticProps() {
         url: "/calculators/fraction-calculator",
         name: "Fraction Calculator"
       },
-      keyWords
+      keyWords,
+      navigationGroup
     }
   }
 }
 
-export default function FractionCalculatorPage({ seoData, keyWords }) {
+export default function FractionCalculatorPage({ seoData, keyWords,navigationGroup }) {
 
   // const keyWords=['fractions calculator','calculate the fraction','fractions',
   //   'decimal to fraction','adding fractions','multiplying fractions','dividing fractions',
@@ -97,7 +117,47 @@ export default function FractionCalculatorPage({ seoData, keyWords }) {
          />
    <Breadcrumb/>
    <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Fraction Calculator</h1>
-   <FractionCalculator/>
+   
+   <div style={{
+      display: 'grid',
+      gridTemplateColumns: '15% 80%',
+      gap: '20px',
+      width: '100%'
+   }}>
+      {/* Left column - Sidebar */}
+      <div>
+        <br/>
+       
+         <VerticalButtonGroup 
+            items={navigationGroup}
+            width="250px"       
+            theme='lightBlue'
+            isSticky={true}
+            verticalOffset='200px'
+         />
+      </div>
+
+      {/* Right column - Table */}
+      <div>
+         <div style={{width:'100%',margin:'auto',marginLeft:'-50px'}}>
+          <div style={{transform:'scale(0.95)'}}>
+       <FractionCalculator/>
+      </div> 
+          
+        
+            <br/>
+            <br/>
+            <br/>
+           
+            
+         </div>
+      </div>
+   </div>
+     
+   
+   
+   {/* <VerticalButtonGroup/> */}
+   {/* <FractionCalculator/> */}
    <br/>
    <br/>
    <br/>
