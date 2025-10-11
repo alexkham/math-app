@@ -190,75 +190,75 @@ export default function DistributionsCalculatorPage({seoData,sectionsContent , i
     components={[
            
              { id: 1, name: 'Discrete Uniform Distribution Calculator', key: 'uniform', component: DiscreteUniformCalculator,
-               props: {
-        links: {
-          n: 'uniform-n',
-          probability: 'uniform-probability',
-          mean: 'uniform-mean',
-          variance: 'uniform-variance',
-          stdDev: 'uniform-stddev'
-        }
-      }
+      //          props: {
+      //   links: {
+      //     n: 'uniform-n',
+      //     probability: 'uniform-probability',
+      //     mean: 'uniform-mean',
+      //     variance: 'uniform-variance',
+      //     stdDev: 'uniform-stddev'
+      //   }
+      // }
               },
              { id: 2, name: 'Binomial Distribution Calculator', key: 'binomial', component: BinomialCalculator ,
-              props: {
-        links: {
-          q: 'binomial-q',
-          mean: 'binomial-mean',
-          variance: 'binomial-variance',
-          stdDev: 'binomial-stddev',
-          pmf: 'binomial-pmf'
-        }
-      }
+      //         props: {
+      //   links: {
+      //     q: 'binomial-q',
+      //     mean: 'binomial-mean',
+      //     variance: 'binomial-variance',
+      //     stdDev: 'binomial-stddev',
+      //     pmf: 'binomial-pmf'
+      //   }
+      // }
              },
              { id: 3, name: 'Geometric Distribution Calculator', key: 'geometric', component:GeometricDistributionCalculator ,
 
-              props: {
-  links: {
-    q: 'geometric-q',
-    mean: 'geometric-mean',
-    variance: 'geometric-variance',
-    stdDev: 'geometric-stddev',
-    pmf: 'geometric-pmf'
-  }
-},
+//               props: {
+//   links: {
+//     q: 'geometric-q',
+//     mean: 'geometric-mean',
+//     variance: 'geometric-variance',
+//     stdDev: 'geometric-stddev',
+//     pmf: 'geometric-pmf'
+//   }
+// },
  },
      
     { id: 4, name: 'Negative Binomial Distribution Calculator', key: 'negative-binomial', component:NegativeBinomialCalculator ,
 
-              props: {
-  links: {
-    q: 'geometric-q',
-    mean: 'geometric-mean',
-    variance: 'geometric-variance',
-    stdDev: 'geometric-stddev',
-    pmf: 'geometric-pmf'
-  }
-},
+//               props: {
+//   links: {
+//     q: 'geometric-q',
+//     mean: 'geometric-mean',
+//     variance: 'geometric-variance',
+//     stdDev: 'geometric-stddev',
+//     pmf: 'geometric-pmf'
+//   }
+// },
  },
     { id: 5, name: 'Hypergeometric Distribution Calculator', key: 'hypergeometric', component:HypergeometricCalculator ,
 
-              props: {
-  links: {
-    q: 'geometric-q',
-    mean: 'geometric-mean',
-    variance: 'geometric-variance',
-    stdDev: 'geometric-stddev',
-    pmf: 'geometric-pmf'
-  }
-},
+//               props: {
+//   links: {
+//     q: 'geometric-q',
+//     mean: 'geometric-mean',
+//     variance: 'geometric-variance',
+//     stdDev: 'geometric-stddev',
+//     pmf: 'geometric-pmf'
+//   }
+// },
  },
     { id: 6, name: 'Poisson Distribution Calculator', key: 'poisson', component:PoissonCalculator ,
 
-              props: {
-  links: {
-    q: 'geometric-q',
-    mean: 'geometric-mean',
-    variance: 'geometric-variance',
-    stdDev: 'geometric-stddev',
-    pmf: 'geometric-pmf'
-  }
-},
+//               props: {
+//   links: {
+//     q: 'geometric-q',
+//     mean: 'geometric-mean',
+//     variance: 'geometric-variance',
+//     stdDev: 'geometric-stddev',
+//     pmf: 'geometric-pmf'
+//   }
+// },
  },
  
  //  { id: 2, name: 'Two Independent Events Probability Calculator', key: 'probCalc', component: TwoIndependentEventsCalculator },

@@ -84,12 +84,13 @@ export async function getStaticProps(){
           leftTitle: "[Discrete Distributions](!/probability/distributions#discrete)",
           rightTitle: "Continuous Distributions",
           left: [
-            "**Discrete Uniform**:\nEqual probability for finite outcomes",
-            "**Binomial**:\nSuccesses in n trials with probability p each",
-            "**Geometric**:\nTrials until first success (probability p)",
-            "**Poisson**:\nRare events over time interval (rate λ)",
-            "**Negative Binomial**:\nTrials until r-th success (generalization of geometric)",
-            "**Hypergeometric**:\nSampling without replacement from finite population"
+            "[Discrete Uniform](!/probability/distributions/discrete#uniform):\nEqual probability for finite outcomes",
+            "[Binomial](!/probability/distributions/discrete#binomial):\nSuccesses in n trials with probability p each",
+            "[Geometric](!/probability/distributions/discrete#geometric):\nTrials until first success (probability p)",
+            
+            "[Negative Binomial](!/probability/distributions/discrete#negative-binomial):\nTrials until r-th success (generalization of geometric)",
+            "[Hypergeometric](!/probability/distributions/discrete#hypergeometric):\nSampling without replacement from finite population",
+            "[Poisson](!/probability/distributions/discrete#poisson):\nRare events over time interval (rate λ)",
           ],
           right: [
             "**Uniform**:\nEqual likelihood over interval [a,b]",
@@ -107,35 +108,36 @@ export async function getStaticProps(){
         tableTitle: 'Common Discrete Distributions',
         rows: [
           {
-            type: 'Discrete Uniform',
+            type: '[Discrete Uniform](!/probability/distributions/discrete#uniform)',
             description: 'Every outcome in a finite set has exactly the same probability—complete symmetry across the support.',
             examples: 'Roll of a fair six-sided die; drawing one card at random from a deck'
           },
           {
-            type: 'Binomial',
+            type: '[Binomial](!/probability/distributions/discrete#binomial)',
             description: 'Counts the number of successes in a fixed number $n$ of independent Bernoulli($p$) trials; probability varies with the count of successes.',
             examples: 'Number of heads in 10 coin flips; number of defective items in 20 manufactured parts'
           },
           {
-            type: 'Geometric',
+            type: '[Geometric](!/probability/distributions/discrete#geometric)',
             description: 'Measures how many trials are needed until the first success in independent Bernoulli($p$) trials; has the memoryless property.',
             examples: 'Tossing a coin repeatedly until the first head appears; number of attempts before a free-throw is made'
           },
+         
           {
-            type: 'Poisson',
-            description: 'Models the count of rare, independent events occurring in a fixed interval at average rate $\\lambda$; arises as a limit of the binomial with small $p$.',
-            examples: 'Number of emails received per hour; calls arriving at a call center per minute'
-          },
-          {
-            type: 'Negative Binomial',
+            type: '[Negative Binomial](!/probability/distributions/discrete#negative-binomial)',
             description: 'Generalizes the geometric to count trials until the $r$th success in Bernoulli($p$) trials; allows modeling multiple required successes.',
             examples: 'Number of coin tosses until 5 heads occur; calls made until 3 sales are closed'
           },
           {
-            type: 'Hypergeometric',
+            type: '[Hypergeometric](!/probability/distributions/discrete#hypergeometric)',
             description: 'Counts successes in a sample drawn without replacement from a finite population; trials are dependent and probabilities change with each draw.',
             examples: 'Drawing 5 cards from a 52-card deck and counting aces; selecting defective items from a batch without replacement'
-          }
+          },
+           {
+            type: '[Poisson](!/probability/distributions/discrete#poisson)',
+            description: 'Models the count of rare, independent events occurring in a fixed interval at average rate $\\lambda$; arises as a limit of the binomial with small $p$.',
+            examples: 'Number of emails received per hour; calls arriving at a call center per minute'
+          },
         ]
       };
       
@@ -199,7 +201,7 @@ export default function DistributionsPage({sectionsContent,introContent,distribu
           sectionsContent.discrete.before,
           // <GenericTable tableData={discreteDistributionsTypesData}
           // />
-          <GenericTable key={2} tableData={discreteDistributionsTypesData} theme='navyBlue'
+          <GenericTable key={2} tableData={discreteDistributionsTypesData} theme='lightBlue'
           cellFontSize={'16px'}
           headerFontSize={'18px'}/>,
           sectionsContent.discrete.after,
