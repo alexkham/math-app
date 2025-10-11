@@ -520,8 +520,17 @@ const poissonTable=`
 
   const introContent = {
   id: "intro",
-  title: "",
-  content: ``
+  title: "**Discrete Distributions**",
+  content: `
+Discrete distributions are probability models for random variables that can take on a countable set of values—typically integers or a finite set of outcomes. Unlike continuous distributions, which describe phenomena like heights or temperatures that can take any value within a range, discrete distributions characterize scenarios with distinct, separable outcomes: the number of successes in a series of trials, the count of events in a time interval, or selections from a finite population.
+
+Understanding discrete distributions is fundamental to probability theory and problem-solving. Each distribution arises from a specific probabilistic mechanism—whether sampling with or without replacement, counting trials until an event occurs, or modeling rare occurrences. Recognizing these underlying structures allows you to match problems to their appropriate models.
+
+The distinctions matter mathematically.The simplest case—the [discrete uniform distribution](!/probability/distributions/discrete#uniform)—assigns equal probability to each outcome in a finite set, serving as the foundation for understanding more complex models. At the other end, the [negative binomial](!/probability/distributions/discrete#negative-binomial) distribution generalizes the [geometric](!/probability/distributions/discrete#geometric) case by counting trials until a specified number of successes rather than just the first. A [binomial](!/probability/distributions/discrete#binomial) distribution assumes a fixed number of independent trials, while a [geometric](!/probability/distributions/discrete#geometric) distribution counts trials until the first success—superficially similar setups that yield entirely different probability mass functions, moments, and analytical properties. Misidentifying the mechanism leads to incorrect calculations and invalid conclusions.
+The [Poisson](!/probability/distributions/discrete#poisson) distribution, meanwhile, models the occurrence of rare events over a continuous interval—time, space, or volume—making it distinct from the trial-based counting distributions.
+
+This page systematically presents six fundamental discrete distributions, detailing their support, parameters, probability functions, and key statistical properties. Mastering these models equips you to tackle a wide range of probabilistic questions with precision and confidence.
+  `
 }
 
 
@@ -699,8 +708,9 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
           id={introContent.id}
           title={introContent.title}
           content={introContent.content}
-          backgroundColor="#f2f2f2"
-          textColor="#34383c"
+           backgroundColor='#f9fafb'
+          //  "#f2f2f2"
+          textColor="#06357a"
         />
    <br/>
    <br/>
