@@ -1100,7 +1100,7 @@ export default function SingleEventProbabilityCalculator() {
           </div>
           <div style={styles.legendItem}>
             <div style={{...styles.legendColor, background: '#ef4444'}}></div>
-            <span style={styles.legendText}>P(A') = {result.complementPercentage}%</span>
+            <span style={styles.legendText}>P(A&apos;) = {result.complementPercentage}%</span>
           </div>
         </div>
       </div>
@@ -1121,7 +1121,7 @@ export default function SingleEventProbabilityCalculator() {
             <strong>P(A)</strong> - Probability of event A occurring = Favorable outcomes / Total outcomes
           </li>
           <li style={styles.explanationItem}>
-            <strong>P(A')</strong> - Probability of event NOT occurring = 1 - P(A)
+            <strong>P(A&apos;)</strong> - Probability of event NOT occurring = 1 - P(A)
           </li>
           <li style={styles.explanationItem}>
             <strong>Odds in Favor</strong> - Ratio of favorable to unfavorable outcomes
@@ -1207,7 +1207,7 @@ export default function SingleEventProbabilityCalculator() {
                   <div style={{...styles.resultCard, ...styles.complementCard}}>
                     <div style={styles.cardHeader}>Probability of Event NOT Occurring</div>
                     <div style={styles.cardContent}>
-                      <div style={styles.mainValue}>P(A') = {result.complement}</div>
+                      <div style={styles.mainValue}>P(A&apos;) = {result.complement}</div>
                       <div style={styles.percentage}>{result.complementPercentage}%</div>
                     </div>
                   </div>
