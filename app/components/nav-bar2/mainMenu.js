@@ -71,6 +71,7 @@ export const mainMenuStructure = [
           items: [
             { label: 'All Calculators', href: '/calculators' },
             { label: 'Statistics Calculator', href: '/calculators/statistics-calculator' },
+            { label: 'Probability Calculator', href: '/probability/calculator' },
             { label: 'Trigonometry Calculator', href: '/calculators/trigonometry-calculator' },
            
             { label: 'Root Calculator', href: '/calculators/root-calculator' },

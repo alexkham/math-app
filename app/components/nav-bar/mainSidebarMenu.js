@@ -49,6 +49,7 @@ const CustomConvert=()=>(
     ] },
   { id: 2, icon: CustomCalculator, tooltip: 'Calculators', content:[
     { text: 'Statistics Calculator', url: '/calculators/statistics-calculator' },
+    { text: 'Probability Calculator', url: '/probability/calculator' },
     { text: 'Trigonometry Calculator', url: '/calculators/trigonometry-calculator' },
     { text: 'Quadratic Equations  Calculator', url: '/calculators/quadratic-equations' },
     { text: 'Root Calculator', url: '/calculators/root-calculator' },

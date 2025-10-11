@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react'
 
-export default function GenericMultiComponentFrame({ 
+import { useState, useEffect } from 'react'
+import { processContent } from '../utils/contentProcessor'
+
+export default function GenericMultiComponentFrame({
   title,
   subtitle,
   components = [],
@@ -19,6 +21,8 @@ export default function GenericMultiComponentFrame({
   const activeComponentData = components.find(c => c.id === activeComponent)
   const ActiveComponent = activeComponentData?.component
   const currentExplanation = explanations[activeComponentData?.key]
+  const content = activeComponentData?.content
+  const componentProps = activeComponentData?.props || {}
   
   return (
     <div style={{
@@ -45,36 +49,49 @@ export default function GenericMultiComponentFrame({
         display: 'grid',
         gridTemplateColumns: `repeat(auto-fit, minmax(${buttonMinWidth}, 1fr))`,
         gap: '10px',
-        marginBottom: '40px'
+        marginBottom: '0px'
       }}>
-        {components.map((component) => (
-          <button
-            key={component.id}
-            onClick={() => setActiveComponent(component.id)}
-            style={{
-              padding: '12px 16px',
-              border: activeComponent === component.id ? `2px solid ${primaryColor}` : '2px solid #ddd',
-              borderRadius: '8px',
-              backgroundColor: activeComponent === component.id ? primaryColor : '#fff',
-              color: activeComponent === component.id ? '#fff' : '#333',
-              cursor: 'pointer',
-              fontSize: '14px',
-              fontWeight: '500',
-              transition: 'all 0.2s ease',
-              opacity: component.component ? 1 : 0.5
-            }}
-            disabled={!component.component}
-          >
-            {component.name}
-          </button>
-        ))}
+        {components.map((component) => {
+          const isActive = activeComponent === component.id
+          const commonStyle = {
+            padding: '12px 16px',
+            border: isActive ? `2px solid ${primaryColor}` : '2px solid #ddd',
+            borderRadius: '8px',
+            backgroundColor: isActive ? primaryColor : '#fff',
+            color: isActive ? '#fff' : '#333',
+            cursor: 'pointer',
+            fontSize: '14px',
+            fontWeight: '500',
+            transition: 'all 0.2s ease',
+            opacity: (component.component || component.href || component.content) ? 1 : 0.5,
+            textDecoration: 'none',
+            display: 'block',
+            textAlign: 'center'
+          }
+          
+          if (component.href) {
+            return (
+              <a key={component.id} href={component.href} style={commonStyle}>
+                {component.name}
+              </a>
+            )
+          }
+          
+          return (
+            <button key={component.id} onClick={() => setActiveComponent(component.id)} style={commonStyle} disabled={!component.component && !component.content}>
+              {component.name}
+            </button>
+          )
+        })}
       </nav>
       
       <main>
         {ActiveComponent ? (
           currentExplanation ? 
-            <ActiveComponent explanations={currentExplanation} /> : 
-            <ActiveComponent />
+            <ActiveComponent explanations={currentExplanation} {...componentProps} /> : 
+            <ActiveComponent {...componentProps} />
+        ) : content ? (
+          <div>{processContent(content)}</div>
         ) : (
           <div style={{
             textAlign: 'center',
