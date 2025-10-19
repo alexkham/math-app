@@ -8,11 +8,12 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import { distributionsDiagramsData } from '@/app/api/db/diagrams/probability/distributions'
 
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+  const keyWords=['bernoulli trial','bernoulli experiment','','','']
 
 
   const uniformTable=`
@@ -438,7 +439,94 @@ const poissonTable=`
 </body>
 </html>
 `
-
+const occurenceMatrix=`
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discrete Distributions Occurrence Matrix</title>
+</head>
+<body style="margin: 20px; background-color: #f5f5f5; font-family: Arial, sans-serif;">
+<table style="border-collapse: collapse; width: 100%; background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+<thead>
+<tr>
+<th style="background-color: #2c3e50; color: white; padding: 15px; text-align: left; font-weight: bold;">Distribution</th>
+<th style="background-color: #2c3e50; color: white; padding: 15px; text-align: center; font-weight: bold;">Equal Probabilities</th>
+<th style="background-color: #2c3e50; color: white; padding: 15px; text-align: center; font-weight: bold;">Fixed n, Independent Trials</th>
+<th style="background-color: #2c3e50; color: white; padding: 15px; text-align: center; font-weight: bold;">Without Replacement</th>
+<th style="background-color: #2c3e50; color: white; padding: 15px; text-align: center; font-weight: bold;">Infinite Trials</th>
+<th style="background-color: #2c3e50; color: white; padding: 15px; text-align: center; font-weight: bold;">Until First Success</th>
+<th style="background-color: #2c3e50; color: white; padding: 15px; text-align: center; font-weight: bold;">Until r-th Success</th>
+<th style="background-color: #2c3e50; color: white; padding: 15px; text-align: center; font-weight: bold;">Constant Rate (λ)</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background-color: #f8f9fa;">
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Discrete Uniform</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+</tr>
+<tr>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Binomial</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+</tr>
+<tr style="background-color: #f8f9fa;">
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Hypergeometric</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+</tr>
+<tr>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Geometric</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+</tr>
+<tr style="background-color: #f8f9fa;">
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Negative Binomial</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+</tr>
+<tr>
+<td style="padding: 12px 15px; font-weight: bold; color: #2c3e50;">Poisson</td>
+<td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+<td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+<td style="padding: 12px 15px; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
+`
 
 
 
@@ -497,6 +585,76 @@ const poissonTable=`
   
     },
   
+    bernoulli:{
+  
+      title:`Bernoulli Trial `,
+      content:`
+## Understanding the Bernoulli Trial: Two Perspectives
+
+There are **two ways to view a Bernoulli trial**:
+
+1. As a **single experiment**
+2. As a **distribution**
+
+In this section, we will focus on the **Bernoulli trial as a concept**, not as a standalone probability distribution. We won’t be analyzing Bernoulli as a separate type of distribution, but rather clarifying how it fits into the broader picture.
+
+###  **Bernoulli Trial** → **Single Experiment**
+
+A **Bernoulli trial** is a **single random experiment** with exactly **two possible outcomes**:
+
+* **Success (1)** with probability ( $p$ )
+* **Failure (0)** with probability ( $1 - p$ )
+
+This setup makes it the most basic probabilistic experiment. A classic example is a **single coin flip**, where heads is defined as success. The outcome is binary, and the probabilities are fixed.
+
+
+`,
+      before:`
+## Understanding the Bernoulli Trial: Two Perspectives
+
+There are **two ways to view a Bernoulli trial**:
+
+1. As a **single experiment**
+2. As a **distribution**
+
+In this section, we will focus on the **Bernoulli trial as a concept**, not as a standalone probability distribution. We won’t be analyzing Bernoulli as a separate type of distribution, but rather clarifying how it fits into the broader picture.
+
+###  **Bernoulli Trial** → **Single Experiment**
+
+A **Bernoulli trial** is a **single random experiment** with exactly **two possible outcomes**:
+
+* **Success (1)** with probability ( $p$ )
+* **Failure (0)** with probability ( $1 - p$ )
+
+This setup makes it the most basic probabilistic experiment. A classic example is a **single coin flip**, where heads is defined as success. The outcome is binary, and the probabilities are fixed.
+      `,
+      after:`
+###  Bernoulli Trial as a Building Block for Discrete Distributions Models
+
+What makes the Bernoulli trial so fundamental is that it **forms the core mechanism behind many important discrete probability distributions**. Once you understand the behavior of a single Bernoulli trial, you can extend it to more complex models by simply **repeating the trial under certain rules**.
+
+Here’s how it builds into larger structures:
+
+* [Binomial distribution](!/probability/distributions/discrete#binomial): Repeats the Bernoulli trial ( n ) times independently and counts how many successes occur.
+* [Geometric distribution](!/probability/distributions/discrete#geometric): Repeats the trial until the **first success**.
+* [Negative binomial distribution](!/probability/distributions/discrete#negative-binomial): Repeats until the **r-th success**.
+* Even the [hypergeometric](!/probability/distributions/discrete#hypergeometric) and some **Markov models** borrow the concept of binary outcomes, though with modified assumptions (like dependence or sampling without replacement).
+
+This modularity makes the Bernoulli trial a **conceptual building block** — much like a “unit of randomness” — that helps us understand how randomness scales when we repeat simple actions under defined conditions.
+
+The power of the Bernoulli trial is not in its complexity — it is in its ability to **scale up into powerful probabilistic models** that describe everything from coin tosses to quality control in manufacturing.
+      `,
+  
+    },
+  
+    decide:{
+  
+      title:`6 Distribution Types: how to decide`,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
     obj5:{
   
       title:``,
@@ -505,7 +663,6 @@ const poissonTable=`
       after:``,
   
     },
-  
     obj5:{
   
       title:``,
@@ -552,7 +709,8 @@ This page systematically presents six fundamental discrete distributions, detail
       geometricTable,
       negativeBinomialTable,
       hypergeometricTable,
-      poissonTable
+      poissonTable,
+      occurenceMatrix,
         
        }
     }
@@ -564,10 +722,30 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
       geometricTable,
       negativeBinomialTable,
       hypergeometricTable,
-      poissonTable}) {
+      poissonTable,
+    occurenceMatrix,
+  }) {
 
     
   const genericSections=[
+     {
+        id:'bernoulli',
+        title:sectionsContent.bernoulli.title,
+        link:'',
+        content:[
+          sectionsContent.bernoulli.before,
+           <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["bernoulli experiment"].svg }} key="table" />,
+          sectionsContent.bernoulli.after,
+        ]
+    },
+     {
+        id:'decide',
+        title:sectionsContent.decide.title,
+        link:'',
+        content:[
+            <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: occurenceMatrix }} key="table" />,
+        ]
+    },
     {
         id:'uniform',
         title:sectionsContent.uniform.title,
@@ -582,6 +760,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         title:sectionsContent.binomial.title,
         link:'',
         content:[
+              <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["binomial distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: binomialTable }} key="table" />,
                sectionsContent.binomial.after,
         
@@ -593,6 +772,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         title:sectionsContent.geometric.title,
         link:'',
         content:[
+              <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["geometric distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: geometricTable }} key="table" />,
               sectionsContent.geometric.after,
             ]
@@ -602,6 +782,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         title:sectionsContent.negative.title,
         link:'',
         content:[
+              <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html:distributionsDiagramsData["negative binomial distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: negativeBinomialTable }} key="table" />,
                sectionsContent.negative.after,
             ]
