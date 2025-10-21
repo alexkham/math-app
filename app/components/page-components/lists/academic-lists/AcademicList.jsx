@@ -865,7 +865,7 @@ export default function AcademicList({
       className={className}
       id={id}
     >
-      <style>
+      {/* <style>
         {`
           .markdown-link {
             text-decoration: none;
@@ -876,7 +876,18 @@ export default function AcademicList({
             ${linkHoverCss}
           }
         `}
-      </style>
+      </style> */}
+
+
+      <style jsx>{`
+  .markdown-link {
+    text-decoration: none;
+  }
+  
+  .markdown-link:hover {
+    text-decoration: none;
+  }
+`}</style>
       
       <div>
         <h1 style={currentTheme.heading}>{processContent(heading)}</h1>

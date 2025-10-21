@@ -3111,7 +3111,18 @@ const TrigonometryApp = ({ functions = FUNCTIONS }) => {
           >
             {showExplanation ? 'Hide' : 'Show'} Explanations
           </button>
+
           <div style={{ 
+            padding: '8px 12px', 
+            backgroundColor: '#f0f8ff',
+            borderRadius: '6px',
+            fontSize: '11px',
+            color: '#1e40af',
+            border: '1px solid #bfdbfe'
+          }}>
+            <span><strong>Keyboard:</strong> Press 1-4 to select quadrants or click the corresponding button</span>
+          </div>
+          {/* <div style={{ 
             padding: '8px 12px', 
             backgroundColor: '#f0f8ff',
             borderRadius: '6px',
@@ -3126,7 +3137,7 @@ const TrigonometryApp = ({ functions = FUNCTIONS }) => {
           <span><strong>Keyboard:</strong> Press 1-4 to select quadrants or clich the corresponding button </span>
          
         </div>
-          </div>
+          </div> */}
         </div>
       </header>
       

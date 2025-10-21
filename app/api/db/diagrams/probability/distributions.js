@@ -403,7 +403,7 @@ export const distributionsDiagramsData={
     },
     "binomial distribution":{
         svg:`
-        <svg viewBox="0 0 1100 900" style="margin-left:200px;" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 1000 800"  xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
   <rect width="900" height="800" fill="#f5f5f5"/>
   
@@ -580,7 +580,7 @@ export const distributionsDiagramsData={
   </text>
 </svg>
         `,
-        explanation:``,
+        explanation:`some explanation`,
         links:[
             {text:``,url:``},
             {text:``,url:``},
@@ -1155,8 +1155,168 @@ export const distributionsDiagramsData={
             {text:``,url:``},
         ]
     },
-    "identity name":{
-        svg:``,
+    "poisson distribution":{
+        svg:`
+        <svg viewBox="0 0 1100 900" style="margin-left:200px;" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="900" height="800" fill="#f5f5f5"/>
+  
+  <!-- Title -->
+  <text x="450" y="35" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    Poisson Distribution
+  </text>
+  
+  <!-- Parameters box -->
+  <rect x="250" y="50" width="400" height="60" fill="#5b7a9b" stroke="#4a6178" stroke-width="2" rx="8"/>
+  <text x="450" y="78" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">
+    Count events in fixed interval (λ = 3)
+  </text>
+  <text x="450" y="98" font-family="Arial, sans-serif" font-size="13" fill="white" text-anchor="middle">
+    (λ = average rate of events per interval)
+  </text>
+  
+  <!-- Concept illustration -->
+  <text x="450" y="145" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    RANDOM EVENTS OCCURRING IN TIME/SPACE
+  </text>
+  
+  <!-- Time interval -->
+  <rect x="100" y="170" width="600" height="60" fill="#e8f4f8" stroke="#4a90a4" stroke-width="2" rx="5"/>
+  <text x="400" y="195" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50" text-anchor="middle">
+    Fixed Interval (time or space)
+  </text>
+  
+  <!-- Random events marked on interval -->
+  <circle cx="150" cy="210" r="8" fill="#e74c3c"/>
+  <circle cx="250" cy="210" r="8" fill="#e74c3c"/>
+  <circle cx="320" cy="210" r="8" fill="#e74c3c"/>
+  <circle cx="420" cy="210" r="8" fill="#e74c3c"/>
+  <circle cx="530" cy="210" r="8" fill="#e74c3c"/>
+  <circle cx="610" cy="210" r="8" fill="#e74c3c"/>
+  <circle cx="660" cy="210" r="8" fill="#e74c3c"/>
+  
+  <text x="400" y="225" font-family="Arial, sans-serif" font-size="12" fill="#e74c3c" text-anchor="middle">
+    ● ● ● ● ● ● ● random events
+  </text>
+  
+  <!-- Examples box -->
+  <rect x="100" y="250" width="600" height="70" fill="#fff8e1" stroke="#ffb74d" stroke-width="2" rx="5"/>
+  <text x="400" y="272" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#6d4c41" text-anchor="middle">
+    Examples:
+  </text>
+  <text x="400" y="292" font-family="Arial, sans-serif" font-size="12" fill="#6d4c41" text-anchor="middle">
+    • # of customers arriving per hour  • # of emails received per day
+  </text>
+  <text x="400" y="310" font-family="Arial, sans-serif" font-size="12" fill="#6d4c41" text-anchor="middle">
+    • # of mutations in DNA sequence  • # of typos per page
+  </text>
+  
+  <!-- Arrow down -->
+  <line x1="450" y1="330" x2="450" y2="360" stroke="#34495e" stroke-width="3"/>
+  <polygon points="450,360 445,350 455,350" fill="#34495e"/>
+  
+  <!-- Distribution title -->
+  <text x="450" y="390" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    PROBABILITY DISTRIBUTION: P(X = k)
+  </text>
+  
+  <!-- Distribution bars - calculated for λ=3 -->
+  <!-- X=0 -->
+  <rect x="80" y="538" width="60" height="22" fill="#b84a4a"/>
+  <text x="110" y="580" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50" text-anchor="middle">0</text>
+  
+  <!-- X=1 -->
+  <rect x="155" y="494" width="60" height="66" fill="#c86b5b"/>
+  <text x="185" y="580" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50" text-anchor="middle">1</text>
+  
+  <!-- X=2 -->
+  <rect x="230" y="460" width="60" height="100" fill="#d88b6b"/>
+  <text x="260" y="580" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50" text-anchor="middle">2</text>
+  
+  <!-- X=3 -->
+  <rect x="305" y="460" width="60" height="100" fill="#8b9b7b"/>
+  <text x="335" y="580" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50" text-anchor="middle">3</text>
+  
+  <!-- X=4 -->
+  <rect x="380" y="485" width="60" height="75" fill="#6b8b7b"/>
+  <text x="410" y="580" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50" text-anchor="middle">4</text>
+  
+  <!-- X=5 -->
+  <rect x="455" y="515" width="60" height="45" fill="#4b7a6b"/>
+  <text x="485" y="580" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50" text-anchor="middle">5</text>
+  
+  <!-- X=6 -->
+  <rect x="530" y="538" width="60" height="22" fill="#3d7a54"/>
+  <text x="560" y="580" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50" text-anchor="middle">6</text>
+  
+  <!-- X=7 -->
+  <rect x="605" y="550" width="60" height="10" fill="#4a7a5a"/>
+  <text x="635" y="580" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50" text-anchor="middle">7</text>
+  
+  <!-- ... continuation -->
+  <text x="690" y="555" font-family="Arial, sans-serif" font-size="16" fill="#7a8a9b" text-anchor="middle">
+    ...
+  </text>
+  
+  <!-- Axes -->
+  <line x1="70" y1="560" x2="710" y2="560" stroke="#2c3e50" stroke-width="2"/>
+  <line x1="70" y1="430" x2="70" y2="560" stroke="#2c3e50" stroke-width="2"/>
+  
+  <!-- Axis labels -->
+  <text x="390" y="610" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    Number of Events (k)
+  </text>
+  <text x="30" y="495" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50" text-anchor="middle" transform="rotate(-90, 30, 495)">
+    Probability
+  </text>
+  
+  <!-- Note box -->
+  <rect x="680" y="320" width="210" height="280" fill="#fff8e1" stroke="#ffb74d" stroke-width="2" rx="8"/>
+  <text x="785" y="355" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#6d4c41" text-anchor="middle">
+    Key Properties:
+  </text>
+  <text x="785" y="390" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Discrete distribution
+  </text>
+  <text x="785" y="425" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Models rare events
+  </text>
+  <text x="785" y="460" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Events independent
+  </text>
+  <text x="785" y="495" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • X can be 0, 1, 2, ...
+  </text>
+  <text x="785" y="530" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • E(X) = λ
+  </text>
+  <text x="785" y="565" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Var(X) = λ
+  </text>
+  
+  <!-- Formula -->
+  <text x="450" y="655" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50" text-anchor="middle">
+    X ~ Poisson(λ)
+  </text>
+  
+  <!-- Example note -->
+  <text x="450" y="680" font-family="Arial, sans-serif" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">
+    Example shown: λ=3, right-skewed distribution
+  </text>
+  
+  <!-- Formula box - BIG CARD -->
+  <rect x="100" y="700" width="700" height="90" fill="#ffffff" stroke="#5b7a9b" stroke-width="4" rx="10"/>
+  <text x="450" y="730" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    PROBABILITY FORMULA:
+  </text>
+  <text x="450" y="762" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    P(X = k) = (λ<tspan baseline-shift="super" font-size="16">k</tspan> × e<tspan baseline-shift="super" font-size="16">-λ</tspan>) / k!
+  </text>
+  <text x="450" y="782" font-family="Arial, sans-serif" font-size="14" fill="#4a5a6a" text-anchor="middle">
+    where λ is the average rate of events per interval
+  </text>
+</svg>
+        `,
         explanation:``,
         links:[
             {text:``,url:``},

@@ -751,6 +751,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         title:sectionsContent.uniform.title,
         link:'',
         content:[
+            <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["discrete uniform distribution"].svg }} key="table" />,
             <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: uniformTable }} key="table" />,
             sectionsContent.uniform.after,
         ]
@@ -801,6 +802,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         title:sectionsContent.poisson.title,
         link:'',
         content:[
+              <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["poisson distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: poissonTable }} key="table" />,
                sectionsContent.poisson.after,
             ]
