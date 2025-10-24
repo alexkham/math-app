@@ -405,7 +405,7 @@ export const distributionsDiagramsData={
         svg:`
         <svg viewBox="0 0 1000 800"  xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
-  <rect width="900" height="800" fill="#f5f5f5"/>
+  <rect width="900" height="700" fill="#f5f5f5"/>
   
   <!-- Title -->
   <text x="450" y="35" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#2c3e50" text-anchor="middle">
@@ -580,7 +580,17 @@ export const distributionsDiagramsData={
   </text>
 </svg>
         `,
-        explanation:`some explanation`,
+        explanation:`## Binomial Distribution
+⋅ Fixed number of [Bernoulli](!/probability/distributions/discrete#bernoulli) trials: $n$  
+⋅ Each trial is independent.  
+⋅ Each trial has two outcomes: success or failure.  
+⋅ Success probability is constant: $p$.  
+⋅ Failure probability: $q = 1 - p$.  
+<p style="background-color: yellow;width: 50%; font-weight: bold;margin:0px;">⋅ Random variable X counts successes.</p>⋅ Distribution is over: $\\{0, 1, \\ldots, n\\}$  
+⋅ Probability function: $P(X = k) = \\binom{n}{k} p^k q^{n - k}$  
+⋅ Parameters: $n \\in \\mathbb{N},\\ 0 < p < 1$  
+⋅ Notation: $X \\sim \\text{Bin}(n, p)$
+ `,
         links:[
             {text:``,url:``},
             {text:``,url:``},
@@ -589,7 +599,7 @@ export const distributionsDiagramsData={
     },
     "geometric distribution":{
         svg:`
-        <svg viewBox="0 0 1100 900" style="margin-left:200px;" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 900 700"  xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
   <rect width="900" height="800" fill="#f5f5f5"/>
   
@@ -774,7 +784,16 @@ export const distributionsDiagramsData={
   </text>
 </svg>
         `,
-        explanation:``,
+        explanation:`## Geometric Distribution
+⋅ Sequence of independent [Bernoulli](!/probability/distributions/discrete#bernoulli) trials.  
+⋅ Each trial has two outcomes: success or failure.  
+⋅ Success probability is constant: $p$.  
+⋅ Failure probability: $q = 1 - p$.  
+<p style="background-color: yellow;width: 75%; font-weight: bold;margin:0px;">⋅ Random variable X counts number of trials until the first success.</p>⋅ Support: $\\{1, 2, \\ldots\\}$  
+⋅ Probability function: $P(X = k) = (1 - p)^{k - 1} \\cdot p$  
+⋅ Parameters: $0 < p < 1$  
+⋅ Notation: $X \\sim \\text{Geom}(p)$
+ `,
         links:[
             {text:``,url:``},
             {text:``,url:``},
@@ -783,7 +802,7 @@ export const distributionsDiagramsData={
     },
     "negative binomial distribution":{
         svg:`
-        <svg viewBox="0 0 1100 900" style="margin-left:200px;" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 900 700"  xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
   <rect width="900" height="800" fill="#f5f5f5"/>
   
@@ -992,7 +1011,17 @@ export const distributionsDiagramsData={
   </text>
 </svg>
         `,
-        explanation:``,
+        explanation:`## Negative Binomial Distribution
+⋅ Sequence of independent [Bernoulli](!/probability/distributions/discrete#bernoulli) trials.  
+⋅ Each trial has two outcomes: success or failure.  
+⋅ Success probability is constant: $p$.  
+⋅ Failure probability: $q = 1 - p$.  
+<p style="background-color: yellow;width: 85%; font-weight: bold;margin:0px;">⋅ Random variable X counts the number of trials needed to get r successes.</p>⋅ Trials are independent and identically distributed.  
+⋅ Support: $\\{r, r+1, r+2, \\ldots\\}$.  
+⋅ Probability function: $P(X = k) = \\binom{k - 1}{r - 1} p^r q^{k - r}$.  
+⋅ Parameters: $r \\in \\mathbb{N},\\ 0 < p < 1$.  
+⋅ Notation: $X \\sim \\text{NegBin}(r, p)$.
+`,
         links:[
             {text:``,url:``},
             {text:``,url:``},
@@ -1001,7 +1030,7 @@ export const distributionsDiagramsData={
     },
     "discrete uniform distribution":{
         svg:`
-        <svg viewBox="0 0 1100 900" style="margin-left:200px;" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 1100 900"  xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
   <rect width="900" height="700" fill="#f5f5f5"/>
   
@@ -1148,7 +1177,16 @@ export const distributionsDiagramsData={
   </text>
 </svg>
         `,
-        explanation:``,
+        explanation:`## Discrete Uniform Distribution
+⋅ Finite set of $n$ equally likely outcomes.  
+⋅ Each outcome has the same probability.  
+<p style="background-color: yellow;width: 90%; font-weight: bold;margin:0px;">⋅ Random variable X takes values uniformly from the set of integers {a, a+1, ..., b}.</p>⋅ All values between $a$ and $b$ are integers.  
+⋅ Support: $\\{a, a+1, \\ldots, b\\}$ where $b \\geq a$.  
+⋅ Probability function: $P(X = k) = \\dfrac{1}{b - a + 1}$.  
+⋅ Parameters: $a, b \\in \\mathbb{Z},\\ a \\leq b$.  
+⋅ Notation: $X \\sim \\text{Unif}(a, b)$.
+
+        `,
         links:[
             {text:``,url:``},
             {text:``,url:``},
@@ -1157,7 +1195,7 @@ export const distributionsDiagramsData={
     },
     "poisson distribution":{
         svg:`
-        <svg viewBox="0 0 1100 900" style="margin-left:200px;" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 900 700"  xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
   <rect width="900" height="800" fill="#f5f5f5"/>
   
@@ -1317,16 +1355,242 @@ export const distributionsDiagramsData={
   </text>
 </svg>
         `,
-        explanation:``,
+        explanation:`## Poisson Distribution
+⋅ Models the number of events occurring in a fixed interval of time or space.  
+⋅ Events occur independently.  
+⋅ Events occur at a constant average rate $\lambda$.  
+<p style="background-color: yellow;width: 80%; font-weight: bold;margin:0px;">⋅ Random variable X counts the number of events in the interval.</p>⋅ Events cannot occur simultaneously (no clustering).  
+⋅ Support: $\\{0, 1, 2, \\ldots\\}$.  
+⋅ Probability function: $P(X = k) = \\dfrac{\\lambda^k e^{-\\lambda}}{k!}$.  
+⋅ Parameter: $\\lambda > 0$.  
+⋅ Notation: $X \\sim \\text{Poisson}(\\lambda)$.
+
+        `,
         links:[
             {text:``,url:``},
             {text:``,url:``},
             {text:``,url:``},
         ]
     },
-    "identity name":{
-        svg:``,
-        explanation:``,
+    "hypergeometric distribution":{
+        svg:`
+        <svg viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="900" height="900" fill="#f5f5f5"/>
+  
+  <!-- Title -->
+  <text x="450" y="35" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    Hypergeometric Distribution
+  </text>
+  
+  <!-- Parameters box -->
+  <rect x="200" y="50" width="500" height="80" fill="#5b7a9b" stroke="#4a6178" stroke-width="2" rx="8"/>
+  <text x="450" y="78" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">
+    Sampling WITHOUT replacement from finite population
+  </text>
+  <text x="450" y="100" font-family="Arial, sans-serif" font-size="13" fill="white" text-anchor="middle">
+    N = 20 total items, K = 8 successes, n = 5 drawn
+  </text>
+  <text x="450" y="118" font-family="Arial, sans-serif" font-size="13" fill="white" text-anchor="middle">
+    X = number of successes in sample
+  </text>
+  
+  <!-- Population -->
+  <text x="450" y="165" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    POPULATION (N = 20)
+  </text>
+  
+  <rect x="100" y="180" width="700" height="130" fill="#e8f4f8" stroke="#4a90a4" stroke-width="2" rx="8"/>
+  
+  <text x="120" y="203" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#3d7a54">K = 8 successes:</text>
+  
+  <!-- Success items - First row -->
+  <circle cx="140" cy="235" r="18" fill="#3d7a54" stroke="#2d5a3d" stroke-width="2"/>
+  <text x="140" y="242" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">S</text>
+  
+  <circle cx="190" cy="235" r="18" fill="#3d7a54" stroke="#2d5a3d" stroke-width="2"/>
+  <text x="190" y="242" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">S</text>
+  
+  <circle cx="240" cy="235" r="18" fill="#3d7a54" stroke="#2d5a3d" stroke-width="2"/>
+  <text x="240" y="242" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">S</text>
+  
+  <circle cx="290" cy="235" r="18" fill="#3d7a54" stroke="#2d5a3d" stroke-width="2"/>
+  <text x="290" y="242" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">S</text>
+  
+  <circle cx="340" cy="235" r="18" fill="#3d7a54" stroke="#2d5a3d" stroke-width="2"/>
+  <text x="340" y="242" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">S</text>
+  
+  <circle cx="390" cy="235" r="18" fill="#3d7a54" stroke="#2d5a3d" stroke-width="2"/>
+  <text x="390" y="242" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">S</text>
+  
+  <circle cx="440" cy="235" r="18" fill="#3d7a54" stroke="#2d5a3d" stroke-width="2"/>
+  <text x="440" y="242" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">S</text>
+  
+  <circle cx="490" cy="235" r="18" fill="#3d7a54" stroke="#2d5a3d" stroke-width="2"/>
+  <text x="490" y="242" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">S</text>
+  
+  <text x="550" y="203" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#b84a4a">N - K = 12 failures:</text>
+  
+  <!-- Failure items - Second row -->
+  <circle cx="140" cy="275" r="18" fill="#b84a4a" stroke="#983838" stroke-width="2"/>
+  <text x="140" y="282" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">F</text>
+  
+  <circle cx="190" cy="275" r="18" fill="#b84a4a" stroke="#983838" stroke-width="2"/>
+  <text x="190" y="282" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">F</text>
+  
+  <circle cx="240" cy="275" r="18" fill="#b84a4a" stroke="#983838" stroke-width="2"/>
+  <text x="240" y="282" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">F</text>
+  
+  <circle cx="290" cy="275" r="18" fill="#b84a4a" stroke="#983838" stroke-width="2"/>
+  <text x="290" y="282" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">F</text>
+  
+  <circle cx="340" cy="275" r="18" fill="#b84a4a" stroke="#983838" stroke-width="2"/>
+  <text x="340" y="282" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">F</text>
+  
+  <circle cx="390" cy="275" r="18" fill="#b84a4a" stroke="#983838" stroke-width="2"/>
+  <text x="390" y="282" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">F</text>
+  
+  <circle cx="440" cy="275" r="18" fill="#b84a4a" stroke="#983838" stroke-width="2"/>
+  <text x="440" y="282" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">F</text>
+  
+  <circle cx="490" cy="275" r="18" fill="#b84a4a" stroke="#983838" stroke-width="2"/>
+  <text x="490" y="282" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">F</text>
+  
+  <circle cx="540" cy="275" r="18" fill="#b84a4a" stroke="#983838" stroke-width="2"/>
+  <text x="540" y="282" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">F</text>
+  
+  <circle cx="590" cy="275" r="18" fill="#b84a4a" stroke="#983838" stroke-width="2"/>
+  <text x="590" y="282" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">F</text>
+  
+  <circle cx="640" cy="275" r="18" fill="#b84a4a" stroke="#983838" stroke-width="2"/>
+  <text x="640" y="282" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">F</text>
+  
+  <circle cx="690" cy="275" r="18" fill="#b84a4a" stroke="#983838" stroke-width="2"/>
+  <text x="690" y="282" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">F</text>
+  
+  <!-- Arrow down -->
+  <line x1="450" y1="320" x2="450" y2="350" stroke="#34495e" stroke-width="3"/>
+  <polygon points="450,350 445,340 455,340" fill="#34495e"/>
+  <text x="580" y="340" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#34495e">
+    Draw n = 5 WITHOUT replacement
+  </text>
+  
+  <!-- Sample -->
+  <text x="450" y="380" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    SAMPLE (n = 5)
+  </text>
+  
+  <rect x="250" y="395" width="400" height="90" fill="#fff8e1" stroke="#ffb74d" stroke-width="2" rx="8"/>
+  
+  <circle cx="300" cy="430" r="18" fill="#3d7a54" stroke="#2d5a3d" stroke-width="2"/>
+  <text x="300" y="437" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">S</text>
+  
+  <circle cx="370" cy="430" r="18" fill="#b84a4a" stroke="#983838" stroke-width="2"/>
+  <text x="370" y="437" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">F</text>
+  
+  <circle cx="440" cy="430" r="18" fill="#3d7a54" stroke="#2d5a3d" stroke-width="2"/>
+  <text x="440" y="437" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">S</text>
+  
+  <circle cx="510" cy="430" r="18" fill="#3d7a54" stroke="#2d5a3d" stroke-width="2"/>
+  <text x="510" y="437" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">S</text>
+  
+  <circle cx="580" cy="430" r="18" fill="#b84a4a" stroke="#983838" stroke-width="2"/>
+  <text x="580" y="437" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">F</text>
+  
+  <text x="450" y="470" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50" text-anchor="middle">
+    Example: X = 3 successes in sample
+  </text>
+  
+  <!-- Arrow to distribution -->
+  <line x1="450" y1="495" x2="450" y2="525" stroke="#34495e" stroke-width="3"/>
+  <polygon points="450,525 445,515 455,515" fill="#34495e"/>
+  
+  <!-- Distribution title -->
+  <text x="350" y="555" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    PROBABILITY DISTRIBUTION: P(X = k)
+  </text>
+  
+  <!-- Distribution bars -->
+  <!-- X=0 -->
+  <rect x="80" y="685" width="60" height="20" fill="#b84a4a"/>
+  <text x="110" y="725" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50" text-anchor="middle">0</text>
+  
+  <!-- X=1 -->
+  <rect x="155" y="640" width="60" height="65" fill="#c86b5b"/>
+  <text x="185" y="725" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50" text-anchor="middle">1</text>
+  
+  <!-- X=2 -->
+  <rect x="230" y="590" width="60" height="115" fill="#d88b6b"/>
+  <text x="260" y="725" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50" text-anchor="middle">2</text>
+  
+  <!-- X=3 -->
+  <rect x="305" y="575" width="60" height="130" fill="#8b9b7b"/>
+  <text x="335" y="725" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50" text-anchor="middle">3</text>
+  
+  <!-- X=4 -->
+  <rect x="380" y="620" width="60" height="85" fill="#6b8b7b"/>
+  <text x="410" y="725" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50" text-anchor="middle">4</text>
+  
+  <!-- X=5 -->
+  <rect x="455" y="675" width="60" height="30" fill="#3d7a54"/>
+  <text x="485" y="725" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50" text-anchor="middle">5</text>
+  
+  <!-- Axes -->
+  <line x1="70" y1="705" x2="525" y2="705" stroke="#2c3e50" stroke-width="2"/>
+  <line x1="70" y1="565" x2="70" y2="705" stroke="#2c3e50" stroke-width="2"/>
+  
+  <!-- Axis labels -->
+  <text x="297" y="755" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    Number of Successes in Sample (k)
+  </text>
+  <text x="30" y="635" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50" text-anchor="middle" transform="rotate(-90, 30, 635)">
+    Probability
+  </text>
+  
+  <!-- Note box -->
+  <rect x="570" y="555" width="310" height="190" fill="#fff8e1" stroke="#ffb74d" stroke-width="2" rx="8"/>
+  <text x="725" y="585" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#6d4c41" text-anchor="middle">
+    Key Properties:
+  </text>
+  <text x="725" y="615" font-family="Arial, sans-serif" font-size="14" fill="#6d4c41" text-anchor="middle">
+    • Sampling WITHOUT replacement
+  </text>
+  <text x="725" y="643" font-family="Arial, sans-serif" font-size="14" fill="#6d4c41" text-anchor="middle">
+    • Finite population (N items)
+  </text>
+  <text x="725" y="671" font-family="Arial, sans-serif" font-size="14" fill="#6d4c41" text-anchor="middle">
+    • K successes, N-K failures
+  </text>
+  <text x="725" y="699" font-family="Arial, sans-serif" font-size="14" fill="#6d4c41" text-anchor="middle">
+    • Draw n items
+  </text>
+  <text x="725" y="727" font-family="Arial, sans-serif" font-size="14" fill="#6d4c41" text-anchor="middle">
+    • E(X) = n(K/N)
+  </text>
+  
+  <!-- Formula box -->
+  <rect x="100" y="780" width="700" height="110" fill="#ffffff" stroke="#5b7a9b" stroke-width="4" rx="10"/>
+  <text x="450" y="810" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    PROBABILITY FORMULA:
+  </text>
+  <text x="450" y="842" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    P(X = k) = [C(K, k) × C(N-K, n-k)] / C(N, n)
+  </text>
+  <text x="450" y="870" font-family="Arial, sans-serif" font-size="14" fill="#4a5a6a" text-anchor="middle">
+    Choose k from K successes and (n-k) from (N-K) failures, divided by all ways to choose n from N
+  </text>
+</svg>
+        `,
+        explanation:`## Hypergeometric Distribution
+⋅ Population of size $N$ contains two types: successes and failures.  
+⋅ Number of successes in the population: $K$.  
+⋅ Number of draws (without replacement): $n$.  
+<p style="background-color: yellow;width: 80%; font-weight: bold;margin:0px;">⋅ Random variable X counts the number of successes in the sample.</p>⋅ Trials are not independent (sampling without replacement).  
+⋅ Support: $\\{\\max(0, n - (N - K)), \\ldots, \\min(n, K)\\}$.  
+⋅ Probability function: $P(X = k) = \\dfrac{\\binom{K}{k} \\binom{N - K}{n - k}}{\\binom{N}{n}}$.  
+⋅ Parameters: $N, K, n \\in \\mathbb{N}$ with $0 \\leq K \\leq N$, $0 \\leq n \\leq N$.  
+⋅ Notation: $X \\sim \\text{Hypergeometric}(N, K, n)$.
+ `,
         links:[
             {text:``,url:``},
             {text:``,url:``},

@@ -9,6 +9,8 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import { distributionsDiagramsData } from '@/app/api/db/diagrams/probability/distributions'
+import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
+import { processContent } from '@/app/utils/contentProcessor'
 
 
 export async function getStaticProps(){
@@ -539,7 +541,12 @@ const occurenceMatrix=`
       content:``,
       before:``,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculator/discrete-distributions?tab=1) →@`,
-  
+      checklist:`<h2 style="color: #3b82f6;"> Checklist for Identifying a Discrete Uniform Distribution</h2>
+✔ All values in the range are equally likely.  
+✔ The variable takes on a finite set of integer values.  
+✔ $X$ is defined over a fixed range from a to b (inclusive).  
+✔ No value is favored over another.
+`
   
     },
     binomial:{
@@ -547,6 +554,11 @@ const occurenceMatrix=`
       content:``,
       before:``,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculator/discrete-distributions?tab=2) →@`,
+      checklist:`
+<h2 style="color: #3b82f6;"> Checklist for Identifying a Binomial Distribution</h2>
+✔ Repeating the same [Bernoulli](!/probability/distributions/discrete#bernoulli) trial independently (each trial does not depend on the others).  
+✔ The trial is repeated exactly n times.  
+✔ $X$ is defined as the number of successes out of the total trials.`,
   
     },
   
@@ -556,14 +568,24 @@ const occurenceMatrix=`
       content:``,
       before:``,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculator/discrete-distributions?tab=3) →@`,
-  
+     checklist:`     
+<h2 style="color: #3b82f6;"> Checklist for Identifying a Geometric Distribution</h2>
+✔   Repeating [Bernoulli](!/probability/distributions/discrete#bernoulli) trials independently with constant probability.  
+✔   No limit on the number of trials — keep repeating until success.  
+✔   $X$ is defined as the total number of trials up to and including the first success.
+     `,
     },
     negative:{
       title:`Negative Binomial Distribution`,
       content:``,
       before:``,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculator/discrete-distributions?tab=4) →@`,
-  
+      checklist:`<h2 style="color: #3b82f6;"> Checklist for Identifying a Negative Binomial Distribution</h2>
+✔ Repeating the same [Bernoulli](!/probability/distributions/discrete#bernoulli) trial independently.  
+✔ Success probability remains constant across trials.  
+✔ X is defined as the number of trials until the r-th success (inclusive).`,
+
+// <h2 style="color: #3b82f6;">Checklist for Identifying a Negative Binomial Distribution</h2>
     },
 
 
@@ -573,7 +595,12 @@ const occurenceMatrix=`
       content:``,
       before:``,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculator/discrete-distributions?tab=5) →@`,
-  
+      checklist:`<h2 style="color: #3b82f6;"> Checklist for Identifying a Hypergeometric Distribution</h2>
+✔ Sampling is done without replacement from a finite population.  
+✔ The population has a fixed number of successes and failures.  
+✔ The number of draws is fixed in advance.  
+✔ $X$ is defined as the number of successes in the sample.
+`,
     },
   
     poisson:{
@@ -582,7 +609,12 @@ const occurenceMatrix=`
       content:``,
       before:``,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculator/discrete-distributions?tab=6) →@`,
-  
+      checklist:`<h2 style="color: #3b82f6;">Checklist for Identifying a Poisson Distribution</h2>
+✔ Events occur independently over time or space.  
+✔ Events happen at a constant average rate (λ).  
+✔ The probability of more than one event in an infinitesimal interval is negligible.  
+✔ $X$ is defined as the number of events in a fixed interval.
+`,
     },
   
     bernoulli:{
@@ -750,8 +782,20 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         id:'uniform',
         title:sectionsContent.uniform.title,
         link:'',
-        content:[
-            <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["discrete uniform distribution"].svg }} key="table" />,
+        content:[       
+  
+   
+    <SvgDiagram
+     key={'uniform'}
+    layout='horizontal'
+    data={distributionsDiagramsData['discrete uniform distribution']}
+    />,
+     <div key={'checklist-uniform'} style={{backgroundColor:'#f2f2f2', textAlign:'center',padding:'30px',
+    borderRadius:'30px',paddingBottom:'50px',display:'flex',alignItems:'flex-start',
+    flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
+   { processContent(sectionsContent.uniform.checklist)}
+    </div>,
+            // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["discrete uniform distribution"].svg }} key="table" />,
             <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: uniformTable }} key="table" />,
             sectionsContent.uniform.after,
         ]
@@ -761,7 +805,19 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         title:sectionsContent.binomial.title,
         link:'',
         content:[
-              <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["binomial distribution"].svg }} key="table" />,
+             <SvgDiagram
+            key={'binomial'}
+    layout='horizontal'
+   
+    data={distributionsDiagramsData['binomial distribution']}
+    />,
+      <div key={'checklist-binomial'} style={{backgroundColor:'#f2f2f2', textAlign:'center',padding:'30px',
+    borderRadius:'30px',paddingBottom:'50px',display:'flex',alignItems:'flex-start',
+    flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
+   { processContent(sectionsContent.binomial.checklist,)}
+    </div>,
+    
+              // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["binomial distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: binomialTable }} key="table" />,
                sectionsContent.binomial.after,
         
@@ -773,7 +829,17 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         title:sectionsContent.geometric.title,
         link:'',
         content:[
-              <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["geometric distribution"].svg }} key="table" />,
+            <SvgDiagram
+     key={'geometric'}
+    layout='horizontal'
+    data={distributionsDiagramsData['geometric distribution']}
+    />,
+    <div key={'checklist-geometric'} style={{backgroundColor:'#f2f2f2', textAlign:'center',padding:'30px',
+    borderRadius:'30px',paddingBottom:'50px',display:'flex',alignItems:'flex-start',
+    flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
+   { processContent(sectionsContent.geometric.checklist)}
+    </div>,
+              // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["geometric distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: geometricTable }} key="table" />,
               sectionsContent.geometric.after,
             ]
@@ -783,7 +849,20 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         title:sectionsContent.negative.title,
         link:'',
         content:[
-              <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html:distributionsDiagramsData["negative binomial distribution"].svg }} key="table" />,
+
+           <SvgDiagram
+     key={'negative- binomial'}
+    layout='horizontal'
+    data={distributionsDiagramsData['negative binomial distribution']}
+    />,
+     <div key={'checklist-negative'} style={{backgroundColor:'#f2f2f2', textAlign:'center',padding:'30px',
+    borderRadius:'30px',paddingBottom:'50px',display:'flex',alignItems:'flex-start',
+    flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
+   { processContent(sectionsContent.negative.checklist)}
+    </div>,
+    
+   
+              // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html:distributionsDiagramsData["negative binomial distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: negativeBinomialTable }} key="table" />,
                sectionsContent.negative.after,
             ]
@@ -793,6 +872,17 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         title:sectionsContent.hypergeometric.title,
         link:'',
         content:[
+
+            <SvgDiagram
+     key={'hypergeometric'}
+    layout='horizontal'
+    data={distributionsDiagramsData['hypergeometric distribution']}
+    />,
+     <div key={'checklist-hypergeometric'} style={{backgroundColor:'#f2f2f2', textAlign:'center',padding:'30px',
+    borderRadius:'30px',paddingBottom:'50px',display:'flex',alignItems:'flex-start',
+    flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
+   { processContent(sectionsContent.hypergeometric.checklist)}
+    </div>,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: hypergeometricTable }} key="table" />,
               sectionsContent.hypergeometric.after,
             ]
@@ -802,7 +892,18 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         title:sectionsContent.poisson.title,
         link:'',
         content:[
-              <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["poisson distribution"].svg }} key="table" />,
+           <SvgDiagram
+     key={'poisson'}
+    layout='horizontal'
+    data={distributionsDiagramsData['poisson distribution']}
+    />,
+      <div key={'checklist-poisson'} style={{backgroundColor:'#f2f2f2', textAlign:'center',padding:'30px',
+    borderRadius:'30px',paddingBottom:'50px',display:'flex',alignItems:'flex-start',
+    flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
+   { processContent(sectionsContent.poisson.checklist)}
+    </div>,
+    
+              // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["poisson distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: poissonTable }} key="table" />,
                sectionsContent.poisson.after,
             ]
