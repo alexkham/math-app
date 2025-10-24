@@ -15,7 +15,8 @@ import { processContent } from '@/app/utils/contentProcessor'
 
 export async function getStaticProps(){
 
-  const keyWords=['bernoulli trial','bernoulli experiment','','','']
+  const keyWords=['bernoulli trial','bernoulli experiment','discrete distributions','binomial distribution',
+    'uniform discrete distribution']
 
 
   const uniformTable=`
