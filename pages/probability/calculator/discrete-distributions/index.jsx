@@ -37,6 +37,11 @@ export async function getStaticProps(){
         // icon: <Home />,
         link: "/probability/calculator/continuous-distributions"
       },
+       {
+        title: "Statistics Calculator",
+        // icon: <Home />,
+        link: "/calculators/statistics-calculator"
+      },
     
   ];
    
@@ -216,7 +221,7 @@ export default function DistributionsCalculatorPage({seoData,sectionsContent ,
       isSticky={true}
       verticalOffset='200px'
       />
-      <div style={{marginTop:'-170px'}}>
+      <div style={{marginTop:'-190px'}}>
    <GenericMultiComponentFrame
     components={[
            

@@ -71,9 +71,9 @@ export default function StatisticsCalculatorPage({ explanations,menuItems }) {
     //   backgroundColor ='#245de1'
     //   color = 'white'
       isSticky={true}
-      verticalOffset='170px'
+      verticalOffset='200px'
       />
-      <div style={{transform:'scale(0.90)',marginTop:'-100px'}}>
+      <div style={{transform:'scale(0.85)',marginTop:'-140px'}}>
       <StatisticsCalculator explanations={explanations}/>
       </div>
       <br/>
@@ -96,6 +96,11 @@ export async function getStaticProps() {
         title: "Continuous Distributions Calculator",
         // icon: <Home />,
         link: "/probability/calculator/continuous-distributions"
+      },
+       {
+        title: "Discrete Distributions Calculator",
+        // icon: <Home />,
+        link: "/probability/calculator/discrete-distributions"
       },
     
   ];

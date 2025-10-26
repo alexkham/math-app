@@ -67,6 +67,11 @@ const navigationGroups = [
         // icon: <Home />,
         link: "/probability/calculator/discrete-distributions"
       },
+       {
+        title: "Statistics Calculator",
+        // icon: <Home />,
+        link: "/calculators/statistics-calculator"
+      },
     
   ];
 
@@ -250,7 +255,7 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
       isSticky={true}
       verticalOffset='200px'
       />
-      <div style={{marginTop:'-200px'}}>
+      <div style={{marginTop:'-230px'}}>
    <GenericMultiComponentFrame
 
      initialActive={initialTab}
