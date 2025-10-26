@@ -17,6 +17,7 @@ import NegativeBinomialCalculator from '@/app/components/calculators/probability
 import HypergeometricCalculator from '@/app/components/calculators/probability/distributions/HypergeometricDistributionCalculator'
 import PoissonCalculator from '@/app/components/calculators/probability/distributions/PoissonDistributionCalculator'
 import { useSearchParams } from 'next/navigation'
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
 export async function getStaticProps(){
 
@@ -24,6 +25,21 @@ export async function getStaticProps(){
     'discrete probability distribution','discrete uniform distribution','hypergeometric distribution',
     'negative binomial distribution','probability distribution discrete']
 
+   
+   const menuItems = [
+    {
+      title: "Probability Calculators",
+      // icon: <Home />,
+      link: "/probability/calculator"
+    },
+    {
+        title: "Discrete Distributions Calculator",
+        // icon: <Home />,
+        link: "/probability/calculator/discrete-distributions"
+      },
+    
+  ];
+   
     const sectionsContent={
 
     obj1:{
@@ -91,12 +107,14 @@ export async function getStaticProps(){
         url: "/url",
          name: "name"
       },
+      menuItems,
         
        }
     }
    }
 
-export default function DistributionsCalculatorPage({seoData,sectionsContent , introContent}) {
+export default function DistributionsCalculatorPage({seoData,sectionsContent , 
+  introContent,menuItems}) {
 
       const searchParams = useSearchParams()
            
@@ -188,6 +206,16 @@ export default function DistributionsCalculatorPage({seoData,sectionsContent , i
    <br/>
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'0px'}}>Discrete Distributions Calculator</h1>
    <br/>
+     <VerticalButtonGroup 
+      items={menuItems}
+      width="250px" 
+      theme='vivid'
+            
+    //   backgroundColor ='#245de1'
+    //   color = 'white'
+      isSticky={true}
+      verticalOffset='200px'
+      />
    <GenericMultiComponentFrame
     components={[
            
