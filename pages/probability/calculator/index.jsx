@@ -191,6 +191,7 @@ export default function ProbabilityCalculator({seoData,sectionsContent , introCo
           { id: 1, name: 'Single Event Probability Calculator', key: 'probCalc', component: SingleEventProbabilityCalculator },
           { id: 2, name: 'Two Independent Events Probability Calculator', key: 'probCalc', component: TwoIndependentEventsCalculator },
            { id: 3, name: 'Discrete Distibutions Calculator',  href: '/probability/calculator/discrete-distributions'  },
+           { id: 4, name: 'Continuous Distibutions Calculator',  href: '/probability/calculator/continuous-distributions'  },
           
 
           //  { id: 4, name: 'Introduction', content: introContent2 },

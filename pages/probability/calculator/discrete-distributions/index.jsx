@@ -20,7 +20,9 @@ import { useSearchParams } from 'next/navigation'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+  const keyWords=['binomial distribution','geometric distribution','poisson distribution',
+    'discrete probability distribution','discrete uniform distribution','hypergeometric distribution',
+    'negative binomial distribution','probability distribution discrete']
 
     const sectionsContent={
 

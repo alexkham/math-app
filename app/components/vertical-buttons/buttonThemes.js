@@ -91,7 +91,36 @@ export const buttonThemes = {
       hoverColor: '#dbeafe'
     }
   },
-
+vivid: {
+  container: {
+    background: '#245de1',
+    padding: '20px',
+    borderRadius: '12px',
+    boxShadow: '0 4px 16px rgba(36, 93, 225, 0.3)'
+  },
+  button: {
+    padding: '16px 20px',
+    marginBottom: '8px',
+    border: '1px solid #245de1',
+    borderRadius: '8px',
+    color: '#ffffff',
+    background: '#245de1',
+    fontSize: '15px',
+    fontWeight: '500'
+  },
+  buttonHover: {
+    background: '#2f6fff',
+    borderColor: '#4a80ff',
+    boxShadow: '0 4px 12px rgba(74, 128, 255, 0.35)'
+  },
+  icon: {
+    color: '#ffffff'
+  },
+  chevron: {
+    color: '#b3d1ff',
+    hoverColor: '#ffffff'
+  }
+},
   indigo: {
     container: {
       background: '#312e81',
