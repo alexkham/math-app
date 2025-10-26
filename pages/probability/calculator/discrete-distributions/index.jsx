@@ -221,7 +221,7 @@ export default function DistributionsCalculatorPage({seoData,sectionsContent ,
       isSticky={true}
       verticalOffset='200px'
       />
-      <div style={{marginTop:'-190px'}}>
+      <div style={{marginTop:'-220px'}}>
    <GenericMultiComponentFrame
     components={[
            
