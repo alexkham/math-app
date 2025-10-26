@@ -32,8 +32,9 @@ import '../../pages.css'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
-export default function StatisticsCalculatorPage({ explanations }) {
+export default function StatisticsCalculatorPage({ explanations,menuItems }) {
   return (
     <>
     <Head>
@@ -62,8 +63,17 @@ export default function StatisticsCalculatorPage({ explanations }) {
         panelBackgroundColor='#f2f2f2'/> 
       <Breadcrumb/>
       <h1 className='title' style={{marginTop:'-20px',marginBottom:'-50px'}}>Statistics Calculator</h1>
-     
-      <div style={{transform:'scale(0.85)'}}>
+     <VerticalButtonGroup 
+      items={menuItems}
+      width="230px" 
+      theme='vivid'
+            
+    //   backgroundColor ='#245de1'
+    //   color = 'white'
+      isSticky={true}
+      verticalOffset='170px'
+      />
+      <div style={{transform:'scale(0.90)',marginTop:'-100px'}}>
       <StatisticsCalculator explanations={explanations}/>
       </div>
       <br/>
@@ -75,8 +85,22 @@ export default function StatisticsCalculatorPage({ explanations }) {
 }
 
 export async function getStaticProps() {
+
+    const menuItems = [
+    {
+      title: "Probability Calculators",
+      // icon: <Home />,
+      link: "/probability/calculator"
+    },
+    {
+        title: "Continuous Distributions Calculator",
+        // icon: <Home />,
+        link: "/probability/calculator/continuous-distributions"
+      },
+    
+  ];
   const explanations  = {
-    sampleSize: "The number of data points in the dataset. It's often denoted as 'n' in statistical formulas.",
+    sampleSize: "This is The number of data points in the dataset. It's often denoted as 'n' in statistical formulas.",
     
     sum: "The total of all values in the dataset. Formula: Σ x, where x represents each value in the dataset.",
     
@@ -118,7 +142,8 @@ export async function getStaticProps() {
  
   return {
     props: {
-      explanations
+      explanations,
+      menuItems
     },
   }
 }

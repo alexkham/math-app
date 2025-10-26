@@ -17,7 +17,7 @@ import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButto
 
 export async function getStaticProps(){
 
-  const keyWords=['continuous distributions','','','','']
+  const keyWords=['continuous distributions','continuous distributions probability','','','']
 
   
 const navigationGroups = [

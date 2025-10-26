@@ -33,9 +33,9 @@ export async function getStaticProps(){
       link: "/probability/calculator"
     },
     {
-        title: "Discrete Distributions Calculator",
+        title: "Continuous Distributions Calculator",
         // icon: <Home />,
-        link: "/probability/calculator/discrete-distributions"
+        link: "/probability/calculator/continuous-distributions"
       },
     
   ];
@@ -216,6 +216,7 @@ export default function DistributionsCalculatorPage({seoData,sectionsContent ,
       isSticky={true}
       verticalOffset='200px'
       />
+      <div style={{marginTop:'-170px'}}>
    <GenericMultiComponentFrame
     components={[
            
@@ -299,6 +300,7 @@ export default function DistributionsCalculatorPage({seoData,sectionsContent ,
            buttonMinWidth="160px"
            primaryColor="#007bff"
    />
+   </div>
    <br/>
    {/* <PoissonCalculator/> */}
    {/* <HypergeometricCalculator/> */}
