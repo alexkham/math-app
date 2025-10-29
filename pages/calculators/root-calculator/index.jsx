@@ -62,6 +62,13 @@ export default function RootCalculatorPage(props) {  // Changed to receive props
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </Head>
+      <style jsx>{`
+  @media (max-width: 1024px) {
+    :global(.layout-container > div:first-child *) {
+      position: static !important;
+    }
+  }
+`}</style>
 
       <GenericNavbar/>
       <br/>

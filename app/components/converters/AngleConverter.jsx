@@ -76,11 +76,11 @@ export default function AngleConverter() {
     <>
       <style jsx>{`
         .container {
-          transform: scale(1.1);
+          transform: scale(1.2);
           transform-origin: top center;
           display: flex;
           flex-direction: column;
-          max-width: 900px;
+          max-width: 1100px;
           margin: 22px auto;
           background: #fff;
           border: 1px solid #2563eb;

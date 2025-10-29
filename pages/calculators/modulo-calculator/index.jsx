@@ -157,6 +157,13 @@ export default function ModuloCalculatorPage({moduloExplanations, keyWords, desc
           })}
         </script>
       </Head>
+      <style jsx>{`
+  @media (max-width: 1024px) {
+    :global(.vertical-button-group-container *) {
+      position: static !important;
+    }
+  }
+`}</style>
       <GenericNavbar/>
       <br/>
       <br/>

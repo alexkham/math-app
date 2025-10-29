@@ -18,6 +18,7 @@ const navigationGroup=[
     items:[
       {title:'Unit Circle',link:'/visual-tools/unit-circle'},
       {title:'Trigonometry Calculator',link:'/calculators/trigonometry-calculator'},
+      {title:'Angle Converter',link:'/converters/degree-radians'},
     ]
   },
   {
@@ -115,7 +116,7 @@ export default function AngleConversionTable({sectionsContent,keyWords,navigatio
          /> */}
       <div style={{
       display: 'grid',
-      gridTemplateColumns: '15% 80%',
+      gridTemplateColumns: '10% 90%',
       gap: '20px',
       width: '100%'
    }}>
@@ -126,18 +127,14 @@ export default function AngleConversionTable({sectionsContent,keyWords,navigatio
             width="250px"       
             theme='lightBlue'
             isSticky={true}
-            verticalOffset='180px'
+            verticalOffset='200px'
          />
       </div>
 
       {/* Right column - Table */}
       <div>
-         <div style={{width:'90%',margin:'auto'}}>
-            {/* <GenericTable tableData={complementIdentitiesTableData}
-               cellFontSize={'16px'}
-               headerFontSize={'18px'}
-               theme='lightBlue'
-            /> */}
+         <div style={{width:'95%',margin:'auto',marginTop:'-40px'}}>
+           
               <DegreeRadianConversionTable/>
             <br/>
             <br/>
