@@ -195,13 +195,13 @@ export default function ModuloCalculatorPage({moduloExplanations, keyWords, desc
       /> 
       <Breadcrumb/>
       <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>Modulo Calculator</h1>
-     
-        <div style={{
+     <div className="layout-container">
+        {/* <div style={{
       display: 'grid',
       gridTemplateColumns: '10% 90%',
       gap: '20px',
       width: '100%'
-   }}>
+   }}> */}
       {/* Left column - Sidebar */}
       <div>
         <br/>
