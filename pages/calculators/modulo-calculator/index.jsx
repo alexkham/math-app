@@ -157,10 +157,26 @@ export default function ModuloCalculatorPage({moduloExplanations, keyWords, desc
           })}
         </script>
       </Head>
-      <style jsx>{`
+     <style jsx>{`
   @media (max-width: 1024px) {
-    :global(.vertical-button-group-container *) {
+    .layout-container > div:first-child,
+    .layout-container > div:first-child *,
+    :global([class*="vertical"]),
+    :global([class*="vertical"]) * {
       position: static !important;
+    }
+  }
+  
+  .layout-container {
+    display: grid;
+    grid-template-columns: 10% 90%;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  @media (max-width: 1024px) {
+    .layout-container {
+      grid-template-columns: 1fr;
     }
   }
 `}</style>
