@@ -169,7 +169,7 @@ export default function ModuloCalculatorPage({moduloExplanations, keyWords, desc
   
   .layout-container {
     display: grid;
-    grid-template-columns: 10% 90%;
+    grid-template-columns: 20% 80%;
     gap: 20px;
     width: 100%;
   }
