@@ -33,6 +33,29 @@ const navigationGroup=[
 
   return (
     <>
+        <style jsx>{`
+  @media (max-width: 1024px) {
+    .layout-container > div:first-child,
+    .layout-container > div:first-child *,
+    :global([class*="vertical"]),
+    :global([class*="vertical"]) * {
+      position: static !important;
+    }
+  }
+  
+  .layout-container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  @media (max-width: 1024px) {
+    .layout-container {
+      grid-template-columns: 1fr;
+    }
+  }
+`}</style>
     <GenericNavbar/>
     <br/>
     <br/>
@@ -48,12 +71,15 @@ const navigationGroup=[
           /> 
     <Breadcrumb/>
     <h1 className='title' style={{marginTop:'-20px' ,marginBottom:'20px'}}>Percentage Calculator</h1>
-    <div style={{
+   
+   
+    <div className="layout-container">
+    {/* <div style={{
       display: 'grid',
       gridTemplateColumns: '10% 90%',
       gap: '20px',
       width: '100%'
-   }}>
+   }}> */}
       {/* Left column - Sidebar */}
       <div>
         <br/>

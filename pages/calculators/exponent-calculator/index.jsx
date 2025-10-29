@@ -121,6 +121,30 @@ export default function ExponentCalculatorPage({ detailInstructions, explanation
         <meta property="og:site_name" content="Learn Math Class" />
         <meta property="og:type" content="website" />
       </Head>
+           <style jsx>{`
+  @media (max-width: 1024px) {
+    .layout-container > div:first-child,
+    .layout-container > div:first-child *,
+    :global([class*="vertical"]),
+    :global([class*="vertical"]) * {
+      position: static !important;
+    }
+  }
+  
+  .layout-container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  @media (max-width: 1024px) {
+    .layout-container {
+      grid-template-columns: 1fr;
+    }
+  }
+`}</style>
+
 
       <GenericNavbar/>
       <br/>
@@ -144,13 +168,13 @@ export default function ExponentCalculatorPage({ detailInstructions, explanation
           title='How to use Exponent Calculator'
         />
       </div>
-      
-  <div style={{
+      <div className="layout-container"> 
+  {/* <div style={{
       display: 'grid',
       gridTemplateColumns: '15% 80%',
       gap: '20px',
       width: '100%'
-   }}>
+   }}> */}
       {/* Left column - Sidebar */}
       <div>
         <br/>

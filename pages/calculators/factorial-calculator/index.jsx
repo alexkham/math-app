@@ -98,6 +98,30 @@ export default function FactorialCalculatorPage({ seoData, keyWords ,navigationG
     }}
   />
 </Head>
+     <style jsx>{`
+  @media (max-width: 1024px) {
+    .layout-container > div:first-child,
+    .layout-container > div:first-child *,
+    :global([class*="vertical"]),
+    :global([class*="vertical"]) * {
+      position: static !important;
+    }
+  }
+  
+  .layout-container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  @media (max-width: 1024px) {
+    .layout-container {
+      grid-template-columns: 1fr;
+    }
+  }
+`}</style>
+
    <GenericNavbar/>
    <br/>
    <br/>
@@ -122,13 +146,13 @@ export default function FactorialCalculatorPage({ seoData, keyWords ,navigationG
             verticalOffset='200px'
          />
    <FactorialCalculator/> */}
-
-     <div style={{
+     <div className="layout-container">
+     {/* <div style={{
       display: 'grid',
       gridTemplateColumns: '10% 90%',
       gap: '20px',
       width: '100%'
-   }}>
+   }}> */}
       {/* Left column - Sidebar */}
       <div>
         <br/>

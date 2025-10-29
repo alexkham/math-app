@@ -102,7 +102,7 @@ export default function LogCalculatorPage({ logarithmExplanations, detailInstruc
        
          <VerticalButtonGroup 
             items={navigationGroup}
-            width="250px"       
+            width="230px"       
             theme='lightBlue'
             isSticky={true}
             verticalOffset='200px'
