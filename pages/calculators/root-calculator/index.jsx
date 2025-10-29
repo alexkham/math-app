@@ -10,11 +10,36 @@ import RootCalculator from '@/app/components/calculators/arithmetics/RootCalcula
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import ExplanationDetails from '@/app/components/ExplanationDetails';
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
+import Sections from '@/app/components/page-components/section/Sections';
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents';
 
 export default function RootCalculatorPage(props) {  // Changed to receive props
-  const { explanations, keyWords,detailInstructions,navigationGroup } = props;  // Destructure props
+  const { explanations, keyWords,detailInstructions,navigationGroup,sectionsContent } = props;  // Destructure props
 
 
+     
+  const rootSections=[
+    {
+        id:'intro',
+        title:sectionsContent.intro.title,
+        link:'/algebra/roots',
+        content:[
+          sectionsContent.intro.content
+        ]
+    },
+    // {
+    //     id:'2',
+    //     title:'section2',
+    //     link:'',
+    //     content:''
+    // },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // }
+]
 
 
   const structuredData = {
@@ -85,7 +110,7 @@ export default function RootCalculatorPage(props) {  // Changed to receive props
         panelBackgroundColor='#f2f2f2'
       />
       <h1 className='title' style={{marginTop:'-0px',marginBottom:'20px'}}>Root Calculator</h1>
-      <div style={{marginBottom:'-20px'}}>
+      <div style={{marginBottom:'20px'}}>
       <ExplanationDetails instructions={detailInstructions}
       title='How to use Root Calculator'/>
       </div>
@@ -93,7 +118,7 @@ export default function RootCalculatorPage(props) {  // Changed to receive props
 
        <div style={{
       display: 'grid',
-      gridTemplateColumns: '15% 80%',
+      gridTemplateColumns: '10% 90%',
       gap: '20px',
       width: '100%'
    }}>
@@ -105,9 +130,9 @@ export default function RootCalculatorPage(props) {  // Changed to receive props
          <VerticalButtonGroup 
             items={navigationGroup}
             width="250px"       
-            theme='lightBlue'
+            theme='vivid'
             isSticky={true}
-            verticalOffset='250px'
+            verticalOffset='200px'
          />
       </div>
 
@@ -133,6 +158,10 @@ export default function RootCalculatorPage(props) {  // Changed to receive props
       </div> */}
       <br/>
       <br/>
+      <SectionTableOfContents sections={rootSections}/>
+      <br/>
+     <Sections sections={rootSections}/>
+      <br/>
       <br/>
       <ScrollUpButton/>
     </>
@@ -140,6 +169,64 @@ export default function RootCalculatorPage(props) {  // Changed to receive props
 }
 
 export async function getStaticProps() {
+
+
+   const sectionsContent={
+
+    intro:{
+      title:`What are roots?`,
+      content:`
+A root is a value that, when multiplied by itself a certain number of times, produces a given number. It represents the inverse operation of exponentiation.
+
+To express roots, mathematicians use radical notation. This notation consists of the radical symbol (√) with two essential components:
+
+• The degree (or index) is a small number positioned at the top left of the radical symbol (ⁿ√) indicating how many times the value must multiply itself
+
+• The radicand is the number or expression written under the radical symbol whose root we're finding
+
+Roots are classified in multiple ways. The most common classification is by degree, which determines the specific type of root: square roots, cube roots, fourth roots, and higher-degree roots each have distinct properties and applications in mathematics.
+        `,
+      before:``,
+      after:``,
+  
+  
+    },
+    obj2:{
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
+  
+    obj3:{
+  
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
+    obj4:{
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
+
+
+    obj5:{
+  
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    }
+  
+  }
+
 
 const navigationGroup=[
   {title:'Other Calculators',
@@ -160,6 +247,7 @@ const navigationGroup=[
 
 
   const explanations = {
+
     square: {
       text: "A square root of a number is a value that, when multiplied by itself, gives the number. For example, the square root of 25 is 5, because 5 × 5 = 25.",
       links: [
@@ -175,7 +263,7 @@ const navigationGroup=[
       ],
     },
     nth: {
-      text: "An nth root of a number is a value that, when multiplied by itself n-1 times, gives the number. For example, the 4th root of 16 is 2, because 2 × 2 × 2 × 2 = 16.",
+      text: "An $n$-th root of a number is a value that, when multiplied by itself $n-1$ times, gives the number. For example, the $4$-th root of $16$ is $2$, because $2 × 2 × 2 × 2 = 16$.",
     }
   };
 
@@ -205,6 +293,7 @@ const navigationGroup=[
       keyWords,
       detailInstructions,
       navigationGroup,
+      sectionsContent
     },
     revalidate: 86400
   };

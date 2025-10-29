@@ -455,7 +455,7 @@ At the center, you have three variables (x, y, z) connected by the equation $x^y
 **The three equivalent relationships:**
 - [Power](!/algebra/powers): $z = x^y$ (x raised to the power y equals z)
 - [Logarithm](!/algebra/logarithms): $y = log_x(z)$ (the logarithm base x of z equals y)
-- [Root](!/algebrs/roots):$x = \\sqrt[y]{z}$ (the y-th root of z equals x)
+- [Root](!/algebra/roots): $x = \\sqrt[y]{z}$ (the y-th root of z equals x)
 
 **The key insight** is that these are all different ways of expressing the same mathematical relationship. If you know any two of the three values (x, y, z), you can find the third using the appropriate operation:
 - **If you know x and y, use exponentiation to find z**

@@ -183,7 +183,7 @@ In general, the n-th root of a number 𝑎 is a number 𝑏 such that:
 𝑎 is the radicand (the number inside the root symbol , corresponding to the **power**).
 
 `,
-          svg:`<svg width="750" height="400" xmlns="http://www.w3.org/2000/svg">
+          svg:`<svg width="750" height="400" style="margin-left:200px;" xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
   <rect width="700" height="400" fill="#f8f9fa"/>
   
