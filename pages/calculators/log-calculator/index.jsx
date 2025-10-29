@@ -43,6 +43,29 @@ export default function LogCalculatorPage({ logarithmExplanations, detailInstruc
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
         <link rel="canonical" href="https://www.learnmathclass.com/calculators/log-calculator" />
       </Head>
+        <style jsx>{`
+  @media (max-width: 1024px) {
+    .layout-container > div:first-child,
+    .layout-container > div:first-child *,
+    :global([class*="vertical"]),
+    :global([class*="vertical"]) * {
+      position: static !important;
+    }
+  }
+  
+  .layout-container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  @media (max-width: 1024px) {
+    .layout-container {
+      grid-template-columns: 1fr;
+    }
+  }
+`}</style>
 
       <GenericNavbar/>
       <br/>
@@ -66,12 +89,13 @@ export default function LogCalculatorPage({ logarithmExplanations, detailInstruc
         />
       </div>
       <br/>
-       <div style={{
+       <div className="layout-container">
+       {/* <div style={{
       display: 'grid',
       gridTemplateColumns: '15% 80%',
       gap: '20px',
       width: '100%'
-   }}>
+   }}> */}
       {/* Left column - Sidebar */}
       <div>
         <br/>
