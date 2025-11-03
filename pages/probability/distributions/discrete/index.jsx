@@ -554,7 +554,10 @@ const occurenceMatrix=`
       title:`Binomial Distribution`,
       content:``,
       before:``,
-      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculator/discrete-distributions?tab=2) →@`,
+      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculator/discrete-distributions?tab=2) →@
+
+      @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use binomial distributions cummulative table](!/tables/probability/binomial-distribution) →@
+      `,
       checklist:`
 <h2 style="color: #3b82f6;"> Checklist for Identifying a Binomial Distribution</h2>
 ✔ Repeating the same [Bernoulli](!/probability/distributions/discrete#bernoulli) trial independently (each trial does not depend on the others).  
