@@ -61,7 +61,7 @@ const navigationGroup=[
   {
    title:'Related Tools',
    items:[
-    {title:'Fractions Calculator',link:'/calculators/fractions-calculator'}
+    {title:'Fractions Calculator',link:'/calculators/fraction-calculator'}
    ]
 
   }
