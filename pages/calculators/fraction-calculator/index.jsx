@@ -25,6 +25,13 @@ const navigationGroup=[
       {title:'Trigonometry Calculator',link:'/calculators/trigonometry-calculator'},
       {title:'Statistics Calculator',link:'/calculators/statistics-calculator'},
     ]
+  },
+  {
+   title:'Visual Tools',
+   items:[
+    {title:'FractionsVisualizer',link:'/visual-tools/fractions-visualizer'}
+   ]
+
   }
 ]
 

@@ -6,6 +6,7 @@ import '../../pages.css'
 import FractionCircleApp from '@/app/components/fractions/FractionCircle'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import Head from 'next/head'
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
 
 // export async function getStaticProps(){
@@ -42,6 +43,29 @@ import Head from 'next/head'
 export async function getStaticProps(){
 
   
+const navigationGroup=[
+  // {title:'Other Calculators',
+  //   items:[
+  //     {title:'Exponent Calculator',link:'/calculators/exponent-calculator'},
+  //     {title:'Root Calculator',link:'/calculators/root-calculator'},
+  //     {title:'Modulo Calculator',link:'/calculators/modulo-calculator'},
+  //     {title:'Logarithm Calculator',link:'/calculators/log-calculator'},
+  //     {title:'Percentage Calculator',link:'/calculators/percentage-calculator'},
+  //     {title:'Factorial Calculator',link:'/calculators/factorial-calculator'},
+  //     // {title:'Fractions Calculator',link:'/calculators/fraction-calculator'},
+  //     {title:'Complex Numbers Calculator',link:'/calculators/complex-numbers'},
+  //     {title:'Trigonometry Calculator',link:'/calculators/trigonometry-calculator'},
+  //     {title:'Statistics Calculator',link:'/calculators/statistics-calculator'},
+  //   ]
+  // },
+  {
+   title:'Related Tools',
+   items:[
+    {title:'Fractions Calculator',link:'/calculators/fractions-calculator'}
+   ]
+
+  }
+]
   const explanationContent = `
 # Understanding Fractions
 
@@ -75,11 +99,13 @@ Divide the top number by the bottom number.
         url: "/visual-tools/fractions-visualizer"
       },
       explanationContent,
+      navigationGroup,
       keyWords
     }
   }
 }
-export default function FractionsVisualizerPage({seoData, explanationContent, keyWords}) {
+export default function FractionsVisualizerPage({seoData, explanationContent,
+  navigationGroup, keyWords}) {
 
  
   return (
@@ -147,8 +173,44 @@ export default function FractionsVisualizerPage({seoData, explanationContent, ke
   
    <h1 className='title' style={{marginTop:'-30px'}}>Fractions Visualizer</h1>
     <br/>
+     <div style={{
+      display: 'grid',
+      gridTemplateColumns: '15% 90%',
+      gap: '20px',
+      width: '100%'
+   }}>
+      {/* Left column - Sidebar */}
+      <div>
+        <br/>
+       
+         <VerticalButtonGroup 
+            items={navigationGroup}
+            width="200px"       
+            theme='vivid'
+            isSticky={true}
+            verticalOffset='200px'
+         />
+      </div>
+
+      {/* Right column - Table */}
+      <div>
+         <div style={{width:'100%',margin:'auto',marginLeft:'-50px'}}>
+          <div style={{transform:'scale(0.99)'}}>
+        <FractionCircleApp  explanationContent={explanationContent}/>
+      </div> 
+          
+        
+            <br/>
+            <br/>
+            <br/>
+           
+            
+         </div>
+      </div>
+   </div>
+     
    <br/>
-   <FractionCircleApp  explanationContent={explanationContent}/>
+   {/* <FractionCircleApp  explanationContent={explanationContent}/> */}
    <br/>
    <br/>
    <br/>
