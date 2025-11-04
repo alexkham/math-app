@@ -1,70 +1,307 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
 
 .pageLayout {
+ 
   display: flex;
   gap: 20px;
-  width: 100%;
-  max-width: 1200px;
+  max-width: 2740px;
   margin: 0 auto;
-  padding: 2rem;
-  margin-top: -50px;
-  min-height: 1000px;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  margin-left: -100px;
 }
 
 .container {
-  width: 66.666%;
-  font-family: 'Inter', sans-serif;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+  flex: 1;
+  max-width: 600px;
   background-color: #ffffff;
-  padding: 2.5rem;
-  border-radius: 8px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-  border: 1px solid #e0e0e0;
-  background-color: #f1f3f5;
-  z-index: 0;
- 
-  
- 
+  padding: 24px;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  /* margin-left: -100px; */
+}
+/* 
+.pageLayout {
+  display: flex;
+  gap: 20px;
+  max-width: none;  
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.container {
+  flex: 1;
+  max-width: none;  
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  margin-left: -100px;
 }
 
 .explanationContainer {
-  width: 33.333%;
-  min-width: 400px;
-  font-family: 'Inter', sans-serif;
-  background-color: #ffffff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e0e0e0;
-  height: fit-content;
-  position: sticky;
-  top: 2rem;
+  flex: 1;
+  max-width: none;  
   align-self: flex-start;
-  margin: 0;
-  
+  position: sticky;
+  top: 20px;
+} */
+
+
+.baseSelection {
+  margin-bottom: 24px;
+}
+
+.baseSelection > label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+}
+
+.radio_container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.radio_container input[type="radio"] {
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.radio_container label {
+  cursor: pointer;
+  color: #475569;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.calculatorBodyWrapper {
+  margin-bottom: 24px;
+}
+
+.calculatorBody {
+  background-color: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-left: 4px solid #3498db;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.calcTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calcTable tbody tr {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.baseCell,
+.exponentCell {
+  flex: 0 0 auto;
+}
+
+.resultCell {
+  flex: 1;
+  font-size: 20px;
+  font-weight: 600;
+  color: #0c4a6e;
+  text-align: right;
+  padding-right: 8px;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.valueInput {
+  width: 150px;
+  padding: 11px 14px;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.2s;
+  outline: none;
+  background-color: #ffffff;
+}
+
+.valueInput:focus {
+  border-color: #3498db;
+}
+
+.nthInput {
+  width: 80px;
+  padding: 11px 14px;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.2s;
+  outline: none;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.nthInput:focus {
+  border-color: #3498db;
+}
+
+.nthInput:read-only {
+  background-color: #f1f5f9;
+  cursor: not-allowed;
+}
+
+.inputError {
+  border-color: #ef4444 !important;
+  background-color: #fef2f2 !important;
+}
+
+.tooltipTrigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: #e2e8f0;
+  color: #64748b;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: help;
+  flex-shrink: 0;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1e293b;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #1e293b;
+}
+
+.errorMessage {
+  background-color: #fef2f2;
+  color: #991b1b;
+  padding: 12px;
+  border-radius: 6px;
+  border: 2px solid #fca5a5;
+  border-left: 4px solid #ef4444;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.warningMessage {
+  background-color: #fffbeb;
+  color: #78350f;
+  padding: 12px;
+  border-radius: 6px;
+  border: 2px solid #fcd34d;
+  border-left: 4px solid #f59e0b;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 12px;
+}
+
+.calculateButton,
+.resetButton {
+  flex: 1;
+  padding: 14px 24px;
+  border: 2px solid;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.calculateButton {
+  background-color: #3498db;
+  color: #ffffff;
+  border-color: #3498db;
+}
+
+.calculateButton:hover {
+  background-color: #2980b9;
+  border-color: #2980b9;
+}
+
+.resetButton {
+  background-color: #ffffff;
+  color: #64748b;
+  border-color: #cbd5e1;
+}
+
+.resetButton:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+  color: #475569;
+}
+
+.explanationContainer {
+  flex: 1;
+  max-width: 600px;
+  align-self: flex-start;
+  position: sticky;
+  top: 20px;
 }
 
 .explanationContent {
-  color: #2d3748;
+  background-color: #f8fafc;
+  padding: 24px;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  border-left: 4px solid #3498db;
 }
 
 .explanationText {
-  font-size: 0.95rem;
+  color: #475569;
+  font-size: 15px;
   line-height: 1.6;
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
 }
 
 .explanationLinks {
-  border-top: 1px solid #e2e8f0;
-  padding-top: 1rem;
+  border-top: 2px solid #e2e8f0;
+  padding-top: 16px;
 }
 
 .linksTitle {
-  font-weight: 500;
-  margin-bottom: 0.75rem;
-  color: #4a5568;
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 14px;
+  margin: 0 0 12px 0;
 }
 
 .linksList {
@@ -74,327 +311,49 @@
 }
 
 .linksList li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 
 .explanationLink {
-  color: #3182ce;
+  color: #3498db;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 14px;
+  transition: color 0.2s;
 }
 
 .explanationLink:hover {
+  color: #2980b9;
   text-decoration: underline;
 }
 
-.baseSelection {
-  margin-bottom: 2rem;
-}
-
-.baseSelection > label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0.75rem;
-  font-weight: 500;
-  color: #1a202c;
-}
-
-.radio_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 820px;
-  height: 44px;
-  margin: 0 auto;
-  border: 1px solid #c0cde0;
-  border-radius: 6px;
-}
-
-.radio_container input[type="radio"] {
-  appearance: none;
-  display: none;
-}
-
-.radio_container label {
-  font-size: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 100%;
-  text-align: center;
-  color: #4a5568;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.radio_container input[type="radio"]:checked + label {
-  background-color: #3182ce;
-  color: #ffffff;
-}
-
-.calculatorBodyWrapper {
-  min-height: 120px;
-  display: flex;
-  align-items: center;
-}
-
-.calculatorBody {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.calcTable {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 10px;
-  margin-bottom: 1.5rem;
-  table-layout: fixed;
-}
-
-.baseCell {
-  vertical-align: bottom;
-  padding-right: 5px;
-  margin-right: -20px;
-  max-width: 160px;
-  width: 160px;
-}
-
-.baseCell > .inputWrapper > .tooltipTrigger {
-  margin-left: -15px;
-}
-
-.exponentCell {
-  vertical-align: top;
-  padding-bottom: 20px;
-  margin-left: -20px;
-  max-width: 120px;
-  width: 120px;
-}
-
-.inputWrapper {
-  display: flex;
-  flex-direction: row;
-  min-width: 50px;
-  align-items: center;
-  width: fit-content;
-}
-
-.inputWrapper input {
-  width: 60px;
-}
-
-.exponentCell>.inputWrapper input{
-    min-height: 30px;
-}
-
-.exponentCell .inputWrapper input {
-    width: 80px;
-    padding: 10px;
-    margin-left: 10px;
-    margin-top: 5px;
-   
-  }
-
-  .baseCell .inputWrapper input {
-    width: 130px;
-    padding: 5px;
-   
-  }
-
-.valueInput {
-  width: 120px;
-  height: 44px;
-  font-size: 18px;
-  text-align: right;
-  border: 1px solid #c0cde0;
-  border-radius: 6px;
-  padding: 5px 12px;
-  margin-right: 20px;
-  transition: all 0.2s ease;
-  color: #2d3748;
-}
-
-.valueInput:focus {
-  outline: none;
-  border-color: #3182ce;
-  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
-}
-
-/* .resultCell {
-  font-size: 18px;
-  font-weight: 700;
-  color: #2d3748;
-  padding-left: 20px;
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-  min-height: 50px;
-} */
-
-
-.resultCell {
-    font-size: 18px;
-    font-weight: 700;
-    color: #2d3748;
-    padding-left: 20px;
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-    min-height: 50px;
-    overflow-x: auto;
-    max-width: 200px;
-    white-space: nowrap;
-    min-width: 400px;
-  }
-
-.buttonContainer {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 24px;
-}
-
-.calculateButton, .resetButton {
-  width: 35%;
-  max-width: 160px;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.calculateButton {
-  background-color: #3182ce;
-  color: white;
-}
-
-.resetButton {
-  background-color: #e53e3e;
-  color: white;
-}
-
-.calculateButton:hover, .resetButton:hover {
-  opacity: 0.9;
-}
-
-.tooltipTrigger {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 20px;
-  min-width: 20px;
-  height: 20px;
-  background-color: #3182ce;
-  border-radius: 50%;
-  color: white;
-  font-size: 12px;
-  margin-left: 8px;
-  margin-top: 5px;
-  cursor: help;
-  position: relative;
-}
-
-.tooltip {
-  position: absolute;
-  bottom: 130%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #2d3748;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  white-space: nowrap;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  pointer-events: none;
-}
-
-.tooltipTrigger:hover .tooltip {
-  opacity: 1;
-}
-
-.tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #2d3748 transparent transparent transparent;
-}
-
-.inputError {
-  border-color: #ff4444 !important;
-}
-
-.errorMessage {
-  color: #ff4444;
-  font-size: 0.9rem;
-  margin-top: 10px;
-  text-align: center;
-}
-
-@media screen and (max-width: 600px) {
+@media (max-width: 1024px) {
   .pageLayout {
     flex-direction: column;
-    padding: 1rem;
   }
-
-  .container, .explanationContainer {
-    width: 100%;
-  }
-
-  .container {
-    padding: 1.5rem;
-  }
-
-  .radio_container {
+  
+  .container,
+  .explanationContainer {
     max-width: 100%;
   }
-
-  .calcTable {
-    font-size: 14px;
-  }
-
-  .valueInput {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .calculateButton, .resetButton {
-    width: 100%;
-    max-width: none;
-    font-size: 14px;
-  }
-
-  .buttonContainer {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .explanationText {
-    font-size: 0.9rem;
-  }
-
-  .explanationLink {
-    font-size: 0.85rem;
+  
+  .explanationContainer {
+    position: static;
   }
 }
 
-.warningMessage {
-    color: #f59e0b;
-    font-size: 0.9rem;
-    margin-top: 10px;
-    text-align: center;
+@media (max-width: 640px) {
+  .calcTable tbody tr {
+    flex-direction: column;
+    align-items: stretch;
   }
+  
+  .valueInput,
+  .nthInput {
+    width: 100%;
+  }
+  
+  .resultCell {
+    text-align: left;
+    padding: 12px 0;
+  }
+}
