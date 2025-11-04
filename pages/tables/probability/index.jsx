@@ -118,6 +118,17 @@ const BinomialIcon = () => (
   </svg>
 );
 
+const PoissonIcon = () => (
+  <svg width="64" height="32" viewBox="0 0 64 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <text x="20" y="22" fontFamily="Arial, sans-serif" fontSize="24" fontWeight="bold" fill="black">λ</text>
+  </svg>
+);
+const NoneIcon = () => (
+  <svg width="64" height="32" viewBox="0 0 64 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+   
+  </svg>
+);
+
 const probabilityTables = [
   {
     name: 'Normal Distribution (Z)',
@@ -138,6 +149,18 @@ const probabilityTables = [
     path: '/tables/probability/binomial-distribution'
   },
   
+  
+ 
+  
+  {
+    name: 'Poisson Distribution',
+    description: 'Poisson distribution tables showing probabilities for the number of events (x) occurring in a fixed interval given different average rates (λ).',
+    icon: PoissonIcon,
+    path: '/tables/probability/poisson-distribution'
+  },
+ 
+ 
+  
 ];
 
 export default function ProbabilityTables() {
@@ -148,6 +171,10 @@ export default function ProbabilityTables() {
         <meta name="description" content="Explore probability tables including normal distribution (Z) and T-distribution tables." />
         <link rel="canonical" href="https://www.learnmathclass.com/tables/probability" />
       </Head>
+      <styles>
+
+        
+      </styles>
      <GenericNavbar/>
       <br/>
       <br/>
@@ -168,7 +195,8 @@ export default function ProbabilityTables() {
           {probabilityTables.map((table) => {
             const Icon = table.icon;
             return (
-              <Link href={table.path} key={table.name} className={styles.card}>
+             
+              table.path&&(<Link href={table.path} key={table.name} className={styles.linkCard}>
                 <div className={styles.cardHeader}>
                   <Icon className={styles.icon} />
                   <h2 className={styles.tableTitle}>{table.name}</h2>
@@ -177,7 +205,9 @@ export default function ProbabilityTables() {
                 <div className={styles.cardFooter}>
                   <span className={styles.viewText}>Explore Table</span>
                 </div>
-              </Link>
+              </Link>)
+             
+             
             );
           })}
         </div>

@@ -173,6 +173,7 @@ export default function FractionsVisualizerPage({seoData, explanationContent,
   
    <h1 className='title' style={{marginTop:'-30px'}}>Fractions Visualizer</h1>
     <br/>
+    <br/>
      <div style={{
       display: 'grid',
       gridTemplateColumns: '15% 90%',

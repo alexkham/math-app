@@ -393,7 +393,7 @@ const BinomialCumulativeTable = () => {
       <div className="controls-section" ref={controlsRef}>
         <div className="controls-content">
           <h2 style={{ textAlign: 'center', margin: '0 0 15px 0', color: '#333' }}>
-            Binomial Distribution Table
+            Select the Type of Probability Calculation
           </h2>
 
           <div className="distribution-buttons">

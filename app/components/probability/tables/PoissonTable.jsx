@@ -276,7 +276,7 @@ const PoissonTable = () => {
           border: 1px solid #2196F3;
           border-radius: 4px;
           font-size: 14px;
-          width: 120px;
+          width: 200px;
         }
         
         button {
@@ -367,7 +367,7 @@ const PoissonTable = () => {
       <div className="controls-section" ref={controlsRef}>
         <div className="controls-content">
           <h2 style={{ textAlign: 'center', margin: '0 0 15px 0', color: '#333' }}>
-            Poisson Distribution Table
+           Select the Type of Probability Calculation
           </h2>
 
           <div className="distribution-buttons">

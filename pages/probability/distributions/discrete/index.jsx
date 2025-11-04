@@ -563,6 +563,17 @@ const occurenceMatrix=`
 ✔ Repeating the same [Bernoulli](!/probability/distributions/discrete#bernoulli) trial independently (each trial does not depend on the others).  
 ✔ The trial is repeated exactly n times.  
 ✔ $X$ is defined as the number of successes out of the total trials.`,
+parameters:`
+
+**Parameters of Binomial Distribution** 
+
+$𝑛$ : fixed number of independent trials;
+$𝑝$ : probability of success in each trial;
+
+This distribution models the number of successes when repeating the same binary experiment $𝑛$ times under identical conditions. The two parameters fully describe the setup: 
+$𝑛$ gives the structure — how many attempts, and $𝑝$ defines the behavior of each — what chance success has.
+It’s useful to compare with the negative binomial, where instead of fixing how many trials you run, you fix how many successes you want and ask: how many trials will it take? Both deal with repeated binary outcomes, but what’s held constant — trials vs. successes — flips.
+`,
   
     },
   
@@ -820,6 +831,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
    { processContent(sectionsContent.binomial.checklist,)}
     </div>,
+    sectionsContent.binomial.parameters,
     
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["binomial distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: binomialTable }} key="table" />,
