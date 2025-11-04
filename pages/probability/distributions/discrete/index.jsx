@@ -547,7 +547,29 @@ const occurenceMatrix=`
 ✔ The variable takes on a finite set of integer values.  
 ✔ $X$ is defined over a fixed range from a to b (inclusive).  
 ✔ No value is favored over another.
-`
+`,
+notation :`**Notations Used:**
+
+$X \\sim \\text{Unif}(a, b)$ or $X \\sim \\text{DU}(a, b)$ — **distribution of the random variable**.
+
+$DiscreteUniform(a, b)$ — **used to denote the distribution itself (not the random variable)**.
+
+$U(a, b)$ — **also used, though it can refer to either discrete or continuous; context is important**.
+
+$P(X = k) = \\frac{1}{b - a + 1}, \\quad \\text{for } k = a, a+1, \\dots, b$ — probability mass function
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+`,
+parameters:`
+ ** Parameters of Uniform Discrete Distribution **
+
+   $a$  : the smallest integer in the range  
+   $b$  : the largest integer in the range
+
+The uniform discrete distribution assigns equal probability to each integer between $a$ and $b$, inclusive. The values must be equally spaced and finite in number. The parameters define the range — once $a$ and $b$ are set, every integer in that closed interval has probability $\\frac{1}{b - a + 1}$.
+This distribution is used when there's no reason to favor any outcome over another — every value is equally likely by design.
+
+`,
   
     },
     binomial:{
@@ -568,11 +590,26 @@ parameters:`
 **Parameters of Binomial Distribution** 
 
 $𝑛$ : fixed number of independent trials;
+
 $𝑝$ : probability of success in each trial;
 
 This distribution models the number of successes when repeating the same binary experiment $𝑛$ times under identical conditions. The two parameters fully describe the setup: 
 $𝑛$ gives the structure — how many attempts, and $𝑝$ defines the behavior of each — what chance success has.
 It’s useful to compare with the negative binomial, where instead of fixing how many trials you run, you fix how many successes you want and ask: how many trials will it take? Both deal with repeated binary outcomes, but what’s held constant — trials vs. successes — flips.
+`,
+notation:`
+
+**Notations Used:**
+
+$X \\sim \\text{Bin}(n, p)$ or $X \\sim \\text{B}(n, p)$ — **distribution of the random variable**.  
+
+$Binomial(n, p)$ — **used to denote the distribution itself (not the random variable)**.
+
+$B(n,p)$ — **occasionally used in theoretical or formal contexts (less common)**.
+
+$P(X = k) = \\binom{n}{k} p^k (1 - p)^{n - k}$ — probability mass function
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 `,
   
     },
@@ -589,6 +626,31 @@ It’s useful to compare with the negative binomial, where instead of fixing how
 ✔   No limit on the number of trials — keep repeating until success.  
 ✔   $X$ is defined as the total number of trials up to and including the first success.
      `,
+
+     parameters:`
+**Parameters of Geometric Distribution **
+
+$𝑝$: probability of success on a single trial, with $0<𝑝≤1$
+
+The geometric distribution models the number of trials needed to get the first success in a sequence of independent Bernoulli trials. 
+There's only one parameter — $𝑝$, the chance of success each time — which completely determines the shape of the distribution. 
+The outcomes are positive integers: $1,2,3,…$ where each value represents the trial number on which success first occurs.
+     `,
+
+     notation:`
+     **Notations Used:**
+
+$X \\sim \\text{Geom}(p)$ or $X \\sim \\text{Geometric}(p)$ — **distribution of the random variable**.
+
+$Geom(p)$ — **used to denote the distribution itself (not the random variable)**.
+
+$G(p)$ — **less common shorthand in some texts or software contexts**.
+
+$P(X = k) = (1 - p)^{k - 1} p, \\quad \\text{for } k = 1, 2, 3, \\dots$ — probability mass function
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+
+     `,
     },
     negative:{
       title:`Negative Binomial Distribution`,
@@ -599,6 +661,33 @@ It’s useful to compare with the negative binomial, where instead of fixing how
 ✔ Repeating the same [Bernoulli](!/probability/distributions/discrete#bernoulli) trial independently.  
 ✔ Success probability remains constant across trials.  
 ✔ X is defined as the number of trials until the r-th success (inclusive).`,
+
+notation:`
+**Notations Used:**
+
+$X \\sim \\text{NegBin}(r, p)$ or $X \\sim \\text{NB}(r, p)$ — **distribution of the random variable**.
+
+$NegativeBinomial(r, p)$ — **used to denote the distribution itself (not the random variable)**.
+
+$NB(r, p)$ — **common shorthand, especially in statistical software**.
+
+$P(X = k) = \\binom{k - 1}{r - 1} p^r (1 - p)^{k - r}, \\quad \\text{for } k = r, r+1, r+2, \\dots$ — probability mass function (trials until $r$-th success)
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+
+`,
+
+parameters:`
+**Parameters of Negative Binomial Distribution **
+
+$𝑟$: number of successes to achieve (a positive integer)
+
+$𝑝$: probability of success in each trial, with $0<𝑝≤1$
+
+This distribution models the number of trials needed to observe $𝑟$ successes, assuming each trial is independent and has the same probability $𝑝$ of success. 
+The outcomes are integers $𝑟$, $𝑟+1$ ,$𝑟+2$ ,…, since at least $𝑟$ trials are needed. 
+$𝑟$ controls the target (how many successes), and $𝑝$ controls the chance of achieving each one — together, they define how spread out or concentrated the distribution is.
+`,
 
 // <h2 style="color: #3b82f6;">Checklist for Identifying a Negative Binomial Distribution</h2>
     },
@@ -616,6 +705,32 @@ It’s useful to compare with the negative binomial, where instead of fixing how
 ✔ The number of draws is fixed in advance.  
 ✔ $X$ is defined as the number of successes in the sample.
 `,
+
+notation:`
+**Notations Used:**
+
+$X \\sim \\text{Hypergeometric}(N, K, n)$ or $X \\sim \\text{Hyp}(N, K, n)$ — **distribution of the random variable**.
+
+$Hypergeometric(N, K, n)$ — **used to denote the distribution itself (not the random variable)**.
+
+$H(N, K, n)$ — **occasionally used in compact form, especially in software or formulas**.
+
+$P(X = k) = \\frac{\\binom{K}{k} \\binom{N - K}{n - k}}{\\binom{N}{n}}, \\quad \\text{for valid } k$ — probability mass function
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+
+`,
+parameters:`
+**Parameters of Hypergeometric Distribution** 
+
+$𝑁$: total population size
+
+$𝐾$: number of successes in the population
+
+$𝑛$: number of draws (without replacement), where $𝑛≤𝑁$
+
+The hypergeometric distribution models the number of successes in $𝑛$ draws from a finite population of size $𝑁$ that contains exactly $𝐾$ successes, without replacement. Unlike the binomial, where each trial is independent, here each draw changes the probabilities — once an item is drawn, it doesn't go back. This dependency is what defines the distribution’s behavior.
+`,
     },
   
     poisson:{
@@ -630,6 +745,28 @@ It’s useful to compare with the negative binomial, where instead of fixing how
 ✔ The probability of more than one event in an infinitesimal interval is negligible.  
 ✔ $X$ is defined as the number of events in a fixed interval.
 `,
+notation:`
+**Notations Used:**
+
+$X \\sim \\text{Poisson}(\\lambda)$ or $X \\sim \\mathcal{P}(\\lambda)$ — **distribution of the random variable**.
+
+$Poisson(\\lambda)$ — **used to denote the distribution itself (not the random variable)**.
+
+$P(\\lambda)$ — **sometimes used informally, especially in compact notation**.
+
+$P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}, \\quad \\text{for } k = 0, 1, 2, \\dots$ — probability mass function
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+
+`,
+parameters:`
+**Parameters of Poisson Distribution** 
+
+$𝜆$: the average rate (mean number of events), with $𝜆>0$
+The Poisson distribution models the number of events occurring in a fixed interval of time or space, assuming events happen independently and at a constant average rate $𝜆$. 
+It describes counts: 0, 1, 2, ..., with probabilities determined by how large or small $𝜆$ is. 
+The single parameter $𝜆$ controls both the mean and the variance of the distribution.
+`
     },
   
     bernoulli:{
@@ -810,6 +947,8 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
    { processContent(sectionsContent.uniform.checklist)}
     </div>,
+    sectionsContent.uniform.notation,
+    sectionsContent.uniform.parameters,
             // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["discrete uniform distribution"].svg }} key="table" />,
             <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: uniformTable }} key="table" />,
             sectionsContent.uniform.after,
@@ -831,6 +970,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
    { processContent(sectionsContent.binomial.checklist,)}
     </div>,
+    sectionsContent.binomial.notation,
     sectionsContent.binomial.parameters,
     
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["binomial distribution"].svg }} key="table" />,
@@ -855,6 +995,8 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
    { processContent(sectionsContent.geometric.checklist)}
     </div>,
+    sectionsContent.geometric.notation,
+    sectionsContent.geometric.parameters,
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["geometric distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: geometricTable }} key="table" />,
               sectionsContent.geometric.after,
@@ -876,7 +1018,8 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
    { processContent(sectionsContent.negative.checklist)}
     </div>,
-    
+    sectionsContent.negative.notation,
+    sectionsContent.negative.parameters,
    
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html:distributionsDiagramsData["negative binomial distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: negativeBinomialTable }} key="table" />,
@@ -899,6 +1042,8 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
    { processContent(sectionsContent.hypergeometric.checklist)}
     </div>,
+    sectionsContent.hypergeometric.notation,
+    sectionsContent.hypergeometric.parameters,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: hypergeometricTable }} key="table" />,
               sectionsContent.hypergeometric.after,
             ]
@@ -918,6 +1063,8 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
    { processContent(sectionsContent.poisson.checklist)}
     </div>,
+    sectionsContent.poisson.notation,
+    sectionsContent.poisson.parameters,
     
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["poisson distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: poissonTable }} key="table" />,
