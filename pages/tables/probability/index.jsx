@@ -151,14 +151,14 @@ const probabilityTables = [
   
   
  
-  
   {
     name: 'Poisson Distribution',
     description: 'Poisson distribution tables showing probabilities for the number of events (x) occurring in a fixed interval given different average rates (λ).',
     icon: PoissonIcon,
     path: '/tables/probability/poisson-distribution'
   },
- 
+  
+  
  
   
 ];
@@ -196,7 +196,7 @@ export default function ProbabilityTables() {
             const Icon = table.icon;
             return (
              
-              table.path&&(<Link href={table.path} key={table.name} className={styles.linkCard}>
+              <Link href={table.path} key={table.name} className={styles.card}>
                 <div className={styles.cardHeader}>
                   <Icon className={styles.icon} />
                   <h2 className={styles.tableTitle}>{table.name}</h2>
@@ -205,7 +205,7 @@ export default function ProbabilityTables() {
                 <div className={styles.cardFooter}>
                   <span className={styles.viewText}>Explore Table</span>
                 </div>
-              </Link>)
+              </Link>
              
              
             );

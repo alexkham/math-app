@@ -41,6 +41,7 @@
     max-width: 800px;
     margin: 0 auto;
     justify-content: center;
+    text-decoration: none;
   }
   .card {
     background-color: white;
@@ -49,8 +50,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     display: flex;
-    flex-direction: column;
-    
+    flex-direction: column;    
     text-decoration: none;
   } 
   
