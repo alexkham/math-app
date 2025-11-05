@@ -570,6 +570,45 @@ The uniform discrete distribution assigns equal probability to each integer betw
 This distribution is used when there's no reason to favor any outcome over another — every value is equally likely by design.
 
 `,
+pmf:`
+The **probability mass function (PMF)** of a **discrete uniform distribution** is given by:
+
+$P(X = x) = \\frac{1}{b - a + 1} = \\frac{1}{n}, \\quad x \\in \\{x_1, x_2, \\dots, x_n\\}$
+
+Where :
+$a$ = lower bound (integer)
+$b$ = upper bound (integer)
+$𝑛=b−a+1$ is total number of possible values 
+
+### Intuition Behind the Formula
+
+**Uniformity**: The term "uniform" implies that each outcome is equally likely. That is, no single value of the random variable is preferred over another. This is the key feature of a uniform distribution.
+
+**Support (Range of the Random Variable)**:
+  * The random variable $X$ can take on $n = b - a + 1$ distinct values: $x_1, x_2, \\ldots, x_n$.
+  * These values could be consecutive integers (like $1, 2, 3, \\ldots, n$) or any set of $n$ distinct values.
+  * The **range** or **support** is thus a finite, countable set.
+
+**Logic Behind the Formula**:
+ 
+ The total probability must sum to 1:
+  
+  $\\sum_{i=1}^n P(X = x_i) = 1$
+  
+Since all probabilities are equal:
+  
+  $n \\cdot \\frac{1}{n} = (b - a + 1) \\cdot \\frac{1}{b - a + 1} = 1$
+  
+  This makes the individual probability of each outcome $\\frac{1}{n} = \\frac{1}{b - a + 1}$.
+
+### Practical Example
+Suppose you roll a fair six-sided die. The possible outcomes are $\\{1, 2, 3, 4, 5, 6\\}$, and the probability of each face is:
+
+$P(X = x) = \\frac{1}{6} = \\frac{1}{6 - 1 + 1}, \\quad x = 1, 2, 3, 4, 5, 6$
+
+Each face has an equal and independent chance of appearing.
+
+`
   
     },
     binomial:{
@@ -611,7 +650,47 @@ $P(X = k) = \\binom{n}{k} p^k (1 - p)^{n - k}$ — probability mass function
 
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 `,
+  pmf:`
+  The **probability mass function (PMF)** of a **binomial distribution** is given by:
+
+$P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}, \\quad k = 0, 1, 2, \\ldots, n$
+
+where $\\binom{n}{k} = \\frac{n!}{k!(n-k)!}$ is the binomial coefficient.
+
+### Intuition Behind the Formula
+
+* **Fixed Number of Trials**: The binomial distribution models the number of successes in $n$ independent trials, where each trial has only two possible outcomes: success or failure.
+
+* **Parameters**:
+  * $n$: The number of independent trials
+  * $p$: The probability of success on each trial
+  * $1-p$: The probability of failure on each trial (often denoted as $q$)
+
+* **Support (Range of the Random Variable)**:
+  * The random variable $X$ can take on values from $0$ to $n$ (inclusive).
+  * These represent the possible number of successes: $0, 1, 2, \\ldots, n$.
+  * The **support** is thus a finite set of $n+1$ non-negative integers.
+
+* **Logic Behind the Formula**:
+  * $\\binom{n}{k}$: The number of ways to choose $k$ successes from $n$ trials
+  * $p^k$: The probability of getting exactly $k$ successes
+  * $(1-p)^{n-k}$: The probability of getting exactly $n-k$ failures
+  * The total probability sums to 1:
   
+  $\\sum_{k=0}^{n} P(X = k) = \\sum_{k=0}^{n} \\binom{n}{k} p^k (1-p)^{n-k} = 1$
+  
+  * This follows from the binomial theorem: $(p + (1-p))^n = 1^n = 1$
+
+### Practical Example
+
+Suppose you flip a fair coin $n = 5$ times, where the probability of heads (success) is $p = 0.5$. The probability of getting exactly $k = 3$ heads is:
+
+$P(X = 3) = \\binom{5}{3} (0.5)^3 (0.5)^{5-3} = 10 \\cdot 0.125 \\cdot 0.25 = 0.3125$
+
+This means there's a 31.25% chance of getting exactly 3 heads in 5 coin flips.
+
+The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with probabilities determined by the formula above.
+  `,
     },
   
     geometric:{
@@ -949,6 +1028,8 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     </div>,
     sectionsContent.uniform.notation,
     sectionsContent.uniform.parameters,
+    sectionsContent.uniform.pmf,
+
             // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["discrete uniform distribution"].svg }} key="table" />,
             <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: uniformTable }} key="table" />,
             sectionsContent.uniform.after,
@@ -972,6 +1053,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     </div>,
     sectionsContent.binomial.notation,
     sectionsContent.binomial.parameters,
+    sectionsContent.binomial.pmf,
     
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["binomial distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: binomialTable }} key="table" />,

@@ -21,7 +21,7 @@ export async function getStaticProps(){
       basic:{
         title:`2 Basic Types of Distributions`,
         content:``,
-        before:`Probability distributions are mathematical models that quantify how likely different outcomes are when dealing with uncertainty and randomness. These powerful tools allow us to systematically describe and predict the behavior of random phenomena across countless real-world scenarios. They fall into two fundamental categories: **discrete distributions** deal with countable outcomes (like number of successes, coin flips, or defective items), while **continuous distributions** handle measurable quantities that can take any value within a range (like height, time, or temperature). The key difference lies in whether you can list all possible outcomes (discrete) or whether outcomes form an unbroken continuum (continuous).
+        before:`Probability distributions are mathematical models that quantify how likely different outcomes are when dealing with uncertainty and randomness. These powerful tools allow us to systematically describe and predict the behavior of random phenomena across countless real-world scenarios. They fall into two fundamental categories: [discrete distributions](!/probability/distributions#discrete-dist) deal with countable outcomes (like number of successes, coin flips, or defective items), while [continuous distributions](!/probability/distributions#continuous-dist) handle measurable quantities that can take any value within a range (like height, time, or temperature). The key difference lies in whether you can list all possible outcomes (discrete) or whether outcomes form an unbroken continuum (continuous).
 
         `,
         between:`
@@ -49,9 +49,9 @@ export async function getStaticProps(){
     
       },
     
-      obj3:{
+      continuous:{
     
-        title:``,
+        title:`Continuous Distributions`,
         content:``,
         before:``,
         after:``,
@@ -81,8 +81,8 @@ export async function getStaticProps(){
     const distributionsData = {
         basic: {
           title: "Probability Distributions",
-          leftTitle: "[Discrete Distributions](!/probability/distributions#discrete)",
-          rightTitle: "Continuous Distributions",
+          leftTitle: "[Discrete Distributions](!/probability/distributions#discrete-dist)",
+          rightTitle: "[Continuous Distributions](!/probability/distributions#continuous-dist)",
           left: [
             "[Discrete Uniform](!/probability/distributions/discrete#uniform):\nEqual probability for finite outcomes",
             "[Binomial](!/probability/distributions/discrete#binomial):\nSuccesses in n trials with probability p each",
@@ -194,7 +194,7 @@ export default function DistributionsPage({sectionsContent,introContent,distribu
         ]
     },
     {
-        id:'discrete-section',
+        id:'discrete-dist',
         title:sectionsContent.discrete.title,
         link:sectionsContent.discrete.link,
         content:[
@@ -207,6 +207,12 @@ export default function DistributionsPage({sectionsContent,introContent,distribu
           sectionsContent.discrete.after,
           
         ]
+    },
+     {
+        id:'continuous-dist',
+        title:sectionsContent.continuous.title,
+        link:'',
+        content:''
     },
     // {
     //     id:'',
