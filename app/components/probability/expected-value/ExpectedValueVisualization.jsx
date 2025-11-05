@@ -220,7 +220,7 @@ export default function ExpectedValueVisualization() {
         </p>
         <p style={{ margin: '10px 0', lineHeight: '1.6', color: '#333' }}>
           Each bar shows the probability of that outcome, and the number inside shows 
-          that value's contribution to the expected value (x · P(X = x)).
+          that value&apos;s contribution to the expected value (x · P(X = x)).
         </p>
       </div>
     </div>
