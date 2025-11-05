@@ -82,7 +82,7 @@ export default function LogCalculatorPage({ logarithmExplanations, detailInstruc
         panelBackgroundColor='#f2f2f2'
       />
       <h1 className='title' style={{marginTop:'-0px',marginBottom:'20px'}}>Logarithm Calculator</h1>
-      <div style={{marginBottom:'-20px'}}>
+      <div style={{marginBottom:'10px'}}>
         <ExplanationDetails 
           instructions={detailInstructionsLogarithms}
           title='How to use Logarithm Calculator'

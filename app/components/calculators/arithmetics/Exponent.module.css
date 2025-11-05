@@ -60,7 +60,7 @@
   font-size: 14px;
   letter-spacing: 0.01em;
 }
-
+/* 
 .radio_container {
   display: flex;
   gap: 20px;
@@ -78,8 +78,42 @@
   font-size: 15px;
   display: flex;
   align-items: center;
+} */
+
+
+
+.radio_container {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
+.radio_container input[type="radio"] {
+  display: none;
+}
+
+.radio_container label {
+  cursor: pointer;
+  color: #475569;
+  font-size: 15px;
+  padding: 10px 20px;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: #ffffff;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.radio_container label:hover {
+  border-color: #3498db;
+  background-color: #f8fafc;
+}
+
+.radio_container input[type="radio"]:checked + label {
+  background-color: #3498db;
+  color: #ffffff;
+  border-color: #3498db;
+}
 .calculatorBodyWrapper {
   margin-bottom: 24px;
 }
