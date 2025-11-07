@@ -53,8 +53,11 @@ export async function getStaticProps(){
     
         title:`Continuous Distributions`,
         content:``,
-        before:``,
-        after:``,
+        before:`@academic[proof:Reminder:Random Variable is a function that maps each fundamental outcome of a probabilistic experiment to a real number.]@
+       A **Continuous Random Variable** is a random variable that can take on any value within an interval or collection of intervals on the real line—its possible values form an uncountable set. Instead of assigning probabilities to individual points, a continuous distribution uses a **probability density function (PDF)** to describe the relative likelihood of values, with probabilities determined by integrating the density over intervals.
+Common continuous distributions include the uniform, normal, exponential, gamma, beta, and chi-square distributions, among others—each characterized by different underlying phenomena they model, such as equal likelihood over an interval, bell-shaped symmetry around a mean, waiting times between events, or distributions arising from transformations of other random variables. They vary in their support (the range of possible values) and the parameters that control their shape and behavior.
+        `,
+        after:`Identifying the appropriate continuous distribution for a problem is essential for accurate probabilistic modeling and analysis. The key lies in recognizing the underlying structure—whether you're dealing with measurements that cluster symmetrically around a center, modeling time until an event occurs, working with proportions bounded between zero and one, or analyzing variables constructed from other random quantities. Each distribution provides established formulas for expected values, variances, and other properties that capture its essential behavior, sparing you from complex integrations each time. Mastering these characteristic patterns enables you to select the right framework and approach your analysis with clarity.`,
     
       },
       obj4:{
@@ -140,6 +143,42 @@ export async function getStaticProps(){
           },
         ]
       };
+
+      const continuousDistributionsTypesData = {
+  tableTitle: 'Common Continuous Distributions',
+  rows: [
+    {
+      type: '[Continuous Uniform](!/probability/distributions/continuous#uniform)',
+      description: 'Every value in the interval $[a,b]$ has equal probability density—complete symmetry across the support.',
+      examples: 'Random angle between 0° and 360°; arrival time uniformly distributed within an hour'
+    },
+    {
+      type: '[Normal (Gaussian)](!/probability/distributions/continuous#normal)',
+      description: 'Bell-shaped distribution symmetric around mean $\\mu$ with spread controlled by variance $\\sigma^2$; arises from the Central Limit Theorem.',
+      examples: 'Heights of adult humans; measurement errors in scientific instruments; test scores'
+    },
+    {
+      type: '[Exponential](!/probability/distributions/continuous#exponential)',
+      description: 'Models the waiting time between independent events occurring at constant rate $\\lambda$; has the memoryless property.',
+      examples: 'Time between arrivals at a queue; lifespan of a radioactive particle; time until next phone call'
+    },
+    {
+      type: '[Gamma](!/probability/distributions/continuous#gamma)',
+      description: 'Generalizes the exponential to model the waiting time until the $k$th event at rate $\\lambda$; uses shape parameter $k$ and rate parameter $\\lambda$.',
+      examples: 'Time until $k$ customers arrive; total rainfall accumulation; time to complete multiple tasks'
+    },
+    {
+      type: '[Beta](!/probability/distributions/continuous#beta)',
+      description: 'Models random proportions or probabilities on $[0,1]$ with shape parameters $\\alpha$ and $\\beta$; flexible family for bounded continuous variables.',
+      examples: 'Proportion of defective items in a batch; click-through rate; task completion percentage'
+    },
+    {
+      type: '[Chi-Square](!/probability/distributions/continuous#chi-square)',
+      description: 'Distribution of the sum of $\\nu$ squared independent standard normal variables; used in hypothesis testing and confidence intervals.',
+      examples: 'Goodness-of-fit test statistic; sample variance of normal data; test of independence in contingency tables'
+    }
+  ]
+};
       
     
 const introContent = {
@@ -160,7 +199,8 @@ Mastering probability distributions gives you the mathematical foundation to tac
           sectionsContent,
           introContent,
           distributionsData,
-          discreteDistributionsTypesData
+          discreteDistributionsTypesData,
+          continuousDistributionsTypesData,
 
           
         }
@@ -168,7 +208,9 @@ Mastering probability distributions gives you the mathematical foundation to tac
     }
     
 
-export default function DistributionsPage({sectionsContent,introContent,distributionsData,discreteDistributionsTypesData}) {
+export default function DistributionsPage({sectionsContent,introContent,
+  distributionsData,discreteDistributionsTypesData,
+continuousDistributionsTypesData}) {
    
     
   const distributionsSections=[
@@ -212,7 +254,14 @@ export default function DistributionsPage({sectionsContent,introContent,distribu
         id:'continuous-dist',
         title:sectionsContent.continuous.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.continuous.before,
+           <GenericTable key={3} tableData={continuousDistributionsTypesData} theme='lightBlue'
+          cellFontSize={'16px'}
+          headerFontSize={'18px'}/>,
+          sectionsContent.continuous.after,
+
+        ]
     },
     // {
     //     id:'',

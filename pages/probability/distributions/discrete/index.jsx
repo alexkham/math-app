@@ -730,6 +730,41 @@ $P(X = k) = (1 - p)^{k - 1} p, \\quad \\text{for } k = 1, 2, 3, \\dots$ — prob
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
      `,
+     pmf:`
+     The **probability mass function (PMF)** of a **geometric distribution** is given by:
+
+$P(X = k) = (1-p)^{k-1} p, \\quad k = 1, 2, 3, \\ldots$
+
+### Intuition Behind the Formula
+
+* **First Success**: The geometric distribution models the number of trials needed to get the first success in a sequence of independent Bernoulli trials.
+
+* **Parameters**:
+  * $p$: The probability of success on each trial
+  * $1-p$: The probability of failure on each trial (often denoted as $q$)
+
+* **Support (Range of the Random Variable)**:
+  * The random variable $X$ can take on values $1, 2, 3, \\ldots$ (all positive integers).
+  * $X = k$ means the first success occurs on the $k$-th trial.
+  * The **support** is thus a countably infinite set.
+
+* **Logic Behind the Formula**:
+  * $(1-p)^{k-1}$: The probability of getting $k-1$ failures before the first success
+  * $p$: The probability of success on the $k$-th trial
+  * The total probability sums to 1:
+  
+  $\\sum_{k=1}^{\\infty} P(X = k) = \\sum_{k=1}^{\\infty} (1-p)^{k-1} p = p \\sum_{k=1}^{\\infty} (1-p)^{k-1} = p \\cdot \\frac{1}{1-(1-p)} = p \\cdot \\frac{1}{p} = 1$
+  
+  * This uses the geometric series formula: $\\sum_{k=0}^{\\infty} r^k = \\frac{1}{1-r}$ for $|r| < 1$
+
+### Practical Example
+
+Suppose you're rolling a fair six-sided die until you get a 6. The probability of rolling a 6 is $p = \\frac{1}{6}$. The probability that you need exactly $k = 4$ rolls to get your first 6 is:
+
+$P(X = 4) = \\left(\\frac{5}{6}\\right)^{4-1} \\cdot \\frac{1}{6} = \\left(\\frac{5}{6}\\right)^{3} \\cdot \\frac{1}{6} \\approx 0.096$
+
+This means there's about a 9.6% chance that you'll need exactly 4 rolls to get your first 6.
+     `,
     },
     negative:{
       title:`Negative Binomial Distribution`,
@@ -766,6 +801,47 @@ $𝑝$: probability of success in each trial, with $0<𝑝≤1$
 This distribution models the number of trials needed to observe $𝑟$ successes, assuming each trial is independent and has the same probability $𝑝$ of success. 
 The outcomes are integers $𝑟$, $𝑟+1$ ,$𝑟+2$ ,…, since at least $𝑟$ trials are needed. 
 $𝑟$ controls the target (how many successes), and $𝑝$ controls the chance of achieving each one — together, they define how spread out or concentrated the distribution is.
+`,
+pmf:`
+The **probability mass function (PMF)** of a **negative binomial distribution** is given by:
+
+$P(X = k) = \\binom{k-1}{r-1} p^r (1-p)^{k-r}, \\quad k = r, r+1, r+2, \\ldots$
+
+where $\\binom{k-1}{r-1} = \\frac{(k-1)!}{(r-1)!(k-r)!}$ is the binomial coefficient.
+
+### Intuition Behind the Formula
+
+* **Fixed Number of Successes**: The negative binomial distribution models the number of trials needed to achieve exactly $r$ successes in a sequence of independent Bernoulli trials.
+
+* **Parameters**:
+  * $r$: The number of successes we want to achieve (a positive integer)
+  * $p$: The probability of success on each trial
+  * $1-p$: The probability of failure on each trial (often denoted as $q$)
+
+* **Support (Range of the Random Variable)**:
+  * The random variable $X$ can take on values $r, r+1, r+2, \\ldots$ (integers starting from $r$).
+  * $X = k$ means the $r$-th success occurs on the $k$-th trial.
+  * The **support** is thus a countably infinite set.
+
+* **Logic Behind the Formula**:
+  * $\\binom{k-1}{r-1}$: The number of ways to arrange $r-1$ successes in the first $k-1$ trials (the $k$-th trial must be the $r$-th success)
+  * $p^r$: The probability of getting exactly $r$ successes
+  * $(1-p)^{k-r}$: The probability of getting exactly $k-r$ failures
+  * The total probability sums to 1:
+  
+  $\\sum_{k=r}^{\\infty} P(X = k) = \\sum_{k=r}^{\\infty} \\binom{k-1}{r-1} p^r (1-p)^{k-r} = 1$
+  
+  * This follows from the negative binomial series expansion.
+
+### Practical Example
+
+Suppose you're flipping a coin until you get $r = 3$ heads, where the probability of heads is $p = 0.5$. The probability that you need exactly $k = 6$ flips to get your third head is:
+
+$P(X = 6) = \\binom{6-1}{3-1} (0.5)^3 (0.5)^{6-3} = \\binom{5}{2} (0.5)^3 (0.5)^3 = 10 \\cdot 0.125 \\cdot 0.125 = 0.15625$
+
+This means there's a 15.625% chance that you'll need exactly 6 flips to get your third head.
+
+Note: The geometric distribution is a special case of the negative binomial distribution where $r = 1$.
 `,
 
 // <h2 style="color: #3b82f6;">Checklist for Identifying a Negative Binomial Distribution</h2>
@@ -810,6 +886,50 @@ $𝑛$: number of draws (without replacement), where $𝑛≤𝑁$
 
 The hypergeometric distribution models the number of successes in $𝑛$ draws from a finite population of size $𝑁$ that contains exactly $𝐾$ successes, without replacement. Unlike the binomial, where each trial is independent, here each draw changes the probabilities — once an item is drawn, it doesn't go back. This dependency is what defines the distribution’s behavior.
 `,
+pmf:`
+The **probability mass function (PMF)** of a **hypergeometric distribution** is given by:
+
+$P(X = k) = \\frac{\\binom{K}{k} \\binom{N-K}{n-k}}{\\binom{N}{n}}, \\quad k = \\max(0, n-N+K), \\ldots, \\min(n, K)$
+
+where $\\binom{a}{b} = \\frac{a!}{b!(a-b)!}$ is the binomial coefficient.
+
+### Intuition Behind the Formula
+
+* **Sampling Without Replacement**: The hypergeometric distribution models the number of successes when drawing $n$ items without replacement from a finite population of size $N$ containing exactly $K$ success items.
+
+* **Parameters**:
+  * $N$: Total population size
+  * $K$: Number of success items in the population
+  * $n$: Number of draws (sample size)
+  * $N-K$: Number of failure items in the population
+
+* **Support (Range of the Random Variable)**:
+  * The random variable $X$ can take on values from $\\max(0, n-N+K)$ to $\\min(n, K)$.
+  * $X = k$ means exactly $k$ successes are drawn in the sample of size $n$.
+  * The lower bound ensures we don't draw more failures than available: $n-k \\leq N-K$
+  * The upper bound ensures we don't draw more successes than available: $k \\leq K$ and $k \\leq n$
+  * The **support** is thus a finite set of non-negative integers.
+
+* **Logic Behind the Formula**:
+  * $\\binom{K}{k}$: The number of ways to choose $k$ successes from $K$ available successes
+  * $\\binom{N-K}{n-k}$: The number of ways to choose $n-k$ failures from $N-K$ available failures
+  * $\\binom{N}{n}$: The total number of ways to choose $n$ items from $N$ items
+  * The total probability sums to 1:
+  
+  $\\sum_{k=\\max(0,n-N+K)}^{\\min(n,K)} P(X = k) = \\sum_{k=\\max(0,n-N+K)}^{\\min(n,K)} \\frac{\\binom{K}{k} \\binom{N-K}{n-k}}{\\binom{N}{n}} = 1$
+  
+  * This follows from Vandermonde's identity.
+
+### Practical Example
+
+Suppose you have a deck of $N = 52$ cards containing $K = 13$ hearts. You draw $n = 5$ cards without replacement. The probability of getting exactly $k = 2$ hearts is:
+
+$P(X = 2) = \\frac{\\binom{13}{2} \\binom{52-13}{5-2}}{\\binom{52}{5}} = \\frac{\\binom{13}{2} \\binom{39}{3}}{\\binom{52}{5}} = \\frac{78 \\cdot 9139}{2598960} \\approx 0.274$
+
+This means there's about a 27.4% chance of getting exactly 2 hearts when drawing 5 cards from a standard deck.
+
+Note: When $N$ is very large relative to $n$, the hypergeometric distribution approximates the binomial distribution with $p = \\frac{K}{N}$.
+`,
     },
   
     poisson:{
@@ -845,7 +965,45 @@ $𝜆$: the average rate (mean number of events), with $𝜆>0$
 The Poisson distribution models the number of events occurring in a fixed interval of time or space, assuming events happen independently and at a constant average rate $𝜆$. 
 It describes counts: 0, 1, 2, ..., with probabilities determined by how large or small $𝜆$ is. 
 The single parameter $𝜆$ controls both the mean and the variance of the distribution.
-`
+`,
+pmf:`
+The **probability mass function (PMF)** of a **Poisson distribution** is given by:
+
+$P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}, \\quad k = 0, 1, 2, \\ldots$
+
+### Intuition Behind the Formula
+
+* **Counting Rare Events**: The Poisson distribution models the number of events occurring in a fixed interval of time or space when events occur independently at a constant average rate.
+
+* **Parameters**:
+  * $\\lambda$: The average rate (mean number of events) in the given interval
+  * $\\lambda > 0$
+
+* **Support (Range of the Random Variable)**:
+  * The random variable $X$ can take on values $0, 1, 2, 3, \\ldots$ (all non-negative integers).
+  * $X = k$ means exactly $k$ events occur in the interval.
+  * The **support** is thus a countably infinite set.
+
+* **Logic Behind the Formula**:
+  * $\\lambda^k$: Represents the rate parameter raised to the power of the number of events
+  * $e^{-\\lambda}$: The exponential decay factor ensuring probabilities sum to 1
+  * $k!$: Accounts for the number of ways $k$ events can be ordered
+  * The total probability sums to 1:
+  
+  $\\sum_{k=0}^{\\infty} P(X = k) = \\sum_{k=0}^{\\infty} \\frac{\\lambda^k e^{-\\lambda}}{k!} = e^{-\\lambda} \\sum_{k=0}^{\\infty} \\frac{\\lambda^k}{k!} = e^{-\\lambda} \\cdot e^{\\lambda} = 1$
+  
+  * This uses the Taylor series expansion: $e^{\\lambda} = \\sum_{k=0}^{\\infty} \\frac{\\lambda^k}{k!}$
+
+### Practical Example
+
+Suppose a call center receives an average of $\\lambda = 4$ calls per hour. The probability of receiving exactly $k = 6$ calls in a given hour is:
+
+$P(X = 6) = \\frac{4^6 e^{-4}}{6!} = \\frac{4096 \\cdot 0.0183}{720} \\approx 0.104$
+
+This means there's about a 10.4% chance of receiving exactly 6 calls in an hour.
+
+Note: The Poisson distribution is often used as an approximation to the binomial distribution when $n$ is large and $p$ is small, with $\\lambda = np$.
+`,
     },
   
     bernoulli:{
@@ -1079,6 +1237,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     </div>,
     sectionsContent.geometric.notation,
     sectionsContent.geometric.parameters,
+    sectionsContent.geometric.pmf,
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["geometric distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: geometricTable }} key="table" />,
               sectionsContent.geometric.after,
@@ -1102,6 +1261,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     </div>,
     sectionsContent.negative.notation,
     sectionsContent.negative.parameters,
+    sectionsContent.negative.pmf,
    
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html:distributionsDiagramsData["negative binomial distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: negativeBinomialTable }} key="table" />,
@@ -1126,6 +1286,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     </div>,
     sectionsContent.hypergeometric.notation,
     sectionsContent.hypergeometric.parameters,
+    sectionsContent.hypergeometric.pmf,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: hypergeometricTable }} key="table" />,
               sectionsContent.hypergeometric.after,
             ]
@@ -1147,6 +1308,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     </div>,
     sectionsContent.poisson.notation,
     sectionsContent.poisson.parameters,
+    sectionsContent.poisson.pmf,
     
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["poisson distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: poissonTable }} key="table" />,
