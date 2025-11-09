@@ -303,6 +303,7 @@ import React, { useState } from 'react';
 import Big from 'big.js';
 import styles from './FactorialCalculator.module.css';
 import factorialExplanations from './factorialExplanations';
+import { processContent } from '@/app/utils/contentProcessor';
 
 function FactorialCalculator({ explanations = factorialExplanations }) {
   const [value, setValue] = useState('');
@@ -596,7 +597,7 @@ function FactorialCalculator({ explanations = factorialExplanations }) {
         <div className={styles.explanationContainer}>
           <div className={styles.explanationContent}>
             <p className={styles.explanationText}>
-              {explanations[factorialType].text}
+              {processContent(explanations[factorialType].text)}
             </p>
             {explanations[factorialType].links && (
               <div className={styles.explanationLinks}>
