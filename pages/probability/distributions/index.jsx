@@ -52,6 +52,7 @@ export async function getStaticProps(){
       continuous:{
     
         title:`Continuous Distributions`,
+        link:'/probability/distributions/continuous',
         content:``,
         before:`@academic[proof:Reminder:Random Variable is a function that maps each fundamental outcome of a probabilistic experiment to a real number.]@
        A **Continuous Random Variable** is a random variable that can take on any value within an interval or collection of intervals on the real line—its possible values form an uncountable set. Instead of assigning probabilities to individual points, a continuous distribution uses a **probability density function (PDF)** to describe the relative likelihood of values, with probabilities determined by integrating the density over intervals.
@@ -253,7 +254,7 @@ continuousDistributionsTypesData}) {
      {
         id:'continuous-dist',
         title:sectionsContent.continuous.title,
-        link:'',
+        link:sectionsContent.continuous.link,
         content:[
           sectionsContent.continuous.before,
            <GenericTable key={3} tableData={continuousDistributionsTypesData} theme='lightBlue'

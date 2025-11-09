@@ -1597,6 +1597,467 @@ export const distributionsDiagramsData={
             {text:``,url:``},
         ]
     },
+    "continuous uniform distribution":{
+        svg:`
+        <svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="900" height="700" fill="#f5f5f5"/>
+  
+  <!-- Title -->
+  <text x="450" y="35" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    Continuous Uniform Distribution
+  </text>
+  
+  <!-- Parameters box -->
+  <rect x="275" y="50" width="350" height="60" fill="#5b7a9b" stroke="#4a6178" stroke-width="2" rx="8"/>
+  <text x="450" y="78" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">
+    All values in [a,b] equally likely
+  </text>
+  <text x="450" y="98" font-family="Arial, sans-serif" font-size="13" fill="white" text-anchor="middle">
+    X can take any real value in the interval [a, b]
+  </text>
+  
+  <!-- Concept illustration -->
+  <text x="450" y="145" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    CONSTANT PROBABILITY DENSITY
+  </text>
+  
+  <!-- Example -->
+  <text x="450" y="180" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50" text-anchor="middle">
+    Example: Random time between 0 and 10 minutes (a=0, b=10)
+  </text>
+  
+  <!-- Arrow down -->
+  <line x1="450" y1="195" x2="450" y2="225" stroke="#34495e" stroke-width="3"/>
+  <polygon points="450,225 445,215 455,215" fill="#34495e"/>
+  
+  <!-- Probability Density Function -->
+  <text x="450" y="255" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    PROBABILITY DENSITY FUNCTION: f(x)
+  </text>
+  
+  <!-- Axes -->
+  <line x1="90" y1="470" x2="665" y2="470" stroke="#2c3e50" stroke-width="2"/>
+  <line x1="90" y1="290" x2="90" y2="470" stroke="#2c3e50" stroke-width="2"/>
+  
+  <!-- Uniform rectangle (flat top) -->
+  <rect x="190" y="350" width="370" height="120" fill="#3d7a54" fill-opacity="0.7" stroke="#2d5a3d" stroke-width="3"/>
+  
+  <!-- Vertical lines at boundaries -->
+  <line x1="190" y1="350" x2="190" y2="470" stroke="#2d5a3d" stroke-width="3"/>
+  <line x1="560" y1="350" x2="560" y2="470" stroke="#2d5a3d" stroke-width="3"/>
+  
+  <!-- Zero density outside [a,b] -->
+  <line x1="90" y1="470" x2="190" y2="470" stroke="#8b0000" stroke-width="3"/>
+  <line x1="560" y1="470" x2="665" y2="470" stroke="#8b0000" stroke-width="3"/>
+  
+  <!-- Boundary markers -->
+  <text x="190" y="490" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">a</text>
+  <text x="560" y="490" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">b</text>
+  
+  <!-- Height annotation -->
+  <line x1="90" y1="350" x2="85" y2="350" stroke="#2c3e50" stroke-width="2"/>
+  <line x1="90" y1="470" x2="85" y2="470" stroke="#2c3e50" stroke-width="2"/>
+  <line x1="85" y1="350" x2="85" y2="470" stroke="#2c3e50" stroke-width="2"/>
+  <text x="50" y="415" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50" text-anchor="middle">
+    1/(b-a)
+  </text>
+  
+  <!-- Density label on top -->
+  <text x="375" y="330" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#3d7a54" text-anchor="middle">
+    f(x) = 1/(b-a) = 1/10 = 0.1
+  </text>
+  
+  <!-- Axis labels -->
+  <text x="377" y="520" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    Value (x)
+  </text>
+  <text x="30" y="380" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50" text-anchor="middle" transform="rotate(-90, 30, 380)">
+    Density
+  </text>
+  
+  <!-- Note box -->
+  <rect x="680" y="250" width="210" height="280" fill="#fff8e1" stroke="#ffb74d" stroke-width="2" rx="8"/>
+  <text x="785" y="285" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#6d4c41" text-anchor="middle">
+    Key Properties:
+  </text>
+  <text x="785" y="320" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Continuous distribution
+  </text>
+  <text x="785" y="355" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Defined on [a, b]
+  </text>
+  <text x="785" y="390" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Constant density
+  </text>
+  <text x="785" y="425" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • f(x) = 1/(b-a)
+  </text>
+  <text x="785" y="460" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • E(X) = (a+b)/2
+  </text>
+  <text x="785" y="495" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Var(X) = (b-a)²/12
+  </text>
+  
+  <!-- Formula -->
+  <text x="450" y="560" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50" text-anchor="middle">
+    X ~ Uniform(a, b)
+  </text>
+  
+  <!-- Example note -->
+  <text x="450" y="585" font-family="Arial, sans-serif" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">
+    Example shown: uniform on [0,10] with constant density 0.1
+  </text>
+  
+  <!-- Formula box - BIG CARD -->
+  <rect x="100" y="600" width="700" height="90" fill="#ffffff" stroke="#5b7a9b" stroke-width="4" rx="10"/>
+  <text x="450" y="630" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    PROBABILITY DENSITY FUNCTION:
+  </text>
+  <text x="450" y="662" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    f(x) = 1/(b-a)  for a ≤ x ≤ b,  and  f(x) = 0  otherwise
+  </text>
+  <text x="450" y="682" font-family="Arial, sans-serif" font-size="14" fill="#4a5a6a" text-anchor="middle">
+    Area under the curve equals 1: (b-a) × 1/(b-a) = 1
+  </text>
+</svg>
+        `,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
+    "normal distribution":{
+        svg:`
+        <svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="900" height="700" fill="#f5f5f5"/>
+  
+  <!-- Title -->
+  <text x="450" y="35" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    Normal (Gaussian) Distribution
+  </text>
+  
+  <!-- Parameters box -->
+  <rect x="250" y="50" width="400" height="60" fill="#5b7a9b" stroke="#4a6178" stroke-width="2" rx="8"/>
+  <text x="450" y="78" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">
+    Symmetric bell curve around mean μ
+  </text>
+  <text x="450" y="98" font-family="Arial, sans-serif" font-size="13" fill="white" text-anchor="middle">
+    X can take any real value from -∞ to +∞
+  </text>
+  
+  <!-- Concept illustration -->
+  <text x="450" y="145" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    BELL-SHAPED PROBABILITY DENSITY
+  </text>
+  
+  <!-- Example -->
+  <text x="450" y="180" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50" text-anchor="middle">
+    Example: Human heights with μ=170 cm, σ=10 cm
+  </text>
+  
+  <!-- Arrow down -->
+  <line x1="450" y1="195" x2="450" y2="225" stroke="#34495e" stroke-width="3"/>
+  <polygon points="450,225 445,215 455,215" fill="#34495e"/>
+  
+  <!-- Probability Density Function -->
+  <text x="450" y="255" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    PROBABILITY DENSITY FUNCTION: f(x)
+  </text>
+  
+  <!-- Axes -->
+  <line x1="90" y1="470" x2="665" y2="470" stroke="#2c3e50" stroke-width="2"/>
+  <line x1="90" y1="290" x2="90" y2="470" stroke="#2c3e50" stroke-width="2"/>
+  
+  <!-- Bell curve using path -->
+  <path d="M 90,470 Q 150,465 200,440 Q 250,380 300,340 Q 350,310 377,305 Q 404,310 450,340 Q 500,380 550,440 Q 600,465 665,470" 
+        fill="#3d7a54" fill-opacity="0.6" stroke="#2d5a3d" stroke-width="3"/>
+  
+  <!-- Mean line (center) -->
+  <line x1="377" y1="305" x2="377" y2="470" stroke="#c0392b" stroke-width="3" stroke-dasharray="8,4"/>
+  <text x="377" y="495" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#c0392b" text-anchor="middle">μ</text>
+  
+  <!-- Standard deviation markers -->
+  <line x1="277" y1="465" x2="277" y2="475" stroke="#e67e22" stroke-width="2"/>
+  <text x="277" y="495" font-family="Arial, sans-serif" font-size="14" fill="#e67e22" text-anchor="middle">μ-σ</text>
+  
+  <line x1="477" y1="465" x2="477" y2="475" stroke="#e67e22" stroke-width="2"/>
+  <text x="477" y="495" font-family="Arial, sans-serif" font-size="14" fill="#e67e22" text-anchor="middle">μ+σ</text>
+  
+  <line x1="177" y1="465" x2="177" y2="475" stroke="#95a5a6" stroke-width="2"/>
+  <text x="177" y="495" font-family="Arial, sans-serif" font-size="12" fill="#95a5a6" text-anchor="middle">μ-2σ</text>
+  
+  <line x1="577" y1="465" x2="577" y2="475" stroke="#95a5a6" stroke-width="2"/>
+  <text x="577" y="495" font-family="Arial, sans-serif" font-size="12" fill="#95a5a6" text-anchor="middle">μ+2σ</text>
+  
+  <!-- Peak height annotation -->
+  <text x="377" y="285" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#3d7a54" text-anchor="middle">
+    Peak at μ
+  </text>
+  
+  <!-- 68-95-99.7 rule annotations -->
+  <text x="327" y="360" font-family="Arial, sans-serif" font-size="11" fill="#e67e22" text-anchor="middle">68%</text>
+  <line x1="277" y1="370" x2="477" y2="370" stroke="#e67e22" stroke-width="2"/>
+  
+  <!-- Axis labels -->
+  <text x="377" y="525" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    Value (x)
+  </text>
+  <text x="30" y="380" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50" text-anchor="middle" transform="rotate(-90, 30, 380)">
+    Density
+  </text>
+  
+  <!-- Note box -->
+  <rect x="680" y="250" width="210" height="280" fill="#fff8e1" stroke="#ffb74d" stroke-width="2" rx="8"/>
+  <text x="785" y="285" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#6d4c41" text-anchor="middle">
+    Key Properties:
+  </text>
+  <text x="785" y="320" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Continuous distribution
+  </text>
+  <text x="785" y="350" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Symmetric bell curve
+  </text>
+  <text x="785" y="380" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Mean = Median = Mode
+  </text>
+  <text x="785" y="410" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • 68% within μ±σ
+  </text>
+  <text x="785" y="440" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • 95% within μ±2σ
+  </text>
+  <text x="785" y="470" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • E(X) = μ
+  </text>
+  <text x="785" y="500" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Var(X) = σ²
+  </text>
+  
+  <!-- Formula -->
+  <text x="450" y="560" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50" text-anchor="middle">
+    X ~ N(μ, σ²)
+  </text>
+  
+  <!-- Example note -->
+  <text x="450" y="585" font-family="Arial, sans-serif" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">
+    Example shown: bell curve centered at mean μ with standard deviation σ
+  </text>
+  
+  <!-- Formula box - BIG CARD -->
+  <rect x="80" y="600" width="740" height="90" fill="#ffffff" stroke="#5b7a9b" stroke-width="4" rx="10"/>
+  <text x="450" y="630" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    PROBABILITY DENSITY FUNCTION:
+  </text>
+  <text x="450" y="662" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    f(x) = (1/(σ√(2π))) · exp(-(x-μ)²/(2σ²))  for -∞ &lt; x &lt; +∞
+  </text>
+  <text x="450" y="682" font-family="Arial, sans-serif" font-size="14" fill="#4a5a6a" text-anchor="middle">
+    where μ is the mean and σ² is the variance
+  </text>
+</svg>
+        `,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
+    "exponential distribution":{
+        svg:`
+        <svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="900" height="700" fill="#f5f5f5"/>
+  
+  <!-- Title -->
+  <text x="450" y="35" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    Exponential Distribution
+  </text>
+  
+  <!-- Parameters box -->
+  <rect x="250" y="50" width="400" height="60" fill="#5b7a9b" stroke="#4a6178" stroke-width="2" rx="8"/>
+  <text x="450" y="78" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">
+    Waiting time between events at rate λ
+  </text>
+  <text x="450" y="98" font-family="Arial, sans-serif" font-size="13" fill="white" text-anchor="middle">
+    X can take any non-negative real value (0 to +∞)
+  </text>
+  
+  <!-- Concept illustration -->
+  <text x="450" y="145" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    EXPONENTIAL DECAY FROM PEAK AT ZERO
+  </text>
+  
+  <!-- Example -->
+  <text x="450" y="180" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50" text-anchor="middle">
+    Example: Time until next customer arrival with λ=0.5 per minute
+  </text>
+  
+  <!-- Arrow down -->
+  <line x1="450" y1="195" x2="450" y2="225" stroke="#34495e" stroke-width="3"/>
+  <polygon points="450,225 445,215 455,215" fill="#34495e"/>
+  
+  <!-- Probability Density Function -->
+  <text x="450" y="255" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    PROBABILITY DENSITY FUNCTION: f(x)
+  </text>
+  
+  <!-- Axes -->
+  <line x1="90" y1="470" x2="665" y2="470" stroke="#2c3e50" stroke-width="2"/>
+  <line x1="90" y1="290" x2="90" y2="470" stroke="#2c3e50" stroke-width="2"/>
+  
+  <!-- Exponential decay curve using path -->
+  <path d="M 90,310 C 110,325 130,345 160,370 C 200,405 250,435 320,455 C 400,468 500,470 665,470 L 90,470 Z" 
+        fill="#3d7a54" fill-opacity="0.6" stroke="#2d5a3d" stroke-width="3"/>
+  
+  <!-- Peak at x=0 -->
+  <line x1="90" y1="305" x2="90" y2="470" stroke="#c0392b" stroke-width="3"/>
+  <text x="90" y="495" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#c0392b" text-anchor="middle">0</text>
+  
+  <!-- Mean marker (1/λ) -->
+  <line x1="290" y1="465" x2="290" y2="475" stroke="#e67e22" stroke-width="2"/>
+  <text x="290" y="495" font-family="Arial, sans-serif" font-size="14" fill="#e67e22" text-anchor="middle">1/λ</text>
+  <line x1="290" y1="290" x2="290" y2="470" stroke="#e67e22" stroke-width="2" stroke-dasharray="6,4"/>
+  
+  <!-- Peak height annotation -->
+  <text x="140" y="295" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#3d7a54" text-anchor="middle">
+    Peak = λ
+  </text>
+  
+  <!-- Decay annotation -->
+  <text x="450" y="330" font-family="Arial, sans-serif" font-size="12" fill="#5a5a5a" text-anchor="middle">
+    Rapid decay: most events happen soon
+  </text>
+  
+  <!-- Memoryless property annotation -->
+  <text x="450" y="355" font-family="Arial, sans-serif" font-size="11" font-style="italic" fill="#7f8c8d" text-anchor="middle">
+    Memoryless: P(X &gt; s+t | X &gt; s) = P(X &gt; t)
+  </text>
+  
+  <!-- Axis labels -->
+  <text x="377" y="525" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    Time (x)
+  </text>
+  <text x="30" y="380" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50" text-anchor="middle" transform="rotate(-90, 30, 380)">
+    Density
+  </text>
+  
+  <!-- Note box -->
+  <rect x="680" y="250" width="210" height="280" fill="#fff8e1" stroke="#ffb74d" stroke-width="2" rx="8"/>
+  <text x="785" y="285" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#6d4c41" text-anchor="middle">
+    Key Properties:
+  </text>
+  <text x="785" y="320" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Continuous distribution
+  </text>
+  <text x="785" y="350" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Defined on [0, ∞)
+  </text>
+  <text x="785" y="380" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Memoryless property
+  </text>
+  <text x="785" y="410" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Peak at x = 0
+  </text>
+  <text x="785" y="440" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Rate parameter λ
+  </text>
+  <text x="785" y="470" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • E(X) = 1/λ
+  </text>
+  <text x="785" y="500" font-family="Arial, sans-serif" font-size="15" fill="#6d4c41" text-anchor="middle">
+    • Var(X) = 1/λ²
+  </text>
+  
+  <!-- Formula -->
+  <text x="450" y="560" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50" text-anchor="middle">
+    X ~ Exp(λ)
+  </text>
+  
+  <!-- Example note -->
+  <text x="450" y="585" font-family="Arial, sans-serif" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">
+    Example shown: exponential decay with rate λ, mean waiting time 1/λ
+  </text>
+  
+  <!-- Formula box - BIG CARD -->
+  <rect x="80" y="600" width="740" height="90" fill="#ffffff" stroke="#5b7a9b" stroke-width="4" rx="10"/>
+  <text x="450" y="630" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    PROBABILITY DENSITY FUNCTION:
+  </text>
+  <text x="450" y="662" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2c3e50" text-anchor="middle">
+    f(x) = λ · exp(-λx)  for x ≥ 0,  and  f(x) = 0  for x &lt; 0
+  </text>
+  <text x="450" y="682" font-family="Arial, sans-serif" font-size="14" fill="#4a5a6a" text-anchor="middle">
+    where λ &gt; 0 is the rate parameter (events per unit time)
+  </text>
+</svg>
+        `,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
+    "identity name":{
+        svg:``,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
+    "identity name":{
+        svg:``,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
+    "identity name":{
+        svg:``,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
+    "identity name":{
+        svg:``,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
+    "identity name":{
+        svg:``,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
+    "identity name":{
+        svg:``,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
     "identity name":{
         svg:``,
         explanation:``,

@@ -1297,6 +1297,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         link:'',
         content:[
            <SvgDiagram
+           
      key={'poisson'}
     layout='horizontal'
     data={distributionsDiagramsData['poisson distribution']}

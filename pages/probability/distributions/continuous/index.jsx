@@ -8,6 +8,8 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import { distributionsDiagramsData } from '@/app/api/db/diagrams/probability/distributions'
+import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
 
 
 export async function getStaticProps(){
@@ -19,25 +21,25 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    obj1:{
-      title:``,
+    normal:{
+      title:`Normal Distribution`,
       content:``,
       before:``,
       after:``,
   
   
     },
-    obj2:{
-      title:``,
+    uniform:{
+      title:`Uniform Continuous Distribution`,
       content:``,
       before:``,
       after:``,
   
     },
   
-    obj3:{
+    exponential:{
   
-      title:``,
+      title:`Exponential Distribution`,
       content:``,
       before:``,
       after:``,
@@ -94,23 +96,60 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
     
   const genericSections=[
     {
-        id:'1',
-        title:'section1',
+        id:'normal',
+        title:sectionsContent.normal.title,
         link:'',
-        content:''
+        content:[
+
+             <SvgDiagram
+            key={'normal'}
+    layout='horizontal'
+   
+    data={distributionsDiagramsData['normal distribution']}
+    />,
+
+        ]
     },
     {
-        id:'2',
-        title:'section2',
+        id:'uniform',
+        title:sectionsContent.uniform.title,
         link:'',
-        content:''
+        content:[
+          
+             <SvgDiagram
+            key={'uniform'}
+    layout='horizontal'
+   
+    data={distributionsDiagramsData['continuous uniform distribution']}
+    />,
+          
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'exponential',
+        title:sectionsContent.exponential.title,
         link:'',
-        content:''
-    }
+        content:[
+             <SvgDiagram
+            key={'exponential'}
+    layout='horizontal'
+   
+    data={distributionsDiagramsData['exponential distribution']}
+    />,
+        ]
+    },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // }
 ]
 
   return (
