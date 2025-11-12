@@ -104,6 +104,7 @@ export default async function Home() {
     
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="msvalidate.01" content="93FCA47C77A3B377FDB3B9FEA951F9CA" />
 </Head>
 <GenericNavbar/>
      
