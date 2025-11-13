@@ -111,7 +111,137 @@ export default async function Home() {
       <HomePage categorizedUrls={categorizedUrls} metaDescriptions={metaDescriptions}></HomePage>
      
       <br></br>
-    
+      <div style={{
+  maxWidth: '1200px',
+  margin: '40px auto',
+  padding: '20px 40px',
+  lineHeight: '1.7',
+  color: '#333',
+  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+}}>
+  <h1 style={{
+    color: '#2c3e50',
+    fontSize: '2.5rem',
+    marginBottom: '20px',
+    borderBottom: '3px solid #3498db',
+    paddingBottom: '15px',
+    marginLeft: '0'
+  }}>Welcome to LearnMathClass</h1>
+  
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    We've built this platform to make learning mathematics more intuitive and accessible. Whether you're a student working through homework, an educator preparing lessons, or someone who simply enjoys exploring mathematical ideas, we offer tools and resources designed to help you understand concepts rather than just memorize them.
+  </p>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    Our approach combines visual explanations, interactive calculators, and clear breakdowns of formulas across multiple branches of mathematics. Each section focuses on a specific area, giving you the depth you need without overwhelming you with everything at once.
+  </p>
+
+  <h2 style={{
+    color: '#34495e',
+    fontSize: '1.8rem',
+    marginTop: '40px',
+    marginBottom: '15px',
+    marginLeft: '0'
+  }}>What We Offer</h2>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    We've organized our content into focused sections covering different mathematical fields:
+  </p>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+      <a href="/algebra" style={{ color: '#3498db', textDecoration: 'none' }}>Algebra</a>
+    </strong> – We break down algebraic concepts into digestible pieces, covering everything from radical rules to logarithm laws with visual aids and examples.
+  </p>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+      <a href="/calculators" style={{ color: '#3498db', textDecoration: 'none' }}>Calculators</a>
+    </strong> – Our interactive calculators don't just give you answers. They walk you through each step of the solution, helping you understand the process behind the math.
+  </p>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+      <a href="/calculus" style={{ color: '#3498db', textDecoration: 'none' }}>Calculus</a>
+    </strong> – We use illustrated widgets and visual representations to make differentiation, integration, and limits less abstract and more approachable.
+  </p>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+      <a href="/combinatorics" style={{ color: '#3498db', textDecoration: 'none' }}>Combinatorics</a>
+    </strong> – From permutations to combinations and partitions, we provide formulas, practical examples, and interactive diagrams to help you visualize counting problems.
+  </p>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+      <a href="/probability" style={{ color: '#3498db', textDecoration: 'none' }}>Probability</a>
+    </strong> – We guide you through probability theory with comprehensive explanations that connect abstract concepts to real-world scenarios and statistical reasoning.
+  </p>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+      <a href="/linear-algebra" style={{ color: '#3498db', textDecoration: 'none' }}>Linear Algebra</a>
+    </strong> – We introduce you to vectors, matrices, and linear systems with tools that make these powerful concepts easier to grasp.
+  </p>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+      <a href="/trigonometry" style={{ color: '#3498db', textDecoration: 'none' }}>Trigonometry</a>
+    </strong> – We cover angles, sine, cosine, tangent, and their applications, helping you see how these functions work in solving triangles and modeling periodic behavior.
+  </p>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+      <a href="/logic" style={{ color: '#3498db', textDecoration: 'none' }}>Logic</a>
+    </strong> – We explore mathematical reasoning, from propositional logic to formal systems, showing how logical thinking underpins proofs and algorithms.
+  </p>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+      <a href="/set-theory" style={{ color: '#3498db', textDecoration: 'none' }}>Set Theory</a>
+    </strong> – We explain the foundational concepts of sets, including notation, relationships, and operations that form the basis of modern mathematics.
+  </p>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+      <a href="/sequences" style={{ color: '#3498db', textDecoration: 'none' }}>Sequences</a>
+    </strong> – We demonstrate patterns in number sequences like Fibonacci and primes, revealing their mathematical significance and natural occurrences.
+  </p>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+      <a href="/math-symbols" style={{ color: '#3498db', textDecoration: 'none' }}>Math Symbols</a>
+    </strong> – We maintain a reference of copyable mathematical symbols with clear explanations, organized for quick access when you need them.
+  </p>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+      <a href="/tables" style={{ color: '#3498db', textDecoration: 'none' }}>Tables</a>
+    </strong> – We provide reference tables for arithmetic, logarithmic, and trigonometric functions that you can use for quick lookups.
+  </p>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+      <a href="/keyboard" style={{ color: '#3498db', textDecoration: 'none' }}>Mathematical Keyboard</a>
+    </strong> – We offer an interactive tool where you can practice writing proper mathematical notation.
+  </p>
+
+  <h2 style={{
+    color: '#34495e',
+    fontSize: '1.8rem',
+    marginTop: '40px',
+    marginBottom: '15px',
+    marginLeft: '0'
+  }}>Our Philosophy</h2>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    We believe that understanding mathematics requires more than memorizing formulas. That's why we emphasize visual learning with diagrams and illustrations that make abstract ideas concrete. Our interactive tools let you experiment and see how changing variables affects outcomes. We structure our explanations to build your intuition step by step.
+  </p>
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    Whether you're preparing for an exam, working on a project, or exploring mathematics out of curiosity, we've designed this platform to be both a learning environment and a practical reference. We want you to not just find answers, but to understand the mathematical thinking behind them.
+  </p>
+</div>
       <br></br>
       <br></br>
       {/* <SequenceTable sequenceData={primes} sequenceTitle={'fibonacci'}></SequenceTable> */}
