@@ -5,7 +5,9 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
+import Quadrants from '@/app/components/trigonometry/Quadrants'
 import React from 'react'
+import '../../../pages/pages.css'
 
 
 export async function getStaticProps(){
@@ -13,8 +15,8 @@ export async function getStaticProps(){
 
 
   
-  const keyWords=['','','','','',
-    '','','','','','','']
+  const keyWords=['quadrants','trigonometric functions','sin','cos','tan',
+    'sec','cot','csc','trigonometri','angle circle','angle quadrants','']
 
 
 
@@ -125,23 +127,24 @@ export default function QuadrantsPage({sectionsContent , introContent}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}></h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-10px'}}>Quadrants and Signs of Trigonometric Functions </h1>
+   <br/>
+   <Quadrants  />
+   <br/>
+   {/* <SectionTableOfContents sections={genericSections}/> */}
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
    <br/>
-   <br/>
-   <br/>
-    <IntroSection 
+    {/* <IntroSection 
           id={introContent.id}
           title={introContent.title}
           content={introContent.content}
           backgroundColor="#f2f2f2"
           textColor="#34383c"
-        />
+        /> */}
    <br/>
    <br/>
-   <Sections sections={genericSections}/>
+   {/* <Sections sections={genericSections}/> */}
    <br/>
    <br/>
    <br/>

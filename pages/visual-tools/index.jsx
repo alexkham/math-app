@@ -80,6 +80,7 @@ export default function VisualToolsPage() {
             content: "See How Main Concepts of Trigonometry Visualized",
             subcategories: [
                 { name: 'Unit Circle Visualizer', href: '/visual-tools/unit-circle' },
+                { name: 'Angle Quadrants', href: '/trigonometry/quadrants' },
             ]
         },
     ]

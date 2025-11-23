@@ -61,6 +61,7 @@ export const mainMenuStructure = [
             { label: 'Matrix Types Generator', href: '/visual-tools/matrix-types' },
             { label: 'Permutations Visualizer', href: '/combinatorics/permutations/permutations-visualizer' },
             { label: 'Unit Circle Visualizer', href: '/visual-tools/unit-circle' },
+            { label: 'Angle Quadrants Visualizer', href: '/trigonometry/quadrants' },
             { label: 'Syntax Tree Builder', href: '/logic/propositional-logic/syntax/tree-builder' },
             { label: 'Fractions Visualizer', href: '/visual-tools/fractions-visualizer' }
           ]

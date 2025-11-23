@@ -3071,7 +3071,7 @@ const TrigonometryApp = ({ functions = FUNCTIONS }) => {
       minHeight: '100vh'
     }}>
       <header style={{ marginBottom: '25px' }}>
-        <h1 style={{ 
+        {/* <h1 style={{ 
           color: '#1f2937', 
           fontSize: 'clamp(20px, 3.5vw, 28px)',
           fontWeight: 'bold',
@@ -3079,7 +3079,7 @@ const TrigonometryApp = ({ functions = FUNCTIONS }) => {
           textAlign: 'center'
         }}>
           Trigonometric Functions Signs
-        </h1>
+        </h1> */}
         <p style={{ 
           color: '#6b7280', 
           fontSize: '14px',

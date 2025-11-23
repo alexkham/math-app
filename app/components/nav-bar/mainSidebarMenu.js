@@ -43,6 +43,7 @@ const CustomConvert=()=>(
         { text: 'Matric Transposition', url: '/visual-tools/matrix-transposition' },
         { text: 'Permutations Visualizer', url: '/combinatorics/permutations/permutations-visualizer' },
         { text: 'Unit Circle Visualizer', url: '/visual-tools/unit-circle' },
+        { text: 'Angle Quadrants Visualizer', url: '/trigonometry/quadrants' },
         { text: 'Matrix Types Generator', url: '/visual-tools/matrix-types' },
         { text: 'Syntax Tree Builder', url: '/logic/propositional-logic/syntax/tree-builder' },
         { text: 'Fractions Visualizer', url: '/visual-tools/fractions-visualizer' },
