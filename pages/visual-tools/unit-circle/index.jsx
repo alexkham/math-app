@@ -11,6 +11,7 @@ import { processContent } from '@/app/utils/contentProcessor'
 import SvgDiagram from '@/app/components/diagrams/svg-diagram/SvgDiagram'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import Sections from '@/app/components/page-components/section/Sections'
+import PageIntro from '@/app/components/page-components/intro/PageIntro'
 
 
 export async function getStaticProps() {
@@ -436,6 +437,20 @@ Try entering these angles in the interactive tool above. You'll notice that the 
   <text x="600" y="-60" font-family="Arial, sans-serif" font-size="48" fill="#0066cc">r = 1</text>
 </svg>`
 
+
+const pageIntroData = {
+  title: "Base Conversion Made Visual",
+  description: "Understand how numbers work in different bases (2-36) with interactive cube visualization. See binary, octal, decimal, and hexadecimal conversions in real-time. Ideal for computer science students and programmers learning number system fundamentals.",
+  // icon: (
+  //   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+  //     <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+  //     <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+  //     <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+  //     <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+  //   </svg>
+  // )
+};
+
    return {
        props: {
            title: 'Unit Circle Visualizer and Calculator | Learn Math Class',
@@ -444,16 +459,16 @@ Try entering these angles in the interactive tool above. You'll notice that the 
            canonicalUrl: 'https://www.learnmathclass.com/visual-tools/unit-circle',
            unitCircleSVG,
            sectionsContent,
+           pageIntroData
        },
        revalidate: 3600
    }
 }
 
 export default function UnitCirclePage({ title, description, keywords, canonicalUrl ,
-  unitCircleSVG , sectionsContent}) {
+  unitCircleSVG , sectionsContent ,pageIntroData}) {
 
 
-    
   const unitCircleSections=[
     {
         id:'definition',
@@ -517,6 +532,14 @@ export default function UnitCirclePage({ title, description, keywords, canonical
     // }
 ]
 
+const baseConverterIcon = (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+    <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+    <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+    <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+  </svg>
+);
 
    return (
        <>
@@ -548,7 +571,11 @@ export default function UnitCirclePage({ title, description, keywords, canonical
            <Breadcrumb/>
            <br/>
            <br/>
-           <h1 className='title' style={{marginTop:'0px',marginBottom:'-40px'}}>Unit Circle Visualizer and Calculator</h1>
+           <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Unit Circle Visualizer and Calculator</h1>
+        {/* <BaseConverterIntro/> */}
+        {/* <div style={{marginBottom:'-60px',marginTop:'0px'}}>
+        <PageIntro data={pageIntroData} icon={baseConverterIcon} theme='blue'/>
+        </div> */}
          <br/>
          <br/>
          <br/>
@@ -572,3 +599,4 @@ export default function UnitCirclePage({ title, description, keywords, canonical
        </>
    )
 }
+

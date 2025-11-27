@@ -63,7 +63,9 @@ export const mainMenuStructure = [
             { label: 'Unit Circle Visualizer', href: '/visual-tools/unit-circle' },
             { label: 'Angle Quadrants Visualizer', href: '/trigonometry/quadrants' },
             { label: 'Syntax Tree Builder', href: '/logic/propositional-logic/syntax/tree-builder' },
-            { label: 'Fractions Visualizer', href: '/visual-tools/fractions-visualizer' }
+            { label: 'Fractions Visualizer', href: '/visual-tools/fractions-visualizer' },
+            { label: 'Discrete Distribution Visualizer', href: '/probability/distributions/discrete/visualizer' },
+            { label: 'Continuous Distribution Visualizer', href: '/probability/distributions/continuous/visualizer' },
           ]
         },
         {
