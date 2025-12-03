@@ -60,12 +60,12 @@ const navigationGroups = [
     {
       title: "Probability Calculators",
       // icon: <Home />,
-      link: "/probability/calculator"
+      link: "/probability/calculators"
     },
     {
         title: "Discrete Distributions Calculator",
         // icon: <Home />,
-        link: "/probability/calculator/discrete-distributions"
+        link: "/probability/calculators/discrete-distributions"
       },
        {
         title: "Statistics Calculator",

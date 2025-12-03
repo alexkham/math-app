@@ -338,6 +338,7 @@ export default function LinearAlgebraPage({
          secondaryNavMode="children"  // or "siblings"
          secondaryNavTitle="More in this Section" />
         <br/>
+        
         <br/>
         
         <IntroSection 

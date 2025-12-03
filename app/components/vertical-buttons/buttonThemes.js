@@ -929,5 +929,17 @@ blueTable: {
     hoverColor: '#ffffff'
   }
 },
+minimalistic: {
+    container: {
+      background: 'transparent',
+      borderRadius: '0px',
+      boxShadow: 'none'
+    },
+    button: {
+      color: '#374151',
+      borderWidth: '1px',
+      borderColor: '#e5e7eb'
+    }
+  }
 
 };

@@ -10,6 +10,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import TableSplitBreakdown from '@/app/components/breakdowns/2-way-split/TableSplit'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import { distributionsDiagramsData } from '@/app/api/db/diagrams/probability/distributions'
+import { probabilityFunctionData } from '@/app/api/db/diagrams/probability/probabilityFunction'
 
 
 
@@ -61,11 +62,20 @@ Common continuous distributions include the uniform, normal, exponential, gamma,
         after:`Identifying the appropriate continuous distribution for a problem is essential for accurate probabilistic modeling and analysis. The key lies in recognizing the underlying structure—whether you're dealing with measurements that cluster symmetrically around a center, modeling time until an event occurs, working with proportions bounded between zero and one, or analyzing variables constructed from other random quantities. Each distribution provides established formulas for expected values, variances, and other properties that capture its essential behavior, sparing you from complex integrations each time. Mastering these characteristic patterns enables you to select the right framework and approach your analysis with clarity.`,
     
       },
-      obj4:{
-        title:``,
-        content:``,
+      function:{
+        title:`Probability Function`,
+        content:`In probability theory, every random process is ultimately described by a rule that assigns probabilities to possible outcomes. This rule is known as a probability function. 
+
+      A [probability function](!/probability/probability-function) is the basic rule that assigns probabilities to the outcomes of a random experiment. It translates uncertainty into a precise mathematical structure by specifying how likely each possible value of a random variable is.
+
+This concept exists independently of any named distribution. In simple or irregular situations, the probability function may not follow a standard form, but it still governs how probabilities are assigned. When the underlying rule has a clear, organized pattern, it becomes possible to describe it through familiar distribution families such as Binomial, Poisson, or Normal. In those cases, the probability function takes on specific forms: a probability mass function for discrete variables or a probability density function for continuous variables.
+
+For [discrete random variables](!/probability/distributions#discrete_dist), this rule appears as a probability mass function (PMF), which specifies the probability of each individual value. For [continuous variables](!/probability/distributions#continuous_dist), the rule takes the form of a probability density function (PDF), which describes how probability is distributed across an interval. Although they behave differently, both PMFs and PDFs serve the same fundamental role: they encode the entire structure of the random phenomenon.
+`,
         before:``,
-        after:``,
+        after:`
+Understanding probability function patterns is crucial because every distribution (does not matter if discrete or continuous) is based directly on them. If you want to explore how PMFs and PDFs work, how they differ, and why they matter, see the full explanation on the dedicated [Probability Function](!/probability/probability-function) page.`,
+        link:'/probability/probability-function'
     
       },
   
@@ -237,7 +247,7 @@ continuousDistributionsTypesData}) {
         ]
     },
     {
-        id:'discrete-dist',
+        id:'discrete_dist',
         title:sectionsContent.discrete.title,
         link:sectionsContent.discrete.link,
         content:[
@@ -252,7 +262,7 @@ continuousDistributionsTypesData}) {
         ]
     },
      {
-        id:'continuous-dist',
+        id:'continuous_dist',
         title:sectionsContent.continuous.title,
         link:sectionsContent.continuous.link,
         content:[
@@ -264,6 +274,26 @@ continuousDistributionsTypesData}) {
 
         ]
     },
+     {
+        id:'function',
+        title:sectionsContent.function.title,
+        link:sectionsContent.function.link,
+        content:[
+          sectionsContent.function.content,
+           <div key={'function'} style={{
+                              textAlign: 'center',
+                              transform: 'scale(0.98)',
+                              transformOrigin: 'center',
+                              marginTop:'50px',
+                              marginLeft:'-150px'
+                            }} dangerouslySetInnerHTML={{ 
+                              __html:   probabilityFunctionData["Probability Function:General Concept"].svg,
+                            }} />,
+
+          sectionsContent.function.after,
+        ]
+    },
+
     // {
     //     id:'',
     //     title:'',
@@ -291,7 +321,10 @@ continuousDistributionsTypesData}) {
    <Breadcrumb/>
    <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Probability Distributions</h1>
    <br/>
-   <SectionTableOfContents sections={distributionsSections}/>
+   <SectionTableOfContents sections={distributionsSections}
+   showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "siblings"
+         secondaryNavTitle="Similar Pages in This Section"/>
    <br/>
    <br/>
    <IntroSection 

@@ -11,7 +11,8 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 export default function IdentityMatrixPage() {
 
     const keyWords=[
-        'identity matrix', 'unit matrix','matrix','square matrix'
+        'identity matrix', 'unit matrix','matrix','square matrix','identity matrix properties',
+        
     ]
 
     const introContent={

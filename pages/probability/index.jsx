@@ -14,6 +14,7 @@ import MyList from '@/app/components/page-components/lists/MyList'
 import TreeStructure2 from '@/app/components/tree-structure/TreeItem2'
 import { probabilityConceptsData } from '@/app/api/db/diagrams/probability/concepts'
 import { setsProbabilityData } from '@/app/api/db/diagrams/probability/setsProbability'
+import { probabilityFunctionData } from '@/app/api/db/diagrams/probability/probabilityFunction'
 
 export async function getStaticProps() {
   const { default: probabilityFormulasList } = await import('@/app/api/db/formulas/probability/probabilityFormulasList')
@@ -478,6 +479,19 @@ svg:
 The reference organizes symbols into practical categories including probability notations (P(A), P(A|B)), random variables and distributions (f_X(x), F_X(x)), and common distribution families (Bin(n,p), N(μ,σ²)). It extends to advanced topics like statistical measures (E(X), Var(X)), hypothesis testing parameters (H₀, α, p-value), and information theory metrics (H(X), I(X;Y)).
 Specialized sections cover moment generating functions (M_X(t)), key probability inequalities (Markov's, Chebyshev's), Bayesian methods, and regression analysis notation—all presented with precise LaTeX formatting to support academic writing and research in probability and statistics.`,
 link:'/math-symbols/probability'
+      },
+      function:{
+        title:'Probability Function',
+        description:`**Almost every probability topic ultimately relies on a single idea:**
+A probability function describes how probability is distributed across all possible outcomes of a [random variable](!/probability#distributions).
+This rule is called a probability function, and it is the mathematical relation that turns a vague notion of uncertainty into something precise and analyzable.
+
+A [probability function](!/probability/probability-function) specifies how likely each possible value of a [random variable](!/probability#distributions) is.
+It determines how probability is distributed across the outcomes and forms the basis on which all familiar probability [distributions](!/probability#distributions) are built. Whether we study simple models like coin tossing or more structured distributions that arise in statistics, the probability function is always the mechanism operating underneath.
+`,
+after:`Because of its central role, this concept receives its own dedicated [page](!/probability/probability-function), where the idea is developed more formally and connected to the structure of probability distributions.
+If you want to understand what a distribution really is, the probability function is the natural place to begin.`,
+link:'/probability/probability-function'
       }
     }
   
@@ -712,6 +726,26 @@ export default function ProbabilityPage({
       content:[
         sectionContent.conditional.before,
         sectionContent.conditional.description,
+
+      ]
+
+    },
+    {
+      id:'function',
+      title:sectionContent.function.title,
+      link:sectionContent.function.link,
+      content:[
+        sectionContent.function.description,
+         <div key={'function'} style={{
+                    textAlign: 'center',
+                    transform: 'scale(0.98)',
+                    transformOrigin: 'center',
+                    marginTop:'50px',
+                    marginLeft:'-150px'
+                  }} dangerouslySetInnerHTML={{ 
+                    __html:   probabilityFunctionData["Central Role of Probability Function"].svg,
+                  }} />,
+        sectionContent.function.after,
 
       ]
 

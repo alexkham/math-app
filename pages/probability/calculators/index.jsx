@@ -16,7 +16,7 @@ import TwoIndependentEventsCalculator from '@/app/components/calculators/probabi
 export async function getStaticProps(){
 
   const keyWords=['probability calculator','probability','probability formula',
-    'compute probability calculator','calculate probability']
+    'compute probability calculator','calculate probability','calculating probability calculator']
 
     const sectionsContent={
 
@@ -183,15 +183,15 @@ export default function ProbabilityCalculator({seoData,sectionsContent , introCo
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'-20px'}}>Probability Calculator</h1>
+   <h1 className='title' style={{marginTop:'-10px',marginBottom:'-20px'}}>Probability Calculators</h1>
    <br/>
    <GenericMultiComponentFrame
     components={[
         
           { id: 1, name: 'Single Event Probability Calculator', key: 'probCalc', component: SingleEventProbabilityCalculator },
           { id: 2, name: 'Two Independent Events Probability Calculator', key: 'probCalc', component: TwoIndependentEventsCalculator },
-           { id: 3, name: 'Discrete Distibutions Calculator',  href: '/probability/calculator/discrete-distributions'  },
-           { id: 4, name: 'Continuous Distibutions Calculator',  href: '/probability/calculator/continuous-distributions'  },
+           { id: 3, name: 'Discrete Distibutions Calculator',  href: '/probability/calculators/discrete-distributions'  },
+           { id: 4, name: 'Continuous Distibutions Calculator',  href: '/probability/calculators/continuous-distributions'  },
           
 
           //  { id: 4, name: 'Introduction', content: introContent2 },

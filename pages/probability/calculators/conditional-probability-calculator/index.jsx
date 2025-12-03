@@ -4,7 +4,7 @@ import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import ConditionalProbabilityTable from '@/app/components/probability/conditional-probability-demo/ConditionalProbabilityTable'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
-import '../../pages.css'
+import '../../../../pages/pages.css'
 
 export default function ConditionalProbabilityCalculatorPage() {
 

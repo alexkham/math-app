@@ -392,7 +392,11 @@ These foundational features play crucial roles across linear algebra, connecting
     {/* <MyList data={list} boxed={true} color={'blue'} compact={true} type={'dot'}/> */}
     <br/>
     <br/>
-    <SectionTableOfContents sections={sectionsContent}/>
+    {/* <SectionTableOfContents sections={sectionsContent}/> */}
+      <SectionTableOfContents sections={sectionsContent}
+         showSecondaryNav={true}
+         secondaryNavMode="children"  // or "siblings"
+         secondaryNavTitle="More in this Section" />
     <br/>
     <br/>
     
