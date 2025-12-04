@@ -12,59 +12,159 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+  const keyWords = [
+  'sets in probability',
+  'events and sets',
+  'sample space and events',
+  'probability set operations',
+  'what is a set in probability',
+  'sets and probability models',
+  'union and intersection probability',
+  'complements in probability',
+  'probability events examples',
+  'probability set notation'
+];
+
 
     const sectionsContent={
 
-    obj1:{
-      title:``,
-      content:``,
+    definition:{
+      title:`What Is a Set in Probability?`,
+      content:`
+A set in probability is simply a collection of possible outcomes of a random experiment. It plays the same structural role as a set in mathematics, but the focus is different.
+
+In set theory, a set is an abstract collection of objects with no context attached. In probability, a set always describes “what can happen” when an experiment is run. Its elements are outcomes, and these sets help us form events, define sample spaces, and build probability models.
+
+**Examples**:
+•  S{H, T}  — the outcomes of a coin toss
+• $ {1, 2, 3, 4, 5, 6}$ — the outcomes of a die roll
+• intervals like $[0, 5]$ — possible values of a continuous measurement
+
+In probability, sets are not abstract objects — they are the language we use to describe outcomes, events, and everything built on top of them.`,
       before:``,
       after:``,
   
   
     },
-    obj2:{
-      title:``,
-      content:``,
+    purpose:{
+      title:`Why Sets Matter in Probability`,
+      content:`
+Sets matter in probability because they are the basic way we describe everything that can happen. Every outcome of a random experiment belongs to a set, and every event we talk about in probability is just a set of those outcomes. Once we see probability through sets, the entire structure becomes clearer: sample spaces become the “universe” of all outcomes, events become meaningful groups inside that universe, and probability models use these sets to assign chances to different possibilities.
+
+This is why sets come before every other concept — before events, before probability functions, and even before distributions. They give us the framework that all later ideas rely on.`,
       before:``,
       after:``,
   
     },
   
-    obj3:{
+    types:{
   
-      title:``,
-      content:``,
+      title:`Types of Sets Used in Probability`,
+      content:`
+Probability deals with a few main kinds of sets, each matching a different type of random experiment. Some sets are small and finite, like the possible results of flipping a coin or rolling a die. Others are countably infinite, such as the set of non-negative integers when modeling counts. And in continuous situations, the sets are intervals on the real line, describing measurements that can take any value in a range. These different types of sets let us represent everything from simple discrete outcomes to full continuous scales, depending on the nature of the experiment.
+`,
       before:``,
       after:``,
   
     },
-    obj4:{
-      title:``,
-      content:``,
+    operations:{
+      title:`Core Set Operations in Probability`,
+      content:`
+Probability uses the same basic operations as set theory, but with a different purpose. In set theory, union, intersection, complement, and difference are abstract tools for manipulating collections of objects. In probability, these operations gain a concrete interpretation: they describe how events relate to one another inside a sample space. The union of two events represents any outcome where at least one of them happens; the intersection represents outcomes where both occur; the complement represents the event “not happening”; and the difference keeps outcomes belonging to one event but not the other. When two events share no outcomes, they are disjoint. The full technical treatment of these operations belongs to the set-theory section, but here we use them as the machinery that turns real-life statements about uncertainty into precise events we can assign probabilities to.
+`,
+      before:``,
+      after:``,
+  
+    },
+    events:{
+      title:`How Sets Become Events`,
+      content:`
+In probability, an event is nothing more than a set of outcomes. Once a sample space is defined, every meaningful statement about what might happen is translated into a set inside that space. Saying “the die shows an even number” becomes the set {2, 4, 6}; saying “the waiting time is less than 3 minutes” becomes the interval (0, 3). This translation is what turns everyday language into precise mathematical objects. Once an event is expressed as a set, all of probability’s tools—probabilities, complements, unions, intersections, conditional relationships—can be applied to it. In this way, sets are not just background structure; they are the actual form that events take.
+`,
+      before:``,
+      after:``,
+  
+    },
+    models:{
+      title:`Sets Inside Probability Models`,
+      content:`
+A probability model is built from three parts: the sample space, the collection of events, and the rule that assigns probabilities. All three rely directly on sets. The sample space is the set of all possible outcomes. Events are subsets of that space that describe meaningful statements about the experiment. And the probability function assigns a numerical value to each event-set, telling us how likely it is to occur. Whether the model is a simple coin toss, a multi-step random process, or a continuous measurement, sets provide the structure that the probability assignment is built on. Without sets, there would be no way to organize outcomes or define events that probabilities can attach to.
+`,
+      before:``,
+      after:``,
+  
+    },
+    mistakes:{
+      title:`Common Mistakes and Misunderstandings`,
+      content:`
+Several errors show up repeatedly when learners first connect sets to probability. One common mistake is confusing a single outcome with an event, even though an event can contain many outcomes. Another is mixing up union and intersection, which leads to incorrect interpretations such as treating “A or B” as “A and B.” Some people treat complements incorrectly by forgetting that they are defined relative to the entire sample space, not just the part of the problem they happen to be focusing on. In continuous settings, a frequent misunderstanding is expecting individual points to have nonzero probability, even though their probability is actually zero. Recognizing these mistakes early helps prevent deeper errors when working with conditional probability, independence, and probability distributions.
+`,
+      before:``,
+      after:``,
+  
+    },
+    connection:{
+      title:`Connections to Other Probability Concepts`,
+      content:`
+Sets link directly to every major idea in probability. Sample spaces are simply the largest sets that describe every possible outcome. Events are subsets that capture specific conditions we care about. Probability functions assign numerical values to these event-sets, turning structure into measurable likelihoods. The cumulative distribution function (CDF) is built from sets of the form (−∞, x], and conditional probability is defined by comparing intersections of sets. Even independence is expressed through the relationship between event-sets and how their probabilities combine. Because every major concept rests on sets, understanding them makes the entire framework of probability much easier to navigate.
+`,
       before:``,
       after:``,
   
     },
 
 
-    obj5:{
+    notation:{
   
-      title:``,
-      content:``,
+      title:`Notation Used for Sets in Probability`,
+      content:`
+Notation Used for Sets in Probability
+
+Probability relies on a small collection of symbols to describe outcomes, events, and their relationships inside a sample space. These symbols come from set theory but gain specific meaning when applied to probability models. Here is the notation used most often:
+
+• { } — lists the outcomes inside a set  
+• $∈$ — indicates that an outcome belongs to a set  
+• $∉$ — indicates that an outcome does not belong to a set  
+• $⊆$ — shows that one set is contained inside another  
+• $⊂$ — strict subset (contained but not equal)  
+• $∪$ — union of two sets (either event occurs)  
+• $∩$ — intersection of two sets (both events occur)  
+• \\ — difference of sets (in one event but not the other)  
+• $∅$ — the empty set, containing no outcomes  
+• $Ω$ — the full sample space of all possible outcomes  
+• $Aᶜ$ or $A′$ — the complement of event A  
+• $(a, b), [a, b], (−∞, x]$ — intervals used for continuous outcomes  
+• $|A|$ — the number of elements in a finite set A
+
+These symbols allow us to write events precisely, express how they relate to each other, and apply probability rules consistently.
+
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+      
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Set Theory Symbols and Notations](!/math-symbols/set-theory) →@
+      
+`,
       before:``,
       after:``,
   
-    }
+    },
+    // obj5:{
+  
+    //   title:``,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+  
+    // },
   
   }
 
 
   const introContent = {
   id: "intro",
-  title: "",
-  content: ``
+  title: "Sets: The Starting Point of Probability",
+  content: `
+Probability starts with sets. Before we talk about events, sample spaces, random variables, or probability functions, we first need a way to describe “what can happen.” Sets give us that language. They let us collect outcomes, group them into meaningful events, combine them, compare them, and build the entire structure of probability on top of them. Once sets are in place, everything else in probability becomes much easier to define and understand.`
 }
 
 
@@ -91,23 +191,77 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
     
   const genericSections=[
     {
-        id:'1',
-        title:'section1',
+        id:'definition',
+        title:sectionsContent.definition.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.definition.content,
+        ]
+    },
+     {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          sectionsContent.notation.content,
+        ]
     },
     {
-        id:'2',
-        title:'section2',
+        id:'purpose',
+        title:sectionsContent.purpose.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.purpose.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'types',
+        title:sectionsContent.types.title,
         link:'',
-        content:''
-    }
+        content:[
+          sectionsContent.types.content,
+        ]
+    },
+    {
+        id:'operations',
+        title:sectionsContent.operations.title,
+        link:'',
+        content:[
+          sectionsContent.operations.content,
+        ]
+    },
+    {
+        id:'events',
+        title:sectionsContent.events.title,
+        link:'',
+        content:[
+          sectionsContent.events.content,
+        ]
+    },
+    {
+        id:'models',
+        title:sectionsContent.models.title,
+        link:'',
+        content:[
+          sectionsContent.models.content,
+        ]
+    },
+    {
+        id:'mistakes',
+        title:sectionsContent.mistakes.title,
+        link:'',
+        content:[
+          sectionsContent.mistakes.content,
+        ]
+    },
+    {
+        id:'connection',
+        title:sectionsContent.connection.title,
+        link:'',
+        content:[
+          sectionsContent.connection.content,
+        ]
+    },
 ]
 
   return (

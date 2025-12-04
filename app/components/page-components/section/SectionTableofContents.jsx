@@ -1293,7 +1293,7 @@ const SectionTableOfContents = ({
           position: fixed;
           top: 20px;
           left: 0;
-          width: 250px;
+          width: 270px;
           height: calc(100vh - 40px);
           overflow-y: auto;
           z-index: 1000;

@@ -12,8 +12,19 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['probability function','equations for probability','finding probability',
-    '','']
+ const keyWords = [
+  'probability function',
+  'pmf', 'pdf',
+  'probability mass function',
+  'probability density function',
+  'how to find probability',
+  'probability function examples',
+  'discrete probability function',
+  'continuous probability function',
+  'probability function formula',
+  'pmf vs pdf'
+];
+
 
     const sectionsContent={
 
@@ -41,7 +52,8 @@ $(X)$ — this is the random variable. Think of it as the “thing that can happ
 This is the “language” we use to describe how probabilities behave, whether the outcomes are separate points or part of a continuous range.
 
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-      `,
+      
+`,
       before:``,
       after:``,
   
@@ -466,7 +478,7 @@ export default function ProbabilityFunctionPage({seoData,sectionsContent , intro
    <SectionTableOfContents sections={genericSections}
      showSecondaryNav={true}
          secondaryNavMode="siblings"  // or "siblings"
-         secondaryNavTitle="Similar Pages in This Section"/>
+         secondaryNavTitle="More in Probability Section"/>
    <br/>
    <br/>
    <br/>

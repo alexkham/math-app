@@ -12,7 +12,19 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+  const keyWords = [
+  'expected value',
+  'expectation',
+  'expected value formula',
+  'mean of a random variable',
+  'how to calculate expected value',
+  'expected value pmf',
+  'expected value pdf',
+  'expected value of a function',
+  'expected value of a sum',
+  'linearity of expectation'
+];
+
 
     const sectionsContent={
 
@@ -43,27 +55,29 @@ It is simply the number that reflects the overall behavior of the distribution �
 When we talk about expected value, a few symbols appear again and again.  
 Here is what they mean in plain language, without the formal overload.
 
-$E(X)$ or $𝔼[X]$ — the expected value of the random variable X.  
-This is the most common way to write “the long-run average of X.”
+$E(X)$ or $𝔼[X]$ — the expected value of the random variable $X$.  
+This is the most common way to write “the long-run average of $X$.”
 
 $Σ$ (the summation sign) — used in the discrete case.  
-It tells us we are adding together the contributions from all possible values of X,
+It tells us we are adding together the contributions from all possible values of $X$,
 each weighted by its probability.
 
 $∫$ (the integral sign) — used in the continuous case.  
 It represents adding up contributions continuously along the density curve.
 
-$p(x)$ — the probability that X takes the value x (for discrete variables).  
+$p(x)$ — the probability that $X$ takes the value x (for discrete variables).  
 This comes from the PMF.
 
 $f(x)$ — the probability density at x (for continuous variables).  
 It shows where values tend to concentrate.
 
-$E[g(X)]$ — the expected value of some function of X.  
-This appears when computing variance, powers of X, or transformations.
+$E[g(X)]$ — the expected value of some function of $X$.  
+This appears when computing variance, powers of $X$, or transformations.
 
 All of these symbols simply help express the same idea:  
 expected value is a weighted average based on the probability function of the variable.
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 `,
       before:``,
       after:``,
@@ -385,7 +399,7 @@ export default function ExpectedValuePage({seoData,sectionsContent , introConten
    <SectionTableOfContents sections={genericSections}
    showSecondaryNav={true}
          secondaryNavMode="siblings"  // or "siblings"
-         secondaryNavTitle="Similar Pages in This Section"/>
+         secondaryNavTitle="More in Probability Section"/>
    <br/>
    <br/>
    <br/>
