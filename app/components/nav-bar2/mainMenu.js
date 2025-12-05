@@ -89,7 +89,8 @@ export const mainMenuStructure = [
             { label: 'Fraction Calculator', href: '/calculators/fraction-calculator' },
             { label: 'Combinatorics Calculator', href: '/combinatorics/calculator' },
             { label: 'Complex Numbers Calculator', href: '/calculators/complex-numbers' },
-            { label: 'Conditional Probability Calculator', href: '/probability/conditional-probability-calculator' },
+            { label: 'Conditional Probability Calculator', href: '/probability/calculators/conditional-probability-calculator' },
+             { label: 'Joint Probability Calculator', href: '/probability/calculators/joint-probability' },
             
           ]
         },

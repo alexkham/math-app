@@ -125,11 +125,33 @@ const CustomProbability=()=>(
             content:"Calculate Basic Trigonometric functions for any angle in degrees or radiands and Inverse trigonometric functions "
           },
           {
-            category: 'Probability Calculator',
+            category: 'Probability Calculators',
             icon: CustomProbability,
-            href:'/probability/calculator',
+            href:'/probability/calculators',
             // No subcategories, will show simple link
-            content:"Calculate Wide Range of Probability functions for various events and distributions"
+            content:"Calculate Wide Range of Probability functions for various events and distributions",
+            subcategories:[
+               {
+                name: "Single Event Probability Calculator",
+                href: "/probability/calculators"
+              },
+               {
+                name: "Two Independent Events Calculator",
+                href: "/probability/calculators"
+              },
+               {
+                name: "Discrete Distributions Calculators",
+                href: "/probability/calculators/discrete-distributions"
+              },
+               {
+                name: "Continuous Distributions Calculators",
+                href: "/probability/calculators/continuous-distributions"
+              },
+               {
+                name: "Joint Probability Calculator",
+                href: '/probability/calculators/joint-probability'
+              },
+            ]
           },
           {
             id: "algebra-calculators",

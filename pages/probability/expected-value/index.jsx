@@ -78,6 +78,7 @@ All of these symbols simply help express the same idea:
 expected value is a weighted average based on the probability function of the variable.
 
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+
 `,
       before:``,
       after:``,

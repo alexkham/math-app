@@ -67,7 +67,8 @@ const CustomConvert=()=>(
     { text: 'Fraction Calculator', url: '/calculators/fraction-calculator' },
     { text: 'Combinatorics Calculator', url: '/combinatorics/calculator' },
     { text: 'Complex Numbers Calculator', url: '/calculators/complex-numbers' },
-    { text: 'Conditional Probability Calculator', url: '/probability/conditional-probability-calculator' },
+    { text: 'Conditional Probability Calculator', url: '/probability/calculators/conditional-probability-calculator' },
+    { text: 'Joint Probability Calculator', url: '/probability/calculators/joint-probability' },
     { text: 'Linear Equations Solver', url: '/algebra/equations/linear/solver' },
    
   ]},

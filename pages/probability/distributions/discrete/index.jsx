@@ -924,7 +924,7 @@ where $\\binom{a}{b} = \\frac{a!}{b!(a-b)!}$ is the binomial coefficient.
 
 Suppose you have a deck of $N = 52$ cards containing $K = 13$ hearts. You draw $n = 5$ cards without replacement. The probability of getting exactly $k = 2$ hearts is:
 
-$P(X = 2) = \\frac{\\binom{13}{2} \\binom{52-13}{5-2}}{\\binom{52}{5}} = \\frac{\\binom{13}{2} \\binom{39}{3}}{\\binom{52}{5}} = \\frac{78 \\cdot 9139}{2598960} \\approx 0.274$
+$$P(X = 2) = \\frac{\\binom{13}{2} \\binom{52-13}{5-2}}{\\binom{52}{5}} = \\frac{\\binom{13}{2} \\binom{39}{3}}{\\binom{52}{5}} = \\frac{78 \\cdot 9139}{2598960} \\approx 0.274$$
 
 This means there's about a 27.4% chance of getting exactly 2 hearts when drawing 5 cards from a standard deck.
 
@@ -990,7 +990,7 @@ $P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}, \\quad k = 0, 1, 2, \\ldots$
   * $k!$: Accounts for the number of ways $k$ events can be ordered
   * The total probability sums to 1:
   
-  $\\sum_{k=0}^{\\infty} P(X = k) = \\sum_{k=0}^{\\infty} \\frac{\\lambda^k e^{-\\lambda}}{k!} = e^{-\\lambda} \\sum_{k=0}^{\\infty} \\frac{\\lambda^k}{k!} = e^{-\\lambda} \\cdot e^{\\lambda} = 1$
+  $$\\sum_{k=0}^{\\infty} P(X = k) = \\sum_{k=0}^{\\infty} \\frac{\\lambda^k e^{-\\lambda}}{k!} = e^{-\\lambda} \\sum_{k=0}^{\\infty} \\frac{\\lambda^k}{k!} = e^{-\\lambda} \\cdot e^{\\lambda} = 1$$
   
   * This uses the Taylor series expansion: $e^{\\lambda} = \\sum_{k=0}^{\\infty} \\frac{\\lambda^k}{k!}$
 

@@ -6,17 +6,16 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
-import '../../../pages/pages.css'
+import '../../../../pages/pages.css'
 import Head from 'next/head'
-import GenericMultiComponentFrame from '@/app/components/GenericMulticomponentFrame'
-import SingleEventProbabilityCalculator from '@/app/components/calculators/probability/SingleEventCalculator'
-import { useSearchParams } from 'next/navigation'
-import TwoIndependentEventsCalculator from '@/app/components/calculators/probability/TwoIndependentEventsCalculator'
+import JointProbability2x2Table from '@/app/components/calculators/probability/JointProbability2x2Table.jsx'
+
 
 export async function getStaticProps(){
 
-  const keyWords=['probability calculator','probability','probability formula',
-    'compute probability calculator','calculate probability','calculating probability calculator']
+  const keyWords=['joint probability','joint probability calculator', 'probability table calculator', 
+    'marginal probability', 'two event probability', 'bivariate probability', 
+    'contingency table calculator', 'joint distribution']
 
     const sectionsContent={
 
@@ -90,14 +89,7 @@ export async function getStaticProps(){
     }
    }
 
-export default function ProbabilityCalculator({seoData,sectionsContent , introContent}) {
-
-
-      const searchParams = useSearchParams()
-       
-      const tab=searchParams.get('tab')
-     const initialTab = tab ? parseInt(tab) : 1
-
+export default function JointProbabilityCalculatorPage({seoData,sectionsContent , introContent}) {
 
     
   const genericSections=[
@@ -182,45 +174,23 @@ export default function ProbabilityCalculator({seoData,sectionsContent , introCo
          /> 
    <Breadcrumb/>
    <br/>
+ 
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'-20px'}}>Probability Calculators</h1>
+   <h1 className='title' style={{marginTop:'-10px',marginBottom:'0px'}}>Joint Probability Calculator</h1>
    <br/>
-   <GenericMultiComponentFrame
-    components={[
-        
-          { id: 1, name: 'Single Event Probability Calculator', key: 'probCalc', component: SingleEventProbabilityCalculator },
-          { id: 2, name: 'Two Independent Events Probability Calculator', key: 'probCalc', component: TwoIndependentEventsCalculator },
-           { id: 3, name: 'Discrete Distibutions Calculator',  href: '/probability/calculators/discrete-distributions'  },
-           { id: 4, name: 'Continuous Distibutions Calculator',  href: '/probability/calculators/continuous-distributions'  },
-           { id: 5, name: 'Joint Probability Calculator',  href: '/probability/calculators/joint-probability'  },
-          
-
-          //  { id: 4, name: 'Introduction', content: introContent2 },
-          
-          
-        ]}
-        initialActive={1}
-        buttonMinWidth="160px"
-        primaryColor="#007bff"
-   
-   />
-
-   {/* <TwoIndependentEventsCalculator/> */}
-   {/* <div style={{transform:'scale(0.9)'}}>
-   <SingleEventProbabilityCalculator/>
-   </div> */}
+     <JointProbability2x2Table/>
    <br/>
    {/* <SectionTableOfContents sections={genericSections}/> */}
    <br/>
    <br/>
-   {/* <div>{JSON.stringify(initialTab)}</div> */}
    <br/>
     {/* <IntroSection 
           id={introContent.id}
           title={introContent.title}
           content={introContent.content}
-          backgroundColor="#f2f2f2"
-          textColor="#34383c"
+           backgroundColor='#f9fafb'
+          //  "#f2f2f2"
+          textColor="#06357a"
         /> */}
    <br/>
    <br/>
