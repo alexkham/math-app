@@ -228,28 +228,66 @@ Independence is the cleanest possible relationship between variables: completely
       after:``,
   
     },
+   
     distributions:{
-      title:`Common Joint Distributions`,
-      content:`
-- **Multinomial distribution:** joint outcomes for repeated categorical trials  
+      title:`Joint Distributions`,
+      content:`- **Multinomial distribution:** joint outcomes for repeated categorical trials  
 - **Bivariate normal distribution:** joint behaviour of two correlated normal variables  
 - **Joint uniform distribution:** probability spread evenly over a region  
 - **Joint Bernoulli / 2×2 models:** simplest case of two binary variables  
- These serve as standard examples of how joint behaviour can be shaped by dependence patterns and constraints
+ These serve as standard examples of how joint behaviour can be shaped by dependence patterns and constraints`,
+      before:``,
+      after:``,
+  
+    },
+
+
+    importance:{
+  
+      title:`Why Joint Probability Matters in Practice`,
+      content:`
+      • Real systems involve several quantities changing together  
+• Joint probability captures relationships that single-variable views miss  
+• Essential for modeling risk with multiple factors  
+• Forms the basis for classification and many machine-learning methods  
+• Used in finance to understand co-movement of assets  
+• Needed in weather and environmental modeling with multiple measurements  
+• Critical for interpreting medical tests, symptoms, and diagnostic patterns
 `,
       before:``,
       after:``,
   
     },
-    obj4:{
-      title:``,
-      content:``,
+    mistakes:{
+  
+      title:`Common Mistakes`,
+      content:`
+• Confusing joint probability with conditional probability  
+• Assuming independence when variables are actually dependent  
+• Treating \(P(A, B)\) as if it were \(P(A) + P(B)\)  
+• Forgetting that all joint values must sum or integrate to 1  
+• Mixing up marginals and conditionals when reading tables  
+• Misinterpreting patterns in contingency tables as independence
+`,
       before:``,
       after:``,
   
     },
-
-
+    other:{
+  
+      title:`Connections to Other Probability Concepts`,
+      content:`
+- **Conditional probability:** built directly from the joint distribution  
+- **Independence:** defined in terms of how the joint breaks into marginals  
+- **Marginal probability:** obtained by summing or integrating the joint  
+- **Covariance and correlation:** measure how variables move together, visible first in the joint  
+- **Bayes’ theorem:** emerges from the relationship between joint and conditional probabilities  
+- **Multivariate distributions:** extend joint probability to higher dimensions
+`,
+      before:``,
+      after:``,
+  
+    },
     obj5:{
   
       title:``,
@@ -257,7 +295,7 @@ Independence is the cleanest possible relationship between variables: completely
       before:``,
       after:``,
   
-    }
+    },
   
   }
 
@@ -369,24 +407,50 @@ export default function JointProbabilityPage({seoData,sectionsContent , introCon
           sectionsContent.distributions.content,
         ]
     },
+    // {
+    //     id:'common',
+    //     title:sectionsContent.common.title,
+    //     link:'',
+    //     content:[
+    //       sectionsContent.common.content,
+    //     ]
+    // },
     {
-        id:'',
-        title:'',
+        id:'importance',
+        title:sectionsContent.importance.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.importance.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'mistakes',
+        title:sectionsContent.mistakes.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.mistakes.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'other',
+        title:sectionsContent.other.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.other.content,
+        ]
     },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
 ]
 
   return (
