@@ -3782,7 +3782,7 @@ export default function JointProbability2x2Table() {
           <strong>How to use:</strong>
           <ul style={{ margin: '8px 0', paddingLeft: '20px' }}>
             <li><strong>Direct Entry:</strong> Enter the four joint probabilities directly in the center cells. They must sum to 1.</li>
-            <li><strong>From Marginals:</strong> Enter marginal probabilities (P({eventAName}), P({eventBName})) AND one joint probability (e.g., P({eventAName}∩{eventBName})), then click "Calculate from Marginals" to compute the remaining three.</li>
+            <li><strong>From Marginals:</strong> Enter marginal probabilities (P({eventAName}), P({eventBName})) AND one joint probability (e.g., P({eventAName}∩{eventBName})), then click &quot;Calculate from Marginals&quot; to compute the remaining three.</li>
             <li><strong>Auto-calculation:</strong> When you enter 2 out of 3 values in any row or column, the third is automatically calculated.</li>
             <li><strong>Complements:</strong> When you enter a marginal (e.g., P({eventAName})), its complement (P({eventAName}<sup>c</sup>)) is automatically calculated.</li>
           </ul>
