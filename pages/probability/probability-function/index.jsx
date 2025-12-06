@@ -329,7 +329,7 @@ A probability function lets us answer questions such as:
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/probability-function",
          name: "name"
       },
         

@@ -178,7 +178,7 @@ Probability starts with sets. Before we talk about events, sample spaces, random
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/sets",
          name: "name"
       },
         

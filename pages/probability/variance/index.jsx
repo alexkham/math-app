@@ -307,7 +307,7 @@ When working with probability distributions and random variables, understanding 
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/variance",
          name: "name"
       },
         

@@ -80,7 +80,7 @@ This model demonstrates the idea of equiprobable events and forms the basis for 
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/models/coin-toss",
          name: "name"
       },
         

@@ -241,7 +241,7 @@ provides the foundation for variance, covariance, risk calculations, and many pr
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/expected-value",
          name: "name"
       },
         

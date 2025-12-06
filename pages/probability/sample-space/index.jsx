@@ -140,7 +140,7 @@ Since “all possible outcomes” appears directly in the formula, it makes sens
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/sample-space",
          name: "name"
       },
         

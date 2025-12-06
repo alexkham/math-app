@@ -80,7 +80,7 @@ It illustrates the foundation for discrete random variables, independent trials,
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/models/dice-roll",
          name: "name"
       },
         

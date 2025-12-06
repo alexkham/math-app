@@ -322,7 +322,7 @@ The sections below outline how joint probability is represented, how it connects
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/joint-probability",
          name: "name"
       },
         

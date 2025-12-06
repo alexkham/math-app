@@ -139,7 +139,7 @@ const navigationGroups = [
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/calculators/continuous-distributions",
          name: "name"
       },
       menuItems,

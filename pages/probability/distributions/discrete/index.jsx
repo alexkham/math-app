@@ -1122,7 +1122,7 @@ This page systematically presents six fundamental discrete distributions, detail
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/distributions/discrete",
          name: "name"
       },
       uniformTable,

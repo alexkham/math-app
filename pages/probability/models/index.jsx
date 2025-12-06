@@ -170,7 +170,7 @@ Below are the most fundamental models used throughout probability. These appear 
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/models",
          name: "name"
       },
         
