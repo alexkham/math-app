@@ -91,7 +91,7 @@ export async function getStaticProps(){
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/visual-tools/dice-roll",
          name: "name"
       },
         
