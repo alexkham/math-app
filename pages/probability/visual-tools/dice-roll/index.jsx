@@ -9,25 +9,24 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import GenericMultiComponentFrame from '@/app/components/GenericMulticomponentFrame'
-import CoinFlipperSimulator from '@/app/components/probability/coin-toss/CinTossProbabilitySimulator'
-import CoinSampleSpaceVisualizer from '@/app/components/probability/sampleSpace/CoinSampleSpaceVisualizer'
+import DiceRollSimulator from '@/app/components/probability/dice-roll/DiceRollSimulator'
+import DiceSampleSpaceVisualizer from '@/app/components/probability/sampleSpace/DiceSampleSpaceVisualizer'
 
 
 export async function getStaticProps(){
 
   const keyWords = [
-  'coin toss probability',
-  'coin flip simulator',
-  'sample space calculator',
-  'law of large numbers',
-  'probability simulator',
-  'coin toss outcomes',
-  'expected value calculator',
-  'variance calculator',
-  'probability visualizer',
-  'interactive probability tool'
+  'dice probability calculator',
+  'dice roll simulator',
+  'sum distribution calculator',
+  'dice probability visualizer',
+  'multiple dice probability',
+  'dice rolling statistics',
+  'expected value dice',
+  'dice sample space',
+  'probability distribution dice',
+  'interactive dice simulator'
 ]
-
     const sectionsContent={
 
     obj1:{
@@ -100,7 +99,7 @@ export async function getStaticProps(){
     }
    }
 
-export default function CointTossPage({seoData,sectionsContent , introContent}) {
+export default function DiceRollVisualizersPage({seoData,sectionsContent , introContent}) {
 
     
   const genericSections=[
@@ -186,30 +185,25 @@ export default function CointTossPage({seoData,sectionsContent , introContent}) 
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'-50px'}}>Coin Toss</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'-50px'}}>Dice Roll Visualizers</h1>
    <br/>
    <GenericMultiComponentFrame
     components={[
            
-    { id: 1, name: 'Coin Toss Probability Simulator', key: 'simulator', component: CoinFlipperSimulator },
-    { id: 2, name: 'Coin Toss Sample Space Explorer/Calculator', key: 'sampleSpace', component: CoinSampleSpaceVisualizer },
-            //   { id: 3, name: 'Discrete Distibutions Calculator',  href: '/probability/calculators/discrete-distributions'  },
-            //   { id: 4, name: 'Continuous Distibutions Calculator',  href: '/probability/calculators/continuous-distributions'  },
-            //   { id: 5, name: 'Joint Probability Calculator',  href: '/probability/calculators/joint-probability'  },
-             
-   
-             //  { id: 4, name: 'Introduction', content: introContent2 },
-             
+    { id: 1, name: 'Dice Roll Probability Simulator', key: 'simulator', component: DiceRollSimulator },
+    { id: 2, name: 'Dice Sample Space Explorer/Calculator', key: 'sampleSpace', component: DiceSampleSpaceVisualizer },
+            
              
            ]}
            initialActive={1}
            buttonMinWidth="160px"
            primaryColor="#007bff"
    
+   
    />
    <br/>
-   {/* <CoinFlipperSimulator/>
-   <CoinSampleSpaceVisualizer/> */}
+   {/* <DiceRollSimulator/>
+   <DiceSampleSpaceVisualizer/> */}
    {/* <SectionTableOfContents sections={genericSections}/> */}
    <br/>
    <br/>
