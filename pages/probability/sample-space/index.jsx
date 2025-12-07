@@ -12,7 +12,66 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+// const keyWords = [
+//   'sample space',
+//   'outcomes in probability',
+//   'types of sample spaces',
+//   'finite and infinite sample spaces',
+//   'events as subsets of the sample space',
+//   'representing outcomes',
+//   'probability experiment outcomes'
+// ];
+
+
+const keyWords = [
+  // Core
+  'sample space',
+  'sample space in probability',
+  'definition of sample space',
+  'probability sample space',
+
+  // Supporting
+  'outcomes in probability',
+  'possible outcomes',
+  'listing outcomes',
+  'representing sample space',
+  'finite sample space',
+  'infinite sample space',
+  'continuous sample space',
+  'discrete sample space',
+  'types of sample spaces',
+
+  // Event-related
+  'events as subsets of sample space',
+  'event subsets',
+  'probability of events sample space',
+  'sample space and events',
+
+  // Technical
+  // 'omega notation in probability',
+  // 'omega sample space',
+  // 'outcome notation',
+  // 'cartesian product sample space',
+  // 'set-builder sample space',
+
+  // Long-tail
+  // 'how to define a sample space',
+  // 'sample space examples probability',
+  // 'sample space for experiments',
+  // 'difference between events and sample space',
+  // 'how to represent a sample space',
+  // 'sample space for two-step experiments',
+  // 'continuous sample space examples',
+
+  // People Also Ask
+  // 'what is a sample space',
+  // 'how do you list a sample space',
+  // 'why is sample space important',
+  // 'what are outcomes in probability',
+  // 'how do events relate to sample space'
+];
+
+
 
     const sectionsContent={
 
@@ -75,23 +134,112 @@ These categories help determine how probabilities are assigned and what tools ar
       after:``,
   
     },
-    obj4:{
-      title:``,
-      content:``,
+    outcomes:{
+      title:`Listing and Representing Outcomes`,
+      content:`
+Once the sample space is identified, it can be written in different ways depending on the scenario and the size of the outcome set:
+
+- **Explicit lists** for small finite spaces, e.g.  
+  $\(\\Omega = \{1,2,3,4,5,6\}\)$
+
+- **Ordered pairs** for multi-step experiments, e.g. two coin tosses  
+  \(\Omega = \{(H,H), (H,T), (T,H), (T,T)\}\)
+
+- **Sequences or tuples** when more than two components are involved, e.g. three dice  
+  \(\Omega = \{(x_1, x_2, x_3) : x_i \in \{1,\ldots,6\}\}\)
+
+- **Intervals** when outcomes vary continuously, e.g. a measurement  
+  \(\Omega = [0,1]\)
+
+- **Set-builder notation** for describing outcomes by a rule, e.g.  
+  \(\Omega = \{x : 0 \le x \le 10\}\)
+
+- **Cartesian products** for combining simpler spaces, e.g.  
+  \(\Omega = A \times B\)
+
+These representations make it easier to see how outcomes are organized and how events will be formed from them.
+`,
       before:``,
       after:``,
   
     },
-    obj4:{
-      title:``,
-      content:``,
+    properties:{
+      title:`Properties of a Sample Space`,
+      content:`
+A sample space is not just any set—it must satisfy a few basic requirements so that probability can be defined consistently:
+
+- It must include **every** outcome that can occur in the scenario.
+- It must exclude outcomes that **cannot** occur.
+- Its outcomes must be **mutually exclusive** (only one outcome happens in a single trial).
+- Its outcomes must be **collectively exhaustive** (something from the set must occur).
+- Events are formed by selecting subsets of the sample space: \(A \subseteq \Omega\).
+
+These properties ensure that probabilities assigned to events make sense and behave consistently.
+`,
       before:``,
       after:``,
   
     },
-    obj4:{
-      title:``,
-      content:``,
+    events:{
+      title:`Relationship to Events`,
+      content:`
+Events are built directly from the sample space. An event is simply a subset of \(\Omega\) that collects the outcomes we care about in a particular question.
+
+- If \(\Omega\) describes everything that can happen, an event selects the outcomes where something specific happens.
+- For a die roll with \(\Omega = \{1,2,3,4,5,6\}\), the event “roll an even number” is \(\{2,4,6\}\).
+- For two coin tosses with \(\Omega = \{(H,H),(H,T),(T,H),(T,T)\}\), the event “at least one head” is \(\{(H,H),(H,T),(T,H)\}\).
+- For a continuous outcome like height, an event might be an interval such as \([1.6, 1.8]\).
+
+Viewing events as subsets of \(\Omega\) makes probability assignments consistent and ties every event back to the underlying structure of the scenario.
+`,
+      before:``,
+      after:``,
+  
+    },
+    practice:{
+      title:`Sample Space in Practice`,
+      content:`
+Different situations lead to different forms of sample spaces. A few common examples show how the idea appears in everyday probability questions:
+
+- A die roll: $\(\\Omega = \{1,2,3,4,5,6\}\)$
+- A deck draw: $\(\\Omega =\)$ all 52 individual cards
+- Two coin tosses: \(\Omega = \{(H,H), (H,T), (T,H), (T,T)\}\)
+- Measuring a person’s height: \(\Omega = [0,3]\)
+- Time until an event occurs: \(\Omega = [0,\infty)\)
+- Choosing two items without replacement: outcomes are ordered pairs of objects
+
+These examples show how the structure of \(\Omega\) changes with the scenario, but the idea remains the same: it captures every outcome the situation can produce.
+`,
+      before:``,
+      after:``,
+  
+    },
+    mistakes:{
+      title:`Common Mistakes`,
+      content:`
+- Leaving out outcomes that actually can occur in the scenario  
+- Including outcomes that cannot occur  
+- Ignoring the order of outcomes when order matters  
+- Mixing outcomes of different types within the same sample space  
+- Using an incomplete \(\Omega\), which leads to incorrect event definitions or wrong probabilities  
+
+A correct sample space removes ambiguity and prevents errors in later calculations.
+`,
+      before:``,
+      after:``,
+  
+    },
+    connection:{
+      title:`Connections to Other Concepts`,
+      content:`
+- Events are subsets of $\(\\Omega\)$, built directly from the sample space  
+- Probability of events is defined only after $\(\\Omega\)$ is fixed  
+- Random variables map outcomes in $\(\\Omega\)$ to numerical values  
+- Joint sample spaces describe outcomes of several variables together  
+- Independence and dependence are interpreted through how outcomes combine in $\(\\Omega\)$  
+
+The sample space anchors every other concept in probability, making it the natural starting point for the entire subject.
+`,
       before:``,
       after:``,
   
@@ -137,11 +285,11 @@ Since “all possible outcomes” appears directly in the formula, it makes sens
          sectionsContent,
          introContent,
           seoData: {
-        title: "Title | Learn Math Class",
+        title: "Sample Spaces in Probability | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
         url: "/probability/sample-space",
-         name: "name"
+         name: "Sample Spaces"
       },
         
        }
@@ -177,40 +325,52 @@ export default function SampleSpacePage({seoData,sectionsContent , introContent}
         ]
     },
     {
-        id:'',
-        title:'',
+        id:'outcomes',
+        title:sectionsContent.outcomes.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.outcomes.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'properties',
+        title:sectionsContent.properties.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.properties.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'events',
+        title:sectionsContent.events.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.events.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'practice',
+        title:sectionsContent.practice.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.practice.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'mistakes',
+        title:sectionsContent.mistakes.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.mistakes.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'connection',
+        title:sectionsContent.connection.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.connection.content,
+        ]
     },
 ]
 
@@ -279,7 +439,12 @@ export default function SampleSpacePage({seoData,sectionsContent , introContent}
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Sample Space</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "siblings"
+         secondaryNavTitle="More in Probability Section"
+   
+   />
    <br/>
    <br/>
    <br/>

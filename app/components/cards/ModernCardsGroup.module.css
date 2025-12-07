@@ -21,6 +21,7 @@
     display: flex;
     min-height: 200px;
     transition: box-shadow 0.3s ease;
+    
   }
   
   .card:hover {
@@ -28,8 +29,9 @@
   }
   
   .imageContainer {
-    width: 40%;
+    width: 50%;
     position: relative;
+    border: solid 1px lightgray;
   }
   
   .image {
