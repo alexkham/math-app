@@ -64,18 +64,82 @@ Each case contributes its share, and those shares sum to give the complete pictu
   
     },
   
-    obj3:{
+    notation:{
   
-      title:``,
-      content:``,
+      title:`Useful Notation`,
+      content:`
+Before expressing the phenomenon formally, we need notation for the key pieces.
+
+**The event of interest:**
+Call it A. This is what you're trying to find the probability of.
+
+**The cases (partition):**
+Call them B₁, B₂, ..., Bₙ. These are the distinct scenarios that divide the sample space.
+
+Key properties:
+- They're disjoint (no overlap — only one can occur)
+- They're exhaustive (together they cover everything)
+- Exactly one of them happens
+
+**Conditional pieces:**
+P(A | Bᵢ) is the probability of A given that case Bᵢ occurred. This captures how likely A is within that specific scenario.
+
+**Weights:**
+P(Bᵢ) is the probability that case Bᵢ occurs. This tells you how much that scenario contributes to the total.
+
+**Sum notation:**
+When we add contributions from all cases, we write:
+∑ (sum over all i)
+
+That's the notation toolkit. Each piece has a clear meaning:
+- A is what you want
+- The Bᵢ are the cases
+- P(A | Bᵢ) is A's probability within case i
+- P(Bᵢ) is the weight of case i
+
+Next, we combine these pieces into the formal law.`,
       before:``,
       after:``,
   
     },
-    obj3:{
+    law:{
   
-      title:``,
-      content:``,
+      title:`The Law of Total Probability`,
+      content:`
+Now we formalize the phenomenon described in the previous sections.
+
+**Statement in words:**
+
+If an event A can occur through several disjoint cases B₁, B₂, ..., Bₙ that cover the entire sample space, then the probability of A is the sum of its probability within each case, weighted by the probability of that case occurring.
+
+**The formula:**
+
+P(A) = P(A | B₁)·P(B₁) + P(A | B₂)·P(B₂) + ... + P(A | Bₙ)·P(Bₙ)
+
+Or using summation notation:
+
+P(A) = ∑ P(A | Bᵢ)·P(Bᵢ)
+
+**What each term means:**
+
+- P(A | Bᵢ)·P(Bᵢ) is the contribution from case i
+- P(A | Bᵢ) tells you how likely A is in that case
+- P(Bᵢ) weights that contribution by how likely the case is
+- The sum adds all contributions to get the total
+
+**Discrete version:**
+
+This is the form shown above, used when you have a finite or countable number of cases.
+
+**Continuous version (conceptual):**
+
+When the partition becomes continuous (like a range of values), the sum becomes an integral:
+
+P(A) = ∫ P(A | B=b)·f(b) db
+
+where f(b) is the probability density of the conditioning variable.
+
+This law expresses mathematically what we've already understood conceptually: probability distributes across cases, and the total comes from adding weighted contributions.`,
       before:``,
       after:``,
   
@@ -177,14 +241,40 @@ export default function TotalProbabilityPage({seoData,sectionsContent , introCon
     
   const genericSections=[
     {
-        id:'1',
-        title:'section1',
+        id:'when',
+        title:sectionsContent.when.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.when.content,
+        ]
     },
     {
-        id:'2',
-        title:'section2',
+        id:'cases',
+        title:sectionsContent.cases.title,
+        link:'',
+        content:[
+          sectionsContent.cases.content,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          sectionsContent.notation.content,
+        ]
+    },
+    {
+        id:'law',
+        title:sectionsContent.law.title,
+        link:'',
+        content:[
+          sectionsContent.law.content,
+        ]
+    },
+    {
+        id:'',
+        title:'',
         link:'',
         content:''
     },
@@ -193,7 +283,37 @@ export default function TotalProbabilityPage({seoData,sectionsContent , introCon
         title:'',
         link:'',
         content:''
-    }
+    },
+    {
+        id:'',
+        title:'',
+        link:'',
+        content:''
+    },
+    {
+        id:'',
+        title:'',
+        link:'',
+        content:''
+    },
+    {
+        id:'',
+        title:'',
+        link:'',
+        content:''
+    },
+    {
+        id:'',
+        title:'',
+        link:'',
+        content:''
+    },
+    {
+        id:'',
+        title:'',
+        link:'',
+        content:''
+    },
 ]
 
   return (
