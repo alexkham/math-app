@@ -127,7 +127,7 @@ export default function WaffleChart() {
           This waffle chart demonstrates how conditional probability differs from total probability. 
           While the total probability P(Event) considers all possible outcomes equally, 
           conditional probability P(Event | Condition) restricts our view to specific regions. 
-          When you know which region you're in, the likelihood of the event changes dramatically.
+          When you know which region you are in, the likelihood of the event changes dramatically.
         </p>
       </div>
 
@@ -322,7 +322,7 @@ export default function WaffleChart() {
               <strong> P(<ColorSquare color={darkTileColor} size={13} /> | <ColorSquare color={areas[0].color} size={13} />)</strong> = (dark tiles in that region) / 100. 
               The <strong>total probability P(<ColorSquare color={darkTileColor} size={13} />)</strong> is calculated using the law of total probability: 
               sum of P(Region) × P(<ColorSquare color={darkTileColor} size={13} /> | Region) across all regions. 
-              Notice how conditional probabilities vary by region—knowing which region you're in changes the likelihood of the event.
+              Notice how conditional probabilities vary by region—knowing which region you are in changes the likelihood of the event.
             </div>
           </div>
         </div>
