@@ -50,6 +50,15 @@ export async function getStaticProps(){
      image:'/images/set_theory2.jpg',
     href: "/probability/visual-tools/venn-diagrams"
   },
+   {
+    title: "Conditional Probability Visualizers",
+    description: "Explore probability event relationships with interactive Venn diagram visualizations. Understand intersections, unions, and complements through dynamic 2-set and 3-set visual examples.",
+    backgroundColor: "#4F46E5", // Indigo
+    textColor: "#ffffff",
+    ratio: 7,
+     image:'/images/conditional-probability2.jpg',
+    href: "/probability/visual-tools/conditional-probability"
+  },
   //  {
   //   title: "Analytics Dashboard",
   //   description: "Comprehensive analytics dashboard with real-time data visualization and reporting tools.",
