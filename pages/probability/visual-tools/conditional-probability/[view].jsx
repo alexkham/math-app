@@ -249,14 +249,14 @@ export default function ConditionalProbabilityViewPage({seoData, sectionsContent
    {componentName === 'TreeDiagram' && (
      <div style={{transform:'scale(0.9)'}}>
       <ConditionalProbabilityTree2/>
-       <p style={{textAlign: 'center', padding: '40px', color: '#666'}}>Tree Diagram component coming soon</p>
+       {/* <p style={{textAlign: 'center', padding: '40px', color: '#666'}}>Tree Diagram component coming soon</p> */}
      </div>
    )}
    
    {componentName === 'VennDiagram' && (
      <div style={{transform:'scale(0.9)'}}>
       <ConditionalProbabilityVenn/>
-       <p style={{textAlign: 'center', padding: '40px', color: '#666'}}>Venn Diagram component coming soon</p>
+       {/* <p style={{textAlign: 'center', padding: '40px', color: '#666'}}>Venn Diagram component coming soon</p> */}
      </div>
    )}
    
