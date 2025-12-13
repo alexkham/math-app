@@ -434,6 +434,12 @@ const cardStyles = {
          See proportions and conditional probabilities in a grid-based visual format.
        </div>
      </Link>
+     <Link href="/probability/visual-tools/conditional-probability/contingency-table" style={cardStyles.card}>
+       <div style={cardStyles.title}>Contingency Table</div>
+       <div style={cardStyles.description}>
+        Interactive 2×2 table visualizing conditional probability relationships between events A and B.
+       </div>
+     </Link>
    </div>
    
    <br/>
