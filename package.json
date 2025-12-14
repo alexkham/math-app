@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start --port 3007 ",
+    "generate-nav": "node generateNavFromSitemap.js",
     "lint": "next lint",
     "generate-sitemap": "next build && node generate-sitemap.mjs",
     "build-with-sitemap": "npm run build && npm run generate-sitemap --/test"

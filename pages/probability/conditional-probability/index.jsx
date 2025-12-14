@@ -98,49 +98,105 @@ These visual perspectives reinforce the idea that conditioning is a change of vi
       after:``,
   
     },
-    obj3:{
+    examples:{
   
-      title:``,
-      content:``,
+      title:`Examples`,
+      content:`
+**1. Information Changes the Probability**  
+Suppose $A$ is “a randomly chosen person has a university degree” and $B$ is “the person is over 40.”  
+The probability of $A$ evaluated after knowing $B$ may differ from the overall probability of $A$, because the condition changes the relevant group.
+
+**2. No Change Under Conditioning**  
+If $A$ is “tomorrow is sunny” and $B$ is “a fair coin lands heads today,” knowing $B$ has no effect on how we evaluate $A$. In this case, conditioning does not change the probability, illustrating a link to independence.
+
+**3. Sequential Situations**  
+Consider drawing two cards from a deck without replacement. Let $A$ be “the second card is an ace” and $B$ be “the first card is an ace.”  
+Knowing whether $B$ occurred changes how we evaluate $A$, because the situation after the first draw is different from the original one.
+
+These examples show how conditional probability reflects the impact of information on how uncertainty is assessed.
+`,
       before:``,
       after:``,
   
     },
-    obj3:{
+    independence:{
   
-      title:``,
-      content:``,
+      title:`Conditional Probability vs Independence`,
+      content:`
+Conditioning usually changes probabilities, because new information restricts the situation we are considering. Once a condition is known, the frame of reference shifts, and probabilities are re-evaluated within that restricted context.
+
+Independence is the special case where this shift does **not** occur. If events are independent, then knowing that one event happened provides no information about the other. In that case, conditioning leaves probabilities unchanged.
+
+This contrast is crucial:  
+- **Conditional probability** describes how probabilities *update* when information is known.  
+- **Independence** describes when such an update is unnecessary.
+
+Understanding this distinction prevents a common mistake — assuming probabilities should change just because a condition is mentioned, or assuming independence without justification.
+`,
       before:``,
       after:``,
   
     },
-    obj3:{
+    patterns:{
   
-      title:``,
-      content:``,
+      title:`Common Patterns Where Conditioning Appears`,
+      content:`
+Conditional probability shows up naturally in many recurring situations.
+
+One common pattern is **“given that…”** reasoning, where information is stated explicitly and probabilities must be evaluated under that condition. Another is **filtering**, where attention is restricted to cases that meet a certain criterion before any assessment is made.
+
+Conditioning also appears in **sequential processes**, where earlier outcomes affect how later ones are viewed, and in **classification problems**, where probabilities are evaluated within specific groups or categories.
+
+Recognizing these patterns helps identify when conditional probability is required, even if the word “given” is not explicitly used.
+`,
       before:``,
       after:``,
   
     },
-    obj3:{
+    mistakes:{
   
-      title:``,
-      content:``,
+      title:`Common Mistakes`,
+      content:`
+Conditional probability is often misapplied, even in simple situations.
+
+A frequent mistake is forgetting to restrict the situation properly and continuing to reason as if all outcomes were still possible. Another common error is dividing by the wrong probability, which leads to incorrect normalization.
+
+Confusing $P(A \\mid B)$ with $P(B \\mid A)$ is especially widespread and can completely reverse the meaning of a statement. It is also common to assume independence implicitly, treating conditioning as irrelevant without justification.
+
+Being explicit about what is known and what space is being considered helps avoid these errors.
+`,
       before:``,
       after:``,
   
     },
-    obj3:{
+    why:{
   
-      title:``,
-      content:``,
+      title:`Why Conditional Probability Matters`,
+      content:`
+Conditional probability is the mechanism by which probability responds to information. It models learning, observation, and the updating of beliefs as new facts become known.
+
+This idea lies at the heart of inference, decision-making, and prediction. It underpins statistical reasoning, risk assessment, and data analysis, where conclusions must be drawn in the presence of partial information.
+
+Without conditional probability, probability theory would be unable to describe how uncertainty evolves when knowledge changes.
+`,
       before:``,
       after:``,
   
     },
-    obj4:{
-      title:``,
-      content:``,
+    connections:{
+      title:`Connections to Other Probability Concepts`,
+      content:`
+Conditional probability connects directly to many central ideas in probability.
+
+- **Events** provide the objects being conditioned on.  
+- **Independence** describes when conditioning has no effect.  
+- **Total probability** combines conditional probabilities across cases.  
+- **Chain rule** builds joint probabilities from conditional ones.  
+- **Bayes theorem** inverts conditional probabilities to update beliefs.  
+- **Random variables and distributions** extend conditioning to numerical outcomes.
+
+Understanding conditional probability clarifies how these concepts fit together into a single coherent framework.
+`,
       before:``,
       after:``,
   
@@ -235,65 +291,77 @@ export default function ConditionalProbabilityPage({seoData,sectionsContent , in
         ]
     },
     {
-        id:'',
-        title:'',
+        id:'examples',
+        title:sectionsContent.examples.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.examples.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'independence',
+        title:sectionsContent.independence.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.independence.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'patterns',
+        title:sectionsContent.patterns.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.patterns.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'mistakes',
+        title:sectionsContent.mistakes.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.mistakes.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'why',
+        title:sectionsContent.why.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.why.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'connections',
+        title:sectionsContent.connections.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.connections.content,
+        ]
     },
-    {
-        id:'',
-        title:'',
-        link:'',
-        content:''
-    },
-    {
-        id:'',
-        title:'',
-        link:'',
-        content:''
-    },
-    {
-        id:'',
-        title:'',
-        link:'',
-        content:''
-    },
-    {
-        id:'',
-        title:'',
-        link:'',
-        content:''
-    },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
 ]
 
   return (

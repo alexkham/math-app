@@ -41,6 +41,7 @@ import GeneralAccordionWrapper from './components/accordion/GeneralAccordionWrap
 import summaries from './api/db/tables/set-theory/summaries';
 import Head from 'next/head';
 import GenericNavbar from './components/nav-bar2/GenericNavbar';
+import MyNavbar3 from './components/nav-bar3/MyNavbar3';
 
 
 export function generateStaticParams() {
@@ -106,7 +107,10 @@ export default async function Home() {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="msvalidate.01" content="93FCA47C77A3B377FDB3B9FEA951F9CA" />
 </Head>
-<GenericNavbar/>
+{/* <GenericNavbar/> */}
+<MyNavbar3
+themeName='dark'
+/>
      
       <HomePage categorizedUrls={categorizedUrls} metaDescriptions={metaDescriptions}></HomePage>
      
