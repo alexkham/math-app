@@ -8,21 +8,23 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
-import GenericMultiComponentFrame from '@/app/components/GenericMulticomponentFrame'
-import SingleEventProbabilityCalculator from '@/app/components/calculators/probability/SingleEventCalculator'
-import { useSearchParams } from 'next/navigation'
-import TwoIndependentEventsCalculator from '@/app/components/calculators/probability/TwoIndependentEventsCalculator'
+
 
 export async function getStaticProps(){
 
-  const keyWords=['probability calculator','probability','probability formula',
-    'compute probability calculator','calculate probability','calculating probability calculator']
+  const keyWords=['','','','','']
 
     const sectionsContent={
 
-    obj1:{
-      title:``,
-      content:``,
+    situation:{
+      title:`The Situation Bayes' Theorem Addresses`,
+      content:`
+Bayes&apos; theorem appears in situations where we observe something directly, but care about something that is not directly visible. We see evidence, data, or outcomes, while the underlying cause or explanation remains uncertain.
+
+In many problems, the probability of observing evidence given a cause is easier to assess than the probability of the cause given the evidence. This asymmetry creates a gap: we know how likely the evidence is under different scenarios, but we want to reason in the opposite direction.
+
+Bayes&apos; theorem provides the bridge between these two perspectives. It shows how information flows from what we can observe to what we want to infer, allowing probabilities to be updated in a principled and consistent way.
+`,
       before:``,
       after:``,
   
@@ -67,8 +69,14 @@ export async function getStaticProps(){
 
   const introContent = {
   id: "intro",
-  title: "",
-  content: ``
+  title: "Probability After Information",
+  content: `
+Probability does not stay fixed when new information appears. What we believe about a situation often changes once evidence is observed, data is collected, or a condition becomes known. Bayes&apos; theorem captures this process in a precise and consistent way.
+
+At its core, Bayes&apos; theorem describes how probabilities should update when we move from what we believed *before* seeing evidence to what we should believe *after*. It connects prior knowledge with new information and explains how both should be combined rather than treated separately.
+
+This idea is not an add-on to probability theory. Bayes&apos; theorem sits at the intersection of conditional probability, total probability, and independence, tying them together into a single update mechanism. The sections that follow show how this connection works and why Bayes&apos; theorem plays such a central role in probabilistic reasoning.
+`
 }
 
 
@@ -82,7 +90,7 @@ export async function getStaticProps(){
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/bayes-theorem",
          name: "name"
       },
         
@@ -90,22 +98,17 @@ export async function getStaticProps(){
     }
    }
 
-export default function ProbabilityCalculator({seoData,sectionsContent , introContent}) {
-
-
-      const searchParams = useSearchParams()
-       
-      const tab=searchParams.get('tab')
-     const initialTab = tab ? parseInt(tab) : 1
-
+export default function BayesPage({seoData,sectionsContent , introContent}) {
 
     
   const genericSections=[
     {
-        id:'1',
-        title:'section1',
+        id:'situation',
+        title:sectionsContent.situation.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.situation.content,
+        ]
     },
     {
         id:'2',
@@ -167,7 +170,7 @@ export default function ProbabilityCalculator({seoData,sectionsContent , introCo
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -183,53 +186,28 @@ export default function ProbabilityCalculator({seoData,sectionsContent , introCo
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'-20px'}}>Probability Calculators</h1>
-   <br/>
-   <GenericMultiComponentFrame
-    components={[
-        
-          { id: 1, name: 'Single Event Probability Calculator', key: 'probCalc', component: SingleEventProbabilityCalculator },
-          { id: 2, name: 'Two Independent Events Probability Calculator', key: 'probCalc', component: TwoIndependentEventsCalculator },
-           { id: 3, name: 'Discrete Distibutions Calculator',  href: '/probability/calculators/discrete-distributions'  },
-           { id: 4, name: 'Continuous Distibutions Calculator',  href: '/probability/calculators/continuous-distributions'  },
-           { id: 5, name: 'Joint Probability Calculator',  href: '/probability/calculators/joint-probability'  },
-           { id: 6, name: 'Two Events Probability Calculator',  href: '/probability/calculators/two-events'  },
-          
-
-          //  { id: 4, name: 'Introduction', content: introContent2 },
-          
-          
-        ]}
-        initialActive={1}
-        buttonMinWidth="160px"
-        primaryColor="#007bff"
-   
-   />
-
-   {/* <TwoIndependentEventsCalculator/> */}
-   {/* <div style={{transform:'scale(0.9)'}}>
-   <SingleEventProbabilityCalculator/>
-   </div> */}
-   <br/>
-   {/* <SectionTableOfContents sections={genericSections}/> */}
+   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Bayes&apos; Theorem</h1>
    <br/>
    <br/>
-   {/* <div>{JSON.stringify(initialTab)}</div> */}
+   <SectionTableOfContents sections={genericSections}/>
    <br/>
-    {/* <IntroSection 
+   <br/>
+   <br/>
+    <IntroSection 
           id={introContent.id}
           title={introContent.title}
           content={introContent.content}
-          backgroundColor="#f2f2f2"
-          textColor="#34383c"
-        /> */}
+           backgroundColor='#f9fafb'
+          //  "#f2f2f2"
+          textColor="#06357a"
+        />
    <br/>
    <br/>
-   {/* <Sections sections={genericSections}/> */}
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

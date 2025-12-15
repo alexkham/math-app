@@ -25,11 +25,12 @@
 
 
 import Script from "next/script";
-import MyNavbar3 from "@/app/components/nav-bar3/MyNavbar3";
+
 import ScrollUpButton from "@/app/components/scroll-up-button/ScrollUpButton";
 import ScrollToBottom from "@/app/components/scroll-up-button/ScrollToBottom";
 import ScrollToTop from "@/app/components/scroll-up-button/ScrollToTop";
 import Footer from "@/app/components/page-components/footer/Footer";
+import MyNavbar3 from "@/app/components/nav-bar3/MyNavbar3";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -49,7 +50,8 @@ export default function App({ Component, pageProps }) {
       </Script>
 
       {/* Navigation */}
-      <MyNavbar3 themeName="dark" />
+      <MyNavbar3 themeName="dark"/>
+      {/* <MyNavbar3 themeName="dark" /> */}
         {/* <ScrollToTop right='60px' /> */}
   <ScrollToBottom center={true}
   bottom={null}/>
@@ -57,7 +59,7 @@ export default function App({ Component, pageProps }) {
       {/* Your actual page */}
       <Component {...pageProps} />
 
-      {/* <ScrollUpButton/> */}
+      <ScrollUpButton/>
       <Footer/>
     </>
   );

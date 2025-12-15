@@ -83,40 +83,136 @@ Non-negativity is a structural constraint, not a computational rule. Any assignm
       after:``,
   
     },
-    obj3:{
+    axiom2:{
   
-      title:``,
-      content:``,
+      title:`Axiom 2 — Normalization`,
+      content:`
+Probability is measured on a fixed scale. The event that represents absolute certainty — that *something happens* — must anchor this scale.
+
+This axiom states that the probability of the entire sample space is equal to one. It establishes what “100% certainty” means and ensures that all other probabilities are measured relative to this reference point.
+
+In symbolic form, the axiom is written as:
+
+$P(\\Omega) = 1$
+
+Normalization does not describe a particular event. It fixes the scale of probability itself. Without it, probability values would have no consistent meaning across different models.
+`,
       before:``,
       after:``,
   
     },
-    obj3:{
+    axiom3:{
   
-      title:``,
-      content:``,
+      title:`Axiom 3 — Additivity for Disjoint Events`,
+      content:`
+When two events cannot occur together, their probabilities should contribute independently to the total chance that one of them occurs. Disjoint situations do not interfere with one another, so there is no overlap to account for.
+
+This axiom states that if events share no common outcomes, the probability that one or the other occurs is the sum of their probabilities. It formalizes how probability combines across mutually exclusive cases.
+
+In symbolic form, the axiom is written as:
+
+$P(A \\cup B) = P(A) + P(B)$  whenever $A \\cap B = \\varnothing$
+
+Additivity captures the idea that probability accumulates across exclusive alternatives. It is the mechanism that allows probability to be built up from separate cases into a complete description of uncertainty.
+`,
       before:``,
       after:``,
   
     },
-    obj3:{
+    consequences:{
   
-      title:``,
-      content:``,
+      title:`Immediate Consequences of the Axioms`,
+      content:`
+Once the axioms are in place, several basic results follow automatically. These are not additional assumptions — they are direct consequences of the three axioms.
+
+- **Probability of the empty event**  
+  The event that cannot occur has probability zero.
+
+- **Probability of complements**  
+  For any event, the probability of its complement is determined by how much probability remains once the event itself is accounted for.
+
+- **Monotonicity**  
+  If one event is contained within another, its probability cannot be larger.
+
+- **Additivity for two events**  
+  For any two events, the probability of their union can be expressed by combining their individual probabilities while correcting for any overlap.
+
+These results show how much structure is already enforced by the axioms alone. Many familiar probability rules emerge without introducing any new principles.
+`,
       before:``,
       after:``,
   
     },
-    obj3:{
+    assume:{
   
-      title:``,
-      content:``,
+      title:`What the Axioms Do  Not  Assume`,
+      content:`
+The probability axioms are intentionally minimal. They impose consistency, but they do **not** encode any specific modeling choices. Several common assumptions are **not** built into the axioms.
+
+- **No independence assumption**  
+  The axioms do not state that events are independent. Independence is an additional property that must be justified separately.
+
+- **No equal-likelihood assumption**  
+  Nothing in the axioms says outcomes or events are equally likely. Uniform probability is a modeling choice, not a requirement.
+
+- **No symmetry or fairness**  
+  The axioms do not assume coins are fair, dice are balanced, or processes are symmetric.
+
+- **No restriction to finite spaces**  
+  The axioms apply equally to finite, countable, and continuous sample spaces.
+
+This section is crucial because it separates what probability *requires* from what is often *assumed*. Many misunderstandings arise from attributing extra meaning to the axioms that they do not contain.
+`,
       before:``,
       after:``,
   
     },
-    obj3:{
+    follow:{
   
+      title:`From Axioms to All Probability Rules`,
+      content:`
+The axioms are not isolated rules. Together, they are strong enough to generate the entire structure of probability theory. Many familiar probability formulas are not additional assumptions — they are logical consequences of these three constraints.
+
+Once probability is treated as a consistent assignment to events, concepts like conditional probability, total probability, independence, and Bayes’ theorem emerge naturally. Each of these ideas can be derived by applying the axioms to specific event constructions and relationships.
+
+This is why the axioms sit at the foundation of probability. They do not compete with later rules; they *produce* them. Everything else in probability refines or reorganizes what the axioms already enforce.
+`,
+      before:``,
+      after:``,
+  
+    },
+    practice:{
+      title:`Why the Axioms Matter in Practice`,
+      content:`
+The axioms ensure that probability models behave consistently, no matter where they are applied. They prevent contradictory assignments and make it possible to reason reliably about uncertainty across different contexts.
+
+Because the axioms are universal, probability models built in one domain can be transferred to another without changing their logical foundation. This is why the same probability rules apply in science, engineering, data analysis, and decision-making.
+
+In practice, the axioms act as a safeguard. Any model that violates them may produce numbers, but those numbers cannot be interpreted coherently as probabilities.
+`,
+      before:``,
+      after:``,
+  
+    },
+    connections:{
+      title:`Connections to Other Probability Concepts`,
+      content:`
+The probability axioms form the base layer of the entire probability framework.
+
+- **Events** are the objects to which probabilities are assigned.
+- **Sample spaces** define the universe in which those events live.
+- **Conditional probability** arises by applying the axioms under restricted information.
+- **Total probability** follows from additivity across cases.
+- **Independence** describes special situations where conditioning has no effect.
+- **Random variables** and **probability distributions** extend the axioms to numerical outcomes.
+
+Every probability concept ultimately traces back to these axioms, making them the unifying foundation of the subject.
+`,
+      before:``,
+      after:``,
+  
+    },
+    obj4:{
       title:``,
       content:``,
       before:``,
@@ -212,59 +308,71 @@ export default function AxiomsPage({seoData,sectionsContent , introContent}) {
         ]
     },
     {
-        id:'',
-        title:'',
+        id:'axiom2',
+        title:sectionsContent.axiom2.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.axiom2.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'axiom3',
+        title:sectionsContent.axiom3.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.axiom3.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'consequences',
+        title:sectionsContent.consequences.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.consequences.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'assume',
+        title:sectionsContent.assume.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.assume.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'practice',
+        title:sectionsContent.practice.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.practice.content,
+        ]
     },
     {
-        id:'',
-        title:'',
+        id:'connections',
+        title:sectionsContent.connections.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.connections.content,
+        ]
     },
-    {
-        id:'',
-        title:'',
-        link:'',
-        content:''
-    },
-    {
-        id:'',
-        title:'',
-        link:'',
-        content:''
-    },
-    {
-        id:'',
-        title:'',
-        link:'',
-        content:''
-    },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
 ]
 
   return (

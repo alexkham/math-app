@@ -6,17 +6,31 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
-import '../../../pages/pages.css'
+import '../../../../pages/pages.css'
 import Head from 'next/head'
-import GenericMultiComponentFrame from '@/app/components/GenericMulticomponentFrame'
-import SingleEventProbabilityCalculator from '@/app/components/calculators/probability/SingleEventCalculator'
-import { useSearchParams } from 'next/navigation'
-import TwoIndependentEventsCalculator from '@/app/components/calculators/probability/TwoIndependentEventsCalculator'
+import TwoEventsProbabilityCalculator from '@/app/components/calculators/probability/events/TwoEventsProbabilityCalculator'
+
 
 export async function getStaticProps(){
 
-  const keyWords=['probability calculator','probability','probability formula',
-    'compute probability calculator','calculate probability','calculating probability calculator']
+  const keyWords = [
+  'probability calculator',
+  'probability of two events',
+  'conditional probability',
+  'independent events',
+  'mutually exclusive events',
+  'two events probability calculator',
+  'probability of two events',
+  'probability of A and B',
+  'probability of A or B',
+  'union and intersection probability calculator',
+  'conditional probability two events',
+  'independent events probability calculator',
+  'mutually exclusive events calculator',
+  'two event venn diagram probability',
+  'probability rules two events'
+];
+
 
     const sectionsContent={
 
@@ -82,7 +96,7 @@ export async function getStaticProps(){
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/calculators/two-events",
          name: "name"
       },
         
@@ -90,14 +104,7 @@ export async function getStaticProps(){
     }
    }
 
-export default function ProbabilityCalculator({seoData,sectionsContent , introContent}) {
-
-
-      const searchParams = useSearchParams()
-       
-      const tab=searchParams.get('tab')
-     const initialTab = tab ? parseInt(tab) : 1
-
+export default function TwoEventsCalculatorPage({seoData,sectionsContent , introContent}) {
 
     
   const genericSections=[
@@ -167,7 +174,7 @@ export default function ProbabilityCalculator({seoData,sectionsContent , introCo
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -183,45 +190,37 @@ export default function ProbabilityCalculator({seoData,sectionsContent , introCo
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'-20px'}}>Probability Calculators</h1>
+   <h1 className='title' style={{marginTop:'-10px',marginBottom:'0px'}}>Two Events Probability Calculator</h1>
    <br/>
-   <GenericMultiComponentFrame
-    components={[
-        
-          { id: 1, name: 'Single Event Probability Calculator', key: 'probCalc', component: SingleEventProbabilityCalculator },
-          { id: 2, name: 'Two Independent Events Probability Calculator', key: 'probCalc', component: TwoIndependentEventsCalculator },
-           { id: 3, name: 'Discrete Distibutions Calculator',  href: '/probability/calculators/discrete-distributions'  },
-           { id: 4, name: 'Continuous Distibutions Calculator',  href: '/probability/calculators/continuous-distributions'  },
-           { id: 5, name: 'Joint Probability Calculator',  href: '/probability/calculators/joint-probability'  },
-           { id: 6, name: 'Two Events Probability Calculator',  href: '/probability/calculators/two-events'  },
-          
-
-          //  { id: 4, name: 'Introduction', content: introContent2 },
-          
-          
-        ]}
-        initialActive={1}
-        buttonMinWidth="160px"
-        primaryColor="#007bff"
-   
-   />
-
-   {/* <TwoIndependentEventsCalculator/> */}
-   {/* <div style={{transform:'scale(0.9)'}}>
-   <SingleEventProbabilityCalculator/>
-   </div> */}
+   <TwoEventsProbabilityCalculator/>
    <br/>
    {/* <SectionTableOfContents sections={genericSections}/> */}
    <br/>
    <br/>
-   {/* <div>{JSON.stringify(initialTab)}</div> */}
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
    <br/>
     {/* <IntroSection 
           id={introContent.id}
           title={introContent.title}
           content={introContent.content}
-          backgroundColor="#f2f2f2"
-          textColor="#34383c"
+           backgroundColor='#f9fafb'
+          //  "#f2f2f2"
+          textColor="#06357a"
         /> */}
    <br/>
    <br/>
@@ -229,7 +228,7 @@ export default function ProbabilityCalculator({seoData,sectionsContent , introCo
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }
