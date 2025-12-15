@@ -610,7 +610,7 @@ export default function TrigonometryPage({ seoData, sectionsContent, introConten
     }}
   />
 </Head>
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -643,7 +643,7 @@ export default function TrigonometryPage({ seoData, sectionsContent, introConten
     <br/>
    
     <br/>
-    <ScrollUpButton/>
+    {/* <ScrollUpButton/> */}
     
 
 
