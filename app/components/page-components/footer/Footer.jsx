@@ -89,7 +89,7 @@ function Footer({ themeName = 'darkGray' }) {
           </p>
         </div>
 
-        {/* Link Columns */}
+        {/* Link Columns !!!*/}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
