@@ -2,12 +2,14 @@
 .container {
  min-height: 300px;
  padding: 2rem;
- margin: 0;
+ margin: auto;
+
  font-family: 'Times New Roman', Times, serif;
  line-height: 1.5;
- width: 80%;
- margin-left: 200px;
- margin-right: 55px;
+ width: 65%;
+ 
+ /* margin-left: 300px;
+ margin-right: 95px; */
 }
 
 .content {

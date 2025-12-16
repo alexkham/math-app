@@ -336,7 +336,10 @@ export default function LinearAlgebraPage({
         <SectionTableOfContents sections={linearAlgebraSections}
          showSecondaryNav={true}
          secondaryNavMode="children"  // or "siblings"
-         secondaryNavTitle="More in this Section" />
+         secondaryNavTitle="More in this Section" 
+         numbered={true}
+        
+         />
         <br/>
         
         <br/>
