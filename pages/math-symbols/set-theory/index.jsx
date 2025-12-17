@@ -8,6 +8,7 @@ import '../../pages.css'
 import DataWrapper from '@/app/components/generic-table/DataWrapper';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
+import VerticalSidebarFrame from '@/app/components/vertical-buttons/VerticalBarGroupFrame';
 
 export default function MathSymbolsSetTheoryPage({ symbolsData, meta,menuItems}) {
   return (
@@ -39,7 +40,31 @@ export default function MathSymbolsSetTheoryPage({ symbolsData, meta,menuItems})
       </h1>
       <br />
       <br />
-      <div style={{display:'flex',flexDirection:'row',alignItems: 'flex-start' }}>
+
+   <VerticalSidebarFrame
+   sidebarPosition='left'
+   sidebarWidth='200px'
+   gap='10px'
+   sidebar={ 
+   <VerticalButtonGroup 
+     items={menuItems}
+     width="200px"       
+   //   backgroundColor ='#0070f3'
+   //   color = 'white'
+     isSticky={true}
+     verticalOffset='220px'
+
+   
+
+     />}
+   mainContent={
+   <DataWrapper data={symbolsData} />
+
+   }
+   
+   />
+
+      {/* <div style={{display:'flex',flexDirection:'row',alignItems: 'flex-start' }}>
      
      <VerticalButtonGroup 
      items={menuItems}
@@ -58,7 +83,7 @@ export default function MathSymbolsSetTheoryPage({ symbolsData, meta,menuItems})
       >
         <DataWrapper data={symbolsData} />
       </div>
-      </div>
+      </div> */}
       <ScrollUpButton />
     </>
   );

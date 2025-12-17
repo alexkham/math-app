@@ -65,3 +65,7 @@ public/sitemap.xml
 #autiomations
 
 automations/*
+
+
+#scripts
+scripts/

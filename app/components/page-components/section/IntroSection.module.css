@@ -16,6 +16,7 @@
  max-width: 1000px;
  margin: 0 auto;
  font-size: 1.15rem;
+ margin-left: 150px;
  /* margin-left: -20px; */
 }
 
@@ -34,6 +35,6 @@
  font-size: 2.2rem;
  margin-bottom: 1.5rem;
  font-weight: 600;
- text-align: center;
+ /* text-align: center; */
  
 }
