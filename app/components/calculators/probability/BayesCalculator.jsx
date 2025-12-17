@@ -333,7 +333,7 @@ export default function BayesTheoremCalculator() {
           fontWeight: '500',
           lineHeight: '1.4'
         }}>
-          Calculate posterior probabilities using Bayes' Theorem with visual tree diagrams and step-by-step solutions.
+          Calculate posterior probabilities using Bayes&apos; Theorem with visual tree diagrams and step-by-step solutions.
         </p>
       </div>
 
@@ -451,7 +451,7 @@ export default function BayesTheoremCalculator() {
 
                 <div>
                   <label style={{ display: 'block', fontWeight: '500', marginBottom: '6px', color: '#374151', fontSize: '13px' }}>
-                    P(B|A') - Conditional Probability if A is false
+                    P(B|A&apos;) - Conditional Probability if A is false
                   </label>
                   <input
                     type="number"
@@ -729,7 +729,7 @@ export default function BayesTheoremCalculator() {
               <div style={{ fontWeight: '600', marginBottom: '6px' }}>💡 Example: Rare Disease Test</div>
               <div style={{ marginBottom: '4px' }}>• P(A) = 0.01 (disease affects 1% of population)</div>
               <div style={{ marginBottom: '4px' }}>• P(B|A) = 0.95 (test is 95% accurate if you have disease)</div>
-              <div>• P(B|A') = 0.05 (5% false positive rate)</div>
+              <div>• P(B|A&apos;) = 0.05 (5% false positive rate)</div>
             </div>
           )}
 
@@ -925,7 +925,7 @@ export default function BayesTheoremCalculator() {
                 Ready to Calculate
               </div>
               <div style={{ fontSize: '14px' }}>
-                Enter your probabilities and click Calculate to see Bayes' Theorem in action
+                Enter your probabilities and click Calculate to see Bayes&apos; Theorem in action
               </div>
             </div>
           )}
@@ -1098,13 +1098,13 @@ function BayesTreeDiagram({ results, mode, instanceId }) {
         {/* Branch to not A */}
         <line x1="58" y1="265" x2="120" y2="380" stroke="#6b7280" strokeWidth="2.5" />
         <text x="65" y="330" fontSize="12" fill="#6b7280" fontWeight="600">
-          P(A')
+          P(A&apos;)
         </text>
         <text x="65" y="345" fontSize="11" fill="#6b7280" fontWeight="600">
           {results.priorNotA.toFixed(3)}
         </text>
         <circle cx="130" cy="390" r="8" fill="#6b7280" />
-        <text x="142" y="395" fontSize="13" fill="#374151" fontWeight="600">A'</text>
+        <text x="142" y="395" fontSize="13" fill="#374151" fontWeight="600">A&apos;</text>
         
         {/* From A to B */}
         <line x1="138" y1="110" x2="220" y2="50" stroke="#10b981" strokeWidth="2.5" />
@@ -1120,18 +1120,18 @@ function BayesTreeDiagram({ results, mode, instanceId }) {
         {/* From A to not B */}
         <line x1="138" y1="115" x2="220" y2="170" stroke="#9ca3af" strokeWidth="2" strokeDasharray="5,5" />
         <text x="155" y="145" fontSize="11" fill="#9ca3af">
-          P(B'|A)
+          P(B&apos;|A)
         </text>
         <text x="155" y="158" fontSize="10" fill="#9ca3af">
           {(1 - results.condProbB_A).toFixed(3)}
         </text>
         <circle cx="230" cy="175" r="8" fill="#9ca3af" />
-        <text x="242" y="180" fontSize="13" fill="#374151">B'</text>
+        <text x="242" y="180" fontSize="13" fill="#374151">B&apos;</text>
         
         {/* From not A to B */}
         <line x1="138" y1="385" x2="220" y2="330" stroke="#f59e0b" strokeWidth="2.5" />
         <text x="155" y="355" fontSize="11" fill="#f59e0b" fontWeight="600">
-          P(B|A')
+          P(B|A&apos;)
         </text>
         <text x="155" y="368" fontSize="10" fill="#f59e0b" fontWeight="600">
           {results.condProbB_notA.toFixed(3)}
@@ -1142,13 +1142,13 @@ function BayesTreeDiagram({ results, mode, instanceId }) {
         {/* From not A to not B */}
         <line x1="138" y1="395" x2="220" y2="450" stroke="#9ca3af" strokeWidth="2" strokeDasharray="5,5" />
         <text x="155" y="425" fontSize="11" fill="#9ca3af">
-          P(B'|A')
+          P(B&apos;|A&apos;)
         </text>
         <text x="155" y="438" fontSize="10" fill="#9ca3af">
           {(1 - results.condProbB_notA).toFixed(3)}
         </text>
         <circle cx="230" cy="455" r="8" fill="#9ca3af" />
-        <text x="242" y="460" fontSize="13" fill="#374151">B'</text>
+        <text x="242" y="460" fontSize="13" fill="#374151">B&apos;</text>
         
         {/* Joint probabilities */}
         <text x="250" y="50" fontSize="11" fill="#374151" fontFamily="monospace">
@@ -1159,21 +1159,21 @@ function BayesTreeDiagram({ results, mode, instanceId }) {
         </text>
         
         <text x="250" y="180" fontSize="11" fill="#9ca3af" fontFamily="monospace">
-          P(A∩B')
+          P(A∩B&apos;)
         </text>
         <text x="250" y="195" fontSize="11" fill="#9ca3af" fontFamily="monospace">
           {(results.priorA * (1 - results.condProbB_A)).toFixed(4)}
         </text>
         
         <text x="250" y="330" fontSize="11" fill="#374151" fontFamily="monospace">
-          P(A'∩B)
+          P(A&apos;∩B)
         </text>
         <text x="250" y="345" fontSize="12" fill="#f59e0b" fontFamily="monospace" fontWeight="600">
           {(results.priorNotA * results.condProbB_notA).toFixed(4)}
         </text>
         
         <text x="250" y="460" fontSize="11" fill="#9ca3af" fontFamily="monospace">
-          P(A'∩B')
+          P(A&apos;∩B&apos;)
         </text>
         <text x="250" y="475" fontSize="11" fill="#9ca3af" fontFamily="monospace">
           {(results.priorNotA * (1 - results.condProbB_notA)).toFixed(4)}
@@ -1199,7 +1199,7 @@ function BayesTreeDiagram({ results, mode, instanceId }) {
         color: '#0c4a6e',
         lineHeight: '1.5'
       }}>
-        <strong>Reading the diagram:</strong> Follow the highlighted green and orange paths to B. The posterior probability P(A|B) = {results.posteriorA_B.toFixed(4)} compares these paths using Bayes' Theorem.
+        <strong>Reading the diagram:</strong> Follow the highlighted green and orange paths to B. The posterior probability P(A|B) = {results.posteriorA_B.toFixed(4)} compares these paths using Bayes&apos; Theorem.
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
-import BayesTheoremCalculator from '@/app/components/calculators/probability/BayesCakcukator'
+import BayesTheoremCalculator from '@/app/components/calculators/probability/BayesCalculator'
 
 
 export async function getStaticProps(){
