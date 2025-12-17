@@ -59,6 +59,15 @@ export async function getStaticProps(){
      image:'/images/conditional-probability2.jpg',
     href: "/probability/visual-tools/conditional-probability"
   },
+   {
+    title: "Probability Inequalities Visualizers",
+    description: "Explore visually fundamental probability inequalities including Markov's and Chebyshev's inequalities with interactive calculators and visualizations. Understand how these powerful bounds provide estimates for tail probabilities and apply them to real-world scenarios.",
+    backgroundColor: "#4F46E5", // Indigo
+    textColor: "#ffffff",
+    ratio: 7,
+     image:'/images/inequality.jpg',
+    href: "/probability/visual-tools/inequalities"
+  },
   //  {
   //   title: "Analytics Dashboard",
   //   description: "Comprehensive analytics dashboard with real-time data visualization and reporting tools.",
@@ -140,7 +149,7 @@ export async function getStaticProps(){
          sectionsContent,
          introContent,
           seoData: {
-        title: "Title | Learn Math Class",
+        title: "Probability Visual Tools | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
         url: "/probability/visual-tools",

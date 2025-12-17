@@ -824,7 +824,7 @@ const SectionTableOfContents = ({
 
     const setInitialThreshold = () => {
       if (boxRef.current) {
-        stickyThreshold.current = boxRef.current.offsetTop + 100;
+        stickyThreshold.current = boxRef.current.offsetTop + 1000;
       }
     };
 
