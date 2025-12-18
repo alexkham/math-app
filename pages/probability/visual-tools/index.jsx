@@ -60,6 +60,15 @@ export async function getStaticProps(){
     href: "/probability/visual-tools/conditional-probability"
   },
    {
+    title: "Expected Value Visualizers",
+    description: "Learn expected value through interactive visualizations. See how probability weights combine with outcomes to determine long-run averages.",
+    backgroundColor: "#4F46E5", // Indigo
+    textColor: "#ffffff",
+    ratio: 7,
+     image:'/images/capital_e1.jpg',
+    href: "/probability/visual-tools/expected-value"
+  },
+   {
     title: "Probability Inequalities Visualizers",
     description: "Explore visually fundamental probability inequalities including Markov's and Chebyshev's inequalities with interactive calculators and visualizations. Understand how these powerful bounds provide estimates for tail probabilities and apply them to real-world scenarios.",
     backgroundColor: "#4F46E5", // Indigo

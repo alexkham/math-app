@@ -60,10 +60,10 @@ const ModernCardsGroup = ({ items = [] }) => {
                 <Link 
                   href={item.href || '#'} 
                   className={styles.viewButton}
-                  style={{ 
-                    color: item.textColor || '#4F46E5',
-                    borderColor: item.textColor || '#4F46E5'
-                  }}
+                  // style={{ 
+                  //   color: item.textColor || '#4F46E5',
+                  //   borderColor: item.textColor || '#4F46E5'
+                  // }}
                 >
                   View Details
                 </Link>

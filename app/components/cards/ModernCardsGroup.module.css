@@ -102,11 +102,11 @@
   }
   
   .viewButton {
-    color: #4F46E5;
+    color: white;
     font-weight: 500;
     font-size: 0.875rem;
     padding: 0.5rem 1rem;
-    border: 1px solid #4F46E5;
+    border: 1px solid white;
     border-radius: 9999px;
     background: transparent;
     cursor: pointer;
@@ -117,6 +117,7 @@
   
   .viewButton:hover {
     background: #f8fafc;
+    color:#4F46E5;
   }
   
   .menuButton {
