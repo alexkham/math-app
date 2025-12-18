@@ -102,11 +102,11 @@
   }
   
   .viewButton {
-    color: white;
+    color: #f8fafc;
     font-weight: 500;
     font-size: 0.875rem;
     padding: 0.5rem 1rem;
-    border: 1px solid white;
+    border: 1px solid #f8fafc;
     border-radius: 9999px;
     background: transparent;
     cursor: pointer;
