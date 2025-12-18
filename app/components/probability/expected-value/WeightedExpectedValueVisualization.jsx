@@ -110,7 +110,7 @@ const WeightedExpectedValueVisualizer = () => {
         maxWidth: '700px',
         margin: '0 auto 20px'
       }}>
-        Higher probabilities "pull" the expected value toward them. 
+        Higher probabilities &quot;pull&quot; the expected value toward them. 
         Watch how E(X) differs from the simple average when probabilities are unequal.
       </p>
 
@@ -379,7 +379,7 @@ const WeightedExpectedValueVisualizer = () => {
           fontWeight="bold"
           fill="#2c3e50"
         >
-          Probability "Weights" Pull the Expected Value
+          Probability &quot;Weights&quot; Pull the Expected Value
         </text>
 
         {/* Contribution explanation label */}
@@ -533,7 +533,7 @@ const WeightedExpectedValueVisualizer = () => {
             
             <ul style={{ color: '#34495e', marginTop: '10px', paddingLeft: '20px' }}>
               <li style={{ marginBottom: '8px' }}><strong>Blue circles</strong> contain P(X = x) - the probability of each outcome. Circle size also shows probability</li>
-              <li style={{ marginBottom: '8px' }}><strong>Arrow thickness/length</strong> shows "pull strength" - how much that outcome pulls E(X) toward it</li>
+              <li style={{ marginBottom: '8px' }}><strong>Arrow thickness/length</strong> shows &quot;pull strength&quot; - how much that outcome pulls E(X) toward it</li>
               <li style={{ marginBottom: '8px' }}><strong>Red line (E(X))</strong> is the weighted average - pulled toward high-probability outcomes</li>
               <li style={{ marginBottom: '8px' }}><strong>Gray dashed line</strong> is the simple average (unweighted) - treats all outcomes equally</li>
             </ul>
@@ -549,7 +549,7 @@ const WeightedExpectedValueVisualizer = () => {
               <p style={{ marginTop: '8px', marginBottom: '0', color: '#555', fontSize: '12px' }}>
                 When probabilities are equal, E(X) = simple average. 
                 When probabilities differ, E(X) is pulled toward high-probability outcomes. 
-                This is why it's called a <strong>weighted</strong> average!
+                This is why it is called a <strong>weighted</strong> average!
               </p>
             </div>
           </div>

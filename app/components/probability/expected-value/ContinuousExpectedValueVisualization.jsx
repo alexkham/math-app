@@ -635,7 +635,7 @@ export default function ContinuousExpectedValueVisualization() {
             </p>
             <p style={{ margin: '10px 0 0 0', lineHeight: '1.6', color: '#333', fontSize: '13px' }}>
               The shaded area under the curve represents the probability density function (PDF). The red dashed line 
-              shows the expected value - the "balance point" of the distribution. Adjust the parameters to see how 
+              shows the expected value - the &quot;balance point&quot; of the distribution. Adjust the parameters to see how 
               the shape changes and how E[X] moves accordingly.
             </p>
           </div>
