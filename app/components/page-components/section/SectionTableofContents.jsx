@@ -739,6 +739,7 @@ import { ChevronDown, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import tocThemes from './tocThemes';
+import { processContent } from '@/app/utils/contentProcessor';
 
 const SectionTableOfContents = ({ 
   sections = [], 
@@ -936,7 +937,7 @@ const SectionTableOfContents = ({
           >
             <div className="toc-link-content">
               {section.icon && renderIcon(section.icon)}
-              <span className="section-title">{section.title}</span>
+              <span className="section-title">{processContent(section.title)}</span>
             </div>
             {finalTheme.styles.showArrows && (
               <ChevronRight 
@@ -955,7 +956,7 @@ const SectionTableOfContents = ({
                   onClick={(e) => handleLinkClick(e, subsection.id, section.id)}
                   className="subsection-link"
                 >
-                  {subsection.title}
+                  {processContent(subsection.title)}
                 </a>
               ))}
             </div>
@@ -977,7 +978,7 @@ const SectionTableOfContents = ({
         >
           <div className="toc-link-content">
             {section.icon && renderIcon(section.icon)}
-            <span className="section-title">{section.title}</span>
+            <span className="section-title">{processContent(section.title)}</span>
           </div>
         </a>
       </div>
@@ -992,7 +993,7 @@ const SectionTableOfContents = ({
         <div className="secondary-nav sticky-secondary-nav">
           <div className="secondary-nav-content">
             <h3 className="secondary-nav-title">
-              {secondaryNavTitle}
+              {processContent(secondaryNavTitle)}
             </h3>
             <ul className="secondary-nav-list">
               {secondaryNavLinks.map((link) => {
@@ -1052,7 +1053,7 @@ const SectionTableOfContents = ({
           className="secondary-nav-toggle"
           onClick={toggleSecondaryNav}
         >
-          <span>{secondaryNavTitle}</span>
+          <span>{processContent(secondaryNavTitle)}</span>
           <ChevronDown 
             className={`accordion-arrow ${secondaryNavOpen ? 'expanded' : ''}`}
             size={20}

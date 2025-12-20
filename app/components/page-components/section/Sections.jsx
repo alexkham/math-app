@@ -5,6 +5,7 @@ import { processContent } from '@/app/utils/contentProcessor';
 import { lora700, inter } from '@/app/utils/fonts'; // Changed from poppins500 to inter
 import styles from './Sections.module.css';
 
+
 const Sections = ({ sections,leftMargin='220px' }) => {
  const renderContent = (content) => {
    if (!content) return null;
@@ -111,7 +112,7 @@ const Sections = ({ sections,leftMargin='220px' }) => {
           <br/>
          
          
-           <h2 className={`${styles.sectionTitle} ${lora700.className}`}>{section.title}</h2>
+           <h2 className={`${styles.sectionTitle} ${lora700.className}`}>{processContent(section.title)}</h2>
            {section.image && (
              <div className={styles.sectionImage}>
                <img src={section.image} alt={section.title} />

@@ -12,7 +12,7 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
- const keyWords = [
+   const keyWords = [
   'probability models',
   'probability model examples',
   'sample space and events',
@@ -28,117 +28,288 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    definition:{
-      title:`What Are Probability Models?`,
+    obj1:{
+      title:`What Is a Probability Model`,
       content:`
-A probability model is a simplified picture of a random situation. It describes:
-• the possible outcomes,
-• how those outcomes are produced,
-• and how probability is assigned to them.
+A probability model is a mathematical description of a random situation.
 
-A model does not aim to capture every detail of reality. It keeps only the parts needed to understand the randomness. Once we have the model, we can analyze many questions using the same underlying structure.
+It specifies:
+- the set of all possible outcomes
+- which collections of outcomes are considered events
+- how probabilities are assigned to those events
+
+The model defines **how randomness is generated**, not what is later measured from it.  
+Questions about averages, counts, or numerical outcomes arise only after additional structure is placed on the model.
 `,
       before:``,
       after:``,
+      link:'',
   
   
     },
-    purpose:{
-      title:`Why We Use Models?`,
+    obj2:{
+      title:`Why Probability Uses Models`,
       content:`
-Different random situations often share the same pattern. A model gives us a standard way to describe that pattern so we can:
-• reason about uncertainty,
-• compute probabilities,
-• compare scenarios,
-• and reuse the same structure in many problems.
+Real-world situations are too complex to analyze directly.  
+Probability works by replacing reality with a simplified structure that captures only the random mechanism of interest.
 
-Models act as templates. If two problems follow the same model, they can be solved using the same principles.
+Models make this possible by:
+- stripping away irrelevant details
+- making assumptions explicit
+- allowing repeated reasoning under controlled conditions
+
+Any conclusion drawn in probability is therefore conditional on the model being used.  
+The quality of a probabilistic result depends not on how realistic a situation feels, but on how appropriate the chosen model is for the question being asked.
 `,
       before:``,
       after:``,
+      link:'',
   
     },
   
-    types:{
+    obj3:{
   
-      title:`Types of Basic Probability Models`,
+      title:`What all Probability Models Have in Common`,
       content:`
-Here are the foundational models that appear throughout probability:
+Probability models may look different on the surface, but they are built from the same basic ingredients.
 
-• **Coin Toss Model**  
-  A model with two outcomes (0/1 or heads/tails). Used for Bernoulli trials, binary events, and repeated independent experiments.
+At the core of every model are:
+- a list of possible outcomes the experiment may produce
+- collections of outcomes treated as meaningful events
+- numerical weights expressing how likely those events are
 
-• **Dice Roll Model**  
-  A uniform model where all outcomes have equal chance. Useful for discrete randomness and symmetry-based problems.
+Nothing in this structure depends on the story behind the model.  
+Coins, dice, cards, measurements, or simulations all fit into the same abstract framework.
 
-• **Urn Models**  
-  A model where outcomes depend on drawing objects from a container, with or without replacement. It forms the basis for binomial, hypergeometric, and related distributions.
-
-Each model captures a distinct type of randomness that reappears in many theoretical and practical problems.
+This is why probability theory can move freely between different contexts:  
+the interpretation changes, but the underlying machinery does not.
 `,
       before:``,
       after:``,
+      link:'',
+      plagiarism:'yes',
   
     },
-    use:{
-      title:`How These Models Are Used Later`,
+    obj4:{
+      title:`Models, Random Variables, and Distributions`,
       content:`
-Probability models appear everywhere else in the subject:
+A probability model defines a space of outcomes and their probabilities.
 
-• Random variables are built on top of models.  
-• Distributions arise when a model is repeated or extended.  
-• Conditional probability and Bayes often rely on model structure.  
-• Simulations and experiments use these models directly.
+A **random variable** is a function defined on that space:
 
-By learning the core models, you prepare the foundation for all later topics.
+$\[X : S \\rightarrow \\mathbb{R}\]$
+
+A **distribution** is the probability law induced by that function:
+
+$\[P(X \\in A)\]$
+
+The order is fixed:
+
+model → random variable → distribution
+
+The model supplies randomness.  
+The random variable selects what is measured.  
+The distribution records the resulting probabilities.
 `,
       before:``,
       after:``,
+      link:'',
   
     },
-    obj4:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-  
-    },
-    obj4:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-  
-    },
-    obj4:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-  
-    },
-    obj4:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-  
-    },
-    obj4:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-  
-    },
-
-
     obj5:{
+      title:`One Distribution, Many Models`,
+      content:`
+A probability distribution does not uniquely identify how randomness was produced.
+
+The same distribution may arise from:
+- different outcome spaces
+- different experimental setups
+- different probability assignments
+
+Once a distribution is formed, the mechanism that generated it is no longer visible.
+
+Distributions describe *results*, not *processes*.  
+Models describe *processes*, not results.
+`,
+      before:``,
+      after:``,
+      link:'',
+  
+    },
+    obj6:{
+      title:`One Model, Many Distributions`,
+      content:`
+Fix a probability model $(S,\mathcal{E},P)$.
+
+Different random variables can be defined on the same model:
+
+$\[X_1, X_2, \\dots : S \\rightarrow \\mathbb{R}.\]$
+
+Each choice produces its own distribution:
+
+$\[P(X_k \\in A), \\quad A \\subseteq \\mathbb{R}.\]$
+
+By changing the mapping (not the model), the resulting distribution may be:
+- discrete
+- continuous
+- mixed
+
+The model remains unchanged.  
+Only the measurement changes.
+`,
+      before:``,
+      after:``,
+      link:'',
+  
+    },
+    obj7:{
+      title:`Modeling Assumptions`,
+      content:`
+Every probability model rests on explicit choices.
+
+Typical assumptions include:
+- outcomes are treated as symmetric
+- trials do not influence each other
+- the same mechanism is repeated each time
+- the outcome space is finite or infinite
+
+These assumptions are not conclusions.  
+They are inputs to the model.
+
+Changing an assumption changes the model, and therefore changes all results derived from it.
+`,
+      before:``,
+      after:``,
+      link:'',
+  
+    },
+    obj8:{
+      title:`Simple Discrete Models`,
+      content:`
+Some probability models have a finite or countable set of outcomes.
+
+In such models:
+- all outcomes can be listed explicitly
+- events are formed by grouping outcomes
+- probabilities are assigned directly to each outcome
+
+These models are often used as starting points because their structure is fully visible.
+
+Examples of this class include:
+- two-outcome mechanisms
+- finite multi-outcome mechanisms
+
+Concrete realizations of these appear on the following pages:
+- Coin Toss Model
+- Dice Roll Model
+`,
+      before:``,
+      after:``,
+      link:'',
+  
+    },
+    obj9:{
+      title:`From Simple Models to Richer Ones`,
+      content:`
+Simple discrete models are only the starting point.
+
+By extending or modifying a basic model, one can describe:
+- repeated experiments
+- dependent outcomes
+- infinite outcome spaces
+- measurements that vary continuously
+
+The underlying idea remains the same: outcomes and probabilities are fixed first, and additional structure is built on top of them.
+
+More advanced models reuse the same foundations, but allow for greater complexity in how randomness is represented.
+`,
+      before:``,
+      after:``,
+      link:'',
+  
+    },
+    obj10:{
+      title:`Models vs Reality`,
+      content:`
+A probability model is not a description of the world itself.
+
+It is a constructed object that isolates a specific random mechanism while ignoring everything else.
+
+Because of this:
+- models can be useful even when they are unrealistic
+- realistic detail does not guarantee correctness
+- conclusions are valid only within the chosen model
+
+When a model does not match the situation it is applied to, probability calculations remain correct mathematically but become irrelevant in practice.
+`,
+      before:``,
+      after:``,
+      link:'',
+  
+    },
+    obj11:{
+      title:`How This Section Is Organized`,
+      content:`
+This page introduces probability models at a conceptual level.
+
+Each model is then developed on its own page, using the same internal structure:
+- description of the random mechanism
+- definition of outcomes and events
+- probability assignment
+- possible measurements and distributions
+
+This organization allows new models to be added without changing the overall framework, and makes it easy to compare different modeling choices across examples.
+`,
+      before:``,
+      after:``,
+      link:'',
+  
+    },
+    obj12:{
+      title:`Model Pages`,
+      content:`
+The following pages present concrete probability models built using the framework introduced above.
+
+Each page focuses on a single random mechanism and shows how outcomes, events, and probabilities are specified within that model.
+
+Available models:
+- Coin Toss Model
+- Dice Roll Model
+
+Additional models will be added over time, following the same structure and conventions.
+`,
+      before:``,
+      after:``,
+      link:'',
+  
+    },
+    obj13:{
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+      link:'',
+      link:'',
+  
+    },
+    obj14:{
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+      link:'',
+      link:'',
+  
+    },
+
+
+    obj15:{
   
       title:``,
       content:``,
       before:``,
       after:``,
+      link:'',
   
     }
   
@@ -147,15 +318,16 @@ By learning the core models, you prepare the foundation for all later topics.
 
   const introContent = {
   id: "intro",
-  title: "Probability Models: The Starting Point of Everything Else",
+  title: "Modeling Random Phenomena",
   content: `
-Before we talk about random variables, distributions, expected value, or any other idea in probability, there has to be something underneath them. That “something” is a probability model.
+Probability does not begin with formulas or distributions.  
+It begins with simplified descriptions of situations in which outcomes are uncertain.
 
-A probability model describes the basic random mechanism we are working with. It tells us what the possible outcomes are, how they are produced, and how probability is assigned to them. Once this foundation is set, every other concept in probability—events, random variables, distributions, CDFs, expectation, variance—sits on top of the model and grows naturally from it.
+These descriptions do not attempt to capture reality in full detail.  
+They isolate the random mechanism of interest and ignore everything else.
 
-Think of probability models as the playground where all other ideas come to life. They give us the structure we need to build, compare, and analyze different kinds of random behavior.
-
-Below are the most fundamental models used throughout probability. These appear again and again in theory, examples, exercises, simulations, and real-world problems.
+Such idealized descriptions are called **probability models**.  
+They provide a controlled setting in which randomness can be analyzed, compared, and reused across different problems.
 `
 }
 
@@ -167,7 +339,7 @@ Below are the most fundamental models used throughout probability. These appear 
          sectionsContent,
          introContent,
           seoData: {
-        title: "Title | Learn Math Class",
+        title: "Probability Models | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
         url: "/probability/models",
@@ -178,66 +350,155 @@ Below are the most fundamental models used throughout probability. These appear 
     }
    }
 
-export default function ProbabilityModelsPage({seoData,sectionsContent , introContent}) {
+export default function ModelsPage({seoData,sectionsContent , introContent}) {
 
     
   const genericSections=[
     {
-        id:'definition',
-        title:sectionsContent.definition.title,
-        link:'',
+        id:'1',
+        title:sectionsContent.obj1.title,
+        link:sectionsContent.obj1.link,
         content:[
-            sectionsContent.definition.content,
+          sectionsContent.obj1.content,
         ]
     },
     {
-        id:'purpose',
-        title:sectionsContent.purpose.title,
-        link:'',
+        id:'2',
+        title:sectionsContent.obj2.title,
+        link:sectionsContent.obj2.link,
         content:[
-            sectionsContent.purpose.content,
+          sectionsContent.obj2.content,
         ]
     },
     {
-        id:'types',
-        title:sectionsContent.types.title,
-        link:'',
+        id:'3',
+        title:sectionsContent.obj3.title,
+        link:sectionsContent.obj3.link,
         content:[
-            sectionsContent.types.content,
+          sectionsContent.obj3.content,
         ]
     },
     {
-        id:'use',
-        title:sectionsContent.use.title,
-        link:'',
+        id:'4',
+        title:sectionsContent.obj4.title,
+        link:sectionsContent.obj4.link,
         content:[
-            sectionsContent.use.content,
+          sectionsContent.obj4.content,
+        ]
+    },
+    {
+        id:'5',
+        title:sectionsContent.obj5.title,
+        link:sectionsContent.obj5.link,
+        content:[
+          sectionsContent.obj5.content,
+        ]
+    },
+    {
+        id:'6',
+        title:sectionsContent.obj6.title,
+        link:sectionsContent.obj6.link,
+        content:[
+          sectionsContent.obj6.content,
+        ]
+    },
+    {
+        id:'7',
+        title:sectionsContent.obj7.title,
+        link:sectionsContent.obj7.link,
+        content:[
+          sectionsContent.obj7.content,
+        ]
+    },
+    {
+        id:'8',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
+        ]
+    },
+    {
+        id:'9',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
+        ]
+    },
+    {
+        id:'10',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
+        ]
+    },
+    {
+        id:'11',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
+        ]
+    },
+    {
+        id:'12',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
     // {
-    //     id:'',
-    //     title:'',
-    //     link:'',
-    //     content:''
+    //     id:'13',
+    //     title:sectionsContent.obj13.title,
+    //     link:sectionsContent.obj13.link,
+    //     content:[
+    //       sectionsContent.obj13.content,
+    //     ]
     // },
     // {
-    //     id:'',
-    //     title:'',
-    //     link:'',
-    //     content:''
+    //     id:'14',
+    //     title:sectionsContent.obj14.title,
+    //     link:sectionsContent.obj14.link,
+    //     content:[
+    //       sectionsContent.obj14.content,
+    //     ]
     // },
     // {
-    //     id:'',
-    //     title:'',
-    //     link:'',
-    //     content:''
+    //     id:'15',
+    //     title:sectionsContent.obj15.title,
+    //     link:sectionsContent.obj15.link,
+    //     content:[
+    //       sectionsContent.obj15.content,
+    //     ]
     // },
     // {
-    //     id:'',
-    //     title:'',
-    //     link:'',
-    //     content:''
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
     // },
+    // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
+    // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
+    
 ]
 
   return (
@@ -286,7 +547,7 @@ export default function ProbabilityModelsPage({seoData,sectionsContent , introCo
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -305,11 +566,7 @@ export default function ProbabilityModelsPage({seoData,sectionsContent , introCo
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Probability Models</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}
-   showSecondaryNav={true}
-         secondaryNavMode="siblings"  // or "siblings"
-         secondaryNavTitle="More in Probability Section"
-   />
+   <SectionTableOfContents sections={genericSections}/>
    <br/>
    <br/>
    <br/>
@@ -327,7 +584,7 @@ export default function ProbabilityModelsPage({seoData,sectionsContent , introCo
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }
