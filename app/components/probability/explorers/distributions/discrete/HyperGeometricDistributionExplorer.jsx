@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import GenericDistributionVisualization from './GenericDistributionVisualizer';
+import GenericDistributionExplorer from './GenericDistributionExplorer';
 
-export default function HypergeometricDistributionVisualizer({ 
+export default function HypergeometricDistributionExplorer({ 
   title = "Hypergeometric Distribution",
   description = "Sampling without replacement from a finite population",
   examples = [
@@ -392,5 +392,5 @@ export default function HypergeometricDistributionVisualizer({
     onCalculateRightIncRangeProbability
   };
 
-  return <GenericDistributionVisualization distribution={distributionData} />;
+  return <GenericDistributionExplorer distribution={distributionData} />;
 }

@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import GenericDistributionVisualization from './GenericDistributionVisualizer';
+import GenericDistributionExplorer from './GenericDistributionExplorer';
 
-export default function PoissonDistributionVisualizer({ 
+
+export default function PoissonDistributionExplorer({ 
   title = "Poisson Distribution",
   description = "Number of events in a fixed interval",
   examples = [
@@ -266,5 +267,5 @@ export default function PoissonDistributionVisualizer({
     onCalculateRightIncRangeProbability
   };
 
-  return <GenericDistributionVisualization distribution={distributionData} />;
+  return <GenericDistributionExplorer distribution={distributionData} />;
 }

@@ -1344,7 +1344,7 @@
 import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 
-export default function GenericDistributionVisualization({ distribution }) {
+export default function GenericDistributionExplorer({ distribution }) {
   const [activeTab, setActiveTab] = useState('pmf');
   const [calcTab, setCalcTab] = useState('point');
   const [pointK, setPointK] = useState('');

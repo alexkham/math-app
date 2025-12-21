@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import GenericDistributionVisualization from './GenericDistributionVisualizer';
+import GenericDistributionExplorer from './GenericDistributionExplorer';
 
-export default function GeometricDistributionVisualizer({ 
+export default function GeometricDistributionExplorerer({ 
   title = "Geometric Distribution",
   description = "Number of trials until the first success",
   examples = [
@@ -219,5 +219,5 @@ export default function GeometricDistributionVisualizer({
     onCalculateRightIncRangeProbability
   };
 
-  return <GenericDistributionVisualization distribution={distributionData} />;
+  return <GenericDistributionExplorer distribution={distributionData} />;
 }

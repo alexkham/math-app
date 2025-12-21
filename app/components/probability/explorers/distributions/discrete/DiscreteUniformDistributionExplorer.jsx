@@ -499,9 +499,9 @@
 
 
 import React, { useState, useMemo } from 'react';
-import GenericDistributionVisualization from './GenericDistributionVisualizer';
+import GenericDistributionExplorer from './GenericDistributionExplorer';
 
-export default function DiscreteUniformDistributionVisualizer({ 
+export default function DiscreteUniformDistributionExplorer({ 
   title = "Discrete Uniform Distribution",
   description = "Equal probability for finite outcomes",
   examples = [
@@ -749,5 +749,5 @@ export default function DiscreteUniformDistributionVisualizer({
     onCalculateRightIncRangeProbability
   };
 
-  return <GenericDistributionVisualization distribution={distributionData} />;
+  return <GenericDistributionExplorer distribution={distributionData} />;
 }

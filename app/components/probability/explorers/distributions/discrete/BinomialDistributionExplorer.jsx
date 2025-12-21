@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import GenericDistributionVisualization from './GenericDistributionVisualizer';
+import GenericDistributionExplorer from './GenericDistributionExplorer';
 
-export default function BinomialDistributionVisualizer({ 
+
+
+export default function BinomialDistributionExplorer({ 
   title = "Binomial Distribution",
   description = "Number of successes in n independent trials",
   examples = [
@@ -295,5 +297,5 @@ export default function BinomialDistributionVisualizer({
     onCalculateRightIncRangeProbability
   };
 
-  return <GenericDistributionVisualization distribution={distributionData} />;
+  return <GenericDistributionExplorer distribution={distributionData} />;
 }

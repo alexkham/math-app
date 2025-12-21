@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import GenericDistributionVisualization from './GenericDistributionVisualizer';
+import GenericDistributionExplorer from './GenericDistributionExplorer';
 
-export default function NegativeBinomialDistributionVisalizer({ 
+export default function NegativeBinomialDistributionExplorer({ 
   title = "Negative Binomial Distribution",
   description = "Number of trials until r successes",
   examples = [
@@ -291,5 +291,5 @@ export default function NegativeBinomialDistributionVisalizer({
     onCalculateRightIncRangeProbability
   };
 
-  return <GenericDistributionVisualization distribution={distributionData} />;
+  return <GenericDistributionExplorer distribution={distributionData} />;
 }
