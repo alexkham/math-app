@@ -1158,14 +1158,14 @@ export default function CLTSimulator({ customExplanations = null }) {
             </p>
             <div style={styles.divider} />
             <p style={styles.explanationText}>
-              <strong>What you're seeing:</strong> The left chart shows the original distribution. 
+              <strong>What you are seeing:</strong> The left chart shows the original distribution. 
               The right chart shows the distribution of sample means. As sample size (n) increases, 
               the distribution of means becomes more normal, regardless of the original distribution shape. 
               This is the Central Limit Theorem in action.
             </p>
             <p style={{...styles.explanationText, marginBottom: 0}}>
               <strong>Note:</strong> Sample size (n) is how many values you average together in each sample. The number of histogram 
-              bars (bins) is just how we display the results—they're not related to sample size.
+              bars (bins) is just how we display the results—they are not related to sample size.
             </p>
           </div>
         </div>
