@@ -17,7 +17,43 @@ export default function ZDistributionTablePage() {
     <br/>
     <Breadcrumb/>
     <h1 className='title' style={{marginTop:'-20px',marginBottom:'-50px'}}>Normal Distribution(Z) Table</h1>
+  
     <ZTableContainer    />
+     <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
     <ScrollUpButton/>
     </>
   )
