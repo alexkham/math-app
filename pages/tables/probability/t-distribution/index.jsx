@@ -10,7 +10,7 @@ export default function TTablePage() {
   return (
     <>
     {/* <MyNavbar/> */}
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>

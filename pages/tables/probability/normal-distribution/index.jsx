@@ -10,7 +10,7 @@ export default function ZDistributionTablePage() {
   return (
     <>
     {/* <MyNavbar/> */}
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -54,7 +54,7 @@ export default function ZDistributionTablePage() {
    <br/>
    <br/>
    <br/>
-    <ScrollUpButton/>
+    {/* <ScrollUpButton/> */}
     </>
   )
 }

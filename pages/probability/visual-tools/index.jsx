@@ -24,6 +24,15 @@ export async function getStaticProps(){
     const cardsData=[
 
        {
+    title: "Probability Distributions Explorer",
+    description: "Explore coin toss probability with interactive simulators and calculators. Visualize sample spaces, run probability simulations, and watch the Law of Large Numbers in action with our coin flip tools.",
+    backgroundColor: "#4F46E5", // Indigo
+    textColor: "#ffffff",
+    ratio: 2,
+   image:'/images/magnifying_glass.jpg',
+    href: "/probability/visual-tools/distributions"
+  },
+       {
     title: "Coin Toss Visualizers",
     description: "Explore coin toss probability with interactive simulators and calculators. Visualize sample spaces, run probability simulations, and watch the Law of Large Numbers in action with our coin flip tools.",
     backgroundColor: "#4F46E5", // Indigo
