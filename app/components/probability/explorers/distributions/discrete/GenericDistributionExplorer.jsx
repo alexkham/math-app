@@ -1449,13 +1449,13 @@ export default function GenericDistributionExplorer({ distribution }) {
       display: 'flex',
       flexDirection: 'column'
     }}>
-      <h1 style={{
+      <h2 style={{
         textAlign: 'center',
         color: '#2c3e50',
         marginBottom: '5px',
         fontSize: '28px',
         margin: '0 0 5px 0'
-      }}>{distribution.title}</h1>
+      }}>{distribution.title}</h2>
       <p style={{
         textAlign: 'center',
         color: '#7f8c8d',

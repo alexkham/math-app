@@ -79,10 +79,10 @@ export async function getStaticProps(){
          sectionsContent,
          introContent,
           seoData: {
-        title: "Title | Learn Math Class",
+        title: "Base Converter | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/converters/base-converter",
          name: "name"
       },
         

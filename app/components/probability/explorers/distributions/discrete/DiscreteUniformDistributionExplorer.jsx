@@ -502,7 +502,7 @@ import React, { useState, useMemo } from 'react';
 import GenericDistributionExplorer from './GenericDistributionExplorer';
 
 export default function DiscreteUniformDistributionExplorer({ 
-  title = "Discrete Uniform Distribution",
+  title = "Modify Parameters and See Results",
   description = "Equal probability for finite outcomes",
   examples = [
     'Rolling a fair die (outcomes 1-6 with equal probability)',
