@@ -10,19 +10,19 @@ import Link from 'next/link'
 
 export async function getStaticProps(){
 
-  const keyWords=['probability distributions', 'distribution explorer', 'discrete distributions', 'continuous distributions', 'binomial distribution', 'normal distribution', 'poisson distribution', 'exponential distribution']
+  const keyWords=['expected value', 'expected value calculator', 'mean calculator', 'probability calculator', 'discrete distribution expected value', 'continuous distribution expected value']
 
   const sectionsContent = {
     obj1: {
-      title: `What are Probability Distributions?`,
-      content: `A probability distribution describes how probabilities are distributed over the values of a random variable. It provides a mathematical function that gives the probabilities of occurrence of different possible outcomes.`,
+      title: `What is Expected Value?`,
+      content: `Expected value (mean) is the average outcome you would expect from a probability distribution over many trials. It represents the center of the distribution and is fundamental to probability theory and statistics.`,
       before: ``,
       after: ``,
       link: '',
     },
     obj2: {
-      title: `Discrete vs Continuous Distributions`,
-      content: `Discrete distributions describe random variables that can only take on specific, countable values (like the number of heads in coin flips). Continuous distributions describe random variables that can take on any value within a range (like height or temperature).`,
+      title: `How to Calculate Expected Value`,
+      content: `For discrete distributions, multiply each outcome by its probability and sum the results. For continuous distributions, integrate the product of x and the probability density function over the distribution's range.`,
       before: ``,
       after: ``,
       link: '',
@@ -31,8 +31,8 @@ export async function getStaticProps(){
 
   const introContent = {
     id: "intro",
-    title: "Interactive Distribution Explorers",
-    content: `Explore probability distributions through interactive visualizations and calculators. Each explorer provides probability calculations, visual representations, and detailed explanations to help you understand how different distributions work.`
+    title: "Calculate Expected Value",
+    content: `Use our interactive calculators to compute expected values for various data types and probability distributions. Each calculator provides step-by-step solutions and visualizations to help you understand the concept.`
   }
 
   return {
@@ -40,66 +40,84 @@ export async function getStaticProps(){
       sectionsContent,
       introContent,
       seoData: {
-        title: "Probability Distribution Explorers | Interactive Calculators | Learn Math Class",
-        description: "Explore discrete and continuous probability distributions with interactive calculators and visualizations. Calculate probabilities, understand parameters, and visualize distributions including binomial, normal, Poisson, and exponential.",
+        title: "Expected Value Calculators | Interactive Tools | Learn Math Class",
+        description: "Calculate expected values for discrete and continuous probability distributions. Interactive calculators with step-by-step solutions for binomial, normal, Poisson, exponential, and more.",
         keywords: keyWords.join(", "),
-        url: "/probability/visual-tools/distributions",
-        name: "Probability Distribution Explorers"
+        url: "/probability/calculators/expected-value",
+        name: "Expected Value Calculators"
       },
     }
   }
 }
 
-export default function DistributionExplorersPage({seoData, sectionsContent, introContent}) {
+export default function ExpectedValueCalculatorsPage({seoData, sectionsContent, introContent}) {
+
+  const basicCalculators = [
+    {
+      title: 'Direct Data Calculator',
+      description: 'Calculate expected value from probability distribution table',
+      href: '/probability/calculators/expected-value/direct-data'
+    },
+    {
+      title: 'Raw Data Calculator',
+      description: 'Calculate expected value from a list of raw data values',
+      href: '/probability/calculators/expected-value/raw-data'
+    },
+    {
+      title: 'Grouped Data Calculator',
+      description: 'Calculate expected value from grouped frequency data',
+      href: '/probability/calculators/expected-value/grouped-data'
+    }
+  ]
 
   const discreteDistributions = [
     {
+      title: 'Discrete Uniform',
+      description: 'Expected value for equally likely discrete outcomes',
+      href: '/probability/calculators/expected-value/discrete-uniform'
+    },
+    {
       title: 'Binomial Distribution',
-      description: 'Models the number of successes in a fixed number of independent trials',
-      href: '/probability/visual-tools/distributions/binomial'
+      description: 'Expected value for n trials with probability p',
+      href: '/probability/calculators/expected-value/binomial'
     },
     {
       title: 'Geometric Distribution',
-      description: 'Models the number of trials until the first success',
-      href: '/probability/visual-tools/distributions/geometric'
+      description: 'Expected value for trials until first success',
+      href: '/probability/calculators/expected-value/geometric'
     },
     {
-      title: 'Negative Binomial Distribution',
-      description: 'Models the number of trials until a specified number of successes',
-      href: '/probability/visual-tools/distributions/negative-binomial'
-    },
-    {
-      title: 'Poisson Distribution',
-      description: 'Models the number of events occurring in a fixed interval',
-      href: '/probability/visual-tools/distributions/poisson'
+      title: 'Negative Binomial',
+      description: 'Expected value for trials until r successes',
+      href: '/probability/calculators/expected-value/negative-binomial'
     },
     {
       title: 'Hypergeometric Distribution',
-      description: 'Models sampling without replacement from a finite population',
-      href: '/probability/visual-tools/distributions/hypergeometric'
+      description: 'Expected value for sampling without replacement',
+      href: '/probability/calculators/expected-value/hypergeometric'
     },
     {
-      title: 'Uniform Discrete Distribution',
-      description: 'Models equally likely outcomes over a discrete range',
-      href: '/probability/visual-tools/distributions/uniform-discrete'
+      title: 'Poisson Distribution',
+      description: 'Expected value for events in a fixed interval',
+      href: '/probability/calculators/expected-value/poisson'
     }
   ]
 
   const continuousDistributions = [
     {
-      title: 'Normal Distribution',
-      description: 'The bell curve - models many natural phenomena',
-      href: '/probability/visual-tools/distributions/normal'
+      title: 'Continuous Uniform',
+      description: 'Expected value for uniform continuous distribution',
+      href: '/probability/calculators/expected-value/continuous-uniform'
     },
     {
       title: 'Exponential Distribution',
-      description: 'Models time between events in a Poisson process',
-      href: '/probability/visual-tools/distributions/exponential'
+      description: 'Expected value for exponential distribution',
+      href: '/probability/calculators/expected-value/exponential'
     },
     {
-      title: 'Uniform Continuous Distribution',
-      description: 'Models equally likely outcomes over a continuous range',
-      href: '/probability/visual-tools/distributions/uniform-continuous'
+      title: 'Normal Distribution',
+      description: 'Expected value (mean μ) for normal distribution',
+      href: '/probability/calculators/expected-value/normal'
     }
   ]
 
@@ -180,9 +198,8 @@ export default function DistributionExplorersPage({seoData, sectionsContent, int
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'-50px', marginBottom:'5px'}}>
-        Probability Distribution Explorers
+        Expected Value Calculators
       </h1>
-      
       <div style={{
   maxWidth: '900px',
   margin: '0 auto 30px auto',
@@ -200,7 +217,7 @@ export default function DistributionExplorersPage({seoData, sectionsContent, int
     marginBottom: '8px',
     margin: '0 0 8px 0'
   }}>
-    Explore Probability Distributions
+    Calculate Expected Value
   </h2>
   <p style={{
     fontSize: '14px',
@@ -208,7 +225,7 @@ export default function DistributionExplorersPage({seoData, sectionsContent, int
     margin: 0,
     opacity: 0.95
   }}>
-    Interactive tools with dynamic visualizations, parameter controls, and probability calculators for discrete and continuous distributions.
+    Interactive calculators for various data types and distributions with step-by-step solutions and visualizations.
   </p>
 </div>
       <br/>
@@ -223,8 +240,72 @@ export default function DistributionExplorersPage({seoData, sectionsContent, int
       <br/>
       <br/>
 
-      {/* Discrete Distributions Section */}
+      {/* Calculator Sections */}
       <div style={{maxWidth: '1200px', margin: '0 auto', padding: '0 20px'}}>
+        
+        {/* Basic Calculators Section */}
+        <h2 style={{
+          fontSize: '28px',
+          fontWeight: '700',
+          color: '#1a365d',
+          marginBottom: '24px',
+          textAlign: 'center'
+        }}>
+          Basic Calculators
+        </h2>
+        
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '24px',
+          marginBottom: '60px'
+        }}>
+          {basicCalculators.map((calc, index) => (
+            <Link 
+              key={index}
+              href={calc.href}
+              style={{
+                display: 'block',
+                padding: '28px',
+                backgroundColor: '#ffffff',
+                border: '2px solid #e2e8f0',
+                borderRadius: '12px',
+                textDecoration: 'none',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.borderColor = '#3182ce';
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 16px rgba(49,130,206,0.2)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.borderColor = '#e2e8f0';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
+              }}
+            >
+              <h3 style={{
+                fontSize: '20px',
+                fontWeight: '600',
+                color: '#2d3748',
+                marginBottom: '12px'
+              }}>
+                {calc.title}
+              </h3>
+              <p style={{
+                fontSize: '15px',
+                color: '#4a5568',
+                lineHeight: '1.6',
+                margin: 0
+              }}>
+                {calc.description}
+              </p>
+            </Link>
+          ))}
+        </div>
+
+        {/* Discrete Distributions Section */}
         <h2 style={{
           fontSize: '28px',
           fontWeight: '700',

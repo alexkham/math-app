@@ -196,6 +196,7 @@ export default function ProbabilityCalculator({seoData,sectionsContent , introCo
            { id: 6, name: 'Two Events Probability Calculator',  href: '/probability/calculators/two-events'  },
            { id: 7, name: 'Three Events Probability Calculator',  href: '/probability/calculators/three-events'  },
            { id: 8, name: "Bayes' Theorem Calculator",  href: '/probability/calculators/bayes-calculator'  },
+           { id: 8, name: "Expected Value Calculators",  href: '/probability/calculators/expected-value'  },
           
 
           //  { id: 4, name: 'Introduction', content: introContent2 },

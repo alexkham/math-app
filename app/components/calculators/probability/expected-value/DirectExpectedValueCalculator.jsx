@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 
-const ExpectedValueCalculator = () => {
+const DirectExpectedValueCalculator = () => {
   const [outcomes, setOutcomes] = useState([
     { value: 100, probability: 0.25 },
     { value: 50, probability: 0.5 },
@@ -863,4 +863,4 @@ const styles = {
   },
 };
 
-export default ExpectedValueCalculator;
+export default DirectExpectedValueCalculator;

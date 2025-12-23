@@ -6,23 +6,20 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
-import '../../../pages/pages.css'
+import '../../../../pages/pages.css'
 import Head from 'next/head'
 
 
 export async function getStaticProps(){
 
-  const keyWords = [
-  "probability inequalities",
-  "inequalities in probability",
-  "probability bounds",
-  "bounding probabilities",
-  "distribution free bounds",
+ const keyWords = [
   "markov inequality",
-  "chebyshev inequality",
-  "tail probability bounds",
-  "expectation variance inequalities",
-  "probability theory inequalities"
+  "markov's inequality probability",
+  "probability bounds",
+  "tail bound markov",
+  "nonnegative random variable",
+  "expectation inequality",
+  "probability inequalities markov"
 ];
 
 
@@ -31,19 +28,19 @@ export async function getStaticProps(){
     const sectionsContent={
 
     obj1:{
-      title:`What Probability Inequalities Do`,
+      title:`What Markov’s Inequality Applies To`,
       content:`
-Probability inequalities place limits on how likely certain events can be, without requiring full knowledge of the underlying distribution.
+Markov’s inequality applies to random variables that satisfy very minimal conditions.
 
-They do not attempt to compute exact probabilities. Instead, they provide bounds that are guaranteed to hold whenever the stated assumptions are satisfied.
+Specifically:
+• the random variable must be **non-negative**
+• its **expected value must exist and be finite**
+• no assumptions are made about the shape of the distribution
 
-In practice, this means they can:
-• bound tail probabilities
-• control the chance of large deviations
-• give worst-case guarantees
-• remain valid even when the distribution is unknown
+There is no requirement of symmetry, boundedness, or continuity.  
+The inequality holds equally for discrete and continuous random variables, as long as non-negativity is satisfied.
 
-Probability inequalities are therefore tools for reasoning under uncertainty when precise calculation is not possible or not necessary.
+These minimal assumptions explain both the strength and the weakness of the result: it applies very broadly, but the bound it provides is often coarse.
 `,
       before:``,
       after:``,
@@ -52,18 +49,17 @@ Probability inequalities are therefore tools for reasoning under uncertainty whe
   
     },
     obj2:{
-      title:`Why Inequalities Matter in Probability`,
+      title:`Statement of Markov’s Inequality`,
       content:`
-Exact probability calculations are often unavailable or impractical.
+Let $X$ be a non-negative random variable with finite expected value $\mathbb{E}[X]$.
 
-In many situations, the full distribution of a random variable is unknown, difficult to compute, or unnecessary for the question being asked. Probability inequalities make it possible to reason in such cases by providing bounds that hold under broad conditions.
+For any real number $a > 0$, Markov’s inequality states:
 
-Because they rely on minimal assumptions, inequalities are used:
-• to justify convergence results
-• to control error and variability
-• to obtain guarantees that remain valid across many models
+$\[\\mathbb{P}(X \\ge a) \\le \\frac{\\mathbb{E}[X]}{a}.\]$
 
-For this reason, probability inequalities are foundational tools in both theoretical arguments and applied probability.
+This inequality provides an upper bound on the probability that $X$ exceeds a given threshold, expressed solely in terms of its expectation.
+
+No additional assumptions on the distribution of $X$ are required.
 `,
       before:``,
       after:``,
@@ -73,19 +69,16 @@ For this reason, probability inequalities are foundational tools in both theoret
   
     obj3:{
   
-      title:`What Inequalities Depend On`,
+      title:`What the Inequality Is Saying`,
       content:`
-Probability inequalities are built on a small set of basic quantities associated with random variables.
+Markov’s inequality states that a non-negative random variable cannot take large values too frequently if its average size is small.
 
-Most inequalities rely on:
-• the expectation of a random variable
-• measures of spread such as variance
-• structural assumptions like non-negativity or boundedness
+If the expected value of a quantity is limited, then the probability of observing values far above that average must also be limited. The larger the threshold chosen, the smaller the guaranteed upper bound on the probability of exceeding it.
 
-Different inequalities require different levels of information.  
-The fewer assumptions used, the more general the bound tends to be, but the less tight it becomes.
+The inequality does not attempt to predict how likely large values actually are.  
+It only guarantees that they cannot occur more often than the bound allows.
 
-This shared dependence on simple characteristics explains why very different random variables can be constrained by the same inequality.
+For this reason, Markov’s inequality should be read as a **constraint**, not an approximation.
 `,
       before:``,
       after:``,
@@ -93,18 +86,20 @@ This shared dependence on simple characteristics explains why very different ran
   
     },
     obj4:{
-      title:`Types of Probability Inequalities`,
+      title:`Why the Bound Is So General`,
       content:`
-Probability inequalities can be grouped according to the kind of information they use and the type of bounds they provide.
+Markov’s inequality is extremely general because it relies on almost no information.
 
-Common high-level categories include:
-• inequalities based only on expectation
-• inequalities that incorporate variance or higher moments
-• tail bounds that control extreme deviations
-• concentration-type inequalities that sharpen bounds under stronger assumptions
+It uses only two facts:
+• the random variable cannot take negative values
+• its expected value exists
 
-These categories are not rigid.  
-They reflect increasing levels of available information, with stronger assumptions generally leading to tighter bounds.
+Nothing else about the distribution matters. The inequality does not depend on symmetry, spread, shape, or tail behavior. As a result, it applies equally to very different random mechanisms.
+
+This generality comes at a cost.  
+Because the inequality ignores most of the structure of the distribution, the bound it produces is often far from tight.
+
+Markov’s inequality is therefore best understood as a **baseline bound**: it sets a limit that cannot be violated, but it rarely captures the true probability accurately.
 `,
       before:``,
       after:``,
@@ -112,24 +107,18 @@ They reflect increasing levels of available information, with stronger assumptio
   
     },
     obj5:{
-      title:`Featured Inequalities`,
+      title:`Typical Use Cases`,
       content:`
-This section highlights core probability inequalities that are used throughout probability theory.  
-Each inequality has its own page with assumptions, statements, and typical uses.
+Markov’s inequality is most often used when only minimal information about a random variable is available.
 
-**Markov’s Inequality**
-• Applies to non-negative random variables
-• Uses expectation only
-• Provides very general, often loose bounds
+Common situations include:
+• obtaining a quick upper bound on a tail probability
+• reasoning about extreme outcomes without knowing a distribution
+• providing a first step in theoretical arguments or proofs
+• serving as a baseline before applying stronger inequalities
 
-
-
-**Chebyshev’s Inequality**
-• Uses both expectation and variance
-• Gives tighter bounds than Markov under stronger assumptions
-• Central for reasoning about deviations from the mean
-
-
+In practice, Markov’s inequality is rarely the final result.  
+It is used to establish a guaranteed bound that can later be improved by introducing additional assumptions or information.
 `,
       before:``,
       after:``,
@@ -137,18 +126,16 @@ Each inequality has its own page with assumptions, statements, and typical uses.
   
     },
     obj6:{
-      title:`Relationship Between Common Inequalities`,
+      title:`Relationship to Other Inequalities`,
       content:`
-Probability inequalities form a hierarchy based on the assumptions they require.
+Markov’s inequality is the most basic member of a larger family of probability bounds.
 
-• **Markov’s inequality** uses only non-negativity and expectation, making it broadly applicable but often loose.
-• **Chebyshev’s inequality** adds information about variance, which tightens the bound while reducing generality.
+It relies only on non-negativity and expectation, which makes it broadly applicable but weak. Other inequalities strengthen this bound by incorporating additional information about the random variable.
 
-This illustrates a general trade-off:
-• fewer assumptions → wider applicability
-• more assumptions → sharper bounds
+A direct refinement is **Chebyshev’s inequality**, which applies Markov’s inequality to squared deviations and uses variance to obtain a tighter bound. Further inequalities introduce higher moments or independence assumptions to sharpen the result even more.
 
-Many other inequalities fit into this pattern, refining earlier ones by incorporating additional structure or moments.
+In this sense, Markov’s inequality serves as a starting point.  
+Many stronger probability inequalities can be viewed as extensions or refinements built on its underlying idea.
 `,
       before:``,
       after:``,
@@ -156,17 +143,15 @@ Many other inequalities fit into this pattern, refining earlier ones by incorpor
   
     },
     obj7:{
-      title:`How Inequalities Are Used`,
+      title:`Limitations of Markov’s Inequality`,
       content:`
-Probability inequalities are used to control uncertainty when exact calculations are unavailable or unnecessary.
+Although Markov’s inequality always holds under its assumptions, the bounds it provides are often very loose.
 
-Typical uses include:
-• bounding tail probabilities
-• estimating how far a random variable can deviate from a reference value
-• proving convergence results without specifying distributions
-• comparing variability across different models
+Because it uses only the expected value, the inequality ignores how values are distributed around that average. As a result, the bound may be far larger than the true probability, especially when the random variable has light tails or is tightly concentrated.
 
-Because they provide guarantees that hold under broad conditions, inequalities are often used as intermediate tools. They establish limits first, and more precise results are built on top of them when additional information becomes available.
+Markov’s inequality is also uninformative when the threshold is close to the expected value, since the bound may approach or exceed 1. In such cases, it provides little practical insight.
+
+For these reasons, Markov’s inequality is best viewed as a guarantee of what **cannot** happen too often, rather than a precise estimate of what **does** happen.
 `,
       before:``,
       after:``,
@@ -174,15 +159,13 @@ Because they provide guarantees that hold under broad conditions, inequalities a
   
     },
     obj8:{
-      title:`Inequalities vs Exact Distributions`,
+      title:`Why Markov’s Inequality Matters`,
       content:`
-Probability inequalities do not describe the full behavior of a random variable.
+Markov’s inequality is the simplest non-trivial result that connects expectation to probability.
 
-They provide bounds that must hold, but they do not capture how probability is distributed within those bounds. As a result, the estimates they give may be conservative or loose.
+It shows that meaningful probabilistic statements can be made even when almost no information about a random variable is available. This idea lies at the core of many arguments in probability theory: before refining estimates, one must first establish absolute limits.
 
-When the exact distribution of a random variable is known and manageable, working directly with that distribution is usually preferable. Inequalities become most valuable when such information is missing, incomplete, or too costly to compute.
-
-In this sense, inequalities complement exact methods rather than replace them.
+Because of its minimal assumptions, Markov’s inequality appears repeatedly as a foundational tool. More advanced inequalities refine it, but none bypass the basic logic it introduces.
 `,
       before:``,
       after:``,
@@ -190,20 +173,13 @@ In this sense, inequalities complement exact methods rather than replace them.
   
     },
     obj9:{
-      title:`How This Section Is Organized`,
+      title:`Summary`,
       content:`
-This page provides an overview of probability inequalities and how they fit into probability theory.
+Markov’s inequality provides an upper bound on the probability that a non-negative random variable exceeds a given level.
 
-Each inequality is treated on its own page, where its assumptions, statement, and implications are presented in detail. The parent page focuses on connections, scope, and conceptual differences rather than formulas or proofs.
+It requires only the existence of an expected value and makes no assumptions about distribution shape. The resulting bound is universal but often loose.
 
-As new inequalities are added, they are integrated into the same structure, allowing this section to expand without changing its overall organization.
-
-**Inequality Pages**:
-
-• Markov’s Inequality  
-• Chebyshev’s Inequality  
-• (Future additions will appear here)
-
+For this reason, Markov’s inequality is best understood as a baseline result: simple, reliable, and foundational, but rarely the final word in probabilistic analysis.
 `,
       before:``,
       after:``,
@@ -269,13 +245,13 @@ As new inequalities are added, they are integrated into the same structure, allo
 
   const introContent = {
   id: "intro",
-  title: "Probability Inequalities",
+  title: "Markov’s Inequality",
   content: `
-In many probability problems, the exact distribution of a random variable is unknown or too complicated to work with directly.
+In many situations, very little is known about a random variable beyond its average size.
 
-Probability inequalities address this situation by providing guaranteed bounds on probabilities using limited information, such as an expected value or a variance. Instead of describing outcomes precisely, they restrict how extreme those outcomes can be.
+Even without knowing the distribution, it is often possible to rule out extreme behavior. Markov’s inequality does exactly this: it places an upper bound on the probability that a non-negative random variable exceeds a given level, using only its expected value.
 
-These results are deliberately general. They apply across wide classes of random variables and make minimal assumptions, trading sharpness for reliability. For this reason, probability inequalities play a central role in theoretical analysis, estimation, and convergence arguments.
+The result is deliberately simple and broadly applicable. It trades precision for generality, providing a guaranteed bound under minimal assumptions.
 `
 }
 
@@ -287,10 +263,10 @@ These results are deliberately general. They apply across wide classes of random
          sectionsContent,
          introContent,
           seoData: {
-        title: "Probability Inequalities Page | Learn Math Class",
+        title: "Markov Inequality Page | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/probability/inequalities",
+        url: "/probability/inequalities/markov",
          name: "name"
       },
         
@@ -302,14 +278,6 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
     
   const genericSections=[
-     {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -374,7 +342,14 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
           sectionsContent.obj8.content,
         ]
     },
-   
+    {
+        id:'9',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
+        ]
+    },
     // {
     //     id:'10',
     //     title:sectionsContent.obj10.title,
@@ -512,7 +487,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Probability Inequalities</h1>
+   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Markov Inequality</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}/>
