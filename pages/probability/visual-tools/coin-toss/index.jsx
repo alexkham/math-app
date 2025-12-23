@@ -170,7 +170,7 @@ export default function CointTossPage({seoData,sectionsContent , introContent}) 
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -228,7 +228,7 @@ export default function CointTossPage({seoData,sectionsContent , introContent}) 
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

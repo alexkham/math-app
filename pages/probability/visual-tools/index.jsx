@@ -252,7 +252,7 @@ export default function ProbabilityVisualToolsPage({seoData,sectionsContent ,
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -290,7 +290,7 @@ export default function ProbabilityVisualToolsPage({seoData,sectionsContent ,
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

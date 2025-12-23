@@ -28,8 +28,20 @@ export async function getStaticProps(){
     const sectionsContent={
 
     obj1:{
-      title:``,
-      content:``,
+      title:`What Chebyshev’s Inequality Applies To`,
+      content:`
+Chebyshev’s inequality applies to random variables under very broad conditions.
+
+Specifically:
+• the random variable must have a **finite mean**
+• the **variance must exist and be finite**
+• no assumptions are made about the distribution’s shape
+
+The inequality applies equally to discrete and continuous random variables.  
+There is no requirement of symmetry, boundedness, or independence.
+
+Compared to Markov’s inequality, Chebyshev uses more information — variance — and therefore provides a tighter bound, while still remaining distribution-free.
+`,
       before:``,
       after:``,
       link:'',
@@ -37,8 +49,20 @@ export async function getStaticProps(){
   
     },
     obj2:{
-      title:``,
-      content:``,
+      title:`Statement of Chebyshev’s Inequality`,
+      content:`
+Let $X$ be a random variable with finite mean $\mu$ and finite variance $\sigma^2$.
+
+For any real number $k > 0$, Chebyshev’s inequality states:
+ 
+ $\[\\mathbb{P}\\big(|X - \\mu| \\ge k\,\\sigma\\big) \\le \\frac{1}{k^2}.\]$
+
+Equivalently, for any $\\varepsilon > 0$,
+  
+  $\[\\mathbb{P}\\big(|X - \\mu| \\ge \\varepsilon\\big) \\le \\frac{\\sigma^2}{\\varepsilon^2}.\]$
+
+The bound depends only on the variance and makes no assumptions about the form of the distribution.
+`,
       before:``,
       after:``,
       link:'',
@@ -47,56 +71,112 @@ export async function getStaticProps(){
   
     obj3:{
   
-      title:``,
-      content:``,
+      title:`What the Inequality Is Saying`,
+      content:`
+Chebyshev’s inequality states that a random variable with small variance cannot stray far from its mean very often.
+
+The variance measures how spread out the values of the variable are. If this spread is limited, then large deviations from the mean must be rare. The inequality makes this idea precise by turning variability into a bound on deviation probabilities.
+
+The result does not predict where values will cluster.  
+It only guarantees that extreme departures from the mean are constrained by the size of the variance.
+
+For this reason, Chebyshev’s inequality should be read as a **guarantee**, not as a description of typical behavior.
+`,
       before:``,
       after:``,
       link:'',
+      plagiarism:'yes',
   
     },
     obj4:{
-      title:``,
-      content:``,
+      title:`Why Chebyshev Improves on Markov`,
+      content:`
+Markov’s inequality uses only the expected value of a random variable and applies to non-negative quantities. As a result, it places very weak restrictions on how values are distributed.
+
+Chebyshev’s inequality incorporates additional information: the variance. By measuring how values spread around the mean, variance allows much stronger control over deviations in both directions.
+
+In effect, Chebyshev’s inequality applies Markov’s idea to squared deviations from the mean. This extra structure tightens the bound while still avoiding any assumptions about the exact form of the distribution.
+
+Chebyshev therefore refines Markov’s inequality: it remains distribution-free, but achieves stronger bounds by using more information.
+`,
       before:``,
       after:``,
       link:'',
   
     },
     obj5:{
-      title:``,
-      content:``,
+      title:`Typical Use Cases`,
+      content:`
+Chebyshev’s inequality is used when information about variability is available, but the exact distribution is unknown or unnecessary.
+
+Common uses include:
+• bounding the probability of large deviations from the mean
+• analyzing the stability of averages and estimators
+• providing guarantees in problems involving uncertainty and noise
+• serving as a tool in theoretical arguments where distributional details are absent
+
+In many applications, Chebyshev’s inequality provides a first meaningful bound that can later be refined if stronger assumptions are introduced.
+`,
       before:``,
       after:``,
       link:'',
   
     },
     obj6:{
-      title:``,
-      content:``,
+      title:`Role in Convergence and Limit Results`,
+      content:`
+Chebyshev’s inequality plays a central role in establishing convergence results in probability.
+
+Because it controls the probability of deviations from the mean using variance, it is naturally suited to analyzing sequences of random variables, especially averages. When variances shrink, Chebyshev’s inequality shows that large deviations become increasingly unlikely.
+
+This makes the inequality a key tool in proofs of the **Law of Large Numbers**, where it is used to show that sample averages concentrate around their expected value.
+
+In this role, Chebyshev’s inequality acts as a bridge between basic moment information and asymptotic behavior.
+`,
       before:``,
       after:``,
       link:'',
   
     },
     obj7:{
-      title:``,
-      content:``,
+      title:`Limitations of Chebyshev’s Inequality`,
+      content:`
+Although Chebyshev’s inequality is widely applicable, the bounds it provides are often conservative.
+
+Because it depends only on variance, the inequality ignores finer features of the distribution such as shape, symmetry, or tail behavior. As a result, the bound may be much larger than the true probability, especially for well-behaved distributions.
+
+Chebyshev’s inequality is also insensitive to how deviations occur. Two random variables with the same variance but very different distributions receive the same bound, even if one is far more concentrated than the other.
+
+For tighter control, additional assumptions or more specialized inequalities are usually required.
+`,
       before:``,
       after:``,
       link:'',
   
     },
     obj8:{
-      title:``,
-      content:``,
+      title:`Why Chebyshev’s Inequality Matters`,
+      content:`
+Chebyshev’s inequality is the first probability bound that explicitly connects variability to deviation control.
+
+By using variance, it shows that knowing how spread out a random variable is already imposes strong restrictions on how often extreme values can occur. This insight is fundamental in probability theory and underlies many results about stability and convergence.
+
+Because it makes no assumptions about distribution shape, Chebyshev’s inequality remains broadly applicable while still being strong enough to support key theoretical arguments.
+`,
       before:``,
       after:``,
       link:'',
   
     },
     obj9:{
-      title:``,
-      content:``,
+      title:`Summary`,
+      content:`
+Chebyshev’s inequality provides an upper bound on the probability that a random variable deviates far from its mean.
+
+It requires only finite mean and variance and applies to both discrete and continuous random variables. The resulting bound is distribution-free and stronger than what can be obtained from expectation alone.
+
+For this reason, Chebyshev’s inequality is a central tool in probability theory: simple, general, and essential for understanding convergence and variability.
+`,
       before:``,
       after:``,
       link:'',
@@ -403,7 +483,7 @@ export default function ChebyshevInequalityPage({seoData,sectionsContent , intro
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Chebyshev's Inequality</h1>
+   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Chebyshev&apos;s Inequality</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}/>

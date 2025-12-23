@@ -204,7 +204,7 @@ export default function ExpectedValuePage({seoData, sectionsContent, introConten
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -219,7 +219,7 @@ export default function ExpectedValuePage({seoData, sectionsContent, introConten
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'-20px'}}>{h1Title}</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'-20px'}}>{h1Title}</h1>
    <br/>
    <br/>
    
