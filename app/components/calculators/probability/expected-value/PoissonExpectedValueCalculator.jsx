@@ -172,7 +172,7 @@ const PoissonExpectedValueCalculator = () => {
           <div style={styles.keyInsightIcon}>💡</div>
           <div style={styles.keyInsightContent}>
             <strong>Key Insight:</strong> E(X) = {calculations.expectedValue.toFixed(2)} means you expect {calculations.expectedValue.toFixed(2)} events 
-            per time interval on average. For Poisson, the rate parameter λ IS the expected value - they're the same thing!
+            per time interval on average. For Poisson, the rate parameter λ IS the expected value - they are the same thing!
           </div>
         </div>
       )}
@@ -555,7 +555,7 @@ const PoissonExpectedValueCalculator = () => {
             <p style={styles.p}>
               The Poisson distribution models rare, random events occurring at a constant average rate. 
               The parameter λ represents this rate - the expected number of occurrences. By definition, 
-              if the average rate is λ, then the expected value IS λ. No calculation needed - it's built into 
+              if the average rate is λ, then the expected value IS λ. No calculation needed - it is built into 
               the definition of the distribution!
             </p>
           </div>

@@ -1106,7 +1106,7 @@ const GeometricExpectedValueCalculator = () => {
       <div style={styles.intro}>
         <p style={styles.introText}>
           Calculate the <strong>expected value</strong> (average number of trials until first success) for a geometric distribution. 
-          Perfect for modeling attempts until success: coin flips, sales calls, quality tests, or any "try until you succeed" scenario.
+          Perfect for modeling attempts until success: coin flips, sales calls, quality tests, or any &apos;try until you succeed&apos; scenario.
         </p>
       </div>
 
@@ -1456,7 +1456,7 @@ const GeometricExpectedValueCalculator = () => {
             <h4 style={styles.h4}>What Does E(X) Mean?</h4>
             <p style={styles.p}>
               The expected value E(X) represents the average number of trials you need until you get your first success. 
-              It's how many attempts you should expect before achieving success when each trial is independent.
+              It is how many attempts you should expect before achieving success when each trial is independent.
             </p>
           </div>
 
@@ -1467,8 +1467,8 @@ const GeometricExpectedValueCalculator = () => {
             </p>
             <ul style={styles.ul}>
               <li style={styles.li}>Expect {calculations.isValid ? calculations.expectedValue.toFixed(2) : '___'} trials until first success on average</li>
-              <li style={styles.li}>Half the time you'll succeed within {calculations.isValid ? Math.ceil(Math.log(0.5) / Math.log(1 - calculations.p)) : '___'} trials (median)</li>
-              <li style={styles.li}>Each trial has the same probability - past failures don't affect future chances</li>
+              <li style={styles.li}>Half the time you will succeed within {calculations.isValid ? Math.ceil(Math.log(0.5) / Math.log(1 - calculations.p)) : '___'} trials (median)</li>
+              <li style={styles.li}>Each trial has the same probability - past failures do not affect future chances</li>
             </ul>
           </div>
 

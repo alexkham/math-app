@@ -191,7 +191,7 @@ const NegativeBinomialExpectedValueCalculator = () => {
         <div style={styles.keyInsight}>
           <div style={styles.keyInsightIcon}>💡</div>
           <div style={styles.keyInsightContent}>
-            <strong>Key Insight:</strong> E(X) = {calculations.expectedValue.toFixed(2)} means on average you'll experience {calculations.expectedValue.toFixed(2)} failures 
+            <strong>Key Insight:</strong> E(X) = {calculations.expectedValue.toFixed(2)} means on average you will experience {calculations.expectedValue.toFixed(2)} failures 
             before getting your {calculations.r} required successes. Total trials needed: about {(calculations.expectedValue + calculations.r).toFixed(2)}.
           </div>
         </div>
@@ -576,8 +576,8 @@ const NegativeBinomialExpectedValueCalculator = () => {
           <div style={styles.explainSection}>
             <h4 style={styles.h4}>What Does E(X) Mean?</h4>
             <p style={styles.p}>
-              The expected value E(X) represents the average number of failures you'll experience before achieving 
-              r successes. It's the "cost" in terms of failed attempts to reach your success goal.
+              The expected value E(X) represents the average number of failures you will experience before achieving 
+              r successes. It is the cost in terms of failed attempts to reach your success goal.
             </p>
           </div>
 

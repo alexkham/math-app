@@ -1800,7 +1800,7 @@ const ContinuousUniformExpectedValueCalculator = () => {
           <div style={styles.explainSection}>
             <h4 style={styles.h4}>What Does E(X) Mean?</h4>
             <p style={styles.p}>
-              The expected value E(X) represents the average value of the distribution - the "center of mass" 
+              The expected value E(X) represents the average value of the distribution - the &apos;center of mass&apos; 
               of the PDF. For uniform distributions, this is simply the midpoint of the interval [a, b].
             </p>
           </div>
@@ -1831,8 +1831,8 @@ const ContinuousUniformExpectedValueCalculator = () => {
             <h4 style={styles.h4}>Why E(X) = (a + b) / 2</h4>
             <p style={styles.p}>
               The continuous uniform distribution has constant probability density across [a, b]. 
-              When you integrate x · f(x), you're finding the weighted average where all weights are equal. 
-              This naturally gives you the midpoint. It's the same as averaging two numbers: (a + b) / 2.
+              When you integrate x · f(x), you are finding the weighted average where all weights are equal. 
+              This naturally gives you the midpoint. It is the same as averaging two numbers: (a + b) / 2.
             </p>
           </div>
         </div>

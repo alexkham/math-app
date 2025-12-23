@@ -95,7 +95,7 @@ const DirectExpectedValueCalculator = () => {
       <div style={styles.intro}>
         <p style={styles.introText}>
           The <strong>expected value</strong> (also called expectation or mean) represents the average 
-          outcome you would expect if you repeated an experiment many times. It's calculated by multiplying 
+          outcome you would expect if you repeated an experiment many times. It is calculated by multiplying 
           each possible outcome by its probability and summing the results.
         </p>
       </div>
@@ -306,7 +306,7 @@ const DirectExpectedValueCalculator = () => {
           <div style={styles.explainSection}>
             <h4 style={styles.h4}>What is Expected Value?</h4>
             <p style={styles.p}>
-              Expected value represents the average outcome you would expect over many trials. It's a weighted 
+              Expected value represents the average outcome you would expect over many trials. It is a weighted 
               average where each outcome is weighted by its probability of occurring.
             </p>
           </div>

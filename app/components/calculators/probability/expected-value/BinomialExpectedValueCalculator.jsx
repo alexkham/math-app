@@ -1582,7 +1582,7 @@ const BinomialExpectedValueCalculator = () => {
             <h4 style={styles.h4}>What Does E(X) Mean?</h4>
             <p style={styles.p}>
               The expected value E(X) represents the average number of successes you would get if you repeated 
-              this n-trial experiment many times. It's the "center" of the distribution and the most likely outcome range.
+              this n-trial experiment many times. It is the &apos;center&apos; of the distribution and the most likely outcome range.
             </p>
           </div>
 
@@ -1594,7 +1594,7 @@ const BinomialExpectedValueCalculator = () => {
             <ul style={styles.ul}>
               <li style={styles.li}>Expect {calculations.isValid ? calculations.expectedValue.toFixed(2) : '___'} successes per experiment on average</li>
               <li style={styles.li}>Over many experiments, successes average to {calculations.isValid ? calculations.expectedValue.toFixed(2) : '___'}</li>
-              <li style={styles.li}>This is your "break-even" point for planning or prediction</li>
+              <li style={styles.li}>This is your &apos;break-even&apos; point for planning or prediction</li>
             </ul>
           </div>
 

@@ -1487,7 +1487,7 @@ const DiscreteUniformExpectedValueCalculator = () => {
             </p>
             <ul style={styles.ul}>
               <li style={styles.li}>Over many trials, outcomes average to {calculations.isValid ? calculations.expectedValue.toFixed(2) : '___'}</li>
-              <li style={styles.li}>This is the "center" of the distribution</li>
+              <li style={styles.li}>This is the &apos;center&apos; of the distribution</li>
               <li style={styles.li}>All values are equally likely, so E(X) is the midpoint</li>
             </ul>
           </div>

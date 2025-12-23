@@ -209,7 +209,7 @@ const HypergeometricExpectedValueCalculator = () => {
       <div style={styles.intro}>
         <p style={styles.introText}>
           Calculate the <strong>expected value</strong> (average number of successes) when drawing without replacement from a finite population. 
-          Perfect for quality control, card games, lottery analysis, or any sampling scenario where items aren't replaced.
+          Perfect for quality control, card games, lottery analysis, or any sampling scenario where items are not replaced.
         </p>
       </div>
 
@@ -604,7 +604,7 @@ const HypergeometricExpectedValueCalculator = () => {
                     <div style={styles.insightBox}>
                       <strong>Why this works:</strong> If {(calculations.p * 100).toFixed(1)}% of the population are successes, 
                       and you draw {calculations.n} items, you expect about {(calculations.p * 100).toFixed(1)}% of your sample to be successes too. 
-                      That's {calculations.n} × {calculations.p.toFixed(2)} = {calculations.expectedValue.toFixed(2)} items. 
+                      That is {calculations.n} × {calculations.p.toFixed(2)} = {calculations.expectedValue.toFixed(2)} items. 
                       The key difference from binomial: no replacement means probabilities change slightly with each draw, 
                       but the expected value formula stays simple!
                     </div>
@@ -636,8 +636,8 @@ const HypergeometricExpectedValueCalculator = () => {
           <div style={styles.explainSection}>
             <h4 style={styles.h4}>What Does E(X) Mean?</h4>
             <p style={styles.p}>
-              The expected value E(X) represents the average number of successes you'll get when drawing n items 
-              without replacement from a population of N items containing K successes. It's the proportion of successes 
+              The expected value E(X) represents the average number of successes you will get when drawing n items 
+              without replacement from a population of N items containing K successes. It is the proportion of successes 
               in the population multiplied by your sample size.
             </p>
           </div>
@@ -668,8 +668,8 @@ const HypergeometricExpectedValueCalculator = () => {
             <p style={styles.p}>
               This formula reflects the simple fact that your sample should reflect the population proportion. 
               If K/N of the population are successes, then K/N of your sample should be successes too. 
-              Multiply by n to get the count: n × (K/N) = nK/N. Unlike binomial, there's no replacement, 
-              but the expected value is the same - it's the variance that differs!
+              Multiply by n to get the count: n × (K/N) = nK/N. Unlike binomial, there is no replacement, 
+              but the expected value is the same - it is the variance that differs!
             </p>
           </div>
         </div>

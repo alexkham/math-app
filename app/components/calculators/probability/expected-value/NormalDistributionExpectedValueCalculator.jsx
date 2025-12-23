@@ -139,7 +139,7 @@ const NormalExpectedValueCalculator = () => {
           <div style={styles.keyInsightContent}>
             <strong>Key Insight:</strong> From {calculations.n} data points, the estimated E(X) = {calculations.expectedValue.toFixed(2)}. 
             This is your sample mean x̄, which is the best estimate of the population mean μ. 
-            We're 95% confident the true μ is between {calculations.ciLower.toFixed(2)} and {calculations.ciUpper.toFixed(2)}.
+            We are 95% confident the true μ is between {calculations.ciLower.toFixed(2)} and {calculations.ciUpper.toFixed(2)}.
           </div>
         </div>
       )}
@@ -464,7 +464,7 @@ const NormalExpectedValueCalculator = () => {
             <h4 style={styles.h4}>What Does E(X) Mean?</h4>
             <p style={styles.p}>
               For a normal distribution, the expected value E(X) equals the population mean μ. 
-              When we don't know μ, we estimate it from sample data using the sample mean x̄. 
+              When we do not know μ, we estimate it from sample data using the sample mean x̄. 
               This x̄ is our best estimate of E(X).
             </p>
           </div>
