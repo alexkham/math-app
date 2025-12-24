@@ -189,6 +189,7 @@ export default function PoissonDistributionTable({seoData, sectionsContent, intr
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'20px'}}>Poisson Distribution Table</h1>
    <br/>
     <SectionTableOfContents sections={genericSections} stickyWidth={'250px'}
+    showSecondaryNav={true}
     secondaryNavMode='siblings'
     secondaryNavTitle='Other Probability Tables'/>
    <br/>

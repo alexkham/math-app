@@ -173,7 +173,10 @@ export default function TDistributionTable({seoData, sectionsContent}) {
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'20px'}}>T-Distribution Table</h1>
    <br/>
    <SectionTableOfContents sections={genericSections}
-   stickyWidth={'220px'}/>
+   stickyWidth={'220px'}
+   showSecondaryNav={true}
+   secondaryNavMode='siblings'
+   secondaryNavTitle='Other Probability Tables'/>
    <br/>
    <TTableContainer/>
    <br/>

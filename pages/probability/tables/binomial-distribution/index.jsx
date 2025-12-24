@@ -190,6 +190,7 @@ export default function BinomialDistributionTablePage({seoData, sectionsContent,
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'-20px'}}>Binomial Distribution Table</h1>
    <br/>
    <SectionTableOfContents sections={genericSections}  stickyWidth={'150px'} 
+   showSecondaryNav={true}
    secondaryNavMode='siblings'
    secondaryNavTitle='Other Probability Tables'/>
   
