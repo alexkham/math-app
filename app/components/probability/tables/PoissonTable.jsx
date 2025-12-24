@@ -195,7 +195,7 @@ const PoissonTable = () => {
         
         .poisson-table {
           border-collapse: collapse;
-          font-size: 10px;
+          font-size: 12px;
           width: 100%;
         }
         

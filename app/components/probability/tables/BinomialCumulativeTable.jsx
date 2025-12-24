@@ -207,7 +207,7 @@ const BinomialCumulativeTable = () => {
         
         .binomial-table {
           border-collapse: collapse;
-          font-size: 10px;
+          font-size: 12px;
           width: 100%;
         }
         
@@ -215,16 +215,17 @@ const BinomialCumulativeTable = () => {
           background-color: #ffd814;
           color: #333;
           font-weight: bold;
-          padding: 6px 3px;
+          padding: 6px 10px;
           border: 1px solid #999;
           text-align: center;
           position: sticky;
           top: 0;
           z-index: 90;
+          
         }
         
         .binomial-table td {
-          padding: 4px 3px;
+          padding: 4px 1px;
           border: 1px solid #ddd;
           text-align: center;
         }
