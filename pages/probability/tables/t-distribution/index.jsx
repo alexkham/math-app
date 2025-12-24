@@ -178,6 +178,7 @@ export default function TDistributionTable({seoData, sectionsContent}) {
    secondaryNavMode='siblings'
    secondaryNavTitle='Other Probability Tables'/>
    <br/>
+   <br/>
    <TTableContainer/>
    <br/>
    
