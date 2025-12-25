@@ -6,21 +6,19 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
-import '../../../pages/pages.css'
+import '../pages.css'
 import Head from 'next/head'
 
 
 export async function getStaticProps(){
 
- const keyWords = [
-  "combinatorics in probability",
-  "counting in probability",
-  "finite sample space",
-  "classical probability",
-  "permutations probability",
-  "combinations probability",
-  "combinatorial probability",
-  "discrete probability models"
+  const keyWords = [
+  "indicator random variable",
+  "indicator variables probability",
+  "expectation of indicator",
+  "linearity of expectation",
+  "counting with indicators",
+  "events as random variables"
 ];
 
 
@@ -29,17 +27,8 @@ export async function getStaticProps(){
     const sectionsContent={
 
     obj1:{
-      title:`Finite Sample Spaces and Counting`,
-      content:`
-In classical probability models, probabilities are computed using  
-   
-   $P(A)=\\dfrac{|A|}{|\\Omega|}$
-
-This formula applies only when the sample space $\Omega$ is finite and all outcomes are equally likely.  
-Under these conditions, probability values are determined entirely by counting how many outcomes belong to an event and how many outcomes are possible in total.
-
-When these assumptions fail, counting alone is no longer sufficient and other probability tools are required.
-`,
+      title:``,
+      content:``,
       before:``,
       after:``,
       link:'',
@@ -47,17 +36,8 @@ When these assumptions fail, counting alone is no longer sufficient and other pr
   
     },
     obj2:{
-      title:`Counting Structures Used by Probability Models`,
-      content:`
-Probability calculations depend on how outcomes are organized.
-
-• If order matters, outcomes are counted as ordered selections.
-• If order does not matter, outcomes are counted as unordered selections.
-• In some models, repetition of outcomes is allowed; in others, it is not.
-
-These structural distinctions determine which counting method applies to a given probability model.  
-Choosing the wrong structure leads directly to incorrect probability values.
-`,
+      title:``,
+      content:``,
       before:``,
       after:``,
       link:'',
@@ -66,117 +46,56 @@ Choosing the wrong structure leads directly to incorrect probability values.
   
     obj3:{
   
-      title:`Counting in Classical Probability Experiments`,
-      content:`
-Standard probability experiments require explicit outcome definitions.
-
-• Coin-toss experiments count sequences of results.
-• Dice-roll experiments count ordered or unordered outcomes depending on the question.
-• Card draws and urn models count selections with or without replacement.
-
-The same physical experiment can require different counting rules depending on how outcomes are defined.  
-Probability errors often originate from defining the outcome space incorrectly before counting.
-`,
+      title:``,
+      content:``,
       before:``,
       after:``,
       link:'',
   
     },
     obj4:{
-      title:`From Counting to Distributions`,
-      content:`
-When counting is repeated across structured experiments, probability distributions are formed.
-
-* In repeated Bernoulli trials, counting successes leads to the binomial distribution.
-* In sampling without replacement, counting selections leads to the hypergeometric distribution.
-* In symmetric finite models, counting outcomes leads to the discrete uniform distribution.
-
-In each case, counting determines the possible values of a random variable and the probabilities assigned to those values.  
-This establishes the chain: counting → random variable → probability distribution.
-`,
+      title:``,
+      content:``,
       before:``,
       after:``,
       link:'',
   
     },
     obj5:{
-      title:`Conditional Probability as Restricted Counting`,
-      content:`
-[Conditional probability](!/probability/conditional-probability) recomputes probabilities after information is applied.
-
-* Outcomes that contradict the given information are removed.
-* The sample space is reduced.
-* Probabilities are recalculated by counting outcomes within this restricted space.
-
-Under finite, equally likely assumptions, [conditional probability](!/probability/conditional-probability) is therefore a counting problem on a smaller sample space.  
-This interpretation provides the structural basis for Bayes’ theorem.
-`,
+      title:``,
+      content:``,
       before:``,
       after:``,
       link:'',
   
     },
     obj6:{
-      title:`Expectation via Counting`,
-      content:`
-Expectation can be computed without constructing a full [probability distribution](!/probability/distributions).
-
-* Each outcome contributes a numerical value.
-* Outcomes are counted according to their contribution.
-* Indicator random variables isolate whether specific events occur.
-
-By summing contributions across outcomes, expectation values can be obtained directly from counting arguments.  
-This approach simplifies many finite probability problems while remaining exact.
-`,
+      title:``,
+      content:``,
       before:``,
       after:``,
       link:'',
   
     },
     obj7:{
-      title:`Scope Limits of Counting Methods`,
-      content:`
-Counting methods apply only to finite, discrete probability models.
-
-They do not apply when:
-
-* the sample space is infinite or continuous
-* probabilities are defined through density functions
-* outcomes are modeled empirically or through simulation
-
-In these cases, probability values are not determined by counting outcomes, and different mathematical tools are required.
-`,
+      title:``,
+      content:``,
       before:``,
       after:``,
       link:'',
   
     },
     obj8:{
-      title:`Position Within the Probability Framework`,
-      content:`
-Probability theory is organized in layers.
-
-* Experiments generate outcomes.
-* Combinatorics counts those outcomes.
-* Probability assigns numerical weights to events.
-* Distributions summarize the behavior of random variables.
-
-This page connects counting to probability without duplicating the material covered in the combinatorics or distribution sections.
-`,
+      title:``,
+      content:``,
       before:``,
       after:``,
       link:'',
   
     },
     obj9:{
-      title:`Summary`,
-      content:`
-In finite probability models, probability values are determined by counting outcomes.
-
-Combinatorics provides the mechanism for measuring event sizes, defining random variables, and forming discrete probability distributions. It underlies classical probability formulas, conditional probability calculations, and expectation computations based on indicator variables.
-
-This page explains how counting is used within probability theory, while all counting techniques themselves are handled in the dedicated combinatorics section.
-`,
+      title:``,
+      content:``,
       before:``,
       after:``,
       link:'',
@@ -241,8 +160,14 @@ This page explains how counting is used within probability theory, while all cou
 
   const introContent = {
   id: "intro",
-  title: "",
-  content: ``
+  title: "Why Indicators Exist",
+  content: `
+Many probability problems ask whether a specific event occurs or does not occur.  
+Indicator random variables encode this yes–no information numerically.
+
+By representing events as random variables that take values $0$ or $1$, indicators allow probability questions to be handled using expectation and algebraic operations.  
+This makes them a structural tool for counting and for applying linearity of expectation.
+`
 }
 
 
@@ -253,10 +178,10 @@ This page explains how counting is used within probability theory, while all cou
          sectionsContent,
          introContent,
           seoData: {
-        title: "Combinatorics in Probability | Learn Math Class",
+        title: "Indicators in Probability | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/combinatorics",
+        url: "/probability/indicators",
          name: "name"
       },
         
@@ -264,7 +189,7 @@ This page explains how counting is used within probability theory, while all cou
     }
    }
 
-export default function CombinatoricsPage({seoData,sectionsContent , introContent}) {
+export default function IndicatorsPage({seoData,sectionsContent , introContent}) {
 
     
   const genericSections=[
@@ -340,54 +265,54 @@ export default function CombinatoricsPage({seoData,sectionsContent , introConten
           sectionsContent.obj9.content,
         ]
     },
-    // {
-    //     id:'10',
-    //     title:sectionsContent.obj10.title,
-    //     link:sectionsContent.obj10.link,
-    //     content:[
-    //       sectionsContent.obj10.content,
-    //     ]
-    // },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
+    {
+        id:'10',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
+        ]
+    },
+    {
+        id:'11',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
+        ]
+    },
+    {
+        id:'12',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+        ]
+    },
+    {
+        id:'13',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
+        ]
+    },
+    {
+        id:'14',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+        ]
+    },
+    {
+        id:'15',
+        title:sectionsContent.obj15.title,
+        link:sectionsContent.obj15.link,
+        content:[
+          sectionsContent.obj15.content,
+        ]
+    },
     // {
     //     id:'1',
     //     title:sectionsContent.obj1.title,
@@ -477,7 +402,7 @@ export default function CombinatoricsPage({seoData,sectionsContent , introConten
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Combinatorics in Probability</h1>
+   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Indicators in Probability</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}/>

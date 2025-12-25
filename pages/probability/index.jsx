@@ -312,6 +312,7 @@ By treating events as sets, we gain access to the full power of [set theory](!/s
       },
       axioms:{
         title:`Basic Axioms of Probability`,
+        link:'/probability/axioms',
         description:`The three Kolmogorov axioms provide a minimal yet complete framework for assigning consistent probabilities to events, laying the groundwork for all of probability theory.  From these principles flow essential rules—such as the addition rule for disjoint events, the definition of conditional probability, and Bayes’ theorem—as well as many useful corollaries that drive rigorous problem‐solving in statistics, science, and engineering.
 `
 
@@ -359,18 +360,18 @@ But are all outcomes equally likely?
 **The answer is: it depends.**
  As we know from everyday experience, some experiments—like flipping a fair coin or rolling a fair die—assign the same probability to each outcome, while in others certain outcomes carry more weight.
 To capture how those weights are assigned—and how they change when we look at different features of the same experiment—we need the formal notion of a probability distribution.
-In many problems, interest centers not on the raw outcomes themselves but on some numerical feature of those outcomes—what we call a random variable. 
+In many problems, interest centers not on the raw outcomes themselves but on some numerical feature of those outcomes—what we call a [random variable](!/probability/random-variables). 
 @academic[theorem:A Random Variable is simply a rule that assigns a number to every elementary outcome in the sample space.]@ 
 By doing this, it becomes possible to talk about averages, variances and more, using the full toolbox of arithmetic and calculus.
-@academic[theorem:The Probability Distribution of a random variable then tells us how likely each numerical value is to happen.]@
- It does this by gathering together all the elementary outcomes that map to the same number (or fall into the same range) and adding up their probabilities. Even when every outcome in the sample space is equally likely—say, each face of a fair die—different choices of random variable (for example, the face value itself versus “even or odd,” or “number of sixes in two rolls”) will group those outcomes differently. As a result, each of those measurements has its own distinct distribution, reflecting the particular way it “reads” the experiment. 
+@academic[theorem:The Probability Distribution of a [random variable](!/probability/random-variables) then tells us how likely each numerical value is to happen.]@
+ It does this by gathering together all the elementary outcomes that map to the same number (or fall into the same range) and adding up their probabilities. Even when every outcome in the sample space is equally likely—say, each face of a fair die—different choices of [random variable](!/probability/random-variables) (for example, the face value itself versus “even or odd,” or “number of sixes in two rolls”) will group those outcomes differently. As a result, each of those measurements has its own distinct distribution, reflecting the particular way it “reads” the experiment. 
  At its heart, working with a probability distribution is simply about **deciding how to spread out your “degree of belief”** over every thing that could happen, and then using that spread to answer questions about uncertainty.
 
-* **Assigning weight:** You begin by giving each possible outcome a nonnegative number (its weight), in such a way that all the weights add up to one.
-* **Capturing uncertainty:** Those weights encode exactly how confident you are in each outcome, from “almost impossible” to “almost certain.”
-* **Calculating what matters:** Once the weights are set, you can systematically compute things like “how much total weight falls in this region of outcomes,” or “what’s the average we’d expect,” or “how wildly outcomes vary.”
-* **Guiding decisions:** With those calculations in hand, you can compare different spreads of belief, choose actions that maximize your expected gain, or measure how risky a plan is.
-There are many different probability distributions—each with its own characteristic pattern—but they can be broadly classified into two main categories: **discrete distributions**, which assign probabilities to countable outcomes, and **continuous distributions**, which use density functions over intervals of real numbers.
+• **Assigning weight:** You begin by giving each possible outcome a nonnegative number (its weight), in such a way that all the weights add up to one.
+• **Capturing uncertainty:** Those weights encode exactly how confident you are in each outcome, from “almost impossible” to “almost certain.”
+• **Calculating what matters:** Once the weights are set, you can systematically compute things like “how much total weight falls in this region of outcomes,” or “what’s the average we’d expect,” or “how wildly outcomes vary.”
+• **Guiding decisions:** With those calculations in hand, you can compare different spreads of belief, choose actions that maximize your expected gain, or measure how risky a plan is.
+There are many different probability distributions—each with its own characteristic pattern—but they can be broadly classified into two main categories: [discrete distributions](!/probability/distributions/duscrete), which assign probabilities to countable outcomes, and [continuous distributions](!/probability/distributions/continuous), which use density functions over intervals of real numbers.
 `,
 svg:
 `
@@ -453,7 +454,8 @@ svg:
         before:`@academic[example:Conditional probability is simply the chance of something happening once you already know something else has happened. It tells you how your outlook on an event shifts when you gain new information about another event's occurence.]@
 `,
         after:``,
-        description:`When you learn about conditional probability, you’re really seeing how knowing that one event happened (B) changes your “bet” on another event (A).  That change (or lack of change) is exactly what we mean by dependence or independence:
+        link:'/probability/conditional-probability',
+        description:`When you learn about [conditional probability](!/probability/conditional-probability), you’re really seeing how knowing that one event happened (B) changes your “bet” on another event (A).  That change (or lack of change) is exactly what we mean by dependence or independence:
 
  **Dependent events**:
   If knowing that B occurred **does** change your opinion about $A$, then $A$ and $B$ are **dependent**.
@@ -461,7 +463,7 @@ svg:
   Or in simple words: “Once I see $B$ happen, my chance of $A$ goes up or down compared to what I thought before.”
 
  **Independent events**:
-  If knowing that $B$ occurred **doesn’t** change your opinion about likelihood of $A$, then $A$ and $B$ are **independent**.
+  If knowing that $B$ occurred **doesn’t** change your opinion about likelihood of $A$, then $A$ and $B$ are [independent](!/probability/independence).
  \t\t\t\t\t\t$P(A\\mid B)\\;=\\;P(A)$
  Equivalently, the fact that $B$ happened gives you zero new information about $A$.
 
@@ -650,7 +652,7 @@ export default function ProbabilityPage({
     {
       id: 'axioms',
       title: sectionContent.axioms.title, 
-     
+      link:sectionContent.axioms.link,
       content: [
         sectionContent.axioms.description,
         <MyList
@@ -722,7 +724,7 @@ export default function ProbabilityPage({
 
       id:'conditional',
       title:sectionContent.conditional.title,
-      link:'',
+      link:sectionContent.conditional.link,
       content:[
         sectionContent.conditional.before,
         sectionContent.conditional.description,
