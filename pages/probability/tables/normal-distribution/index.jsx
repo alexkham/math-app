@@ -91,7 +91,7 @@ export default function NormalDistributionTable({seoData, sectionsContent, intro
     {
         id:'what-is',
         title:'What is the Normal Distribution?',
-        link:'#what-is',
+        link:'/probability/distributions/continuous#normal',
         content: sectionsContent.obj1.content
     },
     {

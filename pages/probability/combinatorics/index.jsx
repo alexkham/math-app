@@ -29,8 +29,17 @@ export async function getStaticProps(){
     const sectionsContent={
 
     obj1:{
-      title:``,
-      content:``,
+      title:`Finite Sample Spaces and Counting`,
+      content:`
+In classical probability models, probabilities are computed using  
+   
+   $P(A)=\\dfrac{|A|}{|\\Omega|}$
+
+This formula applies only when the sample space $\Omega$ is finite and all outcomes are equally likely.  
+Under these conditions, probability values are determined entirely by counting how many outcomes belong to an event and how many outcomes are possible in total.
+
+When these assumptions fail, counting alone is no longer sufficient and other probability tools are required.
+`,
       before:``,
       after:``,
       link:'',
@@ -38,8 +47,17 @@ export async function getStaticProps(){
   
     },
     obj2:{
-      title:``,
-      content:``,
+      title:`Counting Structures Used by Probability Models`,
+      content:`
+Probability calculations depend on how outcomes are organized.
+
+• If order matters, outcomes are counted as ordered selections.
+• If order does not matter, outcomes are counted as unordered selections.
+• In some models, repetition of outcomes is allowed; in others, it is not.
+
+These structural distinctions determine which counting method applies to a given probability model.  
+Choosing the wrong structure leads directly to incorrect probability values.
+`,
       before:``,
       after:``,
       link:'',
@@ -48,16 +66,34 @@ export async function getStaticProps(){
   
     obj3:{
   
-      title:``,
-      content:``,
+      title:`Counting in Classical Probability Experiments`,
+      content:`
+Standard probability experiments require explicit outcome definitions.
+
+• Coin-toss experiments count sequences of results.
+• Dice-roll experiments count ordered or unordered outcomes depending on the question.
+• Card draws and urn models count selections with or without replacement.
+
+The same physical experiment can require different counting rules depending on how outcomes are defined.  
+Probability errors often originate from defining the outcome space incorrectly before counting.
+`,
       before:``,
       after:``,
       link:'',
   
     },
     obj4:{
-      title:``,
-      content:``,
+      title:`From Counting to Distributions`,
+      content:`
+When counting is repeated across structured experiments, probability distributions are formed.
+
+* In repeated Bernoulli trials, counting successes leads to the binomial distribution.
+* In sampling without replacement, counting selections leads to the hypergeometric distribution.
+* In symmetric finite models, counting outcomes leads to the discrete uniform distribution.
+
+In each case, counting determines the possible values of a random variable and the probabilities assigned to those values.  
+This establishes the chain: counting → random variable → probability distribution.
+`,
       before:``,
       after:``,
       link:'',
