@@ -166,9 +166,10 @@ has taken place.
 
 Keeping this distinction clear is necessary for writing correct probability statements
 and for understanding formulas introduced later.
+
 `,
       before:``,
-      after:``,
+      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
   
     },
     next:{
@@ -318,6 +319,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
         link:'',
         content:[
             sectionsContent.notation.content,
+            sectionsContent.notation.after,
         ]
     },
     {

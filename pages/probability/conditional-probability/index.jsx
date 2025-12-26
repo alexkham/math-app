@@ -58,7 +58,7 @@ Before introducing the formula, we fix the symbols used to describe conditional 
 This notation allows us to express conditioning precisely and compactly in the next section.
 `,
       before:``,
-      after:``,
+      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
   
     },
     formula:{
@@ -272,6 +272,7 @@ export default function ConditionalProbabilityPage({seoData,sectionsContent , in
         link:'',
         content:[
             sectionsContent.notation.content,
+            sectionsContent.notation.after,
         ]
     },
     {

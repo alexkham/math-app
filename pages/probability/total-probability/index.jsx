@@ -118,9 +118,11 @@ That's the notation toolkit. Each piece has a clear meaning:
 - P(A | Bᵢ) is A's probability within case i
 - P(Bᵢ) is the weight of case i
 
-Next, we combine these pieces into the formal law.`,
+Next, we combine these pieces into the formal law.
+
+`,
       before:``,
-      after:``,
+      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
   
     },
     law:{
@@ -617,6 +619,7 @@ export default function TotalProbabilityPage({seoData,sectionsContent , introCon
         link:'',
         content:[
           sectionsContent.notation.content,
+          sectionsContent.notation.after,
         ]
     },
     {

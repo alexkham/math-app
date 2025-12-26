@@ -54,9 +54,11 @@ Before writing the independence formulas, we fix the symbols used to describe th
 - $P(A \\cap B)$ — the event in which both occur  
 
 These symbols allow us to express independence in a compact way once the formal statements appear in the following section.
+
+
 `,
       before:``,
-      after:``,
+      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
   
     },
     formula:{
@@ -275,6 +277,7 @@ export default function IndependencePage({seoData,sectionsContent , introContent
         link:'',
         content:[
             sectionsContent.notation.content,
+            sectionsContent.notation.after,
         ]
     },
     {

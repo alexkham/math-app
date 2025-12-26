@@ -107,9 +107,10 @@ $\(\\Omega\)$ — the sample space (the set of all possible outcomes)
  Events as subsets of the sample space: $\(A \\subseteq \\Omega\)$
 
 These symbols will appear throughout the page whenever we describe outcomes or refer to parts of the sample space.
+
 `,
       before:``,
-      after:``,
+      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
   
     },
   
@@ -314,6 +315,7 @@ export default function SampleSpacePage({seoData,sectionsContent , introContent}
         link:'',
         content:[
             sectionsContent.notation.content,
+            sectionsContent.notation.after,
         ]
     },
     {

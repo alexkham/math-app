@@ -150,9 +150,11 @@ $\\operatorname{Cov}(Y,X)$ represent the same quantity.
 
 When a random variable is paired with itself, covariance reduces to variance.  
 This relationship links covariance directly to concepts introduced earlier.
+
+
 `,
       before:``,
-      after:``,
+      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
       link:'',
   
     },
@@ -330,6 +332,7 @@ export default function CovariancePage({seoData,sectionsContent , introContent})
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          sectionsContent.obj7.after,
         ]
     },
     {

@@ -72,7 +72,7 @@ Before writing Bayes' theorem formally, we fix the symbols used to describe the 
 This notation makes it clear which quantities are known, which are updated, and how conditional probability is used to connect them in the formula that follows.
 `,
       before:``,
-      after:``,
+      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
   
     },
     formula:{
@@ -82,7 +82,7 @@ Bayes' theorem expresses the update of probability in a single relation built fr
 
 $P(A \\mid B) = \\dfrac{P(B \\mid A)\,P(A)}{P(B)}$
 
-Each part of the formula has a clear role. The term $P(A)$ represents the starting assessment before any information is known. The term $P(B \mid A)$ measures how compatible the observation is with that situation. The denominator $P(B)$ ensures that the updated probabilities remain properly scaled.
+Each part of the formula has a clear role. The term $P(A)$ represents the starting assessment before any information is known. The term $P(B \\mid A)$ measures how compatible the observation is with that situation. The denominator $P(B)$ ensures that the updated probabilities remain properly scaled.
 
 This formula does not introduce a new rule. It follows directly from the definition of conditional probability and the basic structure of probability theory.
 `,
@@ -287,6 +287,7 @@ export default function BayesPage({seoData,sectionsContent , introContent}) {
         link:'',
         content:[
           sectionsContent.notation.content,
+          sectionsContent.notation.after,
         ]
     },
     {
