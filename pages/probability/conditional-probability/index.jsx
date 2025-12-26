@@ -411,7 +411,7 @@ export default function ConditionalProbabilityPage({seoData,sectionsContent , in
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -430,7 +430,12 @@ export default function ConditionalProbabilityPage({seoData,sectionsContent , in
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Conditional Probability</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+    secondaryNavMode="siblings"  // or "siblings"
+    secondaryNavTitle="Other Pages in Probability Section" 
+   
+   />
    <br/>
    <br/>
    <br/>
@@ -448,7 +453,7 @@ export default function ConditionalProbabilityPage({seoData,sectionsContent , in
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

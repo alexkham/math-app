@@ -392,7 +392,7 @@ export default function IndependencePage({seoData,sectionsContent , introContent
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -411,7 +411,11 @@ export default function IndependencePage({seoData,sectionsContent , introContent
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Independence of Events</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+    secondaryNavMode="siblings"  // or "siblings"
+    secondaryNavTitle="Other Pages in Probability Section" 
+   />
    <br/>
    <br/>
    <br/>
@@ -429,7 +433,7 @@ export default function IndependencePage({seoData,sectionsContent , introContent
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

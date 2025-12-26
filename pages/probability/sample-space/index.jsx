@@ -422,7 +422,7 @@ export default function SampleSpacePage({seoData,sectionsContent , introContent}
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -464,7 +464,7 @@ export default function SampleSpacePage({seoData,sectionsContent , introContent}
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

@@ -515,7 +515,11 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Probability Inequalities</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+    secondaryNavMode="siblings"  // or "siblings"
+    secondaryNavTitle="Other Pages in Probability Section" 
+   />
    <br/>
    <br/>
    <br/>

@@ -756,7 +756,7 @@ export default function TotalProbabilityPage({seoData,sectionsContent , introCon
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -798,7 +798,7 @@ export default function TotalProbabilityPage({seoData,sectionsContent , introCon
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

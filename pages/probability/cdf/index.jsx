@@ -500,7 +500,12 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Cumulative Distribution Function (CDF)</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+    secondaryNavMode="siblings"  // or "siblings"
+    secondaryNavTitle="Other Pages in Probability Section" 
+   
+   />
    <br/>
    <br/>
    <br/>
@@ -514,7 +519,9 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
         />
    <br/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections}
+   
+   />
    <br/>
    <br/>
    <br/>

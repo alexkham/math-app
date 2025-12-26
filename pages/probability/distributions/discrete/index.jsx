@@ -1373,7 +1373,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -1392,7 +1392,11 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Discrete Distributions</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+    secondaryNavMode="siblings"  // or "siblings"
+    secondaryNavTitle="Other Pages in Probability Section" 
+   />
    <br/>
    <br/>
    <br/>
@@ -1410,7 +1414,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

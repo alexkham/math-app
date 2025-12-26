@@ -82,7 +82,13 @@ Bayes' theorem expresses the update of probability in a single relation built fr
 
 $P(A \\mid B) = \\dfrac{P(B \\mid A)\,P(A)}{P(B)}$
 
-Each part of the formula has a clear role. The term $P(A)$ represents the starting assessment before any information is known. The term $P(B \\mid A)$ measures how compatible the observation is with that situation. The denominator $P(B)$ ensures that the updated probabilities remain properly scaled.
+Each part of the formula has a clear role.
+
+The term $P(A)$ represents the starting assessment before any information is known. 
+
+The term $P(B \\mid A)$ measures how compatible the observation is with that situation. 
+
+The denominator $P(B)$ ensures that the updated probabilities remain properly scaled.
 
 This formula does not introduce a new rule. It follows directly from the definition of conditional probability and the basic structure of probability theory.
 `,
@@ -152,7 +158,7 @@ These examples show Bayes' theorem as a reasoning tool rather than a calculation
       content:`
 Bayes' theorem is often misapplied, not because the formula is difficult, but because its structure is misunderstood.
 
-A frequent mistake is confusing $P(A \mid B)$ with $P(B \mid A)$. These two quantities describe different questions, and swapping them can completely change the interpretation of a result.
+A frequent mistake is confusing $P(A \\mid B)$ with $P(B \\mid A)$. These two quantities describe different questions, and swapping them can completely change the interpretation of a result.
 
 Another common error is ignoring the starting probabilities and focusing only on how well an observation fits a situation. This leads to conclusions that feel intuitive but are mathematically inconsistent.
 
@@ -441,7 +447,12 @@ export default function BayesPage({seoData,sectionsContent , introContent}) {
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Bayes&apos; Theorem</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+    secondaryNavMode="siblings"  // or "siblings"
+    secondaryNavTitle="Other Pages in Probability Section" 
+   
+   />
    <br/>
    <br/>
    <br/>

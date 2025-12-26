@@ -456,7 +456,7 @@ export default function ProbabilityFunctionPage({seoData,sectionsContent , intro
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -496,7 +496,7 @@ export default function ProbabilityFunctionPage({seoData,sectionsContent , intro
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

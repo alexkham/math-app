@@ -378,7 +378,7 @@ export default function ExpectedValuePage({seoData,sectionsContent , introConten
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -418,7 +418,7 @@ export default function ExpectedValuePage({seoData,sectionsContent , introConten
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

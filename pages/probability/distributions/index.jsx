@@ -305,7 +305,7 @@ continuousDistributionsTypesData}) {
 
   return (
    <>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -354,7 +354,7 @@ continuousDistributionsTypesData}) {
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
 
 
    </>
