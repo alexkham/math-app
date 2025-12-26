@@ -23,180 +23,12 @@ export async function getStaticProps(){
     const sectionsContent={
 
 
-//   normal:{
-//   title:`Normal Distribution`,
-//   content:``,
-//   before:``,
-//   after:``,
-//   checklist:`<h2 style="color: #52525b; margin-top: 0; font-size: 20px;">
-// <span style="background: #71717a; color: white; padding: 5px 14px; border-radius: 4px; margin-right: 10px; font-weight: 600; font-size: 14px; display: inline-block;">✓</span>
-// Checklist for Identifying a Normal Distribution
-// </h2>
-// ✔ Data clusters symmetrically around a central value (the mean).<br>
-// ✔ Most values fall near the mean, with frequency decreasing as you move away.<br>
-// ✔ The distribution is bell-shaped and symmetric.<br>
-// ✔ <strong>Random variable X</strong> represents continuous measurements that can be positive or negative.<br>
-// ✔ Applicable to natural phenomena, measurement errors, and sums of random variables (Central Limit Theorem).`,
-
-//   parameters:`<h3 style="color: #475569; margin-top: 0; font-size: 18px;">
-// <span style="background: #64748b; color: white; padding: 5px 14px; border-radius: 4px; margin-right: 10px; font-weight: 600; font-size: 14px; display: inline-block;">θ</span>
-// Parameters of Normal Distribution
-// </h3>
-// <strong>μ</strong> (mu): mean or center of the distribution, where $\\mu \\in \\mathbb{R}$
-
-// <strong>σ</strong> (sigma): standard deviation, measuring spread around the mean, where $\\sigma > 0$
-
-// <div style="background: #f1f5f9; border-left: 3px solid #64748b; padding: 12px 16px; margin: 12px 0; border-radius: 4px; font-size: 14px;">
-// The normal distribution is fully characterized by these two parameters. <strong>μ</strong> determines the location (where the peak sits on the number line), while <strong>σ</strong> controls the spread (how wide or narrow the bell curve is). Variance is $\\sigma^2$, but we typically use $\\sigma$ as the primary parameter since it's in the same units as the data.
-// </div>`,
-
-//   notation:`<h3 style="color: #334155; margin-top: 0; font-size: 18px;">
-// <span style="background: #94a3b8; color: white; padding: 5px 14px; border-radius: 4px; margin-right: 10px; font-weight: 600; font-size: 14px; display: inline-block;">N</span>
-// Notations Used
-// </h3>
-// <strong>$X \\sim N(\\mu, \\sigma^2)$</strong> — distribution of the random variable (variance notation).
-
-// <strong>$X \\sim \\text{Normal}(\\mu, \\sigma^2)$</strong> — alternative explicit form.
-
-// <strong>$N(\\mu, \\sigma^2)$</strong> — used to denote the distribution itself (not the random variable).
-
-// <strong>$N(0, 1)$</strong> — the standard normal distribution ($\\mu = 0, \\sigma = 1$).
-
-// <strong>$Z \\sim N(0, 1)$</strong> — conventional notation for a standard normal random variable.
-
-// <div style="background: #e0f2fe; border-left: 3px solid #0ea5e9; padding: 12px 16px; margin: 12px 0; border-radius: 4px; font-size: 14px;">
-// <strong>Note:</strong> Some texts use $N(\\mu, \\sigma)$ with standard deviation instead of variance. Always check which convention is being used. Statistical software often defaults to variance notation.
-// </div>
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
-
-//   pdf:`<h3 style="color: #1e40af; margin-top: 0; font-size: 18px;">
-// <span style="background: #3b82f6; color: white; padding: 5px 14px; border-radius: 4px; margin-right: 10px; font-weight: 600; font-size: 14px; display: inline-block;">f(x)</span>
-// Probability Density Function (PDF)
-// </h3>
-
-// The <strong>probability density function (PDF)</strong> of a <strong>normal distribution</strong> is given by:
-
-// $$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}, \\quad -\\infty < x < \\infty$$
-
-// ### Intuition Behind the Formula
-
-// * **Bell-Shaped Curve**: The normal distribution creates a symmetric, bell-shaped curve centered at $\\mu$.
-
-// * **Parameters**:
-//   * $\\mu$: The mean determines where the center of the bell sits
-//   * $\\sigma$: The standard deviation controls the width of the bell
-//   * $\\sigma^2$: The variance ($\\sigma$ squared) appears in the exponent
-
-// * **Support (Range of the Random Variable)**:
-//   * The random variable $X$ can take any real value: $(-\\infty, +\\infty)$
-//   * While theoretically unbounded, approximately 99.7% of values fall within $\\mu \\pm 3\\sigma$
-//   * The <strong>support</strong> is the entire real line
-
-// * **Logic Behind the Formula**:
-//   * $\\frac{1}{\\sigma\\sqrt{2\\pi}}$: Normalization constant ensuring total area equals 1
-//   * $(x-\\mu)^2$: Squared distance from the mean (makes curve symmetric)
-//   * $e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$: Exponential decay as you move away from $\\mu$
-//   * The total area under the curve equals 1:
-  
-//   $$\\int_{-\\infty}^{\\infty} f(x)\\,dx = 1$$
-
-// <div style="background: #dbeafe; border-left: 3px solid #3b82f6; padding: 12px 16px; margin: 12px 0; border-radius: 4px; font-size: 14px;">
-// <strong>Practical Example:</strong> Human heights follow approximately a normal distribution. If adult male heights have $\\mu = 175$ cm and $\\sigma = 7$ cm, then $X \\sim N(175, 49)$. The PDF tells us the relative likelihood of observing different heights, with the peak at 175 cm and decreasing probability as we move toward very short or very tall individuals.
-// </div>`,
-
-//   cdf:`<h3 style="color: #1e3a8a; margin-top: 0; font-size: 18px;">
-// <span style="background: #2563eb; color: white; padding: 5px 14px; border-radius: 4px; margin-right: 10px; font-weight: 600; font-size: 14px; display: inline-block;">F(x)</span>
-// Cumulative Distribution Function (CDF)
-// </h3>
-
-// The <strong>cumulative distribution function (CDF)</strong> gives the probability that $X$ is less than or equal to a specific value:
-
-// $$F(x) = P(X \\leq x) = \\int_{-\\infty}^{x} \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(t-\\mu)^2}{2\\sigma^2}}\\,dt$$
-
-// **Standard Normal CDF**: For the standard normal distribution $N(0, 1)$, the CDF is traditionally denoted by $\\Phi(z)$:
-
-// $$\\Phi(z) = P(Z \\leq z) = \\int_{-\\infty}^{z} \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{t^2}{2}}\\,dt$$
-
-// **Key Properties**:
-// * $F(-\\infty) = 0$ and $F(+\\infty) = 1$
-// * $F(\\mu) = 0.5$ (the mean is the 50th percentile)
-// * The CDF is strictly increasing and S-shaped
-// * Any normal CDF can be expressed using the standard normal: $F(x) = \\Phi\\left(\\frac{x-\\mu}{\\sigma}\\right)$
-
-// <div style="background: #bfdbfe; border-left: 3px solid #2563eb; padding: 12px 16px; margin: 12px 0; border-radius: 4px; font-size: 14px;">
-// <strong>Practical Use:</strong> The normal CDF has no closed-form expression, so we use tables, calculators, or software. To find $P(X \\leq 180)$ when $X \\sim N(175, 49)$, convert to standard normal: $Z = (180-175)/7 \\approx 0.714$, then look up $\\Phi(0.714) \\approx 0.762$, meaning about 76.2% of values fall below 180.
-// </div>`,
-
-//   meanVariance:`<h3 style="color: #1e3a8a; margin-top: 0; font-size: 18px;">
-// <span style="background: #1d4ed8; color: white; padding: 5px 14px; border-radius: 4px; margin-right: 10px; font-weight: 600; font-size: 14px; display: inline-block;">μ,σ²</span>
-// Mean and Variance
-// </h3>
-
-// **Expected Value (Mean)**:
-
-// $$E[X] = \\mu$$
-
-// The mean of a normal distribution is simply the parameter $\\mu$. This is also the median and mode—all three measures of center coincide for the normal distribution due to its symmetry.
-
-// **Variance**:
-
-// $$\\text{Var}(X) = \\sigma^2$$
-
-// The variance equals the parameter $\\sigma^2$. This measures the average squared deviation from the mean.
-
-// **Standard Deviation**:
-
-// $$\\text{SD}(X) = \\sigma$$
-
-// Standard deviation $\\sigma$ is more interpretable than variance because it's in the same units as the original data. It represents the typical distance of observations from the mean.
-
-// <div style="background: #93c5fd; border-left: 3px solid #1d4ed8; padding: 12px 16px; margin: 12px 0; border-radius: 4px; font-size: 14px;">
-// <strong>Empirical Rule (68-95-99.7)</strong>:<br>
-// - Approximately 68% of data falls within $\\mu \\pm \\sigma$<br>
-// - Approximately 95% of data falls within $\\mu \\pm 2\\sigma$<br>
-// - Approximately 99.7% of data falls within $\\mu \\pm 3\\sigma$
-// </div>`,
-
-//   keyProperties:`<h3 style="color: #1e3a8a; margin-top: 0; font-size: 18px;">
-// <span style="background: #1e40af; color: white; padding: 5px 14px; border-radius: 4px; margin-right: 10px; font-weight: 600; font-size: 14px; display: inline-block;">★</span>
-// Key Properties and Special Characteristics
-// </h3>
-
-// **Symmetry**: The normal distribution is perfectly symmetric about its mean. This means $P(X \\leq \\mu - a) = P(X \\geq \\mu + a)$ for any value $a$.
-
-// **Unimodal**: The distribution has a single peak (mode) at $x = \\mu$, where the probability density is highest.
-
-// **Asymptotic**: The tails approach (but never touch) the horizontal axis as $x \\to \\pm\\infty$. Theoretically, any value is possible, though extreme values are increasingly unlikely.
-
-// **Central Limit Theorem**: Perhaps the most important property—the sum or average of independent random variables tends toward a normal distribution as sample size increases, regardless of the original distribution (with some conditions).
-
-// **Linear Transformations**: If $X \\sim N(\\mu, \\sigma^2)$, then $aX + b \\sim N(a\\mu + b, a^2\\sigma^2)$. This property preserves normality under scaling and shifting.
-
-// **Standardization**: Any normal random variable can be standardized: $Z = \\frac{X - \\mu}{\\sigma}$ gives $Z \\sim N(0, 1)$, the standard normal distribution.
-
-// **Sums of Normals**: If $X_1 \\sim N(\\mu_1, \\sigma_1^2)$ and $X_2 \\sim N(\\mu_2, \\sigma_2^2)$ are independent, then $X_1 + X_2 \\sim N(\\mu_1 + \\mu_2, \\sigma_1^2 + \\sigma_2^2)$.
-
-// **Maximum Entropy**: Among all distributions with specified mean and variance, the normal distribution has the maximum entropy (it's the "least informative" or "most random" distribution given those constraints).
-
-// <div style="background: rgba(255,255,255,0.3); border-left: 3px solid #1e40af; padding: 12px 16px; margin: 12px 0; border-radius: 4px; font-size: 14px;">
-// <strong>Why It Matters:</strong> The normal distribution appears throughout statistics because of the Central Limit Theorem. Many statistical methods (t-tests, ANOVA, regression) assume normality or rely on it through the CLT. Understanding these properties helps you recognize when normal approximations are appropriate and when they break down.
-// </div>`
-// },
-
 normal:{
   title:`Normal Distribution`,
   content:``,
   before:``,
   after:``,
   
-//  checklist:`<h2 style="color: #52525b;"><span style="background: #71717a; color: white; padding: 5px 14px; border-radius: 4px; margin-right: 10px; font-weight: 600; font-size: 14px; display: inline-block;">✓</span>Checklist for Identifying a Normal Distribution</h2>
-// ✔ Data clusters symmetrically around a central value (the mean).
-// ✔ Most values fall near the mean, with frequency decreasing as you move away.
-// ✔ The distribution is bell-shaped and symmetric.
-// ✔ Random variable X represents continuous measurements that can be positive or negative.
-// ✔ Applicable to natural phenomena, measurement errors, and sums of random variables (Central Limit Theorem).`,
-
 checklist:`<h2 style="color: #52525b;"> Checklist for Identifying a Normal Distribution</h2>
 ✔ Data clusters symmetrically around a central value (the mean).
 ✔ Most values fall near the mean, with frequency decreasing as you move away.
@@ -204,7 +36,7 @@ checklist:`<h2 style="color: #52525b;"> Checklist for Identifying a Normal Distr
 ✔ Random variable X represents continuous measurements that can be positive or negative.
 ✔ Applicable to natural phenomena, measurement errors, and sums of random variables (Central Limit Theorem).
 `,
-//  
+ 
 
 parameters:`<h3 style="color: #475569;">Parameters of Normal Distribution</h3>
 **μ** (mu): mean or center of the distribution, where $\\mu \\in \\mathbb{R}$
@@ -213,24 +45,6 @@ parameters:`<h3 style="color: #475569;">Parameters of Normal Distribution</h3>
 
 The normal distribution is fully characterized by these two parameters. **μ** determines the location (where the peak sits on the number line), while **σ** controls the spread (how wide or narrow the bell curve is). Variance is $\\sigma^2$, but we typically use $\\sigma$ as the primary parameter since it's in the same units as the data.`,
 
-
-//   notation:`<h3 style="color: #334155;">
-// <span style="background: #94a3b8; color: white; padding: 5px 14px; border-radius: 4px; margin-right: 10px; font-weight: 600; font-size: 14px; display: inline-block;">N</span>
-// Notations Used
-// </h3>
-// **$X \\sim N(\\mu, \\sigma^2)$** — distribution of the random variable (variance notation).
-
-// **$X \\sim \\text{Normal}(\\mu, \\sigma^2)$** — alternative explicit form.
-
-// **$N(\\mu, \\sigma^2)$** — used to denote the distribution itself (not the random variable).
-
-// **$N(0, 1)$** — the standard normal distribution ($\\mu = 0, \\sigma = 1$).
-
-// **$Z \\sim N(0, 1)$** — conventional notation for a standard normal random variable.
-
-// **Note:** Some texts use $N(\\mu, \\sigma)$ with standard deviation instead of variance. Always check which convention is being used. Statistical software often defaults to variance notation.
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
 
  notation:`<h3 style="color: #334155;">Notations Used</h3>
 $X \\sim N(\\mu, \\sigma^2)$ — distribution of the random variable (variance notation).
@@ -248,38 +62,6 @@ $Z \\sim N(0, 1)$ — conventional notation for a standard normal random variabl
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
 
 
-// pdf:`<h3 style="color: #1e40af;">
-// <span style="background: #3b82f6; color: white; padding: 5px 14px; border-radius: 4px; margin-right: 10px; font-weight: 600; font-size: 14px; display: inline-block;">f(x)</span>
-// Probability Density Function (PDF)
-// </h3>
-
-// The **probability density function (PDF)** of a **normal distribution** is given by:
-
-// $$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}, \\quad -\\infty < x < \\infty$$
-
-// ### Intuition Behind the Formula
-
-// * **Bell-Shaped Curve**: The normal distribution creates a symmetric, bell-shaped curve centered at $\\mu$.
-
-// * **Parameters**:
-//   * $\\mu$: The mean determines where the center of the bell sits
-//   * $\\sigma$: The standard deviation controls the width of the bell
-//   * $\\sigma^2$: The variance ($\\sigma$ squared) appears in the exponent
-
-// * **Support (Range of the Random Variable)**:
-//   * The random variable $X$ can take any real value: $(-\\infty, +\\infty)$
-//   * While theoretically unbounded, approximately 99.7% of values fall within $\\mu \\pm 3\\sigma$
-//   * The **support** is the entire real line
-
-// * **Logic Behind the Formula**:
-//   * $\\frac{1}{\\sigma\\sqrt{2\\pi}}$: Normalization constant ensuring total area equals 1
-//   * $(x-\\mu)^2$: Squared distance from the mean (makes curve symmetric)
-//   * $e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$: Exponential decay as you move away from $\\mu$
-//   * The total area under the curve equals 1:
-  
-//   $$\\int_{-\\infty}^{\\infty} f(x)\\,dx = 1$$
-
-// **Practical Example:** Human heights follow approximately a normal distribution. If adult male heights have $\\mu = 175$ cm and $\\sigma = 7$ cm, then $X \\sim N(175, 49)$. The PDF tells us the relative likelihood of observing different heights, with the peak at 175 cm and decreasing probability as we move toward very short or very tall individuals.`,
 
 pdf:`<h3 style="color: #1e40af;">Probability Density Function (PDF)</h3>
 The **probability density function (PDF)** of a **normal distribution** is given by:
@@ -308,14 +90,9 @@ $$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}, \\
   
   $$\\int_{-\\infty}^{\\infty} f(x)\\,dx = 1$$
 
-**Practical Example:** Human heights follow approximately a normal distribution. If adult male heights have $\\mu = 175$ cm and $\\sigma = 7$ cm, then $X \\sim N(175, 49)$. The PDF tells us the relative likelihood of observing different heights, with the peak at 175 cm and decreasing probability as we move toward very short or very tall individuals.`,  
+**Practical Example:** Human heights follow approximately a normal distribution. If adult male heights have $\\mu = 175$ cm and $\\sigma = 7$ cm, then $X \\sim N(175, 49)$. The PDF tells us the relative likelihood of observing different heights, with the peak at 175 cm and decreasing probability as we move toward very short or very tall individuals.`,
 
-
-cdf:`<h3 style="color: #1e3a8a;">
-<span style="background: #2563eb; color: white; padding: 5px 14px; border-radius: 4px; margin-right: 10px; font-weight: 600; font-size: 14px; display: inline-block;">F(x)</span>
-Cumulative Distribution Function (CDF)
-</h3>
-
+cdf:`<h3 style="color: #1e3a8a;">Cumulative Distribution Function (CDF)</h3>
 The **cumulative distribution function (CDF)** gives the probability that $X$ is less than or equal to a specific value:
 
 $$F(x) = P(X \\leq x) = \\int_{-\\infty}^{x} \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(t-\\mu)^2}{2\\sigma^2}}\\,dt$$
@@ -332,11 +109,7 @@ $$\\Phi(z) = P(Z \\leq z) = \\int_{-\\infty}^{z} \\frac{1}{\\sqrt{2\\pi}} e^{-\\
 
 **Practical Use:** The normal CDF has no closed-form expression, so we use tables, calculators, or software. To find $P(X \\leq 180)$ when $X \\sim N(175, 49)$, convert to standard normal: $Z = (180-175)/7 \\approx 0.714$, then look up $\\Phi(0.714) \\approx 0.762$, meaning about 76.2% of values fall below 180.`,
 
-  meanVariance:`<h3 style="color: #1e3a8a;">
-<span style="background: #1d4ed8; color: white; padding: 5px 14px; border-radius: 4px; margin-right: 10px; font-weight: 600; font-size: 14px; display: inline-block;">μ,σ²</span>
-Mean and Variance
-</h3>
-
+meanVariance:`<h3 style="color: #1e3a8a;">Mean and Variance</h3>
 **Expected Value (Mean)**:
 
 $$E[X] = \\mu$$
@@ -356,15 +129,11 @@ $$\\text{SD}(X) = \\sigma$$
 Standard deviation $\\sigma$ is more interpretable than variance because it's in the same units as the original data. It represents the typical distance of observations from the mean.
 
 **Empirical Rule (68-95-99.7)**:
-- Approximately 68% of data falls within $\\mu \\pm \\sigma$
-- Approximately 95% of data falls within $\\mu \\pm 2\\sigma$
-- Approximately 99.7% of data falls within $\\mu \\pm 3\\sigma$`,
+• Approximately 68% of data falls within $\\mu \\pm \\sigma$
+• Approximately 95% of data falls within $\\mu \\pm 2\\sigma$
+• Approximately 99.7% of data falls within $\\mu \\pm 3\\sigma$`,
 
-  keyProperties:`<h3 style="color: #1e3a8a;">
-<span style="background: #1e40af; color: white; padding: 5px 14px; border-radius: 4px; margin-right: 10px; font-weight: 600; font-size: 14px; display: inline-block;">★</span>
-Key Properties and Special Characteristics
-</h3>
-
+keyProperties:`<h3 style="color: #1e3a8a;">Key Properties and Special Characteristics</h3>
 **Symmetry**: The normal distribution is perfectly symmetric about its mean. This means $P(X \\leq \\mu - a) = P(X \\geq \\mu + a)$ for any value $a$.
 
 **Unimodal**: The distribution has a single peak (mode) at $x = \\mu$, where the probability density is highest.
@@ -381,27 +150,270 @@ Key Properties and Special Characteristics
 
 **Maximum Entropy**: Among all distributions with specified mean and variance, the normal distribution has the maximum entropy (it's the "least informative" or "most random" distribution given those constraints).
 
-**Why It Matters:** The normal distribution appears throughout statistics because of the Central Limit Theorem. Many statistical methods (t-tests, ANOVA, regression) assume normality or rely on it through the CLT. Understanding these properties helps you recognize when normal approximations are appropriate and when they break down.`
+**Why It Matters:** The normal distribution appears throughout statistics because of the Central Limit Theorem. Many statistical methods (t-tests, ANOVA, regression) assume normality or rely on it through the CLT. Understanding these properties helps you recognize when normal approximations are appropriate and when they break down.`,
 },
 
 
+// uniform:{
+//       title:`Uniform Continuous Distribution`,
+//       content:``,
+//       before:``,
+//       after:``,
+  
+//     },
 uniform:{
-      title:`Uniform Continuous Distribution`,
-      content:``,
-      before:``,
-      after:``,
+  title:`Continuous Uniform Distribution`,
+  content:``,
+  before:``,
+  after:``,
   
-    },
+  checklist:`<h2 style="color: #52525b;"> Checklist for Identifying a Continuous Uniform Distribution</h2>
+✔ All values in a continuous interval are equally likely.
+✔ The probability density is constant across the entire range.
+✔ The distribution has a rectangular shape when graphed.
+✔ Random variable X can take any value within a finite interval [a, b].
+✔ Often models situations with complete uncertainty within known bounds.`,
+
+  parameters:`<h3 style="color: #475569;">Parameters of Continuous Uniform Distribution</h3>
+**a**: lower bound of the interval, where $a \\in \\mathbb{R}$
+
+**b**: upper bound of the interval, where $b \\in \\mathbb{R}$ and $b > a$
+
+The continuous uniform distribution is fully characterized by these two parameters. **a** and **b** define the endpoints of the interval where the random variable can take values. The distribution assigns equal probability density to every point in this interval, making it the simplest continuous distribution.`,
+
+  notation:`<h3 style="color: #334155;">Notations Used</h3>
+$X \\sim U(a, b)$ — distribution of the random variable.
+
+$X \\sim \\text{Uniform}(a, b)$ — alternative explicit form.
+
+$U(a, b)$ or $\\text{Unif}(a, b)$ — used to denote the distribution itself (not the random variable).
+
+$U(0, 1)$ — the standard uniform distribution on the unit interval.
+
+**Note:** The continuous uniform distribution is distinct from the discrete uniform distribution. The continuous version has a probability density function, while the discrete version has a probability mass function.
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
+
+  pdf:`<h3 style="color: #1e40af;">Probability Density Function (PDF)</h3>
+The **probability density function (PDF)** of a **continuous uniform distribution** is given by:
+
+$$f(x) = \\begin{cases} \\frac{1}{b-a} & \\text{if } a \\leq x \\leq b \\\\ 0 & \\text{otherwise} \\end{cases}$$
+
+### Intuition Behind the Formula
+
+* **Constant Density**: The uniform distribution has a flat, rectangular shape. The probability density is the same at every point within the interval [a, b].
+
+* **Parameters**:
+  * $a$: The minimum value the random variable can take
+  * $b$: The maximum value the random variable can take
+  * The width of the interval is $b - a$
+
+* **Support (Range of the Random Variable)**:
+  * The random variable $X$ can take any value in the closed interval: $[a, b]$
+  * Outside this interval, the probability density is zero
+  * The **support** is the finite interval [a, b]
+
+* **Logic Behind the Formula**:
+  * $\\frac{1}{b-a}$: The constant density ensures the total area under the curve equals 1
+  * The height of the rectangle is $\\frac{1}{b-a}$ and the width is $b-a$, so area = height × width = 1
+  * All subintervals of the same length have equal probability
+  * The total area under the curve equals 1:
   
-    exponential:{
+  $$\\int_{a}^{b} \\frac{1}{b-a}\\,dx = \\frac{1}{b-a} \\cdot (b-a) = 1$$
+
+**Practical Example:** A bus arrives at a stop every 10 minutes. If you arrive at a random time, your wait time $X$ follows $U(0, 10)$. The PDF is $f(x) = \\frac{1}{10} = 0.1$ for $0 \\leq x \\leq 10$. Any 2-minute interval within this range has the same probability: $P(3 \\leq X \\leq 5) = P(7 \\leq X \\leq 9) = 0.1 \\times 2 = 0.2$.`,
+
+  cdf:`<h3 style="color: #1e3a8a;">Cumulative Distribution Function (CDF)</h3>
+The **cumulative distribution function (CDF)** gives the probability that $X$ is less than or equal to a specific value:
+
+$$F(x) = \\begin{cases} 0 & \\text{if } x < a \\\\ \\frac{x-a}{b-a} & \\text{if } a \\leq x \\leq b \\\\ 1 & \\text{if } x > b \\end{cases}$$
+
+**Key Properties**:
+* $F(a) = 0$ (no probability mass below the lower bound)
+* $F(b) = 1$ (all probability mass is within [a, b])
+* The CDF increases linearly from 0 to 1 within the interval [a, b]
+* For any $x$ in [a, b], $F(x)$ represents the fraction of the interval covered from $a$ to $x$
+
+**Practical Use:** The CDF for the uniform distribution is particularly simple. To find $P(X \\leq x)$ when $X \\sim U(0, 10)$ and $x = 3$: $F(3) = \\frac{3-0}{10-0} = 0.3$, meaning 30% of values fall below 3. For any probability calculation: $P(c \\leq X \\leq d) = F(d) - F(c) = \\frac{d-a}{b-a} - \\frac{c-a}{b-a} = \\frac{d-c}{b-a}$.`,
+
+  meanVariance:`<h3 style="color: #1e3a8a;">Mean and Variance</h3>
+**Expected Value (Mean)**:
+
+$$E[X] = \\frac{a+b}{2}$$
+
+The mean of a uniform distribution is simply the midpoint of the interval. This reflects the distribution's perfect symmetry—the expected value lies exactly halfway between the bounds.
+
+**Variance**:
+
+$$\\text{Var}(X) = \\frac{(b-a)^2}{12}$$
+
+The variance measures spread around the mean. It depends on the square of the interval width. A wider interval means more variability in possible values.
+
+**Standard Deviation**:
+
+$$\\text{SD}(X) = \\frac{b-a}{\\sqrt{12}} = \\frac{b-a}{2\\sqrt{3}}$$
+
+Standard deviation is approximately 28.9% of the interval width. For a uniform distribution on [0, 10], the standard deviation is about 2.89.
+
+**Properties**:
+• The median equals the mean: both are $(a+b)/2$
+• Any value has equal density, but the distribution still has a well-defined center and spread
+• Approximately 86.6% of values fall within one standard deviation of the mean (compared to 68% for normal)`,
+
+  keyProperties:`<h3 style="color: #1e3a8a;">Key Properties and Special Characteristics</h3>
+**Perfect Symmetry**: The uniform distribution is symmetric about its mean $(a+b)/2$. The probability density is identical at equal distances from the center: $f(\\mu - d) = f(\\mu + d)$ for any $d$.
+
+**Memoryless in Relative Terms**: While not memoryless in the exponential sense, the uniform distribution has no "preferred" region—every subinterval of equal length has equal probability.
+
+**Bounded Support**: Unlike the normal or exponential distributions, the uniform distribution has strict bounds. Values outside [a, b] have zero probability, making it ideal for modeling quantities with known limits.
+
+**Maximum Entropy**: Among all continuous distributions with bounded support [a, b], the uniform distribution has maximum entropy. It represents complete uncertainty about where the value will fall within the interval—no region is favored over any other.
+
+**Linear CDF**: The CDF increases at a constant rate within [a, b]. This linearity makes probability calculations particularly straightforward and intuitive.
+
+**Transformation Properties**: Linear transformations preserve uniformity. If $X \\sim U(a, b)$, then $cX + d \\sim U(ca + d, cb + d)$ for $c > 0$. This includes the important case that $\\frac{X-a}{b-a} \\sim U(0, 1)$, the standard uniform.
+
+**Relation to Other Distributions**: The standard uniform $U(0, 1)$ is fundamental in probability theory and simulation. Most random number generators produce uniform random numbers, which can then be transformed to generate samples from any other distribution using the inverse transform method.
+
+**Order Statistics**: For a sample from $U(0, 1)$, the order statistics have well-known beta distributions, making the uniform distribution central to the study of order statistics.
+
+**Why It Matters:** The uniform distribution represents the principle of indifference—when all outcomes in an interval are equally likely. It's essential for modeling complete uncertainty within known bounds, serves as the foundation for random number generation, and appears in numerous statistical procedures and simulation methods.`,
+},  
+ 
+
+
+
+// exponential:{
   
-      title:`Exponential Distribution`,
-      content:``,
-      before:``,
-      after:``,
+//       title:`Exponential Distribution`,
+//       content:``,
+//       before:``,
+//       after:``,
   
-    },
-    what:{
+//     },
+    
+
+exponential:{
+  title:`Exponential Distribution`,
+  content:``,
+  before:``,
+  after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use continuous distributions calculator](!/probability/calculator/continuous-distributions?tab=2) →@`,
+  
+  checklist:`<h2 style="color: #52525b;"> Checklist for Identifying an Exponential Distribution</h2>
+✔ Models the time until an event occurs in a continuous process.
+✔ Events occur independently at a constant average rate.
+✔ The distribution is memoryless: past waiting time doesn't affect future waiting time.
+✔ Random variable X represents waiting time, which is always non-negative.
+✔ Commonly used for modeling lifetimes, time between arrivals, and decay processes.`,
+
+  parameters:`<h3 style="color: #475569;">Parameters of Exponential Distribution</h3>
+**λ** (lambda): rate parameter, where $\\lambda > 0$
+
+The exponential distribution is fully characterized by a single parameter. **λ** represents the average rate at which events occur per unit time. Alternatively, the distribution is sometimes parameterized by $\\beta = 1/\\lambda$, the scale parameter, which represents the mean waiting time. Higher λ means events occur more frequently (shorter waiting times), while lower λ means events are rarer (longer waiting times).`,
+
+  notation:`<h3 style="color: #334155;">Notations Used</h3>
+$X \\sim \\text{Exp}(\\lambda)$ — distribution of the random variable (rate parameterization).
+
+$X \\sim \\text{Exponential}(\\lambda)$ — alternative explicit form.
+
+$\\text{Exp}(\\lambda)$ — used to denote the distribution itself (not the random variable).
+
+$X \\sim \\text{Exp}(\\beta)$ — scale parameterization where $\\beta = 1/\\lambda$ is the mean.
+
+**Note:** Always check whether the parameter represents the rate (λ) or the scale (β = 1/λ). Statistical software may use either convention. The rate parameterization is more common in probability theory.
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
+
+  pdf:`<h3 style="color: #1e40af;">Probability Density Function (PDF)</h3>
+The **probability density function (PDF)** of an **exponential distribution** is given by:
+
+$$f(x) = \\begin{cases} \\lambda e^{-\\lambda x} & \\text{if } x \\geq 0 \\\\ 0 & \\text{if } x < 0 \\end{cases}$$
+
+### Intuition Behind the Formula
+
+* **Decreasing Density**: The exponential distribution has its highest density at x = 0 and decreases exponentially as x increases. This reflects that shorter waiting times are more likely than longer ones.
+
+* **Parameters**:
+  * $\\lambda$: The rate parameter controls how quickly the density decreases
+  * Higher $\\lambda$ means steeper decline (events happen more frequently)
+  * Lower $\\lambda$ means gentler decline (events happen less frequently)
+
+* **Support (Range of the Random Variable)**:
+  * The random variable $X$ can take any non-negative value: $[0, \\infty)$
+  * Time cannot be negative, so the support starts at zero
+  * Theoretically unbounded above, though very large values have low probability
+  * The **support** is the half-infinite interval $[0, \\infty)$
+
+* **Logic Behind the Formula**:
+  * $\\lambda$: The rate parameter also serves as the initial density at x = 0
+  * $e^{-\\lambda x}$: Exponential decay function ensuring rapid decrease for larger x
+  * The decay rate is proportional to λ: faster decay for larger λ
+  * The total area under the curve equals 1:
+  
+  $$\\int_{0}^{\\infty} \\lambda e^{-\\lambda x}\\,dx = \\lambda \\left[-\\frac{1}{\\lambda}e^{-\\lambda x}\\right]_{0}^{\\infty} = 1$$
+
+**Practical Example:** Customer service calls arrive at a help desk at an average rate of 5 per hour, so $\\lambda = 5$. The time $X$ (in hours) until the next call follows $\\text{Exp}(5)$. The PDF is $f(x) = 5e^{-5x}$ for $x \\geq 0$. The probability of waiting less than 6 minutes (0.1 hours) is $P(X \\leq 0.1) = 1 - e^{-5(0.1)} \\approx 0.393$, or about 39.3%.`,
+
+  cdf:`<h3 style="color: #1e3a8a;">Cumulative Distribution Function (CDF)</h3>
+The **cumulative distribution function (CDF)** gives the probability that $X$ is less than or equal to a specific value:
+
+$$F(x) = \\begin{cases} 0 & \\text{if } x < 0 \\\\ 1 - e^{-\\lambda x} & \\text{if } x \\geq 0 \\end{cases}$$
+
+**Key Properties**:
+* $F(0) = 0$ (no probability mass below zero)
+* $F(x) \\to 1$ as $x \\to \\infty$ (all probability is non-negative)
+* The CDF increases from 0 to 1, starting slowly and approaching 1 asymptotically
+* For any $x \\geq 0$, $P(X > x) = 1 - F(x) = e^{-\\lambda x}$ (survival function)
+
+**Memoryless Property**: The exponential distribution is the only continuous distribution with the memoryless property: $P(X > s + t \\mid X > s) = P(X > t)$. In terms of the CDF: knowing that $X > s$ doesn't change the probability that $X > s + t$ relative to waiting an additional time $t$ from the start.
+
+**Practical Use:** The exponential CDF is one of the simplest to work with. To find $P(X \\leq x)$ when $X \\sim \\text{Exp}(3)$ and $x = 2$: $F(2) = 1 - e^{-3(2)} = 1 - e^{-6} \\approx 0.9975$, meaning about 99.75% of values fall below 2. The complementary probability $P(X > 2) = e^{-6} \\approx 0.0025$.`,
+
+  meanVariance:`<h3 style="color: #1e3a8a;">Mean and Variance</h3>
+**Expected Value (Mean)**:
+
+$$E[X] = \\frac{1}{\\lambda}$$
+
+The mean of an exponential distribution is the reciprocal of the rate parameter. If events occur at rate λ per unit time, the average waiting time is 1/λ. For example, if λ = 5 events per hour, the mean wait time is 1/5 = 0.2 hours (12 minutes).
+
+**Variance**:
+
+$$\\text{Var}(X) = \\frac{1}{\\lambda^2}$$
+
+The variance equals the square of the mean. This unique relationship means that knowing the mean completely determines the variance, and vice versa. Higher variability accompanies longer average wait times.
+
+**Standard Deviation**:
+
+$$\\text{SD}(X) = \\frac{1}{\\lambda}$$
+
+Remarkably, the standard deviation equals the mean for the exponential distribution. This means the typical deviation from the mean is as large as the mean itself, reflecting the distribution's high skewness and long right tail.
+
+**Properties**:
+• The median is $\\ln(2)/\\lambda \\approx 0.693/\\lambda$, which is always less than the mean (reflecting right skewness)
+• The mode is 0 (the most likely value is the shortest possible wait time)
+• The coefficient of variation is always 1, regardless of λ`,
+
+  keyProperties:`<h3 style="color: #1e3a8a;">Key Properties and Special Characteristics</h3>
+**Memoryless Property**: The exponential distribution's most distinctive feature. If $X \\sim \\text{Exp}(\\lambda)$, then $P(X > s + t \\mid X > s) = P(X > t)$ for all $s, t \\geq 0$. The amount of time already waited doesn't affect the distribution of remaining waiting time. This is the continuous analog of the geometric distribution's memoryless property.
+
+**Heavy Right Tail**: The distribution is strongly right-skewed with a long tail extending toward infinity. While most values cluster near zero, there's always some probability of observing very large values. The skewness coefficient is exactly 2 for all exponential distributions.
+
+**Constant Hazard Rate**: The hazard rate (instantaneous failure rate) is constant and equal to λ. This means the risk of an event occurring in the next instant remains the same regardless of how much time has passed. This property is equivalent to memorylessness.
+
+**Relation to Poisson Process**: If events occur according to a Poisson process with rate λ, the time between consecutive events follows an exponential distribution with parameter λ. Conversely, if inter-arrival times are exponential with rate λ, the counting process is Poisson with rate λ.
+
+**Minimum of Exponentials**: If $X_1, X_2, \\ldots, X_n$ are independent exponential random variables with rates $\\lambda_1, \\lambda_2, \\ldots, \\lambda_n$, then $\\min(X_1, X_2, \\ldots, X_n) \\sim \\text{Exp}(\\lambda_1 + \\lambda_2 + \\cdots + \\lambda_n)$. The minimum of exponentials is exponential with rate equal to the sum of rates.
+
+**Sum of Exponentials**: The sum of $n$ independent $\\text{Exp}(\\lambda)$ random variables follows a gamma distribution with shape parameter $n$ and rate parameter λ. This connects the exponential to the broader gamma family.
+
+**Lack of Memory in Reliability**: In reliability engineering, the memoryless property implies that a component with exponential lifetime doesn't age—its probability of failure in the next time unit is the same whether it's new or has been functioning for years. This makes exponential distributions suitable for modeling random failures but not wear-out failures.
+
+**Transformation Properties**: If $X \\sim \\text{Exp}(\\lambda)$, then $cX \\sim \\text{Exp}(\\lambda/c)$ for $c > 0$. Scaling time scales the rate inversely.
+
+**Why It Matters:** The exponential distribution is fundamental in queuing theory, reliability analysis, and survival analysis. Its memoryless property makes it mathematically tractable while providing reasonable models for many random arrival and failure processes. It's the continuous-time analog of the geometric distribution and serves as the building block for more complex models like the gamma and Weibull distributions.`,
+},
+
+what:{
       title:`What Makes a Distribution Continuous`,
       content:`A continuous probability distribution describes the behavior of a continuous [random variable](!/probability/random-variables)—one that can take any value within a given range, rather than being limited to distinct, separate values. Unlike [discrete distributions](!/probability/distributions/discrete) where you can list individual outcomes (like rolling a 1, 2, 3, 4, 5, or 6 on a die), continuous distributions involve measurements that flow seamlessly along a continuum.
 
@@ -844,64 +856,147 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
             data={distributionsDiagramsData['normal distribution']}
         />,
         
-       <div key={'checklist-normal'} style={{background: 'linear-gradient(to right, #fafafa 0%, #f5f5f5 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #e5e7eb'}}>
+       <div key={'checklist-normal'} style={{background: 'linear-gradient(to right, #fafafa 0%, #f5f5f5 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #e5e7eb',transform:'scale(0.9)'}}>
             {processContent(sectionsContent.normal.checklist)}
         </div>,
         // <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1'}}>
         //     {processContent(sectionsContent.normal.parameters)}
         // </div>,
-        <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1'}}>
+        <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
     {processContent(sectionsContent.normal.parameters)}
 </div>,
-        <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8'}}>
+        <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
             {processContent(sectionsContent.normal.notation)}
         </div>,
         
-        <div key={'pdf-normal'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa'}}>
+        <div key={'pdf-normal'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
             {processContent(sectionsContent.normal.pdf)}
         </div>,
         
-        <div key={'cdf-normal'} style={{background: 'linear-gradient(to right, #dbeafe 0%, #bfdbfe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #3b82f6'}}>
+        <div key={'cdf-normal'} style={{background: 'linear-gradient(to right, #dbeafe 0%, #bfdbfe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #3b82f6',transform:'scale(0.9)'}}>
             {processContent(sectionsContent.normal.cdf)}
         </div>,
         
-        <div key={'meanVariance-normal'} style={{background: 'linear-gradient(to right, #bfdbfe 0%, #93c5fd 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #2563eb'}}>
+        <div key={'meanVariance-normal'} style={{background: 'linear-gradient(to right, #bfdbfe 0%, #93c5fd 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #2563eb',transform:'scale(0.9)'}}>
             {processContent(sectionsContent.normal.meanVariance)}
         </div>,
         
-        <div key={'keyProperties-normal'} style={{background: 'linear-gradient(to right, #93c5fd 0%, #60a5fa 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #1d4ed8'}}>
+        <div key={'keyProperties-normal'} style={{background: 'linear-gradient(to right, #93c5fd 0%, #60a5fa 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #1d4ed8',transform:'scale(0.9)'}}>
             {processContent(sectionsContent.normal.keyProperties)}
         </div>,
     ]
 },
-    {
-        id:'uniform',
-        title:sectionsContent.uniform.title,
-        link:'',
-        content:[
-          
-             <SvgDiagram
+
+
+{
+    id:'uniform',
+    title:sectionsContent.uniform.title,
+    link:'',
+    content:[
+        <SvgDiagram
             key={'uniform'}
-    layout='horizontal'
-   
-    data={distributionsDiagramsData['continuous uniform distribution']}
-    />,
+            layout='horizontal'
+            data={distributionsDiagramsData['continuous uniform distribution']}
+        />,
+        
+        <div key={'checklist-uniform'} style={{background: 'linear-gradient(to right, #fafafa 0%, #f5f5f5 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #e5e7eb',transform:'scale(0.9)'}}>
+            {processContent(sectionsContent.uniform.checklist)}
+        </div>,
+        
+        <div key={'parameters-uniform'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+            {processContent(sectionsContent.uniform.parameters)}
+        </div>,
+        
+        <div key={'notation-uniform'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+            {processContent(sectionsContent.uniform.notation)}
+        </div>,
+        
+        <div key={'pdf-uniform'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+            {processContent(sectionsContent.uniform.pdf)}
+        </div>,
+        
+        <div key={'cdf-uniform'} style={{background: 'linear-gradient(to right, #dbeafe 0%, #bfdbfe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #3b82f6',transform:'scale(0.9)'}}>
+            {processContent(sectionsContent.uniform.cdf)}
+        </div>,
+        
+        <div key={'meanVariance-uniform'} style={{background: 'linear-gradient(to right, #bfdbfe 0%, #93c5fd 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #2563eb',transform:'scale(0.9)'}}>
+            {processContent(sectionsContent.uniform.meanVariance)}
+        </div>,
+        
+        <div key={'keyProperties-uniform'} style={{background: 'linear-gradient(to right, #93c5fd 0%, #60a5fa 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #1d4ed8',transform:'scale(0.9)'}}>
+            {processContent(sectionsContent.uniform.keyProperties)}
+        </div>,
+    ]
+},
+    // {
+    //     id:'uniform',
+    //     title:sectionsContent.uniform.title,
+    //     link:'',
+    //     content:[
           
-        ]
-    },
-    {
-        id:'exponential',
-        title:sectionsContent.exponential.title,
-        link:'',
-        content:[
-             <SvgDiagram
-            key={'exponential'}
-    layout='horizontal'
+    //          <SvgDiagram
+    //         key={'uniform'}
+    // layout='horizontal'
    
-    data={distributionsDiagramsData['exponential distribution']}
-    />,
-        ]
-    },
+    // data={distributionsDiagramsData['continuous uniform distribution']}
+    // />,
+          
+    //     ]
+    // },
+
+    {
+    id:'exponential',
+    title:sectionsContent.exponential.title,
+    link:'',
+    content:[
+        <SvgDiagram
+            key={'exponential'}
+            layout='horizontal'
+            data={distributionsDiagramsData['exponential distribution']}
+        />,
+        
+        <div key={'checklist-exponential'} style={{background: 'linear-gradient(to right, #fafafa 0%, #f5f5f5 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #e5e7eb',transform:'scale(0.9)'}}>
+            {processContent(sectionsContent.exponential.checklist)}
+        </div>,
+        
+        <div key={'parameters-exponential'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+            {processContent(sectionsContent.exponential.parameters)}
+        </div>,
+        
+        <div key={'notation-exponential'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+            {processContent(sectionsContent.exponential.notation)}
+        </div>,
+        
+        <div key={'pdf-exponential'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+            {processContent(sectionsContent.exponential.pdf)}
+        </div>,
+        
+        <div key={'cdf-exponential'} style={{background: 'linear-gradient(to right, #dbeafe 0%, #bfdbfe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #3b82f6',transform:'scale(0.9)'}}>
+            {processContent(sectionsContent.exponential.cdf)}
+        </div>,
+        
+        <div key={'meanVariance-exponential'} style={{background: 'linear-gradient(to right, #bfdbfe 0%, #93c5fd 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #2563eb',transform:'scale(0.9)'}}>
+            {processContent(sectionsContent.exponential.meanVariance)}
+        </div>,
+        
+        <div key={'keyProperties-exponential'} style={{background: 'linear-gradient(to right, #93c5fd 0%, #60a5fa 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #1d4ed8',transform:'scale(0.9)'}}>
+            {processContent(sectionsContent.exponential.keyProperties)}
+        </div>,
+    ]
+},
+    // {
+    //     id:'exponential',
+    //     title:sectionsContent.exponential.title,
+    //     link:'',
+    //     content:[
+    //          <SvgDiagram
+    //         key={'exponential'}
+    // layout='horizontal'
+   
+    // data={distributionsDiagramsData['exponential distribution']}
+    // />,
+    //     ]
+    // },
      {
         id:'shared',
         title:sectionsContent.shared.title,
