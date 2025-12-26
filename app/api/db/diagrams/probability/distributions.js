@@ -1723,7 +1723,14 @@ export const distributionsDiagramsData={
   </text>
 </svg>
         `,
-        explanation:``,
+        explanation:`## Continuous Uniform Distribution
+⋅ Models situations where all values in a continuous interval are equally likely.  
+⋅ No value in the interval is more probable than any other.  
+<p style="background-color: yellow;width: 90%; font-weight: bold;margin:0px;">⋅ Random variable X takes values uniformly from the continuous interval [a, b].</p>⋅ Probability density is constant across the entire interval.  
+⋅ Support: $[a, b]$ where $a < b$.  
+⋅ Probability density function: $f(x) = \\dfrac{1}{b - a}$ for $a \\leq x \\leq b$, and $f(x) = 0$ otherwise.  
+⋅ Parameters: $a, b \\in \\mathbb{R},\\ a < b$.  
+⋅ Notation: $X \\sim \\text{Unif}(a, b)$ or $X \\sim U(a, b)$.`,
         links:[
             {text:``,url:``},
             {text:``,url:``},
@@ -1861,7 +1868,15 @@ export const distributionsDiagramsData={
   </text>
 </svg>
         `,
-        explanation:``,
+        explanation:`## Normal Distribution
+⋅ Models measurements and phenomena that cluster symmetrically around a central value.  
+⋅ Bell-shaped curve, symmetric about the mean $\mu$.  
+⋅ Central Limit Theorem: sums and averages of independent random variables converge to normal.  
+<p style="background-color: yellow;width: 90%; font-weight: bold;margin:0px;">⋅ Random variable X represents values that tend to concentrate near the mean with decreasing likelihood farther away.</p>⋅ Approximately 68% of values fall within one standard deviation of the mean.  
+⋅ Support: $(-\\infty, \\infty)$.  
+⋅ Probability density function: $f(x) = \\dfrac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$.  
+⋅ Parameters: $\\mu \\in \\mathbb{R}$ (mean), $\\sigma > 0$ (standard deviation).  
+⋅ Notation: $X \\sim N(\\mu, \\sigma^2)$ or $X \\sim \\text{Normal}(\\mu, \\sigma^2)$.`,
         links:[
             {text:``,url:``},
             {text:``,url:``},
@@ -1997,7 +2012,15 @@ export const distributionsDiagramsData={
   </text>
 </svg>
         `,
-        explanation:``,
+        explanation:`## Exponential Distribution
+⋅ Models the time until the first event occurs in a Poisson process.  
+⋅ Events occur independently at a constant average rate $\lambda$.  
+⋅ Exhibits the memoryless property: $P(X > s + t \mid X > s) = P(X > t)$.  
+<p style="background-color: yellow;width: 90%; font-weight: bold;margin:0px;">⋅ Random variable X represents the waiting time until the first event occurs.</p>⋅ Continuous analog of the geometric distribution.  
+⋅ Support: $[0, \\infty)$.  
+⋅ Probability density function: $f(x) = \\lambda e^{-\\lambda x}$ for $x \\geq 0$, and $f(x) = 0$ otherwise.  
+⋅ Parameter: $\\lambda > 0$ (rate parameter).  
+⋅ Notation: $X \\sim \\text{Exp}(\\lambda)$.`,
         links:[
             {text:``,url:``},
             {text:``,url:``},

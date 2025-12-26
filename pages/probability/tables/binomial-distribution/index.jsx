@@ -119,6 +119,9 @@ export default function BinomialDistributionTablePage({seoData, sectionsContent,
     }
 ]
 
+
+ 
+
   return (
    <>
    <Head>
@@ -189,13 +192,15 @@ export default function BinomialDistributionTablePage({seoData, sectionsContent,
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'-20px'}}>Binomial Distribution Table</h1>
    <br/>
-   <SectionTableOfContents sections={genericSections}  stickyWidth={'150px'} 
+   <SectionTableOfContents sections={genericSections}  stickyWidth={'180px'} 
    showSecondaryNav={true}
    secondaryNavMode='siblings'
-   secondaryNavTitle='Other Probability Tables'/>
+   secondaryNavTitle='Other Probability Tables'
+   
+   />
   
   
-   <div style={{width:'80%',margin:'auto'}}>
+   <div style={{marginLeft:'130px'}}>
    <BinomialCumulativeTable/>
    </div>
    <br/>

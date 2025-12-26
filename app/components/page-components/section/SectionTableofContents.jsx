@@ -1,737 +1,3 @@
-// import React, { useState, useEffect, useRef } from 'react';
-// import Image from 'next/image';
-// import { ChevronDown } from 'lucide-react';
-// import Link from 'next/link';
-// import { usePathname } from 'next/navigation';
-
-// const SectionTableOfContents = ({ 
-//   sections = [], 
-//   title = '',
-//   showSecondaryNav = false,
-//   secondaryNavMode = 'children', 
-//   secondaryNavTitle = 'More in this Section',
-//   navLinks = null
-// }) => {
-//   const [isSticky, setIsSticky] = useState(false);
-//   const [expandedSection, setExpandedSection] = useState(null);
-//   const [urlStructure, setUrlStructure] = useState({});
-//   const [secondaryNavLinks, setSecondaryNavLinks] = useState(
-//     navLinks && navLinks.links ? navLinks.links : []
-//   );
-//   const [useProvidedLinks, setUseProvidedLinks] = useState(
-//     !!(navLinks && navLinks.links && Array.isArray(navLinks.links) && navLinks.links.length > 0)
-//   );
-//   const [currentPath, setCurrentPath] = useState('');
-//   const [secondaryNavOpen, setSecondaryNavOpen] = useState(false);
-//   const [expandedSecondaryItems, setExpandedSecondaryItems] = useState({});
-//   const boxRef = useRef(null);
-//   const stickyThreshold = useRef(0);
-//   const pathname = usePathname();
-
-//   // Check if we have proper navLinks
-//   useEffect(() => {
-//     if (navLinks && navLinks.links && Array.isArray(navLinks.links) && navLinks.links.length > 0) {
-//       console.log('USING PROVIDED LINKS FROM PROPS');
-//       setUseProvidedLinks(true);
-      
-//       const filteredLinks = navLinks.links.filter(link => !link.includes('[') && !link.includes(']'));
-//       setSecondaryNavLinks(filteredLinks);
-      
-//       setCurrentPath(navLinks.currentPath || pathname);
-      
-//       const basicStructure = {};
-//       if (navLinks.currentPath) {
-//         basicStructure[navLinks.currentPath] = filteredLinks;
-//         setUrlStructure(basicStructure);
-//       }
-//     } else {
-//       setUseProvidedLinks(false);
-//     }
-//   }, [navLinks, pathname]);
-
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       if (boxRef.current) {
-//         const currentScrollPos = window.pageYOffset;
-//         setIsSticky(currentScrollPos > stickyThreshold.current);
-//       }
-//     };
-
-//     const setInitialThreshold = () => {
-//       if (boxRef.current) {
-//         stickyThreshold.current = boxRef.current.offsetTop + 100;
-//       }
-//     };
-
-//     setInitialThreshold();
-//     window.addEventListener('scroll', handleScroll);
-//     window.addEventListener('resize', setInitialThreshold);
-
-//     return () => {
-//       window.removeEventListener('scroll', handleScroll);
-//       window.removeEventListener('resize', setInitialThreshold);
-//     };
-//   }, []);
-
-//   // Fetch sitemap data for secondary navigation - ONLY if no links provided
-//   useEffect(() => {
-//     if (!showSecondaryNav || useProvidedLinks) return;
-    
-//     async function fetchSitemap() {
-//       try {
-//         const response = await fetch('/api/sitemap');
-//         const data = await response.json();
-//         console.log('Links generated internally');
-//         setUrlStructure(data);
-//       } catch (error) {
-//         console.error('Error fetching sitemap:', error);
-//       }
-//     }
-    
-//     fetchSitemap();
-//   }, [showSecondaryNav, useProvidedLinks]);
-
-//   // Process links for secondary navigation - only for API-based mode
-//   useEffect(() => {
-//     if (useProvidedLinks || !showSecondaryNav || !pathname || Object.keys(urlStructure).length === 0) return;
-    
-//     let path = pathname;
-//     let newLinks = [];
-
-//     if (secondaryNavMode === 'children') {
-//       newLinks = urlStructure[path] || [];
-//     } else if (secondaryNavMode === 'siblings') {
-//       const pathParts = pathname.split('/').filter(Boolean);
-//       pathParts.pop();
-//       const parentPath = pathParts.length === 0 ? '/' : '/' + pathParts.join('/');
-      
-//       newLinks = urlStructure[parentPath] || [];
-      
-//       path = parentPath;
-//     }
-
-//     newLinks = newLinks.filter(link => !link.includes('[') && !link.includes(']'));
-//     setSecondaryNavLinks(newLinks);
-//     setCurrentPath(path);
-//   }, [urlStructure, pathname, secondaryNavMode, showSecondaryNav, useProvidedLinks]);
-
-//   const handleLinkClick = (e, id, parentId = null) => {
-//     e.preventDefault();
-//     const element = document.getElementById(id);
-//     if (element) {
-//       const offset = isSticky ? 100 : 320;
-//       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-//       window.scrollTo({
-//         top: elementPosition - offset,
-//         behavior: 'smooth'
-//       });
-//     }
-//   };
-
-//   const toggleSection = (sectionId) => {
-//     setExpandedSection(expandedSection === sectionId ? null : sectionId);
-//   };
-
-//   const toggleSecondaryNav = () => {
-//     setSecondaryNavOpen(!secondaryNavOpen);
-//   };
-
-//   const toggleSecondaryItem = (itemPath) => {
-//     setExpandedSecondaryItems(prev => ({
-//       ...prev,
-//       [itemPath]: !prev[itemPath]
-//     }));
-//   };
-
-//   const renderIcon = (icon) => {
-//     if (typeof icon === 'string') {
-//       return <Image src={icon} alt="" width={34} height={34} />;
-//     } else if (React.isValidElement(icon)) {
-//       return React.cloneElement(icon, { width: 24, height: 24 });
-//     } else if (icon && typeof icon === 'object' && icon.src) {
-//       return <Image src={icon} alt="" width={24} height={24} />;
-//     }
-//     return null;
-//   };
-
-//   const renderSection = (section) => {
-//     if (section.subsections) {
-//       return (
-//         <div key={section.id} className="toc-item accordion" style={{backgroundColor: `${section.background}`}}>
-//           <button 
-//             className="toc-link accordion-header" 
-//             onClick={() => toggleSection(section.id)}
-//           >
-//             {section.icon && <span className="toc-icon">{renderIcon(section.icon)}</span>}
-//             <span className="section-title">{section.title}</span>
-//             <ChevronDown 
-//               className={`accordion-arrow ${expandedSection === section.id ? 'expanded' : ''}`}
-//               size={28}
-//               strokeWidth={3}
-//             />
-//           </button>
-//           {expandedSection === section.id && (
-//             <div className="subsections-list">
-//               {section.subsections.map((subsection) => (
-//                 <a
-//                   key={subsection.id}
-//                   href={`#${subsection.id}`}
-//                   onClick={(e) => handleLinkClick(e, subsection.id, section.id)}
-//                   className="subsection-link"
-//                 >
-//                   {subsection.title}
-//                 </a>
-//               ))}
-//             </div>
-//           )}
-//         </div>
-//       );
-//     }
-
-//     return (
-//       <div key={section.id} className="toc-item" style={{backgroundColor: `${section.background}`}}>
-//         <a
-//           href={`#${section.id}`}
-//           onClick={(e) => handleLinkClick(e, section.id)}
-//           className="toc-link"
-//         >
-//           {section.icon && <span className="toc-icon">{renderIcon(section.icon)}</span>}
-//           {section.title}
-//         </a>
-//       </div>
-//     );
-//   };
-
-//   const renderSecondaryNav = () => {
-//     if (secondaryNavLinks.length === 0) return null;
-
-//     // In sticky mode, show direct menu without accordion
-//     if (isSticky) {
-//       return (
-//         <div className="secondary-nav sticky-secondary-nav" style={{ width: '100%' }}>
-//           <div className="secondary-nav-content" style={{ backgroundColor: '#0d47a1', width: '100%' }}>
-//             <h3 className="secondary-nav-title" style={{ color: 'white' }}>
-//               More in this Section
-//             </h3>
-//             <ul className="secondary-nav-list">
-//               {secondaryNavLinks.map((link) => {
-//                 const hasChildren = !useProvidedLinks && urlStructure[`${currentPath}${currentPath === '/' ? '' : '/'}${link}`] && 
-//                                    urlStructure[`${currentPath}${currentPath === '/' ? '' : '/'}${link}`].length > 0;
-//                 const itemPath = `${currentPath}${currentPath === '/' ? '' : '/'}${link}`;
-                
-//                 return (
-//                   <li key={link} className="secondary-nav-item">
-//                     <div className="secondary-nav-item-wrapper">
-//                       <Link 
-//                         href={itemPath}
-//                         className="secondary-nav-link"
-//                         style={{ color: 'white', textTransform: 'capitalize' }}
-//                       >
-//                         {link.replace(/-/g, ' ')}
-//                       </Link>
-//                       {hasChildren && (
-//                         <button 
-//                           className="expand-toggle"
-//                           onClick={() => toggleSecondaryItem(itemPath)}
-//                         >
-//                           <ChevronDown 
-//                             className={`secondary-arrow ${expandedSecondaryItems[itemPath] ? 'expanded' : ''}`}
-//                             size={16}
-//                             strokeWidth={2}
-//                             color="white"
-//                           />
-//                         </button>
-//                       )}
-//                     </div>
-                    
-//                     {hasChildren && expandedSecondaryItems[itemPath] && (
-//                       <ul className="secondary-nav-sublist">
-//                         {urlStructure[itemPath].map(childLink => (
-//                           <li key={childLink} className="secondary-nav-subitem">
-//                             <Link 
-//                               href={`${itemPath}/${childLink}`}
-//                               className="secondary-nav-sublink"
-//                               style={{ color: '#bbdefb', textTransform: 'capitalize' }}
-//                             >
-//                               {childLink.replace(/-/g, ' ')}
-//                             </Link>
-//                           </li>
-//                         ))}
-//                       </ul>
-//                     )}
-//                   </li>
-//                 );
-//               })}
-//             </ul>
-//           </div>
-//         </div>
-//       );
-//     }
-
-//     // For non-sticky mode - keep original accordion behavior
-//     return (
-//       <div className="secondary-nav">
-//         <button 
-//           className="secondary-nav-toggle"
-//           onClick={toggleSecondaryNav}
-//         >
-//           <span>{secondaryNavTitle}</span>
-//           <ChevronDown 
-//             className={`accordion-arrow ${secondaryNavOpen ? 'expanded' : ''}`}
-//             size={28}
-//             strokeWidth={3}
-//           />
-//         </button>
-        
-//         {secondaryNavOpen && (
-//           <div className="secondary-nav-content">
-//             <ul className="secondary-nav-list">
-//               {secondaryNavLinks.map((link) => (
-//                 <li key={link} className="secondary-nav-item">
-//                   <Link 
-//                     href={`${currentPath}${currentPath === '/' ? '' : '/'}${link}`} 
-//                     className="secondary-nav-link"
-//                   >
-//                     {link.replace(/-/g, ' ')}
-//                   </Link>
-//                 </li>
-//               ))}
-//             </ul>
-//           </div>
-//         )}
-//       </div>
-//     );
-//   };
-
-//   return (
-//     <div ref={boxRef} className={`toc-container ${isSticky ? 'sticky' : ''}`}>
-//       {sections.length > 0 && (
-//         <div className="toc-grid">
-//           {sections.map(renderSection)}
-//         </div>
-//       )}
-//       {showSecondaryNav && renderSecondaryNav()}
-//       <style jsx global>{`
-//         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-//         .toc-container {
-//           width: 85%;
-//           max-width: 1200px;
-//           margin: 20px auto;
-//           padding: 20px;
-//           background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
-//           border: 1px solid #e1e4e8;
-//           border-radius: 12px;
-//           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-//           font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-//         }
-
-//         .toc-grid {
-//           display: flex;
-//           flex-wrap: wrap;
-//           justify-content: center;
-//           gap: 16px;
-//         }
-
-//         .toc-item {
-//           flex: 0 0 calc(33.333% - 16px);
-//           min-width: 180px;
-//           background-color: #ffffff;
-//           border: 1.5px solid #e8eaed;
-//           border-radius: 10px;
-//           padding: 16px;
-//           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-//           transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-//           min-height: 60px;
-//           height: fit-content;
-//           position: relative;
-//           overflow: hidden;
-//         }
-
-//         .toc-item::before {
-//           content: '';
-//           position: absolute;
-//           top: 0;
-//           left: 0;
-//           width: 100%;
-//           height: 3px;
-//           background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
-//           transform: scaleX(0);
-//           transform-origin: left;
-//           transition: transform 0.3s ease;
-//         }
-
-//         .toc-item:hover::before {
-//           transform: scaleX(1);
-//         }
-
-//         .toc-link {
-//           display: flex;
-//           align-items: center;
-//           justify-content: center;
-//           text-align: left;
-//           text-decoration: none;
-//           color: #1565c0;
-//           font-weight: 600;
-//           font-size: 15px;
-//           line-height: 1.4;
-//           width: 100%;
-//           transition: color 0.2s ease;
-//         }
-
-//         .section-title {
-//           flex: 1;
-//           margin: 0 10px;
-//         }
-
-//         .toc-icon {
-//           margin-right: 10px;
-//           display: flex;
-//           align-items: center;
-//           flex-shrink: 0;
-//           opacity: 0.9;
-//           transition: opacity 0.2s ease;
-//         }
-
-//         .toc-item:hover .toc-icon {
-//           opacity: 1;
-//         }
-
-//         .accordion-header {
-//           width: 100%;
-//           border: none;
-//           background: none;
-//           cursor: pointer;
-//           padding: 0;
-//           display: flex;
-//           align-items: center;
-//         }
-
-//         .accordion-arrow {
-//           color: #90a4ae;
-//           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-//           margin-right: 20px;
-//           margin-top: 5px;
-//         }
-
-//         .accordion-arrow.expanded {
-//           transform: rotate(180deg);
-//           color: #1976d2;
-//         }
-
-//         .subsections-list {
-//           margin-top: 16px;
-//           padding-top: 16px;
-//           border-top: 1.5px solid #e8eaed;
-//           display: flex;
-//           flex-direction: column;
-//           gap: 10px;
-//         }
-
-//         .subsection-link {
-//           color: #546e7a;
-//           text-decoration: none;
-//           font-size: 14px;
-//           font-weight: 500;
-//           padding: 8px 12px;
-//           border-radius: 6px;
-//           transition: all 0.2s ease;
-//           margin-left: 28px;
-//           position: relative;
-//         }
-
-//         .subsection-link::before {
-//           content: '';
-//           position: absolute;
-//           left: -8px;
-//           top: 50%;
-//           transform: translateY(-50%);
-//           width: 4px;
-//           height: 4px;
-//           background-color: #1976d2;
-//           border-radius: 50%;
-//           opacity: 0;
-//           transition: opacity 0.2s ease;
-//         }
-
-//         .subsection-link:hover::before {
-//           opacity: 1;
-//         }
-
-//         .subsection-link:hover {
-//           background-color: #e3f2fd;
-//           color: #1565c0;
-//           padding-left: 20px;
-//         }
-
-//         .toc-link:hover {
-//           color: #0d47a1;
-//         }
-
-//         .toc-item:hover {
-//           transform: translateY(-4px);
-//           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-//           border-color: #1976d2;
-//         }
-
-//         /* Secondary Navigation Styles */
-//         .secondary-nav {
-//           width: 100%;
-//           margin-top: 24px;
-//           border-radius: 10px;
-//           overflow: hidden;
-//           border: 1.5px solid #1565c0;
-//           background-color: #0d47a1;
-//           box-shadow: 0 4px 12px rgba(13, 71, 161, 0.2);
-//         }
-
-//         .secondary-nav-toggle {
-//           width: 100%;
-//           display: flex;
-//           justify-content: space-between;
-//           align-items: center;
-//           padding: 18px 24px;
-//           background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
-//           border: none;
-//           cursor: pointer;
-//           font-size: 16px;
-//           font-weight: 600;
-//           color: white;
-//           text-align: left;
-//           text-transform: capitalize;
-//           transition: background 0.3s ease;
-//         }
-
-//         .secondary-nav-toggle:hover {
-//           background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
-//         }
-
-//         .secondary-nav-content {
-//           padding: 20px 24px;
-//           background-color: #1565c0;
-//           border-top: 1px solid rgba(255, 255, 255, 0.1);
-//         }
-
-//         .secondary-nav-title {
-//           font-size: 16px;
-//           color: white;
-//           margin-bottom: 16px;
-//           font-weight: 600;
-//           text-transform: capitalize;
-//           letter-spacing: 0.3px;
-//         }
-
-//         .secondary-nav-list {
-//           list-style: none;
-//           padding: 0;
-//           margin: 0;
-//         }
-
-//         .secondary-nav-item {
-//           margin-bottom: 8px;
-//         }
-
-//         .secondary-nav-link {
-//           display: block;
-//           padding: 4px 6px;
-//           color: white;
-//           text-decoration: none;
-//           font-size: 14px;
-//           font-weight: 500;
-//           border-radius: 6px;
-//           transition: all 0.2s ease;
-//           text-transform: capitalize;
-//           position: relative;
-//           overflow: hidden;
-//         }
-
-//         .secondary-nav-link::before {
-//           content: '';
-//           position: absolute;
-//           top: 0;
-//           left: 0;
-//           width: 3px;
-//           height: 100%;
-//           background-color: #64b5f6;
-//           transform: scaleY(0);
-//           transition: transform 0.2s ease;
-//         }
-
-//         .secondary-nav-link:hover::before {
-//           transform: scaleY(1);
-//         }
-
-//         .secondary-nav-link:hover {
-//           background-color: rgba(255, 255, 255, 0.15);
-//           padding-left: 20px;
-//         }
-
-//         /* Expandable items in sticky mode */
-//         .secondary-nav-item-wrapper {
-//           display: flex;
-//           align-items: center;
-//           justify-content: space-between;
-//         }
-
-//         .expand-toggle {
-//           background: none;
-//           border: none;
-//           cursor: pointer;
-//           padding: 8px 12px;
-//           border-radius: 4px;
-//           transition: background-color 0.2s ease;
-//         }
-
-//         .expand-toggle:hover {
-//           background-color: rgba(255, 255, 255, 0.1);
-//         }
-
-//         .secondary-arrow {
-//           color: rgba(255, 255, 255, 0.7);
-//           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-//         }
-
-//         .secondary-arrow.expanded {
-//           transform: rotate(180deg);
-//           color: white;
-//         }
-
-//         .secondary-nav-sublist {
-//           list-style: none;
-//           padding-left: 24px;
-//           margin-top: 8px;
-//         }
-
-//         .secondary-nav-subitem {
-//           margin-bottom: 6px;
-//         }
-
-//         .secondary-nav-sublink {
-//           display: block;
-//           padding: 8px 12px;
-//           color: #bbdefb;
-//           text-decoration: none;
-//           font-size: 13px;
-//           font-weight: 500;
-//           text-transform: capitalize;
-//           border-radius: 4px;
-//           transition: all 0.2s ease;
-//         }
-
-//         .secondary-nav-sublink:hover {
-//           color: white;
-//           background-color: rgba(255, 255, 255, 0.1);
-//           padding-left: 16px;
-//         }
-
-//         /* Sticky Styling */
-//         .sticky {
-//           position: fixed;
-//           top: 20px;
-//           left: 0;
-//           width: 270px;
-//           height: calc(100vh - 40px);
-//           overflow-y: auto;
-//           z-index: 1000;
-//           padding-top: 50px;
-//           background: #ffffff;
-//           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-//           border: 1px solid #e1e4e8;
-//           border-radius: 12px;
-//           scrollbar-width: thin;
-//           scrollbar-color: #cbd5e0 #f7fafc;
-//         }
-
-//         .sticky::-webkit-scrollbar {
-//           width: 6px;
-//         }
-
-//         .sticky::-webkit-scrollbar-track {
-//           background: #f7fafc;
-//           border-radius: 10px;
-//         }
-
-//         .sticky::-webkit-scrollbar-thumb {
-//           background: #cbd5e0;
-//           border-radius: 10px;
-//         }
-
-//         .sticky::-webkit-scrollbar-thumb:hover {
-//           background: #a0aec0;
-//         }
-
-//         .sticky .toc-grid {
-//           flex-direction: column;
-//           gap: 12px;
-//         }
-
-//         .sticky .toc-item {
-//           width: 100%;
-//           margin-right: 0;
-//         }
-
-//         .sticky .secondary-nav {
-//           width: 100%;
-//           margin-right: 0;
-//           border: none;
-//           border-radius: 8px;
-//           background-color: #0d47a1;
-//           margin-top: 16px;
-//         }
-        
-//         .sticky-secondary-nav {
-//           padding: 12px;
-//         }
-
-//         @media (max-width: 1024px) {
-//           .toc-container {
-//             width: 90%;
-//           }
-
-//           .toc-item {
-//             flex: 0 0 calc(50% - 16px);
-//           }
-//         }
-
-//         @media (max-width: 768px) {
-//           .toc-container {
-//             width: 95%;
-//             padding: 16px;
-//             transition: opacity 0.3s ease;
-//           }
-
-//           .toc-item {
-//             flex: 0 0 calc(50% - 16px);
-//             min-width: 140px;
-//           }
-
-//           .sticky {
-//             display: none;
-//           }
-
-//           .toc-container:not(.sticky) {
-//             position: relative;
-//             width: 95%;
-//             margin: 16px auto;
-//             opacity: 1;
-//           }
-//         }
-
-//         @media (max-width: 480px) {
-//           .toc-item {
-//             flex: 0 0 100%;
-//           }
-
-//           .toc-grid {
-//             gap: 12px;
-//           }
-//         }
-//       `}</style>
-//     </div>
-//   );
-// };
-
-// export default SectionTableOfContents;
 
 // import React, { useState, useEffect, useRef } from 'react';
 // import Image from 'next/image';
@@ -750,7 +16,8 @@
 //   navLinks = null,
 //   theme = 'classicAcademic', // default theme
 //   numbered = false, // show numbers on items
-//   maxWidth = null // custom max width, overrides theme default
+//   maxWidth = null, // custom max width, overrides theme default
+//   stickyWidth = null // custom sticky width, overrides theme default
 // }) => {
 //   const [isSticky, setIsSticky] = useState(false);
 //   const [expandedSection, setExpandedSection] = useState(null);
@@ -781,7 +48,8 @@
 //     },
 //     sizes: {
 //       ...activeTheme.sizes,
-//       maxWidth: maxWidth || activeTheme.sizes.maxWidth
+//       maxWidth: maxWidth || activeTheme.sizes.maxWidth,
+//       stickyWidth: stickyWidth || activeTheme.sizes.stickyWidth
 //     }
 //   };
 
@@ -1574,6 +842,7 @@
 
 // export default SectionTableOfContents;
 
+
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { ChevronDown, ChevronRight } from 'lucide-react';
@@ -1589,6 +858,7 @@ const SectionTableOfContents = ({
   secondaryNavMode = 'children', 
   secondaryNavTitle = 'More in this Section',
   navLinks = null,
+  additionalNavGroup = null, // { groupTitle: "Title", links: [{ title: "Link 1", href: "/path" }] }
   theme = 'classicAcademic', // default theme
   numbered = false, // show numbers on items
   maxWidth = null, // custom max width, overrides theme default
@@ -1829,62 +1099,86 @@ const SectionTableOfContents = ({
   };
 
   const renderSecondaryNav = () => {
-    if (secondaryNavLinks.length === 0) return null;
+    if (secondaryNavLinks.length === 0 && (!additionalNavGroup || !additionalNavGroup.links || additionalNavGroup.links.length === 0)) return null;
 
     if (isSticky) {
       return (
         <div className="secondary-nav sticky-secondary-nav">
           <div className="secondary-nav-content">
-            <h3 className="secondary-nav-title">
-              {processContent(secondaryNavTitle)}
-            </h3>
-            <ul className="secondary-nav-list">
-              {secondaryNavLinks.map((link) => {
-                const hasChildren = !useProvidedLinks && urlStructure[`${currentPath}${currentPath === '/' ? '' : '/'}${link}`] && 
-                                   urlStructure[`${currentPath}${currentPath === '/' ? '' : '/'}${link}`].length > 0;
-                const itemPath = `${currentPath}${currentPath === '/' ? '' : '/'}${link}`;
-                
-                return (
-                  <li key={link} className="secondary-nav-item">
-                    <div className="secondary-nav-item-wrapper">
+            {secondaryNavLinks.length > 0 && (
+              <>
+                <h3 className="secondary-nav-title">
+                  {processContent(secondaryNavTitle)}
+                </h3>
+                <ul className="secondary-nav-list">
+                  {secondaryNavLinks.map((link) => {
+                    const hasChildren = !useProvidedLinks && urlStructure[`${currentPath}${currentPath === '/' ? '' : '/'}${link}`] && 
+                                       urlStructure[`${currentPath}${currentPath === '/' ? '' : '/'}${link}`].length > 0;
+                    const itemPath = `${currentPath}${currentPath === '/' ? '' : '/'}${link}`;
+                    
+                    return (
+                      <li key={link} className="secondary-nav-item">
+                        <div className="secondary-nav-item-wrapper">
+                          <Link 
+                            href={itemPath}
+                            className="secondary-nav-link"
+                          >
+                            {link.replace(/-/g, ' ')}
+                          </Link>
+                          {hasChildren && (
+                            <button 
+                              className="expand-toggle"
+                              onClick={() => toggleSecondaryItem(itemPath)}
+                            >
+                              <ChevronRight 
+                                className={`secondary-arrow ${expandedSecondaryItems[itemPath] ? 'expanded' : ''}`}
+                                size={14}
+                                strokeWidth={2}
+                              />
+                            </button>
+                          )}
+                        </div>
+                        
+                        {hasChildren && expandedSecondaryItems[itemPath] && (
+                          <ul className="secondary-nav-sublist">
+                            {urlStructure[itemPath].map(childLink => (
+                              <li key={childLink} className="secondary-nav-subitem">
+                                <Link 
+                                  href={`${itemPath}/${childLink}`}
+                                  className="secondary-nav-sublink"
+                                >
+                                  {childLink.replace(/-/g, ' ')}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            )}
+            
+            {additionalNavGroup && additionalNavGroup.links && additionalNavGroup.links.length > 0 && (
+              <>
+                <h3 className="secondary-nav-group-title">
+                  {processContent(additionalNavGroup.groupTitle)}
+                </h3>
+                <ul className="secondary-nav-list">
+                  {additionalNavGroup.links.map((link, index) => (
+                    <li key={index} className="secondary-nav-item">
                       <Link 
-                        href={itemPath}
+                        href={link.href}
                         className="secondary-nav-link"
                       >
-                        {link.replace(/-/g, ' ')}
+                        {processContent(link.title)}
                       </Link>
-                      {hasChildren && (
-                        <button 
-                          className="expand-toggle"
-                          onClick={() => toggleSecondaryItem(itemPath)}
-                        >
-                          <ChevronRight 
-                            className={`secondary-arrow ${expandedSecondaryItems[itemPath] ? 'expanded' : ''}`}
-                            size={14}
-                            strokeWidth={2}
-                          />
-                        </button>
-                      )}
-                    </div>
-                    
-                    {hasChildren && expandedSecondaryItems[itemPath] && (
-                      <ul className="secondary-nav-sublist">
-                        {urlStructure[itemPath].map(childLink => (
-                          <li key={childLink} className="secondary-nav-subitem">
-                            <Link 
-                              href={`${itemPath}/${childLink}`}
-                              className="secondary-nav-sublink"
-                            >
-                              {childLink.replace(/-/g, ' ')}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
         </div>
       );
@@ -1906,18 +1200,40 @@ const SectionTableOfContents = ({
         
         {secondaryNavOpen && (
           <div className="secondary-nav-content">
-            <ul className="secondary-nav-list">
-              {secondaryNavLinks.map((link) => (
-                <li key={link} className="secondary-nav-item">
-                  <Link 
-                    href={`${currentPath}${currentPath === '/' ? '' : '/'}${link}`} 
-                    className="secondary-nav-link"
-                  >
-                    {link.replace(/-/g, ' ')}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {secondaryNavLinks.length > 0 && (
+              <ul className="secondary-nav-list">
+                {secondaryNavLinks.map((link) => (
+                  <li key={link} className="secondary-nav-item">
+                    <Link 
+                      href={`${currentPath}${currentPath === '/' ? '' : '/'}${link}`} 
+                      className="secondary-nav-link"
+                    >
+                      {link.replace(/-/g, ' ')}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+            
+            {additionalNavGroup && additionalNavGroup.links && additionalNavGroup.links.length > 0 && (
+              <>
+                <h3 className="secondary-nav-group-title">
+                  {processContent(additionalNavGroup.groupTitle)}
+                </h3>
+                <ul className="secondary-nav-list">
+                  {additionalNavGroup.links.map((link, index) => (
+                    <li key={index} className="secondary-nav-item">
+                      <Link 
+                        href={link.href}
+                        className="secondary-nav-link"
+                      >
+                        {processContent(link.title)}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
         )}
       </div>
@@ -2089,14 +1405,15 @@ const SectionTableOfContents = ({
         }
 
         .accordion-arrow {
-          color: ${finalTheme.colors.arrow};
+         
           transition: all ${finalTheme.effects.transition};
           flex-shrink: 0;
+          color:white;
         }
 
         .accordion-arrow.expanded {
           transform: rotate(90deg);
-          color: ${finalTheme.colors.arrowExpanded};
+           color:white;
         }
 
         .subsections-list {
@@ -2191,6 +1508,18 @@ const SectionTableOfContents = ({
           font-weight: 600;
           text-transform: capitalize;
           letter-spacing: 0.3px;
+        }
+
+        .secondary-nav-group-title {
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.85);
+          margin-top: 24px;
+          margin-bottom: 12px;
+          font-weight: 600;
+          text-transform: capitalize;
+          letter-spacing: 0.3px;
+          padding-top: 16px;
+          border-top: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .secondary-nav-list {
@@ -2374,6 +1703,14 @@ const SectionTableOfContents = ({
           color: white;
           font-size: 12px;
           margin-bottom: 8px;
+        }
+
+        .sticky .secondary-nav-group-title {
+          font-size: 11px;
+          color: rgba(255, 255, 255, 0.85);
+          margin-top: 16px;
+          margin-bottom: 8px;
+          padding-top: 12px;
         }
 
         .sticky .secondary-nav-link {
