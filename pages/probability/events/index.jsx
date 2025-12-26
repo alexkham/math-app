@@ -12,7 +12,18 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+  const keyWords = [
+  'probability events',
+  'sample space events',
+  'mutually exclusive events',
+  'independent events',
+  'complementary events',
+  'union of events',
+  'intersection of events',
+  'event probability',
+  'disjoint events',
+  'probability theory'
+]
 
     const sectionsContent={
 

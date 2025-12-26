@@ -12,7 +12,18 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+ const keyWords = [
+  'Bayes theorem',
+  'Bayes rule',
+  'conditional probability',
+  'posterior probability',
+  'prior probability',
+  'Bayesian inference',
+  'likelihood',
+  'total probability',
+  'probability theory',
+  'Bayes formula'
+]
 
     const sectionsContent={
 

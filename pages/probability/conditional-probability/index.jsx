@@ -11,8 +11,18 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
+const keyWords = [
+  'conditional probability',
+  'conditional probability formula',
+  'probability given event',
+  'dependent events',
+  'independent events',
+  'conditional probability examples',
+  'probability theory',
+  'joint probability',
+  'intersection of events',
+  'conditional probability rules'
+]
 
     const sectionsContent={
 

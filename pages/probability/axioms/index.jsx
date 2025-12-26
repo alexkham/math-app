@@ -12,7 +12,18 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+  const keyWords = [
+  'probability axioms',
+  'Kolmogorov axioms',
+  'axiomatic probability',
+  'probability space',
+  'sample space',
+  'probability measure',
+  'sigma-additivity',
+  'probability theory foundations',
+  'mathematical probability',
+  'three axioms of probability'
+]
 
     const sectionsContent={
 

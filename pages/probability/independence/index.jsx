@@ -12,7 +12,18 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+ const keyWords = [
+  'independent events',
+  'statistical independence',
+  'probability independence',
+  'independent events formula',
+  'mutually independent events',
+  'independence probability',
+  'dependent vs independent events',
+  'conditional independence',
+  'testing independence',
+  'independence in probability'
+]
 
     const sectionsContent={
 

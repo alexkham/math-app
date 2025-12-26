@@ -11,8 +11,18 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
+const keyWords = [
+  'variance',
+  'variance formula',
+  'probability variance',
+  'variance of random variable',
+  'variance calculation',
+  'standard deviation',
+  'variance properties',
+  'expected value variance',
+  'variance statistics',
+  'variance and mean'
+]
 
     const sectionsContent={
 
