@@ -34,9 +34,9 @@ export async function getStaticProps(){
 A probability model is a mathematical description of a random situation.
 
 It specifies:
-- the set of all possible outcomes
-- which collections of outcomes are considered events
-- how probabilities are assigned to those events
+• the set of all possible outcomes
+• which collections of outcomes are considered events
+• how probabilities are assigned to those events
 
 The model defines **how randomness is generated**, not what is later measured from it.  
 Questions about averages, counts, or numerical outcomes arise only after additional structure is placed on the model.
@@ -54,9 +54,9 @@ Real-world situations are too complex to analyze directly.
 Probability works by replacing reality with a simplified structure that captures only the random mechanism of interest.
 
 Models make this possible by:
-- stripping away irrelevant details
-- making assumptions explicit
-- allowing repeated reasoning under controlled conditions
+• stripping away irrelevant details
+• making assumptions explicit
+• allowing repeated reasoning under controlled conditions
 
 Any conclusion drawn in probability is therefore conditional on the model being used.  
 The quality of a probabilistic result depends not on how realistic a situation feels, but on how appropriate the chosen model is for the question being asked.
@@ -74,9 +74,9 @@ The quality of a probabilistic result depends not on how realistic a situation f
 Probability models may look different on the surface, but they are built from the same basic ingredients.
 
 At the core of every model are:
-- a list of possible outcomes the experiment may produce
-- collections of outcomes treated as meaningful events
-- numerical weights expressing how likely those events are
+• a list of possible outcomes the experiment may produce
+• collections of outcomes treated as meaningful events
+• numerical weights expressing how likely those events are
 
 Nothing in this structure depends on the story behind the model.  
 Coins, dice, cards, measurements, or simulations all fit into the same abstract framework.
@@ -122,9 +122,9 @@ The distribution records the resulting probabilities.
 A probability distribution does not uniquely identify how randomness was produced.
 
 The same distribution may arise from:
-- different outcome spaces
-- different experimental setups
-- different probability assignments
+• different outcome spaces
+• different experimental setups
+• different probability assignments
 
 Once a distribution is formed, the mechanism that generated it is no longer visible.
 
@@ -150,9 +150,9 @@ Each choice produces its own distribution:
 $\[P(X_k \\in A), \\quad A \\subseteq \\mathbb{R}.\]$
 
 By changing the mapping (not the model), the resulting distribution may be:
-- discrete
-- continuous
-- mixed
+• discrete
+• continuous
+• mixed
 
 The model remains unchanged.  
 Only the measurement changes.
@@ -168,10 +168,10 @@ Only the measurement changes.
 Every probability model rests on explicit choices.
 
 Typical assumptions include:
-- outcomes are treated as symmetric
-- trials do not influence each other
-- the same mechanism is repeated each time
-- the outcome space is finite or infinite
+• outcomes are treated as symmetric
+• trials do not influence each other
+• the same mechanism is repeated each time
+• the outcome space is finite or infinite
 
 These assumptions are not conclusions.  
 They are inputs to the model.
@@ -189,19 +189,19 @@ Changing an assumption changes the model, and therefore changes all results deri
 Some probability models have a finite or countable set of outcomes.
 
 In such models:
-- all outcomes can be listed explicitly
-- events are formed by grouping outcomes
-- probabilities are assigned directly to each outcome
+• all outcomes can be listed explicitly
+• events are formed by grouping outcomes
+• probabilities are assigned directly to each outcome
 
 These models are often used as starting points because their structure is fully visible.
 
 Examples of this class include:
-- two-outcome mechanisms
-- finite multi-outcome mechanisms
+• two-outcome mechanisms
+• finite multi-outcome mechanisms
 
 Concrete realizations of these appear on the following pages:
-- Coin Toss Model
-- Dice Roll Model
+• Coin Toss Model
+• Dice Roll Model
 `,
       before:``,
       after:``,
@@ -214,10 +214,10 @@ Concrete realizations of these appear on the following pages:
 Simple discrete models are only the starting point.
 
 By extending or modifying a basic model, one can describe:
-- repeated experiments
-- dependent outcomes
-- infinite outcome spaces
-- measurements that vary continuously
+• repeated experiments
+• dependent outcomes
+• infinite outcome spaces
+• measurements that vary continuously
 
 The underlying idea remains the same: outcomes and probabilities are fixed first, and additional structure is built on top of them.
 
@@ -236,9 +236,9 @@ A probability model is not a description of the world itself.
 It is a constructed object that isolates a specific random mechanism while ignoring everything else.
 
 Because of this:
-- models can be useful even when they are unrealistic
-- realistic detail does not guarantee correctness
-- conclusions are valid only within the chosen model
+• models can be useful even when they are unrealistic
+• realistic detail does not guarantee correctness
+• conclusions are valid only within the chosen model
 
 When a model does not match the situation it is applied to, probability calculations remain correct mathematically but become irrelevant in practice.
 `,
@@ -253,10 +253,10 @@ When a model does not match the situation it is applied to, probability calculat
 This page introduces probability models at a conceptual level.
 
 Each model is then developed on its own page, using the same internal structure:
-- description of the random mechanism
-- definition of outcomes and events
-- probability assignment
-- possible measurements and distributions
+• description of the random mechanism
+• definition of outcomes and events
+• probability assignment
+• possible measurements and distributions
 
 This organization allows new models to be added without changing the overall framework, and makes it easy to compare different modeling choices across examples.
 `,
@@ -273,8 +273,8 @@ The following pages present concrete probability models built using the framewor
 Each page focuses on a single random mechanism and shows how outcomes, events, and probabilities are specified within that model.
 
 Available models:
-- Coin Toss Model
-- Dice Roll Model
+• Coin Toss Model
+• Dice Roll Model
 
 Additional models will be added over time, following the same structure and conventions.
 `,

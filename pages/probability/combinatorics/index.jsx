@@ -87,9 +87,9 @@ Probability errors often originate from defining the outcome space incorrectly b
       content:`
 When counting is repeated across structured experiments, probability distributions are formed.
 
-* In repeated Bernoulli trials, counting successes leads to the binomial distribution.
-* In sampling without replacement, counting selections leads to the hypergeometric distribution.
-* In symmetric finite models, counting outcomes leads to the discrete uniform distribution.
+• In repeated Bernoulli trials, counting successes leads to the binomial distribution.
+• In sampling without replacement, counting selections leads to the hypergeometric distribution.
+• In symmetric finite models, counting outcomes leads to the discrete uniform distribution.
 
 In each case, counting determines the possible values of a random variable and the probabilities assigned to those values.  
 This establishes the chain: counting → random variable → probability distribution.
@@ -104,9 +104,9 @@ This establishes the chain: counting → random variable → probability distrib
       content:`
 [Conditional probability](!/probability/conditional-probability) recomputes probabilities after information is applied.
 
-* Outcomes that contradict the given information are removed.
-* The sample space is reduced.
-* Probabilities are recalculated by counting outcomes within this restricted space.
+• Outcomes that contradict the given information are removed.
+• The sample space is reduced.
+• Probabilities are recalculated by counting outcomes within this restricted space.
 
 Under finite, equally likely assumptions, [conditional probability](!/probability/conditional-probability) is therefore a counting problem on a smaller sample space.  
 This interpretation provides the structural basis for Bayes’ theorem.
@@ -121,9 +121,9 @@ This interpretation provides the structural basis for Bayes’ theorem.
       content:`
 Expectation can be computed without constructing a full [probability distribution](!/probability/distributions).
 
-* Each outcome contributes a numerical value.
-* Outcomes are counted according to their contribution.
-* Indicator random variables isolate whether specific events occur.
+• Each outcome contributes a numerical value.
+• Outcomes are counted according to their contribution.
+• Indicator random variables isolate whether specific events occur.
 
 By summing contributions across outcomes, expectation values can be obtained directly from counting arguments.  
 This approach simplifies many finite probability problems while remaining exact.
@@ -140,9 +140,9 @@ Counting methods apply only to finite, discrete probability models.
 
 They do not apply when:
 
-* the sample space is infinite or continuous
-* probabilities are defined through density functions
-* outcomes are modeled empirically or through simulation
+• the sample space is infinite or continuous
+• probabilities are defined through density functions
+• outcomes are modeled empirically or through simulation
 
 In these cases, probability values are not determined by counting outcomes, and different mathematical tools are required.
 `,
@@ -156,10 +156,10 @@ In these cases, probability values are not determined by counting outcomes, and 
       content:`
 Probability theory is organized in layers.
 
-* Experiments generate outcomes.
-* Combinatorics counts those outcomes.
-* Probability assigns numerical weights to events.
-* Distributions summarize the behavior of random variables.
+• Experiments generate outcomes.
+• Combinatorics counts those outcomes.
+• Probability assigns numerical weights to events.
+• Distributions summarize the behavior of random variables.
 
 This page connects counting to probability without duplicating the material covered in the combinatorics or distribution sections.
 `,
@@ -241,10 +241,13 @@ This page explains how counting is used within probability theory, while all cou
 
   const introContent = {
   id: "intro",
-  title: "",
-  content: ``
-}
+  title: "Counting as the Foundation of Classical Probability",
+  content: `In classical probability theory, calculating probabilities often reduces to a counting problem. When outcomes are finite and equally likely, the probability of an event is simply the ratio of favorable outcomes to total outcomes. This fundamental relationship makes combinatorics—the mathematics of counting—an essential tool in probability.
 
+Understanding how to count correctly determines whether probability calculations are accurate. The structure of an experiment dictates which counting method applies: whether order matters, whether repetition is allowed, and how outcomes are grouped. These distinctions directly affect probability values.
+
+This page explains how counting methods connect to probability calculations, from basic classical formulas to conditional probability, expectation, and discrete distributions. All specific counting techniques (permutations, combinations, etc.) are covered in the dedicated combinatorics section.`
+}
 
 
 

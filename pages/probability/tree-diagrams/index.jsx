@@ -174,11 +174,11 @@ Tree diagrams are most effective when the process is sequential and the number o
 Tree diagrams are simple in structure, but they are often used incorrectly.
 
 Typical mistakes include:
-- treating branch probabilities as unconditional rather than conditional
-- assigning probabilities to paths directly instead of to branches
-- forgetting that branch probabilities at a node must sum to 1
-- double-counting outcomes by summing overlapping paths
-- mixing up stages of the process with events of interest
+• treating branch probabilities as unconditional rather than conditional
+• assigning probabilities to paths directly instead of to branches
+• forgetting that branch probabilities at a node must sum to 1
+• double-counting outcomes by summing overlapping paths
+• mixing up stages of the process with events of interest
 
 Another common error is reading the tree in the wrong direction after information is observed. Once an outcome at a later stage is known, only the paths consistent with that outcome should be considered.
 
@@ -195,10 +195,10 @@ Being careful about what each branch represents, and what information is being c
 Tree diagrams are most effective when a random situation unfolds in a small number of clearly ordered stages.
 
 They work especially well when:
-- outcomes occur sequentially rather than all at once
-- later possibilities depend on earlier outcomes
-- conditional probabilities are central to the problem
-- the number of branches remains manageable
+• outcomes occur sequentially rather than all at once
+• later possibilities depend on earlier outcomes
+• conditional probabilities are central to the problem
+• the number of branches remains manageable
 
 In contrast, tree diagrams become less practical as the number of stages or possible outcomes grows. In such cases, the visual structure can become cluttered, and alternative representations such as tables or formulas may be more efficient.
 
@@ -212,9 +212,9 @@ Tree diagrams are therefore best viewed as a tool for **structured reasoning**, 
     obj10:{
       title:`Interactive Tools`,
       content:`
-- Probability Tree Visualizer  
-- Conditional Probability Explorer  
-- Bayes Tree Simulator
+• Probability Tree Visualizer  
+• Conditional Probability Explorer  
+• Bayes Tree Simulator
 `,
       before:``,
       after:``,

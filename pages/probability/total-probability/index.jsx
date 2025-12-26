@@ -92,31 +92,31 @@ Each case contributes its share, and those shares sum to give the complete pictu
 Before expressing the phenomenon formally, we need notation for the key pieces.
 
 **The event of interest:**
-Call it A. This is what you're trying to find the probability of.
+Call it $A$. This is what you're trying to find the probability of.
 
 **The cases (partition):**
-Call them B₁, B₂, ..., Bₙ. These are the distinct scenarios that divide the sample space.
+Call them $B₁, B₂, ..., Bₙ$. These are the distinct scenarios that divide the sample space.
 
 Key properties:
-- They're disjoint (no overlap — only one can occur)
-- They're exhaustive (together they cover everything)
-- Exactly one of them happens
+• They're disjoint (no overlap — only one can occur)
+• They're exhaustive (together they cover everything)
+• Exactly one of them happens
 
 **Conditional pieces:**
-P(A | Bᵢ) is the probability of A given that case Bᵢ occurred. This captures how likely A is within that specific scenario.
+$P(A | Bᵢ)$ is the probability of $A$ given that case $Bᵢ$ occurred. This captures how likely $A$ is within that specific scenario.
 
 **Weights:**
-P(Bᵢ) is the probability that case Bᵢ occurs. This tells you how much that scenario contributes to the total.
+$P(Bᵢ)$ is the probability that case $Bᵢ$ occurs. This tells you how much that scenario contributes to the total.
 
 **Sum notation:**
 When we add contributions from all cases, we write:
-∑ (sum over all i)
+$∑$ (sum over all $i$)
 
 That's the notation toolkit. Each piece has a clear meaning:
-- A is what you want
-- The Bᵢ are the cases
-- P(A | Bᵢ) is A's probability within case i
-- P(Bᵢ) is the weight of case i
+• $A$ is what you want
+• The $Bᵢ$ are the cases
+• $P(A | Bᵢ)$ is $A$'s probability within case $i$
+• $P(Bᵢ)$ is the weight of case $i$
 
 Next, we combine these pieces into the formal law.
 
@@ -137,18 +137,18 @@ If an event A can occur through several disjoint cases B₁, B₂, ..., Bₙ tha
 
 **The formula:**
 
-P(A) = P(A | B₁)·P(B₁) + P(A | B₂)·P(B₂) + ... + P(A | Bₙ)·P(Bₙ)
+$$P(A) = P(A | B₁)·P(B₁) + P(A | B₂)·P(B₂) + ... + P(A | Bₙ)·P(Bₙ)$$
 
 Or using summation notation:
 
-P(A) = ∑ P(A | Bᵢ)·P(Bᵢ)
+\t\t\t\t\t\t$P(A) = ∑ P(A | Bᵢ)·P(Bᵢ)$
 
 **What each term means:**
 
-- P(A | Bᵢ)·P(Bᵢ) is the contribution from case i
-- P(A | Bᵢ) tells you how likely A is in that case
-- P(Bᵢ) weights that contribution by how likely the case is
-- The sum adds all contributions to get the total
+• $P(A | Bᵢ)·P(Bᵢ)$ is the contribution from case i
+• $P(A | Bᵢ)$ tells you how likely A is in that case
+• $P(Bᵢ)$ weights that contribution by how likely the case is
+• The sum adds all contributions to get the total
 
 **Discrete version:**
 
@@ -158,9 +158,9 @@ This is the form shown above, used when you have a finite or countable number of
 
 When the partition becomes continuous (like a range of values), the sum becomes an integral:
 
-P(A) = ∫ P(A | B=b)·f(b) db
+$$P(A) = ∫ P(A | B=b)·f(b) db$$
 
-where f(b) is the probability density of the conditioning variable.
+where $f(b)$ is the probability density of the conditioning variable.
 
 This law expresses mathematically what we've already understood conceptually: probability distributes across cases, and the total comes from adding weighted contributions.`,
       before:``,
@@ -175,23 +175,23 @@ Total probability becomes clearer when visualized. Here are three ways to see th
 
 **Probability tree:**
 
-Start with the root. Branches split into the different cases B₁, B₂, ..., Bₙ, each labeled with P(Bᵢ). From each case, further branches show whether A occurs or not, labeled with P(A | Bᵢ) and P(A' | Bᵢ).
+Start with the root. Branches split into the different cases $B₁, B₂, ..., Bₙ$, each labeled with $P(Bᵢ)$. From each case, further branches show whether A occurs or not, labeled with $P(A | Bᵢ)$ and $P(A' | Bᵢ)$.
 
-To find P(A), trace all paths that end in A. Multiply along each path, then add across paths. This gives the total probability formula naturally.
+To find $P(A)$, trace all paths that end in A. Multiply along each path, then add across paths. This gives the total probability formula naturally.
 
 **Partition block diagram:**
 
-Draw the sample space as a rectangle. Divide it vertically into blocks representing B₁, B₂, ..., Bₙ. The width of each block is proportional to P(Bᵢ).
+Draw the sample space as a rectangle. Divide it vertically into blocks representing $B₁, B₂, ..., Bₙ$. The width of each block is proportional to $P(Bᵢ)$.
 
-Now overlay the event A as a horizontal band cutting across all blocks. The area of A within each block represents P(A ∩ Bᵢ). The total area of A is the sum of these pieces.
+Now overlay the event $A$ as a horizontal band cutting across all blocks. The area of $A$ within each block represents $P(A ∩ Bᵢ)$. The total area of $A$ is the sum of these pieces.
 
 **Table view (joint distribution):**
 
-Create a table with cases as rows and outcomes (A or A') as columns. Fill in joint probabilities P(A ∩ Bᵢ) and P(A' ∩ Bᵢ).
+Create a table with cases as rows and outcomes ($A$ or $A'$) as columns. Fill in joint probabilities $P(A ∩ Bᵢ)$ and $P(A' ∩ Bᵢ)$.
 
-The row totals are P(Bᵢ). The column total for A is P(A) — which equals the sum of P(A ∩ Bᵢ) down that column. Since P(A ∩ Bᵢ) = P(A | Bᵢ)·P(Bᵢ), you see the total probability formula in the table structure.
+The row totals are $P(Bᵢ)$. The column total for $A$ is $P(A)$ — which equals the sum of $P(A ∩ Bᵢ)$ down that column. Since $P(A ∩ Bᵢ) = P(A | Bᵢ)·P(Bᵢ)$, you see the total probability formula in the table structure.
 
-All three diagrams show the same phenomenon: A's probability distributes across cases, and you recover the total by adding contributions.`,
+All three diagrams show the same phenomenon: $A$'s probability distributes across cases, and you recover the total by adding contributions.`,
       before:``,
       after:``,
   
@@ -206,17 +206,17 @@ A disease affects 1% of the population. A test is 95% accurate for infected peop
 
 What's the probability of testing positive?
 
-Cases: B₁ = has disease, B₂ = healthy
-- P(B₁) = 0.01, P(B₂) = 0.99
-- P(positive | B₁) = 0.95
-- P(positive | B₂) = 0.10
+Cases: $B₁$ = has disease, $B₂$ = healthy
+• $P(B₁) = 0.01$, $P(B₂) = 0.99$
+• $P(\\text{positive} | B₁) = 0.95$
+• $P(\\text{positive} | B₂) = 0.10$
 
-P(positive) = P(positive | B₁)·P(B₁) + P(positive | B₂)·P(B₂)
-            = 0.95 × 0.01 + 0.10 × 0.99
-            = 0.0095 + 0.099
-            = 0.1085
+$P(\\text{positive}) = P(\\text{positive} | B₁)·P(B₁) + P(\\text{positive} | B₂)·P(B₂)$
+            $= 0.95 × 0.01 + 0.10 × 0.99$
+            $= 0.0095 + 0.099$
+            $= 0.1085$
 
-About 10.85% of tests come back positive.
+About $10.85$% of tests come back positive.
 
 **Example 2: Manufacturing defects**
 
@@ -224,17 +224,17 @@ A factory has three machines producing parts. Machine A makes 50% of parts with 
 
 What's the probability a randomly selected part is defective?
 
-Cases: B₁ = from A, B₂ = from B, B₃ = from C
-- P(B₁) = 0.50, P(B₂) = 0.30, P(B₃) = 0.20
-- P(defective | B₁) = 0.02
-- P(defective | B₂) = 0.03
-- P(defective | B₃) = 0.05
+Cases: $B₁ =$ from $A$, $B₂ =$ from $B$, $B₃ =$ from $C$
+• $P(B₁) = 0.50, P(B₂) = 0.30, P(B₃) = 0.20$
+• $P(\\text{defective} | B₁) = 0.02$
+• $P(\\text{defective} | B₂) = 0.03$
+• $P(\\text{defective} | B₃) = 0.05$
 
-P(defective) = 0.02 × 0.50 + 0.03 × 0.30 + 0.05 × 0.20
-             = 0.010 + 0.009 + 0.010
-             = 0.029
+$P(\\text{defective}) = 0.02 × 0.50 + 0.03 × 0.30 + 0.05 × 0.20$
+             $= 0.010 + 0.009 + 0.010$
+             $= 0.029$
 
-2.9% of all parts are defective.
+$2.9$% of all parts are defective.
 
 **Example 3: Weather scenarios**
 
@@ -242,17 +242,17 @@ Tomorrow will be sunny, cloudy, or rainy with probabilities 0.6, 0.3, and 0.1. Y
 
 What's the probability you go running tomorrow?
 
-Cases: B₁ = sunny, B₂ = cloudy, B₃ = rainy
-- P(B₁) = 0.6, P(B₂) = 0.3, P(B₃) = 0.1
-- P(run | B₁) = 0.8
-- P(run | B₂) = 0.5
-- P(run | B₃) = 0.1
+Cases: $B₁ =$ sunny, $B₂ = $cloudy, $B₃ =$ rainy
+• $P(B₁) = 0.6, P(B₂) = 0.3, P(B₃) = 0.1$
+• $P(\\text{run} | B₁) = 0.8$
+• $P(\\text{run} | B₂) = 0.5$
+• $P(\\text{run} | B₃) = 0.1$
 
-P(run) = 0.8 × 0.6 + 0.5 × 0.3 + 0.1 × 0.1
-       = 0.48 + 0.15 + 0.01
-       = 0.64
+$P(\\text{run}) = 0.8 × 0.6 + 0.5 × 0.3 + 0.1 × 0.1$
+       $= 0.48 + 0.15 + 0.01$
+       $= 0.64$
 
-64% chance you'll go running.
+$64$% chance you'll go running.
 
 In each example, the total probability emerges from weighted contributions across distinct scenarios.`,
       before:``,
@@ -267,29 +267,29 @@ The law follows from three fundamental facts about how probability behaves.
 
 **Fact 1: Exactly one case occurs**
 
-The cases B₁, B₂, ..., Bₙ partition the sample space. They're disjoint and exhaustive. Every outcome belongs to exactly one case. When you run the experiment, one and only one case happens.
+The cases $B₁, B₂, ..., Bₙ$ partition the sample space. They're disjoint and exhaustive. Every outcome belongs to exactly one case. When you run the experiment, one and only one case happens.
 
-**Fact 2: A overlaps each case separately**
+**Fact 2**: $A$ **overlaps each case separately**
 
-The event A might occur in any of the cases. We can split A into pieces: the part that happens in B₁, the part in B₂, and so on. These pieces are A ∩ B₁, A ∩ B₂, ..., A ∩ Bₙ.
+The event $A$ might occur in any of the cases. We can split A into pieces: the part that happens in $B₁$, the part in $B₂$, and so on. These pieces are $A ∩ B₁, A ∩ B₂, ..., A ∩ Bₙ$.
 
 **Fact 3: Disjoint pieces add**
 
 Since the cases don't overlap, the pieces of A don't overlap either. When you have disjoint events, their probabilities add:
 
-P(A) = P(A ∩ B₁) + P(A ∩ B₂) + ... + P(A ∩ Bₙ)
+$$P(A) = P(A ∩ B₁) + P(A ∩ B₂) + ... + P(A ∩ Bₙ)$$
 
-Now use the definition of conditional probability. We know P(A ∩ Bᵢ) = P(A | Bᵢ)·P(Bᵢ). Substitute this into the sum:
+Now use the definition of conditional probability. We know $P(A ∩ Bᵢ) = P(A | Bᵢ)·P(Bᵢ)$. Substitute this into the sum:
 
-P(A) = P(A | B₁)·P(B₁) + P(A | B₂)·P(B₂) + ... + P(A | Bₙ)·P(Bₙ)
+$$P(A) = P(A | B₁)·P(B₁) + P(A | B₂)·P(B₂) + ... + P(A | Bₙ)·P(Bₙ)$$
 
 That's the law of total probability.
 
 **The deep intuition:**
 
-You're not doing anything clever. You're just acknowledging that A happens "in pieces" across the cases, and probability naturally adds across those disjoint pieces. The conditional probabilities weight each piece by how much of A falls in that case. The case probabilities weight by how likely each case is to occur.
+You're not doing anything clever. You're just acknowledging that $A$ happens "in pieces" across the cases, and probability naturally adds across those disjoint pieces. The conditional probabilities weight each piece by how much of $A$ falls in that case. The case probabilities weight by how likely each case is to occur.
 
-It's the simplest possible accounting: count every way A can happen, weight by likelihood, sum the contributions. Nothing more.`,
+It's the simplest possible accounting: count every way $A$ can happen, weight by likelihood, sum the contributions. Nothing more.`,
       before:``,
       after:``,
   
@@ -302,7 +302,7 @@ Total probability is built entirely from conditional probabilities. It shows how
 
 **Conditional probability tells you:**
 
-Given that you're in a specific case, what's the probability of the event? That's P(A | Bᵢ).
+Given that you're in a specific case, what's the probability of the event? That's $P(A | Bᵢ)$.
 
 **Total probability tells you:**
 
@@ -310,10 +310,10 @@ When you don't know which case you're in, combine the conditional probabilities 
 
 **The relationship:**
 
-P(A) = ∑ P(A | Bᵢ)·P(Bᵢ)
+$$P(A) = ∑ P(A | Bᵢ)·P(Bᵢ)$$
 
 The left side is unconditional — no assumptions about which case occurred.
-The right side is entirely conditional — every P(A | Bᵢ) assumes you know the case.
+The right side is entirely conditional — every $P(A | Bᵢ)$ assumes you know the case.
 
 Total probability is the bridge. It reconstructs the unconditional probability from conditional pieces.
 
@@ -342,11 +342,11 @@ Total probability and the chain rule work together but serve different purposes.
 
 The chain rule breaks a joint probability into a sequence of conditional steps:
 
-P(A ∩ B) = P(A | B)·P(B)
+$$P(A ∩ B) = P(A | B)·P(B)$$
 
 Or for longer sequences:
 
-P(A ∩ B ∩ C) = P(A | B ∩ C)·P(B | C)·P(C)
+$$P(A ∩ B ∩ C) = P(A | B ∩ C)·P(B | C)·P(C)$$
 
 You multiply conditional probabilities along a specific pathway to get the joint probability of that pathway.
 
@@ -354,14 +354,14 @@ You multiply conditional probabilities along a specific pathway to get the joint
 
 Total probability adds contributions from different pathways:
 
-P(A) = ∑ P(A | Bᵢ)·P(Bᵢ)
+$$P(A) = ∑ P(A | Bᵢ)·P(Bᵢ)$$
 
-Each term P(A | Bᵢ)·P(Bᵢ) is actually P(A ∩ Bᵢ) by the chain rule. So total probability is summing P(A ∩ Bᵢ) across all cases.
+Each term $P(A | Bᵢ)·P(Bᵢ)$ is actually $P(A ∩ Bᵢ)$ by the chain rule. So total probability is summing $P(A ∩ Bᵢ)$ across all cases.
 
 **How they work together:**
 
-- Chain rule: multiply down a single branch of the probability tree
-- Total probability: add across multiple branches
+• Chain rule: multiply down a single branch of the probability tree
+• Total probability: add across multiple branches
 
 In a probability tree, you multiply along each path (chain rule) to get that path's probability. Then you add across paths (total probability) to get the overall probability of the endpoint.
 
@@ -382,36 +382,36 @@ Bayes' theorem cannot exist without total probability. They're inseparable.
 
 **Bayes' theorem:**
 
-P(Bᵢ | A) = P(A | Bᵢ)·P(Bᵢ) / P(A)
+$$P(Bᵢ | A) = P(A | Bᵢ)·P(Bᵢ) / P(A)$$
 
-This reverses conditioning: you know P(A | Bᵢ) but want P(Bᵢ | A).
+This reverses conditioning: you know $P(A | Bᵢ)$ but want $P(Bᵢ | A)$.
 
 **Where total probability enters:**
 
-The denominator P(A) is computed using total probability:
+The denominator $P(A)$ is computed using total probability:
 
-P(A) = ∑ P(A | Bⱼ)·P(Bⱼ)
+$$P(A) = ∑ P(A | Bⱼ)·P(Bⱼ)$$
 
 The sum runs over all cases, giving:
 
-P(Bᵢ | A) = P(A | Bᵢ)·P(Bᵢ) / [∑ P(A | Bⱼ)·P(Bⱼ)]
+$$P(Bᵢ | A) = P(A | Bᵢ)·P(Bᵢ) / [∑ P(A | Bⱼ)·P(Bⱼ)]$$
 
 **Why this matters:**
 
 The numerator uses the chain rule for one specific case.
 The denominator uses total probability summed across all cases.
 
-Without total probability, you have no way to compute P(A) from the conditional pieces. Bayes would be incomplete.
+Without total probability, you have no way to compute $P(A)$ from the conditional pieces. Bayes would be incomplete.
 
 **The conceptual flow:**
 
-1. You observe event A
-2. You want to know which case Bᵢ caused it (posterior probability)
-3. You start with how likely each case is (prior: P(Bᵢ))
-4. You know how likely A is in each case (likelihood: P(A | Bᵢ))
-5. Chain rule gives the numerator: P(A | Bᵢ)·P(Bᵢ)
-6. Total probability normalizes across all cases: ∑ P(A | Bⱼ)·P(Bⱼ)
-7. The ratio gives the posterior: P(Bᵢ | A)
+1. You observe event $A$
+2. You want to know which case $Bᵢ$ caused it (posterior probability)
+3. You start with how likely each case is (prior: $P(Bᵢ)$)
+4. You know how likely $A$ is in each case (likelihood: $P(A | Bᵢ)$)
+5. Chain rule gives the numerator: $P(A | Bᵢ)·P(Bᵢ)$
+6. Total probability normalizes across all cases: $∑ P(A | Bⱼ)·P(Bⱼ)$
+7. The ratio gives the posterior: $P(Bᵢ | A)$
 
 Total probability ensures the posteriors sum to 1. It's the normalization constant that makes Bayes work.
 
@@ -425,13 +425,13 @@ Bayes and total probability are two sides of the same reasoning framework. Total
       content:`
 **Using non-disjoint cases**
 
-The cases must be mutually exclusive. If B₁ and B₂ can both occur, you'll double-count probability. Example: splitting by "rain" and "bad weather" overlaps since rain is bad weather.
+The cases must be mutually exclusive. If $B₁$ and $B₂$ can both occur, you'll double-count probability. Example: splitting by "rain" and "bad weather" overlaps since rain is bad weather.
 
 Fix: ensure cases can't happen simultaneously.
 
 **Failing to cover the entire space**
 
-Cases must be exhaustive. If your cases don't account for every possibility, you'll underestimate P(A).
+Cases must be exhaustive. If your cases don't account for every possibility, you'll underestimate $P(A)$.
 
 Example: dividing a population by "under 30" and "over 40" misses ages 30-40.
 
@@ -439,9 +439,9 @@ Fix: verify cases partition the whole sample space.
 
 **Mixing conditional and unconditional probabilities**
 
-The formula requires P(A | Bᵢ), not P(A). Using unconditional probabilities breaks the calculation.
+The formula requires $P(A | Bᵢ)$, not $P(A)$. Using unconditional probabilities breaks the calculation.
 
-Example: using P(A) directly instead of P(A | B₁), P(A | B₂), etc.
+Example: using $P(A)$ directly instead of $P(A | B₁)$, $P(A | B₂)$, etc.
 
 Fix: ensure every term inside the sum is properly conditioned.
 
@@ -455,13 +455,13 @@ Fix: explicitly list all cases before computing.
 
 **Misapplying independence assumptions**
 
-Assuming P(A | Bᵢ) = P(A) implies independence, which defeats the purpose of splitting into cases. If A were independent of all cases, total probability would be trivial.
+Assuming $P(A | Bᵢ) = P(A)$ implies independence, which defeats the purpose of splitting into cases. If $A$ were independent of all cases, total probability would be trivial.
 
 Fix: only use total probability when the outcome depends on which case occurred.
 
 **Using wrong weights**
 
-The weights must be P(Bᵢ), not P(Bᵢ | A) or other quantities.
+The weights must be $P(Bᵢ)$, not $P(Bᵢ | A)$ or other quantities.
 
 Fix: verify you're using prior probabilities of cases, not posteriors.
 
@@ -513,10 +513,10 @@ Total probability connects to fundamental concepts across probability theory.
 Total probability is built entirely from conditional pieces. It shows how to reconstruct unconditional probabilities from conditional ones.
 
 **Chain rule:**
-Each term P(A | Bᵢ)·P(Bᵢ) equals P(A ∩ Bᵢ) by the chain rule. Total probability sums these joint probabilities across cases.
+Each term $P(A | Bᵢ)·P(Bᵢ)$ equals $P(A ∩ Bᵢ)$ by the chain rule. Total probability sums these joint probabilities across cases.
 
 **Bayes' theorem:**
-Bayes uses total probability as its denominator. The normalization constant P(A) comes from summing P(A | Bᵢ)·P(Bᵢ) over all cases.
+Bayes uses total probability as its denominator. The normalization constant $P(A)$ comes from summing $P(A | Bᵢ)·P(Bᵢ)$ over all cases.
 
 **Partitions:**
 Total probability requires a partition — disjoint, exhaustive cases. Any partition of the sample space enables total probability reasoning.
@@ -525,16 +525,16 @@ Total probability requires a partition — disjoint, exhaustive cases. Any parti
 A mixture distribution is a probability distribution formed by combining multiple component distributions, weighted by mixing probabilities. This is exactly the structure of total probability.
 
 **Weighted averages:**
-The formula P(A) = ∑ P(A | Bᵢ)·P(Bᵢ) is a weighted average of conditional probabilities, with weights P(Bᵢ). The overall probability is the expectation of P(A | B) over the distribution of B.
+The formula $P(A) = ∑ P(A | Bᵢ)·P(Bᵢ)$ is a weighted average of conditional probabilities, with weights $P(Bᵢ)$. The overall probability is the expectation of $P(A | B)$ over the distribution of $B$.
 
 **Joint probability:**
-Total probability decomposes P(A) into pieces P(A ∩ Bᵢ). It marginalizes over the cases: P(A) = ∑ P(A ∩ Bᵢ).
+Total probability decomposes $P(A)$ into pieces $P(A ∩ Bᵢ)$. It marginalizes over the cases: $P(A) = ∑ P(A ∩ Bᵢ)$.
 
 **Law of total expectation:**
-The expectation version states E[X] = ∑ E[X | Bᵢ]·P(Bᵢ). Same structure, different quantity.
+The expectation version states $E[X] = ∑ E[X | Bᵢ]·P(Bᵢ)$. Same structure, different quantity.
 
 **Independence:**
-If A is independent of all Bᵢ, then P(A | Bᵢ) = P(A) for all i, and total probability becomes trivial: P(A) = P(A)·∑ P(Bᵢ) = P(A). The interesting cases involve dependence.
+If $A$ is independent of all $Bᵢ$, then $P(A | Bᵢ) = P(A)$ for all $i$, and total probability becomes trivial: $P(A) = P(A)·∑ P(Bᵢ) = P(A)$. The interesting cases involve dependence.
 
 Total probability sits at the center of a web of interconnected ideas. Master it, and the rest of probability theory becomes clearer.`,
       before:``,

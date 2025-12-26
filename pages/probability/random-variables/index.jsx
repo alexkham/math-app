@@ -277,9 +277,11 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
     },
     {
         id:'definition',
-        title:sectionsContent.definition.content,
+        title:sectionsContent.definition.title,
         link:'',
-        content:''
+        content:[
+          sectionsContent.definition.content,
+        ]
     },
     {
         id:'types',
@@ -330,30 +332,30 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
           sectionsContent.next.content,
         ]
     },
-    {
-        id:'',
-        title:'',
-        link:'',
-        content:''
-    },
-    {
-        id:'',
-        title:'',
-        link:'',
-        content:''
-    },
-    {
-        id:'',
-        title:'',
-        link:'',
-        content:''
-    },
-    {
-        id:'',
-        title:'',
-        link:'',
-        content:''
-    },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
 
 ]
 

@@ -116,7 +116,7 @@ Independence shows up in many simple and practical situations:
 
 **1. Repeated Trials**  
 Consider flipping a fair coin twice. The result of the first flip does not affect the result of the second. If $A$ is “first flip is heads” and $B$ is “second flip is heads,” then  
-$P(A \cap B) = P(A)P(B)$, reflecting the independence of the trials.
+$P(A \\cap B) = P(A)P(B)$, reflecting the independence of the trials.
 
 **2. Separate Components**  
 Imagine two unrelated sensors operating in different parts of a system. If their detections come from unrelated mechanisms, the event “sensor 1 triggers” and the event “sensor 2 triggers” behave independently. Observing one does not update our belief about the other.
