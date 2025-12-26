@@ -248,7 +248,7 @@ This idea is not an add-on to probability theory. Bayes'; theorem sits at the in
          sectionsContent,
          introContent,
           seoData: {
-        title: "Title | Learn Math Class",
+        title: "Bayes'Theorem Page  | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
         url: "/probability/bayes-theorem",

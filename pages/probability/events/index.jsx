@@ -208,10 +208,10 @@ This page presents the idea of events and shows how they form the basic language
          sectionsContent,
          introContent,
           seoData: {
-        title: "Title | Learn Math Class",
+        title: "Events in Probability | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/events",
          name: "name"
       },
         

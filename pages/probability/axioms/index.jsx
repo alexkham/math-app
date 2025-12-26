@@ -260,10 +260,10 @@ Everything that follows in probability — conditional probability, independence
          sectionsContent,
          introContent,
           seoData: {
-        title: "Title | Learn Math Class",
+        title: "Axioms of Probability | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/probability/axioms",
          name: "name"
       },
         

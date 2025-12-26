@@ -238,7 +238,7 @@ provides the foundation for variance, covariance, risk calculations, and many pr
          sectionsContent,
          introContent,
           seoData: {
-        title: "Title | Learn Math Class",
+        title: "Expected Value Page | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
         url: "/probability/expected-value",
