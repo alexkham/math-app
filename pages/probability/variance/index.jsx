@@ -81,7 +81,7 @@ This measure connects directly to uncertainty and risk. Higher variance means gr
     calculate:{
       title:`How to Calculate Variance`,
       content:`
-The variance of a random variable $X$ with expected value $\\mu$ is formally defined as:
+The variance of a [random variable](!/probability/random-variables) $X$ with [expected value](!/probability/expected-value) $\\mu$ is formally defined as:
 
 $$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$$
 
@@ -269,15 +269,25 @@ Several misconceptions about variance appear frequently when working with probab
       content:`
 Variance does not exist in isolation—it connects to numerous other ideas in probability theory and statistics, forming part of a broader framework for understanding randomness.
 
-**Expectation**: Variance is built directly from expectation. The formula $\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$ defines variance as an expected value, making it a second-order moment of the distribution. Understanding expectation is prerequisite to understanding variance. See the [expected value](/probability/expected-value) page.
+[Expectation](!/probability/expected-value) (Expected Value): 
 
-**Standard deviation**: Standard deviation is the square root of variance, providing a measure of spread in the original units of the random variable. The two are mathematically equivalent but serve different purposes in practice. See the [standard deviation](/probability/standard-deviation) page.
+Variance is built directly from expectation. The formula $\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$ defines variance as an expected value, making it a second-order moment of the distribution. Understanding expectation is prerequisite to understanding variance. See the [expected value](/probability/expected-value) page.
 
-**Covariance**: When working with multiple random variables, covariance extends the concept of variance to measure how two variables vary together. Variance is actually a special case: $\\mathrm{Var}(X) = \\mathrm{Cov}(X, X)$. See the [covariance](/probability/covariance) page.
+ 
+[Covariance](!/probability/covariance): 
+When working with multiple random variables, covariance extends the concept of variance to measure how two variables vary together. Variance is actually a special case of covariance: 
 
-**Linear combinations**: Variance plays a central role in analyzing weighted sums of random variables, particularly through formulas like $\\mathrm{Var}(aX + b) = a^2\\mathrm{Var}(X)$ and rules for variance of sums. These appear throughout statistical modeling and experimental design.
+$$\\mathrm{Var}(X) = \\mathrm{Cov}(X, X)$$. 
 
-**Probability distributions**: Every named distribution has an associated variance that characterizes its spread. Knowing the variance formula for distributions like binomial, normal, or Poisson allows quick analysis without recalculating from first principles. Distribution pages provide these formulas and their derivations.
+See the [covariance](!/probability/covariance) page.
+
+**Linear combinations**: Variance plays a central role in analyzing weighted sums of random variables, particularly through formulas like
+ 
+$$\\mathrm{Var}(aX + b) = a^2\\mathrm{Var}(X)$$ 
+ 
+ and rules for variance of sums. These appear throughout statistical modeling and experimental design.
+
+[Probability distributions](!/probability/distributions): Every named distribution has an associated variance that characterizes its spread. Knowing the variance formula for distributions like binomial, normal, or Poisson allows quick analysis without recalculating from first principles. [Distribution pages](!/probability/distributions) provide these formulas and their derivations.
 
 Together, these connections show that variance is not merely a standalone measure but a fundamental quantity that links together many essential concepts in probability theory.`,
       before:``,
