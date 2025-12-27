@@ -1076,17 +1076,17 @@ When we encounter a probability problem, often times we need to identify which d
 Each distribution corresponds to a specific data-generating process, and our task is to match the problem's structure to the correct model. This identification depends on several key characteristics of how outcomes are produced.
 The first question to ask is whether **the number of possible outcomes is finite or infinite**. This fundamental distinction splits the six distributions into two major branches.
 
-**If outcomes are finite**, begin by checking whether **all outcomes are equally likely**. If every value in the set has the same probability — like rolling a fair die or randomly selecting from a deck — you have a discrete uniform distribution. This is the simplest case, characterized entirely by equal probability across all outcomes.
+**If outcomes are finite**, begin by checking whether **all outcomes are equally likely**. If every value in the set has the same probability — like rolling a fair die or randomly selecting from a deck — you have a [discrete uniform](!/probability/distributions/discrete#uniform) distribution. This is the simplest case, characterized entirely by equal probability across all outcomes.
 
-If probabilities are not equal within a finite set, ask whether you're **counting successes in a fixed number of independent trials** with constant probability p. If you perform exactly n trials and count how many successes occur, use the binomial distribution. This is the classic "perform n trials, count successes" scenario.
+If probabilities are not equal within a finite set, ask whether you're **counting successes in a fixed number of independent trials** with constant probability p. If you perform exactly n trials and count how many successes occur, use the [binomial distribution](!/probability/distributions/discrete#binomial). This is the classic "perform n trials, count successes" scenario.
 
-If neither uniform nor binomial fits, consider whether you're **sampling without replacement from a finite population** containing two types of items. If each draw changes the composition and thus affects probabilities for subsequent draws — like drawing cards without returning them — you have a hypergeometric distribution.
+If neither uniform nor binomial fits, consider whether you're **sampling without replacement from a finite population** containing two types of items. If each draw changes the composition and thus affects probabilities for subsequent draws — like drawing cards without returning them — you have a [hypergeometric distribution](!/probability/distributions/discrete#hypergeometric).
 
 **If outcomes are infinite**, the next question is whether you're **counting trials until the first success** occurs. If you repeat independent trials with constant probability p until success happens, and you want to know how many trials that takes, use the geometric distribution.
 
-If you're not stopping at the first success but instead **counting trials until the r-th success** (where r > 1), use the negative binomial distribution. This generalizes the geometric case by asking how many trials are needed to achieve multiple successes rather than just one.
+If you're not stopping at the first success but instead **counting trials until the r-th success** (where r > 1), use the [negative binomial](!/probability/distributions/discrete#negative_binomial) distribution. This generalizes the [geometric](!/probability/distributions/discrete#geometric) case by asking how many trials are needed to achieve multiple successes rather than just one.
 
-Finally, if you're not counting discrete trials at all but rather **counting rare events occurring at a constant rate λ** over time or space — like phone calls arriving per hour, equipment failures per month, or typos per page — the Poisson distribution applies. Events happen independently at an average rate in a continuous interval.
+Finally, if you're not counting discrete trials at all but rather **counting rare events occurring at a constant rate λ** over time or space — like phone calls arriving per hour, equipment failures per month, or typos per page — the [Poisson distribution](!/probability/distributions/discrete#poisson) applies. Events happen independently at an average rate in a continuous interval.
 
 This diagram illustrates the decision process we described here so far.
 
@@ -1146,17 +1146,28 @@ Finally, the **nature of what the** [random variable](!/probability/random-varia
       content:`
 While all discrete distributions share the common feature of countable support, they model fundamentally different probabilistic mechanisms. This page examines six essential discrete distributions, each arising from a distinct experimental setup and serving specific analytical purposes.
 
-The **discrete uniform distribution** models situations where all outcomes in a finite set are equally likely, such as rolling a fair die or randomly selecting from a fixed collection. The **binomial distribution** counts the number of successes in a fixed number of independent trials, each with the same probability of success — like counting heads in ten coin flips. The **geometric distribution** asks how many trials are needed until the first success occurs, assuming independent trials with constant success probability. The **negative binomial distribution** generalizes this by counting trials until a specified number of successes, not just the first. The **hypergeometric distribution** models sampling without replacement from a finite population containing two types of items, where each draw changes the probabilities for subsequent draws. Finally, the **Poisson distribution** counts events occurring randomly over time or space at a constant average rate, useful for modeling rare events like customer arrivals or equipment failures.
+The [discrete uniform distribution](!/probability/distributions/discrete#uniform) models situations where all outcomes in a finite set are equally likely, such as rolling a fair die or randomly selecting from a fixed collection. The [binomial distribution](!/probability/distributions/discrete#binomial) counts the number of successes in a fixed number of independent trials, each with the same probability of success — like counting heads in ten coin flips. The [geometric distribution](!/probability/distributions/discrete#geometric) asks how many trials are needed until the first success occurs, assuming independent trials with constant success probability. The [negative binomial distribution](!/probability/distributions/discrete#negative_binomial) generalizes this by counting trials until a specified number of successes, not just the first. The [hypergeometric distribution](!/probability/distributions/discrete#hypergeometric) models sampling without replacement from a finite population containing two types of items, where each draw changes the probabilities for subsequent draws. Finally, the [Poisson distribution](!/probability/distributions/discrete#poisson) counts events occurring randomly over time or space at a constant average rate, useful for modeling rare events like customer arrivals or equipment failures.
 
-Each distribution has unique parameters, probability mass functions, and applications that make it the natural choice for particular types of problems.`,
+Each distribution has unique parameters, [probability mass functions](!/probability/probability-function), and applications that make it the natural choice for particular types of problems.`,
       before:``,
       after:``,
   
     },
-    obj5:{
+    shared:{
   
-      title:``,
-      content:``,
+      title:`Shared Properties Across Discrete Distributions`,
+      content:`
+Although the six discrete distributions model different scenarios, they share an underlying mathematical framework that makes them recognizable as members of the same family.
+
+At the core of every discrete distribution sits the **probability mass function (PMF)**, denoted $P(X = k)$. This function answers the question: what's the chance of observing exactly value $k$? Two rules always hold: **non-negativity**, $P(X = k) \\geq 0$ for all $k$, and **normalization**, $\\sum_{\\text{all } k} P(X = k) = 1$. No probability can be negative, and when you add up all probabilities across the support, you must get exactly 1.
+
+Beyond the PMF, each distribution provides the **cumulative distribution function (CDF)**, defined as $F(x) = P(X \\leq x)$. This gives the probability of observing a value up to and including some threshold $x$. Unlike continuous distributions where the CDF forms a smooth curve, discrete CDFs climb in distinct jumps — flat between values, then leaping upward by $P(X = k)$ at each point $k$ in the support.
+
+Every discrete distribution has an **expected value** (mean) and **variance**. The expected value is calculated as $E[X] = \\sum_k k \\cdot P(X = k)$, representing where the distribution balances — the long-run average if you repeated the experiment infinitely. The variance is $\\text{Var}(X) = E[X^2] - (E[X])^2$, quantifying how tightly or loosely probability concentrates around the mean. Different distributions yield different formulas when you compute these sums, but the definitions apply universally.
+
+The **support** — the set of values where outcomes can occur — is always countable. You might have finitely many options or infinitely many that you could list in sequence, but never an uncountable continuum. Finally, each distribution is fully specified by a small set of **parameters**: the uniform needs its endpoints $a$ and $b$, the binomial needs $n$ and $p$, the Poisson needs $\\lambda$.
+
+`,
       before:``,
       after:``,
   
@@ -1213,7 +1224,7 @@ Discrete distributions are probability models for random variables that can take
 
 Understanding discrete distributions is fundamental to probability theory and problem-solving. Each distribution arises from a specific probabilistic mechanism—whether sampling with or without replacement, counting trials until an event occurs, or modeling rare occurrences. Recognizing these underlying structures allows you to match problems to their appropriate models.
 
-The distinctions matter mathematically.The simplest case—the [discrete uniform distribution](!/probability/distributions/discrete#uniform)—assigns equal probability to each outcome in a finite set, serving as the foundation for understanding more complex models. At the other end, the [negative binomial](!/probability/distributions/discrete#negative-binomial) distribution generalizes the [geometric](!/probability/distributions/discrete#geometric) case by counting trials until a specified number of successes rather than just the first. A [binomial](!/probability/distributions/discrete#binomial) distribution assumes a fixed number of independent trials, while a [geometric](!/probability/distributions/discrete#geometric) distribution counts trials until the first success—superficially similar setups that yield entirely different probability mass functions, moments, and analytical properties. Misidentifying the mechanism leads to incorrect calculations and invalid conclusions.
+The distinctions matter mathematically.The simplest case—the [discrete uniform distribution](!/probability/distributions/discrete#uniform)—assigns equal probability to each outcome in a finite set, serving as the foundation for understanding more complex models. At the other end, the [negative binomial](!/probability/distributions/discrete#negative_binomial) distribution generalizes the [geometric](!/probability/distributions/discrete#geometric) case by counting trials until a specified number of successes rather than just the first. A [binomial](!/probability/distributions/discrete#binomial) distribution assumes a fixed number of independent trials, while a [geometric](!/probability/distributions/discrete#geometric) distribution counts trials until the first success—superficially similar setups that yield entirely different probability mass functions, moments, and analytical properties. Misidentifying the mechanism leads to incorrect calculations and invalid conclusions.
 The [Poisson](!/probability/distributions/discrete#poisson) distribution, meanwhile, models the occurrence of rare events over a continuous interval—time, space, or volume—making it distinct from the trial-based counting distributions.
 
 This page systematically presents six fundamental discrete distributions, detailing their support, parameters, probability functions, and key statistical properties. Mastering these models equips you to tackle a wide range of probabilistic questions with precision and confidence.
@@ -1409,13 +1420,13 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
             ]
     },
     {
-        id:'negative-binomial',
+        id:'negative_binomial',
         title:sectionsContent.negative.title,
         link:'',
         content:[
 
            <SvgDiagram
-     key={'negative- binomial'}
+     key={'negative-binomial'}
     layout='horizontal'
     data={distributionsDiagramsData['negative binomial distribution']}
     />,
@@ -1481,6 +1492,34 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
                sectionsContent.poisson.after,
             ]
     },
+
+   
+    {
+        id:'shared',
+        title:sectionsContent.shared.title,
+        link:'',
+        content:[
+          sectionsContent.shared.content,
+        ]
+    },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
+    // {
+    //     id:'',
+    //     title:'',
+    //     link:'',
+    //     content:''
+    // },
     // {
     //     id:'',
     //     title:'',
