@@ -541,7 +541,7 @@ const occurenceMatrix=`
       title:`Uniform Discrete Distribution`,
       content:``,
       before:``,
-      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculator/discrete-distributions?tab=1) →@`,
+      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=1) →@`,
       checklist:`<h2 style="color: #3b82f6;"> Checklist for Identifying a Discrete Uniform Distribution</h2>
 ✔ All values in the range are equally likely.  
 ✔ The variable takes on a finite set of integer values.  
@@ -615,7 +615,7 @@ Each face has an equal and independent chance of appearing.
       title:`Binomial Distribution`,
       content:``,
       before:``,
-      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculator/discrete-distributions?tab=2) →@
+      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=2) →@
 
       @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use binomial distributions cummulative table](!/probability/tables/binomial-distribution) →@
       `,
@@ -698,7 +698,7 @@ The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with
       title:`Geometric Distribution`,
       content:``,
       before:``,
-      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculator/discrete-distributions?tab=3) →@`,
+      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=3) →@`,
      checklist:`     
 <h2 style="color: #3b82f6;"> Checklist for Identifying a Geometric Distribution</h2>
 ✔   Repeating [Bernoulli](!/probability/distributions/discrete#bernoulli) trials independently with constant probability.  
@@ -770,7 +770,7 @@ This means there's about a 9.6% chance that you'll need exactly 4 rolls to get y
       title:`Negative Binomial Distribution`,
       content:``,
       before:``,
-      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculator/discrete-distributions?tab=4) →@`,
+      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=4) →@`,
       checklist:`<h2 style="color: #3b82f6;"> Checklist for Identifying a Negative Binomial Distribution</h2>
 ✔ Repeating the same [Bernoulli](!/probability/distributions/discrete#bernoulli) trial independently.  
 ✔ Success probability remains constant across trials.  
@@ -853,7 +853,7 @@ Note: The geometric distribution is a special case of the negative binomial dist
       title:`Hypergeometric Distribution`,
       content:``,
       before:``,
-      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculator/discrete-distributions?tab=5) →@`,
+      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=5) →@`,
       checklist:`<h2 style="color: #3b82f6;"> Checklist for Identifying a Hypergeometric Distribution</h2>
 ✔ Sampling is done without replacement from a finite population.  
 ✔ The population has a fixed number of successes and failures.  
@@ -937,7 +937,7 @@ Note: When $N$ is very large relative to $n$, the hypergeometric distribution ap
       title:`Poisson Distribution`,
       content:``,
       before:``,
-      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculator/discrete-distributions?tab=6) →@`,
+      after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=6) →@`,
       checklist:`<h2 style="color: #3b82f6;">Checklist for Identifying a Poisson Distribution</h2>
 ✔ Events occur independently over time or space.  
 ✔ Events happen at a constant average rate (λ).  
