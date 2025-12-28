@@ -463,6 +463,87 @@ Understanding probability function patterns is crucial because every distributio
       },
   
   
+      what:{
+    
+        title:`What a Probability Distribution Is`,
+        content:`
+A probability distribution is a mathematical model that assigns probabilities to the possible values of a [random variable](!/probability/random-variables), thereby encoding the structure of uncertainty associated with a random process. It provides the complete probabilistic characterization of a random phenomenon, specifying not just what outcomes can occur, but how probability is allocated across them.
+
+Formally, given a [probability space](!/probability/sample-space) $(\\Omega, \\mathcal{F}, \\mathbb{P})$ and a [random variable](!/probability/random-variables) $X : \\Omega \\to \\mathbb{R}$, the probability distribution of $X$ is the probability measure induced by $X$ on the measurable subsets of $\\mathbb{R}$, defined by 
+
+$$\\mathbb{P}_X(A) = \\mathbb{P}(X \\in A)$$ 
+
+for all measurable sets $A$. This induced measure encapsulates all probabilistic information about $X$ and serves as the primary object of analysis in statistical inference and probabilistic modeling.
+
+The relationship between [random variable](!/probability/random-variables) and distribution is foundational. A random variable is a function that maps outcomes from the sample space to real numbers—it translates abstract events into measurable quantities. The distribution captures how probability flows through this mapping. While the random variable provides the mechanism for quantification, the distribution describes the probabilistic behavior of those quantities. Two random variables defined on different probability spaces may share the same distribution if they exhibit identical probabilistic structure, making the distribution the essential mathematical object for analysis.
+
+The distribution functions as a model that captures the regularities of randomness in quantitative form. It abstracts from individual realizations and describes the law governing the occurrence of outcomes. Distributions provide the foundation for defining [expectation](!/probability/expected-value), [variance](!/probability/variance), moments, and limit theorems, forming the central organizing concept of probability theory.
+
+`,
+        before:``,
+        after:``,
+    
+      },
+      notation:{
+    
+        title:`Useful Notation`,
+        content:`
+Throughout this page, we use standard probability notation:
+
+- $\\Omega$ — the sample space, the set of all possible outcomes of a random experiment
+- $\\mathcal{F}$ — a σ-algebra of events, the collection of measurable subsets of $\\Omega$
+- $\\mathbb{P}$ — a probability measure on $(\\Omega, \\mathcal{F})$, assigning probabilities to events
+- $X : \\Omega \\to \\mathbb{R}$ — a random variable, a measurable function mapping outcomes to real numbers
+- $\\mathbb{P}_X$ — the probability distribution of $X$, the induced measure on $\\mathbb{R}$
+- $A$ — a measurable set, typically a subset of $\\mathbb{R}$
+
+The triple $(\\Omega, \\mathcal{F}, \\mathbb{P})$ is called a probability space and provides the foundational structure for all probability theory.
+
+ @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+
+`,
+        before:``,
+        after:``,
+    
+      },
+      common:{
+    
+        title:`What All Distributions Have in Common`,
+        content:`
+Despite their diversity, all probability distributions share fundamental structural properties.
+
+Every distribution assigns probabilities through a **probability function**—either a probability mass function (PMF) for discrete variables or a probability density function (PDF) for continuous variables. These functions encode how probability is distributed across the support.
+
+Every distribution has a **cumulative distribution function (CDF)**, defined as $F_X(x) = \\mathbb{P}(X \\leq x)$. The CDF completely characterizes the distribution and exists for every random variable, whether discrete or continuous.
+
+The **support** is the set of values where the distribution assigns positive probability or density. It defines what outcomes are possible under the model.
+
+Distributions are determined by **parameters**—numerical constants that specify a particular member of a distribution family. Parameters control location (such as $\\mu$), scale (such as $\\sigma$), or shape.
+
+All distributions have an **expected value** (mean), provided the integral or sum $\\mathbb{E}[X]$ exists and is finite. Similarly, **variance** $\\text{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$ measures dispersion when it exists. Not all distributions have finite moments—the Cauchy distribution, for instance, has no finite mean.
+
+Distributions can be characterized by **moment generating functions** or **characteristic functions**, which encode all moments when they exist and provide tools for deriving distributional properties.`,
+        before:``,
+        after:``,
+    
+      },
+      matter:{
+    
+        title:`Why Distributions Matter`,
+        content:`
+Probability distributions form the conceptual foundation of quantitative reasoning under uncertainty.
+
+Distributions provide the mathematical framework for **modeling** random phenomena. By identifying the appropriate distribution, we translate real-world randomness into a precise mathematical structure amenable to rigorous analysis. The distribution captures the essential probabilistic behavior of a system while abstracting away irrelevant details.
+
+In **statistical inference**, distributions enable us to draw conclusions from data. Sample statistics follow known distributions, allowing us to estimate population parameters, test hypotheses, and construct confidence intervals. The sampling distribution of estimators derives directly from the underlying probability distributions of the data.
+
+For **prediction**, distributions quantify uncertainty about future outcomes. Rather than producing single-valued forecasts, distributional models provide probabilistic statements—the likelihood of various scenarios, credible intervals, and risk assessments. This probabilistic framework is essential for decision-making under uncertainty.
+
+Distributions bridge probability theory and data science. They connect theoretical probability spaces to empirical observations, enabling the development of statistical methods, machine learning algorithms, and stochastic models. Without distributions, the mathematical treatment of randomness and data analysis as we know it would not exist.`,
+        before:``,
+        after:``,
+    
+      },
       obj5:{
     
         title:``,
@@ -470,7 +551,39 @@ Understanding probability function patterns is crucial because every distributio
         before:``,
         after:``,
     
-      }
+      },
+      obj5:{
+    
+        title:``,
+        content:``,
+        before:``,
+        after:``,
+    
+      },
+      obj5:{
+    
+        title:``,
+        content:``,
+        before:``,
+        after:``,
+    
+      },
+      obj5:{
+    
+        title:``,
+        content:``,
+        before:``,
+        after:``,
+    
+      },
+      obj5:{
+    
+        title:``,
+        content:``,
+        before:``,
+        after:``,
+    
+      },
     
     }
 
@@ -478,21 +591,21 @@ Understanding probability function patterns is crucial because every distributio
     const distributionsData = {
         basic: {
           title: "Probability Distributions",
-          leftTitle: "[Discrete Distributions](!/probability/distributions#discrete-dist)",
-          rightTitle: "[Continuous Distributions](!/probability/distributions#continuous-dist)",
+          leftTitle: "[Discrete Distributions](!/probability/distributions/discrete)",
+          rightTitle: "[Continuous Distributions](!/probability/distributions/continuous)",
           left: [
             "[Discrete Uniform](!/probability/distributions/discrete#uniform):\nEqual probability for finite outcomes",
             "[Binomial](!/probability/distributions/discrete#binomial):\nSuccesses in n trials with probability p each",
             "[Geometric](!/probability/distributions/discrete#geometric):\nTrials until first success (probability p)",
             
-            "[Negative Binomial](!/probability/distributions/discrete#negative-binomial):\nTrials until r-th success (generalization of geometric)",
+            "[Negative Binomial](!/probability/distributions/discrete#negative_binomial):\nTrials until r-th success (generalization of geometric)",
             "[Hypergeometric](!/probability/distributions/discrete#hypergeometric):\nSampling without replacement from finite population",
             "[Poisson](!/probability/distributions/discrete#poisson):\nRare events over time interval (rate λ)",
           ],
           right: [
-            "**Uniform**:\nEqual likelihood over interval [a,b]",
-            "**Normal**:\nBell curve with mean μ and variance σ²",
-            "**Exponential**:\nWaiting time between events (rate λ)",
+            "[Uniform](!/probability/distributions/continuous#uniform):\nEqual likelihood over interval [a,b]",
+            "[Normal](!/probability/distributions/continuous#normal):\nBell curve with mean μ and variance σ²",
+            "[Exponential](!/probability/distributions/continuous#exponential):\nWaiting time between events (rate λ)",
             "**Gamma**:\nWaiting time until k-th event (shape, rate)",
             "**Beta**:\nRandom proportions on [0,1] (shape parameters α,β)",
             "**Chi-Square**:\nSum of squared normal variables (degrees of freedom ν)"
@@ -577,14 +690,15 @@ Understanding probability function patterns is crucial because every distributio
     
 const introContent = {
     id: "intro",
-    title: "Why Probability Distributions Matter",
-    content: `Probability distributions serve as the crucial bridge between theoretical probability and real-world data analysis, transforming abstract mathematical concepts into concrete analytical tools. They form the foundation for statistical inference, machine learning algorithms, and mathematical modeling across all quantitative disciplines.
+    title: "Modeling Random Phenomena",
+    content: `
+    Probability is about uncertainty, but uncertainty alone is not enough to work mathematically. To reason, compare, and make predictions, we need a way to describe how uncertainty is structured. Probability distributions provide that structure.
 
-Distributions provide the mathematical framework for describing random variables and their behavior. When we observe data from experiments or natural phenomena, distributions help us identify underlying patterns, estimate parameters, and make probabilistic statements about future observations. They connect the idealized world of mathematical probability with the messy reality of actual measurements and observations.
+Distributions sit at the core of probability theory and statistics. They organize random behavior into well-defined mathematical forms, allowing different random phenomena to be compared, analyzed, and modeled in a unified way. Whether outcomes are counted or measured, rare or frequent, symmetric or skewed, distributions give probability its shape.
 
-From a pure mathematical perspective, distributions are elegant functions that encode all the probabilistic information about a random variable. They allow us to compute expected values, variances, and higher moments, perform hypothesis testing, and derive sampling distributions. Understanding distributions means understanding how randomness behaves mathematically—whether you're working with discrete counting processes, continuous measurements, or complex stochastic systems.
+This page serves as a conceptual map of probability distributions. It explains how distributions fit into probability theory, how they relate to random variables, and how the major categories of distributions are organized. Specific distribution families and formulas are explored on their own pages; here, the focus is on the ideas that tie them all together.
 
-Mastering probability distributions gives you the mathematical foundation to tackle problems involving uncertainty, from simple coin flips to sophisticated statistical models.`
+    `
   }
   
   
@@ -614,6 +728,55 @@ continuousDistributionsTypesData, seoData}) {
    
     
   const distributionsSections=[
+
+     {
+        id:'what',
+        title:sectionsContent.what.title,
+        link:sectionsContent.what.link,
+        content:[
+          sectionsContent.what.content,
+        ]
+    },
+     {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:sectionsContent.notation.link,
+        content:[
+          sectionsContent.notation.content,
+        ]
+    },
+     {
+        id:'common',
+        title:sectionsContent.common.title,
+        link:sectionsContent.common.link,
+        content:[
+          sectionsContent.common.content,
+        ]
+    },
+     // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
+     // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
+     // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
     {
         id:'basic',
         title:sectionsContent.basic.title,
@@ -680,6 +843,23 @@ continuousDistributionsTypesData, seoData}) {
           sectionsContent.function.after,
         ]
     },
+
+     {
+        id:'matter',
+        title:sectionsContent.matter.title,
+        link:sectionsContent.matter.link,
+        content:[
+          sectionsContent.matter.content,
+        ]
+    },
+     // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
 
 ]
 
