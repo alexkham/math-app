@@ -89,7 +89,7 @@ export default function VarianceVisualizer() {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>Variance Visualizer</h1>
+      {/* <h1 style={styles.title}>Variance Visualizer</h1> */}
       
       <div style={styles.instructions}>
         <strong>How to use:</strong> Drag points on chart to change values • Edit values directly in table • Hover over points to see deviation • Add/remove points or try presets to explore variance behavior
