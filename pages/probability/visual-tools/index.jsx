@@ -78,6 +78,15 @@ export async function getStaticProps(){
     href: "/probability/visual-tools/expected-value"
   },
    {
+    title: "Variance Visualizer",
+    description: "Interactive tool for understanding variance through visual exploration. Drag data points to see real-time variance calculations, toggle between population and sample variance, and watch step-by-step breakdowns of how variance measures data spread.",
+    backgroundColor: "#4F46E5", // Indigo
+    textColor: "#ffffff",
+    ratio: 7,
+     image:'/images/variance.jpg',
+    href: "/probability/visual-tools/variance"
+  },
+   {
     title: "Probability Inequalities Visualizers",
     description: "Explore visually fundamental probability inequalities including Markov's and Chebyshev's inequalities with interactive calculators and visualizations. Understand how these powerful bounds provide estimates for tail probabilities and apply them to real-world scenarios.",
     backgroundColor: "#4F46E5", // Indigo

@@ -83,6 +83,16 @@ export default function VisualToolsPage() {
                 { name: 'Angle Quadrants', href: '/trigonometry/quadrants' },
             ]
         },
+        {
+            category: 'Probability Visualizers',
+            icon: CustomTrigo,
+            content: "Learn Probability in Interactive Way Visualized",
+            href:'/probability/visual-tools',
+            subcategories: [
+                { name: 'Unit Circle Visualizer', href: '/visual-tools/unit-circle' },
+                { name: 'Angle Quadrants', href: '/trigonometry/quadrants' },
+            ]
+        },
     ]
 
     const keyWords = [
@@ -105,7 +115,7 @@ export default function VisualToolsPage() {
                 <link rel="canonical" href="https://www.learnmathclass.com/visual-tools" />
             </Head>
 
-            <GenericNavbar/>
+            {/* <GenericNavbar/> */}
             <br/>
             <br/>
             <br/>
@@ -127,8 +137,30 @@ export default function VisualToolsPage() {
             <div style={{transform:'scale(0.9)'}}>
                 <CardsGroup items={cardItems}/>
             </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
 
-            <ScrollUpButton/>
+            {/* <ScrollUpButton/> */}
         </>
     )
 }
