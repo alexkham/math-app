@@ -25,7 +25,7 @@ export async function getStaticProps(){
 
        {
     title: "Probability Distributions Explorer",
-    description: "Explore coin toss probability with interactive simulators and calculators. Visualize sample spaces, run probability simulations, and watch the Law of Large Numbers in action with our coin flip tools.",
+    description: "Compare probability distributions side-by-side with interactive visualization tools. Switch between discrete and continuous distributions to understand their unique properties, parameters, and real-world applications.",
     backgroundColor: "#4F46E5", // Indigo
     textColor: "#ffffff",
     ratio: 2,
@@ -94,6 +94,15 @@ export async function getStaticProps(){
     ratio: 7,
      image:'/images/inequality.jpg',
     href: "/probability/visual-tools/inequalities"
+  },
+   {
+    title: "Probability Function Visualizers",
+    description: "Visualize probability functions with interactive visualizers for both discrete and continuous distributions. Adjust parameters in real-time to see how PMF and PDF curves change for Binomial, Poisson, Normal, Exponential, and other distributions.",
+    backgroundColor: "#4F46E5", // Indigo
+    textColor: "#ffffff",
+    ratio: 7,
+     image:'/images/probability-function.jpg',
+    href: "/probability/visual-tools/probability-function"
   },
   //  {
   //   title: "Analytics Dashboard",
