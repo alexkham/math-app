@@ -277,7 +277,7 @@ export default function ProbabilityVisualToolsPage({seoData,sectionsContent ,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'10px',marginBottom:'100px'}}>Probability Visual Tools</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'30px'}}>Probability Visual Tools</h1>
    <br/>
    <ModernCardsGroup items={cardsData}/>
    <br/>

@@ -130,19 +130,19 @@ export default function VennDiagramsPage({seoData, sectionsContent, introContent
     {
         id:'1',
         title: sectionsContent.obj1.title,
-        link: '#operations',
+        link: '',
         content: sectionsContent.obj1.content
     },
     {
         id:'2',
         title: sectionsContent.obj2.title,
-        link: '#concepts',
+        link: '',
         content: sectionsContent.obj2.content
     },
     {
         id:'3',
         title: sectionsContent.obj3.title,
-        link: '#examples',
+        link: '',
         content: sectionsContent.obj3.content
     }
 ]
