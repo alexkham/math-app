@@ -9,7 +9,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import GenericMultiComponentFrame from '@/app/components/GenericMulticomponentFrame'
-import CoinFlipperSimulator from '@/app/components/probability/coin-toss/CinTossProbabilitySimulator'
+import CoinFlipperSimulator from '@/app/components/probability/coin-toss/CoinTossProbabilitySimulator'
 import CoinSampleSpaceVisualizer from '@/app/components/probability/sampleSpace/CoinSampleSpaceVisualizer'
 
 

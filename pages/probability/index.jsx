@@ -15,6 +15,7 @@ import TreeStructure2 from '@/app/components/tree-structure/TreeItem2'
 import { probabilityConceptsData } from '@/app/api/db/diagrams/probability/concepts'
 import { setsProbabilityData } from '@/app/api/db/diagrams/probability/setsProbability'
 import { probabilityFunctionData } from '@/app/api/db/diagrams/probability/probabilityFunction'
+import StaticCards from '@/app/components/cards/static-cards/StaticCards'
 
 export async function getStaticProps() {
   const { default: probabilityFormulasList } = await import('@/app/api/db/formulas/probability/probabilityFormulasList')
@@ -494,7 +495,41 @@ It determines how probability is distributed across the outcomes and forms the b
 after:`Because of its central role, this concept receives its own dedicated [page](!/probability/probability-function), where the idea is developed more formally and connected to the structure of probability distributions.
 If you want to understand what a distribution really is, the probability function is the natural place to begin.`,
 link:'/probability/probability-function'
-      }
+      },
+
+
+       visual:{
+      title:`Visual Tools`,
+      content:`Visual probability tools transform abstract mathematical concepts into interactive experiences that build intuitive understanding. By manipulating parameters and observing real-time changes in distributions, sample spaces, and probability outcomes, you develop the kind of deep, geometric intuition that makes probability theory truly click—moving beyond memorized formulas to genuine comprehension of how randomness behaves.
+      Explore our collection of interactive probability visualizers—each tool designed to make complex concepts tangible through hands-on experimentation:
+      `,
+      before:``,
+      after:``,
+      link:'/probability/visual-tools',
+      title1:`<h2 style="color:#3497da;text-align:center;">Coin Toss Visualizers</h2>
+      <hr style="border-color:#3497da; border-width:1px;" />
+      `,
+      title2:`<h2 style="color:#3497da;text-align:center;">Dice Roll Visualizers</h2>
+      <hr style="border-color:#3497da; border-width:1px;" />
+      `,
+  
+      title3:`<h2 style="color:#3497da;text-align:center;">Venn Diagrams Visualizers</h2>
+      <hr style="border-color:#3497da; border-width:1px;" />
+      `,
+  
+      title4:`<h2 style="color:#3497da;text-align:center;">Variance Visualizer</h2>
+      <hr style="border-color:#3497da; border-width:1px;" />
+      `,
+      title5:`<h2 style="color:#3497da;text-align:center;">Expected Value Visualizers</h2>
+      <hr style="border-color:#3497da; border-width:1px;" />
+      `,
+  
+      title6:`<h2 style="color:#3497da;text-align:center;">Probability Inequalities Visualizers</h2>
+      <hr style="border-color:#3497da; border-width:1px;" />
+      `,
+  
+  
+    },
     }
   
 
@@ -539,6 +574,171 @@ Probability is widely applied in science, engineering, finance, and everyday dec
   const canonicalUrl = 'https://www.learnmathclass.com/probability'
   const lastModified = new Date().toISOString()
   
+ const visualToolsCards=[
+
+  {
+    id: 1,
+    title: 'Advanced Analytics',
+    summary: 'Comprehensive data analysis and visualization tools',
+    content: `Our advanced analytics platform provides real-time insights into your data with powerful visualization capabilities.
+     Track key performance metrics, identify trends, and make data-driven decisions. 
+     Features include customizable dashboards, automated reporting, predictive analytics, and machine learning integration.`,
+    icon: '📊', // Can use emoji or image URL like: '/images/analytics.png'
+    link: '/analytics',
+    linkTitle: 'View Dashboard'
+  },
+  // {
+  //   id: 1,
+  //   title: 'Advanced Analytics',
+  //   summary: 'Comprehensive data analysis and visualization tools',
+  //   content: 'Our advanced analytics platform provides real-time insights into your data with powerful visualization capabilities. Track key performance metrics, identify trends, and make data-driven decisions. Features include customizable dashboards, automated reporting, predictive analytics, and machine learning integration.',
+  //   icon: '📊', // Can use emoji or image URL like: '/images/analytics.png'
+  //   link: '/analytics',
+  //   linkTitle: 'View Dashboard'
+  // },
+  // {
+  //   id: 1,
+  //   title: 'Advanced Analytics',
+  //   summary: 'Comprehensive data analysis and visualization tools',
+  //   content: 'Our advanced analytics platform provides real-time insights into your data with powerful visualization capabilities. Track key performance metrics, identify trends, and make data-driven decisions. Features include customizable dashboards, automated reporting, predictive analytics, and machine learning integration.',
+  //   icon: '📊', // Can use emoji or image URL like: '/images/analytics.png'
+  //   link: '/analytics',
+  //   linkTitle: 'View Dashboard'
+  // },
+  // {
+  //   id: 1,
+  //   title: 'Advanced Analytics',
+  //   summary: 'Comprehensive data analysis and visualization tools',
+  //   content: 'Our advanced analytics platform provides real-time insights into your data with powerful visualization capabilities. Track key performance metrics, identify trends, and make data-driven decisions. Features include customizable dashboards, automated reporting, predictive analytics, and machine learning integration.',
+  //   icon: '📊', // Can use emoji or image URL like: '/images/analytics.png'
+  //   link: '/analytics',
+  //   linkTitle: 'View Dashboard'
+  // },
+
+ ]
+
+
+ const coinVisualTools= [
+  {
+    id: 1,
+    title: 'Coin Flipper Simulator',
+    summary: 'Watch the Law of Large Numbers come alive as coin flips converge to their expected probability in real-time.',
+    content: 'This interactive simulator lets you flip a fair or biased coin thousands of times and observe how the actual proportion of heads gravitates toward the theoretical probability. The convergence graph displays your results against confidence bands, showing that while short-term randomness creates wild fluctuations, long-term patterns are remarkably predictable. Track streaks, analyze z-scores, and experiment with different probabilities to build deep intuition about how randomness behaves at scale—transforming abstract statistical concepts like variance and standard deviation into tangible, visual experiences.',
+    icon: '🪙',
+    link: '/probability/visual-tools/coin-toss',
+    linkTitle: 'Launch Simulator'
+  },
+  {
+    id: 2,
+    title: 'Coin Sample Space Visualizer',
+    summary: 'See every possible outcome when flipping multiple coins and instantly calculate probabilities for any pattern or condition.',
+    content: 'This visualizer generates the complete sample space for 1-6 coin flips, displaying all possible outcomes as an interactive grid. Highlight specific events—like "exactly 2 heads," "runs of 3 tails," or "alternating patterns"—and watch as the tool instantly calculates favorable outcomes and probabilities. By making abstract counting principles visual and interactive, you build concrete intuition for how sample spaces work, why we count outcomes the way we do, and how theoretical probabilities emerge from the structure of equally likely events.',
+    icon: '🪙🪙',
+    link: '/probability/visual-tools/coin-toss',
+    linkTitle: 'Launch Visualizer'
+  }
+];
+
+
+const diceVisualTools = [
+  {
+    id: 1,
+    title: 'Dice Roll Simulator',
+    summary: 'Roll multiple dice thousands of times and watch distributions emerge from randomness as sums converge to their theoretical expected values.',
+    content: 'This simulator lets you roll 1-6 standard dice simultaneously, accumulating results to reveal how frequency distributions match theoretical probability patterns. Compare actual histograms against expected distributions, track how average sums converge to 3.5 per die, and analyze variance and z-scores across thousands of rolls. Whether exploring the Central Limit Theorem or understanding why certain sums are more common in board games, this tool transforms abstract dice probability into concrete visual patterns you can manipulate and observe in real-time.',
+    icon: '🎲',
+    link: '/probability/visual-tools/dice-roll',
+    linkTitle: 'Launch Simulator'
+  },
+  {
+    id: 2,
+    title: 'Dice Sample Space Explorer',
+    summary: 'Visualize every possible dice outcome and filter by complex conditions to calculate exact probabilities for any event you can imagine.',
+    content: 'This explorer generates the complete sample space for 1-4 dice rolls, displaying all possible outcomes with interactive dice visuals and letting you highlight events using sophisticated filters—from simple conditions like "sum equals 7" to complex patterns like "all dice in ascending order" or "at least two 6s with an even sum." Watch favorable outcomes light up as you adjust parameters, see probability calculations update instantly, and build intuition for why certain dice combinations are more likely than others. Perfect for understanding conditional probability, combinatorics, and the mathematical structure underlying dice games.',
+    icon: '🎲🎲',
+    link: '/probability/visual-tools/dice-roll',
+    linkTitle: 'Launch Explorer'
+  }
+];
+
+const vennVisualTools = [
+  {
+    id: 1,
+    title: '2-Set Venn Diagram Solver',
+    summary: 'Solve probability problems involving two events by visualizing how marginal probabilities and constraints determine all four regions of a Venn diagram.',
+    content: 'This interactive solver takes marginal probabilities for two events and additional constraints (like intersection or complement probabilities) and calculates the exact probability for all four regions of the sample space. Click diagram segments to highlight specific outcomes, view step-by-step calculations showing how each region is derived from the given information, and explore multiple real-world scenarios from student surveys to medical testing. Perfect for understanding how conditional information propagates through a probability space and building intuition for the algebra of events.',
+    icon: '⚭',
+    link: '/probability/visual-tools/venn-diagrams/two-sets',
+    linkTitle: 'Launch Solver'
+  },
+  {
+    id: 2,
+    title: '3-Set Venn Diagram Solver',
+    summary: 'Tackle complex three-event probability problems by solving systems of equations to find all eight regions where events intersect and complement each other.',
+    content: 'This advanced solver handles the full complexity of three-event probability problems, where you must determine eight distinct regions from marginal probabilities and intersection constraints. Watch as the tool works through systems of equations to compute values like P(A∩B∩C) and P(A∩Bᶜ∩C), with detailed calculation steps showing the logical dependency chain from given information to derived probabilities. The interactive Venn diagram lets you click any of the eight segments to see its specific calculation, making the abstract algebra of three-set problems concrete and visual. Essential for mastering advanced probability problems involving multiple overlapping events.',
+    icon: '⚛',
+    link: '/probability/visual-tools/venn-diagrams/three-sets',
+    linkTitle: 'Launch Solver'
+  }
+];
+
+
+const varianceVisualTools =[ {
+  id: 1,
+  title: 'Interactive Variance Calculator',
+  summary: 'Drag data points and watch variance update in real-time as deviations from the mean become visually tangible through interactive bars and step-by-step calculations.',
+  content: 'This powerful visualizer transforms the abstract concept of variance into something you can literally see and feel. Drag points up or down on the chart to instantly see how each value\'s distance from the mean contributes to overall spread—colored deviation bars grow and shrink dynamically, squared deviations update in the table, and the complete calculation chain unfolds step-by-step on the right. Switch between population (σ²) and sample (s²) variance to understand why we divide by n-1, explore presets that demonstrate low versus high variance datasets, and hover over any element for contextual tooltips. Perfect for building deep intuition about why we square deviations, how outliers disproportionately affect variance, and what standard deviation really measures.',
+  icon: '📈',
+  link: '/probability/visual-tools/variance',
+  linkTitle: 'Launch Calculator'
+}
+
+];
+
+
+const expectedValueVisualTools = [
+  {
+    id: 1,
+    title: 'Weighted Average Expected Value',
+    summary: 'See how probabilities literally "pull" the expected value toward them through an intuitive weight-and-force visualization that makes weighted averages tangible.',
+    content: 'This unique visualizer uses a physical metaphor to show why expected value is called a weighted average. Each outcome appears as a "weight" on a number line, with circle size and arrow thickness representing probability—high-probability outcomes exert stronger "pull" on the expected value. Watch the blue E(X) marker get tugged toward heavy weights while comparing it to the gray unweighted average that ignores probabilities entirely. Use the animation feature to cycle through preset distributions, or manually select scenarios like "Strong Right Bias" to see how asymmetric probabilities shift expected value dramatically. Perfect for building visceral intuition about why E(X) ≠ simple average and how probability weighting fundamentally changes where the "center" of a distribution lies.',
+    icon: '⚖️',
+    link: '/probability/visual-tools/expected-value/weighted',
+    linkTitle: 'Launch Visualizer'
+  },
+  {
+    id: 2,
+    title: 'Discrete Expected Value Calculator',
+    summary: 'Adjust probability distributions with sliders and watch the expected value update instantly as bar heights and contributions recalculate in real-time.',
+    content: 'This interactive calculator displays discrete probability distributions as bar charts with a distinctive red dashed line marking the expected value position. Drag probability sliders for each outcome and watch automatic normalization ensure probabilities sum to 1.0, while each bar simultaneously displays three key pieces of information: the probability P(X=x), the contribution x·P(X=x), and the visual height representing likelihood. The formula E[X] = Σ x·P(X=x) becomes concrete as you see individual contributions sum to the total expected value, and the red line shifts left or right based on your probability adjustments. Ideal for experimenting with different distributions and understanding how expected value emerges from the weighted sum of outcomes.',
+    icon: '📊',
+    link: '/probability/visual-tools/expected-value/discrete',
+    linkTitle: 'Launch Calculator'
+  }
+];
+
+
+const inequalitiesVisualTools = [
+  {
+    id: 1,
+    title: 'Markov Inequality Visualizer',
+    summary: 'Watch how Markov\'s inequality bounds tail probabilities using only the expected value—no variance or distribution shape required.',
+    content: 'This visualizer demonstrates Markov\'s inequality (P(X ≥ a) ≤ E[X]/a) across nine different distributions, both continuous and discrete. Adjust the expected value and threshold to see the bound in action, with red shaded regions showing the actual tail probability beyond your threshold. The tool highlights a critical insight: when a ≤ E[X], the bound becomes useless (≥1), warning you with red alerts. Watch how the bound gets tighter as the threshold increases relative to the mean, and compare actual probabilities to theoretical bounds across exponential, normal, Poisson, binomial, and other distributions. Perfect for understanding when Markov provides useful information and when it\'s too loose to be practical.',
+    icon: '≥',
+    link: '/probability/visual-tools/inequalities/markov',
+    linkTitle: 'Launch Visualizer'
+  },
+  {
+    id: 2,
+    title: 'Chebyshev Inequality Visualizer',
+    summary: 'Explore how Chebyshev\'s inequality bounds deviations from the mean using variance, providing guarantees that work for any distribution.',
+    content: 'This powerful visualizer shows Chebyshev\'s inequality (P(|X - μ| ≥ a) ≤ σ²/a²) in action, highlighting both tail regions symmetrically around the mean. Unlike Markov, Chebyshev uses variance to provide much tighter bounds on how far values can stray from the mean—regardless of distribution shape. Adjust mean, variance, and deviation threshold independently to see how the bound tightens as you move further from center or as variance decreases. Red shaded regions show both tails combined, demonstrating that at least (1 - σ²/a²) of the probability mass must lie within a standard deviations of the mean. Test with normal, exponential, uniform, Poisson, and other distributions to see this distribution-free bound consistently hold, building intuition for why Chebyshev is fundamental to concentration inequalities.',
+    icon: '≶',
+    link: '/probability/visual-tools/inequalities/chebyshev',
+    linkTitle: 'Launch Visualizer'
+  }
+];
+
   return {
     props: {
       sectionContent,
@@ -550,7 +750,14 @@ Probability is widely applied in science, engineering, finance, and everyday dec
       probabilityTermsList,
       axiomsData,
       probabilityRulesTreeData,
-      probabilityTOCTreeData
+      probabilityTOCTreeData,
+      visualToolsCards,
+      coinVisualTools,
+      diceVisualTools,
+      vennVisualTools,
+      varianceVisualTools,
+      expectedValueVisualTools,
+      inequalitiesVisualTools,
     }
   }
 }
@@ -565,7 +772,15 @@ export default function ProbabilityPage({
   probabilityTermsList,
   axiomsData,
   probabilityRulesTreeData,
-  probabilityTOCTreeData
+  probabilityTOCTreeData,
+  visualToolsCards,
+  coinVisualTools,
+  diceVisualTools,
+  vennVisualTools,
+  varianceVisualTools,
+  expectedValueVisualTools,
+  inequalitiesVisualTools,
+
 }) {
   // Reconstruct sections with React components
   const probabilitySections = [
@@ -764,7 +979,65 @@ export default function ProbabilityPage({
           width: 8 // full width
         }
       ]
-    }
+    },
+
+     {
+        id:'visual-tools',
+        title:sectionContent.visual.title,
+        link:sectionContent.visual.link,
+        content:[
+          sectionContent.visual.content,
+          // <StaticCards key={'visual-tools'}
+          // cards={visualToolsCards}
+          // layout='list'
+          
+          // />,
+          sectionContent.visual.title1,
+          <StaticCards
+          key={'coin'}
+          layout='grid'
+          cards={coinVisualTools}
+          theme='minimal'
+          />,
+           sectionContent.visual.title2,
+            <StaticCards
+          key={'dice'}
+          layout='grid'
+          cards={diceVisualTools}
+          theme='minimal'
+          />,
+           sectionContent.visual.title3,
+            <StaticCards
+          key={'venn'}
+          layout='grid'
+          cards={vennVisualTools}
+          theme='minimal'
+          />,
+           sectionContent.visual.title4,
+            <StaticCards
+          key={'variance'}
+          layout='list'
+          cards={varianceVisualTools}
+          theme='minimal'
+          />,
+           sectionContent.visual.title5,
+            <StaticCards
+          key={'expected'}
+          layout='grid'
+          cards={expectedValueVisualTools}
+          theme='minimal'
+          />,
+           sectionContent.visual.title6,
+            <StaticCards
+          key={'inequalities'}
+          layout='grid'
+          cards={inequalitiesVisualTools}
+          theme='minimal'
+          />,
+
+
+        ]
+    },
   ]
 
   const structuredData = {

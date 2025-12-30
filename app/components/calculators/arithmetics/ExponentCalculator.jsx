@@ -123,10 +123,10 @@ function ExponentCalculator({ explanations, detailInstructions }) {
 
   return (
     <div className={styles.pageLayout}>
-      <ExplanationDetails 
+      {/* <ExplanationDetails 
         title="How to use Exponent Calculator" 
         instructions={detailInstructions}
-      />
+      /> */}
       <div className={styles.container}>
         <div className={styles.baseSelection}>
           <label>Choose Power Type</label>
