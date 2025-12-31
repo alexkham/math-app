@@ -65,7 +65,7 @@ const ExplanationDetails = ({ title = "How to use", instructions, links, externa
         <summary style={{
           cursor: 'pointer',
           fontWeight: '600',
-          color: '#2563eb',
+          color: '#2196f3',
           outline: 'none',
           listStyle: 'none',
           display: 'flex',
@@ -74,7 +74,7 @@ const ExplanationDetails = ({ title = "How to use", instructions, links, externa
           height: '10px'
         }}>
           <span style={{
-            backgroundColor: '#2563eb',
+            backgroundColor: '#2196f3',
             color: 'white',
             width: '22px',
             height: '22px',
@@ -89,7 +89,7 @@ const ExplanationDetails = ({ title = "How to use", instructions, links, externa
             marginLeft: 'auto',
             fontSize: '18px',
             fontWeight: 'bold',
-            backgroundColor: '#2563eb',
+            backgroundColor: '#2196f3',
             color: 'white',
             width: '22px',
             height: '22px',
@@ -148,7 +148,7 @@ const ExplanationDetails = ({ title = "How to use", instructions, links, externa
                 href={link.url}
                 style={{
                   display: 'block',
-                  color: '#3b82f6',
+                  color: '#2196f3',
                   textDecoration: 'none',
                   fontSize: '14px',
                   padding: '8px',

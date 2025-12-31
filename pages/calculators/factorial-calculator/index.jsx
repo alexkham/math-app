@@ -2218,7 +2218,7 @@ return (
       
       .layout-container {
         display: grid;
-        grid-template-columns: 20% 80%;
+        grid-template-columns: 15% 85%;
         gap: 20px;
         width: 100%;
       }
@@ -2244,6 +2244,7 @@ return (
     />
     <Breadcrumb/>
     <h1 className='title' style={{marginTop:'-30px',marginBottom:'10px'}}>Factorial Calculator</h1>
+   <br/>
     <div style={{marginBottom:'20px'}}>
       <ExplanationDetails 
         instructions={detailInstructions}

@@ -282,8 +282,8 @@ A probability function is a diagnostic tool. Once defined, it allows us to inter
       content: `
 The probability function is the bridge between the physical world of experiments and the theoretical world of mathematics.
 
-* **It Builds the Distribution:** You cannot mathematically define a probability distribution without the function that governs it.
-* **It Enables Calculation:** Every metric we care about—**Expectation** (averages), **Variance** (risk), and **Quantiles**—is calculated directly from this function.
+* **It Builds the Distribution:** You cannot mathematically define a [probability distribution](!/probability/distributions) without the function that governs it.
+* **It Enables Calculation:** Every metric we care about—[Expectation](!/probability/expected-value) (averages), [Variance](!/probability/variance) (risk), and **Quantiles**—is calculated directly from this function.
 * **It Allows Modeling:** To analyze real-world phenomena (like stock prices, defect rates, or waiting times), we must fit a probability function to the reality. Without it, we have only raw data, not a predictive model.
       `,
       before: ``,
