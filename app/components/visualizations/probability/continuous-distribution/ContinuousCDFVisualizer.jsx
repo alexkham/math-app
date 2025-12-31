@@ -1,12 +1,7 @@
-
-
-import { processContent } from '@/app/utils/contentProcessor';
 import { useState, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-
-
-export default function ContinuousProbabilityDistributions({ explanationsOverride = {} }) {
+export default function ContinuousCDFVisualizer({ explanationsOverride = {} }) {
   const [activeDistribution, setActiveDistribution] = useState('uniform');
   
   const [uniformA, setUniformA] = useState(0);
@@ -17,30 +12,10 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
   
   const [exponentialLambda, setExponentialLambda] = useState(1);
 
-  const uniformPDF = (x, a, b) => {
-    if (x < a || x > b) return 0;
-    return 1 / (b - a);
-  };
-
-  const normalPDF = (x, mean, stdDev) => {
-    const coefficient = 1 / (stdDev * Math.sqrt(2 * Math.PI));
-    const exponent = -Math.pow(x - mean, 2) / (2 * Math.pow(stdDev, 2));
-    return coefficient * Math.exp(exponent);
-  };
-
-  const exponentialPDF = (x, lambda) => {
-    if (x < 0) return 0;
-    return lambda * Math.exp(-lambda * x);
-  };
-
   const uniformCDF = (x, a, b) => {
     if (x < a) return 0;
     if (x > b) return 1;
     return (x - a) / (b - a);
-  };
-
-  const normalCDF = (x, mean, stdDev) => {
-    return 0.5 * (1 + erf((x - mean) / (stdDev * Math.sqrt(2))));
   };
 
   const erf = (x) => {
@@ -60,6 +35,10 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
     return sign * y;
   };
 
+  const normalCDF = (x, mean, stdDev) => {
+    return 0.5 * (1 + erf((x - mean) / (stdDev * Math.sqrt(2))));
+  };
+
   const exponentialCDF = (x, lambda) => {
     if (x < 0) return 0;
     return 1 - Math.exp(-lambda * x);
@@ -75,7 +54,6 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
     for (let x = start; x <= end; x += step) {
       data.push({
         x: parseFloat(x.toFixed(3)),
-        pdf: uniformPDF(x, uniformA, uniformB),
         cdf: uniformCDF(x, uniformA, uniformB)
       });
     }
@@ -91,7 +69,6 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
     for (let x = start; x <= end; x += step) {
       data.push({
         x: parseFloat(x.toFixed(3)),
-        pdf: normalPDF(x, normalMean, normalStdDev),
         cdf: normalCDF(x, normalMean, normalStdDev)
       });
     }
@@ -106,7 +83,6 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
     for (let x = 0; x <= end; x += step) {
       data.push({
         x: parseFloat(x.toFixed(3)),
-        pdf: exponentialPDF(x, exponentialLambda),
         cdf: exponentialCDF(x, exponentialLambda)
       });
     }
@@ -116,9 +92,9 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
   const distributions = {
     uniform: {
       name: 'Continuous Uniform',
-      description: 'Constant probability over an interval',
+      description: 'Linear increase from 0 to 1 over [a, b]',
       data: uniformData,
-      explanation: 'The continuous uniform distribution has constant probability density over the interval $[a, b]$. The probability density function is $f(x) = \\frac{1}{b-a}$ for $a \\leq x \\leq b$, and $0$ otherwise. The expected value is $E[X] = \\frac{a+b}{2}$ and the variance is $\\text{Var}(X) = \\frac{(b-a)^2}{12}$. This distribution models situations where all values in an interval are equally likely, such as the position of a randomly thrown dart on a board, random arrival times within a time window, or measurement errors uniformly distributed within tolerances.',
+      explanation: 'The cumulative distribution function (CDF) of the continuous uniform distribution is $F(x) = \\frac{x-a}{b-a}$ for $a \\leq x \\leq b$, $F(x) = 0$ for $x < a$, and $F(x) = 1$ for $x > b$. The CDF shows the probability that the random variable $X$ is less than or equal to $x$, i.e., $P(X \\leq x)$. For the uniform distribution, this probability increases linearly from 0 to 1 across the interval. This means that the probability of landing in the first half of the interval is exactly 0.5, and the probability increases uniformly as we move through the interval.',
       controls: (
         <>
           <div className="control-group">
@@ -152,9 +128,9 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
     },
     normal: {
       name: 'Normal (Gaussian)',
-      description: 'Bell-shaped curve, symmetric around mean',
+      description: 'S-shaped curve, steepest at mean',
       data: normalData,
-      explanation: 'The normal distribution, also known as the Gaussian distribution, is the most important probability distribution in statistics. Its probability density function is $f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$, where $\\mu$ is the mean and $\\sigma$ is the standard deviation. The expected value is $E[X] = \\mu$ and the variance is $\\text{Var}(X) = \\sigma^2$. The normal distribution appears naturally in many phenomena due to the Central Limit Theorem. Applications include measurement errors, heights and weights in populations, IQ scores, financial returns, and any process that results from many small independent random effects.',
+      explanation: 'The cumulative distribution function (CDF) of the normal distribution is $F(x) = \\frac{1}{2}\\left[1 + \\text{erf}\\left(\\frac{x-\\mu}{\\sigma\\sqrt{2}}\\right)\\right]$, where erf is the error function. The CDF gives the probability $P(X \\leq x)$ that a normally distributed random variable is less than or equal to $x$. The S-shaped curve is symmetric around the mean $\\mu$, where $F(\\mu) = 0.5$. The curve is steepest at the mean and flattens out in the tails. About 68% of values fall within one standard deviation of the mean ($F(\\mu + \\sigma) - F(\\mu - \\sigma) \\approx 0.68$), 95% within two standard deviations, and 99.7% within three standard deviations.',
       controls: (
         <>
           <div className="control-group">
@@ -188,9 +164,9 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
     },
     exponential: {
       name: 'Exponential',
-      description: 'Time between events in a Poisson process',
+      description: 'Rapid initial rise, asymptotic approach to 1',
       data: exponentialData,
-      explanation: 'The exponential distribution models the time between events in a Poisson process, where events occur continuously and independently at a constant average rate. The probability density function is $f(x) = \\lambda e^{-\\lambda x}$ for $x \\geq 0$, where $\\lambda$ is the rate parameter. The expected value is $E[X] = \\frac{1}{\\lambda}$ and the variance is $\\text{Var}(X) = \\frac{1}{\\lambda^2}$. The exponential distribution has the memoryless property, meaning the probability of an event occurring in the next interval is independent of how much time has already passed. Common applications include time until equipment failure, waiting time between customer arrivals, radioactive decay, and time until the next earthquake.',
+      explanation: 'The cumulative distribution function (CDF) of the exponential distribution is $F(x) = 1 - e^{-\\lambda x}$ for $x \\geq 0$, and $F(x) = 0$ for $x < 0$. The CDF shows the probability that the waiting time is less than or equal to $x$. The curve rises quickly at first and then asymptotically approaches 1. The memoryless property of the exponential distribution means that $P(X > s + t | X > s) = P(X > t)$ for all $s, t \\geq 0$. The median waiting time (where $F(x) = 0.5$) is $\\frac{\\ln(2)}{\\lambda}$, and about 63.2% of events occur within the first $\\frac{1}{\\lambda}$ time units.',
       controls: (
         <div className="control-group">
           <label>
@@ -211,8 +187,6 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
 
   const currentDist = distributions[activeDistribution];
   const finalExplanation = explanationsOverride[activeDistribution] || currentDist.explanation;
-
-  const [viewType, setViewType] = useState('pdf');
 
   return (
     <div className="container">
@@ -360,35 +334,6 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
           border: none;
         }
 
-        .view-toggle {
-          display: flex;
-          gap: 10px;
-          margin-bottom: 20px;
-          justify-content: center;
-        }
-
-        .view-btn {
-          padding: 10px 20px;
-          background: white;
-          border: 2px solid #e1e8ed;
-          border-radius: 6px;
-          cursor: pointer;
-          font-weight: 600;
-          color: #1a3a52;
-          transition: all 0.3s;
-        }
-
-        .view-btn:hover {
-          background: #f0f4f8;
-          border-color: #245de1;
-        }
-
-        .view-btn.active {
-          background: #245de1;
-          color: white;
-          border-color: #245de1;
-        }
-
         .chart-container {
           margin-top: 20px;
           background: #fafbfc;
@@ -461,8 +406,8 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
         }
       `}</style>
 
-      {/* <h1>Continuous Probability Distributions</h1> */}
-      <p className="subtitle">Interactive visualization of fundamental continuous distributions</p>
+      <h1>Cumulative Distribution Functions (CDF)</h1>
+      <p className="subtitle">Visualizing probability accumulation for continuous distributions</p>
 
       <div className="tabs">
         {Object.keys(distributions).map((key) => (
@@ -479,7 +424,7 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
       <div className="main-layout">
         <div className="content">
           <div className="distribution-header">
-            <h2 className="distribution-title">{currentDist.name}</h2>
+            <h2 className="distribution-title">{currentDist.name} - CDF</h2>
             <p className="distribution-description">{currentDist.description}</p>
           </div>
           
@@ -487,23 +432,8 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
             {currentDist.controls}
           </div>
 
-          <div className="view-toggle">
-            <button
-              className={`view-btn ${viewType === 'pdf' ? 'active' : ''}`}
-              onClick={() => setViewType('pdf')}
-            >
-              PDF (Probability Density)
-            </button>
-            <button
-              className={`view-btn ${viewType === 'cdf' ? 'active' : ''}`}
-              onClick={() => setViewType('cdf')}
-            >
-              CDF (Cumulative)
-            </button>
-          </div>
-
           <div className="chart-container">
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={450}>
               <LineChart data={currentDist.data}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
                 <XAxis 
@@ -513,13 +443,13 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
                 />
                 <YAxis 
                   label={{ 
-                    value: viewType === 'pdf' ? 'f(x)' : 'F(x)', 
+                    value: 'F(x) = P(X ≤ x)', 
                     angle: -90, 
                     position: 'insideLeft', 
                     style: { fontWeight: 600 } 
                   }}
                   stroke="#1a3a52"
-                  domain={viewType === 'cdf' ? [0, 1] : ['auto', 'auto']}
+                  domain={[0, 1]}
                 />
                 <Tooltip 
                   formatter={(value) => value.toFixed(4)}
@@ -533,9 +463,9 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
                 />
                 <Line 
                   type="monotone"
-                  dataKey={viewType}
+                  dataKey="cdf"
                   stroke="#245de1"
-                  strokeWidth={2}
+                  strokeWidth={3}
                   dot={false}
                 />
               </LineChart>
@@ -544,8 +474,8 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
         </div>
 
         <div className="explanation-panel">
-          <h3 className="explanation-title">Explanation</h3>
-          <p className="explanation-text">{processContent(finalExplanation)}</p>
+          <h3 className="explanation-title">CDF Explanation</h3>
+          <p className="explanation-text">{finalExplanation}</p>
         </div>
       </div>
     </div>

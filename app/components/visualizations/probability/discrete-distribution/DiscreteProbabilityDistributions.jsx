@@ -653,7 +653,7 @@ export default function DiscreteProbabilityDistributions({ explanationsOverride 
           </div>
 
           <div className="chart-container">
-            <ResponsiveContainer width="100%" height={450}>
+            <ResponsiveContainer width="100%" height={350}>
               <BarChart data={currentDist.data}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
                 <XAxis 
