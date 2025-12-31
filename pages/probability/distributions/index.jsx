@@ -544,10 +544,16 @@ Distributions bridge probability theory and data science. They connect theoretic
         after:``,
     
       },
-      obj5:{
+      cdf:{
     
-        title:``,
-        content:``,
+        title:`Cumulative Distribution Function (CDF)`,
+        content:`While the [probability function](!/probability/probability-function) (PMF or PDF) focuses on the likelihood of specific values or densities, the **Cumulative Distribution Function (CDF)** captures the accumulation of probability across the variable's range. The CDF, typically denoted as $F_X(x)$, defines the probability that a [random variable](!/probability/random-variables) $X$ takes a value less than or equal to $x$:
+
+$$F_X(x) = \\mathbb{P}(X \\leq x)$$
+
+This function serves as a complete characterization of any random variable, whether [discrete](!/probability/distributions/discrete) or [continuous](!/probability/distributions/continuous). In the discrete case, the CDF forms a step function that increases in jumps at each outcome. In the continuous case, it appears as a smooth, continuous curve that represents the integral of the density function from $-\infty$ to $x$.
+
+The CDF is universally applicable and mathematically powerful. It allows us to easily calculate the probability of intervals—simply by taking the difference $F(b) - F(a)$—and is the basis for defining **Quantiles** and **Percentiles**. Because probabilities cannot be negative and total probability must sum to one, every CDF fundamentally starts at 0 (at $-\infty$) and monotonically increases to 1 (at $+\infty$).`,
         before:``,
         after:``,
     
@@ -845,6 +851,15 @@ continuousDistributionsTypesData, seoData}) {
     },
 
      {
+        id:'cdf',
+        title:sectionsContent.cdf.title,
+        link:sectionsContent.cdf.link,
+        content:[
+          sectionsContent.cdf.content,
+        ]
+    },
+
+     {
         id:'matter',
         title:sectionsContent.matter.title,
         link:sectionsContent.matter.link,
@@ -852,6 +867,7 @@ continuousDistributionsTypesData, seoData}) {
           sectionsContent.matter.content,
         ]
     },
+    
      // {
     //     id:'1',
     //     title:sectionsContent.obj1.title,
