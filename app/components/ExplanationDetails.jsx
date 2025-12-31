@@ -22,7 +22,7 @@ const ExplanationDetails = ({ title = "How to use", instructions, links, externa
             padding: 8px 15px !important;
             font-size: 12px !important;
             height:50px;
-            z-index:1000000 !important; 
+            z-index:100 ; 
                    
           }
         }
@@ -58,7 +58,7 @@ const ExplanationDetails = ({ title = "How to use", instructions, links, externa
           top: 0,
           left: '50%',
           transform: 'translateX(-50%)',
-          zIndex: '100000',
+          zIndex: '100',
           
           
         }}>

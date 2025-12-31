@@ -554,22 +554,28 @@ import ExplanationDetails from '@/app/components/ExplanationDetails';
 
 export async function getStaticProps() {
 
-const navigationGroup = [
-  {
-    title: 'Other Calculators',
-    items: [
-      {title: 'GCF Calculator', link: '/calculators/gcf-calculator'},
-      {title: 'LCM Calculator', link: '/calculators/lcm-calculator'},
-      {title: 'Prime Number Checker', link: '/calculators/prime-number-checker'},
-      {title: 'Divisibility Calculator', link: '/calculators/divisibility-calculator'},
-      {title: 'Exponent Calculator', link: '/calculators/exponent-calculator'},
-      {title: 'Root Calculator', link: '/calculators/root-calculator'},
-      {title: 'Fractions Calculator', link: '/calculators/fraction-calculator'},
-      {title: 'Polynomial Calculator', link: '/calculators/polynomial-calculator'},
+const navigationGroup=[
+  {title:'Other Calculators',
+    items:[
+      {title:'Exponent Calculator',link:'/calculators/exponent-calculator'},
+      {title:'Root Calculator',link:'/calculators/root-calculator'},
+      {title:'Modulo Calculator',link:'/calculators/modulo-calculator'},
+      {title:'Logarithm Calculator',link:'/calculators/log-calculator'},
+      {title:'Percentage Calculator',link:'/calculators/percentage-calculator'},
+      {title:'Factorial Calculator',link:'/calculators/factorial-calculator'},
+      // {title:'Fractions Calculator',link:'/calculators/fraction-calculator'},
+      {title:'Complex Numbers Calculator',link:'/calculators/complex-numbers'},
+      {title:'Trigonometry Calculator',link:'/calculators/trigonometry-calculator'},
+      {title:'Statistics Calculator',link:'/calculators/statistics-calculator'},
     ]
+  },
+  {
+   title:'Visual Tools',
+   items:[
+    {title:'FractionsVisualizer',link:'/visual-tools/fractions-visualizer'}
+   ]
   }
-];
-
+]
 
 const detailInstructions = [
   "Enter any whole number (positive or negative) in the input field",
@@ -723,23 +729,23 @@ The number $1$ is special—it's neither prime nor composite. By definition, pri
     link: '',
   },
 
-  obj10: {
-    title: `Related Calculators and Concepts`,
-    content: `**Greatest Common Factor (GCF) Calculator** - Find the largest factor shared by two or more numbers. Use prime factorization from this calculator to help identify common factors. Essential for simplifying fractions and solving algebraic problems.
+//   obj10: {
+//     title: `Related Calculators and Concepts`,
+//     content: `**Greatest Common Factor (GCF) Calculator** - Find the largest factor shared by two or more numbers. Use prime factorization from this calculator to help identify common factors. Essential for simplifying fractions and solving algebraic problems.
 
-**Least Common Multiple (LCM) Calculator** - Find the smallest number that's a multiple of two or more numbers. Works hand-in-hand with factoring to solve fraction addition problems and pattern recognition.
+// **Least Common Multiple (LCM) Calculator** - Find the smallest number that's a multiple of two or more numbers. Works hand-in-hand with factoring to solve fraction addition problems and pattern recognition.
 
-**Prime Number Checker** - Quickly verify whether a number is prime or composite. Use this before factoring to understand if your number can be broken down or if it's already in simplest form.
+// **Prime Number Checker** - Quickly verify whether a number is prime or composite. Use this before factoring to understand if your number can be broken down or if it's already in simplest form.
 
-**Divisibility Calculator** - Test if one number divides evenly into another. Complements complete factoring by checking specific divisibility rules for numbers like $2, 3, 5, 9$, and $10$.
+// **Divisibility Calculator** - Test if one number divides evenly into another. Complements complete factoring by checking specific divisibility rules for numbers like $2, 3, 5, 9$, and $10$.
 
-**Polynomial Factoring Tools** - Extend factoring concepts to algebraic expressions. After mastering number factoring, apply similar techniques to expressions like $x^2 - 5x + 6$.
+// **Polynomial Factoring Tools** - Extend factoring concepts to algebraic expressions. After mastering number factoring, apply similar techniques to expressions like $x^2 - 5x + 6$.
 
-For theoretical background, explore **number theory fundamentals**, **divisibility rules**, **prime factorization applications**, and **factor trees** for visual factoring methods.`,
-    before: ``,
-    after: ``,
-    link: '',
-  },
+// For theoretical background, explore **number theory fundamentals**, **divisibility rules**, **prime factorization applications**, and **factor trees** for visual factoring methods.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
 };
 
 const faqQuestions = {

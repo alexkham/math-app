@@ -216,7 +216,7 @@ const CustomProbability=()=>(
     ]
   return (
     <>
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -238,8 +238,24 @@ const CustomProbability=()=>(
     <div style={{transform:'scale(0.9)'}}>
     <CardsGroup items={cardItems}/>
     </div>
-
-    <ScrollUpButton/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+    {/* <ScrollUpButton/> */}
     
     </>
   )
