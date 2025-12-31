@@ -78,7 +78,7 @@ export const mainMenuStructure = [
             { label: 'Trigonometry Calculator', href: '/calculators/trigonometry-calculator' },
            
             { label: 'Root Calculator', href: '/calculators/root-calculator' },
-            { label: 'Logarithmic Calculator', href: '/calculators/log-calculator' },
+            { label: 'Logarithm Calculator', href: '/calculators/log-calculator' },
             { label: 'Exponent Calculator', href: '/calculators/exponent-calculator' },
             { label: 'Factoring Calculator', href: '/calculators/factoring-calculator' },
             { label: 'Polynomial Calculator', href: '/calculators/polynomial-calculator' },

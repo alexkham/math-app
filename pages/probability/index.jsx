@@ -1101,7 +1101,7 @@ export default function ProbabilityPage({
         />
       </Head>
 
-      <GenericNavbar/>
+      {/* <GenericNavbar/> */}
       <br/>
       <br/>
       <br/>
@@ -1137,7 +1137,7 @@ export default function ProbabilityPage({
         <br/>
         <br/>
         <br/>
-        <ScrollUpButton/>
+        {/* <ScrollUpButton/> */}
       </main>
     </>
   )
