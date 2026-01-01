@@ -90,17 +90,17 @@ export async function getStaticProps() {
     {
       title: "Probability Calculators",
       // icon: <Home />,
-      link: "/probability/calculator"
+      link: "/probability/calculators"
     },
     {
         title: "Continuous Distributions Calculator",
         // icon: <Home />,
-        link: "/probability/calculator/continuous-distributions"
+        link: "/probability/calculators/continuous-distributions"
       },
        {
         title: "Discrete Distributions Calculator",
         // icon: <Home />,
-        link: "/probability/calculator/discrete-distributions"
+        link: "/probability/calculators/discrete-distributions"
       },
     
   ];

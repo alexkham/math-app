@@ -372,7 +372,7 @@ By doing this, it becomes possible to talk about averages, variances and more, u
 • **Capturing uncertainty:** Those weights encode exactly how confident you are in each outcome, from “almost impossible” to “almost certain.”
 • **Calculating what matters:** Once the weights are set, you can systematically compute things like “how much total weight falls in this region of outcomes,” or “what’s the average we’d expect,” or “how wildly outcomes vary.”
 • **Guiding decisions:** With those calculations in hand, you can compare different spreads of belief, choose actions that maximize your expected gain, or measure how risky a plan is.
-There are many different probability distributions—each with its own characteristic pattern—but they can be broadly classified into two main categories: [discrete distributions](!/probability/distributions/duscrete), which assign probabilities to countable outcomes, and [continuous distributions](!/probability/distributions/continuous), which use density functions over intervals of real numbers.
+There are many different probability distributions—each with its own characteristic pattern—but they can be broadly classified into two main categories: [discrete distributions](!/probability/distributions/discrete), which assign probabilities to countable outcomes, and [continuous distributions](!/probability/distributions/continuous), which use density functions over intervals of real numbers.
 `,
 svg:
 `

@@ -343,7 +343,7 @@ const navigationGroup = [
       {title: 'Logarithm Calculator', link: '/calculators/log-calculator'},
       {title: 'Factorial Calculator', link: '/calculators/factorial-calculator'},
       {title: 'Trigonometry Calculator', link: '/calculators/trigonometry-calculator'},
-      {title: 'Matrix Calculator', link: '/calculators/matrix-calculator'},
+      // {title: 'Matrix Calculator', link: '/calculators/matrix-calculator'},
     ]
   }
 ];
