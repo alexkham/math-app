@@ -197,27 +197,27 @@ Many commonly used probability distributions have closed-form expressions for th
 
 **Bernoulli distribution** (parameter $p$):
 $$\\mathrm{Var}(X) = p(1-p)$$
-See the [Bernoulli distribution](/probability/bernoulli-distribution) page.
+
 
 **Binomial distribution** (parameters $n$, $p$):
 $$\\mathrm{Var}(X) = np(1-p)$$
-See the [binomial distribution](/probability/binomial-distribution) page.
+See the [binomial distribution](/probability/distributions/discrete#binomial) page.
 
 **Poisson distribution** (parameter $\\lambda$):
 $$\\mathrm{Var}(X) = \\lambda$$
-See the [Poisson distribution](/probability/poisson-distribution) page.
+See the [Poisson distribution](/probability/distributions/discrete#poisson) page.
 
 **Uniform distribution** on $[a, b]$:
 $$\\mathrm{Var}(X) = \\frac{(b-a)^2}{12}$$
-See the [uniform distribution](/probability/uniform-distribution) page.
+See the [uniform distribution](/probability/distributions/continuous#uniform) page.
 
 **Exponential distribution** (parameter $\\lambda$):
 $$\\mathrm{Var}(X) = \\frac{1}{\\lambda^2}$$
-See the [exponential distribution](/probability/exponential-distribution) page.
+See the [exponential distribution](/probability/distributions/continuous#exponential) page.
 
 **Normal distribution** (parameters $\\mu$, $\\sigma^2$):
 $$\\mathrm{Var}(X) = \\sigma^2$$
-See the [normal distribution](/probability/normal-distribution) page.
+See the [normal distribution](/probability/distributions/continuous#normal) page.
 
 Each distribution's page contains derivations and detailed explanations of these variance formulas.`,
       before:``,
