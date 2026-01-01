@@ -160,7 +160,7 @@ export default function BaseConverterPage({seoData,sectionsContent , introConten
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -199,7 +199,15 @@ export default function BaseConverterPage({seoData,sectionsContent , introConten
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

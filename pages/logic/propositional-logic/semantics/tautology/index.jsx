@@ -218,7 +218,7 @@ As long as the equivalence is valid -the overall bilateral expression as a whole
 So the final answer to that question is **YES** , as long as equivalence is valid- it is a tautology.
 
 ## Are all tautologies logical equivalences?
-According to [definition](!/logic/propositional-logic/tautology#definition), a tautology is about a **single proposition that is always true**, while [equivalence](!/logic/propositional-logic/semantics/equivalences) is a relationship between two propositions that always have the same truth value.
+According to [definition](!/logic/propositional-logic/semantics/tautology#definition), a tautology is about a **single proposition that is always true**, while [equivalence](!/logic/propositional-logic/semantics/equivalences) is a relationship between two propositions that always have the same truth value.
 A tautology must always evaluate to true, but it does not necessarily have to express a relationship between two statements.In fact, there are numerous tautologies that are unilateral expressions that evaluate to true in all possible valuations but don't express a relationship of equality between two propositions.
 **Examples**:
 Law of Excluded Middle:

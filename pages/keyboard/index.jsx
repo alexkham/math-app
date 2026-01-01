@@ -21,11 +21,39 @@ export default function KeyboardPage(props) {
         <meta property="og:image" content="https://www.learnmathclass.com/images/math-keyboard-og.jpg" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
       </Head>
+
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
       
       <div>
         <h3 className='title' style={{marginLeft:'20px'}}>Mathematical Keyboard</h3>
         <MultipleTypeWriter />
       </div>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
     </>
   )
 }
