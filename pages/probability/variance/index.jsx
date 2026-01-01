@@ -239,7 +239,7 @@ Because standard deviation shares the same units as the random variable itself, 
 
 Both measures contain the same information—knowing one determines the other. Variance appears more naturally in theoretical derivations and algebraic manipulations, while standard deviation proves more useful for interpretation and communication of results.
 
-For more on standard deviation and its applications, see the [standard deviation](/probability/standard-deviation) page.`,
+`,
       before:``,
       after:``,
   
