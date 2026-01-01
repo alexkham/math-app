@@ -159,7 +159,7 @@ export async function getStaticProps() {
     AND: {
       text: "AND returns true only when both P and Q are true because it represents the strictest form of logical agreement. This mirrors real-world scenarios where multiple conditions must be met simultaneously. AND is fundamental to logic because it allows us to check complete fulfillment of multiple requirements. In set theory, AND corresponds to intersection - finding what sets have in common. This concept extends to validation where we need to ensure all conditions are satisfied before proceeding.",
       links: [{ title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/equivalence-validator" }
+        { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/semantics/equivalence-validator" }
       ],
     },
     OR: {
