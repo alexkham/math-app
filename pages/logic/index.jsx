@@ -58,7 +58,7 @@ export async function getStaticProps() {
  However, not all logical equivalences are laws. Some are specific derivations that are still true but are not considered "fundamental" enough to be named as laws.
  All laws are logical equivalences, but not all logical equivalences are laws.
 Laws are fundamental, while other equivalences may be derived, conditional, or context-dependent.
- Learn more about [basic laws](!/logic/propositional-logic/laws) of propositional logic and other [equivalences](!/logic/propositional-logic/equivalences).`,
+ Learn more about [basic laws](!/logic/propositional-logic/laws) of propositional logic and other [equivalences](!/logic/propositional-logic/semantics/equivalences).`,
 `**Inference Rules**:
  Formal rules such as modus ponens, modus tollens, and others that allow for step-by-step proofs`,
 `**Normal Forms**:
