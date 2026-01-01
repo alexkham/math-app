@@ -305,7 +305,7 @@ These foundational features play crucial roles across linear algebra, connecting
         {
           id: "special",
           title: "Square Matrices and Special Cases",
-          link:`/linear-algebra/matrix/types/square`,
+          link:``,///linear-algebra/matrix/types/square -future link
           content: [`
             Square matrices form a unique class that enables a rich variety of special cases based on their element patterns, symmetry properties, and operational behaviors.That is why square matrices deserve detailed study and investigation.
             Square matrices (n×n) have important subtypes based on element patterns.
