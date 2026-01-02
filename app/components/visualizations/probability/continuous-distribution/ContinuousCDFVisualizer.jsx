@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { processContent } from '@/app/utils/contentProcessor';
 
 export default function ContinuousCDFVisualizer({ explanationsOverride = {} }) {
   const [activeDistribution, setActiveDistribution] = useState('uniform');
@@ -406,7 +407,7 @@ export default function ContinuousCDFVisualizer({ explanationsOverride = {} }) {
         }
       `}</style>
 
-      <h1>Cumulative Distribution Functions (CDF)</h1>
+      {/* <h1>Cumulative Distribution Functions (CDF)</h1> */}
       <p className="subtitle">Visualizing probability accumulation for continuous distributions</p>
 
       <div className="tabs">
@@ -475,7 +476,7 @@ export default function ContinuousCDFVisualizer({ explanationsOverride = {} }) {
 
         <div className="explanation-panel">
           <h3 className="explanation-title">CDF Explanation</h3>
-          <p className="explanation-text">{finalExplanation}</p>
+          <p className="explanation-text">{processContent(finalExplanation)}</p>
         </div>
       </div>
     </div>
