@@ -1,13 +1,10 @@
 
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import React from 'react'
-import '../pages.css'
 import VerticalScrollingFormulaWidget from '@/app/components/examples/VerticalScrollingFormulaWidget'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import Sections from '@/app/components/page-components/section/Sections'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Head from 'next/head';
 import { createContentHtml } from '@/app/utils/utils-functions'
@@ -18,6 +15,7 @@ import StaticSectionTableOfContents from '@/app/components/page-components/secti
 import SEOFriendlySectionTableOfContents from '@/app/components/page-components/section/SEOFriendlyTableofContents'
 import SectionTableOfContents2 from '@/app/components/page-components/section/SectionTableofContents2'
 import ToolsSlider from '@/app/components/sliders/ToolsSlider'
+import '../../pages/pages.css'
 
 
 
@@ -572,12 +570,10 @@ At the center, you have three variables (x, y, z) connected by the equation $x^y
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </Head>
-
-      <GenericNavbar/>
+      {/* <GenericNavbar/> */}
       <br/>
       <br/>
-      <br/>
-      <br/>
+    
       <OperaSidebar 
         side='right'
         topOffset='55px' 
@@ -585,41 +581,36 @@ At the center, you have three variables (x, y, z) connected by the equation $x^y
         panelWidth='200px'
         iconColor='white'
         panelBackgroundColor='#f2f2f2'
-      /> 
+      />
       <Breadcrumb/>
-     {/* <SecondaryNavbar verticalPosition='17.5%' alignment='top' backgroundColor='#1f2937' height={'20px'} /> */}
+      {/* <SecondaryNavbar verticalPosition='17.5%' alignment='top' backgroundColor='#1f2937' height={'20px'} /> */}
       <main>
-        <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>
+        <h1 className='title' style={{marginTop:'-40px',marginBottom:'20px'}}>
           Algebra
         </h1>
-       
-       {/* <StaticSectionTableOfContents
-       sections={algebraSections}
-       showSecondaryNav={true}
-       secondaryNavMode="children"  // or "siblings"
-       secondaryNavTitle="More in this Section" 
-       navLinks={childrenNav}/> */}
-
-       {/* <SEOFriendlySectionTableOfContents
-       sections={algebraSections}
-       showSecondaryNav={true}
-       secondaryNavMode="children"  // or "siblings"
-       secondaryNavTitle="More in this Section" 
-       navLinks={childrenNav}/> */}
-
-       {/* <SectionTableOfContents2
-       sections={algebraSections}
-       showSecondaryNav={true}
-       secondaryNavMode="children"  // or "siblings"
-       secondaryNavTitle="More in this Section" 
-       navLinks={childrenNav}/> */}
-      
-       <SectionTableOfContents 
-  sections={algebraSections}
-  showSecondaryNav={true}
-  secondaryNavMode="children"
-  secondaryNavTitle="More in this Section" />
-
+        {/* <StaticSectionTableOfContents
+        sections={algebraSections}
+        showSecondaryNav={true}
+        secondaryNavMode="children"  // or "siblings"
+        secondaryNavTitle="More in this Section" 
+        navLinks={childrenNav}/> */}
+        {/* <SEOFriendlySectionTableOfContents
+        sections={algebraSections}
+        showSecondaryNav={true}
+        secondaryNavMode="children"  // or "siblings"
+        secondaryNavTitle="More in this Section" 
+        navLinks={childrenNav}/> */}
+        {/* <SectionTableOfContents2
+        sections={algebraSections}
+        showSecondaryNav={true}
+        secondaryNavMode="children"  // or "siblings"
+        secondaryNavTitle="More in this Section" 
+        navLinks={childrenNav}/> */}
+        <SectionTableOfContents 
+   sections={algebraSections}
+   showSecondaryNav={true}
+   secondaryNavMode="children"
+   secondaryNavTitle="More in this Section" />
         {/* <SectionTableOfContents sections={algebraSections}
          showSecondaryNav={true}
          secondaryNavMode="children"  // or "siblings"
@@ -640,8 +631,8 @@ At the center, you have three variables (x, y, z) connected by the equation $x^y
         <br/>
         {/* <ToolsSlider/> */}
         <br/>
-        <ScrollUpButton/>
+         {/* <ScrollUpButton/> */} 
       </main>
     </>
-  )
+  );
 }

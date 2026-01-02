@@ -1,14 +1,12 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import React from 'react'
-import '../../../pages.css'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import DataWrapper2 from '@/app/components/data-wrapper/generic-table/DataWrapper'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
 import ExpandableTable from '@/app/components/generic-table/ExpandableTable'
+import '../../../../pages/pages.css'
 
 
 
@@ -761,39 +759,36 @@ export default function RadicalRulesPage({rootRadicalRulesData,keyWords ,section
       
   return (
     <>
-    <GenericNavbar/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <OperaSidebar
-                 side='right'
-                 topOffset='55px'
-                 sidebarWidth='45px'
-                 panelWidth='200px'
-                 iconColor='white'
-                 panelBackgroundColor='#f2f2f2'
-               />
-    <Breadcrumb/>
-   
-    <h1 className='title' style={{marginTop:'-20px'}}>Radical Rules</h1>
-    <br/>
-    <br/>
-    <SectionTableOfContents sections={radicalsSections}/>
+      {/* <GenericNavbar/> */}
+    
+      <br/>
+      <br/>
+      <OperaSidebar
+                   side='right'
+                   topOffset='55px'
+                   sidebarWidth='45px'
+                   panelWidth='200px'
+                   iconColor='white'
+                   panelBackgroundColor='#f2f2f2'
+                 />
+      <Breadcrumb/>
+      <h1 className='title' style={{marginTop:'-20px'}}>Radical Rules</h1>
+      <br/>
+      <br/>
+      <SectionTableOfContents sections={radicalsSections}/>
       {/* <div style={{transform:'scale(0.87)',marginTop:'0px'}}>
         <DataWrapper2 data={radicalLawsData}
         config={config}/>
         </div> */}
-        <br/>
-        <br/>
-        <IntroSection/>
-        <br/>
-        <br/>
-        <Sections sections={radicalsSections}/>
-        <br/>
-        <br/>
-        <ScrollUpButton/>
-    
+      <br/>
+      <br/>
+      <IntroSection/>
+      <br/>
+      <br/>
+      <Sections sections={radicalsSections}/>
+      <br/>
+      <br/>
+       {/* <ScrollUpButton/> */} 
     </>
-  )
+  );
 }

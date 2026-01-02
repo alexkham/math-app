@@ -1,11 +1,8 @@
 
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import React from 'react'
-import '../../pages.css'
 import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionWrapper'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
@@ -125,8 +122,7 @@ export default function AlgebraDefinitionsPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </Head>
-
-      <GenericNavbar />
+      {/* <GenericNavbar/> */}
       <br />
       <br />
       <br />
@@ -140,7 +136,6 @@ export default function AlgebraDefinitionsPage({
         iconColor='white'
         panelBackgroundColor='#f2f2f2'
       />
-
       <main>
         <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
           Algebra Terms and Definitions
@@ -157,8 +152,8 @@ export default function AlgebraDefinitionsPage({
         <br />
         <br />
         <br />
-        <ScrollUpButton />
+         {/* <ScrollUpButton/> */} 
       </main>
     </>
-  )
+  );
 }
