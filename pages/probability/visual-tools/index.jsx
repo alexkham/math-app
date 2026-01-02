@@ -104,6 +104,15 @@ export async function getStaticProps(){
      image:'/images/probability-function.jpg',
     href: "/probability/visual-tools/probability-function"
   },
+   {
+    title: "Cumulative Probability Function(CDF) Visualizers",
+    description: "Understand cumulative distribution functions through interactive charts for discrete (Binomial, Poisson, Geometric) and continuous distributions (Normal, Exponential, Uniform). Adjust parameters to see how probability accumulates across different distributions with real-time CDF visualizations.",
+    backgroundColor: "#4F46E5", // Indigo
+    textColor: "#ffffff",
+    ratio: 7,
+     image:'/images/accumulate.jpg',
+    href: "/probability/visual-tools/cdf"
+  },
   //  {
   //   title: "Analytics Dashboard",
   //   description: "Comprehensive analytics dashboard with real-time data visualization and reporting tools.",

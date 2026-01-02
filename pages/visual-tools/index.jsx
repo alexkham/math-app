@@ -88,10 +88,18 @@ export default function VisualToolsPage() {
             icon: CustomTrigo,
             content: "Learn Probability in Interactive Way Visualized",
             href:'/probability/visual-tools',
-            subcategories: [
-                { name: 'Unit Circle Visualizer', href: '/visual-tools/unit-circle' },
-                { name: 'Angle Quadrants', href: '/trigonometry/quadrants' },
-            ]
+           subcategories: [
+  { name: 'Probability Distributions Explorer', href: '/probability/visual-tools/distributions' },
+  { name: 'Coin Toss Visualizers', href: '/probability/visual-tools/coin-toss' },
+  { name: 'Dice Roll Visualizers', href: '/probability/visual-tools/dice-roll' },
+  { name: 'Venn Diagrams Visualizers', href: '/probability/visual-tools/venn-diagrams' },
+  { name: 'Conditional Probability Visualizers', href: '/probability/visual-tools/conditional-probability' },
+  { name: 'Expected Value Visualizers', href: '/probability/visual-tools/expected-value' },
+  { name: 'Variance Visualizer', href: '/probability/visual-tools/variance' },
+  { name: 'Probability Inequalities Visualizers', href: '/probability/visual-tools/inequalities' },
+  { name: 'Probability Function Visualizers', href: '/probability/visual-tools/probability-function' },
+  { name: 'CDF Visualizers', href: '/probability/visual-tools/cdf' }
+]
         },
     ]
 
