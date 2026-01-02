@@ -1,12 +1,9 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import React from 'react'
-import '../../pages.css'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import { limitsDiagrams } from '@/app/api/db/diagrams/calculus/limits'
 import { basicFunctionsDiagrams } from '@/app/api/db/diagrams/functions/basics'
 
@@ -96,7 +93,7 @@ Finally, [Trigonometric and Exponential Limits](!/calculus/limits/rules#trigonom
       }
     }
   }
-  
+
 
 export default function LimitsPage({sectionsContent,introContent}) {
 
@@ -135,41 +132,39 @@ export default function LimitsPage({sectionsContent,introContent}) {
   // }
 ]
   return (
-   <>
-   <GenericNavbar/>
-   <br/>
-   <br/>
-   <br/>
-   <br/>
-    <OperaSidebar 
-             side='right'
-             // topOffset='65px' 
-             sidebarWidth='45px'
-             panelWidth='300px'
-             iconColor='white'
-             panelBackgroundColor='#f2f2f2'/> 
-   <Breadcrumb/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Limits of Functions</h1>
-   <br/>
-   <SectionTableOfContents sections={limitSections}/>
-   <br/>
-   <br/>
-   <IntroSection 
-          id={introContent.id}
-          title={introContent.title}
-          content={introContent.content}
-          backgroundColor="#f2f2f2"
-          textColor="#34383c"
-        />
-   <br/>
-   <br/>
-   <Sections sections={limitSections}/>
-   <br/>
-   <br/>
-   <br/>
-  <ScrollUpButton/>
-   
-   
-   </>
-  )
+    <>
+      {/* <GenericNavbar/> */}
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <OperaSidebar 
+               side='right'
+               // topOffset='65px' 
+               sidebarWidth='45px'
+               panelWidth='300px'
+               iconColor='white'
+               panelBackgroundColor='#f2f2f2'/>
+      <Breadcrumb/>
+      <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Limits of Functions</h1>
+      <br/>
+      <SectionTableOfContents sections={limitSections}/>
+      <br/>
+      <br/>
+      <IntroSection 
+             id={introContent.id}
+             title={introContent.title}
+             content={introContent.content}
+             backgroundColor="#f2f2f2"
+             textColor="#34383c"
+           />
+      <br/>
+      <br/>
+      <Sections sections={limitSections}/>
+      <br/>
+      <br/>
+      <br/>
+       {/* <ScrollUpButton/> */} 
+    </>
+  );
 }

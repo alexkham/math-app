@@ -1,12 +1,9 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 import React from 'react'
-import '../../../pages.css'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents';
 import IntroSection from '@/app/components/page-components/section/IntroContentSection';
 import Sections from '@/app/components/page-components/section/Sections';
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import ExpandableTable from '@/app/components/generic-table/ExpandableTable';
 
 
@@ -232,7 +229,7 @@ export async function getStaticProps(){
       }
     }
   }
-  
+
 
 export default function LimitsRulesData({sectionsContent,limitRulesData}) {
 
@@ -330,34 +327,33 @@ export default function LimitsRulesData({sectionsContent,limitRulesData}) {
 
   return (
     <>
-    <GenericNavbar/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <OperaSidebar 
-                side='right'
-                // topOffset='65px' 
-                sidebarWidth='45px'
-                panelWidth='200px'
-                iconColor='white'
-                panelBackgroundColor='#f2f2f2'
-              /> 
-    <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>Limits Rules</h1>
-    <br/>
-    <SectionTableOfContents sections={limitsRulesSections}/>
-    <br/>
-    <br/>
-    <br/>
-    {/* <IntroSection/> */}
-    <br/>
-    <br/>
-    <Sections sections={limitsRulesSections}/>
-    <br/>
-    <br/>
-    <ScrollUpButton/>
-    
+      {/* <GenericNavbar/> */}
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <OperaSidebar 
+                  side='right'
+                  // topOffset='65px' 
+                  sidebarWidth='45px'
+                  panelWidth='200px'
+                  iconColor='white'
+                  panelBackgroundColor='#f2f2f2'
+                />
+      <Breadcrumb/>
+      <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>Limits Rules</h1>
+      <br/>
+      <SectionTableOfContents sections={limitsRulesSections}/>
+      <br/>
+      <br/>
+      <br/>
+      {/* <IntroSection/> */}
+      <br/>
+      <br/>
+      <Sections sections={limitsRulesSections}/>
+      <br/>
+      <br/>
+       {/* <ScrollUpButton/> */} 
     </>
-  )
+  );
 }

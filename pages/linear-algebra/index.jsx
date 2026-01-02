@@ -314,7 +314,7 @@ export default function LinearAlgebraPage({
         />
       </Head>
 
-      <GenericNavbar/>
+      {/* <GenericNavbar/> */}
       <br/>
       <br/>
       <br/>
@@ -360,7 +360,7 @@ export default function LinearAlgebraPage({
         <br/>
         
         <br/>
-        <ScrollUpButton/>
+        {/* <ScrollUpButton/> */}
       </main>
     </>
   )

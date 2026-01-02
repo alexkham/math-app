@@ -31,14 +31,14 @@ export async function getStaticProps(){
     obj1:{
       title:`From Single Random Variables to Pairs`,
       content:`
-Variance describes how a single random variable is distributed around its typical
+[Variance](!/probability/variance) describes how a single [random variable](!/probability/random-variables) is distributed around its typical
 value. It captures variability, but only for one quantity at a time.
 
 In many applications, two quantities are observed together in each trial or
 measurement. Treating them independently ignores how their values are related across
 the same observations.
 
-Covariance extends the idea of variability to pairs of random variables by focusing on
+Covariance extends the idea of variability to pairs of [random variables](!/probability/random-variables) by focusing on
 their joint behavior rather than on each variable in isolation.
 `,
       before:``,
@@ -50,7 +50,7 @@ their joint behavior rather than on each variable in isolation.
     obj2:{
       title:`What Covariance Describes`,
       content:`
-For each random variable, values fluctuate around an average level.  
+For each [random variable](!/probability/random-variables), values fluctuate around an average level.  
 Covariance examines how the positions of two variables relative to their own averages
 compare across the same observations.
 
@@ -60,7 +60,7 @@ If one variable tends to be above its average while the other is below, the cova
 reflects an opposing pattern.
 
 In this way, covariance summarizes the directional relationship between the deviations
-of two random variables.
+of two [random variable](!/probability/random-variables).
 `,
       before:``,
       after:``,
@@ -91,13 +91,13 @@ variables deviate from their averages.
     obj4:{
       title:`Covariance and Independence`,
       content:`
-If two random variables are independent, their joint behavior separates into two
+If two [random variables](!/probability/random-variables) are independent, their joint behavior separates into two
 unrelated components. As a result, their covariance evaluates to zero.
 
 The converse does not hold. A covariance value of zero does not rule out dependence.
 Two variables may exhibit structured relationships that covariance does not capture.
 
-Covariance therefore reflects only one limited aspect of how random variables may be
+Covariance therefore reflects only one limited aspect of how [random variables](!/probability/random-variables) may be
 related.`,
       before:``,
       after:``,
@@ -108,7 +108,7 @@ related.`,
       title:`Why Covariance Is Important`,
       content:`
 Covariance provides a way to describe how two random variables are related beyond their
-individual behavior. It captures information that variance alone cannot express.
+individual behavior. It captures information that [variance](!/probability/variance) alone cannot express.
 
 This concept plays a central role in many areas of probability and statistics, including
 the study of joint distributions, linear relationships, and multivariate models.
@@ -144,11 +144,11 @@ behavior.
     obj7:{
       title:`Notation & Naming Conventions`,
       content:`
-Covariance between two random variables is written as $\\operatorname{Cov}(X,Y)$.  
+Covariance between two [random variables](!/probability/random-variables) is written as $\\operatorname{Cov}(X,Y)$.  
 The order of the variables does not affect the value, so $\\operatorname{Cov}(X,Y)$ and
 $\\operatorname{Cov}(Y,X)$ represent the same quantity.
 
-When a random variable is paired with itself, covariance reduces to variance.  
+When a [random variable](!/probability/random-variables)e is paired with itself, covariance reduces to [variance](!/probability/variance).  
 This relationship links covariance directly to concepts introduced earlier.
 
 

@@ -1,11 +1,8 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import React from 'react'
-import '../../pages.css'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import Sections from '@/app/components/page-components/section/Sections'
 
 
@@ -97,7 +94,7 @@ The **Basic Integration Rules** provide the essential foundation, mirroring the 
       }
     }
   }
-  
+
 
 export default function IntegralsPage({sectionsContent,introContent}) {
 
@@ -131,11 +128,11 @@ export default function IntegralsPage({sectionsContent,introContent}) {
 
   return (
     <>
-    <GenericNavbar/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+      {/* <GenericNavbar/> */}
+      <br/>
+      <br/>
+      <br/>
+      <br/>
       <OperaSidebar 
             side='right'
             // topOffset='65px' 
@@ -143,27 +140,26 @@ export default function IntegralsPage({sectionsContent,introContent}) {
             panelWidth='200px'
             iconColor='white'
             panelBackgroundColor='#f2f2f2'
-          /> 
-    <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>Integrals</h1>
-    <br/>
-    <SectionTableOfContents sections={integralSections}/>
-    <br/>
-    <br/>
-    <IntroSection 
-          id={introContent.id}
-          title={introContent.title}
-          content={introContent.content}
-          backgroundColor="#f2f2f2"
-          textColor="#34383c"
-        />
-    <br/>
-    <br/>
-    <Sections sections={integralSections}/>
-    <br/>
-    <br/>
-    <ScrollUpButton/>
-    
+          />
+      <Breadcrumb/>
+      <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>Integrals</h1>
+      <br/>
+      <SectionTableOfContents sections={integralSections}/>
+      <br/>
+      <br/>
+      <IntroSection 
+            id={introContent.id}
+            title={introContent.title}
+            content={introContent.content}
+            backgroundColor="#f2f2f2"
+            textColor="#34383c"
+          />
+      <br/>
+      <br/>
+      <Sections sections={integralSections}/>
+      <br/>
+      <br/>
+       {/* <ScrollUpButton/> */} 
     </>
-  )
+  );
 }

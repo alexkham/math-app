@@ -1,9 +1,6 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import React from 'react'
-import '../../pages.css'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import { Section } from 'lucide-react'
@@ -269,40 +266,39 @@ export default function DerivativesPage({sectionsContent ,introContent}) {
 
 
   return (
-   <>
-   <GenericNavbar/>
-   <br/>
-   <br/>
-   <br/>
-   <br/>
-    <OperaSidebar 
-              side='right'
-              // topOffset='65px' 
-              sidebarWidth='45px'
-              panelWidth='200px'
-              iconColor='white'
-              panelBackgroundColor='#f2f2f2'
-            /> 
-   <Breadcrumb/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Derivatives</h1>
-   <br/>
-   <SectionTableOfContents sections={derivativesSections}/>
-   <br/>
-   <br/>
-   <IntroSection 
-          id={introContent.id}
-          title={introContent.title}
-          content={introContent.content}
-          backgroundColor="#f2f2f2"
-          textColor="#34383c"
-        />
-   <br/>
-   <br/>
-   <br/>
-   <Sections sections={derivativesSections}/>
-   <br/>
-   <ScrollUpButton/>
-
-   </>
-  )
+    <>
+      {/* <GenericNavbar/> */}
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <OperaSidebar 
+                side='right'
+                // topOffset='65px' 
+                sidebarWidth='45px'
+                panelWidth='200px'
+                iconColor='white'
+                panelBackgroundColor='#f2f2f2'
+              />
+      <Breadcrumb/>
+      <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Derivatives</h1>
+      <br/>
+      <SectionTableOfContents sections={derivativesSections}/>
+      <br/>
+      <br/>
+      <IntroSection 
+             id={introContent.id}
+             title={introContent.title}
+             content={introContent.content}
+             backgroundColor="#f2f2f2"
+             textColor="#34383c"
+           />
+      <br/>
+      <br/>
+      <br/>
+      <Sections sections={derivativesSections}/>
+      <br/>
+       {/* <ScrollUpButton/> */} 
+    </>
+  );
 }

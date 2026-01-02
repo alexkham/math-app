@@ -30,15 +30,15 @@ export async function getStaticProps(){
       content:`
 ### Formal Statement of the Central Limit Theorem
 
-Let $X_1, X_2, \\dots, X_n$ be independent and identically distributed random variables with finite mean $\mu$ and finite variance $\sigma^2$.  
+Let $X_1, X_2, \\dots, X_n$ be independent and identically distributed [random variables](!/probability/random-variables) with finite mean $\\mu$ and finite [variance](!/probability/variance) $\\sigma^2$.  
 Let $\\bar X_n$ denote their sample mean.
 
-As the sample size $n$ increases, the standardized sample mean converges in distribution to a normal random variable:
+As the sample size $n$ increases, the standardized sample mean converges in distribution to a normal [random variable](!/probability/random-variables):
 
 $\\displaystyle (\\bar X_n - \\mu)\, / \, (\\sigma / \\sqrt{n}) \;\\xrightarrow{d}\; \\mathcal{N}(0,1)$
 
 This result does not depend on the shape of the original distribution.  
-Only independence, identical distribution, and finite variance are required.
+Only [independence](!/probability/independence), identical distribution, and finite [variance](!/probability/variance) are required.
 
 `,
       before:``,
@@ -53,7 +53,7 @@ Only independence, identical distribution, and finite variance are required.
 The Central Limit Theorem is not concerned with individual outcomes or single measurements.  
 Instead, it describes the behavior of the *distribution of averages* formed from many observations.
 
-Even when the original random variable has a skewed, irregular, or discrete distribution, the distribution of the sample mean becomes approximately normal once the sample size is sufficiently large. As the number of observations increases, this distribution moves closer to the familiar bell-shaped curve.
+Even when the original [random variable](!/probability/random-variables) has a skewed, irregular, or discrete distribution, the distribution of the sample mean becomes approximately normal once the sample size is sufficiently large. As the number of observations increases, this distribution moves closer to the familiar bell-shaped curve.
 
 The theorem explains why normal patterns appear so often in aggregated data.  
 It shows that regularity emerges from the process of averaging itself, largely independent of the original source of randomness.
@@ -71,18 +71,18 @@ It shows that regularity emerges from the process of averaging itself, largely i
 The Central Limit Theorem involves several distinct objects, each playing a different role. Keeping these roles separate is essential for correct interpretation.
 
 * **Original random variable** ($X$) 
-  Represents the outcome of a single experiment or measurement, with mean $\\mu$ and variance $\sigma^2$.
+  Represents the outcome of a single experiment or measurement, with mean $\\mu$ and [variance](!/probability/variance) $\\sigma^2$.
 
 * **Sample** ($X_1, X_2, \\dots, X_n$)  
-  Independent copies of the original random variable, drawn under identical conditions.
+  Independent copies of the original [random variable](!/probability/random-variables), drawn under identical conditions.
 
 * **Sample mean** ($\\bar X_n$) 
   The average of the sample values,
   $[ \\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i, ]$
-  which is itself a random variable.
+  which is itself a [random variable](!/probability/random-variables).
 
 * **Limiting normal distribution**  
-  The normal distribution that the standardized sample mean approaches in distribution as $n$ increases.
+  The [normal distribution](!/probability/distributions/continuous#normal) that the standardized sample mean approaches in distribution as $n$ increases.
 
 The theorem does not describe how individual observations behave.  
 It describes how the **distribution of the sample mean** behaves as the sample size grows.
@@ -105,7 +105,7 @@ Rather than focusing on formulas, this section shows how distributions change as
   As the sample size grows, the distribution of the sample mean becomes smoother and more symmetric. Random fluctuations are reduced, and a bell-shaped form begins to emerge.
 
 * **Convergence toward a normal shape**  
-  For sufficiently large samples, the histogram of sample means closely resembles a normal distribution, regardless of the original distribution’s shape.
+  For sufficiently large samples, the histogram of sample means closely resembles a [normal distribution](!/probability/distributions/continuous#normal), regardless of the original distribution’s shape.
 
 * **Different starting distributions, same outcome**  
   Whether the original data are uniform, skewed, or discrete, the averaging process drives the sample mean toward the same normal pattern.
@@ -148,13 +148,13 @@ Its validity depends on several key conditions.
   Each observation must come from the same underlying distribution. Mixing different distributions can break the aggregation effect described by the theorem.
 
 * **Finite mean**  
-  The expected value of the original random variable must exist. Without a well-defined mean, averaging loses its stabilizing effect.
+  The [expected value](!/probability/expected-value) of the original [random variable](!/probability/random-variables) must exist. Without a well-defined mean, averaging loses its stabilizing effect.
 
-* **Finite variance**  
+* **Finite** [variance](!/probability/variance)  
   The variability of the original distribution must be finite. Extremely heavy-tailed distributions can violate this requirement.
 
 When these conditions fail, the conclusion of the theorem may no longer hold.  
-In particular, heavy-tailed or strongly dependent data can produce averages that do not resemble a normal distribution, even for large sample sizes.
+In particular, heavy-tailed or strongly dependent data can produce averages that do not resemble a [normal distribution](!/probability/distributions/continuous#normal), even for large sample sizes.
 `,
       before:``,
       after:``,
@@ -209,7 +209,7 @@ The Central Limit Theorem is arguably the most important result in probability a
 
 Without the CLT, we couldn't construct **confidence intervals** or perform **hypothesis tests**. These methods rely on knowing the distribution of sample statistics—and the CLT tells us that distribution is approximately normal, regardless of the underlying data. This universality is extraordinary.
 
-The theorem also explains why the **normal distribution appears everywhere** in nature and science. Measurement errors, biological traits, financial returns—many phenomena involve summing or averaging independent factors, which is exactly the setup where the CLT applies.
+The theorem also explains why the [normal distribution](!/probability/distributions/continuous#normal) **appears everywhere** in nature and science. Measurement errors, biological traits, financial returns—many phenomena involve summing or averaging independent factors, which is exactly the setup where the CLT applies.
 
 In practical terms, the CLT allows researchers to:
 
@@ -255,7 +255,7 @@ This transformation happens through aggregation. Individual values may be chaoti
 
 Three core insights define the CLT:
 • Averaging smooths randomness into regular patterns
-• The normal distribution emerges universally from aggregation
+• The [normal distribution](!/probability/distributions/continuous#normal) emerges universally from aggregation
 • Probability becomes predictable at scale
 
 The Central Limit Theorem is why statistical inference works. It's why we can quantify uncertainty, build confidence intervals, and make probability statements about sample statistics. It connects the irregular world of individual observations to the ordered world of statistical theory.

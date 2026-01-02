@@ -47,15 +47,17 @@ The normal distribution is fully characterized by these two parameters. **μ** d
 
 
  notation:`<h3 style="color: #334155;">Notations Used</h3>
-$X \\sim N(\\mu, \\sigma^2)$ — distribution of the random variable (variance notation).
+$X \\sim N(\\mu, \\sigma^2)$ — distribution of the [random variable](!/probability/random-variables) ([variance](!/probability/variance) notation).
 
 $X \\sim \\text{Normal}(\\mu, \\sigma^2)$ — alternative explicit form.
 
-$N(\\mu, \\sigma^2)$ — used to denote the distribution itself (not the random variable).
+$N(\\mu, \\sigma^2)$ — used to denote the distribution itself (not the [random variable](!/probability/random-variables)
+).
 
 $N(0, 1)$ — the standard normal distribution ($\\mu = 0, \\sigma = 1$).
 
-$Z \\sim N(0, 1)$ — conventional notation for a standard normal random variable.
+$Z \\sim N(0, 1)$ — conventional notation for a standard normal [random variable](!/probability/random-variables)
+.
 
 **Note:** Some texts use $N(\\mu, \\sigma)$ with standard deviation instead of variance. Always check which convention is being used. Statistical software often defaults to variance notation.
 
@@ -75,10 +77,10 @@ $$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}, \\
 * **Parameters**:
   * $\\mu$: The mean determines where the center of the bell sits
   * $\\sigma$: The standard deviation controls the width of the bell
-  * $\\sigma^2$: The variance ($\\sigma$ squared) appears in the exponent
+  * $\\sigma^2$: The [variance](!/probability/variance) ($\\sigma$ squared) appears in the exponent
 
 * **Support (Range of the Random Variable)**:
-  * The random variable $X$ can take any real value: $(-\\infty, +\\infty)$
+  * The [random variable](!/probability/random-variables) $X$ can take any real value: $(-\\infty, +\\infty)$
   * While theoretically unbounded, approximately 99.7% of values fall within $\\mu \\pm 3\\sigma$
   * The **support** is the entire real line
 
@@ -144,7 +146,7 @@ keyProperties:`<h3 style="color: #1e3a8a;">Key Properties and Special Characteri
 
 **Linear Transformations**: If $X \\sim N(\\mu, \\sigma^2)$, then $aX + b \\sim N(a\\mu + b, a^2\\sigma^2)$. This property preserves normality under scaling and shifting.
 
-**Standardization**: Any normal random variable can be standardized: $Z = \\frac{X - \\mu}{\\sigma}$ gives $Z \\sim N(0, 1)$, the standard normal distribution.
+**Standardization**: Any normal [random variable](!/probability/random-variables) can be standardized: $Z = \\frac{X - \\mu}{\\sigma}$ gives $Z \\sim N(0, 1)$, the standard normal distribution.
 
 **Sums of Normals**: If $X_1 \\sim N(\\mu_1, \\sigma_1^2)$ and $X_2 \\sim N(\\mu_2, \\sigma_2^2)$ are independent, then $X_1 + X_2 \\sim N(\\mu_1 + \\mu_2, \\sigma_1^2 + \\sigma_2^2)$.
 
@@ -182,11 +184,11 @@ uniform:{
 The continuous uniform distribution is fully characterized by these two parameters. **a** and **b** define the endpoints of the interval where the random variable can take values. The distribution assigns equal probability density to every point in this interval, making it the simplest continuous distribution.`,
 
   notation:`<h3 style="color: #334155;">Notations Used</h3>
-$X \\sim U(a, b)$ — distribution of the random variable.
+$X \\sim U(a, b)$ — distribution of the [random variable](!/probability/random-variables).
 
 $X \\sim \\text{Uniform}(a, b)$ — alternative explicit form.
 
-$U(a, b)$ or $\\text{Unif}(a, b)$ — used to denote the distribution itself (not the random variable).
+$U(a, b)$ or $\\text{Unif}(a, b)$ — used to denote the distribution itself (not the [random variable](!/probability/random-variables)).
 
 $U(0, 1)$ — the standard uniform distribution on the unit interval.
 
@@ -204,12 +206,12 @@ $$f(x) = \\begin{cases} \\frac{1}{b-a} & \\text{if } a \\leq x \\leq b \\\\ 0 & 
 * **Constant Density**: The uniform distribution has a flat, rectangular shape. The probability density is the same at every point within the interval [a, b].
 
 * **Parameters**:
-  * $a$: The minimum value the random variable can take
-  * $b$: The maximum value the random variable can take
+  * $a$: The minimum value the [random variable](!/probability/random-variables) can take
+  * $b$: The maximum value the [random variable](!/probability/random-variables) can take
   * The width of the interval is $b - a$
 
 * **Support (Range of the Random Variable)**:
-  * The random variable $X$ can take any value in the closed interval: $[a, b]$
+  * The [random variable](!/probability/random-variables) $X$ can take any value in the closed interval: $[a, b]$
   * Outside this interval, the probability density is zero
   * The **support** is the finite interval [a, b]
 
@@ -312,11 +314,11 @@ exponential:{
 The exponential distribution is fully characterized by a single parameter. **λ** represents the average rate at which events occur per unit time. Alternatively, the distribution is sometimes parameterized by $\\beta = 1/\\lambda$, the scale parameter, which represents the mean waiting time. Higher λ means events occur more frequently (shorter waiting times), while lower λ means events are rarer (longer waiting times).`,
 
   notation:`<h3 style="color: #334155;">Notations Used</h3>
-$X \\sim \\text{Exp}(\\lambda)$ — distribution of the random variable (rate parameterization).
+$X \\sim \\text{Exp}(\\lambda)$ — distribution of the [random variable](!/probability/random-variables) (rate parameterization).
 
 $X \\sim \\text{Exponential}(\\lambda)$ — alternative explicit form.
 
-$\\text{Exp}(\\lambda)$ — used to denote the distribution itself (not the random variable).
+$\\text{Exp}(\\lambda)$ — used to denote the distribution itself (not the [random variable](!/probability/random-variables)).
 
 $X \\sim \\text{Exp}(\\beta)$ — scale parameterization where $\\beta = 1/\\lambda$ is the mean.
 
@@ -339,7 +341,7 @@ $$f(x) = \\begin{cases} \\lambda e^{-\\lambda x} & \\text{if } x \\geq 0 \\\\ 0 
   * Lower $\\lambda$ means gentler decline (events happen less frequently)
 
 * **Support (Range of the Random Variable)**:
-  * The random variable $X$ can take any non-negative value: $[0, \\infty)$
+  * The [random variable](!/probability/random-variables) $X$ can take any non-negative value: $[0, \\infty)$
   * Time cannot be negative, so the support starts at zero
   * Theoretically unbounded above, though very large values have low probability
   * The **support** is the half-infinite interval $[0, \\infty)$
@@ -433,11 +435,11 @@ Common examples include the normal distribution (describing heights, test scores
   
       title:`Continuous vs Discrete Distributions`,
       content:`
-Understanding whether your random variable is continuous or discrete determines which distribution family to use and how to calculate probabilities. The distinction fundamentally changes your mathematical approach.
+Understanding whether your [random variable](!/probability/random-variables) is continuous or discrete determines which distribution family to use and how to calculate probabilities. The distinction fundamentally changes your mathematical approach.
 
 [Discrete distributions](!/probability/distributions/discrete) deal with countable outcomes—things you can list individually. When you [roll dice](!/probability/models/dice-roll), count defective items, or track the number of customers arriving, you're working with discrete random variables. Here, each specific outcome has a non-zero probability, and you calculate probabilities by summing values from a probability mass function (PMF). On a graph, discrete distributions appear as distinct bars or points.
 
-**Continuous distributions** handle measurements that flow along a continuum—height, time, temperature, distance. The underlying random variable can assume infinitely many values within any interval. Since individual points have probability zero, you must calculate probabilities over ranges by integrating the probability density function (PDF). Graphs show smooth curves where area represents probability.
+**Continuous distributions** handle measurements that flow along a continuum—height, time, temperature, distance. The underlying [random variable](!/probability/random-variables) can assume infinitely many values within any interval. Since individual points have probability zero, you must calculate probabilities over ranges by integrating the probability density function (PDF). Graphs show smooth curves where area represents probability.
 
 **Choosing the right type:**
 • Can you count the possible outcomes? Use discrete (binomial, Poisson, geometric)
@@ -505,7 +507,7 @@ Despite their different shapes and applications, all continuous distributions sh
 Every continuous distribution has a PDF, $f(x)$, that describes the relative likelihood of values. While the formula changes between distributions, the PDF always integrates to 1 over the entire support.
 
 **Cumulative Distribution Function (CDF)**
-The [CDF](!/probability/cdf), $F(x)$, gives the probability that the random variable is less than or equal to x. Calculated by integrating the PDF from negative infinity to x, it always ranges from 0 to 1 and is non-decreasing.
+The [CDF](!/probability/cdf), $F(x)$, gives the probability that the [random variable](!/probability/random-variables) is less than or equal to x. Calculated by integrating the PDF from negative infinity to x, it always ranges from 0 to 1 and is non-decreasing.
 
 **Mean (Expected Value)**
 [Expected Value](!/probability/expected-value) is the center of mass of the distribution, calculated as the integral of x·f(x). Different distributions have different formulas, but the concept remains constant—it's where the distribution "balances."
@@ -606,7 +608,7 @@ The probability density function f(x) tells you the relative likelihood of value
 
 **The CDF: Your Probability Calculator**
 
-The cumulative distribution function F(x) = P(X ≤ x) answers the question "what's the probability the random variable is at most x?" This is directly usable. If you need P(X ≤ 5), just evaluate F(5). For P(X > 5), use 1 - F(5). For P(3 < X ≤ 7), calculate F(7) - F(3). The CDF eliminates the need for integration in many practical problems.
+The cumulative distribution function F(x) = P(X ≤ x) answers the question "what's the probability the [random variable](!/probability/random-variables) is at most x?" This is directly usable. If you need P(X ≤ 5), just evaluate F(5). For P(X > 5), use 1 - F(5). For P(3 < X ≤ 7), calculate F(7) - F(3). The CDF eliminates the need for integration in many practical problems.
 
 **The Fundamental Relationship**
 

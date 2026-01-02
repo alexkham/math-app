@@ -3,6 +3,10 @@ import TypeWriter from '@/app/components/keyboards/TypeWriter'
 import React from 'react'
 import Head from 'next/head';
 import MultipleTypeWriter from '@/app/components/keyboards/MultipleTypeWriter';
+import NewMultipleTypeWriter from '@/app/components/keyboards/NewMultipleTypeWriter';
+import '../../pages/pages.css'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 
 export default function KeyboardPage(props) {
   return (
@@ -24,16 +28,27 @@ export default function KeyboardPage(props) {
 
       <br/>
       <br/>
+     
+    
+       <OperaSidebar 
+              side='right'
+              topOffset='55px' 
+              sidebarWidth='45px'
+              panelWidth='300px'
+              iconColor='white'
+              panelBackgroundColor='#f2f2f2'
+            /> 
+            <Breadcrumb/>
       <br/>
       <br/>
-      <br/>
-      <br/>
-      <br/>
-      
-      <div>
-        <h3 className='title' style={{marginLeft:'20px'}}>Mathematical Keyboard</h3>
-        <MultipleTypeWriter />
-      </div>
+     
+     
+        <h1 className='title' style={{marginTop:'-50px',marginBottom:'-30px'}}>Mathematical Keyboard</h1>
+        {/* <MultipleTypeWriter /> */}
+        <div style={{transform:'scale(0.95)',margin:'auto',width:'80%'}}>
+        <NewMultipleTypeWriter/>
+        </div>
+    
       <br/>
       <br/>
       <br/>
