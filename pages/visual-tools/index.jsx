@@ -36,6 +36,25 @@ const CustomAlgebra = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-variable"><path d="M8 21s-4-3-4-9 4-9 4-9"/><path d="M16 3s4 3 4 9-4 9-4 9"/><line x1="15" x2="9" y1="9" y2="15"/><line x1="9" x2="15" y1="9" y2="15"/></svg>
 )
 
+const CustomProbability = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect width="12" height="12" x="2" y="10" rx="2" ry="2"/>
+        <circle cx="8" cy="16" r="1" fill="currentColor"/>
+        <path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6"/>
+        <circle cx="15" r="1" fill="currentColor"/>
+        <circle cx="18" cy="9" r="1" fill="currentColor"/>
+    </svg>
+)
+
+const CustomProbabilityAlt = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+        <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+        <circle cx="8" cy="9" r="1" fill="currentColor"/>
+        <circle cx="16" cy="15" r="1" fill="currentColor"/>
+    </svg>
+)
+
 export default function VisualToolsPage() {
     const cardItems = [
         {
@@ -85,7 +104,7 @@ export default function VisualToolsPage() {
         },
         {
             category: 'Probability Visualizers',
-            icon: CustomTrigo,
+            icon: CustomProbabilityAlt,
             content: "Learn Probability in Interactive Way Visualized",
             href:'/probability/visual-tools',
            subcategories: [
