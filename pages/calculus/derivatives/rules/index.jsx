@@ -5,6 +5,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Sections from '@/app/components/page-components/section/Sections';
 import IntroSection from '@/app/components/page-components/section/IntroContentSection';
 import ExpandableTable from '@/app/components/generic-table/ExpandableTable';
+import '../../../../pages/pages.css'
 
 
 

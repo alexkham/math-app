@@ -4,6 +4,7 @@ import React from 'react'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
+import '../../../pages/pages.css'
 
 
 export async function getStaticProps(){

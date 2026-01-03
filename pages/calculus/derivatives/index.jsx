@@ -5,6 +5,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import { Section } from 'lucide-react'
 import Sections from '@/app/components/page-components/section/Sections'
+import '../../../pages/pages.css'
 
 
 

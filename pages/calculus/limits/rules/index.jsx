@@ -5,6 +5,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import IntroSection from '@/app/components/page-components/section/IntroContentSection';
 import Sections from '@/app/components/page-components/section/Sections';
 import ExpandableTable from '@/app/components/generic-table/ExpandableTable';
+import '../../../../pages/pages.css'
 
 
 export async function getStaticProps(){

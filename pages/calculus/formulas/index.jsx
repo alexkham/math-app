@@ -46,6 +46,8 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import FormulasTOC from '@/app/components/examples/FormulaTOC'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import '../../../pages/pages.css'
+
 
 export async function getStaticProps() {
   const { default: calculusFormulasList } = await import('@/app/api/db/formulas/calculus/calculusFormulasList')

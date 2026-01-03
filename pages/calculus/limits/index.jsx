@@ -6,6 +6,7 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Sections from '@/app/components/page-components/section/Sections'
 import { limitsDiagrams } from '@/app/api/db/diagrams/calculus/limits'
 import { basicFunctionsDiagrams } from '@/app/api/db/diagrams/functions/basics'
+import '../../../pages/pages.css'
 
 
 
