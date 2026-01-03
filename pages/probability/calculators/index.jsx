@@ -183,7 +183,7 @@ export default function ProbabilityCalculator({seoData,sectionsContent , introCo
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-40px',marginBottom:'-20px'}}>Probability Calculators</h1>
+   <h1 className='title' style={{marginTop:'-60px',marginBottom:'-50px'}}>Probability Calculators</h1>
    <br/>
    <GenericMultiComponentFrame
     components={[
