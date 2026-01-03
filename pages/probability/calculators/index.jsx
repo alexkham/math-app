@@ -167,7 +167,7 @@ export default function ProbabilityCalculator({seoData,sectionsContent , introCo
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -193,10 +193,11 @@ export default function ProbabilityCalculator({seoData,sectionsContent , introCo
            { id: 3, name: 'Discrete Distibutions Calculator',  href: '/probability/calculators/discrete-distributions'  },
            { id: 4, name: 'Continuous Distibutions Calculator',  href: '/probability/calculators/continuous-distributions'  },
            { id: 5, name: 'Joint Probability Calculator',  href: '/probability/calculators/joint-probability'  },
+           { id: 10, name: 'Conditional Probability Calculator',  href: '/probability/calculators/conditional-probability'  },
            { id: 6, name: 'Two Events Probability Calculator',  href: '/probability/calculators/two-events'  },
            { id: 7, name: 'Three Events Probability Calculator',  href: '/probability/calculators/three-events'  },
            { id: 8, name: "Bayes' Theorem Calculator",  href: '/probability/calculators/bayes-calculator'  },
-           { id: 8, name: "Expected Value Calculators",  href: '/probability/calculators/expected-value'  },
+           { id: 9, name: "Expected Value Calculators",  href: '/probability/calculators/expected-value'  },
           
 
           //  { id: 4, name: 'Introduction', content: introContent2 },
@@ -232,7 +233,7 @@ export default function ProbabilityCalculator({seoData,sectionsContent , introCo
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

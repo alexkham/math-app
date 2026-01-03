@@ -70,7 +70,7 @@ No probabilities or numerical values are attached yet.
   
       title:`Events`,
       content:`
-Events in the coin toss model are collections of outcomes drawn from the outcome space.
+[Events](!/probability/events) in the coin toss model are collections of outcomes drawn from the outcome space.
 
 With two possible outcomes, the possible events include:
 • the event that the outcome is Heads
@@ -78,7 +78,7 @@ With two possible outcomes, the possible events include:
 • the event that some outcome occurs
 • the event that no outcome occurs
 
-Events describe *which outcomes are of interest*, not how likely they are.  
+[Events](!/probability/events) describe *which outcomes are of interest*, not how likely they are.  
 At this level, the model organizes outcomes into meaningful groups without assigning probabilities.
 `,
       before:``,
@@ -146,7 +146,7 @@ It serves as a base on which many different measurements can be defined.
     obj7:{
       title:`Distributions Directly Induced by a Single Toss`,
       content:`
-When a random variable is defined on the coin toss model, its probability distribution follows immediately.
+When a [random variable](!/probability/random-variables) is defined on the coin toss model, its probability [distribution](!/probability/distributions) follows immediately.
 
 For a binary encoding of the outcomes, the resulting distribution assigns probability to two numerical values.  
 This is the simplest non-degenerate probability distribution and serves as a basic building block in probability theory.

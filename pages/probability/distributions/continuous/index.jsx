@@ -33,7 +33,7 @@ checklist:`<h2 style="color: #52525b;"> Checklist for Identifying a Normal Distr
 ✔ Data clusters symmetrically around a central value (the mean).
 ✔ Most values fall near the mean, with frequency decreasing as you move away.
 ✔ The distribution is bell-shaped and symmetric.
-✔ Random variable X represents continuous measurements that can be positive or negative.
+✔ [Random variable](!/probability/random-variables) X represents continuous measurements that can be positive or negative.
 ✔ Applicable to natural phenomena, measurement errors, and sums of random variables (Central Limit Theorem).
 `,
  
@@ -43,7 +43,7 @@ parameters:`<h3 style="color: #475569;">Parameters of Normal Distribution</h3>
 
 **σ** (sigma): standard deviation, measuring spread around the mean, where $\\sigma > 0$
 
-The normal distribution is fully characterized by these two parameters. **μ** determines the location (where the peak sits on the number line), while **σ** controls the spread (how wide or narrow the bell curve is). Variance is $\\sigma^2$, but we typically use $\\sigma$ as the primary parameter since it's in the same units as the data.`,
+The normal distribution is fully characterized by these two parameters. **μ** determines the location (where the peak sits on the number line), while **σ** controls the spread (how wide or narrow the bell curve is). [Variance](!/probability/variance) is $\\sigma^2$, but we typically use $\\sigma$ as the primary parameter since it's in the same units as the data.`,
 
 
  notation:`<h3 style="color: #334155;">Notations Used</h3>
@@ -79,7 +79,7 @@ $$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}, \\
   * $\\sigma$: The standard deviation controls the width of the bell
   * $\\sigma^2$: The [variance](!/probability/variance) ($\\sigma$ squared) appears in the exponent
 
-* **Support (Range of the Random Variable)**:
+* **Support** (Range of the [Random Variable](!/probability/random-variables)):
   * The [random variable](!/probability/random-variables) $X$ can take any real value: $(-\\infty, +\\infty)$
   * While theoretically unbounded, approximately 99.7% of values fall within $\\mu \\pm 3\\sigma$
   * The **support** is the entire real line
@@ -233,23 +233,23 @@ $$F(x) = \\begin{cases} 0 & \\text{if } x < a \\\\ \\frac{x-a}{b-a} & \\text{if 
 **Key Properties**:
 * $F(a) = 0$ (no probability mass below the lower bound)
 * $F(b) = 1$ (all probability mass is within [a, b])
-* The CDF increases linearly from 0 to 1 within the interval [a, b]
+* The [CDF(Cumulative Density Function)](!/probability/cdf) increases linearly from 0 to 1 within the interval [a, b]
 * For any $x$ in [a, b], $F(x)$ represents the fraction of the interval covered from $a$ to $x$
 
-**Practical Use:** The CDF for the uniform distribution is particularly simple. To find $P(X \\leq x)$ when $X \\sim U(0, 10)$ and $x = 3$: $F(3) = \\frac{3-0}{10-0} = 0.3$, meaning 30% of values fall below 3. For any probability calculation: $P(c \\leq X \\leq d) = F(d) - F(c) = \\frac{d-a}{b-a} - \\frac{c-a}{b-a} = \\frac{d-c}{b-a}$.`,
+**Practical Use:** The [CDF(Cumulative Density Function)](!/probability/cdf) for the uniform distribution is particularly simple. To find $P(X \\leq x)$ when $X \\sim U(0, 10)$ and $x = 3$: $F(3) = \\frac{3-0}{10-0} = 0.3$, meaning 30% of values fall below 3. For any probability calculation: $P(c \\leq X \\leq d) = F(d) - F(c) = \\frac{d-a}{b-a} - \\frac{c-a}{b-a} = \\frac{d-c}{b-a}$.`,
 
   meanVariance:`<h3 style="color: #1e3a8a;">Mean and Variance</h3>
 **Expected Value (Mean)**:
 
 $$E[X] = \\frac{a+b}{2}$$
 
-The mean of a uniform distribution is simply the midpoint of the interval. This reflects the distribution's perfect symmetry—the expected value lies exactly halfway between the bounds.
+The [expected value](!/probability/expected-value) of a uniform distribution is simply the midpoint of the interval. This reflects the distribution's perfect symmetry—the expected value lies exactly halfway between the bounds.
 
 **Variance**:
 
 $$\\text{Var}(X) = \\frac{(b-a)^2}{12}$$
 
-The variance measures spread around the mean. It depends on the square of the interval width. A wider interval means more variability in possible values.
+The [variance](!/probability/variance) measures spread around the [mean](!/probability/expected-value). It depends on the square of the interval width. A wider interval means more variability in possible values.
 
 **Standard Deviation**:
 
@@ -267,11 +267,11 @@ Standard deviation is approximately 28.9% of the interval width. For a uniform d
 
 **Memoryless in Relative Terms**: While not memoryless in the exponential sense, the uniform distribution has no "preferred" region—every subinterval of equal length has equal probability.
 
-**Bounded Support**: Unlike the normal or exponential distributions, the uniform distribution has strict bounds. Values outside [a, b] have zero probability, making it ideal for modeling quantities with known limits.
+**Bounded Support**: Unlike the normal or [exponential distributions](!probability/distributions/continuous#exponential), the uniform distribution has strict bounds. Values outside [a, b] have zero probability, making it ideal for modeling quantities with known limits.
 
 **Maximum Entropy**: Among all continuous distributions with bounded support [a, b], the uniform distribution has maximum entropy. It represents complete uncertainty about where the value will fall within the interval—no region is favored over any other.
 
-**Linear CDF**: The CDF increases at a constant rate within [a, b]. This linearity makes probability calculations particularly straightforward and intuitive.
+**Linear CDF**: The [CDF](!/probability/cdf) increases at a constant rate within [a, b]. This linearity makes probability calculations particularly straightforward and intuitive.
 
 **Transformation Properties**: Linear transformations preserve uniformity. If $X \\sim U(a, b)$, then $cX + d \\sim U(ca + d, cb + d)$ for $c > 0$. This includes the important case that $\\frac{X-a}{b-a} \\sim U(0, 1)$, the standard uniform.
 
@@ -652,7 +652,7 @@ Method of moments is quick and works well for simple distributions and large sam
   
       title:`Transformations and Standardization`,
       content:`
-Transforming random variables is a powerful technique that simplifies calculations, enables comparisons across different scales, and reveals relationships between distributions. Understanding how transformations affect continuous distributions is essential for practical statistical work.
+Transforming [random variables](!/probability/random-variables) is a powerful technique that simplifies calculations, enables comparisons across different scales, and reveals relationships between distributions. Understanding how transformations affect continuous distributions is essential for practical statistical work.
 
 **The Standard Normal Distribution**
 
@@ -689,7 +689,7 @@ The fundamental principle of continuous distributions is that probability equals
 
 **Parameter Effects on Shape and Spread**
 
-Changing parameters reshapes the distribution dynamically. For the normal distribution, increasing σ flattens and widens the curve (more spread), while decreasing σ makes it taller and narrower (less spread). The mean μ slides the entire curve left or right without changing its shape. For the exponential distribution, increasing λ compresses probability toward zero (faster decay), while decreasing λ stretches it out (slower decay). Interactive visualizers let you manipulate parameters and immediately see these effects, building intuition about how distributions behave.
+Changing parameters reshapes the distribution dynamically. For the normal distribution, increasing σ flattens and widens the curve (more spread), while decreasing σ makes it taller and narrower (less spread). The mean μ slides the entire curve left or right without changing its shape. For the [exponential distribution](!/probability/distributions/continuous#exponential), increasing λ compresses probability toward zero (faster decay), while decreasing λ stretches it out (slower decay). Interactive visualizers let you manipulate parameters and immediately see these effects, building intuition about how distributions behave.
 
 `,
       before:``,

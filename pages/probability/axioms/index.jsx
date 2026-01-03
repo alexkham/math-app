@@ -28,13 +28,26 @@ export async function getStaticProps(){
     const sectionsContent={
 
     why:{
-      title:`Why Probability Needs Axioms`,
+      title:`What Are Axioms and Why Do We Need Them in Probability`,
       content:`
-Intuition alone is not enough to support probability. Different people can reason intuitively in different ways, and without clear constraints this leads to contradictions. Axioms provide a common ground: a minimal set of rules that every probability assignment must satisfy, regardless of context or interpretation.
+Axioms are the foundation of any mathematical theory. They are the basic rules, the cornerstones, the starting assumptions that we accept without proof. Every branch of mathematics — geometry, algebra, calculus, and probability — is built on axioms. They are the bedrock statements from which everything else follows through logical reasoning.
 
-These rules do not describe specific situations or models. Instead, they define the boundaries of what is considered a valid probability system. Any method of assigning probabilities that violates them cannot be internally consistent.
+In geometry, we start with axioms like "a straight line can be drawn between any two points." In algebra, we have axioms about how addition and multiplication behave. These are not proven — they are assumed to be true, and from them we derive theorems, corollaries, and all the rules that make the field work. Axioms are milestones that anchor the entire structure. They provide the foundation from which we build, through logical inference, all the knowledge in that field. Without axioms, there would be no starting point, no common ground, and no way to ensure that our reasoning leads to consistent conclusions.
 
-By fixing these constraints upfront, axioms ensure that all later probability rules work together without conflict. They are what make probability a coherent mathematical framework rather than a collection of ad-hoc calculations.
+Axioms in mathematics are the foundational cornerstones upon which entire theories are built. They:
+
+• Provide foundation without requiring proof
+• Serve as starting points for logical reasoning
+• Generate theorems and corollaries through deduction
+• Ensure internal consistency
+• Define the boundaries of what's valid in the theory
+• Create common ground for all work in that field
+• Enable construction of the entire mathematical structure
+• Prevent contradictions
+
+Probability is no different. Like any other field of mathematics, probability needs its own cornerstones to base the entire process of logical inference upon. Without axioms, probability would be nothing more than intuition and guesswork — different people reasoning in different ways with no guarantee of consistency. The axioms establish the foundation. From these basic assumptions, all the theorems, formulas, and techniques of probability theory emerge through logical deduction.
+
+The probability axioms are not arbitrary. They reflect fundamental properties we expect probability to have: that it cannot be negative, that certainty corresponds to a fixed value, and that probabilities combine in predictable ways when situations are mutually exclusive. These simple rules, accepted without proof, are enough to generate the entire structure of probability theory. Everything that follows — conditional probability, independence, expected values, distributions — traces back to these foundation stones.
 `,
       before:``,
       after:``,
@@ -44,9 +57,9 @@ By fixing these constraints upfront, axioms ensure that all later probability ru
     events:{
       title:`Probability as an Assignment to Events`,
       content:`
-In probability, numbers are not assigned arbitrarily. A probability model assigns values to **events**, which represent situations that may or may not occur. These assignments are made relative to a fixed sample space that describes everything that is possible.
+In probability, numbers are not assigned arbitrarily. A probability model assigns values to [events](!/probability/events) and [random variables](!/probability/random-variables), which represent situations that may or may not occur. These assignments are made relative to a fixed [sample space](!/probability/sample-space) which in turn describes everything that is possible.
 
-The axioms govern this assignment process. They do not depend on how events are described or interpreted; they apply uniformly to all events within the same framework. What matters is not the nature of the event, but how probabilities attached to events relate to one another.
+The axioms govern this assignment process. They do not depend on how events are described or interpreted; they apply uniformly to all [events](!/probability/events) within the same framework. What matters is not the nature of the event, but how probabilities attached to events relate to one another.
 
 Understanding probability as a rule-based assignment to events is essential. It clarifies that the axioms are not abstract principles floating above probability, but concrete constraints on how probabilities can be consistently attached to events.
 `,
@@ -223,9 +236,16 @@ Every probability concept ultimately traces back to these axioms, making them th
       after:``,
   
     },
-    obj4:{
-      title:``,
-      content:``,
+    axioms_to_rules:{
+      title:`From Axioms to All Probability Rules`,
+      content:`
+The probability axioms are not isolated rules. Together, they form the foundation from which the entire structure of probability theory is constructed. Every probability formula, every theorem, every technique in probability can be derived through logical inference from these three basic constraints.
+
+This is what makes axioms powerful. They are minimal — just three simple statements — yet they generate everything else. Conditional probability emerges when we apply the axioms to restricted sample spaces. The law of total probability follows from additivity across mutually exclusive cases. Independence is defined by examining how probabilities behave under the axioms when events do not influence each other. Bayes' theorem is a direct consequence of how conditional probabilities relate under the axiom structure.
+
+Random variables and probability distributions extend the axioms to numerical outcomes, but they introduce no new foundational principles. The rules governing expected values, variances, and moment generating functions all trace back to the same three axioms applied in different contexts.
+
+This chain of logical inference is what transforms probability from a collection of formulas into a unified mathematical theory. The axioms sit at the base. Everything else is built upward through deduction, theorem by theorem, each step grounded in what came before, all the way back to the foundation stones.`,
       before:``,
       after:``,
   
@@ -294,14 +314,14 @@ export default function AxiomsPage({seoData,sectionsContent , introContent}) {
             sectionsContent.why.content,
         ]
     },
-    {
-        id:'events',
-        title:sectionsContent.events.title,
-        link:'',
-        content:[
-            sectionsContent.events.content,
-        ]
-    },
+    // {
+    //     id:'events',
+    //     title:sectionsContent.events.title,
+    //     link:'',
+    //     content:[
+    //         sectionsContent.events.content,
+    //     ]
+    // },
     {
         id:'axioms',
         title:sectionsContent.axioms.title,
