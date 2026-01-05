@@ -214,6 +214,30 @@ export default function CombinatoricsCalculatorPage({ seoData, explanationsMappi
    <br/>
    <br/>
    <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
    <ScrollUpButton/>
    
    

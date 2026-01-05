@@ -18,7 +18,7 @@ export default function FractionCalculator({ explanations = defaultExplanations 
   const [validationError, setValidationError] = useState(null);
   const [apiError, setApiError] = useState(null);
   
-  const API_URL = 'https://www.pickjourney.com';
+  const API_URL = 'https://api.learnmathclass.com';
 
   const resetForm = () => {
     setInput1('');
