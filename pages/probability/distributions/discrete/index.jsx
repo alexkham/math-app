@@ -1158,7 +1158,7 @@ Each distribution has unique parameters, [probability mass functions](!/probabil
   
       title:`Shared Properties Across Discrete Distributions`,
       content:`
-Although the six discrete distributions model different scenarios, they share an underlying mathematical framework that makes them recognizable as members of the same family.
+Although the six main discrete distributions model different scenarios, they share an underlying mathematical framework that makes them recognizable as members of the same family.
 
 At the core of every discrete distribution sits the [probability mass function (PMF)](!/probability/probability-function#pmf), denoted 
 
