@@ -313,6 +313,64 @@ export const probabilityConceptsData={
             {text:``,url:``},
         ]
     },
+    "axioms":{
+        svg:`        
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg style="fill:none;stroke:none;fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="735" height="582" viewBox="0 0 735 582"><style class="text-font-style fontImports" data-font-family="Roboto">@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;amp;display=block);</style><g id="items" style="isolation: isolate"><g id="blend" style="mix-blend-mode: normal"><g id="g-root-sy_4_cu_vector_4masz21b94jyj-fill" data-item-order="-164978" transform="translate(263.788818359375, 440)"><g id="sy_4_cu_vector_4masz21b94jyj-fill-merged" stroke="none" fill="url(#gradient-76aaff-163240667)" fill-opacity="1"><g><path d="M58.497 10L10 94 H446.477L397.979 10 H58.497"></path></g></g></g><g id="g-root-sy_3_cu_vector_4masz21b94jyk-fill" data-item-order="-164974" transform="translate(312.2835388183594, 356)"><g id="sy_3_cu_vector_4masz21b94jyk-fill-merged" stroke="none" fill="url(#gradient-64edab-240055791)" fill-opacity="1"><g><path d="M58.497 10L10 94 H349.482L300.985 10 H58.497"></path></g></g></g><g id="g-root-sy_2_cu_vector_6haum1b94kqt-fill" data-item-order="-164970" transform="translate(360.786376953125, 272)"><g id="sy_2_cu_vector_6haum1b94kqt-fill-merged" stroke="none" fill="url(#gradient-bceb57-497517668)" fill-opacity="1"><g><path d="M58.497 10L10 94 H252.487L203.99 10 H58.497"></path></g></g></g><g id="g-root-sy_1_cu_vector_6haum1b94kqu-fill" data-item-order="-164966" transform="translate(409.28118896484375, 146)"><defs><linearGradient id="gradient-76aaff-163240667" x2="0" y2="1"><stop offset="0" stop-color="#9cc2ff"></stop><stop offset="1" stop-color="#4f92ff"></stop></linearGradient><linearGradient id="gradient-64edab-240055791" x2="0" y2="1"><stop offset="0" stop-color="#83fac1"></stop><stop offset="1" stop-color="#44e095"></stop></linearGradient><linearGradient id="gradient-bceb57-497517668" x2="0" y2="1"><stop offset="0" stop-color="#cff976"></stop><stop offset="1" stop-color="#a8dd38"></stop></linearGradient><linearGradient id="gradient-ffeb37-386795387" x2="0" y2="1"><stop offset="0" stop-color="#ffef63"></stop><stop offset="1" stop-color="#ffe60a"></stop></linearGradient></defs><g id="sy_1_cu_vector_6haum1b94kqu-fill-merged" stroke="none" fill="url(#gradient-ffeb37-386795387)" fill-opacity="1"><g><path d="M82.746 10L10 136 H155.492L82.746 10"></path></g></g></g><g id="g-root-tx_mathemat_1urrupa1b94lc3-fill" data-item-order="0" transform="translate(176, 38)"><g id="tx_mathemat_1urrupa1b94lc3-fill-merged" stroke="none" fill="#484848" fill-opacity="1"><g><text style="font: bold 25px Roboto, sans-serif; white-space: pre;" transform="translate(202, 28)" font-weight="bold" font-size="25px" font-family="Roboto, sans-serif"><tspan x="-185.72" y="15" dominant-baseline="ideographic">Mathematical Theory Foundation</tspan></text></g></g></g><g id="g-root-ic_circ_1463vam1b8nr4c-fill" data-item-order="0" transform="translate(458, 206)"></g><g id="g-root-tx_mathemat_145hb1q1b94lc7-fill" data-item-order="0" transform="translate(194, 218)"><g id="tx_mathemat_145hb1q1b94lc7-fill-merged" stroke="none" fill="#484848" fill-opacity="1"><g><text style="font: 20px Roboto, sans-serif; white-space: pre;" transform="translate(214, 22)" font-size="20px" font-family="Roboto, sans-serif"><tspan x="-190.49" y="12" dominant-baseline="ideographic">Mathematical Theory</tspan></text></g></g></g><g id="g-root-ic_math_18efodq1b8m9zc-fill" data-item-order="0" transform="translate(458, 290)"></g><g id="g-root-tx_theorems_18lat661b94kjy-fill" data-item-order="0" transform="translate(254, 302)"><g id="tx_theorems_18lat661b94kjy-fill-merged" stroke="none" fill="#484848" fill-opacity="1"><g><text style="font: 20px Roboto, sans-serif; white-space: pre;" transform="translate(106, 22)" font-size="20px" font-family="Roboto, sans-serif"><tspan x="-92.02" y="12" dominant-baseline="ideographic">Theorems</tspan></text></g></g></g><g id="g-root-ic_brai_1hi6rla1b94lxg-fill" data-item-order="0" transform="translate(458, 374)"></g><g id="g-root-tx_logicalr_1hgxtf21b94jr9-fill" data-item-order="0" transform="translate(134, 386)"><g id="tx_logicalr_1hgxtf21b94jr9-fill-merged" stroke="none" fill="#484848" fill-opacity="1"><g><text style="font: 20px Roboto, sans-serif; white-space: pre;" transform="translate(178, 22)" font-size="20px" font-family="Roboto, sans-serif"><tspan x="-165.17" y="12" dominant-baseline="ideographic">Logical Reasoning</tspan></text></g></g></g><g id="g-root-ic_acad_zpnsxa1b94m4g-fill" data-item-order="0" transform="translate(458, 458)"></g><g id="g-root-tx_axioms_1lw4uge1b94m4s-fill" data-item-order="0" transform="translate(182, 470)"><g id="tx_axioms_1lw4uge1b94m4s-fill-merged" stroke="none" fill="#484848" fill-opacity="1"><g><text style="font: 20px Roboto, sans-serif; white-space: pre;" transform="translate(82, 22)" font-size="20px" font-family="Roboto, sans-serif"><tspan x="-69.1" y="12" dominant-baseline="ideographic">Axioms</tspan></text></g></g></g><g id="g-root-sy_4_cu_vector_4masz21b94jyj-stroke" data-item-order="-164978" transform="translate(263.788818359375, 440)"><g id="sy_4_cu_vector_4masz21b94jyj-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2" stroke-opacity="1"><g><path d="M 58.4974 10L 10 94L 446.4768 94L 397.9794 10L 58.4974 10Z"></path></g></g></g><g id="g-root-sy_3_cu_vector_4masz21b94jyk-stroke" data-item-order="-164974" transform="translate(312.2835388183594, 356)"><g id="sy_3_cu_vector_4masz21b94jyk-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2" stroke-opacity="1"><g><path d="M 58.49743 10L 10.00003 94L 349.48203 94L 300.98463 10L 58.49743 10Z"></path></g></g></g><g id="g-root-sy_2_cu_vector_6haum1b94kqt-stroke" data-item-order="-164970" transform="translate(360.786376953125, 272)"><g id="sy_2_cu_vector_6haum1b94kqt-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2" stroke-opacity="1"><g><path d="M 58.497339 10L 9.999939 94L 252.487039 94L 203.989639 10L 58.497339 10Z"></path></g></g></g><g id="g-root-sy_1_cu_vector_6haum1b94kqu-stroke" data-item-order="-164966" transform="translate(409.28118896484375, 146)"><g id="sy_1_cu_vector_6haum1b94kqu-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2" stroke-opacity="1"><g><path d="M 82.7461 10L 10 136L 155.4923 136L 82.7461 10Z"></path></g></g></g><g id="g-root-tx_mathemat_1urrupa1b94lc3-stroke" data-item-order="0" transform="translate(176, 38)"></g><g id="g-root-ic_circ_1463vam1b8nr4c-stroke" data-item-order="0" transform="translate(458, 206)"><g id="ic_circ_1463vam1b8nr4c-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2" stroke-opacity="1"><g><path d="M 34.099998 56.599602C 46.526402 56.599602 56.599998 46.526001 56.599998 34.099602C 56.599998 21.6731 46.526402 11.59961 34.099998 11.59961C 21.673561 11.59961 11.600006 21.6731 11.600006 34.099602C 11.600006 46.526001 21.673561 56.599602 34.099998 56.599602ZM 24.00016 25.5996L 43.800201 25.5996M 10 10M 29.80014 25.5996L 29.00016 43.999599M 36.599998 25.5996L 36.599998 41.599602C 36.599998 42.799599 37.599998 43.799599 38.799999 43.799599C 40 43.799599 41 42.799599 41 41.599602L 41 41.199799"></path></g></g></g><g id="g-root-tx_mathemat_145hb1q1b94lc7-stroke" data-item-order="0" transform="translate(194, 218)"></g><g id="g-root-ic_math_18efodq1b8m9zc-stroke" data-item-order="0" transform="translate(458, 290)"><g id="ic_math_18efodq1b8m9zc-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2" stroke-opacity="1"><g><path d="M 19 25.445999C 17.020252 25.184191 15.026797 25.039272 13.03 25.012001C 12.470404 25.005322 12.010774 25.452433 12.002 26.012001L 12.002 49.012001C 12.002 49.564285 12.449715 50.012001 13.002 50.012001C 29.202 50.278 34.001999 57.012001 34.001999 57.012001M 53 25.077999C 53.639999 25.046 54.299999 25.021999 54.98 25.012001C 55.248665 25.006626 55.508186 25.109604 55.700073 25.297728C 55.891956 25.485849 56.000053 25.743282 56 26.011999L 56 49.012001C 56 49.564285 55.552284 50.012001 55 50.012001C 38.799999 50.278 34 57.012001 34 57.012001L 34 35.012001M 47 11.002L 47 19.001999M 51 15.002L 43 15.002M 25.344 21.346001L 31 27.002001M 31 21.346001L 25.344 27.002001M 46 27.002001L 38 27.002001M 42 22.501999C 41.723858 22.501999 41.5 22.725857 41.5 23.001999M 42.5 23C 42.5 22.723858 42.276142 22.5 42 22.5M 42 23.501999C 42.276142 23.501999 42.5 23.278141 42.5 23.001999M 41.5 23C 41.5 23.276142 41.723858 23.5 42 23.5M 42 30.502001C 41.723858 30.502001 41.5 30.725857 41.5 31.002001M 42.5 31C 42.5 30.723858 42.276142 30.5 42 30.5M 42 31.502001C 42.276142 31.502001 42.5 31.278143 42.5 31.002001M 41.5 31C 41.5 31.276142 41.723858 31.5 42 31.5M 19 14.002L 21 17.001999L 23 11.002L 30 11.002"></path></g></g></g><g id="g-root-tx_theorems_18lat661b94kjy-stroke" data-item-order="0" transform="translate(254, 302)"></g><g id="g-root-ic_brai_1hi6rla1b94lxg-stroke" data-item-order="0" transform="translate(458, 374)"><g id="ic_brai_1hi6rla1b94lxg-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2" stroke-opacity="1"><g><path d="M 45.312 11.002L 45.312 19.001999M 49.312 15.002L 41.312 15.002M 50.653999 22.001999L 56.312 27.66M 56.312 22.001999L 50.653999 27.66M 40.312 26.993999L 32.312 26.993999M 36.312 22.493999C 36.035858 22.493999 35.812 22.717857 35.812 22.993999M 36.812 23C 36.812 22.723858 36.588142 22.5 36.312 22.5M 36.312 23.493999C 36.588142 23.493999 36.812 23.270142 36.812 22.993999M 35.812 23C 35.812 23.276142 36.035858 23.5 36.312 23.5M 36.312 30.493999C 36.035858 30.493999 35.812 30.717857 35.812 30.993999M 36.812 31C 36.812 30.723858 36.588142 30.5 36.312 30.5M 36.312 31.493999C 36.588142 31.493999 36.812 31.270142 36.812 30.993999M 35.812 31C 35.812 31.276142 36.035858 31.5 36.312 31.5M 25.312 14.002L 27.312 17.001999L 29.312 11.002L 36.312 11.002M 23.702 57L 23.702 52.046001L 21.864 52.046001C 19.126419 52.047108 16.906895 49.827583 16.908001 47.09L 16.908001 42.133999L 12.686 42.133999C 12.367165 42.132717 12.068053 41.979469 11.880757 41.721443C 11.69346 41.463417 11.640433 41.131542 11.738 40.827999C 13.938 34 15.738 26.85 20.310001 22.666M 46.832001 35.112C 46.833202 40.247105 44.380547 45.073639 40.232002 48.100002L 40.232002 57"></path></g></g></g><g id="g-root-tx_logicalr_1hgxtf21b94jr9-stroke" data-item-order="0" transform="translate(134, 386)"></g><g id="g-root-ic_acad_zpnsxa1b94m4g-stroke" data-item-order="0" transform="translate(458, 458)"><g id="ic_acad_zpnsxa1b94m4g-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2" stroke-opacity="1"><g><path d="M 19.48 40L 12 46C 28 45 43 54 47 57M 47 57C 40 49 26 39 11 39L 20.540001 31M 47 57C 44.099998 45.5 28 31 16 30L 34 15C 36.036751 15.458306 37.931305 16.405582 39.519997 17.76M 47 57C 47 57 53 40 32 27L 45 11C 57 16 57 33 57 33Z"></path></g></g></g><g id="g-root-tx_axioms_1lw4uge1b94m4s-stroke" data-item-order="0" transform="translate(182, 470)"></g></g></g></svg>
+        `,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
+    "identity name":{
+        svg:``,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
+    "identity name":{
+        svg:``,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
+    "identity name":{
+        svg:``,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
+    "identity name":{
+        svg:``,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
+    "identity name":{
+        svg:``,
+        explanation:``,
+        links:[
+            {text:``,url:``},
+            {text:``,url:``},
+            {text:``,url:``},
+        ]
+    },
     "identity name":{
         svg:``,
         explanation:``,

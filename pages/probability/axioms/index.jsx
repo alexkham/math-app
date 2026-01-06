@@ -8,6 +8,8 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
+import Image from 'next/image'
+import { probabilityConceptsData } from '@/app/api/db/diagrams/probability/concepts'
 
 
 export async function getStaticProps(){
@@ -45,12 +47,16 @@ Axioms in mathematics are the foundational cornerstones upon which entire theori
 • Enable construction of the entire mathematical structure
 • Prevent contradictions
 
-Probability is no different. Like any other field of mathematics, probability needs its own cornerstones to base the entire process of logical inference upon. Without axioms, probability would be nothing more than intuition and guesswork — different people reasoning in different ways with no guarantee of consistency. The axioms establish the foundation. From these basic assumptions, all the theorems, formulas, and techniques of probability theory emerge through logical deduction.
+Axioms, essentially, are the foundation to any further mathematical reasoning: theorems, corollaries, inference,proofs.
 
-The probability axioms are not arbitrary. They reflect fundamental properties we expect probability to have: that it cannot be negative, that certainty corresponds to a fixed value, and that probabilities combine in predictable ways when situations are mutually exclusive. These simple rules, accepted without proof, are enough to generate the entire structure of probability theory. Everything that follows — conditional probability, independence, expected values, distributions — traces back to these foundation stones.
+
 `,
       before:``,
-      after:``,
+      after:`
+
+In this sense, every mathematical field requires axioms as a foundation for further development. Probability is no different. Like any other field of mathematics, probability needs its own cornerstones to base the entire process of logical inference upon. Without axioms, probability would be nothing more than intuition and guesswork — different people reasoning in different ways with no guarantee of consistency. The axioms establish the foundation. From these basic assumptions, all the theorems, formulas, and techniques of probability theory emerge through logical deduction.
+
+The probability axioms are not arbitrary. They reflect fundamental properties we expect probability to have: that it cannot be negative, that certainty corresponds to a fixed value, and that probabilities combine in predictable ways when situations are mutually exclusive. These simple rules, accepted without proof, are enough to generate the entire structure of probability theory. Everything that follows — conditional probability, independence, expected values, distributions — traces back to these foundation stones.`,
   
   
     },
@@ -312,6 +318,12 @@ export default function AxiomsPage({seoData,sectionsContent , introContent}) {
         link:'',
         content:[
             sectionsContent.why.content,
+            <div dangerouslySetInnerHTML={{ __html: probabilityConceptsData['axioms'].svg }}
+            key={'pyramid'}
+            style={{width:'80%',margin:'auto'}}
+            />,
+            sectionsContent.why.after,
+           
         ]
     },
     // {
@@ -328,6 +340,14 @@ export default function AxiomsPage({seoData,sectionsContent , introContent}) {
         link:'',
         content:[
             sectionsContent.axioms.content,
+             <div key={'axioms1'} style={{width:'60%',margin:'auto'}} >
+            <Image
+            src='/probability/3 axioms of probability.jpg'
+             alt="Description"
+            width={600}
+            height={600}
+            />
+            </div>
         ]
     },
     {

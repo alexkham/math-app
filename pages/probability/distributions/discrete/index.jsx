@@ -11,6 +11,7 @@ import Head from 'next/head'
 import { distributionsDiagramsData } from '@/app/api/db/diagrams/probability/distributions'
 import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
 import { processContent } from '@/app/utils/contentProcessor'
+import GenericTable from '@/app/components/generic-table/GenericTable'
 
 
 export async function getStaticProps(){
@@ -1159,11 +1160,39 @@ Each distribution has unique parameters, [probability mass functions](!/probabil
       content:`
 Although the six discrete distributions model different scenarios, they share an underlying mathematical framework that makes them recognizable as members of the same family.
 
-At the core of every discrete distribution sits the **probability mass function (PMF)**, denoted $P(X = k)$. This function answers the question: what's the chance of observing exactly value $k$? Two rules always hold: **non-negativity**, $P(X = k) \\geq 0$ for all $k$, and **normalization**, $\\sum_{\\text{all } k} P(X = k) = 1$. No probability can be negative, and when you add up all probabilities across the support, you must get exactly 1.
+At the core of every discrete distribution sits the [probability mass function (PMF)](!/probability/probability-function#pmf), denoted 
 
-Beyond the PMF, each distribution provides the **cumulative distribution function (CDF)**, defined as $F(x) = P(X \\leq x)$. This gives the probability of observing a value up to and including some threshold $x$. Unlike continuous distributions where the CDF forms a smooth curve, discrete CDFs climb in distinct jumps — flat between values, then leaping upward by $P(X = k)$ at each point $k$ in the support.
+$$P(X = k)$$
 
-Every discrete distribution has an **expected value** (mean) and **variance**. The expected value is calculated as $E[X] = \\sum_k k \\cdot P(X = k)$, representing where the distribution balances — the long-run average if you repeated the experiment infinitely. The variance is $\\text{Var}(X) = E[X^2] - (E[X])^2$, quantifying how tightly or loosely probability concentrates around the mean. Different distributions yield different formulas when you compute these sums, but the definitions apply universally.
+This function answers the question: what's the chance of observing exactly value $k$? 
+
+Two rules always hold: [non-negativity](!/probability/axioms#axiom1):
+
+$$P(X = k) \\geq 0$$ 
+
+for all $k$, and [normalization](!/probability/axioms#axiom2):
+
+$$\\sum_{\\text{all } k} P(X = k) = 1$$
+
+No probability can be negative, and when you add up all probabilities across the support, you must get exactly 1.
+
+Beyond the PMF, each distribution provides the [cumulative distribution function (CDF)](!/probability/cdf), defined as:
+
+$$F(x) = P(X \\leq x)$$
+
+This gives the probability of observing a value up to and including some threshold $x$. Unlike [continuous distributions](!/probability/distributions/continuous) where the CDF forms a smooth curve, discrete [CDFs](!/probability/cdf) climb in distinct jumps — flat between values, then leaping upward by $P(X = k)$ at each point $k$ in the support.
+
+Every discrete distribution has an [expected value (mean)](!/probability/expected-value) and [variance](!probability/variance). The [expected value](!/probability/expected-value) for discrete distributions is calculated as 
+
+$$E[X] = \\sum_k k \\cdot P(X = k)$$
+
+representing where the distribution balances — the long-run average if you repeated the experiment infinitely. 
+
+The [variance](!/probability/variance) is 
+
+$$\\text{Var}(X) = E[X^2] - (E[X])^2$$
+
+quantifying how tightly or loosely probability concentrates around the mean. Different distributions yield different formulas when you compute these sums, but the definitions apply universally.
 
 The **support** — the set of values where outcomes can occur — is always countable. You might have finitely many options or infinitely many that you could list in sequence, but never an uncountable continuum. Finally, each distribution is fully specified by a small set of **parameters**: the uniform needs its endpoints $a$ and $b$, the binomial needs $n$ and $p$, the Poisson needs $\\lambda$.
 
@@ -1216,6 +1245,37 @@ The **support** — the set of values where outcomes can occur — is always cou
   }
 
 
+  const discreteDistributionsOverviewData = {
+  tableTitle: 'Types of Discrete Distributions',
+  rows: [
+    {
+      distribution: 'Discrete Uniform',
+      description: 'Models situations where all outcomes in a finite set are equally likely, such as rolling a fair die or randomly selecting from a fixed collection.'
+    },
+    {
+      distribution: 'Binomial',
+      description: 'Counts the number of successes in a fixed number of independent trials, each with the same probability of success—like counting heads in ten coin flips.'
+    },
+    {
+      distribution: 'Geometric',
+      description: 'Measures how many trials are needed until the first success occurs, assuming independent trials with constant success probability.'
+    },
+    {
+      distribution: 'Negative Binomial',
+      description: 'Generalizes the geometric distribution by counting trials until a specified number of successes, not just the first.'
+    },
+    {
+      distribution: 'Hypergeometric',
+      description: 'Models sampling without replacement from a finite population containing two types of items, where each draw changes the probabilities for subsequent draws.'
+    },
+    {
+      distribution: 'Poisson',
+      description: 'Counts events occurring randomly over time or space at a constant average rate, useful for modeling rare events like customer arrivals or equipment failures.'
+    }
+  ]
+};
+
+
   const introContent = {
   id: "intro",
   title: "**Discrete Distributions**",
@@ -1252,6 +1312,7 @@ This page systematically presents six fundamental discrete distributions, detail
       hypergeometricTable,
       poissonTable,
       occurenceMatrix,
+      discreteDistributionsOverviewData,
         
        }
     }
@@ -1265,6 +1326,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
       hypergeometricTable,
       poissonTable,
     occurenceMatrix,
+    discreteDistributionsOverviewData,
   }) {
 
     
@@ -1292,6 +1354,11 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         link:'',
         content:[
           sectionsContent.types.content,
+          <div key={'types'} style={{width:'80%',margin:'auto'}}>
+           <GenericTable  tableData={discreteDistributionsOverviewData} theme='lightBlue'
+          cellFontSize={'16px'}
+          headerFontSize={'18px'}/>,
+          </div>
         ]
     },
 
