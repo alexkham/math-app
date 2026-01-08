@@ -39,14 +39,30 @@ import metaDescriptions from './components/home-page/metaDescriptions'
 import GeneralAccordion from './components/accordion/GeneralAccordionComponent';
 import GeneralAccordionWrapper from './components/accordion/GeneralAccordionWrapper';
 import summaries from './api/db/tables/set-theory/summaries';
-import Head from 'next/head';
 import GenericNavbar from './components/nav-bar2/GenericNavbar';
 import MyNavbar3 from './components/nav-bar3/MyNavbar3';
+import Head from 'next/head';
 
 
 export function generateStaticParams() {
   return [{}]; // This ensures the page is statically generated
 }
+
+export const metadata = {
+  title: 'Learn Math Class: Free Online Math Learning Resources & Calculators',
+  description: 'Learn mathematics online with our free resources, interactive calculators, and step-by-step solutions. Covering algebra, geometry, trigonometry, statistics, and more.',
+  keywords: 'math learning, online math, math calculator, math practice, algebra, geometry, trigonometry, statistics',
+  openGraph: {
+    title: 'Learn Math Class - Free Online Math Learning Resources',
+    description: 'Master mathematics with our comprehensive online learning platform. Interactive tools, practice problems, and detailed explanations for all math levels.',
+    url: 'https://www.learnmathclass.com',
+    type: 'website',
+  },
+  robots: 'index, follow',
+  alternates: {
+    canonical: 'https://www.learnmathclass.com',
+  },
+};
 
 
 
@@ -65,28 +81,7 @@ export default async function Home() {
     ...categorizedUrls.leaves
   ];
   
-  
-
-
-
-
-  const countingPrinciples=`
-  graph TD
-      A["<h3>Counting Principles in Combinatorics</h3>"]
-      B["<h4>Addition Principle</h4>Count of disjoint events<br>is sum of individual counts"]
-      C["<h4>Multiplication Principle</h4>Count of sequential events<br>is product of individual counts"]
-      D["<h4>Permutations</h4>Ordered arrangements<br>of distinct objects"]
-      E["<h4>Combinations</h4>Unordered selections<br>from a set of objects"]
-      
-      A --> B
-      A --> C
-      C --> D
-      C --> E
-  `
-
-  return (
-    <div className='outer-container' >
-      <Head>
+    <Head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Learn Math Class: Free Online Math Learning Resources & Calculators</title>
@@ -107,6 +102,24 @@ export default async function Home() {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="msvalidate.01" content="93FCA47C77A3B377FDB3B9FEA951F9CA" />
 </Head>
+
+
+  const countingPrinciples=`
+  graph TD
+      A["<h3>Counting Principles in Combinatorics</h3>"]
+      B["<h4>Addition Principle</h4>Count of disjoint events<br>is sum of individual counts"]
+      C["<h4>Multiplication Principle</h4>Count of sequential events<br>is product of individual counts"]
+      D["<h4>Permutations</h4>Ordered arrangements<br>of distinct objects"]
+      E["<h4>Combinations</h4>Unordered selections<br>from a set of objects"]
+      
+      A --> B
+      A --> C
+      C --> D
+      C --> E
+  `
+
+  return (
+    <div className='outer-container' >
 {/* <GenericNavbar/> */}
 <MyNavbar3
 themeName='dark'
