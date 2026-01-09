@@ -700,7 +700,7 @@ Probability errors often originate from defining the outcome space incorrectly b
       content:`
 When counting is repeated across structured experiments, probability distributions are formed.
 
-• In repeated [Bernoulli trials](!/probability/distributions/discrete#bernoilli), counting successes leads to the [binomial distribution](!/probability/distributions/discrete#binomial).
+• In repeated [Bernoulli trials](!/probability/distributions/discrete#bernoulli), counting successes leads to the [binomial distribution](!/probability/distributions/discrete#binomial).
 • In sampling without replacement, counting selections leads to the [hypergeometric distribution](!/probability/distributions/discrete#hypergeometric).
 • In symmetric finite models, counting outcomes leads to the [discrete uniform distribution](!/probability/distributions/discrete#uniform).
 

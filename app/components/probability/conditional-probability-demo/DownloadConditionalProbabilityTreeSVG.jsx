@@ -1,9 +1,9 @@
-
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
-export default function ConditionalProbabilityTree2() {
+export default function DownloadConditionalProbabilityTreeSVG() {
+  const svgRef = useRef(null);
   const [pA, setPA] = useState(0.6);
   const [pBGivenA, setPBGivenA] = useState(0.7);
   const [pBGivenNotA, setPBGivenNotA] = useState(0.3);
@@ -25,6 +25,36 @@ export default function ConditionalProbabilityTree2() {
   const level1X = 240;
   const level2X = 520;
   const verticalSpacing = 120;
+
+  // Download SVG function
+  const downloadSVG = () => {
+    if (!svgRef.current) return;
+    
+    const svgClone = svgRef.current.cloneNode(true);
+    svgClone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    svgClone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+    
+    const removeStyles = (element) => {
+      if (element.hasAttribute('style')) {
+        element.removeAttribute('style');
+      }
+      for (let child of element.children) {
+        removeStyles(child);
+      }
+    };
+    removeStyles(svgClone);
+    
+    const svgData = svgClone.outerHTML;
+    const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'conditional-probability-tree.svg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 
   // Node positions
   const nodes = {
@@ -138,7 +168,6 @@ export default function ConditionalProbabilityTree2() {
 
   return (
     <div style={{ padding: '20px', maxWidth: '1400px', margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-      {/* <h1 style={{ fontSize: '28px', fontWeight: 'bold', marginBottom: '10px' }}>Conditional Probability Tree</h1> */}
       <p style={{ color: '#666', marginBottom: '30px' }}>
         Visualize conditional probabilities with events A and B. Click on intersection probabilities to highlight paths.
       </p>
@@ -150,7 +179,7 @@ export default function ConditionalProbabilityTree2() {
         <div style={{ flex: '0 0 auto' }}>
           {/* Tree Visualization */}
           <div style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '20px', marginBottom: '20px' }}>
-            <svg width={width} height={height} style={{ display: 'block' }}>
+            <svg ref={svgRef} width={width} height={height} style={{ display: 'block' }}>
               {/* Draw paths */}
               {paths.map((path, idx) => {
                 const fromNode = nodes[path.from];
@@ -311,12 +340,30 @@ export default function ConditionalProbabilityTree2() {
                   borderRadius: '6px',
                   fontSize: '14px',
                   fontWeight: '600',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  marginBottom: '10px'
                 }}
               >
                 Clear Selection
               </button>
             )}
+
+            <button
+              onClick={downloadSVG}
+              style={{
+                width: '100%',
+                padding: '10px',
+                background: '#3b82f6',
+                color: 'white',
+                border: 'none',
+                borderRadius: '6px',
+                fontSize: '14px',
+                fontWeight: '600',
+                cursor: 'pointer'
+              }}
+            >
+              Download SVG
+            </button>
           </div>
         </div>
 

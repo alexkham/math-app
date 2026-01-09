@@ -31,13 +31,13 @@ export async function getStaticProps(){
     intuition:{
       title:`The Intuition Behind Expected Value`,
       content:`
-The simplest way to think about expected value is as the **long-run average** of a random variable.
+The simplest way to think about expected value is as the **long-run average** of a [random variable](!/probability/random-variables).
 If you could run the same random experiment again and again, the results would fluctuate from trial
 to trial, but the average of all outcomes would settle around a single number. That number is the
 expected value.
 
-For discrete random variables, this average is formed by giving more weight to outcomes that are more likely.
-For continuous variables, the density curve shows where values tend to concentrate, and the expected
+For [discrete random variables](!/probability/random-variables#types), this average is formed by giving more weight to outcomes that are more likely.
+For [continuous variables](!/probability/random-variables#types), the density curve shows where values tend to concentrate, and the expected
 value reflects the balance point of that curve.
 
 The value that occurs most often and the expected value are not necessarily the same.
@@ -89,7 +89,7 @@ expected value is a weighted average based on the probability function of the va
   
       title:`How to Calculate Expected Value`,
       content:`
-Expected value is always computed the same way: we take each possible value of the random variable, give it the weight it deserves based on its probability, and combine all those weighted contributions into a single average. The only difference between discrete and continuous variables is how we perform this combination.
+Expected value is always computed the same way: we take each possible value of the [random variable](!/probability/random-variables), give it the weight it deserves based on its probability, and combine all those weighted contributions into a single average. The only difference between discrete and continuous variables is how we perform this combination.
 
 **Discrete Random Variables (using a PMF)**  
 For discrete variables, we use a weighted sum: multiply each value $x$ by its probability $p(x)$, then add all these products together. This gives the formula $E(X) = Σ x · p(x)$. It is simply a probability-weighted average of all possible outcomes.
