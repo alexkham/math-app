@@ -490,10 +490,10 @@ export default function TotalProbabilityVisualizer() {
                 color: highlightedPath === 'notB' ? '#ef4444' : '#1e293b',
                 marginBottom: '8px'
               }}>
-                P(B') = {jointProbs.map((_, i) => `P(E${i + 1})·P(B'|E${i + 1})`).join(' + ')}
+                P(B&apos;) = {jointProbs.map((_, i) => `P(E${i + 1})·P(B'|E${i + 1})`).join(' + ')}
               </div>
               <div style={{ fontSize: '16px', fontWeight: '700', color: '#ef4444' }}>
-                P(B') = {pNotB.toFixed(4)}
+                P(B&apos;) = {pNotB.toFixed(4)}
               </div>
             </div>
           </div>
@@ -568,7 +568,7 @@ export default function TotalProbabilityVisualizer() {
                       fontWeight: highlightedPath === `E${i}notB` ? '600' : '400',
                       color: highlightedPath === `E${i}notB` ? baseColors[i % baseColors.length] : '#1e293b'
                     }}>
-                      P(E{i + 1} ∩ B') = {jp.EnotB.toFixed(4)}
+                      P(E{i + 1} ∩ B&apos;) = {jp.EnotB.toFixed(4)}
                     </div>
                   </div>
                 </React.Fragment>
@@ -579,7 +579,7 @@ export default function TotalProbabilityVisualizer() {
           {/* Bayes' Theorem */}
           <div style={{ background: 'white', padding: '15px', borderRadius: '6px' }}>
             <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '12px', color: '#64748b' }}>
-              Bayes' Theorem (Reverse Probabilities)
+              Bayes&apos; Theorem (Reverse Probabilities)
             </h3>
             <div style={{ fontSize: '13px', lineHeight: '1.8' }}>
               {eventProbs.map((_, i) => (

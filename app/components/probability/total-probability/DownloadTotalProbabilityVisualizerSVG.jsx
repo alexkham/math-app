@@ -696,7 +696,7 @@ export default function TotalProbabilityVisualizerSVGDownload() {
           {/* Bayes' Theorem */}
           <div style={{ background: 'white', padding: '15px', borderRadius: '6px' }}>
             <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '12px', color: '#64748b' }}>
-              Bayes' Theorem P(Aᵢ|Bⱼ)
+              Bayes&apos; Theorem P(Aᵢ|Bⱼ)
             </h3>
             <div style={{ fontSize: '12px', lineHeight: '1.6', maxHeight: '300px', overflowY: 'auto' }}>
               {bMarginals.map((pBj, j) => (
