@@ -782,7 +782,7 @@ export default function DistributionsCalculatorPage({seoData, sectionsContent, i
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-40px',marginBottom:'0px'}}>Discrete Distributions Calculator</h1>
+      <h1 className='title' style={{marginTop:'-40px',marginBottom:'20px'}}>Discrete Distributions Calculator</h1>
       <br/>
       <VerticalButtonGroup 
         items={menuItems}

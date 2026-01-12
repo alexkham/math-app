@@ -760,7 +760,7 @@ export default function ContinuousDistributionsPage({seoData, sectionsContent, i
       /> 
       <Breadcrumb/>
       
-      <h1 className='title' style={{marginTop:'-40px',marginBottom:'-20px'}}>Continuous Distributions Calculator</h1>
+      <h1 className='title' style={{marginTop:'-20px',marginBottom:'-20px'}}>Continuous Distributions Calculator</h1>
       <br/>
       
       <div style={{

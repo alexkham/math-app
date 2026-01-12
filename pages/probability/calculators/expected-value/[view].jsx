@@ -18,6 +18,9 @@ import PoissonExpectedValueCalculator from '@/app/components/calculators/probabi
 import ContinuousUniformExpectedValueCalculator from '@/app/components/calculators/probability/expected-value/ContinuousUniformExpectedValueCalculator'
 import ExponentialExpectedValueCalculator from '@/app/components/calculators/probability/expected-value/ExponentialExpectedValueCalculator'
 import NormalExpectedValueCalculator from '@/app/components/calculators/probability/expected-value/NormalDistributionExpectedValueCalculator'
+import '../../../../pages/pages.css'
+
+
 
 export async function getStaticPaths() {
   const paths = [
@@ -279,7 +282,7 @@ export default function ExpectedValueCalculatorPage({ seoData, sectionsContent, 
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-50px', marginBottom:'-50px'}}>
+      <h1 className='title' style={{marginTop:'-70px', marginBottom:'-50px'}}>
         {h1Title}
       </h1>
       <br/>
