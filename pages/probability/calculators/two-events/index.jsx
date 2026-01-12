@@ -717,8 +717,8 @@ export default function TwoEventsCalculatorPage({seoData, sectionsContent, intro
         isSticky={true}
         verticalOffset='200px'
       /> */}
-      <div style={{marginTop:'-50px'}}>
-        <TwoEventsProbabilityCalculator/>
+      <div style={{marginTop:'-50px'}} className="calculator-widget">
+        <TwoEventsProbabilityCalculator />
       </div>
       <br/>
       <br/>

@@ -663,7 +663,7 @@ export default function ThreeEventsCalculatorPage({seoData, sectionsContent, int
       
       <h1 className='title' style={{marginTop:'-20px',marginBottom:'0px'}}>Three Events Probability Calculator</h1>
       <br/>
-      <ThreeEventsProbabilityCalculator/>
+      <ThreeEventsProbabilityCalculator className="calculator-widget"/>
       <br/>
       <SectionTableOfContents sections={genericSections}/>
       <br/>

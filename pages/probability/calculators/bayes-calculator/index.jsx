@@ -358,7 +358,7 @@ export default function BayesCalculatorPage({seoData, sectionsContent, introCont
       <br/>
       <h1 className='title' style={{marginTop:'-30px',marginBottom:'-40px'}}>Bayes&apos; Theorem Calculator</h1>
       <br/>
-      <div style={{width:'75%',margin:'auto',transform:'scale(0.99)'}}>
+      <div style={{width:'75%',margin:'auto',transform:'scale(0.99)'}} className="calculator-widget">
         <BayesTheoremCalculator/>
       </div>
       <br/>

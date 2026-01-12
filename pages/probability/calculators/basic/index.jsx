@@ -840,6 +840,7 @@ export default function ProbabilityCalculator({seoData, sectionsContent, faqQues
       <br/>
       
       <GenericMultiComponentFrame
+      className="calculator-widget"
         paramName="calc"
         defaultSlug="single-event"
         components={[

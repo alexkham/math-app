@@ -287,7 +287,8 @@ export default function ExpectedValueCalculatorPage({ seoData, sectionsContent, 
       </h1>
       <br/>
 
-      <div style={{
+      <div className="calculator-widget"
+      style={{
         maxWidth: '1200px',
         margin: '0 auto',
         padding: '0 20px',

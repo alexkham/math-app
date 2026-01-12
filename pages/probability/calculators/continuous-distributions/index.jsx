@@ -777,7 +777,7 @@ export default function ContinuousDistributionsPage({seoData, sectionsContent, i
           verticalOffset='200px'
         />
         
-        <div style={{ flex: 1, marginTop:'-50px', marginLeft:'-100px'}}>
+        <div style={{ flex: 1, marginTop:'-50px', marginLeft:'-100px'}} className="calculator-widget">
           <GenericMultiComponentFrame
             initialActive={initialTab}
             buttonMinWidth="160px"
