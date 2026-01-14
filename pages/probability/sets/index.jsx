@@ -575,7 +575,7 @@ Several errors show up repeatedly when learners first connect sets to probabilit
     connection:{
       title:`Connections to Other Probability Concepts`,
       content:`
-Sets link directly to every major idea in probability. Sample spaces are simply the largest sets that describe every possible outcome. Events are subsets that capture specific conditions we care about. Probability functions assign numerical values to these event-sets, turning structure into measurable likelihoods. The cumulative distribution function (CDF) is built from sets of the form (−∞, x], and conditional probability is defined by comparing intersections of sets. Even independence is expressed through the relationship between event-sets and how their probabilities combine. Because every major concept rests on sets, understanding them makes the entire framework of probability much easier to navigate.
+Sets link directly to every major idea in probability. [Sample spaces](!/probability/sample-space) are simply the largest sets that describe every possible outcome. Events are subsets that capture specific conditions we care about. Probability functions assign numerical values to these event-sets, turning structure into measurable likelihoods. The cumulative distribution function (CDF) is built from sets of the form (−∞, x], and conditional probability is defined by comparing intersections of sets. Even independence is expressed through the relationship between event-sets and how their probabilities combine. Because every major concept rests on sets, understanding them makes the entire framework of probability much easier to navigate.
 `,
       before:``,
       after:``,
@@ -605,7 +605,7 @@ Probability relies on a small collection of symbols to describe outcomes, events
 • $(a, b), [a, b], (−∞, x]$ — intervals used for continuous outcomes  
 • $|A|$ — the number of elements in a finite set A
 
-These symbols allow us to write events precisely, express how they relate to each other, and apply probability rules consistently.
+These symbols allow us to write [events](!/probability/events) precisely, express how they relate to each other, and apply probability rules consistently.
 
 
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
