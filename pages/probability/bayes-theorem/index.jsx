@@ -688,7 +688,7 @@ This notation makes it clear which quantities are known, which are updated, and 
       content:`
 Bayes' theorem expresses the update of probability in a single relation built from conditional probability:
 
-$P(A \\mid B) = \\dfrac{P(B \\mid A)\,P(A)}{P(B)}$
+$$P(A \\mid B) = \\dfrac{P(B \\mid A)\,P(A)}{P(B)}$$
 
 Each part of the formula has a clear role.
 

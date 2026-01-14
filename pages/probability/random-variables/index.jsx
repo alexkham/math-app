@@ -618,16 +618,16 @@ possible.
       title:`What a Random Variable Is`,
       content:`
 
-Random variables provide a means to quantify and manipulate probabilities using mathematical tools such as calculus. They offer a flexible and powerful framework for modeling various real-world phenomena that exhibit randomness. For example, consider rolling a six-sided die: the outcome of this event can be represented by a random variable X, which takes on values ranging from 1 to 6 with equal probability.
+Random variables provide a means to quantify and manipulate probabilities using mathematical tools such as calculus. They offer a flexible and powerful framework for modeling various real-world phenomena that exhibit randomness. For example, consider rolling a [six-sided die](!/probability/models/dice-roll): the outcome of this event can be represented by a random variable X, which takes on values ranging from 1 to 6 with equal probability.
 
-Random variables are essential in probability theory and statistics, as they allow for the development of probability distributions, such as the binomial distribution, normal distribution, and Poisson distribution. These distributions describe the likelihood of various outcomes occurring and provide important insights into the behavior of random events.
+Random variables are essential in probability theory and statistics, as they allow for the development of [probability distributions](!/probability/distributions), such as the binomial distribution, normal distribution, and Poisson distribution. These distributions describe the likelihood of various outcomes occurring and provide important insights into the behavior of random [events](!/probability/events).
 
 One can also define continuous random variables to represent outcomes that can take on an infinite number of values within a given range. For instance, the height of adult humans or the lifetime of a light bulb may be modeled as continuous random variables.
 
-In summary, a random variable is a powerful mathematical tool for representing and analyzing the outcomes of random events using probabilistic methods. By assigning real numbers to each possible outcome of an experiment, we can study probability distributions, make predictions, and optimize decisions in various fields, including finance, engineering, economics, and science.
+In summary, a random variable is a powerful mathematical tool for representing and analyzing the outcomes of random events using probabilistic methods. By assigning real numbers to each possible outcome of an experiment, we can study [probability distributions](!/probability/distributions), make predictions, and optimize decisions in various fields, including finance, engineering, economics, and science.
 `,
       before:`
-      A random variable is a mathematical construct that represents the numerical outcome of a random experiment or event. It acts as a function that assigns real numbers to each possible outcome of the experiment, with the understanding that multiple outcomes may result in the same value. The randomness associated with a random variable stems from the unpredictable nature of the underlying event, rather than the variable itself.
+      A random variable is a mathematical construct that represents the numerical outcome of a random experiment or [event](!/probability/events). It acts as a function that assigns real numbers to each possible outcome of the experiment, with the understanding that multiple outcomes may result in the same value. The randomness associated with a random variable stems from the unpredictable nature of the underlying event, rather than the variable itself.
 
 
       `,

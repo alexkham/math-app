@@ -2375,7 +2375,7 @@ export default function LandingPage({
   topNavData,
   heroData,
   contentCardsData,
-  sidebarTheme = 'azure',
+  sidebarTheme = 'portfolio',
   backgroundColor = '#f0f2f5',
   showOperaSidebar = true
 }) {

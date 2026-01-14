@@ -594,7 +594,7 @@ const getCardStyle = (card) => {
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
-    borderRadius: '4px'
+    borderRadius: '1px'
   };
 
   if (method === 'customSize') {
