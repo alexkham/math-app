@@ -542,12 +542,20 @@ const occurenceMatrix=`
       title:`Uniform Discrete Distribution`,
       content:``,
       before:``,
+      link:'/probability/distributions/discrete/uniform',
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=1) →@`,
       checklist:`<h2 style="color: #3b82f6;"> Checklist for Identifying a Discrete Uniform Distribution</h2>
 ✔ All values in the range are equally likely.  
 ✔ The variable takes on a finite set of integer values.  
 ✔ $X$ is defined over a fixed range from a to b (inclusive).  
 ✔ No value is favored over another.
+
+`,
+
+how:`
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn More About How to Distinguish between Different Types of Discrete Distributions](!/probability/distributions/discrete#decide) →@
+
 `,
 notation :`**Notations Used:**
 
@@ -616,6 +624,7 @@ Each face has an equal and independent chance of appearing.
       title:`Binomial Distribution`,
       content:``,
       before:``,
+       link:'/probability/distributions/discrete/binomial',
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=2) →@
 
       @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use binomial distributions cummulative table](!/probability/tables/binomial-distribution) →@
@@ -624,7 +633,15 @@ Each face has an equal and independent chance of appearing.
 <h2 style="color: #3b82f6;"> Checklist for Identifying a Binomial Distribution</h2>
 ✔ Repeating the same [Bernoulli](!/probability/distributions/discrete#bernoulli) trial independently (each trial does not depend on the others).  
 ✔ The trial is repeated exactly n times.  
-✔ $X$ is defined as the number of successes out of the total trials.`,
+✔ $X$ is defined as the number of successes out of the total trials.
+
+`,
+
+how:`
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn More About How to Distinguish between Different Types of Discrete Distributions](!/probability/distributions/discrete#decide) →@
+
+`,
 parameters:`
 
 **Parameters of Binomial Distribution** 
@@ -699,13 +716,21 @@ The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with
       title:`Geometric Distribution`,
       content:``,
       before:``,
+       link:'/probability/distributions/discrete/geometric',
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=3) →@`,
      checklist:`     
 <h2 style="color: #3b82f6;"> Checklist for Identifying a Geometric Distribution</h2>
 ✔   Repeating [Bernoulli](!/probability/distributions/discrete#bernoulli) trials independently with constant probability.  
 ✔   No limit on the number of trials — keep repeating until success.  
 ✔   $X$ is defined as the total number of trials up to and including the first success.
+
      `,
+
+     how:`
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn More About How to Distinguish between Different Types of Discrete Distributions](!/probability/distributions/discrete#decide) →@
+
+`,
 
      parameters:`
 **Parameters of Geometric Distribution **
@@ -771,12 +796,19 @@ This means there's about a 9.6% chance that you'll need exactly 4 rolls to get y
       title:`Negative Binomial Distribution`,
       content:``,
       before:``,
+       link:'/probability/distributions/discrete/negative-binomial',
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=4) →@`,
       checklist:`<h2 style="color: #3b82f6;"> Checklist for Identifying a Negative Binomial Distribution</h2>
 ✔ Repeating the same [Bernoulli](!/probability/distributions/discrete#bernoulli) trial independently.  
 ✔ Success probability remains constant across trials.  
-✔ X is defined as the number of trials until the r-th success (inclusive).`,
+✔ X is defined as the number of trials until the r-th success (inclusive).
 
+`,
+how:`
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn More About How to Distinguish between Different Types of Discrete Distributions](!/probability/distributions/discrete#decide) →@
+
+`,
 notation:`
 **Notations Used:**
 
@@ -854,14 +886,20 @@ Note: The geometric distribution is a special case of the negative binomial dist
       title:`Hypergeometric Distribution`,
       content:``,
       before:``,
+       link:'/probability/distributions/discrete/hypergeometric',
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=5) →@`,
       checklist:`<h2 style="color: #3b82f6;"> Checklist for Identifying a Hypergeometric Distribution</h2>
 ✔ Sampling is done without replacement from a finite population.  
 ✔ The population has a fixed number of successes and failures.  
 ✔ The number of draws is fixed in advance.  
 ✔ $X$ is defined as the number of successes in the sample.
-`,
 
+`,
+how:`
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn More About How to Distinguish between Different Types of Discrete Distributions](!/probability/distributions/discrete#decide) →@
+
+`,
 notation:`
 **Notations Used:**
 
@@ -938,12 +976,20 @@ Note: When $N$ is very large relative to $n$, the hypergeometric distribution ap
       title:`Poisson Distribution`,
       content:``,
       before:``,
+       link:'/probability/distributions/discrete/poisson',
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=6) →@`,
       checklist:`<h2 style="color: #3b82f6;">Checklist for Identifying a Poisson Distribution</h2>
 ✔ Events occur independently over time or space.  
 ✔ Events happen at a constant average rate (λ).  
 ✔ The probability of more than one event in an infinitesimal interval is negligible.  
 ✔ $X$ is defined as the number of events in a fixed interval.
+
+
+`,
+how:`
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn More About How to Distinguish between Different Types of Discrete Distributions](!/probability/distributions/discrete#decide) →@
+
 `,
 notation:`
 **Notations Used:**
@@ -1201,28 +1247,78 @@ The **support** — the set of values where outcomes can occur — is always cou
       after:``,
   
     },
-    obj5:{
+    attributes:{
   
-      title:``,
-      content:``,
+      title:`Common Attributes of Discrete Probability Distributions`,
+      content:`
+     Discrete probability distributions arise whenever a random process produces outcomes that can be **counted** rather than measured. Although different discrete distributions model very different scenarios—such as fixed numbers of trials, waiting times for events, or sampling from finite populations—they are all built from the same underlying structural components. These shared elements determine how probabilities are assigned, how outcomes are constrained, and how central tendency and variability are described.
+
+Every **discrete probability distribution** is characterized by the following **common attributes**:
+
+* **Parameters**
+  Quantities that define the distribution and determine its behavior, such as the number of trials, success probability, or event rate.
+
+* **Probability Mass Function and Support**
+  A rule that assigns probability to each possible outcome, together with the set of discrete values for which those probabilities are non-zero.
+
+* **Cumulative Distribution Function (CDF)**
+  A function that accumulates probability across outcomes up to a given value.
+
+* **Expected Value (Mean)**
+  A numerical summary representing the long-run average outcome of the distribution.
+
+* **Variance and Standard Deviation**
+  Measures that describe how spread out the possible outcomes are around the mean.
+
+Although discrete distributions vary significantly in their interpretation and behavior, they all possess this same set of attributes. This common structure allows different distributions to be analyzed, compared, and applied using a unified probabilistic language.
+
+      `,
       before:``,
       after:``,
   
     },
-    obj5:{
+    properties:{
   
-      title:``,
-      content:``,
+      title:`Distribution-Specific Properties`,
+      content:`
+Beyond their shared structural attributes, discrete probability distributions may exhibit **special mathematical properties** that distinguish one distribution from another. These properties are not universal: some apply only to specific distributions, while others hold only under particular conditions. They describe *how* a distribution behaves, not merely *what* quantities can be computed from it.
+
+Unlike attributes—which every discrete distribution possesses—properties capture unique behaviors that often explain **why a particular distribution is chosen** in a given modeling context.
+
+Common examples of **distribution-specific properties** include:
+
+* **Memoryless Property**
+  The outcome of future trials is independent of past outcomes, even when conditioning on how much has already occurred.
+
+* **Additivity**
+  The sum of independent random variables from the same distribution belongs to the same distributional family.
+
+* **Closure Under Operations**
+  Certain distributions remain within the same family when combined through addition, scaling, or other transformations.
+
+* **Symmetry**
+  Probabilities are balanced around a central value, producing a mirror-image distribution.
+
+* **Limiting Behavior**
+  One distribution emerges as an approximation or limit of another under specific conditions.
+
+Not all discrete distributions possess these properties, and no single distribution exhibits all of them. Instead, each distribution is characterized by a distinct combination of properties that determine its mathematical behavior and practical usefulness. Recognizing these properties helps clarify both the strengths and limitations of different discrete models.
+
+      `,
       before:``,
       after:``,
   
     },
-    obj5:{
+    general:{
   
       title:``,
       content:``,
       before:``,
       after:``,
+      how:`
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:16px]:[Learn More About How to Distinguish between Different Types of Discrete Distributions](!/probability/distributions/discrete#decide) →@
+
+`,
   
     },
     obj5:{
@@ -1275,6 +1371,66 @@ The **support** — the set of values where outcomes can occur — is always cou
   ]
 };
 
+const discreteDistributionsAttributesData = {
+  tableTitle: 'Common Attributes of Discrete Distributions',
+  rows: [
+    {
+      distribution: 'Discrete Uniform',
+      parameters: '$a$ = minimum value, $b$ = maximum value (integers)',
+      support: '$\\{a,a+1,\\dots,b\\}$',
+      pmf: '$P(X=k)$\n$=\\frac{1}{b-a+1}$',
+      cdf: '$F(k)=\\frac{k-a+1}{b-a+1}\\; (a\\le k\\le b)$',
+      expectedValue: '$E[X]=\\frac{a+b}{2}$',
+      variance: '$\\mathrm{Var}(X)=\\frac{(b-a+1)^2-1}{12}$'
+    },
+    {
+      distribution: 'Binomial',
+      parameters: '$n$ = number of trials, $p$ = success probability per trial',
+      support: '$\\{0,1,\\dots,n\\}$',
+      pmf: '$P(X=k)=\\binom{n}{k}p^k(1-p)^{n-k}$',
+      cdf: '$F(k)=\\sum_{i=0}^{k}\\binom{n}{i}p^i(1-p)^{n-i}$',
+      expectedValue: '$E[X]=np$',
+      variance: '$\\mathrm{Var}(X)=np(1-p)$'
+    },
+    {
+      distribution: 'Geometric',
+      parameters: '$p$ = success probability per trial',
+      support: '$\\{1,2,3,\\dots\\}$',
+      pmf: '$P(X=k)=(1-p)^{k-1}p$',
+      cdf: '$F(k)=1-(1-p)^k$',
+      expectedValue: '$E[X]=\\frac{1}{p}$',
+      variance: '$\\mathrm{Var}(X)=\\frac{1-p}{p^2}$'
+    },
+    {
+      distribution: 'Negative Binomial',
+      parameters: '$r$ = number of successes, $p$ = success probability',
+      support: '$\\{r,r+1,\\dots\\}$',
+      pmf: '$P(X=k)=\\binom{k-1}{r-1}p^r(1-p)^{k-r}$',
+      cdf: '$F(k)=\\sum_{i=r}^{k}\\binom{i-1}{r-1}p^r(1-p)^{i-r}$',
+      expectedValue: '$E[X]=\\frac{r}{p}$',
+      variance: '$\\mathrm{Var}(X)=\\frac{r(1-p)}{p^2}$'
+    },
+    {
+      distribution: 'Hyper\ngeometric',
+      parameters: '$N$ = population size, $K$ = successes in population, $n$ = draws',
+      support: '$\\max(0,n-N+K)\\le k\\le \\min(n,K)$',
+      pmf: '$P(X=k)=\\frac{\\binom{K}{k}\\binom{N-K}{n-k}}{\\binom{N}{n}}$',
+      cdf: '$F(k)=\\sum_{i=\\max(0,n-N+K)}^{k}\\frac{\\binom{K}{i}\\binom{N-K}{n-i}}{\\binom{N}{n}}$',
+      expectedValue: '$E[X]=n\\frac{K}{N}$',
+      variance: '$\\mathrm{Var}(X)=n\\frac{K}{N}\\left(1-\\frac{K}{N}\\right)\\frac{N-n}{N-1}$'
+    },
+    {
+      distribution: '[Poisson](!/probability/distributions/discrete/poisson)',
+      parameters: '$\\lambda$ = average event rate',
+      support: '$\\{0,1,2,\\dots\\}$',
+      pmf: '$P(X=k)=\\frac{\\lambda^k e^{-\\lambda}}{k!}$',
+      cdf: '$F(k)=\\sum_{i=0}^{k}\\frac{\\lambda^i e^{-\\lambda}}{i!}$',
+      expectedValue: '$E[X]=\\lambda$',
+      variance: '$\\mathrm{Var}(X)=\\lambda$'
+    }
+  ]
+};
+
 
   const introContent = {
   id: "intro",
@@ -1313,6 +1469,7 @@ This page systematically presents six fundamental discrete distributions, detail
       poissonTable,
       occurenceMatrix,
       discreteDistributionsOverviewData,
+      discreteDistributionsAttributesData,
         
        }
     }
@@ -1327,6 +1484,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
       poissonTable,
     occurenceMatrix,
     discreteDistributionsOverviewData,
+    discreteDistributionsAttributesData,
   }) {
 
     
@@ -1362,25 +1520,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         ]
     },
 
-     {
-        id:'decide',
-        title:sectionsContent.decide.title,
-        link:'',
-        content:[
-          sectionsContent.decide.content,
-         
-    <div  key={'decide'}  style={{width:'100%',marginBottom:'-50px'}}>
-           <SvgDiagram
-            scale={'0.95'}
-    layout='vertical'
-   
-    data={distributionsDiagramsData['distribution desicion making flowchart']}
-    />
-    </div>,
-     sectionsContent.decide.after,
-      <div style={{margin:'auto',width:'100%',transform:'scale(0.85)',marginTop:'0px'}} dangerouslySetInnerHTML={{ __html: occurenceMatrix }} key="table" />,
-        ]
-    },
+ 
     // {
     //     id:'',
     //     title:'',
@@ -1413,7 +1553,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     {
         id:'uniform',
         title:sectionsContent.uniform.title,
-        link:'',
+        link:sectionsContent.uniform.link,
         content:[       
   
    
@@ -1427,9 +1567,10 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
    { processContent(sectionsContent.uniform.checklist)}
     </div>,
-    sectionsContent.uniform.notation,
-    sectionsContent.uniform.parameters,
-    sectionsContent.uniform.pmf,
+    sectionsContent.general.how,
+    // sectionsContent.uniform.notation,
+    // sectionsContent.uniform.parameters,
+    // sectionsContent.uniform.pmf,
 
             // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["discrete uniform distribution"].svg }} key="table" />,
             <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: uniformTable }} key="table" />,
@@ -1439,7 +1580,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     {
         id:'binomial',
         title:sectionsContent.binomial.title,
-        link:'',
+        link:sectionsContent.binomial.link,
         content:[
              <SvgDiagram
             key={'binomial'}
@@ -1452,9 +1593,10 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
    { processContent(sectionsContent.binomial.checklist,)}
     </div>,
-    sectionsContent.binomial.notation,
-    sectionsContent.binomial.parameters,
-    sectionsContent.binomial.pmf,
+     sectionsContent.general.how,
+    // sectionsContent.binomial.notation,
+    // sectionsContent.binomial.parameters,
+    // sectionsContent.binomial.pmf,
     
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["binomial distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: binomialTable }} key="table" />,
@@ -1466,7 +1608,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     {
         id:'geometric',
         title:sectionsContent.geometric.title,
-        link:'',
+        link:sectionsContent.geometric.link,
         content:[
             <SvgDiagram
      key={'geometric'}
@@ -1478,9 +1620,11 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
    { processContent(sectionsContent.geometric.checklist)}
     </div>,
-    sectionsContent.geometric.notation,
-    sectionsContent.geometric.parameters,
-    sectionsContent.geometric.pmf,
+
+     sectionsContent.general.how,
+    // sectionsContent.geometric.notation,
+    // sectionsContent.geometric.parameters,
+    // sectionsContent.geometric.pmf,
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["geometric distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: geometricTable }} key="table" />,
               sectionsContent.geometric.after,
@@ -1489,7 +1633,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     {
         id:'negative_binomial',
         title:sectionsContent.negative.title,
-        link:'',
+        link:sectionsContent.negative.link,
         content:[
 
            <SvgDiagram
@@ -1502,9 +1646,11 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
    { processContent(sectionsContent.negative.checklist)}
     </div>,
-    sectionsContent.negative.notation,
-    sectionsContent.negative.parameters,
-    sectionsContent.negative.pmf,
+
+     sectionsContent.general.how,
+    // sectionsContent.negative.notation,
+    // sectionsContent.negative.parameters,
+    // sectionsContent.negative.pmf,
    
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html:distributionsDiagramsData["negative binomial distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: negativeBinomialTable }} key="table" />,
@@ -1514,7 +1660,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     {
         id:'hypergeometric',
         title:sectionsContent.hypergeometric.title,
-        link:'',
+        link:sectionsContent.hypergeometric.link,
         content:[
 
             <SvgDiagram
@@ -1527,9 +1673,11 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
    { processContent(sectionsContent.hypergeometric.checklist)}
     </div>,
-    sectionsContent.hypergeometric.notation,
-    sectionsContent.hypergeometric.parameters,
-    sectionsContent.hypergeometric.pmf,
+
+     sectionsContent.general.how,
+    // sectionsContent.hypergeometric.notation,
+    // sectionsContent.hypergeometric.parameters,
+    // sectionsContent.hypergeometric.pmf,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: hypergeometricTable }} key="table" />,
               sectionsContent.hypergeometric.after,
             ]
@@ -1537,7 +1685,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     {
         id:'poisson',
         title:sectionsContent.poisson.title,
-        link:'',
+        link:sectionsContent.poisson.link,
         content:[
            <SvgDiagram
            
@@ -1550,9 +1698,11 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     flexDirection:'column',margin:'0 auto',paddingLeft:'200px',fontWeight:'bold',border:'solid 1px #f2f2f2'}}>
    { processContent(sectionsContent.poisson.checklist)}
     </div>,
-    sectionsContent.poisson.notation,
-    sectionsContent.poisson.parameters,
-    sectionsContent.poisson.pmf,
+
+     sectionsContent.general.how,
+    // sectionsContent.poisson.notation,
+    // sectionsContent.poisson.parameters,
+    // sectionsContent.poisson.pmf,
     
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["poisson distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: poissonTable }} key="table" />,
@@ -1560,15 +1710,61 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
             ]
     },
 
-   
     {
-        id:'shared',
-        title:sectionsContent.shared.title,
+        id:'decide',
+        title:sectionsContent.decide.title,
         link:'',
         content:[
-          sectionsContent.shared.content,
+          sectionsContent.decide.content,
+         
+    <div  key={'decide'}  style={{width:'100%',marginBottom:'-50px'}}>
+           <SvgDiagram
+            scale={'0.95'}
+    layout='vertical'
+   
+    data={distributionsDiagramsData['distribution desicion making flowchart']}
+    />
+    </div>,
+     sectionsContent.decide.after,
+      <div style={{margin:'auto',width:'100%',transform:'scale(0.85)',marginTop:'0px'}} dangerouslySetInnerHTML={{ __html: occurenceMatrix }} key="table" />,
         ]
     },
+
+
+
+
+     {
+        id:'attributes',
+        title:sectionsContent.attributes.title,
+        link:'',
+        content:[
+          sectionsContent.attributes.content,
+            <div key={'attributes'} style={{width:'1200px'}}>
+           <GenericTable  tableData={discreteDistributionsAttributesData} theme='lightBlueCards'
+          cellFontSize={'13px'}
+          headerFontSize={'18px'}/>,
+          </div>
+        ]
+    },
+
+     {
+        id:'properties',
+        title:sectionsContent.properties.title,
+        link:'',
+        content:[
+          sectionsContent.properties.content,
+        ]
+    },
+
+   
+    // {
+    //     id:'shared',
+    //     title:sectionsContent.shared.title,
+    //     link:'',
+    //     content:[
+    //       sectionsContent.shared.content,
+    //     ]
+    // },
     // {
     //     id:'',
     //     title:'',

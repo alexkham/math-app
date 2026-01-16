@@ -445,7 +445,7 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../../../pages/pages.css'
 import Head from 'next/head'
-import DiscreteDistributionsCDF from '@/app/components/visualizations/probability/discrete-distribution/DiscreteProbabilityCDF'
+import DiscreteDistributionsCDF from '@/app/components/visualizations/probability/discrete-distribution/CDFs/DiscreteProbabilityCDF'
 
 
 export async function getStaticProps(){

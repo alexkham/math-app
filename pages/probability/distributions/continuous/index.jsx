@@ -135,6 +135,8 @@ Standard deviation $\\sigma$ is more interpretable than variance because it's in
 • Approximately 95% of data falls within $\\mu \\pm 2\\sigma$
 • Approximately 99.7% of data falls within $\\mu \\pm 3\\sigma$`,
 
+link:'/probability/distributions/continuous/normal',
+
 keyProperties:`<h3 style="color: #1e3a8a;">Key Properties and Special Characteristics</h3>
 **Symmetry**: The normal distribution is perfectly symmetric about its mean. This means $P(X \\leq \\mu - a) = P(X \\geq \\mu + a)$ for any value $a$.
 
@@ -168,6 +170,7 @@ uniform:{
   content:``,
   before:``,
   after:``,
+  link:'/probability/distributions/continuous/uniform',
   
   checklist:`<h2 style="color: #52525b;"> Checklist for Identifying a Continuous Uniform Distribution</h2>
 ✔ All values in a continuous interval are equally likely.
@@ -175,6 +178,7 @@ uniform:{
 ✔ The distribution has a rectangular shape when graphed.
 ✔ Random variable X can take any value within a finite interval [a, b].
 ✔ Often models situations with complete uncertainty within known bounds.`,
+
 
   parameters:`<h3 style="color: #475569;">Parameters of Continuous Uniform Distribution</h3>
 **a**: lower bound of the interval, where $a \\in \\mathbb{R}$
@@ -299,6 +303,7 @@ exponential:{
   title:`Exponential Distribution`,
   content:``,
   before:``,
+  link:'/probability/distributions/continuous/exponential',
   after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use continuous distributions calculator](!/probability/calculator/continuous-distributions?tab=2) →@`,
   
   checklist:`<h2 style="color: #52525b;"> Checklist for Identifying an Exponential Distribution</h2>
@@ -850,7 +855,7 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
     {
     id:'normal',
     title:sectionsContent.normal.title,
-    link:'',
+    link:sectionsContent.normal.link,
     content:[
         <SvgDiagram
             key={'normal'}
@@ -867,9 +872,9 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
         <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
     {processContent(sectionsContent.normal.parameters)}
 </div>,
-        <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-            {processContent(sectionsContent.normal.notation)}
-        </div>,
+        // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.notation)}
+        // </div>,
         
         <div key={'pdf-normal'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
             {processContent(sectionsContent.normal.pdf)}
@@ -893,7 +898,7 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
 {
     id:'uniform',
     title:sectionsContent.uniform.title,
-    link:'',
+    link:sectionsContent.uniform.link,
     content:[
         <SvgDiagram
             key={'uniform'}
@@ -909,9 +914,9 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
             {processContent(sectionsContent.uniform.parameters)}
         </div>,
         
-        <div key={'notation-uniform'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-            {processContent(sectionsContent.uniform.notation)}
-        </div>,
+        // <div key={'notation-uniform'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.uniform.notation)}
+        // </div>,
         
         <div key={'pdf-uniform'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
             {processContent(sectionsContent.uniform.pdf)}
@@ -949,7 +954,7 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
     {
     id:'exponential',
     title:sectionsContent.exponential.title,
-    link:'',
+    link:sectionsContent.exponential.link,
     content:[
         <SvgDiagram
             key={'exponential'}
@@ -965,9 +970,9 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
             {processContent(sectionsContent.exponential.parameters)}
         </div>,
         
-        <div key={'notation-exponential'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-            {processContent(sectionsContent.exponential.notation)}
-        </div>,
+        // <div key={'notation-exponential'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.exponential.notation)}
+        // </div>,
         
         <div key={'pdf-exponential'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
             {processContent(sectionsContent.exponential.pdf)}

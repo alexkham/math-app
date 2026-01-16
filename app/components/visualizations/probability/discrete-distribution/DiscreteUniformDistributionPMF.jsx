@@ -1,35 +1,28 @@
 import { useState, useMemo } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function PoissonDistribution() {
-  const [poissonLambda, setPoissonLambda] = useState(3);
+export default function DiscreteUniformDistribution() {
+  const [uniformMin, setUniformMin] = useState(1);
+  const [uniformMax, setUniformMax] = useState(6);
 
-  const factorial = (n) => {
-    if (n <= 1) return 1;
-    let result = 1;
-    for (let i = 2; i <= n; i++) {
-      result *= i;
-    }
-    return result;
+  const discreteUniformPMF = (k, a, b) => {
+    if (k < a || k > b) return 0;
+    return 1 / (b - a + 1);
   };
 
-  const poissonPMF = (k, lambda) => {
-    return (Math.pow(lambda, k) * Math.exp(-lambda)) / factorial(k);
-  };
-
-  const poissonData = useMemo(() => {
+  const discreteUniformData = useMemo(() => {
     const data = [];
-    const maxK = Math.min(30, poissonLambda + 15);
-    for (let k = 0; k <= maxK; k++) {
+    for (let k = uniformMin; k <= uniformMax; k++) {
       data.push({
         x: k,
-        probability: poissonPMF(k, poissonLambda)
+        probability: discreteUniformPMF(k, uniformMin, uniformMax)
       });
     }
     return data;
-  }, [poissonLambda]);
+  }, [uniformMin, uniformMax]);
 
-  const explanation = 'The Poisson distribution models the number of events occurring in a fixed interval when events happen at a constant average rate. The probability mass function is $P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}$, where $\\lambda$ is the average rate of events. Both the expected value and variance equal $\\lambda$: $E[X] = \\lambda$ and $\\text{Var}(X) = \\lambda$. Common applications include customer arrivals per hour, website hits per minute, radioactive decay events, and other scenarios where rare events occur independently at a constant average rate.';
+  const explanation = 'A discrete uniform distribution assigns equal probability to each value in a finite range. The probability mass function is $P(X = k) = \\frac{1}{b - a + 1}$ for $a \\leq k \\leq b$. The expected value is $E[X] = \\frac{a + b}{2}$, and the variance is $\\text{Var}(X) = \\frac{n^2 - 1}{12}$, where $n = b - a + 1$. Common examples include rolling a fair die, selecting a random card from a deck, or generating a random number from a finite range.';
 
   return (
     <div className="container">
@@ -207,27 +200,40 @@ export default function PoissonDistribution() {
         }
       `}</style>
 
-      <h1>Poisson Distribution</h1>
-      <p className="subtitle">Rare events occurring at a constant average rate</p>
+      {/* <h1>Discrete Uniform Distribution</h1>
+      <p className="subtitle">Equal probability for each value in a finite range</p> */}
 
       <div className="main-layout">
         <div className="content">
           <div className="distribution-header">
-            <h2 className="distribution-title">Poisson Distribution</h2>
-            <p className="distribution-description">Rare events over time interval (rate λ)</p>
+            <h2 className="distribution-title">Discrete Uniform Distribution</h2>
+            <p className="distribution-description">Equal probability for finite outcomes</p>
           </div>
           
           <div className="controls">
             <div className="control-group">
               <label>
-                Rate Lambda (λ): {poissonLambda.toFixed(1)}
+                Minimum Value (a): {uniformMin}
                 <input
                   type="range"
-                  min="0.5"
-                  max="15"
-                  step="0.5"
-                  value={poissonLambda}
-                  onChange={(e) => setPoissonLambda(parseFloat(e.target.value))}
+                  min="0"
+                  max="20"
+                  step="1"
+                  value={uniformMin}
+                  onChange={(e) => setUniformMin(Math.min(parseInt(e.target.value), uniformMax - 1))}
+                />
+              </label>
+            </div>
+            <div className="control-group">
+              <label>
+                Maximum Value (b): {uniformMax}
+                <input
+                  type="range"
+                  min="1"
+                  max="30"
+                  step="1"
+                  value={uniformMax}
+                  onChange={(e) => setUniformMax(Math.max(parseInt(e.target.value), uniformMin + 1))}
                 />
               </label>
             </div>
@@ -235,7 +241,7 @@ export default function PoissonDistribution() {
 
           <div className="chart-container">
             <ResponsiveContainer width="100%" height={450}>
-              <BarChart data={poissonData}>
+              <BarChart data={discreteUniformData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
                 <XAxis 
                   dataKey="x" 
@@ -268,7 +274,7 @@ export default function PoissonDistribution() {
 
         <div className="explanation-panel">
           <h3 className="explanation-title">Explanation</h3>
-          <p className="explanation-text">{explanation}</p>
+          <p className="explanation-text">{processContent(explanation)}</p>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { processContent } from '@/app/utils/contentProcessor';
 
 export default function HypergeometricDistribution() {
   const [hyperN, setHyperN] = useState(50);
@@ -214,9 +215,9 @@ export default function HypergeometricDistribution() {
           }
         }
       `}</style>
-
+{/* 
       <h1>Hypergeometric Distribution</h1>
-      <p className="subtitle">Sampling without replacement from finite population</p>
+      <p className="subtitle">Sampling without replacement from finite population</p> */}
 
       <div className="main-layout">
         <div className="content">
@@ -307,7 +308,7 @@ export default function HypergeometricDistribution() {
 
         <div className="explanation-panel">
           <h3 className="explanation-title">Explanation</h3>
-          <p className="explanation-text">{explanation}</p>
+          <p className="explanation-text">{processContent(explanation)}</p>
         </div>
       </div>
     </div>

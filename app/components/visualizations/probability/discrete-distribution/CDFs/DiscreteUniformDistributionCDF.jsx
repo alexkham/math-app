@@ -1,29 +1,31 @@
 import { useState, useMemo } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function GeometricDistribution() {
-  const [geometricP, setGeometricP] = useState(0.3);
+export default function DiscreteUniformDistributionCDF({ explanation }) {
+  const [uniformMin, setUniformMin] = useState(1);
+  const [uniformMax, setUniformMax] = useState(6);
 
-  const geometricPMF = (k, p) => {
-    return Math.pow(1 - p, k - 1) * p;
+  const defaultExplanation = 'The cumulative distribution function (CDF) for the discrete uniform distribution is $F(k) = \\frac{\\lfloor k \\rfloor - a + 1}{b - a + 1}$ for $a \\leq k \\leq b$. The CDF increases in equal steps of $\\frac{1}{n}$ where $n = b - a + 1$ is the number of possible values. Each step represents one additional outcome being included in the cumulative probability. The CDF reaches 1.0 at the maximum value $b$ and remains at 1.0 for all larger values.';
+
+  const discreteUniformCDF = (k, a, b) => {
+    if (k < a) return 0;
+    if (k >= b) return 1;
+    return (Math.floor(k) - a + 1) / (b - a + 1);
   };
 
-  const geometricData = useMemo(() => {
+  const discreteUniformData = useMemo(() => {
     const data = [];
-    const maxK = Math.min(50, Math.ceil(10 / geometricP));
-    for (let k = 1; k <= maxK; k++) {
-      const prob = geometricPMF(k, geometricP);
-      if (prob > 0.001) {
-        data.push({
-          x: k,
-          probability: prob
-        });
-      }
+    for (let k = uniformMin; k <= uniformMax; k++) {
+      data.push({
+        x: k,
+        cdf: discreteUniformCDF(k, uniformMin, uniformMax)
+      });
     }
     return data;
-  }, [geometricP]);
+  }, [uniformMin, uniformMax]);
 
-  const explanation = 'The geometric distribution models the number of trials needed to get the first success in repeated independent trials. The probability mass function is $P(X = k) = (1-p)^{k-1} p$. The expected value is $E[X] = \\frac{1}{p}$ and the variance is $\\text{Var}(X) = \\frac{1-p}{p^2}$. Common applications include counting coin flips until the first heads, attempts until the first sale is made, or trials until equipment failure occurs.';
+  const finalExplanation = explanation || defaultExplanation;
 
   return (
     <div className="container">
@@ -169,7 +171,6 @@ export default function GeometricDistribution() {
           font-size: 18px;
           color: #2c3e50;
           line-height: 1.6;
-          margin-bottom: 12px;
         }
 
         @media (max-width: 1024px) {
@@ -201,27 +202,40 @@ export default function GeometricDistribution() {
         }
       `}</style>
 
-      <h1>Geometric Distribution</h1>
-      <p className="subtitle">Trials until first success with probability p</p>
+      {/* <h1>Discrete Uniform Distribution CDF</h1>
+      <p className="subtitle">Interactive visualization of the cumulative distribution function</p> */}
 
       <div className="main-layout">
         <div className="content">
           <div className="distribution-header">
-            <h2 className="distribution-title">Geometric Distribution</h2>
-            <p className="distribution-description">Trials until first success (probability p)</p>
+            <h2 className="distribution-title">Discrete Uniform Distribution CDF</h2>
+            <p className="distribution-description">CDF rises uniformly in equal steps</p>
           </div>
           
           <div className="controls">
             <div className="control-group">
               <label>
-                Success Probability (p): {geometricP.toFixed(2)}
+                Minimum Value (a): {uniformMin}
                 <input
                   type="range"
-                  min="0.05"
-                  max="0.95"
-                  step="0.05"
-                  value={geometricP}
-                  onChange={(e) => setGeometricP(parseFloat(e.target.value))}
+                  min="0"
+                  max="20"
+                  step="1"
+                  value={uniformMin}
+                  onChange={(e) => setUniformMin(Math.min(parseInt(e.target.value), uniformMax - 1))}
+                />
+              </label>
+            </div>
+            <div className="control-group">
+              <label>
+                Maximum Value (b): {uniformMax}
+                <input
+                  type="range"
+                  min="1"
+                  max="30"
+                  step="1"
+                  value={uniformMax}
+                  onChange={(e) => setUniformMax(Math.max(parseInt(e.target.value), uniformMin + 1))}
                 />
               </label>
             </div>
@@ -229,7 +243,7 @@ export default function GeometricDistribution() {
 
           <div className="chart-container">
             <ResponsiveContainer width="100%" height={450}>
-              <BarChart data={geometricData}>
+              <LineChart data={discreteUniformData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
                 <XAxis 
                   dataKey="x" 
@@ -237,7 +251,8 @@ export default function GeometricDistribution() {
                   stroke="#1a3a52"
                 />
                 <YAxis 
-                  label={{ value: 'Probability P(X = k)', angle: -90, position: 'insideLeft', style: { fontWeight: 600 } }}
+                  domain={[0, 1]}
+                  label={{ value: 'Cumulative Probability F(k)', angle: -90, position: 'insideLeft', style: { fontWeight: 600 } }}
                   stroke="#1a3a52"
                 />
                 <Tooltip 
@@ -250,19 +265,22 @@ export default function GeometricDistribution() {
                     fontWeight: 600
                   }}
                 />
-                <Bar 
-                  dataKey="probability" 
-                  fill="#245de1"
-                  radius={[6, 6, 0, 0]}
+                <Line 
+                  type="stepAfter"
+                  dataKey="cdf" 
+                  stroke="#245de1"
+                  strokeWidth={3}
+                  dot={{ fill: '#245de1', r: 4 }}
+                  activeDot={{ r: 6 }}
                 />
-              </BarChart>
+              </LineChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         <div className="explanation-panel">
-          <h3 className="explanation-title">Explanation</h3>
-          <p className="explanation-text">{explanation}</p>
+          <h3 className="explanation-title">CDF Explanation</h3>
+          <div className="explanation-text">{processContent(finalExplanation)}</div>
         </div>
       </div>
     </div>

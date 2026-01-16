@@ -1,41 +1,36 @@
 import { useState, useMemo } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function NegativeBinomialDistribution() {
-  const [negBinomialR, setNegBinomialR] = useState(3);
-  const [negBinomialP, setNegBinomialP] = useState(0.4);
+export default function PoissonDistribution() {
+  const [poissonLambda, setPoissonLambda] = useState(3);
 
-  const binomialCoeff = (n, k) => {
-    if (k > n) return 0;
-    if (k === 0 || k === n) return 1;
-    
+  const factorial = (n) => {
+    if (n <= 1) return 1;
     let result = 1;
-    for (let i = 1; i <= k; i++) {
-      result *= (n - i + 1) / i;
+    for (let i = 2; i <= n; i++) {
+      result *= i;
     }
     return result;
   };
 
-  const negativeBinomialPMF = (k, r, p) => {
-    return binomialCoeff(k - 1, r - 1) * Math.pow(p, r) * Math.pow(1 - p, k - r);
+  const poissonPMF = (k, lambda) => {
+    return (Math.pow(lambda, k) * Math.exp(-lambda)) / factorial(k);
   };
 
-  const negativeBinomialData = useMemo(() => {
+  const poissonData = useMemo(() => {
     const data = [];
-    const maxK = Math.min(100, Math.ceil(negBinomialR + 30 / negBinomialP));
-    for (let k = negBinomialR; k <= maxK; k++) {
-      const prob = negativeBinomialPMF(k, negBinomialR, negBinomialP);
-      if (prob > 0.001) {
-        data.push({
-          x: k,
-          probability: prob
-        });
-      }
+    const maxK = Math.min(30, poissonLambda + 15);
+    for (let k = 0; k <= maxK; k++) {
+      data.push({
+        x: k,
+        probability: poissonPMF(k, poissonLambda)
+      });
     }
     return data;
-  }, [negBinomialR, negBinomialP]);
+  }, [poissonLambda]);
 
-  const explanation = 'The negative binomial distribution models the number of trials needed to achieve $r$ successes in repeated independent trials. The probability mass function is $P(X = k) = \\binom{k-1}{r-1} p^r (1-p)^{k-r}$. The expected value is $E[X] = \\frac{r}{p}$ and the variance is $\\text{Var}(X) = \\frac{r(1-p)}{p^2}$. This distribution is used for modeling scenarios like the number of calls until $r$ sales are made, games played until $r$ wins are achieved, or attempts until $r$ successes occur.';
+  const explanation = 'The Poisson distribution models the number of events occurring in a fixed interval when events happen at a constant average rate. The probability mass function is $P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}$, where $\\lambda$ is the average rate of events. Both the expected value and variance equal $\\lambda$: $E[X] = \\lambda$ and $\\text{Var}(X) = \\lambda$. Common applications include customer arrivals per hour, website hits per minute, radioactive decay events, and other scenarios where rare events occur independently at a constant average rate.';
 
   return (
     <div className="container">
@@ -213,40 +208,27 @@ export default function NegativeBinomialDistribution() {
         }
       `}</style>
 
-      <h1>Negative Binomial Distribution</h1>
-      <p className="subtitle">Trials until r-th success (generalization of geometric)</p>
+      {/* <h1>Poisson Distribution</h1>
+      <p className="subtitle">Rare events occurring at a constant average rate</p> */}
 
       <div className="main-layout">
         <div className="content">
           <div className="distribution-header">
-            <h2 className="distribution-title">Negative Binomial Distribution</h2>
-            <p className="distribution-description">Trials until r-th success (generalization of geometric)</p>
+            <h2 className="distribution-title">Poisson Distribution</h2>
+            <p className="distribution-description">Rare events over time interval (rate λ)</p>
           </div>
           
           <div className="controls">
             <div className="control-group">
               <label>
-                Number of Successes (r): {negBinomialR}
+                Rate Lambda (λ): {poissonLambda.toFixed(1)}
                 <input
                   type="range"
-                  min="1"
-                  max="20"
-                  step="1"
-                  value={negBinomialR}
-                  onChange={(e) => setNegBinomialR(parseInt(e.target.value))}
-                />
-              </label>
-            </div>
-            <div className="control-group">
-              <label>
-                Success Probability (p): {negBinomialP.toFixed(2)}
-                <input
-                  type="range"
-                  min="0.05"
-                  max="0.95"
-                  step="0.05"
-                  value={negBinomialP}
-                  onChange={(e) => setNegBinomialP(parseFloat(e.target.value))}
+                  min="0.5"
+                  max="15"
+                  step="0.5"
+                  value={poissonLambda}
+                  onChange={(e) => setPoissonLambda(parseFloat(e.target.value))}
                 />
               </label>
             </div>
@@ -254,7 +236,7 @@ export default function NegativeBinomialDistribution() {
 
           <div className="chart-container">
             <ResponsiveContainer width="100%" height={450}>
-              <BarChart data={negativeBinomialData}>
+              <BarChart data={poissonData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
                 <XAxis 
                   dataKey="x" 
@@ -287,7 +269,7 @@ export default function NegativeBinomialDistribution() {
 
         <div className="explanation-panel">
           <h3 className="explanation-title">Explanation</h3>
-          <p className="explanation-text">{explanation}</p>
+          <p className="explanation-text">{processContent(explanation)}</p>
         </div>
       </div>
     </div>

@@ -1,37 +1,30 @@
 import { useState, useMemo } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function BinomialDistribution() {
-  const [binomialN, setBinomialN] = useState(10);
-  const [binomialP, setBinomialP] = useState(0.5);
+export default function GeometricDistributionCDF({ explanation }) {
+  const [geometricP, setGeometricP] = useState(0.3);
 
-  const binomialCoeff = (n, k) => {
-    if (k > n) return 0;
-    if (k === 0 || k === n) return 1;
-    
-    let result = 1;
-    for (let i = 1; i <= k; i++) {
-      result *= (n - i + 1) / i;
-    }
-    return result;
+  const defaultExplanation = 'The geometric CDF has a closed form: $F(k) = P(X \\leq k) = 1 - (1-p)^k$ for $k \\geq 1$. This represents the probability that the first success occurs on or before trial $k$. The CDF starts at $F(1) = p$ (success on the first trial) and asymptotically approaches 1.0 as $k$ increases. The rate of increase depends on $p$: larger values of $p$ lead to faster convergence to 1.0, while smaller values result in a more gradual increase, reflecting the longer expected waiting time.';
+
+  const geometricCDF = (k, p) => {
+    if (k < 1) return 0;
+    return 1 - Math.pow(1 - p, Math.floor(k));
   };
 
-  const binomialPMF = (k, n, p) => {
-    return binomialCoeff(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k);
-  };
-
-  const binomialData = useMemo(() => {
+  const geometricData = useMemo(() => {
     const data = [];
-    for (let k = 0; k <= binomialN; k++) {
+    const maxK = Math.min(50, Math.ceil(10 / geometricP));
+    for (let k = 1; k <= maxK; k++) {
       data.push({
         x: k,
-        probability: binomialPMF(k, binomialN, binomialP)
+        cdf: geometricCDF(k, geometricP)
       });
     }
     return data;
-  }, [binomialN, binomialP]);
+  }, [geometricP]);
 
-  const explanation = 'The binomial distribution models the number of successes in $n$ independent trials, each with probability $p$ of success. The probability mass function is $P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}$, where $\\binom{n}{k}$ is the binomial coefficient. The expected value is $E[X] = np$ and the variance is $\\text{Var}(X) = np(1-p)$. This distribution is commonly used for modeling coin flips (number of heads in $n$ tosses), quality control testing (defective items in a batch), and clinical trial success rates.';
+  const finalExplanation = explanation || defaultExplanation;
 
   return (
     <div className="container">
@@ -177,7 +170,6 @@ export default function BinomialDistribution() {
           font-size: 18px;
           color: #2c3e50;
           line-height: 1.6;
-          margin-bottom: 12px;
         }
 
         @media (max-width: 1024px) {
@@ -209,40 +201,27 @@ export default function BinomialDistribution() {
         }
       `}</style>
 
-      <h1>Binomial Distribution</h1>
-      <p className="subtitle">Successes in n independent trials with probability p each</p>
+      {/* <h1>Geometric Distribution CDF</h1>
+      <p className="subtitle">Interactive visualization of the cumulative distribution function</p> */}
 
       <div className="main-layout">
         <div className="content">
           <div className="distribution-header">
-            <h2 className="distribution-title">Binomial Distribution</h2>
-            <p className="distribution-description">Successes in n trials with probability p each</p>
+            <h2 className="distribution-title">Geometric Distribution CDF</h2>
+            <p className="distribution-description">CDF for waiting time until first success</p>
           </div>
           
           <div className="controls">
             <div className="control-group">
               <label>
-                Number of Trials (n): {binomialN}
+                Success Probability (p): {geometricP.toFixed(2)}
                 <input
                   type="range"
-                  min="1"
-                  max="50"
-                  step="1"
-                  value={binomialN}
-                  onChange={(e) => setBinomialN(parseInt(e.target.value))}
-                />
-              </label>
-            </div>
-            <div className="control-group">
-              <label>
-                Success Probability (p): {binomialP.toFixed(2)}
-                <input
-                  type="range"
-                  min="0.01"
-                  max="0.99"
-                  step="0.01"
-                  value={binomialP}
-                  onChange={(e) => setBinomialP(parseFloat(e.target.value))}
+                  min="0.05"
+                  max="0.95"
+                  step="0.05"
+                  value={geometricP}
+                  onChange={(e) => setGeometricP(parseFloat(e.target.value))}
                 />
               </label>
             </div>
@@ -250,7 +229,7 @@ export default function BinomialDistribution() {
 
           <div className="chart-container">
             <ResponsiveContainer width="100%" height={450}>
-              <BarChart data={binomialData}>
+              <LineChart data={geometricData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
                 <XAxis 
                   dataKey="x" 
@@ -258,7 +237,8 @@ export default function BinomialDistribution() {
                   stroke="#1a3a52"
                 />
                 <YAxis 
-                  label={{ value: 'Probability P(X = k)', angle: -90, position: 'insideLeft', style: { fontWeight: 600 } }}
+                  domain={[0, 1]}
+                  label={{ value: 'Cumulative Probability F(k)', angle: -90, position: 'insideLeft', style: { fontWeight: 600 } }}
                   stroke="#1a3a52"
                 />
                 <Tooltip 
@@ -271,19 +251,22 @@ export default function BinomialDistribution() {
                     fontWeight: 600
                   }}
                 />
-                <Bar 
-                  dataKey="probability" 
-                  fill="#245de1"
-                  radius={[6, 6, 0, 0]}
+                <Line 
+                  type="stepAfter"
+                  dataKey="cdf" 
+                  stroke="#245de1"
+                  strokeWidth={3}
+                  dot={{ fill: '#245de1', r: 4 }}
+                  activeDot={{ r: 6 }}
                 />
-              </BarChart>
+              </LineChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         <div className="explanation-panel">
-          <h3 className="explanation-title">Explanation</h3>
-          <p className="explanation-text">{explanation}</p>
+          <h3 className="explanation-title">CDF Explanation</h3>
+          <div className="explanation-text">{processContent(finalExplanation)}</div>
         </div>
       </div>
     </div>

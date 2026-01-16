@@ -1,27 +1,48 @@
 import { useState, useMemo } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function DiscreteUniformDistribution() {
-  const [uniformMin, setUniformMin] = useState(1);
-  const [uniformMax, setUniformMax] = useState(6);
+export default function HypergeometricDistributionCDF({ explanation }) {
+  const [hyperN, setHyperN] = useState(50);
+  const [hyperK, setHyperK] = useState(20);
+  const [hyperDraws, setHyperDraws] = useState(10);
 
-  const discreteUniformPMF = (k, a, b) => {
-    if (k < a || k > b) return 0;
-    return 1 / (b - a + 1);
+  const defaultExplanation = 'The hypergeometric CDF is $F(k) = P(X \\leq k) = \\sum_{i=0}^{k} \\frac{\\binom{K}{i} \\binom{N-K}{n-i}}{\\binom{N}{n}}$ for $\\max(0, n-(N-K)) \\leq k \\leq \\min(n, K)$. This represents the probability of drawing $k$ or fewer success items when sampling $n$ items without replacement from a population of size $N$ containing $K$ success items. The CDF is bounded by the minimum and maximum possible number of successes in the sample. Unlike the binomial CDF, the hypergeometric CDF accounts for the changing probability as items are drawn without replacement.';
+
+  const binomialCoeff = (n, k) => {
+    if (k > n) return 0;
+    if (k === 0 || k === n) return 1;
+    
+    let result = 1;
+    for (let i = 1; i <= k; i++) {
+      result *= (n - i + 1) / i;
+    }
+    return result;
   };
 
-  const discreteUniformData = useMemo(() => {
+  const hypergeometricPMF = (k, N, K, n) => {
+    const numerator = binomialCoeff(K, k) * binomialCoeff(N - K, n - k);
+    const denominator = binomialCoeff(N, n);
+    return numerator / denominator;
+  };
+
+  const hypergeometricData = useMemo(() => {
     const data = [];
-    for (let k = uniformMin; k <= uniformMax; k++) {
+    const minK = Math.max(0, hyperDraws - (hyperN - hyperK));
+    const maxK = Math.min(hyperDraws, hyperK);
+    let cumulative = 0;
+    
+    for (let k = minK; k <= maxK; k++) {
+      cumulative += hypergeometricPMF(k, hyperN, hyperK, hyperDraws);
       data.push({
         x: k,
-        probability: discreteUniformPMF(k, uniformMin, uniformMax)
+        cdf: cumulative
       });
     }
     return data;
-  }, [uniformMin, uniformMax]);
+  }, [hyperN, hyperK, hyperDraws]);
 
-  const explanation = 'A discrete uniform distribution assigns equal probability to each value in a finite range. The probability mass function is $P(X = k) = \\frac{1}{b - a + 1}$ for $a \\leq k \\leq b$. The expected value is $E[X] = \\frac{a + b}{2}$, and the variance is $\\text{Var}(X) = \\frac{n^2 - 1}{12}$, where $n = b - a + 1$. Common examples include rolling a fair die, selecting a random card from a deck, or generating a random number from a finite range.';
+  const finalExplanation = explanation || defaultExplanation;
 
   return (
     <div className="container">
@@ -167,7 +188,6 @@ export default function DiscreteUniformDistribution() {
           font-size: 18px;
           color: #2c3e50;
           line-height: 1.6;
-          margin-bottom: 12px;
         }
 
         @media (max-width: 1024px) {
@@ -199,40 +219,58 @@ export default function DiscreteUniformDistribution() {
         }
       `}</style>
 
-      <h1>Discrete Uniform Distribution</h1>
-      <p className="subtitle">Equal probability for each value in a finite range</p>
+      {/* <h1>Hypergeometric Distribution CDF</h1>
+      <p className="subtitle">Interactive visualization of the cumulative distribution function</p> */}
 
       <div className="main-layout">
         <div className="content">
           <div className="distribution-header">
-            <h2 className="distribution-title">Discrete Uniform Distribution</h2>
-            <p className="distribution-description">Equal probability for finite outcomes</p>
+            <h2 className="distribution-title">Hypergeometric Distribution CDF</h2>
+            <p className="distribution-description">CDF for sampling without replacement</p>
           </div>
           
           <div className="controls">
             <div className="control-group">
               <label>
-                Minimum Value (a): {uniformMin}
+                Population Size (N): {hyperN}
                 <input
                   type="range"
-                  min="0"
-                  max="20"
-                  step="1"
-                  value={uniformMin}
-                  onChange={(e) => setUniformMin(Math.min(parseInt(e.target.value), uniformMax - 1))}
+                  min="10"
+                  max="100"
+                  step="5"
+                  value={hyperN}
+                  onChange={(e) => {
+                    const newN = parseInt(e.target.value);
+                    setHyperN(newN);
+                    setHyperK(Math.min(hyperK, newN));
+                    setHyperDraws(Math.min(hyperDraws, newN));
+                  }}
                 />
               </label>
             </div>
             <div className="control-group">
               <label>
-                Maximum Value (b): {uniformMax}
+                Success States (K): {hyperK}
                 <input
                   type="range"
                   min="1"
-                  max="30"
+                  max={hyperN}
                   step="1"
-                  value={uniformMax}
-                  onChange={(e) => setUniformMax(Math.max(parseInt(e.target.value), uniformMin + 1))}
+                  value={hyperK}
+                  onChange={(e) => setHyperK(parseInt(e.target.value))}
+                />
+              </label>
+            </div>
+            <div className="control-group">
+              <label>
+                Number of Draws (n): {hyperDraws}
+                <input
+                  type="range"
+                  min="1"
+                  max={hyperN}
+                  step="1"
+                  value={hyperDraws}
+                  onChange={(e) => setHyperDraws(parseInt(e.target.value))}
                 />
               </label>
             </div>
@@ -240,7 +278,7 @@ export default function DiscreteUniformDistribution() {
 
           <div className="chart-container">
             <ResponsiveContainer width="100%" height={450}>
-              <BarChart data={discreteUniformData}>
+              <LineChart data={hypergeometricData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
                 <XAxis 
                   dataKey="x" 
@@ -248,7 +286,8 @@ export default function DiscreteUniformDistribution() {
                   stroke="#1a3a52"
                 />
                 <YAxis 
-                  label={{ value: 'Probability P(X = k)', angle: -90, position: 'insideLeft', style: { fontWeight: 600 } }}
+                  domain={[0, 1]}
+                  label={{ value: 'Cumulative Probability F(k)', angle: -90, position: 'insideLeft', style: { fontWeight: 600 } }}
                   stroke="#1a3a52"
                 />
                 <Tooltip 
@@ -261,19 +300,22 @@ export default function DiscreteUniformDistribution() {
                     fontWeight: 600
                   }}
                 />
-                <Bar 
-                  dataKey="probability" 
-                  fill="#245de1"
-                  radius={[6, 6, 0, 0]}
+                <Line 
+                  type="stepAfter"
+                  dataKey="cdf" 
+                  stroke="#245de1"
+                  strokeWidth={3}
+                  dot={{ fill: '#245de1', r: 4 }}
+                  activeDot={{ r: 6 }}
                 />
-              </BarChart>
+              </LineChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         <div className="explanation-panel">
-          <h3 className="explanation-title">Explanation</h3>
-          <p className="explanation-text">{explanation}</p>
+          <h3 className="explanation-title">CDF Explanation</h3>
+          <div className="explanation-text">{processContent(finalExplanation)}</div>
         </div>
       </div>
     </div>
