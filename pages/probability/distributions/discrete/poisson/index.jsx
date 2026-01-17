@@ -669,7 +669,13 @@ export default function PoissonDistributionPage({seoData,sectionsContent , intro
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Poisson Distribution</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+    secondaryNavMode="siblings"  // or "siblings"
+    secondaryNavTitle="Other Discrete Distributions" 
+   
+   
+   />
    <br/>
    <br/>
    <br/>

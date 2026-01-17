@@ -685,7 +685,12 @@ export default function NegativeBinomialDistributionPage({seoData,sectionsConten
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Negative Binomial Distribution</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+    secondaryNavMode="siblings"  // or "siblings"
+    secondaryNavTitle="Other Discrete Distributions" 
+   
+   />
    <br/>
    <br/>
    <br/>

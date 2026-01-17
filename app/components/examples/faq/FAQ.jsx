@@ -180,7 +180,7 @@ export default function FAQ({
             <div>
               <h3 style={currentTheme.footerTitle}>Still have questions?</h3>
               <p style={currentTheme.footerText}>
-                Can't find the answer you're looking for? Our support team is here to help.
+                Can&apos;t find the answer you&apos;re looking for? Our support team is here to help.
               </p>
               {currentTheme.footerButtons && (
                 <div style={currentTheme.buttonGroup}>

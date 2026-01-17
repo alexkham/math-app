@@ -445,7 +445,7 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../../../pages/pages.css'
 import Head from 'next/head'
-import ContinuousCDFVisualizer from '@/app/components/visualizations/probability/continuous-distribution/ContinuousCDFVisualizer'
+import ContinuousCDFVisualizer from '@/app/components/visualizations/probability/continuous-distribution/CDF/ContinuousCDFVisualizer'
 
 
 export async function getStaticProps(){

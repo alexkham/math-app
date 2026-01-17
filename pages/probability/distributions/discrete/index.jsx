@@ -138,11 +138,11 @@ export async function getStaticProps(){
 </tr>
 <tr>
 <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">PMF (Probability Mass Function)</td>
-<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">P(X = k) = C(n,k) × p^k × (1-p)^(n-k) for k ∈ {0, 1, ..., n}</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">P(X = k) = C(n,k) · pᵏ · (1-p)ⁿ⁻ᵏ for k ∈ {0, 1, ..., n}</td>
 </tr>
 <tr style="background-color: #f8f9fa;">
 <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">CDF (Cumulative Distribution Function)</td>
-<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">P(X ≤ k) = Σ(i=0 to k) C(n,i) × p^i × (1-p)^(n-i)</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">P(X ≤ k) = Σ(i=0 to k) C(n,i) · pⁱ · (1-p)ⁿ⁻ⁱ</td>
 </tr>
 <tr>
 <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Mean</td>
@@ -1258,16 +1258,16 @@ Every **discrete probability distribution** is characterized by the following **
 * **Parameters**
   Quantities that define the distribution and determine its behavior, such as the number of trials, success probability, or event rate.
 
-* **Probability Mass Function and Support**
+* [Probability Mass Function and Support](!/probability/probability-function)
   A rule that assigns probability to each possible outcome, together with the set of discrete values for which those probabilities are non-zero.
 
-* **Cumulative Distribution Function (CDF)**
+* [Cumulative Distribution Function (CDF)](!/probability/cdf)
   A function that accumulates probability across outcomes up to a given value.
 
-* **Expected Value (Mean)**
+* [Expected Value (Mean)](!/probability/expected-value)
   A numerical summary representing the long-run average outcome of the distribution.
 
-* **Variance and Standard Deviation**
+* [Variance and Standard Deviation](!/probability/variance)
   Measures that describe how spread out the possible outcomes are around the mean.
 
 Although discrete distributions vary significantly in their interpretation and behavior, they all possess this same set of attributes. This common structure allows different distributions to be analyzed, compared, and applied using a unified probabilistic language.
@@ -1345,27 +1345,27 @@ Not all discrete distributions possess these properties, and no single distribut
   tableTitle: 'Types of Discrete Distributions',
   rows: [
     {
-      distribution: 'Discrete Uniform',
+      distribution: '[Discrete Uniform](!/probability/distributions/discrete#uniform)',
       description: 'Models situations where all outcomes in a finite set are equally likely, such as rolling a fair die or randomly selecting from a fixed collection.'
     },
     {
-      distribution: 'Binomial',
+      distribution: '[Binomial](!/probability/distributions/discrete#binomial)',
       description: 'Counts the number of successes in a fixed number of independent trials, each with the same probability of success—like counting heads in ten coin flips.'
     },
     {
-      distribution: 'Geometric',
+      distribution: '[Geometric](!/probability/distributions/discrete#geometric)',
       description: 'Measures how many trials are needed until the first success occurs, assuming independent trials with constant success probability.'
     },
     {
-      distribution: 'Negative Binomial',
+      distribution: '[Negative Binomial](!/probability/distributions/discrete#negative_binomial)',
       description: 'Generalizes the geometric distribution by counting trials until a specified number of successes, not just the first.'
     },
     {
-      distribution: 'Hypergeometric',
+      distribution: '[Hypergeometric](!/probability/distributions/discrete#hypergeometric)',
       description: 'Models sampling without replacement from a finite population containing two types of items, where each draw changes the probabilities for subsequent draws.'
     },
     {
-      distribution: 'Poisson',
+      distribution: '[Poisson](!/probability/distributions/discrete#poisson)',
       description: 'Counts events occurring randomly over time or space at a constant average rate, useful for modeling rare events like customer arrivals or equipment failures.'
     }
   ]
@@ -1375,7 +1375,7 @@ const discreteDistributionsAttributesData = {
   tableTitle: 'Common Attributes of Discrete Distributions',
   rows: [
     {
-      distribution: 'Discrete Uniform',
+      distribution: '[Discrete Uniform](!/probability/distributions/discrete#uniform)',
       parameters: '$a$ = minimum value, $b$ = maximum value (integers)',
       support: '$\\{a,a+1,\\dots,b\\}$',
       pmf: '$P(X=k)$\n$=\\frac{1}{b-a+1}$',
@@ -1384,7 +1384,7 @@ const discreteDistributionsAttributesData = {
       variance: '$\\mathrm{Var}(X)=\\frac{(b-a+1)^2-1}{12}$'
     },
     {
-      distribution: 'Binomial',
+      distribution: '[Binomial](!/probability/distributions/discrete#binomial)',
       parameters: '$n$ = number of trials, $p$ = success probability per trial',
       support: '$\\{0,1,\\dots,n\\}$',
       pmf: '$P(X=k)=\\binom{n}{k}p^k(1-p)^{n-k}$',
@@ -1393,7 +1393,7 @@ const discreteDistributionsAttributesData = {
       variance: '$\\mathrm{Var}(X)=np(1-p)$'
     },
     {
-      distribution: 'Geometric',
+      distribution: '[Geometric](!/probability/distributions/discrete#geometric)',
       parameters: '$p$ = success probability per trial',
       support: '$\\{1,2,3,\\dots\\}$',
       pmf: '$P(X=k)=(1-p)^{k-1}p$',
@@ -1402,7 +1402,7 @@ const discreteDistributionsAttributesData = {
       variance: '$\\mathrm{Var}(X)=\\frac{1-p}{p^2}$'
     },
     {
-      distribution: 'Negative Binomial',
+      distribution: '[Negative Binomial](!/probability/distributions/discrete#negative_binomial)',
       parameters: '$r$ = number of successes, $p$ = success probability',
       support: '$\\{r,r+1,\\dots\\}$',
       pmf: '$P(X=k)=\\binom{k-1}{r-1}p^r(1-p)^{k-r}$',
@@ -1411,7 +1411,7 @@ const discreteDistributionsAttributesData = {
       variance: '$\\mathrm{Var}(X)=\\frac{r(1-p)}{p^2}$'
     },
     {
-      distribution: 'Hyper\ngeometric',
+      distribution: '[Hypergeometric](!/probability/distributions/discrete#hypergeometric)',
       parameters: '$N$ = population size, $K$ = successes in population, $n$ = draws',
       support: '$\\max(0,n-N+K)\\le k\\le \\min(n,K)$',
       pmf: '$P(X=k)=\\frac{\\binom{K}{k}\\binom{N-K}{n-k}}{\\binom{N}{n}}$',
@@ -1420,7 +1420,7 @@ const discreteDistributionsAttributesData = {
       variance: '$\\mathrm{Var}(X)=n\\frac{K}{N}\\left(1-\\frac{K}{N}\\right)\\frac{N-n}{N-1}$'
     },
     {
-      distribution: '[Poisson](!/probability/distributions/discrete/poisson)',
+      distribution: '[Poisson](!/probability/distributions/discrete#poisson)',
       parameters: '$\\lambda$ = average event rate',
       support: '$\\{0,1,2,\\dots\\}$',
       pmf: '$P(X=k)=\\frac{\\lambda^k e^{-\\lambda}}{k!}$',

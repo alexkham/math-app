@@ -869,9 +869,9 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
         // <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1'}}>
         //     {processContent(sectionsContent.normal.parameters)}
         // </div>,
-        <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-    {processContent(sectionsContent.normal.parameters)}
-</div>,
+//         <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+//     {processContent(sectionsContent.normal.parameters)}
+// </div>,
         // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
         //     {processContent(sectionsContent.normal.notation)}
         // </div>,
@@ -910,9 +910,9 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
             {processContent(sectionsContent.uniform.checklist)}
         </div>,
         
-        <div key={'parameters-uniform'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-            {processContent(sectionsContent.uniform.parameters)}
-        </div>,
+        // <div key={'parameters-uniform'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.uniform.parameters)}
+        // </div>,
         
         // <div key={'notation-uniform'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
         //     {processContent(sectionsContent.uniform.notation)}
@@ -966,9 +966,9 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
             {processContent(sectionsContent.exponential.checklist)}
         </div>,
         
-        <div key={'parameters-exponential'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-            {processContent(sectionsContent.exponential.parameters)}
-        </div>,
+        // <div key={'parameters-exponential'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.exponential.parameters)}
+        // </div>,
         
         // <div key={'notation-exponential'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
         //     {processContent(sectionsContent.exponential.notation)}

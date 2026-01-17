@@ -24,12 +24,33 @@ export async function getStaticProps(){
   'expected value of a sum',
   'linearity of expectation'
 ];
-
+ const generalTable=`
+ <table style="border-collapse: collapse; margin: 20px auto; font-family: Arial, sans-serif; font-size: 16px;">
+  <thead>
+    <tr style="background-color: #f0f0f0;">
+      <th style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">x (value of X)</th>
+      <th style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">0</th>
+      <th style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">1</th>
+      <th style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">2</th>
+      <th style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px 12px; text-align: center; font-weight: 600;">P(X = x)</td>
+      <td style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">0.1</td>
+      <td style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">0.3</td>
+      <td style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">0.4</td>
+      <td style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">0.2</td>
+    </tr>
+  </tbody>
+</table>
+ `
 
     const sectionsContent={
 
     intuition:{
-      title:`The Intuition Behind Expected Value`,
+      title:`**The Intuition Behind Expected Value**`,
       content:`
 The simplest way to think about expected value is as the **long-run average** of a [random variable](!/probability/random-variables).
 If you could run the same random experiment again and again, the results would fluctuate from trial
@@ -50,7 +71,7 @@ It is simply the number that reflects the overall behavior of the distribution �
   
     },
     notation:{
-      title:`Notation We Use for Expected Value`,
+      title:`**Notation We Use for Expected Value**`,
       content:`
 When we talk about expected value, a few symbols appear again and again.  
 Here is what they mean in plain language, without the formal overload.
@@ -87,15 +108,38 @@ expected value is a weighted average based on the probability function of the va
   
     calculate:{
   
-      title:`How to Calculate Expected Value`,
+      title:`**How to Calculate Expected Value**`,
       content:`
 Expected value is always computed the same way: we take each possible value of the [random variable](!/probability/random-variables), give it the weight it deserves based on its probability, and combine all those weighted contributions into a single average. The only difference between discrete and continuous variables is how we perform this combination.
 
+**Discrete Random Variables (using empirical/tabulated probabilities)-general case**  
+When probabilities are obtained from data or observations rather than a formula, we still compute expected value as a weighted sum. Each observed value $x_i$ is multiplied by its corresponding probability $P(X = x_i)$, and these products are summed.
+
+This gives the formula:
+$$E[X] = \\sum_{i} x_i \\cdot P(X = x_i)$$
+
+or equivalently, using $p_i$ to denote the probability of outcome $i$:
+
+$$E[X] = \\sum_{i} x_i \\cdot p_i$$
+
+This is the same weighted average principle, but applied to a specific set of values and their empirically determined probabilities—such as those found in a probability table or derived from experimental data.
+
 **Discrete Random Variables (using a PMF)**  
-For discrete variables, we use a weighted sum: multiply each value $x$ by its probability $p(x)$, then add all these products together. This gives the formula $E(X) = Σ x · p(x)$. It is simply a probability-weighted average of all possible outcomes.
+For discrete variables, we use a weighted sum: multiply each value $x$ by its probability $p(x)$, then add all these products together. 
+
+This gives the formula:
+$$E(X) = Σ x · p(x)$$
+
+It is simply a probability-weighted average of all possible outcomes.
 
 **Continuous Random Variables (using a PDF)**  
-For continuous variables, we replace the weighted sum with a weighted integral: multiply each x by its density $f(x)$, and integrate over all possible values. This gives the formula $E(X) = ∫ x · f(x) dx$. Here, the density $f(x)$ plays a role similar to $p(x)$, except probabilities come from the area under the curve rather than point values.
+For continuous variables, we replace the weighted sum with a weighted integral: multiply each x by its density $f(x)$, and integrate over all possible values. 
+
+This gives the formula: 
+
+$$E(X) = ∫ x · f(x) dx$$ 
+
+Here, the density $f(x)$ plays a role similar to $p(x)$, except probabilities come from the area under the curve rather than point values.
 
 In both cases, the underlying idea is identical: expected value is the average of all possible outcomes, each weighted by how likely it is.
 
@@ -108,7 +152,7 @@ Every well-known probability distribution—both discrete and continuous—comes
   
     },
     function:{
-      title:`Expected Value of a Function`,
+      title:`**Expected Value of a Function**`,
       content:`
 Sometimes we are not interested in the expected value of $X$ itself, but in the expected value of some function of $X$. This happens in many situations: when computing variance, when working with powers of $X$, when modeling profits or losses, or any time we transform the random variable into something new. The idea is exactly the same as before: we weight the values of $g(X)$ by the probability function of $X$.
 
@@ -128,7 +172,7 @@ Expected value of a function is a fundamental idea because it appears everywhere
 
     properties:{
   
-      title:`Properties of Expected Value`,
+      title:`**Properties of Expected Value**`,
       content:`
 Expected value follows a small set of structural rules that make it one of the most useful ideas in probability. These properties describe how expectation behaves when random variables are combined or transformed, and they allow many calculations to be broken into simpler parts.
 
@@ -154,7 +198,7 @@ These properties make expectation a powerful tool: they let us simplify expressi
     },
     sum:{
   
-      title:`Expected Value of a Sum`,
+      title:`**Expected Value of a Sum**`,
       content:`
 A key fact about expected value is that it adds up cleanly when random variables are added. If we combine two random variables by adding them, the expected value of the total is simply the sum of their individual expected values. In symbols, $E(X + Y) = E(X) + E(Y)$. This rule works whether the variables are independent or dependent, which makes it unusually powerful.
 
@@ -166,7 +210,7 @@ The same idea extends to any number of variables: $E(X1 + X2 + ... + Xn) = E(X1)
     },
     examples:{
   
-      title:`Examples of Expected Value`,
+      title:`**Examples of Expected Value**`,
       content:`
 These short examples show how expected value works for different types of random variables. They are not full derivations, just quick illustrations of the idea.
 
@@ -190,12 +234,154 @@ These examples highlight how expected value captures the broad tendency of a ran
     },
     related:{
   
-      title:`Relation to Other Probability Concepts`,
+      title:`**Relation to Other Probability Concepts**`,
       content:`
 Expected value sits at the center of many other ideas in probability. It is the quantity used to define variance, since variance measures how far values tend to deviate from the expected value. It also appears in the law of large numbers, which explains why averages from repeated experiments settle near E(X). Many probability distributions are summarized by their mean, and formulas for standard distributions highlight this connection.
 
 Expected value also links directly to more advanced topics. The expected value of a function is used in risk calculations, moment methods, and the analysis of transformed variables. In statistics, expectation provides the foundation for covariance, correlation, regression, and many estimation techniques. Because of these relationships, understanding expected value is essential for moving deeper into both probability and statistics.
 `,
+      before:``,
+      after:``,
+  
+    },
+    general:{
+  
+      title:`**Calculating Expected Value: General Case**`,
+      content:`
+  
+      `,
+      before:`
+      To calculate an expected value, we start with two ingredients:
+
+* a [random variable](!/probability/random-variables), which assigns numerical values to outcomes of an experiment,
+* a [probability function](!/probability/probability-function), which assigns a probability to each possible value of that variable.
+
+In this example, the probability function is **not given by a formula**. Instead, it is obtained **empirically**: probabilities are estimated from observed frequencies of outcomes in repeated, similar situations. This is common in practice when a theoretical model is not assumed in advance.
+
+### Example
+
+Suppose we define some [discrete random variable](!/probability/random-variables#types) (X) as the number of items sold in a small shop on a given morning. Based on past observations, the probabilities are summarized as follows:
+    
+
+`,
+      after:`
+### Here:
+
+* ($X$) is the **random variable**,
+* the row of probabilities defines its **probability mass function**, constructed from data rather than a closed-form expression.
+
+The expected value is calculated by multiplying each value by its probability and summing:
+
+$$E[X] = 0\\cdot0.1 + 1\\cdot0.3 + 2\\cdot0.4 + 3\\cdot0.2 = 1.7$$
+
+### Intuition :
+
+This calculation can be read as a **balance**: values that occur more often pull the average toward themselves, while rare values have little influence. If this morning were repeated many times under similar conditions, the average number of items sold would stabilize near (1.7).
+
+In case of [continuous random variable](!/probability/random-variables#types), the same idea applies, but probabilities are replaced by a density and the sum becomes an integral. That case is handled separately later.
+
+In both discrete and continuous settings, the underlying calculation principle is identical: values are weighted by how likely they are to occur. The distinction between the two cases lies only in the mathematical operation used to carry out this weighting—a sum for discrete variables and an integral for continuous ones—not in the idea of expected value itself.
+
+
+      `,
+  
+    },
+    discrete:{
+  
+      title:`**Expected Value for Discrete Random Variables (PMF)**`,
+      content:`
+      When a discrete random variable is described by a probability mass function given in formula form, the expected value is computed directly from that function rather than from listed probabilities. In this setting, each possible value of the random variable is weighted by the probability assigned to it by the PMF.
+
+If a discrete random variable $X$ has probability mass function $p(x)=P(X=x)$, its expected value is defined by
+
+$$E[X]=∑x⋅p(x)$$
+
+The summation runs over all values in the support of $X$. The PMF provides the weights, and the summation combines all weighted contributions into a single number.
+
+This formulation is especially useful when probabilities follow a clear rule or pattern, allowing the expected value to be computed algebraically rather than by listing outcomes individually. In later sections, this definition will be applied to specific distributions, where substituting the corresponding PMF into the sum leads to closed-form results.
+     
+`,
+      before:``,
+      after:``,
+      example:`
+    **Expected Value for Discrete Random Variables (PMF) — Formula-Based Example**
+
+Let a discrete random variable $X$ take the values $1, 2, 3, 4$, and suppose its probability mass function is defined by the formula
+
+$$p(x) = P(X = x) = \\frac{x}{10}, \\quad x = 1, 2, 3, 4.$$
+
+(Indeed, $\\frac{1+2+3+4}{10} = 1$, so this is a valid PMF.)
+
+Using the definition of expected value for a discrete random variable,
+
+$$E[X] = \\sum_{x} x \\cdot p(x),$$
+
+we substitute the PMF formula directly:
+
+$$E[X] = \\sum_{x=1}^{4} x \\cdot \\frac{x}{10} = \\frac{1}{10} \\sum_{x=1}^{4} x^2.$$
+
+Now compute the sum:
+
+$$E[X] = \\frac{1}{10}(1^2 + 2^2 + 3^2 + 4^2) = \\frac{1}{10}(1 + 4 + 9 + 16) = \\frac{30}{10} = 3.$$
+
+This example shows how expected value can be calculated directly from a probability function formula, without listing probabilities individually. The structure of the PMF determines the calculation.
+      
+      `,
+  
+    },
+    continuous:{
+  
+      title:`**Continuous Random Variables (using a PDF)**  `,
+      content:`
+When a continuous random variable is described by a probability density function given in formula form, the expected value is computed directly from that function using integration. In this setting, each possible value of the random variable is weighted by the density assigned to it by the PDF.
+
+If a continuous random variable $X$ has probability density function $f(x)$, its expected value is defined by
+
+$$E[X] = \\int_{-\\infty}^{\\infty} x \\cdot f(x) \\, dx$$
+
+The integral runs over all values in the support of $X$. The PDF provides the weights, and the integration combines all weighted contributions into a single number.
+
+This formulation is especially useful when densities follow a clear rule or pattern, allowing the expected value to be computed algebraically rather than by approximating with discrete intervals. In later sections, this definition will be applied to specific distributions, where substituting the corresponding PDF into the integral leads to closed-form results.
+
+**Expected Value for Continuous Random Variables (PDF) — Formula-Based Example**
+
+Let a continuous random variable $X$ be defined on the interval $[0, 2]$, and suppose its probability density function is defined by the formula
+
+$$f(x) = \\frac{x}{2}, \\quad 0 \\leq x \\leq 2.$$
+
+(Indeed, $\\int_{0}^{2} \\frac{x}{2} \\, dx = \\frac{1}{2} \\cdot \\frac{x^2}{2} \\bigg|_{0}^{2} = \\frac{4}{4} = 1$, so this is a valid PDF.)
+
+Using the definition of expected value for a continuous random variable,
+
+$$E[X] = \\int_{-\\infty}^{\\infty} x \\cdot f(x) \\, dx,$$
+
+we substitute the PDF formula directly:
+
+$$E[X] = \\int_{0}^{2} x \\cdot \\frac{x}{2} \\, dx = \\frac{1}{2} \\int_{0}^{2} x^2 \\, dx.$$
+
+Now compute the integral:
+
+$$E[X] = \\frac{1}{2} \\cdot \\frac{x^3}{3} \\bigg|_{0}^{2} = \\frac{1}{2} \\cdot \\frac{8}{3} = \\frac{4}{3} \\approx 1.33.$$
+
+This example shows how expected value can be calculated directly from a probability density function formula, without approximating with discrete intervals. The structure of the PDF determines the calculation.
+      
+      `,
+      before:``,
+      after:``,
+  
+    },
+    obj5:{
+  
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+  
+    },
+    obj5:{
+  
+      title:``,
+      content:``,
       before:``,
       after:``,
   
@@ -237,6 +423,7 @@ provides the foundation for variance, covariance, risk calculations, and many pr
       props:{
          sectionsContent,
          introContent,
+         generalTable,
           seoData: {
         title: "Expected Value Page | Learn Math Class",
         description: "Metadescription",
@@ -249,7 +436,7 @@ provides the foundation for variance, covariance, risk calculations, and many pr
     }
    }
 
-export default function ExpectedValuePage({seoData,sectionsContent , introContent}) {
+export default function ExpectedValuePage({seoData,sectionsContent , introContent,generalTable}) {
 
     
   const genericSections=[
@@ -275,6 +462,33 @@ export default function ExpectedValuePage({seoData,sectionsContent , introConten
         link:'',
         content:[
             sectionsContent.calculate.content,
+        ]
+    },
+     {
+        id:'general',
+        title:sectionsContent.general.title,
+        link:'',
+        content:[
+          sectionsContent.general.before,         
+           <div style={{transform:'scale(1.15)'}} dangerouslySetInnerHTML={{ __html: generalTable }} key="table" />,
+            sectionsContent.general.after,
+        ]
+    },
+     {
+        id:'discrete',
+        title:sectionsContent.discrete.title,
+        link:'',
+        content:[
+          sectionsContent.discrete.content,
+          sectionsContent.discrete.example,
+        ]
+    },
+     {
+        id:'continuous',
+        title:sectionsContent.continuous.title,
+        link:'',
+        content:[
+          sectionsContent.continuous.content,
         ]
     },
      {

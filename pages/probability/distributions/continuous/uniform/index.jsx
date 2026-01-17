@@ -9,6 +9,7 @@ import React from 'react'
 import '../../../../../pages/pages.css'
 import Head from 'next/head'
 import { processContent } from '@/app/utils/contentProcessor'
+import ContinuousUniformDistribution from '@/app/components/visualizations/probability/continuous-distribution/ContinuousUniformDistribution'
 
 
 export async function getStaticProps(){
@@ -169,11 +170,24 @@ export async function getStaticProps(){
     const sectionsContent={
 
     obj1:{
-      title:`The Probabilistic Experiment Behind It`,
-      content:``,
+      title:`The Probabilistic Experiment Behind continuous uniform distribution`,
+      content:`
+      The probabilistic experiment behind the continuous uniform distribution begins with the assumption that an outcome can occur anywhere within a fixed interval, and that no location inside that interval is preferred over another. The key idea is not randomness over trials, but randomness over position or value. Once the bounds of the interval are set, the experiment treats every point between them as equally plausible.
+
+This type of experiment arises when the only information available is that a value lies somewhere between two limits, and there is no mechanism that biases one sub-interval over another. The uncertainty is purely geometric: probability corresponds to relative length, not to isolated points. Because the outcomes form a continuum, individual values have zero probability; only ranges matter.
+
+The defining feature of this experiment is complete symmetry across the interval. If one interval is twice as long as another, it is twice as likely to contain the outcome. Nothing else distinguishes outcomes.
+
+Like the [discrete uniform distribution](!/probability/distributions/discrete/uniform), the continuous uniform distribution is built on the idea of complete symmetry, no outcome is favored over another. The difference lies only in how probability is assigned: [discrete uniform](!/probability/distributions/discrete/uniform) spreads probability across a finite set of distinct values, while continuous uniform spreads it evenly across an entire interval, with probability determined by length rather than individual points.
+      `,
       before:``,
       after:``,
       link:'',
+      example:`
+      **Example**:
+
+Choose a real number at random between 0 and 10, with no additional information. The chance that the number lies between 2 and 4 depends only on the interval length (2 units), not on where it sits inside the range.
+      `,
   
   
     },
@@ -222,7 +236,7 @@ The continuous uniform distribution is fully characterized by these two paramete
   
     },
     obj5:{
-      title:`Probability Density Function (PDF)`,
+      title:`Probability Density Function (PDF) and Support (Range)`,
       content:``,
       before:``,
       after:``,
@@ -334,6 +348,18 @@ The continuous uniform distribution is fully characterized by these two paramete
       link:'',
   
     },
+    links:{
+  
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+      link:'',
+      examples:`
+         @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Continuous Uniform](!/probability/distributions/continuous/uniform#12) →@
+            `,
+  
+    },
   
   }
 
@@ -374,6 +400,8 @@ export default function ContinuousUniformDistributionPage({seoData,sectionsConte
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          sectionsContent.obj1.example,
+          sectionsContent.links.examples,
         ]
     },
     {
@@ -399,20 +427,23 @@ export default function ContinuousUniformDistributionPage({seoData,sectionsConte
                   </div>,
         ]
     },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
+    // {
+    //     id:'4',
+    //     title:sectionsContent.obj4.title,
+    //     link:sectionsContent.obj4.link,
+    //     content:[
+    //       sectionsContent.obj4.content,
+    //     ]
+    // },
     {
         id:'5',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'pdf-uniform'} style={{transform:'scale(0.8)'}}>
+          <ContinuousUniformDistribution/>
+          </div>,
         ]
     },
     {
@@ -587,7 +618,11 @@ export default function ContinuousUniformDistributionPage({seoData,sectionsConte
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Continuous Uniform Distribution</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+    secondaryNavMode="siblings"  // or "siblings"
+    secondaryNavTitle="Other Continuous Distributions" 
+   />
    <br/>
    <br/>
    <br/>

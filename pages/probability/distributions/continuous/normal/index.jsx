@@ -9,6 +9,7 @@ import React from 'react'
 import '../../../../../pages/pages.css'
 import Head from 'next/head'
 import { processContent } from '@/app/utils/contentProcessor'
+import NormalDistribution from '@/app/components/visualizations/probability/continuous-distribution/NormalDistribution'
 
 
 export async function getStaticProps(){
@@ -169,11 +170,24 @@ export async function getStaticProps(){
     const sectionsContent={
 
     obj1:{
-      title:`The Probabilistic Experiment Behind It`,
-      content:``,
+      title:`The Probabilistic Experiment Behind normal distribution`,
+      content:`
+      The probabilistic experiment underlying the normal distribution arises when an outcome is shaped by many small, independent influences, none of which dominates the result. Each influence nudges the outcome slightly upward or downward, and the final value reflects the combined effect of all these contributions.
+
+This experiment is not defined by repetition of identical trials, but by aggregation. The core assumption is that deviations occur naturally in both directions, are roughly symmetric, and tend to cancel out when added together. Extreme outcomes are possible, but increasingly unlikely because they require many influences to align in the same direction.
+
+The normal distribution emerges as a consequence of stability: when numerous independent factors interact, the resulting variability concentrates around a central value. The spread reflects how strong those individual influences are, while the center reflects their average balance point.
+
+This experiment explains why many natural and measurement-based quantities cluster around a typical value with gradual falloff on both sides.
+      `,
       before:``,
       after:``,
       link:'',
+      example:`
+      **Example**:
+
+Human height results from genetics, nutrition, environment, and random biological variation. No single factor determines the outcome, but together they produce values concentrated around an average, with fewer extremely short or tall individuals.
+      `,
   
   
     },
@@ -230,7 +244,7 @@ The normal distribution is fully characterized by these two parameters.
   
     },
     obj5:{
-      title:`Probability Density Function (PDF)`,
+      title:`Probability Density Function (PDF) and Support (Range)`,
       content:``,
       before:``,
       after:``,
@@ -342,6 +356,18 @@ The normal distribution is fully characterized by these two parameters.
       link:'',
   
     },
+     links:{
+  
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+      link:'',
+      examples:`
+         @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Normal](!/probability/distributions/continuous/uniform#12) →@
+            `,
+  
+    },
   
   }
 
@@ -382,6 +408,8 @@ export default function NormalDistributionPage({seoData,sectionsContent , introC
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          sectionsContent.obj1.example,
+          sectionsContent.links.examples,
         ]
     },
     {
@@ -408,20 +436,24 @@ export default function NormalDistributionPage({seoData,sectionsContent , introC
                   </div>,
         ]
     },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
+    // {
+    //     id:'4',
+    //     title:sectionsContent.obj4.title,
+    //     link:sectionsContent.obj4.link,
+    //     content:[
+    //       sectionsContent.obj4.content,
+    //     ]
+    // },
     {
         id:'5',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+           <div key={'pdf-normal'} style={{transform:'scale(0.8)'}}>
+            <NormalDistribution/>
+                   
+                    </div>,
         ]
     },
     {
@@ -596,7 +628,11 @@ export default function NormalDistributionPage({seoData,sectionsContent , introC
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Normal Distribution</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+    secondaryNavMode="siblings"  // or "siblings"
+    secondaryNavTitle="Other Continuous Distributions" 
+   />
    <br/>
    <br/>
    <br/>

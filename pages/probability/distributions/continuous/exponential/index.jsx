@@ -9,6 +9,7 @@ import React from 'react'
 import '../../../../../pages/pages.css'
 import Head from 'next/head'
 import { processContent } from '@/app/utils/contentProcessor'
+import ExponentialDistribution from '@/app/components/visualizations/probability/continuous-distribution/ExponentialDistribution'
 
 
 export async function getStaticProps(){
@@ -34,11 +35,24 @@ export async function getStaticProps(){
     const sectionsContent={
 
     obj1:{
-      title:`The Probabilistic Experiment Behind It`,
-      content:``,
+      title:`The Probabilistic Experiment Behind exponential distribution`,
+      content:`
+      The probabilistic experiment behind the exponential distribution focuses on waiting time rather than counts or measurements. The experiment observes how long it takes until a particular event happens, under the assumption that the event occurs continuously and unpredictably, but at a steady average rate.
+
+A defining characteristic of this experiment is lack of memory. The process does not “age”: the chance that the [event](!/probability/events) occurs in the next instant does not depend on how much time has already passed. Waiting longer provides no advantage or disadvantage—the system resets at every moment.
+
+This framework applies when [events](!/probability/events) occur [independently](!/probability/independence), one at a time, and without buildup or anticipation. Time is continuous, and probability accumulates smoothly as time passes.
+
+The exponential distribution captures the idea that short waiting times are common, while long waits are possible but become progressively more rare.
+      `,
       before:``,
       after:``,
       link:'',
+      example:`
+    **Example**:
+
+Consider the time until the next phone call arrives at a quiet call center where calls come in at a stable average rate. Whether the last call arrived a second ago or an hour ago does not affect the likelihood of receiving the next one in the coming minute.
+`,
   
   
     },
@@ -88,7 +102,7 @@ Higher λ means events occur more frequently (shorter waiting times), while lowe
   
     },
     obj5:{
-      title:`Probability Density Function (PDF)`,
+      title:`Probability Density Function (PDF) and Support (Range)`,
       content:``,
       before:``,
       after:``,
@@ -200,6 +214,18 @@ Higher λ means events occur more frequently (shorter waiting times), while lowe
       link:'',
   
     },
+     links:{
+  
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+      link:'',
+      examples:`
+         @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Exponential](!/probability/distributions/continuous/uniform#12) →@
+            `,
+  
+    },
   
   }
 
@@ -241,6 +267,8 @@ export default function ExponbentialDistributionPage({seoData,sectionsContent , 
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          sectionsContent.obj1.example,
+          sectionsContent.links.examples,
         ]
     },
     {
@@ -266,20 +294,24 @@ export default function ExponbentialDistributionPage({seoData,sectionsContent , 
                   </div>,
         ]
     },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
+    // {
+    //     id:'4',
+    //     title:sectionsContent.obj4.title,
+    //     link:sectionsContent.obj4.link,
+    //     content:[
+    //       sectionsContent.obj4.content,
+    //     ]
+    // },
     {
         id:'5',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+           <div key={'pdf-exponential'} style={{transform:'scale(0.8)'}}>
+                   
+                    <ExponentialDistribution/>
+                    </div>,
         ]
     },
     {
@@ -470,7 +502,12 @@ export default function ExponbentialDistributionPage({seoData,sectionsContent , 
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Exponential Distribution</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+    secondaryNavMode="siblings"  // or "siblings"
+    secondaryNavTitle="Other Continuous Distributions" 
+   
+   />
    <br/>
    <br/>
    <br/>
