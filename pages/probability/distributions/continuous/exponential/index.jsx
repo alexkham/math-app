@@ -10,6 +10,7 @@ import '../../../../../pages/pages.css'
 import Head from 'next/head'
 import { processContent } from '@/app/utils/contentProcessor'
 import ExponentialDistribution from '@/app/components/visualizations/probability/continuous-distribution/ExponentialDistribution'
+import ExponentialDistributionCDF from '@/app/components/visualizations/probability/continuous-distribution/CDF/ExponentialDistributionCDF'
 
 
 export async function getStaticProps(){
@@ -320,6 +321,10 @@ export default function ExponbentialDistributionPage({seoData,sectionsContent , 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+            <div key={'cdf-exponential'} style={{transform:'scale(0.8)'}}>
+                   
+                    <ExponentialDistributionCDF/>
+                    </div>,
         ]
     },
     {

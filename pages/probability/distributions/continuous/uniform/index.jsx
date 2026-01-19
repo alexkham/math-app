@@ -10,6 +10,7 @@ import '../../../../../pages/pages.css'
 import Head from 'next/head'
 import { processContent } from '@/app/utils/contentProcessor'
 import ContinuousUniformDistribution from '@/app/components/visualizations/probability/continuous-distribution/ContinuousUniformDistribution'
+import ContinuousUniformDistributionCDF from '@/app/components/visualizations/probability/continuous-distribution/CDF/ContinuousUniformDistributionCDF'
 
 
 export async function getStaticProps(){
@@ -452,6 +453,9 @@ export default function ContinuousUniformDistributionPage({seoData,sectionsConte
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+           <div key={'cdf-uniform'} style={{transform:'scale(0.8)'}}>
+          <ContinuousUniformDistributionCDF/>
+          </div>,
         ]
     },
     {

@@ -10,6 +10,7 @@ import '../../../../../pages/pages.css'
 import Head from 'next/head'
 import { processContent } from '@/app/utils/contentProcessor'
 import NormalDistribution from '@/app/components/visualizations/probability/continuous-distribution/NormalDistribution'
+import NormalDistributionCDF from '@/app/components/visualizations/probability/continuous-distribution/CDF/NormalDistributionCDF'
 
 
 export async function getStaticProps(){
@@ -462,6 +463,10 @@ export default function NormalDistributionPage({seoData,sectionsContent , introC
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'cdf-normal'} style={{transform:'scale(0.8)'}}>
+            <NormalDistributionCDF/>
+                   
+                    </div>,
         ]
     },
     {

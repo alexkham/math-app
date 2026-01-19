@@ -8,6 +8,7 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
+import GenericTable from '@/app/components/generic-table/GenericTable'
 
 
 export async function getStaticProps(){
@@ -370,6 +371,24 @@ This example shows how expected value can be calculated directly from a probabil
       after:``,
   
     },
+    individualdist:{
+  title:`**Expected Value Formulas for Specific Distributions**`,
+  content:`
+Unlike the general case where probabilities are empirical or tabulated, or cases where we work directly from a PMF or PDF formula, specific probability distributions have pre-derived expected value formulas that bypass the need for summation or integration.
+
+Each standard probability distribution has a derived formula for its expected value. These formulas come from applying the general definitions—summation for discrete cases, integration for continuous ones—to the specific probability functions that define each distribution.
+
+Once derived, these formulas become standard results that can be used directly without repeating the original calculations. For instance:
+
+
+`,
+  before:``,
+  after:`
+The normal distribution is typically presented with its mean $μ$ already given as a parameter, so $E(X) = μ$ by definition.
+
+Using these established formulas makes calculations immediate. Instead of setting up integrals or sums from scratch, you simply identify the distribution type and its parameters, then apply the corresponding formula. This approach is both faster and less error-prone, especially when working with well-known distributions in applied problems.
+`,
+},
     obj5:{
   
       title:``,
@@ -417,6 +436,65 @@ provides the foundation for variance, covariance, risk calculations, and many pr
 }
 
 
+const discreteExpectedValueFormulasData = {
+  tableTitle: 'Expected Value Formulas for Discrete Distributions',
+  rows: [
+    {
+      distribution: 'Discrete Uniform',
+      formula: `E[X]=\\frac{a + b}{2}`,
+      parameters: '$a$ = minimum value, $b$ = maximum value'
+    },
+    {
+      distribution: 'Binomial',
+      formula: 'E[X] = np',
+      parameters: '$n$ = number of trials, $p$ = probability of success'
+    },
+    {
+      distribution: 'Geometric',
+      formula: 'E[X] = \\frac{1}{p}',
+      parameters: '$p$ = probability of success on each trial'
+    },
+    {
+      distribution: 'Negative Binomial',
+      formula: 'E[X] = \\frac{r}{p}',
+      parameters: '$r$ = number of successes needed, $p$ = probability of success'
+    },
+    {
+      distribution: 'Hypergeometric',
+      formula: 'E[X] = n\\frac{K}{N}',
+      parameters: '$n$ = sample size, $K$ = successes in population, $N$ = population size'
+    },
+    {
+      distribution: 'Poisson',
+      formula: 'E[X] = \\lambda',
+      parameters: '$\\lambda$ = average rate of occurrence per interval'
+    }
+  ]
+};
+
+
+const continuousExpectedValueFormulasData = {
+  tableTitle: 'Expected Value Formulas for Continuous Distributions',
+  rows: [
+    {
+      distribution: 'Continuous Uniform',
+      formula: 'E[X] = \\frac{a + b}{2}',
+      parameters: '$a$ = lower bound of interval, $b$ = upper bound of interval'
+    },
+    {
+      distribution: 'Exponential',
+      formula: 'E[X] = \\frac{1}{\\lambda}',
+      parameters: '$\\lambda$ = rate parameter (events per unit time)'
+    },
+    {
+      distribution: 'Normal',
+      formula: 'E[X] = \\mu',
+      parameters: '$\\mu$ = mean (location parameter), $\\sigma^2$ = variance'
+    }
+  ]
+};
+
+
 
 
    return {
@@ -424,6 +502,8 @@ provides the foundation for variance, covariance, risk calculations, and many pr
          sectionsContent,
          introContent,
          generalTable,
+         discreteExpectedValueFormulasData,
+         continuousExpectedValueFormulasData,
           seoData: {
         title: "Expected Value Page | Learn Math Class",
         description: "Metadescription",
@@ -436,7 +516,9 @@ provides the foundation for variance, covariance, risk calculations, and many pr
     }
    }
 
-export default function ExpectedValuePage({seoData,sectionsContent , introContent,generalTable}) {
+export default function ExpectedValuePage({seoData,sectionsContent , introContent,generalTable,
+  discreteExpectedValueFormulasData,continuousExpectedValueFormulasData,
+}) {
 
     
   const genericSections=[
@@ -489,6 +571,22 @@ export default function ExpectedValuePage({seoData,sectionsContent , introConten
         link:'',
         content:[
           sectionsContent.continuous.content,
+        ]
+    },
+     {
+        id:'individualdist',
+        title:sectionsContent.individualdist.title,
+        link:'',
+        content:[
+          sectionsContent.individualdist.content,
+            <GenericTable key={'discrete-expected-values'} tableData={discreteExpectedValueFormulasData} theme='lightBlue'
+          cellFontSize={'16px'}
+          headerFontSize={'18px'}/>,
+         
+            <GenericTable key={'continuous-expected-values'} tableData={continuousExpectedValueFormulasData} theme='lightBlue'
+          cellFontSize={'16px'}
+          headerFontSize={'18px'}/>,
+          sectionsContent.individualdist.after,
         ]
     },
      {
