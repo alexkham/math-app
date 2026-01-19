@@ -474,7 +474,7 @@ const discreteExpectedValueFormulasData = {
 
 
 const continuousExpectedValueFormulasData = {
-  tableTitle: 'Expected Value Formulas for Continuous Distributions',
+  tableTitle: 'Expected Value Formulas for Continuous Distributions.',
   rows: [
     {
       distribution: 'Continuous Uniform',
