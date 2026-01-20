@@ -273,12 +273,15 @@ export async function getStaticProps() {
       concepts:{
         title:'Main Concepts',
         description:`@academic[theorem: The Sample Space (Ω), is the collection of all different results that the experiment may produce.]@
-        The sample space can be **finite** (for example, in the dice‐rolling scenario or coin flipping) or **infinite** (for instance, selecting a real number).
-        In addition, we may divide sample spaces by outcome types into  **discrete** or **continuous**.
-        Often times, defining or calculating proper sample space for any given case may pose sertious challenge and demands experience and certain analytic skills.
+        The [sample space](!/probability/sample-space) can be **finite** (for example, in the dice‐rolling scenario or coin flipping) or **infinite** (for instance, selecting a real number).
+        In addition, we may divide [sample spaces](!/probability/sample-space) by outcome types into  **discrete** or **continuous**.
+        Often times, defining or calculating proper [sample space](!/probability/sample-space) for any given case may pose sertious challenge and demands experience and certain analytic skills.
          Although in the case of a dice roll the collection of possible outcomes may seem self‐evident, the sample space plays an important role in conducting more complex experiments. Typically, a researcher will take the sample space and partition it into subsets in order to draw various conclusions.
        In any practical application, accurately defining the sample space is essential to solving probability problems.
-         @academic[theorem:Probability Event is simply any subset of the sample space.]@
+        
+       In probability theory, the objects to which probabilities are assigned are called [events](!/probability/events).
+By definition, an [event](!/probability/events) is any subset of the [sample space](!/probability/sample-space). This includes single outcomes, collections of outcomes, the empty set, and the entire sample space itself.
+       @academic[theorem:Probability Event is simply any subset of the sample space.]@
          **Example:**
    In case of dice roll the sample space would be $S = \\{1, 2, 3, 4, 5, 6\\}$
    **Some possible events:**
@@ -286,7 +289,7 @@ export async function getStaticProps() {
  Event $B = \\{5\\}$ (rolling exactly 5)
  Event $C = \\{1, 2, 3, 4, 5, 6\\}$ (any outcome - certain event)
  Event $D = \\{\\}$ (impossible event)
- As the definition states and the example shows, probability event may include one or more outcomes.It is a set of results counting as one event.         
+ As the definition states and the example shows, [probability event](!/probability/events) may include one or more outcomes.It is a set of results counting as one event.         
  @academic[theorem:Probability is a function that assigns to each event in the sample space a real number in $[0,1]$ where total probability value of the entire sample space $𝑃(𝑆)=1$.]@
  @academic[theorem:This number is calculated as a ratio $P(E) = \\frac{\\text{Number of favorable outcomes for event E}}{\\text{Total number of possible outcomes in the sample space S}}$]@
  Probability function satisfies three basic [axioms](!/probability#axioms) of probability.
@@ -300,7 +303,7 @@ This apparent contradiction reveals why probability theory fundamentally operate
 
 This set-theoretic foundation makes perfect sense: when we ask "what's the probability of rolling an even number on a die," we're really asking about the set $ \\{2, 4, 6\\}$, not about individual outcomes in isolation.
 
-By treating events as sets, we gain access to the full power of [set theory](!/set-theory) and algebra of sets laws for probability calculations. This mathematical framework provides elegant tools for combining and manipulating events—operations like union and intersection become natural ways to express complex probabilistic relationships, while concepts such as subsets and complements offer systematic approaches to analyzing event dependencies and exclusions.
+By treating [events](!/probability/events) as sets, we gain access to the full power of [set theory](!/set-theory) and algebra of sets laws for probability calculations. This mathematical framework provides elegant tools for combining and manipulating events—operations like union and intersection become natural ways to express complex probabilistic relationships, while concepts such as subsets and complements offer systematic approaches to analyzing event dependencies and exclusions.
 `,
         before:`When we conceptualize probability, we naturally think of [sample spaces](!/probability#concepts) as collections of individual outcomes—dots scattered across our mathematical landscape.`,
         between:`However, this intuitive picture presents a fundamental challenge: if we treat each outcome as a geometric point, it has zero area by definition.

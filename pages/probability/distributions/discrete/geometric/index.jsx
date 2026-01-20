@@ -250,30 +250,165 @@ $$P(X = k) = (1-p)^{k-1} p, \\quad k = 1, 2, 3, \\ldots$$
       link:'',
   
     },
-    obj5:{
-      title:`Cumulative Distribution Function (CDF)`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj5:{
+    //   title:`Cumulative Distribution Function (CDF)`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
-    obj6:{
-      title:`Expected Value (mean)`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // },
+   obj5:{
+  title:`Cumulative Distribution Function (CDF)`,
+  content:`
+The [cumulative distribution function (CDF)](!/probability/cdf) of a **geometric distribution** is given by:
+
+$$F_X(k) = P(X \\leq k) = 1 - (1-p)^k$$
+
+Where:
+$p$ = probability of success on each trial
+$k$ = number of trials until and including the first success (where $k \\geq 1$)
+$(1-p)$ = probability of failure on each trial
+
+### Intuition Behind the Formula
+
+**Definition**: The [CDF](!/probability/cdf) gives the probability that the first success occurs on or before trial $k$.
+
+**Complement Approach**: 
+Instead of summing probabilities from 1 to $k$, it's easier to use the complement. The event "first success on or before trial $k$" is the complement of "first success after trial $k$", which means all of the first $k$ trials are failures:
+
+$$P(X \\leq k) = 1 - P(\\text{all first } k \\text{ trials fail}) = 1 - (1-p)^k$$
+
+**Verification by Summation**:
+We can verify this by summing the PMF:
+
+$$P(X \\leq k) = \\sum_{i=1}^{k} (1-p)^{i-1}p = p\\sum_{i=0}^{k-1} (1-p)^i = p \\cdot \\frac{1-(1-p)^k}{1-(1-p)} = 1-(1-p)^k$$
+
+**Monotonic Property**: As $k$ increases, $(1-p)^k$ decreases toward 0, so $F_X(k)$ increases toward 1, which reflects the increasing certainty that success will eventually occur.
+  `,
+  before:``,
+  after:``,
+  link:'',
+},
+   
+    // obj6:{
+    //   title:`Expected Value (mean)`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
-    obj7:{
-      title:`Variance and Standard Deviation`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // },
   
-    },
+  obj6: {
+  title: `Expected Value (Mean)`,
+  content: `
+As explained in the [general case for calculating expected value](!/probability/expected-value#general), the expected value of a discrete random variable is computed as a weighted sum where each possible value is multiplied by its probability:
+
+$$E[X] = \\sum_{x} x \\cdot P(X = x)$$
+
+For the **geometric distribution**, we apply this general formula to the specific probability mass function of this distribution.
+
+### Formula
+
+$$E[X] = \\frac{1}{p}$$
+
+Where:
+$p$ = probability of success on each trial
+
+### Derivation and Intuition
+
+Starting from the general definition and substituting the PMF $P(X = k) = (1-p)^{k-1}p$ for $k = 1, 2, 3, \\ldots$:
+
+$$E[X] = \\sum_{k=1}^{\\infty} k \\cdot (1-p)^{k-1} p = p \\sum_{k=1}^{\\infty} k \\cdot (1-p)^{k-1}$$
+
+Using the formula for the derivative of a geometric series, we recognize that:
+
+$$\\sum_{k=1}^{\\infty} k \\cdot r^{k-1} = \\frac{1}{(1-r)^2}$$
+
+Substituting $r = 1-p$:
+
+$$E[X] = p \\cdot \\frac{1}{(1-(1-p))^2} = p \\cdot \\frac{1}{p^2} = \\frac{1}{p}$$
+
+The result $E[X] = \\frac{1}{p}$ captures an intuitive relationship: if the probability of success on each trial is $p$, then on average you need $\\frac{1}{p}$ trials to achieve the first success. The smaller the probability of success, the more trials you expect to need.
+
+### Example
+
+Consider rolling a die until you get a 6, where $p = \\frac{1}{6}$:
+
+$$E[X] = \\frac{1}{1/6} = 6$$
+
+On average, you expect to roll the die 6 times before seeing the first 6. This makes intuitive sense: with a 1-in-6 chance per roll, the average wait is 6 rolls.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
+  
+    // obj7:{
+    //   title:`Variance and Standard Deviation`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
+  
+    // },
+
+    obj7: {
+  title: `Variance and Standard Deviation`,
+  content: `
+The [variance](!/probability/variance#calculate) of a discrete random variable measures how spread out the values are around the expected value. It is computed as:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$
+
+Or using the shortcut formula:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+
+For the **geometric distribution**, we apply this formula to derive the variance.
+
+### Formula
+
+$$\\mathrm{Var}(X) = \\frac{1-p}{p^2}$$
+
+Where:
+$p$ = probability of success on each trial
+$(1-p) = q$ = probability of failure on each trial
+
+### Derivation and Intuition
+
+Starting with the shortcut formula, we need to calculate $\\mathbb{E}[X^2]$.
+
+We know from the expected value section that $\\mu = \\frac{1}{p}$.
+
+Using the PMF $P(X = k) = (1-p)^{k-1}p$ and applying summation techniques involving derivatives of geometric series:
+
+$$\\mathbb{E}[X^2] = \\sum_{k=1}^{\\infty} k^2 (1-p)^{k-1} p = \\frac{2-p}{p^2}$$
+
+Applying the shortcut formula:
+
+$$\\mathrm{Var}(X) = \\frac{2-p}{p^2} - \\left(\\frac{1}{p}\\right)^2 = \\frac{2-p}{p^2} - \\frac{1}{p^2} = \\frac{1-p}{p^2}$$
+
+The result $\\mathrm{Var}(X) = \\frac{1-p}{p^2}$ shows that variance increases as $p$ decreases. When success is rare (small $p$), the waiting time becomes highly variable—sometimes you succeed quickly, sometimes you wait a very long time. The quadratic relationship with $p$ in the denominator means variance grows rapidly as $p$ approaches zero.
+
+### Standard Deviation
+
+$$\\sigma = \\sqrt{\\frac{1-p}{p^2}} = \\frac{\\sqrt{1-p}}{p}$$
+
+### Example
+
+Consider rolling a die until you get a 6, where $p = \\frac{1}{6}$:
+
+$$\\mathrm{Var}(X) = \\frac{1 - \\frac{1}{6}}{(\\frac{1}{6})^2} = \\frac{\\frac{5}{6}}{\\frac{1}{36}} = \\frac{5}{6} \\times 36 = 30$$
+
+$$\\sigma = \\sqrt{30} \\approx 5.477$$
+
+The variance of 30 and standard deviation of about 5.5 indicate substantial variability around the expected wait time of 6 rolls. You might get lucky and succeed on roll 2, or unlucky and wait 15+ rolls.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj8:{
       title:`Mode and Median`,
       content:``,
@@ -529,30 +664,30 @@ export default function GeometricDistributionPage({seoData,sectionsContent , int
           sectionsContent.obj7.content,
         ]
     },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
+    // {
+    //     id:'8',
+    //     title:sectionsContent.obj8.title,
+    //     link:sectionsContent.obj8.link,
+    //     content:[
+    //       sectionsContent.obj8.content,
+    //     ]
+    // },
+    // {
+    //     id:'9',
+    //     title:sectionsContent.obj9.title,
+    //     link:sectionsContent.obj9.link,
+    //     content:[
+    //       sectionsContent.obj9.content,
+    //     ]
+    // },
+    // {
+    //     id:'10',
+    //     title:sectionsContent.obj10.title,
+    //     link:sectionsContent.obj10.link,
+    //     content:[
+    //       sectionsContent.obj10.content,
+    //     ]
+    // },
     {
         id:'11',
         title:sectionsContent.obj11.title,
@@ -561,30 +696,30 @@ export default function GeometricDistributionPage({seoData,sectionsContent , int
           sectionsContent.obj11.content,
         ]
     },
-    {
-        id:'12',
-        title:sectionsContent.obj12.title,
-        link:sectionsContent.obj12.link,
-        content:[
-          sectionsContent.obj12.content,
-        ]
-    },
-    {
-        id:'13',
-        title:sectionsContent.obj13.title,
-        link:sectionsContent.obj13.link,
-        content:[
-          sectionsContent.obj13.content,
-        ]
-    },
-    {
-        id:'14',
-        title:sectionsContent.obj14.title,
-        link:sectionsContent.obj14.link,
-        content:[
-          sectionsContent.obj14.content,
-        ]
-    },
+    // {
+    //     id:'12',
+    //     title:sectionsContent.obj12.title,
+    //     link:sectionsContent.obj12.link,
+    //     content:[
+    //       sectionsContent.obj12.content,
+    //     ]
+    // },
+    // {
+    //     id:'13',
+    //     title:sectionsContent.obj13.title,
+    //     link:sectionsContent.obj13.link,
+    //     content:[
+    //       sectionsContent.obj13.content,
+    //     ]
+    // },
+    // {
+    //     id:'14',
+    //     title:sectionsContent.obj14.title,
+    //     link:sectionsContent.obj14.link,
+    //     content:[
+    //       sectionsContent.obj14.content,
+    //     ]
+    // },
   
     // {
     //     id:'1',

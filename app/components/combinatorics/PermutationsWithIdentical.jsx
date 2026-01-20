@@ -19,7 +19,7 @@ const PermutationRow = ({ label, permutation, colors }) => (
   </div>
 );
 
-const PermutationsWithIdentical = ({ items = ['A', 'B', 'C', 'C'] }) => {
+const PermutationsWithIdenticalVisualizer = ({ items = ['A', 'B', 'C', 'C'] }) => {
   const colors = { 'A': '#FF6B6B', 'B': '#4ECDC4', 'C': '#45B7D1', 'D': '#FFA07A' };
   const [permutationStacks, setPermutationStacks] = useState({});
   const [currentPermutation, setCurrentPermutation] = useState([]);
@@ -169,4 +169,4 @@ const PermutationsWithIdentical = ({ items = ['A', 'B', 'C', 'C'] }) => {
   );
 };
 
-export default PermutationsWithIdentical;
+export default PermutationsWithIdenticalVisualizer;

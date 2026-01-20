@@ -1050,6 +1050,7 @@ $P(X = 6) = \\frac{4^6 e^{-4}}{6!} = \\frac{4096 \\cdot 0.0183}{720} \\approx 0.
 This means there's about a 10.4% chance of receiving exactly 6 calls in an hour.
 
 Note: The Poisson distribution is often used as an approximation to the binomial distribution when $n$ is large and $p$ is small, with $\\lambda = np$.
+
 `,
     },
   

@@ -246,30 +246,179 @@ $$P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}, \\quad k = 0, 1, 2, \\ldots$$
       link:'',
   
     },
-    obj5:{
-      title:`Cumulative Distribution Function (CDF)`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj5:{
+    //   title:`Cumulative Distribution Function (CDF)`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
-    obj6:{
-      title:`Expected Value (mean)`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // },
+   
+   obj5:{
+  title:`Cumulative Distribution Function (CDF)`,
+  content:`
+The [cumulative distribution function (CDF)](!/probability/cdf) of a **Poisson distribution** is given by:
+
+$$F_X(k) = P(X \\leq k) = \\sum_{i=0}^{k} \\frac{\\lambda^i e^{-\\lambda}}{i!}$$
+
+Where:
+$\\lambda$ = average rate of occurrence (expected number of events, $\\lambda > 0$)
+$k$ = number of events observed (where $k = 0, 1, 2, 3, \\ldots$)
+$e$ = Euler's number (approximately 2.71828)
+
+### Intuition Behind the Formula
+
+**Definition**: The [CDF](!/probability/cdf) gives the probability of observing $k$ or fewer events in a fixed interval of time or space.
+
+**Summation of Probabilities**: 
+We sum the individual probabilities from 0 events up to $k$ events:
+
+$$P(X \\leq k) = P(X=0) + P(X=1) + P(X=2) + \\cdots + P(X=k)$$
+
+**Alternative Formulation via Incomplete Gamma Function**:
+The CDF can be expressed using the regularized incomplete gamma function:
+
+$$F_X(k) = \\frac{\\Gamma(k+1, \\lambda)}{k!} = Q(k+1, \\lambda)$$
+
+This relationship is often used in statistical software for efficient computation, especially for large values of $k$.
+
+**Complementary Probability**: 
+For "more than $k$ events":
+
+$$P(X > k) = 1 - F_X(k)$$
+
+**Infinite Support**: Unlike finite discrete distributions, the Poisson distribution has infinite support ($k$ can be arbitrarily large), though probabilities decrease rapidly for $k \\gg \\lambda$.
+  `,
+  before:``,
+  after:``,
+  link:'',
+},
+   
+    // obj6:{
+    //   title:`Expected Value (mean)`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
-    obj7:{
-      title:`Variance and Standard Deviation`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // },
+   
+   obj6: {
+  title: `Expected Value (Mean)`,
+  content: `
+As explained in the [general case for calculating expected value](!/probability/expected-value#general), the expected value of a discrete random variable is computed as a weighted sum where each possible value is multiplied by its probability:
+
+$$E[X] = \\sum_{x} x \\cdot P(X = x)$$
+
+For the **Poisson distribution**, we apply this general formula to the specific probability mass function of this distribution.
+
+### Formula
+
+$$E[X] = \\lambda$$
+
+Where:
+$\\lambda$ = average rate of occurrence (expected number of events per interval)
+
+### Derivation and Intuition
+
+Starting from the general definition and substituting the PMF $P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}$ for $k = 0, 1, 2, \\ldots$:
+
+$$E[X] = \\sum_{k=0}^{\\infty} k \\cdot \\frac{\\lambda^k e^{-\\lambda}}{k!}$$
+
+The $k = 0$ term vanishes, so we start from $k = 1$:
+
+$$E[X] = \\sum_{k=1}^{\\infty} k \\cdot \\frac{\\lambda^k e^{-\\lambda}}{k!} = e^{-\\lambda} \\sum_{k=1}^{\\infty} \\frac{k \\cdot \\lambda^k}{k!} = e^{-\\lambda} \\sum_{k=1}^{\\infty} \\frac{\\lambda^k}{(k-1)!}$$
+
+Substituting $j = k - 1$:
+
+$$E[X] = e^{-\\lambda} \\lambda \\sum_{j=0}^{\\infty} \\frac{\\lambda^j}{j!} = e^{-\\lambda} \\lambda \\cdot e^{\\lambda} = \\lambda$$
+
+The result $E[X] = \\lambda$ has a particularly elegant interpretation: the parameter $\\lambda$ is both the rate of occurrence and the expected value. The Poisson distribution is parameterized directly by its mean.
+
+### Example
+
+Consider phone calls arriving at a call center at an average rate of $\\lambda = 12$ calls per hour:
+
+$$E[X] = 12$$
+
+The expected number of calls in one hour is exactly 12, which is the defining parameter of the distribution. This self-referential property makes the Poisson distribution especially natural for modeling count data.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
+   
+    // obj7:{
+    //   title:`Variance and Standard Deviation`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+
+    obj7: {
+  title: `Variance and Standard Deviation`,
+  content: `
+The [variance](!/probability/variance#calculate) of a discrete random variable measures how spread out the values are around the expected value. It is computed as:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$
+
+Or using the shortcut formula:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+
+For the **Poisson distribution**, we apply this formula to derive the variance.
+
+### Formula
+
+$$\\mathrm{Var}(X) = \\lambda$$
+
+Where:
+$\\lambda$ = average rate of occurrence (expected number of events per interval)
+
+### Derivation and Intuition
+
+Starting with the shortcut formula, we need to calculate $\\mathbb{E}[X^2]$.
+
+We know from the expected value section that $\\mu = \\lambda$.
+
+Using the PMF $P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}$:
+
+$$\\mathbb{E}[X^2] = \\sum_{k=0}^{\\infty} k^2 \\cdot \\frac{\\lambda^k e^{-\\lambda}}{k!}$$
+
+Through algebraic manipulation using properties of the exponential series:
+
+$$\\mathbb{E}[X^2] = \\lambda^2 + \\lambda$$
+
+Applying the shortcut formula:
+
+$$\\mathrm{Var}(X) = (\\lambda^2 + \\lambda) - \\lambda^2 = \\lambda$$
+
+The result $\\mathrm{Var}(X) = \\lambda$ reveals a remarkable property: **the Poisson distribution's variance equals its mean**. This makes the Poisson distribution unique among common distributions. The single parameter $\\lambda$ completely determines both the center and the spread of the distribution.
+
+This property provides a practical test: if observed count data has variance approximately equal to its mean, the Poisson distribution may be an appropriate model.
+
+### Standard Deviation
+
+$$\\sigma = \\sqrt{\\lambda}$$
+
+### Example
+
+Consider phone calls arriving at a rate of $\\lambda = 16$ calls per hour:
+
+$$\\mathrm{Var}(X) = 16$$
+
+$$\\sigma = \\sqrt{16} = 4$$
+
+The variance equals the expected value (16), and the standard deviation of 4 indicates that in most hours, the number of calls will fall within roughly 12 to 20 calls (within one standard deviation of the mean).
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj8:{
       title:`Mode and Median`,
       content:``,
@@ -520,30 +669,30 @@ export default function PoissonDistributionPage({seoData,sectionsContent , intro
           sectionsContent.obj7.content,
         ]
     },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
+    // {
+    //     id:'8',
+    //     title:sectionsContent.obj8.title,
+    //     link:sectionsContent.obj8.link,
+    //     content:[
+    //       sectionsContent.obj8.content,
+    //     ]
+    // },
+    // {
+    //     id:'9',
+    //     title:sectionsContent.obj9.title,
+    //     link:sectionsContent.obj9.link,
+    //     content:[
+    //       sectionsContent.obj9.content,
+    //     ]
+    // },
+    // {
+    //     id:'10',
+    //     title:sectionsContent.obj10.title,
+    //     link:sectionsContent.obj10.link,
+    //     content:[
+    //       sectionsContent.obj10.content,
+    //     ]
+    // },
     {
         id:'11',
         title:sectionsContent.obj11.title,
@@ -552,30 +701,30 @@ export default function PoissonDistributionPage({seoData,sectionsContent , intro
           sectionsContent.obj11.content,
         ]
     },
-    {
-        id:'12',
-        title:sectionsContent.obj12.title,
-        link:sectionsContent.obj12.link,
-        content:[
-          sectionsContent.obj12.content,
-        ]
-    },
-    {
-        id:'13',
-        title:sectionsContent.obj13.title,
-        link:sectionsContent.obj13.link,
-        content:[
-          sectionsContent.obj13.content,
-        ]
-    },
-    {
-        id:'14',
-        title:sectionsContent.obj14.title,
-        link:sectionsContent.obj14.link,
-        content:[
-          sectionsContent.obj14.content,
-        ]
-    },
+    // {
+    //     id:'12',
+    //     title:sectionsContent.obj12.title,
+    //     link:sectionsContent.obj12.link,
+    //     content:[
+    //       sectionsContent.obj12.content,
+    //     ]
+    // },
+    // {
+    //     id:'13',
+    //     title:sectionsContent.obj13.title,
+    //     link:sectionsContent.obj13.link,
+    //     content:[
+    //       sectionsContent.obj13.content,
+    //     ]
+    // },
+    // {
+    //     id:'14',
+    //     title:sectionsContent.obj14.title,
+    //     link:sectionsContent.obj14.link,
+    //     content:[
+    //       sectionsContent.obj14.content,
+    //     ]
+    // },
    
     // {
     //     id:'1',

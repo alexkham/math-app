@@ -251,30 +251,165 @@ where $\\binom{k-1}{r-1} = \\frac{(k-1)!}{(r-1)!(k-r)!}$ is the binomial coeffic
       link:'',
   
     },
-    obj5:{
-      title:`Cumulative Distribution Function (CDF)`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj5:{
+    //   title:`Cumulative Distribution Function (CDF)`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
-    obj6:{
-      title:`Expected Value (mean)`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // },
+   
+   obj5:{
+  title:`Cumulative Distribution Function (CDF)`,
+  content:`
+The [cumulative distribution function (CDF)](!/probability/cdf) of a **negative binomial distribution** is given by:
+
+$$F_X(k) = P(X \\leq k) = \\sum_{i=r}^{k} \\binom{i-1}{r-1} p^r (1-p)^{i-r}$$
+
+Where:
+$r$ = number of successes desired (fixed, positive integer)
+$p$ = probability of success on each trial
+$k$ = number of trials until the $r$-th success (where $k \\geq r$)
+$\\binom{i-1}{r-1}$ = binomial coefficient
+
+### Intuition Behind the Formula
+
+**Definition**: The [CDF](!/probability/cdf) gives the probability that the $r$-th success occurs on or before trial $k$.
+
+**Summation of Probabilities**: 
+We sum the PMF values from the minimum possible value ($r$ trials) up to $k$ trials:
+
+$$P(X \\leq k) = P(X=r) + P(X=r+1) + P(X=r+2) + \\cdots + P(X=k)$$
+
+**Alternative Formulation via Regularized Incomplete Beta Function**:
+The CDF can also be expressed using the regularized incomplete beta function:
+
+$$F_X(k) = I_p(r, k-r+1)$$
+
+This relationship connects the negative binomial distribution to the beta distribution and is often used in statistical software for efficient computation.
+
+**Complementary Form**: 
+The probability that the $r$-th success occurs after trial $k$ is:
+
+$$P(X > k) = 1 - F_X(k)$$
+  `,
+  before:``,
+  after:``,
+  link:'',
+},
+   
+    // obj6:{
+    //   title:`Expected Value (mean)`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
-    obj7:{
-      title:`Variance and Standard Deviation`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // },
+   
+    obj6: {
+  title: `Expected Value (Mean)`,
+  content: `
+As explained in the [general case for calculating expected value](!/probability/expected-value#general), the expected value of a discrete random variable is computed as a weighted sum where each possible value is multiplied by its probability:
+
+$$E[X] = \\sum_{x} x \\cdot P(X = x)$$
+
+For the **negative binomial distribution**, we apply this general formula to the specific probability mass function of this distribution.
+
+### Formula
+
+$$E[X] = \\frac{r}{p}$$
+
+Where:
+$r$ = number of successes desired (fixed, positive integer)
+$p$ = probability of success on each trial
+
+### Derivation and Intuition
+
+The negative binomial random variable $X$ represents the number of trials needed to achieve $r$ successes. It can be viewed as the sum of $r$ independent geometric random variables, where each represents the number of trials needed to achieve one additional success.
+
+Since each geometric variable has expected value $\\frac{1}{p}$, and we need $r$ such successes:
+
+$$E[X] = r \\cdot \\frac{1}{p} = \\frac{r}{p}$$
+
+This result follows directly from the linearity of expectation applied to the sum of $r$ geometric random variables.
+
+The result $E[X] = \\frac{r}{p}$ extends the geometric distribution's intuition: if you need one success and expect $\\frac{1}{p}$ trials, then needing $r$ successes should require $r$ times as many trials on average.
+
+### Example
+
+Consider rolling a die until you get three 6's, where $r = 3$ and $p = \\frac{1}{6}$:
+
+$$E[X] = \\frac{3}{1/6} = 18$$
+
+On average, you expect to roll the die 18 times before accumulating three 6's. This is exactly three times the expected wait for a single 6.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
+   
+    // obj7:{
+    //   title:`Variance and Standard Deviation`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+
+    obj7: {
+  title: `Variance and Standard Deviation`,
+  content: `
+The [variance](!/probability/variance#calculate) of a discrete random variable measures how spread out the values are around the expected value. It is computed as:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$
+
+Or using the shortcut formula:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+
+For the **negative binomial distribution**, we apply this formula to derive the variance.
+
+### Formula
+
+$$\\mathrm{Var}(X) = \\frac{r(1-p)}{p^2}$$
+
+Where:
+$r$ = number of successes desired (fixed, positive integer)
+$p$ = probability of success on each trial
+$(1-p) = q$ = probability of failure on each trial
+
+### Derivation and Intuition
+
+The negative binomial random variable can be viewed as the sum of $r$ independent geometric random variables, each representing the trials needed for one additional success.
+
+Since each geometric variable has variance $\\frac{1-p}{p^2}$, and variances add for independent variables:
+
+$$\\mathrm{Var}(X) = r \\cdot \\frac{1-p}{p^2} = \\frac{r(1-p)}{p^2}$$
+
+The result $\\mathrm{Var}(X) = \\frac{r(1-p)}{p^2}$ extends the geometric distribution's variance by a factor of $r$. As with the geometric case, variance increases rapidly as $p$ decreases (rare successes create high variability) and grows linearly with the number of required successes $r$.
+
+### Standard Deviation
+
+$$\\sigma = \\sqrt{\\frac{r(1-p)}{p^2}} = \\frac{\\sqrt{r(1-p)}}{p}$$
+
+### Example
+
+Consider rolling a die until you get three 6's, where $r = 3$ and $p = \\frac{1}{6}$:
+
+$$\\mathrm{Var}(X) = \\frac{3 \\times \\frac{5}{6}}{(\\frac{1}{6})^2} = \\frac{\\frac{15}{6}}{\\frac{1}{36}} = \\frac{5}{2} \\times 36 = 90$$
+
+$$\\sigma = \\sqrt{90} \\approx 9.487$$
+
+The variance of 90 and standard deviation of about 9.5 indicate high variability around the expected 18 rolls. The actual number of rolls needed could vary substantially from this average.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj8:{
       title:`Mode and Median`,
       content:``,
@@ -536,30 +671,30 @@ export default function NegativeBinomialDistributionPage({seoData,sectionsConten
           sectionsContent.obj7.content,
         ]
     },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
+    // {
+    //     id:'8',
+    //     title:sectionsContent.obj8.title,
+    //     link:sectionsContent.obj8.link,
+    //     content:[
+    //       sectionsContent.obj8.content,
+    //     ]
+    // },
+    // {
+    //     id:'9',
+    //     title:sectionsContent.obj9.title,
+    //     link:sectionsContent.obj9.link,
+    //     content:[
+    //       sectionsContent.obj9.content,
+    //     ]
+    // },
+    // {
+    //     id:'10',
+    //     title:sectionsContent.obj10.title,
+    //     link:sectionsContent.obj10.link,
+    //     content:[
+    //       sectionsContent.obj10.content,
+    //     ]
+    // },
     {
         id:'11',
         title:sectionsContent.obj11.title,
@@ -568,30 +703,30 @@ export default function NegativeBinomialDistributionPage({seoData,sectionsConten
           sectionsContent.obj11.content,
         ]
     },
-    {
-        id:'12',
-        title:sectionsContent.obj12.title,
-        link:sectionsContent.obj12.link,
-        content:[
-          sectionsContent.obj12.content,
-        ]
-    },
-    {
-        id:'13',
-        title:sectionsContent.obj13.title,
-        link:sectionsContent.obj13.link,
-        content:[
-          sectionsContent.obj13.content,
-        ]
-    },
-    {
-        id:'14',
-        title:sectionsContent.obj14.title,
-        link:sectionsContent.obj14.link,
-        content:[
-          sectionsContent.obj14.content,
-        ]
-    },
+    // {
+    //     id:'12',
+    //     title:sectionsContent.obj12.title,
+    //     link:sectionsContent.obj12.link,
+    //     content:[
+    //       sectionsContent.obj12.content,
+    //     ]
+    // },
+    // {
+    //     id:'13',
+    //     title:sectionsContent.obj13.title,
+    //     link:sectionsContent.obj13.link,
+    //     content:[
+    //       sectionsContent.obj13.content,
+    //     ]
+    // },
+    // {
+    //     id:'14',
+    //     title:sectionsContent.obj14.title,
+    //     link:sectionsContent.obj14.link,
+    //     content:[
+    //       sectionsContent.obj14.content,
+    //     ]
+    // },
    
     // {
     //     id:'1',

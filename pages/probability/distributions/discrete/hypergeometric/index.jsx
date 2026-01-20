@@ -252,30 +252,169 @@ where $\\binom{a}{b} = \\frac{a!}{b!(a-b)!}$ is the binomial coefficient.
       link:'',
   
     },
-    obj5:{
-      title:`Cumulative Distribution Function (CDF)`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj5:{
+    //   title:`Cumulative Distribution Function (CDF)`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
-    obj6:{
-      title:`Expected Value (mean)`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // },
+ obj5:{
+  title:`Cumulative Distribution Function (CDF)`,
+  content:`
+The [cumulative distribution function (CDF)](!/probability/cdf) of a **hypergeometric distribution** is given by:
+
+$$F_X(k) = P(X \\leq k) = \\sum_{i=0}^{k} \\frac{\\binom{K}{i}\\binom{N-K}{n-i}}{\\binom{N}{n}}$$
+
+Where:
+$N$ = total population size
+$K$ = number of success states in the population
+$n$ = number of draws (sample size)
+$k$ = number of observed successes in the sample (where $\\max(0, n-N+K) \\leq k \\leq \\min(n, K)$)
+
+### Intuition Behind the Formula
+
+**Definition**: The [CDF](!/probability/cdf) gives the probability of observing $k$ or fewer successes when drawing $n$ items without replacement from a population of size $N$ containing $K$ success states.
+
+**Summation of Probabilities**: 
+We sum the individual probabilities from the minimum possible value up to $k$:
+
+$$P(X \\leq k) = P(X=0) + P(X=1) + P(X=2) + \\cdots + P(X=k)$$
+
+**Without Replacement Effect**: Unlike the binomial distribution, the hypergeometric CDF accounts for sampling without replacement. Each draw changes the composition of the remaining population, creating dependency between draws.
+
+**Boundary Conditions**: 
+The support is bounded by physical constraints:
+- Minimum: $\\max(0, n-N+K)$ (can't draw more failures than exist)
+- Maximum: $\\min(n, K)$ (can't draw more successes than exist or more items than drawn)
+
+**Complementary Probability**: 
+For "more than $k$ successes":
+
+$$P(X > k) = 1 - F_X(k)$$
+  `,
+  before:``,
+  after:``,
+  link:'',
+},
+ 
+    // obj6:{
+    //   title:`Expected Value (mean)`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
-    obj7:{
-      title:`Variance and Standard Deviation`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // },
+
+    obj6: {
+  title: `Expected Value (Mean)`,
+  content: `
+As explained in the [general case for calculating expected value](!/probability/expected-value#general), the expected value of a discrete random variable is computed as a weighted sum where each possible value is multiplied by its probability:
+
+$$E[X] = \\sum_{x} x \\cdot P(X = x)$$
+
+For the **hypergeometric distribution**, we apply this general formula to the specific probability mass function of this distribution.
+
+### Formula
+
+$$E[X] = n \\cdot \\frac{K}{N}$$
+
+Where:
+$N$ = total population size
+$K$ = number of success states in the population
+$n$ = number of draws (sample size)
+
+### Derivation and Intuition
+
+The hypergeometric distribution describes sampling without replacement. Although the draws are not independent, the expected value has a remarkably simple form.
+
+The proportion of successes in the population is $\\frac{K}{N}$. When drawing $n$ items, each draw has the same marginal probability $\\frac{K}{N}$ of being a success (even though the draws are dependent).
+
+By symmetry and linearity of expectation, the expected number of successes in $n$ draws is:
+
+$$E[X] = n \\cdot \\frac{K}{N}$$
+
+The result $E[X] = n \\cdot \\frac{K}{N}$ captures the intuition that the expected proportion of successes in the sample matches the proportion in the population. If you sample $n$ items from a population where the success rate is $\\frac{K}{N}$, you expect $n \\cdot \\frac{K}{N}$ successes on average.
+
+### Example
+
+Consider drawing 5 cards from a standard deck of 52 cards, counting the number of aces. Here $N = 52$, $K = 4$, and $n = 5$:
+
+$$E[X] = 5 \\cdot \\frac{4}{52} = \\frac{20}{52} \\approx 0.385$$
+
+On average, you expect to draw about 0.385 aces in a 5-card hand, which reflects the 4-in-52 proportion of aces in the deck.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
+    // obj7:{
+    //   title:`Variance and Standard Deviation`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+    obj7: {
+  title: `Variance and Standard Deviation`,
+  content: `
+The [variance](!/probability/variance#calculate) of a discrete random variable measures how spread out the values are around the expected value. It is computed as:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$
+
+Or using the shortcut formula:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+
+For the **hypergeometric distribution**, we apply this formula to derive the variance.
+
+### Formula
+
+$$\\mathrm{Var}(X) = n \\cdot \\frac{K}{N} \\cdot \\frac{N-K}{N} \\cdot \\frac{N-n}{N-1}$$
+
+Where:
+$N$ = total population size
+$K$ = number of success states in the population
+$n$ = number of draws (sample size)
+
+### Derivation and Intuition
+
+The derivation involves computing $\\mathbb{E}[X^2]$ using indicator random variables and accounting for the dependency created by sampling without replacement.
+
+We know from the expected value section that $\\mu = n \\cdot \\frac{K}{N}$.
+
+The variance formula can be rewritten to show its relationship to the binomial variance:
+
+$$\\mathrm{Var}(X) = n \\cdot \\frac{K}{N} \\cdot \\left(1 - \\frac{K}{N}\\right) \\cdot \\frac{N-n}{N-1}$$
+
+The first three terms $n \\cdot \\frac{K}{N} \\cdot \\left(1 - \\frac{K}{N}\\right)$ match the binomial variance formula with $p = \\frac{K}{N}$.
+
+The additional factor $\\frac{N-n}{N-1}$ is called the **finite population correction** and is always less than 1. It accounts for the reduction in variance caused by sampling without replacement. As the sample size $n$ approaches the population size $N$, this factor approaches zero, reflecting that sampling the entire population leaves no variability.
+
+### Standard Deviation
+
+$$\\sigma = \\sqrt{n \\cdot \\frac{K}{N} \\cdot \\frac{N-K}{N} \\cdot \\frac{N-n}{N-1}}$$
+
+### Example
+
+Consider drawing 5 cards from a standard deck of 52, counting aces. Here $N = 52$, $K = 4$, $n = 5$:
+
+$$\\mathrm{Var}(X) = 5 \\cdot \\frac{4}{52} \\cdot \\frac{48}{52} \\cdot \\frac{47}{51}$$
+
+$$= 5 \\cdot \\frac{1}{13} \\cdot \\frac{12}{13} \\cdot \\frac{47}{51} \\approx 0.331$$
+
+$$\\sigma \\approx \\sqrt{0.331} \\approx 0.575$$
+
+The relatively small variance reflects the limited range of possible outcomes (0 to 4 aces) and the constraining effect of sampling without replacement from a finite deck.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj8:{
       title:`Mode and Median`,
       content:``,
@@ -531,30 +670,30 @@ export default function HypergeometricDistributionPage({seoData,sectionsContent 
           sectionsContent.obj7.content,
         ]
     },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
+    // {
+    //     id:'8',
+    //     title:sectionsContent.obj8.title,
+    //     link:sectionsContent.obj8.link,
+    //     content:[
+    //       sectionsContent.obj8.content,
+    //     ]
+    // },
+    // {
+    //     id:'9',
+    //     title:sectionsContent.obj9.title,
+    //     link:sectionsContent.obj9.link,
+    //     content:[
+    //       sectionsContent.obj9.content,
+    //     ]
+    // },
+    // {
+    //     id:'10',
+    //     title:sectionsContent.obj10.title,
+    //     link:sectionsContent.obj10.link,
+    //     content:[
+    //       sectionsContent.obj10.content,
+    //     ]
+    // },
     {
         id:'11',
         title:sectionsContent.obj11.title,
@@ -563,30 +702,30 @@ export default function HypergeometricDistributionPage({seoData,sectionsContent 
           sectionsContent.obj11.content,
         ]
     },
-    {
-        id:'12',
-        title:sectionsContent.obj12.title,
-        link:sectionsContent.obj12.link,
-        content:[
-          sectionsContent.obj12.content,
-        ]
-    },
-    {
-        id:'13',
-        title:sectionsContent.obj13.title,
-        link:sectionsContent.obj13.link,
-        content:[
-          sectionsContent.obj13.content,
-        ]
-    },
-    {
-        id:'14',
-        title:sectionsContent.obj14.title,
-        link:sectionsContent.obj14.link,
-        content:[
-          sectionsContent.obj14.content,
-        ]
-    },
+    // {
+    //     id:'12',
+    //     title:sectionsContent.obj12.title,
+    //     link:sectionsContent.obj12.link,
+    //     content:[
+    //       sectionsContent.obj12.content,
+    //     ]
+    // },
+    // {
+    //     id:'13',
+    //     title:sectionsContent.obj13.title,
+    //     link:sectionsContent.obj13.link,
+    //     content:[
+    //       sectionsContent.obj13.content,
+    //     ]
+    // },
+    // {
+    //     id:'14',
+    //     title:sectionsContent.obj14.title,
+    //     link:sectionsContent.obj14.link,
+    //     content:[
+    //       sectionsContent.obj14.content,
+    //     ]
+    // },
     
     // {
     //     id:'1',

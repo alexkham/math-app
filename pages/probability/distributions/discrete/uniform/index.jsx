@@ -261,31 +261,262 @@ Since all probabilities are equal:
       link:'',
   
     },
-    obj5:{
-      title:`Cumulative Distribution Function (CDF)`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+//     obj5:{
+//       title:`Cumulative Distribution Function (CDF)`,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+//       formula:`
+//       Let 
+// X
+// X be uniform on the integers 
+// {
+// a
+// ,
+// a
+// +
+// 1
+// ,
+// …
+// ,
+// b
+// }
+// {a,a+1,…,b}, where 
+// a
+// ,
+// b
+// ∈
+// Z
+// a,b∈Z and 
+// a
+// ≤
+// b
+// a≤b. The number of points is 
+// n
+// =
+// b
+// −
+// a
+// +
+// 1
+// n=b−a+1.
+// ​
+
+// F
+// X
+// (
+// x
+// )
+// =
+// {
+// 0
+// ,
+// x
+// <
+// a
+// ⌊
+// x
+// ⌋
+// −
+// a
+// +
+// 1
+// b
+// −
+// a
+// +
+// 1
+// ,
+// a
+// ≤
+// x
+// ≤
+// b
+// 1
+// ,
+// x
+// >
+// b
+// F 
+// X
+//  (x)= 
+// ⎩
+// ⎨
+// ⎧
   
-    },
-    obj6:{
-      title:`Expected Value (mean)`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+// 0,
+// b−a+1
+// ⌊x⌋−a+1
+//  ,
+// 1,
   
-    },
-    obj7:{
-      title:`Variance and Standard Deviation`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+// x<a
+// a≤x≤b
+// x>b
+ 
+
+      
+//       `,
   
-    },
-    obj8:{
+//     },
+   
+obj5:{
+  title:`Cumulative Distribution Function (CDF)`,
+  content:`
+The [cumulative distribution function (CDF)](!/probability/cdf) of a **discrete uniform distribution** is given by:
+
+$$F_X(x) = P(X \\leq x) = \\begin{cases} 0, & x < a \\\\ \\frac{\\lfloor x \\rfloor - a + 1}{b - a + 1}, & a \\leq x \\leq b \\\\ 1, & x > b \\end{cases}$$
+
+Where:
+$a$ = lower bound (integer)
+$b$ = upper bound (integer)
+$\\lfloor x \\rfloor$ = floor function (largest integer less than or equal to $x$)
+
+### Intuition Behind the Formula
+
+**Definition**: The [CDF](!/probability/cdf) gives the probability that the random variable $X$ takes on a value less than or equal to $x$.
+
+**Three Regions**:
+
+1. **Before the range** ($x < a$): No outcomes are possible below $a$, so $F_X(x) = 0$.
+
+2. **Within the range** ($a \\leq x \\leq b$): The CDF counts how many integer values from $a$ to $\\lfloor x \\rfloor$ are included, divided by the total number of outcomes $(b - a + 1)$.
+   * Number of outcomes up to $\\lfloor x \\rfloor$: $\\lfloor x \\rfloor - a + 1$
+   * Total outcomes: $b - a + 1$
+   * Therefore: $F_X(x) = \\frac{\\lfloor x \\rfloor - a + 1}{b - a + 1}$
+
+3. **After the range** ($x > b$): All outcomes have occurred, so $F_X(x) = 1$.
+
+**Step Function Behavior**: Since $X$ only takes integer values, the CDF remains constant between integers and jumps by $\\frac{1}{b - a + 1}$ at each integer point.
+  `,
+  before:``,
+  after:``,
+  link:'',
+},
+
+// obj6:{
+//       title:`Expected Value (mean)`,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+  
+obj6: {
+  title: `Expected Value (Mean)`,
+  content: `
+As explained in the [general case for calculating expected value](!/probability/expected-value#general), the expected value of a discrete random variable is computed as a weighted sum where each possible value is multiplied by its probability:
+
+$$E[X] = \\sum_{x} x \\cdot P(X = x)$$
+
+For the **discrete uniform distribution**, we apply this general formula to the specific probability mass function of this distribution.
+
+### Formula
+
+$$E[X] = \\frac{a + b}{2}$$
+
+Where:
+$a$ = minimum value (lower bound)
+$b$ = maximum value (upper bound)
+
+### Derivation and Intuition
+
+Starting from the general definition and substituting the PMF $P(X = x) = \\frac{1}{b - a + 1}$ for each $x \\in \\{a, a+1, \\ldots, b\\}$:
+
+$$E[X] = \\sum_{x=a}^{b} x \\cdot \\frac{1}{b - a + 1} = \\frac{1}{b - a + 1} \\sum_{x=a}^{b} x$$
+
+The sum of integers from $a$ to $b$ is:
+
+$$\\sum_{x=a}^{b} x = \\frac{(b - a + 1)(a + b)}{2}$$
+
+Substituting back:
+
+$$E[X] = \\frac{1}{b - a + 1} \\cdot \\frac{(b - a + 1)(a + b)}{2} = \\frac{a + b}{2}$$
+
+The result $E[X] = \\frac{a + b}{2}$ captures the symmetry of the uniform distribution: the expected value is simply the midpoint between the minimum and maximum values. Since all outcomes are equally likely, the average naturally falls at the center of the range.
+
+### Example
+
+Consider rolling a fair six-sided die, where $a = 1$ and $b = 6$:
+
+$$E[X] = \\frac{1 + 6}{2} = 3.5$$
+
+The expected value is 3.5, which is the arithmetic mean of all possible outcomes $\\{1, 2, 3, 4, 5, 6\\}$. Note that the expected value need not be a possible outcome of the random variable.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
+
+// obj7:{
+//       title:`Variance and Standard Deviation`,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+obj7: {
+  title: `Variance and Standard Deviation`,
+  content: `
+  The [variance](!/probability/variance#calculate) of a discrete random variable measures how spread out the values are around the expected value. It is computed as:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$
+
+Or using the shortcut formula:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+
+For the **discrete uniform distribution**, we apply this formula to derive the variance.
+
+### Formula
+
+$$\\mathrm{Var}(X) = \\frac{(b - a + 1)^2 - 1}{12}$$
+
+Where:
+$a$ = minimum value (lower bound)
+$b$ = maximum value (upper bound)
+
+### Derivation and Intuition
+
+Starting with the shortcut formula, we need to calculate $\\mathbb{E}[X^2]$.
+
+We know from the expected value section that $\\mu = \\frac{a + b}{2}$.
+
+For $\\mathbb{E}[X^2]$, using the PMF $P(X = x) = \\frac{1}{b - a + 1}$:
+
+$$\\mathbb{E}[X^2] = \\sum_{x=a}^{b} x^2 \\cdot \\frac{1}{b - a + 1} = \\frac{1}{b - a + 1} \\sum_{x=a}^{b} x^2$$
+
+Using the formula for sum of squares: $\\sum_{x=a}^{b} x^2 = \\frac{(b - a + 1)(2b^2 + 2ab + 2a^2 - a - b)}{6}$
+
+After algebraic manipulation:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2 = \\frac{(b - a + 1)^2 - 1}{12}$$
+
+The result shows that variance depends on the range width $(b - a + 1)$ squared. A wider range of equally likely values produces higher variance. The formula is symmetric and increases quadratically with the spread between $a$ and $b$.
+
+### Standard Deviation
+
+$$\\sigma = \\sqrt{\\mathrm{Var}(X)} = \\sqrt{\\frac{(b - a + 1)^2 - 1}{12}}$$
+
+### Example
+
+For a fair six-sided die where $a = 1$ and $b = 6$:
+
+$$\\mathrm{Var}(X) = \\frac{(6 - 1 + 1)^2 - 1}{12} = \\frac{36 - 1}{12} = \\frac{35}{12} \\approx 2.917$$
+
+$$\\sigma = \\sqrt{\\frac{35}{12}} \\approx 1.708$$
+
+The variance of approximately 2.917 indicates moderate spread around the mean of 3.5, with outcomes ranging from 1 to 6.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},   
+
+obj8:{
       title:`Mode and Median`,
       content:``,
       before:``,
@@ -537,30 +768,30 @@ export default function DiscreteUniformDistributionPage({seoData,sectionsContent
           sectionsContent.obj7.content,
         ]
     },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
+    // {
+    //     id:'8',
+    //     title:sectionsContent.obj8.title,
+    //     link:sectionsContent.obj8.link,
+    //     content:[
+    //       sectionsContent.obj8.content,
+    //     ]
+    // },
+    // {
+    //     id:'9',
+    //     title:sectionsContent.obj9.title,
+    //     link:sectionsContent.obj9.link,
+    //     content:[
+    //       sectionsContent.obj9.content,
+    //     ]
+    // },
+    // {
+    //     id:'10',
+    //     title:sectionsContent.obj10.title,
+    //     link:sectionsContent.obj10.link,
+    //     content:[
+    //       sectionsContent.obj10.content,
+    //     ]
+    // },
     {
         id:'11',
         title:sectionsContent.obj11.title,
@@ -569,30 +800,30 @@ export default function DiscreteUniformDistributionPage({seoData,sectionsContent
           sectionsContent.obj11.content,
         ]
     },
-    {
-        id:'12',
-        title:sectionsContent.obj12.title,
-        link:sectionsContent.obj12.link,
-        content:[
-          sectionsContent.obj12.content,
-        ]
-    },
-    {
-        id:'13',
-        title:sectionsContent.obj13.title,
-        link:sectionsContent.obj13.link,
-        content:[
-          sectionsContent.obj13.content,
-        ]
-    },
-    {
-        id:'14',
-        title:sectionsContent.obj14.title,
-        link:sectionsContent.obj14.link,
-        content:[
-          sectionsContent.obj14.content,
-        ]
-    },
+    // {
+    //     id:'12',
+    //     title:sectionsContent.obj12.title,
+    //     link:sectionsContent.obj12.link,
+    //     content:[
+    //       sectionsContent.obj12.content,
+    //     ]
+    // },
+    // {
+    //     id:'13',
+    //     title:sectionsContent.obj13.title,
+    //     link:sectionsContent.obj13.link,
+    //     content:[
+    //       sectionsContent.obj13.content,
+    //     ]
+    // },
+    // {
+    //     id:'14',
+    //     title:sectionsContent.obj14.title,
+    //     link:sectionsContent.obj14.link,
+    //     content:[
+    //       sectionsContent.obj14.content,
+    //     ]
+    // },
    
     // {
     //     id:'1',

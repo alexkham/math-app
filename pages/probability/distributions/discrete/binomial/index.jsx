@@ -116,30 +116,167 @@ where $\\binom{n}{k} = \\frac{n!}{k!(n-k)!}$ is the binomial coefficient.
       link:'',
   
     },
+    // obj5:{
+    //   title:`Cumulative Distribution Function (CDF)`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
+  
+    // },
+    
     obj5:{
-      title:`Cumulative Distribution Function (CDF)`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+  title:`Cumulative Distribution Function (CDF)`,
+  content:`
+The [cumulative distribution function (CDF)](!/probability/cdf) of a **binomial distribution** is given by:
+
+$$F_X(k) = P(X \\leq k) = \\sum_{i=0}^{k} \\binom{n}{i} p^i (1-p)^{n-i}$$
+
+Where:
+$n$ = number of trials
+$p$ = probability of success on each trial
+$k$ = number of successes (where $0 \\leq k \\leq n$)
+$\\binom{n}{i}$ = binomial coefficient "$n$ choose $i$"
+
+### Intuition Behind the Formula
+
+**Definition**: The [CDF](!/probability/cdf) gives the probability of observing $k$ or fewer successes in $n$ trials.
+
+**Summation of Probabilities**: 
+Since we want the probability of getting *at most* $k$ successes, we sum the individual probabilities from 0 successes up to $k$ successes:
+
+$$P(X \\leq k) = P(X=0) + P(X=1) + P(X=2) + \\cdots + P(X=k)$$
+
+**Discrete Nature**: Unlike continuous distributions, the binomial CDF is a step function that jumps at each integer value from 0 to $n$. Between integers, the CDF remains constant.
+
+**Complementary Probabilities**: 
+For calculations involving "more than $k$ successes," use:
+$$P(X > k) = 1 - P(X \\leq k) = 1 - F_X(k)$$
+
+For "at least $k$ successes":
+$$P(X \\geq k) = 1 - P(X \\leq k-1) = 1 - F_X(k-1)$$
+  `,
+  before:``,
+  after:``,
+  link:'',
+},
+    
+    // obj6:{
+    //   title:`Expected Value (mean)`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
-    obj6:{
-      title:`Expected Value (mean)`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // },
+   
+   obj6: {
+  title: `Expected Value (Mean)`,
+  content: `
+As explained in the [general case for calculating expected value](!/probability/expected-value#general), the expected value of a discrete random variable is computed as a weighted sum where each possible value is multiplied by its probability:
+
+$$E[X] = \\sum_{x} x \\cdot P(X = x)$$
+
+For the **binomial distribution**, we apply this general formula to the specific probability mass function of this distribution.
+
+### Formula
+
+$$E[X] = np$$
+
+Where:
+$n$ = number of independent trials
+$p$ = probability of success on each trial
+
+### Derivation and Intuition
+
+The binomial random variable $X$ can be expressed as the sum of $n$ independent Bernoulli random variables: $X = X_1 + X_2 + \\cdots + X_n$, where each $X_i$ represents the outcome of trial $i$ (1 for success, 0 for failure).
+
+Each Bernoulli variable has expected value $E[X_i] = p$.
+
+By the linearity of expectation:
+
+$$E[X] = E[X_1 + X_2 + \\cdots + X_n] = E[X_1] + E[X_2] + \\cdots + E[X_n] = p + p + \\cdots + p = np$$
+
+The result $E[X] = np$ captures a simple and intuitive fact: if you perform $n$ trials, each with probability $p$ of success, you expect on average to get $np$ successes. This is the most natural interpretation of "average number of successes."
+
+### Example
+
+Consider flipping a fair coin 10 times, where $n = 10$ and $p = 0.5$:
+
+$$E[X] = 10 \\times 0.5 = 5$$
+
+The expected number of heads in 10 flips is 5, which aligns perfectly with our intuition about a fair coin.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
+   
+    // obj7:{
+    //   title:`Variance and Standard Deviation`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
-    obj7:{
-      title:`Variance and Standard Deviation`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    },
+    // },
+
+obj7: {
+  title: `Variance and Standard Deviation`,
+  content: `
+The [variance](!/probability/variance#calculate) of a discrete random variable measures how spread out the values are around the expected value. It is computed as:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$
+
+Or using the shortcut formula:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+
+For the **binomial distribution**, we apply this formula to derive the variance.
+
+### Formula
+
+$$\\mathrm{Var}(X) = np(1-p)$$
+
+Where:
+$n$ = number of independent trials
+$p$ = probability of success on each trial
+$(1-p) = q$ = probability of failure on each trial
+
+### Derivation and Intuition
+
+Since the binomial random variable can be expressed as the sum of $n$ independent Bernoulli variables: $X = X_1 + X_2 + \\cdots + X_n$, and for independent variables variances add:
+
+$$\\mathrm{Var}(X) = \\mathrm{Var}(X_1) + \\mathrm{Var}(X_2) + \\cdots + \\mathrm{Var}(X_n)$$
+
+Each Bernoulli variable has variance $\\mathrm{Var}(X_i) = p(1-p)$.
+
+Therefore:
+
+$$\\mathrm{Var}(X) = np(1-p)$$
+
+The result $\\mathrm{Var}(X) = np(1-p)$ shows that variance depends on both the number of trials and the probability structure. The term $p(1-p)$ is maximized when $p = 0.5$ (a fair coin), meaning maximum variability occurs when success and failure are equally likely. As $p$ approaches 0 or 1, variance decreases because outcomes become more predictable.
+
+### Standard Deviation
+
+$$\\sigma = \\sqrt{np(1-p)}$$
+
+### Example
+
+Consider flipping a fair coin 100 times, where $n = 100$ and $p = 0.5$:
+
+$$\\mathrm{Var}(X) = 100 \\times 0.5 \\times 0.5 = 25$$
+
+$$\\sigma = \\sqrt{25} = 5$$
+
+The variance of 25 and standard deviation of 5 indicate that while we expect 50 heads on average, typical outcomes will deviate by about 5 heads in either direction.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
+
+
     obj8:{
       title:`Mode and Median`,
       content:``,
@@ -394,30 +531,30 @@ export default function BinomialDistributionPage({seoData,sectionsContent , intr
           sectionsContent.obj7.content,
         ]
     },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
+    // {
+    //     id:'8',
+    //     title:sectionsContent.obj8.title,
+    //     link:sectionsContent.obj8.link,
+    //     content:[
+    //       sectionsContent.obj8.content,
+    //     ]
+    // },
+    // {
+    //     id:'9',
+    //     title:sectionsContent.obj9.title,
+    //     link:sectionsContent.obj9.link,
+    //     content:[
+    //       sectionsContent.obj9.content,
+    //     ]
+    // },
+    // {
+    //     id:'10',
+    //     title:sectionsContent.obj10.title,
+    //     link:sectionsContent.obj10.link,
+    //     content:[
+    //       sectionsContent.obj10.content,
+    //     ]
+    // },
     {
         id:'11',
         title:sectionsContent.obj11.title,
@@ -426,30 +563,30 @@ export default function BinomialDistributionPage({seoData,sectionsContent , intr
           sectionsContent.obj11.content,
         ]
     },
-    {
-        id:'12',
-        title:sectionsContent.obj12.title,
-        link:sectionsContent.obj12.link,
-        content:[
-          sectionsContent.obj12.content,
-        ]
-    },
-    {
-        id:'13',
-        title:sectionsContent.obj13.title,
-        link:sectionsContent.obj13.link,
-        content:[
-          sectionsContent.obj13.content,
-        ]
-    },
-    {
-        id:'14',
-        title:sectionsContent.obj14.title,
-        link:sectionsContent.obj14.link,
-        content:[
-          sectionsContent.obj14.content,
-        ]
-    },
+    // {
+    //     id:'12',
+    //     title:sectionsContent.obj12.title,
+    //     link:sectionsContent.obj12.link,
+    //     content:[
+    //       sectionsContent.obj12.content,
+    //     ]
+    // },
+    // {
+    //     id:'13',
+    //     title:sectionsContent.obj13.title,
+    //     link:sectionsContent.obj13.link,
+    //     content:[
+    //       sectionsContent.obj13.content,
+    //     ]
+    // },
+    // {
+    //     id:'14',
+    //     title:sectionsContent.obj14.title,
+    //     link:sectionsContent.obj14.link,
+    //     content:[
+    //       sectionsContent.obj14.content,
+    //     ]
+    // },
    
     // {
     //     id:'1',

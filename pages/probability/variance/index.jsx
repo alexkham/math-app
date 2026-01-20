@@ -532,6 +532,7 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
+import GenericTable from '@/app/components/generic-table/GenericTable'
 
 
 export async function getStaticProps(){
@@ -664,11 +665,11 @@ export async function getStaticProps(){
     definition:{
       title:`What is Variance`,
       content:`
-Variance of a random variable is a quantitative characteristic of how far, on average, the outcomes of a random variable fall from what we expect. 
+Variance of a [random variable](!/probability/random-variables) is a quantitative characteristic of how far, on average, the outcomes of a [random variable](!/probability/random-variables) fall from what we expect. 
 
 To calculate it, we take each possible outcome, find how far it is from the mean, square that distance, and then average all those squared distances according to the probability of each outcome.
 
-The squaring step is crucial: it ensures that deviations above and below the mean both contribute positively to the measure, and it emphasizes larger deviations more heavily than smaller ones. A random variable with high variance produces outcomes that tend to be far from its expected value, while low variance indicates outcomes cluster tightly around the mean.
+The squaring step is crucial: it ensures that deviations above and below the mean both contribute positively to the measure, and it emphasizes larger deviations more heavily than smaller ones. A [random variable](!/probability/random-variables) with high variance produces outcomes that tend to be far from its expected value, while low variance indicates outcomes cluster tightly around the mean.
 
 This measure gives us our first quantitative tool for describing not where a distribution is centered, but how spread out or concentrated it is around that center.`,
       before:``,
@@ -702,52 +703,195 @@ These symbols appear consistently in variance calculations and provide a compact
   
       title:`What Variance Measures`,
       content:`
-Variance captures how spread out a random variable's outcomes are around its expected value. It quantifies the degree of fluctuation, inconsistency, or variability we can expect from the random process.
+Variance captures how spread out a [random variable's](!/probability/random-variables) outcomes are around its [expected value](!/probability/expected-value). It quantifies the degree of fluctuation, inconsistency, or variability we can expect from the random process.
 
-When a random variable has low variance, its outcomes cluster tightly near the mean. Most realizations fall close to what we expect. When variance is high, outcomes scatter widely—some fall far above the mean, others far below, creating unpredictability in individual observations.
+When a [random variable](!/probability/random-variables) has low variance, its outcomes cluster tightly near the[mean(expected value)](!/probability/expected-value). Most realizations fall close to what we expect. When variance is high, outcomes scatter widely—some fall far above the mean, others far below, creating unpredictability in individual observations.
 
-Expected value alone tells us the center of a distribution but says nothing about reliability or concentration. Two random variables can share the same mean yet behave completely differently: one might produce nearly constant outcomes while the other swings wildly. Variance distinguishes between these cases.
+[Expected value](!/probability/expected-value) alone tells us the center of a distribution but says nothing about reliability or concentration. Two [random variables](!/probability/random-variables) can share the same mean yet behave completely differently: one might produce nearly constant outcomes while the other swings wildly. Variance distinguishes between these cases.
 
 This measure connects directly to uncertainty and risk. Higher variance means greater uncertainty about where any single outcome will land. In practical contexts, variance signals volatility, unreliability, or the potential for surprising deviations from what we anticipate on average.`,
       before:``,
       after:``,
   
     },
-    calculate:{
-      title:`How to Calculate Variance`,
-      content:`
+//     calculate:{
+//       title:`How to Calculate Variance`,
+//       content:`
+// The variance of a [random variable](!/probability/random-variables) $X$ with [expected value](!/probability/expected-value) $\\mu$ is formally defined as:
+
+// $$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$$
+
+// This is the expected value of the squared deviation from the mean.
+
+// A computationally convenient alternative is the shortcut formula:
+
+// $$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+
+// This expresses variance as the difference between the expected value of the square and the square of the expected value.
+
+// For discrete random variables, variance is computed as a sum:
+
+// $$\\mathrm{Var}(X) = \\sum_i (x_i - \\mu)^2 p(x_i)$$
+
+// where the sum runs over all possible values $x_i$ with probabilities $p(x_i)$.
+
+// For continuous random variables, variance is computed as an integral:
+
+// $$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 f(x) \\, dx$$
+
+// where $f(x)$ is the probability density function.
+
+// The choice between sum and integral depends entirely on whether the random variable takes discrete values or ranges continuously. Both formulas express the same concept: averaging squared deviations weighted by probability.
+
+// For more on computing expected values, see the [expected value](!/probability/expected-value) page.`,
+//       before:``,
+//       after:``,
+  
+//     },
+ 
+calculate:{
+  title:`How to Calculate Variance`,
+  content:`
 The variance of a [random variable](!/probability/random-variables) $X$ with [expected value](!/probability/expected-value) $\\mu$ is formally defined as:
 
 $$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$$
 
 This is the expected value of the squared deviation from the mean.
 
-A computationally convenient alternative is the shortcut formula:
+A computationally convenient alternative is the **shortcut formula**:
 
 $$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
 
 This expresses variance as the difference between the expected value of the square and the square of the expected value.
 
-For discrete random variables, variance is computed as a sum:
+The calculation method depends on whether the random variable is discrete or continuous, and whether we're working from empirical data, a probability function, or a known distribution.
+  `,
+  before:``,
+  after:``,
+},
 
-$$\\mathrm{Var}(X) = \\sum_i (x_i - \\mu)^2 p(x_i)$$
+general:{
+  title:`Calculating Variance: General Case`,
+  content:`
+When working with empirical data or tabulated probabilities (rather than a formula), variance is computed directly from observed values and their frequencies.
 
-where the sum runs over all possible values $x_i$ with probabilities $p(x_i)$.
+For a discrete [random variable](!/probability/random-variables) $X$ with observed values $x_1, x_2, \\ldots, x_n$ and corresponding probabilities $p_1, p_2, \\ldots, p_n$:
 
-For continuous random variables, variance is computed as an integral:
+**Step 1**: Calculate the [mean (expected value)](!/probability/expected-value):
+$$\\mu = \\sum_{i=1}^{n} x_i p_i$$
+
+**Step 2**: Calculate variance using the definition:
+$$\\mathrm{Var}(X) = \\sum_{i=1}^{n} (x_i - \\mu)^2 p_i$$
+
+Or using the shortcut formula:
+$$\\mathrm{Var}(X) = \\left(\\sum_{i=1}^{n} x_i^2 p_i\\right) - \\mu^2$$
+
+### Example
+
+Consider a small shop where the number of items sold on a given morning varies randomly. Let $X$ represent the number of items sold. Based on past observations, the probabilities for different sales outcomes are:
+
+
+
+  `,
+  before:``,
+  after:`
+
+ This is the same data from the [expected value general case](!/probability/expected-value#general). First, we calculate the mean:
+
+$$\\mu = E[X] = 0(0.1) + 1(0.3) + 2(0.4) + 3(0.2) = 0 + 0.3 + 0.8 + 0.6 = 1.7$$
+
+Now we calculate how spread out the sales are around this average of 1.7 items.
+
+Using the shortcut formula for variance:
+
+$$\\mathbb{E}[X^2] = 0^2(0.1) + 1^2(0.3) + 2^2(0.4) + 3^2(0.2) = 0 + 0.3 + 1.6 + 1.8 = 3.7$$
+
+$$\\mathrm{Var}(X) = 3.7 - (1.7)^2 = 3.7 - 2.89 = 0.81$$
+
+The variance is 0.81, indicating moderate spread around the mean of 1.7 items.
+  `,
+},
+
+discrete:{
+  title:`Variance for Discrete Random Variables (PMF)`,
+  content:`
+When a [discrete random variable](!/probability/random-variables#types) is described by a [probability mass function](!/probability/probability-function) $p(x) = P(X = x)$ given in formula form, variance is computed directly from that function.
+
+$$\\mathrm{Var}(X) = \\sum_{x} (x - \\mu)^2 p(x)$$
+
+Or using the shortcut formula:
+
+$$\\mathrm{Var}(X) = \\sum_{x} x^2 p(x) - \\mu^2$$
+
+where the sum runs over all values in the support of $X$.
+
+### Example
+
+Let $X$ have PMF $p(x) = \\frac{x}{10}$ for $x = 1, 2, 3, 4$.
+
+From the [expected value example](!/probability/expected-value#discrete), we know $\\mu = 3$.
+
+Calculate $\\mathbb{E}[X^2]$:
+
+$$\\mathbb{E}[X^2] = \\sum_{x=1}^{4} x^2 \\cdot \\frac{x}{10} = \\frac{1}{10}\\sum_{x=1}^{4} x^3 = \\frac{1}{10}(1 + 8 + 27 + 64) = \\frac{100}{10} = 10$$
+
+Using the shortcut formula:
+
+$$\\mathrm{Var}(X) = 10 - 3^2 = 10 - 9 = 1$$
+
+The variance is 1, with standard deviation $\\sigma = \\sqrt{1} = 1$.
+  `,
+  before:``,
+  after:``,
+},
+
+continuous:{
+  title:`Variance for Continuous Random Variables (PDF)`,
+  content:`
+When a [continuous random variable](!/probability/random-variables#types) is described by a [probability density function](!/probability/probability-function) $f(x)$, variance is computed using integration.
 
 $$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 f(x) \\, dx$$
 
-where $f(x)$ is the probability density function.
+Or using the shortcut formula:
 
-The choice between sum and integral depends entirely on whether the random variable takes discrete values or ranges continuously. Both formulas express the same concept: averaging squared deviations weighted by probability.
+$$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} x^2 f(x) \\, dx - \\mu^2$$
 
-For more on computing expected values, see the [expected value](!/probability/expected-value) page.`,
-      before:``,
-      after:``,
+### Example
+
+Let $X$ have PDF $f(x) = \\frac{x}{2}$ for $0 \\leq x \\leq 2$.
+
+From the [expected value example](!/probability/expected-value#continuous), we know $\\mu = \\frac{4}{3}$.
+
+Calculate $\\mathbb{E}[X^2]$:
+
+$$\\mathbb{E}[X^2] = \\int_{0}^{2} x^2 \\cdot \\frac{x}{2} \\, dx = \\frac{1}{2}\\int_{0}^{2} x^3 \\, dx = \\frac{1}{2} \\cdot \\frac{x^4}{4}\\bigg|_{0}^{2} = \\frac{1}{8}(16) = 2$$
+
+Using the shortcut formula:
+
+$$\\mathrm{Var}(X) = 2 - \\left(\\frac{4}{3}\\right)^2 = 2 - \\frac{16}{9} = \\frac{18 - 16}{9} = \\frac{2}{9} \\approx 0.222$$
+
+The variance is $\\frac{2}{9}$, with standard deviation $\\sigma = \\sqrt{\\frac{2}{9}} = \\frac{\\sqrt{2}}{3} \\approx 0.471$.
+  `,
+  before:``,
+  after:``,
+},
+
+individualdist:{
+  title:`Variance Formulas for Specific Distributions`,
+  content:`
+Each standard probability [distribution](!/probability/distributions) has a pre-derived variance formula that bypasses the need for summation or integration. These formulas are established results obtained by applying the general variance definition to each distribution's specific [probability function](!/probability/probability-function).
+
+
+`,
+  before:``,
+  after:`
+  For derivations and detailed explanations, see each distribution's individual page. Using these formulas is faster and more reliable than computing from scratch.
   
-    },
-    square:{
+  `,
+},
+
+
+square:{
       title:`Why Squaring the Distance?`,
       content:`
 The definition of variance requires squaring each deviation before averaging. This choice is not arbitrary—it serves several mathematical and practical purposes.
@@ -951,11 +1095,102 @@ When working with probability distributions and random variables, understanding 
 `
   }
 
+
+const generalTable=`
+ <table style="border-collapse: collapse; margin: 20px auto; font-family: Arial, sans-serif; font-size: 16px;">
+  <thead>
+    <tr style="background-color: #f0f0f0;">
+      <th style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">x (items sold)</th>
+      <th style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">0</th>
+      <th style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">1</th>
+      <th style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">2</th>
+      <th style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px 12px; text-align: center; font-weight: 600;">P(X = x)</td>
+      <td style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">0.1</td>
+      <td style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">0.3</td>
+      <td style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">0.4</td>
+      <td style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">0.2</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+
+const discreteVarianceFormulasData = {
+  tableTitle: 'Variance Formulas for Discrete Distributions',
+  rows: [
+    {
+      distribution: '[Discrete Uniform](!/probability/distributions/discrete/uniform#7)',
+      formula: `\\mathrm{Var}(X) = \\frac{(b-a+1)^2 - 1}{12}`,
+      parameters: '$a$ = minimum value, $b$ = maximum value'
+    },
+    // {
+    //   distribution: '[Bernoulli](!/probability/distributions/discrete/bernoulli#7)',
+    //   formula: '\\mathrm{Var}(X) = p(1-p)',
+    //   parameters: '$p$ = probability of success'
+    // },
+    {
+      distribution: '[Binomial](!/probability/distributions/discrete/binomial#7)',
+      formula: '\\mathrm{Var}(X) = np(1-p)',
+      parameters: '$n$ = number of trials, $p$ = probability of success'
+    },
+    {
+      distribution: '[Geometric](!/probability/distributions/discrete/geometric#7)',
+      formula: '\\mathrm{Var}(X) = \\frac{1-p}{p^2}',
+      parameters: '$p$ = probability of success on each trial'
+    },
+    {
+      distribution: '[Negative Binomial](!/probability/distributions/discrete/negative-binomial#7)',
+      formula: '\\mathrm{Var}(X) = \\frac{r(1-p)}{p^2}',
+      parameters: '$r$ = number of successes needed, $p$ = probability of success'
+    },
+    {
+      distribution: '[Hypergeometric](!/probability/distributions/discrete/hypergeometric#7)',
+      formula: '\\mathrm{Var}(X) = n\\frac{K}{N}\\frac{N-K}{N}\\frac{N-n}{N-1}',
+      parameters: '$n$ = sample size, $K$ = successes in population, $N$ = population size'
+    },
+    {
+      distribution: '[Poisson](!/probability/distributions/discrete/poisson#7)',
+      formula: '\\mathrm{Var}(X) = \\lambda',
+      parameters: '$\\lambda$ = average rate of occurrence per interval'
+    }
+  ]
+};
+
+
+const continuousVarianceFormulasData = {
+  tableTitle: 'Variance Formulas for Continuous Distributions',
+  rows: [
+    {
+      distribution: '[Continuous Uniform](!/probability/distributions/continuous/uniform#8)',
+      formula: '\\mathrm{Var}(X) = \\frac{(b-a)^2}{12}',
+      parameters: '$a$ = lower bound of interval, $b$ = upper bound of interval'
+    },
+    {
+      distribution: '[Exponential](!/probability/distributions/continuous/exponential#8)',
+      formula: '\\mathrm{Var}(X) = \\frac{1}{\\lambda^2}',
+      parameters: '$\\lambda$ = rate parameter (events per unit time)'
+    },
+    {
+      distribution: '[Normal](!/probability/distributions/continuous/normal#8)',
+      formula: '\\mathrm{Var}(X) = \\sigma^2',
+      parameters: '$\\mu$ = mean (location parameter), $\\sigma^2$ = variance parameter'
+    }
+  ]
+};
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
+      generalTable,
+      discreteVarianceFormulasData,
+      continuousVarianceFormulasData,
       schemas,
       seoData: {
         title: "Variance: Measuring Spread in Probability | Learn Math Class",
@@ -968,7 +1203,9 @@ When working with probability distributions and random variables, understanding 
   }
 }
 
-export default function VariancePage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function VariancePage({seoData, sectionsContent, introContent, faqQuestions,
+   schemas, generalTable,discreteVarianceFormulasData,
+      continuousVarianceFormulasData,}) {
 
     
   const genericSections=[
@@ -980,14 +1217,7 @@ export default function VariancePage({seoData, sectionsContent, introContent, fa
             sectionsContent.definition.content,
         ]
     },
-    {
-        id:'notation',
-        title:sectionsContent.notation.title,
-        link:'',
-        content:[
-            sectionsContent.notation.content,
-        ]
-    },
+  
     {
         id:'what',
         title:sectionsContent.what.title,
@@ -996,14 +1226,76 @@ export default function VariancePage({seoData, sectionsContent, introContent, fa
             sectionsContent.what.content,
         ]
     },
-    {
-        id:'calculate',
-        title:sectionsContent.calculate.title,
+      {
+        id:'notation',
+        title:sectionsContent.notation.title,
         link:'',
         content:[
-            sectionsContent.calculate.content,
+            sectionsContent.notation.content,
         ]
     },
+    // {
+    //     id:'calculate',
+    //     title:sectionsContent.calculate.title,
+    //     link:'',
+    //     content:[
+    //         sectionsContent.calculate.content,
+    //     ]
+    // },
+
+
+    {
+    id:'calculate',
+    title:sectionsContent.calculate.title,
+    link:'',
+    content:[
+        sectionsContent.calculate.content,
+        
+    ]
+},
+{
+    id:'general',
+    title:sectionsContent.general.title,
+    link:'',
+    content:[
+        sectionsContent.general.content,
+       
+          <div style={{transform:'scale(1.15)'}} dangerouslySetInnerHTML={{ __html: generalTable }} key="table" />,
+           sectionsContent.general.after,
+    ]
+},
+{
+    id:'discrete',
+    title:sectionsContent.discrete.title,
+    link:'',
+    content:[
+        sectionsContent.discrete.content,
+    ]
+},
+{
+    id:'continuous',
+    title:sectionsContent.continuous.title,
+    link:'',
+    content:[
+        sectionsContent.continuous.content,
+    ]
+},
+{
+    id:'individualdist',
+    title:sectionsContent.individualdist.title,
+    link:'',
+    content:[
+        sectionsContent.individualdist.content,
+           <GenericTable key={'discrete-expected-values'} tableData={discreteVarianceFormulasData} theme='lightBlue'
+          cellFontSize={'16px'}
+          headerFontSize={'18px'}/>,
+         
+            <GenericTable key={'continuous-expected-values'} tableData={continuousVarianceFormulasData} theme='lightBlue'
+          cellFontSize={'16px'}
+          headerFontSize={'18px'}/>,
+           sectionsContent.individualdist.after,
+    ]
+},
     {
         id:'square',
         title:sectionsContent.square.title,

@@ -440,32 +440,32 @@ const discreteExpectedValueFormulasData = {
   tableTitle: 'Expected Value Formulas for Discrete Distributions',
   rows: [
     {
-      distribution: 'Discrete Uniform',
+      distribution: '[Discrete Uniform](!/probability/distributions/discrete/uniform#6)',
       formula: `E[X]=\\frac{a + b}{2}`,
       parameters: '$a$ = minimum value, $b$ = maximum value'
     },
     {
-      distribution: 'Binomial',
+      distribution: '[Binomial](!/probability/distributions/discrete/binomial#6)',
       formula: 'E[X] = np',
       parameters: '$n$ = number of trials, $p$ = probability of success'
     },
     {
-      distribution: 'Geometric',
+      distribution: '[Geometric](!/probability/distributions/discrete/geometric#6)',
       formula: 'E[X] = \\frac{1}{p}',
       parameters: '$p$ = probability of success on each trial'
     },
     {
-      distribution: 'Negative Binomial',
+      distribution: '[Negative Binomial](!/probability/distributions/discrete/negative-binomial#6)',
       formula: 'E[X] = \\frac{r}{p}',
       parameters: '$r$ = number of successes needed, $p$ = probability of success'
     },
     {
-      distribution: 'Hypergeometric',
+      distribution: '[Hypergeometric](!/probability/distributions/discrete/hypergeometric#6)',
       formula: 'E[X] = n\\frac{K}{N}',
       parameters: '$n$ = sample size, $K$ = successes in population, $N$ = population size'
     },
     {
-      distribution: 'Poisson',
+      distribution: '[Poisson](!/probability/distributions/discrete/poisson#6)',
       formula: 'E[X] = \\lambda',
       parameters: '$\\lambda$ = average rate of occurrence per interval'
     }
@@ -477,22 +477,24 @@ const continuousExpectedValueFormulasData = {
   tableTitle: 'Expected Value Formulas for Continuous Distributions',
   rows: [
     {
-      distribution: 'Continuous Uniform',
+      distribution: '[Continuous Uniform](!/probability/distributions/continuous/uniform#7)',
       formula: 'E[X] = \\frac{a + b}{2}',
       parameters: '$a$ = lower bound of interval, $b$ = upper bound of interval'
     },
     {
-      distribution: 'Exponential',
+      distribution: '[Exponential](!/probability/distributions/continuous/exponential#7)',
       formula: 'E[X] = \\frac{1}{\\lambda}',
       parameters: '$\\lambda$ = rate parameter (events per unit time)'
     },
     {
-      distribution: 'Normal',
+      distribution: '[Normal](!/probability/distributions/continuous/normal#7)',
       formula: 'E[X] = \\mu',
       parameters: '$\\mu$ = mean (location parameter), $\\sigma^2$ = variance'
     }
   ]
 };
+
+
 
 
 
