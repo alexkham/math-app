@@ -453,7 +453,10 @@ This means there's about a 9.6% chance that you'll need exactly 4 rolls to get y
     },
     obj12:{
       title:`Interactive Calculator`,
-      content:``,
+      content:`
+      This interactive calculator computes probabilities for the geometric distribution, which models the number of trials needed until the first success occurs. Enter your success probability ($p$) and choose whether you want the full distribution or specific probabilities like $P(X=k)$, $P(X<k)$, or $P(X≥k)$ to find how likely you are to achieve your first success on a particular trial. Perfect for modeling scenarios like sales conversions, quality testing, or any situation where you're waiting for the first success.
+     
+      `,
       before:``,
       after:``,
       link:'',

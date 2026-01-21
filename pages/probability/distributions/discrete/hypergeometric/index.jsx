@@ -460,7 +460,10 @@ Note: When $N$ is very large relative to $n$, the hypergeometric distribution ap
     },
     obj12:{
       title:`Interactive Calculator`,
-      content:``,
+      content:`
+      This interactive calculator computes probabilities for the hypergeometric distribution, which models sampling without replacement from a finite population. Enter your population size ($N$), number of success items ($K$), and sample size ($n$) to calculate the probability of getting a specific number of successes in your sample. Ideal for card games, quality control sampling, lottery calculations, or any scenario where you're drawing items without putting them back.
+      
+      `,
       before:``,
       after:``,
       link:'',

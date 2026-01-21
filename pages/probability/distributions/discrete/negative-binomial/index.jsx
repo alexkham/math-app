@@ -455,7 +455,10 @@ Note: The geometric distribution is a special case of the negative binomial dist
     },
     obj12:{
       title:`Interactive Calculator`,
-      content:``,
+      content:`
+      This interactive calculator computes probabilities for the negative binomial distribution, which models the number of failures before achieving a target number of successes. Enter your target successes ($r$), success probability ($p$), and choose whether you want the full distribution or specific probabilities to see how many failures you might encounter. Perfect for modeling customer acquisition, manufacturing quality targets, or any scenario where you need multiple successes and want to know about the failures along the way.
+     
+      `,
       before:``,
       after:``,
       link:'',

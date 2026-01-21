@@ -464,7 +464,10 @@ Note: The Poisson distribution is often used as an approximation to the binomial
     },
     obj12:{
       title:`Interactive Calculator`,
-      content:``,
+      content:`
+      This interactive calculator computes probabilities for the Poisson distribution, which models the number of events occurring in a fixed interval of time or space. Enter the average rate ($λ$) of events and choose whether you want the full distribution or specific probabilities like $P(X=k)$ or $P(X≤k)$ to analyze event frequencies. Essential for modeling customer arrivals, website traffic, defect rates, or any situation involving rare events occurring at a constant average rate.
+      
+      `,
       before:``,
       after:``,
       link:'',

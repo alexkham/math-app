@@ -558,7 +558,10 @@ Each face has an equal and independent chance of appearing.
     },
     obj12:{
       title:`Interactive Calculator`,
-      content:``,
+      content:`
+      This interactive calculator computes probabilities for the discrete uniform distribution, where every value in a range has equal probability of occurring. Enter your minimum value ($a$) and maximum value ($b$) to model scenarios like fair dice rolls, random number selection, or lottery draws. The calculator shows you the equal probability for each value and lets you compute cumulative probabilities for any range within your specified bounds.
+      
+      `,
       before:``,
       after:``,
       link:'',

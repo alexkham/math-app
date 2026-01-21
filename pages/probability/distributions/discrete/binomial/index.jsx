@@ -323,8 +323,9 @@ The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with
     },
     obj12:{
       title:`Interactive Calculator`,
-      content:`Use this calculator to compute probabilities and distribution properties for the binomial distribution.
-
+      content:`
+      This interactive calculator computes probabilities for the binomial distribution, modeling the number of successes in a fixed number of independent trials. Enter your number of trials ($n$), success probability ($p$), and choose whether you want the full distribution or specific probabilities like $P(X=k)$, $P(X≤k)$, or $P(X≥k)$. The calculator instantly shows you the probability distribution, mean, variance, and standard deviation.
+     
       `,
       before:``,
       after:``,
