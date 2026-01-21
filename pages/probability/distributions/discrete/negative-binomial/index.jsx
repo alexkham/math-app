@@ -11,7 +11,8 @@ import Head from 'next/head'
 import { processContent } from '@/app/utils/contentProcessor'
 import NegativeBinomialDistribution from '@/app/components/visualizations/probability/discrete-distribution/NegativeBinomialDistributionPMF'
 import NegativeBinomialDistributionCDF from '@/app/components/visualizations/probability/discrete-distribution/CDFs/NegativeBinomialDistributionCDF'
-
+import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
+import NegativeBinomialCalculator from '@/app/components/calculators/probability/distributions/NegativeBinomialCalculator'
 
 export async function getStaticProps(){
 
@@ -541,6 +542,9 @@ $P(X = k) = \\binom{k - 1}{r - 1} p^r (1 - p)^{k - r}, \\quad \\text{for } k = r
         example:`
          @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Negative Binomial Distribution](!/probability/distributions/discrete/negative-binomial#11) →@
             `,
+               calculators:`            
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Discrete Distributions Probability Calculators ](!/probability/calculators/discrete-distributions) →@
+        `,
       title:``,
       content:``,
       before:``,
@@ -561,13 +565,24 @@ $r$-th success occurs. The random variable measures the total number of trials r
   `
 }
 
-
+const negativeBinomialExplanations = {
+  "How to use": "1. Select probability type: 'All values' for full distribution, or choose a specific query\n2. Enter r (number of successes) - how many successes you want to achieve\n3. Enter p (success probability) - probability of success on each trial (0 < p ≤ 1)\n4. For specific queries, enter k (number of failures) - failures before achieving r successes\n5. Click Calculate to see probabilities and distribution",
+  
+  "Parameters": "• r (number of successes): Target number of successes you want to achieve (must be positive integer)\n• p (success probability): Probability of success on each trial (0 < p ≤ 1)\n• k (number of failures): Number of failures that occur before the r-th success (non-negative integer)\n• q (failure probability): Equals 1 - p",
+  
+  "Query types": "• P(X = k): Probability of exactly k failures before r-th success\n• P(X < k): Probability of fewer than k failures before r-th success\n• P(X ≤ k): Probability of k or fewer failures before r-th success\n• P(X > k): Probability of more than k failures before r-th success\n• P(X ≥ k): Probability of k or more failures before r-th success",
+  
+  "Examples": "Customer acquisition: Need 5 customers (r=5) with 20% conversion rate (p=0.2). Select 'All values' to see distribution of prospects needed.\n\nManufacturing: Need to produce 10 good items (r=10) with 95% success rate (p=0.95). Select P(X≤3) and enter k=3 to find probability of at most 3 defects before getting 10 good items.\n\nSales calls: Need 3 sales (r=3) with 30% close rate (p=0.3). Select P(X=7) and enter k=7 to find probability of exactly 7 rejections before getting 3 sales.",
+  
+  "Interpretation": "• Mean (μ = r(1-p)/p): Expected number of failures before achieving r successes\n• Variance: Measure of variability in failure count\n• Std Dev: Typical deviation from expected failures\n• Chart: Shows probability distribution of failures - extends geometric distribution to multiple successes"
+};
 
 
    return {
       props:{
          sectionsContent,
          introContent,
+         negativeBinomialExplanations,
           seoData: {
         title: "Discrete Negative Binomial Distribution | Learn Math Class",
         description: "Metadescription",
@@ -580,7 +595,9 @@ $r$-th success occurs. The random variable measures the total number of trials r
     }
    }
 
-export default function NegativeBinomialDistributionPage({seoData,sectionsContent , introContent}) {
+export default function NegativeBinomialDistributionPage({seoData,sectionsContent , introContent,
+  negativeBinomialExplanations,
+}) {
 
     
   const genericSections=[
@@ -703,14 +720,20 @@ export default function NegativeBinomialDistributionPage({seoData,sectionsConten
           sectionsContent.obj11.content,
         ]
     },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
+    {
+        id:'12',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+           sectionsContent.obj12.content,
+                    <CalculatorInstructions key={'explanations'} explanations={negativeBinomialExplanations}/>,
+                    <div key={'binomial-calculator'} style={{marginBottom:'-250px'}}>
+                    <NegativeBinomialCalculator />,
+                    </div>,
+                    // sectionsContent.obj12.after,
+                    sectionsContent.links.calculators,
+        ]
+    },
     // {
     //     id:'13',
     //     title:sectionsContent.obj13.title,

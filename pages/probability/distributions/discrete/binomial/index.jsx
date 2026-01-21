@@ -11,6 +11,8 @@ import Head from 'next/head'
 import { processContent } from '@/app/utils/contentProcessor'
 import BinomialDistribution from '@/app/components/visualizations/probability/discrete-distribution/BinomialDistributionPMF'
 import BinomialDistributionCDF from '@/app/components/visualizations/probability/discrete-distribution/CDFs/BinomialDistributionCDF'
+import BinomialCalculator from '@/app/components/calculators/probability/distributions/BinomialDistributionCalculator'
+import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
 
 
 export async function getStaticProps(){
@@ -321,7 +323,9 @@ The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with
     },
     obj12:{
       title:`Interactive Calculator`,
-      content:``,
+      content:`Use this calculator to compute probabilities and distribution properties for the binomial distribution.
+
+      `,
       before:``,
       after:``,
       link:'',
@@ -403,6 +407,9 @@ $P(X = k) = \\binom{n}{k} p^k (1 - p)^{n - k}$ — **probability mass function (
         example:`
          @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Binomial Distribution](!/probability/distributions/discrete/binomial#11) →@
             `,
+            calculators:`            
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Discrete Distributions Probability Calculators ](!/probability/calculators/discrete-distributions) →@
+        `,
       title:``,
       content:``,
       before:``,
@@ -423,12 +430,26 @@ $P(X = k) = \\binom{n}{k} p^k (1 - p)^{n - k}$ — **probability mass function (
 }
 
 
+ const binomialExplanations = {
+
+  "How to use": "1. Select the probability type you want to calculate (all values or specific query)\n2. Enter n (number of trials) - must be a positive integer\n3. Enter p (probability of success) - must be between 0 and 1\n4. If using a specific query, enter k (target number of successes)\n5. Click Calculate to see results",
+  
+  "Parameters": "• n (number of trials): Total number of independent experiments you perform\n• p (success probability): The probability that a single trial results in success (between 0 and 1)\n• k (number of successes): The specific number of successful outcomes you're interested in",
+  
+  
+  "Query types": "• P(X = k): Probability of exactly k successes\n• P(X < k): Probability of fewer than k successes\n• P(X ≤ k): Probability of k or fewer successes\n• P(X > k): Probability of more than k successes\n• P(X ≥ k): Probability of k or more successes",
+  
+  "Examples": "Coin flips: Flip a coin 10 times (n=10), with p=0.5 for heads. Find P(X=6) for exactly 6 heads.\n\nQuality control: Test 20 items (n=20), defect rate p=0.1. Find P(X≤2) for at most 2 defects.\n\nFree throws: Player takes 15 shots (n=15), makes 70% (p=0.7). Find P(X≥10) for at least 10 makes.",
+  
+  "Interpretation": "• Mean (μ): The expected number of successes - where the distribution centers\n• Variance (σ²): How spread out the results are - higher means more variability\n• Std Dev (σ): Average distance from the mean - easier to interpret than variance\n• Chart: Shows probability distribution - taller bars are more likely outcomes"
+};
 
 
    return {
       props:{
          sectionsContent,
          introContent,
+         binomialExplanations,
           seoData: {
         title: "Discrete Binomial Distribution | Learn Math Class",
         description: "Metadescription",
@@ -441,7 +462,7 @@ $P(X = k) = \\binom{n}{k} p^k (1 - p)^{n - k}$ — **probability mass function (
     }
    }
 
-export default function BinomialDistributionPage({seoData,sectionsContent , introContent}) {
+export default function BinomialDistributionPage({seoData,sectionsContent , introContent,binomialExplanations}) {
 
     
   const genericSections=[
@@ -563,14 +584,20 @@ export default function BinomialDistributionPage({seoData,sectionsContent , intr
           sectionsContent.obj11.content,
         ]
     },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
+    {
+        id:'12',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+          <CalculatorInstructions key={'explanations'} explanations={binomialExplanations}/>,
+          <div key={'binomial-calculator'} style={{marginBottom:'-250px'}}>
+          <BinomialCalculator />,
+          </div>,
+          // sectionsContent.obj12.after,
+          sectionsContent.links.calculators,
+        ]
+    },
     // {
     //     id:'13',
     //     title:sectionsContent.obj13.title,

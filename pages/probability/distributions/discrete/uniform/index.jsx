@@ -11,7 +11,8 @@ import Head from 'next/head'
 import { processContent } from '@/app/utils/contentProcessor'
 import DiscreteUniformDistribution from '@/app/components/visualizations/probability/discrete-distribution/DiscreteUniformDistributionPMF'
 import DiscreteUniformDistributionCDF from '@/app/components/visualizations/probability/discrete-distribution/CDFs/DiscreteUniformDistributionCDF'
-
+import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
+import DiscreteUniformCalculator from '@/app/components/calculators/probability/distributions/UniformDistributionCalculator'
 
 export async function getStaticProps(){
 
@@ -637,6 +638,10 @@ $P(X = k) = \\frac{1}{b - a + 1}, \\quad \\text{for } k = a, a+1, \\ldots, b$ �
         example:`
          @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Discrete Uniform Distribution](!/probability/distributions/discrete/uniform#11) →@
             `,
+
+                       calculators:`            
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Discrete Distributions Probability Calculators ](!/probability/calculators/discrete-distributions) →@
+        `,
       title:``,
       content:``,
       before:``,
@@ -656,6 +661,17 @@ $P(X = k) = \\frac{1}{b - a + 1}, \\quad \\text{for } k = a, a+1, \\ldots, b$ �
   `
 }
 
+const discreteUniformExplanations = {
+  "How to use": "1. Select probability type: 'All values' for full distribution, or choose a specific query\n2. Enter a (minimum value) - lowest possible value (integer)\n3. Enter b (maximum value) - highest possible value (integer, must be greater than a)\n4. For specific queries, enter x (target value) - the specific value you want to query\n5. Click Calculate to see probabilities and distribution",
+  
+  "Parameters": "• a (minimum): Lowest value in the range (integer)\n• b (maximum): Highest value in the range (integer, b > a)\n• x (target value): Specific value to query (must be between a and b)\n• n (count): Total number of possible values = b - a + 1",
+  
+  "Query types": "• P(X = x): Probability of getting exactly value x (always 1/n)\n• P(X < x): Probability of getting value less than x\n• P(X ≤ x): Probability of getting value less than or equal to x\n• P(X > x): Probability of getting value greater than x\n• P(X ≥ x): Probability of getting value greater than or equal to x",
+  
+  "Examples": "Fair die: Enter a=1, b=6 to model standard die. Select P(X=4) and enter x=4 to find probability of rolling a 4 (result: 1/6).\n\nRandom selection: Choosing from items numbered 10 to 20, enter a=10, b=20. Select 'All values' to see each number has equal 1/11 probability.\n\nLottery ticket: Numbers 1-50, enter a=1, b=50. Select P(X≤25) and enter x=25 to find probability of number 25 or less (result: 0.5).",
+  
+  "Interpretation": "• Mean (μ = (a+b)/2): Average value, exactly in the middle of range\n• Variance (σ² = (n²-1)/12): Spread of values\n• Probability (1/n): Each value has exactly equal probability\n• Chart: All bars have equal height - uniform distribution"
+};
 
 
 
@@ -663,6 +679,7 @@ $P(X = k) = \\frac{1}{b - a + 1}, \\quad \\text{for } k = a, a+1, \\ldots, b$ �
       props:{
          sectionsContent,
          introContent,
+         discreteUniformExplanations,
           seoData: {
         title: "Discrete Uniform Distribution | Learn Math Class",
         description: "Metadescription",
@@ -675,7 +692,9 @@ $P(X = k) = \\frac{1}{b - a + 1}, \\quad \\text{for } k = a, a+1, \\ldots, b$ �
     }
    }
 
-export default function DiscreteUniformDistributionPage({seoData,sectionsContent , introContent}) {
+export default function DiscreteUniformDistributionPage({seoData,sectionsContent , introContent,
+  discreteUniformExplanations,
+}) {
 
     
   const genericSections=[
@@ -800,14 +819,20 @@ export default function DiscreteUniformDistributionPage({seoData,sectionsContent
           sectionsContent.obj11.content,
         ]
     },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
+    {
+        id:'12',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+           sectionsContent.obj12.content,
+                    <CalculatorInstructions key={'explanations'} explanations={discreteUniformExplanations}/>,
+                    <div key={'binomial-calculator'} style={{marginBottom:'-250px'}}>
+                    <DiscreteUniformCalculator />,
+                    </div>,
+                    // sectionsContent.obj12.after,
+                    sectionsContent.links.calculators,
+        ]
+    },
     // {
     //     id:'13',
     //     title:sectionsContent.obj13.title,

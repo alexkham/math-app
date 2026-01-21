@@ -12,6 +12,8 @@ import { processContent } from '@/app/utils/contentProcessor'
 import GeometricDistribution from '@/app/components/visualizations/probability/discrete-distribution/GeometricDistributionPMF'
 import { transform } from 'typescript'
 import GeometricDistributionCDF from '@/app/components/visualizations/probability/discrete-distribution/CDFs/GeometricDistributionCDF'
+import GeometricDistributionCalculator from '@/app/components/calculators/probability/distributions/GeometricDistributionCalculator'
+import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
 
 
 export async function getStaticProps(){
@@ -534,6 +536,9 @@ $P(X = k) = (1 - p)^{k - 1} p, \\quad \\text{for } k = 1, 2, 3, \\ldots$ — **p
         example:`
          @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Geometric Distribution](!/probability/distributions/discrete/geometric#11) →@
             `,
+               calculators:`            
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Discrete Distributions Probability Calculators ](!/probability/calculators/discrete-distributions) →@
+        `,
       title:``,
       content:``,
       before:``,
@@ -554,12 +559,26 @@ $P(X = k) = (1 - p)^{k - 1} p, \\quad \\text{for } k = 1, 2, 3, \\ldots$ — **p
 }
 
 
+const geometricExplanations = {
+  "How to use": "1. Select probability type: 'All values' shows full distribution, or choose a specific query like P(X=k) or P(X≤k)\n2. Enter p (success probability) - must be between 0 and 1, cannot be 0\n3. For specific queries, enter k (trial number) - must be a positive integer\n4. Click Calculate to see results including mean, variance, and probability distribution",
+  
+  "Parameters": "• p (success probability): Probability of success on each trial (0 < p ≤ 1)\n• k (number of trials): Which trial you're interested in - must be at least 1\n• q (failure probability): Equals 1 - p, probability of failure on each trial",
+  
+  "Query types": "• P(X = k): Probability that first success occurs on exactly trial k\n• P(X < k): Probability that first success occurs before trial k\n• P(X ≤ k): Probability that first success occurs on or before trial k\n• P(X > k): Probability that first success occurs after trial k\n• P(X ≥ k): Probability that first success occurs on or after trial k",
+  
+  "Examples": "Sales calls: If conversion rate is 0.2 (p=0.2), enter p=0.2 and select 'All values' to see distribution of trials until first sale.\n\nQuality testing: With 10% defect rate (p=0.1), select P(X≤5) and enter k=5 to find probability of finding first defect within 5 items.\n\nJob applications: With 30% interview rate (p=0.3), select P(X=3) and enter k=3 to find probability of getting first interview on exactly the 3rd application.",
+  
+  "Interpretation": "• Mean (μ = 1/p): Expected number of trials until first success\n• Variance (σ² = (1-p)/p²): Variability in number of trials needed\n• Std Dev (σ): Typical deviation from expected trials\n• Chart: Shows how probability decreases as trial number increases - first few trials most likely"
+};
+
+
 
 
    return {
       props:{
          sectionsContent,
          introContent,
+         geometricExplanations,
           seoData: {
         title: "Discrete Geometric Distribution | Learn Math Class",
         description: "Metadescription",
@@ -572,7 +591,7 @@ $P(X = k) = (1 - p)^{k - 1} p, \\quad \\text{for } k = 1, 2, 3, \\ldots$ — **p
     }
    }
 
-export default function GeometricDistributionPage({seoData,sectionsContent , introContent}) {
+export default function GeometricDistributionPage({seoData,sectionsContent , introContent,geometricExplanations}) {
 
     
   const genericSections=[
@@ -696,14 +715,19 @@ export default function GeometricDistributionPage({seoData,sectionsContent , int
           sectionsContent.obj11.content,
         ]
     },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
+    {
+        id:'12',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+          <CalculatorInstructions key={'instructions'} explanations={geometricExplanations}/>,
+          <div style={{marginBottom:'-250px'}}>
+          <GeometricDistributionCalculator/>
+          </div>,
+          sectionsContent.links.calculators,
+        ]
+    },
     // {
     //     id:'13',
     //     title:sectionsContent.obj13.title,

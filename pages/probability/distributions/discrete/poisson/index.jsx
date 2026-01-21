@@ -11,7 +11,8 @@ import Head from 'next/head'
 import { processContent } from '@/app/utils/contentProcessor'
 import PoissonDistribution from '@/app/components/visualizations/probability/discrete-distribution/PoissonDistributionPMF'
 import PoissonDistributionCDF from '@/app/components/visualizations/probability/discrete-distribution/CDFs/PoissonDistributionCDF'
-
+import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
+import PoissonCalculator from '@/app/components/calculators/probability/distributions/PoissonDistributionCalculator'
 
 export async function getStaticProps(){
 
@@ -541,6 +542,9 @@ $P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}, \\quad \\text{for } k = 0, 1, 
         example:`
          @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Poisson Distribution](!/probability/distributions/discrete/poisson#11) →@
             `,
+               calculators:`            
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Discrete Distributions Probability Calculators ](!/probability/calculators/discrete-distributions) →@
+        `,
       title:``,
       content:``,
       before:``,
@@ -559,13 +563,24 @@ $P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}, \\quad \\text{for } k = 0, 1, 
   `
 }
 
-
+const poissonExplanations = {
+  "How to use": "1. Select probability type: 'All values' for full distribution, or choose a specific query\n2. Enter λ (lambda - average rate) - average number of events per time/space interval\n3. For specific queries, enter k (number of events) - the target event count\n4. Click Calculate to see probabilities and distribution",
+  
+  "Parameters": "• λ (lambda): Average number of events per interval (must be positive)\n• k (number of events): Specific count of events you're querying (non-negative integer)\n• λ also equals both the mean and variance of the distribution",
+  
+  "Query types": "• P(X = k): Probability of exactly k events occurring\n• P(X < k): Probability of fewer than k events occurring\n• P(X ≤ k): Probability of k or fewer events occurring\n• P(X > k): Probability of more than k events occurring\n• P(X ≥ k): Probability of k or more events occurring",
+  
+  "Examples": "Customer service: Average 4 calls per hour (λ=4). Select P(X=5) and enter k=5 to find probability of exactly 5 calls in next hour.\n\nWebsite traffic: Average 12 visits per minute (λ=12). Select P(X≤8) and enter k=8 to find probability of at most 8 visits in next minute.\n\nDefect rate: Average 2 defects per batch (λ=2). Select 'All values' to see full distribution of defects per batch.",
+  
+  "Interpretation": "• Mean (μ = λ): Expected number of events per interval\n• Variance (σ² = λ): Variability equals the mean for Poisson distribution\n• Std Dev (σ = √λ): Typical deviation from expected event count\n• Chart: Shows probability distribution - shape becomes more symmetric as λ increases"
+};
 
 
    return {
       props:{
          sectionsContent,
          introContent,
+         poissonExplanations,
           seoData: {
         title: "Poisson Distribution | Learn Math Class",
         description: "Metadescription",
@@ -578,7 +593,9 @@ $P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}, \\quad \\text{for } k = 0, 1, 
     }
    }
 
-export default function PoissonDistributionPage({seoData,sectionsContent , introContent}) {
+export default function PoissonDistributionPage({seoData,sectionsContent , introContent,
+  poissonExplanations,
+}) {
 
     
   const genericSections=[
@@ -701,14 +718,20 @@ export default function PoissonDistributionPage({seoData,sectionsContent , intro
           sectionsContent.obj11.content,
         ]
     },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
+    {
+        id:'12',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+           sectionsContent.obj12.content,
+                    <CalculatorInstructions key={'explanations'} explanations={poissonExplanations}/>,
+                    <div key={'binomial-calculator'} style={{marginBottom:'-350px'}}>
+                    <PoissonCalculator />,
+                    </div>,
+                    // sectionsContent.obj12.after,
+                    sectionsContent.links.calculators,
+        ]
+    },
     // {
     //     id:'13',
     //     title:sectionsContent.obj13.title,

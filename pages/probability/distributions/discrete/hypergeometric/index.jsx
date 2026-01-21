@@ -11,7 +11,8 @@ import Head from 'next/head'
 import { processContent } from '@/app/utils/contentProcessor'
 import HypergeometricDistribution from '@/app/components/visualizations/probability/discrete-distribution/HypergeometricDistributionPMF'
 import HypergeometricDistributionCDF from '@/app/components/visualizations/probability/discrete-distribution/CDFs/HypergeometricDistributionCDF'
-
+import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
+import HypergeometricCalculator from '@/app/components/calculators/probability/distributions/HypergeometricDistributionCalculator'
 
 export async function getStaticProps(){
 
@@ -542,6 +543,9 @@ $P(X = k) = \\frac{\\binom{K}{k} \\binom{N - K}{n - k}}{\\binom{N}{n}}, \\quad \
         example:`
          @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Hypergeometric Distribution](!/probability/distributions/discrete/hypergeometric#11) →@
             `,
+               calculators:`            
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Discrete Distributions Probability Calculators ](!/probability/calculators/discrete-distributions) →@
+        `,
       title:``,
       content:``,
       before:``,
@@ -561,6 +565,18 @@ $P(X = k) = \\frac{\\binom{K}{k} \\binom{N - K}{n - k}}{\\binom{N}{n}}, \\quad \
   `
 }
 
+const hypergeometricExplanations = {
+  "How to use": "1. Select probability type: 'All values' for full distribution, or choose a specific query like P(X=k) or P(X≤k)\n2. Enter N (population size) - total items available\n3. Enter K (success states) - how many items in population are 'successes'\n4. Enter n (sample size) - how many items you're drawing\n5. For specific queries, enter k (target successes in your sample)\n6. Click Calculate to see probabilities and distribution",
+  
+  "Parameters": "• N (population size): Total number of items in the population\n• K (success states): Number of 'success' items in the population\n• n (sample size): Number of items you draw from the population\n• k (successes in sample): Number of successes you want in your sample\n• K must be ≤ N, and n must be ≤ N",
+  
+  "Query types": "• P(X = k): Probability of getting exactly k successes in your sample\n• P(X < k): Probability of getting fewer than k successes\n• P(X ≤ k): Probability of getting k or fewer successes\n• P(X > k): Probability of getting more than k successes\n• P(X ≥ k): Probability of getting k or more successes",
+  
+  "Examples": "Card drawing: Draw 5 cards from 52-card deck. To find probability of exactly 3 hearts, enter N=52, K=13 (hearts in deck), n=5 (cards drawn), select P(X=3), enter k=3.\n\nQuality control: Batch of 100 items has 15 defects. Drawing sample of 10, to find probability of at most 2 defects, enter N=100, K=15, n=10, select P(X≤2), enter k=2.\n\nLottery: 50 tickets total, 5 are winners. Buying 8 tickets, to find probability of at least 1 winner, enter N=50, K=5, n=8, select P(X≥1), enter k=1.",
+  
+  "Interpretation": "• Mean (μ = n·K/N): Expected number of successes in your sample\n• Variance: Measure of spread, affected by population and sample sizes\n• Std Dev: Typical variation from expected successes\n• Chart: Shows probability distribution - sampling without replacement means finite range of possible outcomes"
+};
+
 
 
 
@@ -568,6 +584,7 @@ $P(X = k) = \\frac{\\binom{K}{k} \\binom{N - K}{n - k}}{\\binom{N}{n}}, \\quad \
       props:{
          sectionsContent,
          introContent,
+         hypergeometricExplanations,
           seoData: {
         title: "Discrete Hypergeometric Distribution | Learn Math Class",
         description: "Metadescription",
@@ -580,7 +597,9 @@ $P(X = k) = \\frac{\\binom{K}{k} \\binom{N - K}{n - k}}{\\binom{N}{n}}, \\quad \
     }
    }
 
-export default function HypergeometricDistributionPage({seoData,sectionsContent , introContent}) {
+export default function HypergeometricDistributionPage({seoData,sectionsContent , introContent,
+  hypergeometricExplanations
+}) {
 
     
   const genericSections=[
@@ -702,14 +721,20 @@ export default function HypergeometricDistributionPage({seoData,sectionsContent 
           sectionsContent.obj11.content,
         ]
     },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
+    {
+        id:'12',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+           sectionsContent.obj12.content,
+                    <CalculatorInstructions key={'explanations'} explanations={hypergeometricExplanations}/>,
+                    <div key={'binomial-calculator'} style={{marginBottom:'-150px'}}>
+                    <HypergeometricCalculator />,
+                    </div>,
+                    // sectionsContent.obj12.after,
+                    sectionsContent.links.calculators,
+        ]
+    },
     // {
     //     id:'13',
     //     title:sectionsContent.obj13.title,
