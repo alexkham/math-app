@@ -731,7 +731,7 @@ export default function HypergeometricDistributionPage({seoData,sectionsContent 
         content:[
            sectionsContent.obj12.content,
                     <CalculatorInstructions key={'explanations'} explanations={hypergeometricExplanations}/>,
-                    <div key={'binomial-calculator'} style={{marginBottom:'-150px'}}>
+                    <div key={'calculator'} style={{marginBottom:'-150px'}}>
                     <HypergeometricCalculator />,
                     </div>,
                     // sectionsContent.obj12.after,

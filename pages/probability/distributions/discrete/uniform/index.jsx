@@ -829,7 +829,7 @@ export default function DiscreteUniformDistributionPage({seoData,sectionsContent
         content:[
            sectionsContent.obj12.content,
                     <CalculatorInstructions key={'explanations'} explanations={discreteUniformExplanations}/>,
-                    <div key={'binomial-calculator'} style={{marginBottom:'-250px'}}>
+                    <div key={'calculator'} style={{marginBottom:'-250px'}}>
                     <DiscreteUniformCalculator />,
                     </div>,
                     // sectionsContent.obj12.after,

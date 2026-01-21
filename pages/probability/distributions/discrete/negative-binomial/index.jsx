@@ -730,7 +730,7 @@ export default function NegativeBinomialDistributionPage({seoData,sectionsConten
         content:[
            sectionsContent.obj12.content,
                     <CalculatorInstructions key={'explanations'} explanations={negativeBinomialExplanations}/>,
-                    <div key={'binomial-calculator'} style={{marginBottom:'-250px'}}>
+                    <div key={'calculator'} style={{marginBottom:'-250px'}}>
                     <NegativeBinomialCalculator />,
                     </div>,
                     // sectionsContent.obj12.after,

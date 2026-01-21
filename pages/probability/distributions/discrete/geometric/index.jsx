@@ -725,7 +725,7 @@ export default function GeometricDistributionPage({seoData,sectionsContent , int
         content:[
           sectionsContent.obj12.content,
           <CalculatorInstructions key={'instructions'} explanations={geometricExplanations}/>,
-          <div style={{marginBottom:'-250px'}}>
+          <div  key={'calculator'} style={{marginBottom:'-250px'}}>
           <GeometricDistributionCalculator/>
           </div>,
           sectionsContent.links.calculators,

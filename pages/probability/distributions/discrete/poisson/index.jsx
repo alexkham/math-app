@@ -728,7 +728,7 @@ export default function PoissonDistributionPage({seoData,sectionsContent , intro
         content:[
            sectionsContent.obj12.content,
                     <CalculatorInstructions key={'explanations'} explanations={poissonExplanations}/>,
-                    <div key={'binomial-calculator'} style={{marginBottom:'-350px'}}>
+                    <div key={'calculator'} style={{marginBottom:'-350px'}}>
                     <PoissonCalculator />,
                     </div>,
                     // sectionsContent.obj12.after,
