@@ -25,6 +25,7 @@ export async function getStaticProps(){
   'expected value of a sum',
   'linearity of expectation'
 ];
+
  const generalTable=`
  <table style="border-collapse: collapse; margin: 20px auto; font-family: Arial, sans-serif; font-size: 16px;">
   <thead>

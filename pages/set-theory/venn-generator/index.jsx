@@ -27,10 +27,9 @@ const StandardContainer = ({ children }) => (
 export default function VennDiagramGeneratorPage() {
   return (
    <>
-   <GenericNavbar/>
+   {/* <GenericNavbar/>
+   */}
   
-   <br/>
-   <br/>
    <br/>
    <br/>
    <OperaSidebar
@@ -54,7 +53,7 @@ export default function VennDiagramGeneratorPage() {
    {/* </StandardContainer> */}
    
    {/* </div> */}
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
   
    </>
   )
