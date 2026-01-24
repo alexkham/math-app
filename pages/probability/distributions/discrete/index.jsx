@@ -1256,20 +1256,26 @@ The **support** — the set of values where outcomes can occur — is always cou
 
 Every **discrete probability distribution** is characterized by the following **common attributes**:
 
-* **Parameters**
+• **Parameters**
   Quantities that define the distribution and determine its behavior, such as the number of trials, success probability, or event rate.
 
-* [Probability Mass Function and Support](!/probability/probability-function)
+• [Probability Mass Function and Support](!/probability/probability-function)
   A rule that assigns probability to each possible outcome, together with the set of discrete values for which those probabilities are non-zero.
 
-* [Cumulative Distribution Function (CDF)](!/probability/cdf)
+• [Cumulative Distribution Function (CDF)](!/probability/cdf)
   A function that accumulates probability across outcomes up to a given value.
 
-* [Expected Value (Mean)](!/probability/expected-value)
+• [Expected Value (Mean)](!/probability/expected-value)
   A numerical summary representing the long-run average outcome of the distribution.
 
-* [Variance and Standard Deviation](!/probability/variance)
+• [Variance and Standard Deviation](!/probability/variance)
   Measures that describe how spread out the possible outcomes are around the mean.
+
+•[Mode](!/probability/mode)
+The [mode](!/probability/mode) tells you where probability concentrates most heavily. Look at the PMF values—the mode is simply the outcome with the tallest bar. Sometimes one value dominates, sometimes several tie for the top, and occasionally everything sits at equal height with no clear winner.
+
+•[Median](!/probability/median)
+The [median](!/probability/median) splits the distribution's total probability in half. Start from zero and accumulate probability mass by summing the PMF—the median is where you cross the 50% threshold. Because discrete values jump rather than flow smoothly, you might hit exactly 0.5 or land somewhere between valid outcomes, creating ambiguity absent in continuous settings.  
 
 Although discrete distributions vary significantly in their interpretation and behavior, they all possess this same set of attributes. This common structure allows different distributions to be analyzed, compared, and applied using a unified probabilistic language.
 
@@ -1310,6 +1316,97 @@ Not all discrete distributions possess these properties, and no single distribut
       after:``,
   
     },
+
+    mode: {
+  title: `Mode`,
+  content: `
+The **mode** of a discrete distribution is the value (or values) where the [PMF](!/probability/probability-function/pmf) reaches its maximum. It identifies the most probable outcome—the value most likely to appear in a single draw from the distribution.
+
+## Finding the Mode
+
+Unlike [expected value](!/probability/expected-value) or [variance](!/probability/variance), there is no universal formula for the mode. You find it by direct comparison:
+
+1. Evaluate $P(X = k)$ across all values in the support
+2. Identify which $k$ produces the largest probability
+3. If multiple values tie for maximum probability, all are modes
+
+## Distribution-Specific Results
+
+Some distributions have analytical expressions for their mode:
+
+**Binomial:** The mode is $\\lfloor (n+1)p \\rfloor$ when $(n+1)p$ is not an integer. When $(n+1)p$ is an integer, both $(n+1)p - 1$ and $(n+1)p$ are modes.
+
+**Geometric:** The mode is always 1 (the first trial is most likely to succeed).
+
+**Poisson:** The mode is $\\lfloor \\lambda \\rfloor$ when $\\lambda$ is not an integer. When $\\lambda$ is an integer, both $\\lambda - 1$ and $\\lambda$ are modes.
+
+**Discrete Uniform:** All values in the support are modes (every outcome equally likely).
+
+## Characteristics
+
+- **Unimodal:** One clear maximum (most common case)
+- **Bimodal:** Two values tied for maximum probability
+- **Multimodal:** Three or more values sharing the maximum
+- **No mode:** All probabilities equal (like discrete uniform)
+
+The mode provides intuition about where probability concentrates, but unlike the mean, it doesn't account for the distribution's overall shape or spread.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
+
+median: {
+  title: `Median`,
+  content: `
+The **median** of a discrete distribution is the value that divides the probability mass in half. It marks the center point where cumulative probability reaches or crosses 50%.
+
+## Finding the Median
+
+There is no closed-form formula applicable to all discrete distributions. Instead, find the median through the [CDF](!/probability/cdf):
+
+1. Compute $F(k) = P(X \\leq k)$ for values in the support
+2. Find the smallest $k$ such that $F(k) \\geq 0.5$
+3. Verify that $P(X \\geq k) \\geq 0.5$ also holds
+
+The median $m$ satisfies:
+
+$$P(X \\leq m) \\geq 0.5 \\quad \\text{and} \\quad P(X \\geq m) \\geq 0.5$$
+
+## Distribution-Specific Results
+
+Some distributions allow analytical solutions:
+
+**Geometric:** The median is $\\lceil \\frac{-\\ln(2)}{\\ln(1-p)} \\rceil$
+
+**Binomial:** No simple formula; typically requires numerical computation or tables
+
+**Poisson:** Approximately $\\lambda + \\frac{1}{3} - \\frac{0.02}{\\lambda}$ for large $\\lambda$; otherwise compute numerically
+
+**Discrete Uniform on** $\\{a, a+1, \\ldots, b\\}$: The median is $\\frac{a+b}{2}$ when $b-a$ is even; when odd, any value between $\\frac{a+b-1}{2}$ and $\\frac{a+b+1}{2}$ qualifies
+
+## Discrete vs Continuous
+
+Unlike continuous distributions where the median is the unique point where $F(m) = 0.5$, discrete distributions present complications:
+
+• Probability mass concentrates at isolated points
+• The CDF jumps rather than rising smoothly
+• Multiple adjacent values may satisfy the median criterion
+• Some distributions have intervals of valid medians rather than a single value
+
+## Median vs Mean
+
+The median measures central tendency differently than the [expected value](!/probability/expected-value):
+
+• **Median:** Splits probability in half; robust to extreme values
+• **Mean:** Weighted average of all outcomes; sensitive to tail behavior
+
+For symmetric distributions, median and mean coincide. For skewed distributions, they diverge—the mean shifts toward the tail while the median stays near the probability center.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     general:{
   
       title:``,
@@ -1372,66 +1469,153 @@ Not all discrete distributions possess these properties, and no single distribut
   ]
 };
 
+// const discreteDistributionsAttributesData = {
+//   tableTitle: 'Common Attributes of Discrete Distributions',
+//   rows: [
+//     {
+//       distribution: '[Discrete Uniform](!/probability/distributions/discrete#uniform)',
+//       parameters: '$a$ = minimum value, $b$ = maximum value (integers)',
+//       support: '$\\{a,a+1,\\dots,b\\}$',
+//       pmf: '$P(X=k)$\n$=\\frac{1}{b-a+1}$',
+//       cdf: '$F(k)=\\frac{k-a+1}{b-a+1}\\; (a\\le k\\le b)$',
+//       expectedValue: '$E[X]=\\frac{a+b}{2}$',
+//       variance: '$\\mathrm{Var}(X)=\\frac{(b-a+1)^2-1}{12}$'
+//     },
+//     {
+//       distribution: '[Binomial](!/probability/distributions/discrete#binomial)',
+//       parameters: '$n$ = number of trials, $p$ = success probability per trial',
+//       support: '$\\{0,1,\\dots,n\\}$',
+//       pmf: '$P(X=k)=\\binom{n}{k}p^k(1-p)^{n-k}$',
+//       cdf: '$F(k)=\\sum_{i=0}^{k}\\binom{n}{i}p^i(1-p)^{n-i}$',
+//       expectedValue: '$E[X]=np$',
+//       variance: '$\\mathrm{Var}(X)=np(1-p)$'
+//     },
+//     {
+//       distribution: '[Geometric](!/probability/distributions/discrete#geometric)',
+//       parameters: '$p$ = success probability per trial',
+//       support: '$\\{1,2,3,\\dots\\}$',
+//       pmf: '$P(X=k)=(1-p)^{k-1}p$',
+//       cdf: '$F(k)=1-(1-p)^k$',
+//       expectedValue: '$E[X]=\\frac{1}{p}$',
+//       variance: '$\\mathrm{Var}(X)=\\frac{1-p}{p^2}$'
+//     },
+//     {
+//       distribution: '[Negative Binomial](!/probability/distributions/discrete#negative_binomial)',
+//       parameters: '$r$ = number of successes, $p$ = success probability',
+//       support: '$\\{r,r+1,\\dots\\}$',
+//       pmf: '$P(X=k)=\\binom{k-1}{r-1}p^r(1-p)^{k-r}$',
+//       cdf: '$F(k)=\\sum_{i=r}^{k}\\binom{i-1}{r-1}p^r(1-p)^{i-r}$',
+//       expectedValue: '$E[X]=\\frac{r}{p}$',
+//       variance: '$\\mathrm{Var}(X)=\\frac{r(1-p)}{p^2}$'
+//     },
+//     {
+//       distribution: '[Hypergeometric](!/probability/distributions/discrete#hypergeometric)',
+//       parameters: '$N$ = population size, $K$ = successes in population, $n$ = draws',
+//       support: '$\\max(0,n-N+K)\\le k\\le \\min(n,K)$',
+//       pmf: '$P(X=k)=\\frac{\\binom{K}{k}\\binom{N-K}{n-k}}{\\binom{N}{n}}$',
+//       cdf: '$F(k)=\\sum_{i=\\max(0,n-N+K)}^{k}\\frac{\\binom{K}{i}\\binom{N-K}{n-i}}{\\binom{N}{n}}$',
+//       expectedValue: '$E[X]=n\\frac{K}{N}$',
+//       variance: '$\\mathrm{Var}(X)=n\\frac{K}{N}\\left(1-\\frac{K}{N}\\right)\\frac{N-n}{N-1}$'
+//     },
+//     {
+//       distribution: '[Poisson](!/probability/distributions/discrete#poisson)',
+//       parameters: '$\\lambda$ = average event rate',
+//       support: '$\\{0,1,2,\\dots\\}$',
+//       pmf: '$P(X=k)=\\frac{\\lambda^k e^{-\\lambda}}{k!}$',
+//       cdf: '$F(k)=\\sum_{i=0}^{k}\\frac{\\lambda^i e^{-\\lambda}}{i!}$',
+//       expectedValue: '$E[X]=\\lambda$',
+//       variance: '$\\mathrm{Var}(X)=\\lambda$'
+//     }
+//   ]
+// };
+
+
 const discreteDistributionsAttributesData = {
   tableTitle: 'Common Attributes of Discrete Distributions',
   rows: [
+    // {
+    //   attribute: 'Distribution',
+    //   discreteUniform: '[Discrete Uniform](!/probability/distributions/discrete#uniform)',
+    //   binomial: '[Binomial](!/probability/distributions/discrete#binomial)',
+    //   geometric: '[Geometric](!/probability/distributions/discrete#geometric)',
+    //   negativeBinomial: '[Negative Binomial](!/probability/distributions/discrete#negative_binomial)',
+    //   hypergeometric: '[Hypergeometric](!/probability/distributions/discrete#hypergeometric)',
+    //   poisson: '[Poisson](!/probability/distributions/discrete#poisson)'
+    // },
     {
-      distribution: '[Discrete Uniform](!/probability/distributions/discrete#uniform)',
-      parameters: '$a$ = minimum value, $b$ = maximum value (integers)',
-      support: '$\\{a,a+1,\\dots,b\\}$',
-      pmf: '$P(X=k)$\n$=\\frac{1}{b-a+1}$',
-      cdf: '$F(k)=\\frac{k-a+1}{b-a+1}\\; (a\\le k\\le b)$',
-      expectedValue: '$E[X]=\\frac{a+b}{2}$',
-      variance: '$\\mathrm{Var}(X)=\\frac{(b-a+1)^2-1}{12}$'
+      attribute: 'Parameters',
+      discreteUniform: '$a$ = minimum value, $b$ = maximum value (integers)',
+      binomial: '$n$ = number of trials, $p$ = success probability per trial',
+      geometric: '$p$ = success probability per trial',
+      negativeBinomial: '$r$ = number of successes, $p$ = success probability',
+      hypergeometric: '$N$ = population size, $K$ = successes in population, $n$ = draws',
+      poisson: '$\\lambda$ = average event rate'
     },
     {
-      distribution: '[Binomial](!/probability/distributions/discrete#binomial)',
-      parameters: '$n$ = number of trials, $p$ = success probability per trial',
-      support: '$\\{0,1,\\dots,n\\}$',
-      pmf: '$P(X=k)=\\binom{n}{k}p^k(1-p)^{n-k}$',
-      cdf: '$F(k)=\\sum_{i=0}^{k}\\binom{n}{i}p^i(1-p)^{n-i}$',
-      expectedValue: '$E[X]=np$',
-      variance: '$\\mathrm{Var}(X)=np(1-p)$'
+      attribute: 'Support',
+      discreteUniform: '$\\{a,a+1,\\dots,b\\}$',
+      binomial: '$\\{0,1,\\dots,n\\}$',
+      geometric: '$\\{1,2,3,\\dots\\}$',
+      negativeBinomial: '$\\{r,r+1,\\dots\\}$',
+      hypergeometric: '$\\{\\max(0,n-N+K),\\dots,\\min(n,K)\\}$',
+      poisson: '$\\{0,1,2,\\dots\\}$'
     },
     {
-      distribution: '[Geometric](!/probability/distributions/discrete#geometric)',
-      parameters: '$p$ = success probability per trial',
-      support: '$\\{1,2,3,\\dots\\}$',
-      pmf: '$P(X=k)=(1-p)^{k-1}p$',
-      cdf: '$F(k)=1-(1-p)^k$',
-      expectedValue: '$E[X]=\\frac{1}{p}$',
-      variance: '$\\mathrm{Var}(X)=\\frac{1-p}{p^2}$'
+      attribute: 'PMF',
+      discreteUniform: '$P(X=k)=\\frac{1}{b-a+1}$',
+      binomial: '$P(X=k)=\\binom{n}{k}p^k(1-p)^{n-k}$',
+      geometric: '$P(X=k)=(1-p)^{k-1}p$',
+      negativeBinomial: '$P(X=k)=\\binom{k-1}{r-1}p^r(1-p)^{k-r}$',
+      hypergeometric: '$P(X=k)=\\frac{\\binom{K}{k}\\binom{N-K}{n-k}}{\\binom{N}{n}}$',
+      poisson: '$P(X=k)=\\frac{\\lambda^k e^{-\\lambda}}{k!}$'
     },
     {
-      distribution: '[Negative Binomial](!/probability/distributions/discrete#negative_binomial)',
-      parameters: '$r$ = number of successes, $p$ = success probability',
-      support: '$\\{r,r+1,\\dots\\}$',
-      pmf: '$P(X=k)=\\binom{k-1}{r-1}p^r(1-p)^{k-r}$',
-      cdf: '$F(k)=\\sum_{i=r}^{k}\\binom{i-1}{r-1}p^r(1-p)^{i-r}$',
-      expectedValue: '$E[X]=\\frac{r}{p}$',
-      variance: '$\\mathrm{Var}(X)=\\frac{r(1-p)}{p^2}$'
+      attribute: 'CDF',
+      discreteUniform: '$F(k)=\\frac{k-a+1}{b-a+1}$ for $a\\le k\\le b$',
+      binomial: '$F(k)=\\sum_{i=0}^{k}\\binom{n}{i}p^i(1-p)^{n-i}$',
+      geometric: '$F(k)=1-(1-p)^k$',
+      negativeBinomial: '$F(k)=\\sum_{i=r}^{k}\\binom{i-1}{r-1}p^r(1-p)^{i-r}$',
+      hypergeometric: '$F(k)=\\sum_{i=\\max(0,n-N+K)}^{k}\\frac{\\binom{K}{i}\\binom{N-K}{n-i}}{\\binom{N}{n}}$',
+      poisson: '$F(k)=\\sum_{i=0}^{k}\\frac{\\lambda^i e^{-\\lambda}}{i!}$'
     },
     {
-      distribution: '[Hypergeometric](!/probability/distributions/discrete#hypergeometric)',
-      parameters: '$N$ = population size, $K$ = successes in population, $n$ = draws',
-      support: '$\\max(0,n-N+K)\\le k\\le \\min(n,K)$',
-      pmf: '$P(X=k)=\\frac{\\binom{K}{k}\\binom{N-K}{n-k}}{\\binom{N}{n}}$',
-      cdf: '$F(k)=\\sum_{i=\\max(0,n-N+K)}^{k}\\frac{\\binom{K}{i}\\binom{N-K}{n-i}}{\\binom{N}{n}}$',
-      expectedValue: '$E[X]=n\\frac{K}{N}$',
-      variance: '$\\mathrm{Var}(X)=n\\frac{K}{N}\\left(1-\\frac{K}{N}\\right)\\frac{N-n}{N-1}$'
+      attribute: 'Expected Value',
+      discreteUniform: '$E[X]=\\frac{a+b}{2}$',
+      binomial: '$E[X]=np$',
+      geometric: '$E[X]=\\frac{1}{p}$',
+      negativeBinomial: '$E[X]=\\frac{r}{p}$',
+      hypergeometric: '$E[X]=n\\frac{K}{N}$',
+      poisson: '$E[X]=\\lambda$'
     },
     {
-      distribution: '[Poisson](!/probability/distributions/discrete#poisson)',
-      parameters: '$\\lambda$ = average event rate',
-      support: '$\\{0,1,2,\\dots\\}$',
-      pmf: '$P(X=k)=\\frac{\\lambda^k e^{-\\lambda}}{k!}$',
-      cdf: '$F(k)=\\sum_{i=0}^{k}\\frac{\\lambda^i e^{-\\lambda}}{i!}$',
-      expectedValue: '$E[X]=\\lambda$',
-      variance: '$\\mathrm{Var}(X)=\\lambda$'
+      attribute: 'Variance',
+      discreteUniform: '$\\mathrm{Var}(X)=\\frac{(b-a+1)^2-1}{12}$',
+      binomial: '$\\mathrm{Var}(X)=np(1-p)$',
+      geometric: '$\\mathrm{Var}(X)=\\frac{1-p}{p^2}$',
+      negativeBinomial: '$\\mathrm{Var}(X)=\\frac{r(1-p)}{p^2}$',
+      hypergeometric: '$\\mathrm{Var}(X)=n\\frac{K}{N}\\left(1-\\frac{K}{N}\\right)\\frac{N-n}{N-1}$',
+      poisson: '$\\mathrm{Var}(X)=\\lambda$'
+    },
+    {
+      attribute: 'Mode',
+      discreteUniform: 'All values in $\\{a,\\dots,b\\}$ (uniform)',
+      binomial: '$\\lfloor(n+1)p\\rfloor$ (bimodal if $(n+1)p$ is integer)',
+      geometric: '$1$ (always)',
+      negativeBinomial: '$\\lfloor\\frac{(r-1)(1-p)}{p}\\rfloor$ if $r>1$; otherwise $r$',
+      hypergeometric: '$\\lfloor\\frac{(n+1)(K+1)}{N+2}\\rfloor$ (approximation)',
+      poisson: '$\\lfloor\\lambda\\rfloor$ (bimodal if $\\lambda$ is integer)'
+    },
+    {
+      attribute: 'Median',
+      discreteUniform: '$\\frac{a+b}{2}$ (if $b-a$ even); any value in $\\{\\frac{a+b-1}{2},\\frac{a+b+1}{2}\\}$ (if odd)',
+      binomial: 'No closed form (numerical)',
+      geometric: '$\\lceil\\frac{-\\ln(2)}{\\ln(1-p)}\\rceil$',
+      negativeBinomial: 'No closed form (numerical)',
+      hypergeometric: 'No closed form (numerical)',
+      poisson: '$\\approx\\lambda+\\frac{1}{3}-\\frac{0.02}{\\lambda}$ (large $\\lambda$); otherwise numerical'
     }
   ]
 };
-
 
   const introContent = {
   id: "intro",
@@ -1747,7 +1931,22 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
           </div>
         ]
     },
-
+//      {
+//     id: 'mode',
+//     title: sectionsContent.mode.title,
+//     link: '',
+//     content: [
+//       sectionsContent.mode.content,
+//     ]
+// },
+// {
+//     id: 'median',
+//     title: sectionsContent.median.title,
+//     link: '',
+//     content: [
+//       sectionsContent.median.content,
+//     ]
+// },
      {
         id:'properties',
         title:sectionsContent.properties.title,

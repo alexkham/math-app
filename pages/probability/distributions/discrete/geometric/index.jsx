@@ -233,18 +233,18 @@ $$P(X = k) = (1-p)^{k-1} p, \\quad k = 1, 2, 3, \\ldots$$
 * **First Success**: The geometric distribution models the number of trials needed to get the first success in a sequence of independent Bernoulli trials.
 
 * **Support (Range of the Random Variable)**:
-  * The random variable $X$ can take on values $1, 2, 3, \\ldots$ (all positive integers).
-  * $X = k$ means the first success occurs on the $k$-th trial.
-  * The **support** is thus a countably infinite set.
+  • The random variable $X$ can take on values $1, 2, 3, \\ldots$ (all positive integers).
+  • $X = k$ means the first success occurs on the $k$-th trial.
+  • The **support** is thus a countably infinite set.
 
 * **Logic Behind the Formula**:
-  * $(1-p)^{k-1}$: The probability of getting $k-1$ failures before the first success
-  * $p$: The probability of success on the $k$-th trial
-  * The total probability sums to 1:
+  • $(1-p)^{k-1}$: The probability of getting $k-1$ failures before the first success
+  • $p$: The probability of success on the $k$-th trial
+  • The total probability sums to 1:
   
   $\\sum_{k=1}^{\\infty} P(X = k) = \\sum_{k=1}^{\\infty} (1-p)^{k-1} p = p \\sum_{k=1}^{\\infty} (1-p)^{k-1} = p \\cdot \\frac{1}{1-(1-p)} = p \\cdot \\frac{1}{p} = 1$
   
-  * This uses the geometric series formula: $\\sum_{k=0}^{\\infty} r^k = \\frac{1}{1-r}$ for $|r| < 1$
+  • This uses the geometric series formula: $\\sum_{k=0}^{\\infty} r^k = \\frac{1}{1-r}$ for $|r| < 1$
 
       `,
       before:``,
@@ -411,14 +411,74 @@ The variance of 30 and standard deviation of about 5.5 indicate substantial vari
   after: ``,
   link: '',
 },
-    obj8:{
-      title:`Mode and Median`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj8:{
+    //   title:`Mode and Median`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+    obj8: {
+  title: `Mode and Median`,
+  content: `
+### Mode
+
+The **mode** is the value of $k$ (number of trials until first success) with the highest probability—the peak of the [PMF](!/probability/probability-function/pmf).
+
+For the [geometric distribution](!/probability/distributions/discrete/geometric), the mode is always:
+
+$$\\text{Mode} = 1$$
+
+**Intuition:** The geometric PMF is $p_X(k) = (1-p)^{k-1}p$, which decreases monotonically. The probability is highest at the first trial and decreases exponentially with each subsequent trial. Since each additional trial multiplies the probability by $(1-p) < 1$, the maximum probability always occurs at $k = 1$.
+
+**Example:** For $p = 0.3$:
+• $P(X = 1) = 0.3$
+• $P(X = 2) = 0.7 \\times 0.3 = 0.21$
+• $P(X = 3) = 0.49 \\times 0.3 = 0.147$
+
+The mode is 1, representing that getting success on the first trial is always the most likely single outcome.
+
+This holds regardless of the value of $p$—whether success is rare ($p$ near 0) or common ($p$ near 1), the first trial is always most probable.
+
+### Median
+
+The **median** is the value $m$ such that $P(X \\leq m) \\geq 0.5$ and $P(X \\geq m) \\geq 0.5$.
+
+For the geometric distribution, the median can be found by solving:
+
+$$\\sum_{k=1}^{m} (1-p)^{k-1}p \\geq 0.5$$
+
+Using the [CDF](!/probability/cdf) $F(k) = 1 - (1-p)^k$, we solve:
+
+$$1 - (1-p)^m \\geq 0.5$$
+
+$$(1-p)^m \\leq 0.5$$
+
+$$m \\geq \\frac{\\ln(0.5)}{\\ln(1-p)} = \\frac{-\\ln(2)}{\\ln(1-p)}$$
+
+The median is:
+
+$$\\text{Median} = \\left\\lceil \\frac{-\\ln(2)}{\\ln(1-p)} \\right\\rceil$$
+
+**Example:** For $p = 0.5$:
+
+$$\\text{Median} = \\left\\lceil \\frac{-\\ln(2)}{\\ln(0.5)} \\right\\rceil = \\left\\lceil \\frac{0.693}{0.693} \\right\\rceil = 1$$
+
+**Example:** For $p = 0.3$:
+
+$$\\text{Median} = \\left\\lceil \\frac{-\\ln(2)}{\\ln(0.7)} \\right\\rceil = \\left\\lceil \\frac{0.693}{0.357} \\right\\rceil = \\lceil 1.94 \\rceil = 2$$
+
+**Properties:**
+• The median is always close to $\\frac{1}{p}$ (the [expected value](!/probability/expected-value))
+• For high $p$, median = mode = 1
+• For low $p$, median > mode, reflecting right skew
+• The geometric distribution is always right-skewed (median ≥ mode)
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj9:{
       title:`Moment Generating Function`,
       content:``,
@@ -686,14 +746,14 @@ export default function GeometricDistributionPage({seoData,sectionsContent , int
           sectionsContent.obj7.content,
         ]
     },
-    // {
-    //     id:'8',
-    //     title:sectionsContent.obj8.title,
-    //     link:sectionsContent.obj8.link,
-    //     content:[
-    //       sectionsContent.obj8.content,
-    //     ]
-    // },
+    {
+        id:'8',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
+        ]
+    },
     // {
     //     id:'9',
     //     title:sectionsContent.obj9.title,

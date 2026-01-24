@@ -279,14 +279,74 @@ The variance of 25 and standard deviation of 5 indicate that while we expect 50 
 },
 
 
-    obj8:{
-      title:`Mode and Median`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj8:{
+    //   title:`Mode and Median`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+    obj8: {
+  title: `Mode and Median`,
+  content: `
+### Mode
+
+The **mode** is the value of $k$ (number of successes) with the highest probability—the peak of the [PMF](!/probability/probability-function/pmf).
+
+For the binomial distribution, the mode depends on the product $np$:
+
+**If $(n+1)p$ is an integer:**
+The distribution has two modes: $(n+1)p - 1$ and $(n+1)p$
+
+**If $(n+1)p$ is not an integer:**
+The mode is $\\lfloor (n+1)p \\rfloor$ (the floor of $(n+1)p$)
+
+**Intuition:** The mode sits near the [expected value](!/probability/expected-value) $np$, representing the most likely number of successes. When $p = 0.5$, the distribution is symmetric and the mode equals the mean (for appropriate $n$). As $p$ moves toward 0 or 1, the mode shifts accordingly.
+
+**Example:** For $n = 10$ and $p = 0.3$:
+$(n+1)p = 11 \\times 0.3 = 3.3$
+
+Mode = $\\lfloor 3.3 \\rfloor = 3$
+
+Getting exactly 3 successes is more likely than any other outcome.
+
+**Example:** For $n = 9$ and $p = 0.5$:
+$(n+1)p = 10 \\times 0.5 = 5$ (integer)
+
+Modes = 4 and 5 (both equally likely)
+
+### Median
+
+The **median** is the value $m$ such that $P(X \\leq m) \\geq 0.5$ and $P(X \\geq m) \\geq 0.5$.
+
+For the binomial distribution, there is no simple closed-form expression for the median, but it can be found numerically by solving:
+
+$$\\sum_{k=0}^{m} \\binom{n}{k} p^k (1-p)^{n-k} \\geq 0.5$$
+
+**Properties of the median:**
+• The median is always within one unit of the mean $np$
+• For symmetric cases ($p = 0.5$), median = mode = mean
+• For skewed distributions, median lies between mean and mode
+
+**Example:** For $n = 10$ and $p = 0.5$:
+Mean = $10 \\times 0.5 = 5$
+
+The median is also 5 (by symmetry)
+
+**Example:** For $n = 10$ and $p = 0.3$:
+Mean = $10 \\times 0.3 = 3$
+
+The median is also 3 (close to the mean)
+
+Unlike continuous distributions where finding the median requires integration, for discrete distributions like binomial, the median is found by summing probabilities until reaching 0.5.
+ 
+`,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj9:{
       title:`Moment Generating Function`,
       content:``,
@@ -553,14 +613,14 @@ export default function BinomialDistributionPage({seoData,sectionsContent , intr
           sectionsContent.obj7.content,
         ]
     },
-    // {
-    //     id:'8',
-    //     title:sectionsContent.obj8.title,
-    //     link:sectionsContent.obj8.link,
-    //     content:[
-    //       sectionsContent.obj8.content,
-    //     ]
-    // },
+    {
+        id:'8',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
+        ]
+    },
     // {
     //     id:'9',
     //     title:sectionsContent.obj9.title,
