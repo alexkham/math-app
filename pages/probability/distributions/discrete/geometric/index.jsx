@@ -421,31 +421,31 @@ The variance of 30 and standard deviation of about 5.5 indicate substantial vari
     // },
     obj8: {
   title: `Mode and Median`,
-  content: `
-### Mode
+  content: `### Mode
 
-The **mode** is the value of $k$ (number of trials until first success) with the highest probability—the peak of the [PMF](!/probability/probability-function/pmf).
+The [mode](!/probability/mode) is the value of $k$ (number of trials until first success) with the highest probability—the peak of the [PMF](!/probability/probability-function/pmf).
 
-For the [geometric distribution](!/probability/distributions/discrete/geometric), the mode is always:
+For the geometric distribution, the [mode](!/probability/mode) is always:
 
 $$\\text{Mode} = 1$$
 
-**Intuition:** The geometric PMF is $p_X(k) = (1-p)^{k-1}p$, which decreases monotonically. The probability is highest at the first trial and decreases exponentially with each subsequent trial. Since each additional trial multiplies the probability by $(1-p) < 1$, the maximum probability always occurs at $k = 1$.
+**Intuition:** The geometric [PMF](!/probability/probability-function/pmf) is $p_X(k) = (1-p)^{k-1}p$, which decreases monotonically. The probability is highest at the first trial and decreases exponentially with each subsequent trial. Since each additional trial multiplies the probability by $(1-p) < 1$, the maximum probability always occurs at $k = 1$.
 
-**Example:** For $p = 0.3$:
+**Example:** 
+For $p = 0.3$:
 • $P(X = 1) = 0.3$
 • $P(X = 2) = 0.7 \\times 0.3 = 0.21$
 • $P(X = 3) = 0.49 \\times 0.3 = 0.147$
 
-The mode is 1, representing that getting success on the first trial is always the most likely single outcome.
+The [mode](!/probability/mode) is 1, representing that getting success on the first trial is always the most likely single outcome.
 
 This holds regardless of the value of $p$—whether success is rare ($p$ near 0) or common ($p$ near 1), the first trial is always most probable.
 
 ### Median
 
-The **median** is the value $m$ such that $P(X \\leq m) \\geq 0.5$ and $P(X \\geq m) \\geq 0.5$.
+The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) \\geq 0.5$ and $P(X \\geq m) \\geq 0.5$.
 
-For the geometric distribution, the median can be found by solving:
+For the geometric distribution, the [median](!/probability/median) can be found by solving:
 
 $$\\sum_{k=1}^{m} (1-p)^{k-1}p \\geq 0.5$$
 
@@ -461,11 +461,13 @@ The median is:
 
 $$\\text{Median} = \\left\\lceil \\frac{-\\ln(2)}{\\ln(1-p)} \\right\\rceil$$
 
-**Example:** For $p = 0.5$:
+**Example:**
+ For $p = 0.5$:
 
 $$\\text{Median} = \\left\\lceil \\frac{-\\ln(2)}{\\ln(0.5)} \\right\\rceil = \\left\\lceil \\frac{0.693}{0.693} \\right\\rceil = 1$$
 
-**Example:** For $p = 0.3$:
+**Example:** 
+For $p = 0.3$:
 
 $$\\text{Median} = \\left\\lceil \\frac{-\\ln(2)}{\\ln(0.7)} \\right\\rceil = \\left\\lceil \\frac{0.693}{0.357} \\right\\rceil = \\lceil 1.94 \\rceil = 2$$
 
@@ -474,7 +476,8 @@ $$\\text{Median} = \\left\\lceil \\frac{-\\ln(2)}{\\ln(0.7)} \\right\\rceil = \\
 • For high $p$, median = mode = 1
 • For low $p$, median > mode, reflecting right skew
 • The geometric distribution is always right-skewed (median ≥ mode)
-  `,
+  
+`,
   before: ``,
   after: ``,
   link: '',

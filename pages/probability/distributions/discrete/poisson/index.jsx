@@ -420,14 +420,76 @@ The variance equals the expected value (16), and the standard deviation of 4 ind
   after: ``,
   link: '',
 },
-    obj8:{
-      title:`Mode and Median`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj8:{
+    //   title:`Mode and Median`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+
+    obj8: {
+  title: `Mode and Median`,
+  content: `### Mode
+
+The [mode](!/probability/mode) is the value of $k$ (number of events) with the highest probability—the peak of the [PMF](!/probability/probability-function/pmf).
+
+For the Poisson distribution, the mode depends on the parameter $\\lambda$:
+
+**If** $\\lambda$ **is an integer:**
+The distribution has two modes: $\\lambda - 1$ and $\\lambda$
+
+**If** $\\lambda$ **is not an integer:**
+The mode is $\\lfloor \\lambda \\rfloor$
+
+**Intuition:** The mode sits at or just below the [expected value](!/probability/expected-value) $\\lambda$, representing the most likely number of events. The Poisson distribution models rare events, and the mode indicates the count that balances the competing effects of increasing event likelihood with decreasing probability of higher counts.
+
+**Example:**
+ For $\\lambda = 4.7$:
+
+Mode = $\\lfloor 4.7 \\rfloor = 4$
+
+Getting exactly 4 events is more likely than any other outcome.
+
+**Example:**
+ For $\\lambda = 5$:
+
+Modes = 4 and 5 (both equally likely)
+
+### Median
+
+The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) \\geq 0.5$ and $P(X \\geq m) \\geq 0.5$.
+
+For the Poisson distribution, there is no simple closed-form expression for the median, but it can be found numerically by solving:
+
+$$\\sum_{k=0}^{m} \\frac{\\lambda^k e^{-\\lambda}}{k!} \\geq 0.5$$
+
+**Properties of the median:**
+• The median is approximately $\\lambda + \\frac{1}{3} - \\frac{0.02}{\\lambda}$ for large $\\lambda$
+• For integer $\\lambda$, median $\\approx \\lambda$
+• The distribution approaches symmetry as $\\lambda$ increases
+
+**Example:**
+For $\\lambda = 5$:
+Mean = 5
+
+The median is approximately 5 (nearly symmetric)
+
+**Example:** 
+For $\\lambda = 2$:
+Mean = 2
+
+The median is approximately 2 (found numerically)
+
+Unlike continuous distributions where finding the median requires integration, for [discrete](!/probability/distributions/discrete) distributions, the median is found by summing probabilities until reaching 0.5.
+  
+`,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj9:{
       title:`Moment Generating Function`,
       content:``,
@@ -689,14 +751,14 @@ export default function PoissonDistributionPage({seoData,sectionsContent , intro
           sectionsContent.obj7.content,
         ]
     },
-    // {
-    //     id:'8',
-    //     title:sectionsContent.obj8.title,
-    //     link:sectionsContent.obj8.link,
-    //     content:[
-    //       sectionsContent.obj8.content,
-    //     ]
-    // },
+    {
+        id:'8',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
+        ]
+    },
     // {
     //     id:'9',
     //     title:sectionsContent.obj9.title,

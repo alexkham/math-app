@@ -517,14 +517,74 @@ The variance of approximately 2.917 indicates moderate spread around the mean of
   link: '',
 },   
 
-obj8:{
-      title:`Mode and Median`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+// obj8:{
+//       title:`Mode and Median`,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
   
-    },
+//     },
+
+obj8: {
+  title: `Mode and Median`,
+  content: `### Mode
+
+The [mode](!/probability/mode) is the value of $k$ with the highest probability—the peak of the [PMF](!/probability/probability-function/pmf).
+
+For the discrete uniform distribution, all values have equal probability, so:
+
+**Every value in the range** $\\{a, a+1, a+2, \\ldots, b\\}$ **is a mode**
+
+The distribution is multimodal with $b - a + 1$ modes.
+
+**Intuition:** Since the discrete uniform distribution assigns equal probability $\\frac{1}{b-a+1}$ to each value, no single outcome is more likely than any other. This reflects complete uncertainty within the specified range—all outcomes are equally probable.
+
+**Example:**
+ For $a = 1$, $b = 6$ (rolling a fair die):
+
+Modes = 1, 2, 3, 4, 5, 6 (all equally likely with probability $\\frac{1}{6}$)
+
+**Example:** 
+For $a = 0$, $b = 4$:
+
+Modes = 0, 1, 2, 3, 4 (all equally likely with probability $\\frac{1}{5}$)
+
+### Median
+
+The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) \\geq 0.5$ and $P(X \\geq m) \\geq 0.5$.
+
+For the discrete uniform distribution:
+
+**If** $b - a + 1$ **is odd:**
+Median = $\\frac{a + b}{2}$ (the middle value)
+
+**If** $b - a + 1$ **is even:**
+Any value between $\\frac{a + b - 1}{2}$ and $\\frac{a + b + 1}{2}$ can be considered the median
+
+**Properties of the median:**
+• The median equals the [expected value](!/probability/expected-value) $\\frac{a + b}{2}$ when the range has an odd number of values
+• For symmetric distributions, median = mode = mean (when appropriately defined)
+• The median represents the center of the distribution
+
+**Example:** 
+For $a = 1$, $b = 6$:
+Mean = $\\frac{1 + 6}{2} = 3.5$
+
+Median = 3.5 (between 3 and 4)
+
+**Example:**
+ For $a = 1$, $b = 5$:
+Mean = $\\frac{1 + 5}{2} = 3$
+
+Median = 3 (the exact middle value)
+
+Unlike [continuous distributions](!/probability/distributions/continuous) where finding the median requires integration, for [discrete](!/probability/distributions/discrete) distributions, the median is found by identifying the middle value(s) when outcomes are equally spaced and equally probable.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj9:{
       title:`Moment Generating Function`,
       content:``,
@@ -790,14 +850,14 @@ export default function DiscreteUniformDistributionPage({seoData,sectionsContent
           sectionsContent.obj7.content,
         ]
     },
-    // {
-    //     id:'8',
-    //     title:sectionsContent.obj8.title,
-    //     link:sectionsContent.obj8.link,
-    //     content:[
-    //       sectionsContent.obj8.content,
-    //     ]
-    // },
+    {
+        id:'8',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
+        ]
+    },
     // {
     //     id:'9',
     //     title:sectionsContent.obj9.title,

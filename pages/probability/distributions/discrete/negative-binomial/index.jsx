@@ -411,14 +411,72 @@ The variance of 90 and standard deviation of about 9.5 indicate high variability
   after: ``,
   link: '',
 },
-    obj8:{
-      title:`Mode and Median`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj8:{
+    //   title:`Mode and Median`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+    obj8: {
+  title: `Mode and Median`,
+  content: `### Mode
+
+The [mode](!/probability/mode) is the value of $k$ (number of failures before the $r$-th success) with the highest probability—the peak of the [PMF](!/probability/probability-function/pmf).
+
+For the negative binomial distribution, the mode depends on the parameters $r$ and $p$:
+
+**If** $r > 1$**:**
+The mode is $\\lfloor \\frac{(r-1)(1-p)}{p} \\rfloor$
+
+**If** $r = 1$**:**
+The mode is 0 (this reduces to the [geometric distribution](!/probability/distributions/discrete/geometric))
+
+**Intuition:** The mode sits near the [expected value](!/probability/expected-value) $\\frac{r(1-p)}{p}$, representing the most likely number of failures before achieving $r$ successes. As $p$ decreases (success becomes rarer), the mode shifts rightward, reflecting that more failures are expected before accumulating the required successes.
+
+**Example:** For $r = 5$ and $p = 0.3$:
+
+Mode = $\\lfloor \\frac{(5-1)(1-0.3)}{0.3} \\rfloor = \\lfloor \\frac{4 \\times 0.7}{0.3} \\rfloor = \\lfloor 9.33 \\rfloor = 9$
+
+Getting exactly 9 failures before the 5th success is more likely than any other outcome.
+
+**Example:** For $r = 1$ and $p = 0.4$:
+
+Mode = 0 (geometric case: most likely to succeed on first trial)
+
+### Median
+
+The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) \\geq 0.5$ and $P(X \\geq m) \\geq 0.5$.
+
+For the negative binomial distribution, there is no simple closed-form expression for the median, but it can be found numerically by solving:
+
+$$\\sum_{k=0}^{m} \\binom{k+r-1}{k} p^r (1-p)^k \\geq 0.5$$
+
+**Properties of the median:**
+• The median is always close to the mean $\\frac{r(1-p)}{p}$
+• For $r = 1$, the median follows the geometric distribution formula
+• The distribution is right-skewed, so median < mean typically
+
+**Example:**
+ For $r = 3$ and $p = 0.5$:
+Mean = $\\frac{3(1-0.5)}{0.5} = 3$
+
+The median is approximately 2-3 (found numerically)
+
+**Example:** 
+For $r = 5$ and $p = 0.3$:
+Mean = $\\frac{5(1-0.3)}{0.3} \\approx 11.67$
+
+The median is approximately 11 (close to the mean)
+
+Unlike continuous distributions where finding the median requires integration, for [discrete](!/probability/distributions/discrete) distributions, the median is found by summing probabilities until reaching 0.5.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj9:{
       title:`Moment Generating Function`,
       content:``,
@@ -691,14 +749,14 @@ export default function NegativeBinomialDistributionPage({seoData,sectionsConten
           sectionsContent.obj7.content,
         ]
     },
-    // {
-    //     id:'8',
-    //     title:sectionsContent.obj8.title,
-    //     link:sectionsContent.obj8.link,
-    //     content:[
-    //       sectionsContent.obj8.content,
-    //     ]
-    // },
+    {
+        id:'8',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
+        ]
+    },
     // {
     //     id:'9',
     //     title:sectionsContent.obj9.title,

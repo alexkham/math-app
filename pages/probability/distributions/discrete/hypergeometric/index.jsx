@@ -416,14 +416,70 @@ The relatively small variance reflects the limited range of possible outcomes (0
   after: ``,
   link: '',
 },
-    obj8:{
-      title:`Mode and Median`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj8:{
+    //   title:`Mode and Median`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+    obj8: {
+  title: `Mode and Median`,
+  content: `### Mode
+
+The [mode](!/probability/mode) is the value of $k$ (number of successes in the sample) with the highest probability—the peak of the [PMF](!/probability/probability-function/pmf).
+
+For the hypergeometric distribution, the mode depends on the parameters $N$, $K$, and $n$:
+
+The mode is $\\lfloor \\frac{(n+1)(K+1)}{N+2} \\rfloor$
+
+**Intuition:** The mode sits near the [expected value](!/probability/expected-value) $\\frac{nK}{N}$, representing the most likely number of successes when sampling without replacement. Unlike the [binomial](!/probability/distributions/discrete/binomial) where trials are independent, the hypergeometric mode reflects how depletion of the population affects the probability distribution.
+
+**Example:** 
+For $N = 50$, $K = 20$, $n = 10$:
+
+Mode = $\\lfloor \\frac{(10+1)(20+1)}{50+2} \\rfloor = \\lfloor \\frac{11 \\times 21}{52} \\rfloor = \\lfloor 4.44 \\rfloor = 4$
+
+Getting exactly 4 successes is more likely than any other outcome.
+
+**Example:** 
+For $N = 100$, $K = 30$, $n = 20$:
+
+Mode = $\\lfloor \\frac{21 \\times 31}{102} \\rfloor = \\lfloor 6.38 \\rfloor = 6$
+
+### Median
+
+The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) \\geq 0.5$ and $P(X \\geq m) \\geq 0.5$.
+
+For the hypergeometric distribution, there is no simple closed-form expression for the median, but it can be found numerically by solving:
+
+$$\\sum_{k=0}^{m} \\frac{\\binom{K}{k}\\binom{N-K}{n-k}}{\\binom{N}{n}} \\geq 0.5$$
+
+**Properties of the median:**
+• The median is always close to the mean $\\frac{nK}{N}$
+• For large $N$, the hypergeometric approaches the binomial, and median behavior converges
+• The distribution can be symmetric or skewed depending on parameters
+
+**Example:**
+For $N = 50$, $K = 25$, $n = 10$:
+Mean = $\\frac{10 \\times 25}{50} = 5$
+
+The median is 5 (by symmetry, since $K = N/2$)
+
+**Example:** 
+For $N = 100$, $K = 30$, $n = 20$:
+Mean = $\\frac{20 \\times 30}{100} = 6$
+
+The median is approximately 6 (close to the mean)
+
+Unlike continuous distributions where finding the median requires integration, for [discrete](!/probability/distributions/discrete) distributions, the median is found by summing probabilities until reaching 0.5.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj9:{
       title:`Moment Generating Function`,
       content:``,
@@ -692,14 +748,14 @@ export default function HypergeometricDistributionPage({seoData,sectionsContent 
           sectionsContent.obj7.content,
         ]
     },
-    // {
-    //     id:'8',
-    //     title:sectionsContent.obj8.title,
-    //     link:sectionsContent.obj8.link,
-    //     content:[
-    //       sectionsContent.obj8.content,
-    //     ]
-    // },
+    {
+        id:'8',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
+        ]
+    },
     // {
     //     id:'9',
     //     title:sectionsContent.obj9.title,
