@@ -151,7 +151,7 @@ export default function ConditionalProbabilityTable2x4({ explanations = null }) 
         <strong>Conditional Panels (right):</strong> Click any row to highlight the corresponding cell in the main table and its marginal probability. This shows the relationship between joint and conditional probabilities.
       </p>
       <p style={{ marginBottom: '10px' }}>
-        <strong>Accordions:</strong> Expand the "Row Explanations" sections to see what each conditional probability represents.
+        <strong>Accordions:</strong> Expand the &quot;Row Explanations&quot; sections to see what each conditional probability represents.
       </p>
       <p style={{ marginBottom: '10px' }}>
         <strong>Clear Selection:</strong> Use the red button at the bottom to reset all highlights.
@@ -463,7 +463,7 @@ export default function ConditionalProbabilityTable2x4({ explanations = null }) 
       </div>
 
       <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af' }}>
-        <strong>How to read:</strong> Cells show joint probabilities. Click conditional rows to highlight paths. The highlighted connections demonstrate Bayes' theorem in action: P(A|B) = P(A ∩ B) / P(B). Watch how the same joint probability appears in multiple conditional calculations depending on which event you condition on.
+        <strong>How to read:</strong> Cells show joint probabilities. Click conditional rows to highlight paths. The highlighted connections demonstrate Bayes&apos; theorem in action: P(A|B) = P(A ∩ B) / P(B). Watch how the same joint probability appears in multiple conditional calculations depending on which event you condition on.
       </div>
     </div>
   );
