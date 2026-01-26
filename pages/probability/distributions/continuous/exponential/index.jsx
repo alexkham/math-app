@@ -441,6 +441,9 @@ Half of the waiting times are less than 13.9 minutes, and half are greater.
       examples:`
          @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Exponential](!/probability/distributions/continuous/uniform#12) →@
             `,
+               calculators:`            
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Discrete Distributions Probability Calculators ](!/probability/calculators/continuous-distributions) →@
+        `,
   
     },
   
@@ -597,7 +600,8 @@ export default function ExponbentialDistributionPage({seoData,sectionsContent , 
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <ExponentialDistributionCalculator/>
+          <ExponentialDistributionCalculator/>,
+          sectionsContent.links.calculators,
         ]
     },
     {

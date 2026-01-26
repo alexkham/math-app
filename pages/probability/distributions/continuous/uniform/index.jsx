@@ -578,6 +578,9 @@ Half of arrivals occur before 2:15 PM, and half occur after. This is also the [m
       examples:`
          @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Continuous Uniform](!/probability/distributions/continuous/uniform#12) →@
             `,
+                 calculators:`            
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Discrete Distributions Probability Calculators ](!/probability/calculators/continuous-distributions) →@
+        `,
   
     },
   
@@ -731,7 +734,9 @@ export default function ContinuousUniformDistributionPage({seoData,sectionsConte
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <ContinuousUniformCalculator/>
+          <ContinuousUniformCalculator/>,
+          sectionsContent.links.calculators,
+
         ]
     },
     {

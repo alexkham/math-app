@@ -580,6 +580,9 @@ Half of all heights fall below 170 cm, and half fall above. This coincides with 
       examples:`
          @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Normal](!/probability/distributions/continuous/uniform#12) →@
             `,
+                 calculators:`            
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Discrete Distributions Probability Calculators ](!/probability/calculators/continuous-distributions) →@
+        `,
   
     },
   
@@ -736,7 +739,8 @@ export default function NormalDistributionPage({seoData,sectionsContent , introC
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <NormalDistributionCalculator/>
+          <NormalDistributionCalculator/>,
+          sectionsContent.links.calculators,
         ]
     },
     {
