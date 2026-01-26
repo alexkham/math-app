@@ -1,27 +1,1620 @@
+// // // // 'use client';
+
+// // // // import React, { useState } from 'react';
+
+// // // // export default function ConditionalProbabilityTable2x3({ explanations = null }) {
+// // // //   const [activeTab, setActiveTab] = useState('explanation');
+  
+// // // //   const defaults = {
+// // // //     pA: 0.6,
+// // // //     pB1GivenA: 0.5,
+// // // //     pB2GivenA: 0.3,
+// // // //     pB1GivenNotA: 0.3,
+// // // //     pB2GivenNotA: 0.4
+// // // //   };
+  
+// // // //   const [pA, setPA] = useState(defaults.pA);
+// // // //   const [pB1GivenA, setPB1GivenA] = useState(defaults.pB1GivenA);
+// // // //   const [pB2GivenA, setPB2GivenA] = useState(defaults.pB2GivenA);
+// // // //   const [pB1GivenNotA, setPB1GivenNotA] = useState(defaults.pB1GivenNotA);
+// // // //   const [pB2GivenNotA, setPB2GivenNotA] = useState(defaults.pB2GivenNotA);
+  
+// // // //   const [highlightedCell, setHighlightedCell] = useState(null);
+// // // //   const [highlightedMarginal, setHighlightedMarginal] = useState(null);
+// // // //   const [editingCell, setEditingCell] = useState(null);
+
+// // // //   const pNotA = 1 - pA;
+// // // //   const pB3GivenA = 1 - pB1GivenA - pB2GivenA;
+// // // //   const pB3GivenNotA = 1 - pB1GivenNotA - pB2GivenNotA;
+  
+// // // //   const pAAndB1 = pA * pB1GivenA;
+// // // //   const pAAndB2 = pA * pB2GivenA;
+// // // //   const pAAndB3 = pA * pB3GivenA;
+// // // //   const pNotAAndB1 = pNotA * pB1GivenNotA;
+// // // //   const pNotAAndB2 = pNotA * pB2GivenNotA;
+// // // //   const pNotAAndB3 = pNotA * pB3GivenNotA;
+  
+// // // //   const pB1 = pAAndB1 + pNotAAndB1;
+// // // //   const pB2 = pAAndB2 + pNotAAndB2;
+// // // //   const pB3 = pAAndB3 + pNotAAndB3;
+
+// // // //   const cellColors = {
+// // // //     'AB1': '#10b981',
+// // // //     'AB2': '#f59e0b',
+// // // //     'AB3': '#8b5cf6',
+// // // //     'notAB1': '#ef4444',
+// // // //     'notAB2': '#06b6d4',
+// // // //     'notAB3': '#ec4899'
+// // // //   };
+
+// // // //   const resetToDefaults = () => {
+// // // //     setPA(defaults.pA);
+// // // //     setPB1GivenA(defaults.pB1GivenA);
+// // // //     setPB2GivenA(defaults.pB2GivenA);
+// // // //     setPB1GivenNotA(defaults.pB1GivenNotA);
+// // // //     setPB2GivenNotA(defaults.pB2GivenNotA);
+// // // //     setHighlightedCell(null);
+// // // //     setHighlightedMarginal(null);
+// // // //     setEditingCell(null);
+// // // //   };
+
+// // // //   const handleConditionalClick = (cell, marginal) => {
+// // // //     if (highlightedCell === cell && highlightedMarginal === marginal) {
+// // // //       setHighlightedCell(null);
+// // // //       setHighlightedMarginal(null);
+// // // //     } else {
+// // // //       setHighlightedCell(cell);
+// // // //       setHighlightedMarginal(marginal);
+// // // //     }
+// // // //   };
+
+// // // //   const handleCellClick = (cell) => {
+// // // //     if (editingCell) return;
+// // // //     if (highlightedCell === cell && !highlightedMarginal) {
+// // // //       setHighlightedCell(null);
+// // // //     } else {
+// // // //       setHighlightedCell(cell);
+// // // //       setHighlightedMarginal(null);
+// // // //     }
+// // // //   };
+
+// // // //   const getCellStyle = (cellKey, isEditable = false) => {
+// // // //     const baseStyle = {
+// // // //       padding: isEditable ? '15px' : '20px',
+// // // //       textAlign: 'center',
+// // // //       border: '2px solid #e2e8f0',
+// // // //       cursor: isEditable ? 'pointer' : 'pointer',
+// // // //       transition: 'all 0.3s',
+// // // //       background: 'white'
+// // // //     };
+
+// // // //     if (highlightedCell === cellKey) {
+// // // //       return {
+// // // //         ...baseStyle,
+// // // //         border: `3px solid ${cellColors[cellKey]}`,
+// // // //         background: `${cellColors[cellKey]}30`,
+// // // //         fontWeight: 'bold'
+// // // //       };
+// // // //     }
+
+// // // //     return baseStyle;
+// // // //   };
+
+// // // //   const getMarginalStyle = (marginalKey, isEditable = false) => {
+// // // //     const baseStyle = {
+// // // //       padding: '15px',
+// // // //       fontWeight: 'bold',
+// // // //       background: '#f8fafc',
+// // // //       border: '2px solid #e2e8f0',
+// // // //       textAlign: 'center',
+// // // //       fontSize: '16px',
+// // // //       cursor: isEditable ? 'pointer' : 'default'
+// // // //     };
+
+// // // //     if (highlightedMarginal === marginalKey) {
+// // // //       return {
+// // // //         ...baseStyle,
+// // // //         border: `3px solid ${cellColors[highlightedCell]}`,
+// // // //         background: `${cellColors[highlightedCell]}20`
+// // // //       };
+// // // //     }
+
+// // // //     return baseStyle;
+// // // //   };
+
+// // // //   const getHeaderStyle = () => ({
+// // // //     padding: '15px',
+// // // //     fontWeight: 'bold',
+// // // //     background: '#f8fafc',
+// // // //     border: '2px solid #e2e8f0',
+// // // //     textAlign: 'center'
+// // // //   });
+
+// // // //   const handleInputChange = (setter, value) => {
+// // // //     const num = parseFloat(value);
+// // // //     if (!isNaN(num) && num >= 0 && num <= 1) {
+// // // //       setter(num);
+// // // //     }
+// // // //   };
+
+// // // //   const renderEditableJointCell = (jointValue, conditionalValue, setter, cellKey, label) => {
+// // // //     const isEditing = editingCell === cellKey;
+
+// // // //     return (
+// // // //       <div onClick={() => !isEditing && setEditingCell(cellKey)} style={{ cursor: 'pointer' }}>
+// // // //         {isEditing ? (
+// // // //           <div>
+// // // //             <div style={{ fontSize: '11px', color: '#64748b', marginBottom: '5px' }}>Edit conditional</div>
+// // // //             <input
+// // // //               type="number"
+// // // //               step="0.01"
+// // // //               value={conditionalValue}
+// // // //               onChange={(e) => handleInputChange(setter, e.target.value)}
+// // // //               onBlur={() => setEditingCell(null)}
+// // // //               onKeyDown={(e) => {
+// // // //                 if (e.key === 'Enter' || e.key === 'Escape') setEditingCell(null);
+// // // //               }}
+// // // //               autoFocus
+// // // //               style={{
+// // // //                 width: '90%',
+// // // //                 padding: '6px',
+// // // //                 border: '2px solid #3b82f6',
+// // // //                 borderRadius: '4px',
+// // // //                 fontSize: '16px',
+// // // //                 textAlign: 'center',
+// // // //                 fontWeight: 'bold'
+// // // //               }}
+// // // //             />
+// // // //           </div>
+// // // //         ) : (
+// // // //           <>
+// // // //             <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>
+// // // //               {jointValue.toFixed(4)}
+// // // //             </div>
+// // // //             <div style={{ fontSize: '12px', color: '#64748b' }}>
+// // // //               <span dangerouslySetInnerHTML={{ __html: label }} />
+// // // //             </div>
+// // // //           </>
+// // // //         )}
+// // // //       </div>
+// // // //     );
+// // // //   };
+
+// // // //   const renderEditableMarginal = (value, setter, cellKey) => {
+// // // //     const isEditing = editingCell === cellKey;
+
+// // // //     return (
+// // // //       <div onClick={() => !isEditing && setEditingCell(cellKey)} style={{ cursor: 'pointer' }}>
+// // // //         {isEditing ? (
+// // // //           <input
+// // // //             type="number"
+// // // //             step="0.01"
+// // // //             value={value}
+// // // //             onChange={(e) => handleInputChange(setter, e.target.value)}
+// // // //             onBlur={() => setEditingCell(null)}
+// // // //             onKeyDown={(e) => {
+// // // //               if (e.key === 'Enter' || e.key === 'Escape') setEditingCell(null);
+// // // //             }}
+// // // //             autoFocus
+// // // //             style={{
+// // // //               width: '80%',
+// // // //               padding: '6px',
+// // // //               border: '2px solid #3b82f6',
+// // // //               borderRadius: '4px',
+// // // //               fontSize: '16px',
+// // // //               textAlign: 'center',
+// // // //               fontWeight: 'bold'
+// // // //             }}
+// // // //           />
+// // // //         ) : (
+// // // //           <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
+// // // //             {value.toFixed(4)}
+// // // //           </div>
+// // // //         )}
+// // // //         <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
+// // // //             {value.toFixed(4)}
+// // // //           </div>
+// // // //       </div>
+// // // //     );
+// // // //   };
+
+// // // //   const defaultExplanation = (
+// // // //     <div style={{ fontSize: '14px', lineHeight: '1.6', color: '#475569' }}>
+// // // //       <h3 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '10px', color: '#1e293b' }}>
+// // // //         2×3 Contingency Table
+// // // //       </h3>
+// // // //       <p style={{ marginBottom: '10px' }}>
+// // // //         Two variables: A (binary) and B (three categories: B₁, B₂, B₃).
+// // // //       </p>
+// // // //       <p style={{ marginBottom: '10px' }}>
+// // // //         <strong>Cells:</strong> Joint probabilities P(A ∩ Bᵢ). Click to edit conditional inputs.
+// // // //       </p>
+// // // //     </div>
+// // // //   );
+
+// // // //   const controlsExplanation = (
+// // // //     <div style={{ fontSize: '14px', lineHeight: '1.6', color: '#475569' }}>
+// // // //       <h3 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '10px', color: '#1e293b' }}>
+// // // //         How to Use
+// // // //       </h3>
+// // // //       <p style={{ marginBottom: '10px' }}>
+// // // //         Click cells to edit:
+// // // //       </p>
+// // // //       <ul style={{ marginLeft: '20px', marginBottom: '10px' }}>
+// // // //         <li>P(A) - Total column, row A</li>
+// // // //         <li>Conditional inputs P(Bᵢ|A), P(Bᵢ|A<sup>c</sup>) - table cells</li>
+// // // //       </ul>
+// // // //       <p>P(B₃|...) auto-calculated.</p>
+// // // //     </div>
+// // // //   );
+
+// // // //   return (
+// // // //     <div style={{ padding: '20px', maxWidth: '1600px', margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+// // // //       <style>{`
+// // // //         @keyframes borderPulse {
+// // // //           0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+// // // //           50% { box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3); }
+// // // //         }
+// // // //         .clickable-row { animation: borderPulse 3s ease-in-out infinite; }
+// // // //         .clickable-row:hover { animation: none; }
+// // // //         .conditional-table { border-spacing: 0 8px; }
+// // // //       `}</style>
+      
+// // // //       <p style={{ color: '#666', marginBottom: '30px' }}>
+// // // //         2×3 contingency table. Click cells to edit.
+// // // //       </p>
+
+// // // //       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '20px', marginBottom: '30px' }}>
+// // // //         <div>
+// // // //           <div style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '20px', marginBottom: '20px' }}>
+// // // //             <h2 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '20px', textAlign: 'center' }}>Joint Probability Table</h2>
+            
+// // // //             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+// // // //               <thead>
+// // // //                 <tr>
+// // // //                   <th style={getHeaderStyle()}></th>
+// // // //                   <th style={getHeaderStyle()}>B₁</th>
+// // // //                   <th style={getHeaderStyle()}>B₂</th>
+// // // //                   <th style={getHeaderStyle()}>B₃</th>
+// // // //                   <th style={getHeaderStyle()}>Total</th>
+// // // //                 </tr>
+// // // //               </thead>
+// // // //               <tbody>
+// // // //                 <tr>
+// // // //                   <td style={getHeaderStyle()}>A</td>
+// // // //                   <td style={getCellStyle('AB1', true)}>
+// // // //                     {renderEditableJointCell(pAAndB1, pB1GivenA, setPB1GivenA, 'editAB1', 'P(A ∩ B₁)')}
+// // // //                   </td>
+// // // //                   <td style={getCellStyle('AB2', true)}>
+// // // //                     {renderEditableJointCell(pAAndB2, pB2GivenA, setPB2GivenA, 'editAB2', 'P(A ∩ B₂)')}
+// // // //                   </td>
+// // // //                   <td style={getCellStyle('AB3')} onClick={() => handleCellClick('AB3')}>
+// // // //                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pAAndB3.toFixed(4)}</div>
+// // // //                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A ∩ B₃)</div>
+// // // //                   </td>
+// // // //                   <td style={getMarginalStyle('A', true)}>
+// // // //                     {renderEditableMarginal(pA, setPA, 'editPA')}
+// // // //                   </td>
+// // // //                 </tr>
+// // // //                 <tr>
+// // // //                   <td style={getHeaderStyle()}>A<sup>c</sup></td>
+// // // //                   <td style={getCellStyle('notAB1', true)}>
+// // // //                     {renderEditableJointCell(pNotAAndB1, pB1GivenNotA, setPB1GivenNotA, 'editNotAB1', 'P(A<sup>c</sup> ∩ B₁)')}
+// // // //                   </td>
+// // // //                   <td style={getCellStyle('notAB2', true)}>
+// // // //                     {renderEditableJointCell(pNotAAndB2, pB2GivenNotA, setPB2GivenNotA, 'editNotAB2', 'P(A<sup>c</sup> ∩ B₂)')}
+// // // //                   </td>
+// // // //                   <td style={getCellStyle('notAB3')} onClick={() => handleCellClick('notAB3')}>
+// // // //                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pNotAAndB3.toFixed(4)}</div>
+// // // //                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A<sup>c</sup> ∩ B₃)</div>
+// // // //                   </td>
+// // // //                   <td style={getMarginalStyle('notA')}>
+// // // //                     <div style={{ fontSize: '16px', fontWeight: 'bold' }}>{pNotA.toFixed(4)}</div>
+// // // //                   </td>
+// // // //                 </tr>
+// // // //                 <tr>
+// // // //                   <td style={getHeaderStyle()}>Total</td>
+// // // //                   <td style={getMarginalStyle('B1')}>{pB1.toFixed(4)}</td>
+// // // //                   <td style={getMarginalStyle('B2')}>{pB2.toFixed(4)}</td>
+// // // //                   <td style={getMarginalStyle('B3')}>{pB3.toFixed(4)}</td>
+// // // //                   <td style={{ ...getHeaderStyle(), fontSize: '16px', fontWeight: 'bold' }}>1.0000</td>
+// // // //                 </tr>
+// // // //               </tbody>
+// // // //             </table>
+// // // //           </div>
+
+// // // //           <div style={{ background: '#f8fafc', borderRadius: '8px', overflow: 'hidden' }}>
+// // // //             <div style={{ display: 'flex', borderBottom: '2px solid #e2e8f0' }}>
+// // // //               <button onClick={() => setActiveTab('explanation')}
+// // // //                 style={{ flex: 1, padding: '12px', background: activeTab === 'explanation' ? 'white' : '#f8fafc', border: 'none', borderBottom: activeTab === 'explanation' ? '3px solid #3b82f6' : 'none', fontWeight: activeTab === 'explanation' ? 'bold' : 'normal', cursor: 'pointer', fontSize: '14px' }}>
+// // // //                 Explanation
+// // // //               </button>
+// // // //               <button onClick={() => setActiveTab('controls')}
+// // // //                 style={{ flex: 1, padding: '12px', background: activeTab === 'controls' ? 'white' : '#f8fafc', border: 'none', borderBottom: activeTab === 'controls' ? '3px solid #3b82f6' : 'none', fontWeight: activeTab === 'controls' ? 'bold' : 'normal', cursor: 'pointer', fontSize: '14px' }}>
+// // // //                 Controls
+// // // //               </button>
+// // // //             </div>
+
+// // // //             <div style={{ padding: '20px', background: 'white', minHeight: '200px' }}>
+// // // //               {activeTab === 'explanation' && (explanations || defaultExplanation)}
+// // // //               {activeTab === 'controls' && controlsExplanation}
+// // // //             </div>
+// // // //           </div>
+// // // //         </div>
+
+// // // //         <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+// // // //           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+// // // //             <div style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '15px', display: 'flex', flexDirection: 'column' }}>
+// // // //               <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>Conditional on A</h3>
+// // // //               <div style={{ background: '#dbeafe', padding: '5px 10px', borderRadius: '4px', marginBottom: '10px', textAlign: 'center' }}>
+// // // //                 <span style={{ fontSize: '12px', color: '#1e40af', fontWeight: '600' }}>Click rows</span>
+// // // //               </div>
+// // // //               <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 6px", flexGrow: 1 }} className="conditional-table">
+// // // //                 <tbody>
+// // // //                   {[['AB1', 'A', pB1GivenA, 'P(B₁|A)'], ['AB2', 'A', pB2GivenA, 'P(B₂|A)'], ['AB3', 'A', pB3GivenA, 'P(B₃|A)']].map(([cell, marg, val, lbl]) => (
+// // // //                     <tr key={cell} className="clickable-row" onClick={() => handleConditionalClick(cell, marg)}
+// // // //                       style={{ cursor: 'pointer', transition: 'all 0.2s', background: highlightedCell === cell && highlightedMarginal === marg ? `${cellColors[cell]}15` : 'transparent' }}
+// // // //                       onMouseEnter={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = '#f8fafc'; }}
+// // // //                       onMouseLeave={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = 'transparent'; }}>
+// // // //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }}>{lbl}</td>
+// // // //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px' }}>{val.toFixed(4)}</td>
+// // // //                     </tr>
+// // // //                   ))}
+// // // //                   <tr>
+// // // //                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }}>Total</td>
+// // // //                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontWeight: 'bold', fontSize: '12px' }}>1.0000</td>
+// // // //                   </tr>
+// // // //                 </tbody>
+// // // //               </table>
+// // // //             </div>
+
+// // // //             <div style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '15px', display: 'flex', flexDirection: 'column' }}>
+// // // //               <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>Conditional on A<sup>c</sup></h3>
+// // // //               <div style={{ background: '#dbeafe', padding: '5px 10px', borderRadius: '4px', marginBottom: '10px', textAlign: 'center' }}>
+// // // //                 <span style={{ fontSize: '12px', color: '#1e40af', fontWeight: '600' }}>Click rows</span>
+// // // //               </div>
+// // // //               <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 6px", flexGrow: 1 }} className="conditional-table">
+// // // //                 <tbody>
+// // // //                   {[['notAB1', 'notA', pB1GivenNotA, 'P(B₁|A<sup>c</sup>)'], ['notAB2', 'notA', pB2GivenNotA, 'P(B₂|A<sup>c</sup>)'], ['notAB3', 'notA', pB3GivenNotA, 'P(B₃|A<sup>c</sup>)']].map(([cell, marg, val, lbl]) => (
+// // // //                     <tr key={cell} className="clickable-row" onClick={() => handleConditionalClick(cell, marg)}
+// // // //                       style={{ cursor: 'pointer', transition: 'all 0.2s', background: highlightedCell === cell && highlightedMarginal === marg ? `${cellColors[cell]}15` : 'transparent' }}
+// // // //                       onMouseEnter={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = '#f8fafc'; }}
+// // // //                       onMouseLeave={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = 'transparent'; }}>
+// // // //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }} dangerouslySetInnerHTML={{ __html: lbl }}></td>
+// // // //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px' }}>{val.toFixed(4)}</td>
+// // // //                     </tr>
+// // // //                   ))}
+// // // //                   <tr>
+// // // //                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }}>Total</td>
+// // // //                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontWeight: 'bold', fontSize: '12px' }}>1.0000</td>
+// // // //                   </tr>
+// // // //                 </tbody>
+// // // //               </table>
+// // // //             </div>
+// // // //           </div>
+
+// // // //           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px' }}>
+// // // //             {[
+// // // //               ['B1', 'B₁', [['AB1', pB1 > 0 ? pAAndB1 / pB1 : 0, 'P(A|B₁)'], ['notAB1', pB1 > 0 ? pNotAAndB1 / pB1 : 0, 'P(A<sup>c</sup>|B₁)']]],
+// // // //               ['B2', 'B₂', [['AB2', pB2 > 0 ? pAAndB2 / pB2 : 0, 'P(A|B₂)'], ['notAB2', pB2 > 0 ? pNotAAndB2 / pB2 : 0, 'P(A<sup>c</sup>|B₂)']]],
+// // // //               ['B3', 'B₃', [['AB3', pB3 > 0 ? pAAndB3 / pB3 : 0, 'P(A|B₃)'], ['notAB3', pB3 > 0 ? pNotAAndB3 / pB3 : 0, 'P(A<sup>c</sup>|B₃)']]]
+// // // //             ].map(([key, title, cells]) => (
+// // // //               <div key={key} style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '15px' }}>
+// // // //                 <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>Conditional on {title}</h3>
+// // // //                 <div style={{ background: '#dbeafe', padding: '5px 10px', borderRadius: '4px', marginBottom: '10px', textAlign: 'center' }}>
+// // // //                   <span style={{ fontSize: '12px', color: '#1e40af', fontWeight: '600' }}>Click rows</span>
+// // // //                 </div>
+// // // //                 <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 6px" }} className="conditional-table">
+// // // //                   <tbody>
+// // // //                     {cells.map(([cell, val, lbl]) => (
+// // // //                       <tr key={cell} className="clickable-row" onClick={() => handleConditionalClick(cell, key)}
+// // // //                         style={{ cursor: 'pointer', background: highlightedCell === cell && highlightedMarginal === key ? `${cellColors[cell]}15` : 'transparent' }}
+// // // //                         onMouseEnter={(e) => { if (!(highlightedCell === cell && highlightedMarginal === key)) e.currentTarget.style.background = '#f8fafc'; }}
+// // // //                         onMouseLeave={(e) => { if (!(highlightedCell === cell && highlightedMarginal === key)) e.currentTarget.style.background = 'transparent'; }}>
+// // // //                         <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }} dangerouslySetInnerHTML={{ __html: lbl }}></td>
+// // // //                         <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px' }}>{val.toFixed(4)}</td>
+// // // //                       </tr>
+// // // //                     ))}
+// // // //                     <tr>
+// // // //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }}>Total</td>
+// // // //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontWeight: 'bold', fontSize: '12px' }}>1.0000</td>
+// // // //                     </tr>
+// // // //                   </tbody>
+// // // //                 </table>
+// // // //               </div>
+// // // //             ))}
+// // // //           </div>
+
+// // // //           <div style={{ display: 'flex', gap: '10px' }}>
+// // // //             <button onClick={resetToDefaults}
+// // // //               style={{ flex: 1, padding: '10px', background: '#3b82f6', color: 'white', border: 'none', borderRadius: '6px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
+// // // //               Reset to Defaults
+// // // //             </button>
+            
+// // // //             {(highlightedCell || highlightedMarginal) && (
+// // // //               <button onClick={() => { setHighlightedCell(null); setHighlightedMarginal(null); }}
+// // // //                 style={{ flex: 1, padding: '10px', background: '#ef4444', color: 'white', border: 'none', borderRadius: '6px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
+// // // //                 Clear Selection
+// // // //               </button>
+// // // //             )}
+// // // //           </div>
+// // // //         </div>
+// // // //       </div>
+
+// // // //       <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af' }}>
+// // // //         <strong>How to read:</strong> Cells show joints. Click to edit conditionals or P(A). Click conditional rows to highlight.
+// // // //       </div>
+// // // //     </div>
+// // // //   );
+// // // // }
+
+
+
+// // // 'use client';
+
+// // // import React, { useState } from 'react';
+
+// // // export default function ConditionalProbabilityTable2x3({ explanations = null }) {
+// // //   const [activeTab, setActiveTab] = useState('explanation');
+  
+// // //   const pA = 0.6;
+// // //   const pB1GivenA = 0.5;
+// // //   const pB2GivenA = 0.3;
+// // //   const pB1GivenNotA = 0.3;
+// // //   const pB2GivenNotA = 0.4;
+  
+// // //   const [highlightedCell, setHighlightedCell] = useState(null);
+// // //   const [highlightedMarginal, setHighlightedMarginal] = useState(null);
+
+// // //   const pNotA = 1 - pA;
+// // //   const pB3GivenA = 1 - pB1GivenA - pB2GivenA;
+// // //   const pB3GivenNotA = 1 - pB1GivenNotA - pB2GivenNotA;
+  
+// // //   const pAAndB1 = pA * pB1GivenA;
+// // //   const pAAndB2 = pA * pB2GivenA;
+// // //   const pAAndB3 = pA * pB3GivenA;
+// // //   const pNotAAndB1 = pNotA * pB1GivenNotA;
+// // //   const pNotAAndB2 = pNotA * pB2GivenNotA;
+// // //   const pNotAAndB3 = pNotA * pB3GivenNotA;
+  
+// // //   const pB1 = pAAndB1 + pNotAAndB1;
+// // //   const pB2 = pAAndB2 + pNotAAndB2;
+// // //   const pB3 = pAAndB3 + pNotAAndB3;
+
+// // //   const cellColors = {
+// // //     'AB1': '#10b981',
+// // //     'AB2': '#f59e0b',
+// // //     'AB3': '#8b5cf6',
+// // //     'notAB1': '#ef4444',
+// // //     'notAB2': '#06b6d4',
+// // //     'notAB3': '#ec4899'
+// // //   };
+
+// // //   const handleConditionalClick = (cell, marginal) => {
+// // //     if (highlightedCell === cell && highlightedMarginal === marginal) {
+// // //       setHighlightedCell(null);
+// // //       setHighlightedMarginal(null);
+// // //     } else {
+// // //       setHighlightedCell(cell);
+// // //       setHighlightedMarginal(marginal);
+// // //     }
+// // //   };
+
+// // //   const handleCellClick = (cell) => {
+// // //     if (highlightedCell === cell && !highlightedMarginal) {
+// // //       setHighlightedCell(null);
+// // //     } else {
+// // //       setHighlightedCell(cell);
+// // //       setHighlightedMarginal(null);
+// // //     }
+// // //   };
+
+// // //   const getCellStyle = (cellKey) => {
+// // //     const baseStyle = {
+// // //       padding: '20px',
+// // //       textAlign: 'center',
+// // //       border: '2px solid #e2e8f0',
+// // //       cursor: 'pointer',
+// // //       transition: 'all 0.3s',
+// // //       background: 'white'
+// // //     };
+
+// // //     if (highlightedCell === cellKey) {
+// // //       return {
+// // //         ...baseStyle,
+// // //         border: `3px solid ${cellColors[cellKey]}`,
+// // //         background: `${cellColors[cellKey]}30`,
+// // //         fontWeight: 'bold'
+// // //       };
+// // //     }
+
+// // //     return baseStyle;
+// // //   };
+
+// // //   const getMarginalStyle = (marginalKey) => {
+// // //     const baseStyle = {
+// // //       padding: '15px',
+// // //       fontWeight: 'bold',
+// // //       background: '#f8fafc',
+// // //       border: '2px solid #e2e8f0',
+// // //       textAlign: 'center',
+// // //       fontSize: '16px'
+// // //     };
+
+// // //     if (highlightedMarginal === marginalKey) {
+// // //       return {
+// // //         ...baseStyle,
+// // //         border: `3px solid ${cellColors[highlightedCell]}`,
+// // //         background: `${cellColors[highlightedCell]}20`
+// // //       };
+// // //     }
+
+// // //     return baseStyle;
+// // //   };
+
+// // //   const getHeaderStyle = () => ({
+// // //     padding: '15px',
+// // //     fontWeight: 'bold',
+// // //     background: '#f8fafc',
+// // //     border: '2px solid #e2e8f0',
+// // //     textAlign: 'center'
+// // //   });
+
+// // //   const defaultExplanation = (
+// // //     <div style={{ fontSize: '14px', lineHeight: '1.6', color: '#475569' }}>
+// // //       <h3 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '10px', color: '#1e293b' }}>
+// // //         2×3 Contingency Table
+// // //       </h3>
+// // //       <p style={{ marginBottom: '10px' }}>
+// // //         Two variables: A (binary) and B (three categories: B₁, B₂, B₃).
+// // //       </p>
+// // //       <p style={{ marginBottom: '10px' }}>
+// // //         <strong>Cells:</strong> Joint probabilities P(A ∩ Bᵢ)
+// // //       </p>
+// // //     </div>
+// // //   );
+
+// // //   const controlsExplanation = (
+// // //     <div style={{ fontSize: '14px', lineHeight: '1.6', color: '#475569' }}>
+// // //       <h3 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '10px', color: '#1e293b' }}>
+// // //         How to Use
+// // //       </h3>
+// // //       <p style={{ marginBottom: '10px' }}>
+// // //         Controls explanation placeholder.
+// // //       </p>
+// // //     </div>
+// // //   );
+
+// // //   return (
+// // //     <div style={{ padding: '20px', maxWidth: '1600px', margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+// // //       <style>{`
+// // //         @keyframes borderPulse {
+// // //           0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+// // //           50% { box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3); }
+// // //         }
+// // //         .clickable-row { animation: borderPulse 3s ease-in-out infinite; }
+// // //         .clickable-row:hover { animation: none; }
+// // //         .conditional-table { border-spacing: 0 8px; }
+// // //       `}</style>
+      
+// // //       <p style={{ color: '#666', marginBottom: '30px' }}>
+// // //         2×3 contingency table showing joint, marginal, and conditional probabilities.
+// // //       </p>
+
+// // //       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '20px', marginBottom: '30px' }}>
+// // //         <div>
+// // //           <div style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '20px', marginBottom: '20px' }}>
+// // //             <h2 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '20px', textAlign: 'center' }}>Joint Probability Table</h2>
+            
+// // //             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+// // //               <thead>
+// // //                 <tr>
+// // //                   <th style={getHeaderStyle()}></th>
+// // //                   <th style={getHeaderStyle()}>B₁</th>
+// // //                   <th style={getHeaderStyle()}>B₂</th>
+// // //                   <th style={getHeaderStyle()}>B₃</th>
+// // //                   <th style={getHeaderStyle()}>Total</th>
+// // //                 </tr>
+// // //               </thead>
+// // //               <tbody>
+// // //                 <tr>
+// // //                   <td style={getHeaderStyle()}>A</td>
+// // //                   <td style={getCellStyle('AB1')} onClick={() => handleCellClick('AB1')}>
+// // //                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pAAndB1.toFixed(4)}</div>
+// // //                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A ∩ B₁)</div>
+// // //                   </td>
+// // //                   <td style={getCellStyle('AB2')} onClick={() => handleCellClick('AB2')}>
+// // //                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pAAndB2.toFixed(4)}</div>
+// // //                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A ∩ B₂)</div>
+// // //                   </td>
+// // //                   <td style={getCellStyle('AB3')} onClick={() => handleCellClick('AB3')}>
+// // //                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pAAndB3.toFixed(4)}</div>
+// // //                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A ∩ B₃)</div>
+// // //                   </td>
+// // //                   <td style={getMarginalStyle('A')}>{pA.toFixed(4)}</td>
+// // //                 </tr>
+// // //                 <tr>
+// // //                   <td style={getHeaderStyle()}>A<sup>c</sup></td>
+// // //                   <td style={getCellStyle('notAB1')} onClick={() => handleCellClick('notAB1')}>
+// // //                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pNotAAndB1.toFixed(4)}</div>
+// // //                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A<sup>c</sup> ∩ B₁)</div>
+// // //                   </td>
+// // //                   <td style={getCellStyle('notAB2')} onClick={() => handleCellClick('notAB2')}>
+// // //                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pNotAAndB2.toFixed(4)}</div>
+// // //                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A<sup>c</sup> ∩ B₂)</div>
+// // //                   </td>
+// // //                   <td style={getCellStyle('notAB3')} onClick={() => handleCellClick('notAB3')}>
+// // //                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pNotAAndB3.toFixed(4)}</div>
+// // //                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A<sup>c</sup> ∩ B₃)</div>
+// // //                   </td>
+// // //                   <td style={getMarginalStyle('notA')}>{pNotA.toFixed(4)}</td>
+// // //                 </tr>
+// // //                 <tr>
+// // //                   <td style={getHeaderStyle()}>Total</td>
+// // //                   <td style={getMarginalStyle('B1')}>{pB1.toFixed(4)}</td>
+// // //                   <td style={getMarginalStyle('B2')}>{pB2.toFixed(4)}</td>
+// // //                   <td style={getMarginalStyle('B3')}>{pB3.toFixed(4)}</td>
+// // //                   <td style={{ ...getHeaderStyle(), fontSize: '16px', fontWeight: 'bold' }}>1.0000</td>
+// // //                 </tr>
+// // //               </tbody>
+// // //             </table>
+// // //           </div>
+
+// // //           <div style={{ background: '#f8fafc', borderRadius: '8px', overflow: 'hidden' }}>
+// // //             <div style={{ display: 'flex', borderBottom: '2px solid #e2e8f0' }}>
+// // //               <button onClick={() => setActiveTab('explanation')}
+// // //                 style={{ flex: 1, padding: '12px', background: activeTab === 'explanation' ? 'white' : '#f8fafc', border: 'none', borderBottom: activeTab === 'explanation' ? '3px solid #3b82f6' : 'none', fontWeight: activeTab === 'explanation' ? 'bold' : 'normal', cursor: 'pointer', fontSize: '14px' }}>
+// // //                 Explanation
+// // //               </button>
+// // //               <button onClick={() => setActiveTab('controls')}
+// // //                 style={{ flex: 1, padding: '12px', background: activeTab === 'controls' ? 'white' : '#f8fafc', border: 'none', borderBottom: activeTab === 'controls' ? '3px solid #3b82f6' : 'none', fontWeight: activeTab === 'controls' ? 'bold' : 'normal', cursor: 'pointer', fontSize: '14px' }}>
+// // //                 Controls
+// // //               </button>
+// // //             </div>
+
+// // //             <div style={{ padding: '20px', background: 'white', minHeight: '200px' }}>
+// // //               {activeTab === 'explanation' && (explanations || defaultExplanation)}
+// // //               {activeTab === 'controls' && controlsExplanation}
+// // //             </div>
+// // //           </div>
+// // //         </div>
+
+// // //         <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+// // //           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+// // //             <div style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '15px', display: 'flex', flexDirection: 'column' }}>
+// // //               <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>Conditional on A</h3>
+// // //               <div style={{ background: '#dbeafe', padding: '5px 10px', borderRadius: '4px', marginBottom: '10px', textAlign: 'center' }}>
+// // //                 <span style={{ fontSize: '12px', color: '#1e40af', fontWeight: '600' }}>Click rows</span>
+// // //               </div>
+// // //               <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 6px", flexGrow: 1 }} className="conditional-table">
+// // //                 <tbody>
+// // //                   {[['AB1', 'A', pB1GivenA, 'P(B₁|A)'], ['AB2', 'A', pB2GivenA, 'P(B₂|A)'], ['AB3', 'A', pB3GivenA, 'P(B₃|A)']].map(([cell, marg, val, lbl]) => (
+// // //                     <tr key={cell} className="clickable-row" onClick={() => handleConditionalClick(cell, marg)}
+// // //                       style={{ cursor: 'pointer', transition: 'all 0.2s', background: highlightedCell === cell && highlightedMarginal === marg ? `${cellColors[cell]}15` : 'transparent' }}
+// // //                       onMouseEnter={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = '#f8fafc'; }}
+// // //                       onMouseLeave={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = 'transparent'; }}>
+// // //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }}>{lbl}</td>
+// // //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px' }}>{val.toFixed(4)}</td>
+// // //                     </tr>
+// // //                   ))}
+// // //                   <tr>
+// // //                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }}>Total</td>
+// // //                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontWeight: 'bold', fontSize: '12px' }}>1.0000</td>
+// // //                   </tr>
+// // //                 </tbody>
+// // //               </table>
+// // //             </div>
+
+// // //             <div style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '15px', display: 'flex', flexDirection: 'column' }}>
+// // //               <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>Conditional on A<sup>c</sup></h3>
+// // //               <div style={{ background: '#dbeafe', padding: '5px 10px', borderRadius: '4px', marginBottom: '10px', textAlign: 'center' }}>
+// // //                 <span style={{ fontSize: '12px', color: '#1e40af', fontWeight: '600' }}>Click rows</span>
+// // //               </div>
+// // //               <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 6px", flexGrow: 1 }} className="conditional-table">
+// // //                 <tbody>
+// // //                   {[['notAB1', 'notA', pB1GivenNotA, 'P(B₁|A<sup>c</sup>)'], ['notAB2', 'notA', pB2GivenNotA, 'P(B₂|A<sup>c</sup>)'], ['notAB3', 'notA', pB3GivenNotA, 'P(B₃|A<sup>c</sup>)']].map(([cell, marg, val, lbl]) => (
+// // //                     <tr key={cell} className="clickable-row" onClick={() => handleConditionalClick(cell, marg)}
+// // //                       style={{ cursor: 'pointer', transition: 'all 0.2s', background: highlightedCell === cell && highlightedMarginal === marg ? `${cellColors[cell]}15` : 'transparent' }}
+// // //                       onMouseEnter={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = '#f8fafc'; }}
+// // //                       onMouseLeave={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = 'transparent'; }}>
+// // //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }} dangerouslySetInnerHTML={{ __html: lbl }}></td>
+// // //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px' }}>{val.toFixed(4)}</td>
+// // //                     </tr>
+// // //                   ))}
+// // //                   <tr>
+// // //                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }}>Total</td>
+// // //                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontWeight: 'bold', fontSize: '12px' }}>1.0000</td>
+// // //                   </tr>
+// // //                 </tbody>
+// // //               </table>
+// // //             </div>
+// // //           </div>
+
+// // //           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px' }}>
+// // //             {[
+// // //               ['B1', 'B₁', [['AB1', pB1 > 0 ? pAAndB1 / pB1 : 0, 'P(A|B₁)'], ['notAB1', pB1 > 0 ? pNotAAndB1 / pB1 : 0, 'P(A<sup>c</sup>|B₁)']]],
+// // //               ['B2', 'B₂', [['AB2', pB2 > 0 ? pAAndB2 / pB2 : 0, 'P(A|B₂)'], ['notAB2', pB2 > 0 ? pNotAAndB2 / pB2 : 0, 'P(A<sup>c</sup>|B₂)']]],
+// // //               ['B3', 'B₃', [['AB3', pB3 > 0 ? pAAndB3 / pB3 : 0, 'P(A|B₃)'], ['notAB3', pB3 > 0 ? pNotAAndB3 / pB3 : 0, 'P(A<sup>c</sup>|B₃)']]]
+// // //             ].map(([key, title, cells]) => (
+// // //               <div key={key} style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '15px' }}>
+// // //                 <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>Conditional on {title}</h3>
+// // //                 <div style={{ background: '#dbeafe', padding: '5px 10px', borderRadius: '4px', marginBottom: '10px', textAlign: 'center' }}>
+// // //                   <span style={{ fontSize: '12px', color: '#1e40af', fontWeight: '600' }}>Click rows</span>
+// // //                 </div>
+// // //                 <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 6px" }} className="conditional-table">
+// // //                   <tbody>
+// // //                     {cells.map(([cell, val, lbl]) => (
+// // //                       <tr key={cell} className="clickable-row" onClick={() => handleConditionalClick(cell, key)}
+// // //                         style={{ cursor: 'pointer', background: highlightedCell === cell && highlightedMarginal === key ? `${cellColors[cell]}15` : 'transparent' }}
+// // //                         onMouseEnter={(e) => { if (!(highlightedCell === cell && highlightedMarginal === key)) e.currentTarget.style.background = '#f8fafc'; }}
+// // //                         onMouseLeave={(e) => { if (!(highlightedCell === cell && highlightedMarginal === key)) e.currentTarget.style.background = 'transparent'; }}>
+// // //                         <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }} dangerouslySetInnerHTML={{ __html: lbl }}></td>
+// // //                         <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px' }}>{val.toFixed(4)}</td>
+// // //                       </tr>
+// // //                     ))}
+// // //                     <tr>
+// // //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }}>Total</td>
+// // //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontWeight: 'bold', fontSize: '12px' }}>1.0000</td>
+// // //                     </tr>
+// // //                   </tbody>
+// // //                 </table>
+// // //               </div>
+// // //             ))}
+// // //           </div>
+
+// // //           {(highlightedCell || highlightedMarginal) && (
+// // //             <button onClick={() => { setHighlightedCell(null); setHighlightedMarginal(null); }}
+// // //               style={{ padding: '10px', background: '#ef4444', color: 'white', border: 'none', borderRadius: '6px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
+// // //               Clear Selection
+// // //             </button>
+// // //           )}
+// // //         </div>
+// // //       </div>
+
+// // //       <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af' }}>
+// // //         <strong>How to read:</strong> Cells show joint probabilities. Click conditional rows to highlight paths.
+// // //       </div>
+// // //     </div>
+// // //   );
+// // // }
+
+
+// // 'use client';
+
+// // import React, { useState } from 'react';
+
+// // export default function ConditionalProbabilityTable2x3({ explanations = null }) {
+// //   const [activeTab, setActiveTab] = useState('explanation');
+  
+// //   const pA = 0.6;
+// //   const pB1GivenA = 0.5;
+// //   const pB2GivenA = 0.3;
+// //   const pB1GivenNotA = 0.3;
+// //   const pB2GivenNotA = 0.4;
+  
+// //   const [highlightedCell, setHighlightedCell] = useState(null);
+// //   const [highlightedMarginal, setHighlightedMarginal] = useState(null);
+
+// //   const pNotA = 1 - pA;
+// //   const pB3GivenA = 1 - pB1GivenA - pB2GivenA;
+// //   const pB3GivenNotA = 1 - pB1GivenNotA - pB2GivenNotA;
+  
+// //   const pAAndB1 = pA * pB1GivenA;
+// //   const pAAndB2 = pA * pB2GivenA;
+// //   const pAAndB3 = pA * pB3GivenA;
+// //   const pNotAAndB1 = pNotA * pB1GivenNotA;
+// //   const pNotAAndB2 = pNotA * pB2GivenNotA;
+// //   const pNotAAndB3 = pNotA * pB3GivenNotA;
+  
+// //   const pB1 = pAAndB1 + pNotAAndB1;
+// //   const pB2 = pAAndB2 + pNotAAndB2;
+// //   const pB3 = pAAndB3 + pNotAAndB3;
+
+// //   const cellColors = {
+// //     'AB1': '#10b981',
+// //     'AB2': '#f59e0b',
+// //     'AB3': '#8b5cf6',
+// //     'notAB1': '#ef4444',
+// //     'notAB2': '#06b6d4',
+// //     'notAB3': '#ec4899'
+// //   };
+
+// //   const handleConditionalClick = (cell, marginal) => {
+// //     if (highlightedCell === cell && highlightedMarginal === marginal) {
+// //       setHighlightedCell(null);
+// //       setHighlightedMarginal(null);
+// //     } else {
+// //       setHighlightedCell(cell);
+// //       setHighlightedMarginal(marginal);
+// //     }
+// //   };
+
+// //   const handleCellClick = (cell) => {
+// //     if (highlightedCell === cell && !highlightedMarginal) {
+// //       setHighlightedCell(null);
+// //     } else {
+// //       setHighlightedCell(cell);
+// //       setHighlightedMarginal(null);
+// //     }
+// //   };
+
+// //   const getCellStyle = (cellKey) => {
+// //     const baseStyle = {
+// //       padding: '20px',
+// //       textAlign: 'center',
+// //       border: '2px solid #e2e8f0',
+// //       cursor: 'pointer',
+// //       transition: 'all 0.3s',
+// //       background: 'white'
+// //     };
+
+// //     if (highlightedCell === cellKey) {
+// //       return {
+// //         ...baseStyle,
+// //         border: `3px solid ${cellColors[cellKey]}`,
+// //         background: `${cellColors[cellKey]}30`,
+// //         fontWeight: 'bold'
+// //       };
+// //     }
+
+// //     return baseStyle;
+// //   };
+
+// //   const getMarginalStyle = (marginalKey) => {
+// //     const baseStyle = {
+// //       padding: '15px',
+// //       fontWeight: 'bold',
+// //       background: '#f8fafc',
+// //       border: '2px solid #e2e8f0',
+// //       textAlign: 'center',
+// //       fontSize: '16px'
+// //     };
+
+// //     if (highlightedMarginal === marginalKey) {
+// //       return {
+// //         ...baseStyle,
+// //         border: `3px solid ${cellColors[highlightedCell]}`,
+// //         background: `${cellColors[highlightedCell]}20`
+// //       };
+// //     }
+
+// //     return baseStyle;
+// //   };
+
+// //   const getHeaderStyle = () => ({
+// //     padding: '15px',
+// //     fontWeight: 'bold',
+// //     background: '#f8fafc',
+// //     border: '2px solid #e2e8f0',
+// //     textAlign: 'center'
+// //   });
+
+// //   const defaultExplanation = (
+// //     <div style={{ fontSize: '14px', lineHeight: '1.6', color: '#475569' }}>
+// //       <h3 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '10px', color: '#1e293b' }}>
+// //         2×3 Contingency Table
+// //       </h3>
+// //       <p style={{ marginBottom: '10px' }}>
+// //         Two variables: A (binary) and B (three categories: B₁, B₂, B₃).
+// //       </p>
+// //       <p style={{ marginBottom: '10px' }}>
+// //         <strong>Cells:</strong> Joint probabilities P(A ∩ Bᵢ)
+// //       </p>
+// //     </div>
+// //   );
+
+// //   const controlsExplanation = (
+// //     <div style={{ fontSize: '14px', lineHeight: '1.6', color: '#475569' }}>
+// //       <h3 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '10px', color: '#1e293b' }}>
+// //         How to Use
+// //       </h3>
+// //       <p style={{ marginBottom: '10px' }}>
+// //         Controls explanation placeholder.
+// //       </p>
+// //     </div>
+// //   );
+
+// //   return (
+// //     <div style={{ padding: '20px', maxWidth: '1600px', margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+// //       <style>{`
+// //         @keyframes borderPulse {
+// //           0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+// //           50% { box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3); }
+// //         }
+// //         .clickable-row { animation: borderPulse 3s ease-in-out infinite; }
+// //         .clickable-row:hover { animation: none; }
+// //         .conditional-table { border-spacing: 0 8px; }
+// //       `}</style>
+      
+// //       <p style={{ color: '#666', marginBottom: '30px' }}>
+// //         2×3 contingency table showing joint, marginal, and conditional probabilities.
+// //       </p>
+
+// //       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '20px', marginBottom: '30px' }}>
+// //         <div>
+// //           <div style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '20px', marginBottom: '20px' }}>
+// //             <h2 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '20px', textAlign: 'center' }}>Joint Probability Table</h2>
+            
+// //             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+// //               <thead>
+// //                 <tr>
+// //                   <th style={getHeaderStyle()}></th>
+// //                   <th style={getHeaderStyle()}>B₁</th>
+// //                   <th style={getHeaderStyle()}>B₂</th>
+// //                   <th style={getHeaderStyle()}>B₃</th>
+// //                   <th style={getHeaderStyle()}>Total</th>
+// //                 </tr>
+// //               </thead>
+// //               <tbody>
+// //                 <tr>
+// //                   <td style={getHeaderStyle()}>A</td>
+// //                   <td style={getCellStyle('AB1')} onClick={() => handleCellClick('AB1')}>
+// //                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pAAndB1.toFixed(4)}</div>
+// //                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A ∩ B₁)</div>
+// //                   </td>
+// //                   <td style={getCellStyle('AB2')} onClick={() => handleCellClick('AB2')}>
+// //                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pAAndB2.toFixed(4)}</div>
+// //                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A ∩ B₂)</div>
+// //                   </td>
+// //                   <td style={getCellStyle('AB3')} onClick={() => handleCellClick('AB3')}>
+// //                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pAAndB3.toFixed(4)}</div>
+// //                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A ∩ B₃)</div>
+// //                   </td>
+// //                   <td style={getMarginalStyle('A')}>
+// //                     <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '3px' }}>{pA.toFixed(4)}</div>
+// //                     <div style={{ fontSize: '11px', color: '#64748b' }}>P(A)</div>
+// //                   </td>
+// //                 </tr>
+// //                 <tr>
+// //                   <td style={getHeaderStyle()}>A<sup>c</sup></td>
+// //                   <td style={getCellStyle('notAB1')} onClick={() => handleCellClick('notAB1')}>
+// //                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pNotAAndB1.toFixed(4)}</div>
+// //                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A<sup>c</sup> ∩ B₁)</div>
+// //                   </td>
+// //                   <td style={getCellStyle('notAB2')} onClick={() => handleCellClick('notAB2')}>
+// //                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pNotAAndB2.toFixed(4)}</div>
+// //                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A<sup>c</sup> ∩ B₂)</div>
+// //                   </td>
+// //                   <td style={getCellStyle('notAB3')} onClick={() => handleCellClick('notAB3')}>
+// //                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pNotAAndB3.toFixed(4)}</div>
+// //                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A<sup>c</sup> ∩ B₃)</div>
+// //                   </td>
+// //                   <td style={getMarginalStyle('notA')}>
+// //                     <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '3px' }}>{pNotA.toFixed(4)}</div>
+// //                     <div style={{ fontSize: '11px', color: '#64748b' }}>P(A<sup>c</sup>)</div>
+// //                   </td>
+// //                 </tr>
+// //                 <tr>
+// //                   <td style={getHeaderStyle()}>Total</td>
+// //                   <td style={getMarginalStyle('B1')}>
+// //                     <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '3px' }}>{pB1.toFixed(4)}</div>
+// //                     <div style={{ fontSize: '11px', color: '#64748b' }}>P(B₁)</div>
+// //                   </td>
+// //                   <td style={getMarginalStyle('B2')}>
+// //                     <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '3px' }}>{pB2.toFixed(4)}</div>
+// //                     <div style={{ fontSize: '11px', color: '#64748b' }}>P(B₂)</div>
+// //                   </td>
+// //                   <td style={getMarginalStyle('B3')}>
+// //                     <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '3px' }}>{pB3.toFixed(4)}</div>
+// //                     <div style={{ fontSize: '11px', color: '#64748b' }}>P(B₃)</div>
+// //                   </td>
+// //                   <td style={{ ...getHeaderStyle(), fontSize: '16px', fontWeight: 'bold' }}>1.0000</td>
+// //                 </tr>
+// //               </tbody>
+// //             </table>
+// //           </div>
+
+// //           <div style={{ background: '#f8fafc', borderRadius: '8px', overflow: 'hidden' }}>
+// //             <div style={{ display: 'flex', borderBottom: '2px solid #e2e8f0' }}>
+// //               <button onClick={() => setActiveTab('explanation')}
+// //                 style={{ flex: 1, padding: '12px', background: activeTab === 'explanation' ? 'white' : '#f8fafc', border: 'none', borderBottom: activeTab === 'explanation' ? '3px solid #3b82f6' : 'none', fontWeight: activeTab === 'explanation' ? 'bold' : 'normal', cursor: 'pointer', fontSize: '14px' }}>
+// //                 Explanation
+// //               </button>
+// //               <button onClick={() => setActiveTab('controls')}
+// //                 style={{ flex: 1, padding: '12px', background: activeTab === 'controls' ? 'white' : '#f8fafc', border: 'none', borderBottom: activeTab === 'controls' ? '3px solid #3b82f6' : 'none', fontWeight: activeTab === 'controls' ? 'bold' : 'normal', cursor: 'pointer', fontSize: '14px' }}>
+// //                 Controls
+// //               </button>
+// //             </div>
+
+// //             <div style={{ padding: '20px', background: 'white', minHeight: '200px' }}>
+// //               {activeTab === 'explanation' && (explanations || defaultExplanation)}
+// //               {activeTab === 'controls' && controlsExplanation}
+// //             </div>
+// //           </div>
+// //         </div>
+
+// //         <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+// //           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+// //             <div style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '15px', display: 'flex', flexDirection: 'column' }}>
+// //               <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>Conditional on A</h3>
+// //               <div style={{ background: '#dbeafe', padding: '5px 10px', borderRadius: '4px', marginBottom: '10px', textAlign: 'center' }}>
+// //                 <span style={{ fontSize: '12px', color: '#1e40af', fontWeight: '600' }}>Click rows</span>
+// //               </div>
+// //               <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 6px", flexGrow: 1 }} className="conditional-table">
+// //                 <tbody>
+// //                   {[
+// //                     ['AB1', 'A', pB1GivenA, 'P(B₁|A)', 'P(A ∩ B₁) / P(A)', pAAndB1, pA],
+// //                     ['AB2', 'A', pB2GivenA, 'P(B₂|A)', 'P(A ∩ B₂) / P(A)', pAAndB2, pA],
+// //                     ['AB3', 'A', pB3GivenA, 'P(B₃|A)', 'P(A ∩ B₃) / P(A)', pAAndB3, pA]
+// //                   ].map(([cell, marg, val, lbl, formula, numerator, denominator]) => (
+// //                     <tr key={cell} className="clickable-row" onClick={() => handleConditionalClick(cell, marg)}
+// //                       style={{ cursor: 'pointer', transition: 'all 0.2s', background: highlightedCell === cell && highlightedMarginal === marg ? `${cellColors[cell]}15` : 'transparent' }}
+// //                       onMouseEnter={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = '#f8fafc'; }}
+// //                       onMouseLeave={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = 'transparent'; }}>
+// //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontSize: '11px' }}>
+// //                         <div style={{ marginBottom: '2px', fontWeight: 'bold' }}>
+// //                           {lbl} = {formula}
+// //                         </div>
+// //                         <div style={{ color: '#64748b', fontSize: '10px' }}>
+// //                           = {numerator.toFixed(4)} / {denominator.toFixed(4)}
+// //                         </div>
+// //                       </td>
+// //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px', fontWeight: 'bold' }}>{val.toFixed(4)}</td>
+// //                     </tr>
+// //                   ))}
+// //                   <tr>
+// //                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }}>Total</td>
+// //                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontWeight: 'bold', fontSize: '12px' }}>1.0000</td>
+// //                   </tr>
+// //                 </tbody>
+// //               </table>
+// //             </div>
+
+// //             <div style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '15px', display: 'flex', flexDirection: 'column' }}>
+// //               <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>Conditional on A<sup>c</sup></h3>
+// //               <div style={{ background: '#dbeafe', padding: '5px 10px', borderRadius: '4px', marginBottom: '10px', textAlign: 'center' }}>
+// //                 <span style={{ fontSize: '12px', color: '#1e40af', fontWeight: '600' }}>Click rows</span>
+// //               </div>
+// //               <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 6px", flexGrow: 1 }} className="conditional-table">
+// //                 <tbody>
+// //                   {[
+// //                     ['notAB1', 'notA', pB1GivenNotA, 'P(B₁|A<sup>c</sup>)', 'P(A<sup>c</sup> ∩ B₁) / P(A<sup>c</sup>)', pNotAAndB1, pNotA],
+// //                     ['notAB2', 'notA', pB2GivenNotA, 'P(B₂|A<sup>c</sup>)', 'P(A<sup>c</sup> ∩ B₂) / P(A<sup>c</sup>)', pNotAAndB2, pNotA],
+// //                     ['notAB3', 'notA', pB3GivenNotA, 'P(B₃|A<sup>c</sup>)', 'P(A<sup>c</sup> ∩ B₃) / P(A<sup>c</sup>)', pNotAAndB3, pNotA]
+// //                   ].map(([cell, marg, val, lbl, formula, numerator, denominator]) => (
+// //                     <tr key={cell} className="clickable-row" onClick={() => handleConditionalClick(cell, marg)}
+// //                       style={{ cursor: 'pointer', transition: 'all 0.2s', background: highlightedCell === cell && highlightedMarginal === marg ? `${cellColors[cell]}15` : 'transparent' }}
+// //                       onMouseEnter={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = '#f8fafc'; }}
+// //                       onMouseLeave={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = 'transparent'; }}>
+// //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontSize: '11px' }}>
+// //                         <div style={{ marginBottom: '2px', fontWeight: 'bold' }} dangerouslySetInnerHTML={{ __html: lbl + ' = ' + formula }}></div>
+// //                         <div style={{ color: '#64748b', fontSize: '10px' }}>
+// //                           = {numerator.toFixed(4)} / {denominator.toFixed(4)}
+// //                         </div>
+// //                       </td>
+// //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px', fontWeight: 'bold' }}>{val.toFixed(4)}</td>
+// //                     </tr>
+// //                   ))}
+// //                   <tr>
+// //                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }}>Total</td>
+// //                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontWeight: 'bold', fontSize: '12px' }}>1.0000</td>
+// //                   </tr>
+// //                 </tbody>
+// //               </table>
+// //             </div>
+// //           </div>
+
+// //           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px' }}>
+// //             {[
+// //               ['B1', 'B₁', [
+// //                 ['AB1', pB1 > 0 ? pAAndB1 / pB1 : 0, 'P(A|B₁)', 'P(A ∩ B₁) / P(B₁)', pAAndB1, pB1],
+// //                 ['notAB1', pB1 > 0 ? pNotAAndB1 / pB1 : 0, 'P(A<sup>c</sup>|B₁)', 'P(A<sup>c</sup> ∩ B₁) / P(B₁)', pNotAAndB1, pB1]
+// //               ]],
+// //               ['B2', 'B₂', [
+// //                 ['AB2', pB2 > 0 ? pAAndB2 / pB2 : 0, 'P(A|B₂)', 'P(A ∩ B₂) / P(B₂)', pAAndB2, pB2],
+// //                 ['notAB2', pB2 > 0 ? pNotAAndB2 / pB2 : 0, 'P(A<sup>c</sup>|B₂)', 'P(A<sup>c</sup> ∩ B₂) / P(B₂)', pNotAAndB2, pB2]
+// //               ]],
+// //               ['B3', 'B₃', [
+// //                 ['AB3', pB3 > 0 ? pAAndB3 / pB3 : 0, 'P(A|B₃)', 'P(A ∩ B₃) / P(B₃)', pAAndB3, pB3],
+// //                 ['notAB3', pB3 > 0 ? pNotAAndB3 / pB3 : 0, 'P(A<sup>c</sup>|B₃)', 'P(A<sup>c</sup> ∩ B₃) / P(B₃)', pNotAAndB3, pB3]
+// //               ]]
+// //             ].map(([key, title, cells]) => (
+// //               <div key={key} style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '15px' }}>
+// //                 <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>Conditional on {title}</h3>
+// //                 <div style={{ background: '#dbeafe', padding: '5px 10px', borderRadius: '4px', marginBottom: '10px', textAlign: 'center' }}>
+// //                   <span style={{ fontSize: '12px', color: '#1e40af', fontWeight: '600' }}>Click rows</span>
+// //                 </div>
+// //                 <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 6px" }} className="conditional-table">
+// //                   <tbody>
+// //                     {cells.map(([cell, val, lbl, formula, numerator, denominator]) => (
+// //                       <tr key={cell} className="clickable-row" onClick={() => handleConditionalClick(cell, key)}
+// //                         style={{ cursor: 'pointer', background: highlightedCell === cell && highlightedMarginal === key ? `${cellColors[cell]}15` : 'transparent' }}
+// //                         onMouseEnter={(e) => { if (!(highlightedCell === cell && highlightedMarginal === key)) e.currentTarget.style.background = '#f8fafc'; }}
+// //                         onMouseLeave={(e) => { if (!(highlightedCell === cell && highlightedMarginal === key)) e.currentTarget.style.background = 'transparent'; }}>
+// //                         <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontSize: '11px' }}>
+// //                           <div style={{ marginBottom: '2px', fontWeight: 'bold' }} dangerouslySetInnerHTML={{ __html: lbl + ' = ' + formula }}></div>
+// //                           <div style={{ color: '#64748b', fontSize: '10px' }}>
+// //                             = {numerator.toFixed(4)} / {denominator.toFixed(4)}
+// //                           </div>
+// //                         </td>
+// //                         <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px', fontWeight: 'bold' }}>{val.toFixed(4)}</td>
+// //                       </tr>
+// //                     ))}
+// //                     <tr>
+// //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }}>Total</td>
+// //                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontWeight: 'bold', fontSize: '12px' }}>1.0000</td>
+// //                     </tr>
+// //                   </tbody>
+// //                 </table>
+// //               </div>
+// //             ))}
+// //           </div>
+
+// //           {(highlightedCell || highlightedMarginal) && (
+// //             <button onClick={() => { setHighlightedCell(null); setHighlightedMarginal(null); }}
+// //               style={{ padding: '10px', background: '#ef4444', color: 'white', border: 'none', borderRadius: '6px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
+// //               Clear Selection
+// //             </button>
+// //           )}
+// //         </div>
+// //       </div>
+
+// //       <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af' }}>
+// //         <strong>How to read:</strong> Cells show joint probabilities. Click conditional rows to highlight paths.
+// //       </div>
+// //     </div>
+// //   );
+// // }
+
+
+// 'use client';
+
+// import React, { useState } from 'react';
+
+// export default function ConditionalProbabilityTable2x3({ explanations = null }) {
+//   const [activeTab, setActiveTab] = useState('explanation');
+  
+//   const pA = 0.6;
+//   const pB1GivenA = 0.5;
+//   const pB2GivenA = 0.3;
+//   const pB1GivenNotA = 0.3;
+//   const pB2GivenNotA = 0.4;
+  
+//   const [highlightedCell, setHighlightedCell] = useState(null);
+//   const [highlightedMarginal, setHighlightedMarginal] = useState(null);
+  
+//   const [accordionStates, setAccordionStates] = useState({
+//     condA: false,
+//     condNotA: false,
+//     condB1: false,
+//     condB2: false,
+//     condB3: false
+//   });
+
+//   const pNotA = 1 - pA;
+//   const pB3GivenA = 1 - pB1GivenA - pB2GivenA;
+//   const pB3GivenNotA = 1 - pB1GivenNotA - pB2GivenNotA;
+  
+//   const pAAndB1 = pA * pB1GivenA;
+//   const pAAndB2 = pA * pB2GivenA;
+//   const pAAndB3 = pA * pB3GivenA;
+//   const pNotAAndB1 = pNotA * pB1GivenNotA;
+//   const pNotAAndB2 = pNotA * pB2GivenNotA;
+//   const pNotAAndB3 = pNotA * pB3GivenNotA;
+  
+//   const pB1 = pAAndB1 + pNotAAndB1;
+//   const pB2 = pAAndB2 + pNotAAndB2;
+//   const pB3 = pAAndB3 + pNotAAndB3;
+
+//   const cellColors = {
+//     'AB1': '#10b981',
+//     'AB2': '#f59e0b',
+//     'AB3': '#8b5cf6',
+//     'notAB1': '#ef4444',
+//     'notAB2': '#06b6d4',
+//     'notAB3': '#ec4899'
+//   };
+
+//   const toggleAccordion = (key) => {
+//     setAccordionStates(prev => ({ ...prev, [key]: !prev[key] }));
+//   };
+
+//   const handleConditionalClick = (cell, marginal) => {
+//     if (highlightedCell === cell && highlightedMarginal === marginal) {
+//       setHighlightedCell(null);
+//       setHighlightedMarginal(null);
+//     } else {
+//       setHighlightedCell(cell);
+//       setHighlightedMarginal(marginal);
+//     }
+//   };
+
+//   const handleCellClick = (cell) => {
+//     if (highlightedCell === cell && !highlightedMarginal) {
+//       setHighlightedCell(null);
+//     } else {
+//       setHighlightedCell(cell);
+//       setHighlightedMarginal(null);
+//     }
+//   };
+
+//   const getCellStyle = (cellKey) => {
+//     const baseStyle = {
+//       padding: '20px',
+//       textAlign: 'center',
+//       border: '2px solid #e2e8f0',
+//       cursor: 'pointer',
+//       transition: 'all 0.3s',
+//       background: 'white'
+//     };
+
+//     if (highlightedCell === cellKey) {
+//       return {
+//         ...baseStyle,
+//         border: `3px solid ${cellColors[cellKey]}`,
+//         background: `${cellColors[cellKey]}30`,
+//         fontWeight: 'bold'
+//       };
+//     }
+
+//     return baseStyle;
+//   };
+
+//   const getMarginalStyle = (marginalKey) => {
+//     const baseStyle = {
+//       padding: '15px',
+//       fontWeight: 'bold',
+//       background: '#f8fafc',
+//       border: '2px solid #e2e8f0',
+//       textAlign: 'center',
+//       fontSize: '16px'
+//     };
+
+//     if (highlightedMarginal === marginalKey) {
+//       return {
+//         ...baseStyle,
+//         border: `3px solid ${cellColors[highlightedCell]}`,
+//         background: `${cellColors[highlightedCell]}20`
+//       };
+//     }
+
+//     return baseStyle;
+//   };
+
+//   const getHeaderStyle = () => ({
+//     padding: '15px',
+//     fontWeight: 'bold',
+//     background: '#f8fafc',
+//     border: '2px solid #e2e8f0',
+//     textAlign: 'center'
+//   });
+
+//   const defaultExplanation = (
+//     <div style={{ fontSize: '14px', lineHeight: '1.6', color: '#475569' }}>
+//       <h3 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '10px', color: '#1e293b' }}>
+//         2×3 Contingency Table
+//       </h3>
+//       <p style={{ marginBottom: '10px' }}>
+//         Two variables: A (binary) and B (three categories: B₁, B₂, B₃).
+//       </p>
+//       <p style={{ marginBottom: '10px' }}>
+//         <strong>Cells:</strong> Joint probabilities P(A ∩ Bᵢ)
+//       </p>
+//     </div>
+//   );
+
+//   const controlsExplanation = (
+//     <div style={{ fontSize: '14px', lineHeight: '1.6', color: '#475569' }}>
+//       <h3 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '10px', color: '#1e293b' }}>
+//         How to Use
+//       </h3>
+//       <p style={{ marginBottom: '10px' }}>
+//         Controls explanation placeholder.
+//       </p>
+//     </div>
+//   );
+
+//   const Accordion = ({ isOpen, onToggle, children }) => (
+//     <div>
+//       <div 
+//         onClick={onToggle}
+//         style={{ 
+//           background: '#dbeafe', 
+//           padding: '8px 10px', 
+//           borderRadius: '4px', 
+//           marginBottom: isOpen ? '8px' : '10px', 
+//           textAlign: 'center',
+//           cursor: 'pointer',
+//           userSelect: 'none',
+//           display: 'flex',
+//           alignItems: 'center',
+//           justifyContent: 'center',
+//           gap: '6px'
+//         }}>
+//         <span style={{ fontSize: '12px', color: '#1e40af', fontWeight: '600' }}>
+//           {isOpen ? '▼' : '▶'} Row Explanations
+//         </span>
+//       </div>
+//       {isOpen && (
+//         <div style={{ 
+//           background: '#f0f9ff', 
+//           padding: '10px', 
+//           borderRadius: '4px', 
+//           marginBottom: '10px',
+//           fontSize: '11px',
+//           color: '#1e40af',
+//           lineHeight: '1.6'
+//         }}>
+//           {children}
+//         </div>
+//       )}
+//     </div>
+//   );
+
+//   return (
+//     <div style={{ padding: '20px', maxWidth: '1600px', margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+//       <style>{`
+//         @keyframes borderPulse {
+//           0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+//           50% { box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3); }
+//         }
+//         .clickable-row { animation: borderPulse 3s ease-in-out infinite; }
+//         .clickable-row:hover { animation: none; }
+//         .conditional-table { border-spacing: 0 8px; }
+//       `}</style>
+      
+//       <p style={{ color: '#666', marginBottom: '30px' }}>
+//         2×3 contingency table showing joint, marginal, and conditional probabilities.
+//       </p>
+
+//       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '20px', marginBottom: '30px' }}>
+//         <div>
+//           <div style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '20px', marginBottom: '20px' }}>
+//             <h2 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '20px', textAlign: 'center' }}>Joint Probability Table</h2>
+            
+//             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+//               <thead>
+//                 <tr>
+//                   <th style={getHeaderStyle()}></th>
+//                   <th style={getHeaderStyle()}>B₁</th>
+//                   <th style={getHeaderStyle()}>B₂</th>
+//                   <th style={getHeaderStyle()}>B₃</th>
+//                   <th style={getHeaderStyle()}>Total</th>
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 <tr>
+//                   <td style={getHeaderStyle()}>A</td>
+//                   <td style={getCellStyle('AB1')} onClick={() => handleCellClick('AB1')}>
+//                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pAAndB1.toFixed(4)}</div>
+//                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A ∩ B₁)</div>
+//                   </td>
+//                   <td style={getCellStyle('AB2')} onClick={() => handleCellClick('AB2')}>
+//                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pAAndB2.toFixed(4)}</div>
+//                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A ∩ B₂)</div>
+//                   </td>
+//                   <td style={getCellStyle('AB3')} onClick={() => handleCellClick('AB3')}>
+//                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pAAndB3.toFixed(4)}</div>
+//                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A ∩ B₃)</div>
+//                   </td>
+//                   <td style={getMarginalStyle('A')}>
+//                     <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '3px' }}>{pA.toFixed(4)}</div>
+//                     <div style={{ fontSize: '11px', color: '#64748b' }}>P(A)</div>
+//                   </td>
+//                 </tr>
+//                 <tr>
+//                   <td style={getHeaderStyle()}>A<sup>c</sup></td>
+//                   <td style={getCellStyle('notAB1')} onClick={() => handleCellClick('notAB1')}>
+//                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pNotAAndB1.toFixed(4)}</div>
+//                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A<sup>c</sup> ∩ B₁)</div>
+//                   </td>
+//                   <td style={getCellStyle('notAB2')} onClick={() => handleCellClick('notAB2')}>
+//                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pNotAAndB2.toFixed(4)}</div>
+//                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A<sup>c</sup> ∩ B₂)</div>
+//                   </td>
+//                   <td style={getCellStyle('notAB3')} onClick={() => handleCellClick('notAB3')}>
+//                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pNotAAndB3.toFixed(4)}</div>
+//                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A<sup>c</sup> ∩ B₃)</div>
+//                   </td>
+//                   <td style={getMarginalStyle('notA')}>
+//                     <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '3px' }}>{pNotA.toFixed(4)}</div>
+//                     <div style={{ fontSize: '11px', color: '#64748b' }}>P(A<sup>c</sup>)</div>
+//                   </td>
+//                 </tr>
+//                 <tr>
+//                   <td style={getHeaderStyle()}>Total</td>
+//                   <td style={getMarginalStyle('B1')}>
+//                     <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '3px' }}>{pB1.toFixed(4)}</div>
+//                     <div style={{ fontSize: '11px', color: '#64748b' }}>P(B₁)</div>
+//                   </td>
+//                   <td style={getMarginalStyle('B2')}>
+//                     <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '3px' }}>{pB2.toFixed(4)}</div>
+//                     <div style={{ fontSize: '11px', color: '#64748b' }}>P(B₂)</div>
+//                   </td>
+//                   <td style={getMarginalStyle('B3')}>
+//                     <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '3px' }}>{pB3.toFixed(4)}</div>
+//                     <div style={{ fontSize: '11px', color: '#64748b' }}>P(B₃)</div>
+//                   </td>
+//                   <td style={{ ...getHeaderStyle(), fontSize: '16px', fontWeight: 'bold' }}>1.0000</td>
+//                 </tr>
+//               </tbody>
+//             </table>
+//           </div>
+
+//           <div style={{ background: '#f8fafc', borderRadius: '8px', overflow: 'hidden' }}>
+//             <div style={{ display: 'flex', borderBottom: '2px solid #e2e8f0' }}>
+//               <button onClick={() => setActiveTab('explanation')}
+//                 style={{ flex: 1, padding: '12px', background: activeTab === 'explanation' ? 'white' : '#f8fafc', border: 'none', borderBottom: activeTab === 'explanation' ? '3px solid #3b82f6' : 'none', fontWeight: activeTab === 'explanation' ? 'bold' : 'normal', cursor: 'pointer', fontSize: '14px' }}>
+//                 Explanation
+//               </button>
+//               <button onClick={() => setActiveTab('controls')}
+//                 style={{ flex: 1, padding: '12px', background: activeTab === 'controls' ? 'white' : '#f8fafc', border: 'none', borderBottom: activeTab === 'controls' ? '3px solid #3b82f6' : 'none', fontWeight: activeTab === 'controls' ? 'bold' : 'normal', cursor: 'pointer', fontSize: '14px' }}>
+//                 Controls
+//               </button>
+//             </div>
+
+//             <div style={{ padding: '20px', background: 'white', minHeight: '200px' }}>
+//               {activeTab === 'explanation' && (explanations || defaultExplanation)}
+//               {activeTab === 'controls' && controlsExplanation}
+//             </div>
+//           </div>
+//         </div>
+
+//         <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+//           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+//             <div style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '15px', display: 'flex', flexDirection: 'column' }}>
+//               <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>Conditional on A</h3>
+//               <Accordion isOpen={accordionStates.condA} onToggle={() => toggleAccordion('condA')}>
+//                 <div>P(B₁|A) - Probability of B₁ conditional on A</div>
+//                 <div>P(B₂|A) - Probability of B₂ conditional on A</div>
+//                 <div>P(B₃|A) - Probability of B₃ conditional on A</div>
+//               </Accordion>
+//               <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 6px", flexGrow: 1 }} className="conditional-table">
+//                 <tbody>
+//                   {[
+//                     ['AB1', 'A', pB1GivenA, 'P(B₁|A)', 'P(A ∩ B₁) / P(A)', pAAndB1, pA],
+//                     ['AB2', 'A', pB2GivenA, 'P(B₂|A)', 'P(A ∩ B₂) / P(A)', pAAndB2, pA],
+//                     ['AB3', 'A', pB3GivenA, 'P(B₃|A)', 'P(A ∩ B₃) / P(A)', pAAndB3, pA]
+//                   ].map(([cell, marg, val, lbl, formula, numerator, denominator]) => (
+//                     <tr key={cell} className="clickable-row" onClick={() => handleConditionalClick(cell, marg)}
+//                       style={{ cursor: 'pointer', transition: 'all 0.2s', background: highlightedCell === cell && highlightedMarginal === marg ? `${cellColors[cell]}15` : 'transparent' }}
+//                       onMouseEnter={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = '#f8fafc'; }}
+//                       onMouseLeave={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = 'transparent'; }}>
+//                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontSize: '11px' }}>
+//                         <div style={{ marginBottom: '2px', fontWeight: 'bold' }}>
+//                           {lbl} = {formula}
+//                         </div>
+//                         <div style={{ color: '#64748b', fontSize: '10px' }}>
+//                           = {numerator.toFixed(4)} / {denominator.toFixed(4)}
+//                         </div>
+//                       </td>
+//                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px', fontWeight: 'bold' }}>{val.toFixed(4)}</td>
+//                     </tr>
+//                   ))}
+//                   <tr>
+//                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }}>Total</td>
+//                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontWeight: 'bold', fontSize: '12px' }}>1.0000</td>
+//                   </tr>
+//                 </tbody>
+//               </table>
+//             </div>
+
+//             <div style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '15px', display: 'flex', flexDirection: 'column' }}>
+//               <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>Conditional on A<sup>c</sup></h3>
+//               <Accordion isOpen={accordionStates.condNotA} onToggle={() => toggleAccordion('condNotA')}>
+//                 <div dangerouslySetInnerHTML={{ __html: 'P(B₁|A<sup>c</sup>) - Probability of B₁ conditional on A<sup>c</sup>' }}></div>
+//                 <div dangerouslySetInnerHTML={{ __html: 'P(B₂|A<sup>c</sup>) - Probability of B₂ conditional on A<sup>c</sup>' }}></div>
+//                 <div dangerouslySetInnerHTML={{ __html: 'P(B₃|A<sup>c</sup>) - Probability of B₃ conditional on A<sup>c</sup>' }}></div>
+//               </Accordion>
+//               <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 6px", flexGrow: 1 }} className="conditional-table">
+//                 <tbody>
+//                   {[
+//                     ['notAB1', 'notA', pB1GivenNotA, 'P(B₁|A<sup>c</sup>)', 'P(A<sup>c</sup> ∩ B₁) / P(A<sup>c</sup>)', pNotAAndB1, pNotA],
+//                     ['notAB2', 'notA', pB2GivenNotA, 'P(B₂|A<sup>c</sup>)', 'P(A<sup>c</sup> ∩ B₂) / P(A<sup>c</sup>)', pNotAAndB2, pNotA],
+//                     ['notAB3', 'notA', pB3GivenNotA, 'P(B₃|A<sup>c</sup>)', 'P(A<sup>c</sup> ∩ B₃) / P(A<sup>c</sup>)', pNotAAndB3, pNotA]
+//                   ].map(([cell, marg, val, lbl, formula, numerator, denominator]) => (
+//                     <tr key={cell} className="clickable-row" onClick={() => handleConditionalClick(cell, marg)}
+//                       style={{ cursor: 'pointer', transition: 'all 0.2s', background: highlightedCell === cell && highlightedMarginal === marg ? `${cellColors[cell]}15` : 'transparent' }}
+//                       onMouseEnter={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = '#f8fafc'; }}
+//                       onMouseLeave={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = 'transparent'; }}>
+//                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontSize: '11px' }}>
+//                         <div style={{ marginBottom: '2px', fontWeight: 'bold' }} dangerouslySetInnerHTML={{ __html: lbl + ' = ' + formula }}></div>
+//                         <div style={{ color: '#64748b', fontSize: '10px' }}>
+//                           = {numerator.toFixed(4)} / {denominator.toFixed(4)}
+//                         </div>
+//                       </td>
+//                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px', fontWeight: 'bold' }}>{val.toFixed(4)}</td>
+//                     </tr>
+//                   ))}
+//                   <tr>
+//                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }}>Total</td>
+//                     <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontWeight: 'bold', fontSize: '12px' }}>1.0000</td>
+//                   </tr>
+//                 </tbody>
+//               </table>
+//             </div>
+//           </div>
+
+//           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px' }}>
+//             {[
+//               ['B1', 'B₁', 'condB1', [
+//                 ['AB1', pB1 > 0 ? pAAndB1 / pB1 : 0, 'P(A|B₁)', 'P(A ∩ B₁) / P(B₁)', pAAndB1, pB1, 'P(A|B₁) - Probability of A conditional on B₁'],
+//                 ['notAB1', pB1 > 0 ? pNotAAndB1 / pB1 : 0, 'P(A<sup>c</sup>|B₁)', 'P(A<sup>c</sup> ∩ B₁) / P(B₁)', pNotAAndB1, pB1, 'P(A<sup>c</sup>|B₁) - Probability of A<sup>c</sup> conditional on B₁']
+//               ]],
+//               ['B2', 'B₂', 'condB2', [
+//                 ['AB2', pB2 > 0 ? pAAndB2 / pB2 : 0, 'P(A|B₂)', 'P(A ∩ B₂) / P(B₂)', pAAndB2, pB2, 'P(A|B₂) - Probability of A conditional on B₂'],
+//                 ['notAB2', pB2 > 0 ? pNotAAndB2 / pB2 : 0, 'P(A<sup>c</sup>|B₂)', 'P(A<sup>c</sup> ∩ B₂) / P(B₂)', pNotAAndB2, pB2, 'P(A<sup>c</sup>|B₂) - Probability of A<sup>c</sup> conditional on B₂']
+//               ]],
+//               ['B3', 'B₃', 'condB3', [
+//                 ['AB3', pB3 > 0 ? pAAndB3 / pB3 : 0, 'P(A|B₃)', 'P(A ∩ B₃) / P(B₃)', pAAndB3, pB3, 'P(A|B₃) - Probability of A conditional on B₃'],
+//                 ['notAB3', pB3 > 0 ? pNotAAndB3 / pB3 : 0, 'P(A<sup>c</sup>|B₃)', 'P(A<sup>c</sup> ∩ B₃) / P(B₃)', pNotAAndB3, pB3, 'P(A<sup>c</sup>|B₃) - Probability of A<sup>c</sup> conditional on B₃']
+//               ]]
+//             ].map(([key, title, accordionKey, cells]) => (
+//               <div key={key} style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '15px' }}>
+//                 <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>Conditional on {title}</h3>
+//                 <Accordion isOpen={accordionStates[accordionKey]} onToggle={() => toggleAccordion(accordionKey)}>
+//                   {cells.map(([cell, val, lbl, formula, numerator, denominator, explanation]) => (
+//                     <div key={cell} dangerouslySetInnerHTML={{ __html: explanation }}></div>
+//                   ))}
+//                 </Accordion>
+//                 <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 6px" }} className="conditional-table">
+//                   <tbody>
+//                     {cells.map(([cell, val, lbl, formula, numerator, denominator]) => (
+//                       <tr key={cell} className="clickable-row" onClick={() => handleConditionalClick(cell, key)}
+//                         style={{ cursor: 'pointer', background: highlightedCell === cell && highlightedMarginal === key ? `${cellColors[cell]}15` : 'transparent' }}
+//                         onMouseEnter={(e) => { if (!(highlightedCell === cell && highlightedMarginal === key)) e.currentTarget.style.background = '#f8fafc'; }}
+//                         onMouseLeave={(e) => { if (!(highlightedCell === cell && highlightedMarginal === key)) e.currentTarget.style.background = 'transparent'; }}>
+//                         <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontSize: '11px' }}>
+//                           <div style={{ marginBottom: '2px', fontWeight: 'bold' }} dangerouslySetInnerHTML={{ __html: lbl + ' = ' + formula }}></div>
+//                           <div style={{ color: '#64748b', fontSize: '10px' }}>
+//                             = {numerator.toFixed(4)} / {denominator.toFixed(4)}
+//                           </div>
+//                         </td>
+//                         <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px', fontWeight: 'bold' }}>{val.toFixed(4)}</td>
+//                       </tr>
+//                     ))}
+//                     <tr>
+//                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }}>Total</td>
+//                       <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontWeight: 'bold', fontSize: '12px' }}>1.0000</td>
+//                     </tr>
+//                   </tbody>
+//                 </table>
+//               </div>
+//             ))}
+//           </div>
+
+//           {(highlightedCell || highlightedMarginal) && (
+//             <button onClick={() => { setHighlightedCell(null); setHighlightedMarginal(null); }}
+//               style={{ padding: '10px', background: '#ef4444', color: 'white', border: 'none', borderRadius: '6px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
+//               Clear Selection
+//             </button>
+//           )}
+//         </div>
+//       </div>
+
+//       <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af' }}>
+//         <strong>How to read:</strong> Cells show joint probabilities. Click conditional rows to highlight paths.
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
 'use client';
 
 import React, { useState } from 'react';
+import defaultExplanations from './2x3explanations.js';
 
 export default function ConditionalProbabilityTable2x3({ explanations = null }) {
-  const [activeTab, setActiveTab] = useState('explanation');
+  const [activeTab, setActiveTab] = useState('explanations');
   
-  const defaults = {
-    pA: 0.6,
-    pB1GivenA: 0.5,
-    pB2GivenA: 0.3,
-    pB1GivenNotA: 0.3,
-    pB2GivenNotA: 0.4
-  };
-  
-  const [pA, setPA] = useState(defaults.pA);
-  const [pB1GivenA, setPB1GivenA] = useState(defaults.pB1GivenA);
-  const [pB2GivenA, setPB2GivenA] = useState(defaults.pB2GivenA);
-  const [pB1GivenNotA, setPB1GivenNotA] = useState(defaults.pB1GivenNotA);
-  const [pB2GivenNotA, setPB2GivenNotA] = useState(defaults.pB2GivenNotA);
+  const pA = 0.6;
+  const pB1GivenA = 0.5;
+  const pB2GivenA = 0.3;
+  const pB1GivenNotA = 0.3;
+  const pB2GivenNotA = 0.4;
   
   const [highlightedCell, setHighlightedCell] = useState(null);
   const [highlightedMarginal, setHighlightedMarginal] = useState(null);
-  const [editingCell, setEditingCell] = useState(null);
+  
+  const [accordionStates, setAccordionStates] = useState({
+    condA: false,
+    condNotA: false,
+    condB1: false,
+    condB2: false,
+    condB3: false
+  });
 
   const pNotA = 1 - pA;
   const pB3GivenA = 1 - pB1GivenA - pB2GivenA;
@@ -47,15 +1640,18 @@ export default function ConditionalProbabilityTable2x3({ explanations = null }) 
     'notAB3': '#ec4899'
   };
 
-  const resetToDefaults = () => {
-    setPA(defaults.pA);
-    setPB1GivenA(defaults.pB1GivenA);
-    setPB2GivenA(defaults.pB2GivenA);
-    setPB1GivenNotA(defaults.pB1GivenNotA);
-    setPB2GivenNotA(defaults.pB2GivenNotA);
-    setHighlightedCell(null);
-    setHighlightedMarginal(null);
-    setEditingCell(null);
+  const explanationsToUse = explanations || defaultExplanations;
+
+  const getExplanationKey = () => {
+    if (!highlightedCell) return 'default';
+    if (highlightedMarginal) return `${highlightedCell}-${highlightedMarginal}`;
+    return highlightedCell;
+  };
+
+  const currentExplanation = explanationsToUse[getExplanationKey()] || explanationsToUse['default'];
+
+  const toggleAccordion = (key) => {
+    setAccordionStates(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
   const handleConditionalClick = (cell, marginal) => {
@@ -69,7 +1665,6 @@ export default function ConditionalProbabilityTable2x3({ explanations = null }) 
   };
 
   const handleCellClick = (cell) => {
-    if (editingCell) return;
     if (highlightedCell === cell && !highlightedMarginal) {
       setHighlightedCell(null);
     } else {
@@ -78,12 +1673,12 @@ export default function ConditionalProbabilityTable2x3({ explanations = null }) 
     }
   };
 
-  const getCellStyle = (cellKey, isEditable = false) => {
+  const getCellStyle = (cellKey) => {
     const baseStyle = {
-      padding: isEditable ? '15px' : '20px',
+      padding: '20px',
       textAlign: 'center',
       border: '2px solid #e2e8f0',
-      cursor: isEditable ? 'pointer' : 'pointer',
+      cursor: 'pointer',
       transition: 'all 0.3s',
       background: 'white'
     };
@@ -100,15 +1695,14 @@ export default function ConditionalProbabilityTable2x3({ explanations = null }) 
     return baseStyle;
   };
 
-  const getMarginalStyle = (marginalKey, isEditable = false) => {
+  const getMarginalStyle = (marginalKey) => {
     const baseStyle = {
       padding: '15px',
       fontWeight: 'bold',
       background: '#f8fafc',
       border: '2px solid #e2e8f0',
       textAlign: 'center',
-      fontSize: '16px',
-      cursor: isEditable ? 'pointer' : 'default'
+      fontSize: '16px'
     };
 
     if (highlightedMarginal === marginalKey) {
@@ -130,121 +1724,63 @@ export default function ConditionalProbabilityTable2x3({ explanations = null }) 
     textAlign: 'center'
   });
 
-  const handleInputChange = (setter, value) => {
-    const num = parseFloat(value);
-    if (!isNaN(num) && num >= 0 && num <= 1) {
-      setter(num);
-    }
-  };
-
-  const renderEditableJointCell = (jointValue, conditionalValue, setter, cellKey, label) => {
-    const isEditing = editingCell === cellKey;
-
-    return (
-      <div onClick={() => !isEditing && setEditingCell(cellKey)} style={{ cursor: 'pointer' }}>
-        {isEditing ? (
-          <div>
-            <div style={{ fontSize: '11px', color: '#64748b', marginBottom: '5px' }}>Edit conditional</div>
-            <input
-              type="number"
-              step="0.01"
-              value={conditionalValue}
-              onChange={(e) => handleInputChange(setter, e.target.value)}
-              onBlur={() => setEditingCell(null)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === 'Escape') setEditingCell(null);
-              }}
-              autoFocus
-              style={{
-                width: '90%',
-                padding: '6px',
-                border: '2px solid #3b82f6',
-                borderRadius: '4px',
-                fontSize: '16px',
-                textAlign: 'center',
-                fontWeight: 'bold'
-              }}
-            />
-          </div>
-        ) : (
-          <>
-            <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>
-              {jointValue.toFixed(4)}
-            </div>
-            <div style={{ fontSize: '12px', color: '#64748b' }}>
-              <span dangerouslySetInnerHTML={{ __html: label }} />
-            </div>
-          </>
-        )}
-      </div>
-    );
-  };
-
-  const renderEditableMarginal = (value, setter, cellKey) => {
-    const isEditing = editingCell === cellKey;
-
-    return (
-      <div onClick={() => !isEditing && setEditingCell(cellKey)} style={{ cursor: 'pointer' }}>
-        {isEditing ? (
-          <input
-            type="number"
-            step="0.01"
-            value={value}
-            onChange={(e) => handleInputChange(setter, e.target.value)}
-            onBlur={() => setEditingCell(null)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === 'Escape') setEditingCell(null);
-            }}
-            autoFocus
-            style={{
-              width: '80%',
-              padding: '6px',
-              border: '2px solid #3b82f6',
-              borderRadius: '4px',
-              fontSize: '16px',
-              textAlign: 'center',
-              fontWeight: 'bold'
-            }}
-          />
-        ) : (
-          <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
-            {value.toFixed(4)}
-          </div>
-        )}
-        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
-            {value.toFixed(4)}
-          </div>
-      </div>
-    );
-  };
-
-  const defaultExplanation = (
+  const controlsExplanation = (
     <div style={{ fontSize: '14px', lineHeight: '1.6', color: '#475569' }}>
       <h3 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '10px', color: '#1e293b' }}>
-        2×3 Contingency Table
+        How to Use This Table
       </h3>
       <p style={{ marginBottom: '10px' }}>
-        Two variables: A (binary) and B (three categories: B₁, B₂, B₃).
+        <strong>Main Table (left):</strong> Click any cell to highlight it and see its joint probability. Click marginal totals to highlight related conditional probabilities.
       </p>
       <p style={{ marginBottom: '10px' }}>
-        <strong>Cells:</strong> Joint probabilities P(A ∩ Bᵢ). Click to edit conditional inputs.
+        <strong>Conditional Panels (right):</strong> Click any row to highlight the corresponding cell in the main table and its marginal probability. This shows the relationship between joint and conditional probabilities.
+      </p>
+      <p style={{ marginBottom: '10px' }}>
+        <strong>Accordions:</strong> Expand the "Row Explanations" sections to see what each conditional probability represents.
+      </p>
+      <p style={{ marginBottom: '10px' }}>
+        <strong>Clear Selection:</strong> Use the red button at the bottom to reset all highlights.
+      </p>
+      <p style={{ color: '#64748b', fontSize: '13px' }}>
+        Each conditional panel shows how probabilities distribute when you know one variable's value. The formulas show how conditional probabilities are calculated from joint and marginal probabilities.
       </p>
     </div>
   );
 
-  const controlsExplanation = (
-    <div style={{ fontSize: '14px', lineHeight: '1.6', color: '#475569' }}>
-      <h3 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '10px', color: '#1e293b' }}>
-        How to Use
-      </h3>
-      <p style={{ marginBottom: '10px' }}>
-        Click cells to edit:
-      </p>
-      <ul style={{ marginLeft: '20px', marginBottom: '10px' }}>
-        <li>P(A) - Total column, row A</li>
-        <li>Conditional inputs P(Bᵢ|A), P(Bᵢ|A<sup>c</sup>) - table cells</li>
-      </ul>
-      <p>P(B₃|...) auto-calculated.</p>
+  const Accordion = ({ isOpen, onToggle, children }) => (
+    <div>
+      <div 
+        onClick={onToggle}
+        style={{ 
+          background: '#dbeafe', 
+          padding: '8px 10px', 
+          borderRadius: '4px', 
+          marginBottom: isOpen ? '8px' : '10px', 
+          textAlign: 'center',
+          cursor: 'pointer',
+          userSelect: 'none',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '6px'
+        }}>
+        <span style={{ fontSize: '12px', color: '#1e40af', fontWeight: '600' }}>
+          {isOpen ? '▼' : '▶'} Row Explanations
+        </span>
+      </div>
+      {isOpen && (
+        <div style={{ 
+          background: '#f0f9ff', 
+          padding: '10px', 
+          borderRadius: '4px', 
+          marginBottom: '10px',
+          fontSize: '11px',
+          color: '#1e40af',
+          lineHeight: '1.6'
+        }}>
+          {children}
+        </div>
+      )}
     </div>
   );
 
@@ -260,10 +1796,12 @@ export default function ConditionalProbabilityTable2x3({ explanations = null }) 
         .conditional-table { border-spacing: 0 8px; }
       `}</style>
       
-      <p style={{ color: '#666', marginBottom: '30px' }}>
-        2×3 contingency table. Click cells to edit.
+      <p style={{ color: '#666', marginBottom: '10px' }}>
+        2×3 contingency table showing joint, marginal, and conditional probabilities.
       </p>
-
+       <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af' }}>
+        <strong>How to read:</strong> Cells show joint probabilities. Click conditional rows to highlight paths.The highlighted connections demonstrate Bayes' theorem in action: P(A|B) = P(A ∩ B) / P(B). Watch how the same joint probability appears in multiple conditional calculations depending on which event you condition on. The color coding helps trace these mathematical relationships visually.
+      </div>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '20px', marginBottom: '30px' }}>
         <div>
           <div style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '20px', marginBottom: '20px' }}>
@@ -282,41 +1820,56 @@ export default function ConditionalProbabilityTable2x3({ explanations = null }) 
               <tbody>
                 <tr>
                   <td style={getHeaderStyle()}>A</td>
-                  <td style={getCellStyle('AB1', true)}>
-                    {renderEditableJointCell(pAAndB1, pB1GivenA, setPB1GivenA, 'editAB1', 'P(A ∩ B₁)')}
+                  <td style={getCellStyle('AB1')} onClick={() => handleCellClick('AB1')}>
+                    <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pAAndB1.toFixed(4)}</div>
+                    <div style={{ fontSize: '12px', color: '#64748b' }}>P(A ∩ B₁)</div>
                   </td>
-                  <td style={getCellStyle('AB2', true)}>
-                    {renderEditableJointCell(pAAndB2, pB2GivenA, setPB2GivenA, 'editAB2', 'P(A ∩ B₂)')}
+                  <td style={getCellStyle('AB2')} onClick={() => handleCellClick('AB2')}>
+                    <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pAAndB2.toFixed(4)}</div>
+                    <div style={{ fontSize: '12px', color: '#64748b' }}>P(A ∩ B₂)</div>
                   </td>
                   <td style={getCellStyle('AB3')} onClick={() => handleCellClick('AB3')}>
                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pAAndB3.toFixed(4)}</div>
                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A ∩ B₃)</div>
                   </td>
-                  <td style={getMarginalStyle('A', true)}>
-                    {renderEditableMarginal(pA, setPA, 'editPA')}
+                  <td style={getMarginalStyle('A')}>
+                    <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '3px' }}>{pA.toFixed(4)}</div>
+                    <div style={{ fontSize: '11px', color: '#64748b' }}>P(A)</div>
                   </td>
                 </tr>
                 <tr>
                   <td style={getHeaderStyle()}>A<sup>c</sup></td>
-                  <td style={getCellStyle('notAB1', true)}>
-                    {renderEditableJointCell(pNotAAndB1, pB1GivenNotA, setPB1GivenNotA, 'editNotAB1', 'P(A<sup>c</sup> ∩ B₁)')}
+                  <td style={getCellStyle('notAB1')} onClick={() => handleCellClick('notAB1')}>
+                    <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pNotAAndB1.toFixed(4)}</div>
+                    <div style={{ fontSize: '12px', color: '#64748b' }}>P(A<sup>c</sup> ∩ B₁)</div>
                   </td>
-                  <td style={getCellStyle('notAB2', true)}>
-                    {renderEditableJointCell(pNotAAndB2, pB2GivenNotA, setPB2GivenNotA, 'editNotAB2', 'P(A<sup>c</sup> ∩ B₂)')}
+                  <td style={getCellStyle('notAB2')} onClick={() => handleCellClick('notAB2')}>
+                    <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pNotAAndB2.toFixed(4)}</div>
+                    <div style={{ fontSize: '12px', color: '#64748b' }}>P(A<sup>c</sup> ∩ B₂)</div>
                   </td>
                   <td style={getCellStyle('notAB3')} onClick={() => handleCellClick('notAB3')}>
                     <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{pNotAAndB3.toFixed(4)}</div>
                     <div style={{ fontSize: '12px', color: '#64748b' }}>P(A<sup>c</sup> ∩ B₃)</div>
                   </td>
                   <td style={getMarginalStyle('notA')}>
-                    <div style={{ fontSize: '16px', fontWeight: 'bold' }}>{pNotA.toFixed(4)}</div>
+                    <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '3px' }}>{pNotA.toFixed(4)}</div>
+                    <div style={{ fontSize: '11px', color: '#64748b' }}>P(A<sup>c</sup>)</div>
                   </td>
                 </tr>
                 <tr>
                   <td style={getHeaderStyle()}>Total</td>
-                  <td style={getMarginalStyle('B1')}>{pB1.toFixed(4)}</td>
-                  <td style={getMarginalStyle('B2')}>{pB2.toFixed(4)}</td>
-                  <td style={getMarginalStyle('B3')}>{pB3.toFixed(4)}</td>
+                  <td style={getMarginalStyle('B1')}>
+                    <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '3px' }}>{pB1.toFixed(4)}</div>
+                    <div style={{ fontSize: '11px', color: '#64748b' }}>P(B₁)</div>
+                  </td>
+                  <td style={getMarginalStyle('B2')}>
+                    <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '3px' }}>{pB2.toFixed(4)}</div>
+                    <div style={{ fontSize: '11px', color: '#64748b' }}>P(B₂)</div>
+                  </td>
+                  <td style={getMarginalStyle('B3')}>
+                    <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '3px' }}>{pB3.toFixed(4)}</div>
+                    <div style={{ fontSize: '11px', color: '#64748b' }}>P(B₃)</div>
+                  </td>
                   <td style={{ ...getHeaderStyle(), fontSize: '16px', fontWeight: 'bold' }}>1.0000</td>
                 </tr>
               </tbody>
@@ -325,9 +1878,9 @@ export default function ConditionalProbabilityTable2x3({ explanations = null }) 
 
           <div style={{ background: '#f8fafc', borderRadius: '8px', overflow: 'hidden' }}>
             <div style={{ display: 'flex', borderBottom: '2px solid #e2e8f0' }}>
-              <button onClick={() => setActiveTab('explanation')}
-                style={{ flex: 1, padding: '12px', background: activeTab === 'explanation' ? 'white' : '#f8fafc', border: 'none', borderBottom: activeTab === 'explanation' ? '3px solid #3b82f6' : 'none', fontWeight: activeTab === 'explanation' ? 'bold' : 'normal', cursor: 'pointer', fontSize: '14px' }}>
-                Explanation
+              <button onClick={() => setActiveTab('explanations')}
+                style={{ flex: 1, padding: '12px', background: activeTab === 'explanations' ? 'white' : '#f8fafc', border: 'none', borderBottom: activeTab === 'explanations' ? '3px solid #3b82f6' : 'none', fontWeight: activeTab === 'explanations' ? 'bold' : 'normal', cursor: 'pointer', fontSize: '14px' }}>
+                Explanations
               </button>
               <button onClick={() => setActiveTab('controls')}
                 style={{ flex: 1, padding: '12px', background: activeTab === 'controls' ? 'white' : '#f8fafc', border: 'none', borderBottom: activeTab === 'controls' ? '3px solid #3b82f6' : 'none', fontWeight: activeTab === 'controls' ? 'bold' : 'normal', cursor: 'pointer', fontSize: '14px' }}>
@@ -336,7 +1889,11 @@ export default function ConditionalProbabilityTable2x3({ explanations = null }) 
             </div>
 
             <div style={{ padding: '20px', background: 'white', minHeight: '200px' }}>
-              {activeTab === 'explanation' && (explanations || defaultExplanation)}
+              {activeTab === 'explanations' && (
+                <div style={{ fontSize: '14px', lineHeight: '1.6', color: '#475569' }}>
+                  {currentExplanation}
+                </div>
+              )}
               {activeTab === 'controls' && controlsExplanation}
             </div>
           </div>
@@ -346,18 +1903,31 @@ export default function ConditionalProbabilityTable2x3({ explanations = null }) 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
             <div style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '15px', display: 'flex', flexDirection: 'column' }}>
               <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>Conditional on A</h3>
-              <div style={{ background: '#dbeafe', padding: '5px 10px', borderRadius: '4px', marginBottom: '10px', textAlign: 'center' }}>
-                <span style={{ fontSize: '12px', color: '#1e40af', fontWeight: '600' }}>Click rows</span>
-              </div>
+              <Accordion isOpen={accordionStates.condA} onToggle={() => toggleAccordion('condA')}>
+                <div>P(B₁|A) - Probability of B₁ conditional on A</div>
+                <div>P(B₂|A) - Probability of B₂ conditional on A</div>
+                <div>P(B₃|A) - Probability of B₃ conditional on A</div>
+              </Accordion>
               <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 6px", flexGrow: 1 }} className="conditional-table">
                 <tbody>
-                  {[['AB1', 'A', pB1GivenA, 'P(B₁|A)'], ['AB2', 'A', pB2GivenA, 'P(B₂|A)'], ['AB3', 'A', pB3GivenA, 'P(B₃|A)']].map(([cell, marg, val, lbl]) => (
+                  {[
+                    ['AB1', 'A', pB1GivenA, 'P(B₁|A)', 'P(A ∩ B₁) / P(A)', pAAndB1, pA],
+                    ['AB2', 'A', pB2GivenA, 'P(B₂|A)', 'P(A ∩ B₂) / P(A)', pAAndB2, pA],
+                    ['AB3', 'A', pB3GivenA, 'P(B₃|A)', 'P(A ∩ B₃) / P(A)', pAAndB3, pA]
+                  ].map(([cell, marg, val, lbl, formula, numerator, denominator]) => (
                     <tr key={cell} className="clickable-row" onClick={() => handleConditionalClick(cell, marg)}
                       style={{ cursor: 'pointer', transition: 'all 0.2s', background: highlightedCell === cell && highlightedMarginal === marg ? `${cellColors[cell]}15` : 'transparent' }}
                       onMouseEnter={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = '#f8fafc'; }}
                       onMouseLeave={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = 'transparent'; }}>
-                      <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }}>{lbl}</td>
-                      <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px' }}>{val.toFixed(4)}</td>
+                      <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontSize: '11px' }}>
+                        <div style={{ marginBottom: '2px', fontWeight: 'bold' }}>
+                          {lbl} = {formula}
+                        </div>
+                        <div style={{ color: '#64748b', fontSize: '10px' }}>
+                          = {numerator.toFixed(4)} / {denominator.toFixed(4)}
+                        </div>
+                      </td>
+                      <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px', fontWeight: 'bold' }}>{val.toFixed(4)}</td>
                     </tr>
                   ))}
                   <tr>
@@ -370,18 +1940,29 @@ export default function ConditionalProbabilityTable2x3({ explanations = null }) 
 
             <div style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '15px', display: 'flex', flexDirection: 'column' }}>
               <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>Conditional on A<sup>c</sup></h3>
-              <div style={{ background: '#dbeafe', padding: '5px 10px', borderRadius: '4px', marginBottom: '10px', textAlign: 'center' }}>
-                <span style={{ fontSize: '12px', color: '#1e40af', fontWeight: '600' }}>Click rows</span>
-              </div>
+              <Accordion isOpen={accordionStates.condNotA} onToggle={() => toggleAccordion('condNotA')}>
+                <div dangerouslySetInnerHTML={{ __html: 'P(B₁|A<sup>c</sup>) - Probability of B₁ conditional on A<sup>c</sup>' }}></div>
+                <div dangerouslySetInnerHTML={{ __html: 'P(B₂|A<sup>c</sup>) - Probability of B₂ conditional on A<sup>c</sup>' }}></div>
+                <div dangerouslySetInnerHTML={{ __html: 'P(B₃|A<sup>c</sup>) - Probability of B₃ conditional on A<sup>c</sup>' }}></div>
+              </Accordion>
               <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 6px", flexGrow: 1 }} className="conditional-table">
                 <tbody>
-                  {[['notAB1', 'notA', pB1GivenNotA, 'P(B₁|A<sup>c</sup>)'], ['notAB2', 'notA', pB2GivenNotA, 'P(B₂|A<sup>c</sup>)'], ['notAB3', 'notA', pB3GivenNotA, 'P(B₃|A<sup>c</sup>)']].map(([cell, marg, val, lbl]) => (
+                  {[
+                    ['notAB1', 'notA', pB1GivenNotA, 'P(B₁|A<sup>c</sup>)', 'P(A<sup>c</sup> ∩ B₁) / P(A<sup>c</sup>)', pNotAAndB1, pNotA],
+                    ['notAB2', 'notA', pB2GivenNotA, 'P(B₂|A<sup>c</sup>)', 'P(A<sup>c</sup> ∩ B₂) / P(A<sup>c</sup>)', pNotAAndB2, pNotA],
+                    ['notAB3', 'notA', pB3GivenNotA, 'P(B₃|A<sup>c</sup>)', 'P(A<sup>c</sup> ∩ B₃) / P(A<sup>c</sup>)', pNotAAndB3, pNotA]
+                  ].map(([cell, marg, val, lbl, formula, numerator, denominator]) => (
                     <tr key={cell} className="clickable-row" onClick={() => handleConditionalClick(cell, marg)}
                       style={{ cursor: 'pointer', transition: 'all 0.2s', background: highlightedCell === cell && highlightedMarginal === marg ? `${cellColors[cell]}15` : 'transparent' }}
                       onMouseEnter={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = '#f8fafc'; }}
                       onMouseLeave={(e) => { if (!(highlightedCell === cell && highlightedMarginal === marg)) e.currentTarget.style.background = 'transparent'; }}>
-                      <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }} dangerouslySetInnerHTML={{ __html: lbl }}></td>
-                      <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px' }}>{val.toFixed(4)}</td>
+                      <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontSize: '11px' }}>
+                        <div style={{ marginBottom: '2px', fontWeight: 'bold' }} dangerouslySetInnerHTML={{ __html: lbl + ' = ' + formula }}></div>
+                        <div style={{ color: '#64748b', fontSize: '10px' }}>
+                          = {numerator.toFixed(4)} / {denominator.toFixed(4)}
+                        </div>
+                      </td>
+                      <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px', fontWeight: 'bold' }}>{val.toFixed(4)}</td>
                     </tr>
                   ))}
                   <tr>
@@ -395,24 +1976,40 @@ export default function ConditionalProbabilityTable2x3({ explanations = null }) 
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px' }}>
             {[
-              ['B1', 'B₁', [['AB1', pB1 > 0 ? pAAndB1 / pB1 : 0, 'P(A|B₁)'], ['notAB1', pB1 > 0 ? pNotAAndB1 / pB1 : 0, 'P(A<sup>c</sup>|B₁)']]],
-              ['B2', 'B₂', [['AB2', pB2 > 0 ? pAAndB2 / pB2 : 0, 'P(A|B₂)'], ['notAB2', pB2 > 0 ? pNotAAndB2 / pB2 : 0, 'P(A<sup>c</sup>|B₂)']]],
-              ['B3', 'B₃', [['AB3', pB3 > 0 ? pAAndB3 / pB3 : 0, 'P(A|B₃)'], ['notAB3', pB3 > 0 ? pNotAAndB3 / pB3 : 0, 'P(A<sup>c</sup>|B₃)']]]
-            ].map(([key, title, cells]) => (
+              ['B1', 'B₁', 'condB1', [
+                ['AB1', pB1 > 0 ? pAAndB1 / pB1 : 0, 'P(A|B₁)', 'P(A ∩ B₁) / P(B₁)', pAAndB1, pB1, 'P(A|B₁) - Probability of A conditional on B₁'],
+                ['notAB1', pB1 > 0 ? pNotAAndB1 / pB1 : 0, 'P(A<sup>c</sup>|B₁)', 'P(A<sup>c</sup> ∩ B₁) / P(B₁)', pNotAAndB1, pB1, 'P(A<sup>c</sup>|B₁) - Probability of A<sup>c</sup> conditional on B₁']
+              ]],
+              ['B2', 'B₂', 'condB2', [
+                ['AB2', pB2 > 0 ? pAAndB2 / pB2 : 0, 'P(A|B₂)', 'P(A ∩ B₂) / P(B₂)', pAAndB2, pB2, 'P(A|B₂) - Probability of A conditional on B₂'],
+                ['notAB2', pB2 > 0 ? pNotAAndB2 / pB2 : 0, 'P(A<sup>c</sup>|B₂)', 'P(A<sup>c</sup> ∩ B₂) / P(B₂)', pNotAAndB2, pB2, 'P(A<sup>c</sup>|B₂) - Probability of A<sup>c</sup> conditional on B₂']
+              ]],
+              ['B3', 'B₃', 'condB3', [
+                ['AB3', pB3 > 0 ? pAAndB3 / pB3 : 0, 'P(A|B₃)', 'P(A ∩ B₃) / P(B₃)', pAAndB3, pB3, 'P(A|B₃) - Probability of A conditional on B₃'],
+                ['notAB3', pB3 > 0 ? pNotAAndB3 / pB3 : 0, 'P(A<sup>c</sup>|B₃)', 'P(A<sup>c</sup> ∩ B₃) / P(B₃)', pNotAAndB3, pB3, 'P(A<sup>c</sup>|B₃) - Probability of A<sup>c</sup> conditional on B₃']
+              ]]
+            ].map(([key, title, accordionKey, cells]) => (
               <div key={key} style={{ background: 'white', border: '2px solid #e2e8f0', borderRadius: '8px', padding: '15px' }}>
                 <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>Conditional on {title}</h3>
-                <div style={{ background: '#dbeafe', padding: '5px 10px', borderRadius: '4px', marginBottom: '10px', textAlign: 'center' }}>
-                  <span style={{ fontSize: '12px', color: '#1e40af', fontWeight: '600' }}>Click rows</span>
-                </div>
+                <Accordion isOpen={accordionStates[accordionKey]} onToggle={() => toggleAccordion(accordionKey)}>
+                  {cells.map(([cell, val, lbl, formula, numerator, denominator, explanation]) => (
+                    <div key={cell} dangerouslySetInnerHTML={{ __html: explanation }}></div>
+                  ))}
+                </Accordion>
                 <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 6px" }} className="conditional-table">
                   <tbody>
-                    {cells.map(([cell, val, lbl]) => (
+                    {cells.map(([cell, val, lbl, formula, numerator, denominator]) => (
                       <tr key={cell} className="clickable-row" onClick={() => handleConditionalClick(cell, key)}
                         style={{ cursor: 'pointer', background: highlightedCell === cell && highlightedMarginal === key ? `${cellColors[cell]}15` : 'transparent' }}
                         onMouseEnter={(e) => { if (!(highlightedCell === cell && highlightedMarginal === key)) e.currentTarget.style.background = '#f8fafc'; }}
                         onMouseLeave={(e) => { if (!(highlightedCell === cell && highlightedMarginal === key)) e.currentTarget.style.background = 'transparent'; }}>
-                        <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontWeight: 'bold', fontSize: '12px' }} dangerouslySetInnerHTML={{ __html: lbl }}></td>
-                        <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px' }}>{val.toFixed(4)}</td>
+                        <td style={{ padding: '8px', border: '1px solid #e2e8f0', fontSize: '11px' }}>
+                          <div style={{ marginBottom: '2px', fontWeight: 'bold' }} dangerouslySetInnerHTML={{ __html: lbl + ' = ' + formula }}></div>
+                          <div style={{ color: '#64748b', fontSize: '10px' }}>
+                            = {numerator.toFixed(4)} / {denominator.toFixed(4)}
+                          </div>
+                        </td>
+                        <td style={{ padding: '8px', border: '1px solid #e2e8f0', textAlign: 'center', fontSize: '12px', fontWeight: 'bold' }}>{val.toFixed(4)}</td>
                       </tr>
                     ))}
                     <tr>
@@ -425,25 +2022,18 @@ export default function ConditionalProbabilityTable2x3({ explanations = null }) 
             ))}
           </div>
 
-          <div style={{ display: 'flex', gap: '10px' }}>
-            <button onClick={resetToDefaults}
-              style={{ flex: 1, padding: '10px', background: '#3b82f6', color: 'white', border: 'none', borderRadius: '6px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
-              Reset to Defaults
+          {(highlightedCell || highlightedMarginal) && (
+            <button onClick={() => { setHighlightedCell(null); setHighlightedMarginal(null); }}
+              style={{ padding: '10px', background: '#ef4444', color: 'white', border: 'none', borderRadius: '6px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
+              Clear Selection
             </button>
-            
-            {(highlightedCell || highlightedMarginal) && (
-              <button onClick={() => { setHighlightedCell(null); setHighlightedMarginal(null); }}
-                style={{ flex: 1, padding: '10px', background: '#ef4444', color: 'white', border: 'none', borderRadius: '6px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
-                Clear Selection
-              </button>
-            )}
-          </div>
+          )}
         </div>
       </div>
 
-      <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af' }}>
-        <strong>How to read:</strong> Cells show joints. Click to edit conditionals or P(A). Click conditional rows to highlight.
-      </div>
+      {/* <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af' }}>
+        <strong>How to read:</strong> Cells show joint probabilities. Click conditional rows to highlight paths.The highlighted connections demonstrate Bayes' theorem in action: P(A|B) = P(A ∩ B) / P(B). Watch how the same joint probability appears in multiple conditional calculations depending on which event you condition on. The color coding helps trace these mathematical relationships visually.
+      </div> */}
     </div>
   );
 }

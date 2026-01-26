@@ -20,6 +20,233 @@ export async function getStaticProps(){
     'continuous uniform','continuous uniform distribution',
     'probability density function uniform distribution','']
 
+
+
+    const normalTable = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Normal Distribution</title>
+</head>
+<body style="margin: 20px; background-color: #f5f5f5; font-family: Arial, sans-serif;">
+    <table style="border-collapse: collapse; width: 100%; background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+        <thead>
+            <tr>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: left; font-weight: bold;">Property</th>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: left; font-weight: bold;">Normal Distribution</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Description</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Models measurements that cluster symmetrically around a central value with characteristic bell-shaped curve (e.g., heights, test scores, measurement errors)</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Support (Domain)</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">X ∈ (-∞, ∞)</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Finite or Infinite?</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Infinite (continuous)</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Bounds/Range</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(-∞, ∞) - all real numbers</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Parameters</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">μ (mu, the mean or center), σ (sigma, the standard deviation), where σ > 0</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Distribution Property/Mechanism</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Symmetric around the mean; values closer to μ are more likely; describes aggregated effects of many independent random factors</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">PDF (Probability Density Function)</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) = (1/(σ√(2π))) × e<sup>-((x-μ)²/(2σ²))</sup></td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">CDF (Cumulative Distribution Function)</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">F(x) = Φ((x-μ)/σ) where Φ is the standard normal CDF (no closed form, requires numerical methods or tables)</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Mean</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">E[X] = μ</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Variance</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Var(X) = σ²</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Standard Deviation</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">σ</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Mode</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">μ (the mean)</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; font-weight: bold; color: #2c3e50;">Median</td>
+                <td style="padding: 12px 15px; color: #34495e;">μ (the mean)</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+`;
+
+const exponentialTable = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exponential Distribution</title>
+</head>
+<body style="margin: 20px; background-color: #f5f5f5; font-family: Arial, sans-serif;">
+    <table style="border-collapse: collapse; width: 100%; background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+        <thead>
+            <tr>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: left; font-weight: bold;">Property</th>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: left; font-weight: bold;">Exponential Distribution</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Description</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Models the time between events in a process where events occur continuously and independently at a constant average rate (e.g., time until next phone call, equipment failure time, radioactive decay)</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Support (Domain)</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">X ∈ [0, ∞)</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Finite or Infinite?</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Infinite (continuous)</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Bounds/Range</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞) - non-negative real numbers</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Parameters</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">λ (lambda, the rate parameter), where λ > 0</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Distribution Property/Mechanism</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Memoryless property; continuous analog of geometric distribution; models waiting times for Poisson processes; probabilities decay exponentially</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">PDF (Probability Density Function)</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) = λe<sup>-λx</sup> for x ≥ 0</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">CDF (Cumulative Distribution Function)</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">F(x) = 1 - e<sup>-λx</sup> for x ≥ 0</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Mean</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">E[X] = 1/λ</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Variance</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Var(X) = 1/λ²</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Standard Deviation</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">σ = 1/λ</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Mode</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0 (always)</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; font-weight: bold; color: #2c3e50;">Median</td>
+                <td style="padding: 12px 15px; color: #34495e;">(ln 2)/λ ≈ 0.693/λ</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+`;
+
+const continuousUniformTable = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Continuous Uniform Distribution</title>
+</head>
+<body style="margin: 20px; background-color: #f5f5f5; font-family: Arial, sans-serif;">
+    <table style="border-collapse: collapse; width: 100%; background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+        <thead>
+            <tr>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: left; font-weight: bold;">Property</th>
+                <th style="background-color: #2c3e50; color: white; padding: 15px; text-align: left; font-weight: bold;">Continuous Uniform Distribution</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Description</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Models situations where all values in a continuous interval are equally likely (e.g., random arrival time within an hour, random point selection on a line segment)</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Support (Domain)</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">X ∈ [a, b]</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Finite or Infinite?</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Finite (continuous)</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Bounds/Range</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[a, b] where a < b (finite interval)</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Parameters</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a (minimum value), b (maximum value), where a < b</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Distribution Property/Mechanism</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Constant probability density over the interval; all subintervals of equal length are equally probable; simplest continuous distribution</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">PDF (Probability Density Function)</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) = 1/(b - a) for a ≤ x ≤ b; f(x) = 0 otherwise</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">CDF (Cumulative Distribution Function)</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">F(x) = 0 for x < a; F(x) = (x - a)/(b - a) for a ≤ x ≤ b; F(x) = 1 for x > b</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Mean</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">E[X] = (a + b)/2</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Variance</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Var(X) = (b - a)²/12</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Standard Deviation</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">σ = (b - a)/√12</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Mode</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Any value in [a, b] (all values equally probable)</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px 15px; font-weight: bold; color: #2c3e50;">Median</td>
+                <td style="padding: 12px 15px; color: #34495e;">(a + b)/2</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+`;
+
     const sectionsContent={
 
 
@@ -777,6 +1004,9 @@ This section organizes continuous distributions, highlights their shared structu
       props:{
          sectionsContent,
          introContent,
+         normalTable,
+         exponentialTable,
+         continuousUniformTable,
           seoData: {
         title: "Title | Learn Math Class",
         description: "Metadescription",
@@ -789,7 +1019,11 @@ This section organizes continuous distributions, highlights their shared structu
     }
    }
 
-export default function ContinuousDistributionsPage({seoData,sectionsContent , introContent}) {
+export default function ContinuousDistributionsPage({seoData,sectionsContent , introContent,
+    normalTable,
+         exponentialTable,
+         continuousUniformTable,
+}) {
 
     
   const genericSections=[
@@ -876,21 +1110,24 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
         //     {processContent(sectionsContent.normal.notation)}
         // </div>,
         
-        <div key={'pdf-normal'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-            {processContent(sectionsContent.normal.pdf)}
-        </div>,
+        // <div key={'pdf-normal'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.pdf)}
+        // </div>,
         
-        <div key={'cdf-normal'} style={{background: 'linear-gradient(to right, #dbeafe 0%, #bfdbfe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #3b82f6',transform:'scale(0.9)'}}>
-            {processContent(sectionsContent.normal.cdf)}
-        </div>,
+        // <div key={'cdf-normal'} style={{background: 'linear-gradient(to right, #dbeafe 0%, #bfdbfe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #3b82f6',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.cdf)}
+        // </div>,
         
-        <div key={'meanVariance-normal'} style={{background: 'linear-gradient(to right, #bfdbfe 0%, #93c5fd 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #2563eb',transform:'scale(0.9)'}}>
-            {processContent(sectionsContent.normal.meanVariance)}
-        </div>,
+        // <div key={'meanVariance-normal'} style={{background: 'linear-gradient(to right, #bfdbfe 0%, #93c5fd 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #2563eb',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.meanVariance)}
+        // </div>,
         
         <div key={'keyProperties-normal'} style={{background: 'linear-gradient(to right, #93c5fd 0%, #60a5fa 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #1d4ed8',transform:'scale(0.9)'}}>
             {processContent(sectionsContent.normal.keyProperties)}
         </div>,
+        <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} 
+     dangerouslySetInnerHTML={{ __html: normalTable }} 
+     key="normal-table" />,
     ]
 },
 
@@ -918,21 +1155,24 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
         //     {processContent(sectionsContent.uniform.notation)}
         // </div>,
         
-        <div key={'pdf-uniform'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-            {processContent(sectionsContent.uniform.pdf)}
-        </div>,
+        // <div key={'pdf-uniform'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.uniform.pdf)}
+        // </div>,
         
-        <div key={'cdf-uniform'} style={{background: 'linear-gradient(to right, #dbeafe 0%, #bfdbfe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #3b82f6',transform:'scale(0.9)'}}>
-            {processContent(sectionsContent.uniform.cdf)}
-        </div>,
+        // <div key={'cdf-uniform'} style={{background: 'linear-gradient(to right, #dbeafe 0%, #bfdbfe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #3b82f6',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.uniform.cdf)}
+        // </div>,
         
-        <div key={'meanVariance-uniform'} style={{background: 'linear-gradient(to right, #bfdbfe 0%, #93c5fd 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #2563eb',transform:'scale(0.9)'}}>
-            {processContent(sectionsContent.uniform.meanVariance)}
-        </div>,
+        // <div key={'meanVariance-uniform'} style={{background: 'linear-gradient(to right, #bfdbfe 0%, #93c5fd 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #2563eb',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.uniform.meanVariance)}
+        // </div>,
         
         <div key={'keyProperties-uniform'} style={{background: 'linear-gradient(to right, #93c5fd 0%, #60a5fa 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #1d4ed8',transform:'scale(0.9)'}}>
             {processContent(sectionsContent.uniform.keyProperties)}
         </div>,
+        <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} 
+     dangerouslySetInnerHTML={{ __html: continuousUniformTable }} 
+     key="continuous-uniform-table" />
     ]
 },
     // {
@@ -974,21 +1214,24 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
         //     {processContent(sectionsContent.exponential.notation)}
         // </div>,
         
-        <div key={'pdf-exponential'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-            {processContent(sectionsContent.exponential.pdf)}
-        </div>,
+        // <div key={'pdf-exponential'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.exponential.pdf)}
+        // </div>,
         
-        <div key={'cdf-exponential'} style={{background: 'linear-gradient(to right, #dbeafe 0%, #bfdbfe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #3b82f6',transform:'scale(0.9)'}}>
-            {processContent(sectionsContent.exponential.cdf)}
-        </div>,
+        // <div key={'cdf-exponential'} style={{background: 'linear-gradient(to right, #dbeafe 0%, #bfdbfe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #3b82f6',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.exponential.cdf)}
+        // </div>,
         
-        <div key={'meanVariance-exponential'} style={{background: 'linear-gradient(to right, #bfdbfe 0%, #93c5fd 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #2563eb',transform:'scale(0.9)'}}>
-            {processContent(sectionsContent.exponential.meanVariance)}
-        </div>,
+        // <div key={'meanVariance-exponential'} style={{background: 'linear-gradient(to right, #bfdbfe 0%, #93c5fd 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #2563eb',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.exponential.meanVariance)}
+        // </div>,
         
         <div key={'keyProperties-exponential'} style={{background: 'linear-gradient(to right, #93c5fd 0%, #60a5fa 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #1d4ed8',transform:'scale(0.9)'}}>
             {processContent(sectionsContent.exponential.keyProperties)}
         </div>,
+        <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} 
+     dangerouslySetInnerHTML={{ __html: exponentialTable }} 
+     key="exponential-table" />,
     ]
 },
     // {

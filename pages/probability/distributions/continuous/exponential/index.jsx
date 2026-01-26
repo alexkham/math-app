@@ -11,6 +11,7 @@ import Head from 'next/head'
 import { processContent } from '@/app/utils/contentProcessor'
 import ExponentialDistribution from '@/app/components/visualizations/probability/continuous-distribution/ExponentialDistribution'
 import ExponentialDistributionCDF from '@/app/components/visualizations/probability/continuous-distribution/CDF/ExponentialDistributionCDF'
+import ExponentialDistributionCalculator from '@/app/components/calculators/probability/distributions/continuous/ExponentialDistributionCalculator'
 
 
 export async function getStaticProps(){
@@ -104,7 +105,37 @@ Higher λ means events occur more frequently (shorter waiting times), while lowe
     },
     obj5:{
       title:`Probability Density Function (PDF) and Support (Range)`,
-      content:``,
+      content:`<h3 style="color: #1e40af;">Probability Density Function (PDF)</h3>
+The **probability density function (PDF)** of an **exponential distribution** is given by:
+
+$$f(x) = \\begin{cases} \\lambda e^{-\\lambda x} & \\text{if } x \\geq 0 \\\\ 0 & \\text{if } x < 0 \\end{cases}$$
+
+### Intuition Behind the Formula
+
+ **Decreasing Density**: The exponential distribution has its highest density at x = 0 and decreases exponentially as x increases. This reflects that shorter waiting times are more likely than longer ones.
+
+ **Parameters**:
+  • $\\lambda$: The rate parameter controls how quickly the density decreases
+  • Higher $\\lambda$ means steeper decline (events happen more frequently)
+  • Lower $\\lambda$ means gentler decline (events happen less frequently)
+
+ **Support (Range of the Random Variable)**:
+  • The [random variable](!/probability/random-variables) $X$ can take any non-negative value: $[0, \\infty)$
+  • Time cannot be negative, so the support starts at zero
+  • Theoretically unbounded above, though very large values have low probability
+  • The **support** is the half-infinite interval $[0, \\infty)$
+
+ **Logic Behind the Formula**:
+  • $\\lambda$: The rate parameter also serves as the initial density at x = 0
+  • $e^{-\\lambda x}$: Exponential decay function ensuring rapid decrease for larger x
+  • The decay rate is proportional to λ: faster decay for larger λ
+  • The total area under the curve equals 1:
+  
+  $$\\int_{0}^{\\infty} \\lambda e^{-\\lambda x}\\,dx = \\lambda \\left[-\\frac{1}{\\lambda}e^{-\\lambda x}\\right]_{0}^{\\infty} = 1$$
+
+**Practical Example:** Customer service calls arrive at a help desk at an average rate of 5 per hour, so $\\lambda = 5$. The time $X$ (in hours) until the next call follows $\\text{Exp}(5)$. The PDF is $f(x) = 5e^{-5x}$ for $x \\geq 0$. The probability of waiting less than 6 minutes (0.1 hours) is $P(X \\leq 0.1) = 1 - e^{-5(0.1)} \\approx 0.393$, or about 39.3%.
+
+      `,
       before:``,
       after:``,
       link:'',
@@ -112,36 +143,221 @@ Higher λ means events occur more frequently (shorter waiting times), while lowe
     },
     obj6:{
       title:`Cumulative Distribution Function (CDF)`,
-      content:``,
+      content:`
+      <h3 style="color: #1e3a8a;">Cumulative Distribution Function (CDF)</h3>
+The **cumulative distribution function (CDF)** gives the probability that $X$ is less than or equal to a specific value:
+
+$$F(x) = \\begin{cases} 0 & \\text{if } x < 0 \\\\ 1 - e^{-\\lambda x} & \\text{if } x \\geq 0 \\end{cases}$$
+
+**Key Properties**:
+• $F(0) = 0$ (no probability mass below zero)
+• $F(x) \\to 1$ as $x \\to \\infty$ (all probability is non-negative)
+• The CDF increases from 0 to 1, starting slowly and approaching 1 asymptotically
+• For any $x \\geq 0$, $P(X > x) = 1 - F(x) = e^{-\\lambda x}$ (survival function)
+
+**Memoryless Property**: The exponential distribution is the only continuous distribution with the memoryless property: $P(X > s + t \\mid X > s) = P(X > t)$. In terms of the CDF: knowing that $X > s$ doesn't change the probability that $X > s + t$ relative to waiting an additional time $t$ from the start.
+
+**Practical Use:** The exponential CDF is one of the simplest to work with. To find $P(X \\leq x)$ when $X \\sim \\text{Exp}(3)$ and $x = 2$: $F(2) = 1 - e^{-3(2)} = 1 - e^{-6} \\approx 0.9975$, meaning about 99.75% of values fall below 2. The complementary probability $P(X > 2) = e^{-6} \\approx 0.0025$.
+      `,
       before:``,
       after:``,
       link:'',
   
     },
-    obj7:{
-      title:`Expected Value (mean)`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj7:{
+    //   title:`Expected Value (mean)`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
-    obj8:{
-      title:`Variance and Standard Deviation`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // },
+
+    obj7: {
+  title: `Expected Value (Mean)`,
+  content: `
+Computing the mean of a continuous random variable involves integration rather than summation, weighting each point by its probability density. The [continuous expected value framework](!/probability/expected-value#continuous) applies directly to the exponential distribution:
+
+$$E[X] = \\int_{-\\infty}^{\\infty} x \\cdot f(x) \\, dx$$
+
+### Formula
+
+$$E[X] = \\frac{1}{\\lambda}$$
+
+Where:
+$\\lambda$ = the rate parameter (events per unit time)
+
+### Derivation and Intuition
+
+The exponential distribution has PDF $f(x) = \\lambda e^{-\\lambda x}$ for $x \\geq 0$. Computing the expected value:
+
+$$E[X] = \\int_{0}^{\\infty} x \\cdot \\lambda e^{-\\lambda x} \\, dx$$
+
+Using integration by parts with $u = x$ and $dv = \\lambda e^{-\\lambda x} dx$:
+
+$$E[X] = \\left[-x e^{-\\lambda x}\\right]_{0}^{\\infty} + \\int_{0}^{\\infty} e^{-\\lambda x} \\, dx$$
+
+The first term vanishes at both limits. For the second term:
+
+$$E[X] = \\int_{0}^{\\infty} e^{-\\lambda x} \\, dx = \\left[-\\frac{1}{\\lambda} e^{-\\lambda x}\\right]_{0}^{\\infty} = 0 - \\left(-\\frac{1}{\\lambda}\\right) = \\frac{1}{\\lambda}$$
+
+The result $E[X] = \\frac{1}{\\lambda}$ captures an intuitive relationship: if events occur at rate $\\lambda$ per unit time, then the average waiting time until the next event is $\\frac{1}{\\lambda}$ time units. A higher rate means shorter average wait times; a lower rate means longer waits.
+
+This parallels the [geometric distribution](!/probability/distributions/discrete/geometric#expected-value), which models waiting in discrete trials. The exponential distribution is the continuous analog, modeling waiting in continuous time.
+
+### Example
+
+Suppose customers arrive at a store at an average rate of $\\lambda = 3$ customers per hour:
+
+$$E[X] = \\frac{1}{3} \\text{ hours} = 20 \\text{ minutes}$$
+
+The expected time until the next customer arrives is 20 minutes. If the rate increases to $\\lambda = 6$ customers per hour, the expected wait drops to $\\frac{1}{6}$ hours, or 10 minutes.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
+    // obj8:{
+    //   title:`Variance and Standard Deviation`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
-    obj9:{
-      title:`Mode and Median`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // },
+
+    obj8: {
+  title: `Variance and Standard Deviation`,
+  content: `
+The [variance](!/probability/variance#calculate) of a continuous random variable quantifies the spread of values around the mean. For continuous distributions, it is calculated through integration:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 f(x) \\, dx$$
+
+Alternatively, using the computational formula:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+
+For the **exponential distribution**, this calculation reveals how the spread relates to the rate parameter.
+
+### Formula
+
+$$\\mathrm{Var}(X) = \\frac{1}{\\lambda^2}$$
+
+Where:
+$\\lambda$ = the rate parameter (events per unit time)
+
+### Derivation and Intuition
+
+Starting with the computational formula, we need to calculate $\\mathbb{E}[X^2]$.
+
+We know from the expected value section that $\\mu = \\frac{1}{\\lambda}$.
+
+The exponential distribution has PDF $f(x) = \\lambda e^{-\\lambda x}$ for $x \\geq 0$:
+
+$$\\mathbb{E}[X^2] = \\int_{0}^{\\infty} x^2 \\cdot \\lambda e^{-\\lambda x} \\, dx$$
+
+Using integration by parts twice (or the gamma function), we obtain:
+
+$$\\mathbb{E}[X^2] = \\frac{2}{\\lambda^2}$$
+
+Applying the computational formula:
+
+$$\\mathrm{Var}(X) = \\frac{2}{\\lambda^2} - \\left(\\frac{1}{\\lambda}\\right)^2 = \\frac{2}{\\lambda^2} - \\frac{1}{\\lambda^2} = \\frac{1}{\\lambda^2}$$
+
+The result $\\mathrm{Var}(X) = \\frac{1}{\\lambda^2}$ shows that variance decreases rapidly as the rate increases. When events occur frequently (large $\\lambda$), waiting times are consistently short with little variability. When events are rare (small $\\lambda$), waiting times become both long and highly variable. The quadratic relationship means doubling the rate reduces variance by a factor of four.
+
+Notably, for the exponential distribution, the standard deviation equals the mean—a unique property that doesn't hold for most distributions.
+
+### Standard Deviation
+
+$$\\sigma = \\frac{1}{\\lambda}$$
+
+### Example
+
+Suppose customers arrive at a store at an average rate of $\\lambda = 3$ customers per hour:
+
+$$\\mathrm{Var}(X) = \\frac{1}{(3)^2} = \\frac{1}{9} \\text{ hours}^2 \\approx 0.111 \\text{ hours}^2$$
+
+$$\\sigma = \\frac{1}{3} \\text{ hours} = 20 \\text{ minutes}$$
+
+The standard deviation of 20 minutes equals the mean waiting time of 20 minutes. This indicates substantial variability: sometimes the next customer arrives in just a few minutes, other times you might wait 40+ minutes, even though the average is 20 minutes.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
+    // obj9:{
+    //   title:`Mode and Median`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+    obj9: {
+  title: `Mode and Median`,
+  content: `### Mode
+
+The [mode](!/probability/mode) is the value where the [probability density function](!/probability/probability-function/pdf) reaches its maximum—the peak of the distribution curve.
+
+For the exponential distribution, the [mode](!/probability/mode) is always:
+
+$$\\text{Mode} = 0$$
+
+**Intuition:** The exponential [PDF](!/probability/probability-function/pdf) is $f(x) = \\lambda e^{-\\lambda x}$ for $x \\geq 0$, which is a monotonically decreasing function. The density is highest at $x = 0$ and decreases exponentially as $x$ increases.
+
+At $x = 0$: $f(0) = \\lambda$
+
+For any $x > 0$: $f(x) = \\lambda e^{-\\lambda x} < \\lambda$
+
+The maximum always occurs at the left boundary of the support. This reflects the nature of waiting times—the shortest possible wait (zero) is always the most probable density value, though the probability of any exact value is zero (as with all continuous distributions).
+
+**Example:** 
+For customer arrivals with $\\lambda = 3$ per hour:
+
+Mode = 0
+
+The density is highest at zero waiting time, then decays exponentially. While you can't actually wait exactly zero time, the probability density is concentrated near zero, making very short waits most likely.
+
+### Median
+
+The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) = 0.5$—the point that divides the distribution's probability in half.
+
+For the exponential distribution, the [median](!/probability/median) can be found using the [CDF](!/probability/cdf) $F(x) = 1 - e^{-\\lambda x}$:
+
+Setting $F(m) = 0.5$:
+
+$$1 - e^{-\\lambda m} = 0.5$$
+
+$$e^{-\\lambda m} = 0.5$$
+
+$$-\\lambda m = \\ln(0.5) = -\\ln(2)$$
+
+$$m = \\frac{\\ln(2)}{\\lambda}$$
+
+The median is:
+
+$$\\text{Median} = \\frac{\\ln(2)}{\\lambda} \\approx \\frac{0.693}{\\lambda}$$
+
+**Example:**
+For customer arrivals with $\\lambda = 3$ per hour:
+
+$$\\text{Median} = \\frac{\\ln(2)}{3} \\approx \\frac{0.693}{3} \\approx 0.231 \\text{ hours} \\approx 13.9 \\text{ minutes}$$
+
+Half of the waiting times are less than 13.9 minutes, and half are greater.
+
+**Properties:**
+• The exponential distribution is right-skewed: mode < median < [mean](!/probability/expected-value)
+• Mode = 0, Median = $\\frac{\\ln(2)}{\\lambda} \\approx 0.693 \\times \\frac{1}{\\lambda}$, Mean = $\\frac{1}{\\lambda}$
+• The median is always smaller than the [mean](!/probability/expected-value): about 69.3% of the mean value
+• This reflects the right skew—most observations cluster near zero, but occasional long waits pull the mean higher
+• The relationship Median/Mean ≈ 0.693 holds for all exponential distributions regardless of $\\lambda$
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj10:{
       title:`Quantiles/Percentiles`,
       content:``,
@@ -381,6 +597,7 @@ export default function ExponbentialDistributionPage({seoData,sectionsContent , 
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+          <ExponentialDistributionCalculator/>
         ]
     },
     {

@@ -11,6 +11,7 @@ import Head from 'next/head'
 import { processContent } from '@/app/utils/contentProcessor'
 import NormalDistribution from '@/app/components/visualizations/probability/continuous-distribution/NormalDistribution'
 import NormalDistributionCDF from '@/app/components/visualizations/probability/continuous-distribution/CDF/NormalDistributionCDF'
+import NormalDistributionCalculator from '@/app/components/calculators/probability/distributions/continuous/NormalDistributionCalculator'
 
 
 export async function getStaticProps(){
@@ -246,7 +247,36 @@ The normal distribution is fully characterized by these two parameters.
     },
     obj5:{
       title:`Probability Density Function (PDF) and Support (Range)`,
-      content:``,
+      content:`
+      <h3 style="color: #1e40af;">Probability Density Function (PDF)</h3>
+The **probability density function (PDF)** of a **normal distribution** is given by:
+
+$$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}, \\quad -\\infty < x < \\infty$$
+
+### Intuition Behind the Formula
+
+ **Bell-Shaped Curve**: The normal distribution creates a symmetric, bell-shaped curve centered at $\\mu$.
+
+  **Parameters**:
+  • $\\mu$: The mean determines where the center of the bell sits
+  • $\\sigma$: The standard deviation controls the width of the bell
+  • $\\sigma^2$: The [variance](!/probability/variance) ($\\sigma$ squared) appears in the exponent
+
+ **Support** (Range of the [Random Variable](!/probability/random-variables)):
+  • The [random variable](!/probability/random-variables) $X$ can take any real value: $(-\\infty, +\\infty)$
+  • While theoretically unbounded, approximately 99.7% of values fall within $\\mu \\pm 3\\sigma$
+  • The **support** is the entire real line
+
+ **Logic Behind the Formula**:
+  • $\\frac{1}{\\sigma\\sqrt{2\\pi}}$: Normalization constant ensuring total area equals 1
+  • $(x-\\mu)^2$: Squared distance from the mean (makes curve symmetric)
+  • $e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$: Exponential decay as you move away from $\\mu$
+  • The total area under the curve equals 1:
+  
+  $$\\int_{-\\infty}^{\\infty} f(x)\\,dx = 1$$
+
+**Practical Example:** Human heights follow approximately a normal distribution. If adult male heights have $\\mu = 175$ cm and $\\sigma = 7$ cm, then $X \\sim N(175, 49)$. The PDF tells us the relative likelihood of observing different heights, with the peak at 175 cm and decreasing probability as we move toward very short or very tall individuals.
+      `,
       before:``,
       after:``,
       link:'',
@@ -254,36 +284,219 @@ The normal distribution is fully characterized by these two parameters.
     },
     obj6:{
       title:`Cumulative Distribution Function (CDF)`,
-      content:``,
+      content:`<h3 style="color: #1e3a8a;">Cumulative Distribution Function (CDF)</h3>
+The **cumulative distribution function (CDF)** gives the probability that $X$ is less than or equal to a specific value:
+
+$$F(x) = P(X \\leq x) = \\int_{-\\infty}^{x} \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(t-\\mu)^2}{2\\sigma^2}}\\,dt$$
+
+**Standard Normal CDF**: For the standard normal distribution $N(0, 1)$, the CDF is traditionally denoted by $\\Phi(z)$:
+
+$$\\Phi(z) = P(Z \\leq z) = \\int_{-\\infty}^{z} \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{t^2}{2}}\\,dt$$
+
+**Key Properties**:
+• $F(-\\infty) = 0$ and $F(+\\infty) = 1$
+• $F(\\mu) = 0.5$ (the mean is the 50th percentile)
+• The CDF is strictly increasing and S-shaped
+• Any normal CDF can be expressed using the standard normal: $F(x) = \\Phi\\left(\\frac{x-\\mu}{\\sigma}\\right)$
+
+**Practical Use:** The normal CDF has no closed-form expression, so we use tables, calculators, or software. To find $P(X \\leq 180)$ when $X \\sim N(175, 49)$, convert to standard normal: $Z = (180-175)/7 \\approx 0.714$, then look up $\\Phi(0.714) \\approx 0.762$, meaning about 76.2% of values fall below 180.
+      `,
       before:``,
       after:``,
       link:'',
   
     },
-    obj7:{
-      title:`Expected Value (mean)`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj7:{
+    //   title:`Expected Value (mean)`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
-    obj8:{
-      title:`Variance and Standard Deviation`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // },
+
+    obj7: {
+  title: `Expected Value (Mean)`,
+  content: `
+The mean of a continuous random variable requires integrating across all possible values, with each value weighted by its density. For the normal distribution, this computation follows the [standard continuous expected value formula](!/probability/expected-value#continuous):
+
+$$E[X] = \\int_{-\\infty}^{\\infty} x \\cdot f(x) \\, dx$$
+
+### Formula
+
+$$E[X] = \\mu$$
+
+Where:
+$\\mu$ = the location parameter of the distribution
+
+### Derivation and Intuition
+
+The normal distribution has PDF:
+
+$$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$$
+
+Computing the expected value:
+
+$$E[X] = \\int_{-\\infty}^{\\infty} x \\cdot \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}} \\, dx$$
+
+Using the substitution $z = \\frac{x-\\mu}{\\sigma}$, we get $x = \\mu + \\sigma z$ and $dx = \\sigma \\, dz$:
+
+$$E[X] = \\int_{-\\infty}^{\\infty} (\\mu + \\sigma z) \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz$$
+
+$$E[X] = \\mu \\int_{-\\infty}^{\\infty} \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz + \\sigma \\int_{-\\infty}^{\\infty} z \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz$$
+
+The first integral equals 1 (total probability of standard normal). The second integral equals 0 by symmetry (integrating an odd function over a symmetric interval).
+
+Therefore: $E[X] = \\mu \\cdot 1 + \\sigma \\cdot 0 = \\mu$
+
+The result $E[X] = \\mu$ reveals a fundamental property of the normal distribution: the parameter $\\mu$ directly represents the mean. The distribution is perfectly symmetric around $\\mu$, making it simultaneously the center of mass, the balance point, and the most likely region of values.
+
+### Example
+
+Consider human heights modeled as normally distributed with $\\mu = 170$ cm and $\\sigma = 10$ cm:
+
+$$E[X] = 170 \\text{ cm}$$
+
+The expected height is exactly 170 cm, which is the center of the distribution. Half of all heights fall above this value, and half fall below it.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
+    // obj8:{
+    //   title:`Variance and Standard Deviation`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
-    obj9:{
-      title:`Mode and Median`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // },
+
+    obj8: {
+  title: `Variance and Standard Deviation`,
+  content: `
+The [variance](!/probability/variance#calculate) of a continuous random variable quantifies the spread of values around the mean. For continuous distributions, it is calculated through integration:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 f(x) \\, dx$$
+
+Alternatively, using the computational formula:
+
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+
+For the **normal distribution**, this calculation yields a direct relationship with the distribution parameter.
+
+### Formula
+
+$$\\mathrm{Var}(X) = \\sigma^2$$
+
+Where:
+$\\sigma$ = the scale parameter of the distribution
+
+### Derivation and Intuition
+
+The normal distribution has PDF:
+
+$$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$$
+
+We know from the expected value section that $\\mu = E[X]$. Computing the variance:
+
+$$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 \\cdot \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}} \\, dx$$
+
+Using the substitution $z = \\frac{x-\\mu}{\\sigma}$, we get $(x-\\mu) = \\sigma z$ and $dx = \\sigma \\, dz$:
+
+$$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} (\\sigma z)^2 \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz = \\sigma^2 \\int_{-\\infty}^{\\infty} z^2 \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz$$
+
+The integral equals 1 (this is the variance of the standard normal distribution).
+
+Therefore: $\\mathrm{Var}(X) = \\sigma^2 \\cdot 1 = \\sigma^2$
+
+The result $\\mathrm{Var}(X) = \\sigma^2$ reveals that the parameter $\\sigma$ directly controls the spread of the distribution. Just as $\\mu$ determines the center, $\\sigma^2$ determines how dispersed values are around that center. A larger $\\sigma$ produces a wider, flatter bell curve; a smaller $\\sigma$ produces a narrow, peaked distribution.
+
+### Standard Deviation
+
+$$\\sigma$$
+
+The standard deviation is simply the parameter $\\sigma$ itself, which is why it's called the standard deviation parameter. This makes interpretation straightforward: about 68% of values fall within one standard deviation of the mean, about 95% within two standard deviations, and about 99.7% within three standard deviations.
+
+### Example
+
+Consider human heights modeled as normally distributed with $\\mu = 170$ cm and $\\sigma = 10$ cm:
+
+$$\\mathrm{Var}(X) = (10)^2 = 100 \\text{ cm}^2$$
+
+$$\\sigma = 10 \\text{ cm}$$
+
+The variance of 100 cm² and standard deviation of 10 cm indicate that most heights cluster within 10 cm of the mean. We expect about 68% of heights to fall between 160 cm and 180 cm, and about 95% between 150 cm and 190 cm.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
+    // obj9:{
+    //   title:`Mode and Median`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+    obj9: {
+  title: `Mode and Median`,
+  content: `### Mode
+
+The [mode](!/probability/mode) is the value where the [probability density function](!/probability/probability-function/pdf) reaches its maximum—the peak of the distribution curve.
+
+For the normal distribution, the [mode](!/probability/mode) is:
+
+$$\\text{Mode} = \\mu$$
+
+**Intuition:** The normal [PDF](!/probability/probability-function/pdf) is:
+
+$$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$$
+
+The exponential term $e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$ is maximized when the exponent equals zero, which occurs when $(x-\\mu)^2 = 0$, giving $x = \\mu$.
+
+The normal distribution is perfectly symmetric around $\\mu$, making this point simultaneously the center of mass, the highest point, and the balance point. No other value has higher probability density.
+
+**Example:** 
+For human heights with $\\mu = 170$ cm and $\\sigma = 10$ cm:
+
+Mode = 170 cm
+
+This is the most common height—the peak of the bell curve. Heights become progressively less common as you move away from 170 cm in either direction.
+
+### Median
+
+The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) = 0.5$—the point that divides the distribution's probability in half.
+
+For the normal distribution, the [median](!/probability/median) is:
+
+$$\\text{Median} = \\mu$$
+
+**Intuition:** Because the normal distribution is perfectly symmetric around $\\mu$, exactly half the probability mass lies below $\\mu$ and half lies above. The [CDF](!/probability/cdf) evaluated at $\\mu$ gives:
+
+$$F(\\mu) = 0.5$$
+
+This symmetry means that [mode](!/probability/mode) = [median](!/probability/median) = [mean](!/probability/expected-value) = $\\mu$, a unique property that holds only for symmetric distributions.
+
+**Example:**
+For human heights with $\\mu = 170$ cm and $\\sigma = 10$ cm:
+
+Median = 170 cm
+
+Half of all heights fall below 170 cm, and half fall above. This coincides with both the mean and mode.
+
+**Properties:**
+• For the normal distribution: mode = median = mean (all equal $\\mu$)
+• The parameter $\\sigma$ controls spread but doesn't affect the location of mode or median
+• This triple equality holds for all symmetric distributions but is particularly important for the normal distribution
+• Unlike skewed distributions where mean, median, and mode diverge, the normal distribution's symmetry keeps them aligned
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj10:{
       title:`Quantiles/Percentiles`,
       content:``,
@@ -523,6 +736,7 @@ export default function NormalDistributionPage({seoData,sectionsContent , introC
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+          <NormalDistributionCalculator/>
         ]
     },
     {
