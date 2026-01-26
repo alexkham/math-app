@@ -1020,7 +1020,9 @@ export default function NormalDistributionPage({seoData,sectionsContent , introC
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <NormalDistributionCalculator/>,
+          <div key={'normal-calc'}>
+          <NormalDistributionCalculator/>
+          </div>,
           sectionsContent.links.calculators,
         ]
     },

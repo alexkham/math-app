@@ -917,7 +917,9 @@ export default function ExponbentialDistributionPage({seoData,sectionsContent , 
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <ExponentialDistributionCalculator/>,
+          <div key={'exponential-calc'}>
+          <ExponentialDistributionCalculator/>
+          </div>,
           sectionsContent.links.calculators,
         ]
     },

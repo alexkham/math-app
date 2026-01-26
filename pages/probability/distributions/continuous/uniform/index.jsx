@@ -1056,7 +1056,9 @@ export default function ContinuousUniformDistributionPage({seoData,sectionsConte
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <ContinuousUniformCalculator/>,
+          <div key={'uniform-calc'}>
+          <ContinuousUniformCalculator/>
+          </div>,
           sectionsContent.links.calculators,
 
         ]
