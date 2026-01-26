@@ -358,14 +358,110 @@ Half of the waiting times are less than 13.9 minutes, and half are greater.
   after: ``,
   link: '',
 },
-    obj10:{
-      title:`Quantiles/Percentiles`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj10:{
+    //   title:`Quantiles/Percentiles`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+    obj10: {
+  title: `Quantiles/Percentiles`,
+  content: `
+A **quantile** is a value that divides the distribution at a specific probability threshold. The $p$-th quantile $x_p$ satisfies:
+
+$$P(X \\leq x_p) = p$$
+
+where $0 < p < 1$. 
+
+**Percentiles** are quantiles expressed as percentages: the $k$-th percentile corresponds to the quantile at $p = k/100$. For example, the 25th percentile is the 0.25 quantile, the 50th percentile is the [median](!/probability/median), and the 75th percentile is the 0.75 quantile.
+
+Quantiles are found by inverting the [CDF](!/probability/cdf): if $F(x_p) = p$, then $x_p = F^{-1}(p)$.
+
+### Finding Quantiles for the Exponential Distribution
+
+For an exponential distribution with rate parameter $\\lambda$, the [CDF](!/probability/cdf) is:
+
+$$F(x) = 1 - e^{-\\lambda x}$$
+
+To find the $p$-th quantile, we solve $F(x_p) = p$:
+
+$$1 - e^{-\\lambda x_p} = p$$
+
+$$e^{-\\lambda x_p} = 1 - p$$
+
+$$-\\lambda x_p = \\ln(1 - p)$$
+
+$$x_p = -\\frac{\\ln(1 - p)}{\\lambda} = \\frac{-\\ln(1 - p)}{\\lambda}$$
+
+This gives the general quantile formula:
+
+$$x_p = \\frac{-\\ln(1 - p)}{\\lambda}$$
+
+Unlike the normal distribution, the exponential distribution has a closed-form expression for quantiles—no tables or numerical methods needed.
+
+### Common Percentiles
+
+**25th Percentile (First Quartile, Q1):**
+
+$$x_{0.25} = \\frac{-\\ln(1 - 0.25)}{\\lambda} = \\frac{-\\ln(0.75)}{\\lambda} = \\frac{0.288}{\\lambda}$$
+
+About 25% of waiting times are less than $\\frac{0.288}{\\lambda}$.
+
+**50th Percentile (Median, Q2):**
+
+$$x_{0.50} = \\frac{-\\ln(1 - 0.50)}{\\lambda} = \\frac{-\\ln(0.50)}{\\lambda} = \\frac{\\ln(2)}{\\lambda} \\approx \\frac{0.693}{\\lambda}$$
+
+This matches the [median](!/probability/median) derived earlier.
+
+**75th Percentile (Third Quartile, Q3):**
+
+$$x_{0.75} = \\frac{-\\ln(1 - 0.75)}{\\lambda} = \\frac{-\\ln(0.25)}{\\lambda} = \\frac{1.386}{\\lambda}$$
+
+About 75% of waiting times are less than $\\frac{1.386}{\\lambda}$.
+
+**Interquartile Range (IQR):**
+
+$$\\text{IQR} = Q3 - Q1 = \\frac{1.386}{\\lambda} - \\frac{0.288}{\\lambda} = \\frac{1.098}{\\lambda}$$
+
+The IQR contains the middle 50% of the distribution.
+
+### Example
+
+For customer arrivals with $\\lambda = 3$ per hour:
+
+**25th percentile:** $\\frac{0.288}{3} = 0.096$ hours $\\approx 5.8$ minutes
+
+25% of waits are less than 5.8 minutes.
+
+**50th percentile:** $\\frac{0.693}{3} = 0.231$ hours $\\approx 13.9$ minutes
+
+Half of waits are less than 13.9 minutes (the [median](!/probability/median)).
+
+**75th percentile:** $\\frac{1.386}{3} = 0.462$ hours $\\approx 27.7$ minutes
+
+75% of waits are less than 27.7 minutes.
+
+**IQR:** $\\frac{1.098}{3} = 0.366$ hours $\\approx 22$ minutes
+
+The middle 50% of waiting times span about 22 minutes.
+
+### Other Notable Percentiles
+
+**90th percentile:** $x_{0.90} = \\frac{-\\ln(0.10)}{\\lambda} = \\frac{2.303}{\\lambda}$ (only 10% of waits exceed this)
+
+**95th percentile:** $x_{0.95} = \\frac{-\\ln(0.05)}{\\lambda} = \\frac{2.996}{\\lambda}$ (only 5% of waits exceed this)
+
+**99th percentile:** $x_{0.99} = \\frac{-\\ln(0.01)}{\\lambda} = \\frac{4.605}{\\lambda}$ (only 1% of waits exceed this)
+
+The exponential distribution's right skew means that while most observations cluster near zero, the upper percentiles can be quite large relative to the [mean](!/probability/expected-value) $\\frac{1}{\\lambda}$.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj11:{
       title:`Moment Generating Function`,
       content:``,
@@ -374,14 +470,61 @@ Half of the waiting times are less than 13.9 minutes, and half are greater.
       link:'',
   
     },
-    obj12:{
-      title:`Real-World Examples and Common Applications`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj12:{
+    //   title:`Real-World Examples and Common Applications`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+    obj12: {
+  title: `Real-World Examples and Common Applications`,
+  content: `
+The [exponential distribution](!/probability/distributions/continuous/exponential) models waiting times and lifetimes when events occur randomly and independently at a constant rate.
+
+### Common Applications
+
+**Reliability Engineering and Survival Analysis:**
+• Component failure times (electronics, mechanical parts)
+• System reliability modeling
+• Time until equipment breakdown
+• Light bulb lifetimes
+
+**Queueing Theory and Service Systems:**
+• Time between customer arrivals
+• Call center inter-arrival times
+• Web server request intervals
+• Traffic flow patterns
+
+**Physics and Natural Sciences:**
+• Radioactive decay intervals
+• Time between cosmic ray detections
+• Molecular collision intervals
+• Photon emission times
+
+**Insurance and Actuarial Science:**
+• Time until next insurance claim
+• Inter-occurrence times for accidents
+• Time between policy cancellations
+
+### Why It Appears
+
+The exponential distribution is the continuous analog of the [geometric distribution](!/probability/distributions/discrete/geometric). It emerges naturally from [Poisson processes](!/probability/distributions/discrete/poisson)—when events occur at rate $\\lambda$, the time until the next event follows an exponential distribution with the same rate parameter.
+
+The **memoryless property** makes it unique: $P(X > s + t \\mid X > s) = P(X > t)$. Past waiting time provides no information about future waiting time.
+
+### Example Application
+
+A web server receives requests at an average rate of 120 per hour ($\\lambda = 2$ per minute). The time between consecutive requests follows $\\text{Exp}(2)$.
+
+The [median](!/probability/median) wait between requests is $\\frac{\\ln(2)}{2} \\approx 0.35$ minutes (21 seconds). However, 10% of inter-arrival times exceed $\\frac{2.3}{2} = 1.15$ minutes, requiring server capacity planning for occasional gaps.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj13:{
       title:`Interactive Calculator`,
       content:``,
@@ -391,27 +534,201 @@ Half of the waiting times are less than 13.9 minutes, and half are greater.
       link:'',
   
     },
-    obj14:{
-      title:`Special Cases`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-      link:'',
+    // obj14:{
+    //   title:`Special Cases`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
+    //   link:'',
   
-    },
+    // },
+
+    obj14: {
+  title: `Special Cases`,
+  content: `
+The exponential distribution has several special cases and limiting behaviors that reveal its connections to other distributions and its unique mathematical properties.
+
+### Unit Exponential Distribution
+
+When $\\lambda = 1$, we obtain the **unit exponential distribution** $\\text{Exp}(1)$:
+
+$$f(x) = e^{-x} \\text{ for } x \\geq 0$$
+
+This simplified form is often used in theoretical work. Any exponential random variable $X \\sim \\text{Exp}(\\lambda)$ can be transformed to unit exponential:
+
+$$Y = \\lambda X \\sim \\text{Exp}(1)$$
+
+### As λ → 0 (Rate Decreases)
+
+As $\\lambda \\to 0$, events become increasingly rare:
+
+• The [mean](!/probability/expected-value) $\\frac{1}{\\lambda} \\to \\infty$ (average wait grows without bound)
+• The distribution becomes more spread out
+• Most probability mass shifts toward larger values
+• The density near zero approaches zero
+
+This represents the limit of extremely infrequent events.
+
+### As λ → ∞ (Rate Increases)
+
+As $\\lambda \\to \\infty$, events occur nearly instantaneously:
+
+• The [mean](!/probability/expected-value) $\\frac{1}{\\lambda} \\to 0$ (average wait shrinks to zero)
+• All probability concentrates near zero
+• The distribution degenerates toward a point mass at zero
+
+This represents the limit where waiting time becomes negligible.
+
+### Limiting Behavior and Connections
+
+**Relationship to Poisson:**
+The exponential distribution is intimately connected to the [Poisson distribution](!/probability/distributions/discrete/poisson). If events follow a Poisson process with rate $\\lambda$, then:
+
+• The time until the first event is $\\text{Exp}(\\lambda)$
+• The time between consecutive events is $\\text{Exp}(\\lambda)$
+
+The exponential is the continuous-time analog of the [geometric distribution](!/probability/distributions/discrete/geometric).
+
+**Minimum of Exponentials:**
+If $X_1 \\sim \\text{Exp}(\\lambda_1)$ and $X_2 \\sim \\text{Exp}(\\lambda_2)$ are independent, then:
+
+$$\\min(X_1, X_2) \\sim \\text{Exp}(\\lambda_1 + \\lambda_2)$$
+
+The minimum waiting time has rate equal to the sum of rates. This property is crucial in reliability theory (system fails when first component fails).
+
+**Memoryless Property:**
+The exponential distribution is the **only continuous distribution** with the memoryless property:
+
+$$P(X > s + t \\mid X > s) = P(X > t)$$
+
+This makes it the natural choice for modeling random failures and arrivals.
+
+### Practical Implications
+
+**Reliability Analysis:**
+When $\\lambda$ is very small (reliable components), failures are rare and the exponential model applies over long time spans. As $\\lambda$ increases (less reliable components), the model still applies but predicts more frequent failures.
+
+**Queueing Systems:**
+In service systems, when $\\lambda$ is large (high arrival rate), the system stays busy. As $\\lambda$ decreases (low traffic), the server experiences longer idle periods between customers.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
 
 
-    obj15:{
+    // obj15:{
   
-      title:`Properties`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    //   title:`Properties`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
   
+    obj15: {
+  title: `Properties`,
+  content: `
+The exponential distribution has several distinctive properties, most notably the memoryless property that uniquely characterizes it among continuous distributions.
+
+### Symmetry
+
+The exponential distribution is **not symmetric**. It has:
+• Support on $[0, \\infty)$ only
+• Maximum density at $x = 0$
+• Long right tail extending to infinity
+• Strong positive skew
+
+### Skewness
+
+$$\\text{Skewness} = 2$$
+
+The skewness coefficient of 2 indicates substantial right skew. Most probability mass concentrates near zero, but the long tail pulls the [mean](!/probability/expected-value) rightward.
+
+### Kurtosis
+
+$$\\text{Kurtosis} = 9$$
+
+$$\\text{Excess Kurtosis} = 6$$
+
+High kurtosis (9 versus 3 for normal) indicates the exponential distribution has heavier tails than the normal distribution. Extreme values occur more frequently than in normal or uniform distributions.
+
+### Tail Behavior
+
+The exponential distribution has **exponentially decaying right tail**:
+
+$$f(x) = \\lambda e^{-\\lambda x} \\to 0 \\text{ as } x \\to \\infty$$
+
+The tail decreases exponentially, which is:
+• Heavier than normal tails (which decay like $e^{-x^2}$)
+• Lighter than polynomial tails (like power laws)
+• Characteristic of many natural decay processes
+
+Probabilities in the tail:
+• $P(X > \\frac{2}{\\lambda}) = e^{-2} \\approx 0.135$ (13.5%)
+• $P(X > \\frac{3}{\\lambda}) = e^{-3} \\approx 0.050$ (5%)
+• $P(X > \\frac{5}{\\lambda}) = e^{-5} \\approx 0.007$ (0.7%)
+
+### Unique Mathematical Properties
+
+**Memoryless Property (Defining Characteristic):**
+$$P(X > s + t \\mid X > s) = P(X > t) \\text{ for all } s, t \\geq 0$$
+
+The exponential is the **only continuous distribution** with this property. Past waiting time provides no information about future waiting time. This makes it ideal for modeling random arrivals and failures without aging effects.
+
+Equivalently:
+$$P(X > s + t) = P(X > s) \\cdot P(X > t)$$
+
+**Constant Hazard Rate:**
+The hazard function (instantaneous failure rate) is constant:
+
+$$h(x) = \\frac{f(x)}{1 - F(x)} = \\frac{\\lambda e^{-\\lambda x}}{e^{-\\lambda x}} = \\lambda$$
+
+The failure rate doesn't depend on age—components don't "wear out" under the exponential model.
+
+**Closure Under Minimum:**
+If $X_1 \\sim \\text{Exp}(\\lambda_1)$ and $X_2 \\sim \\text{Exp}(\\lambda_2)$ are independent:
+
+$$\\min(X_1, X_2) \\sim \\text{Exp}(\\lambda_1 + \\lambda_2)$$
+
+The minimum of exponentials is exponential with rate equal to the sum of rates.
+
+**Scaling Property:**
+If $X \\sim \\text{Exp}(\\lambda)$, then for any $c > 0$:
+
+$$cX \\sim \\text{Exp}(\\lambda/c)$$
+
+Rescaling by $c$ divides the rate by $c$.
+
+### Useful Identities
+
+**Relationship to Poisson:**
+If events follow a [Poisson process](!/probability/distributions/discrete/poisson) with rate $\\lambda$, the time between events is $\\text{Exp}(\\lambda)$. The number of events in time $t$ is $\\text{Poisson}(\\lambda t)$.
+
+**Mean Equals Standard Deviation:**
+$$E[X] = \\sigma = \\frac{1}{\\lambda}$$
+
+This unique relationship (mean = standard deviation) holds only for the exponential distribution.
+
+**Lack of Memory Formula:**
+$$E[X - t \\mid X > t] = E[X] = \\frac{1}{\\lambda}$$
+
+The expected remaining waiting time equals the original expected waiting time—knowing you've already waited $t$ time units doesn't change your expectation.
+
+**Survival Function:**
+$$S(x) = P(X > x) = e^{-\\lambda x}$$
+
+Simple exponential decay makes many calculations tractable.
+
+**Sum of Exponentials:**
+The sum of $n$ independent $\\text{Exp}(\\lambda)$ variables follows a Gamma$(n, \\lambda)$ distribution, generalizing the exponential.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj16:{
   
       title:`Related Distributions`,
@@ -578,14 +895,14 @@ export default function ExponbentialDistributionPage({seoData,sectionsContent , 
           sectionsContent.obj10.content,
         ]
     },
-    {
-        id:'11',
-        title:sectionsContent.obj11.title,
-        link:sectionsContent.obj11.link,
-        content:[
-          sectionsContent.obj11.content,
-        ]
-    },
+    // {
+    //     id:'11',
+    //     title:sectionsContent.obj11.title,
+    //     link:sectionsContent.obj11.link,
+    //     content:[
+    //       sectionsContent.obj11.content,
+    //     ]
+    // },
     {
         id:'12',
         title:sectionsContent.obj12.title,
@@ -628,14 +945,14 @@ export default function ExponbentialDistributionPage({seoData,sectionsContent , 
           sectionsContent.obj16.content,
         ]
     },
-    {
-        id:'17',
-        title:sectionsContent.obj17.title,
-        link:sectionsContent.obj17.link,
-        content:[
-          sectionsContent.obj17.content,
-        ]
-    },
+    // {
+    //     id:'17',
+    //     title:sectionsContent.obj17.title,
+    //     link:sectionsContent.obj17.link,
+    //     content:[
+    //       sectionsContent.obj17.content,
+    //     ]
+    // },
     // {
     //     id:'1',
     //     title:sectionsContent.obj1.title,

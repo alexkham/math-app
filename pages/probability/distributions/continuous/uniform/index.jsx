@@ -495,14 +495,108 @@ Half of arrivals occur before 2:15 PM, and half occur after. This is also the [m
   after: ``,
   link: '',
 },
-    obj10:{
-      title:`Quantiles/Percentiles`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj10:{
+    //   title:`Quantiles/Percentiles`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+    obj10: {
+  title: `Quantiles/Percentiles`,
+  content: `
+A **quantile** is a value that divides the distribution at a specific probability threshold. The $p$-th quantile $x_p$ satisfies:
+
+$$P(X \\leq x_p) = p$$
+
+where $0 < p < 1$. 
+
+**Percentiles** are quantiles expressed as percentages: the $k$-th percentile corresponds to the quantile at $p = k/100$. For example, the 25th percentile is the 0.25 quantile, the 50th percentile is the [median](!/probability/median), and the 75th percentile is the 0.75 quantile.
+
+Quantiles are found by inverting the [CDF](!/probability/cdf): if $F(x_p) = p$, then $x_p = F^{-1}(p)$.
+
+### Finding Quantiles for the Continuous Uniform Distribution
+
+For a continuous uniform distribution on the interval $[a, b]$, the [CDF](!/probability/cdf) is:
+
+$$F(x) = \\frac{x - a}{b - a} \\text{ for } a \\leq x \\leq b$$
+
+To find the $p$-th quantile, we solve $F(x_p) = p$:
+
+$$\\frac{x_p - a}{b - a} = p$$
+
+$$x_p - a = p(b - a)$$
+
+$$x_p = a + p(b - a)$$
+
+This gives the simple quantile formula:
+
+$$x_p = a + p(b - a)$$
+
+The $p$-th quantile is located a fraction $p$ of the way from $a$ to $b$ along the interval. This linear relationship makes quantiles for the uniform distribution particularly intuitive.
+
+### Common Percentiles
+
+**25th Percentile (First Quartile, Q1):**
+
+$$x_{0.25} = a + 0.25(b - a) = a + \\frac{b - a}{4} = \\frac{3a + b}{4}$$
+
+About 25% of values fall below this point, located one-quarter of the way from $a$ to $b$.
+
+**50th Percentile (Median, Q2):**
+
+$$x_{0.50} = a + 0.50(b - a) = a + \\frac{b - a}{2} = \\frac{a + b}{2}$$
+
+This is the [median](!/probability/median), located exactly at the midpoint.
+
+**75th Percentile (Third Quartile, Q3):**
+
+$$x_{0.75} = a + 0.75(b - a) = a + \\frac{3(b - a)}{4} = \\frac{a + 3b}{4}$$
+
+About 75% of values fall below this point, located three-quarters of the way from $a$ to $b$.
+
+**Interquartile Range (IQR):**
+
+$$\\text{IQR} = Q3 - Q1 = \\frac{a + 3b}{4} - \\frac{3a + b}{4} = \\frac{b - a}{2}$$
+
+The IQR spans exactly half the total interval width, containing the middle 50% of the distribution.
+
+### Example
+
+For a bus arriving uniformly between 2:00 PM and 2:30 PM (interval $[0, 30]$ minutes):
+
+**25th percentile:** $0 + 0.25(30 - 0) = 7.5$ minutes
+
+25% of arrivals occur before 2:07:30 PM.
+
+**50th percentile:** $0 + 0.50(30 - 0) = 15$ minutes
+
+Half of arrivals occur before 2:15 PM (the [median](!/probability/median)).
+
+**75th percentile:** $0 + 0.75(30 - 0) = 22.5$ minutes
+
+75% of arrivals occur before 2:22:30 PM.
+
+**IQR:** $22.5 - 7.5 = 15$ minutes
+
+The middle 50% of arrivals span a 15-minute window from 2:07:30 PM to 2:22:30 PM.
+
+### Other Notable Percentiles
+
+**10th percentile:** $x_{0.10} = a + 0.10(b - a)$ (10% of values below this)
+
+**90th percentile:** $x_{0.90} = a + 0.90(b - a)$ (90% of values below this)
+
+**95th percentile:** $x_{0.95} = a + 0.95(b - a)$ (95% of values below this)
+
+For the uniform distribution, every percentile divides the interval proportionally—the $p$-th percentile is always located at position $p$ along the interval from $a$ to $b$. This makes the uniform distribution the simplest case for understanding quantiles.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj11:{
       title:`Moment Generating Function`,
       content:``,
@@ -511,14 +605,61 @@ Half of arrivals occur before 2:15 PM, and half occur after. This is also the [m
       link:'',
   
     },
-    obj12:{
-      title:`Real-World Examples and Common Applications`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj12:{
+    //   title:`Real-World Examples and Common Applications`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+    obj12: {
+  title: `Real-World Examples and Common Applications`,
+  content: `
+The continuous uniform distribution models situations where any value within an interval is equally likely, representing complete uncertainty within defined bounds.
+
+### Common Applications
+
+**Random Number Generation:**
+• Computational random number generators produce uniform $[0,1]$ values
+• Simulations and Monte Carlo methods
+• Cryptographic applications
+• Statistical sampling algorithms
+
+**Scheduling and Timing:**
+• Random arrival times within a window
+• Bus/train arrival when schedule unknown
+• Meeting start times with imprecise information
+• Random delays or offsets
+
+**Physical and Geometric Problems:**
+• Random point selection on a line segment or interval
+• Angle measurements in certain contexts
+• Rounding errors in numerical computations
+• Random coordinates within bounded regions
+
+**Decision Making Under Ignorance:**
+• Modeling complete uncertainty about a parameter
+• Bayesian prior distributions (non-informative priors)
+• Initial estimates before data collection
+
+### Why It Appears
+
+The uniform distribution represents maximum entropy—when you know only the minimum and maximum possible values, the uniform distribution assumes nothing else. It's the "default" model for complete ignorance within bounds.
+
+It also serves as the foundation for generating other distributions: by transforming uniform $[0,1]$ random variables using inverse [CDF](!/probability/cdf) methods, any continuous distribution can be simulated.
+
+### Example Application
+
+A digital clock displays time in whole minutes. When you glance at it, the actual time has passed some fraction into the current minute. This fraction is uniformly distributed on $[0, 1)$ minutes, with [mean](!/probability/expected-value) 30 seconds.
+
+For scheduling, if a bus arrives "sometime between 2:00 and 2:30" with no further information, modeling arrival time as $\\text{Uniform}(0, 30)$ minutes reflects complete uncertainty, giving an expected wait of 15 minutes.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj13:{
       title:`Interactive Calculator`,
       content:``,
@@ -528,26 +669,207 @@ Half of arrivals occur before 2:15 PM, and half occur after. This is also the [m
       link:'',
   
     },
-    obj14:{
-      title:`Special Cases`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-      link:'',
+    // obj14:{
+    //   title:`Special Cases`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
+    //   link:'',
   
-    },
+    // },
+obj14: {
+  title: `Special Cases`,
+  content: `
+The continuous uniform distribution, while mathematically simple, exhibits several special cases and edge behaviors worth understanding.
 
+### Unit Interval Uniform Distribution
 
-    obj15:{
+When $a = 0$ and $b = 1$, we obtain the **standard uniform distribution** $\\text{Uniform}(0, 1)$:
+
+$$f(x) = 1 \\text{ for } 0 \\leq x \\leq 1$$
+
+This is the fundamental distribution in random number generation—all other continuous distributions can be generated by transforming uniform $[0, 1]$ random variables using the inverse [CDF](!/probability/cdf) method.
+
+Any uniform random variable $X \\sim \\text{Uniform}(a, b)$ can be transformed to standard uniform:
+
+$$U = \\frac{X - a}{b - a} \\sim \\text{Uniform}(0, 1)$$
+
+### As Interval Width Approaches Zero
+
+As $b - a \\to 0$ (with midpoint $\\frac{a+b}{2}$ held constant), the uniform distribution degenerates to a point mass:
+
+$$\\lim_{b \\to a} \\text{Uniform}(a, b) = \\delta_{\\frac{a+b}{2}}$$
+
+All probability concentrates at a single value. The distribution becomes deterministic—no randomness remains.
+
+### As Interval Width Increases
+
+As $b - a \\to \\infty$, the interval grows without bound:
+
+• The density $f(x) = \\frac{1}{b-a} \\to 0$ (probability spreads thinner)
+• [Variance](!/probability/variance) $\\frac{(b-a)^2}{12} \\to \\infty$ (uncertainty grows)
+• The distribution can no longer be normalized over the entire real line
+
+Unlike the normal distribution, a uniform distribution over $(-\\infty, \\infty)$ cannot exist as a proper probability distribution.
+
+### Symmetric Interval Around Zero
+
+When $a = -c$ and $b = c$ for some $c > 0$, the distribution is symmetric around zero:
+
+$$X \\sim \\text{Uniform}(-c, c)$$
+
+Properties:
+• [Mean](!/probability/expected-value) $= 0$
+• [Variance](!/probability/variance) $= \\frac{(2c)^2}{12} = \\frac{c^2}{3}$
+• Useful for modeling symmetric errors or deviations
+
+### Limiting Behavior and Connections
+
+**Relationship to Discrete Uniform:**
+The continuous uniform is the limiting case of the [discrete uniform distribution](!/probability/distributions/discrete/uniform) as the number of possible values increases and their spacing decreases:
+
+$$\\lim_{n \\to \\infty} \\text{DiscreteUniform}\\{a, a + \\Delta, a + 2\\Delta, \\ldots, b\\} \\to \\text{Uniform}(a, b)$$
+
+where $\\Delta = \\frac{b-a}{n}$ as the grid becomes infinitely fine.
+
+**Maximum Entropy:**
+Among all continuous distributions on $[a, b]$, the uniform distribution has **maximum entropy**—it represents the state of complete ignorance about where in the interval a value might fall.
+
+**Sum of Uniforms:**
+Unlike the normal and exponential distributions, sums of uniform random variables do **not** remain uniform. Instead, the sum of $n$ independent $\\text{Uniform}(0, 1)$ variables approaches normal by the [Central Limit Theorem](!/probability/central-limit-theorem).
+
+### Practical Implications
+
+**Measurement Rounding:**
+Digital instruments that round to the nearest unit create uniform rounding errors on $[-0.5, 0.5]$. As precision decreases (rounding to nearest 10, 100, etc.), the interval widens proportionally.
+
+**Bounded Uncertainty:**
+When you know a parameter lies between $a$ and $b$ but have no other information, the uniform prior represents minimal assumptions—neither favoring high values nor low values within the range.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
+
+    // obj15:{
   
-      title:`Properties`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    //   title:`Properties`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+    obj15: {
+  title: `Properties`,
+  content: `
+The continuous uniform distribution has simple mathematical properties stemming from its constant density across the support interval.
+
+### Symmetry
+
+The uniform distribution is **perfectly symmetric** around its midpoint $\\frac{a+b}{2}$:
+
+$$f\\left(\\frac{a+b}{2} + x\\right) = f\\left(\\frac{a+b}{2} - x\\right) \\text{ for } |x| \\leq \\frac{b-a}{2}$$
+
+This symmetry implies:
+• [Mean](!/probability/expected-value) = [Median](!/probability/median) = $\\frac{a+b}{2}$
+• [Mode](!/probability/mode) is not uniquely defined (all values equally probable)
+• The distribution is mirror-symmetric about its center
+
+### Skewness
+
+$$\\text{Skewness} = 0$$
+
+Zero skewness confirms perfect symmetry. The uniform distribution has no tendency toward either tail—both sides balance exactly.
+
+### Kurtosis
+
+$$\\text{Kurtosis} = 1.8$$
+
+$$\\text{Excess Kurtosis} = -1.2$$
+
+The uniform distribution has **negative excess kurtosis** (platykurtic). With kurtosis 1.8 < 3, it has lighter tails than the normal distribution. The flat shape means probability is spread evenly rather than concentrated at the center or in the tails.
+
+### Tail Behavior
+
+The uniform distribution has **no tails** in the traditional sense:
+
+$$f(x) = \\begin{cases} \\frac{1}{b-a} & \\text{for } a \\leq x \\leq b \\\\ 0 & \\text{otherwise} \\end{cases}$$
+
+Probability density is constant within $[a, b]$ and exactly zero outside this interval. There is an abrupt cutoff at the boundaries—no gradual decay.
+
+This represents the opposite extreme from heavy-tailed distributions:
+• No values outside $[a, b]$ are possible
+• All values within $[a, b]$ are equally likely
+• No concept of "rare extreme events"
+
+### Unique Mathematical Properties
+
+**Constant Density:**
+The defining property is uniform density:
+
+$$f(x) = \\frac{1}{b-a} \\text{ for all } x \\in [a, b]$$
+
+This makes many calculations algebraically simple.
+
+**Maximum Entropy on Bounded Interval:**
+Among all continuous distributions on $[a, b]$, the uniform distribution has the highest entropy:
+
+$$H = \\ln(b - a)$$
+
+It represents maximum uncertainty or minimum information—complete ignorance about where in $[a, b]$ a value falls.
+
+**Probability Proportional to Length:**
+For any subinterval $[c, d] \\subseteq [a, b]$:
+
+$$P(c \\leq X \\leq d) = \\frac{d - c}{b - a}$$
+
+Probability is simply the length of the subinterval divided by the total interval length.
+
+**Independence from Location:**
+The distribution shape depends only on interval width $b - a$, not on location. Shifting the interval preserves all distributional properties:
+
+$$\\text{Uniform}(a, b) \\stackrel{d}{=} \\text{Uniform}(a+c, b+c) \\text{ for any } c$$
+
+### Useful Identities
+
+**Linear Transformation:**
+If $X \\sim \\text{Uniform}(a, b)$, then:
+
+$$Y = cX + d \\sim \\text{Uniform}(ca + d, cb + d) \\text{ for } c > 0$$
+
+Linear transformations preserve uniformity (with appropriate parameter adjustments).
+
+**Standardization:**
+Any uniform variable can be transformed to standard uniform:
+
+$$U = \\frac{X - a}{b - a} \\sim \\text{Uniform}(0, 1)$$
+
+**Inverse CDF Method:**
+The uniform [CDF](!/probability/cdf) is:
+
+$$F(x) = \\frac{x - a}{b - a}$$
+
+with inverse:
+
+$$F^{-1}(p) = a + p(b - a)$$
+
+This makes generating uniform random variables and computing [quantiles](!/probability/median) trivial.
+
+**Order Statistics:**
+For $n$ independent $\\text{Uniform}(0, 1)$ variables, the $k$-th order statistic follows a Beta$(k, n-k+1)$ distribution. The minimum and maximum have simple distributions:
+
+$$\\min(X_1, \\ldots, X_n) \\sim \\text{Uniform}(a, a + \\frac{b-a}{n})$$ (approximately, for large $n$)
+
+**Not Closed Under Addition:**
+Unlike the normal distribution, sums of independent uniform variables do **not** remain uniform. Instead, the sum approaches normal by the [Central Limit Theorem](!/probability/central-limit-theorem).
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
   
     obj16:{
   
@@ -712,14 +1034,14 @@ export default function ContinuousUniformDistributionPage({seoData,sectionsConte
           sectionsContent.obj10.content,
         ]
     },
-    {
-        id:'11',
-        title:sectionsContent.obj11.title,
-        link:sectionsContent.obj11.link,
-        content:[
-          sectionsContent.obj11.content,
-        ]
-    },
+    // {
+    //     id:'11',
+    //     title:sectionsContent.obj11.title,
+    //     link:sectionsContent.obj11.link,
+    //     content:[
+    //       sectionsContent.obj11.content,
+    //     ]
+    // },
     {
         id:'12',
         title:sectionsContent.obj12.title,
@@ -755,6 +1077,14 @@ export default function ContinuousUniformDistributionPage({seoData,sectionsConte
           sectionsContent.obj15.content,
         ]
     },
+    // {
+    //     id:'16',
+    //     title:sectionsContent.obj16.title,
+    //     link:sectionsContent.obj16.link,
+    //     content:[
+    //       sectionsContent.obj16.content,
+    //     ]
+    // },
     // {
     //     id:'1',
     //     title:sectionsContent.obj1.title,

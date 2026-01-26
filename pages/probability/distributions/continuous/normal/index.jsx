@@ -497,14 +497,101 @@ Half of all heights fall below 170 cm, and half fall above. This coincides with 
   after: ``,
   link: '',
 },
-    obj10:{
-      title:`Quantiles/Percentiles`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj10:{
+    //   title:`Quantiles/Percentiles`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+    obj10: {
+  title: `Quantiles/Percentiles`,
+  content: `
+A **quantile** is a value that divides the distribution at a specific probability threshold. The $p$-th quantile $x_p$ satisfies:
+
+$$P(X \\leq x_p) = p$$
+
+where $0 < p < 1$. 
+
+**Percentiles** are quantiles expressed as percentages: the $k$-th percentile corresponds to the quantile at $p = k/100$. For example, the 25th percentile is the 0.25 quantile, the 50th percentile is the [median](!/probability/median), and the 75th percentile is the 0.75 quantile.
+
+Quantiles are found by inverting the [CDF](!/probability/cdf): if $F(x_p) = p$, then $x_p = F^{-1}(p)$.
+
+### Finding Quantiles for the Normal Distribution
+
+For a normal distribution with [mean](!/probability/expected-value) $\\mu$ and standard deviation $\\sigma$, the $p$-th quantile is:
+
+$$x_p = \\mu + \\sigma \\cdot z_p$$
+
+where $z_p$ is the $p$-th quantile of the standard normal distribution (mean 0, standard deviation 1).
+
+The standard normal quantiles $z_p$ cannot be expressed in closed form and must be obtained from:
+• Statistical tables (z-tables)
+• Software functions (e.g., qnorm() in R, norm.ppf() in Python)
+• Numerical approximations
+
+### Common Percentiles
+
+**25th Percentile (First Quartile, Q1):**
+
+$$x_{0.25} = \\mu + \\sigma \\cdot z_{0.25} = \\mu - 0.674\\sigma$$
+
+About 25% of values fall below this point.
+
+**50th Percentile (Median, Q2):**
+
+$$x_{0.50} = \\mu + \\sigma \\cdot z_{0.50} = \\mu$$
+
+This is the [median](!/probability/median), dividing the distribution in half.
+
+**75th Percentile (Third Quartile, Q3):**
+
+$$x_{0.75} = \\mu + \\sigma \\cdot z_{0.75} = \\mu + 0.674\\sigma$$
+
+About 75% of values fall below this point.
+
+**Interquartile Range (IQR):**
+
+$$\\text{IQR} = Q3 - Q1 = 1.349\\sigma$$
+
+The IQR contains the middle 50% of the distribution.
+
+### Example
+
+For human heights with $\\mu = 170$ cm and $\\sigma = 10$ cm:
+
+**25th percentile:** $170 + 10(-0.674) = 170 - 6.74 = 163.26$ cm
+
+25% of people are shorter than 163.26 cm.
+
+**50th percentile:** $170 + 10(0) = 170$ cm
+
+Half of people are shorter than 170 cm (the [median](!/probability/median)).
+
+**75th percentile:** $170 + 10(0.674) = 170 + 6.74 = 176.74$ cm
+
+75% of people are shorter than 176.74 cm.
+
+**IQR:** $176.74 - 163.26 = 13.48$ cm
+
+The middle 50% of heights span about 13.5 cm.
+
+### Other Notable Percentiles
+
+**90th percentile:** $x_{0.90} = \\mu + 1.282\\sigma$ (only 10% exceed this value)
+
+**95th percentile:** $x_{0.95} = \\mu + 1.645\\sigma$ (only 5% exceed this value)
+
+**99th percentile:** $x_{0.99} = \\mu + 2.326\\sigma$ (only 1% exceed this value)
+
+These percentiles are commonly used in hypothesis testing and confidence interval construction.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj11:{
       title:`Moment Generating Function`,
       content:``,
@@ -513,14 +600,59 @@ Half of all heights fall below 170 cm, and half fall above. This coincides with 
       link:'',
   
     },
-    obj12:{
-      title:`Real-World Examples and Common Applications`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj12:{
+    //   title:`Real-World Examples and Common Applications`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+
+    obj12: {
+  title: `Real-World Examples and Common Applications`,
+  content: `
+The normal distribution appears throughout nature and human activity whenever many small, independent factors combine to produce a measurement.
+
+### Common Applications
+
+**Measurement and Physical Sciences:**
+• Human heights, weights, and other biological measurements
+• Measurement errors in scientific instruments
+• IQ scores and standardized test results
+• Blood pressure readings in healthy populations
+
+**Finance and Economics:**
+• Asset returns over short time periods (approximately normal)
+• Pricing models for options and derivatives
+• Portfolio risk analysis
+• Economic indicators like inflation rates
+
+**Quality Control and Manufacturing:**
+• Product dimensions and tolerances
+• Production process variations
+• Six Sigma methodologies
+• Control chart limits
+
+**Natural Phenomena:**
+• Temperature variations around seasonal averages
+• Rainfall amounts in many regions
+• Particle velocities in gases (Maxwell-Boltzmann distribution)
+
+### Why It Appears
+
+The [Central Limit Theorem](!/probability/central-limit-theorem) explains why the normal distribution is ubiquitous: when many independent random effects add together, their sum tends toward normal regardless of the individual distributions. This makes it the natural model for aggregate phenomena.
+
+### Example Application
+
+A factory produces bolts with target diameter 10 mm. Due to manufacturing variation, actual diameters follow $N(10, 0.1^2)$. Quality standards require diameters between 9.8 mm and 10.2 mm.
+
+Using the normal distribution, we can calculate that approximately 95.4% of bolts meet specifications, helping determine acceptable defect rates and production costs.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj13:{
       title:`Interactive Calculator`,
       content:``,
@@ -530,26 +662,175 @@ Half of all heights fall below 170 cm, and half fall above. This coincides with 
       link:'',
   
     },
-    obj14:{
-      title:`Special Cases`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-      link:'',
+    // obj14:{
+    //   title:`Special Cases`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
+    //   link:'',
   
-    },
+    // },
+
+    obj14: {
+  title: `Special Cases`,
+  content: `
+The normal distribution exhibits several important special cases and limiting behaviors that connect it to other distributions and reveal its mathematical structure.
+
+### Standard Normal Distribution
+
+When $\\mu = 0$ and $\\sigma = 1$, we obtain the **standard normal distribution** $Z \\sim N(0, 1)$:
+
+$$f(z) = \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}}$$
+
+Any normal random variable $X \\sim N(\\mu, \\sigma^2)$ can be standardized:
+
+$$Z = \\frac{X - \\mu}{\\sigma} \\sim N(0, 1)$$
+
+This transformation is the foundation for z-scores, hypothesis testing, and normal probability tables.
+
+### Degenerate Case
+
+As $\\sigma \\to 0$, the normal distribution converges to a point mass at $\\mu$:
+
+$$\\lim_{\\sigma \\to 0} N(\\mu, \\sigma^2) = \\delta_{\\mu}$$
+
+All probability concentrates at a single value, and the distribution becomes deterministic. This represents the limiting case of no variability.
+
+### As σ Increases
+
+As $\\sigma \\to \\infty$, the distribution spreads out indefinitely. The density becomes flatter and approaches zero everywhere, though it never becomes truly uniform over the real line (total probability remains 1).
+
+### Limiting Behavior
+
+**Central Limit Theorem Connection:**
+The normal distribution emerges as the limit of many other distributions. For example:
+
+• [Binomial](!/probability/distributions/discrete/binomial) $B(n, p)$ approaches $N(np, np(1-p))$ as $n \\to \\infty$ with fixed $p$
+• Sum of $n$ independent identically distributed variables approaches normal (under mild conditions)
+• Sample [means](!/probability/expected-value) from any distribution approach normal as sample size grows
+
+**Sum of Normals:**
+If $X_1 \\sim N(\\mu_1, \\sigma_1^2)$ and $X_2 \\sim N(\\mu_2, \\sigma_2^2)$ are independent, then:
+
+$$X_1 + X_2 \\sim N(\\mu_1 + \\mu_2, \\sigma_1^2 + \\sigma_2^2)$$
+
+The normal distribution is **closed under addition**—sums of normal variables remain normal.
+
+### Practical Implications
+
+**Measurement Precision:**
+In metrology, as measurement precision improves ($\\sigma$ decreases), measurements cluster more tightly around the true value. The standard normal case ($\\sigma = 1$) provides a natural reference scale.
+
+**Model Robustness:**
+Many statistical procedures assume normality. When $n$ is large (typically $n > 30$), the [Central Limit Theorem](!/probability/central-limit-theorem) justifies this assumption even when underlying data aren't normal—this is why normal-based inference is so widely applicable.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
 
 
-    obj15:{
+    // obj15:{
   
-      title:`Properties`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    //   title:`Properties`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
-    },
+    // },
+  obj15: {
+  title: `Properties`,
+  content: `
+The normal distribution possesses several distinctive mathematical properties that make it central to probability theory and statistics.
+
+### Symmetry
+
+The normal distribution is **perfectly symmetric** around its [mean](!/probability/expected-value) $\\mu$:
+
+$$f(\\mu + x) = f(\\mu - x) \\text{ for all } x$$
+
+This symmetry implies:
+• [Mean](!/probability/expected-value) = [Median](!/probability/median) = [Mode](!/probability/mode) = $\\mu$
+• Odd central moments equal zero: $E[(X - \\mu)^{2k+1}] = 0$
+• The distribution is mirror-symmetric about the vertical line at $x = \\mu$
+
+### Skewness
+
+$$\\text{Skewness} = 0$$
+
+The skewness coefficient measures asymmetry. Zero skewness confirms perfect symmetry—there is no tendency toward either tail.
+
+### Kurtosis
+
+$$\\text{Kurtosis} = 3$$
+
+$$\\text{Excess Kurtosis} = 0$$
+
+Kurtosis measures tail weight and peakedness. The normal distribution defines the baseline (kurtosis = 3), so excess kurtosis is zero by definition. Distributions with kurtosis > 3 have heavier tails than normal; kurtosis < 3 indicates lighter tails.
+
+### Tail Behavior
+
+The normal distribution has **exponentially decaying tails**:
+
+$$f(x) \\sim e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}} \\text{ as } |x - \\mu| \\to \\infty$$
+
+Probabilities in the tails decrease rapidly:
+• $P(|X - \\mu| > 2\\sigma) \\approx 0.05$ (5%)
+• $P(|X - \\mu| > 3\\sigma) \\approx 0.003$ (0.3%)
+• $P(|X - \\mu| > 4\\sigma) \\approx 0.00006$ (0.006%)
+
+The tails are "thin"—extreme values are increasingly rare. This is lighter than polynomial tails but heavier than exponential cutoffs.
+
+### Unique Mathematical Properties
+
+**Closure Under Linear Transformation:**
+If $X \\sim N(\\mu, \\sigma^2)$, then for constants $a$ and $b$:
+
+$$aX + b \\sim N(a\\mu + b, a^2\\sigma^2)$$
+
+**Closure Under Addition:**
+If $X_1 \\sim N(\\mu_1, \\sigma_1^2)$ and $X_2 \\sim N(\\mu_2, \\sigma_2^2)$ are independent:
+
+$$X_1 + X_2 \\sim N(\\mu_1 + \\mu_2, \\sigma_1^2 + \\sigma_2^2)$$
+
+Sums of independent normal variables remain normal—a rare property called **stability** or **reproductive property**.
+
+**Maximum Entropy:**
+Among all continuous distributions on $(-\\infty, \\infty)$ with specified [mean](!/probability/expected-value) $\\mu$ and [variance](!/probability/variance) $\\sigma^2$, the normal distribution has the highest entropy. It represents maximum uncertainty given only these two constraints.
+
+**Characteristic Function:**
+$$\\phi(t) = E[e^{itX}] = e^{i\\mu t - \\frac{\\sigma^2 t^2}{2}}$$
+
+This simple exponential form makes analytical work tractable.
+
+### Useful Identities
+
+**68-95-99.7 Rule (Empirical Rule):**
+• Approximately 68% of values lie within $\\mu \\pm \\sigma$
+• Approximately 95% of values lie within $\\mu \\pm 2\\sigma$
+• Approximately 99.7% of values lie within $\\mu \\pm 3\\sigma$
+
+**Moment Generating Function:**
+$$M(t) = E[e^{tX}] = e^{\\mu t + \\frac{\\sigma^2 t^2}{2}}$$
+
+**Linear Combinations:**
+For independent normal variables $X_i \\sim N(\\mu_i, \\sigma_i^2)$ and constants $a_i$:
+
+$$\\sum_{i=1}^n a_i X_i \\sim N\\left(\\sum_{i=1}^n a_i \\mu_i, \\sum_{i=1}^n a_i^2 \\sigma_i^2\\right)$$
+
+**Central Limit Theorem:**
+For i.i.d. random variables $X_1, X_2, \\ldots, X_n$ with [mean](!/probability/expected-value) $\\mu$ and [variance](!/probability/variance) $\\sigma^2$:
+
+$$\\frac{\\bar{X}_n - \\mu}{\\sigma/\\sqrt{n}} \\xrightarrow{d} N(0, 1) \\text{ as } n \\to \\infty$$
+
+This convergence explains why the normal distribution appears so frequently in nature and statistics.
+  `,
+  before: ``,
+  after: ``,
+  link: '',
+},
   
     obj16:{
   
@@ -717,14 +998,14 @@ export default function NormalDistributionPage({seoData,sectionsContent , introC
           sectionsContent.obj10.content,
         ]
     },
-    {
-        id:'11',
-        title:sectionsContent.obj11.title,
-        link:sectionsContent.obj11.link,
-        content:[
-          sectionsContent.obj11.content,
-        ]
-    },
+    // {
+    //     id:'11',
+    //     title:sectionsContent.obj11.title,
+    //     link:sectionsContent.obj11.link,
+    //     content:[
+    //       sectionsContent.obj11.content,
+    //     ]
+    // },
     {
         id:'12',
         title:sectionsContent.obj12.title,
@@ -759,6 +1040,14 @@ export default function NormalDistributionPage({seoData,sectionsContent , introC
           sectionsContent.obj15.content,
         ]
     },
+    // {
+    //     id:'16',
+    //     title:sectionsContent.obj16.title,
+    //     link:sectionsContent.obj16.link,
+    //     content:[
+    //       sectionsContent.obj16.content,
+    //     ]
+    // },
     // {
     //     id:'1',
     //     title:sectionsContent.obj1.title,
