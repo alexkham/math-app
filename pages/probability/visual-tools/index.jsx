@@ -465,7 +465,17 @@ export async function getStaticProps(){
       ratio: 7,
       image: '/probability/total.jpg',
       href: "/probability/visual-tools/total-probability"
-    }
+    },
+    {
+      title: "Contingency Tables Visualizer",
+      description: "Interactive contingency tables for visualizing joint, marginal, and conditional probabilities. Click cells and conditional rows to highlight relationships and see how Bayes' theorem connects different probability perspectives. Available in 2×2, 2×3, 2×4, and 3×3 configurations with detailed explanations for each state.",
+      backgroundColor: "#4F46E5",
+      textColor: "#ffffff",
+      ratio: 7,
+      image: '/probability/cross table.jpg',
+      href: "/probability/visual-tools/contingency-tables"
+    },
+    
   ]
 
   const faqQuestions = {

@@ -208,9 +208,12 @@ export default function ConditionalProbabilityTable2x4({ explanations = null }) 
         .conditional-table { border-spacing: 0 8px; }
       `}</style>
       
-      <p style={{ color: '#666', marginBottom: '30px' }}>
+      {/* <p style={{ color: '#666', marginBottom: '30px' }}>
         2×4 contingency table showing joint, marginal, and conditional probabilities.
-      </p>
+      </p> */}
+       <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af' }}>
+        <strong>How to read:</strong> Cells show joint probabilities. Click conditional rows to highlight paths. The highlighted connections demonstrate Bayes&apos; theorem in action: P(A|B) = P(A ∩ B) / P(B). Watch how the same joint probability appears in multiple conditional calculations depending on which event you condition on.
+      </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '20px', marginBottom: '30px' }}>
         <div>
@@ -462,9 +465,9 @@ export default function ConditionalProbabilityTable2x4({ explanations = null }) 
         </div>
       </div>
 
-      <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af' }}>
+      {/* <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af' }}>
         <strong>How to read:</strong> Cells show joint probabilities. Click conditional rows to highlight paths. The highlighted connections demonstrate Bayes&apos; theorem in action: P(A|B) = P(A ∩ B) / P(B). Watch how the same joint probability appears in multiple conditional calculations depending on which event you condition on.
-      </div>
+      </div> */}
     </div>
   );
 }

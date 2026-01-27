@@ -129,9 +129,12 @@ export default function ConditionalProbabilityTable2() {
         }
       `}</style>
       
-      <p style={{ color: '#666', marginBottom: '30px' }}>
+      {/* <p style={{ color: '#666', marginBottom: '30px' }}>
         2×2 contingency table showing joint, marginal, and conditional probabilities. Click any cell to highlight it.
-      </p>
+      </p> */}
+        <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af' }}>
+        <strong>How to read:</strong> The main table shows joint probabilities P(A∩B) in each cell. Row and column totals show marginal probabilities. The four tables on the right show all conditional probability distributions with their calculations. Click any conditional probability to highlight the corresponding cells in the main table.
+      </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '30px' }}>
         {/* Left side: Contingency Table + Controls */}
@@ -605,9 +608,9 @@ export default function ConditionalProbabilityTable2() {
       </div>
 
       {/* Instructions */}
-      <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af' }}>
+      {/* <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af' }}>
         <strong>How to read:</strong> The main table shows joint probabilities P(A∩B) in each cell. Row and column totals show marginal probabilities. The four tables on the right show all conditional probability distributions with their calculations. Click any conditional probability to highlight the corresponding cells in the main table.
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -68,7 +68,7 @@ export default function GenericMultiComponentFrame({
   return (
     <div style={{
       padding: '20px',
-      maxWidth: '1200px',
+      maxWidth: '1600px',
       margin: '0 auto',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
     }}>
