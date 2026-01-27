@@ -1,4 +1,112 @@
-
+/**
+ * GenericMultiComponentFrame
+ * 
+ * A tabbed container component that renders multiple components/content with tab navigation.
+ * Supports URL query parameter sync for shareable tab states.
+ * 
+ * @component
+ * 
+ * @param {string} [title] - Optional header title displayed above tabs
+ * @param {string} [subtitle] - Optional subtitle displayed below title
+ * @param {Array} components - Array of component configurations (see below)
+ * @param {number} [initialActive=1] - ID of initially active component (1-indexed)
+ * @param {Object} [explanations={}] - Object mapping component keys to explanation data passed as props
+ * @param {string} [buttonMinWidth='180px'] - Minimum width for tab buttons
+ * @param {string} [primaryColor='#007bff'] - Active tab color
+ * @param {string} [paramName='tab'] - URL query parameter name for tab state
+ * @param {string} [defaultSlug=null] - Default slug when no URL param present
+ * 
+ * @example
+ * // Basic usage with components
+ * <GenericMultiComponentFrame
+ *   components={[
+ *     { id: 1, name: 'Tab 1', component: MyComponent1 },
+ *     { id: 2, name: 'Tab 2', component: MyComponent2 },
+ *   ]}
+ *   initialActive={1}
+ * />
+ * 
+ * @example
+ * // With URL slug support (creates URLs like ?table=2x2)
+ * <GenericMultiComponentFrame
+ *   components={[
+ *     { id: 1, name: '2×2 Table', slug: '2x2', component: Table2x2 },
+ *     { id: 2, name: '2×3 Table', slug: '2x3', component: Table2x3 },
+ *   ]}
+ *   paramName="table"
+ *   defaultSlug="2x2"
+ * />
+ * 
+ * @example
+ * // With external links (renders as <a> instead of <button>)
+ * <GenericMultiComponentFrame
+ *   components={[
+ *     { id: 1, name: 'Calculator', component: Calculator },
+ *     { id: 2, name: 'Advanced Calculator', href: '/calculators/advanced' },
+ *   ]}
+ * />
+ * 
+ * @example
+ * // With content instead of component
+ * <GenericMultiComponentFrame
+ *   components={[
+ *     { id: 1, name: 'Info', content: 'This is plain text or processContent string' },
+ *     { id: 2, name: 'Component', component: MyComponent },
+ *   ]}
+ * />
+ * 
+ * @example
+ * // With explanations passed to components
+ * const explanations = {
+ *   'table2x3': { row1: 'Explanation...', row2: 'Explanation...' },
+ *   'table3x3': { row1: 'Explanation...', row2: 'Explanation...' },
+ * }
+ * 
+ * <GenericMultiComponentFrame
+ *   components={[
+ *     { id: 1, name: '2×3', key: 'table2x3', component: Table2x3 },
+ *     { id: 2, name: '3×3', key: 'table3x3', component: Table3x3 },
+ *   ]}
+ *   explanations={explanations}
+ * />
+ * // Components receive: <Table2x3 explanations={explanations.table2x3} />
+ * 
+ * @example
+ * // With custom props passed to component
+ * <GenericMultiComponentFrame
+ *   components={[
+ *     { id: 1, name: 'Chart', component: Chart, props: { showLegend: true, color: 'blue' } },
+ *   ]}
+ * />
+ * // Component receives: <Chart showLegend={true} color="blue" />
+ * 
+ * 
+ * Component Configuration Object:
+ * @typedef {Object} ComponentConfig
+ * @property {number} [id] - Unique identifier (auto-generated from index+1 if not provided)
+ * @property {string} name - Display name for the tab button
+ * @property {string} [slug] - URL-friendly identifier for query param sync
+ * @property {string} [key] - Key to lookup in explanations object
+ * @property {React.Component} [component] - React component to render
+ * @property {string} [href] - External link (renders tab as <a> tag)
+ * @property {string} [content] - Plain content string (processed via processContent)
+ * @property {Object} [props] - Additional props passed to component
+ * 
+ * 
+ * URL Query Parameter Behavior:
+ * - When components have `slug` property, URL syncs automatically
+ * - paramName controls the query key (e.g., paramName="view" → ?view=slug)
+ * - defaultSlug sets initial tab when no URL param exists
+ * - Clicking tabs updates URL without page scroll
+ * - Direct URL access (e.g., ?table=2x3) opens correct tab
+ * 
+ * 
+ * Styling Notes:
+ * - Tab buttons use CSS Grid with auto-fit for responsive layout
+ * - buttonMinWidth controls minimum button size before wrapping
+ * - Active tab uses primaryColor for background
+ * - Disabled tabs (no component/href/content) show 50% opacity
+ */
 import { useState, useEffect } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { processContent } from '../utils/contentProcessor'
