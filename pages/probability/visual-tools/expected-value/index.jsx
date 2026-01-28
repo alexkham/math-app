@@ -686,14 +686,14 @@ export default function ExpectedValueLanding({seoData, sectionsContent, introCon
         <Link href="/probability/visual-tools/expected-value/weighted" style={cardStyles.card}>
           <div style={cardStyles.title}>Weighted Expected Value</div>
           <div style={cardStyles.description}>
-            See how probability "weights" pull E[X] toward high-probability outcomes. Includes preset distributions and animation mode.
+            See how probability &quot;weights&quot; pull E[X] toward high-probability outcomes. Includes preset distributions and animation mode.
           </div>
         </Link>
 
         <Link href="/probability/visual-tools/expected-value/discrete" style={cardStyles.card}>
           <div style={cardStyles.title}>Discrete Expected Value</div>
           <div style={cardStyles.description}>
-            Adjust probabilities with sliders and see each value's contribution to E[X] in an interactive bar chart.
+            Adjust probabilities with sliders and see each value&apos;s contribution to E[X] in an interactive bar chart.
           </div>
         </Link>
       </div>
