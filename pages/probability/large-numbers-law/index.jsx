@@ -142,7 +142,33 @@ It describes how the **sample mean** behaves as the sample size grows—specific
     //   before:``,
     //   after:``,
     //   link:'',
-  
+  obj4:{
+  title:`Visual Intuition`,
+  content:`
+### Visual Intuition
+
+The Law of Large Numbers is best understood visually.  
+Rather than focusing on formulas, this section shows how the sample mean evolves as observations accumulate.
+
+* **Early samples (small n)**  
+  When the sample size is small, the sample mean is highly volatile. It can swing dramatically with each new observation, landing far from the true mean. Random fluctuations dominate the behavior.
+
+* **Increasing the sample size**  
+  As more observations are collected, the sample mean begins to stabilize. The wild swings become smaller. The running average starts to hover near the population mean, with deviations becoming less frequent and less severe.
+
+* **Convergence emerges (large n)**  
+  For sufficiently large samples, the sample mean stays very close to the true mean. Random fluctuations persist, but they become negligible relative to the sample size. The path may wander slightly, but it remains tightly clustered around $\\mu$.
+
+* **Universal pattern across distributions**  
+  Whether the original data come from [uniform](/probability/distributions/continuous/uniform), [exponential](/probability/distributions/continuous/exponential), or [discrete distributions](/probability/distributions/discrete), the sample mean always converges to the population mean. The specific distribution affects the speed of convergence, but not the eventual outcome.
+
+These visuals highlight the core message of the theorem:  
+**averaging transforms randomness into predictability**. Individual values remain uncertain, but their average becomes certain at scale.
+`,
+  before:``,
+  after:``,
+  link:'visual-intuition',
+},
     // },
     // obj5:{
     //   title:``,
