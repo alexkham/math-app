@@ -293,7 +293,7 @@ export default function CentralLimitTheoremDemo() {
       <div style={{ marginBottom: '20px', padding: '15px', background: '#eff6ff', borderRadius: '8px', border: '2px solid #3b82f6' }}>
         <h3 style={{ margin: '0 0 10px 0', color: '#1e40af', fontSize: '16px', fontWeight: 'bold' }}>Central Limit Theorem</h3>
         <p style={{ margin: 0, color: '#475569', fontSize: '14px', lineHeight: '1.5' }}>
-          The sampling distribution of sample means approaches a normal distribution as sample size increases, regardless of the population distribution's shape. Take many samples, calculate each mean, and watch the histogram of means form a bell curve.
+          The sampling distribution of sample means approaches a normal distribution as sample size increases, regardless of the population distribution&apos;s shape. Take many samples, calculate each mean, and watch the histogram of means form a bell curve.
         </p>
       </div>
 
