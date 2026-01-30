@@ -108,6 +108,7 @@ const ModernCardsGroup = ({ items = [] }) => {
         return (
           <div 
             key={index} 
+            id={`card-${index}`} 
             className={styles.card}
             style={{
               backgroundColor: item.backgroundColor || 'white',

@@ -344,6 +344,9 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import ModernCardsGroup from '@/app/components/cards/ModernCardsGroup'
+import QuickNav from '@/app/components/cards/QuickNav'
+import ScrollToTop from '@/app/components/scroll-up-button/ScrollToTop'
+import ToolsPageHeader from '@/app/components/cards/ToolsPageHeader'
 
 
 export async function getStaticProps(){
@@ -906,7 +909,25 @@ export default function ProbabilityVisualToolsPage({seoData, sectionsContent, in
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'-30px',marginBottom:'30px'}}>Probability Visual Tools</h1>
+     <QuickNav items={cardsData} dropdownLabel="All Tools" />
       <br/>
+      <ScrollToTop
+      top={'80px'}
+      center={true}
+ 
+      />
+      <br/>
+     <ToolsPageHeader 
+  items={cardsData}
+  icon="🔍"
+  intro={{
+    title: "Explore Interactive Probability Tools",
+    description: "Master concepts through hands-on visualization...",
+    tip: "Click any tool below to see its description..."
+  }}
+  onFilteredItemsChange={(filtered) => setDisplayedItems(filtered)}
+/>
+      
       <ModernCardsGroup items={cardsData}/>
       <br/>
       {/* <SectionTableOfContents sections={genericSections}/> */}
