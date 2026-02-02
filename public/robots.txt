@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://learnmathclass.com/sitemap.xml
+Sitemap: https://www.learnmathclass.com/sitemap.xml
