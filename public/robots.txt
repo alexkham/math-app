@@ -1,27 +1,4 @@
 User-agent: *
 Allow: /
 
-# Block crawling of font files and other unnecessary static assets
-Disallow: /_next/static/media/
-Disallow: /_next/static/chunks/
-Disallow: /_next/static/css/
-Disallow: /_next/static/images/
-
-# Allow essential paths
-Allow: /_next/image*
-Allow: /static/images/
-Allow: /api/
-Allow: /images/
-
-# Keep search engines informed about your site structure
-Sitemap: https://www.learnmathclass.com/sitemap.xml
-
-# Add specific rules for major search engines
-User-agent: Googlebot
-Disallow: /_next/static/media/
-
-User-agent: Bingbot
-Disallow: /_next/static/media/
-
-User-agent: Slurp
-Disallow: /_next/static/media/
+Sitemap: https://learnmathclass.com/sitemap.xml
