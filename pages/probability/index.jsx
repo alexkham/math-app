@@ -22,156 +22,156 @@ export async function getStaticProps() {
   const { default: probabilityTermsList } = await import('@/app/api/db/definitions/probability/probabilityDefinitions')
   
 
-  const probabilityTOCTreeData = {
-    "Introduction to Probability": {
-      explanation: "Foundation concepts and historical development of probability theory",
-      url: "/probability/introduction"
-    },
-    "Basic Definitions & Notation": {
-      "Sample Space": {
-        explanation: "The set of all possible outcomes of a random experiment",
-        url: "/probability/sample-space"
-      },
-      "Events": {
-        explanation: "Subsets of the sample space representing outcomes of interest",
-        url: "/probability/events"
-      },
-      "Axioms of Probability": {
-        explanation: "The fundamental mathematical rules that define probability measures",
-        url: "/probability/axioms"
-      }
-    },
-    "Probability Rules": {
-      "Complement Rule": {
-        explanation: "P(A^c) = 1 - P(A) for any event A",
-        url: "/probability/complement-rule"
-      },
-      "Addition Rule": {
-        explanation: "P(A ∪ B) = P(A) + P(B) - P(A ∩ B)",
-        url: "/probability/addition-rule"
-      },
-      "Inclusion–Exclusion Principle": {
-        explanation: "Generalization of addition rule for multiple events",
-        url: "/probability/inclusion-exclusion"
-      },
-      "Monotonicity & Boole's Inequality": {
-        explanation: "If A ⊆ B, then P(A) ≤ P(B); P(∪Ai) ≤ ΣP(Ai)",
-        url: "/probability/monotonicity-boole"
-      },
-      "Multiplication & Chain Rules": {
-        explanation: "P(A ∩ B) = P(A|B)P(B) and its generalizations",
-        url: "/probability/multiplication-chain"
-      },
-      "Law of Total Probability": {
-        explanation: "P(A) = ΣP(A|Bi)P(Bi) for partition {Bi}",
-        url: "/probability/total-probability"
-      },
-      "Bayes' Theorem": {
-        explanation: "P(A|B) = P(B|A)P(A) / P(B) - updating beliefs with evidence",
-        url: "/probability/bayes-theorem"
-      }
-    },
-    "Classical / Combinatorial Probability": {
-      "Equally-likely models (Laplace's rule)": {
-        explanation: "P(A) = |A| / |S| when all outcomes are equally likely",
-        url: "/probability/laplace-rule"
-      },
-      "Permutations vs. Combinations": {
-        explanation: "Counting arrangements (order matters) vs selections (order doesn't matter)",
-        url: "/probability/permutations-combinations"
-      },
-      "Ordered vs. Unordered Draws": {
-        explanation: "Sampling with and without regard to sequence",
-        url: "/probability/ordered-unordered"
-      },
-      "Counting Tools: Factorials & Binomial Coefficients": {
-        explanation: "n! and C(n,k) = n!/(k!(n-k)!) for combinatorial calculations",
-        url: "/probability/counting-tools"
-      }
-    },
-    "Discrete Probability Distributions": {
-      "Uniform": {
-        explanation: "All outcomes have equal probability: P(X = k) = 1/n",
-        url: "/probability/discrete-uniform"
-      },
-      "Binomial": {
-        explanation: "Number of successes in n trials: P(X = k) = C(n,k)p^k(1-p)^(n-k)",
-        url: "/probability/binomial"
-      },
-      "Poisson": {
-        explanation: "Rare events in fixed intervals: P(X = k) = λ^k e^(-λ) / k!",
-        url: "/probability/poisson"
-      },
-      "Geometric": {
-        explanation: "Number of trials until first success: P(X = k) = (1-p)^(k-1)p",
-        url: "/probability/geometric"
-      }
-    },
-    "Continuous Probability Distributions": {
-      "Uniform": {
-        explanation: "Constant density over interval [a,b]: f(x) = 1/(b-a)",
-        url: "/probability/continuous-uniform"
-      },
-      "Normal (Gaussian)": {
-        explanation: "Bell curve distribution: f(x) = (1/σ√(2π))e^(-(x-μ)²/(2σ²))",
-        url: "/probability/normal"
-      },
-      "Exponential": {
-        explanation: "Time between events: f(x) = λe^(-λx) for x ≥ 0",
-        url: "/probability/exponential"
-      },
-      "Gamma & Beta": {
-        explanation: "Flexible distributions for positive values and proportions",
-        url: "/probability/gamma-beta"
-      }
-    },
-    "Conditional Probability & Independence": {
-      "Overview": {
-        explanation: "P(A|B) = P(A∩B)/P(B) and when P(A|B) = P(A)",
-        url: "/probability/conditional-independence"
-      }
-    },
-    "Expectation & Variance": {
-      "Overview": {
-        explanation: "E[X] = Σx P(X=x) and Var(X) = E[(X-μ)²] - measures of center and spread",
-        url: "/probability/expectation-variance"
-      }
-    },
-    "Limit Theorems": {
-      "Law of Large Numbers": {
-        explanation: "Sample averages converge to expected value as n → ∞",
-        url: "/probability/law-large-numbers"
-      },
-      "Central Limit Theorem": {
-        explanation: "Sample means approach normal distribution regardless of population distribution",
-        url: "/probability/central-limit-theorem"
-      }
-    },
-    "Stochastic Processes & Markov Chains": {
-      "Overview": {
-        explanation: "Random processes evolving over time, memoryless property",
-        url: "/probability/stochastic-markov"
-      }
-    },
-    "Applications & Case Studies": {
-      "Overview": {
-        explanation: "Real-world problems solved using probability theory",
-        url: "/probability/applications"
-      }
-    },
-    "Interactive Simulations & Tools": {
-      "Overview": {
-        explanation: "Computational tools for exploring probability concepts",
-        url: "/probability/simulations"
-      }
-    },
-    "Exercises & Assessments": {
-      "Overview": {
-        explanation: "Practice problems and evaluation materials",
-        url: "/probability/exercises"
-      }
-    }
-  };
+  // const probabilityTOCTreeData = {
+  //   "Introduction to Probability": {
+  //     explanation: "Foundation concepts and historical development of probability theory",
+  //     url: "/probability/introduction"
+  //   },
+  //   "Basic Definitions & Notation": {
+  //     "Sample Space": {
+  //       explanation: "The set of all possible outcomes of a random experiment",
+  //       url: "/probability/sample-space"
+  //     },
+  //     "Events": {
+  //       explanation: "Subsets of the sample space representing outcomes of interest",
+  //       url: "/probability/events"
+  //     },
+  //     "Axioms of Probability": {
+  //       explanation: "The fundamental mathematical rules that define probability measures",
+  //       url: "/probability/axioms"
+  //     }
+  //   },
+  //   "Probability Rules": {
+  //     "Complement Rule": {
+  //       explanation: "P(A^c) = 1 - P(A) for any event A",
+  //       url: "/probability/complement-rule"
+  //     },
+  //     "Addition Rule": {
+  //       explanation: "P(A ∪ B) = P(A) + P(B) - P(A ∩ B)",
+  //       url: "/probability/addition-rule"
+  //     },
+  //     "Inclusion–Exclusion Principle": {
+  //       explanation: "Generalization of addition rule for multiple events",
+  //       url: "/probability/inclusion-exclusion"
+  //     },
+  //     "Monotonicity & Boole's Inequality": {
+  //       explanation: "If A ⊆ B, then P(A) ≤ P(B); P(∪Ai) ≤ ΣP(Ai)",
+  //       url: "/probability/monotonicity-boole"
+  //     },
+  //     "Multiplication & Chain Rules": {
+  //       explanation: "P(A ∩ B) = P(A|B)P(B) and its generalizations",
+  //       url: "/probability/multiplication-chain"
+  //     },
+  //     "Law of Total Probability": {
+  //       explanation: "P(A) = ΣP(A|Bi)P(Bi) for partition {Bi}",
+  //       url: "/probability/total-probability"
+  //     },
+  //     "Bayes' Theorem": {
+  //       explanation: "P(A|B) = P(B|A)P(A) / P(B) - updating beliefs with evidence",
+  //       url: "/probability/bayes-theorem"
+  //     }
+  //   },
+  //   "Classical / Combinatorial Probability": {
+  //     "Equally-likely models (Laplace's rule)": {
+  //       explanation: "P(A) = |A| / |S| when all outcomes are equally likely",
+  //       url: "/probability/laplace-rule"
+  //     },
+  //     "Permutations vs. Combinations": {
+  //       explanation: "Counting arrangements (order matters) vs selections (order doesn't matter)",
+  //       url: "/probability/permutations-combinations"
+  //     },
+  //     "Ordered vs. Unordered Draws": {
+  //       explanation: "Sampling with and without regard to sequence",
+  //       url: "/probability/ordered-unordered"
+  //     },
+  //     "Counting Tools: Factorials & Binomial Coefficients": {
+  //       explanation: "n! and C(n,k) = n!/(k!(n-k)!) for combinatorial calculations",
+  //       url: "/probability/counting-tools"
+  //     }
+  //   },
+  //   "Discrete Probability Distributions": {
+  //     "Uniform": {
+  //       explanation: "All outcomes have equal probability: P(X = k) = 1/n",
+  //       url: "/probability/discrete-uniform"
+  //     },
+  //     "Binomial": {
+  //       explanation: "Number of successes in n trials: P(X = k) = C(n,k)p^k(1-p)^(n-k)",
+  //       url: "/probability/binomial"
+  //     },
+  //     "Poisson": {
+  //       explanation: "Rare events in fixed intervals: P(X = k) = λ^k e^(-λ) / k!",
+  //       url: "/probability/poisson"
+  //     },
+  //     "Geometric": {
+  //       explanation: "Number of trials until first success: P(X = k) = (1-p)^(k-1)p",
+  //       url: "/probability/geometric"
+  //     }
+  //   },
+  //   "Continuous Probability Distributions": {
+  //     "Uniform": {
+  //       explanation: "Constant density over interval [a,b]: f(x) = 1/(b-a)",
+  //       url: "/probability/continuous-uniform"
+  //     },
+  //     "Normal (Gaussian)": {
+  //       explanation: "Bell curve distribution: f(x) = (1/σ√(2π))e^(-(x-μ)²/(2σ²))",
+  //       url: "/probability/normal"
+  //     },
+  //     "Exponential": {
+  //       explanation: "Time between events: f(x) = λe^(-λx) for x ≥ 0",
+  //       url: "/probability/exponential"
+  //     },
+  //     "Gamma & Beta": {
+  //       explanation: "Flexible distributions for positive values and proportions",
+  //       url: "/probability/gamma-beta"
+  //     }
+  //   },
+  //   "Conditional Probability & Independence": {
+  //     "Overview": {
+  //       explanation: "P(A|B) = P(A∩B)/P(B) and when P(A|B) = P(A)",
+  //       url: "/probability/conditional-independence"
+  //     }
+  //   },
+  //   "Expectation & Variance": {
+  //     "Overview": {
+  //       explanation: "E[X] = Σx P(X=x) and Var(X) = E[(X-μ)²] - measures of center and spread",
+  //       url: "/probability/expectation-variance"
+  //     }
+  //   },
+  //   "Limit Theorems": {
+  //     "Law of Large Numbers": {
+  //       explanation: "Sample averages converge to expected value as n → ∞",
+  //       url: "/probability/law-large-numbers"
+  //     },
+  //     "Central Limit Theorem": {
+  //       explanation: "Sample means approach normal distribution regardless of population distribution",
+  //       url: "/probability/central-limit-theorem"
+  //     }
+  //   },
+  //   "Stochastic Processes & Markov Chains": {
+  //     "Overview": {
+  //       explanation: "Random processes evolving over time, memoryless property",
+  //       url: "/probability/stochastic-markov"
+  //     }
+  //   },
+  //   "Applications & Case Studies": {
+  //     "Overview": {
+  //       explanation: "Real-world problems solved using probability theory",
+  //       url: "/probability/applications"
+  //     }
+  //   },
+  //   "Interactive Simulations & Tools": {
+  //     "Overview": {
+  //       explanation: "Computational tools for exploring probability concepts",
+  //       url: "/probability/simulations"
+  //     }
+  //   },
+  //   "Exercises & Assessments": {
+  //     "Overview": {
+  //       explanation: "Practice problems and evaluation materials",
+  //       url: "/probability/exercises"
+  //     }
+  //   }
+  // };
 
   
   const probabilityRulesTreeData = {
@@ -753,7 +753,7 @@ const inequalitiesVisualTools = [
       probabilityTermsList,
       axiomsData,
       probabilityRulesTreeData,
-      probabilityTOCTreeData,
+      // probabilityTOCTreeData,
       visualToolsCards,
       coinVisualTools,
       diceVisualTools,
@@ -775,7 +775,7 @@ export default function ProbabilityPage({
   probabilityTermsList,
   axiomsData,
   probabilityRulesTreeData,
-  probabilityTOCTreeData,
+  // probabilityTOCTreeData,
   visualToolsCards,
   coinVisualTools,
   diceVisualTools,
