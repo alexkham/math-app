@@ -243,6 +243,13 @@ themeName='dark'
     </strong> – We offer an interactive tool where you can practice writing proper mathematical notation.
   </p>
 
+
+  <p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+  <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+    <Link href="/complex-numbers" style={{ color: '#3498db', textDecoration: 'none' }}>Complex Numbers</Link>
+  </strong> – We explore the world of complex numbers, covering algebraic and trigonometric forms, geometric representation on the complex plane, operations, conjugates, absolute value, De Moivre's theorem, and exponential form.
+</p>
+
   <h2 style={{
     color: '#34495e',
     fontSize: '1.8rem',
