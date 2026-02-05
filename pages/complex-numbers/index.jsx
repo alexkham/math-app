@@ -1115,7 +1115,11 @@ export default function ComplexNumbersPage({seoData, sectionsContent, introConte
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Complex Numbers</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+   showSecondaryNav={true}
+         secondaryNavMode="children"  // or "siblings"
+         secondaryNavTitle="More in this Section"
+   />
    <br/>
    <br/>
    <br/>
