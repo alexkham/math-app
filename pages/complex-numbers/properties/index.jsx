@@ -12,8 +12,23 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
-
+  const keyWords = [
+  "complex number properties",
+  "field axioms complex numbers",
+  "complex numbers field",
+  "complex conjugate properties",
+  "modulus properties",
+  "argument properties",
+  "triangle inequality complex numbers",
+  "algebraic closure",
+  "fundamental theorem of algebra",
+  "ordered field",
+  "commutative property complex numbers",
+  "associative property complex numbers",
+  "distributive property",
+  "multiplicative inverse complex number",
+  "reverse triangle inequality"
+]
   // •
 
 //   \u2022 First item
@@ -493,28 +508,178 @@ Although $z_1 < z_2$ is meaningless for complex numbers, we can compare their [m
   content: `Complex numbers obey specific rules that determine how they interact under arithmetic operations. Some of these properties arise from the algebraic structure shared with real numbers, while others are unique to the complex number system. Understanding these properties provides the foundation for manipulating complex expressions, simplifying calculations, and recognizing what complex numbers can and cannot do.`
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "What is a field in mathematics?",
+    answer: "A field is a set equipped with two operations (addition and multiplication) that satisfy specific axioms: closure, commutativity, associativity, identity elements, inverse elements, and distributivity. Fields guarantee predictable arithmetic where you can add, subtract, multiply, and divide (except by zero)."
+  },
+  obj2: {
+    question: "Are complex numbers a field?",
+    answer: "Yes, the complex numbers ℂ form a field. They satisfy all eleven field axioms, which means algebraic techniques developed for real numbers work identically for complex numbers — factoring, expanding, simplifying, and solving equations all transfer seamlessly."
+  },
+  obj3: {
+    question: "What is the multiplicative inverse of a complex number?",
+    answer: "For a nonzero complex number z, the multiplicative inverse is z⁻¹ = z̄/|z|², where z̄ is the conjugate and |z| is the modulus. This formula uses the property that z · z̄ = |z|² to eliminate the imaginary part from the denominator."
+  },
+  obj4: {
+    question: "What are the conjugate properties of complex numbers?",
+    answer: "Key conjugate properties include: the conjugate of a conjugate returns the original (double conjugate), conjugate distributes over addition and multiplication, z · z̄ = |z|², and z + z̄ = 2Re(z). The conjugate of a quotient equals the quotient of conjugates."
+  },
+  obj5: {
+    question: "What is the product of a complex number and its conjugate?",
+    answer: "A complex number multiplied by its conjugate always yields the square of its modulus: z · z̄ = |z|² = a² + b² for z = a + bi. This result is always a non-negative real number and is essential for complex division."
+  },
+  obj6: {
+    question: "What is the modulus of a product of complex numbers?",
+    answer: "The modulus of a product equals the product of the moduli: |z₁ · z₂| = |z₁| · |z₂|. Similarly, the modulus of a quotient equals the quotient of moduli, and the modulus of a power equals the modulus raised to that power."
+  },
+  obj7: {
+    question: "What is the triangle inequality for complex numbers?",
+    answer: "The triangle inequality states |z₁ + z₂| ≤ |z₁| + |z₂|. Geometrically, the distance from the origin to z₁ + z₂ never exceeds the sum of the individual distances. This is equivalent to saying one side of a triangle cannot exceed the sum of the other two."
+  },
+  obj8: {
+    question: "What is the reverse triangle inequality?",
+    answer: "The reverse triangle inequality states ||z₁| - |z₂|| ≤ |z₁ - z₂|. The absolute difference of moduli never exceeds the modulus of the difference. This provides a lower bound complementing the upper bound from the standard triangle inequality."
+  },
+  obj9: {
+    question: "How does the argument behave under multiplication?",
+    answer: "The argument of a product equals the sum of arguments: arg(z₁ · z₂) = arg(z₁) + arg(z₂). Geometrically, multiplying complex numbers adds their angles. Similarly, division subtracts arguments, and raising to a power multiplies the argument by the exponent."
+  },
+  obj10: {
+    question: "What is algebraic closure?",
+    answer: "A field is algebraically closed if every non-constant polynomial with coefficients in that field has at least one root in that field. The complex numbers are algebraically closed, meaning every polynomial equation has solutions in ℂ. The real numbers are not algebraically closed."
+  },
+  obj11: {
+    question: "What is the Fundamental Theorem of Algebra?",
+    answer: "The Fundamental Theorem of Algebra states that every polynomial of degree n ≥ 1 with complex coefficients has exactly n roots in ℂ, counting multiplicity. This guarantees polynomial equations always have solutions without needing number systems beyond the complex numbers."
+  },
+  obj12: {
+    question: "Why can't complex numbers be ordered?",
+    answer: "Complex numbers cannot be ordered because no consistent definition of 'less than' exists. If i > 0, then i² > 0, meaning -1 > 0 — a contradiction. If i < 0, then -i > 0, so (-i)² > 0, again giving -1 > 0. Neither case works, so no ordering is possible."
+  },
+  obj13: {
+    question: "Can you compare complex numbers at all?",
+    answer: "While z₁ < z₂ is meaningless for complex numbers, you can compare their moduli. The statement |z₁| < |z₂| is well-defined because moduli are real numbers. We compare sizes (distances from origin), not positions."
+  }
+}
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Properties of Complex Numbers",
+    "description": "Learn properties of complex numbers: field axioms, conjugate properties, modulus and argument rules, triangle inequality, algebraic closure, and why complex numbers cannot be ordered.",
+    "url": "https://www.learnmathclass.com/complex-numbers/properties",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Properties of Complex Numbers"
+    },
+    "teaches": [
+      "Complex numbers as a mathematical field",
+      "The eleven field axioms and their verification",
+      "Properties of the complex conjugate",
+      "Properties of the modulus including triangle inequality",
+      "Properties of the argument under arithmetic operations",
+      "Algebraic closure and the Fundamental Theorem of Algebra",
+      "Why complex numbers cannot be ordered"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Properties of Complex Numbers | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/complex-numbers/properties",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Complex Numbers",
+        "item": "https://www.learnmathclass.com/complex-numbers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Properties",
+        "item": "https://www.learnmathclass.com/complex-numbers/properties"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Properties of Complex Numbers | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/complex-numbers/properties",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Properties of Complex Numbers: Field Axioms | Learn Math Class",
+      description: "Learn properties of complex numbers: field axioms, conjugate properties, modulus and argument rules, triangle inequality, algebraic closure, and why complex numbers cannot be ordered.",
+      keywords: keyWords.join(", "),
+      url: "/complex-numbers/properties",
+      name: "Properties of Complex Numbers"
+    },
+  }
+}
    }
 
-export default function PropertiesPage({seoData,sectionsContent , introContent}) {
+// export default function PropertiesPage({seoData,sectionsContent , introContent}) {
 
-    
+export default function PropertiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+
   const genericSections=[
     {
         id:'1',
@@ -665,7 +830,7 @@ export default function PropertiesPage({seoData,sectionsContent , introContent})
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -706,6 +871,47 @@ export default function PropertiesPage({seoData,sectionsContent , introContent})
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

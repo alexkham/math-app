@@ -12,7 +12,23 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+  const keyWords = [
+  "imaginary numbers",
+  "imaginary unit",
+  "i squared equals negative one",
+  "what is i in math",
+  "pure imaginary numbers",
+  "square root of negative number",
+  "powers of i",
+  "i to the power",
+  "imaginary axis",
+  "imaginary part",
+  "simplify square root negative",
+  "i cycle pattern",
+  "sqrt(-1)",
+  "complex number imaginary part",
+  "pure imaginary definition"
+]
 
   // •
 
@@ -316,27 +332,188 @@ The [absolute value](!/complex-numbers/absolute-value) of a pure imaginary numbe
   `
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "What is the imaginary unit i?",
+    answer: "The imaginary unit i is a number defined by the property i² = -1. It was introduced because no real number squared can produce a negative result, yet the equation x² + 1 = 0 requires such a solution. The symbol i represents a number perpendicular to all real numbers."
+  },
+  obj2: {
+    question: "What is i squared?",
+    answer: "i² = -1 by definition. This is the fundamental property that defines the imaginary unit. Every calculation involving imaginary numbers relies on substituting -1 wherever i² appears."
+  },
+  obj3: {
+    question: "How do you simplify the square root of a negative number?",
+    answer: "For any positive real number a, √(-a) = i√a. Extract the negative sign as a factor of i, leaving the positive square root. For example, √(-4) = i√4 = 2i, and √(-7) = i√7."
+  },
+  obj4: {
+    question: "Why doesn't the product rule √a · √b = √(ab) work for negative numbers?",
+    answer: "The product rule for radicals assumes non-negative radicands. With negatives, it produces contradictions: √(-1) · √(-1) would incorrectly give √1 = 1, but we know i · i = i² = -1. Always convert negative square roots to i-form before multiplying."
+  },
+  obj5: {
+    question: "What is a pure imaginary number?",
+    answer: "A pure imaginary number has the form bi where b is a real number and the real part equals zero. Examples include 3i, -7i, and ½i. In the standard form z = a + bi, a pure imaginary number has a = 0."
+  },
+  obj6: {
+    question: "Is zero a pure imaginary number?",
+    answer: "Yes, zero is the only number that is both real and pure imaginary. Written as 0 = 0 + 0i, it satisfies both conditions: the imaginary part is zero (making it real) and the real part is zero (making it pure imaginary). It sits at the origin where the real and imaginary axes cross."
+  },
+  obj7: {
+    question: "What is the imaginary part of a complex number?",
+    answer: "For z = a + bi, the imaginary part Im(z) equals b — just the coefficient, not bi. The imaginary part is always a real number. For example, if z = 5 + 3i, then Im(z) = 3, not 3i."
+  },
+  obj8: {
+    question: "Is the imaginary part of a complex number real or imaginary?",
+    answer: "The imaginary part is always a real number. The name refers to which component it describes, not its nature. For z = a + bi, both Re(z) = a and Im(z) = b are real numbers — they are coordinates extracted from the complex number."
+  },
+  obj9: {
+    question: "What is the pattern of powers of i?",
+    answer: "Powers of i cycle through four values: i¹ = i, i² = -1, i³ = -i, i⁴ = 1, then the pattern repeats. Every fourth power returns to 1, so i⁵ = i, i⁶ = -1, and so on indefinitely."
+  },
+  obj10: {
+    question: "How do you calculate i to a large power?",
+    answer: "Divide the exponent by 4 and use the remainder. Remainder 0 gives 1, remainder 1 gives i, remainder 2 gives -1, remainder 3 gives -i. For example, i³²³ has remainder 3 when divided by 4, so i³²³ = i³ = -i."
+  },
+  obj11: {
+    question: "What is i to the power of negative 1?",
+    answer: "i⁻¹ = 1/i = -i. To simplify, multiply numerator and denominator by i: (1/i)(i/i) = i/i² = i/(-1) = -i. This corresponds to remainder 3 in the cycle of powers of i."
+  },
+  obj12: {
+    question: "Where are imaginary numbers located on the complex plane?",
+    answer: "Pure imaginary numbers lie on the vertical axis (imaginary axis) of the complex plane. The number bi corresponds to the point (0, b) — zero horizontal displacement and vertical displacement equal to b. For example, 3i is 3 units above the origin."
+  },
+  obj13: {
+    question: "What is the conjugate of a pure imaginary number?",
+    answer: "The conjugate of a pure imaginary number bi is -bi. Since conjugation negates only the imaginary part and a pure imaginary has no real part, the conjugate equals the negative of the original. This means z̄ = -z for any pure imaginary z."
+  },
+  obj14: {
+    question: "How can you test if a complex number is pure imaginary?",
+    answer: "A complex number z is pure imaginary if and only if z̄ = -z (the conjugate equals the negative). This condition forces the real part to be zero. Alternatively, check if Re(z) = 0 directly."
+  },
+  obj15: {
+    question: "What is the absolute value of a pure imaginary number?",
+    answer: "For a pure imaginary number bi, the modulus |bi| = |b|, the absolute value of the coefficient. The formula |z| = √(a² + b²) simplifies to √(b²) = |b| when a = 0. For example, |5i| = 5 and |-3i| = 3."
+  }
+}
 
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Imaginary Numbers",
+    "description": "Learn about imaginary numbers: the imaginary unit i, simplifying square roots of negatives, pure imaginary numbers, powers of i cycle, and the imaginary axis on the complex plane.",
+    "url": "https://www.learnmathclass.com/complex-numbers/imaginary-numbers",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Imaginary Numbers"
+    },
+    "teaches": [
+      "Definition of the imaginary unit i where i² = -1",
+      "Simplifying square roots of negative numbers",
+      "Pure imaginary numbers and their definition",
+      "Why the imaginary part is actually a real number",
+      "The cyclic pattern of powers of i",
+      "Geometric visualization on the imaginary axis",
+      "Conjugate properties of pure imaginary numbers"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Imaginary Numbers | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/complex-numbers/imaginary-numbers",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Complex Numbers",
+        "item": "https://www.learnmathclass.com/complex-numbers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Imaginary Numbers",
+        "item": "https://www.learnmathclass.com/complex-numbers/imaginary-numbers"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Imaginary Numbers | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/complex-numbers/imaginary-numbers",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Imaginary Numbers: Definition, Powers of i | Learn Math Class",
+      description: "Learn about imaginary numbers: the imaginary unit i, simplifying square roots of negatives, pure imaginary numbers, powers of i cycle, and the imaginary axis on the complex plane.",
+      keywords: keyWords.join(", "),
+      url: "/complex-numbers/imaginary-numbers",
+      name: "Imaginary Numbers"
+    },
+  }
+}
    }
 
-export default function ImaginaryNumbersPage({seoData,sectionsContent , introContent}) {
+// export default function ImaginaryNumbersPage({seoData,sectionsContent , introContent}) {
 
+
+export default function ImaginaryNumbersPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -488,7 +665,7 @@ export default function ImaginaryNumbersPage({seoData,sectionsContent , introCon
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -529,6 +706,47 @@ export default function ImaginaryNumbersPage({seoData,sectionsContent , introCon
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

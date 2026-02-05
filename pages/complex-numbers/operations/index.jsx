@@ -12,7 +12,23 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+ const keyWords = [
+  "complex number operations",
+  "add complex numbers",
+  "subtract complex numbers",
+  "multiply complex numbers",
+  "divide complex numbers",
+  "complex number addition",
+  "complex number multiplication",
+  "complex number division",
+  "FOIL method complex numbers",
+  "complex conjugate division",
+  "multiplicative inverse complex number",
+  "i squared equals negative one",
+  "complex arithmetic",
+  "complex number calculator",
+  "how to divide complex numbers"
+]
 
   // •
 
@@ -383,28 +399,178 @@ Geometrically, $z^{-1}$ lies on the same ray from the origin as $\\bar{z}$, but 
   content: `Complex numbers combine real and imaginary components, and arithmetic must handle both parts systematically. Addition and subtraction operate component-wise, just like vector arithmetic. Multiplication requires the distributive property and the fundamental identity $i^2 = -1$. Division introduces the [conjugate](!/complex-numbers/complex-conjugate) as an essential tool for eliminating imaginary denominators. These four operations extend real arithmetic into the complex plane while preserving the algebraic structure that makes calculation predictable.`
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "How do you add complex numbers?",
+    answer: "To add complex numbers, combine like terms: add the real parts together and add the imaginary parts together. For z₁ = a + bi and z₂ = c + di, the sum is (a + c) + (b + d)i. The real and imaginary components are handled independently."
+  },
+  obj2: {
+    question: "How do you subtract complex numbers?",
+    answer: "To subtract complex numbers, subtract the real parts and subtract the imaginary parts separately. For z₁ = a + bi and z₂ = c + di, the difference is (a - c) + (b - d)i. Be careful to distribute the negative sign to both parts of the subtracted number."
+  },
+  obj3: {
+    question: "How do you multiply complex numbers?",
+    answer: "Multiply complex numbers using the FOIL method (distributive property), then use i² = -1 to simplify. For (a + bi)(c + di), expand to get ac + adi + bci + bdi², then substitute i² = -1 to get (ac - bd) + (ad + bc)i."
+  },
+  obj4: {
+    question: "How do you divide complex numbers?",
+    answer: "To divide complex numbers, multiply both numerator and denominator by the conjugate of the denominator. This converts the denominator to a real number since z · z̄ = |z|². Then divide each part of the numerator by this real number to get standard a + bi form."
+  },
+  obj5: {
+    question: "Why do we multiply by the conjugate when dividing complex numbers?",
+    answer: "Multiplying by the conjugate eliminates the imaginary part from the denominator. When you multiply (c + di) by its conjugate (c - di), you get c² + d², which is always a real number. This allows the result to be written in standard algebraic form."
+  },
+  obj6: {
+    question: "What is i² equal to?",
+    answer: "i² = -1 by definition. This is the fundamental property of the imaginary unit i. In any complex number calculation, whenever i² appears, it must be replaced with -1. This is the most common source of errors in complex multiplication."
+  },
+  obj7: {
+    question: "What is the multiplicative inverse of a complex number?",
+    answer: "The multiplicative inverse of z = a + bi is z⁻¹ = z̄/|z|² = (a - bi)/(a² + b²). This is the number that when multiplied by z gives 1. Every nonzero complex number has a multiplicative inverse; only zero has no inverse."
+  },
+  obj8: {
+    question: "What is the geometric meaning of complex addition?",
+    answer: "Complex addition corresponds to vector addition on the complex plane. Place two complex numbers as arrows from the origin, then position the second arrow's tail at the first arrow's head. The sum extends from the origin to the final head — the parallelogram or tip-to-tail rule."
+  },
+  obj9: {
+    question: "What does multiplying by i do geometrically?",
+    answer: "Multiplying a complex number by i rotates it 90° counterclockwise in the complex plane. For example, i(2 + 5i) = 2i + 5i² = -5 + 2i. The original point (2, 5) rotates to (-5, 2), a quarter turn around the origin."
+  },
+  obj10: {
+    question: "What are common mistakes when working with complex numbers?",
+    answer: "Common mistakes include: forgetting that i² = -1 in multiplication, not distributing the negative sign in subtraction, leaving complex numbers in the denominator, and confusing conjugate (flip imaginary sign only) with negative (flip both signs)."
+  },
+  obj11: {
+    question: "Is complex number multiplication commutative?",
+    answer: "Yes, complex multiplication is commutative: z₁ · z₂ = z₂ · z₁. It is also associative: (z₁ · z₂) · z₃ = z₁ · (z₂ · z₃). These properties, along with distributivity, make complex numbers a mathematical field."
+  },
+  obj12: {
+    question: "What is |z₁ - z₂| in the complex plane?",
+    answer: "The modulus |z₁ - z₂| represents the distance between points z₁ and z₂ in the complex plane. Subtraction z₁ - z₂ gives the vector from z₂ to z₁, and its modulus measures how far apart these two complex numbers are."
+  }
+}
 
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Operations on Complex Numbers",
+    "description": "Learn how to add, subtract, multiply, and divide complex numbers. Step-by-step examples, the conjugate method for division, multiplicative inverse, and common pitfalls to avoid.",
+    "url": "https://www.learnmathclass.com/complex-numbers/operations",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Complex Number Arithmetic"
+    },
+    "teaches": [
+      "Adding complex numbers by combining like terms",
+      "Subtracting complex numbers with proper sign distribution",
+      "Multiplying complex numbers using FOIL and i² = -1",
+      "Dividing complex numbers using the conjugate",
+      "Finding the multiplicative inverse of a complex number",
+      "Geometric interpretation of complex operations",
+      "Common pitfalls and how to avoid them"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Operations on Complex Numbers | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/complex-numbers/operations",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Complex Numbers",
+        "item": "https://www.learnmathclass.com/complex-numbers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Operations",
+        "item": "https://www.learnmathclass.com/complex-numbers/operations"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Operations on Complex Numbers | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/complex-numbers/operations",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Operations on Complex Numbers: Add, Multiply, Divide | Learn Math Class",
+      description: "Learn how to add, subtract, multiply, and divide complex numbers. Step-by-step examples, the conjugate method for division, multiplicative inverse, and common pitfalls to avoid.",
+      keywords: keyWords.join(", "),
+      url: "/complex-numbers/operations",
+      name: "Operations on Complex Numbers"
+    },
+  }
+}
    }
 
-export default function OperationsPage({seoData,sectionsContent , introContent}) {
+// export default function OperationsPage({seoData,sectionsContent , introContent}) {
 
-    
+
+export default function OperationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+
   const genericSections=[
     {
         id:'1',
@@ -555,7 +721,7 @@ export default function OperationsPage({seoData,sectionsContent , introContent})
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -596,6 +762,47 @@ export default function OperationsPage({seoData,sectionsContent , introContent})
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>
