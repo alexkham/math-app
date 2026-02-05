@@ -260,7 +260,7 @@ export default function ConvertersPage() {
         }
       `}</style>
 
-      <GenericNavbar/>
+      {/* <GenericNavbar/> */}
       <br/>
       <br/>
       <br/>
@@ -337,7 +337,7 @@ export default function ConvertersPage() {
         </section>
       </div>
 
-      <ScrollUpButton/>
+      {/* <ScrollUpButton/> */}
     </>
   )
 }
