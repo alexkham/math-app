@@ -38,8 +38,10 @@ const convertToRelativePath = (url) => {
 
 const HomePage = ({ categorizedUrls, metaDescriptions }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const allUrls = [...categorizedUrls.main, ...Object.values(categorizedUrls.categories).flat(), ...categorizedUrls.leaves];
-
+  // const allUrls = [...categorizedUrls.main, ...Object.values(categorizedUrls.categories).flat(), ...categorizedUrls.leaves];
+const allUrls = [...categorizedUrls.main, ...Object.values(categorizedUrls.categories).flat(), ...categorizedUrls.leaves]
+  .filter(url => !url.endsWith('learnmathclass.com') && !url.includes('/test1'));
+  
   const heroUrls = allUrls.slice(0, 5);
   const featuredUrls = allUrls.slice(5, 9);
 
