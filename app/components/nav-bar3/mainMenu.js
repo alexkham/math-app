@@ -1,7 +1,7 @@
 /**
  * Auto-generated from sitemap.xml
- * Generated: 2025-12-14T02:37:24.786Z
- * Total pages: 177
+ * Generated: 2026-02-05T18:10:15.771Z
+ * Total pages: 262
  * 
  * To regenerate: node generateNavFromSitemap.js
  */
@@ -150,8 +150,36 @@ export const mainMenuStructure = [
         "href": "/probability",
         "items": [
           {
+            "label": "Axioms",
+            "href": "/probability/axioms"
+          },
+          {
+            "label": "Bayes Theorem",
+            "href": "/probability/bayes-theorem"
+          },
+          {
             "label": "Calculators",
             "href": "/probability/calculators"
+          },
+          {
+            "label": "Cdf",
+            "href": "/probability/cdf"
+          },
+          {
+            "label": "Central Limit Theorem",
+            "href": "/probability/central-limit-theorem"
+          },
+          {
+            "label": "Combinatorics",
+            "href": "/probability/combinatorics"
+          },
+          {
+            "label": "Conditional Probability",
+            "href": "/probability/conditional-probability"
+          },
+          {
+            "label": "Covariance",
+            "href": "/probability/covariance"
           },
           {
             "label": "Definitions",
@@ -174,8 +202,32 @@ export const mainMenuStructure = [
             "href": "/probability/formulas"
           },
           {
+            "label": "Independence",
+            "href": "/probability/independence"
+          },
+          {
+            "label": "Indicators",
+            "href": "/probability/indicators"
+          },
+          {
+            "label": "Inequalities",
+            "href": "/probability/inequalities"
+          },
+          {
             "label": "Joint Probability",
             "href": "/probability/joint-probability"
+          },
+          {
+            "label": "Large Numbers Law",
+            "href": "/probability/large-numbers-law"
+          },
+          {
+            "label": "Median",
+            "href": "/probability/median"
+          },
+          {
+            "label": "Mode",
+            "href": "/probability/mode"
           },
           {
             "label": "Models",
@@ -184,6 +236,10 @@ export const mainMenuStructure = [
           {
             "label": "Probability Function",
             "href": "/probability/probability-function"
+          },
+          {
+            "label": "Random Variables",
+            "href": "/probability/random-variables"
           },
           {
             "label": "Rules",
@@ -198,8 +254,16 @@ export const mainMenuStructure = [
             "href": "/probability/sets"
           },
           {
+            "label": "Tables",
+            "href": "/probability/tables"
+          },
+          {
             "label": "Total Probability",
             "href": "/probability/total-probability"
+          },
+          {
+            "label": "Tree Diagrams",
+            "href": "/probability/tree-diagrams"
           },
           {
             "label": "Variance",
@@ -264,6 +328,56 @@ export const mainMenuStructure = [
             "href": "/sequences/prime-numbers"
           }
         ]
+      },
+      {
+        "title": "Complex Numbers",
+        "href": "/complex-numbers",
+        "items": [
+          {
+            "label": "Absolute Value",
+            "href": "/complex-numbers/absolute-value"
+          },
+          {
+            "label": "Algebraic Form",
+            "href": "/complex-numbers/algebraic-form"
+          },
+          {
+            "label": "Complex Conjugate",
+            "href": "/complex-numbers/complex-conjugate"
+          },
+          {
+            "label": "Demoivre Theorem",
+            "href": "/complex-numbers/demoivre-theorem"
+          },
+          {
+            "label": "Equations Polynomials",
+            "href": "/complex-numbers/equations-polynomials"
+          },
+          {
+            "label": "Exponential Form",
+            "href": "/complex-numbers/exponential-form"
+          },
+          {
+            "label": "Geometric Representation",
+            "href": "/complex-numbers/geometric-representation"
+          },
+          {
+            "label": "Imaginary Numbers",
+            "href": "/complex-numbers/imaginary-numbers"
+          },
+          {
+            "label": "Operations",
+            "href": "/complex-numbers/operations"
+          },
+          {
+            "label": "Properties",
+            "href": "/complex-numbers/properties"
+          },
+          {
+            "label": "Trigonometric Form",
+            "href": "/complex-numbers/trigonometric-form"
+          }
+        ]
       }
     ]
   },
@@ -281,12 +395,28 @@ export const mainMenuStructure = [
             "href": "/visual-tools/base-converter"
           },
           {
+            "label": "Binomial",
+            "href": "/probability/visual-tools/distributions/binomial"
+          },
+          {
+            "label": "Cdf",
+            "href": "/probability/visual-tools/cdf"
+          },
+          {
+            "label": "Chebyshev",
+            "href": "/probability/visual-tools/inequalities/chebyshev"
+          },
+          {
             "label": "Coin Toss",
             "href": "/probability/visual-tools/coin-toss"
           },
           {
             "label": "Conditional Probability",
             "href": "/probability/visual-tools/conditional-probability"
+          },
+          {
+            "label": "Conditional Probability - Contingency Table",
+            "href": "/probability/visual-tools/conditional-probability/contingency-table"
           },
           {
             "label": "Conditional Probability - Tree Diagram",
@@ -301,6 +431,18 @@ export const mainMenuStructure = [
             "href": "/probability/visual-tools/conditional-probability/waffle-chart"
           },
           {
+            "label": "Contingency Tables",
+            "href": "/probability/visual-tools/contingency-tables"
+          },
+          {
+            "label": "Continuous",
+            "href": "/probability/visual-tools/cdf/continuous"
+          },
+          {
+            "label": "Continuous",
+            "href": "/probability/visual-tools/probability-function/continuous"
+          },
+          {
             "label": "Determinant Calculator",
             "href": "/visual-tools/determinant-calculator"
           },
@@ -309,12 +451,52 @@ export const mainMenuStructure = [
             "href": "/probability/visual-tools/dice-roll"
           },
           {
+            "label": "Discrete",
+            "href": "/probability/visual-tools/cdf/discrete"
+          },
+          {
+            "label": "Discrete",
+            "href": "/probability/visual-tools/expected-value/discrete"
+          },
+          {
+            "label": "Discrete",
+            "href": "/probability/visual-tools/probability-function/discrete"
+          },
+          {
+            "label": "Distributions",
+            "href": "/probability/visual-tools/distributions"
+          },
+          {
+            "label": "Expected Value",
+            "href": "/probability/visual-tools/expected-value"
+          },
+          {
+            "label": "Exponential",
+            "href": "/probability/visual-tools/distributions/exponential"
+          },
+          {
             "label": "Fractions Visualizer",
             "href": "/visual-tools/fractions-visualizer"
           },
           {
             "label": "Gauss Elimination",
             "href": "/visual-tools/gauss-elimination"
+          },
+          {
+            "label": "Geometric",
+            "href": "/probability/visual-tools/distributions/geometric"
+          },
+          {
+            "label": "Hypergeometric",
+            "href": "/probability/visual-tools/distributions/hypergeometric"
+          },
+          {
+            "label": "Inequalities",
+            "href": "/probability/visual-tools/inequalities"
+          },
+          {
+            "label": "Markov",
+            "href": "/probability/visual-tools/inequalities/markov"
           },
           {
             "label": "Matrix Multiplication",
@@ -329,8 +511,24 @@ export const mainMenuStructure = [
             "href": "/visual-tools/matrix-types"
           },
           {
+            "label": "Negative Binomial",
+            "href": "/probability/visual-tools/distributions/negative-binomial"
+          },
+          {
+            "label": "Normal",
+            "href": "/probability/visual-tools/distributions/normal"
+          },
+          {
             "label": "Permutations Visualizer",
             "href": "/combinatorics/permutations/permutations-visualizer"
+          },
+          {
+            "label": "Poisson",
+            "href": "/probability/visual-tools/distributions/poisson"
+          },
+          {
+            "label": "Probability Function",
+            "href": "/probability/visual-tools/probability-function"
           },
           {
             "label": "Quadrants",
@@ -341,12 +539,28 @@ export const mainMenuStructure = [
             "href": "/visual-tools/square-root"
           },
           {
+            "label": "Total Probability",
+            "href": "/probability/visual-tools/total-probability"
+          },
+          {
             "label": "Tree Builder",
             "href": "/logic/propositional-logic/syntax/tree-builder"
           },
           {
+            "label": "Uniform Continuous",
+            "href": "/probability/visual-tools/distributions/uniform-continuous"
+          },
+          {
+            "label": "Uniform Discrete",
+            "href": "/probability/visual-tools/distributions/uniform-discrete"
+          },
+          {
             "label": "Unit Circle",
             "href": "/visual-tools/unit-circle"
+          },
+          {
+            "label": "Variance",
+            "href": "/probability/visual-tools/variance"
           },
           {
             "label": "Venn Diagrams",
@@ -361,12 +575,8 @@ export const mainMenuStructure = [
             "href": "/probability/visual-tools/venn-diagrams/two-sets"
           },
           {
-            "label": "Visualizer",
-            "href": "/probability/distributions/continuous/visualizer"
-          },
-          {
-            "label": "Visualizer",
-            "href": "/probability/distributions/discrete/visualizer"
+            "label": "Weighted",
+            "href": "/probability/visual-tools/expected-value/weighted"
           }
         ],
         "href": "/visual-tools"
@@ -374,6 +584,18 @@ export const mainMenuStructure = [
       {
         "title": "Calculators",
         "items": [
+          {
+            "label": "Basic",
+            "href": "/probability/calculators/basic"
+          },
+          {
+            "label": "Bayes Calculator",
+            "href": "/probability/calculators/bayes-calculator"
+          },
+          {
+            "label": "Binomial",
+            "href": "/probability/calculators/expected-value/binomial"
+          },
           {
             "label": "Calculator",
             "href": "/combinatorics/calculator"
@@ -383,20 +605,40 @@ export const mainMenuStructure = [
             "href": "/calculators/complex-numbers"
           },
           {
-            "label": "Conditional Probability Calculator",
-            "href": "/probability/calculators/conditional-probability-calculator"
+            "label": "Conditional Probability",
+            "href": "/probability/calculators/conditional-probability"
           },
           {
             "label": "Continuous Distributions",
             "href": "/probability/calculators/continuous-distributions"
           },
           {
+            "label": "Continuous Uniform",
+            "href": "/probability/calculators/expected-value/continuous-uniform"
+          },
+          {
+            "label": "Direct Data",
+            "href": "/probability/calculators/expected-value/direct-data"
+          },
+          {
             "label": "Discrete Distributions",
             "href": "/probability/calculators/discrete-distributions"
           },
           {
+            "label": "Discrete Uniform",
+            "href": "/probability/calculators/expected-value/discrete-uniform"
+          },
+          {
+            "label": "Expected Value",
+            "href": "/probability/calculators/expected-value"
+          },
+          {
             "label": "Exponent Calculator",
             "href": "/calculators/exponent-calculator"
+          },
+          {
+            "label": "Exponential",
+            "href": "/probability/calculators/expected-value/exponential"
           },
           {
             "label": "Factorial Calculator",
@@ -411,6 +653,18 @@ export const mainMenuStructure = [
             "href": "/calculators/fraction-calculator"
           },
           {
+            "label": "Geometric",
+            "href": "/probability/calculators/expected-value/geometric"
+          },
+          {
+            "label": "Grouped Data",
+            "href": "/probability/calculators/expected-value/grouped-data"
+          },
+          {
+            "label": "Hypergeometric",
+            "href": "/probability/calculators/expected-value/hypergeometric"
+          },
+          {
             "label": "Joint Probability",
             "href": "/probability/calculators/joint-probability"
           },
@@ -423,8 +677,20 @@ export const mainMenuStructure = [
             "href": "/calculators/modulo-calculator"
           },
           {
+            "label": "Negative Binomial",
+            "href": "/probability/calculators/expected-value/negative-binomial"
+          },
+          {
+            "label": "Normal",
+            "href": "/probability/calculators/expected-value/normal"
+          },
+          {
             "label": "Percentage Calculator",
             "href": "/calculators/percentage-calculator"
+          },
+          {
+            "label": "Poisson",
+            "href": "/probability/calculators/expected-value/poisson"
           },
           {
             "label": "Polynomial Calculator",
@@ -435,6 +701,10 @@ export const mainMenuStructure = [
             "href": "/calculators/quadratic-equations"
           },
           {
+            "label": "Raw Data",
+            "href": "/probability/calculators/expected-value/raw-data"
+          },
+          {
             "label": "Root Calculator",
             "href": "/calculators/root-calculator"
           },
@@ -443,8 +713,16 @@ export const mainMenuStructure = [
             "href": "/calculators/statistics-calculator"
           },
           {
+            "label": "Three Events",
+            "href": "/probability/calculators/three-events"
+          },
+          {
             "label": "Trigonometry Calculator",
             "href": "/calculators/trigonometry-calculator"
+          },
+          {
+            "label": "Two Events",
+            "href": "/probability/calculators/two-events"
           }
         ],
         "href": "/calculators"
@@ -517,10 +795,6 @@ export const mainMenuStructure = [
             "href": "/tables/arithmetics/binary-logarithms"
           },
           {
-            "label": "Binomial Distribution",
-            "href": "/tables/probability/binomial-distribution"
-          },
-          {
             "label": "Calculus",
             "href": "/math-symbols/calculus"
           },
@@ -581,20 +855,12 @@ export const mainMenuStructure = [
             "href": "/tables/trigonometry/negative-angle"
           },
           {
-            "label": "Normal Distribution",
-            "href": "/tables/probability/normal-distribution"
-          },
-          {
             "label": "Perfect Cubes",
             "href": "/tables/arithmetics/perfect-cubes"
           },
           {
             "label": "Perfect Squares",
             "href": "/tables/arithmetics/perfect-squares"
-          },
-          {
-            "label": "Poisson Distribution",
-            "href": "/tables/probability/poisson-distribution"
           },
           {
             "label": "Powers Table",
@@ -627,10 +893,6 @@ export const mainMenuStructure = [
           {
             "label": "Supplement Angle",
             "href": "/tables/trigonometry/supplement-angle"
-          },
-          {
-            "label": "T Distribution",
-            "href": "/tables/probability/t-distribution"
           },
           {
             "label": "Trigonometry",
