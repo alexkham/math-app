@@ -42,7 +42,8 @@ import summaries from './api/db/tables/set-theory/summaries';
 import GenericNavbar from './components/nav-bar2/GenericNavbar';
 import MyNavbar3 from './components/nav-bar3/MyNavbar3';
 import Head from 'next/head';
-// import Footer  from './components/page-components/footer/Footer'
+
+
 
 
 export function generateStaticParams() {
@@ -120,6 +121,7 @@ export default async function Home() {
   `
 
   return (
+    <>
     <div className='outer-container' >
 {/* <GenericNavbar/> */}
 <MyNavbar3
@@ -280,28 +282,12 @@ themeName='dark'
      <br></br>
      <br></br>
     
-      <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
+   
      
     
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
     
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
      
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
+    
      {/* <ZScoreVisualizer></ZScoreVisualizer> */}
     
      
@@ -323,16 +309,11 @@ themeName='dark'
      <BellCurveHighlighted
      dataPoints={dataPoints}
      zScore={zScores}></BellCurveHighlighted> */}
-     <br></br>
-     <br></br>
-     <br></br>
-     <br></br>
+     
      {/* <BellCurveHighlighted2
      dataPoints={dataPoints}
      zScore={zScores}></BellCurveHighlighted2> */}
-     <br></br>
-     <br></br>
-     <br></br>
+    
    
     
      {/* <TypeWriter></TypeWriter> */}
@@ -342,26 +323,145 @@ themeName='dark'
    
       </div> */}
      
-     <br></br>
+    
      {/* <MathSolutionSlideshow problemData={complexMathData}></MathSolutionSlideshow> */}
-     <br></br>
-     <br></br>
+   
       {/* <div style={{position:'absolute',top:'100px',width:'1200px'}}>
      <PowerTable></PowerTable>
       </div>  */}
      
      
-     <br></br>
+   
      {/* <MatrixMultiplication></MatrixMultiplication> */}
-     <br></br>
-     <br></br>
+    
      {/* <h2>Z Score Visualizer</h2>
      <ZScoreVisualizer></ZScoreVisualizer> */}
      
    
-     <br></br>
-     {/* <Footer/> */}
+    
+ 
      
     </div>
+      <footer style={{
+  background: '#2d3748',
+  color: '#e2e8f0',
+  padding: '50px 40px 30px',
+}}>
+ <div style={{
+  display: 'grid',
+  gridTemplateColumns: '1fr 2fr',
+  gap: '60px',
+  padding: '0 40px 30px',
+}}>
+    <div style={{
+      paddingRight: '40px',
+      paddingLeft: '100px'
+    }}>
+      <h2 style={{
+        color: '#ffffff',
+        fontSize: '24px',
+        margin: '0 0 15px 0',
+      }}>
+        Learn Math Class
+      </h2>
+      <p style={{
+        color: '#a0aec0',
+        fontSize: '14px',
+        lineHeight: '1.6',
+        margin: 0,
+      }}>
+        Your comprehensive online resource for mathematics education. Interactive calculators, visual tools, and detailed explanations for algebra, calculus, probability, and more.
+      </p>
+    </div>
+
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(3, 1fr)',
+      gap: '30px',
+    }}>
+      <div>
+        <h3 style={{
+          color: '#cbd5e0',
+          fontSize: '14px',
+          marginBottom: '12px',
+          textTransform: 'uppercase',
+        }}>
+          Topics
+        </h3>
+        <ul style={{
+          listStyle: 'none',
+          padding: 0,
+          margin: 0,
+        }}>
+          <li style={{ marginBottom: '8px' }}><Link href="/algebra" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Algebra</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/calculus" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Calculus</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/trigonometry" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Trigonometry</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/combinatorics" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Combinatorics</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/linear-algebra" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Linear Algebra</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/probability" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Probability</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/logic" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Mathematical Logic</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/set-theory" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Set Theory</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/sequences" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Sequences</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/complex-numbers" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Complex Numbers</Link></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style={{
+          color: '#cbd5e0',
+          fontSize: '14px',
+          marginBottom: '12px',
+          textTransform: 'uppercase',
+        }}>
+          Tools
+        </h3>
+        <ul style={{
+          listStyle: 'none',
+          padding: 0,
+          margin: 0,
+        }}>
+          <li style={{ marginBottom: '8px' }}><Link href="/visual-tools" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Visual Tools</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/calculators" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Calculators</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/converters" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Converters</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/tables" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Tables</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/keyboard" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Keyboard</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/math-symbols" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Math Symbols</Link></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style={{
+          color: '#cbd5e0',
+          fontSize: '14px',
+          marginBottom: '12px',
+          textTransform: 'uppercase',
+        }}>
+          About
+        </h3>
+        <ul style={{
+          listStyle: 'none',
+          padding: 0,
+          margin: 0,
+        }}>
+          <li style={{ marginBottom: '8px' }}><Link href="/about" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>About Us</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/contact" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Contact</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/privacy" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Privacy</Link></li>
+          <li style={{ marginBottom: '8px' }}><Link href="/terms" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Terms</Link></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div style={{
+    borderTop: '1px solid #4a5568',
+    paddingTop: '20px',
+    textAlign: 'center',
+    color: '#718096',
+    fontSize: '13px',
+  }}>
+    © 2025 Learn Math Class. All rights reserved.
+  </div>
+</footer>
+    </>
   )
 }
