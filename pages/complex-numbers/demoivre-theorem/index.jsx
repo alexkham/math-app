@@ -12,7 +12,23 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+ const keyWords = [
+  "De Moivre's theorem",
+  "De Moivre's formula",
+  "complex number powers",
+  "nth roots complex numbers",
+  "roots of unity",
+  "cis theta power n",
+  "(cos θ + i sin θ)^n",
+  "find nth roots",
+  "cube roots complex",
+  "square roots complex number",
+  "complex roots regular polygon",
+  "primitive root of unity",
+  "De Moivre proof",
+  "trigonometric form powers",
+  "complex number root formula"
+]
 
   // •
 
@@ -454,28 +470,185 @@ A regular pentagon with radius $2$, one vertex on the positive real axis.`,
   `
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "What is De Moivre's theorem?",
+    answer: "De Moivre's theorem states that (cos θ + i sin θ)^n = cos(nθ) + i sin(nθ) for any integer n. In compact notation, (cis θ)^n = cis(nθ). The angle simply multiplies by the exponent, making complex powers trivial to compute in trigonometric form."
+  },
+  obj2: {
+    question: "How do you apply De Moivre's theorem to complex powers?",
+    answer: "Convert the complex number to trigonometric form z = r·cis θ, then apply the formula: z^n = r^n·cis(nθ). The modulus raises to the nth power and the argument multiplies by n. Finally, convert back to algebraic form if needed."
+  },
+  obj3: {
+    question: "Does De Moivre's theorem work for negative exponents?",
+    answer: "Yes. For negative integers, z^(-n) = r^(-n)·cis(-nθ). The modulus inverts and the argument multiplies by the negative exponent. The same structural simplicity applies to all integer powers, positive or negative."
+  },
+  obj4: {
+    question: "How do you prove De Moivre's theorem?",
+    answer: "The proof uses mathematical induction. The base case n = 1 is trivial. For the inductive step, multiply (cis θ)^k by cis θ, which adds arguments to give cis((k+1)θ). Extension to negative integers follows from the reciprocal relationship z^(-n) = 1/z^n."
+  },
+  obj5: {
+    question: "How many nth roots does a complex number have?",
+    answer: "Every nonzero complex number has exactly n distinct nth roots. They all have the same modulus R^(1/n) and are evenly spaced around a circle, with arguments differing by 360°/n. The roots form vertices of a regular n-gon."
+  },
+  obj6: {
+    question: "What is the formula for nth roots of a complex number?",
+    answer: "For w = R·cis φ, the n roots are z_k = R^(1/n)·cis((φ + 360°k)/n) for k = 0, 1, ..., n-1. Each value of k gives a distinct root. Beyond k = n-1, the angles repeat and no new roots appear."
+  },
+  obj7: {
+    question: "Why do nth roots form a regular polygon?",
+    answer: "All n roots share the same modulus R^(1/n), placing them on a circle. Consecutive roots differ in argument by exactly 360°/n, spacing them evenly. This uniform distribution around the circle creates vertices of a regular n-gon."
+  },
+  obj8: {
+    question: "What are the roots of unity?",
+    answer: "The nth roots of unity are the n solutions to z^n = 1. They are z_k = cis(360°k/n) for k = 0, 1, ..., n-1. All lie on the unit circle and form a regular n-gon. The root ω = cis(360°/n) generates all others as powers: 1, ω, ω², ..., ω^(n-1)."
+  },
+  obj9: {
+    question: "What is a primitive root of unity?",
+    answer: "The primitive nth root of unity is ω = cis(2π/n) = cis(360°/n). It generates all other nth roots through its powers: the complete set is {1, ω, ω², ..., ω^(n-1)}. This generator connects roots of unity to group theory."
+  },
+  obj10: {
+    question: "What is the sum of all nth roots of unity?",
+    answer: "The sum of all nth roots of unity equals zero: 1 + ω + ω² + ... + ω^(n-1) = 0. Geometrically, the roots form a regular polygon centered at the origin, so their vector sum returns to zero. This is a geometric series with ratio ω ≠ 1."
+  },
+  obj11: {
+    question: "What is the product of all nth roots of unity?",
+    answer: "The product of all nth roots of unity is (-1)^(n+1). For odd n, the product is 1. For even n, the product is -1. This relates to the constant term of the polynomial z^n - 1."
+  },
+  obj12: {
+    question: "What are the fourth roots of unity?",
+    answer: "The fourth roots of unity are 1, i, -1, and -i. They sit at 0°, 90°, 180°, and 270° on the unit circle, forming a square. Each satisfies z⁴ = 1."
+  },
+  obj13: {
+    question: "How do you find the cube roots of a negative number?",
+    answer: "Write the negative number in trigonometric form with argument 180°. For -8 = 8·cis(180°), the cube roots are 2·cis((180° + 360°k)/3) for k = 0, 1, 2, giving 2·cis(60°), 2·cis(180°) = -2, and 2·cis(300°). One root is real (-2), and two are complex conjugates."
+  },
+  obj14: {
+    question: "What are the square roots of i?",
+    answer: "Write i = 1·cis(90°). The square roots are cis(45°) and cis(225°), which equal (√2/2)(1 + i) and (√2/2)(-1 - i). They are opposite each other on the unit circle, separated by 180°."
+  }
+}
 
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "De Moivre's Theorem",
+    "description": "Master De Moivre's theorem for complex powers and roots. Learn the formula (cis θ)^n = cis(nθ), find nth roots of any complex number, and explore roots of unity with geometric interpretations.",
+    "url": "https://www.learnmathclass.com/complex-numbers/demoivre-theorem",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "De Moivre's Theorem"
+    },
+    "teaches": [
+      "De Moivre's formula for complex powers",
+      "Proof of De Moivre's theorem by induction",
+      "Computing high powers of complex numbers",
+      "Formula for nth roots of complex numbers",
+      "Geometric interpretation of roots as regular polygons",
+      "Roots of unity and their properties",
+      "Primitive roots of unity and generation"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Demoivre Theorem | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/complex-numbers/demoivre-theorem",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Complex Numbers",
+        "item": "https://www.learnmathclass.com/complex-numbers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "De Moivre's Theorem",
+        "item": "https://www.learnmathclass.com/complex-numbers/demoivre-theorem"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Demoivre Theorem | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/complex-numbers/demoivre-theorem",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "De Moivre's Theorem: Powers & Roots of ℂ | Learn Math Class",
+      description: "Master De Moivre's theorem for complex powers and roots. Learn the formula (cis θ)^n = cis(nθ), find nth roots of any complex number, and explore roots of unity with geometric interpretations.",
+      keywords: keyWords.join(", "),
+      url: "/complex-numbers/demoivre-theorem",
+      name: "De Moivre's Theorem"
+    },
+  }
+}
    }
 
-export default function DeMoivreTheoremPage({seoData,sectionsContent , introContent}) {
+// export default function DeMoivreTheoremPage({seoData,sectionsContent , introContent}) {
 
-    
+
+export default function DeMoivreTheoremPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+
+
   const genericSections=[
     {
         id:'1',
@@ -626,7 +799,7 @@ export default function DeMoivreTheoremPage({seoData,sectionsContent , introCont
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -670,6 +843,49 @@ export default function DeMoivreTheoremPage({seoData,sectionsContent , introCont
     }}
   />
 </Head>
+*/}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
+    }}
+  />
+</Head>
+
    {/* <GenericNavbar/> */}
    <br/>
    <br/>

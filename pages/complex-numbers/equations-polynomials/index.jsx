@@ -12,7 +12,23 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+ const keyWords = [
+  "polynomial equations complex numbers",
+  "fundamental theorem of algebra",
+  "complex roots polynomial",
+  "factor polynomial complex",
+  "Vieta's formulas",
+  "conjugate pairs roots",
+  "solve z^n = w",
+  "nth roots complex number",
+  "algebraically closed field",
+  "quadratic complex coefficients",
+  "polynomial factorization",
+  "complex solutions polynomial",
+  "roots of unity polynomial",
+  "real polynomial complex roots",
+  "polynomial complex plane"
+]
 
   // •
 
@@ -431,28 +447,179 @@ The Fundamental Theorem of Algebra ensures that these applications never encount
   content: `The real numbers leave many polynomial equations unsolved — $x^2 + 1 = 0$ has no real answer, and neither does $x^4 + 4 = 0$. Complex numbers fill this gap completely. The Fundamental Theorem of Algebra guarantees that every polynomial equation has solutions in $\\mathbb{C}$, and the number of solutions matches the polynomial's degree exactly. This completeness makes the complex field the natural setting for polynomial theory.`
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "What is the Fundamental Theorem of Algebra?",
+    answer: "The Fundamental Theorem of Algebra states that every non-constant polynomial with complex coefficients has at least one complex root. This implies every polynomial of degree n has exactly n roots in ℂ (counting multiplicity) and can be factored completely into linear factors."
+  },
+  obj2: {
+    question: "What does it mean that ℂ is algebraically closed?",
+    answer: "A field is algebraically closed if every non-constant polynomial with coefficients from that field has a root in the field. The complex numbers ℂ are algebraically closed — every polynomial equation solvable anywhere is solvable in ℂ. No further extension is needed to find polynomial roots."
+  },
+  obj3: {
+    question: "Do complex roots of real polynomials come in conjugate pairs?",
+    answer: "Yes. For any polynomial with real coefficients, if z₀ is a non-real root, then its conjugate z̄₀ is also a root. This is because p(z̄) = p̄(z) when all coefficients are real, so p(z₀) = 0 implies p(z̄₀) = 0."
+  },
+  obj4: {
+    question: "Why does every real polynomial of odd degree have at least one real root?",
+    answer: "Complex roots of real polynomials come in conjugate pairs, consuming an even number of roots. With odd degree n, at least one root remains unpaired. An unpaired root of a real polynomial must be real, since otherwise its conjugate would also be a root."
+  },
+  obj5: {
+    question: "What are Vieta's formulas?",
+    answer: "Vieta's formulas relate a polynomial's coefficients to symmetric combinations of its roots. For a monic quadratic z² + bz + c = 0 with roots z₁, z₂: the sum z₁ + z₂ = -b and the product z₁·z₂ = c. Similar patterns extend to higher degrees."
+  },
+  obj6: {
+    question: "How do you solve z^n = w for a complex number w?",
+    answer: "Write w = R·cis(φ) in trigonometric form. The n solutions are z_k = R^(1/n)·cis((φ + 360°k)/n) for k = 0, 1, ..., n-1. All roots have the same modulus R^(1/n) and are evenly spaced around a circle, forming a regular n-gon."
+  },
+  obj7: {
+    question: "How many solutions does z^n = z̄ have?",
+    answer: "The equation z^n = z̄ has n + 2 solutions: one at the origin (z = 0) and n + 1 solutions on the unit circle with arguments θ = 360°k/(n+1) for k = 0, 1, ..., n. These unit circle solutions come from requiring r = 1 and (n+1)θ to be a multiple of 360°."
+  },
+  obj8: {
+    question: "What does z + z̄ = k describe geometrically?",
+    answer: "Since z + z̄ = 2·Re(z), the equation z + z̄ = k describes the vertical line where Re(z) = k/2. Every point on this line satisfies the equation. Similarly, z·z̄ = k describes a circle centered at the origin with radius √k."
+  },
+  obj9: {
+    question: "Does the quadratic formula work for complex coefficients?",
+    answer: "Yes, the quadratic formula z = (-b ± √(b² - 4ac))/(2a) works unchanged for complex coefficients. The discriminant b² - 4ac may be complex, requiring you to find the square root of a complex number using De Moivre's theorem or trigonometric form."
+  },
+  obj10: {
+    question: "How do you factor a polynomial completely over ℂ?",
+    answer: "By the Fundamental Theorem, every polynomial of degree n factors as p(z) = aₙ(z - z₁)(z - z₂)···(z - zₙ), where aₙ is the leading coefficient and z₁, ..., zₙ are the n roots (possibly repeated). This complete factorization into linear factors is always possible over ℂ."
+  },
+  obj11: {
+    question: "What is root multiplicity?",
+    answer: "A root has multiplicity m if the factor (z - r) appears m times in the polynomial's factorization. For example, in p(z) = (z - 2)³(z + i)(z - i), the root 2 has multiplicity 3 while i and -i are simple roots (multiplicity 1). The multiplicities sum to the degree."
+  },
+  obj12: {
+    question: "Why are complex roots important in engineering?",
+    answer: "In signal processing, filter behavior depends on polynomial root locations. In control theory, system stability requires all characteristic polynomial roots to have negative real parts. Root placement in the complex plane directly determines whether systems oscillate, decay, or grow unstably."
+  },
+  obj13: {
+    question: "How are roots of unity related to regular polygons?",
+    answer: "The n-th roots of unity (solutions to z^n = 1) form the vertices of a regular n-gon inscribed in the unit circle. More generally, roots of z^n = w form a regular n-gon of radius |w|^(1/n), rotated according to the argument of w."
+  }
+}
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Complex Polynomial Equations",
+    "description": "Learn how complex numbers solve all polynomial equations. Covers the Fundamental Theorem of Algebra, factoring over ℂ, Vieta's formulas, conjugate pairs, and solving equations like z^n = w.",
+    "url": "https://www.learnmathclass.com/complex-numbers/equations-polynomials",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Polynomial Equations with Complex Numbers"
+    },
+    "teaches": [
+      "The Fundamental Theorem of Algebra",
+      "Complete factorization of polynomials over ℂ",
+      "Vieta's formulas relating roots and coefficients",
+      "Conjugate pairs for real polynomial roots",
+      "Solving z^n = w using De Moivre's theorem",
+      "Equations involving conjugates and their geometric meaning",
+      "Applications in signal processing and control theory"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Equations and Polynomials | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/complex-numbers/equations-polynomials",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Complex Numbers",
+        "item": "https://www.learnmathclass.com/complex-numbers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Equations and Polynomials",
+        "item": "https://www.learnmathclass.com/complex-numbers/equations-polynomials"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Equations and Polynomials | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/complex-numbers/equations-polynomials",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Polynomial Equations & Fundamental Theorem | Learn Math Class",
+      description: "Learn how complex numbers solve all polynomial equations. Covers the Fundamental Theorem of Algebra, factoring over ℂ, Vieta's formulas, conjugate pairs, and solving equations like z^n = w.",
+      keywords: keyWords.join(", "),
+      url: "/complex-numbers/equations-polynomials",
+      name: "Complex Polynomial Equations"
+    },
+  }
+}
    }
 
-export default function EquationsPolynomialsPage({seoData,sectionsContent , introContent}) {
+// export default function EquationsPolynomialsPage({seoData,sectionsContent , introContent}) {
 
-    
+export default function EquationsPolynomialsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) { 
+
+
   const genericSections=[
     {
         id:'1',
@@ -603,7 +770,7 @@ export default function EquationsPolynomialsPage({seoData,sectionsContent , intr
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -644,6 +811,47 @@ export default function EquationsPolynomialsPage({seoData,sectionsContent , intr
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

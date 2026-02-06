@@ -12,7 +12,23 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+  const keyWords = [
+  "algebraic form complex numbers",
+  "standard form complex number",
+  "a + bi form",
+  "real part imaginary part",
+  "Re(z) Im(z)",
+  "complex number notation",
+  "rectangular form complex",
+  "complex number equality",
+  "complex number components",
+  "write complex number standard form",
+  "identify real imaginary parts",
+  "complex number format",
+  "cartesian form complex",
+  "complex number representation",
+  "a plus bi"
+]
 
   // •
 
@@ -310,28 +326,179 @@ Additional identities and applications appear in the [complex conjugate](!/compl
   `
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "What is the algebraic form of a complex number?",
+    answer: "The algebraic form (also called standard form or rectangular form) writes every complex number as z = a + bi, where a and b are real numbers and i is the imaginary unit with i² = -1. The value a is the real part and b is the imaginary part."
+  },
+  obj2: {
+    question: "What are the real and imaginary parts of a complex number?",
+    answer: "For z = a + bi, the real part is a (written Re(z) = a) and the imaginary part is b (written Im(z) = b). Note that the imaginary part is just b, not bi — it's a real number indicating the coefficient of i."
+  },
+  obj3: {
+    question: "Why is the imaginary part a real number?",
+    answer: "The term 'imaginary part' refers to which component of z the value describes, not the nature of the value itself. For z = 3 + 2i, the imaginary part is 2 (a real number), not 2i. The functions Re(z) and Im(z) always output real numbers."
+  },
+  obj4: {
+    question: "When are two complex numbers equal?",
+    answer: "Two complex numbers z₁ = a + bi and z₂ = c + di are equal if and only if a = c AND b = d. Both the real parts must match and the imaginary parts must match. This means one complex equation gives two real equations."
+  },
+  obj5: {
+    question: "How do you find the real and imaginary parts of a complex number?",
+    answer: "Write the number in standard form a + bi. The coefficient with no i is the real part; the coefficient of i is the imaginary part. For 5 - 3i, rewrite as 5 + (-3)i, giving Re(z) = 5 and Im(z) = -3. Include the negative sign with the imaginary part."
+  },
+  obj6: {
+    question: "What happens when the imaginary part is zero?",
+    answer: "When b = 0, the complex number z = a + 0i = a reduces to a real number. Every real number is a complex number with zero imaginary part. This is why ℝ is a subset of ℂ."
+  },
+  obj7: {
+    question: "What happens when the real part is zero?",
+    answer: "When a = 0, the complex number z = 0 + bi = bi is called a pure imaginary number. It lies on the imaginary axis of the complex plane. Examples include i, 3i, and -5i."
+  },
+  obj8: {
+    question: "What is the difference between rectangular and polar form?",
+    answer: "Rectangular (algebraic) form z = a + bi specifies a complex number by its horizontal and vertical components. Polar (trigonometric) form z = r·cis θ specifies it by distance from origin (modulus r) and angle (argument θ). Both represent the same number differently."
+  },
+  obj9: {
+    question: "How does equating real and imaginary parts help solve equations?",
+    answer: "A complex equation a + bi = c + di splits into two real equations: a = c and b = d. This doubles the information from one equation, converting complex problems into systems of real equations that standard techniques can solve."
+  },
+  obj10: {
+    question: "Why can't complex numbers be ordered like real numbers?",
+    answer: "Real numbers occupy a one-dimensional line where we can compare single values. Complex numbers carry two independent values (real and imaginary parts), and no consistent rule determines whether 3 + 2i is greater or less than 1 + 5i. We can only compare their moduli."
+  },
+  obj11: {
+    question: "How do you identify if a complex number is real using its conjugate?",
+    answer: "A complex number z is real if and only if z = z̄ (equals its conjugate). Real numbers sit on the real axis, which is the mirror line for conjugation. Points on a mirror remain fixed under reflection."
+  },
+  obj12: {
+    question: "How do you identify if a complex number is pure imaginary using its conjugate?",
+    answer: "A complex number z is pure imaginary if and only if z̄ = -z (conjugate equals negative). Pure imaginary numbers sit on the imaginary axis, perpendicular to the reflection mirror. Reflection sends them to their opposites through the origin."
+  }
+}
 
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Algebraic Form of Complex Numbers",
+    "description": "Master the algebraic form z = a + bi of complex numbers. Learn about real and imaginary parts, Re(z) and Im(z) notation, equality conditions, and how conjugate identities classify numbers.",
+    "url": "https://www.learnmathclass.com/complex-numbers/algebraic-form",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Algebraic Form of Complex Numbers"
+    },
+    "teaches": [
+      "Standard form z = a + bi",
+      "Real part Re(z) and imaginary part Im(z)",
+      "Equality of complex numbers",
+      "The complex conjugate z̄ = a - bi",
+      "Conjugate properties and distribution",
+      "Classification theorems using conjugates",
+      "Useful conjugate identities"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Algebraic Form Page  | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/complex-numbers/algebraic-form",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Complex Numbers",
+        "item": "https://www.learnmathclass.com/complex-numbers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Algebraic Form",
+        "item": "https://www.learnmathclass.com/complex-numbers/algebraic-form"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Algebraic Form Page  | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/complex-numbers/algebraic-form",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Algebraic Form: Standard Form a + bi | Learn Math Class",
+      description: "Master the algebraic form z = a + bi of complex numbers. Learn about real and imaginary parts, Re(z) and Im(z) notation, equality conditions, and how conjugate identities classify numbers.",
+      keywords: keyWords.join(", "),
+      url: "/complex-numbers/algebraic-form",
+      name: "Algebraic Form of Complex Numbers"
+    },
+  }
+}
    }
 
-export default function AlgebraicFormPage({seoData,sectionsContent , introContent}) {
+// export default function AlgebraicFormPage({seoData,sectionsContent , introContent}) {
 
-    
+export default function AlgebraicFormPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+
+
   const genericSections=[
     {
         id:'1',
@@ -482,7 +649,7 @@ export default function AlgebraicFormPage({seoData,sectionsContent , introConten
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -523,6 +690,47 @@ export default function AlgebraicFormPage({seoData,sectionsContent , introConten
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

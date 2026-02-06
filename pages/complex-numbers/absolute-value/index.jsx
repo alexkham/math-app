@@ -12,7 +12,23 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+ const keyWords = [
+  "modulus complex number",
+  "absolute value complex number",
+  "complex number magnitude",
+  "modulus formula",
+  "sqrt a squared plus b squared",
+  "z times z bar",
+  "triangle inequality complex",
+  "reverse triangle inequality",
+  "complex number distance",
+  "modulus properties",
+  "complex modulus definition",
+  "calculate modulus",
+  "conjugate modulus identity",
+  "complex plane distance",
+  "modulus product rule"
+]
 
   // •
 
@@ -364,26 +380,178 @@ The inequality $|z - z_0| < r$ can be rewritten as $z_0 - r < z < z_0 + r$ only 
 }
 
 
+const faqQuestions = {
+  obj1: {
+    question: "What is the modulus of a complex number?",
+    answer: "The modulus of z = a + bi, written |z|, is the distance from the origin to point (a, b) in the complex plane. The formula is |z| = √(a² + b²), derived from the Pythagorean theorem. It's also called absolute value or magnitude."
+  },
+  obj2: {
+    question: "How do you calculate the modulus of a complex number?",
+    answer: "Square both the real and imaginary parts, add them together, and take the square root. For z = 3 + 4i: |z| = √(3² + 4²) = √(9 + 16) = √25 = 5. For z = -2 + i: |z| = √(4 + 1) = √5 ≈ 2.236."
+  },
+  obj3: {
+    question: "What is the relationship between modulus and conjugate?",
+    answer: "The product of a complex number and its conjugate equals the square of its modulus: z·z̄ = |z|². For z = a + bi, this gives (a + bi)(a - bi) = a² + b² = |z|². This identity is essential for division and many proofs."
+  },
+  obj4: {
+    question: "What is the modulus of a real number?",
+    answer: "For a real number z = a (where the imaginary part is zero), the modulus equals the ordinary absolute value: |a| = √(a² + 0²) = √a² = |a|. Complex modulus and real absolute value agree completely on real numbers."
+  },
+  obj5: {
+    question: "What is the modulus of a pure imaginary number?",
+    answer: "For a pure imaginary number z = bi (where the real part is zero), the modulus equals the absolute value of the coefficient: |bi| = √(0² + b²) = |b|. For example, |4i| = 4 and |-3i| = 3."
+  },
+  obj6: {
+    question: "When is the modulus equal to zero?",
+    answer: "The modulus equals zero only when the complex number itself is zero: |z| = 0 if and only if z = 0. Every nonzero complex number has a positive modulus since it lies some distance from the origin."
+  },
+  obj7: {
+    question: "What is the product rule for modulus?",
+    answer: "The modulus of a product equals the product of the moduli: |z₁·z₂| = |z₁|·|z₂|. Similarly for division: |z₁/z₂| = |z₁|/|z₂|. For powers: |zⁿ| = |z|ⁿ. These rules simplify calculations significantly."
+  },
+  obj8: {
+    question: "Does the conjugate change the modulus?",
+    answer: "No, the conjugate preserves the modulus: |z̄| = |z|. Conjugation reflects a point across the real axis, and reflection doesn't change the distance from the origin. Both z = 3 + 4i and z̄ = 3 - 4i have modulus 5."
+  },
+  obj9: {
+    question: "What is the triangle inequality for complex numbers?",
+    answer: "The triangle inequality states |z₁ + z₂| ≤ |z₁| + |z₂|. The modulus of a sum never exceeds the sum of the moduli. Geometrically, the direct path (left side) can't exceed the detoured path through z₁ then z₂ (right side)."
+  },
+  obj10: {
+    question: "When does equality hold in the triangle inequality?",
+    answer: "Equality |z₁ + z₂| = |z₁| + |z₂| holds when z₁ and z₂ point in the same direction from the origin — that is, when one is a non-negative real multiple of the other. Geometrically, the triangle degenerates to a line segment."
+  },
+  obj11: {
+    question: "What is the reverse triangle inequality?",
+    answer: "The reverse triangle inequality states ||z₁| - |z₂|| ≤ |z₁ - z₂|. The absolute difference of two moduli never exceeds the modulus of the difference. This bounds how much moduli can vary as complex numbers change."
+  },
+  obj12: {
+    question: "How does modulus describe circles in the complex plane?",
+    answer: "The equation |z - z₀| = r describes a circle centered at z₀ with radius r — all points at distance exactly r from center z₀. The inequality |z - z₀| < r describes the open disk interior, and |z - z₀| ≤ r the closed disk."
+  },
+  obj13: {
+    question: "How do you find the distance between two complex numbers?",
+    answer: "The distance between z₁ and z₂ in the complex plane equals |z₁ - z₂|. This is the Euclidean distance formula applied to points (a₁, b₁) and (a₂, b₂): √[(a₁-a₂)² + (b₁-b₂)²]."
+  }
+}
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Modulus (Absolute Value) of Complex Numbers",
+    "description": "Learn the modulus of complex numbers: definition |z| = √(a² + b²), the identity z·z̄ = |z|², properties, the triangle inequality and its proof, reverse triangle inequality, and applications.",
+    "url": "https://www.learnmathclass.com/complex-numbers/absolute-value",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Complex Number Modulus"
+    },
+    "teaches": [
+      "Definition of modulus |z| = √(a² + b²)",
+      "Special cases: real, pure imaginary, zero",
+      "The identity z·z̄ = |z|²",
+      "Modulus properties: products, quotients, powers",
+      "The triangle inequality and its proof",
+      "The reverse triangle inequality",
+      "Circles and distance in the complex plane"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Absolute Value of Complex Numbers | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/complex-numbers/absolute-value",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Complex Numbers",
+        "item": "https://www.learnmathclass.com/complex-numbers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Absolute Value",
+        "item": "https://www.learnmathclass.com/complex-numbers/absolute-value"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Absolute Value of Complex Numbers | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/complex-numbers/absolute-value",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Modulus: Absolute Value & Triangle Inequality | Learn Math Class",
+      description: "Learn the modulus of complex numbers: definition |z| = √(a² + b²), the identity z·z̄ = |z|², properties, the triangle inequality and its proof, reverse triangle inequality, and applications.",
+      keywords: keyWords.join(", "),
+      url: "/complex-numbers/absolute-value",
+      name: "Modulus (Absolute Value) of Complex Numbers"
+    },
+  }
+}
    }
 
-export default function AbsoluteValuePage({seoData,sectionsContent , introContent}) {
+// export default function AbsoluteValuePage({seoData,sectionsContent , introContent}) {
 
+
+export default function AbsoluteValuePage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -535,7 +703,7 @@ export default function AbsoluteValuePage({seoData,sectionsContent , introConten
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -576,6 +744,47 @@ export default function AbsoluteValuePage({seoData,sectionsContent , introConten
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

@@ -12,7 +12,23 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+ const keyWords = [
+  "exponential form complex numbers",
+  "Euler's formula",
+  "e to the i theta",
+  "Euler's identity",
+  "e^(iπ) + 1 = 0",
+  "complex number exponential notation",
+  "re^(iθ)",
+  "convert to exponential form",
+  "multiply complex exponential form",
+  "divide complex exponential form",
+  "complex number powers exponential",
+  "roots of complex numbers",
+  "Taylor series Euler formula",
+  "cis notation exponential",
+  "polar to exponential form"
+]
 
   // •
 
@@ -438,28 +454,183 @@ The exponential form appears wherever oscillation, rotation, or periodic phenome
   content: `The [trigonometric form](!/complex-numbers/trigonometric-form) $r\\text{cis}\\theta$ simplifies multiplication and powers, but notation can be streamlined further. Euler's formula reveals that $e^{i\\theta}$ equals $\\cos\\theta + i\\sin\\theta$, allowing us to write any complex number as $z = re^{i\\theta}$. This exponential form inherits all the advantages of trigonometric representation while invoking the familiar rules of exponents — multiplication adds exponents, division subtracts them, and powers simply multiply.`
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "What is Euler's formula?",
+    answer: "Euler's formula states that e^(iθ) = cos θ + i sin θ for any real angle θ. It connects exponential functions with trigonometric functions through the imaginary unit, revealing that growth and oscillation are mathematically unified."
+  },
+  obj2: {
+    question: "How do you prove Euler's formula?",
+    answer: "Euler's formula is proven using Taylor series. Substitute iθ into the exponential series e^x = 1 + x + x²/2! + ..., then use the cyclic powers of i to separate real and imaginary parts. The real part becomes the cosine series, and the imaginary part becomes the sine series."
+  },
+  obj3: {
+    question: "What is Euler's identity?",
+    answer: "Euler's identity is e^(iπ) + 1 = 0, a special case of Euler's formula when θ = π. It connects five fundamental mathematical constants (e, i, π, 1, and 0) in a single equation, often called the most beautiful formula in mathematics."
+  },
+  obj4: {
+    question: "What is the exponential form of a complex number?",
+    answer: "The exponential form writes a complex number as z = re^(iθ), where r is the modulus (distance from origin) and θ is the argument (angle from positive real axis). It is equivalent to the trigonometric form z = r(cos θ + i sin θ) = r cis θ."
+  },
+  obj5: {
+    question: "How do you convert algebraic form to exponential form?",
+    answer: "For z = a + bi, calculate r = √(a² + b²) for the modulus and θ = arctan(b/a) adjusted for quadrant for the argument. Then write z = re^(iθ). For example, 1 + i = √2 · e^(iπ/4)."
+  },
+  obj6: {
+    question: "How do you convert exponential form to algebraic form?",
+    answer: "For z = re^(iθ), compute the real part a = r cos θ and imaginary part b = r sin θ. Then write z = a + bi. For example, 4e^(i·2π/3) = -2 + 2√3i."
+  },
+  obj7: {
+    question: "How do you multiply complex numbers in exponential form?",
+    answer: "To multiply z₁ = r₁e^(iθ₁) and z₂ = r₂e^(iθ₂), multiply the moduli and add the arguments: z₁·z₂ = (r₁r₂)e^(i(θ₁+θ₂)). The standard exponent rule e^a · e^b = e^(a+b) applies directly."
+  },
+  obj8: {
+    question: "How do you divide complex numbers in exponential form?",
+    answer: "To divide z₁ = r₁e^(iθ₁) by z₂ = r₂e^(iθ₂), divide the moduli and subtract the arguments: z₁/z₂ = (r₁/r₂)e^(i(θ₁-θ₂)). This follows from the exponent rule e^a / e^b = e^(a-b)."
+  },
+  obj9: {
+    question: "How do you raise a complex number to a power in exponential form?",
+    answer: "For z = re^(iθ) and integer n, apply the power rule: z^n = r^n · e^(inθ). The modulus raises to the nth power and the argument multiplies by n. This is De Moivre's theorem in exponential notation."
+  },
+  obj10: {
+    question: "How do you find the nth roots of a complex number?",
+    answer: "For w = Re^(iφ), the n roots are z_k = R^(1/n) · e^(i(φ + 2πk)/n) for k = 0, 1, ..., n-1. All roots have modulus R^(1/n) and are evenly spaced around a circle, separated by angle 2π/n."
+  },
+  obj11: {
+    question: "What does e^(iπ) equal?",
+    answer: "e^(iπ) = -1. By Euler's formula, e^(iπ) = cos π + i sin π = -1 + 0 = -1. This result, rearranged as e^(iπ) + 1 = 0, is Euler's identity."
+  },
+  obj12: {
+    question: "What does e^(iπ/2) equal?",
+    answer: "e^(iπ/2) = i. By Euler's formula, e^(iπ/2) = cos(π/2) + i sin(π/2) = 0 + i·1 = i. This shows that e raised to iπ/2 produces the imaginary unit."
+  },
+  obj13: {
+    question: "Why is exponential form useful for complex numbers?",
+    answer: "Exponential form simplifies arithmetic: multiplication adds exponents, division subtracts them, powers multiply the exponent, and roots divide it. It also reveals the connection between circular motion and exponential functions, which is foundational in Fourier analysis, signal processing, and physics."
+  },
+  obj14: {
+    question: "What is the relationship between cis θ and e^(iθ)?",
+    answer: "They are equal: cis θ = cos θ + i sin θ = e^(iθ). The notation 'cis' is shorthand for 'cos + i sin,' while e^(iθ) expresses the same value using Euler's formula. Both represent a point on the unit circle at angle θ."
+  }
+}
 
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Exponential Form of Complex Numbers",
+    "description": "Master the exponential form z = re^(iθ) of complex numbers. Learn Euler's formula, Euler's identity, and how to multiply, divide, and find powers and roots using exponential notation.",
+    "url": "https://www.learnmathclass.com/complex-numbers/exponential-form",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Exponential Form of Complex Numbers"
+    },
+    "teaches": [
+      "Euler's formula e^(iθ) = cos θ + i sin θ",
+      "Euler's identity e^(iπ) + 1 = 0",
+      "Exponential form z = re^(iθ)",
+      "Converting between algebraic and exponential forms",
+      "Multiplication and division in exponential form",
+      "Powers and roots using exponential notation",
+      "Applications in signal processing and physics"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Exponential Form | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/complex-numbers/exponential-form",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Complex Numbers",
+        "item": "https://www.learnmathclass.com/complex-numbers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Exponential Form",
+        "item": "https://www.learnmathclass.com/complex-numbers/exponential-form"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Exponential Form | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/complex-numbers/exponential-form",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Exponential Form: Euler's Formula & Identity | Learn Math Class",
+      description: "Master the exponential form z = re^(iθ) of complex numbers. Learn Euler's formula, Euler's identity, and how to multiply, divide, and find powers and roots using exponential notation.",
+      keywords: keyWords.join(", "),
+      url: "/complex-numbers/exponential-form",
+      name: "Exponential Form of Complex Numbers"
+    },
+  }
+}
    }
 
-export default function ExponentialFormPage({seoData,sectionsContent , introContent}) {
+// export default function ExponentialFormPage({seoData,sectionsContent , introContent}) {
 
-    
+export default function ExponentialFormPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+
   const genericSections=[
     {
         id:'1',
@@ -610,7 +781,7 @@ export default function ExponentialFormPage({seoData,sectionsContent , introCont
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -651,6 +822,47 @@ export default function ExponentialFormPage({seoData,sectionsContent , introCont
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

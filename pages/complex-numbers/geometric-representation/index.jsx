@@ -12,7 +12,23 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+ const keyWords = [
+  "complex plane",
+  "Argand diagram",
+  "geometric representation complex numbers",
+  "plot complex numbers",
+  "real axis imaginary axis",
+  "complex number as vector",
+  "visualize complex numbers",
+  "complex plane quadrants",
+  "conjugate reflection",
+  "complex number coordinates",
+  "vector addition complex numbers",
+  "complex multiplication rotation",
+  "modulus distance",
+  "complex numbers two dimensions",
+  "graphing complex numbers"
+]
 
   // •
 
@@ -306,26 +322,180 @@ General multiplication combines rotation with scaling. The product $z_1 \\cdot z
 }
 
 
+const faqQuestions = {
+  obj1: {
+    question: "What is the complex plane?",
+    answer: "The complex plane is a two-dimensional coordinate system where every complex number z = a + bi corresponds to a unique point (a, b). The horizontal axis represents real numbers and the vertical axis represents imaginary numbers. It is also called the Argand diagram."
+  },
+  obj2: {
+    question: "What is an Argand diagram?",
+    answer: "An Argand diagram is another name for the complex plane, honoring Jean-Robert Argand who published the geometric interpretation in 1806. It visualizes complex numbers as points where the horizontal position gives the real part and the vertical position gives the imaginary part."
+  },
+  obj3: {
+    question: "How do you plot a complex number on the complex plane?",
+    answer: "To plot z = a + bi, move 'a' units horizontally (right if positive, left if negative) and 'b' units vertically (up if positive, down if negative). The complex number 3 + 2i becomes the point (3, 2), located 3 units right and 2 units up from the origin."
+  },
+  obj4: {
+    question: "What are the real axis and imaginary axis?",
+    answer: "The real axis is the horizontal axis of the complex plane, containing all real numbers at points (a, 0). The imaginary axis is the vertical axis, containing all pure imaginary numbers at points (0, b). They intersect at the origin, which represents zero."
+  },
+  obj5: {
+    question: "Why is zero both real and pure imaginary?",
+    answer: "Zero, written as 0 = 0 + 0i, is the only number that lies on both axes simultaneously. It has zero imaginary part (making it real) and zero real part (making it pure imaginary). The origin (0, 0) is where the real and imaginary axes cross."
+  },
+  obj6: {
+    question: "How are complex numbers like vectors?",
+    answer: "A complex number z = a + bi can be viewed as a vector (arrow) from the origin to the point (a, b). The horizontal component is a, the vertical component is b. Vector addition of complex numbers follows the parallelogram rule, matching algebraic addition exactly."
+  },
+  obj7: {
+    question: "What is the geometric meaning of complex addition?",
+    answer: "Complex addition corresponds to vector addition using the parallelogram or tip-to-tail rule. Place the tail of z₂ at the head of z₁; the sum extends from the origin to the new endpoint. This matches the algebraic rule (a+c) + (b+d)i perfectly."
+  },
+  obj8: {
+    question: "What does the conjugate look like geometrically?",
+    answer: "The conjugate z̄ of z = a + bi is a reflection across the real axis. The point (a, b) maps to (a, -b) — same horizontal position, opposite vertical position. The real axis acts as a mirror, with points above reflecting to corresponding points below."
+  },
+  obj9: {
+    question: "Why can't complex numbers be ordered like real numbers?",
+    answer: "Real numbers form a one-dimensional line where 'rightward means greater.' Complex numbers fill a two-dimensional plane with no consistent direction for 'greater than.' We cannot say whether 3+2i or 1+5i is larger because neither dominates in a meaningful way."
+  },
+  obj10: {
+    question: "Can you compare complex numbers at all?",
+    answer: "While z₁ < z₂ is meaningless, you can compare moduli. The modulus |z| measures distance from the origin, so |3+4i| = 5 exceeds |1+i| = √2. However, many different complex numbers share the same modulus (all points on a circle), so this doesn't provide a full ordering."
+  },
+  obj11: {
+    question: "What is the geometric meaning of the modulus?",
+    answer: "The modulus |z| = √(a² + b²) is the distance from the origin to the point (a, b) in the complex plane. It equals the length of the vector representing z. The Pythagorean theorem directly yields this formula from the horizontal and vertical components."
+  },
+  obj12: {
+    question: "What does multiplication by i do geometrically?",
+    answer: "Multiplying by i rotates a complex number 90° counterclockwise around the origin. The number 1 becomes i, i becomes -1, -1 becomes -i, and -i returns to 1. This rotation property is fundamental to understanding complex multiplication geometrically."
+  },
+  obj13: {
+    question: "What is the geometric meaning of complex multiplication?",
+    answer: "Complex multiplication combines scaling and rotation. The product z₁·z₂ has modulus |z₁||z₂| (lengths multiply) and its angle from the positive real axis equals the sum of the individual angles (rotations add). Multiply magnitudes, add angles."
+  },
+  obj14: {
+    question: "What is the geometric meaning of subtraction z₁ - z₂?",
+    answer: "The difference z₁ - z₂ represents the vector pointing from z₂ to z₁. Its modulus |z₁ - z₂| gives the distance between the two complex numbers in the plane. Subtraction answers: how far and in what direction from z₂ to reach z₁?"
+  }
+}
 
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Geometric Representation | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/complex-numbers/geometric-representation",
-         name: "name"
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Geometric Representation of Complex Numbers",
+    "description": "Learn to visualize complex numbers on the complex plane (Argand diagram). Plot points, understand vectors, see conjugates as reflections, and discover why complex numbers can't be ordered.",
+    "url": "https://www.learnmathclass.com/complex-numbers/geometric-representation",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Complex Plane and Argand Diagram"
+    },
+    "teaches": [
+      "The complex plane and Argand diagram",
+      "Real axis and imaginary axis structure",
+      "Plotting complex numbers as points",
+      "Vector interpretation of complex numbers",
+      "Conjugate as reflection across the real axis",
+      "Why complex numbers cannot be ordered",
+      "Geometric meaning of complex operations"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Complex Numbers",
+        "item": "https://www.learnmathclass.com/complex-numbers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Geometric Representation",
+        "item": "https://www.learnmathclass.com/complex-numbers/geometric-representation"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Geometric Representation | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/complex-numbers/geometric-representation",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Complex Plane & Argand Diagram: Visualize ℂ | Learn Math Class",
+      description: "Learn to visualize complex numbers on the complex plane (Argand diagram). Plot points, understand vectors, see conjugates as reflections, and discover why complex numbers can't be ordered.",
+      keywords: keyWords.join(", "),
+      url: "/complex-numbers/geometric-representation",
+      name: "Geometric Representation of Complex Numbers"
+    },
+  }
+}
    }
 
-export default function GeometricRepresentationPage({seoData,sectionsContent , introContent}) {
-
+// export default function GeometricRepresentationPage({seoData,sectionsContent , introContent}) {
+export default function GeometricRepresentationPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -477,7 +647,7 @@ export default function GeometricRepresentationPage({seoData,sectionsContent , i
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -518,6 +688,47 @@ export default function GeometricRepresentationPage({seoData,sectionsContent , i
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

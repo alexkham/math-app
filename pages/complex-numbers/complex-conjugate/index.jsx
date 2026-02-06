@@ -11,9 +11,23 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  "complex conjugate",
+  "conjugate of complex number",
+  "z bar notation",
+  "complex conjugate definition",
+  "conjugate properties",
+  "z times z bar",
+  "conjugate pairs",
+  "reflection real axis",
+  "divide complex numbers conjugate",
+  "conjugate modulus",
+  "z* notation",
+  "real part conjugate",
+  "imaginary part conjugate",
+  "conjugate polynomial roots",
+  "complex number division"
+]
   // •
 
 //   \u2022 First item
@@ -377,27 +391,182 @@ Conjugate pairs multiply to give real quadratic factors. If $z_0 = a + bi$ is a 
   `
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "What is the complex conjugate?",
+    answer: "For a complex number z = a + bi, the conjugate is z̄ = a - bi. It preserves the real part while negating the imaginary part. For example, the conjugate of 3 + 2i is 3 - 2i. Geometrically, it represents reflection across the real axis."
+  },
+  obj2: {
+    question: "What does z̄ or z* notation mean?",
+    answer: "Both z̄ (overline) and z* (asterisk) denote the complex conjugate. The overline notation dominates in pure mathematics, while the asterisk appears frequently in physics and engineering, especially in quantum mechanics and signal processing. They represent the identical operation."
+  },
+  obj3: {
+    question: "What is the geometric meaning of the conjugate?",
+    answer: "The conjugate is reflection across the real axis in the complex plane. If z = a + bi corresponds to point (a, b), then z̄ = a - bi corresponds to (a, -b). The real axis acts as a mirror, with points above reflecting to corresponding points below."
+  },
+  obj4: {
+    question: "What is z times z̄ equal to?",
+    answer: "The product z·z̄ equals |z|², the square of the modulus. For z = a + bi, we get z·z̄ = (a + bi)(a - bi) = a² + b². This product is always a real, non-negative number, and equals zero only when z = 0."
+  },
+  obj5: {
+    question: "What happens when you conjugate twice?",
+    answer: "Conjugating twice returns the original number: z̄̄ = z. This is called the involution property. Geometrically, reflecting across the real axis twice brings every point back to its starting position."
+  },
+  obj6: {
+    question: "Does conjugation distribute over addition and multiplication?",
+    answer: "Yes. For addition: the conjugate of z₁ + z₂ equals z̄₁ + z̄₂. For multiplication: the conjugate of z₁·z₂ equals z̄₁·z̄₂. These properties also extend to subtraction, division, and powers."
+  },
+  obj7: {
+    question: "How do you know if a complex number is real using conjugates?",
+    answer: "A complex number z is real if and only if z = z̄. Real numbers sit on the real axis, which is the mirror line for conjugation. Points on a mirror remain fixed under reflection, so z = z̄ characterizes exactly the real numbers."
+  },
+  obj8: {
+    question: "How do you know if a complex number is pure imaginary using conjugates?",
+    answer: "A complex number z is pure imaginary if and only if z̄ = -z. Pure imaginary numbers sit on the imaginary axis, perpendicular to the mirror. Reflection sends each to its opposite through the origin, making the conjugate equal the negative."
+  },
+  obj9: {
+    question: "How does the conjugate help with complex division?",
+    answer: "To divide w/z, multiply both numerator and denominator by z̄: (w/z)·(z̄/z̄) = (w·z̄)/(z·z̄) = (w·z̄)/|z|². The denominator becomes real (|z|²), allowing the quotient to be written in standard form a + bi."
+  },
+  obj10: {
+    question: "What is the formula for the real and imaginary parts using conjugates?",
+    answer: "Re(z) = (z + z̄)/2 and Im(z) = (z - z̄)/(2i). The sum z + z̄ = 2a isolates the real part, and the difference z - z̄ = 2bi isolates the imaginary part. These identities appear frequently in calculations."
+  },
+  obj11: {
+    question: "Does the conjugate preserve the modulus?",
+    answer: "Yes, |z̄| = |z|. The conjugate has the same distance from the origin as the original number because reflection across a line through the origin does not change radial distance. Algebraically, |a - bi| = √(a² + b²) = |a + bi|."
+  },
+  obj12: {
+    question: "Why do complex roots of real polynomials come in conjugate pairs?",
+    answer: "Because conjugation distributes over polynomial evaluation and leaves real coefficients unchanged. If p(z₀) = 0 for polynomial p with real coefficients, then p(z̄₀) = p̄(z₀) = 0̄ = 0. So z̄₀ is also a root."
+  },
+  obj13: {
+    question: "Is the conjugate the same as negation?",
+    answer: "No. The negative of 3 + 2i is -3 - 2i (both signs change). The conjugate of 3 + 2i is 3 - 2i (only the imaginary sign changes). Confusing these operations leads to errors. They coincide only for pure imaginary numbers."
+  }
+}
 
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Complex Conjugate",
+    "description": "Master the complex conjugate: definition, geometric meaning as reflection, properties, the identity z·z̄ = |z|², applications to division, and conjugate pairs in polynomial roots.",
+    "url": "https://www.learnmathclass.com/complex-numbers/complex-conjugate",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Complex Conjugate"
+    },
+    "teaches": [
+      "Definition of complex conjugate z̄ = a - bi",
+      "Geometric interpretation as reflection across real axis",
+      "Properties: involution, additivity, multiplicativity",
+      "The identity z·z̄ = |z|²",
+      "Classification theorems for real and pure imaginary numbers",
+      "Using conjugates for complex division",
+      "Conjugate pairs in real polynomial roots"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Complex Conjugate Page | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/complex-numbers/complex-conjugate",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Complex Numbers",
+        "item": "https://www.learnmathclass.com/complex-numbers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Complex Conjugate",
+        "item": "https://www.learnmathclass.com/complex-numbers/complex-conjugate"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Complex Conjugate Page | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/complex-numbers/complex-conjugate",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Complex Conjugate: Definition & Properties | Learn Math Class",
+      description: "Master the complex conjugate: definition, geometric meaning as reflection, properties, the identity z·z̄ = |z|², applications to division, and conjugate pairs in polynomial roots.",
+      keywords: keyWords.join(", "),
+      url: "/complex-numbers/complex-conjugate",
+      name: "Complex Conjugate"
+    },
+  }
+}
    }
 
-export default function ComplexConjugatePage({seoData,sectionsContent , introContent}) {
+// export default function ComplexConjugatePage({seoData,sectionsContent , introContent}) {
 
+
+export default function ComplexConjugatePage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -549,7 +718,7 @@ export default function ComplexConjugatePage({seoData,sectionsContent , introCon
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -590,6 +759,47 @@ export default function ComplexConjugatePage({seoData,sectionsContent , introCon
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

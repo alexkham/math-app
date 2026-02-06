@@ -42,6 +42,7 @@ import summaries from './api/db/tables/set-theory/summaries';
 import GenericNavbar from './components/nav-bar2/GenericNavbar';
 import MyNavbar3 from './components/nav-bar3/MyNavbar3';
 import Head from 'next/head';
+// import Footer  from './components/page-components/footer/Footer'
 
 
 export function generateStaticParams() {
@@ -359,6 +360,7 @@ themeName='dark'
      
    
      <br></br>
+     {/* <Footer/> */}
      
     </div>
   )
