@@ -636,13 +636,29 @@ From this single definition, an entire class of numbers emerges. Pure imaginary 
 
 The powers of $i$ follow a cyclic pattern that repeats every four steps: $i^1 = i$, $i^2 = -1$, $i^3 = -i$, $i^4 = 1$, then back to $i$. This cycle provides a shortcut for computing any power of $i$ — simply divide the exponent by 4 and use the remainder.`,
   after: ``,
-  link: '',
+  link: '/complex-numbers/imaginary-numbers',
 },
 
 obj2: {
   title: `Algebraic Representation and the Complex Conjugate`,
   before: ``,
-  content: `When we write $z = a + bi$, the symbols $a$ and $b$ represent ordinary real numbers. Mathematicians assigned names to these components: $Re(z) = a$ labels the horizontal contribution, while $Im(z) = b$ labels the vertical one. Students often stumble here — the quantity $Im(z)$ equals $b$ alone, not $bi$. That coefficient standing before $i$ is itself a member of $\\mathbb{R}$.
+  content: `Every complex number can be written in [algebraic form](!/complex-numbers/algebraic-form) (also called **standard form**):
+
+$$z = a + bi$$
+
+The variables $a$ and $b$ represent ordinary real numbers, while $i$ is the imaginary unit satisfying:
+
+$$i^2 = -1$$
+
+The letters $a$ and $b$ are conventional choices — using $x$ and $y$ or any other symbols works equally well.
+
+Mathematicians assigned names to these components. The value $a$ is called the **real part**, and the value $b$ is called the **imaginary part**:
+
+$$Re(z) = a \\quad \\text{and} \\quad Im(z) = b$$
+
+Note that the imaginary part is $b$ itself — a real number — not $bi$. The term "imaginary part" indicates which component of the number the value describes, not the nature of $b$ as a quantity.
+
+This representation provides the foundation for arithmetic, comparison, and manipulation of complex numbers. For a complete treatment of the [algebraic form](!/complex-numbers/algebraic-form), including equality conditions, conjugate identities, and classification theorems, see the dedicated page.
 
 For any $z = a + bi$, we construct its [conjugate](!/complex-numbers/complex-conjugate) by flipping the sign in front of $b$: thus $\\bar{z} = a - bi$. What does this operation actually do? On the [complex plane](!/complex-numbers/geometric-representation), it mirrors the point through the horizontal axis. Studying this picture makes the abstract definition concrete — the conjugate sits at equal distance from the real axis, but on the opposite side.
 
@@ -650,7 +666,7 @@ Why does this matter? When $z$ meets $\\bar{z}$ through multiplication, somethin
 
 The conjugate operation carries deep significance throughout complex mathematics. It enables division by eliminating imaginary numbers from denominators. It connects directly to the modulus through the identity $|z|^2 = z \\cdot \\bar{z}$. It preserves arithmetic structure: the conjugate of a sum equals the sum of conjugates, and the conjugate of a product equals the product of conjugates. These properties make the conjugate indispensable for proofs, simplifications, and computations across every branch of complex analysis. A [dedicated section](!/complex-numbers/complex-conjugate) explores the conjugate in full detail — its properties, its geometric meaning, and its applications to solving equations and simplifying expressions.`,
   after: ``,
-  link: '',
+  link: '/complex-numbers/algebraic-form',
 },
   
     obj3: {
@@ -664,7 +680,7 @@ The conjugate operation carries deep significance throughout complex mathematics
 
 [Division](!/complex-numbers/operations) presents the only genuine challenge. A complex number in the denominator violates standard mathematical convention — we need real denominators for final answers. The solution employs the [conjugate](!/complex-numbers/complex-conjugate): multiply both numerator and denominator by the conjugate of the denominator. This works because $z \\cdot \\bar{z}$ always produces a real number. The fraction $\\frac{3 + 2i}{1 - 4i}$ transforms through multiplication by $\\frac{1 + 4i}{1 + 4i}$, converting the denominator to the real value $1 + 16 = 17$ and allowing us to express the result in standard $a + bi$ form.`,
   after: ``,
-  link: '',
+  link: '/complex-numbers/operations',
 },
 
     obj4: {
@@ -680,7 +696,7 @@ One fundamental difference separates $\\mathbb{C}$ from $\\mathbb{R}$: complex n
 
 The [Triangle Inequality](!/complex-numbers/absolute-value) governs how distances combine: $|z_1 + z_2| \\leq |z_1| + |z_2|$. Geometrically, this says the direct path between two points never exceeds the detour through the origin. This inequality appears constantly in analysis and provides essential bounds for estimation and proof.`,
   after: ``,
-  link: '',
+  link: '/complex-numbers/geometric-representation',
 },
 
     obj5: {
@@ -714,7 +730,7 @@ Certain angles deserve memorization. Numbers on the positive real axis have argu
 
 The true power of trigonometric form reveals itself in multiplication and division. When two numbers multiply, their moduli multiply and their arguments add: $z_1 \\cdot z_2 = r_1 r_2 \\text{cis}(\\theta_1 + \\theta_2)$. Division works inversely — moduli divide, arguments subtract. These elegant rules transform tedious algebraic expansion into simple arithmetic on lengths and angles.`,
   after: ``,
-  link: '',
+  link: '/complex-numbers/trigonometric-form',
 },
 
     obj7: {
@@ -730,7 +746,7 @@ Powers reduce to almost trivial calculation. Raising $z = re^{i\\theta}$ to the 
 
 One specialization of Euler's formula achieves legendary status among mathematicians. Setting $\\theta = \\pi$ produces $e^{i\\pi} = \\cos\\pi + i\\sin\\pi = -1$, which rearranges to $e^{i\\pi} + 1 = 0$. This single equation — known as Euler's Identity — connects five of mathematics' most fundamental constants: $e$, $i$, $\\pi$, $1$, and $0$. It unites exponential growth, imaginary numbers, circular geometry, multiplicative identity, and additive identity into one compact statement, often celebrated as the most beautiful formula in all of mathematics.`,
   after: ``,
-  link: '',
+  link: '/complex-numbers/exponential-form',
 },
 
     obj8: {
@@ -746,7 +762,7 @@ If $w = R\\text{cis}\\phi$, the $n$-th roots follow the formula $z_k = R^{1/n}\\
 
 The roots of unity — solutions to $z^n = 1$ — deserve special attention. Since $1 = 1\\text{cis}(0°)$, the $n$-th roots of unity are $z_k = \\text{cis}\\left(\\frac{360°k}{n}\\right)$. For $n = 4$, the fourth roots of unity are $1$, $i$, $-1$, and $-i$, forming a square on the unit circle. For $n = 6$, we obtain a regular hexagon. These roots appear throughout mathematics: in Fourier analysis, in polynomial factorization, in signal processing, and in the study of symmetry. The primitive root $\\omega = \\text{cis}\\left(\\frac{360°}{n}\\right)$ generates all others as powers: $\\omega^0, \\omega^1, \\omega^2, \\ldots, \\omega^{n-1}$.`,
   after: ``,
-  link: '',
+  link: '/complex-numbers/demoivre-theorem',
 },
 
     obj9: {
@@ -762,7 +778,7 @@ Polynomials with real coefficients exhibit special behavior: their non-real root
 
 Certain equations showcase the interplay between conjugation and powers. The equation $z^n = \\bar{z}$ yields exactly $n + 2$ solutions: zero itself, plus $n + 1$ values distributed on the unit circle. Solving such equations requires translating into [trigonometric form](!/complex-numbers/trigonometric-form), applying the constraint that $r^n e^{in\\theta} = re^{-i\\theta}$, and extracting the permissible values of $r$ and $\\theta$. These techniques, combining algebraic manipulation with geometric insight, represent the full power of complex number theory applied to equation solving.`,
   after: ``,
-  link: '',
+  link: '/complex-numbers/equations-polynomials',
 },
     obj10:{
       title:``,

@@ -314,7 +314,58 @@ Additional identities and applications appear in the [complex conjugate](!/compl
       after:``,
       link:'',
   
-    }
+    },
+    obj21: {
+  title: `The Real Part`,
+  before: ``,
+  content: `The real part of a complex number extracts its horizontal component. For any number written in algebraic form:
+
+$$z = a + bi$$
+
+the real part is the value $a$, denoted:
+
+$$Re(z) = a$$
+
+This function accepts a complex number as input and returns a real number as output. No matter how elaborate the original expression, $Re(z)$ always belongs to the real number line.
+
+On the [complex plane](!/complex-numbers/geometric-representation), the real part measures horizontal displacement from the origin — movement along the real axis. The number $z = 5 - 3i$ sits at coordinates $(5, -3)$, so $Re(z) = 5$ gives the horizontal position.
+
+A useful identity connects the real part to the [conjugate](!/complex-numbers/complex-conjugate):
+
+$$Re(z) = \\frac{z + \\bar{z}}{2}$$
+
+Adding a number to its conjugate cancels the imaginary terms, leaving twice the real part. This identity often simplifies calculations where extracting the real component matters.
+
+Real numbers are characterized by having no imaginary contribution: $z$ is real if and only if $Re(z) = z$. Equivalently, real numbers satisfy $Im(z) = 0$.`,
+  after: ``,
+  link: '',
+},
+
+obj22: {
+  title: `The Imaginary Part`,
+  before: ``,
+  content: `Given a complex number in algebraic form:
+
+$$z = a + bi$$
+
+the imaginary part captures the coefficient multiplying $i$:
+
+$$Im(z) = b$$
+
+Students frequently misunderstand this definition. The output is $b$ — a real number — not the product $bi$. When $z = 7 + 4i$, the imaginary part equals $4$, an ordinary real value. The word "imaginary" in the name refers to the role this component plays within $z$, not to any special nature of $b$ itself.
+
+Geometrically, $Im(z)$ specifies how far the point lies above or below the horizontal axis in the [complex plane](!/complex-numbers/geometric-representation). Consider $z = 5 - 3i$, located at $(5, -3)$. Here $Im(z) = -3$, indicating three units below the real axis. Dropping the minus sign would place the point incorrectly.
+
+The [conjugate](!/complex-numbers/complex-conjugate) provides an algebraic route to isolate this component:
+
+$$Im(z) = \\frac{z - \\bar{z}}{2i}$$
+
+Taking the difference $z - \\bar{z}$ eliminates the real terms entirely, leaving only the imaginary contribution.
+
+A complex number qualifies as [pure imaginary](!/complex-numbers/imaginary-numbers) precisely when its real part vanishes while the number itself remains nonzero — that is, when $Re(z) = 0$ and $z \\neq 0$.`,
+  after: ``,
+  link: '',
+},
   
   }
 
@@ -514,6 +565,22 @@ export default function AlgebraicFormPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'21',
+        title:sectionsContent.obj21.title,
+        link:sectionsContent.obj21.link,
+        content:[
+          sectionsContent.obj21.content,
+        ]
+    },
+    {
+        id:'22',
+        title:sectionsContent.obj22.title,
+        link:sectionsContent.obj22.link,
+        content:[
+          sectionsContent.obj22.content,
         ]
     },
     {
