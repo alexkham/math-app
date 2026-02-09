@@ -440,7 +440,7 @@ export default function ComplexAddition() {
           {/* geometric note */}
           <div style={{ marginTop: 18, fontSize: 11, lineHeight: 1.55, padding: "10px 11px", borderRadius: 5, borderLeft: `2px solid ${t.stepNoteBorder}`, background: t.stepNoteBg, color: t.textMuted }}>
             <strong style={{ color: t.textMid }}>Geometric interpretation</strong><br />
-            Place z₂'s tail at z₁'s tip. The diagonal of the parallelogram formed by the two vectors gives the sum.
+            Place z₂&apos;s tail at z₁&apos;s tip. The diagonal of the parallelogram formed by the two vectors gives the sum.
           </div>
 
           {/* all three representations */}
