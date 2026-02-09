@@ -72,7 +72,7 @@ export default function MathSymbolsComplexNumbersPage({ symbolsData, meta, menuI
           className="title"
           style={{
             margin: 'auto',
-            width: '85%',
+            width: '80%',
           }}
         >
           <DataWrapper data={symbolsData} />
