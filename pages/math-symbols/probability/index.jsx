@@ -20,7 +20,7 @@ export default function MathSymbolsProbabilityPage({ symbolsData, meta ,menuItem
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="canonical" href={meta.canonical} />
       </Head>
-      <GenericNavbar />
+      {/* <GenericNavbar /> */}
       <br />
       <br />
       <br />
@@ -59,7 +59,7 @@ export default function MathSymbolsProbabilityPage({ symbolsData, meta ,menuItem
         <DataWrapper data={symbolsData} />
       </div>
       </div>
-      <ScrollUpButton />
+      {/* <ScrollUpButton /> */}
     </>
   );
 }
@@ -100,6 +100,10 @@ export async function getStaticProps() {
         // icon: <Home />,
         link: "/math-symbols/combinatorics"
       },
+       {
+          title: "Complex Numbers",
+          link: "/math-symbols/complex-numbers"  // Example without icon
+        },
       // {
       //   title: "Probability",
       //   // icon: <Home />,

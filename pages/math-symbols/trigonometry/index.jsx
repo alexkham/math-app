@@ -107,6 +107,10 @@ export async function getStaticProps() {
         // icon: <Home />,
         link: "/math-symbols/probability"
       },
+       {
+          title: "Complex Numbers",
+          link: "/math-symbols/complex-numbers"  // Example without icon
+        },
     // {
     //   title: "Settings",
     //   link: "/settings"  // Example without icon
