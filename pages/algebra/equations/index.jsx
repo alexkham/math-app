@@ -8,6 +8,7 @@ import { equationsData } from '@/app/api/db/diagrams/algebra/equations'
 import FourPanel from '@/app/components/page-components/lists/FourPanel'
 import TreeStructure2 from '@/app/components/tree-structure/TreeItem2'
 import Head from 'next/head'
+import '../../../pages/pages.css'
 
 
 export async function getStaticProps(){

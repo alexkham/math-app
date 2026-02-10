@@ -6,7 +6,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
-import '../../../../pages/pages.css'
+import '../../../pages/pages.css'
 import Head from 'next/head'
 
 
@@ -57,15 +57,33 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    obj1:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
+    // obj1:{
+    //   title:``,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
   
   
-    },
+    // },
+
+    obj1: {
+  title: `What is a Polynomial?`,
+  content: `A polynomial in the variable $x$ is an expression of the form:
+
+$$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_2x^2 + a_1x + a_0$$
+
+The components are straightforward. The variable $x$ represents an unknown quantity. The coefficients $a_0, a_1, \\ldots, a_n$ are fixed numbers — typically real numbers, though complex coefficients appear in advanced contexts. The exponents on $x$ must be non-negative integers: $0, 1, 2, 3$, and so on.
+
+The expression $3x^4 - 2x^2 + 5x - 7$ is a polynomial. So is $x^2 + 1$. So is the constant $5$, which can be written as $5x^0$. The simplest polynomial is just a number; the most complex have no upper limit on degree or number of terms.
+
+Certain expressions fail to qualify. The expression $x^{-2} + 3$ contains a negative exponent and is not a polynomial. The expression $\\sqrt{x} + 1$ involves a fractional exponent ($x^{1/2}$) and is not a polynomial. The expression $\\frac{1}{x} + 4$ places the variable in a denominator, equivalent to $x^{-1}$, and is not a polynomial. The expression $2^x$ has the variable in the exponent rather than the base and is not a polynomial. Each of these violates the requirement that exponents be non-negative integers.
+
+Polynomials are closed under addition, subtraction, and multiplication — combining two polynomials through these operations always produces another polynomial. Division, however, can break the pattern: $\\frac{x^2 + 1}{x}$ is not a polynomial.`,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj2:{
       title:``,
       content:``,
@@ -191,8 +209,8 @@ export async function getStaticProps(){
 
   const introContent = {
   id: "intro",
-  title: "Seeing Numbers in Two Dimensions",
-  content: ``
+  title: "Expressions Built from Powers",
+  content: `A polynomial is an algebraic expression constructed from variables, coefficients, and non-negative integer exponents, combined through addition, subtraction, and multiplication. These expressions appear throughout mathematics — from simple linear equations to complex models in physics and engineering. Understanding polynomials means understanding the building blocks of algebra itself.`
 }
 
 
@@ -203,10 +221,10 @@ export async function getStaticProps(){
          sectionsContent,
          introContent,
           seoData: {
-        title: "Geometric Representation | Learn Math Class",
+        title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/complex-numbers/geometric-representation",
+        url: "/url",
          name: "name"
       },
         
