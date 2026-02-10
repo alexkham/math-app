@@ -2112,9 +2112,9 @@ const CheatSheet = ({
               <button onClick={handlePrint} style={styles.button}>
                 🖨️ Print
               </button>
-              <button onClick={handleDownload} style={styles.button}>
+              {/* <button onClick={handleDownload} style={styles.button}>
                 📥 Download HTML
-              </button>
+              </button> */}
             </div>
           )}
         </div>
