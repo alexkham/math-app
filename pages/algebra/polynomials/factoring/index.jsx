@@ -11,8 +11,23 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
+const keyWords = [
+  "factoring polynomials",
+  "factor polynomial",
+  "factoring techniques",
+  "greatest common factor GCF",
+  "factoring by grouping",
+  "factor trinomials",
+  "difference of squares",
+  "perfect square trinomial",
+  "sum of cubes",
+  "difference of cubes",
+  "AC method factoring",
+  "factor quadratic",
+  "irreducible polynomial",
+  "factoring strategy",
+  "how to factor polynomials"
+]
 
   // •
 
@@ -399,27 +414,184 @@ Stopping too early leaves factors on the table. After obtaining $(x^2 + 4)(x^2 -
 That reverse process is factoring, and it underpins much of algebra. Solving [polynomial equations](!/algebra/polynomials/roots), simplifying rational expressions, and analyzing how polynomials behave all depend on the ability to decompose a polynomial into simpler multiplicative pieces. The sections that follow develop the methods for doing so, from extracting common factors through recognizing special patterns to handling polynomials of any degree.`
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "What does it mean to factor a polynomial?",
+    answer: "Factoring a polynomial means writing it as a product of two or more polynomials of lower degree. For example, x² + 5x + 6 factors as (x + 2)(x + 3). The factored form reveals the roots directly — each factor (x - r) identifies a root at x = r."
+  },
+  obj2: {
+    question: "What is the first step in factoring any polynomial?",
+    answer: "Always check for a greatest common factor (GCF) first. The GCF is the largest expression that divides evenly into every term. For 6x³ + 9x² - 3x, the GCF is 3x, giving 3x(2x² + 3x - 1). This simplifies all subsequent steps."
+  },
+  obj3: {
+    question: "How do you factor by grouping?",
+    answer: "Split the polynomial into pairs of terms, factor each pair separately, then look for a common binomial factor. For x³ + 2x² + 3x + 6: group as (x³ + 2x²) + (3x + 6), factor to get x²(x + 2) + 3(x + 2), then factor out (x + 2) to get (x² + 3)(x + 2)."
+  },
+  obj4: {
+    question: "How do you factor a trinomial x² + bx + c?",
+    answer: "Find two numbers m and n where m·n = c and m + n = b. If such numbers exist, the trinomial factors as (x + m)(x + n). For x² + 7x + 12, the numbers 3 and 4 satisfy 3·4 = 12 and 3 + 4 = 7, so it factors as (x + 3)(x + 4)."
+  },
+  obj5: {
+    question: "What is the AC method for factoring trinomials?",
+    answer: "For ax² + bx + c, multiply a·c, find two numbers m and n where m·n = ac and m + n = b, then rewrite the middle term and factor by grouping. For 6x² + 11x + 4: ac = 24, use 3 and 8, rewrite as 6x² + 3x + 8x + 4, then group to get (3x + 4)(2x + 1)."
+  },
+  obj6: {
+    question: "What is the difference of squares formula?",
+    answer: "The identity a² - b² = (a + b)(a - b) factors any expression that is one perfect square minus another. For 9x² - 16: recognize (3x)² - 4², so it factors as (3x + 4)(3x - 4). The sum of squares a² + b² does not factor over the reals."
+  },
+  obj7: {
+    question: "How do you recognize a perfect square trinomial?",
+    answer: "A perfect square trinomial has form a² + 2ab + b² = (a + b)² or a² - 2ab + b² = (a - b)². Check: first and last terms must be perfect squares, and the middle term must equal twice the product of their square roots. For x² + 10x + 25: x², 5², and 2·x·5 = 10x, so it equals (x + 5)²."
+  },
+  obj8: {
+    question: "What are the sum and difference of cubes formulas?",
+    answer: "a³ + b³ = (a + b)(a² - ab + b²) and a³ - b³ = (a - b)(a² + ab + b²). The linear factor has the same sign as the original; the quadratic factor follows SOAP: Same, Opposite, Always Positive for the signs. For x³ + 8: (x + 2)(x² - 2x + 4)."
+  },
+  obj9: {
+    question: "How do you factor higher-degree polynomials?",
+    answer: "Look for patterns like 'quadratic in disguise' where substitution helps (e.g., x⁴ + 5x² + 6 becomes u² + 5u + 6 with u = x²). Apply difference of squares repeatedly. Use known roots — if P(r) = 0, then (x - r) is a factor and polynomial division gives the remaining quotient."
+  },
+  obj10: {
+    question: "What is an irreducible polynomial?",
+    answer: "A polynomial is irreducible over a number system when it cannot be factored into lower-degree polynomials with coefficients in that system. x² + 1 is irreducible over the reals (no real roots) but factors as (x + i)(x - i) over the complex numbers."
+  },
+  obj11: {
+    question: "Why doesn't the sum of squares factor over the reals?",
+    answer: "The expression a² + b² has no real factorization because its roots are complex: ±bi. Over the complex numbers, a² + b² = (a + bi)(a - bi). But with only real numbers available, no two linear factors multiply to give a² + b²."
+  },
+  obj12: {
+    question: "What is the most common factoring mistake?",
+    answer: "Skipping the GCF check is the most frequent error. The polynomial 3x³ - 12x looks difficult until you extract 3x to get 3x(x² - 4) = 3x(x + 2)(x - 2). Another common mistake is sign errors in trinomials — always verify by multiplying the factors back together."
+  },
+  obj13: {
+    question: "How do you know if a polynomial can be factored over the integers?",
+    answer: "For trinomials ax² + bx + c, check the discriminant b² - 4ac. If it's a perfect square, the polynomial factors over the integers. If negative, there are no real roots and it's irreducible over the reals. The rational root theorem helps test candidates for higher-degree polynomials."
+  }
+}
 
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Factoring Polynomials",
+    "description": "Master factoring polynomials: GCF, grouping, trinomials, difference of squares, perfect square trinomials, sum and difference of cubes, higher-degree techniques, and irreducible polynomials.",
+    "url": "https://www.learnmathclass.com/algebra/polynomials/factoring",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Factoring Polynomials"
+    },
+    "teaches": [
+      "Definition and purpose of factoring",
+      "Greatest common factor extraction",
+      "Factoring by grouping",
+      "Factoring trinomials: simple and AC method",
+      "Special patterns: difference of squares, perfect squares, cubes",
+      "Higher-degree polynomial techniques",
+      "Irreducible polynomials and factoring strategy"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Factoring Polynomials | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/algebra/polynomials/factoring",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Algebra",
+        "item": "https://www.learnmathclass.com/algebra"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Polynomials",
+        "item": "https://www.learnmathclass.com/algebra/polynomials"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Factoring",
+        "item": "https://www.learnmathclass.com/algebra/polynomials/factoring"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Factoring Polynomials | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/algebra/polynomials/factoring",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Factoring Polynomials: Techniques & Patterns | Learn Math Class",
+      description: "Master factoring polynomials: GCF, grouping, trinomials, difference of squares, perfect square trinomials, sum and difference of cubes, higher-degree techniques, and irreducible polynomials.",
+      keywords: keyWords.join(", "),
+      url: "/algebra/polynomials/factoring",
+      name: "Factoring Polynomials"
+    },
+  }
+}
    }
 
-export default function FactoringPage({seoData,sectionsContent , introContent}) {
+// export default function FactoringPage({seoData,sectionsContent , introContent}) {
 
+export default function FactoringPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -571,7 +743,7 @@ export default function FactoringPage({seoData,sectionsContent , introContent}) 
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -614,7 +786,48 @@ export default function FactoringPage({seoData,sectionsContent , introContent}) 
       })
     }}
   />
+</Head> */}
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
+    }}
+  />
 </Head>
+
    {/* <GenericNavbar/> */}
    <br/>
    <br/>

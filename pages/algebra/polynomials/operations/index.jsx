@@ -11,9 +11,23 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  "polynomial operations",
+  "add polynomials",
+  "subtract polynomials",
+  "multiply polynomials",
+  "divide polynomials",
+  "polynomial long division",
+  "synthetic division",
+  "FOIL method",
+  "combine like terms",
+  "special products polynomials",
+  "polynomial arithmetic",
+  "degree of polynomial product",
+  "polynomial quotient remainder",
+  "how to multiply polynomials",
+  "how to divide polynomials"
+]
   // •
 
 //   \u2022 First item
@@ -323,27 +337,183 @@ These relationships provide a quick sanity check. If multiplying two quadratics 
 Some of these operations are simple: adding polynomials amounts to collecting like terms. Others demand more care — polynomial long division mirrors its numerical counterpart but requires tracking multiple terms across multiple steps. Together, these operations provide the machinery behind [factoring](!/algebra/polynomials/factoring), solving [polynomial equations](!/algebra/polynomials/roots), and simplifying complex algebraic expressions.`
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "How do you add polynomials?",
+    answer: "To add polynomials, combine like terms — terms with the same variable raised to the same exponent. For (2x² + 3x - 1) + (x² - 5x + 4), group the x² terms, the x terms, and the constants: (2x² + x²) + (3x - 5x) + (-1 + 4) = 3x² - 2x + 3."
+  },
+  obj2: {
+    question: "How do you subtract polynomials?",
+    answer: "Distribute the negative sign across every term of the polynomial being subtracted, then combine like terms. For (2x² + 3x - 1) - (x² - 5x + 4), negate to get -x² + 5x - 4, then add: 2x² - x² + 3x + 5x - 1 - 4 = x² + 8x - 5."
+  },
+  obj3: {
+    question: "How do you multiply polynomials?",
+    answer: "Multiply every term of one polynomial by every term of the other, then combine like terms. For each pair, multiply coefficients and add exponents on matching variables. The degree of the product equals the sum of the degrees of the factors."
+  },
+  obj4: {
+    question: "What is the FOIL method?",
+    answer: "FOIL is a mnemonic for multiplying two binomials: First, Outer, Inner, Last. For (2x + 3)(x - 4): First 2x·x = 2x², Outer 2x·(-4) = -8x, Inner 3·x = 3x, Last 3·(-4) = -12. Combine to get 2x² - 5x - 12. FOIL only works for two binomials."
+  },
+  obj5: {
+    question: "What are the special product formulas?",
+    answer: "(a + b)² = a² + 2ab + b² and (a - b)² = a² - 2ab + b² for squaring binomials. (a + b)(a - b) = a² - b² for conjugates. For cubes: (a + b)(a² - ab + b²) = a³ + b³ and (a - b)(a² + ab + b²) = a³ - b³."
+  },
+  obj6: {
+    question: "How does polynomial long division work?",
+    answer: "Divide the leading term of the dividend by the leading term of the divisor to get the first term of the quotient. Multiply this by the divisor and subtract from the dividend. Repeat with the remainder until its degree is less than the divisor's degree."
+  },
+  obj7: {
+    question: "What is synthetic division?",
+    answer: "Synthetic division is a shortcut for dividing by (x - c) using only coefficients. Write the dividend's coefficients, place c to the left, then repeatedly multiply and add. The final row gives the quotient coefficients and remainder. It's faster than long division but only works for linear divisors."
+  },
+  obj8: {
+    question: "When can you use synthetic division?",
+    answer: "Synthetic division works only when the divisor is a linear binomial of the form (x - c). For divisors like x² + 1, 2x - 3, or any polynomial of degree two or higher, you must use polynomial long division instead."
+  },
+  obj9: {
+    question: "What is the degree of a polynomial product?",
+    answer: "The degree of a product equals the sum of the degrees of the factors. A degree-2 polynomial times a degree-3 polynomial always produces a degree-5 polynomial. This rule has no exceptions because leading terms multiply but never cancel."
+  },
+  obj10: {
+    question: "What is the degree of a polynomial sum?",
+    answer: "The degree of a sum is at most the maximum of the two input degrees. It can be less if the leading terms cancel — adding 2x³ + x and -2x³ + 5x² produces 5x² + x, a degree-2 result from two degree-3 polynomials."
+  },
+  obj11: {
+    question: "What does it mean when polynomial division has no remainder?",
+    answer: "When the remainder is zero, the divisor divides the dividend evenly, meaning the divisor is a factor of the dividend. For example, if dividing P(x) by (x - 2) gives remainder 0, then (x - 2) is a factor and x = 2 is a root of P(x)."
+  },
+  obj12: {
+    question: "What is the most common mistake in polynomial subtraction?",
+    answer: "The most common error is negating only the first term instead of every term. For (5x² + 2x - 3) - (x² - 4x + 1), you must change all signs: -x² + 4x - 1. Negating only x² gives the wrong answer. Always distribute the negative across all terms."
+  },
+  obj13: {
+    question: "How do you handle missing terms in polynomial division?",
+    answer: "Insert placeholder terms with zero coefficients. To divide x³ + 4 by x + 1, rewrite the dividend as x³ + 0x² + 0x + 4. This keeps terms aligned during subtraction steps and prevents errors in the quotient."
+  }
+}
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Operations on Polynomials",
+    "description": "Learn polynomial operations: adding, subtracting, multiplying, dividing polynomials. Master FOIL, special products, polynomial long division, synthetic division, and degree rules.",
+    "url": "https://www.learnmathclass.com/algebra/polynomials/operations",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Polynomial Operations"
+    },
+    "teaches": [
+      "Adding polynomials by combining like terms",
+      "Subtracting polynomials with sign distribution",
+      "Multiplying polynomials term by term",
+      "Special products and FOIL method",
+      "Polynomial long division",
+      "Synthetic division for linear divisors",
+      "How operations affect polynomial degree"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Operations on Polynomials | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/algebra/polynomials/operations",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Algebra",
+        "item": "https://www.learnmathclass.com/algebra"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Polynomials",
+        "item": "https://www.learnmathclass.com/algebra/polynomials"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Operations",
+        "item": "https://www.learnmathclass.com/algebra/polynomials/operations"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Operations on Polynomials | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/algebra/polynomials/operations",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Polynomial Operations: Add, Subtract, Multiply, Divide | Learn Math Class",
+      description: "Learn polynomial operations: adding, subtracting, multiplying, dividing polynomials. Master FOIL, special products, polynomial long division, synthetic division, and degree rules.",
+      keywords: keyWords.join(", "),
+      url: "/algebra/polynomials/operations",
+      name: "Operations on Polynomials"
+    },
+  }
+}
    }
 
-export default function OperationsPage({seoData,sectionsContent , introContent}) {
+// export default function OperationsPage({seoData,sectionsContent , introContent}) {
 
+
+export default function OperationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -495,7 +665,7 @@ export default function OperationsPage({seoData,sectionsContent , introContent})
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -536,6 +706,47 @@ export default function OperationsPage({seoData,sectionsContent , introContent})
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

@@ -12,8 +12,23 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
-
+  const keyWords = [
+  "roots of a polynomial",
+  "polynomial roots",
+  "zeros of a polynomial",
+  "find polynomial roots",
+  "polynomial root multiplicity",
+  "quadratic formula roots",
+  "rational root theorem",
+  "roots and factors",
+  "complex roots polynomial",
+  "conjugate pairs roots",
+  "Vieta's formulas",
+  "sum and product of roots",
+  "polynomial x-intercepts",
+  "how to find polynomial roots",
+  "number of roots polynomial"
+]
   // •
 
 //   \u2022 First item
@@ -397,26 +412,185 @@ Abandoning the Rational Root Theorem too early is another pitfall. Every candida
   content: `The roots of a polynomial are the values that make it equal zero. These special inputs reveal the polynomial's structure, connect its algebraic and geometric properties, and stand at the center of solving polynomial equations. Finding roots is one of the most fundamental tasks in algebra.`
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "What is a root of a polynomial?",
+    answer: "A root (also called a zero) of a polynomial P(x) is a value r such that P(r) = 0. For example, x = 2 is a root of x² - 5x + 6 because substituting gives 4 - 10 + 6 = 0. Roots are the inputs that make the polynomial equal zero."
+  },
+  obj2: {
+    question: "How are roots and factors of a polynomial related?",
+    answer: "If r is a root of P(x), then (x - r) is a factor. Conversely, if (x - r) divides P(x) evenly, then r is a root. The polynomial x² - 5x + 6 factors as (x - 2)(x - 3), immediately revealing roots x = 2 and x = 3."
+  },
+  obj3: {
+    question: "How many roots can a polynomial have?",
+    answer: "A polynomial of degree n has at most n real roots. Over the complex numbers, it has exactly n roots when counted with multiplicity (Fundamental Theorem of Algebra). A degree-5 polynomial always has exactly five complex roots, though some may repeat or be non-real."
+  },
+  obj4: {
+    question: "What is root multiplicity?",
+    answer: "Multiplicity measures how many times a root appears as a factor. In (x - 2)³(x + 1), the root x = 2 has multiplicity 3 and x = -1 has multiplicity 1. Multiplicity affects the graph: odd multiplicity means crossing the x-axis, even multiplicity means touching and turning back."
+  },
+  obj5: {
+    question: "How do you find roots of a polynomial by factoring?",
+    answer: "Factor the polynomial completely, then set each factor equal to zero. For x² - 7x + 10 = (x - 2)(x - 5), setting x - 2 = 0 gives x = 2 and setting x - 5 = 0 gives x = 5. Factored form makes roots immediately visible."
+  },
+  obj6: {
+    question: "What is the quadratic formula for finding roots?",
+    answer: "For ax² + bx + c, the roots are x = (-b ± √(b² - 4ac)) / 2a. The discriminant Δ = b² - 4ac determines root types: Δ > 0 gives two distinct real roots, Δ = 0 gives one repeated root, Δ < 0 gives two complex conjugate roots."
+  },
+  obj7: {
+    question: "What is the Rational Root Theorem?",
+    answer: "For a polynomial with integer coefficients, any rational root p/q (in lowest terms) has p dividing the constant term and q dividing the leading coefficient. This generates a finite list of candidates to test, narrowing the search for rational roots."
+  },
+  obj8: {
+    question: "How does synthetic division help find polynomial roots?",
+    answer: "Synthetic division tests whether a value r is a root while simultaneously finding the quotient. If the remainder is 0, then r is a root and (x - r) is a factor. The quotient is a polynomial of degree one less, which can be factored further."
+  },
+  obj9: {
+    question: "What are complex roots of a polynomial?",
+    answer: "Complex roots involve the imaginary unit i. For polynomials with real coefficients, complex roots always come in conjugate pairs: if a + bi is a root, then a - bi is also a root. The polynomial x² + 1 has complex roots i and -i."
+  },
+  obj10: {
+    question: "Why must complex roots come in conjugate pairs?",
+    answer: "When a polynomial has real coefficients, complex conjugation applied to P(r) = 0 shows that the conjugate is also a root. This is why a polynomial with real coefficients and odd degree must have at least one real root — an odd number of roots cannot all be paired."
+  },
+  obj11: {
+    question: "How do polynomial roots appear on the graph?",
+    answer: "Real roots correspond to x-intercepts where the graph meets the x-axis. At roots with odd multiplicity, the graph crosses the axis. At roots with even multiplicity, the graph touches the axis and turns back. Complex roots produce no x-intercepts."
+  },
+  obj12: {
+    question: "What are Vieta's formulas for polynomial roots?",
+    answer: "Vieta's formulas relate roots to coefficients. For x² + bx + c with roots r₁ and r₂: r₁ + r₂ = -b and r₁·r₂ = c. These allow computing root relationships without finding the roots themselves and provide a check on computed answers."
+  },
+  obj13: {
+    question: "What is the discriminant of a quadratic?",
+    answer: "The discriminant Δ = b² - 4ac determines the nature of roots for ax² + bx + c. When Δ > 0: two distinct real roots. When Δ = 0: one repeated real root. When Δ < 0: two complex conjugate roots. It classifies roots without solving."
+  }
+}
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Roots of a Polynomial",
+    "description": "Master polynomial roots: definition, roots-factors relationship, multiplicity, finding methods (factoring, quadratic formula, rational root theorem, synthetic division), complex roots, and Vieta's formulas.",
+    "url": "https://www.learnmathclass.com/algebra/polynomials/roots",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Polynomial Roots"
+    },
+    "teaches": [
+      "Definition of polynomial roots and zeros",
+      "Connection between roots and factors",
+      "Root multiplicity and its geometric meaning",
+      "Finding roots: factoring, quadratic formula, rational root theorem",
+      "Synthetic division for root finding",
+      "Real vs complex roots and conjugate pairs",
+      "Vieta's formulas for sum and product of roots"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Roots of a Polynomial | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/algebra/polynomials/roots",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Algebra",
+        "item": "https://www.learnmathclass.com/algebra"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Polynomials",
+        "item": "https://www.learnmathclass.com/algebra/polynomials"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Roots",
+        "item": "https://www.learnmathclass.com/algebra/polynomials/roots"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Roots of a Polynomial | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/algebra/polynomials/roots",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Roots of a Polynomial: Find Zeros & Solve Equations | Learn Math Class",
+      description: "Master polynomial roots: definition, roots-factors relationship, multiplicity, finding methods (factoring, quadratic formula, rational root theorem, synthetic division), complex roots, and Vieta's formulas.",
+      keywords: keyWords.join(", "),
+      url: "/algebra/polynomials/roots",
+      name: "Roots of a Polynomial"
+    },
+  }
+}
    }
 
-export default function RootsPage({seoData,sectionsContent , introContent}) {
+// export default function RootsPage({seoData,sectionsContent , introContent}) {
+
+
+export default function RootsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
     
   const genericSections=[
@@ -569,7 +743,7 @@ export default function RootsPage({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -610,6 +784,47 @@ export default function RootsPage({seoData,sectionsContent , introContent}) {
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>
