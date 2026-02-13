@@ -12,7 +12,23 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+  const keyWords = [
+  "additive inverse complex number",
+  "negative complex number",
+  "opposite complex number",
+  "negate complex number",
+  "complex number minus z",
+  "additive inverse definition",
+  "complex subtraction",
+  "reflection through origin",
+  "additive inverse vs conjugate",
+  "complex number negation",
+  "additive inverse formula",
+  "z plus negative z equals zero",
+  "complex additive identity",
+  "inverse properties complex",
+  "negate real imaginary parts"
+]
 
   // •
 
@@ -436,28 +452,178 @@ When in doubt, write out the additive inverse explicitly before combining terms.
   content: `Every complex number has a counterpart that, when added to it, produces zero. This counterpart is called the additive inverse. The concept extends directly from real numbers, where $5$ and $-5$ cancel each other, to complex numbers, where both the real and imaginary parts must be negated. Understanding the additive inverse clarifies the nature of subtraction and reveals a fundamental symmetry in the [complex plane](!/complex-numbers/geometric-representation).`
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "What is the additive inverse of a complex number?",
+    answer: "The additive inverse of z = a + bi is -z = -a - bi. Both the real part and the imaginary part are negated. The defining property is z + (-z) = 0: a number plus its additive inverse always equals zero."
+  },
+  obj2: {
+    question: "How do you find the additive inverse of a complex number?",
+    answer: "Negate both components. For z = a + bi, the additive inverse is -z = -a - bi. For example, the additive inverse of 3 + 2i is -3 - 2i, and the additive inverse of -4 + 5i is 4 - 5i."
+  },
+  obj3: {
+    question: "What is the geometric meaning of the additive inverse?",
+    answer: "The additive inverse is the reflection of z through the origin in the complex plane. If z lies in the first quadrant, -z lies in the third. Both z and -z are equidistant from the origin but point in opposite directions, separated by exactly π radians."
+  },
+  obj4: {
+    question: "What is the difference between additive inverse and conjugate?",
+    answer: "The additive inverse -z negates both parts: for z = a + bi, -z = -a - bi. The conjugate z̄ negates only the imaginary part: z̄ = a - bi. Geometrically, -z reflects through the origin while z̄ reflects across the real axis."
+  },
+  obj5: {
+    question: "Does taking the additive inverse change the modulus?",
+    answer: "No. The modulus is preserved: |-z| = |z|. Both z and -z lie at the same distance from the origin. They occupy opposite ends of a diameter of the circle centered at the origin with radius |z|."
+  },
+  obj6: {
+    question: "What happens to the argument when taking the additive inverse?",
+    answer: "The argument shifts by π radians: arg(-z) = arg(z) + π. If z points in direction θ, then -z points in direction θ + π — the exact opposite direction. This corresponds to a 180° rotation about the origin."
+  },
+  obj7: {
+    question: "Is the additive inverse unique?",
+    answer: "Yes. Every complex number has exactly one additive inverse. If w₁ and w₂ both satisfy z + w = 0, then w₁ = w₂. This uniqueness justifies writing -z without ambiguity."
+  },
+  obj8: {
+    question: "How is subtraction related to additive inverse?",
+    answer: "Subtraction is defined as adding the additive inverse: z₁ - z₂ = z₁ + (-z₂). This reduces subtraction to addition. The component-wise rule works because -z₂ negates both parts of z₂."
+  },
+  obj9: {
+    question: "What is the additive inverse of zero?",
+    answer: "The additive inverse of 0 is 0 itself. Zero is the only complex number equal to its own additive inverse. Geometrically, the origin is the only point that maps to itself under reflection through the origin."
+  },
+  obj10: {
+    question: "What is double negation of a complex number?",
+    answer: "Double negation returns the original: -(-z) = z. Taking the additive inverse twice leaves the number unchanged. Reflecting through the origin twice brings you back to the starting point."
+  },
+  obj11: {
+    question: "Do negation and conjugation commute?",
+    answer: "Yes. The order does not matter: -z̄ = (-z)̄. For z = 3 + 2i, both paths give -3 + 2i. You can negate first then conjugate, or conjugate first then negate — the result is the same."
+  },
+  obj12: {
+    question: "What is a common mistake with additive inverses?",
+    answer: "The most common error is negating only one part. Writing -(3 + 2i) = -3 + 2i is wrong — this produces the negative of the conjugate. The correct result is -(3 + 2i) = -3 - 2i, with both signs flipped."
+  },
+  obj13: {
+    question: "When are the additive inverse and conjugate equal?",
+    answer: "Only for pure imaginary numbers. If z = bi with b ≠ 0, then -z = -bi and z̄ = -bi, so they match. For any number with a nonzero real part, the additive inverse and conjugate are different."
+  }
+}
 
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Additive Inverse of Complex Numbers",
+    "description": "Learn the additive inverse of complex numbers: definition -z = -a - bi, geometric meaning as reflection through origin, properties, comparison with conjugate, connection to subtraction, and common mistakes.",
+    "url": "https://www.learnmathclass.com/complex-numbers/additive-inverse",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Additive Inverse of Complex Numbers"
+    },
+    "teaches": [
+      "Definition of additive inverse: -z = -a - bi",
+      "Geometric interpretation as reflection through origin",
+      "Properties: double negation, distribution, modulus preservation",
+      "Difference between additive inverse and conjugate",
+      "Connection between subtraction and additive inverse",
+      "Uniqueness of additive inverse",
+      "Common mistakes when negating complex numbers"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Additive Inverse of a Complex Number | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/complex-numbers/additive-inverse",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Complex Numbers",
+        "item": "https://www.learnmathclass.com/complex-numbers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Additive Inverse",
+        "item": "https://www.learnmathclass.com/complex-numbers/additive-inverse"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Additive Inverse of a Complex Number | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/complex-numbers/additive-inverse",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Additive Inverse: Negation of Complex Numbers | Learn Math Class",
+      description: "Learn the additive inverse of complex numbers: definition -z = -a - bi, geometric meaning as reflection through origin, properties, comparison with conjugate, connection to subtraction, and common mistakes.",
+      keywords: keyWords.join(", "),
+      url: "/complex-numbers/additive-inverse",
+      name: "Additive Inverse of Complex Numbers"
+    },
+  }
+}
    }
 
-export default function AdditiveInversePage({seoData,sectionsContent , introContent}) {
+// export default function AdditiveInversePage({seoData,sectionsContent , introContent}) {
 
-    
+
+export default function AdditiveInversePage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
   const genericSections=[
     {
         id:'1',
@@ -608,7 +774,7 @@ export default function AdditiveInversePage({seoData,sectionsContent , introCont
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -649,6 +815,47 @@ export default function AdditiveInversePage({seoData,sectionsContent , introCont
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

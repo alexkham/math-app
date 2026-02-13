@@ -400,7 +400,7 @@ export default function PowersPage({sectionsContent,introContent}) {
              panelBackgroundColor='#f2f2f2'
            />
       <Breadcrumb/>
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'10px'}}>Powers</h1>
+      <h1 className='title' style={{marginTop:'-30px',marginBottom:'10px'}}>Logarithms</h1>
       <br/>
       <SectionTableOfContents sections={logarithmsSections}
        showSecondaryNav={true}

@@ -11,9 +11,23 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  "multiplicative inverse complex number",
+  "reciprocal complex number",
+  "complex number inverse formula",
+  "one over z complex",
+  "z inverse formula",
+  "conjugate over modulus squared",
+  "complex division inverse",
+  "inverse complex number calculator",
+  "z times z inverse equals one",
+  "complex reciprocal",
+  "multiplicative inverse definition",
+  "invert complex number",
+  "complex number one divided by",
+  "inverse vs conjugate",
+  "unit circle inverse equals conjugate"
+]
   // •
 
 //   \u2022 First item
@@ -453,26 +467,179 @@ Leaving a complex denominator unreduced is incomplete. A final answer like $\\fr
 }
 
 
+const faqQuestions = {
+  obj1: {
+    question: "What is the multiplicative inverse of a complex number?",
+    answer: "The multiplicative inverse of z = a + bi is the number z⁻¹ satisfying z · z⁻¹ = 1. The formula is z⁻¹ = z̄/|z|² = (a - bi)/(a² + b²). It uses the conjugate in the numerator and the modulus squared in the denominator."
+  },
+  obj2: {
+    question: "How do you find the multiplicative inverse of a complex number?",
+    answer: "Take the conjugate and divide by the modulus squared. For z = 3 + 4i: the conjugate is 3 - 4i, the modulus squared is 25, so z⁻¹ = (3 - 4i)/25 = 3/25 - 4i/25. Verify by checking that z · z⁻¹ = 1."
+  },
+  obj3: {
+    question: "Why does the inverse formula use the conjugate?",
+    answer: "Multiplying by the conjugate eliminates the imaginary unit from the denominator. Since z · z̄ = |z|² (a real number), we get 1/z = z̄/(z · z̄) = z̄/|z|². This converts division by a complex number into division by a real number."
+  },
+  obj4: {
+    question: "What is the geometric meaning of the multiplicative inverse?",
+    answer: "The inverse reflects z across the real axis and scales its distance from the origin by 1/|z|². The modulus inverts: |z⁻¹| = 1/|z|. The argument negates: arg(z⁻¹) = -arg(z). Numbers far from the origin have inverses close to it."
+  },
+  obj5: {
+    question: "Does zero have a multiplicative inverse?",
+    answer: "No. Zero is the only complex number without a multiplicative inverse. No number w satisfies 0 · w = 1 because zero times anything is zero. This is why division by zero is undefined for complex numbers."
+  },
+  obj6: {
+    question: "What is the difference between multiplicative inverse and conjugate?",
+    answer: "The conjugate z̄ = a - bi only changes the sign of the imaginary part. The inverse z⁻¹ = (a - bi)/(a² + b²) also divides by the modulus squared. They are equal only on the unit circle, where |z| = 1."
+  },
+  obj7: {
+    question: "When are the inverse and conjugate equal?",
+    answer: "Only when |z| = 1 (on the unit circle). In that case, |z|² = 1, so z⁻¹ = z̄/1 = z̄. For example, if z = (3/5) + (4/5)i, then |z| = 1 and both z⁻¹ and z̄ equal (3/5) - (4/5)i."
+  },
+  obj8: {
+    question: "How is division related to multiplicative inverse?",
+    answer: "Division is multiplication by the inverse: z₁/z₂ = z₁ · z₂⁻¹. Substituting the formula gives z₁/z₂ = z₁ · z̄₂/|z₂|² = (z₁ · z̄₂)/|z₂|². This is the standard method for dividing complex numbers."
+  },
+  obj9: {
+    question: "What is double inversion?",
+    answer: "Double inversion returns the original: (z⁻¹)⁻¹ = z. Taking the multiplicative inverse twice leaves the number unchanged. If w is the inverse of z, then z is the inverse of w."
+  },
+  obj10: {
+    question: "Do inversion and conjugation commute?",
+    answer: "Yes. The order does not matter: (z̄)⁻¹ = (z⁻¹)̄. You can conjugate first then invert, or invert first then conjugate — the result is the same."
+  },
+  obj11: {
+    question: "What is the inverse of a product?",
+    answer: "The inverse of a product is the product of the inverses: (z₁ · z₂)⁻¹ = z₁⁻¹ · z₂⁻¹. To invert a product, invert each factor. Order does not matter since multiplication is commutative."
+  },
+  obj12: {
+    question: "Is the multiplicative inverse unique?",
+    answer: "Yes. Every nonzero complex number has exactly one multiplicative inverse. If two numbers both satisfy z · w = 1, they must be equal. This uniqueness justifies the notation z⁻¹ and 1/z."
+  },
+  obj13: {
+    question: "What is a common mistake when finding the inverse?",
+    answer: "A common error is treating 1/(a + bi) as 1/a + 1/bi, inverting each part separately. This is wrong. The correct method multiplies by the conjugate: 1/(a + bi) = (a - bi)/(a² + b²)."
+  }
+}
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Multiplicative Inverse of Complex Numbers",
+    "description": "Learn the multiplicative inverse of complex numbers: formula z⁻¹ = z̄/|z|², geometric meaning, properties, comparison with conjugate, connection to division, and why zero has no inverse.",
+    "url": "https://www.learnmathclass.com/complex-numbers/multiplicative-inverse",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Multiplicative Inverse of Complex Numbers"
+    },
+    "teaches": [
+      "Definition of multiplicative inverse: z⁻¹ = z̄/|z|²",
+      "Derivation using conjugate multiplication",
+      "Geometric interpretation: modulus inverts, argument negates",
+      "Properties: double inversion, products, conjugation",
+      "Difference between inverse and conjugate",
+      "Why zero has no multiplicative inverse",
+      "Connection between division and multiplicative inverse"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Multiplicative Inverse of a Complex Number | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/complex-numbers/multiplicative-inverse",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Complex Numbers",
+        "item": "https://www.learnmathclass.com/complex-numbers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Multiplicative Inverse",
+        "item": "https://www.learnmathclass.com/complex-numbers/multiplicative-inverse"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Multiplicative Inverse of a Complex Number | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/complex-numbers/multiplicative-inverse",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Multiplicative Inverse: Reciprocal of ℂ | Learn Math Class",
+      description: "Learn the multiplicative inverse of complex numbers: formula z⁻¹ = z̄/|z|², geometric meaning, properties, comparison with conjugate, connection to division, and why zero has no inverse.",
+      keywords: keyWords.join(", "),
+      url: "/complex-numbers/multiplicative-inverse",
+      name: "Multiplicative Inverse of Complex Numbers"
+    },
+  }
+}
    }
 
-export default function MultiplicativeInversePage({seoData,sectionsContent , introContent}) {
-
+// export default function MultiplicativeInversePage({seoData,sectionsContent , introContent}) {
+export default function MultiplicativeInversePage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -624,7 +791,7 @@ export default function MultiplicativeInversePage({seoData,sectionsContent , int
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -667,7 +834,49 @@ export default function MultiplicativeInversePage({seoData,sectionsContent , int
       })
     }}
   />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
+    }}
+  />
 </Head>
+
    {/* <GenericNavbar/> */}
    <br/>
    <br/>
