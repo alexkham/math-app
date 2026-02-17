@@ -12,7 +12,23 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+  const keyWords = [
+  "modular arithmetic",
+  "modular addition",
+  "modular subtraction",
+  "modular multiplication",
+  "modular exponentiation",
+  "mod arithmetic operations",
+  "clock arithmetic",
+  "last digit problems",
+  "power cycles modulo",
+  "congruence arithmetic",
+  "day of week calculation",
+  "divisibility rules modular",
+  "reduce before operate",
+  "modular division inverse",
+  "wrap around arithmetic"
+]
 
   // •
 
@@ -423,27 +439,185 @@ Simplify $(2^{50} + 3^{50}) \\bmod 5$. Powers of $2 \\bmod 5$ cycle $\\{2, 4, 3,
   content: `[Computing a remainder](!/arithmetic/modulo/computing-remainders) answers a single question about a single number. Modular arithmetic goes further — it builds a complete system where addition, subtraction, multiplication, and exponentiation all operate within the confines of a fixed modulus. Numbers exceeding the range cycle back, and the arithmetic never leaves the set $\\{0, 1, 2, \\ldots, n-1\\}$.`
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "What is modular arithmetic?",
+    answer: "Modular arithmetic is a system where numbers wrap around after reaching a modulus n. All operations stay within the set {0, 1, 2, ..., n-1}. Like a 12-hour clock where 10 + 5 = 3 (not 15), numbers cycle back when they exceed the modulus."
+  },
+  obj2: {
+    question: "What is the core principle of modular arithmetic?",
+    answer: "Reducing numbers before, during, or after an operation produces the same final remainder. This means large numbers can be replaced by their remainders at any stage without affecting the outcome, making calculations with huge numbers practical."
+  },
+  obj3: {
+    question: "How do you add numbers in modular arithmetic?",
+    answer: "Reduce each operand mod n, add the results, then reduce again if the sum reaches or exceeds n. For (47 + 38) mod 10: reduce to 7 + 8 = 15, then 15 mod 10 = 5. The final reduction handles sums that exceed the modulus."
+  },
+  obj4: {
+    question: "How do you subtract in modular arithmetic?",
+    answer: "Reduce each operand, subtract, and if the result is negative, add n. For (23 - 47) mod 10: reduce to 3 - 7 = -4, then add 10 to get 6. The negative result represents wrapping backward past zero on the number cycle."
+  },
+  obj5: {
+    question: "How do you multiply in modular arithmetic?",
+    answer: "Reduce each factor mod n, multiply the remainders, then reduce the product. For (89 × 76) mod 9: reduce to 8 × 4 = 32, then 32 mod 9 = 5. This avoids computing the full product 6,764."
+  },
+  obj6: {
+    question: "How do you compute large powers modulo n?",
+    answer: "Reduce after every multiplication instead of computing the full power first. For 7⁴ mod 10: compute 7² = 49 → 9, then 9 × 7 = 63 → 3, then 3 × 7 = 21 → 1. The largest intermediate is 63, not 2,401."
+  },
+  obj7: {
+    question: "What are power cycles in modular arithmetic?",
+    answer: "Powers of any base mod n eventually repeat in a cycle. For 2^k mod 7, the cycle is {2, 4, 1} with period 3. To find 2¹⁰⁰ mod 7: divide 100 by 3 to get remainder 1, so 2¹⁰⁰ ≡ 2¹ = 2 (mod 7)."
+  },
+  obj8: {
+    question: "Why doesn't division work normally in modular arithmetic?",
+    answer: "Modular reduction discards information that division needs. Dividing remainders directly gives wrong answers. Instead, division requires the modular inverse: to divide by b, multiply by b⁻¹ where b·b⁻¹ ≡ 1 (mod n). Not every number has an inverse for every modulus."
+  },
+  obj9: {
+    question: "How do you find the last digit of a large power?",
+    answer: "The last digit is the number mod 10. Find the cycle of powers mod 10, then locate the exponent's position in that cycle. For 7¹⁰⁰: powers of 7 cycle {7,9,3,1} with period 4. Since 100 mod 4 = 0, the answer is 1 (position of 7⁴)."
+  },
+  obj10: {
+    question: "How do you solve clock problems with modular arithmetic?",
+    answer: "A 12-hour clock uses mod 12; a 24-hour clock uses mod 24. Add hours to current time and reduce. For 50 hours after 10:00: (10 + 50) mod 12 = 60 mod 12 = 0, which is 12:00. For backward calculations, subtract and add n if negative."
+  },
+  obj11: {
+    question: "How do you calculate day of the week using modulo?",
+    answer: "Days cycle mod 7. Assign Sunday = 0 through Saturday = 6. Add the number of days to the current day number and reduce mod 7. For 100 days after Wednesday (day 3): (3 + 100) mod 7 = 103 mod 7 = 5 = Friday."
+  },
+  obj12: {
+    question: "Why do divisibility rules work?",
+    answer: "Divisibility rules exploit congruence properties of 10. For divisibility by 9: since 10 ≡ 1 (mod 9), each digit contributes its face value regardless of position, making the digit sum determine divisibility. For 11: since 10 ≡ -1 (mod 11), positions alternate in sign."
+  },
+  obj13: {
+    question: "How do you find the last two digits of a power?",
+    answer: "The last two digits are the number mod 100. Find when the powers cycle mod 100. For 7⁵⁰ mod 100: since 7⁴ = 2401 ≡ 1 (mod 100), and 50 = 4×12 + 2, we get 7⁵⁰ ≡ 7² = 49 (mod 100). The last two digits are 49."
+  }
+}
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Modular Arithmetic",
+    "description": "Master modular arithmetic: addition, subtraction, multiplication, and exponentiation mod n. Solve last digit problems, clock calculations, and day of week questions with power cycles.",
+    "url": "https://www.learnmathclass.com/arithmetic/modulo/modular-arithmetic",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Modular Arithmetic"
+    },
+    "teaches": [
+      "Modular addition, subtraction, and multiplication",
+      "The reduce-operate-reduce principle",
+      "Modular exponentiation with step-by-step reduction",
+      "Detecting and using power cycles",
+      "Solving last digit and last two digit problems",
+      "Clock and day of week calculations",
+      "Why divisibility rules work modularly"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Modulo Operations Page | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/modulo/operations",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Arithmetic",
+        "item": "https://www.learnmathclass.com/arithmetic"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Modulo",
+        "item": "https://www.learnmathclass.com/arithmetic/modulo"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Modular Arithmetic",
+        "item": "https://www.learnmathclass.com/arithmetic/modulo/modular-arithmetic"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+//    return {
+//       props:{
+//          sectionsContent,
+//          introContent,
+//           seoData: {
+//         title: "Modulo Operations Page | Learn Math Class",
+//         description: "Metadescription",
+//         keywords: keyWords.join(", "),
+//         url: "/modulo/operations",
+//          name: "name"
+//       },
         
-       }
-    }
+//        }
+//     }
+
+
+return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Modular Arithmetic: Operations, Power Cycles & Applications | Learn Math Class",
+      description: "Master modular arithmetic: addition, subtraction, multiplication, and exponentiation mod n. Solve last digit problems, clock calculations, and day of week questions with power cycles.",
+      keywords: keyWords.join(", "),
+      url: "/arithmetic/modulo/modular-arithmetic",
+      name: "Modular Arithmetic"
+    },
+  }
+}
    }
 
-export default function OperationsPage({seoData,sectionsContent , introContent}) {
+// export default function OperationsPage({seoData,sectionsContent , introContent}) {
 
+
+export default function OperationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -595,7 +769,7 @@ export default function OperationsPage({seoData,sectionsContent , introContent})
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -636,6 +810,47 @@ export default function OperationsPage({seoData,sectionsContent , introContent})
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

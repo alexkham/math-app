@@ -12,7 +12,23 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
+ const keyWords = [
+  "modulo negative numbers",
+  "negative modulo result",
+  "truncated division",
+  "floored division",
+  "negative remainder",
+  "mod negative dividend",
+  "modulo convention",
+  "python vs javascript modulo",
+  "convert negative remainder",
+  "floor division modulo",
+  "truncate toward zero",
+  "negative mod positive",
+  "modulo sign behavior",
+  "remainder negative number",
+  "modulo programming languages"
+]
 
   // •
 
@@ -372,27 +388,180 @@ Ensure non-negative results in JavaScript: $((-23 \\% \\; 5) + 5) \\% \\; 5 = (-
   content: `[Modulo](!/arithmetic/modulo) with positive numbers is unambiguous — divide, take what's left over. But the moment the dividend turns negative, the operation splits into two competing definitions that produce different answers to the same question. The mathematics is consistent either way; the confusion arises from the fact that different contexts — and different programming languages — choose different sides.`
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "What is (-7) mod 3?",
+    answer: "It depends on the convention. Under truncated division (C, Java, JavaScript), the answer is -1. Under floored division (Python, mathematics), the answer is 2. Both are valid — they represent the same congruence class but use different representative values."
+  },
+  obj2: {
+    question: "What is truncated division?",
+    answer: "Truncated division rounds the quotient toward zero. For (-7) ÷ 3 = -2.33, truncate to -2, giving remainder -7 - (3 × -2) = -1. The remainder inherits the sign of the dividend, so negative dividends produce non-positive remainders."
+  },
+  obj3: {
+    question: "What is floored division?",
+    answer: "Floored division rounds the quotient toward negative infinity. For (-7) ÷ 3 = -2.33, floor to -3, giving remainder -7 - (3 × -3) = 2. The remainder is always non-negative, staying in {0, 1, ..., n-1} regardless of the dividend's sign."
+  },
+  obj4: {
+    question: "Which modulo convention is correct?",
+    answer: "Both are correct — they are different definitions, not errors. Mathematics prefers floored division for cleaner theory. Computing often uses truncated division because it maps to hardware instructions. The choice doesn't affect congruence relationships."
+  },
+  obj5: {
+    question: "Why does Python give different modulo results than JavaScript?",
+    answer: "Python uses floored division: (-7) % 3 = 2. JavaScript uses truncated division: (-7) % 3 = -1. The algorithms produce different remainders for negative dividends. Code ported between languages must account for this difference."
+  },
+  obj6: {
+    question: "How do you convert a negative remainder to a positive one?",
+    answer: "Add the modulus. If truncated division gives (-7) mod 3 = -1, add 3 to get 2. The universal formula ((a % n) + n) % n works in any language — if the remainder is already non-negative, the formula leaves it unchanged."
+  },
+  obj7: {
+    question: "Are -1 and 2 the same modulo 3?",
+    answer: "Yes. Both -1 and 2 belong to the same congruence class modulo 3 because their difference (3) is divisible by 3. The conventions disagree on which representative to return, not on the underlying mathematical relationship."
+  },
+  obj8: {
+    question: "What happens with a negative divisor in modulo?",
+    answer: "Behavior varies unpredictably across languages. Mathematical convention typically requires the modulus to be positive. The safest practice is to use the absolute value of the modulus and handle sign logic separately."
+  },
+  obj9: {
+    question: "Why does array indexing fail with negative modulo?",
+    answer: "In Python, (-1) % n = n-1, correctly wrapping to the last element. In C or JavaScript, (-1) % n = -1, an invalid index. Code expecting wrap-around behavior must use ((index % n) + n) % n to guarantee non-negative results."
+  },
+  obj10: {
+    question: "How do you ensure non-negative remainders in JavaScript?",
+    answer: "Use the formula ((a % n) + n) % n. For (-23 % 5) in JavaScript: -3, then (-3 + 5) % 5 = 2. This works universally regardless of which convention the language uses, converting any negative remainder to its positive equivalent."
+  },
+  obj11: {
+    question: "What is (-1) mod 7 under each convention?",
+    answer: "Truncated: -1 ÷ 7 = -0.14, truncate to 0, remainder = -1 - (7 × 0) = -1. Floored: floor to -1, remainder = -1 - (7 × -1) = -1 + 7 = 6. The truncated result is -1; the floored result is 6."
+  },
+  obj12: {
+    question: "What is the most common mistake with negative modulo?",
+    answer: "Assuming the % operator behaves identically in every language. Code written in Python (floored) will produce different results in Java or JavaScript (truncated) for negative inputs. Always test with negative dividends explicitly."
+  }
+}
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Modulo of Negative Numbers",
+    "description": "Understand modulo with negative dividends: truncated vs floored division, why Python and JavaScript differ, converting negative remainders, and avoiding common pitfalls.",
+    "url": "https://www.learnmathclass.com/arithmetic/modulo/negative-numbers",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Negative Number Modulo"
+    },
+    "teaches": [
+      "Truncated division: round toward zero",
+      "Floored division: round toward negative infinity",
+      "Why different languages produce different results",
+      "Converting negative remainders to positive",
+      "Congruence perspective on conventions",
+      "Handling negative divisors safely",
+      "Common pitfalls with negative modulo"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Modulo of Negative Numbers | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/modulo/negative-numbers",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Arithmetic",
+        "item": "https://www.learnmathclass.com/arithmetic"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Modulo",
+        "item": "https://www.learnmathclass.com/arithmetic/modulo"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Negative Numbers",
+        "item": "https://www.learnmathclass.com/arithmetic/modulo/negative-numbers"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+
+//    return {
+//       props:{
+//          sectionsContent,
+//          introContent,
+//           seoData: {
+//         title: "Modulo of Negative Numbers | Learn Math Class",
+//         description: "Metadescription",
+//         keywords: keyWords.join(", "),
+//         url: "/modulo/negative-numbers",
+//          name: "name"
+//       },
         
-       }
-    }
+//        }
+//     }
+
+return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Modulo of Negative Numbers: Truncated vs Floored Division | Learn Math Class",
+      description: "Understand modulo with negative dividends: truncated vs floored division, why Python and JavaScript differ, converting negative remainders, and avoiding common pitfalls.",
+      keywords: keyWords.join(", "),
+      url: "/arithmetic/modulo/negative-numbers",
+      name: "Modulo of Negative Numbers"
+    },
+  }
+}
    }
 
-export default function NegativeNumbersPage({seoData,sectionsContent , introContent}) {
+// export default function NegativeNumbersPage({seoData,sectionsContent , introContent}) {
 
+export default function NegativeNumbersPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -544,7 +713,7 @@ export default function NegativeNumbersPage({seoData,sectionsContent , introCont
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -585,6 +754,47 @@ export default function NegativeNumbersPage({seoData,sectionsContent , introCont
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>
