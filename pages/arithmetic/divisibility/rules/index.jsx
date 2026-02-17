@@ -485,13 +485,117 @@ const faqQuestions = {
 }
 
 
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": "Divisibility Rules",
+//     "description": "Master divisibility rules for 2, 3, 4, 5, 6, 8, 9, 10, and 11. Learn digit sum tests, last digit checks, alternating sums, and how to combine rules for composite divisors.",
+//     "url": "https://www.learnmathclass.com/arithmetic/divisibility/divisibility-rules",
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "High School, College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Divisibility Rules"
+//     },
+//     "teaches": [
+//       "Divisibility tests for 2, 5, and 10 using last digit",
+//       "Digit sum rule for 3 and 9",
+//       "Last two/three digits for 4 and 8",
+//       "Alternating sum rule for 11",
+//       "Combining rules for composite divisors",
+//       "Why divisibility rules work via modular arithmetic",
+//       "Worked examples applying multiple rules"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Arithmetic",
+//         "item": "https://www.learnmathclass.com/arithmetic"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Divisibility",
+//         "item": "https://www.learnmathclass.com/arithmetic/divisibility"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 4,
+//         "name": "Divisibility Rules",
+//         "item": "https://www.learnmathclass.com/arithmetic/divisibility/divisibility-rules"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
+
+
+
+
+//    return {
+//       props:{
+//          sectionsContent,
+//          introContent,
+//           seoData: {
+//         title: "Divisibility Rules | Learn Math Class",
+//         description: "Metadescription",
+//         keywords: keyWords.join(", "),
+//         url: "/arithmetic/divisibility/rules",
+//          name: "name"
+//       },
+        
+//        }
+//     }
+
 const schemas = {
   learningResource: {
     "@context": "https://schema.org",
     "@type": "LearningResource",
     "name": "Divisibility Rules",
     "description": "Master divisibility rules for 2, 3, 4, 5, 6, 8, 9, 10, and 11. Learn digit sum tests, last digit checks, alternating sums, and how to combine rules for composite divisors.",
-    "url": "https://www.learnmathclass.com/arithmetic/divisibility/divisibility-rules",
+    "url": "https://www.learnmathclass.com/arithmetic/divisibility/rules",
     "inLanguage": "en-US",
     "learningResourceType": "Explanation",
     "educationalLevel": "High School, College",
@@ -552,7 +656,7 @@ const schemas = {
         "@type": "ListItem",
         "position": 4,
         "name": "Divisibility Rules",
-        "item": "https://www.learnmathclass.com/arithmetic/divisibility/divisibility-rules"
+        "item": "https://www.learnmathclass.com/arithmetic/divisibility/rules"
       }
     ]
   },
@@ -571,23 +675,21 @@ const schemas = {
   }
 }
 
-
-
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Divisibility Rules | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/arithmetic/divisibility/rules",
-//          name: "name"
-//       },
-        
-//        }
-//     }
+// return {
+//   props:{
+//     sectionsContent,
+//     introContent,
+//     faqQuestions,
+//     schemas,
+//     seoData: {
+//       title: "Divisibility Rules: Tests for 2, 3, 4, 5, 6, 8, 9, 10, 11 | Learn Math Class",
+//       description: "Master divisibility rules for 2, 3, 4, 5, 6, 8, 9, 10, and 11. Learn digit sum tests, last digit checks, alternating sums, and how to combine rules for composite divisors.",
+//       keywords: keyWords.join(", "),
+//       url: "/arithmetic/divisibility/divisibility-rules",
+//       name: "Divisibility Rules"
+//     },
+//   }
+// }
 
 return {
   props:{
@@ -599,7 +701,7 @@ return {
       title: "Divisibility Rules: Tests for 2, 3, 4, 5, 6, 8, 9, 10, 11 | Learn Math Class",
       description: "Master divisibility rules for 2, 3, 4, 5, 6, 8, 9, 10, and 11. Learn digit sum tests, last digit checks, alternating sums, and how to combine rules for composite divisors.",
       keywords: keyWords.join(", "),
-      url: "/arithmetic/divisibility/divisibility-rules",
+      url: "/arithmetic/divisibility/rules",
       name: "Divisibility Rules"
     },
   }
