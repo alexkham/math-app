@@ -926,7 +926,7 @@ const InteractiveVectorCanvasCore = React.forwardRef((props, ref) => {
     />
   );
 });
-
+InteractiveVectorCanvasCore.displayName = 'InteractiveVectorCanvasCore';
 // ============================================================
 // WRAPPER WITH CONTROLS
 // ============================================================
