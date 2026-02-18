@@ -248,7 +248,10 @@ $\\gcd(1071, 462) = 21$.
 
 The algorithm always terminates because the remainder $r$ satisfies $0 \\leq r < b$, so $b$ strictly decreases at each step. A sequence of positive integers that strictly decreases must eventually reach zero.`,
   before: ``,
-  after: ``,
+  after: `
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Try calculating Greatest Common Divisor with our GCF Calculator](!/arithmetic/calculators/gcf-calculator) →@`,
+
   link: '',
 },
     // obj7:{
@@ -654,6 +657,7 @@ export default function GCDPage({seoData, sectionsContent, introContent, faqQues
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          sectionsContent.obj6.after,
         ]
     },
     {

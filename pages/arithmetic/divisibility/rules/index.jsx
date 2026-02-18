@@ -354,7 +354,9 @@ Is $8{,}910$ divisible by $15$? Since $15 = 5 \\times 3$ and $\\gcd(5, 3) = 1$, 
 
 The coprimality condition is essential. Testing divisibility by $12$ as "$\\text{divisible by } 2$ and $\\text{divisible by } 6$" is not sufficient, because $\\gcd(2, 6) = 2 \\neq 1$. The factorization must split $12$ into coprime components — $4$ and $3$ — for the combined test to work.`,
   before: ``,
-  after: ``,
+ after: `
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Test divisibility by any of these rules with our Divisibility Calculator](!/arithmetic/calculators/divisibility-calculator) →@`,
   link: '',
 },
 
@@ -798,6 +800,7 @@ export default function DivisibilityRulesPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          sectionsContent.obj11.after,
         ]
     },
     {

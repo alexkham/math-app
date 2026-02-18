@@ -213,7 +213,9 @@ This is often the fastest route. The Euclidean algorithm finds the GCD efficient
 
 A practical note: to avoid integer overflow in computation, divide before multiplying — compute $\\frac{a}{\\gcd(a,b)} \\cdot b$ rather than $\\frac{a \\cdot b}{\\gcd(a,b)}$.`,
   before: ``,
-  after: ``,
+  after: `
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Find the least common multiple with our LCM Calculator](!/arithmetic/calculators/lcm-calculator) →@`,
   link: '',
 },
 
@@ -627,6 +629,7 @@ export default function LCMPage({seoData, sectionsContent, introContent, faqQues
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          sectionsContent.obj5.after,
         ]
     },
     {

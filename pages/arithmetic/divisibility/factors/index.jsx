@@ -69,77 +69,333 @@ const keyWords = [
 //                     __html:   sectionContent.distributions.svg,
 //                   }} />
 
-    const sectionsContent={
+//     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
+//     // obj1:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
   
   
-    // },
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
+//     // },
+//     // obj2:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
   
-    // },
+//     // },
   
-    // obj3:{
+//     // obj3:{
   
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
   
-    // },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
+//     // },
+//     // obj4:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
   
-    // },
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
+//     // },
+//     // obj5:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
   
-    // },
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
+//     // },
+//     // obj6:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
   
-    // },
+//     // },
 
-    obj1: {
-  title: `Factors (Divisors)`,
-  content: `A factor of $n$ is any integer $a$ such that $a \\mid n$ — meaning $n = a \\cdot k$ for some integer $k$. The terms "factor" and "divisor" are interchangeable.
+//     obj1: {
+//   title: `Factors (Divisors)`,
+//   content: `A factor of $n$ is any integer $a$ such that $a \\mid n$ — meaning $n = a \\cdot k$ for some integer $k$. The terms "factor" and "divisor" are interchangeable.
+
+// Every positive integer has at least two factors: $1$ and itself. The number $1$ divides everything, and every number divides itself. Most numbers have additional factors between these two extremes.
+
+// The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$ — eight in total. The factors of $13$ are just $1$ and $13$ — making it [prime](!/arithmetic/divisibility/prime-numbers).
+
+// Unlike multiples, which extend infinitely, the factor set of any positive integer is finite. No factor of $n$ can exceed $n$ itself (in absolute value), so the search space is bounded from the start.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+// obj2: {
+//   title: `Finding All Factors`,
+//   content: `A systematic search tests each integer from $1$ up to $\\sqrt{n}$. If $a$ divides $n$, both $a$ and $\\frac{n}{a}$ are factors — a pair produced from a single test. Stopping at $\\sqrt{n}$ is sufficient because if $a > \\sqrt{n}$, then $\\frac{n}{a} < \\sqrt{n}$, and that smaller partner would already have been found.
+
+// For $n = 36$, test integers from $1$ to $6$ (since $\\sqrt{36} = 6$):
+
+// $1 \\mid 36$: pair $(1, 36)$. $2 \\mid 36$: pair $(2, 18)$. $3 \\mid 36$: pair $(3, 12)$. $4 \\mid 36$: pair $(4, 9)$. $5 \\nmid 36$: skip. $6 \\mid 36$: pair $(6, 6)$.
+
+// The complete factor set is $\\{1, 2, 3, 4, 6, 9, 12, 18, 36\\}$ — nine factors, all discovered by testing only six candidates.
+
+// For large numbers, [divisibility rules](!/arithmetic/divisibility/rules) speed up the testing. Checking whether $2$, $3$, or $5$ divide $n$ takes a glance at the digits, not a full division.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+// obj3: {
+//   title: `Factor Pairs`,
+//   content: `Every factor $a$ of $n$ has a partner: $\\frac{n}{a}$. Together they satisfy $a \\cdot \\frac{n}{a} = n$, and listing factor pairs ensures no divisor is overlooked.
+
+// For $n = 24$, the pairs are: $(1, 24)$, $(2, 12)$, $(3, 8)$, $(4, 6)$. Each pair multiplies to $24$, and together they account for all eight factors.
+
+// For perfect squares, one pair collapses into a repeated value. The number $36$ has the pair $(6, 6)$ — the square root paired with itself. This is why perfect squares have an odd number of factors: every other factor appears in a pair of two distinct values, but the square root stands alone.
+
+// Organizing factors into pairs is more reliable than listing them individually. Starting from $(1, n)$ and working inward, each successful division test produces two factors at once — halving the work and providing a built-in completeness check.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+// obj4: {
+//   title: `Proper Divisors`,
+//   content: `The proper divisors of $n$ are all of its factors except $n$ itself. They are the numbers that divide $n$ without being equal to it.
+
+// The proper divisors of $12$ are $\\{1, 2, 3, 4, 6\\}$. The number $12$ itself is excluded.
+
+// Proper divisors define three classical categories. A number is perfect if the sum of its proper divisors equals the number: $6 = 1 + 2 + 3$, so $6$ is perfect. A number is abundant if the sum exceeds it: the proper divisors of $12$ sum to $1 + 2 + 3 + 4 + 6 = 16 > 12$. A number is deficient if the sum falls short: the proper divisors of $10$ sum to $1 + 2 + 5 = 8 < 10$.
+
+// Perfect numbers are rare. The first four are $6, 28, 496$, and $8{,}128$. Every known perfect number is even, and whether an odd perfect number exists remains one of the oldest unsolved problems in mathematics.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+// obj5: {
+//   title: `Multiples`,
+//   content: `A multiple of $a$ is any number $b$ such that $a \\mid b$ — meaning $b = a \\cdot k$ for some positive integer $k$. Where factors divide into a number, multiples are produced by multiplying out from it.
+
+// The multiples of $7$ are $7, 14, 21, 28, 35, 42, \\ldots$ — an infinite sequence with no largest member. Every positive integer generates infinitely many multiples.
+
+// Zero is a multiple of every number, since $0 = a \\cdot 0$ for any $a$. It sits at the start of every multiple sequence, though it is often omitted when listing "the multiples of $a$" in contexts where only positive values are relevant.
+
+// The [modulo](!/arithmetic/modulo) operation identifies which multiple of $n$ is closest to a given number $a$ without exceeding it: $a = n \\cdot q + r$, where $n \\cdot q$ is that nearest multiple and $r$ is the gap between it and $a$.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+// obj6: {
+//   title: `Factors vs Multiples`,
+//   content: `The two concepts are inverses of each other, and mixing them up is one of the most common errors in elementary number theory.
+
+// Factors go downward. The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$ — all less than or equal to $24$. There are finitely many of them.
+
+// Multiples go upward. The multiples of $24$ are $24, 48, 72, 96, \\ldots$ — all greater than or equal to $24$ (excluding zero). There are infinitely many.
+
+// The relationship is symmetric: $a$ is a factor of $b$ if and only if $b$ is a multiple of $a$. The number $3$ is a factor of $12$, and $12$ is a multiple of $3$. Same fact, opposite viewpoints.
+
+// A useful mnemonic: factors fit into a number (they are smaller), multiples multiply out from a number (they are larger). The factor set is contained; the multiple set is unbounded.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+
+//     // obj7:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+//     // obj8:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+//     // obj9:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+//     // obj10:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+//     // obj11:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+
+//     obj7: {
+//   title: `Common Factors`,
+//   content: `A common factor of two numbers $m$ and $n$ is a number that divides both. Finding common factors means intersecting the two factor sets.
+
+// The factors of $12$ are $\\{1, 2, 3, 4, 6, 12\\}$. The factors of $18$ are $\\{1, 2, 3, 6, 9, 18\\}$. The common factors — numbers appearing in both sets — are $\\{1, 2, 3, 6\\}$.
+
+// Every pair of positive integers shares at least one common factor: $1$ divides both, always. The question is whether they share anything larger.
+
+// The greatest common factor is the largest member of the common factor set. For $12$ and $18$, it is $6$. This value — the [GCD](!/arithmetic/divisibility/gcd) — plays a central role in simplifying **fractions**, solving equations, and determining whether two numbers are coprime.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+// obj8: {
+//   title: `Common Multiples`,
+//   content: `A common multiple of two numbers $m$ and $n$ is a number divisible by both. Where common factors are drawn from finite sets, common multiples form an infinite sequence.
+
+// The multiples of $4$ are $4, 8, 12, 16, 20, 24, 28, 32, 36, \\ldots$ The multiples of $6$ are $6, 12, 18, 24, 30, 36, \\ldots$ The common multiples are $12, 24, 36, 48, \\ldots$ — every value that appears in both lists.
+
+// The smallest positive common multiple is the [LCM](!/arithmetic/divisibility/lcm). For $4$ and $6$, it is $12$. Every other common multiple is a multiple of the LCM: $24 = 2 \\cdot 12$, $36 = 3 \\cdot 12$, and so on.
+
+// Common multiples arise naturally in problems involving synchronization. If one event repeats every $4$ days and another every $6$ days, they coincide every $12$ days — the LCM of their periods.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+
+// obj9: {
+//   title: `Counting Factors`,
+//   content: `For small numbers, counting factors by listing them is practical. For larger numbers, [prime factorization](!/arithmetic/divisibility/prime-factorization) provides a formula.
+
+// If $n = p_1^{a_1} \\cdot p_2^{a_2} \\cdots p_k^{a_k}$, the number of positive divisors of $n$ is:
+
+// $$(a_1 + 1)(a_2 + 1) \\cdots (a_k + 1)$$
+
+// Each prime factor $p_i$ can appear in a divisor $0, 1, 2, \\ldots, a_i$ times — that is $a_i + 1$ independent choices. The total number of divisors is the product of all these choices.
+
+// The number $72 = 2^3 \\cdot 3^2$ has $(3+1)(2+1) = 12$ factors. Listing them confirms: $1, 2, 3, 4, 6, 8, 9, 12, 18, 24, 36, 72$ — exactly twelve.
+
+// The number $100 = 2^2 \\cdot 5^2$ has $(2+1)(2+1) = 9$ factors.
+
+// The formula reveals structure that raw listing obscures. A number with many small prime factors has more divisors than a number of similar size with fewer, larger prime factors. The number $60 = 2^2 \\cdot 3 \\cdot 5$ has $12$ factors, while $64 = 2^6$ has only $7$.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+// obj10: {
+//   title: `Sum of Factors`,
+//   content: `The sum of all positive divisors of $n$ is denoted $\\sigma(n)$. Like the divisor count, it can be computed directly from the [prime factorization](!/arithmetic/divisibility/prime-factorization).
+
+// For $n = 12$: the divisors are $1, 2, 3, 4, 6, 12$, and $\\sigma(12) = 1 + 2 + 3 + 4 + 6 + 12 = 28$.
+
+// For $n = 6$: the divisors are $1, 2, 3, 6$, and $\\sigma(6) = 1 + 2 + 3 + 6 = 12$. The sum of all divisors is twice the number — but more revealing is that the sum of the proper divisors is $1 + 2 + 3 = 6$, equal to $n$ itself. This makes $6$ a perfect number.
+
+// The relationship between $\\sigma(n)$ and $n$ classifies every positive integer. When $\\sigma(n) - n = n$, the number is perfect. When $\\sigma(n) - n > n$, it is abundant. When $\\sigma(n) - n < n$, it is deficient. Most numbers are deficient; abundance and perfection are the exceptions.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+
+// obj11: {
+//   title: `Worked Examples`,
+//   content: `Find all factors of $48$. Test from $1$ to $\\sqrt{48} \\approx 6.9$: $1 \\mid 48$ (pair $1, 48$), $2 \\mid 48$ (pair $2, 24$), $3 \\mid 48$ (pair $3, 16$), $4 \\mid 48$ (pair $4, 12$), $5 \\nmid 48$, $6 \\mid 48$ (pair $6, 8$). Factors: $\\{1, 2, 3, 4, 6, 8, 12, 16, 24, 48\\}$ — ten in total.
+
+// List the first $8$ multiples of $9$: $9, 18, 27, 36, 45, 54, 63, 72$.
+
+// Find the common factors of $30$ and $45$. Factors of $30$: $\\{1, 2, 3, 5, 6, 10, 15, 30\\}$. Factors of $45$: $\\{1, 3, 5, 9, 15, 45\\}$. Common: $\\{1, 3, 5, 15\\}$. The [GCD](!/arithmetic/divisibility/gcd) is $15$.
+
+// Count the factors of $180 = 2^2 \\cdot 3^2 \\cdot 5$. Formula: $(2+1)(2+1)(1+1) = 18$ factors.
+
+// Is $28$ perfect? Proper divisors: $1, 2, 4, 7, 14$. Sum: $1 + 2 + 4 + 7 + 14 = 28$. Yes — $28$ is the second perfect number.
+
+// Is $20$ abundant or deficient? Proper divisors: $1, 2, 4, 5, 10$. Sum: $22 > 20$. Abundant.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+
+//     obj12:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj13:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+//       link:'',
+  
+//     },
+//     obj14:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+//       link:'',
+  
+//     },
+
+
+//     obj15:{
+  
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     }
+  
+//   }
+
+
+const sectionsContent = {
+
+  obj1: {
+    title: `Factors (Divisors)`,
+    content: `A factor of $n$ is any integer $a$ such that $a \\mid n$ — meaning $n = a \\cdot k$ for some integer $k$. The terms "factor" and "divisor" are interchangeable.
 
 Every positive integer has at least two factors: $1$ and itself. The number $1$ divides everything, and every number divides itself. Most numbers have additional factors between these two extremes.
 
 The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$ — eight in total. The factors of $13$ are just $1$ and $13$ — making it [prime](!/arithmetic/divisibility/prime-numbers).
 
 Unlike multiples, which extend infinitely, the factor set of any positive integer is finite. No factor of $n$ can exceed $n$ itself (in absolute value), so the search space is bounded from the start.`,
-  before: ``,
-  after: ``,
-  link: '',
-},
+    before: ``,
+    after: ``,
+    link: '',
+  },
 
-obj2: {
-  title: `Finding All Factors`,
-  content: `A systematic search tests each integer from $1$ up to $\\sqrt{n}$. If $a$ divides $n$, both $a$ and $\\frac{n}{a}$ are factors — a pair produced from a single test. Stopping at $\\sqrt{n}$ is sufficient because if $a > \\sqrt{n}$, then $\\frac{n}{a} < \\sqrt{n}$, and that smaller partner would already have been found.
+  obj2: {
+    title: `Finding All Factors`,
+    content: `A systematic search tests each integer from $1$ up to $\\sqrt{n}$. If $a$ divides $n$, both $a$ and $\\frac{n}{a}$ are factors — a pair produced from a single test. Stopping at $\\sqrt{n}$ is sufficient because if $a > \\sqrt{n}$, then $\\frac{n}{a} < \\sqrt{n}$, and that smaller partner would already have been found.
 
 For $n = 36$, test integers from $1$ to $6$ (since $\\sqrt{36} = 6$):
 
@@ -148,56 +404,58 @@ $1 \\mid 36$: pair $(1, 36)$. $2 \\mid 36$: pair $(2, 18)$. $3 \\mid 36$: pair $
 The complete factor set is $\\{1, 2, 3, 4, 6, 9, 12, 18, 36\\}$ — nine factors, all discovered by testing only six candidates.
 
 For large numbers, [divisibility rules](!/arithmetic/divisibility/rules) speed up the testing. Checking whether $2$, $3$, or $5$ divide $n$ takes a glance at the digits, not a full division.`,
-  before: ``,
-  after: ``,
-  link: '',
-},
+    before: ``,
+    after: `
+    
+    @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use our Divisibility Calculator](!/arithmetic/calculators/divisibility-calculator) →@`,
+    link: '',
+  },
 
-obj3: {
-  title: `Factor Pairs`,
-  content: `Every factor $a$ of $n$ has a partner: $\\frac{n}{a}$. Together they satisfy $a \\cdot \\frac{n}{a} = n$, and listing factor pairs ensures no divisor is overlooked.
+  obj3: {
+    title: `Factor Pairs`,
+    content: `Every factor $a$ of $n$ has a partner: $\\frac{n}{a}$. Together they satisfy $a \\cdot \\frac{n}{a} = n$, and listing factor pairs ensures no divisor is overlooked.
 
 For $n = 24$, the pairs are: $(1, 24)$, $(2, 12)$, $(3, 8)$, $(4, 6)$. Each pair multiplies to $24$, and together they account for all eight factors.
 
 For perfect squares, one pair collapses into a repeated value. The number $36$ has the pair $(6, 6)$ — the square root paired with itself. This is why perfect squares have an odd number of factors: every other factor appears in a pair of two distinct values, but the square root stands alone.
 
 Organizing factors into pairs is more reliable than listing them individually. Starting from $(1, n)$ and working inward, each successful division test produces two factors at once — halving the work and providing a built-in completeness check.`,
-  before: ``,
-  after: ``,
-  link: '',
-},
+    before: ``,
+    after: ``,
+    link: '',
+  },
 
-obj4: {
-  title: `Proper Divisors`,
-  content: `The proper divisors of $n$ are all of its factors except $n$ itself. They are the numbers that divide $n$ without being equal to it.
+  obj4: {
+    title: `Proper Divisors`,
+    content: `The proper divisors of $n$ are all of its factors except $n$ itself. They are the numbers that divide $n$ without being equal to it.
 
 The proper divisors of $12$ are $\\{1, 2, 3, 4, 6\\}$. The number $12$ itself is excluded.
 
 Proper divisors define three classical categories. A number is perfect if the sum of its proper divisors equals the number: $6 = 1 + 2 + 3$, so $6$ is perfect. A number is abundant if the sum exceeds it: the proper divisors of $12$ sum to $1 + 2 + 3 + 4 + 6 = 16 > 12$. A number is deficient if the sum falls short: the proper divisors of $10$ sum to $1 + 2 + 5 = 8 < 10$.
 
 Perfect numbers are rare. The first four are $6, 28, 496$, and $8{,}128$. Every known perfect number is even, and whether an odd perfect number exists remains one of the oldest unsolved problems in mathematics.`,
-  before: ``,
-  after: ``,
-  link: '',
-},
+    before: ``,
+    after: ``,
+    link: '',
+  },
 
-obj5: {
-  title: `Multiples`,
-  content: `A multiple of $a$ is any number $b$ such that $a \\mid b$ — meaning $b = a \\cdot k$ for some positive integer $k$. Where factors divide into a number, multiples are produced by multiplying out from it.
+  obj5: {
+    title: `Multiples`,
+    content: `A multiple of $a$ is any number $b$ such that $a \\mid b$ — meaning $b = a \\cdot k$ for some positive integer $k$. Where factors divide into a number, multiples are produced by multiplying out from it.
 
 The multiples of $7$ are $7, 14, 21, 28, 35, 42, \\ldots$ — an infinite sequence with no largest member. Every positive integer generates infinitely many multiples.
 
 Zero is a multiple of every number, since $0 = a \\cdot 0$ for any $a$. It sits at the start of every multiple sequence, though it is often omitted when listing "the multiples of $a$" in contexts where only positive values are relevant.
 
 The [modulo](!/arithmetic/modulo) operation identifies which multiple of $n$ is closest to a given number $a$ without exceeding it: $a = n \\cdot q + r$, where $n \\cdot q$ is that nearest multiple and $r$ is the gap between it and $a$.`,
-  before: ``,
-  after: ``,
-  link: '',
-},
+    before: ``,
+    after: ``,
+    link: '',
+  },
 
-obj6: {
-  title: `Factors vs Multiples`,
-  content: `The two concepts are inverses of each other, and mixing them up is one of the most common errors in elementary number theory.
+  obj6: {
+    title: `Factors vs Multiples`,
+    content: `The two concepts are inverses of each other, and mixing them up is one of the most common errors in elementary number theory.
 
 Factors go downward. The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$ — all less than or equal to $24$. There are finitely many of them.
 
@@ -206,85 +464,46 @@ Multiples go upward. The multiples of $24$ are $24, 48, 72, 96, \\ldots$ — all
 The relationship is symmetric: $a$ is a factor of $b$ if and only if $b$ is a multiple of $a$. The number $3$ is a factor of $12$, and $12$ is a multiple of $3$. Same fact, opposite viewpoints.
 
 A useful mnemonic: factors fit into a number (they are smaller), multiples multiply out from a number (they are larger). The factor set is contained; the multiple set is unbounded.`,
-  before: ``,
-  after: ``,
-  link: '',
-},
+    before: ``,
+    after: ``,
+    link: '',
+  },
 
-
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj8:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj9:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj10:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj11:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
-    obj7: {
-  title: `Common Factors`,
-  content: `A common factor of two numbers $m$ and $n$ is a number that divides both. Finding common factors means intersecting the two factor sets.
+  obj7: {
+    title: `Common Factors`,
+    content: `A common factor of two numbers $m$ and $n$ is a number that divides both. Finding common factors means intersecting the two factor sets.
 
 The factors of $12$ are $\\{1, 2, 3, 4, 6, 12\\}$. The factors of $18$ are $\\{1, 2, 3, 6, 9, 18\\}$. The common factors — numbers appearing in both sets — are $\\{1, 2, 3, 6\\}$.
 
 Every pair of positive integers shares at least one common factor: $1$ divides both, always. The question is whether they share anything larger.
 
 The greatest common factor is the largest member of the common factor set. For $12$ and $18$, it is $6$. This value — the [GCD](!/arithmetic/divisibility/gcd) — plays a central role in simplifying **fractions**, solving equations, and determining whether two numbers are coprime.`,
-  before: ``,
-  after: ``,
-  link: '',
-},
+    before: ``,
+    after: `
+    
+    @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Visit GCF Calculator Page](!/arithmetic/calculators/gcf-calculator) →@`,
+    link: '',
+  },
 
-obj8: {
-  title: `Common Multiples`,
-  content: `A common multiple of two numbers $m$ and $n$ is a number divisible by both. Where common factors are drawn from finite sets, common multiples form an infinite sequence.
+  obj8: {
+    title: `Common Multiples`,
+    content: `A common multiple of two numbers $m$ and $n$ is a number divisible by both. Where common factors are drawn from finite sets, common multiples form an infinite sequence.
 
 The multiples of $4$ are $4, 8, 12, 16, 20, 24, 28, 32, 36, \\ldots$ The multiples of $6$ are $6, 12, 18, 24, 30, 36, \\ldots$ The common multiples are $12, 24, 36, 48, \\ldots$ — every value that appears in both lists.
 
 The smallest positive common multiple is the [LCM](!/arithmetic/divisibility/lcm). For $4$ and $6$, it is $12$. Every other common multiple is a multiple of the LCM: $24 = 2 \\cdot 12$, $36 = 3 \\cdot 12$, and so on.
 
 Common multiples arise naturally in problems involving synchronization. If one event repeats every $4$ days and another every $6$ days, they coincide every $12$ days — the LCM of their periods.`,
-  before: ``,
-  after: ``,
-  link: '',
-},
+    before: ``,
+    after: `
+    
+    @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use LCM Calculator to find Least Common Multiples](!/arithmetic/calculators/lcm-calculator) →@`,
+    link: '',
+  },
 
-
-obj9: {
-  title: `Counting Factors`,
-  content: `For small numbers, counting factors by listing them is practical. For larger numbers, [prime factorization](!/arithmetic/divisibility/prime-factorization) provides a formula.
+  obj9: {
+    title: `Counting Factors`,
+    content: `For small numbers, counting factors by listing them is practical. For larger numbers, [prime factorization](!/arithmetic/divisibility/prime-factorization) provides a formula.
 
 If $n = p_1^{a_1} \\cdot p_2^{a_2} \\cdots p_k^{a_k}$, the number of positive divisors of $n$ is:
 
@@ -297,29 +516,30 @@ The number $72 = 2^3 \\cdot 3^2$ has $(3+1)(2+1) = 12$ factors. Listing them con
 The number $100 = 2^2 \\cdot 5^2$ has $(2+1)(2+1) = 9$ factors.
 
 The formula reveals structure that raw listing obscures. A number with many small prime factors has more divisors than a number of similar size with fewer, larger prime factors. The number $60 = 2^2 \\cdot 3 \\cdot 5$ has $12$ factors, while $64 = 2^6$ has only $7$.`,
-  before: ``,
-  after: ``,
-  link: '',
-},
+    before: ``,
+    after: `
+    
+    @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Check our Prime Factorization Calculator](!/arithmetic/calculators/prime-calculator) →@`,
+    link: '',
+  },
 
-obj10: {
-  title: `Sum of Factors`,
-  content: `The sum of all positive divisors of $n$ is denoted $\\sigma(n)$. Like the divisor count, it can be computed directly from the [prime factorization](!/arithmetic/divisibility/prime-factorization).
+  obj10: {
+    title: `Sum of Factors`,
+    content: `The sum of all positive divisors of $n$ is denoted $\\sigma(n)$. Like the divisor count, it can be computed directly from the [prime factorization](!/arithmetic/divisibility/prime-factorization).
 
 For $n = 12$: the divisors are $1, 2, 3, 4, 6, 12$, and $\\sigma(12) = 1 + 2 + 3 + 4 + 6 + 12 = 28$.
 
 For $n = 6$: the divisors are $1, 2, 3, 6$, and $\\sigma(6) = 1 + 2 + 3 + 6 = 12$. The sum of all divisors is twice the number — but more revealing is that the sum of the proper divisors is $1 + 2 + 3 = 6$, equal to $n$ itself. This makes $6$ a perfect number.
 
 The relationship between $\\sigma(n)$ and $n$ classifies every positive integer. When $\\sigma(n) - n = n$, the number is perfect. When $\\sigma(n) - n > n$, it is abundant. When $\\sigma(n) - n < n$, it is deficient. Most numbers are deficient; abundance and perfection are the exceptions.`,
-  before: ``,
-  after: ``,
-  link: '',
-},
+    before: ``,
+    after: ``,
+    link: '',
+  },
 
-
-obj11: {
-  title: `Worked Examples`,
-  content: `Find all factors of $48$. Test from $1$ to $\\sqrt{48} \\approx 6.9$: $1 \\mid 48$ (pair $1, 48$), $2 \\mid 48$ (pair $2, 24$), $3 \\mid 48$ (pair $3, 16$), $4 \\mid 48$ (pair $4, 12$), $5 \\nmid 48$, $6 \\mid 48$ (pair $6, 8$). Factors: $\\{1, 2, 3, 4, 6, 8, 12, 16, 24, 48\\}$ — ten in total.
+  obj11: {
+    title: `Worked Examples`,
+    content: `Find all factors of $48$. Test from $1$ to $\\sqrt{48} \\approx 6.9$: $1 \\mid 48$ (pair $1, 48$), $2 \\mid 48$ (pair $2, 24$), $3 \\mid 48$ (pair $3, 16$), $4 \\mid 48$ (pair $4, 12$), $5 \\nmid 48$, $6 \\mid 48$ (pair $6, 8$). Factors: $\\{1, 2, 3, 4, 6, 8, 12, 16, 24, 48\\}$ — ten in total.
 
 List the first $8$ multiples of $9$: $9, 18, 27, 36, 45, 54, 63, 72$.
 
@@ -330,52 +550,12 @@ Count the factors of $180 = 2^2 \\cdot 3^2 \\cdot 5$. Formula: $(2+1)(2+1)(1+1) 
 Is $28$ perfect? Proper divisors: $1, 2, 4, 7, 14$. Sum: $1 + 2 + 4 + 7 + 14 = 28$. Yes — $28$ is the second perfect number.
 
 Is $20$ abundant or deficient? Proper divisors: $1, 2, 4, 5, 10$. Sum: $22 > 20$. Abundant.`,
-  before: ``,
-  after: ``,
-  link: '',
-},
+    before: ``,
+    after: ``,
+    link: '',
+  },
 
-
-    obj12:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    },
-    obj13:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-      link:'',
-  
-    },
-    obj14:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-      link:'',
-  
-    },
-
-
-    obj15:{
-  
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    }
-  
-  }
-
+}
 
   const introContent = {
   id: "intro",
@@ -677,6 +857,7 @@ export default function FactorsPage({seoData, sectionsContent, introContent, faq
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          sectionsContent.obj2.after,
         ]
     },
     {
@@ -717,6 +898,7 @@ export default function FactorsPage({seoData, sectionsContent, introContent, faq
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          sectionsContent.obj7.after,
         ]
     },
     {
@@ -725,6 +907,7 @@ export default function FactorsPage({seoData, sectionsContent, introContent, faq
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          sectionsContent.obj8.after,
         ]
     },
     {
@@ -733,6 +916,7 @@ export default function FactorsPage({seoData, sectionsContent, introContent, faq
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          sectionsContent.obj9.after,
         ]
     },
     {
