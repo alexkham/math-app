@@ -11,8 +11,23 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
+const keyWords = [
+  "exponential inequalities",
+  "solve exponential inequality",
+  "exponential inequality rules",
+  "base greater than 1",
+  "base less than 1",
+  "inequality direction flip",
+  "exponential inequality examples",
+  "compound exponential inequality",
+  "2^x inequality",
+  "solving inequalities with exponents",
+  "exponential function increasing decreasing",
+  "when to flip inequality sign",
+  "exponential inequality domain",
+  "compare exponential expressions",
+  "exponential inequality steps"
+]
 
   // •
 
@@ -277,27 +292,171 @@ Systems involving multiple exponential inequalities with different bases are han
   content: `[Exponential equations](!/algebra/powers/exponential-equations) ask when two exponential expressions are equal. Exponential inequalities ask when one is larger than the other — and the answer hinges on a single property of the base that changes everything about how the inequality behaves.`
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "How does the base affect solving exponential inequalities?",
+    answer: "When base a > 1, the exponential function is increasing, so the inequality direction is preserved: aˣ > aʸ means x > y. When 0 < a < 1, the function is decreasing, so the direction flips: aˣ > aʸ means x < y."
+  },
+  obj2: {
+    question: "How do you solve a basic exponential inequality like 2^x > 8?",
+    answer: "Rewrite both sides with the same base: 2ˣ > 2³. Since base 2 > 1, the function is increasing and direction is preserved. Compare exponents directly: x > 3."
+  },
+  obj3: {
+    question: "When do you flip the inequality sign in exponential inequalities?",
+    answer: "Flip the inequality when the base is between 0 and 1 (like 1/2, 1/3, 0.5). These bases create decreasing functions, so larger exponents give smaller values. For (1/3)ˣ > (1/3)², the solution is x < 2."
+  },
+  obj4: {
+    question: "How do you solve exponential inequalities with different bases?",
+    answer: "Convert both sides to powers of a common base using exponent laws. For 4ˣ < 32: rewrite as (2²)ˣ < 2⁵, giving 2²ˣ < 2⁵. Then compare exponents: 2x < 5, so x < 5/2."
+  },
+  obj5: {
+    question: "Can an exponential expression ever equal zero or be negative?",
+    answer: "No. For any positive base a, aˣ > 0 for all real x. The equation 2ˣ = 0 has no solution. The inequality 3ˣ < 0 has no solution. This property often eliminates impossible cases."
+  },
+  obj6: {
+    question: "How do you solve compound exponential inequalities?",
+    answer: "Rewrite all parts with the same base, then solve both inequality conditions. For 1/4 < 2ˣ < 16: rewrite as 2⁻² < 2ˣ < 2⁴. Since base > 1, preserve direction: -2 < x < 4."
+  },
+  obj7: {
+    question: "What is the inequality 2^x > -5 solution?",
+    answer: "All real numbers. Since 2ˣ is always positive (greater than 0), it is automatically greater than -5 for every value of x. No calculation needed once you recognize aˣ > 0 always."
+  },
+  obj8: {
+    question: "How do you handle (1/2)^x > 4?",
+    answer: "Rewrite 4 as a power of 1/2: since (1/2)⁻² = 4, the inequality becomes (1/2)ˣ > (1/2)⁻². Base 1/2 < 1 means decreasing function, so flip direction: x < -2."
+  },
+  obj9: {
+    question: "What if the base equals 1?",
+    answer: "The base a = 1 is excluded from exponential functions because 1ˣ = 1 for all x. No inequality between distinct powers is possible — 1ˣ = 1ʸ = 1 always, regardless of x and y."
+  },
+  obj10: {
+    question: "How do you solve 9^(x+1) ≥ 27^x?",
+    answer: "Convert to base 3: 9 = 3² and 27 = 3³. Rewrite as 3^(2x+2) ≥ 3^(3x). Base 3 > 1, preserve direction: 2x + 2 ≥ 3x, giving 2 ≥ x, so x ≤ 2."
+  }
+}
 
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Exponential Inequalities",
+    "description": "Learn to solve exponential inequalities: when to preserve vs flip inequality direction based on base, rewriting with common bases, compound inequalities, and domain considerations.",
+    "url": "https://www.learnmathclass.com/algebra/powers/exponential-inequalities",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Exponential Inequalities"
+    },
+    "teaches": [
+      "Base determines inequality direction",
+      "Solving basic exponential inequalities",
+      "Rewriting with common bases",
+      "When to flip the inequality sign",
+      "Domain and sign considerations",
+      "Compound exponential inequalities",
+      "No solution and all real number cases"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Exponential Inequalities | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/algebra/powers/exponential-inequalities",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Algebra",
+        "item": "https://www.learnmathclass.com/algebra"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Powers",
+        "item": "https://www.learnmathclass.com/algebra/powers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Exponential Inequalities",
+        "item": "https://www.learnmathclass.com/algebra/powers/exponential-inequalities"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+//    return {
+//       props:{
+//          sectionsContent,
+//          introContent,
+//           seoData: {
+//         title: "Exponential Inequalities | Learn Math Class",
+//         description: "Metadescription",
+//         keywords: keyWords.join(", "),
+//         url: "/algebra/powers/exponential-inequalities",
+//          name: "name"
+//       },
         
-       }
-    }
+//        }
+//     }
+
+return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Exponential Inequalities: When to Flip the Sign | Learn Math Class",
+      description: "Learn to solve exponential inequalities: when to preserve vs flip inequality direction based on base, rewriting with common bases, compound inequalities, and domain considerations.",
+      keywords: keyWords.join(", "),
+      url: "/algebra/powers/exponential-inequalities",
+      name: "Exponential Inequalities"
+    },
+  }
+}
    }
 
-export default function InequalitiesPage({seoData,sectionsContent , introContent}) {
-
+// export default function InequalitiesPage({seoData,sectionsContent , introContent}) {
+export default function InequalitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -449,7 +608,7 @@ export default function InequalitiesPage({seoData,sectionsContent , introContent
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -490,6 +649,47 @@ export default function InequalitiesPage({seoData,sectionsContent , introContent
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>
