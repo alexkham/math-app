@@ -6,7 +6,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
-import '../pages.css'
+import '../../../../pages/pages.css';
 import Head from 'next/head'
 
 
