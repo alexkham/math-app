@@ -11,22 +11,23 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-const keyWords = [
-  "exponential inequalities",
-  "solve exponential inequality",
-  "exponential inequality rules",
-  "base greater than 1",
-  "base less than 1",
-  "inequality direction flip",
-  "exponential inequality examples",
-  "compound exponential inequality",
-  "2^x inequality",
-  "solving inequalities with exponents",
-  "exponential function increasing decreasing",
-  "when to flip inequality sign",
-  "exponential inequality domain",
-  "compare exponential expressions",
-  "exponential inequality steps"
+
+ const keyWords = [
+  "exponential equations",
+  "solve exponential equation",
+  "matching bases",
+  "variable in exponent",
+  "2^x = 8",
+  "exponential equation examples",
+  "solve for x in exponent",
+  "exponential equation methods",
+  "substitution exponential equation",
+  "quadratic in exponential form",
+  "rational exponent equations",
+  "negative exponent equations",
+  "extraneous solutions exponential",
+  "exponential vs polynomial equation",
+  "how to solve exponential equations"
 ]
 
   // •
@@ -115,51 +116,56 @@ const keyWords = [
     //   link:'',
   
     // },
+    // obj6:{
+    //   title:``,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
+  
+    // },
 
     obj1: {
-  title: `Key Principle: Base Determines Direction`,
-  content: `The behavior of an exponential inequality depends entirely on whether the base is greater than $1$ or between $0$ and $1$. This is the central idea on this page, and every solving method flows from it.
+  title: `What is an Exponential Equation`,
+  content: `An exponential equation is any equation in which the variable appears in an exponent. The equation $2^x = 16$ is exponential — the unknown $x$ controls how many times the base is applied. The equation $3^{2x-1} = 27$ is exponential. The equation $5 \cdot 4^x = 320$ is exponential.
 
-When $a > 1$, the function $a^x$ is increasing — larger exponents produce larger values. So the inequality $a^x > a^y$ holds exactly when $x > y$. The direction of the inequality is preserved.
+What makes these equations distinct from polynomial equations is the position of the variable. In $x^3 = 8$, the variable is the base and the exponent is a fixed number — this is a polynomial equation, solved by taking a [root](!/algebra/powers/rational-exponents). In $2^x = 8$, the base is fixed and the exponent is the variable — this is an exponential equation, and roots alone will not solve it.
 
-When $0 < a < 1$, the function $a^x$ is decreasing — larger exponents produce smaller values. So the inequality $a^x > a^y$ holds exactly when $x < y$. The direction of the inequality flips.
-
-The base $a = 1$ is excluded because $1^x = 1$ for all $x$ — no inequality between distinct powers is possible.
-
-This directional rule replaces the familiar "multiply or divide by a negative flips the inequality" from linear algebra. In exponential inequalities, it is not the sign of a multiplier but the size of the base that governs whether the inequality reverses.`,
+The distinction matters because the techniques are entirely different. Polynomial equations are solved by factoring, applying the quadratic formula, or extracting roots. Exponential equations require rewriting expressions using the laws of exponents, matching bases, or — when those approaches fail — logarithms.`,
   before: ``,
   after: ``,
   link: '',
 },
 
 obj2: {
-  title: `Solving Basic Exponential Inequalities`,
-  content: `The simplest exponential inequalities are solved by expressing both sides as powers of the same base and then applying the directional rule.
+  title: `Method 1: Matching Bases`,
+  content: `The simplest exponential equations yield to a single principle: if two powers of the same base are equal and the base is positive and not equal to $1$, then their exponents must be equal.
 
-The inequality $2^x > 8$ rewrites as $2^x > 2^3$. Since the base $2$ is greater than $1$, the function is increasing and the inequality preserves direction: $x > 3$.
+$$a^x = a^y \\implies x = y \\qquad (a > 0,\\; a \\neq 1)$$
 
-The inequality $\\left(\\frac{1}{3}\\right)^x > 9$ requires more care. Rewrite $9$ as a power of $\\frac{1}{3}$: since $\\frac{1}{3}^{-2} = 3^2 = 9$, the inequality becomes $\\left(\\frac{1}{3}\\right)^x > \\left(\\frac{1}{3}\\right)^{-2}$. The base $\\frac{1}{3}$ is between $0$ and $1$, so the function is decreasing and the inequality flips: $x < -2$.
+For $2^x = 8$, recognize that $8 = 2^3$. The equation becomes $2^x = 2^3$, so $x = 3$.
 
-The inequality $5^{x-1} \\leq 125$ rewrites as $5^{x-1} \\leq 5^3$. Base greater than $1$, direction preserved: $x - 1 \\leq 3$, so $x \\leq 4$.
+The method extends to cases where the connection between bases is less obvious. The equation $4^x = 8$ involves different bases, but both are powers of $2$: $4 = 2^2$ and $8 = 2^3$. Rewriting gives $(2^2)^x = 2^3$, which by the power of a power rule becomes $2^{2x} = 2^3$. Matching exponents: $2x = 3$, so $x = \\frac{3}{2}$.
 
-The procedure is consistent: rewrite both sides with a common base, then read off the inequality between exponents — preserving direction if the base exceeds $1$, reversing it if the base is a proper fraction.`,
+The equation $9^{x+1} = 27$ works the same way. Both bases are powers of $3$: $9 = 3^2$ and $27 = 3^3$. Rewriting: $(3^2)^{x+1} = 3^3$, giving $3^{2(x+1)} = 3^3$. So $2(x+1) = 3$, and $x = \\frac{1}{2}$.
+
+The key skill is recognizing when two numbers share a common base. Familiarity with small powers — $2, 4, 8, 16, 32$; $3, 9, 27, 81$; $5, 25, 125$ — makes this recognition faster.`,
   before: ``,
   after: ``,
   link: '',
 },
 
-
 obj3: {
-  title: `Inequalities Requiring Simplification`,
-  content: `When the two sides of an inequality do not immediately share a base, the [laws of exponents](!/algebra/powers/laws) are needed to rewrite one or both sides before comparison.
+  title: `Method 2: Using Laws to Simplify`,
+  content: `Some exponential equations require algebraic manipulation before the bases can be matched. The [laws of exponents](!/algebra/powers/laws) provide the tools for restructuring these expressions.
 
-The inequality $4^x < 32$ involves $4 = 2^2$ and $32 = 2^5$. Rewriting: $(2^2)^x < 2^5$, so $2^{2x} < 2^5$. Base $2 > 1$, direction preserved: $2x < 5$, giving $x < \\frac{5}{2}$.
+Consider $2^{x+1} + 2^x = 12$. The term $2^{x+1}$ can be rewritten using the product rule: $2^{x+1} = 2^x \cdot 2^1 = 2 \cdot 2^x$. The equation becomes $2 \cdot 2^x + 2^x = 12$.
 
-The inequality $9^{x+1} \\geq 27^x$ involves $9 = 3^2$ and $27 = 3^3$. Rewriting: $3^{2(x+1)} \\geq 3^{3x}$, which gives $3^{2x+2} \\geq 3^{3x}$. Base $3 > 1$, direction preserved: $2x + 2 \\geq 3x$, so $2 \\geq x$, meaning $x \\leq 2$.
+Now $2^x$ is a common factor: $2^x(2 + 1) = 12$, which simplifies to $3 \cdot 2^x = 12$, so $2^x = 4 = 2^2$, giving $x = 2$.
 
-The inequality $\\left(\\frac{1}{4}\\right)^x > \\left(\\frac{1}{8}\\right)^2$ requires converting both bases. Since $\\frac{1}{4} = 2^{-2}$ and $\\frac{1}{8} = 2^{-3}$, the inequality becomes $(2^{-2})^x > (2^{-3})^2$, or $2^{-2x} > 2^{-6}$. Base $2 > 1$: $-2x > -6$, so $x < 3$.
+Consider $3^{2x} - 4 \cdot 3^x + 3 = 0$. The term $3^{2x}$ equals $(3^x)^2$, so the equation is quadratic in $3^x$. But before reaching for substitution, notice that the laws transformed the original into a form where standard techniques apply — the exponent rules did the heavy lifting.
 
-The algebraic manipulation happens before the directional rule is applied. Simplify first, compare second.`,
+The general strategy is to express every exponential term in the equation as a power of a single base or as a product involving a single exponential expression. Once the equation has a single exponential unknown, isolation becomes straightforward.`,
   before: ``,
   after: ``,
   link: '',
@@ -167,44 +173,59 @@ The algebraic manipulation happens before the directional rule is applied. Simpl
 
 
 obj4: {
-  title: `Domain and Sign Considerations`,
-  content: `Exponential expressions with positive bases carry a property that constrains the solution space: $a^x > 0$ for every real $x$ when $a > 0$.
+  title: `Equations with Rational and Negative Exponents`,
+  content: `Not every equation with exponents has the variable in the exponent. Some place the variable in the base while the exponent is a fixed [rational](!/algebra/powers/rational-exponents) or [negative](!/algebra/powers/negative-exponents) number. These are solved by inverting the exponent.
 
-No real exponent can make a positive base produce zero or a negative result. The equation $2^x = 0$ has no solution. The inequality $3^x < 0$ has no solution. This fact is not just a technicality — it eliminates entire branches of potential answers.
+The equation $x^{2/3} = 4$ asks: what value of $x$, when raised to the power $\\frac{2}{3}$, gives $4$? To isolate $x$, raise both sides to the reciprocal power $\\frac{3}{2}$:
 
-The inequality $2^x > -5$ is satisfied by every real $x$, because $2^x$ is always positive and thus always greater than $-5$. No computation is needed once the sign property is recognized.
+$$x = 4^{3/2} = (\\sqrt{4})^3 = 2^3 = 8$$
 
-The inequality $2^x < -1$ has no solution at all, for the same reason.
+The equation $x^{-2} = 9$ translates to $\\frac{1}{x^2} = 9$, so $x^2 = \\frac{1}{9}$, giving $x = \\pm\\frac{1}{3}$.
 
-When [negative exponents](!/algebra/powers/negative-exponents) appear with variable bases, domain restrictions must be checked. The expression $x^{-2} > 4$ requires $x \\neq 0$, and the solution set must exclude zero regardless of what the algebra produces. Similarly, expressions involving [rational exponents](!/algebra/powers/rational-exponents) with even roots require the base to be non-negative.`,
+The equation $x^{3/4} = 27$ is solved by raising both sides to the power $\\frac{4}{3}$: $x = 27^{4/3} = (\\sqrt[3]{27})^4 = 3^4 = 81$.
+
+The reciprocal exponent works because $(a^{m/n})^{n/m} = a^1 = a$ by the power of a power rule. The exponent and its reciprocal undo each other, leaving the base isolated.`,
   before: ``,
   after: ``,
   link: '',
 },
+
 
 obj5: {
-  title: `Compound Inequalities`,
-  content: `A compound exponential inequality places an exponential expression between two bounds, requiring the variable to satisfy both constraints simultaneously.
+  title: `Equations Reducible to Simpler Form`,
+  content: `Some exponential equations disguise a familiar structure. The equation $4^x - 3 \cdot 2^x + 2 = 0$ looks intimidating, but a substitution reveals a quadratic hiding underneath.
 
-The inequality $\\frac{1}{4} < 2^x < 16$ sets lower and upper bounds on $2^x$. Rewrite each bound as a power of $2$: $2^{-2} < 2^x < 2^4$. Since the base $2 > 1$ preserves direction, the solution is $-2 < x < 4$.
+Since $4^x = (2^2)^x = (2^x)^2$, let $t = 2^x$. The equation becomes:
 
-The inequality $\\frac{1}{27} \\leq 3^{x-1} \\leq 81$ rewrites as $3^{-3} \\leq 3^{x-1} \\leq 3^4$. Preserving direction: $-3 \\leq x - 1 \\leq 4$, so $-2 \\leq x \\leq 5$.
+$$t^2 - 3t + 2 = 0$$
 
-With a base between $0$ and $1$, both inequality directions flip. The inequality $\\frac{1}{9} < \\left(\\frac{1}{3}\\right)^x < 3$ rewrites as $\\left(\\frac{1}{3}\\right)^{-2} < \\left(\\frac{1}{3}\\right)^x < \\left(\\frac{1}{3}\\right)^{-1}$. Since $\\frac{1}{3} < 1$, the function is decreasing: $-2 > x > -1$, which reads as $-1 < x < -2$ — but this is empty when written carelessly. Reversing properly: $-2 < x < -1$. Care with the direction at each step prevents this kind of error.
+This [factors](!/algebra/polynomials/factoring) as $(t - 1)(t - 2) = 0$, giving $t = 1$ or $t = 2$.
 
-Systems involving multiple exponential inequalities with different bases are handled by solving each inequality independently and then intersecting the solution sets.`,
+Substituting back: $2^x = 1$ gives $x = 0$, and $2^x = 2$ gives $x = 1$. Both solutions are valid.
+
+The substitution works whenever the equation involves two exponential terms where one exponent is double the other — $a^{2x}$ and $a^x$, or $a^{4x}$ and $a^{2x}$. The doubled exponent creates a perfect square under substitution, converting the exponential equation into a polynomial one.
+
+More complex examples follow the same pattern. The equation $9^x + 2 \cdot 3^x - 15 = 0$ becomes $t^2 + 2t - 15 = 0$ with $t = 3^x$, factoring as $(t + 5)(t - 3) = 0$. Since $3^x > 0$ for all real $x$, the solution $t = -5$ is rejected, leaving $3^x = 3$ and $x = 1$.`,
   before: ``,
   after: ``,
   link: '',
 },
-    obj6:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    },
+
+obj6: {
+  title: `Checking Solutions`,
+  content: `Exponential equations demand verification, because the solving process can introduce values that fail in the original equation.
+
+Domain validity is the first check. The base of an exponential expression must be positive when the exponent is irrational, and nonzero when the exponent is negative. Any solution that violates these conditions is extraneous and must be discarded.
+
+The substitution method introduces the most common source of false solutions. When $t = a^x$ is used, only positive values of $t$ are valid — because $a^x > 0$ for any positive base $a$ and any real $x$. A quadratic in $t$ may produce a negative root, but that root has no corresponding real value of $x$.
+
+Squaring both sides of an equation — sometimes necessary when rational exponents are involved — can also generate extraneous solutions. The equation $x^{1/2} = -3$ has no real solution, since a square root is non-negative. But squaring gives $x = 9$, which does not satisfy the original equation.
+
+Substituting each candidate back into the original equation is the reliable final step. If the left side equals the right side, the solution stands. If not, it is discarded — regardless of how cleanly the algebra produced it.`,
+  before: ``,
+  after: ``,
+  link: '',
+},
     obj7:{
       title:``,
       content:``,
@@ -288,61 +309,60 @@ Systems involving multiple exponential inequalities with different bases are han
 
   const introContent = {
   id: "intro",
-  title: "When We Compare Powers",
-  content: `[Exponential equations](!/algebra/powers/exponential-equations) ask when two exponential expressions are equal. Exponential inequalities ask when one is larger than the other — and the answer hinges on a single property of the base that changes everything about how the inequality behaves.`
+  title: "Solving for the Exponent",
+  content: `In a [polynomial](!/algebra/polynomials) equation like $x^2 = 9$, the unknown is the base and the exponent is fixed. In an exponential equation, the roles reverse — the base is known and the unknown sits in the exponent. The equation $2^x = 8$ asks not "what number squared gives $9$?" but "how many times must $2$ be multiplied by itself to reach $8$?" That shift demands a different set of solving techniques, all grounded in the [laws of exponents](!/algebra/powers/laws).`
 }
 
 const faqQuestions = {
   obj1: {
-    question: "How does the base affect solving exponential inequalities?",
-    answer: "When base a > 1, the exponential function is increasing, so the inequality direction is preserved: aˣ > aʸ means x > y. When 0 < a < 1, the function is decreasing, so the direction flips: aˣ > aʸ means x < y."
+    question: "What is an exponential equation?",
+    answer: "An exponential equation has the variable in the exponent, like 2ˣ = 16 or 3^(2x-1) = 27. This differs from polynomial equations like x³ = 8 where the variable is the base. The position of the variable determines which solving techniques apply."
   },
   obj2: {
-    question: "How do you solve a basic exponential inequality like 2^x > 8?",
-    answer: "Rewrite both sides with the same base: 2ˣ > 2³. Since base 2 > 1, the function is increasing and direction is preserved. Compare exponents directly: x > 3."
+    question: "How do you solve exponential equations by matching bases?",
+    answer: "Rewrite both sides as powers of the same base, then set exponents equal. For 2ˣ = 8: since 8 = 2³, the equation becomes 2ˣ = 2³, so x = 3. This works because aˣ = aʸ implies x = y when a > 0 and a ≠ 1."
   },
   obj3: {
-    question: "When do you flip the inequality sign in exponential inequalities?",
-    answer: "Flip the inequality when the base is between 0 and 1 (like 1/2, 1/3, 0.5). These bases create decreasing functions, so larger exponents give smaller values. For (1/3)ˣ > (1/3)², the solution is x < 2."
+    question: "How do you solve 4^x = 8?",
+    answer: "Convert both to powers of 2: 4 = 2² and 8 = 2³. The equation becomes (2²)ˣ = 2³, which simplifies to 2^(2x) = 2³. Match exponents: 2x = 3, so x = 3/2."
   },
   obj4: {
-    question: "How do you solve exponential inequalities with different bases?",
-    answer: "Convert both sides to powers of a common base using exponent laws. For 4ˣ < 32: rewrite as (2²)ˣ < 2⁵, giving 2²ˣ < 2⁵. Then compare exponents: 2x < 5, so x < 5/2."
+    question: "What if the bases cannot be matched?",
+    answer: "When no common base exists (like 2ˣ = 5), logarithms are required. Take log of both sides: x·log(2) = log(5), so x = log(5)/log(2). This topic is covered in the logarithms section."
   },
   obj5: {
-    question: "Can an exponential expression ever equal zero or be negative?",
-    answer: "No. For any positive base a, aˣ > 0 for all real x. The equation 2ˣ = 0 has no solution. The inequality 3ˣ < 0 has no solution. This property often eliminates impossible cases."
+    question: "How do you solve equations with rational exponents like x^(2/3) = 4?",
+    answer: "Raise both sides to the reciprocal power. For x^(2/3) = 4: raise to power 3/2 to get x = 4^(3/2) = (√4)³ = 2³ = 8. The reciprocal exponent undoes the original."
   },
   obj6: {
-    question: "How do you solve compound exponential inequalities?",
-    answer: "Rewrite all parts with the same base, then solve both inequality conditions. For 1/4 < 2ˣ < 16: rewrite as 2⁻² < 2ˣ < 2⁴. Since base > 1, preserve direction: -2 < x < 4."
+    question: "How do you solve x^(-2) = 9?",
+    answer: "Rewrite as 1/x² = 9, so x² = 1/9, giving x = ±1/3. Negative exponents mean reciprocals, so isolate the positive exponent first, then solve normally."
   },
   obj7: {
-    question: "What is the inequality 2^x > -5 solution?",
-    answer: "All real numbers. Since 2ˣ is always positive (greater than 0), it is automatically greater than -5 for every value of x. No calculation needed once you recognize aˣ > 0 always."
+    question: "How do substitution and quadratic methods work for exponential equations?",
+    answer: "When an equation has a^(2x) and a^x terms, substitute t = aˣ. For 4ˣ - 3·2ˣ + 2 = 0: since 4ˣ = (2ˣ)², let t = 2ˣ. Get t² - 3t + 2 = 0, factor to (t-1)(t-2) = 0, giving t = 1 or t = 2, so x = 0 or x = 1."
   },
   obj8: {
-    question: "How do you handle (1/2)^x > 4?",
-    answer: "Rewrite 4 as a power of 1/2: since (1/2)⁻² = 4, the inequality becomes (1/2)ˣ > (1/2)⁻². Base 1/2 < 1 means decreasing function, so flip direction: x < -2."
+    question: "Why do exponential equations sometimes have no solution?",
+    answer: "Because aˣ > 0 for any positive base and real exponent. The equation 2ˣ = -4 has no solution since 2ˣ is always positive. Similarly, when substitution gives a negative value for t = aˣ, that root must be rejected."
   },
   obj9: {
-    question: "What if the base equals 1?",
-    answer: "The base a = 1 is excluded from exponential functions because 1ˣ = 1 for all x. No inequality between distinct powers is possible — 1ˣ = 1ʸ = 1 always, regardless of x and y."
+    question: "What are extraneous solutions in exponential equations?",
+    answer: "Solutions that emerge from algebra but don't satisfy the original equation. Substitution can produce negative t values (invalid since aˣ > 0). Squaring can introduce false roots. Always substitute answers back into the original equation to verify."
   },
   obj10: {
-    question: "How do you solve 9^(x+1) ≥ 27^x?",
-    answer: "Convert to base 3: 9 = 3² and 27 = 3³. Rewrite as 3^(2x+2) ≥ 3^(3x). Base 3 > 1, preserve direction: 2x + 2 ≥ 3x, giving 2 ≥ x, so x ≤ 2."
+    question: "What's the difference between exponential and polynomial equations?",
+    answer: "In exponential equations (2ˣ = 8), the variable is in the exponent. In polynomial equations (x³ = 8), the variable is the base. They require completely different solving techniques: matching bases vs taking roots or factoring."
   }
 }
-
 
 const schemas = {
   learningResource: {
     "@context": "https://schema.org",
     "@type": "LearningResource",
-    "name": "Exponential Inequalities",
-    "description": "Learn to solve exponential inequalities: when to preserve vs flip inequality direction based on base, rewriting with common bases, compound inequalities, and domain considerations.",
-    "url": "https://www.learnmathclass.com/algebra/powers/exponential-inequalities",
+    "name": "Exponential Equations",
+    "description": "Learn to solve exponential equations: matching bases, using exponent laws, substitution for quadratic forms, rational and negative exponent cases, and checking for extraneous solutions.",
+    "url": "https://www.learnmathclass.com/algebra/powers/exponential-equations",
     "inLanguage": "en-US",
     "learningResourceType": "Explanation",
     "educationalLevel": "High School, College",
@@ -353,16 +373,16 @@ const schemas = {
     },
     "about": {
       "@type": "Thing",
-      "name": "Exponential Inequalities"
+      "name": "Exponential Equations"
     },
     "teaches": [
-      "Base determines inequality direction",
-      "Solving basic exponential inequalities",
-      "Rewriting with common bases",
-      "When to flip the inequality sign",
-      "Domain and sign considerations",
-      "Compound exponential inequalities",
-      "No solution and all real number cases"
+      "What makes an equation exponential",
+      "Matching bases method",
+      "Using laws of exponents to simplify",
+      "Equations with rational and negative exponents",
+      "Substitution to reveal quadratic structure",
+      "Identifying and rejecting extraneous solutions",
+      "Domain validity checks"
     ],
     "keywords": keyWords.join(", "),
     "author": {
@@ -402,8 +422,8 @@ const schemas = {
       {
         "@type": "ListItem",
         "position": 4,
-        "name": "Exponential Inequalities",
-        "item": "https://www.learnmathclass.com/algebra/powers/exponential-inequalities"
+        "name": "Exponential Equations",
+        "item": "https://www.learnmathclass.com/algebra/powers/exponential-equations"
       }
     ]
   },
@@ -428,10 +448,10 @@ const schemas = {
 //          sectionsContent,
 //          introContent,
 //           seoData: {
-//         title: "Exponential Inequalities | Learn Math Class",
+//         title: "Exponential Equations Page | Learn Math Class",
 //         description: "Metadescription",
 //         keywords: keyWords.join(", "),
-//         url: "/algebra/powers/exponential-inequalities",
+//         url: "/algebra/powers/exponential-equations",
 //          name: "name"
 //       },
         
@@ -445,18 +465,18 @@ return {
     faqQuestions,
     schemas,
     seoData: {
-      title: "Exponential Inequalities: When to Flip the Sign | Learn Math Class",
-      description: "Learn to solve exponential inequalities: when to preserve vs flip inequality direction based on base, rewriting with common bases, compound inequalities, and domain considerations.",
+      title: "Exponential Equations: Solve for the Exponent | Learn Math Class",
+      description: "Learn to solve exponential equations: matching bases, using exponent laws, substitution for quadratic forms, rational and negative exponent cases, and checking for extraneous solutions.",
       keywords: keyWords.join(", "),
-      url: "/algebra/powers/exponential-inequalities",
-      name: "Exponential Inequalities"
+      url: "/algebra/powers/exponential-equations",
+      name: "Exponential Equations"
     },
   }
 }
    }
 
-// export default function InequalitiesPage({seoData,sectionsContent , introContent}) {
-export default function InequalitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+// export default function ExponentialEquationsPage({seoData,sectionsContent , introContent}) {
+export default function ExponentialEquationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -499,14 +519,14 @@ export default function InequalitiesPage({seoData, sectionsContent, introContent
           sectionsContent.obj5.content,
         ]
     },
-    // {
-    //     id:'6',
-    //     title:sectionsContent.obj6.title,
-    //     link:sectionsContent.obj6.link,
-    //     content:[
-    //       sectionsContent.obj6.content,
-    //     ]
-    // },
+    {
+        id:'6',
+        title:sectionsContent.obj6.title,
+        link:sectionsContent.obj6.link,
+        content:[
+          sectionsContent.obj6.content,
+        ]
+    },
     // {
     //     id:'7',
     //     title:sectionsContent.obj7.title,
@@ -709,7 +729,7 @@ export default function InequalitiesPage({seoData, sectionsContent, introContent
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Exponential Inequalities</h1>
+   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Exponential Equations</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

@@ -266,7 +266,7 @@ export default function PowersPage({sectionsContent,introContent}) {
       <br/>
       <SectionTableOfContents sections={powersSections}
        showSecondaryNav={true}
-       secondaryNavMode="siblings"
+       secondaryNavMode="children"
        secondaryNavTitle="Similar Pages"/>
       <br/>
       <br/>

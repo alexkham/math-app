@@ -737,7 +737,7 @@ export default function ExponentialFunctionsPage({seoData, sectionsContent, intr
    <br/>
    <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
-         secondaryNavMode="children"  // or "siblings"
+         secondaryNavMode="siblings"  // or "siblings"
          secondaryNavTitle="More in this Section"
    
    />
