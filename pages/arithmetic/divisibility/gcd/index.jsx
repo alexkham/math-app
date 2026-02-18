@@ -865,7 +865,12 @@ export default function GCDPage({seoData, sectionsContent, introContent, faqQues
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Greatest Common Divisor (GCD)</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "siblings"
+         secondaryNavTitle="More in this Section"
+   
+   />
    <br/>
    <br/>
    <br/>
