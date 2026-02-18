@@ -817,7 +817,12 @@ export default function NegativeNumbersPage({seoData, sectionsContent, introCont
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Modulo of Negative Numbers</h1>
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+     showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "siblings"
+         secondaryNavTitle="More in this Section"
+   
+   />
    <br/>
    <br/>
    <br/>
