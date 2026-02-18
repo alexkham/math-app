@@ -1367,7 +1367,6 @@ const UnifiedVennDiagram2Plus = forwardRef(({
     </div>
   );
 });
-
-UnifiedVennDiagram2.displayName = 'UnifiedVennDiagram2';
+UnifiedVennDiagram2Plus.displayName = 'UnifiedVennDiagram2Plus';
 
 export default UnifiedVennDiagram2Plus;
