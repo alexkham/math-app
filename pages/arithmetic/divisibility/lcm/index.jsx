@@ -130,7 +130,7 @@ export async function getStaticProps(){
   title: `What is LCM?`,
   content: `The least common multiple of two positive integers $a$ and $b$, written $\\text{lcm}(a, b)$, is the smallest positive integer divisible by both.
 
-The [multiples](!/arithmetic/divisibility/factors-and-multiples) of $4$ are $4, 8, 12, 16, 20, 24, \\ldots$ The multiples of $6$ are $6, 12, 18, 24, 30, \\ldots$ The numbers appearing in both lists — the common multiples — are $12, 24, 36, \\ldots$ The smallest is $12$, so $\\text{lcm}(4, 6) = 12$.
+The [multiples](!/arithmetic/divisibility/factors) of $4$ are $4, 8, 12, 16, 20, 24, \\ldots$ The multiples of $6$ are $6, 12, 18, 24, 30, \\ldots$ The numbers appearing in both lists — the common multiples — are $12, 24, 36, \\ldots$ The smallest is $12$, so $\\text{lcm}(4, 6) = 12$.
 
 The LCM always exists and is always at least as large as the larger input: $\\text{lcm}(a, b) \\geq \\max(a, b)$. The result must be a multiple of both numbers, so it cannot be smaller than either one.
 

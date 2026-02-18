@@ -196,7 +196,7 @@ A number is divisible by $2$ if its last digit is even. By $5$ if its last digit
 
 Each rule exploits the structure of base-$10$ place value. The last digit determines divisibility by $2$ and $5$ because $10$ is divisible by both. The digit-sum rule for $9$ works because $10 \\equiv 1 \\pmod{9}$, as explained on the [modular arithmetic](!/arithmetic/modulo/operations) page.
 
-These shortcuts are covered in full — with rules for $2, 3, 4, 5, 6, 8, 9, 10$, and $11$ — on the [divisibility rules](!/arithmetic/divisibility/divisibility-rules) page.`,
+These shortcuts are covered in full — with rules for $2, 3, 4, 5, 6, 8, 9, 10$, and $11$ — on the [divisibility rules](!/arithmetic/divisibility/rules) page.`,
   before: ``,
   after: ``,
   link: '',
@@ -253,7 +253,7 @@ The multiples of a number are infinite. The multiples of $3$ are $3, 6, 9, 12, 1
 
 Factors come in pairs. If $a$ is a factor of $n$, then $\\frac{n}{a}$ is also a factor. For $24$: the pair $(3, 8)$ corresponds to $3 \\cdot 8 = 24$, and the pair $(4, 6)$ to $4 \\cdot 6 = 24$. Searching for factors only up to $\\sqrt{n}$ is sufficient — every factor above the square root is already paired with one below it.
 
-The full treatment, including counting formulas and systematic methods, appears on the [factors and multiples](!/arithmetic/divisibility/factors-and-multiples) page.`,
+The full treatment, including counting formulas and systematic methods, appears on the [factors and multiples](!/arithmetic/divisibility/factors) page.`,
   before: ``,
   after: ``,
   link: '',
@@ -317,7 +317,7 @@ obj10: {
 
 **Fractions** arise when division is not exact. The expression $\\frac{a}{b}$ in lowest terms requires dividing both numerator and denominator by their GCD — a divisibility operation. Simplifying fractions is, at its core, factoring out common divisors.
 
-[Modular arithmetic](!/arithmetic/modulo/operations) extends divisibility into a full arithmetic system where numbers are classified by their remainders. The [divisibility rules](!/arithmetic/divisibility/divisibility-rules) for $3$, $9$, and $11$ are consequences of how $10$ behaves under [modular arithmetic](!/arithmetic/modulo/operations) — shortcuts derived from congruence properties of the base of our number system.`,
+[Modular arithmetic](!/arithmetic/modulo/operations) extends divisibility into a full arithmetic system where numbers are classified by their remainders. The [divisibility rules](!/arithmetic/divisibility/rules) for $3$, $9$, and $11$ are consequences of how $10$ behaves under [modular arithmetic](!/arithmetic/modulo/operations) — shortcuts derived from congruence properties of the base of our number system.`,
   before: ``,
   after: ``,
   link: '',

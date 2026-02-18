@@ -127,7 +127,7 @@ const keyWords = [
   title: `What is GCD?`,
   content: `The greatest common divisor of two positive integers $a$ and $b$, written $\\gcd(a, b)$, is the largest positive integer that divides both.
 
-The [common factors](!/arithmetic/divisibility/factors-and-multiples) of $12$ and $18$ are $\\{1, 2, 3, 6\\}$. The largest is $6$, so $\\gcd(12, 18) = 6$.
+The [common factors](!/arithmetic/divisibility/factors) of $12$ and $18$ are $\\{1, 2, 3, 6\\}$. The largest is $6$, so $\\gcd(12, 18) = 6$.
 
 The common factors of $20$ and $35$ are $\\{1, 5\\}$. The largest is $5$, so $\\gcd(20, 35) = 5$.
 
@@ -318,7 +318,7 @@ If $\\gcd(a, b) = 1$ and $\\gcd(a, c) = 1$, then $\\gcd(a, b \\cdot c) = 1$. Cop
 
 If $\\gcd(a, b) = 1$, then $\\gcd(a^2, b^2) = 1$. Squaring both numbers introduces no new shared primes.
 
-These properties are essential in the theory of [divisibility](!/arithmetic/divisibility). The rule that divisibility by $6$ can be tested by checking $2$ and $3$ separately works precisely because $\\gcd(2, 3) = 1$. Coprimality is what makes the [combined divisibility rules](!/arithmetic/divisibility/divisibility-rules) valid.`,
+These properties are essential in the theory of [divisibility](!/arithmetic/divisibility). The rule that divisibility by $6$ can be tested by checking $2$ and $3$ separately works precisely because $\\gcd(2, 3) = 1$. Coprimality is what makes the [combined divisibility rules](!/arithmetic/divisibility/rules) valid.`,
   before: ``,
   after: ``,
   link: '',
@@ -428,7 +428,7 @@ Simplify $\\frac{84}{126}$. $\\gcd(84, 126)$: $126 = 84 \\cdot 1 + 42$, $84 = 42
   const introContent = {
   id: "intro",
   title: "The Largest Shared Divisor",
-  content: `When two numbers share [common factors](!/arithmetic/divisibility/factors-and-multiples), the greatest among them captures the deepest structural connection between the pair. The greatest common divisor — GCD — measures how much two numbers overlap in their factor structure, and it appears everywhere from simplifying **fractions** to determining whether two quantities are fundamentally incompatible.`
+  content: `When two numbers share [common factors](!/arithmetic/divisibility/factors), the greatest among them captures the deepest structural connection between the pair. The greatest common divisor — GCD — measures how much two numbers overlap in their factor structure, and it appears everywhere from simplifying **fractions** to determining whether two quantities are fundamentally incompatible.`
 }
 
 const faqQuestions = {
