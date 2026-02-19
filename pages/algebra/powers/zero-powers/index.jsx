@@ -659,7 +659,7 @@ export default function ZeroPowersPage({seoData, sectionsContent, introContent, 
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
-          <FAQSection theme='leftBorder' faqQuestions={faqQuestions} width='90%'/>
+          <FAQSection key={'faq'} theme='leftBorder' faqQuestions={faqQuestions} width='90%'/>
         ]
     },
     // {
