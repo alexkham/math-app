@@ -131,7 +131,7 @@ const keyWords = [
 
 But what is $2^\\pi$? The exponent $\\pi$ is not a natural number, not a negative integer, and not a fraction. It cannot be expressed as a ratio of two integers. The repeated multiplication idea is meaningless, and the root interpretation does not apply — there is no "$\\pi$th root" in the sense that $a^{1/n}$ defines an $n$th root.
 
-Yet $2^\\pi$ must have a value if the [laws of exponents](!/algebra/powers/laws) are to work for all real numbers. The product rule requires $2^\\pi \\cdot 2^{1-\\pi} = 2^1 = 2$. The power rule requires $(2^\\pi)^{1/\\pi} = 2$. The algebraic framework assumes this number exists. The question is how to define it.`,
+Yet $2^\\pi$ must have a value if the [laws of exponents](!/algebra/powers/exponent-rules/) are to work for all real numbers. The product rule requires $2^\\pi \\cdot 2^{1-\\pi} = 2^1 = 2$. The power rule requires $(2^\\pi)^{1/\\pi} = 2$. The algebraic framework assumes this number exists. The question is how to define it.`,
   before: ``,
   after: ``,
   link: '',
@@ -185,7 +185,7 @@ Zero is excluded as well. The expression $0^x$ equals $0$ for positive $x$ and i
 
 obj5: {
   title: `The Laws Still Hold`,
-  content: `By now the pattern is familiar: each extension of the exponent definition preserves the [laws of exponents](!/algebra/powers/laws), and the irrational case is no different.
+  content: `By now the pattern is familiar: each extension of the exponent definition preserves the [laws of exponents](!/algebra/powers/exponent-rules/), and the irrational case is no different.
 
 The product rule $a^m \\cdot a^n = a^{m+n}$ holds when $m$ and $n$ are irrational. The proof relies on the fact that the rule holds for all rational approximations, and the limiting process preserves algebraic identities.
 

@@ -1007,7 +1007,7 @@ The most persistent algebraic error is distributing an exponent over a sum: $(a 
   const introContent = {
   id: "intro",
   title: "The Rules in One Place",
-  content: `The [laws of exponents](!/algebra/powers/laws) were derived step by step across the preceding pages — first for [natural exponents](!/algebra/powers/natural-exponents), then verified as the definition extended to [negative](!/algebra/powers/negative-exponents), [rational](!/algebra/powers/rational-exponents), and [irrational](!/algebra/powers/irrational-exponents) exponents. This page collects every rule, its domain restrictions, and the edge cases that require caution.`
+  content: `The [laws of exponents](!/algebra/powers/exponent-rules/) were derived step by step across the preceding pages — first for [natural exponents](!/algebra/powers/natural-exponents), then verified as the definition extended to [negative](!/algebra/powers/negative-exponents), [rational](!/algebra/powers/rational-exponents), and [irrational](!/algebra/powers/irrational-exponents) exponents. This page collects every rule, its domain restrictions, and the edge cases that require caution.`
 }
 
 const faqQuestions = {

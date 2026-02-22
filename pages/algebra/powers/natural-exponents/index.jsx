@@ -340,7 +340,7 @@ Each step applies one law. When multiple laws are needed, working from the inner
   const introContent = {
   id: "intro",
   title: "Where Exponents Begin",
-  content: `Before powers can be extended to negative, fractional, or irrational exponents, they must first be grounded in the simplest case: a positive whole number telling you how many times to multiply a base by itself. This is where the notation $a^n$ acquires its first meaning, where the [laws of exponents](!/algebra/powers/laws) are first derived from concrete arithmetic, and where the patterns emerge that every later extension is built to preserve.`
+  content: `Before powers can be extended to negative, fractional, or irrational exponents, they must first be grounded in the simplest case: a positive whole number telling you how many times to multiply a base by itself. This is where the notation $a^n$ acquires its first meaning, where the [laws of exponents](!/algebra/powers/exponent-rules/) are first derived from concrete arithmetic, and where the patterns emerge that every later extension is built to preserve.`
 }
 
 const faqQuestions = {

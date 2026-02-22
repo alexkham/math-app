@@ -151,7 +151,7 @@ The procedure is consistent: rewrite both sides with a common base, then read of
 
 obj3: {
   title: `Inequalities Requiring Simplification`,
-  content: `When the two sides of an inequality do not immediately share a base, the [laws of exponents](!/algebra/powers/laws) are needed to rewrite one or both sides before comparison.
+  content: `When the two sides of an inequality do not immediately share a base, the [laws of exponents](!/algebra/powers/exponent-rules/) are needed to rewrite one or both sides before comparison.
 
 The inequality $4^x < 32$ involves $4 = 2^2$ and $32 = 2^5$. Rewriting: $(2^2)^x < 2^5$, so $2^{2x} < 2^5$. Base $2 > 1$, direction preserved: $2x < 5$, giving $x < \\frac{5}{2}$.
 

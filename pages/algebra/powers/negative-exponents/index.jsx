@@ -304,7 +304,7 @@ In each case, the laws reduce the expression step by step. Negative exponents ar
   const introContent = {
   id: "intro",
   title: "What Happens Below Zero",
-  content: `The [natural exponent](!/algebra/powers/natural-exponents) definition — multiply the base by itself $n$ times — has no way to handle $a^0$ or $a^{-3}$. There is no such thing as multiplying a number by itself zero times or negative three times. Yet the [laws of exponents](!/algebra/powers/laws) demand that these expressions have values, and they leave no room for choice about what those values must be.`
+  content: `The [natural exponent](!/algebra/powers/natural-exponents) definition — multiply the base by itself $n$ times — has no way to handle $a^0$ or $a^{-3}$. There is no such thing as multiplying a number by itself zero times or negative three times. Yet the [laws of exponents](!/algebra/powers/exponent-rules/) demand that these expressions have values, and they leave no room for choice about what those values must be.`
 }
 
 

@@ -156,7 +156,7 @@ A numerical pattern reaches the same conclusion from a different direction. List
 
 A third argument frames it in terms of the empty product. The expression $a^n$ is the product of $n$ copies of $a$. When $n = 0$, there are no copies — an empty product. By convention, the product of no factors is the multiplicative identity, $1$, just as the sum of no terms is the additive identity, $0$.
 
-Three distinct arguments, one conclusion. The value $a^0 = 1$ is not arbitrary — it is the only value consistent with the [laws of exponents](!/algebra/powers/laws).`,
+Three distinct arguments, one conclusion. The value $a^0 = 1$ is not arbitrary — it is the only value consistent with the [laws of exponents](!/algebra/powers/exponent-rules/).`,
   before: ``,
   after: ``,
   link: '',

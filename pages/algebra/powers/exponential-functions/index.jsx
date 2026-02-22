@@ -131,7 +131,7 @@ export async function getStaticProps(){
 
 The expression $2^x$ is something different. The base is locked at $2$ and the exponent $x$ is free to be any real number. As $x$ changes, $2^x$ traces out a curve: $2^0 = 1$, $2^1 = 2$, $2^2 = 4$, $2^3 = 8$, $2^{-1} = \\frac{1}{2}$, $2^{1/2} = \\sqrt{2}$.
 
-This is the defining feature of an exponential function: a constant base raised to a variable exponent. The function $f(x) = a^x$, with $a > 0$ and $a \\neq 1$, assigns to every real number $x$ a positive output determined by the [laws of exponents](!/algebra/powers/laws).
+This is the defining feature of an exponential function: a constant base raised to a variable exponent. The function $f(x) = a^x$, with $a > 0$ and $a \\neq 1$, assigns to every real number $x$ a positive output determined by the [laws of exponents](!/algebra/powers/exponent-rules/).
 
 The shift from "evaluate $a^n$ for a specific $n$" to "study $a^x$ as $x$ ranges over all reals" is the transition from arithmetic to function behavior — from individual calculations to a complete curve.`,
   before: ``,

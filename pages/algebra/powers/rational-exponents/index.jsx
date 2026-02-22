@@ -156,7 +156,7 @@ $$a^{1/n} = \\sqrt[n]{a}$$
 
 Root notation and exponent notation are two ways of writing the same thing. The expression $\\sqrt[3]{8}$ and $8^{1/3}$ both equal $2$, because $2^3 = 8$. The expression $\\sqrt[4]{16}$ and $16^{1/4}$ both equal $2$, because $2^4 = 16$. The expression $27^{1/3} = \\sqrt[3]{27} = 3$, because $3^3 = 27$.
 
-The exponent form is often more convenient for algebraic manipulation, since the [laws of exponents](!/algebra/powers/laws) apply directly. The radical form is often preferred for numerical computation and when presenting final answers. Fluency in both notations — and the ability to convert freely between them — is essential.`,
+The exponent form is often more convenient for algebraic manipulation, since the [laws of exponents](!/algebra/powers/exponent-rules/) apply directly. The radical form is often preferred for numerical computation and when presenting final answers. Fluency in both notations — and the ability to convert freely between them — is essential.`,
   before: ``,
   after: ``,
   link: '',
@@ -232,7 +232,7 @@ The pattern is now three layers deep. Natural exponents established the laws. Ne
 
 obj7: {
   title: `Simplifying Expressions`,
-  content: `Converting radicals to exponent form often makes simplification more straightforward, because the [laws of exponents](!/algebra/powers/laws) apply directly to fractional exponents just as they do to integers.
+  content: `Converting radicals to exponent form often makes simplification more straightforward, because the [laws of exponents](!/algebra/powers/exponent-rules/) apply directly to fractional exponents just as they do to integers.
 
 Simplify $x^{3/4} \\cdot x^{1/2}$. The product rule adds exponents: $x^{3/4 + 1/2} = x^{3/4 + 2/4} = x^{5/4}$. In radical form, this is $\\sqrt[4]{x^5} = x\\sqrt[4]{x}$.
 
@@ -323,7 +323,7 @@ The key advantage of exponent notation over radical notation is uniformity. Ever
   const introContent = {
   id: "intro",
   title: "Powers Meet Roots",
-  content: `[Natural exponents](!/algebra/powers/natural-exponents) count repeated multiplications. [Negative exponents](!/algebra/powers/negative-exponents) take reciprocals. Both extensions were forced by the [laws of exponents](!/algebra/powers/laws) — the definitions were chosen as the only ones that keep the rules intact. The same logic now answers a harder question: what should $a^{1/2}$ mean? The laws leave no room for debate, and the answer ties exponentiation directly to roots.`
+  content: `[Natural exponents](!/algebra/powers/natural-exponents) count repeated multiplications. [Negative exponents](!/algebra/powers/negative-exponents) take reciprocals. Both extensions were forced by the [laws of exponents](!/algebra/powers/exponent-rules/) — the definitions were chosen as the only ones that keep the rules intact. The same logic now answers a harder question: what should $a^{1/2}$ mean? The laws leave no room for debate, and the answer ties exponentiation directly to roots.`
 }
 
 const faqQuestions = {
