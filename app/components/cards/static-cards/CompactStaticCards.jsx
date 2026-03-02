@@ -1716,7 +1716,7 @@ export default function CompactStaticCards({
               justifyContent: 'center',
               paddingBottom: '4px'
             }}>
-              <span style={{ fontSize: '1.2rem', color: '#94a3b8' }}>⌄</span>
+              <span style={{ fontSize: '2.5rem', color: '#94a3b8' }}>⌄</span>
             </div>
           )}
 
