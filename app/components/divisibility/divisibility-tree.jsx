@@ -302,7 +302,7 @@ const DivisibilityTreeSVG = () => {
     <div style={styles.container}>
       {/* Header */}
       <header style={styles.header}>
-        <h1 style={styles.title}>Divisibility Decision Tree</h1>
+        {/* <h1 style={styles.title}>Divisibility Decision Tree</h1> */}
         <p style={styles.subtitle}>Hover any highlighted node for detailed explanation</p>
       </header>
 

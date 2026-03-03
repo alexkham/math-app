@@ -8,6 +8,7 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import DivisibilityTreeSVG from '@/app/components/divisibility/divisibility-tree'
 
 
 export async function getStaticProps(){
@@ -203,10 +204,10 @@ export async function getStaticProps(){
          sectionsContent,
          introContent,
           seoData: {
-        title: "Title | Learn Math Class",
+        title: "Divisibility Tree Page | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/arithmetic/visual-tools/divisibility-tree",
          name: "name"
       },
         
@@ -214,7 +215,7 @@ export async function getStaticProps(){
     }
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
+export default function DivisibilityTreePage({seoData,sectionsContent , introContent}) {
 
     
   const genericSections=[
@@ -427,29 +428,32 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Page Title</h1>
+   <h1 className='title' style={{marginTop:'-30px',marginBottom:'-60px'}}>Divisibility Decision Tree</h1>
    <br/>
+   <div style={{transform:'scale(0.9)'}}>
+   <DivisibilityTreeSVG/>
+   </div>
    <br/>
-   <SectionTableOfContents sections={genericSections}
+   {/* <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
          secondaryNavMode="siblings"  // or "children"
          secondaryNavTitle="More in this Section"
    
-   />
+   /> */}
    <br/>
    <br/>
    <br/>
-    <IntroSection 
+    {/* <IntroSection 
           id={introContent.id}
           title={introContent.title}
           content={introContent.content}
            backgroundColor='#f9fafb'
           //  "#f2f2f2"
           textColor="#06357a"
-        />
+        /> */}
    <br/>
    <br/>
-   <Sections sections={genericSections}/>
+   {/* <Sections sections={genericSections}/> */}
    <br/>
    <br/>
    <br/>
