@@ -1,7 +1,7 @@
 /**
  * Auto-generated from sitemap.xml
- * Generated: 2026-02-05T18:10:15.771Z
- * Total pages: 262
+ * Generated: 2026-03-03T04:44:09.232Z
+ * Total pages: 307
  * 
  * To regenerate: node generateNavFromSitemap.js
  */
@@ -42,6 +42,10 @@ export const mainMenuStructure = [
           {
             "label": "Logarithms",
             "href": "/algebra/logarithms"
+          },
+          {
+            "label": "Polynomials",
+            "href": "/algebra/polynomials"
           },
           {
             "label": "Powers",
@@ -88,16 +92,52 @@ export const mainMenuStructure = [
             "href": "/trigonometry/definitions"
           },
           {
+            "label": "Degrees Radians",
+            "href": "/trigonometry/degrees-radians"
+          },
+          {
+            "label": "Equations",
+            "href": "/trigonometry/equations"
+          },
+          {
             "label": "Formulas",
             "href": "/trigonometry/formulas"
+          },
+          {
+            "label": "Functions",
+            "href": "/trigonometry/functions"
+          },
+          {
+            "label": "Graphs",
+            "href": "/trigonometry/graphs"
           },
           {
             "label": "Identities",
             "href": "/trigonometry/identities"
           },
           {
-            "label": "Quadrants",
-            "href": "/trigonometry/quadrants"
+            "label": "Inequalities",
+            "href": "/trigonometry/inequalities"
+          },
+          {
+            "label": "Inverse Functions",
+            "href": "/trigonometry/inverse-functions"
+          },
+          {
+            "label": "Properties",
+            "href": "/trigonometry/properties"
+          },
+          {
+            "label": "Right Triangle",
+            "href": "/trigonometry/right-triangle"
+          },
+          {
+            "label": "Sines Cosines Law",
+            "href": "/trigonometry/sines-cosines-law"
+          },
+          {
+            "label": "Unit Circle",
+            "href": "/trigonometry/unit-circle"
           }
         ]
       },
@@ -338,8 +378,16 @@ export const mainMenuStructure = [
             "href": "/complex-numbers/absolute-value"
           },
           {
+            "label": "Additive Inverse",
+            "href": "/complex-numbers/additive-inverse"
+          },
+          {
             "label": "Algebraic Form",
             "href": "/complex-numbers/algebraic-form"
+          },
+          {
+            "label": "Cheat Sheets",
+            "href": "/complex-numbers/cheat-sheets"
           },
           {
             "label": "Complex Conjugate",
@@ -366,6 +414,10 @@ export const mainMenuStructure = [
             "href": "/complex-numbers/imaginary-numbers"
           },
           {
+            "label": "Multiplicative Inverse",
+            "href": "/complex-numbers/multiplicative-inverse"
+          },
+          {
             "label": "Operations",
             "href": "/complex-numbers/operations"
           },
@@ -376,6 +428,32 @@ export const mainMenuStructure = [
           {
             "label": "Trigonometric Form",
             "href": "/complex-numbers/trigonometric-form"
+          }
+        ]
+      },
+      {
+        "title": "Arithmetic",
+        "href": "/arithmetic",
+        "items": [
+          {
+            "label": "Calculators",
+            "href": "/arithmetic/calculators"
+          },
+          {
+            "label": "Divisibility",
+            "href": "/arithmetic/divisibility"
+          },
+          {
+            "label": "Fractions",
+            "href": "/arithmetic/fractions"
+          },
+          {
+            "label": "Modulo",
+            "href": "/arithmetic/modulo"
+          },
+          {
+            "label": "Visual Tools",
+            "href": "/arithmetic/visual-tools"
           }
         ]
       }
@@ -456,11 +534,11 @@ export const mainMenuStructure = [
           },
           {
             "label": "Discrete",
-            "href": "/probability/visual-tools/expected-value/discrete"
+            "href": "/probability/visual-tools/probability-function/discrete"
           },
           {
             "label": "Discrete",
-            "href": "/probability/visual-tools/probability-function/discrete"
+            "href": "/probability/visual-tools/expected-value/discrete"
           },
           {
             "label": "Distributions",
@@ -529,10 +607,6 @@ export const mainMenuStructure = [
           {
             "label": "Probability Function",
             "href": "/probability/visual-tools/probability-function"
-          },
-          {
-            "label": "Quadrants",
-            "href": "/trigonometry/quadrants"
           },
           {
             "label": "Square Root",
@@ -805,6 +879,10 @@ export const mainMenuStructure = [
           {
             "label": "Complement Angle",
             "href": "/tables/trigonometry/complement-angle"
+          },
+          {
+            "label": "Complex Numbers",
+            "href": "/math-symbols/complex-numbers"
           },
           {
             "label": "Difference Angle",

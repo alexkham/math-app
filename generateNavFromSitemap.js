@@ -27,6 +27,8 @@ const CONFIG = {
     { path: '/set-theory', label: 'Set Theory' },
     { path: '/sequences', label: 'Sequences' },
     { path: '/complex-numbers', label: 'Complex Numbers' },
+    { path: '/arithmetic', label: 'Arithmetic' },
+
   ],
   
   // Resources sections
