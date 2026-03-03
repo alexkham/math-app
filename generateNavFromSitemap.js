@@ -28,6 +28,7 @@ const CONFIG = {
     { path: '/sequences', label: 'Sequences' },
     { path: '/complex-numbers', label: 'Complex Numbers' },
     { path: '/arithmetic', label: 'Arithmetic' },
+    { path: '/functions', label: 'Functions' },
 
   ],
   

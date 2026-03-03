@@ -1,7 +1,7 @@
 /**
  * Auto-generated from sitemap.xml
- * Generated: 2026-03-03T04:44:09.232Z
- * Total pages: 307
+ * Generated: 2026-03-03T20:28:22.128Z
+ * Total pages: 319
  * 
  * To regenerate: node generateNavFromSitemap.js
  */
@@ -456,6 +456,56 @@ export const mainMenuStructure = [
             "href": "/arithmetic/visual-tools"
           }
         ]
+      },
+      {
+        "title": "Functions",
+        "href": "/functions",
+        "items": [
+          {
+            "label": "Analyzing",
+            "href": "/functions/analyzing"
+          },
+          {
+            "label": "Arithmetic",
+            "href": "/functions/arithmetic"
+          },
+          {
+            "label": "Composition",
+            "href": "/functions/composition"
+          },
+          {
+            "label": "Domain",
+            "href": "/functions/domain"
+          },
+          {
+            "label": "Families",
+            "href": "/functions/families"
+          },
+          {
+            "label": "Graphs",
+            "href": "/functions/graphs"
+          },
+          {
+            "label": "Inverse",
+            "href": "/functions/inverse"
+          },
+          {
+            "label": "Piecewise",
+            "href": "/functions/piecewise"
+          },
+          {
+            "label": "Properties",
+            "href": "/functions/properties"
+          },
+          {
+            "label": "Range",
+            "href": "/functions/range"
+          },
+          {
+            "label": "Transformations",
+            "href": "/functions/transformations"
+          }
+        ]
       }
     ]
   },
@@ -534,11 +584,11 @@ export const mainMenuStructure = [
           },
           {
             "label": "Discrete",
-            "href": "/probability/visual-tools/probability-function/discrete"
+            "href": "/probability/visual-tools/expected-value/discrete"
           },
           {
             "label": "Discrete",
-            "href": "/probability/visual-tools/expected-value/discrete"
+            "href": "/probability/visual-tools/probability-function/discrete"
           },
           {
             "label": "Distributions",
