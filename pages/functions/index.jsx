@@ -748,7 +748,7 @@ export default function FunctionsPage({
    <br/>
    <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
-         secondaryNavMode="siblings"  // or "children"
+         secondaryNavMode="children"  // or "children"
          secondaryNavTitle="More in this Section"
 
    />
