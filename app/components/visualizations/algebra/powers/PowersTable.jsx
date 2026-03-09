@@ -501,7 +501,7 @@ const PowerTable = () => {
 
         <div style={styles.patternNote}>
           <p style={styles.patternText}>
-            Each row is <strong style={styles.patternStrong}>×{base}</strong> the row above it — that's the power of exponents!
+            Each row is <strong style={styles.patternStrong}>×{base}</strong> the row above it — that is the power of exponents!
           </p>
         </div>
       </div>
