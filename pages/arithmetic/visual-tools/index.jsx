@@ -536,6 +536,15 @@ export async function getStaticProps(){
       image: '',
       href: "/arithmetic/visual-tools/divisibility-tree"
     },
+      {
+      title: "Divisibility Tiles Visualizer",
+      description: "Explore divisibility by grouping tiles into equal sets. Enter any number from 1 to 100, choose a divisor, and watch tiles organize into complete groups with remainders highlighted. See instantly whether numbers divide evenly with step-by-step visual explanations.",
+      backgroundColor: "#4F46E5",
+      textColor: "#ffffff",
+      ratio: 7,
+      image: '',
+      href: "/arithmetic/visual-tools/divisibility-tiles"
+    }
   ]
 
   const faqQuestions = {
@@ -707,6 +716,16 @@ export async function getStaticProps(){
     content: ``
   }
 
+  const pageArticle=`Arithmetic forms the foundation of all mathematical thinking, and understanding divisibility is one of its most essential skills. These interactive visualization tools transform abstract number relationships into concrete, explorable experiences.
+
+The Divisibility Table Visualizer presents numbers in a grid format, highlighting multiples and common factors with color coding. Select any divisor and watch patterns emerge across the table — a powerful way to recognize divisibility rules intuitively rather than memorizing them.
+
+The Divisibility Tree Visualizer takes a different approach, breaking down individual numbers into their prime factors through animated branching diagrams. Enter any composite number and observe step-by-step how it decomposes through repeated division until only primes remain.
+
+The Divisibility Tiles Visualizer offers a hands-on grouping experience. Numbers from 1 to 100 can be divided into equal sets, with remainders clearly highlighted. This concrete representation helps learners grasp why some divisions result in whole numbers while others leave remainders.
+
+Each tool runs directly in your browser with no downloads or registration required. Use them for self-study, classroom demonstrations, or homework support.`
+
   return {
     props: {
       sectionsContent,
@@ -714,6 +733,7 @@ export async function getStaticProps(){
       cardsData,
       faqQuestions,
       schemas,
+      pageArticle,
       seoData: {
         title: "Arithmetic Visual Tools - Interactive Visualizers | Learn Math Class",
         description: "Interactive arithmetic visualization tools including divisibility tables, divisibility trees, and number theory explorers with real-time visual feedback.",
@@ -725,7 +745,8 @@ export async function getStaticProps(){
   }
 }
 
-export default function ArithmeticVisualToolsPage({seoData, sectionsContent, introContent, cardsData, faqQuestions, schemas}) {
+export default function ArithmeticVisualToolsPage({seoData, sectionsContent, 
+  introContent, cardsData, faqQuestions, schemas, pageArticle}) {
 
   const genericSections = [
     {
@@ -829,6 +850,7 @@ export default function ArithmeticVisualToolsPage({seoData, sectionsContent, int
           tip: "Click any tool below to see its description..."
         }}
         onFilteredItemsChange={(filtered) => setDisplayedItems(filtered)}
+        article={pageArticle}
       />
       <br/>
       <br/>
