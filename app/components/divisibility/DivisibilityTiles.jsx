@@ -29,7 +29,7 @@ const DivisibilityTiles = () => {
             <span style={styles.icon}>÷</span>
           </div>
           {/* <h1 style={styles.title}>Divisibility Tiles</h1> */}
-          <p style={styles.subtitle}>See how numbers group — and what's left over</p>
+          <p style={styles.subtitle}>See how numbers group — and what is left over</p>
         </header>
 
         {/* Main Content */}
