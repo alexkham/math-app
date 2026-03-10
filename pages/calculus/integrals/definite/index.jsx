@@ -11,9 +11,22 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  "definite integral",
+  "definite integral definition",
+  "Riemann sum",
+  "area under curve",
+  "signed area integral",
+  "integral notation",
+  "definite integral properties",
+  "integral bounds",
+  "evaluate definite integral",
+  "average value function",
+  "integral additivity",
+  "definite integral calculus",
+  "Riemann sum limit",
+  "area between curve and axis"
+]
   // •
 
 //   \u2022 First item
@@ -345,24 +358,165 @@ Riemann sums provide the rigorous foundation. Approximate the region with rectan
 
 
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: " Definite Integrals | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/calculus/integrals/definite",
-         name: "name"
+const faqQuestions = {
+  obj1: {
+    question: "What is a Riemann sum?",
+    answer: "A Riemann sum approximates a definite integral by partitioning the interval into subintervals, forming rectangles with heights f(x*) and width Δx, then summing their areas. As the number of rectangles approaches infinity, the Riemann sum approaches the definite integral.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "What does definite integral notation mean?",
+    answer: "In ∫ₐᵇ f(x) dx, the lower limit a and upper limit b bound the interval, f(x) is the integrand being accumulated, and dx indicates the variable of integration. The result is a number, not a function. The variable x is a dummy variable that disappears after integration.",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "What is signed area in integration?",
+    answer: "The definite integral computes area with sign: regions above the x-axis contribute positive area, regions below contribute negative area. The integral sums these signed contributions, so it can be zero (when areas cancel) or negative (when more area lies below the axis).",
+    sectionId: "3"
+  },
+  obj4: {
+    question: "What are the properties of definite integrals?",
+    answer: "Key properties include: additivity over intervals (∫ₐᵇ + ∫ᵇᶜ = ∫ₐᶜ), reversing limits negates the integral (∫ₐᵇ = −∫ᵇₐ), zero-width intervals give zero (∫ₐᵃ = 0), and comparison (if f ≤ g then ∫f ≤ ∫g).",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "What is the linearity property of integrals?",
+    answer: "Definite integrals respect addition and scalar multiplication: ∫[f + g] = ∫f + ∫g (sum rule) and ∫c·f = c·∫f (constant multiple rule). This allows complex integrands to be broken into simpler pieces, integrated separately, then combined.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "How do you compute a definite integral?",
+    answer: "The Fundamental Theorem of Calculus provides the method: find an antiderivative F where F'(x) = f(x), then evaluate ∫ₐᵇ f(x) dx = F(b) − F(a). This transforms integration from a limiting process into finding antiderivatives and evaluating at endpoints.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "What is the average value of a function?",
+    answer: "The average value of f on [a,b] is f_avg = (1/(b−a))∫ₐᵇ f(x) dx. Geometrically, it's the height of a rectangle with base [a,b] whose area equals the area under the curve. The Mean Value Theorem guarantees f attains this average at some point c in (a,b).",
+    sectionId: "7"
+  }
+}
+
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Definite Integrals",
+    "description": "Learn definite integrals: Riemann sum construction, integral notation, signed area interpretation, properties, linearity, computing with antiderivatives, and average value of a function.",
+    "url": "https://www.learnmathclass.com/calculus/integrals/definite",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Definite Integrals"
+    },
+    "teaches": [
+      "Riemann sum construction and limit definition",
+      "Definite integral notation and meaning",
+      "Signed area interpretation",
+      "Properties: additivity, reversing limits, comparison",
+      "Linearity: sum rule and constant multiple rule",
+      "Average value of a function"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Calculus",
+        "item": "https://www.learnmathclass.com/calculus"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Integrals",
+        "item": "https://www.learnmathclass.com/calculus/integrals"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Definite Integrals",
+        "item": "https://www.learnmathclass.com/calculus/integrals/definite"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: " Definite Integrals | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/calculus/integrals/definite",
+  //        name: "name"
+  //     },
         
-       }
+  //      }
+  //   }
+
+    return {
+      props: {
+        sectionsContent,
+        introContent,
+        faqQuestions,
+        schemas,
+        seoData: {
+          title: "Definite Integrals: Riemann Sums & Properties | Learn Math Class",
+          description: "Learn definite integrals: Riemann sum construction, integral notation, signed area interpretation, properties, linearity, computing with antiderivatives, and average value of a function.",
+          keywords: keyWords.join(", "),
+          url: "/calculus/integrals/definite",
+          name: "Definite Integrals"
+        },
+      }
     }
+
    }
-
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
+export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -514,7 +668,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -557,7 +711,48 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
       })
     }}
   />
+</Head> */}
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
+    }}
+  />
 </Head>
+
    {/* <GenericNavbar/> */}
    <br/>
    <br/>

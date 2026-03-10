@@ -11,9 +11,23 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  "special integrals",
+  "integral formulas",
+  "basic integration formulas",
+  "power rule integration",
+  "integral of x^n",
+  "exponential integral",
+  "trigonometric integrals",
+  "integral of sin cos",
+  "inverse trig integrals",
+  "arctan integral",
+  "arcsin integral",
+  "logarithmic integrals",
+  "integral of tan x",
+  "integral of sec x",
+  "integration table"
+]
   // •
 
 //   \u2022 First item
@@ -349,24 +363,165 @@ Memorizing these forms accelerates computation and provides reference points for
 
 
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Special Interals | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/calculus/integrals/special",
-         name: "name"
+const faqQuestions = {
+  obj1: {
+    question: "Why should you memorize special integrals?",
+    answer: "Integration techniques transform unfamiliar integrals into standard forms. Memorizing these targets provides speed through instant recognition, building blocks for complex integrals, verification by differentiation, and pattern anchors that guide technique selection.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "What is the power rule for integration?",
+    answer: "The power rule states ∫xⁿ dx = xⁿ⁺¹/(n+1) + C for n ≠ -1. The exponent increases by one and you divide by the new exponent. The exception n = -1 gives ∫1/x dx = ln|x| + C, with absolute value ensuring validity for negative x.",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "What are the exponential integral formulas?",
+    answer: "The exponential function is its own antiderivative: ∫eˣ dx = eˣ + C. For other bases: ∫aˣ dx = aˣ/ln(a) + C. With a linear argument: ∫eᵏˣ dx = eᵏˣ/k + C. The factor 1/ln(a) or 1/k compensates for the chain rule.",
+    sectionId: "3"
+  },
+  obj4: {
+    question: "What are the basic trigonometric integrals?",
+    answer: "Key formulas: ∫sin x dx = -cos x + C; ∫cos x dx = sin x + C; ∫sec²x dx = tan x + C; ∫csc²x dx = -cot x + C; ∫sec x tan x dx = sec x + C; ∫csc x cot x dx = -csc x + C. Each reverses a standard derivative.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "What integrals produce inverse trig functions?",
+    answer: "∫1/(1+x²) dx = arctan x + C; ∫1/√(1-x²) dx = arcsin x + C; ∫1/(x√(x²-1)) dx = arcsec|x| + C. More generally: ∫1/(a²+x²) dx = (1/a)arctan(x/a) + C and ∫1/√(a²-x²) dx = arcsin(x/a) + C.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "How do you integrate logarithms?",
+    answer: "The integral of ln x requires integration by parts: ∫ln x dx = x ln x - x + C. A key pattern is ∫f'(x)/f(x) dx = ln|f(x)| + C. For example, ∫tan x dx = ∫sin x/cos x dx = -ln|cos x| + C using this pattern.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "What are the integrals of tan, cot, sec, and csc?",
+    answer: "∫tan x dx = -ln|cos x| + C = ln|sec x| + C; ∫cot x dx = ln|sin x| + C; ∫sec x dx = ln|sec x + tan x| + C; ∫csc x dx = -ln|csc x + cot x| + C. These use the f'/f pattern or clever multiplication by 1.",
+    sectionId: "7"
+  }
+}
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Special Integrals",
+    "description": "Essential integration formulas: power rule, exponential, trigonometric, inverse trig (arctan, arcsin), and logarithmic integrals. Standard forms every calculus student should memorize.",
+    "url": "https://www.learnmathclass.com/calculus/integrals/special",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Special Integrals"
+    },
+    "teaches": [
+      "Power rule for integration including n = -1 case",
+      "Exponential function integrals",
+      "Basic trigonometric integrals",
+      "Inverse trigonometric integral forms",
+      "Logarithmic integrals and the f'/f pattern",
+      "Integrals of tan, cot, sec, and csc"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Calculus",
+        "item": "https://www.learnmathclass.com/calculus"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Integrals",
+        "item": "https://www.learnmathclass.com/calculus/integrals"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Special Integrals",
+        "item": "https://www.learnmathclass.com/calculus/integrals/special"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Special Interals | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/calculus/integrals/special",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+
+  return {
+  props: {
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Special Integrals: Essential Formulas | Learn Math Class",
+      description: "Essential integration formulas: power rule, exponential, trigonometric, inverse trig (arctan, arcsin), and logarithmic integrals. Standard forms every calculus student should memorize.",
+      keywords: keyWords.join(", "),
+      url: "/calculus/integrals/special",
+      name: "Special Integrals"
+    },
+  }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
+// export default function PageTemplate({seoData,sectionsContent , introContent}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -518,7 +673,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -559,6 +714,47 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

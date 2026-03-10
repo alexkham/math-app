@@ -11,9 +11,22 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  "integration techniques",
+  "u-substitution",
+  "integration by parts",
+  "trigonometric integrals",
+  "trigonometric substitution",
+  "partial fractions integration",
+  "how to integrate",
+  "substitution method calculus",
+  "LIATE rule",
+  "integration methods",
+  "advanced integration",
+  "integrate sin cos powers",
+  "rational function integration",
+  "choosing integration technique"
+]
   // •
 
 //   \u2022 First item
@@ -354,24 +367,166 @@ No single algorithm covers all cases—unlike differentiation, which follows sys
 
 
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Integration Techniques | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/calculus/integrals/techniques",
-         name: "name"
+const faqQuestions = {
+  obj1: {
+    question: "Why are integration techniques needed?",
+    answer: "Unlike differentiation, which follows mechanical rules, integration has no universal algorithm. Many functions have no elementary antiderivative or are difficult to find without insight. Techniques transform integrands into forms matching known formulas.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "How does u-substitution work?",
+    answer: "Substitution reverses the chain rule. Let u = g(x), so du = g'(x) dx. Replace all x-expressions with u-expressions and integrate. For definite integrals, convert the limits: when x = a, u = g(a). Look for a function paired with its derivative.",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "What is integration by parts?",
+    answer: "Integration by parts reverses the product rule: ∫u dv = uv − ∫v du. Identify factors u and dv, differentiate u to get du, integrate dv to get v, then apply the formula. The LIATE rule (Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential) guides choosing u.",
+    sectionId: "3"
+  },
+  obj4: {
+    question: "How do you integrate powers of sine and cosine?",
+    answer: "For odd power of sine: save one sin x, convert sin²x = 1 − cos²x, substitute u = cos x. For odd power of cosine: save one cos x, convert cos²x = 1 − sin²x, substitute u = sin x. For both even: use half-angle identities.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "When do you use trigonometric substitution?",
+    answer: "Use trig substitution for square roots of quadratics. For √(a²−x²): let x = a sin θ. For √(a²+x²): let x = a tan θ. For √(x²−a²): let x = a sec θ. These substitutions eliminate the square root using Pythagorean identities.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "How does partial fractions work?",
+    answer: "Partial fractions decompose rational functions into simpler fractions. Factor the denominator, write the fraction as a sum of terms with linear or irreducible quadratic denominators, solve for coefficients, then integrate each term using basic formulas.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "How do you choose the right integration technique?",
+    answer: "Pattern recognition guides selection. Substitution: function paired with its derivative. Parts: products of different function types. Trigonometric integrals: powers of sin and cos. Trig substitution: square roots of a²±x² or x²−a². Partial fractions: rational functions with factorable denominators.",
+    sectionId: "7"
+  }
+}
+
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Integration Techniques",
+    "description": "Master integration techniques: u-substitution, integration by parts (LIATE), trigonometric integrals, trig substitution, partial fractions, and how to choose the right method.",
+    "url": "https://www.learnmathclass.com/calculus/integrals/techniques",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Integration Techniques"
+    },
+    "teaches": [
+      "Why integration techniques are necessary",
+      "U-substitution method",
+      "Integration by parts with LIATE rule",
+      "Trigonometric integrals with powers of sine and cosine",
+      "Trigonometric substitution for square roots",
+      "Partial fraction decomposition"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Calculus",
+        "item": "https://www.learnmathclass.com/calculus"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Integrals",
+        "item": "https://www.learnmathclass.com/calculus/integrals"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Integration Techniques",
+        "item": "https://www.learnmathclass.com/calculus/integrals/techniques"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Integration Techniques | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/calculus/integrals/techniques",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props: {
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Integration Techniques: Substitution, Parts & More | Learn Math Class",
+      description: "Master integration techniques: u-substitution, integration by parts (LIATE), trigonometric integrals, trig substitution, partial fractions, and how to choose the right method.",
+      keywords: keyWords.join(", "),
+      url: "/calculus/integrals/techniques",
+      name: "Integration Techniques"
+    },
+  }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
+// export default function PageTemplate({seoData,sectionsContent , introContent}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -523,7 +678,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -564,6 +719,47 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

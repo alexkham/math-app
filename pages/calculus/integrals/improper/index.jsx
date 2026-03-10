@@ -11,9 +11,22 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  "improper integrals",
+  "improper integral convergence",
+  "improper integral divergence",
+  "infinite limits integration",
+  "unbounded integrand",
+  "p-test improper integrals",
+  "comparison test integrals",
+  "limit comparison test",
+  "integral to infinity",
+  "vertical asymptote integral",
+  "improper integral examples",
+  "convergent improper integral",
+  "divergent improper integral",
+  "evaluate improper integral"
+]
   // •
 
 //   \u2022 First item
@@ -355,25 +368,171 @@ Some infinite regions have finite area. The region under $1/x^2$ from $1$ to $\\
 
 
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Improper Integrals | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/calculus/integrals/improper",
-         name: "name"
+const faqQuestions = {
+  obj1: {
+    question: "What makes an integral improper?",
+    answer: "An integral is improper if it has infinite limits of integration (extending to ∞ or −∞) or an unbounded integrand (a vertical asymptote within or at the boundary of the interval). Both conditions can occur simultaneously in the same integral.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "How do you evaluate integrals with infinite limits?",
+    answer: "Replace the infinite limit with a finite variable, compute the resulting proper integral, then take a limit. For ∫ₐ^∞ f(x) dx, evaluate lim(b→∞) ∫ₐᵇ f(x) dx. For both limits infinite, split at any finite point c and evaluate each piece independently.",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "How do you handle integrals with discontinuous integrands?",
+    answer: "When f has a vertical asymptote at c within [a,b], split the integral and use limits. If the asymptote is at an endpoint, approach it from within the interval. Both limits must exist independently for the integral to converge.",
+    sectionId: "3"
+  },
+  obj4: {
+    question: "What is the difference between convergence and divergence?",
+    answer: "An improper integral converges if the defining limit exists and is finite—the integral equals that value. It diverges if the limit is infinite or fails to exist. For example, ∫₁^∞ 1/x² dx converges to 1, while ∫₁^∞ 1/x dx diverges to infinity.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "What is the p-test for improper integrals?",
+    answer: "For ∫₁^∞ 1/xᵖ dx: converges if p > 1, diverges if p ≤ 1. For ∫₀¹ 1/xᵖ dx: converges if p < 1, diverges if p ≥ 1. The boundary case p = 1 always diverges because ∫1/x dx = ln|x| is unbounded in both directions.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "What is the comparison test for improper integrals?",
+    answer: "For nonnegative functions: if f(x) ≤ g(x) and ∫g converges, then ∫f converges. If f(x) ≥ g(x) and ∫g diverges, then ∫f diverges. Compare unknown integrals to known ones like 1/xᵖ to determine convergence.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "What is the limit comparison test?",
+    answer: "For positive functions f and g, if lim(x→∞) f(x)/g(x) = L where 0 < L < ∞, then ∫f and ∫g both converge or both diverge. This is useful when direct comparison is awkward but the functions have similar asymptotic behavior.",
+    sectionId: "7"
+  }
+}
+
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Improper Integrals",
+    "description": "Learn improper integrals: infinite limits, unbounded integrands, convergence vs divergence, the p-test, comparison test, and limit comparison test for determining convergence.",
+    "url": "https://www.learnmathclass.com/calculus/integrals/improper",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Improper Integrals"
+    },
+    "teaches": [
+      "What makes an integral improper",
+      "Handling infinite limits of integration",
+      "Handling discontinuous integrands",
+      "Convergence vs divergence of improper integrals",
+      "The p-test for 1/xᵖ integrals",
+      "Comparison and limit comparison tests"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Calculus",
+        "item": "https://www.learnmathclass.com/calculus"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Integrals",
+        "item": "https://www.learnmathclass.com/calculus/integrals"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Improper Integrals",
+        "item": "https://www.learnmathclass.com/calculus/integrals/improper"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Improper Integrals | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/calculus/integrals/improper",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props: {
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Improper Integrals: Convergence & Tests | Learn Math Class",
+      description: "Learn improper integrals: infinite limits, unbounded integrands, convergence vs divergence, the p-test, comparison test, and limit comparison test for determining convergence.",
+      keywords: keyWords.join(", "),
+      url: "/calculus/integrals/improper",
+      name: "Improper Integrals"
+    },
+  }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
+// export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
-    
+
+
+export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+
+
   const genericSections=[
     {
         id:'1',
@@ -524,7 +683,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -565,6 +724,47 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

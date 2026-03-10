@@ -11,9 +11,22 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  "indefinite integral",
+  "antiderivative",
+  "constant of integration",
+  "indefinite integral notation",
+  "basic antiderivative formulas",
+  "power rule integration",
+  "integral of x^n",
+  "linearity of integrals",
+  "verify antiderivative",
+  "indefinite vs definite integral",
+  "find antiderivative",
+  "integration calculus",
+  "integral plus C",
+  "reverse differentiation"
+]
   // •
 
 //   \u2022 First item
@@ -343,26 +356,163 @@ Finding antiderivatives is the central challenge. Unlike differentiation, which 
 `
 };
 
+const faqQuestions = {
+  obj1: {
+    question: "What is an antiderivative?",
+    answer: "A function F is an antiderivative of f if F'(x) = f(x). Antiderivatives reverse differentiation. They are not unique—if F is an antiderivative of f, then so is F + C for any constant C, forming a family of functions.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "Why do indefinite integrals have +C?",
+    answer: "The constant of integration C represents the complete family of antiderivatives. Since the derivative of any constant is zero, functions differing by a constant share the same derivative. Omitting +C gives only one member when infinitely many exist.",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "What does indefinite integral notation mean?",
+    answer: "The notation ∫f(x) dx = F(x) + C means the indefinite integral. The ∫ symbol without limits indicates an indefinite integral, f(x) is the integrand, and dx specifies the variable. The result is a function family, not a number.",
+    sectionId: "3"
+  },
+  obj4: {
+    question: "What are the basic antiderivative formulas?",
+    answer: "Key formulas include: ∫xⁿ dx = xⁿ⁺¹/(n+1) + C for n ≠ -1; ∫1/x dx = ln|x| + C; ∫eˣ dx = eˣ + C; ∫cos x dx = sin x + C; ∫sin x dx = -cos x + C. These should be memorized.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "What are the linearity rules for indefinite integrals?",
+    answer: "Sum rule: ∫[f(x) + g(x)] dx = ∫f(x) dx + ∫g(x) dx. Constant multiple rule: ∫c·f(x) dx = c∫f(x) dx. These rules let you break complex integrands into simpler pieces.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "How do you verify an antiderivative?",
+    answer: "Differentiate your answer. If ∫f(x) dx = F(x) + C, then F'(x) must equal f(x). This check catches sign errors, missing constants, and algebraic mistakes because differentiation is mechanical and straightforward.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "How are indefinite and definite integrals related?",
+    answer: "The Fundamental Theorem of Calculus connects them. Indefinite integrals find antiderivatives: ∫f(x) dx = F(x) + C. Definite integrals evaluate: ∫ₐᵇ f(x) dx = F(b) − F(a). The constant C cancels when computing F(b) − F(a).",
+    sectionId: "7"
+  }
+}
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Indefinite Integrals",
+    "description": "Learn indefinite integrals and antiderivatives: the constant of integration, notation, basic formulas (power rule, exponential, trig), linearity rules, verification, and connection to definite integrals.",
+    "url": "https://www.learnmathclass.com/calculus/integrals/indefinite",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Indefinite Integrals"
+    },
+    "teaches": [
+      "Definition and properties of antiderivatives",
+      "The constant of integration and its meaning",
+      "Indefinite integral notation",
+      "Basic antiderivative formulas",
+      "Linearity rules for indefinite integrals",
+      "Verifying antiderivatives by differentiation"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Indefinite Integrals | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/calculus/integrals/indefinite",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Calculus",
+        "item": "https://www.learnmathclass.com/calculus"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Integrals",
+        "item": "https://www.learnmathclass.com/calculus/integrals"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Indefinite Integrals",
+        "item": "https://www.learnmathclass.com/calculus/integrals/indefinite"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Indefinite Integrals | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/calculus/integrals/indefinite",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props: {
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Indefinite Integrals: Antiderivatives & Formulas | Learn Math Class",
+      description: "Learn indefinite integrals and antiderivatives: the constant of integration, notation, basic formulas (power rule, exponential, trig), linearity rules, verification, and connection to definite integrals.",
+      keywords: keyWords.join(", "),
+      url: "/calculus/integrals/indefinite",
+      name: "Indefinite Integrals"
+    },
+  }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
+// export default function PageTemplate({seoData,sectionsContent , introContent}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -514,7 +664,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -557,7 +707,49 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
       })
     }}
   />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
+    }}
+  />
 </Head>
+
    {/* <GenericNavbar/> */}
    <br/>
    <br/>

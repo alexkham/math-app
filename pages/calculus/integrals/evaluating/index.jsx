@@ -12,8 +12,22 @@ import Head from 'next/head'
 
 export async function getStaticProps(){
 
-  const keyWords=['','','','','']
-
+  const keyWords = [
+  "evaluating integrals",
+  "how to solve integrals",
+  "integral evaluation techniques",
+  "direct antidifferentiation",
+  "completing the square integral",
+  "piecewise function integral",
+  "absolute value integral",
+  "symmetry in integrals",
+  "even odd function integral",
+  "integral common mistakes",
+  "check integral answer",
+  "definite integral setup",
+  "integral step by step",
+  "antiderivative calculus"
+]
   // •
 
 //   \u2022 First item
@@ -356,24 +370,170 @@ For definite integrals, setup matters as much as computation. Identify the corre
 
 
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Evaluating Integrals | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/calculus/integrals/evaluating",
-         name: "name"
+const faqQuestions = {
+  obj1: {
+    question: "What is direct antidifferentiation?",
+    answer: "Direct antidifferentiation means applying known formulas and linearity directly to find the integral. Simplify the integrand first—expand, separate terms, rewrite fractions—then match each piece to a standard antiderivative formula.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "How do you recognize standard integral forms?",
+    answer: "Many integrals are disguised versions of basic formulas. Completing the square transforms quadratics into arctan or arcsin forms. Rewriting constants like √(9−x²) as √(3²−x²) reveals the arcsin pattern. Look for these hidden structures before using advanced techniques.",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "How do you set up a definite integral?",
+    answer: "Identify the variable and its range, express the integrand in terms of that variable, and determine the bounds where accumulation begins and ends. Check that the answer is reasonable—positive integrand with a < b should give positive result.",
+    sectionId: "3"
+  },
+  obj4: {
+    question: "How do you integrate absolute value functions?",
+    answer: "Split the integral at points where the argument changes sign. For ∫|x| dx from -2 to 3, split at x = 0: integrate -x from -2 to 0, then x from 0 to 3. The absolute value of an integral does not equal the integral of the absolute value.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "How do you integrate piecewise functions?",
+    answer: "Split the integral at the boundaries between pieces using additivity: ∫ₐᶜ f = ∫ₐᵇ f + ∫ᵇᶜ f. Integrate each piece using its formula over its subinterval, then add the results.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "How does symmetry simplify integrals?",
+    answer: "For integrals over symmetric intervals [-a, a]: even functions (f(-x) = f(x)) give ∫₋ₐᵃ f = 2∫₀ᵃ f; odd functions (f(-x) = -f(x)) give ∫₋ₐᵃ f = 0. This can eliminate half the work or give the answer immediately.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "What are common integration mistakes?",
+    answer: "Common errors include: forgetting +C in indefinite integrals, dropping absolute values in ln|x|, sign errors in substitution (if u = -x then du = -dx), forgetting to convert limits in substitution, and missing discontinuities that make integrals improper.",
+    sectionId: "7"
+  },
+  obj8: {
+    question: "How do you check an integral answer?",
+    answer: "Differentiate your antiderivative—it should return the integrand. For definite integrals, verify the answer is reasonable: correct sign, value between m(b−a) and M(b−a) where m and M bound the integrand. Compare to numerical approximation when possible.",
+    sectionId: "8"
+  }
+}
+
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Evaluating Integrals",
+    "description": "Master integral evaluation: direct antidifferentiation, recognizing standard forms, definite integral setup, absolute values, piecewise functions, symmetry shortcuts, and avoiding common mistakes.",
+    "url": "https://www.learnmathclass.com/calculus/integrals/evaluating",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Evaluating Integrals"
+    },
+    "teaches": [
+      "Direct antidifferentiation and simplification",
+      "Recognizing standard forms through algebraic manipulation",
+      "Setting up definite integrals correctly",
+      "Handling absolute values and piecewise functions",
+      "Using symmetry to simplify integrals",
+      "Avoiding common integration mistakes"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Calculus",
+        "item": "https://www.learnmathclass.com/calculus"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Integrals",
+        "item": "https://www.learnmathclass.com/calculus/integrals"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Evaluating Integrals",
+        "item": "https://www.learnmathclass.com/calculus/integrals/evaluating"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Evaluating Integrals | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/calculus/integrals/evaluating",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props: {
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Evaluating Integrals: Strategy & Examples | Learn Math Class",
+      description: "Master integral evaluation: direct antidifferentiation, recognizing standard forms, definite integral setup, absolute values, piecewise functions, symmetry shortcuts, and avoiding common mistakes.",
+      keywords: keyWords.join(", "),
+      url: "/calculus/integrals/evaluating",
+      name: "Evaluating Integrals"
+    },
+  }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
+// export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
+export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -525,7 +685,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -566,6 +726,47 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>
