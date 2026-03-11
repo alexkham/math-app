@@ -34,6 +34,9 @@ const metaDescriptions= {
     Delve into the key formulas of trigonometry, covering angles, sine, cosine, tangent, and their applications to solve triangles and analyze periodic patterns.
    
     `,
+   'https://www.learnmathclass.com/arithmetic': `
+  Explore the foundations of arithmetic, covering divisibility, prime factorization, number properties, and essential operations that form the building blocks of all mathematics.
+`,
 
     'https://www.learnmathclass.com/complex-numbers': `Explore complex numbers: algebraic and trigonometric forms, geometric representation on the complex plane, operations, properties, conjugates, absolute value, De Moivre's theorem, and exponential form.`,
     'https://www.learnmathclass.com/math-symbols':`
