@@ -253,6 +253,18 @@ themeName='dark'
   </strong> – We explore the world of complex numbers, covering algebraic and trigonometric forms, geometric representation on the complex plane, operations, conjugates, absolute value, De Moivre&apos;s theorem, and exponential form.
 </p>
 
+<p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+      <Link href="/functions" style={{ color: '#3498db', textDecoration: 'none' }}>Functions</Link>
+    </strong> – We dive into mathematical functions from the ground up, covering domain and range, composition, inverse functions, piecewise definitions, graphing techniques, transformations, and the behavior of essential function families.
+</p>
+
+<p style={{ margin: '15px 0', fontSize: '1.05rem', marginLeft: '0' }}>
+    <strong style={{ fontWeight: 600, color: '#2c3e50' }}>
+      <Link href="/arithmetic" style={{ color: '#3498db', textDecoration: 'none' }}>Arithmetic</Link>
+    </strong> – We cover the foundations of number operations, including divisibility rules, fractions, modular arithmetic, and visual tools that bring these essential building blocks to life.
+</p>
+
   <h2 style={{
     color: '#34495e',
     fontSize: '1.8rem',

@@ -38,6 +38,9 @@ const metaDescriptions= {
   Explore the foundations of arithmetic, covering divisibility, prime factorization, number properties, and essential operations that form the building blocks of all mathematics.
 `,
 
+'https://www.learnmathclass.com/functions': `
+  Explore the world of mathematical functions, covering domain and range, composition, inverse functions, piecewise definitions, graphing techniques, transformations, and key properties of essential function families.
+`,
     'https://www.learnmathclass.com/complex-numbers': `Explore complex numbers: algebraic and trigonometric forms, geometric representation on the complex plane, operations, properties, conjugates, absolute value, De Moivre's theorem, and exponential form.`,
     'https://www.learnmathclass.com/math-symbols':`
     Explore tens of copiable mathematical symbols with explanations used in formulas and equations divided by categories and groups. 
