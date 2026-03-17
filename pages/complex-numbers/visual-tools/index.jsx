@@ -811,7 +811,16 @@ export async function getStaticProps(){
       ratio: 7,
       image: '',
       href: "/complex-numbers/visual-tools/complex-explorer"
-    }
+    },
+   {
+  title: "Powers of i Calculator/Visualizer",
+  description: "Calculate any power of i instantly. See the 4-step cycle in a dynamic diagram, follow the division-by-4 method step by step, and look up results from i⁰ to i¹⁰⁰ in the reference table.",
+  backgroundColor: "#4F46E5",
+  textColor: "#ffffff",
+  ratio: 7,
+  image: '',
+  href: "/complex-numbers/visual-tools/i-powers"
+},
   ]
 
   const faqQuestions = {
