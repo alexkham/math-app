@@ -12,9 +12,22 @@ import CheatSheet from '@/app/components/cheat-sheets/CheatSheet'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  "complex numbers cheat sheet",
+  "complex numbers formulas",
+  "complex number operations",
+  "Euler's formula",
+  "De Moivre's theorem",
+  "complex conjugate properties",
+  "modulus complex number",
+  "trigonometric form complex numbers",
+  "roots of unity",
+  "complex plane Argand diagram",
+  "imaginary unit i",
+  "complex number reference",
+  "exponential form complex numbers",
+  "complex arithmetic formulas"
+]
   // •
 
 //   \u2022 First item
@@ -869,35 +882,155 @@ const complexNumbersCheatSheetData = {
 
 
 
-  const introContent = {
-  id: "intro",
-  title: "",
-  content: ``
+//   const introContent = {
+//   id: "intro",
+//   title: "",
+//   content: ``
+// }
+
+const faqQuestions = {
+  obj1: {
+    question: "What topics does the complex numbers cheat sheet cover?",
+    answer: "The cheat sheet covers the imaginary unit and powers of i, algebraic form and components, complex conjugate properties, arithmetic operations, modulus, geometric representation, trigonometric form, exponential form and Euler's formula, De Moivre's theorem and roots, equations and polynomials, and field properties of the complex numbers."
+  },
+  obj2: {
+    question: "What is Euler's formula?",
+    answer: "Euler's formula states that e^(iθ) = cos θ + i sin θ. It connects the exponential function to trigonometry and allows any complex number to be written in exponential form as z = re^(iθ), where r is the modulus and θ is the argument."
+  },
+  obj3: {
+    question: "What is De Moivre's theorem?",
+    answer: "De Moivre's theorem states that (cos θ + i sin θ)^n = cos(nθ) + i sin(nθ). It provides a formula for computing powers of complex numbers in trigonometric form: raise the modulus to the power and multiply the argument by n."
+  },
+  obj4: {
+    question: "How many nth roots does a complex number have?",
+    answer: "Every nonzero complex number has exactly n distinct nth roots. These roots all share the same modulus (r^(1/n)) and are equally spaced around a circle, separated by 360°/n, forming the vertices of a regular n-gon."
+  },
+  obj5: {
+    question: "What are the three forms of a complex number?",
+    answer: "A complex number can be written in algebraic form (a + bi), trigonometric form (r(cos θ + i sin θ)), or exponential form (re^(iθ)). All three are equivalent. Trigonometric and exponential forms are most efficient for multiplication, division, and powers."
+  }
+}
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Complex Numbers Cheat Sheet",
+    "description": "Comprehensive complex numbers reference: imaginary unit, algebraic and trigonometric forms, conjugate, modulus, Euler's formula, De Moivre's theorem, roots of unity, and field properties.",
+    "url": "https://www.learnmathclass.com/complex-numbers/cheat-sheets",
+    "inLanguage": "en-US",
+    "learningResourceType": "Reference",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Complex Numbers"
+    },
+    "teaches": [
+      "Powers of i and the imaginary unit",
+      "Algebraic, trigonometric, and exponential forms",
+      "Complex conjugate and modulus properties",
+      "Arithmetic operations and geometric interpretation",
+      "Euler's formula and De Moivre's theorem",
+      "Roots of complex numbers and roots of unity",
+      "Fundamental Theorem of Algebra and field properties"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Complex Numbers",
+        "item": "https://www.learnmathclass.com/complex-numbers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Complex Numbers Cheat Sheet",
+        "item": "https://www.learnmathclass.com/complex-numbers/cheat-sheets"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
 }
 
 
-
-
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-         complexNumbersCheatSheetData,
-          seoData: {
-        title: "Title | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/url",
-         name: "name"
-      },
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //        complexNumbersCheatSheetData,
+  //         seoData: {
+  //       title: "Title | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/complex-numbers/cheat-sheets",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    complexNumbersCheatSheetData,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Complex Numbers Cheat Sheet | Learn Math Class",
+      description: "Comprehensive complex numbers reference: imaginary unit, algebraic and trigonometric forms, conjugate, modulus, Euler's formula, De Moivre's theorem, roots of unity, and field properties.",
+      keywords: keyWords.join(", "),
+      url: "/complex-numbers/cheat-sheets",
+      name: "Complex Numbers Cheat Sheet"
+    },
+  }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent,
-    complexNumbersCheatSheetData,
-}) {
+// export default function PageTemplate({seoData,sectionsContent , introContent,
+//     complexNumbersCheatSheetData,
+// }) {
+
+export default function PageTemplate({seoData, sectionsContent, introContent, complexNumbersCheatSheetData, faqQuestions, schemas}) {
 
     
   const genericSections=[
@@ -1050,7 +1183,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent,
 
   return (
    <>
-   <Head>
+<Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -1072,25 +1205,21 @@ export default function PageTemplate({seoData,sectionsContent , introContent,
   <script 
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>
