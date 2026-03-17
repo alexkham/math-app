@@ -6,11 +6,9 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
-import '../../../../pages/pages.css'
+import '../pages.css'
 import Head from 'next/head'
-import PowersOfICalculator from '@/app/components/calculators/complex-numbers/PowersOfICalculator'
-
-
+import ConjugateModulusVisualizer from '../../../../app/components/calculators/complex-numbers/ConjugateModulusVisualizer'
 
 
 export async function getStaticProps(){
@@ -209,7 +207,7 @@ export async function getStaticProps(){
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/complex-numbers/visual-tools/i-powers",
+        url: "/complex-numbers/visual-tools/complex-conjugate",
          name: "name"
       },
         
@@ -430,9 +428,9 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Powers of i Calculator/Visualizer</h1>
+   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Complex Conjugate Visualizer</h1>
    <br/>
-  <PowersOfICalculator/>
+   <ConjugateModulusVisualizer/>
    <br/>
    {/* <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
