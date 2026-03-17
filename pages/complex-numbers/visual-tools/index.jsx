@@ -821,6 +821,33 @@ export async function getStaticProps(){
   image: '',
   href: "/complex-numbers/visual-tools/i-powers"
 },
+ {
+  title: "Complex Conjugate Explorer",
+  description: "Drag a point on the Argand plane to see z and its conjugate z̄ mirrored across the real axis. Watch the modulus circle, right triangle decomposition, and the proof that z · z̄ = |z|² update in real time.",
+  backgroundColor: "#4F46E5",
+  textColor: "#ffffff",
+  ratio: 7,
+  image: '',
+  href: "/complex-numbers/visual-tools/complex-conjugate"
+},
+{
+  title: "Euler's Formula Explorer",
+  description: "Explore eⁱᶿ = cos θ + i sin θ on an interactive unit circle. Drag the angle or use the slider, see the right triangle projections, hit landmark angles like Euler's identity eⁱᵖ = −1, and scale with r for the full polar form.",
+  backgroundColor: "#4F46E5",
+  textColor: "#ffffff",
+  ratio: 7,
+  image: '',
+  href: "/complex-numbers/visual-tools/euler-formula"
+},
+{
+  title: "Polar-Rectangular Converter",
+  description: "Explore eⁱᶿ = cos θ + i sin θ on an interactive unit circle. Drag the angle or use the slider, see the right triangle projections, hit landmark angles like Euler's identity eⁱᵖ = −1, and scale with r for the full polar form.",
+  backgroundColor: "#4F46E5",
+  textColor: "#ffffff",
+  ratio: 7,
+  image: '',
+  href: "/complex-numbers/visual-tools/polar-rectangular"
+},
   ]
 
   const faqQuestions = {

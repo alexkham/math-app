@@ -8,7 +8,7 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
-import ConjugateModulusVisualizer from '../../../../app/components/calculators/complex-numbers/ConjugateModulusVisualizer'
+import PolarRectangularConverter from '../../../../app/components/calculators/complex-numbers/PolarRectangularConverter'
 
 
 export async function getStaticProps(){
@@ -204,10 +204,10 @@ export async function getStaticProps(){
          sectionsContent,
          introContent,
           seoData: {
-        title: "Title | Learn Math Class",
+        title: "Polar-Rectangular Converter | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/complex-numbers/visual-tools/complex-conjugate",
+        url: "/complex-numbers/visual-tools/polar-rectangular",
          name: "name"
       },
         
@@ -428,9 +428,9 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Complex Conjugate Visualizer</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Polar-Rectangular Converter</h1>
    <br/>
-   <ConjugateModulusVisualizer/>
+   <PolarRectangularConverter/>
    <br/>
    {/* <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
