@@ -6,14 +6,9 @@
 // import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 // import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 // import React from 'react'
-// import '../../../../pages/pages.css'
+// import '../pages.css'
 // import Head from 'next/head'
-
-// import ComplexAdditionSubtractionVisualizer from 'app/components/calculators/complex-numbers/ComplexAdditionSubtractionVisualizer'
-
-
-
-
+// import ComplexMultiplicationVisualizer from '../../../../app/components/calculators/complex-numbers/ComplexMultiplicationVisualizer'
 
 
 
@@ -210,10 +205,10 @@
 //          sectionsContent,
 //          introContent,
 //           seoData: {
-//         title: "Complex Numbers Addition /Subtraction Visualizer | Learn Math Class",
+//         title: "Complex Numbers Multiplication | Learn Math Class",
 //         description: "Metadescription",
 //         keywords: keyWords.join(", "),
-//         url: "/complex-numbers/visual-tools/addition-subtraction",
+//         url: "/complex-numbers/visual-tools/multiplication",
 //          name: "name"
 //       },
         
@@ -434,10 +429,9 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Complex Numbers Addition /Subtraction Visualizer</h1>
+//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Complex Numbers Multiplication</h1>
 //    <br/>
-//   <ComplexAdditionSubtractionVisualizer/>
- 
+//    <ComplexMultiplicationVisualizer/>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -468,6 +462,7 @@
 // }
 
 
+
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
@@ -476,181 +471,171 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
-import '../../../../pages/pages.css'
+import '../pages.css'
 import Head from 'next/head'
-
-import ComplexAdditionSubtractionVisualizer from 'app/components/calculators/complex-numbers/ComplexAdditionSubtractionVisualizer'
-
-
-
-
+import ComplexMultiplicationVisualizer from '../../../../app/components/calculators/complex-numbers/ComplexMultiplicationVisualizer'
 
 
 
 export async function getStaticProps(){
 
   const keyWords = [
-    "complex number addition",
-    "complex number subtraction",
-    "add complex numbers visually",
-    "complex addition calculator",
-    "parallelogram rule complex numbers",
-    "complex subtraction visualizer",
-    "vector addition complex plane",
-    "complex number arithmetic",
-    "add imaginary numbers",
-    "subtract complex numbers",
-    "triangle inequality complex",
-    "complex plane vector addition",
-    "tip to tail complex numbers",
-    "complex number distance",
-    "interactive complex arithmetic"
+    "complex multiplication",
+    "complex number multiplication",
+    "multiply complex numbers",
+    "complex multiplication visualizer",
+    "FOIL complex numbers",
+    "multiply magnitudes add angles",
+    "complex multiplication geometry",
+    "complex plane multiplication",
+    "i squared equals negative one",
+    "polar multiplication complex",
+    "complex number product calculator",
+    "rotation scaling complex plane",
+    "interactive complex multiplication",
+    "complex multiplication step by step",
+    "algebraic complex multiplication"
   ]
 
     const sectionsContent={
 
     obj1:{
-      title:`Getting Started — Drag Two Points`,
-      content:`Two draggable points sit on the complex plane: $z_1$ (navy) and $z_2$ (orange). Grab either point and move it anywhere within the $\\pm 5$ grid to see the addition and subtraction results update instantly.
+      title:`Getting Started — Drag and Multiply`,
+      content:`Two draggable points represent the factors $z_1$ (navy) and $z_2$ (orange) on the complex plane. Grab either point and move it to see the green product vector $z_1 \\cdot z_2$ update in real time, along with the three angle arcs and both step-by-step solution panels.
 
-Alternatively, type precise values into the input fields on the right panel — each point has separate real and imaginary inputs accepting values from $-5$ to $5$ in steps of $0.1$. Five preset configurations are available below the plane: $(3+i)$ & $(1+3i)$, $(2+2i)$ & $(-2+2i)$, $4$ & $3i$, a conjugate pair, and $(-1+3i)$ & $(2-i)$. Click **Random** to generate two arbitrary points.
+You can also type values directly into the input fields on the right — each factor has separate real and imaginary inputs accepting values from $-10$ to $10$. Five preset configurations are available below the plane: $(2+i)(-1+2i)$, $(1+i)(1-i)$, $3 \\times 2i$, $i \\times i$, and $2(-3+4i)$. Click **Random** to generate two arbitrary factors.
 
-The **Show** toggle lets you display both operations simultaneously, or isolate addition or subtraction for a cleaner view. Start with "Both" to compare the two operations side by side, then switch to "Addition" or "Subtraction" to focus on the geometry of each one individually.`,
+Each input panel shows the complex number in rectangular form alongside its modulus and argument, so you can track both the algebraic and geometric perspectives simultaneously.`,
       before:``,
       after:``,
       link:'',
     },
     obj2:{
-      title:`The Parallelogram Rule for Addition`,
-      content:`Switch to **Addition** mode to see the parallelogram clearly. The green vector from the origin to the sum point $z_1 + z_2$ forms the diagonal of the parallelogram whose sides are $z_1$ and $z_2$.
+      title:`Reading the Three Angle Arcs`,
+      content:`Three concentric arcs near the origin display the arguments of both factors and their product. The inner navy arc shows $\\theta_1$ (the argument of $z_1$), the middle orange arc shows $\\theta_2$ (the argument of $z_2$), and the outer green arc shows $\\theta_1 + \\theta_2$ (the argument of the product).
 
-Two dashed "ghost" vectors complete the parallelogram. A dashed copy of $z_2$ (orange) is translated to the tip of $z_1$, and a dashed copy of $z_1$ (navy) is translated to the tip of $z_2$. Both ghost vectors arrive at the same destination — the sum point. This is the **tip-to-tail** construction: place one vector's tail at the other's tip, and the sum runs from the origin to where you end up.
+This is the geometric rule in action: **when you multiply complex numbers, angles add**. The green arc visually spans the combined rotation from both factors. Try clicking the preset $(2+i)(-1+2i)$ — the navy arc covers about $26.6°$, the orange arc covers about $116.6°$, and the green product arc covers their sum at $143.1°$.
 
-The light green shaded region fills the interior of the parallelogram, making the geometric relationship immediately visible. Try the preset $(3+i)$ & $(1+3i)$ — the parallelogram tilts toward the imaginary axis because $z_2$ has a larger imaginary component. Then try $4$ & $3i$ — one side lies along the real axis and the other along the imaginary axis, producing a rectangle.`,
+Click $i \\times i$ to see the cleanest case: each factor has an angle of $90°$, so the product arc spans $180°$, placing the result at $-1$ on the negative real axis. This is the geometric proof that $i^2 = -1$ — two quarter-turn rotations compose into a half-turn.`,
       before:``,
       after:``,
       link:'',
     },
 
     obj3:{
-      title:`Subtraction and the Difference Vector`,
-      content:`Switch to **Subtraction** mode to isolate the subtraction geometry. The purple vector from the origin represents $z_1 - z_2$, while a purple dashed line connects the tips of $z_2$ and $z_1$ directly.
+      title:`Multiplication by a Pure Real Number`,
+      content:`Click the preset $2(-3+4i)$ to see what happens when one factor is purely real. The navy vector for $z_1 = 2$ lies flat on the positive real axis with $\\theta_1 = 0°$. Since its angle is zero, it contributes no rotation — only scaling.
 
-This dashed line has the same length and direction as the difference vector — it literally shows "the vector from $z_2$ to $z_1$." The modulus $|z_1 - z_2|$ equals the distance between the two points on the plane.
+The product $-6 + 8i$ points in the exact same direction as $z_2 = -3 + 4i$ but is twice as long. The green product vector is a stretched copy of the orange vector. The product's angle equals $\\theta_2$ unchanged because $\\theta_1 + \\theta_2 = 0° + \\theta_2 = \\theta_2$.
 
-A faint dashed vector labeled $-z_2$ appears opposite to $z_2$ (rotated 180°). This illustrates the key identity: $z_1 - z_2 = z_1 + (-z_2)$. Subtraction is addition of the negation.
+Now try changing $z_1$ to $-2$. A negative real number has $\\theta_1 = 180°$, so the product rotates $z_2$ by a half-turn (flipping it through the origin) and scales by $2$. The product is $6 - 8i$ — same magnitude, opposite direction.
 
-Try the **conjugate pair** preset: $z_1 = 3 + 2i$ and $z_2 = 3 - 2i$. The difference is $4i$ (pure imaginary) and the dashed line between the points is vertical. The sum is $6$ (pure real) and lies on the real axis — conjugate pairs always produce this split.`,
+This shows that multiplying by a positive real stretches without rotating, multiplying by a negative real stretches and flips, and multiplying by $1$ or $-1$ produces no scaling at all.`,
       before:``,
       after:``,
       link:'',
     },
 
     obj4:{
-      title:`Both Mode — Comparing Addition and Subtraction`,
-      content:`In **Both** mode, the addition parallelogram (green) and subtraction vector (purple) appear together. This side-by-side view reveals how the two operations relate geometrically.
+      title:`Multiplication by Pure Imaginary Numbers`,
+      content:`Click $3 \\times 2i$ to see a real number multiplied by a pure imaginary. Here $z_1 = 3$ (angle $0°$) and $z_2 = 2i$ (angle $90°$). The product is $6i$ — the result sits on the positive imaginary axis at angle $90°$. Multiplication by $i$ rotates any vector $90°$ counterclockwise.
 
-The green sum vector and the purple difference vector are actually the two diagonals of the same parallelogram. The sum is the diagonal that starts at the origin and passes through the interior. The difference connects the two input points — it is the other diagonal, translated to start at the origin.
+Now click $i \\times i$. Both factors are the imaginary unit with modulus $1$ and angle $90°$. The product has modulus $1 \\times 1 = 1$ and angle $90° + 90° = 180°$, landing at $-1$. This is the defining property $i^2 = -1$ demonstrated geometrically — two $90°$ rotations compose into a $180°$ rotation.
 
-Try dragging $z_2$ to the exact opposite of $z_1$. For example, set $z_1 = 3 + 2i$ and $z_2 = -3 - 2i$. The sum collapses to zero (both vectors cancel) while the difference doubles to $6 + 4i$. The parallelogram degenerates to a line segment because the two vectors are antiparallel.
-
-Now set both points in the same direction — for example $z_1 = 2 + i$ and $z_2 = 4 + 2i$. The sum is $6 + 3i$ (aligned), the parallelogram again degenerates to a line, and the triangle inequality reaches equality.`,
+Try setting $z_1 = 0 + 2i$ and $z_2 = 0 + 3i$. Both are pure imaginary, so both angles are $90°$. The product angle is $180°$ and the modulus is $2 \\times 3 = 6$, giving $-6$. Two pure imaginary numbers always produce a negative real product because $90° + 90° = 180°$.`,
       before:``,
       after:``,
       link:'',
     },
 
     obj5:{
-      title:`Degenerate and Axis-Aligned Configurations`,
-      content:`Several input combinations produce visually distinct special cases worth capturing.
+      title:`Conjugate Pair Multiplication`,
+      content:`Click $(1+i)(1-i)$ to see a conjugate pair. These two numbers have the same modulus ($\\sqrt{2}$) but opposite angles ($45°$ and $-45°$). Their angles cancel: $45° + (-45°) = 0°$, so the product lies on the positive real axis.
 
-**Pure real inputs:** click preset $4$ & $3i$, then change $z_2$ to a real number like $2$. Both vectors lie on the real axis, the parallelogram collapses to a horizontal line, and both the sum and difference are real numbers.
+The product is $(1+i)(1-i) = 1 - i^2 = 1 + 1 = 2$. Geometrically, moduli multiply: $\\sqrt{2} \\times \\sqrt{2} = 2$. The result is always a positive real number — this is a general rule: $z \\cdot \\bar{z} = |z|^2$.
 
-**Pure imaginary inputs:** set $z_1 = 0 + 3i$ and $z_2 = 0 + 2i$. Both vectors are vertical, the parallelogram collapses to a vertical line, and results are purely imaginary.
+In the visualizer, the green product vector sits flat on the real axis. The navy arc points upward, the orange arc points downward by the same amount, and the green product arc vanishes because the total angle is zero.
 
-**One vector zero:** set $z_2 = 0$. The sum equals $z_1$ itself, the difference also equals $z_1$, and the parallelogram disappears because one side has zero length.
-
-**Collinear vectors:** when $z_1$ and $z_2$ point in the same direction (same argument), the parallelogram degenerates to a line and the triangle inequality becomes an equality. Drag both points to, say, the positive real axis to see this.
-
-**Off-screen result:** when the sum exceeds the $\\pm 5$ range, the green vector is replaced by a dashed ray pointing toward the edge with an arrow and the label "$z_1 + z_2 \\to$", indicating the result is beyond the visible area.`,
+Try setting $z_1 = 3 + 4i$ and $z_2 = 3 - 4i$. The product is $9 + 16 = 25$ — again a real number equal to $|z_1|^2 = 5^2 = 25$. This pattern is used extensively in complex division and rationalizing denominators.`,
       before:``,
       after:``,
       link:'',
     },
 
     obj6:{
-      title:`Reading the Step-by-Step Panel`,
-      content:`The **Step-by-Step** section on the right breaks down each operation into three lines.
+      title:`Off-Screen Products and the Zoom Inset`,
+      content:`When both factors have large moduli, the product can exceed the visible $\\pm 10$ range. In this case the green product vector is replaced by a dashed ray pointing toward the edge of the plane, with an arrow and the label "$z_1 z_2 \\to$". The right panel still shows the exact numerical result even though the point is off-screen.
 
-For addition, it shows: the original expression $(z_1) + (z_2)$, the component-wise grouping $(a_1 + a_2) + (b_1 + b_2)i$, and the final simplified result highlighted in green.
+Try setting $z_1 = 8 + 6i$ and $z_2 = 5 + 5i$. The product modulus is $10 \\times 5\\sqrt{2} \\approx 70.7$ — far beyond the grid. The dashed ray indicates the direction, and the result panel gives the exact value.
 
-For subtraction, the same three-line pattern appears with minus signs: the original expression, the component-wise grouping $(a_1 - a_2) + (b_1 - b_2)i$, and the result in purple.
+Conversely, when the product modulus is very small (below $1$), a **zoom inset** appears in the upper-right corner of the plane. This magnified view shows a small grid around the origin with the product point plotted at readable scale. Try $z_1 = 0.3$ and $z_2 = 0.2 + 0.1i$ — the product is tiny, but the inset makes it clearly visible with its own labeled axes and coordinates.
 
-All values update dynamically as you drag or type. When "Both" mode is active, both operations appear stacked. Switching to "Addition" or "Subtraction" mode hides the irrelevant calculation, giving a cleaner view.
-
-This panel makes the component-wise nature of complex addition explicit — the real and imaginary parts are handled independently, with no cross-terms or powers of $i$ involved.`,
+These two features ensure every product is readable regardless of magnitude.`,
       before:``,
       after:``,
       link:'',
     },
 
     obj7:{
-      title:`The Triangle Inequality`,
-      content:`When addition is visible, a dedicated panel displays the **triangle inequality** for the current configuration:
+      title:`The Algebraic (FOIL) Method`,
+      content:`The **Algebraic Method** panel shows the full FOIL expansion step by step. For two complex numbers $(a + bi)(c + di)$, the four terms are:
 
-$$|z_1 + z_2| \\leq |z_1| + |z_2|$$
+$$ac + adi + bci + bdi^2$$
 
-The panel substitutes the actual modulus values and verifies the inequality with a green checkmark. This states that the length of the sum vector can never exceed the sum of the individual lengths — geometrically, the diagonal of a triangle is always shorter than the sum of the other two sides.
+Since $i^2 = -1$, the last term becomes $-bd$. Collecting real and imaginary parts gives:
 
-Equality holds when $z_1$ and $z_2$ have the same argument (point in the same direction). Drag both points onto the positive real axis — for example $z_1 = 3$ and $z_2 = 2$ — and watch the left side equal the right side exactly: $|5| = |3| + |2| = 5$.
+$$(ac - bd) + (ad + bc)i$$
 
-Now rotate $z_2$ perpendicular to $z_1$ and the gap widens. The farther apart the two vectors' directions, the shorter the sum vector relative to the individual lengths.`,
+The panel substitutes your current values and walks through each stage: the four FOIL products, combining the $i$ terms, replacing $i^2$ with $-1$, and arriving at the final result.
+
+Try $(2 + i)(-1 + 2i)$ to see a worked example: the four terms are $-2 + 4i + (-i) + 2i^2 = -2 + 3i - 2 = -4 + 3i$. Each intermediate value updates in real time as you adjust the inputs, making this a dynamic FOIL calculator for any pair of complex numbers.`,
       before:``,
       after:``,
       link:'',
     },
 
     obj8:{
-      title:`How Complex Addition Works`,
-      content:`Adding two complex numbers is straightforward — combine real parts and imaginary parts separately:
+      title:`The Geometric (Polar) Method`,
+      content:`The **Geometric Method** panel shows the polar interpretation of multiplication in two lines:
 
-$$(a + bi) + (c + di) = (a + c) + (b + d)i$$
+$$|z_1| \\times |z_2| = |z_1 z_2|$$
+$$\\theta_1 + \\theta_2 = \\theta_{\\text{product}}$$
 
-There are no cross-terms because the real and imaginary components are independent. This is identical to adding two-dimensional vectors component-wise: if $z_1 = (a, b)$ and $z_2 = (c, d)$, then $z_1 + z_2 = (a + c, b + d)$.
+Moduli multiply and arguments add. This is why polar form makes multiplication simple — instead of four FOIL terms and an $i^2$ substitution, you just do one multiplication and one addition.
 
-The geometric interpretation is the parallelogram rule. Place $z_1$ and $z_2$ as arrows from the origin. The sum is the diagonal of the parallelogram they form. Equivalently, translate $z_2$ so its tail sits at the tip of $z_1$ — the arrow from the origin to the new tip of $z_2$ is $z_1 + z_2$.
+Using **Euler's formula**, $z_1 z_2 = r_1 e^{i\\theta_1} \\cdot r_2 e^{i\\theta_2} = r_1 r_2 \\cdot e^{i(\\theta_1 + \\theta_2)}$. The exponential form turns multiplication of complex numbers into multiplication of real magnitudes and addition of exponents.
 
-Complex addition is commutative ($z_1 + z_2 = z_2 + z_1$) and associative. It also preserves the structure of the complex plane — the sum of two complex numbers is always another complex number.`,
+The panel also provides a plain-English summary: "The product vector is [modulus] units long at [angle] from the real axis." This sentence combines both polar components into one geometric description. Compare this to the multi-line algebraic expansion above — for multiplication, the polar approach is dramatically simpler.`,
       before:``,
       after:``,
       link:'',
     },
 
     obj9:{
-      title:`How Complex Subtraction Works`,
-      content:`Subtracting complex numbers also works component-wise:
+      title:`Complex Multiplication as Rotation and Scaling`,
+      content:`Every complex multiplication can be decomposed into two geometric operations: **scaling** (changing length) and **rotation** (changing angle).
 
-$$(a + bi) - (c + di) = (a - c) + (b - d)i$$
+Multiplying $z_1$ by $z_2$ scales $z_1$ by the factor $|z_2|$ and rotates it counterclockwise by $\\theta_2$. Equivalently, it scales $z_2$ by $|z_1|$ and rotates by $\\theta_1$ — the result is the same either way because multiplication is commutative.
 
-The key geometric insight is that $z_1 - z_2$ equals the vector from the point $z_2$ to the point $z_1$. Its modulus $|z_1 - z_2|$ is the Euclidean distance between the two points on the complex plane.
+When $|z_2| = 1$ (the factor lies on the unit circle), multiplication is a pure rotation with no scaling. Set $z_2$ to any point on the unit circle — for example $z_2 = \\cos(60°) + i\\sin(60°) \\approx 0.5 + 0.87i$ — and watch $z_1$ rotate by $60°$ without changing length.
 
-Subtraction can always be rewritten as adding the negation: $z_1 - z_2 = z_1 + (-z_2)$, where $-z_2 = -c - di$ is $z_2$ reflected through the origin (rotated by $180°$). The visualizer shows this as the faint dashed $-z_2$ ghost vector.
+When $\\theta_2 = 0$ (the factor is a positive real number), multiplication is pure scaling with no rotation. The product points in the same direction as $z_1$ but is stretched or compressed.
 
-Two important special cases: when $z_2$ is the **conjugate** of $z_1$ (same real part, opposite imaginary part), the difference is purely imaginary ($2bi$). When $z_1 = z_2$, the difference is zero.`,
+This rotation-scaling interpretation is the reason complex multiplication appears throughout physics, signal processing, and computer graphics — it naturally encodes combined scale-and-rotate transformations in a single operation.`,
       before:``,
       after:``,
       link:'',
     },
 
     obj10:{
-      title:`Conjugate Pairs in Addition and Subtraction`,
-      content:`Click the **Conjugate pair** preset to load $z_1 = 3 + 2i$ and $z_2 = 3 - 2i$. These are complex conjugates — they share the same real part but have opposite imaginary parts.
+      title:`Why i² = −1 Makes Geometric Sense`,
+      content:`The preset $i \\times i$ gives the most fundamental demonstration. The imaginary unit $i$ has modulus $1$ and argument $90°$. Multiplying by $i$ means "rotate $90°$ counterclockwise and scale by $1$" — a pure quarter-turn.
 
-Adding conjugates always cancels the imaginary components: $(3 + 2i) + (3 - 2i) = 6$. The sum is a pure real number lying on the real axis. In the visualizer, the green sum point sits exactly on the horizontal axis.
+Applying this twice: $i \\times i = i^2$. Two quarter-turns make a half-turn ($90° + 90° = 180°$), which places the result at $-1$ on the negative real axis. The length stays $1 \\times 1 = 1$, so the result is exactly $-1$. This is the geometric reason behind the algebraic definition $i^2 = -1$.
 
-Subtracting conjugates always cancels the real components: $(3 + 2i) - (3 - 2i) = 4i$. The difference is a pure imaginary number on the vertical axis. The purple vector points straight up.
+Continuing: $i^3 = i^2 \\cdot i = -1 \\cdot i = -i$ (a $270°$ rotation), and $i^4 = i^3 \\cdot i = -i \\cdot i = 1$ (a full $360°$ rotation returning to $1$). This connects directly to the **powers of i** cycle: $1 \\to i \\to -1 \\to -i \\to 1$.
 
-The dashed line connecting $z_1$ and $z_2$ is vertical — conjugates are always symmetric about the real axis. This pair produces one of the cleanest illustrations: real-axis sum, imaginary-axis difference, and a perfectly symmetric parallelogram.`,
+You can verify each step in the visualizer by setting one factor to $i$ and the other to successive powers.`,
       before:``,
       after:``,
       link:'',
@@ -658,19 +643,19 @@ The dashed line connecting $z_1$ and $z_2$ is vertical — conjugates are always
 
     obj11:{
       title:`Related Concepts and Tools`,
-      content:`Complex addition and subtraction form the foundation of complex arithmetic. Explore these related pages for the full picture.
+      content:`Complex multiplication connects to many areas of complex number theory and applied mathematics. Explore these related pages.
 
-**Complex Numbers** — foundational theory covering the imaginary unit $i$, rectangular form $a + bi$, and algebraic operations.
+**Complex Addition & Subtraction Visualizer** — while addition works component-wise (no cross-terms), multiplication involves the FOIL expansion and the $i^2 = -1$ rule. Compare how the two operations look geometrically.
 
-**Complex Number Explorer** — a general-purpose tool for plotting and operating on complex numbers, including multiplication and division.
+**Polar-Rectangular Converter** — convert between $a + bi$ and $re^{i\\theta}$ forms. Polar form is where multiplication becomes simple: multiply moduli, add angles.
 
-**Polar-Rectangular Converter** — convert between $a + bi$ and $re^{i\\theta}$ form. Polar form simplifies multiplication and division, while rectangular form (used here) simplifies addition and subtraction.
+**Euler's Formula Explorer** — the identity $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ is the theoretical foundation for the polar multiplication rule.
 
-**Euler's Formula Explorer** — visualize $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ and see how rotation connects to the exponential function.
+**Powers of i Calculator** — the cyclic pattern $i^0 = 1, i^1 = i, i^2 = -1, i^3 = -i$ is a direct consequence of repeated multiplication by $i$.
 
-**Powers of i Calculator** — compute $i^n$ for any integer using the mod 4 cycle, a building block for complex arithmetic.
+**Complex Number Explorer** — a general-purpose tool for all complex operations on the plane.
 
-**Variance and Expected Value** — complex addition rules mirror real-number linearity: $E[z_1 + z_2] = E[z_1] + E[z_2]$, extending to random complex variables.`,
+**De Moivre's Theorem** — extends the multiplication rule to powers: $(re^{i\\theta})^n = r^n e^{in\\theta}$.`,
       before:``,
       after:``,
       link:'',
@@ -687,24 +672,24 @@ The dashed line connecting $z_1$ and $z_2$ is vertical — conjugates are always
 
   const faqQuestions = {
     obj1: {
-      question: "How do you add two complex numbers?",
-      answer: "Add the real parts together and add the imaginary parts together: (a + bi) + (c + di) = (a + c) + (b + d)i. There are no cross-terms — it works exactly like two-dimensional vector addition."
+      question: "How do you multiply two complex numbers?",
+      answer: "Use FOIL: (a + bi)(c + di) = ac + adi + bci + bdi². Since i² = −1, this simplifies to (ac − bd) + (ad + bc)i. Alternatively, in polar form, multiply the moduli and add the arguments."
     },
     obj2: {
-      question: "How do you subtract complex numbers?",
-      answer: "Subtract real parts and imaginary parts separately: (a + bi) − (c + di) = (a − c) + (b − d)i. Geometrically, z₁ − z₂ is the vector from z₂ to z₁, and its modulus equals the distance between the two points."
+      question: "What does complex multiplication look like geometrically?",
+      answer: "Multiplying z₁ by z₂ scales z₁ by the length of z₂ and rotates it by the angle of z₂. The product modulus is |z₁|·|z₂| and the product angle is θ₁ + θ₂. This is why polar form makes multiplication simple."
     },
     obj3: {
-      question: "What is the parallelogram rule for complex addition?",
-      answer: "When z₁ and z₂ are drawn as vectors from the origin, their sum z₁ + z₂ is the diagonal of the parallelogram they form. This is equivalent to placing z₂ tip-to-tail at the end of z₁ — the resulting arrow from the origin is the sum."
+      question: "Why does i² equal −1 geometrically?",
+      answer: "The imaginary unit i has modulus 1 and angle 90°. Multiplying by i means rotating 90° counterclockwise. Two rotations of 90° give 180°, placing the result at −1 on the negative real axis. Two quarter-turns equal a half-turn."
     },
     obj4: {
-      question: "What is the triangle inequality for complex numbers?",
-      answer: "The triangle inequality states |z₁ + z₂| ≤ |z₁| + |z₂|. The length of the sum vector never exceeds the sum of the individual lengths. Equality holds only when z₁ and z₂ point in exactly the same direction."
+      question: "What happens when you multiply complex conjugates?",
+      answer: "Conjugates z = a + bi and z̄ = a − bi have equal moduli but opposite angles, so their angles cancel and the product is always a positive real number: z · z̄ = a² + b² = |z|²."
     },
     obj5: {
-      question: "What happens when you add complex conjugates?",
-      answer: "Adding conjugates cancels the imaginary parts: (a + bi) + (a − bi) = 2a, a pure real number. Subtracting them cancels the real parts: (a + bi) − (a − bi) = 2bi, a pure imaginary number."
+      question: "Why is polar form better for complex multiplication?",
+      answer: "In polar form, multiplication reduces to multiplying two real numbers (moduli) and adding two angles. The algebraic FOIL method requires four products and an i² substitution. Polar form is simpler because Euler's formula converts multiplication into exponent addition."
     }
   }
 
@@ -712,9 +697,9 @@ The dashed line connecting $z_1$ and $z_2$ is vertical — conjugates are always
     webApplication: {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Complex Addition & Subtraction Visualizer",
-      "description": "Interactive visualizer for adding and subtracting complex numbers. Drag points on the complex plane, see the parallelogram rule, step-by-step solutions, and triangle inequality in real time.",
-      "url": "https://www.learnmathclass.com/complex-numbers/visual-tools/addition-subtraction",
+      "name": "Complex Multiplication Visualizer",
+      "description": "Interactive complex multiplication tool showing both FOIL algebraic steps and polar geometric interpretation. Drag points, see angle arcs, and explore rotation and scaling on the complex plane.",
+      "url": "https://www.learnmathclass.com/complex-numbers/visual-tools/multiplication",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -723,13 +708,13 @@ The dashed line connecting $z_1$ and $z_2$ is vertical — conjugates are always
         "priceCurrency": "USD"
       },
       "featureList": [
-        "Two draggable complex number points with independent input fields",
-        "Parallelogram visualization with ghost tip-to-tail vectors for addition",
-        "Difference vector and distance line for subtraction",
-        "Toggle between Addition, Subtraction, or Both display modes",
-        "Live step-by-step component-wise calculation breakdown",
-        "Triangle inequality verification with real-time modulus values",
-        "Five presets including conjugate pair plus random generator"
+        "Two draggable complex number factors with independent input fields",
+        "Three concentric angle arcs showing θ₁, θ₂, and θ₁+θ₂",
+        "Full FOIL algebraic expansion with step-by-step substitution",
+        "Polar geometric method showing modulus multiplication and angle addition",
+        "Zoom inset for small products and ray-to-edge for off-screen products",
+        "Five presets including conjugate pair and i×i demonstrations",
+        "Real-time modulus and argument display for all three vectors"
       ],
       "author": {
         "@type": "Organization",
@@ -769,8 +754,8 @@ The dashed line connecting $z_1$ and $z_2$ is vertical — conjugates are always
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Addition & Subtraction Visualizer",
-          "item": "https://www.learnmathclass.com/complex-numbers/visual-tools/addition-subtraction"
+          "name": "Complex Multiplication Visualizer",
+          "item": "https://www.learnmathclass.com/complex-numbers/visual-tools/multiplication"
         }
       ]
     },
@@ -797,11 +782,11 @@ The dashed line connecting $z_1$ and $z_2$ is vertical — conjugates are always
          faqQuestions,
          schemas,
           seoData: {
-        title: "Complex Addition & Subtraction | Learn Math Class",
-        description: "Visualize complex number addition and subtraction with draggable vectors. See the parallelogram rule, step-by-step solutions, and triangle inequality in real time.",
+        title: "Complex Multiplication Visualizer | Learn Math Class",
+        description: "Visualize complex multiplication with draggable vectors. See FOIL steps, polar angle addition, rotation and scaling, and special cases like i² = −1 in real time.",
         keywords: keyWords.join(", "),
-        url: "/complex-numbers/visual-tools/addition-subtraction",
-         name: "Complex Addition & Subtraction Visualizer"
+        url: "/complex-numbers/visual-tools/multiplication",
+         name: "Complex Multiplication Visualizer"
       },
         
        }
@@ -960,10 +945,9 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Complex Numbers Addition /Subtraction Visualizer</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Complex Numbers Multiplication</h1>
    <br/>
-  <ComplexAdditionSubtractionVisualizer/>
- 
+   <ComplexMultiplicationVisualizer/>
    <br/>
    <SectionTableOfContents sections={genericSections}/>
    <br/>
