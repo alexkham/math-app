@@ -736,7 +736,7 @@ export default function ImageKernelPage({seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Page Title</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Image and Kernel of Linear Transformation</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

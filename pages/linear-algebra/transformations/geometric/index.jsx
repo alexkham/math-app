@@ -763,7 +763,7 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Page Title</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Geometric Transformations</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}
