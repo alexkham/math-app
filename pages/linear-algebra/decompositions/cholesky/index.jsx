@@ -11,9 +11,22 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  "Cholesky decomposition",
+  "Cholesky factorization",
+  "LL^T factorization",
+  "symmetric positive definite matrix",
+  "Cholesky algorithm",
+  "positive definiteness test",
+  "Cholesky vs LU",
+  "LDL^T decomposition",
+  "Cholesky solve linear system",
+  "matrix square root",
+  "covariance matrix Cholesky",
+  "pivoted Cholesky",
+  "Cholesky computational cost",
+  "lower triangular factorization"
+]
   // •
 
 //   \u2022 First item
@@ -334,24 +347,155 @@ const introContent = {
 }
 
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Title | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/url",
-         name: "name"
+const faqQuestions = {
+  obj1: {
+    question: "What is the Cholesky decomposition?",
+    answer: "The Cholesky decomposition writes a symmetric positive definite matrix A as A = LLᵀ, where L is lower triangular with strictly positive diagonal entries. It is the unique matrix square root in this form and is the fastest direct solver for symmetric positive definite systems.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "When does the Cholesky decomposition exist?",
+    answer: "The Cholesky factorization exists if and only if the matrix is symmetric and positive definite — meaning xᵀAx > 0 for every nonzero vector x. Equivalently, all eigenvalues must be strictly positive. If the matrix is only positive semi-definite or indefinite, the standard algorithm breaks down.",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "How is Cholesky different from LU decomposition?",
+    answer: "Cholesky exploits symmetry and positive definiteness to achieve half the cost of LU (n³/3 vs 2n³/3 operations), requires no pivoting, and stores only one triangular factor since the other is its transpose. Cholesky is the symmetric-positive-definite specialization of LU.",
+    sectionId: "9"
+  },
+  obj4: {
+    question: "Why does Cholesky not require pivoting?",
+    answer: "Positive definiteness guarantees that every quantity under the square root during the algorithm is strictly positive. No zero or negative pivots can occur, so row swaps are never needed. If the algorithm encounters a non-positive value, the matrix is not positive definite.",
+    sectionId: "6"
+  },
+  obj5: {
+    question: "Where is Cholesky decomposition used?",
+    answer: "Cholesky appears in solving normal equations for least squares, sampling from multivariate normal distributions using covariance matrices, finite element stiffness matrices, and Newton's method in optimization. It is the default solver whenever the matrix is symmetric positive definite.",
+    sectionId: "8"
+  }
+}
+
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Cholesky Decomposition",
+    "description": "Cholesky decomposition A = LLᵀ for symmetric positive definite matrices: algorithm, worked example, system solving, computational cost, positive definiteness test, and applications.",
+    "url": "https://www.learnmathclass.com/linear-algebra/decompositions/cholesky",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Cholesky Decomposition"
+    },
+    "teaches": [
+      "Cholesky factorization A = LLᵀ",
+      "Existence conditions: symmetric positive definite",
+      "Column-by-column Cholesky algorithm",
+      "Forward and back substitution for system solving",
+      "Cholesky as a positive definiteness test",
+      "Relationship to LU and LDLᵀ decompositions",
+      "Applications in statistics, optimization, and simulation"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Linear Algebra",
+        "item": "https://www.learnmathclass.com/linear-algebra"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Decompositions",
+        "item": "https://www.learnmathclass.com/linear-algebra/decompositions"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Cholesky Decomposition",
+        "item": "https://www.learnmathclass.com/linear-algebra/decompositions/cholesky"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Title | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/linear-algebra/decompositions/cholesky",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Cholesky Decomposition: Algorithm & Uses | Learn Math Class",
+      description: "Cholesky decomposition A = LLᵀ for symmetric positive definite matrices: algorithm, worked example, system solving, computational cost, positive definiteness test, and applications.",
+      keywords: keyWords.join(", "),
+      url: "/linear-algebra/decompositions/cholesky",
+      name: "Cholesky Decomposition"
+    },
+  }
+}
    }
-
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
+export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -503,7 +647,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -546,6 +690,47 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
       })
     }}
   />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
+    }}
+  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>
@@ -563,7 +748,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Page Title</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Cholesky Decomposition</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

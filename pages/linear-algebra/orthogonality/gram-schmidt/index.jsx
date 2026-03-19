@@ -788,7 +788,7 @@ export default function GramSchmidtsPage({seoData, sectionsContent, introContent
    <Sections sections={genericSections}/>
    <br/>
    <br/>
-   {/* <MyNavbar/> */}
+  
    <br/>
    {/* <ScrollUpButton/> */}
    </>

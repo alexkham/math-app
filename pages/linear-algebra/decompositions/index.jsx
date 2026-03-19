@@ -11,9 +11,22 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  "matrix decompositions",
+  "matrix factorization",
+  "LU decomposition",
+  "QR decomposition",
+  "Cholesky decomposition",
+  "spectral decomposition",
+  "singular value decomposition",
+  "SVD linear algebra",
+  "triangular factorization",
+  "orthogonal factorization",
+  "choosing matrix decomposition",
+  "matrix factorization comparison",
+  "decompositions linear algebra",
+  "diagonal factorization"
+]
   // •
 
 //   \u2022 First item
@@ -301,26 +314,148 @@ const introContent = {
   content: `A matrix decomposition writes a matrix as a product of simpler matrices — triangular, diagonal, orthogonal, or some combination — whose structure makes subsequent computation cheap. The upfront cost of factoring is repaid every time the factors are used to solve a system, compute eigenvalues, approximate data, or analyze stability. Decompositions are the computational backbone of applied linear algebra.`,
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "What is a matrix decomposition?",
+    answer: "A matrix decomposition expresses a matrix as a product of simpler matrices — typically triangular, diagonal, or orthogonal — whose structure makes solving systems, computing eigenvalues, and approximating data dramatically cheaper. The factors reproduce the original matrix exactly.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "What are the main matrix decompositions?",
+    answer: "The five core decompositions are LU (triangular factors from Gaussian elimination), QR (orthogonal times triangular from Gram-Schmidt), Cholesky (symmetric positive definite square root), spectral (orthogonal eigendecomposition for symmetric matrices), and SVD (universal factorization for any matrix).",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "Which matrix decomposition should I use?",
+    answer: "Use LU for general square systems, Cholesky for symmetric positive definite systems (twice as fast), QR for least squares and overdetermined systems, spectral decomposition for symmetric eigenvalue problems, and SVD for rank determination, pseudoinverse, low-rank approximation, or any rectangular or rank-deficient matrix.",
+    sectionId: "8"
+  },
+  obj4: {
+    question: "How are the decompositions related to each other?",
+    answer: "Cholesky is the symmetric positive definite specialization of LU. QR is Gram-Schmidt in matrix form. The spectral decomposition is eigendecomposition restricted to symmetric matrices with orthogonal eigenvectors. The SVD generalizes the spectral decomposition to all matrices regardless of shape or symmetry.",
+    sectionId: "9"
+  },
+  obj5: {
+    question: "Why are matrix decompositions important?",
+    answer: "Decompositions convert hard problems into sequences of easy ones. They enable efficient system solving, numerically stable least squares, eigenvalue computation without characteristic polynomials, dimensionality reduction, and low-rank approximation. They are the computational backbone of applied linear algebra.",
+    sectionId: "2"
+  }
+}
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Matrix Decompositions",
+    "description": "Overview of matrix decompositions: LU, QR, Cholesky, spectral, and SVD. When to use each factorization, computational costs, relationships between decompositions, and applications.",
+    "url": "https://www.learnmathclass.com/linear-algebra/decompositions",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Matrix Decompositions"
+    },
+    "teaches": [
+      "What matrix decompositions are and why they matter",
+      "LU decomposition for system solving",
+      "QR decomposition for least squares and eigenvalues",
+      "Cholesky decomposition for symmetric positive definite matrices",
+      "Spectral decomposition for symmetric eigenproblems",
+      "SVD as the universal matrix factorization",
+      "Choosing the right decomposition for a given problem"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Title | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/linear-algebra/decompositions",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Linear Algebra",
+        "item": "https://www.learnmathclass.com/linear-algebra"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Matrix Decompositions",
+        "item": "https://www.learnmathclass.com/linear-algebra/decompositions"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Title | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/linear-algebra/decompositions",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Matrix Decompositions: LU, QR, SVD & More | Learn Math Class",
+      description: "Overview of matrix decompositions: LU, QR, Cholesky, spectral, and SVD. When to use each factorization, computational costs, relationships between decompositions, and applications.",
+      keywords: keyWords.join(", "),
+      url: "/linear-algebra/decompositions",
+      name: "Matrix Decompositions"
+    },
+  }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
+// export default function PageTemplate({seoData,sectionsContent , introContent}) {
+export default function DecompositionsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -472,7 +607,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -513,6 +648,47 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

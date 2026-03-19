@@ -11,9 +11,22 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  "QR decomposition",
+  "QR factorization",
+  "Householder reflections",
+  "Gram-Schmidt QR",
+  "Givens rotations",
+  "QR least squares",
+  "thin QR full QR",
+  "QR eigenvalue algorithm",
+  "orthogonal triangular factorization",
+  "QR numerical stability",
+  "condition number QR",
+  "modified Gram-Schmidt QR",
+  "QR decomposition example",
+  "orthonormal columns matrix"
+]
   // •
 
 //   \u2022 First item
@@ -325,26 +338,155 @@ const introContent = {
   content: `The QR decomposition factors a matrix into an orthogonal factor Q and an upper triangular factor R. It is the matrix form of the Gram-Schmidt process, the standard method for least-squares computation, and the foundation of the most widely used eigenvalue algorithm. The orthogonal factor preserves lengths and condition numbers, making QR the numerically safest of the triangular factorizations.`,
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "What is the QR decomposition?",
+    answer: "The QR decomposition factors an m×n matrix A (with independent columns) as A = QR, where Q has orthonormal columns and R is upper triangular with positive diagonal entries. Q spans the column space of A, and R stores the coefficients expressing A's columns in terms of Q's columns.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "How is QR computed?",
+    answer: "QR can be computed via Gram-Schmidt orthogonalization, Householder reflections, or Givens rotations. Householder is the default for dense matrices due to its backward stability. Modified Gram-Schmidt is used when Q is needed explicitly. Givens rotations are preferred for sparse matrices.",
+    sectionId: "9"
+  },
+  obj3: {
+    question: "Why is QR better than normal equations for least squares?",
+    answer: "Forming AᵀA squares the condition number of A, amplifying rounding errors. QR reduces least squares to the triangular system Rx̂ = Qᵀb, preserving the original condition number. If A has condition number 10⁶, QR works at 10⁶ while normal equations work at 10¹².",
+    sectionId: "6"
+  },
+  obj4: {
+    question: "What is the difference between thin QR and full QR?",
+    answer: "Thin (reduced) QR has Q of size m×n with orthonormal columns and R of size n×n. Full QR extends Q to a square m×m orthogonal matrix by adding columns spanning the orthogonal complement of Col(A). Thin QR suffices for system solving and least squares; full QR is needed when the left null space basis is required.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "How does the QR algorithm compute eigenvalues?",
+    answer: "The QR algorithm iterates: factor Aₖ = QₖRₖ, then form Aₖ₊₁ = RₖQₖ. Each step is a similarity transformation preserving eigenvalues while driving sub-diagonal entries toward zero. With shifts, convergence is cubic for symmetric matrices. It avoids the numerical instability of finding roots of the characteristic polynomial.",
+    sectionId: "7"
+  }
+}
 
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Title | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/url",
-         name: "name"
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "QR Decomposition",
+    "description": "QR decomposition: Gram-Schmidt, Householder, and Givens methods. Thin vs full QR, least-squares solving, the QR eigenvalue algorithm, numerical stability, and factor properties.",
+    "url": "https://www.learnmathclass.com/linear-algebra/decompositions/qr",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "QR Decomposition"
+    },
+    "teaches": [
+      "QR factorization A = QR definition and structure",
+      "QR via Gram-Schmidt orthogonalization",
+      "QR via Householder reflections",
+      "Thin QR vs full QR decomposition",
+      "Least-squares solving with QR",
+      "The QR algorithm for eigenvalue computation",
+      "Gram-Schmidt vs Householder vs Givens comparison"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Linear Algebra",
+        "item": "https://www.learnmathclass.com/linear-algebra"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Decompositions",
+        "item": "https://www.learnmathclass.com/linear-algebra/decompositions"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "QR Decomposition",
+        "item": "https://www.learnmathclass.com/linear-algebra/decompositions/qr"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Title | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/linear-algebra/.decompositions/qr",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "QR Decomposition: Methods & Applications | Learn Math Class",
+      description: "QR decomposition: Gram-Schmidt, Householder, and Givens methods. Thin vs full QR, least-squares solving, the QR eigenvalue algorithm, numerical stability, and factor properties.",
+      keywords: keyWords.join(", "),
+      url: "/linear-algebra/decompositions/qr",
+      name: "QR Decomposition"
+    },
+  }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
+// export default function PageTemplate({seoData,sectionsContent , introContent}) {
+export default function QRDecompositionPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -427,46 +569,46 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
           sectionsContent.obj10.content,
         ]
     },
-    {
-        id:'11',
-        title:sectionsContent.obj11.title,
-        link:sectionsContent.obj11.link,
-        content:[
-          sectionsContent.obj11.content,
-        ]
-    },
-    {
-        id:'12',
-        title:sectionsContent.obj12.title,
-        link:sectionsContent.obj12.link,
-        content:[
-          sectionsContent.obj12.content,
-        ]
-    },
-    {
-        id:'13',
-        title:sectionsContent.obj13.title,
-        link:sectionsContent.obj13.link,
-        content:[
-          sectionsContent.obj13.content,
-        ]
-    },
-    {
-        id:'14',
-        title:sectionsContent.obj14.title,
-        link:sectionsContent.obj14.link,
-        content:[
-          sectionsContent.obj14.content,
-        ]
-    },
-    {
-        id:'15',
-        title:sectionsContent.obj15.title,
-        link:sectionsContent.obj15.link,
-        content:[
-          sectionsContent.obj15.content,
-        ]
-    },
+    // {
+    //     id:'11',
+    //     title:sectionsContent.obj11.title,
+    //     link:sectionsContent.obj11.link,
+    //     content:[
+    //       sectionsContent.obj11.content,
+    //     ]
+    // },
+    // {
+    //     id:'12',
+    //     title:sectionsContent.obj12.title,
+    //     link:sectionsContent.obj12.link,
+    //     content:[
+    //       sectionsContent.obj12.content,
+    //     ]
+    // },
+    // {
+    //     id:'13',
+    //     title:sectionsContent.obj13.title,
+    //     link:sectionsContent.obj13.link,
+    //     content:[
+    //       sectionsContent.obj13.content,
+    //     ]
+    // },
+    // {
+    //     id:'14',
+    //     title:sectionsContent.obj14.title,
+    //     link:sectionsContent.obj14.link,
+    //     content:[
+    //       sectionsContent.obj14.content,
+    //     ]
+    // },
+    // {
+    //     id:'15',
+    //     title:sectionsContent.obj15.title,
+    //     link:sectionsContent.obj15.link,
+    //     content:[
+    //       sectionsContent.obj15.content,
+    //     ]
+    // },
     // {
     //     id:'1',
     //     title:sectionsContent.obj1.title,
@@ -496,7 +638,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -537,6 +679,48 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

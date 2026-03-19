@@ -11,9 +11,23 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  "singular value decomposition",
+  "SVD",
+  "singular values",
+  "left right singular vectors",
+  "low-rank approximation",
+  "pseudoinverse SVD",
+  "Moore-Penrose pseudoinverse",
+  "Eckart-Young theorem",
+  "matrix rank SVD",
+  "condition number singular values",
+  "four fundamental subspaces SVD",
+  "compact SVD thin SVD",
+  "SVD image compression",
+  "operator norm Frobenius norm",
+  "UΣVᵀ factorization"
+]
   // •
 
 //   \u2022 First item
@@ -381,25 +395,162 @@ const introContent = {
   content: `The singular value decomposition factors any matrix of any shape as UΣVᵀ — two orthogonal matrices sandwiching a diagonal matrix of non-negative singular values. It exists for every matrix, reveals the rank, provides orthonormal bases for all four fundamental subspaces, computes the pseudoinverse, yields the best low-rank approximation, and decomposes every linear transformation into a rotation, a scaling, and another rotation. No other single factorization provides this much information.`,
 }
 
+const faqQuestions = {
+  obj1: {
+    question: "What is the singular value decomposition?",
+    answer: "The SVD factors any m×n matrix A as A = UΣVᵀ, where U and V are orthogonal matrices of left and right singular vectors, and Σ is diagonal with non-negative singular values. It exists for every matrix regardless of shape, rank, or symmetry.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "What do singular values represent geometrically?",
+    answer: "Singular values measure how much a matrix stretches vectors along each orthogonal direction. The largest singular value σ₁ is the maximum stretching factor, and the transformation A decomposes geometrically into a rotation (Vᵀ), a coordinate-axis scaling (Σ), and another rotation (U).",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "How does SVD give the best low-rank approximation?",
+    answer: "The Eckart-Young-Mirsky theorem states that truncating the SVD at k terms gives the closest rank-k matrix to A in both operator and Frobenius norms. The approximation error equals σₖ₊₁ in operator norm. This is the basis of image compression and noise reduction.",
+    sectionId: "8"
+  },
+  obj4: {
+    question: "How is the pseudoinverse computed from the SVD?",
+    answer: "The Moore-Penrose pseudoinverse is A⁺ = VΣ⁺Uᵀ, where Σ⁺ reciprocates each nonzero singular value and transposes the shape. For overdetermined systems A⁺b gives the least-squares solution; for rank-deficient systems it gives the minimum-norm least-squares solution.",
+    sectionId: "7"
+  },
+  obj5: {
+    question: "How does SVD reveal the four fundamental subspaces?",
+    answer: "The first r columns of V span the row space, the remaining n−r columns span the null space. The first r columns of U span the column space, the remaining m−r columns span the left null space. No other factorization provides orthonormal bases for all four subspaces simultaneously.",
+    sectionId: "6"
+  },
+  obj6: {
+    question: "What is the condition number of a matrix?",
+    answer: "The condition number κ(A) = σ₁/σᵣ is the ratio of the largest to smallest nonzero singular value. It measures sensitivity to perturbation: a matrix with κ = 10ᵏ loses roughly k digits of accuracy in floating-point computation. Orthogonal matrices have κ = 1; singular matrices have κ = ∞.",
+    sectionId: "9"
+  }
+}
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Title | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/url",
-         name: "name"
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Singular Value Decomposition (SVD)",
+    "description": "Singular value decomposition A = UΣVᵀ: singular values, geometric interpretation, pseudoinverse, low-rank approximation, four fundamental subspaces, norms, and condition number.",
+    "url": "https://www.learnmathclass.com/linear-algebra/decompositions/svd",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Singular Value Decomposition"
+    },
+    "teaches": [
+      "SVD factorization A = UΣVᵀ for any matrix",
+      "Geometric interpretation as rotation-scaling-rotation",
+      "Singular values from eigenvalues of AᵀA",
+      "Four fundamental subspaces from U and V",
+      "Moore-Penrose pseudoinverse via SVD",
+      "Best low-rank approximation (Eckart-Young theorem)",
+      "Matrix norms and condition number from singular values",
+      "Outer product form and relationship to spectral decomposition"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Linear Algebra",
+        "item": "https://www.learnmathclass.com/linear-algebra"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Decompositions",
+        "item": "https://www.learnmathclass.com/linear-algebra/decompositions"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Singular Value Decomposition",
+        "item": "https://www.learnmathclass.com/linear-algebra/decompositions/svd"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Title | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/linear-algebra/decompositions/svd",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "SVD: Singular Value Decomposition | Learn Math Class",
+      description: "Singular value decomposition A = UΣVᵀ: singular values, geometric interpretation, pseudoinverse, low-rank approximation, four fundamental subspaces, norms, and condition number.",
+      keywords: keyWords.join(", "),
+      url: "/linear-algebra/decompositions/svd",
+      name: "Singular Value Decomposition (SVD)"
+    },
+  }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
+// export default function PageTemplate({seoData,sectionsContent , introContent}) {
+export default function SVDPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -498,30 +649,30 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
           sectionsContent.obj12.content,
         ]
     },
-    {
-        id:'13',
-        title:sectionsContent.obj13.title,
-        link:sectionsContent.obj13.link,
-        content:[
-          sectionsContent.obj13.content,
-        ]
-    },
-    {
-        id:'14',
-        title:sectionsContent.obj14.title,
-        link:sectionsContent.obj14.link,
-        content:[
-          sectionsContent.obj14.content,
-        ]
-    },
-    {
-        id:'15',
-        title:sectionsContent.obj15.title,
-        link:sectionsContent.obj15.link,
-        content:[
-          sectionsContent.obj15.content,
-        ]
-    },
+    // {
+    //     id:'13',
+    //     title:sectionsContent.obj13.title,
+    //     link:sectionsContent.obj13.link,
+    //     content:[
+    //       sectionsContent.obj13.content,
+    //     ]
+    // },
+    // {
+    //     id:'14',
+    //     title:sectionsContent.obj14.title,
+    //     link:sectionsContent.obj14.link,
+    //     content:[
+    //       sectionsContent.obj14.content,
+    //     ]
+    // },
+    // {
+    //     id:'15',
+    //     title:sectionsContent.obj15.title,
+    //     link:sectionsContent.obj15.link,
+    //     content:[
+    //       sectionsContent.obj15.content,
+    //     ]
+    // },
     // {
     //     id:'1',
     //     title:sectionsContent.obj1.title,
@@ -551,7 +702,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -592,6 +743,47 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
           }
         }
       })
+    }}
+  />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

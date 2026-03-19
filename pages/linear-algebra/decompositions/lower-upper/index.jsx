@@ -11,9 +11,22 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  "LU decomposition",
+  "LU factorization",
+  "Gaussian elimination matrix",
+  "lower upper triangular",
+  "PA = LU pivoting",
+  "partial pivoting",
+  "forward back substitution",
+  "LU solve linear system",
+  "LU determinant",
+  "elimination multipliers",
+  "triangular factorization",
+  "LU computational cost",
+  "matrix factorization",
+  "LU vs Cholesky"
+]
   // •
 
 //   \u2022 First item
@@ -338,25 +351,153 @@ Compared to alternatives: [Cramer's rule](!/linear-algebra/determinants/applicat
 }
 
 
+const faqQuestions = {
+  obj1: {
+    question: "What is LU decomposition?",
+    answer: "LU decomposition writes a square matrix A as A = LU, where L is unit lower triangular (ones on the diagonal, multipliers below) and U is upper triangular (the row echelon form). It captures the entire Gaussian elimination process in reusable matrix form.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "When does LU decomposition exist without pivoting?",
+    answer: "The factorization A = LU without row swaps exists if and only if every leading principal submatrix of A is nonsingular. When a zero pivot appears, row swaps are needed, giving the pivoted form PA = LU which exists for every invertible matrix.",
+    sectionId: "4"
+  },
+  obj3: {
+    question: "How do you solve a linear system using LU?",
+    answer: "Given PA = LU, solve Ax = b in two steps: forward substitution to solve Ly = Pb, then back substitution to solve Ux = y. The factorization costs about 2n³/3 operations, but each subsequent solve costs only O(n²), making LU efficient for multiple right-hand sides.",
+    sectionId: "6"
+  },
+  obj4: {
+    question: "What is partial pivoting in LU decomposition?",
+    answer: "Partial pivoting selects the largest entry in the current pivot column (at or below the pivot row) and swaps it into the pivot position. This keeps all multipliers in L bounded by 1 in absolute value, limiting rounding error accumulation. The result is PA = LU with P recording the row swaps.",
+    sectionId: "5"
+  },
+  obj5: {
+    question: "How does LU compute the determinant?",
+    answer: "The determinant of A equals the product of the diagonal entries of U, times (−1)^s where s is the number of row swaps. Since det(L) = 1 for unit lower triangular L, det(A) = (−1)^s · u₁₁u₂₂···uₙₙ. This is essentially free once LU is available.",
+    sectionId: "7"
+  }
+}
 
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Title | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/linear-algebra/decompositions/lower-upper",
-         name: "name"
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "LU Decomposition",
+    "description": "LU decomposition: factoring matrices into lower and upper triangular forms via Gaussian elimination. Partial pivoting, system solving, determinants, inverse computation, and cost analysis.",
+    "url": "https://www.learnmathclass.com/linear-algebra/decompositions/lower-upper",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "LU Decomposition"
+    },
+    "teaches": [
+      "LU factorization from Gaussian elimination",
+      "Structure of L (multipliers) and U (echelon form)",
+      "Existence conditions and partial pivoting PA = LU",
+      "Forward and back substitution for system solving",
+      "Determinant and inverse via LU",
+      "Computational cost comparison with alternatives"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Linear Algebra",
+        "item": "https://www.learnmathclass.com/linear-algebra"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Decompositions",
+        "item": "https://www.learnmathclass.com/linear-algebra/decompositions"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "LU Decomposition",
+        "item": "https://www.learnmathclass.com/linear-algebra/decompositions/lower-upper"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+  //  return {
+  //     props:{
+  //        sectionsContent,
+  //        introContent,
+  //         seoData: {
+  //       title: "Title | Learn Math Class",
+  //       description: "Metadescription",
+  //       keywords: keyWords.join(", "),
+  //       url: "/linear-algebra/decompositions/lower-upper",
+  //        name: "name"
+  //     },
         
-       }
-    }
+  //      }
+  //   }
+
+  return {
+  props:{
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "LU Decomposition: Factorization & Solving | Learn Math Class",
+      description: "LU decomposition: factoring matrices into lower and upper triangular forms via Gaussian elimination. Partial pivoting, system solving, determinants, inverse computation, and cost analysis.",
+      keywords: keyWords.join(", "),
+      url: "/linear-algebra/decompositions/lower-upper",
+      name: "LU Decomposition"
+    },
+  }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
+// export default function PageTemplate({seoData,sectionsContent , introContent}) {
+export default function LUDecompositionPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -439,46 +580,46 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
           sectionsContent.obj10.content,
         ]
     },
-    {
-        id:'11',
-        title:sectionsContent.obj11.title,
-        link:sectionsContent.obj11.link,
-        content:[
-          sectionsContent.obj11.content,
-        ]
-    },
-    {
-        id:'12',
-        title:sectionsContent.obj12.title,
-        link:sectionsContent.obj12.link,
-        content:[
-          sectionsContent.obj12.content,
-        ]
-    },
-    {
-        id:'13',
-        title:sectionsContent.obj13.title,
-        link:sectionsContent.obj13.link,
-        content:[
-          sectionsContent.obj13.content,
-        ]
-    },
-    {
-        id:'14',
-        title:sectionsContent.obj14.title,
-        link:sectionsContent.obj14.link,
-        content:[
-          sectionsContent.obj14.content,
-        ]
-    },
-    {
-        id:'15',
-        title:sectionsContent.obj15.title,
-        link:sectionsContent.obj15.link,
-        content:[
-          sectionsContent.obj15.content,
-        ]
-    },
+    // {
+    //     id:'11',
+    //     title:sectionsContent.obj11.title,
+    //     link:sectionsContent.obj11.link,
+    //     content:[
+    //       sectionsContent.obj11.content,
+    //     ]
+    // },
+    // {
+    //     id:'12',
+    //     title:sectionsContent.obj12.title,
+    //     link:sectionsContent.obj12.link,
+    //     content:[
+    //       sectionsContent.obj12.content,
+    //     ]
+    // },
+    // {
+    //     id:'13',
+    //     title:sectionsContent.obj13.title,
+    //     link:sectionsContent.obj13.link,
+    //     content:[
+    //       sectionsContent.obj13.content,
+    //     ]
+    // },
+    // {
+    //     id:'14',
+    //     title:sectionsContent.obj14.title,
+    //     link:sectionsContent.obj14.link,
+    //     content:[
+    //       sectionsContent.obj14.content,
+    //     ]
+    // },
+    // {
+    //     id:'15',
+    //     title:sectionsContent.obj15.title,
+    //     link:sectionsContent.obj15.link,
+    //     content:[
+    //       sectionsContent.obj15.content,
+    //     ]
+    // },
     // {
     //     id:'1',
     //     title:sectionsContent.obj1.title,
@@ -508,7 +649,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+   {/* <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -551,6 +692,47 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
       })
     }}
   />
+</Head> */}
+
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
+    }}
+  />
 </Head>
    {/* <GenericNavbar/> */}
    <br/>
@@ -568,7 +750,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Page Title</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Lower-Upper Decomposition</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}
