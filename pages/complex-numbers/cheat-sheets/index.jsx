@@ -1011,7 +1011,7 @@ const schemas = {
   return {
   props:{
     sectionsContent,
-    introContent,
+    // introContent,
     complexNumbersCheatSheetData,
     faqQuestions,
     schemas,
@@ -1030,7 +1030,7 @@ const schemas = {
 //     complexNumbersCheatSheetData,
 // }) {
 
-export default function PageTemplate({seoData, sectionsContent, introContent, complexNumbersCheatSheetData, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent,  complexNumbersCheatSheetData, faqQuestions, schemas}) {
 
     
   const genericSections=[
