@@ -471,7 +471,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Euler's Formula Explorer</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Euler&apos;s Formula Explorer</h1>
    <br/>
    <EulerFormulaExplorer/>
    <br/>
