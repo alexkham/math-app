@@ -6,7 +6,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
-import '../pages.css'
+import '../../pages.css'
 import Head from 'next/head'
 
 
@@ -530,54 +530,54 @@ export default function DecompositionsPage({seoData, sectionsContent, introConte
           sectionsContent.obj9.content,
         ]
     },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
-    {
-        id:'11',
-        title:sectionsContent.obj11.title,
-        link:sectionsContent.obj11.link,
-        content:[
-          sectionsContent.obj11.content,
-        ]
-    },
-    {
-        id:'12',
-        title:sectionsContent.obj12.title,
-        link:sectionsContent.obj12.link,
-        content:[
-          sectionsContent.obj12.content,
-        ]
-    },
-    {
-        id:'13',
-        title:sectionsContent.obj13.title,
-        link:sectionsContent.obj13.link,
-        content:[
-          sectionsContent.obj13.content,
-        ]
-    },
-    {
-        id:'14',
-        title:sectionsContent.obj14.title,
-        link:sectionsContent.obj14.link,
-        content:[
-          sectionsContent.obj14.content,
-        ]
-    },
-    {
-        id:'15',
-        title:sectionsContent.obj15.title,
-        link:sectionsContent.obj15.link,
-        content:[
-          sectionsContent.obj15.content,
-        ]
-    },
+    // {
+    //     id:'10',
+    //     title:sectionsContent.obj10.title,
+    //     link:sectionsContent.obj10.link,
+    //     content:[
+    //       sectionsContent.obj10.content,
+    //     ]
+    // },
+    // {
+    //     id:'11',
+    //     title:sectionsContent.obj11.title,
+    //     link:sectionsContent.obj11.link,
+    //     content:[
+    //       sectionsContent.obj11.content,
+    //     ]
+    // },
+    // {
+    //     id:'12',
+    //     title:sectionsContent.obj12.title,
+    //     link:sectionsContent.obj12.link,
+    //     content:[
+    //       sectionsContent.obj12.content,
+    //     ]
+    // },
+    // {
+    //     id:'13',
+    //     title:sectionsContent.obj13.title,
+    //     link:sectionsContent.obj13.link,
+    //     content:[
+    //       sectionsContent.obj13.content,
+    //     ]
+    // },
+    // {
+    //     id:'14',
+    //     title:sectionsContent.obj14.title,
+    //     link:sectionsContent.obj14.link,
+    //     content:[
+    //       sectionsContent.obj14.content,
+    //     ]
+    // },
+    // {
+    //     id:'15',
+    //     title:sectionsContent.obj15.title,
+    //     link:sectionsContent.obj15.link,
+    //     content:[
+    //       sectionsContent.obj15.content,
+    //     ]
+    // },
     // {
     //     id:'1',
     //     title:sectionsContent.obj1.title,
@@ -708,7 +708,7 @@ export default function DecompositionsPage({seoData, sectionsContent, introConte
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Page Title</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Decompositions</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}
