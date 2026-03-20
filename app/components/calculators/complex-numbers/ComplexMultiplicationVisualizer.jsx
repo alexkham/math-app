@@ -502,13 +502,13 @@ export default function ComplexMultiplicationVisualizer() {
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: palette.green }}></span>
               <span>
-                <strong>Multiplying by i rotates by 90°.</strong> Try the "i × i" preset — i has modulus 1 and angle 90°, so i² has angle 180° = −1. This is why i² = −1 makes geometric sense.
+                <strong>Multiplying by i rotates by 90°.</strong> Try the &quot;i × i&quot; preset — i has modulus 1 and angle 90°, so i² has angle 180° = −1. This is why i² = −1 makes geometric sense.
               </span>
             </div>
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: palette.blue }}></span>
               <span>
-                <strong>Multiplying by a real number</strong> just scales (stretches or compresses) without rotating. Try "2(−3+4i)" — the angle stays the same, only the length doubles.
+                <strong>Multiplying by a real number</strong> just scales (stretches or compresses) without rotating. Try &quot;2(−3+4i)&quot; — the angle stays the same, only the length doubles.
               </span>
             </div>
           </div>

@@ -480,13 +480,13 @@ export default function ComplexAddSubVisualizer() {
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: palette.green }}></span>
               <span>
-                <strong>Addition is component-wise:</strong> add the real parts, add the imaginary parts. (a+bi) + (c+di) = (a+c) + (b+d)i. No cross-terms, no i² — it's just vector addition.
+                <strong>Addition is component-wise:</strong> add the real parts, add the imaginary parts. (a+bi) + (c+di) = (a+c) + (b+d)i. No cross-terms, no i² — it is just vector addition.
               </span>
             </div>
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: palette.navy }}></span>
               <span>
-                <strong>The parallelogram rule:</strong> z₁+z₂ is the diagonal of the parallelogram formed by z₁ and z₂. The dashed vectors show z₂ translated to the tip of z₁ (and vice versa) — "tip to tail."
+                <strong>The parallelogram rule:</strong> z₁+z₂ is the diagonal of the parallelogram formed by z₁ and z₂. The dashed vectors show z₂ translated to the tip of z₁ (and vice versa) — &quot;tip to tail.&quot;
               </span>
             </div>
             <div style={styles.explainItem}>

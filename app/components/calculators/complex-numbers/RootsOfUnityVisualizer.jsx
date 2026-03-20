@@ -389,19 +389,19 @@ export default function RootsOfUnityVisualizer() {
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: palette.green }}></span>
               <span>
-                <strong>The sum of all n-th roots is zero:</strong> ω⁰ + ω¹ + ω² + … + ω<sup>{n - 1}</sup> = 0. Geometrically, the vectors cancel out — they're perfectly balanced around the origin.
+                <strong>The sum of all n-th roots is zero:</strong> ω⁰ + ω¹ + ω² + … + ω<sup>{n - 1}</sup> = 0. Geometrically, the vectors cancel out — they are perfectly balanced around the origin.
               </span>
             </div>
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: '#9060c0' }}></span>
               <span>
-                <strong>ω = e<sup>i·2π/n</sup> is the primitive root</strong> — every other root is a power of ω. This is why we call it a "generator" of the group of n-th roots.
+                <strong>ω = e<sup>i·2π/n</sup> is the primitive root</strong> — every other root is a power of ω. This is why we call it a &quot;generator&quot; of the group of n-th roots.
               </span>
             </div>
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: palette.blue }}></span>
               <span>
-                <strong>Connection to De Moivre's:</strong> finding the n-th roots of unity is the same as solving z<sup>n</sup> = 1, which De Moivre's theorem handles by splitting the angle 0 into 0 + 2πk/n for each k.
+                <strong>Connection to De Moivre&apos;s:</strong> finding the n-th roots of unity is the same as solving z<sup>n</sup> = 1, which De Moivre&apos;s theorem handles by splitting the angle 0 into 0 + 2πk/n for each k.
               </span>
             </div>
           </div>

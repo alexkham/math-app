@@ -389,7 +389,7 @@ export default function ComplexDistanceMidpoint() {
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: palette.orange }}></span>
               <span>
-                <strong>The distance between two complex numbers</strong> is |z₁ − z₂| = √((a₁−a₂)² + (b₁−b₂)²). It's the same Euclidean distance formula from coordinate geometry — the Argand plane is just the xy-plane relabeled.
+                <strong>The distance between two complex numbers</strong> is |z₁ − z₂| = √((a₁−a₂)² + (b₁−b₂)²). It is the same Euclidean distance formula from coordinate geometry — the Argand plane is just the xy-plane relabeled.
               </span>
             </div>
             <div style={styles.explainItem}>
@@ -401,7 +401,7 @@ export default function ComplexDistanceMidpoint() {
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: '#9060c0' }}></span>
               <span>
-                <strong>The midpoint</strong> is (z₁+z₂)/2 — average the real parts, average the imaginary parts. It's the point equidistant from both z₁ and z₂ along the segment connecting them.
+                <strong>The midpoint</strong> is (z₁+z₂)/2 — average the real parts, average the imaginary parts. It is the point equidistant from both z₁ and z₂ along the segment connecting them.
               </span>
             </div>
             <div style={styles.explainItem}>

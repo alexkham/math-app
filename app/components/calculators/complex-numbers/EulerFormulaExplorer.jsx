@@ -441,7 +441,7 @@ export default function EulerFormulaExplorer() {
             <div style={styles.sectionTitle}>Formula Breakdown</div>
             <div style={styles.breakdownLine}>
               <span style={styles.breakdownStep}>1</span>
-              <span>Start with Euler's formula: <strong>e<sup>iθ</sup> = cos θ + i sin θ</strong></span>
+              <span>Start with Euler&apos;s formula: <strong>e<sup>iθ</sup> = cos θ + i sin θ</strong></span>
             </div>
             {radius !== 1 && (
               <div style={styles.breakdownLine}>

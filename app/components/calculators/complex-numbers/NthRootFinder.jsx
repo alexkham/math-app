@@ -413,7 +413,7 @@ export default function NthRootFinder() {
 
           {/* Step-by-step */}
           <div style={styles.stepsBox}>
-            <div style={styles.sectionTitle}>Step-by-Step (De Moivre's)</div>
+            <div style={styles.sectionTitle}>Step-by-Step (De Moivre&apos;s)</div>
             <div style={styles.stepLine}>
               <span style={styles.stepNum}>1</span>
               <span>Write z in polar form:</span>
@@ -501,25 +501,25 @@ export default function NthRootFinder() {
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: '#f89838' }}></span>
               <span>
-                <strong>The roots form a regular n-gon</strong> because consecutive roots differ by exactly 2π/n = {fmtShort(360 / n)}° in angle. The first root's angle is arg(z)/n; the rest are evenly spaced from there.
+                <strong>The roots form a regular n-gon</strong> because consecutive roots differ by exactly 2π/n = {fmtShort(360 / n)}° in angle. The first root&apos;s angle is arg(z)/n; the rest are evenly spaced from there.
               </span>
             </div>
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: palette.navy }}></span>
               <span>
-                <strong>De Moivre's theorem is the engine:</strong> w<sup>n</sup> = z means w = |z|<sup>1/n</sup> · e<sup>i(arg(z) + 2πk)/n</sup>. Each value of k = 0, 1, …, n−1 gives a different root. After that, the angles repeat.
+                <strong>De Moivre&apos;s theorem is the engine:</strong> w<sup>n</sup> = z means w = |z|<sup>1/n</sup> · e<sup>i(arg(z) + 2πk)/n</sup>. Each value of k = 0, 1, …, n−1 gives a different root. After that, the angles repeat.
               </span>
             </div>
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: '#9060c0' }}></span>
               <span>
-                <strong>Special case: roots of unity.</strong> When z = 1, the roots are just the n-th roots of unity — evenly spaced on the unit circle starting at angle 0. For general z, the circle's radius changes and the whole polygon rotates.
+                <strong>Special case: roots of unity.</strong> When z = 1, the roots are just the n-th roots of unity — evenly spaced on the unit circle starting at angle 0. For general z, the circle&apos;s radius changes and the whole polygon rotates.
               </span>
             </div>
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: palette.blue }}></span>
               <span>
-                <strong>Try √(−1):</strong> the two square roots of −1 are i and −i. The polygon is a line segment through the origin on the imaginary axis — the simplest possible "2-gon."
+                <strong>Try √(−1):</strong> the two square roots of −1 are i and −i. The polygon is a line segment through the origin on the imaginary axis — the simplest possible &quot;2-gon.&quot;
               </span>
             </div>
           </div>

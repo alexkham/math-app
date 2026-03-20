@@ -506,13 +506,13 @@ export default function ComplexDivisionVisualizer() {
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: palette.green }}></span>
               <span>
-                <strong>Dividing by i rotates by −90°.</strong> Try "1/i" — i has angle 90°, so dividing subtracts 90°, giving angle −90° = −i. This confirms that 1/i = −i.
+                <strong>Dividing by i rotates by −90°.</strong> Try &quot;1/i&quot; — i has angle 90°, so dividing subtracts 90°, giving angle −90° = −i. This confirms that 1/i = −i.
               </span>
             </div>
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: palette.blue }}></span>
               <span>
-                <strong>Dividing conjugates</strong> always gives a result on the unit circle. Try "(3+4i)/(3−4i)" — since |z| = |z̄|, the magnitudes cancel to 1, and only the angle doubles.
+                <strong>Dividing conjugates</strong> always gives a result on the unit circle. Try &quot;(3+4i)/(3−4i)&quot; — since |z| = |z̄|, the magnitudes cancel to 1, and only the angle doubles.
               </span>
             </div>
           </div>

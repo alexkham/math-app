@@ -206,7 +206,7 @@ export default function DeMoivreCalculator() {
       ` }} />
 
       <div style={styles.header}>
-        <h1 style={styles.title}>De Moivre's Theorem</h1>
+        <h1 style={styles.title}>De Moivre&apos;s Theorem</h1>
         <span style={styles.subtitle}>(r · e<sup>iθ</sup>)<sup>n</sup> = r<sup>n</sup> · e<sup>inθ</sup></span>
       </div>
 
@@ -458,7 +458,7 @@ export default function DeMoivreCalculator() {
 
           {/* Step-by-step */}
           <div style={styles.stepsBox}>
-            <div style={styles.sectionTitle}>Step-by-Step (De Moivre's Theorem)</div>
+            <div style={styles.sectionTitle}>Step-by-Step (De Moivre&apos;s Theorem)</div>
             <div style={styles.stepLine}>
               <span style={styles.stepNum}>1</span>
               <span>Convert to polar form:</span>
@@ -468,7 +468,7 @@ export default function DeMoivreCalculator() {
             </div>
             <div style={styles.stepLine}>
               <span style={styles.stepNum}>2</span>
-              <span>Apply De Moivre's Theorem: (r · e<sup>iθ</sup>)<sup>n</sup> = r<sup>n</sup> · e<sup>inθ</sup></span>
+              <span>Apply De Moivre&apos;s Theorem: (r · e<sup>iθ</sup>)<sup>n</sup> = r<sup>n</sup> · e<sup>inθ</sup></span>
             </div>
             <div style={styles.stepLine}>
               <span style={styles.stepNum}>3</span>
@@ -508,7 +508,7 @@ export default function DeMoivreCalculator() {
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: palette.navy }}></span>
               <span>
-                <strong>De Moivre's Theorem</strong> says (cos θ + i sin θ)<sup>n</sup> = cos(nθ) + i sin(nθ). In exponential form: (r·e<sup>iθ</sup>)<sup>n</sup> = r<sup>n</sup>·e<sup>inθ</sup>. Raising to a power means raising the modulus and multiplying the angle.
+                <strong>De Moivre&apos;s Theorem</strong> says (cos θ + i sin θ)<sup>n</sup> = cos(nθ) + i sin(nθ). In exponential form: (r·e<sup>iθ</sup>)<sup>n</sup> = r<sup>n</sup>·e<sup>inθ</sup>. Raising to a power means raising the modulus and multiplying the angle.
               </span>
             </div>
             <div style={styles.explainItem}>
@@ -520,7 +520,7 @@ export default function DeMoivreCalculator() {
             <div style={styles.explainItem}>
               <span style={{ ...styles.dot, backgroundColor: palette.green }}></span>
               <span>
-                <strong>Negative exponents</strong> give reciprocals: z⁻ⁿ = 1/zⁿ. The modulus shrinks (r⁻ⁿ) and the angle reverses (−nθ). Try "(3+4i)⁻¹" to see how the result is a tiny vector in the opposite angular direction.
+                <strong>Negative exponents</strong> give reciprocals: z⁻ⁿ = 1/zⁿ. The modulus shrinks (r⁻ⁿ) and the angle reverses (−nθ). Try &quot;(3+4i)⁻¹&quot; to see how the result is a tiny vector in the opposite angular direction.
               </span>
             </div>
             <div style={styles.explainItem}>
