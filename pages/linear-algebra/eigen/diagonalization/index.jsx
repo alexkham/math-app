@@ -6,7 +6,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
-import '../pages.css'
+import '../../../pages.css'
 import Head from 'next/head'
 
 
@@ -427,7 +427,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Page Title</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Diagonalization</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}
