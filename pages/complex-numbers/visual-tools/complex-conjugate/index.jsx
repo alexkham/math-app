@@ -11,7 +11,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import ConjugateModulusVisualizer from '../../../../app/components/calculators/complex-numbers/ConjugateModulusVisualizer'
-
+import SiblingsNav from '../../../../app/components/SiblingsNav'
 
 export async function getStaticProps(){
 
@@ -233,32 +233,47 @@ The denominator becomes a real number, eliminating the imaginary part.`,
       after:``,
       link:'',
     },
-    obj10:{
-      title:`Related Concepts and Tools`,
-      content:`Explore more complex number topics with these resources:
+//     obj10:{
+//       title:`Related Concepts and Tools`,
+//       content:`Explore more complex number topics with these resources:
 
-**Related visualizers:**
+// **Related visualizers:**
 
-- **Complex Number Explorer** — visualize complex numbers with modulus, quadrants, and coordinate display
-- **Complex Operations Visualizer** — see addition, subtraction, and multiplication geometrically
-- **Polar Form Visualizer** — explore the relationship between rectangular and polar representations
+// - **Complex Number Explorer** — visualize complex numbers with modulus, quadrants, and coordinate display
+// - **Complex Operations Visualizer** — see addition, subtraction, and multiplication geometrically
+// - **Polar Form Visualizer** — explore the relationship between rectangular and polar representations
 
-**Theoretical foundations:**
+// **Theoretical foundations:**
 
-- **Complex Numbers** — comprehensive introduction to a + bi form
-- **Complex Plane** — understanding the Argand diagram coordinate system
-- **Polar Form** — representing complex numbers as r(cos θ + i sin θ)
+// - **Complex Numbers** — comprehensive introduction to a + bi form
+// - **Complex Plane** — understanding the Argand diagram coordinate system
+// - **Polar Form** — representing complex numbers as r(cos θ + i sin θ)
 
-**Calculators:**
+// **Calculators:**
 
-- **Complex Number Calculator** — perform arithmetic operations
-- **Polar to Rectangular Converter** — convert between coordinate systems
+// - **Complex Number Calculator** — perform arithmetic operations
+// - **Polar to Rectangular Converter** — convert between coordinate systems
 
-The conjugate and modulus concepts connect to advanced topics like **complex division**, **roots of unity**, and **Euler's formula**.`,
-      before:``,
-      after:``,
-      link:'',
-    },
+// The conjugate and modulus concepts connect to advanced topics like **complex division**, **roots of unity**, and **Euler's formula**.`,
+//       before:``,
+//       after:``,
+//       link:'',
+//     },
+obj10:{
+  title:`Related Concepts and Tools`,
+  content:`The conjugate appears throughout complex arithmetic — most visibly wherever division or modulus is involved. These tools show where it leads.
+
+[Division Visualizer](!/complex-numbers/visual-tools/division) — the conjugate is the engine of complex division. To compute $\\frac{z_1}{z_2}$, you multiply numerator and denominator by $\\bar{z_2}$, turning the denominator into the real number $|z_2|^2 = z_2 \\cdot \\bar{z_2}$. This tool makes that process geometric.
+
+[Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular) — the modulus $|z|$ you see here is the $r$ in polar form $re^{i\\theta}$. Conjugates share the same modulus but opposite argument: if $z = re^{i\\theta}$, then $\\bar{z} = re^{-i\\theta}$. Convert any point here to see its polar counterpart.
+
+[Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication) — $z \\cdot \\bar{z} = |z|^2$ is a multiplication, and a special one: the imaginary parts cancel exactly. See how multiplying a number by its conjugate always lands on the positive real axis.
+
+[Distance & Midpoint Tool](!/complex-numbers/visual-tools/distance-midpoint) — conjugate pairs $z$ and $\\bar{z}$ are always symmetric about the real axis. Their midpoint is always real, and their distance is always $2|\\text{Im}(z)|$ — pure geometry that this tool illustrates directly.`,
+  before:``,
+  after:``,
+  link:'',
+},
   }
 
   const faqQuestions = {
@@ -539,9 +554,15 @@ export default function ComplexConjugateVisualizerPage({
    <br/>
    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Complex Conjugate Visualizer</h1>
    <br/>
+   <SiblingsNav>
    <ConjugateModulusVisualizer/>
+   </SiblingsNav>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
+   />
    <br/>
    <br/>
    <br/>

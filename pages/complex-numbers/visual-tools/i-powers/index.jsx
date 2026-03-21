@@ -9,7 +9,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import PowersOfICalculator from '@/app/components/calculators/complex-numbers/PowersOfICalculator'
-
+import SiblingsNav from '../../../../app/components/SiblingsNav'
 
 
 
@@ -182,23 +182,39 @@ Multiplying by $i$ is equivalent to rotating a point 90° counterclockwise on th
       link:'',
     },
 
-    obj10:{
-      title:`Related Concepts and Tools`,
-      content:`The powers of $i$ connect to several fundamental topics in complex number theory. Explore these related pages to build a fuller picture.
+//     obj10:{
+//       title:`Related Concepts and Tools`,
+//       content:`The powers of $i$ connect to several fundamental topics in complex number theory. Explore these related pages to build a fuller picture.
 
-**Complex Numbers** — foundational theory covering the imaginary unit $i$, rectangular form $a + bi$, and algebraic operations.
+// **Complex Numbers** — foundational theory covering the imaginary unit $i$, rectangular form $a + bi$, and algebraic operations.
 
-**Euler's Formula Explorer** — interactive visualization of $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ on the complex plane, showing how the four powers of $i$ correspond to quarter-turn rotations.
+// **Euler's Formula Explorer** — interactive visualization of $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ on the complex plane, showing how the four powers of $i$ correspond to quarter-turn rotations.
 
-**Complex Number Explorer** — a general-purpose tool for plotting and operating on complex numbers in both rectangular and polar form.
+// **Complex Number Explorer** — a general-purpose tool for plotting and operating on complex numbers in both rectangular and polar form.
 
-**Polar Form and Modulus** — how to express complex numbers as $re^{i\\theta}$ and compute the modulus $|z|$ and argument $\\arg(z)$.
+// **Polar Form and Modulus** — how to express complex numbers as $re^{i\\theta}$ and compute the modulus $|z|$ and argument $\\arg(z)$.
 
-**De Moivre's Theorem** — extends powers of complex numbers to arbitrary exponents using $(\\cos\\theta + i\\sin\\theta)^n = \\cos(n\\theta) + i\\sin(n\\theta)$.`,
-      before:``,
-      after:``,
-      link:'',
-    },
+// **De Moivre's Theorem** — extends powers of complex numbers to arbitrary exponents using $(\\cos\\theta + i\\sin\\theta)^n = \\cos(n\\theta) + i\\sin(n\\theta)$.`,
+//       before:``,
+//       after:``,
+//       link:'',
+//     },
+
+obj10:{
+  title:`Related Concepts and Tools`,
+  content:`The mod 4 cycle here is algebraically simple, but its geometric meaning becomes clear once you see it on the complex plane.
+
+The direct geometric explanation lives in the [Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication). Each multiplication by $i$ is a 90° rotation — modulus stays at 1, angle increases by 90°. Four rotations return to the start. The cycle $i, -1, -i, 1$ is just that rotation applied repeatedly, and you can reproduce it exactly by setting $z_1 = i$ and $z_2 = i$ there, then mentally chaining the result.
+
+That rotation behavior is a special case of [De Moivre's Theorem](!/complex-numbers/visual-tools/demoivre-visualizer). In polar form, $i = e^{i\pi/2}$, so $i^n = e^{in\pi/2}$ — which means the angle just increments by $\pi/2$ each time and wraps around at $2\pi$. Set $z = i$ in that tool and drag $n$ through 1, 2, 3, 4 to watch it happen visually.
+
+If the polar notation $e^{i\pi/2}$ is unfamiliar, [Euler's Formula Explorer](!/complex-numbers/visual-tools/euler-formula) is the place to start. $\theta = \pi/2$ places you exactly at $i$ on the unit circle — and $\theta = \pi$ lands at $-1$, which is $i^2$. The four powers of $i$ are the four cardinal points of the unit circle, and that tool shows why.
+
+The [Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular) ties it together practically — convert $i$, $-1$, $-i$, and $1$ to polar form and you'll see that all four have $r = 1$ and angles that are exact multiples of 90°.`,
+  before:``,
+  after:``,
+  link:'',
+},
 
   }
 
@@ -477,9 +493,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Powers of i Calculator/Visualizer</h1>
    <br/>
+   <SiblingsNav>
   <PowersOfICalculator/>
+  </SiblingsNav>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
+   />
    <br/>
    <br/>
    <br/>

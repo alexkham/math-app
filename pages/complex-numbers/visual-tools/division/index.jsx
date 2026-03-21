@@ -472,7 +472,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import ComplexDivisionVisualizer from '../../../../app/components/calculators/complex-numbers/ComplexDivisionVisualizer'
-
+import SiblingsNav from '../../../../app/components/SiblingsNav'
 
 export async function getStaticProps(){
 
@@ -635,25 +635,41 @@ The three angle arcs on the plane make the subtraction visible: the green arc is
       link:'',
     },
 
-    obj11:{
-      title:`Related Concepts and Tools`,
-      content:`Complex division is the inverse of complex multiplication. Explore these related pages for the complete picture of complex arithmetic.
+//     obj11:{
+//       title:`Related Concepts and Tools`,
+//       content:`Complex division is the inverse of complex multiplication. Explore these related pages for the complete picture of complex arithmetic.
 
-**Complex Multiplication Visualizer** — the counterpart to this tool. Multiplication adds angles and multiplies moduli; division subtracts angles and divides moduli.
+// **Complex Multiplication Visualizer** — the counterpart to this tool. Multiplication adds angles and multiplies moduli; division subtracts angles and divides moduli.
 
-**Complex Addition & Subtraction Visualizer** — addition and subtraction work component-wise with no cross-terms, unlike multiplication and division which involve the $i^2 = -1$ rule.
+// **Complex Addition & Subtraction Visualizer** — addition and subtraction work component-wise with no cross-terms, unlike multiplication and division which involve the $i^2 = -1$ rule.
 
-**Polar-Rectangular Converter** — convert between $a + bi$ and $re^{i\\theta}$ forms. The polar form makes division simple: just divide moduli and subtract arguments.
+// **Polar-Rectangular Converter** — convert between $a + bi$ and $re^{i\\theta}$ forms. The polar form makes division simple: just divide moduli and subtract arguments.
 
-**Euler's Formula Explorer** — the identity $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ provides the theoretical basis for the polar division rule.
+// **Euler's Formula Explorer** — the identity $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ provides the theoretical basis for the polar division rule.
 
-**Powers of i Calculator** — since $1/i = -i$ and $1/i^2 = -1$, reciprocals of powers of $i$ follow the same mod 4 cycle.
+// **Powers of i Calculator** — since $1/i = -i$ and $1/i^2 = -1$, reciprocals of powers of $i$ follow the same mod 4 cycle.
 
-**Complex Numbers** — foundational theory covering algebraic operations, conjugates, and the modulus-argument representation.`,
-      before:``,
-      after:``,
-      link:'',
-    },
+// **Complex Numbers** — foundational theory covering algebraic operations, conjugates, and the modulus-argument representation.`,
+//       before:``,
+//       after:``,
+//       link:'',
+//     },
+
+obj11:{
+  title:`Related Concepts and Tools`,
+  content:`Division is where the conjugate and polar form converge — the algebraic method needs one, the geometric method needs the other. Both threads lead somewhere.
+
+The algebraic side connects directly to the [Complex Conjugate Explorer](!/complex-numbers/visual-tools/complex-conjugate). Multiplying by $\\frac{\\bar{z_2}}{\\bar{z_2}}$ works precisely because $z_2 \\cdot \\bar{z_2} = |z_2|^2$ is always real — that identity is the whole mechanism. If the step-by-step panel here feels like a trick, that tool explains why it always works.
+
+The geometric side — divide the moduli, subtract the angles — is the mirror image of multiplication. The [Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication) shows the same logic in reverse: multiply moduli, add angles. Running both tools with the same two points makes the relationship between the operations immediate.
+
+Both geometric methods only make sense once you are comfortable with polar form, so the [Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular) is worth having open alongside this one, especially when the angle arithmetic in the geometric panel is not obvious.
+
+Finally, the "dividing conjugates" preset here — $(3+4i)/(3-4i)$ — always lands on the unit circle because the moduli cancel exactly. That unit circle behavior is the core subject of [De Moivre's Theorem](!/complex-numbers/visual-tools/demoivre-visualizer), which generalizes it to arbitrary powers.`,
+  before:``,
+  after:``,
+  link:'',
+},
 
   }
 
@@ -941,9 +957,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Complex Numbers Division</h1>
    <br/>
+   <SiblingsNav>
    <ComplexDivisionVisualizer/>
+   </SiblingsNav>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
+   />
    <br/>
    <br/>
    <br/>

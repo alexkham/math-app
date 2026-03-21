@@ -10,7 +10,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 
 import ComplexAdditionSubtractionVisualizer from 'app/components/calculators/complex-numbers/ComplexAdditionSubtractionVisualizer'
-
+import SiblingsNav from '../../../../app/components/SiblingsNav'
 
 
 
@@ -188,19 +188,27 @@ The dashed line connecting $z_1$ and $z_2$ is vertical — conjugates are always
 
     obj11:{
       title:`Related Concepts and Tools`,
-      content:`Complex addition and subtraction form the foundation of complex arithmetic. Explore these related pages for the full picture.
+      content:`Explore the full suite of complex number visual tools — each one targets a different operation or concept on the complex plane.
 
-**Complex Numbers** — foundational theory covering the imaginary unit $i$, rectangular form $a + bi$, and algebraic operations.
+[Complex Numbers](!/complex-numbers) — foundational theory covering the imaginary unit $i$, rectangular form $a + bi$, modulus, argument, and the structure of the complex plane. Start here if you are new to the topic.
 
-**Complex Number Explorer** — a general-purpose tool for plotting and operating on complex numbers, including multiplication and division.
+[Complex Number Explorer](!/complex-numbers/visual-tools/complex-explorer) — a general-purpose interactive tool for plotting complex numbers, adjusting their real and imaginary parts, and observing how they behave under basic operations.
 
-**Polar-Rectangular Converter** — convert between $a + bi$ and $re^{i\\theta}$ form. Polar form simplifies multiplication and division, while rectangular form (used here) simplifies addition and subtraction.
+[Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular) — switch between rectangular form $a + bi$ and polar form $r e^{i\theta}$. Polar form simplifies multiplication and division; rectangular form, used in this tool, simplifies addition and subtraction.
 
-**Euler's Formula Explorer** — visualize $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ and see how rotation connects to the exponential function.
+[Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication) — see how multiplying two complex numbers stretches and rotates vectors on the plane. The moduli multiply and the arguments add.
 
-**Powers of i Calculator** — compute $i^n$ for any integer using the mod 4 cycle, a building block for complex arithmetic.
+[Division Visualizer](!/complex-numbers/visual-tools/division) — visualize complex division as the inverse of multiplication: the moduli divide and the arguments subtract.
 
-**Variance and Expected Value** — complex addition rules mirror real-number linearity: $E[z_1 + z_2] = E[z_1] + E[z_2]$, extending to random complex variables.`,
+[Complex Conjugate Explorer](!/complex-numbers/visual-tools/complex-conjugate) — explore the conjugate $\\bar{z} = a - bi$ and its geometric meaning as a reflection across the real axis. Conjugates appear throughout complex arithmetic and are essential for division.
+
+[Distance & Midpoint Tool](!/complex-numbers/visual-tools/distance-midpoint) — compute and visualize the distance $|z_1 - z_2|$ and midpoint between two complex numbers, connecting complex arithmetic to Euclidean geometry.
+
+[De Moivre's Theorem Visualizer](!/complex-numbers/visual-tools/demoivre-visualizer) — animate the identity $(r e^{i\theta})^n = r^n e^{in\theta}$ and watch how raising a complex number to a power scales its modulus and multiplies its angle.
+
+[Powers of i Calculator](!/complex-numbers/visual-tools/i-powers) — compute $i^n$ for any integer using the mod 4 cycle $i, -1, -i, 1$ and see where each power lands on the unit circle.
+
+[Euler's Formula Explorer](!/complex-numbers/visual-tools/euler-formula) — visualize $e^{i\theta} = \cos\theta + i\sin\theta$ and see how the exponential function traces the unit circle, connecting trigonometry, complex numbers, and the number $e$.`,
       before:``,
       after:``,
       link:'',
@@ -492,10 +500,16 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Complex Numbers Addition /Subtraction Visualizer</h1>
    <br/>
+   <SiblingsNav>
   <ComplexAdditionSubtractionVisualizer/>
+  </SiblingsNav>
  
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+     showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
+   />
    <br/>
    <br/>
    <br/>

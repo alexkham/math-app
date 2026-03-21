@@ -472,7 +472,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import PolarRectangularConverter from '../../../../app/components/calculators/complex-numbers/PolarRectangularConverter'
-
+import SiblingsNav from '../../../../app/components/SiblingsNav'
 
 export async function getStaticProps(){
 
@@ -653,25 +653,43 @@ This converter lets you work in whichever form is convenient and instantly see t
       link:'',
     },
 
-    obj11:{
-      title:`Related Concepts and Tools`,
-      content:`Polar-rectangular conversion connects to many areas of complex number mathematics. Explore these related pages for deeper coverage.
+//     obj11:{
+//       title:`Related Concepts and Tools`,
+//       content:`Polar-rectangular conversion connects to many areas of complex number mathematics. Explore these related pages for deeper coverage.
 
-**Euler's Formula Explorer** — interactive visualization of $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$, the identity that bridges polar and exponential notation.
+// **Euler's Formula Explorer** — interactive visualization of $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$, the identity that bridges polar and exponential notation.
 
-**Complex Number Explorer** — a general-purpose tool for plotting, adding, multiplying, and exploring complex numbers on the plane.
+// **Complex Number Explorer** — a general-purpose tool for plotting, adding, multiplying, and exploring complex numbers on the plane.
 
-**Complex Numbers** — foundational theory covering the imaginary unit $i$, rectangular form, and algebraic operations.
+// **Complex Numbers** — foundational theory covering the imaginary unit $i$, rectangular form, and algebraic operations.
 
-**Powers of i Calculator** — compute $i^n$ for any integer using the mod 4 cycle, closely related to rotation on the unit circle.
+// **Powers of i Calculator** — compute $i^n$ for any integer using the mod 4 cycle, closely related to rotation on the unit circle.
 
-**De Moivre's Theorem** — extends polar-form exponentiation to arbitrary powers: $(r(\\cos\\theta + i\\sin\\theta))^n = r^n(\\cos(n\\theta) + i\\sin(n\\theta))$.
+// **De Moivre's Theorem** — extends polar-form exponentiation to arbitrary powers: $(r(\\cos\\theta + i\\sin\\theta))^n = r^n(\\cos(n\\theta) + i\\sin(n\\theta))$.
 
-**Trigonometric Identities** — the cosine and sine functions used in conversion are deeply connected to angle-sum, double-angle, and other trig identities.`,
-      before:``,
-      after:``,
-      link:'',
-    },
+// **Trigonometric Identities** — the cosine and sine functions used in conversion are deeply connected to angle-sum, double-angle, and other trig identities.`,
+//       before:``,
+//       after:``,
+//       link:'',
+//     },
+
+obj11:{
+  title:`Related Concepts and Tools`,
+  content:`Polar and rectangular are two languages for the same point. The tools below each connect to one or both of those languages.
+
+[Euler's Formula Explorer](!/complex-numbers/visual-tools/euler-formula) — the theoretical backbone of polar form. Euler's identity $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ is precisely why polar form is written $re^{i\\theta}$ — drag $\\theta$ along the unit circle and watch the rectangular components $\\cos\\theta$ and $\\sin\\theta$ emerge directly.
+
+[Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication) — the main reason polar form exists. In rectangular form, multiplying two complex numbers requires expanding brackets; in polar form it reduces to multiplying moduli and adding angles. Use this tool after converting to polar to see why.
+
+[Division Visualizer](!/complex-numbers/visual-tools/division) — the inverse of multiplication: moduli divide and angles subtract. Again, polar form makes this geometric and immediate in a way rectangular form cannot.
+
+[De Moivre's Theorem Visualizer](!/complex-numbers/visual-tools/demoivre-visualizer) — takes polar form one step further. $(re^{i\\theta})^n = r^n e^{in\\theta}$ raises the modulus to a power and multiplies the angle — a direct consequence of the polar representation you see in this converter.
+
+[Complex Number Explorer](!/complex-numbers/visual-tools/complex-explorer) — a general-purpose tool for plotting and manipulating complex numbers. Useful for verifying that a polar conversion lands where you expect on the plane.`,
+  before:``,
+  after:``,
+  link:'',
+},
 
   }
 
@@ -959,9 +977,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Polar-Rectangular Converter</h1>
    <br/>
+   <SiblingsNav>
    <PolarRectangularConverter/>
+   </SiblingsNav>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
+   />
    <br/>
    <br/>
    <br/>

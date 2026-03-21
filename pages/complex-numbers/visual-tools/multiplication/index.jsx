@@ -10,7 +10,7 @@ import React from 'react'
 import '../../../pages.css'
 import Head from 'next/head'
 import ComplexMultiplicationVisualizer from '../../../../app/components/calculators/complex-numbers/ComplexMultiplicationVisualizer'
-
+import SiblingsNav from '../../../../app/components/SiblingsNav'
 
 
 export async function getStaticProps(){
@@ -177,25 +177,41 @@ You can verify each step in the visualizer by setting one factor to $i$ and the 
       link:'',
     },
 
-    obj11:{
-      title:`Related Concepts and Tools`,
-      content:`Complex multiplication connects to many areas of complex number theory and applied mathematics. Explore these related pages.
+//     obj11:{
+//       title:`Related Concepts and Tools`,
+//       content:`Complex multiplication connects to many areas of complex number theory and applied mathematics. Explore these related pages.
 
-**Complex Addition & Subtraction Visualizer** — while addition works component-wise (no cross-terms), multiplication involves the FOIL expansion and the $i^2 = -1$ rule. Compare how the two operations look geometrically.
+// **Complex Addition & Subtraction Visualizer** — while addition works component-wise (no cross-terms), multiplication involves the FOIL expansion and the $i^2 = -1$ rule. Compare how the two operations look geometrically.
 
-**Polar-Rectangular Converter** — convert between $a + bi$ and $re^{i\\theta}$ forms. Polar form is where multiplication becomes simple: multiply moduli, add angles.
+// **Polar-Rectangular Converter** — convert between $a + bi$ and $re^{i\\theta}$ forms. Polar form is where multiplication becomes simple: multiply moduli, add angles.
 
-**Euler's Formula Explorer** — the identity $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ is the theoretical foundation for the polar multiplication rule.
+// **Euler's Formula Explorer** — the identity $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ is the theoretical foundation for the polar multiplication rule.
 
-**Powers of i Calculator** — the cyclic pattern $i^0 = 1, i^1 = i, i^2 = -1, i^3 = -i$ is a direct consequence of repeated multiplication by $i$.
+// **Powers of i Calculator** — the cyclic pattern $i^0 = 1, i^1 = i, i^2 = -1, i^3 = -i$ is a direct consequence of repeated multiplication by $i$.
 
-**Complex Number Explorer** — a general-purpose tool for all complex operations on the plane.
+// **Complex Number Explorer** — a general-purpose tool for all complex operations on the plane.
 
-**De Moivre's Theorem** — extends the multiplication rule to powers: $(re^{i\\theta})^n = r^n e^{in\\theta}$.`,
-      before:``,
-      after:``,
-      link:'',
-    },
+// **De Moivre's Theorem** — extends the multiplication rule to powers: $(re^{i\\theta})^n = r^n e^{in\\theta}$.`,
+//       before:``,
+//       after:``,
+//       link:'',
+//     },
+
+obj11:{
+  title:`Related Concepts and Tools`,
+  content:`Multiplication is where complex numbers stop feeling like algebra and start feeling like geometry. The "multiply lengths, add angles" rule connects everything else in the toolkit.
+
+The immediate next step from here is [Division](!/complex-numbers/visual-tools/division) — it's the same geometric rule run backwards. Where multiplication adds angles and multiplies moduli, division subtracts angles and divides moduli. Running both tools with the same two points side by side makes the inverse relationship clear in a way that algebra alone doesn't.
+
+The geometric method here — angles and moduli — only makes sense in polar form, so the [Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular) is the natural companion. Every pair of values in the polar panel here ($|z_1|$, $\\theta_1$, $|z_2|$, $\\theta_2$) corresponds directly to what that converter shows for a single number.
+
+The "multiplying by $i$ rotates by 90°" idea in the $i \\times i$ preset is the seed of something bigger. The [Powers of i Calculator](!/complex-numbers/visual-tools/i-powers) follows that single observation through its full cycle — each multiplication by $i$ is another 90° rotation, producing the $i, -1, -i, 1$ pattern directly from the geometry you see here.
+
+And if you want to see what happens when you apply this operation repeatedly to the same number, [De Moivre's Theorem](!/complex-numbers/visual-tools/demoivre-visualizer) is exactly that — multiplying $z$ by itself $n$ times, with the spiral trail showing each intermediate step.`,
+  before:``,
+  after:``,
+  link:'',
+},
 
   }
 
@@ -483,9 +499,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Complex Numbers Multiplication</h1>
    <br/>
+   <SiblingsNav>
    <ComplexMultiplicationVisualizer/>
+   </SiblingsNav>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
+   />
    <br/>
    <br/>
    <br/>

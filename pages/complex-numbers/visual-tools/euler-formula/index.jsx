@@ -10,7 +10,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import EulerFormulaExplorer from '../../../../app/components/calculators/complex-numbers/EulerFormulaExplorer'
-
+import SiblingsNav from '../../../../app/components/SiblingsNav'
 
 export async function getStaticProps(){
 
@@ -175,25 +175,41 @@ Moduli multiply, angles add. This is far simpler than expanding $(a + bi)(c + di
       link:'',
     },
 
-    obj10:{
-      title:`Related Concepts and Tools`,
-      content:`Euler's formula connects to many areas of complex number theory and applied mathematics. Explore these related topics to deepen your understanding.
+//     obj10:{
+//       title:`Related Concepts and Tools`,
+//       content:`Euler's formula connects to many areas of complex number theory and applied mathematics. Explore these related topics to deepen your understanding.
 
-**Complex Number Explorer** — an interactive tool for visualizing complex arithmetic, plotting numbers in rectangular and polar form, and performing operations on the complex plane.
+// **Complex Number Explorer** — an interactive tool for visualizing complex arithmetic, plotting numbers in rectangular and polar form, and performing operations on the complex plane.
 
-**Complex Numbers** — foundational theory covering the imaginary unit $i$, rectangular form $a + bi$, and algebraic operations.
+// **Complex Numbers** — foundational theory covering the imaginary unit $i$, rectangular form $a + bi$, and algebraic operations.
 
-**Polar Form and Modulus** — detailed coverage of writing complex numbers as $re^{i\\theta}$, computing the modulus $|z|$ and argument $\\arg(z)$.
+// **Polar Form and Modulus** — detailed coverage of writing complex numbers as $re^{i\\theta}$, computing the modulus $|z|$ and argument $\\arg(z)$.
 
-**De Moivre's Theorem** — extends Euler's formula to integer powers: $(e^{i\\theta})^n = e^{in\\theta}$, which gives $( \\cos\\theta + i\\sin\\theta )^n = \\cos(n\\theta) + i\\sin(n\\theta)$.
+// **De Moivre's Theorem** — extends Euler's formula to integer powers: $(e^{i\\theta})^n = e^{in\\theta}$, which gives $( \\cos\\theta + i\\sin\\theta )^n = \\cos(n\\theta) + i\\sin(n\\theta)$.
 
-**Roots of Unity** — the $n$-th roots of $1$ are $e^{i \\cdot 2\\pi k/n}$ for $k = 0, 1, \\dots, n-1$, equally spaced around the unit circle.
+// **Roots of Unity** — the $n$-th roots of $1$ are $e^{i \\cdot 2\\pi k/n}$ for $k = 0, 1, \\dots, n-1$, equally spaced around the unit circle.
 
-**Trigonometric Identities** — Euler's formula provides elegant proofs of angle-sum, double-angle, and product-to-sum identities by manipulating exponentials.`,
-      before:``,
-      after:``,
-      link:'',
-    },
+// **Trigonometric Identities** — Euler's formula provides elegant proofs of angle-sum, double-angle, and product-to-sum identities by manipulating exponentials.`,
+//       before:``,
+//       after:``,
+//       link:'',
+//     },
+
+obj10:{
+  title:`Related Concepts and Tools`,
+  content:`Euler's formula is the theoretical backbone of the entire visual tools section. Almost everything else here is a consequence of $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ in one way or another.
+
+The most direct application is the [Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular). The polar form $re^{i\\theta}$ you see labeled on this plane is exactly what that tool converts to and from. If you set $r = 1$ here and drag $\theta$, you are tracing the same right triangle that converter uses to extract $a = r\\cos\\theta$ and $b = r\\sin\\theta$.
+
+The reason $e^{i\\theta}$ matters for arithmetic becomes concrete in the [Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication). The key property is $e^{i\\alpha} \cdot e^{i\\beta} = e^{i(\\alpha+\\beta)}$ — multiplying two complex numbers in polar form just adds their angles. That is not a coincidence or a trick; it follows directly from the exponential law you see here.
+
+[De Moivre's Theorem](!/complex-numbers/visual-tools/demoivre-visualizer) takes that one step further: $(re^{i\\theta})^n = r^n e^{in\\theta}$. It is Euler's formula combined with the exponent rule, applied $n$ times. Snap $\\theta$ to $\\pi/2$ here and then visit that tool — you will see exactly why the powers of $i$ cycle the way they do.
+
+Speaking of which, the [Powers of i Calculator](!/complex-numbers/visual-tools/i-powers) is the simplest special case of everything on this page. Setting $\\theta = \\pi/2$ places you at $i$ on the unit circle. Each power multiplies the angle by another $\\pi/2$, cycling through the four cardinal points. The mod 4 pattern that tool is built around is just the unit circle doing four 90° rotations.`,
+  before:``,
+  after:``,
+  link:'',
+},
 
   }
 
@@ -473,9 +489,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Euler&apos;s Formula Explorer</h1>
    <br/>
+   <SiblingsNav>
    <EulerFormulaExplorer/>
+   </SiblingsNav>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
+   />
    <br/>
    <br/>
    <br/>

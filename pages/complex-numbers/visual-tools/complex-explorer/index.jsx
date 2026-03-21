@@ -9,8 +9,8 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
-import ComplexExplorer from '@/app/components/visualizations/complex-numbers/ComplexExplorer'
-
+import ComplexExplorer from '@/app/components/calculators/complex-numbers/ComplexExplorer'
+import SiblingsNav from '../../../../app/components/SiblingsNav'
 
 export async function getStaticProps(){
 
@@ -184,21 +184,39 @@ Other properties include: $\\overline{z_1 + z_2} = \\bar{z_1} + \\bar{z_2}$ and 
       link: '',
     },
 
-    obj11: {
-      title: `Related Concepts`,
-      content: `The Complex Number Explorer connects to several important topics in complex analysis:
+//     obj11: {
+//       title: `Related Concepts`,
+//       content: `The Complex Number Explorer connects to several important topics in complex analysis:
 
-**Polar Form**: Complex numbers can also be written as $z = r(\\cos\\theta + i\\sin\\theta)$ or $z = re^{i\\theta}$, where $r = |z|$ is the modulus and $\\theta$ is the argument (angle from the positive real axis).
+// **Polar Form**: Complex numbers can also be written as $z = r(\\cos\\theta + i\\sin\\theta)$ or $z = re^{i\\theta}$, where $r = |z|$ is the modulus and $\\theta$ is the argument (angle from the positive real axis).
 
-**Complex Arithmetic**: Addition combines real and imaginary parts separately. Multiplication uses the distributive property along with $i^2 = -1$. Division uses conjugates to rationalize denominators.
+// **Complex Arithmetic**: Addition combines real and imaginary parts separately. Multiplication uses the distributive property along with $i^2 = -1$. Division uses conjugates to rationalize denominators.
 
-**Euler's Formula**: The remarkable identity $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ connects exponential and trigonometric functions through complex numbers.
+// **Euler's Formula**: The remarkable identity $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ connects exponential and trigonometric functions through complex numbers.
 
-**Applications**: Complex numbers model oscillations, waves, electrical impedance, quantum states, and 2D transformations in graphics and engineering.`,
-      before: ``,
-      after: ``,
-      link: '',
-    }
+// **Applications**: Complex numbers model oscillations, waves, electrical impedance, quantum states, and 2D transformations in graphics and engineering.`,
+//       before: ``,
+//       after: ``,
+//       link: '',
+//     }
+
+obj11:{
+  title:`Related Concepts and Tools`,
+  content:`The explorer shows the full picture of a single complex number at once. Each tool below takes one of those properties and goes deeper.
+
+[Complex Conjugate Explorer](!/complex-numbers/visual-tools/complex-conjugate) — the ghost point $\\bar{z}$ you see reflected below the real axis here gets its own dedicated tool. Drag $z$ and watch the conjugate mirror it in real time, with the identity $z \\cdot \\bar{z} = |z|^2$ verified step by step.
+
+[Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular) — the modulus and right triangle visible in this explorer are the core of the polar representation $re^{i\\theta}$. This converter makes the switch between the two forms explicit, with live conversion formulas and an angle arc.
+
+[Addition & Subtraction Visualizer](!/complex-numbers/visual-tools/addition-subtraction) — move from one complex number to two. This tool places $z_1$ and $z_2$ on the same plane and shows the parallelogram rule for addition and the difference vector for subtraction.
+
+[Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication) — see what happens when two complex numbers are multiplied: moduli scale and arguments rotate. The single modulus circle you see in the explorer becomes a geometric transformation.
+
+[Distance & Midpoint Tool](!/complex-numbers/visual-tools/distance-midpoint) — extends the modulus concept to two points. The distance $|z_1 - z_2|$ between any two complex numbers is computed and visualized directly on the plane.`,
+  before:``,
+  after:``,
+  link:'',
+},
 
   }
 
@@ -444,9 +462,15 @@ export default function ComplexExplorerPage({
       <br/>
       <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Complex Number Explorer</h1>
       <br/>
+      <SiblingsNav>
       <ComplexExplorer/>
+      </SiblingsNav>
       <br/>
-      <SectionTableOfContents sections={genericSections}/>
+      <SectionTableOfContents sections={genericSections}
+       showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
+      />
       <br/>
       <br/>
       <br/>

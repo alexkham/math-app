@@ -10,7 +10,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import DeMoivreCalculator from '../../../../app/components/calculators/complex-numbers/DeMoivreCalculator'
-
+import SiblingsNav from '../../../../app/components/SiblingsNav'
 
 export async function getStaticProps(){
 
@@ -181,25 +181,41 @@ Roots of unity appear throughout mathematics: in Fourier transforms, polynomial 
       link:'',
     },
 
-    obj11:{
-      title:`Related Concepts and Tools`,
-      content:`De Moivre's theorem ties together many areas of complex number theory. Explore these related pages.
+//     obj11:{
+//       title:`Related Concepts and Tools`,
+//       content:`De Moivre's theorem ties together many areas of complex number theory. Explore these related pages.
 
-**Euler's Formula Explorer** — the identity $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ is the foundation of De Moivre's theorem. The explorer visualizes the unit circle trace and the right triangle connection.
+// **Euler's Formula Explorer** — the identity $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ is the foundation of De Moivre's theorem. The explorer visualizes the unit circle trace and the right triangle connection.
 
-**Complex Multiplication Visualizer** — multiplication is the single-step version of De Moivre: multiply moduli, add angles. Repeated multiplication gives exponentiation.
+// **Complex Multiplication Visualizer** — multiplication is the single-step version of De Moivre: multiply moduli, add angles. Repeated multiplication gives exponentiation.
 
-**Polar-Rectangular Converter** — De Moivre's theorem requires polar form. This converter handles the conversion between $a + bi$ and $re^{i\\theta}$.
+// **Polar-Rectangular Converter** — De Moivre's theorem requires polar form. This converter handles the conversion between $a + bi$ and $re^{i\\theta}$.
 
-**Powers of i Calculator** — the $i^n$ cycle is a special case of De Moivre with $r = 1$ and $\\theta = 90°$. The mod 4 pattern emerges because $4 \\times 90° = 360°$.
+// **Powers of i Calculator** — the $i^n$ cycle is a special case of De Moivre with $r = 1$ and $\\theta = 90°$. The mod 4 pattern emerges because $4 \\times 90° = 360°$.
 
-**Complex Division Visualizer** — division subtracts angles and divides moduli, the inverse of the power operation.
+// **Complex Division Visualizer** — division subtracts angles and divides moduli, the inverse of the power operation.
 
-**Complex Numbers** — foundational theory covering the imaginary unit, algebraic operations, and the modulus-argument representation.`,
-      before:``,
-      after:``,
-      link:'',
-    },
+// **Complex Numbers** — foundational theory covering the imaginary unit, algebraic operations, and the modulus-argument representation.`,
+//       before:``,
+//       after:``,
+//       link:'',
+//     },
+
+obj11:{
+  title:`Related Concepts and Tools`,
+  content:`De Moivre's theorem only makes sense in polar form — the whole point is that exponentiation becomes trivial when you write $z = re^{i\\theta}$. The tools below build up everything this theorem depends on.
+
+The essential prerequisite is the [Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular). De Moivre's theorem lives entirely in polar coordinates — $r$ gets raised to the $n$th power, $\\theta$ gets multiplied by $n$. If you want to understand why the step-by-step panel here converts to polar first, that tool shows the conversion geometry in full detail.
+
+Right behind it is [Euler's Formula Explorer](!/complex-numbers/visual-tools/euler-formula). The exponential notation $re^{i\\theta}$ is not just shorthand — it is why De Moivre's theorem works at all. $(re^{i\\theta})^n = r^n e^{in\\theta}$ follows directly from the exponent rules once you accept Euler's formula.
+
+The [Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication) shows the single-step version of what this tool does repeatedly. Each intermediate power in the purple trail is one more multiplication — modulus scales by $|z|$, angle shifts by $\\theta$. The trail you see here is that operation applied $n$ times in sequence.
+
+Finally, for the unit circle behavior — where $|z| = 1$ and powers only rotate — the [Powers of i Calculator](!/complex-numbers/visual-tools/i-powers) is the cleanest special case. Setting $r = 1$ and $\\theta = 90°$ here reproduces exactly the $i, -1, -i, 1$ cycle that tool is built around.`,
+  before:``,
+  after:``,
+  link:'',
+},
 
   }
 
@@ -487,9 +503,15 @@ export default function DeMoivreVisualizerPage({seoData, sectionsContent, introC
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>De Moivre Law Visual Calculator</h1>
    <br/>
+   <SiblingsNav>
    <DeMoivreCalculator/>
+   </SiblingsNav>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
+   />
    <br/>
    <br/>
    <br/>

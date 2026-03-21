@@ -472,7 +472,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import ComplexDistanceMidpoint from '../../../../app/components/calculators/complex-numbers/ComplexDistanceMidpoint'
-
+import SiblingsNav from '../../../../app/components/SiblingsNav'
 
 export async function getStaticProps(){
 
@@ -633,25 +633,41 @@ This is the only configuration where $|z_1 - z_2| = 0$. By definition, $|w| = 0$
       link:'',
     },
 
-    obj11:{
-      title:`Related Concepts and Tools`,
-      content:`Distance and midpoint are foundational operations in complex plane geometry. Explore these related pages.
+//     obj11:{
+//       title:`Related Concepts and Tools`,
+//       content:`Distance and midpoint are foundational operations in complex plane geometry. Explore these related pages.
 
-**Complex Addition & Subtraction Visualizer** — the distance $|z_1 - z_2|$ is the modulus of the subtraction result. The midpoint $(z_1 + z_2)/2$ is half the addition result. This tool shows both operations geometrically.
+// **Complex Addition & Subtraction Visualizer** — the distance $|z_1 - z_2|$ is the modulus of the subtraction result. The midpoint $(z_1 + z_2)/2$ is half the addition result. This tool shows both operations geometrically.
 
-**Polar-Rectangular Converter** — convert between $a + bi$ and $re^{i\\theta}$. The modulus $r = |z|$ is the distance from the origin, a special case of the general distance formula.
+// **Polar-Rectangular Converter** — convert between $a + bi$ and $re^{i\\theta}$. The modulus $r = |z|$ is the distance from the origin, a special case of the general distance formula.
 
-**Complex Number Explorer** — a general-purpose tool for plotting, operating on, and exploring complex numbers on the plane.
+// **Complex Number Explorer** — a general-purpose tool for plotting, operating on, and exploring complex numbers on the plane.
 
-**Euler's Formula Explorer** — visualize how $e^{i\\theta}$ traces the unit circle, connecting distance and angle concepts.
+// **Euler's Formula Explorer** — visualize how $e^{i\\theta}$ traces the unit circle, connecting distance and angle concepts.
 
-**Complex Numbers** — foundational theory covering the imaginary unit, rectangular form, modulus, and algebraic operations.
+// **Complex Numbers** — foundational theory covering the imaginary unit, rectangular form, modulus, and algebraic operations.
 
-**Complex Conjugate Visualizer** — conjugates reflect across the real axis. The distance between $z$ and $\\bar{z}$ is $2|b|$ — twice the imaginary part.`,
-      before:``,
-      after:``,
-      link:'',
-    },
+// **Complex Conjugate Visualizer** — conjugates reflect across the real axis. The distance between $z$ and $\\bar{z}$ is $2|b|$ — twice the imaginary part.`,
+//       before:``,
+//       after:``,
+//       link:'',
+//     },
+
+obj11:{
+  title:`Related Concepts and Tools`,
+  content:`Distance and midpoint sit at the intersection of complex arithmetic and Euclidean geometry — the Argand plane is just the coordinate plane relabeled, so every geometric idea carries over directly.
+
+The most immediate connection is to [Addition & Subtraction](!/complex-numbers/visual-tools/addition-subtraction). The distance $|z_1 - z_2|$ is literally the modulus of the difference vector, so subtraction and distance are the same operation viewed differently — one algebraic, one geometric.
+
+The [Complex Conjugate Explorer](!/complex-numbers/visual-tools/complex-conjugate) is worth visiting alongside this tool. Conjugate pairs $z$ and $\\bar{z}$ are always symmetric about the real axis, which means their midpoint is always real and their distance is always $2|\\text{Im}(z)|$. Load a conjugate pair here and both facts become immediately visible.
+
+If you want to go deeper on the circle equation $|z - z_1| = r$ that the dashed circle here represents, the [Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular) shows how modulus and distance connect to polar form — the $r$ in $re^{i\\theta}$ is exactly the distance from the origin, which is the special case $z_2 = 0$ of what this tool computes.
+
+Finally, the [Complex Number Explorer](!/complex-numbers/visual-tools/complex-explorer) is a good starting point if any of the ideas here feel unfamiliar — it focuses on a single point and builds up modulus, argument, and the right triangle from scratch before you work with two points.`,
+  before:``,
+  after:``,
+  link:'',
+},
 
   }
 
@@ -938,9 +954,15 @@ export default function DistanceMidpointPage({seoData, sectionsContent, introCon
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Distance and Midpoint between Complex Numbers</h1>
    <br/>
+   <SiblingsNav>
    <ComplexDistanceMidpoint/>
+   </SiblingsNav>
    <br/>
-   <SectionTableOfContents sections={genericSections}/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
+   />
    <br/>
    <br/>
    <br/>
