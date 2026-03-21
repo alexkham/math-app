@@ -185,7 +185,7 @@ export default function TrigonometricTablesPage({sectionsContent , introContent,
 
   return (
    <div >
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -225,7 +225,7 @@ export default function TrigonometricTablesPage({sectionsContent , introContent,
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </div>
   )
 }

@@ -239,7 +239,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -332,7 +332,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

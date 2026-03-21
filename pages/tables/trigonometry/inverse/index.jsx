@@ -252,7 +252,7 @@ export default function InversePage({ seoData, sectionsContent, introContent,
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -344,7 +344,7 @@ export default function InversePage({ seoData, sectionsContent, introContent,
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }
