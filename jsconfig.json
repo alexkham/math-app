@@ -12,15 +12,100 @@
 // }
 
 
+// {
+//   "compilerOptions": {
+//     "baseUrl": ".",
+//     "paths": {
+//       "@/*": ["./*"]
+//     }
+//   },
+//   "exclude": ["node_modules", ".next", ".git"],
+//   "typeAcquisition": {
+//     "exclude": ["react-beautiful-dnd"]
+//   }
+// }
+
+// {
+//   "compilerOptions": {
+//     "baseUrl": ".",
+//     "paths": {
+//       "@/*": ["./*"],
+//       "@/components/*": ["app/components/*"],
+//       "@/lib/*": ["lib/*"],
+//       "@/utils/*": ["utils/*"],
+//       "@/hooks/*": ["hooks/*"],
+//       "@/styles/*": ["styles/*"]
+//     },
+//     "jsx": "react-jsx",
+//     "allowJs": true,
+//     "checkJs": true,
+//     "moduleResolution": "node",
+//     "resolveJsonModule": true,
+//     "isolatedModules": true,
+//     "noEmit": true
+//   },
+//   "include": [
+//     "**/*.js",
+//     "**/*.jsx",
+//     "**/*.ts",
+//     "**/*.tsx"
+//   ],
+//   "exclude": [
+//     "node_modules",
+//     ".next",
+//     "dist",
+//     "build",
+//     ".git"
+//   ]
+// }
+
+
+
+// {
+//   "compilerOptions": {
+//     "baseUrl": ".",
+//     "paths": {
+//       "@/*": ["./*"],
+//       "@/components/*": ["app/components/*"],
+//       "@/lib/*": ["lib/*"],
+//       "@/utils/*": ["utils/*"],
+//       "@/hooks/*": ["hooks/*"],
+//       "@/styles/*": ["styles/*"]
+//     },
+//     "allowJs": true,
+//     "jsx": "react-jsx",
+//     "moduleResolution": "node",
+//     "resolveJsonModule": true,
+//     "isolatedModules": true,
+//     "noEmit": true
+//   },
+//   "include": [
+//     "**/*.js",
+//     "**/*.jsx"
+//   ],
+//   "exclude": [
+//     "node_modules",
+//     ".next",
+//     "dist",
+//     "build",
+//     ".git"
+//   ]
+// }
+
+// {
+//   "compilerOptions": { "baseUrl": ".", "paths": { "@/*": ["./*"] } },
+//   "exclude": ["node_modules", ".next"]
+// }
+
+
+
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"]
-    }
+    "paths": { "@/*": ["./*"] },
+    "checkJs": false,
+    "allowJs": true
   },
-  "exclude": ["node_modules", ".next", ".git"],
-  "typeAcquisition": {
-    "exclude": ["react-beautiful-dnd"]
-  }
+  "include": ["app/**/*", "components/**/*", "lib/**/*", "utils/**/*"],
+  "exclude": ["node_modules", ".next", "dist", "build", ".git", "public", "coverage"]
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Calculator, PieChart, Database } from 'lucide-react';
 import styles from './TableNavigation.module.css';
+import Image from 'next/image';
 
 const getCategoryIcon = (category) => {
   switch (category.toLowerCase()) {
@@ -19,7 +20,10 @@ const TableModal = ({ table, onClose }) => (
   <div className={styles.modal}>
     <div className={styles.modalContent}>
       <h2 className={styles.modalTitle}>{table.name}</h2>
-      <img src="/api/placeholder/300/200" alt={table.name} className={styles.modalImage} />
+      {/* <img src="/api/placeholder/300/200" alt={table.name} className={styles.modalImage} />
+       */}
+
+       <Image src="/api/placeholder/300/200" alt={table.name} width={300} height={200} className={styles.modalImage} />
       <div className={styles.tableWrapper}>
         <table className={styles.table}>
           <thead>
@@ -84,7 +88,8 @@ const TableNavigation = ({ filesData }) => {
               .map((file) => (
                 <div key={file.filename} className={styles.tableCard}>
                   <h3 className={styles.tableTitle}>{file.filename.split('_').join(' ')}</h3>
-                  <img src="/api/placeholder/300/200" alt={file.filename} className={styles.tableImage} />
+                  {/* <img src="/api/placeholder/300/200" alt={file.filename} className={styles.tableImage} /> */}
+                  <Image src="/api/placeholder/300/200" alt={file.filename} width={300} height={200} className={styles.tableImage} />
                   <button 
                     className={styles.viewButton}
                     onClick={() => setSelectedTable(file)}

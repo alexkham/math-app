@@ -4,6 +4,7 @@ import React,{useEffect} from 'react';
 import { processContent } from '@/app/utils/contentProcessor';
 import { lora700, inter } from '@/app/utils/fonts'; // Changed from poppins500 to inter
 import styles from './Sections.module.css';
+import Image from 'next/image';
 
 
 const Sections = ({ sections,leftMargin='220px' }) => {
@@ -113,11 +114,17 @@ const Sections = ({ sections,leftMargin='220px' }) => {
          
          
            <h2 className={`${styles.sectionTitle} ${lora700.className}`}>{processContent(section.title)}</h2>
-           {section.image && (
+           {/* {section.image && (
              <div className={styles.sectionImage}>
                <img src={section.image} alt={section.title} />
              </div>
-           )}
+           )} */}
+
+           {section.image && (
+            <div className={styles.sectionImage} style={{ position: 'relative' }}>
+              <Image src={section.image} alt={section.title} fill style={{ objectFit: 'cover' }} />
+            </div>
+          )}
            {section.svg && (
              <div className={styles.sectionImage} dangerouslySetInnerHTML={{ __html: section.svg }} />
            )}

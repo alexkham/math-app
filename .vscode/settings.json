@@ -9,22 +9,35 @@
 // }
 
 
+// {
+//     "github.copilot.enable": {
+//         "*": false,
+//         "plaintext": false,
+//         "markdown": false,
+//         "scminput": false
+//     },
+    
+//     "editor.accessibilitySupport": "off",
+//     "files.watcherExclude": {
+//         "**/node_modules/**": true,
+//         "**/.next/**": true,
+//         "**/.git/**": true
+//     },
+//     "search.exclude": {
+//         "**/node_modules": true,
+//         "**/.next": true
+//     }
+// }
+
+
 {
-    "github.copilot.enable": {
-        "*": false,
-        "plaintext": false,
-        "markdown": false,
-        "scminput": false
-    },
-    "js/ts.tsserver.maxMemory": 4096,
-    "editor.accessibilitySupport": "off",
-    "files.watcherExclude": {
-        "**/node_modules/**": true,
-        "**/.next/**": true,
-        "**/.git/**": true
-    },
-    "search.exclude": {
-        "**/node_modules": true,
-        "**/.next": true
-    }
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    "**/.git/**": true,
+    "**/dist/**": true,
+    "**/build/**": true,
+    "**/public/**": true
+  },
+ "js/ts.validate.enabled": true
 }

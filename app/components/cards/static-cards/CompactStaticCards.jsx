@@ -1654,7 +1654,7 @@ export default function CompactStaticCards({
                 borderRadius: '8px', 
                 overflow: 'hidden'
               }}>
-                <img 
+                {/* <img 
                   src={card.contentImage} 
                   alt={card.contentImageAlt || ''} 
                   style={{ 
@@ -1663,7 +1663,17 @@ export default function CompactStaticCards({
                     objectFit: card.contentImageFit || 'cover',
                     display: 'block'
                   }} 
-                />
+                /> */}
+                <Image 
+                    src={card.contentImage} 
+                    alt={card.contentImageAlt || ''} 
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    style={{ 
+                      objectFit: card.contentImageFit || 'cover',
+                      display: 'block'
+                    }} 
+                  />
               </div>
             )}
 
