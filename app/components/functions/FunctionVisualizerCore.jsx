@@ -373,6 +373,7 @@ const VisualizerCore = React.forwardRef((props, ref) => {
 
   return <canvas ref={canvasRef} width={width} height={height} style={{ display: 'block', cursor: interaction.hoveredCurve || interaction.hoveredSpecialPoint ? 'crosshair' : interaction.isPanning ? 'grabbing' : enablePan ? 'grab' : 'default' }} {...interaction.handlers} />;
 });
+VisualizerCore.displayName = 'VisualizerCore';
 
 // ============================================================
 // ICONS
@@ -526,7 +527,7 @@ export default function Demo() {
 
         <div style={{ padding: 12, background: '#e8f5e9', borderRadius: 6, fontSize: 12, marginBottom: 12 }}>
           <strong>💡 Export</strong><br />
-          Click "Export" button to get PNG preview and SVG code.
+          Click &quot;Export&quot; button to get PNG preview and SVG code.
         </div>
 
         <div style={{ padding: 10, background: '#f8f9fa', borderRadius: 6, fontSize: 11 }}>
