@@ -121,7 +121,7 @@ const parseExpression = (expression) => {
     }
   }
 
-  console.log(components);
+  
   return components;
 };
 
@@ -160,7 +160,7 @@ const LogicCalculator = () => {
   useEffect(() => {
     const information = operatorDescriptions[selectedOperator]?.description;
     setInfo(information);
-    console.log('info' + info);
+   
   }, [selectedOperator]);
 
   useEffect(() => {
@@ -241,8 +241,7 @@ const LogicCalculator = () => {
       row[expression] = evaluateExpression(expression, row);
       table.push(row);
     }
-    console.log(components);
-    console.log(expression);
+  
     return table;
   };
 

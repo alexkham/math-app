@@ -34,7 +34,7 @@ const SectionTableOfContents = ({
   useEffect(() => {
     // Check for proper navLinks object structure
     if (navLinks && navLinks.links && Array.isArray(navLinks.links) && navLinks.links.length > 0) {
-      // console.log('USING PROVIDED LINKS FROM PROPS');
+      
       setUseProvidedLinks(true);
       
       // Filter and set the links
@@ -87,7 +87,7 @@ const SectionTableOfContents = ({
       try {
         const response = await fetch('/api/sitemap');
         const data = await response.json();
-        console.log('Links generated internally');
+       
         setUrlStructure(data);
       } catch (error) {
         console.error('Error fetching sitemap:', error);

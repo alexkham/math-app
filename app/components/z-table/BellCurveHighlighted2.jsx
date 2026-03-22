@@ -11,9 +11,7 @@ const BellCurveHighlighted2 = ({ dataPoints, zScore  }) => {
     const chartRef = useRef(null);
    const pdf = x => Math.exp(-x * x / 2) / Math.sqrt(2 * Math.PI);
    // const pdf=x=>(2*x+6)
-    console.log(dataPoints)
-    console.log(zScore)
-    console.log(zScore[0])
+  
     
     // Prepare your chart data here
     const chartData = {
@@ -29,7 +27,7 @@ const BellCurveHighlighted2 = ({ dataPoints, zScore  }) => {
             backgroundColor: dataPoints.map(x => parseFloat(x) <= parseFloat(zScore[0]+400) ? 'rgba(0, 0, 192, 0.2)' : 'transparent'),
         }],
     };
-    console.log( 'Dataset :'+chartData.datasets[0].data)
+   
     const options = {
         scales: {
             x: { 
