@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import Image from 'next/image';
 
 // ============================================================
 // DEFAULT STYLES
@@ -408,9 +409,10 @@ function ExportModal({ isOpen, onClose, pngDataUrl, svgContent }) {
           <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}><CloseIcon /></button>
         </div>
 
-        <div style={{ marginBottom: 20 }}>
+        <div style={{ marginBottom: 20, position: 'relative' }}>
           <h4 style={{ margin: '0 0 8px', fontSize: 14, color: '#666' }}>PNG Preview</h4>
-          <img src={pngDataUrl} alt="Graph" style={{ width: '100%', border: '1px solid #eee', borderRadius: 8 }} />
+          {/* <img src={pngDataUrl} alt="Graph" style={{ width: '100%', border: '1px solid #eee', borderRadius: 8 }} /> */}
+          <Image src={pngDataUrl} alt="Graph" fill unoptimized style={{ objectFit: 'contain', border: '1px solid #eee', borderRadius: 8 }} />
           <p style={{ fontSize: 11, color: '#888', margin: '8px 0 0' }}>Right-click → Save image as...</p>
         </div>
 
