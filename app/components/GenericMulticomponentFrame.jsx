@@ -107,7 +107,7 @@
  * - Active tab uses primaryColor for background
  * - Disabled tabs (no component/href/content) show 50% opacity
  */
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useCallback } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { processContent } from '../utils/contentProcessor'
 
@@ -129,27 +129,50 @@ export default function GenericMultiComponentFrame({
   const hasSlugs = components.some(c => c.slug)
   
   // Determine initial active component
-  const getInitialActive = () => {
-    if (hasSlugs) {
-      const slugParam = searchParams.get(paramName)
-      if (slugParam) {
-        const foundComponent = components.find(c => c.slug === slugParam)
-        if (foundComponent) return foundComponent.id || components.indexOf(foundComponent) + 1
-      }
-      if (defaultSlug) {
-        const defaultComponent = components.find(c => c.slug === defaultSlug)
-        if (defaultComponent) return defaultComponent.id || components.indexOf(defaultComponent) + 1
-      }
+  // const getInitialActive = () => {
+  //   if (hasSlugs) {
+  //     const slugParam = searchParams.get(paramName)
+  //     if (slugParam) {
+  //       const foundComponent = components.find(c => c.slug === slugParam)
+  //       if (foundComponent) return foundComponent.id || components.indexOf(foundComponent) + 1
+  //     }
+  //     if (defaultSlug) {
+  //       const defaultComponent = components.find(c => c.slug === defaultSlug)
+  //       if (defaultComponent) return defaultComponent.id || components.indexOf(defaultComponent) + 1
+  //     }
+  //   }
+  //   return initialActive
+  // }
+  
+  // const [activeComponent, setActiveComponent] = useState(getInitialActive)
+  
+  // useEffect(() => {
+  //   const validComponent = getInitialActive()
+  //   setActiveComponent(validComponent)
+  // }, [searchParams, components.length])
+
+const getInitialActive = useCallback(() => {
+  if (hasSlugs) {
+    const slugParam = searchParams.get(paramName)
+    if (slugParam) {
+      const foundComponent = components.find(c => c.slug === slugParam)
+      if (foundComponent) return foundComponent.id || components.indexOf(foundComponent) + 1
     }
-    return initialActive
+    if (defaultSlug) {
+      const defaultComponent = components.find(c => c.slug === defaultSlug)
+      if (defaultComponent) return defaultComponent.id || components.indexOf(defaultComponent) + 1
+    }
   }
-  
-  const [activeComponent, setActiveComponent] = useState(getInitialActive)
-  
-  useEffect(() => {
-    const validComponent = getInitialActive()
-    setActiveComponent(validComponent)
-  }, [searchParams, components.length])
+  return initialActive
+}, [hasSlugs, searchParams, paramName, components, defaultSlug, initialActive])
+
+const [activeComponent, setActiveComponent] = useState(getInitialActive)
+
+useEffect(() => {
+  const validComponent = getInitialActive()
+  setActiveComponent(validComponent)
+}, [getInitialActive]) // ← Now safe and lint-clean
+
 
   const handleComponentChange = (component) => {
     const componentId = component.id || components.indexOf(component) + 1
