@@ -1,5 +1,5 @@
 
-import { Metadata } from 'next'
+
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
