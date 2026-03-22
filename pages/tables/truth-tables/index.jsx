@@ -20,31 +20,7 @@ export const metadata = {
 
 export default function TruthTablesPage({ seoData, keyWords, truthExplanations, menuItems }) {
 
-  // const menuItems=[
-
-  //   {
-  //     title: "Tautologies",
-  //     // icon: <Home />,
-  //     link: "/tables/truth-tables/tautologies"
-  //   },
-
-  //   {
-  //     title: "Implications",
-  //     // icon: <Home />,
-  //     link: "/tables/truth-tables/implications"
-  //   },
-  //   {
-  //     title: "Biconditionals",
-  //     // icon: <Home />,
-  //     link: "/tables/truth-tables/biconditionals"
-  //   },
-  //   {
-  //     title: "Contradictions",
-  //     // icon: <Home />,
-  //     link: "/tables/truth-tables/contradictions"
-  //   },
-
-  // ]
+  
   return (
     <>
     <Head>

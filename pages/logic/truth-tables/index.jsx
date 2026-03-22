@@ -1,5 +1,5 @@
 
-import { GetStaticProps } from 'next';
+
 import Head from 'next/head';
 import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 import LogicCalculator from '@/app/components/logic-calculator/LogicCalculator';
