@@ -99,8 +99,9 @@ const TruthTablesPage = ({ operatorDescriptions,menuItems }) => {
         <LogicCalculator />
         </div> */}
         <div style={{display: 'grid', gridTemplateColumns: '200px 1fr', gap: '20px', alignItems: 'start', paddingTop: '30px',width:'100%'}}>
-          <div style={{marginTop: '60px'}}>
-            <VerticalButtonGroup items={menuItems} width="200px" />
+          <div style={{marginTop: '-40px'}}>
+            <h2>Explore by Category</h2>
+            <VerticalButtonGroup items={menuItems} width="200px"/>
           </div>
           <LogicCalculator />
         </div>
