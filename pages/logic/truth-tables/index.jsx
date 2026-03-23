@@ -1,15 +1,12 @@
 
 
 import Head from 'next/head';
-import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 import LogicCalculator from '@/app/components/logic-calculator/LogicCalculator';
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
-
 import styles from './TruthTablesPage.module.css';
 import ReactMarkdown from 'react-markdown';
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
+import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
 
 
@@ -17,6 +14,26 @@ export const getStaticProps = async () => {
   const operatorDescriptions = await import('@/app/components/logic-calculator/operatorDescriptions');
   
   const keyWords = ['truth table', 'logic calculator', 'Boolean algebra', 'propositional logic', 'logical operators', 'AND', 'OR', 'NOT', 'XOR', 'NAND', 'NOR'];
+
+const menuItems = [
+  {
+    title: "Implications",
+    link: "/logic/truth-tables/implications"
+  },
+  {
+    title: "Biconditionals",
+    link: "/logic/truth-tables/biconditionals"
+  },
+  {
+    title: "Tautologies",
+    link: "/logic/truth-tables/tautologies"
+  },
+  {
+    title: "Contradictions",
+    link: "/logic/truth-tables/contradictions"
+  },
+]
+
 
   return {
     props: {
@@ -28,7 +45,8 @@ export const getStaticProps = async () => {
         name: "Dynamic Truth Table Generator"
       },
       operatorDescriptions: operatorDescriptions.default,
-      keyWords
+      keyWords,
+      menuItems,
     },
   };
 };
@@ -36,7 +54,7 @@ export const getStaticProps = async () => {
 
 
 
-const TruthTablesPage = ({ operatorDescriptions }) => {
+const TruthTablesPage = ({ operatorDescriptions,menuItems }) => {
   return (
     <>
      
@@ -77,8 +95,14 @@ const TruthTablesPage = ({ operatorDescriptions }) => {
       <Breadcrumb/>
       <main className={styles.main}>
         <h1 className={styles.title}>Dynamic Truth Table Generator</h1>
-        <div style={{transform:'scale(0.9)'}}>
+        {/* <div style={{transform:'scale(0.9)'}}>
         <LogicCalculator />
+        </div> */}
+        <div style={{display: 'grid', gridTemplateColumns: '200px 1fr', gap: '20px', alignItems: 'start', paddingTop: '30px',width:'100%'}}>
+          <div style={{marginTop: '60px'}}>
+            <VerticalButtonGroup items={menuItems} width="200px" />
+          </div>
+          <LogicCalculator />
         </div>
         <div id="operator-explanations" className={styles.explanations}>
           {Object.entries(operatorDescriptions).map(([symbol, data]) => (
@@ -95,13 +119,14 @@ const TruthTablesPage = ({ operatorDescriptions }) => {
                 </a>
               )}
               <br></br>
-              {<a href={'/tables/truth-tables'}  className={styles.readMore}>Check Truth Tables for Basic Logical Operators</a>}
+              {/* {<a href={'/tables/truth-tables'}  className={styles.readMore}>Check Truth Tables for Basic Logical Operators</a>} */}
               <br></br>
               <a href="#top" className={styles.backToTop}>Back to Top</a>
             </section>
             </>
           ))}
         </div>
+        
       </main>
       {/* <ScrollUpButton /> */}
     </>
