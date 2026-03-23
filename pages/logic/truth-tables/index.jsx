@@ -61,7 +61,7 @@ const TruthTablesPage = ({ operatorDescriptions }) => {
         <meta name="twitter:description" content="Generate dynamic truth tables for logical expressions. Learn about logical operators and Boolean algebra with our interactive tool." />
         <meta name="twitter:image" content="https://learnmathclass.com/images/truth-table-generator.jpg" />
       </Head>
-     <GenericNavbar/>
+     {/* <GenericNavbar/> */}
       <br></br>
       <br></br>
       <br></br>
@@ -103,7 +103,7 @@ const TruthTablesPage = ({ operatorDescriptions }) => {
           ))}
         </div>
       </main>
-      <ScrollUpButton />
+      {/* <ScrollUpButton /> */}
     </>
   );
 };
