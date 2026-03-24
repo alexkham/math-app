@@ -1,7 +1,6 @@
 
 
 
-import React from 'react'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import '../../pages.css'
 import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionWrapper'
