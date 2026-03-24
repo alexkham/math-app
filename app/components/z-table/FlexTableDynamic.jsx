@@ -1,7 +1,5 @@
 import React from 'react';
 import './FlexTable.css';
-import { cumulativeProbability,complementaryCumulativeProbability } from '@/app/utils/z-tables';
-import { probabilityBetweenZScores,twoTailedZScore } from '@/app/utils/z-tables';
 
 const FlexTableDynamic = ({ startZ = 0, endZ = 4.1, increment = 0.1, probabilityCalculation }) => {
     function cumulativeProbability(z) {

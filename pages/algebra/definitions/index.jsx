@@ -6,7 +6,6 @@ import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionW
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
-import SecondaryNavbar from '@/app/components/nav-bar/SecondaryNavbar'
 import '../../../pages/pages.css'
 
 export async function getStaticProps() {

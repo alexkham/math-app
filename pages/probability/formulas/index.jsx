@@ -1,6 +1,5 @@
 import React from 'react'
 import probabilityFormulaList from '@/app/api/db/formulas/probability/probabilityFormulasList'
-import MyNavbar from '@/app/components/nav-bar/MyNavbar'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import '../../pages.css'
 import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionWrapper'

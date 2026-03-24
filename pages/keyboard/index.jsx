@@ -6,7 +6,6 @@ import NewMultipleTypeWriter from '@/app/components/keyboards/NewMultipleTypeWri
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import Sections from '@/app/components/page-components/section/Sections'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../pages/pages.css'
 

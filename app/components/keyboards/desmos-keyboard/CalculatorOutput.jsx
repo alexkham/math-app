@@ -618,7 +618,6 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
-import { InlineMath, BlockMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
 import styles from './CalculatorOutput.module.css';
 import { processContent } from '@/app/utils/contentProcessor';

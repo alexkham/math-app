@@ -1,45 +1,10 @@
-import ButtonGroup from './components/button-group/ButtonGroup';
-import GenericTable from './components/generic-table/GenericTable';
-import MyAccordion from './components/my-accordion/MyAccordion';
 
-import SelectComponent from './components/select-component/SelectComponent';
-import SelectionPage from './components/SelectionPage';
-import  SelectionPageNavigate from './components/SelectionPageNavigate'
-import ParentComponent from './components/ParentSelect';
-import ParentSelect from './components/ParentSelect';
-import SelectTable2Steps from './components/select-table/SelectTable2Steps';
 import Link from 'next/link';
-import MyNavbar from './components/nav-bar/MyNavbar';
-import FlexTableDynamic from './components/z-table/FlexTableDynamic';
-import ZTableContainer from './components/z-table/ZTableContainer';
-import ZScoreVisualizer from './components/z-table/ZScoreVisualizer';
-import { pdf } from './utils/probability';
 
-import BellCurveHighlighted from './components/z-table/BellCurveHighlighted';
-import BellCurveHighlighted2 from './components/z-table/BellCurveHighlighted2';
-import TypeWriter from './components/keyboards/TypeWriter';
-import { primes } from './api/db/sequences/prime';
-import PrimeTable from './components/sequences/PrimeTable';
-import SequenceTable from './components/sequences/SequenceTable';
-import MermaidDiagram from './components/mermaid-diagram/MermaidDiagram';
-import TrigoCalculator from './components/trigo-calculator/TrigoCalculator';
-import LogarithmTable from './components/logarithm-table/LogarithmTable';
-import NaturalLogarithmTable from './components/logarithm-table/NaturalLogarithmTable';
-import Base2LogarithmTable from './components/logarithm-table/LogarithmBase2Table';
-import ExponentialTable from './components/logarithm-table/ExponentialTable';
-import PowerTable from './components/logarithm-table/PowerTable';
-import LogicCalculator from './components/logic-calculator/LogicCalculator';
-import MatrixMultiplication from './components/matrix-multiplication/MatrixMultiplication';
 import { parseSitemap } from '@/pages/api/sitemap';
 import HomePage from './components/home-page/HomePage';
-import { getMetaDescriptions } from './utils/getMetaDescriptions';
-import MathSolutionSlideshow from './components/examples/MathSolutionSlideShow';
 import metaDescriptions from './components/home-page/metaDescriptions'
 
-import GeneralAccordion from './components/accordion/GeneralAccordionComponent';
-import GeneralAccordionWrapper from './components/accordion/GeneralAccordionWrapper';
-import summaries from './api/db/tables/set-theory/summaries';
-import GenericNavbar from './components/nav-bar2/GenericNavbar';
 import MyNavbar3 from './components/nav-bar3/MyNavbar3';
 import Head from 'next/head';
 

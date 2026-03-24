@@ -7,11 +7,9 @@ import UnitCircle from '@/app/components/trigo-calculator/UnitCircle'
 import React from 'react';
 import '../../pages.css'
 import Head from 'next/head'
-import { processContent } from '@/app/utils/contentProcessor'
 import SvgDiagram from '@/app/components/diagrams/svg-diagram/SvgDiagram'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import Sections from '@/app/components/page-components/section/Sections'
-import PageIntro from '@/app/components/page-components/intro/PageIntro'
 
 
 export async function getStaticProps() {

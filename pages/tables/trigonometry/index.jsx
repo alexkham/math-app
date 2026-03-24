@@ -3,7 +3,6 @@ import NewCardGroup from '@/app/components/cards/NewCardGroup'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import '../../pages.css'
 // import styles from '../tables.module.css';
-import { TriangleRight } from 'lucide-react';
 
 
 export async function getStaticProps(){

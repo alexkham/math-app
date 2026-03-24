@@ -1,14 +1,11 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import React from 'react';
 import '../pages.css'
 import VerticalScrollingFormulaWidget from '@/app/components/examples/VerticalScrollingFormulaWidget';
 import trigonometryFormulaList from '@/app/api/db/formulas/trigonometry/trigonometryFormulas';
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents2';
-import { SectionIcon } from 'lucide-react';
 import Sections from '@/app/components/page-components/section/Sections';
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import IntroSection from '@/app/components/page-components/section/IntroContentSection';
 import trigonometryTermsList from '@/app/api/db/definitions/trigonometry/trigonometryDefinitions';
 import ToolsSlider from '@/app/components/sliders/ToolsSlider';

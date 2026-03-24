@@ -2723,7 +2723,6 @@
 
 // export default MatrixMultiplicationVisualizer;
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 
 const BraceSVG = ({ type, x, y, width, height, color, strokeWidth }) => {
   const d = (() => {

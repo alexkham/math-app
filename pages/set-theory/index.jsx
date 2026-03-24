@@ -1,20 +1,13 @@
 
 import React from 'react'
 import TableOfContents from '@/app/components/page-components/table-of-contents/TableOfContents';
-import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import '../pages.css'
 import ContentBlocks from '@/app/components/page-components/content-components/ContentBlocks';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import diagrams from '../../app/api/db/svg/set-theory/svg'
 //import diagramsReact from '../../app/api/db/svg/set-theory/svgReact'
-import styles from '../../app/components/page-components/content-components/ContentBlocks.module.css';
-import ChartVenn from '@/app/components/diagrams/VennDiagram';
-import StableChartVenn from '@/app/components/diagrams/StableChartVenn';
-import SetTheoryVennDiagram from '@/app/components/diagrams/SetTheoryDiagram';
-import SetTheoryVennDiagram2 from '@/app/components/diagrams/SetTheoryDiagram2';
 import Head from 'next/head';
-import SecondaryNavbar from '@/app/components/nav-bar/SecondaryNavbar';
 import summaries from '@/app/api/db/tables/set-theory/summaries';
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 

@@ -571,7 +571,6 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import React from 'react';
 import '../../pages.css';
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 import Sections from '@/app/components/page-components/section/Sections';
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents';

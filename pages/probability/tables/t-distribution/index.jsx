@@ -1,7 +1,6 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../../pages/pages.css'
 import '../../../../pages/tables/table.css'

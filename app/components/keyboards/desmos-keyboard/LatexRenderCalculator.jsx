@@ -3,8 +3,6 @@
 import React, { useState } from 'react';
 import CalculatorOutput from './CalculatorOutput';
 import CalculatorKeyboard from './CalculatorKeyboard';
-import { mathKeyboardLayout } from './mathKeyboardLayout';
-import { processContent } from '@/app/utils/contentProcessor';
 
 const LaTeXRenderCalculator = ({ keyboardLayout }) => {
   const [expression, setExpression] = useState('');

@@ -221,7 +221,7 @@ import React from 'react';
 import { InlineMath, BlockMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
 import styles from './TableOfContents.module.css';
-import { lora700,poppins500,roboto } from '@/app/utils/fonts';
+import { lora700,roboto } from '@/app/utils/fonts';
 
 const createSlug = (text) => {
   const cleanText = text.replace(/\s*\(.*?\)\s*/g, '').trim();

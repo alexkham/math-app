@@ -3,8 +3,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { processContent } from '@/app/utils/contentProcessor';
-import { capitalizeWords } from '@/app/utils/utils-functions';
-import { color } from 'framer-motion';
 
 const ChevronLeft = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '24px', height: '24px' }}>

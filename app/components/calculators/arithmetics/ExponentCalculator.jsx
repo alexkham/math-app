@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Decimal from 'decimal.js';
 import styles from './Exponent.module.css';
-import ExplanationDetails from '@/app/components/ExplanationDetails';
 import { processContent } from '@/app/utils/contentProcessor';
 
 function ExponentCalculator({ explanations, detailInstructions }) {

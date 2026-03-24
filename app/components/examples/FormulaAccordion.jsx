@@ -1,6 +1,6 @@
 
 
-import React, { useId } from 'react';
+import React from 'react';
 import styles from '../accordion/GeneralAccordion.module.css';
 import FormulaWidget from './FormulaWidget';
 import { capitalizeWords } from '@/app/utils/utils-functions';

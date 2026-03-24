@@ -3,7 +3,6 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import React from 'react'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import { Section } from 'lucide-react'
 import Sections from '@/app/components/page-components/section/Sections'
 import '../../../pages/pages.css'
 

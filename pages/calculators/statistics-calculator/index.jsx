@@ -24,7 +24,6 @@
 //   )
 // }
 import Head from 'next/head'
-import MyNavbar from '@/app/components/nav-bar/MyNavbar'
 import React from 'react'
 import StatisticsCalculator from '@/app/components/calculators/statistics/StatisticsCalculator'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'

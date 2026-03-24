@@ -5,6 +5,18 @@
 //   }
 // }
 
+// {
+//   "extends": "next/core-web-vitals"
+// }
+
+
+
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "plugins": ["unused-imports"],
+  "rules": {
+    "no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "warn",
+    "unused-imports/no-unused-vars": ["warn", { "varsIgnorePattern": "^_" }]
+  }
 }

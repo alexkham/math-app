@@ -5,11 +5,9 @@ import React from 'react'
 import '../../../pages.css'
 import CoOccurrenceMatrix from '@/app/components/matrices/CoOccurenceMatrix'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
-import Explanations from '@/app/components/Explanations'
 import { processContent } from '@/app/utils/contentProcessor'
 import Sections from '@/app/components/page-components/section/Sections'
 import MyList from '@/app/components/page-components/lists/MyList'
-import MathContainer from '@/app/components/math-content/MathContainer'
 import katex from "katex";
 import Head from 'next/head'
 
@@ -162,7 +160,7 @@ export default function MatrixTypesPage({
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -215,7 +213,7 @@ export default function MatrixTypesPage({
 </div>
   <br/>
   <br/>
-  <ScrollUpButton/>
+  {/* <ScrollUpButton/> */}
    </>
   )
 }

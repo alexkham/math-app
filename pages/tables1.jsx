@@ -5,9 +5,7 @@ import path from 'path';
 import { capitalizeWords } from '@/app/utils/utils-functions';
 //import './tables.css'
 import MyNavbar from '@/app/components/nav-bar/MyNavbar';
-import LogarithmTable from '@/app/components/logarithm-table/LogarithmTable';
 import Head from 'next/head';
-import SecondaryNavbar from '@/app/components/nav-bar/SecondaryNavbar';
 
 
 export async function getStaticProps() {

@@ -4,11 +4,8 @@ import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import React from 'react'
 import '../../pages.css'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
-import { Sidebar } from 'lucide-react'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import Head from 'next/head'
-import TrigoCalculator from '@/app/components/trigo-calculator/TrigoCalculator'
-import InverseTrigoCalculator from '@/app/components/trigo-calculator/InverseTrigoCalculator'
 import CalculatorSwitcher from '@/app/components/calculators/CalculatorSwitcher'
 
 export default function TrigonometryCalculatorPage({ explanations ,inverseTrigoExplanations}) {

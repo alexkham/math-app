@@ -1,6 +1,5 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import PermutationsVisualizer2 from '@/app/components/combinatorics/PermutationsVisualizer2'
-import MyNavbar from '@/app/components/nav-bar/MyNavbar'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../pages.css'

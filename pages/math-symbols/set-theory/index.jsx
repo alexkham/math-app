@@ -1,12 +1,10 @@
 
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 import React from 'react';
 import Head from 'next/head';
 import '../../pages.css'
 import DataWrapper from '@/app/components/generic-table/DataWrapper';
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
 import VerticalSidebarFrame from '@/app/components/vertical-buttons/VerticalBarGroupFrame';
 

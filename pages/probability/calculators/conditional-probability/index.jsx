@@ -44,11 +44,8 @@
 
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import ConditionalProbabilityTable from '@/app/components/probability/conditional-probability-demo/ConditionalProbabilityTable'
 import React from 'react'
 import '../../../../pages/pages.css'

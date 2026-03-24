@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { Book, Calculator, PieChart, Sigma, Percent,Section ,DraftingCompass,BookOpenCheck } from 'lucide-react';
 import styles from './tables.module.css';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 
 const categoryIcons = {

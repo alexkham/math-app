@@ -55,7 +55,6 @@
 import React from 'react'
 import '../../pages.css'
 import DeterminantCalculator from '@/app/components/matrix-multiplication/DeterminantCalculator'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import Head from 'next/head'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'

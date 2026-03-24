@@ -542,11 +542,8 @@
 import Head from 'next/head';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
-import IntroSection from '@/app/components/page-components/section/IntroContentSection';
 import Sections from '@/app/components/page-components/section/Sections';
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents';
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import FactoringCalculator from '@/app/components/calculators/algebra/FactoringCalculator';
 import '../../pages.css';
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';

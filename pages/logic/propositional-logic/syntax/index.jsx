@@ -3,16 +3,12 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import React from 'react'
 import '../../../pages.css'
-import VerticalScrollingFormulaWidget from '@/app/components/examples/VerticalScrollingFormulaWidget'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import Sections from '@/app/components/page-components/section/Sections'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Head from 'next/head'
-import { createContentHtml } from '@/app/utils/utils-functions'
-import ToolsSlider from '@/app/components/sliders/ToolsSlider'
 import MyList from '@/app/components/page-components/lists/MyList'
-import { renderAcademicBlockHTML } from '@/app/utils/academicBlocks'
 
 export async function getStaticProps() {
 //  const { default: logicFormulasList } = await import('@/app/api/db/formulas/logic/logicFormulasList')

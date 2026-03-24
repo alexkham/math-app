@@ -4,13 +4,7 @@
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
-import GoHomeButton from './components/GoHomeButton';
-import GoBackButton from './components/GoBackButton';
 import ScrollUpButton from './components/scroll-up-button/ScrollUpButton';
-import MyNavbar from './components/nav-bar/MyNavbar';
-import { mainMenuStructure } from './components/nav-bar2/mainMenu';
-import GenericNavbar from './components/nav-bar2/GenericNavbar';
-import Head from 'next/head';
 
 const inter = Inter({ subsets: ['latin'] });
 

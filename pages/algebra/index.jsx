@@ -9,11 +9,6 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Head from 'next/head';
 import { createContentHtml } from '@/app/utils/utils-functions'
 import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
-import SecondaryNavbar from '@/app/components/nav-bar/SecondaryNavbar'
-import { fetchSiteNavLinks } from '@/app/utils/navLinks'
-import StaticSectionTableOfContents from '@/app/components/page-components/section/StaticSectionTableOfContent'
-import SEOFriendlySectionTableOfContents from '@/app/components/page-components/section/SEOFriendlyTableofContents'
-import SectionTableOfContents2 from '@/app/components/page-components/section/SectionTableofContents2'
 import ToolsSlider from '@/app/components/sliders/ToolsSlider'
 import '../../pages/pages.css'
 

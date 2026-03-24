@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import './MyNavbar2.css'
-import SearchBar from './SearchBar'
 import SearchBar2 from './SearchBar2'
 
 function MyNavbar2() {

@@ -28,7 +28,6 @@ import Script from "next/script";
 
 import ScrollUpButton from "@/app/components/scroll-up-button/ScrollUpButton";
 import ScrollToBottom from "@/app/components/scroll-up-button/ScrollToBottom";
-import ScrollToTop from "@/app/components/scroll-up-button/ScrollToTop";
 import Footer from "@/app/components/page-components/footer/Footer";
 import MyNavbar3 from "@/app/components/nav-bar3/MyNavbar3";
 

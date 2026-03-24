@@ -1,6 +1,5 @@
 import React from 'react';
 import '../z-table/FlexTable.css';
-import { cumulativeProbabilityT, complementaryCumulativeProbabilityT } from '@/app/utils/t-tables';
 
 const FlexTableDynamic = ({ startT = 0, endT = 4.1, increment = 0.1, probabilityCalculation, degreesOfFreedom }) => {
   const generateTableData = () => {

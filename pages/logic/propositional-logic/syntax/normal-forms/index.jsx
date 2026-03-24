@@ -1,8 +1,6 @@
 
 
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import CNFConverter from '@/app/components/logic-calculator/normal-form-converters/CNFConverter'
-import DNFConverter from '@/app/components/logic-calculator/normal-form-converters/DNFConverter'
 import NormalFormsConverter from '@/app/components/logic-calculator/normal-form-converters/NormalFormsConverter'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'

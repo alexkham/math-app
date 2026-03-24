@@ -3,7 +3,6 @@ import React ,{useState} from 'react'
 import SelectComponent from '../select-component/SelectComponent';
 import { cumulativeProbability,complementaryCumulativeProbability } from '@/app/utils/z-tables';
 import FlexTableDynamic from './FlexTableDynamic';
-import { probabilityBetweenZScores,twoTailedZScore } from '@/app/utils/z-tables';
 import './FlexTable.css'
 
 const z_tables = {

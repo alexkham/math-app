@@ -4,9 +4,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './LogicCalculator.css';
 import operatorDescriptions from './operatorDescriptions';
-import ReactMarkdown from 'react-markdown';
-import { roboto } from '@/app/utils/fonts';
-import Link from 'next/link';
 
 // const markdown = `
 // # Understanding the Logical OR Operator (∨)

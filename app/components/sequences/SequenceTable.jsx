@@ -7,7 +7,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm'
 import 'katex/dist/katex.min.css'; 
-import { anton ,roboto_mono , poppins ,inter} from '@/app/fonts';
+import {  inter} from '@/app/fonts';
 
 
 const SequenceTable = ({ sequenceData, sequenceTitle ,article}) => {

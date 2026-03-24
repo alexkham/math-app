@@ -262,7 +262,7 @@
 'use client'
 
 import React, { useState } from 'react';
-import { capitalizeWords, range } from '@/app/utils/utils-functions';
+import { range } from '@/app/utils/utils-functions';
 import './InverseTrigoCalculator.css';
 import Link from 'next/link';
 

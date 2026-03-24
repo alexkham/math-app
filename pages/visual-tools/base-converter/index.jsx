@@ -26,7 +26,6 @@
 // pages/base-converter.js
 import React from 'react';
 import Head from 'next/head';
-import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 import BaseVisualizer2 from '@/app/components/base-visualizer/BaseVisualizer2';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import '../../pages.css'

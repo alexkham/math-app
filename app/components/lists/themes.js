@@ -1,5 +1,4 @@
 // themes.js
-import { BookOpen, Sparkles, Zap, Shield, Check, Star, ArrowRight, Circle } from 'lucide-react';
 
 export const themes = {
   modern: {

@@ -1,10 +1,8 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
@@ -461,7 +459,7 @@ Let $z_1 = 10\\,\\text{cis}\\,\\frac{2\\pi}{3}$ and $z_2 = 2\\,\\text{cis}\\,\\f
 
 $$\\frac{z_1}{z_2} = \\frac{10}{2}\\,\\text{cis}\\left(\\frac{2\\pi}{3} - \\frac{\\pi}{6}\\right) = 5\\,\\text{cis}\\,\\frac{\\pi}{2}$$
 
-These formulas extend naturally to [De Moivre's theorem](!/complex-numbers/de-moivres-theorem), which handles powers and roots with equal elegance.`,
+These formulas extend naturally to [De Moivre's theorem](!/complex-numbers/demoivres-theorem), which handles powers and roots with equal elegance.`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[De Moivre's Theorem](!/complex-numbers/de-moivres-theorem) →@`,
   link: '',

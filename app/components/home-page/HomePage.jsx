@@ -2,7 +2,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, ChevronLeft, SquareChevronUp, Book } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Book } from 'lucide-react';
 import styles from './HomePage.module.css';
 import { capitalizeWords, formatTitle } from '@/app/utils/utils-functions';
 import Image from 'next/image';

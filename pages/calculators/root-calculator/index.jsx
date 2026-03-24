@@ -303,12 +303,9 @@
 import Head from 'next/head';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
-import IntroSection from '@/app/components/page-components/section/IntroContentSection';
 import Sections from '@/app/components/page-components/section/Sections';
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents';
 import ExplanationDetails from '@/app/components/ExplanationDetails';
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import RootCalculator from '@/app/components/calculators/arithmetics/RootCalculator';
 import '../../pages.css';
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';

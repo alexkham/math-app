@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function VarianceVisualizer() {
   const [dataPoints, setDataPoints] = useState([12, 15, 18, 20, 22, 25, 28]);
