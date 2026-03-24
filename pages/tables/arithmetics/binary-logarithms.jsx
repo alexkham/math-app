@@ -1,7 +1,4 @@
 
-import MyNavbar from '@/app/components/nav-bar/MyNavbar'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
-import React from 'react'
 import '../table.css'
 import '../../../app/globals.css'
 import Base2LogarithmTable from '@/app/components/logarithm-table/LogarithmBase2Table'
@@ -12,7 +9,7 @@ export default function BinaryLogarithmTablePage() {
   return (
    <>
    <div className='tables-main'>
-   <MyNavbar></MyNavbar>
+   {/* <MyNavbar></MyNavbar> */}
    <br></br>
    <br></br>
   
@@ -29,7 +26,7 @@ export default function BinaryLogarithmTablePage() {
    <br></br>
    <br></br>
    <br></br>
-   <ScrollUpButton></ScrollUpButton>
+   {/* <ScrollUpButton></ScrollUpButton> */}
    </div>
    </>
   )

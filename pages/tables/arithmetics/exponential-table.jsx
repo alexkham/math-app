@@ -1,11 +1,7 @@
-import MyNavbar from '@/app/components/nav-bar/MyNavbar'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
-import React from 'react'
 import '../table.css'
 import '../../../app/globals.css'
 import ExponentialTable from '@/app/components/logarithm-table/ExponentialTable'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 
 export default function ExponentialTablePage() {

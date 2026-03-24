@@ -1,73 +1,9 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-// import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
-// import SquareRootsTable from '@/app/components/tables/SquareRootsTable'
-// import React from 'react';
-// import '../../../pages.css'
-// import ExplanationDetails from '@/app/components/ExplanationDetails'
-
-// export default function PerfectSquaresTablePage() {
-//     const keyWords=['perfect square ', 'square root'];
-
-//     const combinedInstructions = [
-//         "Use the search bar to find any perfect square between 1 and 10000",
-//         "Table shows perfect squares organized in columns for easy reading",
-//         "Each entry shows both the square root (√) and its perfect square",
-//         "Numbers not found in search aren't perfect squares",
-       
-//         "Perfect squares are numbers that result from an integer multiplied by itself",
-//         "For example: 1=1×1, 4=2×2, 9=3×3, 16=4×4",
-//         "They follow a pattern: each perfect square is the previous one plus the next odd number",
-//         "Used extensively in geometry for area calculations and in algebra for factoring",
-//         "You can always find their exact square root (no decimals)",
-//         "Perfect squares connect to many math concepts like the Pythagorean theorem"
-//       ];
-    
-
-//   return (
-//     <>
-//     <GenericNavbar/>
-//     <br/>
-//     <br/>
-//     <br/>
-//     <br/>
-//     <Breadcrumb/>
-//     <OperaSidebar 
-//       side='right'
-//       topOffset='65px' 
-//       sidebarWidth='45px'
-//       panelWidth='300px'
-      
-//       iconColor='white'
-//       panelBackgroundColor='#f2f2f2'/> 
-//     <h1 className='title' style={{marginTop:'-30px',marginBottom:'30px'}}> Perfect Squares 1 - 10000 </h1>
-//     <div style={{ marginBottom: '-30px' }}>
-       
-//         <ExplanationDetails
-//           title="About This Table"
-//           instructions={combinedInstructions}
-//         />
-//       </div>
-//     <div style={{transform:'scale(0.9)'}}>
-//     <SquareRootsTable/>
-//     </div>
-//     <br/>
-//     <br/>
-//     <br/>
-//     <ScrollUpButton/>
-
-//     </>
-//   )
-// }
 
 
-import React from 'react';
+
 import Head from 'next/head';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import SquareRootsTable from '@/app/components/tables/SquareRootsTable';
 import ExplanationDetails from '@/app/components/ExplanationDetails';
 import '../../../pages.css';
@@ -94,7 +30,7 @@ export default function PerfectSquaresTablePage({ keyWords, combinedInstructions
         <meta name="twitter:description" content="Explore perfect squares and their square roots with our interactive table and search tool." />
       </Head>
 
-      <GenericNavbar/>
+      {/* <GenericNavbar/> */}
       <br/>
       <br/>
       <br/>
@@ -131,7 +67,7 @@ export default function PerfectSquaresTablePage({ keyWords, combinedInstructions
       <br/>
       <br/>
       <br/>
-      <ScrollUpButton/>
+      {/* <ScrollUpButton/> */}
     </>
   );
 }

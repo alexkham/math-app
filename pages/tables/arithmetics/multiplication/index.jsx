@@ -1,11 +1,5 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
-import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import MultiplicationTables from '@/app/components/tables/MultiplicationTables'
@@ -159,7 +153,7 @@ export default function MultiplicationTablesPage({seoData,sectionsContent , intr
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -197,7 +191,7 @@ export default function MultiplicationTablesPage({seoData,sectionsContent , intr
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

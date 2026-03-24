@@ -1,7 +1,4 @@
 import NaturalLogarithmTable from '@/app/components/logarithm-table/NaturalLogarithmTable'
-import MyNavbar from '@/app/components/nav-bar/MyNavbar'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
-import React from 'react'
 import '../table.css'
 import '../../../app/globals.css'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
@@ -10,7 +7,7 @@ export default function NaturalLogarithmTablePage() {
   return (
    <>
    <div className='tables-main'>
-   <MyNavbar></MyNavbar>
+   {/* <MyNavbar></MyNavbar> */}
    <br></br>
    <br></br>
   
@@ -27,7 +24,7 @@ export default function NaturalLogarithmTablePage() {
    <br></br>
    <br></br>
    <br></br>
-   <ScrollUpButton></ScrollUpButton>
+   {/* <ScrollUpButton></ScrollUpButton> */}
    </div>
    </>
   )

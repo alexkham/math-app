@@ -1,10 +1,7 @@
 import dynamic from 'next/dynamic'
-import MyNavbar from '@/app/components/nav-bar/MyNavbar'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import '../../../pages.css'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import Head from 'next/head'
 
 // Dynamically import the client component with no SSR
@@ -136,7 +133,7 @@ export default function LogarithmTablePage({sectionsContent,seoData,keyWords}) {
     }}
   />
 </Head>
-      <GenericNavbar/>
+      {/* <GenericNavbar/> */}
       <br />
       <br />
       <br />
@@ -155,7 +152,7 @@ export default function LogarithmTablePage({sectionsContent,seoData,keyWords}) {
         <h1 className='title' style={{marginTop:'-20px',marginBottom:'-30px'}}>Logarithm Table</h1>
         <LogarithmTable />
       </div>
-      <ScrollUpButton />
+      {/* <ScrollUpButton /> */}
     </div>
   )
 }

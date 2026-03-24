@@ -1,9 +1,6 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import PowerTable from '@/app/components/tables/PowerTable'
-import React from 'react'
 import '../../../pages.css'
 import ExplanationDetails from '@/app/components/ExplanationDetails';
 import Head from 'next/head'
@@ -20,7 +17,7 @@ export default function PowersTablePage({keyWords,instructions}) {
         
       
       </Head>
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -51,7 +48,7 @@ export default function PowersTablePage({keyWords,instructions}) {
     <br/>
     <br/>
     <br/>
-    <ScrollUpButton/>
+    {/* <ScrollUpButton/> */}
     </>
   )
 }
