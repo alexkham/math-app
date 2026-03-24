@@ -1,6 +1,6 @@
 
 
-
+'use client';
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import styles from './OperaSidebar.module.css';
