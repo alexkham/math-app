@@ -658,7 +658,7 @@ export default function MatrixRankCalculator() {
               </h3>
               <div style={{ fontSize: '12px', color: '#374151', lineHeight: '1.6' }}>
                 <p style={{ marginBottom: '6px' }}>
-                  The <strong>rank</strong> of a matrix is the number of linearly independent rows (or columns — they're always equal). Equivalently, it's the number of pivots in Row Echelon Form.
+                  The <strong>rank</strong> of a matrix is the number of linearly independent rows (or columns — they&apos;re always equal). Equivalently, it&apos;s the number of pivots in Row Echelon Form.
                 </p>
                 <p style={{ marginBottom: '6px' }}>
                   For an m×n matrix, rank ≤ min(m, n). When rank = min(m, n) the matrix has <strong>full rank</strong>. Otherwise it is <strong>rank-deficient</strong>.
@@ -704,7 +704,7 @@ export default function MatrixRankCalculator() {
                   <strong style={{ color: '#166534' }}>Pivot columns (P)</strong> — contain a leading 1 in REF. These columns are linearly independent and form a basis for the column space.
                 </p>
                 <p style={{ marginBottom: '0' }}>
-                  <strong style={{ color: '#b45309' }}>Free columns (F)</strong> — no pivot. Each free column gives one degree of freedom in the null space. The corresponding variable is "free" when solving Ax = 0.
+                  <strong style={{ color: '#b45309' }}>Free columns (F)</strong> — no pivot. Each free column gives one degree of freedom in the null space. The corresponding variable is &quot;free&quot; when solving Ax = 0.
                 </p>
               </div>
             </div>
