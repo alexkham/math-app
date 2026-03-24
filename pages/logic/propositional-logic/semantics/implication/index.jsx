@@ -1,11 +1,8 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import React from 'react'
 import '../../../../pages.css'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import Sections from '@/app/components/page-components/section/Sections'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import MyList from '@/app/components/page-components/lists/MyList'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import ExpandableTable from '@/app/components/generic-table/ExpandableTable'
@@ -336,7 +333,7 @@ export default function ImplicationPage({implicationLaws ,introContent ,properti
     }}
   />
 </Head>
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -368,7 +365,7 @@ export default function ImplicationPage({implicationLaws ,introContent ,properti
        />
     <Sections sections={implicationSections}/>
     <br/>
-    <ScrollUpButton/>
+    {/* <ScrollUpButton/> */}
     
     </>
   )
