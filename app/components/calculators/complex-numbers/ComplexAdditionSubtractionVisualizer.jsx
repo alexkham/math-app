@@ -69,6 +69,7 @@ export default function ComplexAddSubVisualizer() {
     const pt = fromSvg(sx, sy);
     const setter = dragging === 'z1' ? setZ1 : setZ2;
     setter({ re: clamp(pt.re), im: clamp(pt.im) });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dragging]);
 
   const handlePointerUp = useCallback(() => {
