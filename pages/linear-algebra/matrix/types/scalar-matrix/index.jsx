@@ -1,9 +1,6 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import React from 'react'
 import '../../../../pages.css'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
@@ -45,73 +42,9 @@ export default function ScalarMatrixPage() {
         `\nGeneral form for $n \\times n$ case: $S_{n\\times n} = cI = \\begin{pmatrix} c & 0 & 0 & \\cdots & 0 \\\\ 0 & c & 0 & \\cdots & 0 \\\\ 0 & 0 & c & \\cdots & 0 \\\\ \\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & 0 & \\cdots & c \\end{pmatrix}$.`
             ]
         },
-//         {
-//             id: `special_matrices`,
-//             title: `Relation to Other Special Matrices`,
-//             content: [
-//                 `The [definition](!/linear-algebra/matrix/types/diagonal-matrix#definition) of a diagonal matrix - requiring only that all non-diagonal elements be zero - creates a broad category that naturally includes several other matrix types as special cases.`,
 
              
-             
-//                 `Since it (the definition) sets no special requirements for  diagonal elements, diagonal matrices include also:`,             
-//                 `\n**Zero Matrix**: Where all elements (including diagonal) are 0.
-//                 [Identity Matrix](!/linear-algebra/matrix/types/identity-matrix): Where all diagonal elements are **1** and other equal to **0**.
-//                 **Scalar Matrix**: When all diagonal elements are equal to some scalar λ and other equal to **0**.`,
-             
-//                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 280">
-//     <!-- Diagonal Matrix (largest ellipse) -->
-//     <ellipse cx="175" cy="140" rx="154" ry="112" 
-//              fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
-//     <text x="175" y="56" text-anchor="middle" font-family="Arial" font-size="16" fill="#1565C0">
-//         Diagonal Matrices
-//     </text>
-//     <text x="175" y="70" text-anchor="middle" font-family="Arial" font-size="12" fill="#1565C0">
-//         (aᵢⱼ = 0 for i ≠ j)
-//     </text>
-
-//     <!-- Scalar Matrix (medium ellipse) -->
-//     <ellipse cx="175" cy="161" rx="98" ry="70" 
-//              fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
-//     <text x="175" y="126" text-anchor="middle" font-family="Arial" font-size="16" fill="#2E7D32">
-//         Scalar Matrices
-//     </text>
-//     <text x="175" y="140" text-anchor="middle" font-family="Arial" font-size="12" fill="#2E7D32">
-//         (all diagonal elements = λ)
-//     </text>
-
-//     <!-- Identity Matrix (small circle) -->
-//     <circle cx="119" cy="175" r="28" 
-//             fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
-//     <text x="119" y="179" text-anchor="middle" font-family="Arial" font-size="14" fill="#E65100">
-//         Identity
-//     </text>
-
-//     <!-- Zero Matrix (inside scalar, separated from identity) -->
-//     <circle cx="224" cy="175" r="28" 
-//             fill="#F3E5F5" stroke="#6A1B9A" stroke-width="2"/>
-//     <text x="224" y="179" text-anchor="middle" font-family="Arial" font-size="14" fill="#6A1B9A">
-//         Zero
-//     </text>
-
-//     <!-- Legend -->
-//     <text x="21" y="266" font-family="Arial" font-size="12" fill="#E65100">
-//         Note: Identity (λ = 1) and Zero (λ = 0)
-//     </text>
-//     <text x="21" y="280" font-family="Arial" font-size="12" fill="#E65100">
-//         are special cases of scalar matrices
-//     </text>
-// </svg>`,
-               
-//               `\nOn the other hand, **diagonal matrices**, by their definition, belong to both **upper** and **lower triangular** matrix categories simultaneously, since they satisfy both conditions: having zeros below the main diagonal (upper triangular) and having zeros above the main diagonal (lower triangular). This makes diagonal matrices a special intersection case of **triangular matrices**.`,
-//               `\nAny **diagonal matrix** (and so **identity**, **zero** and **scalar matrices** as a sub-sets of diagonal) is automatically symmetric, since the condition for symmetry (aᵢⱼ = aⱼᵢ for all i,j) is naturally satisfied when all off-diagonal elements are zero.
-//               However, the opposite is not always true : **symmetric matrices** form a broader category as they can have non-zero elements anywhere as long as they mirror across the main diagonal.`,
-//                `\nThe relationship between **diagonal** and **skew-symmetric matrices** has one special case: the zero matrix is the only matrix that satisfies both definitions, since it's the only matrix that can have all elements equal to zero (including the diagonal) while maintaining the skew-symmetric property aᵢⱼ = -aⱼᵢ.`,
-//                 `\n**To learn more about relationships between different types of square matrices, visit this** [page](!/linear-algebra/matrix/types).`,
-//                 `\n You may also check our [matrix types generator tool](!/visual-tools/matrix-types) for visual illustration of different types of square matrices`
-
-
-//             ]
-//         },
+       
         {
             id: `properties`,
             title: `Basic Properties`,
@@ -224,7 +157,7 @@ export default function ScalarMatrixPage() {
     
   return (
     <>
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -254,7 +187,7 @@ export default function ScalarMatrixPage() {
         
     <br/>
     <br/>
-    <ScrollUpButton/>
+    {/* <ScrollUpButton/> */}
     
     </>
   )

@@ -1,9 +1,6 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import React from 'react'
 import '../../../../pages.css'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
@@ -322,7 +319,7 @@ While simple in structure, the zero matrix plays a critical role in linear algeb
     
   return (
     <>
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -352,7 +349,7 @@ While simple in structure, the zero matrix plays a critical role in linear algeb
         
     <br/>
     <br/>
-    <ScrollUpButton/>
+    {/* <ScrollUpButton/> */}
     
     </>
   )
