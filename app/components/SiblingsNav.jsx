@@ -106,7 +106,7 @@ export default function SiblingsNav({
     else setLoading(false);
 
     return () => { cancelled = true; };
-  }, [parentPath]);
+  }, [parentPath, parts.length]);
 
   /* If too shallow or only one sibling, just render children as-is */
   const showNav = !loading && siblings.length > 1 && parts.length >= 2;

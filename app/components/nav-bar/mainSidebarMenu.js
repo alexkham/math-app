@@ -79,7 +79,7 @@ const CustomConvert=()=>(
         { text: 'Probability Tables', url: '/tables/probability' },
         { text: 'Arithmetics Tables', url: '/tables/arithmetics' },
         { text: 'Mathematical Symbols', url: '/math-symbols' },
-        { text: 'Truth Tables', url: '/tables/truth-tables' },
+        { text: 'Truth Tables', url: '/logic/truth-tables' },
         { text: 'Angle Conversion Table', url: '/tables/angle-conversion' },
         { text: 'Trigonometry Tables', url: '/tables/trigonometry' },
         
