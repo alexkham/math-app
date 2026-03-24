@@ -1,6 +1,10 @@
+// {
+//   "extends": "next/core-web-vitals",
+//   "rules": {
+//     "no-unused-vars": ["warn", { "varsIgnorePattern": "^_" }]
+//   }
+// }
+
 {
-  "extends": "next/core-web-vitals",
-  "rules": {
-    "no-unused-vars": ["warn", { "varsIgnorePattern": "^_" }]
-  }
+  "extends": "next/core-web-vitals"
 }
