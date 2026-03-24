@@ -256,6 +256,7 @@ This operation requires additional implementation for the power value input.
     } else {
       setResult(null)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [z1, z2, operation])
 
   const needsSecondNumber = !['conjugate', 'modulus'].includes(operation)
