@@ -1,9 +1,6 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import DegreeRadianConversionTable from '@/app/components/tables/conversion-tables/DegreeRadianConversion'
-import React from 'react'
 import '../../pages.css'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
@@ -92,7 +89,7 @@ export default function AngleConversionTable({sectionsContent,keyWords,navigatio
   
   return (
     <>
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -153,7 +150,7 @@ export default function AngleConversionTable({sectionsContent,keyWords,navigatio
     <br/>
     <br/>
     <br/>
-    <ScrollUpButton/>
+    {/* <ScrollUpButton/> */}
     
     </>
   )

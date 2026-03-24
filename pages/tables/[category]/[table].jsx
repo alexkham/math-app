@@ -1,13 +1,6 @@
-import React from 'react';
-import RootLayout from './layout'
 import GenericTable from '@/app/components/generic-table/GenericTable';
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import '../table.css'
-import MyNavbar from '@/app/components/nav-bar/MyNavbar';
-import FlexTableDynamic from '@/app/components/z-table/FlexTableDynamic';
-import { cumulativeProbability,complementaryCumulativeProbability } from '@/app/utils/z-tables';
 import ZTableContainer from '@/app/components/z-table/ZTableContainer';
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 
 
 // Function to generate static paths for each category and table
@@ -64,7 +57,7 @@ export default function TablePage({ category, table, selectedItem }) {
        
      <>
      {/* <MyNavbar></MyNavbar> */}
-     <GenericNavbar/>
+     {/* <GenericNavbar/> */}
    
         
       
@@ -86,7 +79,7 @@ export default function TablePage({ category, table, selectedItem }) {
     <br></br>
     <br></br>
     <br></br>
-    <ScrollUpButton></ScrollUpButton>
+    {/* <ScrollUpButton></ScrollUpButton> */}
 
     
      

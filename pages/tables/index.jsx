@@ -30,7 +30,7 @@ export default function Tables({ categories ,categoryLinks }) {
         <meta name="description" content="Explore our comprehensive collection of mathematical tables including algebra, calculus, trigonometry, probability, and arithmetics." />
         <link rel="canonical" href="https://www.learnmathclass.com/tables" />
       </Head>
-      <GenericNavbar/>
+      {/* <GenericNavbar/> */}
       <br/>
       <br/>
       <br/>

@@ -117,7 +117,7 @@ export default function TrigonometryDefinitionsPage({
         />
       </Head>
 
-      <GenericNavbar />
+      {/* <GenericNavbar /> */}
       <br />
       <br />
       <br />
@@ -148,7 +148,7 @@ export default function TrigonometryDefinitionsPage({
         <br />
         <br />
         <br />
-        <ScrollUpButton />
+        {/* <ScrollUpButton /> */}
       </main>
     </>
   )

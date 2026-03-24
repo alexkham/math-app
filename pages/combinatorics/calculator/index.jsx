@@ -1,10 +1,7 @@
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import React from 'react'
 import { useSearchParams } from 'next/navigation'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import CombinatoricsCalculator from '@/app/components/calculators/combinatorics/CombinatoricsCalculator'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import '../../pages.css'
 import Head from 'next/head'
 
@@ -191,7 +188,7 @@ export default function CombinatoricsCalculatorPage({ seoData, explanationsMappi
    }}
  />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -238,7 +235,7 @@ export default function CombinatoricsCalculatorPage({ seoData, explanationsMappi
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    
    
    

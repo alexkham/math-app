@@ -257,15 +257,19 @@ export default function MultipleComplexAddition() {
     ctx.fillText("Σ", toX(result.re) + 10, toY(result.im) - 8);
   }, [numbers, result, partials, hovered, t, zoom, pan]);
 
-  useEffect(() => { draw(); }, [draw]);
+  useEffect(() => { draw(); }, 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  [draw]);
   useEffect(() => {
     const cvs = canvasRef.current; if (!cvs) return;
     const resize = () => { const r = cvs.parentElement.getBoundingClientRect(); cvs.width = r.width; cvs.height = r.height; draw(); };
     resize(); window.addEventListener("resize", resize); return () => window.removeEventListener("resize", resize);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [draw]);
   useEffect(() => {
     const el = canvasRef.current?.parentElement; if (!el) return;
     const h = (e) => e.preventDefault(); el.addEventListener("wheel", h, { passive: false }); return () => el.removeEventListener("wheel", h);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /* ─── input row ─── */

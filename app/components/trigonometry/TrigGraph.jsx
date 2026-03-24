@@ -1,11 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine, ReferenceArea } from 'recharts';
 
-const TrigGraph = ({ functionType, currentValue, currentAngle = Math.PI/6 }) => {
-  const [zoomDomain, setZoomDomain] = useState([-2 * Math.PI, 2 * Math.PI]);
-  const [rangeDomain, setRangeDomain] = useState([-4, 4]);
 
-  const functionDefinitions = {
+ const functionDefinitions = {
     sin: (x) => Math.sin(x),
     cos: (x) => Math.cos(x),
     tan: (x) => {
@@ -32,6 +29,13 @@ const TrigGraph = ({ functionType, currentValue, currentAngle = Math.PI/6 }) => 
     }
   };
 
+
+
+const TrigGraph = ({ functionType, currentValue, currentAngle = Math.PI/6 }) => {
+  const [zoomDomain, setZoomDomain] = useState([-2 * Math.PI, 2 * Math.PI]);
+  const [rangeDomain, setRangeDomain] = useState([-4, 4]);
+
+ 
   const asymptotePositions = useMemo(() => {
     if (functionType === 'tan' || functionType === 'sec') {
       return Array.from({ length: 7 }, (_, i) => Math.PI/2 + (i-3) * Math.PI);
