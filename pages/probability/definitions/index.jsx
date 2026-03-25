@@ -112,7 +112,7 @@ probabilityTermsList,
         />
       </Head>
 
-      <GenericNavbar />
+      {/* <GenericNavbar /> */}
       <br />
       <br />
       <br />
@@ -139,7 +139,7 @@ probabilityTermsList,
         <br />
         <br />
         <br />
-        <ScrollUpButton />
+        {/* <ScrollUpButton /> */}
       </main>
     </>
   )

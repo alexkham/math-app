@@ -155,7 +155,7 @@ export default function SequencesPage({sequences,tocItems}) {
         <meta name="twitter:description" content="Explore various mathematical sequences and number patterns. Learn about arithmetic, geometric, and other important sequences in mathematics." />
         <meta name="twitter:image" content="https://www.learnmathclass.com/images/sequences-twitter.jpg" />
       </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
     <br></br>
     <br></br>
     <br></br>
@@ -207,7 +207,7 @@ export default function SequencesPage({sequences,tocItems}) {
         </>
     )
    })} */}
-   <ScrollUpButton></ScrollUpButton>
+   {/* <ScrollUpButton></ScrollUpButton> */}
    </>
   )
 }

@@ -1,15 +1,12 @@
 
-import React from 'react'
 import TableOfContents from '@/app/components/page-components/table-of-contents/TableOfContents';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import '../pages.css'
 import ContentBlocks from '@/app/components/page-components/content-components/ContentBlocks';
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import diagrams from '../../app/api/db/svg/set-theory/svg'
 //import diagramsReact from '../../app/api/db/svg/set-theory/svgReact'
 import Head from 'next/head';
 import summaries from '@/app/api/db/tables/set-theory/summaries';
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 
 export default function SetTheoryPage({tocItems}) {
 
@@ -33,7 +30,7 @@ export default function SetTheoryPage({tocItems}) {
         <meta name="twitter:image" content="https:/learnmathclass.com/images/set-theory-twitter.jpg" />
       </Head>
     {/* <MyNavbar></MyNavbar> */}
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
      
     <br></br>
     <br></br>
@@ -188,7 +185,7 @@ export default function SetTheoryPage({tocItems}) {
     <br></br>
     <br></br>
     
-    <ScrollUpButton></ScrollUpButton>
+    {/* <ScrollUpButton></ScrollUpButton> */}
     
     </>
   )

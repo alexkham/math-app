@@ -114,7 +114,7 @@ export default function LogicDefinitionsPage({
         />
       </Head>
 
-      <GenericNavbar />
+      {/* <GenericNavbar /> */}
       <br />
       <br />
       <br />
@@ -144,7 +144,7 @@ export default function LogicDefinitionsPage({
         <br />
         <br />
         <br />
-        <ScrollUpButton />
+        {/* <ScrollUpButton /> */}
       </main>
     </>
   )

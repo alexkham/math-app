@@ -1,13 +1,10 @@
 
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar' 
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import React from 'react'
 import '../pages.css'
 import VerticalScrollingFormulaWidget from '@/app/components/examples/VerticalScrollingFormulaWidget'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import Sections from '@/app/components/page-components/section/Sections'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Head from 'next/head'
 import { createContentHtml } from '@/app/utils/utils-functions'
@@ -343,7 +340,7 @@ export default function LogicPage({
        />
      </Head>
 
-     <GenericNavbar/>
+     {/* <GenericNavbar/> */}
      <br/>
      <br/>
      <br/>
@@ -381,7 +378,7 @@ export default function LogicPage({
        <br/>
        <br/>
        <br/>
-       <ScrollUpButton/>
+       {/* <ScrollUpButton/> */}
      </main>
    </>
  )
