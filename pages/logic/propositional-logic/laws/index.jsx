@@ -1,10 +1,7 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import React from 'react'
 import '../../../pages.css'
 import DataWrapper2 from '@/app/components/data-wrapper/generic-table/DataWrapper'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import Head from 'next/head'
 
 
@@ -274,7 +271,7 @@ export default function PropositionalLogicLawsPage({ seoData, config, logicLawsD
     }}
   />
 </Head>
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -296,7 +293,7 @@ export default function PropositionalLogicLawsPage({ seoData, config, logicLawsD
     <br/>
     <br/>
     <br/>
-    <ScrollUpButton/>
+    {/* <ScrollUpButton/> */}
     
     </>
   )
