@@ -473,7 +473,7 @@ export default function CombinatoricspAGE({sectionsContent,introContent,
 
   return (
    <>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -508,7 +508,7 @@ export default function CombinatoricspAGE({sectionsContent,introContent,
    <Sections sections={combinatoricsSections}/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

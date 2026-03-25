@@ -1,9 +1,6 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import React from 'react'
 import '../../pages.css'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
@@ -803,7 +800,7 @@ export default function PermutationsPage({seoData,sectionsContent,introContent,p
     }}
   />
 </Head>
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -839,7 +836,7 @@ export default function PermutationsPage({seoData,sectionsContent,introContent,p
     <Sections sections={permutationsSections}/>
     <br/> 
     <br/>
-    <ScrollUpButton/> 
+    {/* <ScrollUpButton/>  */}
     
     </>
   )
