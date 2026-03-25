@@ -3,6 +3,7 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import PowerTable from '../../../../app/components/visualizations/algebra/powers/PowersTable'
 
 
 export async function getStaticProps(){
@@ -422,8 +423,9 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Powers Table</h1>
+   <h1 className='title' style={{marginTop:'-60px',marginBottom:'0px'}}>Table of Powers</h1>
    <br/>
+   <PowerTable/>
    <br/>
    {/* <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
