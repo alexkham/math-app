@@ -402,7 +402,7 @@ These patterns are the building blocks of deductive reasoning. Each corresponds 
     },
     obj3: {
       title: `P ∨ ¬P: Law of Excluded Middle`,
-      content: `The formula P ∨ ¬P states that for any proposition P, either P is true or its [negation](!/logic/propositional-logic/syntax/negation) ¬P is true. There is no third option. This is the law of excluded middle (tertium non datur), one of the three classical laws of thought alongside the law of non-[contradiction](!/logic/propositional-logic/semantics/contradiction) and the law of identity.
+      content: `The formula P ∨ ¬P states that for any proposition P, either P is true or its negation ¬P is true. There is no third option. This is the law of excluded middle (tertium non datur), one of the three classical laws of thought alongside the law of non-[contradiction](!/logic/propositional-logic/semantics/contradiction) and the law of identity.
 
 The truth table has only two rows (P = T and P = F), and the result is T in both. When P is true, the first disjunct holds. When P is false, ¬P is true and the second disjunct holds.
 
@@ -490,7 +490,7 @@ Disjunctive syllogism is one of the most commonly used inference rules in natura
     },
     obj11: {
       title: `(P ↔ Q) → ((P → Q) ∧ (Q → P)): Biconditional Decomposition`,
-      content: `This [tautology](!/logic/propositional-logic/semantics/tautology) states that if P and Q are logically equivalent (P ↔ Q), then P implies Q and Q implies P. The [biconditional](!/logic/propositional-logic/semantics/biconditional) decomposes into the conjunction of both directions of implication.
+      content: `This [tautology](!/logic/propositional-logic/semantics/tautology) states that if P and Q are logically equivalent (P ↔ Q), then P implies Q and Q implies P. The [biconditional](!/logic/truth-tables/biconditionals) decomposes into the conjunction of both directions of implication.
 
 The biconditional P ↔ Q is true when P and Q share the same truth value (both true or both false). In both cases, P → Q and Q → P are each true, so their conjunction is true and the outer implication holds. When P ↔ Q is false (P and Q differ), the outer implication is vacuously true.
 
