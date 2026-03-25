@@ -1,9 +1,6 @@
 
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import React from 'react'
 import '../../pages.css'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import Head from 'next/head'
 import CalculatorSwitcher from '@/app/components/calculators/CalculatorSwitcher'
@@ -67,7 +64,7 @@ export default function TrigonometryCalculatorPage({ explanations ,inverseTrigoE
         </script>
       </Head>
 
-      <GenericNavbar/>
+      {/* <GenericNavbar/> */}
     
       <br/>
       <br/>
@@ -98,7 +95,7 @@ export default function TrigonometryCalculatorPage({ explanations ,inverseTrigoE
       <br/>
       <br/>
       <br/>
-      <ScrollUpButton/>
+      {/* <ScrollUpButton/> */}
     </>
   )
 }

@@ -125,7 +125,7 @@ export default function PolynomialCalculatorPage({ keyWords, instructions,operat
         <meta name="twitter:description" content="Free online polynomial calculator. Add and subtract polynomials easily, step by step solution, random polynomial generator." />
       </Head>
 
-      <GenericNavbar/>
+      {/* <GenericNavbar/> */}
       <br/>
       <br/>
       <br/>
@@ -151,7 +151,7 @@ export default function PolynomialCalculatorPage({ keyWords, instructions,operat
       <br/>
       <br/>
       <br/>
-      <ScrollUpButton/>
+      {/* <ScrollUpButton/> */}
     </>
   )
 }

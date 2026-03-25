@@ -1,9 +1,6 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import PercentageCalculator from '@/app/components/calculators/arithmetics/PercentageCalculator'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
-import React from 'react'
 import '../../pages.css'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
@@ -56,7 +53,7 @@ const navigationGroup=[
     }
   }
 `}</style>
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -117,7 +114,7 @@ const navigationGroup=[
     <br/>
     <br/>
     <br/>
-    <ScrollUpButton/>
+    {/* <ScrollUpButton/> */}
     
     </>
   )

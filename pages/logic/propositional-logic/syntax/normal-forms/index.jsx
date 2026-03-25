@@ -48,7 +48,7 @@ export default function NormalFormsPage({dnfExplanations, cnfExplanations, title
           })}
         </script>
       </Head>
-      <GenericNavbar/>
+      {/* <GenericNavbar/> */}
       <br/>
       <br/>
       <br/>

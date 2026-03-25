@@ -2,7 +2,6 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import React from 'react'
 import '../../pages.css'
 import generateQuadraticExplanations from '@/app/components/solvers/quadraticExplanations'
 import QuadraticSolver from '@/app/components/solvers/QuadraticSolver'
@@ -27,7 +26,7 @@ export default function QuadraticEquationsSolverPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="canonical" href="https://www.learnmathclass.com/calculators/quadratic-equations" />
     </Head>
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -220,7 +219,7 @@ export default function QuadraticEquationsSolverPage() {
     <br/>
     <br/>
     <br/>
-    <ScrollUpButton/>
+    {/* <ScrollUpButton/> */}
     </>
   )
 }

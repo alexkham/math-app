@@ -1,36 +1,9 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import MyNavbar from '@/app/components/nav-bar/MyNavbar'
-// import React from 'react'
-// import explanations from '@/app/components/calculators/statistics/explanations'
-// import StatisticsCalculator from '@/app/components/calculators/statistics/StatisticsCalculator'
-// import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
-// import '../../pages.css'
 
-// export default function StatisticsCalculatorPage() {
-//   return (
-//    <>
-//    <MyNavbar/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    <h1 className='title'>Statistics Calculator</h1>
-//    <br/>
-//    <StatisticsCalculator explanations={explanations}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    <ScrollUpButton/>
-//    </>
-//   )
-// }
 import Head from 'next/head'
-import React from 'react'
 import StatisticsCalculator from '@/app/components/calculators/statistics/StatisticsCalculator'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import '../../pages.css'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 
 export default function StatisticsCalculatorPage({ explanations,menuItems }) {
@@ -47,7 +20,7 @@ export default function StatisticsCalculatorPage({ explanations,menuItems }) {
     <meta property="og:url" content="https://learnmathclass.com/calculators/statistics-calculator" />
     <link rel="canonical" href="https://learnmathclass.com/calculators/statistics-calculator" />
     </Head>
-      <GenericNavbar/>
+      {/* <GenericNavbar/> */}
       <br/>
       <br/>
       <br/>
@@ -78,7 +51,7 @@ export default function StatisticsCalculatorPage({ explanations,menuItems }) {
       <br/>
       <br/>
       <br/>
-      <ScrollUpButton/>
+      {/* <ScrollUpButton/> */}
     </>
   )
 }
