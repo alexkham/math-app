@@ -1,8 +1,5 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
-import React from 'react'
 import '../../../pages.css'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 // import { categories, matrixTypes } from '../../../../app/components/matrices/matrix-comparison/matrixComparisonData';
@@ -89,7 +86,7 @@ export default function MatrixPropertiesPage() {
 
   return (
     <>
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -116,7 +113,7 @@ export default function MatrixPropertiesPage() {
     <br/>
     <br/>
     <br/>
-    <ScrollUpButton/>
+    {/* <ScrollUpButton/> */}
 
     </>
   )

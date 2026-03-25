@@ -1,9 +1,6 @@
 
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import React from 'react'
 import '../../pages.css'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import AngleConverter from '@/app/components/converters/AngleConverter'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import Head from 'next/head'
@@ -55,7 +52,7 @@ export default function AngleConverterPage({content,navigationGroup}) {
         />
       </Head>
 
-      <GenericNavbar/>
+      {/* <GenericNavbar/> */}
       <br/>
       <br/>
       <OperaSidebar
@@ -118,7 +115,7 @@ export default function AngleConverterPage({content,navigationGroup}) {
       <br/>
       <br/>
       <br/>
-      <ScrollUpButton/>
+      {/* <ScrollUpButton/> */}
     </>
   )
 }

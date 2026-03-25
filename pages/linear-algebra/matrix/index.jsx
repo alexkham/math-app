@@ -373,7 +373,7 @@ These foundational features play crucial roles across linear algebra, connecting
 
   return (
     <>
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -418,7 +418,7 @@ These foundational features play crucial roles across linear algebra, connecting
        
         <br/>
         <br/>
-        <ScrollUpButton/>
+        {/* <ScrollUpButton/> */}
     
     </>
   )

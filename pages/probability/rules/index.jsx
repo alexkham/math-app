@@ -346,7 +346,7 @@ export default function ProbabilityRulesPage({ sectionsContent,
 
   return (
     <>
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -378,7 +378,7 @@ export default function ProbabilityRulesPage({ sectionsContent,
     <Sections
     sections={probabilityRulesSections}/>
     <br/>
-<ScrollUpButton/>
+{/* <ScrollUpButton/> */}
     <br/>
     
     
