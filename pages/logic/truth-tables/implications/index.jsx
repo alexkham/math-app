@@ -279,7 +279,7 @@ Material implication is used throughout mathematics to express theorems, definit
 
 The converse is not logically equivalent to the original: P → Q and Q → P have different truth tables. The converse is false when Q is true and P is false — the opposite falsifying case from the original.
 
-A common logical error is affirming the consequent: assuming that because P → Q is true, Q → P must also be true. The truth tables on this page show precisely why this reasoning fails. However, when both P → Q and Q → P hold, the result is the [biconditional](!/logic/propositional-logic/semantics/biconditional) P ↔ Q.`,
+A common logical error is affirming the consequent: assuming that because P → Q is true, Q → P must also be true. The truth tables on this page show precisely why this reasoning fails. However, when both P → Q and Q → P hold, the result is the [biconditional](!/logic/truth-tables/biconditionals) P ↔ Q.`,
       before: ``,
       after: ``,
       link: ``,
@@ -297,7 +297,7 @@ The equivalence ¬P → Q ≡ P ∨ Q is useful in simplifying logical expressio
     },
     obj6: {
       title: `P → ¬Q: Negated Consequent`,
-      content: `The [implication](!/logic/propositional-logic/semantics/implication) P → ¬Q reads "if P then not Q." By material implication, P → ¬Q ≡ ¬P ∨ ¬Q. This is the [negation](!/logic/propositional-logic/syntax/negation) of the conjunction P ∧ Q by De Morgan&apos;s law: asserting P → ¬Q is the same as denying that P and Q are both true.
+      content: `The [implication](!/logic/propositional-logic/semantics/implication) P → ¬Q reads "if P then not Q." By material implication, P → ¬Q ≡ ¬P ∨ ¬Q. This is the negation of the conjunction P ∧ Q by De Morgan&apos;s law: asserting P → ¬Q is the same as denying that P and Q are both true.
 
 This form expresses mutual exclusivity under a condition: if P holds, then Q cannot. It appears in mathematical proofs where establishing one property rules out another.
 
