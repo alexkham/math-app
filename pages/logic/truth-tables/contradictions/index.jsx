@@ -446,7 +446,7 @@ By De Morgan&apos;s law, ¬P ∧ ¬Q is equivalent to ¬(P ∨ Q). So the formul
     },
     obj6: {
       title: `P ↔ ¬P: Self-Contradictory Equivalence`,
-      content: `The [biconditional](!/logic/propositional-logic/semantics/biconditional) P ↔ ¬P asserts that P and its [negation](!/logic/propositional-logic/syntax/negation) have the same truth value. But by definition, P and ¬P always have opposite truth values — when one is true, the other is false.
+      content: `The [biconditional](!/logic/truth-tables/biconditionals) P ↔ ¬P asserts that P and its negation have the same truth value. But by definition, P and ¬P always have opposite truth values — when one is true, the other is false.
 
 When P is true, ¬P is false, and the biconditional T ↔ F evaluates to false. When P is false, ¬P is true, and F ↔ T evaluates to false. Both rows are false — this is a [contradiction](!/logic/propositional-logic/semantics/contradiction).
 
@@ -492,7 +492,7 @@ In practice, recognizing that two seemingly different formulas are logically equ
       title: `(P ↔ Q) ∧ (P ↔ ¬Q): Conflicting Equivalences`,
       content: `This [contradiction](!/logic/propositional-logic/semantics/contradiction) asserts that P is equivalent to Q and also equivalent to ¬Q. If P ↔ Q holds, then P and Q have the same truth value. If P ↔ ¬Q also holds, then P and ¬Q have the same truth value. But Q and ¬Q always differ, so P cannot match both.
 
-When P and Q are both true: P ↔ Q is true, but P ↔ ¬Q becomes T ↔ F = false. When P is true and Q is false: P ↔ Q becomes T ↔ F = false. Every row fails at least one [biconditional](!/logic/propositional-logic/semantics/biconditional).
+When P and Q are both true: P ↔ Q is true, but P ↔ ¬Q becomes T ↔ F = false. When P is true and Q is false: P ↔ Q becomes T ↔ F = false. Every row fails at least one [biconditional](!/logic/truth-tables/biconditionals).
 
 This pattern generalizes: asserting equivalence with both a proposition and its negation is always contradictory.`,
       before: ``,
