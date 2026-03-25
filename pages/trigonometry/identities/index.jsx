@@ -1,9 +1,6 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-import React from 'react'
 import '../../pages.css'
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import ExpandableTable from '@/app/components/generic-table/ExpandableTable'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents2'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -786,100 +783,6 @@ export async function getStaticProps(){
   ],
 
 
-  // "Inverse Trigonometric Identities": [
-  //   {
-  //     id: 92,
-  //     law: "sin⁻¹(x)",
-  //     formula: "sin⁻¹(−x) = −sin⁻¹(x)",
-  //     explanation: "Odd function; valid for x ∈ [−1, 1]"
-  //   },
-  //   {
-  //     id: 93,
-  //     law: "cos⁻¹(x)",
-  //     formula: "cos⁻¹(−x) = π − cos⁻¹(x)",
-  //     explanation: "Reflective identity; x ∈ [−1, 1]"
-  //   },
-  //   {
-  //     id: 94,
-  //     law: "tan⁻¹(x)",
-  //     formula: "tan⁻¹(−x) = −tan⁻¹(x)",
-  //     explanation: "Odd function; valid for all real x"
-  //   },
-  //   {
-  //     id: 95,
-  //     law: "cot⁻¹(x)",
-  //     formula: "cot⁻¹(−x) = π − cot⁻¹(x)",
-  //     explanation: "Symmetry identity for cotangent inverse; x ∈ ℝ"
-  //   },
-  //   {
-  //     id: 96,
-  //     law: "sec⁻¹(x)",
-  //     formula: "sec⁻¹(−x) = π − sec⁻¹(x)",
-  //     explanation: "Valid for |x| ≥ 1"
-  //   },
-  //   {
-  //     id: 97,
-  //     law: "csc⁻¹(x)",
-  //     formula: "csc⁻¹(−x) = −csc⁻¹(x)",
-  //     explanation: "Odd function; valid for |x| ≥ 1"
-  //   }
-  // ]
-
-  // "Inverse Trigonometric Identities": [
-  //   {
-  //     id: 92,
-  //     law: "sin⁻¹(sin(x)) = x",
-  //     formula: "sin⁻¹(sin(x)) = x",
-  //     explanation: "Valid only if x is in [−π/2, π/2]"
-  //   },
-  //   {
-  //     id: 93,
-  //     law: "cos⁻¹(cos(x)) = x",
-  //     formula: "cos⁻¹(cos(x)) = x",
-  //     explanation: "Valid only if x is in [0, π]"
-  //   },
-  //   {
-  //     id: 94,
-  //     law: "tan⁻¹(tan(x)) = x",
-  //     formula: "tan⁻¹(tan(x)) = x",
-  //     explanation: "Valid only if x is in (−π/2, π/2)"
-  //   },
-  //   {
-  //     id: 95,
-  //     law: "sin(sin⁻¹(x)) = x",
-  //     formula: "sin(sin⁻¹(x)) = x",
-  //     explanation: "Valid only if x is in [−1, 1]"
-  //   },
-  //   {
-  //     id: 96,
-  //     law: "cos(cos⁻¹(x)) = x",
-  //     formula: "cos(cos⁻¹(x)) = x",
-  //     explanation: "Valid only if x is in [−1, 1]"
-  //   },
-  //   {
-  //     id: 97,
-  //     law: "tan(tan⁻¹(x)) = x",
-  //     formula: "tan(tan⁻¹(x)) = x",
-  //     explanation: "Valid for all real x"
-  //   }
-  // ]
-      
-        // "Angle Sum and Difference Identities": [
-        //   { id: 13, law: "Sine Sum", formula: "sin(a + b) = sin(a)cos(b) + cos(a)sin(b)", explanation: "Sine of a sum expands to product terms", topic: "Angle Sum/Diff" },
-        //   { id: 14, law: "Cosine Difference", formula: "cos(a − b) = cos(a)cos(b) + sin(a)sin(b)", explanation: "Cosine of a difference uses similar pattern", topic: "Angle Sum/Diff" },
-        //   { id: 15, law: "Tangent Sum", formula: "tan(a + b) = (tan(a) + tan(b)) / (1 − tan(a)tan(b))", explanation: "Tangent sum is a rational function", topic: "Angle Sum/Diff" }
-        // ],
-      
-        // "Double Angle Identities": [
-        //   { id: 16, law: "Double Sine", formula: "sin(2θ) = 2sin(θ)cos(θ)", explanation: "Sine double angle comes from sum formula", topic: "Double Angle" },
-        //   { id: 17, law: "Double Cosine", formula: "cos(2θ) = cos²(θ) − sin²(θ)", explanation: "Cosine double angle from cos(a + b)", topic: "Double Angle" },
-        //   { id: 18, law: "Alt Cosine", formula: "cos(2θ) = 2cos²(θ) − 1", explanation: "Alternative form using cos²", topic: "Double Angle" }
-        // ],
-      
-        // "Half Angle Identities": [
-        //   { id: 19, law: "Half Cosine", formula: "cos²(θ) = (1 + cos(2θ))/2", explanation: "Derived from double angle cosine", topic: "Half Angle" },
-        //   { id: 20, law: "Half Sine", formula: "sin²(θ) = (1 − cos(2θ))/2", explanation: "Derived from double angle sine", topic: "Half Angle" }
-        // ]
       };
 
       const config = {
@@ -1294,7 +1197,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
   {/* Favicon */}
   <link rel="icon" href="/favicon.ico" />
 </Head>
-    <GenericNavbar/>
+    {/* <GenericNavbar/> */}
     <br/>
     <br/>
     <br/>
@@ -1336,7 +1239,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
      </div> */}
     <br/>
     <br/>
-    <ScrollUpButton/>
+    {/* <ScrollUpButton/> */}
     </>
   )
 }
