@@ -53,7 +53,7 @@ export default function MatrixTranspositionCalculatorPage({ keyWords = [], descr
         <meta property="twitter:description" content={description} />
       </Head>
       
-      <GenericNavbar/>
+      {/* <GenericNavbar/> */}
       <br/>
       <br/>
       <br/>
@@ -76,7 +76,7 @@ export default function MatrixTranspositionCalculatorPage({ keyWords = [], descr
       }}>
       <MatrixTranspositionCalculator/>
       </div>
-      <ScrollUpButton/>
+      {/* <ScrollUpButton/> */}
     </>
   )
 }

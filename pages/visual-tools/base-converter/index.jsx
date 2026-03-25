@@ -24,13 +24,10 @@
 //   )
 // }
 // pages/base-converter.js
-import React from 'react';
 import Head from 'next/head';
 import BaseVisualizer2 from '@/app/components/base-visualizer/BaseVisualizer2';
-import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import '../../pages.css'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
-import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
 
@@ -44,7 +41,7 @@ export default function BaseConverter({navigationGroup }) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href="https://www.learnmathclass.com/visual-tools/base-converter" />
       </Head>
-     <GenericNavbar/>
+     {/* <GenericNavbar/> */}
       <br></br>
       <br></br>
       <br></br>
@@ -72,7 +69,7 @@ export default function BaseConverter({navigationGroup }) {
       <BaseVisualizer2 />
       </div>
      
-      <ScrollUpButton></ScrollUpButton>
+      {/* <ScrollUpButton></ScrollUpButton> */}
     </>
   );
 }

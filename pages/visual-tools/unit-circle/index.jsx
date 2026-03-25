@@ -553,7 +553,7 @@ const baseConverterIcon = (
                <meta name="viewport" content="width=device-width, initial-scale=1" />
                <meta name="robots" content="index, follow" />
            </Head>
-           <GenericNavbar/>
+           {/* <GenericNavbar/> */}
            <br/>
            <br/>
            <br/>
@@ -593,7 +593,7 @@ const baseConverterIcon = (
            <br/>
            
            <br/>
-           <ScrollUpButton/>
+           {/* <ScrollUpButton/> */}
        </>
    )
 }

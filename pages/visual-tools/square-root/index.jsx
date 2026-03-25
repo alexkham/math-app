@@ -32,7 +32,7 @@ export default function SquareRootVisualizerPage({ explanationsRoots, keyWords }
         <meta name="twitter:description" content="Visualize and understand square roots with our interactive grid-based learning tool." />
       </Head>
 
-      <GenericNavbar/>
+      {/* <GenericNavbar/> */}
       <br/>
       <br/>
       <br/>
@@ -55,7 +55,7 @@ export default function SquareRootVisualizerPage({ explanationsRoots, keyWords }
       <br/>
       <br/>
       <br/>
-      <ScrollUpButton/>
+      {/* <ScrollUpButton/> */}
     </>
   );
 }

@@ -154,7 +154,7 @@ export default function FractionsVisualizerPage({seoData, explanationContent,
     }}
   />
 </Head>
-   <GenericNavbar/>
+   {/* <GenericNavbar/> */}
    <br/>
    <br/>
    <br/>
@@ -216,7 +216,7 @@ export default function FractionsVisualizerPage({seoData, explanationContent,
    <br/>
    <br/>
    <br/>
-   <ScrollUpButton/>
+   {/* <ScrollUpButton/> */}
    </>
   )
 }

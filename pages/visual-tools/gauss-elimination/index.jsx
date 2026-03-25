@@ -485,7 +485,7 @@ export default function GaussianEliminationCalculatorPage({ seoData, sectionsCon
         />
       </Head>
 
-      <GenericNavbar/>
+      {/* <GenericNavbar/> */}
       <br/>
       <br/>
       <br/>
@@ -530,7 +530,7 @@ export default function GaussianEliminationCalculatorPage({ seoData, sectionsCon
         <br/>
         <br/>
 
-        <ScrollUpButton />
+        {/* <ScrollUpButton /> */}
       </main>
 
       <style jsx>{`

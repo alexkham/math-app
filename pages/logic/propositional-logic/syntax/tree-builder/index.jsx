@@ -121,8 +121,8 @@ export default function TreeBuilderPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
         />
       </Head>
-
-      <GenericNavbar/>
+{/* 
+      <GenericNavbar/> */}
       <br/>
       <br/>
       <br/>
@@ -145,7 +145,7 @@ export default function TreeBuilderPage({
       <br/>
       <br/>
       <br/>
-      <ScrollUpButton/>
+      {/* <ScrollUpButton/> */}
     </>
   )
 }
