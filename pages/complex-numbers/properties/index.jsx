@@ -336,7 +336,7 @@ Dividing complex numbers subtracts arguments.
 
 $$\\arg(z^n) = n \\cdot \\arg(z)$$
 
-Raising to the $n$th power multiplies the argument by $n$. This property underlies [De Moivre's theorem](!/complex-numbers/de-moivres-theorem).
+Raising to the $n$th power multiplies the argument by $n$. This property underlies [De Moivre's theorem](!/complex-numbers/demoivres-theorem).
 
 ## Argument of a Conjugate
 
