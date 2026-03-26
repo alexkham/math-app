@@ -346,7 +346,7 @@ export async function getStaticProps() {
   const sectionsContent = {
     obj1: {
       title: `What Is a Biconditional?`,
-      content: `The [biconditional](!/logic/propositional-logic/semantics/biconditional) P ↔ Q (read "P if and only if Q") is a compound proposition that is true exactly when P and Q have the same truth value — both true or both false. It is false when they differ.
+      content: `The biconditional P ↔ Q (read "P if and only if Q") is a compound proposition that is true exactly when P and Q have the same truth value — both true or both false. It is false when they differ.
 
 The biconditional is equivalent to the conjunction of two conditionals: P ↔ Q ≡ (P → Q) ∧ (Q → P). This means P is both sufficient and necessary for Q. In mathematics, "if and only if" (abbreviated iff) signals that a definition or characterization is being given — the two sides are interchangeable.
 
@@ -383,7 +383,7 @@ The biconditional can also be expressed using other connectives: P ↔ Q ≡ (P 
 
 The proof is direct: P ↔ Q means P and Q have the same truth value. If both are true, then ¬P and ¬Q are both false — still matching. If both are false, then ¬P and ¬Q are both true — still matching. In either case ¬P ↔ ¬Q holds.
 
-This symmetry under [negation](!/logic/propositional-logic/syntax/negation) is a distinctive feature of the biconditional. It does not hold for the conditional: P → Q is not equivalent to ¬P → ¬Q (that would be the inverse, which is a common logical fallacy).`,
+This symmetry under negation is a distinctive feature of the biconditional. It does not hold for the conditional: P → Q is not equivalent to ¬P → ¬Q (that would be the inverse, which is a common logical fallacy).`,
       before: ``,
       after: ``,
       link: ``,
@@ -434,7 +434,7 @@ Note that this is a biconditional [tautology](!/logic/propositional-logic/semant
     },
     obj9: {
       title: `P ↔ ¬¬P: Double Negation`,
-      content: `This [tautology](!/logic/propositional-logic/semantics/tautology) states that any proposition P is logically equivalent to its double [negation](!/logic/propositional-logic/syntax/negation) ¬¬P. Negating a proposition twice returns it to its original truth value.
+      content: `This [tautology](!/logic/propositional-logic/semantics/tautology) states that any proposition P is logically equivalent to its double negation ¬¬P. Negating a proposition twice returns it to its original truth value.
 
 The truth table is trivial: when P is true, ¬P is false and ¬¬P is true — matching P. When P is false, ¬P is true and ¬¬P is false — again matching P.
 
@@ -445,7 +445,7 @@ Double negation elimination (from ¬¬P infer P) is accepted in classical logic 
     },
     obj10: {
       title: `(P ∧ Q) ↔ ¬(¬P ∨ ¬Q): De Morgan&apos;s Law`,
-      content: `This [tautology](!/logic/propositional-logic/semantics/tautology) expresses De Morgan&apos;s first law as a biconditional: the conjunction P ∧ Q is equivalent to the [negation](!/logic/propositional-logic/syntax/negation) of the disjunction of the negations, ¬(¬P ∨ ¬Q).
+      content: `This [tautology](!/logic/propositional-logic/semantics/tautology) expresses De Morgan&apos;s first law as a biconditional: the conjunction P ∧ Q is equivalent to the negation of the disjunction of the negations, ¬(¬P ∨ ¬Q).
 
 Reading it plainly: "P and Q" is the same as "it is not the case that not-P or not-Q." If both P and Q hold, then neither ¬P nor ¬Q holds, so their disjunction is false and its negation is true. If either P or Q fails, the corresponding negation is true, the disjunction is true, and its negation is false.
 
