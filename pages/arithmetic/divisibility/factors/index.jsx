@@ -383,7 +383,7 @@ const sectionsContent = {
 
 Every positive integer has at least two factors: $1$ and itself. The number $1$ divides everything, and every number divides itself. Most numbers have additional factors between these two extremes.
 
-The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$ — eight in total. The factors of $13$ are just $1$ and $13$ — making it [prime](!/arithmetic/divisibility/prime-numbers).
+The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$ — eight in total. The factors of $13$ are just $1$ and $13$ — making it prime.
 
 Unlike multiples, which extend infinitely, the factor set of any positive integer is finite. No factor of $n$ can exceed $n$ itself (in absolute value), so the search space is bounded from the start.`,
     before: ``,
@@ -501,7 +501,7 @@ Common multiples arise naturally in problems involving synchronization. If one e
 
   obj9: {
     title: `Counting Factors`,
-    content: `For small numbers, counting factors by listing them is practical. For larger numbers, [prime factorization](!/arithmetic/divisibility/prime-factorization) provides a formula.
+    content: `For small numbers, counting factors by listing them is practical. For larger numbers, prime factorization provides a formula.
 
 If $n = p_1^{a_1} \\cdot p_2^{a_2} \\cdots p_k^{a_k}$, the number of positive divisors of $n$ is:
 
@@ -855,7 +855,7 @@ export default function FactorsPage({seoData, sectionsContent, introContent, faq
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          sectionsContent.obj2.after,
+          // sectionsContent.obj2.after,
         ]
     },
     {
@@ -896,7 +896,7 @@ export default function FactorsPage({seoData, sectionsContent, introContent, faq
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          sectionsContent.obj7.after,
+          // sectionsContent.obj7.after,
         ]
     },
     {
@@ -905,7 +905,7 @@ export default function FactorsPage({seoData, sectionsContent, introContent, faq
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          sectionsContent.obj8.after,
+          // sectionsContent.obj8.after,
         ]
     },
     {
@@ -914,7 +914,7 @@ export default function FactorsPage({seoData, sectionsContent, introContent, faq
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          sectionsContent.obj9.after,
+          // sectionsContent.obj9.after,
         ]
     },
     {

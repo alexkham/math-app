@@ -180,7 +180,7 @@ The method is transparent and reliable for small numbers. For large numbers it b
 
 obj4: {
   title: `Method 2: Prime Factorization`,
-  content: `The [prime factorization](!/arithmetic/divisibility/prime-factorization) of each number reveals exactly which primes they share and in what quantities. The GCD takes the minimum exponent for each common prime.
+  content: `The prime factorization of each number reveals exactly which primes they share and in what quantities. The GCD takes the minimum exponent for each common prime.
 
 For $\\gcd(48, 180)$:
 
@@ -301,7 +301,7 @@ The numbers $8$ and $15$ are coprime: the factors of $8$ are $\\{1, 2, 4, 8\\}$,
 
 The numbers $9$ and $12$ are not coprime: $\\gcd(9, 12) = 3$.
 
-The numbers $7$ and $20$ are coprime: $7$ is [prime](!/arithmetic/divisibility/prime-numbers) and does not divide $20$.
+The numbers $7$ and $20$ are coprime: $7$ is prime and does not divide $20$.
 
 Two structural facts generate coprime pairs reliably. Any two consecutive integers are coprime — $\\gcd(n, n+1) = 1$ for all $n$ — because any common divisor of $n$ and $n+1$ would have to divide their difference, which is $1$. And a prime $p$ is coprime with every number it does not divide.`,
   before: ``,
@@ -374,7 +374,7 @@ obj11: {
   title: `Worked Examples`,
   content: `Find $\\gcd(56, 84)$ by listing factors. Factors of $56$: $\\{1, 2, 4, 7, 8, 14, 28, 56\\}$. Factors of $84$: $\\{1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42, 84\\}$. Common: $\\{1, 2, 4, 7, 14, 28\\}$. GCD $= 28$.
 
-Find $\\gcd(120, 84)$ by [prime factorization](!/arithmetic/divisibility/prime-factorization). $120 = 2^3 \\cdot 3 \\cdot 5$ and $84 = 2^2 \\cdot 3 \\cdot 7$. Shared primes: $2^{\\min(3,2)} \\cdot 3^{\\min(1,1)} = 2^2 \\cdot 3 = 12$.
+Find $\\gcd(120, 84)$ by prime factorization. $120 = 2^3 \\cdot 3 \\cdot 5$ and $84 = 2^2 \\cdot 3 \\cdot 7$. Shared primes: $2^{\\min(3,2)} \\cdot 3^{\\min(1,1)} = 2^2 \\cdot 3 = 12$.
 
 Find $\\gcd(782, 253)$ by the Euclidean algorithm. $782 = 253 \\cdot 3 + 23$. Then $253 = 23 \\cdot 11 + 0$. GCD $= 23$.
 

@@ -178,7 +178,7 @@ The method is intuitive and works well for small inputs. It becomes tedious when
 
 obj4: {
   title: `Method 2: Prime Factorization`,
-  content: `The [prime factorization](!/arithmetic/divisibility/prime-factorization) approach mirrors the GCD method, but takes the maximum exponent for each prime instead of the minimum.
+  content: `The prime factorization approach mirrors the GCD method, but takes the maximum exponent for each prime instead of the minimum.
 
 For $\\text{lcm}(12, 18)$:
 
@@ -352,7 +352,7 @@ obj11: {
   title: `Worked Examples`,
   content: `Find $\\text{lcm}(8, 14)$ by listing multiples. Multiples of $8$: $8, 16, 24, 32, 40, 48, 56$. Multiples of $14$: $14, 28, 42, 56$. First common multiple: $56$. So $\\text{lcm}(8, 14) = 56$.
 
-Find $\\text{lcm}(24, 90)$ by [prime factorization](!/arithmetic/divisibility/prime-factorization). $24 = 2^3 \\cdot 3$ and $90 = 2 \\cdot 3^2 \\cdot 5$. Maximum exponents: $2^3 \\cdot 3^2 \\cdot 5 = 8 \\cdot 9 \\cdot 5 = 360$.
+Find $\\text{lcm}(24, 90)$ by prime factorization. $24 = 2^3 \\cdot 3$ and $90 = 2 \\cdot 3^2 \\cdot 5$. Maximum exponents: $2^3 \\cdot 3^2 \\cdot 5 = 8 \\cdot 9 \\cdot 5 = 360$.
 
 Find $\\text{lcm}(35, 15)$ using the [GCD](!/arithmetic/divisibility/gcd). $\\gcd(35, 15) = 5$. So $\\text{lcm} = \\frac{35 \\cdot 15}{5} = 105$.
 
