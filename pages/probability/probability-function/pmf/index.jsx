@@ -451,7 +451,7 @@ Two distributions can share the same mean but behave completely differently. One
   obj9: {
     title: `Transformations`,
     content: `
-If we take some [random variable](!/probabilioty/random-variables) $X$ and apply function $g$ the result $Y=g(X)$ will be a new random variable.
+If we take some [random variable](!/probability/random-variables) $X$ and apply function $g$ the result $Y=g(X)$ will be a new random variable.
 
 ## The Transformation Process
 
@@ -500,7 +500,7 @@ Linear transformations follow: $E[aX + b] = aE[X] + b$
 
 ## Key Insight
 
-Transformations create new [random variables](!/probabilioty/random-variables), but the underlying probability structure stays connected to the original PMF. You're redistributing the same total probability mass, just arranging it differently.
+Transformations create new [random variables](!/probability/random-variables), but the underlying probability structure stays connected to the original PMF. You're redistributing the same total probability mass, just arranging it differently.
     `,
     before: ``,
     after: ``,
