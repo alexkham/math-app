@@ -523,7 +523,7 @@ The formula reveals structure that raw listing obscures. A number with many smal
 
   obj10: {
     title: `Sum of Factors`,
-    content: `The sum of all positive divisors of $n$ is denoted $\\sigma(n)$. Like the divisor count, it can be computed directly from the [prime factorization](!/arithmetic/divisibility/prime-factorization).
+    content: `The sum of all positive divisors of $n$ is denoted $\\sigma(n)$. Like the divisor count, it can be computed directly from the prime factorization.
 
 For $n = 12$: the divisors are $1, 2, 3, 4, 6, 12$, and $\\sigma(12) = 1 + 2 + 3 + 4 + 6 + 12 = 28$.
 
