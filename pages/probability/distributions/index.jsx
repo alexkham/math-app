@@ -157,7 +157,7 @@ Distributions are determined by **parameters**—numerical constants that specif
 
 All distributions have an [expected value (mean)](!/probability/expected-value), provided the integral or sum $\\mathbb{E}[X]$ exists and is finite. 
 
-Similarly, [variance](!/probability/varance) $\\text{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$ measures dispersion when it exists. 
+Similarly, [variance](!/probability/variance) $\\text{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$ measures dispersion when it exists. 
 
 Not all distributions have finite moments—the Cauchy distribution, for instance, has no finite mean.
 
