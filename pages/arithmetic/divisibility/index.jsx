@@ -265,9 +265,9 @@ Primes are the atoms of multiplication. Every integer greater than $1$ is either
 
 The first primes are $2, 3, 5, 7, 11, 13, 17, 19, 23, 29, \\ldots$ — an infinite sequence with no largest member. The number $2$ is the only even prime; every other even number is divisible by $2$ and therefore composite.
 
-The number $1$ is not prime. It has only one factor (itself), while the definition requires exactly two. Excluding $1$ is not a technicality — it is necessary to preserve the uniqueness of [prime factorization](!/arithmetic/divisibility/prime-factorization).
+The number $1$ is not prime. It has only one factor (itself), while the definition requires exactly two. Excluding $1$ is not a technicality — it is necessary to preserve the uniqueness of prime factorization.
 
-The full treatment, including primality testing and the Sieve of Eratosthenes, appears on the [prime numbers](!/arithmetic/divisibility/prime-numbers) page.`,
+`,
   before: ``,
   after: ``,
   link: '',
@@ -281,7 +281,7 @@ The number $360$ factors as $2^3 \\cdot 3^2 \\cdot 5$. No other combination of p
 
 Prime factorization reveals the divisor structure of a number. The number of factors of $n = p_1^{a_1} \\cdot p_2^{a_2} \\cdots$ is $(a_1 + 1)(a_2 + 1) \\cdots$ — a formula that reads the answer directly from the exponents.
 
-Factorization also underpins the computation of [GCD](!/arithmetic/divisibility/gcd) and [LCM](!/arithmetic/divisibility/lcm). The GCD takes the minimum exponent of each shared prime; the LCM takes the maximum. These connections are developed on the [prime factorization](!/arithmetic/divisibility/prime-factorization) page.`,
+Factorization also underpins the computation of [GCD](!/arithmetic/divisibility/gcd) and [LCM](!/arithmetic/divisibility/lcm). The GCD takes the minimum exponent of each shared prime; the LCM takes the maximum. These connections are developed on the prime factorization page.`,
   before: ``,
   after: ``,
   link: '',
@@ -300,7 +300,7 @@ $$a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$$
 
 For $4$ and $6$: $4 \\cdot 6 = 24$, and $\\gcd(4,6) \\cdot \\text{lcm}(4,6) = 2 \\cdot 12 = 24$.
 
-Three methods exist for computing the GCD: listing factors, [prime factorization](!/arithmetic/divisibility/prime-factorization), and the Euclidean algorithm — which uses [modulo](!/arithmetic/modulo) repeatedly to reduce the problem. The full treatment appears on the [GCD](!/arithmetic/divisibility/gcd) and [LCM](!/arithmetic/divisibility/lcm) pages.`,
+Three methods exist for computing the GCD: listing factors, prime factorization, and the Euclidean algorithm — which uses [modulo](!/arithmetic/modulo) repeatedly to reduce the problem. The full treatment appears on the [GCD](!/arithmetic/divisibility/gcd) and [LCM](!/arithmetic/divisibility/lcm) pages.`,
   before: ``,
   after: ``,
   link: '',
