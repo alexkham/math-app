@@ -289,7 +289,7 @@ Repeated application of earlier techniques handles layered structures. The polyn
 
 Known roots provide another entry point. If $r$ is a root of a polynomial $P(x)$, then $(x - r)$ is a factor, and polynomial [division](!/algebra/polynomials/operations) produces the remaining quotient. For instance, if direct substitution shows that $P(2) = 0$, then $(x - 2)$ divides $P(x)$ evenly, and the quotient can be factored further using any applicable technique.
 
-The [Fundamental Theorem of Algebra](!/complex-numbers/equations-and-polynomials) guarantees that every polynomial of degree $n$ has exactly $n$ roots over the [complex numbers](!/complex-numbers), counted with multiplicity. This means complete factorization into linear factors is always possible in that setting.`,
+The [Fundamental Theorem of Algebra](!/complex-numbers/equations-polynomials) guarantees that every polynomial of degree $n$ has exactly $n$ roots over the [complex numbers](!/complex-numbers), counted with multiplicity. This means complete factorization into linear factors is always possible in that setting.`,
   before: ``,
   after: ``,
   link: '',
@@ -337,7 +337,7 @@ Not every polynomial factors neatly over the integers. When no technique produce
 
 The polynomial $x^2 - 2$ is irreducible over the integers because no pair of integer-coefficient linear factors produces it. Over the reals, it factors as $(x + \\sqrt{2})(x - \\sqrt{2})$. The polynomial $x^2 + 1$ goes further: it is irreducible over both the integers and the reals, since its roots $\\pm i$ are not real numbers. Over the [complex numbers](!/complex-numbers), it factors as $(x + i)(x - i)$.
 
-The [Fundamental Theorem of Algebra](!/complex-numbers/equations-and-polynomials) settles the question at the deepest level: every polynomial of degree $n \\geq 1$ with complex coefficients factors completely into $n$ linear factors over the complex numbers. This means the only irreducible polynomials over the complex numbers are linear — degree $1$.
+The [Fundamental Theorem of Algebra](!/complex-numbers/equations-polynomials) settles the question at the deepest level: every polynomial of degree $n \\geq 1$ with complex coefficients factors completely into $n$ linear factors over the complex numbers. This means the only irreducible polynomials over the complex numbers are linear — degree $1$.
 
 Over the reals, the irreducible building blocks are linear polynomials and quadratic polynomials with negative discriminant ($b^2 - 4ac < 0$). Every real polynomial factors into a product of such pieces. Over the integers, identifying irreducibility is harder and no single test covers all cases, though the discriminant and the rational root theorem from the [rules](!/algebra/polynomials/rules) page offer useful starting points.`,
   before: ``,

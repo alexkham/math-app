@@ -114,10 +114,10 @@ $𝑐$ is the exponent — the value the logarithm gives
           title:`Logarithm Rules`,
           content:`Logarithm rules are the backbone of working with exponential relationships — they tell us how to simplify expressions, solve equations, and understand the behavior of logarithmic functions.
           It all starts with the [Definition and Basic Rules](!/algebra/logarithms/rules#definitions), which lay out what a logarithm means and how it connects to powers.
-          Then come the [Fundamental Properties](!/algebra/logarithms/lrules#properties), which show how logs behave with multiplication, division, and exponents — the everyday operations of algebra. 
-          Sometimes, you’ll need to change how a logarithm is written, and that’s where the [Base Conversion Rules](!/algebra/logarithms/lrules#conversion) step in. 
-          When working with natural or common logarithms, things get more specific — and that’s covered in the [Natural Logarithm Properties](!/algebra/logarithms/lrules#natural) and [Common Logarithm Properties](!/algebra/logarithms/lrules#common).
-          As problems get trickier, the [Advanced Logarithmic Rules](!/algebra/logarithms/lrules#advanced) handle special cases and identities. And throughout it all, the [Domain and Range Rules](!/algebra/logarithms/lrules#domain) remind us where logarithms actually make sense. 
+          Then come the [Fundamental Properties](!/algebra/logarithms/rules#properties), which show how logs behave with multiplication, division, and exponents — the everyday operations of algebra. 
+          Sometimes, you’ll need to change how a logarithm is written, and that’s where the [Base Conversion Rules](!/algebra/logarithms/rules#conversion) step in. 
+          When working with natural or common logarithms, things get more specific — and that’s covered in the [Natural Logarithm Properties](!/algebra/logarithms/rules#natural) and [Common Logarithm Properties](!/algebra/logarithms/rules#common).
+          As problems get trickier, the [Advanced Logarithmic Rules](!/algebra/logarithms/rules#advanced) handle special cases and identities. And throughout it all, the [Domain and Range Rules](!/algebra/logarithms/rules#domain) remind us where logarithms actually make sense. 
           Together, they form a complete picture of how logarithms work.
 `,
           before:``,
