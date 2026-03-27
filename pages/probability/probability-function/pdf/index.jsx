@@ -910,7 +910,7 @@ PDF: $f(x) = \\frac{x^{\\alpha-1}(1-x)^{\\beta-1}}{B(\\alpha, \\beta)}$ for $x \
 
 The PDF is remarkably flexible, changing shape dramatically based on parameters $\\alpha$ and $\\beta$. For $\\alpha, \\beta > 1$, it's unimodal with peak inside $(0, 1)$. For $\\alpha, \\beta < 1$, it's U-shaped with density concentrating at the endpoints. For $\\alpha = \\beta$, it's symmetric around $\\frac{1}{2}$. For $\\alpha \\neq \\beta$, it's skewed. The normalizing constant $B(\\alpha, \\beta)$ ensures integration to 1. As $\\alpha$ increases, mass shifts toward 1; as $\\beta$ increases, mass shifts toward 0. Special case: $\\alpha = \\beta = 1$ reduces to [uniform](!/probability/distributions/continuous/uniform) on $[0, 1]$. The bounded support makes it ideal for modeling proportions, probabilities, and rates.
 
-[Read More About Beta Distribution](!/probability/distributions/continuous/beta)
+
 
 ## PDF Patterns
 
