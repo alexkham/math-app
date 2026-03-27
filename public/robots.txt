@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /*?_rsc=
 
 Sitemap: https://www.learnmathclass.com/sitemap.xml
