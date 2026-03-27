@@ -227,7 +227,7 @@ Testing via synthetic division is often more efficient than direct substitution,
 
     obj7: {
   title: `Limitations of the Rational Root Theorem`,
-  content: `The Rational Root Theorem identifies only rational roots. Irrational roots and [complex roots](!/complex-numbers/equations-and-polynomials) lie entirely outside its reach.
+  content: `The Rational Root Theorem identifies only rational roots. Irrational roots and [complex roots](!/complex-numbers/equations-polynomials) lie entirely outside its reach.
 
 The polynomial $x^2 - 2$ illustrates this clearly. Its constant term is $-2$ and its leading coefficient is $1$, producing candidates $\\pm 1, \\pm 2$. Testing each: $P(1) = -1$, $P(-1) = -1$, $P(2) = 2$, $P(-2) = 2$. None equals zero. The actual roots are $\\pm\\sqrt{2}$, both irrational — invisible to the theorem.
 

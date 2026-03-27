@@ -163,9 +163,9 @@ The complex number $z = a + bi$ can be viewed as an arrow beginning at the origi
 
 Vector addition follows the parallelogram rule, also known as tip-to-tail addition. Given two vectors $z_1$ and $z_2$, place the tail of $z_2$ at the head of $z_1$. The sum $z_1 + z_2$ stretches from the origin to the final endpoint. Algebraically, $(a + bi) + (c + di) = (a + c) + (b + d)i$ adds components separately — and geometrically, this matches exactly how vectors combine through the parallelogram construction.
 
-Subtraction reverses the second vector before adding. To compute $z_1 - z_2$, flip $z_2$ to point in the opposite direction and then add. The result connects the two points in the plane, giving the displacement from $z_2$ to $z_1$. The [modulus](!/algebra/complex-numbers/absolute-value) of $z_1 - z_2$ measures the distance between them.
+Subtraction reverses the second vector before adding. To compute $z_1 - z_2$, flip $z_2$ to point in the opposite direction and then add. The result connects the two points in the plane, giving the displacement from $z_2$ to $z_1$. The [modulus](!/complex-numbers/absolute-value) of $z_1 - z_2$ measures the distance between them.
 
-The vector interpretation makes the [modulus](!/algebra/complex-numbers/absolute-value) geometrically obvious. The length of the arrow from the origin to $(a, b)$ follows from the Pythagorean theorem: $|z| = \\sqrt{a^2 + b^2}$. This is simply the distance formula applied to a vector's components, revealing modulus as nothing more exotic than length.`,
+The vector interpretation makes the [modulus](!/complex-numbers/absolute-value) geometrically obvious. The length of the arrow from the origin to $(a, b)$ follows from the Pythagorean theorem: $|z| = \\sqrt{a^2 + b^2}$. This is simply the distance formula applied to a vector's components, revealing modulus as nothing more exotic than length.`,
   after: ``,
   link: '',
 },
@@ -210,7 +210,7 @@ Complex numbers refuse such arrangement. No consistent definition of "less than"
 
 The geometry reveals why ordering fails. Real numbers occupy a one-dimensional line where direction determines comparison — rightward means greater, leftward means lesser. Complex numbers fill a two-dimensional plane where points spread in all directions. No single direction consistently represents "greater than" without privileging some numbers arbitrarily over others. Should $3 + 2i$ exceed $1 + 5i$ because it lies further right, or should $1 + 5i$ exceed $3 + 2i$ because it lies further up? Neither choice maintains logical consistency across all pairs.
 
-One meaningful comparison survives: the [modulus](!/algebra/complex-numbers/absolute-value) provides a measure of size. The modulus $|z| = \\sqrt{a^2 + b^2}$ gives the distance from the origin to the point. We can legitimately say $|3 + 4i| = 5$ exceeds $|1 + i| = \\sqrt{2}$ because $5 > \\sqrt{2}$. But modulus compares magnitudes, not the numbers themselves. Multiple complex numbers share the same modulus — every point on a circle centered at the origin has identical modulus — so comparing distances cannot substitute for a full ordering.`,
+One meaningful comparison survives: the [modulus](!/complex-numbers/absolute-value) provides a measure of size. The modulus $|z| = \\sqrt{a^2 + b^2}$ gives the distance from the origin to the point. We can legitimately say $|3 + 4i| = 5$ exceeds $|1 + i| = \\sqrt{2}$ because $5 > \\sqrt{2}$. But modulus compares magnitudes, not the numbers themselves. Multiple complex numbers share the same modulus — every point on a circle centered at the origin has identical modulus — so comparing distances cannot substitute for a full ordering.`,
   after: ``,
   link: '',
 },
@@ -315,7 +315,7 @@ General multiplication combines rotation with scaling. The product $z_1 \\cdot z
   id: "intro",
   title: "Seeing Numbers in Two Dimensions",
   content: `
-  Algebra defines complex numbers through symbols and operations, but geometry gives them shape and position. Every complex number corresponds to a unique point in a two-dimensional plane, transforming abstract expressions like $3 + 2i$ into visible locations we can plot, measure, and manipulate. This geometric perspective revolutionizes how we understand complex arithmetic — addition becomes vector combination, conjugation becomes reflection, and the [modulus](!/algebra/complex-numbers/absolute-value) becomes distance.
+  Algebra defines complex numbers through symbols and operations, but geometry gives them shape and position. Every complex number corresponds to a unique point in a two-dimensional plane, transforming abstract expressions like $3 + 2i$ into visible locations we can plot, measure, and manipulate. This geometric perspective revolutionizes how we understand complex arithmetic — addition becomes vector combination, conjugation becomes reflection, and the [modulus](!/complex-numbers/absolute-value) becomes distance.
   `
 }
 

@@ -376,7 +376,7 @@ Larger spans work identically. What day is it $1{,}000$ days from a Tuesday (day
 
 obj12: {
   title: `Why Divisibility Rules Work`,
-  content: `The familiar [divisibility rules](!/arithmetic/divisibility/divisibility-rules) are modular arithmetic in disguise. Each rule exploits a congruence property of $10$ — the base of our number system.
+  content: `The familiar [divisibility rules](!/arithmetic/divisibility/rules) are modular arithmetic in disguise. Each rule exploits a congruence property of $10$ — the base of our number system.
 
 The digit-sum rule for $9$ works because $10 \\equiv 1 \\pmod{9}$. Every [power](!/algebra/powers) of $10$ is congruent to $1$: $10^0 = 1$, $10^1 \\equiv 1$, $10^2 \\equiv 1$, and so on. A digit $d$ in the $k$th place contributes $d \\cdot 10^k \\equiv d \\cdot 1 = d \\pmod{9}$. The place value drops away, and only the digit itself matters. So the entire number is congruent to the sum of its digits modulo $9$.
 
@@ -384,7 +384,7 @@ The rule for $3$ follows identically: $10 \\equiv 1 \\pmod{3}$, so the digit sum
 
 The alternating-sum rule for $11$ works because $10 \\equiv -1 \\pmod{11}$. Powers of $10$ alternate: $10^0 = 1$, $10^1 \\equiv -1$, $10^2 \\equiv 1$, $10^3 \\equiv -1$. Each digit's contribution alternates in sign depending on its position, producing the alternating sum.
 
-Every shortcut in the [divisibility rules](!/arithmetic/divisibility/divisibility-rules) page traces back to a congruence property of $10$ modulo the divisor in question. Modular arithmetic is the engine; the rules are the user-facing controls.`,
+Every shortcut in the [divisibility rules](!/arithmetic/divisibility/rules) page traces back to a congruence property of $10$ modulo the divisor in question. Modular arithmetic is the engine; the rules are the user-facing controls.`,
   before: ``,
   after: ``,
   link: '',

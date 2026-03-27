@@ -390,7 +390,7 @@ $$p(z) = a_n(z - r_1)(z - r_2)\\cdots(z - r_n)$$
 
 Over $\\mathbb{R}$, some polynomials resist complete factorization. Over $\\mathbb{C}$, none do.
 
-For more on polynomial roots, see [equations and polynomials](!/complex-numbers/equations-and-polynomials).`,
+For more on polynomial roots, see [equations and polynomials](!/complex-numbers/equations-polynomials).`,
   before: ``,
   after: ``,
   link: '',
