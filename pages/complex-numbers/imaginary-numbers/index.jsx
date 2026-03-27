@@ -134,7 +134,7 @@ One critical warning accompanies this technique: the familiar product rule for r
     obj3: {
   title: `Defining Pure Imaginary Numbers`,
   before: ``,
-  content: `The imaginary unit $i$ serves as the foundation for an entire family of numbers. Multiply $i$ by any real number $b$, and the result $bi$ belongs to a special category: the pure imaginary numbers. These occupy a distinct position within the broader [complex number](!/algebra/complex-numbers) system, characterized by the complete absence of a real component.
+  content: `The imaginary unit $i$ serves as the foundation for an entire family of numbers. Multiply $i$ by any real number $b$, and the result $bi$ belongs to a special category: the pure imaginary numbers. These occupy a distinct position within the broader [complex number](!/complex-numbers) system, characterized by the complete absence of a real component.
 
 Formally, when we write a complex number in standard form $z = a + bi$, the number qualifies as pure imaginary precisely when $a = 0$. The real part vanishes entirely, leaving only the imaginary term. The structure reduces to $z = 0 + bi = bi$, where $b$ can be any real value — positive, negative, rational, irrational, or even zero.
 

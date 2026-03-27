@@ -84,7 +84,7 @@ export async function getStaticProps(){
     obj1: {
   title: `From Algebra to Geometry`,
   before: ``,
-  content: `The [algebraic form](!/algebra/complex-numbers/algebraic-form) $z = a + bi$ contains two real numbers: the real part $a$ and the imaginary part $b$. Two numbers naturally suggest two dimensions. Rather than confining complex numbers to a line, we grant them an entire plane — a flat surface where horizontal position encodes the real part and vertical position encodes the imaginary part.
+  content: `The [algebraic form](!/complex-numbers/algebraic-form) $z = a + bi$ contains two real numbers: the real part $a$ and the imaginary part $b$. Two numbers naturally suggest two dimensions. Rather than confining complex numbers to a line, we grant them an entire plane — a flat surface where horizontal position encodes the real part and vertical position encodes the imaginary part.
 
 The correspondence is direct: the complex number $z = a + bi$ maps to the point with coordinates $(a, b)$. The number $4 + 3i$ becomes the point $(4, 3)$, located four units right of the origin and three units up. The number $-2 + i$ becomes $(-2, 1)$, sitting in the second quadrant. Every complex number finds a home at exactly one point, and every point in the plane represents exactly one complex number.
 
@@ -111,7 +111,7 @@ The identification of complex numbers with points transforms algebra into geomet
 
 The horizontal axis carries the real numbers. Every point on this line has coordinates $(a, 0)$, corresponding to complex numbers of the form $z = a + 0i = a$. The integers $-3, -2, -1, 0, 1, 2, 3$ appear at their familiar positions stretching left and right. Irrational values like $\\sqrt{2}$ and $\\pi$ occupy their proper locations. The entire real number line, in all its infinite extent, embeds as the horizontal axis of the complex plane.
 
-The vertical axis carries the [pure imaginary numbers](!/algebra/complex-numbers/imaginary-numbers). Every point on this line has coordinates $(0, b)$, corresponding to complex numbers $z = 0 + bi = bi$. The number $i$ sits one unit above the origin; $2i$ sits two units up; $-3i$ sits three units down. No real numbers appear on this axis except at the origin itself.
+The vertical axis carries the [pure imaginary numbers](!/complex-numbers/imaginary-numbers). Every point on this line has coordinates $(0, b)$, corresponding to complex numbers $z = 0 + bi = bi$. The number $i$ sits one unit above the origin; $2i$ sits two units up; $-3i$ sits three units down. No real numbers appear on this axis except at the origin itself.
 
 The origin occupies a singular position in this structure. Located at $(0, 0)$, it represents the complex number $0 = 0 + 0i$. This point lies on both axes simultaneously — it belongs to the real numbers (having zero imaginary part) and to the pure imaginary numbers (having zero real part). No other point shares this dual membership. The origin serves as the reference for all measurements: distances emanate from it, angles open from the positive real axis through it, and the entire coordinate system centers upon it.
 
@@ -182,7 +182,7 @@ The vector interpretation makes the [modulus](!/complex-numbers/absolute-value) 
     obj5: {
   title: `Visualizing the Conjugate`,
   before: ``,
-  content: `The [conjugate](!/algebra/complex-numbers/complex-conjugate) operation gains immediate clarity in the geometric setting. For $z = a + bi$, the conjugate $\\bar{z} = a - bi$ preserves the real part while negating the imaginary part. On the plane, this transforms the point $(a, b)$ into $(a, -b)$ — the same horizontal coordinate, opposite vertical coordinate.
+  content: `The [conjugate](!/complex-numbers/complex-conjugate) operation gains immediate clarity in the geometric setting. For $z = a + bi$, the conjugate $\\bar{z} = a - bi$ preserves the real part while negating the imaginary part. On the plane, this transforms the point $(a, b)$ into $(a, -b)$ — the same horizontal coordinate, opposite vertical coordinate.
 
 This transformation has a name: reflection across the real axis. The real axis acts as a mirror. Points above the axis map to corresponding points below; points below map to points above. Points on the real axis itself — the real numbers — remain fixed in place, unmoved by conjugation because they have no imaginary component to negate.
 
@@ -226,7 +226,7 @@ One meaningful comparison survives: the [modulus](!/complex-numbers/absolute-val
     obj7: {
   title: `Visualizing Operations`,
   before: ``,
-  content: `Arithmetic operations on complex numbers translate into geometric actions on the plane. This correspondence provides visual intuition that algebraic manipulation alone cannot offer, and it foreshadows the deeper connections explored in [trigonometric](!/algebra/complex-numbers/trigonometric-form) and [exponential](!/algebra/complex-numbers/exponential-form) forms.
+  content: `Arithmetic operations on complex numbers translate into geometric actions on the plane. This correspondence provides visual intuition that algebraic manipulation alone cannot offer, and it foreshadows the deeper connections explored in [trigonometric](!/complex-numbers/trigonometric-form) and [exponential](!/complex-numbers/exponential-form) forms.
 
 Addition performs vector combination. Given $z_1$ and $z_2$ as arrows from the origin, their sum $z_1 + z_2$ completes the parallelogram formed by the two arrows. Equivalently, translate $z_2$ so its tail sits at the head of $z_1$; the sum extends from the origin to the new head of $z_2$. This tip-to-tail construction matches the component-wise addition $(a + c) + (b + d)i$ with perfect precision.
 
@@ -234,7 +234,7 @@ Subtraction measures displacement between points. The difference $z_1 - z_2$ rep
 
 Multiplication introduces richer geometry involving both scaling and rotation. Multiplying by a positive real number stretches or shrinks the vector without changing its direction — $2z$ points the same way as $z$ but twice as far from the origin. Multiplying by $-1$ rotates the vector by $180°$, flipping it to the opposite side of the plane. Multiplying by $i$ rotates $90°$ counterclockwise: the number $1$ becomes $i$, $i$ becomes $-1$, $-1$ becomes $-i$, and $-i$ returns to $1$.
 
-General multiplication combines rotation with scaling. The product $z_1 \\cdot z_2$ has modulus $|z_1||z_2|$ — the lengths multiply. Its angle from the positive real axis equals the sum of the individual angles — the rotations add. This geometric description anticipates the [trigonometric form](!/algebra/complex-numbers/trigonometric-form), where multiplication becomes transparently simple: multiply magnitudes, add angles.`,
+General multiplication combines rotation with scaling. The product $z_1 \\cdot z_2$ has modulus $|z_1||z_2|$ — the lengths multiply. Its angle from the positive real axis equals the sum of the individual angles — the rotations add. This geometric description anticipates the [trigonometric form](!/complex-numbers/trigonometric-form), where multiplication becomes transparently simple: multiply magnitudes, add angles.`,
   after: ``,
   link: '',
 },
