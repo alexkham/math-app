@@ -211,7 +211,7 @@ to explicitly state that a proposition $\( P \)$ is always true (equivalent to t
 \t\t\t\t\t\t$(𝑃→𝑄)≡(¬𝑃∨𝑄)$
 
 (Material implication rewritten in disjunctive form.)
-As long as the equivalence is valid -the overall bilateral expression as a whole evaluates to true and falls under [definition](!/logic/propositional-logic/tautology#definition) of tautology.
+As long as the equivalence is valid -the overall bilateral expression as a whole evaluates to true and falls under [definition](!/logic/propositional-logic/semantics/tautology#definition) of tautology.
 So the final answer to that question is **YES** , as long as equivalence is valid- it is a tautology.
 
 ## Are all tautologies logical equivalences?
@@ -271,7 +271,7 @@ This means that the set of all logical equivalences is a subset of the set of al
     laws:{
 
       title:'Logic Laws as Tautologies',
-      content:`As discussed in previous [section](!/logic/propositional-logic/tautology#tautology_vs_equivalence), valid equivalence is bilateral statement evaluating to true and in this way it is a **tautology**.
+      content:`As discussed in previous [section](!/logic/propositional-logic/semantics/tautology#tautology_vs_equivalence), valid equivalence is bilateral statement evaluating to true and in this way it is a **tautology**.
             Since all [propositional logic laws](!/logic/propositional-logic/laws) are either [equivalences](!/logic/propositional-logic/semantics/equivalences) or directly tautological statements, we conclude that all propositional logic laws are tautologies.
 ## Propositional Logic Laws as Equivalences
            Many fundamental laws of propositional logic are expressed as equivalences, meaning both sides of the equation always yield the same truth value. Since the equivalence itself must always hold, it is a **tautology**.

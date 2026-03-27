@@ -594,7 +594,7 @@ Mode: $1$ (always)
 
 The [PMF](!/probability/probability-function/pmf) $P(X = k) = (1-p)^{k-1}p$ decreases monotonically. The first trial has highest probability.
 
-[Negative Binomial](!/probability/distributions/discrete/negative_binomial) with parameters $r$ and $p$
+[Negative Binomial](!/probability/distributions/discrete/negative-binomial) with parameters $r$ and $p$
 
 Mode: $\\lfloor \\frac{(r-1)(1-p)}{p} \\rfloor$ when $r > 1$
 
@@ -1014,7 +1014,7 @@ Finding the mode is a maximization problem: $\\arg\\max f(x)$.
 
 [Calculus](!/calculus) provides tools (derivatives, critical points) for continuous cases.
 
-[Numerical optimization](!/numerical-methods) methods handle complex cases without closed forms.
+Numerical optimization methods handle complex cases without closed forms.
   `,
   before: ``,
   after: ``,
