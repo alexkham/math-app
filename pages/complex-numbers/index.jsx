@@ -106,7 +106,7 @@ The [Triangle Inequality](!/complex-numbers/absolute-value) governs how distance
     obj5: {
   title: `The Mathematical Theory: Complex Numbers as a Field`,
   before: ``,
-  content: `Mathematics demands rigor beyond intuition. Before accepting $\\mathbb{C}$ as a legitimate number system, we must verify that it satisfies the structural requirements of a [mathematical field](!/complex-numbers/properties-and-fields). A field is a set equipped with addition and multiplication operations that obey eleven specific axioms — the same rules that govern the rational and real numbers.
+  content: `Mathematics demands rigor beyond intuition. Before accepting $\\mathbb{C}$ as a legitimate number system, we must verify that it satisfies the structural requirements of a mathematical field. A field is a set equipped with addition and multiplication operations that obey eleven specific axioms — the same rules that govern the rational and real numbers.
 
 The verification proceeds systematically. Addition in $\\mathbb{C}$ is commutative: $z_1 + z_2 = z_2 + z_1$ for any pair of complex numbers. It is also associative: $(z_1 + z_2) + z_3 = z_1 + (z_2 + z_3)$. An additive identity exists — the number $0 + 0i$ satisfies $z + 0 = z$ for every $z$. Every complex number possesses an additive inverse: the negative $-z = -a - bi$ fulfills $z + (-z) = 0$.
 

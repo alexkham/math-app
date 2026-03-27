@@ -322,7 +322,7 @@ obj8: {
 
 Pattern recognition depends on modulo. The last digit of any number is that number $\\bmod 10$. The last two digits are the number $\\bmod 100$. Identifying whether a number is even or odd is a $\\bmod 2$ test. These are modular observations embedded so deeply in everyday arithmetic that they rarely get named as such.
 
-Many [divisibility rules](!/arithmetic/divisibility/divisibility-rules) are modular arguments in compact form. The rule that a number is divisible by $9$ if its digit sum is divisible by $9$ rests on the fact that $10 \\equiv 1 \\pmod{9}$. The rule for $11$ uses $10 \\equiv -1 \\pmod{11}$. Modulo provides the machinery; the rules are shortcuts derived from it.
+Many [divisibility rules](!/arithmetic/divisibility/rules) are modular arguments in compact form. The rule that a number is divisible by $9$ if its digit sum is divisible by $9$ rests on the fact that $10 \\equiv 1 \\pmod{9}$. The rule for $11$ uses $10 \\equiv -1 \\pmod{11}$. Modulo provides the machinery; the rules are shortcuts derived from it.
 
 In computer science, modulo controls array indexing, hash functions, and cyclic data structures. In cryptography, modular arithmetic underpins the algorithms that secure digital communication. The humble remainder, extracted from a simple division, turns out to be one of the most widely used tools in all of mathematics.`,
   before: ``,
@@ -362,7 +362,7 @@ obj10: {
 
 [Divisibility](!/arithmetic/divisibility) is the concept that modulo tests. The statement $a \\bmod n = 0$ is the computational form of $n \\mid a$. Every divisibility question is, at its core, a modulo question.
 
-[Divisibility rules](!/arithmetic/divisibility/divisibility-rules) are modular arguments packaged as mental shortcuts. The digit-sum test for $9$, the last-digit test for $5$, the alternating-sum test for $11$ — each one exploits a congruence property of $10$ raised to successive [powers](!/algebra/powers).
+[Divisibility rules](!/arithmetic/divisibility/rules) are modular arguments packaged as mental shortcuts. The digit-sum test for $9$, the last-digit test for $5$, the alternating-sum test for $11$ — each one exploits a congruence property of $10$ raised to successive [powers](!/algebra/powers).
 
 The [GCD](!/arithmetic/divisibility/gcd) — greatest common divisor — relies on modulo through the Euclidean algorithm, which repeatedly applies the modulo operation to reduce a pair of numbers until the remainder reaches zero. The last nonzero remainder is the GCD.`,
   before: ``,

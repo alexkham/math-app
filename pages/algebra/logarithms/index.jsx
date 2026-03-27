@@ -113,7 +113,7 @@ $𝑐$ is the exponent — the value the logarithm gives
         rules:{
           title:`Logarithm Rules`,
           content:`Logarithm rules are the backbone of working with exponential relationships — they tell us how to simplify expressions, solve equations, and understand the behavior of logarithmic functions.
-          It all starts with the [Definition and Basic Rules](!/algebra/logarithms/lrules#definitions), which lay out what a logarithm means and how it connects to powers.
+          It all starts with the [Definition and Basic Rules](!/algebra/logarithms/rules#definitions), which lay out what a logarithm means and how it connects to powers.
           Then come the [Fundamental Properties](!/algebra/logarithms/lrules#properties), which show how logs behave with multiplication, division, and exponents — the everyday operations of algebra. 
           Sometimes, you’ll need to change how a logarithm is written, and that’s where the [Base Conversion Rules](!/algebra/logarithms/lrules#conversion) step in. 
           When working with natural or common logarithms, things get more specific — and that’s covered in the [Natural Logarithm Properties](!/algebra/logarithms/lrules#natural) and [Common Logarithm Properties](!/algebra/logarithms/lrules#common).
@@ -122,7 +122,7 @@ $𝑐$ is the exponent — the value the logarithm gives
 `,
           before:``,
           after:``,
-          link:`/algebra/logarithms/logarithm-rules`,
+          link:`/algebra/logarithms/rules`,
           svg:`<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="788" height="633" viewBox="0 98 1008 875" style="margin-left:100px; fill:none;stroke:none;fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
