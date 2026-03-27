@@ -265,7 +265,7 @@ These patterns are not special rules; they are simply common ways real situation
       content:`
 Events sit at the foundation of nearly everything in probability, and many later concepts are just refinements of how events behave.
 
-- [Sample spaces](!/probability/sample-spaces) provide the universe from which events are formed.
+- [Sample spaces](!/probability/sample-space) provide the universe from which events are formed.
 - [Random variables](!/probability/random-variables) turn outcomes into numerical values, but still rely on events underneath.
 - [Conditional probability](!/probability/conditional-probability) examines events under restricted information.
 - [Independence](!/probability/independence) describes when events do not influence each other.
