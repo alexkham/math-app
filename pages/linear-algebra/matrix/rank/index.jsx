@@ -266,13 +266,98 @@ const faqQuestions = {
 }
 
 
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": seoData.name,
+//     "description": seoData.description,
+//     "url": "https://www.learnmathclass.com" + seoData.url,
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "High School, College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Matrix Rank"
+//     },
+//     "teaches": [
+//       "Definition of rank and the equality of column rank and row rank",
+//       "Computing rank via row reduction and pivot counting",
+//       "Full rank, rank deficiency, and their implications",
+//       "The rank-nullity theorem and dimension counting",
+//       "Rank conditions for solvability of linear systems",
+//       "The four fundamental subspaces and their dimensions"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Linear Algebra",
+//         "item": "https://www.learnmathclass.com/linear-algebra"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Matrices",
+//         "item": "https://www.learnmathclass.com/linear-algebra/matrix"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 4,
+//         "name": "Rank of a Matrix",
+//         "item": "https://www.learnmathclass.com/linear-algebra/matrix/rank"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
+
 const schemas = {
   learningResource: {
     "@context": "https://schema.org",
     "@type": "LearningResource",
-    "name": seoData.name,
-    "description": seoData.description,
-    "url": "https://www.learnmathclass.com" + seoData.url,
+    "name": "Rank of a Matrix",
+    "description": "Learn matrix rank — how to compute it by row reduction, the rank-nullity theorem, rank conditions for linear systems, properties of rank, and the four fundamental subspaces.",
+    "url": "https://www.learnmathclass.com/linear-algebra/matrix/rank",
     "inLanguage": "en-US",
     "learningResourceType": "Explanation",
     "educationalLevel": "High School, College",
@@ -350,6 +435,7 @@ const schemas = {
     }))
   }
 }
+
 
    return {
   props: {

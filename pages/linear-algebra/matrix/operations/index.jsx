@@ -301,13 +301,98 @@ const faqQuestions = {
 }
 
 
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": seoData.name,
+//     "description": seoData.description,
+//     "url": "https://www.learnmathclass.com" + seoData.url,
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "High School, College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Matrix Operations"
+//     },
+//     "teaches": [
+//       "Matrix addition, subtraction, and scalar multiplication",
+//       "Matrix multiplication definition and dimension requirements",
+//       "Non-commutativity of matrix products",
+//       "Transpose operation and its properties",
+//       "Matrix powers and diagonalization for efficient computation",
+//       "Elementary matrices and matrix decompositions"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Linear Algebra",
+//         "item": "https://www.learnmathclass.com/linear-algebra"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Matrices",
+//         "item": "https://www.learnmathclass.com/linear-algebra/matrix"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 4,
+//         "name": "Matrix Operations",
+//         "item": "https://www.learnmathclass.com/linear-algebra/matrix/operations"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
+
 const schemas = {
   learningResource: {
     "@context": "https://schema.org",
     "@type": "LearningResource",
-    "name": seoData.name,
-    "description": seoData.description,
-    "url": "https://www.learnmathclass.com" + seoData.url,
+    "name": "Matrix Operations",
+    "description": "Master matrix operations — addition, scalar multiplication, matrix multiplication, transpose, powers, and decompositions. Includes dimension rules and worked examples.",
+    "url": "https://www.learnmathclass.com/linear-algebra/matrix/operations",
     "inLanguage": "en-US",
     "learningResourceType": "Explanation",
     "educationalLevel": "High School, College",

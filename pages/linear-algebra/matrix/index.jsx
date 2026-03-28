@@ -235,13 +235,92 @@ const faqQuestions = {
 }
 
 
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": seoData.name,
+//     "description": seoData.description,
+//     "url": "https://www.learnmathclass.com" + seoData.url,
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "High School, College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Matrices in Linear Algebra"
+//     },
+//     "teaches": [
+//       "Matrix notation and entry indexing",
+//       "Matrix dimensions, rows, columns, and the main diagonal",
+//       "Matrix arithmetic including addition, scalar multiplication, and matrix multiplication",
+//       "Inverse matrices and the determinant condition for invertibility",
+//       "Rank, trace, and their algebraic significance",
+//       "Matrices as linear transformations between vector spaces"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Linear Algebra",
+//         "item": "https://www.learnmathclass.com/linear-algebra"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Matrices",
+//         "item": "https://www.learnmathclass.com/linear-algebra/matrix"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
+
 const schemas = {
   learningResource: {
     "@context": "https://schema.org",
     "@type": "LearningResource",
-    "name": seoData.name,
-    "description": seoData.description,
-    "url": "https://www.learnmathclass.com" + seoData.url,
+    "name": "Matrices in Linear Algebra",
+    "description": "Learn what matrices are in linear algebra — notation, dimensions, arithmetic, inverse, rank, trace, and how matrices represent linear transformations and systems of equations.",
+    "url": "https://www.learnmathclass.com/linear-algebra/matrix",
     "inLanguage": "en-US",
     "learningResourceType": "Explanation",
     "educationalLevel": "High School, College",
@@ -313,6 +392,8 @@ const schemas = {
     }))
   }
 }
+
+
 
   return {
   props: {

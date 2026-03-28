@@ -280,13 +280,99 @@ const faqQuestions = {
 }
 
 
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": seoData.name,
+//     "description": seoData.description,
+//     "url": "https://www.learnmathclass.com" + seoData.url,
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "High School, College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Trace of a Matrix"
+//     },
+//     "teaches": [
+//       "Definition of the trace as the sum of diagonal entries",
+//       "Linearity of the trace and contrast with the determinant",
+//       "The cyclic property and its consequences",
+//       "Trace as the sum of eigenvalues",
+//       "Similarity invariance of the trace",
+//       "The Frobenius inner product and trace in matrix calculus"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Linear Algebra",
+//         "item": "https://www.learnmathclass.com/linear-algebra"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Matrices",
+//         "item": "https://www.learnmathclass.com/linear-algebra/matrix"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 4,
+//         "name": "Trace of a Matrix",
+//         "item": "https://www.learnmathclass.com/linear-algebra/matrix/trace"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
+
+
 const schemas = {
   learningResource: {
     "@context": "https://schema.org",
     "@type": "LearningResource",
-    "name": seoData.name,
-    "description": seoData.description,
-    "url": "https://www.learnmathclass.com" + seoData.url,
+    "name": "Trace of a Matrix",
+    "description": "Learn the trace of a matrix — definition, cyclic property, connection to eigenvalues, similarity invariance, Frobenius inner product, commutator identities, and matrix differentiation.",
+    "url": "https://www.learnmathclass.com/linear-algebra/matrix/trace",
     "inLanguage": "en-US",
     "learningResourceType": "Explanation",
     "educationalLevel": "High School, College",

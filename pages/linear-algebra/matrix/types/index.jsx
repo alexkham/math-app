@@ -270,13 +270,98 @@ const faqQuestions = {
 }
 
 
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": seoData.name,
+//     "description": seoData.description,
+//     "url": "https://www.learnmathclass.com" + seoData.url,
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "High School, College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Types of Matrices"
+//     },
+//     "teaches": [
+//       "Diagonal, identity, and triangular matrix structures",
+//       "Symmetric and skew-symmetric matrix properties",
+//       "Orthogonal matrices and length preservation",
+//       "Nilpotent and idempotent matrices as algebraic types",
+//       "Involutory and permutation matrices",
+//       "Singular versus nonsingular classification"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Linear Algebra",
+//         "item": "https://www.learnmathclass.com/linear-algebra"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Matrices",
+//         "item": "https://www.learnmathclass.com/linear-algebra/matrix"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 4,
+//         "name": "Types of Matrices",
+//         "item": "https://www.learnmathclass.com/linear-algebra/matrix/types"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
+
 const schemas = {
   learningResource: {
     "@context": "https://schema.org",
     "@type": "LearningResource",
-    "name": seoData.name,
-    "description": seoData.description,
-    "url": "https://www.learnmathclass.com" + seoData.url,
+    "name": "Types of Matrices",
+    "description": "Learn about matrix types — diagonal, symmetric, orthogonal, triangular, nilpotent, idempotent, and permutation matrices. Defining properties, eigenvalue behavior, and key theorems.",
+    "url": "https://www.learnmathclass.com/linear-algebra/matrix/types",
     "inLanguage": "en-US",
     "learningResourceType": "Explanation",
     "educationalLevel": "High School, College",
@@ -354,8 +439,6 @@ const schemas = {
     }))
   }
 }
-
-
 
 return {
   props: {
