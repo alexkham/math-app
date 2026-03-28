@@ -6,6 +6,7 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Sections from '@/app/components/page-components/section/Sections'
 import Head from 'next/head'
 import MyList from '@/app/components/page-components/lists/MyList'
+import '../../../../pages/pages.css'
 
 
      
