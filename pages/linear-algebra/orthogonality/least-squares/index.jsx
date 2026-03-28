@@ -292,7 +292,7 @@ The minimum squared error is
 
 $$\\|\\mathbf{r}\\|^2 = \\|(I - P)\\mathbf{b}\\|^2 = \\|\\mathbf{b}\\|^2 - \\|P\\mathbf{b}\\|^2$$
 
-by the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-products), since $P\\mathbf{b}$ and $(I - P)\\mathbf{b}$ are orthogonal.`,
+by the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product), since $P\\mathbf{b}$ and $(I - P)\\mathbf{b}$ are orthogonal.`,
     before: ``,
     after: ``,
     link: ``,

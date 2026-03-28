@@ -216,7 +216,7 @@ The SVD exists without any restriction. The matrix need not be square, need not 
   },
   obj2: {
     title: `The Geometric Interpretation`,
-    content: `Every [linear transformation](!/linear-algebra/linear-transformations) $\\mathbf{x} \\mapsto A\\mathbf{x}$ decomposes into three geometric steps:
+    content: `Every [linear transformation](!/linear-algebra/transformations) $\\mathbf{x} \\mapsto A\\mathbf{x}$ decomposes into three geometric steps:
 
 $V^T$ rotates (or reflects) the input space, aligning the input with the "natural axes" of the transformation — the directions along which $A$ stretches most and least.
 
@@ -801,7 +801,7 @@ export default function SVDPage({seoData, sectionsContent, introContent, faqQues
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Page Title</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>SVD Decompositions</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

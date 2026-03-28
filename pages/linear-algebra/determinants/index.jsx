@@ -234,7 +234,7 @@ The complete set of algebraic [properties](!/linear-algebra/determinants/propert
   },
   obj9: {
     title: `Area, Volume, and Orientation`,
-    content: `The determinant has a direct geometric meaning: it measures how a matrix, viewed as a [linear transformation](!/linear-algebra/linear-transformations), distorts size and orientation.
+    content: `The determinant has a direct geometric meaning: it measures how a matrix, viewed as a [linear transformation](!/linear-algebra/transformations), distorts size and orientation.
 
 In two dimensions, $|\\det(A)|$ equals the area of the parallelogram spanned by the columns of $A$. In three dimensions, $|\\det(A)|$ equals the volume of the parallelepiped spanned by the three column vectors, which also equals the scalar triple product $\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})$. In $n$ dimensions, $|\\det(A)|$ is the factor by which the map $x \\mapsto Ax$ scales $n$-dimensional volumes.
 

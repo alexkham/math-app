@@ -499,7 +499,7 @@ for every vector $\\mathbf{v} \\in V$. The columns of $P_{\\mathcal{C} \\leftarr
 
 In $\\mathbb{R}^2$, let $\\mathcal{B} = \\{(1, 1), (1, -1)\\}$ and let $\\mathcal{C}$ be the standard basis. The $\\mathcal{C}$-coordinates of $(1, 1)$ are just $(1, 1)$, and the $\\mathcal{C}$-coordinates of $(1, -1)$ are $(1, -1)$. So $P_{\\mathcal{C} \\leftarrow \\mathcal{B}} = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (3, 1)$: solve $P\\mathbf{c} = (3, 1)$, giving $\\mathbf{c} = P^{-1}(3, 1) = \\frac{1}{-2}\\begin{pmatrix} -1 & -1 \\\\ -1 & 1 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = (2, 1)$. So $[\\mathbf{v}]_\\mathcal{B} = (2, 1)$, meaning $\\mathbf{v} = 2(1, 1) + 1(1, -1)$.
 
-Change of basis connects to [similarity](!/linear-algebra/linear-transformations/change-of-basis): if a [linear transformation](!/linear-algebra/linear-transformations) has matrix $A$ in basis $\\mathcal{B}$, its matrix in basis $\\mathcal{C}$ is $P^{-1}AP$. Choosing a good basis — one that simplifies $A$ into diagonal or triangular form — is the central idea behind [diagonalization](!/linear-algebra/eigenvalues-vectors/diagonalization).`,
+Change of basis connects to [similarity](!/linear-algebra/linear-transformations/change-of-basis): if a [linear transformation](!/linear-algebra/transformations) has matrix $A$ in basis $\\mathcal{B}$, its matrix in basis $\\mathcal{C}$ is $P^{-1}AP$. Choosing a good basis — one that simplifies $A$ into diagonal or triangular form — is the central idea behind [diagonalization](!/linear-algebra/eigenvalues-vectors/diagonalization).`,
     before: ``,
     after: ``,
     link: ``,
