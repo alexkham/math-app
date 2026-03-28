@@ -496,7 +496,7 @@ Standard deviation is approximately 28.9% of the interval width. For a uniform d
 
 **Memoryless in Relative Terms**: While not memoryless in the exponential sense, the uniform distribution has no "preferred" region—every subinterval of equal length has equal probability.
 
-**Bounded Support**: Unlike the normal or [exponential distributions](!probability/distributions/continuous/exponential), the uniform distribution has strict bounds. Values outside [a, b] have zero probability, making it ideal for modeling quantities with known limits.
+**Bounded Support**: Unlike the normal or [exponential distributions](!/probability/distributions/continuous/exponential), the uniform distribution has strict bounds. Values outside [a, b] have zero probability, making it ideal for modeling quantities with known limits.
 
 **Maximum Entropy**: Among all continuous distributions with bounded support [a, b], the uniform distribution has maximum entropy. It represents complete uncertainty about where the value will fall within the interval—no region is favored over any other.
 
