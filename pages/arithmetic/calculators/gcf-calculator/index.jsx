@@ -16,7 +16,7 @@ const navigationGroup=[
       {title:'Factoring Calculator',link:'/calculators/factoring-calculator'},
       {title:'LCM Calculator',link:'/arithmetic/calculators/lcm-calculator'},
       {title:'Divisibility Calculator',link:'/arithmetic/calculators/divisibility-calculator'},
-      {title:'Prime Number Checker',link:'/arithmetic/calculators/prime-checker'},
+      // {title:'Prime Number Checker',link:'/arithmetic/calculators/prime-checker'},
     ]
   },
   {title:'Other Calculators',
