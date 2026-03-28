@@ -28,12 +28,12 @@ const currentPath = '/algebra';
 
 
  const tools=[
-  {
-    title: "Quadratic Equation Solver",
-    description: "Solve quadratic equations and see the solution steps explained",
-    image: "/tools/quadratic-solver.jpg",
-    link: "/calculators/quadratic-equations"
-  },
+  // {
+  //   title: "Quadratic Equation Solver",
+  //   description: "Solve quadratic equations and see the solution steps explained",
+  //   image: "/tools/quadratic-solver.jpg",
+  //   link: "/calculators/quadratic-equations"
+  // },
 
   {
     title: "Polynomial Calculator",
