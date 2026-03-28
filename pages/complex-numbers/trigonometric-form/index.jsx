@@ -459,7 +459,7 @@ Let $z_1 = 10\\,\\text{cis}\\,\\frac{2\\pi}{3}$ and $z_2 = 2\\,\\text{cis}\\,\\f
 
 $$\\frac{z_1}{z_2} = \\frac{10}{2}\\,\\text{cis}\\left(\\frac{2\\pi}{3} - \\frac{\\pi}{6}\\right) = 5\\,\\text{cis}\\,\\frac{\\pi}{2}$$
 
-These formulas extend naturally to [De Moivre's theorem](!/complex-numbers/demoivres-theorem), which handles powers and roots with equal elegance.`,
+These formulas extend naturally to [De Moivre's theorem](!/complex-numbers/demoivre-theorem), which handles powers and roots with equal elegance.`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[De Moivre's Theorem](!/complex-numbers/de-moivres-theorem) →@`,
   link: '',

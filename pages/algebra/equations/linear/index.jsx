@@ -8,6 +8,10 @@ import Head from 'next/head'
 import MyList from '@/app/components/page-components/lists/MyList'
 
 
+     
+//  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use linear equations solver](!/algebra/equations/linear/solver) →@
+
+
 export async function getStaticProps(){
 
 
@@ -242,8 +246,7 @@ Useful for checking, exploring, or when speed matters more than manual process.
 
  While algebraic simplification is the foundation, **multiple paths** can lead to the solution of a linear equation. Choosing a method depends on the goal: understanding, speed, visualization, or verification.
 
-      
- @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use linear equations solver](!/algebra/equations/linear/solver) →@
+ 
 
       `,
       before:``,

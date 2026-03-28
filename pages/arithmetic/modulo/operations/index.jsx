@@ -434,7 +434,7 @@ Simplify $(2^{50} + 3^{50}) \\bmod 5$. Powers of $2 \\bmod 5$ cycle $\\{2, 4, 3,
   const introContent = {
   id: "intro",
   title: "Arithmetic That Wraps Around",
-  content: `[Computing a remainder](!/arithmetic/modulo/computing-remainders) answers a single question about a single number. Modular arithmetic goes further — it builds a complete system where addition, subtraction, multiplication, and exponentiation all operate within the confines of a fixed modulus. Numbers exceeding the range cycle back, and the arithmetic never leaves the set $\\{0, 1, 2, \\ldots, n-1\\}$.`
+  content: `[Computing a remainder](!/arithmetic/modulo#51) answers a single question about a single number. Modular arithmetic goes further — it builds a complete system where addition, subtraction, multiplication, and exponentiation all operate within the confines of a fixed modulus. Numbers exceeding the range cycle back, and the arithmetic never leaves the set $\\{0, 1, 2, \\ldots, n-1\\}$.`
 }
 
 const faqQuestions = {
