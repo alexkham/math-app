@@ -1,612 +1,615 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import React from 'react'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
-import Head from 'next/head'
-import MyList from '@/app/components/page-components/lists/MyList'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../../pages/pages.css'
-
-
-     
-//  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use linear equations solver](!/algebra/equations/linear/solver) →@
+import Head from 'next/head'
 
 
 export async function getStaticProps(){
+const keyWords = [
+  "linear equations",
+  "solving linear equations",
+  "first degree equations",
+  "ax + b = 0",
+  "properties of equality",
+  "multi-step equations",
+  "equations with fractions",
+  "equations with decimals",
+  "equations with parentheses",
+  "literal equations",
+  "identity equation",
+  "contradiction equation",
+  "clearing fractions",
+  "isolate the variable"
+]
+  // •
 
+//   \u2022 First item
+// \u2022 Second item
 
-const linearEquationFormsData = [
- {
-   item: '###  **Standard Form**',
-   math: '$$ax + b = 0$$',
-   after: '* $a \\neq 0$, $b$ can be any real number.\n* Most general and flexible form.'
- },
- {
-   item: '###  **Simplified Form (Isolated Variable)**',
-   math: '$$x = c$$',
-   after: '* Comes from solving the standard form.\n* Represents the solution explicitly.'
- },
- {
-   item: '###  **Multiplicative Form**',
-   math: '$$ax = c$$',
-   after: '* No constant term on the left.\n* Occurs when $b = 0$ in the standard form.'
- },
- {
-   item: '###  **Equality of Two Linear Expressions**',
-   math: '$$ax + b = cx + d$$',
-   after: '* Linear terms and constants on both sides.\n* Needs rearrangement to solve.\n* Generalized form encompassing most cases.'
- },
- {
-   item: '###  **Factored Form**',
-   math: '$$a(x - r) = 0$$',
-   after: '* Clearly shows the root $x = r$.\n* Arises from factoring the standard form.'
- },
- {
-   item: '###  **Proportional Form**',
-   math: '$$\\frac{ax + b}{c} = d$$',
-   after: '* Equation contains linear expression in a fraction.\n* Can be cleared by multiplying both sides by $c$.'
- },
- {
-   item: '###  **Linear Combination Form**',
-   math: '$$a_1x + a_2x + \\dots + a_nx + b = 0$$',
-   after: '* Multiple like terms; still linear.\n* Simplified to $ax + b = 0$'
- },
- {
-   item: '###  **Implicit Linear Form**',
-   math: '$$f(x) = 0, \\quad \\text{where } f(x) = ax + b$$',
-   after: '* Function notation, but still an algebraic linear equation.'
- }
-];
-
-
-const elementaryOperationsData = [
-{
-  item: '### **Addition of the Same Value to Both Sides of the Equation**',
-  math: '',
-  after: '* **Goal**: Eliminate negative constants or move negative terms.\n* **Example 1**:\n  $x - 5 = 3 \\Rightarrow$\n$x - 5 + 5 = 3 + 5 \\Rightarrow$\n$ x = 8$\n* **Example 2**:\n  $2x - 7 = 11 \\Rightarrow 2x - 7 + 7 = 11 + 7 \\Rightarrow 2x = 18$'
-},
-{
-  item: '### **Subtraction of the Same Value from Both Sides of the Equation(Transposing)**',
-  math: '',
-  after: '* **Goal**: Eliminate positive constants or move positive terms.\n* **Example 1**:\n  $x + 3 = 7 \\Rightarrow x + 3 - 3 = 7 - 3 \\Rightarrow x = 4$\n* **Example 2**:\n  $5x + 12 = 27 \\Rightarrow 5x + 12 - 12 = 27 - 12 \\Rightarrow 5x = 15$\n* **Example 3**:\n  $3x + 8 = x + 14 \\Rightarrow 3x + 8 - 8 = x + 14 - 8 \\Rightarrow 3x = x + 6$'
-},
-{
- item: '### **Multiplication by a Nonzero Constant (both sides)**',
- math: '',
- after: '* **Goal**: Eliminate fractions or decimal coefficients.\n* **Example 1**:\n  $\\frac{x}{3} = 4 \\Rightarrow 3 \\cdot \\frac{x}{3} = 3 \\cdot 4 \\Rightarrow x = 12$\n* **Example 2**:\n  $0.5x = 6 \\Rightarrow 2 \\cdot 0.5x = 2 \\cdot 6 \\Rightarrow x = 12$'
-},
-{
- item: '### **Division by a Nonzero Constant (both sides)**',
- math: '',
- after: '* **Goal**: Eliminate coefficients of the variable.\n* **Example 1**:\n  $4x = 12 \\Rightarrow \\frac{4x}{4} = \\frac{12}{4} \\Rightarrow x = 3$\n* **Example 2**:\n  $-6x = 18 \\Rightarrow \\frac{-6x}{-6} = \\frac{18}{-6} \\Rightarrow x = -3$'
-},
-{
- item: '### **Combining Like Terms**',
- math: '',
- after: '* **Goal**: Simplify expressions on one or both sides.\n* **Example 1**:\n  $2x + 3x = 10 \\Rightarrow 5x = 10$\n* **Example 2**:\n  $7x - 2x + 4 = 19 \\Rightarrow 5x + 4 = 19$\n* **Example 3**:\n  $3x + 5 = x + 11 \\Rightarrow 3x - x = 11 - 5 \\Rightarrow 2x = 6$'
-},
-{
-  item: '### **Distributive Property (Expanding)**',
-  math: '',
-  after: '* **Goal**: Remove parentheses from expressions.\n* **Example 1**:\n  $2(x + 3) = 10 \\Rightarrow 2x + 6 = 10$\n* **Example 2**:\n  $-3(2x - 4) = 18 \\Rightarrow -6x + 12 = 18$'
-},
-{
-  item: '### **Factoring**',
-  math: '',
-  after: '* **Goal**: Factor out common terms from expressions.\n* **Example 1**:\n  $3x + 6 = 0 \\Rightarrow 3(x + 2) = 0$\n* **Example 2**:\n  $4x - 8 = 12 \\Rightarrow 4(x - 2) = 12$'
-}
-//  {
-//    item: '###  **Transposing Terms**',
-//    math: '',
-//    after: '* **Goal**: Move terms from one side to the other (usually via addition/subtraction).\n* **Example**:\n  $x + 5 = 8 \\Rightarrow x = 8 - 5 = 3$'
-//  }
-];
-
-
-const keyWords=['linear equations','equations','math equations','algebra equations',
-    'solving equations','mathematical equations','linear equations examples',
-    'solving equations with variables on both sides',]
-
-    
-  const sectionsContent={
-
-    definition:{
-      title:`What is Linear equation?`,
-      content:``,
-      before:`In algebra we define as a linear equation in one variable any mathematical expression that can be reduced to the form
-
-\t\t\t\t\t\t\t\t$ax + b = 0$
-
-where $a \\neq 0$.
-While this canonical form is often taken as the standard, it is important to understand that a linear equation does not always appear this way at first glance. It might involve parentheses, fractions, terms spread across both sides of the equals sign, or even look quite unlike a typical 
-$ax + b = 0$ equation — and yet still be linear.
-
-Being able to [recognize different forms](!/algebra/equations/linear#forms) of linear equations and knowing how to **transform them into simpler or more familiar ones** is a fundamental skill in solving them. This process relies on a small set of [elementary operations](!/algebra/equations/linear#operations) — things like adding or subtracting the same quantity from both sides, multiplying or dividing by nonzero numbers, or simplifying expressions. These operations don’t change the solution of the equation, but they let us manipulate its form freely, making it easier to solve. Understanding both the variety of forms and how to move between them is essential groundwork before tackling the solution itself.
-`,
-      after:``,
   
-  
-    },
-    forms:{
-      title:`Different forms of linear equations`,
-      content:``,
-      before:`
-      Linear equations can appear in various algebraic forms, each serving different purposes in mathematical analysis and problem-solving. While the standard (canonical) form $ax + b = 0$ provides the most recognizable pattern, linear equations frequently present themselves in other configurations that may initially seem unrelated. Understanding these different forms is crucial because the same mathematical relationship can be expressed in multiple ways depending on the context or the stage of solution. 
-      Recognizing these variations allows you to identify linear equations regardless of their appearance and choose the most appropriate form for solving or analyzing a given problem.
-      We may as well modify the forms transforming them one to another using [elementary operations](!/algebra/equations/linear#operations). This process of tranformation may itself lead to a solution.
-      
-      `,
-      after:`
+// <hr style="border-width:1px;"></hr>
 
-      In practice, linear equations rarely appear in their pure, isolated forms. Real-world problems often present equations that combine multiple forms simultaneously - you might encounter an equation with fractions, parentheses, and terms distributed across both sides, requiring you to recognize and work with several forms at once.
-      For instance, an equation like $\\frac{2(x-3)}{4}+ 5 = 3x - 7$ incorporates fractional, factored, and two-sided linear expression forms together. This complexity means that successful problem-solving requires not just recognizing individual forms, but understanding how to systematically transform mixed expressions into simpler, more manageable structures. 
-     
-      `,
-  
-    },
-  
-    operations:{
-  
-      title:`Elementary Operations`,
-      content:``,
-      before:`Solving linear equations requires a systematic approach to simplification, achieved through a set of fundamental techniques called elementary operations. These operations serve as the mathematical tools that allow us to transform complex equations into simpler, more manageable forms without altering the equation's solution. Just as elementary row operations in linear algebra preserve the solution set of a system while simplifying its structure, these algebraic operations maintain the truthfulness of the equation while reducing its complexity. Each operation—whether adding the same value to both sides, multiplying by a constant, or combining like terms—follows the principle of balance: whatever is done to one side must be done to the other. This ensures that the equality relationship remains intact throughout the solution process. Understanding and mastering these operations is essential because they form the foundation for solving almost any linear equation, regardless of its initial complexity or form.
-      
-      
-      `,
-      after:`
-      
-      While linear equations are mathematically straightforward, solving them is rarely a single-step process. Most problems require combining several techniques in strategic sequences—you might need to distribute terms, clear fractions, and combine like terms before isolating the variable. The path from problem to solution often involves multiple steps that aren't immediately obvious, requiring you to think ahead and choose the most efficient approach. This complexity reminds us that even "simple" mathematical concepts can demand sophisticated problem-solving skills and careful planning to reach the final answer.
-      `,
-  
-    },
-    function:{
-      title:`Linear Equation vs Linear Function`,
-      content:`
-      Essentially, both concepts (**Linear Equations** and **Linear Functions**)describe the **same underlying relationship** — but viewed from different perspectives:
+// <hr style="color:blue;" />
 
-A **linear equation** in one variable (e.g., $ax + b = 0$) is primarily about finding **a specific value** of $x$ that makes the statement true — it’s **static** in that sense, focused on solving.
-
-A **linear function** (e.g., $f(x) = ax + b$) is about describing how $y$ (or $f(x)$) **changes with** $x$ — it is a **dynamic rule** for generating outputs from inputs.
-
-### Key Idea :
-
-@academic[example:A linear equation becomes a linear function when we stop asking ‘What value of $x$ makes this true?’ and instead ask ‘What value comes out when I plug $x$ in?’]@
-
-### How to Form the Link:
-
-* Take the linear equation $ax + b = 0$
-* Rearranged, it becomes $y = ax + b$ — now it defines a **linear function**.
-* The **solution** to the original equation corresponds to the **x-intercept** of the function: the point where $f(x) = 0$.
-
-      `,
-      before:`While linear equations focus on solving for a specific value that satisfies a condition, the same expression — once interpreted as a rule assigning outputs to inputs — becomes a linear function. In this way, $ax + b = 0$ and $f(x) = ax + b$ are two sides of the same coin: one algebraic, one functional. Understanding this connection deepens insight into both algebra and graphing.
-      `,
-      after:``,
-  
-    },
-
-
-    solving:{
-  
-      title:`Solving Linear Equations`,
-      content:`If we treat everything we have discussed so far — expanding, combining like terms, using elementary operations — as falling under the umbrella of [simplification](!/algebra/equations/linear#simplify), then solving linear equations can be approached in several distinct ways. Here's a breakdown of the main methods:
-
- **Main Methods for Solving Linear Equations**
-
-### 1. **Algebraic Simplification**
-
-This is the most standard and general method.
-It involves:
-
-* [Simplifying](!/algebra/equations/linear#simplify) the equation using algebraic rules
-* Applying elementary operations to isolate the variable
-
-This is the default method taught in algebra, and it works for any linear equation in one variable.
-
-
-### 2. **Graphical Method**
-
-In this approach, the linear equation $ax + b = 0$ is interpreted as a function $y = ax + b$, and the solution corresponds to the **x-intercept** of the line (where $y = 0$).
-
-It's useful for visual understanding or checking solutions, though less precise unless graphing is done digitally.
+// <hr style="border-color:#3498db; border-width:1px;" />
 
 
 
-### 3. **Numeric (Trial and Error or Table Method)**
-
-This is a very basic, sometimes informal approach:
-
-* Guess values for $x$
-* Plug them into the equation until you find the value that makes it true
-
-It is inefficient for exact answers but helpful in early learning or for estimating solutions in applied contexts.
-
-
-
-### 4. **Using Inverse Operations Directly**
-
-Instead of [simplifying](!/algebra/equations/linear#simplify) everything formally, this method focuses on “undoing” the equation step-by-step:
-
-* Reverse additions/subtractions, then multiplications/divisions, like peeling away layers
-
-This is often taught as a mental or intuitive technique in early algebra courses.
-
-
-
-### 5. **Technology-Based Methods**
-
-Solving using:
-
-* Calculators
-* Computer Algebra Systems (CAS)
-* Apps or graphing tools
-
-Useful for checking, exploring, or when speed matters more than manual process.
-
-
- While algebraic simplification is the foundation, **multiple paths** can lead to the solution of a linear equation. Choosing a method depends on the goal: understanding, speed, visualization, or verification.
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
  
-
-      `,
-      before:``,
-      after:``,
-  
-    },
-    simplify:{
-  
-      title:`Simplifying Linear Equations`,
-      content:`**Ordered Algorithm for Simplifying and** [Solving](!/algebra/equations/linear#solving) **a Linear Equation**
-
-### **Step 1: Expand**
-
- **First**, eliminate all parentheses by applying the **distributive property**:
-
- \t\t\t\t\t\t\t$a(b + c) \\rightarrow ab + ac$
-
-  Do this **on both sides** of the equation.
+// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.notation)}
+        // </div>,
 
 
-### **Step 2: Eliminate Fractions**
-
-If the equation includes fractions, find the **least common denominator (LCD)** and multiply **every term** by it to clear the denominators.
-
-
-### **Step 3: Combine Like Terms**
-
- Now simplify each side:
-
-  * Add or subtract constants.
-  * Add or subtract variable terms.
-  * Do this **separately** on each side.
+//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+//     {processContent(sectionsContent.normal.parameters)}
+// </div>,
+        
+//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+//                   {processContent(sectionsContent.obj4.content)}
+//                   </div>,
 
 
-### **Step 4: Move Variable Terms to One Side**
-
- Use **addition or subtraction** to bring all variable terms to one side (typically the left side).
-
-
-### **Step 5: Move Constant Terms to the Other Side**
-
- Use **addition or subtraction** again to move constants to the opposite side.
-
-
-### **Step 6: Isolate the Variable**
-
- Use **multiplication or division** to get the variable by itself (make its coefficient 1).
+//  <div key={'dist'} style={{
+//                     textAlign: 'center',
+//                     transform: 'scale(0.98)',
+//                     transformOrigin: 'center',
+//                     marginTop:'50px',
+//                     marginLeft:'-150px'
+//                   }} dangerouslySetInnerHTML={{ 
+//                     __html:   sectionContent.distributions.svg,
+//                   }} />
 
 
-### **Step 7 (Optional): Check**
+const sectionsContent = {
+  obj1: {
+    title: `Definition and Standard Form`,
+    content: `A linear equation in one variable is any equation that can be written as
 
-Substitute the solution back into the original equation to verify.
+$$ax + b = 0$$
+
+where $a$ and $b$ are real constants and $a \\neq 0$. The variable $x$ appears only to the first power — no $x^2$, no $\\sqrt{x}$, no $x$ in a denominator. The word "linear" reflects the geometric fact that the graph of $y = ax + b$ is a straight line, and the solution of $ax + b = 0$ is the point where that line crosses the horizontal axis.
+
+Not every linear equation arrives in standard form. The equation $3x - 7 = 2x + 5$ is linear because, after collecting terms, it reduces to $x - 12 = 0$. The equation $\\frac{x}{4} + 1 = 3$ is also linear — the fraction involves only a numerical denominator, not a variable one. Recognition matters: any equation where the variable appears solely to the first power, with no products or compositions involving the variable, is linear regardless of how it is initially presented.
+
+The solution is immediate from standard form. Subtracting $b$ and dividing by $a$ gives $x = -\\frac{b}{a}$. This single value is the only solution, and it always exists when $a \\neq 0$. Linear equations never produce two solutions, infinitely many solutions, or no solutions — as long as the coefficient of $x$ is genuinely nonzero.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj2: {
+    title: `Properties of Equality`,
+    content: `Solving a linear equation means transforming it into an equivalent equation where the variable stands alone. Two properties of equality make this possible, and they are the only tools required.
+
+The addition property states that adding or subtracting the same quantity on both sides of an equation produces an equivalent equation. If $x + 5 = 12$, then subtracting $5$ from both sides gives $x = 7$. The solution set has not changed — it has only become visible. This property works because equality is preserved when identical operations are applied symmetrically.
+
+The multiplication property states that multiplying or dividing both sides by any nonzero constant also produces an equivalent equation. If $3x = 21$, then dividing both sides by $3$ gives $x = 7$. The restriction to nonzero multipliers is critical: multiplying both sides by zero collapses every equation to $0 = 0$, destroying all information about the original solution.
+
+These two properties generate every valid algebraic step in the solution of a linear equation. Combining them in sequence — first clearing additive terms, then clearing the coefficient of $x$ — isolates the variable systematically.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj3: {
+    title: `Solving Single-Step and Multi-Step Equations`,
+    content: `A single-step equation requires exactly one application of the properties of equality. The equation $x - 9 = 4$ is solved by adding $9$ to both sides, yielding $x = 13$. The equation $-5x = 40$ is solved by dividing both sides by $-5$, yielding $x = -8$. In each case, one operation undoes the one operation binding the variable.
+
+Multi-step equations demand a sequence of operations. Consider $4x - 7 = 2x + 11$. The variable appears on both sides and constants are mixed in. The strategy proceeds in stages: gather all variable terms on one side and all constant terms on the other, then isolate the variable.
+
+$$4x - 7 = 2x + 11$$
+
+Subtract $2x$ from both sides:
+
+$$2x - 7 = 11$$
+
+Add $7$ to both sides:
+
+$$2x = 18$$
+
+Divide both sides by $2$:
+
+$$x = 9$$
+
+The order of these steps is flexible — subtracting $2x$ first or adding $7$ first both reach the same result — but the underlying logic is rigid: every step must preserve equivalence, and each step must bring the equation closer to the form $x = \\text{value}$.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj4: {
+    title: `Equations with Parentheses`,
+    content: `When an equation contains parentheses, the distributive property clears them before any collecting or isolating takes place. The equation $3(2x - 5) = 4x + 1$ begins with distribution on the left:
+
+$$6x - 15 = 4x + 1$$
+
+From here, the procedure is identical to any multi-step equation. Subtract $4x$ from both sides to get $2x - 15 = 1$, add $15$ to get $2x = 16$, and divide by $2$ to reach $x = 8$.
+
+Nested parentheses require working from the innermost grouping outward. The equation $2[3(x + 1) - 4] = 10$ simplifies as follows: first distribute the $3$ inside the brackets to get $2[3x + 3 - 4] = 10$, then simplify inside the brackets to $2[3x - 1] = 10$, then distribute the $2$ to obtain $6x - 2 = 10$, and finally solve to get $x = 2$.
+
+A persistent source of error is the negative sign preceding parentheses. In the expression $-(x + 4)$, the negative distributes to every term inside, producing $-x - 4$. Writing $-x + 4$ instead is one of the most common algebraic mistakes, and it changes the solution entirely.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj5: {
+    title: `Equations with Fractions`,
+    content: `Fractional coefficients do not change the type of an equation, but they complicate arithmetic. Clearing all fractions at once simplifies the process. The technique is to multiply every term on both sides by the least common denominator of all fractions present.
+
+Consider the equation $\\frac{x}{3} + \\frac{x - 2}{4} = 5$. The LCD of $3$ and $4$ is $12$. Multiplying every term by $12$ gives:
+
+$$4x + 3(x - 2) = 60$$
+
+Distributing and collecting:
+
+$$4x + 3x - 6 = 60$$
+$$7x = 66$$
+$$x = \\frac{66}{7}$$
+
+The multiplication by $12$ is valid because $12$ is a nonzero constant — it does not depend on $x$. The solution set is preserved exactly. After clearing, the equation is a standard multi-step linear equation with integer coefficients.
+
+A crucial distinction separates these equations from [rational equations](!/algebra/equations/rational). When the denominators are numerical constants (like $3$, $4$, $12$), clearing them is safe and changes nothing about the solution set. When the variable itself appears in a denominator, the equation is no longer linear — it is rational, and clearing that denominator introduces domain restrictions and the possibility of extraneous solutions.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj6: {
+    title: `Equations with Decimals`,
+    content: `Decimal coefficients are fractions in disguise, and the same clearing strategy applies. Multiplying both sides by an appropriate power of $10$ converts every coefficient to an integer.
+
+The equation $0.3x + 1.25 = 0.8x - 0.5$ has decimals extending to the hundredths place. Multiplying every term by $100$ produces:
+
+$$30x + 125 = 80x - 50$$
+
+Collecting variable terms on the right and constants on the left:
+
+$$175 = 50x$$
+$$x = \\frac{175}{50} = \\frac{7}{2}$$
+
+The choice of multiplier depends on the finest decimal present. If the most decimal places in any coefficient is one, multiply by $10$. If two, multiply by $100$. This is equivalent to rewriting each decimal as a fraction and clearing denominators, compressed into a single step.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj7: {
+    title: `Special Cases`,
+    content: `The procedure for solving a linear equation assumes that the variable survives the simplification process. When it does not, two outcomes are possible, and neither produces a finite solution set.
+
+An identity arises when simplification eliminates the variable and leaves a true numerical statement. The equation $2(x + 3) = 2x + 6$ distributes to $2x + 6 = 2x + 6$. Subtracting $2x$ from both sides gives $6 = 6$, which is true regardless of $x$. Every real number satisfies the original equation, and the solution set is $\\mathbb{R}$. The equation was not conditional — it was a restatement of an algebraic identity.
+
+A contradiction arises when simplification eliminates the variable and leaves a false numerical statement. The equation $3(x + 1) = 3x + 8$ distributes to $3x + 3 = 3x + 8$. Subtracting $3x$ from both sides gives $3 = 8$, which is false for every value of $x$. No real number satisfies the equation, and the solution set is empty.
+
+Both situations are recognizable during solving: the variable terms cancel completely, and the remaining constant equation decides between identity and contradiction. If the constants match, every value works. If they clash, nothing does.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj8: {
+    title: `Literal Equations and Formulas`,
+    content: `A literal equation contains multiple variables, and the task is to solve for one of them in terms of the others. The same properties of equality apply — the only difference is that the "constants" being manipulated are themselves variables.
+
+Consider the equation $d = rt$, which relates distance, rate, and time. Solving for $t$ means isolating it on one side. Dividing both sides by $r$ (assuming $r \\neq 0$) gives $t = \\frac{d}{r}$. The variable $r$ is treated as a nonzero constant throughout, just as a numerical coefficient would be.
+
+More involved formulas demand the same multi-step approach used for numerical linear equations. To isolate $r$ in the formula $A = P(1 + rt)$, begin by dividing both sides by $P$:
+
+$$\\frac{A}{P} = 1 + rt$$
+
+Subtract $1$:
+
+$$\\frac{A}{P} - 1 = rt$$
+
+Divide by $t$:
+
+$$r = \\frac{1}{t}\\left(\\frac{A}{P} - 1\\right)$$
+
+Each step is a reversible operation that preserves equivalence, applied to letters instead of numbers. The logic is identical to solving $7 = 2(1 + 3x)$ — only the symbols differ.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+};
 
 
-## 🔹 Why This Order?
+ const introContent = {
+  id: 'intro',
+  title: `First-Degree Equations and the Foundation of Solving`,
+  content: `A linear equation in one variable is the simplest type of algebraic equation: the unknown appears only to the first power, and — provided the coefficient is nonzero — exactly one solution exists. The methods used to solve linear equations are elementary, but they are not trivial. Every technique for handling more complex equations relies on the same core logic: transform the equation into a simpler equivalent form by applying reversible operations. Mastering that logic here makes everything that follows possible.`,
+};
 
-Each step prepares for the next:
 
-* **Expand** first so you can see all terms.
-* **Clear fractions** before combining terms to avoid errors.
-* **Combine like terms** before moving anything around.
-* Then start isolating the variable.
-
-      `,
-      before:``,
-      after:``,
-  
-    },
-    tips:{
-  
-      title:`Efficiency Tips: Shortcuts and Minimizing Steps`,
-      content:`While solving linear equations follows a standard sequence, not every equation needs every step. With practice, you can learn to recognize opportunities to **combine steps** or **skip redundant ones** — making your work quicker and cleaner without losing accuracy.
-
- **Skip clearing fractions if only one term has a denominator**: 
-
-Sometimes it is easier to multiply just that term instead of the whole equation.
-
-  * Example: $\\frac{x}{3} = 2 \\Rightarrow x = 6$ (no need to find LCD)
-
-**Move terms while simplifying**: 
-
-If both sides have terms to combine and move, do them in the same step.
-
-  * Example: $2x + 3 = x + 7 \\Rightarrow x = 4$ (subtracted $x$ and 3 in one move)
-
- **Target the variable side early**:
- 
- Move variable terms to the side where the coefficient is positive or simpler to deal with.
-
- **Avoid multiplying everything by the LCD too early**: 
- 
- In some cases, it's easier to isolate a variable term directly and multiply later, especially if one side is already simplified.
-
-These techniques come with experience — but once mastered, they save time and keep work tidy.
-`,
-      before:``,
-      after:``,
-  
-    },
-    obj5:{
-  
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-  
-    }
-  
+const faqQuestions = {
+  obj1: {
+    question: "What is a linear equation?",
+    answer: "A linear equation in one variable has the form ax + b = 0 where a ≠ 0. The variable appears only to the first power with no products or compositions. It always has exactly one solution: x = -b/a.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "What are the properties of equality for solving equations?",
+    answer: "The addition property: adding or subtracting the same quantity on both sides preserves the solution. The multiplication property: multiplying or dividing by any nonzero constant preserves the solution. These two properties generate every valid solving step.",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "How do you solve multi-step linear equations?",
+    answer: "Gather variable terms on one side and constant terms on the other using addition/subtraction, then isolate the variable by dividing. Each step must preserve equivalence. The order is flexible but the logic is rigid.",
+    sectionId: "3"
+  },
+  obj4: {
+    question: "How do you solve equations with parentheses?",
+    answer: "Use the distributive property to clear parentheses first, then solve as a standard multi-step equation. Watch for negative signs before parentheses — they distribute to every term inside, a common error source.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "How do you solve linear equations with fractions?",
+    answer: "Multiply every term on both sides by the least common denominator to clear all fractions at once. This works because the LCD is a nonzero constant. The result is an equivalent equation with integer coefficients.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "How do you solve equations with decimals?",
+    answer: "Multiply both sides by the appropriate power of 10 (10 for tenths, 100 for hundredths) to convert all coefficients to integers. This is equivalent to clearing fractional denominators in one step.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "What are identity and contradiction equations?",
+    answer: "An identity occurs when variable terms cancel leaving a true statement (like 6 = 6) — every real number is a solution. A contradiction occurs when they leave a false statement (like 3 = 8) — no solution exists.",
+    sectionId: "7"
+  },
+  obj8: {
+    question: "How do you solve literal equations for a specific variable?",
+    answer: "Apply the same properties of equality, treating other variables as constants. Isolate the target variable using addition/subtraction and multiplication/division. The logic is identical to numerical equations — only the symbols differ.",
+    sectionId: "8"
   }
-
-
-  
-const introContent = {
-  id: "intro",
-  title: "",
-  content: `Linear equations form the foundation of algebraic problem-solving and represent one of the most fundamental concepts in mathematics. These equations, characterized by variables raised only to the first power, appear in countless real-world applications from calculating distances and rates to modeling economic relationships and scientific phenomena.
-This comprehensive guide explores linear equations through four essential perspectives. We begin by establishing a clear [definition](!/algebra/equations/linear#definition) of what constitutes a linear equation, moving beyond the simple $ax+b=0$
-form to understand the broader concept. Next, we examine the various [forms](!/algebra/equations/linear#forms) that linear equations can take - from standard form to factored expressions - helping you recognize linear relationships regardless of their initial appearance.
-The [elementary operations](!/algebra/equations/linear#operations) section provides the toolkit needed to manipulate and solve these equations, covering addition, subtraction, multiplication, division, and algebraic techniques like distribution and factoring. We then transition to the visual representation of linear equations through graphing, showing how these algebraic expressions translate into straight lines on the coordinate plane.
-Finally, we tackle solution methods, presenting systematic approaches to finding the values that satisfy linear equations, whether they appear in simple or complex forms.
-By mastering these interconnected concepts, you'll develop both the theoretical understanding and practical skills needed to confidently work with linear equations in any context.`
 }
 
 
-    return {
-      props:{
-         seoData: {
-      title: "Linear Equations - Complete Guide & Examples | Learn Math Class",
-      description: "Master linear equations with comprehensive examples, solving methods, and step-by-step explanations. Learn algebra equations and mathematical problem-solving techniques.",
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Linear Equations",
+    "description": "Master linear equations: standard form ax + b = 0, properties of equality, multi-step solving, equations with parentheses, fractions, decimals, special cases (identities and contradictions), and literal equations.",
+    "url": "https://www.learnmathclass.com/algebra/equations/linear",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Linear Equations"
+    },
+    "teaches": [
+      "Standard form ax + b = 0",
+      "Addition and multiplication properties of equality",
+      "Multi-step equation solving",
+      "Clearing parentheses with distribution",
+      "Clearing fractions with LCD",
+      "Identity and contradiction recognition",
+      "Literal equations and formulas"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Algebra",
+        "item": "https://www.learnmathclass.com/algebra"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Equations",
+        "item": "https://www.learnmathclass.com/algebra/equations"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Linear Equations",
+        "item": "https://www.learnmathclass.com/algebra/equations/linear"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+  return {
+  props: {
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Linear Equations: Solving First-Degree Equations | Learn Math Class",
+      description: "Master linear equations: standard form ax + b = 0, properties of equality, multi-step solving, equations with parentheses, fractions, decimals, special cases (identities and contradictions), and literal equations.",
       keywords: keyWords.join(", "),
       url: "/algebra/equations/linear",
       name: "Linear Equations"
     },
-        sectionsContent,
-        introContent,
-        keyWords,
-        linearEquationFormsData,
-        elementaryOperationsData
-
-        
-      }
-    }
   }
+}
+   }
 
-export default function LinearEquationsPage({ 
-  seoData,
-  sectionsContent,
-  introContent,
-  keyWords,
-  linearEquationFormsData,
-  elementaryOperationsData,
-}) {
 
+export default function LinearEquationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
-  const linearEquationsSections=[
+  const genericSections=[
     {
-        id:'definition',
-        title:sectionsContent.definition.title,
-        link:'',
+        id:'1',
+        title:sectionsContent.obj1.title,
+        link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.definition.before,
-        ]
-    },
-    {
-        id:'forms',
-        title:sectionsContent.forms.title,
-        link:'',
-        content:[
-
-          sectionsContent.forms.before,
-          <div key={'forms_list'} style={{width:'90%',margin:'auto'}}>
-          <MyList
-            key={'forms'}
-            data={linearEquationFormsData}
-            type="number"
-            math={true}
-            boxed={true}
-            color="blue"
-            mathTheme="grayCool"
-            mathProps={{
-            display: true,
-            
-            additionalStyles: { textAlign: "center" ,fontSize: "1.2rem",
-              maxWidth:"400px",margin:"auto",maxHeight:"100px"}
-            }}
-          />
-         </div>,
-          sectionsContent.forms.after,
-          // <div style={{width:'60%',margin:'auto'}}>
-          // <MyList 
-          // key={'forms'}
-          // data={linearEquationFormsData}
-          // type="number"
-          // math={true}
-          // boxed={true}
-          // color="gray"
-          // // centered={true}
-          // mathTheme="royalBlue"
-          // mathProps={{
-          // display: true,
-          // fontSize: "1.9rem", 
-          // textAlign: "center"
-                  
-          //   }}
-          // />
-          // </div>
+          sectionsContent.obj1.content,
         ]
     },
     {
-        id:'operations',
-        title:sectionsContent.operations.title,
-        link:'',
+        id:'2',
+        title:sectionsContent.obj2.title,
+        link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.operations.before,
-           <div key={'elementary_operations_list'} style={{width:'60%',margin:'auto'}}>
-          <MyList
-            key={'forms'}
-            data={elementaryOperationsData}
-            type="number"
-            math={true}
-            boxed={true}
-            color="gray"
-            mathTheme="royalBlue"
-            mathProps={{
-            display: true,
-            
-            additionalStyles: { textAlign: "center" ,fontSize: "1.2rem",
-              maxWidth:"600px",margin:"auto",maxHeight:"100px"}
-            }}
-          />
-         </div>,
-         sectionsContent.operations.after,
-        ]
-    },
-     {
-        id:'simplify',
-        title:sectionsContent.simplify.title,
-        link:'',
-        content:[
-           sectionsContent.simplify.content,
-        ],
-    },
-     {
-        id:'tips',
-        title:sectionsContent.tips.title,
-        link:'',
-        content:[
-          sectionsContent.tips.content,
+          sectionsContent.obj2.content,
         ]
     },
     {
-        id:'solving',
-        title:sectionsContent.solving.title,
-        link:'',
+        id:'3',
+        title:sectionsContent.obj3.title,
+        link:sectionsContent.obj3.link,
         content:[
-         sectionsContent.solving.content,
-
+          sectionsContent.obj3.content,
         ]
     },
-     {
-        id:'function',
-        title:sectionsContent.function.title,
-        link:'',
+    {
+        id:'4',
+        title:sectionsContent.obj4.title,
+        link:sectionsContent.obj4.link,
         content:[
-
-          sectionsContent.function.before,
-          sectionsContent.function.content,
+          sectionsContent.obj4.content,
         ]
     },
-     
+    {
+        id:'5',
+        title:sectionsContent.obj5.title,
+        link:sectionsContent.obj5.link,
+        content:[
+          sectionsContent.obj5.content,
+        ]
+    },
+    {
+        id:'6',
+        title:sectionsContent.obj6.title,
+        link:sectionsContent.obj6.link,
+        content:[
+          sectionsContent.obj6.content,
+        ]
+    },
+    {
+        id:'7',
+        title:sectionsContent.obj7.title,
+        link:sectionsContent.obj7.link,
+        content:[
+          sectionsContent.obj7.content,
+        ]
+    },
+    {
+        id:'8',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
+        ]
+    },
+    // {
+    //     id:'9',
+    //     title:sectionsContent.obj9.title,
+    //     link:sectionsContent.obj9.link,
+    //     content:[
+    //       sectionsContent.obj9.content,
+    //     ]
+    // },
+    // {
+    //     id:'10',
+    //     title:sectionsContent.obj10.title,
+    //     link:sectionsContent.obj10.link,
+    //     content:[
+    //       sectionsContent.obj10.content,
+    //     ]
+    // },
+    // {
+    //     id:'11',
+    //     title:sectionsContent.obj11.title,
+    //     link:sectionsContent.obj11.link,
+    //     content:[
+    //       sectionsContent.obj11.content,
+    //     ]
+    // },
+    // {
+    //     id:'12',
+    //     title:sectionsContent.obj12.title,
+    //     link:sectionsContent.obj12.link,
+    //     content:[
+    //       sectionsContent.obj12.content,
+    //     ]
+    // },
+    // {
+    //     id:'13',
+    //     title:sectionsContent.obj13.title,
+    //     link:sectionsContent.obj13.link,
+    //     content:[
+    //       sectionsContent.obj13.content,
+    //     ]
+    // },
+    // {
+    //     id:'14',
+    //     title:sectionsContent.obj14.title,
+    //     link:sectionsContent.obj14.link,
+    //     content:[
+    //       sectionsContent.obj14.content,
+    //     ]
+    // },
+    // {
+    //     id:'15',
+    //     title:sectionsContent.obj15.title,
+    //     link:sectionsContent.obj15.link,
+    //     content:[
+    //       sectionsContent.obj15.content,
+    //     ]
+    // },
+    // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
+    // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
+    // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
     
-
-     // {
-    //     id:'',
-    //     title:'',
-    //     link:'',
-    //     content:''
-    // }
-
 ]
 
   return (
-    <>
-      <Head>
-   <title>{seoData.title}</title>
-   <meta name="description" content={seoData.description} />
-   <meta name="keywords" content={seoData.keywords} />
-   <meta name="viewport" content="width=device-width, initial-scale=1" />
-   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+   <>
+ <Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
+    }}
+  />
+</Head>
+   {/* <GenericNavbar/> */}
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+    <OperaSidebar 
+           side='right'
+           // topOffset='65px' 
+           sidebarWidth='45px'
+           panelWidth='200px'
+           iconColor='white'
+           panelBackgroundColor='#f2f2f2'
+         /> 
+   <Breadcrumb/>
+   <br/>
+   <br/>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Linear Equations</h1>
+   <br/>
+   <br/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
    
-   <meta property="og:title" content={seoData.title} />
-   <meta property="og:description" content={seoData.description} />
-   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-   <meta property="og:type" content="article" />
-   <meta property="og:site_name" content="Learn Math Class" />
-   
-   <meta name="twitter:card" content="summary" />
-   <meta name="twitter:title" content={seoData.title} />
-   <meta name="twitter:description" content={seoData.description} />
-   
-   <meta name="robots" content="index, follow" />
-   
-   <script 
-     type="application/ld+json"
-     dangerouslySetInnerHTML={{ 
-       __html: JSON.stringify({
-         "@context": "https://schema.org",
-         "@type": "WebPage",
-         "name": seoData.name,
-         "description": seoData.description,
-         "keywords": seoData.keywords,
-         "url": `https://www.learnmathclass.com${seoData.url}`,
-         "dateModified": new Date().toISOString(),
-         "inLanguage": "en-US",
-         "mainEntity": {
-           "@type": "Article",
-           "name": seoData.name,
-           "dateModified": new Date().toISOString(),
-           "author": {
-             "@type": "Organization",
-             "name": "Learn Math Class"
-           }
-         }
-       })
-     }}
    />
- </Head>
-      {/* <GenericNavbar/> */}
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <OperaSidebar 
-                  side='right'
-                  topOffset='55px' 
-                  sidebarWidth='45px'
-                  panelWidth='200px'
-                  iconColor='white'
-                  panelBackgroundColor='#f2f2f2'
-                />
-      <Breadcrumb/>
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Linear Equations</h1>
-      <br/>
-      <SectionTableOfContents sections={linearEquationsSections}/>
-      <br/>
-      <br/>
-      <IntroSection 
-           id={introContent.id}
-           title={introContent.title}
-           content={introContent.content}
-           backgroundColor="#f2f2f2"
-           textColor="#06357a"
-         />
-      <br/>
-      <br/>
-      <br/>
-      <Sections sections={linearEquationsSections}/>
-      <br/>
-       {/* <ScrollUpButton/> */} 
-    </>
-  );
+   <br/>
+   <br/>
+   <br/>
+    <IntroSection 
+          id={introContent.id}
+          title={introContent.title}
+          content={introContent.content}
+           backgroundColor='#f9fafb'
+          //  "#f2f2f2"
+          textColor="#06357a"
+        />
+   <br/>
+   <br/>
+   <Sections sections={genericSections}/>
+   <br/>
+   <br/>
+   <br/>
+   {/* <ScrollUpButton/> */}
+   </>
+  )
 }

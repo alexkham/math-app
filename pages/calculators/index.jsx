@@ -158,10 +158,10 @@ const CustomProbability=()=>(
             icon:CustomAlgebra,
             // href: "/calculators",
             subcategories: [
-              {
-                name: "Quadratic Equations Calculator",
-                href: "/calculators/quadratic-equations"
-              },
+              // {
+              //   name: "Quadratic Equations Calculator",
+              //   href: "/calculators/quadratic-equations"
+              // },
               {
                 name: "Factoring Calculator",
                 href: "/calculators/factoring-calculator"

@@ -250,7 +250,7 @@ Multiplication distributes over sums, enabling expansion of products and factori
 
 **Identity elements** exist for both operations. The additive identity is $0 = 0 + 0i$, satisfying $z + 0 = z$ for every $z$. The multiplicative identity is $1 = 1 + 0i$, satisfying $z \\cdot 1 = z$ for every $z$.
 
-**Inverse elements** also exist. Every complex number $z$ has an additive inverse $-z$ with $z + (-z) = 0$. Every nonzero complex number has a multiplicative inverse $z^{-1}$ with $z \\cdot z^{-1} = 1$. These properties make $\\mathbb{C}$ a [mathematical field](!/complex-numbers/properties-and-fields).`,
+**Inverse elements** also exist. Every complex number $z$ has an additive inverse $-z$ with $z + (-z) = 0$. Every nonzero complex number has a multiplicative inverse $z^{-1}$ with $z \\cdot z^{-1} = 1$. These properties make $\\mathbb{C}$ a mathematical field.`,
   after: ``,
   link: '',
 },

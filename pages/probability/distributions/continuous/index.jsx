@@ -496,7 +496,7 @@ Standard deviation is approximately 28.9% of the interval width. For a uniform d
 
 **Memoryless in Relative Terms**: While not memoryless in the exponential sense, the uniform distribution has no "preferred" region—every subinterval of equal length has equal probability.
 
-**Bounded Support**: Unlike the normal or [exponential distributions](!probability/distributions/continuous#exponential), the uniform distribution has strict bounds. Values outside [a, b] have zero probability, making it ideal for modeling quantities with known limits.
+**Bounded Support**: Unlike the normal or [exponential distributions](!probability/distributions/continuous/exponential), the uniform distribution has strict bounds. Values outside [a, b] have zero probability, making it ideal for modeling quantities with known limits.
 
 **Maximum Entropy**: Among all continuous distributions with bounded support [a, b], the uniform distribution has maximum entropy. It represents complete uncertainty about where the value will fall within the interval—no region is favored over any other.
 
@@ -919,7 +919,7 @@ The fundamental principle of continuous distributions is that probability equals
 
 **Parameter Effects on Shape and Spread**
 
-Changing parameters reshapes the distribution dynamically. For the normal distribution, increasing σ flattens and widens the curve (more spread), while decreasing σ makes it taller and narrower (less spread). The mean μ slides the entire curve left or right without changing its shape. For the [exponential distribution](!/probability/distributions/continuous#exponential), increasing λ compresses probability toward zero (faster decay), while decreasing λ stretches it out (slower decay). Interactive visualizers let you manipulate parameters and immediately see these effects, building intuition about how distributions behave.
+Changing parameters reshapes the distribution dynamically. For the normal distribution, increasing σ flattens and widens the curve (more spread), while decreasing σ makes it taller and narrower (less spread). The mean μ slides the entire curve left or right without changing its shape. For the [exponential distribution](!/probability/distributions/continuous/exponential), increasing λ compresses probability toward zero (faster decay), while decreasing λ stretches it out (slower decay). Interactive visualizers let you manipulate parameters and immediately see these effects, building intuition about how distributions behave.
 
 `,
       before:``,
