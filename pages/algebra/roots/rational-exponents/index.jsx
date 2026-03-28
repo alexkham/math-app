@@ -314,7 +314,7 @@ When the denominator of the exponent is even, the base must be non-negative.
 
 $$(-4)^{1/2} \\quad \\text{is not real}$$
 
-No real number squares to $-4$. The expression requires [complex numbers](!/algebra/roots/complex).
+No real number squares to $-4$. The expression requires complex numbers.
 
 When the denominator is odd, any real base is permitted.
 

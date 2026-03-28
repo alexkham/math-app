@@ -281,9 +281,9 @@ The critical advantage over the normal equations is numerical. Forming $A^TA$ sq
 
 Set $A_0 = A$. At each step, compute the QR factorization $A_k = Q_k R_k$, then form $A_{k+1} = R_k Q_k$.
 
-Under mild conditions, $A_k$ converges to an upper triangular matrix with the eigenvalues on the diagonal. The convergence is driven by the fact that $A_{k+1} = Q_k^T A_k Q_k$ — each iteration is a [similarity](!/linear-algebra/linear-transformations/basis-change) transformation that preserves the eigenvalues while driving the sub-diagonal entries toward zero.
+Under mild conditions, $A_k$ converges to an upper triangular matrix with the eigenvalues on the diagonal. The convergence is driven by the fact that $A_{k+1} = Q_k^T A_k Q_k$ — each iteration is a [similarity](!/linear-algebra/transformations/basis-change) transformation that preserves the eigenvalues while driving the sub-diagonal entries toward zero.
 
-With shifts (replacing $A_k$ by $A_k - \\sigma_k I$ before factoring and adding $\\sigma_k I$ back), convergence accelerates dramatically — cubic convergence for symmetric matrices with the Wilkinson shift. The QR algorithm computes eigenvalues without ever forming the [characteristic polynomial](!/linear-algebra/eigenvalues-vectors/characteristic-equation), avoiding the severe numerical instability of polynomial root-finding.`,
+With shifts (replacing $A_k$ by $A_k - \\sigma_k I$ before factoring and adding $\\sigma_k I$ back), convergence accelerates dramatically — cubic convergence for symmetric matrices with the Wilkinson shift. The QR algorithm computes eigenvalues without ever forming the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation), avoiding the severe numerical instability of polynomial root-finding.`,
     before: ``,
     after: ``,
     link: ``,

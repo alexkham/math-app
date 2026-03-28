@@ -209,7 +209,7 @@ $$\\mathbf{u} \\cdot \\mathbf{v} = u_1 v_1 + u_2 v_2 + \\cdots + u_n v_n = 0$$
 
 Geometrically, this means the angle between the two vectors is $90°$. The vectors are perpendicular — pointing in completely independent directions with no component of one lying along the other.
 
-The zero vector is orthogonal to every vector, since $\\mathbf{0} \\cdot \\mathbf{v} = 0$ for all $\\mathbf{v}$. This is a convention that keeps the theory clean, not a geometric statement — the zero vector has no direction. Orthogonality is defined relative to an [inner product](!/linear-algebra/orthogonality/inner-products), and on this site the standard dot product is used unless stated otherwise.`,
+The zero vector is orthogonal to every vector, since $\\mathbf{0} \\cdot \\mathbf{v} = 0$ for all $\\mathbf{v}$. This is a convention that keeps the theory clean, not a geometric statement — the zero vector has no direction. Orthogonality is defined relative to an [inner product](!/linear-algebra/orthogonality/inner-product), and on this site the standard dot product is used unless stated otherwise.`,
     before: ``,
     after: ``,
     link: ``,
@@ -278,7 +278,7 @@ These two pairs of complements are the structural backbone of projection and [le
   },
   obj6: {
     title: `Inner Products`,
-    content: `The dot product is the standard way to measure angles and lengths in $\\mathbb{R}^n$, but it is not the only one. An [inner product](!/linear-algebra/orthogonality/inner-products) is any function $\\langle \\cdot, \\cdot \\rangle$ that satisfies symmetry, linearity, and positive definiteness. Different inner products define different notions of perpendicularity and distance.
+    content: `The dot product is the standard way to measure angles and lengths in $\\mathbb{R}^n$, but it is not the only one. An [inner product](!/linear-algebra/orthogonality/inner-product) is any function $\\langle \\cdot, \\cdot \\rangle$ that satisfies symmetry, linearity, and positive definiteness. Different inner products define different notions of perpendicularity and distance.
 
 A weighted inner product $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\mathbf{u}^T W \\mathbf{v}$ (with $W$ symmetric positive definite) distorts the geometry — circles become ellipses, and "perpendicular" means something different than in the standard dot product. On function spaces, the integral $\\langle f, g \\rangle = \\int_a^b f(x)g(x)\\,dx$ defines orthogonality for functions, leading to Fourier series and orthogonal polynomials.
 

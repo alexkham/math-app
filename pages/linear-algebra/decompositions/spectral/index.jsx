@@ -217,7 +217,7 @@ This is the [diagonalization](!/linear-algebra/eigenvalues-vectors/diagonalizati
     title: `The Spectral Theorem`,
     content: `The spectral theorem for real symmetric matrices states three facts.
 
-All eigenvalues of a real symmetric matrix are real. No [complex](!/linear-algebra/eigenvalues-vectors/complex-eigen) eigenvalues can appear.
+All eigenvalues of a real symmetric matrix are real. No [complex](!/linear-algebra/eigen/complex) eigenvalues can appear.
 
 Eigenvectors corresponding to distinct eigenvalues are [orthogonal](!/linear-algebra/orthogonality). If $\\lambda_i \\neq \\lambda_j$, then $\\mathbf{q}_i \\cdot \\mathbf{q}_j = 0$ automatically — no [Gram-Schmidt](!/linear-algebra/orthogonality/gram-schmidt) is needed between different eigenspaces.
 
@@ -737,7 +737,7 @@ export default function SpectralDecompositionPage({seoData, sectionsContent, int
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Page Title</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Spectral Decompositions</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}
