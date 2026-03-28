@@ -343,7 +343,7 @@ const schemas = {
   }
 }
    
-   }
+   
 
 
 return {
@@ -360,7 +360,7 @@ return {
       name: "Rational Inequalities"
     },
   }
-}
+}}
 
 export default function RationalInequalitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
@@ -600,3 +600,4 @@ export default function RationalInequalitiesPage({seoData, sectionsContent, intr
    </>
   )
 }
+
