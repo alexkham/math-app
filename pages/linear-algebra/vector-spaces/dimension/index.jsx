@@ -290,7 +290,7 @@ The inequality is strict ($\\dim(W) < \\dim(V)$) for every proper subspace — a
 
 In $\\mathbb{R}^3$, the possible subspace dimensions are $0$ (the zero vector), $1$ (a line through the origin), $2$ (a plane through the origin), and $3$ ($\\mathbb{R}^3$ itself). There is no subspace of dimension $\\frac{3}{2}$ or $\\pi$ — dimension is always a non-negative integer.
 
-For a [matrix](!/linear-algebra/matrix) $A$, the column space is a subspace of $\\mathbb{R}^m$ with dimension equal to the [rank](!/linear-algebra/matrix/rank), and the null space is a subspace of $\\mathbb{R}^n$ with dimension $n - \\text{rank}(A)$. Both dimensions are bounded by the dimensions of their ambient spaces.`,
+For a [matrix](!/linear-algebra/matrix) $A$, the column space is a subspace of $\\mathbb{R}^m$ with dimension equal to the rank, and the null space is a subspace of $\\mathbb{R}^n$ with dimension $n - \\text{rank}(A)$. Both dimensions are bounded by the dimensions of their ambient spaces.`,
     before: ``,
     after: ``,
     link: ``,

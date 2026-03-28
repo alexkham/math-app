@@ -282,7 +282,7 @@ The projection matrix satisfies two algebraic conditions. It is [symmetric](!/li
 
 The complementary matrix $I - P$ projects onto $W^\\perp$. It satisfies $(I - P)^T = I - P$ and $(I - P)^2 = I - P$, and for every $\\mathbf{b}$: $P\\mathbf{b} + (I - P)\\mathbf{b} = \\mathbf{b}$, decomposing $\\mathbf{b}$ into its $W$-component and its $W^\\perp$-component.
 
-The [eigenvalues](!/linear-algebra/eigenvalues-vectors) of $P$ are $0$ and $1$: vectors in $W$ map to themselves (eigenvalue $1$) and vectors in $W^\\perp$ map to zero (eigenvalue $0$). The [rank](!/linear-algebra/matrix/rank) of $P$ equals the [trace](!/linear-algebra/matrix/trace) of $P$, which equals $\\dim(W)$.`,
+The [eigenvalues](!/linear-algebra/eigenvalues-vectors) of $P$ are $0$ and $1$: vectors in $W$ map to themselves (eigenvalue $1$) and vectors in $W^\\perp$ map to zero (eigenvalue $0$). The rank of $P$ equals the [trace](!/linear-algebra/matrix/trace) of $P$, which equals $\\dim(W)$.`,
     before: ``,
     after: ``,
     link: ``,

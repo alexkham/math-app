@@ -286,7 +286,7 @@ $$\\text{Col}(A) = \\text{Span}\\{\\mathbf{a}_1, \\mathbf{a}_2, \\dots, \\mathbf
 
 This identity connects the abstract concept of span to the concrete question of system solvability. The system $A\\mathbf{x} = \\mathbf{b}$ has a solution if and only if $\\mathbf{b}$ lies in the column space of $A$ — that is, if and only if $\\mathbf{b}$ is in the span of the columns.
 
-The [rank](!/linear-algebra/matrix/rank) of $A$ equals the dimension of the column space, which equals the number of independent columns. The pivot columns of the echelon form identify which original columns form a [basis](!/linear-algebra/vector-spaces/basis) for the column space. The non-pivot columns are redundant — they lie in the span of the pivot columns.
+The rank of $A$ equals the dimension of the column space, which equals the number of independent columns. The pivot columns of the echelon form identify which original columns form a [basis](!/linear-algebra/vector-spaces/basis) for the column space. The non-pivot columns are redundant — they lie in the span of the pivot columns.
 
 This also explains why row reduction is the universal computational tool for span questions. Every question about span — membership, spanning, independence — translates into a question about the column space of some matrix, and row reduction answers all of them.`,
     before: ``,

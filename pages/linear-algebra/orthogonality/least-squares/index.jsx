@@ -233,7 +233,7 @@ $$A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$$
 
 These are the normal equations. They form a square $n \\times n$ system regardless of the shape of $A$.
 
-The [matrix](!/linear-algebra/matrix) $A^TA$ is always [symmetric](!/linear-algebra/matrix/types) and positive semi-definite. When $A$ has full column [rank](!/linear-algebra/matrix/rank) (the columns are [linearly independent](!/linear-algebra/vector-spaces/linear-independence)), $A^TA$ is positive definite and [invertible](!/linear-algebra/matrix/inverse), giving a unique least-squares solution:
+The [matrix](!/linear-algebra/matrix) $A^TA$ is always [symmetric](!/linear-algebra/matrix/types) and positive semi-definite. When $A$ has full column rank (the columns are [linearly independent](!/linear-algebra/vector-spaces/linear-independence)), $A^TA$ is positive definite and [invertible](!/linear-algebra/matrix/inverse), giving a unique least-squares solution:
 
 $$\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$$
 
