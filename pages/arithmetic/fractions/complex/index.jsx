@@ -313,7 +313,7 @@ Mixing up which fraction to flip leads to inverted answers. In $\\frac{a}{b} \\d
   const introContent = {
   id: "intro",
   title: "Simplifying Stacked Expressions",
-  content: `A complex fraction contains fractions within its numerator, denominator, or both. Expressions like $\\frac{\\frac{1}{2}}{\\frac{3}{4}}$ or $\\frac{\\frac{2}{3} + 1}{5}$ are complex fractions. Two primary methods simplify them: treating the main fraction bar as [division](!/arithmetic/fractions/dividing), or multiplying by the [least common denominator](!/arithmetic/lcm) of all internal fractions.`
+  content: `A complex fraction contains fractions within its numerator, denominator, or both. Expressions like $\\frac{\\frac{1}{2}}{\\frac{3}{4}}$ or $\\frac{\\frac{2}{3} + 1}{5}$ are complex fractions. Two primary methods simplify them: treating the main fraction bar as [division](!/arithmetic/fractions/dividing), or multiplying by the [least common denominator](!/arithmetic/divisibility/lcm) of all internal fractions.`
 }
 
 

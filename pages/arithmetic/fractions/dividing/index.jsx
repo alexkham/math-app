@@ -229,7 +229,7 @@ For $\\frac{8}{9} \\div \\frac{4}{3}$, rewrite as $\\frac{8}{9} \\times \\frac{3
 
 $$\\frac{8}{9} \\times \\frac{3}{4} = \\frac{2}{3} \\times \\frac{1}{1} = \\frac{2}{3}$$
 
-Without cross-canceling, the product $\\frac{24}{36}$ requires reduction using the [GCF](!/arithmetic/gcf). Canceling first avoids larger numbers entirely.`,
+Without cross-canceling, the product $\\frac{24}{36}$ requires reduction using the [GCD](!/arithmetic/divisibility/gcd). Canceling first avoids larger numbers entirely.`,
     before: ``,
     after: ``,
     link: '',

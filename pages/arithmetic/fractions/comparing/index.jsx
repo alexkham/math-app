@@ -178,7 +178,7 @@ This inverse relationship often surprises at first. The key insight is that larg
     title: `Common Denominator Method`,
     content: `When neither numerator nor denominator matches, convert both fractions to [equivalent fractions](!/arithmetic/fractions/equivalent) with a common denominator, then compare numerators.
 
-To compare $\\frac{3}{4}$ and $\\frac{5}{6}$, find a common denominator. The [LCM](!/arithmetic/lcm) of 4 and 6 is 12.
+To compare $\\frac{3}{4}$ and $\\frac{5}{6}$, find a common denominator. The [LCM](!/arithmetic/divisibility/lcm) of 4 and 6 is 12.
 
 $$\\frac{3}{4} = \\frac{9}{12} \\quad \\text{and} \\quad \\frac{5}{6} = \\frac{10}{12}$$
 

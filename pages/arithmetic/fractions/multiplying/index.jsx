@@ -167,7 +167,7 @@ Consider $\\frac{4}{9} \\times \\frac{3}{8}$. The numerator 4 and denominator 8 
 
 $$\\frac{4}{9} \\times \\frac{3}{8} = \\frac{1}{3} \\times \\frac{1}{2} = \\frac{1}{6}$$
 
-Without canceling first, the product is $\\frac{12}{72}$, which then requires finding the [GCF](!/arithmetic/gcf) to reduce. Cross-canceling reaches the simplified answer directly.`,
+Without canceling first, the product is $\\frac{12}{72}$, which then requires finding the [GCD](!/arithmetic/divisibility/gcd) to reduce. Cross-canceling reaches the simplified answer directly.`,
     before: ``,
     after: ``,
     link: '',

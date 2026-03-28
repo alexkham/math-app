@@ -380,7 +380,7 @@ Common error: testing divisibility by $12$ by checking $2$ and $6$ instead of $4
 
 obj13: {
   title: `Why These Rules Work`,
-  content: `Every divisibility rule is a consequence of how the base $10$ behaves under [modular arithmetic](!/arithmetic/modulo/modular-arithmetic).
+  content: `Every divisibility rule is a consequence of how the base $10$ behaves under [modular arithmetic](!/arithmetic/modulo).
 
 A number written in decimal is $d_k \\cdot 10^k + d_{k-1} \\cdot 10^{k-1} + \\cdots + d_1 \\cdot 10 + d_0$. Reducing this expression [modulo](!/arithmetic/modulo) a divisor $n$ replaces each $10^j$ with its remainder modulo $n$, and the pattern of those remainders determines the rule.
 
@@ -394,7 +394,7 @@ For $n = 3$ or $n = 9$: $10 \\equiv 1$, so $10^k \\equiv 1$ for all $k$. Every d
 
 For $n = 11$: $10 \\equiv -1$, so $10^k$ alternates between $1$ and $-1$. Digits contribute with alternating signs, producing the alternating-sum rule.
 
-Each rule is a human-readable compression of a modular identity. The [modular arithmetic](!/arithmetic/modulo/modular-arithmetic) page develops these identities in full.`,
+Each rule is a human-readable compression of a modular identity. The [modular arithmetic](!/arithmetic/modulo) page develops these identities in full.`,
   before: ``,
   after: ``,
   link: '',

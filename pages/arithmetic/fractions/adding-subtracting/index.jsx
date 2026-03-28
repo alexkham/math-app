@@ -171,7 +171,7 @@ Visually, a bar divided into thirds and a bar divided into fourths have differen
 
 The least common denominator (LCD) is the smallest such number, keeping arithmetic manageable. The LCD of 3 and 4 is 12. The LCD of 6 and 8 is 24.
 
-Finding the LCD uses the [least common multiple](!/arithmetic/lcm). List multiples of each denominator until a match appears, or use prime factorization for larger numbers. For denominators 4 and 6: multiples of 4 are 4, 8, 12, 16... and multiples of 6 are 6, 12, 18... The first common multiple is 12.`,
+Finding the LCD uses the [least common multiple](!/arithmetic/divisibility/lcm). List multiples of each denominator until a match appears, or use prime factorization for larger numbers. For denominators 4 and 6: multiples of 4 are 4, 8, 12, 16... and multiples of 6 are 6, 12, 18... The first common multiple is 12.`,
     before: ``,
     after: ``,
     link: '',
