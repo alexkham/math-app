@@ -220,7 +220,7 @@ The factorization is unique: for a given symmetric positive definite $A$, there 
     title: `Existence: Symmetric Positive Definite Matrices`,
     content: `The Cholesky factorization exists if and only if $A$ is symmetric and positive definite. Symmetry means $A = A^T$. Positive definiteness means $\\mathbf{x}^TA\\mathbf{x} > 0$ for every nonzero vector $\\mathbf{x}$.
 
-Several equivalent conditions characterize positive definiteness: all [eigenvalues](!/linear-algebra/eigenvalues-vectors) of $A$ are strictly positive; all leading principal minors (the [determinants](!/linear-algebra/determinants) of the upper-left $k \\times k$ submatrices) are positive; all pivots in [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) (without pivoting) are positive.
+Several equivalent conditions characterize positive definiteness: all [eigenvalues](!/linear-algebra/eigen) of $A$ are strictly positive; all leading principal minors (the [determinants](!/linear-algebra/determinants) of the upper-left $k \\times k$ submatrices) are positive; all pivots in [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) (without pivoting) are positive.
 
 If either symmetry or positive definiteness fails, the Cholesky algorithm breaks down. A non-symmetric matrix has no $LL^T$ form. A symmetric matrix that is positive semi-definite (some eigenvalue is zero) produces a zero on the diagonal of $L$. An indefinite matrix (eigenvalues of both signs) produces a negative number under the square root, halting the algorithm.`,
     before: ``,
@@ -297,7 +297,7 @@ If the algorithm encounters a non-positive value under the square root, the matr
     title: `Cholesky as a Positive Definiteness Test`,
     content: `The Cholesky algorithm tests positive definiteness as a side effect of factoring. If $A = LL^T$ completes with all diagonal entries of $L$ strictly positive, $A$ is positive definite. If the algorithm breaks down at any step, $A$ is not positive definite.
 
-This is often more practical than computing all [eigenvalues](!/linear-algebra/eigenvalues-vectors) (also $O(n^3)$ but with a larger constant) or checking all leading principal minors (which requires $n$ [determinant](!/linear-algebra/determinants) computations).
+This is often more practical than computing all [eigenvalues](!/linear-algebra/eigen) (also $O(n^3)$ but with a larger constant) or checking all leading principal minors (which requires $n$ [determinant](!/linear-algebra/determinants) computations).
 
 The test is binary: the factorization either succeeds or fails. When it succeeds, $L$ is available for immediate use in system solving. When it fails, the index at which it breaks indicates which leading submatrix is the first to lose positive definiteness.`,
     before: ``,

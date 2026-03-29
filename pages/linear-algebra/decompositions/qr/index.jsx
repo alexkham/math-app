@@ -277,7 +277,7 @@ The critical advantage over the normal equations is numerical. Forming $A^TA$ sq
   },
   obj7: {
     title: `The QR Algorithm for Eigenvalues`,
-    content: `The QR algorithm is the standard method for computing [eigenvalues](!/linear-algebra/eigenvalues-vectors) of general (non-[symmetric](!/linear-algebra/matrix/types)) matrices. It proceeds iteratively:
+    content: `The QR algorithm is the standard method for computing [eigenvalues](!/linear-algebra/eigen) of general (non-[symmetric](!/linear-algebra/matrix/types)) matrices. It proceeds iteratively:
 
 Set $A_0 = A$. At each step, compute the QR factorization $A_k = Q_k R_k$, then form $A_{k+1} = R_k Q_k$.
 

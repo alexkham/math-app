@@ -246,7 +246,7 @@ A set satisfying all ten is a vector space. A set violating even one is not.`,
     title: `The Field of Scalars`,
     content: `The scalars in a vector space come from a field — a set where addition, subtraction, multiplication, and division (by nonzero elements) all work and satisfy the standard arithmetic laws. The real numbers $\\mathbb{R}$ and the [complex numbers](!/complex-numbers) $\\mathbb{C}$ are the two fields that appear most often in linear algebra.
 
-A vector space over $\\mathbb{R}$ is called a real vector space. A vector space over $\\mathbb{C}$ is called a complex vector space. The choice of field determines what scalars are available for multiplication, and this affects the structure of the space. For instance, every real [symmetric](!/linear-algebra/matrix/types) matrix has real [eigenvalues](!/linear-algebra/eigenvalues-vectors), but a general real matrix may have complex eigenvalues — a phenomenon visible only when the scalar field extends from $\\mathbb{R}$ to $\\mathbb{C}$.
+A vector space over $\\mathbb{R}$ is called a real vector space. A vector space over $\\mathbb{C}$ is called a complex vector space. The choice of field determines what scalars are available for multiplication, and this affects the structure of the space. For instance, every real [symmetric](!/linear-algebra/matrix/types) matrix has real [eigenvalues](!/linear-algebra/eigen), but a general real matrix may have complex eigenvalues — a phenomenon visible only when the scalar field extends from $\\mathbb{R}$ to $\\mathbb{C}$.
 
 On this site, the scalar field is $\\mathbb{R}$ unless explicitly stated otherwise. The axioms and definitions carry over to $\\mathbb{C}$ without modification.`,
     before: ``,

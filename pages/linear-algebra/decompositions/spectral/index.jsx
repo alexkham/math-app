@@ -206,7 +206,7 @@ const sectionsContent = {
 
 $$A = QDQ^T$$
 
-where $Q$ is [orthogonal](!/linear-algebra/matrix/types) ($Q^TQ = QQ^T = I$) and $D = \\text{diag}(\\lambda_1, \\dots, \\lambda_n)$ is the diagonal matrix of [eigenvalues](!/linear-algebra/eigenvalues-vectors). The columns of $Q$ are orthonormal eigenvectors: $Q = [\\mathbf{q}_1 \\; \\mathbf{q}_2 \\; \\cdots \\; \\mathbf{q}_n]$ with $A\\mathbf{q}_i = \\lambda_i\\mathbf{q}_i$ and $\\mathbf{q}_i \\cdot \\mathbf{q}_j = \\delta_{ij}$.
+where $Q$ is [orthogonal](!/linear-algebra/matrix/types) ($Q^TQ = QQ^T = I$) and $D = \\text{diag}(\\lambda_1, \\dots, \\lambda_n)$ is the diagonal matrix of [eigenvalues](!/linear-algebra/eigen). The columns of $Q$ are orthonormal eigenvectors: $Q = [\\mathbf{q}_1 \\; \\mathbf{q}_2 \\; \\cdots \\; \\mathbf{q}_n]$ with $A\\mathbf{q}_i = \\lambda_i\\mathbf{q}_i$ and $\\mathbf{q}_i \\cdot \\mathbf{q}_j = \\delta_{ij}$.
 
 This is the [diagonalization](!/linear-algebra/eigenvalues-vectors/diagonalization) $A = PDP^{-1}$ specialized to symmetric matrices, where the crucial bonus is that $P$ can be chosen orthogonal — so $P^{-1} = P^T$. The orthogonality of $Q$ is not a convenience; it is a structural guarantee that holds for every real symmetric matrix, regardless of eigenvalue multiplicities.`,
     before: ``,

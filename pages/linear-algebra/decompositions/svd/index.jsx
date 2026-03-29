@@ -233,7 +233,7 @@ Even the most complex-looking matrix is geometrically just two rotations sandwic
   },
   obj3: {
     title: `Singular Values`,
-    content: `The singular values of $A$ are the square roots of the [eigenvalues](!/linear-algebra/eigenvalues-vectors) of $A^TA$ (or equivalently $AA^T$):
+    content: `The singular values of $A$ are the square roots of the [eigenvalues](!/linear-algebra/eigen) of $A^TA$ (or equivalently $AA^T$):
 
 $$\\sigma_i = \\sqrt{\\lambda_i(A^TA)}$$
 

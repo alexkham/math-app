@@ -250,7 +250,7 @@ The [determinant](!/linear-algebra/determinants) is preserved: $\\det(P^{-1}AP) 
 
 The [trace](!/linear-algebra/matrix/trace) is preserved: $\\text{tr}(P^{-1}AP) = \\text{tr}(APP^{-1}) = \\text{tr}(A)$ by the cyclic property.
 
-The [eigenvalues](!/linear-algebra/eigenvalues-vectors) are preserved: $\\det(P^{-1}AP - \\lambda I) = \\det(P^{-1}(A - \\lambda I)P) = \\det(A - \\lambda I)$, so the characteristic polynomial — and therefore all eigenvalues with their multiplicities — is the same.
+The [eigenvalues](!/linear-algebra/eigen) are preserved: $\\det(P^{-1}AP - \\lambda I) = \\det(P^{-1}(A - \\lambda I)P) = \\det(A - \\lambda I)$, so the characteristic polynomial — and therefore all eigenvalues with their multiplicities — is the same.
 
 The [rank](!/linear-algebra/matrix/rank) is preserved: multiplying by invertible matrices cannot change the rank.
 
@@ -269,7 +269,7 @@ The matrix of $T$ in this basis is diagonal: $D = \\text{diag}(\\lambda_1, \\dot
 
 The change-of-basis matrix $P$ has the eigenvectors as columns: $P = [\\mathbf{v}_1 \\; \\cdots \\; \\mathbf{v}_n]$. The similarity relation gives $A = PDP^{-1}$, or equivalently $D = P^{-1}AP$.
 
-[Diagonalization](!/linear-algebra/eigenvalues-vectors/diagonalization) is the most powerful application of basis change. It reduces matrix powers to diagonal powers: $A^k = PD^kP^{-1} = P\\,\\text{diag}(\\lambda_1^k, \\dots, \\lambda_n^k)\\,P^{-1}$. It simplifies differential equations, recurrence relations, and any computation involving repeated application of the same transformation.`,
+[Diagonalization](!/linear-algebra/eigen/diagonalization) is the most powerful application of basis change. It reduces matrix powers to diagonal powers: $A^k = PD^kP^{-1} = P\\,\\text{diag}(\\lambda_1^k, \\dots, \\lambda_n^k)\\,P^{-1}$. It simplifies differential equations, recurrence relations, and any computation involving repeated application of the same transformation.`,
     before: ``,
     after: ``,
     link: ``,
@@ -319,7 +319,7 @@ Application: $A^{10} = PD^{10}P^{-1} = P\\begin{pmatrix} 2^{10} & 0 \\\\ 0 & 5^{
     title: `Why Basis Choice Matters`,
     content: `The standard basis is the default, but it is rarely the best choice for a given problem.
 
-An [eigenvector](!/linear-algebra/eigenvalues-vectors) basis diagonalizes the matrix, reducing powers and exponentials to operations on diagonal entries. A system of differential equations $\\mathbf{x}' = A\\mathbf{x}$ decouples into independent scalar equations when $A$ is diagonal.
+An [eigenvector](!/linear-algebra/eigen) basis diagonalizes the matrix, reducing powers and exponentials to operations on diagonal entries. A system of differential equations $\\mathbf{x}' = A\\mathbf{x}$ decouples into independent scalar equations when $A$ is diagonal.
 
 An [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) basis simplifies [projections](!/linear-algebra/orthogonality/projections) and [least-squares](!/linear-algebra/orthogonality/least-squares) computations. Coordinates relative to an orthonormal basis are computed by dot products rather than by solving systems, and numerical errors are minimized because the change-of-basis matrix has condition number $1$.
 

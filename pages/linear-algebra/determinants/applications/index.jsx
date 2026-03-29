@@ -199,7 +199,7 @@ The magnitude is $|\\mathbf{a} \\times \\mathbf{b}| = \\sqrt{4 + 256 + 16} = \\s
 
 $$p(\\lambda) = \\det(A - \\lambda I)$$
 
-This is a polynomial of degree $n$ in the variable $\\lambda$. Its roots are the [eigenvalues](!/linear-algebra/eigenvalues-vectors) of $A$ — the scalars $\\lambda$ for which the matrix $A - \\lambda I$ becomes singular.
+This is a polynomial of degree $n$ in the variable $\\lambda$. Its roots are the [eigenvalues](!/linear-algebra/eigen) of $A$ — the scalars $\\lambda$ for which the matrix $A - \\lambda I$ becomes singular.
 
 ## 2×2 Example
 
