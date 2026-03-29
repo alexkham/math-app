@@ -249,7 +249,7 @@ The standard [basis](!/linear-algebra/vector-spaces) $\\{\\mathbf{e}_1, \\mathbf
 
 In $\\mathbb{R}^n$, an orthogonal set of $n$ nonzero vectors is automatically a basis — independence is guaranteed by orthogonality, and $n$ independent vectors in an $n$-dimensional space automatically span. So the only check needed is: do I have $n$ pairwise-orthogonal nonzero vectors? If yes, they form a basis.
 
-Orthonormal bases exist for every finite-dimensional [inner product](!/linear-algebra/orthogonality/inner-products) space. The [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) constructs one from any given basis. This means the computational advantages of orthonormal bases are always available — any space that has a basis at all has an orthonormal one.`,
+Orthonormal bases exist for every finite-dimensional [inner product](!/linear-algebra/orthogonality/inner-product) space. The [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) constructs one from any given basis. This means the computational advantages of orthonormal bases are always available — any space that has a basis at all has an orthonormal one.`,
     before: ``,
     after: ``,
     link: ``,

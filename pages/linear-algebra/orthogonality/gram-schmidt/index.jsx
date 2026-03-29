@@ -204,7 +204,7 @@ export async function getStaticProps(){
 const sectionsContent = {
   obj1: {
     title: `The Goal`,
-    content: `The input is a set of [linearly independent](!/linear-algebra/vector-spaces/linear-independence) vectors $\\{\\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_k\\}$ in an [inner product](!/linear-algebra/orthogonality/inner-products) space. The output is an [orthogonal](!/linear-algebra/orthogonality/orthogonal-sets) set $\\{\\mathbf{u}_1, \\mathbf{u}_2, \\dots, \\mathbf{u}_k\\}$ satisfying two conditions: the vectors are pairwise perpendicular ($\\mathbf{u}_i \\cdot \\mathbf{u}_j = 0$ for $i \\neq j$), and they [span](!/linear-algebra/vector-spaces/span) the same subspace ($\\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_j\\} = \\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_j\\}$ at every step $j$).
+    content: `The input is a set of [linearly independent](!/linear-algebra/vector-spaces/linear-independence) vectors $\\{\\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_k\\}$ in an [inner product](!/linear-algebra/orthogonality/inner-product) space. The output is an [orthogonal](!/linear-algebra/orthogonality/orthogonal-sets) set $\\{\\mathbf{u}_1, \\mathbf{u}_2, \\dots, \\mathbf{u}_k\\}$ satisfying two conditions: the vectors are pairwise perpendicular ($\\mathbf{u}_i \\cdot \\mathbf{u}_j = 0$ for $i \\neq j$), and they [span](!/linear-algebra/vector-spaces/span) the same subspace ($\\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_j\\} = \\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_j\\}$ at every step $j$).
 
 Optionally, each $\\mathbf{u}_i$ is normalized to unit length, producing an orthonormal set $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_k\\}$.
 
@@ -341,7 +341,7 @@ Householder reflections provide an even more robust alternative for computing th
   },
   obj10: {
     title: `Gram-Schmidt on Abstract Inner Product Spaces`,
-    content: `The algorithm works in any [inner product](!/linear-algebra/orthogonality/inner-products) space — the dot product is replaced by the general inner product $\\langle \\cdot, \\cdot \\rangle$, and the formulas are otherwise identical:
+    content: `The algorithm works in any [inner product](!/linear-algebra/orthogonality/inner-product) space — the dot product is replaced by the general inner product $\\langle \\cdot, \\cdot \\rangle$, and the formulas are otherwise identical:
 
 $$\\mathbf{u}_j = \\mathbf{v}_j - \\sum_{i=1}^{j-1} \\frac{\\langle \\mathbf{u}_i, \\mathbf{v}_j \\rangle}{\\langle \\mathbf{u}_i, \\mathbf{u}_i \\rangle}\\,\\mathbf{u}_i$$
 
