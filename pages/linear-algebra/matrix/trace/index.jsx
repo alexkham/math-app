@@ -137,7 +137,7 @@ Only cyclic reorderings are permitted. The rearrangement $\\text{tr}(ABC) = \\te
   },
   obj5: {
     title: `Trace and Eigenvalues`,
-    content: `The trace of a matrix equals the sum of its [eigenvalues](!/linear-algebra/eigenvalues-vectors), counted with algebraic multiplicity:
+    content: `The trace of a matrix equals the sum of its [eigenvalues](!/linear-algebra/eigen), counted with algebraic multiplicity:
 
 $$\\text{tr}(A) = \\lambda_1 + \\lambda_2 + \\cdots + \\lambda_n$$
 

@@ -88,7 +88,7 @@ The entries can be real numbers, complex numbers, or elements of any algebraic f
 
 Row $i$ of $A$ is the horizontal slice $(a_{i1}, a_{i2}, \\dots, a_{in})$, a $1 \\times n$ vector. Column $j$ is the vertical slice $(a_{1j}, a_{2j}, \\dots, a_{mj})^T$, an $m \\times 1$ vector. The main diagonal consists of the entries where the row index equals the column index: $a_{11}, a_{22}, \\dots, a_{kk}$ with $k = \\min(m, n)$. The diagonal is defined for any matrix, not just square ones, though it is most prominent in the square case.
 
-A matrix with $m = n$ is called square, and square matrices occupy a special position. Only square matrices can have a [determinant](!/linear-algebra/determinants), an [inverse](!/linear-algebra/matrix/inverse), [eigenvalues](!/linear-algebra/eigenvalues-vectors), or a [trace](!/linear-algebra/matrix/trace). A column [vector](!/linear-algebra/vectors) in $\\mathbb{R}^n$ is simply an $n \\times 1$ matrix, a row vector is a $1 \\times n$ matrix, and a scalar is a $1 \\times 1$ matrix. Matrices unify all of these objects under a single framework.`,
+A matrix with $m = n$ is called square, and square matrices occupy a special position. Only square matrices can have a [determinant](!/linear-algebra/determinants), an [inverse](!/linear-algebra/matrix/inverse), [eigenvalues](!/linear-algebra/eigen), or a [trace](!/linear-algebra/matrix/trace). A column [vector](!/linear-algebra/vectors) in $\\mathbb{R}^n$ is simply an $n \\times 1$ matrix, a row vector is a $1 \\times n$ matrix, and a scalar is a $1 \\times 1$ matrix. Matrices unify all of these objects under a single framework.`,
     before: ``,
     after: ``,
     link: ``,

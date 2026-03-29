@@ -211,7 +211,7 @@ The usual exponent laws hold: $A^j A^k = A^{j+k}$ and $(A^j)^k = A^{jk}$. When $
 
 One rule from scalar arithmetic does not carry over. Since matrix multiplication is not commutative, the identity $(AB)^k = A^k B^k$ is false in general. Expanding $(AB)^2 = ABAB$, there is no way to rearrange this into $A^2 B^2 = AABB$ without commutativity.
 
-Powers of specific matrix types are particularly well-behaved. For a diagonal matrix $D = \\text{diag}(d_1, \\dots, d_n)$, the $k$-th power is $D^k = \\text{diag}(d_1^k, \\dots, d_n^k)$ — each diagonal entry is raised to the $k$-th power independently. This simplicity is one of the main reasons [diagonalization](!/linear-algebra/eigenvalues-vectors/diagonalization) is so useful: writing $A = PDP^{-1}$ gives $A^k = PD^kP^{-1}$, reducing an expensive matrix power to a cheap diagonal power.`,
+Powers of specific matrix types are particularly well-behaved. For a diagonal matrix $D = \\text{diag}(d_1, \\dots, d_n)$, the $k$-th power is $D^k = \\text{diag}(d_1^k, \\dots, d_n^k)$ — each diagonal entry is raised to the $k$-th power independently. This simplicity is one of the main reasons [diagonalization](!/linear-algebra/eigen/diagonalization) is so useful: writing $A = PDP^{-1}$ gives $A^k = PD^kP^{-1}$, reducing an expensive matrix power to a cheap diagonal power.`,
     before: ``,
     after: ``,
     link: ``,
@@ -239,7 +239,7 @@ The QR decomposition writes $A = QR$ where $Q$ is [orthogonal](!/linear-algebra/
 
 The Cholesky decomposition writes $A = LL^T$ for symmetric positive definite matrices, achieving the work of LU in roughly half the computation by exploiting symmetry.
 
-The eigendecomposition writes $A = PDP^{-1}$ where $D$ is diagonal, placing the [eigenvalues](!/linear-algebra/eigenvalues-vectors) on the diagonal and the eigenvectors in the columns of $P$. It applies only to diagonalizable matrices.
+The eigendecomposition writes $A = PDP^{-1}$ where $D$ is diagonal, placing the [eigenvalues](!/linear-algebra/eigen) on the diagonal and the eigenvectors in the columns of $P$. It applies only to diagonalizable matrices.
 
 The singular value decomposition writes $A = U\\Sigma V^T$ where $U$ and $V$ are orthogonal and $\\Sigma$ is diagonal with nonnegative entries. Unlike the eigendecomposition, the SVD exists for every matrix of every shape. It reveals the rank, the fundamental subspaces, and the best low-rank approximation to $A$, making it one of the most broadly applicable tools in the subject.
 

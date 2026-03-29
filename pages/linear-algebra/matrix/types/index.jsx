@@ -74,7 +74,7 @@ const sectionsContent = {
     title: `Square Matrices`,
     content: `A matrix with equal numbers of rows and columns — $n$ rows and $n$ columns — is called square, and is said to have order $n$. Square matrices occupy a privileged position in linear algebra because several fundamental concepts are defined exclusively for them.
 
-Only square matrices have a [determinant](!/linear-algebra/determinants). Only square matrices can be [invertible](!/linear-algebra/matrix/inverse). Only square matrices have [eigenvalues](!/linear-algebra/eigenvalues-vectors) and a [trace](!/linear-algebra/matrix/trace). Powers $A^k$ are defined only when $A$ is square, since the product $A \\cdot A$ requires the number of columns to equal the number of rows. Every type discussed on this page is a square matrix with additional structure imposed on top.`,
+Only square matrices have a [determinant](!/linear-algebra/determinants). Only square matrices can be [invertible](!/linear-algebra/matrix/inverse). Only square matrices have [eigenvalues](!/linear-algebra/eigen) and a [trace](!/linear-algebra/matrix/trace). Powers $A^k$ are defined only when $A$ is square, since the product $A \\cdot A$ requires the number of columns to equal the number of rows. Every type discussed on this page is a square matrix with additional structure imposed on top.`,
     before: ``,
     after: ``,
     link: ``,
