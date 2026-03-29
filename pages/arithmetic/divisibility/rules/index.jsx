@@ -426,7 +426,7 @@ Each rule is a human-readable compression of a modular identity. The [modular ar
   const introContent = {
   id: "intro",
   title: "Testing Divisibility at a Glance",
-  content: `Checking whether one number divides another by performing the full division works — but it is slow, especially for large numbers. For the most common divisors, patterns in the decimal digits provide an answer instantly. Each pattern is a consequence of how [modular arithmetic](!/arithmetic/modulo/modular-arithmetic) interacts with the base-$10$ place value system, compressed into a rule simple enough to apply mentally.`
+  content: `Checking whether one number divides another by performing the full division works — but it is slow, especially for large numbers. For the most common divisors, patterns in the decimal digits provide an answer instantly. Each pattern is a consequence of how [modular arithmetic](!/arithmetic/modulo) interacts with the base-$10$ place value system, compressed into a rule simple enough to apply mentally.`
 }
 
 const faqQuestions = {

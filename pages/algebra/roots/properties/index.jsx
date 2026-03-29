@@ -216,7 +216,7 @@ $$\\sqrt{-9} \\quad \\text{is not a real number}$$
 
 Even-index radicals also produce only non-negative outputs. The principal root convention guarantees this: $\\sqrt{25} = 5$, not $-5$. Both 5 and $-5$ square to 25, but the radical symbol returns only the non-negative root.
 
-This restriction affects the domain of [radical functions](!/algebra/roots/functions) with even index: only non-negative inputs are allowed. It also determines when [complex numbers](!/algebra/roots/complex) become necessary.`,
+This restriction affects the domain of [radical functions](!/algebra/roots/functions) with even index: only non-negative inputs are allowed. It also determines when [complex numbers](!/complex-numbers) become necessary.`,
     before: ``,
     after: ``,
     link: '',
@@ -236,7 +236,7 @@ Odd-index radicals preserve sign. Positive radicands yield positive roots. Negat
 
 There is no ambiguity requiring a principal root convention for odd indices. Every real number has exactly one real cube root, one real fifth root, and so on. The radical simply returns that unique value.
 
-This means [radical functions](!/algebra/roots/functions) with odd index have domain all real numbers. No restrictions, no need for [complex numbers](!/algebra/roots/complex) to handle negative inputs.`,
+This means [radical functions](!/algebra/roots/functions) with odd index have domain all real numbers. No restrictions, no need for [complex numbers](!/complex-numbers) to handle negative inputs.`,
     before: ``,
     after: ``,
     link: '',
@@ -384,7 +384,7 @@ When $a < 0$ and $n$ is even:
 
 $$\\sqrt[n]{a} \\quad \\text{is not a real number}$$
 
-No real even root of a negative number exists. This is where [complex numbers](!/algebra/roots/complex) enter.
+No real even root of a negative number exists. This is where [complex numbers](!/complex-numbers) enter.
 
 Understanding sign behavior prevents errors in [simplifying](!/algebra/roots/simplifying) and [operations](!/algebra/roots/operations). It also explains why extraneous solutions arise when [solving radical equations](!/algebra/roots/equations) — squaring both sides can introduce negative values where only non-negative values are valid.`,
     before: ``,

@@ -245,7 +245,7 @@ The spectral decomposition says that $A$ acts by projecting onto each eigenvecto
     title: `Computing the Spectral Decomposition`,
     content: `The computation follows the standard eigenvalue workflow, with one additional step for repeated eigenvalues.
 
-Find the eigenvalues by solving the [characteristic equation](!/linear-algebra/eigenvalues-vectors/characteristic-equation) $\\det(A - \\lambda I) = 0$. All roots are real.
+Find the eigenvalues by solving the [characteristic equation](!/linear-algebra/eigen/characteristic-equation) $\\det(A - \\lambda I) = 0$. All roots are real.
 
 For each eigenvalue $\\lambda_i$, find the eigenspace by solving $(A - \\lambda_i I)\\mathbf{v} = \\mathbf{0}$ via [row reduction](!/linear-algebra/linear-systems/gaussian-elimination).
 
