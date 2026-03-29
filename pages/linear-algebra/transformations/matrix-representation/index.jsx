@@ -243,7 +243,7 @@ Column $j$ tells you where $\\mathbf{e}_j$ goes. If the first column of a $2 \\t
 
 The size $m \\times n$ records the dimensions of codomain ($m$ rows) and domain ($n$ columns). A $3 \\times 2$ matrix represents a map from $\\mathbb{R}^2$ to $\\mathbb{R}^3$ — it embeds a plane into three-dimensional space. A $2 \\times 3$ matrix represents a map from $\\mathbb{R}^3$ to $\\mathbb{R}^2$ — it compresses three dimensions down to two.
 
-A square matrix ($m = n$) represents a transformation from a space to itself — a linear operator. Only operators can have [eigenvalues](!/linear-algebra/eigenvalues-vectors), [determinants](!/linear-algebra/determinants), and [traces](!/linear-algebra/matrix/trace).`,
+A square matrix ($m = n$) represents a transformation from a space to itself — a linear operator. Only operators can have [eigenvalues](!/linear-algebra/eigen), [determinants](!/linear-algebra/determinants), and [traces](!/linear-algebra/matrix/trace).`,
     before: ``,
     after: ``,
     link: ``,
@@ -302,7 +302,7 @@ If $T$ has matrix $A$ and $T$ is invertible, then $T^{-1}$ has matrix $A^{-1}$. 
     title: `The Matrix Encodes Everything`,
     content: `Once a linear transformation is represented by a matrix, every property of the transformation becomes a matrix computation.
 
-The [rank](!/linear-algebra/matrix/rank) of $A$ equals the dimension of the [image](!/linear-algebra/transformations/image-kernel) of $T$. The nullity equals the dimension of the kernel. The [determinant](!/linear-algebra/determinants) (for square matrices) tells whether $T$ is invertible and how it scales volumes. The [eigenvalues](!/linear-algebra/eigenvalues-vectors) reveal the scaling factors along invariant directions. The [trace](!/linear-algebra/matrix/trace) equals the sum of the eigenvalues. The [singular values](!/linear-algebra/decompositions/svd) measure the maximum stretching in each orthogonal direction.
+The [rank](!/linear-algebra/matrix/rank) of $A$ equals the dimension of the [image](!/linear-algebra/transformations/image-kernel) of $T$. The nullity equals the dimension of the kernel. The [determinant](!/linear-algebra/determinants) (for square matrices) tells whether $T$ is invertible and how it scales volumes. The [eigenvalues](!/linear-algebra/eigen) reveal the scaling factors along invariant directions. The [trace](!/linear-algebra/matrix/trace) equals the sum of the eigenvalues. The [singular values](!/linear-algebra/decompositions/svd) measure the maximum stretching in each orthogonal direction.
 
 This is why matrices dominate computational linear algebra. Abstract transformations are conceptually powerful, but matrices are what computers operate on. The matrix representation converts every question about a linear map into a question about an array of numbers — and arrays of numbers are what algorithms are designed to handle.`,
     before: ``,
