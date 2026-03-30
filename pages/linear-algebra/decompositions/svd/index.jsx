@@ -331,7 +331,7 @@ The [Frobenius norm](!/linear-algebra/matrix/trace) is the root-sum-of-squares o
 
 The condition number $\\kappa(A) = \\sigma_1/\\sigma_r$ quantifies sensitivity to perturbation. A matrix with $\\kappa = 10^k$ loses roughly $k$ digits of accuracy in solving $A\\mathbf{x} = \\mathbf{b}$ with floating-point arithmetic. A perfectly conditioned matrix ($\\kappa = 1$) is orthogonal. A singular matrix ($\\sigma_r = 0$) has $\\kappa = \\infty$.
 
-The singular values are the natural measuring tool for matrices, just as eigenvalues are the natural measuring tool for symmetric matrices and [linear operators](!/linear-algebra/linear-transformations). For non-symmetric matrices, singular values (not eigenvalues) govern norms and conditioning.`,
+The singular values are the natural measuring tool for matrices, just as eigenvalues are the natural measuring tool for symmetric matrices and [linear operators](!/linear-algebra/transformations). For non-symmetric matrices, singular values (not eigenvalues) govern norms and conditioning.`,
     before: ``,
     after: ``,
     link: ``,
