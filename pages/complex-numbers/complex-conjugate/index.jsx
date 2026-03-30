@@ -312,7 +312,7 @@ The key step uses $\\overline{a_k} = a_k$ because each coefficient is real. If $
 
 Consequences flow immediately. A real quadratic with no real roots must have two complex conjugate roots — if $2 + 3i$ solves it, so does $2 - 3i$. A real cubic always has at least one real root, since complex roots pair off and an odd number of roots cannot all be paired. A real polynomial of degree 4 might have four real roots, two real and two complex conjugates, or two pairs of complex conjugates — but never three real and one complex.
 
-Conjugate pairs multiply to give real quadratic factors. If $z_0 = a + bi$ is a root, then $(z - z_0)(z - \\bar{z_0}) = z^2 - 2az + (a^2 + b^2)$, a quadratic with real coefficients. This factorization explains why every real polynomial factors completely into real linear and real quadratic terms — the [Fundamental Theorem of Algebra](!/complex-numbers/equations-and-polynomials) guarantees complex roots exist, and conjugate pairing ensures they combine into real factors.`,
+Conjugate pairs multiply to give real quadratic factors. If $z_0 = a + bi$ is a root, then $(z - z_0)(z - \\bar{z_0}) = z^2 - 2az + (a^2 + b^2)$, a quadratic with real coefficients. This factorization explains why every real polynomial factors completely into real linear and real quadratic terms — the [Fundamental Theorem of Algebra](!/complex-numbers/equations-polynomials) guarantees complex roots exist, and conjugate pairing ensures they combine into real factors.`,
   after: ``,
   link: '',
 },

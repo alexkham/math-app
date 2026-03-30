@@ -246,7 +246,7 @@ The uniqueness of RREF implies that the pivot positions are intrinsic to the mat
     title: `Pivot Columns and Free Columns`,
     content: `Pivot columns are the columns that contain a pivot position in the echelon form. Free columns are everything else.
 
-The number of pivot columns equals the rank of the matrix. The number of free columns in the coefficient matrix $A$ (not counting the augmented column) equals $n - \\text{rank}(A)$, which is the nullity — the dimension of the [null space](!/linear-algebra/vector-spaces/fundamental-subspaces).
+The number of pivot columns equals the rank of the matrix. The number of free columns in the coefficient matrix $A$ (not counting the augmented column) equals $n - \\text{rank}(A)$, which is the nullity — the dimension of the [null space](!/linear-algebra/vector-spaces/fundamental-spaces).
 
 In the context of a linear system, each pivot column corresponds to a pivot variable: a variable whose value is determined once the free variables are assigned. Each free column corresponds to a free variable: a parameter that can take any real value, generating a family of solutions.
 
@@ -322,7 +322,7 @@ $$[0 \\quad 0 \\quad \\cdots \\quad 0 \\mid d] \\qquad \\text{with } d \\neq 0$$
 
 This row represents the equation $0 = d$, which no values of the unknowns can satisfy.
 
-In terms of [rank](!/linear-algebra/matrix/rank), inconsistency occurs when $\\text{rank}([A \\mid \\mathbf{b}]) > \\text{rank}(A)$. The extra column $\\mathbf{b}$ introduces a new pivot that the coefficient matrix alone does not have — meaning $\\mathbf{b}$ is not in the [column space](!/linear-algebra/vector-spaces/fundamental-subspaces) of $A$.
+In terms of [rank](!/linear-algebra/matrix/rank), inconsistency occurs when $\\text{rank}([A \\mid \\mathbf{b}]) > \\text{rank}(A)$. The extra column $\\mathbf{b}$ introduces a new pivot that the coefficient matrix alone does not have — meaning $\\mathbf{b}$ is not in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$.
 
 If no such contradictory row appears, the system is consistent. The distinction between unique and infinite solutions then depends on whether free variables exist: rank $= n$ gives a unique solution, rank $< n$ gives infinitely many.`,
     before: ``,

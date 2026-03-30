@@ -230,7 +230,7 @@ Each row of $A$ corresponds to one equation. Each column corresponds to one unkn
 
 $$A\\mathbf{x} = x_1 \\mathbf{a}_1 + x_2 \\mathbf{a}_2 + \\cdots + x_n \\mathbf{a}_n$$
 
-Asking whether $A\\mathbf{x} = \\mathbf{b}$ has a solution is therefore equivalent to asking whether $\\mathbf{b}$ lies in the [column space](!/linear-algebra/vector-spaces/fundamental-subspaces) of $A$ — whether $\\mathbf{b}$ can be assembled from the columns using some choice of weights.`,
+Asking whether $A\\mathbf{x} = \\mathbf{b}$ has a solution is therefore equivalent to asking whether $\\mathbf{b}$ lies in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$ — whether $\\mathbf{b}$ can be assembled from the columns using some choice of weights.`,
     before: ``,
     after: ``,
     link: ``,
@@ -308,7 +308,7 @@ The RREF of any matrix is unique. Different sequences of row operations always a
 
 Nontrivial solutions exist if and only if the rank of $A$ is less than $n$. If the system has more unknowns than equations ($n > m$), nontrivial solutions are guaranteed — the rank cannot exceed $m$, which is less than $n$.
 
-The solution set of a homogeneous system is the [null space](!/linear-algebra/vector-spaces/fundamental-subspaces) of $A$: a [subspace](!/linear-algebra/vector-spaces/subspaces) of $\\mathbb{R}^n$ with dimension $n - \\text{rank}(A)$. The superposition principle holds — any linear combination of solutions is again a solution — which is why the solution set has the clean structure of a vector space rather than an arbitrary collection of points.`,
+The solution set of a homogeneous system is the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$: a [subspace](!/linear-algebra/vector-spaces/subspaces) of $\\mathbb{R}^n$ with dimension $n - \\text{rank}(A)$. The superposition principle holds — any linear combination of solutions is again a solution — which is why the solution set has the clean structure of a vector space rather than an arbitrary collection of points.`,
     before: ``,
     after: ``,
     link: ``,

@@ -157,7 +157,7 @@ Creating equivalent fractions with a specific denominator is essential for [addi
     title: `Simplifying Fractions`,
     content: `Simplifying a fraction means dividing both numerator and denominator by a common factor. The fraction $\\frac{12}{18}$ simplifies to $\\frac{6}{9}$ by dividing both parts by 2, and further to $\\frac{2}{3}$ by dividing by 3.
 
-The most efficient approach uses the [greatest common factor](!/arithmetic/gcf). For $\\frac{12}{18}$, the GCF of 12 and 18 is 6. Dividing both parts by 6 in one step gives $\\frac{12 \\div 6}{18 \\div 6} = \\frac{2}{3}$.
+The most efficient approach uses the [greatest common factor](!/arithmetic/divisibility/gcd). For $\\frac{12}{18}$, the GCF of 12 and 18 is 6. Dividing both parts by 6 in one step gives $\\frac{12 \\div 6}{18 \\div 6} = \\frac{2}{3}$.
 
 Simplifying does not change the fraction's value. It produces the same quantity written with smaller numbers, making further calculations easier and results cleaner.`,
     before: ``,
@@ -209,7 +209,7 @@ The density of equivalent fractions is unlimited. Between any two distinct point
 
 Any common multiple of the denominators can serve as a common denominator. For $\\frac{1}{3}$ and $\\frac{1}{4}$, the denominators 3 and 4 share multiples 12, 24, 36, and so on. Using 12: $\\frac{1}{3} = \\frac{4}{12}$ and $\\frac{1}{4} = \\frac{3}{12}$.
 
-The [least common multiple](!/arithmetic/lcm) produces the least common denominator (LCD). Using the LCD keeps numbers as small as possible. For denominators 6 and 8, the LCM is 24, so 24 is the LCD. Larger common denominators like 48 also work but result in bigger numbers that require simplification afterward.`,
+The [least common multiple](!/arithmetic/divisibility/lcm) produces the least common denominator (LCD). Using the LCD keeps numbers as small as possible. For denominators 6 and 8, the LCM is 24, so 24 is the LCD. Larger common denominators like 48 also work but result in bigger numbers that require simplification afterward.`,
     before: ``,
     after: ``,
     link: '',

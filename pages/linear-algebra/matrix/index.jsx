@@ -186,7 +186,7 @@ Whether the system has no solution, exactly one solution, or infinitely many sol
   },
   obj10: {
     title: `Matrices as Linear Transformations`,
-    content: `Every $m \\times n$ matrix $A$ defines a function from $\\mathbb{R}^n$ to $\\mathbb{R}^m$ by the rule $\\mathbf{x} \\mapsto A\\mathbf{x}$. This function is a [linear transformation](!/linear-algebra/linear-transformations): it preserves addition ($A(\\mathbf{x} + \\mathbf{y}) = A\\mathbf{x} + A\\mathbf{y}$) and scalar multiplication ($A(c\\mathbf{x}) = cA\\mathbf{x}$).
+    content: `Every $m \\times n$ matrix $A$ defines a function from $\\mathbb{R}^n$ to $\\mathbb{R}^m$ by the rule $\\mathbf{x} \\mapsto A\\mathbf{x}$. This function is a [linear transformation](!/linear-algebra/transformations): it preserves addition ($A(\\mathbf{x} + \\mathbf{y}) = A\\mathbf{x} + A\\mathbf{y}$) and scalar multiplication ($A(c\\mathbf{x}) = cA\\mathbf{x}$).
 
 The columns of $A$ reveal exactly what the transformation does to the standard basis. The first column $\\mathbf{a}_1$ is the image of $\\mathbf{e}_1$, the second column $\\mathbf{a}_2$ is the image of $\\mathbf{e}_2$, and so on. Once the images of the basis vectors are known, the image of any vector follows by linearity.
 
