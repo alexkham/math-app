@@ -216,7 +216,7 @@ The rank of $A^T A$ equals the rank of $A$. This follows from the fact that the 
   },
   obj9: {
     title: `Rank and the Four Fundamental Subspaces`,
-    content: `Every $m \\times n$ matrix $A$ gives rise to four [subspaces](!/linear-algebra/vector-spaces/fundamental-subspaces), and the rank governs all of their dimensions.
+    content: `Every $m \\times n$ matrix $A$ gives rise to four [subspaces](!/linear-algebra/vector-spaces/fundamental-spaces), and the rank governs all of their dimensions.
 
 The column space of $A$ is the span of the columns, a subspace of $\\mathbb{R}^m$ with dimension equal to $\\text{rank}(A)$. The row space of $A$ is the span of the rows, a subspace of $\\mathbb{R}^n$ also with dimension $\\text{rank}(A)$. The null space of $A$ consists of all solutions to $A\\mathbf{x} = \\mathbf{0}$, a subspace of $\\mathbb{R}^n$ with dimension $n - \\text{rank}(A)$. The left null space consists of all solutions to $A^T\\mathbf{y} = \\mathbf{0}$, a subspace of $\\mathbb{R}^m$ with dimension $m - \\text{rank}(A)$.
 

@@ -274,7 +274,7 @@ The spectral decomposition is the foundation of quadratic form analysis, princip
     title: `Singular Value Decomposition`,
     content: `The [singular value decomposition](!/linear-algebra/decompositions/svd) factors any $m \\times n$ matrix as $A = U\\Sigma V^T$, where $U$ and $V$ are orthogonal and $\\Sigma$ is diagonal with non-negative entries (the singular values). It exists for every matrix of every shape and every [rank](!/linear-algebra/matrix/rank).
 
-The SVD is the most informative factorization in linear algebra. The number of nonzero singular values equals the rank. The columns of $U$ and $V$ provide orthonormal bases for all four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-subspaces). The pseudoinverse is $A^+ = V\\Sigma^+ U^T$. The best rank-$k$ approximation to $A$ is obtained by truncating the SVD at $k$ terms. The [condition number](!/linear-algebra/matrix/rank) is $\\sigma_1/\\sigma_r$.
+The SVD is the most informative factorization in linear algebra. The number of nonzero singular values equals the rank. The columns of $U$ and $V$ provide orthonormal bases for all four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces). The pseudoinverse is $A^+ = V\\Sigma^+ U^T$. The best rank-$k$ approximation to $A$ is obtained by truncating the SVD at $k$ terms. The [condition number](!/linear-algebra/matrix/rank) is $\\sigma_1/\\sigma_r$.
 
 Geometrically, every [linear transformation](!/linear-algebra/transformations) is a rotation ($V^T$), followed by a coordinate-axis scaling ($\\Sigma$), followed by another rotation ($U$). The SVD makes this decomposition explicit.`,
     before: ``,

@@ -276,7 +276,7 @@ All three forms represent the same matrix $A$. The compact form uses the least s
   },
   obj6: {
     title: `SVD and the Four Fundamental Subspaces`,
-    content: `The SVD simultaneously provides orthonormal [bases](!/linear-algebra/vector-spaces) for all four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-subspaces) of $A$.
+    content: `The SVD simultaneously provides orthonormal [bases](!/linear-algebra/vector-spaces) for all four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$.
 
 The first $r$ columns of $V$ ($\\mathbf{v}_1, \\dots, \\mathbf{v}_r$) form an orthonormal basis for the row space of $A$.
 
@@ -368,7 +368,7 @@ This outer product perspective is the basis of nearly every matrix approximation
 
 The [rank](!/linear-algebra/matrix/rank): the number of nonzero singular values.
 
-The four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-subspaces): orthonormal bases from the columns of $U$ and $V$.
+The four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces): orthonormal bases from the columns of $U$ and $V$.
 
 The [pseudoinverse](!/linear-algebra/orthogonality/least-squares): $A^+ = V\\Sigma^+ U^T$.
 

@@ -244,7 +244,7 @@ where $\\mathbf{w} \\in W$ and $\\mathbf{w}^\\perp \\in W^\\perp$. The two compo
   },
   obj4: {
     title: `The Four Fundamental Subspaces Revisited`,
-    content: `The orthogonal complement structure appears naturally in the [four fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-subspaces) of any $m \\times n$ [matrix](!/linear-algebra/matrix) $A$.
+    content: `The orthogonal complement structure appears naturally in the [four fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces) of any $m \\times n$ [matrix](!/linear-algebra/matrix) $A$.
 
 In $\\mathbb{R}^n$, the row space and the null space are orthogonal complements:
 

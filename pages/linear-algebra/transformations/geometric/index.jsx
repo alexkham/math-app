@@ -250,7 +250,7 @@ Rotations about the $x$-axis and $y$-axis have the same $2 \\times 2$ rotation b
 
 $$R_x(\\theta) = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & \\cos\\theta & -\\sin\\theta \\\\ 0 & \\sin\\theta & \\cos\\theta \\end{pmatrix}, \\quad R_y(\\theta) = \\begin{pmatrix} \\cos\\theta & 0 & \\sin\\theta \\\\ 0 & 1 & 0 \\\\ -\\sin\\theta & 0 & \\cos\\theta \\end{pmatrix}$$
 
-Every $3 \\times 3$ rotation matrix is orthogonal with determinant $+1$. The axis of rotation is the [eigenvector](!/linear-algebra/eigenvalues-vectors) with eigenvalue $1$ — the direction that remains fixed. Any rotation in $\\mathbb{R}^3$ can be decomposed into rotations about the coordinate axes (Euler angles), though the decomposition is not unique.`,
+Every $3 \\times 3$ rotation matrix is orthogonal with determinant $+1$. The axis of rotation is the [eigenvector](!/linear-algebra/eigen) with eigenvalue $1$ — the direction that remains fixed. Any rotation in $\\mathbb{R}^3$ can be decomposed into rotations about the coordinate axes (Euler angles), though the decomposition is not unique.`,
     before: ``,
     after: ``,
     link: ``,
