@@ -406,7 +406,7 @@ themeName='dark'
         </ul>
       </div>
 
-      <div>
+      {/* <div>
         <h3 style={{
           color: '#cbd5e0',
           fontSize: '14px',
@@ -425,7 +425,7 @@ themeName='dark'
           <li style={{ marginBottom: '8px' }}><Link href="/privacy" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Privacy</Link></li>
           <li style={{ marginBottom: '8px' }}><Link href="/terms" style={{ color: '#a0aec0', textDecoration: 'none', fontSize: '13px' }}>Terms</Link></li>
         </ul>
-      </div>
+      </div> */}
     </div>
   </div>
 
