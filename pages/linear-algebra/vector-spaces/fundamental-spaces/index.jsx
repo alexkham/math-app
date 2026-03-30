@@ -222,7 +222,7 @@ The four subspaces are not independent of each other. They pair off into [orthog
 
 $$\\text{Col}(A) = \\{A\\mathbf{x} : \\mathbf{x} \\in \\mathbb{R}^n\\} = \\text{Span}\\{\\mathbf{a}_1, \\mathbf{a}_2, \\dots, \\mathbf{a}_n\\}$$
 
-It is the set of all possible outputs of the [linear transformation](!/linear-algebra/linear-transformations) $\\mathbf{x} \\mapsto A\\mathbf{x}$, and it lives in $\\mathbb{R}^m$. Its dimension is $r = \\text{rank}(A)$.
+It is the set of all possible outputs of the [linear transformation](!/linear-algebra/transformations) $\\mathbf{x} \\mapsto A\\mathbf{x}$, and it lives in $\\mathbb{R}^m$. Its dimension is $r = \\text{rank}(A)$.
 
 The column space answers the solvability question: $A\\mathbf{x} = \\mathbf{b}$ has a solution if and only if $\\mathbf{b} \\in \\text{Col}(A)$. Vectors outside the column space are unreachable — no input $\\mathbf{x}$ can produce them.
 

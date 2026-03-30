@@ -269,7 +269,7 @@ The dimension of the null space is the nullity. By the [rank-nullity theorem](!/
 
 $$\\text{Col}(A) = \\{A\\mathbf{x} : \\mathbf{x} \\in \\mathbb{R}^n\\} = \\text{Span}\\{\\mathbf{a}_1, \\mathbf{a}_2, \\dots, \\mathbf{a}_n\\}$$
 
-It is the set of all possible outputs of the [linear transformation](!/linear-algebra/linear-transformations) $\\mathbf{x} \\mapsto A\\mathbf{x}$, and it lives in $\\mathbb{R}^m$.
+It is the set of all possible outputs of the [linear transformation](!/linear-algebra/transformations) $\\mathbf{x} \\mapsto A\\mathbf{x}$, and it lives in $\\mathbb{R}^m$.
 
 The column space is a subspace because the span of any set of vectors is always a subspace. Its dimension equals the [rank](!/linear-algebra/matrix/rank) of $A$.
 

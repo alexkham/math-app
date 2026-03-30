@@ -276,7 +276,7 @@ The spectral decomposition is the foundation of quadratic form analysis, princip
 
 The SVD is the most informative factorization in linear algebra. The number of nonzero singular values equals the rank. The columns of $U$ and $V$ provide orthonormal bases for all four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-subspaces). The pseudoinverse is $A^+ = V\\Sigma^+ U^T$. The best rank-$k$ approximation to $A$ is obtained by truncating the SVD at $k$ terms. The [condition number](!/linear-algebra/matrix/rank) is $\\sigma_1/\\sigma_r$.
 
-Geometrically, every [linear transformation](!/linear-algebra/linear-transformations) is a rotation ($V^T$), followed by a coordinate-axis scaling ($\\Sigma$), followed by another rotation ($U$). The SVD makes this decomposition explicit.`,
+Geometrically, every [linear transformation](!/linear-algebra/transformations) is a rotation ($V^T$), followed by a coordinate-axis scaling ($\\Sigma$), followed by another rotation ($U$). The SVD makes this decomposition explicit.`,
     before: ``,
     after: ``,
     link: ``,

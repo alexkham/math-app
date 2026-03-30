@@ -85,7 +85,7 @@ Only square matrices have a [determinant](!/linear-algebra/determinants). Only s
 
 $$I_3 = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{pmatrix}$$
 
-It is the multiplicative identity: $AI = IA = A$ for any matrix $A$ with compatible dimensions. As a [linear transformation](!/linear-algebra/linear-transformations), $I$ is the map that sends every vector to itself.
+It is the multiplicative identity: $AI = IA = A$ for any matrix $A$ with compatible dimensions. As a [linear transformation](!/linear-algebra/transformations), $I$ is the map that sends every vector to itself.
 
 The identity is simultaneously diagonal, symmetric, orthogonal, upper triangular, and lower triangular. Its determinant is $1$, its inverse is itself, every eigenvalue is $1$, its trace equals $n$, and $I^k = I$ for every non-negative integer $k$. The subscript $n$ is dropped when the size is clear from context.`,
     before: ``,

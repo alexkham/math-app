@@ -318,7 +318,7 @@ $$\\dim(\\text{Col}(A)) + \\dim(\\text{Null}(A)) = n$$
 
 The column space is a subspace of $\\mathbb{R}^m$ with dimension $\\text{rank}(A)$. The null space is a subspace of $\\mathbb{R}^n$ with dimension $n - \\text{rank}(A)$. Their dimensions add up to $n$, the dimension of the domain $\\mathbb{R}^n$.
 
-Interpreted through the lens of [linear transformations](!/linear-algebra/linear-transformations), this says that the $n$ dimensions of the domain split between the image (what the map hits) and the kernel (what the map kills). No dimensions are lost or created — they are redistributed.
+Interpreted through the lens of [linear transformations](!/linear-algebra/transformations), this says that the $n$ dimensions of the domain split between the image (what the map hits) and the kernel (what the map kills). No dimensions are lost or created — they are redistributed.
 
 The rank-nullity theorem is the fundamental bridge between abstract dimension theory and concrete matrix computation. It connects the number of pivot columns (rank) to the number of free variables (nullity), and it guarantees that every question about the dimension of a null space or column space reduces to row reduction and pivot counting.`,
     before: ``,

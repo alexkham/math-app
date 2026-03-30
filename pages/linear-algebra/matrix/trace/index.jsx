@@ -154,7 +154,7 @@ For a $3 \\times 3$ matrix with eigenvalues $2, -1, 4$, the trace is $5$ and the
   },
   obj6: {
     title: `Trace and Similarity`,
-    content: `Two matrices $A$ and $B$ are similar if $B = P^{-1}AP$ for some invertible matrix $P$. Similar matrices represent the same [linear transformation](!/linear-algebra/linear-transformations) in different coordinate systems — $P$ encodes the [change of basis](!/linear-algebra/linear-transformations/change-of-basis).
+    content: `Two matrices $A$ and $B$ are similar if $B = P^{-1}AP$ for some invertible matrix $P$. Similar matrices represent the same [linear transformation](!/linear-algebra/transformations) in different coordinate systems — $P$ encodes the [change of basis](!/linear-algebra/linear-transformations/change-of-basis).
 
 The trace is invariant under similarity:
 

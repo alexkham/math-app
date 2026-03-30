@@ -167,7 +167,7 @@ For a $3 \\times 5$ matrix with rank $2$, the nullity is $3$. The column space i
 
 For a square $n \\times n$ matrix, the theorem says $\\text{rank}(A) + \\text{nullity}(A) = n$. If the rank is $n$ (full rank), the nullity is $0$ — the null space contains only $\\mathbf{0}$, and $A$ is invertible. If the rank is less than $n$, the null space is nontrivial, the [determinant](!/linear-algebra/determinants) is zero, and $A$ is singular.
 
-The rank-nullity theorem is sometimes called the dimension theorem for linear maps. If $A$ defines a [linear transformation](!/linear-algebra/linear-transformations) $T: \\mathbb{R}^n \\to \\mathbb{R}^m$, then the rank is the dimension of the image (range) of $T$, and the nullity is the dimension of the kernel. Their sum equals the dimension of the domain.`,
+The rank-nullity theorem is sometimes called the dimension theorem for linear maps. If $A$ defines a [linear transformation](!/linear-algebra/transformations) $T: \\mathbb{R}^n \\to \\mathbb{R}^m$, then the rank is the dimension of the image (range) of $T$, and the nullity is the dimension of the kernel. Their sum equals the dimension of the domain.`,
     before: ``,
     after: ``,
     link: ``,

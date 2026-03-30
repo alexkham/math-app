@@ -291,7 +291,7 @@ The [eigenvalues](!/linear-algebra/eigen) of $P$ are $0$ and $1$: vectors in $W$
     title: `Properties of Orthogonal Projections`,
     content: `Orthogonal projections are characterized by two properties acting together.
 
-Idempotence ($P^2 = P$): once a vector has been projected, projecting again changes nothing. Every vector in $W$ is a fixed point of $P$. This distinguishes projections from other [linear transformations](!/linear-algebra/linear-transformations) — most transformations continue to change vectors on repeated application.
+Idempotence ($P^2 = P$): once a vector has been projected, projecting again changes nothing. Every vector in $W$ is a fixed point of $P$. This distinguishes projections from other [linear transformations](!/linear-algebra/transformations) — most transformations continue to change vectors on repeated application.
 
 Symmetry ($P^T = P$): the projection is self-adjoint with respect to the dot product. This means $P\\mathbf{u} \\cdot \\mathbf{v} = \\mathbf{u} \\cdot P\\mathbf{v}$ for all $\\mathbf{u}, \\mathbf{v}$. The symmetry condition is what makes the projection orthogonal rather than oblique — it ensures the residual is perpendicular to $W$, not merely non-parallel.
 

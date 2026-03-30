@@ -167,7 +167,7 @@ The column interpretation says that column $j$ of $AB$ is obtained by multiplyin
 
 $$AB = \\begin{pmatrix} A\\mathbf{b}_1 & A\\mathbf{b}_2 & \\cdots & A\\mathbf{b}_p \\end{pmatrix}$$
 
-Each column of the product is a linear combination of the columns of $A$, with weights given by the corresponding column of $B$. This is the view that connects matrix multiplication to [linear transformations](!/linear-algebra/linear-transformations): the product $AB$ applies the transformation $A$ to each column of $B$ independently.
+Each column of the product is a linear combination of the columns of $A$, with weights given by the corresponding column of $B$. This is the view that connects matrix multiplication to [linear transformations](!/linear-algebra/transformations): the product $AB$ applies the transformation $A$ to each column of $B$ independently.
 
 The row interpretation says that row $i$ of $AB$ equals row $i$ of $A$ times the entire matrix $B$. Each row of the product is a linear combination of the rows of $B$, weighted by the entries in the corresponding row of $A$.
 
