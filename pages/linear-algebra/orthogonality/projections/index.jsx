@@ -233,7 +233,7 @@ The projection $\\hat{\\mathbf{b}}$ is the closest point in $W$ to $\\mathbf{b}$
 
 $$\\|\\mathbf{b} - \\mathbf{w}\\|^2 = \\|\\mathbf{z}\\|^2 + \\|\\hat{\\mathbf{b}} - \\mathbf{w}\\|^2 \\geq \\|\\mathbf{z}\\|^2 = \\|\\mathbf{b} - \\hat{\\mathbf{b}}\\|^2$$
 
-The inequality follows from the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-products): $\\mathbf{z}$ is orthogonal to $\\hat{\\mathbf{b}} - \\mathbf{w}$ (both $\\hat{\\mathbf{b}}$ and $\\mathbf{w}$ are in $W$, so their difference is in $W$, and $\\mathbf{z} \\in W^\\perp$). The minimum distance $\\|\\mathbf{z}\\|$ is achieved uniquely at $\\mathbf{w} = \\hat{\\mathbf{b}}$.`,
+The inequality follows from the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product): $\\mathbf{z}$ is orthogonal to $\\hat{\\mathbf{b}} - \\mathbf{w}$ (both $\\hat{\\mathbf{b}}$ and $\\mathbf{w}$ are in $W$, so their difference is in $W$, and $\\mathbf{z} \\in W^\\perp$). The minimum distance $\\|\\mathbf{z}\\|$ is achieved uniquely at $\\mathbf{w} = \\hat{\\mathbf{b}}$.`,
     before: ``,
     after: ``,
     link: ``,

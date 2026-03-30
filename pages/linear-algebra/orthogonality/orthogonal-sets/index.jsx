@@ -285,7 +285,7 @@ So $\\mathbf{x} = 2\\sqrt{2}\\,\\mathbf{q}_1 + \\sqrt{6}\\,\\mathbf{q}_2 + 0 \\c
 
 The rows of an orthogonal matrix also form an orthonormal set — orthogonality of columns and rows go together.
 
-The [determinant](!/linear-algebra/determinants) of an orthogonal matrix is $\\pm 1$, since $1 = \\det(I) = \\det(Q^TQ) = \\det(Q)^2$. When $\\det(Q) = +1$, the matrix represents a [rotation](!/linear-algebra/linear-transformations/geometric-transformations). When $\\det(Q) = -1$, it represents a rotation composed with a reflection.
+The [determinant](!/linear-algebra/determinants) of an orthogonal matrix is $\\pm 1$, since $1 = \\det(I) = \\det(Q^TQ) = \\det(Q)^2$. When $\\det(Q) = +1$, the matrix represents a [rotation](!/linear-algebra/transformations/geometric). When $\\det(Q) = -1$, it represents a rotation composed with a reflection.
 
 The defining geometric property is that orthogonal matrices preserve the dot product: $(Q\\mathbf{u}) \\cdot (Q\\mathbf{v}) = (Q\\mathbf{u})^T(Q\\mathbf{v}) = \\mathbf{u}^TQ^TQ\\mathbf{v} = \\mathbf{u}^T\\mathbf{v} = \\mathbf{u} \\cdot \\mathbf{v}$. Preserving the dot product automatically preserves lengths ($\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$), angles, and distances. An orthogonal matrix is a rigid motion of $\\mathbb{R}^n$ — it rearranges vectors without distorting any geometric relationship.`,
     before: ``,
@@ -309,7 +309,7 @@ These rectangular matrices with orthonormal columns are the natural output of th
 
 $$\\|\\mathbf{x}\\|^2 = c_1^2 + c_2^2 + \\cdots + c_n^2 = \\sum_{i=1}^{n} (\\mathbf{x} \\cdot \\mathbf{q}_i)^2$$
 
-The squared length of $\\mathbf{x}$ equals the sum of the squares of its coordinates. This is the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-products) applied to the orthonormal decomposition $\\mathbf{x} = c_1\\mathbf{q}_1 + \\cdots + c_n\\mathbf{q}_n$.
+The squared length of $\\mathbf{x}$ equals the sum of the squares of its coordinates. This is the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product) applied to the orthonormal decomposition $\\mathbf{x} = c_1\\mathbf{q}_1 + \\cdots + c_n\\mathbf{q}_n$.
 
 When the orthonormal set does not span — when $k < n$ — the sum accounts for only part of the length:
 

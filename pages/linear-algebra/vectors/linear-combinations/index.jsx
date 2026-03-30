@@ -145,7 +145,7 @@ This characterization is developed formally in the [linear independence](!/linea
 
 $$c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{b}$$
 
-Arranging the vectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_k$ as columns of a [matrix](!/linear-algebra/matrices) $A$ and the coefficients as an unknown vector $\\mathbf{x}$, the equation becomes:
+Arranging the vectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_k$ as columns of a [matrix](!/linear-algebra/matrix) $A$ and the coefficients as an unknown vector $\\mathbf{x}$, the equation becomes:
 
 $$A\\mathbf{x} = \\mathbf{b}$$
 

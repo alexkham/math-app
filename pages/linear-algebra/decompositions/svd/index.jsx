@@ -376,7 +376,7 @@ The best rank-$k$ approximation: truncate at $k$ terms.
 
 Norms and the condition number: directly from the singular values.
 
-The [geometry](!/linear-algebra/linear-transformations/geometric-transformations) of the linear map: rotation, scaling, rotation.
+The [geometry](!/linear-algebra/transformations/geometric) of the linear map: rotation, scaling, rotation.
 
 For symmetric matrices, the SVD reduces to the [spectral decomposition](!/linear-algebra/decompositions/spectral). For invertible square matrices, the singular values reveal the conditioning that the [determinant](!/linear-algebra/determinants) alone cannot see (a matrix with $\\det = 1$ can still be poorly conditioned). For rectangular matrices, the SVD is the only factorization that applies without modification.
 

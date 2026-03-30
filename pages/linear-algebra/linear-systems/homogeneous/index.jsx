@@ -315,7 +315,7 @@ This is the computational link between homogeneous systems and independence. Row
   },
   obj9: {
     title: `The Eigenvalue Connection`,
-    content: `The [eigenvalue](!/linear-algebra/eigenvalues-vectors) equation $A\\mathbf{x} = \\lambda\\mathbf{x}$ can be rewritten as
+    content: `The [eigenvalue](!/linear-algebra/eigen) equation $A\\mathbf{x} = \\lambda\\mathbf{x}$ can be rewritten as
 
 $$(A - \\lambda I)\\mathbf{x} = \\mathbf{0}$$
 
