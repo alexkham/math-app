@@ -224,7 +224,7 @@ $\\Sigma$ scales each axis independently by the corresponding singular value. Ax
 
 $U$ rotates (or reflects) the scaled result into the output space.
 
-The singular values measure the stretching in each orthogonal direction. $\\sigma_1$ is the maximum stretching: $\\sigma_1 = \\max_{\\|\\mathbf{x}\\|=1}\\|A\\mathbf{x}\\|$. The smallest nonzero singular value $\\sigma_r$ is the minimum stretching on the [row space](!/linear-algebra/vector-spaces/fundamental-subspaces). The ratio $\\sigma_1/\\sigma_r$ is the condition number — it measures how distorted the transformation is.
+The singular values measure the stretching in each orthogonal direction. $\\sigma_1$ is the maximum stretching: $\\sigma_1 = \\max_{\\|\\mathbf{x}\\|=1}\\|A\\mathbf{x}\\|$. The smallest nonzero singular value $\\sigma_r$ is the minimum stretching on the [row space](!/linear-algebra/vector-spaces/fundamental-spaces). The ratio $\\sigma_1/\\sigma_r$ is the condition number — it measures how distorted the transformation is.
 
 Even the most complex-looking matrix is geometrically just two rotations sandwiching a coordinate-axis scaling.`,
     before: ``,

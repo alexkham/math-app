@@ -223,7 +223,7 @@ $$\\ker(T) = \\{\\mathbf{v} \\in V : T(\\mathbf{v}) = \\mathbf{0}\\}$$
 
 The kernel is a [subspace](!/linear-algebra/vector-spaces/subspaces) of $V$. It contains $\\mathbf{0}$ (since $T(\\mathbf{0}) = \\mathbf{0}$), and if $T(\\mathbf{u}) = \\mathbf{0}$ and $T(\\mathbf{v}) = \\mathbf{0}$, then $T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v}) = \\mathbf{0}$, so $c\\mathbf{u} + d\\mathbf{v} \\in \\ker(T)$.
 
-When $T(\\mathbf{x}) = A\\mathbf{x}$, the kernel is the [null space](!/linear-algebra/vector-spaces/fundamental-subspaces) of $A$: all solutions to the [homogeneous](!/linear-algebra/linear-systems/homogeneous) system $A\\mathbf{x} = \\mathbf{0}$. Its dimension is the nullity, equal to $n - \\text{rank}(A)$.
+When $T(\\mathbf{x}) = A\\mathbf{x}$, the kernel is the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$: all solutions to the [homogeneous](!/linear-algebra/linear-systems/homogeneous) system $A\\mathbf{x} = \\mathbf{0}$. Its dimension is the nullity, equal to $n - \\text{rank}(A)$.
 
 The kernel measures the information lost by $T$. Vectors in the kernel are collapsed to $\\mathbf{0}$ — they represent directions that the transformation annihilates. A larger kernel means more information is destroyed.`,
     before: ``,

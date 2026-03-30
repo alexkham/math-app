@@ -227,7 +227,7 @@ One case is automatic: if the system has more unknowns than equations ($n > m$),
   },
   obj3: {
     title: `The Solution Set Is the Null Space`,
-    content: `The set of all solutions to $A\\mathbf{x} = \\mathbf{0}$ is the [null space](!/linear-algebra/vector-spaces/fundamental-subspaces) of $A$:
+    content: `The set of all solutions to $A\\mathbf{x} = \\mathbf{0}$ is the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$:
 
 $$\\text{Null}(A) = \\{\\mathbf{x} \\in \\mathbb{R}^n : A\\mathbf{x} = \\mathbf{0}\\}$$
 

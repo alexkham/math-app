@@ -207,7 +207,7 @@ const sectionsContent = {
 
 Existence: is there at least one vector $\\mathbf{x}$ satisfying $A\\mathbf{x} = \\mathbf{b}$? This asks whether $\\mathbf{b}$ lies in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$.
 
-Uniqueness: if a solution exists, is it the only one? This asks whether the [null space](!/linear-algebra/vector-spaces/fundamental-subspaces) of $A$ is trivial.
+Uniqueness: if a solution exists, is it the only one? This asks whether the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$ is trivial.
 
 The two questions are independent — existence can hold without uniqueness, and non-existence makes uniqueness moot. Both are answered by the [rank](!/linear-algebra/matrix/rank) of $A$.`,
     before: ``,
