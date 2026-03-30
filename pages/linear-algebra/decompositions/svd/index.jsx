@@ -265,7 +265,7 @@ For $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$: $A^TA = \
     title: `Compact and Thin Forms`,
     content: `The full SVD has $U$ of size $m \\times m$, $\\Sigma$ of size $m \\times n$, and $V$ of size $n \\times n$. Two economical alternatives retain only the essential information.
 
-The thin SVD keeps only the first $n$ columns of $U$ (call them $U_1$) and the top $n \\times n$ block of $\\Sigma$ (call it $\\Sigma_1$): $A = U_1 \\Sigma_1 V^T$. This drops the columns of $U$ corresponding to the [left null space](!/linear-algebra/vector-spaces/fundamental-subspaces).
+The thin SVD keeps only the first $n$ columns of $U$ (call them $U_1$) and the top $n \\times n$ block of $\\Sigma$ (call it $\\Sigma_1$): $A = U_1 \\Sigma_1 V^T$. This drops the columns of $U$ corresponding to the [left null space](!/linear-algebra/vector-spaces/fundamental-spaces).
 
 The compact SVD keeps only the first $r$ columns of $U$ and $V$ (where $r = \\text{rank}(A)$) and the $r \\times r$ diagonal block of nonzero singular values: $A = U_r \\Sigma_r V_r^T$. This is the most economical representation — it captures only the rank-$r$ content of $A$, discarding everything associated with zero singular values.
 
@@ -280,7 +280,7 @@ All three forms represent the same matrix $A$. The compact form uses the least s
 
 The first $r$ columns of $V$ ($\\mathbf{v}_1, \\dots, \\mathbf{v}_r$) form an orthonormal basis for the row space of $A$.
 
-The last $n - r$ columns of $V$ ($\\mathbf{v}_{r+1}, \\dots, \\mathbf{v}_n$) form an orthonormal basis for the [null space](!/linear-algebra/vector-spaces/fundamental-subspaces) of $A$.
+The last $n - r$ columns of $V$ ($\\mathbf{v}_{r+1}, \\dots, \\mathbf{v}_n$) form an orthonormal basis for the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$.
 
 The first $r$ columns of $U$ ($\\mathbf{u}_1, \\dots, \\mathbf{u}_r$) form an orthonormal basis for the [column space](!/linear-algebra/vector-spaces/fundamental-subspaces) of $A$.
 

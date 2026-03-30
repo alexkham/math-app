@@ -271,7 +271,7 @@ $T(x^2) = 2x = 0 \\cdot 1 + 2 \\cdot x$, so column $3$ is $(0, 2)^T$.
 
 $$[T] = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 2 \\end{pmatrix}$$
 
-The $2 \\times 3$ shape reflects $\\dim(\\mathcal{P}_1) = 2$ rows and $\\dim(\\mathcal{P}_2) = 3$ columns. The [rank](!/linear-algebra/matrix/rank) is $2$ — differentiation maps $\\mathcal{P}_2$ onto all of $\\mathcal{P}_1$. The [null space](!/linear-algebra/vector-spaces/fundamental-subspaces) is one-dimensional, spanned by the constant polynomial $1$ — the only polynomials whose derivative is zero.`,
+The $2 \\times 3$ shape reflects $\\dim(\\mathcal{P}_1) = 2$ rows and $\\dim(\\mathcal{P}_2) = 3$ columns. The [rank](!/linear-algebra/matrix/rank) is $2$ — differentiation maps $\\mathcal{P}_2$ onto all of $\\mathcal{P}_1$. The [null space](!/linear-algebra/vector-spaces/fundamental-spaces) is one-dimensional, spanned by the constant polynomial $1$ — the only polynomials whose derivative is zero.`,
     before: ``,
     after: ``,
     link: ``,

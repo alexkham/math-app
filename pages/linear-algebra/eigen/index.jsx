@@ -87,7 +87,7 @@ for some scalar $\\lambda$. The scalar $\\lambda$ is the corresponding eigenvalu
 
 The requirement that $\\mathbf{v} \\neq \\mathbf{0}$ is essential. The zero vector trivially satisfies $A\\mathbf{0} = \\lambda\\mathbf{0}$ for every $\\lambda$, so it carries no information and is excluded by convention.
 
-The eigenvalue $\\lambda$ can be any real number, including zero. When $\\lambda = 0$, the equation $A\\mathbf{v} = \\mathbf{0}$ says that $\\mathbf{v}$ is in the [null space](!/linear-algebra/vector-spaces/fundamental-subspaces) of $A$ — the transformation annihilates that direction entirely.
+The eigenvalue $\\lambda$ can be any real number, including zero. When $\\lambda = 0$, the equation $A\\mathbf{v} = \\mathbf{0}$ says that $\\mathbf{v}$ is in the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$ — the transformation annihilates that direction entirely.
 
 Only square matrices have eigenvalues. The equation $A\\mathbf{v} = \\lambda\\mathbf{v}$ requires $A\\mathbf{v}$ and $\\lambda\\mathbf{v}$ to live in the same space, which demands that $A$ maps $\\mathbb{R}^n$ to $\\mathbb{R}^n$.`,
     before: ``,

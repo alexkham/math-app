@@ -248,7 +248,7 @@ Householder QR is more numerically stable than Gram-Schmidt. It achieves backwar
 
 The full QR factorization extends $Q_1$ to a square $m \\times m$ orthogonal matrix $Q$ by appending $m - n$ columns forming an orthonormal basis for $\\text{Col}(A)^\\perp$. The factor $R$ is extended to $m \\times n$ by appending $m - n$ rows of zeros: $A = QR$.
 
-The full version is needed when the [orthogonal complement](!/linear-algebra/orthogonality) of the column space is required — for instance, when extracting a basis for the [left null space](!/linear-algebra/vector-spaces/fundamental-subspaces). The thin version is more economical for system solving and [least squares](!/linear-algebra/orthogonality/least-squares).`,
+The full version is needed when the [orthogonal complement](!/linear-algebra/orthogonality) of the column space is required — for instance, when extracting a basis for the [left null space](!/linear-algebra/vector-spaces/fundamental-spaces). The thin version is more economical for system solving and [least squares](!/linear-algebra/orthogonality/least-squares).`,
     before: ``,
     after: ``,
     link: ``,
