@@ -123,7 +123,7 @@ $$L = \\begin{pmatrix} l_{11} & 0 & 0 \\\\ l_{21} & l_{22} & 0 \\\\ l_{31} & l_{
 
 Triangular matrices share several convenient properties with diagonal matrices. The [determinant](!/linear-algebra/determinants) is the product of the diagonal entries. The eigenvalues are the diagonal entries. The product of two upper triangular matrices is upper triangular, and the same holds for lower triangular matrices. The inverse of an invertible upper triangular matrix is also upper triangular.
 
-These properties make triangular matrices the natural endpoint of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination). Row reduction converts a general matrix into upper triangular form, and the LU [decomposition](!/linear-algebra/decompositions/lu) factors a matrix into lower and upper triangular components, reducing system-solving to two simple back-substitution passes.`,
+These properties make triangular matrices the natural endpoint of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination). Row reduction converts a general matrix into upper triangular form, and the LU [decomposition](!/linear-algebra/decompositions/lower-upper) factors a matrix into lower and upper triangular components, reducing system-solving to two simple back-substitution passes.`,
     before: ``,
     after: ``,
     link: ``,

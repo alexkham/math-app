@@ -319,7 +319,7 @@ Stiffness matrices in finite element analysis are symmetric positive definite. N
   },
   obj9: {
     title: `Cholesky and LU: The Relationship`,
-    content: `For a symmetric positive definite matrix, [LU](!/linear-algebra/decompositions/lu) factorization without pivoting always succeeds and produces $A = L_U D L_U^T$, where $L_U$ is unit lower triangular and $D$ is diagonal with positive entries. This is the $LDL^T$ decomposition.
+    content: `For a symmetric positive definite matrix, [LU](!/linear-algebra/decompositions/lower-upper) factorization without pivoting always succeeds and produces $A = L_U D L_U^T$, where $L_U$ is unit lower triangular and $D$ is diagonal with positive entries. This is the $LDL^T$ decomposition.
 
 The Cholesky factor is $L_{\\text{Chol}} = L_U D^{1/2}$ — the unit lower triangular factor with $\\sqrt{D}$ absorbed into it. Equivalently, $A = (L_U D^{1/2})(L_U D^{1/2})^T = LL^T$.
 
