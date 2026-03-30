@@ -149,7 +149,7 @@ When $\\det(A) = 0$, orientation is undefined. The map crushes the space down to
   },
   obj5: {
     title: `Linear Transformations as Geometric Mappings`,
-    content: `Every invertible $n \\times n$ matrix defines a bijective [linear transformation](!/linear-algebra/linear-transformations) from $\\mathbb{R}^n$ to itself. The determinant captures the two essential geometric facts about this transformation in a single number: it scales all volumes by $|\\det(A)|$, and it either preserves or reverses orientation according to the sign.
+    content: `Every invertible $n \\times n$ matrix defines a bijective [linear transformation](!/linear-algebra/transformations) from $\\mathbb{R}^n$ to itself. The determinant captures the two essential geometric facts about this transformation in a single number: it scales all volumes by $|\\det(A)|$, and it either preserves or reverses orientation according to the sign.
 
 The [multiplicative property](!/linear-algebra/determinants/properties) $\\det(AB) = \\det(A)\\det(B)$ takes on a clean geometric reading in this context. Composing two linear maps multiplies their volume-scaling factors: if $A$ scales volumes by $|\\det(A)|$ and $B$ scales by $|\\det(B)|$, then $AB$ scales by $|\\det(A)| \\cdot |\\det(B)|$. The orientation effects compose as well — two orientation-reversing maps compose to an orientation-preserving one, matching the sign rule $(-1)(-1) = +1$.
 

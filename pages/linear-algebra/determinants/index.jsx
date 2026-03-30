@@ -72,7 +72,7 @@ const keyWords = [
 
 The notation $|A|$ is widespread but potentially confusing, since the same vertical bars denote absolute value for real numbers and modulus for complex numbers. When there is any risk of ambiguity, $\\det(A)$ is preferred.
 
-The determinant encodes a remarkable amount of structural information. Its most fundamental role is as an invertibility test: $A$ is [invertible](!/linear-algebra/matrices/inverse) if and only if $\\det(A) \\neq 0$. But it also measures how the linear map $x \\mapsto Ax$ distorts volume, determines whether that map preserves or reverses orientation, and appears in explicit formulas for eigenvalues, matrix inverses, and solutions to linear systems. The next several sections develop the determinant starting from the smallest cases and building toward the general definition.`,
+The determinant encodes a remarkable amount of structural information. Its most fundamental role is as an invertibility test: $A$ is [invertible](!/linear-algebra/matrix/inverse) if and only if $\\det(A) \\neq 0$. But it also measures how the linear map $x \\mapsto Ax$ distorts volume, determines whether that map preserves or reverses orientation, and appears in explicit formulas for eigenvalues, matrix inverses, and solutions to linear systems. The next several sections develop the determinant starting from the smallest cases and building toward the general definition.`,
     before: ``,
     after: ``,
     link: ``,

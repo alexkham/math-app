@@ -270,7 +270,7 @@ It lives in $\\mathbb{R}^n$ and has dimension $n - r$, where $r$ is the rank. Th
 
 The null space measures the failure of injectivity. If $\\text{Null}(A) = \\{\\mathbf{0}\\}$, the map is injective — different inputs produce different outputs. If the null space is nontrivial, the map collapses some directions to zero, and distinct inputs can produce the same output: if $A\\mathbf{x}_1 = A\\mathbf{x}_2$, then $\\mathbf{x}_1 - \\mathbf{x}_2 \\in \\text{Null}(A)$.
 
-To find a basis, reduce $A$ to [RREF](!/linear-algebra/linear-systems/rref) and identify the free variables. Each free variable is set to $1$ (with the others at $0$), and the corresponding solution is one basis vector for the null space.
+To find a basis, reduce $A$ to [RREF](!/linear-algebra/linear-systems/echelon-form) and identify the free variables. Each free variable is set to $1$ (with the others at $0$), and the corresponding solution is one basis vector for the null space.
 
 ## Continuing the Example
 
