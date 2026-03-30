@@ -119,7 +119,7 @@ Swapping two columns — say placing $\\mathbf{b}$ first and $\\mathbf{a}$ secon
   },
   obj3: {
     title: `The General Case: n-Dimensional Volume Scaling`,
-    content: `The pattern generalizes to arbitrary dimension. For an $n \\times n$ matrix $A$, the absolute value $|\\det(A)|$ is the factor by which the [linear map](!/linear-algebra/linear-transformations) $x \\mapsto Ax$ scales $n$-dimensional volumes.
+    content: `The pattern generalizes to arbitrary dimension. For an $n \\times n$ matrix $A$, the absolute value $|\\det(A)|$ is the factor by which the [linear map](!/linear-algebra/transformations) $x \\mapsto Ax$ scales $n$-dimensional volumes.
 
 More precisely, consider the unit hypercube in $\\mathbb{R}^n$ — the set of all vectors whose components lie between $0$ and $1$. Its $n$-dimensional volume is $1$. The image of this hypercube under the map $x \\mapsto Ax$ is a parallelepiped whose $n$-dimensional volume equals $|\\det(A)|$.
 
@@ -572,7 +572,7 @@ const schemas = {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Geometric Interpretation of Determinants: Determinant as Area and Volume</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Determinant as Area and Volume</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

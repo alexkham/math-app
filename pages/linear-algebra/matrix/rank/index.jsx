@@ -93,7 +93,7 @@ $$\\text{column rank of } A = \\text{row rank of } A$$
 
 This common value is called the rank of $A$, written $\\text{rank}(A)$ or $\\text{rk}(A)$.
 
-The equality is not obvious. The columns live in $\\mathbb{R}^m$ and the rows live in $\\mathbb{R}^n$ — two different spaces, potentially of different dimensions. The proof goes through row reduction: elementary row operations do not change the row space, and in [reduced row echelon form](!/linear-algebra/linear-systems/rref), the number of nonzero rows (row rank) equals the number of pivot columns (column rank). Since row operations preserve both counts, the equality holds for the original matrix.`,
+The equality is not obvious. The columns live in $\\mathbb{R}^m$ and the rows live in $\\mathbb{R}^n$ — two different spaces, potentially of different dimensions. The proof goes through row reduction: elementary row operations do not change the row space, and in [reduced row echelon form](!/linear-algebra/linear-systems/echelon-form), the number of nonzero rows (row rank) equals the number of pivot columns (column rank). Since row operations preserve both counts, the equality holds for the original matrix.`,
     before: ``,
     after: ``,
     link: ``,
