@@ -357,7 +357,7 @@ Partial pivoting addresses this by modifying the pivot selection step. At each s
 
 Partial pivoting does not change the mathematical structure of Gaussian elimination — it only changes which row swaps are performed. The echelon form, the rank, the pivots, and the solution are all the same in exact arithmetic. The difference is entirely numerical: partial pivoting makes the computation stable.
 
-Every serious numerical implementation of Gaussian elimination uses partial pivoting by default. In the [LU decomposition](!/linear-algebra/decompositions/lu), the row swaps are recorded in a permutation matrix $P$, giving the factorization $PA = LU$.`,
+Every serious numerical implementation of Gaussian elimination uses partial pivoting by default. In the [LU decomposition](!/linear-algebra/decompositions/lower-upper), the row swaps are recorded in a permutation matrix $P$, giving the factorization $PA = LU$.`,
     before: ``,
     after: ``,
     link: ``,

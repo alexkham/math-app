@@ -273,7 +273,7 @@ The structure is identical to [LU](!/linear-algebra/decompositions/lu), but only
   },
   obj5: {
     title: `Computational Cost`,
-    content: `The Cholesky factorization requires roughly $\\frac{1}{3}n^3$ arithmetic operations — exactly half the cost of [LU](!/linear-algebra/decompositions/lu) factorization ($\\frac{2}{3}n^3$). The saving comes from symmetry: the lower triangle of $A$ determines the upper triangle ($a_{ij} = a_{ji}$), so only half the entries need processing.
+    content: `The Cholesky factorization requires roughly $\\frac{1}{3}n^3$ arithmetic operations — exactly half the cost of [LU](!/linear-algebra/decompositions/lower-upper) factorization ($\\frac{2}{3}n^3$). The saving comes from symmetry: the lower triangle of $A$ determines the upper triangle ($a_{ij} = a_{ji}$), so only half the entries need processing.
 
 Each triangular solve costs $O(n^2)$. For a single system, the total is $\\frac{1}{3}n^3 + O(n^2)$. For $k$ systems sharing the same coefficient matrix, the cost is $\\frac{1}{3}n^3 + 2kn^2$.
 

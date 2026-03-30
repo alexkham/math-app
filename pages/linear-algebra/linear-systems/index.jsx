@@ -334,7 +334,7 @@ When $A$ is square ($m = n$) and $\\det(A) \\neq 0$, both conditions hold for ev
 
 The [inverse](!/linear-algebra/matrix/inverse) formula $\\mathbf{x} = A^{-1}\\mathbf{b}$ applies when $A$ is square and invertible. It is elegant but rarely the most efficient approach — computing $A^{-1}$ costs roughly three times as much as solving by elimination.
 
-[LU decomposition](!/linear-algebra/decompositions/lu) factors $A$ into a lower triangular matrix $L$ and an upper triangular matrix $U$. Once the factorization is computed, solving $A\\mathbf{x} = \\mathbf{b}$ reduces to two cheap triangular solves. This is the method of choice when multiple systems share the same coefficient matrix $A$ but have different right-hand sides.
+[LU decomposition](!/linear-algebra/decompositions/lower-upper) factors $A$ into a lower triangular matrix $L$ and an upper triangular matrix $U$. Once the factorization is computed, solving $A\\mathbf{x} = \\mathbf{b}$ reduces to two cheap triangular solves. This is the method of choice when multiple systems share the same coefficient matrix $A$ but have different right-hand sides.
 
 Iterative methods — Jacobi, Gauss-Seidel, conjugate gradient — generate a sequence of approximations converging to the solution. They are preferred for very large sparse systems where direct methods would require too much memory or time. These methods lie at the boundary between linear algebra and numerical analysis.`,
     before: ``,

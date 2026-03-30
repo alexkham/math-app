@@ -215,7 +215,7 @@ Every decomposition represents a trade: an upfront cost to compute the factors, 
     title: `Why Decompositions Matter`,
     content: `Decompositions transform hard problems into sequences of easy ones.
 
-Solving [linear systems](!/linear-algebra/linear-systems): the [LU decomposition](!/linear-algebra/decompositions/lu) converts a single factorization into cheap triangular solves for any number of right-hand sides. The [Cholesky decomposition](!/linear-algebra/decompositions/cholesky) does the same at half the cost when the matrix is symmetric positive definite.
+Solving [linear systems](!/linear-algebra/linear-systems): the [LU decomposition](!/linear-algebra/decompositions/lower-upper) converts a single factorization into cheap triangular solves for any number of right-hand sides. The [Cholesky decomposition](!/linear-algebra/decompositions/cholesky) does the same at half the cost when the matrix is symmetric positive definite.
 
 [Least squares](!/linear-algebra/orthogonality/least-squares): the [QR decomposition](!/linear-algebra/decompositions/qr) avoids squaring the condition number, providing a numerically stable solution to overdetermined systems.
 
@@ -230,7 +230,7 @@ Numerical stability: orthogonal factors ($Q$ in QR, $U$ and $V$ in SVD) preserve
   },
   obj3: {
     title: `LU Decomposition`,
-    content: `The [LU decomposition](!/linear-algebra/decompositions/lu) factors a square matrix as $A = LU$ (or $PA = LU$ with row pivoting), where $L$ is lower triangular and $U$ is upper triangular. It captures the entire process of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) in matrix form: $U$ is the [echelon form](!/linear-algebra/linear-systems/echelon-form), and $L$ stores the multipliers used during elimination.
+    content: `The [LU decomposition](!/linear-algebra/decompositions/lower-upper) factors a square matrix as $A = LU$ (or $PA = LU$ with row pivoting), where $L$ is lower triangular and $U$ is upper triangular. It captures the entire process of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) in matrix form: $U$ is the [echelon form](!/linear-algebra/linear-systems/echelon-form), and $L$ stores the multipliers used during elimination.
 
 Solving $A\\mathbf{x} = \\mathbf{b}$ reduces to two triangular substitutions — forward ($L\\mathbf{y} = \\mathbf{b}$) then backward ($U\\mathbf{x} = \\mathbf{y}$) — each costing $O(n^2)$. The factorization itself costs $\\frac{2}{3}n^3$, but each additional right-hand side costs only $O(n^2)$. For $k$ systems sharing the same coefficient matrix, LU amortizes the dominant cost over all $k$ solves.`,
     before: ``,
