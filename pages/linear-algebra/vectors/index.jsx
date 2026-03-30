@@ -97,7 +97,7 @@ Column notation stacks them vertically:
 
 $$\\mathbf{v} = \\begin{pmatrix} v_1 \\\\ v_2 \\\\ \\vdots \\\\ v_n \\end{pmatrix}$$
 
-The distinction matters when vectors interact with [matrices](!/linear-algebra/matrices): matrix multiplication requires column vectors on the right side of the product. Throughout this section, both formats appear depending on which is clearer for the situation at hand.
+The distinction matters when vectors interact with [matrices](!/linear-algebra/matrix): matrix multiplication requires column vectors on the right side of the product. Throughout this section, both formats appear depending on which is clearer for the situation at hand.
 
 ## Standard Basis Vectors
 

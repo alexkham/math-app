@@ -269,7 +269,7 @@ The thin SVD keeps only the first $n$ columns of $U$ (call them $U_1$) and the t
 
 The compact SVD keeps only the first $r$ columns of $U$ and $V$ (where $r = \\text{rank}(A)$) and the $r \\times r$ diagonal block of nonzero singular values: $A = U_r \\Sigma_r V_r^T$. This is the most economical representation — it captures only the rank-$r$ content of $A$, discarding everything associated with zero singular values.
 
-All three forms represent the same matrix $A$. The compact form uses the least storage; the full form provides bases for all four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-subspaces).`,
+All three forms represent the same matrix $A$. The compact form uses the least storage; the full form provides bases for all four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces).`,
     before: ``,
     after: ``,
     link: ``,

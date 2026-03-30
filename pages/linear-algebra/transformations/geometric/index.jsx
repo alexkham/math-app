@@ -267,7 +267,7 @@ Reflection across an arbitrary line through the origin at angle $\\alpha$ has ma
 
 $$H_\\alpha = \\begin{pmatrix} \\cos 2\\alpha & \\sin 2\\alpha \\\\ \\sin 2\\alpha & -\\cos 2\\alpha \\end{pmatrix}$$
 
-All reflection matrices share the same properties: the determinant is $-1$ (orientation-reversing, area-preserving), the matrix is [orthogonal](!/linear-algebra/matrix/types) (lengths and angles preserved), and the matrix is [involutory](!/linear-algebra/matrix/types) ($H^2 = I$) — reflecting twice returns every vector to its starting point. The [eigenvalues](!/linear-algebra/eigenvalues-vectors) are $+1$ (vectors on the mirror line) and $-1$ (vectors perpendicular to it).`,
+All reflection matrices share the same properties: the determinant is $-1$ (orientation-reversing, area-preserving), the matrix is [orthogonal](!/linear-algebra/matrix/types) (lengths and angles preserved), and the matrix is [involutory](!/linear-algebra/matrix/types) ($H^2 = I$) — reflecting twice returns every vector to its starting point. The [eigenvalues](!/linear-algebra/eigen) are $+1$ (vectors on the mirror line) and $-1$ (vectors perpendicular to it).`,
     before: ``,
     after: ``,
     link: ``,

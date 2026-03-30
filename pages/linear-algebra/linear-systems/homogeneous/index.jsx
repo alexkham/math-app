@@ -740,7 +740,7 @@ export default function HomogeneousSystemsPage({seoData, sectionsContent, introC
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Homogenous Systems of Equations</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Homogeneous Systems of Equations</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

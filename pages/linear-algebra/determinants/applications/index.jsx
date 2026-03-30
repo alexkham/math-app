@@ -227,7 +227,7 @@ Setting $\\lambda = 0$ in the characteristic polynomial gives $p(0) = \\det(A)$,
 
 $$\\det(A) = \\lambda_1 \\lambda_2 \\cdots \\lambda_n$$
 
-The determinant equals the product of all eigenvalues, counted with algebraic multiplicity. A second identity connects the coefficient of $\\lambda^{n-1}$ to the [trace](!/linear-algebra/matrices/trace):
+The determinant equals the product of all eigenvalues, counted with algebraic multiplicity. A second identity connects the coefficient of $\\lambda^{n-1}$ to the [trace](!/linear-algebra/matrix/trace):
 
 $$\\lambda_1 + \\lambda_2 + \\cdots + \\lambda_n = \\operatorname{tr}(A)$$
 

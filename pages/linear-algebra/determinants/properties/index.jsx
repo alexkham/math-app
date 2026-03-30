@@ -158,7 +158,7 @@ The reduction to triangular form requires roughly $\\frac{2}{3}n^3$ arithmetic o
 
 $$\\det(AB) = \\det(A) \\cdot \\det(B)$$
 
-This is one of the most powerful structural facts about determinants. The proof splits into two cases. If $A$ is singular, then $AB$ is also singular (it cannot map onto all of $\\mathbb{R}^n$ if $A$ already fails to), so both sides are zero. If $A$ is invertible, it can be written as a product of [elementary matrices](!/linear-algebra/matrices/operations), each corresponding to a single row operation. Since the determinant of each elementary matrix equals the factor by which that row operation multiplies the determinant, the result follows by chaining these factors together.
+This is one of the most powerful structural facts about determinants. The proof splits into two cases. If $A$ is singular, then $AB$ is also singular (it cannot map onto all of $\\mathbb{R}^n$ if $A$ already fails to), so both sides are zero. If $A$ is invertible, it can be written as a product of [elementary matrices](!/linear-algebra/matrix/operations), each corresponding to a single row operation. Since the determinant of each elementary matrix equals the factor by which that row operation multiplies the determinant, the result follows by chaining these factors together.
 
 ## Corollaries
 
@@ -186,7 +186,7 @@ The determinant is not additive. In general, $\\det(A + B) \\neq \\det(A) + \\de
   obj6: {
     title: `Transpose Invariance`,
     id: `transpose`,
-    content: `The determinant of a matrix equals the determinant of its [transpose](!/linear-algebra/matrices/operations):
+    content: `The determinant of a matrix equals the determinant of its [transpose](!/linear-algebra/matrix/operations):
 
 $$\\det(A^T) = \\det(A)$$
 
