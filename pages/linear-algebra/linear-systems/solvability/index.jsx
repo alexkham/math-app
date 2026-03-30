@@ -205,7 +205,7 @@ const sectionsContent = {
     title: `The Two Questions`,
     content: `Given the system $A\\mathbf{x} = \\mathbf{b}$ with $A$ of size $m \\times n$, two logically independent questions arise.
 
-Existence: is there at least one vector $\\mathbf{x}$ satisfying $A\\mathbf{x} = \\mathbf{b}$? This asks whether $\\mathbf{b}$ lies in the [column space](!/linear-algebra/vector-spaces/fundamental-subspaces) of $A$.
+Existence: is there at least one vector $\\mathbf{x}$ satisfying $A\\mathbf{x} = \\mathbf{b}$? This asks whether $\\mathbf{b}$ lies in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$.
 
 Uniqueness: if a solution exists, is it the only one? This asks whether the [null space](!/linear-algebra/vector-spaces/fundamental-subspaces) of $A$ is trivial.
 

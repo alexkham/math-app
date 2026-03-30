@@ -304,7 +304,7 @@ The error $\\|\\mathbf{b} - P\\mathbf{b}\\|$ is the distance from $\\mathbf{b}$ 
   },
   obj7: {
     title: `Projection and Least Squares`,
-    content: `When the [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ has no solution — when $\\mathbf{b}$ is not in the [column space](!/linear-algebra/vector-spaces/fundamental-subspaces) of $A$ — the [least-squares](!/linear-algebra/orthogonality/least-squares) solution $\\hat{\\mathbf{x}}$ produces the projection of $\\mathbf{b}$ onto $\\text{Col}(A)$:
+    content: `When the [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ has no solution — when $\\mathbf{b}$ is not in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$ — the [least-squares](!/linear-algebra/orthogonality/least-squares) solution $\\hat{\\mathbf{x}}$ produces the projection of $\\mathbf{b}$ onto $\\text{Col}(A)$:
 
 $$A\\hat{\\mathbf{x}} = \\hat{\\mathbf{b}} = P\\mathbf{b}$$
 

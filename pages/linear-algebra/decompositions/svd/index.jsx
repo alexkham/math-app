@@ -282,7 +282,7 @@ The first $r$ columns of $V$ ($\\mathbf{v}_1, \\dots, \\mathbf{v}_r$) form an or
 
 The last $n - r$ columns of $V$ ($\\mathbf{v}_{r+1}, \\dots, \\mathbf{v}_n$) form an orthonormal basis for the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$.
 
-The first $r$ columns of $U$ ($\\mathbf{u}_1, \\dots, \\mathbf{u}_r$) form an orthonormal basis for the [column space](!/linear-algebra/vector-spaces/fundamental-subspaces) of $A$.
+The first $r$ columns of $U$ ($\\mathbf{u}_1, \\dots, \\mathbf{u}_r$) form an orthonormal basis for the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$.
 
 The last $m - r$ columns of $U$ ($\\mathbf{u}_{r+1}, \\dots, \\mathbf{u}_m$) form an orthonormal basis for the left null space of $A$.
 
