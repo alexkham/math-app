@@ -289,13 +289,99 @@ const faqQuestions = {
 }
 
 
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": seoData.name,
+//     "description": seoData.description,
+//     "url": `https://www.learnmathclass.com${seoData.url}`,
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "High School, College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Radical Rules"
+//     },
+//     "teaches": [
+//       "Product rule for radicals",
+//       "Quotient rule for radicals",
+//       "Power rule and rational exponent connection",
+//       "Nested radical simplification",
+//       "Domain restrictions for radical rules",
+//       "Common errors when applying radical rules"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Algebra",
+//         "item": "https://www.learnmathclass.com/algebra"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Roots",
+//         "item": "https://www.learnmathclass.com/algebra/roots"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 4,
+//         "name": seoData.name,
+//         "item": `https://www.learnmathclass.com${seoData.url}`
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
+
+
 const schemas = {
   learningResource: {
     "@context": "https://schema.org",
     "@type": "LearningResource",
-    "name": seoData.name,
-    "description": seoData.description,
-    "url": `https://www.learnmathclass.com${seoData.url}`,
+    "name": "Radical Rules",
+    "description": "Learn radical rules: product rule, quotient rule, power rule, and nested radicals. Understand restrictions, common errors, and connections to exponent laws.",
+    "url": "https://www.learnmathclass.com/algebra/roots/radical-rules",
     "inLanguage": "en-US",
     "learningResourceType": "Explanation",
     "educationalLevel": "High School, College",
@@ -354,8 +440,8 @@ const schemas = {
       {
         "@type": "ListItem",
         "position": 4,
-        "name": seoData.name,
-        "item": `https://www.learnmathclass.com${seoData.url}`
+        "name": "Radical Rules",
+        "item": "https://www.learnmathclass.com/algebra/roots/radical-rules"
       }
     ]
   },
