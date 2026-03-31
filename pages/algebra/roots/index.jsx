@@ -1,374 +1,556 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import React from 'react'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
-import CircularDiagram from '@/app/components/breakdowns/circular-diagram/CircularDiagram'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../pages/pages.css'
+import Head from 'next/head'
 
 
 export async function getStaticProps(){
 
-  const intro=`Roots in mathematics represent the inverse operation of powers, answering the fundamental question: "What number, when raised to a given power, produces a specific result?"
-Roots are indispensable across mathematical disciplines. In algebra, they're crucial for solving quadratic and polynomial equations, while in geometry, they help calculate distances, areas, and volumes. Calculus extensively uses roots in integration techniques, particularly when dealing with radical functions and substitution methods. In trigonometry, roots appear in half-angle formulas and when solving trigonometric equations.
-Perhaps most importantly, roots provide the mathematical framework for understanding irrational numbers and expanding our number system beyond simple fractions. From the ancient Greeks' discovery of √2 to modern computational algorithms, roots continue to challenge and enrich mathematical thinking, serving as gateways to more advanced concepts in analysis, number theory, and applied mathematics.`
+  const keyWords=['','','','','']
+
+  // •
+
+//   \u2022 First item
+// \u2022 Second item
+
+  
+// <hr style="border-width:1px;"></hr>
+
+// <hr style="color:blue;" />
+
+// <hr style="border-color:#3498db; border-width:1px;" />
 
 
-   
-const introContent = {
+
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+
+ 
+// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.notation)}
+        // </div>,
+
+
+//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+//     {processContent(sectionsContent.normal.parameters)}
+// </div>,
+        
+//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+//                   {processContent(sectionsContent.obj4.content)}
+//                   </div>,
+
+
+//  <div key={'dist'} style={{
+//                     textAlign: 'center',
+//                     transform: 'scale(0.98)',
+//                     transformOrigin: 'center',
+//                     marginTop:'50px',
+//                     marginLeft:'-150px'
+//                   }} dangerouslySetInnerHTML={{ 
+//                     __html:   sectionContent.distributions.svg,
+//                   }} />
+
+ const sectionsContent = {
+
+  obj1: {
+    title: `What is a Root`,
+    content: `A root reverses exponentiation. When a number $a$ is raised to power $n$ and produces $b$, the $n$th root of $b$ returns $a$.
+
+$$a^n = b \\quad \\Longleftrightarrow \\quad \\sqrt[n]{b} = a$$
+
+The radical symbol $\\sqrt{\\phantom{x}}$ denotes a root. The small number tucked into the upper left is the index — it specifies which root. The expression under the radical is the radicand.
+
+$$\\sqrt[n]{b}$$
+
+Here $n$ is the index and $b$ is the radicand. When no index appears, square root (index 2) is assumed.
+
+$$\\sqrt{25} = 5 \\quad \\text{because} \\quad 5^2 = 25$$
+
+$$\\sqrt[3]{8} = 2 \\quad \\text{because} \\quad 2^3 = 8$$
+
+$$\\sqrt[4]{81} = 3 \\quad \\text{because} \\quad 3^4 = 81$$
+
+Every root operation poses a question: what base, raised to this power, yields the radicand?`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj2: {
+    title: `Square Roots, Cube Roots, and Beyond`,
+    content: `The index determines which power is being reversed.
+
+A square root ($n = 2$) undoes squaring. It appears constantly — in the Pythagorean theorem, the quadratic formula, distance calculations, and anywhere area connects to length.
+
+$$\\sqrt{49} = 7, \\quad \\sqrt{144} = 12, \\quad \\sqrt{2} \\approx 1.414$$
+
+A cube root ($n = 3$) undoes cubing. It arises in volume problems, certain equations, and throughout higher mathematics.
+
+$$\\sqrt[3]{27} = 3, \\quad \\sqrt[3]{-64} = -4, \\quad \\sqrt[3]{1000} = 10$$
+
+Higher roots follow the same pattern. Fourth roots undo fourth powers, fifth roots undo fifth powers, and so on.
+
+$$\\sqrt[4]{16} = 2, \\quad \\sqrt[5]{32} = 2, \\quad \\sqrt[6]{64} = 2$$
+
+The index matters greatly. Even indices behave differently from odd indices — a distinction explored fully in [properties of radicals](!/algebra/roots/properties). This difference affects domain, sign behavior, and how [simplification](!/algebra/roots/simplifying) proceeds.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj3: {
+    title: `Principal Roots`,
+    content: `Positive numbers have two square roots. Both 5 and $-5$ square to 25. But the radical symbol returns only one value — the principal root.
+
+For square roots and all even-index roots, the principal root is the non-negative one.
+
+$$\\sqrt{25} = 5, \\quad \\text{not } -5, \\quad \\text{and not } \\pm 5$$
+
+This convention exists so that $\\sqrt{x}$ is a function — one input, one output. Without it, $\\sqrt{25}$ would have two values, and expressions involving radicals would become ambiguous.
+
+When both roots are needed, write $\\pm\\sqrt{25} = \\pm 5$ explicitly. This notation appears frequently when [solving radical equations](!/algebra/roots/equations).
+
+Odd-index roots have no such ambiguity. Every real number has exactly one real cube root, one real fifth root, and so on. The principal root is simply that unique value.
+
+$$\\sqrt[3]{-27} = -3 \\quad \\text{(the only real cube root)}$$
+
+The principal root convention allows radicals to behave predictably in equations and as [functions](!/algebra/roots/functions).`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj4: {
+    title: `Radical and Exponent Notation`,
+    content: `Roots can be written two ways: as radicals or as fractional exponents. Both notations represent the same operation.
+
+$$\\sqrt[n]{a} = a^{1/n}$$
+
+The index becomes the denominator of the exponent. Square root is $a^{1/2}$, cube root is $a^{1/3}$, fourth root is $a^{1/4}$.
+
+When the radicand itself has a power, the two exponents combine:
+
+$$\\sqrt[n]{a^m} = a^{m/n}$$
+
+This can also be computed as:
+
+$$\\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$$
+
+For example:
+
+$$\\sqrt[3]{8^2} = 8^{2/3} = \\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$$
+
+Exponent notation often simplifies algebraic manipulation, while radical notation is clearer for computation. Converting between forms is a key technique in [simplifying radicals](!/algebra/roots/simplifying). The full treatment appears in [rational exponents](!/algebra/roots/rational-exponents).`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj5: {
+    title: `Rules for Radicals`,
+    content: `Radicals follow specific rules that enable simplification and combination.
+
+The product rule allows a radical of a product to split:
+
+$$\\sqrt[n]{ab} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$$
+
+The quotient rule does the same for division:
+
+$$\\sqrt[n]{\\frac{a}{b}} = \\frac{\\sqrt[n]{a}}{\\sqrt[n]{b}}$$
+
+Nested radicals combine by multiplying indices:
+
+$$\\sqrt[m]{\\sqrt[n]{a}} = \\sqrt[mn]{a}$$
+
+These rules work when the indices match and when the radicands satisfy certain conditions. Even-index roots require non-negative radicands in the real number system — a restriction detailed in [properties of radicals](!/algebra/roots/properties).
+
+The complete set of rules, with their restrictions and derivations, appears in [radical rules](!/algebra/roots/radical-rules). Mastering these rules is essential for [operations with radicals](!/algebra/roots/operations).`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj6: {
+    title: `Simplifying and Operating`,
+    content: `A radical is in simplest form when no perfect power remains under the radical, no fractions appear under the radical, and no radicals appear in denominators.
+
+$$\\sqrt{72} = \\sqrt{36 \\cdot 2} = 6\\sqrt{2}$$
+
+The factor 36 is a perfect square and comes out; the factor 2 remains.
+
+Radicals can be added or subtracted only when they are like radicals — same index and same radicand.
+
+$$3\\sqrt{5} + 7\\sqrt{5} = 10\\sqrt{5}$$
+
+$$\\sqrt{2} + \\sqrt{3} \\quad \\text{cannot be combined}$$
+
+Multiplication and division follow the [radical rules](!/algebra/roots/radical-rules). Denominators with radicals are typically rationalized — rewritten so the radical moves to the numerator.
+
+Detailed techniques for reducing radicals to simplest form appear in [simplifying radicals](!/algebra/roots/simplifying). Methods for combining and manipulating radical expressions appear in [operations with radicals](!/algebra/roots/operations).`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj7: {
+    title: `Equations with Radicals`,
+    content: `When the unknown sits under a radical, the equation requires special handling.
+
+The standard approach: isolate the radical, then raise both sides to a power that eliminates it.
+
+$$\\sqrt{x + 3} = 5$$
+
+$$x + 3 = 25$$
+
+$$x = 22$$
+
+This process can introduce extraneous solutions — values that satisfy the transformed equation but not the original. Checking solutions is essential, especially with even-index radicals.
+
+Equations with multiple radicals may require the process repeated. Cube roots and higher follow the same logic, though odd-index equations rarely produce extraneous solutions due to different [properties](!/algebra/roots/properties).
+
+Full techniques for solving, including equations with multiple radicals and methods for identifying extraneous solutions, appear in [radical equations](!/algebra/roots/equations).`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj8: {
+    title: `Radicals as Functions`,
+    content: `When the radicand contains a variable, the radical becomes a function.
+
+$$f(x) = \\sqrt{x}$$
+
+This function takes an input $x$ and returns its principal square root. Not every input works — the domain depends on the index.
+
+Even-index radical functions require non-negative radicands. The domain of $f(x) = \\sqrt{x}$ is $x \\geq 0$. This restriction stems from the [properties of radicals](!/algebra/roots/properties).
+
+Odd-index radical functions accept all real inputs. The domain of $f(x) = \\sqrt[3]{x}$ is all real numbers.
+
+The graphs have characteristic shapes. Square root functions start at a point and rise gradually. Cube root functions pass through the origin with an S-curve. These shapes transform predictably under shifts, stretches, and reflections.
+
+Radical functions are inverses of power functions. The square root undoes squaring; the cube root undoes cubing. This inverse relationship connects to [rational exponents](!/algebra/roots/rational-exponents).
+
+Full treatment of graphs, domains, transformations, and inverses appears in [radical functions](!/algebra/roots/functions).`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj9: {
+    title: `When Radicands Are Negative`,
+    content: `Odd roots handle negative radicands naturally. A negative number has a real cube root, fifth root, seventh root, and so on.
+
+$$\\sqrt[3]{-8} = -2, \\quad \\sqrt[5]{-32} = -2$$
+
+Even roots of negative numbers do not exist in the real number system. No real number squares to $-4$.
+
+$$\\sqrt{-4} \\quad \\text{is not a real number}$$
+
+This distinction between even and odd indices is fundamental to [properties of radicals](!/algebra/roots/properties) and determines the domain of [radical functions](!/algebra/roots/functions).
+
+Mathematics extends beyond the reals. The imaginary unit $i$ is defined by $i^2 = -1$, and with it, even roots of negative numbers become expressible:
+
+$$\\sqrt{-4} = 2i$$
+
+This opens the door to complex numbers, where every polynomial has roots and the square root function extends to negative inputs.
+
+The connection between radicals and complex numbers is developed in [radicals and complex numbers](!/algebra/roots/complex).`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj10: {
+    title: `Connection to Powers`,
+    content: `Roots and powers are two sides of one coin. Understanding either requires understanding both.
+
+The [powers section](!/algebra/powers) develops exponentiation from natural exponents through negative, rational, and irrational exponents. Rational exponents — fractions as powers — are precisely where roots reappear.
+
+$$a^{1/2} = \\sqrt{a}, \\quad a^{1/3} = \\sqrt[3]{a}, \\quad a^{m/n} = \\sqrt[n]{a^m}$$
+
+The laws of exponents govern both operations. Product rules, quotient rules, and power rules translate directly between radical and exponent notation. These connections are explored in [radical rules](!/algebra/roots/radical-rules) and [rational exponents](!/algebra/roots/rational-exponents).
+
+Domain restrictions tighten as exponents become more general. Natural exponents allow any base. Negative exponents exclude zero. Rational exponents with even denominators require positive bases. This progression mirrors the restrictions on even-index radicals detailed in [properties of radicals](!/algebra/roots/properties).
+
+Mastery of roots and powers together provides the foundation for exponential functions, logarithms, and calculus.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+}
+
+
+ const introContent = {
   id: "intro",
-  title: "Introduction to Roots",
-  content: `Roots in mathematics represent the inverse operation of powers, answering the fundamental question: "What number, when raised to a given power, produces a specific result?"
-Roots are indispensable across mathematical disciplines. In algebra, they're crucial for solving quadratic and polynomial equations, while in geometry, they help calculate distances, areas, and volumes. Calculus extensively uses roots in integration techniques, particularly when dealing with radical functions and substitution methods. In trigonometry, roots appear in half-angle formulas and when solving trigonometric equations.
-Perhaps most importantly, roots provide the mathematical framework for understanding irrational numbers and expanding our number system beyond simple fractions. From the ancient Greeks' discovery of √2 to modern computational algorithms, roots continue to challenge and enrich mathematical thinking, serving as gateways to more advanced concepts in analysis, number theory, and applied mathematics.`
+  title: "Undoing Powers",
+  content: `Raising a number to a power is straightforward — multiply the base by itself repeatedly. But what if you know the result and need to recover the original base? This reverse operation is the root.
+
+Powers and roots are inverse operations. If raising 3 to the second power gives 9, then the square root of 9 returns 3. Every root asks the same question: what number, when raised to a given power, produces this value?`
 }
 
 
 
-  const circularRulesData = {
-    title: "Root and Radical Rules",
-    color: "#2563eb",
-    size: 65,
-    link: "",
-    // textBox: {
-    //   text:''
-    // },
-    nested: [
-      {
-        title: "Definition and Basic Rules",
-        color: "#3cc583",
-        size: 50,
-        link: "",
-        textBox: {
-          text: "Explain what roots are and how they behave in key cases like squares or even vs. odd indices",
-          width: 230,
-          height: 50,
-          className: ""
-        }
-      },
-      {
-        title: "Product and Quotient Rules",
-        color: "#de8431",
-        size: 50,
-        link: "",
-        textBox: {
-          text: "Show how roots interact under multiplication and division",
-          width: 120,
-          height: 40,
-          className: ""
-        }
-      },
-      {
-        title: "Power and Exponent Rules",
-        color: "#e55753",
-        size: 50,
-        link: "",
-        textBox: {
-          text: "Help translate between radical and exponential forms",
-          width: 150,
-          height: 40,
-          className: ""
-        }
-      },
-      {
-        title: "Nested Root Rules",
-        color: "#de58a9",
-        size: 50,
-        link: "",
-        textBox: {
-          text: "Explain how to simplify layers of roots for complex structures",
-          width: 90,
-          height: 40,
-          className: ""
-        }
-      },
-      {
-        title: "Simplification Rules",
-        color: "#1eabda",
-        size: 50,
-        link: "",
-        textBox: {
-          text: "Provide techniques for factoring, combining, or reducing radicals",
-          width: 200,
-          height: 40,
-          className: ""
-        }
-      },
-      {
-        title: "Rationalization Rules",
-        color: "#92bd39",
-        size: 50,
-        link: "",
-        textBox: {
-          text: "Clear radicals from denominators using algebraic tricks",
-          width: 150,
-          height: 40,
-          className: ""
-        }
-      },
-      {
-        title: "Special Value Rules",
-        color: "#7f64ea",
-        size: 50,
-        link: "",
-        textBox: {
-          text: "Rules for roots of 0, 1, and perfect powers",
-          width: 150,
-          height: 40,
-          className: ""
-        }
-      },
-      {
-        title: "Domain and Sign Rules",
-        color: "#ba5de5",
-        size: 50,
-        link: "",
-        textBox: {
-          text: "Clarify which expressions are valid and how signs behave",
-          width: 150,
-          height: 40,
-          className: ""
-        }
-      },
-      {
-        title: "Equation Solving Rules",
-        color: "#dc2626",
-        size: 50,
-        link: "",
-        textBox: {
-          text: "Guide you through solving equations with radicals, including avoiding extraneous solutions",
-          width: 190,
-          height: 50,
-          className: ""
-        }
-      }
-    ]
-   };
-
-    const sectionsContent={
-
-        definition:{
-          title:`Definitions and Notation`,
-          content:``,
-          before:`In mathematics, $n$-th root of a value is the number that, when multiplied by itself $𝑛$ times, gives back the original value.
-          $n$ is called **index** (or **degree**) and the original value -the **radicand**.
-
-          `,
-          after:`**Notation**:
-          The n-th root of a value is written as $\\sqrt[n]{a}$. 
-          The radical symbol ( $\\sqrt{\ }$ ) denotes a root. 
-          The small number \($ n$ \), called the **index**, indicates the degree of the root.
-           If \( $n = 2$ \), it is called a **square root**, and the index is usually omitted: \( $\\sqrt{a}$ \).
-
-           **Expanded Notation**:
-           This expression means finding the value \( b \) such that multiplying it by itself \( n \) times gives \( a \):
-          
-          \t\t\t\t\t\t\t\t$\\sqrt[n]{a} = \\underbrace{b}_{\\text{such that } b^n = a}$ .
-
-          
-Actually, calculating a root is the inverse operation of [exponentiation (calculating a power)](!/algebra/powers). 
-It answers the question:
-**“What number raised to a given exponent equals a certain value?”**
-In general, the n-th root of a number 𝑎 is a number 𝑏 such that:
-
-\t\t\t\t\t\t\t\t$𝑏^𝑛=𝑎$
-
-**This means**:
-𝑏 is the root (corresponds to the base in [powers](!/algebra/powers)),
-𝑛 is the degree of the root (corresponds to **exponent**),
-𝑎 is the radicand (the number inside the root symbol , corresponding to the **power**).
-
-`,
-          svg:`<svg width="750" height="400" style="margin-left:200px;" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background -->
-  <rect width="700" height="400" fill="#f8f9fa"/>
-  
-  <!-- Root box (top left) -->
-  <rect x="20" y="30" width="100" height="60" rx="5" fill="none" stroke="#4a90e2" stroke-width="2"/>
-  <text x="70" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-style="italic" fill="#4a90e2">root</text>
-  
-  <!-- Index/base box (bottom left) -->
-  <rect x="20" y="280" width="100" height="60" rx="5" fill="none" stroke="#4a90e2" stroke-width="2"/>
-  <text x="70" y="305" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#4a90e2">n</text>
-  
-  <!-- Main equation showing root -->
-  <text x="200" y="80" font-family="Arial, sans-serif" font-size="28" font-style="italic" fill="#333">
-    <tspan font-size="20" baseline-shift="super">n</tspan>√a = b
-  </text>
-  
-  <!-- Arrow from root to equation -->
-  <path d="M 130 50 Q 160 50 180 70" fill="none" stroke="#4a90e2" stroke-width="2" marker-end="url(#arrowhead)"/>
-  
-  <!-- Arrow from index to equation -->
-  <path d="M 130 300 Q 160 250 180 90" fill="none" stroke="#4a90e2" stroke-width="2" marker-end="url(#arrowhead)"/>
-  
-  <!-- Main multiplication equation -->
-  <text x="280" y="180" font-family="Arial, sans-serif" font-size="24" font-style="italic" fill="#333">a = b × b ×...× b × b × b</text>
-  
-  <!-- Brace showing n times -->
-  <path d="M 320 200 Q 320 220 340 220 Q 510 220 510 220 Q 530 220 530 200" 
-        fill="none" stroke="#4a90e2" stroke-width="2"/>
-  <path d="M 320 200 L 325 195" stroke="#4a90e2" stroke-width="2"/>
-  <path d="M 320 200 L 325 205" stroke="#4a90e2" stroke-width="2"/>
-  <path d="M 530 200 L 525 195" stroke="#4a90e2" stroke-width="2"/>
-  <path d="M 530 200 L 525 205" stroke="#4a90e2" stroke-width="2"/>
-  
-  <!-- n times box -->
-  <rect x="420" y="240" width="120" height="60" rx="5" fill="none" stroke="#4a90e2" stroke-width="2"/>
-  <text x="480" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-style="italic" fill="#4a90e2">n times</text>
-  
-  <!-- Arrow to n times box -->
-  <path d="M 425 220 L 425 240" fill="none" stroke="#4a90e2" stroke-width="2" marker-end="url(#arrowhead)"/>
-  
-  <!-- Labels -->
-  <text x="200" y="120" font-family="Arial, sans-serif" font-size="14" fill="#666">b is the nth root of a</text>
-  <text x="70" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">index</text>
-  
-  <!-- Connection showing the relationship -->
-  <text x="200" y="340" font-family="Arial, sans-serif" font-size="16" fill="#333">When you multiply the root by itself n times, you get the original number</text>
-  
-  <!-- Arrow marker definition -->
-  <defs>
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#4a90e2"/>
-    </marker>
-  </defs>
-</svg>`
-      
-      
-        },
-        rules:{
-          title:`Radical Rules`,
-          content:`Root and radical rules are essential for working with expressions involving roots, whether square roots or higher-order radicals.  
-They begin with the [Definition and Basic Rules](!/algebra/roots/radical-rules), which explain what roots are and how they behave in key cases like squares or even vs. odd indices.  
-The [Product and Quotient Rules](!/algebra/roots/radical-rules) show how roots interact under multiplication and division, while the [Power and Exponent Rules](!/algebra/roots/radical-rules) help translate between radical and exponential forms.  
-For more complex structures, the [Nested Root Rules](!/algebra/roots/radical-rules) explain how to simplify layers of roots.  
-The [Simplification Rules](!/algebra/roots/radical-rules) provide techniques for factoring, combining, or reducing radicals.  
-When working with fractions, the [Rationalization Rules](!/algebra/roots/radical-rules) clear radicals from denominators using algebraic tricks.  
-There are also [Special Value Rules](!/algebra/roots/radical-rules) for roots of 0, 1, and perfect powers, and the [Domain and Sign Rules](!/algebra/roots/radical-rules) clarify which expressions are valid and how signs behave.  
-Finally, the [Equation Solving Rules](!/algebra/roots/radical-rules) guide you through solving equations with radicals, including how to avoid extraneous solutions.
-`,
-          before:``,
-          after:``,
-          link:`/algebra/roots/radical-rules`
-      
-        },
-      
-        obj3:{
-      
-          title:``,
-          content:``,
-          before:``,
-          after:``,
-      
-        },
-        obj4:{
-          title:``,
-          content:``,
-          before:``,
-          after:``,
-      
-        },
-    
-    
-        obj5:{
-      
-          title:``,
-          content:``,
-          before:``,
-          after:``,
-      
-        }
-      
-      }
 
 
-    return {
+   return {
       props:{
-
-        sectionsContent,
-        circularRulesData,
-        introContent
+         sectionsContent,
+         introContent,
+          seoData: {
+        title: "Title | Learn Math Class",
+        description: "Metadescription",
+        keywords: keyWords.join(", "),
+        url: "/algebra/roots",
+         name: "name"
+      },
         
-      }
+       }
     }
-  }
+   }
 
-export default function RootsPage({sectionsContent ,circularRulesData ,introContent}) {
+export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
+    
+  const genericSections=[
+    {
+        id:'1',
+        title:sectionsContent.obj1.title,
+        link:sectionsContent.obj1.link,
+        content:[
+          sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'2',
+        title:sectionsContent.obj2.title,
+        link:sectionsContent.obj2.link,
+        content:[
+          sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'3',
+        title:sectionsContent.obj3.title,
+        link:sectionsContent.obj3.link,
+        content:[
+          sectionsContent.obj3.content,
+        ]
+    },
+    {
+        id:'4',
+        title:sectionsContent.obj4.title,
+        link:sectionsContent.obj4.link,
+        content:[
+          sectionsContent.obj4.content,
+        ]
+    },
+    {
+        id:'5',
+        title:sectionsContent.obj5.title,
+        link:sectionsContent.obj5.link,
+        content:[
+          sectionsContent.obj5.content,
+        ]
+    },
+    {
+        id:'6',
+        title:sectionsContent.obj6.title,
+        link:sectionsContent.obj6.link,
+        content:[
+          sectionsContent.obj6.content,
+        ]
+    },
+    {
+        id:'7',
+        title:sectionsContent.obj7.title,
+        link:sectionsContent.obj7.link,
+        content:[
+          sectionsContent.obj7.content,
+        ]
+    },
+    {
+        id:'8',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
+        ]
+    },
+    {
+        id:'9',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
+        ]
+    },
+    {
+        id:'10',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
+        ]
+    },
+    // {
+    //     id:'11',
+    //     title:sectionsContent.obj11.title,
+    //     link:sectionsContent.obj11.link,
+    //     content:[
+    //       sectionsContent.obj11.content,
+    //     ]
+    // },
+    // {
+    //     id:'12',
+    //     title:sectionsContent.obj12.title,
+    //     link:sectionsContent.obj12.link,
+    //     content:[
+    //       sectionsContent.obj12.content,
+    //     ]
+    // },
+    // {
+    //     id:'13',
+    //     title:sectionsContent.obj13.title,
+    //     link:sectionsContent.obj13.link,
+    //     content:[
+    //       sectionsContent.obj13.content,
+    //     ]
+    // },
+    // {
+    //     id:'14',
+    //     title:sectionsContent.obj14.title,
+    //     link:sectionsContent.obj14.link,
+    //     content:[
+    //       sectionsContent.obj14.content,
+    //     ]
+    // },
+    // {
+    //     id:'15',
+    //     title:sectionsContent.obj15.title,
+    //     link:sectionsContent.obj15.link,
+    //     content:[
+    //       sectionsContent.obj15.content,
+    //     ]
+    // },
+    // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
+    // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
+    // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
+    
+]
 
-    const powersSections=[
-        {
-            id:'definition',
-            title:sectionsContent.definition.title,
-            link:'',
-            content:[
-
-                sectionsContent.definition.before,
-                sectionsContent.definition.svg,
-                sectionsContent.definition.after,
-            ]
-        },
-        {
-            id:'rules',
-            title:sectionsContent.rules.title,
-            link:sectionsContent.rules.link,
-            content:[
-              sectionsContent.rules.content,
-              <CircularDiagram data={circularRulesData}
-              key={1}
-              showCircle={true}
-              radius={180}/>
-
-
-
-            ]
-        },
-        // {
-        //     id:'',
-        //     title:'',
-        //     link:'',
-        //     content:''
-        // }
-    ]
   return (
-    <>
-      {/* <GenericNavbar/> */}
-     
-      <br/>
-      <br/>
-      <OperaSidebar 
-             side='right'
-             topOffset='55px' 
-             sidebarWidth='45px'
-             panelWidth='200px'
-             iconColor='white'
-             panelBackgroundColor='#f2f2f2'
-           />
-      <Breadcrumb/>
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'10px'}}>Roots</h1>
-      <br/>
-      <SectionTableOfContents sections={powersSections}
-       showSecondaryNav={true}
-       secondaryNavMode="siblings"
-       secondaryNavTitle="Similar Pages"/>
-      <br/>
-      <br/>
-      <IntroSection 
-            id={introContent.id}
-            title={introContent.title}
-            content={introContent.content}
-            backgroundColor="#f2f2f2"
-            textColor="#06357a"
-          />
-      <br/>
-      <br/>
-      <Sections sections={powersSections}/>
-      <br/>
-      <br/>
-      <br/>
-       {/* <ScrollUpButton/> */} 
-    </>
-  );
+   <>
+   <Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": seoData.name,
+        "description": seoData.description,
+        "keywords": seoData.keywords,
+        "url": `https://www.learnmathclass.com${seoData.url}`,
+        "dateModified": new Date().toISOString(),
+        "inLanguage": "en-US",
+        "mainEntity": {
+          "@type": "Article",
+          "name": seoData.name,
+          "dateModified": new Date().toISOString(),
+          "author": {
+            "@type": "Organization",
+            "name": "Learn Math Class"
+          }
+        }
+      })
+    }}
+  />
+</Head>
+   {/* <GenericNavbar/> */}
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+    <OperaSidebar 
+           side='right'
+           // topOffset='65px' 
+           sidebarWidth='45px'
+           panelWidth='200px'
+           iconColor='white'
+           panelBackgroundColor='#f2f2f2'
+         /> 
+   <Breadcrumb/>
+   <br/>
+   <br/>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Roots (Radicals)</h1>
+   <br/>
+   <br/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
+   
+   />
+   <br/>
+   <br/>
+   <br/>
+    <IntroSection 
+          id={introContent.id}
+          title={introContent.title}
+          content={introContent.content}
+           backgroundColor='#f9fafb'
+          //  "#f2f2f2"
+          textColor="#06357a"
+        />
+   <br/>
+   <br/>
+   <Sections sections={genericSections}/>
+   <br/>
+   <br/>
+   <br/>
+   {/* <ScrollUpButton/> */}
+   </>
+  )
 }

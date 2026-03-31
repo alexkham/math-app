@@ -1,427 +1,507 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import React from 'react'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../pages/pages.css'
+import Head from 'next/head'
 
 
 export async function getStaticProps(){
 
+  const keyWords=['','','','','']
 
-  const intro=`Here's a concise introduction to mathematical logarithms for your page:
+  // •
 
-Logarithms represent the inverse operation of exponentiation, answering the question: "To what power must we raise a base to obtain a given number?" This elegant mathematical concept transforms multiplication into addition and division into subtraction, making complex calculations remarkably manageable.
+//   \u2022 First item
+// \u2022 Second item
 
-Logarithms are fundamental tools across numerous mathematical fields. In algebra, they solve exponential equations that would otherwise be intractable. Calculus relies on logarithmic functions for integration and differentiation, particularly through the natural logarithm's unique derivative property. In number theory, logarithms help analyze prime distribution and computational complexity.
+  
+// <hr style="border-width:1px;"></hr>
 
-`
+// <hr style="color:blue;" />
 
-
-const introContent = {
-  id: "intro",
-  title: "Introduction to Logarithms",
-  content: `Logarithms represent the inverse operation of exponentiation, answering the question: "To what power must we raise a base to obtain a given number?" This elegant mathematical concept transforms multiplication into addition and division into subtraction, making complex calculations remarkably manageable.
-
-Logarithms are fundamental tools across numerous mathematical fields. In algebra, they solve exponential equations that would otherwise be intractable. Calculus relies on logarithmic functions for integration and differentiation, particularly through the natural logarithm's unique derivative property. In number theory, logarithms help analyze prime distribution and computational complexity.`
-}
+// <hr style="border-color:#3498db; border-width:1px;" />
 
 
 
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+
+ 
+// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.notation)}
+        // </div>,
+
+
+//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+//     {processContent(sectionsContent.normal.parameters)}
+// </div>,
+        
+//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+//                   {processContent(sectionsContent.obj4.content)}
+//                   </div>,
+
+
+//  <div key={'dist'} style={{
+//                     textAlign: 'center',
+//                     transform: 'scale(0.98)',
+//                     transformOrigin: 'center',
+//                     marginTop:'50px',
+//                     marginLeft:'-150px'
+//                   }} dangerouslySetInnerHTML={{ 
+//                     __html:   sectionContent.distributions.svg,
+//                   }} />
 
     const sectionsContent={
 
-        definition:{
-          title:`Definition and Notation`,
-          content:``,
-          before:`A logarithm tells you what exponent you need to raise a given base to in order to get a certain result.
-In simple terms, the logarithm answers the question:
+   obj1: {
+  title: `What is a Logarithm?`,
+  content: `A logarithm answers the question: to what power must a base be raised to produce a given number? The expression $\\log_a(b)$ asks for the exponent that satisfies $a^{?} = b$.
 
-**"To what power must the base be raised to produce a given number?"**`,
-          after:`**Notation**:
-The logarithm of a number 𝑎 with base 𝑏  is written as $\\log_b(a)$.
-This means:
-$\\log_b(a)=c$ if and only if $𝑏^𝑐=𝑎$
-$b$ is the base
-$𝑎$ is the result (also called the argument)
-$𝑐$ is the exponent — the value the logarithm gives
+The notation $\\log_a(b) = c$ is read as "log base $a$ of $b$ equals $c$." This statement is equivalent to the exponential form $a^c = b$. The two expressions encode identical information — one solved for the exponent, the other presenting the complete power relationship.
 
-`,
-          svg:`<svg width="700" height="400" style="margin-left:150px;" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background -->
-  <rect width="700" height="400" fill="#f8f9fa"/>
-  
-  <!-- Logarithm box (top left) -->
-  <rect x="20" y="30" width="100" height="60" rx="5" fill="none" stroke="#e74c3c" stroke-width="2"/>
-  <text x="70" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-style="italic" fill="#e74c3c">logarithm</text>
-  
-  <!-- Base box (bottom left) -->
-  <rect x="20" y="280" width="100" height="60" rx="5" fill="none" stroke="#e74c3c" stroke-width="2"/>
-  <text x="70" y="305" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#e74c3c">b</text>
-  
-  <!-- Main logarithm equation -->
-  <text x="200" y="80" font-family="Arial, sans-serif" font-size="28" font-style="italic" fill="#333">
-    log<tspan font-size="20" baseline-shift="sub">b</tspan>(a) = c
-  </text>
-  
-  <!-- Arrow from logarithm to equation -->
-  <path d="M 130 50 Q 160 50 180 70" fill="none" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrowhead)"/>
-  
-  <!-- Arrow from base to equation -->
-  <path d="M 130 300 Q 160 250 180 90" fill="none" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrowhead)"/>
-  
-  <!-- Main power equation showing the relationship -->
-  <text x="280" y="180" font-family="Arial, sans-serif" font-size="24" font-style="italic" fill="#333">a = b × b ×...× b × b × b</text>
-  
-  <!-- Brace showing c times -->
-  <path d="M 320 200 Q 320 220 340 220 Q 510 220 510 220 Q 530 220 530 200" 
-        fill="none" stroke="#e74c3c" stroke-width="2"/>
-  <path d="M 320 200 L 325 195" stroke="#e74c3c" stroke-width="2"/>
-  <path d="M 320 200 L 325 205" stroke="#e74c3c" stroke-width="2"/>
-  <path d="M 530 200 L 525 195" stroke="#e74c3c" stroke-width="2"/>
-  <path d="M 530 200 L 525 205" stroke="#e74c3c" stroke-width="2"/>
-  
-  <!-- c times box -->
-  <rect x="420" y="240" width="120" height="60" rx="5" fill="none" stroke="#e74c3c" stroke-width="2"/>
-  <text x="480" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-style="italic" fill="#e74c3c">c times</text>
-  
-  <!-- Arrow to c times box -->
-  <path d="M 425 220 L 425 240" fill="none" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrowhead)"/>
-  
-  <!-- Alternative notation -->
-  <text x="200" y="140" font-family="Arial, sans-serif" font-size="20" fill="#333">or: b<tspan font-size="16" baseline-shift="super">c</tspan> = a</text>
-  
-  <!-- Labels -->
-  <text x="200" y="120" font-family="Arial, sans-serif" font-size="14" fill="#666">c is the power/exponent</text>
-  <text x="70" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">base</text>
-  
-  <!-- Question explanation -->
-  <text x="200" y="320" font-family="Arial, sans-serif" font-size="16" fill="#333">The logarithm asks: "To what power must we raise b to get a?"</text>
-  <text x="200" y="340" font-family="Arial, sans-serif" font-size="16" fill="#333">Answer: c times</text>
-  
-  <!-- Arrow marker definition -->
-  <defs>
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c"/>
-    </marker>
-  </defs>
-</svg>`,
-      
-      
-        },
-        rules:{
-          title:`Logarithm Rules`,
-          content:`Logarithm rules are the backbone of working with exponential relationships — they tell us how to simplify expressions, solve equations, and understand the behavior of logarithmic functions.
-          It all starts with the [Definition and Basic Rules](!/algebra/logarithms/rules#definitions), which lay out what a logarithm means and how it connects to powers.
-          Then come the [Fundamental Properties](!/algebra/logarithms/rules#properties), which show how logs behave with multiplication, division, and exponents — the everyday operations of algebra. 
-          Sometimes, you’ll need to change how a logarithm is written, and that’s where the [Base Conversion Rules](!/algebra/logarithms/rules#conversion) step in. 
-          When working with natural or common logarithms, things get more specific — and that’s covered in the [Natural Logarithm Properties](!/algebra/logarithms/rules#natural) and [Common Logarithm Properties](!/algebra/logarithms/rules#common).
-          As problems get trickier, the [Advanced Logarithmic Rules](!/algebra/logarithms/rules#advanced) handle special cases and identities. And throughout it all, the [Domain and Range Rules](!/algebra/logarithms/rules#domain) remind us where logarithms actually make sense. 
-          Together, they form a complete picture of how logarithms work.
-`,
-          before:``,
-          after:``,
-          link:`/algebra/logarithms/rules`,
-          svg:`<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="788" height="633" viewBox="0 98 1008 875" style="margin-left:100px; fill:none;stroke:none;fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<style class="text-font-style fontImports" margin:auto  data-font-family="Roboto">@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=block');</style>
-<g id="items" style="isolation: isolate">
-<g id="blend" style="mix-blend-mode: normal">
-<g id="g-root-cp_1_text-1_18lb5owm960ao-fill" data-item-order="-840950" transform="translate(14, 98)">
-<g id="cp_1_text-1_18lb5owm960ao-fill" stroke="none" fill="#1eabda">
-<g><path d="M 10 10L 490 10L 490 172L 10 172L 10 10ZM 490 220L 490 172L 10 172.0002L 10 220L 490 220ZM 10 262L 118 262L 118 251L 112 251L 130 233L 148 251L 142 251L 142 262L 358 262L 358 273L 352 273L 370 291L 388 273L 382 273L 382 262L 490 262L 490 220L 10 220L 10 262Z"></path></g>
-</g>
-</g>
-<g id="g-root-cp_3_text-3_4o6kr4m95ypu-fill" data-item-order="-840922" transform="translate(494, 98)">
-<g id="cp_3_text-3_4o6kr4m95ypu-fill" stroke="none" fill="#92bd39">
-<g><path d="M 10 10L 490 10L 490 172L 10 172L 10 10ZM 10 172L 490 172L 490 220L 10 220L 10 172ZM 10 262L 118 262L 118 251L 112 251L 130 233L 148 251L 142 251L 142 262L 358 262L 358 273L 352 273L 370 291L 388 273L 382 273L 382 262L 490 262L 490 220L 10 220L 10 262Z"></path></g>
-</g>
-</g>
-<g id="g-root-cp_7_text-7_1lpwg40m97dos-fill" data-item-order="-840894" transform="translate(13.999984741210938, 321.0000305175781)">
-<g id="cp_7_text-7_1lpwg40m97dos-fill" stroke="none" fill="#de58a9">
-<g><path d="M 250 351.000031L 250 189.000031L 10 189.000031L 10 351.000031L 118 351.000031L 118 340.000031L 112 340.000031L 130 322.000031L 148 340.000031L 142 340.000031L 142 351.000031L 250 351.000031ZM 10.000029 189.000061L 250.00003 189.000061L 250.00003 81.000244L 10.000029 81.000244L 10.000029 189.000061ZM 142.000049 28.000015L 142.000049 39.000015L 250.000049 39.000015L 250.000049 81.000015L 10.000049 81.000015L 10.000049 39.000015L 118.000049 39.000015L 118.000049 28.000015L 112.000049 28.000015L 130.000049 10.000015L 148.000049 28.000015L 142.000049 28.000015Z"></path></g>
-</g>
-</g>
-<g id="g-root-cp_2_text-2_4hbcswm97dou-fill" data-item-order="-840868" transform="translate(254, 321.0000305175781)">
-<g id="cp_2_text-2_4hbcswm97dou-fill" stroke="none" fill="#3cc583">
-<g><path d="M 490.000001 351.000031L 10.000001 351.000031L 10.000001 189.000031L 490.000001 189.000031L 490.000001 351.000031ZM 490 188.999985L 9.999996 188.999985L 9.999996 80.99995L 490 80.99995L 490 188.999985ZM 10 39L 118 39L 118 50L 112 50L 130 68L 148 50L 142 50L 142 39L 358 39L 358 28L 352 28L 370 10L 388 28L 382 28L 382 39L 490 39L 490 81L 10 81L 10 39Z"></path></g>
-</g>
-</g>
-<g id="g-root-cp_4_text-4_v4uumom97fuw-fill" data-item-order="-840842" transform="translate(734, 350.0000305175781)">
-<g id="cp_4_text-4_v4uumom97fuw-fill" stroke="none" fill="#e0cb15">
-<g><path d="M 10 159.999985L 250 159.999985L 250 51.99995L 10 51.99995L 10 159.999985ZM 142 10L 250 10L 250 52L 10 52L 10 10L 118 10L 118 21L 112 21L 130 39L 148 21L 142 21L 142 10ZM 118 322.000031L 10 322.000031L 10 160.000031L 250 160.000031L 250 322.000031L 142 322.000031L 142 333.000031L 148 333.000031L 130 351.000031L 112 333.000031L 118 333.000031L 118 322.000031Z"></path></g>
-</g>
-</g>
-<g id="g-root-cp_6_text-6_1q8ubo0m97e2y-fill" data-item-order="-840814" transform="translate(13.999984741210938, 633)">
-<g id="cp_6_text-6_1q8ubo0m97e2y-fill" stroke="none" fill="#e55753">
-<g><path d="M 490 291L 10 291L 10 129L 490 129L 490 147L 479 147L 479 141L 461 159L 479 177L 479 171L 490 171L 490 291ZM 10.000029 129.000007L 490.000029 129.000007L 490.000029 81.000107L 10.000029 81.000107L 10.000029 129.000007ZM 142.000049 28.000015L 142.000049 39.000015L 490.000049 39.000015L 490.000049 81.000015L 10.000049 81.000015L 10.000049 39.000015L 118.000049 39.000015L 118.000049 28.000015L 112.000049 28.000015L 130.000049 10.000015L 148.000049 28.000015L 142.000049 28.000015Z"></path></g>
-</g>
-</g>
-<g id="g-root-cp_5_text-5_18i6s9cm97dac-fill" data-item-order="-840788" transform="translate(465, 662)">
-<g id="cp_5_text-5_18i6s9cm97dac-fill" stroke="none" fill="#de8431">
-<g><path d="M 519 261.999985L 39 261.999985L 39 141.999985L 28 141.999985L 28 147.999985L 10 129.999985L 28 111.999985L 28 117.999985L 39 117.999985L 39 99.999985L 519 99.999985L 519 261.999985ZM 39 99.999977L 519 99.999977L 519 51.999977L 39 51.999977L 39 99.999977ZM 410.9999 10L 518.9999 10L 518.9999 52L 39 52L 39 10L 386.9999 10L 386.9999 21L 380.9999 21L 398.9999 39L 416.9999 21L 410.9999 21L 410.9999 10Z"></path></g>
-</g>
-</g>
-<g id="g-root-tx_establis_1utnmhcm97dhd-fill" data-item-order="0" transform="translate(50, 248.00003051757812)">
-<g id="tx_establis_1utnmhcm97dhd-fill" stroke="none" fill="#ffffff">
-<g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px" font-family="Roboto, sans-serif"><tspan x="12" y="31" dominant-baseline="ideographic">Establish the basic definition of logarithms.</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_discover_1umsej4m98sgc-fill" data-item-order="0" transform="translate(530, 248.00003051757812)">
-<g id="tx_discover_1umsej4m98sgc-fill" stroke="none" fill="#ffffff">
-<g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px" font-family="Roboto, sans-serif"><tspan x="12" y="31" dominant-baseline="ideographic">Discover properties such as power and change of base.</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_explorep_m7yw7km98snf-fill" data-item-order="0" transform="translate(530, 212.00003051757812)">
-<g id="tx_explorep_m7yw7km98snf-fill" stroke="none" fill="#ffffff">
-<g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="12" y="34" dominant-baseline="ideographic">Explore Properties</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_definelo_1hgbouom97g20-fill" data-item-order="0" transform="translate(50, 212.00003051757812)">
-<g id="tx_definelo_1hgbouom97g20-fill" stroke="none" fill="#ffffff">
-<g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="12" y="34" dominant-baseline="ideographic">Define Logarithms</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_3_dl2j68m97dhe-fill" data-item-order="0" transform="translate(530, 176.00003051757812)">
-<g id="tx_3_dl2j68m97dhe-fill" stroke="none" fill="#ffffff">
-<g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="16.26" y="34" dominant-baseline="ideographic">3</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_7_1lt0tjkm98s99-fill" data-item-order="0" transform="translate(50, 440.0000305175781)">
-<g id="tx_7_1lt0tjkm98s99-fill" stroke="none" fill="#ffffff">
-<g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="16.26" y="34" dominant-baseline="ideographic">7</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_4_94mjyom98utf-fill" data-item-order="0" transform="translate(770, 428.0000305175781)">
-<g id="tx_4_94mjyom98utf-fill" stroke="none" fill="#ffffff">
-<g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="16.26" y="34" dominant-baseline="ideographic">4</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_2_1lw56z4m98tfk-fill" data-item-order="0" transform="translate(290, 452.0000305175781)">
-<g id="tx_2_1lw56z4m98tfk-fill" stroke="none" fill="#ffffff">
-<g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="16.26" y="34" dominant-baseline="ideographic">2</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_consider_hv9riom98tu6-fill" data-item-order="0" transform="translate(50, 476.0000305175781)">
-<g id="tx_consider_hv9riom98tu6-fill" stroke="none" fill="#ffffff">
-<g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="12" y="34" dominant-baseline="ideographic">Consider Domain </tspan><tspan x="12" y="58" dominant-baseline="ideographic">and Range</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_applybas_hs5e34m9a6to-fill" data-item-order="0" transform="translate(770, 464.0000305175781)">
-<g id="tx_applybas_hs5e34m9a6to-fill" stroke="none" fill="#ffffff">
-<g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="12" y="34" dominant-baseline="ideographic">Apply Base </tspan><tspan x="12" y="58" dominant-baseline="ideographic">Conversion</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_learnbas_4nk3o0m98tfl-fill" data-item-order="0" transform="translate(290, 488.0000305175781)">
-<g id="tx_learnbas_4nk3o0m98tfl-fill" stroke="none" fill="#ffffff">
-<g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="12" y="34" dominant-baseline="ideographic">Learn Basic Rules</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_focusonn_144v6hcm9a96r-fill" data-item-order="0" transform="translate(530, 812)">
-<g id="tx_focusonn_144v6hcm9a96r-fill" stroke="none" fill="#ffffff">
-<g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px" font-family="Roboto, sans-serif"><tspan x="12" y="31" dominant-baseline="ideographic">Focus on natural and common logarithms.</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_understa_146qlqom98u16-fill" data-item-order="0" transform="translate(290, 524)">
-<g id="tx_understa_146qlqom98u16-fill" stroke="none" fill="#ffffff">
-<g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px" font-family="Roboto, sans-serif"><tspan x="12" y="28" dominant-baseline="ideographic">Understand fundamental rules like product and quotient </tspan><tspan x="12" y="46" dominant-baseline="ideographic">rules.</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_userules_1cvie1cm9a87h-fill" data-item-order="0" transform="translate(770, 524)">
-<g id="tx_userules_1cvie1cm9a87h-fill" stroke="none" fill="#ffffff">
-<g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px" font-family="Roboto, sans-serif"><tspan x="12" y="31" dominant-baseline="ideographic">Use rules to convert </tspan><tspan x="12" y="49" dominant-baseline="ideographic">between different </tspan><tspan x="12" y="67" dominant-baseline="ideographic">bases.</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_1_mcyowgm97eo7-fill" data-item-order="0" transform="translate(50, 176.00003051757812)">
-<g id="tx_1_mcyowgm97eo7-fill" stroke="none" fill="#ffffff">
-<g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="16.26" y="34" dominant-baseline="ideographic">1</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_6_1uo1cpcm9a80e-fill" data-item-order="0" transform="translate(50, 740)">
-<g id="tx_6_1uo1cpcm9a80e-fill" stroke="none" fill="#ffffff">
-<g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="16.26" y="34" dominant-baseline="ideographic">6</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_5_1cymrgwm9a9dt-fill" data-item-order="0" transform="translate(530, 740)">
-<g id="tx_5_1cymrgwm9a9dt-fill" stroke="none" fill="#ffffff">
-<g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="16.26" y="34" dominant-baseline="ideographic">5</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_masterad_zlxaxcm9a8sn-fill" data-item-order="0" transform="translate(50, 776)">
-<g id="tx_masterad_zlxaxcm9a8sn-fill" stroke="none" fill="#ffffff">
-<g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="12" y="34" dominant-baseline="ideographic">Master Advanced Rules</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_studyspe_5v6a8m9a8lm-fill" data-item-order="0" transform="translate(530, 776)">
-<g id="tx_studyspe_5v6a8m9a8lm-fill" stroke="none" fill="#ffffff">
-<g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="12" y="34" dominant-baseline="ideographic">Study Specific Logarithms</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_learncom_hv9riom9a800-fill" data-item-order="0" transform="translate(50, 812)">
-<g id="tx_learncom_hv9riom9a800-fill" stroke="none" fill="#ffffff">
-<g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px" font-family="Roboto, sans-serif"><tspan x="12" y="31" dominant-baseline="ideographic">Learn complex rules for advanced applications.</tspan></text></g>
-</g>
-</g>
-<g id="g-root-tx_understa_hx56s0m98suf-fill" data-item-order="0" transform="translate(50, 536)">
-<g id="tx_understa_hx56s0m98suf-fill" stroke="none" fill="#ffffff">
-<g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px" font-family="Roboto, sans-serif"><tspan x="12" y="28" dominant-baseline="ideographic">Understand limitations </tspan><tspan x="12" y="46" dominant-baseline="ideographic">and boundaries.</tspan></text></g>
-</g>
-</g>
-<g id="g-root-cp_1_text-1_18lb5owm960ao-stroke" data-item-order="-840950" transform="translate(14, 98)">
-<g id="cp_1_text-1_18lb5owm960ao-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#ffffff" stroke-width="2">
-<g><path d="M 490 219.9999L 490 172M 10 172L 10 219.9998M 490 220L 490 262L 382 262L 382 273L 388 273L 370 291L 352 273L 358 273L 358 262L 142 262L 142 251L 148 251L 130 233L 112 251L 118 251L 118 262L 10 262L 10 220.5M 490 171.5L 490 10L 10 10L 10 172"></path></g>
-</g>
-</g>
-<g id="g-root-cp_3_text-3_4o6kr4m95ypu-stroke" data-item-order="-840922" transform="translate(494, 98)">
-<g id="cp_3_text-3_4o6kr4m95ypu-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#ffffff" stroke-width="2">
-<g><path d="M 10 172L 10 219.9998M 490 172L 490 219.9999M 10 220.5L 10 262L 118 262L 118 251L 112 251L 130 233L 148 251L 142 251L 142 262L 358 262L 358 273L 352 273L 370 291L 388 273L 382 273L 382 262L 490 262L 490 220M 490 172L 490 10L 10 10L 10 172"></path></g>
-</g>
-</g>
-<g id="g-root-cp_7_text-7_1lpwg40m97dos-stroke" data-item-order="-840894" transform="translate(13.999984741210938, 321.0000305175781)">
-<g id="cp_7_text-7_1lpwg40m97dos-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#ffffff" stroke-width="2">
-<g><path d="M 250.000034 81.000031L 250.000034 39.000031L 142.000034 39.000031L 142.000034 28.000031L 148.000034 28.000031L 130.000034 10.000031L 112.000034 28.000031L 118.000034 28.000031L 118.000034 39.000031L 10.000034 39.000031L 10.000034 81.000031M 250.00003 81.000225L 250.00003 189.000031M 10.000029 81.000225L 10.000029 189.000031M 250.000015 189.500031L 250.000015 351.000031L 10.000015 351.000031L 10.000015 189.500031"></path></g>
-</g>
-</g>
-<g id="g-root-cp_2_text-2_4hbcswm97dou-stroke" data-item-order="-840868" transform="translate(254, 321.0000305175781)">
-<g id="cp_2_text-2_4hbcswm97dou-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#ffffff" stroke-width="2">
-<g><path d="M 9.999998 188.999985L 9.999998 81.000175M 490 188.999985L 490 81.000175M 10 80.5L 10 39L 118 39L 118 50L 112 50L 130 68L 148 50L 142 50L 142 39L 358 39L 358 28L 352 28L 370 10L 388 28L 382 28L 382 39L 490 39L 490 80.5M 490.000001 189.000031L 490.000001 351.000031L 10.000001 351.000031L 10.000001 189.000031"></path></g>
-</g>
-</g>
-<g id="g-root-cp_4_text-4_v4uumom97fuw-stroke" data-item-order="-840842" transform="translate(734, 350.0000305175781)">
-<g id="cp_4_text-4_v4uumom97fuw-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#ffffff" stroke-width="2">
-<g><path d="M 250 159.999985L 250 52.000175M 10 159.999985L 10 52.000175M 250 51.5L 250 10L 142 10L 142 21L 148 21L 130 39L 112 21L 118 21L 118 10L 10 10L 10 51.5M 250 160.000031L 250 322.000031L 142 322.000031L 142 333.000031L 148 333.000031L 130 351.000031L 112 333.000031L 118 333.000031L 118 322.000031L 10 322.000031L 10 160.000031"></path></g>
-</g>
-</g>
-<g id="g-root-cp_6_text-6_1q8ubo0m97e2y-stroke" data-item-order="-840814" transform="translate(13.999984741210938, 633)">
-<g id="cp_6_text-6_1q8ubo0m97e2y-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#ffffff" stroke-width="2">
-<g><path d="M 490.000034 81.000031L 490.000034 39.000031L 142.000034 39.000031L 142.000034 28.000031L 148.000034 28.000031L 130.000034 10.000031L 112.000034 28.000031L 118.000034 28.000031L 118.000034 39.000031L 10.000034 39.000031L 10.000034 81.000031M 490.000029 81.000099L 490.000029 128.999999M 10.000029 81.000099L 10.000029 128.999999M 490.000015 129.5L 490.000015 147L 479.000015 147L 479.000015 141L 461.000015 159L 479.000015 177L 479.000015 171L 490.000015 171L 490.000015 291L 10.000015 291L 10.000015 129.5"></path></g>
-</g>
-</g>
-<g id="g-root-cp_5_text-5_18i6s9cm97dac-stroke" data-item-order="-840788" transform="translate(465, 662)">
-<g id="cp_5_text-5_18i6s9cm97dac-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#ffffff" stroke-width="2">
-<g><path d="M 519 99.999976L 519 52.000076M 39 99.999976L 39 52.000076M 519 51.5L 519 10L 411 10L 411 21L 417 21L 399 39L 381 21L 387 21L 387 10L 39 10L 39 51.5M 519 100L 519 262L 39 262L 39 142L 28 142L 28 148L 10 130L 28 112L 28 118L 39 118L 39 100"></path></g>
-</g>
-</g>
-</g>
-</g>
+Consider $\\log_2(8) = 3$. This asks: what power of $2$ gives $8$? Since $2^3 = 8$, the answer is $3$. Similarly, $\\log_{10}(1000) = 3$ because $10^3 = 1000$, and $\\log_5(25) = 2$ because $5^2 = 25$.
 
-</svg> `,
-      
-        },
-      
-        obj3:{
-      
-          title:``,
-          content:``,
-          before:``,
-          after:``,
-      
-        },
-        obj4:{
-          title:``,
-          content:``,
-          before:``,
-          after:``,
-      
-        },
-    
-    
-        obj5:{
-      
-          title:``,
-          content:``,
-          before:``,
-          after:``,
-      
-        }
-      
-      }
+The base sits as a subscript, the argument sits inside parentheses, and the output is the exponent. Every logarithm can be rewritten as an exponential equation, and every exponential equation can be rewritten using logarithms. This duality is the foundation of all logarithmic work — converting between forms is often the first step in solving problems.`,
+  before: ``,
+  after: ``,
+  link: '',
+},
+   obj2: {
+  title: `Restrictions on Base and Argument`,
+  content: `Not every combination of base and argument produces a valid logarithm. Two restrictions apply.
+
+The base $a$ must satisfy $a > 0$ and $a \\neq 1$. A negative base would produce complex or undefined values for most exponents — $(-2)^{1/2}$ is not a real number. A base of zero fails because $0^c = 0$ for positive $c$, meaning no exponent could produce any result other than zero. A base of one fails because $1^c = 1$ for all $c$, meaning every number would need the same logarithm, which is incoherent. Bases between zero and one are valid and produce decreasing logarithmic functions.
+
+The argument $b$ must satisfy $b > 0$. No real exponent applied to a positive base can produce zero or a negative number. Since $a^c$ is always positive when $a > 0$, logarithms of zero or negative numbers do not exist in the real number system. Attempting to compute $\\log_2(-4)$ or $\\log_3(0)$ has no solution.
+
+These restrictions are not arbitrary conventions — they emerge directly from the behavior of exponential functions. The [properties](!/algebra/logarithms/properties) of logarithms and the shape of their [graphs](!/algebra/logarithms/graphs) all follow from these fundamental constraints.`,
+  before: ``,
+  after: ``,
+  link: '',
+},
+   obj3: {
+  title: `Key Logarithmic Values`,
+  content: `Two values hold for every valid base and appear constantly in calculations.
+
+The first: $\\log_a(1) = 0$ for any base $a$. This follows immediately from the exponential form. Since $a^0 = 1$ for every positive $a \\neq 1$, the exponent that produces $1$ is always zero. The point $(1, 0)$ lies on every logarithmic graph.
+
+The second: $\\log_a(a) = 1$ for any base $a$. Since $a^1 = a$, raising the base to the first power returns the base itself. The exponent that produces the base is always one. The point $(a, 1)$ lies on every logarithmic graph.
+
+These values serve as anchors. When sketching [graphs](!/algebra/logarithms/graphs), they provide two guaranteed points. When checking calculations, they offer quick verification — if a formula gives $\\log_3(1) \\neq 0$, something has gone wrong.
+
+Additional values follow patterns. For base $10$: $\\log_{10}(10) = 1$, $\\log_{10}(100) = 2$, $\\log_{10}(1000) = 3$, and so on — each multiplication by $10$ increases the logarithm by $1$. For base $2$: $\\log_2(2) = 1$, $\\log_2(4) = 2$, $\\log_2(8) = 3$, $\\log_2(16) = 4$. Recognizing powers of the base makes mental calculation possible.`,
+  before: ``,
+  after: ``,
+  link: '',
+},
+   obj4: {
+  title: `Inverse Identities`,
+  content: `Logarithms and exponentials undo each other. Two identities express this relationship and arise whenever the operations are composed.
+
+The first identity: $\\log_a(a^x) = x$. Taking the logarithm of an exponential with the same base extracts the exponent. The expression $\\log_2(2^5) = 5$ without calculation — the logarithm simply returns what the exponent was. This works because logarithm asks "what power of $a$ gives $a^x$?" and the answer is obviously $x$.
+
+The second identity: $a^{\\log_a(x)} = x$. Raising the base to a logarithmic power returns the original argument. The expression $3^{\\log_3(7)} = 7$ without calculation — the exponential returns what the argument was. This works because $\\log_a(x)$ is precisely the power that produces $x$ when applied to base $a$.
+
+These identities are not tricks to memorize but logical necessities. If $f(x) = a^x$ and $g(x) = \\log_a(x)$, then $f$ and $g$ are inverse functions: $f(g(x)) = x$ and $g(f(x)) = x$. Each operation reverses the other.
+
+In practice, these identities simplify expressions and solve [equations](!/algebra/logarithms/equations). Recognizing when an expression contains a logarithm and exponential with matching bases allows immediate simplification.`,
+  before: ``,
+  after: ``,
+  link: '',
+},
+   obj5: {
+  title: `Common and Natural Logarithms`,
+  content: `Two bases appear so frequently that they receive special notation.
+
+The common logarithm uses base $10$ and is written $\\log(x)$ without a subscript, or sometimes $\\log_{10}(x)$ for clarity. Base $10$ aligns with the decimal system, making common logarithms natural for expressing orders of magnitude, pH calculations, and decibel scales.
+
+The natural logarithm uses base $e \\approx 2.71828$ and is written $\\ln(x)$. The number $e$ emerges from calculus — it is the unique base for which the derivative of $a^x$ equals $a^x$ itself. Natural logarithms dominate theoretical mathematics, physics, and any context involving continuous growth or decay.
+
+Both notations are shorthand. The statement $\\log(100) = 2$ means $\\log_{10}(100) = 2$. The statement $\\ln(e^3) = 3$ means $\\log_e(e^3) = 3$. Converting between bases uses a formula covered in [logarithm rules](!/algebra/logarithms/rules).`,
+  before: ``,
+  after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Common and Natural Logs](!/algebra/logarithms/common-natural) →@`,
+  link: '',
+},
+   obj6: {
+  title: `Properties of Logarithms`,
+  content: `Logarithmic functions possess structural characteristics that determine their behavior across the entire domain.
+
+The domain of $\\log_a(x)$ is all positive real numbers — only positive arguments are permitted. The range is all real numbers — logarithms can produce any output, positive or negative. As $x$ approaches zero from the right, the logarithm decreases without bound. As $x$ increases without bound, the logarithm also increases, but slowly.
+
+Monotonicity depends on the base. When $a > 1$, the function is strictly increasing: larger inputs produce larger outputs. When $0 < a < 1$, the function is strictly decreasing: larger inputs produce smaller outputs. This property is critical when solving [inequalities](!/algebra/logarithms/inequalities).
+
+The one-to-one property follows from monotonicity: if $\\log_a(x) = \\log_a(y)$, then $x = y$. No two distinct inputs can produce the same output. This property justifies a key technique in solving [equations](!/algebra/logarithms/equations) — when both sides of an equation are logarithms with the same base, the arguments must be equal.`,
+  before: ``,
+  after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Properties of Logarithms](!/algebra/logarithms/properties) →@`,
+  link: '',
+},
+   obj7: {
+  title: `Logarithm Rules`,
+  content: `The rules of logarithms transform how arguments combine under the logarithm function. Each rule corresponds to an exponent law, inverted.
+
+The product rule: $\\log_a(xy) = \\log_a(x) + \\log_a(y)$. Logarithms convert multiplication into addition. This follows from $a^m \\cdot a^n = a^{m+n}$ — if the exponents add when bases multiply, then logarithms of products split into sums.
+
+The quotient rule: $\\log_a(x/y) = \\log_a(x) - \\log_a(y)$. Division becomes subtraction. The power rule: $\\log_a(x^n) = n \\cdot \\log_a(x)$. Exponents come down as coefficients.
+
+These rules allow expanding complex logarithms into simpler pieces and condensing sums of logarithms into single expressions. Both skills appear constantly when solving [equations](!/algebra/logarithms/equations). The change of base formula converts logarithms from one base to another, enabling calculator computation for any base.`,
+  before: ``,
+  after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Logarithm Rules](!/algebra/logarithms/rules) →@`,
+  link: '',
+},
+   obj8: {
+  title: `Logarithmic Equations`,
+  content: `Equations involving logarithms appear in two main forms: those where the logarithm equals a constant, and those where logarithms appear on both sides.
+
+An equation like $\\log_2(x) = 5$ converts directly to exponential form: $x = 2^5 = 32$. The logarithm definition provides the solution method. An equation like $\\log_3(x - 1) = \\log_3(7)$ uses the one-to-one property: since the logarithms are equal and have the same base, the arguments must match, giving $x - 1 = 7$ and $x = 8$.
+
+More complex equations require the [rules](!/algebra/logarithms/rules) to combine or separate logarithms before these techniques apply. Every solution must be checked against domain restrictions — the argument of every logarithm must be positive. Extraneous solutions that violate these restrictions must be rejected.
+
+Logarithms also solve exponential equations when matching bases fails. An equation like $3^x = 7$ has no integer solution, but taking logarithms of both sides and applying the power rule yields $x = \\log(7)/\\log(3)$.`,
+  before: ``,
+  after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Logarithmic Equations](!/algebra/logarithms/equations) →@`,
+  link: '',
+},
+  obj9: {
+  title: `Logarithmic Inequalities`,
+  content: `Solving logarithmic inequalities follows the same algebraic steps as equations, with one critical addition: the base determines whether the inequality direction is preserved or reversed.
+
+When the base satisfies $a > 1$, the logarithm is increasing. Larger arguments produce larger outputs, so inequality direction is preserved. If $\\log_2(x) > 3$, then $x > 2^3 = 8$.
+
+When the base satisfies $0 < a < 1$, the logarithm is decreasing. Larger arguments produce smaller outputs, so inequality direction reverses. If $\\log_{1/2}(x) > 3$, then $x < (1/2)^3 = 1/8$.
+
+Domain restrictions apply throughout. Every argument must remain positive, and this constraint intersects with the algebraic solution. The [properties](!/algebra/logarithms/properties) page covers monotonicity in detail; the [graphs](!/algebra/logarithms/graphs) page shows why direction reversal occurs visually.`,
+  before: ``,
+  after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Logarithmic Inequalities](!/algebra/logarithms/inequalities) →@`,
+  link: '',
+},
+   obj10: {
+  title: `Graphing Logarithmic Functions`,
+  content: `The graph of $y = \\log_a(x)$ has a distinctive shape determined by the [properties](!/algebra/logarithms/properties) of the function.
+
+Every logarithmic graph passes through $(1, 0)$ because $\\log_a(1) = 0$ for all bases. Every graph also passes through $(a, 1)$ because $\\log_a(a) = 1$. A vertical asymptote exists at $x = 0$ — the graph approaches the $y$-axis but never touches it, plunging toward $-\\infty$ as $x$ approaches zero from the right.
+
+The base controls the overall direction. For $a > 1$, the graph rises from left to right. For $0 < a < 1$, the graph falls. Larger bases (when greater than one) produce flatter curves; the function grows more slowly.
+
+Transformations shift, stretch, and reflect the basic shape. Horizontal shifts move the asymptote. Vertical shifts raise or lower the curve. Reflections flip across axes. Writing equations from transformed graphs requires identifying the new asymptote location and key points.`,
+  before: ``,
+  after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Graphing Logarithmic Functions](!/algebra/logarithms/graphs) →@`,
+  link: '',
+},
+    obj11:{
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+      link:'',
+  
+    },
+    obj12:{
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+      link:'',
+  
+    },
+    obj13:{
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+      link:'',
+      link:'',
+  
+    },
+    obj14:{
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+      link:'',
+      link:'',
+  
+    },
 
 
-    return {
-      props:{
-
-        sectionsContent,
-        introContent
-
-        
-      }
+    obj15:{
+  
+      title:``,
+      content:``,
+      before:``,
+      after:``,
+      link:'',
+  
     }
+  
   }
 
-export default function PowersPage({sectionsContent,introContent}) {
+const introContent = {
+  title: `The Inverse of Exponentiation`,
+  content: `Exponentiation answers the question: given a base and an exponent, what is the result? Logarithms reverse this process, answering: given a base and a result, what exponent produced it? This inverse relationship makes logarithms essential wherever exponential growth or decay appears — compound interest, radioactive decay, sound intensity, earthquake magnitude, and countless other phenomena.
+
+The expression $\\log_a(b) = c$ states that $a^c = b$. The logarithm extracts the exponent. Once this connection is clear, logarithms transform from mysterious notation into a natural extension of the exponential ideas already familiar from earlier algebra.`,
+};
 
 
-    const logarithmsSections=[
-        {
-            id:'definition',
-            title:sectionsContent.definition.title,
-            link:'',
-            content:[
-              sectionsContent.definition.before,
-              sectionsContent.definition.svg,
-              sectionsContent.definition.after,
 
-            ]
-        },
-        {
-            id:'rules',
-            title:sectionsContent.rules.title,
-            link:sectionsContent.rules.link,
-            content:[
-                sectionsContent.rules.content,
-                sectionsContent.rules.svg,
-            
-            ]
 
-        },
-        // {
-        //     id:'',
-        //     title:'',
-        //     link:'',
-        //     content:''
-        // }
-    ]
+   return {
+      props:{
+         sectionsContent,
+         introContent,
+          seoData: {
+        title: "Title | Learn Math Class",
+        description: "Metadescription",
+        keywords: keyWords.join(", "),
+        url: "/algebra/logarithms",
+         name: "name"
+      },
+        
+       }
+    }
+   }
+
+export default function PageTemplate({seoData,sectionsContent , introContent}) {
+
+    
+  const genericSections=[
+    {
+        id:'1',
+        title:sectionsContent.obj1.title,
+        link:sectionsContent.obj1.link,
+        content:[
+          sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'2',
+        title:sectionsContent.obj2.title,
+        link:sectionsContent.obj2.link,
+        content:[
+          sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'3',
+        title:sectionsContent.obj3.title,
+        link:sectionsContent.obj3.link,
+        content:[
+          sectionsContent.obj3.content,
+        ]
+    },
+    {
+        id:'4',
+        title:sectionsContent.obj4.title,
+        link:sectionsContent.obj4.link,
+        content:[
+          sectionsContent.obj4.content,
+        ]
+    },
+    {
+        id:'5',
+        title:sectionsContent.obj5.title,
+        link:sectionsContent.obj5.link,
+        content:[
+          sectionsContent.obj5.content,
+        ]
+    },
+    {
+        id:'6',
+        title:sectionsContent.obj6.title,
+        link:sectionsContent.obj6.link,
+        content:[
+          sectionsContent.obj6.content,
+        ]
+    },
+    {
+        id:'7',
+        title:sectionsContent.obj7.title,
+        link:sectionsContent.obj7.link,
+        content:[
+          sectionsContent.obj7.content,
+        ]
+    },
+    {
+        id:'8',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
+        ]
+    },
+    {
+        id:'9',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
+        ]
+    },
+    {
+        id:'10',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
+        ]
+    },
+    // {
+    //     id:'11',
+    //     title:sectionsContent.obj11.title,
+    //     link:sectionsContent.obj11.link,
+    //     content:[
+    //       sectionsContent.obj11.content,
+    //     ]
+    // },
+    // {
+    //     id:'12',
+    //     title:sectionsContent.obj12.title,
+    //     link:sectionsContent.obj12.link,
+    //     content:[
+    //       sectionsContent.obj12.content,
+    //     ]
+    // },
+    // {
+    //     id:'13',
+    //     title:sectionsContent.obj13.title,
+    //     link:sectionsContent.obj13.link,
+    //     content:[
+    //       sectionsContent.obj13.content,
+    //     ]
+    // },
+    // {
+    //     id:'14',
+    //     title:sectionsContent.obj14.title,
+    //     link:sectionsContent.obj14.link,
+    //     content:[
+    //       sectionsContent.obj14.content,
+    //     ]
+    // },
+    // {
+    //     id:'15',
+    //     title:sectionsContent.obj15.title,
+    //     link:sectionsContent.obj15.link,
+    //     content:[
+    //       sectionsContent.obj15.content,
+    //     ]
+    // },
+    // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
+    // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
+    // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
+    
+]
+
   return (
-    <>
-      {/* <GenericNavbar/> */}
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <OperaSidebar 
-             side='right'
-             topOffset='55px' 
-             sidebarWidth='45px'
-             panelWidth='200px'
-             iconColor='white'
-             panelBackgroundColor='#f2f2f2'
-           />
-      <Breadcrumb/>
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'10px'}}>Logarithms</h1>
-      <br/>
-      <SectionTableOfContents sections={logarithmsSections}
-       showSecondaryNav={true}
-       secondaryNavMode="siblings"
-       secondaryNavTitle="Similar Pages"/>
-      <br/>
-      <br/>
-      <IntroSection 
-            id={introContent.id}
-            title={introContent.title}
-            content={introContent.content}
-            backgroundColor="#f2f2f2"
-            textColor="#06357a"
-          />
-      <br/>
-      <br/>
-      <Sections sections={logarithmsSections}/>
-      <br/>
-      <br/>
-      <br/>
-       {/* <ScrollUpButton/> */} 
-    </>
-  );
+   <>
+   <Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": seoData.name,
+        "description": seoData.description,
+        "keywords": seoData.keywords,
+        "url": `https://www.learnmathclass.com${seoData.url}`,
+        "dateModified": new Date().toISOString(),
+        "inLanguage": "en-US",
+        "mainEntity": {
+          "@type": "Article",
+          "name": seoData.name,
+          "dateModified": new Date().toISOString(),
+          "author": {
+            "@type": "Organization",
+            "name": "Learn Math Class"
+          }
+        }
+      })
+    }}
+  />
+</Head>
+   {/* <GenericNavbar/> */}
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+    <OperaSidebar 
+           side='right'
+           // topOffset='65px' 
+           sidebarWidth='45px'
+           panelWidth='200px'
+           iconColor='white'
+           panelBackgroundColor='#f2f2f2'
+         /> 
+   <Breadcrumb/>
+   <br/>
+   <br/>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Logarithms</h1>
+   <br/>
+   <br/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
+   
+   />
+   <br/>
+   <br/>
+   <br/>
+    <IntroSection 
+          id={introContent.id}
+          title={introContent.title}
+          content={introContent.content}
+           backgroundColor='#f9fafb'
+          //  "#f2f2f2"
+          textColor="#06357a"
+        />
+   <br/>
+   <br/>
+   <Sections sections={genericSections}/>
+   <br/>
+   <br/>
+   <br/>
+   {/* <ScrollUpButton/> */}
+   </>
+  )
 }
