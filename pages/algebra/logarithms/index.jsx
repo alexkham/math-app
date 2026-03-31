@@ -8,9 +8,22 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  'logarithms',
+  'logarithm definition',
+  'log base',
+  'common logarithm',
+  'natural logarithm',
+  'logarithm rules',
+  'logarithmic equations',
+  'logarithm properties',
+  'inverse of exponentiation',
+  'log and exponential relationship',
+  'change of base formula',
+  'logarithmic functions',
+  'logarithmic inequalities',
+  'graphing logarithms'
+]
   // •
 
 //   \u2022 First item
@@ -244,26 +257,132 @@ The expression $\\log_a(b) = c$ states that $a^c = b$. The logarithm extracts th
 };
 
 
+const faqQuestions = {
+  obj1: {
+    question: "What is a logarithm?",
+    answer: "A logarithm answers the question: to what power must a base be raised to produce a given number? The expression log base a of b equals c means a raised to the power c equals b. Logarithms extract exponents from exponential relationships.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "Why must the argument of a logarithm be positive?",
+    answer: "A positive base raised to any real exponent always produces a positive result. Since no real exponent can make a positive base yield zero or a negative number, logarithms of zero or negative arguments have no real solution.",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "What is the difference between common and natural logarithms?",
+    answer: "Common logarithms use base 10 and are written log(x). Natural logarithms use base e (approximately 2.71828) and are written ln(x). Base 10 aligns with the decimal system, while base e arises naturally in calculus and continuous growth models.",
+    sectionId: "5"
+  },
+  obj4: {
+    question: "How are logarithms and exponentials related?",
+    answer: "They are inverse operations. The identity log_a(a^x) = x shows logarithms undo exponentiation, and a^(log_a(x)) = x shows exponentiation undoes logarithms. Each operation reverses the other when the bases match.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "What are the basic logarithm rules?",
+    answer: "The product rule converts log(xy) into log(x) + log(y). The quotient rule converts log(x/y) into log(x) - log(y). The power rule converts log(x^n) into n times log(x). Each rule corresponds to an exponent law applied in reverse.",
+    sectionId: "7"
+  }
+}
 
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Logarithms",
+    "description": "Learn logarithms from definition to application: base and argument rules, inverse identities, common and natural logs, properties, rules, equations, and graphs.",
+    "url": "https://www.learnmathclass.com/algebra/logarithms",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Logarithms"
+    },
+    "teaches": [
+      "Logarithm definition and exponential-logarithmic conversion",
+      "Base and argument restrictions",
+      "Key values and inverse identities",
+      "Common and natural logarithms",
+      "Logarithm rules: product, quotient, power, change of base",
+      "Logarithmic equations, inequalities, and graphs"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Algebra",
+        "item": "https://www.learnmathclass.com/algebra"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Logarithms",
+        "item": "https://www.learnmathclass.com/algebra/logarithms"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
 
    return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Title | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/algebra/logarithms",
-         name: "name"
-      },
-        
-       }
-    }
+  props: {
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Logarithms: Definition, Rules & Properties | Learn Math Class",
+      description: "Learn logarithms from definition to application: base and argument rules, inverse identities, common and natural logs, properties, rules, equations, and graphs.",
+      keywords: keyWords.join(", "),
+      url: "/algebra/logarithms",
+      name: "Logarithms"
+    },
+  }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
+export default function LogarithmsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {   
     
   const genericSections=[
     {
@@ -415,7 +534,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+ <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -437,25 +556,21 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
   <script 
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

@@ -8,9 +8,22 @@ import Head from 'next/head'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
-
+const keyWords = [
+  'roots algebra',
+  'radicals math',
+  'square root',
+  'cube root',
+  'nth root',
+  'principal root',
+  'radical notation',
+  'radicand and index',
+  'rational exponents',
+  'simplifying radicals',
+  'radical equations',
+  'radical functions',
+  'even and odd roots',
+  'roots and powers connection'
+]
   // •
 
 //   \u2022 First item
@@ -292,27 +305,136 @@ Powers and roots are inverse operations. If raising 3 to the second power gives 
 }
 
 
+const faqQuestions = {
+  obj1: {
+    question: "What is a root in math?",
+    answer: "A root reverses exponentiation. The nth root of b asks what number, raised to the nth power, produces b. For example, the square root of 25 is 5 because 5 squared equals 25, and the cube root of 8 is 2 because 2 cubed equals 8.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "What is the difference between even and odd roots?",
+    answer: "Even-index roots (square root, fourth root) require non-negative radicands in real numbers and always return a non-negative principal root. Odd-index roots (cube root, fifth root) accept any real input, including negative numbers, and return one unique real value.",
+    sectionId: "3"
+  },
+  obj3: {
+    question: "How are roots related to exponents?",
+    answer: "Roots and fractional exponents are equivalent notations. The nth root of a equals a raised to the power 1/n. More generally, the nth root of a to the m equals a to the power m/n. All exponent laws apply to both forms.",
+    sectionId: "4"
+  },
+  obj4: {
+    question: "What is a principal root?",
+    answer: "The principal root is the value returned by the radical symbol. For even-index roots, it is the non-negative root. For odd-index roots, it is the unique real root. This convention ensures the radical produces exactly one output for each valid input.",
+    sectionId: "3"
+  },
+  obj5: {
+    question: "Can you take an even root of a negative number?",
+    answer: "Not in the real number system. No real number squared gives a negative result. However, using the imaginary unit i where i squared equals negative one, even roots of negative numbers become expressible as complex numbers. For example, the square root of negative 4 equals 2i.",
+    sectionId: "9"
+  }
+}
+
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Roots and Radicals",
+    "description": "Learn roots and radicals: square roots, cube roots, principal roots, radical notation, rational exponents, simplification rules, radical equations, and functions.",
+    "url": "https://www.learnmathclass.com/algebra/roots",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Roots and Radicals"
+    },
+    "teaches": [
+      "Definition of roots as inverse of exponentiation",
+      "Square roots, cube roots, and higher-index roots",
+      "Principal root convention for even and odd indices",
+      "Radical and rational exponent notation",
+      "Rules for simplifying and operating with radicals",
+      "Radical equations, functions, and complex number connections"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Algebra",
+        "item": "https://www.learnmathclass.com/algebra"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Roots and Radicals",
+        "item": "https://www.learnmathclass.com/algebra/roots"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
 
 
 
    return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Title | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/algebra/roots",
-         name: "name"
-      },
-        
-       }
-    }
+  props: {
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Roots & Radicals: Square, Cube & Nth Roots | Learn Math Class",
+      description: "Learn roots and radicals: square roots, cube roots, principal roots, radical notation, rational exponents, simplification rules, radical equations, and functions.",
+      keywords: keyWords.join(", "),
+      url: "/algebra/roots",
+      name: "Roots and Radicals"
+    },
+  }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
+export default function RootsAndRadicalsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {   
     
   const genericSections=[
     {
@@ -464,7 +586,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+ <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -486,25 +608,21 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
   <script 
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>
