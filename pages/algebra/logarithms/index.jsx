@@ -595,7 +595,7 @@ export default function LogarithmsPage({seoData, sectionsContent, introContent, 
    <br/>
    <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
-         secondaryNavMode="siblings"  // or "children"
+         secondaryNavMode="children"  // or "children"
          secondaryNavTitle="More in this Section"
    
    />

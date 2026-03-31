@@ -1,289 +1,613 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import React from 'react'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../pages/pages.css'
-
+import Head from 'next/head'
 
 
 export async function getStaticProps(){
-     
-  const intro=`Here's a concise introduction to mathematical powers for your page:
+const keyWords = [
+  'powers algebra',
+  'exponents',
+  'base and exponent',
+  'laws of exponents',
+  'negative exponents',
+  'zero exponent',
+  'rational exponents',
+  'irrational exponents',
+  'exponential equations',
+  'exponential functions',
+  'exponent rules',
+  'exponential inequalities',
+  'powers and roots connection',
+  'exponent notation'
+]
+  // •
 
-Mathematical powers, also known as exponents, represent one of the most fundamental operations in mathematics. When we write x^n, we're expressing x multiplied by itself n times, creating a compact notation that unlocks remarkable mathematical relationships and patterns.
+//   \u2022 First item
+// \u2022 Second item
 
-Powers serve as the foundation for countless mathematical concepts across multiple disciplines. In algebra, they enable us to solve polynomial equations and model exponential growth. Calculus relies heavily on power functions for differentiation and integration rules, while the power rule itself forms a cornerstone of derivative calculations. In trigonometry, powers appear in series expansions and identities that define sine, cosine, and other functions.
+  
+// <hr style="border-width:1px;"></hr>
 
-The exponential function e^x, built from the concept of powers, appears throughout natural phenomena and mathematical analysis.
+// <hr style="color:blue;" />
 
-Understanding powers provides the mathematical vocabulary needed to express complex relationships simply and elegantly. From basic arithmetic to advanced calculus, from solving equations to modeling real-world phenomena, powers bridge elementary concepts with sophisticated mathematical thinking, making them indispensable tools for anyone studying mathematics and its applications.`
+// <hr style="border-color:#3498db; border-width:1px;" />
 
+
+
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+
+ 
+// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.notation)}
+        // </div>,
+
+
+//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+//     {processContent(sectionsContent.normal.parameters)}
+// </div>,
+        
+//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+//                   {processContent(sectionsContent.obj4.content)}
+//                   </div>,
+
+
+//  <div key={'dist'} style={{
+//                     textAlign: 'center',
+//                     transform: 'scale(0.98)',
+//                     transformOrigin: 'center',
+//                     marginTop:'50px',
+//                     marginLeft:'-150px'
+//                   }} dangerouslySetInnerHTML={{ 
+//                     __html:   sectionContent.distributions.svg,
+//                   }} />
+
+
+const sectionsContent = {
+
+  obj1: {
+    title: `Definition and Terminology`,
+    content: `The expression $a^n$ is called a power. The number $a$ is the base — the quantity being repeatedly multiplied. The number $n$ is the exponent — it controls how many times the base appears as a factor.
+
+$$a^n = \\underbrace{a \\cdot a \\cdot a \\cdots a}_{n \\text{ times}}$$
+
+This definition works when $n$ is a positive integer. The expression $2^5$ means $2 \\cdot 2 \\cdot 2 \\cdot 2 \\cdot 2 = 32$. Five factors of 2.
+
+The word "power" refers to the entire expression, not just the exponent. Saying "$2^5$ is a power of 2" is correct. Saying "5 is the power" is imprecise — 5 is the exponent.
+
+Two exponents have special names. The exponent 2 gives "squared": $a^2$ is "a squared." The exponent 3 gives "cubed": $a^3$ is "a cubed." All other exponents use the general form: $a^n$ is "a to the power of n" or "a to the nth."`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj2: {
+    title: `Notation and Conventions`,
+    content: `Parentheses determine what the exponent applies to. Without parentheses, the exponent binds only to the symbol immediately before it:
+
+$$-2^2 = -(2^2) = -4$$
+
+$$(-2)^2 = (-2) \\cdot (-2) = 4$$
+
+In the first expression, the exponent applies to 2 alone; the negative sign is applied afterward. In the second, the parentheses force the exponent to apply to $-2$ as a whole.
+
+Stacked exponents are read from the top down:
+
+$$a^{2^3} = a^8$$
+
+This is not the same as $(a^2)^3 = a^6$. Without parentheses, $2^3$ is computed first to produce the exponent 8. The full rules governing expressions like $(a^m)^n$ appear on the [exponent rules](!/algebra/powers/exponent-rules) page.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj3: {
+    title: `Natural Exponents`,
+    content: `When the exponent is a positive integer, the power is a product of repeated factors. The exponent simply counts how many copies of the base are multiplied together.
+
+$$3^4 = 3 \\cdot 3 \\cdot 3 \\cdot 3 = 81$$
+
+$$10^6 = 1{,}000{,}000$$
+
+This is where the laws of exponents — the product rule, quotient rule, power-of-a-power rule — are first derived. Each law emerges naturally from counting and regrouping factors. Every extension of exponents to other types preserves these laws by definition.
+
+The [natural exponents](!/algebra/powers/natural-exponents) page develops this case fully: the derivation of each law, worked examples, and the transition toward broader exponent types.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj4: {
+    title: `Zero as an Exponent`,
+    content: `Repeated multiplication offers no interpretation for multiplying a base zero times. The definition $a^0 = 1$ (for $a \\neq 0$) is not arbitrary — it is forced by consistency with the quotient rule.
+
+If $a^m / a^m = a^{m-m}$, then $a^0$ must equal 1, because any nonzero quantity divided by itself is 1.
+
+A pattern argument reinforces this: $3^3 = 27$, $3^2 = 9$, $3^1 = 3$. Each step divides by 3. Continuing: $3^0 = 1$.
+
+The case $0^0$ is genuinely ambiguous. Different conventions assign it the value 1 in combinatorics and leave it undefined in analysis. The [zero powers](!/algebra/powers/zero-powers) page addresses this case and the reasoning behind each convention.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj5: {
+    title: `Negative Exponents`,
+    content: `A negative exponent produces the reciprocal of the corresponding positive power:
+
+$$a^{-n} = \\frac{1}{a^n}, \\quad a \\neq 0$$
+
+The definition extends the descending pattern below $a^0$. From $3^1 = 3$ and $3^0 = 1$, dividing by 3 once more gives $3^{-1} = 1/3$. Then $3^{-2} = 1/9$, $3^{-3} = 1/27$, and so on.
+
+The base cannot be zero — $0^{-n}$ would require dividing by $0^n = 0$, which is undefined.
+
+Negative exponents rewrite fractions without denominators: $1/a^3 = a^{-3}$. This notational flexibility is essential when applying the laws of exponents. The [negative exponents](!/algebra/powers/negative-exponents) page covers the full treatment.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj6: {
+    title: `Rational Exponents`,
+    content: `When the exponent is a fraction $m/n$, the denominator indicates a root and the numerator indicates a power:
+
+$$a^{m/n} = \\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$$
+
+This equivalence bridges exponents and [roots](!/algebra/roots). Computing $8^{2/3}$: the denominator 3 means cube root, the numerator 2 means square. So $8^{2/3} = (\\sqrt[3]{8})^2 = 2^2 = 4$.
+
+For even denominators, the base must be non-negative in real numbers — $(-4)^{1/2}$ has no real value. Odd denominators accept any real base.
+
+Rational exponents provide a single framework for roots and powers. The [rational exponents](!/algebra/powers/rational-exponents) page develops the notation, the domain restrictions, and the connection to radical form.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj7: {
+    title: `Irrational Exponents`,
+    content: `An irrational exponent like $\\pi$ or $\\sqrt{2}$ cannot be expressed as a fraction, so the rational-exponent definition does not apply directly. Instead, $2^\\pi$ is defined as the limit of $2^r$ where rational values $r$ approach $\\pi$:
+
+$$2^3 = 8, \\quad 2^{3.1} \\approx 8.574, \\quad 2^{3.14} \\approx 8.815, \\quad 2^{3.1415} \\approx 8.824$$
+
+The values converge, and the limit is $2^\\pi$.
+
+This construction requires the base to be positive. For $a > 0$, the function $a^x$ is continuous and the limit always exists. For $a \\leq 0$, the sequence of rational approximations does not converge to a consistent real value.
+
+The [irrational exponents](!/algebra/powers/irrational-exponents) page formalizes this limiting process and the domain restriction $a > 0$.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj8: {
+    title: `Laws of Exponents`,
+    content: `A single set of rules governs all exponent types. The product rule $a^m \\cdot a^n = a^{m+n}$, the quotient rule $a^m / a^n = a^{m-n}$, the power-of-a-power rule $(a^m)^n = a^{mn}$, and the remaining laws hold whether the exponents are natural, zero, negative, rational, or irrational.
+
+These laws are first proved for natural exponents, where they follow from counting factors. The extensions to other exponent types are then defined so that the same laws remain valid — each new definition is chosen precisely to preserve these identities.
+
+Domain restrictions tighten as the exponent type broadens. Natural exponents allow any base. Zero and negative exponents exclude $a = 0$. Rational exponents with even denominators require $a \\geq 0$. Irrational exponents require $a > 0$.
+
+The [exponent rules](!/algebra/powers/exponent-rules) page collects every law with derivations, examples, and the full domain conditions.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj9: {
+    title: `Exponential Equations`,
+    content: `When the unknown appears in the exponent, the equation is exponential: $2^x = 16$, $3^{2x-1} = 27$, $5^x = 12$.
+
+The simplest cases resolve by rewriting both sides with a common base. Since $16 = 2^4$, the equation $2^x = 16$ gives $x = 4$ directly by matching exponents.
+
+When bases cannot be matched, [logarithms](!/algebra/logarithms) provide the tool. Taking the logarithm of both sides converts the exponent into a coefficient, making the unknown accessible through algebra.
+
+The [exponential equations](!/algebra/powers/exponential-equations) page covers both techniques: base matching for exact solutions and logarithmic methods for the general case.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj10: {
+    title: `Exponential Inequalities`,
+    content: `Inequalities involving powers require attention to the base. The expression $2^x > 8$ and $(1/3)^x \\leq 9$ are both exponential inequalities, but they behave differently.
+
+When the base satisfies $a > 1$, the exponential function is increasing: larger exponents produce larger values. The inequality direction is preserved when applying logarithms.
+
+When $0 < a < 1$, the function is decreasing: larger exponents produce smaller values. The inequality reverses when solving.
+
+The [exponential inequalities](!/algebra/powers/exponential-inequalities) page develops the solving techniques and the role the base plays in determining direction.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj11: {
+    title: `Exponential Functions`,
+    content: `When the base is a fixed positive number and the exponent varies, the power $a^x$ becomes a [function](!/algebra/functions) of $x$. This is the conceptual shift from computing individual powers to studying how powers change.
+
+For $a > 1$, the function grows — each unit increase in $x$ multiplies the output by $a$. For $0 < a < 1$, the function decays. The number $e \\approx 2.718$ occupies a central role: the function $e^x$ is its own derivative, making it foundational in calculus.
+
+Exponential functions are the counterpart of [polynomial functions](!/algebra/polynomials). In a polynomial, the base varies and the exponent is fixed ($x^3$). In an exponential function, the base is fixed and the exponent varies ($3^x$). The behaviors are fundamentally different.
+
+The [exponential functions](!/algebra/powers/exponential-functions) page covers graphs, transformations, growth and decay models, and the role of $e$.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+}
 
 const introContent = {
-  id: "intro",
-  title: "Introduction to Powers",
-  content: `Mathematical powers, also known as exponents, represent one of the most fundamental operations in mathematics. When we write $x^n$, we're expressing $x$ multiplied by itself n times, creating a compact notation that unlocks remarkable mathematical relationships and patterns.
-
-Powers serve as the foundation for countless mathematical concepts across multiple disciplines. In algebra, they enable us to solve polynomial equations and model exponential growth. Calculus relies heavily on power functions for differentiation and integration rules, while the power rule itself forms a cornerstone of derivative calculations. In trigonometry, powers appear in series expansions and identities that define sine, cosine, and other functions.
-
-The exponential function $e^x$, built from the concept of powers, appears throughout natural phenomena and mathematical analysis.
-
-Understanding powers provides the mathematical vocabulary needed to express complex relationships simply and elegantly. From basic arithmetic to advanced calculus, from solving equations to modeling real-world phenomena, powers bridge elementary concepts with sophisticated mathematical thinking, making them indispensable tools for anyone studying mathematics and its applications.`
+  id: 'intro',
+  title: `Base, Exponent, Result`,
+  content: `A power is an expression built from two components: a base and an exponent. The base is the number being acted on; the exponent dictates how. In the simplest case, the exponent counts repeated multiplications — but that interpretation covers only the starting point. Extending the exponent to zero, negative values, fractions, and irrational numbers requires progressively broader definitions, each consistent with the rules established at the natural-number level.`,
 }
-   
 
-const sectionsContent={
-
-        definition:{
-          title:`Definitions and Notations`,
-          content:`In mathematics **power** is defined as a result of **exponentiation**, which is the operation of repeated multiplication by the same number. This number is called the **base**, and the number of times it is multiplied by itself is called the **exponent**.`,
-          before:``,
-          after:`**Exponentiation is typically written using superscript notation**:
-
-\t\t\t\t\t\t\t\t$𝑎^𝑛$
-
-**This is read as**:
-"𝑎 raised to the power of 𝑛",
-or "𝑎 to the 𝑛-th power".
-**Where**:
-𝑎 is the base — the number being multiplied,
-𝑛 is the exponent — how many times the base is multiplied by itself,
-$𝑎^𝑛$ is the power — the result of the operation.
-
-This expression means multiplying the base  a  by itself  n  times:
-
-\t\t\t\t\t\t\t\t$a^n = \\underbrace{a \\times a \\times \\cdots \\times a}_{n \\text{ times}}$
-
-
-`,
-          svg:`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 620">
-  <!-- Clean white background -->
-  <rect x="0" y="0" width="1280" height="320" fill="#FFFFFF"/>
-  
-  <!-- Mathematical equation - keeping exact positioning -->
-  <g transform="translate(375, 50)">
-    <!-- n^m = -->
-    <text font-family="Cambria Math, serif" font-weight="400" font-size="43">
-      <tspan x="0" y="73">𝑛</tspan>
-    </text>
-    <text font-family="Cambria Math, serif" font-weight="400" font-size="31">
-      <tspan x="25" y="57">𝑚</tspan>
-    </text>
-    <text font-family="Cambria Math, serif" font-weight="400" font-size="43">
-      <tspan x="57" y="73">=</tspan>
-    </text>
-    
-    <!-- n × n × ... × n -->
-    <text font-family="Cambria Math, serif" font-weight="400" font-size="43">
-      <tspan x="89" y="73">𝑛</tspan>
-      <tspan x="124" y="73">×</tspan>
-      <tspan x="164" y="73">𝑛</tspan>
-      <tspan x="199" y="73">×</tspan>
-      <tspan x="229" y="73">.</tspan>
-      <tspan x="245" y="73">.</tspan>
-      <tspan x="261" y="73">.</tspan>
-      <tspan x="270" y="73">×</tspan>
-      <tspan x="310" y="73">𝑛</tspan>
-      <tspan x="345" y="73">×</tspan>
-      <tspan x="385" y="73">𝑛</tspan>
-      <tspan x="420" y="73">×</tspan>
-      <tspan x="460" y="73">𝑛</tspan>
-    </text>
-  </g>
-
-  <!-- Curly brace - enhanced with smoother curve -->
-<path d="M870.5 140.483C870.5 145.459 869.828 149.492 868.999 149.492L623.501 149.492C622.672 149.492 622 153.525 622 158.5 622 153.525 621.328 149.492 620.499 149.492L455.001 149.492C454.172 149.492 453.5 145.458 453.5 140.483" 
-        stroke="#2D5CA0" 
-        stroke-width="2" 
-        stroke-linecap="round"
-        fill="none"/>
-
-  <!-- Boxes with refined styling -->
-  <!-- 'm times' box -->
-  <rect x="511.5" y="195.5" width="212" height="109" 
-        stroke="#2D5CA0" 
-        stroke-width="1.5" 
-        fill="#FFFFFF"
-        rx="4"/>
-  <text font-family="Cambria Math, serif" font-style="italic" font-weight="400" font-size="43" 
-        x="552.55" y="263" 
-        fill="#2D5CA0">m</text>
-  <text font-family="Cambria Math, serif" font-style="italic" font-weight="400" font-size="37" 
-        x="597.716" y="263" 
-        fill="#2D5CA0">times</text>
-
-  <!-- Connecting arrows with enhanced styling -->
-  <path d="M263 277.536L373.578 140.204" 
-        stroke="#2D5CA0" 
-        stroke-width="2"
-        marker-end="url(#arrowhead)"
-        fill="none"/>
-  
-  <path d="M285.272 62.0376L390.637 91.7878" 
-        stroke="#2D5CA0" 
-        stroke-width="2"
-        marker-end="url(#arrowhead)"
-        fill="none"/>
-
-  <!-- Arrow marker definition -->
-  <defs>
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <path d="M0,0 L10,3.5 L0,7" fill="#2D5CA0"/>
-    </marker>
-  </defs>
-
-  <!-- Base and power boxes -->
-  <rect x="176" y="287" width="114" height="89" 
-        stroke="#2D5CA0" 
-        stroke-width="2" 
-        fill="#FFFFFF"
-        rx="4"/>
-  <text font-family="Cambria Math, serif" font-weight="400" font-size="27" 
-        x="205.116" y="341" 
-        fill="#2D5CA0">base</text>
-
-  <rect x="157" y="38" width="133" height="90" 
-        stroke="#2D5CA0" 
-        stroke-width="2" 
-        fill="#FFFFFF"
-        rx="4"/>
-  <text font-family="Cambria Math, serif" font-weight="400" font-size="32" 
-        x="180.792" y="94" 
-        fill="#2D5CA0">power</text>
-</svg>`,
-      
-      
-        },
-        rules:{
-          title:`Exponent Rules`,
-          content:`Power rules are at the core of simplifying and understanding exponential expressions.  
-They show how to combine, manipulate, and interpret powers in a consistent way across a wide range of problems.  
-Things begin with the [Basic Power Rules](!/algebra/powers/exponent-rules#basic), which handle how exponents behave when you multiply, divide, or nest them.  
-From there, the [Special Exponent Rules](!/algebra/powers/exponent-rules#special) introduce key cases like zero, negative, and fractional exponents — forms that often trip up learners but follow clear patterns.  
-As expressions grow more complex, the [Advanced Power Rules](!/algebra/powers/exponent-rules#advanced) help manage combinations and edge cases, including signs and structure.  
-The [Exponential Function Rules](!/algebra/powers/exponent-rules#function) cover variable exponents and forms common in growth, decay, and modeling.  
-Powers and roots are deeply connected, which is why the [Root and Radical Rules](!/algebra/powers/exponent-rules#roots) translate between radical notation and exponent form.  
-And for bridging exponentials with logarithms, the [Logarithmic Power Relations](!/algebra/powers/exponent-rules#relations) show how powers convert, simplify, and solve through logarithmic tools.
-`,
-          before:``,
-          after:``,
-          svg:`<svg width="924" height="576" viewBox="0 0 924 576" style="fill:none;stroke:none;fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5" xmlns="http://www.w3.org/2000/svg"><style data-font-family="Roboto">@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=block);</style><g id="items" style="isolation:isolate"><g id="blend" style="mix-blend-mode:normal"><g id="g-root-cp_6_g-6_6htrxoqvcwf-fill" data-item-order="-420472" transform="translate(540 350)"><path d="M47 52c0 23.196 18.804 42 42 42s42-18.804 42-42-18.804-42-42-42-42 18.804-42 42" id="cp_6_g-6_6htrxoqvcwf-fill" stroke="none" fill="#7f64ea"/><path d="M10 10.11 38 10s-4.55 4.81-8.443 12.089C25.663 29.367 24.089 36 24.089 36z" fill="#7f64ea"/></g><g id="g-root-cp_5_g-5_1464b25oqvabt-fill" data-item-order="-420466" transform="translate(560 248)"><path d="M58 52c0 23.196 18.804 42 42 42s42-18.804 42-42-18.804-42-42-42-42 18.804-42 42" id="cp_5_g-5_1464b25oqvabt-fill" stroke="none" fill="#1eabda"/><path d="M10 51.892 37.845 65s-1.94-5.73-1.897-13.008C35.992 44.714 38 39 38 39z" fill="#1eabda"/></g><g id="g-root-cp_4_g-4_1utnsvxoqvchv-fill" data-item-order="-420460" transform="translate(540 146)"><path d="M47 52c0 23.196 18.804 42 42 42s42-18.804 42-42-18.804-42-42-42-42 18.804-42 42" id="cp_4_g-4_1utnsvxoqvchv-fill" stroke="none" fill="#92bd39"/><path d="M10 93.89 38 94s-4.55-4.81-8.443-12.089C25.663 74.633 24.089 68 24.089 68z" fill="#92bd39"/></g><g id="g-root-cp_3_g-3_147d98doqvchx-fill" data-item-order="-420454" transform="translate(245 146)"><path d="M10 52c0 23.196 18.804 42 42 42s42-18.804 42-42-18.804-42-42-42-42 18.804-42 42" id="cp_3_g-3_147d98doqvchx-fill" stroke="none" fill="#de8431"/><path d="M131 93.89 103 94s4.55-4.81 8.443-12.089C115.338 74.633 116.911 68 116.911 68z" fill="#de8431"/></g><g id="g-root-cp_2_g-2_i0w7p9oqvbpr-fill" data-item-order="-420448" transform="translate(224 248)"><path d="M10 52c0 23.196 18.804 42 42 42s42-18.804 42-42-18.804-42-42-42-42 18.804-42 42" id="cp_2_g-2_i0w7p9oqvbpr-fill" stroke="none" fill="#e0cb15"/><path d="M142 51.892 114.155 65s1.94-5.73 1.897-13.008C116.008 44.714 114 39 114 39z" fill="#e0cb15"/></g><g id="g-root-cp_1_g-1_1lpwmiloqwqvd-fill" data-item-order="-420442" transform="translate(245 350)"><path d="M10 52c0 23.196 18.804 42 42 42s42-18.804 42-42-18.804-42-42-42-42 18.804-42 42" id="cp_1_g-1_1lpwmiloqwqvd-fill" stroke="none" fill="#3cc583"/><path d="M131 10.11 103 10s4.55 4.81 8.443 12.089C115.338 29.367 116.911 36 116.911 36z" fill="#3cc583"/></g><g id="g-root-cp_end_g-end_13z933xoqwq2r-fill" data-item-order="-420436" transform="translate(374 205)"><path d="M10 94c0 46.392 37.608 84 84 84s84-37.608 84-84-37.608-84-84-84-84 37.608-84 84" id="cp_end_g-end_13z933xoqwq2r-fill" stroke="none" fill="#4f92ff"/></g><g id="g-root-tx_3_1lwrugtoqwpah-fill" data-item-order="0" transform="translate(275 170)"><text style="font:700 30px Roboto,sans-serif;white-space:pre" font-weight="bold" font-size="30" font-family="Roboto, sans-serif" id="tx_3_1lwrugtoqwpah-fill" stroke="none" fill="#fff"><tspan x="13.39" y="46" dominant-baseline="ideographic">3</tspan></text></g><g id="g-root-tx_4_mcyvb1oqwruo-fill" data-item-order="0" transform="translate(607 170)"><text style="font:700 30px Roboto,sans-serif;white-space:pre" font-weight="bold" font-size="30" font-family="Roboto, sans-serif" id="tx_4_mcyvb1oqwruo-fill" stroke="none" fill="#fff"><tspan x="13.39" y="46" dominant-baseline="ideographic">4</tspan></text></g><g id="g-root-tx_rulesfor_1uoo071oqy4n5-fill" data-item-order="0" transform="translate(698 146)"><text style="font:15px Roboto,sans-serif;white-space:pre" font-size="15" font-family="Roboto, sans-serif" id="tx_rulesfor_1uoo071oqy4n5-fill" stroke="none" fill="#424736"><tspan x="12" y="31" dominant-baseline="ideographic">Rules for </tspan><tspan x="12" y="49" dominant-baseline="ideographic">exponential </tspan><tspan x="12" y="67" dominant-baseline="ideographic">functions</tspan></text></g><g id="g-root-tx_speciale_mcyvb1oqy58s-fill" data-item-order="0" transform="translate(26 242)"><text style="font:700 20px Roboto,sans-serif;white-space:pre" font-weight="bold" font-size="20" font-family="Roboto, sans-serif" id="tx_speciale_mcyvb1oqy58s-fill" stroke="none" fill="#e0cb15"><tspan x="85.92" y="34" dominant-baseline="ideographic">Special </tspan><tspan x="12.69" y="58" dominant-baseline="ideographic">Exponent Rules</tspan></text></g><g id="g-root-tx_complexr_1qapxbxoqy3nv-fill" data-item-order="0" transform="translate(74 146)"><text style="font:15px Roboto,sans-serif;white-space:pre" font-size="15" font-family="Roboto, sans-serif" id="tx_complexr_1qapxbxoqy3nv-fill" stroke="none" fill="#4c4034"><tspan x="22.06" y="31" dominant-baseline="ideographic">Complex rules for </tspan><tspan x="30.5" y="49" dominant-baseline="ideographic">advanced power </tspan><tspan x="52.85" y="67" dominant-baseline="ideographic">manipulation</tspan></text></g><g id="g-root-tx_understa_hu0zr1oqwrgl-fill" data-item-order="0" transform="translate(386 254)"><text style="font:700 20px Roboto,sans-serif;white-space:pre" font-weight="bold" font-size="20" font-family="Roboto, sans-serif" id="tx_understa_hu0zr1oqwrgl-fill" stroke="none" fill="#fff"><tspan x="14.02" y="34" dominant-baseline="ideographic">Understanding </tspan><tspan x="27.36" y="58" dominant-baseline="ideographic">Exponential </tspan><tspan x="25.37" y="82" dominant-baseline="ideographic">Expressions</tspan></text></g><g id="g-root-tx_exponent_qpnzzxoqy420-fill" data-item-order="0" transform="translate(698 86)"><text style="font:700 20px Roboto,sans-serif;white-space:pre" font-weight="bold" font-size="20" font-family="Roboto, sans-serif" id="tx_exponent_qpnzzxoqy420-fill" stroke="none" fill="#92bd39"><tspan x="12" y="34" dominant-baseline="ideographic">Exponential </tspan><tspan x="12" y="58" dominant-baseline="ideographic">Function Rules</tspan></text></g><g id="g-root-tx_rootandr_qnskqloqy51q-fill" data-item-order="0" transform="translate(734 242)"><text style="font:700 20px Roboto,sans-serif;white-space:pre" font-weight="bold" font-size="20" font-family="Roboto, sans-serif" id="tx_rootandr_qnskqloqy51q-fill" stroke="none" fill="#1eabda"><tspan x="12" y="34" dominant-baseline="ideographic">Root and </tspan><tspan x="12" y="58" dominant-baseline="ideographic">Radical Rules</tspan></text></g><g id="g-root-tx_2_qunsotoqwq2q-fill" data-item-order="0" transform="translate(254 272)"><text style="font:700 30px Roboto,sans-serif;white-space:pre" font-weight="bold" font-size="30" font-family="Roboto, sans-serif" id="tx_2_qunsotoqwq2q-fill" stroke="none" fill="#fff"><tspan x="13.39" y="46" dominant-baseline="ideographic">2</tspan></text></g><g id="g-root-tx_5_1luwf7hoqwqa7-fill" data-item-order="0" transform="translate(638 272)"><text style="font:700 30px Roboto,sans-serif;white-space:pre" font-weight="bold" font-size="30" font-family="Roboto, sans-serif" id="tx_5_1luwf7hoqwqa7-fill" stroke="none" fill="#fff"><tspan x="13.39" y="46" dominant-baseline="ideographic">5</tspan></text></g><g id="g-root-tx_rulesfor_1ursdmloqy51p-fill" data-item-order="0" transform="translate(26 302)"><text style="font:15px Roboto,sans-serif;white-space:pre" font-size="15" font-family="Roboto, sans-serif" id="tx_rulesfor_1ursdmloqy51p-fill" stroke="none" fill="#46432d"><tspan x="37.06" y="28" dominant-baseline="ideographic">Rules for specific </tspan><tspan x="21.46" y="46" dominant-baseline="ideographic">exponent scenarios</tspan></text></g><g id="g-root-tx_rulesfor_1umskxpoqy5mv-fill" data-item-order="0" transform="translate(734 302)"><text style="font:15px Roboto,sans-serif;white-space:pre" font-size="15" font-family="Roboto, sans-serif" id="tx_rulesfor_1umskxpoqy5mv-fill" stroke="none" fill="#32444a"><tspan x="12" y="28" dominant-baseline="ideographic">Rules for simplifying </tspan><tspan x="12" y="46" dominant-baseline="ideographic">roots and radicals</tspan></text></g><g id="g-root-tx_advanced_qqwy65oqy682-fill" data-item-order="0" transform="translate(86 86)"><text style="font:700 20px Roboto,sans-serif;white-space:pre" font-weight="bold" font-size="20" font-family="Roboto, sans-serif" id="tx_advanced_qqwy65oqy682-fill" stroke="none" fill="#de8431"><tspan x="38.93" y="34" dominant-baseline="ideographic">Advanced </tspan><tspan x="15.78" y="58" dominant-baseline="ideographic">Power Rules</tspan></text></g><g id="g-root-tx_relation_1q5q4n1oqy491-fill" data-item-order="0" transform="translate(698 458)"><text style="font:15px Roboto,sans-serif;white-space:pre" font-size="15" font-family="Roboto, sans-serif" id="tx_relation_1q5q4n1oqy491-fill" stroke="none" fill="#443e5c"><tspan x="12" y="31" dominant-baseline="ideographic">Relations between </tspan><tspan x="12" y="49" dominant-baseline="ideographic">powers and </tspan><tspan x="12" y="67" dominant-baseline="ideographic">logarithms</tspan></text></g><g id="g-root-tx_basicpow_zpobuloqy5ty-fill" data-item-order="0" transform="translate(86 374)"><text style="font:700 20px Roboto,sans-serif;white-space:pre" font-weight="bold" font-size="20" font-family="Roboto, sans-serif" id="tx_basicpow_zpobuloqy5ty-fill" stroke="none" fill="#3cc583"><tspan x="16.71" y="34" dominant-baseline="ideographic">Basic Power </tspan><tspan x="77.61" y="58" dominant-baseline="ideographic">Rules</tspan></text></g><g id="g-root-tx_6_142dgjhoqwqha-fill" data-item-order="0" transform="translate(607 374)"><text style="font:700 30px Roboto,sans-serif;white-space:pre" font-weight="bold" font-size="30" font-family="Roboto, sans-serif" id="tx_6_142dgjhoqwqha-fill" stroke="none" fill="#fff"><tspan x="13.39" y="46" dominant-baseline="ideographic">6</tspan></text></g><g id="g-root-tx_logarith_vbq8zhoqwrgk-fill" data-item-order="0" transform="translate(698 374)"><text style="font:700 20px Roboto,sans-serif;white-space:pre" font-weight="bold" font-size="20" font-family="Roboto, sans-serif" id="tx_logarith_vbq8zhoqwrgk-fill" stroke="none" fill="#7f64ea"><tspan x="12" y="34" dominant-baseline="ideographic">Logarithmic </tspan><tspan x="12" y="58" dominant-baseline="ideographic">Power </tspan><tspan x="12" y="82" dominant-baseline="ideographic">Relations</tspan></text></g><g id="g-root-tx_fundamen_93ds71oqy5tz-fill" data-item-order="0" transform="translate(74 434)"><text style="font:15px Roboto,sans-serif;white-space:pre" font-size="15" font-family="Roboto, sans-serif" id="tx_fundamen_93ds71oqy5tz-fill" stroke="none" fill="#374840"><tspan x="16.17" y="31" dominant-baseline="ideographic">Fundamental rules </tspan><tspan x="44.49" y="49" dominant-baseline="ideographic">for simplifying </tspan><tspan x="90.97" y="67" dominant-baseline="ideographic">powers</tspan></text></g><g id="g-root-tx_understa_1q7ljwdoqwp3g-fill" data-item-order="0" transform="translate(272 38)"><g id="tx_understa_1q7ljwdoqwp3g-fill" stroke="none" fill="#484848"/></g><g id="g-root-tx_1_1qduarhoqwqob-fill" data-item-order="0" transform="translate(275 372)"><text style="font:700 30px Roboto,sans-serif;white-space:pre" font-weight="bold" font-size="30" font-family="Roboto, sans-serif" id="tx_1_1qduarhoqwqob-fill" stroke="none" fill="#fff"><tspan x="13.39" y="46" dominant-baseline="ideographic">1</tspan></text></g><g id="g-root-cp_6_g-6_6htrxoqvcwf-stroke" data-item-order="-420472" transform="translate(540 350)"><path d="M47 52c0 23.196 18.804 42 42 42s42-18.804 42-42-18.804-42-42-42-42 18.804-42 42" id="cp_6_g-6_6htrxoqvcwf-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#fff" stroke-width="2"/><path d="M10 10.11 38 10s-4.55 4.81-8.443 12.089C25.663 29.367 24.089 36 24.089 36z" stroke-miterlimit="4" stroke="#fff" stroke-width="2"/></g><g id="g-root-cp_5_g-5_1464b25oqvabt-stroke" data-item-order="-420466" transform="translate(560 248)"><path d="M58 52c0 23.196 18.804 42 42 42s42-18.804 42-42-18.804-42-42-42-42 18.804-42 42" id="cp_5_g-5_1464b25oqvabt-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#fff" stroke-width="2"/><path d="M10 51.892 37.845 65s-1.94-5.73-1.897-13.008C35.992 44.714 38 39 38 39z" stroke-miterlimit="4" stroke="#fff" stroke-width="2"/></g><g id="g-root-cp_4_g-4_1utnsvxoqvchv-stroke" data-item-order="-420460" transform="translate(540 146)"><path d="M47 52c0 23.196 18.804 42 42 42s42-18.804 42-42-18.804-42-42-42-42 18.804-42 42" id="cp_4_g-4_1utnsvxoqvchv-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#fff" stroke-width="2"/><path d="M10 93.89 38 94s-4.55-4.81-8.443-12.089C25.663 74.633 24.089 68 24.089 68z" stroke-miterlimit="4" stroke="#fff" stroke-width="2"/></g><g id="g-root-cp_3_g-3_147d98doqvchx-stroke" data-item-order="-420454" transform="translate(245 146)"><path d="M10 52c0 23.196 18.804 42 42 42s42-18.804 42-42-18.804-42-42-42-42 18.804-42 42" id="cp_3_g-3_147d98doqvchx-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#fff" stroke-width="2"/><path d="M131 93.89 103 94s4.55-4.81 8.443-12.089C115.338 74.633 116.911 68 116.911 68z" stroke-miterlimit="4" stroke="#fff" stroke-width="2"/></g><g id="g-root-cp_2_g-2_i0w7p9oqvbpr-stroke" data-item-order="-420448" transform="translate(224 248)"><path d="M10 52c0 23.196 18.804 42 42 42s42-18.804 42-42-18.804-42-42-42-42 18.804-42 42" id="cp_2_g-2_i0w7p9oqvbpr-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#fff" stroke-width="2"/><path d="M142 51.892 114.155 65s1.94-5.73 1.897-13.008C116.008 44.714 114 39 114 39z" stroke-miterlimit="4" stroke="#fff" stroke-width="2"/></g><g id="g-root-cp_1_g-1_1lpwmiloqwqvd-stroke" data-item-order="-420442" transform="translate(245 350)"><path d="M10 52c0 23.196 18.804 42 42 42s42-18.804 42-42-18.804-42-42-42-42 18.804-42 42" id="cp_1_g-1_1lpwmiloqwqvd-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#fff" stroke-width="2"/><path d="M131 10.11 103 10s4.55 4.81 8.443 12.089C115.338 29.367 116.911 36 116.911 36z" stroke-miterlimit="4" stroke="#fff" stroke-width="2"/></g><g id="g-root-cp_end_g-end_13z933xoqwq2r-stroke" data-item-order="-420436" transform="translate(374 205)"><path d="M10 94c0 46.392 37.608 84 84 84s84-37.608 84-84-37.608-84-84-84-84 37.608-84 84" id="cp_end_g-end_13z933xoqwq2r-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#fff" stroke-width="2"/></g><g id="g-root-tx_3_1lwrugtoqwpah-stroke" data-item-order="0" transform="translate(275 170)"/><g id="g-root-tx_4_mcyvb1oqwruo-stroke" data-item-order="0" transform="translate(607 170)"/><g id="g-root-tx_rulesfor_1uoo071oqy4n5-stroke" data-item-order="0" transform="translate(698 146)"/><g id="g-root-tx_speciale_mcyvb1oqy58s-stroke" data-item-order="0" transform="translate(26 242)"/><g id="g-root-tx_complexr_1qapxbxoqy3nv-stroke" data-item-order="0" transform="translate(74 146)"/><g id="g-root-tx_understa_hu0zr1oqwrgl-stroke" data-item-order="0" transform="translate(386 254)"/><g id="g-root-tx_exponent_qpnzzxoqy420-stroke" data-item-order="0" transform="translate(698 86)"/><g id="g-root-tx_rootandr_qnskqloqy51q-stroke" data-item-order="0" transform="translate(734 242)"/><g id="g-root-tx_2_qunsotoqwq2q-stroke" data-item-order="0" transform="translate(254 272)"/><g id="g-root-tx_5_1luwf7hoqwqa7-stroke" data-item-order="0" transform="translate(638 272)"/><g id="g-root-tx_rulesfor_1ursdmloqy51p-stroke" data-item-order="0" transform="translate(26 302)"/><g id="g-root-tx_rulesfor_1umskxpoqy5mv-stroke" data-item-order="0" transform="translate(734 302)"/><g id="g-root-tx_advanced_qqwy65oqy682-stroke" data-item-order="0" transform="translate(86 86)"/><g id="g-root-tx_relation_1q5q4n1oqy491-stroke" data-item-order="0" transform="translate(698 458)"/><g id="g-root-tx_basicpow_zpobuloqy5ty-stroke" data-item-order="0" transform="translate(86 374)"/><g id="g-root-tx_6_142dgjhoqwqha-stroke" data-item-order="0" transform="translate(607 374)"/><g id="g-root-tx_logarith_vbq8zhoqwrgk-stroke" data-item-order="0" transform="translate(698 374)"/><g id="g-root-tx_fundamen_93ds71oqy5tz-stroke" data-item-order="0" transform="translate(74 434)"/><g id="g-root-tx_understa_1q7ljwdoqwp3g-stroke" data-item-order="0" transform="translate(272 38)"/><g id="g-root-tx_1_1qduarhoqwqob-stroke" data-item-order="0" transform="translate(275 372)"/></g></g></svg>`,
-
-
-          link:'/algebra/powers/exponent-rules',
-      
-        },
-      
-        obj3:{
-      
-          title:``,
-          content:``,
-          before:``,
-          after:``,
-      
-        },
-        obj4:{
-          title:``,
-          content:``,
-          before:``,
-          after:``,
-      
-        },
-    
-    
-        obj5:{
-      
-          title:``,
-          content:``,
-          before:``,
-          after:``,
-      
-        }
-      
-      }
-
-
-    return {
-      props:{
-
-        sectionsContent,
-        introContent
-        
-      }
-    }
+const faqQuestions = {
+  obj1: {
+    question: "What is a power in math?",
+    answer: "A power is an expression consisting of a base and an exponent, written a^n. The base is the number being multiplied, and the exponent controls how many times. For positive integer exponents, a^n means a multiplied by itself n times.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "Why does anything to the zero power equal one?",
+    answer: "The definition a^0 = 1 is forced by the quotient rule. Since a^m divided by a^m equals a^(m-m) = a^0, and any nonzero number divided by itself is 1, a^0 must equal 1. The pattern of dividing successive powers by the base also confirms this result.",
+    sectionId: "4"
+  },
+  obj3: {
+    question: "What does a negative exponent mean?",
+    answer: "A negative exponent produces the reciprocal of the positive power. The expression a^(-n) equals 1/a^n. This extends the descending pattern: each reduction of the exponent by one divides the result by the base.",
+    sectionId: "5"
+  },
+  obj4: {
+    question: "How do rational exponents connect to roots?",
+    answer: "A rational exponent m/n means take the nth root and raise to the mth power. The expression a^(m/n) equals the nth root of a^m, or equivalently the nth root of a raised to the m. This bridges exponent notation and radical notation.",
+    sectionId: "6"
+  },
+  obj5: {
+    question: "What are the main laws of exponents?",
+    answer: "The main laws are the product rule a^m times a^n equals a^(m+n), the quotient rule a^m divided by a^n equals a^(m-n), and the power-of-a-power rule (a^m)^n equals a^(mn). These hold for all exponent types: natural, zero, negative, rational, and irrational.",
+    sectionId: "8"
   }
+}
 
-export default function PowersPage({sectionsContent,introContent}) {
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Powers and Exponents",
+    "description": "Learn powers and exponents: natural, zero, negative, rational, and irrational exponents. Master exponent laws, exponential equations, inequalities, and functions.",
+    "url": "https://www.learnmathclass.com/algebra/powers",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Powers and Exponents"
+    },
+    "teaches": [
+      "Power notation: base, exponent, and conventions",
+      "Natural, zero, negative, rational, and irrational exponents",
+      "Laws of exponents and domain restrictions",
+      "Rational exponents and their connection to roots",
+      "Exponential equations and inequalities",
+      "Exponential functions, growth, and decay"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-    const powersSections=[
-        {
-            id:'definition',
-            title:sectionsContent.definition.title,
-            link:'',
-            content:[
-                sectionsContent.definition.content,
-                sectionsContent.definition.svg,
-                sectionsContent.definition.after,
-            ],
-        },
-        {
-            id:'rules',
-            title:sectionsContent.rules.title,
-            link:sectionsContent.rules.link,
-            content:[
-                sectionsContent.rules.content,
-                sectionsContent.rules.svg
-            ]
-        },
-        // {
-        //     id:'',
-        //     title:'',
-        //     link:'',
-        //     content:''
-        // }
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Algebra",
+        "item": "https://www.learnmathclass.com/algebra"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Powers and Exponents",
+        "item": "https://www.learnmathclass.com/algebra/powers"
+      }
     ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+   return {
+  props: {
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Powers & Exponents: Rules and Types | Learn Math Class",
+      description: "Learn powers and exponents: natural, zero, negative, rational, and irrational exponents. Master exponent laws, exponential equations, inequalities, and functions.",
+      keywords: keyWords.join(", "),
+      url: "/algebra/powers",
+      name: "Powers and Exponents"
+    },
+  }
+}
+   }
+
+
+ export default function PowersAndExponentsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {  
+    
+  const genericSections=[
+    {
+        id:'1',
+        title:sectionsContent.obj1.title,
+        link:sectionsContent.obj1.link,
+        content:[
+          sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'2',
+        title:sectionsContent.obj2.title,
+        link:sectionsContent.obj2.link,
+        content:[
+          sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'3',
+        title:sectionsContent.obj3.title,
+        link:sectionsContent.obj3.link,
+        content:[
+          sectionsContent.obj3.content,
+        ]
+    },
+    {
+        id:'4',
+        title:sectionsContent.obj4.title,
+        link:sectionsContent.obj4.link,
+        content:[
+          sectionsContent.obj4.content,
+        ]
+    },
+    {
+        id:'5',
+        title:sectionsContent.obj5.title,
+        link:sectionsContent.obj5.link,
+        content:[
+          sectionsContent.obj5.content,
+        ]
+    },
+    {
+        id:'6',
+        title:sectionsContent.obj6.title,
+        link:sectionsContent.obj6.link,
+        content:[
+          sectionsContent.obj6.content,
+        ]
+    },
+    {
+        id:'7',
+        title:sectionsContent.obj7.title,
+        link:sectionsContent.obj7.link,
+        content:[
+          sectionsContent.obj7.content,
+        ]
+    },
+    {
+        id:'8',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
+        ]
+    },
+    {
+        id:'9',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
+        ]
+    },
+    {
+        id:'10',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
+        ]
+    },
+    {
+        id:'11',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
+        ]
+    },
+    // {
+    //     id:'12',
+    //     title:sectionsContent.obj12.title,
+    //     link:sectionsContent.obj12.link,
+    //     content:[
+    //       sectionsContent.obj12.content,
+    //     ]
+    // },
+    // {
+    //     id:'13',
+    //     title:sectionsContent.obj13.title,
+    //     link:sectionsContent.obj13.link,
+    //     content:[
+    //       sectionsContent.obj13.content,
+    //     ]
+    // },
+    // {
+    //     id:'14',
+    //     title:sectionsContent.obj14.title,
+    //     link:sectionsContent.obj14.link,
+    //     content:[
+    //       sectionsContent.obj14.content,
+    //     ]
+    // },
+    // {
+    //     id:'15',
+    //     title:sectionsContent.obj15.title,
+    //     link:sectionsContent.obj15.link,
+    //     content:[
+    //       sectionsContent.obj15.content,
+    //     ]
+    // },
+    // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
+    // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
+    // {
+    //     id:'1',
+    //     title:sectionsContent.obj1.title,
+    //     link:sectionsContent.obj1.link,
+    //     content:[
+    //       sectionsContent.obj1.content,
+    //     ]
+    // },
+    
+]
+
   return (
-    <>
-      {/* <GenericNavbar/> */}
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <OperaSidebar 
-             side='right'
-             topOffset='55px' 
-             sidebarWidth='45px'
-             panelWidth='200px'
-             iconColor='white'
-             panelBackgroundColor='#f2f2f2'
-           />
-      <Breadcrumb/>
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'10px'}}>Powers</h1>
-      <br/>
-      <SectionTableOfContents sections={powersSections}
-       showSecondaryNav={true}
-       secondaryNavMode="children"
-       secondaryNavTitle="Similar Pages"/>
-      <br/>
-      <br/>
-      <IntroSection 
-            id={introContent.id}
-            title={introContent.title}
-            content={introContent.content}
-            backgroundColor="#f2f2f2"
-            textColor="#06357a"
-          />
-      <br/>
-      <br/>
-      <Sections sections={powersSections}/>
-      <br/>
-      <br/>
-      <br/>
-       {/* <ScrollUpButton/> */} 
-    </>
-  );
+   <>
+<Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
+    }}
+  />
+</Head>
+   {/* <GenericNavbar/> */}
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+    <OperaSidebar 
+           side='right'
+           // topOffset='65px' 
+           sidebarWidth='45px'
+           panelWidth='200px'
+           iconColor='white'
+           panelBackgroundColor='#f2f2f2'
+         /> 
+   <Breadcrumb/>
+   <br/>
+   <br/>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Powers</h1>
+   <br/>
+   <br/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
+   
+   />
+   <br/>
+   <br/>
+   <br/>
+    <IntroSection 
+          id={introContent.id}
+          title={introContent.title}
+          content={introContent.content}
+           backgroundColor='#f9fafb'
+          //  "#f2f2f2"
+          textColor="#06357a"
+        />
+   <br/>
+   <br/>
+   <Sections sections={genericSections}/>
+   <br/>
+   <br/>
+   <br/>
+   {/* <ScrollUpButton/> */}
+   </>
+  )
 }
