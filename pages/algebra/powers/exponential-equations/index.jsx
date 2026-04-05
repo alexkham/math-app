@@ -757,20 +757,6 @@ const schemas = {
 }
 
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Exponential Equations Page | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/powers/exponential-equations",
-//          name: "name"
-//       },
-        
-//        }
-//     }
 
 return {
   props:{

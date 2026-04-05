@@ -595,23 +595,6 @@ const schemas = {
 
 
 
-
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Rational Exponents Page | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/roots/rational-exponents",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-
 return {
   props: {
     sectionsContent,

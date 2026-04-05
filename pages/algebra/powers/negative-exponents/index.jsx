@@ -446,20 +446,6 @@ const schemas = {
   }
 }
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Negative Exponents Page | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/powers/negative-exponents",
-//          name: "name"
-//       },
-        
-//        }
-//     }
 
 return {
   props: {

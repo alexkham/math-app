@@ -552,21 +552,6 @@ const schemas = {
 }
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Roots of a Polynomial | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/algebra/polynomials/roots",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
-
 
   return {
   props:{

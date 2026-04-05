@@ -521,20 +521,6 @@ const schemas = {
 }
 
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Logarithmic Inequalities | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/logarithms/inequalities",
-//          name: "name"
-//       },
-        
-//        }
-//     }
 
 return {
   props: {

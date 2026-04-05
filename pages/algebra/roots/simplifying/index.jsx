@@ -571,21 +571,6 @@ const schemas = {
 
 
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Simplifying Roots Page | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/roots/simplifying",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-
 return {
   props: {
     sectionsContent,

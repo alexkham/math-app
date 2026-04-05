@@ -458,22 +458,6 @@ const schemas = {
 
 
 
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Properties of Logarithms | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/logarithms/properties",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-
 return {
   props: {
     sectionsContent,

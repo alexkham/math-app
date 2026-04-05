@@ -561,20 +561,6 @@ const schemas = {
   }
 }
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Logarithmic Equations | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/logarithms/equations",
-//          name: "name"
-//       },
-        
-//        }
-//     }
 
 return {
   props: {

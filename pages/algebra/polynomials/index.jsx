@@ -728,20 +728,6 @@ const schemas = {
 }
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Polynomials | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/algebra/polynomials",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
 
   return {
   props:{

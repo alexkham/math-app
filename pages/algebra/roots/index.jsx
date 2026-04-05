@@ -427,7 +427,8 @@ const schemas = {
       description: "Learn roots and radicals: square roots, cube roots, principal roots, radical notation, rational exponents, simplification rules, radical equations, and functions.",
       keywords: keyWords.join(", "),
       url: "/algebra/roots",
-      name: "Roots and Radicals"
+      name: "Roots and Radicals",
+    
     },
   }
 }

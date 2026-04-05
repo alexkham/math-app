@@ -555,20 +555,6 @@ const schemas = {
 }
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Factoring Polynomials | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/algebra/polynomials/factoring",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
 
   return {
   props:{

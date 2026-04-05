@@ -520,20 +520,7 @@ const schemas = {
   }
 }
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Logarithmic Graphs | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/logarithms/graphs",
-//          name: "name"
-//       },
-        
-//        }
-//     }
+
 
 return {
   props: {

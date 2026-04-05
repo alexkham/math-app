@@ -431,21 +431,6 @@ const schemas = {
 }
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Exponent Rules Page | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/algebra/powers/exponent-rules",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
-
 
   return {
   props: {

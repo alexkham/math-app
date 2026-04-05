@@ -558,23 +558,6 @@ const schemas = {
 }
 
 
-
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Zero Powers Page | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/powers/zero-powers",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-
 return {
   props:{
     sectionsContent,

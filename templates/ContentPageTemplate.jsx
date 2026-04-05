@@ -3,8 +3,7 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages/pages.css'
+import '../pages.css'
 import Head from 'next/head'
 
 
@@ -205,7 +204,7 @@ export async function getStaticProps(){
         description: "Metadescription",
         keywords: keyWords.join(", "),
         url: "/url",
-         name: "Algebra Visual Tools"
+         name: "name"
       },
         
        }
@@ -425,7 +424,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Page Title</h1>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Page Title</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

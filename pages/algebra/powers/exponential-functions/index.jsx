@@ -442,23 +442,6 @@ const schemas = {
 
 
 
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Exponential Functions | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/powers/exponential-functions",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-
-
 return {
   props:{
     sectionsContent,

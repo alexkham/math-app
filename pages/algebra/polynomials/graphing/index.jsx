@@ -532,21 +532,6 @@ const schemas = {
 }
 
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Graphing Polynomials | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/polynomials/graphing",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-
 return {
   props:{
     sectionsContent,

@@ -443,22 +443,6 @@ const schemas = {
 
 
 
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Irrational Exponents Page | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/powers/irrational-exponents",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-
 return {
   props: {
     sectionsContent,

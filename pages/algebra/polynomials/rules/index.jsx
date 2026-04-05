@@ -563,20 +563,6 @@ const schemas = {
 }
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Polynomial Rules | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/algebra/polynomials/rules",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
 
   return {
   props:{

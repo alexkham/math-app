@@ -460,20 +460,6 @@ const schemas = {
   }
 }
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Common Natural Logarithms Page | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/logarithms/common-natural",
-//          name: "name"
-//       },
-        
-//        }
-//     }
 
 return {
   props: {

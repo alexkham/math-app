@@ -568,23 +568,6 @@ const schemas = {
 }
 
 
-
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Operations on Roots Page | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/roots/operations",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-
 return {
   props: {
     sectionsContent,

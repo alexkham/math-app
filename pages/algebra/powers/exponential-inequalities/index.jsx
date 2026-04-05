@@ -421,21 +421,6 @@ const schemas = {
 }
 
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Exponential Inequalities | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/powers/exponential-inequalities",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-
 return {
   props:{
     sectionsContent,

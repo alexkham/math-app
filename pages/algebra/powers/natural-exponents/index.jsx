@@ -483,21 +483,6 @@ const schemas = {
 }
 
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Natural Exponents | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/powers/natural-exponents",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-
 return {
   props:{
     sectionsContent,

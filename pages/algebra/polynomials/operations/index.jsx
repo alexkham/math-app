@@ -477,20 +477,7 @@ const schemas = {
 }
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Operations on Polynomials | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/algebra/polynomials/operations",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
+ 
   return {
   props:{
     sectionsContent,

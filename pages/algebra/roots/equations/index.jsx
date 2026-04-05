@@ -639,20 +639,6 @@ const schemas = {
 }
 
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Radical Equations Page | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/roots/equations",
-//          name: "name"
-//       },
-        
-//        }
-//     }
 
 return {
   props: {
@@ -665,7 +651,8 @@ return {
       description: "Learn to solve radical equations: isolate radicals, square both sides, handle extraneous solutions, solve equations with multiple radicals, and verify all answers.",
       keywords: keyWords.join(", "),
       url: "/algebra/roots/equations",
-      name: "Radical Equations"
+      name: "Radical Equations",
+      
     },
   }
 }

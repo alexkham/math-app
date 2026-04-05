@@ -630,24 +630,6 @@ const schemas = {
 
 
 
-
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Radical Functions Page | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/algebra/roots/functions",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-
-
 return {
   props: {
     sectionsContent,
