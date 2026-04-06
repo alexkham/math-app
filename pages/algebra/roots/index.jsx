@@ -182,7 +182,7 @@ These rules work when the indices match and when the radicands satisfy certain c
 The complete set of rules, with their restrictions and derivations, appears in [radical rules](!/algebra/roots/radical-rules). Mastering these rules is essential for [operations with radicals](!/algebra/roots/operations).`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/roots/rules',
   },
 
   obj6: {
@@ -226,7 +226,7 @@ Equations with multiple radicals may require the process repeated. Cube roots an
 Full techniques for solving, including equations with multiple radicals and methods for identifying extraneous solutions, appear in [radical equations](!/algebra/roots/equations).`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/roots/equations',
   },
 
   obj8: {
@@ -248,7 +248,7 @@ Radical functions are inverses of power functions. The square root undoes squari
 Full treatment of graphs, domains, transformations, and inverses appears in [radical functions](!/algebra/roots/functions).`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/roots/functions',
   },
 
   obj9: {

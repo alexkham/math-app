@@ -134,7 +134,7 @@ The natural logarithm uses base $e \\approx 2.71828$ and is written $\\ln(x)$. T
 Both notations are shorthand. The statement $\\log(100) = 2$ means $\\log_{10}(100) = 2$. The statement $\\ln(e^3) = 3$ means $\\log_e(e^3) = 3$. Converting between bases uses a formula covered in [logarithm rules](!/algebra/logarithms/rules).`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Common and Natural Logs](!/algebra/logarithms/common-natural) →@`,
-  link: '',
+  link: '/algebra/logarithms/common-natural',
 },
    obj6: {
   title: `Properties of Logarithms`,
@@ -147,7 +147,7 @@ Monotonicity depends on the base. When $a > 1$, the function is strictly increas
 The one-to-one property follows from monotonicity: if $\\log_a(x) = \\log_a(y)$, then $x = y$. No two distinct inputs can produce the same output. This property justifies a key technique in solving [equations](!/algebra/logarithms/equations) — when both sides of an equation are logarithms with the same base, the arguments must be equal.`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Properties of Logarithms](!/algebra/logarithms/properties) →@`,
-  link: '',
+  link: '/algebra/logarithms/properties',
 },
    obj7: {
   title: `Logarithm Rules`,
@@ -160,7 +160,7 @@ The quotient rule: $\\log_a(x/y) = \\log_a(x) - \\log_a(y)$. Division becomes su
 These rules allow expanding complex logarithms into simpler pieces and condensing sums of logarithms into single expressions. Both skills appear constantly when solving [equations](!/algebra/logarithms/equations). The change of base formula converts logarithms from one base to another, enabling calculator computation for any base.`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Logarithm Rules](!/algebra/logarithms/rules) →@`,
-  link: '',
+  link: '/algebra/logarithms/rules',
 },
    obj8: {
   title: `Logarithmic Equations`,
@@ -173,7 +173,7 @@ More complex equations require the [rules](!/algebra/logarithms/rules) to combin
 Logarithms also solve exponential equations when matching bases fails. An equation like $3^x = 7$ has no integer solution, but taking logarithms of both sides and applying the power rule yields $x = \\log(7)/\\log(3)$.`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Logarithmic Equations](!/algebra/logarithms/equations) →@`,
-  link: '',
+  link: '/algebra/logarithms/equations',
 },
   obj9: {
   title: `Logarithmic Inequalities`,
@@ -186,7 +186,7 @@ When the base satisfies $0 < a < 1$, the logarithm is decreasing. Larger argumen
 Domain restrictions apply throughout. Every argument must remain positive, and this constraint intersects with the algebraic solution. The [properties](!/algebra/logarithms/properties) page covers monotonicity in detail; the [graphs](!/algebra/logarithms/graphs) page shows why direction reversal occurs visually.`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Logarithmic Inequalities](!/algebra/logarithms/inequalities) →@`,
-  link: '',
+  link: '/algebra/logarithms/inequalities',
 },
    obj10: {
   title: `Graphing Logarithmic Functions`,
@@ -199,7 +199,7 @@ The base controls the overall direction. For $a > 1$, the graph rises from left 
 Transformations shift, stretch, and reflect the basic shape. Horizontal shifts move the asymptote. Vertical shifts raise or lower the curve. Reflections flip across axes. Writing equations from transformed graphs requires identifying the new asymptote location and key points.`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Graphing Logarithmic Functions](!/algebra/logarithms/graphs) →@`,
-  link: '',
+  link: '/algebra/logarithms/graphs',
 },
     obj11:{
       title:``,

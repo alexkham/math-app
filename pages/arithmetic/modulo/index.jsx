@@ -220,7 +220,7 @@ The distinction matters in practice because different programming languages adop
 The full treatment — both conventions, their rationale, language-specific behavior, and conversion between them — is on the [negative numbers](!/arithmetic/modulo/negative-numbers) page.`,
   before: ``,
   after: ``,
-  link: '',
+  link: '/arithmetic/modulo/negative-numbers',
 },
 
 obj5: {

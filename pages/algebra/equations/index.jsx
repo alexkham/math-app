@@ -68,7 +68,101 @@ const keyWords = [
 
  
 const sectionsContent = {
-  obj1: {
+//   obj0: {
+//     title: `Key Terms`,
+//     content: `
+// ## Equations and Expressions
+
+// An **equation** is a statement that two expressions are equal, joined by the $=$ sign. An **expression** is a mathematical phrase combining numbers, variables, and operations — it has no equality sign and cannot be solved. A **variable** is a symbol (typically $x$, $y$, $z$) representing an unknown or changing quantity.
+
+// ## Solutions
+
+// A **solution** is a value of the variable that makes both sides of an equation equal. The **solution set** is the collection of all solutions. An **extraneous solution** is a value that emerges during solving but does not satisfy the original equation — it arises from non-reversible steps like squaring or clearing denominators.
+
+// ## Equation Classification
+
+// A **conditional equation** is true only for specific values of the variable. An **identity** is true for all permissible values. A **contradiction** is true for no value. Two equations are **equivalent equations** when they share the same solution set.
+
+// An **algebraic equation** is built from variables, constants, and the operations $+$, $-$, $\\times$, $\\div$, and integer powers. The **degree of an equation** is the highest power of the variable after simplification. The **standard form** of an equation is the conventional arrangement with all terms on one side, ordered by descending powers, equal to zero.
+
+// ## Supporting Concepts
+
+// A **coefficient** is the numerical factor multiplying a variable or power of a variable in a term. The **discriminant** of a quadratic equation $ax^2 + bx + c = 0$ is the quantity $\\Delta = b^2 - 4ac$, which determines the number and type of solutions. A **domain restriction** is a value excluded from consideration because it causes division by zero or other undefined operations. The **absolute value** of a number is its distance from zero on the number line, always non-negative.`,
+//     before: ``,
+//     after: `
+
+
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+//     link: '',
+//   },
+ 
+// obj0: {
+//     title: `Key Terms`,
+//     content: `
+// ## Equations and Expressions
+
+// An [equation](!/algebra/definitions#equation) is a statement that two expressions are equal, joined by the $=$ sign. An [expression](!/algebra/definitions#expression) is a mathematical phrase combining numbers, variables, and operations — it has no equality sign and cannot be solved. A [variable](!/algebra/definitions#variable) is a symbol (typically $x$, $y$, $z$) representing an unknown or changing quantity.
+
+// ## Solutions
+
+// A [solution](!/algebra/definitions#solution) is a value of the variable that makes both sides of an equation equal. The [solution set](!/algebra/definitions#solution_set) is the collection of all solutions. An [extraneous solution](!/algebra/definitions#extraneous_solution) is a value that emerges during solving but does not satisfy the original equation — it arises from non-reversible steps like squaring or clearing denominators.
+
+// ## Equation Classification
+
+// A [conditional equation](!/algebra/definitions#conditional_equation) is true only for specific values of the variable. An [identity](!/algebra/definitions#identity) is true for all permissible values. A [contradiction](!/algebra/definitions#contradiction) is true for no value. Two equations are [equivalent equations](!/algebra/definitions#equivalent_equations) when they share the same solution set.
+
+// An [algebraic equation](!/algebra/definitions#algebraic_equation) is built from variables, constants, and the operations $+$, $-$, $\\times$, $\\div$, and integer powers. The [degree of an equation](!/algebra/definitions#degree_of_an_equation) is the highest power of the variable after simplification. The [standard form](!/algebra/definitions#standard_form) of an equation is the conventional arrangement with all terms on one side, ordered by descending powers, equal to zero.
+
+// ## Supporting Concepts
+
+// A [coefficient](!/algebra/definitions#coefficient) is the numerical factor multiplying a variable or power of a variable in a term. The [discriminant](!/algebra/definitions#discriminant) of a quadratic equation $ax^2 + bx + c = 0$ is the quantity $\\Delta = b^2 - 4ac$, which determines the number and type of solutions. A [domain restriction](!/algebra/definitions#domain_restriction) is a value excluded from consideration because it causes division by zero or other undefined operations. The [absolute value](!/algebra/definitions#absolute_value) of a number is its distance from zero on the number line, always non-negative.`,
+//     before: ``,
+//     after: `
+
+
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+//     link: '',
+//   },
+
+obj0: {
+    title: `Key Terms`,
+    content: `
+## Equations and Expressions
+
+- [Equation](!/algebra/definitions#equation) — a statement that two expressions are equal, joined by the $=$ sign
+- [Expression](!/algebra/definitions#expression) — a mathematical phrase combining numbers, variables, and operations, with no equality sign
+- [Variable](!/algebra/definitions#variable) — a symbol (typically $x$, $y$, $z$) representing an unknown or changing quantity
+
+## Solutions
+
+- [Solution](!/algebra/definitions#solution) — a value of the variable that makes both sides of an equation equal
+- [Solution set](!/algebra/definitions#solution_set) — the collection of all solutions to an equation
+- [Extraneous solution](!/algebra/definitions#extraneous_solution) — a value that emerges during solving but does not satisfy the original equation
+
+## Equation Classification
+
+- [Conditional equation](!/algebra/definitions#conditional_equation) — true only for specific values of the variable
+- [Identity](!/algebra/definitions#identity) — true for all permissible values of the variable
+- [Contradiction](!/algebra/definitions#contradiction) — true for no value of the variable
+- [Equivalent equations](!/algebra/definitions#equivalent_equations) — equations that share the same solution set
+- [Algebraic equation](!/algebra/definitions#algebraic_equation) — built from variables, constants, and the operations $+$, $-$, $\\times$, $\\div$, and integer powers
+- [Degree of an equation](!/algebra/definitions#degree_of_an_equation) — the highest power of the variable after simplification
+- [Standard form](!/algebra/definitions#standard_form) — all terms on one side, ordered by descending powers, equal to zero
+
+## Supporting Concepts
+
+- [Coefficient](!/algebra/definitions#coefficient) — the numerical factor multiplying a variable or power of a variable
+- [Discriminant](!/algebra/definitions#discriminant) — the quantity $\\Delta = b^2 - 4ac$ in a quadratic equation, determining the number and type of solutions
+- [Domain restriction](!/algebra/definitions#domain_restriction) — a value excluded because it causes division by zero or undefined operations
+- [Absolute value](!/algebra/definitions#absolute_value) — the distance of a number from zero on the number line, always non-negative`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+    link: '',
+  },
+
+
+obj1: {
     title: `What an Equation Is`,
     content: `An equation consists of two expressions joined by an equality sign. The expression to the left of $=$ is the left-hand side, and the expression to the right is the right-hand side. Together they form a single assertion: whatever the left side evaluates to, the right side evaluates to the same thing.
 
@@ -139,7 +233,7 @@ Solving a linear equation requires nothing beyond the properties of equality: is
 The structure breaks only when the variable terms cancel entirely during simplification. If the remaining statement is true (like $0 = 0$), the original equation is an identity. If it is false (like $0 = 5$), the equation is a contradiction. These edge cases aside, first-degree equations are the most predictable objects in algebra.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/equations/linear',
   },
 
   obj7: {
@@ -153,7 +247,7 @@ $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$
 The formula accepts any coefficients and delivers the roots directly, making it the default tool when factoring is not immediate. Vieta's formulas offer a complementary perspective: the sum of the two roots equals $-\\frac{b}{a}$ and their product equals $\\frac{c}{a}$, connecting solutions back to the coefficients that generated them.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/equations/quadratic',
   },
 
   obj8: {
@@ -165,7 +259,7 @@ For cubics and quartics, closed-form solutions exist — Cardano's formula for d
 The practical strategy for polynomial equations of any degree begins with the [rational root theorem](!/algebra/polynomials/rules): test the finite list of candidate rational roots, and each confirmed root reduces the degree by one through polynomial division. Once the degree drops to two, the quadratic formula finishes the job. When no rational roots exist, numerical methods provide approximations to any desired accuracy.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/equations/polynomial',
   },
 
   obj9: {
@@ -177,7 +271,7 @@ The standard technique is to multiply both sides by the least common denominator
 The risk of extraneous solutions is not a minor technicality — it is the defining feature of rational equations. Every solution procedure must end with verification. A candidate that zeros out any denominator in the original equation is rejected, regardless of how cleanly it emerged from the algebra.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/equations/rational',
   },
 
   obj10: {
@@ -187,7 +281,7 @@ The risk of extraneous solutions is not a minor technicality — it is the defin
 This case-splitting approach extends to more complex configurations. The equation $|f(x)| = |g(x)|$ decomposes into $f(x) = g(x)$ and $f(x) = -g(x)$. Equations with multiple absolute value terms require identifying the critical points where each expression inside $|\\;|$ changes sign, then solving on each interval separately using the piecewise definition. The geometric reading — absolute value as distance on the number line — often provides a faster route to the answer than purely mechanical case analysis.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/equations/absolute-value',
   },
 
   obj11: {
@@ -382,6 +476,15 @@ const schemas = {
 export default function EquationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {   
     
   const genericSections=[
+    {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -592,7 +695,7 @@ export default function EquationsPage({seoData, sectionsContent, introContent, f
    <br/>
    <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
-         secondaryNavMode="siblings"  // or "children"
+         secondaryNavMode="children"  // or "children"
          secondaryNavTitle="More in this Section"
    
    />

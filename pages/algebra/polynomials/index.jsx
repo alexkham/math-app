@@ -453,7 +453,7 @@ $$(x + 2)(x - 3) = x^2 - 3x + 2x - 6 = x^2 - x - 6$$
 Division introduces more complexity. Unlike the other three operations, dividing one polynomial by another does not always yield a polynomial. When it does not divide evenly, the result includes a quotient and a remainder, much like integer division. Techniques such as long division and synthetic division handle this process systematically.`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Polynomial Operations](!/algebra/polynomials/operations) →@`,
-  link: '',
+  link: '/algebra/polynomials/operations',
 },
 
 
@@ -478,7 +478,7 @@ Several techniques exist. Extracting a greatest common factor applies to nearly 
 Not every polynomial factors neatly over the integers. The expression $x^2 + 1$ has no real factors. Determining when a polynomial is irreducible — when no further factoring is possible — is itself an important skill.`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Factoring Techniques](!/algebra/polynomials/factoring) →@`,
-  link: '',
+  link: '/algebra/polynomials/factoring',
 },
 
   // obj9: {
@@ -527,7 +527,7 @@ The x-intercepts of the graph are precisely the [roots](!/algebra/polynomials/ro
 Combining end behavior, intercepts, turning points, and a few evaluated points produces an accurate sketch without plotting every value.`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Graphing Polynomials](!/algebra/polynomials/graphing) →@`,
-  link: '',
+  link: '/algebra/polynomials/graphing',
 },
   // obj11: {
   //   title: ``,
@@ -551,7 +551,7 @@ The Rational Root Theorem narrows the search for roots when a polynomial has int
 Together, these theorems provide a strategy: use the Rational Root Theorem to generate candidates, the Remainder Theorem to test them efficiently, and the Factor Theorem to extract confirmed factors.`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Polynomial Theorems](!/algebra/polynomials/rules) →@`,
-  link: '',
+  link: '/algebra/polynomials/rules',
 },
   obj12: {
     title: ``,

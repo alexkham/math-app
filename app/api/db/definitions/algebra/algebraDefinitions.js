@@ -1,4 +1,192 @@
 const algebraTermsList = [
+
+  // NEW CATEGORY: "Equations"
+// 17 entries for algebraTermsList
+
+{
+  name: "Equation",
+  formula: "A statement asserting that two mathematical expressions have the same value, written with the $=$ sign between them.",
+  fields: {
+    "key distinction": `An equation makes a claim that can be tested — true, false, or conditionally true. An expression like $3x + 2$ makes no claim and cannot be solved. The presence of $=$ is what turns a mathematical phrase into a solvable condition.`,
+    "examples": `$2x + 1 = 9$ — conditional, true only when $x = 4$
+$3 + 4 = 7$ — unconditionally true
+$3 + 4 = 8$ — unconditionally false
+$x^2 - 5x + 6 = 0$ — conditional, true when $x = 2$ or $x = 3$`
+  },
+  category: "Equations"
+},
+{
+  name: "Expression",
+  formula: "A mathematical phrase built from numbers, variables, and operations that represents a quantity but makes no assertion about equality.",
+  fields: {
+    "key distinction": `Expressions are evaluated or simplified. Equations are solved. The expression $2x + 1$ can be factored, expanded, or evaluated at specific values of $x$, but asking "what is $x$?" makes no sense without an equation. Placing $2x + 1 = 9$ creates the condition that gives $x$ a definite value.`,
+    "examples": `$3x + 7$ — polynomial expression
+$\\frac{x+1}{x-2}$ — rational expression
+$\\sqrt{x^2 + 4}$ — radical expression
+$2x + 1$ — this is NOT an equation`
+  },
+  category: "Equations"
+},
+{
+  name: "Variable",
+  formula: "A symbol, typically a letter, that represents an unknown quantity or a quantity that can change.",
+  fields: {
+    "usage": `In equations, variables stand for unknowns: the goal is to find which values make the equation true. In expressions and functions, variables represent inputs that can take a range of values. Convention reserves $x$, $y$, $z$ for unknowns, $a$, $b$, $c$ for constants, and $n$, $k$, $i$ for integers.`,
+    "examples": `In $2x + 1 = 9$: the variable is $x$
+In $ax^2 + bx + c = 0$: the variable is $x$; the letters $a$, $b$, $c$ are parameters
+In $f(x) = x^2$: $x$ is the input variable`
+  },
+  category: "Equations"
+},
+{
+  name: "Solution",
+  formula: "A value of the variable that makes both sides of an equation equal when substituted.",
+  fields: {
+    "verification": `A candidate is confirmed as a solution by direct substitution. For $2x + 1 = 9$, substituting $x = 4$ gives $2(4) + 1 = 9$, which is true. Substituting $x = 3$ gives $2(3) + 1 = 7 \\neq 9$, so $x = 3$ is not a solution.`,
+    "terminology": `Also called a root of the equation. The terms are interchangeable for polynomial equations. An equation may have one solution, finitely many, infinitely many, or none at all.`
+  },
+  category: "Equations"
+},
+{
+  name: "Solution Set",
+  formula: "The collection of all values that satisfy an equation, written in set notation.",
+  fields: {
+    "notation": `Curly braces list elements: $\\{-2, 2\\}$ for $x^2 = 4$. Set-builder notation describes conditions: $\\{x \\in \\mathbb{R} : 2x + 1 = 9\\} = \\{4\\}$. The empty set $\\emptyset$ indicates no solutions exist.`,
+    "examples": `$x^2 = 4 \\Rightarrow \\{-2, 2\\}$
+$2x + 1 = 9 \\Rightarrow \\{4\\}$
+$x^2 = -1$ over $\\mathbb{R} \\Rightarrow \\emptyset$
+$2(x+1) = 2x + 2 \\Rightarrow \\mathbb{R}$ (all real numbers)`
+  },
+  category: "Equations"
+},
+{
+  name: "Extraneous Solution",
+  formula: "A value that satisfies a transformed equation but not the original, introduced by non-reversible algebraic steps.",
+  fields: {
+    "causes": `Squaring both sides: $x = 3$ becomes $x^2 = 9$, admitting the false solution $x = -3$. Clearing denominators: multiplying by an expression that equals zero at certain values. These operations expand the solution set because they cannot be undone uniquely.`,
+    "prevention": `Every candidate obtained through squaring, clearing denominators, or raising to an even power must be substituted back into the original equation. Any value that fails verification or violates a domain restriction is extraneous and rejected.`
+  },
+  category: "Equations"
+},
+{
+  name: "Conditional Equation",
+  formula: "An equation that is true for specific values of the variable and false for all others.",
+  fields: {
+    "properties": `Most equations encountered in algebra are conditional. Solving means finding the finite set of values where the equation holds. The number of solutions depends on the equation's degree and type.`,
+    "examples": `$5x - 3 = 12$ — true only when $x = 3$
+$x^2 - 5x + 6 = 0$ — true when $x = 2$ or $x = 3$
+$\\sin(x) = 0$ — true when $x = n\\pi$ for any integer $n$`
+  },
+  category: "Equations"
+},
+{
+  name: "Identity",
+  formula: "An equation that holds true for every permissible value of the variable.",
+  fields: {
+    "key distinction": `Identities are not solved — they are verified. They express structural equivalences between expressions rather than constraints on unknowns. Expanding, factoring, or applying known rules confirms them.`,
+    "examples": `$2(x + 1) = 2x + 2$ — distributive property
+$(a + b)^2 = a^2 + 2ab + b^2$ — algebraic identity
+$\\sin^2(x) + \\cos^2(x) = 1$ — trigonometric identity`
+  },
+  category: "Equations"
+},
+{
+  name: "Contradiction",
+  formula: "An equation that is false for every value of the variable — its solution set is empty.",
+  fields: {
+    "recognition": `A contradiction reveals itself during simplification: the variable terms cancel, leaving a false numerical statement. This means no value of the variable can rescue the equation.`,
+    "examples": `$x + 1 = x + 3$ simplifies to $1 = 3$ — false
+$2(x - 1) = 2x + 5$ simplifies to $-2 = 5$ — false
+Solution set: $\\emptyset$`
+  },
+  category: "Equations"
+},
+{
+  name: "Equivalent Equations",
+  formula: "Two or more equations that share exactly the same solution set.",
+  fields: {
+    "safe operations": `Adding or subtracting the same quantity on both sides. Multiplying or dividing both sides by a nonzero constant. These reversible operations always preserve equivalence.`,
+    "risky operations": `Multiplying by an expression containing the variable, squaring both sides, or clearing denominators. These may enlarge the solution set, producing extraneous solutions that require verification.`
+  },
+  category: "Equations"
+},
+{
+  name: "Algebraic Equation",
+  formula: "An equation built entirely from variables, constants, and the operations of addition, subtraction, multiplication, division, and integer exponentiation.",
+  fields: {
+    "scope": `Algebraic equations exclude transcendental functions: no $\\sin$, $\\cos$, $\\ln$, $e^x$. Equations involving those functions are classified separately as trigonometric, logarithmic, or exponential equations.`,
+    "classification by degree": `Degree 1: linear · Degree 2: quadratic · Degree 3: cubic · Degree 4: quartic · Degree 5: quintic. The degree determines the maximum number of solutions and which solving methods apply.`
+  },
+  category: "Equations"
+},
+{
+  name: "Degree of an Equation",
+  formula: "The highest power of the variable that appears after the equation is cleared of fractions and fully simplified.",
+  fields: {
+    "significance": `Degree determines the maximum number of solutions and dictates which solving techniques are available. Linear (degree 1) always has one solution. Quadratic (degree 2) has at most two. A polynomial of degree $n$ has at most $n$ roots in $\\mathbb{C}$.`,
+    "examples": `$3x + 2 = 0$ — degree 1 (linear)
+$x^2 - 4x + 3 = 0$ — degree 2 (quadratic)
+$x^3 - 1 = 0$ — degree 3 (cubic)
+$\\frac{x^2 + 1}{x - 1} = 0$ — degree 2 after clearing`
+  },
+  category: "Equations"
+},
+{
+  name: "Standard Form",
+  formula: "The conventional way to write an equation with all terms collected on one side, arranged by descending powers of the variable, equal to zero.",
+  fields: {
+    "by equation type": `Linear: $ax + b = 0$
+Quadratic: $ax^2 + bx + c = 0$
+General polynomial: $a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$`,
+    "purpose": `Standard form reveals the degree immediately, makes coefficients readable, and is the required input format for formulas like the quadratic formula $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$.`
+  },
+  category: "Equations"
+},
+{
+  name: "Coefficient",
+  formula: "The numerical factor that multiplies a variable or a power of a variable in a term of an expression or equation.",
+  fields: {
+    "types": `Leading coefficient: the coefficient of the highest-degree term. Free coefficient (constant term): the term with no variable attached. In $3x^2 - 7x + 2$, the leading coefficient is $3$, the coefficient of $x$ is $-7$, and the free coefficient is $2$.`,
+    "examples": `In $5x^3$: coefficient is $5$
+In $-x^2$: coefficient is $-1$
+In $\\frac{2}{3}x$: coefficient is $\\frac{2}{3}$`
+  },
+  category: "Equations"
+},
+{
+  name: "Discriminant",
+  formula: "For the quadratic equation $ax^2 + bx + c = 0$, the discriminant is $\\Delta = b^2 - 4ac$.",
+  fields: {
+    "what it determines": `$\\Delta > 0$: two distinct real solutions
+$\\Delta = 0$: one repeated real solution
+$\\Delta < 0$: no real solutions (two complex conjugate solutions)`,
+    "examples": `$x^2 - 5x + 6 = 0$: $\\Delta = 25 - 24 = 1 > 0$ — two real roots
+$x^2 - 6x + 9 = 0$: $\\Delta = 36 - 36 = 0$ — one repeated root
+$x^2 + x + 1 = 0$: $\\Delta = 1 - 4 = -3 < 0$ — no real roots`
+  },
+  category: "Equations"
+},
+{
+  name: "Domain Restriction",
+  formula: "A value of the variable that must be excluded from consideration because it makes an expression undefined.",
+  fields: {
+    "common causes": `Division by zero: $\\frac{1}{x-3}$ excludes $x = 3$. Even roots of negatives: $\\sqrt{x}$ requires $x \\geq 0$. Logarithms of non-positives: $\\ln(x)$ requires $x > 0$.`,
+    "role in equations": `In rational equations, domain restrictions must be identified before solving. Any candidate solution that coincides with a restriction is extraneous and must be rejected, even if the algebra produces it cleanly.`
+  },
+  category: "Equations"
+},
+{
+  name: "Absolute Value",
+  formula: "The distance of a number from zero on the number line: $|x| = x$ if $x \\geq 0$, and $|x| = -x$ if $x < 0$.",
+  fields: {
+    "properties": `Always non-negative: $|x| \\geq 0$ for all $x$
+$|x| = 0$ only when $x = 0$
+$|ab| = |a| \\cdot |b|$
+$|a + b| \\leq |a| + |b|$ (triangle inequality)`,
+    "in equations": `$|f(x)| = k$ splits into $f(x) = k$ and $f(x) = -k$ when $k > 0$. When $k = 0$, solve $f(x) = 0$. When $k < 0$, no solution exists.`
+  },
+  category: "Equations"
+},
   {
     name: "Square Root",
     formula: "For a number n, its square root is x where x² = n. Denoted as $\\sqrt{n}$ or $n^{1/2}$",

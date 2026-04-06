@@ -197,7 +197,7 @@ Each rule exploits the structure of base-$10$ place value. The last digit determ
 These shortcuts are covered in full — with rules for $2, 3, 4, 5, 6, 8, 9, 10$, and $11$ — on the [divisibility rules](!/arithmetic/divisibility/rules) page.`,
   before: ``,
   after: ``,
-  link: '',
+  link: '/arithmetic/divisibility/rules',
 },
     // obj6:{
     //   title:``,
@@ -254,7 +254,7 @@ Factors come in pairs. If $a$ is a factor of $n$, then $\\frac{n}{a}$ is also a 
 The full treatment, including counting formulas and systematic methods, appears on the [factors and multiples](!/arithmetic/divisibility/factors) page.`,
   before: ``,
   after: ``,
-  link: '',
+  link: '/arithmetic/divisibility/factors',
 },
 
 obj7: {

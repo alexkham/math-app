@@ -117,7 +117,7 @@ This is where the laws of exponents — the product rule, quotient rule, power-o
 The [natural exponents](!/algebra/powers/natural-exponents) page develops this case fully: the derivation of each law, worked examples, and the transition toward broader exponent types.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/powers/natural-exponents',
   },
 
   obj4: {
@@ -131,7 +131,7 @@ A pattern argument reinforces this: $3^3 = 27$, $3^2 = 9$, $3^1 = 3$. Each step 
 The case $0^0$ is genuinely ambiguous. Different conventions assign it the value 1 in combinatorics and leave it undefined in analysis. The [zero powers](!/algebra/powers/zero-powers) page addresses this case and the reasoning behind each convention.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/powers/zero-powers',
   },
 
   obj5: {
@@ -147,7 +147,7 @@ The base cannot be zero — $0^{-n}$ would require dividing by $0^n = 0$, which 
 Negative exponents rewrite fractions without denominators: $1/a^3 = a^{-3}$. This notational flexibility is essential when applying the laws of exponents. The [negative exponents](!/algebra/powers/negative-exponents) page covers the full treatment.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/powers/negative-exponents',
   },
 
   obj6: {
@@ -163,7 +163,7 @@ For even denominators, the base must be non-negative in real numbers — $(-4)^{
 Rational exponents provide a single framework for roots and powers. The [rational exponents](!/algebra/powers/rational-exponents) page develops the notation, the domain restrictions, and the connection to radical form.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/powers/rational-exponents',
   },
 
   obj7: {
@@ -179,7 +179,7 @@ This construction requires the base to be positive. For $a > 0$, the function $a
 The [irrational exponents](!/algebra/powers/irrational-exponents) page formalizes this limiting process and the domain restriction $a > 0$.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/powers/irrational-exponents',
   },
 
   obj8: {
@@ -193,7 +193,7 @@ Domain restrictions tighten as the exponent type broadens. Natural exponents all
 The [exponent rules](!/algebra/powers/exponent-rules) page collects every law with derivations, examples, and the full domain conditions.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/powers/exponent-rules',
   },
 
   obj9: {
@@ -207,7 +207,7 @@ When bases cannot be matched, [logarithms](!/algebra/logarithms) provide the too
 The [exponential equations](!/algebra/powers/exponential-equations) page covers both techniques: base matching for exact solutions and logarithmic methods for the general case.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/powers/exponential-equations',
   },
 
   obj10: {
@@ -221,7 +221,7 @@ When $0 < a < 1$, the function is decreasing: larger exponents produce smaller v
 The [exponential inequalities](!/algebra/powers/exponential-inequalities) page develops the solving techniques and the role the base plays in determining direction.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/powers/exponential-inequalities',
   },
 
   obj11: {
@@ -235,7 +235,7 @@ Exponential functions are the counterpart of [polynomial functions](!/algebra/po
 The [exponential functions](!/algebra/powers/exponential-functions) page covers graphs, transformations, growth and decay models, and the role of $e$.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/powers/exponential-functions',
   },
 
 }

@@ -198,7 +198,7 @@ The solving procedure is identical to that of a [linear equation](!/algebra/equa
 Compound linear inequalities — chains like $-1 < 2x + 3 \\leq 9$ or disjunctions like $x < -5$ or $x > 2$ — are handled by solving each part and combining the results through intersection (AND) or union (OR). The boundary point in every case is the solution of the corresponding linear equation.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/inequalities/linear',
   },
 
   obj10: {
@@ -210,7 +210,7 @@ The discriminant $\\Delta = b^2 - 4ac$ determines the structure before any inter
 The parabola $y = ax^2 + bx + c$ provides a geometric shortcut. The inequality $ax^2 + bx + c > 0$ asks where the parabola lies above the $x$-axis, and $ax^2 + bx + c < 0$ asks where it lies below. The opening direction (upward if $a > 0$, downward if $a < 0$) together with the root locations makes the answer visible.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/inequalities/quadratic',
   },
 
   obj11: {
@@ -222,7 +222,7 @@ The real roots of the polynomial are found first, partitioning the number line i
 Root multiplicity plays a decisive role. At a root of odd multiplicity the polynomial changes sign, so the boundary separates a positive interval from a negative one. At a root of even multiplicity the polynomial keeps its sign, merely touching zero without crossing — the boundary is a tangent point rather than a crossing. This distinction determines the shape of the solution set near each root.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/inequalities/polynomial',
   },
 
   obj12: {
@@ -234,7 +234,7 @@ The critical points include both the zeros of the numerator (where the expressio
 A common and dangerous shortcut is cross-multiplying to clear the denominator. Because the denominator changes sign across the number line, the direction of the inequality would need to flip in some intervals but not others — making a single multiplication invalid. The sign chart avoids this entirely by analyzing the factored form directly, never multiplying through.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/inequalities/rational',
   },
 
   obj13: {
@@ -248,7 +248,7 @@ The "greater than" form $|f(x)| > k$ says that $f(x)$ lies more than $k$ units f
 The geometric reading — absolute value as distance on the number line — provides immediate intuition. The inequality $|x - a| < d$ describes all points within distance $d$ of $a$, forming the interval $(a - d, a + d)$. The inequality $|x - a| > d$ describes all points farther than $d$ from $a$, forming two rays.`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/inequalities/absolute-value',
   },
 
   obj14: {
