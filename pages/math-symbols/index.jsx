@@ -86,7 +86,7 @@ export default function MathSymbolsPage({ symbolsData, meta,menuItems }) {
       <div style={{display:'flex',flexDirection:'row',alignItems: 'flex-start' }}>
       <VerticalButtonGroup 
       items={menuItems}
-      width="200px"       
+      width="180px"       
     //   backgroundColor ='#0070f3'
     //   color = 'white'
       isSticky={true}
@@ -97,7 +97,7 @@ export default function MathSymbolsPage({ symbolsData, meta,menuItems }) {
         className="title"
         style={{
           margin: 'auto',
-          width: '80%',
+          width: '90%',
         
         }}
       >
