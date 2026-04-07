@@ -823,7 +823,7 @@ export async function getStaticProps() {
 const introBarData = {
   description: 'Notation reference with LaTeX codes for trigonometric functions, identities, and related formulas. Use our',
   links: [
-    { label: 'math keyboard', href: '/keyboard' }
+    { label: 'Mathematical Keyboard', href: '/keyboard' }
   ],
   sections: [
     { label: 'Notation confusions', anchor: 'notation-confusions' },

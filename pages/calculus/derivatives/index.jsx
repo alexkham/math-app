@@ -157,6 +157,7 @@ Find more info about mathematical symbols in calculus along with Latex code on t
 `,
       before:``,
       after:``,
+      link:'/tables/math-symbols/calculus'
   
     },
     rules:{
