@@ -554,7 +554,7 @@ export async function getStaticProps() {
   
   const menuItems = [
 
-   { title:"Other tables",
+   { title:"Similar tables",
    items:[ {
       title: "Linear Algebra",
       // icon: <Home />,

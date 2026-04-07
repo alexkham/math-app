@@ -549,53 +549,86 @@ export default function MathSymbolsCalculusPage({ symbolsData, meta, menuItems, 
 export async function getStaticProps() {
 
 
-  const menuItems = [
-    {
-      title: "Linear Algebra",
-      // icon: <Home />,
-      link: "/math-symbols/linear-algebra"
-    },
-    {
-        title: "Mathematical Logic",
-        // icon: <Home />,
-        link: "/math-symbols/math-logic"
-      },
-      // {
-      //   title: "Calculus",
-      //   // icon: <Home />,
-      //   link: "/math-symbols/calculus"
-      // },
-      {
-        title: "Trigonometry",
-        // icon: <Home />,
-        link: "/math-symbols/trigonometry"
-      },
-      {
-        title: "Set Theory",
-        // icon: <Home />,
-        link: "/math-symbols/set-theory"
-      },
+  // const menuItems = [
+  //   {
+  //     title: "Linear Algebra",
+  //     // icon: <Home />,
+  //     link: "/math-symbols/linear-algebra"
+  //   },
+  //   {
+  //       title: "Mathematical Logic",
+  //       // icon: <Home />,
+  //       link: "/math-symbols/math-logic"
+  //     },
+  //     // {
+  //     //   title: "Calculus",
+  //     //   // icon: <Home />,
+  //     //   link: "/math-symbols/calculus"
+  //     // },
+  //     {
+  //       title: "Trigonometry",
+  //       // icon: <Home />,
+  //       link: "/math-symbols/trigonometry"
+  //     },
+  //     {
+  //       title: "Set Theory",
+  //       // icon: <Home />,
+  //       link: "/math-symbols/set-theory"
+  //     },
 
-      {
-        title: "Combinatorics",
-        // icon: <Home />,
-        link: "/math-symbols/combinatorics"
-      },
-      {
-        title: "Probability",
-        // icon: <Home />,
-        link: "/math-symbols/probability"
-      },
-       {
-          title: "Complex Numbers",
-          link: "/math-symbols/complex-numbers"  // Example without icon
-        },
-    // {
-    //   title: "Settings",
-    //   link: "/settings"  // Example without icon
-    // }
-  ];
+  //     {
+  //       title: "Combinatorics",
+  //       // icon: <Home />,
+  //       link: "/math-symbols/combinatorics"
+  //     },
+  //     {
+  //       title: "Probability",
+  //       // icon: <Home />,
+  //       link: "/math-symbols/probability"
+  //     },
+  //      {
+  //         title: "Complex Numbers",
+  //         link: "/math-symbols/complex-numbers"  // Example without icon
+  //       },
+  //   // {
+  //   //   title: "Settings",
+  //   //   link: "/settings"  // Example without icon
+  //   // }
+  // ];
   
+
+const menuItems = [
+  {
+    title: "Similar tables",
+    items: [
+      { title: "Linear Algebra", link: "/math-symbols/linear-algebra" },
+      { title: "Mathematical Logic", link: "/math-symbols/math-logic" },
+      { title: "Trigonometry", link: "/math-symbols/trigonometry" },
+      { title: "Set Theory", link: "/math-symbols/set-theory" },
+      { title: "Combinatorics", link: "/math-symbols/combinatorics" },
+      { title: "Probability", link: "/math-symbols/probability" },
+      { title: "Complex Numbers", link: "/math-symbols/complex-numbers" },
+    ]
+  },
+  {
+    title: "Relevant tools",
+    items: [
+      { title: "Mathematical Keyboard", link: "/keyboard" },
+    ]
+  },
+  {
+    title: "Relevant pages",
+    items: [
+      { title: "Calculus", link: "/calculus" },
+      { title: "Derivatives", link: "/calculus/derivatives" },
+      { title: "Integrals", link: "/calculus/integrals" },
+      { title: "Limits", link: "/calculus/limits" },
+      { title: "Calculus Formulas", link: "/calculus/formulas" },
+      { title: "Calculus Definitions", link: "/calculus/definitions" },
+    ]
+  }
+];
+
 
   const keyWords = [
     'calculus symbols',
