@@ -57,6 +57,7 @@ function Footer({ themeName = 'darkGray' }) {
   return (
     <footer style={{
       background: theme.background,
+      
       color: theme.textColor,
       padding: '50px 40px 30px',
       boxShadow: theme.boxShadow || 'none',

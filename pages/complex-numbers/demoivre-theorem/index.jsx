@@ -71,15 +71,7 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
+   
 
     obj1: {
   title: `Introduction to De Moivre's Theorem`,
@@ -94,14 +86,6 @@ De Moivre's theorem stands among the most useful results in complex analysis. It
   after: ``,
   link: '',
 },
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
   
 
     obj2: {
@@ -131,15 +115,7 @@ Negative exponents invert the modulus and negate the angle multiplier, maintaini
 },
 
 
-    // obj3:{
-  
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj3: {
   title: `Proof of De Moivre's Theorem`,
@@ -172,14 +148,7 @@ The formula $z^n = r^n\\text{cis}(n\\theta)$ thus holds for all integers $n$, po
 },
 
 
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+    
 
     obj4: {
   title: `Applying De Moivre's Theorem to Powers`,
@@ -209,15 +178,7 @@ $$(\\sqrt{3} - i)^6 = 2^6\\text{cis}(-180°) = 64\\text{cis}(-180°) = 64(-1) = 
   link: '',
 },
 
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+   
     obj5: {
   title: `Introduction to $n$-th Roots`,
   before: ``,
@@ -234,14 +195,7 @@ Different values of $k$ yield different angles $\\alpha$. As $k$ runs from $0$ t
   link: '',
 },
 
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
 
     obj6: {
   title: `The Formula for $n$-th Roots`,
@@ -271,14 +225,7 @@ Three roots: $2$, $-1 + \\sqrt{3}i$, and $-1 - \\sqrt{3}i$. Each cubes to $8$.`,
   link: '',
 },
 
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
 
     obj7: {
   title: `Geometric Interpretation of Roots`,
@@ -297,14 +244,7 @@ The [conjugate](!/complex-numbers/complex-conjugate) relationship appears when t
   after: ``,
   link: '',
 },
-    // obj8:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
 
     obj8: {
   title: `Roots of Unity`,
@@ -325,15 +265,7 @@ The primitive $n$-th root of unity, denoted $\\omega = \\text{cis}\\left(\\frac{
   after: ``,
   link: '',
 },
-    // obj9:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
-
     obj9: {
   title: `Properties of Roots of Unity`,
   before: ``,
@@ -357,14 +289,7 @@ These symmetries constrain the algebraic behavior of expressions involving roots
   after: ``,
   link: '',
 },
-    // obj10:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
 
     obj10: {
   title: `Worked Examples`,

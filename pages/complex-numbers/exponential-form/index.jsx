@@ -71,15 +71,7 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-  
-    // },
 
     obj1: {
   title: `Euler's Formula`,
@@ -98,15 +90,7 @@ The significance extends beyond elegance. Euler's formula transforms complex ari
   after: ``,
   link: '',
 },
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-  
+   
 
     obj2: {
   title: `Understanding Euler's Formula`,
@@ -135,15 +119,7 @@ Geometrically, as $\\theta$ increases from $0$, the point $e^{i\\theta}$ traces 
   after: ``,
   link: '',
 },
-    // obj3:{
-  
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+ 
 
     obj3: {
   title: `Euler's Identity`,
@@ -167,14 +143,7 @@ Beyond aesthetics, the identity encodes practical information. It confirms that 
   link: '',
 },
 
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj4: {
   title: `The Exponential Form of a Complex Number`,
@@ -197,15 +166,7 @@ Every nonzero complex number has an exponential form. The number $3 + 4i$ has mo
   after: ``,
   link: '',
 },
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+   
     obj5: {
   title: `Converting Between Forms`,
   before: ``,
@@ -237,14 +198,7 @@ Both conversions are routine once the formulas are memorized. The exponential fo
   after: ``,
   link: '',
 },
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
 
     obj6: {
   title: `Multiplication in Exponential Form`,
@@ -270,14 +224,7 @@ Compare this to multiplying the equivalent algebraic forms and simplifying — t
   after: ``,
   link: '',
 },
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj7: {
   title: `Division in Exponential Form`,
@@ -303,14 +250,7 @@ In [algebraic form](!/complex-numbers/algebraic-form), this division would requi
   after: ``,
   link: '',
 },
-    // obj8:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
 
     obj8: {
   title: `Powers in Exponential Form`,
@@ -337,14 +277,7 @@ The computation required no binomial expansion, no tracking of $i$ powers, no co
   after: ``,
   link: '',
 },
-    // obj9:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
 
     obj9: {
   title: `Roots in Exponential Form`,

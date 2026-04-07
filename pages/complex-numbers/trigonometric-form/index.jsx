@@ -71,16 +71,7 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-  
-    // },
-
     obj1: {
   title: `Why a New Representation?`,
   content: `Computing $(1 + i)^{10}$ in algebraic form requires expanding a binomial to the tenth power — dozens of terms, careful bookkeeping, and ample opportunity for error. The trigonometric form reduces this calculation to a few seconds of mental arithmetic.
@@ -98,14 +89,7 @@ This shift from rectangular to polar thinking unlocks powerful computational sho
   after: ``,
   link: '',
 },
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
   
 
     obj2: {
@@ -132,15 +116,7 @@ The modulus represents the "size" of a complex number without regard to its dire
   after: ``,
   link: '',
 },
-    // obj3:{
-  
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj3: {
   title: `Argument (Angle)`,

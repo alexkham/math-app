@@ -7,6 +7,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
 import '../../../pages/pages.css'
+import DefinitionGlossary from '../../../app/components/examples/DefinitionsGlossary'
 
 export async function getStaticProps() {
   const { default: algebraTermsList } = await import('@/app/api/db/definitions/algebra/algebraDefinitions')
@@ -144,11 +145,27 @@ export default function AlgebraDefinitionsPage({
         <CategoriesList data={algebraTermsList} 
         baseUrl='/algebra/definitions'
         categoryExplanations={definitionsCategoryExplanations}/>
-        <FormulaAccordionWrapper
+        {/* <FormulaAccordionWrapper
           groupByField={'category'}
           data={algebraTermsList}
           type='Definition'
-        />
+        /> */}
+        <br />
+       
+
+<DefinitionGlossary
+  data={algebraTermsList}
+  groupByField="category"
+  type="Definition"
+/>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <br />
         <br />
         <br />
