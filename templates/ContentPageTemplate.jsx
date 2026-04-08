@@ -3,8 +3,9 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import '../pages.css'
 import Head from 'next/head'
+import '@/pages/pages.css'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
@@ -54,6 +55,15 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
+    obj0:{
+      title:`Key Terms`,
+      content:``,
+      before:``,
+      after:``,
+      link:'',
+  
+  
+    },
     obj1:{
       title:``,
       content:``,
@@ -215,6 +225,14 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
     
   const genericSections=[
+    {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -445,8 +463,15 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

@@ -3,8 +3,9 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import '../../../pages/pages.css'
 import Head from 'next/head'
+import '@/pages/pages.css'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
@@ -66,6 +67,46 @@ const keyWords = [
 //                   }} />
 
  const sectionsContent = {
+  // ============================================================
+// obj0 Key Terms — /algebra/roots (hub)
+// ============================================================
+ 
+obj0: {
+  title: `Key Terms`,
+  content: `
+## Core Vocabulary
+ 
+- [Root](!/algebra/definitions#root) — the inverse of exponentiation: the value that, raised to a given power, produces the radicand
+- [Radical](!/algebra/definitions#radical) — the symbol $\\sqrt[n]{\\phantom{x}}$ used to denote a root operation
+- [Index](!/algebra/definitions#index) — the positive integer $n$ specifying which root is taken; even and odd indices behave differently
+- [Radicand](!/algebra/definitions#radicand) — the expression placed under the radical sign
+ 
+## Root Types
+ 
+- [Square Root](!/algebra/definitions#square_root) — the second root, written $\\sqrt{a}$, returning the non-negative value whose square is $a$
+- [Cube Root](!/algebra/definitions#cube_root) — the third root, written $\\sqrt[3]{a}$, defined for all real numbers
+- [Principal Root](!/algebra/definitions#principal_root) — the unique non-negative root returned by the radical symbol when the index is even
+ 
+## Notation and Rules
+ 
+- [Rational Exponent](!/algebra/definitions#rational_exponent) — fractional power notation where $a^{m/n} = \\sqrt[n]{a^m}$
+- [Product Rule (Radicals)](!/algebra/definitions#product_rule_(radicals)) — $\\sqrt[n]{ab} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$
+- [Quotient Rule (Radicals)](!/algebra/definitions#quotient_rule_(radicals)) — $\\sqrt[n]{a/b} = \\sqrt[n]{a} / \\sqrt[n]{b}$
+ 
+## Working with Radicals
+ 
+- [Simplest Form](!/algebra/definitions#simplest_form) — no perfect powers under the radical, no fractions under it, no radicals in denominators
+- [Like Radicals](!/algebra/definitions#like_radicals) — radicals sharing the same index and radicand, required for addition and subtraction
+- [Rationalization](!/algebra/definitions#rationalization) — rewriting an expression so no radical appears in the denominator
+- [Radical Equation](!/algebra/definitions#radical_equation) — an equation where the variable appears under a radical sign
+- [Extraneous Solution](!/algebra/definitions#extraneous_solution) — a value introduced by a non-reversible step that does not satisfy the original equation
+- [Radical Function](!/algebra/definitions#radical_function) — a function of the form $f(x) = \\sqrt[n]{g(x)}$`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
+ 
 
   obj1: {
     title: `What is a Root`,
@@ -439,6 +480,14 @@ export default function RootsAndRadicalsPage({seoData, sectionsContent, introCon
     
   const genericSections=[
     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
+    {
         id:'1',
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
@@ -664,8 +713,15 @@ export default function RootsAndRadicalsPage({seoData, sectionsContent, introCon
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

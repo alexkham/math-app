@@ -6,6 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
@@ -202,6 +203,25 @@ const keyWords = [
 
 
 const sectionsContent = {
+  obj0: {
+  title: `Key Terms`,
+  content: `
+## Function Concepts
+ 
+- [Radical Function](!/algebra/definitions#radical_function) — a function of the form $f(x) = \\sqrt[n]{g(x)}$, where the radicand contains a variable
+- [Square Root](!/algebra/definitions#square_root) — the parent function $f(x) = \\sqrt{x}$ with domain $[0, \\infty)$
+- [Cube Root](!/algebra/definitions#cube_root) — the parent function $f(x) = \\sqrt[3]{x}$ with domain $(-\\infty, \\infty)$
+ 
+## Determining Behavior
+ 
+- [Index](!/algebra/definitions#index) — even index restricts domain to non-negative radicands; odd index allows all reals
+- [Principal Root](!/algebra/definitions#principal_root) — ensures the radical produces one output per input, making it a function
+- [Rational Exponent](!/algebra/definitions#rational_exponent) — connects radical functions to power functions as inverses`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
 
   obj1: {
     title: `The Square Root Function`,
@@ -651,6 +671,14 @@ return {
 export default function FunctionsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -800,50 +828,6 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, f
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
 <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
@@ -922,8 +906,15 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, f
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+        id="0"
+        title={sectionsContent.obj0.title}
+        content={sectionsContent.obj0.content}
+        after={sectionsContent.obj0.after}
+        variant="light"
+      />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

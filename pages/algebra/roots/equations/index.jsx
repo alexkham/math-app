@@ -6,6 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
@@ -203,6 +204,19 @@ const keyWords = [
 
 
 const sectionsContent = {
+  obj0: {
+  title: `Key Terms`,
+  content: `
+## Equation Concepts
+ 
+- [Radical Equation](!/algebra/definitions#radical_equation) — an equation in which the variable appears under a radical sign
+- [Extraneous Solution](!/algebra/definitions#extraneous_solution) — a value that satisfies the transformed equation but not the original, introduced by squaring or other non-reversible steps
+- [Principal Root](!/algebra/definitions#principal_root) — the radical always returns a non-negative value for even indices, which is why negative outputs signal extraneous solutions`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
 
   obj1: {
     title: `What is a Radical Equation`,
@@ -658,12 +672,18 @@ return {
 }
    }
 
-// export default function RootEquationsPage({seoData,sectionsContent , introContent}) {
-
 
 export default function RootEquationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -813,51 +833,7 @@ export default function RootEquationsPage({seoData, sectionsContent, introConten
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
-
+ 
 <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
@@ -935,8 +911,15 @@ export default function RootEquationsPage({seoData, sectionsContent, introConten
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+        id="0"
+        title={sectionsContent.obj0.title}
+        content={sectionsContent.obj0.content}
+        after={sectionsContent.obj0.after}
+        variant="light"
+      />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>
