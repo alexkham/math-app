@@ -1,5 +1,152 @@
 const algebraTermsList = [
 
+{
+  name: "Discriminant",
+  formula: "For the quadratic equation $ax^2 + bx + c = 0$, the discriminant is $\\Delta = b^2 - 4ac$.",
+  link: { label: "Quadratic Equations", url: "/algebra/equations/quadratic" },
+  fields: {
+    "what it determines": {
+      text: `$\\Delta > 0$: two distinct real solutions
+$\\Delta = 0$: one repeated real solution
+$\\Delta < 0$: no real solutions (two complex conjugate solutions)`,
+      illustrations: [
+        {
+          src: `<svg viewBox="0 0 660 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+  <rect width="660" height="180" fill="#f8fafc" rx="4"/>
+  <g transform="translate(10,10)">
+    <text x="100" y="16" text-anchor="middle" font-size="13" font-weight="600" fill="#2563eb">Δ &gt; 0</text>
+    <path d="M10 160 Q55 10 100 80 Q145 150 190 30" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+    <line x1="10" y1="110" x2="190" y2="110" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+    <circle cx="48" cy="110" r="5" fill="#e24b4a"/><circle cx="158" cy="110" r="5" fill="#e24b4a"/>
+    <text x="48" y="132" text-anchor="middle" font-size="11" fill="#e24b4a">x₁</text>
+    <text x="158" y="132" text-anchor="middle" font-size="11" fill="#e24b4a">x₂</text>
+  </g>
+  <g transform="translate(230,10)">
+    <text x="100" y="16" text-anchor="middle" font-size="13" font-weight="600" fill="#639922">Δ = 0</text>
+    <path d="M10 160 Q55 10 100 80 Q145 150 190 30" fill="none" stroke="#639922" stroke-width="2.5"/>
+    <line x1="10" y1="80" x2="190" y2="80" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+    <circle cx="100" cy="80" r="5" fill="#e24b4a"/>
+    <text x="100" y="102" text-anchor="middle" font-size="11" fill="#e24b4a">x₀</text>
+  </g>
+  <g transform="translate(450,10)">
+    <text x="100" y="16" text-anchor="middle" font-size="13" font-weight="600" fill="#d85a30">Δ &lt; 0</text>
+    <path d="M10 140 Q55 30 100 80 Q145 130 190 20" fill="none" stroke="#d85a30" stroke-width="2.5"/>
+    <line x1="10" y1="10" x2="190" y2="10" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+    <text x="100" y="165" text-anchor="middle" font-size="11" fill="#94a3b8">no real roots</text>
+  </g>
+</svg>`,
+          alt: "Three cases of the discriminant",
+          caption: "How Δ determines the number of real roots"
+        }
+      ],
+      links: [
+        { label: "Khan Academy — Discriminant", url: "https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratic-formula-a1/v/discriminant-for-types-of-solutions-for-a-quadratic" },
+        { label: "Wikipedia — Discriminant", url: "https://en.wikipedia.org/wiki/Discriminant" },
+        { label: "home", url: "/"}
+      ]
+    },
+    "examples": `$x^2 - 5x + 6 = 0$: $\\Delta = 25 - 24 = 1 > 0$ — two real roots
+$x^2 - 6x + 9 = 0$: $\\Delta = 36 - 36 = 0$ — one repeated root
+$x^2 + x + 1 = 0$: $\\Delta = 1 - 4 = -3 < 0$ — no real roots`
+  },
+  category: "Mock"
+},
+//   {
+//     name: "Square of Sum",
+//     formula: "$(a + b)^2 = a^2 + 2ab + b^2$",
+//     fields: {
+//       "visual proof": {
+//         text: `The area of a square with side $(a+b)$ can be split into four regions, proving the identity geometrically.`,
+//         illustrations: [
+//           {
+//             src: `<svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+//   <rect width="320" height="320" fill="#f8fafc" rx="4"/>
+//   <g transform="translate(40,40)">
+//     <rect x="0" y="0" width="240" height="240" fill="none" stroke="#334155" stroke-width="2"/>
+//     <rect x="0" y="0" width="150" height="150" fill="#2563eb" fill-opacity="0.12" stroke="#2563eb" stroke-width="1.5"/>
+//     <text x="75" y="82" text-anchor="middle" font-size="20" font-weight="600" fill="#2563eb">a²</text>
+//     <rect x="150" y="0" width="90" height="150" fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="1.5"/>
+//     <text x="195" y="82" text-anchor="middle" font-size="16" font-weight="600" fill="#16a34a">ab</text>
+//     <rect x="0" y="150" width="150" height="90" fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="1.5"/>
+//     <text x="75" y="202" text-anchor="middle" font-size="16" font-weight="600" fill="#16a34a">ab</text>
+//     <rect x="150" y="150" width="90" height="90" fill="#d85a30" fill-opacity="0.12" stroke="#d85a30" stroke-width="1.5"/>
+//     <text x="195" y="202" text-anchor="middle" font-size="20" font-weight="600" fill="#d85a30">b²</text>
+//     <text x="75" y="-10" text-anchor="middle" font-size="14" fill="#334155">a</text>
+//     <text x="195" y="-10" text-anchor="middle" font-size="14" fill="#334155">b</text>
+//     <text x="-14" y="82" text-anchor="middle" font-size="14" fill="#334155">a</text>
+//     <text x="-14" y="202" text-anchor="middle" font-size="14" fill="#334155">b</text>
+//   </g>
+// </svg>`,
+//             alt: "Geometric proof of square of sum",
+//             caption: "Area breakdown: a² + ab + ab + b² = a² + 2ab + b²"
+//           }
+//         ],
+//         links: [
+//           { label: "Visual proof on Math is Fun", url: "https://www.mathsisfun.com/algebra/special-binomial-products.html" }
+//         ]
+//       },
+//       "examples": `$(3 + 2)^2 = 9 + 12 + 4 = 25$
+// $(x + 5)^2 = x^2 + 10x + 25$
+// $(2a + 3b)^2 = 4a^2 + 12ab + 9b^2$`
+//     },
+//     category: "Mock"
+//   },
+//   {
+//     name: "Logarithmic Scale",
+//     formula: "Scale where values are spaced by powers of base $b$: positions proportional to $\\log_b(x)$ rather than $x$.",
+//     fields: {
+//       "how it works": [
+//         {
+//           text: `On a logarithmic scale, equal distances represent equal ratios rather than equal differences. Moving one unit always means multiplying by the same factor.`,
+//           illustrations: [
+//             {
+//               src: `<svg viewBox="0 0 600 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+//   <rect width="600" height="120" fill="#f8fafc" rx="4"/>
+//   <text x="300" y="20" text-anchor="middle" font-size="13" font-weight="600" fill="#334155">Linear vs Logarithmic Scale</text>
+//   <g transform="translate(50,40)">
+//     <line x1="0" y1="0" x2="500" y2="0" stroke="#94a3b8" stroke-width="1.5"/>
+//     <line x1="0" y1="-6" x2="0" y2="6" stroke="#334155" stroke-width="1.5"/>
+//     <line x1="50" y1="-6" x2="50" y2="6" stroke="#334155" stroke-width="1.5"/>
+//     <line x1="100" y1="-6" x2="100" y2="6" stroke="#334155" stroke-width="1.5"/>
+//     <line x1="500" y1="-6" x2="500" y2="6" stroke="#334155" stroke-width="1.5"/>
+//     <text x="0" y="-12" text-anchor="middle" font-size="11" fill="#334155">0</text>
+//     <text x="50" y="-12" text-anchor="middle" font-size="11" fill="#334155">100</text>
+//     <text x="100" y="-12" text-anchor="middle" font-size="11" fill="#334155">200</text>
+//     <text x="500" y="-12" text-anchor="middle" font-size="11" fill="#334155">1000</text>
+//     <text x="-30" y="4" text-anchor="middle" font-size="10" fill="#2563eb" font-weight="600">LIN</text>
+//   </g>
+//   <g transform="translate(50,85)">
+//     <line x1="0" y1="0" x2="500" y2="0" stroke="#94a3b8" stroke-width="1.5"/>
+//     <line x1="0" y1="-6" x2="0" y2="6" stroke="#334155" stroke-width="1.5"/>
+//     <line x1="166" y1="-6" x2="166" y2="6" stroke="#334155" stroke-width="1.5"/>
+//     <line x1="332" y1="-6" x2="332" y2="6" stroke="#334155" stroke-width="1.5"/>
+//     <line x1="500" y1="-6" x2="500" y2="6" stroke="#334155" stroke-width="1.5"/>
+//     <text x="0" y="-12" text-anchor="middle" font-size="11" fill="#334155">1</text>
+//     <text x="166" y="-12" text-anchor="middle" font-size="11" fill="#334155">10</text>
+//     <text x="332" y="-12" text-anchor="middle" font-size="11" fill="#334155">100</text>
+//     <text x="500" y="-12" text-anchor="middle" font-size="11" fill="#334155">1000</text>
+//     <text x="-30" y="4" text-anchor="middle" font-size="10" fill="#d85a30" font-weight="600">LOG</text>
+//   </g>
+// </svg>`,
+//               alt: "Linear vs logarithmic scale comparison",
+//               caption: "Equal spacing on log scale = equal ratios (×10)"
+//             }
+//           ]
+//         },
+//         `Common logarithmic scales include: pH scale, Richter scale, decibels, and musical octaves.`
+//       ],
+//       "applications": {
+//         text: `Used extensively in scientific measurement, data visualization, and signal processing. Logarithmic scales compress wide-ranging data into manageable visual space.`,
+//         links: [
+//           { label: "Wikipedia — Log scale", url: "https://en.wikipedia.org/wiki/Logarithmic_scale" },
+//           { label: "Desmos — Log graphing", url: "https://www.desmos.com/calculator" },
+//           { label: "Better Explained — Intuition", url: "https://betterexplained.com/articles/using-logs-in-the-real-world/" }
+//         ]
+//       }
+//     },
+//     category: "Mock"
+//   },
+
   // NEW CATEGORY: "Equations"
 // 17 entries for algebraTermsList
 
@@ -187,374 +334,762 @@ $|a + b| \\leq |a| + |b|$ (triangle inequality)`,
   },
   category: "Equations"
 },
-  {
-    name: "Square Root",
-    formula: "For a number n, its square root is x where x² = n. Denoted as $\\sqrt{n}$ or $n^{1/2}$",
-    fields: {
-      "properties": `
-      - Two values: positive and negative
-   - Real only if n ≥ 0
-   - (√n)² = n for n ≥ 0
-   - √(a·b) = √a·√b
-   - √(a/b) = √a/√b for b > 0`,
-      "examples": `Common square roots:
-   √4 = ±2
-   √9 = ±3
-   √2 ≈ 1.4142 (irrational)
-   √0 = 0
-   √(-1) = i (imaginary)`
+
+
+
+
+// Roots Category — 19 Definition Entries for algebraTermsList
+
+{
+  name: "Root",
+  formula: "The $n$th root of $b$ is a value $a$ such that $a^n = b$, written $\\sqrt[n]{b} = a$.",
+  link: { label: "Roots", url: "/algebra/roots" },
+  fields: {
+    "intuition": {
+      text: `A root reverses exponentiation. If raising $a$ to the $n$th power produces $b$, then the $n$th root of $b$ recovers $a$. The radical symbol $\\sqrt[n]{\\phantom{x}}$ denotes this operation: the small number $n$ is the index, and the expression underneath is the radicand.`,
+      illustrations: [
+        {
+          src: `
+<svg width="100%" viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg">
+<title>Powers and roots as inverse operations</title>
+<desc>Three examples in ascending order then a generic case: 2 squared is 4, 2 cubed is 8, 3 squared is 9, then a to the n equals b.</desc>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<!-- Row 1: 2² = 4 -->
+<rect x="100" y="30" width="80" height="50" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="140" y="55" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="500" fill="#085041">2</text>
+<rect x="340" y="30" width="80" height="50" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="380" y="55" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="500" fill="#712B13">4</text>
+<line x1="182" y1="46" x2="338" y2="46" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text x="260" y="38" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">2² = 4</text>
+<line x1="338" y1="68" x2="182" y2="68" stroke="#993C1D" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text x="260" y="90" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">√4 = 2</text>
+
+<!-- Row 2: 2³ = 8 -->
+<rect x="100" y="120" width="80" height="50" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="140" y="145" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="500" fill="#085041">2</text>
+<rect x="340" y="120" width="80" height="50" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="380" y="145" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="500" fill="#712B13">8</text>
+<line x1="182" y1="136" x2="338" y2="136" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text x="260" y="128" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">2³ = 8</text>
+<line x1="338" y1="158" x2="182" y2="158" stroke="#993C1D" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text x="260" y="180" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">∛8 = 2</text>
+
+<!-- Row 3: 3² = 9 -->
+<rect x="100" y="210" width="80" height="50" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="140" y="235" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="500" fill="#085041">3</text>
+<rect x="340" y="210" width="80" height="50" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="380" y="235" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="500" fill="#712B13">9</text>
+<line x1="182" y1="226" x2="338" y2="226" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text x="260" y="218" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">3² = 9</text>
+<line x1="338" y1="248" x2="182" y2="248" stroke="#993C1D" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text x="260" y="270" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">√9 = 3</text>
+
+<!-- Dots -->
+<circle cx="260" cy="298" r="2" fill="#888780"/>
+<circle cx="260" cy="312" r="2" fill="#888780"/>
+<circle cx="260" cy="326" r="2" fill="#888780"/>
+
+<!-- Row 4: Generic -->
+<rect x="100" y="350" width="80" height="50" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="140" y="375" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="500" fill="#3C3489">a</text>
+<rect x="340" y="350" width="80" height="50" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="380" y="375" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="500" fill="#3C3489">b</text>
+<line x1="182" y1="366" x2="338" y2="366" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text x="260" y="358" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">aⁿ = b</text>
+<line x1="338" y1="388" x2="182" y2="388" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text x="260" y="410" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">ⁿ√b = a</text>
+
+<!-- Legend -->
+<line x1="484" y1="55" x2="496" y2="55" stroke="#0F6E56" stroke-width="1.5" fill="none"/>
+<text x="500" y="59" text-anchor="start" font-family="sans-serif" font-size="12" fill="#5F5E5A">power →</text>
+<line x1="484" y1="75" x2="496" y2="75" stroke="#993C1D" stroke-width="1.5" fill="none"/>
+<text x="500" y="79" text-anchor="start" font-family="sans-serif" font-size="12" fill="#5F5E5A">← root</text>
+
+</svg>
+          `,
+          alt: "Powers and roots as inverse operations",
+          caption: "Roots undo powers"
+        }
+      ],
+      links: [
+        { label: "What is a Root", url: "/algebra/roots#1" },
+        { label: "Connection to Powers", url: "/algebra/roots#10" }
+      ]
     },
-    category: "Roots"
-   },
-   {
-    name: "Cube Root",
-    formula: "For a number n, its cube root is x where x³ = n. Denoted as $\\sqrt[3]{n}$ or $n^{1/3}$",
-    fields: {
-      "properties": `
-      - Only one real value
-  - Exists for all real numbers
-  - (∛n)³ = n
-  - ∛(a·b) = ∛a·∛b
-  - ∛(a³) = a`,
-      "examples": `Common cube roots:
-  ∛8 = 2
-  ∛27 = 3
-  ∛(-8) = -2
-  ∛1 = 1
-  ∛0 = 0`
-    },
-    category: "Roots"
+    "examples": `$\\sqrt{25} = 5$ because $5^2 = 25$
+
+$\\sqrt[3]{8} = 2$ because $2^3 = 8$
+
+$\\sqrt[4]{81} = 3$ because $3^4 = 81$
+
+$\\sqrt[5]{32} = 2$ because $2^5 = 32$`,
+    "related concepts": `
+- [Radical](!/algebra/definitions#radical)
+- [Index](!/algebra/definitions#index)
+- [Radicand](!/algebra/definitions#radicand)
+- [Square Root](!/algebra/definitions#square_root)
+- [Cube Root](!/algebra/definitions#cube_root)
+- [Principal Root](!/algebra/definitions#principal_root)
+- [Rational Exponent](!/algebra/definitions#rational_exponent)`
   },
-  {
-    name: "Radical Symbol",
-    formula: "√ for square root, $\\sqrt[n]{x}$ for nth root where n is the index and x is the radicand",
-    fields: {
-      "properties": `
-      - Index defaults to 2 if omitted
-  - Index n means nth root
-  - Radicand is expression under radical
-  - Can be nested (compound radicals)`,
-      "examples": `Different radical notations:
-  √x = square root
-  ∛x = cube root
-  $\\sqrt[4]{x}$ = fourth root
-  $\\sqrt[n]{x}$ = nth root`,
-      "rules": "Index n must be positive integer ≥ 2"
-    },
-    category: "Roots"
+  category: "Roots"
+},
+
+{
+  name: "Radical",
+  formula: "The symbol $\\sqrt[n]{\\phantom{x}}$ used to denote a root operation, consisting of the radical sign, an index, and a radicand.",
+  link: { label: "Roots", url: "/algebra/roots" },
+  fields: {
+    "notation": `The radical symbol has three parts:
+
+$$\\sqrt[n]{b}$$
+
+$n$ — the index (which root to take). Omitted when $n = 2$.
+
+$b$ — the radicand (the expression under the radical).
+
+The horizontal bar extending over the radicand is called the vinculum. It acts as a grouping symbol: $\\sqrt{2 + 7}$ means the square root of $9$, not $\\sqrt{2} + 7$.`,
+    "examples": `$\\sqrt{16}$ — index $2$ (implied), radicand $16$
+
+$\\sqrt[3]{x + 1}$ — index $3$, radicand $x + 1$
+
+$\\sqrt[5]{32a^2}$ — index $5$, radicand $32a^2$`,
+    "related concepts": `
+- [Root](!/algebra/definitions#root)
+- [Index](!/algebra/definitions#index)
+- [Radicand](!/algebra/definitions#radicand)
+- [Rational Exponent](!/algebra/definitions#rational_exponent) — alternative notation
+- [Radical Equation](!/algebra/definitions#radical_equation)
+- [Radical Function](!/algebra/definitions#radical_function)`
   },
-  {
-    name: "Radicand",
-    formula: "The expression x under the radical sign in $\\sqrt[n]{x}$. The value we're finding the root of",
-    fields: {
-      "properties": `
-      - Can be any real number for odd roots
-   - Must be non-negative for even roots
-   - Can be variable expression
-   - Can contain other radicals`,
-      "examples": `In these expressions, radicand is:
-   √16: 16
-   ∛(-27): -27
-   $\\sqrt{x+2}$: x+2
-   $\\sqrt[4]{81}$: 81`
+  category: "Roots"
+},
+
+{
+  name: "Index",
+  formula: "The positive integer $n$ in $\\sqrt[n]{a}$ that specifies which root is being taken.",
+  link: { label: "Roots", url: "/algebra/roots" },
+  fields: {
+    "key distinction": {
+      text: `Even indices ($n = 2, 4, 6, \\ldots$) require non-negative radicands and return non-negative values. Odd indices ($n = 3, 5, 7, \\ldots$) accept all real radicands and preserve sign.
+
+This single distinction controls domain restrictions, absolute value behavior during simplification, and whether extraneous solutions can arise.`,
+      illustrations: [
+        {
+          src: `
+          <svg width="100%" viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg">
+<title>Anatomy of a radical expression</title>
+<desc>A radical symbol drawn as a smooth path with three labeled parts: the index n, the radicand b, and the radical sign itself. Below, four examples show indices 2 through 5, and a footer distinguishes even from odd index behavior.</desc>
+
+<!-- Radical symbol path -->
+<path d="M182 85 L190 89 L210 130 L242 42 L360 42" fill="none" stroke="#5F5E5A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+<!-- n (index) -->
+<text x="188" y="78" font-family="serif" font-size="28" font-style="italic" fill="#534AB7">n</text>
+
+<!-- b (radicand) -->
+<text x="278" y="100" font-family="serif" font-size="42" font-style="italic" fill="#993C1D">b</text>
+
+<!-- Label: index -->
+<circle cx="196" cy="62" r="2.5" fill="#534AB7"/>
+<line x1="196" y1="62" x2="120" y2="38" stroke="#534AB7" stroke-width="0.8" fill="none"/>
+<rect x="40" y="24" width="80" height="24" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="80" y="40" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="500" fill="#3C3489">index</text>
+
+<!-- Label: radicand -->
+<circle cx="305" cy="100" r="2.5" fill="#993C1D"/>
+<line x1="305" y1="100" x2="390" y2="100" stroke="#993C1D" stroke-width="0.8" fill="none"/>
+<rect x="392" y="88" width="90" height="24" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="437" y="104" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="500" fill="#712B13">radicand</text>
+
+<!-- Label: radical sign -->
+<circle cx="215" cy="115" r="2.5" fill="#5F5E5A"/>
+<line x1="215" y1="115" x2="120" y2="130" stroke="#5F5E5A" stroke-width="0.8" fill="none"/>
+<rect x="30" y="118" width="90" height="24" rx="6" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="75" y="134" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="500" fill="#444441">radical sign</text>
+
+<!-- Caption line (swappable per definition) -->
+<text x="340" y="172" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#5F5E5A">The index tells you which power is being reversed.</text>
+
+<!-- Examples -->
+<rect x="40" y="200" width="130" height="70" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="105" y="224" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="500" fill="#0C447C">n = 2</text>
+<text x="105" y="242" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#185FA5">√16 = 4</text>
+<text x="105" y="258" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5F5E5A">undoes squaring</text>
+
+<rect x="185" y="200" width="130" height="70" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="250" y="224" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="500" fill="#085041">n = 3</text>
+<text x="250" y="242" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#0F6E56">∛8 = 2</text>
+<text x="250" y="258" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5F5E5A">undoes cubing</text>
+
+<rect x="330" y="200" width="130" height="70" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text x="395" y="224" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="500" fill="#633806">n = 4</text>
+<text x="395" y="242" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#854F0B">⁴√81 = 3</text>
+<text x="395" y="258" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5F5E5A">undoes 4th power</text>
+
+<rect x="475" y="200" width="130" height="70" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="540" y="224" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="500" fill="#3C3489">n = 5</text>
+<text x="540" y="242" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#534AB7">⁵√32 = 2</text>
+<text x="540" y="258" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5F5E5A">undoes 5th power</text>
+
+<!-- Even vs odd -->
+<rect x="40" y="300" width="275" height="50" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="177" y="320" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="500" fill="#0C447C">Even index (2, 4, 6…)</text>
+<text x="177" y="338" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#185FA5">radicand must be ≥ 0</text>
+
+<rect x="335" y="300" width="275" height="50" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="472" y="320" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="500" fill="#085041">Odd index (3, 5, 7…)</text>
+<text x="472" y="338" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#0F6E56">any real radicand allowed</text>
+
+</svg>        
+          
+          `,
+          alt: "Even vs odd index behavior",
+          caption: "Even indices restrict inputs; odd indices accept all real numbers"
+        }
+      ],
+      links: [
+        { label: "Even Index Radicals", url: "/algebra/roots/properties#1" },
+        { label: "Odd Index Radicals", url: "/algebra/roots/properties#2" },
+        { label: "Sign Behavior Summary", url: "/algebra/roots/properties#7" }
+      ]
     },
-    category: "Roots"
-   },
-   {
-    name: "Index (or Degree)",
-    formula: "The value n in $\\sqrt[n]{x}$ indicating which root to take (square, cube, fourth, etc)",
-    fields: {
-      "properties": `
-      - Must be positive integer ≥ 2
-  - Determines number of roots
-  - Even index: requires non-negative radicand
-  - Odd index: allows negative radicand`,
-      "examples": `Common indices:
-  2 (√): square root
-  3 (∛): cube root
-  4: fourth root
-  n: nth root`
-    },
-    category: "Roots"
+    "examples": `$\\sqrt[2]{16} = 4$ — even index, non-negative result
+
+$\\sqrt[3]{-8} = -2$ — odd index, negative result valid
+
+$\\sqrt[4]{-16}$ — even index, not a real number
+
+$\\sqrt[5]{-32} = -2$ — odd index, negative result valid`,
+    "related concepts": `
+- [Root](!/algebra/definitions#root)
+- [Radicand](!/algebra/definitions#radicand)
+- [Principal Root](!/algebra/definitions#principal_root) — convention for even indices
+- [Radical Function](!/algebra/definitions#radical_function) — domain depends on index parity`
   },
-  {
-    name: "Principal Root",
-    formula: "For an even root, the non-negative root out of all possible values. For odd roots, the real root",
-    fields: {
-      "properties": `
-      - Always unique
-  - Used by default for radical symbol
-  - Non-negative for even roots
-  - Same sign as radicand for odd roots`,
-      "examples": `Principal roots:
-  √4 = 2 (not -2)
-  ∛(-8) = -2
-  $\\sqrt[4]{16}$ = 2
-  $\\sqrt{x^2}$ = |x|`
-    },
-    category: "Roots"
+  category: "Roots"
+},
+
+{
+  name: "Radicand",
+  formula: "The expression placed under the radical sign in $\\sqrt[n]{a}$; the value $a$ from which the root is extracted.",
+  link: { label: "Roots", url: "/algebra/roots" },
+  fields: {
+    "properties": `The radicand determines whether a radical has a real value:
+
+- Even index: radicand must be $\\geq 0$ for a real result
+- Odd index: any real radicand is permitted
+
+When simplifying, the radicand is factored to extract perfect powers. A radicand containing a variable creates a [radical function](!/algebra/roots/functions#1) with domain restrictions governed by the index.`,
+    "examples": `In $\\sqrt{x + 5}$, the radicand is $x + 5$
+
+In $\\sqrt[3]{8a^3}$, the radicand is $8a^3$
+
+In $\\sqrt[4]{16x^8}$, the radicand is $16x^8$`,
+    "related concepts": `
+- [Root](!/algebra/definitions#root)
+- [Radical](!/algebra/definitions#radical)
+- [Index](!/algebra/definitions#index)
+- [Simplest Form](!/algebra/definitions#simplest_form) — no perfect powers left in radicand
+- [Perfect Square](!/algebra/definitions#perfect_square)
+- [Perfect Cube](!/algebra/definitions#perfect_cube)`
   },
-  {
-    name: "Perfect Square",
-    formula: "A number n = k² where k is an integer. Also called square number",
-    fields: {
-      "properties": `
-      - Always non-negative
-   - Integer square root
-   - Square ends in 0,1,4,5,6,9
-   - Distance between consecutive grows by 2`,
-      "examples": `First perfect squares:
-   0 = 0²
-   1 = 1²
-   4 = 2²
-   9 = 3²
-   16 = 4²
-   25 = 5²`
-    },
-    category: "Roots"
-   },
-   {
-    name: "Perfect Cube",
-    formula: "A number n = k³ where k is an integer. Also called cubic number",
-    fields: {
-      "properties": `- Can be negative
-  - Integer cube root
-  - Alternates between odd/even
-  - Growing gaps between consecutive`,
-      "examples": `First perfect cubes:
-  -8 = (-2)³
-  -1 = (-1)³
-  0 = 0³
-  1 = 1³
-  8 = 2³
-  27 = 3³`
-    },
-    category: "Roots"
+  category: "Roots"
+},
+
+{
+  name: "Square Root",
+  formula: "The second root of $a$: the non-negative value $b$ such that $b^2 = a$, written $\\sqrt{a}$.",
+  link: { label: "Roots", url: "/algebra/roots" },
+  fields: {
+    "properties": `- Defined only for $a \\geq 0$ in the reals
+- Always returns a non-negative value (principal root)
+- $\\sqrt{a^2} = |a|$ for all real $a$
+- $\\sqrt{ab} = \\sqrt{a} \\cdot \\sqrt{b}$ when $a, b \\geq 0$
+- $(\\sqrt{a})^2 = a$ for $a \\geq 0$`,
+    "examples": `$\\sqrt{0} = 0$
+
+$\\sqrt{1} = 1$
+
+$\\sqrt{4} = 2$
+
+$\\sqrt{144} = 12$
+
+$\\sqrt{2} \\approx 1.414$ (irrational)`,
+    "related concepts": `
+- [Root](!/algebra/definitions#root)
+- [Principal Root](!/algebra/definitions#principal_root)
+- [Cube Root](!/algebra/definitions#cube_root)
+- [Perfect Square](!/algebra/definitions#perfect_square)
+- [Perfect Squares Table](!/tables/arithmetics/perfect-squares)
+- [Square Root Visual Tool](!/visual-tools/square-root)`
   },
-  {
-    name: "Nth Root",
-    formula: "Value x where $x^n = a$, denoted as $\\sqrt[n]{a}$ or $a^{1/n}$",
-    fields: {
-      "properties": `
-      - n must be positive integer
-  - Even n requires a ≥ 0
-  - Odd n allows any real a
-  - Principal root is default`,
-      "examples": `Common nth roots:
-  $\\sqrt[4]{16} = 2$
-  $\\sqrt[5]{32} = 2$
-  $\\sqrt[6]{64} = 2$`
-    },
-    category: "Roots"
+  category: "Roots"
+},
+
+{
+  name: "Cube Root",
+  formula: "The third root of $a$: the value $b$ such that $b^3 = a$, written $\\sqrt[3]{a}$.",
+  link: { label: "Roots", url: "/algebra/roots" },
+  fields: {
+    "properties": `- Defined for all real numbers
+- Preserves sign: $\\sqrt[3]{-a} = -\\sqrt[3]{a}$
+- Every real number has exactly one real cube root
+- No principal root convention needed (no ambiguity)
+- $\\sqrt[3]{a^3} = a$ for all real $a$ (no absolute value)`,
+    "examples": `$\\sqrt[3]{8} = 2$
+
+$\\sqrt[3]{-27} = -3$
+
+$\\sqrt[3]{0} = 0$
+
+$\\sqrt[3]{1000} = 10$
+
+$\\sqrt[3]{2} \\approx 1.260$ (irrational)`,
+    "related concepts": `
+- [Root](!/algebra/definitions#root)
+- [Square Root](!/algebra/definitions#square_root)
+- [Perfect Cube](!/algebra/definitions#perfect_cube)
+- [Perfect Cubes Table](!/tables/arithmetics/perfect-cubes)
+- [Odd-Index Radicals](!/algebra/roots/properties#2)`
   },
-  {
-    name: "Radical Expression",
-    formula: "Mathematical expression containing one or more radicals $\\sqrt[n]{x}$. Can include coefficients, variables, and operations",
-    fields: {
-      "properties": `
-      - Contains at least one radical
-   - May have coefficients
-   - Can include variables
-   - Can be simplified`,
-      "examples": `Radical expressions:
-   $2\\sqrt{3}$
-   $\\sqrt{x} + \\sqrt{y}$
-   $3\\sqrt[3]{2x}$
-   $\\frac{\\sqrt{8}}{\\sqrt{2}}$`
+  category: "Roots"
+},
+
+{
+  name: "Principal Root",
+  formula: "The unique non-negative root returned by the radical symbol $\\sqrt[n]{a}$ when $n$ is even.",
+  link: { label: "Properties", url: "/algebra/roots/properties" },
+  fields: {
+    "key distinction": {
+      text: `Both $5$ and $-5$ square to $25$, but $\\sqrt{25} = 5$ only. The radical symbol returns one value — the non-negative root — so that it behaves as a function. When both roots are needed, $\\pm\\sqrt{a}$ is written explicitly.
+
+For odd indices, no convention is needed: every real number has exactly one real cube root, fifth root, etc.`,
+      illustrations: [
+        {
+          src: `[ILLUSTRATION: Number line centered at 0. Two points at $-5$ and $+5$, both with arrows pointing up to $25$ (labeled "$(-5)^2 = 25$" and "$5^2 = 25$"). A single arrow from $25$ back down points only to $+5$, labeled "$\\sqrt{25} = 5$." Shows the convention selecting the positive value.]`,
+          alt: "Principal root selects the non-negative value",
+          caption: "Two square roots exist, but the radical returns only the non-negative one"
+        }
+      ],
+      links: [
+        { label: "Principal Root Convention", url: "/algebra/roots/properties#3" },
+        { label: "Identity for Even Roots", url: "/algebra/roots/properties#4" }
+      ]
     },
-    category: "Roots"
-   },
-   {
-    name: "Simplifying Radicals",
-    formula: "Converting radical to equivalent form with smallest possible radicand and rational coefficients outside",
-    fields: {
-      "properties": `
-      - Factor radicand
-  - Remove perfect nth powers
-  - Combine like radicals
-  - Rationalize denominators`,
-      "examples": `Steps to simplify:
-  $\\sqrt{12} = \\sqrt{4 \\cdot 3} = \\sqrt{4}\\sqrt{3} = 2\\sqrt{3}$
-  $\\sqrt[3]{54} = \\sqrt[3]{27 \\cdot 2} = 3\\sqrt[3]{2}$`
-    },
-    category: "Roots"
+    "common errors": `Writing $\\sqrt{25} = \\pm 5$. The radical returns $5$ only. The $\\pm$ must be explicit.
+
+Assuming $\\sqrt{x^2} = x$. Correct: $\\sqrt{x^2} = |x|$, because the principal root is non-negative regardless of the sign of $x$.`,
+    "examples": `$\\sqrt{49} = 7$ (not $\\pm 7$)
+
+$\\sqrt[4]{16} = 2$ (not $\\pm 2$)
+
+$\\sqrt[3]{-27} = -3$ (odd index — no ambiguity)
+
+$\\pm\\sqrt{49} = \\pm 7$ (both roots requested explicitly)`,
+    "related concepts": `
+- [Root](!/algebra/definitions#root)
+- [Index](!/algebra/definitions#index)
+- [Radical Function](!/algebra/definitions#radical_function) — domain depends on this convention
+- [Extraneous Solution](!/algebra/definitions#extraneous_solution) — arises from ignoring this convention`
   },
-  {
-    name: "Nested Radicals",
-    formula: "Expression containing radicals inside other radicals: $\\sqrt{a + \\sqrt{b}}$",
-    fields: {
-      "properties": `
-      - Multiple radical layers
-  - Can often be simplified
-  - Harder to manipulate
-  - Special denesting methods`,
-      "examples": `Nested forms:
-  $\\sqrt{5 + \\sqrt{24}}$
-  $\\sqrt{3 + \\sqrt{1 + \\sqrt{2}}}$
-  $\\sqrt[3]{2 + \\sqrt{5}}$`
+  category: "Roots"
+},
+
+{
+  name: "Rational Exponent",
+  formula: "An exponent of the form $\\frac{m}{n}$ where $a^{m/n} = \\sqrt[n]{a^m} = (\\sqrt[n]{a})^m$.",
+  link: { label: "Rational Exponents", url: "/algebra/roots/rational-exponents" },
+  fields: {
+    "intuition": {
+      text: `Every radical can be written as a fractional power. The denominator becomes the index; the numerator becomes the power applied to the base. This is not a separate operation — it is exactly the same operation in a different notation.
+
+Exponent form often simplifies algebraic manipulation because the laws of exponents (add, subtract, multiply exponents) work with fractions just as they do with integers.`,
+      links: [
+        { label: "Unit Fraction Exponents", url: "/algebra/roots/rational-exponents#1" },
+        { label: "General Rational Exponents", url: "/algebra/roots/rational-exponents#2" },
+        { label: "Laws of Exponents with Rationals", url: "/algebra/roots/rational-exponents#6" }
+      ]
     },
-    category: "Roots"
+    "examples": `$a^{1/2} = \\sqrt{a}$
+
+$a^{1/3} = \\sqrt[3]{a}$
+
+$8^{2/3} = (\\sqrt[3]{8})^2 = 4$
+
+$16^{-3/4} = \\frac{1}{(\\sqrt[4]{16})^3} = \\frac{1}{8}$
+
+$x^{1/2} \\cdot x^{1/3} = x^{5/6}$`,
+    "related concepts": `
+- [Root](!/algebra/definitions#root)
+- [Radical](!/algebra/definitions#radical)
+- [Power Rule (Radicals)](!/algebra/definitions#power_rule_(radicals))
+- [Exponent Rules](!/algebra/powers/exponent-rules)
+- [Converting Between Forms](!/algebra/roots/rational-exponents#4)
+- [Negative Rational Exponents](!/algebra/roots/rational-exponents#3)`
   },
-  {
-    name: "Surd",
-    formula: "An irrational root of a rational number. A radical that cannot be simplified to a rational number",
-    fields: {
-      "properties": `
-      - Irrational number
-   - Cannot be further simplified
-   - Root of rational number
-   - Contains no imaginary parts`,
-      "examples": `Common surds:
-   $\\sqrt{2}$
-   $\\sqrt{3}$
-   $\\sqrt[3]{5}$
-   $2\\sqrt{7}$ (mixed surd)`
-    },
-    category: "Roots"
-   },
-   {
-    name: "Radical Equation",
-    formula: "Equation containing variable(s) under radical sign: $\\sqrt{x} = a$ or $\\sqrt{f(x)} = g(x)$",
-    fields: {
-      "properties": `
-      - Check for extraneous solutions
-  - Square both sides carefully
-  - Domain restrictions apply
-  - May have multiple steps`,
-      "examples": `Solving $\\sqrt{x-1} = 2$:
-  $\\sqrt{x-1} = 2$
-  $(\\sqrt{x-1})^2 = 2^2$
-  $x-1 = 4$
-  $x = 5$`
-    },
-    category: "Roots"
+  category: "Roots"
+},
+
+{
+  name: "Product Rule (Radicals)",
+  formula: "$\\sqrt[n]{ab} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$, provided the index matches and radicands satisfy domain restrictions.",
+  link: { label: "Radical Rules", url: "/algebra/roots/radical-rules" },
+  fields: {
+    "properties": `Works in both directions:
+- Split: $\\sqrt{12} = \\sqrt{4} \\cdot \\sqrt{3} = 2\\sqrt{3}$
+- Combine: $\\sqrt{3} \\cdot \\sqrt{12} = \\sqrt{36} = 6$
+
+Restrictions for even index: both $a \\geq 0$ and $b \\geq 0$ required in the reals. Attempting $\\sqrt{-2} \\cdot \\sqrt{-8} = \\sqrt{16}$ is invalid.
+
+Derives from the exponent law $(ab)^{1/n} = a^{1/n} \\cdot b^{1/n}$.`,
+    "examples": `$\\sqrt{50} = \\sqrt{25 \\cdot 2} = 5\\sqrt{2}$
+
+$\\sqrt[3]{24} = \\sqrt[3]{8 \\cdot 3} = 2\\sqrt[3]{3}$
+
+$\\sqrt{5} \\cdot \\sqrt{20} = \\sqrt{100} = 10$`,
+    "related concepts": `
+- [Quotient Rule (Radicals)](!/algebra/definitions#quotient_rule_(radicals))
+- [Power Rule (Radicals)](!/algebra/definitions#power_rule_(radicals))
+- [Simplest Form](!/algebra/definitions#simplest_form) — splitting uses this rule
+- [Rational Exponent](!/algebra/definitions#rational_exponent) — exponent law origin`
   },
-  {
-    name: "Fractional Exponents",
-    formula: "Root expressions written as powers: $x^{\\frac{1}{n}} = \\sqrt[n]{x}$ and $x^{\\frac{m}{n}} = (\\sqrt[n]{x})^m$",
-    fields: {
-      "properties": `
-      - Numerator = power
-  - Denominator = root
-  - Follow exponent rules
-  - Equivalent to radicals`,
-      "examples": `$x^{\\frac{1}{2}} = \\sqrt{x}$
-  $x^{\\frac{1}{3}} = \\sqrt[3]{x}$
-  $x^{\\frac{2}{3}} = (\\sqrt[3]{x})^2$`
-    },
-    category: "Roots"
+  category: "Roots"
+},
+
+{
+  name: "Quotient Rule (Radicals)",
+  formula: "$\\sqrt[n]{\\frac{a}{b}} = \\frac{\\sqrt[n]{a}}{\\sqrt[n]{b}}$, with $b \\neq 0$ and domain restrictions for even index.",
+  link: { label: "Radical Rules", url: "/algebra/roots/radical-rules" },
+  fields: {
+    "properties": `Works in both directions:
+- Split: $\\sqrt{\\frac{49}{16}} = \\frac{\\sqrt{49}}{\\sqrt{16}} = \\frac{7}{4}$
+- Combine: $\\frac{\\sqrt{50}}{\\sqrt{2}} = \\sqrt{\\frac{50}{2}} = \\sqrt{25} = 5$
+
+For even index: $a \\geq 0$ and $b > 0$ required.
+
+Derives from $(\\frac{a}{b})^{1/n} = \\frac{a^{1/n}}{b^{1/n}}$.`,
+    "examples": `$\\sqrt{\\frac{9}{25}} = \\frac{3}{5}$
+
+$\\frac{\\sqrt[3]{54}}{\\sqrt[3]{2}} = \\sqrt[3]{27} = 3$
+
+$\\sqrt{\\frac{x^2}{4}} = \\frac{|x|}{2}$ (even index, variable radicand)`,
+    "related concepts": `
+- [Product Rule (Radicals)](!/algebra/definitions#product_rule_(radicals))
+- [Power Rule (Radicals)](!/algebra/definitions#power_rule_(radicals))
+- [Rationalization](!/algebra/definitions#rationalization) — uses this rule to restructure fractions
+- [Rational Exponent](!/algebra/definitions#rational_exponent)`
   },
-  {
-    name: "Rationalizing the Denominator",
-    formula: "Multiplying numerator and denominator by radical term to eliminate radicals in denominator: $\\frac{a}{\\sqrt{b}} \\cdot \\frac{\\sqrt{b}}{\\sqrt{b}} = \\frac{a\\sqrt{b}}{b}$",
-    fields: {
-      "methods": `
-      - Single radical: multiply by itself
-   - Binomial with radical: multiply by conjugate
-   - Higher order roots: use appropriate root`,
-      "examples": `$\\frac{1}{\\sqrt{2}} = \\frac{\\sqrt{2}}{2}$
-   
-   $\\frac{1}{\\sqrt{3} + \\sqrt{2}} = \\frac{\\sqrt{3} - \\sqrt{2}}{(\\sqrt{3} + \\sqrt{2})(\\sqrt{3} - \\sqrt{2})}$`
-    },
-    category: "Roots"
-   },
-   {
-    name: "Irrational Root",
-    formula: "A root that yields an irrational number - cannot be expressed as p/q where p,q are integers, q≠0",
-    fields: {
-      "properties": `
-      - Non-terminating, non-repeating decimal
-  - Cannot be written as ratio of integers
-  - Often proved irrational by contradiction`,
-      "examples": `Common irrational roots:
-  $\\sqrt{2} ≈ 1.4142135...$
-  $\\sqrt{3} ≈ 1.7320508...$
-  $\\sqrt[3]{2} ≈ 1.2599210...$`
-    },
-    category: "Roots"
+  category: "Roots"
+},
+
+{
+  name: "Power Rule (Radicals)",
+  formula: "$\\sqrt[n]{a^m} = a^{m/n}$, equivalently $(\\sqrt[n]{a})^m = a^{m/n}$.",
+  link: { label: "Radical Rules", url: "/algebra/roots/radical-rules" },
+  fields: {
+    "properties": `The exponent $m$ becomes the numerator, the index $n$ becomes the denominator. Either order — root first or power first — gives the same result.
+
+When $m$ and $n$ share a common factor, the radical simplifies by cancellation:
+
+$\\sqrt[6]{a^4} = a^{4/6} = a^{2/3} = \\sqrt[3]{a^2}$
+
+For even indices with variables, absolute values may be needed: $\\sqrt{x^2} = |x|$, not $x$.`,
+    "examples": `$\\sqrt[3]{8^2} = 8^{2/3} = (\\sqrt[3]{8})^2 = 4$
+
+$\\sqrt{16^3} = 16^{3/2} = (\\sqrt{16})^3 = 64$
+
+$\\sqrt[6]{x^4} = x^{2/3} = \\sqrt[3]{x^2}$`,
+    "related concepts": `
+- [Product Rule (Radicals)](!/algebra/definitions#product_rule_(radicals))
+- [Quotient Rule (Radicals)](!/algebra/definitions#quotient_rule_(radicals))
+- [Rational Exponent](!/algebra/definitions#rational_exponent) — this rule is the bridge between notations
+- [Simplest Form](!/algebra/definitions#simplest_form) — index reduction uses this rule`
   },
-  {
-    name: "Root Approximation",
-    formula: "Methods to find approximate values of roots: Newton's method: $x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}$",
-    fields: {
-      "methods": `
-      - Newton's method
-  - Binary search
-  - Calculator estimation
-  - Numerical algorithms`,
-      "examples": `$\\sqrt{2}$ approximation:
-  1.4 → 1.414 → 1.4142 → 1.41421
-  
-  Newton's method for $\\sqrt{a}$:
-  $x_{n+1} = \\frac{1}{2}(x_n + \\frac{a}{x_n})$`
+  category: "Roots"
+},
+
+{
+  name: "Simplest Form",
+  formula: "A radical is in simplest form when no perfect power remains under the radical, no fraction appears under the radical, and no radical appears in a denominator.",
+  link: { label: "Simplifying", url: "/algebra/roots/simplifying" },
+  fields: {
+    "conditions": {
+      text: `Three conditions must hold simultaneously:
+
+1. No perfect power factor in the radicand. Every factor that can be extracted has been extracted.
+
+2. No fraction under the radical. $\\sqrt{\\frac{3}{4}}$ is rewritten as $\\frac{\\sqrt{3}}{2}$.
+
+3. No radical in a denominator. $\\frac{1}{\\sqrt{3}}$ is rationalized to $\\frac{\\sqrt{3}}{3}$.`,
+      illustrations: [
+        {
+          src: `[ILLUSTRATION: Three side-by-side "before → after" panels. Panel 1: $\\sqrt{72} \\to 6\\sqrt{2}$ (perfect square extracted). Panel 2: $\\sqrt{\\frac{3}{4}} \\to \\frac{\\sqrt{3}}{2}$ (fraction cleared). Panel 3: $\\frac{1}{\\sqrt{3}} \\to \\frac{\\sqrt{3}}{3}$ (denominator rationalized). Each panel labeled with the condition it satisfies.]`,
+          alt: "Three conditions for simplest radical form",
+          caption: "All three conditions must hold for a radical to be fully simplified"
+        }
+      ],
+      links: [
+        { label: "What Simplest Form Means", url: "/algebra/roots/simplifying#1" },
+        { label: "Factoring Out Perfect Powers", url: "/algebra/roots/simplifying#2" }
+      ]
     },
-    category: "Roots"
+    "examples": `$\\sqrt{72} = \\sqrt{36 \\cdot 2} = 6\\sqrt{2}$ — simplified
+
+$\\sqrt{48} = \\sqrt{16 \\cdot 3} = 4\\sqrt{3}$ — simplified
+
+$\\sqrt[3]{54} = \\sqrt[3]{27 \\cdot 2} = 3\\sqrt[3]{2}$ — simplified
+
+$\\sqrt{50}$ is not simplified ($25$ is a perfect square factor)`,
+    "related concepts": `
+- [Perfect Square](!/algebra/definitions#perfect_square)
+- [Perfect Cube](!/algebra/definitions#perfect_cube)
+- [Rationalization](!/algebra/definitions#rationalization) — condition 3
+- [Product Rule (Radicals)](!/algebra/definitions#product_rule_(radicals)) — used for condition 1
+- [Quotient Rule (Radicals)](!/algebra/definitions#quotient_rule_(radicals)) — used for condition 2`
   },
-  {
-    name: "Conjugate Pair",
-    formula: "For expression a + √b, its conjugate is a - √b. Product is a² - b. Used to rationalize denominators",
-    fields: {
-      "properties": `
-      - Product removes radicals
-   - Sum × difference formula
-   - Preserves value when multiplying num/denom`,
-      "examples": `Conjugate pairs:
-   $a + \\sqrt{b}$ and $a - \\sqrt{b}$
-   $\\sqrt{2} + \\sqrt{3}$ and $\\sqrt{2} - \\sqrt{3}$
-   $(a + \\sqrt{b})(a - \\sqrt{b}) = a^2 - b$`
-    },
-    category: "Roots"
-   },
-   {
-    name: "Logarithmic Connection",
-    formula: "$\\sqrt[n]{a} = e^{\\frac{\\ln(a)}{n}}$ and $\\sqrt[n]{a} = b \\iff a = b^n$",
-    fields: {
-      "properties": `
-      - Roots as exponentials
-  - Natural log connection
-  - Change of base formula
-  - Solving using logs`,
-      "examples": `$\\sqrt{x} = e^{\\frac{\\ln(x)}{2}}$
-  $\\sqrt[3]{x} = e^{\\frac{\\ln(x)}{3}}$
-  $\\ln(\\sqrt{x}) = \\frac{1}{2}\\ln(x)$`
-    },
-    category: "Roots"
+  category: "Roots"
+},
+
+{
+  name: "Perfect Square",
+  formula: "An integer that equals $n^2$ for some integer $n$: $0, 1, 4, 9, 16, 25, 36, \\ldots$",
+  link: { label: "Simplifying", url: "/algebra/roots/simplifying" },
+  fields: {
+    "properties": `- The square root of a perfect square is an integer: $\\sqrt{n^2} = n$
+- Used to simplify radicals: factor the radicand to extract perfect square components
+- A variable expression $x^{2k}$ is a perfect square for any positive integer $k$
+- Recognizing perfect squares is essential for efficient simplification`,
+    "examples": `$\\sqrt{36} = 6$ — $36 = 6^2$
+
+$\\sqrt{72} = \\sqrt{36 \\cdot 2} = 6\\sqrt{2}$ — $36$ extracted
+
+$\\sqrt{x^4} = x^2$ — $x^4 = (x^2)^2$
+
+$\\sqrt{50a^2} = 5|a|\\sqrt{2}$ — $25$ and $a^2$ extracted`,
+    "related concepts": `
+- [Perfect Cube](!/algebra/definitions#perfect_cube)
+- [Simplest Form](!/algebra/definitions#simplest_form)
+- [Square Root](!/algebra/definitions#square_root)
+- [Perfect Squares Table](!/tables/arithmetics/perfect-squares)`
   },
-  {
-    name: "Higher-Order Roots",
-    formula: "nth root where n > 3: $\\sqrt[n]{a}$ is value x where x^n = a",
-    fields: {
-      "properties": `
-      - n can be any positive integer
-  - Even n requires a ≥ 0
-  - Odd n allows any real a
-  - Multiple complex roots`,
-      "examples": `Fourth root: $\\sqrt[4]{16} = 2$
-  Fifth root: $\\sqrt[5]{32} = 2$
-  General: $\\sqrt[n]{a^n} = |a|$ for even n`
-    },
-    category: "Roots"
+  category: "Roots"
+},
+
+{
+  name: "Perfect Cube",
+  formula: "An integer that equals $n^3$ for some integer $n$: $0, 1, 8, 27, 64, 125, \\ldots$",
+  link: { label: "Simplifying", url: "/algebra/roots/simplifying" },
+  fields: {
+    "properties": `- The cube root of a perfect cube is an integer: $\\sqrt[3]{n^3} = n$
+- Includes negative values: $(-3)^3 = -27$, so $-27$ is a perfect cube
+- A variable expression $x^{3k}$ is a perfect cube for any positive integer $k$
+- Used to simplify cube roots by factoring out perfect cube components`,
+    "examples": `$\\sqrt[3]{27} = 3$ — $27 = 3^3$
+
+$\\sqrt[3]{-64} = -4$ — $-64 = (-4)^3$
+
+$\\sqrt[3]{54} = \\sqrt[3]{27 \\cdot 2} = 3\\sqrt[3]{2}$ — $27$ extracted
+
+$\\sqrt[3]{x^6} = x^2$ — $x^6 = (x^2)^3$`,
+    "related concepts": `
+- [Perfect Square](!/algebra/definitions#perfect_square)
+- [Simplest Form](!/algebra/definitions#simplest_form)
+- [Cube Root](!/algebra/definitions#cube_root)
+- [Perfect Cubes Table](!/tables/arithmetics/perfect-cubes)`
   },
-  {
-    name: "Imaginary Root",
-    formula: "For negative real number -a, its square root is i√a where i = √(-1). Higher even roots also yield imaginary results",
-    fields: {
-      "properties": `
-      - Occur when taking even roots of negatives
-   - Involve imaginary unit i
-   - Come in conjugate pairs
-   - Real when n is odd`,
-      "examples": `$\\sqrt{-4} = 2i$
-   $\\sqrt{-9} = 3i$
-   $\\sqrt[4]{-16} = \\sqrt{2}(1 + i)$
-   
-   Powers of i:
-   $i^2 = -1$
-   $i^3 = -i$
-   $i^4 = 1$`
+  category: "Roots"
+},
+
+{
+  name: "Rationalization",
+  formula: "The process of rewriting an expression so that no radical appears in the denominator.",
+  link: { label: "Simplifying", url: "/algebra/roots/simplifying" },
+  fields: {
+    "methods": `For monomial denominators, multiply numerator and denominator by the radical:
+
+$$\\frac{1}{\\sqrt{3}} = \\frac{\\sqrt{3}}{3}$$
+
+For binomial denominators, multiply by the [conjugate](!/algebra/definitions#conjugate):
+
+$$\\frac{1}{\\sqrt{5} + 2} \\cdot \\frac{\\sqrt{5} - 2}{\\sqrt{5} - 2} = \\sqrt{5} - 2$$
+
+For higher-index radicals, multiply to complete a perfect power:
+
+$$\\frac{1}{\\sqrt[3]{4}} = \\frac{\\sqrt[3]{2}}{2}$$`,
+    "examples": `$\\frac{5}{\\sqrt{2}} = \\frac{5\\sqrt{2}}{2}$
+
+$\\frac{3}{\\sqrt{7} - 1} = \\frac{\\sqrt{7} + 1}{2}$
+
+$\\frac{2}{\\sqrt[3]{9}} = \\frac{2\\sqrt[3]{3}}{3}$`,
+    "related concepts": `
+- [Simplest Form](!/algebra/definitions#simplest_form) — rationalization is one of the three conditions
+- [Conjugate](!/algebra/definitions#conjugate) — used for binomial denominators
+- [Quotient Rule (Radicals)](!/algebra/definitions#quotient_rule_(radicals))
+- [Rationalizing Monomial Denominators](!/algebra/roots/simplifying#5)
+- [Rationalizing Binomial Denominators](!/algebra/roots/simplifying#6)
+- [Rationalizing Higher-Index Denominators](!/algebra/roots/simplifying#7)`
+  },
+  category: "Roots"
+},
+
+{
+  name: "Like Radicals",
+  formula: "Radical expressions that share the same index and the same radicand.",
+  link: { label: "Operations", url: "/algebra/roots/operations" },
+  fields: {
+    "key distinction": `Like radicals can be added and subtracted by combining coefficients. Unlike radicals cannot be combined.
+
+$3\\sqrt{5}$ and $7\\sqrt{5}$ — like (same index $2$, same radicand $5$)
+
+$\\sqrt{3}$ and $\\sqrt{5}$ — unlike (different radicands)
+
+$\\sqrt{2}$ and $\\sqrt[3]{2}$ — unlike (different indices)
+
+Radicals that appear unlike may become like after simplification:
+
+$\\sqrt{12} + \\sqrt{27} = 2\\sqrt{3} + 3\\sqrt{3} = 5\\sqrt{3}$`,
+    "examples": `$3\\sqrt{5} + 7\\sqrt{5} = 10\\sqrt{5}$
+
+$8\\sqrt[3]{2} - 3\\sqrt[3]{2} = 5\\sqrt[3]{2}$
+
+$\\sqrt{2} + \\sqrt{3}$ — cannot be combined (already simplest form)`,
+    "related concepts": `
+- [Simplest Form](!/algebra/definitions#simplest_form) — simplify before checking
+- [Adding and Subtracting Like Radicals](!/algebra/roots/operations#2)
+- [Radical](!/algebra/definitions#radical)`
+  },
+  category: "Roots"
+},
+
+{
+  name: "Conjugate",
+  formula: "For a binomial $a + b\\sqrt{c}$, its conjugate is $a - b\\sqrt{c}$. Their product eliminates the radical: $(a + b\\sqrt{c})(a - b\\sqrt{c}) = a^2 - b^2c$.",
+  link: { label: "Operations", url: "/algebra/roots/operations" },
+  fields: {
+    "properties": `The product of conjugates is a difference of squares, which eliminates the radical term:
+
+$$(\\sqrt{a} + \\sqrt{b})(\\sqrt{a} - \\sqrt{b}) = a - b$$
+
+This makes conjugates the essential tool for rationalizing binomial denominators. The same algebraic identity appears in factoring and in working with complex numbers.`,
+    "examples": `$(\\sqrt{5} + 2)(\\sqrt{5} - 2) = 5 - 4 = 1$
+
+$(\\sqrt{3} + \\sqrt{7})(\\sqrt{3} - \\sqrt{7}) = 3 - 7 = -4$
+
+$\\frac{1}{\\sqrt{5} + 2} \\cdot \\frac{\\sqrt{5} - 2}{\\sqrt{5} - 2} = \\sqrt{5} - 2$`,
+    "related concepts": `
+- [Rationalization](!/algebra/definitions#rationalization) — primary use case
+- [Rationalizing Binomial Denominators](!/algebra/roots/simplifying#6)
+- [Expanding Products with Radicals](!/algebra/roots/operations#7)
+- [Squaring Radical Expressions](!/algebra/roots/operations#8)`
+  },
+  category: "Roots"
+},
+
+{
+  name: "Radical Equation",
+  formula: "An equation in which the variable appears under a radical sign.",
+  link: { label: "Equations", url: "/algebra/roots/equations" },
+  fields: {
+    "strategy": {
+      text: `Four-step solving process:
+
+1. Isolate the radical on one side
+2. Raise both sides to the power matching the index
+3. Solve the resulting equation
+4. Check every solution in the original equation
+
+Isolation must come first. Squaring before isolating leaves the radical intact and creates a harder equation. Step 4 is mandatory — raising to a power can introduce extraneous solutions.`,
+      links: [
+        { label: "Basic Strategy", url: "/algebra/roots/equations#2" },
+        { label: "Why Isolation Comes First", url: "/algebra/roots/equations#3" },
+        { label: "Verification Process", url: "/algebra/roots/equations#10" }
+      ]
     },
-    category: "Roots"
-   },
+    "examples": `$\\sqrt{x} = 7 \\Rightarrow x = 49$ — check: $\\sqrt{49} = 7$ ✓
+
+$\\sqrt{x + 3} = 5 \\Rightarrow x + 3 = 25 \\Rightarrow x = 22$
+
+$\\sqrt{x + 5} = x - 1$ — squaring gives $x^2 - 3x - 4 = 0$, candidates $x = 4$ (valid) and $x = -1$ (extraneous)`,
+    "related concepts": `
+- [Extraneous Solution](!/algebra/definitions#extraneous_solution) — the defining hazard
+- [Principal Root](!/algebra/definitions#principal_root) — why negative outputs are impossible
+- [Equations with Two Radicals](!/algebra/roots/equations#6)
+- [Cube Roots and Higher](!/algebra/roots/equations#8)`
+  },
+  category: "Roots"
+},
+
+{
+  name: "Extraneous Solution",
+  formula: "A value that satisfies a transformed equation but not the original, introduced by a non-reversible algebraic step.",
+  link: { label: "Equations", url: "/algebra/roots/equations" },
+  fields: {
+    "why they appear": `Squaring both sides is not reversible. Both $5$ and $-5$ square to $25$, so squaring erases sign information. If the original equation requires a radical to equal a negative value, squaring hides this impossibility.
+
+Similarly, clearing denominators in rational equations can introduce values that zero out the original denominator. Any non-reversible step — squaring, cubing with even-degree terms, multiplying by a variable expression — carries this risk.`,
+    "examples": `$\\sqrt{x} = -3$ — squaring gives $x = 9$, but $\\sqrt{9} = 3 \\neq -3$. No solution exists; $x = 9$ is extraneous.
+
+$\\sqrt{x + 5} = x - 1$ — candidates $x = 4$ (valid) and $x = -1$ (extraneous, since $\\sqrt{4} = 2 \\neq -2$)`,
+    "related concepts": `
+- [Radical Equation](!/algebra/definitions#radical_equation) — primary context
+- [Principal Root](!/algebra/definitions#principal_root) — the convention that makes negative outputs impossible
+- [Why Extraneous Solutions Appear](!/algebra/roots/equations#5)
+- [Equivalent Equations](!/algebra/equations#4) — reversible vs non-reversible operations`
+  },
+  category: "Roots"
+},
+
+{
+  name: "Radical Function",
+  formula: "A function of the form $f(x) = \\sqrt[n]{g(x)}$, where the radicand contains a variable.",
+  link: { label: "Functions", url: "/algebra/roots/functions" },
+  fields: {
+    "properties": {
+      text: `Domain depends on the index:
+- Even index: solve $g(x) \\geq 0$ for the domain
+- Odd index: domain is all real numbers
+
+The parent square root function $f(x) = \\sqrt{x}$ has domain $[0, \\infty)$ and range $[0, \\infty)$. Its graph starts at the origin and rises, concave down.
+
+The parent cube root function $f(x) = \\sqrt[3]{x}$ has domain and range $(-\\infty, \\infty)$. Its graph has an S-curve through the origin with odd symmetry.
+
+Radical functions are inverses of power functions. $\\sqrt{x}$ undoes $x^2$ (restricted to $x \\geq 0$); $\\sqrt[3]{x}$ undoes $x^3$.`,
+      illustrations: [
+        {
+          src: `[ILLUSTRATION: Two graphs side by side. Left: $f(x) = \\sqrt{x}$ — curve starting at origin $(0,0)$, rising to the right, concave down, with key points $(1,1)$, $(4,2)$, $(9,3)$ marked. Domain bracket $[0, \\infty)$ shown on x-axis. Right: $f(x) = \\sqrt[3]{x}$ — S-curve through origin, extending both directions, with points $(-8,-2)$, $(0,0)$, $(8,2)$ marked. Full real line domain indicated.]`,
+          alt: "Graphs of square root and cube root parent functions",
+          caption: "Even-index functions start at a point; odd-index functions pass through the origin in both directions"
+        }
+      ],
+      links: [
+        { label: "Square Root Function", url: "/algebra/roots/functions#1" },
+        { label: "Cube Root Function", url: "/algebra/roots/functions#3" },
+        { label: "Domain of Radical Functions", url: "/algebra/roots/functions#6" },
+        { label: "Transformations", url: "/algebra/roots/functions#7" }
+      ]
+    },
+    "examples": `$f(x) = \\sqrt{x - 3}$ — domain $[3, \\infty)$
+
+$g(x) = \\sqrt{5 - 2x}$ — domain $(-\\infty, \\frac{5}{2}]$
+
+$h(x) = \\sqrt[3]{x + 4}$ — domain $(-\\infty, \\infty)$`,
+    "related concepts": `
+- [Root](!/algebra/definitions#root)
+- [Index](!/algebra/definitions#index) — determines domain restrictions
+- [Principal Root](!/algebra/definitions#principal_root) — ensures function behavior
+- [Radical Equation](!/algebra/definitions#radical_equation) — solving sets output equal to a value
+- [Inverse Relationship](!/algebra/roots/functions#8)`
+  },
+  category: "Roots"
+},
+
+
 
 
 
