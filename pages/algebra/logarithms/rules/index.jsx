@@ -5,6 +5,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
@@ -347,6 +348,14 @@ const schemas = {
  export default function LogarithmRulesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {  
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -573,8 +582,15 @@ const schemas = {
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+        id="0"
+        title={sectionsContent.obj0.title}
+        content={sectionsContent.obj0.content}
+        after={sectionsContent.obj0.after}
+        variant="light"
+      />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

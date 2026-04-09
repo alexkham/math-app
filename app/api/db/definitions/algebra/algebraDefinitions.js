@@ -1095,391 +1095,837 @@ $h(x) = \\sqrt[3]{x + 4}$ — domain $(-\\infty, \\infty)$`,
 
 
 
+//Category- Logarithms 
+
+// Logarithms Category — 15 Definition Entries for algebraTermsList
+
+{
+  name: "Logarithm",
+  formula: "The exponent to which a base $a$ must be raised to produce $b$: $\\log_a(b) = c$ means $a^c = b$.",
+  link: { label: "Logarithms", url: "/algebra/logarithms" },
+  fields: {
+    "intuition": {
+      text: `A logarithm reverses exponentiation. If $a^c = b$, then $\\log_a(b) = c$. The logarithm extracts the exponent. Every logarithmic statement converts to an equivalent exponential statement and vice versa — the two forms encode identical information.
+
+Two values hold for every valid base: $\\log_a(1) = 0$ because $a^0 = 1$, and $\\log_a(a) = 1$ because $a^1 = a$. The inverse identities $\\log_a(a^x) = x$ and $a^{\\log_a(x)} = x$ express that logarithms and exponentials undo each other.`,
+      illustrations: [
+        {
+          src: `[ILLUSTRATION: Two-row diagram mirroring the Root SVG pattern. Top row: $2^3 = 8$ with forward arrow labeled "exponentiation," then $\\log_2(8) = 3$ with reverse arrow labeled "logarithm." Bottom row: $10^2 = 100$ forward, $\\log_{10}(100) = 2$ reverse. Third row: $a^c = b$ forward, $\\log_a(b) = c$ reverse (in purple). Dots between specific and generic rows.]`,
+          alt: "Exponentiation and logarithms as inverse operations",
+          caption: "Logarithms undo exponentiation"
+        }
+      ],
+      links: [
+        { label: "What is a Logarithm", url: "/algebra/logarithms#1" },
+        { label: "Inverse Identities", url: "/algebra/logarithms#4" }
+      ]
+    },
+    "examples": `$\\log_2(8) = 3$ because $2^3 = 8$
+
+$\\log_{10}(1000) = 3$ because $10^3 = 1000$
+
+$\\log_5(25) = 2$ because $5^2 = 25$
+
+$\\log_3(1) = 0$ because $3^0 = 1$
+
+$\\log_4(4) = 1$ because $4^1 = 4$`,
+    "related concepts": `
+- [Base (of a Logarithm)](!/algebra/definitions#base_(of_a_logarithm))
+- [Argument (of a Logarithm)](!/algebra/definitions#argument_(of_a_logarithm))
+- [Common Logarithm](!/algebra/definitions#common_logarithm)
+- [Natural Logarithm](!/algebra/definitions#natural_logarithm)
+- [Logarithmic Function](!/algebra/definitions#logarithmic_function)
+- [Logarithmic Equation](!/algebra/definitions#logarithmic_equation)`
+  },
+  category: "Logarithms"
+},
+
+{
+  name: "Base (of a Logarithm)",
+  formula: "The number $a$ in $\\log_a(b)$; must satisfy $a > 0$ and $a \\neq 1$.",
+  link: { label: "Logarithms", url: "/algebra/logarithms" },
+  fields: {
+    "restrictions": `The base must be positive and not equal to one:
+
+- $a > 0$: a negative base produces complex or undefined values for most exponents
+- $a \\neq 1$: since $1^c = 1$ for all $c$, no exponent distinguishes one output from another
+- $0 < a < 1$ is valid: produces a decreasing logarithmic function
+- $a > 1$: produces an increasing logarithmic function
+
+The base determines the direction of monotonicity, which controls whether inequality direction is preserved or reversed.`,
+    "examples": `$\\log_2(8) = 3$ — base $2$
+
+$\\log_{10}(100) = 2$ — base $10$ (common logarithm)
+
+$\\log_e(e^3) = 3$ — base $e$ (natural logarithm)
+
+$\\log_{1/2}(4) = -2$ — base $1/2$ (valid, since $0 < 1/2 < 1$)
+
+$\\log_1(5)$ — undefined (base $1$ not allowed)`,
+    "related concepts": `
+- [Logarithm](!/algebra/definitions#logarithm)
+- [Argument (of a Logarithm)](!/algebra/definitions#argument_(of_a_logarithm))
+- [Common Logarithm](!/algebra/definitions#common_logarithm) — base $10$
+- [Natural Logarithm](!/algebra/definitions#natural_logarithm) — base $e$
+- [Monotonicity](!/algebra/definitions#monotonicity) — direction depends on base
+- [Change of Base Formula](!/algebra/definitions#change_of_base_formula) — converts between bases
+- [Restrictions on Base and Argument](!/algebra/logarithms#2)`
+  },
+  category: "Logarithms"
+},
+
+{
+  name: "Argument (of a Logarithm)",
+  formula: "The number $b$ in $\\log_a(b)$; must satisfy $b > 0$.",
+  link: { label: "Logarithms", url: "/algebra/logarithms" },
+  fields: {
+    "restrictions": `The argument must be strictly positive. Since $a^c > 0$ for any positive base $a$ and any real exponent $c$, no real exponent can produce zero or a negative result.
+
+- $\\log_a(0)$ is undefined — no solution to $a^c = 0$ exists
+- $\\log_a(-5)$ is undefined — no real $c$ satisfies $a^c = -5$
+
+For composite arguments like $\\log_2(x - 3)$, the entire expression must be positive: $x - 3 > 0$, giving $x > 3$. This determines the domain of logarithmic functions and creates the possibility of extraneous solutions when solving equations.`,
+    "examples": `$\\log_2(8)$ — argument is $8$ (valid, positive)
+
+$\\log_3(x - 5)$ — requires $x - 5 > 0$, so $x > 5$
+
+$\\log_{10}(0)$ — undefined
+
+$\\log_5(-25)$ — undefined`,
+    "related concepts": `
+- [Logarithm](!/algebra/definitions#logarithm)
+- [Base (of a Logarithm)](!/algebra/definitions#base_(of_a_logarithm))
+- [Logarithmic Function](!/algebra/definitions#logarithmic_function) — domain is all positive arguments
+- [Logarithmic Equation](!/algebra/definitions#logarithmic_equation) — solutions must satisfy argument > 0
+- [Restrictions on Base and Argument](!/algebra/logarithms#2)`
+  },
+  category: "Logarithms"
+},
+
+{
+  name: "Common Logarithm",
+  formula: "The logarithm with base $10$, written $\\log(x)$ or $\\log_{10}(x)$.",
+  link: { label: "Common & Natural", url: "/algebra/logarithms/common-natural" },
+  fields: {
+    "notation": `Written $\\log(x)$ without a subscript. Some textbooks and programming languages use $\\log$ to mean the natural logarithm instead — context determines which convention applies. When ambiguity is possible, $\\log_{10}(x)$ makes the base explicit.
+
+Calculators typically label the base-10 key as LOG.`,
+    "examples": `$\\log(10) = 1$
+
+$\\log(100) = 2$
+
+$\\log(1000) = 3$
+
+$\\log(0.01) = -2$
+
+$\\log(500) \\approx 2.699$`,
+    "related concepts": `
+- [Logarithm](!/algebra/definitions#logarithm)
+- [Natural Logarithm](!/algebra/definitions#natural_logarithm)
+- [Change of Base Formula](!/algebra/definitions#change_of_base_formula) — converts to/from common log
+- [The Common Logarithm](!/algebra/logarithms/common-natural#1)
+- [Logarithm Table](!/tables/arithmetics/logarithm)
+- [Log Calculator](!/calculators/log-calculator)`
+  },
+  category: "Logarithms"
+},
+
+{
+  name: "Natural Logarithm",
+  formula: "The logarithm with base $e \\approx 2.71828$, written $\\ln(x)$ or $\\log_e(x)$.",
+  link: { label: "Common & Natural", url: "/algebra/logarithms/common-natural" },
+  fields: {
+    "notation": `Written $\\ln(x)$, read "natural log of $x$." The abbreviation comes from the Latin logarithmus naturalis.
+
+Calculators label the base-$e$ key as LN. In many programming languages and advanced mathematics texts, $\\log$ without subscript means $\\ln$.`,
+    "key distinction": `The natural logarithm dominates theoretical mathematics because $e$ has a unique calculus property: the derivative of $e^x$ is $e^x$ itself, and the derivative of $\\ln(x)$ is $1/x$. No other base produces these clean results.`,
+    "examples": `$\\ln(1) = 0$
+
+$\\ln(e) = 1$
+
+$\\ln(e^3) = 3$
+
+$\\ln(2) \\approx 0.693$
+
+$\\ln(10) \\approx 2.303$`,
+    "related concepts": `
+- [Logarithm](!/algebra/definitions#logarithm)
+- [Euler's Number (e)](!/algebra/definitions#euler's_number_(e))
+- [Common Logarithm](!/algebra/definitions#common_logarithm)
+- [Change of Base Formula](!/algebra/definitions#change_of_base_formula)
+- [The Natural Logarithm](!/algebra/logarithms/common-natural#2)
+- [Natural Logarithm Table](!/tables/arithmetics/natural-logarithms)`
+  },
+  category: "Logarithms"
+},
+
+{
+  name: "Euler's Number (e)",
+  formula: "The irrational constant $e \\approx 2.71828$, defined as $\\lim_{n \\to \\infty} (1 + 1/n)^n$.",
+  link: { label: "Common & Natural", url: "/algebra/logarithms/common-natural" },
+  fields: {
+    "properties": `- Irrational: decimal expansion never terminates or repeats
+- $e = 2.718281828459045\\ldots$
+- Base of the natural logarithm: $\\ln(x) = \\log_e(x)$
+- Unique calculus property: $\\frac{d}{dx} e^x = e^x$
+- Arises from continuous compounding: $\\lim_{n \\to \\infty} (1 + 1/n)^n = e$
+- Also defined by the series: $e = \\sum_{n=0}^{\\infty} \\frac{1}{n!}$`,
+    "examples": `$e^0 = 1$
+
+$e^1 = e \\approx 2.718$
+
+$\\ln(e) = 1$
+
+$\\ln(e^5) = 5$
+
+$(1 + 1/1000)^{1000} \\approx 2.7169$ (approaching $e$)`,
+    "related concepts": `
+- [Natural Logarithm](!/algebra/definitions#natural_logarithm)
+- [Exponential Functions](!/algebra/powers/exponential-functions)
+- [The Number e](!/algebra/logarithms/common-natural#3)`
+  },
+  category: "Logarithms"
+},
+
+{
+  name: "Product Rule (Logarithms)",
+  formula: "$\\log_a(xy) = \\log_a(x) + \\log_a(y)$ — the logarithm of a product equals the sum of the logarithms.",
+  link: { label: "Rules", url: "/algebra/logarithms/rules" },
+  fields: {
+    "derivation": `Let $\\log_a(x) = m$ and $\\log_a(y) = n$. Then $x = a^m$ and $y = a^n$.
+
+$$xy = a^m \\cdot a^n = a^{m+n}$$
+
+$$\\log_a(xy) = m + n = \\log_a(x) + \\log_a(y)$$
+
+The rule derives from the exponent law $a^m \\cdot a^n = a^{m+n}$. Multiplication inside the logarithm becomes addition outside.`,
+    "examples": `$\\log_2(8 \\cdot 4) = \\log_2(8) + \\log_2(4) = 3 + 2 = 5$
+
+$\\log(2x) = \\log(2) + \\log(x)$
+
+$\\ln(abc) = \\ln(a) + \\ln(b) + \\ln(c)$`,
+    "related concepts": `
+- [Quotient Rule (Logarithms)](!/algebra/definitions#quotient_rule_(logarithms))
+- [Power Rule (Logarithms)](!/algebra/definitions#power_rule_(logarithms))
+- [The Product Rule](!/algebra/logarithms/rules#1)
+- [Expanding Logarithms](!/algebra/logarithms/rules#5)
+- [Condensing Logarithms](!/algebra/logarithms/rules#6)`
+  },
+  category: "Logarithms"
+},
+
+{
+  name: "Quotient Rule (Logarithms)",
+  formula: "$\\log_a(x/y) = \\log_a(x) - \\log_a(y)$ — the logarithm of a quotient equals the difference of the logarithms.",
+  link: { label: "Rules", url: "/algebra/logarithms/rules" },
+  fields: {
+    "derivation": `Let $\\log_a(x) = m$ and $\\log_a(y) = n$. Then $x/y = a^m / a^n = a^{m-n}$.
+
+$$\\log_a(x/y) = m - n = \\log_a(x) - \\log_a(y)$$
+
+Special case: $\\log_a(1/x) = -\\log_a(x)$, since $\\log_a(1) = 0$.`,
+    "examples": `$\\log_3(81/9) = \\log_3(81) - \\log_3(9) = 4 - 2 = 2$
+
+$\\log(x/5) = \\log(x) - \\log(5)$
+
+$\\ln(1/x) = -\\ln(x)$`,
+    "related concepts": `
+- [Product Rule (Logarithms)](!/algebra/definitions#product_rule_(logarithms))
+- [Power Rule (Logarithms)](!/algebra/definitions#power_rule_(logarithms))
+- [The Quotient Rule](!/algebra/logarithms/rules#2)`
+  },
+  category: "Logarithms"
+},
+
+{
+  name: "Power Rule (Logarithms)",
+  formula: "$\\log_a(x^n) = n \\cdot \\log_a(x)$ — exponents inside the argument become coefficients outside.",
+  link: { label: "Rules", url: "/algebra/logarithms/rules" },
+  fields: {
+    "derivation": `Let $\\log_a(x) = m$, so $x = a^m$. Then $x^n = (a^m)^n = a^{mn}$.
+
+$$\\log_a(x^n) = mn = n \\cdot \\log_a(x)$$
+
+Works for any real exponent $n$, including fractions and negatives:
+
+$\\log_a(\\sqrt{x}) = \\log_a(x^{1/2}) = \\frac{1}{2} \\log_a(x)$
+
+$\\log_a(x^{-3}) = -3 \\log_a(x)$`,
+    "examples": `$\\log_2(8^4) = 4 \\cdot \\log_2(8) = 4 \\cdot 3 = 12$
+
+$\\ln(\\sqrt{x}) = \\frac{1}{2} \\ln(x)$
+
+$\\log(x^{-2}) = -2 \\log(x)$`,
+    "related concepts": `
+- [Product Rule (Logarithms)](!/algebra/definitions#product_rule_(logarithms))
+- [Quotient Rule (Logarithms)](!/algebra/definitions#quotient_rule_(logarithms))
+- [The Power Rule](!/algebra/logarithms/rules#3)`
+  },
+  category: "Logarithms"
+},
+
+{
+  name: "Change of Base Formula",
+  formula: "$\\log_a(x) = \\frac{\\log_b(x)}{\\log_b(a)}$ — converts a logarithm from one base to any other.",
+  link: { label: "Rules", url: "/algebra/logarithms/rules" },
+  fields: {
+    "derivation": `Let $\\log_a(x) = y$, so $a^y = x$. Take $\\log_b$ of both sides:
+
+$$\\log_b(a^y) = \\log_b(x)$$
+
+$$y \\cdot \\log_b(a) = \\log_b(x)$$
+
+$$y = \\frac{\\log_b(x)}{\\log_b(a)}$$
+
+Special case: $\\log_a(b) = \\frac{1}{\\log_b(a)}$ — swapping base and argument gives the reciprocal.`,
+    "examples": `$\\log_2(10) = \\frac{\\log(10)}{\\log(2)} = \\frac{1}{0.301} \\approx 3.322$
+
+$\\log_5(7) = \\frac{\\ln(7)}{\\ln(5)} \\approx 1.209$
+
+$\\log_3(2) = \\frac{1}{\\log_2(3)} \\approx \\frac{1}{1.585} \\approx 0.631$`,
+    "related concepts": `
+- [Common Logarithm](!/algebra/definitions#common_logarithm) — typical target base for calculators
+- [Natural Logarithm](!/algebra/definitions#natural_logarithm) — alternative target base
+- [The Change of Base Formula](!/algebra/logarithms/rules#4)`
+  },
+  category: "Logarithms"
+},
+
+{
+  name: "Monotonicity",
+  formula: "A logarithmic function is strictly increasing when $a > 1$ and strictly decreasing when $0 < a < 1$.",
+  link: { label: "Properties", url: "/algebra/logarithms/properties" },
+  fields: {
+    "key distinction": `For $a > 1$: if $x_1 < x_2$, then $\\log_a(x_1) < \\log_a(x_2)$. Inequality direction is preserved.
+
+For $0 < a < 1$: if $x_1 < x_2$, then $\\log_a(x_1) > \\log_a(x_2)$. Inequality direction is reversed.
+
+This is the single most important property when solving logarithmic inequalities. Taking logarithms of both sides preserves or reverses the inequality depending entirely on the base.`,
+    "examples": `$\\log_2(4) < \\log_2(8)$ — base $> 1$, direction preserved ($2 < 3$)
+
+$\\log_{1/2}(4) > \\log_{1/2}(8)$ — base $< 1$, direction reversed ($-2 > -3$)`,
+    "related concepts": `
+- [One-to-One Property](!/algebra/definitions#one-to-one_property) — follows from monotonicity
+- [Logarithmic Inequality](!/algebra/definitions#logarithmic_inequality) — direction depends on this
+- [Base (of a Logarithm)](!/algebra/definitions#base_(of_a_logarithm)) — determines increasing vs decreasing
+- [Monotonicity](!/algebra/logarithms/properties#3)`
+  },
+  category: "Logarithms"
+},
+
+{
+  name: "One-to-One Property",
+  formula: "If $\\log_a(x) = \\log_a(y)$, then $x = y$. No two distinct inputs produce the same output.",
+  link: { label: "Properties", url: "/algebra/logarithms/properties" },
+  fields: {
+    "strategy": `This property justifies a key equation-solving technique: when both sides of an equation are logarithms with the same base, set the arguments equal and solve the resulting algebraic equation.
+
+$$\\log_a(M) = \\log_a(N) \\implies M = N$$
+
+Every solution must still be checked against domain restrictions — both $M > 0$ and $N > 0$ must hold.`,
+    "examples": `$\\log_3(2x + 1) = \\log_3(x + 5) \\implies 2x + 1 = x + 5 \\implies x = 4$
+
+$\\ln(x^2) = \\ln(9) \\implies x^2 = 9 \\implies x = \\pm 3$ (both valid since arguments stay positive)`,
+    "related concepts": `
+- [Monotonicity](!/algebra/definitions#monotonicity) — one-to-one follows from strict monotonicity
+- [Logarithmic Equation](!/algebra/definitions#logarithmic_equation) — primary application
+- [One-to-One Property](!/algebra/logarithms/properties#4)
+- [Logarithms on Both Sides](!/algebra/logarithms/equations#2)`
+  },
+  category: "Logarithms"
+},
+
+{
+  name: "Logarithmic Equation",
+  formula: "An equation in which the variable appears inside the argument of a logarithm.",
+  link: { label: "Equations", url: "/algebra/logarithms/equations" },
+  fields: {
+    "strategy": `Two main forms:
+
+1. Logarithm equals a constant: $\\log_a(f(x)) = k$ — convert to exponential form: $f(x) = a^k$
+
+2. Logarithms on both sides: $\\log_a(M) = \\log_a(N)$ — apply the one-to-one property: $M = N$
+
+When multiple logarithms appear, use the product, quotient, or power rules to condense into a single logarithm first. Every solution must satisfy domain restrictions: all original arguments must be positive.`,
+    "examples": `$\\log_2(x) = 5 \\implies x = 32$
+
+$\\log_5(2x - 1) = 2 \\implies 2x - 1 = 25 \\implies x = 13$
+
+$\\log_2(x) + \\log_2(x - 2) = 3 \\implies \\log_2(x^2 - 2x) = 3 \\implies x^2 - 2x = 8$`,
+    "related concepts": `
+- [One-to-One Property](!/algebra/definitions#one-to-one_property) — technique for logs on both sides
+- [Product Rule (Logarithms)](!/algebra/definitions#product_rule_(logarithms)) — combining logarithms
+- [Argument (of a Logarithm)](!/algebra/definitions#argument_(of_a_logarithm)) — domain restrictions
+- [Extraneous Solution](!/algebra/definitions#extraneous_solution) — must verify all candidates
+- [Basic Form](!/algebra/logarithms/equations#1)
+- [Combining Logarithms](!/algebra/logarithms/equations#3)
+- [Domain Restrictions](!/algebra/logarithms/equations#4)`
+  },
+  category: "Logarithms"
+},
+
+{
+  name: "Logarithmic Inequality",
+  formula: "An inequality involving a logarithmic expression, where the base determines whether inequality direction is preserved or reversed.",
+  link: { label: "Inequalities", url: "/algebra/logarithms/inequalities" },
+  fields: {
+    "key distinction": `The solving process mirrors equations with one critical addition: the base controls direction.
+
+For $a > 1$ (increasing function): $\\log_a(x) > k \\implies x > a^k$ — direction preserved
+
+For $0 < a < 1$ (decreasing function): $\\log_a(x) > k \\implies x < a^k$ — direction reversed
+
+Domain restrictions apply throughout: every argument must remain positive. The final answer is the intersection of the algebraic solution with the domain.`,
+    "examples": `$\\log_2(x) > 3 \\implies x > 8$ (base $> 1$, preserved)
+
+$\\log_{1/2}(x) > 3 \\implies x < 1/8$ (base $< 1$, reversed)
+
+$\\log_5(x) \\leq 2 \\implies 0 < x \\leq 25$ (including domain)`,
+    "related concepts": `
+- [Monotonicity](!/algebra/definitions#monotonicity) — why direction depends on base
+- [Base (of a Logarithm)](!/algebra/definitions#base_(of_a_logarithm))
+- [Logarithmic Equation](!/algebra/definitions#logarithmic_equation) — same techniques, different operator
+- [Base Greater Than One](!/algebra/logarithms/inequalities#1)
+- [Base Between Zero and One](!/algebra/logarithms/inequalities#2)`
+  },
+  category: "Logarithms"
+},
+
+{
+  name: "Logarithmic Function",
+  formula: "The function $f(x) = \\log_a(x)$ with domain $(0, \\infty)$, range $(-\\infty, \\infty)$, and vertical asymptote at $x = 0$.",
+  link: { label: "Graphs", url: "/algebra/logarithms/graphs" },
+  fields: {
+    "properties": {
+      text: `- Domain: $(0, \\infty)$ — only positive inputs
+- Range: $(-\\infty, \\infty)$ — all real outputs
+- Passes through $(1, 0)$ and $(a, 1)$ for every base
+- Vertical asymptote at $x = 0$ (the $y$-axis)
+- Concave down throughout for $a > 1$
+- Strictly increasing when $a > 1$; strictly decreasing when $0 < a < 1$
+- Continuous on its entire domain
+- Inverse of the exponential function $g(x) = a^x$: their graphs reflect across $y = x$
+
+Transformations shift the asymptote and key points: $y = \\log_a(x - h) + k$ has asymptote at $x = h$ and passes through $(1 + h, k)$.`,
+      illustrations: [
+        {
+          src: `[ILLUSTRATION: Two logarithmic curves on the same axes. Curve 1: $y = \\log_2(x)$ in teal, passing through $(1,0)$, $(2,1)$, $(4,2)$, $(8,3)$, approaching $x = 0$ from the right and plunging downward. Curve 2: $y = \\log_{1/2}(x)$ in coral, passing through $(1,0)$, $(2,-1)$, $(4,-2)$, reflected version. Dashed vertical line at $x = 0$ labeled "asymptote." Points $(1,0)$ marked as shared by both curves.]`,
+          alt: "Logarithmic function graphs for base > 1 and base < 1",
+          caption: "Base > 1 increases; base < 1 decreases. Both pass through (1, 0)."
+        }
+      ],
+      links: [
+        { label: "The Basic Shape", url: "/algebra/logarithms/graphs#1" },
+        { label: "The Vertical Asymptote", url: "/algebra/logarithms/graphs#3" },
+        { label: "Key Points", url: "/algebra/logarithms/graphs#4" },
+        { label: "Effect of Base on Shape", url: "/algebra/logarithms/graphs#5" }
+      ]
+    },
+    "examples": `$f(x) = \\log_2(x)$ — domain $(0, \\infty)$, increasing
+
+$g(x) = \\log_{1/3}(x)$ — domain $(0, \\infty)$, decreasing
+
+$h(x) = \\log_5(x - 2)$ — domain $(2, \\infty)$, asymptote at $x = 2$
+
+$k(x) = \\ln(x) + 3$ — domain $(0, \\infty)$, shifted up by $3$`,
+    "related concepts": `
+- [Logarithm](!/algebra/definitions#logarithm)
+- [Monotonicity](!/algebra/definitions#monotonicity)
+- [One-to-One Property](!/algebra/definitions#one-to-one_property)
+- [Argument (of a Logarithm)](!/algebra/definitions#argument_(of_a_logarithm)) — domain = positive arguments
+- [Inverse Relationship](!/algebra/logarithms/properties#7)
+- [Transformations](!/algebra/logarithms/graphs#6)`
+  },
+  category: "Logarithms"
+},
+
+
+
 
    
-   {
-    name: "Logarithm",
-    formula: "For positive numbers $b ≠ 1$ and $x > 0$, $log_b(x) = y$ means $b^y = x$. Written as: $\\log_b(x) = y \\iff b^y = x$",
-    fields: {
-      "properties": `- Domain: x > 0
-   - Base $b > 0$ and $b ≠ 1$ 
-   - One-to-one function
-   - Inverse of exponential`,
-      "examples": `$\\log_2(8) = 3$ because $2^3 = 8$
-   $\\log_3(27) = 3$ because $3^3 = 27$
-   $\\log_{10}(100) = 2$ because $10^2 = 100$`
-    },
-    category: "Logarithms"
-   },
-   {
-    name: "Base",
-    formula: "The positive number b ≠ 1 in logarithmic expression $\\log_b(x)$ or exponential expression $b^x$",
-    fields: {
-      "properties": `
-      - Must be positive
-  - Cannot equal 1
-  - Common bases: 10, e, 2
-  - Determines growth rate`,
-      "examples": `Common bases:
-  $\\log_{10}(x)$ (common log)
-  $\\log_e(x)$ (natural log, ln)
-  $\\log_2(x)$ (binary log)`
-    },
-    category: "Logarithms"
-  },
-  {
-    name: "Exponent",
-    formula: "The power y in exponential form $b^y$ or the value of logarithm $\\log_b(x)$ where $b^y = x$",
-    fields: {
-      "properties": `
-      - Can be any real number
-  - Results in logarithm value
-  - Determines output level
-  - Key in exponential growth`,
-      "examples": `In $2^3 = 8$:
-  Exponent is 3
-  $\\log_2(8) = 3$
+  //  {
+  //   name: "Logarithm",
+  //   formula: "For positive numbers $b ≠ 1$ and $x > 0$, $log_b(x) = y$ means $b^y = x$. Written as: $\\log_b(x) = y \\iff b^y = x$",
+  //   fields: {
+  //     "properties": `- Domain: x > 0
+  //  - Base $b > 0$ and $b ≠ 1$ 
+  //  - One-to-one function
+  //  - Inverse of exponential`,
+  //     "examples": `$\\log_2(8) = 3$ because $2^3 = 8$
+  //  $\\log_3(27) = 3$ because $3^3 = 27$
+  //  $\\log_{10}(100) = 2$ because $10^2 = 100$`
+  //   },
+  //   category: "Logarithms"
+  //  },
+  //  {
+  //   name: "Base",
+  //   formula: "The positive number b ≠ 1 in logarithmic expression $\\log_b(x)$ or exponential expression $b^x$",
+  //   fields: {
+  //     "properties": `
+  //     - Must be positive
+  // - Cannot equal 1
+  // - Common bases: 10, e, 2
+  // - Determines growth rate`,
+  //     "examples": `Common bases:
+  // $\\log_{10}(x)$ (common log)
+  // $\\log_e(x)$ (natural log, ln)
+  // $\\log_2(x)$ (binary log)`
+  //   },
+  //   category: "Logarithms"
+  // },
+  // {
+  //   name: "Exponent",
+  //   formula: "The power y in exponential form $b^y$ or the value of logarithm $\\log_b(x)$ where $b^y = x$",
+  //   fields: {
+  //     "properties": `
+  //     - Can be any real number
+  // - Results in logarithm value
+  // - Determines output level
+  // - Key in exponential growth`,
+  //     "examples": `In $2^3 = 8$:
+  // Exponent is 3
+  // $\\log_2(8) = 3$
   
-  In $10^x = 1000$:
-  $x = \\log_{10}(1000) = 3$`
-    },
-    category: "Logarithms"
-  },
-  {
-    name: "Natural Logarithm",
-    formula: "Logarithm with base $e (≈ 2.71828...)$, written as $ln(x)$ or $\\log_e(x)$. Inverse of exponential function $e^x$",
-    fields: {
-      "properties": `- Most common in calculus
-   - Used in continuous growth
-   - Base e is irrational
-   - Standard notation $ln(x)$`,
-      "examples": `
-      $\\ln(e) = 1$
-   $\\ln(e^2) = 2$
-   $\\ln(1) = 0$
-   $\\ln(e^x) = x$`
-    },
-    category: "Logarithms"
-   },
+  // In $10^x = 1000$:
+  // $x = \\log_{10}(1000) = 3$`
+  //   },
+  //   category: "Logarithms"
+  // },
+  // {
+  //   name: "Natural Logarithm",
+  //   formula: "Logarithm with base $e (≈ 2.71828...)$, written as $ln(x)$ or $\\log_e(x)$. Inverse of exponential function $e^x$",
+  //   fields: {
+  //     "properties": `- Most common in calculus
+  //  - Used in continuous growth
+  //  - Base e is irrational
+  //  - Standard notation $ln(x)$`,
+  //     "examples": `
+  //     $\\ln(e) = 1$
+  //  $\\ln(e^2) = 2$
+  //  $\\ln(1) = 0$
+  //  $\\ln(e^x) = x$`
+  //   },
+  //   category: "Logarithms"
+  //  },
    
-   {
-    name: "Common Logarithm",
-    formula: "Logarithm with base 10, written as $log(x)$ or $\\log_{10}(x)$. Used for decimal representations",
-    fields: {
-      "properties": `- Used in scientific notation
-   - Counts decimal digits
-   - Often written without base
-   - Standard notation $log(x)$`,
-      "examples": `$\\log(100) = 2$
-   $\\log(1000) = 3$
-   $\\log(10^n) = n$
-   $\\log(0.01) = -2$`
-    },
-    category: "Logarithms"
-   },
+  //  {
+  //   name: "Common Logarithm",
+  //   formula: "Logarithm with base 10, written as $log(x)$ or $\\log_{10}(x)$. Used for decimal representations",
+  //   fields: {
+  //     "properties": `- Used in scientific notation
+  //  - Counts decimal digits
+  //  - Often written without base
+  //  - Standard notation $log(x)$`,
+  //     "examples": `$\\log(100) = 2$
+  //  $\\log(1000) = 3$
+  //  $\\log(10^n) = n$
+  //  $\\log(0.01) = -2$`
+  //   },
+  //   category: "Logarithms"
+  //  },
    
-   {
-    name: "Binary Logarithm",
-    formula: "Logarithm with base 2, written as $\\log_2(x)$. Used in computer science and information theory",
-    fields: {
-      "properties": `- Used in algorithm analysis
-   - Measures bits needed
-   - Common in computing
-   - Standard notation $\\log_2(x)$`,
-      "examples": `$\\log_2(8) = 3$
-   $\\log_2(16) = 4$
-   $\\log_2(2^n) = n$
-   $\\log_2(1024) = 10$`
-    },
-    category: "Logarithms"
-   },
-   {
-    name: "Antilogarithm",
-    formula: "The inverse logarithm function: if y = $\\log_b(x)$, then $antilog_b(y) = x = b^y$",
-    fields: {
-      "properties": `- Inverse of logarithm
-   - Same as exponential function
-   - Returns original number
-   - Preserves base`,
-      "examples": `If $\\log(100) = 2$
-   then antilog(2) = 100
+  //  {
+  //   name: "Binary Logarithm",
+  //   formula: "Logarithm with base 2, written as $\\log_2(x)$. Used in computer science and information theory",
+  //   fields: {
+  //     "properties": `- Used in algorithm analysis
+  //  - Measures bits needed
+  //  - Common in computing
+  //  - Standard notation $\\log_2(x)$`,
+  //     "examples": `$\\log_2(8) = 3$
+  //  $\\log_2(16) = 4$
+  //  $\\log_2(2^n) = n$
+  //  $\\log_2(1024) = 10$`
+  //   },
+  //   category: "Logarithms"
+  //  },
+  //  {
+  //   name: "Antilogarithm",
+  //   formula: "The inverse logarithm function: if y = $\\log_b(x)$, then $antilog_b(y) = x = b^y$",
+  //   fields: {
+  //     "properties": `- Inverse of logarithm
+  //  - Same as exponential function
+  //  - Returns original number
+  //  - Preserves base`,
+  //     "examples": `If $\\log(100) = 2$
+  //  then antilog(2) = 100
    
-   If $\\ln(x) = 3$
-   then antiln(3) = e³
+  //  If $\\ln(x) = 3$
+  //  then antiln(3) = e³
    
-   For $\\log_2(8) = 3$:
-   antilog₂(3) = 2³ = 8`
-    },
-    category: "Logarithms"
-   },
+  //  For $\\log_2(8) = 3$:
+  //  antilog₂(3) = 2³ = 8`
+  //   },
+  //   category: "Logarithms"
+  //  },
    
-   {
-    name: "Characteristic",
-    formula: "The integer part n of logarithm where $\\log_{10}(x) = n + d$ and $0 ≤ d < 1$",
-    fields: {
-      "properties": `- Integer part of logarithm
-   - Indicates magnitude
-   - Can be negative
-   - For base 10 equals exponent in scientific notation`,
-      "examples": `For $\\log(234) = 2.369$:
-   Characteristic = 2
+  //  {
+  //   name: "Characteristic",
+  //   formula: "The integer part n of logarithm where $\\log_{10}(x) = n + d$ and $0 ≤ d < 1$",
+  //   fields: {
+  //     "properties": `- Integer part of logarithm
+  //  - Indicates magnitude
+  //  - Can be negative
+  //  - For base 10 equals exponent in scientific notation`,
+  //     "examples": `For $\\log(234) = 2.369$:
+  //  Characteristic = 2
    
-   For $\\log(0.0234) = -1.631$:
-   Characteristic = -2`
-    },
-    category: "Logarithms"
-   },
+  //  For $\\log(0.0234) = -1.631$:
+  //  Characteristic = -2`
+  //   },
+  //   category: "Logarithms"
+  //  },
    
-   {
-    name: "Mantissa",
-    formula: "The decimal part d of logarithm where $\\log_{10}(x) = n + d$ and $0 ≤ d < 1$",
-    fields: {
-      "properties": `- Decimal part of logarithm
-   - Always positive
-   - Independent of decimal point position
-   - Used in log tables`,
-      "examples": `For $\\log(234) = 2.369$:
-   Mantissa = 0.369
+  //  {
+  //   name: "Mantissa",
+  //   formula: "The decimal part d of logarithm where $\\log_{10}(x) = n + d$ and $0 ≤ d < 1$",
+  //   fields: {
+  //     "properties": `- Decimal part of logarithm
+  //  - Always positive
+  //  - Independent of decimal point position
+  //  - Used in log tables`,
+  //     "examples": `For $\\log(234) = 2.369$:
+  //  Mantissa = 0.369
    
-   For $\\log(0.0234) = -1.631$:
-   Mantissa = 0.369`
-    },
-    category: "Logarithms"
-   },
-   {
-    name: "Logarithmic Function",
-    formula: "Function $f(x) = \\log_b(x)$ where $b > 0, b ≠ 1$. Inverse of exponential function $g(x) = b^x$",
-    fields: {
-      "properties": `- Domain: $x > 0$
-   - Range: all real numbers
-   - Strictly increasing if $b > 1$
-   - Strictly decreasing if $0 < b < 1$`,
-      "examples": `Common forms:
-   $f(x) = \\ln(x)$
-   $f(x) = \\log_{10}(x)$
-   $f(x) = \\log_2(x)$`,
-      "graph": "Characteristic curved shape crossing y-axis at (1,0)"
-    },
-    category: "Logarithms"
-   },
+  //  For $\\log(0.0234) = -1.631$:
+  //  Mantissa = 0.369`
+  //   },
+  //   category: "Logarithms"
+  //  },
+  //  {
+  //   name: "Logarithmic Function",
+  //   formula: "Function $f(x) = \\log_b(x)$ where $b > 0, b ≠ 1$. Inverse of exponential function $g(x) = b^x$",
+  //   fields: {
+  //     "properties": `- Domain: $x > 0$
+  //  - Range: all real numbers
+  //  - Strictly increasing if $b > 1$
+  //  - Strictly decreasing if $0 < b < 1$`,
+  //     "examples": `Common forms:
+  //  $f(x) = \\ln(x)$
+  //  $f(x) = \\log_{10}(x)$
+  //  $f(x) = \\log_2(x)$`,
+  //     "graph": "Characteristic curved shape crossing y-axis at (1,0)"
+  //   },
+  //   category: "Logarithms"
+  //  },
    
-   {
-    name: "Complex Logarithm",
-    formula: "For complex $z = r(cos θ + i sin θ)$, $\\ln(z) = \\ln(r) + i(θ + 2πn)$ where n is integer",
-    fields: {
-      "properties": `- Multivalued function
-   - Has infinite branches
-   - Principal value when $n = 0$
-   - Defined except at $z = 0$`,
-      "examples": `$\\ln(-1) = πi + 2πni$
-   $\\ln(i) = \\frac{πi}{2} + 2πni$
-   Principal value:
-   $\\ln(-1) = πi$`
-    },
-    category: "Logarithms"
-   },
+  //  {
+  //   name: "Complex Logarithm",
+  //   formula: "For complex $z = r(cos θ + i sin θ)$, $\\ln(z) = \\ln(r) + i(θ + 2πn)$ where n is integer",
+  //   fields: {
+  //     "properties": `- Multivalued function
+  //  - Has infinite branches
+  //  - Principal value when $n = 0$
+  //  - Defined except at $z = 0$`,
+  //     "examples": `$\\ln(-1) = πi + 2πni$
+  //  $\\ln(i) = \\frac{πi}{2} + 2πni$
+  //  Principal value:
+  //  $\\ln(-1) = πi$`
+  //   },
+  //   category: "Logarithms"
+  //  },
    
-   {
-    name: "Discrete Logarithm",
-    formula: "For integers $a, b, m$, find $x$ where $a^x ≡ b \\pmod{m}$. Written as $\\log_a(b) \\pmod{m}$",
-    fields: {
-      "properties": `- Used in cryptography
-   - Computationally difficult
-   - May not exist
-   - Modular arithmetic based`,
-      "examples": `In mod 7:
-   $2^3 ≡ 1 \\pmod{7}$
-   so $\\log_2(1) ≡ 3 \\pmod{7}$
+  //  {
+  //   name: "Discrete Logarithm",
+  //   formula: "For integers $a, b, m$, find $x$ where $a^x ≡ b \\pmod{m}$. Written as $\\log_a(b) \\pmod{m}$",
+  //   fields: {
+  //     "properties": `- Used in cryptography
+  //  - Computationally difficult
+  //  - May not exist
+  //  - Modular arithmetic based`,
+  //     "examples": `In mod 7:
+  //  $2^3 ≡ 1 \\pmod{7}$
+  //  so $\\log_2(1) ≡ 3 \\pmod{7}$
    
-   $3^x ≡ 4 \\pmod{7}$
-   $x = \\log_3(4) \\pmod{7}$`
-    },
-    category: "Logarithms"
-   },
-   {
-    name: "Logarithmic Scale",
-    formula: "Scale where values are spaced by powers of base b: positions proportional to $\\log_b(x)$ rather than x",
-    fields: {
-      "properties": `- Equal ratios = equal distances
-   - Compresses large ranges
-   - Often uses base 10
-   - Shows percentage changes`,
-      "examples": `Common scales:
-   pH scale (base 10)
-   Richter scale (base 10)
-   Decibels (base 10)
-   Musical octaves (base 2)`,
-      "applications": "Scientific notation, sound intensity, earthquake magnitude"
-    },
-    category: "Logarithms"
-   },
+  //  $3^x ≡ 4 \\pmod{7}$
+  //  $x = \\log_3(4) \\pmod{7}$`
+  //   },
+  //   category: "Logarithms"
+  //  },
+  //  {
+  //   name: "Logarithmic Scale",
+  //   formula: "Scale where values are spaced by powers of base b: positions proportional to $\\log_b(x)$ rather than x",
+  //   fields: {
+  //     "properties": `- Equal ratios = equal distances
+  //  - Compresses large ranges
+  //  - Often uses base 10
+  //  - Shows percentage changes`,
+  //     "examples": `Common scales:
+  //  pH scale (base 10)
+  //  Richter scale (base 10)
+  //  Decibels (base 10)
+  //  Musical octaves (base 2)`,
+  //     "applications": "Scientific notation, sound intensity, earthquake magnitude"
+  //   },
+  //   category: "Logarithms"
+  //  },
    
-   {
-    name: "Exponential Form",
-    formula: "Equivalent expression of $\\log_b(x) = y$ as $b^y = x$, showing inverse relationship between logarithms and exponents",
-    fields: {
-      "properties": `- Shows inverse relationship
-   - Used for solving equations
-   - Connects exp and log
-   - Base remains constant`,
-      "examples": `$\\log_2(8) = 3 \\iff 2^3 = 8$
-   $\\ln(x) = 4 \\iff e^4 = x$
-   $\\log_{10}(1000) = 3 \\iff 10^3 = 1000$`
-    },
-    category: "Logarithms"
-   },
+  //  {
+  //   name: "Exponential Form",
+  //   formula: "Equivalent expression of $\\log_b(x) = y$ as $b^y = x$, showing inverse relationship between logarithms and exponents",
+  //   fields: {
+  //     "properties": `- Shows inverse relationship
+  //  - Used for solving equations
+  //  - Connects exp and log
+  //  - Base remains constant`,
+  //     "examples": `$\\log_2(8) = 3 \\iff 2^3 = 8$
+  //  $\\ln(x) = 4 \\iff e^4 = x$
+  //  $\\log_{10}(1000) = 3 \\iff 10^3 = 1000$`
+  //   },
+  //   category: "Logarithms"
+  //  },
    
-   {
-    name: "Logarithmic Identity",
-    formula: "Fundamental rules for manipulating logarithms with same base b:",
-    fields: {
-      "properties": `Product rule: $\\log_b(xy) = \\log_b(x) + \\log_b(y)$
-   Quotient rule: $\\log_b(\\frac{x}{y}) = \\log_b(x) - \\log_b(y)$
-   Power rule: $\\log_b(x^n) = n\\log_b(x)$
-   Change of base: $\\log_b(x) = \\frac{\\log_a(x)}{\\log_a(b)}$`,
-      "examples": `$\\log(30) = \\log(2 \\cdot 15) = \\log(2) + \\log(15)$
-   $\\log_2(\\frac{8}{2}) = \\log_2(8) - \\log_2(2) = 3 - 1 = 2$
-   $\\log(x^3) = 3\\log(x)$`
-    },
-    category: "Logarithms"
-   },
-   {
-    name: "Logarithmic Expression",
-    formula: "Mathematical expression containing one or more logarithms, may include variables and other operations",
-    fields: {
-      "properties": `- Contains at least one logarithm
-   - May have variables
-   - Can be simplified using log rules
-   - Domain restrictions apply`,
-      "examples": `$2\\ln(x) + 3$
-   $\\log(x^2 + 1)$
-   $\\log_2(x) + \\log_2(y)$
-   $\\frac{\\ln(x)}{\\ln(2)}$`
-    },
-    category: "Logarithms"
-   },
+  //  {
+  //   name: "Logarithmic Identity",
+  //   formula: "Fundamental rules for manipulating logarithms with same base b:",
+  //   fields: {
+  //     "properties": `Product rule: $\\log_b(xy) = \\log_b(x) + \\log_b(y)$
+  //  Quotient rule: $\\log_b(\\frac{x}{y}) = \\log_b(x) - \\log_b(y)$
+  //  Power rule: $\\log_b(x^n) = n\\log_b(x)$
+  //  Change of base: $\\log_b(x) = \\frac{\\log_a(x)}{\\log_a(b)}$`,
+  //     "examples": `$\\log(30) = \\log(2 \\cdot 15) = \\log(2) + \\log(15)$
+  //  $\\log_2(\\frac{8}{2}) = \\log_2(8) - \\log_2(2) = 3 - 1 = 2$
+  //  $\\log(x^3) = 3\\log(x)$`
+  //   },
+  //   category: "Logarithms"
+  //  },
+  //  {
+  //   name: "Logarithmic Expression",
+  //   formula: "Mathematical expression containing one or more logarithms, may include variables and other operations",
+  //   fields: {
+  //     "properties": `- Contains at least one logarithm
+  //  - May have variables
+  //  - Can be simplified using log rules
+  //  - Domain restrictions apply`,
+  //     "examples": `$2\\ln(x) + 3$
+  //  $\\log(x^2 + 1)$
+  //  $\\log_2(x) + \\log_2(y)$
+  //  $\\frac{\\ln(x)}{\\ln(2)}$`
+  //   },
+  //   category: "Logarithms"
+  //  },
    
-   {
-    name: "Logarithmic Equation",
-    formula: "Equation containing logarithmic expressions that must be solved for variable(s)",
-    fields: {
-      "properties": `- Check domain restrictions
-   - Use log properties to simplify
-   - Convert to exponential form
-   - Check for extraneous solutions`,
-      "examples": `Solving $\\ln(x) = 2$:
-   $\\ln(x) = 2$
-   $e^{\\ln(x)} = e^2$
-   $x = e^2$
+  //  {
+  //   name: "Logarithmic Equation",
+  //   formula: "Equation containing logarithmic expressions that must be solved for variable(s)",
+  //   fields: {
+  //     "properties": `- Check domain restrictions
+  //  - Use log properties to simplify
+  //  - Convert to exponential form
+  //  - Check for extraneous solutions`,
+  //     "examples": `Solving $\\ln(x) = 2$:
+  //  $\\ln(x) = 2$
+  //  $e^{\\ln(x)} = e^2$
+  //  $x = e^2$
    
-   Solving $\\log_2(x+1) = 3$:
-   $2^{\\log_2(x+1)} = 2^3$
-   $x + 1 = 8$
-   $x = 7$`
-    },
-    category: "Logarithms"
-   },
+  //  Solving $\\log_2(x+1) = 3$:
+  //  $2^{\\log_2(x+1)} = 2^3$
+  //  $x + 1 = 8$
+  //  $x = 7$`
+  //   },
+  //   category: "Logarithms"
+  //  },
    
-   {
-    name: "Logarithmic Inequality",
-    formula: "Inequality containing logarithmic expressions to be solved: $\\log_b(x) < k$ or $\\log_b(f(x)) > \\log_b(g(x))$",
-    fields: {
-      "properties": `
-      - Consider base when solving
-   - Domain restrictions crucial
-   - Direction changes if base < 1
-   - Convert to exponential form`,
-      "examples": `Solving $\\ln(x) > 2$:
-   $\\ln(x) > 2$
-   $e^{\\ln(x)} > e^2$
-   $x > e^2$
+  //  {
+  //   name: "Logarithmic Inequality",
+  //   formula: "Inequality containing logarithmic expressions to be solved: $\\log_b(x) < k$ or $\\log_b(f(x)) > \\log_b(g(x))$",
+  //   fields: {
+  //     "properties": `
+  //     - Consider base when solving
+  //  - Domain restrictions crucial
+  //  - Direction changes if base < 1
+  //  - Convert to exponential form`,
+  //     "examples": `Solving $\\ln(x) > 2$:
+  //  $\\ln(x) > 2$
+  //  $e^{\\ln(x)} > e^2$
+  //  $x > e^2$
    
-   $\\log_2(x) < 3$:
-   $x < 2^3$
-   $x < 8$`
-    },
-    category: "Logarithms"
-   },
-   {
-    name: "Asymptote",
-    formula: "For logarithmic function $f(x) = \\log_b(x)$, vertical asymptote at $x = 0$",
-    fields: {
-      "properties": `
-      - Vertical: x = 0
-   - Function never crosses
-   - Defines domain boundary
-   - Different bases, same asymptote`,
-      "examples": `For $y = \\ln(x)$:
-   - Vertical asymptote: x = 0
-   - As x → 0⁺, y → -∞
-   - As x → ∞, y grows slowly`
-    },
-    category: "Logarithms"
-   },
+  //  $\\log_2(x) < 3$:
+  //  $x < 2^3$
+  //  $x < 8$`
+  //   },
+  //   category: "Logarithms"
+  //  },
+  //  {
+  //   name: "Asymptote",
+  //   formula: "For logarithmic function $f(x) = \\log_b(x)$, vertical asymptote at $x = 0$",
+  //   fields: {
+  //     "properties": `
+  //     - Vertical: x = 0
+  //  - Function never crosses
+  //  - Defines domain boundary
+  //  - Different bases, same asymptote`,
+  //     "examples": `For $y = \\ln(x)$:
+  //  - Vertical asymptote: x = 0
+  //  - As x → 0⁺, y → -∞
+  //  - As x → ∞, y grows slowly`
+  //   },
+  //   category: "Logarithms"
+  //  },
    
-   {
-    name: "Graph of a Logarithmic Function",
-    formula: "Plot of $y = \\log_b(x)$ showing characteristic shape with vertical asymptote and continuous growth",
-    fields: {
-      "properties": `
-      - Domain: x > 0
-   - Vertical asymptote at x = 0
-   - Passes through (1,0)
-   - Continuous and increasing for b > 1`,
-      "key points": `- (1,0) always
-   - (b,1) where b is base
-   - ($\\frac{1}{b}$,-1) where b is base`
-    },
-    category: "Logarithms"
-   },
+  //  {
+  //   name: "Graph of a Logarithmic Function",
+  //   formula: "Plot of $y = \\log_b(x)$ showing characteristic shape with vertical asymptote and continuous growth",
+  //   fields: {
+  //     "properties": `
+  //     - Domain: x > 0
+  //  - Vertical asymptote at x = 0
+  //  - Passes through (1,0)
+  //  - Continuous and increasing for b > 1`,
+  //     "key points": `- (1,0) always
+  //  - (b,1) where b is base
+  //  - ($\\frac{1}{b}$,-1) where b is base`
+  //   },
+  //   category: "Logarithms"
+  //  },
    
-   {
-    name: "Base-Change Rule",
-    formula: "$\\log_a(x) = \\frac{\\log_c(x)}{\\log_c(a)}$ for any base $c > 0, c ≠ 1$",
-    fields: {
-      "properties": `
-      - Valid for any positive base
-   - Commonly used with base e or 10
-   - Preserves function value
-   - Useful for calculations`,
-      "examples": `$\\log_2(x) = \\frac{\\ln(x)}{\\ln(2)}$
-   $\\log_3(x) = \\frac{\\log_{10}(x)}{\\log_{10}(3)}$`
-    },
-    category: "Logarithms"
-   },
+  //  {
+  //   name: "Base-Change Rule",
+  //   formula: "$\\log_a(x) = \\frac{\\log_c(x)}{\\log_c(a)}$ for any base $c > 0, c ≠ 1$",
+  //   fields: {
+  //     "properties": `
+  //     - Valid for any positive base
+  //  - Commonly used with base e or 10
+  //  - Preserves function value
+  //  - Useful for calculations`,
+  //     "examples": `$\\log_2(x) = \\frac{\\ln(x)}{\\ln(2)}$
+  //  $\\log_3(x) = \\frac{\\log_{10}(x)}{\\log_{10}(3)}$`
+  //   },
+  //   category: "Logarithms"
+  //  },
    
-   {
-    name: "Logarithmic Growth",
-    formula: "Growth pattern where variable increases by additive constant when input is multiplied by constant: $f(cx) = f(x) + k$",
-    fields: {
-      "properties": `- Slower than polynomial
-   - Inverse of exponential
-   - Common in natural processes
-   - Scale-invariant growth`,
-      "examples": `- Computing complexity O(log n)
-   - pH scale
-   - Earthquake magnitude
-   - Sound intensity (decibels)`
-    },
-    category: "Logarithms"
-   },
+  //  {
+  //   name: "Logarithmic Growth",
+  //   formula: "Growth pattern where variable increases by additive constant when input is multiplied by constant: $f(cx) = f(x) + k$",
+  //   fields: {
+  //     "properties": `- Slower than polynomial
+  //  - Inverse of exponential
+  //  - Common in natural processes
+  //  - Scale-invariant growth`,
+  //     "examples": `- Computing complexity O(log n)
+  //  - pH scale
+  //  - Earthquake magnitude
+  //  - Sound intensity (decibels)`
+  //   },
+  //   category: "Logarithms"
+  //  },
    
-   {
-    name: "Logarithmic Transformation",
-    formula: "Converting data by taking logarithm: $y = \\log_b(x)$ to linearize relationships or normalize distributions",
-    fields: {
-      "properties": `
-      - Compresses large ranges
-   - Normalizes skewed data
-   - Linearizes exponential relationships
-   - Preserves order`,
-      "applications": `- Statistical analysis
-   - Data visualization
-   - Economic scales
-   - Sound measurement`
-    },
-    category: "Logarithms"
-   },
+  //  {
+  //   name: "Logarithmic Transformation",
+  //   formula: "Converting data by taking logarithm: $y = \\log_b(x)$ to linearize relationships or normalize distributions",
+  //   fields: {
+  //     "properties": `
+  //     - Compresses large ranges
+  //  - Normalizes skewed data
+  //  - Linearizes exponential relationships
+  //  - Preserves order`,
+  //     "applications": `- Statistical analysis
+  //  - Data visualization
+  //  - Economic scales
+  //  - Sound measurement`
+  //   },
+  //   category: "Logarithms"
+  //  },
 
 
 

@@ -5,6 +5,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
@@ -66,6 +67,41 @@ const keyWords = [
 //                   }} />
 
     const sectionsContent={
+
+      obj0: {
+  title: `Key Terms`,
+  content: `
+## Core Vocabulary
+ 
+- [Logarithm](!/algebra/definitions#logarithm) — the exponent to which a base must be raised to produce a given number
+- [Base (of a Logarithm)](!/algebra/definitions#base_(of_a_logarithm)) — the number $a$ in $\\log_a(b)$; must be positive and not equal to $1$
+- [Argument (of a Logarithm)](!/algebra/definitions#argument_(of_a_logarithm)) — the number $b$ in $\\log_a(b)$; must be positive
+ 
+## Special Bases
+ 
+- [Common Logarithm](!/algebra/definitions#common_logarithm) — base $10$, written $\\log(x)$
+- [Natural Logarithm](!/algebra/definitions#natural_logarithm) — base $e$, written $\\ln(x)$
+- [Euler's Number (e)](!/algebra/definitions#euler's_number_(e)) — the irrational constant $e \\approx 2.71828$
+ 
+## Rules
+ 
+- [Product Rule (Logarithms)](!/algebra/definitions#product_rule_(logarithms)) — $\\log_a(xy) = \\log_a(x) + \\log_a(y)$
+- [Quotient Rule (Logarithms)](!/algebra/definitions#quotient_rule_(logarithms)) — $\\log_a(x/y) = \\log_a(x) - \\log_a(y)$
+- [Power Rule (Logarithms)](!/algebra/definitions#power_rule_(logarithms)) — $\\log_a(x^n) = n \\cdot \\log_a(x)$
+- [Change of Base Formula](!/algebra/definitions#change_of_base_formula) — $\\log_a(x) = \\log_b(x) / \\log_b(a)$
+ 
+## Properties and Behavior
+ 
+- [Monotonicity](!/algebra/definitions#monotonicity) — increasing for $a > 1$, decreasing for $0 < a < 1$
+- [One-to-One Property](!/algebra/definitions#one-to-one_property) — if $\\log_a(x) = \\log_a(y)$ then $x = y$
+- [Logarithmic Function](!/algebra/definitions#logarithmic_function) — domain $(0, \\infty)$, range $(-\\infty, \\infty)$, vertical asymptote at $x = 0$
+- [Logarithmic Equation](!/algebra/definitions#logarithmic_equation) — an equation where the variable appears inside a logarithm
+- [Logarithmic Inequality](!/algebra/definitions#logarithmic_inequality) — inequality direction depends on the base`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
 
    obj1: {
   title: `What is a Logarithm?`,
@@ -385,6 +421,14 @@ const schemas = {
 export default function LogarithmsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {   
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -611,8 +655,15 @@ export default function LogarithmsPage({seoData, sectionsContent, introContent, 
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+        id="0"
+        title={sectionsContent.obj0.title}
+        content={sectionsContent.obj0.content}
+        after={sectionsContent.obj0.after}
+        variant="light"
+      />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>
