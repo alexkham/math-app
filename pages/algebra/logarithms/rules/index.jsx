@@ -68,6 +68,28 @@ const keyWords = [
 
 
 const sectionsContent = {
+  
+obj0: {
+  title: `Key Terms`,
+  content: `
+## The Rules
+ 
+- [Product Rule (Logarithms)](!/algebra/definitions#product_rule_(logarithms)) — $\\log_a(xy) = \\log_a(x) + \\log_a(y)$
+- [Quotient Rule (Logarithms)](!/algebra/definitions#quotient_rule_(logarithms)) — $\\log_a(x/y) = \\log_a(x) - \\log_a(y)$
+- [Power Rule (Logarithms)](!/algebra/definitions#power_rule_(logarithms)) — $\\log_a(x^n) = n \\cdot \\log_a(x)$
+- [Change of Base Formula](!/algebra/definitions#change_of_base_formula) — $\\log_a(x) = \\log_b(x) / \\log_b(a)$
+ 
+## Supporting Concepts
+ 
+- [Logarithm](!/algebra/definitions#logarithm) — each rule derives from an exponent law inverted through the definition
+- [Common Logarithm](!/algebra/definitions#common_logarithm) — typical target base for change of base
+- [Natural Logarithm](!/algebra/definitions#natural_logarithm) — alternative target base`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
+ 
   obj1: {
     title: `The Product Rule`,
     content: `The logarithm of a product equals the sum of the logarithms:

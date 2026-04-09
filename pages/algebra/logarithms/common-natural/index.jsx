@@ -202,6 +202,24 @@ const keyWords = [
 //   }
 
 const sectionsContent = {
+  
+obj0: {
+  title: `Key Terms`,
+  content: `
+## The Two Special Bases
+ 
+- [Common Logarithm](!/algebra/definitions#common_logarithm) — base $10$, written $\\log(x)$
+- [Natural Logarithm](!/algebra/definitions#natural_logarithm) — base $e$, written $\\ln(x)$
+- [Euler's Number (e)](!/algebra/definitions#euler's_number_(e)) — the irrational constant $e \\approx 2.71828$, base of the natural logarithm
+ 
+## Converting
+ 
+- [Change of Base Formula](!/algebra/definitions#change_of_base_formula) — converts between any two bases using $\\log$ or $\\ln$`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
   obj1: {
     title: `The Common Logarithm`,
     content: `The common logarithm is the [logarithm](!/algebra/logarithms) with base $10$. It is written $\\log(x)$ without a subscript, or $\\log_{10}(x)$ when clarity is needed.

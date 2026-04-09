@@ -201,6 +201,23 @@ const keyWords = [
   
 //   }
 const sectionsContent = {
+  obj0: {
+  title: `Key Terms`,
+  content: `
+## Graph Features
+ 
+- [Logarithmic Function](!/algebra/definitions#logarithmic_function) — domain $(0, \\infty)$, range $(-\\infty, \\infty)$, passes through $(1, 0)$
+- [Base (of a Logarithm)](!/algebra/definitions#base_(of_a_logarithm)) — determines whether the curve rises or falls
+- [Monotonicity](!/algebra/definitions#monotonicity) — $a > 1$ gives an increasing curve; $0 < a < 1$ gives a decreasing curve
+ 
+## Anchor Values
+ 
+- [Logarithm](!/algebra/definitions#logarithm) — $\\log_a(1) = 0$ and $\\log_a(a) = 1$ anchor every graph`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
   obj1: {
     title: `The Basic Shape`,
     content: `The graph of $y = \\log_a(x)$ for $a > 1$ rises slowly from left to right. Starting from extreme negative $y$-values near the $y$-axis, the curve crosses through $(1, 0)$, continues through $(a, 1)$, and extends upward without bound as $x$ increases.

@@ -201,6 +201,21 @@ const keyWords = [
   
 //   }
 const sectionsContent = {
+  
+obj0: {
+  title: `Key Terms`,
+  content: `
+## Inequality Concepts
+ 
+- [Logarithmic Inequality](!/algebra/definitions#logarithmic_inequality) — inequality direction depends on whether the base is greater than or less than $1$
+- [Monotonicity](!/algebra/definitions#monotonicity) — the property that controls whether direction is preserved or reversed
+- [Base (of a Logarithm)](!/algebra/definitions#base_(of_a_logarithm)) — $a > 1$ preserves direction; $0 < a < 1$ reverses it
+- [Argument (of a Logarithm)](!/algebra/definitions#argument_(of_a_logarithm)) — domain restriction: all arguments must remain positive`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
   obj1: {
     title: `Base Greater Than One: Direction Preserved`,
     content: `When $a > 1$, the function $f(x) = \\log_a(x)$ is strictly increasing. Larger inputs produce larger outputs, so inequality direction is preserved when converting between logarithmic and exponential forms.

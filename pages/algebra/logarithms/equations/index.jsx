@@ -201,6 +201,26 @@ const keyWords = [
   
 //   }
 const sectionsContent = {
+  obj0: {
+  title: `Key Terms`,
+  content: `
+## Equation Concepts
+ 
+- [Logarithmic Equation](!/algebra/definitions#logarithmic_equation) — an equation where the variable appears inside a logarithm
+- [One-to-One Property](!/algebra/definitions#one-to-one_property) — if $\\log_a(M) = \\log_a(N)$ then $M = N$
+- [Argument (of a Logarithm)](!/algebra/definitions#argument_(of_a_logarithm)) — all arguments must be positive; solutions violating this are extraneous
+ 
+## Rules Used
+ 
+- [Product Rule (Logarithms)](!/algebra/definitions#product_rule_(logarithms)) — combining sums of logarithms
+- [Power Rule (Logarithms)](!/algebra/definitions#power_rule_(logarithms)) — moving coefficients into exponents
+- [Change of Base Formula](!/algebra/definitions#change_of_base_formula) — solving exponential equations via logarithms`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
+ 
   obj1: {
     title: `Basic Form: Logarithm Equals a Constant`,
     content: `The simplest logarithmic equation has the form $\\log_a(x) = k$, where $k$ is a constant.

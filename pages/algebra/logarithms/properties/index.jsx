@@ -202,6 +202,21 @@ const keyWords = [
 //   }
 
 const sectionsContent = {
+  
+obj0: {
+  title: `Key Terms`,
+  content: `
+## Structural Properties
+ 
+- [Argument (of a Logarithm)](!/algebra/definitions#argument_(of_a_logarithm)) — must be positive; determines the domain
+- [Monotonicity](!/algebra/definitions#monotonicity) — increasing for base $> 1$, decreasing for base between $0$ and $1$
+- [One-to-One Property](!/algebra/definitions#one-to-one_property) — distinct inputs always produce distinct outputs
+- [Logarithmic Function](!/algebra/definitions#logarithmic_function) — domain, range, asymptote, and inverse relationship`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
   obj1: {
     title: `Domain`,
     content: `The domain of $f(x) = \\log_a(x)$ is the set of all positive real numbers: $(0, \\infty)$.
