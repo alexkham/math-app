@@ -245,7 +245,7 @@ Multiplication and division follow the [radical rules](!/algebra/roots/radical-r
 Detailed techniques for reducing radicals to simplest form appear in [simplifying radicals](!/algebra/roots/simplifying). Methods for combining and manipulating radical expressions appear in [operations with radicals](!/algebra/roots/operations).`,
     before: ``,
     after: ``,
-    link: '',
+    link: '/algebra/roots/simplifying',
   },
 
   obj7: {
