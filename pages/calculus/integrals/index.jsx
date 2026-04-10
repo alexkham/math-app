@@ -177,8 +177,23 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
+const keyWords = [
+  "integrals calculus",
+  "integration",
+  "definite integral",
+  "indefinite integral",
+  "antiderivative",
+  "fundamental theorem of calculus",
+  "integration techniques",
+  "integration by parts",
+  "substitution method",
+  "improper integrals",
+  "Riemann sum",
+  "area under curve",
+  "integration rules",
+  "integral formulas",
+  "accumulation"
+]
 
   // •
 
@@ -586,27 +601,147 @@ finds a function—the antiderivative whose derivative returns the original inte
 };
 
 
+const faqQuestions = {
+  obj1: {
+    question: "What is integration in calculus?",
+    answer: "Integration computes accumulated totals from rates of change. Given a velocity function, integrating yields total distance traveled. The integral formalizes continuous summation — adding infinitely many infinitesimal contributions to get a total.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "What is the difference between definite and indefinite integrals?",
+    answer: "A definite integral has bounds (a to b) and produces a number representing accumulated quantity. An indefinite integral has no bounds and produces a family of functions (antiderivatives) differing by a constant C.",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "What is an antiderivative?",
+    answer: "An antiderivative F(x) of f(x) is a function whose derivative equals f(x). The indefinite integral finds all antiderivatives, written as F(x) + C where C is an arbitrary constant representing the infinite family of solutions.",
+    sectionId: "5"
+  },
+  obj4: {
+    question: "What is the Fundamental Theorem of Calculus?",
+    answer: "The Fundamental Theorem connects definite and indefinite integrals. If F is any antiderivative of f, then the definite integral from a to b equals F(b) - F(a). This transforms area computation into finding antiderivatives.",
+    sectionId: "6"
+  },
+  obj5: {
+    question: "What are the main integration techniques?",
+    answer: "Key techniques include substitution (reversing chain rule), integration by parts (reversing product rule), partial fractions (decomposing rational functions), and trigonometric substitution (for square roots of quadratics).",
+    sectionId: "7"
+  },
+  obj6: {
+    question: "What are improper integrals?",
+    answer: "Improper integrals extend integration to infinite intervals or unbounded functions. They are defined as limits: the integral converges if the limit exists and is finite, diverges otherwise. Some infinite regions have finite area.",
+    sectionId: "9"
+  },
+  obj7: {
+    question: "How do you verify an integral is correct?",
+    answer: "Differentiate your answer. The derivative of the antiderivative should return the original integrand. This check catches algebraic errors and sign mistakes, since differentiation is more straightforward than integration.",
+    sectionId: "10"
+  }
+}
+
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Integrals in Calculus",
+    "description": "Master integrals: definite and indefinite integrals, antiderivatives, Fundamental Theorem of Calculus, integration techniques (substitution, parts, partial fractions), special integrals, and improper integrals.",
+    "url": "https://www.learnmathclass.com/calculus/integrals",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Integrals in Calculus"
+    },
+    "teaches": [
+      "The concept of accumulation",
+      "Definite vs indefinite integrals",
+      "Integral notation and terminology",
+      "Antiderivatives and the constant C",
+      "Fundamental Theorem of Calculus",
+      "Integration techniques",
+      "Special integral formulas",
+      "Improper integrals and convergence"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Calculus",
+        "item": "https://www.learnmathclass.com/calculus"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Integrals",
+        "item": "https://www.learnmathclass.com/calculus/integrals"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
 
 
    return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Title | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/calculus/integrals",
-         name: "name"
-      },
-        
-       }
-    }
+  props: {
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Integrals: Definite, Indefinite & Techniques | Learn Math Class",
+      description: "Master integrals: definite and indefinite integrals, antiderivatives, Fundamental Theorem of Calculus, integration techniques (substitution, parts, partial fractions), special integrals, and improper integrals.",
+      keywords: keyWords.join(", "),
+      url: "/calculus/integrals",
+      name: "Integrals in Calculus"
+    },
+  }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
+export default function IntegralsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
-    
   const genericSections=[
     // {
     //     id:'0',
@@ -765,7 +900,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+<Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -787,25 +922,21 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
   <script 
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

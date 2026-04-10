@@ -315,8 +315,23 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
+const keyWords = [
+  "derivatives calculus",
+  "derivative definition",
+  "difference quotient",
+  "derivative notation",
+  "differentiation rules",
+  "chain rule",
+  "product rule",
+  "quotient rule",
+  "implicit differentiation",
+  "higher order derivatives",
+  "differentiability",
+  "tangent line slope",
+  "instantaneous rate of change",
+  "derivative formulas",
+  "differentials"
+]
 
   // •
 
@@ -686,27 +701,146 @@ This single concept—instantaneous rate of change via a limiting process—gene
 `
 };
 
+const faqQuestions = {
+  obj1: {
+    question: "What is a derivative?",
+    answer: "A derivative measures the instantaneous rate of change of a function at a point. It is defined as the limit of the difference quotient: f'(a) = lim(h→0) [f(a+h) - f(a)]/h. Geometrically, this equals the slope of the tangent line to the graph at that point.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "What are the different notations for derivatives?",
+    answer: "Four notations are common: Lagrange (f'(x)), Leibniz (dy/dx), Euler (Df), and Newton (dot notation). Lagrange is compact for functions, Leibniz behaves like a fraction in chain rule, Euler appears in operator theory, and Newton is used for time derivatives.",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "What does the derivative tell you about a function?",
+    answer: "The sign of f'(x) indicates direction: positive means increasing, negative means decreasing. Where f'(x) = 0 are critical points (potential extrema). The second derivative f''(x) indicates concavity: positive is concave up, negative is concave down.",
+    sectionId: "3"
+  },
+  obj4: {
+    question: "When is a function not differentiable?",
+    answer: "A function fails to be differentiable at corners, cusps, vertical tangents, and discontinuities. Differentiability requires continuity (but continuity alone is not sufficient). The classic example is |x|, which is continuous but not differentiable at x = 0.",
+    sectionId: "5"
+  },
+  obj5: {
+    question: "What are the basic differentiation rules?",
+    answer: "The main rules are: power rule (d/dx[x^n] = nx^(n-1)), product rule, quotient rule, and chain rule for compositions. These convert the limit definition into algebraic procedures, making derivative computation efficient.",
+    sectionId: "6"
+  },
+  obj6: {
+    question: "What is implicit differentiation?",
+    answer: "Implicit differentiation finds dy/dx when y is not given explicitly as a function of x. Differentiate both sides of the equation with respect to x, treating y as a function of x (applying chain rule), then solve for dy/dx.",
+    sectionId: "7"
+  },
+  obj7: {
+    question: "What are higher-order derivatives?",
+    answer: "Higher-order derivatives result from differentiating repeatedly. The second derivative f''(x) measures concavity, the third and beyond capture finer behavior. Some functions exhibit patterns: e^x stays unchanged, polynomials eventually become zero, and trig functions cycle.",
+    sectionId: "10"
+  }
+}
 
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Derivatives in Calculus",
+    "description": "Master derivatives: difference quotient definition, notation systems, differentiation rules, implicit and logarithmic differentiation, common and special function derivatives, higher-order derivatives, and differentials.",
+    "url": "https://www.learnmathclass.com/calculus/derivatives",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Derivatives in Calculus"
+    },
+    "teaches": [
+      "Derivative definition via difference quotient",
+      "Derivative notation systems",
+      "Derivative graph analysis",
+      "Differentiability conditions",
+      "Differentiation rules and techniques",
+      "Common and special function derivatives",
+      "Higher-order derivatives",
+      "Differentials and linear approximation"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Calculus",
+        "item": "https://www.learnmathclass.com/calculus"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Derivatives",
+        "item": "https://www.learnmathclass.com/calculus/derivatives"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
 
 
    return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Title | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/calculus/derivatives",
-         name: "name"
-      },
-        
-       }
-    }
+  props: {
+    sectionsContent,
+    introContent,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Derivatives: Definition, Rules & Techniques | Learn Math Class",
+      description: "Master derivatives: difference quotient definition, notation systems, differentiation rules, implicit and logarithmic differentiation, common and special function derivatives, higher-order derivatives, and differentials.",
+      keywords: keyWords.join(", "),
+      url: "/calculus/derivatives",
+      name: "Derivatives in Calculus"
+    },
+  }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
+   export default function DerivativesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     // {
@@ -866,7 +1000,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+ <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -888,25 +1022,21 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
   <script 
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>
