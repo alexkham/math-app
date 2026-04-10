@@ -5,6 +5,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
@@ -67,6 +68,41 @@ const keyWords = [
 
 
 const sectionsContent = {
+  obj0: {
+  title: `Key Terms`,
+  content: `
+## Core Vocabulary
+ 
+- [Power](!/algebra/definitions#power) — an expression $a^n$ consisting of a base raised to an exponent
+- [Base (of a Power)](!/algebra/definitions#base_(of_a_power)) — the number $a$ being raised to a power
+- [Exponent](!/algebra/definitions#exponent) — the number $n$ controlling how the base is used
+ 
+## Exponent Types
+ 
+- [Natural Exponent](!/algebra/definitions#natural_exponent) — positive integer: $a^n = a \\cdot a \\cdots a$ ($n$ times)
+- [Zero Exponent](!/algebra/definitions#zero_exponent) — $a^0 = 1$ for $a \\neq 0$
+- [Negative Exponent](!/algebra/definitions#negative_exponent) — $a^{-n} = 1/a^n$
+- [Rational Exponent](!/algebra/definitions#rational_exponent) — $a^{m/n} = \\sqrt[n]{a^m}$
+- [Irrational Exponent](!/algebra/definitions#irrational_exponent) — defined as a limit of rational approximations
+ 
+## Laws
+ 
+- [Product Rule (Exponents)](!/algebra/definitions#product_rule_(exponents)) — $a^m \\cdot a^n = a^{m+n}$
+- [Quotient Rule (Exponents)](!/algebra/definitions#quotient_rule_(exponents)) — $a^m / a^n = a^{m-n}$
+- [Power of a Power](!/algebra/definitions#power_of_a_power) — $(a^m)^n = a^{mn}$
+- [Power of a Product](!/algebra/definitions#power_of_a_product) — $(ab)^n = a^n b^n$
+- [Power of a Quotient](!/algebra/definitions#power_of_a_quotient) — $(a/b)^n = a^n / b^n$
+ 
+## Applications
+ 
+- [Exponential Equation](!/algebra/definitions#exponential_equation) — variable in the exponent
+- [Exponential Inequality](!/algebra/definitions#exponential_inequality) — direction depends on the base
+- [Exponential Function](!/algebra/definitions#exponential_function) — $f(x) = a^x$ with fixed base, variable exponent`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
 
   obj1: {
     title: `Definition and Terminology`,
@@ -376,6 +412,14 @@ const schemas = {
  export default function PowersAndExponentsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {  
     
   const genericSections=[
+      {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -602,8 +646,15 @@ const schemas = {
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+           id="0"
+           title={sectionsContent.obj0.title}
+           content={sectionsContent.obj0.content}
+           after={sectionsContent.obj0.after}
+           variant="light"
+         />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

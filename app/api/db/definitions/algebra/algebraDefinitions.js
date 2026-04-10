@@ -2277,130 +2277,553 @@ $k(x) = \\ln(x) + 3$ — domain $(0, \\infty)$, shifted up by $3$`,
   
   
   
+//Category -Exponents
 
 
+
+// Exponents Category — 15 Definition Entries for algebraTermsList
+
+{
+  name: "Power",
+  formula: "An expression $a^n$ consisting of a base $a$ raised to an exponent $n$.",
+  link: { label: "Powers", url: "/algebra/powers" },
+  fields: {
+    "intuition": {
+      text: `A power compresses repeated multiplication into compact notation. The expression $a^n$ means $a$ multiplied by itself $n$ times when $n$ is a positive integer. The word "power" refers to the entire expression — not just the exponent.
+
+Special names: $a^2$ is "$a$ squared," $a^3$ is "$a$ cubed." All others use "$a$ to the $n$th power."
+
+The concept extends beyond counting repetitions: zero, negative, fractional, and irrational exponents each broaden the meaning while preserving the same algebraic laws.`,
+      links: [
+        { label: "Definition and Terminology", url: "/algebra/powers#1" },
+        { label: "Notation and Conventions", url: "/algebra/powers#2" }
+      ]
+    },
+    "examples": `$2^5 = 2 \\cdot 2 \\cdot 2 \\cdot 2 \\cdot 2 = 32$
+
+$(-3)^2 = (-3)(-3) = 9$
+
+$10^6 = 1{,}000{,}000$
+
+$a^1 = a$ for any $a$
+
+$1^n = 1$ for any $n$`,
+    "related concepts": `
+- [Base (of a Power)](!/algebra/definitions#base_(of_a_power))
+- [Exponent](!/algebra/definitions#exponent)
+- [Natural Exponent](!/algebra/definitions#natural_exponent)
+- [Root](!/algebra/definitions#root) — the inverse operation
+- [Logarithm](!/algebra/definitions#logarithm) — extracts the exponent`
+  },
+  category: "Exponents"
+},
+
+{
+  name: "Base (of a Power)",
+  formula: "The number $a$ in $a^n$ — the quantity being raised to a power.",
+  link: { label: "Powers", url: "/algebra/powers" },
+  fields: {
+    "key distinction": `Parentheses determine what counts as the base:
+
+$-2^2 = -(2^2) = -4$ — base is $2$, exponent applies to $2$ only
+
+$(-2)^2 = (-2)(-2) = 4$ — base is $-2$, exponent applies to the entire quantity
+
+Without parentheses, the exponent binds to the nearest symbol. The negative sign is not part of the base unless parentheses force it.`,
+    "examples": `In $3^5$, the base is $3$
+
+In $(-7)^3$, the base is $-7$
+
+In $-7^3$, the base is $7$ (result is $-343$)
+
+In $(2x)^4$, the base is $2x$`,
+    "related concepts": `
+- [Power](!/algebra/definitions#power)
+- [Exponent](!/algebra/definitions#exponent)
+- [Base (of a Logarithm)](!/algebra/definitions#base_(of_a_logarithm)) — different concept, same word
+- [Notation and Conventions](!/algebra/powers#2)`
+  },
+  category: "Exponents"
+},
+
+{
+  name: "Exponent",
+  formula: "The number $n$ in $a^n$ that controls how the base is used — counting repetitions for natural exponents, and generalizing through zero, negative, rational, and irrational values.",
+  link: { label: "Powers", url: "/algebra/powers" },
+  fields: {
+    "progression": `Each exponent type extends the previous while preserving the laws:
+
+- Natural ($n = 1, 2, 3, \\ldots$): count repeated multiplications
+- Zero ($n = 0$): $a^0 = 1$ for $a \\neq 0$, forced by the quotient rule
+- Negative ($n < 0$): $a^{-n} = 1/a^n$, extends the pattern below zero
+- Rational ($n = m/k$): $a^{m/k} = \\sqrt[k]{a^m}$, connects to roots
+- Irrational ($n = \\pi, \\sqrt{2}, \\ldots$): defined as the limit of rational approximations
+
+Domain restrictions tighten at each step: natural allows any base, negative excludes $0$, rational with even denominator requires $a \\geq 0$, irrational requires $a > 0$.`,
+    "examples": `$2^3 = 8$ — natural exponent
+
+$5^0 = 1$ — zero exponent
+
+$2^{-3} = 1/8$ — negative exponent
+
+$8^{2/3} = 4$ — rational exponent
+
+$2^\\pi \\approx 8.825$ — irrational exponent`,
+    "related concepts": `
+- [Power](!/algebra/definitions#power)
+- [Base (of a Power)](!/algebra/definitions#base_(of_a_power))
+- [Natural Exponent](!/algebra/definitions#natural_exponent)
+- [Zero Exponent](!/algebra/definitions#zero_exponent)
+- [Negative Exponent](!/algebra/definitions#negative_exponent)
+- [Rational Exponent](!/algebra/definitions#rational_exponent)
+- [Irrational Exponent](!/algebra/definitions#irrational_exponent)`
+  },
+  category: "Exponents"
+},
+
+{
+  name: "Natural Exponent",
+  formula: "A positive integer exponent: $a^n = \\underbrace{a \\cdot a \\cdot a \\cdots a}_{n \\text{ times}}$ for $n \\geq 1$.",
+  link: { label: "Natural Exponents", url: "/algebra/powers/natural-exponents" },
+  fields: {
+    "properties": `- Any real number can serve as base
+- Even exponents always produce non-negative results: $(-3)^2 = 9$
+- Odd exponents preserve sign: $(-3)^3 = -27$
+- All laws of exponents are first derived here from counting and regrouping factors
+- $a^1 = a$ for any $a$; $1^n = 1$ for any $n$`,
+    "examples": `$3^4 = 3 \\cdot 3 \\cdot 3 \\cdot 3 = 81$
+
+$(-2)^4 = 16$ — even exponent, positive result
+
+$(-2)^5 = -32$ — odd exponent, negative result
+
+$10^3 = 1000$`,
+    "related concepts": `
+- [Power](!/algebra/definitions#power)
+- [Exponent](!/algebra/definitions#exponent)
+- [Zero Exponent](!/algebra/definitions#zero_exponent) — next extension
+- [Sign Behavior](!/algebra/powers/natural-exponents#2)
+- [Product Rule derivation](!/algebra/powers/natural-exponents#3)`
+  },
+  category: "Exponents"
+},
+
+{
+  name: "Zero Exponent",
+  formula: "$a^0 = 1$ for any $a \\neq 0$.",
+  link: { label: "Zero Powers", url: "/algebra/powers/zero-powers" },
+  fields: {
+    "why it equals one": `Forced by the quotient rule: $a^n / a^n = a^{n-n} = a^0$. Since $a^n / a^n = 1$, we must have $a^0 = 1$.
+
+A pattern argument confirms: $3^3 = 27$, $3^2 = 9$, $3^1 = 3$. Each step divides by $3$. Continuing: $3^0 = 1$.
+
+The case $0^0$ is genuinely ambiguous — combinatorics assigns it $1$ (empty product), analysis leaves it undefined (indeterminate form $0^0$).`,
+    "examples": `$5^0 = 1$
+
+$(-3)^0 = 1$
+
+$(0.001)^0 = 1$
+
+$0^0$ — context-dependent`,
+    "related concepts": `
+- [Exponent](!/algebra/definitions#exponent)
+- [Negative Exponent](!/algebra/definitions#negative_exponent) — next extension below zero
+- [Quotient Rule (Exponents)](!/algebra/definitions#quotient_rule_(exponents)) — forces the definition
+- [Why a⁰ = 1](!/algebra/powers/zero-powers#3)
+- [The 0⁰ Debate](!/algebra/powers/zero-powers#4)`
+  },
+  category: "Exponents"
+},
+
+{
+  name: "Negative Exponent",
+  formula: "$a^{-n} = \\frac{1}{a^n}$ for $a \\neq 0$.",
+  link: { label: "Negative Exponents", url: "/algebra/powers/negative-exponents" },
+  fields: {
+    "why reciprocals": `Forced by the quotient rule: $a^2 / a^5 = a^{2-5} = a^{-3}$. By cancellation, $a^2 / a^5 = 1/a^3$. So $a^{-3} = 1/a^3$.
+
+The pattern extends the descending sequence: $3^1 = 3$, $3^0 = 1$, $3^{-1} = 1/3$, $3^{-2} = 1/9$.
+
+Base cannot be zero — $0^{-n}$ requires dividing by $0^n = 0$, which is undefined.`,
+    "examples": `$2^{-1} = 1/2$
+
+$3^{-2} = 1/9$
+
+$10^{-3} = 0.001$
+
+$x^{-1} = 1/x$
+
+$1/a^3 = a^{-3}$ — rewriting fractions without denominators`,
+    "related concepts": `
+- [Exponent](!/algebra/definitions#exponent)
+- [Zero Exponent](!/algebra/definitions#zero_exponent) — one step above
+- [Quotient Rule (Exponents)](!/algebra/definitions#quotient_rule_(exponents)) — forces the definition
+- [Definition of Negative Exponents](!/algebra/powers/negative-exponents#3)
+- [Double Negatives and Reciprocals](!/algebra/powers/negative-exponents#4)`
+  },
+  category: "Exponents"
+},
+
+{
+  name: "Irrational Exponent",
+  formula: "An exponent that cannot be expressed as a fraction, such as $\\pi$ or $\\sqrt{2}$. The value $a^x$ is defined as the limit of $a^r$ as rational $r$ approaches $x$.",
+  link: { label: "Irrational Exponents", url: "/algebra/powers/irrational-exponents" },
+  fields: {
+    "how it works": `The number $\\pi$ is irrational, so $2^\\pi$ cannot use the rational exponent definition. Instead, trap $\\pi$ between rational bounds and compute the corresponding powers:
+
+$2^3 = 8$, $2^{3.1} \\approx 8.574$, $2^{3.14} \\approx 8.815$, $2^{3.1415} \\approx 8.824$
+
+The values converge to $2^\\pi \\approx 8.825$.
+
+This requires $a > 0$ — for $a \\leq 0$, the sequence of rational approximations does not converge consistently.`,
+    "examples": `$2^\\pi \\approx 8.825$
+
+$e^\\pi \\approx 23.141$
+
+$10^{\\sqrt{2}} \\approx 25.119$`,
+    "related concepts": `
+- [Exponent](!/algebra/definitions#exponent) — completes the progression
+- [Rational Exponent](!/algebra/definitions#rational_exponent) — the previous step
+- [Exponential Function](!/algebra/definitions#exponential_function) — requires irrational exponents for continuity
+- [The Problem](!/algebra/powers/irrational-exponents#1)
+- [Intuition Through Approximation](!/algebra/powers/irrational-exponents#2)`
+  },
+  category: "Exponents"
+},
+
+{
+  name: "Product Rule (Exponents)",
+  formula: "$a^m \\cdot a^n = a^{m+n}$ — same base, add exponents.",
+  link: { label: "Exponent Rules", url: "/algebra/powers/exponent-rules" },
+  fields: {
+    "derivation": `For natural exponents: $a^m \\cdot a^n$ places $m$ factors of $a$ followed by $n$ more, giving $m + n$ total factors.
+
+The rule extends to all exponent types by definition — zero, negative, rational, and irrational exponents are chosen precisely to keep this identity valid.
+
+Bases must match: $2^3 \\cdot 3^4$ cannot be simplified by adding exponents.`,
+    "examples": `$2^3 \\cdot 2^4 = 2^7 = 128$
+
+$x^5 \\cdot x^{-2} = x^3$
+
+$a^{1/2} \\cdot a^{1/3} = a^{5/6}$`,
+    "related concepts": `
+- [Quotient Rule (Exponents)](!/algebra/definitions#quotient_rule_(exponents))
+- [Power of a Power](!/algebra/definitions#power_of_a_power)
+- [Product Rule (Radicals)](!/algebra/definitions#product_rule_(radicals)) — derived from this
+- [Product Rule (Logarithms)](!/algebra/definitions#product_rule_(logarithms)) — inverse of this
+- [The Product Rule](!/algebra/powers/exponent-rules#1)`
+  },
+  category: "Exponents"
+},
+
+{
+  name: "Quotient Rule (Exponents)",
+  formula: "$\\frac{a^m}{a^n} = a^{m-n}$ — same base, subtract exponents.",
+  link: { label: "Exponent Rules", url: "/algebra/powers/exponent-rules" },
+  fields: {
+    "derivation": `For natural exponents with $m > n$: cancel $n$ common factors from numerator and denominator, leaving $m - n$ factors.
+
+When $m = n$: gives $a^0 = 1$ — forces the zero exponent definition.
+When $m < n$: gives negative exponents — forces the negative exponent definition.`,
+    "examples": `$2^7 / 2^3 = 2^4 = 16$
+
+$x^3 / x^5 = x^{-2} = 1/x^2$
+
+$a^n / a^n = a^0 = 1$`,
+    "related concepts": `
+- [Product Rule (Exponents)](!/algebra/definitions#product_rule_(exponents))
+- [Zero Exponent](!/algebra/definitions#zero_exponent) — derived from this rule
+- [Negative Exponent](!/algebra/definitions#negative_exponent) — derived from this rule
+- [The Quotient Rule](!/algebra/powers/exponent-rules#2)`
+  },
+  category: "Exponents"
+},
+
+{
+  name: "Power of a Power",
+  formula: "$(a^m)^n = a^{mn}$ — raise a power to a power, multiply exponents.",
+  link: { label: "Exponent Rules", url: "/algebra/powers/exponent-rules" },
+  fields: {
+    "derivation": `$(a^m)^n$ means $a^m$ multiplied by itself $n$ times. By the product rule, this adds $m$ a total of $n$ times: $m + m + \\cdots + m = mn$.
+
+Note: $(a^m)^n \\neq a^{m^n}$. Stacked exponents read top-down: $a^{m^n}$ means $a^{(m^n)}$, not $(a^m)^n$.`,
+    "examples": `$(2^3)^4 = 2^{12} = 4096$
+
+$(x^2)^5 = x^{10}$
+
+$(a^{1/2})^4 = a^2$
+
+$2^{3^2} = 2^9 = 512$ — stacked, NOT $(2^3)^2 = 64$`,
+    "related concepts": `
+- [Product Rule (Exponents)](!/algebra/definitions#product_rule_(exponents))
+- [Power of a Product](!/algebra/definitions#power_of_a_product)
+- [Power Rule (Radicals)](!/algebra/definitions#power_rule_(radicals)) — same identity with $n = 1/k$
+- [Power of a Power](!/algebra/powers/exponent-rules#3)`
+  },
+  category: "Exponents"
+},
+
+{
+  name: "Power of a Product",
+  formula: "$(ab)^n = a^n \\cdot b^n$ — distribute the exponent across multiplication.",
+  link: { label: "Exponent Rules", url: "/algebra/powers/exponent-rules" },
+  fields: {
+    "derivation": `$(ab)^n = (ab)(ab)\\cdots(ab)$ — $n$ copies. Rearranging factors: all $a$'s together and all $b$'s together gives $a^n \\cdot b^n$.
+
+This is the exponent law behind the product rule for radicals: $\\sqrt[n]{ab} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$ is $(ab)^{1/n} = a^{1/n} \\cdot b^{1/n}$.`,
+    "examples": `$(2 \\cdot 3)^4 = 2^4 \\cdot 3^4 = 16 \\cdot 81 = 1296$
+
+$(xy)^3 = x^3 y^3$
+
+$(5a)^2 = 25a^2$`,
+    "related concepts": `
+- [Power of a Quotient](!/algebra/definitions#power_of_a_quotient)
+- [Power of a Power](!/algebra/definitions#power_of_a_power)
+- [Product Rule (Radicals)](!/algebra/definitions#product_rule_(radicals)) — same law at $n = 1/k$
+- [Power of a Product](!/algebra/powers/exponent-rules#4)`
+  },
+  category: "Exponents"
+},
+
+{
+  name: "Power of a Quotient",
+  formula: "$\\left(\\frac{a}{b}\\right)^n = \\frac{a^n}{b^n}$ — distribute the exponent across division, $b \\neq 0$.",
+  link: { label: "Exponent Rules", url: "/algebra/powers/exponent-rules" },
+  fields: {
+    "derivation": `$(a/b)^n = (a/b)(a/b)\\cdots(a/b)$ — $n$ copies. Multiply numerators and denominators separately: $a^n / b^n$.
+
+This is the exponent law behind the quotient rule for radicals: $\\sqrt[n]{a/b} = \\sqrt[n]{a} / \\sqrt[n]{b}$.`,
+    "examples": `$(3/4)^2 = 9/16$
+
+$(x/y)^3 = x^3/y^3$
+
+$(2/5)^{-1} = 5/2$`,
+    "related concepts": `
+- [Power of a Product](!/algebra/definitions#power_of_a_product)
+- [Quotient Rule (Radicals)](!/algebra/definitions#quotient_rule_(radicals)) — same law at $n = 1/k$
+- [Power of a Quotient](!/algebra/powers/exponent-rules#5)`
+  },
+  category: "Exponents"
+},
+
+{
+  name: "Exponential Equation",
+  formula: "An equation in which the variable appears in the exponent: $a^{f(x)} = b$.",
+  link: { label: "Exponential Equations", url: "/algebra/powers/exponential-equations" },
+  fields: {
+    "strategy": `Two main methods:
+
+1. Match bases: rewrite both sides as powers of the same base, then equate exponents.
+$2^x = 16 \\Rightarrow 2^x = 2^4 \\Rightarrow x = 4$
+
+2. Use logarithms: when bases cannot be matched, take $\\log$ or $\\ln$ of both sides.
+$3^x = 7 \\Rightarrow x = \\log_3(7) = \\ln(7)/\\ln(3) \\approx 1.771$
+
+Some equations are quadratics in disguise: $4^x - 5 \\cdot 2^x + 4 = 0$ becomes $u^2 - 5u + 4 = 0$ with $u = 2^x$.`,
+    "examples": `$2^x = 32 \\Rightarrow x = 5$
+
+$3^{2x-1} = 27 \\Rightarrow 2x - 1 = 3 \\Rightarrow x = 2$
+
+$5^x = 12 \\Rightarrow x = \\log(12)/\\log(5) \\approx 1.544$`,
+    "related concepts": `
+- [Logarithm](!/algebra/definitions#logarithm) — the tool when bases don't match
+- [Logarithmic Equation](!/algebra/definitions#logarithmic_equation) — the inverse problem
+- [Exponential Function](!/algebra/definitions#exponential_function)
+- [Matching Bases](!/algebra/powers/exponential-equations#5)
+- [Using Logarithms](!/algebra/powers/exponential-equations#7)
+- [Substitution](!/algebra/powers/exponential-equations#8)`
+  },
+  category: "Exponents"
+},
+
+{
+  name: "Exponential Inequality",
+  formula: "An inequality involving an exponential expression, where the base determines whether inequality direction is preserved or reversed.",
+  link: { label: "Exponential Inequalities", url: "/algebra/powers/exponential-inequalities" },
+  fields: {
+    "key distinction": `For $a > 1$ (increasing function): $a^x > a^y \\iff x > y$ — direction preserved.
+
+For $0 < a < 1$ (decreasing function): $a^x > a^y \\iff x < y$ — direction reversed.
+
+This mirrors the logarithmic inequality rule — both stem from monotonicity of the underlying function.`,
+    "examples": `$2^x > 8 \\Rightarrow 2^x > 2^3 \\Rightarrow x > 3$ (base $> 1$, preserved)
+
+$(1/3)^x > 9 \\Rightarrow (1/3)^x > (1/3)^{-2} \\Rightarrow x < -2$ (base $< 1$, reversed)`,
+    "related concepts": `
+- [Exponential Equation](!/algebra/definitions#exponential_equation) — same techniques, different operator
+- [Exponential Function](!/algebra/definitions#exponential_function) — monotonicity determines direction
+- [Logarithmic Inequality](!/algebra/definitions#logarithmic_inequality) — same directional rule
+- [Base Determines Direction](!/algebra/powers/exponential-inequalities#1)`
+  },
+  category: "Exponents"
+},
+
+{
+  name: "Exponential Function",
+  formula: "A function of the form $f(x) = a^x$ with fixed base $a > 0$, $a \\neq 1$, and variable exponent $x$.",
+  link: { label: "Exponential Functions", url: "/algebra/powers/exponential-functions" },
+  fields: {
+    "properties": {
+      text: `- Domain: $(-\\infty, \\infty)$ — any real exponent
+- Range: $(0, \\infty)$ — output is always positive
+- Passes through $(0, 1)$ for every base ($a^0 = 1$)
+- Horizontal asymptote at $y = 0$
+- $a > 1$: exponential growth — output multiplied by $a$ for each unit increase in $x$
+- $0 < a < 1$: exponential decay — output multiplied by $a < 1$ for each unit increase
+- One-to-one: has an inverse, the logarithmic function
+- The base $e \\approx 2.718$ gives $f(x) = e^x$, the natural exponential, whose derivative equals itself`,
+      illustrations: [
+        {
+          src: `[ILLUSTRATION: Two exponential curves on the same axes. Curve 1: $y = 2^x$ in teal (growth), passing through $(0,1)$, rising steeply right, approaching $y = 0$ left. Curve 2: $y = (1/2)^x$ in coral (decay), passing through $(0,1)$, falling toward $y = 0$ right, rising steeply left. Dashed line at $y = 0$ labeled "asymptote." Point $(0,1)$ marked as shared.]`,
+          alt: "Exponential growth and decay graphs",
+          caption: "Base > 1 grows; base between 0 and 1 decays. Both pass through (0, 1)."
+        }
+      ],
+      links: [
+        { label: "The Conceptual Shift", url: "/algebra/powers/exponential-functions#1" },
+        { label: "Basic Shape", url: "/algebra/powers/exponential-functions#2" },
+        { label: "Key Properties", url: "/algebra/powers/exponential-functions#3" }
+      ]
+    },
+    "examples": `$f(x) = 2^x$ — growth, doubles per unit
+
+$g(x) = (1/2)^x$ — decay, halves per unit
+
+$h(x) = e^x$ — natural exponential
+
+$k(x) = 3 \\cdot 2^{x-1} + 5$ — transformed, asymptote at $y = 5$`,
+    "related concepts": `
+- [Power](!/algebra/definitions#power)
+- [Exponential Equation](!/algebra/definitions#exponential_equation)
+- [Exponential Inequality](!/algebra/definitions#exponential_inequality)
+- [Logarithmic Function](!/algebra/definitions#logarithmic_function) — the inverse
+- [Euler's Number (e)](!/algebra/definitions#euler's_number_(e))
+- [Exponential vs Power Functions](!/algebra/powers/exponential-functions#4)`
+  },
+  category: "Exponents"
+},
 
      
-          {
-            name: "Exponent",
-            formula: "The power to which a base is raised in a mathematical expression.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Base",
-            formula: "The number that is raised to the power of the exponent.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Power",
-            formula: "The result of raising a base to an exponent.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Exponential Function",
-            formula: "A function of the form f(x) = a^x, where a > 0 and a ≠ 1.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Exponential Growth",
-            formula: "A process that increases proportionally to its current value, modeled by an exponential function.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Exponential Decay",
-            formula: "A process that decreases proportionally to its current value, modeled by an exponential function.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Scientific Notation",
-            formula: "A method of writing numbers using powers of 10.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Negative Exponent",
-            formula: "Indicates the reciprocal of the base raised to the corresponding positive exponent (a^(-n) = 1/a^n).",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Zero Exponent",
-            formula: "Any nonzero base raised to the power of zero equals 1 (a^0 = 1).",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Fractional Exponent",
-            formula: "Represents a root, where a^(1/n) = √[n]{a}.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Integer Exponent",
-            formula: "An exponent that is a whole number.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Exponential Equation",
-            formula: "An equation in which variables appear in exponents.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Exponential Inequality",
-            formula: "An inequality involving exponential expressions.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Exponential Series",
-            formula: "A mathematical expansion of e^x as a sum of terms.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Exponentiation",
-            formula: "The mathematical operation of raising one quantity to the power of another.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Laws of Exponents",
-            formula: "Rules governing exponentiation, such as the product, quotient, and power rules.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Exponential Curve",
-            formula: "The graph of an exponential function, showing rapid increase or decrease.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Natural Exponential Function",
-            formula: "The exponential function with base e, f(x) = e^x.",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Compound Interest Formula",
-            formula: "A financial formula based on exponential growth, A = P(1 + r/n)^(nt).",
-            fields: [],
-            category: "Exponents"
-          },
-          {
-            name: "Exponential Notation",
-            formula: "A shorthand way to write repeated multiplication of the same factor.",
-            fields: [],
-            category: "Exponents"
-          }
+          // {
+          //   name: "Exponent",
+          //   formula: "The power to which a base is raised in a mathematical expression.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Base",
+          //   formula: "The number that is raised to the power of the exponent.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Power",
+          //   formula: "The result of raising a base to an exponent.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Exponential Function",
+          //   formula: "A function of the form f(x) = a^x, where a > 0 and a ≠ 1.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Exponential Growth",
+          //   formula: "A process that increases proportionally to its current value, modeled by an exponential function.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Exponential Decay",
+          //   formula: "A process that decreases proportionally to its current value, modeled by an exponential function.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Scientific Notation",
+          //   formula: "A method of writing numbers using powers of 10.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Negative Exponent",
+          //   formula: "Indicates the reciprocal of the base raised to the corresponding positive exponent (a^(-n) = 1/a^n).",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Zero Exponent",
+          //   formula: "Any nonzero base raised to the power of zero equals 1 (a^0 = 1).",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Fractional Exponent",
+          //   formula: "Represents a root, where a^(1/n) = √[n]{a}.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Integer Exponent",
+          //   formula: "An exponent that is a whole number.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Exponential Equation",
+          //   formula: "An equation in which variables appear in exponents.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Exponential Inequality",
+          //   formula: "An inequality involving exponential expressions.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Exponential Series",
+          //   formula: "A mathematical expansion of e^x as a sum of terms.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Exponentiation",
+          //   formula: "The mathematical operation of raising one quantity to the power of another.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Laws of Exponents",
+          //   formula: "Rules governing exponentiation, such as the product, quotient, and power rules.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Exponential Curve",
+          //   formula: "The graph of an exponential function, showing rapid increase or decrease.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Natural Exponential Function",
+          //   formula: "The exponential function with base e, f(x) = e^x.",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Compound Interest Formula",
+          //   formula: "A financial formula based on exponential growth, A = P(1 + r/n)^(nt).",
+          //   fields: [],
+          //   category: "Exponents"
+          // },
+          // {
+          //   name: "Exponential Notation",
+          //   formula: "A shorthand way to write repeated multiplication of the same factor.",
+          //   fields: [],
+          //   category: "Exponents"
+          // }
         
         
        
