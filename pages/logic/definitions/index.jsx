@@ -9,6 +9,7 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
+import DefinitionGlossary from '@/app/components/examples/DefinitionsGlossary'
 
 export async function getStaticProps() {
   const { default: logicTermsList } = await import('@/app/api/db/definitions/logic/logicDefinitions')
@@ -136,12 +137,18 @@ export default function LogicDefinitionsPage({
         <CategoriesList
         data={logicTermsList}
         baseUrl='/logic/definitions'/>
-        <FormulaAccordionWrapper
+        {/* <FormulaAccordionWrapper
           groupByField={'category'}
           data={logicTermsList}
           type='Definition'
-        />
+        /> */}
         <br />
+        <DefinitionGlossary
+  data={logicTermsList}
+  groupByField="category"
+  type="Definition"
+/>
+
         <br />
         <br />
         {/* <ScrollUpButton /> */}

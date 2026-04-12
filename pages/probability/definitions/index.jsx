@@ -7,6 +7,8 @@ import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionW
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
+import DefinitionGlossary from '@/app/components/examples/DefinitionsGlossary'
 
 export async function getStaticProps() {
   const { default: probabilityTermsList } = await import('@/app/api/db/definitions/probability/probabilityDefinitions')
@@ -131,10 +133,21 @@ probabilityTermsList,
         <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
           Probability Terms and Definitions
         </h1>
-        <FormulaAccordionWrapper
+        <br/>
+           <CategoriesList data={probabilityTermsList}
+                baseUrl='/probability/definitions'
+                // categoryExplanations={definitionsCategoryExplanations}
+                />
+        {/* <FormulaAccordionWrapper
           groupByField={'category'}
           data={probabilityTermsList}
           type='Definition'
+        /> */}
+        <br/>
+          <DefinitionGlossary
+          data={probabilityTermsList}
+          groupByField="category"
+          type="Definition"
         />
         <br />
         <br />

@@ -851,23 +851,20 @@ export const mainMenuStructure = [
         ],
         "href": "/calculators"
       },
-      {
-        "title": "Solvers",
-        "items": [
-          {
-            "label": "Equivalence Validator",
-            "href": "/logic/propositional-logic/semantics/equivalence-validator"
-          },
-          {
-            "label": "Quadratic Equations",
-            "href": "/calculators/quadratic-equations"
-          },
-          {
-            "label": "Solver",
-            "href": "/algebra/equations/linear/solver"
-          }
-        ]
-      },
+      // {
+      //   "title": "Solvers",
+      //   "items": [
+      //     {
+      //       "label": "Equivalence Validator",
+      //       "href": "/logic/propositional-logic/semantics/equivalence-validator"
+      //     },
+      //     {
+      //       "label": "Quadratic Equations",
+      //       "href": "/calculators/quadratic-equations"
+      //     },
+        
+      //   ]
+      // },
       {
         "title": "Generators",
         "items": [

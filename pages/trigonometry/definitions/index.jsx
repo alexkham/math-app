@@ -6,6 +6,7 @@ import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionW
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
+import DefinitionGlossary from '@/app/components/examples/DefinitionsGlossary'
 
 export async function getStaticProps() {
   const { default: trigonometryTermsList } = await import('@/app/api/db/definitions/trigonometry/trigonometryDefinitions')
@@ -138,12 +139,18 @@ export default function TrigonometryDefinitionsPage({
         data={trigonometryTermsList}
         baseUrl='/trigonometry/definitions'
         />
-        <FormulaAccordionWrapper
+        {/* <FormulaAccordionWrapper
           groupByField={'category'}
           data={trigonometryTermsList}
           type='Definition'
-        />
+        /> */}
         <br />
+        <DefinitionGlossary
+  data={trigonometryTermsList}
+  groupByField="category"
+  type="Definition"
+/>
+
         <br />
         <br />
         {/* <ScrollUpButton /> */}

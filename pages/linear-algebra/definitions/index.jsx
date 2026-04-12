@@ -8,6 +8,7 @@ import FormulaAccordionWrapper from '@/app/components/examples/FormulaAccordionW
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import CategoriesList from '@/app/components/page-components/lists/CategoriesList'
+import DefinitionGlossary from '@/app/components/examples/DefinitionsGlossary'
 
 export async function getStaticProps() {
   const { default: linearAlgebraTermsList } = await import('@/app/api/db/definitions/linear-algebra/linearAlgebraDefinitions')
@@ -165,12 +166,18 @@ export default function LinearAlgebraDefinitionsPage({
         <CategoriesList data={linearAlgebraTermsList}
         baseUrl='/linear-algebra/definitions'
         categoryExplanations={definitionsCategoryExplanations}/>
-        <FormulaAccordionWrapper
+        {/* <FormulaAccordionWrapper
           groupByField={'category'}
           data={linearAlgebraTermsList}
           type='Definition'
-        />
+        /> */}
         <br />
+        <DefinitionGlossary
+  data={linearAlgebraTermsList}
+  groupByField="category"
+  type="Definition"
+/>
+
         <br />
         <br />
         {/* <ScrollUpButton /> */}
