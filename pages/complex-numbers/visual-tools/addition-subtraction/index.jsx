@@ -6,7 +6,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 
-import ComplexAdditionSubtractionVisualizer from 'app/components/calculators/complex-numbers/ComplexAdditionSubtractionVisualizer'
+import ComplexAdditionSubtractionVisualizer from '@/app/components/calculators/complex-numbers/ComplexAdditionSubtractionVisualizer'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 
 

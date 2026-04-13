@@ -55,7 +55,7 @@ export default function SiblingsNav({
   width = '200px',
   topOffset = '24px',
   gap = '28px',
-  maxWidth = '1380px',
+  maxWidth = '1580px',
   padding = '0 28px',
 }) {
   const pathname = usePathname();

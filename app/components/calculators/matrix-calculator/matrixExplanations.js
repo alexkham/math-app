@@ -85,7 +85,7 @@ export const descriptions = {
     'Kronecker Product':
       'The Kronecker product A\u2297B creates a block matrix by replacing each element a\u1D62\u2C7C of A with the block a\u1D62\u2C7C\u00B7B. If A is m\u00D7n and B is p\u00D7q, the result is mp\u00D7nq.',
     Commutator:
-      'The commutator [A,B] = AB \u2212 BA measures how much the order of multiplication matters. It is zero when A and B commute. Important in Lie algebra and quantum mechanics.',
+      'The commutator [A,B] = AB \u2212 BA measures  how much the order of multiplication matters. It is zero when A and B commute. Important in Lie algebra and quantum mechanics.',
     'Anti-commutator':
       'The anti-commutator {A,B} = AB + BA is the symmetric counterpart of the commutator. Used extensively in quantum mechanics, particularly for fermionic operators.',
   },

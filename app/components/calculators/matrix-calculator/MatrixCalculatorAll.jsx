@@ -1,15 +1,15 @@
 
 // import React, { useState } from 'react';
-// import computeVector from './computeVector';
+// import computeMatrix from './computeMatrix';
+// import { processContent } from '../../../utils/contentProcessor';
 // import {
 //   descriptions as defaultDescriptions,
 //   steps as operationSteps,
-// } from './vectorExplanations';
+// } from './matrixExplanations';
 
 // /* ── styles ───────────────────────────────────────────────────── */
 
 // const s = {
-//   /* — wrappers — */
 //   container: {
 //     minHeight: '100vh',
 //     backgroundColor: '#f8f9fa',
@@ -49,8 +49,6 @@
 //     fontSize: '1.1rem',
 //     margin: '0',
 //   },
-
-//   /* — initial card grid — */
 //   stepTitle: {
 //     fontSize: '1.5rem',
 //     fontWeight: '600',
@@ -91,8 +89,6 @@
 //     gap: '24px',
 //     alignItems: 'start',
 //   },
-
-//   /* — left panel — */
 //   leftPanel: {
 //     display: 'flex',
 //     flexDirection: 'column',
@@ -108,8 +104,6 @@
 //     textTransform: 'uppercase',
 //     letterSpacing: '0.04em',
 //   },
-
-//   /* — right (explanation) panel — */
 //   explanationPanel: {
 //     backgroundColor: '#f0f4ff',
 //     borderRadius: '12px',
@@ -171,74 +165,104 @@
 //     margin: '0',
 //   },
 //   buttonGroup: { display: 'flex', gap: '12px' },
-//   vectorGrid: {
+
+//   /* — dimension controls — */
+//   dimControls: {
+//     display: 'flex',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     gap: '24px',
+//     marginBottom: '24px',
+//     padding: '14px',
+//     backgroundColor: '#f0f7ff',
+//     borderRadius: '8px',
+//     border: '1px solid #e0e7ff',
+//     flexWrap: 'wrap',
+//   },
+//   dimGroup: {
+//     display: 'flex',
+//     alignItems: 'center',
+//     gap: '8px',
+//   },
+//   dimLabel: { fontSize: '0.95rem', fontWeight: '500', color: '#374151' },
+//   dimHint: { fontSize: '0.85rem', color: '#6b7280' },
+//   dimWarning: { fontSize: '0.85rem', color: '#dc2626', fontWeight: '500' },
+
+//   /* — matrix grid — */
+//   matrixGrid: {
 //     display: 'grid',
-//     gap: '16px',
+//     gap: '24px',
 //     marginBottom: '24px',
 //   },
-//   vectorGridSingle: { gridTemplateColumns: '1fr' },
-//   vectorGridTwo: { gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' },
-//   vectorGridMultiple: { gridTemplateColumns: '1fr' },
-//   vectorCard: {
+//   matrixGridSingle: { gridTemplateColumns: '1fr' },
+//   matrixGridTwo: { gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' },
+//   matrixGridMultiple: { gridTemplateColumns: '1fr' },
+//   matrixCard: {
 //     backgroundColor: '#f8f9fa',
-//     padding: '16px',
-//     borderRadius: '8px',
+//     padding: '20px',
+//     borderRadius: '12px',
 //     border: '1px solid #e5e7eb',
 //   },
-//   vectorHeader: {
+//   matrixHeader: {
 //     display: 'flex',
 //     justifyContent: 'space-between',
 //     alignItems: 'center',
-//     marginBottom: '12px',
+//     marginBottom: '16px',
 //   },
-//   vectorName: {
+//   matrixName: {
 //     margin: '0',
-//     fontSize: '1.05rem',
+//     fontSize: '1.1rem',
 //     fontWeight: '600',
 //     color: '#374151',
 //   },
-//   vectorHeaderButtons: {
-//     display: 'flex',
-//     gap: '6px',
-//     alignItems: 'center',
-//   },
-//   vectorComponents: {
+//   matrixHeaderRight: {
 //     display: 'flex',
 //     gap: '8px',
 //     alignItems: 'center',
-//     flexWrap: 'wrap',
 //   },
-//   componentInput: {
-//     width: '56px',
-//     padding: '6px',
+//   matrixDimLabel: {
+//     fontSize: '0.85rem',
+//     color: '#6b7280',
+//     fontWeight: '500',
+//   },
+//   matrixContainer: {
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//   },
+//   matrixContent: {
+//     display: 'flex',
+//     alignItems: 'center',
+//     gap: '8px',
+//   },
+//   matrixBracket: {
+//     fontSize: '2rem',
+//     fontWeight: 'bold',
+//     color: '#374151',
+//     lineHeight: '1',
+//   },
+//   matrixTable: {
+//     display: 'grid',
+//     gap: '4px',
+//     padding: '8px',
+//   },
+//   matrixCell: {
+//     width: '50px',
+//     height: '35px',
+//     padding: '4px',
 //     border: '1px solid #d1d5db',
 //     borderRadius: '4px',
 //     textAlign: 'center',
-//     fontSize: '0.9rem',
+//     fontSize: '0.85rem',
+//     backgroundColor: 'white',
 //     outline: 'none',
 //   },
-//   componentInputError: {
+//   matrixCellError: {
 //     borderColor: '#dc2626',
 //     backgroundColor: '#fef2f2',
 //   },
-//   separator: { color: '#6b7280' },
-//   bracket: { fontWeight: '500' },
-//   addVectorContainer: {
-//     display: 'flex',
-//     justifyContent: 'center',
-//     marginBottom: '24px',
-//   },
-//   addVectorButton: {
-//     padding: '8px 16px',
-//     border: '2px dashed #4285f4',
-//     borderRadius: '8px',
-//     backgroundColor: 'transparent',
-//     color: '#4285f4',
-//     fontSize: '0.9rem',
-//     cursor: 'pointer',
-//     transition: 'all 0.2s ease',
-//     outline: 'none',
-//   },
+
+//   /* — operations — */
 //   operationsSection: { marginBottom: '24px' },
 //   operationsTitle: {
 //     fontSize: '1.1rem',
@@ -248,7 +272,7 @@
 //   },
 //   operationsGrid: {
 //     display: 'grid',
-//     gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+//     gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
 //     gap: '8px',
 //     marginBottom: '24px',
 //   },
@@ -262,6 +286,7 @@
 //     fontWeight: '500',
 //     cursor: 'pointer',
 //     transition: 'all 0.2s ease',
+//     textAlign: 'center',
 //     outline: 'none',
 //   },
 //   operationButtonSelected: {
@@ -275,6 +300,31 @@
 //     cursor: 'not-allowed',
 //     borderColor: '#e5e7eb',
 //   },
+
+//   /* — scalar input — */
+//   scalarSection: {
+//     display: 'flex',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     gap: '12px',
+//     marginBottom: '16px',
+//     padding: '12px',
+//     backgroundColor: '#f0f7ff',
+//     borderRadius: '8px',
+//     border: '1px solid #e0e7ff',
+//   },
+//   scalarLabel: { fontSize: '0.95rem', fontWeight: '500', color: '#374151' },
+//   scalarInput: {
+//     width: '80px',
+//     padding: '8px 12px',
+//     border: '1px solid #d1d5db',
+//     borderRadius: '6px',
+//     textAlign: 'center',
+//     fontSize: '1rem',
+//     outline: 'none',
+//   },
+
+//   /* — execute — */
 //   executeButton: {
 //     padding: '12px 32px',
 //     border: 'none',
@@ -292,6 +342,8 @@
 //     backgroundColor: '#9ca3af',
 //     cursor: 'not-allowed',
 //   },
+
+//   /* — results — */
 //   resultsSection: {
 //     backgroundColor: '#f9fafb',
 //     padding: '16px',
@@ -318,136 +370,6 @@
 //     flexDirection: 'column',
 //     gap: '8px',
 //   },
-//   errorSection: {
-//     backgroundColor: '#fef2f2',
-//     border: '1px solid #fecaca',
-//     borderRadius: '8px',
-//     padding: '16px',
-//     marginBottom: '16px',
-//   },
-//   errorTitle: {
-//     color: '#dc2626',
-//     fontWeight: '600',
-//     fontSize: '1rem',
-//     margin: '0 0 8px 0',
-//   },
-//   errorList: { listStyle: 'none', padding: '0', margin: '0' },
-//   errorItem: { color: '#dc2626', fontSize: '0.9rem', marginBottom: '4px' },
-//   buttonDanger: {
-//     padding: '8px 16px',
-//     borderRadius: '6px',
-//     fontSize: '0.9rem',
-//     cursor: 'pointer',
-//     transition: 'all 0.2s ease',
-//     border: '2px solid #dc2626',
-//     backgroundColor: 'transparent',
-//     color: '#dc2626',
-//     outline: 'none',
-//   },
-//   clearVectorButton: {
-//     padding: '3px 8px',
-//     border: '1px solid #9ca3af',
-//     borderRadius: '4px',
-//     backgroundColor: 'transparent',
-//     color: '#6b7280',
-//     fontSize: '0.75rem',
-//     cursor: 'pointer',
-//     transition: 'all 0.15s ease',
-//     outline: 'none',
-//   },
-//   randomVectorButton: {
-//     padding: '3px 8px',
-//     border: '1px solid #4285f4',
-//     borderRadius: '4px',
-//     backgroundColor: 'transparent',
-//     color: '#4285f4',
-//     fontSize: '0.75rem',
-//     cursor: 'pointer',
-//     transition: 'all 0.15s ease',
-//     outline: 'none',
-//   },
-//   removeButton: {
-//     padding: '3px 8px',
-//     border: 'none',
-//     borderRadius: '4px',
-//     backgroundColor: '#dc2626',
-//     color: 'white',
-//     fontSize: '0.75rem',
-//     cursor: 'pointer',
-//     outline: 'none',
-//   },
-//   loading: {
-//     display: 'flex',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     gap: '8px',
-//   },
-//   spinner: {
-//     width: '16px',
-//     height: '16px',
-//     border: '2px solid #e5e7eb',
-//     borderTop: '2px solid #4285f4',
-//     borderRadius: '50%',
-//     animation: 'spin 1s linear infinite',
-//   },
-//   dimControls: {
-//     display: 'flex',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     gap: '16px',
-//     marginBottom: '24px',
-//     padding: '14px',
-//     backgroundColor: '#f3f4f6',
-//     borderRadius: '8px',
-//     border: '1px solid #d1d5db',
-//   },
-//   dimLabel: { fontSize: '0.95rem', fontWeight: '500', color: '#374151' },
-//   dimHint: { fontSize: '0.85rem', color: '#6b7280' },
-
-//   /* — coefficient input (Linear Combination) — */
-//   coefficientRow: {
-//     display: 'flex',
-//     alignItems: 'center',
-//     gap: '8px',
-//     marginBottom: '8px',
-//   },
-//   coefficientLabel: {
-//     fontSize: '0.85rem',
-//     fontWeight: '600',
-//     color: '#4285f4',
-//     minWidth: '24px',
-//   },
-//   coefficientInput: {
-//     width: '64px',
-//     padding: '6px',
-//     border: '2px solid #4285f4',
-//     borderRadius: '4px',
-//     textAlign: 'center',
-//     fontSize: '0.9rem',
-//     outline: 'none',
-//     backgroundColor: '#f0f7ff',
-//   },
-//   coefficientHint: {
-//     fontSize: '0.8rem',
-//     color: '#6b7280',
-//   },
-
-//   /* — extra inputs section (coefficients / target) — */
-//   extraInputsSection: {
-//     backgroundColor: '#fffbeb',
-//     border: '1px solid #fde68a',
-//     borderRadius: '8px',
-//     padding: '16px',
-//     marginBottom: '24px',
-//   },
-//   extraInputsTitle: {
-//     fontSize: '0.95rem',
-//     fontWeight: '600',
-//     color: '#92400e',
-//     margin: '0 0 12px 0',
-//   },
-
-//   /* — result formatting — */
 //   resultLabel: {
 //     fontSize: '0.85rem',
 //     color: '#6b7280',
@@ -458,6 +380,11 @@
 //     fontWeight: '600',
 //     color: '#1f2937',
 //     fontFamily: 'monospace',
+//   },
+//   resultError: {
+//     color: '#dc2626',
+//     fontWeight: '500',
+//     fontSize: '0.95rem',
 //   },
 //   resultTrue: {
 //     color: '#059669',
@@ -473,29 +400,223 @@
 //     fontSize: '0.9rem',
 //     color: '#374151',
 //     textAlign: 'center',
+//     whiteSpace: 'pre-wrap',
 //   },
-//   resultError: {
-//     color: '#dc2626',
-//     fontWeight: '500',
-//     fontSize: '0.95rem',
-//   },
-//   matrixTable: {
+//   resultMatrixTable: {
 //     borderCollapse: 'collapse',
 //     fontFamily: 'monospace',
-//     fontSize: '0.95rem',
+//     fontSize: '0.9rem',
 //   },
-//   matrixCell: {
-//     padding: '6px 12px',
+//   resultMatrixCell: {
+//     padding: '5px 10px',
 //     textAlign: 'right',
 //     border: '1px solid #e5e7eb',
 //   },
-//   matrixRowLabel: {
-//     padding: '6px 10px',
-//     textAlign: 'left',
-//     fontWeight: '600',
+//   resultDecompSection: {
+//     width: '100%',
+//     display: 'flex',
+//     flexDirection: 'column',
+//     gap: '16px',
+//     alignItems: 'center',
+//   },
+//   resultDecompLabel: {
+//     fontSize: '0.9rem',
+//     fontWeight: '700',
 //     color: '#4285f4',
+//     marginBottom: '4px',
+//   },
+//   resultVarRow: {
+//     display: 'flex',
+//     gap: '16px',
+//     flexWrap: 'wrap',
+//     justifyContent: 'center',
+//   },
+//   resultVarItem: {
+//     fontSize: '1rem',
+//     fontFamily: 'monospace',
+//     fontWeight: '600',
+//     color: '#1f2937',
+//   },
+
+//   /* — errors — */
+//   errorSection: {
+//     backgroundColor: '#fef2f2',
+//     border: '1px solid #fecaca',
+//     borderRadius: '8px',
+//     padding: '16px',
+//     marginBottom: '16px',
+//   },
+//   errorTitle: {
+//     color: '#dc2626',
+//     fontWeight: '600',
+//     fontSize: '1rem',
+//     margin: '0 0 8px 0',
+//   },
+//   errorList: { listStyle: 'none', padding: '0', margin: '0' },
+//   errorItem: { color: '#dc2626', fontSize: '0.9rem', marginBottom: '4px' },
+
+//   /* — buttons — */
+//   buttonDanger: {
+//     padding: '8px 16px',
+//     borderRadius: '6px',
+//     fontSize: '0.9rem',
+//     cursor: 'pointer',
+//     transition: 'all 0.2s ease',
+//     border: '2px solid #dc2626',
+//     backgroundColor: 'transparent',
+//     color: '#dc2626',
+//     outline: 'none',
+//   },
+//   clearMatrixButton: {
+//     padding: '3px 8px',
+//     border: '1px solid #9ca3af',
+//     borderRadius: '4px',
+//     backgroundColor: 'transparent',
+//     color: '#6b7280',
+//     fontSize: '0.75rem',
+//     cursor: 'pointer',
+//     transition: 'all 0.15s ease',
+//     outline: 'none',
+//   },
+//   randomMatrixButton: {
+//     padding: '3px 8px',
+//     border: '1px solid #4285f4',
+//     borderRadius: '4px',
+//     backgroundColor: 'transparent',
+//     color: '#4285f4',
+//     fontSize: '0.75rem',
+//     cursor: 'pointer',
+//     transition: 'all 0.15s ease',
+//     outline: 'none',
+//   },
+//   fillControlsRow: {
+//     display: 'flex',
+//     alignItems: 'center',
+//     gap: '6px',
+//     marginBottom: '12px',
+//     flexWrap: 'wrap',
+//   },
+//   fillValueInput: {
+//     width: '48px',
+//     padding: '3px 6px',
+//     border: '1px solid #d1d5db',
+//     borderRadius: '4px',
+//     textAlign: 'center',
+//     fontSize: '0.8rem',
+//     outline: 'none',
+//   },
+//   fillButton: {
+//     padding: '3px 8px',
+//     border: '1px solid #6b7280',
+//     borderRadius: '4px',
+//     backgroundColor: 'transparent',
+//     color: '#6b7280',
+//     fontSize: '0.75rem',
+//     cursor: 'pointer',
+//     transition: 'all 0.15s ease',
+//     outline: 'none',
+//   },
+//   diagonalButton: {
+//     padding: '3px 8px',
+//     border: '1px solid #059669',
+//     borderRadius: '4px',
+//     backgroundColor: 'transparent',
+//     color: '#059669',
+//     fontSize: '0.75rem',
+//     cursor: 'pointer',
+//     transition: 'all 0.15s ease',
+//     outline: 'none',
+//   },
+//   fillLabel: {
+//     fontSize: '0.75rem',
+//     color: '#6b7280',
+//   },
+//   removeButton: {
+//     padding: '3px 8px',
+//     border: 'none',
+//     borderRadius: '4px',
+//     backgroundColor: '#dc2626',
+//     color: 'white',
+//     fontSize: '0.75rem',
+//     cursor: 'pointer',
+//     outline: 'none',
+//   },
+//   addMatrixContainer: {
+//     display: 'flex',
+//     justifyContent: 'center',
+//     marginBottom: '24px',
+//   },
+//   addMatrixButton: {
+//     padding: '8px 16px',
+//     border: '2px dashed #4285f4',
+//     borderRadius: '8px',
+//     backgroundColor: 'transparent',
+//     color: '#4285f4',
+//     fontSize: '0.9rem',
+//     cursor: 'pointer',
+//     transition: 'all 0.2s ease',
+//     outline: 'none',
+//   },
+
+//   /* — loading — */
+//   loading: {
+//     display: 'flex',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     gap: '8px',
+//   },
+//   spinner: {
+//     width: '16px',
+//     height: '16px',
+//     border: '2px solid #e5e7eb',
+//     borderTop: '2px solid #4285f4',
+//     borderRadius: '50%',
+//     animation: 'spin 1s linear infinite',
+//   },
+
+//   /* — matrix accordion (two matrices, cols > 5) — */
+//   matrixAccordion: {
 //     border: '1px solid #e5e7eb',
-//     backgroundColor: '#f0f7ff',
+//     borderRadius: '12px',
+//     overflow: 'hidden',
+//     marginBottom: '0',
+//   },
+//   matrixAccordionToggle: {
+//     display: 'flex',
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//     width: '100%',
+//     padding: '14px 20px',
+//     border: 'none',
+//     backgroundColor: '#f8f9fa',
+//     cursor: 'pointer',
+//     transition: 'background-color 0.15s ease',
+//     outline: 'none',
+//   },
+//   matrixAccordionLeft: {
+//     display: 'flex',
+//     alignItems: 'center',
+//     gap: '12px',
+//   },
+//   matrixAccordionName: {
+//     fontSize: '1.1rem',
+//     fontWeight: '600',
+//     color: '#374151',
+//     margin: 0,
+//   },
+//   matrixAccordionDim: {
+//     fontSize: '0.85rem',
+//     color: '#6b7280',
+//     fontWeight: '500',
+//   },
+//   matrixAccordionArrow: {
+//     fontSize: '0.75rem',
+//     color: '#6b7280',
+//     transition: 'transform 0.2s ease',
+//   },
+//   matrixAccordionBody: {
+//     padding: '0 20px 20px 20px',
+//     backgroundColor: '#f8f9fa',
 //   },
 
 //   /* — history accordion — */
@@ -552,7 +673,7 @@
 //     fontSize: '0.75rem',
 //     color: '#9ca3af',
 //   },
-//   historyVectors: {
+//   historyInputs: {
 //     fontSize: '0.78rem',
 //     color: '#6b7280',
 //     fontFamily: 'monospace',
@@ -583,10 +704,6 @@
 // @keyframes spin {
 //   0% { transform: rotate(0deg); }
 //   100% { transform: rotate(360deg); }
-// }
-// button:focus, button:focus-visible {
-//   outline: none;
-//   box-shadow: none;
 // }`;
 
 // /* ── Tooltip component ────────────────────────────────────────── */
@@ -675,53 +792,58 @@
 
 // /* ── helpers for history ─────────────────────────────────────── */
 
-// function fmtVecCompact(v) {
-//   return '(' + v.map(c => {
-//     if (Number.isInteger(c)) return String(c);
-//     return parseFloat(c.toFixed(4)).toString();
-//   }).join(', ') + ')';
+// function fmtMatCompact(m, rows, cols) {
+//   if (rows <= 2 && cols <= 2) {
+//     const data = [];
+//     for (let r = 0; r < rows; r++) {
+//       const row = [];
+//       for (let c = 0; c < cols; c++) {
+//         const v = m[r * cols + c];
+//         row.push(Number.isInteger(v) ? String(v) : parseFloat(v.toFixed(4)).toString());
+//       }
+//       data.push('[' + row.join(', ') + ']');
+//     }
+//     return data.join(' ');
+//   }
+//   return `${rows}\u00D7${cols}`;
 // }
 
 // function formatHistoryResult(res) {
 //   if (res.type === 'scalar') return String(res.value);
-//   if (res.type === 'vector') return fmtVecCompact(res.value);
+//   if (res.type === 'vector') return '(' + res.value.join(', ') + ')';
+//   if (res.type === 'matrix') return `${res.rows}\u00D7${res.cols} matrix`;
 //   if (res.type === 'boolean') return res.value ? '\u2713 TRUE' : '\u2717 FALSE';
-//   if (res.type === 'matrix') return `${res.value.length}\u00D7${res.value[0].length} matrix`;
+//   if (res.type === 'decomposition') return res.label;
 //   return String(res.value);
 // }
 
 // function formatHistoryInputs(entry) {
-//   const parts = entry.vectors.map((v, i) =>
-//     `${String.fromCharCode(65 + i)}=${fmtVecCompact(v)}`
+//   const parts = entry.matrices.map((m, i) =>
+//     `${String.fromCharCode(65 + i)}(${m.rows}\u00D7${m.cols})`
 //   );
-//   if (entry.coefficients) {
-//     parts.push('c=[' + entry.coefficients.map(c => {
-//       if (Number.isInteger(c)) return String(c);
-//       return parseFloat(c.toFixed(4)).toString();
-//     }).join(', ') + ']');
-//   }
-//   if (entry.targetVector) {
-//     parts.push('t=' + fmtVecCompact(entry.targetVector));
+//   if (entry.scalarValue !== null && entry.scalarValue !== undefined) {
+//     parts.push(`c=${entry.scalarValue}`);
 //   }
 //   return parts.join('  ');
 // }
 
 // /* ── component ────────────────────────────────────────────────── */
 
-// export default function VectorCalculator({ descriptions: descriptionsProp } = {}) {
+// export default function MatrixCalculator({ descriptions: descriptionsProp } = {}) {
 //   const [step, setStep] = useState('operation-type');
 //   const [operationType, setOperationType] = useState('');
-//   const [dimensionality, setDimensionality] = useState(3);
-//   const [vectors, setVectors] = useState([]);
+//   const [dimensions, setDimensions] = useState({ rows: 3, cols: 3 });
+//   const [matrices, setMatrices] = useState([]);
 //   const [selectedOperation, setSelectedOperation] = useState('');
+//   const [scalarValue, setScalarValue] = useState('');
 //   const [result, setResult] = useState(null);
 //   const [errors, setErrors] = useState([]);
 //   const [isLoading, setIsLoading] = useState(false);
-//   const [coefficients, setCoefficients] = useState([]);
-//   const [targetVector, setTargetVector] = useState([]);
+//   const [matrixAccordionOpen, setMatrixAccordionOpen] = useState({});
 //   const [computedSteps, setComputedSteps] = useState(null);
 //   const [history, setHistory] = useState([]);
 //   const [historyOpen, setHistoryOpen] = useState(false);
+//   const [fillValues, setFillValues] = useState({});
 
 //   /* ── merge descriptions: props override defaults ── */
 //   const mergedDescriptions = descriptionsProp
@@ -734,81 +856,138 @@
 //       }, {})
 //     : defaultDescriptions;
 
+//   const toggleMatrixAccordion = (mi) => {
+//     setMatrixAccordionOpen(prev => ({ ...prev, [mi]: !prev[mi] }));
+//   };
+
+//   const needsAccordion = () => operationType === 'two' && dimensions.cols > 5;
+
 //   const operationTypes = [
-//     { id: 'single', label: 'Single Vector', description: 'Magnitude, unit vector, normalization' },
-//     { id: 'two', label: 'Two Vectors', description: 'Add, subtract, dot & cross product' },
-//     { id: 'multiple', label: 'Multiple Vectors', description: 'Linear combinations, spans, independence' },
+//     { id: 'single', label: 'Single Matrix', description: 'Determinant, transpose, inverse, trace, rank' },
+//     { id: 'two', label: 'Two Matrices', description: 'Addition, subtraction, multiplication' },
+//     { id: 'scalar', label: 'Scalar Operations', description: 'Scalar multiplication, addition, power' },
+//     { id: 'system', label: 'System Operations', description: 'Solve linear systems, LU decomposition' },
 //   ];
 
 //   const operationsByType = {
-//     single: ['Magnitude', 'Unit Vector', 'Normalize', 'Sum of Components', 'L1 Norm', 'L2 Norm', 'Infinity Norm'],
-//     two: ['Addition', 'Subtraction', 'Dot Product', 'Cross Product', 'Angle Between', 'Distance', 'Projection', 'Rejection'],
-//     multiple: ['Linear Combination', 'Span Check', 'Linear Independence', 'Orthogonality Check', 'Gram-Schmidt', 'Matrix Form'],
+//     single: [
+//       'Transpose', 'Determinant', 'Inverse', 'Trace', 'Rank',
+//       'LU Decomposition',
+//     ],
+//     two: [
+//       'Addition', 'Subtraction', 'Multiplication', 'Element-wise Multiplication',
+//       'Kronecker Product', 'Commutator', 'Anti-commutator',
+//     ],
+//     scalar: [
+//       'Scalar Multiplication', 'Scalar Addition', 'Scalar Subtraction',
+//       'Matrix Power (Scalar)',
+//     ],
+//     system: [
+//       'Solve Linear System', 'Gaussian Elimination', 'Gauss-Jordan',
+//       "Cramer's Rule", 'Matrix Equation AX=B', 'Least Squares Solution',
+//     ],
 //   };
 
-//   /* ── helpers ── */
+//   const squareOnly = ['Determinant', 'Inverse', 'Trace', 'LU Decomposition'];
+
+//   /* ── validation ── */
 
 //   const validateInputs = () => {
 //     const newErrors = [];
 //     if (!selectedOperation) newErrors.push('Please select an operation');
-//     vectors.forEach((vector, index) => {
-//       const name = String.fromCharCode(65 + index);
-//       const empty = vector.components.filter(c => c === '' || c === null || c === undefined).length;
-//       const valid = vector.components.filter(c => !isNaN(parseFloat(c)) && isFinite(c)).length;
-//       if (empty > 0) newErrors.push(`Vector ${name} has empty components`);
-//       if (valid !== vector.components.length) newErrors.push(`Vector ${name} contains invalid numbers`);
-//     });
-//     if (selectedOperation === 'Cross Product' && dimensionality !== 3)
-//       newErrors.push('Cross product is only defined for 3D vectors');
-//     if (operationType === 'multiple' && vectors.length < 2)
-//       newErrors.push('Multiple vector operations require at least 2 vectors');
 
-//     if (selectedOperation === 'Linear Combination') {
-//       const invalidCoeffs = coefficients.some(c => c === '' || isNaN(parseFloat(c)));
-//       if (invalidCoeffs) newErrors.push('All coefficients must be valid numbers');
+//     matrices.forEach((matrix, index) => {
+//       const name = String.fromCharCode(65 + index);
+//       const total = matrix.rows * matrix.cols;
+//       const empty = matrix.data.filter(c => c === '' || c === null || c === undefined).length;
+//       const valid = matrix.data.filter(c => !isNaN(parseFloat(c)) && isFinite(c)).length;
+//       if (empty > 0) newErrors.push(`Matrix ${name} has empty cells`);
+//       if (valid !== total) newErrors.push(`Matrix ${name} contains invalid numbers`);
+//     });
+
+//     if (operationType === 'two' && matrices.length === 2) {
+//       const [a, b] = matrices;
+//       if (['Addition', 'Subtraction', 'Element-wise Multiplication'].includes(selectedOperation)) {
+//         if (a.rows !== b.rows || a.cols !== b.cols)
+//           newErrors.push('Matrices must have the same dimensions for this operation');
+//       }
+//       if (selectedOperation === 'Multiplication') {
+//         if (a.cols !== b.rows)
+//           newErrors.push('For multiplication, columns of A must equal rows of B');
+//       }
 //     }
 
-//     if (selectedOperation === 'Span Check') {
-//       const emptyTarget = targetVector.some(c => c === '' || c === null || c === undefined);
-//       const invalidTarget = targetVector.some(c => isNaN(parseFloat(c)) || !isFinite(parseFloat(c)));
-//       if (emptyTarget) newErrors.push('Target vector has empty components');
-//       if (invalidTarget) newErrors.push('Target vector contains invalid numbers');
+//     if (operationType === 'single' && squareOnly.includes(selectedOperation)) {
+//       const m = matrices[0];
+//       if (m && m.rows !== m.cols) newErrors.push('This operation requires a square matrix');
+//     }
+
+//     if (operationType === 'scalar') {
+//       if (scalarValue === '' || isNaN(parseFloat(scalarValue)) || !isFinite(parseFloat(scalarValue)))
+//         newErrors.push('Please enter a valid scalar value');
 //     }
 
 //     setErrors(newErrors);
 //     return newErrors.length === 0;
 //   };
 
+//   /* ── handlers ── */
+
 //   const handleReset = () => {
 //     setStep('operation-type');
 //     setOperationType('');
-//     setDimensionality(3);
-//     setVectors([]);
+//     setDimensions({ rows: 3, cols: 3 });
+//     setMatrices([]);
 //     setSelectedOperation('');
+//     setScalarValue('');
 //     setResult(null);
 //     setErrors([]);
 //     setIsLoading(false);
-//     setCoefficients([]);
-//     setTargetVector([]);
 //     setComputedSteps(null);
-//     // history intentionally NOT cleared — persists through reset
 //   };
 
-//   const clearVector = (vi) => {
-//     const updated = [...vectors];
-//     const dim = updated[vi].components.length;
-//     updated[vi] = { ...updated[vi], components: new Array(dim).fill('') };
-//     setVectors(updated);
+//   const clearMatrix = (mi) => {
+//     const updated = [...matrices];
+//     updated[mi] = { ...updated[mi], data: new Array(updated[mi].rows * updated[mi].cols).fill('') };
+//     setMatrices(updated);
 //   };
 
-//   const randomizeVector = (vi) => {
-//     const updated = [...vectors];
-//     const dim = updated[vi].components.length;
-//     updated[vi] = {
-//       ...updated[vi],
-//       components: Array.from({ length: dim }, () => String(Math.floor(Math.random() * 21) - 10)),
+//   const randomizeMatrix = (mi) => {
+//     const updated = [...matrices];
+//     const total = updated[mi].rows * updated[mi].cols;
+//     updated[mi] = {
+//       ...updated[mi],
+//       data: Array.from({ length: total }, () => String(Math.floor(Math.random() * 21) - 10)),
 //     };
-//     setVectors(updated);
+//     setMatrices(updated);
+//   };
+
+//   const fillMatrix = (mi) => {
+//     const val = fillValues[mi] !== undefined && fillValues[mi] !== '' ? fillValues[mi] : '0';
+//     const updated = [...matrices];
+//     const total = updated[mi].rows * updated[mi].cols;
+//     updated[mi] = {
+//       ...updated[mi],
+//       data: new Array(total).fill(String(val)),
+//     };
+//     setMatrices(updated);
+//   };
+
+//   const diagonalMatrix = (mi) => {
+//     const val = fillValues[mi] !== undefined && fillValues[mi] !== '' ? fillValues[mi] : '1';
+//     const updated = [...matrices];
+//     const { rows, cols } = updated[mi];
+//     const data = new Array(rows * cols).fill('0');
+//     const diag = Math.min(rows, cols);
+//     for (let i = 0; i < diag; i++) {
+//       data[i * cols + i] = String(val);
+//     }
+//     updated[mi] = { ...updated[mi], data };
+//     setMatrices(updated);
+//   };
+
+//   const updateFillValue = (mi, value) => {
+//     setFillValues(prev => ({ ...prev, [mi]: value }));
 //   };
 
 //   const handleOperationTypeSelect = (type) => {
@@ -817,52 +996,77 @@
 //     setErrors([]);
 //     setResult(null);
 //     setComputedSteps(null);
+//     setMatrixAccordionOpen({ 0: true, 1: true });
+
 //     let count = 1;
 //     if (type === 'two') count = 2;
-//     if (type === 'multiple') count = 2;
-//     const dim = (typeof dimensionality === 'number' && dimensionality >= 2) ? dimensionality : 3;
-//     const newVectors = Array(count).fill(null).map((_, i) => ({ id: i, components: new Array(dim).fill('') }));
-//     setVectors(newVectors);
-//     setCoefficients(new Array(count).fill(''));
-//     setTargetVector(new Array(dim).fill(''));
+//     if (type === 'system') count = 2;
+
+//     const initialMatrices = Array(count).fill(null).map((_, i) => ({
+//       id: i,
+//       rows: dimensions.rows,
+//       cols: type === 'system' && i === count - 1 ? 1 : dimensions.cols,
+//       data: new Array(dimensions.rows * (type === 'system' && i === count - 1 ? 1 : dimensions.cols)).fill(''),
+//     }));
+//     setMatrices(initialMatrices);
 //     setStep('input');
 //   };
 
-//   const updateVectorComponent = (vi, ci, value) => {
-//     const updated = [...vectors];
-//     updated[vi] = { ...updated[vi], components: [...updated[vi].components] };
-//     updated[vi].components[ci] = value;
-//     setVectors(updated);
-//     if (errors.length > 0) setErrors([]);
-//   };
+//   const handleDimensionsChange = (dim, value) => {
+//     if (value === '') {
+//       setDimensions(prev => ({ ...prev, [dim]: '' }));
+//       return;
+//     }
+//     const val = parseInt(value);
+//     const newDims = { ...dimensions, [dim]: val };
+//     setDimensions(newDims);
 
-//   const updateCoefficient = (index, value) => {
-//     const updated = [...coefficients];
-//     updated[index] = value;
-//     setCoefficients(updated);
-//     if (errors.length > 0) setErrors([]);
-//   };
-
-//   const updateTargetComponent = (ci, value) => {
-//     const updated = [...targetVector];
-//     updated[ci] = value;
-//     setTargetVector(updated);
-//     if (errors.length > 0) setErrors([]);
-//   };
-
-//   const addVector = () => {
-//     if (operationType === 'multiple' && vectors.length < 10) {
-//       const dim = (typeof dimensionality === 'number' && dimensionality >= 2) ? dimensionality : 3;
-//       setVectors([...vectors, { id: vectors.length, components: new Array(dim).fill('') }]);
-//       setCoefficients([...coefficients, '']);
+//     if (newDims.rows >= 1 && newDims.rows <= 10 && newDims.cols >= 1 && newDims.cols <= 10) {
+//       const updated = matrices.map((matrix, i) => {
+//         const nr = newDims.rows;
+//         const nc = operationType === 'system' && i === matrices.length - 1 ? 1 : newDims.cols;
+//         const newData = new Array(nr * nc).fill('');
+//         for (let r = 0; r < Math.min(matrix.rows, nr); r++) {
+//           for (let c = 0; c < Math.min(matrix.cols, nc); c++) {
+//             const oi = r * matrix.cols + c;
+//             const ni = r * nc + c;
+//             if (oi < matrix.data.length) newData[ni] = matrix.data[oi];
+//           }
+//         }
+//         return { ...matrix, rows: nr, cols: nc, data: newData };
+//       });
+//       setMatrices(updated);
+//       setErrors([]);
+//     } else {
+//       const errs = [];
+//       if (newDims.rows < 1 || newDims.rows > 10) errs.push('Rows must be between 1 and 10');
+//       if (newDims.cols < 1 || newDims.cols > 10) errs.push('Columns must be between 1 and 10');
+//       setErrors(errs);
 //     }
 //   };
 
-//   const removeVector = (i) => {
-//     if (operationType === 'multiple' && vectors.length > 2) {
-//       setVectors(vectors.filter((_, idx) => idx !== i));
-//       setCoefficients(coefficients.filter((_, idx) => idx !== i));
+//   const updateMatrixCell = (mi, ci, value) => {
+//     const updated = [...matrices];
+//     updated[mi] = { ...updated[mi], data: [...updated[mi].data] };
+//     updated[mi].data[ci] = value;
+//     setMatrices(updated);
+//     if (errors.length > 0) setErrors([]);
+//   };
+
+//   const addMatrix = () => {
+//     if (operationType === 'system' && matrices.length < 5) {
+//       setMatrices([...matrices, {
+//         id: matrices.length,
+//         rows: dimensions.rows,
+//         cols: dimensions.cols,
+//         data: new Array(dimensions.rows * dimensions.cols).fill(''),
+//       }]);
 //     }
+//   };
+
+//   const removeMatrix = (mi) => {
+//     if (operationType === 'system' && matrices.length > 2)
+//       setMatrices(matrices.filter((_, i) => i !== mi));
 //   };
 
 //   const getAvailableOperations = () => operationsByType[operationType] || [];
@@ -881,25 +1085,21 @@
 //     setComputedSteps(null);
 
 //     setTimeout(() => {
-//       const numericVectors = vectors.map(v =>
-//         v.components.map(c => parseFloat(c))
-//       );
+//       const numericMatrices = matrices.map(m => ({
+//         rows: m.rows,
+//         cols: m.cols,
+//         data: m.data.map(c => parseFloat(c)),
+//       }));
 
 //       const params = {
 //         operation: selectedOperation,
 //         operationType,
-//         dimensionality,
-//         vectors: numericVectors,
+//         dimensions,
+//         matrices: numericMatrices,
+//         scalarValue: scalarValue !== '' ? parseFloat(scalarValue) : null,
 //       };
 
-//       if (selectedOperation === 'Linear Combination') {
-//         params.coefficients = coefficients.map(c => parseFloat(c));
-//       }
-//       if (selectedOperation === 'Span Check') {
-//         params.targetVector = targetVector.map(c => parseFloat(c));
-//       }
-
-//       const res = computeVector(params);
+//       const res = computeMatrix(params);
 //       setResult(res);
 
 //       if (res.type === 'error') {
@@ -909,23 +1109,29 @@
 //         const entry = {
 //           id: Date.now(),
 //           operation: selectedOperation,
-//           vectors: numericVectors,
+//           matrices: numericMatrices,
+//           scalarValue: params.scalarValue,
 //           result: res,
 //           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
 //         };
-//         if (params.coefficients) entry.coefficients = params.coefficients;
-//         if (params.targetVector) entry.targetVector = params.targetVector;
 //         setHistory(prev => [entry, ...prev]);
 //       }
 
 //       // Generate dynamic steps
 //       const stepFn = operationSteps[operationType]?.[selectedOperation];
 //       if (stepFn) {
+//         // Convert flat data to 2D for steps functions
+//         const mats2D = numericMatrices.map(m => {
+//           const mat = [];
+//           for (let r = 0; r < m.rows; r++) {
+//             mat.push(m.data.slice(r * m.cols, r * m.cols + m.cols));
+//           }
+//           return mat;
+//         });
 //         const extras = {
-//           coefficients: params.coefficients,
-//           targetVector: params.targetVector,
+//           scalarValue: params.scalarValue,
 //         };
-//         const stepLines = stepFn(numericVectors, res, extras);
+//         const stepLines = stepFn(mats2D, res, extras);
 //         setComputedSteps(stepLines);
 //       }
 
@@ -933,15 +1139,20 @@
 //     }, 150);
 //   };
 
-//   const canExecute = () => selectedOperation && vectors.length > 0 && !isLoading;
+//   const canExecute = () => selectedOperation && matrices.length > 0 && !isLoading;
 
-//   const getVectorGridExtra = () => {
-//     if (operationType === 'single') return s.vectorGridSingle;
-//     if (operationType === 'two') return s.vectorGridTwo;
-//     return s.vectorGridMultiple;
+//   const needsScalarInput = () =>
+//     operationType === 'scalar' || selectedOperation === 'Matrix Power (Scalar)';
+
+//   const isSquareRequired = (op) => squareOnly.includes(op);
+
+//   const isOpDisabled = (op) => {
+//     if (!isSquareRequired(op)) return false;
+//     const m = matrices[0];
+//     return m && m.rows !== m.cols;
 //   };
 
-//   /* ── explanation: description (from merged, overridable) ── */
+//   /* ── explanation helpers ── */
 //   const getDescription = () => {
 //     const pool = mergedDescriptions[operationType];
 //     if (!pool) return '';
@@ -951,11 +1162,16 @@
 
 //   const getExplanationHeading = () => {
 //     if (selectedOperation) return selectedOperation;
-//     const labels = { single: 'Single Vector Ops', two: 'Two Vector Ops', multiple: 'Multiple Vector Ops' };
+//     const labels = {
+//       single: 'Single Matrix Ops',
+//       two: 'Two Matrix Ops',
+//       scalar: 'Scalar Ops',
+//       system: 'System Ops',
+//     };
 //     return labels[operationType] || 'Explanation';
 //   };
 
-//   /* ── left-panel button style ── */
+//   /* ── left-panel button styles ── */
 //   const catBtnStyle = (id) => ({
 //     padding: '12px',
 //     border: operationType === id ? '2px solid #4285f4' : '2px solid #e5e7eb',
@@ -976,68 +1192,126 @@
 //   });
 //   const catDescStyle = { fontSize: '0.78rem', color: '#6b7280', lineHeight: '1.35' };
 
-//   const dimInputStyle = {
-//     width: '64px',
-//     padding: '8px 10px',
-//     border: dimensionality < 2 || dimensionality > 10 ? '2px solid #dc2626' : '2px solid #d1d5db',
+//   const dimInputStyle = (val) => ({
+//     width: '60px',
+//     padding: '8px 12px',
+//     border: val < 1 || val > 10 ? '2px solid #dc2626' : '2px solid #d1d5db',
 //     borderRadius: '8px',
 //     fontSize: '1rem',
 //     textAlign: 'center',
 //     outline: 'none',
+//   });
+
+//   const getMatrixGridExtra = () => {
+//     if (operationType === 'single') return s.matrixGridSingle;
+//     if (operationType === 'two' || operationType === 'scalar') {
+//       if (needsAccordion()) return s.matrixGridSingle;
+//       return s.matrixGridTwo;
+//     }
+//     return s.matrixGridMultiple;
 //   };
 
-//   /* ── render a single vector card ── */
-//   const renderVector = (vector, vi) => (
-//     <div key={vector.id} style={s.vectorCard}>
-//       <div style={s.vectorHeader}>
-//         <h4 style={s.vectorName}>Vector {String.fromCharCode(65 + vi)}</h4>
-//         <div style={s.vectorHeaderButtons}>
-//           <button
-//             onClick={() => randomizeVector(vi)}
-//             style={s.randomVectorButton}
-//             title="Fill with random numbers"
-//           >
-//             Random
+//   /* ── render a matrix card ── */
+//   const renderMatrix = (matrix, mi, nested = false) => {
+//     const gridStyle = {
+//       gridTemplateColumns: `repeat(${matrix.cols}, 1fr)`,
+//       gridTemplateRows: `repeat(${matrix.rows}, 1fr)`,
+//     };
+//     const label = operationType === 'system' && mi === matrices.length - 1 && matrices.length > 1
+//       ? ` (Vector)` : '';
+
+//     return (
+//       <div key={matrix.id} style={nested ? {} : s.matrixCard}>
+//         {!nested && (
+//           <div style={s.matrixHeader}>
+//             <h4 style={s.matrixName}>Matrix {String.fromCharCode(65 + mi)}{label}</h4>
+//             <div style={s.matrixHeaderRight}>
+//               <span style={s.matrixDimLabel}>{matrix.rows} × {matrix.cols}</span>
+//               <button onClick={() => randomizeMatrix(mi)} style={s.randomMatrixButton} title="Fill with random numbers">
+//                 Random
+//               </button>
+//               <button onClick={() => clearMatrix(mi)} style={s.clearMatrixButton} title="Clear this matrix">
+//                 Clear
+//               </button>
+//               {operationType === 'system' && matrices.length > 2 && mi >= 2 && (
+//                 <button onClick={() => removeMatrix(mi)} style={s.removeButton}>Remove</button>
+//               )}
+//               <Tooltip text="Random fills with integers from -10 to 10. Clear empties all cells." />
+//             </div>
+//           </div>
+//         )}
+//         {nested && (
+//           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '6px', marginBottom: '8px' }}>
+//             <button onClick={() => randomizeMatrix(mi)} style={s.randomMatrixButton} title="Fill with random numbers">
+//               Random
+//             </button>
+//             <button onClick={() => clearMatrix(mi)} style={s.clearMatrixButton} title="Clear this matrix">
+//               Clear
+//             </button>
+//           </div>
+//         )}
+//         {/* Fill controls */}
+//         <div style={s.fillControlsRow}>
+//           <span style={s.fillLabel}>Value:</span>
+//           <input
+//             type="number"
+//             step="any"
+//             value={fillValues[mi] !== undefined ? fillValues[mi] : ''}
+//             onChange={(e) => updateFillValue(mi, e.target.value)}
+//             placeholder="0"
+//             style={s.fillValueInput}
+//           />
+//           <button onClick={() => fillMatrix(mi)} style={s.fillButton} title="Fill all cells with this value">
+//             Fill All
 //           </button>
-//           <button
-//             onClick={() => clearVector(vi)}
-//             style={s.clearVectorButton}
-//             title="Clear this vector"
-//           >
-//             Clear
+//           <button onClick={() => diagonalMatrix(mi)} style={s.diagonalButton} title="Diagonal matrix with this value (default 1)">
+//             Diagonal
 //           </button>
-//           {operationType === 'multiple' && vectors.length > 2 && (
-//             <button onClick={() => removeVector(vi)} style={s.removeButton}>Remove</button>
-//           )}
-//           <Tooltip text="Random fills with integers from -10 to 10. Clear empties all fields." />
+//           <Tooltip text="Fill All sets every cell to the value. Diagonal places it on the main diagonal with zeros elsewhere (default 1 = identity matrix)." />
+//         </div>
+//         <div style={s.matrixContainer}>
+//           <div style={s.matrixContent}>
+//             <span style={s.matrixBracket}>[</span>
+//             <div style={{ ...s.matrixTable, ...gridStyle }}>
+//               {matrix.data.map((cell, ci) => (
+//                 <input
+//                   key={ci}
+//                   type="number"
+//                   step="any"
+//                   value={cell}
+//                   onChange={(e) => updateMatrixCell(mi, ci, e.target.value)}
+//                   placeholder="0"
+//                   style={{
+//                     ...s.matrixCell,
+//                     ...(cell !== '' && (isNaN(parseFloat(cell)) || !isFinite(cell)) ? s.matrixCellError : {}),
+//                   }}
+//                 />
+//               ))}
+//             </div>
+//             <span style={s.matrixBracket}>]</span>
+//           </div>
 //         </div>
 //       </div>
-//       <div style={s.vectorComponents}>
-//         <span style={s.bracket}>(</span>
-//         {vector.components.map((comp, ci) => (
-//           <React.Fragment key={ci}>
-//             <input
-//               type="number"
-//               step="any"
-//               value={comp}
-//               onChange={(e) => updateVectorComponent(vi, ci, e.target.value)}
-//               placeholder="0"
-//               style={{
-//                 ...s.componentInput,
-//                 ...(comp !== '' && (isNaN(parseFloat(comp)) || !isFinite(comp)) ? s.componentInputError : {}),
-//               }}
-//             />
-//             {ci < vector.components.length - 1 && <span style={s.separator}>,</span>}
-//           </React.Fragment>
-//         ))}
-//         <span style={s.bracket}>)</span>
-//       </div>
-//     </div>
-//   );
+//     );
+//   };
 
 //   /* ── render result based on type ── */
+//   const renderResultMatrix = (matrix) => (
+//     <table style={s.resultMatrixTable}>
+//       <tbody>
+//         {matrix.map((row, ri) => (
+//           <tr key={ri}>
+//             {row.map((val, ci) => (
+//               <td key={ci} style={s.resultMatrixCell}>{val}</td>
+//             ))}
+//           </tr>
+//         ))}
+//       </tbody>
+//     </table>
+//   );
+
 //   const renderResult = () => {
-//     if (!result) return 'Select vectors and operation, then click Execute';
+//     if (!result) return 'Select matrices and operation, then click Execute';
 
 //     if (result.type === 'error') {
 //       return <span style={s.resultError}>{result.value}</span>;
@@ -1056,7 +1330,23 @@
 //       return (
 //         <>
 //           <span style={s.resultLabel}>{result.label}</span>
-//           <span style={s.resultValue}>({result.value.join(', ')})</span>
+//           <div style={s.resultVarRow}>
+//             {result.value.map((val, i) => (
+//               <span key={i} style={s.resultVarItem}>
+//                 {result.variables ? result.variables[i] : `x${i + 1}`} = {val}
+//               </span>
+//             ))}
+//           </div>
+//           {result.detail && <span style={s.resultDetail}>{result.detail}</span>}
+//         </>
+//       );
+//     }
+
+//     if (result.type === 'matrix') {
+//       return (
+//         <>
+//           <span style={s.resultLabel}>{result.label} ({result.rows}&times;{result.cols})</span>
+//           {renderResultMatrix(result.value)}
 //         </>
 //       );
 //     }
@@ -1066,32 +1356,27 @@
 //         <>
 //           <span style={s.resultLabel}>{result.label}</span>
 //           <span style={result.value ? s.resultTrue : s.resultFalse}>
-//             {result.value ? '✓ TRUE' : '✗ FALSE'}
+//             {result.value ? '\u2713 TRUE' : '\u2717 FALSE'}
 //           </span>
-//           <span style={s.resultDetail}>{result.detail}</span>
+//           {result.detail && <span style={s.resultDetail}>{result.detail}</span>}
 //         </>
 //       );
 //     }
 
-//     if (result.type === 'matrix') {
+//     if (result.type === 'decomposition') {
 //       return (
-//         <>
+//         <div style={s.resultDecompSection}>
 //           <span style={s.resultLabel}>{result.label}</span>
-//           <table style={s.matrixTable}>
-//             <tbody>
-//               {result.value.map((row, ri) => (
-//                 <tr key={ri}>
-//                   {result.rowLabels && (
-//                     <td style={s.matrixRowLabel}>{result.rowLabels[ri]}</td>
-//                   )}
-//                   {row.map((val, ci) => (
-//                     <td key={ci} style={s.matrixCell}>{val}</td>
-//                   ))}
-//                 </tr>
-//               ))}
-//             </tbody>
-//           </table>
-//         </>
+//           {Object.keys(result.value).map((key) => {
+//             const part = result.value[key];
+//             return (
+//               <div key={key} style={{ textAlign: 'center' }}>
+//                 <div style={s.resultDecompLabel}>{part.label}</div>
+//                 {renderResultMatrix(part.matrix)}
+//               </div>
+//             );
+//           })}
+//         </div>
 //       );
 //     }
 
@@ -1107,8 +1392,8 @@
 
 //         {/* Header */}
 //         <div style={s.header}>
-//           {/* <h1 style={s.title}>Vector Calculator</h1> */}
-//           <p style={s.subtitle}>Professional vector operations calculator</p>
+//           {/* <h1 style={s.title}>Matrix Calculator</h1> */}
+//           <p style={s.subtitle}>Professional matrix operations calculator</p>
 //         </div>
 
 //         {/* ── INITIAL STATE ── */}
@@ -1172,44 +1457,40 @@
 //             {/* ▸ MIDDLE — calculator */}
 //             <div>
 //               <div style={s.inputHeader}>
-//                 <h2 style={s.inputTitle}>Vector Input ({dimensionality}D)</h2>
+//                 <h2 style={s.inputTitle}>Matrix Input ({dimensions.rows}×{dimensions.cols})</h2>
 //                 <div style={s.buttonGroup}>
-//                   <Tooltip text="Enter vector components below. Each input field represents one dimension. Use Random to fill with test values, or Clear to reset." />
+//                   <Tooltip text="Enter matrix values below. Use Random for test values, Clear to reset, Fill All to set uniform values, or Diagonal for identity-like matrices." />
 //                   <button onClick={handleReset} style={s.buttonDanger}>Reset All</button>
 //                 </div>
 //               </div>
 
-//               {/* Dimensionality */}
+//               {/* Dimensions */}
 //               <div style={s.dimControls}>
-//                 <label style={s.dimLabel}>Dimensions:</label>
-//                 <input
-//                   type="number"
-//                   min="2"
-//                   max="10"
-//                   value={dimensionality}
-//                   onChange={(e) => {
-//                     const raw = e.target.value;
-//                     if (raw === '') { setDimensionality(''); return; }
-//                     const val = parseInt(raw);
-//                     setDimensionality(val);
-//                     if (val >= 2 && val <= 10) {
-//                       setVectors(vectors.map(v => {
-//                         const nc = new Array(val).fill('');
-//                         for (let i = 0; i < Math.min(v.components.length, val); i++) nc[i] = v.components[i];
-//                         return { ...v, components: nc };
-//                       }));
-//                       const nt = new Array(val).fill('');
-//                       for (let i = 0; i < Math.min(targetVector.length, val); i++) nt[i] = targetVector[i];
-//                       setTargetVector(nt);
-//                       setErrors([]);
-//                     } else {
-//                       setErrors(['Dimensionality must be between 2 and 10']);
-//                     }
-//                   }}
-//                   style={dimInputStyle}
-//                 />
-//                 <span style={s.dimHint}>(2–10)</span>
-//                 <Tooltip text="Set the number of components per vector. Changing this resizes all vectors, preserving existing values that fit." />
+//                 <div style={s.dimGroup}>
+//                   <label style={s.dimLabel}>Rows:</label>
+//                   <input
+//                     type="number" min="1" max="10"
+//                     value={dimensions.rows}
+//                     onChange={(e) => handleDimensionsChange('rows', e.target.value)}
+//                     style={dimInputStyle(dimensions.rows)}
+//                   />
+//                 </div>
+//                 <div style={s.dimGroup}>
+//                   <label style={s.dimLabel}>Cols:</label>
+//                   <input
+//                     type="number" min="1" max="10"
+//                     value={dimensions.cols}
+//                     onChange={(e) => handleDimensionsChange('cols', e.target.value)}
+//                     style={dimInputStyle(dimensions.cols)}
+//                   />
+//                 </div>
+//                 <span style={s.dimHint}>
+//                   {dimensions.rows}×{dimensions.cols} ({dimensions.rows * dimensions.cols} elements)
+//                 </span>
+//                 {operationType === 'single' && dimensions.rows !== dimensions.cols && (
+//                   <span style={s.dimWarning}>Some operations require square matrices</span>
+//                 )}
+//                 <Tooltip text="Set matrix dimensions (1–10 each). Changing resizes all matrices, preserving existing values that fit." />
 //               </div>
 
 //               {/* Errors */}
@@ -1224,63 +1505,61 @@
 //                 </div>
 //               )}
 
-//               {/* Vectors */}
-//               <div style={{ ...s.vectorGrid, ...getVectorGridExtra() }}>
-//                 {vectors.map((v, i) => renderVector(v, i))}
+//               {/* Matrices */}
+//               <div style={{ ...s.matrixGrid, ...getMatrixGridExtra() }}>
+//                 {matrices.map((m, i) => {
+//                   if (needsAccordion()) {
+//                     const isOpen = matrixAccordionOpen[i] !== false;
+//                     const label = operationType === 'system' && i === matrices.length - 1 && matrices.length > 1
+//                       ? ' (Vector)' : '';
+//                     return (
+//                       <div key={m.id} style={s.matrixAccordion}>
+//                         <button
+//                           onClick={() => toggleMatrixAccordion(i)}
+//                           style={s.matrixAccordionToggle}
+//                         >
+//                           <div style={s.matrixAccordionLeft}>
+//                             <span style={s.matrixAccordionName}>Matrix {String.fromCharCode(65 + i)}{label}</span>
+//                             <span style={s.matrixAccordionDim}>{m.rows} × {m.cols}</span>
+//                           </div>
+//                           <span style={{
+//                             ...s.matrixAccordionArrow,
+//                             transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+//                           }}>
+//                             ▼
+//                           </span>
+//                         </button>
+//                         {isOpen && (
+//                           <div style={s.matrixAccordionBody}>
+//                             {renderMatrix(m, i, true)}
+//                           </div>
+//                         )}
+//                       </div>
+//                     );
+//                   }
+//                   return renderMatrix(m, i);
+//                 })}
 //               </div>
 
-//               {/* Add vector */}
-//               {operationType === 'multiple' && vectors.length < 10 && (
-//                 <div style={s.addVectorContainer}>
-//                   <button onClick={addVector} style={s.addVectorButton}>+ Add Vector</button>
+//               {/* Add matrix (system) */}
+//               {operationType === 'system' && matrices.length < 5 && (
+//                 <div style={s.addMatrixContainer}>
+//                   <button onClick={addMatrix} style={s.addMatrixButton}>+ Add Matrix</button>
 //                 </div>
 //               )}
 
-//               {/* ── Extra inputs: Coefficients (Linear Combination) ── */}
-//               {selectedOperation === 'Linear Combination' && (
-//                 <div style={s.extraInputsSection}>
-//                   <div style={s.extraInputsTitle}>Coefficients (one per vector)</div>
-//                   {vectors.map((v, i) => (
-//                     <div key={i} style={s.coefficientRow}>
-//                       <span style={s.coefficientLabel}>c{String.fromCharCode(8321 + i)}</span>
-//                       <input
-//                         type="number"
-//                         step="any"
-//                         value={coefficients[i] || ''}
-//                         onChange={(e) => updateCoefficient(i, e.target.value)}
-//                         placeholder="0"
-//                         style={s.coefficientInput}
-//                       />
-//                       <span style={s.coefficientHint}>× Vector {String.fromCharCode(65 + i)}</span>
-//                     </div>
-//                   ))}
-//                 </div>
-//               )}
-
-//               {/* ── Extra inputs: Target Vector (Span Check) ── */}
-//               {selectedOperation === 'Span Check' && (
-//                 <div style={s.extraInputsSection}>
-//                   <div style={s.extraInputsTitle}>Target Vector (is it in the span?)</div>
-//                   <div style={s.vectorComponents}>
-//                     <span style={s.bracket}>(</span>
-//                     {targetVector.map((comp, ci) => (
-//                       <React.Fragment key={ci}>
-//                         <input
-//                           type="number"
-//                           step="any"
-//                           value={comp}
-//                           onChange={(e) => updateTargetComponent(ci, e.target.value)}
-//                           placeholder="0"
-//                           style={{
-//                             ...s.componentInput,
-//                             borderColor: '#f59e0b',
-//                           }}
-//                         />
-//                         {ci < targetVector.length - 1 && <span style={s.separator}>,</span>}
-//                       </React.Fragment>
-//                     ))}
-//                     <span style={s.bracket}>)</span>
-//                   </div>
+//               {/* Scalar input */}
+//               {needsScalarInput() && (
+//                 <div style={s.scalarSection}>
+//                   <label style={s.scalarLabel}>Scalar value:</label>
+//                   <input
+//                     type="number" step="any"
+//                     value={scalarValue}
+//                     onChange={(e) => setScalarValue(e.target.value)}
+//                     placeholder="Enter value"
+//                     style={s.scalarInput}
+//                   />
+//                   <Tooltip text="The scalar is applied to every element according to the selected operation (multiply, add, subtract, or power)." />
 //                 </div>
 //               )}
 
@@ -1288,12 +1567,12 @@
 //               <div style={s.operationsSection}>
 //                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
 //                   <h3 style={{ ...s.operationsTitle, marginBottom: 0 }}>Available Operations</h3>
-//                   <Tooltip text={selectedOperation ? getDescription() : 'Select an operation to see its description. Grayed-out operations require specific conditions (e.g. 3D vectors for Cross Product).'} />
+//                   <Tooltip text={selectedOperation ? getDescription() : 'Select an operation to see its description. Grayed-out operations require square matrices.'} />
 //                 </div>
 //                 <div style={s.operationsGrid}>
 //                   {getAvailableOperations().map((op) => {
 //                     const sel = selectedOperation === op;
-//                     const dis = op === 'Cross Product' && dimensionality !== 3;
+//                     const dis = isOpDisabled(op);
 //                     return (
 //                       <button
 //                         key={op}
@@ -1333,7 +1612,7 @@
 //               <div style={s.resultsSection}>
 //                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
 //                   <h4 style={{ ...s.resultsTitle, margin: 0 }}>Result</h4>
-//                   <Tooltip text="Results appear here after clicking Execute. Scalars show a single number, vectors show components in parentheses, and boolean results show pass/fail." />
+//                   <Tooltip text="Results appear here after clicking Execute. Outputs vary by operation: scalars, vectors, matrices, or decompositions (multiple matrices)." />
 //                 </div>
 //                 <div style={s.resultsContent}>
 //                   {renderResult()}
@@ -1345,9 +1624,9 @@
 //             <div style={s.explanationPanel}>
 //               {/* Theory (from merged descriptions — overridable via props) */}
 //               <h4 style={s.explanationTitle}>{getExplanationHeading()}</h4>
-//               <p style={s.explanationBody}>{getDescription()}</p>
+//               <p style={s.explanationBody}>{processContent(getDescription())}</p>
 
-//               {/* Steps (dynamic — always from vectorExplanations.js, never overridable) */}
+//               {/* Steps (dynamic — always from matrixExplanations.js, never overridable) */}
 //               {computedSteps && computedSteps.length > 0 && (
 //                 <>
 //                   <hr style={s.explanationDivider} />
@@ -1385,7 +1664,7 @@
 //                               <span style={s.historyOpName}>{entry.operation}</span>
 //                               <span style={s.historyTime}>{entry.time}</span>
 //                             </div>
-//                             <div style={s.historyVectors}>
+//                             <div style={s.historyInputs}>
 //                               {formatHistoryInputs(entry)}
 //                             </div>
 //                             <div style={s.historyResult}>
@@ -1413,21 +1692,24 @@
 // }
 
 
+
+'use client';
+
 import React, { useState } from 'react';
-import computeVector from './computeVector';
+import computeMatrix from './computeMatrix';
+import { processContent } from '../../../utils/contentProcessor';
 import {
   descriptions as defaultDescriptions,
   steps as operationSteps,
-} from './vectorExplanations';
+} from './matrixExplanations';
 
 /* ── styles ───────────────────────────────────────────────────── */
 
 const s = {
-  /* — wrappers — */
   container: {
     minHeight: '100vh',
     backgroundColor: '#f8f9fa',
-    padding: '20px',
+    padding: '0px',
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
   },
   mainNarrow: {
@@ -1440,7 +1722,7 @@ const s = {
     transition: 'max-width 0.4s ease',
   },
   mainWide: {
-    maxWidth: 'calc(100vw - 100px)',
+    maxWidth: 'calc(100vw - 10px)',
     margin: '0 auto',
     backgroundColor: 'white',
     borderRadius: '16px',
@@ -1463,8 +1745,6 @@ const s = {
     fontSize: '1.1rem',
     margin: '0',
   },
-
-  /* — initial card grid — */
   stepTitle: {
     fontSize: '1.5rem',
     fontWeight: '600',
@@ -1505,8 +1785,6 @@ const s = {
     gap: '24px',
     alignItems: 'start',
   },
-
-  /* — left panel — */
   leftPanel: {
     display: 'flex',
     flexDirection: 'column',
@@ -1536,7 +1814,7 @@ const s = {
   },
   opSubItem: {
     padding: '6px 10px',
-    border: '1px solid transparent',
+    border: '1px solid #e5e7eb',
     borderRadius: '6px',
     backgroundColor: 'transparent',
     cursor: 'pointer',
@@ -1569,7 +1847,6 @@ const s = {
     flexShrink: 0,
   },
 
-  /* — right (explanation) panel — */
   explanationPanel: {
     backgroundColor: '#f0f4ff',
     borderRadius: '12px',
@@ -1631,74 +1908,104 @@ const s = {
     margin: '0',
   },
   buttonGroup: { display: 'flex', gap: '12px' },
-  vectorGrid: {
+
+  /* — dimension controls — */
+  dimControls: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '24px',
+    marginBottom: '24px',
+    padding: '14px',
+    backgroundColor: '#f0f7ff',
+    borderRadius: '8px',
+    border: '1px solid #e0e7ff',
+    flexWrap: 'wrap',
+  },
+  dimGroup: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  dimLabel: { fontSize: '0.95rem', fontWeight: '500', color: '#374151' },
+  dimHint: { fontSize: '0.85rem', color: '#6b7280' },
+  dimWarning: { fontSize: '0.85rem', color: '#dc2626', fontWeight: '500' },
+
+  /* — matrix grid — */
+  matrixGrid: {
     display: 'grid',
-    gap: '16px',
+    gap: '24px',
     marginBottom: '24px',
   },
-  vectorGridSingle: { gridTemplateColumns: '1fr' },
-  vectorGridTwo: { gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' },
-  vectorGridMultiple: { gridTemplateColumns: '1fr' },
-  vectorCard: {
+  matrixGridSingle: { gridTemplateColumns: '1fr' },
+  matrixGridTwo: { gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' },
+  matrixGridMultiple: { gridTemplateColumns: '1fr' },
+  matrixCard: {
     backgroundColor: '#f8f9fa',
-    padding: '16px',
-    borderRadius: '8px',
+    padding: '20px',
+    borderRadius: '12px',
     border: '1px solid #e5e7eb',
   },
-  vectorHeader: {
+  matrixHeader: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: '12px',
+    marginBottom: '16px',
   },
-  vectorName: {
+  matrixName: {
     margin: '0',
-    fontSize: '1.05rem',
+    fontSize: '1.1rem',
     fontWeight: '600',
     color: '#374151',
   },
-  vectorHeaderButtons: {
-    display: 'flex',
-    gap: '6px',
-    alignItems: 'center',
-  },
-  vectorComponents: {
+  matrixHeaderRight: {
     display: 'flex',
     gap: '8px',
     alignItems: 'center',
-    flexWrap: 'wrap',
   },
-  componentInput: {
-    width: '56px',
-    padding: '6px',
+  matrixDimLabel: {
+    fontSize: '0.85rem',
+    color: '#6b7280',
+    fontWeight: '500',
+  },
+  matrixContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  matrixContent: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  matrixBracket: {
+    fontSize: '2rem',
+    fontWeight: 'bold',
+    color: '#374151',
+    lineHeight: '1',
+  },
+  matrixTable: {
+    display: 'grid',
+    gap: '4px',
+    padding: '8px',
+  },
+  matrixCell: {
+    width: '50px',
+    height: '35px',
+    padding: '4px',
     border: '1px solid #d1d5db',
     borderRadius: '4px',
     textAlign: 'center',
-    fontSize: '0.9rem',
+    fontSize: '0.85rem',
+    backgroundColor: 'white',
     outline: 'none',
   },
-  componentInputError: {
+  matrixCellError: {
     borderColor: '#dc2626',
     backgroundColor: '#fef2f2',
   },
-  separator: { color: '#6b7280' },
-  bracket: { fontWeight: '500' },
-  addVectorContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '24px',
-  },
-  addVectorButton: {
-    padding: '8px 16px',
-    border: '2px dashed #4285f4',
-    borderRadius: '8px',
-    backgroundColor: 'transparent',
-    color: '#4285f4',
-    fontSize: '0.9rem',
-    cursor: 'pointer',
-    transition: 'all 0.2s ease',
-    outline: 'none',
-  },
+
+  /* — execute — */
   executeButton: {
     padding: '12px 32px',
     border: 'none',
@@ -1716,6 +2023,31 @@ const s = {
     backgroundColor: '#9ca3af',
     cursor: 'not-allowed',
   },
+
+  /* — scalar input — */
+  scalarSection: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '12px',
+    marginBottom: '16px',
+    padding: '12px',
+    backgroundColor: '#f0f7ff',
+    borderRadius: '8px',
+    border: '1px solid #e0e7ff',
+  },
+  scalarLabel: { fontSize: '0.95rem', fontWeight: '500', color: '#374151' },
+  scalarInput: {
+    width: '80px',
+    padding: '8px 12px',
+    border: '1px solid #d1d5db',
+    borderRadius: '6px',
+    textAlign: 'center',
+    fontSize: '1rem',
+    outline: 'none',
+  },
+
+  /* — results — */
   resultsSection: {
     backgroundColor: '#f9fafb',
     padding: '16px',
@@ -1742,136 +2074,6 @@ const s = {
     flexDirection: 'column',
     gap: '8px',
   },
-  errorSection: {
-    backgroundColor: '#fef2f2',
-    border: '1px solid #fecaca',
-    borderRadius: '8px',
-    padding: '16px',
-    marginBottom: '16px',
-  },
-  errorTitle: {
-    color: '#dc2626',
-    fontWeight: '600',
-    fontSize: '1rem',
-    margin: '0 0 8px 0',
-  },
-  errorList: { listStyle: 'none', padding: '0', margin: '0' },
-  errorItem: { color: '#dc2626', fontSize: '0.9rem', marginBottom: '4px' },
-  buttonDanger: {
-    padding: '8px 16px',
-    borderRadius: '6px',
-    fontSize: '0.9rem',
-    cursor: 'pointer',
-    transition: 'all 0.2s ease',
-    border: '2px solid #dc2626',
-    backgroundColor: 'transparent',
-    color: '#dc2626',
-    outline: 'none',
-  },
-  clearVectorButton: {
-    padding: '3px 8px',
-    border: '1px solid #9ca3af',
-    borderRadius: '4px',
-    backgroundColor: 'transparent',
-    color: '#6b7280',
-    fontSize: '0.75rem',
-    cursor: 'pointer',
-    transition: 'all 0.15s ease',
-    outline: 'none',
-  },
-  randomVectorButton: {
-    padding: '3px 8px',
-    border: '1px solid #4285f4',
-    borderRadius: '4px',
-    backgroundColor: 'transparent',
-    color: '#4285f4',
-    fontSize: '0.75rem',
-    cursor: 'pointer',
-    transition: 'all 0.15s ease',
-    outline: 'none',
-  },
-  removeButton: {
-    padding: '3px 8px',
-    border: 'none',
-    borderRadius: '4px',
-    backgroundColor: '#dc2626',
-    color: 'white',
-    fontSize: '0.75rem',
-    cursor: 'pointer',
-    outline: 'none',
-  },
-  loading: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '8px',
-  },
-  spinner: {
-    width: '16px',
-    height: '16px',
-    border: '2px solid #e5e7eb',
-    borderTop: '2px solid #4285f4',
-    borderRadius: '50%',
-    animation: 'spin 1s linear infinite',
-  },
-  dimControls: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '16px',
-    marginBottom: '24px',
-    padding: '14px',
-    backgroundColor: '#f3f4f6',
-    borderRadius: '8px',
-    border: '1px solid #d1d5db',
-  },
-  dimLabel: { fontSize: '0.95rem', fontWeight: '500', color: '#374151' },
-  dimHint: { fontSize: '0.85rem', color: '#6b7280' },
-
-  /* — coefficient input (Linear Combination) — */
-  coefficientRow: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    marginBottom: '8px',
-  },
-  coefficientLabel: {
-    fontSize: '0.85rem',
-    fontWeight: '600',
-    color: '#4285f4',
-    minWidth: '24px',
-  },
-  coefficientInput: {
-    width: '64px',
-    padding: '6px',
-    border: '2px solid #4285f4',
-    borderRadius: '4px',
-    textAlign: 'center',
-    fontSize: '0.9rem',
-    outline: 'none',
-    backgroundColor: '#f0f7ff',
-  },
-  coefficientHint: {
-    fontSize: '0.8rem',
-    color: '#6b7280',
-  },
-
-  /* — extra inputs section (coefficients / target) — */
-  extraInputsSection: {
-    backgroundColor: '#fffbeb',
-    border: '1px solid #fde68a',
-    borderRadius: '8px',
-    padding: '16px',
-    marginBottom: '24px',
-  },
-  extraInputsTitle: {
-    fontSize: '0.95rem',
-    fontWeight: '600',
-    color: '#92400e',
-    margin: '0 0 12px 0',
-  },
-
-  /* — result formatting — */
   resultLabel: {
     fontSize: '0.85rem',
     color: '#6b7280',
@@ -1882,6 +2084,11 @@ const s = {
     fontWeight: '600',
     color: '#1f2937',
     fontFamily: 'monospace',
+  },
+  resultError: {
+    color: '#dc2626',
+    fontWeight: '500',
+    fontSize: '0.95rem',
   },
   resultTrue: {
     color: '#059669',
@@ -1897,29 +2104,223 @@ const s = {
     fontSize: '0.9rem',
     color: '#374151',
     textAlign: 'center',
+    whiteSpace: 'pre-wrap',
   },
-  resultError: {
-    color: '#dc2626',
-    fontWeight: '500',
-    fontSize: '0.95rem',
-  },
-  matrixTable: {
+  resultMatrixTable: {
     borderCollapse: 'collapse',
     fontFamily: 'monospace',
-    fontSize: '0.95rem',
+    fontSize: '0.9rem',
   },
-  matrixCell: {
-    padding: '6px 12px',
+  resultMatrixCell: {
+    padding: '5px 10px',
     textAlign: 'right',
     border: '1px solid #e5e7eb',
   },
-  matrixRowLabel: {
-    padding: '6px 10px',
-    textAlign: 'left',
-    fontWeight: '600',
+  resultDecompSection: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+    alignItems: 'center',
+  },
+  resultDecompLabel: {
+    fontSize: '0.9rem',
+    fontWeight: '700',
     color: '#4285f4',
+    marginBottom: '4px',
+  },
+  resultVarRow: {
+    display: 'flex',
+    gap: '16px',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  resultVarItem: {
+    fontSize: '1rem',
+    fontFamily: 'monospace',
+    fontWeight: '600',
+    color: '#1f2937',
+  },
+
+  /* — errors — */
+  errorSection: {
+    backgroundColor: '#fef2f2',
+    border: '1px solid #fecaca',
+    borderRadius: '8px',
+    padding: '16px',
+    marginBottom: '16px',
+  },
+  errorTitle: {
+    color: '#dc2626',
+    fontWeight: '600',
+    fontSize: '1rem',
+    margin: '0 0 8px 0',
+  },
+  errorList: { listStyle: 'none', padding: '0', margin: '0' },
+  errorItem: { color: '#dc2626', fontSize: '0.9rem', marginBottom: '4px' },
+
+  /* — buttons — */
+  buttonDanger: {
+    padding: '8px 16px',
+    borderRadius: '6px',
+    fontSize: '0.9rem',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
+    border: '2px solid #dc2626',
+    backgroundColor: 'transparent',
+    color: '#dc2626',
+    outline: 'none',
+  },
+  clearMatrixButton: {
+    padding: '3px 8px',
+    border: '1px solid #9ca3af',
+    borderRadius: '4px',
+    backgroundColor: 'transparent',
+    color: '#6b7280',
+    fontSize: '0.75rem',
+    cursor: 'pointer',
+    transition: 'all 0.15s ease',
+    outline: 'none',
+  },
+  randomMatrixButton: {
+    padding: '3px 8px',
+    border: '1px solid #4285f4',
+    borderRadius: '4px',
+    backgroundColor: 'transparent',
+    color: '#4285f4',
+    fontSize: '0.75rem',
+    cursor: 'pointer',
+    transition: 'all 0.15s ease',
+    outline: 'none',
+  },
+  fillControlsRow: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    marginBottom: '12px',
+    flexWrap: 'wrap',
+  },
+  fillValueInput: {
+    width: '48px',
+    padding: '3px 6px',
+    border: '1px solid #d1d5db',
+    borderRadius: '4px',
+    textAlign: 'center',
+    fontSize: '0.8rem',
+    outline: 'none',
+  },
+  fillButton: {
+    padding: '3px 8px',
+    border: '1px solid #6b7280',
+    borderRadius: '4px',
+    backgroundColor: 'transparent',
+    color: '#6b7280',
+    fontSize: '0.75rem',
+    cursor: 'pointer',
+    transition: 'all 0.15s ease',
+    outline: 'none',
+  },
+  diagonalButton: {
+    padding: '3px 8px',
+    border: '1px solid #059669',
+    borderRadius: '4px',
+    backgroundColor: 'transparent',
+    color: '#059669',
+    fontSize: '0.75rem',
+    cursor: 'pointer',
+    transition: 'all 0.15s ease',
+    outline: 'none',
+  },
+  fillLabel: {
+    fontSize: '0.75rem',
+    color: '#6b7280',
+  },
+  removeButton: {
+    padding: '3px 8px',
+    border: 'none',
+    borderRadius: '4px',
+    backgroundColor: '#dc2626',
+    color: 'white',
+    fontSize: '0.75rem',
+    cursor: 'pointer',
+    outline: 'none',
+  },
+  addMatrixContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: '24px',
+  },
+  addMatrixButton: {
+    padding: '8px 16px',
+    border: '2px dashed #4285f4',
+    borderRadius: '8px',
+    backgroundColor: 'transparent',
+    color: '#4285f4',
+    fontSize: '0.9rem',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
+    outline: 'none',
+  },
+
+  /* — loading — */
+  loading: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px',
+  },
+  spinner: {
+    width: '16px',
+    height: '16px',
+    border: '2px solid #e5e7eb',
+    borderTop: '2px solid #4285f4',
+    borderRadius: '50%',
+    animation: 'spin 1s linear infinite',
+  },
+
+  /* — matrix accordion (two matrices, cols > 5) — */
+  matrixAccordion: {
     border: '1px solid #e5e7eb',
-    backgroundColor: '#f0f7ff',
+    borderRadius: '12px',
+    overflow: 'hidden',
+    marginBottom: '0',
+  },
+  matrixAccordionToggle: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    padding: '14px 20px',
+    border: 'none',
+    backgroundColor: '#f8f9fa',
+    cursor: 'pointer',
+    transition: 'background-color 0.15s ease',
+    outline: 'none',
+  },
+  matrixAccordionLeft: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+  },
+  matrixAccordionName: {
+    fontSize: '1.1rem',
+    fontWeight: '600',
+    color: '#374151',
+    margin: 0,
+  },
+  matrixAccordionDim: {
+    fontSize: '0.85rem',
+    color: '#6b7280',
+    fontWeight: '500',
+  },
+  matrixAccordionArrow: {
+    fontSize: '0.75rem',
+    color: '#6b7280',
+    transition: 'transform 0.2s ease',
+  },
+  matrixAccordionBody: {
+    padding: '0 20px 20px 20px',
+    backgroundColor: '#f8f9fa',
   },
 
   /* — history accordion — */
@@ -1976,7 +2377,7 @@ const s = {
     fontSize: '0.75rem',
     color: '#9ca3af',
   },
-  historyVectors: {
+  historyInputs: {
     fontSize: '0.78rem',
     color: '#6b7280',
     fontFamily: 'monospace',
@@ -2003,15 +2404,22 @@ const s = {
   },
 };
 
+// const spinKeyframes = `
+// @keyframes spin {
+//   0% { transform: rotate(0deg); }
+//   100% { transform: rotate(360deg); }
+// }`;
+
 const spinKeyframes = `
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-button:focus, button:focus-visible {
-  outline: none;
-  box-shadow: none;
+button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }`;
+
 
 /* ── Tooltip component ────────────────────────────────────────── */
 
@@ -2099,53 +2507,58 @@ function Tooltip({ text }) {
 
 /* ── helpers for history ─────────────────────────────────────── */
 
-function fmtVecCompact(v) {
-  return '(' + v.map(c => {
-    if (Number.isInteger(c)) return String(c);
-    return parseFloat(c.toFixed(4)).toString();
-  }).join(', ') + ')';
+function fmtMatCompact(m, rows, cols) {
+  if (rows <= 2 && cols <= 2) {
+    const data = [];
+    for (let r = 0; r < rows; r++) {
+      const row = [];
+      for (let c = 0; c < cols; c++) {
+        const v = m[r * cols + c];
+        row.push(Number.isInteger(v) ? String(v) : parseFloat(v.toFixed(4)).toString());
+      }
+      data.push('[' + row.join(', ') + ']');
+    }
+    return data.join(' ');
+  }
+  return `${rows}\u00D7${cols}`;
 }
 
 function formatHistoryResult(res) {
   if (res.type === 'scalar') return String(res.value);
-  if (res.type === 'vector') return fmtVecCompact(res.value);
+  if (res.type === 'vector') return '(' + res.value.join(', ') + ')';
+  if (res.type === 'matrix') return `${res.rows}\u00D7${res.cols} matrix`;
   if (res.type === 'boolean') return res.value ? '\u2713 TRUE' : '\u2717 FALSE';
-  if (res.type === 'matrix') return `${res.value.length}\u00D7${res.value[0].length} matrix`;
+  if (res.type === 'decomposition') return res.label;
   return String(res.value);
 }
 
 function formatHistoryInputs(entry) {
-  const parts = entry.vectors.map((v, i) =>
-    `${String.fromCharCode(65 + i)}=${fmtVecCompact(v)}`
+  const parts = entry.matrices.map((m, i) =>
+    `${String.fromCharCode(65 + i)}(${m.rows}\u00D7${m.cols})`
   );
-  if (entry.coefficients) {
-    parts.push('c=[' + entry.coefficients.map(c => {
-      if (Number.isInteger(c)) return String(c);
-      return parseFloat(c.toFixed(4)).toString();
-    }).join(', ') + ']');
-  }
-  if (entry.targetVector) {
-    parts.push('t=' + fmtVecCompact(entry.targetVector));
+  if (entry.scalarValue !== null && entry.scalarValue !== undefined) {
+    parts.push(`c=${entry.scalarValue}`);
   }
   return parts.join('  ');
 }
 
 /* ── component ────────────────────────────────────────────────── */
 
-export default function VectorCalculator({ descriptions: descriptionsProp } = {}) {
+export default function MatrixCalculator({ descriptions: descriptionsProp } = {}) {
   const [step, setStep] = useState('operation-type');
   const [operationType, setOperationType] = useState('');
-  const [dimensionality, setDimensionality] = useState(3);
-  const [vectors, setVectors] = useState([]);
+  const [dimensions, setDimensions] = useState({ rows: 3, cols: 3 });
+  const [matrices, setMatrices] = useState([]);
   const [selectedOperation, setSelectedOperation] = useState('');
+  const [scalarValue, setScalarValue] = useState('');
   const [result, setResult] = useState(null);
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [coefficients, setCoefficients] = useState([]);
-  const [targetVector, setTargetVector] = useState([]);
+  const [matrixAccordionOpen, setMatrixAccordionOpen] = useState({});
   const [computedSteps, setComputedSteps] = useState(null);
   const [history, setHistory] = useState([]);
   const [historyOpen, setHistoryOpen] = useState(false);
+  const [fillValues, setFillValues] = useState({});
 
   /* ── merge descriptions: props override defaults ── */
   const mergedDescriptions = descriptionsProp
@@ -2158,80 +2571,138 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
       }, {})
     : defaultDescriptions;
 
+  const toggleMatrixAccordion = (mi) => {
+    setMatrixAccordionOpen(prev => ({ ...prev, [mi]: !prev[mi] }));
+  };
+
+  const needsAccordion = () => operationType === 'two' && dimensions.cols > 5;
+
   const operationTypes = [
-    { id: 'single', label: 'Single Vector', description: 'Magnitude, unit vector, normalization' },
-    { id: 'two', label: 'Two Vectors', description: 'Add, subtract, dot & cross product' },
-    { id: 'multiple', label: 'Multiple Vectors', description: 'Linear combinations, spans, independence' },
+    { id: 'single', label: 'Single Matrix', description: 'Determinant, transpose, inverse, trace, rank' },
+    { id: 'two', label: 'Two Matrices', description: 'Addition, subtraction, multiplication' },
+    { id: 'scalar', label: 'Scalar Operations', description: 'Scalar multiplication, addition, power' },
+    { id: 'system', label: 'System Operations', description: 'Solve linear systems, LU decomposition' },
   ];
 
   const operationsByType = {
-    single: ['Magnitude', 'Unit Vector', 'Normalize', 'Sum of Components', 'L1 Norm', 'L2 Norm', 'Infinity Norm'],
-    two: ['Addition', 'Subtraction', 'Dot Product', 'Cross Product', 'Angle Between', 'Distance', 'Projection', 'Rejection'],
-    multiple: ['Linear Combination', 'Span Check', 'Linear Independence', 'Orthogonality Check', 'Gram-Schmidt', 'Matrix Form'],
+    single: [
+      'Transpose', 'Determinant', 'Inverse', 'Trace', 'Rank',
+      'LU Decomposition',
+    ],
+    two: [
+      'Addition', 'Subtraction', 'Multiplication', 'Element-wise Multiplication',
+      'Kronecker Product', 'Commutator', 'Anti-commutator',
+    ],
+    scalar: [
+      'Scalar Multiplication', 'Scalar Addition', 'Scalar Subtraction',
+      'Matrix Power (Scalar)',
+    ],
+    system: [
+      'Solve Linear System', 'Gaussian Elimination', 'Gauss-Jordan',
+      "Cramer's Rule", 'Matrix Equation AX=B', 'Least Squares Solution',
+    ],
   };
 
-  /* ── helpers ── */
+  const squareOnly = ['Determinant', 'Inverse', 'Trace', 'LU Decomposition'];
+
+  /* ── validation ── */
 
   const validateInputs = () => {
     const newErrors = [];
     if (!selectedOperation) newErrors.push('Please select an operation');
-    vectors.forEach((vector, index) => {
-      const name = String.fromCharCode(65 + index);
-      const empty = vector.components.filter(c => c === '' || c === null || c === undefined).length;
-      const valid = vector.components.filter(c => !isNaN(parseFloat(c)) && isFinite(c)).length;
-      if (empty > 0) newErrors.push(`Vector ${name} has empty components`);
-      if (valid !== vector.components.length) newErrors.push(`Vector ${name} contains invalid numbers`);
-    });
-    if (selectedOperation === 'Cross Product' && dimensionality !== 3)
-      newErrors.push('Cross product is only defined for 3D vectors');
-    if (operationType === 'multiple' && vectors.length < 2)
-      newErrors.push('Multiple vector operations require at least 2 vectors');
 
-    if (selectedOperation === 'Linear Combination') {
-      const invalidCoeffs = coefficients.some(c => c === '' || isNaN(parseFloat(c)));
-      if (invalidCoeffs) newErrors.push('All coefficients must be valid numbers');
+    matrices.forEach((matrix, index) => {
+      const name = String.fromCharCode(65 + index);
+      const total = matrix.rows * matrix.cols;
+      const empty = matrix.data.filter(c => c === '' || c === null || c === undefined).length;
+      const valid = matrix.data.filter(c => !isNaN(parseFloat(c)) && isFinite(c)).length;
+      if (empty > 0) newErrors.push(`Matrix ${name} has empty cells`);
+      if (valid !== total) newErrors.push(`Matrix ${name} contains invalid numbers`);
+    });
+
+    if (operationType === 'two' && matrices.length === 2) {
+      const [a, b] = matrices;
+      if (['Addition', 'Subtraction', 'Element-wise Multiplication'].includes(selectedOperation)) {
+        if (a.rows !== b.rows || a.cols !== b.cols)
+          newErrors.push('Matrices must have the same dimensions for this operation');
+      }
+      if (selectedOperation === 'Multiplication') {
+        if (a.cols !== b.rows)
+          newErrors.push('For multiplication, columns of A must equal rows of B');
+      }
     }
 
-    if (selectedOperation === 'Span Check') {
-      const emptyTarget = targetVector.some(c => c === '' || c === null || c === undefined);
-      const invalidTarget = targetVector.some(c => isNaN(parseFloat(c)) || !isFinite(parseFloat(c)));
-      if (emptyTarget) newErrors.push('Target vector has empty components');
-      if (invalidTarget) newErrors.push('Target vector contains invalid numbers');
+    if (operationType === 'single' && squareOnly.includes(selectedOperation)) {
+      const m = matrices[0];
+      if (m && m.rows !== m.cols) newErrors.push('This operation requires a square matrix');
+    }
+
+    if (operationType === 'scalar') {
+      if (scalarValue === '' || isNaN(parseFloat(scalarValue)) || !isFinite(parseFloat(scalarValue)))
+        newErrors.push('Please enter a valid scalar value');
     }
 
     setErrors(newErrors);
     return newErrors.length === 0;
   };
 
+  /* ── handlers ── */
+
   const handleReset = () => {
     setStep('operation-type');
     setOperationType('');
-    setDimensionality(3);
-    setVectors([]);
+    setDimensions({ rows: 3, cols: 3 });
+    setMatrices([]);
     setSelectedOperation('');
+    setScalarValue('');
     setResult(null);
     setErrors([]);
     setIsLoading(false);
-    setCoefficients([]);
-    setTargetVector([]);
     setComputedSteps(null);
   };
 
-  const clearVector = (vi) => {
-    const updated = [...vectors];
-    const dim = updated[vi].components.length;
-    updated[vi] = { ...updated[vi], components: new Array(dim).fill('') };
-    setVectors(updated);
+  const clearMatrix = (mi) => {
+    const updated = [...matrices];
+    updated[mi] = { ...updated[mi], data: new Array(updated[mi].rows * updated[mi].cols).fill('') };
+    setMatrices(updated);
   };
 
-  const randomizeVector = (vi) => {
-    const updated = [...vectors];
-    const dim = updated[vi].components.length;
-    updated[vi] = {
-      ...updated[vi],
-      components: Array.from({ length: dim }, () => String(Math.floor(Math.random() * 21) - 10)),
+  const randomizeMatrix = (mi) => {
+    const updated = [...matrices];
+    const total = updated[mi].rows * updated[mi].cols;
+    updated[mi] = {
+      ...updated[mi],
+      data: Array.from({ length: total }, () => String(Math.floor(Math.random() * 21) - 10)),
     };
-    setVectors(updated);
+    setMatrices(updated);
+  };
+
+  const fillMatrix = (mi) => {
+    const val = fillValues[mi] !== undefined && fillValues[mi] !== '' ? fillValues[mi] : '0';
+    const updated = [...matrices];
+    const total = updated[mi].rows * updated[mi].cols;
+    updated[mi] = {
+      ...updated[mi],
+      data: new Array(total).fill(String(val)),
+    };
+    setMatrices(updated);
+  };
+
+  const diagonalMatrix = (mi) => {
+    const val = fillValues[mi] !== undefined && fillValues[mi] !== '' ? fillValues[mi] : '1';
+    const updated = [...matrices];
+    const { rows, cols } = updated[mi];
+    const data = new Array(rows * cols).fill('0');
+    const diag = Math.min(rows, cols);
+    for (let i = 0; i < diag; i++) {
+      data[i * cols + i] = String(val);
+    }
+    updated[mi] = { ...updated[mi], data };
+    setMatrices(updated);
+  };
+
+  const updateFillValue = (mi, value) => {
+    setFillValues(prev => ({ ...prev, [mi]: value }));
   };
 
   const handleOperationTypeSelect = (type) => {
@@ -2240,52 +2711,77 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
     setErrors([]);
     setResult(null);
     setComputedSteps(null);
+    setMatrixAccordionOpen({ 0: true, 1: true });
+
     let count = 1;
     if (type === 'two') count = 2;
-    if (type === 'multiple') count = 2;
-    const dim = (typeof dimensionality === 'number' && dimensionality >= 2) ? dimensionality : 3;
-    const newVectors = Array(count).fill(null).map((_, i) => ({ id: i, components: new Array(dim).fill('') }));
-    setVectors(newVectors);
-    setCoefficients(new Array(count).fill(''));
-    setTargetVector(new Array(dim).fill(''));
+    if (type === 'system') count = 2;
+
+    const initialMatrices = Array(count).fill(null).map((_, i) => ({
+      id: i,
+      rows: dimensions.rows,
+      cols: type === 'system' && i === count - 1 ? 1 : dimensions.cols,
+      data: new Array(dimensions.rows * (type === 'system' && i === count - 1 ? 1 : dimensions.cols)).fill(''),
+    }));
+    setMatrices(initialMatrices);
     setStep('input');
   };
 
-  const updateVectorComponent = (vi, ci, value) => {
-    const updated = [...vectors];
-    updated[vi] = { ...updated[vi], components: [...updated[vi].components] };
-    updated[vi].components[ci] = value;
-    setVectors(updated);
-    if (errors.length > 0) setErrors([]);
-  };
+  const handleDimensionsChange = (dim, value) => {
+    if (value === '') {
+      setDimensions(prev => ({ ...prev, [dim]: '' }));
+      return;
+    }
+    const val = parseInt(value);
+    const newDims = { ...dimensions, [dim]: val };
+    setDimensions(newDims);
 
-  const updateCoefficient = (index, value) => {
-    const updated = [...coefficients];
-    updated[index] = value;
-    setCoefficients(updated);
-    if (errors.length > 0) setErrors([]);
-  };
-
-  const updateTargetComponent = (ci, value) => {
-    const updated = [...targetVector];
-    updated[ci] = value;
-    setTargetVector(updated);
-    if (errors.length > 0) setErrors([]);
-  };
-
-  const addVector = () => {
-    if (operationType === 'multiple' && vectors.length < 10) {
-      const dim = (typeof dimensionality === 'number' && dimensionality >= 2) ? dimensionality : 3;
-      setVectors([...vectors, { id: vectors.length, components: new Array(dim).fill('') }]);
-      setCoefficients([...coefficients, '']);
+    if (newDims.rows >= 1 && newDims.rows <= 10 && newDims.cols >= 1 && newDims.cols <= 10) {
+      const updated = matrices.map((matrix, i) => {
+        const nr = newDims.rows;
+        const nc = operationType === 'system' && i === matrices.length - 1 ? 1 : newDims.cols;
+        const newData = new Array(nr * nc).fill('');
+        for (let r = 0; r < Math.min(matrix.rows, nr); r++) {
+          for (let c = 0; c < Math.min(matrix.cols, nc); c++) {
+            const oi = r * matrix.cols + c;
+            const ni = r * nc + c;
+            if (oi < matrix.data.length) newData[ni] = matrix.data[oi];
+          }
+        }
+        return { ...matrix, rows: nr, cols: nc, data: newData };
+      });
+      setMatrices(updated);
+      setErrors([]);
+    } else {
+      const errs = [];
+      if (newDims.rows < 1 || newDims.rows > 10) errs.push('Rows must be between 1 and 10');
+      if (newDims.cols < 1 || newDims.cols > 10) errs.push('Columns must be between 1 and 10');
+      setErrors(errs);
     }
   };
 
-  const removeVector = (i) => {
-    if (operationType === 'multiple' && vectors.length > 2) {
-      setVectors(vectors.filter((_, idx) => idx !== i));
-      setCoefficients(coefficients.filter((_, idx) => idx !== i));
+  const updateMatrixCell = (mi, ci, value) => {
+    const updated = [...matrices];
+    updated[mi] = { ...updated[mi], data: [...updated[mi].data] };
+    updated[mi].data[ci] = value;
+    setMatrices(updated);
+    if (errors.length > 0) setErrors([]);
+  };
+
+  const addMatrix = () => {
+    if (operationType === 'system' && matrices.length < 5) {
+      setMatrices([...matrices, {
+        id: matrices.length,
+        rows: dimensions.rows,
+        cols: dimensions.cols,
+        data: new Array(dimensions.rows * dimensions.cols).fill(''),
+      }]);
     }
+  };
+
+  const removeMatrix = (mi) => {
+    if (operationType === 'system' && matrices.length > 2)
+      setMatrices(matrices.filter((_, i) => i !== mi));
   };
 
   const getAvailableOperations = () => operationsByType[operationType] || [];
@@ -2304,25 +2800,21 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
     setComputedSteps(null);
 
     setTimeout(() => {
-      const numericVectors = vectors.map(v =>
-        v.components.map(c => parseFloat(c))
-      );
+      const numericMatrices = matrices.map(m => ({
+        rows: m.rows,
+        cols: m.cols,
+        data: m.data.map(c => parseFloat(c)),
+      }));
 
       const params = {
         operation: selectedOperation,
         operationType,
-        dimensionality,
-        vectors: numericVectors,
+        dimensions,
+        matrices: numericMatrices,
+        scalarValue: scalarValue !== '' ? parseFloat(scalarValue) : null,
       };
 
-      if (selectedOperation === 'Linear Combination') {
-        params.coefficients = coefficients.map(c => parseFloat(c));
-      }
-      if (selectedOperation === 'Span Check') {
-        params.targetVector = targetVector.map(c => parseFloat(c));
-      }
-
-      const res = computeVector(params);
+      const res = computeMatrix(params);
       setResult(res);
 
       if (res.type === 'error') {
@@ -2331,22 +2823,25 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
         const entry = {
           id: Date.now(),
           operation: selectedOperation,
-          vectors: numericVectors,
+          matrices: numericMatrices,
+          scalarValue: params.scalarValue,
           result: res,
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
         };
-        if (params.coefficients) entry.coefficients = params.coefficients;
-        if (params.targetVector) entry.targetVector = params.targetVector;
         setHistory(prev => [entry, ...prev]);
       }
 
       const stepFn = operationSteps[operationType]?.[selectedOperation];
       if (stepFn) {
-        const extras = {
-          coefficients: params.coefficients,
-          targetVector: params.targetVector,
-        };
-        const stepLines = stepFn(numericVectors, res, extras);
+        const mats2D = numericMatrices.map(m => {
+          const mat = [];
+          for (let r = 0; r < m.rows; r++) {
+            mat.push(m.data.slice(r * m.cols, r * m.cols + m.cols));
+          }
+          return mat;
+        });
+        const extras = { scalarValue: params.scalarValue };
+        const stepLines = stepFn(mats2D, res, extras);
         setComputedSteps(stepLines);
       }
 
@@ -2354,14 +2849,20 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
     }, 150);
   };
 
-  const canExecute = () => selectedOperation && vectors.length > 0 && !isLoading;
+  const canExecute = () => selectedOperation && matrices.length > 0 && !isLoading;
 
-  const getVectorGridExtra = () => {
-    if (operationType === 'single') return s.vectorGridSingle;
-    if (operationType === 'two') return s.vectorGridTwo;
-    return s.vectorGridMultiple;
+  const needsScalarInput = () =>
+    operationType === 'scalar' || selectedOperation === 'Matrix Power (Scalar)';
+
+  const isSquareRequired = (op) => squareOnly.includes(op);
+
+  const isOpDisabled = (op) => {
+    if (!isSquareRequired(op)) return false;
+    const m = matrices[0];
+    return m && m.rows !== m.cols;
   };
 
+  /* ── explanation helpers ── */
   const getDescription = () => {
     const pool = mergedDescriptions[operationType];
     if (!pool) return '';
@@ -2371,11 +2872,16 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
 
   const getExplanationHeading = () => {
     if (selectedOperation) return selectedOperation;
-    const labels = { single: 'Single Vector Ops', two: 'Two Vector Ops', multiple: 'Multiple Vector Ops' };
+    const labels = {
+      single: 'Single Matrix Ops',
+      two: 'Two Matrix Ops',
+      scalar: 'Scalar Ops',
+      system: 'System Ops',
+    };
     return labels[operationType] || 'Explanation';
   };
 
-  /* ── left-panel button style ── */
+  /* ── left-panel button styles ── */
   const catBtnStyle = (id) => ({
     padding: '12px',
     border: operationType === id ? '2px solid #4285f4' : '2px solid #e5e7eb',
@@ -2396,60 +2902,126 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
   });
   const catDescStyle = { fontSize: '0.78rem', color: '#6b7280', lineHeight: '1.35' };
 
-  const dimInputStyle = {
-    width: '64px',
-    padding: '8px 10px',
-    border: dimensionality < 2 || dimensionality > 10 ? '2px solid #dc2626' : '2px solid #d1d5db',
+  const dimInputStyle = (val) => ({
+    width: '60px',
+    padding: '8px 12px',
+    border: val < 1 || val > 10 ? '2px solid #dc2626' : '2px solid #d1d5db',
     borderRadius: '8px',
     fontSize: '1rem',
     textAlign: 'center',
     outline: 'none',
+  });
+
+  const getMatrixGridExtra = () => {
+    if (operationType === 'single') return s.matrixGridSingle;
+    if (operationType === 'two' || operationType === 'scalar') {
+      if (needsAccordion()) return s.matrixGridSingle;
+      return s.matrixGridTwo;
+    }
+    return s.matrixGridMultiple;
   };
 
-  /* ── render a single vector card ── */
-  const renderVector = (vector, vi) => (
-    <div key={vector.id} style={s.vectorCard}>
-      <div style={s.vectorHeader}>
-        <h4 style={s.vectorName}>Vector {String.fromCharCode(65 + vi)}</h4>
-        <div style={s.vectorHeaderButtons}>
-          <button onClick={() => randomizeVector(vi)} style={s.randomVectorButton} title="Fill with random numbers">
-            Random
+  /* ── render a matrix card ── */
+  const renderMatrix = (matrix, mi, nested = false) => {
+    const gridStyle = {
+      gridTemplateColumns: `repeat(${matrix.cols}, 1fr)`,
+      gridTemplateRows: `repeat(${matrix.rows}, 1fr)`,
+    };
+    const label = operationType === 'system' && mi === matrices.length - 1 && matrices.length > 1
+      ? ` (Vector)` : '';
+
+    return (
+      <div key={matrix.id} style={nested ? {} : s.matrixCard}>
+        {!nested && (
+          <div style={s.matrixHeader}>
+            <h4 style={s.matrixName}>Matrix {String.fromCharCode(65 + mi)}{label}</h4>
+            <div style={s.matrixHeaderRight}>
+              <span style={s.matrixDimLabel}>{matrix.rows} &times; {matrix.cols}</span>
+              <button onClick={() => randomizeMatrix(mi)} style={s.randomMatrixButton} title="Fill with random numbers">
+                Random
+              </button>
+              <button onClick={() => clearMatrix(mi)} style={s.clearMatrixButton} title="Clear this matrix">
+                Clear
+              </button>
+              {operationType === 'system' && matrices.length > 2 && mi >= 2 && (
+                <button onClick={() => removeMatrix(mi)} style={s.removeButton}>Remove</button>
+              )}
+              <Tooltip text="Random fills with integers from -10 to 10. Clear empties all cells." />
+            </div>
+          </div>
+        )}
+        {nested && (
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '6px', marginBottom: '8px' }}>
+            <button onClick={() => randomizeMatrix(mi)} style={s.randomMatrixButton} title="Fill with random numbers">
+              Random
+            </button>
+            <button onClick={() => clearMatrix(mi)} style={s.clearMatrixButton} title="Clear this matrix">
+              Clear
+            </button>
+          </div>
+        )}
+        {/* Fill controls */}
+        <div style={s.fillControlsRow}>
+          <span style={s.fillLabel}>Value:</span>
+          <input
+            type="number"
+            step="any"
+            value={fillValues[mi] !== undefined ? fillValues[mi] : ''}
+            onChange={(e) => updateFillValue(mi, e.target.value)}
+            placeholder="0"
+            style={s.fillValueInput}
+          />
+          <button onClick={() => fillMatrix(mi)} style={s.fillButton} title="Fill all cells with this value">
+            Fill All
           </button>
-          <button onClick={() => clearVector(vi)} style={s.clearVectorButton} title="Clear this vector">
-            Clear
+          <button onClick={() => diagonalMatrix(mi)} style={s.diagonalButton} title="Diagonal matrix with this value (default 1)">
+            Diagonal
           </button>
-          {operationType === 'multiple' && vectors.length > 2 && (
-            <button onClick={() => removeVector(vi)} style={s.removeButton}>Remove</button>
-          )}
-          <Tooltip text="Random fills with integers from -10 to 10. Clear empties all fields." />
+          <Tooltip text="Fill All sets every cell to the value. Diagonal places it on the main diagonal with zeros elsewhere (default 1 = identity matrix)." />
+        </div>
+        <div style={s.matrixContainer}>
+          <div style={s.matrixContent}>
+            <span style={s.matrixBracket}>[</span>
+            <div style={{ ...s.matrixTable, ...gridStyle }}>
+              {matrix.data.map((cell, ci) => (
+                <input
+                  key={ci}
+                  type="number"
+                  step="any"
+                  value={cell}
+                  onChange={(e) => updateMatrixCell(mi, ci, e.target.value)}
+                  placeholder="0"
+                  style={{
+                    ...s.matrixCell,
+                    ...(cell !== '' && (isNaN(parseFloat(cell)) || !isFinite(cell)) ? s.matrixCellError : {}),
+                  }}
+                />
+              ))}
+            </div>
+            <span style={s.matrixBracket}>]</span>
+          </div>
         </div>
       </div>
-      <div style={s.vectorComponents}>
-        <span style={s.bracket}>(</span>
-        {vector.components.map((comp, ci) => (
-          <React.Fragment key={ci}>
-            <input
-              type="number"
-              step="any"
-              value={comp}
-              onChange={(e) => updateVectorComponent(vi, ci, e.target.value)}
-              placeholder="0"
-              style={{
-                ...s.componentInput,
-                ...(comp !== '' && (isNaN(parseFloat(comp)) || !isFinite(comp)) ? s.componentInputError : {}),
-              }}
-            />
-            {ci < vector.components.length - 1 && <span style={s.separator}>,</span>}
-          </React.Fragment>
-        ))}
-        <span style={s.bracket}>)</span>
-      </div>
-    </div>
-  );
+    );
+  };
 
   /* ── render result based on type ── */
+  const renderResultMatrix = (matrix) => (
+    <table style={s.resultMatrixTable}>
+      <tbody>
+        {matrix.map((row, ri) => (
+          <tr key={ri}>
+            {row.map((val, ci) => (
+              <td key={ci} style={s.resultMatrixCell}>{val}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+
   const renderResult = () => {
-    if (!result) return 'Select vectors and operation, then click Execute';
+    if (!result) return 'Select matrices and operation, then click Execute';
 
     if (result.type === 'error') {
       return <span style={s.resultError}>{result.value}</span>;
@@ -2468,7 +3040,23 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
       return (
         <>
           <span style={s.resultLabel}>{result.label}</span>
-          <span style={s.resultValue}>({result.value.join(', ')})</span>
+          <div style={s.resultVarRow}>
+            {result.value.map((val, i) => (
+              <span key={i} style={s.resultVarItem}>
+                {result.variables ? result.variables[i] : `x${i + 1}`} = {val}
+              </span>
+            ))}
+          </div>
+          {result.detail && <span style={s.resultDetail}>{result.detail}</span>}
+        </>
+      );
+    }
+
+    if (result.type === 'matrix') {
+      return (
+        <>
+          <span style={s.resultLabel}>{result.label} ({result.rows}&times;{result.cols})</span>
+          {renderResultMatrix(result.value)}
         </>
       );
     }
@@ -2478,32 +3066,27 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
         <>
           <span style={s.resultLabel}>{result.label}</span>
           <span style={result.value ? s.resultTrue : s.resultFalse}>
-            {result.value ? '✓ TRUE' : '✗ FALSE'}
+            {result.value ? '\u2713 TRUE' : '\u2717 FALSE'}
           </span>
-          <span style={s.resultDetail}>{result.detail}</span>
+          {result.detail && <span style={s.resultDetail}>{result.detail}</span>}
         </>
       );
     }
 
-    if (result.type === 'matrix') {
+    if (result.type === 'decomposition') {
       return (
-        <>
+        <div style={s.resultDecompSection}>
           <span style={s.resultLabel}>{result.label}</span>
-          <table style={s.matrixTable}>
-            <tbody>
-              {result.value.map((row, ri) => (
-                <tr key={ri}>
-                  {result.rowLabels && (
-                    <td style={s.matrixRowLabel}>{result.rowLabels[ri]}</td>
-                  )}
-                  {row.map((val, ci) => (
-                    <td key={ci} style={s.matrixCell}>{val}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
+          {Object.keys(result.value).map((key) => {
+            const part = result.value[key];
+            return (
+              <div key={key} style={{ textAlign: 'center' }}>
+                <div style={s.resultDecompLabel}>{part.label}</div>
+                {renderResultMatrix(part.matrix)}
+              </div>
+            );
+          })}
+        </div>
       );
     }
 
@@ -2519,7 +3102,7 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
 
         {/* Header */}
         <div style={s.header}>
-          <p style={s.subtitle}>Professional vector operations calculator</p>
+          <p style={s.subtitle}>Professional matrix operations calculator</p>
         </div>
 
         {/* ── INITIAL STATE ── */}
@@ -2583,7 +3166,7 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
                     <div style={s.opSubList}>
                       {getAvailableOperations().map((op) => {
                         const sel = selectedOperation === op;
-                        const dis = op === 'Cross Product' && dimensionality !== 3;
+                        const dis = isOpDisabled(op);
                         return (
                           <button
                             key={op}
@@ -2609,44 +3192,40 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
             {/* ▸ MIDDLE — calculator */}
             <div>
               <div style={s.inputHeader}>
-                <h2 style={s.inputTitle}>Vector Input ({dimensionality}D)</h2>
+                <h2 style={s.inputTitle}>Matrix Input ({dimensions.rows}&times;{dimensions.cols})</h2>
                 <div style={s.buttonGroup}>
-                  <Tooltip text="Enter vector components below. Each input field represents one dimension. Use Random to fill with test values, or Clear to reset." />
+                  <Tooltip text="Enter matrix values below. Use Random for test values, Clear to reset, Fill All to set uniform values, or Diagonal for identity-like matrices." />
                   <button onClick={handleReset} style={s.buttonDanger}>Reset All</button>
                 </div>
               </div>
 
-              {/* Dimensionality */}
+              {/* Dimensions */}
               <div style={s.dimControls}>
-                <label style={s.dimLabel}>Dimensions:</label>
-                <input
-                  type="number"
-                  min="2"
-                  max="10"
-                  value={dimensionality}
-                  onChange={(e) => {
-                    const raw = e.target.value;
-                    if (raw === '') { setDimensionality(''); return; }
-                    const val = parseInt(raw);
-                    setDimensionality(val);
-                    if (val >= 2 && val <= 10) {
-                      setVectors(vectors.map(v => {
-                        const nc = new Array(val).fill('');
-                        for (let i = 0; i < Math.min(v.components.length, val); i++) nc[i] = v.components[i];
-                        return { ...v, components: nc };
-                      }));
-                      const nt = new Array(val).fill('');
-                      for (let i = 0; i < Math.min(targetVector.length, val); i++) nt[i] = targetVector[i];
-                      setTargetVector(nt);
-                      setErrors([]);
-                    } else {
-                      setErrors(['Dimensionality must be between 2 and 10']);
-                    }
-                  }}
-                  style={dimInputStyle}
-                />
-                <span style={s.dimHint}>(2&ndash;10)</span>
-                <Tooltip text="Set the number of components per vector. Changing this resizes all vectors, preserving existing values that fit." />
+                <div style={s.dimGroup}>
+                  <label style={s.dimLabel}>Rows:</label>
+                  <input
+                    type="number" min="1" max="10"
+                    value={dimensions.rows}
+                    onChange={(e) => handleDimensionsChange('rows', e.target.value)}
+                    style={dimInputStyle(dimensions.rows)}
+                  />
+                </div>
+                <div style={s.dimGroup}>
+                  <label style={s.dimLabel}>Cols:</label>
+                  <input
+                    type="number" min="1" max="10"
+                    value={dimensions.cols}
+                    onChange={(e) => handleDimensionsChange('cols', e.target.value)}
+                    style={dimInputStyle(dimensions.cols)}
+                  />
+                </div>
+                <span style={s.dimHint}>
+                  {dimensions.rows}&times;{dimensions.cols} ({dimensions.rows * dimensions.cols} elements)
+                </span>
+                {operationType === 'single' && dimensions.rows !== dimensions.cols && (
+                  <span style={s.dimWarning}>Some operations require square matrices</span>
+                )}
+                <Tooltip text="Set matrix dimensions (1–10 each). Changing resizes all matrices, preserving existing values that fit." />
               </div>
 
               {/* Errors */}
@@ -2661,60 +3240,61 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
                 </div>
               )}
 
-              {/* Vectors */}
-              <div style={{ ...s.vectorGrid, ...getVectorGridExtra() }}>
-                {vectors.map((v, i) => renderVector(v, i))}
+              {/* Matrices */}
+              <div style={{ ...s.matrixGrid, ...getMatrixGridExtra() }}>
+                {matrices.map((m, i) => {
+                  if (needsAccordion()) {
+                    const isOpen = matrixAccordionOpen[i] !== false;
+                    const label = operationType === 'system' && i === matrices.length - 1 && matrices.length > 1
+                      ? ' (Vector)' : '';
+                    return (
+                      <div key={m.id} style={s.matrixAccordion}>
+                        <button
+                          onClick={() => toggleMatrixAccordion(i)}
+                          style={s.matrixAccordionToggle}
+                        >
+                          <div style={s.matrixAccordionLeft}>
+                            <span style={s.matrixAccordionName}>Matrix {String.fromCharCode(65 + i)}{label}</span>
+                            <span style={s.matrixAccordionDim}>{m.rows} &times; {m.cols}</span>
+                          </div>
+                          <span style={{
+                            ...s.matrixAccordionArrow,
+                            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                          }}>
+                            ▼
+                          </span>
+                        </button>
+                        {isOpen && (
+                          <div style={s.matrixAccordionBody}>
+                            {renderMatrix(m, i, true)}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  }
+                  return renderMatrix(m, i);
+                })}
               </div>
 
-              {/* Add vector */}
-              {operationType === 'multiple' && vectors.length < 10 && (
-                <div style={s.addVectorContainer}>
-                  <button onClick={addVector} style={s.addVectorButton}>+ Add Vector</button>
+              {/* Add matrix (system) */}
+              {operationType === 'system' && matrices.length < 5 && (
+                <div style={s.addMatrixContainer}>
+                  <button onClick={addMatrix} style={s.addMatrixButton}>+ Add Matrix</button>
                 </div>
               )}
 
-              {/* ── Extra inputs: Coefficients (Linear Combination) ── */}
-              {selectedOperation === 'Linear Combination' && (
-                <div style={s.extraInputsSection}>
-                  <div style={s.extraInputsTitle}>Coefficients (one per vector)</div>
-                  {vectors.map((v, i) => (
-                    <div key={i} style={s.coefficientRow}>
-                      <span style={s.coefficientLabel}>c{String.fromCharCode(8321 + i)}</span>
-                      <input
-                        type="number"
-                        step="any"
-                        value={coefficients[i] || ''}
-                        onChange={(e) => updateCoefficient(i, e.target.value)}
-                        placeholder="0"
-                        style={s.coefficientInput}
-                      />
-                      <span style={s.coefficientHint}>&times; Vector {String.fromCharCode(65 + i)}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* ── Extra inputs: Target Vector (Span Check) ── */}
-              {selectedOperation === 'Span Check' && (
-                <div style={s.extraInputsSection}>
-                  <div style={s.extraInputsTitle}>Target Vector (is it in the span?)</div>
-                  <div style={s.vectorComponents}>
-                    <span style={s.bracket}>(</span>
-                    {targetVector.map((comp, ci) => (
-                      <React.Fragment key={ci}>
-                        <input
-                          type="number"
-                          step="any"
-                          value={comp}
-                          onChange={(e) => updateTargetComponent(ci, e.target.value)}
-                          placeholder="0"
-                          style={{ ...s.componentInput, borderColor: '#f59e0b' }}
-                        />
-                        {ci < targetVector.length - 1 && <span style={s.separator}>,</span>}
-                      </React.Fragment>
-                    ))}
-                    <span style={s.bracket}>)</span>
-                  </div>
+              {/* Scalar input */}
+              {needsScalarInput() && (
+                <div style={s.scalarSection}>
+                  <label style={s.scalarLabel}>Scalar value:</label>
+                  <input
+                    type="number" step="any"
+                    value={scalarValue}
+                    onChange={(e) => setScalarValue(e.target.value)}
+                    placeholder="Enter value"
+                    style={s.scalarInput}
+                  />
+                  <Tooltip text="The scalar is applied to every element according to the selected operation (multiply, add, subtract, or power)." />
                 </div>
               )}
 
@@ -2740,7 +3320,7 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
               <div style={s.resultsSection}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
                   <h4 style={{ ...s.resultsTitle, margin: 0 }}>Result</h4>
-                  <Tooltip text="Results appear here after clicking Execute. Scalars show a single number, vectors show components in parentheses, and boolean results show pass/fail." />
+                  <Tooltip text="Results appear here after clicking Execute. Outputs vary by operation: scalars, vectors, matrices, or decompositions (multiple matrices)." />
                 </div>
                 <div style={s.resultsContent}>
                   {renderResult()}
@@ -2751,7 +3331,7 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
             {/* ▸ RIGHT — explanation panel */}
             <div style={s.explanationPanel}>
               <h4 style={s.explanationTitle}>{getExplanationHeading()}</h4>
-              <p style={s.explanationBody}>{getDescription()}</p>
+              <p style={s.explanationBody}>{processContent(getDescription())}</p>
 
               {computedSteps && computedSteps.length > 0 && (
                 <>
@@ -2790,7 +3370,7 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
                               <span style={s.historyOpName}>{entry.operation}</span>
                               <span style={s.historyTime}>{entry.time}</span>
                             </div>
-                            <div style={s.historyVectors}>
+                            <div style={s.historyInputs}>
                               {formatHistoryInputs(entry)}
                             </div>
                             <div style={s.historyResult}>
