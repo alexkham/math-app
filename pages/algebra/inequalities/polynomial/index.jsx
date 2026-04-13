@@ -5,6 +5,8 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
 
 
 export async function getStaticProps(){
@@ -69,6 +71,25 @@ const keyWords = [
 
 
 const sectionsContent = {
+  obj0: {
+  title: `Key Terms`,
+  content: `
+## Core Concepts
+ 
+- [Polynomial Inequality](!/algebra/definitions#polynomial_inequality) — $P(x) > 0$ for degree $\\geq 3$; sign chart with multiplicity awareness
+- [Sign Analysis](!/algebra/definitions#sign_analysis) — the primary method: find roots, partition, test each interval
+ 
+## From Polynomials Category
+ 
+- [Multiplicity](!/algebra/definitions#multiplicity) — odd multiplicity causes sign change, even does not
+- [End Behavior](!/algebra/definitions#end_behavior) — determines the sign in the outermost intervals
+- [Factoring](!/algebra/definitions#factoring) — required to locate all real roots`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
+ 
   obj1: {
     title: `Definition`,
     content: `A polynomial inequality has the form
@@ -341,6 +362,16 @@ const schemas = {
    export default function PolynomialInequalitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
+
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -567,8 +598,17 @@ const schemas = {
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
+
+
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

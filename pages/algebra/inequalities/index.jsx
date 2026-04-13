@@ -5,6 +5,8 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
 
 
 export async function getStaticProps(){
@@ -67,6 +69,33 @@ const keyWords = [
 
  
 const sectionsContent = {
+  
+obj0: {
+  title: `Key Terms`,
+  content: `
+## Core Concepts
+ 
+- [Inequality](!/algebra/definitions#inequality) — a comparison using $<$, $>$, $\\leq$, or $\\geq$; solution is typically an interval
+- [Interval Notation](!/algebra/definitions#interval_notation) — parentheses for excluded endpoints, brackets for included, $\\infty$ always parenthesized
+- [Compound Inequality](!/algebra/definitions#compound_inequality) — two inequalities joined by AND (intersection) or OR (union)
+ 
+## Methods
+ 
+- [Sign Analysis](!/algebra/definitions#sign_analysis) — partition the number line at roots and undefined points, test each interval
+- [Critical Point](!/algebra/definitions#critical_point) — a value where the expression equals zero or is undefined
+ 
+## Inequality Types
+ 
+- [Linear Inequality](!/algebra/definitions#linear_inequality) — degree $1$, solution is a single ray
+- [Quadratic Inequality](!/algebra/definitions#quadratic_inequality) — degree $2$, solved via discriminant and sign chart
+- [Polynomial Inequality](!/algebra/definitions#polynomial_inequality) — degree $\\geq 3$, sign chart with multiplicity
+- [Rational Inequality](!/algebra/definitions#rational_inequality) — variable in denominator, two kinds of critical points
+- [Absolute Value Inequality](!/algebra/definitions#absolute_value_inequality) — converts to a compound inequality via distance interpretation`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
   obj1: {
     title: `What an Inequality Is`,
     content: `An inequality is a mathematical statement that compares two expressions using one of four symbols. The symbol $<$ means "is strictly less than," $>$ means "is strictly greater than," $\\leq$ means "is less than or equal to," and $\\geq$ means "is greater than or equal to." The statement $3 < 7$ is an inequality that is unconditionally true. The statement $5 > 9$ is unconditionally false.
@@ -423,6 +452,16 @@ const schemas = {
 export default function InequalitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
+      {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
+
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -649,8 +688,16 @@ export default function InequalitiesPage({seoData, sectionsContent, introContent
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
+
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

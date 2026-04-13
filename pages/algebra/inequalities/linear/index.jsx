@@ -5,6 +5,8 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
 
 
 export async function getStaticProps(){
@@ -68,6 +70,25 @@ export async function getStaticProps(){
 
 
 const sectionsContent = {
+  
+obj0: {
+  title: `Key Terms`,
+  content: `
+## Core Concepts
+ 
+- [Linear Inequality](!/algebra/definitions#linear_inequality) — $ax + b < 0$ with $a \\neq 0$; solution is always a ray
+- [Inequality](!/algebra/definitions#inequality) — direction reverses when multiplying or dividing by a negative
+- [Interval Notation](!/algebra/definitions#interval_notation) — open parenthesis for strict, closed bracket for non-strict
+ 
+## Extensions
+ 
+- [Compound Inequality](!/algebra/definitions#compound_inequality) — AND produces a bounded interval, OR produces two rays`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
+ 
   obj1: {
     title: `Definition and Standard Form`,
     content: `A linear inequality in one variable is any inequality that can be written as
@@ -355,6 +376,18 @@ const schemas = {
    export default function LinearInequalitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
+    
+  {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
+
+
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -581,8 +614,17 @@ const schemas = {
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
+
+
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

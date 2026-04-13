@@ -6,6 +6,8 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
 
 
 export async function getStaticProps(){
@@ -70,15 +72,34 @@ const keyWords = [
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
+    
+    
+obj0: {
+  title: `Key Terms`,
+  content: `
+## Core Concepts
+ 
+- [Factoring](!/algebra/definitions#factoring) — writing a polynomial as a product of lower-degree factors
+- [Greatest Common Factor (GCF)](!/algebra/definitions#greatest_common_factor_(gcf)) — the largest expression dividing every term
+- [Irreducible Polynomial](!/algebra/definitions#irreducible_polynomial) — cannot be factored further over a given number system
+ 
+## Named Patterns
+ 
+- [Difference of Squares](!/algebra/definitions#difference_of_squares) — $a^2 - b^2 = (a+b)(a-b)$
+- [Perfect Square Trinomial](!/algebra/definitions#perfect_square_trinomial) — $a^2 \\pm 2ab + b^2 = (a \\pm b)^2$
+- [Sum and Difference of Cubes](!/algebra/definitions#sum_and_difference_of_cubes) — $a^3 \\pm b^3$
+ 
+## Supporting Concepts
+ 
+- [Root (of a Polynomial)](!/algebra/definitions#root_(of_a_polynomial)) — each factor $(x-r)$ reveals a root at $x = r$
+- [Trinomial](!/algebra/definitions#trinomial) — three-term polynomials are the most common factoring targets
+- [Factor Theorem](!/algebra/definitions#factor_theorem) — $P(c) = 0$ confirms $(x-c)$ is a factor`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
+ 
 
     obj1: {
   title: `What is Factoring?`,
@@ -269,15 +290,7 @@ The quadratic factors $a^2 - ab + b^2$ and $a^2 + ab + b^2$ that arise from thes
 },
 
 
-    // obj9:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+    
 
     obj9: {
   title: `Factoring Higher-Degree Polynomials`,
@@ -296,15 +309,7 @@ The [Fundamental Theorem of Algebra](!/complex-numbers/equations-polynomials) gu
 },
 
 
-    // obj10:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+   
     obj10: {
   title: `Factoring Strategy`,
   content: `With multiple techniques available, a systematic approach prevents wasted effort and missed factors.
@@ -322,14 +327,7 @@ Not every polynomial factors neatly over the integers. When no technique produce
   after: ``,
   link: '',
 },
-    // obj11:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
 
    obj11: {
   title: `Irreducible Polynomials`,
@@ -345,14 +343,7 @@ Over the reals, the irreducible building blocks are linear polynomials and quadr
   link: '',
 },
 
-    // obj12:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj12: {
   title: `Common Mistakes`,
@@ -573,11 +564,19 @@ const schemas = {
 }
    }
 
-// export default function FactoringPage({seoData,sectionsContent , introContent}) {
-
 export default function FactoringPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
+
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -727,50 +726,7 @@ export default function FactoringPage({seoData, sectionsContent, introContent, f
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
+   
 <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
@@ -844,8 +800,17 @@ export default function FactoringPage({seoData, sectionsContent, introContent, f
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
+
+
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

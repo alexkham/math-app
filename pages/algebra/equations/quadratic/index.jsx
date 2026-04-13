@@ -5,6 +5,8 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '../../../app/components/page-components/KeyTermsCard'
+
 
 
 export async function getStaticProps(){
@@ -66,6 +68,25 @@ const keyWords = [
 //                   }} />
 
  const sectionsContent = {
+  obj0: {
+  title: `Key Terms`,
+  content: `
+## Equation Structure
+ 
+- [Standard Form](!/algebra/definitions#standard_form) — $ax^2 + bx + c = 0$ with $a \\neq 0$
+- [Degree of an Equation](!/algebra/definitions#degree_of_an_equation) — quadratic equations have degree $2$
+- [Coefficient](!/algebra/definitions#coefficient) — the values $a$, $b$, $c$ that determine the equation's behavior
+ 
+## Solutions
+ 
+- [Discriminant](!/algebra/definitions#discriminant) — $\\Delta = b^2 - 4ac$, determines the number and type of solutions
+- [Solution Set](!/algebra/definitions#solution_set) — may contain two, one, or zero real values
+- [Extraneous Solution](!/algebra/definitions#extraneous_solution) — may arise from non-reversible steps during solving`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
   obj1: {
     title: `Definition and Standard Form`,
     content: `A quadratic equation in one variable is any equation that can be written as
@@ -363,6 +384,16 @@ const schemas = {
 export default function QuadraticEquationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {   
     
   const genericSections=[
+    
+  {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -589,8 +620,16 @@ export default function QuadraticEquationsPage({seoData, sectionsContent, introC
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
+
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

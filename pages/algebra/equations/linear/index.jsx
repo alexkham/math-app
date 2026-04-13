@@ -5,6 +5,8 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '../../../app/components/page-components/KeyTermsCard'
+
 
 
 export async function getStaticProps(){
@@ -67,6 +69,30 @@ const keyWords = [
 
 
 const sectionsContent = {
+  
+obj0: {
+  title: `Key Terms`,
+  content: `
+## Equation Basics
+ 
+- [Equation](!/algebra/definitions#equation) — a statement that two expressions are equal
+- [Solution](!/algebra/definitions#solution) — the value of the variable that makes both sides equal
+- [Variable](!/algebra/definitions#variable) — the unknown quantity being solved for
+ 
+## Classification
+ 
+- [Degree of an Equation](!/algebra/definitions#degree_of_an_equation) — linear equations have degree $1$
+- [Standard Form](!/algebra/definitions#standard_form) — $ax + b = 0$
+- [Coefficient](!/algebra/definitions#coefficient) — the numerical factor $a$ multiplying the variable
+- [Conditional Equation](!/algebra/definitions#conditional_equation) — has exactly one solution when $a \\neq 0$
+- [Identity](!/algebra/definitions#identity) — arises when variable terms cancel leaving a true statement
+- [Contradiction](!/algebra/definitions#contradiction) — arises when variable terms cancel leaving a false statement
+- [Equivalent Equations](!/algebra/definitions#equivalent_equations) — solving produces a chain of equivalent equations`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
   obj1: {
     title: `Definition and Standard Form`,
     content: `A linear equation in one variable is any equation that can be written as
@@ -378,6 +404,16 @@ const schemas = {
 export default function LinearEquationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
+    
+  {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -604,8 +640,16 @@ export default function LinearEquationsPage({seoData, sectionsContent, introCont
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
+
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

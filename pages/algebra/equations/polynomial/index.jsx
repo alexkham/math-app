@@ -5,6 +5,8 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '../../../app/components/page-components/KeyTermsCard'
+
 
 
 export async function getStaticProps(){
@@ -70,6 +72,26 @@ const keyWords = [
 
 
 const sectionsContent = {
+  obj0: {
+  title: `Key Terms`,
+  content: `
+## Equation Structure
+ 
+- [Algebraic Equation](!/algebra/definitions#algebraic_equation) — built from variables, constants, and integer powers
+- [Degree of an Equation](!/algebra/definitions#degree_of_an_equation) — determines the maximum number of solutions
+- [Standard Form](!/algebra/definitions#standard_form) — $a_nx^n + \\cdots + a_1x + a_0 = 0$
+- [Coefficient](!/algebra/definitions#coefficient) — the leading coefficient $a_n$ must be nonzero
+ 
+## Solutions
+ 
+- [Solution](!/algebra/definitions#solution) — also called a root of the polynomial
+- [Solution Set](!/algebra/definitions#solution_set) — at most $n$ roots in $\\mathbb{C}$ for degree $n$
+- [Equivalent Equations](!/algebra/definitions#equivalent_equations) — polynomial division preserves equivalence when dividing by a confirmed factor`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
   obj1: {
     title: `Definition and Degree`,
     content: `A polynomial equation in one variable has the general form
@@ -376,6 +398,16 @@ const schemas = {
 export default function PolynomialEquationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
+    
+  {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -602,8 +634,16 @@ export default function PolynomialEquationsPage({seoData, sectionsContent, intro
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
+
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

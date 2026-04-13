@@ -6,6 +6,8 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
 
 
 export async function getStaticProps(){
@@ -67,255 +69,44 @@ const keyWords = [
 //                     __html:   sectionContent.distributions.svg,
 //                   }} />
 
-//     const sectionsContent={
-
-//     // obj1:{
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-  
-  
-//     // },
-
-//     obj1: {
-//   title: `What is a Polynomial?`,
-//   content: `A polynomial in the variable $x$ is an expression of the form:
-
-// $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_2x^2 + a_1x + a_0$$
-
-// The components are straightforward. The variable $x$ represents an unknown quantity. The coefficients $a_0, a_1, \\ldots, a_n$ are fixed numbers — typically real numbers, though complex coefficients appear in advanced contexts. The exponents on $x$ must be non-negative integers: $0, 1, 2, 3$, and so on.
-
-// The expression $3x^4 - 2x^2 + 5x - 7$ is a polynomial. So is $x^2 + 1$. So is the constant $5$, which can be written as $5x^0$. The simplest polynomial is just a number; the most complex have no upper limit on degree or number of terms.
-
-// Certain expressions fail to qualify. The expression $x^{-2} + 3$ contains a negative exponent and is not a polynomial. The expression $\\sqrt{x} + 1$ involves a fractional exponent ($x^{1/2}$) and is not a polynomial. The expression $\\frac{1}{x} + 4$ places the variable in a denominator, equivalent to $x^{-1}$, and is not a polynomial. The expression $2^x$ has the variable in the exponent rather than the base and is not a polynomial. Each of these violates the requirement that exponents be non-negative integers.
-
-// Polynomials are closed under addition, subtraction, and multiplication — combining two polynomials through these operations always produces another polynomial. Division, however, can break the pattern: $\\frac{x^2 + 1}{x}$ is not a polynomial.`,
-//   before: ``,
-//   after: ``,
-//   link: '',
-// },
-//     // obj2:{
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-  
-//     // },
-
-//     obj2: {
-//   title: `Vocabulary`,
-//   content: `Working with polynomials requires precise language. Each piece has a name, and these names appear constantly in algebra.
-
-// A term is a single unit within a polynomial — a coefficient multiplied by a power of the variable. In $4x^3 - 2x + 7$, the terms are $4x^3$, $-2x$, and $7$. Each term stands alone; the polynomial is their sum.
-
-// The coefficient of a term is its numerical factor. In $4x^3$, the coefficient is $4$. In $-2x$, the coefficient is $-2$. A term like $x^2$ has coefficient $1$, even when unwritten. A term like $-x$ has coefficient $-1$.
-
-// The leading term is the term with the highest exponent. In $4x^3 - 2x + 7$, the leading term is $4x^3$. The leading coefficient is the coefficient of the leading term — here, $4$. These determine the polynomial's dominant behavior for large values of $x$.
-
-// The constant term is the term with no variable — the term where $x^0 = 1$ contributes only the coefficient. In $4x^3 - 2x + 7$, the constant term is $7$. Some polynomials, like $x^2 - 3x$, have no constant term, or equivalently, a constant term of zero.
-
-// Polynomials are also classified by number of terms. A monomial has one term: $5x^2$. A binomial has two terms: $x + 3$. A trinomial has three terms: $x^2 - 4x + 4$. Beyond three, no special names exist — we simply say "polynomial with four terms" or describe it by degree.`,
-//   before: ``,
-//   after: ``,
-//   link: '',
-// },
-  
-//     // obj3:{
-  
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-  
-//     // },
-
-//     obj3: {
-//   title: `Degree`,
-//   content: `The degree of a polynomial measures its highest power and determines much of its behavior.
-
-// The degree of a single term is the exponent on its variable. The term $5x^3$ has degree $3$. The term $-2x$ has degree $1$, since $x = x^1$. A constant term like $7$ has degree $0$, since $7 = 7x^0$.
-
-// The degree of a polynomial is the highest degree among all its terms. In $4x^3 - 2x + 7$, the degrees of the individual terms are $3$, $1$, and $0$. The highest is $3$, so the polynomial has degree $3$. In $x^5 - x^2 + x$, the degree is $5$. In $2x - 9$, the degree is $1$.
-
-// A nonzero constant like $5$ is a polynomial of degree $0$. It has one term, $5x^0$, with exponent zero. Constants are the simplest polynomials — they assign the same value regardless of $x$.
-
-// The zero polynomial presents a special case. The expression $0$ has no nonzero terms, so no "highest degree" exists. Conventions vary: some texts leave the degree undefined, others assign $-\\infty$. This technicality rarely affects practical work, but it explains why some theorems explicitly exclude the zero polynomial.
-
-// Degree predicts behavior. It limits the number of roots a polynomial can have, bounds the number of turning points in its graph, and determines how the polynomial grows as $x$ becomes large. A degree $5$ polynomial behaves fundamentally differently from a degree $2$ polynomial, regardless of their specific coefficients.`,
-//   before: ``,
-//   after: ``,
-//   link: '',
-// },
-
-//     // obj4:{
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-  
-//     // },
-
-//     obj4: {
-//   title: `Classification by Degree`,
-//   content: `Polynomials receive names based on their degree. These names appear throughout mathematics and provide immediate information about a polynomial's structure.
-
-// A constant polynomial has degree $0$. Examples include $5$, $-3$, and $\\frac{1}{2}$. The graph is a horizontal line, and the polynomial has no roots unless it equals zero.
-
-// A linear polynomial has degree $1$. The general form is $ax + b$ with $a \\neq 0$. Examples include $2x + 3$, $-x + 1$, and $7x$. The graph is a straight line with slope $a$, crossing the x-axis exactly once.
-
-// A quadratic polynomial has degree $2$. The general form is $ax^2 + bx + c$ with $a \\neq 0$. Examples include $x^2 - 4$, $3x^2 + 2x - 1$, and $-x^2 + 5$. The graph is a parabola, opening upward when $a > 0$ and downward when $a < 0$.
-
-// A cubic polynomial has degree $3$. The general form is $ax^3 + bx^2 + cx + d$ with $a \\neq 0$. Examples include $x^3 - 1$, $2x^3 - x^2 + 4$, and $-x^3 + 2x$. The graph has an S-shaped curve with at most two turning points.
-
-// A quartic polynomial has degree $4$, and a quintic has degree $5$. Beyond degree five, standard names become rare — we simply refer to "a degree $6$ polynomial" or "a degree $10$ polynomial." The pattern of naming by Latin or Greek roots exists but sees little use in practice.`,
-//   before: ``,
-//   after: ``,
-//   link: '',
-// },
-//     // obj5:{
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-  
-//     // },
-
-//     obj5: {
-//   title: `Standard Form`,
-//   content: `A polynomial is in standard form when its terms are arranged in descending order of degree, from highest to lowest.
-
-// The polynomial $2x^2 - x + 3$ is in standard form. The degrees decrease from left to right: $2$, then $1$, then $0$. The polynomial $3 + 2x^2 - x$ contains the same terms but is not in standard form. Rewriting it as $2x^2 - x + 3$ puts it in standard form.
-
-// Standard form offers several advantages. The leading term appears first, making the degree immediately visible. The leading coefficient is the first number you see, simplifying analysis of end behavior. Comparing two polynomials becomes easier when both follow the same ordering convention.
-
-// When a term is missing, standard form reveals the gap. The polynomial $x^3 + 5x - 2$ skips degree $2$ — there is no $x^2$ term. In standard form, this absence is clear. Some contexts require writing missing terms explicitly with zero coefficients: $x^3 + 0x^2 + 5x - 2$. This expanded form proves useful in polynomial long division and synthetic division, where alignment by degree matters.
-
-// Converting to standard form is mechanical. Identify the degree of each term, then reorder from highest to lowest. For $7 - 3x^2 + x^4 + x$, the terms have degrees $0$, $2$, $4$, and $1$. Sorted descending: $x^4 - 3x^2 + x + 7$. The polynomial is now in standard form.`,
-//   before: ``,
-//   after: ``,
-//   link: '',
-// },
-//     // obj6:{
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-  
-//     // },
-
-// obj6: {
-//   title: `Evaluating Polynomials`,
-//   content: `Evaluating a polynomial means substituting a specific value for the variable and computing the result.
-
-// For a polynomial $P(x)$, the notation $P(a)$ represents the value obtained by replacing every $x$ with $a$. If $P(x) = 2x^2 - 3x + 1$, then $P(4)$ means substituting $4$ for $x$:
-
-// $$P(4) = 2(4)^2 - 3(4) + 1 = 2(16) - 12 + 1 = 32 - 12 + 1 = 21$$
-
-// The polynomial evaluates to $21$ when $x = 4$.
-
-// Negative values require careful attention to signs. For the same polynomial, $P(-2)$ gives:
-
-// $$P(-2) = 2(-2)^2 - 3(-2) + 1 = 2(4) + 6 + 1 = 8 + 6 + 1 = 15$$
-
-// The squared term produces a positive result, and subtracting a negative becomes addition.
-
-// Evaluation connects algebra to geometry. Each input-output pair $(a, P(a))$ defines a point on the polynomial's graph. Evaluating $P(x)$ at many values traces out the curve. The point $(4, 21)$ lies on the graph of $P(x) = 2x^2 - 3x + 1$, as does $(-2, 15)$.
-
-// Evaluation also detects roots. If $P(a) = 0$, then $a$ is a root of the polynomial. Testing whether a value is a root requires only evaluation — substitute and check whether the result is zero.`,
-//   before: ``,
-//   after: ``,
-//   link: '',
-// },
-    
-//     obj7:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj8:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj9:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj10:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj11:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj12:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj13:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-//     obj14:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-
-
-//     obj15:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     }
-  
-//   }
-
 
 const sectionsContent = {
+   
+obj0: {
+  title: `Key Terms`,
+  content: `
+## Core Vocabulary
+ 
+- [Polynomial](!/algebra/definitions#polynomial) — an expression built from variables, coefficients, and non-negative integer exponents
+- [Term (of a Polynomial)](!/algebra/definitions#term_(of_a_polynomial)) — a single unit: coefficient times a power of the variable
+- [Leading Coefficient](!/algebra/definitions#leading_coefficient) — the coefficient of the highest-degree term
+- [Constant Term](!/algebra/definitions#constant_term) — the term with no variable, equal to $P(0)$
+- [Degree (of a Polynomial)](!/algebra/definitions#degree_(of_a_polynomial)) — the highest exponent on the variable
+ 
+## Classification by Terms
+ 
+- [Monomial](!/algebra/definitions#monomial) — one term
+- [Binomial](!/algebra/definitions#binomial) — two terms
+- [Trinomial](!/algebra/definitions#trinomial) — three terms
+ 
+## Structure and Behavior
+ 
+- [Root (of a Polynomial)](!/algebra/definitions#root_(of_a_polynomial)) — a value $r$ where $P(r) = 0$
+- [Factoring](!/algebra/definitions#factoring) — writing a polynomial as a product of lower-degree factors
+- [End Behavior](!/algebra/definitions#end_behavior) — direction of the graph as $x \\to \\pm\\infty$
+- [Turning Point](!/algebra/definitions#turning_point) — where the graph reverses direction; at most $n-1$
+ 
+## Key Theorems
+ 
+- [Remainder Theorem](!/algebra/definitions#remainder_theorem) — remainder of dividing by $(x-c)$ equals $P(c)$
+- [Factor Theorem](!/algebra/definitions#factor_theorem) — $(x-c)$ is a factor iff $P(c) = 0$
+- [Rational Root Theorem](!/algebra/definitions#rational_root_theorem) — restricts rational root candidates to $\\pm p/q$`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
+ 
 
   obj1: {
     title: `What is a Polynomial?`,
@@ -429,14 +220,7 @@ Evaluation also detects [roots](!/algebra/polynomials/roots). If $P(a) = 0$, the
     link: '',
   },
 
-  // obj7: {
-  //   title: ``,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
-
+ 
 
   obj7: {
   title: `Operations on Polynomials`,
@@ -457,13 +241,7 @@ Division introduces more complexity. Unlike the other three operations, dividing
 },
 
 
-  // obj8: {
-  //   title: ``,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
+ 
 
   obj8: {
   title: `Factoring Polynomials`,
@@ -481,14 +259,7 @@ Not every polynomial factors neatly over the integers. The expression $x^2 + 1$ 
   link: '/algebra/polynomials/factoring',
 },
 
-  // obj9: {
-  //   title: ``,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
-
+ 
   obj9: {
   title: `Roots and Zeros`,
   content: `A [root](!/algebra/polynomials/roots) of a polynomial $P(x)$ is a value $r$ such that $P(r) = 0$. The terms "root" and "zero" are interchangeable — both refer to inputs that make the polynomial vanish.
@@ -505,14 +276,7 @@ Not all roots are real numbers. The polynomial $x^2 + 1$ has no real roots, but 
   link: '/algebra/polynomials/roots',
 },
 
-  // obj10: {
-  //   title: ``,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
-
+  
 
   obj10: {
   title: `Graphing Polynomials`,
@@ -529,14 +293,7 @@ Combining end behavior, intercepts, turning points, and a few evaluated points p
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Graphing Polynomials](!/algebra/polynomials/graphing) →@`,
   link: '/algebra/polynomials/graphing',
 },
-  // obj11: {
-  //   title: ``,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
-
+ 
 
   obj11: {
   title: `Key Theorems`,
@@ -746,12 +503,21 @@ const schemas = {
 }
    }
 
-// export default function PolynomialsPage({seoData,sectionsContent , introContent}) {
 
 
 export default function PolynomialsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
+
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -901,51 +667,7 @@ export default function PolynomialsPage({seoData, sectionsContent, introContent,
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
-
+ 
 <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
@@ -1023,8 +745,16 @@ export default function PolynomialsPage({seoData, sectionsContent, introContent,
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
+
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

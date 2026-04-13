@@ -5,6 +5,8 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
 
 
 export async function getStaticProps(){
@@ -67,6 +69,24 @@ const keyWords = [
 
 
 const sectionsContent = {
+  obj0: {
+  title: `Key Terms`,
+  content: `
+## Core Concepts
+ 
+- [Rational Inequality](!/algebra/definitions#rational_inequality) — variable in denominator; sign chart with two kinds of critical points
+- [Critical Point](!/algebra/definitions#critical_point) — numerator zeros (expression $= 0$) vs denominator zeros (undefined)
+- [Sign Analysis](!/algebra/definitions#sign_analysis) — applied to the quotient via factor-by-factor sign tracking
+ 
+## Endpoint Rules
+ 
+- [Inequality](!/algebra/definitions#inequality) — numerator zeros may be included for $\\leq$/$\\geq$; denominator zeros never
+- [Interval Notation](!/algebra/definitions#interval_notation) — denominator zeros always get parentheses`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
   obj1: {
     title: `Definition`,
     content: `A rational inequality is any inequality involving at least one fraction in which the variable appears in the denominator. The inequality
@@ -365,6 +385,17 @@ return {
 export default function RationalInequalitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
+
+
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -591,8 +622,16 @@ export default function RationalInequalitiesPage({seoData, sectionsContent, intr
           textColor="#06357a"
         />
    <br/>
+      <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
+
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

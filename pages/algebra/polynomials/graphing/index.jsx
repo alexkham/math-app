@@ -6,6 +6,8 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
 
 
 export async function getStaticProps(){
@@ -69,15 +71,27 @@ const keyWords = [
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
+   obj0: {
+  title: `Key Terms`,
+  content: `
+## Graph Features
+ 
+- [End Behavior](!/algebra/definitions#end_behavior) — direction of the curve as $x \\to \\pm\\infty$, controlled by the leading term
+- [Turning Point](!/algebra/definitions#turning_point) — local maximum or minimum; at most $n - 1$ for degree $n$
+- [Multiplicity](!/algebra/definitions#multiplicity) — determines crossing vs touching at each root
+ 
+## Structural Inputs
+ 
+- [Leading Coefficient](!/algebra/definitions#leading_coefficient) — sign determines whether ends rise or fall
+- [Degree (of a Polynomial)](!/algebra/definitions#degree_(of_a_polynomial)) — even vs odd controls whether ends move in same or opposite directions
+- [Constant Term](!/algebra/definitions#constant_term) — equals $P(0)$, giving the y-intercept
+- [Root (of a Polynomial)](!/algebra/definitions#root_(of_a_polynomial)) — x-intercepts of the graph`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
+ 
 
     obj1: {
   title: `The Graph of a Polynomial`,
@@ -140,14 +154,7 @@ The polynomial $-2x^5 + 100x^4 - 3x + 7$ has odd degree and a negative leading c
 },
 
 
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+
 
     obj4: {
   title: `Turning Points`,
@@ -162,14 +169,7 @@ Knowing the upper bound on turning points serves as a reality check when sketchi
   after: ``,
   link: '',
 },
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj5: {
   title: `Behavior at Roots`,
@@ -184,14 +184,7 @@ The polynomial $(x - 1)(x + 2)^2(x - 3)^3$ illustrates all three behaviors. At $
   after: ``,
   link: '',
 },
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj6: {
   title: `Symmetry`,
@@ -206,14 +199,7 @@ Most polynomials have neither symmetry. The presence of both even and odd powers
   after: ``,
   link: '',
 },
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
 obj7: {
   title: `Graphing Linear Polynomials`,
@@ -229,15 +215,7 @@ No turning points exist because the graph never changes direction — it increas
   link: '',
 },
 
-    // obj8:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+ 
     obj8: {
   title: `Graphing Quadratic Polynomials`,
   content: `A quadratic polynomial $P(x) = ax^2 + bx + c$ produces a parabola — a U-shaped curve with a single turning point called the vertex.
@@ -251,15 +229,7 @@ The discriminant $b^2 - 4ac$ determines the number of x-intercepts. When it is p
   after: ``,
   link: '',
 },
-    // obj9:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+ 
     obj9: {
   title: `Graphing Cubic Polynomials`,
   content: `A cubic polynomial $P(x) = ax^3 + bx^2 + cx + d$ produces a curve whose two ends always move in opposite directions — one rising, one falling — determined by the sign of $a$.
@@ -273,15 +243,7 @@ The inflection point, where the curve changes from concave up to concave down or
   after: ``,
   link: '',
 },
-    // obj10:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
-
     obj10: {
   title: `Graphing Higher-Degree Polynomials`,
   content: `Beyond cubics, polynomial graphs grow more complex but remain governed by the same principles.
@@ -297,14 +259,7 @@ As the degree increases, accurately sketching the graph by hand becomes harder. 
   after: ``,
   link: '',
 },
-    // obj11:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
 
     obj11: {
   title: `Sketching Strategy`,
@@ -323,15 +278,7 @@ Finally, connect the plotted points with a smooth curve that respects end behavi
   after: ``,
   link: '',
 },
-    // obj12:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
-
     obj12: {
   title: `Common Mistakes`,
   content: `Several errors recur when graphing polynomials, most of them stemming from misapplied rules or overlooked details.
@@ -555,6 +502,16 @@ export default function GraphingPage({seoData, sectionsContent, introContent, fa
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
+
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -704,52 +661,7 @@ export default function GraphingPage({seoData, sectionsContent, introContent, fa
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
-
-
+ 
 <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
@@ -822,8 +734,16 @@ export default function GraphingPage({seoData, sectionsContent, introContent, fa
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
+
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

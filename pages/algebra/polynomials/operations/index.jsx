@@ -6,6 +6,8 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
 
 
 export async function getStaticProps(){
@@ -69,15 +71,30 @@ const keyWords = [
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
+   obj0: {
+  title: `Key Terms`,
+  content: `
+## Addition and Subtraction
+ 
+- [Like Terms](!/algebra/definitions#like_terms) — terms sharing the same variable and exponent; the basis of addition and subtraction
+- [Term (of a Polynomial)](!/algebra/definitions#term_(of_a_polynomial)) — each unit has a coefficient and a degree
+ 
+## Multiplication
+ 
+- [Degree (of a Polynomial)](!/algebra/definitions#degree_(of_a_polynomial)) — degree of a product equals the sum of the input degrees
+- [Binomial](!/algebra/definitions#binomial) — multiplying two binomials is the most common multiplication task
+ 
+## Division
+ 
+- [Polynomial Long Division](!/algebra/definitions#polynomial_long_division) — systematic division producing quotient and remainder
+- [Synthetic Division](!/algebra/definitions#synthetic_division) — shortcut for dividing by $(x - c)$ using only coefficients
+- [Remainder Theorem](!/algebra/definitions#remainder_theorem) — remainder equals $P(c)$`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
+ 
 
     obj1: {
   title: `Adding Polynomials`,
@@ -116,15 +133,7 @@ Like addition, subtraction always produces a polynomial. The degree of the resul
   link: '',
 },
   
-    // obj3:{
   
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
 
     obj3: {
   title: `Multiplying Polynomials`,
@@ -139,14 +148,7 @@ The number of terms before combining can grow quickly. Multiplying an $m$-term p
   after: ``,
   link: '',
 },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+    
 
     obj4: {
   title: `Special Products`,
@@ -167,14 +169,7 @@ Each pairs a linear factor with a quadratic factor to produce a two-term cubic. 
   after: ``,
   link: '',
 },
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
  obj5: {
   title: `FOIL Method`,
   content: `FOIL is a mnemonic for multiplying two binomials: First, Outer, Inner, Last. It names the four products that arise when each term of one binomial is distributed across the other.
@@ -189,15 +184,7 @@ The method does not extend beyond binomials. Attempting to apply FOIL to a binom
   link: '',
 },
 
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
-
     obj6: {
   title: `Polynomial Long Division`,
   content: `Dividing one polynomial by another follows a process that mirrors numerical long division. The idea is to find a quotient and a remainder that satisfy:
@@ -213,15 +200,7 @@ Missing powers in the dividend require placeholder terms. Dividing $x^3 + 4$ by 
   after: ``,
   link: '',
 },
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+   
 
     obj7: {
   title: `Synthetic Division`,
@@ -236,15 +215,7 @@ The limitation is strict: synthetic division works only for divisors of the form
   after: ``,
   link: '',
 },
-    // obj8:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+   
     obj8: {
   title: `Degree and Operations`,
   content: `Each arithmetic operation affects the degree of the result in a specific, predictable way. These rules serve as both a guide during computation and a check after it.
@@ -260,15 +231,7 @@ These relationships provide a quick sanity check. If multiplying two quadratics 
   after: ``,
   link: '',
 },
-    // obj9:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+ 
     
     obj10:{
       title:``,
@@ -495,12 +458,20 @@ const schemas = {
 }
    }
 
-// export default function OperationsPage({seoData,sectionsContent , introContent}) {
-
 
 export default function OperationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
+
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -650,50 +621,7 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
   
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
 
 <Head>
   <title>{seoData.title}</title>
@@ -767,8 +695,16 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
+
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

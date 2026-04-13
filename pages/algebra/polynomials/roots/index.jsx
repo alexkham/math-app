@@ -6,6 +6,8 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
 
 
 export async function getStaticProps(){
@@ -70,16 +72,32 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
-
+     
+obj0: {
+  title: `Key Terms`,
+  content: `
+## Core Concepts
+ 
+- [Root (of a Polynomial)](!/algebra/definitions#root_(of_a_polynomial)) — a value $r$ where $P(r) = 0$
+- [Multiplicity](!/algebra/definitions#multiplicity) — how many times $(x-r)$ appears as a factor
+- [Factoring](!/algebra/definitions#factoring) — root $r$ gives factor $(x-r)$ and vice versa
+ 
+## Root-Finding Tools
+ 
+- [Factor Theorem](!/algebra/definitions#factor_theorem) — $(x-c)$ is a factor iff $P(c) = 0$
+- [Rational Root Theorem](!/algebra/definitions#rational_root_theorem) — narrows rational root candidates to $\\pm p/q$
+- [Synthetic Division](!/algebra/definitions#synthetic_division) — efficient testing and factor extraction
+- [Vieta's Formulas](!/algebra/definitions#vieta's_formulas) — relate root sums and products to coefficients
+ 
+## Existence and Count
+ 
+- [Fundamental Theorem of Algebra](!/algebra/definitions#fundamental_theorem_of_algebra) — exactly $n$ complex roots for degree $n$
+- [Degree (of a Polynomial)](!/algebra/definitions#degree_(of_a_polynomial)) — caps the number of real roots at $n$`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+  link: '',
+},
     obj1: {
   title: `What is a Root?`,
   content: `A root of a polynomial $P(x)$ is a value $r$ such that $P(r) = 0$. The terms "root," "zero," and "solution" all refer to the same thing — an input that makes the polynomial vanish.
@@ -93,14 +111,7 @@ Roots answer a precise question: for which values of $x$ does $P(x) = 0$? This q
   after: ``,
   link: '',
 },
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
 
     obj2: {
   title: `Roots and Factors`,
@@ -116,15 +127,7 @@ This connection works in reverse too. Discovering a single root opens the door t
   link: '',
 },
   
-    // obj3:{
-  
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+ 
 
     obj3: {
   title: `Number of Roots`,
@@ -139,15 +142,7 @@ The gap between "at most $n$ real roots" and "exactly $n$ complex roots" explain
   after: ``,
   link: '',
 },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+   
     obj4: {
   title: `Multiplicity`,
   content: `A root's multiplicity measures how many times it appears as a factor.
@@ -570,13 +565,20 @@ const schemas = {
 }
    }
 
-// export default function RootsPage({seoData,sectionsContent , introContent}) {
-
-
 export default function RootsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
+
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -726,51 +728,7 @@ export default function RootsPage({seoData, sectionsContent, introContent, faqQu
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
-
+ 
 <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
@@ -843,8 +801,16 @@ export default function RootsPage({seoData, sectionsContent, introContent, faqQu
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
+
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>
