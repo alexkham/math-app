@@ -5,8 +5,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../../pages/pages.css'
 import Head from 'next/head'
-import KeyTermsCard from '../../../app/components/page-components/KeyTermsCard'
-
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export async function getStaticProps(){
 const keyWords = [
