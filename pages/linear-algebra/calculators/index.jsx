@@ -130,14 +130,14 @@ export default function ToolSectionPageTemplate({
 
       <ToolSectionPage
         meta={pageMeta}
-        children={children}
+        // children={children}
         parentSections={parentSections}
         parentSectionData={parentSectionData}
         toolType={toolType}
         theme="deepBlue"
         rightOffset="45px"
         article={article}
-      />
+      >{children}</ ToolSectionPage>
       <br/>
       <br/>
       <br/>
