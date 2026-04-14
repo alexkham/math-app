@@ -212,6 +212,7 @@ const ToolSectionPage = ({
         brandSub="Learn Math Class"
         open={sidebarOpen}
         onToggle={setSidebarOpen}
+        sidebarSectionTitle={`More in ${meta.parentTitle}`||'More In This Section'}
       />
       <div style={{
         marginLeft: contentMargin,

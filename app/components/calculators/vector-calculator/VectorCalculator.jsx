@@ -1415,6 +1415,7 @@
 
 import React, { useState } from 'react';
 import computeVector from './computeVector';
+import { processContent } from '../../../utils/contentProcessor';
 import {
   descriptions as defaultDescriptions,
   steps as operationSteps,
@@ -2751,7 +2752,7 @@ export default function VectorCalculator({ descriptions: descriptionsProp } = {}
             {/* ▸ RIGHT — explanation panel */}
             <div style={s.explanationPanel}>
               <h4 style={s.explanationTitle}>{getExplanationHeading()}</h4>
-              <p style={s.explanationBody}>{getDescription()}</p>
+              <p style={s.explanationBody}>{processContent(getDescription())}</p>
 
               {computedSteps && computedSteps.length > 0 && (
                 <>

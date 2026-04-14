@@ -1,3 +1,4 @@
+
 // import React, { useState, useMemo } from 'react';
 // import solveLinearSystem, { subscript, fmtNum } from './solveLinearSystem';
 // import { processContent } from '../../../utils/contentProcessor';
@@ -12,7 +13,7 @@
 //     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
 //   },
 //   main: {
-//     maxWidth: 'calc(100vw - 320px)',
+//     maxWidth: 'calc(100vw - 180px)',
 //     margin: '0 auto',
 //     backgroundColor: 'white',
 //     borderRadius: '16px',
@@ -28,10 +29,9 @@
 //   },
 //   subtitle: { color: '#6b7280', fontSize: '1.1rem', margin: '0' },
 
-//   /* 3-col — wider right panel */
 //   threeCol: {
 //     display: 'grid',
-//     gridTemplateColumns: '200px 2fr 1.4fr',
+//     gridTemplateColumns: '220px 2fr 1.4fr',
 //     gap: '24px',
 //     alignItems: 'start',
 //   },
@@ -40,7 +40,7 @@
 //   leftPanel: {
 //     display: 'flex',
 //     flexDirection: 'column',
-//     gap: '10px',
+//     gap: '6px',
 //     position: 'sticky',
 //     top: '20px',
 //   },
@@ -51,6 +51,61 @@
 //     marginBottom: '4px',
 //     textTransform: 'uppercase',
 //     letterSpacing: '0.04em',
+//   },
+//   leftSectionTitle: {
+//     fontSize: '0.95rem',
+//     fontWeight: '700',
+//     color: '#1f2937',
+//     marginTop: '10px',
+//     marginBottom: '4px',
+//     textTransform: 'uppercase',
+//     letterSpacing: '0.04em',
+//   },
+
+//   /* sub-operation items */
+//   opSubList: {
+//     display: 'flex',
+//     flexDirection: 'column',
+//     gap: '2px',
+//     marginTop: '2px',
+//     marginBottom: '4px',
+//     paddingLeft: '10px',
+//     borderLeft: '2px solid #d0d9f0',
+//     marginLeft: '10px',
+//   },
+//   opSubItem: {
+//     padding: '6px 10px',
+//     border: '1px solid transparent',
+//     borderRadius: '6px',
+//     backgroundColor: 'transparent',
+//     cursor: 'pointer',
+//     textAlign: 'left',
+//     width: '100%',
+//     fontSize: '0.82rem',
+//     color: '#374151',
+//     transition: 'all 0.15s ease',
+//     outline: 'none',
+//     display: 'flex',
+//     alignItems: 'center',
+//     gap: '5px',
+//     boxSizing: 'border-box',
+//   },
+//   opSubItemSelected: {
+//     backgroundColor: '#f0f7ff',
+//     color: '#4285f4',
+//     fontWeight: '600',
+//     borderColor: '#bfdbfe',
+//   },
+//   opSubItemDisabled: {
+//     color: '#9ca3af',
+//     cursor: 'not-allowed',
+//   },
+//   opSubDot: {
+//     width: '5px',
+//     height: '5px',
+//     borderRadius: '50%',
+//     backgroundColor: '#4285f4',
+//     flexShrink: 0,
 //   },
 
 //   /* RIGHT */
@@ -80,7 +135,6 @@
 //     margin: '16px 0',
 //   },
 
-//   /* tabs */
 //   tabRow: {
 //     display: 'flex',
 //     gap: '0',
@@ -105,7 +159,6 @@
 //     borderBottomColor: '#4285f4',
 //   },
 
-//   /* steps list */
 //   stepsTitle: {
 //     fontSize: '0.9rem',
 //     fontWeight: '700',
@@ -154,7 +207,6 @@
 //   dimLabel: { fontSize: '0.95rem', fontWeight: '500', color: '#374151' },
 //   dimHint: { fontSize: '0.85rem', color: '#6b7280' },
 
-//   /* view toggle */
 //   viewToggle: {
 //     display: 'flex',
 //     border: '1px solid #e5e7eb',
@@ -179,7 +231,6 @@
 //     color: 'white',
 //   },
 
-//   /* equation card */
 //   eqCard: {
 //     backgroundColor: '#f8f9fa',
 //     padding: '20px',
@@ -226,10 +277,6 @@
 //     backgroundColor: 'white',
 //     outline: 'none',
 //   },
-//   eqCellFocus: {
-//     borderColor: '#4285f4',
-//     boxShadow: '0 0 0 2px rgba(66,133,244,0.15)',
-//   },
 //   eqVar: {
 //     fontSize: '0.85rem',
 //     fontWeight: '600',
@@ -255,7 +302,6 @@
 //     outline: 'none',
 //   },
 
-//   /* matrix view */
 //   matrixContainer: {
 //     display: 'flex',
 //     alignItems: 'center',
@@ -276,45 +322,6 @@
 //   },
 //   matrixTable: { display: 'grid', gap: '4px', padding: '8px' },
 
-//   /* ops grid */
-//   opsSection: { marginBottom: '24px' },
-//   opsTitle: {
-//     fontSize: '1.1rem',
-//     fontWeight: '600',
-//     color: '#1f2937',
-//     marginBottom: '16px',
-//   },
-//   opsGrid: {
-//     display: 'grid',
-//     gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-//     gap: '8px',
-//     marginBottom: '24px',
-//   },
-//   opBtn: {
-//     padding: '10px 12px',
-//     border: '2px solid #e5e7eb',
-//     borderRadius: '8px',
-//     backgroundColor: 'white',
-//     color: '#374151',
-//     fontSize: '0.85rem',
-//     fontWeight: '500',
-//     cursor: 'pointer',
-//     transition: 'all 0.2s ease',
-//     textAlign: 'center',
-//     outline: 'none',
-//   },
-//   opBtnSelected: {
-//     borderColor: '#4285f4',
-//     backgroundColor: '#f0f7ff',
-//     color: '#4285f4',
-//   },
-//   opBtnDisabled: {
-//     backgroundColor: '#f3f4f6',
-//     color: '#9ca3af',
-//     cursor: 'not-allowed',
-//     borderColor: '#e5e7eb',
-//   },
-
 //   execRow: { display: 'flex', justifyContent: 'center', marginBottom: '24px' },
 //   execBtn: {
 //     padding: '12px 32px',
@@ -333,7 +340,6 @@
 //     cursor: 'not-allowed',
 //   },
 
-//   /* result */
 //   resultBox: {
 //     backgroundColor: '#f9fafb',
 //     padding: '16px',
@@ -379,7 +385,6 @@
 //   },
 //   resError: { color: '#dc2626', fontWeight: '500', fontSize: '0.95rem' },
 
-//   /* errors */
 //   errorSection: {
 //     backgroundColor: '#fef2f2',
 //     border: '1px solid #fecaca',
@@ -396,7 +401,6 @@
 //   errorList: { listStyle: 'none', padding: '0', margin: '0' },
 //   errorItem: { color: '#dc2626', fontSize: '0.9rem', marginBottom: '4px' },
 
-//   /* small buttons */
 //   btnSm: {
 //     padding: '3px 8px',
 //     borderRadius: '4px',
@@ -420,7 +424,6 @@
 //     outline: 'none',
 //   },
 
-//   /* mode buttons (left panel) */
 //   modeBtn: (active) => ({
 //     padding: '12px',
 //     border: active ? '2px solid #4285f4' : '2px solid #e5e7eb',
@@ -451,7 +454,6 @@
 //     outline: 'none',
 //   }),
 
-//   /* graph */
 //   graphWrap: {
 //     width: '100%',
 //     display: 'flex',
@@ -533,11 +535,9 @@
 //     'Computes x = A⁻¹b directly. Requires A to be square and non-singular (det(A) ≠ 0). The inverse is found via Gauss-Jordan on [A|I].',
 // };
 
-// /* ── line colors for graph ────────────────────────────────────── */
-
 // const LINE_COLORS = ['#4285f4', '#ea4335', '#34a853', '#fbbc05', '#8e44ad', '#e67e22', '#1abc9c', '#e74c3c', '#2c3e50', '#d35400'];
 
-// /* ── Graph component (2-var systems) ──────────────────────────── */
+// /* ── Graph component ──────────────────────────────────────────── */
 
 // function SystemGraph({ coeffs, constants, solution, numEqs, numVars }) {
 //   if (numVars !== 2) {
@@ -548,15 +548,10 @@
 //   const H = 280;
 //   const pad = 40;
 
-//   /* Determine viewport from solution or from line intersections with reasonable range */
 //   let cx = 0;
 //   let cy = 0;
-//   if (solution) {
-//     cx = solution[0];
-//     cy = solution[1];
-//   }
+//   if (solution) { cx = solution[0]; cy = solution[1]; }
 
-//   /* auto-range: at least ±5, expanding if solution is far from origin */
 //   let range = Math.max(5, Math.abs(cx) * 1.5 + 2, Math.abs(cy) * 1.5 + 2);
 //   range = Math.ceil(range);
 
@@ -568,55 +563,30 @@
 //   const toSX = (x) => pad + ((x - xMin) / (xMax - xMin)) * (W - 2 * pad);
 //   const toSY = (y) => (H - pad) - ((y - yMin) / (yMax - yMin)) * (H - 2 * pad);
 
-//   /* grid lines */
 //   const gridLines = [];
 //   const step = range <= 10 ? 1 : range <= 25 ? 5 : 10;
 
 //   for (let v = Math.ceil(xMin / step) * step; v <= xMax; v += step) {
 //     const sx = toSX(v);
-//     gridLines.push(
-//       <line key={`gx${v}`} x1={sx} y1={pad} x2={sx} y2={H - pad}
-//         stroke="#e5e7eb" strokeWidth="0.5" />
-//     );
-//     if (v !== 0) {
-//       gridLines.push(
-//         <text key={`lx${v}`} x={sx} y={H - pad + 14} textAnchor="middle"
-//           fontSize="9" fill="#9ca3af">{v}</text>
-//       );
-//     }
+//     gridLines.push(<line key={`gx${v}`} x1={sx} y1={pad} x2={sx} y2={H - pad} stroke="#e5e7eb" strokeWidth="0.5" />);
+//     if (v !== 0) gridLines.push(<text key={`lx${v}`} x={sx} y={H - pad + 14} textAnchor="middle" fontSize="9" fill="#9ca3af">{v}</text>);
 //   }
 //   for (let v = Math.ceil(yMin / step) * step; v <= yMax; v += step) {
 //     const sy = toSY(v);
-//     gridLines.push(
-//       <line key={`gy${v}`} x1={pad} y1={sy} x2={W - pad} y2={sy}
-//         stroke="#e5e7eb" strokeWidth="0.5" />
-//     );
-//     if (v !== 0) {
-//       gridLines.push(
-//         <text key={`ly${v}`} x={pad - 6} y={sy + 3} textAnchor="end"
-//           fontSize="9" fill="#9ca3af">{v}</text>
-//       );
-//     }
+//     gridLines.push(<line key={`gy${v}`} x1={pad} y1={sy} x2={W - pad} y2={sy} stroke="#e5e7eb" strokeWidth="0.5" />);
+//     if (v !== 0) gridLines.push(<text key={`ly${v}`} x={pad - 6} y={sy + 3} textAnchor="end" fontSize="9" fill="#9ca3af">{v}</text>);
 //   }
 
-//   /* axes */
 //   const axes = [];
 //   if (xMin <= 0 && xMax >= 0) {
 //     const ax = toSX(0);
-//     axes.push(
-//       <line key="yaxis" x1={ax} y1={pad} x2={ax} y2={H - pad}
-//         stroke="#374151" strokeWidth="1" />
-//     );
+//     axes.push(<line key="yaxis" x1={ax} y1={pad} x2={ax} y2={H - pad} stroke="#374151" strokeWidth="1" />);
 //   }
 //   if (yMin <= 0 && yMax >= 0) {
 //     const ay = toSY(0);
-//     axes.push(
-//       <line key="xaxis" x1={pad} y1={ay} x2={W - pad} y2={ay}
-//         stroke="#374151" strokeWidth="1" />
-//     );
+//     axes.push(<line key="xaxis" x1={pad} y1={ay} x2={W - pad} y2={ay} stroke="#374151" strokeWidth="1" />);
 //   }
 
-//   /* lines: ax + by = c → two points at x=xMin, x=xMax (if b≠0), else vertical */
 //   const lines = [];
 //   for (let i = 0; i < numEqs; i++) {
 //     const a = coeffs[i][0];
@@ -627,49 +597,29 @@
 //     if (Math.abs(b) > 1e-10) {
 //       const y1 = (c - a * xMin) / b;
 //       const y2 = (c - a * xMax) / b;
-//       lines.push(
-//         <line key={`l${i}`}
-//           x1={toSX(xMin)} y1={toSY(y1)}
-//           x2={toSX(xMax)} y2={toSY(y2)}
-//           stroke={color} strokeWidth="2" opacity="0.85"
-//         />
-//       );
+//       lines.push(<line key={`l${i}`} x1={toSX(xMin)} y1={toSY(y1)} x2={toSX(xMax)} y2={toSY(y2)} stroke={color} strokeWidth="2" opacity="0.85" />);
 //     } else if (Math.abs(a) > 1e-10) {
 //       const xv = c / a;
-//       lines.push(
-//         <line key={`l${i}`}
-//           x1={toSX(xv)} y1={pad}
-//           x2={toSX(xv)} y2={H - pad}
-//           stroke={color} strokeWidth="2" opacity="0.85"
-//         />
-//       );
+//       lines.push(<line key={`l${i}`} x1={toSX(xv)} y1={pad} x2={toSX(xv)} y2={H - pad} stroke={color} strokeWidth="2" opacity="0.85" />);
 //     }
 
-//     /* label */
 //     const lblX = W - pad - 4;
 //     let lblY;
-//     if (Math.abs(b) > 1e-10) {
-//       lblY = toSY((c - a * xMax) / b);
-//     } else {
-//       lblY = pad + 14 + i * 14;
-//     }
+//     if (Math.abs(b) > 1e-10) lblY = toSY((c - a * xMax) / b);
+//     else lblY = pad + 14 + i * 14;
 //     lines.push(
-//       <text key={`ll${i}`} x={lblX} y={Math.max(pad + 10, Math.min(H - pad - 4, lblY - 4))}
-//         textAnchor="end" fontSize="10" fontWeight="600" fill={color}>
+//       <text key={`ll${i}`} x={lblX} y={Math.max(pad + 10, Math.min(H - pad - 4, lblY - 4))} textAnchor="end" fontSize="10" fontWeight="600" fill={color}>
 //         eq{i + 1}
 //       </text>
 //     );
 //   }
 
-//   /* solution dot */
 //   let solDot = null;
 //   if (solution) {
 //     solDot = (
 //       <g>
-//         <circle cx={toSX(solution[0])} cy={toSY(solution[1])} r="5"
-//           fill="#4285f4" stroke="white" strokeWidth="2" />
-//         <text x={toSX(solution[0]) + 8} y={toSY(solution[1]) - 8}
-//           fontSize="10" fontWeight="600" fill="#1f2937">
+//         <circle cx={toSX(solution[0])} cy={toSY(solution[1])} r="5" fill="#4285f4" stroke="white" strokeWidth="2" />
+//         <text x={toSX(solution[0]) + 8} y={toSY(solution[1]) - 8} fontSize="10" fontWeight="600" fill="#1f2937">
 //           ({fmtNum(solution[0])}, {fmtNum(solution[1])})
 //         </text>
 //       </g>
@@ -682,17 +632,13 @@
 //         style={{ backgroundColor: 'white', borderRadius: '8px', border: '1px solid #d0d9f0' }}>
 //         {gridLines}
 //         {axes}
-//         {/* clip lines to plot area */}
 //         <defs>
 //           <clipPath id="plot-area">
 //             <rect x={pad} y={pad} width={W - 2 * pad} height={H - 2 * pad} />
 //           </clipPath>
 //         </defs>
-//         <g clipPath="url(#plot-area)">
-//           {lines}
-//         </g>
+//         <g clipPath="url(#plot-area)">{lines}</g>
 //         {solDot && <g clipPath="url(#plot-area)">{solDot}</g>}
-//         {/* axis labels */}
 //         <text x={W - pad + 4} y={toSY(0) + 4} fontSize="11" fontWeight="600" fill="#374151">x&#8321;</text>
 //         <text x={toSX(0) + 6} y={pad - 6} fontSize="11" fontWeight="600" fill="#374151">x&#8322;</text>
 //       </svg>
@@ -713,14 +659,12 @@
 //   const [method, setMethod] = useState('Gaussian Elimination');
 //   const [result, setResult] = useState(null);
 //   const [errors, setErrors] = useState([]);
-//   const [view, setView] = useState('equation'); // 'equation' | 'matrix'
-//   const [rightTab, setRightTab] = useState('theory'); // 'theory' | 'steps' | 'graph'
+//   const [view, setView] = useState('equation');
+//   const [rightTab, setRightTab] = useState('theory');
 
 //   function makeEmpty(rows, cols) {
 //     return Array.from({ length: rows }, () => new Array(cols).fill(''));
 //   }
-
-//   /* ── dimension changes ── */
 
 //   const handleEqsChange = (val) => {
 //     if (val === '') { setNumEqs(''); return; }
@@ -759,8 +703,6 @@
 //     setErrors([]);
 //   };
 
-//   /* ── cell updates ── */
-
 //   const updateCoeff = (r, c, val) => {
 //     setCoeffs((prev) => {
 //       const next = prev.map((row) => [...row]);
@@ -778,8 +720,6 @@
 //     });
 //     if (errors.length) setErrors([]);
 //   };
-
-//   /* ── fill helpers ── */
 
 //   const randomize = () => {
 //     setCoeffs(Array.from({ length: numEqs }, () =>
@@ -811,8 +751,6 @@
 //     setRightTab('theory');
 //   };
 
-//   /* ── validation ── */
-
 //   const validate = () => {
 //     const errs = [];
 //     for (let r = 0; r < numEqs; r++) {
@@ -829,8 +767,6 @@
 //     return errs.length === 0;
 //   };
 
-//   /* ── solve ── */
-
 //   const solve = () => {
 //     if (!validate()) return;
 //     const numCoeffs = coeffs.map((row) => row.map((v) => parseFloat(v)));
@@ -841,25 +777,17 @@
 //     if (res.steps && res.steps.length > 0) setRightTab('steps');
 //   };
 
-//   /* ── is method disabled? ── */
-
 //   const isMethodDisabled = (m) => SQUARE_ONLY.includes(m) && numEqs !== numVars;
 
-//   /* ── parsed coefficients for the graph (best-effort) ── */
-
 //   const parsedCoeffs = useMemo(() => {
-//     try {
-//       return coeffs.map((row) => row.map((v) => (v === '' ? 0 : parseFloat(v) || 0)));
-//     } catch { return null; }
+//     try { return coeffs.map((row) => row.map((v) => (v === '' ? 0 : parseFloat(v) || 0))); }
+//     catch { return null; }
 //   }, [coeffs]);
 
 //   const parsedConst = useMemo(() => {
-//     try {
-//       return constants.map((v) => (v === '' ? 0 : parseFloat(v) || 0));
-//     } catch { return null; }
+//     try { return constants.map((v) => (v === '' ? 0 : parseFloat(v) || 0)); }
+//     catch { return null; }
 //   }, [constants]);
-
-//   /* ── render equation view ── */
 
 //   const renderEquationView = () => (
 //     <div style={s.eqCard}>
@@ -877,102 +805,55 @@
 //           {row.map((val, c) => (
 //             <React.Fragment key={c}>
 //               {c > 0 && <span style={s.eqSign}>+</span>}
-//               <input
-//                 type="number"
-//                 step="any"
-//                 value={val}
-//                 onChange={(e) => updateCoeff(r, c, e.target.value)}
-//                 placeholder="0"
-//                 style={s.eqCell}
-//               />
+//               <input type="number" step="any" value={val} onChange={(e) => updateCoeff(r, c, e.target.value)} placeholder="0" style={s.eqCell} />
 //               <span style={s.eqVar}>x{subscript(c + 1)}</span>
 //             </React.Fragment>
 //           ))}
 //           <span style={s.eqSign}>=</span>
-//           <input
-//             type="number"
-//             step="any"
-//             value={constants[r]}
-//             onChange={(e) => updateConstant(r, e.target.value)}
-//             placeholder="0"
-//             style={s.eqConstCell}
-//           />
+//           <input type="number" step="any" value={constants[r]} onChange={(e) => updateConstant(r, e.target.value)} placeholder="0" style={s.eqConstCell} />
 //         </div>
 //       ))}
 //     </div>
 //   );
 
-//   /* ── render matrix view (augmented) ── */
-
-//   const renderMatrixView = () => {
-//     const augCols = numVars + 1;
-//     return (
-//       <div style={s.eqCard}>
-//         <div style={s.eqCardHeader}>
-//           <h4 style={s.eqCardTitle}>Augmented Matrix [A|b]</h4>
-//           <div style={s.eqCardActions}>
-//             <button onClick={randomize} style={{ ...s.btnSm, ...s.btnRandom }}>Random</button>
-//             <button onClick={clearAll} style={{ ...s.btnSm, ...s.btnClear }}>Clear</button>
-//           </div>
-//         </div>
-//         <div style={s.matrixContainer}>
-//           <span style={s.bracket}>[</span>
-//           <div style={{
-//             ...s.matrixTable,
-//             gridTemplateColumns: `repeat(${numVars}, 1fr)`,
-//           }}>
-//             {coeffs.map((row, r) =>
-//               row.map((val, c) => (
-//                 <input
-//                   key={`${r}-${c}`}
-//                   type="number"
-//                   step="any"
-//                   value={val}
-//                   onChange={(e) => updateCoeff(r, c, e.target.value)}
-//                   placeholder="0"
-//                   style={s.eqCell}
-//                 />
-//               ))
-//             )}
-//           </div>
-//           <div style={s.augDivider} />
-//           <div style={{
-//             ...s.matrixTable,
-//             gridTemplateColumns: '1fr',
-//           }}>
-//             {constants.map((val, r) => (
-//               <input
-//                 key={r}
-//                 type="number"
-//                 step="any"
-//                 value={val}
-//                 onChange={(e) => updateConstant(r, e.target.value)}
-//                 placeholder="0"
-//                 style={s.eqConstCell}
-//               />
-//             ))}
-//           </div>
-//           <span style={s.bracket}>]</span>
+//   const renderMatrixView = () => (
+//     <div style={s.eqCard}>
+//       <div style={s.eqCardHeader}>
+//         <h4 style={s.eqCardTitle}>Augmented Matrix [A|b]</h4>
+//         <div style={s.eqCardActions}>
+//           <button onClick={randomize} style={{ ...s.btnSm, ...s.btnRandom }}>Random</button>
+//           <button onClick={clearAll} style={{ ...s.btnSm, ...s.btnClear }}>Clear</button>
 //         </div>
 //       </div>
-//     );
-//   };
-
-//   /* ── render result ── */
+//       <div style={s.matrixContainer}>
+//         <span style={s.bracket}>[</span>
+//         <div style={{ ...s.matrixTable, gridTemplateColumns: `repeat(${numVars}, 1fr)` }}>
+//           {coeffs.map((row, r) =>
+//             row.map((val, c) => (
+//               <input key={`${r}-${c}`} type="number" step="any" value={val} onChange={(e) => updateCoeff(r, c, e.target.value)} placeholder="0" style={s.eqCell} />
+//             ))
+//           )}
+//         </div>
+//         <div style={s.augDivider} />
+//         <div style={{ ...s.matrixTable, gridTemplateColumns: '1fr' }}>
+//           {constants.map((val, r) => (
+//             <input key={r} type="number" step="any" value={val} onChange={(e) => updateConstant(r, e.target.value)} placeholder="0" style={s.eqConstCell} />
+//           ))}
+//         </div>
+//         <span style={s.bracket}>]</span>
+//       </div>
+//     </div>
+//   );
 
 //   const renderResult = () => {
 //     if (!result) return 'Enter values, choose a method, and click Solve';
 
-//     if (result.type === 'error') {
-//       return <span style={s.resError}>{result.detail}</span>;
-//     }
+//     if (result.type === 'error') return <span style={s.resError}>{result.detail}</span>;
 
 //     if (result.type === 'none') {
 //       return (
 //         <>
-//           <span style={{ color: '#dc2626', fontWeight: '600', fontSize: '1rem' }}>
-//             &#10007; No Solution
-//           </span>
+//           <span style={{ color: '#dc2626', fontWeight: '600', fontSize: '1rem' }}>&#10007; No Solution</span>
 //           <span style={s.resDetail}>{result.detail}</span>
 //         </>
 //       );
@@ -981,9 +862,7 @@
 //     if (result.type === 'infinite') {
 //       return (
 //         <>
-//           <span style={{ color: '#d97706', fontWeight: '600', fontSize: '1rem' }}>
-//             &#8734; Infinite Solutions
-//           </span>
+//           <span style={{ color: '#d97706', fontWeight: '600', fontSize: '1rem' }}>&#8734; Infinite Solutions</span>
 //           <span style={s.resDetail}>{result.detail}</span>
 //         </>
 //       );
@@ -994,17 +873,13 @@
 //         <span style={s.resLabel}>Unique solution ({method})</span>
 //         <div style={s.resVarRow}>
 //           {result.solution.map((v, i) => (
-//             <span key={i} style={s.resVar}>
-//               x{subscript(i + 1)} = {fmtNum(v)}
-//             </span>
+//             <span key={i} style={s.resVar}>x{subscript(i + 1)} = {fmtNum(v)}</span>
 //           ))}
 //         </div>
 //         <span style={s.resDetail}>{result.detail}</span>
 //       </>
 //     );
 //   };
-
-//   /* ── right panel tabs ── */
 
 //   const renderRightContent = () => {
 //     if (rightTab === 'theory') {
@@ -1019,11 +894,7 @@
 
 //     if (rightTab === 'steps') {
 //       if (!result || !result.steps || result.steps.length === 0) {
-//         return (
-//           <p style={{ ...s.explBody, fontStyle: 'italic' }}>
-//             Solve a system to see step-by-step calculations here.
-//           </p>
-//         );
+//         return <p style={{ ...s.explBody, fontStyle: 'italic' }}>Solve a system to see step-by-step calculations here.</p>;
 //       }
 //       return (
 //         <>
@@ -1041,13 +912,7 @@
 //       return (
 //         <>
 //           <div style={s.stepsTitle}>System Graph</div>
-//           <SystemGraph
-//             coeffs={parsedCoeffs}
-//             constants={parsedConst}
-//             solution={result?.type === 'unique' ? result.solution : null}
-//             numEqs={numEqs}
-//             numVars={numVars}
-//           />
+//           <SystemGraph coeffs={parsedCoeffs} constants={parsedConst} solution={result?.type === 'unique' ? result.solution : null} numEqs={numEqs} numVars={numVars} />
 //         </>
 //       );
 //     }
@@ -1062,31 +927,49 @@
 //       <div style={s.main}>
 
 //         <div style={s.header}>
-//           <h1 style={s.title}>Linear Systems Calculator</h1>
+//           {/* <h1 style={s.title}>Linear Systems Calculator</h1> */}
 //           <p style={s.subtitle}>Solve and visualize systems of linear equations</p>
 //         </div>
 
 //         <div style={s.threeCol}>
 
-//           {/* ▸ LEFT — input mode */}
+//           {/* ▸ LEFT — input mode + method sub-items */}
 //           <div style={s.leftPanel}>
 //             <div style={s.leftTitle}>Input Mode</div>
 
-//             <button
-//               onClick={() => setView('equation')}
-//               style={s.modeBtn(view === 'equation')}
-//             >
+//             <button onClick={() => setView('equation')} style={s.modeBtn(view === 'equation')}>
 //               <div style={s.modeLbl(view === 'equation')}>Equations</div>
 //               <div style={s.modeDesc}>Enter coefficients equation by equation</div>
 //             </button>
 
-//             <button
-//               onClick={() => setView('matrix')}
-//               style={s.modeBtn(view === 'matrix')}
-//             >
+//             <button onClick={() => setView('matrix')} style={s.modeBtn(view === 'matrix')}>
 //               <div style={s.modeLbl(view === 'matrix')}>Augmented Matrix</div>
 //               <div style={s.modeDesc}>Enter the full augmented matrix [A|b]</div>
 //             </button>
+
+//             {/* ── Solution Method sub-items ── */}
+//             <div style={s.leftSectionTitle}>Method</div>
+//             <div style={s.opSubList}>
+//               {METHODS.map((m) => {
+//                 const sel = method === m;
+//                 const dis = isMethodDisabled(m);
+//                 return (
+//                   <button
+//                     key={m}
+//                     onClick={() => { if (!dis) { setMethod(m); setResult(null); } }}
+//                     disabled={dis}
+//                     style={{
+//                       ...s.opSubItem,
+//                       ...(sel ? s.opSubItemSelected : {}),
+//                       ...(dis ? s.opSubItemDisabled : {}),
+//                     }}
+//                   >
+//                     {sel && <span style={s.opSubDot} />}
+//                     {m}
+//                   </button>
+//                 );
+//               })}
+//             </div>
 //           </div>
 
 //           {/* ▸ MIDDLE — editor */}
@@ -1105,21 +988,11 @@
 //             <div style={s.dimControls}>
 //               <div style={s.dimGroup}>
 //                 <label style={s.dimLabel}>Equations:</label>
-//                 <input
-//                   type="number" min="1" max="10"
-//                   value={numEqs}
-//                   onChange={(e) => handleEqsChange(e.target.value)}
-//                   style={s.dimInput(numEqs)}
-//                 />
+//                 <input type="number" min="1" max="10" value={numEqs} onChange={(e) => handleEqsChange(e.target.value)} style={s.dimInput(numEqs)} />
 //               </div>
 //               <div style={s.dimGroup}>
 //                 <label style={s.dimLabel}>Variables:</label>
-//                 <input
-//                   type="number" min="1" max="10"
-//                   value={numVars}
-//                   onChange={(e) => handleVarsChange(e.target.value)}
-//                   style={s.dimInput(numVars)}
-//                 />
+//                 <input type="number" min="1" max="10" value={numVars} onChange={(e) => handleVarsChange(e.target.value)} style={s.dimInput(numVars)} />
 //               </div>
 //               <span style={s.dimHint}>
 //                 {numEqs} equation{numEqs !== 1 ? 's' : ''}, {numVars} unknown{numVars !== 1 ? 's' : ''}
@@ -1144,45 +1017,18 @@
 //               </div>
 //             )}
 
-//             {/* Input (equation or matrix view) */}
+//             {/* Input view */}
 //             {view === 'equation' ? renderEquationView() : renderMatrixView()}
 
-//             {/* Method selector */}
-//             <div style={s.opsSection}>
-//               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-//                 <h3 style={{ ...s.opsTitle, marginBottom: 0 }}>Solution Method</h3>
-//                 <Tooltip text="Select a method to solve the system. Grayed-out methods require a square system." />
-//               </div>
-//               <div style={s.opsGrid}>
-//                 {METHODS.map((m) => {
-//                   const sel = method === m;
-//                   const dis = isMethodDisabled(m);
-//                   return (
-//                     <button
-//                       key={m}
-//                       onClick={() => { if (!dis) { setMethod(m); setResult(null); } }}
-//                       disabled={dis}
-//                       style={{
-//                         ...s.opBtn,
-//                         ...(sel ? s.opBtnSelected : {}),
-//                         ...(dis ? s.opBtnDisabled : {}),
-//                       }}
-//                     >
-//                       {m}
-//                     </button>
-//                   );
-//                 })}
-//               </div>
-
-//               <div style={s.execRow}>
-//                 <button
-//                   onClick={solve}
-//                   style={{ ...s.execBtn, ...(!method ? s.execBtnDisabled : {}) }}
-//                   disabled={!method}
-//                 >
-//                   Solve System
-//                 </button>
-//               </div>
+//             {/* Execute */}
+//             <div style={s.execRow}>
+//               <button
+//                 onClick={solve}
+//                 style={{ ...s.execBtn, ...(!method ? s.execBtnDisabled : {}) }}
+//                 disabled={!method}
+//               >
+//                 Solve System
+//               </button>
 //             </div>
 
 //             {/* Result */}
@@ -1218,6 +1064,7 @@
 //     </div>
 //   );
 // }
+
 
 
 import React, { useState, useMemo } from 'react';
@@ -1741,19 +1588,19 @@ function Tooltip({ text }) {
   );
 }
 
-/* ── descriptions ─────────────────────────────────────────────── */
+/* ── default descriptions ─────────────────────────────────────── */
 
-const descriptions = {
+const defaultDescriptions = {
   _default:
     'Enter a system of linear equations. Choose a solution method and click Solve to find the unknowns.',
   'Gaussian Elimination':
-    'Reduces the augmented matrix [A|b] to row echelon form via forward elimination, then uses back-substitution to find the solution. Time complexity O(n³).',
+    'Reduces the augmented matrix [A|b] to row echelon form via forward elimination, then uses back-substitution to find the solution. Time complexity O(n\u00B3).',
   'Gauss-Jordan':
     'Extends Gaussian elimination by reducing the matrix to reduced row echelon form (RREF), eliminating above and below each pivot. The solution is read directly from the last column.',
   "Cramer's Rule":
-    'Uses determinants to solve square systems. Each variable xᵢ = det(Aᵢ)/det(A), where Aᵢ is A with column i replaced by b. Requires det(A) ≠ 0. Elegant but O(n!) for large n.',
+    'Uses determinants to solve square systems. Each variable x\u1D62 = det(A\u1D62)/det(A), where A\u1D62 is A with column i replaced by b. Requires det(A) \u2260 0. Elegant but O(n!) for large n.',
   'Inverse Method':
-    'Computes x = A⁻¹b directly. Requires A to be square and non-singular (det(A) ≠ 0). The inverse is found via Gauss-Jordan on [A|I].',
+    'Computes x = A\u207B\u00B9b directly. Requires A to be square and non-singular (det(A) \u2260 0). The inverse is found via Gauss-Jordan on [A|I].',
 };
 
 const LINE_COLORS = ['#4285f4', '#ea4335', '#34a853', '#fbbc05', '#8e44ad', '#e67e22', '#1abc9c', '#e74c3c', '#2c3e50', '#d35400'];
@@ -1872,7 +1719,7 @@ function SystemGraph({ coeffs, constants, solution, numEqs, numVars }) {
 const METHODS = ['Gaussian Elimination', 'Gauss-Jordan', "Cramer's Rule", 'Inverse Method'];
 const SQUARE_ONLY = ["Cramer's Rule", 'Inverse Method'];
 
-export default function LinearSystemsCalculator() {
+export default function LinearSystemsCalculator({ descriptions: descriptionsProp } = {}) {
   const [numEqs, setNumEqs] = useState(3);
   const [numVars, setNumVars] = useState(3);
   const [coeffs, setCoeffs] = useState(() => makeEmpty(3, 3));
@@ -1882,6 +1729,11 @@ export default function LinearSystemsCalculator() {
   const [errors, setErrors] = useState([]);
   const [view, setView] = useState('equation');
   const [rightTab, setRightTab] = useState('theory');
+
+  /* ── merge descriptions: props override defaults ── */
+  const mergedDescriptions = descriptionsProp
+    ? { ...defaultDescriptions, ...descriptionsProp }
+    : defaultDescriptions;
 
   function makeEmpty(rows, cols) {
     return Array.from({ length: rows }, () => new Array(cols).fill(''));
@@ -2104,7 +1956,7 @@ export default function LinearSystemsCalculator() {
 
   const renderRightContent = () => {
     if (rightTab === 'theory') {
-      const desc = descriptions[method] || descriptions._default;
+      const desc = mergedDescriptions[method] || mergedDescriptions._default;
       return (
         <>
           <h4 style={s.explTitle}>{method}</h4>

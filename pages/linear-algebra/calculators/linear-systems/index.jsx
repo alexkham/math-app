@@ -11,8 +11,23 @@ import LinearSystemsCalculator from '@/app/components/calculators/linear-system/
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
+const keyWords = [
+  'linear systems calculator',
+  'system of equations solver',
+  'Gaussian elimination calculator',
+  'Gauss-Jordan calculator',
+  'Cramers rule calculator',
+  'matrix inverse method solver',
+  'augmented matrix calculator',
+  'solve linear equations online',
+  'row echelon form calculator',
+  'RREF calculator',
+  'system of linear equations',
+  'linear algebra solver',
+  'simultaneous equations calculator',
+  'back substitution calculator',
+  'free equation solver'
+];
 
   // •
 
@@ -55,336 +70,275 @@ export async function getStaticProps(){
 //                     __html:   sectionContent.distributions.svg,
 //                   }} />
 
-    const sectionsContent={
-
-    obj0:{
-      title:`Key Terms`,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-  
-    },
-    obj1:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-  
-    },
-    obj2:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    },
-  
-    obj3:{
-  
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    },
-    obj4:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    },
-    obj5:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    },
-    obj6:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    },
-    obj7:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    },
-    obj8:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    },
-    obj9:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    },
-    obj10:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    },
-    obj11:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    },
-    obj12:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    },
-    obj13:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-      link:'',
-  
-    },
-    obj14:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-      link:'',
-  
-    },
+  const descriptions = {
+  _default:
+    'Enter a system of linear equations. Choose a solution method and click Solve to find the unknowns.',
+  'Gaussian Elimination':
+    'Reduces the augmented matrix [A|b] to row echelon form via forward elimination, then uses back-substitution to find the solution. Time complexity O(n^3).\n\n@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more](!/linear-algebra/calculators/linear-systems#1) \u2193@',
+  'Gauss-Jordan':
+    'Extends Gaussian elimination by reducing the matrix to reduced row echelon form (RREF), eliminating above and below each pivot. The solution is read directly from the last column.\n\n@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more](!/linear-algebra/calculators/linear-systems#2) \u2193@',
+  "Cramer's Rule":
+    'Uses determinants to solve square systems. Each variable xi = det(Ai)/det(A), where Ai is A with column i replaced by b. Requires det(A) != 0. Elegant but O(n!) for large n.\n\n@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more](!/linear-algebra/calculators/linear-systems#3) \u2193@',
+  'Inverse Method':
+    'Computes x = A^(-1)b directly. Requires A to be square and non-singular (det(A) != 0). The inverse is found via Gauss-Jordan on [A|I].\n\n@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more](!/linear-algebra/calculators/linear-systems#4) \u2193@',
+};
 
 
-    obj15:{
-  
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-      link:'',
-  
-    }
-  
+const sectionsContent = {
+
+  obj0: {
+    title: `Key Terms`,
+    content: ``,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj1: {
+    title: `Gaussian Elimination`,
+    content: `Gaussian elimination reduces an augmented matrix $[A|\\mathbf{b}]$ to row echelon form (REF) through three elementary row operations: swapping rows, scaling a row by a nonzero constant, and adding a multiple of one row to another.
+
+The process works column by column from left to right. For each column, a pivot element is selected (using partial pivoting for numerical stability), and all entries below the pivot are eliminated. The result is an upper triangular system that is solved via **back-substitution**, working from the last equation upward.
+
+$$a_{11}x_1 + a_{12}x_2 + \\cdots = b_1$$
+$$a_{22}x_2 + \\cdots = b_2$$
+$$\\ddots$$
+
+Gaussian elimination has $O(n^3)$ time complexity and is the foundation of most direct solvers for linear systems.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj2: {
+    title: `Gauss-Jordan Elimination`,
+    content: `Gauss-Jordan elimination extends **Gaussian elimination** by continuing to reduce the matrix to reduced row echelon form (RREF). After creating zeros below each pivot (forward elimination), it also eliminates all entries above each pivot (backward elimination) and scales each pivot to 1.
+
+The result is an identity-like structure on the left side of the augmented matrix, and the solution vector appears directly in the rightmost column — no back-substitution is needed.
+
+Gauss-Jordan is slightly more expensive than standard Gaussian elimination (roughly 50% more operations) but produces a cleaner final form. It is also the method used to compute **matrix inverses** by applying the process to $[A|I]$.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj3: {
+    title: `Cramer&apos;s Rule`,
+    content: `Cramer&apos;s Rule solves a square system $A\\mathbf{x} = \\mathbf{b}$ by expressing each unknown as a ratio of **determinants**:
+
+$$x_i = \\frac{\\det(A_i)}{\\det(A)}$$
+
+where $A_i$ is the matrix $A$ with its $i$-th column replaced by $\\mathbf{b}$. The method requires $\\det(A) \\neq 0$, meaning the system must have a unique solution.
+
+While Cramer&apos;s Rule is elegant and useful for theoretical analysis and small systems (2x2, 3x3), it becomes computationally impractical for large systems due to $O(n!)$ complexity of naive determinant computation. For practical computation, **Gaussian elimination** is preferred.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj4: {
+    title: `Inverse Method`,
+    content: `The inverse method solves $A\\mathbf{x} = \\mathbf{b}$ by computing $\\mathbf{x} = A^{-1}\\mathbf{b}$ directly. This requires $A$ to be square and non-singular ($\\det(A) \\neq 0$).
+
+The calculator finds $A^{-1}$ using **Gauss-Jordan elimination** on the augmented matrix $[A|I]$. Row operations transform the left side into $I$, and the right side becomes $A^{-1}$.
+
+The inverse method is most useful when solving multiple systems with the same coefficient matrix but different right-hand sides, since $A^{-1}$ only needs to be computed once. For a single system, Gaussian elimination is more efficient because computing the full inverse requires more operations than directly solving the system.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj5: {
+    title: `Types of Solutions`,
+    content: `A system of linear equations has exactly one of three solution types:
+
+**Unique solution** -- the system has exactly one set of values satisfying all equations. This occurs when the coefficient matrix has full rank (rank equals the number of unknowns). The graph shows lines intersecting at a single point.
+
+**Infinitely many solutions** -- the system is consistent but underdetermined. This occurs when the rank is less than the number of unknowns and no contradictions exist. Solutions form a line, plane, or higher-dimensional subspace.
+
+**No solution** -- the system is inconsistent. This occurs when row reduction produces a row of the form $[0 \\; 0 \\; \\cdots \\; 0 \\; | \\; c]$ where $c \\neq 0$. Geometrically, this means parallel lines or planes that never intersect.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj6: {
+    title: `Augmented Matrix Representation`,
+    content: `The augmented matrix $[A|\\mathbf{b}]$ combines the coefficient matrix and the constants vector into a single matrix for efficient manipulation. For a system with $m$ equations and $n$ unknowns:
+
+$$\\left[\\begin{array}{cccc|c} a_{11} & a_{12} & \\cdots & a_{1n} & b_1 \\\\ a_{21} & a_{22} & \\cdots & a_{2n} & b_2 \\\\ \\vdots & \\vdots & \\ddots & \\vdots & \\vdots \\\\ a_{m1} & a_{m2} & \\cdots & a_{mn} & b_m \\end{array}\\right]$$
+
+Row operations on the augmented matrix correspond exactly to valid algebraic manipulations of the equations. The calculator supports both equation input (showing the algebraic form) and matrix input (showing the augmented matrix directly).`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj7: {
+    title: `Row Echelon Form vs Reduced Row Echelon Form`,
+    content: `**Row echelon form (REF)** is the result of **Gaussian elimination**. Requirements: all zero rows are at the bottom, each leading entry (pivot) is to the right of the one above it, and all entries below each pivot are zero. REF requires back-substitution to find the solution.
+
+**Reduced row echelon form (RREF)** is the result of **Gauss-Jordan elimination**. In addition to REF requirements: every pivot equals 1, and every pivot is the only nonzero entry in its column. The solution can be read directly from the final matrix.
+
+RREF is unique for any given matrix, while REF is not (different pivot choices produce different REF forms). Both forms preserve the solution set of the original system.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj8: {
+    title: `Related Tools and Concepts`,
+    content: `This linear systems calculator solves systems using four methods with step-by-step breakdowns and a 2D graph for two-variable systems. For matrix-specific operations like **determinants**, **inverses**, **LU decomposition**, and **Kronecker products**, use the **Matrix Operations Calculator**.
+
+For vector-level computations including **dot products**, **cross products**, **projections**, **Gram-Schmidt orthogonalization**, and **linear independence checks**, use the **Vector Operations Calculator**. Related topics include **eigenvalues**, **rank**, **null space**, and **least squares** solutions.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+};
+
+const faqQuestions = {
+  obj1: {
+    question: "What methods does this linear systems calculator support?",
+    answer: "The calculator supports four solution methods: Gaussian elimination (forward elimination with back-substitution), Gauss-Jordan elimination (full reduction to RREF), Cramer's Rule (determinant-based solution for square systems), and the Inverse Method (computing x = A inverse times b). Each method includes step-by-step calculation breakdowns."
+  },
+  obj2: {
+    question: "Which method should I use to solve a system of equations?",
+    answer: "Gaussian elimination is the most versatile and efficient general-purpose method. Gauss-Jordan is useful when you want the solution without back-substitution. Cramer's Rule works well for small square systems (2x2 or 3x3) but is impractical for larger ones. The Inverse Method is best when solving multiple systems with the same coefficient matrix."
+  },
+  obj3: {
+    question: "How do I know if a system has no solution or infinitely many solutions?",
+    answer: "During row reduction, if a row becomes all zeros on the left but nonzero on the right (like 0 0 0 | 5), the system has no solution. If there are fewer pivots than unknowns and no contradictory rows, the system has infinitely many solutions with free variables."
+  },
+  obj4: {
+    question: "What is the difference between Gaussian and Gauss-Jordan elimination?",
+    answer: "Gaussian elimination reduces the matrix to row echelon form (upper triangular) and then uses back-substitution to find the solution. Gauss-Jordan continues the reduction to reduced row echelon form where every pivot is 1 and is the only nonzero entry in its column, so the solution is read directly without back-substitution."
+  },
+  obj5: {
+    question: "Can this calculator handle non-square systems?",
+    answer: "Yes, the calculator supports systems with different numbers of equations and variables (up to 10 each). Non-square systems may have no solution or infinitely many solutions. Note that Cramer's Rule and the Inverse Method require square systems, but Gaussian and Gauss-Jordan elimination work for any dimensions."
   }
+};
 
+const schemas = {
+  webApplication: {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Linear Systems Calculator",
+    "description": "Free linear systems calculator with Gaussian elimination, Gauss-Jordan, Cramer's Rule, and inverse method. Step-by-step solutions with 2D graphing for two-variable systems.",
+    "url": "https://www.learnmathclass.com/linear-algebra/calculators/linear-systems",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Four solution methods: Gaussian elimination, Gauss-Jordan, Cramer's Rule, Inverse Method",
+      "Step-by-step calculation breakdowns for every method",
+      "Equation view and augmented matrix input modes",
+      "2D graph visualization for two-variable systems",
+      "Support for systems up to 10 equations and 10 unknowns",
+      "Detection of unique, infinite, and no-solution cases",
+      "Random fill and clear controls for quick testing"
+    ],
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString(),
+    "inLanguage": "en-US",
+    "isAccessibleForFree": true,
+    "learningResourceType": "Interactive Tool",
+    "educationalLevel": "High School, College",
+    "keywords": keyWords.join(", ")
+  },
 
-  const introContent = {
-  id: "intro",
-  title: "",
-  content: ``
-}
-
-
-
-
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Title | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/linear-algebra/calculators/linear-systems",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
-        
-       }
-    }
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Linear Algebra",
+        "item": "https://www.learnmathclass.com/linear-algebra"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Calculators",
+        "item": "https://www.learnmathclass.com/linear-algebra/calculators"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Linear Systems Calculator",
+        "item": "https://www.learnmathclass.com/linear-algebra/calculators/linear-systems"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+};
+
+
+
+
+  return {
+  props: {
+    sectionsContent,
+    descriptions,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Linear Systems Calculator - Equation Solver | Learn Math Class",
+      description: "Solve systems of linear equations with Gaussian elimination, Gauss-Jordan, Cramer's Rule, and inverse method. Free step-by-step solutions with 2D graphing.",
+      keywords: keyWords.join(", "),
+      url: "/linear-algebra/calculators/linear-systems",
+      name: "Linear Systems Calculator"
+    },
+  }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
+export default function LinearSystemsCalculatorPage({seoData, sectionsContent, descriptions, faqQuestions, schemas}) {
     
-  const genericSections=[
-    {
-        id:'0',
-        title:sectionsContent.obj0.title,
-        link:sectionsContent.obj0.link,
-        content:[
-          sectionsContent.obj0.content,
-        ]
-    },
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
-        ]
-    },
-    {
-        id:'2',
-        title:sectionsContent.obj2.title,
-        link:sectionsContent.obj2.link,
-        content:[
-          sectionsContent.obj2.content,
-        ]
-    },
-    {
-        id:'3',
-        title:sectionsContent.obj3.title,
-        link:sectionsContent.obj3.link,
-        content:[
-          sectionsContent.obj3.content,
-        ]
-    },
-    {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
-    {
-        id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
-        content:[
-          sectionsContent.obj5.content,
-        ]
-    },
-    {
-        id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
-        content:[
-          sectionsContent.obj6.content,
-        ]
-    },
-    {
-        id:'7',
-        title:sectionsContent.obj7.title,
-        link:sectionsContent.obj7.link,
-        content:[
-          sectionsContent.obj7.content,
-        ]
-    },
-    {
-        id:'8',
-        title:sectionsContent.obj8.title,
-        link:sectionsContent.obj8.link,
-        content:[
-          sectionsContent.obj8.content,
-        ]
-    },
-    {
-        id:'9',
-        title:sectionsContent.obj9.title,
-        link:sectionsContent.obj9.link,
-        content:[
-          sectionsContent.obj9.content,
-        ]
-    },
-    {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
-    {
-        id:'11',
-        title:sectionsContent.obj11.title,
-        link:sectionsContent.obj11.link,
-        content:[
-          sectionsContent.obj11.content,
-        ]
-    },
-    {
-        id:'12',
-        title:sectionsContent.obj12.title,
-        link:sectionsContent.obj12.link,
-        content:[
-          sectionsContent.obj12.content,
-        ]
-    },
-    {
-        id:'13',
-        title:sectionsContent.obj13.title,
-        link:sectionsContent.obj13.link,
-        content:[
-          sectionsContent.obj13.content,
-        ]
-    },
-    {
-        id:'14',
-        title:sectionsContent.obj14.title,
-        link:sectionsContent.obj14.link,
-        content:[
-          sectionsContent.obj14.content,
-        ]
-    },
-    {
-        id:'15',
-        title:sectionsContent.obj15.title,
-        link:sectionsContent.obj15.link,
-        content:[
-          sectionsContent.obj15.content,
-        ]
-    },
-    // {
-    //     id:'1',
-    //     title:sectionsContent.obj1.title,
-    //     link:sectionsContent.obj1.link,
-    //     content:[
-    //       sectionsContent.obj1.content,
-    //     ]
-    // },
-    // {
-    //     id:'1',
-    //     title:sectionsContent.obj1.title,
-    //     link:sectionsContent.obj1.link,
-    //     content:[
-    //       sectionsContent.obj1.content,
-    //     ]
-    // },
-    // {
-    //     id:'1',
-    //     title:sectionsContent.obj1.title,
-    //     link:sectionsContent.obj1.link,
-    //     content:[
-    //       sectionsContent.obj1.content,
-    //     ]
-    // },
-    
+ const genericSections=[
+  { id:'0', title:sectionsContent.obj0.title, link:sectionsContent.obj0.link, content:[sectionsContent.obj0.content] },
+  { id:'1', title:sectionsContent.obj1.title, link:sectionsContent.obj1.link, content:[sectionsContent.obj1.content] },
+  { id:'2', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[sectionsContent.obj2.content] },
+  { id:'3', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[sectionsContent.obj3.content] },
+  { id:'4', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[sectionsContent.obj4.content] },
+  { id:'5', title:sectionsContent.obj5.title, link:sectionsContent.obj5.link, content:[sectionsContent.obj5.content] },
+  { id:'6', title:sectionsContent.obj6.title, link:sectionsContent.obj6.link, content:[sectionsContent.obj6.content] },
+  { id:'7', title:sectionsContent.obj7.title, link:sectionsContent.obj7.link, content:[sectionsContent.obj7.content] },
+  { id:'8', title:sectionsContent.obj8.title, link:sectionsContent.obj8.link, content:[sectionsContent.obj8.content] },
 ]
 
   return (
    <>
-   <Head>
+ <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -406,25 +360,21 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
   <script 
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
+      __html: JSON.stringify(schemas.webApplication)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>
@@ -452,7 +402,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
          color="#1f2937"
          activeColor="#4285f4"
          activeBg="#f0f7ff">
-     <LinearSystemsCalculator/>
+   <LinearSystemsCalculator descriptions={descriptions}/>
       </SiblingsNav>
       </div>
    <br/>

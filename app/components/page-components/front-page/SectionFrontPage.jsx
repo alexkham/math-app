@@ -620,7 +620,7 @@ const SidebarSubLink = ({ href, label }) => {
   );
 };
 
-const Sidebar = ({ sections, subtopics, brandName, brandSub, open, onToggle }) => {
+const Sidebar = ({ sections, subtopics, brandName, brandSub, open, onToggle ,sidebarSectionTitle}) => {
   const t = useTheme();
   const ref = useRef(null);
   useEffect(() => {
@@ -650,7 +650,8 @@ const Sidebar = ({ sections, subtopics, brandName, brandSub, open, onToggle }) =
         {sections.map((sec, i) => <DotItem key={sec.id} label={sec.title} active={i === 0} onClick={() => scrollTo(sec.id)} />)}
       </div>
       <nav className="sfp-sidebar-nav" style={{ display: open ? 'flex' : 'none', flexDirection: 'column', padding: '8px 0', flex: 1, overflowY: 'auto', overflowX: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-        <div style={heading}>On This Page</div>
+        {/* <div style={heading}>In This Section</div> */}
+        <div style={heading}>{sidebarSectionTitle || `In ${brandName} section`}</div>
         {sections.map((sec) => <SidebarNavLink key={sec.id} icon={sec.navIcon} label={sec.title} onClick={() => scrollTo(sec.id)} />)}
         {subtopics?.length > 0 && (
           <>
