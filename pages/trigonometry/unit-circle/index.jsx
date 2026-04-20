@@ -6,6 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
@@ -175,7 +176,33 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
+ obj0: {
+    title: `Key Terms`,
+    content: `
+## The Circle
  
+- [Unit Circle](!/trigonometry/definitions#unit_circle) — the circle $x^2 + y^2 = 1$ centered at the origin
+- [Sine](!/trigonometry/definitions#sine) — $y$-coordinate of the point at angle $\\theta$
+- [Cosine](!/trigonometry/definitions#cosine) — $x$-coordinate of the point at angle $\\theta$
+ 
+## Angle Placement
+ 
+- [Standard Position](!/trigonometry/definitions#angle_in_standard_position) — vertex at origin, initial side on positive $x$-axis
+- [Initial Side](!/trigonometry/definitions#initial_side) — the fixed starting ray along the positive $x$-axis
+- [Terminal Side](!/trigonometry/definitions#terminal_side) — the ray after rotation, intersecting the circle
+ 
+## Angle Classification
+ 
+- [Coterminal Angles](!/trigonometry/definitions#coterminal_angles) — different rotations landing at the same point
+- [Quadrantal Angles](!/trigonometry/definitions#quadrantal_angles) — terminal side on a coordinate axis
+- [Reference Angle](!/trigonometry/definitions#reference_angle) — acute angle to the $x$-axis, isolating magnitude from sign
+- [Complementary Angles](!/trigonometry/definitions#complementary_angles) — two angles summing to $90°$
+- [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — two angles summing to $180°$`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,
+    link: '',
+  },
 
     obj1: {
     title: `Definition and Equation`,
@@ -442,6 +469,15 @@ export default function UnitCirclePage({seoData,sectionsContent , introContent, 
 
 
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -668,8 +704,15 @@ export default function UnitCirclePage({seoData,sectionsContent , introContent, 
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

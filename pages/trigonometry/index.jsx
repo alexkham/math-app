@@ -11,6 +11,7 @@ import trigonometryTermsList from '@/app/api/db/definitions/trigonometry/trigono
 import ToolsSlider from '@/app/components/sliders/ToolsSlider';
 import Head from 'next/head'
 import { createContentHtml } from '@/app/utils/utils-functions';
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
  export async function getStaticProps(){
@@ -173,6 +174,61 @@ import { createContentHtml } from '@/app/utils/utils-functions';
 
   
   const sectionsContent={
+    
+// ─── /trigonometry (hub) ──────────────────────────────────────────────────
+ 
+obj0: {
+    title: `Key Terms`,
+    content: `
+## Angles & Measurement
+ 
+- [Angle](!/trigonometry/definitions#angle) — a figure formed by two rays sharing a common endpoint, measuring rotation
+- [Degree](!/trigonometry/definitions#degree) — $\\frac{1}{360}$ of a full rotation
+- [Radian](!/trigonometry/definitions#radian) — the angle subtended by an arc equal in length to the radius
+- [Arc Length](!/trigonometry/definitions#arc_length) — distance along a circular arc: $s = r\\theta$
+- [Central Angle](!/trigonometry/definitions#central_angle) — an angle whose vertex is at the center of a circle
+- [Sector](!/trigonometry/definitions#sector) — the region between two radii and their intercepted arc
+- [Unit Circle](!/trigonometry/definitions#unit_circle) — the circle $x^2 + y^2 = 1$ centered at the origin
+- [Initial Side](!/trigonometry/definitions#initial_side) — the fixed ray from which rotation begins
+- [Terminal Side](!/trigonometry/definitions#terminal_side) — the ray obtained after rotation
+- [Positive Angle](!/trigonometry/definitions#positive_angle) — counterclockwise rotation
+- [Negative Angle](!/trigonometry/definitions#negative_angle) — clockwise rotation
+- [Standard Position](!/trigonometry/definitions#angle_in_standard_position) — vertex at origin, initial side along positive $x$-axis
+- [Coterminal Angles](!/trigonometry/definitions#coterminal_angles) — angles sharing the same terminal side
+- [Quadrantal Angles](!/trigonometry/definitions#quadrantal_angles) — angles whose terminal side lies on an axis
+- [Reference Angle](!/trigonometry/definitions#reference_angle) — the acute angle between the terminal side and the $x$-axis
+- [Complementary Angles](!/trigonometry/definitions#complementary_angles) — two angles summing to $90°$
+- [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — two angles summing to $180°$
+ 
+## Functions
+ 
+- [Sine](!/trigonometry/definitions#sine) — $y$-coordinate on the unit circle
+- [Cosine](!/trigonometry/definitions#cosine) — $x$-coordinate on the unit circle
+- [Tangent](!/trigonometry/definitions#tangent) — ratio $\\frac{\\sin\\theta}{\\cos\\theta}$, the slope of the terminal side
+- [Cosecant](!/trigonometry/definitions#cosecant) — reciprocal of sine
+- [Secant](!/trigonometry/definitions#secant) — reciprocal of cosine
+- [Cotangent](!/trigonometry/definitions#cotangent) — reciprocal of tangent
+- [Trigonometric Ratio](!/trigonometry/definitions#trigonometric_ratio) — a ratio of two sides of a right triangle relative to an acute angle
+- [Periodic Function](!/trigonometry/definitions#periodic_function) — a function that repeats at regular intervals
+- [Inverse Trigonometric Function](!/trigonometry/definitions#inverse_trigonometric_function) — returns the angle for a given trigonometric value
+ 
+## Right Triangle
+ 
+- [Hypotenuse](!/trigonometry/definitions#hypotenuse) — the side opposite the right angle
+- [Adjacent Side](!/trigonometry/definitions#adjacent_side) — the leg next to the chosen acute angle
+- [Opposite Side](!/trigonometry/definitions#opposite_side) — the leg across from the chosen acute angle
+ 
+## Graphs
+ 
+- [Amplitude](!/trigonometry/definitions#amplitude) — maximum distance from midline to peak: $|A|$
+- [Period](!/trigonometry/definitions#period) — horizontal length of one cycle: $\\frac{2\\pi}{|B|}$
+- [Phase Shift](!/trigonometry/definitions#phase_shift) — horizontal displacement: $\\frac{C}{B}$
+- [Frequency](!/trigonometry/definitions#frequency) — cycles per unit interval: $\\frac{1}{T}$`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,
+    link: '',
+  },
 
     formulas:{
       title:`Trigonometry Formulas`,
@@ -419,6 +475,15 @@ export default function TrigonometryPage({ seoData, sectionsContent, introConten
 
 
   const trigonometrySections = [
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
    
     {
       id: 'formulas',

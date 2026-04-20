@@ -6,6 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
@@ -173,90 +174,29 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-
-    // },
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-
-    // obj3:{
-
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-    // obj8:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-    // obj9:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-    // obj10:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-
+  obj0: {
+    title: `Key Terms`,
+    content: `
+## The Six Functions
+ 
+- [Sine](!/trigonometry/definitions#sine) — $y$-coordinate on the unit circle
+- [Cosine](!/trigonometry/definitions#cosine) — $x$-coordinate on the unit circle
+- [Tangent](!/trigonometry/definitions#tangent) — ratio $\\frac{\\sin\\theta}{\\cos\\theta}$, the slope of the terminal side
+- [Cosecant](!/trigonometry/definitions#cosecant) — reciprocal of sine
+- [Secant](!/trigonometry/definitions#secant) — reciprocal of cosine
+- [Cotangent](!/trigonometry/definitions#cotangent) — reciprocal of tangent
+ 
+## Supporting Concepts
+ 
+- [Trigonometric Ratio](!/trigonometry/definitions#trigonometric_ratio) — a ratio of two sides of a right triangle
+- [Unit Circle](!/trigonometry/definitions#unit_circle) — the circle $x^2 + y^2 = 1$ that defines the functions for all angles
+- [Periodic Function](!/trigonometry/definitions#periodic_function) — a function repeating at regular intervals`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,
+    link: '',
+  },
+ 
      obj1: {
     title: `The Sine Function`,
     content: `The sine function assigns to each real number $\\theta$ the $y$-coordinate of the corresponding point on the [unit circle](!/trigonometry/unit-circle):
@@ -551,6 +491,15 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, f
 
 
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -777,8 +726,15 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, f
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

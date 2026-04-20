@@ -8,6 +8,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
@@ -218,6 +219,19 @@ export async function getStaticProps(){
     //   link:'',
 
     // },
+    obj0: {
+    title: `Key Terms`,
+    content: `
+- [Periodic Function](!/trigonometry/definitions#periodic_function) — a function that repeats at regular intervals, producing infinitely many solutions
+- [Reference Angle](!/trigonometry/definitions#reference_angle) — the acute angle to the $x$-axis, used to identify solutions by quadrant
+- [Inverse Trigonometric Function](!/trigonometry/definitions#inverse_trigonometric_function) — returns the angle for a given function value
+- [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — angles summing to $180°$, linking sine solutions across quadrants
+- [Quadrantal Angles](!/trigonometry/definitions#quadrantal_angles) — boundary angles where some functions are undefined or extreme`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,
+    link: '',
+  },
 
     obj1: {
     title: `General Solutions vs Restricted Solutions`,
@@ -572,6 +586,15 @@ export default function EquationsPage({seoData,sectionsContent , introContent, f
 
 
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -798,8 +821,15 @@ export default function EquationsPage({seoData,sectionsContent , introContent, f
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

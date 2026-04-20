@@ -9,6 +9,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
@@ -177,7 +178,34 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-  
+  obj0: {
+    title: `Key Terms`,
+    content: `
+## Triangle Sides
+ 
+- [Hypotenuse](!/trigonometry/definitions#hypotenuse) — the side opposite the right angle, always the longest
+- [Adjacent Side](!/trigonometry/definitions#adjacent_side) — the leg next to the chosen acute angle
+- [Opposite Side](!/trigonometry/definitions#opposite_side) — the leg across from the chosen acute angle
+ 
+## The Six Ratios
+ 
+- [Sine](!/trigonometry/definitions#sine) — opposite over hypotenuse
+- [Cosine](!/trigonometry/definitions#cosine) — adjacent over hypotenuse
+- [Tangent](!/trigonometry/definitions#tangent) — opposite over adjacent
+- [Cosecant](!/trigonometry/definitions#cosecant) — hypotenuse over opposite
+- [Secant](!/trigonometry/definitions#secant) — hypotenuse over adjacent
+- [Cotangent](!/trigonometry/definitions#cotangent) — adjacent over opposite
+ 
+## Supporting Concepts
+ 
+- [Trigonometric Ratio](!/trigonometry/definitions#trigonometric_ratio) — a ratio of sides depending only on the angle
+- [Complementary Angles](!/trigonometry/definitions#complementary_angles) — the two acute angles sum to $90°$, producing cofunction relationships
+- [Inverse Trigonometric Function](!/trigonometry/definitions#inverse_trigonometric_function) — recovers an angle from a known side ratio`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,
+    link: '',
+  },
 
      obj1: {
     title: `Naming the Sides: Opposite, Adjacent, Hypotenuse`,
@@ -448,6 +476,15 @@ export default function RightTrianglePage({seoData,sectionsContent , introConten
 
 
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -674,8 +711,15 @@ export default function RightTrianglePage({seoData,sectionsContent , introConten
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

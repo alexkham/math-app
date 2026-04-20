@@ -8,6 +8,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
@@ -143,7 +144,19 @@ export async function getStaticProps(){
 //                   }} />
 
     const sectionsContent={
-
+   obj0: {
+    title: `Key Terms`,
+    content: `
+- [Sine](!/trigonometry/definitions#sine) — the function at the core of both laws
+- [Cosine](!/trigonometry/definitions#cosine) — appears in the Law of Cosines correction term
+- [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — angles summing to $180°$, central to the ambiguous case
+- [Inverse Trigonometric Function](!/trigonometry/definitions#inverse_trigonometric_function) — used to recover angles from computed sides`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,
+    link: '',
+  },
+ 
     
      obj1: {
     title: `Triangle Notation`,
@@ -455,6 +468,16 @@ export default function SinesCosinesLawPage({seoData,sectionsContent , introCont
 
 
   const genericSections=[
+
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -681,8 +704,15 @@ export default function SinesCosinesLawPage({seoData,sectionsContent , introCont
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

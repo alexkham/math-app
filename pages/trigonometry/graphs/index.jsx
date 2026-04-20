@@ -6,6 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
@@ -173,99 +174,27 @@ export async function getStaticProps(){
 //                   }} />
 
     const sectionsContent={
-
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-
-    // },
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-
-    // obj3:{
-
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-    // obj8:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-    // obj9:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-    // obj10:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-    // obj11:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-
-    // },
-
+    obj0: {
+    title: `Key Terms`,
+    content: `
+## Transformation Parameters
+ 
+- [Amplitude](!/trigonometry/definitions#amplitude) — maximum distance from midline to peak: $|A|$
+- [Period](!/trigonometry/definitions#period) — horizontal length of one cycle: $\\frac{2\\pi}{|B|}$
+- [Phase Shift](!/trigonometry/definitions#phase_shift) — horizontal displacement: $\\frac{C}{B}$
+- [Frequency](!/trigonometry/definitions#frequency) — cycles per unit interval: $\\frac{1}{T}$
+ 
+## Functions Being Graphed
+ 
+- [Sine](!/trigonometry/definitions#sine) — $y$-coordinate on the unit circle
+- [Cosine](!/trigonometry/definitions#cosine) — $x$-coordinate on the unit circle
+- [Tangent](!/trigonometry/definitions#tangent) — ratio of sine to cosine
+- [Periodic Function](!/trigonometry/definitions#periodic_function) — a function that repeats at regular intervals`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,
+    link: '',
+  },
 
      obj1: {
     title: `Graph of the Sine Function`,
@@ -575,6 +504,15 @@ export default function GraphsPage({seoData,sectionsContent , introContent, faqQ
 
 
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -801,8 +739,15 @@ export default function GraphsPage({seoData,sectionsContent , introContent, faqQ
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

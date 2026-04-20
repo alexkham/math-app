@@ -1,245 +1,506 @@
+// /trigonometry/definitions — Definition Data Entries
+// 33 terms across 4 categories
+// Links use verified section anchors from extract_sections_v6 output
+
+
 const trigonometryTermsList=[
-    {
-        "name": "Trigonometry",
-        "formula": "The branch of mathematics that examines the relationships between the angles and sides of triangles, primarily through trigonometric functions like sine, cosine, and tangent.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Plane angle",
-        "formula": "A geometric figure formed by two rays sharing a common endpoint, measured as the rotation from one ray (the initial side) to the other (the terminal side).",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Vertex",
-        "formula": "The common endpoint of two rays or line segments that define an angle or form a corner in a geometric figure.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Initial side",
-        "formula": "The fixed starting ray of an angle from which rotation begins to define the angle.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Terminal side",
-        "formula": "The ray that results after rotating the initial side to form an angle.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Positive angle",
-        "formula": "An angle measured counterclockwise from the initial side to the terminal side.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Negative angle",
-        "formula": "An angle measured clockwise from the initial side to the terminal side.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Degree",
-        "formula": "A unit of angular measure where one degree equals 1/360 of a complete circle.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Minute",
-        "formula": "A subunit of a degree, where one minute equals 1/60 of a degree.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Second",
-        "formula": "A subunit of a minute, where one second equals 1/60 of a minute or 1/3600 of a degree.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Radian",
-        "formula": "A measure of an angle based on the arc length of a circle, defined as the angle subtended by an arc equal in length to the radius of the circle.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Arc length",
-        "formula": "The distance along the curve of a circle, determined by the product of the circle's radius and the central angle in radians.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Central angle",
-        "formula": "An angle formed by two radii of a circle, with its vertex at the center of the circle.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Unit circle",
-        "formula": "A circle with a radius of one unit, used in trigonometry to define and evaluate trigonometric functions.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Sector",
-        "formula": "A portion of a circle bounded by two radii and the arc between them.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Area of a sector",
-        "formula": "The area of a slice of a circle, calculated as half the product of the radius squared and the central angle in radians.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Angular velocity",
-        "formula": "The rate of change of an angle over time, expressed in radians per unit time.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Linear velocity",
-        "formula": "The rate at which a point moves along the circumference of a circular path, calculated as the product of the radius and the angular velocity.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Directed line",
-        "formula": "A line with an assigned positive and negative direction, used to measure distances with sign.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Rectangular coordinate system",
-        "formula": "A two-dimensional plane defined by perpendicular horizontal and vertical axes intersecting at an origin, used to locate points using ordered pairs of numbers.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Abscissa",
-        "formula": "The horizontal coordinate of a point in a rectangular coordinate system, representing its distance from the vertical axis.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Ordinate",
-        "formula": "The vertical coordinate of a point in a rectangular coordinate system, representing its distance from the horizontal axis.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Quadrant",
-        "formula": "One of the four regions of a rectangular coordinate system, divided by the x-axis and y-axis.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Radius vector",
-        "formula": "The straight-line distance from the origin to a point in a rectangular coordinate system.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Angle in standard position",
-        "formula": "An angle with its vertex at the origin of a coordinate system and its initial side along the positive x-axis.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Coterminal angles",
-        "formula": "Angles that share the same terminal side when placed in standard position, differing by integer multiples of 360°.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Quadrantal angles",
-        "formula": "Angles whose terminal sides lie along the axes in a coordinate system, such as 0°, 90°, 180°, and 270°.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Reciprocal trigonometric functions",
-        "formula": "Functions defined as the reciprocals of the primary trigonometric functions, including cosecant (csc), secant (sec), and cotangent (cot).",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Unit circle",
-        "formula": "A circle with a radius of one, centered at the origin in a coordinate plane, used to define trigonometric functions.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Circular functions",
-        "formula": "Functions like sine and cosine defined as the coordinates of a point on the unit circle, applicable to all real numbers.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Undefined trigonometric functions",
-        "formula": "Trigonometric functions that do not have a value for specific angles due to division by zero.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Arc length on unit circle",
-        "formula": "The length of an arc on the unit circle, numerically equal to the measure of the angle in radians.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Wrapping function",
-        "formula": "A function that maps real numbers to points on the unit circle by associating arc lengths with coordinates (cos(s), sin(s)).",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Signs of trigonometric functions",
-        "formula": "The positivity or negativity of trigonometric functions in different quadrants based on the signs of x and y coordinates.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Circular angle measures",
-        "formula": "Angles measured in radians, where the arc length on the unit circle equals the angle in radians.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Domain of trigonometric functions",
-        "formula": "The set of input values (angles) for which trigonometric functions are defined.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Evaluation of trigonometric functions",
-        "formula": "Calculating specific trigonometric values for given angles using known properties, quadrants, or the unit circle.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Periodicity of trigonometric functions",
-        "formula": "A property of trigonometric functions where their values repeat at regular intervals, such as 2π for sine and cosine.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Even function",
-        "formula": "A function f(x) that satisfies f(−x) = f(x), with the graph symmetric about the y-axis; examples include cosine and secant.",
-        "fields": [],
-        "category": "Trigonometry"
-      },
-      {
-        "name": "Odd function",
-        "formula": "A function $f(x)$ that satisfies $f(−x) = −f(x)$, with the graph symmetric about the origin; examples include sine and tangent.",
-        "fields": [],
-        "category": "Trigonometry"
-      }
-  
+      // ─── ANGLES & MEASUREMENT ───────────────────────────────────────────────
+
+  {
+    id: 'angle',
+    name: 'Angle',
+    category: 'Angles & Measurement',
+    formula: `A figure formed by two rays sharing a common endpoint (vertex), representing the amount and direction of rotation from one ray to the other.`,
+    link: { url: '/trigonometry#angles', text: 'Angles' },
+    fields: {
+      intuition: `An angle measures rotation. One ray (the initial side) is fixed; the other (the terminal side) is obtained by rotating through a specified amount. The size of the rotation — not the lengths of the rays — determines the angle.`,
+      notation: `Angles are denoted by Greek letters ($\\theta$, $\\alpha$, $\\beta$, $\\phi$) or by three-point notation ($\\angle ABC$, where $B$ is the vertex). The unit of measurement is either degrees ($°$) or radians ($\\text{rad}$).`,
+      'common errors': `Confusing the angle with the arc it subtends. The angle is the rotation; the arc is the curved path traced on a circle. They are proportional but not identical.`,
+      'related concepts': `- [Degree](!/trigonometry/definitions#degree)
+- [Radian](!/trigonometry/definitions#radian)
+- [Standard Position](!/trigonometry/definitions#angle_in_standard_position)
+- [Unit Circle](!/trigonometry/definitions#unit_circle)`,
+    },
+  },
+
+  {
+    id: 'initial_side',
+    name: 'Initial Side',
+    category: 'Angles & Measurement',
+    formula: `The fixed ray from which an angle's rotation begins, lying along the positive $x$-axis when the angle is in standard position.`,
+    link: { url: '/trigonometry/degrees-radians#6', text: 'Standard Position of an Angle' },
+    fields: {
+      intuition: `The starting line. Every angle begins here and rotates away from it. In the standard coordinate setup, the initial side always points to the right along the positive $x$-axis.`,
+      'related concepts': `- [Terminal Side](!/trigonometry/definitions#terminal_side)
+- [Standard Position](!/trigonometry/definitions#angle_in_standard_position)
+- [Angle](!/trigonometry/definitions#angle)`,
+    },
+  },
+
+  {
+    id: 'terminal_side',
+    name: 'Terminal Side',
+    category: 'Angles & Measurement',
+    formula: `The ray obtained by rotating the initial side through the given angle; its position determines all trigonometric function values.`,
+    link: { url: '/trigonometry/degrees-radians#6', text: 'Standard Position of an Angle' },
+    fields: {
+      intuition: `The ending line after rotation. Where the terminal side lands on the unit circle fixes the point $(\\cos\\theta, \\sin\\theta)$ and therefore every trigonometric value of $\\theta$.`,
+      properties: `Two angles with the same terminal side are coterminal and produce identical trigonometric values regardless of how many full rotations separate them.`,
+      'related concepts': `- [Initial Side](!/trigonometry/definitions#initial_side)
+- [Coterminal Angles](!/trigonometry/definitions#coterminal_angles)
+- [Unit Circle](!/trigonometry/definitions#unit_circle)`,
+    },
+  },
+
+  {
+    id: 'positive_angle',
+    name: 'Positive Angle',
+    category: 'Angles & Measurement',
+    formula: `An angle generated by counterclockwise rotation from the initial side to the terminal side.`,
+    link: { url: '/trigonometry/degrees-radians#6', text: 'Standard Position of an Angle' },
+    fields: {
+      intuition: `Counterclockwise is the positive direction by convention. A rotation of $90°$ counterclockwise is $+90°$; the same rotation clockwise would be $-90°$.`,
+      'related concepts': `- [Negative Angle](!/trigonometry/definitions#negative_angle)
+- [Standard Position](!/trigonometry/definitions#angle_in_standard_position)
+- [Coterminal Angles](!/trigonometry/definitions#coterminal_angles)`,
+    },
+  },
+
+  {
+    id: 'negative_angle',
+    name: 'Negative Angle',
+    category: 'Angles & Measurement',
+    formula: `An angle generated by clockwise rotation from the initial side to the terminal side.`,
+    link: { url: '/trigonometry/degrees-radians#6', text: 'Standard Position of an Angle' },
+    fields: {
+      intuition: `Clockwise rotation produces a negative angle. The angles $-90°$ and $270°$ are coterminal — same terminal side, different rotation paths, different signs.`,
+      'related concepts': `- [Positive Angle](!/trigonometry/definitions#positive_angle)
+- [Standard Position](!/trigonometry/definitions#angle_in_standard_position)
+- [Coterminal Angles](!/trigonometry/definitions#coterminal_angles)`,
+    },
+  },
+
+  {
+    id: 'degree',
+    name: 'Degree',
+    category: 'Angles & Measurement',
+    formula: `A unit of angle measurement equal to $\\frac{1}{360}$ of a full rotation, denoted by the symbol $°$.`,
+    link: { url: '/trigonometry/degrees-radians#1', text: 'Degree Measurement' },
+    fields: {
+      intuition: `A full turn is $360°$, a half turn is $180°$, a quarter turn is $90°$. The number 360 persists because it is divisible by many small integers, making subdivision convenient.`,
+      notation: `Subdivisions: $1° = 60'$ (arc minutes), $1' = 60''$ (arc seconds). Modern alternative: decimal degrees (e.g., $41.41°$).`,
+      'common errors': `Using degrees in formulas that require radians — arc length $s = r\\theta$ and sector area $A = \\frac{1}{2}r^2\\theta$ hold only when $\\theta$ is in radians.`,
+      'related concepts': `- [Radian](!/trigonometry/definitions#radian)`,
+    },
+  },
+
+  {
+    id: 'radian',
+    name: 'Radian',
+    category: 'Angles & Measurement',
+    formula: `The angle subtended at the center of a circle by an arc whose length equals the radius: $\\theta = \\frac{s}{r}$.`,
+    link: { url: '/trigonometry/degrees-radians#2', text: 'Radian Measurement' },
+    fields: {
+      intuition: `A radian ties angle measurement directly to the circle. When the arc length matches the radius, the central angle is exactly one radian ($\\approx 57.3°$). A full circle has $2\\pi$ radians because the circumference is $2\\pi r$.`,
+      properties: `Dimensionless (ratio of two lengths). A full rotation is $2\\pi$. A half rotation is $\\pi$. A quarter rotation is $\\frac{\\pi}{2}$. One radian $\\approx 57.296°$.`,
+      'common errors': `Forgetting that radian measure is required for the derivative $\\frac{d}{dx}\\sin x = \\cos x$, the small-angle approximation $\\sin\\theta \\approx \\theta$, and all Taylor series expansions of trigonometric functions.`,
+      'related concepts': `- [Degree](!/trigonometry/definitions#degree)
+- [Arc Length](!/trigonometry/definitions#arc_length)`,
+    },
+  },
+
+  {
+    id: 'arc_length',
+    name: 'Arc Length',
+    category: 'Angles & Measurement',
+    formula: `The distance along a circular arc intercepted by a central angle: $s = r\\theta$, where $\\theta$ is in radians.`,
+    link: { url: '/trigonometry/degrees-radians#4', text: 'Arc Length' },
+    fields: {
+      intuition: `Wrap a string around part of a circle and straighten it — that length is the arc length. The formula $s = r\\theta$ works cleanly because radians are defined as the ratio $\\frac{s}{r}$.`,
+      examples: `A circle of radius $5$ with a central angle of $\\frac{\\pi}{3}$ radians: $s = 5 \\cdot \\frac{\\pi}{3} = \\frac{5\\pi}{3} \\approx 5.24$.`,
+      'related concepts': `- [Radian](!/trigonometry/definitions#radian)
+- [Central Angle](!/trigonometry/definitions#central_angle)
+- [Sector](!/trigonometry/definitions#sector)`,
+    },
+  },
+
+  {
+    id: 'central_angle',
+    name: 'Central Angle',
+    category: 'Angles & Measurement',
+    formula: `An angle whose vertex is at the center of a circle and whose sides are radii intercepting an arc.`,
+    link: { url: '/trigonometry/degrees-radians#2', text: 'Radian Measurement' },
+    fields: {
+      intuition: `The angle seen from the center of the circle. It directly governs both the arc length ($s = r\\theta$) and the sector area ($A = \\frac{1}{2}r^2\\theta$) of the region it carves out.`,
+      'related concepts': `- [Arc Length](!/trigonometry/definitions#arc_length)
+- [Sector](!/trigonometry/definitions#sector)
+- [Radian](!/trigonometry/definitions#radian)`,
+    },
+  },
+
+  {
+    id: 'unit_circle',
+    name: 'Unit Circle',
+    category: 'Angles & Measurement',
+    formula: `The circle of radius $1$ centered at the origin, defined by $x^2 + y^2 = 1$, whose points encode trigonometric values as coordinates.`,
+    link: { url: '/trigonometry/unit-circle#1', text: 'Definition and Equation' },
+    fields: {
+      intuition: `Setting the radius to $1$ eliminates division from the trigonometric ratios. The coordinates of the point at angle $\\theta$ become the function values directly: $x = \\cos\\theta$, $y = \\sin\\theta$.`,
+      properties: `Every point satisfies the Pythagorean identity $\\cos^2\\theta + \\sin^2\\theta = 1$. The circle provides sign information via quadrants, exact values via standard angles, and periodicity via full rotations.`,
+      'related concepts': `- [Reference Angle](!/trigonometry/definitions#reference_angle)`,
+    },
+  },
+
+  {
+    id: 'sector',
+    name: 'Sector',
+    category: 'Angles & Measurement',
+    formula: `The region enclosed by two radii and the arc between them, with area $A = \\frac{1}{2}r^2\\theta$ where $\\theta$ is in radians.`,
+    link: { url: '/trigonometry/degrees-radians#5', text: 'Sector Area' },
+    fields: {
+      intuition: `A pie-shaped slice of a circle. The sector's area is proportional to its central angle: half the circle's angle gives half the circle's area.`,
+      examples: `A sector with radius $4$ and central angle $\\frac{\\pi}{4}$: $A = \\frac{1}{2}(16)\\left(\\frac{\\pi}{4}\\right) = 2\\pi \\approx 6.28$.`,
+      'related concepts': `- [Central Angle](!/trigonometry/definitions#central_angle)
+- [Arc Length](!/trigonometry/definitions#arc_length)
+- [Radian](!/trigonometry/definitions#radian)`,
+    },
+  },
+
+  {
+    id: 'angle_in_standard_position',
+    name: 'Angle in Standard Position',
+    category: 'Angles & Measurement',
+    formula: `An angle placed on the coordinate plane with its vertex at the origin and its initial side along the positive $x$-axis.`,
+    link: { url: '/trigonometry/degrees-radians#6', text: 'Standard Position of an Angle' },
+    fields: {
+      intuition: `A universal reference frame for trigonometry. Fixing the vertex and initial side means every angle lands at a unique spot on the unit circle, making function evaluation systematic rather than case-by-case.`,
+      properties: `Counterclockwise rotation is positive; clockwise is negative. There is no restriction on magnitude — angles can exceed $360°$ or be negative.`,
+      'related concepts': `- [Initial Side](!/trigonometry/definitions#initial_side)
+- [Terminal Side](!/trigonometry/definitions#terminal_side)
+- [Coterminal Angles](!/trigonometry/definitions#coterminal_angles)`,
+    },
+  },
+
+  {
+    id: 'coterminal_angles',
+    name: 'Coterminal Angles',
+    category: 'Angles & Measurement',
+    formula: `Two angles that share the same terminal side when placed in standard position, differing by an integer multiple of $360°$ (or $2\\pi$).`,
+    link: { url: '/trigonometry/degrees-radians#7', text: 'Coterminal Angles' },
+    fields: {
+      intuition: `Different amounts of rotation that land at the same place. The angles $50°$, $410°$, and $-310°$ all point the same direction — they produce identical trigonometric values.`,
+      notation: `$\\theta$ and $\\theta + 360°n$ (or $\\theta + 2\\pi n$) are coterminal for any integer $n$.`,
+      examples: `Finding the coterminal angle of $850°$ in $[0°, 360°)$: $850 - 2(360) = 130°$.`,
+      'related concepts': `- [Angle in Standard Position](!/trigonometry/definitions#angle_in_standard_position)`,
+    },
+  },
+
+  {
+    id: 'quadrantal_angles',
+    name: 'Quadrantal Angles',
+    category: 'Angles & Measurement',
+    formula: `Angles whose terminal side lies along a coordinate axis: $0°$, $90°$, $180°$, $270°$, and their coterminal equivalents.`,
+    link: { url: '/trigonometry/unit-circle#3', text: 'Standard Position and the Terminal Side' },
+    fields: {
+      intuition: `These are the boundary angles between quadrants. The terminal side lands exactly on an axis, so one coordinate is $0$ and the other is $\\pm 1$. This makes some functions undefined (division by zero) and others take their extreme values.`,
+      properties: `At $0°$: $\\sin = 0$, $\\cos = 1$. At $90°$: $\\sin = 1$, $\\cos = 0$. At $180°$: $\\sin = 0$, $\\cos = -1$. At $270°$: $\\sin = -1$, $\\cos = 0$. Tangent and secant are undefined at $90°$ and $270°$; cotangent and cosecant are undefined at $0°$ and $180°$.`,
+      'related concepts': `- [Unit Circle](!/trigonometry/definitions#unit_circle)`,
+    },
+  },
+
+  {
+    id: 'reference_angle',
+    name: 'Reference Angle',
+    category: 'Angles & Measurement',
+    formula: `The acute angle between the terminal side of $\\theta$ and the $x$-axis, always in $[0°, 90°]$ (or $[0, \\frac{\\pi}{2}]$).`,
+    link: { url: '/trigonometry/unit-circle#5', text: 'Reference Angles' },
+    fields: {
+      intuition: `The reference angle strips away quadrant information and isolates the magnitude. Evaluate the function at the reference angle, then attach the sign dictated by the quadrant.`,
+      properties: `QI: $\\alpha = \\theta$. QII: $\\alpha = 180° - \\theta$. QIII: $\\alpha = \\theta - 180°$. QIV: $\\alpha = 360° - \\theta$. In all cases: $|\\sin\\theta| = \\sin\\alpha$ and $|\\cos\\theta| = \\cos\\alpha$.`,
+      examples: `Reference angle of $225°$: $225° - 180° = 45°$. Reference angle of $\\frac{5\\pi}{6}$: $\\pi - \\frac{5\\pi}{6} = \\frac{\\pi}{6}$.`,
+      'related concepts': `- [Unit Circle](!/trigonometry/definitions#unit_circle)`,
+    },
+  },
+
+  {
+    id: 'complementary_angles',
+    name: 'Complementary Angles',
+    category: 'Angles & Measurement',
+    formula: `Two angles whose measures sum to $90°$ (or $\\frac{\\pi}{2}$ radians).`,
+    link: { url: '/trigonometry/degrees-radians#8', text: 'Complementary and Supplementary Angles' },
+    fields: {
+      intuition: `In a right triangle, the two acute angles are always complementary. The word "co-" in cosine, cotangent, and cosecant comes from "complement" — each is the cofunction of its complement.`,
+      properties: `If $\\alpha + \\beta = 90°$, then $\\sin\\alpha = \\cos\\beta$, $\\tan\\alpha = \\cot\\beta$, and $\\sec\\alpha = \\csc\\beta$.`,
+      examples: `$30°$ and $60°$ are complementary: $\\sin 30° = \\frac{1}{2} = \\cos 60°$.`,
+      'related concepts': `- [Supplementary Angles](!/trigonometry/definitions#supplementary_angles)`,
+    },
+  },
+
+  {
+    id: 'supplementary_angles',
+    name: 'Supplementary Angles',
+    category: 'Angles & Measurement',
+    formula: `Two angles whose measures sum to $180°$ (or $\\pi$ radians).`,
+    link: { url: '/trigonometry/degrees-radians#8', text: 'Complementary and Supplementary Angles' },
+    fields: {
+      intuition: `Supplementary angles share the same sine but have opposite cosines: $\\sin\\theta = \\sin(180° - \\theta)$ and $\\cos\\theta = -\\cos(180° - \\theta)$. This is because their terminal sides are reflections across the $y$-axis on the unit circle.`,
+      properties: `If $\\alpha + \\beta = 180°$, then $\\sin\\alpha = \\sin\\beta$ and $\\cos\\alpha = -\\cos\\beta$.`,
+      examples: `$40°$ and $140°$ are supplementary: $\\sin 40° = \\sin 140°$, $\\cos 40° = -\\cos 140°$.`,
+      'related concepts': `- [Complementary Angles](!/trigonometry/definitions#complementary_angles)`,
+    },
+  },
+
+  // ─── FUNCTIONS ──────────────────────────────────────────────────────────
+
+  {
+    id: 'sine',
+    name: 'Sine',
+    category: 'Functions',
+    formula: `The trigonometric function that maps an angle $\\theta$ to the $y$-coordinate of the corresponding point on the unit circle: $\\sin\\theta = y$.`,
+    link: { url: '/trigonometry/functions#1', text: 'The Sine Function' },
+    fields: {
+      properties: `Domain: all real numbers. Range: $[-1, 1]$. Period: $2\\pi$. Odd function: $\\sin(-\\theta) = -\\sin\\theta$. Zeros at $\\theta = n\\pi$.`,
+      notation: `In a right triangle: $\\sin\\theta = \\frac{\\text{opposite}}{\\text{hypotenuse}}$ (SOH).`,
+      'related concepts': `- [Cosine](!/trigonometry/definitions#cosine)
+- [Tangent](!/trigonometry/definitions#tangent)
+- [Cosecant](!/trigonometry/definitions#cosecant)
+- [Secant](!/trigonometry/definitions#secant)
+- [Cotangent](!/trigonometry/definitions#cotangent)`,
+    },
+  },
+
+  {
+    id: 'cosine',
+    name: 'Cosine',
+    category: 'Functions',
+    formula: `The trigonometric function that maps an angle $\\theta$ to the $x$-coordinate of the corresponding point on the unit circle: $\\cos\\theta = x$.`,
+    link: { url: '/trigonometry/functions#2', text: 'The Cosine Function' },
+    fields: {
+      properties: `Domain: all real numbers. Range: $[-1, 1]$. Period: $2\\pi$. Even function: $\\cos(-\\theta) = \\cos\\theta$. Zeros at $\\theta = \\frac{\\pi}{2} + n\\pi$.`,
+      notation: `In a right triangle: $\\cos\\theta = \\frac{\\text{adjacent}}{\\text{hypotenuse}}$ (CAH). Phase relationship: $\\cos\\theta = \\sin\\left(\\theta + \\frac{\\pi}{2}\\right)$.`,
+      'related concepts': `- [Sine](!/trigonometry/definitions#sine)
+- [Tangent](!/trigonometry/definitions#tangent)
+- [Cosecant](!/trigonometry/definitions#cosecant)
+- [Secant](!/trigonometry/definitions#secant)
+- [Cotangent](!/trigonometry/definitions#cotangent)`,
+    },
+  },
+
+  {
+    id: 'tangent',
+    name: 'Tangent',
+    category: 'Functions',
+    formula: `The ratio of sine to cosine: $\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta} = \\frac{y}{x}$, geometrically the slope of the terminal side.`,
+    link: { url: '/trigonometry/functions#3', text: 'The Tangent Function' },
+    fields: {
+      properties: `Domain: all reals except $\\frac{\\pi}{2} + n\\pi$. Range: $(-\\infty, \\infty)$. Period: $\\pi$. Odd function. Strictly increasing on each period interval.`,
+      notation: `In a right triangle: $\\tan\\theta = \\frac{\\text{opposite}}{\\text{adjacent}}$ (TOA).`,
+      'related concepts': `- [Sine](!/trigonometry/definitions#sine)
+- [Cosine](!/trigonometry/definitions#cosine)
+- [Cotangent](!/trigonometry/definitions#cotangent)`,
+    },
+  },
+
+  {
+    id: 'cosecant',
+    name: 'Cosecant',
+    category: 'Functions',
+    formula: `The reciprocal of sine: $\\csc\\theta = \\frac{1}{\\sin\\theta}$.`,
+    link: { url: '/trigonometry/functions#4', text: 'The Cosecant Function' },
+    fields: {
+      properties: `Domain: all reals except $n\\pi$. Range: $(-\\infty, -1] \\cup [1, \\infty)$. Period: $2\\pi$. Odd function. Undefined where $\\sin\\theta = 0$.`,
+      notation: `In a right triangle: $\\csc\\theta = \\frac{\\text{hypotenuse}}{\\text{opposite}}$.`,
+      'related concepts': `- [Sine](!/trigonometry/definitions#sine)
+- [Cosine](!/trigonometry/definitions#cosine)
+- [Secant](!/trigonometry/definitions#secant)
+- [Cotangent](!/trigonometry/definitions#cotangent)`,
+    },
+  },
+
+  {
+    id: 'secant',
+    name: 'Secant',
+    category: 'Functions',
+    formula: `The reciprocal of cosine: $\\sec\\theta = \\frac{1}{\\cos\\theta}$.`,
+    link: { url: '/trigonometry/functions#5', text: 'The Secant Function' },
+    fields: {
+      properties: `Domain: all reals except $\\frac{\\pi}{2} + n\\pi$. Range: $(-\\infty, -1] \\cup [1, \\infty]$. Period: $2\\pi$. Even function. Undefined where $\\cos\\theta = 0$.`,
+      notation: `In a right triangle: $\\sec\\theta = \\frac{\\text{hypotenuse}}{\\text{adjacent}}$.`,
+      'related concepts': `- [Sine](!/trigonometry/definitions#sine)
+- [Cosine](!/trigonometry/definitions#cosine)
+- [Cosecant](!/trigonometry/definitions#cosecant)
+- [Cotangent](!/trigonometry/definitions#cotangent)`,
+    },
+  },
+
+  {
+    id: 'cotangent',
+    name: 'Cotangent',
+    category: 'Functions',
+    formula: `The reciprocal of tangent, equivalently the ratio of cosine to sine: $\\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta}$.`,
+    link: { url: '/trigonometry/functions#6', text: 'The Cotangent Function' },
+    fields: {
+      properties: `Domain: all reals except $n\\pi$. Range: $(-\\infty, \\infty)$. Period: $\\pi$. Odd function. Strictly decreasing on each period interval — the opposite of tangent.`,
+      notation: `In a right triangle: $\\cot\\theta = \\frac{\\text{adjacent}}{\\text{opposite}}$. Cofunction relationship: $\\cot\\theta = \\tan\\left(\\frac{\\pi}{2} - \\theta\\right)$.`,
+      'related concepts': `- [Sine](!/trigonometry/definitions#sine)
+- [Cosine](!/trigonometry/definitions#cosine)
+- [Tangent](!/trigonometry/definitions#tangent)
+- [Cosecant](!/trigonometry/definitions#cosecant)
+- [Secant](!/trigonometry/definitions#secant)`,
+    },
+  },
+
+  {
+    id: 'trigonometric_ratio',
+    name: 'Trigonometric Ratio',
+    category: 'Functions',
+    formula: `A ratio of two sides of a right triangle relative to one of its acute angles, defining the six trigonometric functions geometrically.`,
+    link: { url: '/trigonometry/right-triangle#2', text: 'Defining Sine, Cosine, and Tangent' },
+    fields: {
+      intuition: `The central insight: these ratios depend only on the angle, not on the triangle's size. All right triangles sharing the same acute angle are similar, so their side ratios are identical. This makes the ratio a property of the angle alone.`,
+      properties: `Three primary ratios (sin, cos, tan) and three reciprocals (csc, sec, cot). For acute angles, $0 < \\sin\\theta < 1$ and $0 < \\cos\\theta < 1$, while $\\tan\\theta$ can be any positive value.`,
+      'common errors': `Mislabeling opposite and adjacent sides. These names are relative to the chosen angle — swapping the reference angle swaps which side is which.`,
+      'related concepts': `- [Sine](!/trigonometry/definitions#sine)
+- [Cosine](!/trigonometry/definitions#cosine)
+- [Tangent](!/trigonometry/definitions#tangent)`,
+    },
+  },
+
+  {
+    id: 'periodic_function',
+    name: 'Periodic Function',
+    category: 'Functions',
+    formula: `A function $f$ for which there exists a positive constant $T$ such that $f(x + T) = f(x)$ for all $x$ in the domain. The smallest such $T$ is the fundamental period.`,
+    link: { url: '/trigonometry/properties#1', text: 'Periodicity' },
+    fields: {
+      intuition: `The function repeats its values at regular intervals. Once you know the behavior over one period, you know it everywhere. All six trigonometric functions are periodic.`,
+      properties: `Sine, cosine, cosecant, secant: period $2\\pi$. Tangent, cotangent: period $\\pi$. For transformed functions $f(Bx)$: the period becomes $\\frac{T}{|B|}$.`,
+      'related concepts': `- [Period](!/trigonometry/definitions#period)
+- [Coterminal Angles](!/trigonometry/definitions#coterminal_angles)`,
+    },
+  },
+
+  {
+    id: 'inverse_trigonometric_function',
+    name: 'Inverse Trigonometric Function',
+    category: 'Functions',
+    formula: `A function that reverses a trigonometric function on a restricted domain, returning the angle whose trigonometric value is the given input.`,
+    link: { url: '/trigonometry/inverse-functions#1', text: 'Why Restriction Is Necessary' },
+    fields: {
+      intuition: `Trigonometric functions are periodic, so they fail the horizontal line test on their full domains. By restricting each to an interval where it is one-to-one (monotonic), an inverse can be defined that returns a unique angle.`,
+      properties: `$\\arcsin$: domain $[-1,1]$, range $[-\\frac{\\pi}{2}, \\frac{\\pi}{2}]$. $\\arccos$: domain $[-1,1]$, range $[0, \\pi]$. $\\arctan$: domain $(-\\infty,\\infty)$, range $(-\\frac{\\pi}{2}, \\frac{\\pi}{2}]$.`,
+      'common errors': `Confusing $\\sin^{-1}(x)$ (inverse function, returns an angle) with $\\frac{1}{\\sin(x)}$ (reciprocal, equals $\\csc(x)$). The notation $\\arcsin$ avoids this ambiguity.`,
+      'related concepts': `- [Sine](!/trigonometry/definitions#sine)
+- [Cosine](!/trigonometry/definitions#cosine)
+- [Tangent](!/trigonometry/definitions#tangent)`,
+    },
+  },
+
+  // ─── RIGHT TRIANGLE ─────────────────────────────────────────────────────
+
+  {
+    id: 'hypotenuse',
+    name: 'Hypotenuse',
+    category: 'Right Triangle',
+    formula: `The side of a right triangle opposite the right angle — always the longest side.`,
+    link: { url: '/trigonometry/right-triangle#1', text: 'Naming the Sides: Opposite, Adjacent, Hypotenuse' },
+    fields: {
+      intuition: `The hypotenuse is fixed by the right angle, not by the acute angle under consideration. While "opposite" and "adjacent" swap depending on which acute angle is chosen, the hypotenuse stays the same.`,
+      properties: `Always longer than either leg. In a triangle with legs $a$ and $b$: $c = \\sqrt{a^2 + b^2}$. On the unit circle, the hypotenuse (radius) is $1$, which is why $\\sin\\theta$ and $\\cos\\theta$ equal the legs directly.`,
+      'related concepts': `- [Adjacent Side](!/trigonometry/definitions#adjacent_side)
+- [Opposite Side](!/trigonometry/definitions#opposite_side)
+- [Trigonometric Ratio](!/trigonometry/definitions#trigonometric_ratio)`,
+    },
+  },
+
+  {
+    id: 'adjacent_side',
+    name: 'Adjacent Side',
+    category: 'Right Triangle',
+    formula: `The leg of a right triangle that forms one ray of the acute angle under consideration (the other ray being the hypotenuse).`,
+    link: { url: '/trigonometry/right-triangle#1', text: 'Naming the Sides: Opposite, Adjacent, Hypotenuse' },
+    fields: {
+      intuition: `"Adjacent" means next to. This leg touches the angle directly — it sits alongside the angle together with the hypotenuse. The adjacent side for one acute angle is the opposite side for the other.`,
+      notation: `Appears in: $\\cos\\theta = \\frac{\\text{adjacent}}{\\text{hypotenuse}}$, $\\tan\\theta = \\frac{\\text{opposite}}{\\text{adjacent}}$, $\\sec\\theta = \\frac{\\text{hypotenuse}}{\\text{adjacent}}$, $\\cot\\theta = \\frac{\\text{adjacent}}{\\text{opposite}}$.`,
+      'related concepts': `- [Hypotenuse](!/trigonometry/definitions#hypotenuse)
+- [Opposite Side](!/trigonometry/definitions#opposite_side)
+- [Trigonometric Ratio](!/trigonometry/definitions#trigonometric_ratio)`,
+    },
+  },
+
+  {
+    id: 'opposite_side',
+    name: 'Opposite Side',
+    category: 'Right Triangle',
+    formula: `The leg of a right triangle that lies directly across from the acute angle under consideration, not touching it.`,
+    link: { url: '/trigonometry/right-triangle#1', text: 'Naming the Sides: Opposite, Adjacent, Hypotenuse' },
+    fields: {
+      intuition: `"Opposite" means across from. This leg does not touch the angle — it faces it from the far side of the triangle. Which side is "opposite" depends entirely on which acute angle is the reference.`,
+      notation: `Appears in: $\\sin\\theta = \\frac{\\text{opposite}}{\\text{hypotenuse}}$, $\\tan\\theta = \\frac{\\text{opposite}}{\\text{adjacent}}$, $\\csc\\theta = \\frac{\\text{hypotenuse}}{\\text{opposite}}$, $\\cot\\theta = \\frac{\\text{adjacent}}{\\text{opposite}}$.`,
+      'related concepts': `- [Hypotenuse](!/trigonometry/definitions#hypotenuse)
+- [Adjacent Side](!/trigonometry/definitions#adjacent_side)
+- [Trigonometric Ratio](!/trigonometry/definitions#trigonometric_ratio)`,
+    },
+  },
+
+  // ─── GRAPHS ─────────────────────────────────────────────────────────────
+
+  {
+    id: 'amplitude',
+    name: 'Amplitude',
+    category: 'Graphs',
+    formula: `The maximum vertical distance from the midline to a peak (or valley) of a sinusoidal function: for $y = A\\sin(Bx - C) + D$, the amplitude is $|A|$.`,
+    link: { url: '/trigonometry/graphs#6', text: 'Amplitude' },
+    fields: {
+      intuition: `Amplitude controls the height of the wave. A larger $|A|$ stretches the wave vertically; a smaller $|A|$ compresses it. The function oscillates between $D - |A|$ and $D + |A|$.`,
+      properties: `Always non-negative ($|A|$). When $A < 0$, the wave is inverted (reflected across the midline) but the amplitude is still $|A|$. Applies only to bounded functions — tangent and cotangent have no amplitude.`,
+      examples: `$y = 3\\sin(x)$: amplitude $3$, range $[-3, 3]$. $y = -2\\cos(x) + 1$: amplitude $2$, range $[-1, 3]$.`,
+      'related concepts': `- [Period](!/trigonometry/definitions#period)`,
+    },
+  },
+
+  {
+    id: 'period',
+    name: 'Period',
+    category: 'Graphs',
+    formula: `The horizontal length of one complete cycle of a periodic function: for $y = A\\sin(Bx - C) + D$, the period is $T = \\frac{2\\pi}{|B|}$.`,
+    link: { url: '/trigonometry/graphs#7', text: 'Period' },
+    fields: {
+      intuition: `The period tells you how wide one wave is. A larger $|B|$ compresses the wave horizontally (shorter period, faster oscillation); a smaller $|B|$ stretches it (longer period, slower oscillation).`,
+      properties: `Unmodified sine and cosine: $T = 2\\pi$. Tangent and cotangent: $T = \\frac{\\pi}{|B|}$. The coefficient $B$ is recovered from a known period by $B = \\frac{2\\pi}{T}$.`,
+      examples: `$y = \\sin(2x)$: period $\\pi$. $y = \\cos\\left(\\frac{x}{3}\\right)$: period $6\\pi$. $y = \\tan(4x)$: period $\\frac{\\pi}{4}$.`,
+      'related concepts': `- [Amplitude](!/trigonometry/definitions#amplitude)
+- [Frequency](!/trigonometry/definitions#frequency)`,
+    },
+  },
+
+  {
+    id: 'phase_shift',
+    name: 'Phase Shift',
+    category: 'Graphs',
+    formula: `The horizontal displacement of a sinusoidal graph from its standard starting position: for $y = A\\sin(Bx - C) + D$, the phase shift is $\\frac{C}{B}$.`,
+    link: { url: '/trigonometry/graphs#8', text: 'Phase Shift' },
+    fields: {
+      intuition: `Phase shift slides the wave left or right. Positive $\\frac{C}{B}$ shifts right; negative shifts left. The "standard" cycle begins at $x = \\frac{C}{B}$ instead of at $x = 0$.`,
+      'common errors': `Reading $C$ directly as the shift without dividing by $B$. In $y = \\sin(2x - \\pi)$, the phase shift is $\\frac{\\pi}{2}$, not $\\pi$. Factor the argument as $2(x - \\frac{\\pi}{2})$ to see the shift clearly.`,
+      examples: `$\\cos(x) = \\sin(x + \\frac{\\pi}{2})$: cosine is sine shifted $\\frac{\\pi}{2}$ left.`,
+      'related concepts': `- [Period](!/trigonometry/definitions#period)`,
+    },
+  },
+
+  {
+    id: 'frequency',
+    name: 'Frequency',
+    category: 'Graphs',
+    formula: `The number of complete cycles a periodic function completes per unit interval, equal to the reciprocal of the period: $f = \\frac{1}{T} = \\frac{|B|}{2\\pi}$.`,
+    link: { url: '/trigonometry/graphs#7', text: 'Period' },
+    fields: {
+      intuition: `Period measures how long one cycle takes; frequency measures how many cycles fit in a fixed interval. Higher frequency means faster oscillation and shorter period.`,
+      properties: `$f = \\frac{1}{T}$. For $y = A\\sin(Bx)$: $f = \\frac{|B|}{2\\pi}$. Doubling $B$ doubles the frequency and halves the period.`,
+      'related concepts': `- [Period](!/trigonometry/definitions#period)`,
+    },
+  },
+
 
 
 

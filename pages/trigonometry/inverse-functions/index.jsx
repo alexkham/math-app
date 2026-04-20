@@ -7,6 +7,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
@@ -144,7 +145,19 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-   
+   obj0: {
+    title: `Key Terms`,
+    content: `
+- [Inverse Trigonometric Function](!/trigonometry/definitions#inverse_trigonometric_function) — returns the angle for a given trigonometric value
+- [Sine](!/trigonometry/definitions#sine) — $y$-coordinate on the unit circle, restricted to $[-\\frac{\\pi}{2}, \\frac{\\pi}{2}]$ for inversion
+- [Cosine](!/trigonometry/definitions#cosine) — $x$-coordinate on the unit circle, restricted to $[0, \\pi]$ for inversion
+- [Tangent](!/trigonometry/definitions#tangent) — ratio of sine to cosine, restricted to $(-\\frac{\\pi}{2}, \\frac{\\pi}{2})$ for inversion
+- [Trigonometric Ratio](!/trigonometry/definitions#trigonometric_ratio) — the right-triangle ratios that inverse functions reverse`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,
+    link: '',
+  },
 
 
      obj1: {
@@ -470,6 +483,15 @@ export default function InverseFunctionsPage({seoData,sectionsContent , introCon
 
 
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -696,8 +718,15 @@ export default function InverseFunctionsPage({seoData,sectionsContent , introCon
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

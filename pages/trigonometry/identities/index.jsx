@@ -6,6 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export async function getStaticProps(){
 
@@ -15,6 +16,27 @@ export async function getStaticProps(){
   ]
 
   const sectionsContent={
+    obj0: {
+    title: `Key Terms`,
+    content: `
+## Functions
+ 
+- [Sine](!/trigonometry/definitions#sine) — $y$-coordinate on the unit circle
+- [Cosine](!/trigonometry/definitions#cosine) — $x$-coordinate on the unit circle
+- [Tangent](!/trigonometry/definitions#tangent) — ratio $\\frac{\\sin\\theta}{\\cos\\theta}$
+- [Cosecant](!/trigonometry/definitions#cosecant) — reciprocal of sine
+- [Secant](!/trigonometry/definitions#secant) — reciprocal of cosine
+- [Cotangent](!/trigonometry/definitions#cotangent) — reciprocal of tangent
+ 
+## Angle Relationships
+ 
+- [Complementary Angles](!/trigonometry/definitions#complementary_angles) — two angles summing to $90°$, the basis of cofunction identities
+- [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — two angles summing to $180°$`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,
+    link: '',
+  },
     definition:{
       title:'Definition-based Identities',
       before: `Definition-based identities derive from the fundamental relationships between trigonometric functions based on their right-triangle definitions.
@@ -827,6 +849,15 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
  
 
   const identitiesSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
 
     {
       id:'definition',
@@ -1227,16 +1258,16 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
   textColor="#34383c"
 />
     <br/>
+      <KeyTermsCard
+      id="0"
+      title={sectionsContent.obj0.title}
+      content={sectionsContent.obj0.content}
+      after={sectionsContent.obj0.after}
+      variant="light"
+    />
     <br/>
-    <Sections sections={identitiesSections}/>
-    {/* <h1>Reciprocal</h1> */}
-    {/* <DataWrapper2 data={reciprocalId}/> */}
-    {/* <div style={{marginLeft:'200px',marginRight:'200px'}}>
-    <ExpandableTable data={trigIdentitiesData["Reciprocal Identities"]}
-     displayColumns={ ["law", "formula", "explanation"]}
-     copyableFields={["formula"]}
-     includedFields={ ["law", "formula", "explanation"]} />
-     </div> */}
+    <Sections sections={identitiesSections.slice(1)}/>
+   
     <br/>
     <br/>
     {/* <ScrollUpButton/> */}

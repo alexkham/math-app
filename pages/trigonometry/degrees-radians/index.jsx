@@ -5,6 +5,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '../../pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
@@ -172,6 +173,39 @@ export async function getStaticProps(){
 //                   }} />
 
     const sectionsContent={
+      obj0: {
+    title: `Key Terms`,
+    content: `
+## Units
+ 
+- [Degree](!/trigonometry/definitions#degree) — $\\frac{1}{360}$ of a full rotation
+- [Radian](!/trigonometry/definitions#radian) — the angle subtended by an arc equal in length to the radius
+ 
+## Angle Anatomy
+ 
+- [Angle](!/trigonometry/definitions#angle) — rotation between two rays sharing a common endpoint
+- [Initial Side](!/trigonometry/definitions#initial_side) — the fixed starting ray
+- [Terminal Side](!/trigonometry/definitions#terminal_side) — the ray after rotation
+- [Positive Angle](!/trigonometry/definitions#positive_angle) — counterclockwise rotation
+- [Negative Angle](!/trigonometry/definitions#negative_angle) — clockwise rotation
+- [Standard Position](!/trigonometry/definitions#angle_in_standard_position) — vertex at origin, initial side on positive $x$-axis
+ 
+## Circle Measurements
+ 
+- [Arc Length](!/trigonometry/definitions#arc_length) — distance along a circular arc: $s = r\\theta$
+- [Central Angle](!/trigonometry/definitions#central_angle) — an angle with vertex at the center of a circle
+- [Sector](!/trigonometry/definitions#sector) — region between two radii and their arc
+ 
+## Angle Relationships
+ 
+- [Coterminal Angles](!/trigonometry/definitions#coterminal_angles) — angles that share the same terminal side
+- [Complementary Angles](!/trigonometry/definitions#complementary_angles) — two angles summing to $90°$
+- [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — two angles summing to $180°$`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,
+    link: '',
+  },
 
    
 
@@ -411,6 +445,15 @@ export default function DegreesRadiansPage({seoData,sectionsContent , introConte
 
 
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -637,8 +680,15 @@ export default function DegreesRadiansPage({seoData,sectionsContent , introConte
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>
