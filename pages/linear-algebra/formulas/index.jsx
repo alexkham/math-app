@@ -115,7 +115,7 @@ export default function LinearAlgebraFormulasPage({
 
       <Breadcrumb/>
       <main>
-        <h1 className='title' style={{marginTop:'-20px',marginBottom:'-10px'}}>
+        <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>
           Linear Algebra Formulas
         </h1>
         <FormulasTOC data={linearAlgebraFormulasList} />

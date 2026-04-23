@@ -115,6 +115,7 @@
   .sectionsContainer {
     margin: 0;
     padding: 80px 15px 15px;
+   
   }
  
   .sectionNavigation {
@@ -138,4 +139,5 @@
 
  .section {
   scroll-padding-top: 150px; /* Adjust to your header height */
+  width: 100%;
 }
