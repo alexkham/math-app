@@ -1202,7 +1202,6 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
   <title>Trigonometric Identities: Complete Guide with Formulas | LearnMathClass</title>
   <meta name="description" content="Master trigonometric identities with our comprehensive guide. Learn Pythagorean, angle sum, double angle, and all essential trig identities with formulas and explanations." />
   <meta name="keywords" content="trigonometric identities, trig identities, trigonometry, verifying trig identities, simplifying trig identities, proving trigonometric identities" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta charset="utf-8" />
 
   {/* Canonical URL */}

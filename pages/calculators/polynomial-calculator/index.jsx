@@ -110,7 +110,6 @@ export default function PolynomialCalculatorPage({ keyWords, instructions,operat
         <title>Polynomial Calculator | Math Calculator</title>
         <meta name="description" content="Free online polynomial calculator. Add and subtract polynomials easily, step by step solution, random polynomial generator." />
         <meta name="keywords" content={keyWords.join(', ')} />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="canonical" href="https://www.learnmathclass.com/calculators/polynomial-calculator" />
 
         {/* Open Graph metadata */}

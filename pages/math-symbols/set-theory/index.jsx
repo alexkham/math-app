@@ -16,7 +16,6 @@ export default function MathSymbolsSetTheoryPage({ symbolsData, meta,menuItems})
         <meta name="description" content={meta.description} />
         <meta name="keywords" content={meta.keywords.join(', ')} />
         <meta name="author" content={meta.author} />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="canonical" href={meta.canonical} />
       </Head>
       {/* <GenericNavbar /> */}

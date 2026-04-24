@@ -34,39 +34,55 @@
    /* components/Breadcrumb.module.css */
 .breadcrumb {
     display: flex;
+    flex-wrap: wrap;
     list-style: none;
     padding: 10px 20px;
    background: none;
     border-radius: 5px;
     margin-bottom: -10px;
+    row-gap: 4px;
   }
-  
+
   .breadcrumb-item {
     margin-right: 10px;
   }
-  
+
   .breadcrumb-item a {
     text-decoration: none;
     color: #007bff;
     font-weight: bold;
   }
-  
-  .breadcrumb-item a:hover {
+
+  .breadcrumb-item a:hover,
+  .breadcrumb-item a:focus-visible {
     text-decoration: underline;
   }
-  
+
   .breadcrumb-item::after {
     content: '/';
     margin-left: 10px;
     color: #6c757d;
   }
-  
+
   .breadcrumb-item:last-child::after {
     content: '';
   }
-  
+
   .breadcrumb-item.active {
     color: #6c757d;
     font-weight: normal;
+  }
+
+  @media (max-width: 767px) {
+    .breadcrumb {
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+    .breadcrumb-item {
+      margin-right: 6px;
+    }
+    .breadcrumb-item::after {
+      margin-left: 6px;
+    }
   }
   

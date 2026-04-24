@@ -455,7 +455,6 @@ export default function TautologyPage({tautologies ,introContent ,sectionsConten
   <title>Tautology in Propositional Logic | Learn Math Class</title>
   <meta name="description" content="Learn about tautologies in propositional logic. Understand definitions, examples, and relationships with contradictions and logical equivalences." />
   <meta name="keywords" content={keyWords.join(', ')} />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="canonical" href="https://www.learnmathclass.com/logic/propositional-logic/semantics/tautology" />
   
   <meta property="og:type" content="article" />

@@ -11,7 +11,6 @@ export default function CombinatoricsFormulasPage({ combinatoricsFormulaList, ke
         <title>Combinatorics Formulas | Learn Math Class</title>
         <meta name="description" content="Explore comprehensive combinatorics formulas including permutations and combinations." />
         <meta name="keywords" content={keyWords.join(', ')} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href="https://www.learnmathclass.com/combinatorics/formulas" />
         <meta name="author" content="Learn Math Class" />
         <meta name="robots" content="index, follow" />

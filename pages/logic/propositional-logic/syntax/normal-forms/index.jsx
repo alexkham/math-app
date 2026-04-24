@@ -25,7 +25,6 @@ export default function NormalFormsPage({dnfExplanations, cnfExplanations, title
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content="https://www.learnmathclass.com/images/normal-forms-og.jpg" />
         <link rel="canonical" href={canonicalUrl} />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",

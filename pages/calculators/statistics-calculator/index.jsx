@@ -13,7 +13,6 @@ export default function StatisticsCalculatorPage({ explanations,menuItems }) {
     <title>Statistics Calculator | Free Online Math Tool | Learn Math Class</title>
     <meta name="description" content="Master statistics with our free online calculator at Learn Math Class. Ideal for students and educators. Covers descriptive stats, probability, hypothesis testing, and more. Enhance your math skills today!" />
     <meta name="keywords" content="statistics calculator, math learning tool, online statistics, Learn Math Class, probability calculator, descriptive statistics, hypothesis testing, math education" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:title" content="Free Statistics Calculator | Learn Math Class" />
     <meta property="og:description" content="Boost your math skills with our comprehensive online statistics calculator. Free, easy-to-use, and perfect for students and teachers." />
     <meta property="og:type" content="website" />

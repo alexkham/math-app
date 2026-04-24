@@ -5,6 +5,8 @@ import Link from 'next/link';
 import navThemes from './navThemes';
 import { mainMenuStructure } from './mainMenu';
 import SearchBar2 from '../nav-bar2/SearchBar2';
+import { useMediaQuery } from '@/app/hooks/useMediaQuery';
+import { mediaQuery } from '@/app/lib/breakpoints';
 
 function ChevronDown({ style = {} }) {
   const { width = 16, height = 16, ...restStyle } = style;
@@ -53,7 +55,8 @@ function MyNavbar3({
   searchComponent = <SearchBar2 width="200px" />
 }) {
   const theme = navThemes[themeName] || navThemes.white;
-  
+  const isMobile = useMediaQuery(mediaQuery.tabletDown);
+
   const [isNavActive, setIsNavActive] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState(null);
@@ -583,30 +586,51 @@ function MyNavbar3({
         maxWidth: '1400px',
         height: '60px',
         margin: '0 auto',
-        padding: '0 40px',
+        padding: isMobile ? '0 16px' : '0 40px',
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: isMobile ? 'flex-start' : 'center',
         alignItems: 'center',
         position: 'relative',
       }}>
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMobileMenuOpen}
           style={{
-            display: 'none',
+            display: isMobile ? 'flex' : 'none',
+            alignItems: 'center',
+            justifyContent: 'center',
             background: 'none',
             border: 'none',
             fontSize: '24px',
-            padding: '8px',
+            padding: '10px',
+            minWidth: '44px',
+            minHeight: '44px',
             cursor: 'pointer',
             color: 'white',
-            position: 'absolute',
-            left: '20px',
           }}
         >
           {isMobileMenuOpen ? '✕' : '☰'}
         </button>
 
-        <ul style={{
+        <ul style={isMobile ? {
+          display: isMobileMenuOpen ? 'flex' : 'none',
+          flexDirection: 'column',
+          alignItems: 'stretch',
+          listStyle: 'none',
+          gap: '0',
+          position: 'fixed',
+          top: '60px',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: '#4d4dff',
+          padding: '8px 0 24px',
+          margin: 0,
+          overflowY: 'auto',
+          height: 'auto',
+          zIndex: 9999,
+        } : {
           display: 'flex',
           alignItems: 'center',
           listStyle: 'none',

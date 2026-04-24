@@ -1,11 +1,15 @@
 
+'use client';
 import React from 'react';
 import Link from 'next/link';
 import { footerThemes } from './footerThemes';
 import { mainMenuStructure } from '../../nav-bar3/mainMenu';
+import { useMediaQuery } from '@/app/hooks/useMediaQuery';
+import { mediaQuery } from '@/app/lib/breakpoints';
 
 function Footer({ themeName = 'darkGray' }) {
   const theme = footerThemes[themeName] || footerThemes.darkGray;
+  const isMobile = useMediaQuery(mediaQuery.tabletDown);
 
   // Extract navigation sections from mainMenuStructure
   const getFooterSections = () => {
@@ -57,26 +61,26 @@ function Footer({ themeName = 'darkGray' }) {
   return (
     <footer style={{
       background: theme.background,
-      
+
       color: theme.textColor,
-      padding: '50px 40px 30px',
+      padding: isMobile ? '30px 16px 20px' : '50px 40px 30px',
       boxShadow: theme.boxShadow || 'none',
     }}>
       <div style={{
         display: 'grid',
-        gridTemplateColumns: '1fr 2fr',
-        gap: '60px',
+        gridTemplateColumns: isMobile ? '1fr' : '1fr 2fr',
+        gap: isMobile ? '24px' : '60px',
         maxWidth: '1200px',
         margin: '0 auto 30px',
       }}>
         {/* Brand Section */}
         <div style={{
-          paddingRight: '40px',
-          paddingLeft:'100px'
+          paddingRight: isMobile ? 0 : '40px',
+          paddingLeft: isMobile ? 0 : '100px'
         }}>
           <h2 style={{
             color: theme.brandTitle,
-            fontSize: '24px',
+            fontSize: isMobile ? '20px' : '24px',
             margin: '0 0 15px 0',
           }}>
             Learn Math Class
@@ -94,8 +98,8 @@ function Footer({ themeName = 'darkGray' }) {
         {/* Link Columns !!!*/}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '30px',
+          gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(3, 1fr)',
+          gap: isMobile ? '20px' : '30px',
         }}>
           {/* Topics Column */}
           <div>

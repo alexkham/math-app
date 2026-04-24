@@ -137,10 +137,12 @@
 
 'use client';
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import { X, Menu } from 'lucide-react';
 import styles from './OperaSidebar.module.css';
 import { mainSidebarMenu } from './mainSidebarMenu';
 import { normalizeUrl } from '@/app/utils/url-utils';
+import { useMediaQuery } from '@/app/hooks/useMediaQuery';
+import { mediaQuery } from '@/app/lib/breakpoints';
 
 export default function OperaSidebar({
   topOffset = '55px',
@@ -153,6 +155,9 @@ export default function OperaSidebar({
   side = 'left'
 }) {
   const [activeItem, setActiveItem] = useState(null);
+  const isMobile = useMediaQuery(mediaQuery.tabletDown);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const sidebarVisible = !isMobile || mobileOpen;
 
   const handleClose = () => {
     setActiveItem(null);
@@ -205,7 +210,9 @@ export default function OperaSidebar({
     top: topOffset,
     width: sidebarWidth,
     backgroundColor,
-    [side]: 0
+    [side]: 0,
+    transform: sidebarVisible ? 'translateX(0)' : `translateX(${side === 'left' ? '-100%' : '100%'})`,
+    transition: 'transform 0.25s ease',
   };
 
   const panelStyle = {
@@ -236,7 +243,37 @@ export default function OperaSidebar({
 
   return (
     <div className={styles.container}>
-      <div className={styles.sidebar} style={sidebarStyle}>
+      {isMobile && (
+        <button
+          type="button"
+          aria-label={mobileOpen ? 'Hide side menu' : 'Show side menu'}
+          aria-expanded={mobileOpen}
+          onClick={() => {
+            if (mobileOpen && activeItem) setActiveItem(null);
+            setMobileOpen(!mobileOpen);
+          }}
+          style={{
+            position: 'fixed',
+            top: topOffset,
+            [side]: 0,
+            width: '40px',
+            height: '40px',
+            background: backgroundColor,
+            color: iconColor,
+            border: 'none',
+            borderRadius: side === 'left' ? '0 6px 6px 0' : '6px 0 0 6px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            zIndex: 3100,
+            boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+          }}
+        >
+          {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+        </button>
+      )}
+      <div className={`${styles.sidebar} ${mobileOpen ? styles.sidebarMobileVisible : ''}`} style={sidebarStyle}>
         {sidebarItems.map((item) => (
           <div
             key={item.id}

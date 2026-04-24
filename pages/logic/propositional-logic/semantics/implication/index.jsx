@@ -262,7 +262,6 @@ export default function ImplicationPage({implicationLaws ,introContent ,properti
   <title>Logical Implication (Conditional Statement) | Learn Math Class</title>
   <meta name="description" content="Learn logical implication in propositional logic. Complete guide covering definition, truth tables, properties, and applications in mathematical proofs." />
   <meta name="keywords" content={keyWords.join(', ')} />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="canonical" href="https://www.learnmathclass.com/logic/propositional-logic/semantics/implication" />
   
   <meta property="og:type" content="article" />

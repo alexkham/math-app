@@ -1588,7 +1588,6 @@ export default function BinomialDistributionPage({
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
   
   <meta property="og:title" content={seoData.title} />

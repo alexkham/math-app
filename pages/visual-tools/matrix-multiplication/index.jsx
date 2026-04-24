@@ -400,7 +400,6 @@ export default function MatrixMultiplicationPage({ seoData, sectionsContent, faq
     <>
       <Head>
         <title>{seoData.title}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={seoData.description} />
         <meta name="keywords" content={seoData.keywords} />
         <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />

@@ -26,7 +26,8 @@
  transition: color 0.2s ease;
 }
 
-.content a:hover {
+.content a:hover,
+.content a:focus-visible {
  text-decoration: underline;
  color: #004c99;
 }
@@ -36,5 +37,23 @@
  margin-bottom: 1.5rem;
  font-weight: 600;
  /* text-align: center; */
- 
+
+}
+
+@media (max-width: 767px) {
+ .container {
+  width: auto;
+  padding: 1rem;
+  min-height: 0;
+ }
+
+ .content {
+  margin-left: 0;
+  font-size: 1rem;
+ }
+
+ .title {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+ }
 }

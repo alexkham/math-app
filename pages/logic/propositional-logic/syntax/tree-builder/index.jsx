@@ -100,7 +100,6 @@ export default function TreeBuilderPage({
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
         <meta name="keywords" content={keyWords.join(', ')} />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="canonical" href={canonicalUrl} />
         
         <meta property="og:type" content="website" />

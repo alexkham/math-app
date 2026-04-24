@@ -37,7 +37,6 @@ export default function BaseConverter({navigationGroup }) {
       <Head>
         <title>Base Conversion Visualizer</title>
         <meta name="description" content="Visualize number base conversions with our interactive tool." />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href="https://www.learnmathclass.com/visual-tools/base-converter" />
       </Head>

@@ -158,14 +158,19 @@
 
 
 
+'use client';
 import React,{useEffect} from 'react';
 import { processContent } from '@/app/utils/contentProcessor';
 import { lora700, inter } from '@/app/utils/fonts'; // Changed from poppins500 to inter
 import styles from './Sections.module.css';
 import Image from 'next/image';
+import { useMediaQuery } from '@/app/hooks/useMediaQuery';
+import { mediaQuery } from '@/app/lib/breakpoints';
 
 
 const Sections = ({ sections,leftMargin='220px' }) => {
+ const isMobile = useMediaQuery(mediaQuery.tabletDown);
+ const effectiveLeftMargin = isMobile ? '0' : leftMargin;
  const renderContent = (content) => {
    if (!content) return null;
    
@@ -264,7 +269,7 @@ const Sections = ({ sections,leftMargin='220px' }) => {
 
 
  return (
-   <div className={styles.sectionsContainer} style={{marginLeft:leftMargin}} suppressHydrationWarning={true} >
+   <div className={styles.sectionsContainer} style={{marginLeft:effectiveLeftMargin}} suppressHydrationWarning={true} >
      {flattenedSections.map((section, index) => (
        <section key={section.id} id={section.id} className={styles.section}>
          <div className={styles.sectionContent}>

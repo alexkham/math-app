@@ -34,7 +34,6 @@ export default function EquivalenceValidatorPage({keyWords}) {
   <title>Logical Equivalence Validator | Learn Math Class</title>
   <meta name="description" content="Interactive logical equivalence validator for propositional logic. Check if two logical expressions are equivalent with step-by-step verification." />
   <meta name="keywords" content={keyWords.join(', ')} />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="canonical" href="https://www.learnmathclass.com/logic/propositional-logic/semantics/equivalence-validator" />
   
   <meta property="og:type" content="website" />
