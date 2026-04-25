@@ -873,6 +873,7 @@ import BinomialDistribution from '@/app/components/visualizations/probability/di
 import BinomialDistributionCDF from '@/app/components/visualizations/probability/discrete-distribution/CDFs/BinomialDistributionCDF'
 import BinomialCalculator from '@/app/components/calculators/probability/distributions/BinomialDistributionCalculator'
 import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

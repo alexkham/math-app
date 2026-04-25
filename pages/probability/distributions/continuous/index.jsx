@@ -9,6 +9,7 @@ import Head from 'next/head'
 import { distributionsDiagramsData } from '@/app/api/db/diagrams/probability/distributions'
 import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
 import { processContent } from '@/app/utils/contentProcessor'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

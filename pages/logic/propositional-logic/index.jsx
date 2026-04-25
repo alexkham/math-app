@@ -5,6 +5,7 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import '../../pages.css'
 
 export default function PropositionalLogicPage({ keyWords, introContent, propositionalLogicSections }) {

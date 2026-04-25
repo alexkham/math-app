@@ -946,6 +946,7 @@ import NegativeBinomialDistribution from '@/app/components/visualizations/probab
 import NegativeBinomialDistributionCDF from '@/app/components/visualizations/probability/discrete-distribution/CDFs/NegativeBinomialDistributionCDF'
 import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
 import NegativeBinomialCalculator from '@/app/components/calculators/probability/distributions/NegativeBinomialCalculator'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export async function getStaticProps(){
 

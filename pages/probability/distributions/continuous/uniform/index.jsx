@@ -1220,6 +1220,7 @@ import { processContent } from '@/app/utils/contentProcessor'
 import ContinuousUniformDistribution from '@/app/components/visualizations/probability/continuous-distribution/ContinuousUniformDistribution'
 import ContinuousUniformDistributionCDF from '@/app/components/visualizations/probability/continuous-distribution/CDF/ContinuousUniformDistributionCDF'
 import ContinuousUniformCalculator from '@/app/components/calculators/probability/distributions/continuous/UniformDistributionCalculator'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

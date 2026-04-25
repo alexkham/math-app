@@ -10,6 +10,7 @@ import { distributionsDiagramsData } from '@/app/api/db/diagrams/probability/dis
 import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
 import { processContent } from '@/app/utils/contentProcessor'
 import GenericTable from '@/app/components/generic-table/GenericTable'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

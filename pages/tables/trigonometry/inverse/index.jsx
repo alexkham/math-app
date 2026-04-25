@@ -6,6 +6,7 @@ import Head from 'next/head'
 
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

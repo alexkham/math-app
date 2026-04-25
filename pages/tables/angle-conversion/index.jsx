@@ -3,6 +3,7 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import DegreeRadianConversionTable from '@/app/components/tables/conversion-tables/DegreeRadianConversion'
 import '../../pages.css'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
  export async function getStaticProps(){

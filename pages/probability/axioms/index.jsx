@@ -12,6 +12,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import Image from 'next/image'
 import { probabilityConceptsData } from '@/app/api/db/diagrams/probability/concepts'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

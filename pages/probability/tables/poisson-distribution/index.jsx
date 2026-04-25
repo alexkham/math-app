@@ -6,6 +6,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import PoissonTable from '@/app/components/probability/tables/PoissonTable'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

@@ -1048,6 +1048,7 @@ import DiscreteUniformDistribution from '@/app/components/visualizations/probabi
 import DiscreteUniformDistributionCDF from '@/app/components/visualizations/probability/discrete-distribution/CDFs/DiscreteUniformDistributionCDF'
 import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
 import DiscreteUniformCalculator from '@/app/components/calculators/probability/distributions/UniformDistributionCalculator'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export async function getStaticProps(){
 

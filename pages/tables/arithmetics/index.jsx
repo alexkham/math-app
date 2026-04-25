@@ -5,6 +5,7 @@ import styles from './arithmetics.module.css';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 import { capitalizeWords } from '@/app/utils/utils-functions';
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 

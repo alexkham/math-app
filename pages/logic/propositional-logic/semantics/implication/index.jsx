@@ -7,6 +7,7 @@ import MyList from '@/app/components/page-components/lists/MyList'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import ExpandableTable from '@/app/components/generic-table/ExpandableTable'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 

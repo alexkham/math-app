@@ -8,6 +8,7 @@ import Head from 'next/head'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 import { complementData } from '@/app/api/db/diagrams/trigonometry/complement_supplement'
 import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

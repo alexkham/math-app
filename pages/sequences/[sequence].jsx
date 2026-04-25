@@ -6,6 +6,7 @@ import fs from 'fs';
 import path from 'path';
 import SequenceTable from '@/app/components/sequences/SequenceTable';
 import contentMap from '../../app/api/db/content';
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 // const article =`

@@ -4,6 +4,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import BaseConverter from '@/app/components/converters/BaseConverter'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

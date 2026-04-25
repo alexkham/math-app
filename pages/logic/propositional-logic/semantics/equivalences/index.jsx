@@ -7,6 +7,7 @@ import MyList from '@/app/components/page-components/lists/MyList'
 import ExpandableTable from '@/app/components/data-wrapper/generic-table/ExpandableTable'
 import Head from 'next/head'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export async function getStaticProps(){
 

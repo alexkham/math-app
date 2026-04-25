@@ -15,6 +15,7 @@ import GeometricDistribution from '@/app/components/visualizations/probability/d
 import GeometricDistributionCDF from '@/app/components/visualizations/probability/discrete-distribution/CDFs/GeometricDistributionCDF'
 import GeometricDistributionCalculator from '@/app/components/calculators/probability/distributions/GeometricDistributionCalculator'
 import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

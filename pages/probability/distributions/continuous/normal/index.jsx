@@ -1182,6 +1182,7 @@ import { processContent } from '@/app/utils/contentProcessor'
 import NormalDistribution from '@/app/components/visualizations/probability/continuous-distribution/NormalDistribution'
 import NormalDistributionCDF from '@/app/components/visualizations/probability/continuous-distribution/CDF/NormalDistributionCDF'
 import NormalDistributionCalculator from '@/app/components/calculators/probability/distributions/continuous/NormalDistributionCalculator'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

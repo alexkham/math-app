@@ -1,6 +1,7 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import NewCardGroup from '@/app/components/cards/NewCardGroup'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import '../../pages.css'
 // import styles from '../tables.module.css';
 

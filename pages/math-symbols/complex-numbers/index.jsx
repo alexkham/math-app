@@ -5,6 +5,7 @@ import Head from 'next/head';
 import '../../pages.css'
 import DataWrapper from '@/app/components/generic-table/DataWrapper';
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export default function MathSymbolsComplexNumbersPage({ symbolsData, meta, menuItems, schemas }) {
   return (

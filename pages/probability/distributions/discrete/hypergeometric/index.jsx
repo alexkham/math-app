@@ -945,6 +945,7 @@ import HypergeometricDistribution from '@/app/components/visualizations/probabil
 import HypergeometricDistributionCDF from '@/app/components/visualizations/probability/discrete-distribution/CDFs/HypergeometricDistributionCDF'
 import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
 import HypergeometricCalculator from '@/app/components/calculators/probability/distributions/HypergeometricDistributionCalculator'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export async function getStaticProps(){
 

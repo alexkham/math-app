@@ -3,6 +3,7 @@ import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import '../../../pages.css'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 // Dynamically import the client component with no SSR
 const LogarithmTable = dynamic(

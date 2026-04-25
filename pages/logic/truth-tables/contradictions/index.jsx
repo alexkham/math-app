@@ -7,6 +7,7 @@ import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButto
 
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export default function ContradictionsTruthTablesPage({ keyWords, contradictionExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent }) {

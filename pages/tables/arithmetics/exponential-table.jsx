@@ -3,6 +3,7 @@ import '../../../app/globals.css'
 import ExponentialTable from '@/app/components/logarithm-table/ExponentialTable'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export default function ExponentialTablePage() {
   return (

@@ -423,6 +423,7 @@ import DataWrapper from '@/app/components/generic-table/DataWrapper';
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
 import IntroBar from '../../../app/components/page-components/IntroBar'
 import Sections from '../../../app/components/page-components/section/Sections'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export default function MathSymbolsCalculusPage({ symbolsData, meta, menuItems, introBarData,
       pitfallSections, faqQuestions, schemas }) {

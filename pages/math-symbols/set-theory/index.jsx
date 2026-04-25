@@ -7,6 +7,7 @@ import '../../pages.css'
 import DataWrapper from '@/app/components/generic-table/DataWrapper';
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
 import VerticalSidebarFrame from '@/app/components/vertical-buttons/VerticalBarGroupFrame';
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export default function MathSymbolsSetTheoryPage({ symbolsData, meta,menuItems}) {
   return (

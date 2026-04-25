@@ -7,6 +7,7 @@ import diagrams from '../../app/api/db/svg/set-theory/svg'
 //import diagramsReact from '../../app/api/db/svg/set-theory/svgReact'
 import Head from 'next/head';
 import summaries from '@/app/api/db/tables/set-theory/summaries';
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export default function SetTheoryPage({tocItems}) {
 

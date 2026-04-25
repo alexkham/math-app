@@ -14,6 +14,7 @@ import { probabilityConceptsData } from '@/app/api/db/diagrams/probability/conce
 import { setsProbabilityData } from '@/app/api/db/diagrams/probability/setsProbability'
 import { probabilityFunctionData } from '@/app/api/db/diagrams/probability/probabilityFunction'
 import StaticCards from '@/app/components/cards/static-cards/StaticCards'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export async function getStaticProps() {
   const { default: probabilityFormulasList } = await import('@/app/api/db/formulas/probability/probabilityFormulasList')

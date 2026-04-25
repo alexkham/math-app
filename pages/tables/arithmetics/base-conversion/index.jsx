@@ -4,6 +4,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import BaseConversionTable from '@/app/components/tables/conversion-tables/BaseConversionTable'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

@@ -3,6 +3,7 @@ import '../../../app/globals.css'
 import GoHomeButton from '../../../app/components/GoHomeButton'
 import GoBackButton from '../../../app/components/GoBackButton'
 import ScrollUpButton from '../../../app/components/scroll-up-button/ScrollUpButton'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 const inter = Inter({ subsets: ['latin'] })
 

@@ -11,6 +11,7 @@ import { processContent } from '@/app/utils/contentProcessor'
 import ExponentialDistribution from '@/app/components/visualizations/probability/continuous-distribution/ExponentialDistribution'
 import ExponentialDistributionCDF from '@/app/components/visualizations/probability/continuous-distribution/CDF/ExponentialDistributionCDF'
 import ExponentialDistributionCalculator from '@/app/components/calculators/probability/distributions/continuous/ExponentialDistributionCalculator'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

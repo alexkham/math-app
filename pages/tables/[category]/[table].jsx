@@ -1,6 +1,7 @@
 import GenericTable from '@/app/components/generic-table/GenericTable';
 import '../table.css'
 import ZTableContainer from '@/app/components/z-table/ZTableContainer';
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 // Function to generate static paths for each category and table

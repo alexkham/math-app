@@ -6,6 +6,7 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 import ExplanationDetails from '@/app/components/ExplanationDetails';
 import '../../../pages.css';
 import CubeRootsTable from '@/app/components/tables/CubeRootsTable';
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export default function PerfectCubesTablePage({ keyWords, combinedInstructions }) {
   return (

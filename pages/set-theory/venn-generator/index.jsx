@@ -3,6 +3,7 @@ import VennGenerator from '@/app/components/diagrams/VennGenerator'
 import React from 'react'
 import '../../pages.css'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 const StandardContainer = ({ children }) => (

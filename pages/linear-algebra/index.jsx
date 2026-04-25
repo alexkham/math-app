@@ -10,6 +10,7 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Head from 'next/head'
 import MyList from '@/app/components/page-components/lists/MyList'
 import ToolsSlider from '@/app/components/sliders/ToolsSlider'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export async function getStaticProps() {
   const { default: linearAlgebraFormulasList } = await import('@/app/api/db/formulas/linear-algebra/linearAlgebraFormulas');

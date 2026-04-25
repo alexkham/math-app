@@ -6,6 +6,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import ExpandableTable from '@/app/components/data-wrapper/generic-table/ExpandableTable'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Head from 'next/head';
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

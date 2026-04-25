@@ -7,6 +7,7 @@ import ExpandableTable from '@/app/components/data-wrapper/generic-table/Expanda
 import { renderAcademicBlockHTML } from '@/app/utils/academicBlocks'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 

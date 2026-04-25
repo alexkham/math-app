@@ -12,6 +12,7 @@ import GenericTable from '@/app/components/generic-table/GenericTable'
 import { distributionsDiagramsData } from '@/app/api/db/diagrams/probability/distributions'
 import { probabilityFunctionData } from '@/app/api/db/diagrams/probability/probabilityFunction'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 

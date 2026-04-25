@@ -78,6 +78,7 @@
  */
 
 import Head from 'next/head';
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import SectionFrontPage from '../../app/components/page-components/front-page/SectionFrontPage';
 import {buildSectionData} from '../../app/components/page-components/front-page/buildSectionData'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'

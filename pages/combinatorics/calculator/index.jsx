@@ -4,6 +4,7 @@ import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import CombinatoricsCalculator from '@/app/components/calculators/combinatorics/CombinatoricsCalculator'
 import '../../pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
  export async function getStaticProps(){

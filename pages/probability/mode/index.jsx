@@ -8,6 +8,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import GenericTable from '@/app/components/generic-table/GenericTable'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

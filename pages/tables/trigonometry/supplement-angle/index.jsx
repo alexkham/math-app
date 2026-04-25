@@ -5,6 +5,7 @@ import React from 'react'
 import '../../../../../math-app/pages/pages.css'
 import Head from 'next/head'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

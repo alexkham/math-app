@@ -7,6 +7,7 @@ import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import React from 'react'
 import '../../../../pages.css'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export default function NormalFormsPage({dnfExplanations, cnfExplanations, title, description, keywords, canonicalUrl}) {
   return (

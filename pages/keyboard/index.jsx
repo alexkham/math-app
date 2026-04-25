@@ -7,6 +7,7 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import '../../pages/pages.css'
 
 export async function getStaticProps() {

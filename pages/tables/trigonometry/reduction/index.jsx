@@ -5,6 +5,7 @@ import '../../../../../math-app/pages/pages.css'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import Head from 'next/head'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

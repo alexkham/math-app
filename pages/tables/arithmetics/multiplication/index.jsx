@@ -3,6 +3,7 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import MultiplicationTables from '@/app/components/tables/MultiplicationTables'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

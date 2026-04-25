@@ -6,6 +6,7 @@ import { capitalizeWords } from '@/app/utils/utils-functions';
 //import './tables.css'
 import MyNavbar from '@/app/components/nav-bar/MyNavbar';
 import Head from 'next/head';
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps() {

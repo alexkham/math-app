@@ -2,6 +2,7 @@ import React from 'react'
 import '../pages.css'
 import Head from 'next/head'
 import LandingPage from '@/app/components/page-components/landing-pages/LandingPage'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

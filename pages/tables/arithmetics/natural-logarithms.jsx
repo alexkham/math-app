@@ -2,6 +2,7 @@ import NaturalLogarithmTable from '@/app/components/logarithm-table/NaturalLogar
 import '../table.css'
 import '../../../app/globals.css'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export default function NaturalLogarithmTablePage() {
   return (

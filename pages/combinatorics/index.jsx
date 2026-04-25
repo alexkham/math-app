@@ -12,6 +12,7 @@ import MermaidDiagram from '@/app/components/mermaid-diagram/MermaidDiagram'
 import { countingPrinciplesDiagramsData } from '@/app/api/db/diagrams/combinatorics/countingPrinciples'
 import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
 import { scenariosData } from '@/app/api/db/diagrams/combinatorics/scenarios'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 

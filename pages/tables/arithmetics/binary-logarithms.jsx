@@ -3,6 +3,7 @@ import '../table.css'
 import '../../../app/globals.css'
 import Base2LogarithmTable from '@/app/components/logarithm-table/LogarithmBase2Table'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export default function BinaryLogarithmTablePage() {

@@ -5,6 +5,7 @@ import { Bell, TrendingUp } from 'lucide-react';
 import styles from './probability.module.css';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 const BinomialIcon = () => (
   <svg width="64" height="32" viewBox="0 0 64 32" fill="none" xmlns="http://www.w3.org/2000/svg">

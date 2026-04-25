@@ -7,6 +7,7 @@ import Head from 'next/head'
 
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export default function ImplicationsTruthTablesPage({ seoData, keyWords, implicationExplanations, menuItems, sectionsContent, faqQuestions, schemas }) {

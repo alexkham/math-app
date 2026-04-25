@@ -8,6 +8,7 @@ import GenericTable from '@/app/components/generic-table/GenericTable'
 import { scenariosData } from '@/app/api/db/diagrams/combinatorics/scenarios'
 import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 

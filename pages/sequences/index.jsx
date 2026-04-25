@@ -9,6 +9,7 @@ import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import ContentBlocks from '@/app/components/page-components/content-components/ContentBlocks';
 import '../pages.css'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 // export async function getStaticProps() {

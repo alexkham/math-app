@@ -3,6 +3,7 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import React from 'react'
 import Head from 'next/head'
 import ExpandingCardsGrid from '@/app/components/cards/expanding-cards/ExpandingCardsGrid'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import '../../../pages/pages.css'
 
 export async function getStaticProps(){

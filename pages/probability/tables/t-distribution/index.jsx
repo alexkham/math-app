@@ -6,6 +6,7 @@ import '../../../../pages/pages.css'
 import '../../../../pages/tables/table.css'
 import Head from 'next/head'
 import TTableContainer from '@/app/components/t-table/TTableContainer'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){

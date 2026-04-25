@@ -6,6 +6,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Head from 'next/head'
 import { createContentHtml } from '@/app/utils/utils-functions'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export async function getStaticProps() {
  const { default: logicFormulasList } = await import('@/app/api/db/formulas/logic/logicFormulasList')

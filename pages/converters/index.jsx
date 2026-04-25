@@ -6,6 +6,7 @@ import CardsGroup from '@/app/components/cards/CardsGroup'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import Link from 'next/link'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 

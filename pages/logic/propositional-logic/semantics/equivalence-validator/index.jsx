@@ -3,6 +3,7 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import '../../../../pages.css'
 import LogicalEquivalenceVerifier from '@/app/components/logic-calculator/EquivalenceChecker'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 

@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 

@@ -4,6 +4,7 @@ import { Book, Calculator, PieChart, Sigma, Percent,Section ,DraftingCompass,Boo
 import styles from './tables.module.css';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 const categoryIcons = {
   'Algebra': Book,

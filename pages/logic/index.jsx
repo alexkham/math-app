@@ -10,6 +10,7 @@ import Head from 'next/head'
 import { createContentHtml } from '@/app/utils/utils-functions'
 import ToolsSlider from '@/app/components/sliders/ToolsSlider'
 import MyList from '@/app/components/page-components/lists/MyList'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export async function getStaticProps() {
  const { default: logicFormulasList } = await import('@/app/api/db/formulas/logic/logicFormulasList')

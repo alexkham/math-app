@@ -2,6 +2,7 @@ import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import PermutationsVisualizer2 from '@/app/components/combinatorics/PermutationsVisualizer2'
 import '../../../pages.css'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export default function PermutationsVisualizerPage() {
   return (

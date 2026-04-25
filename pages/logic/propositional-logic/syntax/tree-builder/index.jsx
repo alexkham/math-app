@@ -8,6 +8,7 @@ import Head from 'next/head'
 import '../../../../pages.css'
 import PropositionTreeBuilder from '@/app/components/logic-calculator/proposition-tree/PropositionTreeBuilder'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export async function getStaticProps() {
   const keyWords = [

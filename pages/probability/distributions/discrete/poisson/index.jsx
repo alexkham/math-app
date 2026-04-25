@@ -950,6 +950,7 @@ import PoissonDistribution from '@/app/components/visualizations/probability/dis
 import PoissonDistributionCDF from '@/app/components/visualizations/probability/discrete-distribution/CDFs/PoissonDistributionCDF'
 import CalculatorInstructions from '@/app/components/calculators/CalculatorInstructions'
 import PoissonCalculator from '@/app/components/calculators/probability/distributions/PoissonDistributionCalculator'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export async function getStaticProps(){
 

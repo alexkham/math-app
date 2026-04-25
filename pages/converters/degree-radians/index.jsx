@@ -6,6 +6,7 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import Head from 'next/head'
 import ContentBlocks from '@/app/components/page-components/content-components/ContentBlocks'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 const keywords = [
   'degree to radians',

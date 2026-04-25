@@ -8,6 +8,7 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Sections from '@/app/components/page-components/section/Sections';
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import ExpandableTable from '@/app/components/generic-table/ExpandableTable';
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 

@@ -4,6 +4,7 @@ import PowerTable from '@/app/components/tables/PowerTable'
 import '../../../pages.css'
 import ExplanationDetails from '@/app/components/ExplanationDetails';
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export default function PowersTablePage({keyWords,instructions}) {
   

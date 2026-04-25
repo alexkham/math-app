@@ -424,6 +424,7 @@ import DataWrapper from '@/app/components/generic-table/DataWrapper';
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
 import IntroBar from '../../../app/components/page-components/IntroBar'
 import Sections from '../../../app/components/page-components/section/Sections'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export default function MathSymbolsTrigonometryPage({ symbolsData, meta, menuItems, pitfallSections,
       introBarData, faqQuestions, schemas }) {

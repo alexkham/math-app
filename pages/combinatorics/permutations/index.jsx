@@ -7,6 +7,7 @@ import Sections from '@/app/components/page-components/section/Sections'
 import { scenariosData } from '@/app/api/db/diagrams/combinatorics/scenarios'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 
