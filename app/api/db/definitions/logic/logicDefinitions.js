@@ -7,7 +7,7 @@ const logicTermsList = [
     name: 'Proposition',
     category: 'Syntax',
     formula: `A declarative statement that carries exactly one truth value: true or false, but not both`,
-    link: { url: '/logic/propositional-logic/syntax#definitions', text: 'Propositional Logic Syntax' },
+    link: { url: '/logic/propositional-logic/syntax', text: 'Propositional Logic Syntax' },
     fields: {
       intuition: `A proposition is the atomic unit of logical reasoning — a complete claim whose truth can be evaluated. Questions, commands, and exclamations are not propositions because they lack a definite truth value.`,
       examples: `Propositions:
@@ -66,7 +66,7 @@ Not propositions:
     name: 'Well-Formed Formula (WFF)',
     category: 'Syntax',
     formula: `An expression constructed according to the formation rules of propositional logic, ensuring unambiguous syntactic structure`,
-    link: { url: '/logic/propositional-logic/syntax#wff', text: 'Well-Formed Formulas' },
+    link: { url: '/logic/propositional-logic/syntax', text: 'Well-Formed Formulas' },
     fields: {
       intuition: `A WFF is a syntactically valid logical expression. Just as natural language has grammar, propositional logic has formation rules that determine which symbol sequences constitute proper formulas. An expression that violates these rules — like "$\\land P )(Q$" — is not a WFF and cannot be assigned a truth value.`,
       properties: `- Every propositional variable is a WFF

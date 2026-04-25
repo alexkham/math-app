@@ -207,13 +207,22 @@ export const processContent = (content, styles = null) => {
         );
       }
     } else {
-      elements.push(
-        <span key={`tab-${lineIndex}`} style={{ marginLeft: `${tabCount * 2}em` }}>
-          {processedParts}
-        </span>
-      );
-      if (lineIndex < lines.length - 1) {
-        elements.push(<br key={`br-${elements.length}`} />);
+      const hasBlockPlaceholder = /(__SVG_PLACEHOLDER_\d+__|__ACADEMIC_PLACEHOLDER_\d+__)/.test(trimmedLine);
+      if (hasBlockPlaceholder) {
+        elements.push(
+          <div key={`tab-${lineIndex}`} style={{ marginLeft: `${tabCount * 2}em` }}>
+            {processedParts}
+          </div>
+        );
+      } else {
+        elements.push(
+          <span key={`tab-${lineIndex}`} style={{ marginLeft: `${tabCount * 2}em` }}>
+            {processedParts}
+          </span>
+        );
+        if (lineIndex < lines.length - 1) {
+          elements.push(<br key={`br-${elements.length}`} />);
+        }
       }
     }
   });
