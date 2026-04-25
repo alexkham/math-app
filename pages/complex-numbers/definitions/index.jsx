@@ -7,7 +7,7 @@ import '../../../pages/pages.css'
 import DefinitionGlossary from '../../../app/components/examples/DefinitionsGlossary'
 
 export async function getStaticProps() {
-  const { default: complexNumbersTermsList } = await import('@/app/api/db/definitions/complexNumbers/complexNumbersDefinitions')
+  const { default: complexNumbersTermsList } = await import('@/app/api/db/definitions/complex-numbers/complexNumbersDefinitions')
 
   const keyWords = [
     'complex numbers definitions',
