@@ -836,7 +836,7 @@ export default function MathWorkflowDemo() {
 
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif", maxWidth: 720, margin: "0 auto" }}>
-      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+      {/* Fonts now loaded globally via pages/_document.js (DM Sans, JetBrains Mono) */}
       <div style={{
         display: "flex", flexWrap: "wrap", gap: 6,
         marginBottom: 20, justifyContent: "center",
