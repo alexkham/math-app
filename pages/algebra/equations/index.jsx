@@ -689,7 +689,7 @@ export default function EquationsPage({seoData, sectionsContent, introContent, f
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Equations</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Equations</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

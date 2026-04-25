@@ -1046,7 +1046,7 @@ export default function ExponentialDistributionPage({
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Exponential Distribution</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Exponential Distribution</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

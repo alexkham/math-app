@@ -903,7 +903,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Poisson Distribution</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Poisson Distribution</h1>
 //    <br/>
 //    <br/>
 //    <SectionTableOfContents sections={genericSections}
@@ -1714,7 +1714,7 @@ export default function PoissonDistributionPage({
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Poisson Distribution</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Poisson Distribution</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

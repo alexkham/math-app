@@ -745,7 +745,7 @@ export default function GeometricRepresentationPage({seoData, sectionsContent, i
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Geometric Representation</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Geometric Representation</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

@@ -497,7 +497,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Cumulative Distribution Function (CDF)</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cumulative Distribution Function (CDF)</h1>
 //    <br/>
 //    <br/>
 //    <SectionTableOfContents sections={genericSections}
@@ -1118,7 +1118,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Cumulative Distribution Function (CDF)</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cumulative Distribution Function (CDF)</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

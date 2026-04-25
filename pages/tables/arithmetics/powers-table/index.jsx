@@ -31,7 +31,7 @@ export default function PowersTablePage({keyWords,instructions}) {
             iconColor='white'
             panelBackgroundColor='#f2f2f2'
           />
-    <h1 className='title' style={{marginTop:'-10px',marginBottom:'0px'}}>Table of Powers base 1-10</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Table of Powers base 1-10</h1>
    <br/>
    <br/>
    <div style={{ marginBottom: '-30px' }}>

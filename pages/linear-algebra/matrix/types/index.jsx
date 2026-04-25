@@ -667,7 +667,7 @@ export default function MatrixTypesPage({seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Types of Matrices</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Types of Matrices</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

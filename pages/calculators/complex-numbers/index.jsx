@@ -288,7 +288,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Complex Numbers Calculator</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Numbers Calculator</h1>
 //    <br/>
 //    <ComplexNumbersCalculator
 //   explanations={explanations}
@@ -838,7 +838,7 @@ return (
       panelBackgroundColor='#f2f2f2'
     />
     
-    <h1 className='title' style={{marginTop:'-20px',marginBottom:'30px'}}>Complex Numbers Calculator</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Numbers Calculator</h1>
     <div style={{marginBottom:'20px'}}>
       <ExplanationDetails 
         instructions={detailInstructions}

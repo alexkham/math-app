@@ -231,7 +231,7 @@
 // //         panelBackgroundColor='#f2f2f2'
 // //       />
 // //       <main>
-// //         <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
+// //         <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
 // //           Algebra Terms and Definitions
 // //         </h1>
 // //         {/* <SecondaryNavbar alignment='left' mode='siblings' title='Similar Pages'/> */}
@@ -500,7 +500,7 @@
 //         panelBackgroundColor='#f2f2f2'
 //       />
 //       <main>
-//         <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
+//         <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
 //           Algebra Terms and Definitions
 //         </h1>
 //         <CategoriesList data={algebraTermsList}
@@ -751,7 +751,7 @@ export default function AlgebraDefinitionsPage({
         panelBackgroundColor='#f2f2f2'
       />
       <main>
-        <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
+        <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
           Algebra Terms and Definitions
         </h1>
         <CategoriesList data={algebraTermsList}

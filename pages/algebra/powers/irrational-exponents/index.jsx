@@ -643,7 +643,7 @@ export default function IrrationalExponentsPage({seoData, sectionsContent, intro
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Irrational Exponents</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Irrational Exponents</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

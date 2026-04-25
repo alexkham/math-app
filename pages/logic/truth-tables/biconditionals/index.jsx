@@ -216,7 +216,7 @@ export default function BiconditionalsTruthTablesPage({ keyWords, biconditionalE
           panelWidth='300px'
           iconColor='white'
           panelBackgroundColor='#f2f2f2'/> 
-      <h1 className='title' style={{marginTop:'-10px', marginBottom:'0px'}}>Biconditionals (Double Implications) Truth Tables</h1> 
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Biconditionals (Double Implications) Truth Tables</h1> 
 
       <br/>
       <div style={{display: 'grid', gridTemplateColumns: '200px 1fr', gap: '0px', alignItems: 'start', paddingTop: '30px'}}>

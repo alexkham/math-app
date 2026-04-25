@@ -282,7 +282,7 @@
 //                 panelBackgroundColor='#f2f2f2'
 //               />
 //       <Breadcrumb/>
-//       <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Derivatives</h1>
+//       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Derivatives</h1>
 //       <br/>
 //       <SectionTableOfContents sections={derivativesSections}/>
 //       <br/>
@@ -1055,7 +1055,7 @@ const schemas = {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Derivatives</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Derivatives</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

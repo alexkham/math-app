@@ -839,7 +839,7 @@ export default function LCMPage({seoData, sectionsContent, introContent, faqQues
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Least Common Multiple (LCM)</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Least Common Multiple (LCM)</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

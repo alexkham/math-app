@@ -662,7 +662,7 @@ export default function MatrixRankPage({seoData, sectionsContent, introContent, 
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Rank of a Matrix</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Rank of a Matrix</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

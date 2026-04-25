@@ -748,7 +748,7 @@ export default function DividingPage({seoData, sectionsContent, introContent, fa
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Dividing Fractions</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Dividing Fractions</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

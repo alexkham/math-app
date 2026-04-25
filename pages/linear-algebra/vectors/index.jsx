@@ -575,7 +575,7 @@ export default function VectorsPage({seoData, sectionsContent, introContent, faq
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Vectors</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Vectors</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

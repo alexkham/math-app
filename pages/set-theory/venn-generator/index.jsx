@@ -39,7 +39,7 @@ export default function VennDiagramGeneratorPage() {
         panelBackgroundColor='#f2f2f2'
       />
    <Breadcrumb/>
-   <h1 className='title' style={{marginTop:'-30px'}}>Venn Diagrams Generator</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Venn Diagrams Generator</h1>
    <br/>
    {/* <div style={{
         transform: 'scale(0.8)', 

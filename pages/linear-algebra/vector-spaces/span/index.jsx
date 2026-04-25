@@ -732,7 +732,7 @@ export default function SpanPage({seoData, sectionsContent, introContent, faqQue
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Span</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Span</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

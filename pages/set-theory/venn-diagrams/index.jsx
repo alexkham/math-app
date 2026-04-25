@@ -775,7 +775,7 @@ export default function VennDiagramsPage({seoData, sectionsContent, introContent
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Venn Diagrams</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Venn Diagrams</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

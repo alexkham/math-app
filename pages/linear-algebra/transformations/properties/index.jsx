@@ -747,7 +747,7 @@ export default function TransformationPropertiesPage({seoData, sectionsContent, 
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Properties of Linear Transformation</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Properties of Linear Transformation</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

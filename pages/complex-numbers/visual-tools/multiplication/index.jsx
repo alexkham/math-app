@@ -493,7 +493,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Complex Numbers Multiplication</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Numbers Multiplication</h1>
    <br/>
    <SiblingsNav>
    <ComplexMultiplicationVisualizer/>

@@ -261,7 +261,7 @@ export default function PageTemplate({ seoData, sectionsContent, introContent,
    <br/>
    <br/>
    
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Half Angle Identities</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Half Angle Identities</h1>
     <div style={{
       display: 'grid',
       gridTemplateColumns: '15% 80%',

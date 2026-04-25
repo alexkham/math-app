@@ -313,7 +313,7 @@ boxed={true} color={'blue'} compact={true} type={'dot'} width={'650px'} />
      <Breadcrumb/>
     
      <main>
-       <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>
+       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
          Propositional Logic Syntax
        </h1>
        <SectionTableOfContents sections={logicSections}

@@ -67,7 +67,7 @@ const navigationGroup=[
             panelBackgroundColor='#f2f2f2'
           /> 
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-20px' ,marginBottom:'20px'}}>Percentage Calculator</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Percentage Calculator</h1>
    
    
     <div className="layout-container">

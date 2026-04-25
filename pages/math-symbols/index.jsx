@@ -77,7 +77,7 @@ export default function MathSymbolsPage({ symbolsData, meta,menuItems }) {
         iconColor="white"
         panelBackgroundColor="#f2f2f2"
       />
-      <h1 className="title" style={{ marginTop: '0px',marginBottom:'0px' }}>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
         {meta.pageHeading}
       </h1>
       <br/>

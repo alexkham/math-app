@@ -46,7 +46,7 @@ export default function PerfectSquaresTablePage({ keyWords, combinedInstructions
         panelBackgroundColor='#f2f2f2'
       />
 
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'30px'}}>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
         Perfect Squares 1 - 10000
       </h1>
 

@@ -666,7 +666,7 @@ export default function InequalitiesPage({seoData, sectionsContent, introContent
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Inequalities</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Inequalities</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

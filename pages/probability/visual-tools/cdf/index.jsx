@@ -319,7 +319,7 @@ export default function CDFVisualizerPage({seoData, sectionsContent, introConten
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Cumulative Distribution Function(CDF) Visualization</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cumulative Distribution Function(CDF) Visualization</h1>
       <br/>
         <div style={{width: '90%', margin: '0 auto'}}>
         <StaticCards cards={cardsData} theme="elegant" layout="grid" />

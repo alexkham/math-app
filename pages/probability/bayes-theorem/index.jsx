@@ -556,7 +556,7 @@ export default function BayesPage({seoData, sectionsContent, introContent, faqQu
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Bayes&apos; Theorem</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Bayes&apos; Theorem</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

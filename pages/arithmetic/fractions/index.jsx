@@ -733,7 +733,7 @@ export default function FractionsPage({seoData, sectionsContent, introContent, f
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Fractions</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Fractions</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

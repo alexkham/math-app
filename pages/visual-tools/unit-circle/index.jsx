@@ -568,7 +568,7 @@ const baseConverterIcon = (
            <Breadcrumb/>
            <br/>
            <br/>
-           <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Unit Circle Visualizer and Calculator</h1>
+           <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Unit Circle Visualizer and Calculator</h1>
         {/* <BaseConverterIntro/> */}
         {/* <div style={{marginBottom:'-60px',marginTop:'0px'}}>
         <PageIntro data={pageIntroData} icon={baseConverterIcon} theme='blue'/>

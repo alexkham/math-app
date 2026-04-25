@@ -698,7 +698,7 @@ combinationsScenariosTableData}) {
                panelBackgroundColor='#f2f2f2'
              /> 
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>Combinations</h1>   
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Combinations</h1>   
     <br/> 
     <SectionTableOfContents sections={combinationsSections}
     showSecondaryNav={true}

@@ -126,7 +126,7 @@ export default function AlgebraDefinitionsPage({
         panelBackgroundColor='#f2f2f2'
       />
       <main>
-        <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
+        <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
           Calculus Terms and Definitions
         </h1>
         <CategoriesList

@@ -357,7 +357,7 @@ export default function LogicPage({
      <Breadcrumb/>
     
      <main>
-       <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>
+       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
          Mathematical Logic
        </h1>
        <SectionTableOfContents sections={logicSections}

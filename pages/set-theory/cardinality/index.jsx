@@ -723,7 +723,7 @@ export default function CardinalityPage({seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Cardinality of Sets</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cardinality of Sets</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

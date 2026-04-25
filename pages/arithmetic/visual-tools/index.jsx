@@ -427,7 +427,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Arithmetic Visual Tools</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Arithmetic Visual Tools</h1>
 //    <br/>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
@@ -827,7 +827,7 @@ export default function ArithmeticVisualToolsPage({seoData, sectionsContent,
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'30px'}}>Arithmetic Visual Tools</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Arithmetic Visual Tools</h1>
       <QuickNav items={cardsData} dropdownLabel="All Tools" />
       <br/>
       <ScrollToTop

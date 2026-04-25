@@ -760,7 +760,7 @@ export default function GramSchmidtsPage({seoData, sectionsContent, introContent
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Gram Schmidt Process</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Gram Schmidt Process</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

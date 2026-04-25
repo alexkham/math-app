@@ -685,7 +685,7 @@ export default function RulesPage({seoData, sectionsContent, introContent, faqQu
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Exponent Rules</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Exponent Rules</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

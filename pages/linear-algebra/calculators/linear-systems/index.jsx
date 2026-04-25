@@ -393,7 +393,7 @@ export default function LinearSystemsCalculatorPage({seoData, sectionsContent, d
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Linear Systems Calculator</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Linear Systems Calculator</h1>
    <br/>
     <div style={{transform:'scale(1)',marginLeft:'-250px'}}>
         <SiblingsNav topOffset="200px" title='Similar Calculators' 

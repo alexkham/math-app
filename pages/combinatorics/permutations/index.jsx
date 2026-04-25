@@ -814,7 +814,7 @@ export default function PermutationsPage({seoData,sectionsContent,introContent,p
                panelBackgroundColor='#f2f2f2'
              /> 
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>Permutations</h1>   
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Permutations</h1>   
     <br/> 
     <SectionTableOfContents sections={permutationsSections}
      showSecondaryNav={true}

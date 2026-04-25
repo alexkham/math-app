@@ -768,7 +768,7 @@ export default function ComparingPage({seoData, sectionsContent, introContent, f
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Comparing Fractions</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Comparing Fractions</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

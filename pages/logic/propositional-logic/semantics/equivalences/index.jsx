@@ -384,7 +384,7 @@ sectionsContent.conditional.after,
             panelBackgroundColor='#f2f2f2'
           />
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-20px'}}>Logical Equivalences</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Logical Equivalences</h1>
     <br/>
     <br/>
     <br/>

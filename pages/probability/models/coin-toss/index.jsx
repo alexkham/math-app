@@ -536,7 +536,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Coin Toss</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Coin Toss</h1>
 //    <br/>
 //    <br/>
 //    <SectionTableOfContents sections={genericSections}/>
@@ -1209,7 +1209,7 @@ export default function CoinTossPage({seoData, sectionsContent, introContent, fa
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Coin Toss</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Coin Toss</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}/>

@@ -578,7 +578,7 @@ export default function CrossProductPage({seoData, sectionsContent, introContent
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Cross Product</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cross Product</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

@@ -745,7 +745,7 @@ export default function LinearSystemsPage({seoData, sectionsContent, introConten
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Systems of Linear Equations</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Systems of Linear Equations</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

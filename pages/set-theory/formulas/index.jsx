@@ -25,7 +25,7 @@ export default function AlgebraFormulasPage() {
       iconColor='white'
       panelBackgroundColor='#f2f2f2'/> 
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-20px',marginBottom:'0px'}}>Set Theory Formulas</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Set Theory Formulas</h1>
     {/* <div style={{transform:'scale(0.8)'}}> */}
     <FormulasTOC data={setTheoryFormulasList}/>
     {/* </div> */}

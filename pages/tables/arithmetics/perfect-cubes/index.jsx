@@ -45,7 +45,7 @@ export default function PerfectCubesTablePage({ keyWords, combinedInstructions }
         panelBackgroundColor='#f2f2f2'
       />
 
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'30px'}}>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
         Perfect Cubes 1 - 1000000
       </h1>
 

@@ -143,7 +143,7 @@
 //             panelBackgroundColor='#f2f2f2'
 //           />
 //       <Breadcrumb/>
-//       <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>Integrals</h1>
+//       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Integrals</h1>
 //       <br/>
 //       <SectionTableOfContents sections={integralSections}/>
 //       <br/>
@@ -955,7 +955,7 @@ export default function IntegralsPage({seoData, sectionsContent, introContent, f
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Integrals</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Integrals</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

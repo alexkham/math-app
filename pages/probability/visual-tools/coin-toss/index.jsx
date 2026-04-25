@@ -355,7 +355,7 @@ export default function CoinTossPage({seoData, sectionsContent, introContent, fa
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-50px',marginBottom:'-50px'}}>Coin Toss</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Coin Toss</h1>
       <br/>
       <GenericMultiComponentFrame
         components={[

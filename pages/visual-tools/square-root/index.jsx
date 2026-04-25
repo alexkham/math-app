@@ -46,7 +46,7 @@ export default function SquareRootVisualizerPage({ explanationsRoots, keyWords }
         iconColor='white'
         panelBackgroundColor='#f2f2f2'
       />
-      <h1 className='title' style={{marginTop:'-20px',marginBottom:'-30px'}}>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
         Square Root Visualizer
       </h1>
       <div style={{transform:'scale(0.85)'}}>

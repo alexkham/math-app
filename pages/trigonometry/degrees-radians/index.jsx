@@ -658,7 +658,7 @@ export default function DegreesRadiansPage({seoData,sectionsContent , introConte
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Degrees and Radians</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Degrees and Radians</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

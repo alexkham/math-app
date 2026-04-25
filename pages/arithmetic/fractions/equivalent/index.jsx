@@ -719,7 +719,7 @@ export default function EquivalentFractionsPage({seoData, sectionsContent, intro
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Equivalent Fractions</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Equivalent Fractions</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

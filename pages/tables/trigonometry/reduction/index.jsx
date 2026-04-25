@@ -307,7 +307,7 @@ export default function ReductionPage({ seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Trigonometric Reduction Formulas</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Trigonometric Reduction Formulas</h1>
    <br/>
     <div style={{
       display: 'grid',

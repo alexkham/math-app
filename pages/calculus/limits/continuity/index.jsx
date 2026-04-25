@@ -864,7 +864,7 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Continuity of Limits</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Continuity of Limits</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

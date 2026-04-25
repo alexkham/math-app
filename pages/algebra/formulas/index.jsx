@@ -126,7 +126,7 @@ export default function AlgebraFormulasPage({
       />
       <Breadcrumb/>
       <main>
-        <h1 className='title' style={{marginTop:'-20px',marginBottom:'-10px'}}>
+        <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
           Algebra Formulas
         </h1>
         <FormulasTOC data={algebraFormulasList} />

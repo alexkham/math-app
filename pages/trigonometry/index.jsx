@@ -686,7 +686,7 @@ export default function TrigonometryPage({ seoData, sectionsContent, introConten
       panelBackgroundColor='#f2f2f2'/> 
     <Breadcrumb/>
    
-    <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>Trigonometry</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Trigonometry</h1>
     <SectionTableOfContents sections={trigonometrySections}
     showSecondaryNav={true}
     secondaryNavMode="children"  // or "siblings"

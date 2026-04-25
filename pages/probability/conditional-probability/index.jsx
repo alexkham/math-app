@@ -437,7 +437,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Conditional Probability</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Conditional Probability</h1>
 //    <br/>
 //    <br/>
 //    <SectionTableOfContents sections={genericSections}
@@ -1009,7 +1009,7 @@ export default function ConditionalProbabilityPage({seoData, sectionsContent, in
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Conditional Probability</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Conditional Probability</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

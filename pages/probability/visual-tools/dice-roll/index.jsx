@@ -354,7 +354,7 @@ export default function DiceRollVisualizersPage({seoData, sectionsContent, intro
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-50px',marginBottom:'-50px'}}>Dice Roll Visualizers</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Dice Roll Visualizers</h1>
       <br/>
       <GenericMultiComponentFrame
         components={[

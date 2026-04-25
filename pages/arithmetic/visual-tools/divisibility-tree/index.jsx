@@ -887,7 +887,7 @@ export default function DivisibilityTreePage({
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-50px',marginBottom:'-30px'}}>Divisibility Decision Tree</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Divisibility Decision Tree</h1>
       <br/>
       <div style={{transform:'scale(0.95)'}}>
         <DivisibilityTreeSVG/>

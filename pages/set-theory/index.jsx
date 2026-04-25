@@ -39,7 +39,7 @@ export default function SetTheoryPage({tocItems}) {
     <br></br>
     <Breadcrumb></Breadcrumb>
 
-    <h1 className='title' style={{marginTop:'-20px',marginBottom:'10px'}}>Set Theory:Terminology and Basic Concepts</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Set Theory:Terminology and Basic Concepts</h1>
     <TableOfContents tocItems={tocItems} showNumbers={false} ></TableOfContents>
     <ContentBlocks tocItems={tocItems}></ContentBlocks>
     <br></br>

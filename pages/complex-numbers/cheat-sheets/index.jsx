@@ -1234,7 +1234,7 @@ export default function PageTemplate({seoData, sectionsContent,  complexNumbersC
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Complex Numbers Cheat Sheets</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Numbers Cheat Sheets</h1>
    <br/>
     <CheatSheet
       type="card"

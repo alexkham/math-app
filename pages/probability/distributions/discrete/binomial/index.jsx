@@ -828,7 +828,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Binomial Distribution</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Binomial Distribution</h1>
 //    <br/>
 //    <br/>
 //    <SectionTableOfContents sections={genericSections}
@@ -1638,7 +1638,7 @@ export default function BinomialDistributionPage({
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Binomial Distribution</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Binomial Distribution</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

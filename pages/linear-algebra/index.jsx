@@ -328,7 +328,7 @@ export default function LinearAlgebraPage({
       <Breadcrumb/>
      
       <main>
-        <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>
+        <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
           Linear Algebra
         </h1>
         <SectionTableOfContents sections={linearAlgebraSections}

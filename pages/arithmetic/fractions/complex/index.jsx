@@ -743,7 +743,7 @@ export default function ComplexFractionsPage({seoData, sectionsContent, introCon
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Complex Fractions</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Fractions</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

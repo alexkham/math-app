@@ -776,7 +776,7 @@ export default function GeometricDistributionPage({
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Geometric Distribution</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Geometric Distribution</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

@@ -127,7 +127,7 @@ probabilityTermsList,
       />
 
       <main>
-        <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
+        <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
           Probability Terms and Definitions
         </h1>
         <br/>

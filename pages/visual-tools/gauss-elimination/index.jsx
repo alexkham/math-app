@@ -502,7 +502,7 @@ export default function GaussianEliminationCalculatorPage({ seoData, sectionsCon
       <Breadcrumb/>
 
       <main className="container">
-        <h1 className="title" style={{marginBottom:'-20px',marginTop:'-20px'}}>
+        <h1 className="title" style={{marginTop:'0px',marginBottom:'10px'}}>
           Gaussian Elimination Calculator
         </h1>
         

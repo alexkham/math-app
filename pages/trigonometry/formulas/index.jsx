@@ -114,7 +114,7 @@ export default function TrigonometryFormulasPage({
 
       <Breadcrumb/>
       <main>
-        <h1 className='title' style={{marginTop:'-10px',marginBottom:'10px'}}>
+        <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
           Trigonometry Formulas
         </h1>
         <FormulasTOC data={trigonometryFormulaList}/>

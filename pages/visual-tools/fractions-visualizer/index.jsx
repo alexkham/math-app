@@ -170,7 +170,7 @@ export default function FractionsVisualizerPage({seoData, explanationContent,
    <br/>
    <br/>
   
-   <h1 className='title' style={{marginTop:'-30px'}}>Fractions Visualizer</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Fractions Visualizer</h1>
     <br/>
     <br/>
      <div style={{

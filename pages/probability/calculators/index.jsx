@@ -813,7 +813,7 @@ export default function ProbabilityCalculatorsHub({seoData, miniCards, staticCar
       <br/>
       <br/>
       
-      <h1 className='title' style={{marginTop:'-10px',marginBottom:'40px'}}>Probability Calculators</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Probability Calculators</h1>
       
       {/* MiniCards Navigation - Anchor links to sections below */}
       <div style={{maxWidth: '1200px', margin: '0 auto', padding: '0 20px'}}>

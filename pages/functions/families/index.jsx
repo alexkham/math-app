@@ -948,7 +948,7 @@ export default function FamiliesPage({seoData, sectionsContent, introContent, fa
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Function Families</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Function Families</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

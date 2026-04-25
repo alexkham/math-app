@@ -62,7 +62,7 @@ export default function NormalFormsPage({dnfExplanations, cnfExplanations, title
         panelBackgroundColor='#f2f2f2'
       />
       <Breadcrumb/>
-      <h1 className='title' style={{marginTop:'-10px', marginBottom:'-20px'}}>Normal Forms Converters</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Normal Forms Converters</h1>
       <div style={{transform:'scale(0.95)'}}>
         <NormalFormsConverter
           dnfExplanations={dnfExplanations}

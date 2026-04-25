@@ -497,7 +497,7 @@ export default function DeMoivreVisualizerPage({seoData, sectionsContent, introC
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>De Moivre Law Visual Calculator</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>De Moivre Law Visual Calculator</h1>
    <br/>
    <SiblingsNav>
    <DeMoivreCalculator/>

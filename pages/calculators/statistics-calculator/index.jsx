@@ -33,7 +33,7 @@ export default function StatisticsCalculatorPage({ explanations,menuItems }) {
         iconColor='white'
         panelBackgroundColor='#f2f2f2'/> 
       <Breadcrumb/>
-      <h1 className='title' style={{marginTop:'-20px',marginBottom:'-50px'}}>Statistics Calculator</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Statistics Calculator</h1>
      <VerticalButtonGroup 
       items={menuItems}
       width="230px" 

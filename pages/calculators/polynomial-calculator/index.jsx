@@ -139,7 +139,7 @@ export default function PolynomialCalculatorPage({ keyWords, instructions,operat
         panelBackgroundColor='#f2f2f2'
       /> 
 
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'-10px'}}>Polynomial Calculator</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Polynomial Calculator</h1>
       <div >
         <PolynomialCalculator 
         instructions={instructions}

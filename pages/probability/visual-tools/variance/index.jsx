@@ -447,7 +447,7 @@ export default function VarianceVisualizerPage({seoData, sectionsContent, introC
       <br/>
       <br/>
 
-      <h1 className='title' style={{marginTop:'-50px',marginBottom:'-20px'}}>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
         Interactive Variance Visualizer
       </h1>
 

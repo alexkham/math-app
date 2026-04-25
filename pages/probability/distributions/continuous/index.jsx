@@ -1371,7 +1371,7 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Continuous Distributions</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Continuous Distributions</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

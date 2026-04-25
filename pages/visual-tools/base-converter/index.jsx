@@ -54,7 +54,7 @@ export default function BaseConverter({navigationGroup }) {
       iconColor='white'
       panelBackgroundColor='#f2f2f2'/> 
       <Breadcrumb></Breadcrumb>
-      <h1 className='title' style={{marginTop:'-20px'}}>Base Conversion Visualizer</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Base Conversion Visualizer</h1>
       <br></br>
      <VerticalButtonGroup 
             items={navigationGroup}

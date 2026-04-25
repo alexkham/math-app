@@ -868,7 +868,7 @@ export default function SpecialPage({seoData, sectionsContent, introContent, faq
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Special Limits</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Special Limits</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

@@ -347,7 +347,7 @@ export default function ImplicationPage({implicationLaws ,introContent ,properti
                 panelBackgroundColor='#f2f2f2'
               />
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Logical Implication (Conditional Statement)</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Logical Implication (Conditional Statement)</h1>
     <br/>
     <SectionTableOfContents sections={implicationSections}
      showSecondaryNav={true}

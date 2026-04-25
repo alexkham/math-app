@@ -162,7 +162,7 @@ export default function ProbabilityTablesPage({seoData, tableCards}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'30px'}}>Probability Distribution Tables</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Probability Distribution Tables</h1>
    <ExpandingCardsGrid cards={tableCards}/>
    <br/>
    <br/>

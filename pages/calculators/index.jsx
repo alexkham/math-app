@@ -221,7 +221,7 @@ const CustomProbability=()=>(
     <br/>
    
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-20px',marginBottom:'-20px'}} >Calculators</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}} >Calculators</h1>
     <br/>
     <OperaSidebar 
    side='right'

@@ -498,7 +498,7 @@ export default function TautologyPage({tautologies ,introContent ,sectionsConten
                 panelBackgroundColor='#f2f2f2'
               />
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Tautology</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Tautology</h1>
     <br/>
     <SectionTableOfContents sections={tautologySections}
      showSecondaryNav={true}

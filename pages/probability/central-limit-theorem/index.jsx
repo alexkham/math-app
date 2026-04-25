@@ -656,7 +656,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Central Limit Theorem</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Central Limit Theorem</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

@@ -63,7 +63,7 @@
 // //         panelBackgroundColor='#f2f2f2'
 // //       />
       
-// //       <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>Factoring Calculator</h1>
+// //       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Factoring Calculator</h1>
 // //       <FactoringCalculator/>
 // //       <br/>
 // //       {/* <ScrollUpButton/> */}
@@ -478,7 +478,7 @@
 //       panelBackgroundColor='#f2f2f2'
 //     />
     
-//     <h1 className='title' style={{marginTop:'-20px',marginBottom:'30px'}}>Factoring Calculator</h1>
+//     <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Factoring Calculator</h1>
     
 //     <div className="layout-container"> 
 //       <div>
@@ -952,7 +952,7 @@ return (
       panelBackgroundColor='#f2f2f2'
     />
     
-    <h1 className='title' style={{marginTop:'-20px',marginBottom:'30px'}}>Factoring Calculator</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Factoring Calculator</h1>
     <br/>
    <div style={{marginBottom:'60px'}}>
       <ExplanationDetails 

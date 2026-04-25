@@ -730,7 +730,7 @@ export default function DomainPage({seoData, sectionsContent, introContent, faqQ
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Domain</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Domain</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

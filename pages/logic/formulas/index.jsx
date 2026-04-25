@@ -88,7 +88,7 @@ export default function LinearAlgebraFormulasPage({ seoData, keyWords }) {
       iconColor='white'
       panelBackgroundColor='#f2f2f2'/> 
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-20px',marginBottom:'-10px'}}>Mathematical Logic Formulas</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Mathematical Logic Formulas</h1>
     <FormulasTOC data={logicFormulasList} />
     <div style={{transform:'scale(0.95)'}}>
     <FormulaAccordionWrapper data={logicFormulasList} groupByField={['category']}/>

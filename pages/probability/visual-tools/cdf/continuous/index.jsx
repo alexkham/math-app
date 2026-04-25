@@ -340,7 +340,7 @@ export default function CDFContinuousVisualizerPage({seoData, sectionsContent, i
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-40px',marginBottom:'-70px'}}>Cumulative Distribution Function(CDF) of Continuous Distributions</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cumulative Distribution Function(CDF) of Continuous Distributions</h1>
       
       <div style={{transform:'scale(0.8)'}}>
         <ContinuousCDFVisualizer/>

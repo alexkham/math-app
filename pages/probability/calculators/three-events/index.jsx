@@ -189,7 +189,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'0px'}}>Three Events Probability Calculator</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Three Events Probability Calculator</h1>
 //    <br/>
 //    <ThreeEventsProbabilityCalculator/>
 //    <br/>
@@ -657,7 +657,7 @@ export default function ThreeEventsCalculatorPage({seoData, sectionsContent, int
       /> 
       <Breadcrumb/>
       
-      <h1 className='title' style={{marginTop:'-20px',marginBottom:'0px'}}>Three Events Probability Calculator</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Three Events Probability Calculator</h1>
       <br/>
       <ThreeEventsProbabilityCalculator className="calculator-widget"/>
       <br/>

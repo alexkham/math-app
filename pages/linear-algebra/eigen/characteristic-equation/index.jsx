@@ -570,7 +570,7 @@ export default function CharacteristicEquationPage({seoData, sectionsContent, in
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Characteristic Equation</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Characteristic Equation</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

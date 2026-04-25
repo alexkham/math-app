@@ -515,7 +515,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Joint Probability</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Joint Probability</h1>
 //    <br/>
 //    <br/>
 //    <SectionTableOfContents sections={genericSections}
@@ -1133,7 +1133,7 @@ export default function JointProbabilityPage({seoData, sectionsContent, introCon
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Joint Probability</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Joint Probability</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

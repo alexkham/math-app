@@ -353,7 +353,7 @@ export default function ComplexNumbersVisualToolsPage({
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'30px'}}>Complex Numbers Visual Tools</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Numbers Visual Tools</h1>
       <QuickNav items={cardsData} dropdownLabel="All Tools" />
       <br/>
       <ScrollToTop

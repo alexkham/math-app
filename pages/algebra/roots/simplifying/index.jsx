@@ -871,7 +871,7 @@ export default function SimplifyingPage({seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Simplifying Roots</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Simplifying Roots</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

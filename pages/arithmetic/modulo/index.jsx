@@ -873,7 +873,7 @@ export default function ModuloPage({seoData, sectionsContent, introContent, faqQ
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Modulo</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Modulo</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

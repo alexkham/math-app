@@ -783,7 +783,7 @@ export default function FactoringPage({seoData, sectionsContent, introContent, f
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Factoring Polynomials</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Factoring Polynomials</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}/>

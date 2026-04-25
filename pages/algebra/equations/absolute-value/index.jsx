@@ -568,7 +568,7 @@ export default function AbsoluteValueEquationsPage({seoData, sectionsContent, in
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Equations with Absolute Value</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Equations with Absolute Value</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

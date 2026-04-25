@@ -1241,7 +1241,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
           
           iconColor='white'
           panelBackgroundColor='#f2f2f2'/> 
-    <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Trigonometric Identities</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Trigonometric Identities</h1>
     {/* <div style={{transform:'scale(0.9)',marginLeft:'100px',marginRight:'100px'}}>
     <DataWrapper2 data={trigIdentitiesData} config={config} searchable={false}/>
     </div> */}

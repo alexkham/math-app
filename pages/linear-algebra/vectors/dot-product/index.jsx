@@ -608,7 +608,7 @@ export default function DotProductPage({seoData, sectionsContent, introContent, 
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Dot Product</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Dot Product</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

@@ -494,7 +494,7 @@ return (
       panelBackgroundColor='#f2f2f2'
     />
     
-    <h1 className='title' style={{marginTop:'-20px',marginBottom:'30px'}}>Exponent Calculator</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Exponent Calculator</h1>
     <div style={{marginBottom:'20px'}}>
       <ExplanationDetails 
         instructions={detailInstructions}

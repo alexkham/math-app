@@ -775,7 +775,7 @@ export default function InequalitiesPage({seoData, sectionsContent, introContent
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Logarithmic Inequalities</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Logarithmic Inequalities</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

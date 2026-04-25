@@ -202,7 +202,7 @@ export default function CombinatoricsCalculatorPage({ seoData, explanationsMappi
          iconColor='white'
          panelBackgroundColor='#f2f2f2'/> 
    <Breadcrumb/>
-   <h1 className='title' style={{marginTop:'-20px', marginBottom:'-20px'}}>Combinatorics Calculator</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Combinatorics Calculator</h1>
    <CombinatoricsCalculator 
    explanations={explanationsMapping}
    initialScenario={initialScenario}/>

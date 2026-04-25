@@ -623,7 +623,7 @@ const schemas = {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Diagonalization</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Diagonalization</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

@@ -597,7 +597,7 @@ export default function ProbabilityFunctionViewPage({seoData, sectionsContent, i
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-40px',marginBottom:'-100px'}}>{h1Title}</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>{h1Title}</h1>
    <br/>
    <div style={{transform:'scale(0.8)'}}>
    {componentName === 'DiscreteProbability' && (

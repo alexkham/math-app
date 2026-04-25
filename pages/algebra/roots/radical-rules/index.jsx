@@ -712,7 +712,7 @@ export default function RadicalRulesPage({seoData, sectionsContent, introContent
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Radical Rules</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Radical Rules</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

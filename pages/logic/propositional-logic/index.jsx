@@ -36,7 +36,7 @@ export default function PropositionalLogicPage({ keyWords, introContent, proposi
         panelBackgroundColor='#f2f2f2'
       />
       <Breadcrumb/>
-      <h1 className='title' style={{marginTop:'-20px',marginBottom:'30px'}}>Propositional Logic</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Propositional Logic</h1>
       <SectionTableOfContents sections={propositionalLogicSections}
        showSecondaryNav={true}
        secondaryNavMode="children"  // or "siblings"

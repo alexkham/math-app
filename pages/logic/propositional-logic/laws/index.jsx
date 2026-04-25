@@ -285,7 +285,7 @@ export default function PropositionalLogicLawsPage({ seoData, config, logicLawsD
               panelBackgroundColor='#f2f2f2'
             />
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'0px', marginBottom:'0px'}}>Basic Propositional Logic Laws</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Basic Propositional Logic Laws</h1>
     <div style={{transform:'scale(0.87)',marginTop:'-100px'}}>
     <DataWrapper2 data={logicLawsData}
     config={config}/>

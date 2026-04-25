@@ -611,7 +611,7 @@ export default function PolynomialEquationsPage({seoData, sectionsContent, intro
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Polynomial Equations</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Polynomial Equations</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

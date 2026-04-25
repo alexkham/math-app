@@ -422,7 +422,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-60px',marginBottom:'0px'}}>Table of Powers</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Table of Powers</h1>
    <br/>
    <PowerTable/>
    <br/>

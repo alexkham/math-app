@@ -717,7 +717,7 @@ export default function GraphingPage({seoData, sectionsContent, introContent, fa
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Graphing Polynomials</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Graphing Polynomials</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}/>

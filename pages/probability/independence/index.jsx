@@ -419,7 +419,7 @@
 // //    <Breadcrumb/>
 // //    <br/>
 // //    <br/>
-// //    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Independence of Events</h1>
+// //    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Independence of Events</h1>
 // //    <br/>
 // //    <br/>
 // //    <SectionTableOfContents sections={genericSections}
@@ -973,7 +973,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Independence of Events</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Independence of Events</h1>
 //    <br/>
 //    <br/>
 //    <SectionTableOfContents sections={genericSections}
@@ -1525,7 +1525,7 @@ export default function IndependencePage({seoData, sectionsContent, introContent
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Independence of Events</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Independence of Events</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

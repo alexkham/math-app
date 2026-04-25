@@ -147,7 +147,7 @@ export default function VisualToolsPage() {
             <br/>
             
             <Breadcrumb/>
-            <h1 className='title' style={{marginTop:'-20px',marginBottom:'-20px'}}>Visual Tools</h1>
+            <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Visual Tools</h1>
             <br/>
             <OperaSidebar 
                 side='right'

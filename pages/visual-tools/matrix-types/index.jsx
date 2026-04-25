@@ -70,7 +70,7 @@ export default function MatrixTypesPage({ keyWords, matrixTypesExplanations }) {
         iconColor='white'
         panelBackgroundColor='#f2f2f2'
       />
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Square Matrix Types Generator</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Square Matrix Types Generator</h1>
      
       <div style={{transform:'scale(0.95)'}}>
         <MatrixGenerator explanations={matrixTypesExplanations}/>

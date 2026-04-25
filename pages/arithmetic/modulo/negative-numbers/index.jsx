@@ -811,7 +811,7 @@ export default function NegativeNumbersPage({seoData, sectionsContent, introCont
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Modulo of Negative Numbers</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Modulo of Negative Numbers</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

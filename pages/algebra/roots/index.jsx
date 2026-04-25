@@ -691,7 +691,7 @@ export default function RootsAndRadicalsPage({seoData, sectionsContent, introCon
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Roots (Radicals)</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Roots (Radicals)</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

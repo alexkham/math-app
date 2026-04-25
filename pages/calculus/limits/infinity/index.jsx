@@ -898,7 +898,7 @@ export default function InfinityPage({seoData, sectionsContent, introContent, fa
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Infinite Limits and Limits at Infinity</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Infinite Limits and Limits at Infinity</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

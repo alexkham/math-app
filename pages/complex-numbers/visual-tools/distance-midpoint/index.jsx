@@ -428,7 +428,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Distance and Midpoint between Complex Numbers</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Distance and Midpoint between Complex Numbers</h1>
 //    <br/>
 //    <ComplexDistanceMidpoint/>
 //    <br/>
@@ -948,7 +948,7 @@ export default function DistanceMidpointPage({seoData, sectionsContent, introCon
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Distance and Midpoint between Complex Numbers</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Distance and Midpoint between Complex Numbers</h1>
    <br/>
    <SiblingsNav>
    <ComplexDistanceMidpoint/>

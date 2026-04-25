@@ -654,7 +654,7 @@ export default function RationalExponentsPage({seoData, sectionsContent, introCo
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Rational Exponents</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Rational Exponents</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

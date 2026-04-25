@@ -741,7 +741,7 @@ export default function LinearIndependencePage({seoData, sectionsContent, introC
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Linear Independence</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Linear Independence</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

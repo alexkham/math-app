@@ -353,7 +353,7 @@ $𝑝∨𝑞$ is satisfiable because it’s true in cases where either $𝑝$ or
      <Breadcrumb/>
     
      <main>
-       <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>
+       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
          Semantics
        </h1>
        <SectionTableOfContents sections={logicSections}

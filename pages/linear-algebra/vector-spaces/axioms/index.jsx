@@ -765,7 +765,7 @@ export default function VectorSpaceAxiomsPage({seoData, sectionsContent, introCo
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Axioms related to Vector Spaces</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Axioms related to Vector Spaces</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

@@ -483,7 +483,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Chebyshev&apos;s Inequality</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Chebyshev&apos;s Inequality</h1>
 //    <br/>
 //    <br/>
 //    <SectionTableOfContents sections={genericSections}/>
@@ -1099,7 +1099,7 @@ export default function ChebyshevInequalityPage({seoData, sectionsContent, intro
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Chebyshev&apos;s Inequality</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Chebyshev&apos;s Inequality</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}/>

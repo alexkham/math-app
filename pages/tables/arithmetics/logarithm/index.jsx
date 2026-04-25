@@ -149,7 +149,7 @@ export default function LogarithmTablePage({sectionsContent,seoData,keyWords}) {
      <Breadcrumb />
       <div style={{position:'absolute', top:'100px', width:'95%', left:'0', right:'0'}}>
       
-        <h1 className='title' style={{marginTop:'-20px',marginBottom:'-30px'}}>Logarithm Table</h1>
+        <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Logarithm Table</h1>
         <LogarithmTable />
       </div>
       {/* <ScrollUpButton /> */}

@@ -169,7 +169,7 @@
 // //            panelBackgroundColor='#f2f2f2'
 // //          />
 // //    <Breadcrumb/>
-// //    <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Fraction Calculator</h1>
+// //    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Fraction Calculator</h1>
    
 // //    <div style={{
 // //       display: 'grid',
@@ -683,7 +683,7 @@
 //       panelBackgroundColor='#f2f2f2'
 //     />
     
-//     <h1 className='title' style={{marginTop:'-20px',marginBottom:'30px'}}>Fraction Calculator</h1>
+//     <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Fraction Calculator</h1>
 //     <div style={{marginBottom:'20px'}}>
 //       <ExplanationDetails 
 //         instructions={detailInstructions}
@@ -1208,7 +1208,7 @@ return (
       panelBackgroundColor='#f2f2f2'
     />
     
-    <h1 className='title' style={{marginTop:'-20px',marginBottom:'30px'}}>Fraction Calculator</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Fraction Calculator</h1>
     <div style={{marginBottom:'20px'}}>
       <ExplanationDetails 
         instructions={detailInstructions}

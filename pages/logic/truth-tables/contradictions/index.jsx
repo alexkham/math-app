@@ -243,7 +243,7 @@ export default function ContradictionsTruthTablesPage({ keyWords, contradictionE
           panelWidth='300px'
           iconColor='white'
           panelBackgroundColor='#f2f2f2'/> 
-      <h1 className='title' style={{marginTop:'-30px', marginBottom:'0px'}}>Contradictions Truth Tables</h1> 
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Contradictions Truth Tables</h1> 
 
       <br/>
       <div style={{display: 'grid', gridTemplateColumns: '200px 1fr', gap: '0px', alignItems: 'start', paddingTop: '30px'}}>

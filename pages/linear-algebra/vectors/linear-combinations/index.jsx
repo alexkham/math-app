@@ -527,7 +527,7 @@ export default function LinearCombinationsPage({seoData, sectionsContent, introC
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Linear Combinations</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Linear Combinations</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

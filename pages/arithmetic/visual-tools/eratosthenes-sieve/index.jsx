@@ -428,7 +428,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Sieve of Eratosthenes</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Sieve of Eratosthenes</h1>
 //    <br/>
 //    <EratosthenesSieve/>
 //    <br/>
@@ -896,7 +896,7 @@ export default function SievePage({
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Sieve of Eratosthenes</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Sieve of Eratosthenes</h1>
       <br/>
       <EratosthenesSieve/>
       <br/>

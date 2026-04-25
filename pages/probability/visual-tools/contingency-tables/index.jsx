@@ -424,7 +424,7 @@
 // // //    <Breadcrumb/>
 // // //    <br/>
 // // //    <br/>
-// // //    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Contingency Tables</h1>
+// // //    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Contingency Tables</h1>
 // // //    <br/>
 // // //    <br/>
 // // //    <SectionTableOfContents sections={genericSections}/>
@@ -737,7 +737,7 @@
 // //       <Breadcrumb/>
 // //       <br/>
 // //       <br/>
-// //       <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Contingency Tables</h1>
+// //       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Contingency Tables</h1>
 // //       <br/>
 // //       <br/>
 // //       <GenericMultiComponentFrame
@@ -1810,7 +1810,7 @@ const genericSections = [
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-60px',marginBottom:'-20px'}}>Contingency Tables</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Contingency Tables</h1>
       <br/>
       <br/>
       <div style={{transform:'scale(0.95)'}}>

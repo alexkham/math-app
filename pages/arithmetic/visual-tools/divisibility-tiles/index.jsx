@@ -428,7 +428,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Divisibility Tiles</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Divisibility Tiles</h1>
 //    <br/>
 //    <DivisibilityTiles/>
 //    <br/>
@@ -888,7 +888,7 @@ export default function DivisibilityTilesPage({
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Divisibility Tiles</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Divisibility Tiles</h1>
       <br/>
       <DivisibilityTiles/>
       <br/>

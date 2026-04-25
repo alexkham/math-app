@@ -524,7 +524,7 @@ export default function VectorMagnitudePage({seoData, sectionsContent, introCont
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Magnitude of a Vector</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Magnitude of a Vector</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

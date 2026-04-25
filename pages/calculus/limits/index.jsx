@@ -147,7 +147,7 @@
 //                iconColor='white'
 //                panelBackgroundColor='#f2f2f2'/>
 //       <Breadcrumb/>
-//       <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Limits of Functions</h1>
+//       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Limits of Functions</h1>
 //       <br/>
 //       <SectionTableOfContents sections={limitSections}/>
 //       <br/>
@@ -811,7 +811,7 @@ export default function LimitsPage({seoData, sectionsContent, introContent, faqQ
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Limits in Calculus</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Limits in Calculus</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

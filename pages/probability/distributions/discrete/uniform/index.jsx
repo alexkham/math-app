@@ -1002,7 +1002,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Discrete Uniform Distribution</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Discrete Uniform Distribution</h1>
 //    <br/>
 //    <br/>
 //    <SectionTableOfContents sections={genericSections}
@@ -1820,7 +1820,7 @@ export default function DiscreteUniformDistributionPage({
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Discrete Uniform Distribution</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Discrete Uniform Distribution</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

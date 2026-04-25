@@ -722,7 +722,7 @@ export default function OrthogonalityPage({seoData, sectionsContent, introConten
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Orthogonality</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Orthogonality</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

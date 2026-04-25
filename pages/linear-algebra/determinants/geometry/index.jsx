@@ -572,7 +572,7 @@ const schemas = {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Determinant as Area and Volume</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Determinant as Area and Volume</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

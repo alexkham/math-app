@@ -588,7 +588,7 @@ export default function EigenvaluePropertiesPage({seoData, sectionsContent, intr
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Properties of Eigenvalue and Eigenvector</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Properties of Eigenvalue and Eigenvector</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

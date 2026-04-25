@@ -88,7 +88,7 @@ export default function ArithmeticCalculatorsPage({ calculatorCards, seoData }) 
         panelBackgroundColor='#f2f2f2'
       />
       
-      <h1 className='title' style={{marginTop:'-20px', marginBottom:'20px'}}>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
         Arithmetic Calculators
       </h1>
       

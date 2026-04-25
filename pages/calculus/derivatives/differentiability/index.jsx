@@ -760,7 +760,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Differentiability</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Differentiability</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

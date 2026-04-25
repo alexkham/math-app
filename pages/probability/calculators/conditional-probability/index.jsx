@@ -389,7 +389,7 @@ export default function ConditionalProbabilityCalculatorPage({seoData, sectionsC
         panelBackgroundColor='#f2f2f2'
       />
       <Breadcrumb/>
-      <h1 className='title' style={{marginTop:'-30px', marginBottom:'-50px'}}>Conditional Probability Calculator</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Conditional Probability Calculator</h1>
       <div style={{transform:'scale(0.85)'}} className="calculator-widget">
         <ConditionalProbabilityTable/>
       </div>

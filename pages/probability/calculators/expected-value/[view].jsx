@@ -281,7 +281,7 @@ export default function ExpectedValueCalculatorPage({ seoData, sectionsContent, 
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-70px', marginBottom:'-50px'}}>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
         {h1Title}
       </h1>
       <br/>

@@ -103,7 +103,7 @@ export default function AngleConversionTable({sectionsContent,keyWords,navigatio
              iconColor='white'
              panelBackgroundColor='#f2f2f2'/> 
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>Angle Conversion Table</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Angle Conversion Table</h1>
     <br/>
     {/* <VerticalButtonGroup 
             items={navigationGroup}

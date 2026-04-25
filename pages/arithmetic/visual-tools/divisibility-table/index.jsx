@@ -428,7 +428,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Divisibility Table</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Divisibility Table</h1>
 //    <br/>
 //    {/* Add this just before <DivisibilityTable/> in the page */}
 
@@ -1027,7 +1027,7 @@ export default function DivisibilityTablePage({seoData, sectionsContent, introCo
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'10px'}}>Divisibility Table</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Divisibility Table</h1>
      
 
       {/* Instruction Box

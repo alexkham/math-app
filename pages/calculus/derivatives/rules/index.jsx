@@ -444,7 +444,7 @@
 //               panelBackgroundColor='#f2f2f2'
 //             />
 //       <Breadcrumb/>
-//       <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Derivative Rules</h1>
+//       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Derivative Rules</h1>
 //       <br/>
 //       <SectionTableOfContents sections={derivativeRulesSections}/>
 //       <br/>
@@ -1311,7 +1311,7 @@ export default function RulesPage({seoData, sectionsContent, introContent, faqQu
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Derivative Rules</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Derivative Rules</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

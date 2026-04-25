@@ -703,7 +703,7 @@ continuousDistributionsTypesData, seoData}) {
            panelBackgroundColor='#f2f2f2'
          /> 
    <Breadcrumb/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Probability Distributions</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Probability Distributions</h1>
    <br/>
    <SectionTableOfContents sections={distributionsSections}
    showSecondaryNav={true}

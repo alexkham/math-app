@@ -205,7 +205,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Probability Inequalities</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Probability Inequalities</h1>
 //    <br/>
 //    <br/>
    
@@ -690,7 +690,7 @@ export default function InequalitiesLanding({seoData, sectionsContent, introCont
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Probability Inequalities</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Probability Inequalities</h1>
       <br/>
       <br/>
       

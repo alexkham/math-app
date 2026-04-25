@@ -22,7 +22,7 @@ export default function CombinatoricsFormulasPage({ combinatoricsFormulaList, ke
       <br/>
       
         <Breadcrumb />
-        <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}} >Combinatorics Formulas</h1>
+        <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}} >Combinatorics Formulas</h1>
         <FormulasTOC data={combinatoricsFormulaList}/>
         <FormulaAccordionWrapper data={combinatoricsFormulaList} groupByField={['category']} />
       

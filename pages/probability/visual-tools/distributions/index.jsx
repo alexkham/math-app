@@ -179,7 +179,7 @@
 //       <Breadcrumb/>
 //       <br/>
 //       <br/>
-//       <h1 className='title' style={{marginTop:'-50px', marginBottom:'5px'}}>
+//       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
 //         Probability Distribution Explorers
 //       </h1>
       
@@ -864,7 +864,7 @@ export default function DistributionExplorersPage({seoData, sectionsContent, int
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-50px', marginBottom:'5px'}}>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
         Probability Distribution Explorers
       </h1>
       

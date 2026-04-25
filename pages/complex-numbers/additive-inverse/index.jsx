@@ -872,7 +872,7 @@ export default function AdditiveInversePage({seoData, sectionsContent, introCont
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Additive Inverse of a Complex Number</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Additive Inverse of a Complex Number</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

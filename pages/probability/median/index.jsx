@@ -1498,7 +1498,7 @@ export default function MedianPage({
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Median</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Median</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}/>

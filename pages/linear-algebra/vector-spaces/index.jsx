@@ -945,7 +945,7 @@ export default function VectorSpacesPage({seoData, sectionsContent, introContent
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Vector Spaces</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Vector Spaces</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

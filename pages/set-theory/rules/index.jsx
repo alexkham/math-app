@@ -448,7 +448,7 @@ export default function SetTheoryRulesPage({sectionsContent,setAlgebraLawsData})
            panelBackgroundColor='#f2f2f2'
          />
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-30px', marginBottom:'10px'}}>Set Theory Rules</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Set Theory Rules</h1>
     <br/>
     <SectionTableOfContents sections={setTheoryRulesSections}/>
     <br/>

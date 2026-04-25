@@ -732,7 +732,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Cholesky Decomposition</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cholesky Decomposition</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

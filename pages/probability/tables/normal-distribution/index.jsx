@@ -185,7 +185,7 @@ export default function NormalDistributionTable({seoData, sectionsContent, intro
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Normal Distribution (Z-Score) Table</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Normal Distribution (Z-Score) Table</h1>
    <br/>
     <SectionTableOfContents sections={genericSections}
     stickyWidth={'250px'}

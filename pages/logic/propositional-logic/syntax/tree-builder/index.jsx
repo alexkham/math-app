@@ -136,7 +136,7 @@ export default function TreeBuilderPage({
         panelBackgroundColor='#f2f2f2'
       />
       <Breadcrumb/>
-      <h1 className='title' style={{marginTop:'10px', marginBottom:'-10px'}}>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
         Proposition Analyzer & Tree Builder
       </h1>
       

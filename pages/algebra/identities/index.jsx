@@ -457,7 +457,7 @@ export default function LogarithmRulesPage({keyWords, algebraicIdentitiesData ,s
                    panelBackgroundColor='#f2f2f2'
                  />
       <Breadcrumb/>
-      <h1 className='title' style={{marginTop:'-20px',marginBottom:'10px'}}>Algebric Identities</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Algebric Identities</h1>
       <br/>
       <br/>
       <SectionTableOfContents sections={logarithRulesSections}

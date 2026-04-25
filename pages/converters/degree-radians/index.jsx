@@ -68,7 +68,7 @@ export default function AngleConverterPage({content,navigationGroup}) {
       <br/>
       <br/>
       <Breadcrumb/>
-      <h1 className='title' style={{marginBottom:'50px', marginTop:'-20px'}}>Angle Degree to Radians Converter</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Angle Degree to Radians Converter</h1>
         
        
           <div style={{

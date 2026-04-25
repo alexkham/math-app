@@ -187,7 +187,7 @@ export default function BinomialDistributionTablePage({seoData, sectionsContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'-20px'}}>Binomial Distribution Table</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Binomial Distribution Table</h1>
    <br/>
    <SectionTableOfContents sections={genericSections}  stickyWidth={'180px'} 
    showSecondaryNav={true}

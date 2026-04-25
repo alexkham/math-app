@@ -80,7 +80,7 @@ export default function TrigonometryCalculatorPage({ explanations ,inverseTrigoE
       <br/>
       <br/>
       <Breadcrumb/>
-      <h1 className='title' style={{marginBottom:'-20px', marginTop:'-30px'}}>Trigonometry Calculator</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Trigonometry Calculator</h1>
       <br/>
       <br/>
       <CalculatorSwitcher standardExplanations={explanations} inverseExplanations={inverseTrigoExplanations} scale={'0.9'}/>

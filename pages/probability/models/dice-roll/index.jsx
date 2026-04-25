@@ -509,7 +509,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Dice Roll</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Dice Roll</h1>
 //    <br/>
 //    <br/>
 //    <SectionTableOfContents sections={genericSections}/>
@@ -1164,7 +1164,7 @@ export default function DiceRollPage({seoData, sectionsContent, introContent, fa
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Dice Roll</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Dice Roll</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}/>

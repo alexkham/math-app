@@ -117,7 +117,7 @@ export default function EquivalenceValidatorPage({keyWords}) {
                 panelBackgroundColor='#f2f2f2'
               />
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'0px', marginBottom:'20px'}}>Logical Equivalence Validator</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Logical Equivalence Validator</h1>
     <div style={{transform:'scale(0.95)'}}>
     <LogicalEquivalenceVerifier/>
     </div>

@@ -778,7 +778,7 @@ export default function SetOperationsPage({seoData, sectionsContent, introConten
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Operations on Sets</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Operations on Sets</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

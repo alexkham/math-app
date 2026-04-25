@@ -456,7 +456,7 @@ export default function ComplexExplorerPage({
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Complex Number Explorer</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Number Explorer</h1>
       <br/>
       <SiblingsNav>
       <ComplexExplorer/>

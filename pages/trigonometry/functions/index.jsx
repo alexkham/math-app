@@ -704,7 +704,7 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, f
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Trigonometric Functions</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Trigonometric Functions</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

@@ -497,7 +497,7 @@ export default function DeterminantCalculatorPage({ seoData, sectionsContent, fa
       /> 
 
       <main className="container mx-auto px-4 py-8">
-        <h1 className="title" style={{marginBottom:'20px',marginTop:'20px'}}>Determinant Calculator</h1>
+        <h1 className="title" style={{marginTop:'0px',marginBottom:'10px'}}>Determinant Calculator</h1>
         
         <div style={{width:'95%'}}>
           <DeterminantCalculator />

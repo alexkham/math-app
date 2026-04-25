@@ -21,7 +21,7 @@ export default function PermutationsVisualizerPage() {
       iconColor='white'
       panelBackgroundColor='#f2f2f2'/> 
    <Breadcrumb></Breadcrumb>
-   <h1 className='title'  style={{marginBottom:'-20px'}}>Permutations Visualizer</h1>
+   <h1 className='title'  style={{marginBottom:'10px'}}>Permutations Visualizer</h1>
    <PermutationsVisualizer2></PermutationsVisualizer2>
    {/* <ScrollUpButton></ScrollUpButton> */}
    

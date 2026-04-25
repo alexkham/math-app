@@ -849,7 +849,7 @@ export default function PiecewisePage({seoData, sectionsContent, introContent, f
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Piecewise Functions</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Piecewise Functions</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

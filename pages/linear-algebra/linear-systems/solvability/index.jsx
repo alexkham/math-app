@@ -743,7 +743,7 @@ export default function SolvabilityPage({seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Solvability of Linear Systems</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Solvability of Linear Systems</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

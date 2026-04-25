@@ -927,7 +927,7 @@ export default function TransformationsPage({seoData, sectionsContent, introCont
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Transformations</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Transformations</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

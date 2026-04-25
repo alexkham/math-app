@@ -677,7 +677,7 @@ export default function MatrixTracePage({seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Trace of a Matrix</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Trace of a Matrix</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

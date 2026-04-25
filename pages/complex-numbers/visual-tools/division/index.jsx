@@ -428,7 +428,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Complex Numbers Division</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Numbers Division</h1>
 //    <br/>
 //    <ComplexDivisionVisualizer/>
 //    <br/>
@@ -951,7 +951,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Complex Numbers Division</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Numbers Division</h1>
    <br/>
    <SiblingsNav>
    <ComplexDivisionVisualizer/>

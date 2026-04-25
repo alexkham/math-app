@@ -167,7 +167,7 @@ export default function CalculusFormulasPage({
       />
       <Breadcrumb/>
       <main>
-        <h1 className='title' style={{marginTop:'-20px',marginBottom:'-10px'}}>
+        <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
           Calculus Formulas
         </h1>
         <FormulasTOC data={calculusFormulasList} />

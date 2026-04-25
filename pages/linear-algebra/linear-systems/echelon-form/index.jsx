@@ -764,7 +764,7 @@ export default function EchelonFormPage({seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Reduced Row Echelon Form(REF)</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Reduced Row Echelon Form(REF)</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

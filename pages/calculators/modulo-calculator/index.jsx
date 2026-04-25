@@ -194,7 +194,7 @@
 // //         panelBackgroundColor='#f2f2f2'
 // //       /> 
 // //       <Breadcrumb/>
-// //       <h1 className='title' style={{marginTop:'-20px',marginBottom:'20px'}}>Modulo Calculator</h1>
+// //       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Modulo Calculator</h1>
 // //      <div className="layout-container">
 // //         {/* <div style={{
 // //       display: 'grid',
@@ -732,7 +732,7 @@
 //     <Breadcrumb/>
 //     <br/>
 //     <br/>
-//     <h1 className='title' style={{marginTop:'-40px',marginBottom:'0px'}}>Modulo Calculator</h1>
+//     <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Modulo Calculator</h1>
 //     <br/>
 //     <div className="layout-container">
 //       <div>
@@ -1268,7 +1268,7 @@ return (
     <Breadcrumb/>
     <br/>
     <br/>
-    <h1 className='title' style={{marginTop:'-40px',marginBottom:'0px'}}>Modulo Calculator</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Modulo Calculator</h1>
     <br/>
     
     <div className="layout-container">

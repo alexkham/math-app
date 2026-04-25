@@ -493,7 +493,7 @@ export default function ContradictionPage({
                 panelBackgroundColor='#f2f2f2'
               />
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Contradiction</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Contradiction</h1>
     <br/>
     <SectionTableOfContents sections={contradictionSections}
      showSecondaryNav={true}

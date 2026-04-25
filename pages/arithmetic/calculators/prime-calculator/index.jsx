@@ -414,7 +414,7 @@ return (
       panelBackgroundColor='#f2f2f2'
     />
     
-    <h1 className='title' style={{marginTop:'-20px',marginBottom:'0px'}}>Prime Number Checker</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Prime Number Checker</h1>
     <br/>
     <div style={{marginBottom:'20px'}}>
       <ExplanationDetails 

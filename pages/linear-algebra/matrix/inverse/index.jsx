@@ -673,7 +673,7 @@ export default function MatrixInversePage({seoData, sectionsContent, introConten
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Inverse of a Matrix</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Inverse of a Matrix</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

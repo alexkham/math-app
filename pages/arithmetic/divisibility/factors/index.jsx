@@ -1134,7 +1134,7 @@ export default function FactorsPage({seoData, sectionsContent, introContent, faq
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Factors and Multiples</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Factors and Multiples</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

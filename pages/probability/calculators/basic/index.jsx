@@ -828,7 +828,7 @@ export default function ProbabilityCalculator({seoData, sectionsContent, faqQues
       <br/>
       <br/>
       
-      <h1 className='title' style={{marginTop:'-60px',marginBottom:'-0px'}}>Basic Probability Calculators</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Basic Probability Calculators</h1>
       
       <br/>
       

@@ -746,7 +746,7 @@ export default function RangePage({seoData, sectionsContent, introContent, faqQu
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Range</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Range</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

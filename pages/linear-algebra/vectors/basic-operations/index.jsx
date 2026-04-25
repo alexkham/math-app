@@ -535,7 +535,7 @@ export default function BasicVectorOperationsPage({seoData, sectionsContent, int
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Basic Operations on Vectors</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Basic Operations on Vectors</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

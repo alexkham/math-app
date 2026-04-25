@@ -132,7 +132,7 @@
 //       />
 
 //       <main>
-//         <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
+//         <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
 //           Trigonometry Terms and Definitions
 //         </h1>
 //         <CategoriesList
@@ -387,7 +387,7 @@ export default function TrigonometryDefinitionsPage({
       />
 
       <main>
-        <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>
+        <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
           Trigonometry Terms and Definitions
         </h1>
         <CategoriesList

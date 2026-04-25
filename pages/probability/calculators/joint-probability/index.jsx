@@ -365,7 +365,7 @@ export default function JointProbabilityCalculatorPage({seoData, sectionsContent
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-50px',marginBottom:'-20px'}}>Joint Probability Calculator</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Joint Probability Calculator</h1>
       <br/>
       <JointProbability2x2Table/>
       <br/>

@@ -800,7 +800,7 @@ export default function SVDPage({seoData, sectionsContent, introContent, faqQues
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>SVD Decompositions</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>SVD Decompositions</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

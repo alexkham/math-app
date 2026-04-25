@@ -729,7 +729,7 @@ export default function MultiplyingPage({seoData, sectionsContent, introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Multiplying Fractions</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Multiplying Fractions</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

@@ -480,7 +480,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Combinatorics in Probability</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Combinatorics in Probability</h1>
 //    <br/>
 //    <br/>
 //    <SectionTableOfContents sections={genericSections}
@@ -1086,7 +1086,7 @@ export default function CombinatoricsPage({seoData, sectionsContent, introConten
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Combinatorics in Probability</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Combinatorics in Probability</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

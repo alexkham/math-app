@@ -190,7 +190,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'0px'}}>Two Events Probability Calculator</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Two Events Probability Calculator</h1>
 //    <br/>
 //    <TwoEventsProbabilityCalculator/>
 //    <br/>
@@ -702,7 +702,7 @@ export default function TwoEventsCalculatorPage({seoData, sectionsContent, intro
       <Breadcrumb/>
    
      
-      <h1 className='title' style={{marginTop:'-20px',marginBottom:'50px'}}>Two Events Probability Calculator</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Two Events Probability Calculator</h1>
       <br/>
       <br/>
       {/* <VerticalButtonGroup 

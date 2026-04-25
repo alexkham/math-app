@@ -868,7 +868,7 @@ export default function EquationsPolynomialsPage({seoData, sectionsContent, intr
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Equations and Polynomials </h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Equations and Polynomials </h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

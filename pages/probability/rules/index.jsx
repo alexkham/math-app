@@ -361,7 +361,7 @@ export default function ProbabilityRulesPage({ sectionsContent,
            panelBackgroundColor='#f2f2f2'
          /> 
     <Breadcrumb/>
-    <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Rules of Probability</h1>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Rules of Probability</h1>
     <br/>
     <SectionTableOfContents
     sections={probabilityRulesSections}/>

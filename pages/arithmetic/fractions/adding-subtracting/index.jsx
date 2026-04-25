@@ -745,7 +745,7 @@ export default function AddingSubtractingPage({seoData, sectionsContent, introCo
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Adding and Subtracting Fractions</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Adding and Subtracting Fractions</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

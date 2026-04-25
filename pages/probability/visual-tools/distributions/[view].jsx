@@ -3533,7 +3533,7 @@ export default function DistributionExplorerPage({ seoData, sectionsContent, int
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-50px', marginBottom:'-20px'}}>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
         {h1Title}
       </h1>
       <br/>

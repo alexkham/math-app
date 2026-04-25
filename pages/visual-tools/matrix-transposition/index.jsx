@@ -66,7 +66,7 @@ export default function MatrixTranspositionCalculatorPage({ keyWords = [], descr
       iconColor='white'
       panelBackgroundColor='#f2f2f2'/> 
       <Breadcrumb/>
-      <h1 className='title' style={{marginBottom:'-10px', marginTop:'-10px'}}>Matrix Transposition Calculator</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Matrix Transposition Calculator</h1>
       <br/>
       <div style={{
         transform: 'scale(0.9)', 

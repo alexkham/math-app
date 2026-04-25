@@ -487,7 +487,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Markov Inequality</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Markov Inequality</h1>
 //    <br/>
 //    <br/>
 //    <SectionTableOfContents sections={genericSections}/>
@@ -1110,7 +1110,7 @@ export default function MarkovInequalityPage({seoData, sectionsContent, introCon
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Markov Inequality</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Markov Inequality</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}/>

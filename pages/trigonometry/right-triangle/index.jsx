@@ -689,7 +689,7 @@ export default function RightTrianglePage({seoData,sectionsContent , introConten
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Right Triangle</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Right Triangle</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

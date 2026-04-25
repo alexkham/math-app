@@ -195,7 +195,7 @@ export default function TrigonometricTablesPage({sectionsContent , introContent,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'20px'}}>Trigonometry Tables</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Trigonometry Tables</h1>
    <br/>
    <NewCardGroup
    cards={tablesCardsData}

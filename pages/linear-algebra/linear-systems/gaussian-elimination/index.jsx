@@ -771,7 +771,7 @@ export default function GaussianEliminationPage({seoData, sectionsContent, intro
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Gaussian Elimination</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Gaussian Elimination</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

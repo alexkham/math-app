@@ -597,7 +597,7 @@ export default function QuadraticEquationsPage({seoData, sectionsContent, introC
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Quadratic Equations</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Quadratic Equations</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

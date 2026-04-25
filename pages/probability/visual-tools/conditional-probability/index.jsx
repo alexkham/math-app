@@ -459,7 +459,7 @@ export default function ConditionalProbabilityLanding({seoData, sectionsContent,
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Conditional Probability Visualizations</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Conditional Probability Visualizations</h1>
       <br/>
       <br/>
       

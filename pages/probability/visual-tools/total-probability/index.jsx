@@ -371,7 +371,7 @@ export default function TotalProbabilityPage({seoData, sectionsContent, faqQuest
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-50px',marginBottom:'-120px'}}>Total Probability Visualizer</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Total Probability Visualizer</h1>
       <br/>
       <div style={{transform:'scale(0.85)'}}>
         <TotalProbabilityVisualizerV2/>

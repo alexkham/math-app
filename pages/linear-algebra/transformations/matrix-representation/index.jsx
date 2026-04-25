@@ -720,7 +720,7 @@ export default function MatrixRepresentationPage({seoData, sectionsContent, intr
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Matric Representation of Linear Transformation</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Matric Representation of Linear Transformation</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

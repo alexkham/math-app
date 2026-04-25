@@ -516,7 +516,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Tree Diagrams</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Tree Diagrams</h1>
 //    <br/>
 //    <br/>
 //    <SectionTableOfContents sections={genericSections}
@@ -1168,7 +1168,7 @@ export default function TreeDiagramsPage({seoData, sectionsContent, introContent
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Tree Diagrams</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Tree Diagrams</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

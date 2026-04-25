@@ -633,7 +633,7 @@ export default function LogarithmsPage({seoData, sectionsContent, introContent, 
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Logarithms</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Logarithms</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

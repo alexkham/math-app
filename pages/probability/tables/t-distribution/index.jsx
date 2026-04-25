@@ -169,7 +169,7 @@ export default function TDistributionTable({seoData, sectionsContent}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'20px'}}>T-Distribution Table</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>T-Distribution Table</h1>
    <br/>
    <SectionTableOfContents sections={genericSections}
    stickyWidth={'220px'}

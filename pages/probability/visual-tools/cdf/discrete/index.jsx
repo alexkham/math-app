@@ -343,7 +343,7 @@ export default function CDFDiscreteVisualizerPage({seoData, sectionsContent, int
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'-50px',marginBottom:'-70px'}}>Cumulative Distribution Function(CDF) of Discrete Distributions</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cumulative Distribution Function(CDF) of Discrete Distributions</h1>
       <div style={{transform:'scale(0.8)'}}>
         <DiscreteDistributionsCDF/>
       </div>

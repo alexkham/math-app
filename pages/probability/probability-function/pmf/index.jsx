@@ -1152,7 +1152,7 @@ export default function PMFPage({seoData,sectionsContent , introContent ,general
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Probability Mass Functions (PMF)</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Probability Mass Functions (PMF)</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}/>

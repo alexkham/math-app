@@ -593,7 +593,7 @@ export default function VectorCalculatorPage({seoData, sectionsContent, descript
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Vectors Calculator</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Vectors Calculator</h1>
    <br/>
    
    <div style={{transform:'scale(1)',marginLeft:'-250px'}}>

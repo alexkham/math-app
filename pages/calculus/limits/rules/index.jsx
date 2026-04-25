@@ -342,7 +342,7 @@
 //                   panelBackgroundColor='#f2f2f2'
 //                 />
 //       <Breadcrumb/>
-//       <h1 className='title' style={{marginTop:'-30px', marginBottom:'20px'}}>Limits Rules</h1>
+//       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Limits Rules</h1>
 //       <br/>
 //       <SectionTableOfContents sections={limitsRulesSections}/>
 //       <br/>
@@ -1268,7 +1268,7 @@ export default function RulesPage({seoData, sectionsContent, introContent, faqQu
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-10px',marginBottom:'20px'}}>Rules of Limits</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Rules of Limits</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

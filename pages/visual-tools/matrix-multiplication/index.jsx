@@ -455,7 +455,7 @@ export default function MatrixMultiplicationPage({ seoData, sectionsContent, faq
 
       <main className="container">
         <Breadcrumb />
-        <h1 className="title" style={{marginTop:'10px', marginBottom:'20px'}}>Matrix Multiplication Visualizer</h1>
+        <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Matrix Multiplication Visualizer</h1>
         
         <br/>
         <MatrixMultiplication />

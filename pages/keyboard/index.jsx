@@ -367,7 +367,7 @@ export default function KeyboardPage({ seoData, sectionsContent, introContent, f
      
       
       
-      <h1 className='title' style={{marginTop:'-30px',marginBottom:'-20px'}}>Mathematical Keyboard</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Mathematical Keyboard</h1>
        <div style={{transform:'scale(0.95)',margin:'auto',width:'80%'}}>
         <NewMultipleTypeWriter/>
       </div>

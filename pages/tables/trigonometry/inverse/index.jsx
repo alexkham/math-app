@@ -264,7 +264,7 @@ export default function InversePage({ seoData, sectionsContent, introContent,
    <br/>
    
    <br/>
-   <h1 className='title' style={{marginTop:'-30px',marginBottom:'0px'}}>Inverse Trigonometric Functions</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Inverse Trigonometric Functions</h1>
    <br/>
     <div style={{
       display: 'grid',
