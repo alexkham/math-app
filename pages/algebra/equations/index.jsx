@@ -154,10 +154,25 @@ obj0: {
 - [Coefficient](!/algebra/definitions#coefficient) — the numerical factor multiplying a variable or power of a variable
 - [Discriminant](!/algebra/definitions#discriminant) — the quantity $\\Delta = b^2 - 4ac$ in a quadratic equation, determining the number and type of solutions
 - [Domain restriction](!/algebra/definitions#domain_restriction) — a value excluded because it causes division by zero or undefined operations
-- [Absolute value](!/algebra/definitions#absolute_value) — the distance of a number from zero on the number line, always non-negative`,
+- [Absolute value](!/algebra/definitions#absolute_value) — the distance of a number from zero on the number line, always non-negative
+
+## Formulas
+
+- [Quadratic Formula](!/algebra/formulas#quadratic_formula) — $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$
+- [Discriminant](!/algebra/formulas#discriminant) — $\\Delta = b^2 - 4ac$
+- [Square Root Property](!/algebra/formulas#square_root_property) — $x^2 = p \\implies x = \\pm\\sqrt{p}$
+- [Completing the Square](!/algebra/formulas#completing_the_square) — $x^2 + bx = \\left(x + \\frac{b}{2}\\right)^2 - \\frac{b^2}{4}$
+- [Absolute Value Equation](!/algebra/formulas#absolute_value_equation) — $|p| = b \\implies p = b \\text{ or } p = -b$
+- [Absolute Value Inequalities](!/algebra/formulas#absolute_value_inequalities) — $|p| < b \\implies -b < p < b$
+- [Vieta's Formulas (Quadratic)](!/algebra/formulas#vietas_quadratic) — $x_1 + x_2 = -\\frac{b}{a}$
+- [Vieta's Formulas (General)](!/algebra/formulas#vietas_cubic) — $r_1 + r_2 + r_3 = -a_{n-1}$
+`,
     before: ``,
     after: `
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+`,
     link: '',
   },
 
