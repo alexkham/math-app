@@ -83,10 +83,22 @@ obj0: {
  
 - [Logarithm](!/algebra/definitions#logarithm) — each rule derives from an exponent law inverted through the definition
 - [Common Logarithm](!/algebra/definitions#common_logarithm) — typical target base for change of base
-- [Natural Logarithm](!/algebra/definitions#natural_logarithm) — alternative target base`,
+- [Natural Logarithm](!/algebra/definitions#natural_logarithm) — alternative target base
+
+## Formulas Used on This Page
+
+- [Product Rule (Logarithms)](!/algebra/formulas#product_rule_logarithms) — $\\log_a(xy) = \\log_a(x) + \\log_a(y)$
+- [Quotient Rule (Logarithms)](!/algebra/formulas#quotient_rule_logarithms) — $\\log_a\\left(\\frac{x}{y}\\right) = \\log_a(x) - \\log_a(y)$
+- [Power Rule (Logarithms)](!/algebra/formulas#power_rule_logarithms) — $\\log_a(x^n) = n \\cdot \\log_a(x)$
+- [Change of Base Formula](!/algebra/formulas#change_of_base_formula) — $\\log_a(x) = \\frac{\\log_b(x)}{\\log_b(a)}$
+
+`,
   before: ``,
   after: `
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+`,
   link: '',
 },
  

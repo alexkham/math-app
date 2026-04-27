@@ -80,10 +80,22 @@ const keyWords = [
  
 - [Index](!/algebra/definitions#index) — rules require matching indices; even indices impose non-negative radicand restrictions
 - [Radicand](!/algebra/definitions#radicand) — the expression under the radical to which the rules are applied
-- [Rational Exponent](!/algebra/definitions#rational_exponent) — every radical rule derives from an exponent law applied to fractional powers`,
+- [Rational Exponent](!/algebra/definitions#rational_exponent) — every radical rule derives from an exponent law applied to fractional powers
+
+## Formulas Used on This Page
+
+- [Product Rule (Radicals)](!/algebra/formulas#product_rule_radicals) — $\\sqrt[n]{ab} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$
+- [Quotient Rule (Radicals)](!/algebra/formulas#quotient_rule_radicals) — $\\sqrt[n]{\\frac{a}{b}} = \\frac{\\sqrt[n]{a}}{\\sqrt[n]{b}}$
+- [Power Rule (Radicals)](!/algebra/formulas#power_rule_radicals) — $\\sqrt[n]{a^m} = a^{m/n}$
+- [Nested Radicals](!/algebra/formulas#nested_radicals) — $\\sqrt[m]{\\sqrt[n]{a}} = \\sqrt[mn]{a}$
+
+`,
   before: ``,
   after: `
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+`,
   link: '',
 },
 

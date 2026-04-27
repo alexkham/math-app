@@ -214,10 +214,18 @@ const sectionsContent = {
 - [Root](!/algebra/definitions#root) — $a^{1/n} = \\sqrt[n]{a}$; the denominator of the exponent becomes the index
 - [Radical](!/algebra/definitions#radical) — the notation that rational exponents replace or complement
 - [Index](!/algebra/definitions#index) — becomes the denominator in exponent form
-- [Power Rule (Radicals)](!/algebra/definitions#power_rule_(radicals)) — the bridge identity $\\sqrt[n]{a^m} = a^{m/n}$`,
+- [Power Rule (Radicals)](!/algebra/definitions#power_rule_(radicals)) — the bridge identity $\\sqrt[n]{a^m} = a^{m/n}$
+
+## Formulas Used on This Page
+
+- [Radical–Exponent Conversion](!/algebra/formulas#radical_to_exponent_conversion) — $\\sqrt[n]{a} = a^{1/n}$
+`,
   before: ``,
   after: `
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+`,
   link: '',
 },
  

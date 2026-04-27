@@ -68,138 +68,6 @@ const keyWords = [
 //                     __html:   sectionContent.distributions.svg,
 //                   }} />
 
-//     const sectionsContent={
-
-//     obj1:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-  
-//     },
-//     obj2:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-  
-//     obj3:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj4:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj5:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj6:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj7:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj8:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj9:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj10:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj11:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj12:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj13:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-//     obj14:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-
-
-//     obj15:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     }
-  
-//   }
 
 const sectionsContent = {
   obj0: {
@@ -214,10 +82,19 @@ const sectionsContent = {
 ## Related Concepts
  
 - [Radical Function](!/algebra/definitions#radical_function) — domain and range depend directly on index parity
-- [Rational Exponent](!/algebra/definitions#rational_exponent) — equivalent notation where domain restrictions carry over`,
+- [Rational Exponent](!/algebra/definitions#rational_exponent) — equivalent notation where domain restrictions carry over
+
+## Formulas Used on This Page
+
+- [Even Root Identity](!/algebra/formulas#even_root_identity) — $\\sqrt[n]{a^n} = |a|$ ($n$ even)
+- [Odd Root Identity](!/algebra/formulas#odd_root_identity) — $\\sqrt[n]{a^n} = a$ ($n$ odd)
+`,
   before: ``,
   after: `
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+`,
   link: '',
 },
 

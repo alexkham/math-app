@@ -2511,7 +2511,9 @@ const HIDE_SCROLLBAR_CSS = `
   .ftoc-no-scrollbar::-webkit-scrollbar { display: none; }
 `;
 
-const toId = (name) => name.toLowerCase().replace(/\s+/g, '_');
+// const toId = (name) => name.toLowerCase().replace(/\s+/g, '_');
+
+const toId = (name) => name.toLowerCase().replace(/[()]/g, '').replace(/\s+/g, '_');
 
 const noScroll = {
   scrollbarWidth: 'none',

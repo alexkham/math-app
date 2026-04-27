@@ -96,10 +96,22 @@ const keyWords = [
 - [One-to-One Property](!/algebra/definitions#one-to-one_property) — if $\\log_a(x) = \\log_a(y)$ then $x = y$
 - [Logarithmic Function](!/algebra/definitions#logarithmic_function) — domain $(0, \\infty)$, range $(-\\infty, \\infty)$, vertical asymptote at $x = 0$
 - [Logarithmic Equation](!/algebra/definitions#logarithmic_equation) — an equation where the variable appears inside a logarithm
-- [Logarithmic Inequality](!/algebra/definitions#logarithmic_inequality) — inequality direction depends on the base`,
+- [Logarithmic Inequality](!/algebra/definitions#logarithmic_inequality) — inequality direction depends on the base
+
+## Formulas Used on This Page
+
+- [Logarithm of the Base](!/algebra/formulas#logarithm_of_the_base) — $\\log_a(a) = 1$
+- [Logarithm of One](!/algebra/formulas#logarithm_of_one) — $\\log_a(1) = 0$
+- [Logarithm of an Exponential](!/algebra/formulas#logarithm_of_an_exponential) — $\\log_a(a^x) = x$
+- [Exponential of a Logarithm](!/algebra/formulas#exponential_of_a_logarithm) — $a^{\\log_a(x)} = x$
+
+`,
   before: ``,
   after: `
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+`,
   link: '',
 },
 
