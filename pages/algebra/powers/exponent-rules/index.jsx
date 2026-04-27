@@ -81,10 +81,25 @@ obj0: {
 - [Power of a Quotient](!/algebra/definitions#power_of_a_quotient) — $(a/b)^n = a^n / b^n$
 - [Zero Exponent](!/algebra/definitions#zero_exponent) — $a^0 = 1$
 - [Negative Exponent](!/algebra/definitions#negative_exponent) — $a^{-n} = 1/a^n$
-- [Rational Exponent](!/algebra/definitions#rational_exponent) — $a^{m/n} = \\sqrt[n]{a^m}$`,
+- [Rational Exponent](!/algebra/definitions#rational_exponent) — $a^{m/n} = \\sqrt[n]{a^m}$
+
+## Formulas Used on This Page
+
+- [Product Rule](!/algebra/formulas#product_rule_exponents) — $a^m \\cdot a^n = a^{m+n}$
+- [Quotient Rule](!/algebra/formulas#quotient_rule_exponents) — $\\frac{a^m}{a^n} = a^{m-n}$
+- [Power of a Power](!/algebra/formulas#power_of_a_power) — $(a^m)^n = a^{mn}$
+- [Power of a Product](!/algebra/formulas#power_of_a_product) — $(ab)^n = a^n \\cdot b^n$
+- [Power of a Quotient](!/algebra/formulas#power_of_a_quotient) — $\\left(\\frac{a}{b}\\right)^n = \\frac{a^n}{b^n}$
+- [Negative Exponent](!/algebra/formulas#negative_exponent) — $a^{-n} = \\frac{1}{a^n}$
+- [Negative Exponent Flip](!/algebra/formulas#negative_exponent_flip) — $\\left(\\frac{a}{b}\\right)^{-n} = \\left(\\frac{b}{a}\\right)^n$
+- [Zero Exponent](!/algebra/formulas#zero_exponent) — $a^0 = 1$
+`,
   before: ``,
   after: `
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+`,
   link: '',
 },
  

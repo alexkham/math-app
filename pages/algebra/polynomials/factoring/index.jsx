@@ -93,10 +93,25 @@ obj0: {
  
 - [Root (of a Polynomial)](!/algebra/definitions#root_(of_a_polynomial)) — each factor $(x-r)$ reveals a root at $x = r$
 - [Trinomial](!/algebra/definitions#trinomial) — three-term polynomials are the most common factoring targets
-- [Factor Theorem](!/algebra/definitions#factor_theorem) — $P(c) = 0$ confirms $(x-c)$ is a factor`,
+- [Factor Theorem](!/algebra/definitions#factor_theorem) — $P(c) = 0$ confirms $(x-c)$ is a factor
+
+## Formulas Used on This Page
+
+- [Difference of Squares](!/algebra/formulas#difference_of_squares) — $a^2 - b^2 = (a + b)(a - b)$
+- [Trinomial Factoring Pattern](!/algebra/formulas#trinomial_factoring_pattern) — $x^2 + (a + b)x + ab = (x + a)(x + b)$
+- [Sum of Cubes](!/algebra/formulas#sum_of_cubes) — $a^3 + b^3 = (a + b)(a^2 - ab + b^2)$
+- [Difference of Cubes](!/algebra/formulas#difference_of_cubes) — $a^3 - b^3 = (a - b)(a^2 + ab + b^2)$
+- [General Difference of Even Powers](!/algebra/formulas#general_difference_even_powers) — $x^{2n} - a^{2n} = (x^n - a^n)(x^n + a^n)$
+- [General Difference of Powers (odd n)](!/algebra/formulas#general_difference_odd) — $x^n - a^n = (x - a)(x^{n-1} + ax^{n-2} + \\cdots + a^{n-1})$
+- [General Sum of Powers (odd n)](!/algebra/formulas#general_sum_odd) — $x^n + a^n = (x + a)(x^{n-1} - ax^{n-2} + \\cdots + a^{n-1})$
+
+`,
   before: ``,
   after: `
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+`,
   link: '',
 },
  

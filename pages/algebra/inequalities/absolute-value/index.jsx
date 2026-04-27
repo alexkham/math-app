@@ -80,10 +80,18 @@ const keyWords = [
  
 ## From Other Categories
  
-- [Absolute Value](!/algebra/definitions#absolute_value) — distance from zero; always non-negative`,
+- [Absolute Value](!/algebra/definitions#absolute_value) — distance from zero; always non-negative
+
+## Formulas Used on This Page
+
+- [Absolute Value Inequalities](!/algebra/formulas#absolute_value_inequalities) — $|p| < b \\implies -b < p < b$; $|p| > b \\implies p < -b \\text{ or } p > b$
+`,
   before: ``,
   after: `
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+`,
   link: '',
 },
   obj1: {

@@ -81,10 +81,18 @@ obj0: {
 - [Conditional Equation](!/algebra/definitions#conditional_equation) — $|f(x)| = k$ with $k > 0$ splits into two conditional equations
 - [Contradiction](!/algebra/definitions#contradiction) — $|f(x)| = k$ with $k < 0$ has no solution
 - [Solution Set](!/algebra/definitions#solution_set) — typically two values from the two cases
-- [Extraneous Solution](!/algebra/definitions#extraneous_solution) — may arise when squaring to eliminate absolute values`,
+- [Extraneous Solution](!/algebra/definitions#extraneous_solution) — may arise when squaring to eliminate absolute values
+
+## Formulas Used on This Page
+
+- [Absolute Value Equation](!/algebra/formulas#absolute_value_equation) — $|p| = b \\implies p = b \\text{ or } p = -b$
+`,
   before: ``,
   after: `
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+`,
   link: '',
 },
   obj1: {

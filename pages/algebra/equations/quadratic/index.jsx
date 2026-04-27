@@ -80,10 +80,22 @@ const keyWords = [
  
 - [Discriminant](!/algebra/definitions#discriminant) — $\\Delta = b^2 - 4ac$, determines the number and type of solutions
 - [Solution Set](!/algebra/definitions#solution_set) — may contain two, one, or zero real values
-- [Extraneous Solution](!/algebra/definitions#extraneous_solution) — may arise from non-reversible steps during solving`,
+- [Extraneous Solution](!/algebra/definitions#extraneous_solution) — may arise from non-reversible steps during solving
+
+## Formulas Used on This Page
+
+- [Quadratic Formula](!/algebra/formulas#quadratic_formula) — $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$
+- [Discriminant](!/algebra/formulas#discriminant) — $\\Delta = b^2 - 4ac$
+- [Square Root Property](!/algebra/formulas#square_root_property) — $x^2 = p \\implies x = \\pm\\sqrt{p}$
+- [Completing the Square](!/algebra/formulas#completing_the_square) — $x^2 + bx = \\left(x + \\frac{b}{2}\\right)^2 - \\frac{b^2}{4}$
+- [Vieta's Formulas (Quadratic)](!/algebra/formulas#vietas_quadratic) — $x_1 + x_2 = -\\frac{b}{a}$, $x_1 \\cdot x_2 = \\frac{c}{a}$
+`,
   before: ``,
   after: `
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+`,
   link: '',
 },
   obj1: {

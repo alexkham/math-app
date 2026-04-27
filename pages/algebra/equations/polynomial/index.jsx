@@ -85,10 +85,18 @@ const sectionsContent = {
  
 - [Solution](!/algebra/definitions#solution) — also called a root of the polynomial
 - [Solution Set](!/algebra/definitions#solution_set) — at most $n$ roots in $\\mathbb{C}$ for degree $n$
-- [Equivalent Equations](!/algebra/definitions#equivalent_equations) — polynomial division preserves equivalence when dividing by a confirmed factor`,
+- [Equivalent Equations](!/algebra/definitions#equivalent_equations) — polynomial division preserves equivalence when dividing by a confirmed factor
+
+## Formulas Used on This Page
+
+- [Vieta's Formulas (General)](!/algebra/formulas#vietas_cubic) — $r_1 + r_2 + r_3 = -a_{n-1}$, $r_1 r_2 r_3 = (-1)^n a_0$
+`,
   before: ``,
   after: `
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+`,
   link: '',
 },
   obj1: {

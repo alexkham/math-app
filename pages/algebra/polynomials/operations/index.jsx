@@ -88,10 +88,21 @@ const keyWords = [
  
 - [Polynomial Long Division](!/algebra/definitions#polynomial_long_division) — systematic division producing quotient and remainder
 - [Synthetic Division](!/algebra/definitions#synthetic_division) — shortcut for dividing by $(x - c)$ using only coefficients
-- [Remainder Theorem](!/algebra/definitions#remainder_theorem) — remainder equals $P(c)$`,
+- [Remainder Theorem](!/algebra/definitions#remainder_theorem) — remainder equals $P(c)$
+
+## Formulas Used on This Page
+
+- [Square of a Sum](!/algebra/formulas#square_of_a_sum) — $(a + b)^2 = a^2 + 2ab + b^2$
+- [Square of a Difference](!/algebra/formulas#square_of_a_difference) — $(a - b)^2 = a^2 - 2ab + b^2$
+- [Cube of a Sum](!/algebra/formulas#cube_of_a_sum) — $(a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3$
+- [Cube of a Difference](!/algebra/formulas#cube_of_a_difference) — $(a - b)^3 = a^3 - 3a^2b + 3ab^2 - b^3$
+`,
   before: ``,
   after: `
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+`,
   link: '',
 },
  

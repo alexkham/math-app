@@ -91,10 +91,21 @@ obj0: {
  
 - [Vieta's Formulas](!/algebra/definitions#vieta's_formulas) — root sums and products from coefficients alone
 - [Root (of a Polynomial)](!/algebra/definitions#root_(of_a_polynomial)) — the values these theorems locate
-- [Synthetic Division](!/algebra/definitions#synthetic_division) — the computational tool for testing candidates`,
+- [Synthetic Division](!/algebra/definitions#synthetic_division) — the computational tool for testing candidates
+
+## Formulas Used on This Page
+
+- [Remainder Theorem](!/algebra/formulas#remainder_theorem) — $P(x) = (x - c) \\cdot Q(x) + P(c)$
+- [Factor Theorem](!/algebra/formulas#factor_theorem) — $(x - c)$ is a factor of $P(x) \\iff P(c) = 0$
+- [Rational Root Theorem](!/algebra/formulas#rational_root_theorem) — if $\\frac{p}{q}$ is a root: $p \\mid a_0$ and $q \\mid a_n$
+
+`,
   before: ``,
   after: `
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+`,
   link: '',
 },
 
