@@ -65,6 +65,7 @@ function MyNavbar3({
   const timeoutRef = useRef(null);
   const panelRefs = useRef({});
   const triggerRefs = useRef({});
+  const hamburgerRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,16 +73,21 @@ function MyNavbar3({
     };
 
     const handleClickOutside = (event) => {
+      // Skip if click is on the hamburger toggle — its own onClick will handle it
+      if (hamburgerRef.current && hamburgerRef.current.contains(event.target)) {
+        return;
+      }
+
       // Check if click is outside all panels
       const clickedOutsideAllPanels = Object.values(panelRefs.current).every(
         ref => !ref || !ref.contains(event.target)
       );
-      
+
       // Check if click is on any menu trigger
       const clickedOnTrigger = Object.values(triggerRefs.current).some(
         ref => ref && ref.contains(event.target)
       );
-      
+
       // Only close if clicked outside panels AND not on a trigger
       if (clickedOutsideAllPanels && !clickedOnTrigger) {
         closeMegaMenu();
@@ -576,10 +582,9 @@ function MyNavbar3({
       width: '100%',
       height: '60px',
       backgroundColor: '#4d4dff',
-      backdropFilter: 'blur(10px)',
       borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
       zIndex: 10000,
-      transition: 'all 0.3s ease',
+      transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
       boxShadow: isNavActive ? '0 2px 10px rgba(0, 0, 0, 0.15)' : 'none',
     }}>
       <div style={{
@@ -593,7 +598,8 @@ function MyNavbar3({
         position: 'relative',
       }}>
         <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          ref={hamburgerRef}
+          onClick={() => setIsMobileMenuOpen(prev => !prev)}
           aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isMobileMenuOpen}
           style={{
@@ -629,7 +635,7 @@ function MyNavbar3({
           margin: 0,
           overflowY: 'auto',
           height: 'auto',
-          zIndex: 9999,
+          zIndex: 100000,
         } : {
           display: 'flex',
           alignItems: 'center',

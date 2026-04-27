@@ -130,12 +130,12 @@ export default function AlgebraFormulasPage({
           Algebra Formulas
         </h1>
         <FormulasTOC data={algebraFormulasList} />
-        <div style={{transform:'scale(0.95)'}}>
+        {/* <div style={{transform:'scale(0.95)'}}>
           <FormulaAccordionWrapper 
             data={algebraFormulasList}
             groupByField={['category']}
           />
-        </div>
+        </div> */}
         <br/>
          {/* <ScrollUpButton/> */} 
       </main>

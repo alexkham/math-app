@@ -1,2782 +1,4 @@
 
-// // // // // import React, { useState, useMemo } from 'react';
-// // // // // import { InlineMath } from 'react-katex';
-// // // // // import { ChevronDown } from 'lucide-react';
-// // // // // import 'katex/dist/katex.min.css';
-// // // // // import styles from './FormulasTOC.module.css';
-
-// // // // // const createItemId = (name) => {
-// // // // //   return name.toLowerCase().replace(/\s+/g, '_');
-// // // // // };
-
-// // // // // const FormulasTOC = ({ data }) => {
-// // // // //   const [expandedFormula, setExpandedFormula] = useState(null);
-
-// // // // //   const columns = useMemo(() => {
-// // // // //     // Group by category first
-// // // // //     const categorized = data.reduce((acc, formula) => {
-// // // // //       const category = formula.category;
-// // // // //       if (!acc[category]) {
-// // // // //         acc[category] = {
-// // // // //           name: category,
-// // // // //           formulas: [],
-// // // // //           totalItems: 0
-// // // // //         };
-// // // // //       }
-// // // // //       acc[category].formulas.push({
-// // // // //         ...formula,
-// // // // //         itemId: createItemId(formula.name)
-// // // // //       });
-// // // // //       acc[category].totalItems = acc[category].formulas.length;
-// // // // //       return acc;
-// // // // //     }, {});
-
-// // // // //     // Convert to array and get categories
-// // // // //     const categories = Object.values(categorized);
-    
-// // // // //     // Initialize 4 columns
-// // // // //     const cols = [[], [], [], []];
-    
-// // // // //     // First pass: ensure at least one category per column
-// // // // //     for (let i = 0; i < 4 && i < categories.length; i++) {
-// // // // //       cols[i].push(categories[i]);
-// // // // //     }
-    
-// // // // //     // Second pass: distribute remaining categories by total items
-// // // // //     let currentCol = 0;
-// // // // //     let colTotals = cols.map(col => 
-// // // // //       col.reduce((sum, cat) => sum + (cat?.totalItems || 0), 0)
-// // // // //     );
-    
-// // // // //     for (let i = 4; i < categories.length; i++) {
-// // // // //       // Find column with least total items
-// // // // //       currentCol = colTotals.indexOf(Math.min(...colTotals));
-// // // // //       cols[currentCol].push(categories[i]);
-// // // // //       colTotals[currentCol] += categories[i].totalItems;
-// // // // //     }
-
-// // // // //     return cols;
-// // // // //   }, [data]);
-
-// // // // //   const handleFormulaClick = (formulaName) => {
-// // // // //     setExpandedFormula(expandedFormula === formulaName ? null : formulaName);
-// // // // //   };
-
-// // // // //   return (
-// // // // //     <div className={styles.pageWrapper}>
-// // // // //       <div className={styles.tocContainer}>
-// // // // //         {columns.map((column, colIndex) => (
-// // // // //           <div key={colIndex} className={styles.column}>
-// // // // //             {column.map(category => (
-// // // // //               <div key={category.name} className={styles.categoryCard}>
-// // // // //                 <div className={styles.categoryHeader}>
-// // // // //                   <div className={styles.categoryTitle}>{category.name}</div>
-// // // // //                   <div className={styles.headerAccent} />
-// // // // //                 </div>
-// // // // //                 <div className={styles.formulaList}>
-// // // // //                   {category.formulas.map((formula) => (
-// // // // //                     <div key={formula.name} className={styles.formulaItem}>
-// // // // //                       <button
-// // // // //                         onClick={() => handleFormulaClick(formula.name)}
-// // // // //                         className={`${styles.formulaButton} ${expandedFormula === formula.name ? styles.expanded : ''}`}
-// // // // //                       >
-// // // // //                         <span>{formula.name}</span>
-// // // // //                         <ChevronDown 
-// // // // //                           className={`${styles.chevron} ${expandedFormula === formula.name ? styles.rotated : ''}`}
-// // // // //                           size={18}
-// // // // //                         />
-// // // // //                       </button>
-// // // // //                       {expandedFormula === formula.name && (
-// // // // //                         <div className={styles.expandedFormula}>
-// // // // //                           <div className={styles.formulaContent}>
-// // // // //                             <InlineMath math={formula.formula.replace(/\$/g, '')} />
-// // // // //                             <a 
-// // // // //                               href={`#${formula.itemId}`}
-// // // // //                               className={styles.learnMore}
-// // // // //                               onClick={(e) => {
-// // // // //                                 e.stopPropagation();
-// // // // //                                 const element = document.getElementById(`${formula.itemId}section`);
-// // // // //                                 if (element) {
-// // // // //                                   element.scrollIntoView({ behavior: 'smooth' });
-// // // // //                                   // Trigger click after scrolling
-// // // // //                                   setTimeout(() => {
-// // // // //                                     element.click();
-// // // // //                                   }, 100);
-// // // // //                                 }
-// // // // //                               }}
-// // // // //                             >
-// // // // //                               Learn More
-// // // // //                             </a>
-// // // // //                           </div>
-// // // // //                         </div>
-// // // // //                       )}
-// // // // //                     </div>
-// // // // //                   ))}
-// // // // //                 </div>
-// // // // //               </div>
-// // // // //             ))}
-// // // // //           </div>
-// // // // //         ))}
-// // // // //       </div>
-// // // // //     </div>
-// // // // //   );
-// // // // // };
-
-// // // // // export default FormulasTOC;
-
-
-// // // // import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-// // // // import { processContent } from '../../utils/contentProcessor';
-
-// // // // // ─── Constants ─────────────────────────────────────────────────
-
-// // // // const ALL_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-// // // // const ACCENT = '#4a6cf7';
-// // // // const ACCENT_LIGHT = '#eef1fd';
-// // // // const ACCENT_BORDER = '#cdd5f8';
-// // // // const ACCENT_HOVER = '#dbe1fc';
-
-// // // // const HIDE_SCROLLBAR_CSS = `
-// // // //   .ftoc-no-scrollbar::-webkit-scrollbar { display: none; }
-// // // // `;
-
-// // // // const toId = (name) => name.toLowerCase().replace(/\s+/g, '_');
-
-// // // // const noScroll = {
-// // // //   scrollbarWidth: 'none',
-// // // //   msOverflowStyle: 'none',
-// // // // };
-
-// // // // // ─── Styles ────────────────────────────────────────────────────
-
-// // // // const S = {
-// // // //   wrap: {
-// // // //     display: 'flex',
-// // // //     flexDirection: 'column',
-// // // //     gap: 0,
-// // // //     maxWidth: '820px',
-// // // //     margin: '0 auto',
-// // // //     padding: '0 16px',
-// // // //   },
-
-// // // //   /* ── View Toggle ── */
-// // // //   toggleWrap: {
-// // // //     display: 'flex',
-// // // //     justifyContent: 'center',
-// // // //     marginBottom: '20px',
-// // // //   },
-// // // //   toggleTrack: {
-// // // //     display: 'inline-flex',
-// // // //     background: '#f1f5f9',
-// // // //     borderRadius: '10px',
-// // // //     padding: '3px',
-// // // //     border: '1px solid #e2e8f0',
-// // // //   },
-
-// // // //   /* ── TOC Cards ── */
-// // // //   tocGrid: {
-// // // //     display: 'grid',
-// // // //     gridTemplateColumns: 'repeat(4, 1fr)',
-// // // //     gap: '12px',
-// // // //     marginBottom: '24px',
-// // // //   },
-// // // //   tocCard: {
-// // // //     borderRadius: '10px',
-// // // //     overflow: 'hidden',
-// // // //     border: '1px solid #d0d9ed',
-// // // //     background: '#fff',
-// // // //   },
-// // // //   tocCardHeader: {
-// // // //     background: 'linear-gradient(135deg, #4a6cf7 0%, #3b5de7 100%)',
-// // // //     color: '#fff',
-// // // //     padding: '14px 16px',
-// // // //     fontSize: '14px',
-// // // //     fontWeight: '600',
-// // // //   },
-// // // //   tocCardBody: {
-// // // //     padding: '4px 0',
-// // // //   },
-// // // //   tocPeek: {
-// // // //     padding: '6px 14px 10px',
-// // // //     display: 'flex',
-// // // //     flexDirection: 'column',
-// // // //     gap: '6px',
-// // // //   },
-// // // //   tocPeekFormula: {
-// // // //     fontSize: '14px',
-// // // //     background: '#f1f5f9',
-// // // //     padding: '6px 10px',
-// // // //     borderRadius: '4px',
-// // // //     color: '#475569',
-// // // //     lineHeight: '1.6',
-// // // //   },
-
-// // // //   /* ── Nav Panel ── */
-// // // //   navPanel: {
-// // // //     background: '#fff',
-// // // //     border: '1.5px solid #d0d9ed',
-// // // //     borderRadius: '14px',
-// // // //     overflow: 'hidden',
-// // // //     marginBottom: '24px',
-// // // //   },
-// // // //   alphaBar: {
-// // // //     display: 'flex',
-// // // //     flexWrap: 'nowrap',
-// // // //     gap: '1px',
-// // // //     padding: '10px 14px',
-// // // //     background: '#f8fafc',
-// // // //     borderBottom: '1.5px solid #e2e8f0',
-// // // //     justifyContent: 'center',
-// // // //     overflowX: 'auto',
-// // // //     ...noScroll,
-// // // //   },
-// // // //   termGrid: {
-// // // //     padding: '16px 20px',
-// // // //     display: 'grid',
-// // // //     gridTemplateColumns: '1fr 1fr',
-// // // //     gap: '2px 20px',
-// // // //   },
-// // // //   catFilterRow: {
-// // // //     display: 'flex',
-// // // //     flexWrap: 'wrap',
-// // // //     gap: '6px',
-// // // //     padding: '14px 20px',
-// // // //     borderTop: '1px solid #e2e8f0',
-// // // //   },
-// // // //   navStatus: {
-// // // //     padding: '8px 20px 14px',
-// // // //     fontSize: '14px',
-// // // //     color: '#94a3b8',
-// // // //     borderTop: '1px solid #e2e8f0',
-// // // //     textAlign: 'right',
-// // // //   },
-
-// // // //   /* ── Search Bar ── */
-// // // //   searchBar: {
-// // // //     position: 'sticky',
-// // // //     top: '63px',
-// // // //     zIndex: 10,
-// // // //     background: 'rgba(30, 58, 138, 0.75)',
-// // // //     backdropFilter: 'blur(8px)',
-// // // //     borderRadius: '4px',
-// // // //     padding: '14px 20px',
-// // // //     marginBottom: '32px',
-// // // //     display: 'flex',
-// // // //     alignItems: 'center',
-// // // //     gap: '14px',
-// // // //   },
-// // // //   searchWrapper: {
-// // // //     position: 'relative',
-// // // //     flex: 1,
-// // // //   },
-// // // //   searchClear: {
-// // // //     position: 'absolute',
-// // // //     top: '50%',
-// // // //     right: '14px',
-// // // //     transform: 'translateY(-50%)',
-// // // //     border: 'none',
-// // // //     background: 'none',
-// // // //     color: '#94a3b8',
-// // // //     fontSize: '16px',
-// // // //     cursor: 'pointer',
-// // // //     padding: '0',
-// // // //     lineHeight: 1,
-// // // //   },
-// // // //   searchCount: {
-// // // //     fontSize: '14px',
-// // // //     color: '#c7d2e8',
-// // // //     whiteSpace: 'nowrap',
-// // // //     flexShrink: 0,
-// // // //   },
-
-// // // //   /* ── Category Group ── */
-// // // //   groupHeader: {
-// // // //     display: 'flex',
-// // // //     alignItems: 'baseline',
-// // // //     gap: '10px',
-// // // //     margin: '0 0 16px',
-// // // //     paddingBottom: '8px',
-// // // //     borderBottom: '2px solid #c7d2e8',
-// // // //   },
-// // // //   groupTitle: {
-// // // //     fontFamily: "'Source Serif 4', Georgia, serif",
-// // // //     fontSize: '22px',
-// // // //     fontWeight: '600',
-// // // //     color: '#1e40af',
-// // // //     margin: 0,
-// // // //     letterSpacing: '0.01em',
-// // // //   },
-// // // //   groupCount: {
-// // // //     fontSize: '14px',
-// // // //     color: '#94a3b8',
-// // // //     fontWeight: '400',
-// // // //   },
-
-// // // //   /* ── Formula Card ── */
-// // // //   cardBody: {
-// // // //     padding: '22px 26px',
-// // // //     background: '#fbfcff',
-// // // //   },
-// // // //   cardName: {
-// // // //     fontFamily: "'Source Serif 4', Georgia, serif",
-// // // //     fontSize: '20px',
-// // // //     fontWeight: '600',
-// // // //     color: '#1e293b',
-// // // //     margin: '0 0 8px',
-// // // //     lineHeight: '1.3',
-// // // //   },
-// // // //   cardFormula: {
-// // // //     fontSize: '17px',
-// // // //     color: '#475569',
-// // // //     lineHeight: '1.7',
-// // // //     margin: 0,
-// // // //   },
-// // // //   cardToggle: {
-// // // //     display: 'flex',
-// // // //     alignItems: 'center',
-// // // //     justifyContent: 'center',
-// // // //     gap: '6px',
-// // // //     padding: '12px 0 4px',
-// // // //     cursor: 'pointer',
-// // // //     color: ACCENT,
-// // // //     fontSize: '15px',
-// // // //     fontWeight: '500',
-// // // //     userSelect: 'none',
-// // // //   },
-// // // //   cardDetail: (open) => ({
-// // // //     borderTop: '1.5px solid #e2e8f0',
-// // // //     background: '#f0f4fc',
-// // // //     overflow: 'hidden',
-// // // //     maxHeight: open ? '5000px' : '0',
-// // // //     padding: open ? '20px 26px' : '0 26px',
-// // // //     transition: 'max-height 0.35s ease, padding 0.3s ease',
-// // // //   }),
-// // // //   tabBody: {
-// // // //     padding: '20px 22px',
-// // // //     border: '1.5px solid #d0d9ed',
-// // // //     borderRadius: '0 8px 8px 8px',
-// // // //     fontSize: '17px',
-// // // //     color: '#475569',
-// // // //     lineHeight: '1.7',
-// // // //     background: '#fff',
-// // // //     minHeight: '60px',
-// // // //   },
-
-// // // //   /* ── Sidebar ── */
-// // // //   sidebar: (visible) => ({
-// // // //     position: 'fixed',
-// // // //     top: '20px',
-// // // //     left: '20px',
-// // // //     width: '200px',
-// // // //     background: '#fff',
-// // // //     border: '1.5px solid #d0d9ed',
-// // // //     borderRadius: '12px',
-// // // //     padding: '16px 14px',
-// // // //     maxHeight: 'calc(100vh - 40px)',
-// // // //     overflowY: 'auto',
-// // // //     opacity: visible ? 1 : 0,
-// // // //     transform: visible ? 'translateY(0)' : 'translateY(12px)',
-// // // //     transition: 'opacity 0.3s, transform 0.3s',
-// // // //     pointerEvents: visible ? 'auto' : 'none',
-// // // //     zIndex: 50,
-// // // //     ...noScroll,
-// // // //   }),
-// // // //   sidebarGroup: {
-// // // //     marginBottom: '14px',
-// // // //   },
-
-// // // //   /* ── Empty State ── */
-// // // //   empty: {
-// // // //     textAlign: 'center',
-// // // //     padding: '50px 20px',
-// // // //     color: '#94a3b8',
-// // // //     fontSize: '16px',
-// // // //   },
-// // // // };
-
-// // // // // ─── AlphaButton ───────────────────────────────────────────────
-
-// // // // function AlphaButton({ letter, active, disabled, onClick }) {
-// // // //   const [hovered, setHovered] = useState(false);
-
-// // // //   return (
-// // // //     <button
-// // // //       style={{
-// // // //         width: 27,
-// // // //         height: 27,
-// // // //         display: 'flex',
-// // // //         alignItems: 'center',
-// // // //         justifyContent: 'center',
-// // // //         fontSize: '13px',
-// // // //         fontWeight: '600',
-// // // //         fontFamily: 'inherit',
-// // // //         borderRadius: '6px',
-// // // //         border: 'none',
-// // // //         cursor: disabled ? 'default' : 'pointer',
-// // // //         pointerEvents: disabled ? 'none' : 'auto',
-// // // //         background: active ? ACCENT : hovered ? ACCENT_HOVER : 'transparent',
-// // // //         color: active ? '#fff' : disabled ? '#cbd5e1' : ACCENT,
-// // // //         transition: 'all 0.12s',
-// // // //         flexShrink: 0,
-// // // //       }}
-// // // //       onClick={onClick}
-// // // //       onMouseEnter={() => setHovered(true)}
-// // // //       onMouseLeave={() => setHovered(false)}
-// // // //     >
-// // // //       {letter}
-// // // //     </button>
-// // // //   );
-// // // // }
-
-// // // // // ─── ToggleButton ──────────────────────────────────────────────
-
-// // // // function ToggleButton({ label, active, icon, onClick }) {
-// // // //   const [hovered, setHovered] = useState(false);
-
-// // // //   return (
-// // // //     <button
-// // // //       style={{
-// // // //         display: 'flex',
-// // // //         alignItems: 'center',
-// // // //         gap: '6px',
-// // // //         padding: '8px 18px',
-// // // //         border: 'none',
-// // // //         borderRadius: '8px',
-// // // //         cursor: 'pointer',
-// // // //         fontFamily: 'inherit',
-// // // //         fontSize: '14px',
-// // // //         fontWeight: '500',
-// // // //         background: active ? ACCENT : hovered ? '#e2e8f0' : 'transparent',
-// // // //         color: active ? '#fff' : '#475569',
-// // // //         transition: 'all 0.15s',
-// // // //       }}
-// // // //       onClick={onClick}
-// // // //       onMouseEnter={() => setHovered(true)}
-// // // //       onMouseLeave={() => setHovered(false)}
-// // // //     >
-// // // //       {icon}
-// // // //       {label}
-// // // //     </button>
-// // // //   );
-// // // // }
-
-// // // // // ─── CategoryChip ──────────────────────────────────────────────
-
-// // // // function CategoryChip({ label, active, count, onToggle, onNavigate }) {
-// // // //   const [hovered, setHovered] = useState(false);
-// // // //   const [navHovered, setNavHovered] = useState(false);
-
-// // // //   const checkSvg = (
-// // // //     <svg width="12" height="12" viewBox="0 0 12 12">
-// // // //       <polyline
-// // // //         points="2,6 5,9 10,3"
-// // // //         fill="none"
-// // // //         stroke="#fff"
-// // // //         strokeWidth="1.8"
-// // // //         strokeLinecap="round"
-// // // //         strokeLinejoin="round"
-// // // //       />
-// // // //     </svg>
-// // // //   );
-
-// // // //   const arrowSvg = (
-// // // //     <svg width="12" height="12" viewBox="0 0 12 12">
-// // // //       <path
-// // // //         d="M2 6h8M7 3l3 3-3 3"
-// // // //         fill="none"
-// // // //         stroke="currentColor"
-// // // //         strokeWidth="1.5"
-// // // //         strokeLinecap="round"
-// // // //         strokeLinejoin="round"
-// // // //       />
-// // // //     </svg>
-// // // //   );
-
-// // // //   return (
-// // // //     <div
-// // // //       style={{
-// // // //         display: 'flex',
-// // // //         alignItems: 'center',
-// // // //         justifyContent: 'space-between',
-// // // //         padding: '8px 14px',
-// // // //         border: active
-// // // //           ? `1.5px solid ${ACCENT}`
-// // // //           : hovered
-// // // //             ? '1.5px solid #93aee0'
-// // // //             : '1.5px solid #d0d9ed',
-// // // //         borderRadius: '10px',
-// // // //         background: active ? ACCENT_LIGHT : '#fff',
-// // // //         cursor: 'pointer',
-// // // //         transition: 'border-color 0.15s, background 0.15s',
-// // // //         gap: '8px',
-// // // //       }}
-// // // //       onClick={onToggle}
-// // // //       onMouseEnter={() => setHovered(true)}
-// // // //       onMouseLeave={() => setHovered(false)}
-// // // //     >
-// // // //       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-// // // //         <div
-// // // //           style={{
-// // // //             width: 18,
-// // // //             height: 18,
-// // // //             borderRadius: '3px',
-// // // //             border: active ? `1.5px solid ${ACCENT}` : '1.5px solid #94a3b8',
-// // // //             display: 'flex',
-// // // //             alignItems: 'center',
-// // // //             justifyContent: 'center',
-// // // //             flexShrink: 0,
-// // // //             background: active ? ACCENT : '#fff',
-// // // //             transition: 'all 0.15s',
-// // // //           }}
-// // // //         >
-// // // //           {active && checkSvg}
-// // // //         </div>
-// // // //         <span style={{ fontSize: '15px', fontWeight: '500', color: '#1e293b' }}>
-// // // //           {processContent(label)}
-// // // //         </span>
-// // // //         <span style={{ fontSize: '13px', color: '#94a3b8' }}>({count})</span>
-// // // //       </div>
-// // // //       <button
-// // // //         style={{
-// // // //           display: 'flex',
-// // // //           alignItems: 'center',
-// // // //           gap: '3px',
-// // // //           padding: '4px 11px',
-// // // //           borderRadius: '16px',
-// // // //           border: `1px solid ${navHovered ? ACCENT : '#d0d9ed'}`,
-// // // //           background: navHovered ? ACCENT_HOVER : '#fff',
-// // // //           fontSize: '13px',
-// // // //           fontWeight: '500',
-// // // //           fontFamily: 'inherit',
-// // // //           color: ACCENT,
-// // // //           cursor: 'pointer',
-// // // //           flexShrink: 0,
-// // // //           transition: 'background 0.12s, border-color 0.12s',
-// // // //         }}
-// // // //         onMouseEnter={() => setNavHovered(true)}
-// // // //         onMouseLeave={() => setNavHovered(false)}
-// // // //         onClick={(e) => {
-// // // //           e.stopPropagation();
-// // // //           onNavigate();
-// // // //         }}
-// // // //       >
-// // // //         Go to {arrowSvg}
-// // // //       </button>
-// // // //     </div>
-// // // //   );
-// // // // }
-
-// // // // // ─── ClearButton ───────────────────────────────────────────────
-
-// // // // function ClearButton({ onClick }) {
-// // // //   const [hovered, setHovered] = useState(false);
-
-// // // //   return (
-// // // //     <button
-// // // //       style={{
-// // // //         display: 'flex',
-// // // //         alignItems: 'center',
-// // // //         gap: '5px',
-// // // //         padding: '8px 16px',
-// // // //         border: '1px solid red',
-// // // //         background: hovered ? '#fef2f2' : 'none',
-// // // //         borderRadius: '10px',
-// // // //         fontSize: '15px',
-// // // //         fontWeight: '500',
-// // // //         fontFamily: 'inherit',
-// // // //         color: '#dc2626',
-// // // //         cursor: 'pointer',
-// // // //         transition: 'background 0.15s',
-// // // //       }}
-// // // //       onClick={onClick}
-// // // //       onMouseEnter={() => setHovered(true)}
-// // // //       onMouseLeave={() => setHovered(false)}
-// // // //     >
-// // // //       &#10005; Clear
-// // // //     </button>
-// // // //   );
-// // // // }
-
-// // // // // ─── TermItem ──────────────────────────────────────────────────
-
-// // // // function TermItem({ item, onNavigate }) {
-// // // //   const [hovered, setHovered] = useState(false);
-
-// // // //   return (
-// // // //     <a
-// // // //       href={`#${toId(item.name)}`}
-// // // //       style={{
-// // // //         padding: '8px 12px',
-// // // //         fontSize: '15px',
-// // // //         color: hovered ? ACCENT : '#334155',
-// // // //         borderRadius: '6px',
-// // // //         cursor: 'pointer',
-// // // //         transition: 'all 0.12s',
-// // // //         textDecoration: 'none',
-// // // //         display: 'flex',
-// // // //         alignItems: 'baseline',
-// // // //         gap: '8px',
-// // // //         background: hovered ? ACCENT_LIGHT : 'transparent',
-// // // //       }}
-// // // //       onMouseEnter={() => setHovered(true)}
-// // // //       onMouseLeave={() => setHovered(false)}
-// // // //       onClick={(e) => {
-// // // //         e.preventDefault();
-// // // //         onNavigate(toId(item.name));
-// // // //       }}
-// // // //     >
-// // // //       <span
-// // // //         style={{
-// // // //           fontSize: '14px',
-// // // //           fontWeight: '600',
-// // // //           color: ACCENT,
-// // // //           width: '14px',
-// // // //           flexShrink: 0,
-// // // //         }}
-// // // //       >
-// // // //         {item.name[0]}
-// // // //       </span>
-// // // //       {processContent(item.name)}
-// // // //       <span
-// // // //         style={{
-// // // //           fontSize: '13px',
-// // // //           color: '#94a3b8',
-// // // //           marginLeft: 'auto',
-// // // //           flexShrink: 0,
-// // // //           whiteSpace: 'nowrap',
-// // // //         }}
-// // // //       >
-// // // //         {item.category}
-// // // //       </span>
-// // // //     </a>
-// // // //   );
-// // // // }
-
-// // // // // ─── TocItem (expandable item inside blue card) ────────────────
-
-// // // // function TocItem({ item, isOpen, onToggle, onNavigate }) {
-// // // //   const [hovered, setHovered] = useState(false);
-// // // //   const id = toId(item.name);
-
-// // // //   return (
-// // // //     <div>
-// // // //       <button
-// // // //         style={{
-// // // //           display: 'flex',
-// // // //           alignItems: 'center',
-// // // //           justifyContent: 'space-between',
-// // // //           width: '100%',
-// // // //           padding: '8px 14px',
-// // // //           border: 'none',
-// // // //           cursor: 'pointer',
-// // // //           fontFamily: 'inherit',
-// // // //           textAlign: 'left',
-// // // //           fontSize: '13px',
-// // // //           color: '#334155',
-// // // //           background: isOpen ? '#f0f4ff' : hovered ? '#f8fafc' : 'transparent',
-// // // //           transition: 'background 0.1s',
-// // // //         }}
-// // // //         onClick={() => onToggle(id)}
-// // // //         onMouseEnter={() => setHovered(true)}
-// // // //         onMouseLeave={() => setHovered(false)}
-// // // //       >
-// // // //         <span>{item.name}</span>
-// // // //         <svg
-// // // //           width="14"
-// // // //           height="14"
-// // // //           viewBox="0 0 14 14"
-// // // //           style={{
-// // // //             transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-// // // //             transition: 'transform 0.2s',
-// // // //             color: '#94a3b8',
-// // // //             flexShrink: 0,
-// // // //           }}
-// // // //         >
-// // // //           <polyline
-// // // //             points="4,5 7,8 10,5"
-// // // //             fill="none"
-// // // //             stroke="currentColor"
-// // // //             strokeWidth="1.5"
-// // // //             strokeLinecap="round"
-// // // //             strokeLinejoin="round"
-// // // //           />
-// // // //         </svg>
-// // // //       </button>
-// // // //       {isOpen && (
-// // // //         <div style={S.tocPeek}>
-// // // //           <div style={S.tocPeekFormula}>{processContent(item.formula)}</div>
-// // // //           <a
-// // // //             style={{
-// // // //               fontSize: '12px',
-// // // //               color: ACCENT,
-// // // //               cursor: 'pointer',
-// // // //               textDecoration: 'none',
-// // // //             }}
-// // // //             onClick={(e) => {
-// // // //               e.preventDefault();
-// // // //               onNavigate(id);
-// // // //             }}
-// // // //           >
-// // // //             Learn More &#8595;
-// // // //           </a>
-// // // //         </div>
-// // // //       )}
-// // // //     </div>
-// // // //   );
-// // // // }
-
-// // // // // ─── CardLink ──────────────────────────────────────────────────
-
-// // // // function CardLink({ link }) {
-// // // //   const [hovered, setHovered] = useState(false);
-
-// // // //   if (!link || (!link.url && !link.href)) return null;
-
-// // // //   const label = link.label || link.text || link.url || link.href;
-// // // //   const url = link.url || link.href;
-
-// // // //   return (
-// // // //     <div>
-// // // //       <a
-// // // //         href={url}
-// // // //         style={{
-// // // //           display: 'inline-flex',
-// // // //           alignItems: 'center',
-// // // //           gap: '5px',
-// // // //           fontSize: '14px',
-// // // //           color: hovered ? '#1d4ed8' : ACCENT,
-// // // //           textDecoration: 'none',
-// // // //           padding: '8px 0 0',
-// // // //           cursor: 'pointer',
-// // // //           fontWeight: '500',
-// // // //           transition: 'color 0.15s',
-// // // //         }}
-// // // //         onMouseEnter={() => setHovered(true)}
-// // // //         onMouseLeave={() => setHovered(false)}
-// // // //       >
-// // // //         <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
-// // // //           <path
-// // // //             d="M3 11L11 3M11 3H6M11 3v5"
-// // // //             fill="none"
-// // // //             stroke="currentColor"
-// // // //             strokeWidth="1.2"
-// // // //             strokeLinecap="round"
-// // // //             strokeLinejoin="round"
-// // // //           />
-// // // //         </svg>
-// // // //         {processContent(label)}
-// // // //       </a>
-// // // //     </div>
-// // // //   );
-// // // // }
-
-// // // // // ─── BackToTop ─────────────────────────────────────────────────
-
-// // // // function BackToTop() {
-// // // //   const [hovered, setHovered] = useState(false);
-
-// // // //   return (
-// // // //     <div
-// // // //       style={{
-// // // //         fontSize: '13px',
-// // // //         color: hovered ? ACCENT : '#94a3b8',
-// // // //         cursor: 'pointer',
-// // // //         textAlign: 'right',
-// // // //         padding: '6px 0 0',
-// // // //         userSelect: 'none',
-// // // //         transition: 'color 0.15s',
-// // // //       }}
-// // // //       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-// // // //       onMouseEnter={() => setHovered(true)}
-// // // //       onMouseLeave={() => setHovered(false)}
-// // // //     >
-// // // //       &uarr; Back to top
-// // // //     </div>
-// // // //   );
-// // // // }
-
-// // // // // ─── TabButton ─────────────────────────────────────────────────
-
-// // // // function TabButton({ label, active, onClick }) {
-// // // //   const [hovered, setHovered] = useState(false);
-
-// // // //   return (
-// // // //     <span
-// // // //       style={{
-// // // //         padding: '10px 22px',
-// // // //         fontSize: '15px',
-// // // //         fontWeight: '500',
-// // // //         borderRadius: '8px 8px 0 0',
-// // // //         border: '1.5px solid',
-// // // //         borderBottom: 'none',
-// // // //         cursor: 'pointer',
-// // // //         marginRight: '3px',
-// // // //         textTransform: 'capitalize',
-// // // //         transition: 'background 0.15s, color 0.15s',
-// // // //         background: active ? ACCENT : hovered ? '#dae2f3' : '#e4eaf5',
-// // // //         color: active ? '#fff' : '#475569',
-// // // //         borderColor: active ? ACCENT : '#d0d9ed',
-// // // //       }}
-// // // //       onClick={onClick}
-// // // //       onMouseEnter={() => setHovered(true)}
-// // // //       onMouseLeave={() => setHovered(false)}
-// // // //     >
-// // // //       {processContent(label)}
-// // // //     </span>
-// // // //   );
-// // // // }
-
-// // // // // ─── FieldContent ──────────────────────────────────────────────
-
-// // // // function FieldContent({ value }) {
-// // // //   if (typeof value === 'string') {
-// // // //     return <div>{processContent(value)}</div>;
-// // // //   }
-
-// // // //   // Future: component registry for MathDerivation, FunctionMachineDiagram
-// // // //   // if (typeof value === 'object' && value?.component) {
-// // // //   //   const Component = COMPONENT_REGISTRY[value.component];
-// // // //   //   if (Component) {
-// // // //   //     const { component, ...props } = value;
-// // // //   //     return <Component {...props} />;
-// // // //   //   }
-// // // //   // }
-
-// // // //   return null;
-// // // // }
-
-// // // // // ─── FormulaCard ───────────────────────────────────────────────
-
-// // // // function FormulaCard({ item, isHighlighted, onToggle, isOpen }) {
-// // // //   const hasFields =
-// // // //     item.fields &&
-// // // //     typeof item.fields === 'object' &&
-// // // //     !Array.isArray(item.fields) &&
-// // // //     Object.keys(item.fields).length > 0;
-
-// // // //   const [activeTab, setActiveTab] = useState(0);
-// // // //   const [hovered, setHovered] = useState(false);
-// // // //   const fieldEntries = hasFields ? Object.entries(item.fields) : [];
-// // // //   const itemId = toId(item.name);
-
-// // // //   return (
-// // // //     <div
-// // // //       id={itemId}
-// // // //       style={{
-// // // //         border: isHighlighted
-// // // //           ? `2px solid ${ACCENT}`
-// // // //           : hovered
-// // // //             ? '1.5px solid #93aee0'
-// // // //             : '1.5px solid #d0d9ed',
-// // // //         borderRadius: '12px',
-// // // //         marginBottom: '12px',
-// // // //         overflow: 'hidden',
-// // // //         background: isHighlighted ? '#f8faff' : '#fff',
-// // // //         transition: 'border-color 0.2s, background 0.2s',
-// // // //         scrollMarginTop: '130px',
-// // // //       }}
-// // // //       onMouseEnter={() => setHovered(true)}
-// // // //       onMouseLeave={() => setHovered(false)}
-// // // //     >
-// // // //       <div style={S.cardBody}>
-// // // //         <h3 style={S.cardName}>{processContent(item.name)}</h3>
-// // // //         <div style={S.cardFormula}>{processContent(item.formula)}</div>
-// // // //         {item.link && <CardLink link={item.link} />}
-// // // //         {hasFields && (
-// // // //           <div
-// // // //             style={S.cardToggle}
-// // // //             onClick={() => onToggle(itemId)}
-// // // //           >
-// // // //             {isOpen ? 'Hide details' : 'See details'}
-// // // //             <svg
-// // // //               width="14"
-// // // //               height="14"
-// // // //               viewBox="0 0 14 14"
-// // // //               style={{
-// // // //                 transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-// // // //                 transition: 'transform 0.25s',
-// // // //               }}
-// // // //             >
-// // // //               <polyline
-// // // //                 points="3,5 7,9 11,5"
-// // // //                 fill="none"
-// // // //                 stroke="currentColor"
-// // // //                 strokeWidth="2"
-// // // //                 strokeLinecap="round"
-// // // //                 strokeLinejoin="round"
-// // // //               />
-// // // //             </svg>
-// // // //           </div>
-// // // //         )}
-// // // //         {!isOpen && <BackToTop />}
-// // // //       </div>
-
-// // // //       {hasFields && (
-// // // //         <div style={S.cardDetail(isOpen)}>
-// // // //           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 0 }}>
-// // // //             {fieldEntries.map(([key], i) => (
-// // // //               <TabButton
-// // // //                 key={key}
-// // // //                 label={key.replace(/_/g, ' ')}
-// // // //                 active={i === activeTab}
-// // // //                 onClick={() => setActiveTab(i)}
-// // // //               />
-// // // //             ))}
-// // // //           </div>
-// // // //           <div style={S.tabBody}>
-// // // //             <FieldContent value={fieldEntries[activeTab]?.[1] || ''} />
-// // // //           </div>
-// // // //           <BackToTop />
-// // // //         </div>
-// // // //       )}
-// // // //     </div>
-// // // //   );
-// // // // }
-
-// // // // // ─── SidebarLink ───────────────────────────────────────────────
-
-// // // // function SidebarLink({ item, active, onNavigate }) {
-// // // //   const [hovered, setHovered] = useState(false);
-
-// // // //   return (
-// // // //     <a
-// // // //       href={`#${toId(item.name)}`}
-// // // //       style={{
-// // // //         display: 'block',
-// // // //         padding: '3px 8px',
-// // // //         fontSize: '14px',
-// // // //         color: active ? ACCENT : hovered ? ACCENT : '#64748b',
-// // // //         fontWeight: active ? '600' : '400',
-// // // //         textDecoration: 'none',
-// // // //         borderLeft: `2px solid ${active || hovered ? ACCENT : 'transparent'}`,
-// // // //         borderRadius: '0 4px 4px 0',
-// // // //         background: active || hovered ? ACCENT_LIGHT : 'transparent',
-// // // //         transition: 'all 0.12s',
-// // // //         cursor: 'pointer',
-// // // //         whiteSpace: 'normal',
-// // // //         wordBreak: 'break-word',
-// // // //         lineHeight: '1.3',
-// // // //       }}
-// // // //       onMouseEnter={() => setHovered(true)}
-// // // //       onMouseLeave={() => setHovered(false)}
-// // // //       onClick={(e) => {
-// // // //         e.preventDefault();
-// // // //         onNavigate(toId(item.name));
-// // // //       }}
-// // // //     >
-// // // //       {processContent(item.name)}
-// // // //     </a>
-// // // //   );
-// // // // }
-
-// // // // // ─── Icons ─────────────────────────────────────────────────────
-
-// // // // const GridIcon = (
-// // // //   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-// // // //     <rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.3" />
-// // // //     <rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.3" />
-// // // //     <rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.3" />
-// // // //     <rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.3" />
-// // // //   </svg>
-// // // // );
-
-// // // // const ListIcon = (
-// // // //   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-// // // //     <line x1="1" y1="3" x2="15" y2="3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-// // // //     <line x1="1" y1="8" x2="15" y2="8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-// // // //     <line x1="1" y1="13" x2="15" y2="13" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-// // // //   </svg>
-// // // // );
-
-// // // // // ═══════════════════════════════════════════════════════════════
-// // // // // MAIN COMPONENT
-// // // // // ═══════════════════════════════════════════════════════════════
-
-// // // // export default function FormulasTOC({
-// // // //   data = [],
-// // // //   groupByField = 'category',
-// // // //   type = 'Formula',
-// // // // }) {
-// // // //   const [view, setView] = useState('cards');           // 'cards' | 'index'
-// // // //   const [activeLetter, setActiveLetter] = useState(null);
-// // // //   const [activeCats, setActiveCats] = useState(new Set());
-// // // //   const [openTocItems, setOpenTocItems] = useState(new Set());
-// // // //   const [openCards, setOpenCards] = useState(new Set());
-// // // //   const [highlightedId, setHighlightedId] = useState(null);
-// // // //   const [searchTerm, setSearchTerm] = useState('');
-// // // //   const [searchFocused, setSearchFocused] = useState(false);
-// // // //   const [sidebarVisible, setSidebarVisible] = useState(false);
-// // // //   const [activeItemId, setActiveItemId] = useState(null);
-// // // //   const [activeSidebarCat, setActiveSidebarCat] = useState(null);
-
-// // // //   const navPanelRef = useRef(null);
-// // // //   const highlightTimer = useRef(null);
-// // // //   const observerRef = useRef(null);
-
-// // // //   // ── Derived data ──
-
-// // // //   const categories = useMemo(
-// // // //     () => [...new Set(data.map((d) => d[groupByField]))],
-// // // //     [data, groupByField],
-// // // //   );
-
-// // // //   const catCounts = useMemo(() => {
-// // // //     const counts = {};
-// // // //     data.forEach((d) => {
-// // // //       const key = d[groupByField] || 'Other';
-// // // //       counts[key] = (counts[key] || 0) + 1;
-// // // //     });
-// // // //     return counts;
-// // // //   }, [data, groupByField]);
-
-// // // //   const usedLetters = useMemo(
-// // // //     () => new Set(data.map((d) => d.name[0].toUpperCase())),
-// // // //     [data],
-// // // //   );
-
-// // // //   const grouped = useMemo(() => {
-// // // //     const lower = searchTerm.toLowerCase();
-// // // //     const filtered = lower
-// // // //       ? data.filter(
-// // // //           (d) =>
-// // // //             d.name?.toLowerCase().includes(lower) ||
-// // // //             d.formula?.toLowerCase().includes(lower) ||
-// // // //             (d.fields &&
-// // // //               typeof d.fields === 'object' &&
-// // // //               Object.values(d.fields).some(
-// // // //                 (v) => typeof v === 'string' && v.toLowerCase().includes(lower),
-// // // //               )),
-// // // //         )
-// // // //       : data;
-
-// // // //     const groups = {};
-// // // //     filtered.forEach((d) => {
-// // // //       const key = d[groupByField] || 'Other';
-// // // //       if (!groups[key]) groups[key] = [];
-// // // //       groups[key].push(d);
-// // // //     });
-// // // //     return groups;
-// // // //   }, [data, searchTerm, groupByField]);
-
-// // // //   const totalCount = useMemo(
-// // // //     () => Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0),
-// // // //     [grouped],
-// // // //   );
-
-// // // //   const navFiltered = useMemo(() => {
-// // // //     let result = data;
-// // // //     if (activeLetter) {
-// // // //       result = result.filter((d) => d.name[0].toUpperCase() === activeLetter);
-// // // //     }
-// // // //     if (activeCats.size > 0) {
-// // // //       result = result.filter((d) => activeCats.has(d[groupByField]));
-// // // //     }
-// // // //     return [...result].sort((a, b) => a.name.localeCompare(b.name));
-// // // //   }, [data, activeLetter, activeCats, groupByField]);
-
-// // // //   // ── Handlers ──
-
-// // // //   const toggleLetter = useCallback((letter) => {
-// // // //     setActiveLetter((prev) => (prev === letter ? null : letter));
-// // // //   }, []);
-
-// // // //   const toggleCat = useCallback((cat) => {
-// // // //     setActiveCats((prev) => {
-// // // //       const next = new Set(prev);
-// // // //       if (next.has(cat)) next.delete(cat);
-// // // //       else next.add(cat);
-// // // //       return next;
-// // // //     });
-// // // //   }, []);
-
-// // // //   const clearFilters = useCallback(() => {
-// // // //     setActiveCats(new Set());
-// // // //     setActiveLetter(null);
-// // // //   }, []);
-
-// // // //   const toggleTocItem = useCallback((id) => {
-// // // //     setOpenTocItems((prev) => {
-// // // //       const next = new Set();
-// // // //       if (!prev.has(id)) next.add(id);
-// // // //       return next;
-// // // //     });
-// // // //   }, []);
-
-// // // //   const toggleCard = useCallback((id) => {
-// // // //     setOpenCards((prev) => {
-// // // //       const next = new Set(prev);
-// // // //       if (next.has(id)) next.delete(id);
-// // // //       else next.add(id);
-// // // //       return next;
-// // // //     });
-// // // //   }, []);
-
-// // // //   const scrollToItem = useCallback((id) => {
-// // // //     const el = document.getElementById(id);
-// // // //     if (!el) return;
-// // // //     const y = el.getBoundingClientRect().top + window.scrollY - 130;
-// // // //     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-// // // //   }, []);
-
-// // // //   const navigateToItem = useCallback(
-// // // //     (id) => {
-// // // //       setSearchTerm('');
-
-// // // //       const hasFields = data.some((d) => {
-// // // //         const did = toId(d.name);
-// // // //         return (
-// // // //           did === id &&
-// // // //           d.fields &&
-// // // //           typeof d.fields === 'object' &&
-// // // //           Object.keys(d.fields).length > 0
-// // // //         );
-// // // //       });
-
-// // // //       if (hasFields) {
-// // // //         setOpenCards((prev) => new Set(prev).add(id));
-// // // //       }
-
-// // // //       setHighlightedId(id);
-// // // //       clearTimeout(highlightTimer.current);
-// // // //       highlightTimer.current = setTimeout(() => setHighlightedId(null), 3000);
-
-// // // //       requestAnimationFrame(() => {
-// // // //         setTimeout(() => scrollToItem(id), 100);
-// // // //       });
-// // // //     },
-// // // //     [data, scrollToItem],
-// // // //   );
-
-// // // //   const navigateToCategory = useCallback((cat) => {
-// // // //     const categoryId = `category_${cat.toLowerCase().replace(/\s+/g, '_')}`;
-// // // //     const el = document.getElementById(categoryId);
-// // // //     if (!el) return;
-// // // //     const y = el.getBoundingClientRect().top + window.scrollY - 140;
-// // // //     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-// // // //   }, []);
-
-// // // //   // ── Hash navigation ──
-
-// // // //   useEffect(() => {
-// // // //     const hash = window.location.hash.slice(1);
-// // // //     if (hash) setTimeout(() => navigateToItem(hash), 150);
-// // // //   }, [navigateToItem]);
-
-// // // //   useEffect(() => {
-// // // //     const onHashChange = () => {
-// // // //       const hash = window.location.hash.slice(1);
-// // // //       if (hash) navigateToItem(hash);
-// // // //     };
-// // // //     window.addEventListener('hashchange', onHashChange);
-// // // //     return () => window.removeEventListener('hashchange', onHashChange);
-// // // //   }, [navigateToItem]);
-
-// // // //   useEffect(() => {
-// // // //     const onClick = (e) => {
-// // // //       const a = e.target.closest('a[href^="#"]');
-// // // //       if (!a) return;
-// // // //       const hash = a.getAttribute('href').slice(1);
-// // // //       if (hash) {
-// // // //         e.preventDefault();
-// // // //         window.history.pushState(null, '', `#${hash}`);
-// // // //         navigateToItem(hash);
-// // // //       }
-// // // //     };
-// // // //     document.addEventListener('click', onClick);
-// // // //     return () => document.removeEventListener('click', onClick);
-// // // //   }, [navigateToItem]);
-
-// // // //   // ── Sidebar visibility ──
-
-// // // //   useEffect(() => {
-// // // //     const check = () => {
-// // // //       if (!navPanelRef.current) return;
-// // // //       const rect = navPanelRef.current.getBoundingClientRect();
-// // // //       const footer = document.querySelector('footer');
-// // // //       const pastFooter = footer
-// // // //         ? footer.getBoundingClientRect().top < window.innerHeight
-// // // //         : false;
-// // // //       setSidebarVisible(rect.bottom < 0 && window.innerWidth >= 1100 && !pastFooter);
-// // // //     };
-
-// // // //     window.addEventListener('scroll', check, { passive: true });
-// // // //     window.addEventListener('resize', check, { passive: true });
-// // // //     return () => {
-// // // //       window.removeEventListener('scroll', check);
-// // // //       window.removeEventListener('resize', check);
-// // // //     };
-// // // //   }, []);
-
-// // // //   // ── Intersection observer for sidebar active state ──
-
-// // // //   useEffect(() => {
-// // // //     if (observerRef.current) observerRef.current.disconnect();
-
-// // // //     const observer = new IntersectionObserver(
-// // // //       (entries) => {
-// // // //         entries.forEach((entry) => {
-// // // //           if (entry.isIntersecting) {
-// // // //             const id = entry.target.id;
-// // // //             setActiveItemId(id);
-// // // //             const item = data.find((d) => toId(d.name) === id);
-// // // //             if (item) setActiveSidebarCat(item[groupByField]);
-// // // //           }
-// // // //         });
-// // // //       },
-// // // //       { rootMargin: '-80px 0px -60% 0px', threshold: 0 },
-// // // //     );
-
-// // // //     data.forEach((item) => {
-// // // //       const el = document.getElementById(toId(item.name));
-// // // //       if (el) observer.observe(el);
-// // // //     });
-
-// // // //     observerRef.current = observer;
-// // // //     return () => observer.disconnect();
-// // // //   }, [data, grouped, groupByField]);
-
-// // // //   // ── Responsive TOC grid ──
-
-// // // //   const tocGridStyle = useMemo(() => {
-// // // //     const colCount = categories.length <= 2 ? 2 : categories.length <= 4 ? categories.length : 4;
-// // // //     return {
-// // // //       ...S.tocGrid,
-// // // //       gridTemplateColumns: `repeat(${colCount}, 1fr)`,
-// // // //     };
-// // // //   }, [categories]);
-
-// // // //   // ── Render ──
-
-// // // //   return (
-// // // //     <>
-// // // //       <style>{HIDE_SCROLLBAR_CSS}</style>
-
-// // // //       <div style={S.wrap}>
-// // // //         {/* ── View Toggle ── */}
-// // // //         <div ref={navPanelRef} style={{ marginBottom: 0 }}>
-// // // //           <div style={S.toggleWrap}>
-// // // //             <div style={S.toggleTrack}>
-// // // //               <ToggleButton
-// // // //                 label="Categories"
-// // // //                 icon={GridIcon}
-// // // //                 active={view === 'cards'}
-// // // //                 onClick={() => setView('cards')}
-// // // //               />
-// // // //               <ToggleButton
-// // // //                 label="Index"
-// // // //                 icon={ListIcon}
-// // // //                 active={view === 'index'}
-// // // //                 onClick={() => setView('index')}
-// // // //               />
-// // // //             </div>
-// // // //           </div>
-
-// // // //           {/* ── TOC Cards View ── */}
-// // // //           {view === 'cards' && (
-// // // //             <div style={tocGridStyle}>
-// // // //               {categories.map((cat) => {
-// // // //                 const items = data.filter((d) => d[groupByField] === cat);
-// // // //                 return (
-// // // //                   <div key={cat} style={S.tocCard}>
-// // // //                     <div style={S.tocCardHeader}>{cat}</div>
-// // // //                     <div style={S.tocCardBody}>
-// // // //                       {items.map((f) => (
-// // // //                         <TocItem
-// // // //                           key={f.name}
-// // // //                           item={f}
-// // // //                           isOpen={openTocItems.has(toId(f.name))}
-// // // //                           onToggle={toggleTocItem}
-// // // //                           onNavigate={navigateToItem}
-// // // //                         />
-// // // //                       ))}
-// // // //                     </div>
-// // // //                   </div>
-// // // //                 );
-// // // //               })}
-// // // //             </div>
-// // // //           )}
-
-// // // //           {/* ── Index View ── */}
-// // // //           {view === 'index' && (
-// // // //             <div style={S.navPanel}>
-// // // //               {/* Alpha bar */}
-// // // //               <div className="ftoc-no-scrollbar" style={S.alphaBar}>
-// // // //                 {ALL_LETTERS.map((l) => (
-// // // //                   <AlphaButton
-// // // //                     key={l}
-// // // //                     letter={l}
-// // // //                     active={activeLetter === l}
-// // // //                     disabled={!usedLetters.has(l)}
-// // // //                     onClick={() => toggleLetter(l)}
-// // // //                   />
-// // // //                 ))}
-// // // //               </div>
-
-// // // //               {/* Term grid */}
-// // // //               <div className="ftoc-no-scrollbar" style={S.termGrid}>
-// // // //                 {navFiltered.map((item) => (
-// // // //                   <TermItem key={item.name} item={item} onNavigate={navigateToItem} />
-// // // //                 ))}
-// // // //               </div>
-
-// // // //               {/* Category filters */}
-// // // //               <div style={S.catFilterRow}>
-// // // //                 {categories.map((cat) => (
-// // // //                   <CategoryChip
-// // // //                     key={cat}
-// // // //                     label={cat}
-// // // //                     active={activeCats.has(cat)}
-// // // //                     count={catCounts[cat]}
-// // // //                     onToggle={() => toggleCat(cat)}
-// // // //                     onNavigate={() => navigateToCategory(cat)}
-// // // //                   />
-// // // //                 ))}
-// // // //                 {(activeCats.size > 0 || activeLetter) && (
-// // // //                   <ClearButton onClick={clearFilters} />
-// // // //                 )}
-// // // //               </div>
-
-// // // //               {/* Status */}
-// // // //               <div style={S.navStatus}>
-// // // //                 {navFiltered.length} of {data.length} {type.toLowerCase()}s
-// // // //               </div>
-// // // //             </div>
-// // // //           )}
-// // // //         </div>
-
-// // // //         {/* ── Search Bar ── */}
-// // // //         <div style={S.searchBar}>
-// // // //           <div style={S.searchWrapper}>
-// // // //             <input
-// // // //               type="text"
-// // // //               value={searchTerm}
-// // // //               onChange={(e) => setSearchTerm(e.target.value)}
-// // // //               onFocus={() => setSearchFocused(true)}
-// // // //               onBlur={() => setSearchFocused(false)}
-// // // //               placeholder={`Search in ${type}s...`}
-// // // //               style={{
-// // // //                 width: '100%',
-// // // //                 padding: '13px 36px 13px 18px',
-// // // //                 border: searchFocused ? `2px solid ${ACCENT}` : '2px solid transparent',
-// // // //                 borderRadius: '28px',
-// // // //                 fontSize: '16px',
-// // // //                 fontFamily: 'inherit',
-// // // //                 outline: 'none',
-// // // //                 background: '#fff',
-// // // //                 color: '#1e293b',
-// // // //                 boxSizing: 'border-box',
-// // // //                 transition: 'border-color 0.2s',
-// // // //               }}
-// // // //             />
-// // // //             {searchTerm && (
-// // // //               <button
-// // // //                 style={S.searchClear}
-// // // //                 onClick={() => setSearchTerm('')}
-// // // //                 aria-label="Clear search"
-// // // //               >
-// // // //                 &#10005;
-// // // //               </button>
-// // // //             )}
-// // // //           </div>
-// // // //           <span style={S.searchCount}>
-// // // //             {totalCount} {totalCount === 1 ? type.toLowerCase() : `${type.toLowerCase()}s`}
-// // // //           </span>
-// // // //         </div>
-
-// // // //         {/* ── Formula Cards ── */}
-// // // //         {Object.keys(grouped).length === 0 ? (
-// // // //           <div style={S.empty}>
-// // // //             No {type.toLowerCase()}s found for &quot;{searchTerm}&quot;
-// // // //           </div>
-// // // //         ) : (
-// // // //           Object.entries(grouped).map(([group, items]) => {
-// // // //             const categoryId = `category_${group.toLowerCase().replace(/\s+/g, '_')}`;
-// // // //             return (
-// // // //               <div key={group} id={categoryId} style={{ marginBottom: '40px' }}>
-// // // //                 <div style={S.groupHeader}>
-// // // //                   <h2 style={S.groupTitle}>{group}</h2>
-// // // //                   <span style={S.groupCount}>({items.length} {items.length === 1 ? type.toLowerCase() : `${type.toLowerCase()}s`})</span>
-// // // //                 </div>
-// // // //                 {items.map((item) => {
-// // // //                   const id = toId(item.name);
-// // // //                   return (
-// // // //                     <FormulaCard
-// // // //                       key={id}
-// // // //                       item={item}
-// // // //                       isHighlighted={highlightedId === id}
-// // // //                       isOpen={openCards.has(id)}
-// // // //                       onToggle={toggleCard}
-// // // //                     />
-// // // //                   );
-// // // //                 })}
-// // // //               </div>
-// // // //             );
-// // // //           })
-// // // //         )}
-// // // //       </div>
-
-// // // //       {/* ── Sticky Sidebar ── */}
-// // // //       <div className="ftoc-no-scrollbar" style={S.sidebar(sidebarVisible)}>
-// // // //         {categories.map((cat) => {
-// // // //           const items = data.filter((d) => d[groupByField] === cat);
-// // // //           return (
-// // // //             <div key={cat} style={S.sidebarGroup}>
-// // // //               <div
-// // // //                 style={{
-// // // //                   fontSize: '12px',
-// // // //                   fontWeight: '600',
-// // // //                   textTransform: 'uppercase',
-// // // //                   letterSpacing: '1px',
-// // // //                   color: activeSidebarCat === cat ? ACCENT : '#94a3b8',
-// // // //                   marginBottom: '4px',
-// // // //                   paddingLeft: '8px',
-// // // //                   transition: 'color 0.2s',
-// // // //                 }}
-// // // //               >
-// // // //                 {processContent(cat)}
-// // // //               </div>
-// // // //               {items.map((item) => (
-// // // //                 <SidebarLink
-// // // //                   key={item.name}
-// // // //                   item={item}
-// // // //                   active={activeItemId === toId(item.name)}
-// // // //                   onNavigate={navigateToItem}
-// // // //                 />
-// // // //               ))}
-// // // //             </div>
-// // // //           );
-// // // //         })}
-// // // //       </div>
-// // // //     </>
-// // // //   );
-// // // // }
-
-
-// // // import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-// // // import { processContent } from '../../utils/contentProcessor';
-
-// // // // ─── Constants ─────────────────────────────────────────────────
-
-// // // const ALL_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-// // // const ACCENT = '#4a6cf7';
-// // // const ACCENT_LIGHT = '#eef1fd';
-// // // const ACCENT_BORDER = '#cdd5f8';
-// // // const ACCENT_HOVER = '#dbe1fc';
-
-// // // const HIDE_SCROLLBAR_CSS = `
-// // //   .ftoc-no-scrollbar::-webkit-scrollbar { display: none; }
-// // // `;
-
-// // // const toId = (name) => name.toLowerCase().replace(/\s+/g, '_');
-
-// // // const noScroll = {
-// // //   scrollbarWidth: 'none',
-// // //   msOverflowStyle: 'none',
-// // // };
-
-// // // // ─── Styles ────────────────────────────────────────────────────
-
-// // // const S = {
-// // //   wrap: {
-// // //     display: 'flex',
-// // //     flexDirection: 'column',
-// // //     gap: 0,
-// // //     maxWidth: '1150px',
-// // //     margin: '0 auto',
-// // //     padding: '0 20px',
-// // //   },
-
-// // //   /* ── View Toggle ── */
-// // //   toggleWrap: {
-// // //     display: 'flex',
-// // //     justifyContent: 'center',
-// // //     marginBottom: '24px',
-// // //   },
-// // //   toggleTrack: {
-// // //     display: 'inline-flex',
-// // //     background: '#f1f5f9',
-// // //     borderRadius: '12px',
-// // //     padding: '4px',
-// // //     border: '1px solid #e2e8f0',
-// // //   },
-
-// // //   /* ── TOC Cards ── */
-// // //   tocGrid: {
-// // //     display: 'grid',
-// // //     gridTemplateColumns: 'repeat(4, 1fr)',
-// // //     gap: '14px',
-// // //     marginBottom: '28px',
-// // //   },
-// // //   tocCard: {
-// // //     borderRadius: '12px',
-// // //     overflow: 'hidden',
-// // //     border: '1px solid #d0d9ed',
-// // //     background: '#fff',
-// // //   },
-// // //   tocCardHeader: {
-// // //     background: 'linear-gradient(135deg, #4a6cf7 0%, #3b5de7 100%)',
-// // //     color: '#fff',
-// // //     padding: '17px 20px',
-// // //     fontSize: '17px',
-// // //     fontWeight: '600',
-// // //   },
-// // //   tocCardBody: {
-// // //     padding: '5px 0',
-// // //   },
-// // //   tocPeek: {
-// // //     padding: '8px 18px 12px',
-// // //     display: 'flex',
-// // //     flexDirection: 'column',
-// // //     gap: '8px',
-// // //   },
-// // //   tocPeekFormula: {
-// // //     fontSize: '16px',
-// // //     background: '#f1f5f9',
-// // //     padding: '8px 12px',
-// // //     borderRadius: '6px',
-// // //     color: '#475569',
-// // //     lineHeight: '1.6',
-// // //   },
-
-// // //   /* ── Nav Panel ── */
-// // //   navPanel: {
-// // //     background: '#fff',
-// // //     border: '1.5px solid #d0d9ed',
-// // //     borderRadius: '16px',
-// // //     overflow: 'hidden',
-// // //     marginBottom: '28px',
-// // //   },
-// // //   alphaBar: {
-// // //     display: 'flex',
-// // //     flexWrap: 'nowrap',
-// // //     gap: '2px',
-// // //     padding: '12px 18px',
-// // //     background: '#f8fafc',
-// // //     borderBottom: '1.5px solid #e2e8f0',
-// // //     justifyContent: 'center',
-// // //     overflowX: 'auto',
-// // //     ...noScroll,
-// // //   },
-// // //   termGrid: {
-// // //     padding: '20px 24px',
-// // //     display: 'grid',
-// // //     gridTemplateColumns: '1fr 1fr',
-// // //     gap: '3px 24px',
-// // //   },
-// // //   catFilterRow: {
-// // //     display: 'flex',
-// // //     flexWrap: 'wrap',
-// // //     gap: '8px',
-// // //     padding: '17px 24px',
-// // //     borderTop: '1px solid #e2e8f0',
-// // //   },
-// // //   navStatus: {
-// // //     padding: '10px 24px 17px',
-// // //     fontSize: '16px',
-// // //     color: '#94a3b8',
-// // //     borderTop: '1px solid #e2e8f0',
-// // //     textAlign: 'right',
-// // //   },
-
-// // //   /* ── Search Bar ── */
-// // //   searchBar: {
-// // //     position: 'sticky',
-// // //     top: '63px',
-// // //     zIndex: 10,
-// // //     background: 'rgba(30, 58, 138, 0.75)',
-// // //     backdropFilter: 'blur(8px)',
-// // //     borderRadius: '6px',
-// // //     padding: '17px 24px',
-// // //     marginBottom: '38px',
-// // //     display: 'flex',
-// // //     alignItems: 'center',
-// // //     gap: '17px',
-// // //   },
-// // //   searchWrapper: {
-// // //     position: 'relative',
-// // //     flex: 1,
-// // //   },
-// // //   searchClear: {
-// // //     position: 'absolute',
-// // //     top: '50%',
-// // //     right: '17px',
-// // //     transform: 'translateY(-50%)',
-// // //     border: 'none',
-// // //     background: 'none',
-// // //     color: '#94a3b8',
-// // //     fontSize: '19px',
-// // //     cursor: 'pointer',
-// // //     padding: '0',
-// // //     lineHeight: 1,
-// // //   },
-// // //   searchCount: {
-// // //     fontSize: '17px',
-// // //     color: '#c7d2e8',
-// // //     whiteSpace: 'nowrap',
-// // //     flexShrink: 0,
-// // //   },
-
-// // //   /* ── Category Group ── */
-// // //   groupHeader: {
-// // //     display: 'flex',
-// // //     alignItems: 'baseline',
-// // //     gap: '12px',
-// // //     margin: '0 0 20px',
-// // //     paddingBottom: '10px',
-// // //     borderBottom: '2px solid #c7d2e8',
-// // //   },
-// // //   groupTitle: {
-// // //     fontFamily: "'Source Serif 4', Georgia, serif",
-// // //     fontSize: '26px',
-// // //     fontWeight: '600',
-// // //     color: '#1e40af',
-// // //     margin: 0,
-// // //     letterSpacing: '0.01em',
-// // //   },
-// // //   groupCount: {
-// // //     fontSize: '17px',
-// // //     color: '#94a3b8',
-// // //     fontWeight: '400',
-// // //   },
-
-// // //   /* ── Formula Card ── */
-// // //   cardBody: {
-// // //     padding: '26px 32px',
-// // //     background: '#fbfcff',
-// // //   },
-// // //   cardName: {
-// // //     fontFamily: "'Source Serif 4', Georgia, serif",
-// // //     fontSize: '24px',
-// // //     fontWeight: '600',
-// // //     color: '#1e293b',
-// // //     margin: '0 0 10px',
-// // //     lineHeight: '1.3',
-// // //   },
-// // //   cardFormula: {
-// // //     fontSize: '20px',
-// // //     color: '#475569',
-// // //     lineHeight: '1.7',
-// // //     margin: 0,
-// // //   },
-// // //   cardToggle: {
-// // //     display: 'flex',
-// // //     alignItems: 'center',
-// // //     justifyContent: 'center',
-// // //     gap: '8px',
-// // //     padding: '14px 0 5px',
-// // //     cursor: 'pointer',
-// // //     color: ACCENT,
-// // //     fontSize: '18px',
-// // //     fontWeight: '500',
-// // //     userSelect: 'none',
-// // //   },
-// // //   cardDetail: (open) => ({
-// // //     borderTop: '1.5px solid #e2e8f0',
-// // //     background: '#f0f4fc',
-// // //     overflow: 'hidden',
-// // //     maxHeight: open ? '5000px' : '0',
-// // //     padding: open ? '24px 32px' : '0 32px',
-// // //     transition: 'max-height 0.35s ease, padding 0.3s ease',
-// // //   }),
-// // //   tabBody: {
-// // //     padding: '24px 26px',
-// // //     border: '1.5px solid #d0d9ed',
-// // //     borderRadius: '0 10px 10px 10px',
-// // //     fontSize: '20px',
-// // //     color: '#475569',
-// // //     lineHeight: '1.7',
-// // //     background: '#fff',
-// // //     minHeight: '70px',
-// // //   },
-
-// // //   /* ── Sidebar ── */
-// // //   sidebar: (visible) => ({
-// // //     position: 'fixed',
-// // //     top: '20px',
-// // //     left: '20px',
-// // //     width: '220px',
-// // //     background: '#fff',
-// // //     border: '1.5px solid #d0d9ed',
-// // //     borderRadius: '14px',
-// // //     padding: '20px 17px',
-// // //     maxHeight: 'calc(100vh - 40px)',
-// // //     overflowY: 'auto',
-// // //     opacity: visible ? 1 : 0,
-// // //     transform: visible ? 'translateY(0)' : 'translateY(12px)',
-// // //     transition: 'opacity 0.3s, transform 0.3s',
-// // //     pointerEvents: visible ? 'auto' : 'none',
-// // //     zIndex: 50,
-// // //     ...noScroll,
-// // //   }),
-// // //   sidebarGroup: {
-// // //     marginBottom: '17px',
-// // //   },
-
-// // //   /* ── Empty State ── */
-// // //   empty: {
-// // //     textAlign: 'center',
-// // //     padding: '60px 24px',
-// // //     color: '#94a3b8',
-// // //     fontSize: '19px',
-// // //   },
-// // // };
-
-// // // // ─── AlphaButton ───────────────────────────────────────────────
-
-// // // function AlphaButton({ letter, active, disabled, onClick }) {
-// // //   const [hovered, setHovered] = useState(false);
-
-// // //   return (
-// // //     <button
-// // //       style={{
-// // //         width: 32,
-// // //         height: 32,
-// // //         display: 'flex',
-// // //         alignItems: 'center',
-// // //         justifyContent: 'center',
-// // //         fontSize: '15px',
-// // //         fontWeight: '600',
-// // //         fontFamily: 'inherit',
-// // //         borderRadius: '7px',
-// // //         border: 'none',
-// // //         cursor: disabled ? 'default' : 'pointer',
-// // //         pointerEvents: disabled ? 'none' : 'auto',
-// // //         background: active ? ACCENT : hovered ? ACCENT_HOVER : 'transparent',
-// // //         color: active ? '#fff' : disabled ? '#cbd5e1' : ACCENT,
-// // //         transition: 'all 0.12s',
-// // //         flexShrink: 0,
-// // //       }}
-// // //       onClick={onClick}
-// // //       onMouseEnter={() => setHovered(true)}
-// // //       onMouseLeave={() => setHovered(false)}
-// // //     >
-// // //       {letter}
-// // //     </button>
-// // //   );
-// // // }
-
-// // // // ─── ToggleButton ──────────────────────────────────────────────
-
-// // // function ToggleButton({ label, active, icon, onClick }) {
-// // //   const [hovered, setHovered] = useState(false);
-
-// // //   return (
-// // //     <button
-// // //       style={{
-// // //         display: 'flex',
-// // //         alignItems: 'center',
-// // //         gap: '8px',
-// // //         padding: '10px 22px',
-// // //         border: 'none',
-// // //         borderRadius: '9px',
-// // //         cursor: 'pointer',
-// // //         fontFamily: 'inherit',
-// // //         fontSize: '17px',
-// // //         fontWeight: '500',
-// // //         background: active ? ACCENT : hovered ? '#e2e8f0' : 'transparent',
-// // //         color: active ? '#fff' : '#475569',
-// // //         transition: 'all 0.15s',
-// // //       }}
-// // //       onClick={onClick}
-// // //       onMouseEnter={() => setHovered(true)}
-// // //       onMouseLeave={() => setHovered(false)}
-// // //     >
-// // //       {icon}
-// // //       {label}
-// // //     </button>
-// // //   );
-// // // }
-
-// // // // ─── CategoryChip ──────────────────────────────────────────────
-
-// // // function CategoryChip({ label, active, count, onToggle, onNavigate }) {
-// // //   const [hovered, setHovered] = useState(false);
-// // //   const [navHovered, setNavHovered] = useState(false);
-
-// // //   const checkSvg = (
-// // //     <svg width="14" height="14" viewBox="0 0 12 12">
-// // //       <polyline
-// // //         points="2,6 5,9 10,3"
-// // //         fill="none"
-// // //         stroke="#fff"
-// // //         strokeWidth="1.8"
-// // //         strokeLinecap="round"
-// // //         strokeLinejoin="round"
-// // //       />
-// // //     </svg>
-// // //   );
-
-// // //   const arrowSvg = (
-// // //     <svg width="14" height="14" viewBox="0 0 12 12">
-// // //       <path
-// // //         d="M2 6h8M7 3l3 3-3 3"
-// // //         fill="none"
-// // //         stroke="currentColor"
-// // //         strokeWidth="1.5"
-// // //         strokeLinecap="round"
-// // //         strokeLinejoin="round"
-// // //       />
-// // //     </svg>
-// // //   );
-
-// // //   return (
-// // //     <div
-// // //       style={{
-// // //         display: 'flex',
-// // //         alignItems: 'center',
-// // //         justifyContent: 'space-between',
-// // //         padding: '10px 17px',
-// // //         border: active
-// // //           ? `1.5px solid ${ACCENT}`
-// // //           : hovered
-// // //             ? '1.5px solid #93aee0'
-// // //             : '1.5px solid #d0d9ed',
-// // //         borderRadius: '12px',
-// // //         background: active ? ACCENT_LIGHT : '#fff',
-// // //         cursor: 'pointer',
-// // //         transition: 'border-color 0.15s, background 0.15s',
-// // //         gap: '10px',
-// // //       }}
-// // //       onClick={onToggle}
-// // //       onMouseEnter={() => setHovered(true)}
-// // //       onMouseLeave={() => setHovered(false)}
-// // //     >
-// // //       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-// // //         <div
-// // //           style={{
-// // //             width: 21,
-// // //             height: 21,
-// // //             borderRadius: '4px',
-// // //             border: active ? `1.5px solid ${ACCENT}` : '1.5px solid #94a3b8',
-// // //             display: 'flex',
-// // //             alignItems: 'center',
-// // //             justifyContent: 'center',
-// // //             flexShrink: 0,
-// // //             background: active ? ACCENT : '#fff',
-// // //             transition: 'all 0.15s',
-// // //           }}
-// // //         >
-// // //           {active && checkSvg}
-// // //         </div>
-// // //         <span style={{ fontSize: '17px', fontWeight: '500', color: '#1e293b' }}>
-// // //           {processContent(label)}
-// // //         </span>
-// // //         <span style={{ fontSize: '15px', color: '#94a3b8' }}>({count})</span>
-// // //       </div>
-// // //       <button
-// // //         style={{
-// // //           display: 'flex',
-// // //           alignItems: 'center',
-// // //           gap: '4px',
-// // //           padding: '5px 14px',
-// // //           borderRadius: '18px',
-// // //           border: `1px solid ${navHovered ? ACCENT : '#d0d9ed'}`,
-// // //           background: navHovered ? ACCENT_HOVER : '#fff',
-// // //           fontSize: '15px',
-// // //           fontWeight: '500',
-// // //           fontFamily: 'inherit',
-// // //           color: ACCENT,
-// // //           cursor: 'pointer',
-// // //           flexShrink: 0,
-// // //           transition: 'background 0.12s, border-color 0.12s',
-// // //         }}
-// // //         onMouseEnter={() => setNavHovered(true)}
-// // //         onMouseLeave={() => setNavHovered(false)}
-// // //         onClick={(e) => {
-// // //           e.stopPropagation();
-// // //           onNavigate();
-// // //         }}
-// // //       >
-// // //         Go to {arrowSvg}
-// // //       </button>
-// // //     </div>
-// // //   );
-// // // }
-
-// // // // ─── ClearButton ───────────────────────────────────────────────
-
-// // // function ClearButton({ onClick }) {
-// // //   const [hovered, setHovered] = useState(false);
-
-// // //   return (
-// // //     <button
-// // //       style={{
-// // //         display: 'flex',
-// // //         alignItems: 'center',
-// // //         gap: '6px',
-// // //         padding: '10px 20px',
-// // //         border: '1px solid red',
-// // //         background: hovered ? '#fef2f2' : 'none',
-// // //         borderRadius: '12px',
-// // //         fontSize: '17px',
-// // //         fontWeight: '500',
-// // //         fontFamily: 'inherit',
-// // //         color: '#dc2626',
-// // //         cursor: 'pointer',
-// // //         transition: 'background 0.15s',
-// // //       }}
-// // //       onClick={onClick}
-// // //       onMouseEnter={() => setHovered(true)}
-// // //       onMouseLeave={() => setHovered(false)}
-// // //     >
-// // //       &#10005; Clear
-// // //     </button>
-// // //   );
-// // // }
-
-// // // // ─── TermItem ──────────────────────────────────────────────────
-
-// // // function TermItem({ item, onNavigate }) {
-// // //   const [hovered, setHovered] = useState(false);
-
-// // //   return (
-// // //     <a
-// // //       href={`#${toId(item.name)}`}
-// // //       style={{
-// // //         padding: '10px 14px',
-// // //         fontSize: '17px',
-// // //         color: hovered ? ACCENT : '#334155',
-// // //         borderRadius: '7px',
-// // //         cursor: 'pointer',
-// // //         transition: 'all 0.12s',
-// // //         textDecoration: 'none',
-// // //         display: 'flex',
-// // //         alignItems: 'baseline',
-// // //         gap: '10px',
-// // //         background: hovered ? ACCENT_LIGHT : 'transparent',
-// // //       }}
-// // //       onMouseEnter={() => setHovered(true)}
-// // //       onMouseLeave={() => setHovered(false)}
-// // //       onClick={(e) => {
-// // //         e.preventDefault();
-// // //         onNavigate(toId(item.name));
-// // //       }}
-// // //     >
-// // //       <span
-// // //         style={{
-// // //           fontSize: '16px',
-// // //           fontWeight: '600',
-// // //           color: ACCENT,
-// // //           width: '16px',
-// // //           flexShrink: 0,
-// // //         }}
-// // //       >
-// // //         {item.name[0]}
-// // //       </span>
-// // //       {processContent(item.name)}
-// // //       <span
-// // //         style={{
-// // //           fontSize: '15px',
-// // //           color: '#94a3b8',
-// // //           marginLeft: 'auto',
-// // //           flexShrink: 0,
-// // //           whiteSpace: 'nowrap',
-// // //         }}
-// // //       >
-// // //         {item.category}
-// // //       </span>
-// // //     </a>
-// // //   );
-// // // }
-
-// // // // ─── TocItem (expandable item inside blue card) ────────────────
-
-// // // function TocItem({ item, isOpen, onToggle, onNavigate }) {
-// // //   const [hovered, setHovered] = useState(false);
-// // //   const id = toId(item.name);
-
-// // //   return (
-// // //     <div>
-// // //       <button
-// // //         style={{
-// // //           display: 'flex',
-// // //           alignItems: 'center',
-// // //           justifyContent: 'space-between',
-// // //           width: '100%',
-// // //           padding: '10px 17px',
-// // //           border: 'none',
-// // //           cursor: 'pointer',
-// // //           fontFamily: 'inherit',
-// // //           textAlign: 'left',
-// // //           fontSize: '16px',
-// // //           color: '#334155',
-// // //           background: isOpen ? '#f0f4ff' : hovered ? '#f8fafc' : 'transparent',
-// // //           transition: 'background 0.1s',
-// // //         }}
-// // //         onClick={() => onToggle(id)}
-// // //         onMouseEnter={() => setHovered(true)}
-// // //         onMouseLeave={() => setHovered(false)}
-// // //       >
-// // //         <span>{item.name}</span>
-// // //         <svg
-// // //           width="16"
-// // //           height="16"
-// // //           viewBox="0 0 14 14"
-// // //           style={{
-// // //             transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-// // //             transition: 'transform 0.2s',
-// // //             color: '#94a3b8',
-// // //             flexShrink: 0,
-// // //           }}
-// // //         >
-// // //           <polyline
-// // //             points="4,5 7,8 10,5"
-// // //             fill="none"
-// // //             stroke="currentColor"
-// // //             strokeWidth="1.5"
-// // //             strokeLinecap="round"
-// // //             strokeLinejoin="round"
-// // //           />
-// // //         </svg>
-// // //       </button>
-// // //       {isOpen && (
-// // //         <div style={S.tocPeek}>
-// // //           <div style={S.tocPeekFormula}>{processContent(item.formula)}</div>
-// // //           <a
-// // //             style={{
-// // //               fontSize: '14px',
-// // //               color: ACCENT,
-// // //               cursor: 'pointer',
-// // //               textDecoration: 'none',
-// // //             }}
-// // //             onClick={(e) => {
-// // //               e.preventDefault();
-// // //               onNavigate(id);
-// // //             }}
-// // //           >
-// // //             Learn More &#8595;
-// // //           </a>
-// // //         </div>
-// // //       )}
-// // //     </div>
-// // //   );
-// // // }
-
-// // // // ─── CardLink ──────────────────────────────────────────────────
-
-// // // function CardLink({ link }) {
-// // //   const [hovered, setHovered] = useState(false);
-
-// // //   if (!link || (!link.url && !link.href)) return null;
-
-// // //   const label = link.label || link.text || link.url || link.href;
-// // //   const url = link.url || link.href;
-
-// // //   return (
-// // //     <div>
-// // //       <a
-// // //         href={url}
-// // //         style={{
-// // //           display: 'inline-flex',
-// // //           alignItems: 'center',
-// // //           gap: '6px',
-// // //           fontSize: '17px',
-// // //           color: hovered ? '#1d4ed8' : ACCENT,
-// // //           textDecoration: 'none',
-// // //           padding: '10px 0 0',
-// // //           cursor: 'pointer',
-// // //           fontWeight: '500',
-// // //           transition: 'color 0.15s',
-// // //         }}
-// // //         onMouseEnter={() => setHovered(true)}
-// // //         onMouseLeave={() => setHovered(false)}
-// // //       >
-// // //         <svg width="16" height="16" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
-// // //           <path
-// // //             d="M3 11L11 3M11 3H6M11 3v5"
-// // //             fill="none"
-// // //             stroke="currentColor"
-// // //             strokeWidth="1.2"
-// // //             strokeLinecap="round"
-// // //             strokeLinejoin="round"
-// // //           />
-// // //         </svg>
-// // //         {processContent(label)}
-// // //       </a>
-// // //     </div>
-// // //   );
-// // // }
-
-// // // // ─── BackToTop ─────────────────────────────────────────────────
-
-// // // function BackToTop() {
-// // //   const [hovered, setHovered] = useState(false);
-
-// // //   return (
-// // //     <div
-// // //       style={{
-// // //         fontSize: '15px',
-// // //         color: hovered ? ACCENT : '#94a3b8',
-// // //         cursor: 'pointer',
-// // //         textAlign: 'right',
-// // //         padding: '8px 0 0',
-// // //         userSelect: 'none',
-// // //         transition: 'color 0.15s',
-// // //       }}
-// // //       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-// // //       onMouseEnter={() => setHovered(true)}
-// // //       onMouseLeave={() => setHovered(false)}
-// // //     >
-// // //       &uarr; Back to top
-// // //     </div>
-// // //   );
-// // // }
-
-// // // // ─── TabButton ─────────────────────────────────────────────────
-
-// // // function TabButton({ label, active, onClick }) {
-// // //   const [hovered, setHovered] = useState(false);
-
-// // //   return (
-// // //     <span
-// // //       style={{
-// // //         padding: '12px 26px',
-// // //         fontSize: '18px',
-// // //         fontWeight: '500',
-// // //         borderRadius: '10px 10px 0 0',
-// // //         border: '1.5px solid',
-// // //         borderBottom: 'none',
-// // //         cursor: 'pointer',
-// // //         marginRight: '4px',
-// // //         textTransform: 'capitalize',
-// // //         transition: 'background 0.15s, color 0.15s',
-// // //         background: active ? ACCENT : hovered ? '#dae2f3' : '#e4eaf5',
-// // //         color: active ? '#fff' : '#475569',
-// // //         borderColor: active ? ACCENT : '#d0d9ed',
-// // //       }}
-// // //       onClick={onClick}
-// // //       onMouseEnter={() => setHovered(true)}
-// // //       onMouseLeave={() => setHovered(false)}
-// // //     >
-// // //       {processContent(label)}
-// // //     </span>
-// // //   );
-// // // }
-
-// // // // ─── FieldContent ──────────────────────────────────────────────
-
-// // // function FieldContent({ value }) {
-// // //   if (typeof value === 'string') {
-// // //     return <div>{processContent(value)}</div>;
-// // //   }
-
-// // //   // Future: component registry for MathDerivation, FunctionMachineDiagram
-// // //   // if (typeof value === 'object' && value?.component) {
-// // //   //   const Component = COMPONENT_REGISTRY[value.component];
-// // //   //   if (Component) {
-// // //   //     const { component, ...props } = value;
-// // //   //     return <Component {...props} />;
-// // //   //   }
-// // //   // }
-
-// // //   return null;
-// // // }
-
-// // // // ─── FormulaCard ───────────────────────────────────────────────
-
-// // // function FormulaCard({ item, isHighlighted, onToggle, isOpen }) {
-// // //   const hasFields =
-// // //     item.fields &&
-// // //     typeof item.fields === 'object' &&
-// // //     !Array.isArray(item.fields) &&
-// // //     Object.keys(item.fields).length > 0;
-
-// // //   const [activeTab, setActiveTab] = useState(0);
-// // //   const [hovered, setHovered] = useState(false);
-// // //   const fieldEntries = hasFields ? Object.entries(item.fields) : [];
-// // //   const itemId = toId(item.name);
-
-// // //   return (
-// // //     <div
-// // //       id={itemId}
-// // //       style={{
-// // //         border: isHighlighted
-// // //           ? `2px solid ${ACCENT}`
-// // //           : hovered
-// // //             ? '1.5px solid #93aee0'
-// // //             : '1.5px solid #d0d9ed',
-// // //         borderRadius: '14px',
-// // //         marginBottom: '14px',
-// // //         overflow: 'hidden',
-// // //         background: isHighlighted ? '#f8faff' : '#fff',
-// // //         transition: 'border-color 0.2s, background 0.2s',
-// // //         scrollMarginTop: '130px',
-// // //       }}
-// // //       onMouseEnter={() => setHovered(true)}
-// // //       onMouseLeave={() => setHovered(false)}
-// // //     >
-// // //       <div style={S.cardBody}>
-// // //         <h3 style={S.cardName}>{processContent(item.name)}</h3>
-// // //         <div style={S.cardFormula}>{processContent(item.formula)}</div>
-// // //         {item.link && <CardLink link={item.link} />}
-// // //         {hasFields && (
-// // //           <div
-// // //             style={S.cardToggle}
-// // //             onClick={() => onToggle(itemId)}
-// // //           >
-// // //             {isOpen ? 'Hide details' : 'See details'}
-// // //             <svg
-// // //               width="16"
-// // //               height="16"
-// // //               viewBox="0 0 14 14"
-// // //               style={{
-// // //                 transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-// // //                 transition: 'transform 0.25s',
-// // //               }}
-// // //             >
-// // //               <polyline
-// // //                 points="3,5 7,9 11,5"
-// // //                 fill="none"
-// // //                 stroke="currentColor"
-// // //                 strokeWidth="2"
-// // //                 strokeLinecap="round"
-// // //                 strokeLinejoin="round"
-// // //               />
-// // //             </svg>
-// // //           </div>
-// // //         )}
-// // //         {!isOpen && <BackToTop />}
-// // //       </div>
-
-// // //       {hasFields && (
-// // //         <div style={S.cardDetail(isOpen)}>
-// // //           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 0 }}>
-// // //             {fieldEntries.map(([key], i) => (
-// // //               <TabButton
-// // //                 key={key}
-// // //                 label={key.replace(/_/g, ' ')}
-// // //                 active={i === activeTab}
-// // //                 onClick={() => setActiveTab(i)}
-// // //               />
-// // //             ))}
-// // //           </div>
-// // //           <div style={S.tabBody}>
-// // //             <FieldContent value={fieldEntries[activeTab]?.[1] || ''} />
-// // //           </div>
-// // //           <BackToTop />
-// // //         </div>
-// // //       )}
-// // //     </div>
-// // //   );
-// // // }
-
-// // // // ─── SidebarLink ───────────────────────────────────────────────
-
-// // // function SidebarLink({ item, active, onNavigate }) {
-// // //   const [hovered, setHovered] = useState(false);
-
-// // //   return (
-// // //     <a
-// // //       href={`#${toId(item.name)}`}
-// // //       style={{
-// // //         display: 'block',
-// // //         padding: '4px 10px',
-// // //         fontSize: '16px',
-// // //         color: active ? ACCENT : hovered ? ACCENT : '#64748b',
-// // //         fontWeight: active ? '600' : '400',
-// // //         textDecoration: 'none',
-// // //         borderLeft: `2px solid ${active || hovered ? ACCENT : 'transparent'}`,
-// // //         borderRadius: '0 5px 5px 0',
-// // //         background: active || hovered ? ACCENT_LIGHT : 'transparent',
-// // //         transition: 'all 0.12s',
-// // //         cursor: 'pointer',
-// // //         whiteSpace: 'normal',
-// // //         wordBreak: 'break-word',
-// // //         lineHeight: '1.3',
-// // //       }}
-// // //       onMouseEnter={() => setHovered(true)}
-// // //       onMouseLeave={() => setHovered(false)}
-// // //       onClick={(e) => {
-// // //         e.preventDefault();
-// // //         onNavigate(toId(item.name));
-// // //       }}
-// // //     >
-// // //       {processContent(item.name)}
-// // //     </a>
-// // //   );
-// // // }
-
-// // // // ─── Icons ─────────────────────────────────────────────────────
-
-// // // const GridIcon = (
-// // //   <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
-// // //     <rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.3" />
-// // //     <rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.3" />
-// // //     <rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.3" />
-// // //     <rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.3" />
-// // //   </svg>
-// // // );
-
-// // // const ListIcon = (
-// // //   <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
-// // //     <line x1="1" y1="3" x2="15" y2="3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-// // //     <line x1="1" y1="8" x2="15" y2="8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-// // //     <line x1="1" y1="13" x2="15" y2="13" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-// // //   </svg>
-// // // );
-
-// // // // ═══════════════════════════════════════════════════════════════
-// // // // MAIN COMPONENT
-// // // // ═══════════════════════════════════════════════════════════════
-
-// // // export default function FormulasTOC({
-// // //   data = [],
-// // //   groupByField = 'category',
-// // //   type = 'Formula',
-// // // }) {
-// // //   const [view, setView] = useState('cards');
-// // //   const [activeLetter, setActiveLetter] = useState(null);
-// // //   const [activeCats, setActiveCats] = useState(new Set());
-// // //   const [openTocItems, setOpenTocItems] = useState(new Set());
-// // //   const [openCards, setOpenCards] = useState(new Set());
-// // //   const [highlightedId, setHighlightedId] = useState(null);
-// // //   const [searchTerm, setSearchTerm] = useState('');
-// // //   const [searchFocused, setSearchFocused] = useState(false);
-// // //   const [sidebarVisible, setSidebarVisible] = useState(false);
-// // //   const [activeItemId, setActiveItemId] = useState(null);
-// // //   const [activeSidebarCat, setActiveSidebarCat] = useState(null);
-
-// // //   const navPanelRef = useRef(null);
-// // //   const highlightTimer = useRef(null);
-// // //   const observerRef = useRef(null);
-
-// // //   // ── Derived data ──
-
-// // //   const categories = useMemo(
-// // //     () => [...new Set(data.map((d) => d[groupByField]))],
-// // //     [data, groupByField],
-// // //   );
-
-// // //   const catCounts = useMemo(() => {
-// // //     const counts = {};
-// // //     data.forEach((d) => {
-// // //       const key = d[groupByField] || 'Other';
-// // //       counts[key] = (counts[key] || 0) + 1;
-// // //     });
-// // //     return counts;
-// // //   }, [data, groupByField]);
-
-// // //   const usedLetters = useMemo(
-// // //     () => new Set(data.map((d) => d.name[0].toUpperCase())),
-// // //     [data],
-// // //   );
-
-// // //   const grouped = useMemo(() => {
-// // //     const lower = searchTerm.toLowerCase();
-// // //     const filtered = lower
-// // //       ? data.filter(
-// // //           (d) =>
-// // //             d.name?.toLowerCase().includes(lower) ||
-// // //             d.formula?.toLowerCase().includes(lower) ||
-// // //             (d.fields &&
-// // //               typeof d.fields === 'object' &&
-// // //               Object.values(d.fields).some(
-// // //                 (v) => typeof v === 'string' && v.toLowerCase().includes(lower),
-// // //               )),
-// // //         )
-// // //       : data;
-
-// // //     const groups = {};
-// // //     filtered.forEach((d) => {
-// // //       const key = d[groupByField] || 'Other';
-// // //       if (!groups[key]) groups[key] = [];
-// // //       groups[key].push(d);
-// // //     });
-// // //     return groups;
-// // //   }, [data, searchTerm, groupByField]);
-
-// // //   const totalCount = useMemo(
-// // //     () => Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0),
-// // //     [grouped],
-// // //   );
-
-// // //   const navFiltered = useMemo(() => {
-// // //     let result = data;
-// // //     if (activeLetter) {
-// // //       result = result.filter((d) => d.name[0].toUpperCase() === activeLetter);
-// // //     }
-// // //     if (activeCats.size > 0) {
-// // //       result = result.filter((d) => activeCats.has(d[groupByField]));
-// // //     }
-// // //     return [...result].sort((a, b) => a.name.localeCompare(b.name));
-// // //   }, [data, activeLetter, activeCats, groupByField]);
-
-// // //   // ── Handlers ──
-
-// // //   const toggleLetter = useCallback((letter) => {
-// // //     setActiveLetter((prev) => (prev === letter ? null : letter));
-// // //   }, []);
-
-// // //   const toggleCat = useCallback((cat) => {
-// // //     setActiveCats((prev) => {
-// // //       const next = new Set(prev);
-// // //       if (next.has(cat)) next.delete(cat);
-// // //       else next.add(cat);
-// // //       return next;
-// // //     });
-// // //   }, []);
-
-// // //   const clearFilters = useCallback(() => {
-// // //     setActiveCats(new Set());
-// // //     setActiveLetter(null);
-// // //   }, []);
-
-// // //   const toggleTocItem = useCallback((id) => {
-// // //     setOpenTocItems((prev) => {
-// // //       const next = new Set();
-// // //       if (!prev.has(id)) next.add(id);
-// // //       return next;
-// // //     });
-// // //   }, []);
-
-// // //   const toggleCard = useCallback((id) => {
-// // //     setOpenCards((prev) => {
-// // //       const next = new Set(prev);
-// // //       if (next.has(id)) next.delete(id);
-// // //       else next.add(id);
-// // //       return next;
-// // //     });
-// // //   }, []);
-
-// // //   const scrollToItem = useCallback((id) => {
-// // //     const el = document.getElementById(id);
-// // //     if (!el) return;
-// // //     const y = el.getBoundingClientRect().top + window.scrollY - 130;
-// // //     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-// // //   }, []);
-
-// // //   const navigateToItem = useCallback(
-// // //     (id) => {
-// // //       setSearchTerm('');
-
-// // //       const hasFields = data.some((d) => {
-// // //         const did = toId(d.name);
-// // //         return (
-// // //           did === id &&
-// // //           d.fields &&
-// // //           typeof d.fields === 'object' &&
-// // //           Object.keys(d.fields).length > 0
-// // //         );
-// // //       });
-
-// // //       if (hasFields) {
-// // //         setOpenCards((prev) => new Set(prev).add(id));
-// // //       }
-
-// // //       setHighlightedId(id);
-// // //       clearTimeout(highlightTimer.current);
-// // //       highlightTimer.current = setTimeout(() => setHighlightedId(null), 3000);
-
-// // //       requestAnimationFrame(() => {
-// // //         setTimeout(() => scrollToItem(id), 100);
-// // //       });
-// // //     },
-// // //     [data, scrollToItem],
-// // //   );
-
-// // //   const navigateToCategory = useCallback((cat) => {
-// // //     const categoryId = `category_${cat.toLowerCase().replace(/\s+/g, '_')}`;
-// // //     const el = document.getElementById(categoryId);
-// // //     if (!el) return;
-// // //     const y = el.getBoundingClientRect().top + window.scrollY - 140;
-// // //     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-// // //   }, []);
-
-// // //   // ── Hash navigation ──
-
-// // //   useEffect(() => {
-// // //     const hash = window.location.hash.slice(1);
-// // //     if (hash) setTimeout(() => navigateToItem(hash), 150);
-// // //   }, [navigateToItem]);
-
-// // //   useEffect(() => {
-// // //     const onHashChange = () => {
-// // //       const hash = window.location.hash.slice(1);
-// // //       if (hash) navigateToItem(hash);
-// // //     };
-// // //     window.addEventListener('hashchange', onHashChange);
-// // //     return () => window.removeEventListener('hashchange', onHashChange);
-// // //   }, [navigateToItem]);
-
-// // //   useEffect(() => {
-// // //     const onClick = (e) => {
-// // //       const a = e.target.closest('a[href^="#"]');
-// // //       if (!a) return;
-// // //       const hash = a.getAttribute('href').slice(1);
-// // //       if (hash) {
-// // //         e.preventDefault();
-// // //         window.history.pushState(null, '', `#${hash}`);
-// // //         navigateToItem(hash);
-// // //       }
-// // //     };
-// // //     document.addEventListener('click', onClick);
-// // //     return () => document.removeEventListener('click', onClick);
-// // //   }, [navigateToItem]);
-
-// // //   // ── Sidebar visibility ──
-
-// // //   useEffect(() => {
-// // //     const check = () => {
-// // //       if (!navPanelRef.current) return;
-// // //       const rect = navPanelRef.current.getBoundingClientRect();
-// // //       const footer = document.querySelector('footer');
-// // //       const pastFooter = footer
-// // //         ? footer.getBoundingClientRect().top < window.innerHeight
-// // //         : false;
-// // //       setSidebarVisible(rect.bottom < 0 && window.innerWidth >= 1100 && !pastFooter);
-// // //     };
-
-// // //     window.addEventListener('scroll', check, { passive: true });
-// // //     window.addEventListener('resize', check, { passive: true });
-// // //     return () => {
-// // //       window.removeEventListener('scroll', check);
-// // //       window.removeEventListener('resize', check);
-// // //     };
-// // //   }, []);
-
-// // //   // ── Intersection observer for sidebar active state ──
-
-// // //   useEffect(() => {
-// // //     if (observerRef.current) observerRef.current.disconnect();
-
-// // //     const observer = new IntersectionObserver(
-// // //       (entries) => {
-// // //         entries.forEach((entry) => {
-// // //           if (entry.isIntersecting) {
-// // //             const id = entry.target.id;
-// // //             setActiveItemId(id);
-// // //             const item = data.find((d) => toId(d.name) === id);
-// // //             if (item) setActiveSidebarCat(item[groupByField]);
-// // //           }
-// // //         });
-// // //       },
-// // //       { rootMargin: '-80px 0px -60% 0px', threshold: 0 },
-// // //     );
-
-// // //     data.forEach((item) => {
-// // //       const el = document.getElementById(toId(item.name));
-// // //       if (el) observer.observe(el);
-// // //     });
-
-// // //     observerRef.current = observer;
-// // //     return () => observer.disconnect();
-// // //   }, [data, grouped, groupByField]);
-
-// // //   // ── Responsive TOC grid ──
-
-// // //   const tocGridStyle = useMemo(() => {
-// // //     const colCount = categories.length <= 2 ? 2 : categories.length <= 4 ? categories.length : 4;
-// // //     return {
-// // //       ...S.tocGrid,
-// // //       gridTemplateColumns: `repeat(${colCount}, 1fr)`,
-// // //     };
-// // //   }, [categories]);
-
-// // //   // ── Render ──
-
-// // //   return (
-// // //     <>
-// // //       <style>{HIDE_SCROLLBAR_CSS}</style>
-
-// // //       <div style={S.wrap}>
-// // //         {/* ── View Toggle ── */}
-// // //         <div ref={navPanelRef} style={{ marginBottom: 0 }}>
-// // //           <div style={S.toggleWrap}>
-// // //             <div style={S.toggleTrack}>
-// // //               <ToggleButton
-// // //                 label="Categories"
-// // //                 icon={GridIcon}
-// // //                 active={view === 'cards'}
-// // //                 onClick={() => setView('cards')}
-// // //               />
-// // //               <ToggleButton
-// // //                 label="Index"
-// // //                 icon={ListIcon}
-// // //                 active={view === 'index'}
-// // //                 onClick={() => setView('index')}
-// // //               />
-// // //             </div>
-// // //           </div>
-
-// // //           {/* ── TOC Cards View ── */}
-// // //           {view === 'cards' && (
-// // //             <div style={tocGridStyle}>
-// // //               {categories.map((cat) => {
-// // //                 const items = data.filter((d) => d[groupByField] === cat);
-// // //                 return (
-// // //                   <div key={cat} style={S.tocCard}>
-// // //                     <div style={S.tocCardHeader}>{cat}</div>
-// // //                     <div style={S.tocCardBody}>
-// // //                       {items.map((f) => (
-// // //                         <TocItem
-// // //                           key={f.name}
-// // //                           item={f}
-// // //                           isOpen={openTocItems.has(toId(f.name))}
-// // //                           onToggle={toggleTocItem}
-// // //                           onNavigate={navigateToItem}
-// // //                         />
-// // //                       ))}
-// // //                     </div>
-// // //                   </div>
-// // //                 );
-// // //               })}
-// // //             </div>
-// // //           )}
-
-// // //           {/* ── Index View ── */}
-// // //           {view === 'index' && (
-// // //             <div style={S.navPanel}>
-// // //               <div className="ftoc-no-scrollbar" style={S.alphaBar}>
-// // //                 {ALL_LETTERS.map((l) => (
-// // //                   <AlphaButton
-// // //                     key={l}
-// // //                     letter={l}
-// // //                     active={activeLetter === l}
-// // //                     disabled={!usedLetters.has(l)}
-// // //                     onClick={() => toggleLetter(l)}
-// // //                   />
-// // //                 ))}
-// // //               </div>
-
-// // //               <div className="ftoc-no-scrollbar" style={S.termGrid}>
-// // //                 {navFiltered.map((item) => (
-// // //                   <TermItem key={item.name} item={item} onNavigate={navigateToItem} />
-// // //                 ))}
-// // //               </div>
-
-// // //               <div style={S.catFilterRow}>
-// // //                 {categories.map((cat) => (
-// // //                   <CategoryChip
-// // //                     key={cat}
-// // //                     label={cat}
-// // //                     active={activeCats.has(cat)}
-// // //                     count={catCounts[cat]}
-// // //                     onToggle={() => toggleCat(cat)}
-// // //                     onNavigate={() => navigateToCategory(cat)}
-// // //                   />
-// // //                 ))}
-// // //                 {(activeCats.size > 0 || activeLetter) && (
-// // //                   <ClearButton onClick={clearFilters} />
-// // //                 )}
-// // //               </div>
-
-// // //               <div style={S.navStatus}>
-// // //                 {navFiltered.length} of {data.length} {type.toLowerCase()}s
-// // //               </div>
-// // //             </div>
-// // //           )}
-// // //         </div>
-
-// // //         {/* ── Search Bar ── */}
-// // //         <div style={S.searchBar}>
-// // //           <div style={S.searchWrapper}>
-// // //             <input
-// // //               type="text"
-// // //               value={searchTerm}
-// // //               onChange={(e) => setSearchTerm(e.target.value)}
-// // //               onFocus={() => setSearchFocused(true)}
-// // //               onBlur={() => setSearchFocused(false)}
-// // //               placeholder={`Search in ${type}s...`}
-// // //               style={{
-// // //                 width: '100%',
-// // //                 padding: '15px 42px 15px 22px',
-// // //                 border: searchFocused ? `2px solid ${ACCENT}` : '2px solid transparent',
-// // //                 borderRadius: '32px',
-// // //                 fontSize: '19px',
-// // //                 fontFamily: 'inherit',
-// // //                 outline: 'none',
-// // //                 background: '#fff',
-// // //                 color: '#1e293b',
-// // //                 boxSizing: 'border-box',
-// // //                 transition: 'border-color 0.2s',
-// // //               }}
-// // //             />
-// // //             {searchTerm && (
-// // //               <button
-// // //                 style={S.searchClear}
-// // //                 onClick={() => setSearchTerm('')}
-// // //                 aria-label="Clear search"
-// // //               >
-// // //                 &#10005;
-// // //               </button>
-// // //             )}
-// // //           </div>
-// // //           <span style={S.searchCount}>
-// // //             {totalCount} {totalCount === 1 ? type.toLowerCase() : `${type.toLowerCase()}s`}
-// // //           </span>
-// // //         </div>
-
-// // //         {/* ── Formula Cards ── */}
-// // //         {Object.keys(grouped).length === 0 ? (
-// // //           <div style={S.empty}>
-// // //             No {type.toLowerCase()}s found for &quot;{searchTerm}&quot;
-// // //           </div>
-// // //         ) : (
-// // //           Object.entries(grouped).map(([group, items]) => {
-// // //             const categoryId = `category_${group.toLowerCase().replace(/\s+/g, '_')}`;
-// // //             return (
-// // //               <div key={group} id={categoryId} style={{ marginBottom: '48px' }}>
-// // //                 <div style={S.groupHeader}>
-// // //                   <h2 style={S.groupTitle}>{group}</h2>
-// // //                   <span style={S.groupCount}>
-// // //                     ({items.length} {items.length === 1 ? type.toLowerCase() : `${type.toLowerCase()}s`})
-// // //                   </span>
-// // //                 </div>
-// // //                 {items.map((item) => {
-// // //                   const id = toId(item.name);
-// // //                   return (
-// // //                     <FormulaCard
-// // //                       key={id}
-// // //                       item={item}
-// // //                       isHighlighted={highlightedId === id}
-// // //                       isOpen={openCards.has(id)}
-// // //                       onToggle={toggleCard}
-// // //                     />
-// // //                   );
-// // //                 })}
-// // //               </div>
-// // //             );
-// // //           })
-// // //         )}
-// // //       </div>
-
-// // //       {/* ── Sticky Sidebar ── */}
-// // //       <div className="ftoc-no-scrollbar" style={S.sidebar(sidebarVisible)}>
-// // //         {categories.map((cat) => {
-// // //           const items = data.filter((d) => d[groupByField] === cat);
-// // //           return (
-// // //             <div key={cat} style={S.sidebarGroup}>
-// // //               <div
-// // //                 style={{
-// // //                   fontSize: '14px',
-// // //                   fontWeight: '600',
-// // //                   textTransform: 'uppercase',
-// // //                   letterSpacing: '1px',
-// // //                   color: activeSidebarCat === cat ? ACCENT : '#94a3b8',
-// // //                   marginBottom: '5px',
-// // //                   paddingLeft: '10px',
-// // //                   transition: 'color 0.2s',
-// // //                 }}
-// // //               >
-// // //                 {processContent(cat)}
-// // //               </div>
-// // //               {items.map((item) => (
-// // //                 <SidebarLink
-// // //                   key={item.name}
-// // //                   item={item}
-// // //                   active={activeItemId === toId(item.name)}
-// // //                   onNavigate={navigateToItem}
-// // //                 />
-// // //               ))}
-// // //             </div>
-// // //           );
-// // //         })}
-// // //       </div>
-// // //     </>
-// // //   );
-// // // }
-
-
 // // import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 // // import { processContent } from '../../utils/contentProcessor';
 
@@ -2799,17 +21,20 @@
 // //   msOverflowStyle: 'none',
 // // };
 
+// // function normalizeArray(val) {
+// //   if (!val) return [];
+// //   if (Array.isArray(val)) return val;
+// //   return [val];
+// // }
+
 // // // ─── Styles ────────────────────────────────────────────────────
 
 // // const S = {
-// //   /* ── Outer wrap (wide, for TOC) ── */
 // //   outerWrap: {
 // //     maxWidth: '1150px',
 // //     margin: '0 auto',
 // //     padding: '0 20px',
 // //   },
-
-// //   /* ── Inner wrap (narrow, for cards) ── */
 // //   innerWrap: {
 // //     maxWidth: '820px',
 // //     margin: '0 auto',
@@ -2908,7 +133,7 @@
 // //     textAlign: 'right',
 // //   },
 
-// //   /* ── Search Bar (card width) ── */
+// //   /* ── Search Bar ── */
 // //   searchBar: {
 // //     position: 'sticky',
 // //     top: '63px',
@@ -2969,7 +194,7 @@
 // //     fontWeight: '400',
 // //   },
 
-// //   /* ── Formula Card (original sizes) ── */
+// //   /* ── Formula Card ── */
 // //   cardBody: {
 // //     padding: '22px 26px',
 // //     background: '#fbfcff',
@@ -3020,10 +245,10 @@
 // //   },
 
 // //   /* ── Sidebar ── */
-// //   sidebar: (visible) => ({
+// //   sidebar: (visible, leftPos) => ({
 // //     position: 'fixed',
 // //     top: '20px',
-// //     left: '20px',
+// //     left: `${leftPos}px`,
 // //     width: '200px',
 // //     background: '#fff',
 // //     border: '1.5px solid #d0d9ed',
@@ -3050,6 +275,180 @@
 // //     fontSize: '16px',
 // //   },
 // // };
+
+// // // ─── Illustration ──────────────────────────────────────────────
+
+// // function Illustration({ item }) {
+// //   const { src, alt = '', caption, width } = item;
+// //   const isSvg = typeof src === 'string' && src.trimStart().startsWith('<svg');
+
+// //   const wrapStyle = {
+// //     margin: '16px 0',
+// //     padding: '16px',
+// //     background: '#f8fafc',
+// //     borderRadius: '8px',
+// //     border: '0.5px solid #e2e8f0',
+// //   };
+
+// //   const imgStyle = {
+// //     display: 'block',
+// //     margin: '0 auto',
+// //     maxWidth: width ? `${width}px` : '100%',
+// //     width: '100%',
+// //     height: 'auto',
+// //     borderRadius: '4px',
+// //   };
+
+// //   const svgWrapStyle = {
+// //     maxWidth: width ? `${width}px` : '100%',
+// //     margin: '0 auto',
+// //   };
+
+// //   const captionStyle = {
+// //     margin: '8px 0 0',
+// //     fontSize: '13px',
+// //     color: '#94a3b8',
+// //     textAlign: 'center',
+// //     lineHeight: '1.5',
+// //   };
+
+// //   return (
+// //     <div style={wrapStyle}>
+// //       {isSvg ? (
+// //         <div
+// //           style={svgWrapStyle}
+// //           dangerouslySetInnerHTML={{ __html: src }}
+// //         />
+// //       ) : (
+// //         <img src={src} alt={alt} style={imgStyle} loading="lazy" />
+// //       )}
+// //       {caption && <p style={captionStyle}>{processContent(caption)}</p>}
+// //     </div>
+// //   );
+// // }
+
+// // // ─── LinkPill ──────────────────────────────────────────────────
+
+// // function LinkPill({ link }) {
+// //   const [hovered, setHovered] = useState(false);
+// //   const label = link.label || link.text || link.url;
+// //   const url = link.url || link.href;
+
+// //   if (!url) return null;
+
+// //   const style = {
+// //     display: 'inline-flex',
+// //     alignItems: 'center',
+// //     gap: '4px',
+// //     fontSize: '14px',
+// //     color: '#2563eb',
+// //     textDecoration: 'none',
+// //     padding: '6px 14px',
+// //     border: '0.5px solid #e2e8f0',
+// //     borderRadius: '20px',
+// //     background: hovered ? '#eff4ff' : '#f8fafc',
+// //     transition: 'background 0.15s',
+// //     cursor: 'pointer',
+// //   };
+
+// //   const arrowSvg = (
+// //     <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
+// //       <path
+// //         d="M3 11L11 3M11 3H6M11 3v5"
+// //         fill="none"
+// //         stroke="currentColor"
+// //         strokeWidth="1.2"
+// //         strokeLinecap="round"
+// //         strokeLinejoin="round"
+// //       />
+// //     </svg>
+// //   );
+
+// //   return (
+// //     <a
+// //       href={url}
+// //       style={style}
+// //       onMouseEnter={() => setHovered(true)}
+// //       onMouseLeave={() => setHovered(false)}
+// //     >
+// //       {arrowSvg}
+// //       {processContent(label)}
+// //     </a>
+// //   );
+// // }
+
+// // // ─── LinksRow ──────────────────────────────────────────────────
+
+// // function LinksRow({ links }) {
+// //   if (!links || links.length === 0) return null;
+
+// //   const filtered = links.filter((l) => l && (l.url || l.href));
+// //   if (filtered.length === 0) return null;
+
+// //   return (
+// //     <div style={{ margin: '16px 0 0', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+// //       {filtered.map((link, i) => (
+// //         <LinkPill key={i} link={link} />
+// //       ))}
+// //     </div>
+// //   );
+// // }
+
+// // // ─── FieldContent ──────────────────────────────────────────────
+
+// // function FieldContent({ value }) {
+// //   if (typeof value === 'string') {
+// //     return <div>{processContent(value)}</div>;
+// //   }
+
+// //   if (Array.isArray(value)) {
+// //     return (
+// //       <div>
+// //         {value.map((block, i) => (
+// //           <FieldContentBlock key={i} block={block} />
+// //         ))}
+// //       </div>
+// //     );
+// //   }
+
+// //   if (typeof value === 'object' && value !== null) {
+// //     return <FieldContentBlock block={value} />;
+// //   }
+
+// //   return null;
+// // }
+
+// // function FieldContentBlock({ block }) {
+// //   if (typeof block === 'string') {
+// //     return <div>{processContent(block)}</div>;
+// //   }
+
+// //   if (typeof block !== 'object' || block === null) return null;
+
+// //   // Future: component registry for MathDerivation, FunctionMachineDiagram
+// //   // if (block.component) {
+// //   //   const Component = COMPONENT_REGISTRY[block.component];
+// //   //   if (Component) {
+// //   //     const { component, ...props } = block;
+// //   //     return <Component {...props} />;
+// //   //   }
+// //   // }
+
+// //   const { text, links, illustrations } = block;
+
+// //   const illustrationList = normalizeArray(illustrations);
+// //   const linkList = normalizeArray(links);
+
+// //   return (
+// //     <div>
+// //       {text && <div>{processContent(text)}</div>}
+// //       {illustrationList.map((ill, i) => (
+// //         <Illustration key={i} item={ill} />
+// //       ))}
+// //       <LinksRow links={linkList} />
+// //     </div>
+// //   );
+// // }
 
 // // // ─── AlphaButton ───────────────────────────────────────────────
 
@@ -3483,25 +882,6 @@
 // //   );
 // // }
 
-// // // ─── FieldContent ──────────────────────────────────────────────
-
-// // function FieldContent({ value }) {
-// //   if (typeof value === 'string') {
-// //     return <div>{processContent(value)}</div>;
-// //   }
-
-// //   // Future: component registry for MathDerivation, FunctionMachineDiagram
-// //   // if (typeof value === 'object' && value?.component) {
-// //   //   const Component = COMPONENT_REGISTRY[value.component];
-// //   //   if (Component) {
-// //   //     const { component, ...props } = value;
-// //   //     return <Component {...props} />;
-// //   //   }
-// //   // }
-
-// //   return null;
-// // }
-
 // // // ─── FormulaCard ───────────────────────────────────────────────
 
 // // function FormulaCard({ item, isHighlighted, onToggle, isOpen }) {
@@ -3663,10 +1043,12 @@
 // //   const [searchTerm, setSearchTerm] = useState('');
 // //   const [searchFocused, setSearchFocused] = useState(false);
 // //   const [sidebarVisible, setSidebarVisible] = useState(false);
+// //   const [sidebarLeft, setSidebarLeft] = useState(0);
 // //   const [activeItemId, setActiveItemId] = useState(null);
 // //   const [activeSidebarCat, setActiveSidebarCat] = useState(null);
 
 // //   const navPanelRef = useRef(null);
+// //   const cardsRef = useRef(null);
 // //   const highlightTimer = useRef(null);
 // //   const observerRef = useRef(null);
 
@@ -3700,9 +1082,11 @@
 // //             d.formula?.toLowerCase().includes(lower) ||
 // //             (d.fields &&
 // //               typeof d.fields === 'object' &&
-// //               Object.values(d.fields).some(
-// //                 (v) => typeof v === 'string' && v.toLowerCase().includes(lower),
-// //               )),
+// //               Object.values(d.fields).some((v) => {
+// //                 if (typeof v === 'string') return v.toLowerCase().includes(lower);
+// //                 if (typeof v === 'object' && v?.text) return v.text.toLowerCase().includes(lower);
+// //                 return false;
+// //               })),
 // //         )
 // //       : data;
 
@@ -3843,7 +1227,7 @@
 // //     return () => document.removeEventListener('click', onClick);
 // //   }, [navigateToItem]);
 
-// //   // ── Sidebar visibility ──
+// //   // ── Sidebar visibility + position ──
 
 // //   useEffect(() => {
 // //     const check = () => {
@@ -3853,11 +1237,23 @@
 // //       const pastFooter = footer
 // //         ? footer.getBoundingClientRect().top < window.innerHeight
 // //         : false;
-// //       setSidebarVisible(rect.bottom < 0 && window.innerWidth >= 1100 && !pastFooter);
+
+// //       const sidebarW = 200;
+// //       const gap = 24;
+// //       let left = 20;
+// //       if (cardsRef.current) {
+// //         const cardsRect = cardsRef.current.getBoundingClientRect();
+// //         left = cardsRect.left - sidebarW - gap;
+// //       }
+
+// //       const show = rect.bottom < 0 && window.innerWidth >= 1100 && !pastFooter && left > 10;
+// //       setSidebarVisible(show);
+// //       setSidebarLeft(Math.max(10, left));
 // //     };
 
 // //     window.addEventListener('scroll', check, { passive: true });
 // //     window.addEventListener('resize', check, { passive: true });
+// //     check();
 // //     return () => {
 // //       window.removeEventListener('scroll', check);
 // //       window.removeEventListener('resize', check);
@@ -3997,7 +1393,7 @@
 // //       </div>
 
 // //       {/* ── Cards Section (original width) ── */}
-// //       <div style={S.innerWrap}>
+// //       <div ref={cardsRef} style={S.innerWrap}>
 // //         <div style={S.searchBar}>
 // //           <div style={S.searchWrapper}>
 // //             <input
@@ -4070,7 +1466,7 @@
 // //       </div>
 
 // //       {/* ── Sticky Sidebar ── */}
-// //       <div className="ftoc-no-scrollbar" style={S.sidebar(sidebarVisible)}>
+// //       <div className="ftoc-no-scrollbar" style={S.sidebar(sidebarVisible, sidebarLeft)}>
 // //         {categories.map((cat) => {
 // //           const items = data.filter((d) => d[groupByField] === cat);
 // //           return (
@@ -4081,10 +1477,9 @@
 // //                   fontWeight: '600',
 // //                   textTransform: 'uppercase',
 // //                   letterSpacing: '1px',
-// //                   color: activeSidebarCat === cat ? ACCENT : '#94a3b8',
+// //                   color: '#1e40af',
 // //                   marginBottom: '4px',
 // //                   paddingLeft: '8px',
-// //                   transition: 'color 0.2s',
 // //                 }}
 // //               >
 // //                 {processContent(cat)}
@@ -4105,8 +1500,16 @@
 // //   );
 // // }
 
+
 // import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 // import { processContent } from '../../utils/contentProcessor';
+// import FunctionMachineDiagram from './machine-diagram/FunctionMachineDiagram';
+
+// // ─── Component Registry ────────────────────────────────────────
+
+// const COMPONENT_REGISTRY = {
+//   FunctionMachineDiagram,
+// };
 
 // // ─── Constants ─────────────────────────────────────────────────
 
@@ -4127,24 +1530,25 @@
 //   msOverflowStyle: 'none',
 // };
 
+// function normalizeArray(val) {
+//   if (!val) return [];
+//   if (Array.isArray(val)) return val;
+//   return [val];
+// }
+
 // // ─── Styles ────────────────────────────────────────────────────
 
 // const S = {
-//   /* ── Outer wrap (wide, for TOC) ── */
 //   outerWrap: {
 //     maxWidth: '1150px',
 //     margin: '0 auto',
 //     padding: '0 20px',
 //   },
-
-//   /* ── Inner wrap (narrow, for cards) ── */
 //   innerWrap: {
 //     maxWidth: '820px',
 //     margin: '0 auto',
 //     padding: '0 16px',
 //   },
-
-//   /* ── View Toggle ── */
 //   toggleWrap: {
 //     display: 'flex',
 //     justifyContent: 'center',
@@ -4157,8 +1561,6 @@
 //     padding: '4px',
 //     border: '1px solid #e2e8f0',
 //   },
-
-//   /* ── TOC Cards ── */
 //   tocGrid: {
 //     display: 'grid',
 //     gridTemplateColumns: 'repeat(4, 1fr)',
@@ -4195,8 +1597,6 @@
 //     color: '#475569',
 //     lineHeight: '1.6',
 //   },
-
-//   /* ── Nav Panel ── */
 //   navPanel: {
 //     background: '#fff',
 //     border: '1.5px solid #d0d9ed',
@@ -4235,8 +1635,6 @@
 //     borderTop: '1px solid #e2e8f0',
 //     textAlign: 'right',
 //   },
-
-//   /* ── Search Bar (card width) ── */
 //   searchBar: {
 //     position: 'sticky',
 //     top: '63px',
@@ -4273,8 +1671,6 @@
 //     whiteSpace: 'nowrap',
 //     flexShrink: 0,
 //   },
-
-//   /* ── Category Group ── */
 //   groupHeader: {
 //     display: 'flex',
 //     alignItems: 'baseline',
@@ -4296,8 +1692,6 @@
 //     color: '#94a3b8',
 //     fontWeight: '400',
 //   },
-
-//   /* ── Formula Card (original sizes) ── */
 //   cardBody: {
 //     padding: '22px 26px',
 //     background: '#fbfcff',
@@ -4346,8 +1740,6 @@
 //     background: '#fff',
 //     minHeight: '60px',
 //   },
-
-//   /* ── Sidebar ── */
 //   sidebar: (visible, leftPos) => ({
 //     position: 'fixed',
 //     top: '20px',
@@ -4369,8 +1761,6 @@
 //   sidebarGroup: {
 //     marginBottom: '14px',
 //   },
-
-//   /* ── Empty State ── */
 //   empty: {
 //     textAlign: 'center',
 //     padding: '50px 20px',
@@ -4378,6 +1768,100 @@
 //     fontSize: '16px',
 //   },
 // };
+
+// // ─── Illustration ──────────────────────────────────────────────
+
+// function Illustration({ item }) {
+//   const { src, alt = '', caption, width } = item;
+//   const isSvg = typeof src === 'string' && src.trimStart().startsWith('<svg');
+
+//   return (
+//     <div style={{ margin: '16px 0', padding: '16px', background: '#f8fafc', borderRadius: '8px', border: '0.5px solid #e2e8f0' }}>
+//       {isSvg ? (
+//         <div style={{ maxWidth: width ? `${width}px` : '100%', margin: '0 auto' }} dangerouslySetInnerHTML={{ __html: src }} />
+//       ) : (
+//         <img src={src} alt={alt} style={{ display: 'block', margin: '0 auto', maxWidth: width ? `${width}px` : '100%', width: '100%', height: 'auto', borderRadius: '4px' }} loading="lazy" />
+//       )}
+//       {caption && <p style={{ margin: '8px 0 0', fontSize: '13px', color: '#94a3b8', textAlign: 'center', lineHeight: '1.5' }}>{processContent(caption)}</p>}
+//     </div>
+//   );
+// }
+
+// // ─── LinkPill ──────────────────────────────────────────────────
+
+// function LinkPill({ link }) {
+//   const [hovered, setHovered] = useState(false);
+//   const label = link.label || link.text || link.url;
+//   const url = link.url || link.href;
+//   if (!url) return null;
+
+//   return (
+//     <a
+//       href={url}
+//       style={{
+//         display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '14px',
+//         color: '#2563eb', textDecoration: 'none', padding: '6px 14px',
+//         border: '0.5px solid #e2e8f0', borderRadius: '20px',
+//         background: hovered ? '#eff4ff' : '#f8fafc', transition: 'background 0.15s', cursor: 'pointer',
+//       }}
+//       onMouseEnter={() => setHovered(true)}
+//       onMouseLeave={() => setHovered(false)}
+//     >
+//       <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
+//         <path d="M3 11L11 3M11 3H6M11 3v5" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+//       </svg>
+//       {processContent(label)}
+//     </a>
+//   );
+// }
+
+// // ─── LinksRow ──────────────────────────────────────────────────
+
+// function LinksRow({ links }) {
+//   if (!links || links.length === 0) return null;
+//   const filtered = links.filter((l) => l && (l.url || l.href));
+//   if (filtered.length === 0) return null;
+
+//   return (
+//     <div style={{ margin: '16px 0 0', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+//       {filtered.map((link, i) => <LinkPill key={i} link={link} />)}
+//     </div>
+//   );
+// }
+
+// // ─── FieldContent ──────────────────────────────────────────────
+
+// function FieldContent({ value }) {
+//   if (typeof value === 'string') return <div>{processContent(value)}</div>;
+//   if (Array.isArray(value)) return <div>{value.map((block, i) => <FieldContentBlock key={i} block={block} />)}</div>;
+//   if (typeof value === 'object' && value !== null) return <FieldContentBlock block={value} />;
+//   return null;
+// }
+
+// function FieldContentBlock({ block }) {
+//   if (typeof block === 'string') return <div>{processContent(block)}</div>;
+//   if (typeof block !== 'object' || block === null) return null;
+
+//   if (block.component) {
+//     const Component = COMPONENT_REGISTRY[block.component];
+//     if (Component) {
+//       const { component, ...props } = block;
+//       return <Component {...props} />;
+//     }
+//   }
+
+//   const { text, links, illustrations } = block;
+//   const illustrationList = normalizeArray(illustrations);
+//   const linkList = normalizeArray(links);
+
+//   return (
+//     <div>
+//       {text && <div>{processContent(text)}</div>}
+//       {illustrationList.map((ill, i) => <Illustration key={i} item={ill} />)}
+//       <LinksRow links={linkList} />
+//     </div>
+//   );
+// }
 
 // // ─── AlphaButton ───────────────────────────────────────────────
 
@@ -4387,22 +1871,12 @@
 //   return (
 //     <button
 //       style={{
-//         width: 32,
-//         height: 32,
-//         display: 'flex',
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//         fontSize: '15px',
-//         fontWeight: '600',
-//         fontFamily: 'inherit',
-//         borderRadius: '7px',
-//         border: 'none',
-//         cursor: disabled ? 'default' : 'pointer',
-//         pointerEvents: disabled ? 'none' : 'auto',
+//         width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
+//         fontSize: '15px', fontWeight: '600', fontFamily: 'inherit', borderRadius: '7px', border: 'none',
+//         cursor: disabled ? 'default' : 'pointer', pointerEvents: disabled ? 'none' : 'auto',
 //         background: active ? ACCENT : hovered ? ACCENT_HOVER : 'transparent',
 //         color: active ? '#fff' : disabled ? '#cbd5e1' : ACCENT,
-//         transition: 'all 0.12s',
-//         flexShrink: 0,
+//         transition: 'all 0.12s', flexShrink: 0,
 //       }}
 //       onClick={onClick}
 //       onMouseEnter={() => setHovered(true)}
@@ -4421,19 +1895,11 @@
 //   return (
 //     <button
 //       style={{
-//         display: 'flex',
-//         alignItems: 'center',
-//         gap: '8px',
-//         padding: '10px 22px',
-//         border: 'none',
-//         borderRadius: '9px',
-//         cursor: 'pointer',
-//         fontFamily: 'inherit',
-//         fontSize: '17px',
-//         fontWeight: '500',
+//         display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 22px',
+//         border: 'none', borderRadius: '9px', cursor: 'pointer', fontFamily: 'inherit',
+//         fontSize: '17px', fontWeight: '500',
 //         background: active ? ACCENT : hovered ? '#e2e8f0' : 'transparent',
-//         color: active ? '#fff' : '#475569',
-//         transition: 'all 0.15s',
+//         color: active ? '#fff' : '#475569', transition: 'all 0.15s',
 //       }}
 //       onClick={onClick}
 //       onMouseEnter={() => setHovered(true)}
@@ -4453,97 +1919,52 @@
 
 //   const checkSvg = (
 //     <svg width="14" height="14" viewBox="0 0 12 12">
-//       <polyline
-//         points="2,6 5,9 10,3"
-//         fill="none"
-//         stroke="#fff"
-//         strokeWidth="1.8"
-//         strokeLinecap="round"
-//         strokeLinejoin="round"
-//       />
+//       <polyline points="2,6 5,9 10,3" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
 //     </svg>
 //   );
 
 //   const arrowSvg = (
 //     <svg width="14" height="14" viewBox="0 0 12 12">
-//       <path
-//         d="M2 6h8M7 3l3 3-3 3"
-//         fill="none"
-//         stroke="currentColor"
-//         strokeWidth="1.5"
-//         strokeLinecap="round"
-//         strokeLinejoin="round"
-//       />
+//       <path d="M2 6h8M7 3l3 3-3 3" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 //     </svg>
 //   );
 
 //   return (
 //     <div
 //       style={{
-//         display: 'flex',
-//         alignItems: 'center',
-//         justifyContent: 'space-between',
+//         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
 //         padding: '10px 17px',
-//         border: active
-//           ? `1.5px solid ${ACCENT}`
-//           : hovered
-//             ? '1.5px solid #93aee0'
-//             : '1.5px solid #d0d9ed',
-//         borderRadius: '12px',
-//         background: active ? ACCENT_LIGHT : '#fff',
-//         cursor: 'pointer',
-//         transition: 'border-color 0.15s, background 0.15s',
-//         gap: '10px',
+//         border: active ? `1.5px solid ${ACCENT}` : hovered ? '1.5px solid #93aee0' : '1.5px solid #d0d9ed',
+//         borderRadius: '12px', background: active ? ACCENT_LIGHT : '#fff',
+//         cursor: 'pointer', transition: 'border-color 0.15s, background 0.15s', gap: '10px',
 //       }}
 //       onClick={onToggle}
 //       onMouseEnter={() => setHovered(true)}
 //       onMouseLeave={() => setHovered(false)}
 //     >
 //       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-//         <div
-//           style={{
-//             width: 21,
-//             height: 21,
-//             borderRadius: '4px',
-//             border: active ? `1.5px solid ${ACCENT}` : '1.5px solid #94a3b8',
-//             display: 'flex',
-//             alignItems: 'center',
-//             justifyContent: 'center',
-//             flexShrink: 0,
-//             background: active ? ACCENT : '#fff',
-//             transition: 'all 0.15s',
-//           }}
-//         >
+//         <div style={{
+//           width: 21, height: 21, borderRadius: '4px',
+//           border: active ? `1.5px solid ${ACCENT}` : '1.5px solid #94a3b8',
+//           display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+//           background: active ? ACCENT : '#fff', transition: 'all 0.15s',
+//         }}>
 //           {active && checkSvg}
 //         </div>
-//         <span style={{ fontSize: '17px', fontWeight: '500', color: '#1e293b' }}>
-//           {processContent(label)}
-//         </span>
+//         <span style={{ fontSize: '17px', fontWeight: '500', color: '#1e293b' }}>{processContent(label)}</span>
 //         <span style={{ fontSize: '15px', color: '#94a3b8' }}>({count})</span>
 //       </div>
 //       <button
 //         style={{
-//           display: 'flex',
-//           alignItems: 'center',
-//           gap: '4px',
-//           padding: '5px 14px',
-//           borderRadius: '18px',
-//           border: `1px solid ${navHovered ? ACCENT : '#d0d9ed'}`,
-//           background: navHovered ? ACCENT_HOVER : '#fff',
-//           fontSize: '15px',
-//           fontWeight: '500',
-//           fontFamily: 'inherit',
-//           color: ACCENT,
-//           cursor: 'pointer',
-//           flexShrink: 0,
+//           display: 'flex', alignItems: 'center', gap: '4px', padding: '5px 14px',
+//           borderRadius: '18px', border: `1px solid ${navHovered ? ACCENT : '#d0d9ed'}`,
+//           background: navHovered ? ACCENT_HOVER : '#fff', fontSize: '15px', fontWeight: '500',
+//           fontFamily: 'inherit', color: ACCENT, cursor: 'pointer', flexShrink: 0,
 //           transition: 'background 0.12s, border-color 0.12s',
 //         }}
 //         onMouseEnter={() => setNavHovered(true)}
 //         onMouseLeave={() => setNavHovered(false)}
-//         onClick={(e) => {
-//           e.stopPropagation();
-//           onNavigate();
-//         }}
+//         onClick={(e) => { e.stopPropagation(); onNavigate(); }}
 //       >
 //         Go to {arrowSvg}
 //       </button>
@@ -4559,19 +1980,10 @@
 //   return (
 //     <button
 //       style={{
-//         display: 'flex',
-//         alignItems: 'center',
-//         gap: '6px',
-//         padding: '10px 20px',
-//         border: '1px solid red',
-//         background: hovered ? '#fef2f2' : 'none',
-//         borderRadius: '12px',
-//         fontSize: '17px',
-//         fontWeight: '500',
-//         fontFamily: 'inherit',
-//         color: '#dc2626',
-//         cursor: 'pointer',
-//         transition: 'background 0.15s',
+//         display: 'flex', alignItems: 'center', gap: '6px', padding: '10px 20px',
+//         border: '1px solid red', background: hovered ? '#fef2f2' : 'none',
+//         borderRadius: '12px', fontSize: '17px', fontWeight: '500', fontFamily: 'inherit',
+//         color: '#dc2626', cursor: 'pointer', transition: 'background 0.15s',
 //       }}
 //       onClick={onClick}
 //       onMouseEnter={() => setHovered(true)}
@@ -4591,53 +2003,23 @@
 //     <a
 //       href={`#${toId(item.name)}`}
 //       style={{
-//         padding: '10px 14px',
-//         fontSize: '17px',
-//         color: hovered ? ACCENT : '#334155',
-//         borderRadius: '7px',
-//         cursor: 'pointer',
-//         transition: 'all 0.12s',
-//         textDecoration: 'none',
-//         display: 'flex',
-//         alignItems: 'baseline',
-//         gap: '10px',
+//         padding: '10px 14px', fontSize: '17px', color: hovered ? ACCENT : '#334155',
+//         borderRadius: '7px', cursor: 'pointer', transition: 'all 0.12s', textDecoration: 'none',
+//         display: 'flex', alignItems: 'baseline', gap: '10px',
 //         background: hovered ? ACCENT_LIGHT : 'transparent',
 //       }}
 //       onMouseEnter={() => setHovered(true)}
 //       onMouseLeave={() => setHovered(false)}
-//       onClick={(e) => {
-//         e.preventDefault();
-//         onNavigate(toId(item.name));
-//       }}
+//       onClick={(e) => { e.preventDefault(); onNavigate(toId(item.name)); }}
 //     >
-//       <span
-//         style={{
-//           fontSize: '16px',
-//           fontWeight: '600',
-//           color: ACCENT,
-//           width: '16px',
-//           flexShrink: 0,
-//         }}
-//       >
-//         {item.name[0]}
-//       </span>
+//       <span style={{ fontSize: '16px', fontWeight: '600', color: ACCENT, width: '16px', flexShrink: 0 }}>{item.name[0]}</span>
 //       {processContent(item.name)}
-//       <span
-//         style={{
-//           fontSize: '15px',
-//           color: '#94a3b8',
-//           marginLeft: 'auto',
-//           flexShrink: 0,
-//           whiteSpace: 'nowrap',
-//         }}
-//       >
-//         {item.category}
-//       </span>
+//       <span style={{ fontSize: '15px', color: '#94a3b8', marginLeft: 'auto', flexShrink: 0, whiteSpace: 'nowrap' }}>{item.category}</span>
 //     </a>
 //   );
 // }
 
-// // ─── TocItem (expandable item inside blue card) ────────────────
+// // ─── TocItem ───────────────────────────────────────────────────
 
 // function TocItem({ item, isOpen, onToggle, onNavigate }) {
 //   const [hovered, setHovered] = useState(false);
@@ -4647,61 +2029,24 @@
 //     <div>
 //       <button
 //         style={{
-//           display: 'flex',
-//           alignItems: 'center',
-//           justifyContent: 'space-between',
-//           width: '100%',
-//           padding: '10px 17px',
-//           border: 'none',
-//           cursor: 'pointer',
-//           fontFamily: 'inherit',
-//           textAlign: 'left',
-//           fontSize: '16px',
-//           color: '#334155',
-//           background: isOpen ? '#f0f4ff' : hovered ? '#f8fafc' : 'transparent',
-//           transition: 'background 0.1s',
+//           display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%',
+//           padding: '10px 17px', border: 'none', cursor: 'pointer', fontFamily: 'inherit',
+//           textAlign: 'left', fontSize: '16px', color: '#334155',
+//           background: isOpen ? '#f0f4ff' : hovered ? '#f8fafc' : 'transparent', transition: 'background 0.1s',
 //         }}
 //         onClick={() => onToggle(id)}
 //         onMouseEnter={() => setHovered(true)}
 //         onMouseLeave={() => setHovered(false)}
 //       >
 //         <span>{item.name}</span>
-//         <svg
-//           width="16"
-//           height="16"
-//           viewBox="0 0 14 14"
-//           style={{
-//             transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-//             transition: 'transform 0.2s',
-//             color: '#94a3b8',
-//             flexShrink: 0,
-//           }}
-//         >
-//           <polyline
-//             points="4,5 7,8 10,5"
-//             fill="none"
-//             stroke="currentColor"
-//             strokeWidth="1.5"
-//             strokeLinecap="round"
-//             strokeLinejoin="round"
-//           />
+//         <svg width="16" height="16" viewBox="0 0 14 14" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s', color: '#94a3b8', flexShrink: 0 }}>
+//           <polyline points="4,5 7,8 10,5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 //         </svg>
 //       </button>
 //       {isOpen && (
 //         <div style={S.tocPeek}>
 //           <div style={S.tocPeekFormula}>{processContent(item.formula)}</div>
-//           <a
-//             style={{
-//               fontSize: '14px',
-//               color: ACCENT,
-//               cursor: 'pointer',
-//               textDecoration: 'none',
-//             }}
-//             onClick={(e) => {
-//               e.preventDefault();
-//               onNavigate(id);
-//             }}
-//           >
+//           <a style={{ fontSize: '14px', color: ACCENT, cursor: 'pointer', textDecoration: 'none' }} onClick={(e) => { e.preventDefault(); onNavigate(id); }}>
 //             Learn More &#8595;
 //           </a>
 //         </div>
@@ -4714,9 +2059,7 @@
 
 // function CardLink({ link }) {
 //   const [hovered, setHovered] = useState(false);
-
 //   if (!link || (!link.url && !link.href)) return null;
-
 //   const label = link.label || link.text || link.url || link.href;
 //   const url = link.url || link.href;
 
@@ -4725,29 +2068,15 @@
 //       <a
 //         href={url}
 //         style={{
-//           display: 'inline-flex',
-//           alignItems: 'center',
-//           gap: '5px',
-//           fontSize: '14px',
-//           color: hovered ? '#1d4ed8' : ACCENT,
-//           textDecoration: 'none',
-//           padding: '8px 0 0',
-//           cursor: 'pointer',
-//           fontWeight: '500',
-//           transition: 'color 0.15s',
+//           display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '14px',
+//           color: hovered ? '#1d4ed8' : ACCENT, textDecoration: 'none', padding: '8px 0 0',
+//           cursor: 'pointer', fontWeight: '500', transition: 'color 0.15s',
 //         }}
 //         onMouseEnter={() => setHovered(true)}
 //         onMouseLeave={() => setHovered(false)}
 //       >
 //         <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
-//           <path
-//             d="M3 11L11 3M11 3H6M11 3v5"
-//             fill="none"
-//             stroke="currentColor"
-//             strokeWidth="1.2"
-//             strokeLinecap="round"
-//             strokeLinejoin="round"
-//           />
+//           <path d="M3 11L11 3M11 3H6M11 3v5" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
 //         </svg>
 //         {processContent(label)}
 //       </a>
@@ -4762,15 +2091,7 @@
 
 //   return (
 //     <div
-//       style={{
-//         fontSize: '13px',
-//         color: hovered ? ACCENT : '#94a3b8',
-//         cursor: 'pointer',
-//         textAlign: 'right',
-//         padding: '6px 0 0',
-//         userSelect: 'none',
-//         transition: 'color 0.15s',
-//       }}
+//       style={{ fontSize: '13px', color: hovered ? ACCENT : '#94a3b8', cursor: 'pointer', textAlign: 'right', padding: '6px 0 0', userSelect: 'none', transition: 'color 0.15s' }}
 //       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
 //       onMouseEnter={() => setHovered(true)}
 //       onMouseLeave={() => setHovered(false)}
@@ -4788,19 +2109,11 @@
 //   return (
 //     <span
 //       style={{
-//         padding: '10px 22px',
-//         fontSize: '15px',
-//         fontWeight: '500',
-//         borderRadius: '8px 8px 0 0',
-//         border: '1.5px solid',
-//         borderBottom: 'none',
-//         cursor: 'pointer',
-//         marginRight: '3px',
-//         textTransform: 'capitalize',
-//         transition: 'background 0.15s, color 0.15s',
+//         padding: '10px 22px', fontSize: '15px', fontWeight: '500', borderRadius: '8px 8px 0 0',
+//         border: '1.5px solid', borderBottom: 'none', cursor: 'pointer', marginRight: '3px',
+//         textTransform: 'capitalize', transition: 'background 0.15s, color 0.15s',
 //         background: active ? ACCENT : hovered ? '#dae2f3' : '#e4eaf5',
-//         color: active ? '#fff' : '#475569',
-//         borderColor: active ? ACCENT : '#d0d9ed',
+//         color: active ? '#fff' : '#475569', borderColor: active ? ACCENT : '#d0d9ed',
 //       }}
 //       onClick={onClick}
 //       onMouseEnter={() => setHovered(true)}
@@ -4811,34 +2124,10 @@
 //   );
 // }
 
-// // ─── FieldContent ──────────────────────────────────────────────
-
-// function FieldContent({ value }) {
-//   if (typeof value === 'string') {
-//     return <div>{processContent(value)}</div>;
-//   }
-
-//   // Future: component registry for MathDerivation, FunctionMachineDiagram
-//   // if (typeof value === 'object' && value?.component) {
-//   //   const Component = COMPONENT_REGISTRY[value.component];
-//   //   if (Component) {
-//   //     const { component, ...props } = value;
-//   //     return <Component {...props} />;
-//   //   }
-//   // }
-
-//   return null;
-// }
-
 // // ─── FormulaCard ───────────────────────────────────────────────
 
 // function FormulaCard({ item, isHighlighted, onToggle, isOpen }) {
-//   const hasFields =
-//     item.fields &&
-//     typeof item.fields === 'object' &&
-//     !Array.isArray(item.fields) &&
-//     Object.keys(item.fields).length > 0;
-
+//   const hasFields = item.fields && typeof item.fields === 'object' && !Array.isArray(item.fields) && Object.keys(item.fields).length > 0;
 //   const [activeTab, setActiveTab] = useState(0);
 //   const [hovered, setHovered] = useState(false);
 //   const fieldEntries = hasFields ? Object.entries(item.fields) : [];
@@ -4848,17 +2137,10 @@
 //     <div
 //       id={itemId}
 //       style={{
-//         border: isHighlighted
-//           ? `2px solid ${ACCENT}`
-//           : hovered
-//             ? '1.5px solid #93aee0'
-//             : '1.5px solid #d0d9ed',
-//         borderRadius: '12px',
-//         marginBottom: '12px',
-//         overflow: 'hidden',
+//         border: isHighlighted ? `2px solid ${ACCENT}` : hovered ? '1.5px solid #93aee0' : '1.5px solid #d0d9ed',
+//         borderRadius: '12px', marginBottom: '12px', overflow: 'hidden',
 //         background: isHighlighted ? '#f8faff' : '#fff',
-//         transition: 'border-color 0.2s, background 0.2s',
-//         scrollMarginTop: '130px',
+//         transition: 'border-color 0.2s, background 0.2s', scrollMarginTop: '130px',
 //       }}
 //       onMouseEnter={() => setHovered(true)}
 //       onMouseLeave={() => setHovered(false)}
@@ -4868,28 +2150,10 @@
 //         <div style={S.cardFormula}>{processContent(item.formula)}</div>
 //         {item.link && <CardLink link={item.link} />}
 //         {hasFields && (
-//           <div
-//             style={S.cardToggle}
-//             onClick={() => onToggle(itemId)}
-//           >
+//           <div style={S.cardToggle} onClick={() => onToggle(itemId)}>
 //             {isOpen ? 'Hide details' : 'See details'}
-//             <svg
-//               width="14"
-//               height="14"
-//               viewBox="0 0 14 14"
-//               style={{
-//                 transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-//                 transition: 'transform 0.25s',
-//               }}
-//             >
-//               <polyline
-//                 points="3,5 7,9 11,5"
-//                 fill="none"
-//                 stroke="currentColor"
-//                 strokeWidth="2"
-//                 strokeLinecap="round"
-//                 strokeLinejoin="round"
-//               />
+//             <svg width="14" height="14" viewBox="0 0 14 14" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.25s' }}>
+//               <polyline points="3,5 7,9 11,5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 //             </svg>
 //           </div>
 //         )}
@@ -4900,12 +2164,7 @@
 //         <div style={S.cardDetail(isOpen)}>
 //           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 0 }}>
 //             {fieldEntries.map(([key], i) => (
-//               <TabButton
-//                 key={key}
-//                 label={key.replace(/_/g, ' ')}
-//                 active={i === activeTab}
-//                 onClick={() => setActiveTab(i)}
-//               />
+//               <TabButton key={key} label={key.replace(/_/g, ' ')} active={i === activeTab} onClick={() => setActiveTab(i)} />
 //             ))}
 //           </div>
 //           <div style={S.tabBody}>
@@ -4927,27 +2186,16 @@
 //     <a
 //       href={`#${toId(item.name)}`}
 //       style={{
-//         display: 'block',
-//         padding: '3px 8px',
-//         fontSize: '15px',
+//         display: 'block', padding: '3px 8px', fontSize: '15px',
 //         color: active ? ACCENT : hovered ? ACCENT : '#64748b',
-//         fontWeight: active ? '600' : '400',
-//         textDecoration: 'none',
+//         fontWeight: active ? '600' : '400', textDecoration: 'none',
 //         borderLeft: `2px solid ${active || hovered ? ACCENT : 'transparent'}`,
-//         borderRadius: '0 4px 4px 0',
-//         background: active || hovered ? ACCENT_LIGHT : 'transparent',
-//         transition: 'all 0.12s',
-//         cursor: 'pointer',
-//         whiteSpace: 'normal',
-//         wordBreak: 'break-word',
-//         lineHeight: '1.3',
+//         borderRadius: '0 4px 4px 0', background: active || hovered ? ACCENT_LIGHT : 'transparent',
+//         transition: 'all 0.12s', cursor: 'pointer', whiteSpace: 'normal', wordBreak: 'break-word', lineHeight: '1.3',
 //       }}
 //       onMouseEnter={() => setHovered(true)}
 //       onMouseLeave={() => setHovered(false)}
-//       onClick={(e) => {
-//         e.preventDefault();
-//         onNavigate(toId(item.name));
-//       }}
+//       onClick={(e) => { e.preventDefault(); onNavigate(toId(item.name)); }}
 //     >
 //       {processContent(item.name)}
 //     </a>
@@ -5000,103 +2248,49 @@
 //   const highlightTimer = useRef(null);
 //   const observerRef = useRef(null);
 
-//   // ── Derived data ──
-
-//   const categories = useMemo(
-//     () => [...new Set(data.map((d) => d[groupByField]))],
-//     [data, groupByField],
-//   );
+//   const categories = useMemo(() => [...new Set(data.map((d) => d[groupByField]))], [data, groupByField]);
 
 //   const catCounts = useMemo(() => {
 //     const counts = {};
-//     data.forEach((d) => {
-//       const key = d[groupByField] || 'Other';
-//       counts[key] = (counts[key] || 0) + 1;
-//     });
+//     data.forEach((d) => { const key = d[groupByField] || 'Other'; counts[key] = (counts[key] || 0) + 1; });
 //     return counts;
 //   }, [data, groupByField]);
 
-//   const usedLetters = useMemo(
-//     () => new Set(data.map((d) => d.name[0].toUpperCase())),
-//     [data],
-//   );
+//   const usedLetters = useMemo(() => new Set(data.map((d) => d.name[0].toUpperCase())), [data]);
 
 //   const grouped = useMemo(() => {
 //     const lower = searchTerm.toLowerCase();
 //     const filtered = lower
-//       ? data.filter(
-//           (d) =>
-//             d.name?.toLowerCase().includes(lower) ||
-//             d.formula?.toLowerCase().includes(lower) ||
-//             (d.fields &&
-//               typeof d.fields === 'object' &&
-//               Object.values(d.fields).some(
-//                 (v) => typeof v === 'string' && v.toLowerCase().includes(lower),
-//               )),
-//         )
+//       ? data.filter((d) =>
+//           d.name?.toLowerCase().includes(lower) ||
+//           d.formula?.toLowerCase().includes(lower) ||
+//           (d.fields && typeof d.fields === 'object' &&
+//             Object.values(d.fields).some((v) => {
+//               if (typeof v === 'string') return v.toLowerCase().includes(lower);
+//               if (typeof v === 'object' && v?.text) return v.text.toLowerCase().includes(lower);
+//               return false;
+//             })))
 //       : data;
 
 //     const groups = {};
-//     filtered.forEach((d) => {
-//       const key = d[groupByField] || 'Other';
-//       if (!groups[key]) groups[key] = [];
-//       groups[key].push(d);
-//     });
+//     filtered.forEach((d) => { const key = d[groupByField] || 'Other'; if (!groups[key]) groups[key] = []; groups[key].push(d); });
 //     return groups;
 //   }, [data, searchTerm, groupByField]);
 
-//   const totalCount = useMemo(
-//     () => Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0),
-//     [grouped],
-//   );
+//   const totalCount = useMemo(() => Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0), [grouped]);
 
 //   const navFiltered = useMemo(() => {
 //     let result = data;
-//     if (activeLetter) {
-//       result = result.filter((d) => d.name[0].toUpperCase() === activeLetter);
-//     }
-//     if (activeCats.size > 0) {
-//       result = result.filter((d) => activeCats.has(d[groupByField]));
-//     }
+//     if (activeLetter) result = result.filter((d) => d.name[0].toUpperCase() === activeLetter);
+//     if (activeCats.size > 0) result = result.filter((d) => activeCats.has(d[groupByField]));
 //     return [...result].sort((a, b) => a.name.localeCompare(b.name));
 //   }, [data, activeLetter, activeCats, groupByField]);
 
-//   // ── Handlers ──
-
-//   const toggleLetter = useCallback((letter) => {
-//     setActiveLetter((prev) => (prev === letter ? null : letter));
-//   }, []);
-
-//   const toggleCat = useCallback((cat) => {
-//     setActiveCats((prev) => {
-//       const next = new Set(prev);
-//       if (next.has(cat)) next.delete(cat);
-//       else next.add(cat);
-//       return next;
-//     });
-//   }, []);
-
-//   const clearFilters = useCallback(() => {
-//     setActiveCats(new Set());
-//     setActiveLetter(null);
-//   }, []);
-
-//   const toggleTocItem = useCallback((id) => {
-//     setOpenTocItems((prev) => {
-//       const next = new Set();
-//       if (!prev.has(id)) next.add(id);
-//       return next;
-//     });
-//   }, []);
-
-//   const toggleCard = useCallback((id) => {
-//     setOpenCards((prev) => {
-//       const next = new Set(prev);
-//       if (next.has(id)) next.delete(id);
-//       else next.add(id);
-//       return next;
-//     });
-//   }, []);
+//   const toggleLetter = useCallback((letter) => { setActiveLetter((prev) => (prev === letter ? null : letter)); }, []);
+//   const toggleCat = useCallback((cat) => { setActiveCats((prev) => { const next = new Set(prev); if (next.has(cat)) next.delete(cat); else next.add(cat); return next; }); }, []);
+//   const clearFilters = useCallback(() => { setActiveCats(new Set()); setActiveLetter(null); }, []);
+//   const toggleTocItem = useCallback((id) => { setOpenTocItems((prev) => { const next = new Set(); if (!prev.has(id)) next.add(id); return next; }); }, []);
+//   const toggleCard = useCallback((id) => { setOpenCards((prev) => { const next = new Set(prev); if (next.has(id)) next.delete(id); else next.add(id); return next; }); }, []);
 
 //   const scrollToItem = useCallback((id) => {
 //     const el = document.getElementById(id);
@@ -5105,34 +2299,18 @@
 //     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
 //   }, []);
 
-//   const navigateToItem = useCallback(
-//     (id) => {
-//       setSearchTerm('');
-
-//       const hasFields = data.some((d) => {
-//         const did = toId(d.name);
-//         return (
-//           did === id &&
-//           d.fields &&
-//           typeof d.fields === 'object' &&
-//           Object.keys(d.fields).length > 0
-//         );
-//       });
-
-//       if (hasFields) {
-//         setOpenCards((prev) => new Set(prev).add(id));
-//       }
-
-//       setHighlightedId(id);
-//       clearTimeout(highlightTimer.current);
-//       highlightTimer.current = setTimeout(() => setHighlightedId(null), 3000);
-
-//       requestAnimationFrame(() => {
-//         setTimeout(() => scrollToItem(id), 100);
-//       });
-//     },
-//     [data, scrollToItem],
-//   );
+//   const navigateToItem = useCallback((id) => {
+//     setSearchTerm('');
+//     const hasFields = data.some((d) => {
+//       const did = toId(d.name);
+//       return did === id && d.fields && typeof d.fields === 'object' && Object.keys(d.fields).length > 0;
+//     });
+//     if (hasFields) setOpenCards((prev) => new Set(prev).add(id));
+//     setHighlightedId(id);
+//     clearTimeout(highlightTimer.current);
+//     highlightTimer.current = setTimeout(() => setHighlightedId(null), 3000);
+//     requestAnimationFrame(() => { setTimeout(() => scrollToItem(id), 100); });
+//   }, [data, scrollToItem]);
 
 //   const navigateToCategory = useCallback((cat) => {
 //     const categoryId = `category_${cat.toLowerCase().replace(/\s+/g, '_')}`;
@@ -5142,18 +2320,10 @@
 //     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
 //   }, []);
 
-//   // ── Hash navigation ──
+//   useEffect(() => { const hash = window.location.hash.slice(1); if (hash) setTimeout(() => navigateToItem(hash), 150); }, [navigateToItem]);
 
 //   useEffect(() => {
-//     const hash = window.location.hash.slice(1);
-//     if (hash) setTimeout(() => navigateToItem(hash), 150);
-//   }, [navigateToItem]);
-
-//   useEffect(() => {
-//     const onHashChange = () => {
-//       const hash = window.location.hash.slice(1);
-//       if (hash) navigateToItem(hash);
-//     };
+//     const onHashChange = () => { const hash = window.location.hash.slice(1); if (hash) navigateToItem(hash); };
 //     window.addEventListener('hashchange', onHashChange);
 //     return () => window.removeEventListener('hashchange', onHashChange);
 //   }, [navigateToItem]);
@@ -5163,110 +2333,62 @@
 //       const a = e.target.closest('a[href^="#"]');
 //       if (!a) return;
 //       const hash = a.getAttribute('href').slice(1);
-//       if (hash) {
-//         e.preventDefault();
-//         window.history.pushState(null, '', `#${hash}`);
-//         navigateToItem(hash);
-//       }
+//       if (hash) { e.preventDefault(); window.history.pushState(null, '', `#${hash}`); navigateToItem(hash); }
 //     };
 //     document.addEventListener('click', onClick);
 //     return () => document.removeEventListener('click', onClick);
 //   }, [navigateToItem]);
-
-//   // ── Sidebar visibility ──
 
 //   useEffect(() => {
 //     const check = () => {
 //       if (!navPanelRef.current) return;
 //       const rect = navPanelRef.current.getBoundingClientRect();
 //       const footer = document.querySelector('footer');
-//       const pastFooter = footer
-//         ? footer.getBoundingClientRect().top < window.innerHeight
-//         : false;
-
-//       const sidebarW = 200;
-//       const gap = 24;
-//       let left = 20;
-//       if (cardsRef.current) {
-//         const cardsRect = cardsRef.current.getBoundingClientRect();
-//         left = cardsRect.left - sidebarW - gap;
-//       }
-
+//       const pastFooter = footer ? footer.getBoundingClientRect().top < window.innerHeight : false;
+//       const sidebarW = 200; const gap = 24; let left = 20;
+//       if (cardsRef.current) { const cardsRect = cardsRef.current.getBoundingClientRect(); left = cardsRect.left - sidebarW - gap; }
 //       const show = rect.bottom < 0 && window.innerWidth >= 1100 && !pastFooter && left > 10;
 //       setSidebarVisible(show);
 //       setSidebarLeft(Math.max(10, left));
 //     };
-
 //     window.addEventListener('scroll', check, { passive: true });
 //     window.addEventListener('resize', check, { passive: true });
 //     check();
-//     return () => {
-//       window.removeEventListener('scroll', check);
-//       window.removeEventListener('resize', check);
-//     };
+//     return () => { window.removeEventListener('scroll', check); window.removeEventListener('resize', check); };
 //   }, []);
-
-//   // ── Intersection observer for sidebar active state ──
 
 //   useEffect(() => {
 //     if (observerRef.current) observerRef.current.disconnect();
-
-//     const observer = new IntersectionObserver(
-//       (entries) => {
-//         entries.forEach((entry) => {
-//           if (entry.isIntersecting) {
-//             const id = entry.target.id;
-//             setActiveItemId(id);
-//             const item = data.find((d) => toId(d.name) === id);
-//             if (item) setActiveSidebarCat(item[groupByField]);
-//           }
-//         });
-//       },
-//       { rootMargin: '-80px 0px -60% 0px', threshold: 0 },
-//     );
-
-//     data.forEach((item) => {
-//       const el = document.getElementById(toId(item.name));
-//       if (el) observer.observe(el);
-//     });
-
+//     const observer = new IntersectionObserver((entries) => {
+//       entries.forEach((entry) => {
+//         if (entry.isIntersecting) {
+//           const id = entry.target.id;
+//           setActiveItemId(id);
+//           const item = data.find((d) => toId(d.name) === id);
+//           if (item) setActiveSidebarCat(item[groupByField]);
+//         }
+//       });
+//     }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+//     data.forEach((item) => { const el = document.getElementById(toId(item.name)); if (el) observer.observe(el); });
 //     observerRef.current = observer;
 //     return () => observer.disconnect();
 //   }, [data, grouped, groupByField]);
 
-//   // ── Responsive TOC grid ──
-
 //   const tocGridStyle = useMemo(() => {
 //     const colCount = categories.length <= 2 ? 2 : categories.length <= 4 ? categories.length : 4;
-//     return {
-//       ...S.tocGrid,
-//       gridTemplateColumns: `repeat(${colCount}, 1fr)`,
-//     };
+//     return { ...S.tocGrid, gridTemplateColumns: `repeat(${colCount}, 1fr)` };
 //   }, [categories]);
-
-//   // ── Render ──
 
 //   return (
 //     <>
 //       <style>{HIDE_SCROLLBAR_CSS}</style>
 
-//       {/* ── TOC Section (wide) ── */}
 //       <div style={S.outerWrap}>
 //         <div ref={navPanelRef} style={{ marginBottom: 0 }}>
 //           <div style={S.toggleWrap}>
 //             <div style={S.toggleTrack}>
-//               <ToggleButton
-//                 label="Categories"
-//                 icon={GridIcon}
-//                 active={view === 'cards'}
-//                 onClick={() => setView('cards')}
-//               />
-//               <ToggleButton
-//                 label="Index"
-//                 icon={ListIcon}
-//                 active={view === 'index'}
-//                 onClick={() => setView('index')}
-//               />
+//               <ToggleButton label="Categories" icon={GridIcon} active={view === 'cards'} onClick={() => setView('cards')} />
+//               <ToggleButton label="Index" icon={ListIcon} active={view === 'index'} onClick={() => setView('index')} />
 //             </div>
 //           </div>
 
@@ -5278,15 +2400,7 @@
 //                   <div key={cat} style={S.tocCard}>
 //                     <div style={S.tocCardHeader}>{cat}</div>
 //                     <div style={S.tocCardBody}>
-//                       {items.map((f) => (
-//                         <TocItem
-//                           key={f.name}
-//                           item={f}
-//                           isOpen={openTocItems.has(toId(f.name))}
-//                           onToggle={toggleTocItem}
-//                           onNavigate={navigateToItem}
-//                         />
-//                       ))}
+//                       {items.map((f) => <TocItem key={f.name} item={f} isOpen={openTocItems.has(toId(f.name))} onToggle={toggleTocItem} onNavigate={navigateToItem} />)}
 //                     </div>
 //                   </div>
 //                 );
@@ -5297,91 +2411,42 @@
 //           {view === 'index' && (
 //             <div style={S.navPanel}>
 //               <div className="ftoc-no-scrollbar" style={S.alphaBar}>
-//                 {ALL_LETTERS.map((l) => (
-//                   <AlphaButton
-//                     key={l}
-//                     letter={l}
-//                     active={activeLetter === l}
-//                     disabled={!usedLetters.has(l)}
-//                     onClick={() => toggleLetter(l)}
-//                   />
-//                 ))}
+//                 {ALL_LETTERS.map((l) => <AlphaButton key={l} letter={l} active={activeLetter === l} disabled={!usedLetters.has(l)} onClick={() => toggleLetter(l)} />)}
 //               </div>
-
 //               <div className="ftoc-no-scrollbar" style={S.termGrid}>
-//                 {navFiltered.map((item) => (
-//                   <TermItem key={item.name} item={item} onNavigate={navigateToItem} />
-//                 ))}
+//                 {navFiltered.map((item) => <TermItem key={item.name} item={item} onNavigate={navigateToItem} />)}
 //               </div>
-
 //               <div style={S.catFilterRow}>
-//                 {categories.map((cat) => (
-//                   <CategoryChip
-//                     key={cat}
-//                     label={cat}
-//                     active={activeCats.has(cat)}
-//                     count={catCounts[cat]}
-//                     onToggle={() => toggleCat(cat)}
-//                     onNavigate={() => navigateToCategory(cat)}
-//                   />
-//                 ))}
-//                 {(activeCats.size > 0 || activeLetter) && (
-//                   <ClearButton onClick={clearFilters} />
-//                 )}
+//                 {categories.map((cat) => <CategoryChip key={cat} label={cat} active={activeCats.has(cat)} count={catCounts[cat]} onToggle={() => toggleCat(cat)} onNavigate={() => navigateToCategory(cat)} />)}
+//                 {(activeCats.size > 0 || activeLetter) && <ClearButton onClick={clearFilters} />}
 //               </div>
-
-//               <div style={S.navStatus}>
-//                 {navFiltered.length} of {data.length} {type.toLowerCase()}s
-//               </div>
+//               <div style={S.navStatus}>{navFiltered.length} of {data.length} {type.toLowerCase()}s</div>
 //             </div>
 //           )}
 //         </div>
 //       </div>
 
-//       {/* ── Cards Section (original width) ── */}
 //       <div ref={cardsRef} style={S.innerWrap}>
 //         <div style={S.searchBar}>
 //           <div style={S.searchWrapper}>
 //             <input
-//               type="text"
-//               value={searchTerm}
-//               onChange={(e) => setSearchTerm(e.target.value)}
-//               onFocus={() => setSearchFocused(true)}
-//               onBlur={() => setSearchFocused(false)}
+//               type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
+//               onFocus={() => setSearchFocused(true)} onBlur={() => setSearchFocused(false)}
 //               placeholder={`Search in ${type}s...`}
 //               style={{
-//                 width: '100%',
-//                 padding: '13px 36px 13px 18px',
+//                 width: '100%', padding: '13px 36px 13px 18px',
 //                 border: searchFocused ? `2px solid ${ACCENT}` : '2px solid transparent',
-//                 borderRadius: '28px',
-//                 fontSize: '16px',
-//                 fontFamily: 'inherit',
-//                 outline: 'none',
-//                 background: '#fff',
-//                 color: '#1e293b',
-//                 boxSizing: 'border-box',
-//                 transition: 'border-color 0.2s',
+//                 borderRadius: '28px', fontSize: '16px', fontFamily: 'inherit', outline: 'none',
+//                 background: '#fff', color: '#1e293b', boxSizing: 'border-box', transition: 'border-color 0.2s',
 //               }}
 //             />
-//             {searchTerm && (
-//               <button
-//                 style={S.searchClear}
-//                 onClick={() => setSearchTerm('')}
-//                 aria-label="Clear search"
-//               >
-//                 &#10005;
-//               </button>
-//             )}
+//             {searchTerm && <button style={S.searchClear} onClick={() => setSearchTerm('')} aria-label="Clear search">&#10005;</button>}
 //           </div>
-//           <span style={S.searchCount}>
-//             {totalCount} {totalCount === 1 ? type.toLowerCase() : `${type.toLowerCase()}s`}
-//           </span>
+//           <span style={S.searchCount}>{totalCount} {totalCount === 1 ? type.toLowerCase() : `${type.toLowerCase()}s`}</span>
 //         </div>
 
 //         {Object.keys(grouped).length === 0 ? (
-//           <div style={S.empty}>
-//             No {type.toLowerCase()}s found for &quot;{searchTerm}&quot;
-//           </div>
+//           <div style={S.empty}>No {type.toLowerCase()}s found for &quot;{searchTerm}&quot;</div>
 //         ) : (
 //           Object.entries(grouped).map(([group, items]) => {
 //             const categoryId = `category_${group.toLowerCase().replace(/\s+/g, '_')}`;
@@ -5389,21 +2454,11 @@
 //               <div key={group} id={categoryId} style={{ marginBottom: '40px' }}>
 //                 <div style={S.groupHeader}>
 //                   <h2 style={S.groupTitle}>{group}</h2>
-//                   <span style={S.groupCount}>
-//                     ({items.length} {items.length === 1 ? type.toLowerCase() : `${type.toLowerCase()}s`})
-//                   </span>
+//                   <span style={S.groupCount}>({items.length} {items.length === 1 ? type.toLowerCase() : `${type.toLowerCase()}s`})</span>
 //                 </div>
 //                 {items.map((item) => {
 //                   const id = toId(item.name);
-//                   return (
-//                     <FormulaCard
-//                       key={id}
-//                       item={item}
-//                       isHighlighted={highlightedId === id}
-//                       isOpen={openCards.has(id)}
-//                       onToggle={toggleCard}
-//                     />
-//                   );
+//                   return <FormulaCard key={id} item={item} isHighlighted={highlightedId === id} isOpen={openCards.has(id)} onToggle={toggleCard} />;
 //                 })}
 //               </div>
 //             );
@@ -5411,35 +2466,15 @@
 //         )}
 //       </div>
 
-//       {/* ── Sticky Sidebar ── */}
 //       <div className="ftoc-no-scrollbar" style={S.sidebar(sidebarVisible, sidebarLeft)}>
 //         {categories.map((cat) => {
 //           const items = data.filter((d) => d[groupByField] === cat);
 //           return (
 //             <div key={cat} style={S.sidebarGroup}>
-//               <div
-//                 style={{
-//                   fontSize: '13px',
-//                   fontWeight: '600',
-//                   textTransform: 'uppercase',
-//                   letterSpacing: '1px',
-//                   // color: activeSidebarCat === cat ? ACCENT : '#94a3b8',
-//                   color: '#1e40af',
-//                   marginBottom: '4px',
-//                   paddingLeft: '8px',
-//                   transition: 'color 0.2s',
-//                 }}
-//               >
+//               <div style={{ fontSize: '13px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px', color: '#1e40af', marginBottom: '4px', paddingLeft: '8px' }}>
 //                 {processContent(cat)}
 //               </div>
-//               {items.map((item) => (
-//                 <SidebarLink
-//                   key={item.name}
-//                   item={item}
-//                   active={activeItemId === toId(item.name)}
-//                   onNavigate={navigateToItem}
-//                 />
-//               ))}
+//               {items.map((item) => <SidebarLink key={item.name} item={item} active={activeItemId === toId(item.name)} onNavigate={navigateToItem} />)}
 //             </div>
 //           );
 //         })}
@@ -5449,8 +2484,20 @@
 // }
 
 
+
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { processContent } from '../../utils/contentProcessor';
+import FunctionMachineDiagram from './machine-diagram/FunctionMachineDiagram';
+import MathDerivation from './math-derivation/MathDerivation';
+
+// ─── Component Registry ────────────────────────────────────────
+
+const COMPONENT_REGISTRY = {
+  FunctionMachineDiagram,
+  MathDerivation: ({ variant = 'rail', compact = true, passageStyle = 'bar', ...rest }) => (
+    <MathDerivation variant={variant} compact={compact} passageStyle={passageStyle} {...rest} />
+  ),
+};
 
 // ─── Constants ─────────────────────────────────────────────────
 
@@ -5490,8 +2537,6 @@ const S = {
     margin: '0 auto',
     padding: '0 16px',
   },
-
-  /* ── View Toggle ── */
   toggleWrap: {
     display: 'flex',
     justifyContent: 'center',
@@ -5504,8 +2549,6 @@ const S = {
     padding: '4px',
     border: '1px solid #e2e8f0',
   },
-
-  /* ── TOC Cards ── */
   tocGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(4, 1fr)',
@@ -5542,8 +2585,6 @@ const S = {
     color: '#475569',
     lineHeight: '1.6',
   },
-
-  /* ── Nav Panel ── */
   navPanel: {
     background: '#fff',
     border: '1.5px solid #d0d9ed',
@@ -5582,8 +2623,6 @@ const S = {
     borderTop: '1px solid #e2e8f0',
     textAlign: 'right',
   },
-
-  /* ── Search Bar ── */
   searchBar: {
     position: 'sticky',
     top: '63px',
@@ -5620,8 +2659,6 @@ const S = {
     whiteSpace: 'nowrap',
     flexShrink: 0,
   },
-
-  /* ── Category Group ── */
   groupHeader: {
     display: 'flex',
     alignItems: 'baseline',
@@ -5643,8 +2680,6 @@ const S = {
     color: '#94a3b8',
     fontWeight: '400',
   },
-
-  /* ── Formula Card ── */
   cardBody: {
     padding: '22px 26px',
     background: '#fbfcff',
@@ -5693,8 +2728,6 @@ const S = {
     background: '#fff',
     minHeight: '60px',
   },
-
-  /* ── Sidebar ── */
   sidebar: (visible, leftPos) => ({
     position: 'fixed',
     top: '20px',
@@ -5716,8 +2749,6 @@ const S = {
   sidebarGroup: {
     marginBottom: '14px',
   },
-
-  /* ── Empty State ── */
   empty: {
     textAlign: 'center',
     padding: '50px 20px',
@@ -5732,47 +2763,14 @@ function Illustration({ item }) {
   const { src, alt = '', caption, width } = item;
   const isSvg = typeof src === 'string' && src.trimStart().startsWith('<svg');
 
-  const wrapStyle = {
-    margin: '16px 0',
-    padding: '16px',
-    background: '#f8fafc',
-    borderRadius: '8px',
-    border: '0.5px solid #e2e8f0',
-  };
-
-  const imgStyle = {
-    display: 'block',
-    margin: '0 auto',
-    maxWidth: width ? `${width}px` : '100%',
-    width: '100%',
-    height: 'auto',
-    borderRadius: '4px',
-  };
-
-  const svgWrapStyle = {
-    maxWidth: width ? `${width}px` : '100%',
-    margin: '0 auto',
-  };
-
-  const captionStyle = {
-    margin: '8px 0 0',
-    fontSize: '13px',
-    color: '#94a3b8',
-    textAlign: 'center',
-    lineHeight: '1.5',
-  };
-
   return (
-    <div style={wrapStyle}>
+    <div style={{ margin: '16px 0', padding: '16px', background: '#f8fafc', borderRadius: '8px', border: '0.5px solid #e2e8f0' }}>
       {isSvg ? (
-        <div
-          style={svgWrapStyle}
-          dangerouslySetInnerHTML={{ __html: src }}
-        />
+        <div style={{ maxWidth: width ? `${width}px` : '100%', margin: '0 auto' }} dangerouslySetInnerHTML={{ __html: src }} />
       ) : (
-        <img src={src} alt={alt} style={imgStyle} loading="lazy" />
+        <img src={src} alt={alt} style={{ display: 'block', margin: '0 auto', maxWidth: width ? `${width}px` : '100%', width: '100%', height: 'auto', borderRadius: '4px' }} loading="lazy" />
       )}
-      {caption && <p style={captionStyle}>{processContent(caption)}</p>}
+      {caption && <p style={{ margin: '8px 0 0', fontSize: '13px', color: '#94a3b8', textAlign: 'center', lineHeight: '1.5' }}>{processContent(caption)}</p>}
     </div>
   );
 }
@@ -5783,45 +2781,23 @@ function LinkPill({ link }) {
   const [hovered, setHovered] = useState(false);
   const label = link.label || link.text || link.url;
   const url = link.url || link.href;
-
   if (!url) return null;
-
-  const style = {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '4px',
-    fontSize: '14px',
-    color: '#2563eb',
-    textDecoration: 'none',
-    padding: '6px 14px',
-    border: '0.5px solid #e2e8f0',
-    borderRadius: '20px',
-    background: hovered ? '#eff4ff' : '#f8fafc',
-    transition: 'background 0.15s',
-    cursor: 'pointer',
-  };
-
-  const arrowSvg = (
-    <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
-      <path
-        d="M3 11L11 3M11 3H6M11 3v5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
 
   return (
     <a
       href={url}
-      style={style}
+      style={{
+        display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '14px',
+        color: '#2563eb', textDecoration: 'none', padding: '6px 14px',
+        border: '0.5px solid #e2e8f0', borderRadius: '20px',
+        background: hovered ? '#eff4ff' : '#f8fafc', transition: 'background 0.15s', cursor: 'pointer',
+      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {arrowSvg}
+      <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
+        <path d="M3 11L11 3M11 3H6M11 3v5" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
       {processContent(label)}
     </a>
   );
@@ -5831,15 +2807,12 @@ function LinkPill({ link }) {
 
 function LinksRow({ links }) {
   if (!links || links.length === 0) return null;
-
   const filtered = links.filter((l) => l && (l.url || l.href));
   if (filtered.length === 0) return null;
 
   return (
     <div style={{ margin: '16px 0 0', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-      {filtered.map((link, i) => (
-        <LinkPill key={i} link={link} />
-      ))}
+      {filtered.map((link, i) => <LinkPill key={i} link={link} />)}
     </div>
   );
 }
@@ -5847,54 +2820,32 @@ function LinksRow({ links }) {
 // ─── FieldContent ──────────────────────────────────────────────
 
 function FieldContent({ value }) {
-  if (typeof value === 'string') {
-    return <div>{processContent(value)}</div>;
-  }
-
-  if (Array.isArray(value)) {
-    return (
-      <div>
-        {value.map((block, i) => (
-          <FieldContentBlock key={i} block={block} />
-        ))}
-      </div>
-    );
-  }
-
-  if (typeof value === 'object' && value !== null) {
-    return <FieldContentBlock block={value} />;
-  }
-
+  if (typeof value === 'string') return <div>{processContent(value)}</div>;
+  if (Array.isArray(value)) return <div>{value.map((block, i) => <FieldContentBlock key={i} block={block} />)}</div>;
+  if (typeof value === 'object' && value !== null) return <FieldContentBlock block={value} />;
   return null;
 }
 
 function FieldContentBlock({ block }) {
-  if (typeof block === 'string') {
-    return <div>{processContent(block)}</div>;
-  }
-
+  if (typeof block === 'string') return <div>{processContent(block)}</div>;
   if (typeof block !== 'object' || block === null) return null;
 
-  // Future: component registry for MathDerivation, FunctionMachineDiagram
-  // if (block.component) {
-  //   const Component = COMPONENT_REGISTRY[block.component];
-  //   if (Component) {
-  //     const { component, ...props } = block;
-  //     return <Component {...props} />;
-  //   }
-  // }
+  if (block.component) {
+    const Component = COMPONENT_REGISTRY[block.component];
+    if (Component) {
+      const { component, ...props } = block;
+      return <Component {...props} />;
+    }
+  }
 
   const { text, links, illustrations } = block;
-
   const illustrationList = normalizeArray(illustrations);
   const linkList = normalizeArray(links);
 
   return (
     <div>
       {text && <div>{processContent(text)}</div>}
-      {illustrationList.map((ill, i) => (
-        <Illustration key={i} item={ill} />
-      ))}
+      {illustrationList.map((ill, i) => <Illustration key={i} item={ill} />)}
       <LinksRow links={linkList} />
     </div>
   );
@@ -5908,22 +2859,12 @@ function AlphaButton({ letter, active, disabled, onClick }) {
   return (
     <button
       style={{
-        width: 32,
-        height: 32,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '15px',
-        fontWeight: '600',
-        fontFamily: 'inherit',
-        borderRadius: '7px',
-        border: 'none',
-        cursor: disabled ? 'default' : 'pointer',
-        pointerEvents: disabled ? 'none' : 'auto',
+        width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
+        fontSize: '15px', fontWeight: '600', fontFamily: 'inherit', borderRadius: '7px', border: 'none',
+        cursor: disabled ? 'default' : 'pointer', pointerEvents: disabled ? 'none' : 'auto',
         background: active ? ACCENT : hovered ? ACCENT_HOVER : 'transparent',
         color: active ? '#fff' : disabled ? '#cbd5e1' : ACCENT,
-        transition: 'all 0.12s',
-        flexShrink: 0,
+        transition: 'all 0.12s', flexShrink: 0,
       }}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
@@ -5942,19 +2883,11 @@ function ToggleButton({ label, active, icon, onClick }) {
   return (
     <button
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px',
-        padding: '10px 22px',
-        border: 'none',
-        borderRadius: '9px',
-        cursor: 'pointer',
-        fontFamily: 'inherit',
-        fontSize: '17px',
-        fontWeight: '500',
+        display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 22px',
+        border: 'none', borderRadius: '9px', cursor: 'pointer', fontFamily: 'inherit',
+        fontSize: '17px', fontWeight: '500',
         background: active ? ACCENT : hovered ? '#e2e8f0' : 'transparent',
-        color: active ? '#fff' : '#475569',
-        transition: 'all 0.15s',
+        color: active ? '#fff' : '#475569', transition: 'all 0.15s',
       }}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
@@ -5974,97 +2907,52 @@ function CategoryChip({ label, active, count, onToggle, onNavigate }) {
 
   const checkSvg = (
     <svg width="14" height="14" viewBox="0 0 12 12">
-      <polyline
-        points="2,6 5,9 10,3"
-        fill="none"
-        stroke="#fff"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <polyline points="2,6 5,9 10,3" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 
   const arrowSvg = (
     <svg width="14" height="14" viewBox="0 0 12 12">
-      <path
-        d="M2 6h8M7 3l3 3-3 3"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M2 6h8M7 3l3 3-3 3" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 
   return (
     <div
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '10px 17px',
-        border: active
-          ? `1.5px solid ${ACCENT}`
-          : hovered
-            ? '1.5px solid #93aee0'
-            : '1.5px solid #d0d9ed',
-        borderRadius: '12px',
-        background: active ? ACCENT_LIGHT : '#fff',
-        cursor: 'pointer',
-        transition: 'border-color 0.15s, background 0.15s',
-        gap: '10px',
+        border: active ? `1.5px solid ${ACCENT}` : hovered ? '1.5px solid #93aee0' : '1.5px solid #d0d9ed',
+        borderRadius: '12px', background: active ? ACCENT_LIGHT : '#fff',
+        cursor: 'pointer', transition: 'border-color 0.15s, background 0.15s', gap: '10px',
       }}
       onClick={onToggle}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <div
-          style={{
-            width: 21,
-            height: 21,
-            borderRadius: '4px',
-            border: active ? `1.5px solid ${ACCENT}` : '1.5px solid #94a3b8',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
-            background: active ? ACCENT : '#fff',
-            transition: 'all 0.15s',
-          }}
-        >
+        <div style={{
+          width: 21, height: 21, borderRadius: '4px',
+          border: active ? `1.5px solid ${ACCENT}` : '1.5px solid #94a3b8',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+          background: active ? ACCENT : '#fff', transition: 'all 0.15s',
+        }}>
           {active && checkSvg}
         </div>
-        <span style={{ fontSize: '17px', fontWeight: '500', color: '#1e293b' }}>
-          {processContent(label)}
-        </span>
+        <span style={{ fontSize: '17px', fontWeight: '500', color: '#1e293b' }}>{processContent(label)}</span>
         <span style={{ fontSize: '15px', color: '#94a3b8' }}>({count})</span>
       </div>
       <button
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '4px',
-          padding: '5px 14px',
-          borderRadius: '18px',
-          border: `1px solid ${navHovered ? ACCENT : '#d0d9ed'}`,
-          background: navHovered ? ACCENT_HOVER : '#fff',
-          fontSize: '15px',
-          fontWeight: '500',
-          fontFamily: 'inherit',
-          color: ACCENT,
-          cursor: 'pointer',
-          flexShrink: 0,
+          display: 'flex', alignItems: 'center', gap: '4px', padding: '5px 14px',
+          borderRadius: '18px', border: `1px solid ${navHovered ? ACCENT : '#d0d9ed'}`,
+          background: navHovered ? ACCENT_HOVER : '#fff', fontSize: '15px', fontWeight: '500',
+          fontFamily: 'inherit', color: ACCENT, cursor: 'pointer', flexShrink: 0,
           transition: 'background 0.12s, border-color 0.12s',
         }}
         onMouseEnter={() => setNavHovered(true)}
         onMouseLeave={() => setNavHovered(false)}
-        onClick={(e) => {
-          e.stopPropagation();
-          onNavigate();
-        }}
+        onClick={(e) => { e.stopPropagation(); onNavigate(); }}
       >
         Go to {arrowSvg}
       </button>
@@ -6080,19 +2968,10 @@ function ClearButton({ onClick }) {
   return (
     <button
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '6px',
-        padding: '10px 20px',
-        border: '1px solid red',
-        background: hovered ? '#fef2f2' : 'none',
-        borderRadius: '12px',
-        fontSize: '17px',
-        fontWeight: '500',
-        fontFamily: 'inherit',
-        color: '#dc2626',
-        cursor: 'pointer',
-        transition: 'background 0.15s',
+        display: 'flex', alignItems: 'center', gap: '6px', padding: '10px 20px',
+        border: '1px solid red', background: hovered ? '#fef2f2' : 'none',
+        borderRadius: '12px', fontSize: '17px', fontWeight: '500', fontFamily: 'inherit',
+        color: '#dc2626', cursor: 'pointer', transition: 'background 0.15s',
       }}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
@@ -6112,53 +2991,23 @@ function TermItem({ item, onNavigate }) {
     <a
       href={`#${toId(item.name)}`}
       style={{
-        padding: '10px 14px',
-        fontSize: '17px',
-        color: hovered ? ACCENT : '#334155',
-        borderRadius: '7px',
-        cursor: 'pointer',
-        transition: 'all 0.12s',
-        textDecoration: 'none',
-        display: 'flex',
-        alignItems: 'baseline',
-        gap: '10px',
+        padding: '10px 14px', fontSize: '17px', color: hovered ? ACCENT : '#334155',
+        borderRadius: '7px', cursor: 'pointer', transition: 'all 0.12s', textDecoration: 'none',
+        display: 'flex', alignItems: 'baseline', gap: '10px',
         background: hovered ? ACCENT_LIGHT : 'transparent',
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onClick={(e) => {
-        e.preventDefault();
-        onNavigate(toId(item.name));
-      }}
+      onClick={(e) => { e.preventDefault(); onNavigate(toId(item.name)); }}
     >
-      <span
-        style={{
-          fontSize: '16px',
-          fontWeight: '600',
-          color: ACCENT,
-          width: '16px',
-          flexShrink: 0,
-        }}
-      >
-        {item.name[0]}
-      </span>
+      <span style={{ fontSize: '16px', fontWeight: '600', color: ACCENT, width: '16px', flexShrink: 0 }}>{item.name[0]}</span>
       {processContent(item.name)}
-      <span
-        style={{
-          fontSize: '15px',
-          color: '#94a3b8',
-          marginLeft: 'auto',
-          flexShrink: 0,
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {item.category}
-      </span>
+      <span style={{ fontSize: '15px', color: '#94a3b8', marginLeft: 'auto', flexShrink: 0, whiteSpace: 'nowrap' }}>{item.category}</span>
     </a>
   );
 }
 
-// ─── TocItem (expandable item inside blue card) ────────────────
+// ─── TocItem ───────────────────────────────────────────────────
 
 function TocItem({ item, isOpen, onToggle, onNavigate }) {
   const [hovered, setHovered] = useState(false);
@@ -6168,61 +3017,24 @@ function TocItem({ item, isOpen, onToggle, onNavigate }) {
     <div>
       <button
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          width: '100%',
-          padding: '10px 17px',
-          border: 'none',
-          cursor: 'pointer',
-          fontFamily: 'inherit',
-          textAlign: 'left',
-          fontSize: '16px',
-          color: '#334155',
-          background: isOpen ? '#f0f4ff' : hovered ? '#f8fafc' : 'transparent',
-          transition: 'background 0.1s',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%',
+          padding: '10px 17px', border: 'none', cursor: 'pointer', fontFamily: 'inherit',
+          textAlign: 'left', fontSize: '16px', color: '#334155',
+          background: isOpen ? '#f0f4ff' : hovered ? '#f8fafc' : 'transparent', transition: 'background 0.1s',
         }}
         onClick={() => onToggle(id)}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
         <span>{item.name}</span>
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 14 14"
-          style={{
-            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-            transition: 'transform 0.2s',
-            color: '#94a3b8',
-            flexShrink: 0,
-          }}
-        >
-          <polyline
-            points="4,5 7,8 10,5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+        <svg width="16" height="16" viewBox="0 0 14 14" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s', color: '#94a3b8', flexShrink: 0 }}>
+          <polyline points="4,5 7,8 10,5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
       {isOpen && (
         <div style={S.tocPeek}>
           <div style={S.tocPeekFormula}>{processContent(item.formula)}</div>
-          <a
-            style={{
-              fontSize: '14px',
-              color: ACCENT,
-              cursor: 'pointer',
-              textDecoration: 'none',
-            }}
-            onClick={(e) => {
-              e.preventDefault();
-              onNavigate(id);
-            }}
-          >
+          <a style={{ fontSize: '14px', color: ACCENT, cursor: 'pointer', textDecoration: 'none' }} onClick={(e) => { e.preventDefault(); onNavigate(id); }}>
             Learn More &#8595;
           </a>
         </div>
@@ -6235,9 +3047,7 @@ function TocItem({ item, isOpen, onToggle, onNavigate }) {
 
 function CardLink({ link }) {
   const [hovered, setHovered] = useState(false);
-
   if (!link || (!link.url && !link.href)) return null;
-
   const label = link.label || link.text || link.url || link.href;
   const url = link.url || link.href;
 
@@ -6246,29 +3056,15 @@ function CardLink({ link }) {
       <a
         href={url}
         style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '5px',
-          fontSize: '14px',
-          color: hovered ? '#1d4ed8' : ACCENT,
-          textDecoration: 'none',
-          padding: '8px 0 0',
-          cursor: 'pointer',
-          fontWeight: '500',
-          transition: 'color 0.15s',
+          display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '14px',
+          color: hovered ? '#1d4ed8' : ACCENT, textDecoration: 'none', padding: '8px 0 0',
+          cursor: 'pointer', fontWeight: '500', transition: 'color 0.15s',
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
         <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
-          <path
-            d="M3 11L11 3M11 3H6M11 3v5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+          <path d="M3 11L11 3M11 3H6M11 3v5" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
         {processContent(label)}
       </a>
@@ -6283,15 +3079,7 @@ function BackToTop() {
 
   return (
     <div
-      style={{
-        fontSize: '13px',
-        color: hovered ? ACCENT : '#94a3b8',
-        cursor: 'pointer',
-        textAlign: 'right',
-        padding: '6px 0 0',
-        userSelect: 'none',
-        transition: 'color 0.15s',
-      }}
+      style={{ fontSize: '13px', color: hovered ? ACCENT : '#94a3b8', cursor: 'pointer', textAlign: 'right', padding: '6px 0 0', userSelect: 'none', transition: 'color 0.15s' }}
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -6309,19 +3097,11 @@ function TabButton({ label, active, onClick }) {
   return (
     <span
       style={{
-        padding: '10px 22px',
-        fontSize: '15px',
-        fontWeight: '500',
-        borderRadius: '8px 8px 0 0',
-        border: '1.5px solid',
-        borderBottom: 'none',
-        cursor: 'pointer',
-        marginRight: '3px',
-        textTransform: 'capitalize',
-        transition: 'background 0.15s, color 0.15s',
+        padding: '10px 22px', fontSize: '15px', fontWeight: '500', borderRadius: '8px 8px 0 0',
+        border: '1.5px solid', borderBottom: 'none', cursor: 'pointer', marginRight: '3px',
+        textTransform: 'capitalize', transition: 'background 0.15s, color 0.15s',
         background: active ? ACCENT : hovered ? '#dae2f3' : '#e4eaf5',
-        color: active ? '#fff' : '#475569',
-        borderColor: active ? ACCENT : '#d0d9ed',
+        color: active ? '#fff' : '#475569', borderColor: active ? ACCENT : '#d0d9ed',
       }}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
@@ -6335,12 +3115,7 @@ function TabButton({ label, active, onClick }) {
 // ─── FormulaCard ───────────────────────────────────────────────
 
 function FormulaCard({ item, isHighlighted, onToggle, isOpen }) {
-  const hasFields =
-    item.fields &&
-    typeof item.fields === 'object' &&
-    !Array.isArray(item.fields) &&
-    Object.keys(item.fields).length > 0;
-
+  const hasFields = item.fields && typeof item.fields === 'object' && !Array.isArray(item.fields) && Object.keys(item.fields).length > 0;
   const [activeTab, setActiveTab] = useState(0);
   const [hovered, setHovered] = useState(false);
   const fieldEntries = hasFields ? Object.entries(item.fields) : [];
@@ -6350,17 +3125,10 @@ function FormulaCard({ item, isHighlighted, onToggle, isOpen }) {
     <div
       id={itemId}
       style={{
-        border: isHighlighted
-          ? `2px solid ${ACCENT}`
-          : hovered
-            ? '1.5px solid #93aee0'
-            : '1.5px solid #d0d9ed',
-        borderRadius: '12px',
-        marginBottom: '12px',
-        overflow: 'hidden',
+        border: isHighlighted ? `2px solid ${ACCENT}` : hovered ? '1.5px solid #93aee0' : '1.5px solid #d0d9ed',
+        borderRadius: '12px', marginBottom: '12px', overflow: 'hidden',
         background: isHighlighted ? '#f8faff' : '#fff',
-        transition: 'border-color 0.2s, background 0.2s',
-        scrollMarginTop: '130px',
+        transition: 'border-color 0.2s, background 0.2s', scrollMarginTop: '130px',
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -6370,28 +3138,10 @@ function FormulaCard({ item, isHighlighted, onToggle, isOpen }) {
         <div style={S.cardFormula}>{processContent(item.formula)}</div>
         {item.link && <CardLink link={item.link} />}
         {hasFields && (
-          <div
-            style={S.cardToggle}
-            onClick={() => onToggle(itemId)}
-          >
+          <div style={S.cardToggle} onClick={() => onToggle(itemId)}>
             {isOpen ? 'Hide details' : 'See details'}
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-              style={{
-                transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                transition: 'transform 0.25s',
-              }}
-            >
-              <polyline
-                points="3,5 7,9 11,5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+            <svg width="14" height="14" viewBox="0 0 14 14" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.25s' }}>
+              <polyline points="3,5 7,9 11,5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
         )}
@@ -6402,12 +3152,7 @@ function FormulaCard({ item, isHighlighted, onToggle, isOpen }) {
         <div style={S.cardDetail(isOpen)}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 0 }}>
             {fieldEntries.map(([key], i) => (
-              <TabButton
-                key={key}
-                label={key.replace(/_/g, ' ')}
-                active={i === activeTab}
-                onClick={() => setActiveTab(i)}
-              />
+              <TabButton key={key} label={key.replace(/_/g, ' ')} active={i === activeTab} onClick={() => setActiveTab(i)} />
             ))}
           </div>
           <div style={S.tabBody}>
@@ -6429,27 +3174,16 @@ function SidebarLink({ item, active, onNavigate }) {
     <a
       href={`#${toId(item.name)}`}
       style={{
-        display: 'block',
-        padding: '3px 8px',
-        fontSize: '15px',
+        display: 'block', padding: '3px 8px', fontSize: '15px',
         color: active ? ACCENT : hovered ? ACCENT : '#64748b',
-        fontWeight: active ? '600' : '400',
-        textDecoration: 'none',
+        fontWeight: active ? '600' : '400', textDecoration: 'none',
         borderLeft: `2px solid ${active || hovered ? ACCENT : 'transparent'}`,
-        borderRadius: '0 4px 4px 0',
-        background: active || hovered ? ACCENT_LIGHT : 'transparent',
-        transition: 'all 0.12s',
-        cursor: 'pointer',
-        whiteSpace: 'normal',
-        wordBreak: 'break-word',
-        lineHeight: '1.3',
+        borderRadius: '0 4px 4px 0', background: active || hovered ? ACCENT_LIGHT : 'transparent',
+        transition: 'all 0.12s', cursor: 'pointer', whiteSpace: 'normal', wordBreak: 'break-word', lineHeight: '1.3',
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onClick={(e) => {
-        e.preventDefault();
-        onNavigate(toId(item.name));
-      }}
+      onClick={(e) => { e.preventDefault(); onNavigate(toId(item.name)); }}
     >
       {processContent(item.name)}
     </a>
@@ -6502,105 +3236,49 @@ export default function FormulasTOC({
   const highlightTimer = useRef(null);
   const observerRef = useRef(null);
 
-  // ── Derived data ──
-
-  const categories = useMemo(
-    () => [...new Set(data.map((d) => d[groupByField]))],
-    [data, groupByField],
-  );
+  const categories = useMemo(() => [...new Set(data.map((d) => d[groupByField]))], [data, groupByField]);
 
   const catCounts = useMemo(() => {
     const counts = {};
-    data.forEach((d) => {
-      const key = d[groupByField] || 'Other';
-      counts[key] = (counts[key] || 0) + 1;
-    });
+    data.forEach((d) => { const key = d[groupByField] || 'Other'; counts[key] = (counts[key] || 0) + 1; });
     return counts;
   }, [data, groupByField]);
 
-  const usedLetters = useMemo(
-    () => new Set(data.map((d) => d.name[0].toUpperCase())),
-    [data],
-  );
+  const usedLetters = useMemo(() => new Set(data.map((d) => d.name[0].toUpperCase())), [data]);
 
   const grouped = useMemo(() => {
     const lower = searchTerm.toLowerCase();
     const filtered = lower
-      ? data.filter(
-          (d) =>
-            d.name?.toLowerCase().includes(lower) ||
-            d.formula?.toLowerCase().includes(lower) ||
-            (d.fields &&
-              typeof d.fields === 'object' &&
-              Object.values(d.fields).some((v) => {
-                if (typeof v === 'string') return v.toLowerCase().includes(lower);
-                if (typeof v === 'object' && v?.text) return v.text.toLowerCase().includes(lower);
-                return false;
-              })),
-        )
+      ? data.filter((d) =>
+          d.name?.toLowerCase().includes(lower) ||
+          d.formula?.toLowerCase().includes(lower) ||
+          (d.fields && typeof d.fields === 'object' &&
+            Object.values(d.fields).some((v) => {
+              if (typeof v === 'string') return v.toLowerCase().includes(lower);
+              if (typeof v === 'object' && v?.text) return v.text.toLowerCase().includes(lower);
+              return false;
+            })))
       : data;
 
     const groups = {};
-    filtered.forEach((d) => {
-      const key = d[groupByField] || 'Other';
-      if (!groups[key]) groups[key] = [];
-      groups[key].push(d);
-    });
+    filtered.forEach((d) => { const key = d[groupByField] || 'Other'; if (!groups[key]) groups[key] = []; groups[key].push(d); });
     return groups;
   }, [data, searchTerm, groupByField]);
 
-  const totalCount = useMemo(
-    () => Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0),
-    [grouped],
-  );
+  const totalCount = useMemo(() => Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0), [grouped]);
 
   const navFiltered = useMemo(() => {
     let result = data;
-    if (activeLetter) {
-      result = result.filter((d) => d.name[0].toUpperCase() === activeLetter);
-    }
-    if (activeCats.size > 0) {
-      result = result.filter((d) => activeCats.has(d[groupByField]));
-    }
+    if (activeLetter) result = result.filter((d) => d.name[0].toUpperCase() === activeLetter);
+    if (activeCats.size > 0) result = result.filter((d) => activeCats.has(d[groupByField]));
     return [...result].sort((a, b) => a.name.localeCompare(b.name));
   }, [data, activeLetter, activeCats, groupByField]);
 
-  // ── Handlers ──
-
-  const toggleLetter = useCallback((letter) => {
-    setActiveLetter((prev) => (prev === letter ? null : letter));
-  }, []);
-
-  const toggleCat = useCallback((cat) => {
-    setActiveCats((prev) => {
-      const next = new Set(prev);
-      if (next.has(cat)) next.delete(cat);
-      else next.add(cat);
-      return next;
-    });
-  }, []);
-
-  const clearFilters = useCallback(() => {
-    setActiveCats(new Set());
-    setActiveLetter(null);
-  }, []);
-
-  const toggleTocItem = useCallback((id) => {
-    setOpenTocItems((prev) => {
-      const next = new Set();
-      if (!prev.has(id)) next.add(id);
-      return next;
-    });
-  }, []);
-
-  const toggleCard = useCallback((id) => {
-    setOpenCards((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  }, []);
+  const toggleLetter = useCallback((letter) => { setActiveLetter((prev) => (prev === letter ? null : letter)); }, []);
+  const toggleCat = useCallback((cat) => { setActiveCats((prev) => { const next = new Set(prev); if (next.has(cat)) next.delete(cat); else next.add(cat); return next; }); }, []);
+  const clearFilters = useCallback(() => { setActiveCats(new Set()); setActiveLetter(null); }, []);
+  const toggleTocItem = useCallback((id) => { setOpenTocItems((prev) => { const next = new Set(); if (!prev.has(id)) next.add(id); return next; }); }, []);
+  const toggleCard = useCallback((id) => { setOpenCards((prev) => { const next = new Set(prev); if (next.has(id)) next.delete(id); else next.add(id); return next; }); }, []);
 
   const scrollToItem = useCallback((id) => {
     const el = document.getElementById(id);
@@ -6609,34 +3287,18 @@ export default function FormulasTOC({
     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
   }, []);
 
-  const navigateToItem = useCallback(
-    (id) => {
-      setSearchTerm('');
-
-      const hasFields = data.some((d) => {
-        const did = toId(d.name);
-        return (
-          did === id &&
-          d.fields &&
-          typeof d.fields === 'object' &&
-          Object.keys(d.fields).length > 0
-        );
-      });
-
-      if (hasFields) {
-        setOpenCards((prev) => new Set(prev).add(id));
-      }
-
-      setHighlightedId(id);
-      clearTimeout(highlightTimer.current);
-      highlightTimer.current = setTimeout(() => setHighlightedId(null), 3000);
-
-      requestAnimationFrame(() => {
-        setTimeout(() => scrollToItem(id), 100);
-      });
-    },
-    [data, scrollToItem],
-  );
+  const navigateToItem = useCallback((id) => {
+    setSearchTerm('');
+    const hasFields = data.some((d) => {
+      const did = toId(d.name);
+      return did === id && d.fields && typeof d.fields === 'object' && Object.keys(d.fields).length > 0;
+    });
+    if (hasFields) setOpenCards((prev) => new Set(prev).add(id));
+    setHighlightedId(id);
+    clearTimeout(highlightTimer.current);
+    highlightTimer.current = setTimeout(() => setHighlightedId(null), 3000);
+    requestAnimationFrame(() => { setTimeout(() => scrollToItem(id), 100); });
+  }, [data, scrollToItem]);
 
   const navigateToCategory = useCallback((cat) => {
     const categoryId = `category_${cat.toLowerCase().replace(/\s+/g, '_')}`;
@@ -6646,18 +3308,10 @@ export default function FormulasTOC({
     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
   }, []);
 
-  // ── Hash navigation ──
+  useEffect(() => { const hash = window.location.hash.slice(1); if (hash) setTimeout(() => navigateToItem(hash), 150); }, [navigateToItem]);
 
   useEffect(() => {
-    const hash = window.location.hash.slice(1);
-    if (hash) setTimeout(() => navigateToItem(hash), 150);
-  }, [navigateToItem]);
-
-  useEffect(() => {
-    const onHashChange = () => {
-      const hash = window.location.hash.slice(1);
-      if (hash) navigateToItem(hash);
-    };
+    const onHashChange = () => { const hash = window.location.hash.slice(1); if (hash) navigateToItem(hash); };
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
   }, [navigateToItem]);
@@ -6667,110 +3321,62 @@ export default function FormulasTOC({
       const a = e.target.closest('a[href^="#"]');
       if (!a) return;
       const hash = a.getAttribute('href').slice(1);
-      if (hash) {
-        e.preventDefault();
-        window.history.pushState(null, '', `#${hash}`);
-        navigateToItem(hash);
-      }
+      if (hash) { e.preventDefault(); window.history.pushState(null, '', `#${hash}`); navigateToItem(hash); }
     };
     document.addEventListener('click', onClick);
     return () => document.removeEventListener('click', onClick);
   }, [navigateToItem]);
-
-  // ── Sidebar visibility + position ──
 
   useEffect(() => {
     const check = () => {
       if (!navPanelRef.current) return;
       const rect = navPanelRef.current.getBoundingClientRect();
       const footer = document.querySelector('footer');
-      const pastFooter = footer
-        ? footer.getBoundingClientRect().top < window.innerHeight
-        : false;
-
-      const sidebarW = 200;
-      const gap = 24;
-      let left = 20;
-      if (cardsRef.current) {
-        const cardsRect = cardsRef.current.getBoundingClientRect();
-        left = cardsRect.left - sidebarW - gap;
-      }
-
+      const pastFooter = footer ? footer.getBoundingClientRect().top < window.innerHeight : false;
+      const sidebarW = 200; const gap = 24; let left = 20;
+      if (cardsRef.current) { const cardsRect = cardsRef.current.getBoundingClientRect(); left = cardsRect.left - sidebarW - gap; }
       const show = rect.bottom < 0 && window.innerWidth >= 1100 && !pastFooter && left > 10;
       setSidebarVisible(show);
       setSidebarLeft(Math.max(10, left));
     };
-
     window.addEventListener('scroll', check, { passive: true });
     window.addEventListener('resize', check, { passive: true });
     check();
-    return () => {
-      window.removeEventListener('scroll', check);
-      window.removeEventListener('resize', check);
-    };
+    return () => { window.removeEventListener('scroll', check); window.removeEventListener('resize', check); };
   }, []);
-
-  // ── Intersection observer for sidebar active state ──
 
   useEffect(() => {
     if (observerRef.current) observerRef.current.disconnect();
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            setActiveItemId(id);
-            const item = data.find((d) => toId(d.name) === id);
-            if (item) setActiveSidebarCat(item[groupByField]);
-          }
-        });
-      },
-      { rootMargin: '-80px 0px -60% 0px', threshold: 0 },
-    );
-
-    data.forEach((item) => {
-      const el = document.getElementById(toId(item.name));
-      if (el) observer.observe(el);
-    });
-
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          setActiveItemId(id);
+          const item = data.find((d) => toId(d.name) === id);
+          if (item) setActiveSidebarCat(item[groupByField]);
+        }
+      });
+    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+    data.forEach((item) => { const el = document.getElementById(toId(item.name)); if (el) observer.observe(el); });
     observerRef.current = observer;
     return () => observer.disconnect();
   }, [data, grouped, groupByField]);
 
-  // ── Responsive TOC grid ──
-
   const tocGridStyle = useMemo(() => {
     const colCount = categories.length <= 2 ? 2 : categories.length <= 4 ? categories.length : 4;
-    return {
-      ...S.tocGrid,
-      gridTemplateColumns: `repeat(${colCount}, 1fr)`,
-    };
+    return { ...S.tocGrid, gridTemplateColumns: `repeat(${colCount}, 1fr)` };
   }, [categories]);
-
-  // ── Render ──
 
   return (
     <>
       <style>{HIDE_SCROLLBAR_CSS}</style>
 
-      {/* ── TOC Section (wide) ── */}
       <div style={S.outerWrap}>
         <div ref={navPanelRef} style={{ marginBottom: 0 }}>
           <div style={S.toggleWrap}>
             <div style={S.toggleTrack}>
-              <ToggleButton
-                label="Categories"
-                icon={GridIcon}
-                active={view === 'cards'}
-                onClick={() => setView('cards')}
-              />
-              <ToggleButton
-                label="Index"
-                icon={ListIcon}
-                active={view === 'index'}
-                onClick={() => setView('index')}
-              />
+              <ToggleButton label="Categories" icon={GridIcon} active={view === 'cards'} onClick={() => setView('cards')} />
+              <ToggleButton label="Index" icon={ListIcon} active={view === 'index'} onClick={() => setView('index')} />
             </div>
           </div>
 
@@ -6782,15 +3388,7 @@ export default function FormulasTOC({
                   <div key={cat} style={S.tocCard}>
                     <div style={S.tocCardHeader}>{cat}</div>
                     <div style={S.tocCardBody}>
-                      {items.map((f) => (
-                        <TocItem
-                          key={f.name}
-                          item={f}
-                          isOpen={openTocItems.has(toId(f.name))}
-                          onToggle={toggleTocItem}
-                          onNavigate={navigateToItem}
-                        />
-                      ))}
+                      {items.map((f) => <TocItem key={f.name} item={f} isOpen={openTocItems.has(toId(f.name))} onToggle={toggleTocItem} onNavigate={navigateToItem} />)}
                     </div>
                   </div>
                 );
@@ -6801,91 +3399,42 @@ export default function FormulasTOC({
           {view === 'index' && (
             <div style={S.navPanel}>
               <div className="ftoc-no-scrollbar" style={S.alphaBar}>
-                {ALL_LETTERS.map((l) => (
-                  <AlphaButton
-                    key={l}
-                    letter={l}
-                    active={activeLetter === l}
-                    disabled={!usedLetters.has(l)}
-                    onClick={() => toggleLetter(l)}
-                  />
-                ))}
+                {ALL_LETTERS.map((l) => <AlphaButton key={l} letter={l} active={activeLetter === l} disabled={!usedLetters.has(l)} onClick={() => toggleLetter(l)} />)}
               </div>
-
               <div className="ftoc-no-scrollbar" style={S.termGrid}>
-                {navFiltered.map((item) => (
-                  <TermItem key={item.name} item={item} onNavigate={navigateToItem} />
-                ))}
+                {navFiltered.map((item) => <TermItem key={item.name} item={item} onNavigate={navigateToItem} />)}
               </div>
-
               <div style={S.catFilterRow}>
-                {categories.map((cat) => (
-                  <CategoryChip
-                    key={cat}
-                    label={cat}
-                    active={activeCats.has(cat)}
-                    count={catCounts[cat]}
-                    onToggle={() => toggleCat(cat)}
-                    onNavigate={() => navigateToCategory(cat)}
-                  />
-                ))}
-                {(activeCats.size > 0 || activeLetter) && (
-                  <ClearButton onClick={clearFilters} />
-                )}
+                {categories.map((cat) => <CategoryChip key={cat} label={cat} active={activeCats.has(cat)} count={catCounts[cat]} onToggle={() => toggleCat(cat)} onNavigate={() => navigateToCategory(cat)} />)}
+                {(activeCats.size > 0 || activeLetter) && <ClearButton onClick={clearFilters} />}
               </div>
-
-              <div style={S.navStatus}>
-                {navFiltered.length} of {data.length} {type.toLowerCase()}s
-              </div>
+              <div style={S.navStatus}>{navFiltered.length} of {data.length} {type.toLowerCase()}s</div>
             </div>
           )}
         </div>
       </div>
 
-      {/* ── Cards Section (original width) ── */}
       <div ref={cardsRef} style={S.innerWrap}>
         <div style={S.searchBar}>
           <div style={S.searchWrapper}>
             <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onFocus={() => setSearchFocused(true)}
-              onBlur={() => setSearchFocused(false)}
+              type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
+              onFocus={() => setSearchFocused(true)} onBlur={() => setSearchFocused(false)}
               placeholder={`Search in ${type}s...`}
               style={{
-                width: '100%',
-                padding: '13px 36px 13px 18px',
+                width: '100%', padding: '13px 36px 13px 18px',
                 border: searchFocused ? `2px solid ${ACCENT}` : '2px solid transparent',
-                borderRadius: '28px',
-                fontSize: '16px',
-                fontFamily: 'inherit',
-                outline: 'none',
-                background: '#fff',
-                color: '#1e293b',
-                boxSizing: 'border-box',
-                transition: 'border-color 0.2s',
+                borderRadius: '28px', fontSize: '16px', fontFamily: 'inherit', outline: 'none',
+                background: '#fff', color: '#1e293b', boxSizing: 'border-box', transition: 'border-color 0.2s',
               }}
             />
-            {searchTerm && (
-              <button
-                style={S.searchClear}
-                onClick={() => setSearchTerm('')}
-                aria-label="Clear search"
-              >
-                &#10005;
-              </button>
-            )}
+            {searchTerm && <button style={S.searchClear} onClick={() => setSearchTerm('')} aria-label="Clear search">&#10005;</button>}
           </div>
-          <span style={S.searchCount}>
-            {totalCount} {totalCount === 1 ? type.toLowerCase() : `${type.toLowerCase()}s`}
-          </span>
+          <span style={S.searchCount}>{totalCount} {totalCount === 1 ? type.toLowerCase() : `${type.toLowerCase()}s`}</span>
         </div>
 
         {Object.keys(grouped).length === 0 ? (
-          <div style={S.empty}>
-            No {type.toLowerCase()}s found for &quot;{searchTerm}&quot;
-          </div>
+          <div style={S.empty}>No {type.toLowerCase()}s found for &quot;{searchTerm}&quot;</div>
         ) : (
           Object.entries(grouped).map(([group, items]) => {
             const categoryId = `category_${group.toLowerCase().replace(/\s+/g, '_')}`;
@@ -6893,21 +3442,11 @@ export default function FormulasTOC({
               <div key={group} id={categoryId} style={{ marginBottom: '40px' }}>
                 <div style={S.groupHeader}>
                   <h2 style={S.groupTitle}>{group}</h2>
-                  <span style={S.groupCount}>
-                    ({items.length} {items.length === 1 ? type.toLowerCase() : `${type.toLowerCase()}s`})
-                  </span>
+                  <span style={S.groupCount}>({items.length} {items.length === 1 ? type.toLowerCase() : `${type.toLowerCase()}s`})</span>
                 </div>
                 {items.map((item) => {
                   const id = toId(item.name);
-                  return (
-                    <FormulaCard
-                      key={id}
-                      item={item}
-                      isHighlighted={highlightedId === id}
-                      isOpen={openCards.has(id)}
-                      onToggle={toggleCard}
-                    />
-                  );
+                  return <FormulaCard key={id} item={item} isHighlighted={highlightedId === id} isOpen={openCards.has(id)} onToggle={toggleCard} />;
                 })}
               </div>
             );
@@ -6915,33 +3454,15 @@ export default function FormulasTOC({
         )}
       </div>
 
-      {/* ── Sticky Sidebar ── */}
       <div className="ftoc-no-scrollbar" style={S.sidebar(sidebarVisible, sidebarLeft)}>
         {categories.map((cat) => {
           const items = data.filter((d) => d[groupByField] === cat);
           return (
             <div key={cat} style={S.sidebarGroup}>
-              <div
-                style={{
-                  fontSize: '13px',
-                  fontWeight: '600',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px',
-                  color: '#1e40af',
-                  marginBottom: '4px',
-                  paddingLeft: '8px',
-                }}
-              >
+              <div style={{ fontSize: '13px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px', color: '#1e40af', marginBottom: '4px', paddingLeft: '8px' }}>
                 {processContent(cat)}
               </div>
-              {items.map((item) => (
-                <SidebarLink
-                  key={item.name}
-                  item={item}
-                  active={activeItemId === toId(item.name)}
-                  onNavigate={navigateToItem}
-                />
-              ))}
+              {items.map((item) => <SidebarLink key={item.name} item={item} active={activeItemId === toId(item.name)} onNavigate={navigateToItem} />)}
             </div>
           );
         })}
