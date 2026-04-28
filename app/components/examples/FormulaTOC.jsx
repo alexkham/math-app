@@ -2513,7 +2513,10 @@ const HIDE_SCROLLBAR_CSS = `
 
 // const toId = (name) => name.toLowerCase().replace(/\s+/g, '_');
 
-const toId = (name) => name.toLowerCase().replace(/[()]/g, '').replace(/\s+/g, '_');
+// const toId = (name) => name.toLowerCase().replace(/[()]/g, '').replace(/\s+/g, '_');
+
+
+const toId = (name) => name.toLowerCase().replace(/['\u2019()]/g, '').replace(/\s+/g, '_');
 
 const noScroll = {
   scrollbarWidth: 'none',
