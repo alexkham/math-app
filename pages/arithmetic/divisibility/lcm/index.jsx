@@ -72,57 +72,19 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-  
-    // obj3:{
-  
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
+  obj0: {
+  title: `Key Terms`,
+  content: `
+- [Least Common Multiple](!/arithmetic/definitions#least_common_multiple) — the central concept on this page
+- [Multiple](!/arithmetic/definitions#multiple) — the LCM is the smallest shared member of two multiple sequences
+- [Greatest Common Divisor](!/arithmetic/definitions#greatest_common_divisor) — linked to the LCM by the identity $a \\cdot b = \\gcd(a,b) \\cdot \\text{lcm}(a,b)$
+- [Common Denominator](!/arithmetic/definitions#common_denominator) — the LCM of two denominators gives the least common denominator`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Arithmetic Definitions](!/arithmetic/definitions) →@`,
+  link: '',
+},
 
 
     obj1: {
@@ -236,47 +198,8 @@ The relationship is useful in both directions. Knowing the GCD gives the LCM, an
   link: '',
 },
 
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
+    
   
-    // },
-    // obj8:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj9:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj10:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj11:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
     obj7: {
   title: `When $a$ and $b$ Are Coprime`,
   content: `If $\\gcd(a, b) = 1$, the GCD–LCM formula simplifies to:
@@ -552,20 +475,6 @@ const schemas = {
 
 
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Least Common Multiple (LCM) | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/arithmetic/divisibility/lcm",
-//          name: "name"
-//       },
-        
-//        }
-//     }
 
 return {
   props:{
@@ -584,12 +493,19 @@ return {
 }
    }
 
-// export default function LCMPage({seoData,sectionsContent , introContent}) {
 
 export default function LCMPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) { 
 
 
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -740,49 +656,7 @@ export default function LCMPage({seoData, sectionsContent, introContent, faqQues
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
   
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
 <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
@@ -860,8 +734,15 @@ export default function LCMPage({seoData, sectionsContent, introContent, faqQues
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+           id="0"
+           title={sectionsContent.obj0.title}
+           content={sectionsContent.obj0.content}
+           after={sectionsContent.obj0.after}
+           variant="light"
+         />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

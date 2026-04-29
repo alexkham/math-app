@@ -70,57 +70,19 @@ const keyWords = [
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-  
-    // obj3:{
-  
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+
+    obj0: {
+  title: `Key Terms`,
+  content: `
+- [Greatest Common Divisor](!/arithmetic/definitions#greatest_common_divisor) — the central concept on this page
+- [Coprime](!/arithmetic/definitions#coprime) — two integers whose GCD is 1; covered in detail here
+- [Prime Factorization](!/arithmetic/definitions#prime_factorization) — one of three methods for computing the GCD
+- [Least Common Multiple](!/arithmetic/definitions#least_common_multiple) — linked to the GCD by a clean identity`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Arithmetic Definitions](!/arithmetic/definitions) →@`,
+  link: '',
+},
 
     obj1: {
   title: `What is GCD?`,
@@ -572,21 +534,6 @@ const schemas = {
 }
 
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Greatest Common Divisor (GCD) | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/arithmetic/divisibility/gcd",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-
 
 return {
   props:{
@@ -605,11 +552,18 @@ return {
 }
    }
 
-// export default function GCDPage({seoData,sectionsContent , introContent}) {
 
 export default function GCDPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -880,8 +834,15 @@ export default function GCDPage({seoData, sectionsContent, introContent, faqQues
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+           id="0"
+           title={sectionsContent.obj0.title}
+           content={sectionsContent.obj0.content}
+           after={sectionsContent.obj0.after}
+           variant="light"
+         />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

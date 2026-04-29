@@ -72,50 +72,24 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-  
-    // obj3:{
-  
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   obj0: {
+  title: `Key Terms`,
+  content: `
+- [Divisor (Factor)](!/arithmetic/definitions#divisor) — the integer that divides another exactly
+- [Multiple](!/arithmetic/definitions#multiple) — the result of multiplying a number by any integer
+- [Prime Number](!/arithmetic/definitions#prime_number) — an integer greater than 1 with no divisors other than 1 and itself
+- [Composite Number](!/arithmetic/definitions#composite_number) — an integer with at least one divisor beyond 1 and itself
+- [Prime Factorization](!/arithmetic/definitions#prime_factorization) — the unique decomposition into a product of primes
+- [Coprime](!/arithmetic/definitions#coprime) — two integers sharing no common factor other than 1
+- [Greatest Common Divisor](!/arithmetic/definitions#greatest_common_divisor) — the largest integer dividing both of two given integers
+- [Least Common Multiple](!/arithmetic/definitions#least_common_multiple) — the smallest positive integer divisible by both of two given integers
 
+`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Arithmetic Definitions](!/arithmetic/definitions) →@`,
+  link: '',
+},
     obj1: {
   title: `What is Divisibility?`,
   content: `An integer $a$ divides an integer $b$ when $b$ equals $a$ multiplied by some integer $k$, with no remainder:
@@ -513,21 +487,6 @@ const schemas = {
 }
 
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Divisibility Page | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/arithmetic/divisibility",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-
 return {
   props:{
     sectionsContent,
@@ -545,12 +504,19 @@ return {
 }
    }
 
-// export default function DivisibilityPage({seoData,sectionsContent , introContent}) {
 
 
 export default function DivisibilityPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
+    {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -700,50 +666,7 @@ export default function DivisibilityPage({seoData, sectionsContent, introContent
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
-
+ 
 <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
@@ -820,8 +743,15 @@ export default function DivisibilityPage({seoData, sectionsContent, introContent
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+           id="0"
+           title={sectionsContent.obj0.title}
+           content={sectionsContent.obj0.content}
+           after={sectionsContent.obj0.after}
+           variant="light"
+         />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

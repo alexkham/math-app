@@ -70,58 +70,18 @@ const keyWords = [
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-  
-    // obj3:{
-  
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+ 
+obj0: {
+  title: `Key Terms`,
+  content: `
+- [Divisor (Factor)](!/arithmetic/definitions#divisor) — what each rule tests for
+- [Multiple](!/arithmetic/definitions#multiple) — a number passing a rule is a multiple of that divisor
+- [Coprime](!/arithmetic/definitions#coprime) — required when combining rules for composite divisors`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Arithmetic Definitions](!/arithmetic/definitions) →@`,
+  link: '',
+},
 
     obj1: {
   title: `What Are Divisibility Rules?`,
@@ -575,21 +535,6 @@ const faqQuestions = {
 
 
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Divisibility Rules | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/arithmetic/divisibility/rules",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-
 const schemas = {
   learningResource: {
     "@context": "https://schema.org",
@@ -676,21 +621,6 @@ const schemas = {
   }
 }
 
-// return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Divisibility Rules: Tests for 2, 3, 4, 5, 6, 8, 9, 10, 11 | Learn Math Class",
-//       description: "Master divisibility rules for 2, 3, 4, 5, 6, 8, 9, 10, and 11. Learn digit sum tests, last digit checks, alternating sums, and how to combine rules for composite divisors.",
-//       keywords: keyWords.join(", "),
-//       url: "/arithmetic/divisibility/divisibility-rules",
-//       name: "Divisibility Rules"
-//     },
-//   }
-// }
 
 return {
   props:{
@@ -709,10 +639,17 @@ return {
 }
    }
 
-// export default function DivisibilityRulesPage({seoData,sectionsContent , introContent}) {
 export default function DivisibilityRulesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -983,8 +920,15 @@ export default function DivisibilityRulesPage({seoData, sectionsContent, introCo
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+           id="0"
+           title={sectionsContent.obj0.title}
+           content={sectionsContent.obj0.content}
+           after={sectionsContent.obj0.after}
+           variant="light"
+         />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>
