@@ -90,9 +90,9 @@ export default function LinearAlgebraFormulasPage({ seoData, keyWords }) {
     <Breadcrumb/>
     <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Mathematical Logic Formulas</h1>
     <FormulasTOC data={logicFormulasList} />
-    <div style={{transform:'scale(0.95)'}}>
+    {/* <div style={{transform:'scale(0.95)'}}>
     <FormulaAccordionWrapper data={logicFormulasList} groupByField={['category']}/>
-    </div>
+    </div> */}
     <br/>
     {/* <ScrollUpButton/> */}
     </>
