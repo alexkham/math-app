@@ -70,67 +70,25 @@ const keyWords = [
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-  
-    // obj3:{
-  
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
-
+    obj0: {
+  title: `Key Terms`,
+  content: `
+- [Fraction](!/arithmetic/definitions#fraction) — a ratio of two integers representing a quantity
+- [Numerator](!/arithmetic/definitions#numerator) — the number above the fraction bar; counts the parts taken
+- [Denominator](!/arithmetic/definitions#denominator) — the number below the fraction bar; names the size of each part
+- [Proper Fraction](!/arithmetic/definitions#proper_fraction) — a fraction with value strictly between 0 and 1
+- [Improper Fraction](!/arithmetic/definitions#improper_fraction) — a fraction with value greater than or equal to 1
+- [Mixed Number](!/arithmetic/definitions#mixed_number) — a whole number combined with a proper fraction
+- [Equivalent Fractions](!/arithmetic/definitions#equivalent_fractions) — different representations of the same value
+- [Reciprocal](!/arithmetic/definitions#reciprocal) — the fraction obtained by swapping numerator and denominator
+- [Common Denominator](!/arithmetic/definitions#common_denominator) — a shared denominator required for adding or subtracting fractions
+- [Complex Fraction](!/arithmetic/definitions#complex_fraction) — a fraction containing fractions in its numerator or denominator`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Arithmetic Definitions](!/arithmetic/definitions) →@`,
+  link: '',
+},
+ 
     
   obj1: {
     title: `What Is a Fraction`,
@@ -446,20 +404,6 @@ const schemas = {
 }
 
 
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Fractions Page  | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/arithmetic/fractions",
-//          name: "name"
-//       },
-        
-//        }
-//     }
 
 
 return {
@@ -479,12 +423,19 @@ return {
 }
    }
 
-// export default function FractionsPage({seoData,sectionsContent , introContent}) {
 
 export default function FractionsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
 
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -634,50 +585,7 @@ export default function FractionsPage({seoData, sectionsContent, introContent, f
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
   
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
-
 <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
@@ -754,8 +662,15 @@ export default function FractionsPage({seoData, sectionsContent, introContent, f
           textColor="#06357a"
         />
    <br/>
+       <KeyTermsCard
+              id="0"
+              title={sectionsContent.obj0.title}
+              content={sectionsContent.obj0.content}
+              after={sectionsContent.obj0.after}
+              variant="light"
+            />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>
