@@ -23,7 +23,7 @@ function NormalFormsConverter({ dnfExplanations, cnfExplanations }) {
             border: 'none',
             background: 'transparent',
             borderBottom: activeTab === 'dnf' ? '2px solid #4a90e2' : 'none',
-            color: activeTab === 'dnf' ? '#4a90e2' : '#666',
+            color: activeTab === 'dnf' ? '#3b4755' : '#666',
             cursor: 'pointer',
             marginBottom: '-2px'
           }}
