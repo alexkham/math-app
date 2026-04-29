@@ -202,6 +202,25 @@ const keyWords = [
 
 
   const sectionsContent = {
+
+    obj0: {
+  title: `Key Terms`,
+  content: `
+- [Subset](!/set-theory/definitions#subset) — a set whose elements all belong to another set
+- [Proper Subset](!/set-theory/definitions#proper_subset) — a subset strictly smaller than its containing set
+- [Superset](!/set-theory/definitions#superset) — the inverse of the subset relation
+- [Power Set](!/set-theory/definitions#power_set) — the collection of all subsets of a given set
+- [Empty Set](!/set-theory/definitions#empty_set) — subset of every set by vacuous truth
+- [Cardinality](!/set-theory/definitions#cardinality) — determines the number of subsets via $2^{|A|}$
+
+
+`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Set Theory Definitions](!/set-theory/definitions) →@`,
+  link: '',
+},
+ 
   obj1: {
     title: `Subsets`,
     content: `
@@ -474,21 +493,7 @@ const schemas = {
 }
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Title | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/set-theory/subsets",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
-
+ 
   return {
   props: {
     sectionsContent,
@@ -506,12 +511,19 @@ const schemas = {
 }
    }
 
-// export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
 export default function SubsetsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
     
   const genericSections=[
+    {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -781,8 +793,15 @@ export default function SubsetsPage({seoData, sectionsContent, introContent, faq
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

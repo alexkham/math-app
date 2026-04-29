@@ -67,140 +67,27 @@ const keyWords = [
 //                     __html:   sectionContent.distributions.svg,
 //                   }} />
 
-  //   const sectionsContent={
-
-  //   obj1:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
   
-  
-  //   },
-  //   obj2:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  
-  //   obj3:{
-  
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj4:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj5:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj6:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj7:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj8:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj9:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj10:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj11:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj12:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj13:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  //     link:'',
-  
-  //   },
-  //   obj14:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  //     link:'',
-  
-  //   },
-
-
-  //   obj15:{
-  
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   }
-  
-  // }
 
   const sectionsContent = {
+    obj0: {
+  title: `Key Terms`,
+  content: `
+- [Cardinality](!/set-theory/definitions#cardinality) — the number of elements in a set
+- [Finite Set](!/set-theory/definitions#finite_set) — a set with a bounded element count
+- [Infinite Set](!/set-theory/definitions#infinite_set) — a set that cannot be matched with any finite count
+- [Countable Set](!/set-theory/definitions#countable_set) — a set whose elements can be listed in a sequence
+- [Uncountable Set](!/set-theory/definitions#uncountable_set) — a set too large to be listed sequentially
+- [Equivalent Sets](!/set-theory/definitions#equivalent_sets) — sets related by having the same cardinality
+- [Power Set](!/set-theory/definitions#power_set) — always produces a set of strictly larger cardinality
+
+
+`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Set Theory Definitions](!/set-theory/definitions) →@`,
+  link: '',
+},
   obj1: {
     title: `Definition of Cardinality`,
     content: `
@@ -480,20 +367,7 @@ const schemas = {
 
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Title | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/set-theory/cardinality",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
+  
 
   return {
   props: {
@@ -512,11 +386,18 @@ const schemas = {
 }
    }
 
-// export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
 export default function CardinalityPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
   const genericSections=[
+    {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -744,8 +625,15 @@ export default function CardinalityPage({seoData, sectionsContent, introContent,
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+           id="0"
+           title={sectionsContent.obj0.title}
+           content={sectionsContent.obj0.content}
+           after={sectionsContent.obj0.after}
+           variant="light"
+         />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>
