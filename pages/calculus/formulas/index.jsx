@@ -171,12 +171,12 @@ export default function CalculusFormulasPage({
           Calculus Formulas
         </h1>
         <FormulasTOC data={calculusFormulasList} />
-        <div style={{transform:'scale(0.95)'}}>
+        {/* <div style={{transform:'scale(0.95)'}}>
           <FormulaAccordionWrapper 
             data={calculusFormulasList}
             groupByField={['category']}
           />
-        </div>
+        </div> */}
         <br/>
          {/* <ScrollUpButton/> */} 
       </main>

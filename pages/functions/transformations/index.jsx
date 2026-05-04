@@ -69,141 +69,33 @@ export async function getStaticProps(){
 //                     __html:   sectionContent.distributions.svg,
 //                   }} />
 
-  //   const sectionsContent={
-
-  //   obj1:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-
-  //   },
-  //   obj2:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-
-  //   obj3:{
-
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj4:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj5:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj6:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj7:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj8:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj9:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj10:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj11:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj12:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj13:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  //     link:'',
-
-  //   },
-  //   obj14:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  //     link:'',
-
-  //   },
-
-
-  //   obj15:{
-
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   }
-
-  // }
-
+  
 
   const sectionsContent = {
+
+
+    obj0 = {
+  title: `Key Terms`,
+  content: `
+## The Four Operations
+ 
+• [Transformation](!/functions/definitions#transformation) — any operation that modifies a graph: shift, reflect, stretch, or compress
+• [Translation](!/functions/definitions#translation) — sliding the graph horizontally or vertically without changing shape
+• [Reflection](!/functions/definitions#reflection) — flipping the graph across an axis
+• [Dilation](!/functions/definitions#dilation) — stretching or compressing the graph vertically or horizontally
+ 
+## Foundation
+ 
+• [Parent Function](!/functions/definitions#parent_function) — the starting shape before any transformations are applied
+• [Domain](!/functions/definitions#domain) — horizontal transformations shift or scale the domain
+• [Range](!/functions/definitions#range) — vertical transformations shift or scale the range
+`,
+  before: ``,
+  after: `
+ 
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Function Definitions](!/functions/definitions) →@`,
+  link: '',
+},
 
   obj1: {
 
@@ -732,6 +624,14 @@ export default function TransformationsPage({seoData, sectionsContent, introCont
 
   const genericSections=[
     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
+    {
         id:'1',
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
@@ -948,8 +848,15 @@ export default function TransformationsPage({seoData, sectionsContent, introCont
           textColor="#06357a"
         />
    <br/>
+       <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

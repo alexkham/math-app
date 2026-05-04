@@ -69,140 +69,26 @@ export async function getStaticProps(){
 //                     __html:   sectionContent.distributions.svg,
 //                   }} />
 
-  //   const sectionsContent={
-
-  //   obj1:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-
-  //   },
-  //   obj2:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-
-  //   obj3:{
-
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj4:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj5:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj6:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj7:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj8:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj9:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj10:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj11:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj12:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj13:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  //     link:'',
-
-  //   },
-  //   obj14:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  //     link:'',
-
-  //   },
-
-
-  //   obj15:{
-
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   }
-
-  // }
+ 
 
 const sectionsContent = {
+
+
+  obj0 = {
+  title: `Key Terms`,
+  content: `
+• [Function](!/functions/definitions#function) — the objects being combined through arithmetic operations
+• [Domain](!/functions/definitions#domain) — the combined domain is the intersection of both component domains, minus denominator zeros for quotients
+• [Composition of Functions](!/functions/definitions#composition_of_functions) — a different operation: chaining functions in sequence rather than combining outputs
+• [Zero of a Function](!/functions/definitions#zero_of_a_function) — zeros of components determine zeros of products and sign changes of quotients
+`,
+  before: ``,
+  after: `
+ 
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Function Definitions](!/functions/definitions) →@`,
+  link: '',
+},
+ 
 
   obj1: {
     title: `Combining Functions with Operations`,
@@ -604,6 +490,14 @@ export default function ArithmeticPage({
 
 
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -829,8 +723,15 @@ export default function ArithmeticPage({
           textColor="#06357a"
         />
    <br/>
+       <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

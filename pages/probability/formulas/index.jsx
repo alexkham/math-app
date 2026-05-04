@@ -24,9 +24,9 @@ export default function ProbabilityFormulasPage() {
     <Breadcrumb/>
     <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Probability Formulas</h1>
     <FormulasTOC data={probabilityFormulaList}/>
-    <div style={{transform:'scale(0.95)'}}>
+    {/* <div style={{transform:'scale(0.95)'}}>
     <FormulaAccordionWrapper data={probabilityFormulaList} groupByField={['category']}/>
-    </div>
+    </div> */}
     <br/>
     {/* <ScrollUpButton/> */}
     </>

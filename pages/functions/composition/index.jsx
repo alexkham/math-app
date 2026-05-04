@@ -57,6 +57,26 @@ export async function getStaticProps(){
 
 
 const sectionsContent = {
+  obj0 = {
+  title: `Key Terms`,
+  content: `
+## Core
+ 
+• [Composition of Functions](!/functions/definitions#composition_of_functions) — $(f \\circ g)(x) = f(g(x))$, output of $g$ becomes input of $f$
+• [Inverse Function](!/functions/definitions#inverse_function) — composing a function with its inverse yields the identity: $f(f^{-1}(x)) = x$
+ 
+## Supporting
+ 
+• [Function](!/functions/definitions#function) — the building blocks being chained
+• [Domain](!/functions/definitions#domain) — the domain of $f \\circ g$ requires $x$ in the domain of $g$ and $g(x)$ in the domain of $f$
+• [One-to-One Function](!/functions/definitions#one_to_one_function) — required for a function to have an inverse, which composition can verify
+`,
+  before: ``,
+  after: `
+ 
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Function Definitions](!/functions/definitions) →@`,
+  link: '',
+},
 
   obj1: {
     title: `What is Function Composition`,
@@ -480,6 +500,14 @@ export default function CompositionPage({seoData, sectionsContent, introContent,
 
 
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -697,8 +725,15 @@ export default function CompositionPage({seoData, sectionsContent, introContent,
           textColor="#06357a"
         />
    <br/>
+       <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

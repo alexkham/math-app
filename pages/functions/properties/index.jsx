@@ -69,140 +69,37 @@ export async function getStaticProps(){
 //                     __html:   sectionContent.distributions.svg,
 //                   }} />
 
-  //   const sectionsContent={
-
-  //   obj1:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-
-  //   },
-  //   obj2:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-
-  //   obj3:{
-
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj4:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj5:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj6:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj7:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj8:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj9:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj10:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj11:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj12:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   },
-  //   obj13:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  //     link:'',
-
-  //   },
-  //   obj14:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  //     link:'',
-
-  //   },
-
-
-  //   obj15:{
-
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-
-  //   }
-
-  // }
+ 
 
 const sectionsContent = {
+
+  obj0 = {
+  title: `Key Terms`,
+  content: `
+## Symmetry & Type
+ 
+• [Even Function](!/functions/definitions#even_function) — $f(-x) = f(x)$, mirror symmetry about the $y$-axis
+• [Odd Function](!/functions/definitions#odd_function) — $f(-x) = -f(x)$, rotational symmetry about the origin
+• [One-to-One Function](!/functions/definitions#one_to_one_function) — distinct inputs produce distinct outputs
+ 
+## Behavior
+ 
+• [Increasing Function](!/functions/definitions#increasing_function) — output rises as input grows
+• [Decreasing Function](!/functions/definitions#decreasing_function) — output falls as input grows
+• [Local Maximum](!/functions/definitions#local_maximum) — a peak relative to nearby values
+• [Local Minimum](!/functions/definitions#local_minimum) — a valley relative to nearby values
+ 
+## Structure
+ 
+• [Zero of a Function](!/functions/definitions#zero_of_a_function) — input where $f(x) = 0$; determines sign changes
+• [Asymptote](!/functions/definitions#asymptote) — a line the graph approaches without reaching
+`,
+  before: ``,
+  after: `
+ 
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Function Definitions](!/functions/definitions) →@`,
+  link: '',
+},
 
   obj1: {
     title: `Even and Odd Functions`,
@@ -690,6 +587,14 @@ export default function PropertiesPage({seoData, sectionsContent, introContent, 
 
 
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -931,8 +836,15 @@ export default function PropertiesPage({seoData, sectionsContent, introContent, 
           textColor="#06357a"
         />
    <br/>
+       <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

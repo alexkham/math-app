@@ -119,12 +119,18 @@ export default function LinearAlgebraFormulasPage({
           Linear Algebra Formulas
         </h1>
         <FormulasTOC data={linearAlgebraFormulasList} />
-        <div style={{transform:'scale(0.95)'}}>
+        {/* <div style={{transform:'scale(0.95)'}}>
           <FormulaAccordionWrapper 
             data={linearAlgebraFormulasList}
             groupByField={['category']}
           />
-        </div>
+        </div> */}
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <br/>
         {/* <ScrollUpButton/> */}
       </main>

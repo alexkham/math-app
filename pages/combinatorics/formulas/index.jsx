@@ -24,7 +24,7 @@ export default function CombinatoricsFormulasPage({ combinatoricsFormulaList, ke
         <Breadcrumb />
         <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}} >Combinatorics Formulas</h1>
         <FormulasTOC data={combinatoricsFormulaList}/>
-        <FormulaAccordionWrapper data={combinatoricsFormulaList} groupByField={['category']} />
+        {/* <FormulaAccordionWrapper data={combinatoricsFormulaList} groupByField={['category']} /> */}
       
       {/* <ScrollUpButton /> */}
     </>

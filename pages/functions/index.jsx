@@ -205,6 +205,59 @@ export async function getStaticProps(){
 
 
   const sectionsContent = {
+    obj0 = {
+  title: `Key Terms`,
+  content: `
+## Core Concepts
+ 
+• [Function](!/functions/definitions#function) — a rule assigning exactly one output to each input
+• [Relation](!/functions/definitions#relation) — any set of ordered pairs, with no uniqueness requirement
+• [Domain](!/functions/definitions#domain) — the set of all valid inputs
+• [Range](!/functions/definitions#range) — the set of all outputs actually produced
+• [Independent Variable](!/functions/definitions#independent_variable) — the input, chosen freely
+• [Dependent Variable](!/functions/definitions#dependent_variable) — the output, determined by the input
+ 
+## Types & Classification
+ 
+• [One-to-One Function](!/functions/definitions#one_to_one_function) — distinct inputs always produce distinct outputs
+• [Even Function](!/functions/definitions#even_function) — satisfies $f(-x) = f(x)$, symmetric about the $y$-axis
+• [Odd Function](!/functions/definitions#odd_function) — satisfies $f(-x) = -f(x)$, symmetric about the origin
+• [Piecewise Function](!/functions/definitions#piecewise_function) — different rules on different parts of the domain
+ 
+## Operations
+ 
+• [Composition of Functions](!/functions/definitions#composition_of_functions) — output of one function feeds into another: $f(g(x))$
+• [Inverse Function](!/functions/definitions#inverse_function) — reverses the original: $f^{-1}(f(x)) = x$
+ 
+## Function Families
+ 
+• [Parent Function](!/functions/definitions#parent_function) — simplest representative of a family
+• [Linear Function](!/functions/definitions#linear_function) — $f(x) = mx + b$, constant rate of change
+• [Quadratic Function](!/functions/definitions#quadratic_function) — $f(x) = ax^2 + bx + c$, parabolic shape
+• [Constant Function](!/functions/definitions#constant_function) — $f(x) = c$, flat line
+• [Absolute Value Function](!/functions/definitions#absolute_value_function) — $f(x) = |x|$, V-shaped
+ 
+## Graph Features
+ 
+• [Zero of a Function](!/functions/definitions#zero_of_a_function) — input where $f(x) = 0$
+• [Asymptote](!/functions/definitions#asymptote) — a line the graph approaches without reaching
+• [Local Maximum](!/functions/definitions#local_maximum) — a peak relative to nearby values
+• [Local Minimum](!/functions/definitions#local_minimum) — a valley relative to nearby values
+ 
+## Transformations
+ 
+• [Transformation](!/functions/definitions#transformation) — shift, reflect, stretch, or compress a graph
+• [Translation](!/functions/definitions#translation) — slide the graph without changing shape
+• [Reflection](!/functions/definitions#reflection) — flip the graph across an axis
+• [Dilation](!/functions/definitions#dilation) — stretch or compress the graph
+`,
+  before: ``,
+  after: `
+ 
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Function Definitions](!/functions/definitions) →@`,
+  link: '',
+},
+ 
 
   obj1: {
     title: `What is a Function`,
@@ -537,6 +590,14 @@ export default function FunctionsPage({
 
 
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -762,8 +823,15 @@ export default function FunctionsPage({
           textColor="#06357a"
         />
    <br/>
+       <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

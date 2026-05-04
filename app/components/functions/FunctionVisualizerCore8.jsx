@@ -439,10 +439,10 @@ function VisualizerWithControls(props) {
   const visualizerRef = useRef(null);
   const [isMax, setIsMax] = useState(false);
   const [size, setSize] = useState({ width: defaultWidth, height: defaultHeight });
-  const [winSize, setWinSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+  const [winSize, setWinSize] = useState({ width: 1200, height: 800 });
   const [exportModal, setExportModal] = useState({ isOpen: false, png: '', svg: '' });
 
-  useEffect(() => { const h = () => setWinSize({ width: window.innerWidth, height: window.innerHeight }); window.addEventListener('resize', h); return () => window.removeEventListener('resize', h); }, []);
+  useEffect(() => { setWinSize({ width: window.innerWidth, height: window.innerHeight }); const h = () => setWinSize({ width: window.innerWidth, height: window.innerHeight }); window.addEventListener('resize', h); return () => window.removeEventListener('resize', h); }, []);
   useEffect(() => { const h = e => { if (e.key === 'Escape') { if (exportModal.isOpen) setExportModal({ isOpen: false, png: '', svg: '' }); else if (isMax) setIsMax(false); } }; window.addEventListener('keydown', h); return () => window.removeEventListener('keydown', h); }, [isMax, exportModal.isOpen]);
 
   const cur = isMax ? { width: winSize.width - 40, height: winSize.height - 80 } : size;
