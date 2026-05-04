@@ -3161,6 +3161,8 @@ const VisualizerCore = React.forwardRef((props, ref) => {
     />
   );
 });
+VisualizerCore.displayName = 'VisualizerCore';
+
 
 // ============================================================
 // ICONS
