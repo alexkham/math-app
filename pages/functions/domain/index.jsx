@@ -73,7 +73,7 @@ export async function getStaticProps(){
 
   const sectionsContent = {
 
-    obj0 = {
+    obj0 :{
   title: `Key Terms`,
   content: `
 • [Domain](!/functions/definitions#domain) — the set of all valid inputs for a function

@@ -74,7 +74,7 @@ export async function getStaticProps(){
 const sectionsContent = {
 
 
-  obj0 = {
+  obj0 : {
   title: `Key Terms`,
   content: `
 • [Function](!/functions/definitions#function) — the objects being combined through arithmetic operations

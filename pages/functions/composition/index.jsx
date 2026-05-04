@@ -57,7 +57,7 @@ export async function getStaticProps(){
 
 
 const sectionsContent = {
-  obj0 = {
+  obj0 : {
   title: `Key Terms`,
   content: `
 ## Core
