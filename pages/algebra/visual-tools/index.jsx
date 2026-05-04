@@ -743,7 +743,11 @@ export default function AlgebraVisualToolsPage({seoData, sectionsContent, introC
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Algebra Visual Tools</h1>
-      <QuickNav items={cardsData} dropdownLabel="All Tools" />
+      <QuickNav items={cardsData} dropdownLabel="All Tools"
+      
+      accentColor="#2c5d99"
+  accentColorHover="#1e4170"
+      />
       <br/>
       <ScrollToTop
         top={'80px'}
@@ -751,6 +755,8 @@ export default function AlgebraVisualToolsPage({seoData, sectionsContent, introC
       />
       <br/>
       <ToolsPageHeader
+       accentColor="#2c5d99"
+  accentColorSecondary="#3a72b8"
         items={cardsData}
         icon="🔍"
         intro={{
@@ -760,6 +766,29 @@ export default function AlgebraVisualToolsPage({seoData, sectionsContent, introC
         }}
         onFilteredItemsChange={(filtered) => setDisplayedItems(filtered)}
       />
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
 
       <ModernCardsGroup items={cardsData}/>
       <br/>

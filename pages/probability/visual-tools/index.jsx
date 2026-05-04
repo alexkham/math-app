@@ -587,6 +587,26 @@ export default function ProbabilityVisualToolsPage({seoData, sectionsContent, in
   }}
   onFilteredItemsChange={(filtered) => setDisplayedItems(filtered)}
 />
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
       
       <ModernCardsGroup items={cardsData}/>
       <br/>
