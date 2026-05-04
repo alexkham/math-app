@@ -73,7 +73,7 @@ export async function getStaticProps(){
 
   const sectionsContent = {
 
-    obj0 = {
+    obj0 : {
   title: `Key Terms`,
   content: `
 • [Range](!/functions/definitions#range) — the set of all output values a function actually produces
