@@ -436,7 +436,12 @@ export default function AlgebraicIdentityViewPage({
       <br />
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>{h1Title}</h1>
 
-      <SiblingsNav>
+      <SiblingsNav
+       bg="#fafaf7"
+  color="#2c5d99"
+  activeColor="#143a66"
+  activeBg="#dde9f7"
+      >
         {componentName === 'SquareOfSum' && (
           <div style={{ transform: 'scale(0.9)' }}>
             <SquareOfSum />
