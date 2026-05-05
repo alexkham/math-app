@@ -133,6 +133,11 @@
 //   );
 //   if (descMatch) result.description = descMatch[1];
 
+//   const hubDescMatch = content.match(
+//     /hubDescription\s*:\s*["'`]([^"'`]{10,2000})["'`]/
+//   );
+//   if (hubDescMatch) result.hubDescription = hubDescMatch[1];
+
 //   const nameMatch = content.match(
 //     /(?:name)\s*:\s*["'`]([^"'`]{3,100})["'`]/
 //   );
@@ -315,23 +320,23 @@
 
 //     if (type === 'formulas') {
 //       const data = await processFormulas(parentSlug);
-//       sections.push({ id: slug, title: seo.name || seo.title || slugToTitle(slug), type: 'formulas', link: childRoute, navIcon: getNavIcon(seo, 'formulas'), introContent: seo.description || null, ...visualProps });
+//       sections.push({ id: slug, title: seo.name || seo.title || slugToTitle(slug), type: 'formulas', link: childRoute, navIcon: getNavIcon(seo, 'formulas'), introContent: seo.hubDescription || seo.description || null, ...visualProps });
 //       sectionData[slug] = data;
 //     } else if (type === 'definitions') {
 //       const data = await processDefinitions(parentSlug);
-//       sections.push({ id: slug, title: seo.name || seo.title || slugToTitle(slug), type: 'definitions', link: childRoute, navIcon: getNavIcon(seo, 'definitions'), introContent: seo.description || null, ...visualProps });
+//       sections.push({ id: slug, title: seo.name || seo.title || slugToTitle(slug), type: 'definitions', link: childRoute, navIcon: getNavIcon(seo, 'definitions'), introContent: seo.hubDescription || seo.description || null, ...visualProps });
 //       sectionData[slug] = data;
 //     } else if (type === 'calculators') {
 //       const data = processToolSection(sectionRoute, slug);
-//       sections.push({ id: slug, title: seo.name || seo.title || slugToTitle(slug), type: 'calculators', link: childRoute, navIcon: getNavIcon(seo, 'calculators'), content: seo.description || null, ...visualProps });
+//       sections.push({ id: slug, title: seo.name || seo.title || slugToTitle(slug), type: 'calculators', link: childRoute, navIcon: getNavIcon(seo, 'calculators'), content: seo.hubDescription || seo.description || null, ...visualProps });
 //       sectionData[slug] = data;
 //     } else if (type === 'visual-tools') {
 //       const data = processToolSection(sectionRoute, slug);
-//       sections.push({ id: slug, title: seo.name || seo.title || slugToTitle(slug), type: 'visual-tools', link: childRoute, navIcon: getNavIcon(seo, 'visual-tools'), content: seo.description || null, ...visualProps });
+//       sections.push({ id: slug, title: seo.name || seo.title || slugToTitle(slug), type: 'visual-tools', link: childRoute, navIcon: getNavIcon(seo, 'visual-tools'), content: seo.hubDescription || seo.description || null, ...visualProps });
 //       sectionData[slug] = data;
 //     } else {
 //       const data = processSubsection(sectionRoute, slug);
-//       sections.push({ id: slug, title: seo.name || seo.title || slugToTitle(slug), type: 'subsection', link: childRoute, navIcon: getNavIcon(seo, 'subsection'), content: seo.description || null, ...visualProps });
+//       sections.push({ id: slug, title: seo.name || seo.title || slugToTitle(slug), type: 'subsection', link: childRoute, navIcon: getNavIcon(seo, 'subsection'), content: seo.hubDescription || seo.description || null, ...visualProps });
 //       sectionData[slug] = data;
 //     }
 //   }
@@ -345,6 +350,39 @@
 
 /**
  * buildSectionData
+ *
+ * Auto-discovers sections from the filesystem and optionally merges
+ * developer-authored custom prose content per section.
+ *
+ * Usage:
+ *   const { sections, sectionData } = await buildSectionData('/algebra', {
+ *     customSections: { ... }
+ *   });
+ *
+ * customSections shape (all fields optional unless noted):
+ * {
+ *   '<sectionId>': {
+ *     mode: 'augment' | 'replace' | 'prose-only',  // REQUIRED
+ *     body: string,                                // REQUIRED — markdown / HTML string
+ *
+ *     // augment only:
+ *     position: 'before' | 'after',                // default: 'before'
+ *
+ *     // prose-only only (synthesizes a NEW section that doesn't exist on disk):
+ *     title: string,
+ *     navIcon: string,                             // e.g. 'subsection', 'formulas'
+ *     link: string,                                // optional "learn more" href
+ *     linkText: string,
+ *     insertAfter: '<sectionId>',                  // place after this auto section
+ *     insertBefore: '<sectionId>',                 // OR before this one
+ *   }
+ * }
+ *
+ * Modes:
+ *   - augment      : auto content + your prose (before or after the grid)
+ *   - replace      : your prose replaces the auto grid; header/footer/nav stay
+ *   - prose-only   : a brand new narrative section, no auto-pulled content
+ *   - (absent)     : default behavior — pure auto-discovery
  */
 
 import fs from 'fs';
@@ -368,6 +406,19 @@ const TYPE_ICONS = {
   'calculators': 'calculators',
   'visual-tools': 'visual-tools',
   'subsection': 'subsection',
+  'prose-only': 'subsection',
+};
+
+// TYPE_ORDER moved here from SectionsContainer so prose-only insertion
+// is respected. Component now renders sections in the order received.
+const TYPE_ORDER = {
+  'visual-tools': 0,
+  'formulas': 1,
+  'definitions': 2,
+  'editorial': 3,
+  'standalone': 4,
+  'subsection': 5,
+  'calculators': 6,
 };
 
 function getDataModulePath(parentSlug, type) {
@@ -511,13 +562,11 @@ function extractSeoData(filePath) {
   );
   if (svgMatch) result.svg = svgMatch[1];
 
-  // Layout for intro block: 'horizontal' (default) or 'vertical'
   const introLayoutMatch = content.match(
     /introLayout\s*:\s*["'`](horizontal|vertical)["'`]/
   );
   if (introLayoutMatch) result.introLayout = introLayoutMatch[1];
 
-  // Image position: 'right' (default), 'left', 'top', 'bottom'
   const introImagePositionMatch = content.match(
     /introImagePosition\s*:\s*["'`](left|right|top|bottom)["'`]/
   );
@@ -645,10 +694,106 @@ function processSubsection(parentRoute, slug) {
 
 
 /* ================================================================
+   CUSTOM SECTIONS MERGE
+   ================================================================ */
+
+/**
+ * Validates a custom section entry. Returns true if it should be applied,
+ * false otherwise (with a console warning).
+ */
+function validateCustomEntry(id, entry) {
+  if (!entry || typeof entry !== 'object') {
+    console.warn(`buildSectionData: customSections["${id}"] is not an object — skipped.`);
+    return false;
+  }
+  const validModes = ['augment', 'replace', 'prose-only'];
+  if (!validModes.includes(entry.mode)) {
+    console.warn(`buildSectionData: customSections["${id}"].mode must be one of ${validModes.join(', ')} — got "${entry.mode}". Skipped.`);
+    return false;
+  }
+  if (typeof entry.body !== 'string' || entry.body.trim().length === 0) {
+    console.warn(`buildSectionData: customSections["${id}"].body must be a non-empty string — skipped.`);
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Mutates `sections` in place: attaches custom payload to existing sections
+ * (augment / replace) and splices in new prose-only sections at the right
+ * position. Updates `sectionData` for synthesized sections.
+ */
+function applyCustomSections(sections, sectionData, customSections) {
+  if (!customSections || typeof customSections !== 'object') return;
+
+  const autoIds = new Set(sections.map((s) => s.id));
+
+  // Pass 1: augment / replace on existing sections.
+  for (const section of sections) {
+    const entry = customSections[section.id];
+    if (!entry) continue;
+    if (!validateCustomEntry(section.id, entry)) continue;
+
+    if (entry.mode === 'augment') {
+      section.custom = {
+        mode: 'augment',
+        position: entry.position === 'after' ? 'after' : 'before',
+        body: entry.body,
+      };
+    } else if (entry.mode === 'replace') {
+      section.custom = {
+        mode: 'replace',
+        body: entry.body,
+      };
+    } else if (entry.mode === 'prose-only') {
+      console.warn(
+        `buildSectionData: customSections["${section.id}"] uses mode "prose-only" but a section with that id already exists from auto-discovery. Use mode "replace" instead — skipped.`
+      );
+    }
+  }
+
+  // Pass 2: synthesize prose-only sections and splice them in.
+  for (const [id, entry] of Object.entries(customSections)) {
+    if (!entry || entry.mode !== 'prose-only') continue;
+    if (autoIds.has(id)) continue; // already warned above
+    if (!validateCustomEntry(id, entry)) continue;
+
+    const newSection = {
+      id,
+      title: entry.title || slugToTitle(id),
+      type: 'prose-only',
+      navIcon: entry.navIcon || TYPE_ICONS['prose-only'],
+      link: entry.link || null,
+      linkText: entry.linkText || null,
+      custom: {
+        mode: 'prose-only',
+        body: entry.body,
+      },
+    };
+
+    let insertIndex = sections.length;
+    if (entry.insertAfter) {
+      const idx = sections.findIndex((s) => s.id === entry.insertAfter);
+      if (idx >= 0) insertIndex = idx + 1;
+      else console.warn(`buildSectionData: insertAfter target "${entry.insertAfter}" not found for prose-only section "${id}". Appending at end.`);
+    } else if (entry.insertBefore) {
+      const idx = sections.findIndex((s) => s.id === entry.insertBefore);
+      if (idx >= 0) insertIndex = idx;
+      else console.warn(`buildSectionData: insertBefore target "${entry.insertBefore}" not found for prose-only section "${id}". Appending at end.`);
+    }
+    sections.splice(insertIndex, 0, newSection);
+    sectionData[id] = {}; // empty data slot for parity with other sections
+  }
+}
+
+
+/* ================================================================
    MAIN ENTRY POINT
    ================================================================ */
 
-export async function buildSectionData(sectionRoute) {
+export async function buildSectionData(sectionRoute, options = {}) {
+  const { customSections = {} } = options;
+
   const parentSlug = sectionRoute.replace(/^\//, '').split('/')[0];
   const childSlugs = getChildSlugs(sectionRoute);
   const sections = [];
@@ -683,6 +828,13 @@ export async function buildSectionData(sectionRoute) {
       sectionData[slug] = data;
     }
   }
+
+  // Sort by type order BEFORE merging custom sections, so prose-only
+  // insertAfter / insertBefore positions reference the final auto order.
+  sections.sort((a, b) => (TYPE_ORDER[a.type] ?? 5) - (TYPE_ORDER[b.type] ?? 5));
+
+  // Merge developer-authored custom sections (no-op if customSections is empty).
+  applyCustomSections(sections, sectionData, customSections);
 
   return { sections, sectionData };
 }

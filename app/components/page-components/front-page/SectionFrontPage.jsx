@@ -1,17 +1,988 @@
 
+// // import React, { useState, useEffect, useRef, useMemo, createContext, useContext } from 'react';
+// // import Image from 'next/image';
+// // import { processContent } from '@/app/utils/contentProcessor';
+// // import { getTheme } from './sectionFrontPageThemes';
+
+// // const NAVBAR_HEIGHT = 55;
+// // const SIDEBAR_COLLAPSED = 68;
+// // const SIDEBAR_EXPANDED = 290;
+
+// // const ThemeContext = createContext(null);
+// // const useTheme = () => useContext(ThemeContext);
+
+
+// // /* ================================================================
+// //    VISUAL SYSTEM
+// //    Rule: image / svg / icon are ALL optional. Pass any one, none, or
+// //    nothing — components render only what's actually there.
+// //    No broken images. No empty boxes. Ever.
+// //    ================================================================ */
+
+// // const isNonEmpty = (v) => {
+// //   if (v == null) return false;
+// //   if (typeof v === 'string') return v.trim().length > 0;
+// //   return true;
+// // };
+
+// // const pickVisualKind = ({ image, svg, icon }) => {
+// //   if (isNonEmpty(svg)) return 'svg';
+// //   if (isNonEmpty(image)) return 'image';
+// //   if (isNonEmpty(icon)) return 'icon';
+// //   return null;
+// // };
+
+// // /**
+// //  * Preloads an image off-DOM. Renders <Image> only after confirmed load.
+// //  * On fail/loading: renders fallback (svg string) or null. No flash.
+// //  */
+// // const SafeImage = ({ src, alt, sizes, fallbackSvg }) => {
+// //   const [status, setStatus] = useState('loading');
+
+// //   useEffect(() => {
+// //     if (!isNonEmpty(src)) { setStatus('fail'); return; }
+// //     let cancelled = false;
+// //     const probe = new window.Image();
+// //     probe.onload = () => { if (!cancelled) setStatus('ok'); };
+// //     probe.onerror = () => { if (!cancelled) setStatus('fail'); };
+// //     probe.src = src;
+// //     return () => { cancelled = true; };
+// //   }, [src]);
+
+// //   if (status === 'ok') {
+// //     return (
+// //       <Image
+// //         src={src}
+// //         alt={alt || ''}
+// //         fill
+// //         sizes={sizes || '33vw'}
+// //         style={{ objectFit: 'cover' }}
+// //       />
+// //     );
+// //   }
+
+// //   if (status === 'fail' && isNonEmpty(fallbackSvg)) {
+// //     return (
+// //       <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}
+// //         dangerouslySetInnerHTML={{ __html: fallbackSvg }} />
+// //     );
+// //   }
+
+// //   return null;
+// // };
+
+
+// // /* ================================================================
+// //    PLACEHOLDER SVGs
+// //    ================================================================ */
+
+// // const placeholderSvgs = [
+// //   (c) => `<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><line x1="20" y1="70" x2="180" y2="70" stroke="${c}30" stroke-width="1"/><line x1="20" y1="70" x2="20" y2="10" stroke="${c}30" stroke-width="1"/><path d="M25,65 Q60,60 80,40 Q100,20 130,15 Q160,10 175,12" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round"/><path d="M25,68 Q70,65 100,55 Q130,45 160,25 Q170,18 175,20" fill="none" stroke="${c}80" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 3"/></svg>`,
+// //   (c) => `<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><rect x="60" y="20" width="50" height="50" rx="2" fill="none" stroke="${c}40" stroke-width="1.5" stroke-dasharray="4 3"/><polygon points="90,15 140,35 130,75 80,70" fill="none" stroke="${c}" stroke-width="2" stroke-linejoin="round"/><circle cx="90" cy="15" r="3" fill="${c}"/><circle cx="140" cy="35" r="3" fill="${c}"/><circle cx="130" cy="75" r="3" fill="${c}"/><circle cx="80" cy="70" r="3" fill="${c}"/></svg>`,
+// //   (c) => `<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="45" r="35" fill="none" stroke="${c}30" stroke-width="1"/><line x1="100" y1="45" x2="130" y2="25" stroke="${c}" stroke-width="2"/><line x1="100" y1="45" x2="75" y2="70" stroke="${c}80" stroke-width="1.5"/><circle cx="100" cy="45" r="3" fill="${c}"/></svg>`,
+// //   (c) => `<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="45" x2="190" y2="45" stroke="${c}20" stroke-width="1"/><path d="M10,45 Q35,10 60,45 Q85,80 110,45 Q135,10 160,45 Q185,80 190,55" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round"/></svg>`,
+// //   (c) => `<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><line x1="20" y1="75" x2="185" y2="75" stroke="${c}30" stroke-width="1"/><rect x="35" y="30" width="24" height="45" rx="3" fill="${c}30"/><rect x="70" y="15" width="24" height="60" rx="3" fill="${c}60"/><rect x="105" y="40" width="24" height="35" rx="3" fill="${c}45"/><rect x="140" y="22" width="24" height="53" rx="3" fill="${c}"/></svg>`,
+// //   (c) => `<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><line x1="20" y1="80" x2="180" y2="80" stroke="${c}20" stroke-width="1"/><line x1="100" y1="85" x2="100" y2="5" stroke="${c}20" stroke-width="1"/><path d="M30,80 Q100,5 170,80" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round"/><circle cx="100" cy="12" r="3" fill="${c}"/></svg>`,
+// //   (c) => `<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><line x1="20" y1="75" x2="185" y2="75" stroke="${c}20" stroke-width="1"/><line x1="20" y1="75" x2="20" y2="8" stroke="${c}20" stroke-width="1"/><circle cx="40" cy="60" r="4" fill="${c}40"/><circle cx="65" cy="48" r="4" fill="${c}60"/><circle cx="85" cy="52" r="4" fill="${c}50"/><circle cx="110" cy="35" r="4" fill="${c}70"/><circle cx="130" cy="28" r="4" fill="${c}80"/><circle cx="155" cy="18" r="4" fill="${c}"/><path d="M35,62 Q95,45 160,15" fill="none" stroke="${c}50" stroke-width="1.5" stroke-dasharray="4 3"/></svg>`,
+// //   (c) => `<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="55" r="3" fill="${c}40"/><line x1="60" y1="55" x2="140" y2="25" stroke="${c}" stroke-width="2"/><polygon points="140,25 132,30 134,22" fill="${c}"/><line x1="60" y1="55" x2="150" y2="65" stroke="${c}70" stroke-width="2"/><polygon points="150,65 142,60 144,68" fill="${c}70"/></svg>`,
+// //   (c) => `<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><line x1="15" y1="45" x2="185" y2="45" stroke="${c}40" stroke-width="2"/><line x1="50" y1="38" x2="50" y2="52" stroke="${c}60" stroke-width="1.5"/><line x1="100" y1="38" x2="100" y2="52" stroke="${c}60" stroke-width="1.5"/><line x1="150" y1="38" x2="150" y2="52" stroke="${c}60" stroke-width="1.5"/><circle cx="75" cy="45" r="5" fill="${c}" stroke="white" stroke-width="1.5"/><circle cx="130" cy="45" r="5" fill="none" stroke="${c}" stroke-width="2"/></svg>`,
+// //   (c) => `<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><rect x="50" y="12" width="100" height="66" rx="0" fill="none" stroke="${c}40" stroke-width="1.5"/><line x1="83" y1="12" x2="83" y2="78" stroke="${c}20" stroke-width="1"/><line x1="117" y1="12" x2="117" y2="78" stroke="${c}20" stroke-width="1"/><line x1="50" y1="34" x2="150" y2="34" stroke="${c}20" stroke-width="1"/><line x1="50" y1="56" x2="150" y2="56" stroke="${c}20" stroke-width="1"/><circle cx="67" cy="23" r="3" fill="${c}60"/><circle cx="100" cy="23" r="3" fill="${c}"/><circle cx="133" cy="45" r="3" fill="${c}"/><circle cx="67" cy="67" r="3" fill="${c}"/></svg>`,
+// //   (c) => `<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="45" r="38" fill="none" stroke="${c}25" stroke-width="1"/><path d="M100,45 L138,45 A38,38 0 0,0 119,14 Z" fill="${c}20" stroke="${c}" stroke-width="1.5"/><path d="M100,45 L119,14 A38,38 0 0,0 70,18 Z" fill="${c}35" stroke="${c}" stroke-width="1.5"/><circle cx="100" cy="45" r="2.5" fill="${c}"/></svg>`,
+// //   (c) => `<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><line x1="15" y1="75" x2="185" y2="75" stroke="${c}20" stroke-width="1"/><line x1="25" y1="80" x2="25" y2="8" stroke="${c}20" stroke-width="1"/><path d="M30,65 H60 V50 H90 V35 H120 V20 H150 V12 H175" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="60" cy="65" r="3" fill="${c}"/><circle cx="90" cy="50" r="3" fill="${c}"/><circle cx="120" cy="35" r="3" fill="${c}"/><circle cx="150" cy="20" r="3" fill="${c}"/></svg>`,
+// // ];
+
+// // const getPlaceholderSvg = (index, color) => placeholderSvgs[index % placeholderSvgs.length](color);
+
+
+// // /* ================================================================
+// //    NAV ICON
+// //    ================================================================ */
+
+// // const iconMap = {
+// //   formulas: ({ size, color }) => <span style={{ fontSize: size, color, fontStyle: 'italic', fontWeight: 600 }}>&#402;</span>,
+// //   definitions: ({ size, color }) => <span style={{ fontSize: size, color, fontWeight: 600, letterSpacing: '-0.5px' }}>Aa</span>,
+// //   calculators: ({ size, color }) => (
+// //     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+// //       <rect x="4" y="2" width="16" height="20" rx="2" />
+// //       <rect x="7" y="5" width="10" height="4" rx="1" />
+// //       <circle cx="8.5" cy="13" r="0.8" fill={color} stroke="none" /><circle cx="12" cy="13" r="0.8" fill={color} stroke="none" /><circle cx="15.5" cy="13" r="0.8" fill={color} stroke="none" />
+// //       <circle cx="8.5" cy="16.5" r="0.8" fill={color} stroke="none" /><circle cx="12" cy="16.5" r="0.8" fill={color} stroke="none" /><circle cx="15.5" cy="16.5" r="0.8" fill={color} stroke="none" />
+// //       <circle cx="8.5" cy="19.5" r="0.8" fill={color} stroke="none" /><circle cx="12" cy="19.5" r="0.8" fill={color} stroke="none" /><circle cx="15.5" cy="19.5" r="0.8" fill={color} stroke="none" />
+// //     </svg>
+// //   ),
+// //   'visual-tools': ({ size, color }) => (
+// //     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+// //       <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
+// //     </svg>
+// //   ),
+// //   subsection: ({ size, color }) => <span style={{ fontSize: size, color, fontWeight: 600 }}>&sect;</span>,
+// // };
+
+// // const NavIcon = ({ icon, size = 16, color = 'currentColor' }) => {
+// //   const renderer = iconMap[icon];
+// //   if (renderer) return renderer({ size, color });
+// //   if (typeof icon === 'string' && icon.length <= 4) return <span style={{ fontSize: size, color, fontWeight: 600 }}>{icon}</span>;
+// //   return <span style={{ fontSize: size, color, fontWeight: 600 }}>&sect;</span>;
+// // };
+
+
+// // /* ================================================================
+// //    VisualSlot — renders a visual ONLY if there's something to show.
+// //    Returns null otherwise. The caller should also check
+// //    `hasVisual({...})` before allocating space for the slot.
+// //    ================================================================ */
+
+// // const hasVisual = ({ image, svg, icon }) => pickVisualKind({ image, svg, icon }) !== null;
+
+// // const VisualSlot = ({
+// //   image, imageAlt, svg, icon,
+// //   iconSize = 56, iconColor = 'currentColor',
+// //   fallbackPlaceholderIndex, fallbackPlaceholderColor,
+// //   showPlaceholderIfEmpty = false,
+// //   containerStyle = {},
+// // }) => {
+// //   const kind = pickVisualKind({ image, svg, icon });
+// //   const placeholder = (fallbackPlaceholderIndex != null && fallbackPlaceholderColor)
+// //     ? getPlaceholderSvg(fallbackPlaceholderIndex, fallbackPlaceholderColor)
+// //     : null;
+
+// //   let body = null;
+
+// //   const constrained = { maxWidth: 220, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' };
+
+// //   if (kind === 'svg') {
+// //     body = <div style={{ ...constrained, padding: 16 }} dangerouslySetInnerHTML={{ __html: svg }} />;
+// //   } else if (kind === 'image') {
+// //     body = <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+// //       <SafeImage src={image} alt={imageAlt} fallbackSvg={placeholder} />
+// //     </div>;
+// //   } else if (kind === 'icon') {
+// //     body = <NavIcon icon={icon} size={iconSize} color={iconColor} />;
+// //   } else if (showPlaceholderIfEmpty && placeholder) {
+// //     body = <div style={{ ...constrained, padding: 16 }} dangerouslySetInnerHTML={{ __html: placeholder }} />;
+// //   }
+
+// //   if (!body) return null;
+
+// //   return (
+// //     <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', ...containerStyle }}>
+// //       {body}
+// //     </div>
+// //   );
+// // };
+
+
+// // /* ================================================================
+// //    EQUAL GRID
+// //    ================================================================ */
+
+// // const EqualGrid = ({ children }) => {
+// //   const items = React.Children.toArray(children);
+// //   const rows = [];
+// //   for (let i = 0; i < items.length; i += 3) rows.push(items.slice(i, i + 3));
+// //   return (
+// //     <div>
+// //       {rows.map((row, ri) => (
+// //         <div key={ri} style={{ display: 'grid', gridTemplateColumns: `repeat(${row.length}, 1fr)`, gap: 16, marginBottom: ri < rows.length - 1 ? 16 : 0 }}>
+// //           {row}
+// //         </div>
+// //       ))}
+// //     </div>
+// //   );
+// // };
+
+
+// // /* ================================================================
+// //    INTRO PROSE
+// //    No visual provided → text fills the row. Period.
+// //    ================================================================ */
+
+// // const IntroProse = ({ content, image, imageAlt, svg, icon, layout = 'horizontal', imagePosition = 'right' }) => {
+// //   const t = useTheme();
+// //   const hasText = isNonEmpty(content) || (content && typeof content !== 'string');
+// //   const visualPresent = hasVisual({ image, svg, icon });
+
+// //   if (!hasText && !visualPresent) return null;
+
+// //   const isVertical = layout === 'vertical' || imagePosition === 'top' || imagePosition === 'bottom';
+// //   const visualFirst = imagePosition === 'left' || imagePosition === 'top';
+
+// //   const TextEl = hasText ? (
+// //     <div style={{
+// //       fontFamily: "'Source Serif 4', Georgia, serif",
+// //       fontSize: '1.2rem', lineHeight: 1.75, color: t.textSecondary,
+// //       borderLeft: `3px solid ${t.cardAccent}`,
+// //       paddingLeft: 28, paddingTop: 8, paddingBottom: 8,
+// //       flex: visualPresent && !isVertical ? 1 : 'none',
+// //     }}>
+// //       {typeof content === 'string' ? processContent(content) : content}
+// //     </div>
+// //   ) : null;
+
+// //   const VisualEl = visualPresent ? (
+// //     <div style={{
+// //       flex: isVertical ? 'none' : 1,
+// //       minHeight: isVertical ? 240 : 200,
+// //       borderRadius: 8,
+// //       overflow: 'hidden',
+// //       background: '#fafafa',
+// //     }}>
+// //       <VisualSlot image={image} imageAlt={imageAlt} svg={svg} icon={icon} iconSize={64} iconColor={t.cardAccent} />
+// //     </div>
+// //   ) : null;
+
+// //   if (!visualPresent) return <div style={{ marginBottom: 28 }}>{TextEl}</div>;
+// //   if (!hasText) return <div style={{ marginBottom: 28 }}>{VisualEl}</div>;
+
+// //   if (isVertical) {
+// //     return (
+// //       <div style={{ marginBottom: 28, display: 'flex', flexDirection: 'column', gap: 20 }}>
+// //         {visualFirst ? <>{VisualEl}{TextEl}</> : <>{TextEl}{VisualEl}</>}
+// //       </div>
+// //     );
+// //   }
+// //   return (
+// //     <div style={{ marginBottom: 28, display: 'flex', gap: 28, alignItems: 'flex-start' }}>
+// //       {visualFirst ? <>{VisualEl}{TextEl}</> : <>{TextEl}{VisualEl}</>}
+// //     </div>
+// //   );
+// // };
+
+
+// // /* ================================================================
+// //    ATOMS
+// //    ================================================================ */
+
+// // const SectionHeader = ({ title, badge, link, linkText }) => {
+// //   const t = useTheme();
+// //   const [hover, setHover] = useState(false);
+// //   return (
+// //     <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 20, paddingBottom: 12, borderBottom: `2px solid ${t.headerBorderColor}` }}>
+// //       <h2 style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '2.19rem', fontWeight: 700, color: t.headingColor, margin: 0 }}>{title}</h2>
+// //       {badge && <span style={{ fontSize: 15, fontWeight: 600, padding: '3px 10px', borderRadius: 20, background: t.badgeBg, color: t.badgeColor }}>{badge}</span>}
+// //       {link && (
+// //         <a href={link} style={{
+// //           marginLeft: 'auto', fontSize: 14, fontWeight: 700, color: '#fff', textDecoration: 'none',
+// //           background: hover ? t.buttonBgHover : t.buttonBg, padding: '7px 18px', borderRadius: 6,
+// //           transition: 'all 0.15s', whiteSpace: 'nowrap',
+// //           transform: hover ? 'translateY(-1px)' : 'none',
+// //           boxShadow: hover ? `0 3px 10px ${t.buttonBgHover}40` : 'none',
+// //         }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+// //           {linkText || 'See All'} &rarr;
+// //         </a>
+// //       )}
+// //     </div>
+// //   );
+// // };
+
+// // const SectionFooterLink = ({ link, linkText }) => {
+// //   const t = useTheme();
+// //   const [hover, setHover] = useState(false);
+// //   if (!link) return null;
+// //   return (
+// //     <div style={{ display: 'flex', justifyContent: 'center', margin: '24px 0 8px' }}>
+// //       <a href={link} style={{
+// //         display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 15, fontWeight: 700, color: '#fff',
+// //         background: hover ? t.buttonBgHover : t.buttonBg, padding: '10px 28px', borderRadius: 8,
+// //         textDecoration: 'none', transition: 'all 0.15s',
+// //         transform: hover ? 'translateY(-1px)' : 'none',
+// //         boxShadow: hover ? `0 4px 14px ${t.buttonBgHover}40` : `0 2px 6px ${t.buttonBg}25`,
+// //       }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+// //         {linkText || 'View All'} &rarr;
+// //       </a>
+// //     </div>
+// //   );
+// // };
+
+// // const SectionNav = ({ sections, currentIndex }) => {
+// //   const hasPrev = currentIndex > 0;
+// //   const hasNext = currentIndex < sections.length - 1;
+// //   const t = useTheme();
+// //   const btn = { background: 'none', border: '1px solid #e0e0e0', borderRadius: 5, padding: '6px 14px', fontSize: 15, fontWeight: 600, color: t.textSecondary, cursor: 'pointer', fontFamily: "'DM Sans', system-ui, sans-serif", transition: 'all 0.15s' };
+// //   const hover = {
+// //     onMouseEnter: (e) => Object.assign(e.target.style, { borderColor: t.buttonBg, color: t.buttonBgHover, background: t.stripActiveBg }),
+// //     onMouseLeave: (e) => Object.assign(e.target.style, { borderColor: '#e0e0e0', color: t.textSecondary, background: 'none' }),
+// //   };
+// //   const scrollTo = (id) => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 10, behavior: 'smooth' }); };
+// //   return (
+// //     <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', marginTop: 10, borderTop: '1px solid #ebebeb' }}>
+// //       {hasPrev ? <button style={btn} {...hover} onClick={() => scrollTo(sections[currentIndex - 1].id)}>&larr; Prev: {sections[currentIndex - 1].title}</button> : <span />}
+// //       <button style={btn} {...hover} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>&uarr; Back to Top</button>
+// //       {hasNext ? <button style={btn} {...hover} onClick={() => scrollTo(sections[currentIndex + 1].id)}>Next: {sections[currentIndex + 1].title} &rarr;</button> : <span />}
+// //     </div>
+// //   );
+// // };
+
+
+// // /* ================================================================
+// //    CARDS — visual area renders ONLY when something is provided.
+// //    ================================================================ */
+
+// // const CategoryCard = ({ title, count, description, href, onClick, image, imageAlt, svg, icon }) => {
+// //   const t = useTheme();
+// //   const [hover, setHover] = useState(false);
+// //   const Tag = href ? 'a' : 'div';
+// //   const showVisual = hasVisual({ image, svg, icon });
+
+// //   const base = {
+// //     display: 'flex', flexDirection: 'column',
+// //     background: '#fff', border: '1px solid #e0e0e0',
+// //     borderLeft: `4px solid ${t.cardAccent}`, borderRadius: 8,
+// //     textDecoration: 'none', color: 'inherit', transition: 'all 0.15s',
+// //     position: 'relative', minHeight: 100, overflow: 'hidden',
+// //   };
+// //   const hov = { borderLeftColor: t.cardAccentHover, boxShadow: '0 4px 14px rgba(0,0,0,0.05)', transform: 'translateY(-2px)' };
+// //   const props = href ? { href } : { onClick, style: { cursor: onClick ? 'pointer' : 'default' } };
+
+// //   return (
+// //     <Tag {...props} style={{ ...base, ...(hover ? hov : {}) }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+// //       {showVisual && (
+// //         <div style={{ width: '100%', height: 140, borderBottom: '1px solid #ebebeb', flexShrink: 0, background: '#fafafa' }}>
+// //           <VisualSlot image={image} imageAlt={imageAlt || title} svg={svg} icon={icon} iconSize={56} iconColor={t.cardAccent} />
+// //         </div>
+// //       )}
+// //       <div style={{ padding: '18px 16px', display: 'flex', flexDirection: 'column', gap: 6, flex: 1 }}>
+// //         <h3 style={{ fontSize: 17.5, fontWeight: 700, color: t.headingColor, margin: 0 }}>{title}</h3>
+// //         {count != null && <span style={{ fontSize: 13.75, color: t.cardAccent, fontWeight: 600 }}>{count} {count === 1 ? 'item' : 'items'}</span>}
+// //         {description && <span style={{ fontSize: 15.6, color: t.textSecondary, lineHeight: 1.5, paddingBottom: 24 }}>{typeof description === 'string' ? processContent(description) : description}</span>}
+// //       </div>
+// //       {href && (
+// //         <span style={{
+// //           position: 'absolute', bottom: 12, right: 14,
+// //           fontSize: 11.5, fontWeight: 600, color: hover ? t.buttonBg : t.textMuted,
+// //           border: `1px solid ${hover ? t.buttonBg : '#e0e0e0'}`,
+// //           padding: '3px 10px', borderRadius: 4, transition: 'all 0.15s',
+// //         }}>Learn more &rarr;</span>
+// //       )}
+// //     </Tag>
+// //   );
+// // };
+
+// // const FormulaChip = ({ label, tex }) => {
+// //   const t = useTheme();
+// //   const ref = useRef(null);
+// //   useEffect(() => {
+// //     if (ref.current && tex && typeof window !== 'undefined' && window.katex) {
+// //       try { window.katex.render(tex, ref.current, { displayMode: false, throwOnError: false }); }
+// //       catch (e) { ref.current.textContent = tex; }
+// //     }
+// //   }, [tex]);
+// //   return (
+// //     <div style={{ background: '#fff', border: '1px solid #ebebeb', borderRadius: 6, padding: '12px 14px', textAlign: 'center' }}>
+// //       {label && <div style={{ fontSize: 12.5, fontWeight: 700, color: t.textMuted, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 5 }}>{label}</div>}
+// //       <div style={{ fontSize: 18.75, color: t.textPrimary }} ref={ref} />
+// //     </div>
+// //   );
+// // };
+
+// // const DefinitionItem = ({ term, definition }) => {
+// //   const t = useTheme();
+// //   return (
+// //     <div style={{ padding: '12px 16px', background: '#fff', border: '1px solid #ebebeb', borderRadius: 6, display: 'flex', gap: 10, alignItems: 'baseline' }}>
+// //       <span style={{ fontWeight: 700, fontSize: 16.25, color: t.termColor, minWidth: 100, flexShrink: 0 }}>{term}</span>
+// //       <span style={{ fontSize: 15.6, color: t.textSecondary, lineHeight: 1.5 }}>
+// //         {typeof definition === 'string' ? processContent(definition) : definition}
+// //       </span>
+// //     </div>
+// //   );
+// // };
+
+// // const CalculatorCard = ({ title, description, href, image, imageAlt, svg, icon }) => {
+// //   const t = useTheme();
+// //   const [hover, setHover] = useState(false);
+// //   const showVisual = hasVisual({ image, svg, icon });
+
+// //   return (
+// //     <a href={href} style={{
+// //       display: 'flex', flexDirection: 'column', background: '#fff', border: '1px solid #e0e0e0', borderRadius: 10,
+// //       textDecoration: 'none', color: 'inherit', transition: 'all 0.2s', overflow: 'hidden',
+// //       borderColor: hover ? t.buttonBgHover : '#e0e0e0',
+// //       boxShadow: hover ? `0 6px 20px ${t.heroBg}18` : 'none',
+// //       transform: hover ? 'translateY(-3px)' : 'none',
+// //     }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+// //       {showVisual && (
+// //         <div style={{ width: '100%', height: 140, borderBottom: '1px solid #ebebeb', flexShrink: 0, background: '#fafafa' }}>
+// //           <VisualSlot image={image} imageAlt={imageAlt || title} svg={svg} icon={icon} iconSize={56} iconColor={t.heroBg} />
+// //         </div>
+// //       )}
+// //       <div style={{ padding: '24px 22px', flex: 1 }}>
+// //         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
+// //           <div style={{ width: 42, height: 42, borderRadius: 10, background: t.badgeBg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+// //             <NavIcon icon="calculators" size={22} color={t.heroBg} />
+// //           </div>
+// //           <span style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, padding: '3px 8px', borderRadius: 4, background: t.badgeBg, color: t.badgeColor }}>Calculator</span>
+// //         </div>
+// //         <h3 style={{ fontSize: 17, fontWeight: 700, color: t.headingColor, marginBottom: 6 }}>{title}</h3>
+// //         {description && <p style={{ fontSize: 14, color: t.textSecondary, lineHeight: 1.5, margin: 0 }}>{typeof description === 'string' ? processContent(description) : description}</p>}
+// //         <span style={{ display: 'inline-flex', alignItems: 'center', gap: hover ? 8 : 4, fontSize: 13, fontWeight: 700, marginTop: 14, color: t.buttonBg, transition: 'gap 0.15s' }}>Open calculator &rarr;</span>
+// //       </div>
+// //     </a>
+// //   );
+// // };
+
+// // const VisualToolCard = ({ title, description, href, image, imageAlt, svg, icon, previewIndex }) => {
+// //   const t = useTheme();
+// //   const [hover, setHover] = useState(false);
+
+// //   return (
+// //     <a href={href} style={{
+// //       display: 'block', background: '#fff', border: '1px solid #e0e0e0', borderRadius: 10,
+// //       textDecoration: 'none', color: 'inherit', transition: 'all 0.2s', overflow: 'hidden',
+// //       borderColor: hover ? t.buttonBgHover : '#e0e0e0',
+// //       boxShadow: hover ? `0 6px 20px ${t.heroBg}18` : 'none',
+// //       transform: hover ? 'translateY(-3px)' : 'none',
+// //     }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+// //       <div style={{ height: 120, background: t.stripActiveBg, borderBottom: `1px solid ${t.badgeBg}` }}>
+// //         <VisualSlot
+// //           image={image} imageAlt={imageAlt || title} svg={svg} icon={icon}
+// //           iconSize={56} iconColor={t.buttonBgHover}
+// //           fallbackPlaceholderIndex={previewIndex || 0}
+// //           fallbackPlaceholderColor={t.buttonBgHover}
+// //           showPlaceholderIfEmpty
+// //         />
+// //       </div>
+// //       <div style={{ padding: '18px 20px' }}>
+// //         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+// //           <div style={{ width: 36, height: 36, borderRadius: 8, background: t.badgeBg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+// //             <NavIcon icon="visual-tools" size={18} color={t.heroBg} />
+// //           </div>
+// //           <span style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, padding: '3px 8px', borderRadius: 4, background: t.badgeBg, color: t.badgeColor }}>Visual Tool</span>
+// //         </div>
+// //         <h3 style={{ fontSize: 16, fontWeight: 700, color: t.headingColor, marginBottom: 5 }}>{title}</h3>
+// //         {description && <p style={{ fontSize: 13.5, color: t.textSecondary, lineHeight: 1.5, margin: 0 }}>{typeof description === 'string' ? processContent(description) : description}</p>}
+// //         <span style={{ display: 'inline-flex', alignItems: 'center', gap: hover ? 8 : 4, fontSize: 13, fontWeight: 700, marginTop: 12, color: t.buttonBg, transition: 'gap 0.15s' }}>Open tool &rarr;</span>
+// //       </div>
+// //     </a>
+// //   );
+// // };
+
+
+// // /* ================================================================
+// //    ARTICLE BLOCK
+// //    ================================================================ */
+
+// // const ArticleBlock = ({ article }) => {
+// //   const t = useTheme();
+// //   if (!article) return null;
+// //   const { title, content } = typeof article === 'string' ? { title: null, content: article } : article;
+// //   if (!isNonEmpty(content) && !content) return null;
+// //   return (
+// //     <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 48px' }}>
+// //       <div style={{ background: t.articleBg, border: `1px solid ${t.articleBorder}`, borderRadius: 10, padding: '32px 40px', margin: '28px 0 8px' }}>
+// //         <div style={{ width: 40, height: 3, background: t.articleAccent, borderRadius: 2, marginBottom: 16 }} />
+// //         {title && <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '1.4rem', fontWeight: 700, color: t.articleHeading, marginBottom: 12 }}>{title}</h3>}
+// //         <div style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '1.1rem', lineHeight: 1.8, color: t.articleText }}>
+// //           {typeof content === 'string' ? processContent(content) : content}
+// //         </div>
+// //       </div>
+// //     </div>
+// //   );
+// // };
+
+
+// // /* ================================================================
+// //    SECTION RENDERERS
+// //    ================================================================ */
+
+// // const catGroup = { margin: '28px 0 20px', scrollMarginTop: `${NAVBAR_HEIGHT + 20}px` };
+// // const secStyle = { marginBottom: 48, scrollMarginTop: `${NAVBAR_HEIGHT + 10}px` };
+
+// // const CatSubHeading = ({ children }) => {
+// //   const t = useTheme();
+// //   return <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '1.44rem', fontWeight: 700, color: t.headingColor, paddingBottom: 8, marginBottom: 14, borderBottom: '1px solid #e0e0e0' }}>{children}</h3>;
+// // };
+
+// // const SectionIntro = ({ section, contentKey = 'content' }) => {
+// //   const text = section[contentKey] || section.introContent || section.content;
+// //   const hasText = isNonEmpty(text) || (text && typeof text !== 'string');
+// //   const visualPresent = hasVisual({ image: section.image, svg: section.svg, icon: section.icon });
+// //   if (!hasText && !visualPresent) return null;
+// //   return (
+// //     <IntroProse
+// //       content={text}
+// //       image={section.image} imageAlt={section.imageAlt}
+// //       svg={section.svg} icon={section.icon}
+// //       layout={section.introLayout}
+// //       imagePosition={section.introImagePosition}
+// //     />
+// //   );
+// // };
+
+// // const VisualToolsSection = ({ section, sections, currentIndex, data }) => {
+// //   const children = data?.children || [];
+// //   return (
+// //     <section id={section.id} style={secStyle}>
+// //       <SectionHeader title={section.title} badge={`${children.length} tools`} link={section.link} linkText={`Explore ${section.title}`} />
+// //       <SectionIntro section={section} />
+// //       {children.length > 0 && (
+// //         <EqualGrid>
+// //           {children.map((ch, i) => <VisualToolCard key={i} title={ch.title} description={ch.description} href={ch.href} image={ch.image} imageAlt={ch.imageAlt} svg={ch.svg} icon={ch.icon} previewIndex={i} />)}
+// //         </EqualGrid>
+// //       )}
+// //       <SectionFooterLink link={section.link} linkText={`Explore ${section.title}`} />
+// //       <SectionNav sections={sections} currentIndex={currentIndex} />
+// //     </section>
+// //   );
+// // };
+
+// // const CalculatorsSection = ({ section, sections, currentIndex, data }) => {
+// //   const children = data?.children || [];
+// //   return (
+// //     <section id={section.id} style={secStyle}>
+// //       <SectionHeader title={section.title} badge={`${children.length} tools`} link={section.link} linkText={`Explore ${section.title}`} />
+// //       <SectionIntro section={section} />
+// //       {children.length > 0 && (
+// //         <EqualGrid>
+// //           {children.map((ch, i) => <CalculatorCard key={i} title={ch.title} description={ch.description} href={ch.href} image={ch.image} imageAlt={ch.imageAlt} svg={ch.svg} icon={ch.icon} />)}
+// //         </EqualGrid>
+// //       )}
+// //       <SectionFooterLink link={section.link} linkText={`Explore ${section.title}`} />
+// //       <SectionNav sections={sections} currentIndex={currentIndex} />
+// //     </section>
+// //   );
+// // };
+
+// // const FormulasSection = ({ section, sections, currentIndex, data, categoryExplanations }) => {
+// //   const { categories, items, totalCount } = data;
+// //   const scrollCat = (key) => { const el = document.getElementById(`formula-cat-${key}`); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 20, behavior: 'smooth' }); };
+// //   return (
+// //     <section id={section.id} style={secStyle}>
+// //       <SectionHeader title={section.title} badge={`${totalCount} items`} link={section.link} linkText={`See All ${section.title}`} />
+// //       <SectionIntro section={section} contentKey="introContent" />
+// //       {categories.length > 0 && (
+// //         <EqualGrid>
+// //           {categories.map((c) => <CategoryCard key={c.key} title={c.name} count={c.count} description={categoryExplanations?.[c.name]} onClick={() => scrollCat(c.key)} />)}
+// //         </EqualGrid>
+// //       )}
+// //       {categories.map((c) => {
+// //         const ci = items.filter((i) => i.category === c.key);
+// //         if (!ci.length) return null;
+// //         return (
+// //           <div key={c.key} id={`formula-cat-${c.key}`} style={catGroup}>
+// //             <CatSubHeading>{c.name}</CatSubHeading>
+// //             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
+// //               {ci.map((item, i) => <FormulaChip key={`${c.key}-${i}`} label={item.title} tex={item.formula} />)}
+// //             </div>
+// //           </div>
+// //         );
+// //       })}
+// //       <SectionFooterLink link={section.link} linkText={`View All ${section.title}`} />
+// //       <SectionNav sections={sections} currentIndex={currentIndex} />
+// //     </section>
+// //   );
+// // };
+
+// // const DefinitionsSection = ({ section, sections, currentIndex, data, categoryExplanations }) => {
+// //   const { categories, items, totalCount } = data;
+// //   const scrollCat = (key) => { const el = document.getElementById(`def-cat-${key}`); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 20, behavior: 'smooth' }); };
+// //   return (
+// //     <section id={section.id} style={secStyle}>
+// //       <SectionHeader title={section.title} badge={`${totalCount} items`} link={section.link} linkText={`See All ${section.title}`} />
+// //       <SectionIntro section={section} contentKey="introContent" />
+// //       {categories.length > 0 && (
+// //         <EqualGrid>
+// //           {categories.map((c) => <CategoryCard key={c.key} title={c.name} count={c.count} description={categoryExplanations?.[c.name]} onClick={() => scrollCat(c.key)} />)}
+// //         </EqualGrid>
+// //       )}
+// //       {categories.map((c) => {
+// //         const ci = items.filter((i) => i.category === c.key);
+// //         if (!ci.length) return null;
+// //         return (
+// //           <div key={c.key} id={`def-cat-${c.key}`} style={catGroup}>
+// //             <CatSubHeading>{c.name}</CatSubHeading>
+// //             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+// //               {ci.map((item, i) => <DefinitionItem key={`${c.key}-${i}`} term={item.title} definition={item.description} />)}
+// //             </div>
+// //           </div>
+// //         );
+// //       })}
+// //       <SectionFooterLink link={section.link} linkText={`View All ${section.title}`} />
+// //       <SectionNav sections={sections} currentIndex={currentIndex} />
+// //     </section>
+// //   );
+// // };
+
+// // const EditorialSection = ({ section, sections, currentIndex }) => (
+// //   <section id={section.id} style={secStyle}>
+// //     <SectionHeader title={section.title} link={section.link} linkText={section.linkText} />
+// //     <SectionIntro section={section} />
+// //     <SectionFooterLink link={section.link} linkText={section.linkText || `Explore ${section.title}`} />
+// //     <SectionNav sections={sections} currentIndex={currentIndex} />
+// //   </section>
+// // );
+
+// // const StandaloneSection = ({ section, sections, currentIndex }) => (
+// //   <section id={section.id} style={secStyle}>
+// //     <SectionHeader title={section.title} link={section.link} linkText={`Explore ${section.title}`} />
+// //     <SectionIntro section={section} />
+// //     {section.formulas?.length > 0 && (
+// //       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10, margin: '16px 0' }}>
+// //         {section.formulas.map((f, i) => <FormulaChip key={i} label={f.title} tex={f.formula} />)}
+// //       </div>
+// //     )}
+// //     <SectionFooterLink link={section.link} linkText={`Explore ${section.title}`} />
+// //     <SectionNav sections={sections} currentIndex={currentIndex} />
+// //   </section>
+// // );
+
+// // const SubsectionSection = ({ section, sections, currentIndex, data }) => {
+// //   const children = data?.children || [];
+// //   return (
+// //     <section id={section.id} style={secStyle}>
+// //       <SectionHeader title={section.title} link={section.link} linkText={`Explore ${section.title}`} />
+// //       <SectionIntro section={section} />
+// //       {children.length > 0 && (
+// //         <EqualGrid>
+// //           {children.map((ch, i) => <CategoryCard key={i} title={ch.title} description={ch.description} href={ch.href} image={ch.image} imageAlt={ch.imageAlt || ch.title} svg={ch.svg} icon={ch.icon} />)}
+// //         </EqualGrid>
+// //       )}
+// //       <SectionFooterLink link={section.link} linkText={`Explore ${section.title}`} />
+// //       <SectionNav sections={sections} currentIndex={currentIndex} />
+// //     </section>
+// //   );
+// // };
+
+
+// // /* ================================================================
+// //    SECTIONS CONTAINER
+// //    ================================================================ */
+
+// // const renderers = {
+// //   formulas: FormulasSection,
+// //   definitions: DefinitionsSection,
+// //   editorial: EditorialSection,
+// //   standalone: StandaloneSection,
+// //   subsection: SubsectionSection,
+// //   calculators: CalculatorsSection,
+// //   'visual-tools': VisualToolsSection,
+// // };
+
+// // const TYPE_ORDER = { 'visual-tools': 0, 'formulas': 1, 'definitions': 2, 'editorial': 3, 'standalone': 4, 'subsection': 5, 'calculators': 6 };
+
+// // const SectionsContainer = ({ sections, sectionData }) => {
+// //   const t = useTheme();
+// //   const sorted = useMemo(() => [...sections].sort((a, b) => (TYPE_ORDER[a.type] ?? 5) - (TYPE_ORDER[b.type] ?? 5)), [sections]);
+// //   return (
+// //     <div style={{ maxWidth: 1200, margin: '0 auto', padding: '40px 48px 80px', background: t.contentBg }}>
+// //       {sorted.map((section, index) => {
+// //         const R = renderers[section.type];
+// //         if (!R) { console.warn(`No renderer for type: ${section.type}`); return null; }
+// //         return <R key={section.id} section={section} sections={sorted} currentIndex={index} data={sectionData?.[section.id]} categoryExplanations={section.categoryExplanations} />;
+// //       })}
+// //     </div>
+// //   );
+// // };
+
+
+// // /* ================================================================
+// //    SIDEBAR
+// //    ================================================================ */
+
+// // const DotItem = ({ label, active, onClick }) => {
+// //   const [h, setH] = useState(false);
+// //   const lit = h || active;
+// //   return (
+// //     <div style={{ width: 8, height: 8, borderRadius: '50%', background: lit ? '#fff' : 'rgba(255,255,255,0.2)', cursor: 'pointer', transition: 'all 0.2s', transform: lit ? 'scale(1.5)' : 'scale(1)', position: 'relative' }}
+// //       onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)} onClick={onClick}>
+// //       <div style={{ position: 'absolute', left: 22, top: '50%', transform: 'translateY(-50%)', background: '#2c3e50', color: '#fff', fontSize: 15, padding: '4px 10px', borderRadius: 4, whiteSpace: 'nowrap', opacity: h ? 1 : 0, pointerEvents: 'none', transition: 'opacity 0.15s', zIndex: 10 }}>{label}</div>
+// //     </div>
+// //   );
+// // };
+
+// // const SidebarNavLink = ({ icon, label, onClick }) => {
+// //   const t = useTheme();
+// //   const [h, setH] = useState(false);
+// //   return (
+// //     <button style={{ display: 'flex', alignItems: 'flex-start', gap: 10, padding: '10px 20px', fontSize: 16.875, fontWeight: 600, color: h ? '#fff' : 'rgba(255,255,255,0.7)', cursor: 'pointer', transition: 'all 0.15s', border: 'none', textAlign: 'left', width: '100%', fontFamily: 'inherit', backgroundColor: h ? 'rgba(255,255,255,0.06)' : 'transparent', borderLeft: h ? `3px solid ${t.sidebarAccent}` : '3px solid transparent', lineHeight: 1.4 }}
+// //       onClick={onClick} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}>
+// //       {icon && <span style={{ width: 20, textAlign: 'center', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: 2 }}><NavIcon icon={icon} size={16} color={h ? '#fff' : 'rgba(255,255,255,0.6)'} /></span>}
+// //       <span style={{ flex: 1, minWidth: 0 }}>{label}</span>
+// //     </button>
+// //   );
+// // };
+
+// // const SidebarSubLink = ({ href, label }) => {
+// //   const [h, setH] = useState(false);
+// //   return (
+// //     <a href={href} style={{ display: 'block', padding: '8px 20px 8px 48px', fontSize: 15.6, fontWeight: 500, textDecoration: 'none', textTransform: 'capitalize', transition: 'all 0.15s', color: h ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}
+// //       onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}>{label}</a>
+// //   );
+// // };
+
+// // const Sidebar = ({ sections, subtopics, brandName, brandSub, open, onToggle, sidebarSectionTitle }) => {
+// //   const t = useTheme();
+// //   const ref = useRef(null);
+// //   useEffect(() => {
+// //     const handler = (e) => { if (open && ref.current && !ref.current.contains(e.target)) onToggle(false); };
+// //     document.addEventListener('click', handler);
+// //     return () => document.removeEventListener('click', handler);
+// //   }, [open, onToggle]);
+// //   const scrollTo = (id) => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 10, behavior: 'smooth' }); onToggle(false); };
+// //   const heading = { fontSize: 12.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1.2, color: 'rgba(255,255,255,0.3)', padding: '12px 20px 8px' };
+
+// //   return (
+// //     <aside ref={ref} style={{ position: 'fixed', left: 0, top: NAVBAR_HEIGHT, width: open ? SIDEBAR_EXPANDED : SIDEBAR_COLLAPSED, height: `calc(100vh - ${NAVBAR_HEIGHT}px)`, background: t.sidebarBg, zIndex: 90, display: 'flex', flexDirection: 'column', transition: 'width 0.3s cubic-bezier(0.4,0,0.2,1)', overflow: 'hidden', boxShadow: open ? '4px 0 24px rgba(0,0,0,0.15)' : 'none' }}>
+// //       <style dangerouslySetInnerHTML={{ __html: `.sfp-sidebar-nav::-webkit-scrollbar{display:none}.markdown-link{color:#2563eb;text-decoration:none;font-weight:600}` }} />
+// //       <button style={{ width: '100%', height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.6)', flexShrink: 0, borderBottom: '1px solid rgba(255,255,255,0.08)' }}
+// //         onClick={() => onToggle(!open)} aria-label="Toggle sidebar"
+// //         onMouseEnter={(e) => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
+// //         onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.6)'; e.currentTarget.style.background = 'none'; }}>
+// //         <svg style={{ width: 20, height: 20, transition: 'transform 0.3s cubic-bezier(0.4,0,0.2,1)', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+// //       </button>
+// //       <div style={{ padding: '14px 20px 10px', opacity: open ? 1 : 0, transition: 'opacity 0.15s', transitionDelay: open ? '0.1s' : '0s', whiteSpace: 'nowrap' }}>
+// //         <span style={{ fontSize: 20, fontWeight: 700, color: '#fff', display: 'block', marginBottom: 2 }}>{brandName || 'Section'}</span>
+// //         {brandSub && <span style={{ fontSize: 13.75, color: 'rgba(255,255,255,0.45)', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.8px' }}>{brandSub}</span>}
+// //       </div>
+// //       <div style={{ display: open ? 'none' : 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, padding: '16px 0' }}>
+// //         {sections.map((sec, i) => <DotItem key={sec.id} label={sec.title} active={i === 0} onClick={() => scrollTo(sec.id)} />)}
+// //       </div>
+// //       <nav className="sfp-sidebar-nav" style={{ display: open ? 'flex' : 'none', flexDirection: 'column', padding: '8px 0', flex: 1, overflowY: 'auto', overflowX: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+// //         <div style={heading}>{sidebarSectionTitle || `In ${brandName} section`}</div>
+// //         {sections.map((sec) => <SidebarNavLink key={sec.id} icon={sec.navIcon} label={sec.title} onClick={() => scrollTo(sec.id)} />)}
+// //         {subtopics?.length > 0 && (
+// //           <>
+// //             <div style={{ height: 1, background: 'rgba(255,255,255,0.08)', margin: '12px 20px' }} />
+// //             <div style={heading}>Subtopics</div>
+// //             {subtopics.map((sub, i) => <SidebarSubLink key={i} href={sub.href} label={sub.title} />)}
+// //           </>
+// //         )}
+// //       </nav>
+// //       <div style={{ padding: '12px 20px', borderTop: '1px solid rgba(255,255,255,0.08)', opacity: open ? 1 : 0, transition: 'opacity 0.15s', transitionDelay: open ? '0.1s' : '0s', flexShrink: 0 }}>
+// //         <span style={{ fontSize: 13.75, color: 'rgba(255,255,255,0.3)', fontWeight: 500 }}>Learn Math Class</span>
+// //       </div>
+// //     </aside>
+// //   );
+// // };
+
+
+// // /* ================================================================
+// //    HERO BANNER
+// //    ================================================================ */
+
+// // const HeroCtaButton = ({ href, icon, label, sublabel }) => {
+// //   const [hover, setHover] = useState(false);
+// //   return (
+// //     <a href={`#${href}`} style={{
+// //       display: 'flex', alignItems: 'center', gap: 14, padding: '16px 28px', borderRadius: 10,
+// //       textDecoration: 'none', color: '#fff', transition: 'all 0.2s',
+// //       background: hover ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.1)',
+// //       border: `1px solid ${hover ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.15)'}`,
+// //       transform: hover ? 'translateY(-2px)' : 'none',
+// //       boxShadow: hover ? '0 8px 24px rgba(0,0,0,0.2)' : 'none', minWidth: 240,
+// //     }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+// //       onClick={(e) => { e.preventDefault(); const el = document.getElementById(href); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 10, behavior: 'smooth' }); }}>
+// //       <div style={{ width: 40, height: 40, borderRadius: 8, background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+// //         <NavIcon icon={icon} size={22} color="#fff" />
+// //       </div>
+// //       <div style={{ display: 'flex', flexDirection: 'column' }}>
+// //         <span style={{ fontSize: 16, fontWeight: 700 }}>{label}</span>
+// //         <span style={{ fontSize: 12, fontWeight: 500, opacity: 0.7, marginTop: 2 }}>{sublabel}</span>
+// //       </div>
+// //       <span style={{ marginLeft: 'auto', fontSize: 18, opacity: 0.7, transition: 'transform 0.15s', transform: hover ? 'translateX(4px)' : 'none' }}>&rarr;</span>
+// //     </a>
+// //   );
+// // };
+
+// // const HeroBanner = ({ title, subtitle, breadcrumbUrl, stats, sections }) => {
+// //   const t = useTheme();
+// //   const hasVT = sections?.some((s) => s.type === 'visual-tools');
+// //   const hasC = sections?.some((s) => s.type === 'calculators');
+// //   const showCtas = hasVT || hasC;
+
+// //   return (
+// //     <header style={{ background: t.heroBg, color: '#fff', padding: '48px 48px 0', position: 'relative', overflow: 'hidden' }}>
+// //       <div style={{ position: 'absolute', top: '-40%', right: '-15%', width: 500, height: 500, background: 'radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
+// //       <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
+// //         {breadcrumbUrl && (
+// //           <div style={{ fontSize: 16.25, color: 'rgba(255,255,255,0.45)', marginBottom: 16, fontWeight: 500 }}>
+// //             <a href="/" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>Home</a> &rsaquo; {title}
+// //           </div>
+// //         )}
+// //         <div style={{ display: 'flex', gap: 40, alignItems: 'flex-start' }}>
+// //           <div style={{ flex: 1 }}>
+// //             <h1 style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '3.2rem', fontWeight: 700, lineHeight: 1.1, marginBottom: 14, letterSpacing: '-0.02em', marginTop: 0 }}>{title}</h1>
+// //             {subtitle && <p style={{ fontSize: '1.375rem', color: 'rgba(255,255,255,0.65)', maxWidth: 640, lineHeight: 1.7, marginBottom: 32 }}>{subtitle}</p>}
+// //           </div>
+// //           {showCtas && (
+// //             <div style={{ display: 'flex', flexDirection: 'column', gap: 14, paddingTop: 8, flexShrink: 0 }}>
+// //               {hasVT && <HeroCtaButton href="visual-tools" icon="visual-tools" label="Visual Tools" sublabel="Interactive graphs &amp; visualizations" />}
+// //               {hasC && <HeroCtaButton href="calculators" icon="calculators" label="Calculators" sublabel="Step-by-step equation solvers" />}
+// //             </div>
+// //           )}
+// //         </div>
+// //         {stats?.length > 0 && (
+// //           <div style={{ display: 'flex', gap: 36, padding: '18px 0', borderTop: '1px solid rgba(255,255,255,0.1)', flexWrap: 'wrap' }}>
+// //             {stats.map((st, i) => (
+// //               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 16.25, color: 'rgba(255,255,255,0.55)' }}>
+// //                 <span style={{ fontWeight: 700, fontSize: 25, color: '#fff' }}>{st.value}</span> {st.label}
+// //               </div>
+// //             ))}
+// //           </div>
+// //         )}
+// //       </div>
+// //     </header>
+// //   );
+// // };
+
+
+// // /* ================================================================
+// //    TOPIC STRIP
+// //    ================================================================ */
+
+// // const StripLink = ({ id, icon, label, onClick }) => {
+// //   const t = useTheme();
+// //   const [h, setH] = useState(false);
+// //   const base = { display: 'flex', alignItems: 'center', gap: 6, padding: '10px 16px', textDecoration: 'none', fontSize: 16.25, fontWeight: 600, whiteSpace: 'nowrap', borderBottom: '2px solid transparent', transition: 'all 0.15s', color: t.stripTextColor };
+// //   const hov = { color: t.stripActiveColor, background: t.stripActiveBg, borderBottomColor: t.stripActiveBorder };
+// //   return (
+// //     <a href={`#${id}`} style={{ ...base, ...(h ? hov : {}) }} onClick={(e) => onClick(e, id)} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}>
+// //       {icon && <span style={{ display: 'flex', alignItems: 'center', opacity: 0.5 }}><NavIcon icon={icon} size={16} color="currentColor" /></span>}
+// //       {label}
+// //     </a>
+// //   );
+// // };
+
+// // const TopicStrip = ({ sections }) => {
+// //   const scrollTo = (e, id) => { e.preventDefault(); const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 10, behavior: 'smooth' }); };
+// //   return (
+// //     <nav style={{ background: '#fff', borderBottom: '1px solid #e0e0e0', padding: '0 48px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 0, position: 'sticky', top: NAVBAR_HEIGHT, zIndex: 50, boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+// //       {sections.map((sec) => <StripLink key={sec.id} id={sec.id} icon={sec.navIcon} label={sec.title} onClick={scrollTo} />)}
+// //     </nav>
+// //   );
+// // };
+
+
+// // /* ================================================================
+// //    SHELL
+// //    ================================================================ */
+
+// // const SectionFrontPage = ({ meta, sections, sectionData, rightOffset = '45px', theme = 'deepBlue', article }) => {
+// //   const [sidebarOpen, setSidebarOpen] = useState(false);
+// //   const t = getTheme(theme);
+
+// //   const stats = useMemo(() => {
+// //     const r = [];
+// //     Object.entries(sectionData || {}).forEach(([key, data]) => {
+// //       const sec = sections.find((s) => s.id === key);
+// //       if (!sec) return;
+// //       if (sec.type === 'formulas' && data.totalCount) r.push({ value: data.totalCount, label: 'Formulas' });
+// //       if (sec.type === 'definitions' && data.totalCount) r.push({ value: data.totalCount, label: 'Definitions' });
+// //       if (sec.type === 'calculators' && data.children) r.push({ value: data.children.length, label: 'Calculators' });
+// //       if (sec.type === 'visual-tools' && data.children) r.push({ value: data.children.length, label: 'Visual Tools' });
+// //       if (sec.type === 'subsection' && data.children) r.push({ value: data.children.length, label: `${sec.title} Topics` });
+// //     });
+// //     return r;
+// //   }, [sections, sectionData]);
+
+// //   const subtopics = useMemo(() => {
+// //     const all = [];
+// //     Object.entries(sectionData || {}).forEach(([key, data]) => {
+// //       const sec = sections.find((s) => s.id === key);
+// //       if (sec?.type === 'subsection' && data?.children) {
+// //         data.children.forEach((ch) => all.push({ title: ch.title, href: ch.href }));
+// //       }
+// //     });
+// //     return all;
+// //   }, [sections, sectionData]);
+
+// //   const contentMargin = sidebarOpen ? SIDEBAR_EXPANDED : SIDEBAR_COLLAPSED;
+
+// //   return (
+// //     <ThemeContext.Provider value={t}>
+// //       <Sidebar sections={sections} subtopics={subtopics} brandName={meta.title} brandSub="Learn Math Class" open={sidebarOpen} onToggle={setSidebarOpen} />
+// //       <div style={{ marginLeft: contentMargin, marginRight: rightOffset, marginTop: NAVBAR_HEIGHT, minHeight: `calc(100vh - ${NAVBAR_HEIGHT}px)`, transition: 'margin-left 0.3s cubic-bezier(0.4,0,0.2,1)' }}>
+// //         <HeroBanner title={meta.title} subtitle={meta.subtitle} breadcrumbUrl={meta.breadcrumbUrl} stats={stats} sections={sections} />
+// //         <TopicStrip sections={sections} />
+// //         <ArticleBlock article={article} />
+// //         <SectionsContainer sections={sections} sectionData={sectionData} />
+// //       </div>
+// //     </ThemeContext.Provider>
+// //   );
+// // };
+
+// // export default SectionFrontPage;
+
+// // export {
+// //   ThemeContext, useTheme,
+// //   NavIcon, EqualGrid, IntroProse,
+// //   VisualSlot, SafeImage, hasVisual, isNonEmpty, pickVisualKind,
+// //   ArticleBlock, SectionNav, Sidebar, TopicStrip,
+// //   SectionHeader, SectionFooterLink,
+// //   CategoryCard, CalculatorCard, VisualToolCard,
+// //   FormulaChip, DefinitionItem,
+// //   placeholderSvgs, getPlaceholderSvg,
+// //   NAVBAR_HEIGHT, SIDEBAR_COLLAPSED, SIDEBAR_EXPANDED,
+// // };
+
+
 // import React, { useState, useEffect, useRef, useMemo, createContext, useContext } from 'react';
 // import Image from 'next/image';
 // import { processContent } from '@/app/utils/contentProcessor';
 // import { getTheme } from './sectionFrontPageThemes';
 
 // const NAVBAR_HEIGHT = 55;
+// const SIDEBAR_COLLAPSED = 68;
+// const SIDEBAR_EXPANDED = 290;
 
 // const ThemeContext = createContext(null);
 // const useTheme = () => useContext(ThemeContext);
 
 
 // /* ================================================================
-//    PLACEHOLDER SVGs FOR VISUAL TOOLS
+//    VISUAL SYSTEM
+//    ================================================================ */
+
+// const isNonEmpty = (v) => {
+//   if (v == null) return false;
+//   if (typeof v === 'string') return v.trim().length > 0;
+//   return true;
+// };
+
+// const pickVisualKind = ({ image, svg, icon }) => {
+//   if (isNonEmpty(svg)) return 'svg';
+//   if (isNonEmpty(image)) return 'image';
+//   if (isNonEmpty(icon)) return 'icon';
+//   return null;
+// };
+
+// const SafeImage = ({ src, alt, sizes, fallbackSvg }) => {
+//   const [status, setStatus] = useState('loading');
+
+//   useEffect(() => {
+//     if (!isNonEmpty(src)) { setStatus('fail'); return; }
+//     let cancelled = false;
+//     const probe = new window.Image();
+//     probe.onload = () => { if (!cancelled) setStatus('ok'); };
+//     probe.onerror = () => { if (!cancelled) setStatus('fail'); };
+//     probe.src = src;
+//     return () => { cancelled = true; };
+//   }, [src]);
+
+//   if (status === 'ok') {
+//     return (
+//       <Image
+//         src={src}
+//         alt={alt || ''}
+//         fill
+//         sizes={sizes || '33vw'}
+//         style={{ objectFit: 'cover' }}
+//       />
+//     );
+//   }
+
+//   if (status === 'fail' && isNonEmpty(fallbackSvg)) {
+//     return (
+//       <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}
+//         dangerouslySetInnerHTML={{ __html: fallbackSvg }} />
+//     );
+//   }
+
+//   return null;
+// };
+
+
+// /* ================================================================
+//    PLACEHOLDER SVGs
 //    ================================================================ */
 
 // const placeholderSvgs = [
@@ -29,9 +1000,7 @@
 //   (c) => `<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><line x1="15" y1="75" x2="185" y2="75" stroke="${c}20" stroke-width="1"/><line x1="25" y1="80" x2="25" y2="8" stroke="${c}20" stroke-width="1"/><path d="M30,65 H60 V50 H90 V35 H120 V20 H150 V12 H175" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="60" cy="65" r="3" fill="${c}"/><circle cx="90" cy="50" r="3" fill="${c}"/><circle cx="120" cy="35" r="3" fill="${c}"/><circle cx="150" cy="20" r="3" fill="${c}"/></svg>`,
 // ];
 
-// function getPlaceholderSvg(index, color) {
-//   return placeholderSvgs[index % placeholderSvgs.length](color);
-// }
+// const getPlaceholderSvg = (index, color) => placeholderSvgs[index % placeholderSvgs.length](color);
 
 
 // /* ================================================================
@@ -40,7 +1009,7 @@
 
 // const iconMap = {
 //   formulas: ({ size, color }) => <span style={{ fontSize: size, color, fontStyle: 'italic', fontWeight: 600 }}>&#402;</span>,
-//   definitions: ({ size, color }) => <span style={{ fontSize: size, color, fontWeight: 600, fontStyle: 'normal', letterSpacing: '-0.5px' }}>Aa</span>,
+//   definitions: ({ size, color }) => <span style={{ fontSize: size, color, fontWeight: 600, letterSpacing: '-0.5px' }}>Aa</span>,
 //   calculators: ({ size, color }) => (
 //     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
 //       <rect x="4" y="2" width="16" height="20" rx="2" />
@@ -67,6 +1036,50 @@
 
 
 // /* ================================================================
+//    VisualSlot
+//    ================================================================ */
+
+// const hasVisual = ({ image, svg, icon }) => pickVisualKind({ image, svg, icon }) !== null;
+
+// const VisualSlot = ({
+//   image, imageAlt, svg, icon,
+//   iconSize = 56, iconColor = 'currentColor',
+//   fallbackPlaceholderIndex, fallbackPlaceholderColor,
+//   showPlaceholderIfEmpty = false,
+//   containerStyle = {},
+// }) => {
+//   const kind = pickVisualKind({ image, svg, icon });
+//   const placeholder = (fallbackPlaceholderIndex != null && fallbackPlaceholderColor)
+//     ? getPlaceholderSvg(fallbackPlaceholderIndex, fallbackPlaceholderColor)
+//     : null;
+
+//   let body = null;
+
+//   const constrained = { maxWidth: 220, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' };
+
+//   if (kind === 'svg') {
+//     body = <div style={{ ...constrained, padding: 16 }} dangerouslySetInnerHTML={{ __html: svg }} />;
+//   } else if (kind === 'image') {
+//     body = <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+//       <SafeImage src={image} alt={imageAlt} fallbackSvg={placeholder} />
+//     </div>;
+//   } else if (kind === 'icon') {
+//     body = <NavIcon icon={icon} size={iconSize} color={iconColor} />;
+//   } else if (showPlaceholderIfEmpty && placeholder) {
+//     body = <div style={{ ...constrained, padding: 16 }} dangerouslySetInnerHTML={{ __html: placeholder }} />;
+//   }
+
+//   if (!body) return null;
+
+//   return (
+//     <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', ...containerStyle }}>
+//       {body}
+//     </div>
+//   );
+// };
+
+
+// /* ================================================================
 //    EQUAL GRID
 //    ================================================================ */
 
@@ -77,7 +1090,7 @@
 //   return (
 //     <div>
 //       {rows.map((row, ri) => (
-//         <div key={ri} style={{ display: 'grid', gridTemplateColumns: `repeat(${row.length}, 1fr)`, gap: '16px', marginBottom: ri < rows.length - 1 ? '16px' : 0 }}>
+//         <div key={ri} style={{ display: 'grid', gridTemplateColumns: `repeat(${row.length}, 1fr)`, gap: 16, marginBottom: ri < rows.length - 1 ? 16 : 0 }}>
 //           {row}
 //         </div>
 //       ))}
@@ -87,82 +1100,99 @@
 
 
 // /* ================================================================
-//    INTRO PROSE — handles text, images, and SVG
-//    layout: 'horizontal' | 'vertical' (default: 'horizontal')
-//    imagePosition: 'left' | 'right' | 'top' | 'bottom' (default: 'right')
-//    When no image/svg: full-width text.
+//    INTRO PROSE
 //    ================================================================ */
 
-// const IntroProse = ({ content, image, imageAlt, svg, layout = 'horizontal', imagePosition = 'right' }) => {
+// const IntroProse = ({ content, image, imageAlt, svg, icon, layout = 'horizontal', imagePosition = 'right' }) => {
 //   const t = useTheme();
-//   if (!content && !image && !svg) return null;
+//   const hasText = isNonEmpty(content) || (content && typeof content !== 'string');
+//   const visualPresent = hasVisual({ image, svg, icon });
 
-//   const hasVisual = !!(image || svg);
+//   if (!hasText && !visualPresent) return null;
+
 //   const isVertical = layout === 'vertical' || imagePosition === 'top' || imagePosition === 'bottom';
 //   const visualFirst = imagePosition === 'left' || imagePosition === 'top';
 
-//   const textBlock = content ? (
+//   const TextEl = hasText ? (
 //     <div style={{
 //       fontFamily: "'Source Serif 4', Georgia, serif",
 //       fontSize: '1.2rem', lineHeight: 1.75, color: t.textSecondary,
 //       borderLeft: `3px solid ${t.cardAccent}`,
-//       paddingLeft: '28px',
-//       paddingTop: '8px',
-//       paddingBottom: '8px',
-//       flex: isVertical ? 'none' : 1,
+//       paddingLeft: 28, paddingTop: 8, paddingBottom: 8,
+//       flex: visualPresent && !isVertical ? 1 : 'none',
 //     }}>
 //       {typeof content === 'string' ? processContent(content) : content}
 //     </div>
 //   ) : null;
 
-//   const visualBlock = hasVisual ? (
+//   const VisualEl = visualPresent ? (
 //     <div style={{
 //       flex: isVertical ? 'none' : 1,
-//       minHeight: isVertical ? '240px' : '200px',
-//       position: 'relative',
-//       borderRadius: '8px',
+//       minHeight: isVertical ? 240 : 200,
+//       borderRadius: 8,
 //       overflow: 'hidden',
 //       background: '#fafafa',
-//       display: 'flex', alignItems: 'center', justifyContent: 'center',
 //     }}>
-//       {image && (
-//         <Image
-//           src={image}
-//           alt={imageAlt || ''}
-//           fill
-//           sizes={isVertical ? '100vw' : '50vw'}
-//           style={{ objectFit: 'cover' }}
-//         />
-//       )}
-//       {svg && !image && (
-//         <div style={{ width: '100%', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-//           dangerouslySetInnerHTML={{ __html: svg }} />
-//       )}
+//       <VisualSlot image={image} imageAlt={imageAlt} svg={svg} icon={icon} iconSize={64} iconColor={t.cardAccent} />
 //     </div>
 //   ) : null;
 
-//   // No visual — full width text
-//   if (!hasVisual) {
-//     return (
-//       <div style={{ marginBottom: '28px' }}>
-//         {textBlock}
-//       </div>
-//     );
-//   }
+//   if (!visualPresent) return <div style={{ marginBottom: 28 }}>{TextEl}</div>;
+//   if (!hasText) return <div style={{ marginBottom: 28 }}>{VisualEl}</div>;
 
-//   // Vertical layout
 //   if (isVertical) {
 //     return (
-//       <div style={{ marginBottom: '28px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-//         {visualFirst ? <>{visualBlock}{textBlock}</> : <>{textBlock}{visualBlock}</>}
+//       <div style={{ marginBottom: 28, display: 'flex', flexDirection: 'column', gap: 20 }}>
+//         {visualFirst ? <>{VisualEl}{TextEl}</> : <>{TextEl}{VisualEl}</>}
 //       </div>
 //     );
 //   }
-
-//   // Horizontal layout
 //   return (
-//     <div style={{ marginBottom: '28px', display: 'flex', gap: '28px', alignItems: 'flex-start' }}>
-//       {visualFirst ? <>{visualBlock}{textBlock}</> : <>{textBlock}{visualBlock}</>}
+//     <div style={{ marginBottom: 28, display: 'flex', gap: 28, alignItems: 'flex-start' }}>
+//       {visualFirst ? <>{VisualEl}{TextEl}</> : <>{TextEl}{VisualEl}</>}
+//     </div>
+//   );
+// };
+
+
+// /* ================================================================
+//    CUSTOM PROSE BLOCK
+//    Renders a developer-authored string (markdown / HTML) through the
+//    existing processContent pipeline. Used by augment / replace /
+//    prose-only modes.
+//    ================================================================ */
+
+// const CustomProseBlock = ({ body, variant = 'default' }) => {
+//   const t = useTheme();
+//   if (!isNonEmpty(body)) return null;
+
+//   // Long-form prose for prose-only / replace: no left rule, fuller width.
+//   // Short framing prose for augment: matches the IntroProse left-rule look.
+//   const isFraming = variant === 'augment';
+
+//   const baseStyle = isFraming
+//     ? {
+//         fontFamily: "'Source Serif 4', Georgia, serif",
+//         fontSize: '1.15rem',
+//         lineHeight: 1.75,
+//         color: t.textSecondary,
+//         borderLeft: `3px solid ${t.cardAccent}`,
+//         paddingLeft: 28,
+//         paddingTop: 8,
+//         paddingBottom: 8,
+//         marginBottom: 24,
+//       }
+//     : {
+//         fontFamily: "'Source Serif 4', Georgia, serif",
+//         fontSize: '1.15rem',
+//         lineHeight: 1.8,
+//         color: t.textPrimary,
+//         marginBottom: 24,
+//       };
+
+//   return (
+//     <div style={baseStyle}>
+//       {typeof body === 'string' ? processContent(body) : body}
 //     </div>
 //   );
 // };
@@ -174,19 +1204,19 @@
 
 // const SectionHeader = ({ title, badge, link, linkText }) => {
 //   const t = useTheme();
-//   const [linkHovered, setLinkHovered] = useState(false);
+//   const [hover, setHover] = useState(false);
 //   return (
-//     <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', marginBottom: '20px', paddingBottom: '12px', borderBottom: `2px solid ${t.headerBorderColor}` }}>
+//     <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 20, paddingBottom: 12, borderBottom: `2px solid ${t.headerBorderColor}` }}>
 //       <h2 style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '2.19rem', fontWeight: 700, color: t.headingColor, margin: 0 }}>{title}</h2>
-//       {badge && <span style={{ fontSize: '15px', fontWeight: 600, padding: '3px 10px', borderRadius: '20px', background: t.badgeBg, color: t.badgeColor }}>{badge}</span>}
+//       {badge && <span style={{ fontSize: 15, fontWeight: 600, padding: '3px 10px', borderRadius: 20, background: t.badgeBg, color: t.badgeColor }}>{badge}</span>}
 //       {link && (
 //         <a href={link} style={{
-//           marginLeft: 'auto', fontSize: '14px', fontWeight: 700, color: '#ffffff', textDecoration: 'none',
-//           background: linkHovered ? t.buttonBgHover : t.buttonBg, padding: '7px 18px', borderRadius: '6px',
+//           marginLeft: 'auto', fontSize: 14, fontWeight: 700, color: '#fff', textDecoration: 'none',
+//           background: hover ? t.buttonBgHover : t.buttonBg, padding: '7px 18px', borderRadius: 6,
 //           transition: 'all 0.15s', whiteSpace: 'nowrap',
-//           transform: linkHovered ? 'translateY(-1px)' : 'none',
-//           boxShadow: linkHovered ? `0 3px 10px ${t.buttonBgHover}40` : 'none',
-//         }} onMouseEnter={() => setLinkHovered(true)} onMouseLeave={() => setLinkHovered(false)}>
+//           transform: hover ? 'translateY(-1px)' : 'none',
+//           boxShadow: hover ? `0 3px 10px ${t.buttonBgHover}40` : 'none',
+//         }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
 //           {linkText || 'See All'} &rarr;
 //         </a>
 //       )}
@@ -196,17 +1226,17 @@
 
 // const SectionFooterLink = ({ link, linkText }) => {
 //   const t = useTheme();
-//   const [hovered, setHovered] = useState(false);
+//   const [hover, setHover] = useState(false);
 //   if (!link) return null;
 //   return (
 //     <div style={{ display: 'flex', justifyContent: 'center', margin: '24px 0 8px' }}>
 //       <a href={link} style={{
-//         display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '15px', fontWeight: 700, color: '#ffffff',
-//         background: hovered ? t.buttonBgHover : t.buttonBg, padding: '10px 28px', borderRadius: '8px',
+//         display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 15, fontWeight: 700, color: '#fff',
+//         background: hover ? t.buttonBgHover : t.buttonBg, padding: '10px 28px', borderRadius: 8,
 //         textDecoration: 'none', transition: 'all 0.15s',
-//         transform: hovered ? 'translateY(-1px)' : 'none',
-//         boxShadow: hovered ? `0 4px 14px ${t.buttonBgHover}40` : `0 2px 6px ${t.buttonBg}25`,
-//       }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+//         transform: hover ? 'translateY(-1px)' : 'none',
+//         boxShadow: hover ? `0 4px 14px ${t.buttonBgHover}40` : `0 2px 6px ${t.buttonBg}25`,
+//       }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
 //         {linkText || 'View All'} &rarr;
 //       </a>
 //     </div>
@@ -217,48 +1247,72 @@
 //   const hasPrev = currentIndex > 0;
 //   const hasNext = currentIndex < sections.length - 1;
 //   const t = useTheme();
-//   const btnStyle = { background: 'none', border: '1px solid #e0e0e0', borderRadius: '5px', padding: '6px 14px', fontSize: '15px', fontWeight: 600, color: t.textSecondary, cursor: 'pointer', fontFamily: "'DM Sans', system-ui, sans-serif", transition: 'all 0.15s' };
+//   const btn = { background: 'none', border: '1px solid #e0e0e0', borderRadius: 5, padding: '6px 14px', fontSize: 15, fontWeight: 600, color: t.textSecondary, cursor: 'pointer', fontFamily: "'DM Sans', system-ui, sans-serif", transition: 'all 0.15s' };
 //   const hover = {
 //     onMouseEnter: (e) => Object.assign(e.target.style, { borderColor: t.buttonBg, color: t.buttonBgHover, background: t.stripActiveBg }),
 //     onMouseLeave: (e) => Object.assign(e.target.style, { borderColor: '#e0e0e0', color: t.textSecondary, background: 'none' }),
 //   };
 //   const scrollTo = (id) => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 10, behavior: 'smooth' }); };
 //   return (
-//     <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', marginTop: '10px', borderTop: '1px solid #ebebeb' }}>
-//       {hasPrev ? <button style={btnStyle} {...hover} onClick={() => scrollTo(sections[currentIndex - 1].id)}>&larr; Prev: {sections[currentIndex - 1].title}</button> : <span />}
-//       <button style={btnStyle} {...hover} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>&uarr; Back to Top</button>
-//       {hasNext ? <button style={btnStyle} {...hover} onClick={() => scrollTo(sections[currentIndex + 1].id)}>Next: {sections[currentIndex + 1].title} &rarr;</button> : <span />}
+//     <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', marginTop: 10, borderTop: '1px solid #ebebeb' }}>
+//       {hasPrev ? <button style={btn} {...hover} onClick={() => scrollTo(sections[currentIndex - 1].id)}>&larr; Prev: {sections[currentIndex - 1].title}</button> : <span />}
+//       <button style={btn} {...hover} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>&uarr; Back to Top</button>
+//       {hasNext ? <button style={btn} {...hover} onClick={() => scrollTo(sections[currentIndex + 1].id)}>Next: {sections[currentIndex + 1].title} &rarr;</button> : <span />}
 //     </div>
 //   );
 // };
 
-// const CategoryCard = ({ title, count, description, href, onClick, image, imageAlt, svg }) => {
+
+// /* ================================================================
+//    AUGMENT SLOTS
+//    Helper for renderers that support 'augment' mode.
+//    ================================================================ */
+
+// const AugmentSlot = ({ section, position }) => {
+//   if (section.custom?.mode !== 'augment') return null;
+//   if ((section.custom.position || 'before') !== position) return null;
+//   return <CustomProseBlock body={section.custom.body} variant="augment" />;
+// };
+
+
+// /* ================================================================
+//    CARDS
+//    ================================================================ */
+
+// const CategoryCard = ({ title, count, description, href, onClick, image, imageAlt, svg, icon }) => {
 //   const t = useTheme();
-//   const [hovered, setHovered] = useState(false);
+//   const [hover, setHover] = useState(false);
 //   const Tag = href ? 'a' : 'div';
-//   const hasVisual = !!(image || svg);
-//   const base = { display: 'flex', flexDirection: 'column', gap: hasVisual ? 0 : '6px', background: '#ffffff', border: '1px solid #e0e0e0', borderLeft: `4px solid ${t.cardAccent}`, borderRadius: '8px', textDecoration: 'none', color: 'inherit', transition: 'all 0.15s', position: 'relative', minHeight: '100px', overflow: 'hidden' };
+//   const showVisual = hasVisual({ image, svg, icon });
+
+//   const base = {
+//     display: 'flex', flexDirection: 'column',
+//     background: '#fff', border: '1px solid #e0e0e0',
+//     borderLeft: `4px solid ${t.cardAccent}`, borderRadius: 8,
+//     textDecoration: 'none', color: 'inherit', transition: 'all 0.15s',
+//     position: 'relative', minHeight: 100, overflow: 'hidden',
+//   };
 //   const hov = { borderLeftColor: t.cardAccentHover, boxShadow: '0 4px 14px rgba(0,0,0,0.05)', transform: 'translateY(-2px)' };
-//   const tagProps = href ? { href } : { onClick, style: { cursor: onClick ? 'pointer' : 'default' } };
+//   const props = href ? { href } : { onClick, style: { cursor: onClick ? 'pointer' : 'default' } };
+
 //   return (
-//     <Tag {...tagProps} style={{ ...base, ...(hovered ? hov : {}) }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-//       {hasVisual && (
-//         <div style={{ position: 'relative', width: '100%', height: '140px', borderBottom: '1px solid #ebebeb', flexShrink: 0, overflow: 'hidden', background: '#fafafa', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-//           {image && <Image src={image} alt={imageAlt || title || ''} fill sizes="33vw" style={{ objectFit: 'cover' }} />}
-//           {svg && !image && <div style={{ width: '100%', padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }} dangerouslySetInnerHTML={{ __html: svg }} />}
+//     <Tag {...props} style={{ ...base, ...(hover ? hov : {}) }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+//       {showVisual && (
+//         <div style={{ width: '100%', height: 140, borderBottom: '1px solid #ebebeb', flexShrink: 0, background: '#fafafa' }}>
+//           <VisualSlot image={image} imageAlt={imageAlt || title} svg={svg} icon={icon} iconSize={56} iconColor={t.cardAccent} />
 //         </div>
 //       )}
-//       <div style={{ padding: '18px 16px', display: 'flex', flexDirection: 'column', gap: '6px', flex: 1 }}>
-//         <h3 style={{ fontSize: '17.5px', fontWeight: 700, color: t.headingColor, margin: 0 }}>{title}</h3>
-//         {count != null && <span style={{ fontSize: '13.75px', color: t.cardAccent, fontWeight: 600 }}>{count} {count === 1 ? 'item' : 'items'}</span>}
-//         {description && <span style={{ fontSize: '15.6px', color: t.textSecondary, lineHeight: 1.5, paddingBottom: '24px' }}>{typeof description === 'string' ? processContent(description) : description}</span>}
+//       <div style={{ padding: '18px 16px', display: 'flex', flexDirection: 'column', gap: 6, flex: 1 }}>
+//         <h3 style={{ fontSize: 17.5, fontWeight: 700, color: t.headingColor, margin: 0 }}>{title}</h3>
+//         {count != null && <span style={{ fontSize: 13.75, color: t.cardAccent, fontWeight: 600 }}>{count} {count === 1 ? 'item' : 'items'}</span>}
+//         {description && <span style={{ fontSize: 15.6, color: t.textSecondary, lineHeight: 1.5, paddingBottom: 24 }}>{typeof description === 'string' ? processContent(description) : description}</span>}
 //       </div>
 //       {href && (
 //         <span style={{
-//           position: 'absolute', bottom: '12px', right: '14px',
-//           fontSize: '11.5px', fontWeight: 600, color: hovered ? t.buttonBg : t.textMuted,
-//           border: `1px solid ${hovered ? t.buttonBg : '#e0e0e0'}`,
-//           padding: '3px 10px', borderRadius: '4px', transition: 'all 0.15s',
+//           position: 'absolute', bottom: 12, right: 14,
+//           fontSize: 11.5, fontWeight: 600, color: hover ? t.buttonBg : t.textMuted,
+//           border: `1px solid ${hover ? t.buttonBg : '#e0e0e0'}`,
+//           padding: '3px 10px', borderRadius: 4, transition: 'all 0.15s',
 //         }}>Learn more &rarr;</span>
 //       )}
 //     </Tag>
@@ -267,17 +1321,17 @@
 
 // const FormulaChip = ({ label, tex }) => {
 //   const t = useTheme();
-//   const mathRef = useRef(null);
+//   const ref = useRef(null);
 //   useEffect(() => {
-//     if (mathRef.current && tex && typeof window !== 'undefined' && window.katex) {
-//       try { window.katex.render(tex, mathRef.current, { displayMode: false, throwOnError: false }); }
-//       catch (e) { mathRef.current.textContent = tex; }
+//     if (ref.current && tex && typeof window !== 'undefined' && window.katex) {
+//       try { window.katex.render(tex, ref.current, { displayMode: false, throwOnError: false }); }
+//       catch (e) { ref.current.textContent = tex; }
 //     }
 //   }, [tex]);
 //   return (
-//     <div style={{ background: '#ffffff', border: '1px solid #ebebeb', borderRadius: '6px', padding: '12px 14px', textAlign: 'center' }}>
-//       {label && <div style={{ fontSize: '12.5px', fontWeight: 700, color: t.textMuted, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '5px' }}>{label}</div>}
-//       <div style={{ fontSize: '18.75px', color: t.textPrimary }} ref={mathRef} />
+//     <div style={{ background: '#fff', border: '1px solid #ebebeb', borderRadius: 6, padding: '12px 14px', textAlign: 'center' }}>
+//       {label && <div style={{ fontSize: 12.5, fontWeight: 700, color: t.textMuted, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 5 }}>{label}</div>}
+//       <div style={{ fontSize: 18.75, color: t.textPrimary }} ref={ref} />
 //     </div>
 //   );
 // };
@@ -285,81 +1339,79 @@
 // const DefinitionItem = ({ term, definition }) => {
 //   const t = useTheme();
 //   return (
-//     <div style={{ padding: '12px 16px', background: '#ffffff', border: '1px solid #ebebeb', borderRadius: '6px', display: 'flex', gap: '10px', alignItems: 'baseline' }}>
-//       <span style={{ fontWeight: 700, fontSize: '16.25px', color: t.termColor, minWidth: '100px', flexShrink: 0 }}>{term}</span>
-//       <span style={{ fontSize: '15.6px', color: t.textSecondary, lineHeight: 1.5 }}>
+//     <div style={{ padding: '12px 16px', background: '#fff', border: '1px solid #ebebeb', borderRadius: 6, display: 'flex', gap: 10, alignItems: 'baseline' }}>
+//       <span style={{ fontWeight: 700, fontSize: 16.25, color: t.termColor, minWidth: 100, flexShrink: 0 }}>{term}</span>
+//       <span style={{ fontSize: 15.6, color: t.textSecondary, lineHeight: 1.5 }}>
 //         {typeof definition === 'string' ? processContent(definition) : definition}
 //       </span>
 //     </div>
 //   );
 // };
 
-// const CalculatorCard = ({ title, description, href, image, imageAlt, svg }) => {
+// const CalculatorCard = ({ title, description, href, image, imageAlt, svg, icon }) => {
 //   const t = useTheme();
-//   const [hovered, setHovered] = useState(false);
-//   const hasVisual = !!(image || svg);
+//   const [hover, setHover] = useState(false);
+//   const showVisual = hasVisual({ image, svg, icon });
+
 //   return (
 //     <a href={href} style={{
-//       display: 'flex', flexDirection: 'column', background: '#ffffff', border: '1px solid #e0e0e0', borderRadius: '10px',
+//       display: 'flex', flexDirection: 'column', background: '#fff', border: '1px solid #e0e0e0', borderRadius: 10,
 //       textDecoration: 'none', color: 'inherit', transition: 'all 0.2s', overflow: 'hidden',
-//       borderColor: hovered ? t.buttonBgHover : '#e0e0e0',
-//       boxShadow: hovered ? `0 6px 20px ${t.heroBg}18` : 'none',
-//       transform: hovered ? 'translateY(-3px)' : 'none',
-//     }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-//       {hasVisual && (
-//         <div style={{ position: 'relative', width: '100%', height: '140px', borderBottom: '1px solid #ebebeb', flexShrink: 0, overflow: 'hidden', background: '#fafafa', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-//           {image && <Image src={image} alt={imageAlt || title || ''} fill sizes="33vw" style={{ objectFit: 'cover' }} />}
-//           {svg && !image && <div style={{ width: '100%', padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }} dangerouslySetInnerHTML={{ __html: svg }} />}
+//       borderColor: hover ? t.buttonBgHover : '#e0e0e0',
+//       boxShadow: hover ? `0 6px 20px ${t.heroBg}18` : 'none',
+//       transform: hover ? 'translateY(-3px)' : 'none',
+//     }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+//       {showVisual && (
+//         <div style={{ width: '100%', height: 140, borderBottom: '1px solid #ebebeb', flexShrink: 0, background: '#fafafa' }}>
+//           <VisualSlot image={image} imageAlt={imageAlt || title} svg={svg} icon={icon} iconSize={56} iconColor={t.heroBg} />
 //         </div>
 //       )}
 //       <div style={{ padding: '24px 22px', flex: 1 }}>
-//         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
-//           <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: t.badgeBg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+//         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
+//           <div style={{ width: 42, height: 42, borderRadius: 10, background: t.badgeBg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
 //             <NavIcon icon="calculators" size={22} color={t.heroBg} />
 //           </div>
-//           <span style={{ fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', padding: '3px 8px', borderRadius: '4px', background: t.badgeBg, color: t.badgeColor }}>Calculator</span>
+//           <span style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, padding: '3px 8px', borderRadius: 4, background: t.badgeBg, color: t.badgeColor }}>Calculator</span>
 //         </div>
-//         <h3 style={{ fontSize: '17px', fontWeight: 700, color: t.headingColor, marginBottom: '6px' }}>{title}</h3>
-//         {description && <p style={{ fontSize: '14px', color: t.textSecondary, lineHeight: 1.5, margin: 0 }}>{typeof description === 'string' ? processContent(description) : description}</p>}
-//         <span style={{ display: 'inline-flex', alignItems: 'center', gap: hovered ? '8px' : '4px', fontSize: '13px', fontWeight: 700, marginTop: '14px', color: t.buttonBg, transition: 'gap 0.15s' }}>Open calculator &rarr;</span>
+//         <h3 style={{ fontSize: 17, fontWeight: 700, color: t.headingColor, marginBottom: 6 }}>{title}</h3>
+//         {description && <p style={{ fontSize: 14, color: t.textSecondary, lineHeight: 1.5, margin: 0 }}>{typeof description === 'string' ? processContent(description) : description}</p>}
+//         <span style={{ display: 'inline-flex', alignItems: 'center', gap: hover ? 8 : 4, fontSize: 13, fontWeight: 700, marginTop: 14, color: t.buttonBg, transition: 'gap 0.15s' }}>Open calculator &rarr;</span>
 //       </div>
 //     </a>
 //   );
 // };
 
-// const VisualToolCard = ({ title, description, href, image, imageAlt, svg, previewIndex }) => {
+// const VisualToolCard = ({ title, description, href, image, imageAlt, svg, icon, previewIndex }) => {
 //   const t = useTheme();
-//   const [hovered, setHovered] = useState(false);
-//   const previewContent = (image || svg) ? null : getPlaceholderSvg(previewIndex || 0, t.buttonBgHover);
+//   const [hover, setHover] = useState(false);
+
 //   return (
 //     <a href={href} style={{
-//       display: 'block', background: '#ffffff', border: '1px solid #e0e0e0', borderRadius: '10px',
+//       display: 'block', background: '#fff', border: '1px solid #e0e0e0', borderRadius: 10,
 //       textDecoration: 'none', color: 'inherit', transition: 'all 0.2s', overflow: 'hidden',
-//       borderColor: hovered ? t.buttonBgHover : '#e0e0e0',
-//       boxShadow: hovered ? `0 6px 20px ${t.heroBg}18` : 'none',
-//       transform: hovered ? 'translateY(-3px)' : 'none',
-//     }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-//       <div style={{ height: '120px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: t.stripActiveBg, borderBottom: `1px solid ${t.badgeBg}`, overflow: 'hidden' }}>
-//         {image ? (
-//           <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-//             <Image src={image} alt={imageAlt || title || ''} fill sizes="33vw" style={{ objectFit: 'cover' }} />
-//           </div>
-//         ) : svg ? (
-//           <div style={{ width: '100%', padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }} dangerouslySetInnerHTML={{ __html: svg }} />
-//         ) : (
-//           <div style={{ width: '200px' }} dangerouslySetInnerHTML={{ __html: previewContent }} />
-//         )}
+//       borderColor: hover ? t.buttonBgHover : '#e0e0e0',
+//       boxShadow: hover ? `0 6px 20px ${t.heroBg}18` : 'none',
+//       transform: hover ? 'translateY(-3px)' : 'none',
+//     }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+//       <div style={{ height: 120, background: t.stripActiveBg, borderBottom: `1px solid ${t.badgeBg}` }}>
+//         <VisualSlot
+//           image={image} imageAlt={imageAlt || title} svg={svg} icon={icon}
+//           iconSize={56} iconColor={t.buttonBgHover}
+//           fallbackPlaceholderIndex={previewIndex || 0}
+//           fallbackPlaceholderColor={t.buttonBgHover}
+//           showPlaceholderIfEmpty
+//         />
 //       </div>
 //       <div style={{ padding: '18px 20px' }}>
-//         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-//           <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: t.badgeBg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+//         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+//           <div style={{ width: 36, height: 36, borderRadius: 8, background: t.badgeBg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
 //             <NavIcon icon="visual-tools" size={18} color={t.heroBg} />
 //           </div>
-//           <span style={{ fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', padding: '3px 8px', borderRadius: '4px', background: t.badgeBg, color: t.badgeColor }}>Visual Tool</span>
+//           <span style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, padding: '3px 8px', borderRadius: 4, background: t.badgeBg, color: t.badgeColor }}>Visual Tool</span>
 //         </div>
-//         <h3 style={{ fontSize: '16px', fontWeight: 700, color: t.headingColor, marginBottom: '5px' }}>{title}</h3>
-//         {description && <p style={{ fontSize: '13.5px', color: t.textSecondary, lineHeight: 1.5, margin: 0 }}>{typeof description === 'string' ? processContent(description) : description}</p>}
-//         <span style={{ display: 'inline-flex', alignItems: 'center', gap: hovered ? '8px' : '4px', fontSize: '13px', fontWeight: 700, marginTop: '12px', color: t.buttonBg, transition: 'gap 0.15s' }}>Open tool &rarr;</span>
+//         <h3 style={{ fontSize: 16, fontWeight: 700, color: t.headingColor, marginBottom: 5 }}>{title}</h3>
+//         {description && <p style={{ fontSize: 13.5, color: t.textSecondary, lineHeight: 1.5, margin: 0 }}>{typeof description === 'string' ? processContent(description) : description}</p>}
+//         <span style={{ display: 'inline-flex', alignItems: 'center', gap: hover ? 8 : 4, fontSize: 13, fontWeight: 700, marginTop: 12, color: t.buttonBg, transition: 'gap 0.15s' }}>Open tool &rarr;</span>
 //       </div>
 //     </a>
 //   );
@@ -374,11 +1426,12 @@
 //   const t = useTheme();
 //   if (!article) return null;
 //   const { title, content } = typeof article === 'string' ? { title: null, content: article } : article;
+//   if (!isNonEmpty(content) && !content) return null;
 //   return (
-//     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 48px' }}>
-//       <div style={{ background: t.articleBg, border: `1px solid ${t.articleBorder}`, borderRadius: '10px', padding: '32px 40px', margin: '28px 0 8px' }}>
-//         <div style={{ width: '40px', height: '3px', background: t.articleAccent, borderRadius: '2px', marginBottom: '16px' }} />
-//         {title && <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '1.4rem', fontWeight: 700, color: t.articleHeading, marginBottom: '12px' }}>{title}</h3>}
+//     <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 48px' }}>
+//       <div style={{ background: t.articleBg, border: `1px solid ${t.articleBorder}`, borderRadius: 10, padding: '32px 40px', margin: '28px 0 8px' }}>
+//         <div style={{ width: 40, height: 3, background: t.articleAccent, borderRadius: 2, marginBottom: 16 }} />
+//         {title && <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '1.4rem', fontWeight: 700, color: t.articleHeading, marginBottom: 12 }}>{title}</h3>}
 //         <div style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '1.1rem', lineHeight: 1.8, color: t.articleText }}>
 //           {typeof content === 'string' ? processContent(content) : content}
 //         </div>
@@ -393,23 +1446,23 @@
 //    ================================================================ */
 
 // const catGroup = { margin: '28px 0 20px', scrollMarginTop: `${NAVBAR_HEIGHT + 20}px` };
-// const secStyle = { marginBottom: '48px', scrollMarginTop: `${NAVBAR_HEIGHT + 10}px` };
+// const secStyle = { marginBottom: 48, scrollMarginTop: `${NAVBAR_HEIGHT + 10}px` };
 
 // const CatSubHeading = ({ children }) => {
 //   const t = useTheme();
-//   return <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '1.44rem', fontWeight: 700, color: t.headingColor, paddingBottom: '8px', marginBottom: '14px', borderBottom: '1px solid #e0e0e0' }}>{children}</h3>;
+//   return <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '1.44rem', fontWeight: 700, color: t.headingColor, paddingBottom: 8, marginBottom: 14, borderBottom: '1px solid #e0e0e0' }}>{children}</h3>;
 // };
 
-// /** Helper: renders IntroProse with visual props from section */
 // const SectionIntro = ({ section, contentKey = 'content' }) => {
 //   const text = section[contentKey] || section.introContent || section.content;
-//   if (!text && !section.image && !section.svg) return null;
+//   const hasText = isNonEmpty(text) || (text && typeof text !== 'string');
+//   const visualPresent = hasVisual({ image: section.image, svg: section.svg, icon: section.icon });
+//   if (!hasText && !visualPresent) return null;
 //   return (
 //     <IntroProse
 //       content={text}
-//       image={section.image}
-//       imageAlt={section.imageAlt}
-//       svg={section.svg}
+//       image={section.image} imageAlt={section.imageAlt}
+//       svg={section.svg} icon={section.icon}
 //       layout={section.introLayout}
 //       imagePosition={section.introImagePosition}
 //     />
@@ -422,11 +1475,13 @@
 //     <section id={section.id} style={secStyle}>
 //       <SectionHeader title={section.title} badge={`${children.length} tools`} link={section.link} linkText={`Explore ${section.title}`} />
 //       <SectionIntro section={section} />
+//       <AugmentSlot section={section} position="before" />
 //       {children.length > 0 && (
 //         <EqualGrid>
-//           {children.map((ch, i) => <VisualToolCard key={i} title={ch.title} description={ch.description} href={ch.href} image={ch.image} previewIndex={i} />)}
+//           {children.map((ch, i) => <VisualToolCard key={i} title={ch.title} description={ch.description} href={ch.href} image={ch.image} imageAlt={ch.imageAlt} svg={ch.svg} icon={ch.icon} previewIndex={i} />)}
 //         </EqualGrid>
 //       )}
+//       <AugmentSlot section={section} position="after" />
 //       <SectionFooterLink link={section.link} linkText={`Explore ${section.title}`} />
 //       <SectionNav sections={sections} currentIndex={currentIndex} />
 //     </section>
@@ -439,11 +1494,13 @@
 //     <section id={section.id} style={secStyle}>
 //       <SectionHeader title={section.title} badge={`${children.length} tools`} link={section.link} linkText={`Explore ${section.title}`} />
 //       <SectionIntro section={section} />
+//       <AugmentSlot section={section} position="before" />
 //       {children.length > 0 && (
 //         <EqualGrid>
-//           {children.map((ch, i) => <CalculatorCard key={i} title={ch.title} description={ch.description} href={ch.href} />)}
+//           {children.map((ch, i) => <CalculatorCard key={i} title={ch.title} description={ch.description} href={ch.href} image={ch.image} imageAlt={ch.imageAlt} svg={ch.svg} icon={ch.icon} />)}
 //         </EqualGrid>
 //       )}
+//       <AugmentSlot section={section} position="after" />
 //       <SectionFooterLink link={section.link} linkText={`Explore ${section.title}`} />
 //       <SectionNav sections={sections} currentIndex={currentIndex} />
 //     </section>
@@ -457,6 +1514,7 @@
 //     <section id={section.id} style={secStyle}>
 //       <SectionHeader title={section.title} badge={`${totalCount} items`} link={section.link} linkText={`See All ${section.title}`} />
 //       <SectionIntro section={section} contentKey="introContent" />
+//       <AugmentSlot section={section} position="before" />
 //       {categories.length > 0 && (
 //         <EqualGrid>
 //           {categories.map((c) => <CategoryCard key={c.key} title={c.name} count={c.count} description={categoryExplanations?.[c.name]} onClick={() => scrollCat(c.key)} />)}
@@ -468,12 +1526,13 @@
 //         return (
 //           <div key={c.key} id={`formula-cat-${c.key}`} style={catGroup}>
 //             <CatSubHeading>{c.name}</CatSubHeading>
-//             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '10px' }}>
+//             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
 //               {ci.map((item, i) => <FormulaChip key={`${c.key}-${i}`} label={item.title} tex={item.formula} />)}
 //             </div>
 //           </div>
 //         );
 //       })}
+//       <AugmentSlot section={section} position="after" />
 //       <SectionFooterLink link={section.link} linkText={`View All ${section.title}`} />
 //       <SectionNav sections={sections} currentIndex={currentIndex} />
 //     </section>
@@ -487,6 +1546,7 @@
 //     <section id={section.id} style={secStyle}>
 //       <SectionHeader title={section.title} badge={`${totalCount} items`} link={section.link} linkText={`See All ${section.title}`} />
 //       <SectionIntro section={section} contentKey="introContent" />
+//       <AugmentSlot section={section} position="before" />
 //       {categories.length > 0 && (
 //         <EqualGrid>
 //           {categories.map((c) => <CategoryCard key={c.key} title={c.name} count={c.count} description={categoryExplanations?.[c.name]} onClick={() => scrollCat(c.key)} />)}
@@ -498,12 +1558,13 @@
 //         return (
 //           <div key={c.key} id={`def-cat-${c.key}`} style={catGroup}>
 //             <CatSubHeading>{c.name}</CatSubHeading>
-//             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+//             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
 //               {ci.map((item, i) => <DefinitionItem key={`${c.key}-${i}`} term={item.title} definition={item.description} />)}
 //             </div>
 //           </div>
 //         );
 //       })}
+//       <AugmentSlot section={section} position="after" />
 //       <SectionFooterLink link={section.link} linkText={`View All ${section.title}`} />
 //       <SectionNav sections={sections} currentIndex={currentIndex} />
 //     </section>
@@ -514,6 +1575,8 @@
 //   <section id={section.id} style={secStyle}>
 //     <SectionHeader title={section.title} link={section.link} linkText={section.linkText} />
 //     <SectionIntro section={section} />
+//     <AugmentSlot section={section} position="before" />
+//     <AugmentSlot section={section} position="after" />
 //     <SectionFooterLink link={section.link} linkText={section.linkText || `Explore ${section.title}`} />
 //     <SectionNav sections={sections} currentIndex={currentIndex} />
 //   </section>
@@ -523,11 +1586,13 @@
 //   <section id={section.id} style={secStyle}>
 //     <SectionHeader title={section.title} link={section.link} linkText={`Explore ${section.title}`} />
 //     <SectionIntro section={section} />
+//     <AugmentSlot section={section} position="before" />
 //     {section.formulas?.length > 0 && (
-//       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '10px', margin: '16px 0' }}>
+//       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10, margin: '16px 0' }}>
 //         {section.formulas.map((f, i) => <FormulaChip key={i} label={f.title} tex={f.formula} />)}
 //       </div>
 //     )}
+//     <AugmentSlot section={section} position="after" />
 //     <SectionFooterLink link={section.link} linkText={`Explore ${section.title}`} />
 //     <SectionNav sections={sections} currentIndex={currentIndex} />
 //   </section>
@@ -539,12 +1604,31 @@
 //     <section id={section.id} style={secStyle}>
 //       <SectionHeader title={section.title} link={section.link} linkText={`Explore ${section.title}`} />
 //       <SectionIntro section={section} />
+//       <AugmentSlot section={section} position="before" />
 //       {children.length > 0 && (
 //         <EqualGrid>
-//           {children.map((ch, i) => <CategoryCard key={i} title={ch.title} description={ch.description} href={ch.href} image={ch.image} imageAlt={ch.imageAlt || ch.title} svg={ch.svg} />)}
+//           {children.map((ch, i) => <CategoryCard key={i} title={ch.title} description={ch.description} href={ch.href} image={ch.image} imageAlt={ch.imageAlt || ch.title} svg={ch.svg} icon={ch.icon} />)}
 //         </EqualGrid>
 //       )}
+//       <AugmentSlot section={section} position="after" />
 //       <SectionFooterLink link={section.link} linkText={`Explore ${section.title}`} />
+//       <SectionNav sections={sections} currentIndex={currentIndex} />
+//     </section>
+//   );
+// };
+
+// /**
+//  * ProseSection — renders 'replace' and 'prose-only' modes.
+//  *  - replace    : section came from auto-discovery; we keep header/footer/nav
+//  *                 but swap the auto grid for the developer's prose body.
+//  *  - prose-only : synthesized section; same shell, body is the entire content.
+//  */
+// const ProseSection = ({ section, sections, currentIndex }) => {
+//   return (
+//     <section id={section.id} style={secStyle}>
+//       <SectionHeader title={section.title} link={section.link} linkText={section.linkText} />
+//       <CustomProseBlock body={section.custom?.body} variant="default" />
+//       <SectionFooterLink link={section.link} linkText={section.linkText} />
 //       <SectionNav sections={sections} currentIndex={currentIndex} />
 //     </section>
 //   );
@@ -563,19 +1647,23 @@
 //   subsection: SubsectionSection,
 //   calculators: CalculatorsSection,
 //   'visual-tools': VisualToolsSection,
+//   'prose-only': ProseSection,
 // };
-
-// const TYPE_ORDER = { 'visual-tools': 0, 'formulas': 1, 'definitions': 2, 'editorial': 3, 'standalone': 4, 'subsection': 5, 'calculators': 6 };
 
 // const SectionsContainer = ({ sections, sectionData }) => {
 //   const t = useTheme();
-//   const sorted = useMemo(() => [...sections].sort((a, b) => (TYPE_ORDER[a.type] ?? 5) - (TYPE_ORDER[b.type] ?? 5)), [sections]);
+//   // Order is now decided in buildSectionData (so prose-only insertions
+//   // are honored). We render in the order received.
 //   return (
-//     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 48px 80px', background: t.contentBg }}>
-//       {sorted.map((section, index) => {
+//     <div style={{ maxWidth: 1200, margin: '0 auto', padding: '40px 48px 80px', background: t.contentBg }}>
+//       {sections.map((section, index) => {
+//         // 'replace' mode: route to ProseSection regardless of original type.
+//         if (section.custom?.mode === 'replace') {
+//           return <ProseSection key={section.id} section={section} sections={sections} currentIndex={index} />;
+//         }
 //         const R = renderers[section.type];
 //         if (!R) { console.warn(`No renderer for type: ${section.type}`); return null; }
-//         return <R key={section.id} section={section} sections={sorted} currentIndex={index} data={sectionData?.[section.id]} categoryExplanations={section.categoryExplanations} />;
+//         return <R key={section.id} section={section} sections={sections} currentIndex={index} data={sectionData?.[section.id]} categoryExplanations={section.categoryExplanations} />;
 //       })}
 //     </div>
 //   );
@@ -586,16 +1674,13 @@
 //    SIDEBAR
 //    ================================================================ */
 
-// const SIDEBAR_COLLAPSED = 68;
-// const SIDEBAR_EXPANDED = 290;
-
 // const DotItem = ({ label, active, onClick }) => {
 //   const [h, setH] = useState(false);
 //   const lit = h || active;
 //   return (
-//     <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: lit ? 'white' : 'rgba(255,255,255,0.2)', cursor: 'pointer', transition: 'all 0.2s', transform: lit ? 'scale(1.5)' : 'scale(1)', position: 'relative' }}
+//     <div style={{ width: 8, height: 8, borderRadius: '50%', background: lit ? '#fff' : 'rgba(255,255,255,0.2)', cursor: 'pointer', transition: 'all 0.2s', transform: lit ? 'scale(1.5)' : 'scale(1)', position: 'relative' }}
 //       onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)} onClick={onClick}>
-//       <div style={{ position: 'absolute', left: '22px', top: '50%', transform: 'translateY(-50%)', background: '#2c3e50', color: 'white', fontSize: '15px', padding: '4px 10px', borderRadius: '4px', whiteSpace: 'nowrap', opacity: h ? 1 : 0, pointerEvents: 'none', transition: 'opacity 0.15s', zIndex: 10 }}>{label}</div>
+//       <div style={{ position: 'absolute', left: 22, top: '50%', transform: 'translateY(-50%)', background: '#2c3e50', color: '#fff', fontSize: 15, padding: '4px 10px', borderRadius: 4, whiteSpace: 'nowrap', opacity: h ? 1 : 0, pointerEvents: 'none', transition: 'opacity 0.15s', zIndex: 10 }}>{label}</div>
 //     </div>
 //   );
 // };
@@ -604,9 +1689,9 @@
 //   const t = useTheme();
 //   const [h, setH] = useState(false);
 //   return (
-//     <button style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', padding: '10px 20px', fontSize: '16.875px', fontWeight: 600, color: h ? 'white' : 'rgba(255,255,255,0.7)', textDecoration: 'none', cursor: 'pointer', transition: 'all 0.15s', border: 'none', textAlign: 'left', width: '100%', fontFamily: 'inherit', backgroundColor: h ? 'rgba(255,255,255,0.06)' : 'transparent', borderLeft: h ? `3px solid ${t.sidebarAccent}` : '3px solid transparent', lineHeight: 1.4 }}
+//     <button style={{ display: 'flex', alignItems: 'flex-start', gap: 10, padding: '10px 20px', fontSize: 16.875, fontWeight: 600, color: h ? '#fff' : 'rgba(255,255,255,0.7)', cursor: 'pointer', transition: 'all 0.15s', border: 'none', textAlign: 'left', width: '100%', fontFamily: 'inherit', backgroundColor: h ? 'rgba(255,255,255,0.06)' : 'transparent', borderLeft: h ? `3px solid ${t.sidebarAccent}` : '3px solid transparent', lineHeight: 1.4 }}
 //       onClick={onClick} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}>
-//       {icon && <span style={{ width: '20px', textAlign: 'center', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '2px' }}><NavIcon icon={icon} size={16} color={h ? 'white' : 'rgba(255,255,255,0.6)'} /></span>}
+//       {icon && <span style={{ width: 20, textAlign: 'center', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: 2 }}><NavIcon icon={icon} size={16} color={h ? '#fff' : 'rgba(255,255,255,0.6)'} /></span>}
 //       <span style={{ flex: 1, minWidth: 0 }}>{label}</span>
 //     </button>
 //   );
@@ -615,12 +1700,12 @@
 // const SidebarSubLink = ({ href, label }) => {
 //   const [h, setH] = useState(false);
 //   return (
-//     <a href={href} style={{ display: 'block', padding: '8px 20px 8px 48px', fontSize: '15.6px', fontWeight: 500, textDecoration: 'none', textTransform: 'capitalize', transition: 'all 0.15s', color: h ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}
+//     <a href={href} style={{ display: 'block', padding: '8px 20px 8px 48px', fontSize: 15.6, fontWeight: 500, textDecoration: 'none', textTransform: 'capitalize', transition: 'all 0.15s', color: h ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}
 //       onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}>{label}</a>
 //   );
 // };
 
-// const Sidebar = ({ sections, subtopics, brandName, brandSub, open, onToggle ,sidebarSectionTitle}) => {
+// const Sidebar = ({ sections, subtopics, brandName, brandSub, open, onToggle, sidebarSectionTitle }) => {
 //   const t = useTheme();
 //   const ref = useRef(null);
 //   useEffect(() => {
@@ -629,40 +1714,37 @@
 //     return () => document.removeEventListener('click', handler);
 //   }, [open, onToggle]);
 //   const scrollTo = (id) => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 10, behavior: 'smooth' }); onToggle(false); };
-//   const heading = { fontSize: '12.5px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.2px', color: 'rgba(255,255,255,0.3)', padding: '12px 20px 8px' };
+//   const heading = { fontSize: 12.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1.2, color: 'rgba(255,255,255,0.3)', padding: '12px 20px 8px' };
 
 //   return (
-//     <aside ref={ref} style={{ position: 'fixed', left: 0, top: `${NAVBAR_HEIGHT}px`, width: open ? `${SIDEBAR_EXPANDED}px` : `${SIDEBAR_COLLAPSED}px`, height: `calc(100vh - ${NAVBAR_HEIGHT}px)`, background: t.sidebarBg, zIndex: 90, display: 'flex', flexDirection: 'column', transition: 'width 0.3s cubic-bezier(0.4,0,0.2,1)', overflow: 'hidden', boxShadow: open ? '4px 0 24px rgba(0,0,0,0.15)' : 'none' }}>
-//       {/* <style dangerouslySetInnerHTML={{ __html: `.sfp-sidebar-nav::-webkit-scrollbar { display: none; }` }} /> */}
-//       {/* <style dangerouslySetInnerHTML={{ __html: `.sfp-sidebar-nav::-webkit-scrollbar { display: none; } .sfp-intro-prose a { color: #2563eb; text-decoration: none; font-weight: 600; }` }} /> */}
-//       <style dangerouslySetInnerHTML={{ __html: `.sfp-sidebar-nav::-webkit-scrollbar { display: none; } .markdown-link { color: #2563eb; text-decoration: none; font-weight: 600; }` }} />
-//       <button style={{ width: '100%', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.6)', flexShrink: 0, borderBottom: '1px solid rgba(255,255,255,0.08)' }}
+//     <aside ref={ref} style={{ position: 'fixed', left: 0, top: NAVBAR_HEIGHT, width: open ? SIDEBAR_EXPANDED : SIDEBAR_COLLAPSED, height: `calc(100vh - ${NAVBAR_HEIGHT}px)`, background: t.sidebarBg, zIndex: 90, display: 'flex', flexDirection: 'column', transition: 'width 0.3s cubic-bezier(0.4,0,0.2,1)', overflow: 'hidden', boxShadow: open ? '4px 0 24px rgba(0,0,0,0.15)' : 'none' }}>
+//       <style dangerouslySetInnerHTML={{ __html: `.sfp-sidebar-nav::-webkit-scrollbar{display:none}.markdown-link{color:#2563eb;text-decoration:none;font-weight:600}` }} />
+//       <button style={{ width: '100%', height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.6)', flexShrink: 0, borderBottom: '1px solid rgba(255,255,255,0.08)' }}
 //         onClick={() => onToggle(!open)} aria-label="Toggle sidebar"
-//         onMouseEnter={(e) => { e.currentTarget.style.color = 'white'; e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
+//         onMouseEnter={(e) => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
 //         onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.6)'; e.currentTarget.style.background = 'none'; }}>
-//         <svg style={{ width: '20px', height: '20px', transition: 'transform 0.3s cubic-bezier(0.4,0,0.2,1)', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+//         <svg style={{ width: 20, height: 20, transition: 'transform 0.3s cubic-bezier(0.4,0,0.2,1)', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
 //       </button>
 //       <div style={{ padding: '14px 20px 10px', opacity: open ? 1 : 0, transition: 'opacity 0.15s', transitionDelay: open ? '0.1s' : '0s', whiteSpace: 'nowrap' }}>
-//         <span style={{ fontSize: '20px', fontWeight: 700, color: 'white', display: 'block', marginBottom: '2px' }}>{brandName || 'Section'}</span>
-//         {brandSub && <span style={{ fontSize: '13.75px', color: 'rgba(255,255,255,0.45)', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.8px' }}>{brandSub}</span>}
+//         <span style={{ fontSize: 20, fontWeight: 700, color: '#fff', display: 'block', marginBottom: 2 }}>{brandName || 'Section'}</span>
+//         {brandSub && <span style={{ fontSize: 13.75, color: 'rgba(255,255,255,0.45)', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.8px' }}>{brandSub}</span>}
 //       </div>
-//       <div style={{ display: open ? 'none' : 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', padding: '16px 0' }}>
+//       <div style={{ display: open ? 'none' : 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, padding: '16px 0' }}>
 //         {sections.map((sec, i) => <DotItem key={sec.id} label={sec.title} active={i === 0} onClick={() => scrollTo(sec.id)} />)}
 //       </div>
 //       <nav className="sfp-sidebar-nav" style={{ display: open ? 'flex' : 'none', flexDirection: 'column', padding: '8px 0', flex: 1, overflowY: 'auto', overflowX: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-//         {/* <div style={heading}>In This Section</div> */}
 //         <div style={heading}>{sidebarSectionTitle || `In ${brandName} section`}</div>
 //         {sections.map((sec) => <SidebarNavLink key={sec.id} icon={sec.navIcon} label={sec.title} onClick={() => scrollTo(sec.id)} />)}
 //         {subtopics?.length > 0 && (
 //           <>
-//             <div style={{ height: '1px', background: 'rgba(255,255,255,0.08)', margin: '12px 20px' }} />
+//             <div style={{ height: 1, background: 'rgba(255,255,255,0.08)', margin: '12px 20px' }} />
 //             <div style={heading}>Subtopics</div>
 //             {subtopics.map((sub, i) => <SidebarSubLink key={i} href={sub.href} label={sub.title} />)}
 //           </>
 //         )}
 //       </nav>
 //       <div style={{ padding: '12px 20px', borderTop: '1px solid rgba(255,255,255,0.08)', opacity: open ? 1 : 0, transition: 'opacity 0.15s', transitionDelay: open ? '0.1s' : '0s', flexShrink: 0 }}>
-//         <span style={{ fontSize: '13.75px', color: 'rgba(255,255,255,0.3)', fontWeight: 500 }}>Learn Math Class</span>
+//         <span style={{ fontSize: 13.75, color: 'rgba(255,255,255,0.3)', fontWeight: 500 }}>Learn Math Class</span>
 //       </div>
 //     </aside>
 //   );
@@ -674,61 +1756,61 @@
 //    ================================================================ */
 
 // const HeroCtaButton = ({ href, icon, label, sublabel }) => {
-//   const [hovered, setHovered] = useState(false);
+//   const [hover, setHover] = useState(false);
 //   return (
 //     <a href={`#${href}`} style={{
-//       display: 'flex', alignItems: 'center', gap: '14px', padding: '16px 28px', borderRadius: '10px',
-//       textDecoration: 'none', color: 'white', transition: 'all 0.2s',
-//       background: hovered ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.1)',
-//       border: `1px solid ${hovered ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.15)'}`,
-//       transform: hovered ? 'translateY(-2px)' : 'none',
-//       boxShadow: hovered ? '0 8px 24px rgba(0,0,0,0.2)' : 'none', minWidth: '240px',
-//     }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+//       display: 'flex', alignItems: 'center', gap: 14, padding: '16px 28px', borderRadius: 10,
+//       textDecoration: 'none', color: '#fff', transition: 'all 0.2s',
+//       background: hover ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.1)',
+//       border: `1px solid ${hover ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.15)'}`,
+//       transform: hover ? 'translateY(-2px)' : 'none',
+//       boxShadow: hover ? '0 8px 24px rgba(0,0,0,0.2)' : 'none', minWidth: 240,
+//     }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
 //       onClick={(e) => { e.preventDefault(); const el = document.getElementById(href); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 10, behavior: 'smooth' }); }}>
-//       <div style={{ width: '40px', height: '40px', borderRadius: '8px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-//         <NavIcon icon={icon} size={22} color="white" />
+//       <div style={{ width: 40, height: 40, borderRadius: 8, background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+//         <NavIcon icon={icon} size={22} color="#fff" />
 //       </div>
 //       <div style={{ display: 'flex', flexDirection: 'column' }}>
-//         <span style={{ fontSize: '16px', fontWeight: 700 }}>{label}</span>
-//         <span style={{ fontSize: '12px', fontWeight: 500, opacity: 0.7, marginTop: '2px' }}>{sublabel}</span>
+//         <span style={{ fontSize: 16, fontWeight: 700 }}>{label}</span>
+//         <span style={{ fontSize: 12, fontWeight: 500, opacity: 0.7, marginTop: 2 }}>{sublabel}</span>
 //       </div>
-//       <span style={{ marginLeft: 'auto', fontSize: '18px', opacity: 0.7, transition: 'transform 0.15s', transform: hovered ? 'translateX(4px)' : 'none' }}>&rarr;</span>
+//       <span style={{ marginLeft: 'auto', fontSize: 18, opacity: 0.7, transition: 'transform 0.15s', transform: hover ? 'translateX(4px)' : 'none' }}>&rarr;</span>
 //     </a>
 //   );
 // };
 
 // const HeroBanner = ({ title, subtitle, breadcrumbUrl, stats, sections }) => {
 //   const t = useTheme();
-//   const hasVisualTools = sections?.some((s) => s.type === 'visual-tools');
-//   const hasCalculators = sections?.some((s) => s.type === 'calculators');
-//   const showCtas = hasVisualTools || hasCalculators;
+//   const hasVT = sections?.some((s) => s.type === 'visual-tools');
+//   const hasC = sections?.some((s) => s.type === 'calculators');
+//   const showCtas = hasVT || hasC;
 
 //   return (
-//     <header style={{ background: t.heroBg, color: 'white', padding: '48px 48px 0', position: 'relative', overflow: 'hidden' }}>
-//       <div style={{ position: 'absolute', top: '-40%', right: '-15%', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
-//       <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+//     <header style={{ background: t.heroBg, color: '#fff', padding: '48px 48px 0', position: 'relative', overflow: 'hidden' }}>
+//       <div style={{ position: 'absolute', top: '-40%', right: '-15%', width: 500, height: 500, background: 'radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
+//       <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
 //         {breadcrumbUrl && (
-//           <div style={{ fontSize: '16.25px', color: 'rgba(255,255,255,0.45)', marginBottom: '16px', fontWeight: 500 }}>
+//           <div style={{ fontSize: 16.25, color: 'rgba(255,255,255,0.45)', marginBottom: 16, fontWeight: 500 }}>
 //             <a href="/" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>Home</a> &rsaquo; {title}
 //           </div>
 //         )}
-//         <div style={{ display: 'flex', gap: '40px', alignItems: 'flex-start' }}>
+//         <div style={{ display: 'flex', gap: 40, alignItems: 'flex-start' }}>
 //           <div style={{ flex: 1 }}>
-//             <h1 style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '3.2rem', fontWeight: 700, lineHeight: 1.1, marginBottom: '14px', letterSpacing: '-0.02em', marginTop: 0 }}>{title}</h1>
-//             {subtitle && <p style={{ fontSize: '1.375rem', color: 'rgba(255,255,255,0.65)', maxWidth: '640px', lineHeight: 1.7, marginBottom: '32px' }}>{subtitle}</p>}
+//             <h1 style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '3.2rem', fontWeight: 700, lineHeight: 1.1, marginBottom: 14, letterSpacing: '-0.02em', marginTop: 0 }}>{title}</h1>
+//             {subtitle && <p style={{ fontSize: '1.375rem', color: 'rgba(255,255,255,0.65)', maxWidth: 640, lineHeight: 1.7, marginBottom: 32 }}>{subtitle}</p>}
 //           </div>
 //           {showCtas && (
-//             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', paddingTop: '8px', flexShrink: 0 }}>
-//               {hasVisualTools && <HeroCtaButton href="visual-tools" icon="visual-tools" label="Visual Tools" sublabel="Interactive graphs &amp; visualizations" />}
-//               {hasCalculators && <HeroCtaButton href="calculators" icon="calculators" label="Calculators" sublabel="Step-by-step equation solvers" />}
+//             <div style={{ display: 'flex', flexDirection: 'column', gap: 14, paddingTop: 8, flexShrink: 0 }}>
+//               {hasVT && <HeroCtaButton href="visual-tools" icon="visual-tools" label="Visual Tools" sublabel="Interactive graphs &amp; visualizations" />}
+//               {hasC && <HeroCtaButton href="calculators" icon="calculators" label="Calculators" sublabel="Step-by-step equation solvers" />}
 //             </div>
 //           )}
 //         </div>
 //         {stats?.length > 0 && (
-//           <div style={{ display: 'flex', gap: '36px', padding: '18px 0', borderTop: '1px solid rgba(255,255,255,0.1)', flexWrap: 'wrap' }}>
+//           <div style={{ display: 'flex', gap: 36, padding: '18px 0', borderTop: '1px solid rgba(255,255,255,0.1)', flexWrap: 'wrap' }}>
 //             {stats.map((st, i) => (
-//               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '16.25px', color: 'rgba(255,255,255,0.55)' }}>
-//                 <span style={{ fontWeight: 700, fontSize: '25px', color: 'white' }}>{st.value}</span> {st.label}
+//               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 16.25, color: 'rgba(255,255,255,0.55)' }}>
+//                 <span style={{ fontWeight: 700, fontSize: 25, color: '#fff' }}>{st.value}</span> {st.label}
 //               </div>
 //             ))}
 //           </div>
@@ -746,7 +1828,7 @@
 // const StripLink = ({ id, icon, label, onClick }) => {
 //   const t = useTheme();
 //   const [h, setH] = useState(false);
-//   const base = { display: 'flex', alignItems: 'center', gap: '6px', padding: '10px 16px', textDecoration: 'none', fontSize: '16.25px', fontWeight: 600, whiteSpace: 'nowrap', borderBottom: '2px solid transparent', transition: 'all 0.15s', color: t.stripTextColor };
+//   const base = { display: 'flex', alignItems: 'center', gap: 6, padding: '10px 16px', textDecoration: 'none', fontSize: 16.25, fontWeight: 600, whiteSpace: 'nowrap', borderBottom: '2px solid transparent', transition: 'all 0.15s', color: t.stripTextColor };
 //   const hov = { color: t.stripActiveColor, background: t.stripActiveBg, borderBottomColor: t.stripActiveBorder };
 //   return (
 //     <a href={`#${id}`} style={{ ...base, ...(h ? hov : {}) }} onClick={(e) => onClick(e, id)} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}>
@@ -759,7 +1841,7 @@
 // const TopicStrip = ({ sections }) => {
 //   const scrollTo = (e, id) => { e.preventDefault(); const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 10, behavior: 'smooth' }); };
 //   return (
-//     <nav style={{ background: '#ffffff', borderBottom: '1px solid #e0e0e0', padding: '0 48px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 0, position: 'sticky', top: `${NAVBAR_HEIGHT}px`, zIndex: 50, boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+//     <nav style={{ background: '#fff', borderBottom: '1px solid #e0e0e0', padding: '0 48px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 0, position: 'sticky', top: NAVBAR_HEIGHT, zIndex: 50, boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
 //       {sections.map((sec) => <StripLink key={sec.id} id={sec.id} icon={sec.navIcon} label={sec.title} onClick={scrollTo} />)}
 //     </nav>
 //   );
@@ -799,12 +1881,12 @@
 //     return all;
 //   }, [sections, sectionData]);
 
-//   const contentMargin = sidebarOpen ? `${SIDEBAR_EXPANDED}px` : `${SIDEBAR_COLLAPSED}px`;
+//   const contentMargin = sidebarOpen ? SIDEBAR_EXPANDED : SIDEBAR_COLLAPSED;
 
 //   return (
 //     <ThemeContext.Provider value={t}>
 //       <Sidebar sections={sections} subtopics={subtopics} brandName={meta.title} brandSub="Learn Math Class" open={sidebarOpen} onToggle={setSidebarOpen} />
-//       <div style={{ marginLeft: contentMargin, marginRight: rightOffset, marginTop: `${NAVBAR_HEIGHT}px`, minHeight: `calc(100vh - ${NAVBAR_HEIGHT}px)`, transition: 'margin-left 0.3s cubic-bezier(0.4,0,0.2,1)' }}>
+//       <div style={{ marginLeft: contentMargin, marginRight: rightOffset, marginTop: NAVBAR_HEIGHT, minHeight: `calc(100vh - ${NAVBAR_HEIGHT}px)`, transition: 'margin-left 0.3s cubic-bezier(0.4,0,0.2,1)' }}>
 //         <HeroBanner title={meta.title} subtitle={meta.subtitle} breadcrumbUrl={meta.breadcrumbUrl} stats={stats} sections={sections} />
 //         <TopicStrip sections={sections} />
 //         <ArticleBlock article={article} />
@@ -817,28 +1899,17 @@
 // export default SectionFrontPage;
 
 // export {
-//   ThemeContext,
-//   useTheme,
-//   NavIcon,
-//   EqualGrid,
-//   IntroProse,
-//   ArticleBlock,
-//   SectionNav,
-//   Sidebar,
-//   TopicStrip,
-//   SectionHeader,
-//   SectionFooterLink,
-//   CategoryCard,
-//   CalculatorCard,
-//   VisualToolCard,
-//   FormulaChip,
-//   DefinitionItem,
-//   placeholderSvgs,
-//   getPlaceholderSvg,
-//   NAVBAR_HEIGHT,
-//   SIDEBAR_COLLAPSED,
-//   SIDEBAR_EXPANDED,
+//   ThemeContext, useTheme,
+//   NavIcon, EqualGrid, IntroProse, CustomProseBlock, AugmentSlot,
+//   VisualSlot, SafeImage, hasVisual, isNonEmpty, pickVisualKind,
+//   ArticleBlock, SectionNav, Sidebar, TopicStrip,
+//   SectionHeader, SectionFooterLink,
+//   CategoryCard, CalculatorCard, VisualToolCard,
+//   FormulaChip, DefinitionItem, ProseSection,
+//   placeholderSvgs, getPlaceholderSvg,
+//   NAVBAR_HEIGHT, SIDEBAR_COLLAPSED, SIDEBAR_EXPANDED,
 // };
+
 
 
 
@@ -857,9 +1928,6 @@ const useTheme = () => useContext(ThemeContext);
 
 /* ================================================================
    VISUAL SYSTEM
-   Rule: image / svg / icon are ALL optional. Pass any one, none, or
-   nothing — components render only what's actually there.
-   No broken images. No empty boxes. Ever.
    ================================================================ */
 
 const isNonEmpty = (v) => {
@@ -875,10 +1943,6 @@ const pickVisualKind = ({ image, svg, icon }) => {
   return null;
 };
 
-/**
- * Preloads an image off-DOM. Renders <Image> only after confirmed load.
- * On fail/loading: renders fallback (svg string) or null. No flash.
- */
 const SafeImage = ({ src, alt, sizes, fallbackSvg }) => {
   const [status, setStatus] = useState('loading');
 
@@ -970,9 +2034,7 @@ const NavIcon = ({ icon, size = 16, color = 'currentColor' }) => {
 
 
 /* ================================================================
-   VisualSlot — renders a visual ONLY if there's something to show.
-   Returns null otherwise. The caller should also check
-   `hasVisual({...})` before allocating space for the slot.
+   VisualSlot
    ================================================================ */
 
 const hasVisual = ({ image, svg, icon }) => pickVisualKind({ image, svg, icon }) !== null;
@@ -1037,7 +2099,6 @@ const EqualGrid = ({ children }) => {
 
 /* ================================================================
    INTRO PROSE
-   No visual provided → text fills the row. Period.
    ================================================================ */
 
 const IntroProse = ({ content, image, imageAlt, svg, icon, layout = 'horizontal', imagePosition = 'right' }) => {
@@ -1089,6 +2150,53 @@ const IntroProse = ({ content, image, imageAlt, svg, icon, layout = 'horizontal'
       {visualFirst ? <>{VisualEl}{TextEl}</> : <>{TextEl}{VisualEl}</>}
     </div>
   );
+};
+
+
+/* ================================================================
+   CUSTOM PROSE BLOCK
+   Renders a developer-authored string (markdown / HTML) through the
+   existing processContent pipeline. Used by augment / replace /
+   prose-only modes.
+   ================================================================ */
+
+const CustomProseBlock = ({ body, variant = 'default' }) => {
+  const t = useTheme();
+  if (!isNonEmpty(body)) return null;
+
+  // Long-form prose for prose-only / replace: no left rule, fuller width.
+  // Short framing prose for augment: matches the IntroProse left-rule look.
+  const isFraming = variant === 'augment';
+
+  const baseStyle = isFraming
+    ? {
+        fontFamily: "'Source Serif 4', Georgia, serif",
+        fontSize: '1.15rem',
+        lineHeight: 1.75,
+        color: t.textSecondary,
+        borderLeft: `3px solid ${t.cardAccent}`,
+        paddingLeft: 28,
+        paddingTop: 8,
+        paddingBottom: 8,
+        marginBottom: 24,
+      }
+    : {
+        fontFamily: "'Source Serif 4', Georgia, serif",
+        fontSize: '1.15rem',
+        lineHeight: 1.8,
+        color: t.textPrimary,
+        marginBottom: 24,
+      };
+
+  // For string bodies we use dangerouslySetInnerHTML — deterministic on
+  // server and client, bypasses any processing layer that might cause a
+  // hydration mismatch. Developer-authored HTML is rendered as-is.
+  if (typeof body === 'string') {
+    return <div style={baseStyle} dangerouslySetInnerHTML={{ __html: body }} />;
+  }
+
+  // Non-string body (future use: pre-rendered React node) renders directly.
+  return <div style={baseStyle}>{body}</div>;
 };
 
 
@@ -1158,7 +2266,19 @@ const SectionNav = ({ sections, currentIndex }) => {
 
 
 /* ================================================================
-   CARDS — visual area renders ONLY when something is provided.
+   AUGMENT SLOTS
+   Helper for renderers that support 'augment' mode.
+   ================================================================ */
+
+const AugmentSlot = ({ section, position }) => {
+  if (section.custom?.mode !== 'augment') return null;
+  if ((section.custom.position || 'before') !== position) return null;
+  return <CustomProseBlock body={section.custom.body} variant="augment" />;
+};
+
+
+/* ================================================================
+   CARDS
    ================================================================ */
 
 const CategoryCard = ({ title, count, description, href, onClick, image, imageAlt, svg, icon }) => {
@@ -1357,11 +2477,13 @@ const VisualToolsSection = ({ section, sections, currentIndex, data }) => {
     <section id={section.id} style={secStyle}>
       <SectionHeader title={section.title} badge={`${children.length} tools`} link={section.link} linkText={`Explore ${section.title}`} />
       <SectionIntro section={section} />
+      <AugmentSlot section={section} position="before" />
       {children.length > 0 && (
         <EqualGrid>
           {children.map((ch, i) => <VisualToolCard key={i} title={ch.title} description={ch.description} href={ch.href} image={ch.image} imageAlt={ch.imageAlt} svg={ch.svg} icon={ch.icon} previewIndex={i} />)}
         </EqualGrid>
       )}
+      <AugmentSlot section={section} position="after" />
       <SectionFooterLink link={section.link} linkText={`Explore ${section.title}`} />
       <SectionNav sections={sections} currentIndex={currentIndex} />
     </section>
@@ -1374,11 +2496,13 @@ const CalculatorsSection = ({ section, sections, currentIndex, data }) => {
     <section id={section.id} style={secStyle}>
       <SectionHeader title={section.title} badge={`${children.length} tools`} link={section.link} linkText={`Explore ${section.title}`} />
       <SectionIntro section={section} />
+      <AugmentSlot section={section} position="before" />
       {children.length > 0 && (
         <EqualGrid>
           {children.map((ch, i) => <CalculatorCard key={i} title={ch.title} description={ch.description} href={ch.href} image={ch.image} imageAlt={ch.imageAlt} svg={ch.svg} icon={ch.icon} />)}
         </EqualGrid>
       )}
+      <AugmentSlot section={section} position="after" />
       <SectionFooterLink link={section.link} linkText={`Explore ${section.title}`} />
       <SectionNav sections={sections} currentIndex={currentIndex} />
     </section>
@@ -1392,6 +2516,7 @@ const FormulasSection = ({ section, sections, currentIndex, data, categoryExplan
     <section id={section.id} style={secStyle}>
       <SectionHeader title={section.title} badge={`${totalCount} items`} link={section.link} linkText={`See All ${section.title}`} />
       <SectionIntro section={section} contentKey="introContent" />
+      <AugmentSlot section={section} position="before" />
       {categories.length > 0 && (
         <EqualGrid>
           {categories.map((c) => <CategoryCard key={c.key} title={c.name} count={c.count} description={categoryExplanations?.[c.name]} onClick={() => scrollCat(c.key)} />)}
@@ -1409,6 +2534,7 @@ const FormulasSection = ({ section, sections, currentIndex, data, categoryExplan
           </div>
         );
       })}
+      <AugmentSlot section={section} position="after" />
       <SectionFooterLink link={section.link} linkText={`View All ${section.title}`} />
       <SectionNav sections={sections} currentIndex={currentIndex} />
     </section>
@@ -1422,6 +2548,7 @@ const DefinitionsSection = ({ section, sections, currentIndex, data, categoryExp
     <section id={section.id} style={secStyle}>
       <SectionHeader title={section.title} badge={`${totalCount} items`} link={section.link} linkText={`See All ${section.title}`} />
       <SectionIntro section={section} contentKey="introContent" />
+      <AugmentSlot section={section} position="before" />
       {categories.length > 0 && (
         <EqualGrid>
           {categories.map((c) => <CategoryCard key={c.key} title={c.name} count={c.count} description={categoryExplanations?.[c.name]} onClick={() => scrollCat(c.key)} />)}
@@ -1439,6 +2566,7 @@ const DefinitionsSection = ({ section, sections, currentIndex, data, categoryExp
           </div>
         );
       })}
+      <AugmentSlot section={section} position="after" />
       <SectionFooterLink link={section.link} linkText={`View All ${section.title}`} />
       <SectionNav sections={sections} currentIndex={currentIndex} />
     </section>
@@ -1449,6 +2577,8 @@ const EditorialSection = ({ section, sections, currentIndex }) => (
   <section id={section.id} style={secStyle}>
     <SectionHeader title={section.title} link={section.link} linkText={section.linkText} />
     <SectionIntro section={section} />
+    <AugmentSlot section={section} position="before" />
+    <AugmentSlot section={section} position="after" />
     <SectionFooterLink link={section.link} linkText={section.linkText || `Explore ${section.title}`} />
     <SectionNav sections={sections} currentIndex={currentIndex} />
   </section>
@@ -1458,11 +2588,13 @@ const StandaloneSection = ({ section, sections, currentIndex }) => (
   <section id={section.id} style={secStyle}>
     <SectionHeader title={section.title} link={section.link} linkText={`Explore ${section.title}`} />
     <SectionIntro section={section} />
+    <AugmentSlot section={section} position="before" />
     {section.formulas?.length > 0 && (
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10, margin: '16px 0' }}>
         {section.formulas.map((f, i) => <FormulaChip key={i} label={f.title} tex={f.formula} />)}
       </div>
     )}
+    <AugmentSlot section={section} position="after" />
     <SectionFooterLink link={section.link} linkText={`Explore ${section.title}`} />
     <SectionNav sections={sections} currentIndex={currentIndex} />
   </section>
@@ -1474,12 +2606,31 @@ const SubsectionSection = ({ section, sections, currentIndex, data }) => {
     <section id={section.id} style={secStyle}>
       <SectionHeader title={section.title} link={section.link} linkText={`Explore ${section.title}`} />
       <SectionIntro section={section} />
+      <AugmentSlot section={section} position="before" />
       {children.length > 0 && (
         <EqualGrid>
           {children.map((ch, i) => <CategoryCard key={i} title={ch.title} description={ch.description} href={ch.href} image={ch.image} imageAlt={ch.imageAlt || ch.title} svg={ch.svg} icon={ch.icon} />)}
         </EqualGrid>
       )}
+      <AugmentSlot section={section} position="after" />
       <SectionFooterLink link={section.link} linkText={`Explore ${section.title}`} />
+      <SectionNav sections={sections} currentIndex={currentIndex} />
+    </section>
+  );
+};
+
+/**
+ * ProseSection — renders 'replace' and 'prose-only' modes.
+ *  - replace    : section came from auto-discovery; we keep header/footer/nav
+ *                 but swap the auto grid for the developer's prose body.
+ *  - prose-only : synthesized section; same shell, body is the entire content.
+ */
+const ProseSection = ({ section, sections, currentIndex }) => {
+  return (
+    <section id={section.id} style={secStyle}>
+      <SectionHeader title={section.title} link={section.link} linkText={section.linkText} />
+      <CustomProseBlock body={section.custom?.body} variant="default" />
+      <SectionFooterLink link={section.link} linkText={section.linkText} />
       <SectionNav sections={sections} currentIndex={currentIndex} />
     </section>
   );
@@ -1498,19 +2649,23 @@ const renderers = {
   subsection: SubsectionSection,
   calculators: CalculatorsSection,
   'visual-tools': VisualToolsSection,
+  'prose-only': ProseSection,
 };
-
-const TYPE_ORDER = { 'visual-tools': 0, 'formulas': 1, 'definitions': 2, 'editorial': 3, 'standalone': 4, 'subsection': 5, 'calculators': 6 };
 
 const SectionsContainer = ({ sections, sectionData }) => {
   const t = useTheme();
-  const sorted = useMemo(() => [...sections].sort((a, b) => (TYPE_ORDER[a.type] ?? 5) - (TYPE_ORDER[b.type] ?? 5)), [sections]);
+  // Order is now decided in buildSectionData (so prose-only insertions
+  // are honored). We render in the order received.
   return (
     <div style={{ maxWidth: 1200, margin: '0 auto', padding: '40px 48px 80px', background: t.contentBg }}>
-      {sorted.map((section, index) => {
+      {sections.map((section, index) => {
+        // 'replace' mode: route to ProseSection regardless of original type.
+        if (section.custom?.mode === 'replace') {
+          return <ProseSection key={section.id} section={section} sections={sections} currentIndex={index} />;
+        }
         const R = renderers[section.type];
         if (!R) { console.warn(`No renderer for type: ${section.type}`); return null; }
-        return <R key={section.id} section={section} sections={sorted} currentIndex={index} data={sectionData?.[section.id]} categoryExplanations={section.categoryExplanations} />;
+        return <R key={section.id} section={section} sections={sections} currentIndex={index} data={sectionData?.[section.id]} categoryExplanations={section.categoryExplanations} />;
       })}
     </div>
   );
@@ -1747,12 +2902,12 @@ export default SectionFrontPage;
 
 export {
   ThemeContext, useTheme,
-  NavIcon, EqualGrid, IntroProse,
+  NavIcon, EqualGrid, IntroProse, CustomProseBlock, AugmentSlot,
   VisualSlot, SafeImage, hasVisual, isNonEmpty, pickVisualKind,
   ArticleBlock, SectionNav, Sidebar, TopicStrip,
   SectionHeader, SectionFooterLink,
   CategoryCard, CalculatorCard, VisualToolCard,
-  FormulaChip, DefinitionItem,
+  FormulaChip, DefinitionItem, ProseSection,
   placeholderSvgs, getPlaceholderSvg,
   NAVBAR_HEIGHT, SIDEBAR_COLLAPSED, SIDEBAR_EXPANDED,
 };
