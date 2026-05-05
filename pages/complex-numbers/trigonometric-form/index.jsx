@@ -72,6 +72,20 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
+      obj0: {
+  title: `Key Terms`,
+  content: `
+- [Trigonometric Form](!/complex-numbers/definitions#trigonometric_form) — representation as $r(\\cos\\theta + i\\sin\\theta)$
+- [Modulus](!/complex-numbers/definitions#modulus) — the radius $r = |z|$
+- [Argument](!/complex-numbers/definitions#argument) — the angle $\\theta$ determining direction
+- [Algebraic Form](!/complex-numbers/definitions#algebraic_form) — the rectangular counterpart $a + bi$
+- [Exponential Form](!/complex-numbers/definitions#exponential_form) — the compact equivalent $re^{i\\theta}$`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Definitions](!/complex-numbers/definitions) →@`,
+  link: '',
+},
+
   
     obj1: {
   title: `Why a New Representation?`,
@@ -629,20 +643,7 @@ const schemas = {
 }
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Trigonometric Form | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/complex-numbers/trigonometric-form",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
+  
 
   return {
   props:{
@@ -661,7 +662,6 @@ const schemas = {
 }
    }
 
-// export default function TrigoFormPage({seoData,sectionsContent , introContent}) {
 export default function TrigoFormPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
@@ -814,49 +814,7 @@ export default function TrigoFormPage({seoData, sectionsContent, introContent, f
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
   
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
 <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
@@ -933,8 +891,15 @@ export default function TrigoFormPage({seoData, sectionsContent, introContent, f
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+           id="0"
+           title={sectionsContent.obj0.title}
+           content={sectionsContent.obj0.content}
+           after={sectionsContent.obj0.after}
+           variant="light"
+         />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

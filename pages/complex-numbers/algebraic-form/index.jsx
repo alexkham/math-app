@@ -72,16 +72,19 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
-
+   obj0: {
+  title: `Key Terms`,
+  content: `
+- [Algebraic Form](!/complex-numbers/definitions#algebraic_form) — the standard representation $z = a + bi$
+- [Real Part](!/complex-numbers/definitions#real_part) — the component $a$ in $z = a + bi$
+- [Imaginary Part](!/complex-numbers/definitions#imaginary_part) — the coefficient $b$ in $z = a + bi$
+- [Complex Number](!/complex-numbers/definitions#complex_number) — any number expressible in algebraic form
+- [Complex Conjugate](!/complex-numbers/definitions#complex_conjugate) — obtained by negating the imaginary part`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Definitions](!/complex-numbers/definitions) →@`,
+  link: '',
+},
     obj1: {
   title: `The Standard Form of a Complex Number`,
   before: ``,
@@ -98,15 +101,7 @@ Special cases deserve mention. When $b = 0$, the imaginary term vanishes and $z 
   link: '',
 },
 
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
-
     obj2: {
   title: `Real and Imaginary Parts: Formal Notation`,
   before: ``,
@@ -123,15 +118,7 @@ Both $Re$ and $Im$ are functions from $\\mathbb{C}$ to $\\mathbb{R}$. They accep
   link: '',
 },
   
-    // obj3:{
-  
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj3: {
   title: `Equality of Complex Numbers`,
@@ -148,14 +135,7 @@ The equality criterion also explains why complex numbers cannot be ordered. With
   after: ``,
   link: '',
 },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj4: {
   title: `The Complex Conjugate`,
@@ -171,14 +151,7 @@ The conjugate appears throughout complex analysis — in [division](!/complex-nu
   link: '',
 },
 
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
 
     obj5: {
@@ -198,14 +171,7 @@ These rules prove essential when simplifying expressions, verifying identities, 
 },
 
 
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
 
     obj6: {
@@ -221,15 +187,7 @@ Both theorems connect the conjugate operation to fundamental classification ques
   after: ``,
   link: '',
 },
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+   
     obj7: {
   title: `Useful Identities with Conjugates`,
   before: ``,
@@ -511,22 +469,6 @@ const schemas = {
 
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Algebraic Form Page  | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/complex-numbers/algebraic-form",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
-
-
   return {
   props:{
     sectionsContent,
@@ -544,7 +486,6 @@ const schemas = {
 }
    }
 
-// export default function AlgebraicFormPage({seoData,sectionsContent , introContent}) {
 
 export default function AlgebraicFormPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
@@ -715,50 +656,7 @@ export default function AlgebraicFormPage({seoData, sectionsContent, introConten
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
-
+ 
 <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
@@ -836,8 +734,15 @@ export default function AlgebraicFormPage({seoData, sectionsContent, introConten
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+           id="0"
+           title={sectionsContent.obj0.title}
+           content={sectionsContent.obj0.content}
+           after={sectionsContent.obj0.after}
+           variant="light"
+         />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

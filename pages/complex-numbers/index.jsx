@@ -31,6 +31,39 @@ export async function getStaticProps(){
   ]
 
     const sectionsContent={
+      obj0: {
+  title: `Key Terms`,
+  content: `
+## Foundations
+ 
+- [Complex Number](!/complex-numbers/definitions#complex_number) — a number of the form $z = a + bi$
+- [Imaginary Unit](!/complex-numbers/definitions#imaginary_unit) — the number $i$ satisfying $i^2 = -1$
+- [Imaginary Number](!/complex-numbers/definitions#imaginary_number) — a number of the form $bi$ with $b \\neq 0$
+- [Pure Imaginary Number](!/complex-numbers/definitions#pure_imaginary_number) — a complex number with zero real part
+- [Real Part](!/complex-numbers/definitions#real_part) — the component $a$ in $z = a + bi$
+- [Imaginary Part](!/complex-numbers/definitions#imaginary_part) — the coefficient $b$ in $z = a + bi$
+- [Algebraic Form](!/complex-numbers/definitions#algebraic_form) — the standard representation $z = a + bi$
+ 
+## Representations
+ 
+- [Complex Plane](!/complex-numbers/definitions#complex_plane) — the two-dimensional plane for visualizing complex numbers
+- [Modulus](!/complex-numbers/definitions#modulus) — the distance $|z|$ from the origin
+- [Argument](!/complex-numbers/definitions#argument) — the angle $\\theta$ from the positive real axis
+- [Trigonometric Form](!/complex-numbers/definitions#trigonometric_form) — representation as $r(\\cos\\theta + i\\sin\\theta)$
+- [Exponential Form](!/complex-numbers/definitions#exponential_form) — representation as $re^{i\\theta}$
+ 
+## Operations & Structure
+ 
+- [Complex Conjugate](!/complex-numbers/definitions#complex_conjugate) — the reflection $\\overline{z} = a - bi$
+- [Additive Inverse](!/complex-numbers/definitions#additive_inverse) — the number $-z$ that sums to zero
+- [Multiplicative Inverse](!/complex-numbers/definitions#multiplicative_inverse) — the number $z^{-1}$ that multiplies to one
+- [Roots of Unity](!/complex-numbers/definitions#roots_of_unity) — solutions to $z^n = 1$`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Definitions](!/complex-numbers/definitions) →@`,
+  link: '',
+},
+ 
 
     obj1: {
   title: `The Imaginary Unit ($i$) and Pure Imaginary Numbers`,
@@ -551,8 +584,15 @@ export default function ComplexNumbersPage({seoData, sectionsContent, introConte
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+           id="0"
+           title={sectionsContent.obj0.title}
+           content={sectionsContent.obj0.content}
+           after={sectionsContent.obj0.after}
+           variant="light"
+         />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

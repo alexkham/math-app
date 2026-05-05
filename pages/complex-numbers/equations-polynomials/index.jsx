@@ -72,16 +72,18 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
-
+    obj0: {
+  title: `Key Terms`,
+  content: `
+- [Roots of Unity](!/complex-numbers/definitions#roots_of_unity) — solutions to $z^n = 1$
+- [Complex Conjugate](!/complex-numbers/definitions#complex_conjugate) — roots of real-coefficient polynomials come in conjugate pairs
+- [Exponential Form](!/complex-numbers/definitions#exponential_form) — used to express $n$th roots
+- [Modulus](!/complex-numbers/definitions#modulus) — all roots of unity have modulus $1$`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Definitions](!/complex-numbers/definitions) →@`,
+  link: '',
+},
     obj1: {
   title: `Polynomial Equations with Complex Solutions`,
   before: ``,
@@ -97,15 +99,7 @@ The pattern holds universally: every polynomial equation of degree $n$ has exact
   after: ``,
   link: '',
 },
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+   
     obj2: {
   title: `The Fundamental Theorem of Algebra`,
   before: ``,
@@ -126,15 +120,7 @@ The theorem's proof lies beyond elementary methods, requiring tools from analysi
   link: '',
 },
   
-    // obj3:{
   
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
 
     obj3: {
   title: `Factoring Polynomials over $\\mathbb{C}$`,
@@ -157,14 +143,7 @@ Every polynomial admits such complete factorization. Real polynomials may resist
   after: ``,
   link: '',
 },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj4: {
   title: `Vieta's Formulas`,
@@ -189,15 +168,7 @@ These formulas prove useful in both directions. Given a polynomial, we can compu
   after: ``,
   link: '',
 },
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+   
     obj5: {
   title: `Polynomials with Real Coefficients`,
   before: ``,
@@ -219,14 +190,8 @@ This explains why every real cubic crosses the real axis: it must have either th
   after: ``,
   link: '',
 },
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
+    
 
     obj6: {
   title: `Quadratic Equations with Complex Coefficients`,
@@ -253,14 +218,7 @@ The process is lengthier than real quadratics but entirely systematic. Every qua
   after: ``,
   link: '',
 },
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj7: {
   title: `Solving $z^n = w$`,
@@ -291,15 +249,7 @@ Four roots forming a square on a circle of radius $2$, rotated $45°$ from the a
   after: ``,
   link: '',
 },
-    // obj8:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+   
     obj8: {
   title: `Solving $z^n = \\bar{z}$`,
   before: ``,
@@ -330,14 +280,7 @@ Solutions: $z = 0$, $z = 1$, $z = \\text{cis}(120°) = -\\frac{1}{2} + \\frac{\\
   after: ``,
   link: '',
 },
-    // obj9:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj9: {
   title: `Equations Involving Conjugates`,
@@ -365,14 +308,7 @@ This geometric approach often simplifies what algebraic manipulation would make 
   after: ``,
   link: '',
 },
-    // obj10:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+    
 
     obj10: {
   title: `Applications`,
@@ -582,20 +518,7 @@ const schemas = {
 }
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Equations and Polynomials | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/complex-numbers/equations-polynomials",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
+
 
   return {
   props:{
@@ -614,7 +537,6 @@ const schemas = {
 }
    }
 
-// export default function EquationsPolynomialsPage({seoData,sectionsContent , introContent}) {
 
 export default function EquationsPolynomialsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) { 
 
@@ -769,49 +691,7 @@ export default function EquationsPolynomialsPage({seoData, sectionsContent, intr
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
+ 
 
 <Head>
   <title>{seoData.title}</title>
@@ -889,8 +769,15 @@ export default function EquationsPolynomialsPage({seoData, sectionsContent, intr
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+           id="0"
+           title={sectionsContent.obj0.title}
+           content={sectionsContent.obj0.content}
+           after={sectionsContent.obj0.after}
+           variant="light"
+         />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

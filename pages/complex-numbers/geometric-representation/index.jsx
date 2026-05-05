@@ -71,16 +71,19 @@ export async function getStaticProps(){
 //                   }} />
 
     const sectionsContent={
-
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
+obj0: {
+  title: `Key Terms`,
+  content: `
+- [Complex Plane](!/complex-numbers/definitions#complex_plane) — the two-dimensional plane for plotting complex numbers
+- [Modulus](!/complex-numbers/definitions#modulus) — distance from the origin to a point
+- [Argument](!/complex-numbers/definitions#argument) — angle from the positive real axis
+- [Real Part](!/complex-numbers/definitions#real_part) — horizontal coordinate in the complex plane
+- [Imaginary Part](!/complex-numbers/definitions#imaginary_part) — vertical coordinate in the complex plane`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Definitions](!/complex-numbers/definitions) →@`,
+  link: '',
+},
 
     obj1: {
   title: `From Algebra to Geometry`,
@@ -96,14 +99,7 @@ The identification of complex numbers with points transforms algebra into geomet
   link: '',
 },
 
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+ 
 
     obj2: {
   title: `The Two Axes`,
@@ -121,15 +117,7 @@ Every other complex number — those with both $a \\neq 0$ and $b \\neq 0$ — l
   link: '',
 },
   
-    // obj3:{
   
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
 
     obj3: {
   title: `Plotting Complex Numbers`,
@@ -146,14 +134,7 @@ Complex numbers expressed differently may occupy the same point. The number $\\f
   after: ``,
   link: '',
 },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj4: {
   title: `Complex Numbers as Vectors`,
@@ -171,14 +152,7 @@ The vector interpretation makes the [modulus](!/complex-numbers/absolute-value) 
   link: '',
 },
 
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+ 
 
     obj5: {
   title: `Visualizing the Conjugate`,
@@ -193,14 +167,7 @@ The reflection perspective explains several algebraic facts geometrically. Takin
   after: ``,
   link: '',
 },
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj6: {
   title: `The Lack of Order in $\\mathbb{C}$`,
@@ -215,14 +182,7 @@ One meaningful comparison survives: the [modulus](!/complex-numbers/absolute-val
   after: ``,
   link: '',
 },
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj7: {
   title: `Visualizing Operations`,
@@ -461,20 +421,7 @@ const schemas = {
   }
 }
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Geometric Representation | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/complex-numbers/geometric-representation",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
+ 
 
   return {
   props:{
@@ -493,7 +440,6 @@ const schemas = {
 }
    }
 
-// export default function GeometricRepresentationPage({seoData,sectionsContent , introContent}) {
 export default function GeometricRepresentationPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
@@ -646,50 +592,7 @@ export default function GeometricRepresentationPage({seoData, sectionsContent, i
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
   
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
-
 <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
@@ -767,8 +670,15 @@ export default function GeometricRepresentationPage({seoData, sectionsContent, i
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+           id="0"
+           title={sectionsContent.obj0.title}
+           content={sectionsContent.obj0.content}
+           after={sectionsContent.obj0.after}
+           variant="light"
+         />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

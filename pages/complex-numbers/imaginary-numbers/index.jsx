@@ -72,15 +72,18 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
+   obj0: {
+  title: `Key Terms`,
+  content: `
+- [Imaginary Unit](!/complex-numbers/definitions#imaginary_unit) — the number $i$ satisfying $i^2 = -1$
+- [Imaginary Number](!/complex-numbers/definitions#imaginary_number) — a real multiple of $i$
+- [Pure Imaginary Number](!/complex-numbers/definitions#pure_imaginary_number) — a complex number with zero real part
+- [Complex Number](!/complex-numbers/definitions#complex_number) — the broader system containing all imaginary numbers`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Definitions](!/complex-numbers/definitions) →@`,
+  link: '',
+},
 
     obj1: {
   title: `The Necessity of a New Number System`,
@@ -97,15 +100,7 @@ An equivalent notation writes $i = \\sqrt{-1}$, interpreting $i$ as the principa
 },
 
 
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
-
 
     obj2: {
   title: `Simplifying Square Roots of Negative Numbers`,
@@ -121,15 +116,7 @@ One critical warning accompanies this technique: the familiar product rule for r
   link: '',
 },
   
-    // obj3:{
   
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
 
 
     obj3: {
@@ -147,14 +134,7 @@ The number zero occupies a unique position in this classification. Written as $0
 },
 
 
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj4: {
   title: `Critical Distinction: The "Imaginary Part" is Real`,
@@ -172,15 +152,8 @@ A reliable rule of thumb: when identifying the imaginary part of any complex num
   link: '',
 },
 
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
-
+   
     obj5: {
   title: `The Cyclic Nature of the Powers of $i$`,
   before: ``,
@@ -200,14 +173,7 @@ Negative exponents follow the same logic after one preliminary step. Recall that
 },
 
 
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+
 
     obj6: {
   title: `Geometric Visualization: The Imaginary Axis`,
@@ -226,14 +192,7 @@ The origin deserves special attention in this picture. Located at $(0, 0)$, it r
 },
 
 
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj7: {
   title: `Mathematical Properties and Conjugates`,
@@ -476,21 +435,7 @@ const schemas = {
 }
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Imaginary Numbers | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/complex-numbers/imaginary-numbers",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
-
+  
 
   return {
   props:{
@@ -509,7 +454,6 @@ const schemas = {
 }
    }
 
-// export default function ImaginaryNumbersPage({seoData,sectionsContent , introContent}) {
 
 
 export default function ImaginaryNumbersPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
@@ -664,50 +608,7 @@ export default function ImaginaryNumbersPage({seoData, sectionsContent, introCon
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
-
+ 
 <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
@@ -785,8 +686,15 @@ export default function ImaginaryNumbersPage({seoData, sectionsContent, introCon
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+           id="0"
+           title={sectionsContent.obj0.title}
+           content={sectionsContent.obj0.content}
+           after={sectionsContent.obj0.after}
+           variant="light"
+         />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

@@ -71,15 +71,18 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
+    obj0: {
+  title: `Key Terms`,
+  content: `
+- [Complex Number](!/complex-numbers/definitions#complex_number) — elements of the field $\\mathbb{C}$
+- [Additive Inverse](!/complex-numbers/definitions#additive_inverse) — guarantees subtraction in $\\mathbb{C}$
+- [Multiplicative Inverse](!/complex-numbers/definitions#multiplicative_inverse) — guarantees division for nonzero elements
+- [Modulus](!/complex-numbers/definitions#modulus) — underpins the metric structure of $\\mathbb{C}$`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Definitions](!/complex-numbers/definitions) →@`,
+  link: '',
+},
 
     obj1: {
   title: `Overview of Complex Number Properties`,
@@ -198,14 +201,7 @@ These eleven properties guarantee that complex arithmetic behaves consistently a
   after: ``,
   link: '',
 },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj4: {
   title: `Properties of the Conjugate`,
@@ -252,15 +248,7 @@ A complex number multiplied by its conjugate yields the square of its [modulus](
   after: ``,
   link: '',
 },
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+   
     obj5: {
   title: `Properties of the Modulus`,
   content: `The [modulus](!/complex-numbers/absolute-value) $|z|$ of $z = a + bi$ is $|z| = \\sqrt{a^2 + b^2}$, representing the distance from the origin to $z$ in the complex plane.
@@ -308,15 +296,7 @@ The difference of moduli never exceeds the modulus of the difference.`,
   after: ``,
   link: '',
 },
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+   
     obj6: {
   title: `Properties of the Argument`,
   content: `The [argument](!/complex-numbers/trigonometric-form) $\\arg(z)$ is the angle from the positive real axis to the line connecting the origin to $z$. Arguments are determined only up to multiples of $2\\pi$, so the following properties hold modulo $2\\pi$.
@@ -358,14 +338,7 @@ Since $\\arg(z)$ is defined only up to $2\\pi k$ for integer $k$, these equaliti
   after: ``,
   link: '',
 },
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj7: {
   title: `Algebraic Closure`,
@@ -396,14 +369,7 @@ For more on polynomial roots, see [equations and polynomials](!/complex-numbers/
   after: ``,
   link: '',
 },
-    // obj8:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+    
 
     obj8: {
   title: `What Complex Numbers Lack`,
@@ -643,20 +609,7 @@ const schemas = {
 }
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Properties of Complex Numbers | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/complex-numbers/properties",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
+ 
 
   return {
   props:{
@@ -675,7 +628,6 @@ const schemas = {
 }
    }
 
-// export default function PropertiesPage({seoData,sectionsContent , introContent}) {
 
 export default function PropertiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
@@ -829,49 +781,7 @@ export default function PropertiesPage({seoData, sectionsContent, introContent, 
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
+
 
 <Head>
   <title>{seoData.title}</title>
@@ -950,8 +860,15 @@ export default function PropertiesPage({seoData, sectionsContent, introContent, 
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+           id="0"
+           title={sectionsContent.obj0.title}
+           content={sectionsContent.obj0.content}
+           after={sectionsContent.obj0.after}
+           variant="light"
+         />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

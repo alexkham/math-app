@@ -72,15 +72,18 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-    // obj1:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-  
-    // },
+   obj0: {
+  title: `Key Terms`,
+  content: `
+- [Modulus](!/complex-numbers/definitions#modulus) — the absolute value $|z| = \\sqrt{a^2 + b^2}$
+- [Complex Plane](!/complex-numbers/definitions#complex_plane) — where modulus measures distance
+- [Complex Conjugate](!/complex-numbers/definitions#complex_conjugate) — connected via $|z|^2 = z \\cdot \\overline{z}$`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Definitions](!/complex-numbers/definitions) →@`,
+  link: '',
+},
+ 
 
     obj1: {
   title: `Definition of Modulus`,
@@ -101,14 +104,7 @@ The geometric picture makes modulus tangible. Draw the point, draw the line segm
 },
 
 
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
   
-    // },
 
     obj2: {
   title: `Special Cases`,
@@ -125,15 +121,7 @@ The complex number zero stands alone with modulus zero. Since $0 = 0 + 0i$, we h
 },
 
   
-    // obj3:{
-  
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+
 
     obj3: {
   title: `Modulus and the Conjugate`,
@@ -158,14 +146,7 @@ The denominator becomes the real number $|z|^2$, converting the quotient to stan
   after: ``,
   link: '',
 },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj4: {
   title: `Properties of Modulus`,
@@ -186,14 +167,7 @@ These rules transform modulus from a mere distance measurement into a powerful a
   after: ``,
   link: '',
 },
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+ 
 
     obj5: {
   title: `The Triangle Inequality`,
@@ -214,15 +188,7 @@ The inequality extends to any finite sum: $|z_1 + z_2 + \\cdots + z_n| \\leq |z_
   after: ``,
   link: '',
 },
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
+   
 
     obj6: {
   title: `Proving the Triangle Inequality`,
@@ -251,14 +217,7 @@ Equality holds precisely when $\\text{Re}(z_1\\bar{z_2}) = |z_1\\bar{z_2}|$, whi
   after: ``,
   link: '',
 },
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj7: {
   title: `The Reverse Triangle Inequality`,
@@ -283,14 +242,7 @@ The geometric interpretation: $|z_1 - z_2|$ measures the distance between two po
   after: ``,
   link: '',
 },
-    // obj8:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj8: {
   title: `Applications`,
@@ -515,20 +467,7 @@ const schemas = {
 }
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Absolute Value of Complex Numbers | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/complex-numbers/absolute-value",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
+ 
 
   return {
   props:{
@@ -547,7 +486,6 @@ const schemas = {
 }
    }
 
-// export default function AbsoluteValuePage({seoData,sectionsContent , introContent}) {
 
 
 export default function AbsoluteValuePage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
@@ -702,49 +640,6 @@ export default function AbsoluteValuePage({seoData, sectionsContent, introConten
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
 
 <Head>
   <title>{seoData.title}</title>
@@ -823,8 +718,15 @@ export default function AbsoluteValuePage({seoData, sectionsContent, introConten
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+           id="0"
+           title={sectionsContent.obj0.title}
+           content={sectionsContent.obj0.content}
+           after={sectionsContent.obj0.after}
+           variant="light"
+         />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

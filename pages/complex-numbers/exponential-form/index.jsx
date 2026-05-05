@@ -72,7 +72,19 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
-  
+  obj0: {
+  title: `Key Terms`,
+  content: `
+- [Exponential Form](!/complex-numbers/definitions#exponential_form) — representation as $re^{i\\theta}$
+- [Modulus](!/complex-numbers/definitions#modulus) — the scaling factor $r$
+- [Argument](!/complex-numbers/definitions#argument) — the exponent angle $\\theta$
+- [Trigonometric Form](!/complex-numbers/definitions#trigonometric_form) — the expanded equivalent using $\\cos$ and $\\sin$
+- [Roots of Unity](!/complex-numbers/definitions#roots_of_unity) — naturally expressed in exponential form`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Numbers Definitions](!/complex-numbers/definitions) →@`,
+  link: '',
+},
 
     obj1: {
   title: `Euler's Formula`,
@@ -307,14 +319,7 @@ The exponential formula makes root extraction systematic: convert to exponential
   after: ``,
   link: '',
 },
-    // obj10:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
+   
 
     obj10: {
   title: `Why Exponential Form Matters`,
@@ -527,20 +532,7 @@ const schemas = {
 }
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Exponential Form | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/complex-numbers/exponential-form",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
+
 
   return {
   props:{
@@ -559,7 +551,6 @@ const schemas = {
 }
    }
 
-// export default function ExponentialFormPage({seoData,sectionsContent , introContent}) {
 
 export default function ExponentialFormPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
@@ -713,49 +704,7 @@ export default function ExponentialFormPage({seoData, sectionsContent, introCont
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
+ 
 
 <Head>
   <title>{seoData.title}</title>
@@ -834,8 +783,15 @@ export default function ExponentialFormPage({seoData, sectionsContent, introCont
           textColor="#06357a"
         />
    <br/>
+    <KeyTermsCard
+           id="0"
+           title={sectionsContent.obj0.title}
+           content={sectionsContent.obj0.content}
+           after={sectionsContent.obj0.after}
+           variant="light"
+         />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>
