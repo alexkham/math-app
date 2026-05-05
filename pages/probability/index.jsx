@@ -883,11 +883,11 @@ export default function ProbabilityPage({
   const probabilitySections = [
      {
         id:'0',
-        title:sectionsContent.obj0.title,
-        link:sectionsContent.obj0.link,
+        title:sectionContent.obj0.title,
+        link:sectionContent.obj0.link,
         content:[
-          sectionsContent.obj0.content,
-          sectionsContent.obj0.after,
+          sectionContent.obj0.content,
+          sectionContent.obj0.after,
         ]
     },
     {
