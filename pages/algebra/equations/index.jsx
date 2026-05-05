@@ -68,61 +68,7 @@ const keyWords = [
 
  
 const sectionsContent = {
-//   obj0: {
-//     title: `Key Terms`,
-//     content: `
-// ## Equations and Expressions
 
-// An **equation** is a statement that two expressions are equal, joined by the $=$ sign. An **expression** is a mathematical phrase combining numbers, variables, and operations — it has no equality sign and cannot be solved. A **variable** is a symbol (typically $x$, $y$, $z$) representing an unknown or changing quantity.
-
-// ## Solutions
-
-// A **solution** is a value of the variable that makes both sides of an equation equal. The **solution set** is the collection of all solutions. An **extraneous solution** is a value that emerges during solving but does not satisfy the original equation — it arises from non-reversible steps like squaring or clearing denominators.
-
-// ## Equation Classification
-
-// A **conditional equation** is true only for specific values of the variable. An **identity** is true for all permissible values. A **contradiction** is true for no value. Two equations are **equivalent equations** when they share the same solution set.
-
-// An **algebraic equation** is built from variables, constants, and the operations $+$, $-$, $\\times$, $\\div$, and integer powers. The **degree of an equation** is the highest power of the variable after simplification. The **standard form** of an equation is the conventional arrangement with all terms on one side, ordered by descending powers, equal to zero.
-
-// ## Supporting Concepts
-
-// A **coefficient** is the numerical factor multiplying a variable or power of a variable in a term. The **discriminant** of a quadratic equation $ax^2 + bx + c = 0$ is the quantity $\\Delta = b^2 - 4ac$, which determines the number and type of solutions. A **domain restriction** is a value excluded from consideration because it causes division by zero or other undefined operations. The **absolute value** of a number is its distance from zero on the number line, always non-negative.`,
-//     before: ``,
-//     after: `
-
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
-//     link: '',
-//   },
- 
-// obj0: {
-//     title: `Key Terms`,
-//     content: `
-// ## Equations and Expressions
-
-// An [equation](!/algebra/definitions#equation) is a statement that two expressions are equal, joined by the $=$ sign. An [expression](!/algebra/definitions#expression) is a mathematical phrase combining numbers, variables, and operations — it has no equality sign and cannot be solved. A [variable](!/algebra/definitions#variable) is a symbol (typically $x$, $y$, $z$) representing an unknown or changing quantity.
-
-// ## Solutions
-
-// A [solution](!/algebra/definitions#solution) is a value of the variable that makes both sides of an equation equal. The [solution set](!/algebra/definitions#solution_set) is the collection of all solutions. An [extraneous solution](!/algebra/definitions#extraneous_solution) is a value that emerges during solving but does not satisfy the original equation — it arises from non-reversible steps like squaring or clearing denominators.
-
-// ## Equation Classification
-
-// A [conditional equation](!/algebra/definitions#conditional_equation) is true only for specific values of the variable. An [identity](!/algebra/definitions#identity) is true for all permissible values. A [contradiction](!/algebra/definitions#contradiction) is true for no value. Two equations are [equivalent equations](!/algebra/definitions#equivalent_equations) when they share the same solution set.
-
-// An [algebraic equation](!/algebra/definitions#algebraic_equation) is built from variables, constants, and the operations $+$, $-$, $\\times$, $\\div$, and integer powers. The [degree of an equation](!/algebra/definitions#degree_of_an_equation) is the highest power of the variable after simplification. The [standard form](!/algebra/definitions#standard_form) of an equation is the conventional arrangement with all terms on one side, ordered by descending powers, equal to zero.
-
-// ## Supporting Concepts
-
-// A [coefficient](!/algebra/definitions#coefficient) is the numerical factor multiplying a variable or power of a variable in a term. The [discriminant](!/algebra/definitions#discriminant) of a quadratic equation $ax^2 + bx + c = 0$ is the quantity $\\Delta = b^2 - 4ac$, which determines the number and type of solutions. A [domain restriction](!/algebra/definitions#domain_restriction) is a value excluded from consideration because it causes division by zero or other undefined operations. The [absolute value](!/algebra/definitions#absolute_value) of a number is its distance from zero on the number line, always non-negative.`,
-//     before: ``,
-//     after: `
-
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@`,
-//     link: '',
-//   },
 
 obj0: {
     title: `Key Terms`,

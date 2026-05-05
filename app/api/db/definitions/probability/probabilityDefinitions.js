@@ -1028,6 +1028,15 @@ Standard normal: $Z \\sim N(0, 1)$`,
     }
   },
 
+
+];
+
+export default probabilityTermsList;
+
+
+
+
+
   //Last Take
 
   // {
@@ -2025,6 +2034,3 @@ Standard normal: $Z \\sim N(0, 1)$`,
   //   fields: [],
   //   category: "Advanced Concepts"
   // }
-];
-
-export default probabilityTermsList;
