@@ -43,6 +43,20 @@ export async function getStaticProps(){
 //                   </div>,
 
 const sectionsContent = {
+  obj0: {
+  title: `Key Terms`,
+  content: `
+- [Probability Mass Function](!/probability/definitions#probability_mass_function) — $p_X(x) = P(X = x)$ for discrete variables
+- [Discrete Random Variable](!/probability/definitions#discrete_random_variable) — the type of variable described by a PMF
+- [Cumulative Distribution Function](!/probability/definitions#cumulative_distribution_function) — $F_X(x)$, related to the PMF by summation
+- [Expected Value](!/probability/definitions#expected_value) — $E[X]$, computed from the PMF
+- [Variance](!/probability/definitions#variance) — $\\operatorname{Var}(X)$, computed from the PMF`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
+ 
   obj1: {
     title: `Definition & Physical Intuition`,
     content: `
@@ -62,13 +76,7 @@ The weights must sum to 1—that's your total probability budget.
     after: ``,
     link: '',
   },
-  // obj2: {
-  //   title: `The Domain (Support)`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
+ 
 
   obj2: {
     title: `The Domain (Support)`,
@@ -106,13 +114,7 @@ If you're computing $P(X \\in A)$ for some set $A$, you only sum over values in 
     after: ``,
     link: '',
   },
-  // obj3: {
-  //   title: `The Two Fundamental Axioms`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
+ 
   obj3: {
     title: `The Two Fundamental Axioms`,
     content: `
@@ -157,14 +159,7 @@ Violate either axiom, and your probability model breaks. These are the foundatio
   },
   
   
-  // obj4: {
-  //   title: `Representations: The Three Views`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
-
+ 
   obj4: {
     title: `Representations: The Three Views`,
     content: `
@@ -225,13 +220,7 @@ All three describe the same probability distribution, just from different perspe
     `,
     link: '',
   },
-  // obj5: {
-  //   title: `Building a PMF (From Story to Math)`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
+ 
   obj5: {
     title: `Building a PMF (From Story to Math)`,
     content: `
@@ -290,13 +279,7 @@ Once built, the PMF becomes a complete mathematical description of the [random v
     after: ``,
     link: '',
   },
-  // obj6: {
-  //   title: `Calculations Using the PMF`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
+ 
 
   obj6: {
     title: `Calculations Using the PMF`,
@@ -908,6 +891,15 @@ export default function PMFPage({seoData,sectionsContent , introContent ,general
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -1168,8 +1160,15 @@ export default function PMFPage({seoData,sectionsContent , introContent ,general
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

@@ -35,6 +35,20 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
+      obj0: {
+  title: `Key Terms`,
+  content: `
+- [Exponential Distribution](!/probability/definitions#exponential_distribution) — waiting time between events at constant rate $\\lambda$
+- [Poisson Distribution](!/probability/definitions#poisson_distribution) — counts events whose inter-arrival times are exponential
+- [Expected Value](!/probability/definitions#expected_value) — $E[X] = 1/\\lambda$
+- [Variance](!/probability/definitions#variance) — $\\operatorname{Var}(X) = 1/\\lambda^2$
+- [Probability Density Function](!/probability/definitions#probability_density_function) — $f(x) = \\lambda e^{-\\lambda x}$`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
+
     obj1:{
       title:`The Probabilistic Experiment Behind exponential distribution`,
       content:`
@@ -858,6 +872,15 @@ export default function ExponentialDistributionPage({
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -1066,8 +1089,15 @@ export default function ExponentialDistributionPage({
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

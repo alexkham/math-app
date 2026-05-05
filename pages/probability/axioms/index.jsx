@@ -137,6 +137,20 @@ export async function getStaticProps(){
   }
 
   const sectionsContent={
+    obj0: {
+  title: `Key Terms`,
+  content: `
+- [Probability](!/probability/definitions#probability) — a number in $[0,1]$ assigned to each event
+- [Probability Measure](!/probability/definitions#probability_measure) — the function $P$ satisfying non-negativity, normalization, and additivity
+- [Relative Frequency](!/probability/definitions#relative_frequency) — proportion of times an event occurs in $n$ trials
+- [Sample Space](!/probability/definitions#sample_space) — the set $\\Omega$ with $P(\\Omega) = 1$
+- [Event](!/probability/definitions#event) — a subset to which $P$ assigns a value
+- [Null Set](!/probability/definitions#null_set) — $\\emptyset$, with $P(\\emptyset) = 0$`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
 
     why:{
       title:`What Are Axioms and Why Do We Need Them in Probability`,
@@ -458,6 +472,15 @@ export default function AxiomsPage({seoData, sectionsContent, introContent, faqQ
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'why',
         title:sectionsContent.why.title,
@@ -651,8 +674,15 @@ export default function AxiomsPage({seoData, sectionsContent, introContent, faqQ
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

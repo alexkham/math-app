@@ -116,6 +116,21 @@ export async function getStaticProps(){
       
     
     const sectionsContent={
+
+      obj0: {
+  title: `Key Terms`,
+  content: `
+- [Mutual Exclusiveness](!/probability/definitions#mutual_exclusiveness) — events with $A \\cap B = \\emptyset$, simplifying the addition rule
+- [Independent Events](!/probability/definitions#independent_events) — events where $P(A \\cap B) = P(A) \\cdot P(B)$
+- [Complement of a Set](!/probability/definitions#complement_of_set) — $A^c$, with $P(A^c) = 1 - P(A)$
+- [Union of Sets](!/probability/definitions#union_of_sets) — $A \\cup B$, the event in the addition rule
+- [Intersection of Sets](!/probability/definitions#intersection_of_sets) — $A \\cap B$, the event in the multiplication rule
+- [Conditional Probability](!/probability/definitions#conditional_probability) — $P(A \\mid B)$, used in the multiplication rule`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
   
       basic:{
         title:`Basic Axiomatic Properties`,
@@ -281,6 +296,15 @@ export default function ProbabilityRulesPage({ sectionsContent,
 
 
       const probabilityRulesSections=[
+         {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
         {
             id:'basic',
             title:sectionsContent.basic.title,
@@ -375,9 +399,16 @@ export default function ProbabilityRulesPage({ sectionsContent,
           textColor="#06357a"
         />
     <br/>
+      <KeyTermsCard
+      id="0"
+      title={sectionsContent.obj0.title}
+      content={sectionsContent.obj0.content}
+      after={sectionsContent.obj0.after}
+      variant="light"
+    />
     <br/>
     <Sections
-    sections={probabilityRulesSections}/>
+    sections={probabilityRulesSections.slice(1)}/>
     <br/>
 {/* <ScrollUpButton/> */}
     <br/>

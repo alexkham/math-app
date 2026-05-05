@@ -536,6 +536,25 @@ const occurenceMatrix=`
 
 
     const sectionsContent={
+      obj0: {
+  title: `Key Terms`,
+  content: `
+- [Bernoulli Experiment](!/probability/definitions#bernoulli_experiment) — a two-outcome experiment: success or failure
+- [Sequence of Bernoulli Trials](!/probability/definitions#sequence_of_bernoulli_trials) — repeated independent Bernoulli experiments with constant $p$
+- [Bernoulli Distribution](!/probability/definitions#bernoulli_distribution) — distribution for a single success/failure trial
+- [Binomial Distribution](!/probability/definitions#binomial_distribution) — counts successes in $n$ independent Bernoulli trials
+- [Geometric Distribution](!/probability/definitions#geometric_distribution) — number of trials until first success
+- [Negative Binomial Distribution](!/probability/definitions#negative_binomial_distribution) — trials needed to achieve $r$ successes
+- [Poisson Distribution](!/probability/definitions#poisson_distribution) — counts events in a fixed interval at constant rate $\\lambda$
+- [Discrete Uniform Distribution](!/probability/definitions#uniform_distribution_discrete) — equal probability across a finite set of values
+- [Hypergeometric Distribution](!/probability/definitions#hypergeometric_distribution) — successes in $n$ draws without replacement
+- [Discrete Random Variable](!/probability/definitions#discrete_random_variable) — the type all these distributions describe
+- [Probability Mass Function](!/probability/definitions#probability_mass_function) — the function defining each discrete distribution`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
 
     uniform:{
       title:`Uniform Discrete Distribution`,
@@ -1673,6 +1692,15 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
 
     {
         id:'what',
@@ -2080,8 +2108,15 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

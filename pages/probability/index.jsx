@@ -244,6 +244,101 @@ export async function getStaticProps() {
   
 
    const sectionContent = {
+    obj0: {
+  title: `Key Terms`,
+  content: `
+## Foundations
+ 
+- [Probability](!/probability/definitions#probability) — a number in $[0,1]$ assigned to each event
+- [Random Experiment](!/probability/definitions#random_experiment) — a process whose outcome is uncertain
+- [Sample Space](!/probability/definitions#sample_space) — the set $\\Omega$ of all possible outcomes
+- [Event](!/probability/definitions#event) — a subset $A \\subseteq \\Omega$ of the sample space
+- [Elementary Event](!/probability/definitions#elementary_event) — an event containing exactly one outcome
+- [Relative Frequency](!/probability/definitions#relative_frequency) — proportion of times an event occurs in $n$ trials
+- [Probability Measure](!/probability/definitions#probability_measure) — the function $P$ assigning values in $[0,1]$ to events
+- [Equally Likely Events](!/probability/definitions#equally_likely_events) — events each assigned equal probability
+ 
+## Conditional Probability & Independence
+ 
+- [Conditional Probability](!/probability/definitions#conditional_probability) — $P(A \\mid B)$, probability of $A$ given $B$ occurred
+- [Independent Events](!/probability/definitions#independent_events) — events where $P(A \\cap B) = P(A) \\cdot P(B)$
+- [Mutual Exclusiveness](!/probability/definitions#mutual_exclusiveness) — events with $A \\cap B = \\emptyset$
+ 
+## Random Variables
+ 
+- [Random Variable](!/probability/definitions#random_variable) — a function $X: \\Omega \\to \\mathbb{R}$
+- [Discrete Random Variable](!/probability/definitions#discrete_random_variable) — a random variable with countable range
+- [Continuous Random Variable](!/probability/definitions#continuous_random_variable) — a random variable taking values in an interval
+- [Bernoulli Experiment](!/probability/definitions#bernoulli_experiment) — a two-outcome experiment: success or failure
+- [Sequence of Bernoulli Trials](!/probability/definitions#sequence_of_bernoulli_trials) — repeated independent Bernoulli experiments with constant $p$
+- [Function of a Random Variable](!/probability/definitions#function_of_random_variable) — a new variable $Y = g(X)$
+ 
+## Distribution Functions
+ 
+- [Probability Mass Function](!/probability/definitions#probability_mass_function) — $p_X(x) = P(X = x)$ for discrete variables
+- [Probability Density Function](!/probability/definitions#probability_density_function) — $f_X(x)$ such that $P(a \\leq X \\leq b) = \\int_a^b f_X(x)\\,dx$
+- [Cumulative Distribution Function](!/probability/definitions#cumulative_distribution_function) — $F_X(x) = P(X \\leq x)$
+- [PDF of a Transformed Variable](!/probability/definitions#pdf_of_transformed_variable) — density of $Y = g(X)$ derived from density of $X$
+ 
+## Measures
+ 
+- [Expected Value](!/probability/definitions#expected_value) — $E[X]$, the weighted average of all values of $X$
+- [Variance](!/probability/definitions#variance) — $\\operatorname{Var}(X) = E[(X-\\mu)^2]$, spread around the mean
+- [Standard Deviation](!/probability/definitions#standard_deviation) — $\\sigma = \\sqrt{\\operatorname{Var}(X)}$
+- [Covariance](!/probability/definitions#covariance) — $\\operatorname{Cov}(X,Y)$, joint variability of two random variables
+- [Correlation Coefficient](!/probability/definitions#correlation_coefficient) — $\\rho_{XY}$, normalized linear dependence
+- [Conditional Expectation](!/probability/definitions#conditional_expectation) — $E[X \\mid Y = y]$, expected value given information
+- [Conditional Variance](!/probability/definitions#conditional_variance) — $\\operatorname{Var}(X \\mid Y = y)$, spread given information
+- [Moment](!/probability/definitions#moment) — $E[X^k]$, a numerical summary of distribution shape
+- [Moment Generating Function](!/probability/definitions#moment_generating_function) — $M_X(t) = E[e^{tX}]$, encodes all moments
+ 
+## Discrete Distributions
+ 
+- [Bernoulli Distribution](!/probability/definitions#bernoulli_distribution) — distribution for a single success/failure trial
+- [Binomial Distribution](!/probability/definitions#binomial_distribution) — counts successes in $n$ independent Bernoulli trials
+- [Geometric Distribution](!/probability/definitions#geometric_distribution) — number of trials until first success
+- [Negative Binomial Distribution](!/probability/definitions#negative_binomial_distribution) — trials needed to achieve $r$ successes
+- [Poisson Distribution](!/probability/definitions#poisson_distribution) — counts events in a fixed interval at constant rate $\\lambda$
+- [Discrete Uniform Distribution](!/probability/definitions#uniform_distribution_discrete) — equal probability across a finite set of values
+- [Hypergeometric Distribution](!/probability/definitions#hypergeometric_distribution) — successes in $n$ draws without replacement
+ 
+## Continuous Distributions
+ 
+- [Normal Distribution](!/probability/definitions#normal_distribution) — symmetric bell-shaped distribution with parameters $\\mu$, $\\sigma^2$
+- [Exponential Distribution](!/probability/definitions#exponential_distribution) — waiting time between events at constant rate $\\lambda$
+ 
+## Multivariate Probability
+ 
+- [Bivariate Random Variable](!/probability/definitions#bivariate_random_variable) — a pair $(X, Y)$ considered jointly
+- [N-Variate Random Variables](!/probability/definitions#n_variate_random_variables) — a vector $(X_1, \\ldots, X_n)$ of random variables
+- [Joint PMF](!/probability/definitions#joint_pmf) — $p_{X,Y}(x,y) = P(X = x, Y = y)$
+- [Joint PDF](!/probability/definitions#joint_pdf) — $f_{X,Y}(x,y)$, joint density for continuous variables
+- [Joint CDF](!/probability/definitions#joint_cdf) — $F_{X,Y}(x,y) = P(X \\leq x, Y \\leq y)$
+- [Marginal Distribution](!/probability/definitions#marginal_distribution) — distribution of one variable from a joint distribution
+- [Conditional PMF](!/probability/definitions#conditional_pmf) — $p_{X|Y}(x \\mid y)$ for discrete variables
+- [Conditional PDF](!/probability/definitions#conditional_pdf) — $f_{X|Y}(x \\mid y)$ for continuous variables
+- [Independent Random Variables](!/probability/definitions#independent_random_variables) — variables where joint distribution factorizes
+- [Uncorrelated Random Variables](!/probability/definitions#uncorrelated_random_variables) — variables with $\\operatorname{Cov}(X,Y) = 0$
+- [Orthogonal Random Variables](!/probability/definitions#orthogonal_random_variables) — variables with $E[XY] = 0$
+ 
+## Set Operations
+ 
+- [Union of Sets](!/probability/definitions#union_of_sets) — $A \\cup B$, all outcomes in $A$ or $B$
+- [Intersection of Sets](!/probability/definitions#intersection_of_sets) — $A \\cap B$, outcomes in both $A$ and $B$
+- [Complement of a Set](!/probability/definitions#complement_of_set) — $A^c$, all outcomes in $\\Omega$ not in $A$
+- [Disjoint Sets](!/probability/definitions#disjoint_sets) — sets with $A \\cap B = \\emptyset$
+- [Null Set](!/probability/definitions#null_set) — $\\emptyset$, the empty set representing an impossible event
+- [Venn Diagram](!/probability/definitions#venn_diagram) — graphical representation of sets as overlapping circles
+ 
+## Visual Tools
+ 
+- [Probability Tree](!/probability/definitions#probability_tree) — a branching diagram for sequential random processes`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
+ 
       formulas: {
         title: 'Probability Formulas',
         description: 'Visit Probability formulas page',
@@ -786,6 +881,15 @@ export default function ProbabilityPage({
 }) {
   // Reconstruct sections with React components
   const probabilitySections = [
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
       id: 'formulas',
       title: sectionContent.formulas.title,
@@ -1144,7 +1248,16 @@ export default function ProbabilityPage({
           backgroundColor="#f2f2f2"
           textColor="#06357a"
         />
-        <Sections sections={probabilitySections}/>
+        <br/>
+          <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
+        <br/>
+        <Sections sections={probabilitySections.slice(1)}/>
         <br/>
         <br/>
         <br/>

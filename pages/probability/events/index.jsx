@@ -134,6 +134,23 @@ export async function getStaticProps(){
   }
 
   const sectionsContent={
+    obj0: {
+  title: `Key Terms`,
+  content: `
+- [Event](!/probability/definitions#event) — a subset $A \\subseteq \\Omega$ of the sample space
+- [Elementary Event](!/probability/definitions#elementary_event) — an event containing exactly one outcome
+- [Equally Likely Events](!/probability/definitions#equally_likely_events) — events each assigned equal probability
+- [Mutual Exclusiveness](!/probability/definitions#mutual_exclusiveness) — events with $A \\cap B = \\emptyset$, cannot occur simultaneously
+- [Sample Space](!/probability/definitions#sample_space) — the set $\\Omega$ within which events are defined
+- [Union of Sets](!/probability/definitions#union_of_sets) — $A \\cup B$, all outcomes in $A$ or $B$
+- [Intersection of Sets](!/probability/definitions#intersection_of_sets) — $A \\cap B$, outcomes in both $A$ and $B$
+- [Complement of a Set](!/probability/definitions#complement_of_set) — $A^c$, all outcomes not in $A$
+- [Null Set](!/probability/definitions#null_set) — $\\emptyset$, the impossible event`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
 
     sample:{
       title:`Sample Space and Events`,
@@ -340,6 +357,15 @@ export default function EventsPage({seoData, sectionsContent, introContent, faqQ
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'sample',
         title:sectionsContent.sample.title,
@@ -503,8 +529,15 @@ export default function EventsPage({seoData, sectionsContent, introContent, faqQ
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

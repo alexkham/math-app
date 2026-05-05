@@ -632,6 +632,15 @@ const schemas = {
 export default function PropertiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,

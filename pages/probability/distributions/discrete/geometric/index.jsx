@@ -39,6 +39,21 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
+      obj0: {
+  title: `Key Terms`,
+  content: `
+- [Geometric Distribution](!/probability/definitions#geometric_distribution) — number of trials until first success
+- [Bernoulli Experiment](!/probability/definitions#bernoulli_experiment) — the single trial repeated until success
+- [Sequence of Bernoulli Trials](!/probability/definitions#sequence_of_bernoulli_trials) — the repeated structure of the geometric
+- [Negative Binomial Distribution](!/probability/definitions#negative_binomial_distribution) — the geometric is the $r=1$ special case
+- [Expected Value](!/probability/definitions#expected_value) — $E[X] = 1/p$
+- [Variance](!/probability/definitions#variance) — $\\operatorname{Var}(X) = (1-p)/p^2$`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
+
     obj1:{
       title:`The Probabilistic Experiment Behind geometric distribution`,
       content:`
@@ -614,6 +629,15 @@ export default function GeometricDistributionPage({
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -797,8 +821,15 @@ export default function GeometricDistributionPage({
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

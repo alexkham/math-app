@@ -37,6 +37,21 @@ export async function getStaticProps(){
     ]
     
     const sectionsContent={
+      obj0: {
+  title: `Key Terms`,
+  content: `
+- [Discrete Random Variable](!/probability/definitions#discrete_random_variable) — a random variable with countable range
+- [Continuous Random Variable](!/probability/definitions#continuous_random_variable) — a random variable taking values in an interval
+- [Probability Mass Function](!/probability/definitions#probability_mass_function) — $p_X(x) = P(X = x)$, describes discrete distributions
+- [Probability Density Function](!/probability/definitions#probability_density_function) — $f_X(x)$, describes continuous distributions
+- [Cumulative Distribution Function](!/probability/definitions#cumulative_distribution_function) — $F_X(x) = P(X \\leq x)$, defined for all distributions
+- [Expected Value](!/probability/definitions#expected_value) — $E[X]$, a key summary of any distribution
+- [Variance](!/probability/definitions#variance) — $\\operatorname{Var}(X)$, the spread of any distribution`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
   
       basic:{
         title:`2 Basic Types of Distributions`,
@@ -432,6 +447,16 @@ continuousDistributionsTypesData, seoData}) {
   const distributionsSections=[
 
      {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
+
+     {
         id:'what',
         title:sectionsContent.what.title,
         link:sectionsContent.what.link,
@@ -719,9 +744,16 @@ continuousDistributionsTypesData, seoData}) {
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
    <br/>
-   <Sections sections={distributionsSections}/>
+   <Sections sections={distributionsSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

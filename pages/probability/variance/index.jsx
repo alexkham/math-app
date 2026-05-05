@@ -138,6 +138,19 @@ export async function getStaticProps(){
   }
 
   const sectionsContent={
+    obj0: {
+  title: `Key Terms`,
+  content: `
+- [Variance](!/probability/definitions#variance) — $\\operatorname{Var}(X) = E[(X-\\mu)^2]$, spread around the mean
+- [Standard Deviation](!/probability/definitions#standard_deviation) — $\\sigma = \\sqrt{\\operatorname{Var}(X)}$
+- [Conditional Variance](!/probability/definitions#conditional_variance) — $\\operatorname{Var}(X \\mid Y = y)$, spread given information
+- [Expected Value](!/probability/definitions#expected_value) — $E[X]$, used in the variance formula
+- [Covariance](!/probability/definitions#covariance) — $\\operatorname{Cov}(X,Y)$, extends variance to two variables`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
 
     definition:{
       title:`What is Variance`,
@@ -686,6 +699,15 @@ export default function VariancePage({seoData, sectionsContent, introContent, fa
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'definition',
         title:sectionsContent.definition.title,
@@ -907,8 +929,15 @@ export default function VariancePage({seoData, sectionsContent, introContent, fa
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

@@ -134,6 +134,18 @@ export async function getStaticProps(){
   }
 
   const sectionsContent={
+    obj0: {
+  title: `Key Terms`,
+  content: `
+- [Conditional Probability](!/probability/definitions#conditional_probability) — $P(A \\mid B)$, the quantity Bayes' theorem inverts
+- [Probability Measure](!/probability/definitions#probability_measure) — the function $P$ underlying all terms in the formula
+- [Disjoint Sets](!/probability/definitions#disjoint_sets) — partition elements must be disjoint
+- [Event](!/probability/definitions#event) — the observed evidence $A$ and the hypotheses $B_j$`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
 
     situation:{
       title:`How Information Changes Probability`,
@@ -380,6 +392,15 @@ export default function BayesPage({seoData, sectionsContent, introContent, faqQu
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'situation',
         title:sectionsContent.situation.title,
@@ -577,8 +598,15 @@ export default function BayesPage({seoData, sectionsContent, introContent, faqQu
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

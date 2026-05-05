@@ -77,6 +77,19 @@ const centralTendencyComparisonData = {
 };
 
 const sectionsContent = {
+
+  obj0: {
+  title: `Key Terms`,
+  content: `
+- [Cumulative Distribution Function](!/probability/definitions#cumulative_distribution_function) — $F_X(m) = 0.5$ defines the median
+- [Discrete Random Variable](!/probability/definitions#discrete_random_variable) — median defined via PMF sum
+- [Continuous Random Variable](!/probability/definitions#continuous_random_variable) — median defined via PDF integral
+- [Expected Value](!/probability/definitions#expected_value) — $E[X]$, the alternative center measure`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
   obj1: {
   title: `Definition and Concept`,
   content: `
@@ -1339,6 +1352,15 @@ export default function MedianPage({
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -1513,8 +1535,15 @@ export default function MedianPage({
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

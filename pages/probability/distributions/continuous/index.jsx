@@ -247,6 +247,21 @@ const continuousUniformTable = `
 `;
 
     const sectionsContent={
+      obj0: {
+  title: `Key Terms`,
+  content: `
+- [Continuous Random Variable](!/probability/definitions#continuous_random_variable) — the type all continuous distributions describe
+- [Probability Density Function](!/probability/definitions#probability_density_function) — $f_X(x)$, defines every continuous distribution
+- [Cumulative Distribution Function](!/probability/definitions#cumulative_distribution_function) — $F_X(x) = P(X \\leq x)$
+- [Normal Distribution](!/probability/definitions#normal_distribution) — symmetric bell-shaped distribution with parameters $\\mu$, $\\sigma^2$
+- [Exponential Distribution](!/probability/definitions#exponential_distribution) — waiting time between events at constant rate $\\lambda$
+- [Expected Value](!/probability/definitions#expected_value) — $E[X]$, a key summary of any distribution
+- [Variance](!/probability/definitions#variance) — $\\operatorname{Var}(X)$, the spread of any distribution`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
 
 
 normal:{
@@ -515,14 +530,6 @@ Standard deviation is approximately 28.9% of the interval width. For a uniform d
 
 
 
-// exponential:{
-  
-//       title:`Exponential Distribution`,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-//     },
     
 
 exponential:{
@@ -1026,6 +1033,15 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
 
     {
         id:'what',
@@ -1391,8 +1407,15 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

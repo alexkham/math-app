@@ -139,6 +139,21 @@ export async function getStaticProps(){
 
   const sectionsContent={
 
+    obj0: {
+  title: `Key Terms`,
+  content: `
+- [Probability Mass Function](!/probability/definitions#probability_mass_function) — $p_X(x) = P(X = x)$ for discrete variables
+- [Probability Density Function](!/probability/definitions#probability_density_function) — $f_X(x)$, density for continuous variables
+- [Cumulative Distribution Function](!/probability/definitions#cumulative_distribution_function) — $F_X(x) = P(X \\leq x)$
+- [Discrete Random Variable](!/probability/definitions#discrete_random_variable) — the type described by a PMF
+- [Continuous Random Variable](!/probability/definitions#continuous_random_variable) — the type described by a PDF
+- [Random Variable](!/probability/definitions#random_variable) — the object any probability function describes`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
+
     notation:{
       title:`Notation and Symbols`,
       content:`
@@ -480,6 +495,15 @@ export default function ProbabilityFunctionPage({seoData, sectionsContent, intro
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
    
     {
         id:'ways',
@@ -665,8 +689,15 @@ export default function ProbabilityFunctionPage({seoData, sectionsContent, intro
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

@@ -50,6 +50,22 @@ export async function getStaticProps(){
 
     const sectionsContent={
 
+      obj0: {
+  title: `Key Terms`,
+  content: `
+- [Expected Value](!/probability/definitions#expected_value) — $E[X]$, the weighted average of all values of $X$
+- [Conditional Expectation](!/probability/definitions#conditional_expectation) — $E[X \\mid Y = y]$, expected value given information
+- [Moment](!/probability/definitions#moment) — $E[X^k]$, a numerical summary of distribution shape
+- [Random Variable](!/probability/definitions#random_variable) — the object whose expectation is computed
+- [Probability Mass Function](!/probability/definitions#probability_mass_function) — weights in the discrete expectation sum
+- [Probability Density Function](!/probability/definitions#probability_density_function) — weights in the continuous expectation integral`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
+ 
+
     intuition:{
       title:`**The Intuition Behind Expected Value**`,
       content:`
@@ -524,6 +540,15 @@ export default function ExpectedValuePage({seoData,sectionsContent , introConten
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'intuition',
         title:sectionsContent.intuition.title,
@@ -726,8 +751,15 @@ export default function ExpectedValuePage({seoData,sectionsContent , introConten
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

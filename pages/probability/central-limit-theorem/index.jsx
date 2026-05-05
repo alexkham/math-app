@@ -134,6 +134,19 @@ export async function getStaticProps(){
   }
 
   const sectionsContent={
+    obj0: {
+  title: `Key Terms`,
+  content: `
+- [Normal Distribution](!/probability/definitions#normal_distribution) — the limiting distribution in the CLT
+- [Random Variable](!/probability/definitions#random_variable) — the i.i.d. variables being summed
+- [Expected Value](!/probability/definitions#expected_value) — $\\mu = E[X_i]$, the mean of each term
+- [Variance](!/probability/definitions#variance) — $\\sigma^2 = \\operatorname{Var}(X_i)$, the spread of each term
+- [Standard Deviation](!/probability/definitions#standard_deviation) — $\\sigma$, used in the standardization formula`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
 
     obj1:{
       title:`Formal Statement of the Central Limit Theorem`,
@@ -452,6 +465,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -677,8 +699,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

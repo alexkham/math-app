@@ -66,6 +66,20 @@ const centralTendencyComparisonData = {
 };
 
 const sectionsContent = {
+
+  obj0: {
+  title: `Key Terms`,
+  content: `
+- [Probability Mass Function](!/probability/definitions#probability_mass_function) — mode is the $x$ maximizing $p_X(x)$ for discrete variables
+- [Probability Density Function](!/probability/definitions#probability_density_function) — mode is the $x$ maximizing $f_X(x)$ for continuous variables
+- [Expected Value](!/probability/definitions#expected_value) — $E[X]$, an alternative center measure
+- [Discrete Random Variable](!/probability/definitions#discrete_random_variable) — mode as the most probable value
+- [Continuous Random Variable](!/probability/definitions#continuous_random_variable) — mode as the peak of the density`,
+  before: ``,
+  after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+  link: '',
+},
   obj1: {
   title: `Definition and Concept`,
   content: `
@@ -1185,6 +1199,15 @@ export default function ModePage({
 
     
   const genericSections=[
+     {
+        id:'0',
+        title:sectionsContent.obj0.title,
+        link:sectionsContent.obj0.link,
+        content:[
+          sectionsContent.obj0.content,
+          sectionsContent.obj0.after,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -1359,8 +1382,15 @@ export default function ModePage({
           textColor="#06357a"
         />
    <br/>
+     <KeyTermsCard
+     id="0"
+     title={sectionsContent.obj0.title}
+     content={sectionsContent.obj0.content}
+     after={sectionsContent.obj0.after}
+     variant="light"
+   />
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>
