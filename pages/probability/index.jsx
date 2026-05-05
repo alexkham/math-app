@@ -1251,9 +1251,9 @@ export default function ProbabilityPage({
         <br/>
           <KeyTermsCard
   id="0"
-  title={sectionsContent.obj0.title}
-  content={sectionsContent.obj0.content}
-  after={sectionsContent.obj0.after}
+  title={sectionContent.obj0.title}
+  content={sectionContent.obj0.content}
+  after={sectionContent.obj0.after}
   variant="light"
 />
         <br/>
