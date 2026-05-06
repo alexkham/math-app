@@ -201,6 +201,23 @@ const keyWords = [
   // }
 
 const sectionsContent = {
+  // ─── /calculus/integrals/definite ─────────────────────────────────────────
+
+  obj0: {
+    title: `Key Terms`,
+    content: `
+- [Definite Integral](!/calculus/definitions#definite_integral) — $\\int_a^b f(x)\\,dx$, a number representing accumulated quantity
+- [Riemann Sum](!/calculus/definitions#riemann_sum) — the approximating sum whose limit is the integral
+- [Bounds of Integration](!/calculus/definitions#bounds_of_integration) — where accumulation starts ($a$) and ends ($b$)
+- [Signed Area](!/calculus/definitions#signed_area) — positive above the axis, negative below
+- [Average Value of a Function](!/calculus/definitions#average_value_of_a_function) — $\\frac{1}{b-a}\\int_a^b f(x)\\,dx$
+- [Integrand](!/calculus/definitions#integrand) — the function being accumulated`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+    link: '',
+  },
+
   obj1: {
     title: `The Riemann Sum Construction`,
     content: `
@@ -787,8 +804,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
           textColor="#06357a"
         />
    <br/>
+   <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

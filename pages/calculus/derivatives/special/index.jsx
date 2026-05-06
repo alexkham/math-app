@@ -67,141 +67,22 @@ const keyWords = [
 //                     __html:   sectionContent.distributions.svg,
 //                   }} />
 
-  //   const sectionsContent={
-
-  //   obj1:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
   
-  
-  //   },
-  //   obj2:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  
-  //   obj3:{
-  
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj4:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj5:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj6:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj7:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj8:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj9:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj10:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj11:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj12:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj13:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  //     link:'',
-  
-  //   },
-  //   obj14:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  //     link:'',
-  
-  //   },
-
-
-  //   obj15:{
-  
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   }
-  
-  // }
-
 
   const sectionsContent = {
+  // ─── /calculus/derivatives/special ────────────────────────────────────────
+
+  obj0: {
+    title: `Key Terms`,
+    content: `
+- [Derivative](!/calculus/definitions#derivative) — the formulas here extend the common derivatives to inverse trig, hyperbolic, and piecewise functions
+- [Differentiability](!/calculus/definitions#differentiability) — piecewise functions require boundary checks`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+    link: '',
+  },
+
   obj1: {
     title: `Inverse Trigonometric Functions — Arcsine and Arccosine`,
     content: `
@@ -486,20 +367,7 @@ const schemas = {
   }
 }
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Special Derivatives | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/calculus/derivatives/special",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
+ 
 
   return {
   props:{
@@ -518,7 +386,6 @@ const schemas = {
 }
    }
 
-// export default function PageTemplate({seoData,sectionsContent , introContent}) {
 export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
@@ -671,50 +538,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
 
   return (
    <>
-   {/* <Head>
-  <title>{seoData.title}</title>
-  <meta name="description" content={seoData.description} />
-  <meta name="keywords" content={seoData.keywords} />
-  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-  <meta property="og:title" content={seoData.title} />
-  <meta property="og:description" content={seoData.description} />
-  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Learn Math Class" />
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={seoData.title} />
-  <meta name="twitter:description" content={seoData.description} />
-  
-  <meta name="robots" content="index, follow" />
-  
-  <script 
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
-  />
-</Head> */}
-
+ 
 <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
@@ -791,8 +615,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
           textColor="#06357a"
         />
    <br/>
+   <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

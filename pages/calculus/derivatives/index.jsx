@@ -519,6 +519,41 @@ const keyWords = [
 
 
 const sectionsContent = {
+  // ─── /calculus/derivatives (hub) ──────────────────────────────────────────
+
+  obj0: {
+    title: `Key Terms`,
+    content: `
+## The Derivative
+
+- [Derivative](!/calculus/definitions#derivative) — instantaneous rate of change: $f'(a) = \\lim_{h \\to 0} \\frac{f(a+h)-f(a)}{h}$
+- [Differentiability](!/calculus/definitions#differentiability) — the derivative exists and is finite
+- [Tangent Line](!/calculus/definitions#tangent_line) — best linear approximation at a point
+
+## Rates of Change
+
+- [Instantaneous Rate of Change](!/calculus/definitions#instantaneous_rate_of_change) — rate at a single point, equal to $f'(a)$
+- [Average Rate of Change](!/calculus/definitions#average_rate_of_change) — slope of the secant line over an interval
+
+## Extensions
+
+- [Higher-Order Derivative](!/calculus/definitions#higher_order_derivative) — derivatives of derivatives: $f'', f''', f^{(n)}$
+- [Differential](!/calculus/definitions#differential) — $dy = f'(x) \\cdot dx$, the tangent-line estimate of change
+- [Partial Derivative](!/calculus/definitions#partial_derivative) — derivative with respect to one variable, others held constant
+
+## Graph Analysis
+
+- [Critical Point](!/calculus/definitions#critical_point) — where $f' = 0$ or $f'$ is undefined
+- [Local Extremum](!/calculus/definitions#local_extremum) — a local peak or valley
+- [Concavity](!/calculus/definitions#concavity) — bending direction, controlled by $f''$
+- [Inflection Point](!/calculus/definitions#inflection_point) — where concavity reverses
+- [Monotonic Function](!/calculus/definitions#monotonic_function) — strictly increasing or strictly decreasing`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+    link: '',
+  },
+
   obj1: {
     title: `The Difference Quotient and Its Limit`,
     content: `
@@ -1076,15 +1111,15 @@ const schemas = {
           textColor="#06357a"
         />
    <br/>
-    {/* <KeyTermsCard
+   <KeyTermsCard
      id="0"
      title={sectionsContent.obj0.title}
      content={sectionsContent.obj0.content}
      after={sectionsContent.obj0.after}
      variant="light"
-   /> */}
+   />
    <br/>
-   <Sections sections={genericSections.slice(0)}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

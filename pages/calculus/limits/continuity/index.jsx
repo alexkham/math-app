@@ -68,140 +68,25 @@ const keyWords = [
 //                     __html:   sectionContent.distributions.svg,
 //                   }} />
 
-//     const sectionsContent={
 
-//     obj1:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-  
-//     },
-//     obj2:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-  
-//     obj3:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj4:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj5:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj6:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj7:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj8:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj9:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj10:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj11:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj12:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj13:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-//     obj14:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-
-
-//     obj15:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     }
-  
-//   }
 
 const sectionsContent = {
+  // ─── /calculus/limits/continuity ──────────────────────────────────────────
+
+  obj0: {
+    title: `Key Terms`,
+    content: `
+- [Continuity](!/calculus/definitions#continuity) — $\\lim_{x \\to a} f(x) = f(a)$, three conditions in one equation
+- [Discontinuity](!/calculus/definitions#discontinuity) — removable, jump, infinite, or oscillating
+- [Limit](!/calculus/definitions#limit) — the two-sided limit must exist for continuity to hold
+- [One-Sided Limit](!/calculus/definitions#one_sided_limit) — one-sided continuity at endpoints of closed intervals
+- [Asymptote](!/calculus/definitions#asymptote) — infinite discontinuities produce vertical asymptotes`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+    link: '',
+  },
+
   obj1: {
     title: `The Intuitive Idea`,
     content: `
@@ -885,8 +770,15 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
           textColor="#06357a"
         />
    <br/>
+   <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

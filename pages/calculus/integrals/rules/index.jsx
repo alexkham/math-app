@@ -201,6 +201,20 @@ const keyWords = [
   
   // }
 const sectionsContent = {
+  // ─── /calculus/integrals/rules ────────────────────────────────────────────
+
+  obj0: {
+    title: `Key Terms`,
+    content: `
+- [Definite Integral](!/calculus/definitions#definite_integral) — the object these rules govern
+- [Indefinite Integral](!/calculus/definitions#indefinite_integral) — linearity applies to both definite and indefinite forms
+- [Antiderivative](!/calculus/definitions#antiderivative) — the Fundamental Theorem connects antiderivatives to definite integrals`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+    link: '',
+  },
+
   obj1: {
     title: `Sum and Difference Rules`,
     content: `
@@ -809,8 +823,15 @@ export default function RulesPage({seoData, sectionsContent, introContent, faqQu
           textColor="#06357a"
         />
    <br/>
+   <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

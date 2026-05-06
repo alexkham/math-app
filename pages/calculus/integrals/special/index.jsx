@@ -202,6 +202,20 @@ const keyWords = [
   // }
 
 const sectionsContent = {
+  // ─── /calculus/integrals/special ──────────────────────────────────────────
+
+  obj0: {
+    title: `Key Terms`,
+    content: `
+- [Antiderivative](!/calculus/definitions#antiderivative) — each formula reverses a known derivative
+- [Indefinite Integral](!/calculus/definitions#indefinite_integral) — the notation $\\int f(x)\\,dx = F(x) + C$
+- [Integrand](!/calculus/definitions#integrand) — recognizing the integrand's form selects the formula`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+    link: '',
+  },
+
   obj1: {
     title: `Why Memorize Special Integrals?`,
     content: `
@@ -792,8 +806,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
           textColor="#06357a"
         />
    <br/>
+   <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

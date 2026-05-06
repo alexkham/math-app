@@ -201,6 +201,22 @@ export async function getStaticProps(){
   
   // }
 const sectionsContent = {
+  // ─── /calculus/integrals/evaluating ───────────────────────────────────────
+
+  obj0: {
+    title: `Key Terms`,
+    content: `
+- [Definite Integral](!/calculus/definitions#definite_integral) — correct setup: bounds, integrand, variable
+- [Indefinite Integral](!/calculus/definitions#indefinite_integral) — always includes $+ C$
+- [Antiderivative](!/calculus/definitions#antiderivative) — differentiate to verify: $F'(x)$ should return $f(x)$
+- [Integrand](!/calculus/definitions#integrand) — simplify before reaching for techniques
+- [Bounds of Integration](!/calculus/definitions#bounds_of_integration) — convert when substituting in definite integrals`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+    link: '',
+  },
+
   obj1: {
     title: `Direct Antidifferentiation`,
     content: `
@@ -804,8 +820,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
           textColor="#06357a"
         />
    <br/>
+   <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

@@ -1051,6 +1051,470 @@ $$f \\text{ left-continuous at } a \\iff \\lim_{x \\to a^-} f(x) = f(a)$$`,
     related_definitions: `- [Indeterminate Form](!/calculus/definitions#indeterminate_form)`,
   },
 
+
+  // ─── FUNDAMENTAL THEOREM & ANTIDERIVATIVES ──────────────────────────────
+ 
+  {
+    name: 'Fundamental Theorem of Calculus, Part 1',
+    entity: 'definite_integral',
+    category: 'Fundamental Theorem & Antiderivatives',
+    formula: `$$\\frac{d}{dx} \\int_a^x f(t)\\, dt = f(x)$$`,
+    link: { label: 'Fundamental Theorem of Calculus — Part 1', url: '/calculus/integrals/rules#5' },
+    explanation: `Differentiating an accumulation function recovers the integrand. If you accumulate $f$ from $a$ up to a moving boundary $x$, the rate at which the accumulated total grows at $x$ is exactly $f(x)$. This guarantees that every continuous function has an antiderivative — namely, its own accumulation function — even when no elementary formula expresses it.`,
+    conditions: `$f$ must be continuous on an interval containing $a$ and $x$.`,
+    related_formulas: `- [Fundamental Theorem of Calculus, Part 2](!/calculus/integrals/formulas#fundamental_theorem_of_calculus_part_2)
+- [Antiderivative Family](!/calculus/integrals/formulas#antiderivative_family)`,
+    related_definitions: `- [Antiderivative](!/calculus/definitions#antiderivative)
+- [Definite Integral](!/calculus/definitions#definite_integral)`,
+  },
+ 
+  {
+    name: 'Fundamental Theorem of Calculus, Part 2',
+    entity: 'definite_integral',
+    category: 'Fundamental Theorem & Antiderivatives',
+    formula: `$$\\int_a^b f(x)\\, dx = F(b) - F(a) \\quad \\text{where } F'(x) = f(x)$$`,
+    link: { label: 'Fundamental Theorem of Calculus — Part 2', url: '/calculus/integrals/rules#6' },
+    explanation: `The computational engine of integral calculus. Rather than computing limits of Riemann sums, find any antiderivative and evaluate at the endpoints. The constant of integration cancels in the subtraction, so any antiderivative works — different choices of $C$ produce the same definite integral.`,
+    conditions: `$f$ must be continuous on $[a, b]$ (or, more generally, integrable with $F$ continuous on $[a, b]$ and differentiable with $F' = f$ on $(a, b)$).`,
+    notation: `Standard shorthand: $F(x) \\big|_a^b$ or $[F(x)]_a^b$ both mean $F(b) - F(a)$.`,
+    related_formulas: `- [Fundamental Theorem of Calculus, Part 1](!/calculus/integrals/formulas#fundamental_theorem_of_calculus_part_1)
+- [Antiderivative Family](!/calculus/integrals/formulas#antiderivative_family)`,
+    related_definitions: `- [Antiderivative](!/calculus/definitions#antiderivative)
+- [Definite Integral](!/calculus/definitions#definite_integral)
+- [Riemann Sum](!/calculus/definitions#riemann_sum)`,
+  },
+ 
+  {
+    name: 'Antiderivative Family',
+    entity: 'antiderivative',
+    category: 'Fundamental Theorem & Antiderivatives',
+    formula: `$$\\int f(x)\\, dx = F(x) + C \\quad \\text{where } F'(x) = f(x)$$`,
+    link: { label: 'The Constant of Integration', url: '/calculus/integrals/indefinite#2' },
+    explanation: `Antiderivatives come in families. If $F$ is one antiderivative of $f$, every antiderivative has the form $F(x) + C$ for some constant $C$ — because the derivative of any constant is zero, vertical shifts of the graph all share the same derivative. Initial conditions like $F(0) = 3$ pin down $C$.`,
+    conditions: `Holds on any connected interval. On disconnected domains the constant can differ between components.`,
+    related_formulas: `- [Fundamental Theorem of Calculus, Part 2](!/calculus/integrals/formulas#fundamental_theorem_of_calculus_part_2)`,
+    related_definitions: `- [Antiderivative](!/calculus/definitions#antiderivative)
+- [Indefinite Integral](!/calculus/definitions#indefinite_integral)
+- [Integrand](!/calculus/definitions#integrand)`,
+  },
+ 
+  // ─── INTEGRATION RULES ──────────────────────────────────────────────────
+ 
+  {
+    name: 'Sum and Difference Rule (Integrals)',
+    entity: 'indefinite_integral',
+    category: 'Integration Rules',
+    formula: `$$\\int [f(x) \\pm g(x)]\\, dx = \\int f(x)\\, dx \\pm \\int g(x)\\, dx$$`,
+    link: { label: 'Sum and Difference Rules', url: '/calculus/integrals/rules#1' },
+    explanation: `Integration distributes over addition and subtraction. Complex integrands break into simpler pieces, each integrated separately. Holds for both definite and indefinite integrals.`,
+    related_formulas: `- [Constant Multiple Rule (Integrals)](!/calculus/integrals/formulas#constant_multiple_rule_integrals)`,
+  },
+ 
+  {
+    name: 'Constant Multiple Rule (Integrals)',
+    entity: 'indefinite_integral',
+    category: 'Integration Rules',
+    formula: `$$\\int c \\cdot f(x)\\, dx = c \\int f(x)\\, dx$$`,
+    link: { label: 'Constant Multiple Rule', url: '/calculus/integrals/rules#2' },
+    explanation: `Constants factor out of integrals. Combined with the sum rule, this makes integration linear: $\\int [a f + b g]\\, dx = a \\int f\\, dx + b \\int g\\, dx$.`,
+    related_formulas: `- [Sum and Difference Rule (Integrals)](!/calculus/integrals/formulas#sum_and_difference_rule_integrals)`,
+  },
+ 
+  {
+    name: 'Additivity Over Intervals',
+    entity: 'definite_integral',
+    category: 'Integration Rules',
+    formula: `$$\\int_a^b f(x)\\, dx + \\int_b^c f(x)\\, dx = \\int_a^c f(x)\\, dx$$`,
+    link: { label: 'Additivity Over Intervals', url: '/calculus/integrals/rules#3' },
+    explanation: `An integral over $[a, c]$ can be split at any intermediate point $b$. Essential for piecewise functions where different formulas apply on different subintervals. The point $b$ need not lie between $a$ and $c$ — the rule extends with appropriate sign conventions.`,
+    related_formulas: `- [Reversing Limits of Integration](!/calculus/integrals/formulas#reversing_limits_of_integration)
+- [Zero-Width Interval](!/calculus/integrals/formulas#zero_width_interval)`,
+    related_definitions: `- [Bounds of Integration](!/calculus/definitions#bounds_of_integration)`,
+  },
+ 
+  {
+    name: 'Reversing Limits of Integration',
+    entity: 'definite_integral',
+    category: 'Integration Rules',
+    formula: `$$\\int_a^b f(x)\\, dx = -\\int_b^a f(x)\\, dx$$`,
+    link: { label: 'Reversing Limits of Integration', url: '/calculus/integrals/rules#4' },
+    explanation: `Swapping the bounds of a definite integral negates the result. The Riemann sum construction accumulates contributions in the direction $a \\to b$; reversing the direction reverses every signed width $\\Delta x$, flipping the total's sign.`,
+    related_formulas: `- [Zero-Width Interval](!/calculus/integrals/formulas#zero_width_interval)
+- [Additivity Over Intervals](!/calculus/integrals/formulas#additivity_over_intervals)`,
+    related_definitions: `- [Bounds of Integration](!/calculus/definitions#bounds_of_integration)`,
+  },
+ 
+  {
+    name: 'Zero-Width Interval',
+    entity: 'definite_integral',
+    category: 'Integration Rules',
+    formula: `$$\\int_a^a f(x)\\, dx = 0$$`,
+    link: { label: 'Zero-Width Interval', url: '/calculus/integrals/rules#4' },
+    explanation: `An integral over a degenerate interval is zero. With no width, no accumulation occurs.`,
+    related_formulas: `- [Reversing Limits of Integration](!/calculus/integrals/formulas#reversing_limits_of_integration)
+- [Additivity Over Intervals](!/calculus/integrals/formulas#additivity_over_intervals)`,
+  },
+ 
+  {
+    name: 'Comparison Property (Integrals)',
+    entity: 'definite_integral',
+    category: 'Integration Rules',
+    formula: `$$f(x) \\leq g(x) \\text{ on } [a, b] \\implies \\int_a^b f(x)\\, dx \\leq \\int_a^b g(x)\\, dx$$`,
+    link: { label: 'Comparison Properties', url: '/calculus/integrals/rules#8' },
+    explanation: `Pointwise inequality between integrands carries through to integrals. A special case: if $f \\geq 0$, then $\\int f \\geq 0$. The comparison property underpins both estimation techniques and convergence tests for improper integrals.`,
+    conditions: `The inequality $f \\leq g$ must hold throughout $[a, b]$, and both $f$ and $g$ must be integrable on $[a, b]$.`,
+    related_formulas: `- [Bounding Property (Integrals)](!/calculus/integrals/formulas#bounding_property_integrals)`,
+  },
+ 
+  {
+    name: 'Bounding Property (Integrals)',
+    entity: 'definite_integral',
+    category: 'Integration Rules',
+    formula: `$$m \\leq f(x) \\leq M \\text{ on } [a, b] \\implies m(b - a) \\leq \\int_a^b f(x)\\, dx \\leq M(b - a)$$`,
+    link: { label: 'Comparison Properties', url: '/calculus/integrals/rules#8' },
+    explanation: `When the integrand is bounded between constants $m$ and $M$, the integral is bounded between the areas of two rectangles of width $b - a$ and heights $m$, $M$. This is the rectangle approximation in its crudest form, and it provides quick sanity checks on computed integrals.`,
+    related_formulas: `- [Comparison Property (Integrals)](!/calculus/integrals/formulas#comparison_property_integrals)
+- [Average Value of a Function](!/calculus/integrals/formulas#average_value_of_a_function)`,
+  },
+ 
+  {
+    name: 'Substitution Rule',
+    entity: 'indefinite_integral',
+    category: 'Integration Rules',
+    formula: `$$\\int f(g(x))\\, g'(x)\\, dx = \\int f(u)\\, du \\quad \\text{where } u = g(x)$$`,
+    link: { label: 'Substitution (u-Substitution)', url: '/calculus/integrals/techniques#2' },
+    explanation: `The reverse of the chain rule. When the integrand contains an inner function $g(x)$ multiplied by its derivative $g'(x)$, the substitution $u = g(x)$, $du = g'(x)\\, dx$ collapses the integral into a simpler form in $u$.`,
+    variants: `Definite-integral form (with limit conversion): $$\\int_a^b f(g(x))\\, g'(x)\\, dx = \\int_{g(a)}^{g(b)} f(u)\\, du$$`,
+    conditions: `$g$ must be differentiable on the integration interval and $f$ continuous on the range of $g$. For definite integrals, either convert the limits to $u$-values or substitute back to $x$ before evaluating.`,
+    related_formulas: `- [Integration by Parts](!/calculus/integrals/formulas#integration_by_parts)`,
+    related_definitions: `- [Bounds of Integration](!/calculus/definitions#bounds_of_integration)`,
+  },
+ 
+  {
+    name: 'Integration by Parts',
+    entity: 'indefinite_integral',
+    category: 'Integration Rules',
+    formula: `$$\\int u\\, dv = uv - \\int v\\, du$$`,
+    link: { label: 'Integration by Parts', url: '/calculus/integrals/techniques#3' },
+    explanation: `The reverse of the product rule. Splits an integrand into two factors $u$ and $dv$; differentiating $u$ and integrating $dv$ trades the original integral for a hopefully simpler one. The mnemonic LIATE (Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential) ranks function types by how readily they should be chosen as $u$ — earlier types make better choices.`,
+    variants: `Definite-integral form: $$\\int_a^b u\\, dv = uv \\Big|_a^b - \\int_a^b v\\, du$$`,
+    conditions: `$u$ and $v$ must be differentiable on the integration interval.`,
+    related_formulas: `- [Substitution Rule](!/calculus/integrals/formulas#substitution_rule)
+- [Antiderivative of Natural Log](!/calculus/integrals/formulas#antiderivative_of_natural_log)`,
+  },
+ 
+  {
+    name: 'Total Unsigned Area',
+    entity: 'signed_area',
+    category: 'Integration Rules',
+    formula: `$$\\text{Total area} = \\int_a^b |f(x)|\\, dx$$`,
+    link: { label: 'Signed Area Interpretation', url: '/calculus/integrals/definite#3' },
+    explanation: `The definite integral computes signed area — regions above the $x$-axis count positively, regions below count negatively. To get total geometric area regardless of sign, integrate the absolute value of $f$. In practice this means splitting the interval where $f$ changes sign and integrating each piece with the appropriate sign.`,
+    related_formulas: `- [Comparison Property (Integrals)](!/calculus/integrals/formulas#comparison_property_integrals)`,
+    related_definitions: `- [Signed Area](!/calculus/definitions#signed_area)
+- [Integrand](!/calculus/definitions#integrand)`,
+  },
+ 
+  // ─── STANDARD ANTIDERIVATIVES — ALGEBRAIC & LOGARITHMIC ──────────────────
+ 
+  {
+    name: 'Power Rule (Integrals)',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Algebraic & Logarithmic',
+    formula: `$$\\int x^n\\, dx = \\frac{x^{n+1}}{n + 1} + C \\quad (n \\neq -1)$$`,
+    link: { label: 'Power Functions', url: '/calculus/integrals/special#2' },
+    explanation: `Increase the exponent by one, then divide by the new exponent. The reverse of the differentiation power rule. The exception $n = -1$ is critical — that case produces the natural logarithm rather than $x^0/0$, which is undefined.`,
+    conditions: `For non-integer $n$, the integrand $x^n$ may have domain restrictions (e.g., $x \\geq 0$ for $\\sqrt{x}$). The exception $n = -1$ is handled by the reciprocal antiderivative.`,
+    related_formulas: `- [Reciprocal Antiderivative](!/calculus/integrals/formulas#reciprocal_antiderivative)`,
+  },
+ 
+  {
+    name: 'Reciprocal Antiderivative',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Algebraic & Logarithmic',
+    formula: `$$\\int \\frac{1}{x}\\, dx = \\ln|x| + C$$`,
+    link: { label: 'Power Functions', url: '/calculus/integrals/special#2' },
+    explanation: `The exceptional case of the power rule. The absolute value matters: for $x > 0$ the antiderivative is $\\ln x$, and for $x < 0$ it is $\\ln(-x)$ (since differentiating gives $1/x$ in either case). The two cases collapse into $\\ln|x|$, valid on either side of zero — but not across it.`,
+    conditions: `Valid on intervals not containing $0$. The constant $C$ may differ on the positive and negative branches.`,
+    related_formulas: `- [Power Rule (Integrals)](!/calculus/integrals/formulas#power_rule_integrals)
+- [Logarithmic Derivative Pattern](!/calculus/integrals/formulas#logarithmic_derivative_pattern)`,
+  },
+ 
+  {
+    name: 'Logarithmic Derivative Pattern',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Algebraic & Logarithmic',
+    formula: `$$\\int \\frac{f'(x)}{f(x)}\\, dx = \\ln|f(x)| + C$$`,
+    link: { label: 'Logarithmic Integrals', url: '/calculus/integrals/special#6' },
+    explanation: `When the integrand is a function divided by its own derivative — a "logarithmic derivative" pattern — the antiderivative is the logarithm of the function. This pattern appears constantly in disguise: $\\int \\tan x\\, dx$ becomes $\\int (\\sin x)/(\\cos x)\\, dx$, which has the form $-f'/f$ with $f = \\cos x$.`,
+    conditions: `$f$ must be differentiable and nonzero on the integration interval.`,
+    related_formulas: `- [Reciprocal Antiderivative](!/calculus/integrals/formulas#reciprocal_antiderivative)
+- [Antiderivative of Tangent](!/calculus/integrals/formulas#antiderivative_of_tangent)
+- [Antiderivative of Cotangent](!/calculus/integrals/formulas#antiderivative_of_cotangent)`,
+  },
+ 
+  {
+    name: 'Antiderivative of Natural Log',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Algebraic & Logarithmic',
+    formula: `$$\\int \\ln x\\, dx = x \\ln x - x + C$$`,
+    link: { label: 'Logarithmic Integrals', url: '/calculus/integrals/special#6' },
+    explanation: `The natural logarithm has no elementary antiderivative obvious by inspection — it is found via integration by parts with $u = \\ln x$ and $dv = dx$. The result $x \\ln x - x$ is worth memorizing because $\\ln x$ appears constantly as a multiplicative factor inside more complex integrals.`,
+    conditions: `Defined for $x > 0$.`,
+    related_formulas: `- [Integration by Parts](!/calculus/integrals/formulas#integration_by_parts)
+- [Reciprocal Antiderivative](!/calculus/integrals/formulas#reciprocal_antiderivative)`,
+  },
+ 
+  // ─── STANDARD ANTIDERIVATIVES — EXPONENTIAL, TRIG & INVERSE TRIG ─────────
+ 
+  {
+    name: 'Exponential Antiderivative',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Exponential, Trig & Inverse Trig',
+    formula: `$$\\int e^x\\, dx = e^x + C$$`,
+    link: { label: 'Exponential Functions', url: '/calculus/integrals/special#3' },
+    explanation: `The exponential function $e^x$ is its own antiderivative — the same property that makes it its own derivative. This is the defining feature of $e$: it is the unique base for which the function equals its own rate of change.`,
+    variants: `With a linear argument: $$\\int e^{kx}\\, dx = \\frac{e^{kx}}{k} + C$$`,
+    related_formulas: `- [General Exponential Antiderivative](!/calculus/integrals/formulas#general_exponential_antiderivative)`,
+  },
+ 
+  {
+    name: 'General Exponential Antiderivative',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Exponential, Trig & Inverse Trig',
+    formula: `$$\\int a^x\\, dx = \\frac{a^x}{\\ln a} + C \\quad (a > 0,\\, a \\neq 1)$$`,
+    link: { label: 'Exponential Functions', url: '/calculus/integrals/special#3' },
+    explanation: `For an arbitrary positive base, the antiderivative needs a $1/\\ln a$ correction factor — this compensates for the chain-rule factor $\\ln a$ that appears when differentiating $a^x$. Setting $a = e$ recovers the natural form, since $\\ln e = 1$.`,
+    conditions: `$a > 0$ and $a \\neq 1$. (When $a = 1$, $a^x \\equiv 1$ and the antiderivative is just $x + C$.)`,
+    related_formulas: `- [Exponential Antiderivative](!/calculus/integrals/formulas#exponential_antiderivative)`,
+  },
+ 
+  {
+    name: 'Antiderivative of Sine',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Exponential, Trig & Inverse Trig',
+    formula: `$$\\int \\sin x\\, dx = -\\cos x + C$$`,
+    link: { label: 'Trigonometric Functions', url: '/calculus/integrals/special#4' },
+    explanation: `The negative sign reverses the negative in $(\\cos x)' = -\\sin x$. Integration recovers $\\cos x$ but with the opposite sign.`,
+    related_formulas: `- [Antiderivative of Cosine](!/calculus/integrals/formulas#antiderivative_of_cosine)`,
+  },
+ 
+  {
+    name: 'Antiderivative of Cosine',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Exponential, Trig & Inverse Trig',
+    formula: `$$\\int \\cos x\\, dx = \\sin x + C$$`,
+    link: { label: 'Trigonometric Functions', url: '/calculus/integrals/special#4' },
+    explanation: `Direct reverse of $(\\sin x)' = \\cos x$. No sign correction needed.`,
+    related_formulas: `- [Antiderivative of Sine](!/calculus/integrals/formulas#antiderivative_of_sine)`,
+  },
+ 
+  {
+    name: 'Antiderivative of Secant Squared',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Exponential, Trig & Inverse Trig',
+    formula: `$$\\int \\sec^2 x\\, dx = \\tan x + C$$`,
+    link: { label: 'Trigonometric Functions', url: '/calculus/integrals/special#4' },
+    explanation: `Reverses $(\\tan x)' = \\sec^2 x$. Comes up constantly because $\\sec^2 x$ appears as the result of differentiating any tangent expression via the chain rule.`,
+    related_formulas: `- [Antiderivative of Cosecant Squared](!/calculus/integrals/formulas#antiderivative_of_cosecant_squared)`,
+  },
+ 
+  {
+    name: 'Antiderivative of Cosecant Squared',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Exponential, Trig & Inverse Trig',
+    formula: `$$\\int \\csc^2 x\\, dx = -\\cot x + C$$`,
+    link: { label: 'Trigonometric Functions', url: '/calculus/integrals/special#4' },
+    explanation: `Reverses $(\\cot x)' = -\\csc^2 x$, so the antiderivative of $\\csc^2 x$ picks up the opposite sign.`,
+    related_formulas: `- [Antiderivative of Secant Squared](!/calculus/integrals/formulas#antiderivative_of_secant_squared)`,
+  },
+ 
+  {
+    name: 'Antiderivative of Sec Tan',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Exponential, Trig & Inverse Trig',
+    formula: `$$\\int \\sec x \\tan x\\, dx = \\sec x + C$$`,
+    link: { label: 'Trigonometric Functions', url: '/calculus/integrals/special#4' },
+    explanation: `Reverses $(\\sec x)' = \\sec x \\tan x$. Recognize the product $\\sec x \\tan x$ as a derivative pattern, not as something requiring substitution or parts.`,
+    related_formulas: `- [Antiderivative of Csc Cot](!/calculus/integrals/formulas#antiderivative_of_csc_cot)`,
+  },
+ 
+  {
+    name: 'Antiderivative of Csc Cot',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Exponential, Trig & Inverse Trig',
+    formula: `$$\\int \\csc x \\cot x\\, dx = -\\csc x + C$$`,
+    link: { label: 'Trigonometric Functions', url: '/calculus/integrals/special#4' },
+    explanation: `Reverses $(\\csc x)' = -\\csc x \\cot x$, so the antiderivative carries the opposite sign.`,
+    related_formulas: `- [Antiderivative of Sec Tan](!/calculus/integrals/formulas#antiderivative_of_sec_tan)`,
+  },
+ 
+  {
+    name: 'Antiderivative of Tangent',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Exponential, Trig & Inverse Trig',
+    formula: `$$\\int \\tan x\\, dx = \\ln|\\sec x| + C$$`,
+    link: { label: 'Integrals Leading to Logarithms', url: '/calculus/integrals/special#7' },
+    explanation: `Rewrite $\\tan x = \\sin x / \\cos x$, recognize as $-f'(x)/f(x)$ with $f = \\cos x$, and apply the logarithmic derivative pattern. Result: $-\\ln|\\cos x| + C$, equivalently $\\ln|\\sec x| + C$.`,
+    variants: `Equivalent form: $$\\int \\tan x\\, dx = -\\ln|\\cos x| + C$$`,
+    related_formulas: `- [Logarithmic Derivative Pattern](!/calculus/integrals/formulas#logarithmic_derivative_pattern)
+- [Antiderivative of Cotangent](!/calculus/integrals/formulas#antiderivative_of_cotangent)
+- [Antiderivative of Secant](!/calculus/integrals/formulas#antiderivative_of_secant)`,
+  },
+ 
+  {
+    name: 'Antiderivative of Cotangent',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Exponential, Trig & Inverse Trig',
+    formula: `$$\\int \\cot x\\, dx = \\ln|\\sin x| + C$$`,
+    link: { label: 'Integrals Leading to Logarithms', url: '/calculus/integrals/special#7' },
+    explanation: `Rewrite $\\cot x = \\cos x / \\sin x$, recognize as $f'(x)/f(x)$ with $f = \\sin x$, apply the logarithmic derivative pattern.`,
+    related_formulas: `- [Logarithmic Derivative Pattern](!/calculus/integrals/formulas#logarithmic_derivative_pattern)
+- [Antiderivative of Tangent](!/calculus/integrals/formulas#antiderivative_of_tangent)
+- [Antiderivative of Cosecant](!/calculus/integrals/formulas#antiderivative_of_cosecant)`,
+  },
+ 
+  {
+    name: 'Antiderivative of Secant',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Exponential, Trig & Inverse Trig',
+    formula: `$$\\int \\sec x\\, dx = \\ln|\\sec x + \\tan x| + C$$`,
+    link: { label: 'Integrals Leading to Logarithms', url: '/calculus/integrals/special#7' },
+    explanation: `Less obvious than the other trig integrals. The trick: multiply $\\sec x$ by $(\\sec x + \\tan x)/(\\sec x + \\tan x)$ — a clever form of $1$. The numerator becomes $\\sec^2 x + \\sec x \\tan x$, which is exactly the derivative of the denominator $\\sec x + \\tan x$. The integrand is now in $f'/f$ form.`,
+    related_formulas: `- [Logarithmic Derivative Pattern](!/calculus/integrals/formulas#logarithmic_derivative_pattern)
+- [Antiderivative of Cosecant](!/calculus/integrals/formulas#antiderivative_of_cosecant)
+- [Antiderivative of Tangent](!/calculus/integrals/formulas#antiderivative_of_tangent)`,
+  },
+ 
+  {
+    name: 'Antiderivative of Cosecant',
+    entity: 'indefinite_integral',
+    category: 'Standard Antiderivatives — Exponential, Trig & Inverse Trig',
+    formula: `$$\\int \\csc x\\, dx = \\ln|\\csc x - \\cot x| + C$$`,
+    link: { label: 'Integrals Leading to Logarithms', url: '/calculus/integrals/special#7' },
+    explanation: `Mirror of the secant trick: multiply $\\csc x$ by $(\\csc x - \\cot x)/(\\csc x - \\cot x)$. The numerator becomes $\\csc^2 x - \\csc x \\cot x$, the derivative of the denominator.`,
+    variants: `Equivalent form: $$\\int \\csc x\\, dx = -\\ln|\\csc x + \\cot x| + C$$`,
+    related_formulas: `- [Logarithmic Derivative Pattern](!/calculus/integrals/formulas#logarithmic_derivative_pattern)
+- [Antiderivative of Secant](!/calculus/integrals/formulas#antiderivative_of_secant)
+- [Antiderivative of Cotangent](!/calculus/integrals/formulas#antiderivative_of_cotangent)`,
+  },
+ 
+  // ─── INVERSE TRIG, SYMMETRY, IMPROPER, AVERAGE ──────────────────────────
+ 
+  {
+    name: 'Arctangent Form',
+    entity: 'indefinite_integral',
+    category: 'Inverse Trig, Symmetry, Improper, Average',
+    formula: `$$\\int \\frac{1}{a^2 + x^2}\\, dx = \\frac{1}{a} \\arctan\\frac{x}{a} + C$$`,
+    link: { label: 'Inverse Trigonometric Forms', url: '/calculus/integrals/special#5' },
+    explanation: `Reverses the derivative of arctangent. The general $a$ form is more useful than the special case $a = 1$ — most integrals encountered have an arbitrary constant in place of $1$, and completing the square often produces a quadratic of the form $a^2 + (x - h)^2$ that fits this template.`,
+    variants: `Special case $a = 1$: $$\\int \\frac{1}{1 + x^2}\\, dx = \\arctan x + C$$`,
+    conditions: `$a > 0$.`,
+    related_formulas: `- [Arcsine Form](!/calculus/integrals/formulas#arcsine_form)
+- [Arcsecant Form](!/calculus/integrals/formulas#arcsecant_form)`,
+  },
+ 
+  {
+    name: 'Arcsine Form',
+    entity: 'indefinite_integral',
+    category: 'Inverse Trig, Symmetry, Improper, Average',
+    formula: `$$\\int \\frac{1}{\\sqrt{a^2 - x^2}}\\, dx = \\arcsin\\frac{x}{a} + C$$`,
+    link: { label: 'Inverse Trigonometric Forms', url: '/calculus/integrals/special#5' },
+    explanation: `Reverses the derivative of arcsine. The square root structure $\\sqrt{a^2 - x^2}$ also appears as the trigger for trigonometric substitution $x = a\\sin\\theta$ — the two approaches give the same result.`,
+    variants: `Special case $a = 1$: $$\\int \\frac{1}{\\sqrt{1 - x^2}}\\, dx = \\arcsin x + C$$`,
+    conditions: `$a > 0$ and $|x| < a$.`,
+    related_formulas: `- [Arctangent Form](!/calculus/integrals/formulas#arctangent_form)
+- [Arcsecant Form](!/calculus/integrals/formulas#arcsecant_form)`,
+  },
+ 
+  {
+    name: 'Arcsecant Form',
+    entity: 'indefinite_integral',
+    category: 'Inverse Trig, Symmetry, Improper, Average',
+    formula: `$$\\int \\frac{1}{x \\sqrt{x^2 - 1}}\\, dx = \\text{arcsec}\\,|x| + C$$`,
+    link: { label: 'Inverse Trigonometric Forms', url: '/calculus/integrals/special#5' },
+    explanation: `Reverses the derivative of arcsecant. The absolute value handles both branches of the arcsecant function.`,
+    conditions: `$|x| > 1$.`,
+    related_formulas: `- [Arctangent Form](!/calculus/integrals/formulas#arctangent_form)
+- [Arcsine Form](!/calculus/integrals/formulas#arcsine_form)`,
+  },
+ 
+  {
+    name: 'Even Function Symmetry',
+    entity: 'definite_integral',
+    category: 'Inverse Trig, Symmetry, Improper, Average',
+    formula: `$$\\int_{-a}^{a} f(x)\\, dx = 2 \\int_0^a f(x)\\, dx \\quad \\text{if } f \\text{ is even}$$`,
+    link: { label: 'Symmetry Shortcuts', url: '/calculus/integrals/evaluating#6' },
+    explanation: `An even function $f(-x) = f(x)$ has graph symmetric about the $y$-axis, so the area on $[-a, 0]$ equals the area on $[0, a]$. Compute one and double it.`,
+    conditions: `$f(-x) = f(x)$ for all $x \\in [-a, a]$. Examples: $x^2$, $\\cos x$, $|x|$.`,
+    related_formulas: `- [Odd Function Symmetry](!/calculus/integrals/formulas#odd_function_symmetry)`,
+  },
+ 
+  {
+    name: 'Odd Function Symmetry',
+    entity: 'definite_integral',
+    category: 'Inverse Trig, Symmetry, Improper, Average',
+    formula: `$$\\int_{-a}^{a} f(x)\\, dx = 0 \\quad \\text{if } f \\text{ is odd}$$`,
+    link: { label: 'Symmetry Shortcuts', url: '/calculus/integrals/evaluating#6' },
+    explanation: `An odd function $f(-x) = -f(x)$ has graph symmetric through the origin, so the signed area on $[-a, 0]$ exactly cancels the signed area on $[0, a]$. The total integral is zero — without computing anything.`,
+    conditions: `$f(-x) = -f(x)$ for all $x \\in [-a, a]$. Examples: $x^3$, $\\sin x$, $\\tan x$.`,
+    related_formulas: `- [Even Function Symmetry](!/calculus/integrals/formulas#even_function_symmetry)`,
+  },
+ 
+  {
+    name: 'Improper Integral (Infinite Limits)',
+    entity: 'improper_integral',
+    category: 'Inverse Trig, Symmetry, Improper, Average',
+    formula: `$$\\int_a^{\\infty} f(x)\\, dx = \\lim_{b \\to \\infty} \\int_a^b f(x)\\, dx$$`,
+    link: { label: 'Infinite Limits of Integration', url: '/calculus/integrals/improper#2' },
+    explanation: `Definite integrals are defined over finite intervals; integration to $\\infty$ is defined as a limit of finite integrals. The improper integral converges if this limit is finite, diverges otherwise. Symmetric definitions handle the $-\\infty$ case and integrals with both bounds at infinity (split at any finite point and require both halves to converge).`,
+    variants: `Lower limit infinite: $$\\int_{-\\infty}^b f(x)\\, dx = \\lim_{a \\to -\\infty} \\int_a^b f(x)\\, dx$$ Both limits infinite (split at any $c$): $$\\int_{-\\infty}^{\\infty} f(x)\\, dx = \\int_{-\\infty}^c f(x)\\, dx + \\int_c^{\\infty} f(x)\\, dx$$`,
+    conditions: `For the both-infinite case, both component integrals must converge independently — it is not enough for the symmetric limit $\\lim_{R \\to \\infty} \\int_{-R}^R$ to exist.`,
+    related_formulas: `- [Improper Integral (Discontinuous Integrand)](!/calculus/integrals/formulas#improper_integral_discontinuous_integrand)
+- [p-Test for Improper Integrals](!/calculus/integrals/formulas#p_test_for_improper_integrals)`,
+    related_definitions: `- [Improper Integral](!/calculus/definitions#improper_integral)`,
+  },
+ 
+  {
+    name: 'Improper Integral (Discontinuous Integrand)',
+    entity: 'improper_integral',
+    category: 'Inverse Trig, Symmetry, Improper, Average',
+    formula: `$$\\int_a^b f(x)\\, dx = \\lim_{t \\to b^-} \\int_a^t f(x)\\, dx \\quad \\text{(asymptote at } b\\text{)}$$`,
+    link: { label: 'Discontinuous Integrands', url: '/calculus/integrals/improper#3' },
+    explanation: `When the integrand has a vertical asymptote at an endpoint, integrate to a finite cutoff and take the limit as the cutoff approaches the asymptote. For an asymptote at the left endpoint, the limit runs $t \\to a^+$. For an interior asymptote at $c$, split the integral at $c$ and take both one-sided limits independently.`,
+    variants: `Left endpoint asymptote: $$\\int_a^b f(x)\\, dx = \\lim_{t \\to a^+} \\int_t^b f(x)\\, dx$$ Interior asymptote at $c$: $$\\int_a^b f(x)\\, dx = \\lim_{t \\to c^-} \\int_a^t f(x)\\, dx + \\lim_{s \\to c^+} \\int_s^b f(x)\\, dx$$`,
+    conditions: `For interior asymptotes, both one-sided limits must exist independently. Failing to split at the asymptote produces wrong answers — sometimes "computing" finite values for divergent integrals.`,
+    related_formulas: `- [Improper Integral (Infinite Limits)](!/calculus/integrals/formulas#improper_integral_infinite_limits)
+- [p-Test for Improper Integrals](!/calculus/integrals/formulas#p_test_for_improper_integrals)`,
+    related_definitions: `- [Improper Integral](!/calculus/definitions#improper_integral)
+- [Asymptote](!/calculus/definitions#asymptote)`,
+  },
+ 
+  {
+    name: 'p-Test for Improper Integrals',
+    entity: 'improper_integral',
+    category: 'Inverse Trig, Symmetry, Improper, Average',
+    formula: `$$\\int_1^{\\infty} \\frac{1}{x^p}\\, dx \\;\\begin{cases} \\text{converges} & p > 1 \\\\ \\text{diverges} & p \\leq 1 \\end{cases} \\qquad \\int_0^1 \\frac{1}{x^p}\\, dx \\;\\begin{cases} \\text{converges} & p < 1 \\\\ \\text{diverges} & p \\geq 1 \\end{cases}$$`,
+    link: { label: 'The p-Test', url: '/calculus/integrals/improper#5' },
+    explanation: `The integrals of $1/x^p$ are the canonical benchmarks for comparing other improper integrals. The boundary case $p = 1$ — which gives $\\ln x$ as an antiderivative — always diverges, both at infinity and at zero. Convergence at infinity requires fast enough decay ($p > 1$); convergence at zero requires slow enough blow-up ($p < 1$).`,
+    related_formulas: `- [Improper Integral (Infinite Limits)](!/calculus/integrals/formulas#improper_integral_infinite_limits)
+- [Improper Integral (Discontinuous Integrand)](!/calculus/integrals/formulas#improper_integral_discontinuous_integrand)`,
+    related_definitions: `- [Improper Integral](!/calculus/definitions#improper_integral)`,
+  },
+ 
+  {
+    name: 'Average Value of a Function',
+    entity: 'average_value_of_a_function',
+    category: 'Inverse Trig, Symmetry, Improper, Average',
+    formula: `$$f_{\\text{avg}} = \\frac{1}{b - a} \\int_a^b f(x)\\, dx$$`,
+    link: { label: 'Average Value of a Function', url: '/calculus/integrals/definite#7' },
+    explanation: `The continuous analog of an arithmetic mean. The integral computes the total accumulated value, and dividing by the interval length yields the average. Geometrically, $f_{\\text{avg}}$ is the height of the rectangle over $[a, b]$ that has the same area as the region under $f$. The Mean Value Theorem for Integrals guarantees a continuous $f$ actually attains $f_{\\text{avg}}$ at some point $c \\in (a, b)$.`,
+    conditions: `$f$ must be integrable on $[a, b]$ and $a \\neq b$. The Mean Value Theorem for Integrals also requires $f$ continuous on $[a, b]$.`,
+    related_formulas: `- [Bounding Property (Integrals)](!/calculus/integrals/formulas#bounding_property_integrals)`,
+    related_definitions: `- [Average Value of a Function](!/calculus/definitions#average_value_of_a_function)
+- [Definite Integral](!/calculus/definitions#definite_integral)`,
+  },
+
 ];
 
 export default calculusFormulasList;

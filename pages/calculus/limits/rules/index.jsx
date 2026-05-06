@@ -564,6 +564,20 @@ const keyWords = [
   // }
 
 const sectionsContent = {
+  // ─── /calculus/limits/rules ───────────────────────────────────────────────
+
+  obj0: {
+    title: `Key Terms`,
+    content: `
+- [Limit](!/calculus/definitions#limit) — the object these rules operate on
+- [Indeterminate Form](!/calculus/definitions#indeterminate_form) — signals that limit rules cannot be applied directly
+- [Continuity](!/calculus/definitions#continuity) — continuous functions allow limits to pass through compositions`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+    link: '',
+  },
+
   obj1: {
     title: `Why Limit Rules Matter`,
     content: `
@@ -1289,8 +1303,15 @@ export default function RulesPage({seoData, sectionsContent, introContent, faqQu
           textColor="#06357a"
         />
    <br/>
+   <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

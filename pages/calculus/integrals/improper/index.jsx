@@ -202,6 +202,21 @@ const keyWords = [
 
 
 const sectionsContent = {
+  // ─── /calculus/integrals/improper ─────────────────────────────────────────
+
+  obj0: {
+    title: `Key Terms`,
+    content: `
+- [Improper Integral](!/calculus/definitions#improper_integral) — infinite interval or unbounded integrand, evaluated as a limit
+- [Definite Integral](!/calculus/definitions#definite_integral) — improper integrals extend the definite integral framework
+- [Bounds of Integration](!/calculus/definitions#bounds_of_integration) — one or both bounds may be $\\pm\\infty$
+- [Limit](!/calculus/definitions#limit) — convergence or divergence determined by whether the limit exists`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+    link: '',
+  },
+
   obj1: {
     title: `What Makes an Integral Improper?`,
     content: `
@@ -802,8 +817,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
           textColor="#06357a"
         />
    <br/>
+   <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

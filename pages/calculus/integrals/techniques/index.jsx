@@ -201,6 +201,20 @@ const keyWords = [
   // }
 
 const sectionsContent = {
+  // ─── /calculus/integrals/techniques ───────────────────────────────────────
+
+  obj0: {
+    title: `Key Terms`,
+    content: `
+- [Integrand](!/calculus/definitions#integrand) — the expression being transformed into a recognizable form
+- [Indefinite Integral](!/calculus/definitions#indefinite_integral) — the target: find the antiderivative family
+- [Definite Integral](!/calculus/definitions#definite_integral) — substitution in definite integrals requires converting bounds`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+    link: '',
+  },
+
   obj1: {
     title: `Why Techniques Are Needed`,
     content: `
@@ -797,8 +811,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
           textColor="#06357a"
         />
    <br/>
+   <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

@@ -201,6 +201,21 @@ const keyWords = [
   // }
 
 const sectionsContent = {
+  // ─── /calculus/derivatives/differentiability ──────────────────────────────
+
+  obj0: {
+    title: `Key Terms`,
+    content: `
+- [Differentiability](!/calculus/definitions#differentiability) — the limit defining the derivative exists and is finite
+- [Derivative](!/calculus/definitions#derivative) — the object whose existence differentiability governs
+- [Continuity](!/calculus/definitions#continuity) — differentiability implies continuity, but not the reverse
+- [Tangent Line](!/calculus/definitions#tangent_line) — exists at differentiable points; absent at corners, cusps, vertical tangents`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+    link: '',
+  },
+
   obj1: {
     title: `The Definition of Differentiability`,
     content: `
@@ -781,8 +796,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
           textColor="#06357a"
         />
    <br/>
+   <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

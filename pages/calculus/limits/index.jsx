@@ -247,6 +247,28 @@ const keyWords = [
 
 
 const sectionsContent = {
+  // ─── /calculus/limits (hub) ───────────────────────────────────────────────
+ 
+  obj0: {
+    title: `Key Terms`,
+    content: `
+## Foundations
+ 
+- [Limit](!/calculus/definitions#limit) — the value $f(x)$ approaches as $x$ approaches a point
+- [One-Sided Limit](!/calculus/definitions#one_sided_limit) — limit from the left ($a^-$) or right ($a^+$) only
+- [Continuity](!/calculus/definitions#continuity) — no breaks: $\\lim_{x \\to a} f(x) = f(a)$
+- [Discontinuity](!/calculus/definitions#discontinuity) — a point where continuity fails
+ 
+## Behavior
+ 
+- [Indeterminate Form](!/calculus/definitions#indeterminate_form) — $\\frac{0}{0}$, $\\frac{\\infty}{\\infty}$, and similar forms requiring further analysis
+- [Asymptote](!/calculus/definitions#asymptote) — a line the graph approaches at infinity or near a blowup`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+    link: '',
+  },
+ 
   obj1: {
     title: `The Central Idea of a Limit`,
     content: `
@@ -832,8 +854,15 @@ export default function LimitsPage({seoData, sectionsContent, introContent, faqQ
           textColor="#06357a"
         />
    <br/>
+   <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

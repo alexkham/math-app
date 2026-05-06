@@ -201,6 +201,21 @@ const keyWords = [
   // }
 
   const sectionsContent = {
+  // ─── /calculus/derivatives/higher-order ───────────────────────────────────
+
+  obj0: {
+    title: `Key Terms`,
+    content: `
+- [Higher-Order Derivative](!/calculus/definitions#higher_order_derivative) — $f^{(n)}(x)$, differentiating $f$ a total of $n$ times
+- [Derivative](!/calculus/definitions#derivative) — the first-order case from which all higher orders follow
+- [Concavity](!/calculus/definitions#concavity) — governed by the second derivative $f''$
+- [Inflection Point](!/calculus/definitions#inflection_point) — where $f''$ changes sign`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+    link: '',
+  },
+
   obj1: {
     title: `Definition and Notation`,
     content: `
@@ -825,8 +840,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
           textColor="#06357a"
         />
    <br/>
+   <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

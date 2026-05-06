@@ -379,6 +379,37 @@ const keyWords = [
   // }
 
 const sectionsContent = {
+  // ─── /calculus/integrals (hub) ────────────────────────────────────────────
+
+  obj0: {
+    title: `Key Terms`,
+    content: `
+## Indefinite
+
+- [Antiderivative](!/calculus/definitions#antiderivative) — a function $F$ with $F'(x) = f(x)$
+- [Indefinite Integral](!/calculus/definitions#indefinite_integral) — the family $F(x) + C$ of all antiderivatives
+
+## Definite
+
+- [Definite Integral](!/calculus/definitions#definite_integral) — accumulated signed area over $[a, b]$
+- [Riemann Sum](!/calculus/definitions#riemann_sum) — rectangular approximation whose limit defines the integral
+- [Bounds of Integration](!/calculus/definitions#bounds_of_integration) — lower and upper limits $a$, $b$
+- [Signed Area](!/calculus/definitions#signed_area) — area above the axis minus area below
+- [Average Value of a Function](!/calculus/definitions#average_value_of_a_function) — $\\frac{1}{b-a}\\int_a^b f(x)\\,dx$
+
+## Components
+
+- [Integrand](!/calculus/definitions#integrand) — the function being integrated
+
+## Extensions
+
+- [Improper Integral](!/calculus/definitions#improper_integral) — infinite interval or unbounded integrand`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+    link: '',
+  },
+
   obj1: {
     title: `The Idea of Accumulation`,
     content: `
@@ -976,15 +1007,15 @@ export default function IntegralsPage({seoData, sectionsContent, introContent, f
           textColor="#06357a"
         />
    <br/>
-    {/* <KeyTermsCard
+   <KeyTermsCard
      id="0"
      title={sectionsContent.obj0.title}
      content={sectionsContent.obj0.content}
      after={sectionsContent.obj0.after}
      variant="light"
-   /> */}
+   />
    <br/>
-   <Sections sections={genericSections.slice(0)}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>

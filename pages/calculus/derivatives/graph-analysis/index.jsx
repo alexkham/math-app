@@ -202,6 +202,28 @@ const keyWords = [
 
 
   const sectionsContent = {
+  // ─── /calculus/derivatives/graph-analysis ─────────────────────────────────
+
+  obj0: {
+    title: `Key Terms`,
+    content: `
+## First Derivative
+
+- [Tangent Line](!/calculus/definitions#tangent_line) — line through $(a, f(a))$ with slope $f'(a)$
+- [Critical Point](!/calculus/definitions#critical_point) — where $f' = 0$ or $f'$ is undefined
+- [Local Extremum](!/calculus/definitions#local_extremum) — local maximum or minimum at a critical point
+- [Monotonic Function](!/calculus/definitions#monotonic_function) — $f' > 0$ means increasing, $f' < 0$ means decreasing
+
+## Second Derivative
+
+- [Concavity](!/calculus/definitions#concavity) — $f'' > 0$ concave up, $f'' < 0$ concave down
+- [Inflection Point](!/calculus/definitions#inflection_point) — where concavity reverses`,
+    before: ``,
+    after: `
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+    link: '',
+  },
+
   obj1: {
     title: `The Derivative at a Point`,
     content: `
@@ -822,8 +844,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
           textColor="#06357a"
         />
    <br/>
+   <KeyTermsCard
+  id="0"
+  title={sectionsContent.obj0.title}
+  content={sectionsContent.obj0.content}
+  after={sectionsContent.obj0.after}
+  variant="light"
+/>
    <br/>
-   <Sections sections={genericSections}/>
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>
