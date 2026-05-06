@@ -1,484 +1,3 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import ExpandableTable from '@/app/components/generic-table/ExpandableTable'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-// import '../../../pages/pages.css'
-
-
-
-// export async function getStaticProps(){
-
-//   const keyWords=['algebraic identities','polynomial identities','math identities','algebra','solve algebra problems']
-
-
-//   const algebraicIdentitiesData = {
-//     "Basic Binomial Identities": [
-//       {
-//         id: 1,
-//         law: "Square of Sum",
-//         formula: "$(a + b)^2 = a^2 + 2ab + b^2$",
-//         explanation: "Square of a binomial sum"
-//       },
-//       {
-//         id: 2,
-//         law: "Square of Difference",
-//         formula: "$(a - b)^2 = a^2 - 2ab + b^2$",
-//         explanation: "Square of a binomial difference"
-//       },
-//       {
-//         id: 3,
-//         law: "Cube of Sum",
-//         formula: "$(a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3$",
-//         explanation: "Cube of a binomial sum"
-//       },
-//       {
-//         id: 4,
-//         law: "Cube of Difference",
-//         formula: "$(a - b)^3 = a^3 - 3a^2b + 3ab^2 - b^3$",
-//         explanation: "Cube of a binomial difference"
-//       },
-//       {
-//         id: 5,
-//         law: "Fourth Power of Sum",
-//         formula: "$(a + b)^4 = a^4 + 4a^3b + 6a^2b^2 + 4ab^3 + b^4$",
-//         explanation: "Fourth power of a binomial sum"
-//       },
-//       {
-//         id: 6,
-//         law: "Fifth Power of Sum",
-//         formula: "$(a + b)^5 = a^5 + 5a^4b + 10a^3b^2 + 10a^2b^3 + 5ab^4 + b^5$",
-//         explanation: "Fifth power of a binomial sum"
-//       },
-//       {
-//         id: 7,
-//         law: "Fifth Power of Difference",
-//         formula: "$(a - b)^5 = a^5 - 5a^4b + 10a^3b^2 - 10a^2b^3 + 5ab^4 - b^5$",
-//         explanation: "Fifth power of a binomial difference"
-//       }
-//     ],
-  
-//     "General Binomial Expansions": [
-//       {
-//         id: 8,
-//         law: "General Binomial Theorem",
-//         formula: "$(a + b)^n = \\sum_{k=0}^{n} C(n,k) a^{n-k} b^k$",
-//         explanation: "General form where C(n,k) = n!/(k!(n-k)!)"
-//       }
-//     ],
-  
-//     "Multinomial Expansions": [
-//       {
-//         id: 9,
-//         law: "Trinomial Square",
-//         formula: "$(a + b + c)^2 = a^2 + b^2 + c^2 + 2ab + 2bc + 2ac$",
-//         explanation: "Square of a trinomial"
-//       },
-//       {
-//         id: 10,
-//         law: "Trinomial Cube",
-//         formula: "$(a + b + c)^3 = a^3 + b^3 + c^3 + 3(a^2b + ab^2 + a^2c + ac^2 + b^2c + bc^2) + 6abc$",
-//         explanation: "Cube of a trinomial"
-//       }
-//     ],
-  
-//     "Difference of Squares and Higher Powers": [
-//       {
-//         id: 11,
-//         law: "Difference of Squares",
-//         formula: "$a^2 - b^2 = (a + b)(a - b)$",
-//         explanation: "Factorization of difference of squares"
-//       },
-//       {
-//         id: 12,
-//         law: "Difference of Fourth Powers",
-//         formula: "$a^4 - b^4 = (a^2 + b^2)(a^2 - b^2) = (a^2 + b^2)(a + b)(a - b)$",
-//         explanation: "Factorization of difference of fourth powers"
-//       }
-//     ],
-  
-//     "Sums and Differences of Powers": [
-//       {
-//         id: 13,
-//         law: "Sum of Cubes",
-//         formula: "$a^3 + b^3 = (a + b)(a^2 - ab + b^2)$",
-//         explanation: "Factorization of sum of cubes"
-//       },
-//       {
-//         id: 14,
-//         law: "Difference of Cubes",
-//         formula: "$a^3 - b^3 = (a - b)(a^2 + ab + b^2)$",
-//         explanation: "Factorization of difference of cubes"
-//       },
-//       {
-//         id: 15,
-//         law: "Sum of Fourth Powers",
-//         formula: "$a^4 + b^4 = (a^2 + \\sqrt{2}ab + b^2)(a^2 - \\sqrt{2}ab + b^2)$",
-//         explanation: "Factorization of sum of fourth powers"
-//       },
-//       {
-//         id: 16,
-//         law: "Sum of Fifth Powers",
-//         formula: "$a^5 + b^5 = (a + b)(a^4 - a^3b + a^2b^2 - ab^3 + b^4)$",
-//         explanation: "Factorization of sum of fifth powers"
-//       },
-//       {
-//         id: 17,
-//         law: "Difference of Fifth Powers",
-//         formula: "$a^5 - b^5 = (a - b)(a^4 + a^3b + a^2b^2 + ab^3 + b^4)$",
-//         explanation: "Factorization of difference of fifth powers"
-//       },
-//       {
-//         id: 18,
-//         law: "General Difference of Powers",
-//         formula: "$a^n - b^n = (a - b)(a^{n-1} + a^{n-2}b + ... + ab^{n-2} + b^{n-1})$",
-//         explanation: "General factorization of difference of nth powers"
-//       },
-//       {
-//         id: 19,
-//         law: "General Sum of Odd Powers",
-//         formula: "$a^n + b^n = (a + b)(a^{n-1} - a^{n-2}b + ... - ab^{n-2} + b^{n-1})$ when n is odd",
-//         explanation: "General factorization of sum of odd powers"
-//       }
-//     ],
-  
-//     "Special Identities": [
-//       {
-//         id: 20,
-//         law: "Sophie Germain Identity",
-//         formula: "$a^4 + 4b^4 = (a^2 + 2ab + 2b^2)(a^2 - 2ab + 2b^2)$",
-//         explanation: "Special factorization for fourth powers"
-//       },
-//       {
-//         id: 21,
-//         law: "Sum of Squares with Cross Term",
-//         formula: "$a^4 + a^2b^2 + b^4 = (a^2 + ab + b^2)(a^2 - ab + b^2)$",
-//         explanation: "Alternative factorization of sum-like fourth power expression"
-//       },
-//       {
-//         id: 22,
-//         law: "Symmetric Sum Identity",
-//         formula: "$a^2 + b^2 + c^2 - ab - bc - ca = \\frac{1}{2}[(a-b)^2 + (b-c)^2 + (c-a)^2]$",
-//         explanation: "Symmetric expression in terms of pairwise differences"
-//       },
-//       {
-//         id: 23,
-//         law: "Sum of Squares Plus Difference",
-//         formula: "$(a + b)^2 + (a - b)^2 = 2(a^2 + b^2)$",
-//         explanation: "Sum of squared sum and squared difference"
-//       },
-//       {
-//         id: 24,
-//         law: "Difference of Squared Sum and Difference",
-//         formula: "$(a + b)^2 - (a - b)^2 = 4ab$",
-//         explanation: "Difference between squared sum and squared difference"
-//       },
-//       {
-//         id: 25,
-//         law: "Complex Factorization",
-//         formula: "$a^2 + b^2 = (a + bi)(a - bi)$",
-//         explanation: "Factorization using complex numbers"
-//       }
-//     ],
-  
-//     "Factoring Identities": [
-//       {
-//         id: 26,
-//         law: "Quadratic Factoring",
-//         formula: "$x^2 + (a + b)x + ab = (x + a)(x + b)$",
-//         explanation: "Standard quadratic factoring form"
-//       },
-//       {
-//         id: 27,
-//         law: "General Quadratic Roots",
-//         formula: "$ax^2 + bx + c = a(x - r_1)(x - r_2)$ where $r_1, r_2$ are roots",
-//         explanation: "General quadratic factorization using roots"
-//       }
-//     ],
-  
-//     "Basic Algebraic Properties": [
-//       {
-//         id: 28,
-//         law: "Distributive Property",
-//         formula: "$a(b + c) = ab + ac$",
-//         explanation: "Basic distributive property"
-//       },
-//       {
-//         id: 29,
-//         law: "Product of Binomials",
-//         formula: "$(a + b)(c + d) = ac + ad + bc + bd$",
-//         explanation: "Product of two binomials"
-//       },
-//       {
-//         id: 30,
-//         law: "Product of Trinomials",
-//         formula: "$(a + b + c)(d + e + f) = ad + ae + af + bd + be + bf + cd + ce + cf$",
-//         explanation: "Product of two trinomials"
-//       }
-//     ]
-//   };
-
-//   const sectionsContent={
-
-//     basic:{
-//       title:`Basic Binomial Identities`,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-  
-//     },
-//     general:{
-//       title:`General Binomial Expansions`,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-//     },
-  
-//     multinomial:{
-  
-//       title:`Multinomial Expansions`,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-//     },
-//     difference:{
-//       title:`Difference of Squares and Higher Powers`,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-//     },
-
-
-//     sums:{
-  
-//       title:`Sums and Differences of Powers`,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-//     },
-//     special:{
-  
-//       title:`Special Identities`,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-//     },
-//     factoring:{
-  
-//       title:`Factoring Identities`,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-//     },
-
-//     properties:{
-  
-//         title:`Basic Algebraic Properties`,
-//         content:``,
-//         before:``,
-//         after:``,
-    
-//       }
-  
-//   }
-
-
-//   return {
-//     props:{
-//       keyWords,
-//       algebraicIdentitiesData,
-//       sectionsContent
-
-//     }
-//   }
-// }
-
-// export default function LogarithmRulesPage({keyWords, algebraicIdentitiesData ,sectionsContent}) {
-
-    
-
-//   const logarithRulesSections=[
-//     {
-//         id:'basic',
-//         title:sectionsContent.basic.title,
-//         link:'',
-//         content:[
-
-//           <div key={1} style={{marginLeft:'50px',marginRight:'50px'}}>
-//         <ExpandableTable key={11}
-//         data={algebraicIdentitiesData[sectionsContent.basic.title]}
-//          displayColumns={ ["law", "formula", "explanation"]}
-//          copyableFields={["formula"]}
-//          includedFields={ ["law", "formula", "explanation"]} />
-//          </div> ,
-
-//         ]
-//     },
-//     {
-//         id:'general',
-//         title:sectionsContent.general.title,
-//         link:'',
-//         content:[
-//           <div key={2} style={{marginLeft:'50px',marginRight:'50px'}}>
-//           <ExpandableTable key={12}
-//           data={algebraicIdentitiesData[sectionsContent.general.title]}
-//            displayColumns={ ["law", "formula", "explanation"]}
-//            copyableFields={["formula"]}
-//            includedFields={ ["law", "formula", "explanation"]} />
-//            </div> ,
-//         ]
-//     },
-//     {
-//         id:'multinomial',
-//         title:sectionsContent.multinomial.title,
-//         link:'',
-//         content:[
-//           <div key={3} style={{marginLeft:'50px',marginRight:'50px'}}>
-//           <ExpandableTable key={13}
-//           data={algebraicIdentitiesData[sectionsContent.multinomial.title]}
-//            displayColumns={ ["law", "formula", "explanation"]}
-//            copyableFields={["formula"]}
-//            includedFields={ ["law", "formula", "explanation"]} />
-//            </div> ,
-//         ]
-//     },
-//     {
-//       id:'difference',
-//       title:sectionsContent.difference.title,
-//       link:'',
-//       content:[
-//         <div key={4} style={{marginLeft:'50px',marginRight:'50px'}}>
-//         <ExpandableTable key={14}
-//         data={algebraicIdentitiesData[sectionsContent.difference.title]}
-//          displayColumns={ ["law", "formula", "explanation"]}
-//          copyableFields={["formula"]}
-//          includedFields={ ["law", "formula", "explanation"]} />
-//          </div> ,
-//       ]
-//   },
-//   {
-//     id:'sums',
-//     title:sectionsContent.sums.title,
-//     link:'',
-//     content:[
-//       <div key={5} style={{marginLeft:'50px',marginRight:'50px'}}>
-//       <ExpandableTable key={15}
-//       data={algebraicIdentitiesData[sectionsContent.sums.title]}
-//        displayColumns={ ["law", "formula", "explanation"]}
-//        copyableFields={["formula"]}
-//        includedFields={ ["law", "formula", "explanation"]} />
-//        </div> ,
-//     ]
-// },
-// {
-//   id:'special',
-//   title:sectionsContent.special.title,
-//   link:'',
-//   content:[
-//     <div key={6} style={{marginLeft:'50px',marginRight:'50px'}}>
-//     <ExpandableTable key={16}
-//     data={algebraicIdentitiesData[sectionsContent.special.title]}
-//      displayColumns={ ["law", "formula", "explanation"]}
-//      copyableFields={["formula"]}
-//      includedFields={ ["law", "formula", "explanation"]} />
-//      </div> ,
-//   ]
-// },
-// {
-//   id:'factoring',
-//   title:sectionsContent.factoring.title,
-//   link:'',
-//   content:[
-//     <div key={7} style={{marginLeft:'50px',marginRight:'50px'}}>
-//     <ExpandableTable key={17}
-//     data={algebraicIdentitiesData[sectionsContent.factoring.title]}
-//      displayColumns={ ["law", "formula", "explanation"]}
-//      copyableFields={["formula"]}
-//      includedFields={ ["law", "formula", "explanation"]} />
-//      </div> ,
-//   ]
-// },
-// {
-//     id:'properties',
-//     title:sectionsContent.properties.title,
-//     link:'',
-//     content:[
-//       <div key={8} style={{marginLeft:'50px',marginRight:'50px'}}>
-//       <ExpandableTable key={18}
-//       data={algebraicIdentitiesData[sectionsContent.properties.title]}
-//        displayColumns={ ["law", "formula", "explanation"]}
-//        copyableFields={["formula"]}
-//        includedFields={ ["law", "formula", "explanation"]} />
-//        </div> ,
-//     ]
-//   },
-// //   {
-// //     id:'domain',
-// //     title:sectionsContent.domain.title,
-// //     link:'',
-// //     content:[
-// //       <div key={7} style={{marginLeft:'50px',marginRight:'50px'}}>
-// //       <ExpandableTable key={12}
-// //       data={algebraicIdentitiesData[sectionsContent.domain.title]}
-// //        displayColumns={ ["law", "formula", "explanation"]}
-// //        copyableFields={["formula"]}
-// //        includedFields={ ["law", "formula", "explanation"]} />
-// //        </div> ,
-// //     ]
-// //   }
-// ]
-
-   
-
-
-      
-//   return (
-//     <>
-//       {/* <GenericNavbar/> */}
-//       <br/>
-//       <br/>
-//       <br/>
-//       <br/>
-//       <OperaSidebar
-//                    side='right'
-//                    topOffset='55px'
-//                    sidebarWidth='45px'
-//                    panelWidth='200px'
-//                    iconColor='white'
-//                    panelBackgroundColor='#f2f2f2'
-//                  />
-//       <Breadcrumb/>
-//       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Algebric Identities</h1>
-//       <br/>
-//       <br/>
-//       <SectionTableOfContents sections={logarithRulesSections}
-//        showSecondaryNav={true}
-//        secondaryNavMode="siblings"
-//        secondaryNavTitle="Similar Pages"/>
-//       <br/>
-//       <br/>
-//       <IntroSection/>
-//       <br/>
-//       <br/>
-//       <Sections sections={logarithRulesSections}/>
-//       <br/>
-//        {/* <ScrollUpButton/> */} 
-//     </>
-//   );
-// }
-
-
-
-
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -491,37 +10,22 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 export async function getStaticProps() {
 
   const keyWords = [
-    'algebraic identities',
-    'binomial expansion',
-    'difference of squares',
-    'sum of cubes',
-    'binomial theorem'
-  ]
-
-//   const obj1Table = `
-// <table style="border-collapse: collapse; width: 100%; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-//   <thead>
-//     <tr>
-//       <th style="background: #06357a; color: white; padding: 15px; text-align: left; font-weight: bold;">Pattern</th>
-//       <th style="background: #06357a; color: white; padding: 15px; text-align: left; font-weight: bold;">Expanded form</th>
-//     </tr>
-//   </thead>
-//   <tbody>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">$(a+b)^2$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$a^2 + 2ab + b^2$</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">$(a-b)^2$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$a^2 - 2ab + b^2$</td>
-//     </tr>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">$(a+b)(a-b)$</td>
-//       <td style="padding: 12px 15px; color: #34495e;">$a^2 - b^2$</td>
-//     </tr>
-//   </tbody>
-// </table>
-//   `
+  "algebraic identities",
+  "binomial expansion",
+  "difference of squares",
+  "sum of cubes",
+  "difference of cubes",
+  "perfect square trinomial",
+  "binomial theorem",
+  "Pascal triangle coefficients",
+  "factoring patterns",
+  "polynomial identities",
+  "square of binomial",
+  "cube of binomial",
+  "trinomial expansion",
+  "Sophie Germain identity",
+  "conjugate binomials"
+]
 
 const obj1Table = `
 <table style="border-collapse: collapse; width: 60%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
@@ -549,26 +53,6 @@ const obj1Table = `
 `
 
 
-//   const obj2Table = `
-// <table style="border-collapse: collapse; width: 100%; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-//   <thead>
-//     <tr>
-//       <th style="background: #06357a; color: white; padding: 15px; text-align: left; font-weight: bold;">Pattern</th>
-//       <th style="background: #06357a; color: white; padding: 15px; text-align: left; font-weight: bold;">Expanded form</th>
-//     </tr>
-//   </thead>
-//   <tbody>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">$(a+b)^3$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$a^3 + 3a^2b + 3ab^2 + b^3$</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">$(a-b)^3$</td>
-//       <td style="padding: 12px 15px; color: #34495e;">$a^3 - 3a^2b + 3ab^2 - b^3$</td>
-//     </tr>
-//   </tbody>
-// </table>
-//   `
 const obj2Table = `
 <table style="border-collapse: collapse; width: 60%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
@@ -591,54 +75,6 @@ const obj2Table = `
 `
 
 
-//   const obj5Table = `
-// <table style="border-collapse: collapse; width: 100%; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-//   <thead>
-//     <tr>
-//       <th style="background: #06357a; color: white; padding: 15px; text-align: left; font-weight: bold;">Pattern</th>
-//       <th style="background: #06357a; color: white; padding: 15px; text-align: center; font-weight: bold;">Factors over $\\mathbb{R}$?</th>
-//       <th style="background: #06357a; color: white; padding: 15px; text-align: left; font-weight: bold;">Factorization</th>
-//     </tr>
-//   </thead>
-//   <tbody>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">$a^2 - b^2$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$(a+b)(a-b)$</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">$a^2 + b^2$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">irreducible over $\\mathbb{R}$; $(a+bi)(a-bi)$ over $\\mathbb{C}$</td>
-//     </tr>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">$a^3 - b^3$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$(a-b)(a^2 + ab + b^2)$</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">$a^3 + b^3$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$(a+b)(a^2 - ab + b^2)$</td>
-//     </tr>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">$a^4 - b^4$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$(a-b)(a+b)(a^2+b^2)$</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">$a^n - b^n$ (any $n$)</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$(a-b)(a^{n-1} + a^{n-2}b + \\cdots + b^{n-1})$</td>
-//     </tr>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">$a^n + b^n$ (odd $n$ only)</td>
-//       <td style="padding: 12px 15px; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-//       <td style="padding: 12px 15px; color: #34495e;">$(a+b)(a^{n-1} - a^{n-2}b + \\cdots + b^{n-1})$</td>
-//     </tr>
-//   </tbody>
-// </table>
-//   `
 const obj5Table = `
 <table style="border-collapse: collapse; width: 60%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
@@ -688,85 +124,6 @@ const obj5Table = `
 </table>
 `
 
-
-//   const summaryTable = `
-// <table style="border-collapse: collapse; width: 100%; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-//   <thead>
-//     <tr>
-//       <th style="background: #06357a; color: white; padding: 15px; text-align: left; font-weight: bold;">Family</th>
-//       <th style="background: #06357a; color: white; padding: 15px; text-align: left; font-weight: bold;">Identity</th>
-//       <th style="background: #06357a; color: white; padding: 15px; text-align: left; font-weight: bold;">Where it's used</th>
-//     </tr>
-//   </thead>
-//   <tbody>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Square of a sum</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$(a+b)^2 = a^2 + 2ab + b^2$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">completing the square, perfect square trinomials</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Square of a difference</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$(a-b)^2 = a^2 - 2ab + b^2$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">completing the square, expansions</td>
-//     </tr>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Difference of squares</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$a^2 - b^2 = (a+b)(a-b)$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">factoring, rationalizing denominators</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cube of a sum</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$(a+b)^3 = a^3 + 3a^2b + 3ab^2 + b^3$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cubic expansions, depressed cubics</td>
-//     </tr>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cube of a difference</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$(a-b)^3 = a^3 - 3a^2b + 3ab^2 - b^3$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cubic expansions, depressed cubics</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sum of cubes</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$a^3 + b^3 = (a+b)(a^2 - ab + b^2)$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">factoring cubics</td>
-//     </tr>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Difference of cubes</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$a^3 - b^3 = (a-b)(a^2 + ab + b^2)$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">factoring cubics</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Binomial theorem</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$(a+b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^{n-k} b^k$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">general expansions of any degree</td>
-//     </tr>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Square of a trinomial</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$(a+b+c)^2 = a^2+b^2+c^2 + 2ab+2ac+2bc$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">three-variable expansions</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">$a^n - b^n$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$(a-b)(a^{n-1} + a^{n-2}b + \\cdots + b^{n-1})$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">factoring any degree, $(a-b)$ always divides</td>
-//     </tr>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">$a^n + b^n$ (odd $n$)</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$(a+b)(a^{n-1} - a^{n-2}b + \\cdots + b^{n-1})$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">factoring odd-degree sums only</td>
-//     </tr>
-//     <tr>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sophie Germain</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">$a^4 + 4b^4 = (a^2+2ab+2b^2)(a^2-2ab+2b^2)$</td>
-//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">specialty factoring</td>
-//     </tr>
-//     <tr style="background: #f8f9fa;">
-//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Sum of squares (over $\\mathbb{C}$)</td>
-//       <td style="padding: 12px 15px; color: #34495e;">$a^2 + b^2 = (a+bi)(a-bi)$</td>
-//       <td style="padding: 12px 15px; color: #34495e;">complex number factoring</td>
-//     </tr>
-//   </tbody>
-// </table>
-//   `
 const summaryTable = `
 <table style="border-collapse: collapse; width: 60%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
@@ -1035,23 +392,145 @@ The point of memorizing these patterns is speed. Anyone can derive $(a+b)(a-b) =
 The identities below are grouped by shape: squares first, then cubes, then higher powers, then expressions in three terms, then the sum and difference of powers, and finally a small set of less common forms that recur often enough to deserve a place in working memory.`
   }
 
-  return {
-    props: {
-      sectionsContent,
-      introContent,
-      obj1Table,
-      obj2Table,
-      obj5Table,
-      summaryTable,
-      seoData: {
-        title: "Algebraic Identities | Learn Math Class",
-        description: "Squares, cubes, higher powers, trinomials, sums and differences of powers, and special algebraic identities — the shortcuts worth memorizing.",
-        keywords: keyWords.join(", "),
-        url: "/algebra/identities",
-        name: "Algebraic Identities"
-      },
-    }
+
+  const faqQuestions = {
+  obj1: {
+    question: "What is the formula for squaring a binomial?",
+    answer: "(a + b)² = a² + 2ab + b² and (a - b)² = a² - 2ab + b². The middle term 2ab comes from the cross-product in distribution. Conjugate binomials (a+b)(a-b) give a² - b², the difference of squares.",
+    sectionId: "1"
+  },
+  obj2: {
+    question: "What is the formula for cubing a binomial?",
+    answer: "(a + b)³ = a³ + 3a²b + 3ab² + b³ and (a - b)³ = a³ - 3a²b + 3ab² - b³. The coefficients 1, 3, 3, 1 follow the pattern that generalizes to all powers via the binomial theorem.",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "What is the binomial theorem?",
+    answer: "The binomial theorem expands (a+b)ⁿ as the sum of terms C(n,k)·aⁿ⁻ᵏ·bᵏ for k from 0 to n. The coefficients C(n,k) are binomial coefficients found in Pascal's triangle. For (a-b)ⁿ, signs alternate.",
+    sectionId: "3"
+  },
+  obj4: {
+    question: "How do you expand the square of a trinomial?",
+    answer: "(a + b + c)² = a² + b² + c² + 2ab + 2ac + 2bc. Each variable is squared once, and every pair of variables produces a doubled cross-product. The pattern extends to any number of terms.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "What are the sum and difference of cubes formulas?",
+    answer: "a³ - b³ = (a - b)(a² + ab + b²) and a³ + b³ = (a + b)(a² - ab + b²). The quadratic factors are irreducible over real numbers. For any n, aⁿ - bⁿ always factors with (a - b); aⁿ + bⁿ factors only when n is odd.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Does the sum of squares factor?",
+    answer: "Over real numbers, a² + b² is irreducible and cannot be factored. Over complex numbers, it factors as (a + bi)(a - bi) using the imaginary unit. This is why conjugate pairs appear in complex factorization.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "What is the Sophie Germain identity?",
+    answer: "a⁴ + 4b⁴ = (a² + 2ab + 2b²)(a² - 2ab + 2b²). This identity factors an expression that appears irreducible at first glance. It surfaces in number theory and competition problems.",
+    sectionId: "6"
   }
+}
+
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Algebraic Identities",
+    "description": "Master algebraic identities: squares and cubes of binomials, binomial theorem, trinomial expansions, difference of squares, sum and difference of cubes, higher-power factorizations, and special identities.",
+    "url": "https://www.learnmathclass.com/algebra/identities",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Algebraic Identities"
+    },
+    "teaches": [
+      "Squares of binomials and difference of squares",
+      "Cubes of binomials",
+      "Binomial theorem and Pascal's triangle",
+      "Trinomial expansions",
+      "Sum and difference of powers",
+      "Special identities including Sophie Germain",
+      "Factoring using algebraic identities"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Algebra",
+        "item": "https://www.learnmathclass.com/algebra"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Algebraic Identities",
+        "item": "https://www.learnmathclass.com/algebra/identities"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+  return {
+  props: {
+    sectionsContent,
+    introContent,
+    obj1Table,
+    obj2Table,
+    obj5Table,
+    summaryTable,
+    faqQuestions,
+    schemas,
+    seoData: {
+      title: "Algebraic Identities: Binomials, Cubes & Factoring | Learn Math Class",
+      description: "Master algebraic identities: squares and cubes of binomials, binomial theorem, trinomial expansions, difference of squares, sum and difference of cubes, higher-power factorizations, and special identities.",
+      keywords: keyWords.join(", "),
+      url: "/algebra/identities",
+      name: "Algebraic Identities"
+    },
+  }
+}
 }
 
 export default function AlgebraicIdentitiesPage({
@@ -1062,6 +541,8 @@ export default function AlgebraicIdentitiesPage({
   obj2Table,
   obj5Table,
   summaryTable,
+  faqQuestions,
+  schemas,
 }) {
 
   const genericSections = [
@@ -1153,50 +634,46 @@ export default function AlgebraicIdentitiesPage({
 
   return (
     <>
-      <Head>
-        <title>{seoData.title}</title>
-        <meta name="description" content={seoData.description} />
-        <meta name="keywords" content={seoData.keywords} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+    <Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
 
-        <meta property="og:title" content={seoData.title} />
-        <meta property="og:description" content={seoData.description} />
-        <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-        <meta property="og:type" content="article" />
-        <meta property="og:site_name" content="Learn Math Class" />
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
 
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content={seoData.title} />
-        <meta name="twitter:description" content={seoData.description} />
-
-        <meta name="robots" content="index, follow" />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebPage",
-              "name": seoData.name,
-              "description": seoData.description,
-              "keywords": seoData.keywords,
-              "url": `https://www.learnmathclass.com${seoData.url}`,
-              "dateModified": new Date().toISOString(),
-              "inLanguage": "en-US",
-              "mainEntity": {
-                "@type": "Article",
-                "name": seoData.name,
-                "dateModified": new Date().toISOString(),
-                "author": {
-                  "@type": "Organization",
-                  "name": "Learn Math Class"
-                }
-              }
-            })
-          }}
-        />
-      </Head>
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
+    }}
+  />
+</Head>
       <br />
       <br />
       <br />
