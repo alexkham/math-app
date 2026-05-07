@@ -421,11 +421,15 @@ const TYPE_ORDER = {
   'calculators': 6,
 };
 
+// function getDataModulePath(parentSlug, type) {
+//   const capitalized = type.charAt(0).toUpperCase() + type.slice(1);
+//   return `@/app/api/db/${type}/${parentSlug}/${parentSlug}${capitalized}`;
+// }
 function getDataModulePath(parentSlug, type) {
   const capitalized = type.charAt(0).toUpperCase() + type.slice(1);
-  return `@/app/api/db/${type}/${parentSlug}/${parentSlug}${capitalized}`;
+  const camelSlug = parentSlug.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+  return `@/app/api/db/${type}/${parentSlug}/${camelSlug}${capitalized}`;
 }
-
 
 /* ================================================================
    FILESYSTEM UTILITIES

@@ -33,3 +33,16 @@ video {
   text-decoration: none;
   font-weight: bold;
   }
+
+
+
+
+  /* global rule */
+
+
+  .styled-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+.styled-table tbody tr:hover {
+  background: #e8eef7 !important;
+}

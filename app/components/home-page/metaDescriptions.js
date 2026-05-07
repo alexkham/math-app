@@ -13,11 +13,11 @@ const metaDescriptions= {
     'https://www.learnmathclass.com/tables':`
     Access multiple mathematical tables including arithmetic, logarithmic, and trigonometric functions. Essential reference for students and professionals in mathematics and related fields.
     `,
-    'https://www.learnmathclass.com/sequences':`
-    Mathematical sequences like Fibonacci and prime numbers explained. 
-    Discover patterns in number sequences and their significance in mathematics and nature.
-    `
-    ,
+    // 'https://www.learnmathclass.com/sequences':`
+    // Mathematical sequences like Fibonacci and prime numbers explained. 
+    // Discover patterns in number sequences and their significance in mathematics and nature.
+    // `
+    // ,
     'https://www.learnmathclass.com/algebra':`
     Browse algebraic formulas with illustrations, extensive explanations and examples divided by categories:radical rules, exponent rules, logarithm laws and more.
    

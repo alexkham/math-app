@@ -1,7 +1,7 @@
 /**
  * Auto-generated from sitemap.xml
- * Generated: 2026-03-03T20:28:22.128Z
- * Total pages: 319
+ * Generated: 2026-05-07T20:26:59.793Z
+ * Total pages: 436
  * 
  * To regenerate: node generateNavFromSitemap.js
  */
@@ -40,6 +40,10 @@ export const mainMenuStructure = [
             "href": "/algebra/identities"
           },
           {
+            "label": "Inequalities",
+            "href": "/algebra/inequalities"
+          },
+          {
             "label": "Logarithms",
             "href": "/algebra/logarithms"
           },
@@ -54,6 +58,10 @@ export const mainMenuStructure = [
           {
             "label": "Roots",
             "href": "/algebra/roots"
+          },
+          {
+            "label": "Visual Tools",
+            "href": "/algebra/visual-tools"
           }
         ]
       },
@@ -138,6 +146,10 @@ export const mainMenuStructure = [
           {
             "label": "Unit Circle",
             "href": "/trigonometry/unit-circle"
+          },
+          {
+            "label": "Visual Tools",
+            "href": "/trigonometry/visual-tools"
           }
         ]
       },
@@ -168,16 +180,48 @@ export const mainMenuStructure = [
         "href": "/linear-algebra",
         "items": [
           {
+            "label": "Calculators",
+            "href": "/linear-algebra/calculators"
+          },
+          {
+            "label": "Decompositions",
+            "href": "/linear-algebra/decompositions"
+          },
+          {
             "label": "Definitions",
             "href": "/linear-algebra/definitions"
+          },
+          {
+            "label": "Determinants",
+            "href": "/linear-algebra/determinants"
+          },
+          {
+            "label": "Eigen",
+            "href": "/linear-algebra/eigen"
           },
           {
             "label": "Formulas",
             "href": "/linear-algebra/formulas"
           },
           {
+            "label": "Linear Systems",
+            "href": "/linear-algebra/linear-systems"
+          },
+          {
             "label": "Matrix",
             "href": "/linear-algebra/matrix"
+          },
+          {
+            "label": "Orthogonality",
+            "href": "/linear-algebra/orthogonality"
+          },
+          {
+            "label": "Transformations",
+            "href": "/linear-algebra/transformations"
+          },
+          {
+            "label": "Vector Spaces",
+            "href": "/linear-algebra/vector-spaces"
           },
           {
             "label": "Vectors",
@@ -342,12 +386,32 @@ export const mainMenuStructure = [
         "href": "/set-theory",
         "items": [
           {
+            "label": "Cardinality",
+            "href": "/set-theory/cardinality"
+          },
+          {
             "label": "Formulas",
             "href": "/set-theory/formulas"
           },
           {
+            "label": "Operations",
+            "href": "/set-theory/operations"
+          },
+          {
+            "label": "Relationships",
+            "href": "/set-theory/relationships"
+          },
+          {
             "label": "Rules",
             "href": "/set-theory/rules"
+          },
+          {
+            "label": "Subsets",
+            "href": "/set-theory/subsets"
+          },
+          {
+            "label": "Venn Diagrams",
+            "href": "/set-theory/venn-diagrams"
           },
           {
             "label": "Venn Generator",
@@ -428,6 +492,10 @@ export const mainMenuStructure = [
           {
             "label": "Trigonometric Form",
             "href": "/complex-numbers/trigonometric-form"
+          },
+          {
+            "label": "Visual Tools",
+            "href": "/complex-numbers/visual-tools"
           }
         ]
       },
@@ -821,10 +889,6 @@ export const mainMenuStructure = [
             "href": "/calculators/polynomial-calculator"
           },
           {
-            "label": "Quadratic Equations",
-            "href": "/calculators/quadratic-equations"
-          },
-          {
             "label": "Raw Data",
             "href": "/probability/calculators/expected-value/raw-data"
           },
@@ -851,23 +915,34 @@ export const mainMenuStructure = [
         ],
         "href": "/calculators"
       },
-      // {
-      //   "title": "Solvers",
-      //   "items": [
-      //     {
-      //       "label": "Equivalence Validator",
-      //       "href": "/logic/propositional-logic/semantics/equivalence-validator"
-      //     },
-      //     {
-      //       "label": "Quadratic Equations",
-      //       "href": "/calculators/quadratic-equations"
-      //     },
-        
-      //   ]
-      // },
+      {
+        "title": "Solvers",
+        "items": [
+          {
+            "label": "Equivalence Validator",
+            "href": "/logic/propositional-logic/semantics/equivalence-validator"
+          }
+        ]
+      },
       {
         "title": "Generators",
         "items": [
+          {
+            "label": "Biconditionals",
+            "href": "/logic/truth-tables/biconditionals"
+          },
+          {
+            "label": "Contradictions",
+            "href": "/logic/truth-tables/contradictions"
+          },
+          {
+            "label": "Implications",
+            "href": "/logic/truth-tables/implications"
+          },
+          {
+            "label": "Tautologies",
+            "href": "/logic/truth-tables/tautologies"
+          },
           {
             "label": "Truth Tables",
             "href": "/logic/truth-tables"
@@ -950,6 +1025,10 @@ export const mainMenuStructure = [
           {
             "label": "Inverse",
             "href": "/tables/trigonometry/inverse"
+          },
+          {
+            "label": "Layout",
+            "href": "/tables/[category]/layout"
           },
           {
             "label": "Linear Algebra",

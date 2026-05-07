@@ -15,7 +15,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 export async function getStaticProps() {
   const { default: linearAlgebraFormulasList } = await import('@/app/api/db/formulas/linear-algebra/linearAlgebraFormulas');
   const { default: linearAlgebraTermsList } = await import('@/app/api/db/definitions/linear-algebra/linearAlgebraDefinitions')
-  
+  console.log('formulas:', Array.isArray(linearAlgebraFormulasList), linearAlgebraFormulasList?.length);
+console.log('terms:', Array.isArray(linearAlgebraTermsList), linearAlgebraTermsList?.length);
   
   const tools=[
      

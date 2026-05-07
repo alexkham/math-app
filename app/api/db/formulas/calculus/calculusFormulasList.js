@@ -1515,6 +1515,1201 @@ $$f \\text{ left-continuous at } a \\iff \\lim_{x \\to a^-} f(x) = f(a)$$`,
 - [Definite Integral](!/calculus/definitions#definite_integral)`,
   },
 
+
+  // ============================================================
+  // Category 1 — Definition of the Derivative (2 entries)
+  // ============================================================
+ 
+  {
+    id: 'average_rate_of_change',
+    category: 'Definition of the Derivative',
+    name: 'Average Rate of Change',
+    formula: `$$\\bar{m} = \\frac{f(b) - f(a)}{b - a}$$`,
+    link: { url: '/calculus/derivatives#1', text: 'the difference quotient and its limit' },
+    topic: 'calculus',
+    entity: 'average_rate_of_change',
+    variables: `
+- $f$ — a function defined on $[a, b]$
+- $a, b$ — endpoints of the interval, with $a \\neq b$
+- $\\bar{m}$ — the average rate of change, equal to the slope of the secant line through $(a, f(a))$ and $(b, f(b))$`,
+    explanation: `
+The average rate of change of $f$ over $[a, b]$ measures the total change in $f$ per unit change in $x$ across the interval. Geometrically, it is the slope of the secant line through the two endpoints. Substituting $b = a + h$ produces the equivalent [difference quotient](!/calculus/derivatives#1) form $\\frac{f(a + h) - f(a)}{h}$, used in the limit definition of the derivative. As the interval shrinks ($h \\to 0$), the average rate of change becomes the [instantaneous rate of change](!/calculus/definitions#instantaneous_rate_of_change).`,
+    related_definitions: `
+- [Average Rate of Change](!/calculus/definitions#average_rate_of_change)
+- [Instantaneous Rate of Change](!/calculus/definitions#instantaneous_rate_of_change)
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative Limit Definition](!/calculus/formulas#derivative_limit_definition)
+- [Mean Value Theorem](!/calculus/formulas#mean_value_theorem)`,
+  },
+ 
+  {
+    id: 'derivative_limit_definition',
+    category: 'Definition of the Derivative',
+    name: 'Derivative Limit Definition',
+    formula: `$$f'(x) = \\lim_{h \\to 0} \\frac{f(x + h) - f(x)}{h} = \\lim_{t \\to x} \\frac{f(t) - f(x)}{t - x}$$`,
+    link: { url: '/calculus/derivatives/function#1', text: 'the derivative function defined' },
+    topic: 'calculus',
+    entity: 'derivative',
+    variables: `
+- $f$ — a function differentiable at $x$
+- $h$ — increment in $x$ (the $h$-form lets $h \\to 0$ from either side)
+- $f'(x)$ — derivative of $f$ at $x$, the slope of the tangent line to the graph of $f$ at $(x, f(x))$`,
+    conditions: `
+The limit must exist and be finite. If the one-sided limits differ (corner), are infinite (vertical tangent or cusp), or $f$ is not [continuous](!/calculus/limits/continuity) at $x$, the derivative is undefined there.`,
+    explanation: `
+Both forms define the same quantity. The $h$-form treats $h$ as the increment from a fixed $x$; the $t \\to x$ form lets the input point itself approach $x$. Replacing the fixed point $a$ in the [average rate of change](!/calculus/formulas#average_rate_of_change) with a variable $x$ converts the derivative at a single point into the derivative function $f'$. The limit is a [two-sided limit](!/calculus/limits/two-sided), so left- and right-hand limits of the difference quotient must agree.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)
+- [Differentiability](!/calculus/definitions#differentiability)
+- [Instantaneous Rate of Change](!/calculus/definitions#instantaneous_rate_of_change)
+- [Limit](!/calculus/definitions#limit)`,
+    related_formulas: `
+- [Average Rate of Change](!/calculus/formulas#average_rate_of_change)
+- [Constant Rule (Derivatives)](!/calculus/formulas#constant_rule_derivatives)
+- [Power Rule (Derivatives)](!/calculus/formulas#power_rule_derivatives)`,
+  },
+ 
+  // ============================================================
+  // Category 2 — Differentiation Rules (7 entries)
+  // ============================================================
+ 
+  {
+    id: 'constant_rule_derivatives',
+    category: 'Differentiation Rules',
+    name: 'Constant Rule (Derivatives)',
+    formula: `$$\\frac{d}{dx}[c] = 0$$`,
+    link: { url: '/calculus/derivatives/rules#1', text: 'constant rule' },
+    topic: 'calculus',
+    entity: 'derivative',
+    variables: `
+- $c$ — any real constant`,
+    explanation: `
+A constant function has a horizontal graph; its slope is zero everywhere. From the [limit definition](!/calculus/formulas#derivative_limit_definition), the difference quotient $\\frac{c - c}{h} = 0$ for all $h \\neq 0$, so the limit is $0$. Equivalently, this is the [power rule](!/calculus/formulas#power_rule_derivatives) at $n = 0$ since $c = c \\cdot x^0$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Power Rule (Derivatives)](!/calculus/formulas#power_rule_derivatives)
+- [Sum and Difference Rule (Derivatives)](!/calculus/formulas#sum_and_difference_rule_derivatives)`,
+  },
+ 
+  {
+    id: 'power_rule_derivatives',
+    category: 'Differentiation Rules',
+    name: 'Power Rule (Derivatives)',
+    formula: `$$\\frac{d}{dx}[x^n] = n x^{n-1}$$`,
+    link: { url: '/calculus/derivatives/rules#2', text: 'power rule' },
+    topic: 'calculus',
+    entity: 'derivative',
+    variables: `
+- $n$ — any real number (integer, rational, or irrational)
+- $x$ — input value (with $x > 0$ required when $n$ is irrational or a non-integer rational)`,
+    explanation: `
+Applies uniformly across all real exponents: positive integers ($\\frac{d}{dx}[x^5] = 5x^4$), negative integers ($\\frac{d}{dx}[x^{-3}] = -3x^{-4}$), fractions ($\\frac{d}{dx}[\\sqrt{x}] = \\frac{1}{2}x^{-1/2}$), and irrationals ($\\frac{d}{dx}[x^{\\pi}] = \\pi x^{\\pi - 1}$). For positive integer $n$, the proof uses the binomial expansion of $(x + h)^n$ in the [limit definition](!/calculus/formulas#derivative_limit_definition); after dividing by $h$ and taking the limit, only the $nx^{n-1}$ term survives. For real exponents, the rule follows from $x^n = e^{n \\ln x}$ via the [chain rule](!/calculus/formulas#chain_rule).`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Constant Rule (Derivatives)](!/calculus/formulas#constant_rule_derivatives)
+- [Chain Rule](!/calculus/formulas#chain_rule)`,
+  },
+ 
+  {
+    id: 'constant_multiple_rule_derivatives',
+    category: 'Differentiation Rules',
+    name: 'Constant Multiple Rule (Derivatives)',
+    formula: `$$\\frac{d}{dx}[c \\cdot f(x)] = c \\cdot f'(x)$$`,
+    link: { url: '/calculus/derivatives/rules#3', text: 'constant multiple rule' },
+    topic: 'calculus',
+    entity: 'derivative',
+    variables: `
+- $c$ — any real constant
+- $f$ — a function differentiable at $x$`,
+    explanation: `
+Constants factor out of derivatives. From the [limit definition](!/calculus/formulas#derivative_limit_definition), the constant $c$ factors out of the difference quotient and passes through the limit unchanged. The rule is a special case of the [product rule](!/calculus/formulas#product_rule_derivatives) where one factor is constant; stating it separately shortcuts the algebra in nearly every computation.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Sum and Difference Rule (Derivatives)](!/calculus/formulas#sum_and_difference_rule_derivatives)
+- [Product Rule (Derivatives)](!/calculus/formulas#product_rule_derivatives)`,
+  },
+ 
+  {
+    id: 'sum_and_difference_rule_derivatives',
+    category: 'Differentiation Rules',
+    name: 'Sum and Difference Rule (Derivatives)',
+    formula: `$$\\frac{d}{dx}[f(x) \\pm g(x)] = f'(x) \\pm g'(x)$$`,
+    link: { url: '/calculus/derivatives/rules#4', text: 'sum and difference rules' },
+    topic: 'calculus',
+    entity: 'derivative',
+    variables: `
+- $f, g$ — functions differentiable at $x$
+- $\\pm$ — applies independently to addition and subtraction`,
+    explanation: `
+The derivative distributes over addition and subtraction. From the [limit definition](!/calculus/formulas#derivative_limit_definition), the difference quotient splits into two parts and the [sum and difference rule for limits](!/calculus/formulas#sum_and_difference_rule_limits) applies. Extends to any finite sum: $(f_1 + f_2 + \\cdots + f_n)' = f_1' + f_2' + \\cdots + f_n'$. Combined with the [constant multiple rule](!/calculus/formulas#constant_multiple_rule_derivatives), this differentiates every linear combination — every polynomial term-by-term.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Constant Multiple Rule (Derivatives)](!/calculus/formulas#constant_multiple_rule_derivatives)
+- [Sum and Difference Rule (Limits)](!/calculus/formulas#sum_and_difference_rule_limits)`,
+  },
+ 
+  {
+    id: 'product_rule_derivatives',
+    category: 'Differentiation Rules',
+    name: 'Product Rule (Derivatives)',
+    formula: `$$\\frac{d}{dx}[f(x) \\cdot g(x)] = f'(x) \\cdot g(x) + f(x) \\cdot g'(x)$$`,
+    link: { url: '/calculus/derivatives/rules#5', text: 'product rule' },
+    topic: 'calculus',
+    entity: 'derivative',
+    variables: `
+- $f, g$ — functions differentiable at $x$`,
+    explanation: `
+The derivative of a product is not the product of the derivatives. Each factor takes a turn being differentiated while the other is held; the contributions are summed. The proof adds and subtracts $f(x + h)g(x)$ inside the difference quotient, splitting it into a piece isolating $g'$ and a piece isolating $f'$. [Differentiability implies continuity](!/calculus/derivatives/differentiability), which is needed for the limit step. For three factors: $(fgh)' = f'gh + fg'h + fgh'$ — each factor differentiated once, the rest unchanged, all summed.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Quotient Rule (Derivatives)](!/calculus/formulas#quotient_rule_derivatives)
+- [Chain Rule](!/calculus/formulas#chain_rule)
+- [Constant Multiple Rule (Derivatives)](!/calculus/formulas#constant_multiple_rule_derivatives)`,
+  },
+ 
+  {
+    id: 'quotient_rule_derivatives',
+    category: 'Differentiation Rules',
+    name: 'Quotient Rule (Derivatives)',
+    formula: `$$\\frac{d}{dx}\\left[\\frac{f(x)}{g(x)}\\right] = \\frac{f'(x) \\cdot g(x) - f(x) \\cdot g'(x)}{[g(x)]^2}$$`,
+    link: { url: '/calculus/derivatives/rules#6', text: 'quotient rule' },
+    topic: 'calculus',
+    entity: 'derivative',
+    variables: `
+- $f, g$ — functions differentiable at $x$
+- Required: $g(x) \\neq 0$`,
+    conditions: `
+The denominator $g(x)$ must be nonzero at the point of evaluation. The order of terms in the numerator matters: $f'g - fg'$, not $fg' - f'g$.`,
+    explanation: `
+Equivalently derived from the [product rule](!/calculus/formulas#product_rule_derivatives) applied to $f \\cdot g^{-1}$ together with the [chain rule](!/calculus/formulas#chain_rule). Used directly when the function is naturally a fraction; rewriting as a product is preferred when the denominator is a simple power. The derivatives of $\\tan x$, $\\cot x$, $\\sec x$, $\\csc x$ all follow from the quotient rule applied to ratios of $\\sin$ and $\\cos$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Product Rule (Derivatives)](!/calculus/formulas#product_rule_derivatives)
+- [Chain Rule](!/calculus/formulas#chain_rule)
+- [Derivative of Tangent](!/calculus/formulas#derivative_of_tangent)`,
+  },
+ 
+  {
+    id: 'chain_rule',
+    category: 'Differentiation Rules',
+    name: 'Chain Rule',
+    formula: `$$\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x) \\qquad \\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$$`,
+    link: { url: '/calculus/derivatives/rules#7', text: 'chain rule' },
+    topic: 'calculus',
+    entity: 'derivative',
+    variables: `
+- $g$ — function differentiable at $x$
+- $f$ — function differentiable at $g(x)$
+- $y = f(u)$, $u = g(x)$ in the Leibniz form`,
+    explanation: `
+Differentiate the outer function evaluated at the inner function, then multiply by the derivative of the inner function. The Leibniz form makes the rule look like fraction cancellation — and treating $dy/dx$ as a ratio of [differentials](!/calculus/derivatives/differentials) makes that algebra rigorous. For deeper compositions $f(g(h(x)))$, each layer contributes one multiplicative factor: $f'(g(h(x))) \\cdot g'(h(x)) \\cdot h'(x)$. Without the chain rule, composite functions like $\\sin(x^2)$, $e^{3x}$, $\\ln(\\cos x)$ cannot be differentiated — most applications of differentiation use it at some level.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)
+- [Differential](!/calculus/definitions#differential)`,
+    related_formulas: `
+- [Product Rule (Derivatives)](!/calculus/formulas#product_rule_derivatives)
+- [Quotient Rule (Derivatives)](!/calculus/formulas#quotient_rule_derivatives)
+- [Power Rule (Derivatives)](!/calculus/formulas#power_rule_derivatives)`,
+  },
+ 
+  // ============================================================
+  // Category 3 — Major Theorems (2 entries)
+  // ============================================================
+ 
+  {
+    id: 'mean_value_theorem',
+    category: 'Major Theorems',
+    name: 'Mean Value Theorem',
+    formula: `$$f'(c) = \\frac{f(b) - f(a)}{b - a} \\qquad \\text{for some } c \\in (a, b)$$`,
+    link: { url: '/calculus/derivatives/rules#8', text: 'mean value theorem' },
+    topic: 'calculus',
+    entity: 'derivative',
+    variables: `
+- $f$ — a function continuous on $[a, b]$ and differentiable on $(a, b)$
+- $c$ — at least one point in the open interval $(a, b)$ where the equality holds`,
+    conditions: `
+$f$ must be [continuous](!/calculus/limits/continuity) on $[a, b]$ and [differentiable](!/calculus/derivatives/differentiability) on $(a, b)$. Failure of either hypothesis can break the conclusion.`,
+    explanation: `
+At some interior point $c$, the [instantaneous rate of change](!/calculus/definitions#instantaneous_rate_of_change) equals the [average rate of change](!/calculus/formulas#average_rate_of_change) over the whole interval. Geometrically, there is a tangent line parallel to the secant line through the endpoints. The theorem is mostly used to prove other results: a function with $f' > 0$ on an interval is increasing; two functions with the same derivative differ by a constant; the [Fundamental Theorem of Calculus, Part 2](!/calculus/formulas#fundamental_theorem_of_calculus_part_2) follows from it. [Rolle's Theorem](!/calculus/formulas#rolles_theorem) is the special case where $f(a) = f(b)$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)
+- [Continuity](!/calculus/definitions#continuity)
+- [Differentiability](!/calculus/definitions#differentiability)`,
+    related_formulas: `
+- [Rolle's Theorem](!/calculus/formulas#rolles_theorem)
+- [Average Rate of Change](!/calculus/formulas#average_rate_of_change)
+- [Fundamental Theorem of Calculus, Part 2](!/calculus/formulas#fundamental_theorem_of_calculus_part_2)`,
+  },
+ 
+  {
+    id: 'rolles_theorem',
+    category: 'Major Theorems',
+    name: "Rolle's Theorem",
+    formula: `$$\\text{If } f(a) = f(b), \\text{ then } f'(c) = 0 \\text{ for some } c \\in (a, b)$$`,
+    link: { url: '/calculus/derivatives/rules#9', text: "rolle's theorem" },
+    topic: 'calculus',
+    entity: 'derivative',
+    variables: `
+- $f$ — a function continuous on $[a, b]$ and differentiable on $(a, b)$
+- Required: $f(a) = f(b)$
+- $c$ — at least one point in $(a, b)$ where $f'(c) = 0$`,
+    conditions: `
+Continuity on the closed interval $[a, b]$, differentiability on the open interval $(a, b)$, and matching endpoint values $f(a) = f(b)$.`,
+    explanation: `
+The special case of the [Mean Value Theorem](!/calculus/formulas#mean_value_theorem) where the secant line is horizontal. A function that returns to its starting value must have a horizontal tangent somewhere between — at a maximum, a minimum, or a stationary point of constant value. Rolle's Theorem is often used as a stepping stone: the proof of the MVT itself applies Rolle's to an auxiliary function. Between any two roots of $f$, a root of $f'$ must exist.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)
+- [Critical Point](!/calculus/definitions#critical_point)`,
+    related_formulas: `
+- [Mean Value Theorem](!/calculus/formulas#mean_value_theorem)`,
+  },
+ 
+  // ============================================================
+  // Category 4 — Derivatives of Common Functions (10 entries)
+  // ============================================================
+ 
+  {
+    id: 'derivative_of_sine',
+    category: 'Derivatives of Common Functions',
+    name: 'Derivative of Sine',
+    formula: `$$\\frac{d}{dx}[\\sin x] = \\cos x$$`,
+    link: { url: '/calculus/derivatives/common#4', text: 'trigonometric functions: sine and cosine' },
+    topic: 'calculus',
+    entity: 'derivative',
+    explanation: `
+Proved from the [limit definition](!/calculus/formulas#derivative_limit_definition) using the angle addition formula and the [special limits](!/calculus/limits/special) $\\lim_{h \\to 0} \\frac{\\sin h}{h} = 1$ and $\\lim_{h \\to 0} \\frac{\\cos h - 1}{h} = 0$. Repeated differentiation cycles with period four: $\\sin x \\to \\cos x \\to -\\sin x \\to -\\cos x \\to \\sin x$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Cosine](!/calculus/formulas#derivative_of_cosine)
+- [Derivative of Tangent](!/calculus/formulas#derivative_of_tangent)`,
+  },
+ 
+  {
+    id: 'derivative_of_cosine',
+    category: 'Derivatives of Common Functions',
+    name: 'Derivative of Cosine',
+    formula: `$$\\frac{d}{dx}[\\cos x] = -\\sin x$$`,
+    link: { url: '/calculus/derivatives/common#4', text: 'trigonometric functions: sine and cosine' },
+    topic: 'calculus',
+    entity: 'derivative',
+    explanation: `
+The negative sign is essential — a frequent source of error. Follows by differentiating $\\cos x = \\sin(\\pi/2 - x)$ via the [chain rule](!/calculus/formulas#chain_rule), or directly from the [limit definition](!/calculus/formulas#derivative_limit_definition) using the cosine angle addition formula. Cofunction pattern: cosine, cotangent, and cosecant all carry a negative sign in their derivatives.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Sine](!/calculus/formulas#derivative_of_sine)
+- [Derivative of Cotangent](!/calculus/formulas#derivative_of_cotangent)`,
+  },
+ 
+  {
+    id: 'derivative_of_tangent',
+    category: 'Derivatives of Common Functions',
+    name: 'Derivative of Tangent',
+    formula: `$$\\frac{d}{dx}[\\tan x] = \\sec^2 x$$`,
+    link: { url: '/calculus/derivatives/common#5', text: 'trigonometric functions: tangent, cotangent, secant, cosecant' },
+    topic: 'calculus',
+    entity: 'derivative',
+    conditions: `
+Valid where $\\cos x \\neq 0$, i.e. $x \\neq \\frac{\\pi}{2} + k\\pi$ for integer $k$.`,
+    explanation: `
+Derived via the [quotient rule](!/calculus/formulas#quotient_rule_derivatives) on $\\tan x = \\sin x / \\cos x$: the result is $\\frac{\\cos^2 x + \\sin^2 x}{\\cos^2 x} = \\frac{1}{\\cos^2 x} = \\sec^2 x$, using the Pythagorean identity.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Cotangent](!/calculus/formulas#derivative_of_cotangent)
+- [Derivative of Secant](!/calculus/formulas#derivative_of_secant)
+- [Quotient Rule (Derivatives)](!/calculus/formulas#quotient_rule_derivatives)`,
+  },
+ 
+  {
+    id: 'derivative_of_cotangent',
+    category: 'Derivatives of Common Functions',
+    name: 'Derivative of Cotangent',
+    formula: `$$\\frac{d}{dx}[\\cot x] = -\\csc^2 x$$`,
+    link: { url: '/calculus/derivatives/common#5', text: 'trigonometric functions: tangent, cotangent, secant, cosecant' },
+    topic: 'calculus',
+    entity: 'derivative',
+    conditions: `
+Valid where $\\sin x \\neq 0$, i.e. $x \\neq k\\pi$ for integer $k$.`,
+    explanation: `
+Derived via the [quotient rule](!/calculus/formulas#quotient_rule_derivatives) on $\\cot x = \\cos x / \\sin x$. The negative sign matches the cofunction pattern.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Tangent](!/calculus/formulas#derivative_of_tangent)
+- [Derivative of Cosecant](!/calculus/formulas#derivative_of_cosecant)`,
+  },
+ 
+  {
+    id: 'derivative_of_secant',
+    category: 'Derivatives of Common Functions',
+    name: 'Derivative of Secant',
+    formula: `$$\\frac{d}{dx}[\\sec x] = \\sec x \\tan x$$`,
+    link: { url: '/calculus/derivatives/common#5', text: 'trigonometric functions: tangent, cotangent, secant, cosecant' },
+    topic: 'calculus',
+    entity: 'derivative',
+    conditions: `
+Valid where $\\cos x \\neq 0$, i.e. $x \\neq \\frac{\\pi}{2} + k\\pi$ for integer $k$.`,
+    explanation: `
+Derived via the [quotient rule](!/calculus/formulas#quotient_rule_derivatives) on $\\sec x = 1 / \\cos x$, or via the [chain rule](!/calculus/formulas#chain_rule) on $\\sec x = (\\cos x)^{-1}$. No cofunction sign flip — secant is not a cofunction.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Cosecant](!/calculus/formulas#derivative_of_cosecant)
+- [Derivative of Tangent](!/calculus/formulas#derivative_of_tangent)`,
+  },
+ 
+  {
+    id: 'derivative_of_cosecant',
+    category: 'Derivatives of Common Functions',
+    name: 'Derivative of Cosecant',
+    formula: `$$\\frac{d}{dx}[\\csc x] = -\\csc x \\cot x$$`,
+    link: { url: '/calculus/derivatives/common#5', text: 'trigonometric functions: tangent, cotangent, secant, cosecant' },
+    topic: 'calculus',
+    entity: 'derivative',
+    conditions: `
+Valid where $\\sin x \\neq 0$, i.e. $x \\neq k\\pi$ for integer $k$.`,
+    explanation: `
+Derived via the [quotient rule](!/calculus/formulas#quotient_rule_derivatives) on $\\csc x = 1 / \\sin x$. Negative sign matches the cofunction pattern.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Secant](!/calculus/formulas#derivative_of_secant)
+- [Derivative of Cotangent](!/calculus/formulas#derivative_of_cotangent)`,
+  },
+ 
+  {
+    id: 'derivative_of_natural_exponential',
+    category: 'Derivatives of Common Functions',
+    name: 'Derivative of Natural Exponential',
+    formula: `$$\\frac{d}{dx}[e^x] = e^x$$`,
+    link: { url: '/calculus/derivatives/common#6', text: 'exponential functions' },
+    topic: 'calculus',
+    entity: 'derivative',
+    explanation: `
+The natural exponential is the unique non-trivial function equal to its own derivative — the property that defines $e$ as the natural base. Proved from the [limit definition](!/calculus/formulas#derivative_limit_definition) using the [special limit](!/calculus/limits/special) $\\lim_{h \\to 0} \\frac{e^h - 1}{h} = 1$: the difference quotient factors as $e^x \\cdot \\frac{e^h - 1}{h}$, which approaches $e^x \\cdot 1 = e^x$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of General Exponential](!/calculus/formulas#derivative_of_general_exponential)
+- [Derivative of Natural Logarithm](!/calculus/formulas#derivative_of_natural_logarithm)`,
+  },
+ 
+  {
+    id: 'derivative_of_general_exponential',
+    category: 'Derivatives of Common Functions',
+    name: 'Derivative of General Exponential',
+    formula: `$$\\frac{d}{dx}[a^x] = a^x \\ln a$$`,
+    link: { url: '/calculus/derivatives/common#6', text: 'exponential functions' },
+    topic: 'calculus',
+    entity: 'derivative',
+    conditions: `
+$a > 0$ and $a \\neq 1$.`,
+    explanation: `
+Follows from rewriting $a^x = e^{x \\ln a}$ and applying the [chain rule](!/calculus/formulas#chain_rule). The factor $\\ln a$ is constant — it scales the derivative. When $a = e$, $\\ln a = 1$ and the factor disappears, recovering $\\frac{d}{dx}[e^x] = e^x$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Natural Exponential](!/calculus/formulas#derivative_of_natural_exponential)
+- [Derivative of General Logarithm](!/calculus/formulas#derivative_of_general_logarithm)
+- [Chain Rule](!/calculus/formulas#chain_rule)`,
+  },
+ 
+  {
+    id: 'derivative_of_natural_logarithm',
+    category: 'Derivatives of Common Functions',
+    name: 'Derivative of Natural Logarithm',
+    formula: `$$\\frac{d}{dx}[\\ln x] = \\frac{1}{x}$$`,
+    link: { url: '/calculus/derivatives/common#7', text: 'logarithmic functions' },
+    topic: 'calculus',
+    entity: 'derivative',
+    conditions: `
+$x > 0$. The extension $\\frac{d}{dx}[\\ln |x|] = \\frac{1}{x}$ is valid for all $x \\neq 0$.`,
+    explanation: `
+Derived by [implicit differentiation](!/calculus/derivatives/techniques) of $e^y = x$ where $y = \\ln x$: differentiating gives $e^y \\frac{dy}{dx} = 1$, so $\\frac{dy}{dx} = \\frac{1}{e^y} = \\frac{1}{x}$. The reciprocal form $1/x$ is what makes $\\ln$ ubiquitous in [integration](!/calculus/integrals).`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of General Logarithm](!/calculus/formulas#derivative_of_general_logarithm)
+- [Derivative of Natural Exponential](!/calculus/formulas#derivative_of_natural_exponential)`,
+  },
+ 
+  {
+    id: 'derivative_of_general_logarithm',
+    category: 'Derivatives of Common Functions',
+    name: 'Derivative of General Logarithm',
+    formula: `$$\\frac{d}{dx}[\\log_a x] = \\frac{1}{x \\ln a}$$`,
+    link: { url: '/calculus/derivatives/common#7', text: 'logarithmic functions' },
+    topic: 'calculus',
+    entity: 'derivative',
+    conditions: `
+$x > 0$, $a > 0$, $a \\neq 1$.`,
+    explanation: `
+Follows from the change-of-base formula $\\log_a x = \\frac{\\ln x}{\\ln a}$ together with the [constant multiple rule](!/calculus/formulas#constant_multiple_rule_derivatives). When $a = e$, $\\ln a = 1$, recovering $\\frac{d}{dx}[\\ln x] = \\frac{1}{x}$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Natural Logarithm](!/calculus/formulas#derivative_of_natural_logarithm)
+- [Derivative of General Exponential](!/calculus/formulas#derivative_of_general_exponential)`,
+  },
+ 
+  // ============================================================
+  // Category 5 — Derivatives of Inverse Trigonometric Functions (6 entries)
+  // ============================================================
+ 
+  {
+    id: 'derivative_of_arcsine',
+    category: 'Derivatives of Inverse Trigonometric Functions',
+    name: 'Derivative of Arcsine',
+    formula: `$$\\frac{d}{dx}[\\arcsin x] = \\frac{1}{\\sqrt{1 - x^2}}$$`,
+    link: { url: '/calculus/derivatives/special#1', text: 'inverse trigonometric functions: arcsine and arccosine' },
+    topic: 'calculus',
+    entity: 'derivative',
+    conditions: `
+$|x| < 1$. At $x = \\pm 1$ the denominator vanishes — the graph of $\\arcsin x$ has vertical tangents at its endpoints.`,
+    explanation: `
+Derived by [implicit differentiation](!/calculus/derivatives/techniques): from $\\sin y = x$ with $y \\in [-\\pi/2, \\pi/2]$, differentiating gives $\\cos y \\cdot y' = 1$, and $\\cos y = \\sqrt{1 - \\sin^2 y} = \\sqrt{1 - x^2}$ (positive since $y$ lies in the first or fourth quadrant).`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Arccosine](!/calculus/formulas#derivative_of_arccosine)
+- [Derivative of Sine](!/calculus/formulas#derivative_of_sine)`,
+  },
+ 
+  {
+    id: 'derivative_of_arccosine',
+    category: 'Derivatives of Inverse Trigonometric Functions',
+    name: 'Derivative of Arccosine',
+    formula: `$$\\frac{d}{dx}[\\arccos x] = -\\frac{1}{\\sqrt{1 - x^2}}$$`,
+    link: { url: '/calculus/derivatives/special#1', text: 'inverse trigonometric functions: arcsine and arccosine' },
+    topic: 'calculus',
+    entity: 'derivative',
+    conditions: `
+$|x| < 1$.`,
+    explanation: `
+Differs from the [arcsine derivative](!/calculus/formulas#derivative_of_arcsine) only in sign — both follow from differentiating $\\arcsin x + \\arccos x = \\frac{\\pi}{2}$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Arcsine](!/calculus/formulas#derivative_of_arcsine)
+- [Derivative of Cosine](!/calculus/formulas#derivative_of_cosine)`,
+  },
+ 
+  {
+    id: 'derivative_of_arctangent',
+    category: 'Derivatives of Inverse Trigonometric Functions',
+    name: 'Derivative of Arctangent',
+    formula: `$$\\frac{d}{dx}[\\arctan x] = \\frac{1}{1 + x^2}$$`,
+    link: { url: '/calculus/derivatives/special#2', text: 'inverse trigonometric functions: arctangent and arccotangent' },
+    topic: 'calculus',
+    entity: 'derivative',
+    explanation: `
+Defined for all real $x$ — no domain restriction. Derived by [implicit differentiation](!/calculus/derivatives/techniques) of $\\tan y = x$: $\\sec^2 y \\cdot y' = 1$, and $\\sec^2 y = 1 + \\tan^2 y = 1 + x^2$. Always positive, confirming that $\\arctan x$ is strictly increasing. As $x \\to \\pm\\infty$, the derivative approaches zero, reflecting the horizontal asymptotes $y = \\pm \\pi/2$. Reappears prominently in [integration](!/calculus/integrals/special) as the antiderivative of $1/(1+x^2)$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Arccotangent](!/calculus/formulas#derivative_of_arccotangent)
+- [Derivative of Tangent](!/calculus/formulas#derivative_of_tangent)`,
+  },
+ 
+  {
+    id: 'derivative_of_arccotangent',
+    category: 'Derivatives of Inverse Trigonometric Functions',
+    name: 'Derivative of Arccotangent',
+    formula: `$$\\frac{d}{dx}[\\operatorname{arccot} x] = -\\frac{1}{1 + x^2}$$`,
+    link: { url: '/calculus/derivatives/special#2', text: 'inverse trigonometric functions: arctangent and arccotangent' },
+    topic: 'calculus',
+    entity: 'derivative',
+    explanation: `
+Differs from the [arctangent derivative](!/calculus/formulas#derivative_of_arctangent) only in sign — both follow from differentiating $\\arctan x + \\operatorname{arccot} x = \\frac{\\pi}{2}$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Arctangent](!/calculus/formulas#derivative_of_arctangent)
+- [Derivative of Cotangent](!/calculus/formulas#derivative_of_cotangent)`,
+  },
+ 
+  {
+    id: 'derivative_of_arcsecant',
+    category: 'Derivatives of Inverse Trigonometric Functions',
+    name: 'Derivative of Arcsecant',
+    formula: `$$\\frac{d}{dx}[\\operatorname{arcsec} x] = \\frac{1}{|x| \\sqrt{x^2 - 1}}$$`,
+    link: { url: '/calculus/derivatives/special#3', text: 'inverse trigonometric functions: arcsecant and arccosecant' },
+    topic: 'calculus',
+    entity: 'derivative',
+    conditions: `
+$|x| > 1$.`,
+    explanation: `
+Derived by [implicit differentiation](!/calculus/derivatives/techniques) of $\\sec y = x$: $\\sec y \\tan y \\cdot y' = 1$, with $\\sec y = x$ and $\\tan y = \\pm\\sqrt{x^2 - 1}$ depending on quadrant. The absolute value $|x|$ resolves the sign uniformly. Appears in integrals of the form $\\int \\frac{1}{x\\sqrt{x^2 - 1}}\\,dx$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Arccosecant](!/calculus/formulas#derivative_of_arccosecant)
+- [Derivative of Secant](!/calculus/formulas#derivative_of_secant)`,
+  },
+ 
+  {
+    id: 'derivative_of_arccosecant',
+    category: 'Derivatives of Inverse Trigonometric Functions',
+    name: 'Derivative of Arccosecant',
+    formula: `$$\\frac{d}{dx}[\\operatorname{arccsc} x] = -\\frac{1}{|x| \\sqrt{x^2 - 1}}$$`,
+    link: { url: '/calculus/derivatives/special#3', text: 'inverse trigonometric functions: arcsecant and arccosecant' },
+    topic: 'calculus',
+    entity: 'derivative',
+    conditions: `
+$|x| > 1$.`,
+    explanation: `
+Differs from the [arcsecant derivative](!/calculus/formulas#derivative_of_arcsecant) only in sign — both follow from differentiating $\\operatorname{arcsec} x + \\operatorname{arccsc} x = \\frac{\\pi}{2}$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Arcsecant](!/calculus/formulas#derivative_of_arcsecant)
+- [Derivative of Cosecant](!/calculus/formulas#derivative_of_cosecant)`,
+  },
+ 
+  // ============================================================
+  // Category 6 — Derivatives of Hyperbolic Functions (6 entries)
+  // ============================================================
+ 
+  {
+    id: 'derivative_of_hyperbolic_sine',
+    category: 'Derivatives of Hyperbolic Functions',
+    name: 'Derivative of Hyperbolic Sine',
+    formula: `$$\\frac{d}{dx}[\\sinh x] = \\cosh x$$`,
+    link: { url: '/calculus/derivatives/special#5', text: 'hyperbolic functions' },
+    topic: 'calculus',
+    entity: 'derivative',
+    explanation: `
+Verified directly from the exponential definition $\\sinh x = \\frac{e^x - e^{-x}}{2}$: differentiating gives $\\frac{e^x + e^{-x}}{2} = \\cosh x$. No special limits needed — the [exponential derivative](!/calculus/formulas#derivative_of_natural_exponential) does all the work.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Hyperbolic Cosine](!/calculus/formulas#derivative_of_hyperbolic_cosine)
+- [Derivative of Natural Exponential](!/calculus/formulas#derivative_of_natural_exponential)`,
+  },
+ 
+  {
+    id: 'derivative_of_hyperbolic_cosine',
+    category: 'Derivatives of Hyperbolic Functions',
+    name: 'Derivative of Hyperbolic Cosine',
+    formula: `$$\\frac{d}{dx}[\\cosh x] = \\sinh x$$`,
+    link: { url: '/calculus/derivatives/special#5', text: 'hyperbolic functions' },
+    topic: 'calculus',
+    entity: 'derivative',
+    explanation: `
+Critical difference from the [trigonometric analog](!/calculus/formulas#derivative_of_cosine): no negative sign. The hyperbolic cycle $\\sinh \\to \\cosh \\to \\sinh \\to \\cdots$ has period two, not four — and never produces a negative sign under differentiation.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Hyperbolic Sine](!/calculus/formulas#derivative_of_hyperbolic_sine)
+- [Derivative of Cosine](!/calculus/formulas#derivative_of_cosine)`,
+  },
+ 
+  {
+    id: 'derivative_of_hyperbolic_tangent',
+    category: 'Derivatives of Hyperbolic Functions',
+    name: 'Derivative of Hyperbolic Tangent',
+    formula: `$$\\frac{d}{dx}[\\tanh x] = \\operatorname{sech}^2 x$$`,
+    link: { url: '/calculus/derivatives/special#5', text: 'hyperbolic functions' },
+    topic: 'calculus',
+    entity: 'derivative',
+    explanation: `
+Derived via the [quotient rule](!/calculus/formulas#quotient_rule_derivatives) on $\\tanh x = \\sinh x / \\cosh x$, using the identity $\\cosh^2 x - \\sinh^2 x = 1$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Hyperbolic Cotangent](!/calculus/formulas#derivative_of_hyperbolic_cotangent)
+- [Derivative of Tangent](!/calculus/formulas#derivative_of_tangent)`,
+  },
+ 
+  {
+    id: 'derivative_of_hyperbolic_cotangent',
+    category: 'Derivatives of Hyperbolic Functions',
+    name: 'Derivative of Hyperbolic Cotangent',
+    formula: `$$\\frac{d}{dx}[\\coth x] = -\\operatorname{csch}^2 x$$`,
+    link: { url: '/calculus/derivatives/special#5', text: 'hyperbolic functions' },
+    topic: 'calculus',
+    entity: 'derivative',
+    conditions: `
+$x \\neq 0$ (where $\\sinh x = 0$).`,
+    explanation: `
+Derived via the [quotient rule](!/calculus/formulas#quotient_rule_derivatives) on $\\coth x = \\cosh x / \\sinh x$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Hyperbolic Tangent](!/calculus/formulas#derivative_of_hyperbolic_tangent)
+- [Derivative of Cotangent](!/calculus/formulas#derivative_of_cotangent)`,
+  },
+ 
+  {
+    id: 'derivative_of_hyperbolic_secant',
+    category: 'Derivatives of Hyperbolic Functions',
+    name: 'Derivative of Hyperbolic Secant',
+    formula: `$$\\frac{d}{dx}[\\operatorname{sech} x] = -\\operatorname{sech} x \\tanh x$$`,
+    link: { url: '/calculus/derivatives/special#5', text: 'hyperbolic functions' },
+    topic: 'calculus',
+    entity: 'derivative',
+    explanation: `
+Derived via the [chain rule](!/calculus/formulas#chain_rule) on $\\operatorname{sech} x = (\\cosh x)^{-1}$. Note the negative sign — unlike the trigonometric secant, the hyperbolic secant derivative is negative.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Hyperbolic Cosecant](!/calculus/formulas#derivative_of_hyperbolic_cosecant)
+- [Derivative of Secant](!/calculus/formulas#derivative_of_secant)`,
+  },
+ 
+  {
+    id: 'derivative_of_hyperbolic_cosecant',
+    category: 'Derivatives of Hyperbolic Functions',
+    name: 'Derivative of Hyperbolic Cosecant',
+    formula: `$$\\frac{d}{dx}[\\operatorname{csch} x] = -\\operatorname{csch} x \\coth x$$`,
+    link: { url: '/calculus/derivatives/special#5', text: 'hyperbolic functions' },
+    topic: 'calculus',
+    entity: 'derivative',
+    conditions: `
+$x \\neq 0$.`,
+    explanation: `
+Derived via the [chain rule](!/calculus/formulas#chain_rule) on $\\operatorname{csch} x = (\\sinh x)^{-1}$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Hyperbolic Secant](!/calculus/formulas#derivative_of_hyperbolic_secant)
+- [Derivative of Cosecant](!/calculus/formulas#derivative_of_cosecant)`,
+  },
+ 
+  // ============================================================
+  // Category 7 — Derivatives of Inverse Hyperbolic Functions (3 entries)
+  // ============================================================
+ 
+  {
+    id: 'derivative_of_inverse_hyperbolic_sine',
+    category: 'Derivatives of Inverse Hyperbolic Functions',
+    name: 'Derivative of Inverse Hyperbolic Sine',
+    formula: `$$\\frac{d}{dx}[\\operatorname{arcsinh} x] = \\frac{1}{\\sqrt{x^2 + 1}}$$`,
+    link: { url: '/calculus/derivatives/special#6', text: 'inverse hyperbolic functions' },
+    topic: 'calculus',
+    entity: 'derivative',
+    explanation: `
+Defined for all real $x$. Compare with the [arcsine derivative](!/calculus/formulas#derivative_of_arcsine) $\\frac{1}{\\sqrt{1 - x^2}}$ — the sign under the radical flips. Follows from differentiating the logarithmic form $\\operatorname{arcsinh} x = \\ln(x + \\sqrt{x^2 + 1})$. As an antiderivative: $\\int \\frac{1}{\\sqrt{x^2 + 1}}\\,dx = \\operatorname{arcsinh} x + C$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Hyperbolic Sine](!/calculus/formulas#derivative_of_hyperbolic_sine)
+- [Derivative of Arcsine](!/calculus/formulas#derivative_of_arcsine)`,
+  },
+ 
+  {
+    id: 'derivative_of_inverse_hyperbolic_cosine',
+    category: 'Derivatives of Inverse Hyperbolic Functions',
+    name: 'Derivative of Inverse Hyperbolic Cosine',
+    formula: `$$\\frac{d}{dx}[\\operatorname{arccosh} x] = \\frac{1}{\\sqrt{x^2 - 1}}$$`,
+    link: { url: '/calculus/derivatives/special#6', text: 'inverse hyperbolic functions' },
+    topic: 'calculus',
+    entity: 'derivative',
+    conditions: `
+$x > 1$.`,
+    explanation: `
+Compare with the [arccosine derivative](!/calculus/formulas#derivative_of_arccosine) $-\\frac{1}{\\sqrt{1 - x^2}}$ — both the sign under the radical and the overall sign change. As an antiderivative: $\\int \\frac{1}{\\sqrt{x^2 - 1}}\\,dx = \\operatorname{arccosh} x + C$ on $x > 1$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Hyperbolic Cosine](!/calculus/formulas#derivative_of_hyperbolic_cosine)
+- [Derivative of Arccosine](!/calculus/formulas#derivative_of_arccosine)`,
+  },
+ 
+  {
+    id: 'derivative_of_inverse_hyperbolic_tangent',
+    category: 'Derivatives of Inverse Hyperbolic Functions',
+    name: 'Derivative of Inverse Hyperbolic Tangent',
+    formula: `$$\\frac{d}{dx}[\\operatorname{arctanh} x] = \\frac{1}{1 - x^2}$$`,
+    link: { url: '/calculus/derivatives/special#6', text: 'inverse hyperbolic functions' },
+    topic: 'calculus',
+    entity: 'derivative',
+    conditions: `
+$|x| < 1$.`,
+    explanation: `
+Compare with the [arctangent derivative](!/calculus/formulas#derivative_of_arctangent) $\\frac{1}{1 + x^2}$ — the sign in the denominator flips. Follows from differentiating $\\operatorname{arctanh} x = \\frac{1}{2}\\ln\\!\\left(\\frac{1 + x}{1 - x}\\right)$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Hyperbolic Tangent](!/calculus/formulas#derivative_of_hyperbolic_tangent)
+- [Derivative of Arctangent](!/calculus/formulas#derivative_of_arctangent)`,
+  },
+
+
+    // ──────────────────────────────────────────────────────────────────────
+  // Differentiability (2 entries)
+  // ──────────────────────────────────────────────────────────────────────
+ 
+  {
+    name: 'One-Sided Derivative',
+    entity: 'derivative',
+    category: 'Differentiability',
+    formula: `$$f'_-(a) = \\lim_{h \\to 0^-} \\frac{f(a+h) - f(a)}{h}, \\qquad f'_+(a) = \\lim_{h \\to 0^+} \\frac{f(a+h) - f(a)}{h}$$`,
+    link: { label: 'One-Sided Derivatives', url: '/calculus/derivatives/differentiability#7' },
+    variables: `
+- $f'_-(a)$ — left-hand derivative at $a$
+- $f'_+(a)$ — right-hand derivative at $a$`,
+    conditions: `The two-sided derivative $f'(a)$ exists if and only if both one-sided derivatives exist, are finite, and are equal: $f'_-(a) = f'_+(a)$.`,
+    explanation: `One-sided derivatives appear at endpoints of closed intervals where only one direction of approach is available, and at boundaries of piecewise functions where different formulas govern each side. Checking that $f'_-(c) = f'_+(c)$ at a junction is the standard test for differentiability of a piecewise function. A corner is exactly the case where both one-sided derivatives are finite but unequal.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)
+- [Differentiability](!/calculus/definitions#differentiability)
+- [One-Sided Limit](!/calculus/definitions#one_sided_limit)`,
+    related_formulas: `
+- [Derivative Limit Definition](!/calculus/derivatives/formulas#derivative_limit_definition)
+- [Differentiability Implies Continuity](!/calculus/derivatives/formulas#differentiability_implies_continuity)`,
+  },
+ 
+  {
+    name: 'Differentiability Implies Continuity',
+    entity: 'differentiability',
+    category: 'Differentiability',
+    formula: `$$f \\text{ differentiable at } a \\;\\implies\\; f \\text{ continuous at } a$$`,
+    link: { label: 'Differentiability Implies Continuity', url: '/calculus/derivatives/differentiability#2' },
+    explanation: `Differentiability is strictly stronger than continuity. The proof rewrites $f(x) - f(a) = \\frac{f(x) - f(a)}{x - a} \\cdot (x - a)$: as $x \\to a$, the first factor approaches $f'(a)$ (finite by hypothesis), the second approaches $0$, and the product approaches $0$, so $f(x) \\to f(a)$. The converse fails — $f(x) = |x|$ is continuous at $0$ but not differentiable there.`,
+    related_definitions: `
+- [Differentiability](!/calculus/definitions#differentiability)
+- [Continuity](!/calculus/definitions#continuity)
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative Limit Definition](!/calculus/derivatives/formulas#derivative_limit_definition)
+- [One-Sided Derivative](!/calculus/derivatives/formulas#one_sided_derivative)`,
+  },
+ 
+  // ──────────────────────────────────────────────────────────────────────
+  // Differentials (4 entries)
+  // ──────────────────────────────────────────────────────────────────────
+ 
+  {
+    name: 'Differential',
+    entity: 'differential',
+    category: 'Differentials',
+    formula: `$$dy = f'(x)\\, dx$$`,
+    link: { label: 'The Differential dy', url: '/calculus/derivatives/differentials#2' },
+    variables: `
+- $dx$ — independent variable, a (finite) increment in $x$
+- $dy$ — differential of $y$, the change predicted by the tangent line`,
+    explanation: `The differential $dy$ is the vertical change along the tangent line at $x$ for a horizontal shift of $dx$. For fixed $x$, $dy$ is a linear function of $dx$. Compared to the actual change $\\Delta y = f(x + dx) - f(x)$, the error $\\Delta y - dy$ vanishes faster than $dx$ itself: $\\lim_{dx \\to 0} (\\Delta y - dy)/dx = 0$. Treating $dx$ and $dy$ as independent quantities makes [Leibniz notation](!/calculus/derivatives/differentials) algebraically rigorous (chain rule cancellation, separation of variables, $u$-substitution).`,
+    related_definitions: `
+- [Differential](!/calculus/definitions#differential)
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Linear Approximation](!/calculus/derivatives/formulas#linear_approximation)
+- [Total Differential](!/calculus/derivatives/formulas#total_differential)
+- [Derivative Limit Definition](!/calculus/derivatives/formulas#derivative_limit_definition)`,
+  },
+ 
+  {
+    name: 'Linear Approximation',
+    entity: 'differential',
+    category: 'Differentials',
+    formula: `$$f(x + dx) \\approx f(x) + f'(x)\\, dx$$`,
+    link: { label: 'Linear Approximation', url: '/calculus/derivatives/differentials#4' },
+    variables: `
+- $f$ — differentiable at $x$
+- $dx$ — small increment from $x$`,
+    explanation: `The tangent line at $x$ used as an estimator of $f$ at nearby inputs. Equivalent forms: $L(x) = f(a) + f'(a)(x - a)$ as a function of $x$ centered at $a$, or $\\Delta y \\approx f'(x)\\, dx$ in increment notation. Quality depends on the size of $|dx|$ and the magnitude of $f''$ near $x$ — the second derivative controls how quickly the curve diverges from its tangent. Used in error estimation: $|\\Delta y| \\approx |f'(x)|\\, |dx|$, so the derivative acts as an error amplification factor.`,
+    related_definitions: `
+- [Differential](!/calculus/definitions#differential)
+- [Tangent Line](!/calculus/definitions#tangent_line)`,
+    related_formulas: `
+- [Differential](!/calculus/derivatives/formulas#differential)
+- [Tangent Line Equation](!/calculus/derivatives/formulas#tangent_line_equation)
+- [Logarithmic Derivative](!/calculus/derivatives/formulas#logarithmic_derivative)`,
+  },
+ 
+  {
+    name: 'Total Differential',
+    entity: 'partial_derivative',
+    category: 'Differentials',
+    formula: `$$dz = \\frac{\\partial f}{\\partial x}\\, dx + \\frac{\\partial f}{\\partial y}\\, dy$$`,
+    link: { label: 'Differentials of Multiple Variables', url: '/calculus/derivatives/differentials#6' },
+    variables: `
+- $z = f(x, y)$ — function of two variables
+- $\\frac{\\partial f}{\\partial x}, \\frac{\\partial f}{\\partial y}$ — partial derivatives
+- $dx, dy$ — independent increments in $x$ and $y$`,
+    explanation: `Multivariable extension of the single-variable differential. Each partial derivative weights its variable's contribution; the total is a linear approximation in multiple dimensions. Used heavily in error propagation: if $x$ and $y$ are measured with errors $dx$ and $dy$, the inherited error in $z$ is approximately $|dz|$. Generalizes to $n$ variables: $dz = \\sum_{i=1}^{n} \\frac{\\partial f}{\\partial x_i}\\, dx_i$.`,
+    related_definitions: `
+- [Partial Derivative](!/calculus/definitions#partial_derivative)
+- [Differential](!/calculus/definitions#differential)`,
+    related_formulas: `
+- [Differential](!/calculus/derivatives/formulas#differential)
+- [Linear Approximation](!/calculus/derivatives/formulas#linear_approximation)`,
+  },
+ 
+  {
+    name: 'Logarithmic Derivative',
+    entity: 'derivative',
+    category: 'Differentials',
+    formula: `$$\\frac{f'(x)}{f(x)} = \\frac{d}{dx}\\bigl[\\ln |f(x)|\\bigr]$$`,
+    link: { label: 'Error Estimation', url: '/calculus/derivatives/differentials#5' },
+    explanation: `Acts as a relative-error amplification factor: a relative error $|dx|$ in $x$ produces a relative error of approximately $\\bigl|\\frac{f'(x)}{f(x)}\\bigr| \\cdot |dx|$ in $f(x)$. For $f(x) = x^n$ this evaluates to $n/x$, so the relative error in $x^n$ is $|n|$ times the relative error in $x$. Also the basis of [logarithmic differentiation](!/calculus/derivatives/techniques): take $\\ln$ of both sides before differentiating to convert products into sums and exponents into multipliers.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)
+- [Differential](!/calculus/definitions#differential)`,
+    related_formulas: `
+- [Derivative of Natural Logarithm](!/calculus/derivatives/formulas#derivative_of_natural_logarithm)
+- [Logarithmic Differentiation](!/calculus/derivatives/formulas#logarithmic_differentiation)
+- [Linear Approximation](!/calculus/derivatives/formulas#linear_approximation)`,
+  },
+ 
+  // ──────────────────────────────────────────────────────────────────────
+  // Graph Analysis (9 entries)
+  // ──────────────────────────────────────────────────────────────────────
+ 
+  {
+    name: 'Tangent Line Equation',
+    entity: 'tangent_line',
+    category: 'Graph Analysis',
+    formula: `$$y - f(a) = f'(a)\\,(x - a)$$`,
+    link: { label: 'Tangent Lines', url: '/calculus/derivatives/graph-analysis#2' },
+    variables: `
+- $a$ — point of tangency on the $x$-axis
+- $f'(a)$ — slope of the tangent line at $(a, f(a))$`,
+    explanation: `The line through $(a, f(a))$ with slope $f'(a)$ — the best linear approximation to $f$ near $a$. Equivalent slope-intercept form: $y = f'(a)\\,x + [f(a) - f'(a)\\,a]$. Geometric foundation of the [linear approximation](!/calculus/derivatives/formulas#linear_approximation) formula.`,
+    related_definitions: `
+- [Tangent Line](!/calculus/definitions#tangent_line)
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Normal Line Equation](!/calculus/derivatives/formulas#normal_line_equation)
+- [Linear Approximation](!/calculus/derivatives/formulas#linear_approximation)
+- [Derivative Limit Definition](!/calculus/derivatives/formulas#derivative_limit_definition)`,
+  },
+ 
+  {
+    name: 'Normal Line Equation',
+    entity: 'tangent_line',
+    category: 'Graph Analysis',
+    formula: `$$y - f(a) = -\\frac{1}{f'(a)}\\,(x - a)$$`,
+    link: { label: 'Tangent Lines', url: '/calculus/derivatives/graph-analysis#2' },
+    conditions: `Requires $f'(a) \\neq 0$. If $f'(a) = 0$, the tangent is horizontal and the normal is the vertical line $x = a$.`,
+    explanation: `The line through $(a, f(a))$ perpendicular to the tangent line. Two lines are perpendicular when their slopes are negative reciprocals; the tangent has slope $f'(a)$, so the normal has slope $-1/f'(a)$.`,
+    related_definitions: `
+- [Tangent Line](!/calculus/definitions#tangent_line)`,
+    related_formulas: `
+- [Tangent Line Equation](!/calculus/derivatives/formulas#tangent_line_equation)`,
+  },
+ 
+  {
+    name: 'Sign of First Derivative',
+    entity: 'monotonic_function',
+    category: 'Graph Analysis',
+    formula: `$$f'(x) > 0 \\text{ on } (a, b) \\implies f \\text{ strictly increasing on } (a, b) \\\\[4pt] f'(x) < 0 \\text{ on } (a, b) \\implies f \\text{ strictly decreasing on } (a, b)$$`,
+    link: { label: 'Increasing and Decreasing Functions', url: '/calculus/derivatives/graph-analysis#3' },
+    explanation: `The sign of $f'$ on an interval determines the direction of $f$ on that interval. Proof uses the [Mean Value Theorem](!/calculus/derivatives/formulas#mean_value_theorem): for $x_1 < x_2$ in $(a, b)$, there exists $c$ with $f(x_2) - f(x_1) = f'(c)(x_2 - x_1)$, and the sign of $f'(c)$ controls the sign of the difference. To find monotonicity intervals: solve $f'(x) = 0$ and locate where $f'$ is undefined, then test the sign of $f'$ on each resulting open subinterval.`,
+    related_definitions: `
+- [Monotonic Function](!/calculus/definitions#monotonic_function)
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Mean Value Theorem](!/calculus/derivatives/formulas#mean_value_theorem)
+- [Critical Point Condition](!/calculus/derivatives/formulas#critical_point_condition)
+- [First Derivative Test](!/calculus/derivatives/formulas#first_derivative_test)`,
+  },
+ 
+  {
+    name: 'Critical Point Condition',
+    entity: 'critical_point',
+    category: 'Graph Analysis',
+    formula: `$$f \\text{ has local extremum at } c \\;\\implies\\; f'(c) = 0 \\;\\text{or}\\; f'(c) \\text{ undefined}$$`,
+    link: { label: 'Critical Points', url: '/calculus/derivatives/graph-analysis#4' },
+    explanation: `Fermat's theorem: every interior local extremum is a critical point. The converse fails — $f(x) = x^3$ has $f'(0) = 0$ but no extremum at $0$. Critical points are candidates for extrema, classified by the [first](!/calculus/derivatives/formulas#first_derivative_test) or [second derivative test](!/calculus/derivatives/formulas#second_derivative_test).`,
+    related_definitions: `
+- [Critical Point](!/calculus/definitions#critical_point)
+- [Local Extremum](!/calculus/definitions#local_extremum)`,
+    related_formulas: `
+- [First Derivative Test](!/calculus/derivatives/formulas#first_derivative_test)
+- [Second Derivative Test](!/calculus/derivatives/formulas#second_derivative_test)
+- [Extreme Value Theorem](!/calculus/derivatives/formulas#extreme_value_theorem)`,
+  },
+ 
+  {
+    name: 'First Derivative Test',
+    entity: 'local_extremum',
+    category: 'Graph Analysis',
+    formula: `$$\\text{At critical point } c: \\;\\; f' \\text{ changes } + \\to - \\Rightarrow \\text{local max}; \\;\\; f' \\text{ changes } - \\to + \\Rightarrow \\text{local min}; \\;\\; \\text{no sign change} \\Rightarrow \\text{neither}$$`,
+    link: { label: 'The First Derivative Test', url: '/calculus/derivatives/graph-analysis#5' },
+    conditions: `$f$ continuous at $c$. The test works even when $f'(c)$ is undefined, as long as $f'$ exists in a deleted neighborhood of $c$.`,
+    explanation: `Classifies a critical point by examining the sign of $f'$ on each side. Universally applicable — does not require $f''$ to exist. Falls back to a sign-chart check for $f'$ in intervals immediately left and right of $c$.`,
+    related_definitions: `
+- [Local Extremum](!/calculus/definitions#local_extremum)
+- [Critical Point](!/calculus/definitions#critical_point)`,
+    related_formulas: `
+- [Critical Point Condition](!/calculus/derivatives/formulas#critical_point_condition)
+- [Second Derivative Test](!/calculus/derivatives/formulas#second_derivative_test)
+- [Sign of First Derivative](!/calculus/derivatives/formulas#sign_of_first_derivative)`,
+  },
+ 
+  {
+    name: 'Second Derivative Test',
+    entity: 'local_extremum',
+    category: 'Graph Analysis',
+    formula: `$$f'(c) = 0,\\; f''(c) > 0 \\;\\Rightarrow\\; \\text{local min at } c \\\\[4pt] f'(c) = 0,\\; f''(c) < 0 \\;\\Rightarrow\\; \\text{local max at } c$$`,
+    link: { label: 'The Second Derivative Test', url: '/calculus/derivatives/graph-analysis#6' },
+    conditions: `$f'(c) = 0$ and $f''(c)$ exists. If $f''(c) = 0$, the test is inconclusive — fall back to the [first derivative test](!/calculus/derivatives/formulas#first_derivative_test) or examine higher-order derivatives. Cannot handle critical points where $f'(c)$ is undefined.`,
+    explanation: `Faster than the first derivative test when $f''$ is easy to compute: a single value of $f''$ at $c$ determines the classification. The horizontal tangent sits at the bottom of a cup ($f'' > 0$, concave up → minimum) or at the top of a cap ($f'' < 0$, concave down → maximum).`,
+    related_definitions: `
+- [Local Extremum](!/calculus/definitions#local_extremum)
+- [Concavity](!/calculus/definitions#concavity)
+- [Higher-Order Derivative](!/calculus/definitions#higher_order_derivative)`,
+    related_formulas: `
+- [First Derivative Test](!/calculus/derivatives/formulas#first_derivative_test)
+- [Concavity from Second Derivative](!/calculus/derivatives/formulas#concavity_from_second_derivative)
+- [Critical Point Condition](!/calculus/derivatives/formulas#critical_point_condition)`,
+  },
+ 
+  {
+    name: 'Concavity from Second Derivative',
+    entity: 'concavity',
+    category: 'Graph Analysis',
+    formula: `$$f''(x) > 0 \\text{ on } (a,b) \\;\\Rightarrow\\; f \\text{ concave up on } (a,b) \\\\[4pt] f''(x) < 0 \\text{ on } (a,b) \\;\\Rightarrow\\; f \\text{ concave down on } (a,b)$$`,
+    link: { label: 'Concavity', url: '/calculus/derivatives/graph-analysis#7' },
+    explanation: `The sign of the second derivative tracks how the slope is changing, independent of whether $f$ itself rises or falls. Concave up: the curve lies above its tangent lines, slope is increasing. Concave down: the curve lies below its tangent lines, slope is decreasing. A function can be increasing and concave down simultaneously — rising but decelerating.`,
+    related_definitions: `
+- [Concavity](!/calculus/definitions#concavity)
+- [Higher-Order Derivative](!/calculus/definitions#higher_order_derivative)`,
+    related_formulas: `
+- [Inflection Point Condition](!/calculus/derivatives/formulas#inflection_point_condition)
+- [Second Derivative Test](!/calculus/derivatives/formulas#second_derivative_test)`,
+  },
+ 
+  {
+    name: 'Inflection Point Condition',
+    entity: 'inflection_point',
+    category: 'Graph Analysis',
+    formula: `$$c \\text{ is an inflection point} \\;\\iff\\; f'' \\text{ changes sign across } c$$`,
+    link: { label: 'Inflection Points', url: '/calculus/derivatives/graph-analysis#8' },
+    conditions: `At an inflection point, $f''(c) = 0$ or $f''(c)$ is undefined. The condition $f''(c) = 0$ alone is necessary but not sufficient — $f(x) = x^4$ has $f''(0) = 0$ with no inflection point at $0$.`,
+    explanation: `Inflection points are where the bending direction reverses. To locate: find where $f''(x) = 0$ or $f''$ is undefined, then verify $f''$ actually changes sign across each candidate. On the graph of $f'$, inflection points of $f$ correspond to local extrema of $f'$.`,
+    related_definitions: `
+- [Inflection Point](!/calculus/definitions#inflection_point)
+- [Concavity](!/calculus/definitions#concavity)`,
+    related_formulas: `
+- [Concavity from Second Derivative](!/calculus/derivatives/formulas#concavity_from_second_derivative)`,
+  },
+ 
+  {
+    name: 'Extreme Value Theorem',
+    entity: 'derivative',
+    category: 'Graph Analysis',
+    formula: `$$f \\text{ continuous on } [a, b] \\;\\implies\\; f \\text{ attains an absolute max and an absolute min on } [a, b]$$`,
+    link: { label: 'Optimization', url: '/calculus/derivatives/graph-analysis#10' },
+    conditions: `Both hypotheses are essential: $f$ continuous AND interval $[a, b]$ closed and bounded. Discontinuous functions can fail; open or unbounded intervals can fail (e.g., $f(x) = x$ on $(0, 1)$ has no maximum).`,
+    explanation: `Guarantees that optimization on a closed bounded interval produces solutions. The candidates for absolute extrema are the critical points inside $(a, b)$ together with the endpoints $a$ and $b$ — evaluate $f$ at each and pick the largest/smallest.`,
+    related_definitions: `
+- [Continuity](!/calculus/definitions#continuity)
+- [Local Extremum](!/calculus/definitions#local_extremum)`,
+    related_formulas: `
+- [Critical Point Condition](!/calculus/derivatives/formulas#critical_point_condition)
+- [First Derivative Test](!/calculus/derivatives/formulas#first_derivative_test)
+- [Second Derivative Test](!/calculus/derivatives/formulas#second_derivative_test)`,
+  },
+ 
+  // ──────────────────────────────────────────────────────────────────────
+  // Higher-Order Derivatives (8 entries)
+  // ──────────────────────────────────────────────────────────────────────
+ 
+  {
+    name: 'nth Derivative of Power',
+    entity: 'higher_order_derivative',
+    category: 'Higher-Order Derivatives',
+    formula: `$$\\frac{d^k}{dx^k}\\bigl[x^m\\bigr] = \\frac{m!}{(m-k)!}\\, x^{m-k} \\quad (k \\leq m), \\qquad \\frac{d^k}{dx^k}\\bigl[x^m\\bigr] = 0 \\quad (k > m)$$`,
+    link: { label: 'Patterns in Repeated Differentiation — Polynomials', url: '/calculus/derivatives/higher-order#4' },
+    variables: `
+- $m$ — positive integer exponent
+- $k$ — derivative order
+- $\\frac{m!}{(m-k)!}$ — falling factorial`,
+    explanation: `Polynomials terminate under repeated differentiation: each application of the [power rule](!/calculus/derivatives/formulas#power_rule_derivatives) drops the degree by one. After $m$ differentiations, $x^m$ becomes the constant $m!$; one more gives zero. The coefficient $m!/(m-k)!$ is the accumulated product of leading coefficients. This is the basis for the Taylor series coefficient formula.`,
+    related_definitions: `
+- [Higher-Order Derivative](!/calculus/definitions#higher_order_derivative)`,
+    related_formulas: `
+- [Power Rule (Derivatives)](!/calculus/derivatives/formulas#power_rule_derivatives)
+- [Taylor Series](!/calculus/derivatives/formulas#taylor_series)`,
+  },
+ 
+  {
+    name: 'nth Derivative of Natural Exponential',
+    entity: 'higher_order_derivative',
+    category: 'Higher-Order Derivatives',
+    formula: `$$\\frac{d^n}{dx^n}\\bigl[e^x\\bigr] = e^x$$`,
+    link: { label: 'Patterns in Repeated Differentiation — Exponentials', url: '/calculus/derivatives/higher-order#5' },
+    explanation: `The natural exponential is invariant under differentiation at every order — the property that singles out $e$ as the natural base. Among elementary functions only $f \\equiv 0$ and $Ce^x$ share this property.`,
+    related_definitions: `
+- [Higher-Order Derivative](!/calculus/definitions#higher_order_derivative)`,
+    related_formulas: `
+- [Derivative of Natural Exponential](!/calculus/derivatives/formulas#derivative_of_natural_exponential)
+- [nth Derivative of Scaled Exponential](!/calculus/derivatives/formulas#nth_derivative_of_scaled_exponential)`,
+  },
+ 
+  {
+    name: 'nth Derivative of Scaled Exponential',
+    entity: 'higher_order_derivative',
+    category: 'Higher-Order Derivatives',
+    formula: `$$\\frac{d^n}{dx^n}\\bigl[e^{ax}\\bigr] = a^n e^{ax}$$`,
+    link: { label: 'Patterns in Repeated Differentiation — Exponentials', url: '/calculus/derivatives/higher-order#5' },
+    explanation: `Each differentiation introduces one chain-rule factor of $a$; after $n$ differentiations the constant $a^n$ accumulates. For general base: since $a^x = e^{x \\ln a}$, the $n$th derivative of $a^x$ is $(\\ln a)^n\\, a^x$. This pattern is central in linear differential equations: $e^{ax}$ satisfies any constant-coefficient ODE whose characteristic root is $a$.`,
+    related_definitions: `
+- [Higher-Order Derivative](!/calculus/definitions#higher_order_derivative)`,
+    related_formulas: `
+- [Derivative of Natural Exponential](!/calculus/derivatives/formulas#derivative_of_natural_exponential)
+- [Derivative of General Exponential](!/calculus/derivatives/formulas#derivative_of_general_exponential)
+- [Chain Rule](!/calculus/derivatives/formulas#chain_rule)`,
+  },
+ 
+  {
+    name: 'nth Derivative of Sine',
+    entity: 'higher_order_derivative',
+    category: 'Higher-Order Derivatives',
+    formula: `$$\\frac{d^n}{dx^n}\\bigl[\\sin x\\bigr] = \\sin\\!\\left(x + \\frac{n\\pi}{2}\\right)$$`,
+    link: { label: 'Patterns in Repeated Differentiation — Sine and Cosine', url: '/calculus/derivatives/higher-order#6' },
+    explanation: `Sine derivatives cycle with period four: $\\sin x \\to \\cos x \\to -\\sin x \\to -\\cos x \\to \\sin x$. The compact form $\\sin(x + n\\pi/2)$ encodes all four cases simultaneously through the phase shift. For $\\sin(ax)$: the cycle persists with each differentiation introducing an additional factor of $a$, so $\\frac{d^n}{dx^n}[\\sin(ax)] = a^n \\sin(ax + n\\pi/2)$.`,
+    related_definitions: `
+- [Higher-Order Derivative](!/calculus/definitions#higher_order_derivative)`,
+    related_formulas: `
+- [Derivative of Sine](!/calculus/derivatives/formulas#derivative_of_sine)
+- [nth Derivative of Cosine](!/calculus/derivatives/formulas#nth_derivative_of_cosine)`,
+  },
+ 
+  {
+    name: 'nth Derivative of Cosine',
+    entity: 'higher_order_derivative',
+    category: 'Higher-Order Derivatives',
+    formula: `$$\\frac{d^n}{dx^n}\\bigl[\\cos x\\bigr] = \\cos\\!\\left(x + \\frac{n\\pi}{2}\\right)$$`,
+    link: { label: 'Patterns in Repeated Differentiation — Sine and Cosine', url: '/calculus/derivatives/higher-order#6' },
+    explanation: `Same period-four cycle as sine, shifted: $\\cos x \\to -\\sin x \\to -\\cos x \\to \\sin x \\to \\cos x$. The phase-shift form $\\cos(x + n\\pi/2)$ unifies all four cases.`,
+    related_definitions: `
+- [Higher-Order Derivative](!/calculus/definitions#higher_order_derivative)`,
+    related_formulas: `
+- [Derivative of Cosine](!/calculus/derivatives/formulas#derivative_of_cosine)
+- [nth Derivative of Sine](!/calculus/derivatives/formulas#nth_derivative_of_sine)`,
+  },
+ 
+  {
+    name: 'nth Derivative of Reciprocal',
+    entity: 'higher_order_derivative',
+    category: 'Higher-Order Derivatives',
+    formula: `$$\\frac{d^n}{dx^n}\\!\\left[\\frac{1}{x}\\right] = \\frac{(-1)^n\\, n!}{x^{n+1}}$$`,
+    link: { label: 'The nth Derivative of Specific Forms', url: '/calculus/derivatives/higher-order#7' },
+    conditions: `$x \\neq 0$.`,
+    explanation: `Apply the [power rule](!/calculus/derivatives/formulas#power_rule_derivatives) to $x^{-1}$ repeatedly: each differentiation multiplies by one more negative integer, producing the alternating sign $(-1)^n$ and the factorial $n!$. Special case of the falling-factorial pattern with $m = -1$.`,
+    related_definitions: `
+- [Higher-Order Derivative](!/calculus/definitions#higher_order_derivative)`,
+    related_formulas: `
+- [Power Rule (Derivatives)](!/calculus/derivatives/formulas#power_rule_derivatives)
+- [nth Derivative of Natural Logarithm](!/calculus/derivatives/formulas#nth_derivative_of_natural_logarithm)`,
+  },
+ 
+  {
+    name: 'nth Derivative of Natural Logarithm',
+    entity: 'higher_order_derivative',
+    category: 'Higher-Order Derivatives',
+    formula: `$$\\frac{d^n}{dx^n}\\bigl[\\ln x\\bigr] = \\frac{(-1)^{n-1}\\, (n-1)!}{x^n} \\qquad (n \\geq 1)$$`,
+    link: { label: 'The nth Derivative of Specific Forms', url: '/calculus/derivatives/higher-order#7' },
+    conditions: `$x > 0$ and $n \\geq 1$. The formula is the [reciprocal pattern](!/calculus/derivatives/formulas#nth_derivative_of_reciprocal) shifted by one, since $(\\ln x)' = 1/x$.`,
+    explanation: `Differentiating $\\ln x$ once gives $1/x$; subsequent differentiations follow the reciprocal pattern. The exponent of $x$ in the denominator equals the order $n$, the factorial is $(n-1)!$, and the alternating sign is $(-1)^{n-1}$ (positive for $n = 1$).`,
+    related_definitions: `
+- [Higher-Order Derivative](!/calculus/definitions#higher_order_derivative)`,
+    related_formulas: `
+- [Derivative of Natural Logarithm](!/calculus/derivatives/formulas#derivative_of_natural_logarithm)
+- [nth Derivative of Reciprocal](!/calculus/derivatives/formulas#nth_derivative_of_reciprocal)`,
+  },
+ 
+  {
+    name: 'Taylor Series',
+    entity: 'higher_order_derivative',
+    category: 'Higher-Order Derivatives',
+    formula: `$$f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}\\,(x - a)^n$$`,
+    link: { label: 'Higher-Order Derivatives and Taylor Series', url: '/calculus/derivatives/higher-order#8' },
+    variables: `
+- $a$ — center of expansion
+- $f^{(n)}(a)$ — $n$th derivative of $f$ at $a$ (with $f^{(0)} = f$)`,
+    conditions: `Holds for analytic functions in a neighborhood of $a$. Smooth ($C^\\infty$) does not imply analytic — $e^{-1/x^2}$ extended by $f(0) = 0$ has all derivatives zero at $0$ but is not identically zero, so its Taylor series at $0$ does not represent it.`,
+    explanation: `Each coefficient is a higher-order derivative at the center, divided by a factorial. The Taylor polynomial of degree $k$ truncates the series after $k + 1$ terms, providing a polynomial approximation. The Maclaurin series is the special case $a = 0$. Connection to higher-order derivatives is structural: the entire collection $\\{f^{(n)}(a)\\}$ encodes $f$ locally for analytic functions.`,
+    related_definitions: `
+- [Higher-Order Derivative](!/calculus/definitions#higher_order_derivative)
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [nth Derivative of Power](!/calculus/derivatives/formulas#nth_derivative_of_power)
+- [nth Derivative of Natural Exponential](!/calculus/derivatives/formulas#nth_derivative_of_natural_exponential)
+- [nth Derivative of Sine](!/calculus/derivatives/formulas#nth_derivative_of_sine)`,
+  },
+ 
+  // ──────────────────────────────────────────────────────────────────────
+  // Differentiation Techniques (4 entries)
+  // ──────────────────────────────────────────────────────────────────────
+ 
+  {
+    name: 'Inverse Function Derivative',
+    entity: 'derivative',
+    category: 'Differentiation Techniques',
+    formula: `$$(f^{-1})'(x) = \\frac{1}{f'\\!\\bigl(f^{-1}(x)\\bigr)}$$`,
+    link: { label: 'Differentiating Inverse Functions', url: '/calculus/derivatives/techniques#4' },
+    conditions: `$f$ one-to-one and differentiable; $f'(f^{-1}(x)) \\neq 0$.`,
+    explanation: `Derived by [implicit differentiation](!/calculus/derivatives/techniques) of $f(y) = x$ where $y = f^{-1}(x)$: differentiating both sides gives $f'(y) \\cdot y' = 1$, so $y' = 1/f'(y) = 1/f'(f^{-1}(x))$. Geometrically, graphs of $f$ and $f^{-1}$ are reflections across $y = x$, so slopes are reciprocals at corresponding points. Used to derive the [inverse trigonometric](!/calculus/derivatives/formulas#derivative_of_arcsine) and inverse hyperbolic derivatives.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Derivative of Arcsine](!/calculus/derivatives/formulas#derivative_of_arcsine)
+- [Derivative of Arctangent](!/calculus/derivatives/formulas#derivative_of_arctangent)
+- [Derivative of Natural Logarithm](!/calculus/derivatives/formulas#derivative_of_natural_logarithm)`,
+  },
+ 
+  {
+    name: 'Logarithmic Differentiation',
+    entity: 'derivative',
+    category: 'Differentiation Techniques',
+    formula: `$$\\frac{dy}{dx} = y \\cdot \\frac{d}{dx}\\bigl[\\ln |y|\\bigr]$$`,
+    link: { label: 'Logarithmic Differentiation', url: '/calculus/derivatives/techniques#3' },
+    conditions: `$y \\neq 0$ in a neighborhood of the point of evaluation.`,
+    explanation: `Take $\\ln$ of both sides of $y = f(x)$, expand using log properties (products → sums, quotients → differences, exponents → multipliers), then differentiate implicitly. Solving for $dy/dx$ gives the formula above. Distinctively useful for variable-exponent expressions like $x^x$, $(\\sin x)^{\\cos x}$, where no other rule applies cleanly. Also simplifies products and quotients of many factors. The factor $\\frac{d}{dx}[\\ln|y|]$ is the [logarithmic derivative](!/calculus/derivatives/formulas#logarithmic_derivative).`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Logarithmic Derivative](!/calculus/derivatives/formulas#logarithmic_derivative)
+- [Derivative of Natural Logarithm](!/calculus/derivatives/formulas#derivative_of_natural_logarithm)
+- [Chain Rule](!/calculus/derivatives/formulas#chain_rule)`,
+  },
+ 
+  {
+    name: 'Parametric First Derivative',
+    entity: 'derivative',
+    category: 'Differentiation Techniques',
+    formula: `$$\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt}$$`,
+    link: { label: 'Parametric Differentiation', url: '/calculus/derivatives/techniques#6' },
+    conditions: `$dx/dt \\neq 0$ at the point of evaluation. Both $x(t)$ and $y(t)$ differentiable in $t$.`,
+    explanation: `For a curve given by $x = x(t)$, $y = y(t)$, the slope at a point is the ratio of the two parametric derivatives. Follows from the [chain rule](!/calculus/derivatives/formulas#chain_rule) in Leibniz form: $\\frac{dy}{dt} = \\frac{dy}{dx} \\cdot \\frac{dx}{dt}$. Handles curves that loop, self-intersect, or cannot be expressed as $y = f(x)$.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)`,
+    related_formulas: `
+- [Parametric Second Derivative](!/calculus/derivatives/formulas#parametric_second_derivative)
+- [Chain Rule](!/calculus/derivatives/formulas#chain_rule)`,
+  },
+ 
+  {
+    name: 'Parametric Second Derivative',
+    entity: 'derivative',
+    category: 'Differentiation Techniques',
+    formula: `$$\\frac{d^2y}{dx^2} = \\frac{\\dfrac{d}{dt}\\!\\left(\\dfrac{dy}{dx}\\right)}{\\dfrac{dx}{dt}}$$`,
+    link: { label: 'Parametric Differentiation', url: '/calculus/derivatives/techniques#6' },
+    conditions: `$dx/dt \\neq 0$ at the point of evaluation. NOT equal to $\\frac{d^2y/dt^2}{d^2x/dt^2}$ — a common error.`,
+    explanation: `Differentiate $dy/dx$ (a function of $t$ via the [first parametric derivative](!/calculus/derivatives/formulas#parametric_first_derivative)) with respect to $t$, then divide by $dx/dt$ once more. The naive formula $\\frac{d^2y/dt^2}{d^2x/dt^2}$ is wrong and produces incorrect concavity analysis when used.`,
+    related_definitions: `
+- [Derivative](!/calculus/definitions#derivative)
+- [Higher-Order Derivative](!/calculus/definitions#higher_order_derivative)`,
+    related_formulas: `
+- [Parametric First Derivative](!/calculus/derivatives/formulas#parametric_first_derivative)
+- [Concavity from Second Derivative](!/calculus/derivatives/formulas#concavity_from_second_derivative)`,
+  },
+ 
+
 ];
 
 export default calculusFormulasList;
