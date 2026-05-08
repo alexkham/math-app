@@ -11,7 +11,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 export async function getStaticProps(){
 
  const keyWords = [
-  "properties of arithmetic",
+  "arithmetic properties",
   "commutative property",
   "associative property",
   "distributive property",
@@ -369,28 +369,129 @@ const introContent = {
   content: `A property of an operation is a statement that holds for every input. The order of two addends never affects the sum; the grouping of three factors never changes the product. These facts are not coincidences — they are the structural rules of arithmetic, and every algebraic manipulation rests on them. This page collects the core properties of addition and multiplication, the bridge between the two, and the smaller derived rules that follow.`,
 }
  
+const faqQuestions = {
+  obj1: {
+    question: "What are properties of arithmetic operations?",
+    answer: "A property of an arithmetic operation is a statement that holds for every choice of inputs. For example, the commutative property of addition states that a + b equals b + a for any numbers. These properties form the structural rules that all arithmetic and algebra rely on, independent of any specific computation."
+  },
+  obj2: {
+    question: "What are the main properties of addition and multiplication?",
+    answer: "The main properties are commutative (order does not matter), associative (grouping does not matter), and distributive (linking addition and multiplication). Each operation also has an identity element: 0 for addition and 1 for multiplication. Every real number has an additive inverse, and every nonzero real number has a multiplicative inverse."
+  },
+  obj3: {
+    question: "What is the distributive property?",
+    answer: "The distributive property states that a(b + c) equals ab + ac. It connects addition and multiplication, allowing a sum to be multiplied term by term. Reading the equation in reverse gives the basis for factoring, where a common factor is pulled out of a sum: ab + ac equals a(b + c)."
+  },
+  obj4: {
+    question: "Why does zero have no multiplicative inverse?",
+    answer: "The number 0 is the only real number without a multiplicative inverse. The equation 0 times x equals 1 has no solution because, by the zero property of multiplication, 0 times any number equals 0. This is the formal reason division by zero is undefined."
+  },
+  obj5: {
+    question: "How are subtraction and division related to addition and multiplication?",
+    answer: "Subtraction is defined as addition of an additive inverse: a minus b is shorthand for a plus negative b. Division is defined as multiplication by a multiplicative inverse: a divided by b is shorthand for a times 1/b. Both are derived operations built on top of addition and multiplication, not primitive operations of their own."
+  },
+}
 
 
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Properties of Arithmetic Operations",
+    "description": "Learn the properties of arithmetic operations: commutative, associative, distributive, identity, inverse, sign rules, and zero property explained with examples.",
+    "url": "https://www.learnmathclass.com/arithmetic/properties",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "Middle School, High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Properties of Arithmetic Operations"
+    },
+    "teaches": [
+      "Commutative property of addition and multiplication",
+      "Associative property of addition and multiplication",
+      "Distributive property connecting addition and multiplication",
+      "Identity elements: zero for addition and one for multiplication",
+      "Inverse elements and why zero has no multiplicative inverse",
+      "Sign rules, the zero property of multiplication, and how subtraction and division derive from their primary operations"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
 
-
-   return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Title | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/arithmetic/properties",
-         name: "name"
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
       },
-        
-       }
-    }
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Arithmetic",
+        "item": "https://www.learnmathclass.com/arithmetic"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Properties of Arithmetic Operations",
+        "item": "https://www.learnmathclass.com/arithmetic/properties"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+
+  return {
+  props:{
+     sectionsContent,
+     introContent,
+     faqQuestions,
+     schemas,
+     seoData: {
+       title: "Properties of Arithmetic Operations | Learn Math Class",
+       description: "Learn the properties of arithmetic operations: commutative, associative, distributive, identity, inverse, sign rules, and zero property explained with examples.",
+       keywords: keyWords.join(", "),
+       url: "/arithmetic/properties",
+       name: "Properties of Arithmetic Operations"
+     },
+   }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
+export default function ArithmeticProperties({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
     {
@@ -550,7 +651,7 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+ <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
@@ -572,25 +673,21 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
   <script 
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>
