@@ -6,7 +6,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import TrigFunctionsExplorer from '../../../../../app/components/trigonometry/TrigFunctionsExplorer'
+import Quadrants from '../../../../app/components/trigonometry/Quadrants'
 
 
 export async function getStaticProps(){
@@ -214,7 +214,7 @@ export async function getStaticProps(){
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/trigonometry/visual-tools/functions/graphs",
+        url: "/trigonometry/visual-tools/functions-signs",
          name: "name"
       },
         
@@ -443,9 +443,10 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Trigonometric Functions Graphs</h1>
-   <br/>
-   <TrigFunctionsExplorer/>
+   <h1 className='title' style={{marginTop:'-50px',marginBottom:'-50px'}}>Trigonometric Functions Signs by Quadrants</h1>
+   <br/><div style={{transform:'scale(0.9)'}}>
+   <Quadrants/>
+   </div>
    <br/>
    {/* <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
