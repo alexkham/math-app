@@ -8283,7 +8283,7 @@
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { processContent } from '@/app/utils/contentProcessor';
-import { getTheme } from './VisualToolsPageThemes';
+import { getTheme } from './visualToolsPageThemes';
 
 import {
   FONT_FAMILY, SERIF_FAMILY,

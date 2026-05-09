@@ -8,7 +8,7 @@ import { processContent } from '@/app/utils/contentProcessor';
 import {
   FONT_FAMILY, SERIF_FAMILY,
   hexToRgba, hasArticleContent, sanitizeVideos, sanitizeVideoLayout,
-} from './visualToolsCards';
+} from './VisualToolsCards';
 
 
 /* ================================================================
