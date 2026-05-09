@@ -8283,7 +8283,7 @@
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { processContent } from '@/app/utils/contentProcessor';
-import { getTheme } from './visualToolsPageThemes';
+import { getTheme } from './VisualToolsPageThemes';
 
 import {
   FONT_FAMILY, SERIF_FAMILY,
@@ -8294,9 +8294,9 @@ import {
   hasArticleContent, sanitizeVideos, sanitizeVideoLayout,
   useIsMobile,
   MiniCard, BigCard, AlgorithmicGrid,
-} from './visualToolsCards';
+} from './VisualToolsCards';
 
-import { ArticleVideoBlock, VideoModal } from './visualToolsBlocks';
+import { ArticleVideoBlock, VideoModal } from './VisualToolsBlocks';
 
 
 /* ================================================================
