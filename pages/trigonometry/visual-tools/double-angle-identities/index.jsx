@@ -1019,12 +1019,12 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
    <DoubleAngleExplorer/>
    </SiblingsNav>
    <br/>
-   {/* <SectionTableOfContents sections={genericSections}
+   <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
          secondaryNavMode="siblings"  // or "children"
          secondaryNavTitle="More in this Section"
 
-   /> */}
+   />
    <br/>
    <br/>
    <br/>
@@ -1045,7 +1045,7 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
      variant="light"
    /> */}
    <br/>
-   {/* <Sections sections={genericSections}/> */}
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>

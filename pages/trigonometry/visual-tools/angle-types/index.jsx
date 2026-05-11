@@ -1022,12 +1022,12 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
    {/* </div> */}
    </SiblingsNav>
    <br/>
-   {/* <SectionTableOfContents sections={genericSections}
+   <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
          secondaryNavMode="siblings"  // or "children"
          secondaryNavTitle="More in this Section"
 
-   /> */}
+   />
    <br/>
    <br/>
    <br/>
@@ -1048,7 +1048,7 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
      variant="light"
    /> */}
    <br/>
-   {/* <Sections sections={genericSections}/> */}
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>
