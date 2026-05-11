@@ -494,6 +494,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import TriangleExplorer from '../../../../app/components/trigonometry/triangle/TriangleExplorer'
+import SiblingsNav from '../../../../app/components/SiblingsNav'
+
 
 
 export async function getStaticProps(){
@@ -1004,7 +1006,9 @@ export default function TriangleExplorerPage({seoData, sectionsContent, introCon
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Triangle</h1>
    <br/>
+   <SiblingsNav>
    <TriangleExplorer/>
+   </SiblingsNav>
    <br/>
    {/* <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}

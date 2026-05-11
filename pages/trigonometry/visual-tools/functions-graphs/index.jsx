@@ -493,6 +493,11 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import TrigFunctionsExplorer from '../../../../app/components/trigonometry/TrigFunctionsExplorer'
+import SiblingsNav from '../../../../app/components/SiblingsNav'
+
+
+
+
 
 
 export async function getStaticProps(){
@@ -963,7 +968,9 @@ export default function TrigFunctionsGraphsPage({seoData, sectionsContent, intro
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Trigonometric Functions Graphs</h1>
    <br/>
+   <SiblingsNav>
    <TrigFunctionsExplorer/>
+   </SiblingsNav>
    <br/>
    {/* <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}

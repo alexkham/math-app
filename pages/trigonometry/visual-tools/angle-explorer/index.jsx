@@ -471,6 +471,8 @@ import React from 'react'
 import '@/pages/pages.css'
 import Head from 'next/head'
 import AngleExplorer from '../../../../app/components/trigonometry/angle/AngleExplorer'
+import SiblingsNav from '../../../../app/components/SiblingsNav'
+
 
 
 export async function getStaticProps(){
@@ -951,9 +953,11 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
    <br/>
    <h1 className='title' style={{marginTop:'-20px',marginBottom:'10px'}}>Basic Angle Explorer</h1>
    <br/>
+   <SiblingsNav>
    <div style={{width:'80%',margin:'auto'}}>
    <AngleExplorer/>
    </div>
+   </SiblingsNav>
    <br/>
    <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}

@@ -6,8 +6,9 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import TrigoAngleTypesExplorer from '../../../../app/components/trigonometry/angle/types/TrigoAngleTypesExplorer'
+import DoubleAngleExplorer from '../../../../app/components/trigonometry/identities/double-angle/DoubleAngleExplorer'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
+
 
 
 export async function getStaticProps(){
@@ -215,7 +216,7 @@ export async function getStaticProps(){
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/trigonometry/visual-tools/angle-types",
+        url: "/trigonometry/visual-tools/double-angle-identities",
          name: "name"
       },
         
@@ -227,14 +228,14 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
     
   const genericSections=[
-    {
-        id:'0',
-        title:sectionsContent.obj0.title,
-        link:sectionsContent.obj0.link,
-        content:[
-          sectionsContent.obj0.content,
-        ]
-    },
+    // {
+    //     id:'0',
+    //     title:sectionsContent.obj0.title,
+    //     link:sectionsContent.obj0.link,
+    //     content:[
+    //       sectionsContent.obj0.content,
+    //     ]
+    // },
     {
         id:'1',
         title:sectionsContent.obj1.title,
@@ -444,14 +445,10 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>
-    Angle Types
-   </h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'20px'}}>Double Angle Trigonometric Identities</h1>
    <br/>
-  <SiblingsNav>
-    {/* <div style={{transform:'scale(1.15)'}}> */}
-   <TrigoAngleTypesExplorer/>
-   {/* </div> */}
+   <SiblingsNav>
+   <DoubleAngleExplorer/>
    </SiblingsNav>
    <br/>
    {/* <SectionTableOfContents sections={genericSections}
@@ -481,6 +478,9 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    /> */}
    <br/>
    {/* <Sections sections={genericSections}/> */}
+   <br/>
+   <br/>
+   <br/>
    <br/>
    <br/>
    <br/>

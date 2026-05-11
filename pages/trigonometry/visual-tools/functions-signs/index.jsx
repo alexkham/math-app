@@ -494,6 +494,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import Quadrants from '../../../../app/components/trigonometry/Quadrants'
+import SiblingsNav from '../../../../app/components/SiblingsNav'
+
 
 
 export async function getStaticProps(){
@@ -969,9 +971,12 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'-50px'}}>Trigonometric Functions Signs by Quadrants</h1>
-   <br/><div style={{transform:'scale(0.9)'}}>
+   <br/>
+   <SiblingsNav>
+   <div style={{transform:'scale(0.9)'}}>
    <Quadrants/>
    </div>
+   </SiblingsNav>
    <br/>
    {/* <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
