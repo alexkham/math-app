@@ -1006,7 +1006,13 @@ export default function TriangleExplorerPage({seoData, sectionsContent, introCon
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Triangle</h1>
    <br/>
-   <SiblingsNav>
+   <SiblingsNav
+      bg="#fafaf7"
+  color="#2c5d99"
+  activeColor="#143a66"
+  activeBg="#dde9f7"
+   
+   >
    <TriangleExplorer/>
    </SiblingsNav>
    <br/>

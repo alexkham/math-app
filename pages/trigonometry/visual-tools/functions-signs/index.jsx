@@ -972,7 +972,12 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'-50px'}}>Trigonometric Functions Signs by Quadrants</h1>
    <br/>
-   <SiblingsNav>
+   <SiblingsNav 
+      bg="#fafaf7"
+  color="#2c5d99"
+  activeColor="#143a66"
+  activeBg="#dde9f7"
+   >
    <div style={{transform:'scale(0.9)'}}>
    <Quadrants/>
    </div>

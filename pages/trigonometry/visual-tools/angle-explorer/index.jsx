@@ -953,7 +953,12 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
    <br/>
    <h1 className='title' style={{marginTop:'-20px',marginBottom:'10px'}}>Basic Angle Explorer</h1>
    <br/>
-   <SiblingsNav>
+   <SiblingsNav
+      bg="#fafaf7"
+  color="#2c5d99"
+  activeColor="#143a66"
+  activeBg="#dde9f7"
+   >
    <div style={{width:'80%',margin:'auto'}}>
    <AngleExplorer/>
    </div>
