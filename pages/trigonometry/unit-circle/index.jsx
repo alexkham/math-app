@@ -197,7 +197,15 @@ export async function getStaticProps(){
 - [Quadrantal Angles](!/trigonometry/definitions#quadrantal_angles) — terminal side on a coordinate axis
 - [Reference Angle](!/trigonometry/definitions#reference_angle) — acute angle to the $x$-axis, isolating magnitude from sign
 - [Complementary Angles](!/trigonometry/definitions#complementary_angles) — two angles summing to $90°$
-- [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — two angles summing to $180°$`,
+- [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — two angles summing to $180°$
+
+## Formulas Used 
+
+- [Pythagorean Identity - Sine Cosine](!/trigonometry/formulas#pythagorean_identity_-_sine_cosine) —  $\\sin^2\\theta + \\cos^2\\theta = 1$
+- [Pythagorean Identity - Tangent Secant](!/trigonometry/formulas#pythagorean_identity_-_tangent_secant) — $1 + \\tan^2\\theta = \\sec^2\\theta$
+- [Pythagorean Identity - Cotangent Cosecant](!/trigonometry/formulas#pythagorean_identity_-_cotangent_cosecant) — $1 + \\cot^2\\theta = \\csc^2\\theta$
+
+`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,

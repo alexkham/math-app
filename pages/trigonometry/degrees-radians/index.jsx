@@ -200,7 +200,24 @@ export async function getStaticProps(){
  
 - [Coterminal Angles](!/trigonometry/definitions#coterminal_angles) — angles that share the same terminal side
 - [Complementary Angles](!/trigonometry/definitions#complementary_angles) — two angles summing to $90°$
-- [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — two angles summing to $180°$`,
+- [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — two angles summing to $180°$
+
+## Formulas Used
+
+## Measurement & Conversion
+ 
+- [Degree-Radian Conversion](!/trigonometry/formulas#degree-radian_conversion) — $\\theta_{\\text{rad}} = \\theta_{\\text{deg}} \\times \\frac{\\pi}{180}$
+- [Arc Length](!/trigonometry/formulas#arc_length) — $s = r\\theta$
+- [Sector Area](!/trigonometry/formulas#sector_area) — $A = \\frac{1}{2}r^2\\theta$
+ 
+## Supplement & Shift Identities
+ 
+- [Sine Supplement Identity](!/trigonometry/formulas#sine_supplement_identity) — $\\sin(\\pi - \\theta) = \\sin\\theta$
+- [Cosine Supplement Identity](!/trigonometry/formulas#cosine_supplement_identity) — $\\cos(\\pi - \\theta) = -\\cos\\theta$
+- [Tangent Supplement Identity](!/trigonometry/formulas#tangent_supplement_identity) — $\\tan(\\pi - \\theta) = -\\tan\\theta$
+
+
+`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,

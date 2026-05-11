@@ -226,7 +226,15 @@ export async function getStaticProps(){
 - [Reference Angle](!/trigonometry/definitions#reference_angle) — the acute angle to the $x$-axis, used to identify solutions by quadrant
 - [Inverse Trigonometric Function](!/trigonometry/definitions#inverse_trigonometric_function) — returns the angle for a given function value
 - [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — angles summing to $180°$, linking sine solutions across quadrants
-- [Quadrantal Angles](!/trigonometry/definitions#quadrantal_angles) — boundary angles where some functions are undefined or extreme`,
+- [Quadrantal Angles](!/trigonometry/definitions#quadrantal_angles) — boundary angles where some functions are undefined or extreme
+
+## Formulas Used
+
+- [General Solution - Sine Equation](!/trigonometry/formulas#general_solution_-_sine_equation) — $\\sin\\theta = k \\Rightarrow \\theta = (-1)^n \\arcsin k + n\\pi$
+- [General Solution - Cosine Equation](!/trigonometry/formulas#general_solution_-_cosine_equation) — $\\cos\\theta = k \\Rightarrow \\theta = \\pm\\arccos k + 2n\\pi$
+- [General Solution - Tangent Equation](!/trigonometry/formulas#general_solution_-_tangent_equation) — $\\tan\\theta = k \\Rightarrow \\theta = \\arctan k + n\\pi$
+
+`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,

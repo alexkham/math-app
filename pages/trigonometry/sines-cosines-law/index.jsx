@@ -150,7 +150,16 @@ export async function getStaticProps(){
 - [Sine](!/trigonometry/definitions#sine) — the function at the core of both laws
 - [Cosine](!/trigonometry/definitions#cosine) — appears in the Law of Cosines correction term
 - [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — angles summing to $180°$, central to the ambiguous case
-- [Inverse Trigonometric Function](!/trigonometry/definitions#inverse_trigonometric_function) — used to recover angles from computed sides`,
+- [Inverse Trigonometric Function](!/trigonometry/definitions#inverse_trigonometric_function) — used to recover angles from computed sides
+
+## Formulas Used
+
+- [Law of Sines](!/trigonometry/formulas#law_of_sines)    —    $\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C}$
+- [Law of Cosines](!/trigonometry/formulas#law_of_cosines) — $c^2 = a^2 + b^2 - 2ab\\cos C$
+- [Law of Tangents](!/trigonometry/formulas#law_of_tangents) — $\\frac{a - b}{a + b} = \\frac{\\tan\\frac{A - B}{2}}{\\tan\\frac{A + B}{2}}$
+- [Triangle Area - SAS](!/trigonometry/formulas#triangle_area_-_sas) — $A = \\frac{1}{2}ab\\sin C$
+- [Herons Formula](!/trigonometry/formulas#herons_formula) — $A = \\sqrt{s(s-a)(s-b)(s-c)}$
+`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,

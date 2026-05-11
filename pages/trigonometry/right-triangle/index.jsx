@@ -200,7 +200,16 @@ export async function getStaticProps(){
  
 - [Trigonometric Ratio](!/trigonometry/definitions#trigonometric_ratio) — a ratio of sides depending only on the angle
 - [Complementary Angles](!/trigonometry/definitions#complementary_angles) — the two acute angles sum to $90°$, producing cofunction relationships
-- [Inverse Trigonometric Function](!/trigonometry/definitions#inverse_trigonometric_function) — recovers an angle from a known side ratio`,
+- [Inverse Trigonometric Function](!/trigonometry/definitions#inverse_trigonometric_function) — recovers an angle from a known side ratio
+
+## Formulas Used
+
+- [Sine-Cosine Cofunction](!/trigonometry/formulas#sine-cosine_cofunction) — $\\sin\\!\\left(\\frac{\\pi}{2} - \\theta\\right) = \\cos\\theta$
+- [Cosine-Sine Cofunction](!/trigonometry/formulas#cosine-sine_cofunction) — $\\cos\\!\\left(\\frac{\\pi}{2} - \\theta\\right) = \\sin\\theta$
+- [Tangent-Cotangent Cofunction](!/trigonometry/formulas#tangent-cotangent_cofunction) — $\\tan\\!\\left(\\frac{\\pi}{2} - \\theta\\right) = \\cot\\theta$
+
+
+`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,

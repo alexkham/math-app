@@ -152,7 +152,17 @@ export async function getStaticProps(){
 - [Sine](!/trigonometry/definitions#sine) — $y$-coordinate on the unit circle, restricted to $[-\\frac{\\pi}{2}, \\frac{\\pi}{2}]$ for inversion
 - [Cosine](!/trigonometry/definitions#cosine) — $x$-coordinate on the unit circle, restricted to $[0, \\pi]$ for inversion
 - [Tangent](!/trigonometry/definitions#tangent) — ratio of sine to cosine, restricted to $(-\\frac{\\pi}{2}, \\frac{\\pi}{2})$ for inversion
-- [Trigonometric Ratio](!/trigonometry/definitions#trigonometric_ratio) — the right-triangle ratios that inverse functions reverse`,
+- [Trigonometric Ratio](!/trigonometry/definitions#trigonometric_ratio) — the right-triangle ratios that inverse functions reverse
+
+## Formulas Used
+
+- [Arcsin Plus Arccos](!/trigonometry/formulas#arcsin_plus_arccos) — $\\arcsin x + \\arccos x = \\frac{\\pi}{2}$
+- [Arctan Plus Arccot](!/trigonometry/formulas#arctan_plus_arccot) — $\\arctan x + \\operatorname{arccot} x = \\frac{\\pi}{2}$
+- [Arcsin of Negative](!/trigonometry/formulas#arcsin_of_negative) — $\\arcsin(-x) = -\\arcsin x$
+- [Arccos of Negative](!/trigonometry/formulas#arccos_of_negative) — $\\arccos(-x) = \\pi - \\arccos x$
+- [Arctan of Negative](!/trigonometry/formulas#arctan_of_negative) — $\\arctan(-x) = -\\arctan x$
+
+`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,

@@ -191,7 +191,23 @@ export async function getStaticProps(){
 - [Tangent](!/trigonometry/definitions#tangent) — $\\frac{y}{x}$; odd, unbounded, period $\\pi$
 - [Cosecant](!/trigonometry/definitions#cosecant) — $\\frac{1}{\\sin\\theta}$; odd, unbounded below $|1|$
 - [Secant](!/trigonometry/definitions#secant) — $\\frac{1}{\\cos\\theta}$; even, unbounded below $|1|$
-- [Cotangent](!/trigonometry/definitions#cotangent) — $\\frac{\\cos\\theta}{\\sin\\theta}$; odd, unbounded, period $\\pi$`,
+- [Cotangent](!/trigonometry/definitions#cotangent) — $\\frac{\\cos\\theta}{\\sin\\theta}$; odd, unbounded, period $\\pi$
+
+## Formulas Used
+
+## Even-Odd Identities
+ 
+- [Sine Odd Identity](!/trigonometry/formulas#sine_odd_identity) — $\\sin(-\\theta) = -\\sin\\theta$
+- [Cosine Even Identity](!/trigonometry/formulas#cosine_even_identity) — $\\cos(-\\theta) = \\cos\\theta$
+- [Tangent Odd Identity](!/trigonometry/formulas#tangent_odd_identity) — $\\tan(-\\theta) = -\\tan\\theta$
+ 
+## Periodicity Identities
+ 
+- [Sine Periodicity](!/trigonometry/formulas#sine_periodicity) — $\\sin(\\theta + 2\\pi) = \\sin\\theta$
+- [Cosine Periodicity](!/trigonometry/formulas#cosine_periodicity) — $\\cos(\\theta + 2\\pi) = \\cos\\theta$
+- [Tangent Periodicity](!/trigonometry/formulas#tangent_periodicity) — $\\tan(\\theta + \\pi) = \\tan\\theta$
+
+`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,

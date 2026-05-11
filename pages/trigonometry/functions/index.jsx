@@ -190,7 +190,22 @@ export async function getStaticProps(){
  
 - [Trigonometric Ratio](!/trigonometry/definitions#trigonometric_ratio) — a ratio of two sides of a right triangle
 - [Unit Circle](!/trigonometry/definitions#unit_circle) — the circle $x^2 + y^2 = 1$ that defines the functions for all angles
-- [Periodic Function](!/trigonometry/definitions#periodic_function) — a function repeating at regular intervals`,
+- [Periodic Function](!/trigonometry/definitions#periodic_function) — a function repeating at regular intervals
+
+## Formulas Used 
+
+## Reciprocal Identities
+ 
+- [Cosecant Reciprocal Identity](!/trigonometry/formulas#cosecant_reciprocal_identity) — $\\csc\\theta = \\frac{1}{\\sin\\theta}$
+- [Secant Reciprocal Identity](!/trigonometry/formulas#secant_reciprocal_identity) — $\\sec\\theta = \\frac{1}{\\cos\\theta}$
+- [Cotangent Reciprocal Identity](!/trigonometry/formulas#cotangent_reciprocal_identity) — $\\cot\\theta = \\frac{1}{\\tan\\theta}$
+ 
+## Quotient Identities
+ 
+- [Tangent Quotient Identity](!/trigonometry/formulas#tangent_quotient_identity) — $\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta}$
+- [Cotangent Quotient Identity](!/trigonometry/formulas#cotangent_quotient_identity) — $\\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta}$
+
+`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,

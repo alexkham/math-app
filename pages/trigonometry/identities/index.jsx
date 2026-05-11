@@ -31,7 +31,61 @@ export async function getStaticProps(){
 ## Angle Relationships
  
 - [Complementary Angles](!/trigonometry/definitions#complementary_angles) — two angles summing to $90°$, the basis of cofunction identities
-- [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — two angles summing to $180°$`,
+- [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — two angles summing to $180°$
+
+## Formulas Used
+
+## Supplement & Shift Identities
+ 
+- [Sine Anti-Supplement Shift](!/trigonometry/formulas#sine_anti-supplement_shift) — $\\sin(\\pi + \\theta) = -\\sin\\theta$
+- [Cosine Anti-Supplement Shift](!/trigonometry/formulas#cosine_anti-supplement_shift) — $\\cos(\\pi + \\theta) = -\\cos\\theta$
+- [Quadrature Shift - Sine](!/trigonometry/formulas#quadrature_shift_-_sine) — $\\sin\\!\\left(\\frac{\\pi}{2} + \\theta\\right) = \\cos\\theta$
+ 
+## Sum & Difference Formulas
+ 
+- [Sine Sum and Difference](!/trigonometry/formulas#sine_sum_and_difference) — $\\sin(A \\pm B) = \\sin A\\cos B \\pm \\cos A\\sin B$
+- [Cosine Sum and Difference](!/trigonometry/formulas#cosine_sum_and_difference) — $\\cos(A \\pm B) = \\cos A\\cos B \\mp \\sin A\\sin B$
+- [Tangent Sum and Difference](!/trigonometry/formulas#tangent_sum_and_difference) — $\\tan(A \\pm B) = \\frac{\\tan A \\pm \\tan B}{1 \\mp \\tan A\\tan B}$
+ 
+## Double Angle Formulas
+ 
+- [Sine Double Angle](!/trigonometry/formulas#sine_double_angle) — $\\sin 2A = 2\\sin A\\cos A$
+- [Cosine Double Angle](!/trigonometry/formulas#cosine_double_angle) — $\\cos 2A = \\cos^2 A - \\sin^2 A$
+- [Tangent Double Angle](!/trigonometry/formulas#tangent_double_angle) — $\\tan 2A = \\frac{2\\tan A}{1 - \\tan^2 A}$
+ 
+## Half-Angle Formulas
+ 
+- [Sine Half Angle](!/trigonometry/formulas#sine_half_angle) — $\\sin\\frac{A}{2} = \\pm\\sqrt{\\frac{1 - \\cos A}{2}}$
+- [Cosine Half Angle](!/trigonometry/formulas#cosine_half_angle) — $\\cos\\frac{A}{2} = \\pm\\sqrt{\\frac{1 + \\cos A}{2}}$
+- [Tangent Half Angle](!/trigonometry/formulas#tangent_half_angle) — $\\tan\\frac{A}{2} = \\pm\\sqrt{\\frac{1 - \\cos A}{1 + \\cos A}}$
+ 
+## Triple Angle Formulas
+ 
+- [Sine Triple Angle](!/trigonometry/formulas#sine_triple_angle) — $\\sin 3A = 3\\sin A - 4\\sin^3 A$
+- [Cosine Triple Angle](!/trigonometry/formulas#cosine_triple_angle) — $\\cos 3A = 4\\cos^3 A - 3\\cos A$
+- [Tangent Triple Angle](!/trigonometry/formulas#tangent_triple_angle) — $\\tan 3A = \\frac{3\\tan A - \\tan^3 A}{1 - 3\\tan^2 A}$
+ 
+## Power-Reducing Formulas
+ 
+- [Sine Squared Reduction](!/trigonometry/formulas#sine_squared_reduction) — $\\sin^2 A = \\frac{1 - \\cos 2A}{2}$
+- [Cosine Squared Reduction](!/trigonometry/formulas#cosine_squared_reduction) — $\\cos^2 A = \\frac{1 + \\cos 2A}{2}$
+- [Tangent Squared Reduction](!/trigonometry/formulas#tangent_squared_reduction) — $\\tan^2 A = \\frac{1 - \\cos 2A}{1 + \\cos 2A}$
+ 
+## Product-to-Sum Formulas
+ 
+- [Product to Sum - Cosine Cosine](!/trigonometry/formulas#product_to_sum_-_cosine_cosine) — $\\cos A\\cos B = \\frac{1}{2}[\\cos(A - B) + \\cos(A + B)]$
+- [Product to Sum - Sine Sine](!/trigonometry/formulas#product_to_sum_-_sine_sine) — $\\sin A\\sin B = \\frac{1}{2}[\\cos(A - B) - \\cos(A + B)]$
+- [Product to Sum - Sine Cosine](!/trigonometry/formulas#product_to_sum_-_sine_cosine) — $\\sin A\\cos B = \\frac{1}{2}[\\sin(A + B) + \\sin(A - B)]$
+- [Product to Sum - Cosine Sine](!/trigonometry/formulas#product_to_sum_-_cosine_sine) — $\\cos A\\sin B = \\frac{1}{2}[\\sin(A + B) - \\sin(A - B)]$
+ 
+## Sum-to-Product Formulas
+ 
+- [Sum to Product - Sine Sum](!/trigonometry/formulas#sum_to_product_-_sine_sum) — $\\sin A + \\sin B = 2\\sin\\frac{A + B}{2}\\cos\\frac{A - B}{2}$
+- [Sum to Product - Sine Difference](!/trigonometry/formulas#sum_to_product_-_sine_difference) — $\\sin A - \\sin B = 2\\cos\\frac{A + B}{2}\\sin\\frac{A - B}{2}$
+- [Sum to Product - Cosine Sum](!/trigonometry/formulas#sum_to_product_-_cosine_sum) — $\\cos A + \\cos B = 2\\cos\\frac{A + B}{2}\\cos\\frac{A - B}{2}$
+- [Sum to Product - Cosine Difference](!/trigonometry/formulas#sum_to_product_-_cosine_difference) — $\\cos A - \\cos B = -2\\sin\\frac{A + B}{2}\\sin\\frac{A - B}{2}$
+
+`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,
