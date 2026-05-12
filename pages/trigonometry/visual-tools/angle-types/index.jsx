@@ -1020,7 +1020,13 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
   > */}
     {/* <div style={{transform:'scale(1.15)'}}> */}
     <div style={{ display: 'grid', gridTemplateColumns: '200px minmax(0, 1fr)', gap: 28 }}>
-  <SiblingsNavStandalone />
+  <SiblingsNavStandalone 
+  
+     bg="#fafaf7"
+  color="#2c5d99"
+  activeColor="#143a66"
+  activeBg="#dde9f7"
+  />
   <TrigoAngleTypesExplorer/>
 </div>
     {/* <SiblingsNavStandalone/>
