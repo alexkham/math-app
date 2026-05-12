@@ -977,6 +977,7 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
   color="#2c5d99"
   activeColor="#143a66"
   activeBg="#dde9f7"
+  topOffset='200px'
    >
    <div style={{transform:'scale(0.9)'}}>
    <Quadrants/>

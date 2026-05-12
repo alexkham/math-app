@@ -973,6 +973,7 @@ export default function TrigFunctionsGraphsPage({seoData, sectionsContent, intro
   color="#2c5d99"
   activeColor="#143a66"
   activeBg="#dde9f7"
+  topOffset='180px'
    
    >
    <TrigFunctionsExplorer/>

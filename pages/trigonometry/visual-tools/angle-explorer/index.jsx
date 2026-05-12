@@ -959,7 +959,7 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
   activeColor="#143a66"
   activeBg="#dde9f7"
    >
-   <div style={{width:'80%',margin:'auto'}}>
+   <div style={{width:'100%',margin:'auto'}}>
    <AngleExplorer/>
    </div>
    </SiblingsNav>

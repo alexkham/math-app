@@ -506,6 +506,7 @@ import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import TrigoAngleTypesExplorer from '../../../../app/components/trigonometry/angle/types/TrigoAngleTypesExplorer'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
+import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandalone'
 
 
 export async function getStaticProps(){
@@ -1018,7 +1019,12 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
   activeBg="#dde9f7"
   > */}
     {/* <div style={{transform:'scale(1.15)'}}> */}
-   <TrigoAngleTypesExplorer/>
+    <div style={{ display: 'grid', gridTemplateColumns: '200px minmax(0, 1fr)', gap: 28 }}>
+  <SiblingsNavStandalone />
+  <TrigoAngleTypesExplorer/>
+</div>
+    {/* <SiblingsNavStandalone/>
+   <TrigoAngleTypesExplorer/> */}
    {/* </div> */}
    {/* </SiblingsNav> */}
    <br/>

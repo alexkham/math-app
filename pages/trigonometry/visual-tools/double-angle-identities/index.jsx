@@ -506,6 +506,7 @@ import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import DoubleAngleExplorer from '../../../../app/components/trigonometry/identities/double-angle/DoubleAngleExplorer'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
+import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandalone'
 
 
 
@@ -1016,6 +1017,11 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
   activeColor="#143a66"
   activeBg="#dde9f7"
    > */}
+{/* <div style={{ display: 'grid', gridTemplateColumns: '200px minmax(0, 1fr)', gap: 8 }}>
+  <SiblingsNavStandalone />
+  <DoubleAngleExplorer/>
+</div> */}
+   <SiblingsNavStandalone/>
    <DoubleAngleExplorer/>
    {/* </SiblingsNav> */}
    <br/>
