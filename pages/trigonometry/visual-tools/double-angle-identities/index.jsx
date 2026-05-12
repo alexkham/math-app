@@ -1009,7 +1009,7 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'0px',marginBottom:'20px'}}>Double Angle Trigonometric Identities</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Double Angle Trigonometric Identities</h1>
    <br/>
    {/* <SiblingsNav
       bg="#fafaf7"
@@ -1017,11 +1017,21 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
   activeColor="#143a66"
   activeBg="#dde9f7"
    > */}
-{/* <div style={{ display: 'grid', gridTemplateColumns: '200px minmax(0, 1fr)', gap: 8 }}>
-  <SiblingsNavStandalone />
+<div style={{ display: 'grid', gridTemplateColumns: '30px minmax(0, 1fr)', gap: 8,alignItems: 'start' }}>
+  <SiblingsNavStandalone 
+  // bg="#fafaf7"
+  // color="#2c5d99"
+  // activeColor="#143a66"
+  // activeBg="#dde9f7"
+
+  bg="#ffffff"
+  color="#64748b"
+  activeColor="#4F46E5"
+  activeBg="#eef2ff"
+  />
   <DoubleAngleExplorer/>
-</div> */}
-   <SiblingsNavStandalone
+</div>
+   {/* <SiblingsNavStandalone
       bg="#fafaf7"
   color="#2c5d99"
   activeColor="#143a66"
@@ -1030,7 +1040,7 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
    />
   
    <DoubleAngleExplorer/>
- 
+  */}
    {/* </SiblingsNav> */}
    <br/>
    <SectionTableOfContents sections={genericSections}
