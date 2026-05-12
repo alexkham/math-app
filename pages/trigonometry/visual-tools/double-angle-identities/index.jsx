@@ -1010,14 +1010,14 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'20px'}}>Double Angle Trigonometric Identities</h1>
    <br/>
-   <SiblingsNav
+   {/* <SiblingsNav
       bg="#fafaf7"
   color="#2c5d99"
   activeColor="#143a66"
   activeBg="#dde9f7"
-   >
+   > */}
    <DoubleAngleExplorer/>
-   </SiblingsNav>
+   {/* </SiblingsNav> */}
    <br/>
    <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}

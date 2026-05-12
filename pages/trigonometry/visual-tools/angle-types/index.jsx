@@ -1011,16 +1011,16 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
     Angle Types
    </h1>
    <br/>
-  <SiblingsNav
+  {/* <SiblingsNav
      bg="#fafaf7"
   color="#2c5d99"
   activeColor="#143a66"
   activeBg="#dde9f7"
-  >
+  > */}
     {/* <div style={{transform:'scale(1.15)'}}> */}
    <TrigoAngleTypesExplorer/>
    {/* </div> */}
-   </SiblingsNav>
+   {/* </SiblingsNav> */}
    <br/>
    <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
