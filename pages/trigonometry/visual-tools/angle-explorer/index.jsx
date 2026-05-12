@@ -472,6 +472,8 @@ import '@/pages/pages.css'
 import Head from 'next/head'
 import AngleExplorer from '../../../../app/components/trigonometry/angle/AngleExplorer'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
+import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandalone'
+
 
 
 

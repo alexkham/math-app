@@ -1026,9 +1026,11 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
   color="#2c5d99"
   activeColor="#143a66"
   activeBg="#dde9f7"
-   
+ 
    />
+  
    <DoubleAngleExplorer/>
+ 
    {/* </SiblingsNav> */}
    <br/>
    <SectionTableOfContents sections={genericSections}

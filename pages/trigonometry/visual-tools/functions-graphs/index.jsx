@@ -494,6 +494,8 @@ import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import TrigFunctionsExplorer from '../../../../app/components/trigonometry/TrigFunctionsExplorer'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
+import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandalone'
+
 
 
 
@@ -968,23 +970,33 @@ export default function TrigFunctionsGraphsPage({seoData, sectionsContent, intro
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Trigonometric Functions Graphs</h1>
    <br/>
-   <SiblingsNav
+   {/* <SiblingsNav
       bg="#fafaf7"
   color="#2c5d99"
   activeColor="#143a66"
   activeBg="#dde9f7"
   topOffset='180px'
    
-   >
+   > */}
+    <SiblingsNavStandalone
+         bg="#fafaf7"
+     color="#2c5d99"
+     activeColor="#143a66"
+     activeBg="#dde9f7"
+     topOffset='200px'
+    
+      />
+      <div style={{width:'90%',margin:'auto'}}>
    <TrigFunctionsExplorer/>
-   </SiblingsNav>
+   </div>
+   {/* </SiblingsNav> */}
    <br/>
-   {/* <SectionTableOfContents sections={genericSections}
+   <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
          secondaryNavMode="siblings"  // or "children"
          secondaryNavTitle="More in this Section"
 
-   /> */}
+   />
    <br/>
    <br/>
    <br/>
@@ -1005,7 +1017,7 @@ export default function TrigFunctionsGraphsPage({seoData, sectionsContent, intro
      variant="light"
    /> */}
    <br/>
-   {/* <Sections sections={genericSections.slice(1)}/> */}
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>
