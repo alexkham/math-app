@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import BisectedApexDemo from './BisectedApexDemo';
+import BisectedApexDemo from '../BisectedApexDemo';
 
 /* ============================================================
    HalfAngleExplorer v2
