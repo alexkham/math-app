@@ -1017,17 +1017,17 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
   activeColor="#143a66"
   activeBg="#dde9f7"
    > */}
-<div style={{ display: 'grid', gridTemplateColumns: '30px minmax(0, 1fr)', gap: 8,alignItems: 'start' }}>
+<div style={{ display: 'grid', gridTemplateColumns: '100px minmax(0, 1fr)', gap: 8,alignItems: 'start' }}>
   <SiblingsNavStandalone 
-  bg="#fafaf7"
-  color="#2c5d99"
-  activeColor="#143a66"
-  activeBg="#dde9f7"
+  // bg="#fafaf7"
+  // color="#2c5d99"
+  // activeColor="#143a66"
+  // activeBg="#dde9f7"
 
-  // bg="#ffffff"
-  // color="#64748b"
-  // activeColor="#4F46E5"
-  // activeBg="#eef2ff"
+  bg="#ffffff"
+  color="#64748b"
+  activeColor="#4F46E5"
+  activeBg="#eef2ff"
   />
   <DoubleAngleExplorer/>
 </div>
