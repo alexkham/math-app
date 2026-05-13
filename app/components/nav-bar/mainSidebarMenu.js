@@ -40,7 +40,7 @@ const CustomConvert=()=>(
         { text: 'Determinant Visual Calculator', url: '/visual-tools/determinant-calculator' },
         { text: 'Gauss Elinination Calculator', url: '/visual-tools/gauss-elimination' },
         { text: 'Matrix Multiplication Visualizer', url: '/visual-tools/matrix-multiplication' },
-        { text: 'Matric Transposition', url: '/visual-tools/matrix-transposition' },
+        // { text: 'Matric Transposition', url: '/visual-tools/matrix-transposition' },
         { text: 'Permutations Visualizer', url: '/combinatorics/permutations/permutations-visualizer' },
         { text: 'Unit Circle Visualizer', url: '/visual-tools/unit-circle' },
         { text: 'Angle Quadrants Visualizer', url: '/trigonometry/quadrants' },
