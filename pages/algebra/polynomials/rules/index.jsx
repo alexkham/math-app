@@ -1,3 +1,912 @@
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// import Sections from '@/app/components/page-components/section/Sections'
+// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// import React from 'react'
+// import '../../../../pages/pages.css'
+// import Head from 'next/head'
+// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+
+
+// export async function getStaticProps(){
+// const keyWords = [
+//   "polynomial theorems",
+//   "remainder theorem",
+//   "factor theorem",
+//   "rational root theorem",
+//   "Vieta's formulas",
+//   "Descartes rule of signs",
+//   "fundamental theorem of algebra",
+//   "integer root theorem",
+//   "polynomial upper lower bounds",
+//   "polynomial division remainder",
+//   "find rational roots",
+//   "sum product of roots",
+//   "polynomial root theorems",
+//   "how to use factor theorem",
+//   "polynomial rules algebra"
+// ]
+
+//   // •
+
+// //   \u2022 First item
+// // \u2022 Second item
+
+  
+// // <hr style="border-width:1px;"></hr>
+
+// // <hr style="color:blue;" />
+
+// // <hr style="border-color:#3498db; border-width:1px;" />
+
+
+
+// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+
+ 
+// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+//         //     {processContent(sectionsContent.normal.notation)}
+//         // </div>,
+
+
+// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+// //     {processContent(sectionsContent.normal.parameters)}
+// // </div>,
+        
+// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+// //                   {processContent(sectionsContent.obj4.content)}
+// //                   </div>,
+
+
+// //  <div key={'dist'} style={{
+// //                     textAlign: 'center',
+// //                     transform: 'scale(0.98)',
+// //                     transformOrigin: 'center',
+// //                     marginTop:'50px',
+// //                     marginLeft:'-150px'
+// //                   }} dangerouslySetInnerHTML={{ 
+// //                     __html:   sectionContent.distributions.svg,
+// //                   }} />
+
+//     const sectionsContent={
+
+  
+// obj0: {
+//   title: `Key Terms`,
+//   content: `
+// ## Division Theorems
+ 
+// - [Remainder Theorem](!/algebra/definitions#remainder_theorem) — remainder of $P(x) \\div (x-c)$ is $P(c)$
+// - [Factor Theorem](!/algebra/definitions#factor_theorem) — $(x-c)$ divides $P(x)$ exactly when $P(c) = 0$
+ 
+// ## Root-Finding Theorems
+ 
+// - [Rational Root Theorem](!/algebra/definitions#rational_root_theorem) — if $p/q$ is a rational root, $p \\mid a_0$ and $q \\mid a_n$
+// - [Descartes' Rule of Signs](!/algebra/definitions#descartes'_rule_of_signs) — sign changes bound the count of positive and negative roots
+// - [Fundamental Theorem of Algebra](!/algebra/definitions#fundamental_theorem_of_algebra) — every degree-$n$ polynomial has exactly $n$ complex roots
+ 
+// ## Coefficient-Root Relations
+ 
+// - [Vieta's Formulas](!/algebra/definitions#vieta's_formulas) — root sums and products from coefficients alone
+// - [Root (of a Polynomial)](!/algebra/definitions#root_(of_a_polynomial)) — the values these theorems locate
+// - [Synthetic Division](!/algebra/definitions#synthetic_division) — the computational tool for testing candidates
+
+// ## Formulas Used on This Page
+
+// - [Remainder Theorem](!/algebra/formulas#remainder_theorem) — $P(x) = (x - c) \\cdot Q(x) + P(c)$
+// - [Factor Theorem](!/algebra/formulas#factor_theorem) — $(x - c)$ is a factor of $P(x) \\iff P(c) = 0$
+// - [Rational Root Theorem](!/algebra/formulas#rational_root_theorem) — if $\\frac{p}{q}$ is a root: $p \\mid a_0$ and $q \\mid a_n$
+
+// `,
+//   before: ``,
+//   after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+// `,
+//   link: '',
+// },
+
+//     obj1: {
+//   title: `The Remainder Theorem`,
+//   content: `When a polynomial $P(x)$ is divided by a linear binomial $(x - c)$, the remainder is a constant — and that constant equals $P(c)$, the value of the polynomial evaluated at $x = c$.
+
+// This means the remainder can be found without performing any division at all. To find the remainder when $P(x) = x^3 - 4x + 2$ is divided by $(x - 3)$, simply compute $P(3) = 27 - 12 + 2 = 17$. The remainder is $17$.
+
+// The theorem applies to any polynomial and any value of $c$. If $P(x) = 2x^4 - x^2 + 5$ and the divisor is $(x + 1)$, read $(x + 1)$ as $(x - (-1))$ and evaluate $P(-1) = 2(1) - 1 + 5 = 6$. The remainder is $6$, confirmed instantly without setting up [long division or synthetic division](!/algebra/polynomials/operations).`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+//     // obj2:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+
+//     obj2: {
+//   title: `Why the Remainder Theorem Works`,
+//   content: `The proof follows directly from the division algorithm. Dividing $P(x)$ by $(x - c)$ produces a quotient $Q(x)$ and a remainder $R$:
+
+// $$P(x) = (x - c) \\cdot Q(x) + R$$
+
+// Because the divisor $(x - c)$ has degree $1$, the remainder $R$ must have degree less than $1$ — meaning $R$ is a constant, independent of $x$.
+
+// Now substitute $x = c$ into both sides:
+
+// $$P(c) = (c - c) \\cdot Q(c) + R = 0 \\cdot Q(c) + R = R$$
+
+// The factor $(c - c)$ annihilates the quotient term, leaving $P(c) = R$. Evaluation and division are not separate operations — evaluating $P$ at $c$ is equivalent to extracting the remainder of division by $(x - c)$.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+  
+//     // obj3:{
+  
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+
+
+//     obj3: {
+//   title: `The Factor Theorem`,
+//   content: `The Factor Theorem is a direct consequence of the Remainder Theorem: $(x - c)$ is a factor of $P(x)$ if and only if $P(c) = 0$.
+
+// The logic is immediate. If the remainder when dividing by $(x - c)$ is zero, then $P(x) = (x - c) \\cdot Q(x)$ with no leftover term — so $(x - c)$ divides $P(x)$ exactly. Conversely, if $(x - c)$ is a factor, then $P(c) = (c - c) \\cdot Q(c) = 0$.
+
+// This creates a bridge between [roots](!/algebra/polynomials/roots) and [factors](!/algebra/polynomials/factoring). The value $c$ is a root of $P(x)$ precisely when $(x - c)$ is a factor of $P(x)$. Finding one gives the other automatically.
+
+// To test whether $(x - 2)$ is a factor of $x^3 - 6x^2 + 11x - 6$, evaluate $P(2) = 8 - 24 + 22 - 6 = 0$. Since the result is zero, $(x - 2)$ is indeed a factor, and $2$ is a root.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+//     // obj4:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+
+//     obj4: {
+//   title: `Using the Factor Theorem`,
+//   content: `The Factor Theorem works in both directions — it can verify suspected factors and it can build polynomials from known roots.
+
+// To test potential roots, substitute each candidate into $P(x)$ and check for zero. For $P(x) = x^3 - 7x + 6$, testing $x = 1$ gives $P(1) = 1 - 7 + 6 = 0$, confirming that $(x - 1)$ is a factor. Dividing out this factor via [synthetic division](!/algebra/polynomials/operations) yields the quotient $x^2 + x - 6$, which factors further as $(x + 3)(x - 2)$. The complete factorization is $(x - 1)(x + 3)(x - 2)$.
+
+// To construct a polynomial from its roots, reverse the process. If a cubic polynomial has roots $1$, $-2$, and $4$, the Factor Theorem guarantees that $(x - 1)$, $(x + 2)$, and $(x - 4)$ are all factors. Their product gives:
+
+// $$(x - 1)(x + 2)(x - 4) = x^3 - 3x^2 - 6x + 8$$
+
+// Any nonzero scalar multiple $a(x - 1)(x + 2)(x - 4)$ shares the same roots, so the polynomial is determined up to a constant factor unless additional information — such as a specific function value — pins it down.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+//     // obj5:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+
+
+//     obj5: {
+//   title: `The Rational Root Theorem`,
+//   content: `For polynomials with integer coefficients, the Rational Root Theorem restricts which rational numbers can possibly be roots. If $P(x) = a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0$ has integer coefficients and $\\frac{p}{q}$ is a rational root expressed in lowest terms, then $p$ divides the constant term $a_0$ and $q$ divides the leading coefficient $a_n$.
+
+// This transforms an infinite search into a finite one. Instead of testing every rational number, only the fractions formed by divisors of $a_0$ over divisors of $a_n$ need to be checked.
+
+// For $P(x) = 2x^3 + x^2 - 13x + 6$, the constant term is $6$ with divisors $\\pm 1, \\pm 2, \\pm 3, \\pm 6$, and the leading coefficient is $2$ with divisors $\\pm 1, \\pm 2$. The candidate list is:
+
+// $$\\pm 1, \\pm 2, \\pm 3, \\pm 6, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$$
+
+// Twelve candidates replace infinitely many possibilities. Each can be tested by substitution or synthetic division until all rational roots are found or the list is exhausted.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+//     // obj6:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+
+
+//     obj6: {
+//   title: `Applying the Rational Root Theorem`,
+//   content: `The theorem produces a candidate list, but the actual work lies in testing each candidate efficiently. A systematic approach avoids redundant effort.
+
+// Start by listing all divisors of the constant term $a_0$ — these are the possible values of $p$. Then list all divisors of the leading coefficient $a_n$ — these are the possible values of $q$. Form every fraction $\\pm \\frac{p}{q}$ and reduce to lowest terms to eliminate duplicates.
+
+// For $2x^3 + x^2 - 13x + 6$, begin testing with the simplest candidates. $P(1) = 2 + 1 - 13 + 6 = -4$, so $1$ is not a root. $P(2) = 16 + 4 - 26 + 6 = 0$, so $2$ is a root. By the Factor Theorem, $(x - 2)$ is a factor. Synthetic division gives a quotient of $2x^2 + 5x - 3$, which factors as $(2x - 1)(x + 3)$.
+
+// The complete factorization is $(x - 2)(2x - 1)(x + 3)$, giving roots $2$, $\\frac{1}{2}$, and $-3$ — all members of the candidate list.
+
+// Testing via synthetic division is often more efficient than direct substitution, since each test simultaneously produces the quotient polynomial if the candidate turns out to be a root.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+//     // obj7:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+
+//     obj7: {
+//   title: `Limitations of the Rational Root Theorem`,
+//   content: `The Rational Root Theorem identifies only rational roots. Irrational roots and [complex roots](!/complex-numbers/equations-polynomials) lie entirely outside its reach.
+
+// The polynomial $x^2 - 2$ illustrates this clearly. Its constant term is $-2$ and its leading coefficient is $1$, producing candidates $\\pm 1, \\pm 2$. Testing each: $P(1) = -1$, $P(-1) = -1$, $P(2) = 2$, $P(-2) = 2$. None equals zero. The actual roots are $\\pm\\sqrt{2}$, both irrational — invisible to the theorem.
+
+// A polynomial may have no rational roots at all. The polynomial $x^4 + x^3 + x^2 + x + 1$ has integer coefficients and candidates $\\pm 1$, but neither works. All four of its roots are complex, and no amount of rational testing will find them.
+
+// The theorem is best understood as a first filter, not a complete solution. When it finds roots, synthetic division reduces the polynomial's degree, potentially making the remaining roots accessible through the quadratic formula or other methods. When it finds none, it confirms that the roots are irrational or complex and signals the need for different tools.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+//     // obj8:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+
+//     obj8: {
+//   title: `The Integer Root Theorem`,
+//   content: `When the leading coefficient of a polynomial is $1$ — a monic polynomial — the Rational Root Theorem simplifies considerably. Every rational root $\\frac{p}{q}$ has $q$ dividing $1$, which forces $q = \\pm 1$, which means $\\frac{p}{q}$ is an integer. So all rational roots of a monic polynomial are integers, and they must divide the constant term.
+
+// For $x^3 - 6x^2 + 11x - 6$, the only candidates are the divisors of $-6$: $\\pm 1, \\pm 2, \\pm 3, \\pm 6$. No fractions need to be considered.
+
+// Testing: $P(1) = 1 - 6 + 11 - 6 = 0$, so $1$ is a root. Dividing out $(x - 1)$ leaves $x^2 - 5x + 6 = (x - 2)(x - 3)$. All three roots — $1$, $2$, $3$ — are integers dividing $6$, exactly as the theorem predicts.
+
+// This simplification makes monic polynomials particularly approachable. The candidate list is shorter, the candidates are easier to test, and the search is faster. Recognizing that a polynomial is monic before beginning the root search saves unnecessary work with fractions.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+//     // obj9:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+
+//     obj9: {
+//   title: `Descartes' Rule of Signs`,
+//   content: `Descartes' Rule of Signs estimates the number of positive and negative real roots of a polynomial by counting sign changes in its coefficients.
+
+// To count positive real roots, write $P(x)$ in standard form and count how many times the sign of the coefficients changes from one term to the next. For $P(x) = x^3 - 2x^2 - x + 2$, the coefficient signs are $+, -, -, +$. The sign changes twice: from $+$ to $-$ and from $-$ to $+$. The polynomial has either $2$ or $0$ positive real roots — the actual count equals the number of sign changes or less by an even number.
+
+// To count negative real roots, apply the same procedure to $P(-x)$. Substituting $-x$ gives $P(-x) = -x^3 - 2x^2 + x + 2$, with signs $-, -, +, +$. One sign change occurs, so the polynomial has exactly $1$ negative real root.
+
+// The rule does not identify the roots or specify which of the possible counts is correct. For $P(x) = x^3 - 2x^2 - x + 2$, the actual roots are $1$, $2$, and $-1$ — two positive and one negative, consistent with the prediction. But the rule alone cannot distinguish between $2$ positive roots and $0$ positive roots without further analysis.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+//     // obj10:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+
+//     obj10: {
+//   title: `Upper and Lower Bounds`,
+//   content: `Synthetic division provides a way to establish bounds on the real roots of a polynomial, narrowing the interval where roots can exist.
+
+// The upper bound test works as follows: divide $P(x)$ by $(x - c)$ where $c > 0$ using synthetic division. If every entry in the bottom row is non-negative (positive or zero), then $c$ is an upper bound — no real root of $P(x)$ exceeds $c$.
+
+// The lower bound test is similar but uses a negative value of $c$. Divide $P(x)$ by $(x - c)$ where $c < 0$. If the entries in the bottom row alternate in sign (with zeros counting as either sign), then $c$ is a lower bound — no real root is less than $c$.
+
+// For $P(x) = x^3 - 4x^2 + x + 6$, synthetic division by $(x - 5)$ produces the row $1, 1, 6, 36$ — all non-negative, so $5$ is an upper bound. Synthetic division by $(x + 2)$, meaning $c = -2$, produces $1, -6, 13, -20$ — the signs alternate, so $-2$ is a lower bound. All real roots of this polynomial lie in the interval $[-2, 5]$.
+
+// These bounds are especially useful when combined with the Rational Root Theorem, eliminating candidates that fall outside the established range before any testing begins.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+//     // obj11:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+
+//     obj11: {
+//   title: `The Fundamental Theorem of Algebra`,
+//   content: `The Fundamental Theorem of Algebra makes a sweeping guarantee: every polynomial of degree $n \\geq 1$ with complex coefficients has exactly $n$ roots in the [complex numbers](!/complex-numbers), counted with multiplicity.
+
+// A quadratic has $2$ roots. A cubic has $3$. A degree-$10$ polynomial has $10$. No polynomial of positive degree can avoid having roots — the theorem eliminates the possibility of a polynomial that simply never equals zero.
+
+// Some roots may repeat. The polynomial $x^3 - 3x^2 + 3x - 1 = (x - 1)^3$ has degree $3$ but only one distinct root, $x = 1$, appearing with multiplicity $3$. The count of $n$ roots includes these repetitions.
+
+// For polynomials with real coefficients, an additional constraint applies: complex roots come in conjugate pairs. If $a + bi$ is a root, then $a - bi$ is also a root. This means a real polynomial of odd degree must have at least one real root — an odd number of roots cannot be paired off entirely into conjugate pairs.
+
+// The theorem guarantees existence but offers no method for finding roots. For degree $5$ and above, no general formula in radicals exists — a result proven by Abel and Galois. Numerical methods, the Rational Root Theorem, and other tools from this page fill the gap between knowing roots exist and actually computing them.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+//     // obj12:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+  
+//     // },
+
+//     obj12: {
+//   title: `Vieta's Formulas`,
+//   content: `Vieta's formulas express symmetric relationships between the roots of a polynomial and its coefficients, without requiring the roots to be known individually.
+
+// For a monic quadratic $x^2 + bx + c$ with roots $r_1$ and $r_2$:
+
+// $$r_1 + r_2 = -b \\qquad r_1 \\cdot r_2 = c$$
+
+// The sum of the roots equals the negative of the linear coefficient, and the product equals the constant term.
+
+// For a monic cubic $x^3 + bx^2 + cx + d$ with roots $r_1$, $r_2$, $r_3$:
+
+// $$r_1 + r_2 + r_3 = -b$$
+
+// $$r_1r_2 + r_1r_3 + r_2r_3 = c$$
+
+// $$r_1 \\cdot r_2 \\cdot r_3 = -d$$
+
+// The pattern extends to any degree: the $k$-th elementary symmetric polynomial of the roots equals $(-1)^k$ times the coefficient of $x^{n-k}$ in a monic degree-$n$ polynomial.
+
+// These relationships are useful for verifying [factorizations](!/algebra/polynomials/factoring). After finding roots $1$, $2$, and $3$ for $x^3 - 6x^2 + 11x - 6$, Vieta's formulas confirm: $1 + 2 + 3 = 6 = -(-6)$, $1 \\cdot 2 + 1 \\cdot 3 + 2 \\cdot 3 = 11$, and $1 \\cdot 2 \\cdot 3 = 6 = -(-6)$. All three match the coefficients. They also allow solving problems where individual roots are not needed — for instance, finding the sum of the squares of the roots using $(r_1 + r_2 + r_3)^2 - 2(r_1r_2 + r_1r_3 + r_2r_3) = 36 - 22 = 14$.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+//     // obj13:{
+//     //   title:``,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
+//     //   link:'',
+  
+//     // },
+
+//     obj13: {
+//   title: `Common Mistakes`,
+//   content: `The theorems on this page are closely related, and confusing their roles or misapplying their details produces errors that are easy to make and sometimes hard to spot.
+
+// The Remainder Theorem and the Factor Theorem are frequently conflated. The Remainder Theorem says dividing $P(x)$ by $(x - c)$ leaves a remainder of $P(c)$. The Factor Theorem adds one specific condition: if that remainder is zero, then $(x - c)$ is a factor. Applying the Factor Theorem when $P(c) \\neq 0$ — concluding that $(x - c)$ is somehow a partial factor — reflects a misunderstanding of what the theorem actually states.
+
+// With the Rational Root Theorem, two errors dominate. The first is forgetting negative candidates — the divisors of $a_0$ and $a_n$ include both positive and negative values. The second is omitting fractional candidates when the leading coefficient is not $1$. For $2x^3 + x - 6$, candidates include $\\pm\\frac{1}{2}$ and $\\pm\\frac{3}{2}$, not just integers.
+
+// In Descartes' Rule of Signs, the most common error occurs when computing $P(-x)$. Every odd-powered term changes sign while even-powered terms stay the same. Writing $P(-x)$ incorrectly — changing the wrong terms or missing one — corrupts the sign-change count.
+
+// With Vieta's formulas, sign errors are persistent. The sum of roots for $x^2 + bx + c$ is $-b$, not $b$. The product of roots for a cubic $x^3 + bx^2 + cx + d$ is $-d$, not $d$. The alternating sign pattern $(-1)^k$ is easy to lose track of, especially at higher degrees.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+//     obj14:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+//       link:'',
+  
+//     },
+
+
+//     obj15:{
+  
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     }
+  
+//   }
+
+
+//   const introContent = {
+//   id: "intro",
+//   title: "The Theorems Behind the Toolkit",
+//   content: `Working with polynomials involves a great deal of computation — dividing, testing values, searching for [roots](!/algebra/polynomials/roots). But underneath that work sits a collection of theorems that explain why certain shortcuts are valid, why certain searches are guaranteed to terminate, and why the structure of a polynomial's coefficients reveals information about its solutions before a single calculation is performed.
+
+// These results connect seemingly separate tasks. Evaluating a polynomial at a point turns out to be the same as finding a division remainder. Knowing one root immediately produces a [factor](!/algebra/polynomials/factoring). The coefficients of a polynomial place strict limits on which rational numbers could possibly be roots. Each theorem removes guesswork and replaces it with structure.`
+// }
+
+// const faqQuestions = {
+//   obj1: {
+//     question: "What is the Remainder Theorem?",
+//     answer: "The Remainder Theorem states that when a polynomial P(x) is divided by (x - c), the remainder equals P(c). This means you can find the remainder by simple evaluation instead of performing division. For P(x) = x³ - 4x + 2 divided by (x - 3), the remainder is P(3) = 27 - 12 + 2 = 17."
+//   },
+//   obj2: {
+//     question: "What is the Factor Theorem?",
+//     answer: "The Factor Theorem states that (x - c) is a factor of P(x) if and only if P(c) = 0. It connects roots and factors directly: c is a root precisely when (x - c) is a factor. To test if (x - 2) divides a polynomial, evaluate P(2) — if the result is zero, it's a factor."
+//   },
+//   obj3: {
+//     question: "What is the Rational Root Theorem?",
+//     answer: "For a polynomial with integer coefficients, any rational root p/q (in lowest terms) has p dividing the constant term and q dividing the leading coefficient. This generates a finite list of candidates. For 2x³ + x² - 13x + 6, candidates are ±1, ±2, ±3, ±6, ±1/2, ±3/2."
+//   },
+//   obj4: {
+//     question: "How do you use the Rational Root Theorem?",
+//     answer: "List divisors of the constant term (possible p values) and divisors of the leading coefficient (possible q values). Form all fractions ±p/q. Test each candidate by substitution or synthetic division. When you find a root, divide it out and repeat on the quotient."
+//   },
+//   obj5: {
+//     question: "What is the Integer Root Theorem?",
+//     answer: "When the leading coefficient is 1 (monic polynomial), all rational roots must be integers that divide the constant term. For x³ - 6x² + 11x - 6, candidates are only ±1, ±2, ±3, ±6 — no fractions needed. This simplifies the search considerably."
+//   },
+//   obj6: {
+//     question: "What is Descartes' Rule of Signs?",
+//     answer: "Descartes' Rule counts sign changes in coefficients to estimate real roots. The number of positive roots equals the sign changes or less by an even number. For negative roots, apply the rule to P(-x). It gives bounds but not exact counts."
+//   },
+//   obj7: {
+//     question: "What is the Fundamental Theorem of Algebra?",
+//     answer: "Every polynomial of degree n ≥ 1 has exactly n roots in the complex numbers, counted with multiplicity. A cubic always has 3 roots, a quartic has 4. For real coefficients, complex roots come in conjugate pairs, so odd-degree polynomials always have at least one real root."
+//   },
+//   obj8: {
+//     question: "What are Vieta's formulas?",
+//     answer: "Vieta's formulas relate roots to coefficients. For x² + bx + c with roots r₁, r₂: sum r₁ + r₂ = -b and product r₁·r₂ = c. For cubics: sum of roots = -b, sum of pairwise products = c, product of all roots = -d. Useful for verifying answers and solving without finding individual roots."
+//   },
+//   obj9: {
+//     question: "How do you find upper and lower bounds for polynomial roots?",
+//     answer: "Use synthetic division. For upper bound: divide by (x - c) with c > 0; if all entries in the bottom row are non-negative, c is an upper bound. For lower bound: divide by (x - c) with c < 0; if entries alternate in sign, c is a lower bound."
+//   },
+//   obj10: {
+//     question: "Why doesn't the Rational Root Theorem find all roots?",
+//     answer: "The theorem only identifies rational roots. Irrational roots like √2 and complex roots like 2 + 3i are invisible to it. The polynomial x² - 2 has candidates ±1, ±2, but its actual roots ±√2 are irrational. The theorem is a first filter, not a complete solution."
+//   },
+//   obj11: {
+//     question: "How does the Factor Theorem help build polynomials from roots?",
+//     answer: "If a polynomial has roots r₁, r₂, r₃, then (x - r₁)(x - r₂)(x - r₃) is a factor. For roots 1, -2, and 4, the polynomial is (x - 1)(x + 2)(x - 4) = x³ - 3x² - 6x + 8. Any scalar multiple shares the same roots."
+//   },
+//   obj12: {
+//     question: "What is the relationship between the Remainder Theorem and Factor Theorem?",
+//     answer: "The Factor Theorem is a special case of the Remainder Theorem. The Remainder Theorem says dividing P(x) by (x - c) gives remainder P(c). The Factor Theorem adds: when that remainder is zero, (x - c) is a factor. One determines remainders; the other identifies factors."
+//   },
+//   obj13: {
+//     question: "How do you apply Descartes' Rule of Signs to find negative roots?",
+//     answer: "Replace x with -x in P(x) and count sign changes in P(-x). Odd-powered terms change sign; even-powered terms stay the same. The sign changes in P(-x) give the possible number of negative real roots, following the same 'or less by an even number' rule."
+//   }
+// }
+
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": "Polynomial Theorems and Rules",
+//     "description": "Master polynomial theorems: Remainder Theorem, Factor Theorem, Rational Root Theorem, Descartes' Rule of Signs, Fundamental Theorem of Algebra, Vieta's formulas, and root bounds.",
+//     "url": "https://www.learnmathclass.com/algebra/polynomials/rules",
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "High School, College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Polynomial Theorems"
+//     },
+//     "teaches": [
+//       "Remainder Theorem and its proof",
+//       "Factor Theorem for roots and factors",
+//       "Rational Root Theorem for integer-coefficient polynomials",
+//       "Integer Root Theorem for monic polynomials",
+//       "Descartes' Rule of Signs for counting roots",
+//       "Fundamental Theorem of Algebra",
+//       "Vieta's formulas for root-coefficient relationships"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Algebra",
+//         "item": "https://www.learnmathclass.com/algebra"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Polynomials",
+//         "item": "https://www.learnmathclass.com/algebra/polynomials"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 4,
+//         "name": "Rules",
+//         "item": "https://www.learnmathclass.com/algebra/polynomials/rules"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
+
+
+
+//   return {
+//   props:{
+//     sectionsContent,
+//     introContent,
+//     faqQuestions,
+//     schemas,
+//     seoData: {
+//       title: "Polynomial Theorems: Remainder, Factor & Rational Root | Learn Math Class",
+//       description: "Master polynomial theorems: Remainder Theorem, Factor Theorem, Rational Root Theorem, Descartes' Rule of Signs, Fundamental Theorem of Algebra, Vieta's formulas, and root bounds.",
+//       keywords: keyWords.join(", "),
+//       url: "/algebra/polynomials/rules",
+//       name: "Polynomial Theorems and Rules"
+//     },
+//   }
+// }
+//    }
+
+// export default function RulesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+    
+//   const genericSections=[
+//      {
+//         id:'0',
+//         title:sectionsContent.obj0.title,
+//         link:sectionsContent.obj0.link,
+//         content:[
+//           sectionsContent.obj0.content,
+//           sectionsContent.obj0.after,
+//         ]
+//     },
+
+//     {
+//         id:'1',
+//         title:sectionsContent.obj1.title,
+//         link:sectionsContent.obj1.link,
+//         content:[
+//           sectionsContent.obj1.content,
+//         ]
+//     },
+//     {
+//         id:'2',
+//         title:sectionsContent.obj2.title,
+//         link:sectionsContent.obj2.link,
+//         content:[
+//           sectionsContent.obj2.content,
+//         ]
+//     },
+//     {
+//         id:'3',
+//         title:sectionsContent.obj3.title,
+//         link:sectionsContent.obj3.link,
+//         content:[
+//           sectionsContent.obj3.content,
+//         ]
+//     },
+//     {
+//         id:'4',
+//         title:sectionsContent.obj4.title,
+//         link:sectionsContent.obj4.link,
+//         content:[
+//           sectionsContent.obj4.content,
+//         ]
+//     },
+//     {
+//         id:'5',
+//         title:sectionsContent.obj5.title,
+//         link:sectionsContent.obj5.link,
+//         content:[
+//           sectionsContent.obj5.content,
+//         ]
+//     },
+//     {
+//         id:'6',
+//         title:sectionsContent.obj6.title,
+//         link:sectionsContent.obj6.link,
+//         content:[
+//           sectionsContent.obj6.content,
+//         ]
+//     },
+//     {
+//         id:'7',
+//         title:sectionsContent.obj7.title,
+//         link:sectionsContent.obj7.link,
+//         content:[
+//           sectionsContent.obj7.content,
+//         ]
+//     },
+//     {
+//         id:'8',
+//         title:sectionsContent.obj8.title,
+//         link:sectionsContent.obj8.link,
+//         content:[
+//           sectionsContent.obj8.content,
+//         ]
+//     },
+//     {
+//         id:'9',
+//         title:sectionsContent.obj9.title,
+//         link:sectionsContent.obj9.link,
+//         content:[
+//           sectionsContent.obj9.content,
+//         ]
+//     },
+//     {
+//         id:'10',
+//         title:sectionsContent.obj10.title,
+//         link:sectionsContent.obj10.link,
+//         content:[
+//           sectionsContent.obj10.content,
+//         ]
+//     },
+//     {
+//         id:'11',
+//         title:sectionsContent.obj11.title,
+//         link:sectionsContent.obj11.link,
+//         content:[
+//           sectionsContent.obj11.content,
+//         ]
+//     },
+//     {
+//         id:'12',
+//         title:sectionsContent.obj12.title,
+//         link:sectionsContent.obj12.link,
+//         content:[
+//           sectionsContent.obj12.content,
+//         ]
+//     },
+//     {
+//         id:'13',
+//         title:sectionsContent.obj13.title,
+//         link:sectionsContent.obj13.link,
+//         content:[
+//           sectionsContent.obj13.content,
+//         ]
+//     },
+//     // {
+//     //     id:'14',
+//     //     title:sectionsContent.obj14.title,
+//     //     link:sectionsContent.obj14.link,
+//     //     content:[
+//     //       sectionsContent.obj14.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'15',
+//     //     title:sectionsContent.obj15.title,
+//     //     link:sectionsContent.obj15.link,
+//     //     content:[
+//     //       sectionsContent.obj15.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'1',
+//     //     title:sectionsContent.obj1.title,
+//     //     link:sectionsContent.obj1.link,
+//     //     content:[
+//     //       sectionsContent.obj1.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'1',
+//     //     title:sectionsContent.obj1.title,
+//     //     link:sectionsContent.obj1.link,
+//     //     content:[
+//     //       sectionsContent.obj1.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'1',
+//     //     title:sectionsContent.obj1.title,
+//     //     link:sectionsContent.obj1.link,
+//     //     content:[
+//     //       sectionsContent.obj1.content,
+//     //     ]
+//     // },
+    
+// ]
+
+//   return (
+//    <>
+//    {/* <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify({
+//         "@context": "https://schema.org",
+//         "@type": "WebPage",
+//         "name": seoData.name,
+//         "description": seoData.description,
+//         "keywords": seoData.keywords,
+//         "url": `https://www.learnmathclass.com${seoData.url}`,
+//         "dateModified": new Date().toISOString(),
+//         "inLanguage": "en-US",
+//         "mainEntity": {
+//           "@type": "Article",
+//           "name": seoData.name,
+//           "dateModified": new Date().toISOString(),
+//           "author": {
+//             "@type": "Organization",
+//             "name": "Learn Math Class"
+//           }
+//         }
+//       })
+//     }}
+//   />
+// </Head> */}
+
+// <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.faq)
+//     }}
+//   />
+// </Head>
+//    {/* <GenericNavbar/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <OperaSidebar 
+//            side='right'
+//            // topOffset='65px' 
+//            sidebarWidth='45px'
+//            panelWidth='200px'
+//            iconColor='white'
+//            panelBackgroundColor='#f2f2f2'
+//          /> 
+//    <Breadcrumb/>
+//    <br/>
+//    <br/>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Polynomial Rules</h1>
+//    <br/>
+//    <br/>
+//    <SectionTableOfContents sections={genericSections}/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <IntroSection 
+//           id={introContent.id}
+//           title={introContent.title}
+//           content={introContent.content}
+//            backgroundColor='#f9fafb'
+//           //  "#f2f2f2"
+//           textColor="#06357a"
+//         />
+//    <br/>
+//     <KeyTermsCard
+//   id="0"
+//   title={sectionsContent.obj0.title}
+//   content={sectionsContent.obj0.content}
+//   after={sectionsContent.obj0.after}
+//   variant="light"
+// />
+
+//    <br/>
+//    <Sections sections={genericSections.slice(1)}/>
+//    <br/>
+//    <br/>
+//    <br/>
+//    {/* <ScrollUpButton/> */}
+//    </>
+//   )
+// }
+
+
+
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -7,6 +916,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
 
@@ -70,6 +980,162 @@ const keyWords = [
 //                     __html:   sectionContent.distributions.svg,
 //                   }} />
 
+  const linkStyle = 'color: inherit; text-decoration: underline;'
+
+  // ---------- TABLES ----------
+
+  // obj10 — aggregation: upper and lower bound tests via synthetic division
+  const obj10Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Bound type</th>
+      <th style="${tableHeaders.aggregation}">Condition on the synthetic-division row</th>
+      <th style="${tableHeaders.aggregation}">Example &nbsp;(P(x) = x<sup>3</sup> − 4x<sup>2</sup> + x + 6)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Upper bound &nbsp;(c &gt; 0)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every entry in the bottom row is non-negative</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c = 5 &nbsp;→&nbsp; row 1, 1, 6, 36 &nbsp;(all ≥ 0) &nbsp;⇒&nbsp; 5 is an upper bound</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Lower bound &nbsp;(c &lt; 0)</td>
+      <td style="padding: 12px 15px; color: #34495e;">entries alternate in sign &nbsp;(zeros count as either sign)</td>
+      <td style="padding: 12px 15px; color: #34495e;">c = −2 &nbsp;→&nbsp; row 1, −6, 13, −20 &nbsp;(alternating) &nbsp;⇒&nbsp; −2 is a lower bound</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj12 — aggregation: Vieta's formulas for monic quadratic and cubic
+  const obj12Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Monic polynomial</th>
+      <th style="${tableHeaders.aggregation}">Sum of roots</th>
+      <th style="${tableHeaders.aggregation}">Sum of pairwise products</th>
+      <th style="${tableHeaders.aggregation}">Product of all roots</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">x<sup>2</sup> + bx + c &nbsp;(roots r<sub>1</sub>, r<sub>2</sub>)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r<sub>1</sub> + r<sub>2</sub> = −b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">—</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r<sub>1</sub> · r<sub>2</sub> = c</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">x<sup>3</sup> + bx<sup>2</sup> + cx + d &nbsp;(roots r<sub>1</sub>, r<sub>2</sub>, r<sub>3</sub>)</td>
+      <td style="padding: 12px 15px; color: #34495e;">r<sub>1</sub> + r<sub>2</sub> + r<sub>3</sub> = −b</td>
+      <td style="padding: 12px 15px; color: #34495e;">r<sub>1</sub>r<sub>2</sub> + r<sub>1</sub>r<sub>3</sub> + r<sub>2</sub>r<sub>3</sub> = c</td>
+      <td style="padding: 12px 15px; color: #34495e;">r<sub>1</sub> · r<sub>2</sub> · r<sub>3</sub> = −d</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj13 — aggregation: common mistakes catalogued by theorem
+  const obj13Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Theorem</th>
+      <th style="${tableHeaders.aggregation}">Common mistake</th>
+      <th style="${tableHeaders.aggregation}">Correct version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Remainder vs Factor</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">treating (x − c) as a &quot;partial factor&quot; when P(c) ≠ 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Factor Theorem requires P(c) = 0 exactly; otherwise P(c) is just the remainder</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rational Root Theorem</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">forgetting negative candidates, or skipping fractional candidates when a<sub>n</sub> ≠ 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">include ± p ⁄ q for every p | a<sub>0</sub> and every q | a<sub>n</sub></td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Descartes&apos; Rule</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">computing P(−x) incorrectly (changing wrong terms)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">only odd-powered terms flip sign; even-powered terms stay the same</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Vieta&apos;s formulas</td>
+      <td style="padding: 12px 15px; color: #34495e;">sign errors — writing sum as +b or product as +d</td>
+      <td style="padding: 12px 15px; color: #34495e;">k-th symmetric polynomial = (−1)<sup>k</sup> · (coefficient of x<sup>n−k</sup>); alternating signs</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj14 — summary: capstone master toolkit of all eight theorems on the page
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Theorem</th>
+      <th style="${tableHeaders.summary}">What it does</th>
+      <th style="${tableHeaders.summary}">When to use</th>
+      <th style="${tableHeaders.summary}">Output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Remainder Theorem</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">replaces division by (x − c) with a single evaluation</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">find a remainder without long division</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">remainder = P(c)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Factor Theorem</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">links roots to linear factors</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">verify a factor, or build polynomials from known roots</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x − c) is a factor &nbsp;⟺&nbsp; P(c) = 0</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rational Root Theorem</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">restricts rational roots to ± p ⁄ q with p | a<sub>0</sub>, q | a<sub>n</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">polynomial has integer coefficients; search for rational roots</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">finite candidate list</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Integer Root Theorem</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">RRT simplified: all rational roots are integers</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">monic polynomial &nbsp;(a<sub>n</sub> = 1)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">candidates are divisors of a<sub>0</sub> only</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Descartes&apos; Rule of Signs</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">counts sign changes in P(x) and P(−x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">estimate count of positive and negative real roots before solving</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">upper bound on positive / negative roots &nbsp;(or less by an even number)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Upper / Lower Bound Test</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">brackets the interval containing all real roots via synthetic division</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">combine with RRT to eliminate candidates outside the bracket</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">interval [c<sub>low</sub>, c<sub>high</sub>] containing every real root</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Fundamental Theorem of Algebra</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">guarantees every degree-n polynomial has exactly n roots over ℂ &nbsp;(with multiplicity)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">confirm the total number of roots to look for</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">existence guarantee; complex roots of real polynomials come in conjugate pairs</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Vieta&apos;s Formulas</td>
+      <td style="padding: 12px 15px; color: #34495e;">express symmetric functions of roots from coefficients alone</td>
+      <td style="padding: 12px 15px; color: #34495e;">verify a factorization, or work with sums/products of roots without finding them</td>
+      <td style="padding: 12px 15px; color: #34495e;">root–coefficient identities &nbsp;(sum, pairwise products, full product)</td>
+    </tr>
+  </tbody>
+</table>
+`
+
     const sectionsContent={
 
   
@@ -120,14 +1186,6 @@ The theorem applies to any polynomial and any value of $c$. If $P(x) = 2x^4 - x^
   after: ``,
   link: '',
 },
-    // obj2:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
 
     obj2: {
   title: `Why the Remainder Theorem Works`,
@@ -146,17 +1204,6 @@ The factor $(c - c)$ annihilates the quotient term, leaving $P(c) = R$. Evaluati
   after: ``,
   link: '',
 },
-  
-    // obj3:{
-  
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
 
     obj3: {
   title: `The Factor Theorem`,
@@ -171,14 +1218,6 @@ To test whether $(x - 2)$ is a factor of $x^3 - 6x^2 + 11x - 6$, evaluate $P(2) 
   after: ``,
   link: '',
 },
-    // obj4:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
 
     obj4: {
   title: `Using the Factor Theorem`,
@@ -195,15 +1234,6 @@ Any nonzero scalar multiple $a(x - 1)(x + 2)(x - 4)$ shares the same roots, so t
   after: ``,
   link: '',
 },
-    // obj5:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
 
     obj5: {
   title: `The Rational Root Theorem`,
@@ -220,15 +1250,6 @@ Twelve candidates replace infinitely many possibilities. Each can be tested by s
   after: ``,
   link: '',
 },
-    // obj6:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
-
 
     obj6: {
   title: `Applying the Rational Root Theorem`,
@@ -245,14 +1266,6 @@ Testing via synthetic division is often more efficient than direct substitution,
   after: ``,
   link: '',
 },
-    // obj7:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
 
     obj7: {
   title: `Limitations of the Rational Root Theorem`,
@@ -267,14 +1280,6 @@ The theorem is best understood as a first filter, not a complete solution. When 
   after: ``,
   link: '',
 },
-    // obj8:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
 
     obj8: {
   title: `The Integer Root Theorem`,
@@ -289,14 +1294,6 @@ This simplification makes monic polynomials particularly approachable. The candi
   after: ``,
   link: '',
 },
-    // obj9:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
 
     obj9: {
   title: `Descartes' Rule of Signs`,
@@ -311,14 +1308,6 @@ The rule does not identify the roots or specify which of the possible counts is 
   after: ``,
   link: '',
 },
-    // obj10:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
 
     obj10: {
   title: `Upper and Lower Bounds`,
@@ -335,14 +1324,6 @@ These bounds are especially useful when combined with the Rational Root Theorem,
   after: ``,
   link: '',
 },
-    // obj11:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
 
     obj11: {
   title: `The Fundamental Theorem of Algebra`,
@@ -359,14 +1340,6 @@ The theorem guarantees existence but offers no method for finding roots. For deg
   after: ``,
   link: '',
 },
-    // obj12:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-  
-    // },
 
     obj12: {
   title: `Vieta's Formulas`,
@@ -393,15 +1366,6 @@ These relationships are useful for verifying [factorizations](!/algebra/polynomi
   after: ``,
   link: '',
 },
-    // obj13:{
-    //   title:``,
-    //   content:``,
-    //   before:``,
-    //   after:``,
-    //   link:'',
-    //   link:'',
-  
-    // },
 
     obj13: {
   title: `Common Mistakes`,
@@ -419,11 +1383,10 @@ With Vieta's formulas, sign errors are persistent. The sum of roots for $x^2 + b
   link: '',
 },
     obj14:{
-      title:``,
-      content:``,
+      title:`Master Toolkit of Polynomial Theorems`,
+      content:`The theorems on this page form a coordinated toolkit for analyzing polynomials — locating roots, factoring, bounding the search, and relating coefficients to roots. The table below collects every theorem covered above with its purpose, the situation where it applies, and the output it produces.`,
       before:``,
       after:``,
-      link:'',
       link:'',
   
     },
@@ -597,6 +1560,10 @@ const schemas = {
   props:{
     sectionsContent,
     introContent,
+    obj10Table,
+    obj12Table,
+    obj13Table,
+    summaryTable,
     faqQuestions,
     schemas,
     seoData: {
@@ -610,7 +1577,9 @@ const schemas = {
 }
    }
 
-export default function RulesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function RulesPage({seoData, sectionsContent, introContent, obj10Table, obj12Table, obj13Table, summaryTable, faqQuestions, schemas}) {
+
+  const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
   const genericSections=[
      {
@@ -695,12 +1664,19 @@ export default function RulesPage({seoData, sectionsContent, introContent, faqQu
           sectionsContent.obj9.content,
         ]
     },
+
+    // obj10: prose + upper/lower bound aggregation table
     {
         id:'10',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <div
+            key={'obj10-table'}
+            style={tableWrapStyle}
+            dangerouslySetInnerHTML={{ __html: obj10Table }}
+          />,
         ]
     },
     {
@@ -711,30 +1687,51 @@ export default function RulesPage({seoData, sectionsContent, introContent, faqQu
           sectionsContent.obj11.content,
         ]
     },
+
+    // obj12: prose + Vieta's formulas aggregation table
     {
         id:'12',
         title:sectionsContent.obj12.title,
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <div
+            key={'obj12-table'}
+            style={tableWrapStyle}
+            dangerouslySetInnerHTML={{ __html: obj12Table }}
+          />,
         ]
     },
+
+    // obj13: prose + common-mistakes aggregation table
     {
         id:'13',
         title:sectionsContent.obj13.title,
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+          <div
+            key={'obj13-table'}
+            style={tableWrapStyle}
+            dangerouslySetInnerHTML={{ __html: obj13Table }}
+          />,
         ]
     },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
+
+    // obj14: NEW capstone with summary table — master toolkit of all theorems
+    {
+        id:'14',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+          <div
+            key={'summary-table'}
+            style={tableWrapStyle}
+            dangerouslySetInnerHTML={{ __html: summaryTable }}
+          />,
+        ]
+    },
     // {
     //     id:'15',
     //     title:sectionsContent.obj15.title,

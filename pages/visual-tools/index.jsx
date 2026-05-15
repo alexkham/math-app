@@ -79,7 +79,7 @@ export default function VisualToolsPage() {
                 { name: 'Matrix Multiplication Visualizer', href: '/visual-tools/matrix-multiplication' },
                 { name: 'Gauss Elimination Visual Calculator', href: '/visual-tools/gauss-elimination' },
                 { name: 'Determinat Visual Calculator', href: '/visual-tools/determinant-calculator' },
-                { name: 'Matrix Transposition Visualizer', href: '/visual-tools/matrix-transposition' },
+                // { name: 'Matrix Transposition Visualizer', href: '/visual-tools/matrix-transposition' },
                 { name: 'Matrix Types Generator', href: '/visual-tools/matrix-types' },
             ]
         },
