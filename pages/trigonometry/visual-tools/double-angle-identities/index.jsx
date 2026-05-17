@@ -740,7 +740,7 @@ For applications and worked examples, see the **trigonometric identities applica
     webApplication: {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Interactive Double Angle Identities Explorer",
+      "name": "Double Angle Identities Explorer",
       "description": "Explore and verify all six double-angle identities (sin, cos, tan, csc, sec, cot) with animated geometric proofs, algebraic derivations, and live numeric checks.",
       "url": "https://www.learnmathclass.com/trigonometry/visual-tools/double-angle-identities",
       "applicationCategory": "EducationalApplication",
@@ -837,11 +837,11 @@ For applications and worked examples, see the **trigonometric identities applica
           seoData: {
         title: "Double Angle Identities: Interactive Proofs | Learn Math Class",
         description: "Explore all six double-angle identities: sin, cos, tan, csc, sec, cot. Animated geometric proofs, algebraic derivations, and live numeric verification.",
-        hubDescription: "An interactive double-angle identities explorer covering all six trigonometric functions. Animated geometric proofs derive sin(2θ) and cos(2θ) from a bisected isosceles triangle, while algebraic derivation cards handle tan(2θ), csc(2θ), sec(2θ), and cot(2θ) with one-click jumps back to their source proofs. A live formula table and verification cards confirm each identity numerically as you sweep the angle.",
+        hubDescription: "Double-Angle identities explorer covering all six trigonometric functions. Animated geometric proofs derive sin(2θ) and cos(2θ) from a bisected isosceles triangle, while algebraic derivation cards handle tan(2θ), csc(2θ), sec(2θ), and cot(2θ) with one-click jumps back to their source proofs. A live formula table and verification cards confirm each identity numerically as you sweep the angle.",
         category: "Identities",
         keywords: keyWords.join(", "),
         url: "/trigonometry/visual-tools/double-angle-identities",
-        name: "Interactive Double Angle Identities Explorer"
+        name: "Double Angle Identities Explorer"
       },
 
        }

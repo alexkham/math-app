@@ -6,8 +6,7 @@
 // import Head from 'next/head'
 // import '@/pages/pages.css'
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-// import SiblingsNavStandalone  from '../../../../app/components/SiblingsNavStandalone'
-// import HalfAngleExplorer from '../../../../app/components/trigonometry/identities/half-angle/HalfAngleExplorer'
+// import BasicTrigIdentitiesExplorer from '../../../../app/components/trigonometry/identities/basic-identities/BasicTrigoIdentities'
 
 
 // export async function getStaticProps(){
@@ -57,15 +56,15 @@
 
 //     const sectionsContent={
 
-//     obj0:{
-//       title:`Key Terms`,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
+//     // obj0:{
+//     //   title:`Key Terms`,
+//     //   content:``,
+//     //   before:``,
+//     //   after:``,
+//     //   link:'',
   
   
-//     },
+//     // },
 //     obj1:{
 //       title:``,
 //       content:``,
@@ -215,7 +214,7 @@
 //         title: "Title | Learn Math Class",
 //         description: "Metadescription",
 //         keywords: keyWords.join(", "),
-//         url: "/trigonometry/visual-tools/half-angle-identities",
+//         url: "/trigonometry/visual-tools/basic-identities",
 //          name: "name"
 //       },
         
@@ -444,24 +443,9 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'20px',marginBottom:'0px'}}>Half Angle Trigonometric Identities</h1>
+//    <h1 className='title' style={{marginTop:'-20px',marginBottom:'0px'}}>Basic Trigonometric Identities</h1>
 //    <br/>
-//       <div style={{ display: 'grid', gridTemplateColumns: '100px minmax(0, 1fr)', gap: 8,alignItems: 'start' }}>
-//          <SiblingsNavStandalone 
-//          // bg="#fafaf7"
-//          // color="#2c5d99"
-//          // activeColor="#143a66"
-//          // activeBg="#dde9f7"
-       
-//          bg="#ffffff"
-//          color="#64748b"
-//          activeColor="#4F46E5"
-//          activeBg="#eef2ff"
-//          />
-//           <HalfAngleExplorer/>
-//        </div>
-
- 
+//    <BasicTrigIdentitiesExplorer/>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -508,244 +492,231 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import SiblingsNavStandalone  from '../../../../app/components/SiblingsNavStandalone'
-import HalfAngleExplorer from '../../../../app/components/trigonometry/identities/half-angle/HalfAngleExplorer'
+import BasicTrigIdentitiesExplorer from '../../../../app/components/trigonometry/identities/basic-identities/BasicTrigoIdentities'
 
 
 export async function getStaticProps(){
 
   const keyWords = [
-    'half angle identities',
-    'half angle formulas',
-    'sin alpha over 2 identity',
-    'cos alpha over 2 identity',
-    'tan alpha over 2 identity',
-    'csc half angle',
-    'sec half angle',
-    'cot half angle',
-    'half angle proof',
-    'half angle calculator',
-    'trigonometric identities visualizer',
-    'interactive half angle',
-    'derive half angle formulas',
-    'bisected isosceles triangle proof',
-    'half angle geometric proof'
+    'basic trigonometric identities',
+    'trig identities visualizer',
+    'unit circle trig functions',
+    'sine cosine tangent unit circle',
+    'reciprocal identities',
+    'quotient identities',
+    'trig function calculator',
+    'sin cos tan graph',
+    'csc sec cot identities',
+    'trig periodicity visualization',
+    'reference angle visualizer',
+    'interactive trig identities',
+    'six trig functions explorer',
+    'learn trig identities',
+    'unit circle visualizer'
   ]
 
     const sectionsContent={
 
-    obj0:{
-      title:`Key Terms`,
-      content:`• **Half-angle identity** — a formula expressing a trig function of $\\alpha/2$ in terms of trig functions of $\\alpha$.
-• **Geometric proof** — a derivation that uses a drawing (an isosceles triangle, two radii, a perpendicular bisector) rather than algebra.
-• **Bisector** — a line that splits an angle into two equal halves. Here, $OM$ bisects the apex $\\alpha$ into two angles of $\\alpha/2$.
-• **Reciprocal identity** — a function written as $1/\\text{(another)}$. $\\csc = 1/\\sin$, $\\sec = 1/\\cos$, $\\cot = 1/\\tan$.
-• **Derived identity** — one obtained by combining or rearranging others. $\\tan(\\alpha/2)$, $\\csc(\\alpha/2)$, $\\sec(\\alpha/2)$, and $\\cot(\\alpha/2)$ all follow from the formulas for $\\sin(\\alpha/2)$ and $\\cos(\\alpha/2)$.`,
-      before:``,
-      after:``,
-      link:'',
-    },
+    // obj0:{
+    //   title:`Key Terms`,
+    //   content:``,
+    //   before:``,
+    //   after:``,
+    //   link:'',
+  
+  
+    // },
     obj1:{
-      title:`Switching Between Functions`,
-      content:`Six tabs at the top let you pick which half-angle identity to study: $\\sin(\\alpha/2)$, $\\cos(\\alpha/2)$, $\\tan(\\alpha/2)$, $\\csc(\\alpha/2)$, $\\sec(\\alpha/2)$, $\\cot(\\alpha/2)$.
+      title:`Getting Started`,
+      content:`The explorer opens centered on the sine function. Three controls drive everything you see:
 
-How selection changes the view:
-• $\\sin$ and $\\cos$ open the **geometric proof** scene with a step-by-step animation.
-• $\\tan$, $\\csc$, $\\sec$, and $\\cot$ open the **derived identity card** with the algebraic chain.
-• The active tab is highlighted in deep blue.
-• The URL updates with $?halfFn=...$, so links you copy preserve the selected function.
+• Drag the blue dot on the circle to rotate θ
+• Use the slider below the circle for precise multi-turn rotation
+• Toggle **deg** / **rad** for angle units
 
-Clicking any row of the **formula table** at the bottom also jumps to that function.`,
+The graph on the right plots the active function against θ in real time. As you move the dot, the terminal point P traces the unit circle and the dot on the graph tracks the function value.`,
       before:``,
       after:``,
       link:'',
     },
     obj2:{
-      title:`Adjusting the Angle α`,
-      content:`Each view exposes a slider for the **base angle $\\alpha$** in degrees, between $20°$ and $160°$. The half angle is then $\\alpha/2$, ranging from $10°$ to $80°$.
+      title:`Switching Between the Six Functions`,
+      content:`Two controls swap the active function:
 
-What changes as you slide:
-• On geometric scenes, the SVG triangle resizes and the apex $\\alpha$ updates immediately.
-• The number readout shows the current value of $\\alpha$.
-• The verification cards recompute both sides of the identity at the new $\\alpha/2$.
+• The tab strip above the circle shows **sin, cos, tan, csc, sec, cot** in order
+• The formula table below the circle is also clickable — tap any row to make it active
 
-Sweep through several values to confirm each identity is not a coincidence at one angle but a true equality.`,
+When you switch, the diagram redraws to show the correct leg or legs and the graph swaps to that function&apos;s curve. The URL updates with a ?fn= query parameter, so any function view can be shared as a direct link.`,
       before:``,
       after:``,
       link:'',
     },
+  
     obj3:{
-      title:`Playing Through a Geometric Proof`,
-      content:`When $\\sin$ or $\\cos$ is active, an animated proof unfolds in six steps. A toolbar gives you control:
+      title:`Stepping Through the Derivation`,
+      content:`Each function has a five-stage derivation accessed through the **Prev / Play / Next** controls:
 
-• **Reset** — return to step 0 with a blank scene.
-• **Prev** / **Next** — step through one stage at a time.
-• **Play** / **Pause** — advance automatically.
-• **Speed selector** — $0.5\\times$, $1\\times$, $1.5\\times$, $2\\times$.
+1. **Place the angle** — the ray rotates and P appears on the unit circle
+2. **Identify the leg or legs** — vertical for sine, horizontal for cosine, both for tangent
+3. **Read the value** — leg length for sin and cos, a ratio for tan and cot, a reciprocal for csc and sec
+4. **Sign and range** — the quadrant logic and the reference angle
+5. **Periodicity** — drag past 360° to see the spiral arc and coterminal ghost dots
 
-Each step adds one geometric element (radii, triangle fill, bisector, half-angles, leg labels, final metrics). The right-hand panel logs each step with its name and reasoning.`,
+Use Play to auto-advance or step manually with Prev and Next. The rule and description update at each stage.`,
       before:``,
       after:``,
       link:'',
     },
     obj4:{
-      title:`Reading the Geometric Scene`,
-      content:`The SVG shows the unit circle with two radii $OA$ and $OB$ of length $1$ meeting at the center $O$ with angle $\\alpha$ between them.
+      title:`Reading the Unit Circle Display`,
+      content:`The unit circle on the left shows several elements that build up across the steps:
 
-Elements that appear across the steps:
-• **Red arc** at $O$ — the apex angle $\\alpha$.
-• **Indigo chord** $AB$ — the base of the isosceles triangle.
-• **Blue segment** $OM$ — the perpendicular bisector, equal to $\\cos(\\alpha/2)$.
-• **Half-angles** at $O$ — each labeled $\\alpha/2$ once the bisector is drawn.
-• **Half-chord labels** — $\\sin(\\alpha/2)$ on segments $MA$ and $MB$.
+• The red ray from the origin marks the current angle $\\theta$
+• The blue point P sits at $(\\cos\\theta, \\sin\\theta)$
+• The signed leg — vertical, horizontal, or both — shows the function&apos;s geometric meaning
+• A small arc near the origin marks the reference angle once revealed
 
-A small right-angle mark appears at $M$ when the perpendicular bisector becomes visible.`,
+Watch how each leg flips sign as P crosses an axis. That sign flip is the geometric origin of all four quadrant sign rules.`,
       before:``,
       after:``,
       link:'',
     },
     obj5:{
-      title:`Working with Derived Identities`,
-      content:`Selecting $\\tan(\\alpha/2)$, $\\csc(\\alpha/2)$, $\\sec(\\alpha/2)$, or $\\cot(\\alpha/2)$ opens a different card layout. Instead of a triangle, it shows the **algebraic derivation** as a chain of equations.
+      title:`Reading the Graph`,
+      content:`The graph on the right plots the active function across multiple periods. Key features to watch:
 
-Layout of the derived card:
-• A short intro explains which earlier identity the current one rests on.
-• **Jump buttons** link directly to the geometric proofs of the source identities.
-• A multi-line derivation block shows each manipulation with a brief side note.
-• Verification cards confirm both sides match numerically.
+• A blue dot tracks the function value at the current θ
+• Vertical dashed lines mark **asymptotes** — at 90° and 270° for tan and sec, at 0°, 180°, and 360° for cot and csc
+• **Ghost dots** highlight coterminal angles where the function takes the same value
 
-This split keeps the geometric ideas isolated to two functions and treats the other four as algebraic consequences.`,
+The curve&apos;s range is fixed per function: bounded between $-1$ and $1$ for $\\sin\\theta$ and $\\cos\\theta$, unbounded for the other four.`,
       before:``,
       after:``,
       link:'',
     },
     obj6:{
-      title:`Reading the Formula Table`,
-      content:`A reference table beneath every scene lists all six identities at once:
+      title:`Exploring Periodicity`,
+      content:`The slider sweeps past 360° to reveal what makes trig functions cyclic. As θ exceeds one full turn:
 
-• **Function** column — the name of the trig function with $\\alpha/2$ argument.
-• **Identity** column — the right-hand side of the formula.
-• **Value** column — the numeric value at the current $\\alpha/2$.
-• **Source** column — labels each identity as **geometric** ($\\sin$, $\\cos$) or **via X** for derived ones.
+• The ray keeps rotating but P returns to the same circle position
+• The arc near the origin spirals outward to count the rotations
+• Ghost dots appear on the graph at every coterminal angle
 
-Click any row to make that function active. The current row gets a deep-blue left border and tinted background.`,
+For sin, cos, csc, and sec, this means $f(\\theta + 360°) = f(\\theta)$. For tan and cot, the period is shorter — $f(\\theta + 180°) = f(\\theta)$ — visible as twice the repetition rate on the graph.`,
       before:``,
       after:``,
       link:'',
     },
     obj7:{
-      title:`Verifying Identities Numerically`,
-      content:`Every scene includes two metric cards that compute both sides of the active identity at the current $\\alpha$.
+      title:`The Live Formula Table`,
+      content:`Below the circle, a table lists all six functions with their current values at θ:
 
-Example for $\\sin(\\alpha/2)$:
-• Left card shows $\\sin(\\alpha/2)$.
-• Right card shows $\\sqrt{(1 - \\cos\\alpha)/2}$.
+• The **Function** column names the function with $(\\theta)$ notation
+• The **Reading** column states the geometric or algebraic recipe — vertical leg, $\\sin\\theta / \\cos\\theta$, $1 / \\sin\\theta$, and so on
+• The **Value at θ** column updates as you drag
 
-The two numbers always match (within rounding to three decimals). Sweeping the slider while watching the cards is a fast empirical check that the identity holds for every $\\alpha$, not just the one in the picture. The formula table mirrors this across all six functions simultaneously.`,
+Watch how reciprocal pairs move together: when $\\sin\\theta$ is small, $\\csc\\theta$ is large. When $\\cos\\theta = 0$, $\\sec\\theta$ blows up. The table makes these relationships numerical and concrete.`,
       before:``,
       after:``,
       link:'',
     },
     obj8:{
-      title:`Geometric Proofs: sin(α/2) and cos(α/2)`,
-      content:`The two foundational identities are proved by drawing an isosceles triangle with two unit radii.
+      title:`What Are the Basic Trigonometric Identities?`,
+      content:`The basic identities relate the six trig functions to each other through simple ratios. They fall into two groups.
 
-**sin(α/2)** — apply the law of cosines and equate with the squared chord:
-$$|AB|^2 = 2 - 2\\cos\\alpha = (2\\sin(\\alpha/2))^2$$
-Solving gives $\\sin(\\alpha/2) = \\sqrt{(1 - \\cos\\alpha)/2}$.
+**Reciprocal identities:**
 
-**cos(α/2)** — from Pythagoras in the half-triangle, $\\cos^2(\\alpha/2) = 1 - \\sin^2(\\alpha/2)$. Substituting the sin half-angle identity:
-$$\\cos(\\alpha/2) = \\sqrt{(1 + \\cos\\alpha)/2}$$
+$$\\csc\\theta = \\frac{1}{\\sin\\theta} \\qquad \\sec\\theta = \\frac{1}{\\cos\\theta} \\qquad \\cot\\theta = \\frac{1}{\\tan\\theta}$$
 
-For full coverage and equivalent forms (including sign choices by quadrant), see the **half angle identities theory page**.`,
+**Quotient identities:**
+
+$$\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta} \\qquad \\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta}$$
+
+Together they mean only two of the six functions — usually $\\sin\\theta$ and $\\cos\\theta$ — are truly independent. The other four are algebraic combinations of those two.
+
+For broader coverage, see **trigonometric identities theory**.`,
       before:``,
       after:``,
       link:'',
     },
     obj9:{
-      title:`Derived Identities: tan(α/2), csc(α/2), sec(α/2), cot(α/2)`,
-      content:`The four remaining identities follow directly from the first two:
+      title:`Defining Trig Functions on the Unit Circle`,
+      content:`On the unit circle, the terminal point of angle θ sits at coordinates $(\\cos\\theta, \\sin\\theta)$. From this single fact, every trig function follows:
 
-**tan(α/2)** — from $\\tan = \\sin/\\cos$ applied to the half angle:
-$$\\tan(\\alpha/2) = \\sqrt{\\frac{1 - \\cos\\alpha}{1 + \\cos\\alpha}}$$
+• $\\sin\\theta$ is the y-coordinate of P
+• $\\cos\\theta$ is the x-coordinate of P
+• $\\tan\\theta = \\sin\\theta / \\cos\\theta$ is the slope of the ray
+• $\\csc\\theta$, $\\sec\\theta$, $\\cot\\theta$ are reciprocals of the above
 
-**csc(α/2)** — reciprocal of $\\sin(\\alpha/2)$:
-$$\\csc(\\alpha/2) = \\sqrt{\\frac{2}{1 - \\cos\\alpha}}$$
-
-**sec(α/2)** — reciprocal of $\\cos(\\alpha/2)$:
-$$\\sec(\\alpha/2) = \\sqrt{\\frac{2}{1 + \\cos\\alpha}}$$
-
-**cot(α/2)** — reciprocal of $\\tan(\\alpha/2)$:
-$$\\cot(\\alpha/2) = \\sqrt{\\frac{1 + \\cos\\alpha}{1 - \\cos\\alpha}}$$
-
-For step-by-step derivations and alternative forms, see the **trigonometric identities page** and the **reciprocal identities page**.`,
+This definition extends trig beyond right triangles to any real angle — positive or negative, more than 360°, in any quadrant. For the right-triangle perspective, see **right triangle trigonometry**.`,
       before:``,
       after:``,
       link:'',
     },
     obj10:{
-      title:`Why Half-Angle Identities Matter`,
-      content:`Half-angle identities are essential whenever a problem asks for a trig function at an angle that is not on the unit circle but is half of one that is.
+      title:`Periodicity and Reference Angles`,
+      content:`Two facts make trig functions usable for any angle, no matter how large.
 
-• **Exact-value computation** — find $\\sin 15°$, $\\cos 22.5°$, $\\tan 75°$ from $\\sin 30°$, $\\cos 45°$, $\\cos 150°$.
-• **Integration** — the Weierstrass substitution $t = \\tan(\\alpha/2)$ converts rational trig integrals into rational functions of $t$.
-• **Equation solving** — reduce equations mixing $\\sin\\alpha$ and $\\sin(\\alpha/2)$ to single-argument form.
-• **Geometry** — apothems, chord lengths, and inscribed-polygon side lengths all use half-angle formulas.
+**Periodicity** means values repeat at a fixed interval. Sin, cos, csc, and sec have period $360°$ (or $2\\pi$). Tan and cot have period $180°$ (or $\\pi$) because dividing two functions that both flip sign produces a function that does not.
 
-For applications and worked examples, see the **trigonometric identities applications page**.`,
+**Reference angle** is the acute angle between the terminal ray and the x-axis. It reduces any angle to a Q1 calculation — once you know $|\\sin 30°| = 0.5$, you know $|\\sin\\theta| = 0.5$ for every coterminal or reflected angle. The quadrant supplies the sign.
+
+For deeper coverage, see **periodicity** and **reference angles**.`,
       before:``,
       after:``,
       link:'',
     },
     obj11:{
       title:`Related Concepts and Tools`,
-      content:`Continue exploring with these connected resources:
+      content:`Explore connected topics:
 
-• **Double Angle Identities** — companion formulas for $\\sin(2\\theta)$, $\\cos(2\\theta)$, and beyond.
-• **Pythagorean Identities** — $\\sin^2\\theta + \\cos^2\\theta = 1$ and its companions, used in the cos half-angle proof.
-• **Sum and Difference Identities** — base relations from which double- and half-angle identities are derived.
-• **Unit Circle** — geometric setup for every identity in this tool.
-• **Trigonometric Functions Graphs** — see how $\\sin$, $\\cos$, $\\tan$ and their reciprocals evolve as the angle varies.
-• **Triangle Explorer** — interactive triangles with built-in law of sines and law of cosines.`,
+**Trigonometric functions graphs** — adjustable amplitude, period, and phase shift for each function
+
+**Functions signs by quadrant** — focused view of the four quadrant sign patterns
+
+**Angle types explorer** — acute, obtuse, reflex, and coterminal classification
+
+**Pythagorean identity** — the $\\sin^2\\theta + \\cos^2\\theta = 1$ relationship from the unit circle
+
+**Double angle identities** — geometric derivations for $\\sin 2\\theta$ and $\\cos 2\\theta$`,
       before:``,
       after:``,
       link:'',
     },
-
+  
   }
 
 
   const faqQuestions = {
     obj1: {
-      question: "Which half-angle identities does the explorer cover?",
-      answer: "All six standard identities: sin(alpha/2), cos(alpha/2), tan(alpha/2), csc(alpha/2), sec(alpha/2), and cot(alpha/2). Each has its own tab and its own derivation view, either geometric or algebraic."
+      question: "What are the basic trigonometric identities?",
+      answer: "The basic identities are two groups of relationships among the six trig functions. The reciprocal identities define csc, sec, and cot as 1 over sin, 1 over cos, and 1 over tan. The quotient identities define tan and cot as the ratios sin over cos and cos over sin. Only sin and cos are truly independent; the other four are algebraic combinations of those two."
     },
     obj2: {
-      question: "Why do only sin and cos get geometric proofs?",
-      answer: "Sine and cosine are the foundational half-angle identities. Tangent is sin over cos, and cosecant, secant, and cotangent are reciprocals of sin, cos, and tan. The tool limits geometric proofs to sin and cos and treats the other four as algebraic consequences."
+      question: "How are sine and cosine defined on the unit circle?",
+      answer: "On the unit circle, the terminal point of angle theta has coordinates (cos theta, sin theta). The x-coordinate is cos theta and the y-coordinate is sin theta. This definition works for any real angle, positive or negative, including angles beyond 360 degrees, and extends trigonometry beyond the right-triangle setting."
     },
     obj3: {
-      question: "How is sin(alpha/2) proved geometrically?",
-      answer: "Draw an isosceles triangle with two unit radii meeting at angle alpha. The chord length squared is 2 minus 2 cos alpha by the law of cosines, and also equals 4 sin squared (alpha/2) from the bisected half-chord. Equating gives sin(alpha/2) equal to the square root of (1 minus cos alpha) over 2."
+      question: "What is the difference between reciprocal and quotient identities?",
+      answer: "Reciprocal identities express one function as 1 divided by another, like sec theta equals 1 over cos theta. Quotient identities express one function as a ratio of two others, like tan theta equals sin theta over cos theta. Reciprocal identities pair functions in three couples, while quotient identities show how the four remaining functions all build from sin and cos."
     },
     obj4: {
-      question: "Can I verify an identity at a specific angle?",
-      answer: "Yes. Move the alpha slider to the angle you want, then read the two metric cards near the bottom. They show the values of both sides of the identity, computed independently. The formula table at the bottom does the same for all six functions at once."
+      question: "Why does tangent have a period of 180 degrees but sine has 360?",
+      answer: "Tangent is the ratio sin theta over cos theta. When theta increases by 180 degrees, both sin and cos flip sign, and a negative divided by a negative is positive. The two sign flips cancel inside the ratio, so tan returns to its original value after only half a turn. Sine and cosine themselves need a full 360-degree turn to return."
     },
     obj5: {
-      question: "What does the source column of the formula table mean?",
-      answer: "It tells you how each identity was obtained. Sine is labeled geometric. Cosine is via sin (proved using the sin half-angle and Pythagoras). Tangent is via sin and cos. Cosecant, secant, and cotangent are via their reciprocal partners."
+      question: "How do you find a trig function value for any angle?",
+      answer: "First, reduce the angle to its reference angle, which is the acute angle between the terminal ray and the x-axis. Compute or recall the function value for that acute angle. Finally, determine the sign from which quadrant the original angle terminates in. The standard ASTC pattern fixes the sign for each function in each quadrant."
     }
   }
-
 
   const schemas = {
     webApplication: {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Half Angle Identities Explorer",
-      "description": "Explore and verify all six half-angle identities (sin, cos, tan, csc, sec, cot) with animated geometric proofs, algebraic derivations, and live numeric checks.",
-      "url": "https://www.learnmathclass.com/trigonometry/visual-tools/half-angle-identities",
+      "name": "Basic Trigonometric Identities Explorer",
+      "description": "Explore all six trig functions on the unit circle. Drag the angle, step through derivations, and see reciprocal and quotient identities emerge visually.",
+      "url": "https://www.learnmathclass.com/trigonometry/visual-tools/basic-identities",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -754,14 +725,13 @@ For applications and worked examples, see the **trigonometric identities applica
         "priceCurrency": "USD"
       },
       "featureList": [
-        "Six tabs covering sin, cos, tan, csc, sec, and cot half-angle identities",
-        "Animated step-by-step geometric proofs for sin(alpha/2) and cos(alpha/2)",
-        "Algebraic derivation cards for tan, csc, sec, and cot with jump-to-source buttons",
-        "Alpha slider from 20 to 160 degrees with live updates",
-        "Play, pause, step, reset, and speed controls for the animation",
-        "Live verification cards comparing both sides of each identity",
-        "Formula table summarizing all six identities, values, and proof sources",
-        "URL query parameter sync so links preserve the active function"
+        "Drag the terminal point around the unit circle to rotate theta",
+        "Switch between sin, cos, tan, csc, sec, and cot via tabs",
+        "Step through a five-stage derivation for each function",
+        "Multi-turn slider sweeps past 360 degrees with spiral coterminal ghost dots",
+        "Live formula table shows the reading and current value for all six functions",
+        "Toggle between degrees and radians for angle display",
+        "Deep-linkable URLs preserve the active function via ?fn= query parameter"
       ],
       "author": {
         "@type": "Organization",
@@ -801,8 +771,8 @@ For applications and worked examples, see the **trigonometric identities applica
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Half Angle Identities",
-          "item": "https://www.learnmathclass.com/trigonometry/visual-tools/half-angle-identities"
+          "name": "Basic Trigonometric Identities",
+          "item": "https://www.learnmathclass.com/trigonometry/visual-tools/basic-identities"
         }
       ]
     },
@@ -838,22 +808,22 @@ For applications and worked examples, see the **trigonometric identities applica
          faqQuestions,
          schemas,
           seoData: {
-        title: "Half Angle Identities: Interactive Proofs | Learn Math Class",
-        description: "Explore all six half-angle identities: sin, cos, tan, csc, sec, cot. Animated geometric proofs, algebraic derivations, and live numeric verification.",
-        hubDescription: "Half-Angle identities explorer covering all six trigonometric functions. Animated geometric proofs derive sin(α/2) and cos(α/2) from a bisected isosceles triangle, while algebraic derivation cards handle tan(α/2), csc(α/2), sec(α/2), and cot(α/2) with one-click jumps back to their source proofs. A live formula table and verification cards confirm each identity numerically as you sweep α from 20° to 160°.",
-        category: "Identities",
+        title: "Basic Trig Identities Explorer | Unit Circle Visualizer",
+        description: "Explore all six trig functions on the unit circle. Drag the angle, step through derivations, and see reciprocal and quotient identities emerge visually.",
         keywords: keyWords.join(", "),
-        url: "/trigonometry/visual-tools/half-angle-identities",
-        name: "Half Angle Identities Explorer"
+        url: "/trigonometry/visual-tools/basic-identities",
+        name: "Basic Trigonometric Identities Explorer",
+        hubDescription: "Drag the blue dot around the unit circle to watch sine, cosine, tangent, and their reciprocals emerge as signed legs and ratios. Switch between the six functions via tabs, step through a five-stage derivation for each, and use the multi-turn slider to explore periodicity and coterminal angles.",
+        category: "Identities"
       },
-
+        
        }
     }
    }
 
-export default function HalfAngleIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function BasicTrigIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
-
+    
   const genericSections=[
     // {
     //     id:'0',
@@ -951,7 +921,7 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
           sectionsContent.obj11.content,
         ]
     },
-
+    
 ]
 
   return (
@@ -962,38 +932,32 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
   <meta name="keywords" content={seoData.keywords} />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-
+  
   <meta property="og:title" content={seoData.title} />
   <meta property="og:description" content={seoData.description} />
   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Learn Math Class" />
-
+  
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content={seoData.title} />
   <meta name="twitter:description" content={seoData.description} />
-
+  
   <meta name="robots" content="index, follow" />
-
-  <script
+  
+  <script 
     type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.webApplication)
-    }}
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.webApplication) }}
   />
 
-  <script
+  <script 
     type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.breadcrumb)
-    }}
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
   />
 
-  <script
+  <script 
     type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
-    }}
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
   />
 </Head>
    {/* <GenericNavbar/> */}
@@ -1001,46 +965,30 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
    <br/>
    <br/>
    <br/>
-    <OperaSidebar
+    <OperaSidebar 
            side='right'
-           // topOffset='65px'
+           // topOffset='65px' 
            sidebarWidth='45px'
            panelWidth='200px'
            iconColor='white'
            panelBackgroundColor='#f2f2f2'
-         />
+         /> 
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'20px',marginBottom:'0px'}}>Half Angle Trigonometric Identities</h1>
+   <h1 className='title' style={{marginTop:'-20px',marginBottom:'0px'}}>Basic Trigonometric Identities</h1>
    <br/>
-      <div style={{ display: 'grid', gridTemplateColumns: '100px minmax(0, 1fr)', gap: 8,alignItems: 'start' }}>
-         <SiblingsNavStandalone
-         // bg="#fafaf7"
-         // color="#2c5d99"
-         // activeColor="#143a66"
-         // activeBg="#dde9f7"
-
-         bg="#ffffff"
-         color="#64748b"
-         activeColor="#4F46E5"
-         activeBg="#eef2ff"
-         />
-          <HalfAngleExplorer/>
-       </div>
-
-
+   <BasicTrigIdentitiesExplorer/>
    <br/>
    <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
-         secondaryNavMode="siblings"  // or "children"
+         secondaryNavMode="siblings"
          secondaryNavTitle="More in this Section"
-
    />
    <br/>
    <br/>
    <br/>
-    {/* <IntroSection
+    {/* <IntroSection 
           id={introContent.id}
           title={introContent.title}
           content={introContent.content}

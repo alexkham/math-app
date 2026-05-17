@@ -740,7 +740,7 @@ For applications and worked examples, see the **trigonometric identities applica
     webApplication: {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Interactive Pythagorean Identities Explorer",
+      "name": "Pythagorean Identities Explorer",
       "description": "Explore and verify all six Pythagorean trigonometric identities with animated geometric proofs, algebraic derivations, and live numeric checks.",
       "url": "https://www.learnmathclass.com/trigonometry/visual-tools/pythagorean-identities",
       "applicationCategory": "EducationalApplication",
@@ -837,11 +837,11 @@ For applications and worked examples, see the **trigonometric identities applica
           seoData: {
         title: "Pythagorean Identities: Interactive Proofs | Learn Math Class",
         description: "Explore all six Pythagorean trig identities: sin, cos, tan, csc, sec, cot. Animated geometric proof, algebraic derivations, and live numeric verification.",
-        hubDescription: "An interactive Pythagorean identities explorer covering all six trigonometric functions. The base identity sin²θ + cos²θ = 1 is proved geometrically inside the unit circle, then tan, csc, sec, and cot forms follow by dividing through and rearranging. Animated steps, algebraic derivation cards with jump-to-source buttons, and a live formula table verify every identity numerically as you sweep θ through the first quadrant.",
+        hubDescription: "Pythagorean identities explorer covering all six trigonometric functions. The base identity sin²θ + cos²θ = 1 is proved geometrically inside the unit circle, then tan, csc, sec, and cot forms follow by dividing through and rearranging. Animated steps, algebraic derivation cards with jump-to-source buttons, and a live formula table verify every identity numerically as you sweep θ through the first quadrant.",
         category: "Identities",
         keywords: keyWords.join(", "),
         url: "/trigonometry/visual-tools/pythagorean-identities",
-        name: "Interactive Pythagorean Identities Explorer"
+        name: "Pythagorean Identities Explorer"
       },
 
        }
