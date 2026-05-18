@@ -693,7 +693,7 @@ For full theory and proofs, see the **complementary and supplementary angles pag
     webApplication: {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Interactive Angle Explorer",
+      "name": "Angle Explorer",
       "description": "Visualize any angle interactively in degrees or radians. Explore complementary, supplementary, coterminal, reference angles and quadrants with live trig values.",
       "url": "https://www.learnmathclass.com/trigonometry/visual-tools/angle-explorer",
       "applicationCategory": "EducationalApplication",
@@ -793,7 +793,7 @@ For full theory and proofs, see the **complementary and supplementary angles pag
         category: "Angles",
         keywords: keyWords.join(", "),
         url: "/trigonometry/visual-tools/angle-explorer",
-        name: "Interactive Angle Explorer"
+        name: "Angle Explorer"
       },
 
        }

@@ -1,0 +1,1087 @@
+// 'use client';
+
+// import React, { useState, useMemo } from 'react';
+// import { ScenePlayer } from './MatrixCore';
+
+// // ===========================================================
+// // LinearCombinationWrapper
+// // Visualizes C = αA + βB, cell by cell, in three phases.
+// //
+// // Phase 1 — scale A:    each cell a_{i,j} → α·a_{i,j}
+// // Phase 2 — scale B:    each cell b_{i,j} → β·b_{i,j}
+// // Phase 3 — add:        C cell ← α·a_{i,j} + β·b_{i,j}
+// //
+// // Layout never changes across the animation:
+// //     α · A + β · B = C
+// // Only cellOverrides advance, so the structural identity of
+// // the operands stays put.
+// //
+// // Design choices (pinned in chat):
+// //   - Two terms, not k-term (extension is mechanical)
+// //   - Absorb the scaling: A's cells display α·a_{i,j} after
+// //     phase 1 rather than rendering a separate αA matrix
+// //   - α, β are symbolic — no user input, no numeric values
+// //   - Dimensions linked across A, B, C (single row/col pair)
+// // ===========================================================
+
+// const mathInlineStyle = {
+//   fontFamily: '\'Cambria Math\', Georgia, serif',
+//   fontStyle: 'italic'
+// };
+
+// const chevButtonStyle = {
+//   background: 'transparent',
+//   border: 'none',
+//   padding: '0 2px',
+//   fontSize: '8px',
+//   color: '#64748b',
+//   cursor: 'pointer',
+//   lineHeight: 1,
+//   fontFamily: 'inherit'
+// };
+
+// const subStyle = {
+//   fontSize: '0.65em',
+//   verticalAlign: 'sub',
+//   lineHeight: 0,
+//   fontStyle: 'italic'
+// };
+
+// const LINCOMB_INFO =
+//   'A linear combination of two matrices A and B is α\u00B7A + β\u00B7B, ' +
+//   'where α and β are scalars. A and B must share the same shape so that ' +
+//   'the addition is defined; the result C has that same shape. ' +
+//   'Linear combinations are built from two operations already covered: ' +
+//   'scalar multiplication (scale A by α, scale B by β) and matrix ' +
+//   'addition (add the scaled matrices). The animation walks the operation ' +
+//   'in those three phases.';
+
+// // -----------------------------------------------------------
+// // Cell display helpers.
+// //   scaledACell(i,j) — displays "α·a_{i,j}"
+// //   scaledBCell(i,j) — displays "β·b_{i,j}"
+// //   filledCCell(i,j) — displays "α·a_{i,j} + β·b_{i,j}"
+// //
+// // Font size is shrunken for the C cells because the
+// // content is wider than a single symbol; A and B are
+// // only modestly wider after scaling.
+// // -----------------------------------------------------------
+// function scaledACell(i, j, abFontSize) {
+//   return {
+//     display: (
+//       <>
+//         &alpha;
+//         <span style={{ fontStyle: 'normal', margin: '0 1px' }}>&middot;</span>
+//         a<span style={subStyle}>{i + 1},{j + 1}</span>
+//       </>
+//     ),
+//     style: { fontSize: abFontSize }
+//   };
+// }
+
+// function scaledBCell(i, j, abFontSize) {
+//   return {
+//     display: (
+//       <>
+//         &beta;
+//         <span style={{ fontStyle: 'normal', margin: '0 1px' }}>&middot;</span>
+//         b<span style={subStyle}>{i + 1},{j + 1}</span>
+//       </>
+//     ),
+//     style: { fontSize: abFontSize }
+//   };
+// }
+
+// function filledCCell(i, j, cFontSize) {
+//   return {
+//     display: (
+//       <>
+//         &alpha;
+//         <span style={{ fontStyle: 'normal', margin: '0 1px' }}>&middot;</span>
+//         a<span style={subStyle}>{i + 1},{j + 1}</span>
+//         <span style={{ fontStyle: 'normal', margin: '0 2px' }}>+</span>
+//         &beta;
+//         <span style={{ fontStyle: 'normal', margin: '0 1px' }}>&middot;</span>
+//         b<span style={subStyle}>{i + 1},{j + 1}</span>
+//       </>
+//     ),
+//     style: { fontSize: cFontSize }
+//   };
+// }
+
+// // -----------------------------------------------------------
+// // Build overrides for A, B, C at a given (phase, sweepIdx).
+// //
+// // phase:
+// //   0 — intro (A, B native; C empty)
+// //   1 — sweeping phase 1 (A scaling): A cells with idx <= sweepIdx
+// //       are scaled; B native; C empty
+// //   2 — sweeping phase 2 (B scaling): all of A scaled; B cells with
+// //       idx <= sweepIdx scaled; C empty
+// //   3 — sweeping phase 3 (filling C): A, B fully scaled; C cells with
+// //       idx <= sweepIdx filled
+// //   4 — outro (A, B fully scaled; C fully filled)
+// // -----------------------------------------------------------
+// function buildOverrides(rows, cols, phase, sweepIdx, abFontSize, cFontSize) {
+//   const aOver = {};
+//   const bOver = {};
+//   const cOver = {};
+
+//   for (let i = 0; i < rows; i++) {
+//     for (let j = 0; j < cols; j++) {
+//       const idx = i * cols + j;
+
+//       // A
+//       if (phase >= 2 || (phase === 1 && idx <= sweepIdx)) {
+//         aOver[`${i},${j}`] = scaledACell(i, j, abFontSize);
+//       }
+//       // B
+//       if (phase >= 3 || (phase === 2 && idx <= sweepIdx)) {
+//         bOver[`${i},${j}`] = scaledBCell(i, j, abFontSize);
+//       }
+//       // C
+//       if (phase >= 4 || (phase === 3 && idx <= sweepIdx)) {
+//         cOver[`${i},${j}`] = filledCCell(i, j, cFontSize);
+//       } else {
+//         cOver[`${i},${j}`] = { empty: true };
+//       }
+//     }
+//   }
+//   return { aOver, bOver, cOver };
+// }
+
+// // -----------------------------------------------------------
+// // Scene builder
+// // -----------------------------------------------------------
+// function buildScenes(rows, cols) {
+//   const maxDim = Math.max(rows, cols);
+//   // αA cells: "α·a_{i,j}" — wider than a single symbol.
+//   const abFontSize =
+//     maxDim <= 3 ? '14px' : maxDim === 4 ? '12px' : '11px';
+//   // C cells: "α·a_{i,j} + β·b_{i,j}" — substantially wider.
+//   const cFontSize =
+//     maxDim <= 3 ? '11px' : maxDim === 4 ? '10px' : '9px';
+
+//   // Slightly oversized cells so the longer C content fits.
+//   const cellPx =
+//     maxDim <= 3 ? 68 : maxDim === 4 ? 58 : 52;
+
+//   const baseMatrices = (aOver, bOver, cOver) => ({
+//     A: {
+//       symbol: 'a', rows, cols, label: 'A',
+//       cellSize: cellPx,
+//       cellOverrides: aOver
+//     },
+//     B: {
+//       symbol: 'b', rows, cols, label: 'B',
+//       cellSize: cellPx,
+//       cellOverrides: bOver
+//     },
+//     C: {
+//       symbol: 'c', rows, cols, label: 'C',
+//       cellSize: cellPx,
+//       cellOverrides: cOver
+//     }
+//   });
+
+//   // Layout never changes: α · A + β · B = C
+//   // α and β are rendered as Operator slots so they sit in the
+//   // structural position of "a scalar coefficient", not as
+//   // matrix entries.
+//   const baseLayout = [
+//     { type: 'operator', symbol: '\u03B1', size: 28, color: '#1e40af' },
+//     { type: 'operator', symbol: '\u00B7', size: 22 },
+//     { type: 'matrix', ref: 'A' },
+//     { type: 'operator', symbol: '+' },
+//     { type: 'operator', symbol: '\u03B2', size: 28, color: '#1e40af' },
+//     { type: 'operator', symbol: '\u00B7', size: 22 },
+//     { type: 'matrix', ref: 'B' },
+//     { type: 'operator', symbol: '=' },
+//     { type: 'matrix', ref: 'C' }
+//   ];
+
+//   const scenes = [];
+
+//   // ----- Scene 0: intro -----
+//   {
+//     const { aOver, bOver, cOver } = buildOverrides(rows, cols, 0, -1, abFontSize, cFontSize);
+//     scenes.push({
+//       title: 'Linear combination \u03B1\u00B7A + \u03B2\u00B7B',
+//       formula:
+//         `A and B are ${rows}\u00D7${cols}. The linear combination ` +
+//         '\u03B1\u00B7A + \u03B2\u00B7B is built in three phases: ' +
+//         '<strong>scale A by \u03B1</strong>, ' +
+//         '<strong>scale B by \u03B2</strong>, then ' +
+//         '<strong>add the two scaled matrices</strong>. ' +
+//         'The result C has the same shape.',
+//       matrices: baseMatrices(aOver, bOver, cOver),
+//       layout: baseLayout,
+//       highlights: {}
+//     });
+//   }
+
+//   // ----- Phase 1: scale A, cell by cell -----
+//   for (let i = 0; i < rows; i++) {
+//     for (let j = 0; j < cols; j++) {
+//       const idx = i * cols + j;
+//       const { aOver, bOver, cOver } = buildOverrides(rows, cols, 1, idx, abFontSize, cFontSize);
+//       scenes.push({
+//         title:
+//           'Phase 1 \u2014 scale A: ' +
+//           `a<sub>${i + 1},${j + 1}</sub> &rarr; ` +
+//           `\u03B1\u00B7a<sub>${i + 1},${j + 1}</sub>`,
+//         formula:
+//           `Multiply the cell at row ${i + 1}, column ${j + 1} of A by \u03B1. ` +
+//           'The scaled value replaces the original entry in place.',
+//         matrices: baseMatrices(aOver, bOver, cOver),
+//         layout: baseLayout,
+//         highlights: {
+//           A: { cells: [[i, j, 'primary']] }
+//         }
+//       });
+//     }
+//   }
+
+//   // ----- Phase 2: scale B, cell by cell -----
+//   for (let i = 0; i < rows; i++) {
+//     for (let j = 0; j < cols; j++) {
+//       const idx = i * cols + j;
+//       const { aOver, bOver, cOver } = buildOverrides(rows, cols, 2, idx, abFontSize, cFontSize);
+//       scenes.push({
+//         title:
+//           'Phase 2 \u2014 scale B: ' +
+//           `b<sub>${i + 1},${j + 1}</sub> &rarr; ` +
+//           `\u03B2\u00B7b<sub>${i + 1},${j + 1}</sub>`,
+//         formula:
+//           `Multiply the cell at row ${i + 1}, column ${j + 1} of B by \u03B2. ` +
+//           'A is already fully scaled from phase 1.',
+//         matrices: baseMatrices(aOver, bOver, cOver),
+//         layout: baseLayout,
+//         highlights: {
+//           B: { cells: [[i, j, 'secondary']] }
+//         }
+//       });
+//     }
+//   }
+
+//   // ----- Phase 3: fill C, cell by cell -----
+//   for (let i = 0; i < rows; i++) {
+//     for (let j = 0; j < cols; j++) {
+//       const idx = i * cols + j;
+//       const { aOver, bOver, cOver } = buildOverrides(rows, cols, 3, idx, abFontSize, cFontSize);
+//       scenes.push({
+//         title:
+//           'Phase 3 \u2014 add: ' +
+//           `c<sub>${i + 1},${j + 1}</sub> = ` +
+//           `\u03B1\u00B7a<sub>${i + 1},${j + 1}</sub> + ` +
+//           `\u03B2\u00B7b<sub>${i + 1},${j + 1}</sub>`,
+//         formula:
+//           'Take the scaled cell from A and the scaled cell from B at ' +
+//           `(${i + 1}, ${j + 1}), add them, and write the result into ` +
+//           `C[${i + 1},${j + 1}].`,
+//         matrices: baseMatrices(aOver, bOver, cOver),
+//         layout: baseLayout,
+//         highlights: {
+//           A: { cells: [[i, j, 'primary']] },
+//           B: { cells: [[i, j, 'secondary']] },
+//           C: { cells: [[i, j, 'accent']] }
+//         },
+//         overlays: [
+//           {
+//             type: 'cell-arrow-curve',
+//             from: { matrix: 'A', row: i, col: j },
+//             to: { matrix: 'C', row: i, col: j },
+//             style: 'primary',
+//             curveOffset: 35
+//           },
+//           {
+//             type: 'cell-arrow-curve',
+//             from: { matrix: 'B', row: i, col: j },
+//             to: { matrix: 'C', row: i, col: j },
+//             style: 'secondary',
+//             curveOffset: 35
+//           }
+//         ]
+//       });
+//     }
+//   }
+
+//   // ----- Outro -----
+//   {
+//     const { aOver, bOver, cOver } = buildOverrides(rows, cols, 4, -1, abFontSize, cFontSize);
+//     scenes.push({
+//       title: 'Done',
+//       formula:
+//         'C is filled. Every entry c<sub>i,j</sub> = ' +
+//         '\u03B1\u00B7a<sub>i,j</sub> + \u03B2\u00B7b<sub>i,j</sub>. ' +
+//         'A linear combination is element-wise: the result has the same ' +
+//         'shape as the inputs, and each cell depends only on its own pair, ' +
+//         'weighted by the scalars \u03B1 and \u03B2.',
+//       matrices: baseMatrices(aOver, bOver, cOver),
+//       layout: baseLayout,
+//       highlights: {}
+//     });
+//   }
+
+//   return scenes;
+// }
+
+// // -----------------------------------------------------------
+// // UI helpers
+// // -----------------------------------------------------------
+// function InfoIcon({ tip }) {
+//   return (
+//     <span
+//       className="lc-info"
+//       tabIndex={0}
+//       aria-label="More info"
+//       style={{
+//         display: 'inline-flex',
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         width: '16px',
+//         height: '16px',
+//         borderRadius: '50%',
+//         background: '#dbeafe',
+//         color: '#1e40af',
+//         fontSize: '11px',
+//         fontWeight: 700,
+//         cursor: 'help',
+//         position: 'relative',
+//         fontFamily: 'Arial, sans-serif',
+//         lineHeight: 1,
+//         userSelect: 'none',
+//         flexShrink: 0
+//       }}
+//     >
+//       ?
+//       <span className="lc-tip">{tip}</span>
+//     </span>
+//   );
+// }
+
+// function FieldLabel({ children, info }) {
+//   return (
+//     <div style={{
+//       display: 'inline-flex',
+//       alignItems: 'center',
+//       gap: '8px',
+//       margin: '0 0 10px'
+//     }}>
+//       <span style={{
+//         fontSize: '16px',
+//         color: '#1e40af',
+//         fontFamily: 'Arial, sans-serif',
+//         fontWeight: 600,
+//         lineHeight: 1.2
+//       }}>
+//         {children}
+//       </span>
+//       {info && <InfoIcon tip={info} />}
+//     </div>
+//   );
+// }
+
+// function Stepper({ value, onChange, min, max }) {
+//   return (
+//     <span style={{
+//       display: 'inline-flex',
+//       alignItems: 'center',
+//       gap: '4px',
+//       padding: '4px 6px 4px 10px',
+//       borderRadius: '6px',
+//       background: 'white',
+//       border: '1px solid #cbd5e1'
+//     }}>
+//       <span style={{
+//         ...mathInlineStyle,
+//         fontWeight: 500,
+//         minWidth: '10px',
+//         textAlign: 'center',
+//         color: '#0f172a'
+//       }}>
+//         {value}
+//       </span>
+//       <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 0.7 }}>
+//         <button
+//           className="lc-stepper-btn"
+//           onClick={() => onChange(Math.min(max, value + 1))}
+//           disabled={value >= max}
+//           style={chevButtonStyle}
+//           aria-label="Increase"
+//         >&#9650;</button>
+//         <button
+//           className="lc-stepper-btn"
+//           onClick={() => onChange(Math.max(min, value - 1))}
+//           disabled={value <= min}
+//           style={chevButtonStyle}
+//           aria-label="Decrease"
+//         >&#9660;</button>
+//       </span>
+//     </span>
+//   );
+// }
+
+// // ===========================================================
+// // Main wrapper
+// // ===========================================================
+// export default function LinearCombinationWrapper({
+//   defaultRows = 2,
+//   defaultCols = 3,
+//   dimensionRange = [1, 2, 3, 4, 5],
+//   title = 'Linear Combination of Matrices',
+//   subtitle = 'Symbolic visualization of \u03B1\u00B7A + \u03B2\u00B7B = C, in three phases: scale, scale, add.',
+//   defaultSpeed = 1200
+// }) {
+//   const [rows, setRows] = useState(defaultRows);
+//   const [cols, setCols] = useState(defaultCols);
+
+//   const min = dimensionRange[0];
+//   const max = dimensionRange[dimensionRange.length - 1];
+
+//   const scenes = useMemo(
+//     () => buildScenes(rows, cols),
+//     [rows, cols]
+//   );
+
+//   return (
+//     <div style={{
+//       background: 'white',
+//       borderRadius: '10px',
+//       boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+//       padding: '22px',
+//       fontFamily: 'Arial, sans-serif'
+//     }}>
+//       <style>{`
+//         .lc-stepper-btn:hover:not(:disabled) { color: #1e40af; }
+//         .lc-stepper-btn:disabled { color: #cbd5e1; cursor: not-allowed; }
+
+//         .lc-info:hover, .lc-info:focus { background: #bfdbfe; outline: none; }
+
+//         .lc-info .lc-tip {
+//           visibility: hidden; opacity: 0;
+//           position: absolute; top: calc(100% + 8px); left: 50%;
+//           transform: translateX(-50%);
+//           background: #1e293b; color: #f1f5f9;
+//           font-size: 12px; line-height: 1.5; font-weight: 400;
+//           padding: 9px 13px; border-radius: 6px;
+//           width: 320px; text-align: left;
+//           pointer-events: none;
+//           transition: opacity 0.12s ease, visibility 0.12s;
+//           z-index: 10;
+//           font-family: Arial, sans-serif;
+//           font-style: normal;
+//         }
+//         .lc-info .lc-tip::before {
+//           content: ''; position: absolute;
+//           bottom: 100%; left: 50%; transform: translateX(-50%);
+//           border: 5px solid transparent; border-bottom-color: #1e293b;
+//         }
+//         .lc-info:hover .lc-tip, .lc-info:focus .lc-tip {
+//           visibility: visible; opacity: 1;
+//         }
+//       `}</style>
+
+//       {(title || subtitle) && (
+//         <div style={{ marginBottom: '18px' }}>
+//           {title && (
+//             <h2 style={{
+//               fontSize: '22px',
+//               color: '#1e40af',
+//               margin: '0 0 4px 0',
+//               fontWeight: 'bold'
+//             }}>
+//               {title}
+//             </h2>
+//           )}
+//           {subtitle && (
+//             <p style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
+//               {subtitle}
+//             </p>
+//           )}
+//         </div>
+//       )}
+
+//       {/* Control panel: linked dimensions only */}
+//       <div style={{
+//         background: 'white',
+//         border: '1px solid #e5e7eb',
+//         borderRadius: '10px',
+//         padding: '18px'
+//       }}>
+//         <FieldLabel info={LINCOMB_INFO}>
+//           Dimensions (shared by A and B)
+//         </FieldLabel>
+//         <div style={{
+//           display: 'flex',
+//           alignItems: 'center',
+//           gap: '6px',
+//           flexWrap: 'wrap'
+//         }}>
+//           <span style={{ ...mathInlineStyle, fontSize: '15px', fontWeight: 500 }}>
+//             A, B
+//           </span>
+//           <Stepper value={rows} onChange={setRows} min={min} max={max} />
+//           <span style={{ color: '#94a3b8' }}>&times;</span>
+//           <Stepper value={cols} onChange={setCols} min={min} max={max} />
+//         </div>
+//       </div>
+
+//       {/* Output */}
+//       <div style={{ marginTop: '18px' }}>
+//         <ScenePlayer
+//           scenes={scenes}
+//           defaultSpeed={defaultSpeed}
+//           showSpeedSelector={true}
+//           showStepIndicator={true}
+//           showStepLog={true}
+//           stepLogTitle="Step explanations"
+//         />
+//       </div>
+//     </div>
+//   );
+// }
+
+
+'use client';
+
+import React, { useState, useMemo } from 'react';
+import { ScenePlayer } from './MatrixCore';
+
+// ===========================================================
+// LinearCombinationWrapper v2
+//
+// Diff vs v1: cell sizing tuned for the three-matrix layout
+// (A, B, C side by side). Horizontal canvas demand scales
+// with 3·cols·cellPx + scalar slots + operators, so we drop
+// cell size more aggressively when cols is large.
+//
+// Pairs with MatrixCore-v3 (or later), which adds
+// flex-wrap on the canvas as a fallback for narrow viewports.
+//
+// Operation: C = αA + βB, cell by cell, in three phases.
+//   Phase 1 — scale A:  a_{i,j} → α·a_{i,j}
+//   Phase 2 — scale B:  b_{i,j} → β·b_{i,j}
+//   Phase 3 — add:      c_{i,j} = α·a_{i,j} + β·b_{i,j}
+// ===========================================================
+
+const mathInlineStyle = {
+  fontFamily: '\'Cambria Math\', Georgia, serif',
+  fontStyle: 'italic'
+};
+
+const chevButtonStyle = {
+  background: 'transparent',
+  border: 'none',
+  padding: '0 2px',
+  fontSize: '8px',
+  color: '#64748b',
+  cursor: 'pointer',
+  lineHeight: 1,
+  fontFamily: 'inherit'
+};
+
+const subStyle = {
+  fontSize: '0.65em',
+  verticalAlign: 'sub',
+  lineHeight: 0,
+  fontStyle: 'italic'
+};
+
+const LINCOMB_INFO =
+  'A linear combination of two matrices A and B is α\u00B7A + β\u00B7B, ' +
+  'where α and β are scalars. A and B must share the same shape so that ' +
+  'the addition is defined; the result C has that same shape. ' +
+  'Linear combinations are built from two operations already covered: ' +
+  'scalar multiplication (scale A by α, scale B by β) and matrix ' +
+  'addition (add the scaled matrices). The animation walks the operation ' +
+  'in those three phases.';
+
+// -----------------------------------------------------------
+// Sizing — accounts for the three-matrix layout.
+// Returns { cellPx, abFontSize, cFontSize }.
+//
+// Reasoning:
+//   - Total horizontal demand ≈ 3·cols·cellPx + operators
+//   - C cells are widest (contain α·a_{i,j} + β·b_{i,j})
+//   - We pick cellPx so that even at cols=5 the row fits a
+//     ~900px canvas without wrapping; if it doesn't (narrower
+//     viewport), MatrixCore-v3 wraps the row.
+// -----------------------------------------------------------
+function sizingFor(rows, cols) {
+  const maxDim = Math.max(rows, cols);
+  let cellPx;
+  let abFontSize;
+  let cFontSize;
+
+  if (cols <= 2) {
+    cellPx = 68;
+    abFontSize = '14px';
+    cFontSize = maxDim <= 2 ? '12px' : '11px';
+  } else if (cols === 3) {
+    cellPx = 62;
+    abFontSize = '13px';
+    cFontSize = '11px';
+  } else if (cols === 4) {
+    cellPx = 52;
+    abFontSize = '11px';
+    cFontSize = '10px';
+  } else {
+    // cols === 5
+    cellPx = 46;
+    abFontSize = '10px';
+    cFontSize = '9px';
+  }
+  return { cellPx, abFontSize, cFontSize };
+}
+
+// -----------------------------------------------------------
+// Cell display helpers.
+// -----------------------------------------------------------
+function scaledACell(i, j, abFontSize) {
+  return {
+    display: (
+      <>
+        &alpha;
+        <span style={{ fontStyle: 'normal', margin: '0 1px' }}>&middot;</span>
+        a<span style={subStyle}>{i + 1},{j + 1}</span>
+      </>
+    ),
+    style: { fontSize: abFontSize }
+  };
+}
+
+function scaledBCell(i, j, abFontSize) {
+  return {
+    display: (
+      <>
+        &beta;
+        <span style={{ fontStyle: 'normal', margin: '0 1px' }}>&middot;</span>
+        b<span style={subStyle}>{i + 1},{j + 1}</span>
+      </>
+    ),
+    style: { fontSize: abFontSize }
+  };
+}
+
+function filledCCell(i, j, cFontSize) {
+  return {
+    display: (
+      <>
+        &alpha;
+        <span style={{ fontStyle: 'normal', margin: '0 1px' }}>&middot;</span>
+        a<span style={subStyle}>{i + 1},{j + 1}</span>
+        <span style={{ fontStyle: 'normal', margin: '0 2px' }}>+</span>
+        &beta;
+        <span style={{ fontStyle: 'normal', margin: '0 1px' }}>&middot;</span>
+        b<span style={subStyle}>{i + 1},{j + 1}</span>
+      </>
+    ),
+    style: { fontSize: cFontSize }
+  };
+}
+
+// -----------------------------------------------------------
+// Build overrides for A, B, C at a given (phase, sweepIdx).
+// phase: 0 intro, 1 scaling A, 2 scaling B, 3 filling C, 4 outro.
+// -----------------------------------------------------------
+function buildOverrides(rows, cols, phase, sweepIdx, abFontSize, cFontSize) {
+  const aOver = {};
+  const bOver = {};
+  const cOver = {};
+
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      const idx = i * cols + j;
+
+      if (phase >= 2 || (phase === 1 && idx <= sweepIdx)) {
+        aOver[`${i},${j}`] = scaledACell(i, j, abFontSize);
+      }
+      if (phase >= 3 || (phase === 2 && idx <= sweepIdx)) {
+        bOver[`${i},${j}`] = scaledBCell(i, j, abFontSize);
+      }
+      if (phase >= 4 || (phase === 3 && idx <= sweepIdx)) {
+        cOver[`${i},${j}`] = filledCCell(i, j, cFontSize);
+      } else {
+        cOver[`${i},${j}`] = { empty: true };
+      }
+    }
+  }
+  return { aOver, bOver, cOver };
+}
+
+// -----------------------------------------------------------
+// Scene builder
+// -----------------------------------------------------------
+function buildScenes(rows, cols) {
+  const { cellPx, abFontSize, cFontSize } = sizingFor(rows, cols);
+
+  const baseMatrices = (aOver, bOver, cOver) => ({
+    A: {
+      symbol: 'a', rows, cols, label: 'A',
+      cellSize: cellPx,
+      cellOverrides: aOver
+    },
+    B: {
+      symbol: 'b', rows, cols, label: 'B',
+      cellSize: cellPx,
+      cellOverrides: bOver
+    },
+    C: {
+      symbol: 'c', rows, cols, label: 'C',
+      cellSize: cellPx,
+      cellOverrides: cOver
+    }
+  });
+
+  const baseLayout = [
+    { type: 'operator', symbol: '\u03B1', size: 28, color: '#1e40af' },
+    { type: 'operator', symbol: '\u00B7', size: 22 },
+    { type: 'matrix', ref: 'A' },
+    { type: 'operator', symbol: '+' },
+    { type: 'operator', symbol: '\u03B2', size: 28, color: '#1e40af' },
+    { type: 'operator', symbol: '\u00B7', size: 22 },
+    { type: 'matrix', ref: 'B' },
+    { type: 'operator', symbol: '=' },
+    { type: 'matrix', ref: 'C' }
+  ];
+
+  const scenes = [];
+
+  // Scene 0: intro
+  {
+    const { aOver, bOver, cOver } = buildOverrides(rows, cols, 0, -1, abFontSize, cFontSize);
+    scenes.push({
+      title: 'Linear combination \u03B1\u00B7A + \u03B2\u00B7B',
+      formula:
+        `A and B are ${rows}\u00D7${cols}. The linear combination ` +
+        '\u03B1\u00B7A + \u03B2\u00B7B is built in three phases: ' +
+        '<strong>scale A by \u03B1</strong>, ' +
+        '<strong>scale B by \u03B2</strong>, then ' +
+        '<strong>add the two scaled matrices</strong>. ' +
+        'The result C has the same shape.',
+      matrices: baseMatrices(aOver, bOver, cOver),
+      layout: baseLayout,
+      highlights: {}
+    });
+  }
+
+  // Phase 1: scale A
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      const idx = i * cols + j;
+      const { aOver, bOver, cOver } = buildOverrides(rows, cols, 1, idx, abFontSize, cFontSize);
+      scenes.push({
+        title:
+          'Phase 1 \u2014 scale A: ' +
+          `a<sub>${i + 1},${j + 1}</sub> &rarr; ` +
+          `\u03B1\u00B7a<sub>${i + 1},${j + 1}</sub>`,
+        formula:
+          `Multiply the cell at row ${i + 1}, column ${j + 1} of A by \u03B1. ` +
+          'The scaled value replaces the original entry in place.',
+        matrices: baseMatrices(aOver, bOver, cOver),
+        layout: baseLayout,
+        highlights: {
+          A: { cells: [[i, j, 'primary']] }
+        }
+      });
+    }
+  }
+
+  // Phase 2: scale B
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      const idx = i * cols + j;
+      const { aOver, bOver, cOver } = buildOverrides(rows, cols, 2, idx, abFontSize, cFontSize);
+      scenes.push({
+        title:
+          'Phase 2 \u2014 scale B: ' +
+          `b<sub>${i + 1},${j + 1}</sub> &rarr; ` +
+          `\u03B2\u00B7b<sub>${i + 1},${j + 1}</sub>`,
+        formula:
+          `Multiply the cell at row ${i + 1}, column ${j + 1} of B by \u03B2. ` +
+          'A is already fully scaled from phase 1.',
+        matrices: baseMatrices(aOver, bOver, cOver),
+        layout: baseLayout,
+        highlights: {
+          B: { cells: [[i, j, 'secondary']] }
+        }
+      });
+    }
+  }
+
+  // Phase 3: fill C
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      const idx = i * cols + j;
+      const { aOver, bOver, cOver } = buildOverrides(rows, cols, 3, idx, abFontSize, cFontSize);
+      scenes.push({
+        title:
+          'Phase 3 \u2014 add: ' +
+          `c<sub>${i + 1},${j + 1}</sub> = ` +
+          `\u03B1\u00B7a<sub>${i + 1},${j + 1}</sub> + ` +
+          `\u03B2\u00B7b<sub>${i + 1},${j + 1}</sub>`,
+        formula:
+          'Take the scaled cell from A and the scaled cell from B at ' +
+          `(${i + 1}, ${j + 1}), add them, and write the result into ` +
+          `C[${i + 1},${j + 1}].`,
+        matrices: baseMatrices(aOver, bOver, cOver),
+        layout: baseLayout,
+        highlights: {
+          A: { cells: [[i, j, 'primary']] },
+          B: { cells: [[i, j, 'secondary']] },
+          C: { cells: [[i, j, 'accent']] }
+        },
+        overlays: [
+          {
+            type: 'cell-arrow-curve',
+            from: { matrix: 'A', row: i, col: j },
+            to: { matrix: 'C', row: i, col: j },
+            style: 'primary',
+            curveOffset: 35
+          },
+          {
+            type: 'cell-arrow-curve',
+            from: { matrix: 'B', row: i, col: j },
+            to: { matrix: 'C', row: i, col: j },
+            style: 'secondary',
+            curveOffset: 35
+          }
+        ]
+      });
+    }
+  }
+
+  // Outro
+  {
+    const { aOver, bOver, cOver } = buildOverrides(rows, cols, 4, -1, abFontSize, cFontSize);
+    scenes.push({
+      title: 'Done',
+      formula:
+        'C is filled. Every entry c<sub>i,j</sub> = ' +
+        '\u03B1\u00B7a<sub>i,j</sub> + \u03B2\u00B7b<sub>i,j</sub>. ' +
+        'A linear combination is element-wise: the result has the same ' +
+        'shape as the inputs, and each cell depends only on its own pair, ' +
+        'weighted by the scalars \u03B1 and \u03B2.',
+      matrices: baseMatrices(aOver, bOver, cOver),
+      layout: baseLayout,
+      highlights: {}
+    });
+  }
+
+  return scenes;
+}
+
+// -----------------------------------------------------------
+// UI helpers
+// -----------------------------------------------------------
+function InfoIcon({ tip }) {
+  return (
+    <span
+      className="lc-info"
+      tabIndex={0}
+      aria-label="More info"
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '16px',
+        height: '16px',
+        borderRadius: '50%',
+        background: '#dbeafe',
+        color: '#1e40af',
+        fontSize: '11px',
+        fontWeight: 700,
+        cursor: 'help',
+        position: 'relative',
+        fontFamily: 'Arial, sans-serif',
+        lineHeight: 1,
+        userSelect: 'none',
+        flexShrink: 0
+      }}
+    >
+      ?
+      <span className="lc-tip">{tip}</span>
+    </span>
+  );
+}
+
+function FieldLabel({ children, info }) {
+  return (
+    <div style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '8px',
+      margin: '0 0 10px'
+    }}>
+      <span style={{
+        fontSize: '16px',
+        color: '#1e40af',
+        fontFamily: 'Arial, sans-serif',
+        fontWeight: 600,
+        lineHeight: 1.2
+      }}>
+        {children}
+      </span>
+      {info && <InfoIcon tip={info} />}
+    </div>
+  );
+}
+
+function Stepper({ value, onChange, min, max }) {
+  return (
+    <span style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '4px',
+      padding: '4px 6px 4px 10px',
+      borderRadius: '6px',
+      background: 'white',
+      border: '1px solid #cbd5e1'
+    }}>
+      <span style={{
+        ...mathInlineStyle,
+        fontWeight: 500,
+        minWidth: '10px',
+        textAlign: 'center',
+        color: '#0f172a'
+      }}>
+        {value}
+      </span>
+      <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 0.7 }}>
+        <button
+          className="lc-stepper-btn"
+          onClick={() => onChange(Math.min(max, value + 1))}
+          disabled={value >= max}
+          style={chevButtonStyle}
+          aria-label="Increase"
+        >&#9650;</button>
+        <button
+          className="lc-stepper-btn"
+          onClick={() => onChange(Math.max(min, value - 1))}
+          disabled={value <= min}
+          style={chevButtonStyle}
+          aria-label="Decrease"
+        >&#9660;</button>
+      </span>
+    </span>
+  );
+}
+
+// ===========================================================
+// Main wrapper
+// ===========================================================
+export default function LinearCombinationWrapper({
+  defaultRows = 2,
+  defaultCols = 3,
+  dimensionRange = [1, 2, 3, 4, 5],
+  title = 'Linear Combination of Matrices',
+  subtitle = 'Symbolic visualization of \u03B1\u00B7A + \u03B2\u00B7B = C, in three phases: scale, scale, add.',
+  defaultSpeed = 1200
+}) {
+  const [rows, setRows] = useState(defaultRows);
+  const [cols, setCols] = useState(defaultCols);
+
+  const min = dimensionRange[0];
+  const max = dimensionRange[dimensionRange.length - 1];
+
+  const scenes = useMemo(
+    () => buildScenes(rows, cols),
+    [rows, cols]
+  );
+
+  return (
+    <div style={{
+      background: 'white',
+      borderRadius: '10px',
+      boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+      padding: '22px',
+      fontFamily: 'Arial, sans-serif'
+    }}>
+      <style>{`
+        .lc-stepper-btn:hover:not(:disabled) { color: #1e40af; }
+        .lc-stepper-btn:disabled { color: #cbd5e1; cursor: not-allowed; }
+
+        .lc-info:hover, .lc-info:focus { background: #bfdbfe; outline: none; }
+
+        .lc-info .lc-tip {
+          visibility: hidden; opacity: 0;
+          position: absolute; top: calc(100% + 8px); left: 50%;
+          transform: translateX(-50%);
+          background: #1e293b; color: #f1f5f9;
+          font-size: 12px; line-height: 1.5; font-weight: 400;
+          padding: 9px 13px; border-radius: 6px;
+          width: 320px; text-align: left;
+          pointer-events: none;
+          transition: opacity 0.12s ease, visibility 0.12s;
+          z-index: 10;
+          font-family: Arial, sans-serif;
+          font-style: normal;
+        }
+        .lc-info .lc-tip::before {
+          content: ''; position: absolute;
+          bottom: 100%; left: 50%; transform: translateX(-50%);
+          border: 5px solid transparent; border-bottom-color: #1e293b;
+        }
+        .lc-info:hover .lc-tip, .lc-info:focus .lc-tip {
+          visibility: visible; opacity: 1;
+        }
+      `}</style>
+
+      {(title || subtitle) && (
+        <div style={{ marginBottom: '18px' }}>
+          {title && (
+            <h2 style={{
+              fontSize: '22px',
+              color: '#1e40af',
+              margin: '0 0 4px 0',
+              fontWeight: 'bold'
+            }}>
+              {title}
+            </h2>
+          )}
+          {subtitle && (
+            <p style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
+              {subtitle}
+            </p>
+          )}
+        </div>
+      )}
+
+      <div style={{
+        background: 'white',
+        border: '1px solid #e5e7eb',
+        borderRadius: '10px',
+        padding: '18px'
+      }}>
+        <FieldLabel info={LINCOMB_INFO}>
+          Dimensions (shared by A and B)
+        </FieldLabel>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px',
+          flexWrap: 'wrap'
+        }}>
+          <span style={{ ...mathInlineStyle, fontSize: '15px', fontWeight: 500 }}>
+            A, B
+          </span>
+          <Stepper value={rows} onChange={setRows} min={min} max={max} />
+          <span style={{ color: '#94a3b8' }}>&times;</span>
+          <Stepper value={cols} onChange={setCols} min={min} max={max} />
+        </div>
+      </div>
+
+      <div style={{ marginTop: '18px' }}>
+        <ScenePlayer
+          scenes={scenes}
+          defaultSpeed={defaultSpeed}
+          showSpeedSelector={true}
+          showStepIndicator={true}
+          showStepLog={true}
+          stepLogTitle="Step explanations"
+        />
+      </div>
+    </div>
+  );
+}
