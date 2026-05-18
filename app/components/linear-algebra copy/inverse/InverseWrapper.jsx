@@ -5,19 +5,11 @@ import { ScenePlayer } from '../MatrixCoreEnhanced';
 import { STRATEGIES, STRATEGY_ORDER, getStrategy } from './strategies';
 
 // ===========================================================
-// DeterminantWrapper
+// InverseWrapper
 //
 // Tabbed control panel: Scenario (size) | Strategy.
-// Strategy cards self-gate by size via meta.sizes. If the active
-// strategy doesn't support a freshly-picked size, the wrapper
-// auto-snaps to the first enabled strategy that does.
-//
-// Strategy sub-controls:
-//   A strategy may declare `options` in its registry meta. When
-//   the strategy is active, its sub-controls are rendered inside
-//   its card (currently 'pill-row' kind). Values live in
-//   per-strategy wrapper state and are passed to build() so the
-//   builder can react to them.
+// Engine is imported from one level up (../MatrixCoreEnhanced);
+// strategies live in ./strategies.
 // ===========================================================
 
 const mathInlineStyle = {
@@ -81,14 +73,14 @@ function Stepper({ value, onChange, min, max, locked = false, lockReason }) {
       {interactive ? (
         <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 0.7 }}>
           <button
-            className="dw-stepper-btn"
+            className="iw-stepper-btn"
             onClick={() => onChange(Math.min(max, value + 1))}
             disabled={value >= max}
             style={chevButtonStyle}
             aria-label="Increase"
           >&#9650;</button>
           <button
-            className="dw-stepper-btn"
+            className="iw-stepper-btn"
             onClick={() => onChange(Math.max(min, value - 1))}
             disabled={value <= min}
             style={chevButtonStyle}
@@ -110,7 +102,7 @@ function Stepper({ value, onChange, min, max, locked = false, lockReason }) {
 function TabButton({ active, onClick, children }) {
   return (
     <button
-      className="dw-tab"
+      className="iw-tab"
       style={{
         padding: '12px 16px',
         background: active ? 'white' : 'transparent',
@@ -130,10 +122,6 @@ function TabButton({ active, onClick, children }) {
   );
 }
 
-// -----------------------------------------------------------
-// SubControls — renders an active card's options schema
-// -----------------------------------------------------------
-
 function SubControls({ schema, values, onChange, size }) {
   const entries = Object.entries(schema);
   if (entries.length === 0) return null;
@@ -152,7 +140,6 @@ function SubControls({ schema, values, onChange, size }) {
           const [min, max] = opt.rangeFromSize(size);
           const count = max - min + 1;
           const raw = values?.[name] ?? 0;
-          // Clamp display-side too, in case state hasn't settled yet
           const current = Math.max(0, Math.min(raw, count - 1));
           return (
             <div
@@ -210,10 +197,6 @@ function SubControls({ schema, values, onChange, size }) {
   );
 }
 
-// -----------------------------------------------------------
-// StrategyCard — now accepts children (for sub-controls)
-// -----------------------------------------------------------
-
 function StrategyCard({ meta, active, disabled, sizeBadge, onClick, children }) {
   const base = {
     background: active ? '#dbeafe' : 'white',
@@ -226,9 +209,9 @@ function StrategyCard({ meta, active, disabled, sizeBadge, onClick, children }) 
   };
 
   const cls = [
-    'dw-strategy',
-    active && 'dw-strategy-active',
-    disabled && 'dw-strategy-disabled'
+    'iw-strategy',
+    active && 'iw-strategy-active',
+    disabled && 'iw-strategy-disabled'
   ].filter(Boolean).join(' ');
 
   return (
@@ -308,18 +291,16 @@ function StrategyCard({ meta, active, disabled, sizeBadge, onClick, children }) 
 // Main
 // -----------------------------------------------------------
 
-export default function DeterminantWrapper({
+export default function InverseWrapper({
   defaultSize = 2,
-  sizeRange = [2, 3, 4, 5],
-  title = 'Matrix Determinant',
-  subtitle = 'Symbolic visualization of det(A): same scalar, several recipes.',
+  sizeRange = [2, 3],
+  title = 'Matrix Inverse',
+  subtitle = 'Symbolic visualization of A\u207B\u00B9: same matrix, three recipes.',
   defaultSpeed = 1200
 }) {
   const [activeTab, setActiveTab] = useState('scenario');
   const [size, setSize] = useState(defaultSize);
-  const [strategy, setStrategy] = useState('diagonal');
-
-  // Per-strategy options state: { [strategyId]: { [optionName]: value } }
+  const [strategy, setStrategy] = useState('closed-2x2');
   const [strategyOptions, setStrategyOptions] = useState({});
 
   const sizeMin = sizeRange[0];
@@ -335,14 +316,12 @@ export default function DeterminantWrapper({
         return s.enabled && s.sizes.includes(size);
       }) ||
       STRATEGY_ORDER.find((id) => STRATEGIES[id].sizes.includes(size)) ||
-      'diagonal';
+      'closed-2x2';
     setStrategy(next);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [size]);
 
-  // Clamp stored option values when size changes — out-of-range
-  // expansionIndex from a previous larger size would otherwise be
-  // visually unselected in the pill row.
+  // Clamp stored option values when size changes.
   useEffect(() => {
     setStrategyOptions((prev) => {
       let changed = false;
@@ -405,7 +384,7 @@ export default function DeterminantWrapper({
       padding: '12px 0',
       flexWrap: 'wrap'
     }}>
-      <span>det(<span style={mathInlineStyle}>A</span>)</span>
+      <span><span style={mathInlineStyle}>A</span><sup>&minus;1</sup></span>
       <span style={{ color: '#cbd5e1' }}>&middot;</span>
       <span>{size}&times;{size}</span>
       <span style={{ color: '#cbd5e1', margin: '0 4px' }}>|</span>
@@ -422,13 +401,13 @@ export default function DeterminantWrapper({
       fontFamily: 'Arial, sans-serif'
     }}>
       <style>{`
-        .dw-tab:hover { color: #334155; }
-        .dw-strategy:hover { border-color: #94a3b8; }
-        .dw-strategy-active:hover { border-color: #2563eb; }
-        .dw-strategy-disabled { opacity: 0.55; cursor: not-allowed; }
-        .dw-strategy-disabled:hover { border-color: #cbd5e1; }
-        .dw-stepper-btn:hover:not(:disabled) { color: #1e40af; }
-        .dw-stepper-btn:disabled { color: #cbd5e1; cursor: not-allowed; }
+        .iw-tab:hover { color: #334155; }
+        .iw-strategy:hover { border-color: #94a3b8; }
+        .iw-strategy-active:hover { border-color: #2563eb; }
+        .iw-strategy-disabled { opacity: 0.55; cursor: not-allowed; }
+        .iw-strategy-disabled:hover { border-color: #cbd5e1; }
+        .iw-stepper-btn:hover:not(:disabled) { color: #1e40af; }
+        .iw-stepper-btn:disabled { color: #cbd5e1; cursor: not-allowed; }
       `}</style>
 
       {(title || subtitle) && (
@@ -451,7 +430,6 @@ export default function DeterminantWrapper({
         </div>
       )}
 
-      {/* Tabbed control panel */}
       <div style={{
         background: 'white',
         border: '1px solid #e5e7eb',
@@ -499,7 +477,7 @@ export default function DeterminantWrapper({
           {activeTab === 'strategy' && (
             <div>
               <FieldLabel>
-                How det(<span style={mathInlineStyle}>A</span>) is computed
+                How <span style={mathInlineStyle}>A</span><sup>&minus;1</sup> is computed
               </FieldLabel>
               <div style={{
                 display: 'grid',
@@ -544,7 +522,6 @@ export default function DeterminantWrapper({
         </div>
       </div>
 
-      {/* Output */}
       <div style={{ marginTop: '18px' }}>
         {scenes.length === 0 ? (
           <div style={{

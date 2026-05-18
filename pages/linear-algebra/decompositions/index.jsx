@@ -1,3 +1,743 @@
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// import Sections from '@/app/components/page-components/section/Sections'
+// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// import React from 'react'
+// import '../../pages.css'
+// import Head from 'next/head'
+// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+
+// export async function getStaticProps(){
+// const keyWords = [
+//   "matrix decompositions",
+//   "matrix factorization",
+//   "LU decomposition",
+//   "QR decomposition",
+//   "Cholesky decomposition",
+//   "spectral decomposition",
+//   "singular value decomposition",
+//   "SVD linear algebra",
+//   "triangular factorization",
+//   "orthogonal factorization",
+//   "choosing matrix decomposition",
+//   "matrix factorization comparison",
+//   "decompositions linear algebra",
+//   "diagonal factorization"
+// ]
+//   // •
+
+// //   \u2022 First item
+// // \u2022 Second item
+
+  
+// // <hr style="border-width:1px;"></hr>
+
+// // <hr style="color:blue;" />
+
+// // <hr style="border-color:#3498db; border-width:1px;" />
+
+
+
+// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+
+ 
+// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+//         //     {processContent(sectionsContent.normal.notation)}
+//         // </div>,
+
+
+// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+// //     {processContent(sectionsContent.normal.parameters)}
+// // </div>,
+        
+// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+// //                   {processContent(sectionsContent.obj4.content)}
+// //                   </div>,
+
+
+// //  <div key={'dist'} style={{
+// //                     textAlign: 'center',
+// //                     transform: 'scale(0.98)',
+// //                     transformOrigin: 'center',
+// //                     marginTop:'50px',
+// //                     marginLeft:'-150px'
+// //                   }} dangerouslySetInnerHTML={{ 
+// //                     __html:   sectionContent.distributions.svg,
+// //                   }} />
+
+// //     const sectionsContent={
+
+// //     obj1:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+  
+// //     },
+// //     obj2:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+  
+// //     obj3:{
+  
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj4:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj5:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj6:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj7:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj8:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj9:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj10:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj11:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj12:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     },
+// //     obj13:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+// //       link:'',
+  
+// //     },
+// //     obj14:{
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+// //       link:'',
+  
+// //     },
+
+
+// //     obj15:{
+  
+// //       title:``,
+// //       content:``,
+// //       before:``,
+// //       after:``,
+// //       link:'',
+  
+// //     }
+  
+// //   }
+
+// const sectionsContent = {
+//   obj1: {
+//     title: `What a Decomposition Is`,
+//     content: `A matrix decomposition (or factorization) expresses a [matrix](!/linear-algebra/matrix) $A$ as a product of two or more matrices with known, exploitable structure. The factors are typically [triangular](!/linear-algebra/matrix/types), [diagonal](!/linear-algebra/matrix/types), or [orthogonal](!/linear-algebra/matrix/types) — matrices for which solving systems, computing [determinants](!/linear-algebra/determinants), and extracting [eigenvalues](!/linear-algebra/eigen) are either trivial or dramatically simplified.
+
+// A decomposition does not change the matrix. It reveals the internal structure of $A$ by splitting it into interpretable components. The product of the factors always reproduces $A$ exactly — the information is rearranged, not altered.
+
+// Every decomposition represents a trade: an upfront cost to compute the factors, followed by cheap operations that use them. The factorization is done once; the payoff is reaped every time the factors are applied.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj2: {
+//     title: `Why Decompositions Matter`,
+//     content: `Decompositions transform hard problems into sequences of easy ones.
+
+// Solving [linear systems](!/linear-algebra/linear-systems): the [LU decomposition](!/linear-algebra/decompositions/lower-upper) converts a single factorization into cheap triangular solves for any number of right-hand sides. The [Cholesky decomposition](!/linear-algebra/decompositions/cholesky) does the same at half the cost when the matrix is symmetric positive definite.
+
+// [Least squares](!/linear-algebra/orthogonality/least-squares): the [QR decomposition](!/linear-algebra/decompositions/qr) avoids squaring the condition number, providing a numerically stable solution to overdetermined systems.
+
+// Eigenvalue computation: the QR algorithm — an iterative process built on repeated QR factorizations — is the standard method for finding eigenvalues of general matrices, entirely avoiding the characteristic polynomial.
+
+// Dimensionality reduction: the [singular value decomposition](!/linear-algebra/decompositions/svd) identifies the most important directions in the data and discards the rest, enabling compression, noise removal, and low-rank approximation.
+
+// Numerical stability: orthogonal factors ($Q$ in QR, $U$ and $V$ in SVD) preserve lengths and condition numbers, keeping rounding errors under control throughout the computation.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj3: {
+//     title: `LU Decomposition`,
+//     content: `The [LU decomposition](!/linear-algebra/decompositions/lower-upper) factors a square matrix as $A = LU$ (or $PA = LU$ with row pivoting), where $L$ is lower triangular and $U$ is upper triangular. It captures the entire process of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) in matrix form: $U$ is the [echelon form](!/linear-algebra/linear-systems/echelon-form), and $L$ stores the multipliers used during elimination.
+
+// Solving $A\\mathbf{x} = \\mathbf{b}$ reduces to two triangular substitutions — forward ($L\\mathbf{y} = \\mathbf{b}$) then backward ($U\\mathbf{x} = \\mathbf{y}$) — each costing $O(n^2)$. The factorization itself costs $\\frac{2}{3}n^3$, but each additional right-hand side costs only $O(n^2)$. For $k$ systems sharing the same coefficient matrix, LU amortizes the dominant cost over all $k$ solves.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj4: {
+//     title: `QR Decomposition`,
+//     content: `The [QR decomposition](!/linear-algebra/decompositions/qr) factors an $m \\times n$ matrix as $A = QR$, where $Q$ has [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) columns and $R$ is upper triangular. It is produced by the [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt), by Householder reflections, or by Givens rotations.
+
+// QR is the standard method for least-squares problems: the normal equations $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ simplify to the triangular system $R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$, avoiding the condition-number-squaring that comes from forming $A^TA$ directly.
+
+// The QR algorithm for eigenvalues — an iterative scheme that repeatedly factors and recombines — converges to the eigenvalues of a general matrix without computing the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation). It is the dominant eigenvalue algorithm in numerical software.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj5: {
+//     title: `Cholesky Decomposition`,
+//     content: `The [Cholesky decomposition](!/linear-algebra/decompositions/cholesky) factors a [symmetric](!/linear-algebra/matrix/types) positive definite matrix as $A = LL^T$, where $L$ is lower triangular with positive diagonal entries. It exists if and only if $A$ is symmetric positive definite — all [eigenvalues](!/linear-algebra/eigen) strictly positive and $A = A^T$.
+
+// Cholesky exploits symmetry to achieve half the cost of LU: $\\frac{1}{3}n^3$ versus $\\frac{2}{3}n^3$. Only the lower triangle of $A$ is read, and only $L$ is computed — the upper factor $L^T$ is just the transpose.
+
+// Cholesky requires no pivoting. Positive definiteness guarantees that every diagonal entry encountered during the algorithm is strictly positive, so no zero pivots can occur. If the algorithm breaks down (a non-positive value under the square root), the matrix is not positive definite — the decomposition doubles as a definiteness test.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj6: {
+//     title: `Spectral Decomposition`,
+//     content: `The [spectral decomposition](!/linear-algebra/decompositions/spectral) factors a real symmetric matrix as $A = QDQ^T$, where $Q$ is [orthogonal](!/linear-algebra/matrix/types) and $D$ is diagonal. This is the [diagonalization](!/linear-algebra/eigen/diagonalization) of a symmetric matrix, with the additional guarantee that the diagonalizing matrix $Q$ is orthogonal — not merely [invertible](!/linear-algebra/matrix/inverse).
+
+// In outer product form, $A = \\lambda_1 \\mathbf{q}_1\\mathbf{q}_1^T + \\lambda_2 \\mathbf{q}_2\\mathbf{q}_2^T + \\cdots + \\lambda_n \\mathbf{q}_n\\mathbf{q}_n^T$. Each term is the eigenvalue times the [projection](!/linear-algebra/orthogonality/projections) matrix onto the corresponding eigenvector direction. The matrix is decomposed into a sum of independent rank-one projections, weighted by eigenvalues.
+
+// The spectral decomposition is the foundation of quadratic form analysis, principal component analysis, and the classification of symmetric matrices as positive definite, positive semi-definite, or indefinite.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj7: {
+//     title: `Singular Value Decomposition`,
+//     content: `The [singular value decomposition](!/linear-algebra/decompositions/svd) factors any $m \\times n$ matrix as $A = U\\Sigma V^T$, where $U$ and $V$ are orthogonal and $\\Sigma$ is diagonal with non-negative entries (the singular values). It exists for every matrix of every shape and every [rank](!/linear-algebra/matrix/rank).
+
+// The SVD is the most informative factorization in linear algebra. The number of nonzero singular values equals the rank. The columns of $U$ and $V$ provide orthonormal bases for all four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces). The pseudoinverse is $A^+ = V\\Sigma^+ U^T$. The best rank-$k$ approximation to $A$ is obtained by truncating the SVD at $k$ terms. The [condition number](!/linear-algebra/matrix/rank) is $\\sigma_1/\\sigma_r$.
+
+// Geometrically, every [linear transformation](!/linear-algebra/transformations) is a rotation ($V^T$), followed by a coordinate-axis scaling ($\\Sigma$), followed by another rotation ($U$). The SVD makes this decomposition explicit.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj8: {
+//     title: `Choosing the Right Decomposition`,
+//     content: `The choice of decomposition depends on the matrix structure and the question being asked.
+
+// For a square invertible system with one or many right-hand sides, LU is the standard choice — factor once, solve cheaply. For a symmetric positive definite system, Cholesky is faster and more stable. For a [least-squares](!/linear-algebra/orthogonality/least-squares) problem or an overdetermined system, QR avoids condition-number issues. For [eigenvalues](!/linear-algebra/eigen) of a symmetric matrix, the spectral decomposition gives real eigenvalues and orthogonal eigenvectors. For rank determination, the pseudoinverse, low-rank approximation, or any problem where the matrix may be rectangular or rank-deficient, the SVD is the universal tool.
+
+// More specialized decompositions exist for more specialized structures. Banded matrices have banded LU factors. Sparse matrices benefit from fill-reducing permutations. Iterative methods (Krylov subspace methods) avoid explicit factorization entirely for very large systems. But the five decompositions on this page cover the vast majority of problems encountered in a standard linear algebra course and in applied work.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj9: {
+//     title: `Relationships Between Decompositions`,
+//     content: `The five decompositions are not independent — each can be viewed as a refinement or generalization of another.
+
+// LU is [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) recorded as a matrix product. QR is [Gram-Schmidt](!/linear-algebra/orthogonality/gram-schmidt) recorded as a matrix product. Cholesky is the symmetric-positive-definite specialization of LU: when $A = A^T$ with positive eigenvalues, the factorization $A = LDL^T$ compresses into $A = LL^T$ by absorbing $\\sqrt{D}$ into $L$.
+
+// The spectral decomposition is eigendecomposition restricted to symmetric matrices, where the eigenvector matrix is guaranteed to be orthogonal. The SVD generalizes the spectral decomposition to non-symmetric and non-square matrices: for a symmetric positive semi-definite matrix, the SVD and spectral decomposition coincide.
+
+// Each decomposition occupies a specific niche — defined by the matrix structure it requires and the information it provides — but they are all connected through the common themes of triangularity, orthogonality, and diagonality.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+// }
+
+// const introContent = {
+//   title: `Factoring Matrices into Simpler Pieces`,
+//   content: `A matrix decomposition writes a matrix as a product of simpler matrices — triangular, diagonal, orthogonal, or some combination — whose structure makes subsequent computation cheap. The upfront cost of factoring is repaid every time the factors are used to solve a system, compute eigenvalues, approximate data, or analyze stability. Decompositions are the computational backbone of applied linear algebra.`,
+// }
+
+// const faqQuestions = {
+//   obj1: {
+//     question: "What is a matrix decomposition?",
+//     answer: "A matrix decomposition expresses a matrix as a product of simpler matrices — typically triangular, diagonal, or orthogonal — whose structure makes solving systems, computing eigenvalues, and approximating data dramatically cheaper. The factors reproduce the original matrix exactly.",
+//     sectionId: "1"
+//   },
+//   obj2: {
+//     question: "What are the main matrix decompositions?",
+//     answer: "The five core decompositions are LU (triangular factors from Gaussian elimination), QR (orthogonal times triangular from Gram-Schmidt), Cholesky (symmetric positive definite square root), spectral (orthogonal eigendecomposition for symmetric matrices), and SVD (universal factorization for any matrix).",
+//     sectionId: "2"
+//   },
+//   obj3: {
+//     question: "Which matrix decomposition should I use?",
+//     answer: "Use LU for general square systems, Cholesky for symmetric positive definite systems (twice as fast), QR for least squares and overdetermined systems, spectral decomposition for symmetric eigenvalue problems, and SVD for rank determination, pseudoinverse, low-rank approximation, or any rectangular or rank-deficient matrix.",
+//     sectionId: "8"
+//   },
+//   obj4: {
+//     question: "How are the decompositions related to each other?",
+//     answer: "Cholesky is the symmetric positive definite specialization of LU. QR is Gram-Schmidt in matrix form. The spectral decomposition is eigendecomposition restricted to symmetric matrices with orthogonal eigenvectors. The SVD generalizes the spectral decomposition to all matrices regardless of shape or symmetry.",
+//     sectionId: "9"
+//   },
+//   obj5: {
+//     question: "Why are matrix decompositions important?",
+//     answer: "Decompositions convert hard problems into sequences of easy ones. They enable efficient system solving, numerically stable least squares, eigenvalue computation without characteristic polynomials, dimensionality reduction, and low-rank approximation. They are the computational backbone of applied linear algebra.",
+//     sectionId: "2"
+//   }
+// }
+
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": "Matrix Decompositions",
+//     "description": "Overview of matrix decompositions: LU, QR, Cholesky, spectral, and SVD. When to use each factorization, computational costs, relationships between decompositions, and applications.",
+//     "url": "https://www.learnmathclass.com/linear-algebra/decompositions",
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Matrix Decompositions"
+//     },
+//     "teaches": [
+//       "What matrix decompositions are and why they matter",
+//       "LU decomposition for system solving",
+//       "QR decomposition for least squares and eigenvalues",
+//       "Cholesky decomposition for symmetric positive definite matrices",
+//       "Spectral decomposition for symmetric eigenproblems",
+//       "SVD as the universal matrix factorization",
+//       "Choosing the right decomposition for a given problem"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Linear Algebra",
+//         "item": "https://www.learnmathclass.com/linear-algebra"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Matrix Decompositions",
+//         "item": "https://www.learnmathclass.com/linear-algebra/decompositions"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
+
+//   //  return {
+//   //     props:{
+//   //        sectionsContent,
+//   //        introContent,
+//   //         seoData: {
+//   //       title: "Title | Learn Math Class",
+//   //       description: "Metadescription",
+//   //       keywords: keyWords.join(", "),
+//   //       url: "/linear-algebra/decompositions",
+//   //        name: "name"
+//   //     },
+        
+//   //      }
+//   //   }
+
+//   return {
+//   props:{
+//     sectionsContent,
+//     introContent,
+//     faqQuestions,
+//     schemas,
+//     seoData: {
+//       title: "Matrix Decompositions: LU, QR, SVD & More | Learn Math Class",
+//       description: "Overview of matrix decompositions: LU, QR, Cholesky, spectral, and SVD. When to use each factorization, computational costs, relationships between decompositions, and applications.",
+//       keywords: keyWords.join(", "),
+//       url: "/linear-algebra/decompositions",
+//       name: "Matrix Decompositions"
+//     },
+//   }
+// }
+//    }
+
+// // export default function PageTemplate({seoData,sectionsContent , introContent}) {
+// export default function DecompositionsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+    
+//   const genericSections=[
+//     {
+//         id:'1',
+//         title:sectionsContent.obj1.title,
+//         link:sectionsContent.obj1.link,
+//         content:[
+//           sectionsContent.obj1.content,
+//         ]
+//     },
+//     {
+//         id:'2',
+//         title:sectionsContent.obj2.title,
+//         link:sectionsContent.obj2.link,
+//         content:[
+//           sectionsContent.obj2.content,
+//         ]
+//     },
+//     {
+//         id:'3',
+//         title:sectionsContent.obj3.title,
+//         link:sectionsContent.obj3.link,
+//         content:[
+//           sectionsContent.obj3.content,
+//         ]
+//     },
+//     {
+//         id:'4',
+//         title:sectionsContent.obj4.title,
+//         link:sectionsContent.obj4.link,
+//         content:[
+//           sectionsContent.obj4.content,
+//         ]
+//     },
+//     {
+//         id:'5',
+//         title:sectionsContent.obj5.title,
+//         link:sectionsContent.obj5.link,
+//         content:[
+//           sectionsContent.obj5.content,
+//         ]
+//     },
+//     {
+//         id:'6',
+//         title:sectionsContent.obj6.title,
+//         link:sectionsContent.obj6.link,
+//         content:[
+//           sectionsContent.obj6.content,
+//         ]
+//     },
+//     {
+//         id:'7',
+//         title:sectionsContent.obj7.title,
+//         link:sectionsContent.obj7.link,
+//         content:[
+//           sectionsContent.obj7.content,
+//         ]
+//     },
+//     {
+//         id:'8',
+//         title:sectionsContent.obj8.title,
+//         link:sectionsContent.obj8.link,
+//         content:[
+//           sectionsContent.obj8.content,
+//         ]
+//     },
+//     {
+//         id:'9',
+//         title:sectionsContent.obj9.title,
+//         link:sectionsContent.obj9.link,
+//         content:[
+//           sectionsContent.obj9.content,
+//         ]
+//     },
+//     // {
+//     //     id:'10',
+//     //     title:sectionsContent.obj10.title,
+//     //     link:sectionsContent.obj10.link,
+//     //     content:[
+//     //       sectionsContent.obj10.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'11',
+//     //     title:sectionsContent.obj11.title,
+//     //     link:sectionsContent.obj11.link,
+//     //     content:[
+//     //       sectionsContent.obj11.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'12',
+//     //     title:sectionsContent.obj12.title,
+//     //     link:sectionsContent.obj12.link,
+//     //     content:[
+//     //       sectionsContent.obj12.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'13',
+//     //     title:sectionsContent.obj13.title,
+//     //     link:sectionsContent.obj13.link,
+//     //     content:[
+//     //       sectionsContent.obj13.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'14',
+//     //     title:sectionsContent.obj14.title,
+//     //     link:sectionsContent.obj14.link,
+//     //     content:[
+//     //       sectionsContent.obj14.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'15',
+//     //     title:sectionsContent.obj15.title,
+//     //     link:sectionsContent.obj15.link,
+//     //     content:[
+//     //       sectionsContent.obj15.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'1',
+//     //     title:sectionsContent.obj1.title,
+//     //     link:sectionsContent.obj1.link,
+//     //     content:[
+//     //       sectionsContent.obj1.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'1',
+//     //     title:sectionsContent.obj1.title,
+//     //     link:sectionsContent.obj1.link,
+//     //     content:[
+//     //       sectionsContent.obj1.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'1',
+//     //     title:sectionsContent.obj1.title,
+//     //     link:sectionsContent.obj1.link,
+//     //     content:[
+//     //       sectionsContent.obj1.content,
+//     //     ]
+//     // },
+    
+// ]
+
+//   return (
+//    <>
+//    {/* <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify({
+//         "@context": "https://schema.org",
+//         "@type": "WebPage",
+//         "name": seoData.name,
+//         "description": seoData.description,
+//         "keywords": seoData.keywords,
+//         "url": `https://www.learnmathclass.com${seoData.url}`,
+//         "dateModified": new Date().toISOString(),
+//         "inLanguage": "en-US",
+//         "mainEntity": {
+//           "@type": "Article",
+//           "name": seoData.name,
+//           "dateModified": new Date().toISOString(),
+//           "author": {
+//             "@type": "Organization",
+//             "name": "Learn Math Class"
+//           }
+//         }
+//       })
+//     }}
+//   />
+// </Head> */}
+
+// <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.faq)
+//     }}
+//   />
+// </Head>
+//    {/* <GenericNavbar/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <OperaSidebar 
+//            side='right'
+//            // topOffset='65px' 
+//            sidebarWidth='45px'
+//            panelWidth='200px'
+//            iconColor='white'
+//            panelBackgroundColor='#f2f2f2'
+//          /> 
+//    <Breadcrumb/>
+//    <br/>
+//    <br/>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Decompositions</h1>
+//    <br/>
+//    <br/>
+//    <SectionTableOfContents sections={genericSections}
+//     showSecondaryNav={true}
+//          secondaryNavMode="siblings"  // or "children"
+//          secondaryNavTitle="More in this Section"
+   
+//    />
+//    <br/>
+//    <br/>
+//    <br/>
+//     <IntroSection 
+//           id={introContent.id}
+//           title={introContent.title}
+//           content={introContent.content}
+//            backgroundColor='#f9fafb'
+//           //  "#f2f2f2"
+//           textColor="#06357a"
+//         />
+//    <br/>
+//    <br/>
+//    <Sections sections={genericSections}/>
+//    <br/>
+//    <br/>
+//    <br/>
+//    {/* <ScrollUpButton/> */}
+//    </>
+//   )
+// }
+
+
+
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -7,6 +747,7 @@ import React from 'react'
 import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
 export async function getStaticProps(){
@@ -26,179 +767,102 @@ const keyWords = [
   "decompositions linear algebra",
   "diagonal factorization"
 ]
-  // •
 
-//   \u2022 First item
-// \u2022 Second item
+  const linkStyle = 'color: inherit; text-decoration: underline;'
 
-  
-// <hr style="border-width:1px;"></hr>
+  // ---------- TABLES ----------
 
-// <hr style="color:blue;" />
+  // obj8 — comparison (decision matrix): problem → decomposition
+  const obj8Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Problem / Matrix context</th>
+      <th style="${tableHeaders.comparison}">Best decomposition</th>
+      <th style="${tableHeaders.comparison}">Why</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">General square system, one or many right-hand sides</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/decompositions/lower-upper" style="${linkStyle}">LU</a> (with pivoting if needed)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">factor once, then cheap forward/back substitution per right-hand side</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Symmetric positive definite system</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/decompositions/cholesky" style="${linkStyle}">Cholesky</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">half the cost of LU, no pivoting required, doubles as a definiteness test</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Least squares / overdetermined system</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/decompositions/qr" style="${linkStyle}">QR</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">avoids the condition-number squaring of the normal equations</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Symmetric eigenvalue problem</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/decompositions/spectral" style="${linkStyle}">Spectral</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">guarantees real eigenvalues and an orthogonal eigenvector basis</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Rectangular, rank-deficient, or unknown structure</td>
+      <td style="padding: 12px 15px; color: #34495e;"><a href="/linear-algebra/decompositions/svd" style="${linkStyle}">SVD</a></td>
+      <td style="padding: 12px 15px; color: #34495e;">universal — exists for every matrix; reveals rank, pseudoinverse, low-rank approximation, and condition number</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-        //     {processContent(sectionsContent.normal.notation)}
-        // </div>,
-
-
-//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-//     {processContent(sectionsContent.normal.parameters)}
-// </div>,
-        
-//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-//                   {processContent(sectionsContent.obj4.content)}
-//                   </div>,
-
-
-//  <div key={'dist'} style={{
-//                     textAlign: 'center',
-//                     transform: 'scale(0.98)',
-//                     transformOrigin: 'center',
-//                     marginTop:'50px',
-//                     marginLeft:'-150px'
-//                   }} dangerouslySetInnerHTML={{ 
-//                     __html:   sectionContent.distributions.svg,
-//                   }} />
-
-//     const sectionsContent={
-
-//     obj1:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-  
-//     },
-//     obj2:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-  
-//     obj3:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj4:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj5:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj6:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj7:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj8:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj9:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj10:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj11:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj12:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj13:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-//     obj14:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-
-
-//     obj15:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     }
-  
-//   }
+  // obj10 — summary capstone: 5 decompositions side by side
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Decomposition</th>
+      <th style="${tableHeaders.summary} text-align: center;">Form</th>
+      <th style="${tableHeaders.summary}">Matrix requirement</th>
+      <th style="${tableHeaders.summary}">Factor structure</th>
+      <th style="${tableHeaders.summary}">Key application</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/decompositions/lower-upper" style="${linkStyle}">LU</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">A = LU  (or PA = LU)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square; pivoting handles general invertible</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">L lower triangular, U upper triangular</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">solving linear systems, especially with multiple right-hand sides</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/decompositions/qr" style="${linkStyle}">QR</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">A = QR</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any m × n with linearly independent columns</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Q with orthonormal columns, R upper triangular</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">least squares; iterative algorithm for eigenvalues</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/decompositions/cholesky" style="${linkStyle}">Cholesky</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">A = LL<sup>T</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">symmetric positive definite</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">L lower triangular with positive diagonal</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">SPD systems at half LU cost; positive-definiteness test</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/decompositions/spectral" style="${linkStyle}">Spectral</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">A = QDQ<sup>T</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">real symmetric</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Q orthogonal (eigenvectors), D diagonal of eigenvalues</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">symmetric eigenproblems, quadratic forms, PCA</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/decompositions/svd" style="${linkStyle}">SVD</a></td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">A = UΣV<sup>T</sup></td>
+      <td style="padding: 12px 15px; color: #34495e;">any m × n — no restriction</td>
+      <td style="padding: 12px 15px; color: #34495e;">U, V orthogonal; Σ diagonal of non-negative singular values</td>
+      <td style="padding: 12px 15px; color: #34495e;">rank, pseudoinverse, low-rank approximation, condition number</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 const sectionsContent = {
   obj1: {
@@ -288,7 +952,9 @@ Geometrically, every [linear transformation](!/linear-algebra/transformations) i
 
 For a square invertible system with one or many right-hand sides, LU is the standard choice — factor once, solve cheaply. For a symmetric positive definite system, Cholesky is faster and more stable. For a [least-squares](!/linear-algebra/orthogonality/least-squares) problem or an overdetermined system, QR avoids condition-number issues. For [eigenvalues](!/linear-algebra/eigen) of a symmetric matrix, the spectral decomposition gives real eigenvalues and orthogonal eigenvectors. For rank determination, the pseudoinverse, low-rank approximation, or any problem where the matrix may be rectangular or rank-deficient, the SVD is the universal tool.
 
-More specialized decompositions exist for more specialized structures. Banded matrices have banded LU factors. Sparse matrices benefit from fill-reducing permutations. Iterative methods (Krylov subspace methods) avoid explicit factorization entirely for very large systems. But the five decompositions on this page cover the vast majority of problems encountered in a standard linear algebra course and in applied work.`,
+More specialized decompositions exist for more specialized structures. Banded matrices have banded LU factors. Sparse matrices benefit from fill-reducing permutations. Iterative methods (Krylov subspace methods) avoid explicit factorization entirely for very large systems. But the five decompositions on this page cover the vast majority of problems encountered in a standard linear algebra course and in applied work.
+
+The decision compresses into a single lookup keyed on the type of problem at hand.`,
     before: ``,
     after: ``,
     link: ``,
@@ -302,6 +968,14 @@ LU is [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-eliminatio
 The spectral decomposition is eigendecomposition restricted to symmetric matrices, where the eigenvector matrix is guaranteed to be orthogonal. The SVD generalizes the spectral decomposition to non-symmetric and non-square matrices: for a symmetric positive semi-definite matrix, the SVD and spectral decomposition coincide.
 
 Each decomposition occupies a specific niche — defined by the matrix structure it requires and the information it provides — but they are all connected through the common themes of triangularity, orthogonality, and diagonality.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  // NEW capstone section: obj10
+  obj10: {
+    title: `Summary: The Five Decompositions Side by Side`,
+    content: `The five decompositions covered above admit a single side-by-side comparison along four structural attributes: the algebraic form, the kind of matrix each one accepts, the structure of the factors it produces, and the primary application it enables. The table below collects this comparison as one reference card — useful both for orienting a new problem to the right factorization and for seeing how the family of decompositions is organized as a whole.`,
     before: ``,
     after: ``,
     link: ``,
@@ -367,7 +1041,8 @@ const schemas = {
       "Cholesky decomposition for symmetric positive definite matrices",
       "Spectral decomposition for symmetric eigenproblems",
       "SVD as the universal matrix factorization",
-      "Choosing the right decomposition for a given problem"
+      "Choosing the right decomposition for a given problem",
+      "Side-by-side comparison of all five decompositions on form, requirements, factor structure, and key applications"
     ],
     "keywords": keyWords.join(", "),
     "author": {
@@ -421,25 +1096,12 @@ const schemas = {
   }
 }
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Title | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/linear-algebra/decompositions",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
-
   return {
   props:{
     sectionsContent,
     introContent,
+    obj8Table,
+    summaryTable,
     faqQuestions,
     schemas,
     seoData: {
@@ -454,8 +1116,18 @@ const schemas = {
    }
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-export default function DecompositionsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
+export default function DecompositionsPage({
+  seoData,
+  sectionsContent,
+  introContent,
+  obj8Table,
+  summaryTable,
+  faqQuestions,
+  schemas,
+}) {
+
+  const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
   const genericSections=[
     {
         id:'1',
@@ -519,6 +1191,8 @@ export default function DecompositionsPage({seoData, sectionsContent, introConte
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'obj8-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
         ]
     },
     {
@@ -529,14 +1203,17 @@ export default function DecompositionsPage({seoData, sectionsContent, introConte
           sectionsContent.obj9.content,
         ]
     },
-    // {
-    //     id:'10',
-    //     title:sectionsContent.obj10.title,
-    //     link:sectionsContent.obj10.link,
-    //     content:[
-    //       sectionsContent.obj10.content,
-    //     ]
-    // },
+    // NEW capstone section: obj10
+    {
+        id:'10',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
+          <div key={'summary-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
     // {
     //     id:'11',
     //     title:sectionsContent.obj11.title,
@@ -601,7 +1278,7 @@ export default function DecompositionsPage({seoData, sectionsContent, introConte
     //       sectionsContent.obj1.content,
     //     ]
     // },
-    
+
 ]
 
   return (
@@ -611,22 +1288,22 @@ export default function DecompositionsPage({seoData, sectionsContent, introConte
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
+
   <meta property="og:title" content={seoData.title} />
   <meta property="og:description" content={seoData.description} />
   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Learn Math Class" />
-  
+
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content={seoData.title} />
   <meta name="twitter:description" content={seoData.description} />
-  
+
   <meta name="robots" content="index, follow" />
-  
-  <script 
+
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "WebPage",
@@ -655,36 +1332,36 @@ export default function DecompositionsPage({seoData, sectionsContent, introConte
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
+
   <meta property="og:title" content={seoData.title} />
   <meta property="og:description" content={seoData.description} />
   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Learn Math Class" />
-  
+
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content={seoData.title} />
   <meta name="twitter:description" content={seoData.description} />
-  
+
   <meta name="robots" content="index, follow" />
-  
-  <script 
+
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.learningResource)
     }}
   />
 
-  <script 
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.breadcrumb)
     }}
   />
 
-  <script 
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
+    dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.faq)
     }}
   />
@@ -694,14 +1371,14 @@ export default function DecompositionsPage({seoData, sectionsContent, introConte
    <br/>
    <br/>
    <br/>
-    <OperaSidebar 
+    <OperaSidebar
            side='right'
-           // topOffset='65px' 
+           // topOffset='65px'
            sidebarWidth='45px'
            panelWidth='200px'
            iconColor='white'
            panelBackgroundColor='#f2f2f2'
-         /> 
+         />
    <Breadcrumb/>
    <br/>
    <br/>
@@ -712,12 +1389,12 @@ export default function DecompositionsPage({seoData, sectionsContent, introConte
     showSecondaryNav={true}
          secondaryNavMode="siblings"  // or "children"
          secondaryNavTitle="More in this Section"
-   
+
    />
    <br/>
    <br/>
    <br/>
-    <IntroSection 
+    <IntroSection
           id={introContent.id}
           title={introContent.title}
           content={introContent.content}
