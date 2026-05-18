@@ -540,16 +540,18 @@ export async function getStaticProps(){
       title: 'Matrix Multiplication Visualizer and Calculator',
       description: 'Step-by-step animated matrix multiplication with full control over the calculation. Watch each dot product form element-by-element, with red highlighting on the specific pair of values currently being multiplied and yellow on the full row-and-column being combined. Step forward and back, pause, resume, or let it auto-play. Resize either matrix from 1×1 up to 10×10, generate random values within any range, or edit cells by hand — the result matrix dimensions update automatically, and incompatible dimensions are caught before computation starts. A running commentary below the grids spells out every multiplication and the accumulating sum, so the formula C[i][j] = Σ A[i][k]·B[k][j] becomes concrete arithmetic you can verify by hand.',
       href: '/visual-tools/matrix-multiplication',
-      category: 'Matrix Operations',
-      icon: '×',
+      category: 'Matrices',
+      subCategory:'Matrix Operations',
+      icon: '',
     },
     {
       at: 'end',
       title: 'Gaussian Elimination Calculator',
       description: 'Transform any matrix to row echelon form (REF) or reduced row echelon form (RREF) one row operation at a time. Choose a size from 2×3 up to 5×6, fill the cells by hand or generate random values, then pick which form to reduce to. Each stage shows the operation performed — row swap, scaling, or elimination — with the affected rows highlighted in the matrix and the row state before and after spelled out in textbook notation. Step manually with Previous and Next, or hit Play for automatic 1-second advance. RREF makes solutions immediately readable; REF stops earlier and leaves back-substitution to you.',
       href: '/visual-tools/gauss-elimination',
-      category: 'Matrix Operations',
-      icon: '⇄',
+      category: 'Matrices',
+      subCategory:'Matrix Operations',
+      icon: '',
     },
   ]
 
