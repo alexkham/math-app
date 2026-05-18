@@ -10,6 +10,7 @@ video {
     text-align: center;
     margin: 2rem 0;
     margin-bottom: -30px;
+    color:#1e40af ;
   }
   
   @media (max-width: 768px) {

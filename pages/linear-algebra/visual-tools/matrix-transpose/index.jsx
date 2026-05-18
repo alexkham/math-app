@@ -6,7 +6,7 @@
 // import Head from 'next/head'
 // import '@/pages/pages.css'
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-// import AdditionWrapper from '../../../../app/components/linear-algebra copy/matrix/AdditionWrapper'
+// import TransposeWrapper from '../../../../app/components/linear-algebra copy/matrix/TransposeWrapper'
 
 
 // export async function getStaticProps(){
@@ -214,7 +214,7 @@
 //         title: "Title | Learn Math Class",
 //         description: "Metadescription",
 //         keywords: keyWords.join(", "),
-//         url: "/linear-algebra/visual-tools/matrix-addition",
+//         url: "/url",
 //          name: "name"
 //       },
         
@@ -443,10 +443,10 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Matrix Addition</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Page Title</h1>
 //    <br/>
 //    <div style={{width:'80%',margin:'auto'}}>
-//    <AdditionWrapper/>
+//    <TransposeWrapper/>
 //    </div>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
@@ -494,200 +494,194 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import AdditionWrapper from '../../../../app/components/linear-algebra copy/matrix/AdditionWrapper'
+import TransposeWrapper from '../../../../app/components/linear-algebra copy/matrix/TransposeWrapper'
 
 
 export async function getStaticProps(){
 
   const keyWords = [
-    'matrix addition',
-    'matrix subtraction',
-    'matrix addition visualizer',
-    'add matrices step by step',
-    'matrix addition calculator',
-    'element-wise matrix operations',
-    'A + B matrix',
-    'A - B matrix',
-    'how to add matrices',
-    'matrix dimensions for addition',
+    'matrix transpose',
+    'transpose visualizer',
+    'A transpose',
+    'matrix transpose calculator',
+    'how to transpose a matrix',
+    'transpose of a matrix',
+    'rows become columns',
+    'diagonal reflection matrix',
+    'transpose step by step',
+    'symmetric matrix',
+    'matrix operations',
     'interactive matrix tool',
     'linear algebra visualizer',
-    'matrix sum',
-    'matrix difference',
-    'same shape matrices'
+    'm x n transpose',
+    'square matrix transpose'
   ]
 
   const sectionsContent = {
 
     obj0: {
       title: `Key Terms`,
-      content: `**Matrix addition** — combining two matrices of the same shape into a third matrix by adding paired entries: $c_{i,j} = a_{i,j} + b_{i,j}$.
+      content: `**Transpose** — the operation that turns an $m \\times n$ matrix $A$ into an $n \\times m$ matrix $A^T$ by swapping rows and columns: $(A^T)_{i,j} = a_{j,i}$.
 
-**Matrix subtraction** — combining two matrices of the same shape by subtracting paired entries: $c_{i,j} = a_{i,j} - b_{i,j}$.
+**Main diagonal** — the entries $a_{i,i}$ where row index equals column index. Defined fully only for square matrices.
 
-**Element-wise operation** — an operation applied independently to each entry; the result at position $(i,j)$ depends only on the inputs at position $(i,j)$.
+**Row-column swap** — the defining rule of transposition: the entry at row $i$, column $j$ of $A$ moves to row $j$, column $i$ of $A^T$.
 
-**Same-shape requirement** — both operand matrices must have identical row and column counts. A $2 \\times 3$ matrix cannot be added to a $3 \\times 2$ matrix.
+**Diagonal reflection** — the geometric view of transposition as a mirror across the main diagonal of $A$. For non-square $A$, this becomes an abstract reflection axis.
 
-**Result shape** — the output matrix $C$ inherits the shape of the operands. If $A$ and $B$ are $m \\times n$, then $C$ is $m \\times n$.
+**Symmetric matrix** — a square matrix that equals its own transpose: $A = A^T$. Equivalently, $a_{i,j} = a_{j,i}$ for all $i, j$.
 
-**Conformability** — the condition under which an operation is defined. For addition and subtraction, conformability means matching dimensions.`,
+**Involution** — an operation that undoes itself. Transpose is involutive: $(A^T)^T = A$.`,
       before: ``,
       after: ``,
       link: '#key-terms',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose an operation and a shape, then watch the result build up one cell at a time.
+      content: `Choose a shape for $A$ and a mental model for how to build $A^T$, then watch the operation animate cell by cell.
 
-• Use the **Operation** segmented control to switch between **A + B** and **A − B**
-• Set the shared shape of $A$ and $B$ with the **Dimensions** steppers — rows and columns each range from 1 to 5
-• Click play on the scene player to step through each cell of $C$, or use the speed selector to slow down or speed up the animation
+• Open the **Size** tab to set rows and columns of $A$ — each ranges from 1 to 5. The shape of $A^T$ updates automatically beside the steppers
+• Open the **Method** tab to pick one of four equivalent strategies for constructing $A^T$
+• A summary strip at the right of the tab bar always shows the current shape and active method
+• The scene player below the controls supports playback speed, step indicator, and a scrollable step log
 
-The hover **?** icon next to the dimensions label explains why $A$ and $B$ must share the same shape. Because the operation is element-wise, no other configuration is needed — the visualizer fully determines the symbolic flow from the operation and shape alone.`,
+Every method produces the identical $A^T$ — they differ only in how the operation is broken into steps and what is highlighted at each step.`,
       before: ``,
       after: ``,
       link: '#getting-started',
     },
     obj2: {
+      title: `The Four Methods`,
+      content: `The **Method** tab offers four mental models of the same operation, each useful in a different context.
+
+• **Cell-by-cell** — sweeps $A$ in row-major order and places each $a_{i,j}$ at position $[j, i]$ of $A^T$. Total steps: $m \\times n$. This is the textbook definition view
+• **Row-as-column** — moves a whole row of $A$ into the corresponding column of $A^T$ in one step. Total steps: $m$. Best for seeing rows become columns
+• **Column-as-row** — symmetric to row-as-column. Moves each column of $A$ into a row of $A^T$. Total steps: $n$
+• **Diagonal reflection** — treats transpose as a single geometric mirror across the main diagonal (or an abstract diagonal-like axis for rectangular $A$). One conceptual step
+
+The diagonal reflection card is marked **geometric** because it is the only purely visual method — no per-cell mechanics, just one reflection.`,
+      before: ``,
+      after: ``,
+      link: '#the-four-methods',
+    },
+    obj3: {
       title: `Reading the Scene Player`,
-      content: `Each scene focuses on a single cell of $C$ and shows three pieces of information at once.
+      content: `Each animated scene combines highlights, arrows, and a caption.
 
-• **Highlighted cells** — the active cell in $A$ is colored as primary, the matching cell in $B$ as secondary, and the destination cell in $C$ as accent
-• **Curved arrows** — two arrows flow from $a_{i,j}$ and $b_{i,j}$ into $c_{i,j}$, making the data flow explicit
-• **Formula caption** — the title shows the cell-level equation, for example $c_{2,3} = a_{2,3} + b_{2,3}$
-• **Step log** — a running record of completed steps appears below the matrices, so you can scroll back through what has been filled in
+• **Primary highlight** on $A$ marks the source row, column, or cell currently being moved
+• **Accent highlight** on $A^T$ marks the destination
+• **Curved arrows** connect source to destination — in fan-out methods (row-as-column, column-as-row), arrows alternate above and below for clarity
+• The **title** shows the cell-level or row/column-level transformation in math notation
+• The **formula caption** below describes the step in words
 
-By the final scene, every cell of $C$ holds its symbolic sum or difference and the matrices visualize the complete operation.`,
+In the diagonal reflection method, no arrows appear. Instead, a dashed diagonal axis is drawn through $A$ and $A^T$, with cells above and below the axis colored differently so you can see the reflection at a glance.`,
       before: ``,
       after: ``,
       link: '#reading-the-scene-player',
     },
-    obj3: {
-      title: `Switching Between Addition and Subtraction`,
-      content: `The operation toggle changes both the symbol in the equation and the contents of each cell of $C$.
-
-• Selecting **A + B** displays $c_{i,j} = a_{i,j} + b_{i,j}$ in every filled cell
-• Selecting **A − B** displays $c_{i,j} = a_{i,j} - b_{i,j}$ in every filled cell
-• The intro and outro scene captions update to use the words "addition" or "subtraction" accordingly
-• The per-cell scene titles also update their operator
-
-Toggling the operation rebuilds the full sequence of scenes, so you can compare how addition and subtraction differ purely in operator while sharing the exact same element-wise structure.`,
-      before: ``,
-      after: ``,
-      link: '#switching-operations',
-    },
     obj4: {
-      title: `Choosing Dimensions`,
-      content: `The dimension steppers control the shape shared by all three matrices. Because $A$, $B$, and $C$ are linked, changing rows or columns updates all of them at once.
+      title: `Square vs Rectangular Matrices`,
+      content: `The diagonal reflection method behaves differently for square and non-square $A$, and the visualizer makes this explicit.
 
-• Start with a small shape like $2 \\times 2$ or $2 \\times 3$ to see the per-cell flow clearly
-• Increase to $4 \\times 4$ or $5 \\times 5$ to see how the same rule scales — the number of scenes grows as $m \\times n$
-• Symbolic cell contents in $C$ shrink automatically when the matrix is larger, so $a_{i,j} + b_{i,j}$ stays readable even at $5 \\times 5$
-• A square shape ($n \\times n$) and a rectangular shape ($m \\times n$, $m \\neq n$) follow the same rule, since dimensions never need to match across rows and columns for addition
+• For a **square** matrix ($m = n$), the main diagonal is a real geometric line. Reflection across it swaps $a_{i,j}$ with $a_{j,i}$ and fixes the diagonal entries in place
+• For a **rectangular** matrix ($m \\neq n$), a strict main diagonal only extends through the $\\min(m,n) \\times \\min(m,n)$ subregion. The visualizer draws a *diagonal-like* reflection axis through that subregion and explains that the swap rule still applies to every cell, including those in the overhang
 
-There is no separate control for $C$ because its shape is forced by the operation.`,
+Try a $3 \\times 4$ matrix with the diagonal reflection method to see the abstract axis, then switch to $3 \\times 3$ to see the true diagonal.`,
       before: ``,
       after: ``,
-      link: '#choosing-dimensions',
+      link: '#square-vs-rectangular',
     },
     obj5: {
-      title: `What Matrix Addition Is`,
-      content: `Matrix addition pairs up corresponding entries of two matrices and sums them. If $A$ and $B$ are both $m \\times n$ matrices, then $A + B$ is also $m \\times n$, and its entry at row $i$, column $j$ is
+      title: `What the Transpose Is`,
+      content: `The transpose of an $m \\times n$ matrix $A$ is the $n \\times m$ matrix $A^T$ defined by the row-column swap:
 
-$$c_{i,j} = a_{i,j} + b_{i,j}$$
+$$\\left(A^T\\right)_{i,j} = a_{j,i}$$
 
-This makes matrix addition an **element-wise** operation: each entry of the result depends only on the matching entries in $A$ and $B$, not on anything else in either matrix.
+Geometrically, transposition is reflection across the main diagonal. Algebraically, it converts row vectors into column vectors and vice versa. The shape always flips: if $A$ is wide, $A^T$ is tall, and vice versa.
 
-Matrix subtraction works identically, with subtraction replacing addition. The same-shape requirement is what makes the operation well-defined — without matched dimensions, there is no notion of "corresponding entry."
+Transpose has no shape restrictions — any matrix can be transposed, unlike addition (which requires matched shapes) or multiplication (which requires compatible inner dimensions).
 
-For a comprehensive treatment of matrix operations and properties, see **matrix operations theory**.`,
+For comprehensive coverage of matrix operations theory, see **matrix operations**.`,
       before: ``,
       after: ``,
-      link: '#what-matrix-addition-is',
+      link: '#what-the-transpose-is',
     },
     obj6: {
-      title: `Key Formulas`,
-      content: `The full definition of matrix addition for $m \\times n$ matrices $A$ and $B$:
+      title: `Key Properties`,
+      content: `Transpose satisfies several algebraic identities that are central to linear algebra.
 
-$$A + B = C, \\quad c_{i,j} = a_{i,j} + b_{i,j} \\text{ for all } 1 \\leq i \\leq m, \\, 1 \\leq j \\leq n$$
+• **Involution**: $(A^T)^T = A$ — transposing twice returns the original
+• **Sum**: $(A + B)^T = A^T + B^T$ — transpose distributes over addition
+• **Scalar multiplication**: $(kA)^T = k A^T$ — scalars pass through
+• **Product (order reverses)**: $(AB)^T = B^T A^T$ — note the swap, which mirrors how shape compatibility flips
+• **Inverse and transpose commute**: $(A^{-1})^T = (A^T)^{-1}$ for invertible $A$
+• **Determinant invariance**: $\\det(A^T) = \\det(A)$ for square $A$
 
-Matrix subtraction:
-
-$$A - B = C, \\quad c_{i,j} = a_{i,j} - b_{i,j}$$
-
-Matrix addition satisfies the same algebraic properties as ordinary addition:
-
-• **Commutativity**: $A + B = B + A$
-• **Associativity**: $(A + B) + C = A + (B + C)$
-• **Identity**: $A + 0 = A$, where $0$ is the zero matrix of the same shape
-• **Inverse**: $A + (-A) = 0$
-
-Subtraction is neither commutative nor associative, just like with scalars.`,
+The product rule is the trickiest: $(AB)^T \\neq A^T B^T$ in general. The order must reverse.`,
       before: ``,
       after: ``,
-      link: '#key-formulas',
+      link: '#key-properties',
     },
     obj7: {
-      title: `Why the Same-Shape Rule Matters`,
-      content: `Matrix addition is only defined when both operands have identical dimensions. This rule is not arbitrary — it follows directly from the element-wise definition.
+      title: `Symmetric and Skew-Symmetric Matrices`,
+      content: `Two important classes of square matrices are defined entirely through the transpose.
 
-If $A$ is $2 \\times 3$ and $B$ is $2 \\times 4$, then $a_{1,4}$ does not exist while $b_{1,4}$ does. There is no entry in $A$ to pair with $b_{1,4}$, so the sum at that position is undefined. The same problem arises for any mismatch in rows or columns.
+A matrix is **symmetric** if $A = A^T$, meaning $a_{i,j} = a_{j,i}$ for all $i, j$. Symmetric matrices have all the properties one would expect from "matrices that look the same after a mirror reflection": real eigenvalues, orthogonal eigenvectors, and a guaranteed orthogonal diagonalization.
 
-This is fundamentally different from **matrix multiplication**, where the inner dimensions must match but the outer dimensions can differ. Addition demands strict equality of shape; multiplication allows asymmetry.
+A matrix is **skew-symmetric** (or antisymmetric) if $A^T = -A$, meaning $a_{i,j} = -a_{j,i}$. Skew-symmetric matrices have zeros on the main diagonal, since $a_{i,i} = -a_{i,i}$ forces $a_{i,i} = 0$.
 
-For comparison with matrix multiplication and other operations, see **matrix multiplication**.`,
+Every square matrix decomposes uniquely into a symmetric and skew-symmetric part: $A = \\frac{1}{2}(A + A^T) + \\frac{1}{2}(A - A^T)$.`,
       before: ``,
       after: ``,
-      link: '#same-shape-rule',
+      link: '#symmetric-skew-symmetric',
     },
     obj8: {
-      title: `Common Mistakes`,
-      content: `Even though matrix addition is among the simplest matrix operations, a few mistakes appear regularly.
-
-• **Trying to add matrices of different shapes** — a $2 \\times 3$ and a $3 \\times 2$ cannot be added even though both have six entries
-• **Adding a scalar to a matrix as if it were a matrix** — adding a scalar $k$ to $A$ means adding $k$ to every entry, which is technically scalar shifting, not matrix addition
-• **Confusing element-wise multiplication with matrix multiplication** — element-wise (Hadamard) product also requires matching shapes, but standard matrix multiplication does not
-• **Forgetting that subtraction is not commutative** — $A - B \\neq B - A$ in general
-• **Mixing row vectors and column vectors** — a $1 \\times n$ row vector cannot be added to an $n \\times 1$ column vector even when they have the same number of entries`,
-      before: ``,
-      after: ``,
-      link: '#common-mistakes',
-    },
-    obj9: {
       title: `Worked Example`,
-      content: `Take $A$ and $B$ as $2 \\times 3$ matrices:
+      content: `Take $A$ as a $2 \\times 3$ matrix:
 
-$$A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix}, \\quad B = \\begin{pmatrix} 7 & 8 & 9 \\\\ 0 & 1 & 2 \\end{pmatrix}$$
+$$A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix}$$
 
-Then $C = A + B$ is computed cell by cell:
+Then $A^T$ is $3 \\times 2$, with rows and columns swapped:
 
-$$C = \\begin{pmatrix} 1+7 & 2+8 & 3+9 \\\\ 4+0 & 5+1 & 6+2 \\end{pmatrix} = \\begin{pmatrix} 8 & 10 & 12 \\\\ 4 & 6 & 8 \\end{pmatrix}$$
+$$A^T = \\begin{pmatrix} 1 & 4 \\\\ 2 & 5 \\\\ 3 & 6 \\end{pmatrix}$$
 
-For $D = A - B$:
+Reading off the rule: $a_{1,1} = 1$ stays at position $(1,1)$ — it sits on the would-be diagonal. The entry $a_{1,2} = 2$ moves to position $(2,1)$ of $A^T$. The entry $a_{2,3} = 6$ moves to position $(3,2)$ of $A^T$.
 
-$$D = \\begin{pmatrix} 1-7 & 2-8 & 3-9 \\\\ 4-0 & 5-1 & 6-2 \\end{pmatrix} = \\begin{pmatrix} -6 & -6 & -6 \\\\ 4 & 6 & 4 \\end{pmatrix}$$
-
-The visualizer above mirrors this process symbolically — set the dimensions to $2 \\times 3$ and step through to see each pairing in turn.`,
+Set the visualizer to a $2 \\times 3$ shape and try each method to see this transformation animated four different ways.`,
       before: ``,
       after: ``,
       link: '#worked-example',
     },
+    obj9: {
+      title: `Common Mistakes`,
+      content: `Transpose is a simple operation, but a few mistakes recur.
+
+• **Forgetting the order reverses in a product** — $(AB)^T = B^T A^T$, not $A^T B^T$. The swap is essential and follows from shape compatibility
+• **Confusing transpose with inverse** — $A^T$ and $A^{-1}$ are different operations; they coincide only for orthogonal matrices, where $A^T = A^{-1}$
+• **Assuming the diagonal is preserved for rectangular matrices** — there is no true diagonal when $m \\neq n$, only a diagonal-like axis through the square subregion
+• **Confusing transpose with conjugate transpose** — for complex matrices, the conjugate transpose (or Hermitian transpose) $A^*$ also conjugates each entry. For real matrices the two coincide
+• **Writing $A^T$ when the matrix isn't named $A$** — the notation $M^T$, $X^T$, etc., uses whatever symbol names the matrix`,
+      before: ``,
+      after: ``,
+      link: '#common-mistakes',
+    },
     obj10: {
       title: `Related Concepts`,
-      content: `**Matrix operations** — the broader family that includes addition, subtraction, multiplication, transposition, and inversion.
+      content: `**Matrix operations** — the broader family that includes addition, subtraction, multiplication, transpose, and inversion.
 
-**Scalar multiplication** — multiplying every entry of a matrix by a number; like addition, it is element-wise and preserves shape.
+**Matrix addition** — element-wise combination of two matrices of the same shape.
 
-**Matrix multiplication** — a non-element-wise operation with different conformability rules and very different geometric meaning.
+**Matrix multiplication** — non-element-wise operation where transpose plays a role in the product rule $(AB)^T = B^T A^T$.
 
-**Hadamard product** — element-wise multiplication of two matrices of the same shape, the multiplicative analogue of matrix addition.
+**Symmetric matrices** — square matrices satisfying $A = A^T$, fundamental in spectral theory and optimization.
 
-**Vector addition** — the special case where both matrices are row or column vectors; the same element-wise rule applies.
+**Orthogonal matrices** — square matrices satisfying $A^T A = I$, equivalent to $A^T = A^{-1}$.
 
-**Zero matrix** — the additive identity, with every entry equal to zero.
+**Inverse matrix** — the operation $A^{-1}$ such that $A A^{-1} = I$; commutes with transpose.
 
-**Transpose** — reflecting a matrix across its main diagonal; useful when combining matrices of incompatible shapes through related operations.`,
+**Conjugate transpose** — the complex analogue of transpose, combining transposition with element-wise conjugation.
+
+**Determinant** — invariant under transpose: $\\det(A^T) = \\det(A)$.`,
       before: ``,
       after: ``,
       link: '#related-concepts',
@@ -702,24 +696,24 @@ The visualizer above mirrors this process symbolically — set the dimensions to
 
   const faqQuestions = {
     obj1: {
-      question: "What is matrix addition?",
-      answer: "Matrix addition combines two matrices of the same shape into a third matrix by adding their corresponding entries. If A and B are both m by n matrices, then their sum C is also m by n, and each entry c at row i, column j equals a at i,j plus b at i,j. The operation is element-wise: each cell of the result depends only on the matching pair of cells in the operands."
+      question: "What is the transpose of a matrix?",
+      answer: "The transpose of an m by n matrix A, written A superscript T, is the n by m matrix obtained by swapping rows and columns. The entry at row i, column j of A becomes the entry at row j, column i of A transpose. Geometrically, transposition is a reflection of A across its main diagonal."
     },
     obj2: {
-      question: "Can you add matrices of different sizes?",
-      answer: "No. Matrix addition is only defined when both matrices have exactly the same number of rows and the same number of columns. A 2 by 3 matrix cannot be added to a 2 by 4 matrix or a 3 by 2 matrix. Without matched dimensions, some entries in one matrix have no counterpart in the other, so the element-wise rule breaks down."
+      question: "Can any matrix be transposed?",
+      answer: "Yes. Transpose has no shape restrictions — every matrix has a transpose. Unlike matrix addition (which requires matched shapes) or matrix multiplication (which requires compatible inner dimensions), the transpose operation is always defined. The shape always flips: an m by n matrix becomes n by m after transposition."
     },
     obj3: {
-      question: "How do you subtract matrices?",
-      answer: "Matrix subtraction works the same way as matrix addition, but each pair of corresponding entries is subtracted instead of summed. If A and B are both m by n, then C = A minus B is also m by n, with c at i,j equal to a at i,j minus b at i,j. As with scalars, matrix subtraction is not commutative: A minus B is generally not equal to B minus A."
+      question: "What is a symmetric matrix?",
+      answer: "A matrix is symmetric if it equals its own transpose: A equals A superscript T. Symmetry requires the matrix to be square, and means the entry at row i, column j equals the entry at row j, column i for every pair of indices. Symmetric matrices have real eigenvalues and orthogonal eigenvectors, which makes them central in spectral theory."
     },
     obj4: {
-      question: "What is the difference between matrix addition and matrix multiplication?",
-      answer: "Matrix addition is element-wise and requires both matrices to have identical shapes. Matrix multiplication is not element-wise: it requires the number of columns in the first matrix to equal the number of rows in the second, and each entry of the result is a sum of products across an entire row and column. They have completely different conformability rules and geometric meanings."
+      question: "What is the transpose of a product of matrices?",
+      answer: "The transpose of a product reverses the order: A times B all transposed equals B transposed times A transposed. This order reversal is necessary because shape compatibility flips under transposition. The naive guess that A transpose times B transpose works is wrong in general — the order matters and must be swapped."
     },
     obj5: {
-      question: "Is matrix addition commutative?",
-      answer: "Yes. Matrix addition is commutative and associative, just like ordinary addition: A plus B equals B plus A, and grouping does not matter when adding three or more matrices. The zero matrix acts as the additive identity, and every matrix A has an additive inverse minus A such that A plus minus A equals the zero matrix."
+      question: "How does the diagonal reflection method work for rectangular matrices?",
+      answer: "For a square matrix, the main diagonal is a real geometric line and reflection across it swaps a at i,j with a at j,i while fixing the diagonal entries. For a rectangular matrix, no full main diagonal exists — only a partial one through the square subregion of side min of m and n. The visualizer draws a diagonal-like reflection axis through that subregion as an abstract anchor, and the same swap rule applies to every cell, including the overhang."
     }
   }
 
@@ -728,9 +722,9 @@ The visualizer above mirrors this process symbolically — set the dimensions to
     webApplication: {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Matrix Addition and Subtraction Visualizer",
-      "description": "Step-by-step visualizer for matrix addition and subtraction. Watch C = A plus or minus B build cell by cell with linked dimensions and animated cell flows.",
-      "url": "https://www.learnmathclass.com/linear-algebra/visual-tools/matrix-addition",
+      "name": "Matrix Transpose Visualizer",
+      "description": "Step-by-step visualizer for matrix transpose. Watch A become A transpose through four equivalent methods: cell-by-cell, row-as-column, column-as-row, and diagonal reflection.",
+      "url": "https://www.learnmathclass.com/linear-algebra/visual-tools/matrix-transpose",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -739,13 +733,13 @@ The visualizer above mirrors this process symbolically — set the dimensions to
         "priceCurrency": "USD"
       },
       "featureList": [
-        "Toggle between matrix addition and matrix subtraction with one click",
-        "Adjust shared dimensions of A and B from 1 by 1 up to 5 by 5",
-        "Step through each cell of the result matrix C in row-major order",
-        "Animated curved arrows show data flow from A and B into C",
-        "Cell-level formula captions for every step",
-        "Adjustable playback speed and step log of completed operations",
-        "Hover tooltip explaining the same-shape requirement"
+        "Four equivalent methods for building the transpose: cell-by-cell, row-as-column, column-as-row, diagonal reflection",
+        "Tabbed control panel separating size and method",
+        "Adjustable shape of A from 1 by 1 up to 5 by 5, with A transpose shape shown automatically",
+        "Animated curved arrows from source to destination cells",
+        "Diagonal-like reflection axis for non-square matrices",
+        "Cell, row, and column-level highlights synced with the active method",
+        "Adjustable playback speed and step log of completed operations"
       ],
       "author": {
         "@type": "Organization",
@@ -757,7 +751,7 @@ The visualizer above mirrors this process symbolically — set the dimensions to
       "isAccessibleForFree": true,
       "learningResourceType": "Interactive Tool",
       "educationalLevel": "High School, College",
-      "keywords": "matrix addition, matrix subtraction, matrix addition visualizer, add matrices step by step, matrix addition calculator, element-wise matrix operations, A + B matrix, A - B matrix, how to add matrices, matrix dimensions for addition, interactive matrix tool, linear algebra visualizer, matrix sum, matrix difference, same shape matrices"
+      "keywords": "matrix transpose, transpose visualizer, A transpose, matrix transpose calculator, how to transpose a matrix, transpose of a matrix, rows become columns, diagonal reflection matrix, transpose step by step, symmetric matrix, matrix operations, interactive matrix tool, linear algebra visualizer, m x n transpose, square matrix transpose"
     },
 
     breadcrumb: {
@@ -785,8 +779,8 @@ The visualizer above mirrors this process symbolically — set the dimensions to
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Matrix Addition",
-          "item": "https://www.learnmathclass.com/linear-algebra/visual-tools/matrix-addition"
+          "name": "Matrix Transpose",
+          "item": "https://www.learnmathclass.com/linear-algebra/visual-tools/matrix-transpose"
         }
       ]
     },
@@ -820,119 +814,39 @@ The visualizer above mirrors this process symbolically — set the dimensions to
       faqQuestions,
       schemas,
       seoData: {
-        title: "Matrix Addition Visualizer | Add & Subtract Matrices",
-        description: "Visualize matrix addition and subtraction cell by cell. Toggle A+B or A-B, set dimensions up to 5x5, and watch the element-wise rule build the result step by step.",
+        title: "Matrix Transpose Visualizer | A → A^T Step by Step",
+        description: "Visualize matrix transpose four ways: cell-by-cell, row-as-column, column-as-row, and diagonal reflection. Set A from 1x1 up to 5x5 and watch A^T build step by step.",
         keywords: keyWords.join(", "),
-        url: "/linear-algebra/visual-tools/matrix-addition",
-        name: "Matrix Addition and Subtraction Visualizer",
-        hubDescription: "Watch A + B = C or A - B = C build one cell at a time, with animated arrows linking each pair of operand cells to its destination in the result matrix. Toggle between addition and subtraction, adjust the shared shape of A and B from 1x1 to 5x5, and step through the element-wise rule at your own pace.",
-        category: "Matrices",
-        subCategory: "Matrix Operations"
+        url: "/linear-algebra/visual-tools/matrix-transpose",
+        name: "Matrix Transpose Visualizer",
+        hubDescription: "Watch A become A^T through four equivalent methods — cell-by-cell, row-as-column, column-as-row, or a single diagonal reflection. Set the shape of A from 1x1 up to 5x5, switch methods with a tabbed control panel, and see how each mental model breaks the same operation into a different number of steps.",
+        category: 'Matrices',
+        subCategory: 'Matrix Operations'
       }
     }
   }
 }
 
-export default function MatrixAdditionVisualizer({ seoData, sectionsContent, introContent, faqQuestions, schemas }) {
+export default function MatrixTransposeVisualizer({ seoData, sectionsContent, introContent, faqQuestions, schemas }) {
 
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [sectionsContent.obj0.content]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [sectionsContent.obj1.content]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [sectionsContent.obj2.content]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [sectionsContent.obj3.content]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [sectionsContent.obj4.content]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [sectionsContent.obj5.content]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [sectionsContent.obj6.content]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [sectionsContent.obj7.content]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [sectionsContent.obj8.content]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [sectionsContent.obj9.content]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [sectionsContent.obj10.content]
-    },
-    {
-      id: '11',
-      title: sectionsContent.obj11.title,
-      link: sectionsContent.obj11.link,
-      content: [sectionsContent.obj11.content]
-    },
-    {
-      id: '12',
-      title: sectionsContent.obj12.title,
-      link: sectionsContent.obj12.link,
-      content: [sectionsContent.obj12.content]
-    },
-    {
-      id: '13',
-      title: sectionsContent.obj13.title,
-      link: sectionsContent.obj13.link,
-      content: [sectionsContent.obj13.content]
-    },
-    {
-      id: '14',
-      title: sectionsContent.obj14.title,
-      link: sectionsContent.obj14.link,
-      content: [sectionsContent.obj14.content]
-    },
-    {
-      id: '15',
-      title: sectionsContent.obj15.title,
-      link: sectionsContent.obj15.link,
-      content: [sectionsContent.obj15.content]
-    },
+    { id: '0',  title: sectionsContent.obj0.title,  link: sectionsContent.obj0.link,  content: [sectionsContent.obj0.content] },
+    { id: '1',  title: sectionsContent.obj1.title,  link: sectionsContent.obj1.link,  content: [sectionsContent.obj1.content] },
+    { id: '2',  title: sectionsContent.obj2.title,  link: sectionsContent.obj2.link,  content: [sectionsContent.obj2.content] },
+    { id: '3',  title: sectionsContent.obj3.title,  link: sectionsContent.obj3.link,  content: [sectionsContent.obj3.content] },
+    { id: '4',  title: sectionsContent.obj4.title,  link: sectionsContent.obj4.link,  content: [sectionsContent.obj4.content] },
+    { id: '5',  title: sectionsContent.obj5.title,  link: sectionsContent.obj5.link,  content: [sectionsContent.obj5.content] },
+    { id: '6',  title: sectionsContent.obj6.title,  link: sectionsContent.obj6.link,  content: [sectionsContent.obj6.content] },
+    { id: '7',  title: sectionsContent.obj7.title,  link: sectionsContent.obj7.link,  content: [sectionsContent.obj7.content] },
+    { id: '8',  title: sectionsContent.obj8.title,  link: sectionsContent.obj8.link,  content: [sectionsContent.obj8.content] },
+    { id: '9',  title: sectionsContent.obj9.title,  link: sectionsContent.obj9.link,  content: [sectionsContent.obj9.content] },
+    { id: '10', title: sectionsContent.obj10.title, link: sectionsContent.obj10.link, content: [sectionsContent.obj10.content] },
+    { id: '11', title: sectionsContent.obj11.title, link: sectionsContent.obj11.link, content: [sectionsContent.obj11.content] },
+    { id: '12', title: sectionsContent.obj12.title, link: sectionsContent.obj12.link, content: [sectionsContent.obj12.content] },
+    { id: '13', title: sectionsContent.obj13.title, link: sectionsContent.obj13.link, content: [sectionsContent.obj13.content] },
+    { id: '14', title: sectionsContent.obj14.title, link: sectionsContent.obj14.link, content: [sectionsContent.obj14.content] },
+    { id: '15', title: sectionsContent.obj15.title, link: sectionsContent.obj15.link, content: [sectionsContent.obj15.content] },
   ]
 
   return (
@@ -987,10 +901,10 @@ export default function MatrixAdditionVisualizer({ seoData, sectionsContent, int
       <Breadcrumb />
       <br />
       <br />
-      <h1 className='title' style={{ marginTop: '0px', marginBottom: '0px' }}>Matrix Addition&Subtraction</h1>
+      <h1 className='title' style={{ marginTop: '0px', marginBottom: '0px' }}>Matrix Transpose</h1>
       <br />
       <div style={{ width: '80%', margin: 'auto' }}>
-        <AdditionWrapper />
+        <TransposeWrapper />
       </div>
       <br />
       <br />

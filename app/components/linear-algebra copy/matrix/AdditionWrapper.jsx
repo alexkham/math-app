@@ -1120,7 +1120,7 @@ export default function AdditionWrapper({
 
       {(title || subtitle) && (
         <div style={{ marginBottom: '18px' }}>
-          {title && (
+          {/* {title && (
             <h2 style={{
               fontSize: '22px',
               color: '#1e40af',
@@ -1129,7 +1129,7 @@ export default function AdditionWrapper({
             }}>
               {title}
             </h2>
-          )}
+          )} */}
           {subtitle && (
             <p style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
               {subtitle}
@@ -1194,6 +1194,8 @@ export default function AdditionWrapper({
           showStepIndicator={true}
           showStepLog={true}
           stepLogTitle="Step explanations"
+          sceneCanvasProps={{ showCaption: false }}
+          
         />
       </div>
     </div>
