@@ -4,16 +4,9 @@ import React, { useState, useMemo } from 'react';
 import { ScenePlayer } from './MatrixCore';
 
 // ===========================================================
-// HadamardWrapper
-// Visualizes A ⊙ B = C, cell by cell.
-// - Element-wise multiplication: c_{i,j} = a_{i,j} · b_{i,j}
-// - Dimensions are linked: A, B, C all share the same shape
-// - Info icon next to dimensions label explains:
-//     * the same-shape requirement
-//     * the contrast with standard matrix multiplication A × B
-// - No scenario axis, no strategy axis: the operation is
-//   element-wise by definition
-// - Outro scene names the contrast with A × B explicitly
+// HadamardWrapper v2
+// - dangerouslySetInnerHTML on <style> to bypass React's
+//   quote-escaping that triggered hydration mismatch on SSR
 // ===========================================================
 
 const mathInlineStyle = {
@@ -48,13 +41,41 @@ const HADAMARD_INFO =
   'Standard multiplication pairs rows with columns and has different ' +
   'shape requirements; the Hadamard product just pairs cells.';
 
+const HW_CSS = `
+  .hw-stepper-btn:hover:not(:disabled) { color: #1e40af; }
+  .hw-stepper-btn:disabled { color: #cbd5e1; cursor: not-allowed; }
+
+  .hw-info:hover, .hw-info:focus { background: #bfdbfe; outline: none; }
+
+  .hw-info .hw-tip {
+    visibility: hidden; opacity: 0;
+    position: absolute; top: calc(100% + 8px); left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b; color: #f1f5f9;
+    font-size: 12px; line-height: 1.5; font-weight: 400;
+    padding: 9px 13px; border-radius: 6px;
+    width: 320px; text-align: left;
+    pointer-events: none;
+    transition: opacity 0.12s ease, visibility 0.12s;
+    z-index: 10;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+  }
+  .hw-info .hw-tip::before {
+    content: ""; position: absolute;
+    bottom: 100%; left: 50%; transform: translateX(-50%);
+    border: 5px solid transparent; border-bottom-color: #1e293b;
+  }
+  .hw-info:hover .hw-tip, .hw-info:focus .hw-tip {
+    visibility: visible; opacity: 1;
+  }
+`;
+
 // -----------------------------------------------------------
 // Scene builder
 // -----------------------------------------------------------
 function buildScenes(rows, cols) {
   const maxDim = Math.max(rows, cols);
-  // C cells hold "a_{i,j}·b_{i,j}" — wider than a single
-  // symbol, so we shrink the font for larger matrices.
   const cFontSize =
     maxDim <= 3 ? '13px' : maxDim === 4 ? '11px' : '10px';
 
@@ -90,7 +111,6 @@ function buildScenes(rows, cols) {
     C: { symbol: 'c', rows, cols, label: 'C', cellOverrides: cOverrides }
   });
 
-  // \u2299 is the Hadamard product operator (circled dot).
   const baseLayout = [
     { type: 'matrix', ref: 'A' },
     { type: 'operator', symbol: '\u2299', size: 28 },
@@ -101,7 +121,6 @@ function buildScenes(rows, cols) {
 
   const scenes = [];
 
-  // Intro
   scenes.push({
     title: 'Hadamard product (element-wise)',
     formula:
@@ -113,7 +132,6 @@ function buildScenes(rows, cols) {
     highlights: {}
   });
 
-  // Per-cell scenes
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       const idx = i * cols + j;
@@ -151,7 +169,6 @@ function buildScenes(rows, cols) {
     }
   }
 
-  // Outro — names the contrast with standard matrix product
   scenes.push({
     title: 'Done',
     formula:
@@ -296,39 +313,11 @@ export default function HadamardWrapper({
       padding: '22px',
       fontFamily: 'Arial, sans-serif'
     }}>
-      <style>{`
-        .hw-stepper-btn:hover:not(:disabled) { color: #1e40af; }
-        .hw-stepper-btn:disabled { color: #cbd5e1; cursor: not-allowed; }
-
-        .hw-info:hover, .hw-info:focus { background: #bfdbfe; outline: none; }
-
-        .hw-info .hw-tip {
-          visibility: hidden; opacity: 0;
-          position: absolute; top: calc(100% + 8px); left: 50%;
-          transform: translateX(-50%);
-          background: #1e293b; color: #f1f5f9;
-          font-size: 12px; line-height: 1.5; font-weight: 400;
-          padding: 9px 13px; border-radius: 6px;
-          width: 320px; text-align: left;
-          pointer-events: none;
-          transition: opacity 0.12s ease, visibility 0.12s;
-          z-index: 10;
-          font-family: Arial, sans-serif;
-          font-style: normal;
-        }
-        .hw-info .hw-tip::before {
-          content: ''; position: absolute;
-          bottom: 100%; left: 50%; transform: translateX(-50%);
-          border: 5px solid transparent; border-bottom-color: #1e293b;
-        }
-        .hw-info:hover .hw-tip, .hw-info:focus .hw-tip {
-          visibility: visible; opacity: 1;
-        }
-      `}</style>
+      <style dangerouslySetInnerHTML={{ __html: HW_CSS }} />
 
       {(title || subtitle) && (
         <div style={{ marginBottom: '18px' }}>
-          {title && (
+          {/* {title && (
             <h2 style={{
               fontSize: '22px',
               color: '#1e40af',
@@ -337,7 +326,7 @@ export default function HadamardWrapper({
             }}>
               {title}
             </h2>
-          )}
+          )} */}
           {subtitle && (
             <p style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
               {subtitle}
@@ -346,7 +335,6 @@ export default function HadamardWrapper({
         </div>
       )}
 
-      {/* Control panel: just dimensions (linked) */}
       <div style={{
         background: 'white',
         border: '1px solid #e5e7eb',
@@ -371,7 +359,6 @@ export default function HadamardWrapper({
         </div>
       </div>
 
-      {/* Output */}
       <div style={{ marginTop: '18px' }}>
         <ScenePlayer
           scenes={scenes}
@@ -380,6 +367,7 @@ export default function HadamardWrapper({
           showStepIndicator={true}
           showStepLog={true}
           stepLogTitle="Step explanations"
+          sceneCanvasProps={{ showCaption: false }}
         />
       </div>
     </div>

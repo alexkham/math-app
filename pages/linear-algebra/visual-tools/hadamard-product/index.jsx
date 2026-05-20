@@ -6,7 +6,7 @@
 // import Head from 'next/head'
 // import '@/pages/pages.css'
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-// import AdditionWrapper from '../../../../app/components/linear-algebra copy/matrix/AdditionWrapper'
+// import HadamardWrapper from '../../../../app/components/linear-algebra copy/matrix/HadamardWrapper'
 
 
 // export async function getStaticProps(){
@@ -214,7 +214,7 @@
 //         title: "Title | Learn Math Class",
 //         description: "Metadescription",
 //         keywords: keyWords.join(", "),
-//         url: "/linear-algebra/visual-tools/matrix-addition",
+//         url: "/linear-algebra/visual-tools/hadamard-product",
 //          name: "name"
 //       },
         
@@ -226,14 +226,14 @@
 
     
 //   const genericSections=[
-//     {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//         ]
-//     },
+//     // {
+//     //     id:'0',
+//     //     title:sectionsContent.obj0.title,
+//     //     link:sectionsContent.obj0.link,
+//     //     content:[
+//     //       sectionsContent.obj0.content,
+//     //     ]
+//     // },
 //     {
 //         id:'1',
 //         title:sectionsContent.obj1.title,
@@ -443,10 +443,10 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Matrix Addition</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Hadamard Product (element-wise)</h1>
 //    <br/>
 //    <div style={{width:'80%',margin:'auto'}}>
-//    <AdditionWrapper/>
+//    <HadamardWrapper/>
 //    </div>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
@@ -455,6 +455,11 @@
 //          secondaryNavTitle="More in this Section"
    
 //    /> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
 //    <br/>
 //    <br/>
 //    <br/>
@@ -494,26 +499,26 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import AdditionWrapper from '../../../../app/components/linear-algebra copy/matrix/AdditionWrapper'
+import HadamardWrapper from '../../../../app/components/linear-algebra copy/matrix/HadamardWrapper'
 
 
 export async function getStaticProps(){
 
   const keyWords = [
-    'matrix addition',
-    'matrix subtraction',
-    'matrix addition visualizer',
-    'add matrices step by step',
-    'matrix addition calculator',
-    'element-wise matrix operations',
-    'A + B matrix',
-    'A - B matrix',
-    'how to add matrices',
-    'matrix dimensions for addition',
+    'hadamard product',
+    'element-wise matrix multiplication',
+    'A circle dot B',
+    'hadamard product calculator',
+    'element-wise product',
+    'pointwise matrix product',
+    'schur product',
+    'how to compute hadamard product',
+    'hadamard product visualizer',
+    'hadamard vs matrix multiplication',
+    'element-wise multiplication matrices',
     'interactive matrix tool',
     'linear algebra visualizer',
-    'matrix sum',
-    'matrix difference',
+    'matrix operations',
     'same shape matrices'
   ]
 
@@ -521,173 +526,167 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Matrix addition** — combining two matrices of the same shape into a third matrix by adding paired entries: $c_{i,j} = a_{i,j} + b_{i,j}$.
+      content: `**Hadamard product** — the element-wise product of two matrices of the same shape, denoted $A \\odot B$. Each entry of the result is the product of the corresponding entries: $c_{i,j} = a_{i,j} \\cdot b_{i,j}$.
 
-**Matrix subtraction** — combining two matrices of the same shape by subtracting paired entries: $c_{i,j} = a_{i,j} - b_{i,j}$.
+**Schur product** — alternative name for the Hadamard product.
 
-**Element-wise operation** — an operation applied independently to each entry; the result at position $(i,j)$ depends only on the inputs at position $(i,j)$.
+**Element-wise (pointwise) operation** — an operation applied independently to each pair of corresponding entries; the result at $(i,j)$ depends only on the inputs at $(i,j)$.
 
-**Same-shape requirement** — both operand matrices must have identical row and column counts. A $2 \\times 3$ matrix cannot be added to a $3 \\times 2$ matrix.
+**Same-shape requirement** — both operands must have identical dimensions. A $2 \\times 3$ matrix cannot be Hadamard-multiplied with a $3 \\times 2$.
 
-**Result shape** — the output matrix $C$ inherits the shape of the operands. If $A$ and $B$ are $m \\times n$, then $C$ is $m \\times n$.
+**Standard matrix product** — the row-by-column product $A \\times B$, a different operation with different shape rules and a different result.
 
-**Conformability** — the condition under which an operation is defined. For addition and subtraction, conformability means matching dimensions.`,
+**$\\odot$ symbol** — the circle-dot operator, the standard notation distinguishing the Hadamard product from $A \\times B$ or $AB$.`,
       before: ``,
       after: ``,
       link: '#key-terms',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose an operation and a shape, then watch the result build up one cell at a time.
+      content: `Set the shape, then watch $A \\odot B = C$ build one cell at a time.
 
-• Use the **Operation** segmented control to switch between **A + B** and **A − B**
-• Set the shared shape of $A$ and $B$ with the **Dimensions** steppers — rows and columns each range from 1 to 5
-• Click play on the scene player to step through each cell of $C$, or use the speed selector to slow down or speed up the animation
+• Use the **Dimensions** steppers to set the shared shape of $A$ and $B$ (1 to 5 in each direction)
+• Hover the **?** icon for a full explanation of the Hadamard product and how it differs from the standard matrix product
+• Press play on the scene player or step manually with the back and next buttons
+• Adjust speed and use the step log on the right to scroll through completed cells
 
-The hover **?** icon next to the dimensions label explains why $A$ and $B$ must share the same shape. Because the operation is element-wise, no other configuration is needed — the visualizer fully determines the symbolic flow from the operation and shape alone.`,
+There is no operation toggle — the Hadamard product is a single operation, fully determined by the shape of the operands.`,
       before: ``,
       after: ``,
       link: '#getting-started',
     },
     obj2: {
       title: `Reading the Scene Player`,
-      content: `Each scene focuses on a single cell of $C$ and shows three pieces of information at once.
+      content: `Each scene focuses on one cell of $C$ and combines highlights with arrows.
 
-• **Highlighted cells** — the active cell in $A$ is colored as primary, the matching cell in $B$ as secondary, and the destination cell in $C$ as accent
-• **Curved arrows** — two arrows flow from $a_{i,j}$ and $b_{i,j}$ into $c_{i,j}$, making the data flow explicit
-• **Formula caption** — the title shows the cell-level equation, for example $c_{2,3} = a_{2,3} + b_{2,3}$
-• **Step log** — a running record of completed steps appears below the matrices, so you can scroll back through what has been filled in
+• The active cell in $A$ is highlighted primary, the matching cell in $B$ as secondary, and the destination cell in $C$ as accent
+• Two curved arrows flow from $a_{i,j}$ and $b_{i,j}$ into $c_{i,j}$, making the data flow explicit
+• Each filled cell of $C$ shows its symbolic content $a_{i,j} \\cdot b_{i,j}$
+• The step log on the right keeps a record of every completed cell
 
-By the final scene, every cell of $C$ holds its symbolic sum or difference and the matrices visualize the complete operation.`,
+By the final scene, every cell of $C$ contains its symbolic product and the operation is complete.`,
       before: ``,
       after: ``,
       link: '#reading-the-scene-player',
     },
     obj3: {
-      title: `Switching Between Addition and Subtraction`,
-      content: `The operation toggle changes both the symbol in the equation and the contents of each cell of $C$.
-
-• Selecting **A + B** displays $c_{i,j} = a_{i,j} + b_{i,j}$ in every filled cell
-• Selecting **A − B** displays $c_{i,j} = a_{i,j} - b_{i,j}$ in every filled cell
-• The intro and outro scene captions update to use the words "addition" or "subtraction" accordingly
-• The per-cell scene titles also update their operator
-
-Toggling the operation rebuilds the full sequence of scenes, so you can compare how addition and subtraction differ purely in operator while sharing the exact same element-wise structure.`,
-      before: ``,
-      after: ``,
-      link: '#switching-operations',
-    },
-    obj4: {
       title: `Choosing Dimensions`,
-      content: `The dimension steppers control the shape shared by all three matrices. Because $A$, $B$, and $C$ are linked, changing rows or columns updates all of them at once.
+      content: `The dimension steppers control the shape shared by all three matrices.
 
-• Start with a small shape like $2 \\times 2$ or $2 \\times 3$ to see the per-cell flow clearly
-• Increase to $4 \\times 4$ or $5 \\times 5$ to see how the same rule scales — the number of scenes grows as $m \\times n$
-• Symbolic cell contents in $C$ shrink automatically when the matrix is larger, so $a_{i,j} + b_{i,j}$ stays readable even at $5 \\times 5$
-• A square shape ($n \\times n$) and a rectangular shape ($m \\times n$, $m \\neq n$) follow the same rule, since dimensions never need to match across rows and columns for addition
+• Start with a small shape like $2 \\times 2$ or $2 \\times 3$ to see each cell pairing clearly
+• Increase to $4 \\times 4$ or $5 \\times 5$ to see the operation scale — total scenes equal $m \\times n$
+• Symbolic cell contents in $C$ shrink automatically when the shape is large, so $a_{i,j} \\cdot b_{i,j}$ stays readable at $5 \\times 5$
+• Square ($n \\times n$) and rectangular ($m \\times n$, $m \\neq n$) shapes follow identical rules
 
-There is no separate control for $C$ because its shape is forced by the operation.`,
+The shape of $C$ is forced to match the shared shape of $A$ and $B$ — no separate control needed.`,
       before: ``,
       after: ``,
       link: '#choosing-dimensions',
     },
-    obj5: {
-      title: `What Matrix Addition Is`,
-      content: `Matrix addition pairs up corresponding entries of two matrices and sums them. If $A$ and $B$ are both $m \\times n$ matrices, then $A + B$ is also $m \\times n$, and its entry at row $i$, column $j$ is
+    obj4: {
+      title: `What the Hadamard Product Is`,
+      content: `The Hadamard product is the element-wise product of two matrices of the same shape. For $m \\times n$ matrices $A$ and $B$:
 
-$$c_{i,j} = a_{i,j} + b_{i,j}$$
+$$C = A \\odot B, \\quad c_{i,j} = a_{i,j} \\cdot b_{i,j}$$
 
-This makes matrix addition an **element-wise** operation: each entry of the result depends only on the matching entries in $A$ and $B$, not on anything else in either matrix.
+Each entry of $C$ depends only on the matching pair of entries in $A$ and $B$ — no row or column interaction. The result $C$ has the same $m \\times n$ shape as the operands.
 
-Matrix subtraction works identically, with subtraction replacing addition. The same-shape requirement is what makes the operation well-defined — without matched dimensions, there is no notion of "corresponding entry."
+The Hadamard product is the multiplicative analogue of matrix addition: both are element-wise, both require matched shapes, both preserve dimensions. It contrasts sharply with the standard matrix product $A \\times B$, which mixes rows with columns and changes shape.
 
-For a comprehensive treatment of matrix operations and properties, see **matrix operations theory**.`,
+For comprehensive theory, see **matrix operations**.`,
       before: ``,
       after: ``,
-      link: '#what-matrix-addition-is',
+      link: '#what-the-hadamard-product-is',
+    },
+    obj5: {
+      title: `Hadamard vs Standard Matrix Multiplication`,
+      content: `These two operations share the word "multiplication" but are fundamentally different.
+
+• **Notation**: $A \\odot B$ (Hadamard) vs $A B$ or $A \\times B$ (standard)
+• **Shape requirement**: identical shapes (Hadamard) vs inner dimensions match (standard, $m \\times k$ times $k \\times n$)
+• **Result shape**: same as operands (Hadamard) vs $m \\times n$ (standard)
+• **Computation**: pairwise product per cell (Hadamard) vs sum of row-column products (standard)
+• **Commutativity**: commutative (Hadamard) vs generally non-commutative (standard)
+
+For the standard product, see **matrix multiplication**. The two are confused often enough that the Hadamard product is sometimes spelled out as "element-wise product" to avoid ambiguity.`,
+      before: ``,
+      after: ``,
+      link: '#hadamard-vs-standard',
     },
     obj6: {
-      title: `Key Formulas`,
-      content: `The full definition of matrix addition for $m \\times n$ matrices $A$ and $B$:
+      title: `Key Properties`,
+      content: `The Hadamard product satisfies the algebraic properties one would expect from an element-wise multiplication.
 
-$$A + B = C, \\quad c_{i,j} = a_{i,j} + b_{i,j} \\text{ for all } 1 \\leq i \\leq m, \\, 1 \\leq j \\leq n$$
+• **Commutativity**: $A \\odot B = B \\odot A$
+• **Associativity**: $(A \\odot B) \\odot C = A \\odot (B \\odot C)$
+• **Distributivity over addition**: $A \\odot (B + C) = A \\odot B + A \\odot C$
+• **Identity**: the all-ones matrix $J$ acts as identity: $A \\odot J = A$
+• **Scalar pull-out**: $(kA) \\odot B = k(A \\odot B)$
+• **Transpose**: $(A \\odot B)^T = A^T \\odot B^T$
 
-Matrix subtraction:
-
-$$A - B = C, \\quad c_{i,j} = a_{i,j} - b_{i,j}$$
-
-Matrix addition satisfies the same algebraic properties as ordinary addition:
-
-• **Commutativity**: $A + B = B + A$
-• **Associativity**: $(A + B) + C = A + (B + C)$
-• **Identity**: $A + 0 = A$, where $0$ is the zero matrix of the same shape
-• **Inverse**: $A + (-A) = 0$
-
-Subtraction is neither commutative nor associative, just like with scalars.`,
+These properties mirror ordinary scalar multiplication exactly — which is unsurprising, since the operation is just scalar multiplication applied entry by entry.`,
       before: ``,
       after: ``,
-      link: '#key-formulas',
+      link: '#key-properties',
     },
     obj7: {
-      title: `Why the Same-Shape Rule Matters`,
-      content: `Matrix addition is only defined when both operands have identical dimensions. This rule is not arbitrary — it follows directly from the element-wise definition.
+      title: `Where the Hadamard Product Appears`,
+      content: `The Hadamard product shows up wherever data lives in matrix form but the operation needs to be local.
 
-If $A$ is $2 \\times 3$ and $B$ is $2 \\times 4$, then $a_{1,4}$ does not exist while $b_{1,4}$ does. There is no entry in $A$ to pair with $b_{1,4}$, so the sum at that position is undefined. The same problem arises for any mismatch in rows or columns.
+• **Machine learning**: masking, gating in LSTMs and GRUs, attention weights applied element-wise
+• **Image processing**: pointwise filters and masks applied to pixel grids
+• **Statistics**: covariance scaling, weighted moment computations
+• **Numerical linear algebra**: preconditioners and diagonal scaling can be expressed as Hadamard products
+• **Signal processing**: windowing and apodization
 
-This is fundamentally different from **matrix multiplication**, where the inner dimensions must match but the outer dimensions can differ. Addition demands strict equality of shape; multiplication allows asymmetry.
-
-For comparison with matrix multiplication and other operations, see **matrix multiplication**.`,
+The common thread: the matrix shape carries spatial or indexing structure, but the operation itself should not mix rows or columns.`,
       before: ``,
       after: ``,
-      link: '#same-shape-rule',
+      link: '#where-it-appears',
     },
     obj8: {
-      title: `Common Mistakes`,
-      content: `Even though matrix addition is among the simplest matrix operations, a few mistakes appear regularly.
-
-• **Trying to add matrices of different shapes** — a $2 \\times 3$ and a $3 \\times 2$ cannot be added even though both have six entries
-• **Adding a scalar to a matrix as if it were a matrix** — adding a scalar $k$ to $A$ means adding $k$ to every entry, which is technically scalar shifting, not matrix addition
-• **Confusing element-wise multiplication with matrix multiplication** — element-wise (Hadamard) product also requires matching shapes, but standard matrix multiplication does not
-• **Forgetting that subtraction is not commutative** — $A - B \\neq B - A$ in general
-• **Mixing row vectors and column vectors** — a $1 \\times n$ row vector cannot be added to an $n \\times 1$ column vector even when they have the same number of entries`,
-      before: ``,
-      after: ``,
-      link: '#common-mistakes',
-    },
-    obj9: {
       title: `Worked Example`,
       content: `Take $A$ and $B$ as $2 \\times 3$ matrices:
 
 $$A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix}, \\quad B = \\begin{pmatrix} 7 & 8 & 9 \\\\ 0 & 1 & 2 \\end{pmatrix}$$
 
-Then $C = A + B$ is computed cell by cell:
+Then $C = A \\odot B$ is computed cell by cell:
 
-$$C = \\begin{pmatrix} 1+7 & 2+8 & 3+9 \\\\ 4+0 & 5+1 & 6+2 \\end{pmatrix} = \\begin{pmatrix} 8 & 10 & 12 \\\\ 4 & 6 & 8 \\end{pmatrix}$$
+$$C = \\begin{pmatrix} 1 \\cdot 7 & 2 \\cdot 8 & 3 \\cdot 9 \\\\ 4 \\cdot 0 & 5 \\cdot 1 & 6 \\cdot 2 \\end{pmatrix} = \\begin{pmatrix} 7 & 16 & 27 \\\\ 0 & 5 & 12 \\end{pmatrix}$$
 
-For $D = A - B$:
-
-$$D = \\begin{pmatrix} 1-7 & 2-8 & 3-9 \\\\ 4-0 & 5-1 & 6-2 \\end{pmatrix} = \\begin{pmatrix} -6 & -6 & -6 \\\\ 4 & 6 & 4 \\end{pmatrix}$$
-
-The visualizer above mirrors this process symbolically — set the dimensions to $2 \\times 3$ and step through to see each pairing in turn.`,
+Compare with the standard product $A \\times B$: it is undefined here because $A$ is $2 \\times 3$ and $B$ is also $2 \\times 3$ — the inner dimensions ($3$ and $2$) do not match. The Hadamard product has no such restriction beyond matching shapes.`,
       before: ``,
       after: ``,
       link: '#worked-example',
     },
+    obj9: {
+      title: `Common Mistakes`,
+      content: `The Hadamard product is simple, but a few recurring mistakes appear.
+
+• **Confusing it with the standard matrix product** — by far the most common; check the notation ($\\odot$ vs juxtaposition) and the shape rules
+• **Trying to Hadamard-multiply matrices of different shapes** — there is no broadcasting rule in the strict mathematical definition
+• **Assuming the result is a different shape** — $A \\odot B$ has the same shape as both operands, unlike standard multiplication
+• **Using $\\cdot$ or $\\times$ for the Hadamard product** — these notations strongly suggest the standard product and cause confusion
+• **Forgetting the operation is commutative** — unlike standard matrix multiplication, $A \\odot B = B \\odot A$ always holds`,
+      before: ``,
+      after: ``,
+      link: '#common-mistakes',
+    },
     obj10: {
       title: `Related Concepts`,
-      content: `**Matrix operations** — the broader family that includes addition, subtraction, multiplication, transposition, and inversion.
+      content: `**Matrix multiplication** — the standard non-element-wise product $A \\times B$, with different shape rules and very different geometric meaning.
 
-**Scalar multiplication** — multiplying every entry of a matrix by a number; like addition, it is element-wise and preserves shape.
+**Matrix addition** — the additive element-wise operation; same shape requirement, same result-shape behavior as Hadamard.
 
-**Matrix multiplication** — a non-element-wise operation with different conformability rules and very different geometric meaning.
+**Kronecker product** — a different "tensor" product of two matrices producing a much larger result; sometimes confused with Hadamard but unrelated.
 
-**Hadamard product** — element-wise multiplication of two matrices of the same shape, the multiplicative analogue of matrix addition.
+**Outer product** — the vector-vector product producing a rank-1 matrix; another distinct operation.
 
-**Vector addition** — the special case where both matrices are row or column vectors; the same element-wise rule applies.
+**Inner product (Frobenius)** — the sum of all entries of $A \\odot B$ equals $\\langle A, B \\rangle_F$, the Frobenius inner product.
 
-**Zero matrix** — the additive identity, with every entry equal to zero.
+**Scalar multiplication** — element-wise multiplication by a number; the Hadamard product is its matrix-by-matrix analogue.
 
-**Transpose** — reflecting a matrix across its main diagonal; useful when combining matrices of incompatible shapes through related operations.`,
+**Element-wise functions** — applying $f$ to every entry, often combined with Hadamard products in machine learning.`,
       before: ``,
       after: ``,
       link: '#related-concepts',
@@ -702,24 +701,24 @@ The visualizer above mirrors this process symbolically — set the dimensions to
 
   const faqQuestions = {
     obj1: {
-      question: "What is matrix addition?",
-      answer: "Matrix addition combines two matrices of the same shape into a third matrix by adding their corresponding entries. If A and B are both m by n matrices, then their sum C is also m by n, and each entry c at row i, column j equals a at i,j plus b at i,j. The operation is element-wise: each cell of the result depends only on the matching pair of cells in the operands."
+      question: "What is the Hadamard product?",
+      answer: "The Hadamard product, written A circle-dot B, is the element-wise product of two matrices of the same shape. Each entry of the result equals the product of the corresponding entries in A and B. It is also called the Schur product or the element-wise matrix product."
     },
     obj2: {
-      question: "Can you add matrices of different sizes?",
-      answer: "No. Matrix addition is only defined when both matrices have exactly the same number of rows and the same number of columns. A 2 by 3 matrix cannot be added to a 2 by 4 matrix or a 3 by 2 matrix. Without matched dimensions, some entries in one matrix have no counterpart in the other, so the element-wise rule breaks down."
+      question: "How is the Hadamard product different from standard matrix multiplication?",
+      answer: "The Hadamard product multiplies matrices cell by cell, requires identical shapes, and produces a result of the same shape. Standard matrix multiplication pairs rows of A with columns of B, requires the inner dimensions to match, and produces a result whose shape depends on the outer dimensions. They are different operations with different shape rules and different results."
     },
     obj3: {
-      question: "How do you subtract matrices?",
-      answer: "Matrix subtraction works the same way as matrix addition, but each pair of corresponding entries is subtracted instead of summed. If A and B are both m by n, then C = A minus B is also m by n, with c at i,j equal to a at i,j minus b at i,j. As with scalars, matrix subtraction is not commutative: A minus B is generally not equal to B minus A."
+      question: "Can you take the Hadamard product of matrices of different shapes?",
+      answer: "No. Both matrices must have exactly the same number of rows and the same number of columns. Without matched shapes there is no pairing of corresponding entries, so the element-wise rule is not defined."
     },
     obj4: {
-      question: "What is the difference between matrix addition and matrix multiplication?",
-      answer: "Matrix addition is element-wise and requires both matrices to have identical shapes. Matrix multiplication is not element-wise: it requires the number of columns in the first matrix to equal the number of rows in the second, and each entry of the result is a sum of products across an entire row and column. They have completely different conformability rules and geometric meanings."
+      question: "Is the Hadamard product commutative?",
+      answer: "Yes. Because every entry of the result is just the scalar product of the matching entries in A and B, the Hadamard product inherits the commutativity of scalar multiplication: A circle-dot B equals B circle-dot A. It is also associative and distributes over matrix addition."
     },
     obj5: {
-      question: "Is matrix addition commutative?",
-      answer: "Yes. Matrix addition is commutative and associative, just like ordinary addition: A plus B equals B plus A, and grouping does not matter when adding three or more matrices. The zero matrix acts as the additive identity, and every matrix A has an additive inverse minus A such that A plus minus A equals the zero matrix."
+      question: "Where is the Hadamard product used?",
+      answer: "It appears in machine learning for gating and masking, in image processing for pixel-wise filters, in statistics for weighted scaling, and in numerical linear algebra for preconditioning. The common pattern is operations on matrix-shaped data where rows and columns should not be mixed."
     }
   }
 
@@ -728,9 +727,9 @@ The visualizer above mirrors this process symbolically — set the dimensions to
     webApplication: {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Matrix Addition and Subtraction Visualizer",
-      "description": "Step-by-step visualizer for matrix addition and subtraction. Watch C = A plus or minus B build cell by cell with linked dimensions and animated cell flows.",
-      "url": "https://www.learnmathclass.com/linear-algebra/visual-tools/matrix-addition",
+      "name": "Hadamard Product Visualizer",
+      "description": "Step-by-step visualizer for the Hadamard (element-wise) product of two matrices. Watch C equals A circle-dot B build one cell at a time.",
+      "url": "https://www.learnmathclass.com/linear-algebra/visual-tools/hadamard-product",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -739,13 +738,13 @@ The visualizer above mirrors this process symbolically — set the dimensions to
         "priceCurrency": "USD"
       },
       "featureList": [
-        "Toggle between matrix addition and matrix subtraction with one click",
-        "Adjust shared dimensions of A and B from 1 by 1 up to 5 by 5",
-        "Step through each cell of the result matrix C in row-major order",
-        "Animated curved arrows show data flow from A and B into C",
+        "Element-wise product of two matrices visualized cell by cell",
+        "Adjustable shared dimensions of A and B from 1 by 1 up to 5 by 5",
+        "Animated curved arrows from paired source cells into the destination cell",
         "Cell-level formula captions for every step",
-        "Adjustable playback speed and step log of completed operations",
-        "Hover tooltip explaining the same-shape requirement"
+        "Explicit contrast with standard matrix multiplication via the info tooltip and final-scene summary",
+        "Adjustable playback speed and scrollable step log",
+        "Same-shape requirement enforced and explained inline"
       ],
       "author": {
         "@type": "Organization",
@@ -757,7 +756,7 @@ The visualizer above mirrors this process symbolically — set the dimensions to
       "isAccessibleForFree": true,
       "learningResourceType": "Interactive Tool",
       "educationalLevel": "High School, College",
-      "keywords": "matrix addition, matrix subtraction, matrix addition visualizer, add matrices step by step, matrix addition calculator, element-wise matrix operations, A + B matrix, A - B matrix, how to add matrices, matrix dimensions for addition, interactive matrix tool, linear algebra visualizer, matrix sum, matrix difference, same shape matrices"
+      "keywords": "hadamard product, element-wise matrix multiplication, A circle dot B, hadamard product calculator, element-wise product, pointwise matrix product, schur product, how to compute hadamard product, hadamard product visualizer, hadamard vs matrix multiplication, element-wise multiplication matrices, interactive matrix tool, linear algebra visualizer, matrix operations, same shape matrices"
     },
 
     breadcrumb: {
@@ -785,8 +784,8 @@ The visualizer above mirrors this process symbolically — set the dimensions to
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Matrix Addition",
-          "item": "https://www.learnmathclass.com/linear-algebra/visual-tools/matrix-addition"
+          "name": "Hadamard Product",
+          "item": "https://www.learnmathclass.com/linear-algebra/visual-tools/hadamard-product"
         }
       ]
     },
@@ -820,20 +819,20 @@ The visualizer above mirrors this process symbolically — set the dimensions to
       faqQuestions,
       schemas,
       seoData: {
-        title: "Matrix Addition Visualizer | Add & Subtract Matrices",
-        description: "Visualize matrix addition and subtraction cell by cell. Toggle A+B or A-B, set dimensions up to 5x5, and watch the element-wise rule build the result step by step.",
+        title: "Hadamard Product Visualizer | Element-Wise Matrix Product",
+        description: "Visualize the Hadamard product step by step. Set dimensions up to 5x5 and watch C = A circle-dot B build cell by cell. Not to be confused with A x B.",
         keywords: keyWords.join(", "),
-        url: "/linear-algebra/visual-tools/matrix-addition",
-        name: "Matrix Addition and Subtraction Visualizer",
-        hubDescription: "Watch A + B = C or A - B = C build one cell at a time, with animated arrows linking each pair of operand cells to its destination in the result matrix. Toggle between addition and subtraction, adjust the shared shape of A and B from 1x1 to 5x5, and step through the element-wise rule at your own pace.",
-        category: "Matrices",
-        subCategory: "Matrix Operations"
+        url: "/linear-algebra/visual-tools/hadamard-product",
+        name: "Hadamard Product Visualizer",
+        hubDescription: "Watch the element-wise product A circle-dot B build one cell at a time, with animated arrows linking each pair of operand cells to its destination. Adjust the shared shape of A and B from 1x1 to 5x5 and see how the Hadamard product differs from the standard matrix product.",
+        category: 'Matrices',
+        subCategory: 'Matrix Operations'
       }
     }
   }
 }
 
-export default function MatrixAdditionVisualizer({ seoData, sectionsContent, introContent, faqQuestions, schemas }) {
+export default function HadamardProductVisualizer({ seoData, sectionsContent, introContent, faqQuestions, schemas }) {
 
 
   const genericSections = [
@@ -843,96 +842,21 @@ export default function MatrixAdditionVisualizer({ seoData, sectionsContent, int
       link: sectionsContent.obj0.link,
       content: [sectionsContent.obj0.content]
     },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [sectionsContent.obj1.content]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [sectionsContent.obj2.content]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [sectionsContent.obj3.content]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [sectionsContent.obj4.content]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [sectionsContent.obj5.content]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [sectionsContent.obj6.content]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [sectionsContent.obj7.content]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [sectionsContent.obj8.content]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [sectionsContent.obj9.content]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [sectionsContent.obj10.content]
-    },
-    // {
-    //   id: '11',
-    //   title: sectionsContent.obj11.title,
-    //   link: sectionsContent.obj11.link,
-    //   content: [sectionsContent.obj11.content]
-    // },
-    // {
-    //   id: '12',
-    //   title: sectionsContent.obj12.title,
-    //   link: sectionsContent.obj12.link,
-    //   content: [sectionsContent.obj12.content]
-    // },
-    // {
-    //   id: '13',
-    //   title: sectionsContent.obj13.title,
-    //   link: sectionsContent.obj13.link,
-    //   content: [sectionsContent.obj13.content]
-    // },
-    // {
-    //   id: '14',
-    //   title: sectionsContent.obj14.title,
-    //   link: sectionsContent.obj14.link,
-    //   content: [sectionsContent.obj14.content]
-    // },
-    // {
-    //   id: '15',
-    //   title: sectionsContent.obj15.title,
-    //   link: sectionsContent.obj15.link,
-    //   content: [sectionsContent.obj15.content]
-    // },
+    { id: '1',  title: sectionsContent.obj1.title,  link: sectionsContent.obj1.link,  content: [sectionsContent.obj1.content] },
+    { id: '2',  title: sectionsContent.obj2.title,  link: sectionsContent.obj2.link,  content: [sectionsContent.obj2.content] },
+    { id: '3',  title: sectionsContent.obj3.title,  link: sectionsContent.obj3.link,  content: [sectionsContent.obj3.content] },
+    { id: '4',  title: sectionsContent.obj4.title,  link: sectionsContent.obj4.link,  content: [sectionsContent.obj4.content] },
+    { id: '5',  title: sectionsContent.obj5.title,  link: sectionsContent.obj5.link,  content: [sectionsContent.obj5.content] },
+    { id: '6',  title: sectionsContent.obj6.title,  link: sectionsContent.obj6.link,  content: [sectionsContent.obj6.content] },
+    { id: '7',  title: sectionsContent.obj7.title,  link: sectionsContent.obj7.link,  content: [sectionsContent.obj7.content] },
+    { id: '8',  title: sectionsContent.obj8.title,  link: sectionsContent.obj8.link,  content: [sectionsContent.obj8.content] },
+    { id: '9',  title: sectionsContent.obj9.title,  link: sectionsContent.obj9.link,  content: [sectionsContent.obj9.content] },
+    { id: '10', title: sectionsContent.obj10.title, link: sectionsContent.obj10.link, content: [sectionsContent.obj10.content] },
+    // { id: '11', title: sectionsContent.obj11.title, link: sectionsContent.obj11.link, content: [sectionsContent.obj11.content] },
+    // { id: '12', title: sectionsContent.obj12.title, link: sectionsContent.obj12.link, content: [sectionsContent.obj12.content] },
+    // { id: '13', title: sectionsContent.obj13.title, link: sectionsContent.obj13.link, content: [sectionsContent.obj13.content] },
+    // { id: '14', title: sectionsContent.obj14.title, link: sectionsContent.obj14.link, content: [sectionsContent.obj14.content] },
+    // { id: '15', title: sectionsContent.obj15.title, link: sectionsContent.obj15.link, content: [sectionsContent.obj15.content] },
   ]
 
   return (
@@ -987,23 +911,23 @@ export default function MatrixAdditionVisualizer({ seoData, sectionsContent, int
       <Breadcrumb />
       <br />
       <br />
-      <h1 className='title' style={{ marginTop: '0px', marginBottom: '0px' }}>Matrix Addition&Subtraction</h1>
+      <h1 className='title' style={{ marginTop: '0px', marginBottom: '0px' }}>Hadamard Product (element-wise)</h1>
       <br />
       <div style={{ width: '80%', margin: 'auto' }}>
-        <AdditionWrapper />
+        <HadamardWrapper />
       </div>
       <br />
+      <SectionTableOfContents
+        sections={genericSections}
+        showSecondaryNav={true}
+        secondaryNavMode="siblings"
+        secondaryNavTitle="More in this Section"
+      />
       <br />
       <br />
       <br />
       <br />
       <br />
-      <SectionTableOfContents sections={genericSections}
-    showSecondaryNav={true}
-         secondaryNavMode="siblings"  // or "children"
-         secondaryNavTitle="More in this Section"
-   
-   />
       <br />
       <br />
       <br />
@@ -1017,14 +941,14 @@ export default function MatrixAdditionVisualizer({ seoData, sectionsContent, int
         /> */}
       <br />
       {/* <KeyTermsCard
-     id="0"
-     title={sectionsContent.obj0.title}
-     content={sectionsContent.obj0.content}
-     after={sectionsContent.obj0.after}
-     variant="light"
-   /> */}
+        id="0"
+        title={sectionsContent.obj0.title}
+        content={sectionsContent.obj0.content}
+        after={sectionsContent.obj0.after}
+        variant="light"
+      /> */}
       <br />
-      <Sections sections={genericSections}/>
+      <Sections sections={genericSections} />
       <br />
       <br />
       <br />

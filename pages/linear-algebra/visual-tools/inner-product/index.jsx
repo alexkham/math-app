@@ -6,7 +6,7 @@
 // import Head from 'next/head'
 // import '@/pages/pages.css'
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-// import AdditionWrapper from '../../../../app/components/linear-algebra copy/matrix/AdditionWrapper'
+// import InnerProductWrapper from '../../../../app/components/linear-algebra copy/matrix/InnerProductWrapper'
 
 
 // export async function getStaticProps(){
@@ -214,7 +214,7 @@
 //         title: "Title | Learn Math Class",
 //         description: "Metadescription",
 //         keywords: keyWords.join(", "),
-//         url: "/linear-algebra/visual-tools/matrix-addition",
+//         url: "/linear-algebra/visual-tools/inner-product",
 //          name: "name"
 //       },
         
@@ -226,14 +226,14 @@
 
     
 //   const genericSections=[
-//     {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//         ]
-//     },
+//     // {
+//     //     id:'0',
+//     //     title:sectionsContent.obj0.title,
+//     //     link:sectionsContent.obj0.link,
+//     //     content:[
+//     //       sectionsContent.obj0.content,
+//     //     ]
+//     // },
 //     {
 //         id:'1',
 //         title:sectionsContent.obj1.title,
@@ -443,10 +443,10 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Matrix Addition</h1>
+//    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Page Title</h1>
 //    <br/>
 //    <div style={{width:'80%',margin:'auto'}}>
-//    <AdditionWrapper/>
+//    <InnerProductWrapper/>
 //    </div>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
@@ -494,200 +494,196 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import AdditionWrapper from '../../../../app/components/linear-algebra copy/matrix/AdditionWrapper'
+import InnerProductWrapper from '../../../../app/components/linear-algebra copy/matrix/InnerProductWrapper'
 
 
 export async function getStaticProps(){
 
   const keyWords = [
-    'matrix addition',
-    'matrix subtraction',
-    'matrix addition visualizer',
-    'add matrices step by step',
-    'matrix addition calculator',
-    'element-wise matrix operations',
-    'A + B matrix',
-    'A - B matrix',
-    'how to add matrices',
-    'matrix dimensions for addition',
-    'interactive matrix tool',
+    'inner product',
+    'dot product',
+    'frobenius inner product',
+    'inner product calculator',
+    'vector inner product',
+    'matrix inner product',
+    'how to compute inner product',
+    'pairwise multiply and sum',
+    'inner product visualizer',
+    'inner product step by step',
+    'scalar product',
+    'inner product of vectors',
+    'frobenius product',
     'linear algebra visualizer',
-    'matrix sum',
-    'matrix difference',
-    'same shape matrices'
+    'inner product space'
   ]
 
   const sectionsContent = {
 
     obj0: {
       title: `Key Terms`,
-      content: `**Matrix addition** — combining two matrices of the same shape into a third matrix by adding paired entries: $c_{i,j} = a_{i,j} + b_{i,j}$.
+      content: `**Inner product** — an operation that takes two objects of the same shape, multiplies their entries pairwise, and sums the products into a single scalar.
 
-**Matrix subtraction** — combining two matrices of the same shape by subtracting paired entries: $c_{i,j} = a_{i,j} - b_{i,j}$.
+**Dot product** — the classical inner product of two vectors of equal length: $\\langle u, v \\rangle = \\sum_k u_k v_k$.
 
-**Element-wise operation** — an operation applied independently to each entry; the result at position $(i,j)$ depends only on the inputs at position $(i,j)$.
+**Frobenius inner product** — the inner product of two matrices of the same shape: $\\langle A, B \\rangle_F = \\sum_{i,j} a_{i,j} b_{i,j}$.
 
-**Same-shape requirement** — both operand matrices must have identical row and column counts. A $2 \\times 3$ matrix cannot be added to a $3 \\times 2$ matrix.
+**Same-shape requirement** — both operands must have identical dimensions so every entry of one has a partner in the other.
 
-**Result shape** — the output matrix $C$ inherits the shape of the operands. If $A$ and $B$ are $m \\times n$, then $C$ is $m \\times n$.
+**Scalar result** — the output of an inner product is always a single number, regardless of how large the operands are.
 
-**Conformability** — the condition under which an operation is defined. For addition and subtraction, conformability means matching dimensions.`,
+**Inner product space** — a vector space equipped with an inner product. Norms, angles, and orthogonality all derive from it.`,
       before: ``,
       after: ``,
       link: '#key-terms',
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose an operation and a shape, then watch the result build up one cell at a time.
+      content: `Pick a scenario and a shape, then watch the inner product build up term by term.
 
-• Use the **Operation** segmented control to switch between **A + B** and **A − B**
-• Set the shared shape of $A$ and $B$ with the **Dimensions** steppers — rows and columns each range from 1 to 5
-• Click play on the scene player to step through each cell of $C$, or use the speed selector to slow down or speed up the animation
+• Use the **Scenario** pills to switch between **Vectors** $\\langle u, v \\rangle$ and **Matrices** $\\langle A, B \\rangle_F$
+• In the vectors scenario, set the shared **length** of $u$ and $v$ (2 to 10)
+• In the matrices scenario, set the shared **dimensions** of $A$ and $B$ (2×2 to 5×5)
+• Hover the **?** icons for explanations of the inner product itself and the same-shape requirement
+• Use the scene player below to step, play, pause, change speed, and scroll the step log
 
-The hover **?** icon next to the dimensions label explains why $A$ and $B$ must share the same shape. Because the operation is element-wise, no other configuration is needed — the visualizer fully determines the symbolic flow from the operation and shape alone.`,
+The point of having one tool for both scenarios is to make the unity explicit: same operation, different operands.`,
       before: ``,
       after: ``,
       link: '#getting-started',
     },
     obj2: {
-      title: `Reading the Scene Player`,
-      content: `Each scene focuses on a single cell of $C$ and shows three pieces of information at once.
+      title: `The Vectors Scenario`,
+      content: `In the vectors scenario, $u$ and $v$ are shown as row vectors of length $n$, and the result $\\langle u, v \\rangle$ appears as a single boxed scalar.
 
-• **Highlighted cells** — the active cell in $A$ is colored as primary, the matching cell in $B$ as secondary, and the destination cell in $C$ as accent
-• **Curved arrows** — two arrows flow from $a_{i,j}$ and $b_{i,j}$ into $c_{i,j}$, making the data flow explicit
-• **Formula caption** — the title shows the cell-level equation, for example $c_{2,3} = a_{2,3} + b_{2,3}$
-• **Step log** — a running record of completed steps appears below the matrices, so you can scroll back through what has been filled in
+• Each scene pairs one entry $u_k$ with $v_k$, highlighting both and drawing two arrows into the result box
+• The running sum above the canvas updates term by term — counted terms turn green, the current term is blue and bold, pending terms stay grey
+• The result box shows a stacked $\\Sigma$ notation with an upper bound that advances as more terms are counted
+• Final scene highlights every entry of both vectors and the completed sum
 
-By the final scene, every cell of $C$ holds its symbolic sum or difference and the matrices visualize the complete operation.`,
+This is the textbook dot product, broken into its $n$ pairwise products.`,
       before: ``,
       after: ``,
-      link: '#reading-the-scene-player',
+      link: '#vectors-scenario',
     },
     obj3: {
-      title: `Switching Between Addition and Subtraction`,
-      content: `The operation toggle changes both the symbol in the equation and the contents of each cell of $C$.
+      title: `The Matrices Scenario`,
+      content: `In the matrices scenario, $A$ and $B$ are shown as $m \\times n$ grids, and the result $\\langle A, B \\rangle_F$ appears as a single boxed scalar with the Frobenius subscript $F$.
 
-• Selecting **A + B** displays $c_{i,j} = a_{i,j} + b_{i,j}$ in every filled cell
-• Selecting **A − B** displays $c_{i,j} = a_{i,j} - b_{i,j}$ in every filled cell
-• The intro and outro scene captions update to use the words "addition" or "subtraction" accordingly
-• The per-cell scene titles also update their operator
+• Each scene pairs one entry $a_{i,j}$ with $b_{i,j}$ in row-major order, highlighting both and drawing arrows into the result box
+• The running sum above the canvas grows by one $a_{i,j} b_{i,j}$ term per step, color-coded the same way as in the vectors scenario
+• Total steps equal $m \\times n$ — every cell of both matrices contributes exactly one product
+• Final scene highlights every cell of both matrices in green and presents the completed sum
 
-Toggling the operation rebuilds the full sequence of scenes, so you can compare how addition and subtraction differ purely in operator while sharing the exact same element-wise structure.`,
+The Frobenius inner product is exactly the dot product of the matrices "flattened" into long vectors of length $m \\times n$.`,
       before: ``,
       after: ``,
-      link: '#switching-operations',
+      link: '#matrices-scenario',
     },
     obj4: {
-      title: `Choosing Dimensions`,
-      content: `The dimension steppers control the shape shared by all three matrices. Because $A$, $B$, and $C$ are linked, changing rows or columns updates all of them at once.
+      title: `Reading the Running Sum`,
+      content: `The expression above the canvas is the inner product written out as a sum of individual product terms, with per-term color coding.
 
-• Start with a small shape like $2 \\times 2$ or $2 \\times 3$ to see the per-cell flow clearly
-• Increase to $4 \\times 4$ or $5 \\times 5$ to see how the same rule scales — the number of scenes grows as $m \\times n$
-• Symbolic cell contents in $C$ shrink automatically when the matrix is larger, so $a_{i,j} + b_{i,j}$ stays readable even at $5 \\times 5$
-• A square shape ($n \\times n$) and a rectangular shape ($m \\times n$, $m \\neq n$) follow the same rule, since dimensions never need to match across rows and columns for addition
+• **Grey** terms are pending — not yet computed
+• **Blue, bold** marks the term being computed in the current scene
+• **Green** terms have already been counted
+• On the final scene, every term is green and the sum is complete
 
-There is no separate control for $C$ because its shape is forced by the operation.`,
+This running sum is the bridge between the visual pairing (highlights and arrows on the canvas) and the algebraic formula. By the end of the animation, you have seen every term in the sum named, paired, and counted.`,
       before: ``,
       after: ``,
-      link: '#choosing-dimensions',
+      link: '#reading-the-running-sum',
     },
     obj5: {
-      title: `What Matrix Addition Is`,
-      content: `Matrix addition pairs up corresponding entries of two matrices and sums them. If $A$ and $B$ are both $m \\times n$ matrices, then $A + B$ is also $m \\times n$, and its entry at row $i$, column $j$ is
+      title: `What an Inner Product Is`,
+      content: `An inner product is a rule that takes two objects of the same shape and returns a scalar by pairing entries, multiplying, and summing.
 
-$$c_{i,j} = a_{i,j} + b_{i,j}$$
+For vectors of length $n$:
+$$\\langle u, v \\rangle = \\sum_{k=1}^{n} u_k v_k$$
 
-This makes matrix addition an **element-wise** operation: each entry of the result depends only on the matching entries in $A$ and $B$, not on anything else in either matrix.
+For $m \\times n$ matrices (the Frobenius inner product):
+$$\\langle A, B \\rangle_F = \\sum_{i=1}^{m} \\sum_{j=1}^{n} a_{i,j} b_{i,j}$$
 
-Matrix subtraction works identically, with subtraction replacing addition. The same-shape requirement is what makes the operation well-defined — without matched dimensions, there is no notion of "corresponding entry."
+Both formulas implement the same idea: walk through every pair of corresponding entries, multiply them, sum the products. The Frobenius version is the dot product applied to the matrices read as $mn$-long vectors.
 
-For a comprehensive treatment of matrix operations and properties, see **matrix operations theory**.`,
+For comprehensive theory, see **inner product spaces**.`,
       before: ``,
       after: ``,
-      link: '#what-matrix-addition-is',
+      link: '#what-an-inner-product-is',
     },
     obj6: {
-      title: `Key Formulas`,
-      content: `The full definition of matrix addition for $m \\times n$ matrices $A$ and $B$:
+      title: `Key Properties`,
+      content: `Every inner product, whether on vectors or matrices, satisfies four defining properties.
 
-$$A + B = C, \\quad c_{i,j} = a_{i,j} + b_{i,j} \\text{ for all } 1 \\leq i \\leq m, \\, 1 \\leq j \\leq n$$
+• **Symmetry**: $\\langle u, v \\rangle = \\langle v, u \\rangle$
+• **Linearity in the first argument**: $\\langle \\alpha u + \\beta w, v \\rangle = \\alpha \\langle u, v \\rangle + \\beta \\langle w, v \\rangle$
+• **Positive definiteness**: $\\langle u, u \\rangle \\geq 0$, with equality only when $u = 0$
+• **Scalar output**: the result is always a single number, never a vector or matrix
 
-Matrix subtraction:
-
-$$A - B = C, \\quad c_{i,j} = a_{i,j} - b_{i,j}$$
-
-Matrix addition satisfies the same algebraic properties as ordinary addition:
-
-• **Commutativity**: $A + B = B + A$
-• **Associativity**: $(A + B) + C = A + (B + C)$
-• **Identity**: $A + 0 = A$, where $0$ is the zero matrix of the same shape
-• **Inverse**: $A + (-A) = 0$
-
-Subtraction is neither commutative nor associative, just like with scalars.`,
+From these four properties everything else follows — norms ($\\|u\\| = \\sqrt{\\langle u, u \\rangle}$), angles ($\\cos\\theta = \\langle u, v \\rangle / (\\|u\\| \\|v\\|)$), orthogonality ($\\langle u, v \\rangle = 0$), and projections.`,
       before: ``,
       after: ``,
-      link: '#key-formulas',
+      link: '#key-properties',
     },
     obj7: {
-      title: `Why the Same-Shape Rule Matters`,
-      content: `Matrix addition is only defined when both operands have identical dimensions. This rule is not arbitrary — it follows directly from the element-wise definition.
+      title: `Why It Matters`,
+      content: `The inner product is the single most useful operation in linear algebra because so many other concepts are defined through it.
 
-If $A$ is $2 \\times 3$ and $B$ is $2 \\times 4$, then $a_{1,4}$ does not exist while $b_{1,4}$ does. There is no entry in $A$ to pair with $b_{1,4}$, so the sum at that position is undefined. The same problem arises for any mismatch in rows or columns.
+• **Length** of a vector: $\\|u\\| = \\sqrt{\\langle u, u \\rangle}$
+• **Angle** between vectors: $\\cos\\theta = \\langle u, v \\rangle / (\\|u\\| \\|v\\|)$
+• **Orthogonality**: $u \\perp v$ exactly when $\\langle u, v \\rangle = 0$
+• **Projection** of $u$ onto $v$: $\\text{proj}_v u = \\frac{\\langle u, v \\rangle}{\\langle v, v \\rangle} v$
+• **Gram-Schmidt orthogonalization**, **least squares**, and **Fourier expansions** all run on inner products
 
-This is fundamentally different from **matrix multiplication**, where the inner dimensions must match but the outer dimensions can differ. Addition demands strict equality of shape; multiplication allows asymmetry.
-
-For comparison with matrix multiplication and other operations, see **matrix multiplication**.`,
+The Frobenius inner product extends all of this to matrices — matrix norms, matrix angles, orthogonal matrix decompositions, and the trace formula $\\langle A, B \\rangle_F = \\text{tr}(A^T B)$.`,
       before: ``,
       after: ``,
-      link: '#same-shape-rule',
+      link: '#why-it-matters',
     },
     obj8: {
-      title: `Common Mistakes`,
-      content: `Even though matrix addition is among the simplest matrix operations, a few mistakes appear regularly.
-
-• **Trying to add matrices of different shapes** — a $2 \\times 3$ and a $3 \\times 2$ cannot be added even though both have six entries
-• **Adding a scalar to a matrix as if it were a matrix** — adding a scalar $k$ to $A$ means adding $k$ to every entry, which is technically scalar shifting, not matrix addition
-• **Confusing element-wise multiplication with matrix multiplication** — element-wise (Hadamard) product also requires matching shapes, but standard matrix multiplication does not
-• **Forgetting that subtraction is not commutative** — $A - B \\neq B - A$ in general
-• **Mixing row vectors and column vectors** — a $1 \\times n$ row vector cannot be added to an $n \\times 1$ column vector even when they have the same number of entries`,
-      before: ``,
-      after: ``,
-      link: '#common-mistakes',
-    },
-    obj9: {
       title: `Worked Example`,
-      content: `Take $A$ and $B$ as $2 \\times 3$ matrices:
+      content: `**Vectors**: take $u = (1, 2, 3)$ and $v = (4, -1, 2)$.
 
-$$A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix}, \\quad B = \\begin{pmatrix} 7 & 8 & 9 \\\\ 0 & 1 & 2 \\end{pmatrix}$$
+$$\\langle u, v \\rangle = (1)(4) + (2)(-1) + (3)(2) = 4 - 2 + 6 = 8$$
 
-Then $C = A + B$ is computed cell by cell:
+**Matrices**: take $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$ and $B = \\begin{pmatrix} 0 & 1 \\\\ -1 & 2 \\end{pmatrix}$.
 
-$$C = \\begin{pmatrix} 1+7 & 2+8 & 3+9 \\\\ 4+0 & 5+1 & 6+2 \\end{pmatrix} = \\begin{pmatrix} 8 & 10 & 12 \\\\ 4 & 6 & 8 \\end{pmatrix}$$
+$$\\langle A, B \\rangle_F = (1)(0) + (2)(1) + (3)(-1) + (4)(2) = 0 + 2 - 3 + 8 = 7$$
 
-For $D = A - B$:
-
-$$D = \\begin{pmatrix} 1-7 & 2-8 & 3-9 \\\\ 4-0 & 5-1 & 6-2 \\end{pmatrix} = \\begin{pmatrix} -6 & -6 & -6 \\\\ 4 & 6 & 4 \\end{pmatrix}$$
-
-The visualizer above mirrors this process symbolically — set the dimensions to $2 \\times 3$ and step through to see each pairing in turn.`,
+In both cases, the calculation is "pair, multiply, sum" — no row-column gymnastics, no transposition. Set the visualizer to length 3 for the vector case or to $2 \\times 2$ for the matrix case and step through to see the same arithmetic animated.`,
       before: ``,
       after: ``,
       link: '#worked-example',
     },
+    obj9: {
+      title: `Common Mistakes`,
+      content: `A handful of recurring mistakes appear when learning inner products.
+
+• **Confusing inner product with matrix multiplication** — the inner product returns a scalar; matrix multiplication returns a matrix. $u^T v$ is a scalar (essentially the inner product), while $u v^T$ is a rank-1 outer product matrix
+• **Forgetting the same-shape requirement** — you cannot take the inner product of a 3-vector and a 4-vector, or of a $2 \\times 3$ and a $3 \\times 2$ matrix
+• **Conjugation in the complex case** — for complex vectors, the inner product is $\\langle u, v \\rangle = \\sum \\overline{u_k} v_k$ with conjugation on one argument. The visualizer covers the real case
+• **Treating Frobenius as something exotic** — it is just the dot product of the matrices read as long vectors
+• **Mixing up "inner" and "outer"** — outer product takes two vectors and returns a matrix; inner product takes two vectors and returns a scalar`,
+      before: ``,
+      after: ``,
+      link: '#common-mistakes',
+    },
     obj10: {
       title: `Related Concepts`,
-      content: `**Matrix operations** — the broader family that includes addition, subtraction, multiplication, transposition, and inversion.
+      content: `**Dot product** — the inner product on real vectors; the vectors scenario of this tool.
 
-**Scalar multiplication** — multiplying every entry of a matrix by a number; like addition, it is element-wise and preserves shape.
+**Frobenius inner product** — the matrix version; the matrices scenario of this tool.
 
-**Matrix multiplication** — a non-element-wise operation with different conformability rules and very different geometric meaning.
+**Outer product** — the dual operation that takes two vectors and returns a matrix.
 
-**Hadamard product** — element-wise multiplication of two matrices of the same shape, the multiplicative analogue of matrix addition.
+**Norm** — the length of a vector or matrix, defined through the inner product as $\\|x\\| = \\sqrt{\\langle x, x \\rangle}$.
 
-**Vector addition** — the special case where both matrices are row or column vectors; the same element-wise rule applies.
+**Orthogonality** — the condition $\\langle u, v \\rangle = 0$, central to Gram-Schmidt and orthogonal decompositions.
 
-**Zero matrix** — the additive identity, with every entry equal to zero.
+**Projection** — the component of one vector along another, computed with the inner product.
 
-**Transpose** — reflecting a matrix across its main diagonal; useful when combining matrices of incompatible shapes through related operations.`,
+**Cauchy-Schwarz inequality** — $|\\langle u, v \\rangle| \\leq \\|u\\| \\|v\\|$, a universal bound on inner products.
+
+**Matrix multiplication** — uses inner products of rows and columns as its building block.`,
       before: ``,
       after: ``,
       link: '#related-concepts',
@@ -702,24 +698,24 @@ The visualizer above mirrors this process symbolically — set the dimensions to
 
   const faqQuestions = {
     obj1: {
-      question: "What is matrix addition?",
-      answer: "Matrix addition combines two matrices of the same shape into a third matrix by adding their corresponding entries. If A and B are both m by n matrices, then their sum C is also m by n, and each entry c at row i, column j equals a at i,j plus b at i,j. The operation is element-wise: each cell of the result depends only on the matching pair of cells in the operands."
+      question: "What is an inner product?",
+      answer: "An inner product is an operation that takes two objects of the same shape, multiplies their entries pairwise, and sums the products into a single scalar. The classical example is the dot product of two vectors of equal length. The Frobenius inner product extends the same idea to matrices of equal shape."
     },
     obj2: {
-      question: "Can you add matrices of different sizes?",
-      answer: "No. Matrix addition is only defined when both matrices have exactly the same number of rows and the same number of columns. A 2 by 3 matrix cannot be added to a 2 by 4 matrix or a 3 by 2 matrix. Without matched dimensions, some entries in one matrix have no counterpart in the other, so the element-wise rule breaks down."
+      question: "What is the difference between the dot product and the Frobenius inner product?",
+      answer: "They are the same operation applied to different shapes. The dot product takes two vectors of length n and returns the sum of u sub k times v sub k. The Frobenius inner product takes two matrices of the same shape and returns the sum of a at i,j times b at i,j over every entry. The Frobenius product is the dot product of the matrices read as long vectors of length m times n."
     },
     obj3: {
-      question: "How do you subtract matrices?",
-      answer: "Matrix subtraction works the same way as matrix addition, but each pair of corresponding entries is subtracted instead of summed. If A and B are both m by n, then C = A minus B is also m by n, with c at i,j equal to a at i,j minus b at i,j. As with scalars, matrix subtraction is not commutative: A minus B is generally not equal to B minus A."
+      question: "Can you take the inner product of two objects of different shapes?",
+      answer: "No. The inner product requires both operands to have the same shape, because each entry of one must be paired with an entry at the same position in the other. A 3-vector cannot be inner-multiplied with a 4-vector, and a 2 by 3 matrix cannot be inner-multiplied with a 3 by 2 matrix."
     },
     obj4: {
-      question: "What is the difference between matrix addition and matrix multiplication?",
-      answer: "Matrix addition is element-wise and requires both matrices to have identical shapes. Matrix multiplication is not element-wise: it requires the number of columns in the first matrix to equal the number of rows in the second, and each entry of the result is a sum of products across an entire row and column. They have completely different conformability rules and geometric meanings."
+      question: "How is the inner product related to length and angle?",
+      answer: "The length of a vector u is the square root of u inner-product with itself. The angle between two vectors u and v satisfies cosine theta equals u dot v divided by the product of their lengths. So once you have an inner product, you automatically have notions of length, angle, orthogonality, and projection. This is why inner product spaces are the foundation of metric geometry in linear algebra."
     },
     obj5: {
-      question: "Is matrix addition commutative?",
-      answer: "Yes. Matrix addition is commutative and associative, just like ordinary addition: A plus B equals B plus A, and grouping does not matter when adding three or more matrices. The zero matrix acts as the additive identity, and every matrix A has an additive inverse minus A such that A plus minus A equals the zero matrix."
+      question: "Is the inner product the same as matrix multiplication?",
+      answer: "No. The inner product returns a scalar, while matrix multiplication returns a matrix. For two column vectors u and v of the same length, the scalar u transposed times v equals the inner product, but the matrix u times v transposed is the rank-1 outer product, a completely different object. Matrix multiplication uses inner products of rows and columns as building blocks, but the operations are not the same."
     }
   }
 
@@ -728,9 +724,9 @@ The visualizer above mirrors this process symbolically — set the dimensions to
     webApplication: {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Matrix Addition and Subtraction Visualizer",
-      "description": "Step-by-step visualizer for matrix addition and subtraction. Watch C = A plus or minus B build cell by cell with linked dimensions and animated cell flows.",
-      "url": "https://www.learnmathclass.com/linear-algebra/visual-tools/matrix-addition",
+      "name": "Inner Product Visualizer",
+      "description": "Step-by-step visualizer for the inner product of vectors and matrices. Watch the dot product and the Frobenius product build one pair-and-multiply at a time.",
+      "url": "https://www.learnmathclass.com/linear-algebra/visual-tools/inner-product",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -739,13 +735,13 @@ The visualizer above mirrors this process symbolically — set the dimensions to
         "priceCurrency": "USD"
       },
       "featureList": [
-        "Toggle between matrix addition and matrix subtraction with one click",
-        "Adjust shared dimensions of A and B from 1 by 1 up to 5 by 5",
-        "Step through each cell of the result matrix C in row-major order",
-        "Animated curved arrows show data flow from A and B into C",
-        "Cell-level formula captions for every step",
-        "Adjustable playback speed and step log of completed operations",
-        "Hover tooltip explaining the same-shape requirement"
+        "Two scenarios in one tool: vector dot product and Frobenius matrix inner product",
+        "Adjustable vector length from 2 to 10",
+        "Adjustable matrix dimensions from 2 by 2 up to 5 by 5",
+        "Running expanded sum with per-term color coding above the canvas",
+        "Animated curved arrows from paired entries into the scalar result box",
+        "Stacked sigma notation in the result box with advancing upper bound",
+        "Adjustable playback speed and scrollable step log"
       ],
       "author": {
         "@type": "Organization",
@@ -757,7 +753,7 @@ The visualizer above mirrors this process symbolically — set the dimensions to
       "isAccessibleForFree": true,
       "learningResourceType": "Interactive Tool",
       "educationalLevel": "High School, College",
-      "keywords": "matrix addition, matrix subtraction, matrix addition visualizer, add matrices step by step, matrix addition calculator, element-wise matrix operations, A + B matrix, A - B matrix, how to add matrices, matrix dimensions for addition, interactive matrix tool, linear algebra visualizer, matrix sum, matrix difference, same shape matrices"
+      "keywords": "inner product, dot product, frobenius inner product, inner product calculator, vector inner product, matrix inner product, how to compute inner product, pairwise multiply and sum, inner product visualizer, inner product step by step, scalar product, inner product of vectors, frobenius product, linear algebra visualizer, inner product space"
     },
 
     breadcrumb: {
@@ -785,8 +781,8 @@ The visualizer above mirrors this process symbolically — set the dimensions to
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Matrix Addition",
-          "item": "https://www.learnmathclass.com/linear-algebra/visual-tools/matrix-addition"
+          "name": "Inner Product",
+          "item": "https://www.learnmathclass.com/linear-algebra/visual-tools/inner-product"
         }
       ]
     },
@@ -820,119 +816,46 @@ The visualizer above mirrors this process symbolically — set the dimensions to
       faqQuestions,
       schemas,
       seoData: {
-        title: "Matrix Addition Visualizer | Add & Subtract Matrices",
-        description: "Visualize matrix addition and subtraction cell by cell. Toggle A+B or A-B, set dimensions up to 5x5, and watch the element-wise rule build the result step by step.",
+        title: "Inner Product Visualizer | Dot Product & Frobenius",
+        description: "Visualize the inner product step by step for vectors and matrices. Switch between dot product and Frobenius product, set the shape, and watch the scalar result build.",
         keywords: keyWords.join(", "),
-        url: "/linear-algebra/visual-tools/matrix-addition",
-        name: "Matrix Addition and Subtraction Visualizer",
-        hubDescription: "Watch A + B = C or A - B = C build one cell at a time, with animated arrows linking each pair of operand cells to its destination in the result matrix. Toggle between addition and subtraction, adjust the shared shape of A and B from 1x1 to 5x5, and step through the element-wise rule at your own pace.",
-        category: "Matrices",
-        subCategory: "Matrix Operations"
+        url: "/linear-algebra/visual-tools/inner-product",
+        name: "Inner Product Visualizer",
+        hubDescription: "Pair, multiply, sum — watch the inner product build into a single scalar one term at a time. Switch between the classical vector dot product and the Frobenius matrix inner product, set the shape of the operands, and follow a running expanded sum with per-term color coding.",
+        category: 'Vectors',
+        subCategory: 'Products'
       }
     }
   }
 }
 
-export default function MatrixAdditionVisualizer({ seoData, sectionsContent, introContent, faqQuestions, schemas }) {
+export default function InnerProductVisualizer({ seoData, sectionsContent, introContent, faqQuestions, schemas }) {
 
 
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [sectionsContent.obj0.content]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [sectionsContent.obj1.content]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [sectionsContent.obj2.content]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [sectionsContent.obj3.content]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [sectionsContent.obj4.content]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [sectionsContent.obj5.content]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [sectionsContent.obj6.content]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [sectionsContent.obj7.content]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [sectionsContent.obj8.content]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [sectionsContent.obj9.content]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [sectionsContent.obj10.content]
-    },
     // {
-    //   id: '11',
-    //   title: sectionsContent.obj11.title,
-    //   link: sectionsContent.obj11.link,
-    //   content: [sectionsContent.obj11.content]
+    //     id:'0',
+    //     title:sectionsContent.obj0.title,
+    //     link:sectionsContent.obj0.link,
+    //     content:[
+    //       sectionsContent.obj0.content,
+    //     ]
     // },
-    // {
-    //   id: '12',
-    //   title: sectionsContent.obj12.title,
-    //   link: sectionsContent.obj12.link,
-    //   content: [sectionsContent.obj12.content]
-    // },
-    // {
-    //   id: '13',
-    //   title: sectionsContent.obj13.title,
-    //   link: sectionsContent.obj13.link,
-    //   content: [sectionsContent.obj13.content]
-    // },
-    // {
-    //   id: '14',
-    //   title: sectionsContent.obj14.title,
-    //   link: sectionsContent.obj14.link,
-    //   content: [sectionsContent.obj14.content]
-    // },
-    // {
-    //   id: '15',
-    //   title: sectionsContent.obj15.title,
-    //   link: sectionsContent.obj15.link,
-    //   content: [sectionsContent.obj15.content]
-    // },
+    { id: '1',  title: sectionsContent.obj1.title,  link: sectionsContent.obj1.link,  content: [sectionsContent.obj1.content] },
+    { id: '2',  title: sectionsContent.obj2.title,  link: sectionsContent.obj2.link,  content: [sectionsContent.obj2.content] },
+    { id: '3',  title: sectionsContent.obj3.title,  link: sectionsContent.obj3.link,  content: [sectionsContent.obj3.content] },
+    { id: '4',  title: sectionsContent.obj4.title,  link: sectionsContent.obj4.link,  content: [sectionsContent.obj4.content] },
+    { id: '5',  title: sectionsContent.obj5.title,  link: sectionsContent.obj5.link,  content: [sectionsContent.obj5.content] },
+    { id: '6',  title: sectionsContent.obj6.title,  link: sectionsContent.obj6.link,  content: [sectionsContent.obj6.content] },
+    { id: '7',  title: sectionsContent.obj7.title,  link: sectionsContent.obj7.link,  content: [sectionsContent.obj7.content] },
+    { id: '8',  title: sectionsContent.obj8.title,  link: sectionsContent.obj8.link,  content: [sectionsContent.obj8.content] },
+    { id: '9',  title: sectionsContent.obj9.title,  link: sectionsContent.obj9.link,  content: [sectionsContent.obj9.content] },
+    { id: '10', title: sectionsContent.obj10.title, link: sectionsContent.obj10.link, content: [sectionsContent.obj10.content] },
+    // { id: '11', title: sectionsContent.obj11.title, link: sectionsContent.obj11.link, content: [sectionsContent.obj11.content] },
+    // { id: '12', title: sectionsContent.obj12.title, link: sectionsContent.obj12.link, content: [sectionsContent.obj12.content] },
+    // { id: '13', title: sectionsContent.obj13.title, link: sectionsContent.obj13.link, content: [sectionsContent.obj13.content] },
+    // { id: '14', title: sectionsContent.obj14.title, link: sectionsContent.obj14.link, content: [sectionsContent.obj14.content] },
+    // { id: '15', title: sectionsContent.obj15.title, link: sectionsContent.obj15.link, content: [sectionsContent.obj15.content] },
   ]
 
   return (
@@ -987,16 +910,11 @@ export default function MatrixAdditionVisualizer({ seoData, sectionsContent, int
       <Breadcrumb />
       <br />
       <br />
-      <h1 className='title' style={{ marginTop: '0px', marginBottom: '0px' }}>Matrix Addition&Subtraction</h1>
+      <h1 className='title' style={{ marginTop: '-50px', marginBottom: '0px' }}>Inner Product</h1>
       <br />
       <div style={{ width: '80%', margin: 'auto' }}>
-        <AdditionWrapper />
+        <InnerProductWrapper />
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       <br />
       <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
