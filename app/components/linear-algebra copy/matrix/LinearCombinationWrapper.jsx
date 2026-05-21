@@ -1,27 +1,24 @@
+
 // 'use client';
 
 // import React, { useState, useMemo } from 'react';
 // import { ScenePlayer } from './MatrixCore';
 
 // // ===========================================================
-// // LinearCombinationWrapper
-// // Visualizes C = αA + βB, cell by cell, in three phases.
+// // LinearCombinationWrapper v2
 // //
-// // Phase 1 — scale A:    each cell a_{i,j} → α·a_{i,j}
-// // Phase 2 — scale B:    each cell b_{i,j} → β·b_{i,j}
-// // Phase 3 — add:        C cell ← α·a_{i,j} + β·b_{i,j}
+// // Diff vs v1: cell sizing tuned for the three-matrix layout
+// // (A, B, C side by side). Horizontal canvas demand scales
+// // with 3·cols·cellPx + scalar slots + operators, so we drop
+// // cell size more aggressively when cols is large.
 // //
-// // Layout never changes across the animation:
-// //     α · A + β · B = C
-// // Only cellOverrides advance, so the structural identity of
-// // the operands stays put.
+// // Pairs with MatrixCore-v3 (or later), which adds
+// // flex-wrap on the canvas as a fallback for narrow viewports.
 // //
-// // Design choices (pinned in chat):
-// //   - Two terms, not k-term (extension is mechanical)
-// //   - Absorb the scaling: A's cells display α·a_{i,j} after
-// //     phase 1 rather than rendering a separate αA matrix
-// //   - α, β are symbolic — no user input, no numeric values
-// //   - Dimensions linked across A, B, C (single row/col pair)
+// // Operation: C = αA + βB, cell by cell, in three phases.
+// //   Phase 1 — scale A:  a_{i,j} → α·a_{i,j}
+// //   Phase 2 — scale B:  b_{i,j} → β·b_{i,j}
+// //   Phase 3 — add:      c_{i,j} = α·a_{i,j} + β·b_{i,j}
 // // ===========================================================
 
 // const mathInlineStyle = {
@@ -57,14 +54,45 @@
 //   'in those three phases.';
 
 // // -----------------------------------------------------------
-// // Cell display helpers.
-// //   scaledACell(i,j) — displays "α·a_{i,j}"
-// //   scaledBCell(i,j) — displays "β·b_{i,j}"
-// //   filledCCell(i,j) — displays "α·a_{i,j} + β·b_{i,j}"
+// // Sizing — accounts for the three-matrix layout.
+// // Returns { cellPx, abFontSize, cFontSize }.
 // //
-// // Font size is shrunken for the C cells because the
-// // content is wider than a single symbol; A and B are
-// // only modestly wider after scaling.
+// // Reasoning:
+// //   - Total horizontal demand ≈ 3·cols·cellPx + operators
+// //   - C cells are widest (contain α·a_{i,j} + β·b_{i,j})
+// //   - We pick cellPx so that even at cols=5 the row fits a
+// //     ~900px canvas without wrapping; if it doesn't (narrower
+// //     viewport), MatrixCore-v3 wraps the row.
+// // -----------------------------------------------------------
+// function sizingFor(rows, cols) {
+//   const maxDim = Math.max(rows, cols);
+//   let cellPx;
+//   let abFontSize;
+//   let cFontSize;
+
+//   if (cols <= 2) {
+//     cellPx = 68;
+//     abFontSize = '14px';
+//     cFontSize = maxDim <= 2 ? '12px' : '11px';
+//   } else if (cols === 3) {
+//     cellPx = 62;
+//     abFontSize = '13px';
+//     cFontSize = '11px';
+//   } else if (cols === 4) {
+//     cellPx = 52;
+//     abFontSize = '11px';
+//     cFontSize = '10px';
+//   } else {
+//     // cols === 5
+//     cellPx = 46;
+//     abFontSize = '10px';
+//     cFontSize = '9px';
+//   }
+//   return { cellPx, abFontSize, cFontSize };
+// }
+
+// // -----------------------------------------------------------
+// // Cell display helpers.
 // // -----------------------------------------------------------
 // function scaledACell(i, j, abFontSize) {
 //   return {
@@ -111,16 +139,7 @@
 
 // // -----------------------------------------------------------
 // // Build overrides for A, B, C at a given (phase, sweepIdx).
-// //
-// // phase:
-// //   0 — intro (A, B native; C empty)
-// //   1 — sweeping phase 1 (A scaling): A cells with idx <= sweepIdx
-// //       are scaled; B native; C empty
-// //   2 — sweeping phase 2 (B scaling): all of A scaled; B cells with
-// //       idx <= sweepIdx scaled; C empty
-// //   3 — sweeping phase 3 (filling C): A, B fully scaled; C cells with
-// //       idx <= sweepIdx filled
-// //   4 — outro (A, B fully scaled; C fully filled)
+// // phase: 0 intro, 1 scaling A, 2 scaling B, 3 filling C, 4 outro.
 // // -----------------------------------------------------------
 // function buildOverrides(rows, cols, phase, sweepIdx, abFontSize, cFontSize) {
 //   const aOver = {};
@@ -131,15 +150,12 @@
 //     for (let j = 0; j < cols; j++) {
 //       const idx = i * cols + j;
 
-//       // A
 //       if (phase >= 2 || (phase === 1 && idx <= sweepIdx)) {
 //         aOver[`${i},${j}`] = scaledACell(i, j, abFontSize);
 //       }
-//       // B
 //       if (phase >= 3 || (phase === 2 && idx <= sweepIdx)) {
 //         bOver[`${i},${j}`] = scaledBCell(i, j, abFontSize);
 //       }
-//       // C
 //       if (phase >= 4 || (phase === 3 && idx <= sweepIdx)) {
 //         cOver[`${i},${j}`] = filledCCell(i, j, cFontSize);
 //       } else {
@@ -154,17 +170,7 @@
 // // Scene builder
 // // -----------------------------------------------------------
 // function buildScenes(rows, cols) {
-//   const maxDim = Math.max(rows, cols);
-//   // αA cells: "α·a_{i,j}" — wider than a single symbol.
-//   const abFontSize =
-//     maxDim <= 3 ? '14px' : maxDim === 4 ? '12px' : '11px';
-//   // C cells: "α·a_{i,j} + β·b_{i,j}" — substantially wider.
-//   const cFontSize =
-//     maxDim <= 3 ? '11px' : maxDim === 4 ? '10px' : '9px';
-
-//   // Slightly oversized cells so the longer C content fits.
-//   const cellPx =
-//     maxDim <= 3 ? 68 : maxDim === 4 ? 58 : 52;
+//   const { cellPx, abFontSize, cFontSize } = sizingFor(rows, cols);
 
 //   const baseMatrices = (aOver, bOver, cOver) => ({
 //     A: {
@@ -184,10 +190,6 @@
 //     }
 //   });
 
-//   // Layout never changes: α · A + β · B = C
-//   // α and β are rendered as Operator slots so they sit in the
-//   // structural position of "a scalar coefficient", not as
-//   // matrix entries.
 //   const baseLayout = [
 //     { type: 'operator', symbol: '\u03B1', size: 28, color: '#1e40af' },
 //     { type: 'operator', symbol: '\u00B7', size: 22 },
@@ -202,7 +204,7 @@
 
 //   const scenes = [];
 
-//   // ----- Scene 0: intro -----
+//   // Scene 0: intro
 //   {
 //     const { aOver, bOver, cOver } = buildOverrides(rows, cols, 0, -1, abFontSize, cFontSize);
 //     scenes.push({
@@ -220,7 +222,7 @@
 //     });
 //   }
 
-//   // ----- Phase 1: scale A, cell by cell -----
+//   // Phase 1: scale A
 //   for (let i = 0; i < rows; i++) {
 //     for (let j = 0; j < cols; j++) {
 //       const idx = i * cols + j;
@@ -242,7 +244,7 @@
 //     }
 //   }
 
-//   // ----- Phase 2: scale B, cell by cell -----
+//   // Phase 2: scale B
 //   for (let i = 0; i < rows; i++) {
 //     for (let j = 0; j < cols; j++) {
 //       const idx = i * cols + j;
@@ -264,7 +266,7 @@
 //     }
 //   }
 
-//   // ----- Phase 3: fill C, cell by cell -----
+//   // Phase 3: fill C
 //   for (let i = 0; i < rows; i++) {
 //     for (let j = 0; j < cols; j++) {
 //       const idx = i * cols + j;
@@ -306,7 +308,7 @@
 //     }
 //   }
 
-//   // ----- Outro -----
+//   // Outro
 //   {
 //     const { aOver, bOver, cOver } = buildOverrides(rows, cols, 4, -1, abFontSize, cFontSize);
 //     scenes.push({
@@ -484,7 +486,7 @@
 
 //       {(title || subtitle) && (
 //         <div style={{ marginBottom: '18px' }}>
-//           {title && (
+//           {/* {title && (
 //             <h2 style={{
 //               fontSize: '22px',
 //               color: '#1e40af',
@@ -493,7 +495,7 @@
 //             }}>
 //               {title}
 //             </h2>
-//           )}
+//           )} */}
 //           {subtitle && (
 //             <p style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
 //               {subtitle}
@@ -502,7 +504,6 @@
 //         </div>
 //       )}
 
-//       {/* Control panel: linked dimensions only */}
 //       <div style={{
 //         background: 'white',
 //         border: '1px solid #e5e7eb',
@@ -527,7 +528,6 @@
 //         </div>
 //       </div>
 
-//       {/* Output */}
 //       <div style={{ marginTop: '18px' }}>
 //         <ScenePlayer
 //           scenes={scenes}
@@ -536,11 +536,13 @@
 //           showStepIndicator={true}
 //           showStepLog={true}
 //           stepLogTitle="Step explanations"
+//            sceneCanvasProps={{ showCaption: false }}
 //         />
 //       </div>
 //     </div>
 //   );
 // }
+
 
 
 'use client';
@@ -549,20 +551,9 @@ import React, { useState, useMemo } from 'react';
 import { ScenePlayer } from './MatrixCore';
 
 // ===========================================================
-// LinearCombinationWrapper v2
-//
-// Diff vs v1: cell sizing tuned for the three-matrix layout
-// (A, B, C side by side). Horizontal canvas demand scales
-// with 3·cols·cellPx + scalar slots + operators, so we drop
-// cell size more aggressively when cols is large.
-//
-// Pairs with MatrixCore-v3 (or later), which adds
-// flex-wrap on the canvas as a fallback for narrow viewports.
-//
-// Operation: C = αA + βB, cell by cell, in three phases.
-//   Phase 1 — scale A:  a_{i,j} → α·a_{i,j}
-//   Phase 2 — scale B:  b_{i,j} → β·b_{i,j}
-//   Phase 3 — add:      c_{i,j} = α·a_{i,j} + β·b_{i,j}
+// LinearCombinationWrapper v3
+// - dangerouslySetInnerHTML on <style> to bypass React's
+//   quote-escaping that triggered hydration mismatch on SSR
 // ===========================================================
 
 const mathInlineStyle = {
@@ -597,16 +588,38 @@ const LINCOMB_INFO =
   'addition (add the scaled matrices). The animation walks the operation ' +
   'in those three phases.';
 
+const LC_CSS = `
+  .lc-stepper-btn:hover:not(:disabled) { color: #1e40af; }
+  .lc-stepper-btn:disabled { color: #cbd5e1; cursor: not-allowed; }
+
+  .lc-info:hover, .lc-info:focus { background: #bfdbfe; outline: none; }
+
+  .lc-info .lc-tip {
+    visibility: hidden; opacity: 0;
+    position: absolute; top: calc(100% + 8px); left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b; color: #f1f5f9;
+    font-size: 12px; line-height: 1.5; font-weight: 400;
+    padding: 9px 13px; border-radius: 6px;
+    width: 320px; text-align: left;
+    pointer-events: none;
+    transition: opacity 0.12s ease, visibility 0.12s;
+    z-index: 10;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+  }
+  .lc-info .lc-tip::before {
+    content: ""; position: absolute;
+    bottom: 100%; left: 50%; transform: translateX(-50%);
+    border: 5px solid transparent; border-bottom-color: #1e293b;
+  }
+  .lc-info:hover .lc-tip, .lc-info:focus .lc-tip {
+    visibility: visible; opacity: 1;
+  }
+`;
+
 // -----------------------------------------------------------
-// Sizing — accounts for the three-matrix layout.
-// Returns { cellPx, abFontSize, cFontSize }.
-//
-// Reasoning:
-//   - Total horizontal demand ≈ 3·cols·cellPx + operators
-//   - C cells are widest (contain α·a_{i,j} + β·b_{i,j})
-//   - We pick cellPx so that even at cols=5 the row fits a
-//     ~900px canvas without wrapping; if it doesn't (narrower
-//     viewport), MatrixCore-v3 wraps the row.
+// Sizing
 // -----------------------------------------------------------
 function sizingFor(rows, cols) {
   const maxDim = Math.max(rows, cols);
@@ -627,7 +640,6 @@ function sizingFor(rows, cols) {
     abFontSize = '11px';
     cFontSize = '10px';
   } else {
-    // cols === 5
     cellPx = 46;
     abFontSize = '10px';
     cFontSize = '9px';
@@ -636,7 +648,7 @@ function sizingFor(rows, cols) {
 }
 
 // -----------------------------------------------------------
-// Cell display helpers.
+// Cell display helpers
 // -----------------------------------------------------------
 function scaledACell(i, j, abFontSize) {
   return {
@@ -681,10 +693,6 @@ function filledCCell(i, j, cFontSize) {
   };
 }
 
-// -----------------------------------------------------------
-// Build overrides for A, B, C at a given (phase, sweepIdx).
-// phase: 0 intro, 1 scaling A, 2 scaling B, 3 filling C, 4 outro.
-// -----------------------------------------------------------
 function buildOverrides(rows, cols, phase, sweepIdx, abFontSize, cFontSize) {
   const aOver = {};
   const bOver = {};
@@ -748,7 +756,7 @@ function buildScenes(rows, cols) {
 
   const scenes = [];
 
-  // Scene 0: intro
+  // Intro
   {
     const { aOver, bOver, cOver } = buildOverrides(rows, cols, 0, -1, abFontSize, cFontSize);
     scenes.push({
@@ -998,39 +1006,11 @@ export default function LinearCombinationWrapper({
       padding: '22px',
       fontFamily: 'Arial, sans-serif'
     }}>
-      <style>{`
-        .lc-stepper-btn:hover:not(:disabled) { color: #1e40af; }
-        .lc-stepper-btn:disabled { color: #cbd5e1; cursor: not-allowed; }
-
-        .lc-info:hover, .lc-info:focus { background: #bfdbfe; outline: none; }
-
-        .lc-info .lc-tip {
-          visibility: hidden; opacity: 0;
-          position: absolute; top: calc(100% + 8px); left: 50%;
-          transform: translateX(-50%);
-          background: #1e293b; color: #f1f5f9;
-          font-size: 12px; line-height: 1.5; font-weight: 400;
-          padding: 9px 13px; border-radius: 6px;
-          width: 320px; text-align: left;
-          pointer-events: none;
-          transition: opacity 0.12s ease, visibility 0.12s;
-          z-index: 10;
-          font-family: Arial, sans-serif;
-          font-style: normal;
-        }
-        .lc-info .lc-tip::before {
-          content: ''; position: absolute;
-          bottom: 100%; left: 50%; transform: translateX(-50%);
-          border: 5px solid transparent; border-bottom-color: #1e293b;
-        }
-        .lc-info:hover .lc-tip, .lc-info:focus .lc-tip {
-          visibility: visible; opacity: 1;
-        }
-      `}</style>
+      <style dangerouslySetInnerHTML={{ __html: LC_CSS }} />
 
       {(title || subtitle) && (
         <div style={{ marginBottom: '18px' }}>
-          {title && (
+          {/* {title && (
             <h2 style={{
               fontSize: '22px',
               color: '#1e40af',
@@ -1039,7 +1019,7 @@ export default function LinearCombinationWrapper({
             }}>
               {title}
             </h2>
-          )}
+          )} */}
           {subtitle && (
             <p style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
               {subtitle}
@@ -1080,6 +1060,7 @@ export default function LinearCombinationWrapper({
           showStepIndicator={true}
           showStepLog={true}
           stepLogTitle="Step explanations"
+          sceneCanvasProps={{ showCaption: false }}
         />
       </div>
     </div>
