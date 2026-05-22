@@ -1,5 +1,563 @@
 
 
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// import Sections from '@/app/components/page-components/section/Sections'
+// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// import React from 'react'
+// import '../../../pages/pages.css'
+// import Head from 'next/head'
+// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+
+// export async function getStaticProps(){
+
+//   const keyWords = [
+//     'sample space',
+//     'sample space probability',
+//     'sample space definition',
+//     'outcomes in probability',
+//     'possible outcomes',
+//     'finite sample space',
+//     'infinite sample space',
+//     'continuous sample space',
+//     'discrete sample space',
+//     'Omega notation',
+//     'types of sample spaces',
+//     'events as subsets',
+//     'sample space and events',
+//     'listing outcomes probability'
+//   ]
+
+//   const faqQuestions = {
+//     obj1: {
+//       question: "What is a sample space in probability?",
+//       answer: "The sample space is the complete collection of all possible outcomes a scenario can produce. Every outcome that can happen belongs to it, and anything that cannot happen is not included. Each outcome represents one full, specific result of the situation. For example, rolling a die has sample space {1, 2, 3, 4, 5, 6}."
+//     },
+//     obj2: {
+//       question: "What are the different types of sample spaces?",
+//       answer: "Sample spaces fall into three categories: finite sample spaces with a limited number of outcomes (like rolling a die: {1,2,3,4,5,6}), countably infinite sample spaces where outcomes can be listed in sequence (like {1,2,3,...}), and uncountable or continuous sample spaces where outcomes fill an interval (like [0,∞) for measuring time)."
+//     },
+//     obj3: {
+//       question: "How do events relate to the sample space?",
+//       answer: "Events are built directly from the sample space as subsets that collect the outcomes we care about. If the sample space describes everything that can happen, an event selects specific outcomes where something particular happens. For example, with die roll sample space {1,2,3,4,5,6}, the event 'roll an even number' is the subset {2,4,6}."
+//     },
+//     obj4: {
+//       question: "What properties must a sample space have?",
+//       answer: "A sample space must: include every outcome that can occur in the scenario, exclude outcomes that cannot occur, have mutually exclusive outcomes (only one outcome happens per trial), be collectively exhaustive (something from the set must occur), and allow events to be formed as subsets. These properties ensure probabilities behave consistently."
+//     },
+//     obj5: {
+//       question: "How do you represent a sample space?",
+//       answer: "Sample spaces can be represented using: explicit lists for small finite spaces {1,2,3,4,5,6}, ordered pairs for multi-step experiments like {(H,H), (H,T), (T,H), (T,T)}, intervals for continuous outcomes like [0,1], set-builder notation {x : 0 ≤ x ≤ 10}, or Cartesian products for combining spaces. The representation depends on the scenario and size of the outcome set."
+//     }
+//   }
+
+//   const schemas = {
+//     learningResource: {
+//       "@context": "https://schema.org",
+//       "@type": "LearningResource",
+//       "name": "Sample Space",
+//       "description": "Learn sample space in probability: definition, notation, types (finite, infinite, continuous), listing outcomes, properties, relationship to events, and practical examples.",
+//       "url": "https://www.learnmathclass.com/probability/sample-space",
+//       "inLanguage": "en-US",
+//       "learningResourceType": "Explanation",
+//       "educationalLevel": "High School, College",
+//       "educationalUse": "Learning",
+//       "audience": {
+//         "@type": "EducationalAudience",
+//         "educationalRole": "student"
+//       },
+//       "about": {
+//         "@type": "Thing",
+//         "name": "Sample Space"
+//       },
+//       "teaches": [
+//         "Definition: complete collection of all possible outcomes",
+//         "Notation: Ω for sample space, ω for single outcome, set notation",
+//         "Types: finite, countably infinite, uncountable/continuous",
+//         "Listing and representing outcomes: explicit lists, pairs, intervals",
+//         "Properties: exhaustive, mutually exclusive, complete",
+//         "Relationship to events: events as subsets of sample space",
+//         "Sample space in practice: dice, coins, measurements, time",
+//         "Common mistakes: incomplete outcomes, wrong order, mixed types",
+//         "Connections: events, probability, random variables, independence"
+//       ],
+//       "keywords": keyWords.join(", "),
+//       "author": {
+//         "@type": "Organization",
+//         "name": "Learn Math Class"
+//       },
+//       "publisher": {
+//         "@type": "Organization",
+//         "name": "Learn Math Class"
+//       },
+//       "datePublished": "2024-01-15",
+//       "dateModified": new Date().toISOString()
+//     },
+
+//     breadcrumb: {
+//       "@context": "https://schema.org",
+//       "@type": "BreadcrumbList",
+//       "itemListElement": [
+//         {
+//           "@type": "ListItem",
+//           "position": 1,
+//           "name": "Home",
+//           "item": "https://www.learnmathclass.com"
+//         },
+//         {
+//           "@type": "ListItem",
+//           "position": 2,
+//           "name": "Probability",
+//           "item": "https://www.learnmathclass.com/probability"
+//         },
+//         {
+//           "@type": "ListItem",
+//           "position": 3,
+//           "name": "Sample Space",
+//           "item": "https://www.learnmathclass.com/probability/sample-space"
+//         }
+//       ]
+//     },
+
+//     faq: {
+//       "@context": "https://schema.org",
+//       "@type": "FAQPage",
+//       "mainEntity": Object.keys(faqQuestions).map(key => ({
+//         "@type": "Question",
+//         "name": faqQuestions[key].question,
+//         "acceptedAnswer": {
+//           "@type": "Answer",
+//           "text": faqQuestions[key].answer
+//         }
+//       }))
+//     }
+//   }
+
+//   const sectionsContent={
+//     obj0: {
+//   title: `Key Terms`,
+//   content: `
+// - [Random Experiment](!/probability/definitions#random_experiment) — a process whose outcome is uncertain
+// - [Sample Space](!/probability/definitions#sample_space) — the set $\\Omega$ of all possible outcomes
+// - [Elementary Event](!/probability/definitions#elementary_event) — an event containing exactly one outcome
+// - [Event](!/probability/definitions#event) — a subset $A \\subseteq \\Omega$ of the sample space
+// - [Probability Measure](!/probability/definitions#probability_measure) — the function $P$ assigning values in $[0,1]$ to events
+// - [Equally Likely Events](!/probability/definitions#equally_likely_events) — events each assigned equal probability`,
+//   before: ``,
+//   after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+//   link: '',
+// },
+
+//     definition:{
+//       title:`Definition of Sample Space`,
+//       content:`
+// The sample space is the complete collection of all possible outcomes a scenario can produce. Every outcome that can happen belongs to it, and anything that cannot happen is not included.
+
+// Each outcome represents one full, specific result of the situation. Together, these outcomes form the background on which events are defined and probabilities are assigned.
+
+// **Examples**:
+// Rolling a die → {1, 2, 3, 4, 5, 6}
+//  Tossing two coins → {HH, HT, TH, TT}
+//  Measuring a persons height → all real numbers in an interval (for example, [0, 3] meters)
+// `,
+//       before:``,
+//       after:``,
+  
+  
+//     },
+//     notation:{
+//       title:`Useful Notation
+// `,
+//       content:`
+//       Before working with sample spaces in probability, a few standard symbols are used to describe outcomes and the sets they belong to:
+
+// $\(\\Omega\)$ — the sample space (the set of all possible outcomes)
+//  $\(\\omega\)$ — a single outcome (an element of $\(\\Omega\))$
+//  \{\ \} — explicit listing of outcomes for finite sample spaces
+//  Set-builder notation, e.g. $\(\\{x : x > 0\\}\)$
+//  Intervals for continuous outcomes, e.g. $\([0,\\infty)\)$
+//  Cartesian products for multi-step scenarios, e.g. $\(\\Omega = A \\times B\)$
+//  Events as subsets of the sample space: $\(A \\subseteq \\Omega\)$
+
+// These symbols will appear throughout the page whenever we describe outcomes or refer to parts of the sample space.
+
+// `,
+//       before:``,
+//       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
+  
+//     },
+  
+//     types:{
+  
+//       title:`Types of Sample Spaces`,
+//       content:`
+// Different scenarios produce different kinds of sample spaces. They generally fall into a few common categories:
+
+// - **Finite sample spaces:** a limited number of outcomes, e.g. rolling a die  
+//   $\(\\Omega = \{1,2,3,4,5,6\}\)$
+
+// - **Countably infinite sample spaces:** outcomes can be listed in sequence, e.g. number of trials until first success  
+//   $\(\\Omega = \{1,2,3,\\ldots\}\)$
+
+// - **Uncountable or continuous sample spaces:** outcomes fill an interval or region, e.g. measuring time or height  
+//   $\(\\Omega = [0,\\infty)\)$
+
+// These categories help determine how probabilities are assigned and what tools are used to work with the sample space.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     outcomes:{
+//       title:`Listing and Representing Outcomes`,
+//       content:`
+// Once the sample space is identified, it can be written in different ways depending on the scenario and the size of the outcome set:
+
+// - **Explicit lists** for small finite spaces, e.g.  
+//   $\(\\Omega = \{1,2,3,4,5,6\}\)$
+
+// - **Ordered pairs** for multi-step experiments, e.g. two coin tosses  
+//   $\(\\Omega = \{(H,H), (H,T), (T,H), (T,T)\}\)$
+
+// - **Sequences or tuples** when more than two components are involved, e.g. three dice  
+//   $\(\\Omega = \{(x_1, x_2, x_3) : x_i \in \{1,\ldots,6\}\}\)$
+
+// - **Intervals** when outcomes vary continuously, e.g. a measurement  
+//   $\(\\Omega = [0,1]\)$
+
+// - **Set-builder notation** for describing outcomes by a rule, e.g.  
+//   $\(\\Omega = \{x : 0 \le x \le 10\}\)$
+
+// - **Cartesian products** for combining simpler spaces, e.g.  
+//   $\(\\Omega = A \\times B\)$
+
+// These representations make it easier to see how outcomes are organized and how events will be formed from them.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     properties:{
+//       title:`Properties of a Sample Space`,
+//       content:`
+// A sample space is not just any set—it must satisfy a few basic requirements so that probability can be defined consistently:
+
+// • It must include **every** outcome that can occur in the scenario.
+// • It must exclude outcomes that **cannot** occur.
+// • Its outcomes must be **mutually exclusive** (only one outcome happens in a single trial).
+// • Its outcomes must be **collectively exhaustive** (something from the set must occur).
+// • Events are formed by selecting subsets of the sample space: \(A \subseteq \Omega\).
+
+// These properties ensure that probabilities assigned to events make sense and behave consistently.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     events:{
+//       title:`Relationship to Events`,
+//       content:`
+// Events are built directly from the sample space. An event is simply a subset of \(\Omega\) that collects the outcomes we care about in a particular question.
+
+// • If $\(\\Omega\)$ describes everything that can happen, an event selects the outcomes where something specific happens.
+// • For a die roll with $\(\\Omega = \{1,2,3,4,5,6\}\)$, the event "roll an even number" is \(\{2,4,6\}\).
+// • For two coin tosses with $\(\\Omega = \{(H,H),(H,T),(T,H),(T,T)\}\)$, the event "at least one head" is \(\{(H,H),(H,T),(T,H)\}\).
+// • For a continuous outcome like height, an event might be an interval such as \([1.6, 1.8]\).
+
+// Viewing events as subsets of $\(\\Omega\)$ makes probability assignments consistent and ties every event back to the underlying structure of the scenario.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     practice:{
+//       title:`Sample Space in Practice`,
+//       content:`
+// Different situations lead to different forms of sample spaces. A few common examples show how the idea appears in everyday probability questions:
+
+// • A die roll: $\(\\Omega = \{1,2,3,4,5,6\}\)$
+// • A deck draw: $\(\\Omega =\)$ all 52 individual cards
+// • Two coin tosses: $\(\Omega = \{(H,H), (H,T), (T,H), (T,T)\}\)$
+// • Measuring a person's height: $\(\\Omega = [0,3]\)$
+// • Time until an event occurs: $\(\\Omega = [0,\infty)\)$
+// • Choosing two items without replacement: outcomes are ordered pairs of objects
+
+// These examples show how the structure of $\(\\Omega\)$ changes with the scenario, but the idea remains the same: it captures every outcome the situation can produce.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     mistakes:{
+//       title:`Common Mistakes`,
+//       content:`
+// • Leaving out outcomes that actually can occur in the scenario  
+// • Including outcomes that cannot occur  
+// • Ignoring the order of outcomes when order matters  
+// • Mixing outcomes of different types within the same sample space  
+// • Using an incomplete \(\Omega\), which leads to incorrect event definitions or wrong probabilities  
+
+// A correct sample space removes ambiguity and prevents errors in later calculations.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     connection:{
+//       title:`Connections to Other Concepts`,
+//       content:`
+// • Events are subsets of $\(\\Omega\)$, built directly from the sample space  
+// • Probability of events is defined only after $\(\\Omega\)$ is fixed  
+// • Random variables map outcomes in $\(\\Omega\)$ to numerical values  
+// • Joint sample spaces describe outcomes of several variables together  
+// • Independence and dependence are interpreted through how outcomes combine in $\(\\Omega\)$  
+
+// The sample space anchors every other concept in probability, making it the natural starting point for the entire subject.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     obj4:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+  
+//     },
+
+
+//     obj5:{
+  
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+  
+//     }
+  
+//   }
+
+
+//   const introContent = {
+//     id: "intro",
+//     title: "Sample Space — The First Step in Probability",
+//     content: `
+// As explained on the page about the probability of events, probability compares the outcomes we want to the full set of outcomes that could happen. The basic expression we already introduced there is:
+
+// **Probability = (favourable outcomes) / (all possible outcomes)**
+
+// Since "all possible outcomes" appears directly in the formula, it makes sense to understand what this collection actually is and how we identify it for different situations. That collection is the **sample space**. It describes every outcome the scenario can produce and forms the foundation for defining events and assigning probabilities.
+// `
+//   }
+
+//   return {
+//     props: {
+//       sectionsContent,
+//       introContent,
+//       faqQuestions,
+//       schemas,
+//       seoData: {
+//         title: "Sample Space: All Possible Outcomes in Probability | Learn Math Class",
+//         description: "Learn sample space in probability: definition, notation, types (finite, infinite, continuous), listing outcomes, properties, relationship to events, and practical examples.",
+//         keywords: keyWords.join(", "),
+//         url: "/probability/sample-space",
+//         name: "Sample Space"
+//       }
+//     }
+//   }
+// }
+
+// export default function SampleSpacePage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+
+    
+//   const genericSections=[
+//      {
+//         id:'0',
+//         title:sectionsContent.obj0.title,
+//         link:sectionsContent.obj0.link,
+//         content:[
+//           sectionsContent.obj0.content,
+//           sectionsContent.obj0.after,
+//         ]
+//     },
+//     {
+//         id:'definition',
+//         title:sectionsContent.definition.title,
+//         link:'',
+//         content:[
+//             sectionsContent.definition.content,
+//         ]
+//     },
+//     {
+//         id:'notation',
+//         title:sectionsContent.notation.title,
+//         link:'',
+//         content:[
+//             sectionsContent.notation.content,
+//             sectionsContent.notation.after,
+//         ]
+//     },
+//     {
+//         id:'types',
+//         title:sectionsContent.types.title,
+//         link:'',
+//         content:[
+//             sectionsContent.types.content,
+//         ]
+//     },
+//     {
+//         id:'outcomes',
+//         title:sectionsContent.outcomes.title,
+//         link:'',
+//         content:[
+//           sectionsContent.outcomes.content,
+//         ]
+//     },
+//     {
+//         id:'properties',
+//         title:sectionsContent.properties.title,
+//         link:'',
+//         content:[
+//           sectionsContent.properties.content,
+//         ]
+//     },
+//     {
+//         id:'events',
+//         title:sectionsContent.events.title,
+//         link:'',
+//         content:[
+//           sectionsContent.events.content,
+//         ]
+//     },
+//     {
+//         id:'practice',
+//         title:sectionsContent.practice.title,
+//         link:'',
+//         content:[
+//           sectionsContent.practice.content,
+//         ]
+//     },
+//     {
+//         id:'mistakes',
+//         title:sectionsContent.mistakes.title,
+//         link:'',
+//         content:[
+//           sectionsContent.mistakes.content,
+//         ]
+//     },
+//     {
+//         id:'connection',
+//         title:sectionsContent.connection.title,
+//         link:'',
+//         content:[
+//           sectionsContent.connection.content,
+//         ]
+//     },
+// ]
+
+//   return (
+//    <>
+//    <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.faq)
+//     }}
+//   />
+// </Head>
+//    {/* <GenericNavbar/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <OperaSidebar 
+//            side='right'
+//            // topOffset='65px' 
+//            sidebarWidth='45px'
+//            panelWidth='200px'
+//            iconColor='white'
+//            panelBackgroundColor='#f2f2f2'
+//          /> 
+//    <Breadcrumb/>
+//    <br/>
+//    <br/>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Sample Space</h1>
+//    <br/>
+//    <br/>
+//    <SectionTableOfContents sections={genericSections}
+//     showSecondaryNav={true}
+//          secondaryNavMode="siblings"  // or "siblings"
+//          secondaryNavTitle="More in Probability Section"
+   
+//    />
+//    <br/>
+//    <br/>
+//    <br/>
+//     <IntroSection 
+//           id={introContent.id}
+//           title={introContent.title}
+//           content={introContent.content}
+//            backgroundColor='#f9fafb'
+//           //  "#f2f2f2"
+//           textColor="#06357a"
+//         />
+//    <br/>
+//      <KeyTermsCard
+//      id="0"
+//      title={sectionsContent.obj0.title}
+//      content={sectionsContent.obj0.content}
+//      after={sectionsContent.obj0.after}
+//      variant="light"
+//    />
+//    <br/>
+//    <Sections sections={genericSections.slice(1)}/>
+//    <br/>
+//    <br/>
+//    <br/>
+//    {/* <ScrollUpButton/> */}
+//    </>
+//   )
+// }
+
+
+
+// tables-optimized: v4 | 2026-05-22 | 3 tables (outcomes aggregation, mistakes aggregation, summary capstone)
+
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -9,6 +567,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
 export async function getStaticProps(){
@@ -29,6 +588,141 @@ export async function getStaticProps(){
     'sample space and events',
     'listing outcomes probability'
   ]
+
+  const linkStyle = 'color: inherit; text-decoration: underline;'
+
+  // ---------- v4 TABLES ----------
+
+  // outcomes — aggregation: 6 representation formats × when to use × example
+  const outcomesTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 100%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Format</th>
+      <th style="${tableHeaders.aggregation}">When to use</th>
+      <th style="${tableHeaders.aggregation}">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Explicit list</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">small finite sample spaces</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&Omega; = {1, 2, 3, 4, 5, 6}</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Ordered pairs</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two-step experiments where order matters</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&Omega; = {(H, H), (H, T), (T, H), (T, T)}</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sequences / tuples</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">three or more components per outcome</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&Omega; = {(x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>) : x<sub>i</sub> &isin; {1, &hellip;, 6}}</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Intervals</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">continuous outcomes on the real line</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&Omega; = [0, 1]</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Set-builder notation</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">outcomes defined by a rule or condition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&Omega; = {x : 0 &le; x &le; 10}</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Cartesian product</td>
+      <td style="padding: 12px 15px; color: #34495e;">combining two or more simpler sample spaces</td>
+      <td style="padding: 12px 15px; color: #34495e;">&Omega; = A &times; B</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // mistakes — aggregation: 5 misconceptions × what is actually correct
+  const mistakesTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 100%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Mistake</th>
+      <th style="${tableHeaders.aggregation}">What is actually correct</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Leaving out outcomes that can occur</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&Omega; must include every outcome the scenario can produce</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Including outcomes that cannot occur</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&Omega; must exclude any outcome the scenario cannot produce</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Ignoring order when order matters</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">distinguishable outcomes need distinct entries in &Omega;</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Mixing outcomes of different types in one &Omega;</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a single sample space should use one consistent kind of outcome</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Using an incomplete &Omega;</td>
+      <td style="padding: 12px 15px; color: #34495e;">events must reference the full &Omega;, not a truncated version</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // summary capstone: 6 scenarios × Ω × example outcome × example event
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 100%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Scenario</th>
+      <th style="${tableHeaders.summary}">Sample space &Omega;</th>
+      <th style="${tableHeaders.summary}">Example outcome &omega;</th>
+      <th style="${tableHeaders.summary}">Example event (subset of &Omega;)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Roll a fair die</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{1, 2, 3, 4, 5, 6}</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">4</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{2, 4, 6} &mdash; &ldquo;even result&rdquo;</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Toss two coins</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{HH, HT, TH, TT}</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">HT</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{HH, HT, TH} &mdash; &ldquo;at least one head&rdquo;</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Draw a card from a deck</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">52 individual cards</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&ldquo;Ace of Spades&rdquo;</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the 13 hearts &mdash; &ldquo;draw a heart&rdquo;</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Trials until first success</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{1, 2, 3, &hellip;}</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">4</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{1, 2, 3} &mdash; &ldquo;succeed within 3 trials&rdquo;</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Measure a person&apos;s height</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, 3] meters</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1.75</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[1.6, 1.8] &mdash; &ldquo;between 1.6 and 1.8 m&rdquo;</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Time until an event</td>
+      <td style="padding: 12px 15px; color: #34495e;">[0, &infin;)</td>
+      <td style="padding: 12px 15px; color: #34495e;">t = 3.7</td>
+      <td style="padding: 12px 15px; color: #34495e;">[0, 5] &mdash; &ldquo;within 5 minutes&rdquo;</td>
+    </tr>
+  </tbody>
+</table>
+`
 
   const faqQuestions = {
     obj1: {
@@ -321,6 +1015,13 @@ The sample space anchors every other concept in probability, making it the natur
       after:``,
   
     },
+    summary:{
+      title:`Sample Spaces at a Glance`,
+      content:`
+The page has shown that the sample space takes many shapes depending on the scenario, and that events live as subsets of whichever &Omega; the situation defines. The table below collects representative scenarios in one place, pairing each with its sample space, a single outcome from it, and an example event constructed as a subset — making explicit the pattern that runs through every section of the page.`,
+      before:``,
+      after:``,
+    },
     obj4:{
       title:``,
       content:``,
@@ -360,6 +1061,9 @@ Since "all possible outcomes" appears directly in the formula, it makes sense to
       introContent,
       faqQuestions,
       schemas,
+      outcomesTable,
+      mistakesTable,
+      summaryTable,
       seoData: {
         title: "Sample Space: All Possible Outcomes in Probability | Learn Math Class",
         description: "Learn sample space in probability: definition, notation, types (finite, infinite, continuous), listing outcomes, properties, relationship to events, and practical examples.",
@@ -371,9 +1075,19 @@ Since "all possible outcomes" appears directly in the formula, it makes sense to
   }
 }
 
-export default function SampleSpacePage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function SampleSpacePage({
+  seoData,
+  sectionsContent,
+  introContent,
+  faqQuestions,
+  schemas,
+  outcomesTable,
+  mistakesTable,
+  summaryTable,
+}) {
 
-    
+  const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
   const genericSections=[
      {
         id:'0',
@@ -415,6 +1129,8 @@ export default function SampleSpacePage({seoData, sectionsContent, introContent,
         link:'',
         content:[
           sectionsContent.outcomes.content,
+          <div key={'outcomes-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: outcomesTable }} />,
         ]
     },
     {
@@ -447,6 +1163,8 @@ export default function SampleSpacePage({seoData, sectionsContent, introContent,
         link:'',
         content:[
           sectionsContent.mistakes.content,
+          <div key={'mistakes-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
         ]
     },
     {
@@ -455,6 +1173,16 @@ export default function SampleSpacePage({seoData, sectionsContent, introContent,
         link:'',
         content:[
           sectionsContent.connection.content,
+        ]
+    },
+    {
+        id:'summary',
+        title:sectionsContent.summary.title,
+        link:'',
+        content:[
+          sectionsContent.summary.content,
+          <div key={'summary-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
 ]

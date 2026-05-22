@@ -1,6 +1,955 @@
 
 
 
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// import Sections from '@/app/components/page-components/section/Sections'
+// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// import '../../../pages/pages.css'
+// import Head from 'next/head'
+// import GenericTable from '@/app/components/generic-table/GenericTable'
+// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+
+// export async function getStaticProps(){
+
+//   const keyWords = [
+//     'variance',
+//     'variance formula',
+//     'variance probability',
+//     'variance random variable',
+//     'variance calculation',
+//     'standard deviation',
+//     'variance properties',
+//     'variance expected value',
+//     'squared deviation',
+//     'variance sum',
+//     'variance covariance',
+//     'variance independent variables',
+//     'variance distribution',
+//     'variance spread measure'
+//   ]
+
+//   const faqQuestions = {
+//     obj1: {
+//       question: "What is variance in probability?",
+//       answer: "Variance is a quantitative measure of how far, on average, outcomes of a random variable fall from the expected value (mean). It's calculated by taking each possible outcome, finding its distance from the mean, squaring that distance, and averaging all squared distances weighted by probability. High variance means outcomes tend to be far from the mean; low variance indicates outcomes cluster tightly around the mean."
+//     },
+//     obj2: {
+//       question: "How do you calculate variance?",
+//       answer: "Variance is calculated as Var(X) = E[(X - μ)²], the expected value of the squared deviation from the mean. A convenient alternative is the shortcut formula: Var(X) = E[X²] - μ². For discrete variables, use a sum: Σ(xᵢ - μ)² p(xᵢ). For continuous variables, use an integral: ∫(x - μ)² f(x) dx. Both express the same concept: averaging squared deviations weighted by probability."
+//     },
+//     obj3: {
+//       question: "Why do we square deviations in variance?",
+//       answer: "Squaring serves several purposes: First, it prevents cancellation—without squaring, positive and negative deviations would cancel out, always yielding zero. Second, it emphasizes larger deviations more than smaller ones, making variance sensitive to outliers. Third, it guarantees non-negativity—squared terms are always positive. Fourth, it leads to useful algebraic identities like the shortcut formula E[X²] - μ²."
+//     },
+//     obj4: {
+//       question: "How does variance behave when adding random variables?",
+//       answer: "For independent random variables X and Y, variances add: Var(X + Y) = Var(X) + Var(Y). This extends to any number of independent variables. When variables are not independent, an additional term appears: Var(X + Y) = Var(X) + Var(Y) + 2Cov(X,Y), where covariance measures how variables vary together. When independent, covariance is zero."
+//     },
+//     obj5: {
+//       question: "What is the difference between variance and standard deviation?",
+//       answer: "Variance and standard deviation measure the same concept—spread around the mean—but differ in units. Variance is in squared units (e.g., square meters, dollars squared), making it mathematically convenient but harder to interpret. Standard deviation (σ = √Var(X)) returns to original units, providing intuitive sense of typical deviation magnitude. Both contain the same information—knowing one determines the other."
+//     }
+//   }
+
+//   const schemas = {
+//     learningResource: {
+//       "@context": "https://schema.org",
+//       "@type": "LearningResource",
+//       "name": "Variance in Probability",
+//       "description": "Learn variance: definition, calculation methods, why square deviations, properties, variance of sums, standard distributions, standard deviation comparison, common mistakes, and connections to expectation and covariance.",
+//       "url": "https://www.learnmathclass.com/probability/variance",
+//       "inLanguage": "en-US",
+//       "learningResourceType": "Explanation",
+//       "educationalLevel": "High School, College",
+//       "educationalUse": "Learning",
+//       "audience": {
+//         "@type": "EducationalAudience",
+//         "educationalRole": "student"
+//       },
+//       "about": {
+//         "@type": "Thing",
+//         "name": "Variance"
+//       },
+//       "teaches": [
+//         "What variance measures: spread around expected value",
+//         "Notation: Var(X), σ², E[(X-μ)²], squared deviations",
+//         "How to calculate variance: discrete sums and continuous integrals",
+//         "Why square the distance: prevents cancellation, emphasizes outliers",
+//         "Properties: non-negativity, scaling (a²), shifting (no change), additivity",
+//         "Variance of sums: independent case and covariance term",
+//         "Variance in standard distributions: binomial, Poisson, normal, uniform, exponential",
+//         "Variance vs standard deviation: squared units vs original units",
+//         "Common mistakes: negative variance, forgetting independence, linearity assumptions",
+//         "Connections: expectation, covariance, linear combinations, distributions"
+//       ],
+//       "keywords": keyWords.join(", "),
+//       "author": {
+//         "@type": "Organization",
+//         "name": "Learn Math Class"
+//       },
+//       "publisher": {
+//         "@type": "Organization",
+//         "name": "Learn Math Class"
+//       },
+//       "datePublished": "2024-01-15",
+//       "dateModified": new Date().toISOString()
+//     },
+
+//     breadcrumb: {
+//       "@context": "https://schema.org",
+//       "@type": "BreadcrumbList",
+//       "itemListElement": [
+//         {
+//           "@type": "ListItem",
+//           "position": 1,
+//           "name": "Home",
+//           "item": "https://www.learnmathclass.com"
+//         },
+//         {
+//           "@type": "ListItem",
+//           "position": 2,
+//           "name": "Probability",
+//           "item": "https://www.learnmathclass.com/probability"
+//         },
+//         {
+//           "@type": "ListItem",
+//           "position": 3,
+//           "name": "Variance",
+//           "item": "https://www.learnmathclass.com/probability/variance"
+//         }
+//       ]
+//     },
+
+//     faq: {
+//       "@context": "https://schema.org",
+//       "@type": "FAQPage",
+//       "mainEntity": Object.keys(faqQuestions).map(key => ({
+//         "@type": "Question",
+//         "name": faqQuestions[key].question,
+//         "acceptedAnswer": {
+//           "@type": "Answer",
+//           "text": faqQuestions[key].answer
+//         }
+//       }))
+//     }
+//   }
+
+//   const sectionsContent={
+//     obj0: {
+//   title: `Key Terms`,
+//   content: `
+// - [Variance](!/probability/definitions#variance) — $\\operatorname{Var}(X) = E[(X-\\mu)^2]$, spread around the mean
+// - [Standard Deviation](!/probability/definitions#standard_deviation) — $\\sigma = \\sqrt{\\operatorname{Var}(X)}$
+// - [Conditional Variance](!/probability/definitions#conditional_variance) — $\\operatorname{Var}(X \\mid Y = y)$, spread given information
+// - [Expected Value](!/probability/definitions#expected_value) — $E[X]$, used in the variance formula
+// - [Covariance](!/probability/definitions#covariance) — $\\operatorname{Cov}(X,Y)$, extends variance to two variables`,
+//   before: ``,
+//   after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+//   link: '',
+// },
+
+//     definition:{
+//       title:`What is Variance`,
+//       content:`
+// Variance of a [random variable](!/probability/random-variables) is a quantitative characteristic of how far, on average, the outcomes of a [random variable](!/probability/random-variables) fall from what we expect. 
+
+// To calculate it, we take each possible outcome, find how far it is from the mean, square that distance, and then average all those squared distances according to the probability of each outcome.
+
+// The squaring step is crucial: it ensures that deviations above and below the mean both contribute positively to the measure, and it emphasizes larger deviations more heavily than smaller ones. A [random variable](!/probability/random-variables) with high variance produces outcomes that tend to be far from its expected value, while low variance indicates outcomes cluster tightly around the mean.
+
+// This measure gives us our first quantitative tool for describing not where a distribution is centered, but how spread out or concentrated it is around that center.`,
+//       before:``,
+//       after:``,
+  
+  
+//     },
+//     notation:{
+//       title:`Useful Notation`,
+//       content:`
+// Before working with variance formulas, we establish the standard notation used throughout probability theory:
+
+//      • $X$ — a random variable
+//      • $\\mu = \\mathbb{E}[X]$ — the expected value (mean) of $X$
+//      • $\\mathrm{Var}(X)$ or $\\sigma^2$ — the variance of $X$
+//      • $\\mathbb{E}[\\cdot]$ — the expectation operator, computed as a sum for discrete variables or an integral for continuous variables
+//      • $(X - \\mu)^2$ — the squared deviation of $X$ from its mean
+
+// These symbols appear consistently in variance calculations and provide a compact way to express the relationships between a random variable, its center, and its spread.
+
+
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+  
+//     what:{
+  
+//       title:`What Variance Measures`,
+//       content:`
+// Variance captures how spread out a [random variable's](!/probability/random-variables) outcomes are around its [expected value](!/probability/expected-value). It quantifies the degree of fluctuation, inconsistency, or variability we can expect from the random process.
+
+// When a [random variable](!/probability/random-variables) has low variance, its outcomes cluster tightly near the[mean(expected value)](!/probability/expected-value). Most realizations fall close to what we expect. When variance is high, outcomes scatter widely—some fall far above the mean, others far below, creating unpredictability in individual observations.
+
+// [Expected value](!/probability/expected-value) alone tells us the center of a distribution but says nothing about reliability or concentration. Two [random variables](!/probability/random-variables) can share the same mean yet behave completely differently: one might produce nearly constant outcomes while the other swings wildly. Variance distinguishes between these cases.
+
+// This measure connects directly to uncertainty and risk. Higher variance means greater uncertainty about where any single outcome will land. In practical contexts, variance signals volatility, unreliability, or the potential for surprising deviations from what we anticipate on average.`,
+//       before:``,
+//       after:``,
+  
+//     },
+// //     calculate:{
+// //       title:`How to Calculate Variance`,
+// //       content:`
+// // The variance of a [random variable](!/probability/random-variables) $X$ with [expected value](!/probability/expected-value) $\\mu$ is formally defined as:
+
+// // $$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$$
+
+// // This is the expected value of the squared deviation from the mean.
+
+// // A computationally convenient alternative is the shortcut formula:
+
+// // $$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+
+// // This expresses variance as the difference between the expected value of the square and the square of the expected value.
+
+// // For discrete random variables, variance is computed as a sum:
+
+// // $$\\mathrm{Var}(X) = \\sum_i (x_i - \\mu)^2 p(x_i)$$
+
+// // where the sum runs over all possible values $x_i$ with probabilities $p(x_i)$.
+
+// // For continuous random variables, variance is computed as an integral:
+
+// // $$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 f(x) \\, dx$$
+
+// // where $f(x)$ is the probability density function.
+
+// // The choice between sum and integral depends entirely on whether the random variable takes discrete values or ranges continuously. Both formulas express the same concept: averaging squared deviations weighted by probability.
+
+// // For more on computing expected values, see the [expected value](!/probability/expected-value) page.`,
+// //       before:``,
+// //       after:``,
+  
+// //     },
+ 
+// calculate:{
+//   title:`How to Calculate Variance`,
+//   content:`
+// The variance of a [random variable](!/probability/random-variables) $X$ with [expected value](!/probability/expected-value) $\\mu$ is formally defined as:
+
+// $$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$$
+
+// This is the expected value of the squared deviation from the mean.
+
+// A computationally convenient alternative is the **shortcut formula**:
+
+// $$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+
+// This expresses variance as the difference between the expected value of the square and the square of the expected value.
+
+// The calculation method depends on whether the random variable is discrete or continuous, and whether we're working from empirical data, a probability function, or a known distribution.
+//   `,
+//   before:``,
+//   after:``,
+// },
+
+// general:{
+//   title:`Calculating Variance: General Case`,
+//   content:`
+// When working with empirical data or tabulated probabilities (rather than a formula), variance is computed directly from observed values and their frequencies.
+
+// For a discrete [random variable](!/probability/random-variables) $X$ with observed values $x_1, x_2, \\ldots, x_n$ and corresponding probabilities $p_1, p_2, \\ldots, p_n$:
+
+// **Step 1**: Calculate the [mean (expected value)](!/probability/expected-value):
+// $$\\mu = \\sum_{i=1}^{n} x_i p_i$$
+
+// **Step 2**: Calculate variance using the definition:
+// $$\\mathrm{Var}(X) = \\sum_{i=1}^{n} (x_i - \\mu)^2 p_i$$
+
+// Or using the shortcut formula:
+// $$\\mathrm{Var}(X) = \\left(\\sum_{i=1}^{n} x_i^2 p_i\\right) - \\mu^2$$
+
+// ### Example
+
+// Consider a small shop where the number of items sold on a given morning varies randomly. Let $X$ represent the number of items sold. Based on past observations, the probabilities for different sales outcomes are:
+
+
+
+//   `,
+//   before:``,
+//   after:`
+
+//  This is the same data from the [expected value general case](!/probability/expected-value#general). First, we calculate the mean:
+
+// $$\\mu = E[X] = 0(0.1) + 1(0.3) + 2(0.4) + 3(0.2) = 0 + 0.3 + 0.8 + 0.6 = 1.7$$
+
+// Now we calculate how spread out the sales are around this average of 1.7 items.
+
+// Using the shortcut formula for variance:
+
+// $$\\mathbb{E}[X^2] = 0^2(0.1) + 1^2(0.3) + 2^2(0.4) + 3^2(0.2) = 0 + 0.3 + 1.6 + 1.8 = 3.7$$
+
+// $$\\mathrm{Var}(X) = 3.7 - (1.7)^2 = 3.7 - 2.89 = 0.81$$
+
+// The variance is 0.81, indicating moderate spread around the mean of 1.7 items.
+//   `,
+// },
+
+// discrete:{
+//   title:`Variance for Discrete Random Variables (PMF)`,
+//   content:`
+// When a [discrete random variable](!/probability/random-variables#types) is described by a [probability mass function](!/probability/probability-function) $p(x) = P(X = x)$ given in formula form, variance is computed directly from that function.
+
+// $$\\mathrm{Var}(X) = \\sum_{x} (x - \\mu)^2 p(x)$$
+
+// Or using the shortcut formula:
+
+// $$\\mathrm{Var}(X) = \\sum_{x} x^2 p(x) - \\mu^2$$
+
+// where the sum runs over all values in the support of $X$.
+
+// ### Example
+
+// Let $X$ have PMF $p(x) = \\frac{x}{10}$ for $x = 1, 2, 3, 4$.
+
+// From the [expected value example](!/probability/expected-value#discrete), we know $\\mu = 3$.
+
+// Calculate $\\mathbb{E}[X^2]$:
+
+// $$\\mathbb{E}[X^2] = \\sum_{x=1}^{4} x^2 \\cdot \\frac{x}{10} = \\frac{1}{10}\\sum_{x=1}^{4} x^3 = \\frac{1}{10}(1 + 8 + 27 + 64) = \\frac{100}{10} = 10$$
+
+// Using the shortcut formula:
+
+// $$\\mathrm{Var}(X) = 10 - 3^2 = 10 - 9 = 1$$
+
+// The variance is 1, with standard deviation $\\sigma = \\sqrt{1} = 1$.
+//   `,
+//   before:``,
+//   after:``,
+// },
+
+// continuous:{
+//   title:`Variance for Continuous Random Variables (PDF)`,
+//   content:`
+// When a [continuous random variable](!/probability/random-variables#types) is described by a [probability density function](!/probability/probability-function) $f(x)$, variance is computed using integration.
+
+// $$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 f(x) \\, dx$$
+
+// Or using the shortcut formula:
+
+// $$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} x^2 f(x) \\, dx - \\mu^2$$
+
+// ### Example
+
+// Let $X$ have PDF $f(x) = \\frac{x}{2}$ for $0 \\leq x \\leq 2$.
+
+// From the [expected value example](!/probability/expected-value#continuous), we know $\\mu = \\frac{4}{3}$.
+
+// Calculate $\\mathbb{E}[X^2]$:
+
+// $$\\mathbb{E}[X^2] = \\int_{0}^{2} x^2 \\cdot \\frac{x}{2} \\, dx = \\frac{1}{2}\\int_{0}^{2} x^3 \\, dx = \\frac{1}{2} \\cdot \\frac{x^4}{4}\\bigg|_{0}^{2} = \\frac{1}{8}(16) = 2$$
+
+// Using the shortcut formula:
+
+// $$\\mathrm{Var}(X) = 2 - \\left(\\frac{4}{3}\\right)^2 = 2 - \\frac{16}{9} = \\frac{18 - 16}{9} = \\frac{2}{9} \\approx 0.222$$
+
+// The variance is $\\frac{2}{9}$, with standard deviation $\\sigma = \\sqrt{\\frac{2}{9}} = \\frac{\\sqrt{2}}{3} \\approx 0.471$.
+//   `,
+//   before:``,
+//   after:``,
+// },
+
+// individualdist:{
+//   title:`Variance Formulas for Specific Distributions`,
+//   content:`
+// Each standard probability [distribution](!/probability/distributions) has a pre-derived variance formula that bypasses the need for summation or integration. These formulas are established results obtained by applying the general variance definition to each distribution's specific [probability function](!/probability/probability-function).
+
+
+// `,
+//   before:``,
+//   after:`
+//   For derivations and detailed explanations, see each distribution's individual page. Using these formulas is faster and more reliable than computing from scratch.
+  
+//   `,
+// },
+
+
+// square:{
+//       title:`Why Squaring the Distance?`,
+//       content:`
+// The definition of variance requires squaring each deviation before averaging. This choice is not arbitrary—it serves several mathematical and practical purposes.
+
+// First, squaring prevents cancellation. If we simply averaged the raw deviations $(X - \\mu)$ without squaring, positive and negative deviations would cancel each other out, always yielding zero. Squaring ensures all deviations contribute positively to the measure.
+
+// Second, squaring emphasizes larger deviations more heavily than smaller ones. A deviation of 10 contributes 100 to the variance, while a deviation of 1 contributes only 1. This makes variance sensitive to outliers and extreme values, which is often desirable when assessing risk or variability.
+
+// Third, squaring guarantees non-negativity. Since $(X - \\mu)^2 \\geq 0$ always, variance itself is always non-negative, providing a natural scale for measuring spread.
+
+// Finally, squaring leads to algebraically useful identities, particularly the shortcut formula $\\mathbb{E}[X^2] - \\mu^2$. This form connects variance to moments of the distribution and simplifies many theoretical derivations.
+
+// Together, these properties make squared deviations the natural choice for quantifying variability in probability theory.`,
+//       before:``,
+//       after:``,
+  
+//     },
+//     properties:{
+//       title:`Properties of Variance`,
+//       content:`
+// Variance behaves according to several fundamental rules that govern how it responds to transformations and combinations of random variables.
+
+// **Non-negativity**: Variance is always non-negative. Since it is defined as an expected value of squared terms, and squares are never negative, we have $\\mathrm{Var}(X) \\geq 0$ for any random variable $X$.
+
+// **Zero variance implies constancy**: If $\\mathrm{Var}(X) = 0$, then $X$ must be constant—it takes the same value with probability 1. No variability means no randomness.
+
+// **Scaling rule**: Multiplying a random variable by a constant $a$ scales its variance by $a^2$:
+
+// $$\\mathrm{Var}(aX) = a^2 \\mathrm{Var}(X)$$
+
+// This quadratic relationship reflects the squaring in the definition. Doubling a random variable quadruples its variance.
+
+// **Shifting rule**: Adding a constant $b$ to a random variable does not change its variance:
+
+// $$\\mathrm{Var}(X + b) = \\mathrm{Var}(X)$$
+
+// Shifting all outcomes by the same amount shifts the mean by the same amount, leaving all deviations unchanged.
+
+// **Independence and additivity**: For independent random variables $X$ and $Y$, variances add:
+
+// $$\\mathrm{Var}(X + Y) = \\mathrm{Var}(X) + \\mathrm{Var}(Y)$$
+
+// This holds only when the variables are independent. Dependence introduces additional terms.
+
+// **Variance is not linear**: Unlike expectation, variance does not distribute linearly over sums. The rule $\\mathrm{Var}(X + Y) \\neq \\mathrm{Var}(X) + \\mathrm{Var}(Y)$ in general makes variance more complex to work with than expectation.
+
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     sum:{
+//       title:`Variance of a Sum`,
+//       content:`
+// When combining random variables, understanding how their variances interact is essential for probability calculations and statistical modeling.
+
+// **Independent case**: When $X$ and $Y$ are independent random variables, the variance of their sum equals the sum of their variances:
+
+// $$\\mathrm{Var}(X + Y) = \\mathrm{Var}(X) + \\mathrm{Var}(Y)$$
+
+// This result extends to any finite collection of independent variables. For $X_1, X_2, \\ldots, X_n$ independent:
+
+// $$\\mathrm{Var}(X_1 + X_2 + \\cdots + X_n) = \\mathrm{Var}(X_1) + \\mathrm{Var}(X_2) + \\cdots + \\mathrm{Var}(X_n)$$
+
+// **General case with dependence**: When $X$ and $Y$ are not independent, an additional term appears:
+
+// $$\\mathrm{Var}(X + Y) = \\mathrm{Var}(X) + \\mathrm{Var}(Y) + 2\\mathrm{Cov}(X, Y)$$
+
+// The quantity $\\mathrm{Cov}(X, Y)$ is the covariance between $X$ and $Y$, which measures how the two variables vary together. Positive covariance increases the variance of the sum, while negative covariance decreases it.
+
+// When variables are independent, their covariance is zero, recovering the simpler formula.
+
+// For a deeper understanding of how variables interact, see the [covariance](/probability/covariance) page.`,
+//       before:``,
+//       after:``,
+  
+//     },
+//     distributions:{
+//       title:`Variance in Standard Distributions`,
+//       content:`
+// Many commonly used probability distributions have closed-form expressions for their variance. The following table provides these formulas without derivation:
+
+// **Bernoulli distribution** (parameter $p$):
+// $$\\mathrm{Var}(X) = p(1-p)$$
+
+
+// **Binomial distribution** (parameters $n$, $p$):
+// $$\\mathrm{Var}(X) = np(1-p)$$
+// See the [binomial distribution](/probability/distributions/discrete#binomial) page.
+
+// **Poisson distribution** (parameter $\\lambda$):
+// $$\\mathrm{Var}(X) = \\lambda$$
+// See the [Poisson distribution](/probability/distributions/discrete#poisson) page.
+
+// **Uniform distribution** on $[a, b]$:
+// $$\\mathrm{Var}(X) = \\frac{(b-a)^2}{12}$$
+// See the [uniform distribution](/probability/distributions/continuous#uniform) page.
+
+// **Exponential distribution** (parameter $\\lambda$):
+// $$\\mathrm{Var}(X) = \\frac{1}{\\lambda^2}$$
+// See the [exponential distribution](/probability/distributions/continuous#exponential) page.
+
+// **Normal distribution** (parameters $\\mu$, $\\sigma^2$):
+// $$\\mathrm{Var}(X) = \\sigma^2$$
+// See the [normal distribution](/probability/distributions/continuous#normal) page.
+
+// Each distribution's page contains derivations and detailed explanations of these variance formulas.`,
+//       before:``,
+//       after:``,
+  
+//     },
+//     sd:{
+//       title:`Variance vs Standard Deviation`,
+//       content:`
+// Variance and standard deviation measure the same underlying concept—spread around the mean—but they differ in their units and interpretability.
+
+// Variance is expressed in squared units. If a random variable $X$ measures distance in meters, then $\\mathrm{Var}(X)$ is measured in square meters. If $X$ represents dollars, variance has units of dollars squared. This makes variance mathematically convenient but harder to interpret in practical contexts.
+
+// Standard deviation, denoted $\\sigma$, returns to the original scale by taking the square root of variance:
+
+// $$\\sigma = \\sqrt{\\mathrm{Var}(X)}$$
+
+// Because standard deviation shares the same units as the random variable itself, it provides a more intuitive sense of typical deviation magnitude. A standard deviation of 5 meters directly describes spread in meters, while a variance of 25 square meters requires mental conversion.
+
+// Both measures contain the same information—knowing one determines the other. Variance appears more naturally in theoretical derivations and algebraic manipulations, while standard deviation proves more useful for interpretation and communication of results.
+
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     mistakes:{
+//       title:`Common Mistakes`,
+//       content:`
+// Several misconceptions about variance appear frequently when working with probability calculations and statistical reasoning.
+
+// **Thinking variance can be negative**: Since variance is defined as an expected value of squared terms, it is always non-negative. A negative variance is mathematically impossible and signals a calculation error.
+
+// **Confusing variance with expectation**: Variance measures spread, not center. A random variable can have high expected value with low variance, or low expected value with high variance. The two quantities describe different aspects of a distribution and should not be conflated.
+
+// **Forgetting independence when summing variances**: The rule $\\mathrm{Var}(X + Y) = \\mathrm{Var}(X) + \\mathrm{Var}(Y)$ holds only when $X$ and $Y$ are independent. Applying this formula to dependent variables produces incorrect results. When dependence exists, covariance must be included.
+
+// **Mixing discrete and continuous formulas**: Discrete random variables require sums while continuous random variables require integrals. Using the wrong computational approach leads to meaningless expressions or incorrect values.
+
+// **Confusing standard deviation with variance**: Because standard deviation is the square root of variance, the two are related but not interchangeable. Failing to distinguish between $\\sigma$ and $\\sigma^2$ corrupts calculations and interpretations, especially when scaling or transforming variables.
+
+// **Assuming variance behaves linearly**: Unlike expectation, variance does not satisfy $\\mathrm{Var}(aX + bY) = a\\mathrm{Var}(X) + b\\mathrm{Var}(Y)$ in general. The scaling rule involves squaring constants, and additivity requires independence. Treating variance as linear leads to systematic errors.`,
+//       before:``,
+//       after:``,
+  
+//     },
+//     connections:{
+//       title:`Connections to Other Probability Concepts`,
+//       content:`
+// Variance does not exist in isolation—it connects to numerous other ideas in probability theory and statistics, forming part of a broader framework for understanding randomness.
+
+// [Expectation](!/probability/expected-value) (Expected Value): 
+
+// Variance is built directly from expectation. The formula $\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$ defines variance as an expected value, making it a second-order moment of the distribution. Understanding expectation is prerequisite to understanding variance. See the [expected value](/probability/expected-value) page.
+
+ 
+// [Covariance](!/probability/covariance): 
+// When working with multiple random variables, covariance extends the concept of variance to measure how two variables vary together. Variance is actually a special case of covariance: 
+
+// $$\\mathrm{Var}(X) = \\mathrm{Cov}(X, X)$$. 
+
+// See the [covariance](!/probability/covariance) page.
+
+// **Linear combinations**: Variance plays a central role in analyzing weighted sums of random variables, particularly through formulas like
+ 
+// $$\\mathrm{Var}(aX + b) = a^2\\mathrm{Var}(X)$$ 
+ 
+//  and rules for variance of sums. These appear throughout statistical modeling and experimental design.
+
+// [Probability distributions](!/probability/distributions): Every named distribution has an associated variance that characterizes its spread. Knowing the variance formula for distributions like binomial, normal, or Poisson allows quick analysis without recalculating from first principles. [Distribution pages](!/probability/distributions) provide these formulas and their derivations.
+
+// Together, these connections show that variance is not merely a standalone measure but a fundamental quantity that links together many essential concepts in probability theory.`,
+//       before:``,
+//       after:``,
+  
+//     },
+
+
+//     obj5:{
+  
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+  
+//     }
+  
+//   }
+
+
+//   const introContent = {
+//     id: "intro",
+//     title: "Understanding Variance in Probability",
+//     content: `
+// When working with probability distributions and random variables, understanding central tendency through measures like the mean or expected value tells only part of the story. Equally important is understanding how data spreads around that center—a concept captured by variance. Variance sits at the heart of statistical analysis, connecting to numerous other fundamental concepts including standard deviation, covariance, and the broader theory of statistical dispersion. It provides the mathematical foundation for measuring risk in finance, quantifying uncertainty in predictions, and comparing the behavior of different probability distributions. Together with the mean, variance forms one of the two pillars that characterize many common distributions, from the binomial to the normal distribution, making it an indispensable tool for anyone working with probabilistic models or analyzing data.
+// `
+//   }
+
+
+// const generalTable=`
+//  <table style="border-collapse: collapse; margin: 20px auto; font-family: Arial, sans-serif; font-size: 16px;">
+//   <thead>
+//     <tr style="background-color: #f0f0f0;">
+//       <th style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">x (items sold)</th>
+//       <th style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">0</th>
+//       <th style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">1</th>
+//       <th style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">2</th>
+//       <th style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">3</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr>
+//       <td style="border: 1px solid #ddd; padding: 8px 12px; text-align: center; font-weight: 600;">P(X = x)</td>
+//       <td style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">0.1</td>
+//       <td style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">0.3</td>
+//       <td style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">0.4</td>
+//       <td style="border: 1px solid #ddd; padding: 8px 12px; text-align: center;">0.2</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+
+// const discreteVarianceFormulasData = {
+//   tableTitle: 'Variance Formulas for Discrete Distributions',
+//   rows: [
+//     {
+//       distribution: '[Discrete Uniform](!/probability/distributions/discrete/uniform#7)',
+//       formula: `\\mathrm{Var}(X) = \\frac{(b-a+1)^2 - 1}{12}`,
+//       parameters: '$a$ = minimum value, $b$ = maximum value'
+//     },
+//     // {
+//     //   distribution: '[Bernoulli](!/probability/distributions/discrete/bernoulli#7)',
+//     //   formula: '\\mathrm{Var}(X) = p(1-p)',
+//     //   parameters: '$p$ = probability of success'
+//     // },
+//     {
+//       distribution: '[Binomial](!/probability/distributions/discrete/binomial#7)',
+//       formula: '\\mathrm{Var}(X) = np(1-p)',
+//       parameters: '$n$ = number of trials, $p$ = probability of success'
+//     },
+//     {
+//       distribution: '[Geometric](!/probability/distributions/discrete/geometric#7)',
+//       formula: '\\mathrm{Var}(X) = \\frac{1-p}{p^2}',
+//       parameters: '$p$ = probability of success on each trial'
+//     },
+//     {
+//       distribution: '[Negative Binomial](!/probability/distributions/discrete/negative-binomial#7)',
+//       formula: '\\mathrm{Var}(X) = \\frac{r(1-p)}{p^2}',
+//       parameters: '$r$ = number of successes needed, $p$ = probability of success'
+//     },
+//     {
+//       distribution: '[Hypergeometric](!/probability/distributions/discrete/hypergeometric#7)',
+//       formula: '\\mathrm{Var}(X) = n\\frac{K}{N}\\frac{N-K}{N}\\frac{N-n}{N-1}',
+//       parameters: '$n$ = sample size, $K$ = successes in population, $N$ = population size'
+//     },
+//     {
+//       distribution: '[Poisson](!/probability/distributions/discrete/poisson#7)',
+//       formula: '\\mathrm{Var}(X) = \\lambda',
+//       parameters: '$\\lambda$ = average rate of occurrence per interval'
+//     }
+//   ]
+// };
+
+
+// const continuousVarianceFormulasData = {
+//   tableTitle: 'Variance Formulas for Continuous Distributions',
+//   rows: [
+//     {
+//       distribution: '[Continuous Uniform](!/probability/distributions/continuous/uniform#8)',
+//       formula: '\\mathrm{Var}(X) = \\frac{(b-a)^2}{12}',
+//       parameters: '$a$ = lower bound of interval, $b$ = upper bound of interval'
+//     },
+//     {
+//       distribution: '[Exponential](!/probability/distributions/continuous/exponential#8)',
+//       formula: '\\mathrm{Var}(X) = \\frac{1}{\\lambda^2}',
+//       parameters: '$\\lambda$ = rate parameter (events per unit time)'
+//     },
+//     {
+//       distribution: '[Normal](!/probability/distributions/continuous/normal#8)',
+//       formula: '\\mathrm{Var}(X) = \\sigma^2',
+//       parameters: '$\\mu$ = mean (location parameter), $\\sigma^2$ = variance parameter'
+//     }
+//   ]
+// };
+
+//   return {
+//     props: {
+//       sectionsContent,
+//       introContent,
+//       faqQuestions,
+//       generalTable,
+//       discreteVarianceFormulasData,
+//       continuousVarianceFormulasData,
+//       schemas,
+//       seoData: {
+//         title: "Variance: Measuring Spread in Probability | Learn Math Class",
+//         description: "Learn variance: definition, calculation methods, why square deviations, properties, variance of sums, standard distributions, standard deviation comparison, common mistakes, and connections to expectation and covariance.",
+//         keywords: keyWords.join(", "),
+//         url: "/probability/variance",
+//         name: "Variance in Probability"
+//       }
+//     }
+//   }
+// }
+
+// export default function VariancePage({seoData, sectionsContent, introContent, faqQuestions,
+//    schemas, generalTable,discreteVarianceFormulasData,
+//       continuousVarianceFormulasData,}) {
+
+    
+//   const genericSections=[
+//      {
+//         id:'0',
+//         title:sectionsContent.obj0.title,
+//         link:sectionsContent.obj0.link,
+//         content:[
+//           sectionsContent.obj0.content,
+//           sectionsContent.obj0.after,
+//         ]
+//     },
+//     {
+//         id:'definition',
+//         title:sectionsContent.definition.title,
+//         link:'',
+//         content:[
+//             sectionsContent.definition.content,
+//         ]
+//     },
+  
+//     {
+//         id:'what',
+//         title:sectionsContent.what.title,
+//         link:'',
+//         content:[
+//             sectionsContent.what.content,
+//         ]
+//     },
+//       {
+//         id:'notation',
+//         title:sectionsContent.notation.title,
+//         link:'',
+//         content:[
+//             sectionsContent.notation.content,
+//         ]
+//     },
+//     // {
+//     //     id:'calculate',
+//     //     title:sectionsContent.calculate.title,
+//     //     link:'',
+//     //     content:[
+//     //         sectionsContent.calculate.content,
+//     //     ]
+//     // },
+
+
+//     {
+//     id:'calculate',
+//     title:sectionsContent.calculate.title,
+//     link:'',
+//     content:[
+//         sectionsContent.calculate.content,
+        
+//     ]
+// },
+// {
+//     id:'general',
+//     title:sectionsContent.general.title,
+//     link:'',
+//     content:[
+//         sectionsContent.general.content,
+       
+//           <div style={{transform:'scale(1.15)'}} dangerouslySetInnerHTML={{ __html: generalTable }} key="table" />,
+//            sectionsContent.general.after,
+//     ]
+// },
+// {
+//     id:'discrete',
+//     title:sectionsContent.discrete.title,
+//     link:'',
+//     content:[
+//         sectionsContent.discrete.content,
+//     ]
+// },
+// {
+//     id:'continuous',
+//     title:sectionsContent.continuous.title,
+//     link:'',
+//     content:[
+//         sectionsContent.continuous.content,
+//     ]
+// },
+// {
+//     id:'individualdist',
+//     title:sectionsContent.individualdist.title,
+//     link:'',
+//     content:[
+//         sectionsContent.individualdist.content,
+//            <GenericTable key={'discrete-expected-values'} tableData={discreteVarianceFormulasData} theme='lightBlue'
+//           cellFontSize={'16px'}
+//           headerFontSize={'18px'}/>,
+         
+//             <GenericTable key={'continuous-expected-values'} tableData={continuousVarianceFormulasData} theme='lightBlue'
+//           cellFontSize={'16px'}
+//           headerFontSize={'18px'}/>,
+//            sectionsContent.individualdist.after,
+//     ]
+// },
+//     {
+//         id:'square',
+//         title:sectionsContent.square.title,
+//         link:'',
+//         content:[
+//             sectionsContent.square.content,
+//         ]
+//     },
+//     {
+//         id:'properties',
+//         title:sectionsContent.properties.title,
+//         link:'',
+//         content:[
+//             sectionsContent.properties.content,
+//         ]
+//     },
+//     {
+//         id:'sum',
+//         title:sectionsContent.sum.title,
+//         link:'',
+//         content:[
+//             sectionsContent.sum.content,
+//         ]
+//     },
+//     {
+//         id:'distributions',
+//         title:sectionsContent.distributions.title,
+//         link:'',
+//         content:[
+//             sectionsContent.distributions.content,
+//         ]
+//     },
+//     {
+//         id:'sd',
+//         title:sectionsContent.sd.title,
+//         link:'',
+//         content:[
+//             sectionsContent.sd.content,
+//         ]
+//     },
+//     {
+//         id:'mistakes',
+//         title:sectionsContent.mistakes.title,
+//         link:'',
+//         content:[
+//             sectionsContent.mistakes.content,
+//         ]
+//     },
+//     {
+//         id:'connections',
+//         title:sectionsContent.connections.title,
+//         link:'',
+//         content:[
+//             sectionsContent.connections.content,
+//         ]
+//     },
+// ]
+
+//   return (
+//    <>
+//    <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.faq)
+//     }}
+//   />
+// </Head>
+//    {/* <GenericNavbar/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <OperaSidebar 
+//            side='right'
+//            // topOffset='65px' 
+//            sidebarWidth='45px'
+//            panelWidth='200px'
+//            iconColor='white'
+//            panelBackgroundColor='#f2f2f2'
+//          /> 
+//    <Breadcrumb/>
+//    <br/>
+//    <br/>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Variance in Probability</h1>
+//    <br/>
+//    <br/>
+//    <SectionTableOfContents sections={genericSections}
+//    showSecondaryNav={true}
+//          secondaryNavMode="siblings"  // or "siblings"
+//          secondaryNavTitle="More in Probability Section"/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <IntroSection 
+//           id={introContent.id}
+//           title={introContent.title}
+//           content={introContent.content}
+//            backgroundColor='#f9fafb'
+//           //  "#f2f2f2"
+//           textColor="#06357a"
+//         />
+//    <br/>
+//      <KeyTermsCard
+//      id="0"
+//      title={sectionsContent.obj0.title}
+//      content={sectionsContent.obj0.content}
+//      after={sectionsContent.obj0.after}
+//      variant="light"
+//    />
+//    <br/>
+//    <Sections sections={genericSections.slice(1)}/>
+//    <br/>
+//    <br/>
+//    <br/>
+//    {/* <ScrollUpButton/> */}
+//    </>
+//   )
+// }
+
+
+// tables-optimized: v4 | 2026-05-22 | 4 tables (calculate aggregation, sd comparison, mistakes aggregation, summary capstone)
+
+
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -10,6 +959,7 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
 export async function getStaticProps(){
@@ -30,6 +980,178 @@ export async function getStaticProps(){
     'variance distribution',
     'variance spread measure'
   ]
+
+  const linkStyle = 'color: inherit; text-decoration: underline;'
+
+  // ---------- v4 TABLES ----------
+
+  // calculate — aggregation: 3 forms (general / discrete / continuous) × definition × shortcut
+  const calculateTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Type</th>
+      <th style="${tableHeaders.aggregation}">Definition form: Var(X) = E[(X &minus; &mu;)&sup2;]</th>
+      <th style="${tableHeaders.aggregation}">Shortcut form: Var(X) = E[X&sup2;] &minus; &mu;&sup2;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">General</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">E[(X &minus; &mu;)&sup2;]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">E[X&sup2;] &minus; &mu;&sup2;</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Discrete (PMF)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&Sigma;<sub>i</sub> (x<sub>i</sub> &minus; &mu;)&sup2; p(x<sub>i</sub>)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&Sigma;<sub>i</sub> x<sub>i</sub>&sup2; p(x<sub>i</sub>) &minus; &mu;&sup2;</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Continuous (PDF)</td>
+      <td style="padding: 12px 15px; color: #34495e;">&int; (x &minus; &mu;)&sup2; f(x) dx</td>
+      <td style="padding: 12px 15px; color: #34495e;">&int; x&sup2; f(x) dx &minus; &mu;&sup2;</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // sd — comparison: variance vs standard deviation on 4 attributes
+  const sdTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Attribute</th>
+      <th style="${tableHeaders.comparison}">Variance</th>
+      <th style="${tableHeaders.comparison}">Standard deviation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Symbol</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Var(X) or &sigma;&sup2;</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&sigma;</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Formula</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">E[(X &minus; &mu;)&sup2;]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&radic;Var(X)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Units</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">squared units of X (e.g., m&sup2;, $&sup2;)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same units as X (e.g., m, $)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Best for</td>
+      <td style="padding: 12px 15px; color: #34495e;">theoretical derivations, algebraic manipulation</td>
+      <td style="padding: 12px 15px; color: #34495e;">interpretation, real-world communication</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // mistakes — aggregation: 6 common misconceptions × why wrong
+  const mistakesTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Mistake</th>
+      <th style="${tableHeaders.aggregation}">Why it&apos;s wrong</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Allowing negative variance</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">impossible &mdash; variance is an expected value of squared terms, so Var(X) &ge; 0 always</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Confusing variance with expectation</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">variance measures spread, expectation measures center &mdash; two independent aspects of a distribution</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Forgetting independence in Var(X+Y)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Var(X+Y) = Var(X) + Var(Y) requires independence; otherwise add 2&middot;<a href="/probability/covariance" style="${linkStyle}">Cov(X,Y)</a></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Mixing discrete and continuous formulas</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">discrete variables require a sum &Sigma;, continuous variables require an integral &int;</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Confusing &sigma; with &sigma;&sup2;</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">standard deviation and variance differ in both value and units; &sigma; = &radic;&sigma;&sup2;</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Treating variance as linear</td>
+      <td style="padding: 12px 15px; color: #34495e;">scaling squares the constant (Var(aX) = a&sup2;Var(X)); additivity requires independence</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // summary — capstone: 10 key facts × formula × note
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 100%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Aspect</th>
+      <th style="${tableHeaders.summary}">Formula</th>
+      <th style="${tableHeaders.summary}">Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Definition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Var(X) = E[(X &minus; &mu;)&sup2;]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">expected squared deviation from the mean</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Shortcut form</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Var(X) = E[X&sup2;] &minus; &mu;&sup2;</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">algebraically equivalent; often easier to compute</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sign</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Var(X) &ge; 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">equals 0 if and only if X is constant</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Standard deviation</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&sigma; = &radic;Var(X)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">returns to the original units of X</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Units</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">squared units of X</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">e.g., m&sup2; if X is in meters, $&sup2; if X is in dollars</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Scaling</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Var(aX) = a&sup2;Var(X)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the constant factor comes out squared</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Shifting</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Var(X + b) = Var(X)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">adding a constant does not change spread</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sum, independent</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Var(X + Y) = Var(X) + Var(Y)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires X, Y independent</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sum, general</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Var(X + Y) = Var(X) + Var(Y) + 2&middot;Cov(X,Y)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">always valid; reduces to the independent case when Cov = 0</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Standard distributions</td>
+      <td style="padding: 12px 15px; color: #34495e;">closed-form formulas</td>
+      <td style="padding: 12px 15px; color: #34495e;">see the discrete and continuous distribution tables above</td>
+    </tr>
+  </tbody>
+</table>
+`
 
   const faqQuestions = {
     obj1: {
@@ -564,6 +1686,14 @@ Together, these connections show that variance is not merely a standalone measur
   
     },
 
+    summary:{
+      title:`Variance at a Glance`,
+      content:`
+The preceding sections covered variance through several lenses — its definition, its calculation across discrete and continuous settings, the algebraic rules that govern its behavior under scaling, shifting, and summation, and its relationship to standard deviation. The table below collects the most-used facts into a single reference card, with each row pairing a foundational property or formula with a brief note on its scope or use. Together with the distribution tables in the section above, this card is meant to serve as a quick lookup whenever the page&apos;s content is needed in practice.`,
+      before:``,
+      after:``,
+    },
+
 
     obj5:{
   
@@ -681,6 +1811,10 @@ const continuousVarianceFormulasData = {
       generalTable,
       discreteVarianceFormulasData,
       continuousVarianceFormulasData,
+      calculateTable,
+      sdTable,
+      mistakesTable,
+      summaryTable,
       schemas,
       seoData: {
         title: "Variance: Measuring Spread in Probability | Learn Math Class",
@@ -693,11 +1827,23 @@ const continuousVarianceFormulasData = {
   }
 }
 
-export default function VariancePage({seoData, sectionsContent, introContent, faqQuestions,
-   schemas, generalTable,discreteVarianceFormulasData,
-      continuousVarianceFormulasData,}) {
+export default function VariancePage({
+  seoData,
+  sectionsContent,
+  introContent,
+  faqQuestions,
+  schemas,
+  generalTable,
+  discreteVarianceFormulasData,
+  continuousVarianceFormulasData,
+  calculateTable,
+  sdTable,
+  mistakesTable,
+  summaryTable,
+}) {
 
-    
+  const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
   const genericSections=[
      {
         id:'0',
@@ -749,7 +1895,8 @@ export default function VariancePage({seoData, sectionsContent, introContent, fa
     link:'',
     content:[
         sectionsContent.calculate.content,
-        
+        <div key={'calculate-table'} style={tableWrapStyle}
+             dangerouslySetInnerHTML={{ __html: calculateTable }} />,
     ]
 },
 {
@@ -833,6 +1980,8 @@ export default function VariancePage({seoData, sectionsContent, introContent, fa
         link:'',
         content:[
             sectionsContent.sd.content,
+            <div key={'sd-table'} style={tableWrapStyle}
+                 dangerouslySetInnerHTML={{ __html: sdTable }} />,
         ]
     },
     {
@@ -841,6 +1990,8 @@ export default function VariancePage({seoData, sectionsContent, introContent, fa
         link:'',
         content:[
             sectionsContent.mistakes.content,
+            <div key={'mistakes-table'} style={tableWrapStyle}
+                 dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
         ]
     },
     {
@@ -849,6 +2000,16 @@ export default function VariancePage({seoData, sectionsContent, introContent, fa
         link:'',
         content:[
             sectionsContent.connections.content,
+        ]
+    },
+    {
+        id:'summary',
+        title:sectionsContent.summary.title,
+        link:'',
+        content:[
+            sectionsContent.summary.content,
+            <div key={'summary-table'} style={tableWrapStyle}
+                 dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
 ]
