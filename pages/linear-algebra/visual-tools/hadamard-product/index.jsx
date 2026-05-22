@@ -914,7 +914,10 @@ export default function HadamardProductVisualizer({ seoData, sectionsContent, in
       <h1 className='title' style={{ marginTop: '0px', marginBottom: '0px' }}>Hadamard Product (element-wise)</h1>
       <br />
       <div style={{ width: '80%', margin: 'auto' }}>
-        <HadamardWrapper />
+        <HadamardWrapper 
+        mode='matrices'
+        
+        />
       </div>
       <br />
       <SectionTableOfContents

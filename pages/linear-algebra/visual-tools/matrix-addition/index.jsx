@@ -990,7 +990,9 @@ export default function MatrixAdditionVisualizer({ seoData, sectionsContent, int
       <h1 className='title' style={{ marginTop: '0px', marginBottom: '0px' }}>Matrix Addition&Subtraction</h1>
       <br />
       <div style={{ width: '80%', margin: 'auto' }}>
-        <AdditionWrapper />
+        <AdditionWrapper 
+        mode='matrices'
+        />
       </div>
       <br />
       <br />

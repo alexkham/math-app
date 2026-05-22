@@ -537,7 +537,7 @@ export async function getStaticProps(){
   const comingSoonItems = [
     {
       at: 'end',
-      title: 'Matrix Multiplication Visualizer and Calculator',
+      title: 'Matrix Multiplication Visualizer',
       description: 'Step-by-step animated matrix multiplication with full control over the calculation. Watch each dot product form element-by-element, with red highlighting on the specific pair of values currently being multiplied and yellow on the full row-and-column being combined. Step forward and back, pause, resume, or let it auto-play. Resize either matrix from 1×1 up to 10×10, generate random values within any range, or edit cells by hand — the result matrix dimensions update automatically, and incompatible dimensions are caught before computation starts. A running commentary below the grids spells out every multiplication and the accumulating sum, so the formula C[i][j] = Σ A[i][k]·B[k][j] becomes concrete arithmetic you can verify by hand.',
       href: '/visual-tools/matrix-multiplication',
       category: 'Matrices',

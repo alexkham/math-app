@@ -1033,7 +1033,11 @@ export default function ScalarMultiplicationVisualizer({seoData,sectionsContent 
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Matrix Scalar Multiplication</h1>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
-   <ScalarMultiplicationWrapper/>
+   <ScalarMultiplicationWrapper
+   
+   mode='matrices'
+   
+   />
    </div>
    <br/>
    <SectionTableOfContents sections={genericSections}

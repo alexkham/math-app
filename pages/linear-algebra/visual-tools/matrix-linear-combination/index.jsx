@@ -1049,7 +1049,10 @@ export default function LinearCombinationVisualizer({seoData, sectionsContent, i
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Linear Combinations of Matrices</h1>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
-   <LinearCombinationWrapper/>
+   <LinearCombinationWrapper
+   mode='matrices'
+   
+   />
    </div>
    <br/>
    <SectionTableOfContents sections={genericSections}

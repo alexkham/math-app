@@ -325,7 +325,7 @@ Mastering matrix multiplication through visual exploration prepares you for thes
         description: "Visualize matrix multiplication step-by-step with our interactive tool. Watch animated calculations, understand dot products, customize matrix dimensions. Free online matrix calculator for learning linear algebra.",
         keywords: keyWords.join(", "),
         url: "/visual-tools/matrix-multiplication",
-        name: "Interactive Matrix Multiplication Visualizer and Calculator"
+        name: "Interactive Matrix Multiplication Visualizer"
       }
     },
   };

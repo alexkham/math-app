@@ -37,7 +37,7 @@
 // // Shared style atoms
 // // -----------------------------------------------------------
 // const mathInlineStyle = {
-//   fontFamily: '\'Cambria Math\', Georgia, serif',
+//   fontFamily: '"Cambria Math", Georgia, serif',
 //   fontStyle: 'italic'
 // };
 
@@ -63,6 +63,44 @@
 //   'A and B must have the same dimensions. Each entry of A is paired with ' +
 //   'the entry at the same position in B; without matching shapes there is ' +
 //   'no such pairing.';
+
+// // -----------------------------------------------------------
+// // Scoped CSS — extracted as a constant and injected via
+// // dangerouslySetInnerHTML to avoid hydration mismatches on
+// // CSS quotes (content: "").
+// // -----------------------------------------------------------
+// const SCOPED_CSS = `
+// .ip-stepper-btn:hover:not(:disabled) { color: #1e40af; }
+// .ip-stepper-btn:disabled { color: #cbd5e1; cursor: not-allowed; }
+
+// .ip-pill:hover { border-color: #94a3b8; }
+// .ip-pill-active:hover { border-color: #2563eb; }
+
+// .ip-info:hover, .ip-info:focus { background: #bfdbfe; outline: none; }
+
+// .ip-info .ip-tip {
+//   visibility: hidden; opacity: 0;
+//   position: absolute; top: calc(100% + 8px); left: 50%;
+//   transform: translateX(-50%);
+//   background: #1e293b; color: #f1f5f9;
+//   font-size: 12px; line-height: 1.5; font-weight: 400;
+//   padding: 9px 13px; border-radius: 6px;
+//   width: 280px; text-align: left;
+//   pointer-events: none;
+//   transition: opacity 0.12s ease, visibility 0.12s;
+//   z-index: 10;
+//   font-family: Arial, sans-serif;
+//   font-style: normal;
+// }
+// .ip-info .ip-tip::before {
+//   content: ""; position: absolute;
+//   bottom: 100%; left: 50%; transform: translateX(-50%);
+//   border: 5px solid transparent; border-bottom-color: #1e293b;
+// }
+// .ip-info:hover .ip-tip, .ip-info:focus .ip-tip {
+//   visibility: visible; opacity: 1;
+// }
+// `;
 
 // // -----------------------------------------------------------
 // // Per-term running-sum formula for the caption.
@@ -141,7 +179,7 @@
 //       display: 'inline-flex',
 //       alignItems: 'center',
 //       gap: '2px',
-//       fontFamily: '\'Cambria Math\', Georgia, serif',
+//       fontFamily: '"Cambria Math", Georgia, serif',
 //       fontSize: '13px',
 //       lineHeight: 1
 //     }}>
@@ -169,7 +207,7 @@
 // function MatrixResultLabel() {
 //   return (
 //     <span style={{
-//       fontFamily: '\'Cambria Math\', Georgia, serif',
+//       fontFamily: '"Cambria Math", Georgia, serif',
 //       fontSize: '14px',
 //       lineHeight: 1
 //     }}>
@@ -601,42 +639,11 @@
 //       padding: '22px',
 //       fontFamily: 'Arial, sans-serif'
 //     }}>
-//       <style>{`
-//         .ip-stepper-btn:hover:not(:disabled) { color: #1e40af; }
-//         .ip-stepper-btn:disabled { color: #cbd5e1; cursor: not-allowed; }
-
-//         .ip-pill:hover { border-color: #94a3b8; }
-//         .ip-pill-active:hover { border-color: #2563eb; }
-
-//         .ip-info:hover, .ip-info:focus { background: #bfdbfe; outline: none; }
-
-//         .ip-info .ip-tip {
-//           visibility: hidden; opacity: 0;
-//           position: absolute; top: calc(100% + 8px); left: 50%;
-//           transform: translateX(-50%);
-//           background: #1e293b; color: #f1f5f9;
-//           font-size: 12px; line-height: 1.5; font-weight: 400;
-//           padding: 9px 13px; border-radius: 6px;
-//           width: 280px; text-align: left;
-//           pointer-events: none;
-//           transition: opacity 0.12s ease, visibility 0.12s;
-//           z-index: 10;
-//           font-family: Arial, sans-serif;
-//           font-style: normal;
-//         }
-//         .ip-info .ip-tip::before {
-//           content: ''; position: absolute;
-//           bottom: 100%; left: 50%; transform: translateX(-50%);
-//           border: 5px solid transparent; border-bottom-color: #1e293b;
-//         }
-//         .ip-info:hover .ip-tip, .ip-info:focus .ip-tip {
-//           visibility: visible; opacity: 1;
-//         }
-//       `}</style>
+//       <style dangerouslySetInnerHTML={{ __html: SCOPED_CSS }} />
 
 //       {(title || subtitle) && (
 //         <div style={{ marginBottom: '18px' }}>
-//           {title && (
+//           {/* {title && (
 //             <h2 style={{
 //               fontSize: '22px',
 //               color: '#1e40af',
@@ -645,7 +652,7 @@
 //             }}>
 //               {title}
 //             </h2>
-//           )}
+//           )} */}
 //           {subtitle && (
 //             <p style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
 //               {subtitle}
@@ -736,11 +743,14 @@
 //           showStepIndicator={true}
 //           showStepLog={true}
 //           stepLogTitle="Step explanations"
+//           sceneCanvasProps={{ showCaption: false }}
 //         />
 //       </div>
 //     </div>
 //   );
 // }
+
+
 
 
 
@@ -757,6 +767,15 @@ import { ScenePlayer } from './MatrixCore';
 //
 // Both share the same mental model: pair entries by index,
 // multiply, sum. The wrapper makes that unity explicit.
+//
+// MODE prop:
+//   - mode='both'     (default) → scenario pills shown, user
+//                                 toggles vectors/matrices,
+//                                 starts on defaultScenario.
+//   - mode='vectors'  → no pills, vector view only, locked.
+//   - mode='matrices' → no pills, matrix view only, locked.
+//   In the locked modes the scenario can only be changed from
+//   outside by changing the prop.
 //
 // Layout in the canvas:
 //     [left operand] , [right operand] = [result slot]
@@ -1350,8 +1369,15 @@ function Pill({ active, onClick, children }) {
 
 // ===========================================================
 // Main wrapper
+//
+// mode: 'both' (default) | 'vectors' | 'matrices'
+//   'both'     → scenario pills shown; internal state drives
+//                the scenario, starting at defaultScenario.
+//   'vectors'  → locked to vectors; no pills.
+//   'matrices' → locked to matrices; no pills.
 // ===========================================================
 export default function InnerProductWrapper({
+  mode = 'both',
   defaultScenario = 'vectors',
   defaultVecN = 4,
   defaultMatRows = 2,
@@ -1362,7 +1388,14 @@ export default function InnerProductWrapper({
   subtitle = 'Symbolic visualization of \u27E8u, v\u27E9 (vectors) and \u27E8A, B\u27E9_F (Frobenius), step by step.',
   defaultSpeed = 1200
 }) {
-  const [scenario, setScenario] = useState(defaultScenario);
+  const locked = mode === 'vectors' || mode === 'matrices';
+
+  // In 'both' mode the scenario is interactive state; in a
+  // locked mode it is pinned to the prop and only changes if
+  // the prop changes from outside.
+  const [scenarioState, setScenarioState] = useState(defaultScenario);
+  const scenario = locked ? mode : scenarioState;
+
   const [vecN, setVecN] = useState(defaultVecN);
   const [matRows, setMatRows] = useState(defaultMatRows);
   const [matCols, setMatCols] = useState(defaultMatCols);
@@ -1418,28 +1451,30 @@ export default function InnerProductWrapper({
         gap: '32px',
         alignItems: 'flex-start'
       }}>
-        {/* Scenario */}
-        <div>
-          <FieldLabel info={INNER_PRODUCT_INFO}>Scenario</FieldLabel>
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-            <Pill
-              active={scenario === 'vectors'}
-              onClick={() => setScenario('vectors')}
-            >
-              Vectors &nbsp;
-              <span style={mathInlineStyle}>&#10216;u, v&#10217;</span>
-            </Pill>
-            <Pill
-              active={scenario === 'matrices'}
-              onClick={() => setScenario('matrices')}
-            >
-              Matrices &nbsp;
-              <span style={mathInlineStyle}>
-                &#10216;A, B&#10217;<sub style={{ fontStyle: 'normal' }}>F</sub>
-              </span>
-            </Pill>
+        {/* Scenario — only shown in 'both' mode */}
+        {!locked && (
+          <div>
+            <FieldLabel info={INNER_PRODUCT_INFO}>Scenario</FieldLabel>
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+              <Pill
+                active={scenario === 'vectors'}
+                onClick={() => setScenarioState('vectors')}
+              >
+                Vectors &nbsp;
+                <span style={mathInlineStyle}>&#10216;u, v&#10217;</span>
+              </Pill>
+              <Pill
+                active={scenario === 'matrices'}
+                onClick={() => setScenarioState('matrices')}
+              >
+                Matrices &nbsp;
+                <span style={mathInlineStyle}>
+                  &#10216;A, B&#10217;<sub style={{ fontStyle: 'normal' }}>F</sub>
+                </span>
+              </Pill>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Dimensions — scenario-specific */}
         {scenario === 'vectors' ? (

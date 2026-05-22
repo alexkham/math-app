@@ -819,7 +819,7 @@ In both cases, the calculation is "pair, multiply, sum" — no row-column gymnas
         title: "Inner Product Visualizer | Dot Product & Frobenius",
         description: "Visualize the inner product step by step for vectors and matrices. Switch between dot product and Frobenius product, set the shape, and watch the scalar result build.",
         keywords: keyWords.join(", "),
-        url: "/linear-algebra/visual-tools/inner-product",
+        url: "/linear-algebra/visual-tools/vectors-inner-product",
         name: "Inner Product Visualizer",
         hubDescription: "Pair, multiply, sum — watch the inner product build into a single scalar one term at a time. Switch between the classical vector dot product and the Frobenius matrix inner product, set the shape of the operands, and follow a running expanded sum with per-term color coding.",
         category: 'Vectors',
@@ -910,10 +910,10 @@ export default function InnerProductVisualizer({ seoData, sectionsContent, intro
       <Breadcrumb />
       <br />
       <br />
-      <h1 className='title' style={{ marginTop: '-50px', marginBottom: '0px' }}>Inner Product</h1>
+      <h1 className='title' style={{ marginTop: '-50px', marginBottom: '0px' }}>Inner Product of Vectors</h1>
       <br />
       <div style={{ width: '80%', margin: 'auto' }}>
-        <InnerProductWrapper />
+        <InnerProductWrapper mode='vectors' />
       </div>
       <br />
       <SectionTableOfContents sections={genericSections}
