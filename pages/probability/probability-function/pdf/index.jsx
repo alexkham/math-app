@@ -10,8 +10,23 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['','','','','']
+const keyWords = [
+  "probability density function",
+  "PDF probability",
+  "continuous probability distribution",
+  "continuous random variable",
+  "probability density",
+  "PDF formula",
+  "PDF axioms",
+  "PDF to CDF",
+  "CDF to PDF",
+  "change of variables PDF",
+  "Jacobian transformation PDF",
+  "expected value continuous",
+  "variance continuous",
+  "uniform exponential normal PDF",
+  "area under PDF curve",
+]
 
   // •
 
@@ -41,115 +56,7 @@ export async function getStaticProps(){
 //                   </div>,
 
 
-//   const sectionsContent = {
-//   obj1: {
-//     title: `Definition & Physical Intuition`,
-//     content: `
-    
-//     `,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj2: {
-//     title: `The Domain (Support)`,
-//     content: ``,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj3: {
-//     title: `The Two Fundamental Axioms`,
-//     content: ``,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj4: {
-//     title: `Representations`,
-//     content: ``,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj5: {
-//     title: `Calculations Using the PDF`,
-//     content: ``,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj6: {
-//     title: `Derived Properties (Moments via Calculus)`,
-//     content: ``,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj7: {
-//     title: `Connection to CDF (The Fundamental Theorem)`,
-//     content: ``,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj8: {
-//     title: `Transformations (Change of Variables)`,
-//     content: ``,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj9: {
-//     title: `The Famous Families`,
-//     content: ``,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj10: {
-//     title: ``,
-//     content: ``,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj11: {
-//     title: ``,
-//     content: ``,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj12: {
-//     title: ``,
-//     content: ``,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj13: {
-//     title: ``,
-//     content: ``,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj14: {
-//     title: ``,
-//     content: ``,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
-//   obj15: {
-//     title: ``,
-//     content: ``,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   }
-// }
+
 
 
 const sectionsContent = {
@@ -212,13 +119,7 @@ The PDF is the continuous analog of mass in the discrete case. Where mass concen
     after: ``,
     link: '',
   },
-  // obj3: {
-  //   title: `Notation`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
+ 
 
   obj3: {
     title: `Notation`,
@@ -261,14 +162,7 @@ The notation emphasizes that $f(x)$ is fundamentally different from the PMF nota
     after: ``,
     link: '',
   },
-  // obj4: {
-  //   title: `The Domain (Support)`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
-
+ 
 
   obj4: {
     title: `The Domain (Support)`,
@@ -310,13 +204,7 @@ When computing $P(X \\in A)$ for some set $A$, only integrate over the intersect
     after: ``,
     link: '',
   },
-  // obj5: {
-  //   title: `The Two Fundamental Axioms`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
+ 
 
   obj5: {
     title: `The Two Fundamental Axioms`,
@@ -362,13 +250,7 @@ These two axioms are fundamental for both [PMF](!/probability/probability-functi
     after: ``,
     link: '',
   },
-  // obj6: {
-  //   title: `Representations: The Three Views`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
+ 
 
   obj6: {
     title: `Representations: The Three Views`,
@@ -432,13 +314,6 @@ All three describe the same density, just from different perspectives.
     after: ``,
     link: '',
   },
-  // obj7: {
-  //   title: `Building a PDF (From Story to Math)`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
 
 
   obj7: {
@@ -506,14 +381,7 @@ Once built, the PDF becomes a complete mathematical description of the [random v
     after: ``,
     link: '',
   },
-  // obj8: {
-  //   title: `Calculations Using the PDF`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
-
+ 
   obj8: {
     title: `Calculations Using the PDF`,
     content: `
@@ -579,13 +447,7 @@ The PDF gives complete information. If you know $f_X(x)$ for all $x$, you can an
     after: ``,
     link: '',
   },
-  // obj9: {
-  //   title: `Derived Properties: Location Measures`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
+ 
   obj9: {
     title: `Derived Properties: Location Measures`,
     content: `
@@ -649,14 +511,7 @@ Location measures summarize where the distribution sits on the number line. They
     after: ``,
     link: '',
   },
-  // obj10: {
-  //   title: `Derived Properties: Spread Measures`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
-
+ 
   obj10: {
     title: `Derived Properties: Spread Measures`,
     content: `
@@ -718,13 +573,7 @@ Narrow spread means values cluster tightly, making individual outcomes more pred
     after: ``,
     link: '',
   },
-  // obj11: {
-  //   title: `Transformations (Change of Variables)`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
+
 
   obj11: {
     title: `Transformations (Change of Variables)`,
@@ -797,13 +646,7 @@ Transformations redistribute probability density across a new domain. The Jacobi
     after: ``,
     link: '',
   },
-  // obj12: {
-  //   title: `Connection to CDF (The Fundamental Theorem)`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
+
 
   obj12: {
     title: `Connection to CDF (The Fundamental Theorem)`,
@@ -873,14 +716,7 @@ Different questions favor different representations. The PDF is better for under
     after: ``,
     link: '',
   },
-  // obj13: {
-  //   title: `PDFs of Common Continuous Distributions`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
-
+ 
   obj13: {
     title: `PDFs of Common Continuous Distributions`,
     content: `
@@ -928,13 +764,7 @@ Each PDF has characteristic behavior: where density concentrates, how it spreads
     after: ``,
     link: '',
   },
-  // obj14: {
-  //   title: `Common Mistakes`,
-  //   content: ``,
-  //   before: ``,
-  //   after: ``,
-  //   link: '',
-  // },
+
 
   obj14: {
     title: `Common Mistakes`,
@@ -1027,26 +857,135 @@ The goal is not to catalog distributions, but to understand what a PDF is, how i
 }
 
 
+const faqQuestions = {
+  obj1: {
+    question: "What is a probability density function (PDF)?",
+    answer: "A probability density function f_X(x) describes how probability is distributed across a continuous random variable. Unlike discrete probability, density at a point is not itself a probability. Probability is obtained by integrating the PDF over an interval: P(a less than or equal to X less than or equal to b) equals the integral of f_X(x) from a to b."
+  },
+  obj2: {
+    question: "Why is the probability at a single point zero for a continuous random variable?",
+    answer: "For a continuous random variable, a single point has no width, so the integral of the PDF over that single point is zero. Probability is the area under the PDF, and the area of a line segment of zero width is zero. Probability only exists across intervals, not at individual points."
+  },
+  obj3: {
+    question: "What two axioms must every valid PDF satisfy?",
+    answer: "First, the PDF must be non-negative everywhere: f_X(x) greater than or equal to zero for all x. Second, the total area under the curve must equal one: the integral of f_X(x) from negative infinity to positive infinity equals 1. Any function that fails either condition is not a valid probability density function."
+  },
+  obj4: {
+    question: "How are the PDF and CDF related?",
+    answer: "The CDF is the integral of the PDF from negative infinity up to x, and the PDF is the derivative of the CDF. This relationship is an application of the Fundamental Theorem of Calculus to probability: integration accumulates density into cumulative probability, and differentiation recovers the density."
+  },
+  obj5: {
+    question: "Can a PDF value exceed 1?",
+    answer: "Yes. Unlike a PMF, whose values are probabilities and must satisfy p(x) less than or equal to 1, a PDF gives density and can take any non-negative value. For example, the uniform distribution on the interval from 0 to 0.1 has f(x) equal to 10. What must equal 1 is the total area under the curve, not the height."
+  },
+}
 
+
+
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Probability Density Function (PDF)",
+    "description": "Learn the probability density function: definition, axioms, support, PDF-CDF relationship, expected value, variance, transformations, and common continuous PDFs.",
+    "url": "https://www.learnmathclass.com/probability/probability-function/pdf",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Probability Density Function"
+    },
+    "teaches": [
+      "Definition of the PDF and why density differs from probability",
+      "Support of a continuous random variable and the two fundamental axioms of a PDF",
+      "Computing interval probabilities, tail probabilities, and using the complement rule",
+      "Expected value, median, mode, variance, and standard deviation from a PDF",
+      "Change of variables, the Jacobian, and how transformations reshape a PDF",
+      "Connection between PDF and CDF via integration and differentiation, with examples from uniform, normal, exponential, and beta distributions"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Probability",
+        "item": "https://www.learnmathclass.com/probability"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Probability Function",
+        "item": "https://www.learnmathclass.com/probability/probability-function"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Probability Density Function (PDF)",
+        "item": "https://www.learnmathclass.com/probability/probability-function/pdf"
+      }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
 
    return {
-      props:{
-         sectionsContent,
-         introContent,
-          seoData: {
-        title: "Probability Density Function (PDF) | Learn Math Class",
-        description: "Metadescription",
-        keywords: keyWords.join(", "),
-        url: "/probability/probability-function/pdf",
-         name: "name"
-      },
-        
-       }
-    }
+  props:{
+     sectionsContent,
+     introContent,
+     faqQuestions,
+     schemas,
+     seoData: {
+       title: "Probability Density Function (PDF) | Learn Math Class",
+       description: "Learn the probability density function: definition, axioms, support, PDF-CDF relationship, expected value, variance, transformations, and common continuous PDFs.",
+       keywords: keyWords.join(", "),
+       url: "/probability/probability-function/pdf",
+       name: "Probability Density Function (PDF)"
+     },
+   }
+}
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
+export default function PDFPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
     
   const genericSections=[
      {
@@ -1207,10 +1146,11 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
   return (
    <>
-   <Head>
+<Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
   
   <meta property="og:title" content={seoData.title} />
@@ -1228,25 +1168,21 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
   <script 
     type="application/ld+json"
     dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.name,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": seoData.name,
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
+      __html: JSON.stringify(schemas.learningResource)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

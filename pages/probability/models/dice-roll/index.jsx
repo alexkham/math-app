@@ -1,4 +1,689 @@
 
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// import Sections from '@/app/components/page-components/section/Sections'
+// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// import React from 'react'
+// import '../../../../pages/pages.css'
+// import Head from 'next/head'
+// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+
+// export async function getStaticProps(){
+
+//   const keyWords = [
+//     "dice roll probability model",
+//     "finite outcome model",
+//     "categorical probability",
+//     "discrete uniform distribution",
+//     "six sided die probability",
+//     "fair dice biased dice",
+//     "multiple dice probability",
+//     "dice roll random variable",
+//     "multi-outcome experiment",
+//     "finite probability model",
+//     "repeated dice rolls",
+//     "categorical randomness",
+//     "dice probability distributions",
+//     "probability model example"
+//   ]
+
+//   const faqQuestions = {
+//     obj1: {
+//       question: "What is the dice roll probability model?",
+//       answer: "The dice roll model represents a single random trial with a fixed, finite number of possible outcomes. Each trial produces exactly one outcome from mutually exclusive categories. It abstracts away physical details and keeps only the structure of a finite multi-outcome mechanism, typically with outcomes labeled 1 through 6."
+//     },
+//     obj2: {
+//       question: "What assumptions does the dice roll model make?",
+//       answer: "The model assumes: exactly one outcome occurs in each roll, all listed outcomes are mutually exclusive and exhaustive, the probability assigned to each outcome is fixed, and rolls are independent when repeated. These assumptions are part of the model definition—changing any of them produces a different model."
+//     },
+//     obj3: {
+//       question: "How is the dice roll model different from the coin toss model?",
+//       answer: "The dice roll model has more than two possible outcomes, introducing genuinely categorical behavior where outcomes are not ordered by default. Events naturally involve grouping and comparison rather than simple success-failure logic. It forms a bridge between binary models and more general discrete models."
+//     },
+//     obj4: {
+//       question: "What distributions can be created from dice rolls?",
+//       answer: "A single roll with uniform probabilities produces a discrete uniform distribution. Repeated rolls can create: sums producing triangular or normal-like shapes, counts of specific faces (binomial-type), maximum or minimum values, and aggregated values that approximate continuous distributions through rescaling."
+//     },
+//     obj5: {
+//       question: "What is the dice roll model used for?",
+//       answer: "The model is used for situations involving finite distinct categories from a single random mechanism: modeling categorical outcomes, sampling from finite populations, constructing discrete distributions, studying aggregation effects across trials, and providing a foundation for simulation and Monte Carlo methods."
+//     }
+//   }
+
+//   const schemas = {
+//     learningResource: {
+//       "@context": "https://schema.org",
+//       "@type": "LearningResource",
+//       "name": "Dice Roll Probability Model",
+//       "description": "Learn the dice roll probability model: finite outcomes, categorical randomness, events, probability assignments, uniform distributions, and aggregations from repeated rolls.",
+//       "url": "https://www.learnmathclass.com/probability/models/dice-roll",
+//       "inLanguage": "en-US",
+//       "learningResourceType": "Explanation",
+//       "educationalLevel": "High School, College",
+//       "educationalUse": "Learning",
+//       "audience": {
+//         "@type": "EducationalAudience",
+//         "educationalRole": "student"
+//       },
+//       "about": {
+//         "@type": "Thing",
+//         "name": "Dice Roll Probability Model"
+//       },
+//       "teaches": [
+//         "What the dice roll model represents: finite multi-outcome mechanism",
+//         "Outcome space: finite set with more than two elements",
+//         "Events: collections and groupings of outcomes",
+//         "Probability assignment: non-negative values summing to 1",
+//         "Model assumptions: exclusivity, fixed probabilities, independence",
+//         "Random variables on dice roll: numerical assignments to outcomes",
+//         "Distributions from single roll: discrete uniform distribution",
+//         "Distributions from repeated rolls: sums, counts, extrema",
+//         "Approximating continuous distributions through aggregation",
+//         "Why dice roll matters: simplest categorical probability model"
+//       ],
+//       "keywords": keyWords.join(", "),
+//       "author": {
+//         "@type": "Organization",
+//         "name": "Learn Math Class"
+//       },
+//       "publisher": {
+//         "@type": "Organization",
+//         "name": "Learn Math Class"
+//       },
+//       "datePublished": "2024-01-15",
+//       "dateModified": new Date().toISOString()
+//     },
+
+//     breadcrumb: {
+//       "@context": "https://schema.org",
+//       "@type": "BreadcrumbList",
+//       "itemListElement": [
+//         {
+//           "@type": "ListItem",
+//           "position": 1,
+//           "name": "Home",
+//           "item": "https://www.learnmathclass.com"
+//         },
+//         {
+//           "@type": "ListItem",
+//           "position": 2,
+//           "name": "Probability",
+//           "item": "https://www.learnmathclass.com/probability"
+//         },
+//         {
+//           "@type": "ListItem",
+//           "position": 3,
+//           "name": "Probability Models",
+//           "item": "https://www.learnmathclass.com/probability/models"
+//         },
+//         {
+//           "@type": "ListItem",
+//           "position": 4,
+//           "name": "Dice Roll Model",
+//           "item": "https://www.learnmathclass.com/probability/models/dice-roll"
+//         }
+//       ]
+//     },
+
+//     faq: {
+//       "@context": "https://schema.org",
+//       "@type": "FAQPage",
+//       "mainEntity": Object.keys(faqQuestions).map(key => ({
+//         "@type": "Question",
+//         "name": faqQuestions[key].question,
+//         "acceptedAnswer": {
+//           "@type": "Answer",
+//           "text": faqQuestions[key].answer
+//         }
+//       }))
+//     }
+//   }
+
+//   const sectionsContent={
+//     obj0: {
+//   title: `Key Terms`,
+//   content: `
+// - [Random Experiment](!/probability/definitions#random_experiment) — rolling a die is a standard random experiment
+// - [Sample Space](!/probability/definitions#sample_space) — $\\Omega = \\{1,2,3,4,5,6\\}$ for a standard die
+// - [Event](!/probability/definitions#event) — any subset of faces, e.g. rolling an even number
+// - [Equally Likely Events](!/probability/definitions#equally_likely_events) — each face has probability $1/6$ for a fair die
+// - [Discrete Uniform Distribution](!/probability/definitions#uniform_distribution_discrete) — the distribution of a fair die roll`,
+//   before: ``,
+//   after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+//   link: '',
+// },
+
+//     obj1:{
+//       title:`What Is Being Modeled`,
+//       content:`
+// The dice roll model represents a single random trial with a fixed, finite number of possible outcomes.
+
+// Each trial produces exactly one outcome, and no two outcomes can occur at the same time. The model does not depend on the physical act of rolling a die; it abstracts away all physical details and keeps only the structure of a finite multi-outcome mechanism.
+
+// What distinguishes this model from simpler ones is not the presence of numbers, but the existence of several mutually exclusive categories generated by a single random experiment.
+// `,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+  
+//     },
+//     obj2:{
+//       title:`Outcome Space`,
+//       content:`
+// The outcome space of the dice roll model is a finite set containing more than two elements.
+
+// Outcomes are often labeled using integers, such as
+// - 1, 2, 3, 4, 5, 6
+
+// These labels serve only to distinguish outcomes.  
+// At this stage, they are not numerical measurements and carry no arithmetic meaning.
+
+// The outcome space specifies *what can happen* in a single roll.  
+// Probabilities, numerical values, and interpretations are introduced only in later steps.
+// `,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+  
+//     obj3:{
+  
+//       title:`Events`,
+//       content:`
+// Events in the dice roll model are collections of outcomes selected from the outcome space.
+
+// Because the outcome space contains several elements, events can be formed in many different ways, including:
+// • single-outcome events
+// • grouped outcomes
+// • category-based events such as parity or range conditions
+
+// Events describe *which outcomes are considered together* for a given question.  
+// They organize the outcome space without assigning probabilities or numerical values.
+
+// This richer event structure is one of the main differences between the dice roll model and binary models.
+// `,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj4:{
+//       title:`Probability Assignment`,
+//       content:`
+// To complete the dice roll model, a probability is assigned to each outcome in the outcome space.
+
+// Each outcome receives a non-negative number, and the total probability across all outcomes is equal to 1. These probabilities are part of the model definition and must be specified explicitly.
+
+// In many introductory settings, all outcomes are assigned the same probability, producing a symmetric or "fair" model. This symmetry, however, is an assumption rather than a requirement. Unequal probabilities lead to a different, but equally valid, dice roll model.
+
+// The probability assignment determines how likely each outcome is, independently of how the outcomes are labeled.
+// `,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj5:{
+//       title:`Assumptions`,
+//       content:`
+// The dice roll model is defined under a small set of explicit assumptions.
+
+// • exactly one outcome occurs in each roll  
+// • all listed outcomes are mutually exclusive and exhaustive  
+// • the probability assigned to each outcome is fixed  
+// • rolls are independent when the experiment is repeated  
+
+// These assumptions are part of the model, not conclusions drawn from it.  
+// Changing any of them produces a different model, even if the same outcome labels are used.
+// `,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj6:{
+//       title:`Random Variables on the Dice Roll Model`,
+//       content:`
+// Once the dice roll model is fixed, numerical quantities can be defined on top of it.
+
+// A random variable assigns a number to each possible outcome of a roll.  
+// Different choices of this assignment lead to different interpretations and uses of the same model.
+
+// Common examples include:
+// • using the outcome label itself as a numerical value
+// • indicator variables for specific outcomes or groups of outcomes
+// • category-based mappings such as even vs odd
+// • transformed mappings such as thresholds or modular values
+
+// The dice roll model does not privilege any particular random variable.  
+// It provides a base on which many different measurements can be defined.
+// `,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj7:{
+//       title:`Distributions Directly Induced by a Single Roll`,
+//       content:`
+// When a random variable is defined on the dice roll model, its probability distribution is determined by the probabilities of the underlying outcomes.
+
+// If the random variable assigns a distinct value to each outcome, the resulting distribution places probability mass on a finite set of points. In the symmetric case, this produces a discrete uniform distribution.
+
+// Other choices of random variables may group several outcomes together or assign the same value to multiple faces. These mappings lead to categorical or degenerate distributions, depending on how outcomes are combined.
+
+// At this level, the distributions reflect the finite, multi-outcome structure of a single roll.
+// `,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj8:{
+//       title:`Distributions Built from Repeated Dice Rolls`,
+//       content:`
+// Richer distributions appear when the dice roll model is repeated and outcomes from multiple rolls are combined.
+
+// Each roll adds another categorical outcome, and sequences of rolls can be aggregated in different ways to define new random variables. The resulting distribution depends on *how* the outcomes are combined, not on the die itself.
+
+// Common constructions include:
+// • sums of multiple rolls
+// • averages of rolls
+// • counts of specific faces or groups of faces
+// • maximum or minimum over several rolls
+
+// These constructions produce a wide range of discrete distributions and provide natural links to topics such as convolution, multinomial models, and aggregation effects.
+// `,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj9:{
+//       title:`Approximating Continuous Distributions`,
+//       content:`
+// Repeated dice rolls can also be combined to produce behavior that resembles continuous randomness.
+
+// By aggregating many rolls and rescaling the results, the discrete nature of individual outcomes becomes less prominent. As the number of rolls increases, the distribution of the aggregated values smooths out and begins to resemble a continuous shape.
+
+// In this way, continuous distributions can be approached as limits of experiments built from finite, multi-outcome randomness. The dice roll model therefore serves not only as a discrete model, but also as a practical foundation for simulation and approximation of continuous probabilistic behavior.
+// `,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj10:{
+//       title:`Why the Dice Roll Model Matters`,
+//       content:`
+// The dice roll model is the simplest probability model that captures randomness with more than two possible outcomes.
+
+// It introduces genuinely categorical behavior, where outcomes are not ordered by default and where events naturally involve grouping and comparison rather than simple success–failure logic.
+
+// Because of this, the dice roll model forms a bridge between binary models and more general discrete models. It provides a foundation for understanding categorical data, aggregation of outcomes, and the construction of complex probability distributions from finite sources of randomness.
+// `,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj11:{
+//       title:`Variations of the Dice Roll Model`,
+//       content:`
+// The basic dice roll model can be modified in several ways while preserving its finite multi-outcome structure.
+
+// Common variations include:
+// • assigning unequal probabilities to outcomes (biased dice)
+// • changing the number of possible outcomes (dice with different numbers of faces)
+// • conditioning outcomes on previous rolls
+// • introducing stopping rules based on observed results
+
+// Each variation defines a new probability model.  
+// Although the outcome labels may look similar, the underlying assumptions and probability assignments are different.
+// `,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj12:{
+//       title:`What This Model Is Used For`,
+//       content:`
+// The dice roll model is used whenever a situation involves a finite set of distinct categories produced by a single random mechanism.
+
+// Typical uses include:
+// • modeling categorical outcomes
+// • sampling from finite populations
+// • constructing and combining discrete distributions
+// • studying aggregation effects across repeated trials
+// • providing a foundation for simulation and Monte Carlo methods
+
+// Because it captures finite multi-outcome randomness in its simplest form, the dice roll model appears widely in probability theory, statistics, and applied modeling.
+// `,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     },
+//     obj13:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+//       link:'',
+  
+//     },
+//     obj14:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+//       link:'',
+  
+//     },
+
+
+//     obj15:{
+  
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+  
+//     }
+  
+//   }
+
+
+//   const introContent = {
+//     id: "intro",
+//     title: "Dice Roll Probability Model",
+//     content: `
+// The dice roll model describes a random mechanism in which a single trial produces one outcome from a finite set of distinct possibilities.
+
+// Unlike binary models, this setting introduces randomness with multiple categories. Each outcome represents a separate case, and exactly one of them occurs on every trial.
+
+// By allowing more than two outcomes, the dice roll model provides a basic framework for studying categorical randomness, grouping of events, and the probability distributions that arise from finite multi-outcome experiments.
+// `
+//   }
+
+//   return {
+//     props: {
+//       sectionsContent,
+//       introContent,
+//       faqQuestions,
+//       schemas,
+//       seoData: {
+//         title: "Dice Roll Probability Model: Finite Multi-Outcome Randomness | Learn Math Class",
+//         description: "Learn the dice roll probability model: finite outcomes, categorical randomness, events, probability assignments, uniform distributions, and aggregations from repeated rolls.",
+//         keywords: keyWords.join(", "),
+//         url: "/probability/models/dice-roll",
+//         name: "Dice Roll Probability Model"
+//       }
+//     }
+//   }
+// }
+
+// export default function DiceRollPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+
+    
+//   const genericSections=[
+//      {
+//         id:'0',
+//         title:sectionsContent.obj0.title,
+//         link:sectionsContent.obj0.link,
+//         content:[
+//           sectionsContent.obj0.content,
+//           sectionsContent.obj0.after,
+//         ]
+//     },
+//     {
+//         id:'1',
+//         title:sectionsContent.obj1.title,
+//         link:sectionsContent.obj1.link,
+//         content:[
+//           sectionsContent.obj1.content,
+//         ]
+//     },
+//     {
+//         id:'2',
+//         title:sectionsContent.obj2.title,
+//         link:sectionsContent.obj2.link,
+//         content:[
+//           sectionsContent.obj2.content,
+//         ]
+//     },
+//     {
+//         id:'3',
+//         title:sectionsContent.obj3.title,
+//         link:sectionsContent.obj3.link,
+//         content:[
+//           sectionsContent.obj3.content,
+//         ]
+//     },
+//     {
+//         id:'4',
+//         title:sectionsContent.obj4.title,
+//         link:sectionsContent.obj4.link,
+//         content:[
+//           sectionsContent.obj4.content,
+//         ]
+//     },
+//     {
+//         id:'5',
+//         title:sectionsContent.obj5.title,
+//         link:sectionsContent.obj5.link,
+//         content:[
+//           sectionsContent.obj5.content,
+//         ]
+//     },
+//     {
+//         id:'6',
+//         title:sectionsContent.obj6.title,
+//         link:sectionsContent.obj6.link,
+//         content:[
+//           sectionsContent.obj6.content,
+//         ]
+//     },
+//     {
+//         id:'7',
+//         title:sectionsContent.obj7.title,
+//         link:sectionsContent.obj7.link,
+//         content:[
+//           sectionsContent.obj7.content,
+//         ]
+//     },
+//     {
+//         id:'8',
+//         title:sectionsContent.obj8.title,
+//         link:sectionsContent.obj8.link,
+//         content:[
+//           sectionsContent.obj8.content,
+//         ]
+//     },
+//     {
+//         id:'9',
+//         title:sectionsContent.obj9.title,
+//         link:sectionsContent.obj9.link,
+//         content:[
+//           sectionsContent.obj9.content,
+//         ]
+//     },
+//     {
+//         id:'10',
+//         title:sectionsContent.obj10.title,
+//         link:sectionsContent.obj10.link,
+//         content:[
+//           sectionsContent.obj10.content,
+//         ]
+//     },
+//     {
+//         id:'11',
+//         title:sectionsContent.obj11.title,
+//         link:sectionsContent.obj11.link,
+//         content:[
+//           sectionsContent.obj11.content,
+//         ]
+//     },
+//     {
+//         id:'12',
+//         title:sectionsContent.obj12.title,
+//         link:sectionsContent.obj12.link,
+//         content:[
+//           sectionsContent.obj12.content,
+//         ]
+//     },
+//     // {
+//     //     id:'13',
+//     //     title:sectionsContent.obj13.title,
+//     //     link:sectionsContent.obj13.link,
+//     //     content:[
+//     //       sectionsContent.obj13.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'14',
+//     //     title:sectionsContent.obj14.title,
+//     //     link:sectionsContent.obj14.link,
+//     //     content:[
+//     //       sectionsContent.obj14.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'15',
+//     //     title:sectionsContent.obj15.title,
+//     //     link:sectionsContent.obj15.link,
+//     //     content:[
+//     //       sectionsContent.obj15.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'1',
+//     //     title:sectionsContent.obj1.title,
+//     //     link:sectionsContent.obj1.link,
+//     //     content:[
+//     //       sectionsContent.obj1.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'1',
+//     //     title:sectionsContent.obj1.title,
+//     //     link:sectionsContent.obj1.link,
+//     //     content:[
+//     //       sectionsContent.obj1.content,
+//     //     ]
+//     // },
+//     // {
+//     //     id:'1',
+//     //     title:sectionsContent.obj1.title,
+//     //     link:sectionsContent.obj1.link,
+//     //     content:[
+//     //       sectionsContent.obj1.content,
+//     //     ]
+//     // },
+    
+// ]
+
+//   return (
+//    <>
+//    <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.faq)
+//     }}
+//   />
+// </Head>
+//    {/* <GenericNavbar/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <OperaSidebar 
+//            side='right'
+//            // topOffset='65px' 
+//            sidebarWidth='45px'
+//            panelWidth='200px'
+//            iconColor='white'
+//            panelBackgroundColor='#f2f2f2'
+//          /> 
+//    <Breadcrumb/>
+//    <br/>
+//    <br/>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Dice Roll</h1>
+//    <br/>
+//    <br/>
+//    <SectionTableOfContents sections={genericSections}/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <IntroSection 
+//           id={introContent.id}
+//           title={introContent.title}
+//           content={introContent.content}
+//            backgroundColor='#f9fafb'
+//           //  "#f2f2f2"
+//           textColor="#06357a"
+//         />
+//    <br/>
+//      <KeyTermsCard
+//      id="0"
+//      title={sectionsContent.obj0.title}
+//      content={sectionsContent.obj0.content}
+//      after={sectionsContent.obj0.after}
+//      variant="light"
+//    />
+//    <br/>
+//    <Sections sections={genericSections.slice(1)}/>
+//    <br/>
+//    <br/>
+//    <br/>
+//    {/* <ScrollUpButton/> */}
+//    </>
+//   )
+// }
+
+
+// tables-optimized: v4 | 2026-05-22 | 3 tables (obj5 aggregation, obj8 aggregation, summary capstone)
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -8,6 +693,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
 export async function getStaticProps(){
@@ -28,6 +714,135 @@ export async function getStaticProps(){
     "dice probability distributions",
     "probability model example"
   ]
+
+  const linkStyle = 'color: inherit; text-decoration: underline;'
+
+  // ---------- v4 TABLES ----------
+
+  // obj5 — aggregation: 4 modeling assumptions × what they state × effect of violation
+  const assumptionsTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 100%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Assumption</th>
+      <th style="${tableHeaders.aggregation}">What it states</th>
+      <th style="${tableHeaders.aggregation}">What violating it produces</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Single outcome per roll</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each roll produces exactly one outcome</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a fundamentally different model (e.g. multi-result mechanisms)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Mutually exclusive &amp; exhaustive</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">outcomes don&apos;t overlap and cover every possibility</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">overlapping outcomes or unmodeled cases</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Fixed probabilities</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each outcome has a probability set in advance, unchanging between rolls</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">time-varying or adaptive probability models</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Independence across rolls</td>
+      <td style="padding: 12px 15px; color: #34495e;">outcomes of separate rolls don&apos;t influence each other</td>
+      <td style="padding: 12px 15px; color: #34495e;">Markov-chain-like models with memory between trials</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj8 — aggregation: 4 constructions from repeated rolls
+  const constructionsTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 100%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Construction</th>
+      <th style="${tableHeaders.aggregation}">What it produces</th>
+      <th style="${tableHeaders.aggregation}">Resulting shape or distribution</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sum of n rolls</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">total points obtained across n rolls</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">triangular for n = 2; bell-shaped as n grows (route to the normal limit)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Count of a target face</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">how many times a specific face (or face group) appears</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/probability/distributions/discrete/binomial" style="${linkStyle}">binomial</a>(n, p) with p equal to that face&apos;s probability</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Maximum or minimum of n rolls</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">extreme value across a sequence of rolls</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">an order-statistic distribution skewed toward the upper (or lower) faces</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Average of n rolls</td>
+      <td style="padding: 12px 15px; color: #34495e;">mean points per roll</td>
+      <td style="padding: 12px 15px; color: #34495e;">concentrates around the expected value as n grows (law of large numbers)</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // summary capstone — 8 aspects × statement × example
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 100%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Aspect</th>
+      <th style="${tableHeaders.summary}">Statement</th>
+      <th style="${tableHeaders.summary}">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">What it represents</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a single random trial with a fixed, finite set of mutually exclusive outcomes</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a standard six-sided die</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Outcome space</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a finite set of labels distinguishing outcomes; no arithmetic meaning at this stage</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&Omega; = {1, 2, 3, 4, 5, 6}</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Events</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">subsets of the outcome space &mdash; single outcomes, groupings, or category-based selections</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&ldquo;even result&rdquo; = {2, 4, 6}</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Probability assignment</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">non-negative weights on each outcome that sum to 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">fair die: P(k) = 1/6 for every face</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Modeling assumptions</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one outcome per roll, mutually exclusive &amp; exhaustive, fixed probabilities, independent rolls</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&ldquo;a fair die rolled repeatedly under identical conditions&rdquo;</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/probability/random-variables" style="${linkStyle}">Random variables</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">numerical mappings on outcomes; different choices yield different measurements</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">X = face value; Y = 1<sub>{even}</sub>; Z = face mod 3</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Distribution from one roll</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">finite-support discrete law; uniform when the model is symmetric</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/probability/distributions/discrete/uniform" style="${linkStyle}">discrete uniform</a> on {1, &hellip;, 6}</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Distributions from repeated rolls</td>
+      <td style="padding: 12px 15px; color: #34495e;">sums, counts, extrema, averages &mdash; aggregation produces richer shapes</td>
+      <td style="padding: 12px 15px; color: #34495e;">sum of 2 dice &rarr; triangular on {2, 3, &hellip;, 12}</td>
+    </tr>
+  </tbody>
+</table>
+`
 
   const faqQuestions = {
     obj1: {
@@ -370,6 +1185,13 @@ Because it captures finite multi-outcome randomness in its simplest form, the di
       link:'',
   
     },
+    summary:{
+      title:`Dice Roll Model at a Glance`,
+      content:`The page has built up the dice roll model layer by layer — from its finite outcome space and event structure through the probability assignment and modeling assumptions, then onto random variables and the distributions that single and repeated rolls induce. The table below collects these threads into a single reference card, pairing each aspect of the model with its concise statement and a concrete example.`,
+      before:``,
+      after:``,
+      link:'',
+    },
     obj13:{
       title:``,
       content:``,
@@ -421,6 +1243,9 @@ By allowing more than two outcomes, the dice roll model provides a basic framewo
       introContent,
       faqQuestions,
       schemas,
+      assumptionsTable,
+      constructionsTable,
+      summaryTable,
       seoData: {
         title: "Dice Roll Probability Model: Finite Multi-Outcome Randomness | Learn Math Class",
         description: "Learn the dice roll probability model: finite outcomes, categorical randomness, events, probability assignments, uniform distributions, and aggregations from repeated rolls.",
@@ -432,9 +1257,19 @@ By allowing more than two outcomes, the dice roll model provides a basic framewo
   }
 }
 
-export default function DiceRollPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function DiceRollPage({
+  seoData,
+  sectionsContent,
+  introContent,
+  faqQuestions,
+  schemas,
+  assumptionsTable,
+  constructionsTable,
+  summaryTable,
+}) {
 
-    
+  const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
   const genericSections=[
      {
         id:'0',
@@ -483,6 +1318,8 @@ export default function DiceRollPage({seoData, sectionsContent, introContent, fa
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'assumptions-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: assumptionsTable }} />,
         ]
     },
     {
@@ -507,6 +1344,8 @@ export default function DiceRollPage({seoData, sectionsContent, introContent, fa
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'constructions-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: constructionsTable }} />,
         ]
     },
     {
@@ -539,6 +1378,16 @@ export default function DiceRollPage({seoData, sectionsContent, introContent, fa
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+        ]
+    },
+    {
+        id:'summary',
+        title:sectionsContent.summary.title,
+        link:sectionsContent.summary.link,
+        content:[
+          sectionsContent.summary.content,
+          <div key={'summary-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         ]
     },
     // {
