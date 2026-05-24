@@ -1843,7 +1843,7 @@
 // ============================================================================
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { Venncore, ExplanationsPanel } from './Venncore';
+import { Venncore, ExplanationsPanel } from './VennCore';
 
 const TWO_SET_CASES = [
   { A: false, B: false },

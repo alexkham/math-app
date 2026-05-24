@@ -1801,7 +1801,7 @@
 // ============================================================================
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { Venncore, ExplanationsPanel } from './Venncore';
+import { Venncore, ExplanationsPanel } from './VennCore';
 
 const CIRCLE_STROKE = '#1e293b';
 const STROKE_W = 1;
