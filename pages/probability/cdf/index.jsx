@@ -1,3 +1,656 @@
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// import Sections from '@/app/components/page-components/section/Sections'
+// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// import React from 'react'
+// import '../../../pages/pages.css'
+// import Head from 'next/head'
+// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+
+// export async function getStaticProps(){
+
+//   const keyWords = [
+//     'cumulative distribution function',
+//     'cdf',
+//     'cdf in probability',
+//     'cdf definition',
+//     'cdf of random variable',
+//     'P(X ≤ x)',
+//     'cumulative probability',
+//     'cdf properties',
+//     'discrete cdf',
+//     'continuous cdf',
+//     'cdf vs pdf',
+//     'cdf vs pmf',
+//     'using cdf',
+//     'interval probability cdf',
+//     'cdf calculation'
+//   ]
+
+//   const faqQuestions = {
+//     obj1: {
+//       question: "What is a cumulative distribution function (CDF)?",
+//       answer: "The cumulative distribution function (CDF) of a random variable X, denoted F_X(x), gives the probability that X takes a value less than or equal to x. It shows how probability accumulates as values increase along the number line, providing a complete characterization of the random variable's distribution."
+//     },
+//     obj2: {
+//       question: "How is CDF different from PDF and PMF?",
+//       answer: "The CDF tracks accumulated probability up to a point and exists for all random variables. The PMF applies only to discrete variables and gives probability at individual values. The PDF applies only to continuous variables and describes probability density. The CDF is the most general representation, with PMF and PDF as special cases."
+//     },
+//     obj3: {
+//       question: "What are the key properties of a CDF?",
+//       answer: "A valid CDF must be: (1) non-decreasing - it can only stay the same or increase, (2) right-continuous, (3) bounded between 0 and 1, and (4) have limits of 0 as x approaches negative infinity and 1 as x approaches positive infinity. These properties follow directly from the probability axioms."
+//     },
+//     obj4: {
+//       question: "How do you use the CDF to calculate probabilities?",
+//       answer: "To find P(a < X ≤ b), subtract CDF values: F_X(b) - F_X(a). This works uniformly for discrete, continuous, and mixed distributions. For one-sided probabilities like P(X ≤ x), simply evaluate the CDF at x. This often simplifies calculations by replacing sums or integrals with function evaluations."
+//     },
+//     obj5: {
+//       question: "What is the difference between discrete and continuous CDFs?",
+//       answer: "For discrete random variables, the CDF is a step function with jumps at possible values, where each jump size equals the probability of that value. For continuous random variables, the CDF increases smoothly without jumps, and its slope is determined by the probability density function. Mixed distributions show both behaviors."
+//     }
+//   }
+
+//   const schemas = {
+//     learningResource: {
+//       "@context": "https://schema.org",
+//       "@type": "LearningResource",
+//       "name": "Cumulative Distribution Function (CDF)",
+//       "description": "Learn cumulative distribution function (CDF) in probability. Understand how probability accumulates, CDF properties, and calculating probabilities for random variables.",
+//       "url": "https://www.learnmathclass.com/probability/cdf",
+//       "inLanguage": "en-US",
+//       "learningResourceType": "Explanation",
+//       "educationalLevel": "High School, College",
+//       "educationalUse": "Learning",
+//       "audience": {
+//         "@type": "EducationalAudience",
+//         "educationalRole": "student"
+//       },
+//       "about": {
+//         "@type": "Thing",
+//         "name": "Cumulative Distribution Function"
+//       },
+//       "teaches": [
+//         "Definition and meaning of cumulative distribution function (CDF)",
+//         "Mathematical formula F_X(x) = P(X ≤ x)",
+//         "Key properties of CDFs: non-decreasing, right-continuous, proper limits",
+//         "How CDF works for discrete, continuous, and mixed distributions",
+//         "Using CDF to calculate interval probabilities",
+//         "Differences between CDF, PMF, and PDF",
+//         "Visual interpretation of probability accumulation"
+//       ],
+//       "keywords": keyWords.join(", "),
+//       "author": {
+//         "@type": "Organization",
+//         "name": "Learn Math Class"
+//       },
+//       "publisher": {
+//         "@type": "Organization",
+//         "name": "Learn Math Class"
+//       },
+//       "datePublished": "2024-01-15",
+//       "dateModified": new Date().toISOString()
+//     },
+
+//     breadcrumb: {
+//       "@context": "https://schema.org",
+//       "@type": "BreadcrumbList",
+//       "itemListElement": [
+//         {
+//           "@type": "ListItem",
+//           "position": 1,
+//           "name": "Home",
+//           "item": "https://www.learnmathclass.com"
+//         },
+//         {
+//           "@type": "ListItem",
+//           "position": 2,
+//           "name": "Probability",
+//           "item": "https://www.learnmathclass.com/probability"
+//         },
+//         {
+//           "@type": "ListItem",
+//           "position": 3,
+//           "name": "Cumulative Distribution Function (CDF)",
+//           "item": "https://www.learnmathclass.com/probability/cdf"
+//         }
+//       ]
+//     },
+
+//     faq: {
+//       "@context": "https://schema.org",
+//       "@type": "FAQPage",
+//       "mainEntity": Object.keys(faqQuestions).map(key => ({
+//         "@type": "Question",
+//         "name": faqQuestions[key].question,
+//         "acceptedAnswer": {
+//           "@type": "Answer",
+//           "text": faqQuestions[key].answer
+//         }
+//       }))
+//     }
+//   }
+
+//   const sectionsContent={
+//     obj0: {
+//   title: `Key Terms`,
+//   content: `
+// - [Cumulative Distribution Function](!/probability/definitions#cumulative_distribution_function) — $F_X(x) = P(X \\leq x)$
+// - [Joint CDF](!/probability/definitions#joint_cdf) — $F_{X,Y}(x,y) = P(X \\leq x, Y \\leq y)$
+// - [Probability Mass Function](!/probability/definitions#probability_mass_function) — relates to CDF by summation for discrete variables
+// - [Probability Density Function](!/probability/definitions#probability_density_function) — relates to CDF by integration for continuous variables
+// - [Random Variable](!/probability/definitions#random_variable) — the object the CDF characterizes`,
+//   before: ``,
+//   after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+//   link: '',
+// },
+
+//     from:{
+//       title:`From Events to Random Variables`,
+//       content:`
+// Probability is first defined for events, but many questions involve numerical values rather than yes-or-no outcomes. A random variable connects these two views by assigning a number to each outcome of an experiment.
+
+// Once a random variable is defined, statements about its value naturally form events. Expressions like $X \le x$, $X > x$, or $a < X \le b$ describe collections of outcomes and therefore have probabilities attached to them.
+
+// The cumulative distribution function is built exactly on this connection. It takes events of the form $X \le x$ and assigns to each value $x$ the probability of that event, linking random variables back to the event-based foundation of probability.
+// `,
+//       before:``,
+//       after:``,
+  
+  
+//     },
+//     definition:{
+//       title:`CDF Defined (Core Meaning)`,
+//       content:`
+// The cumulative distribution function describes how probability is distributed along the values of a random variable. For each possible value, it tells us how much probability has accumulated up to that point.
+
+// Instead of asking whether the random variable takes one specific value, the CDF answers a broader question: how likely it is that the value does not exceed a given level. As the value increases, the accumulated probability can only stay the same or grow.
+
+// This perspective is what makes the CDF so powerful. It focuses on accumulation rather than individual outcomes, providing a single, consistent way to describe the behavior of a random variable across its entire range.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+  
+//     mathematical:{
+  
+//       title:`Mathematical Definition`,
+//       content:`
+// Formally, the cumulative distribution function of a random variable $X$ is defined by
+
+// $F_X(x) = P(X \\le x)$
+
+// For each real number $x$, the CDF assigns the probability that the random variable takes a value less than or equal to $x$. The function $F_X$ maps numbers on the real line to values between 0 and 1.
+
+// The choice of "less than or equal to" is not arbitrary. It ensures that the CDF behaves consistently across discrete, continuous, and mixed random variables, allowing a single definition to cover all cases.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     properties:{
+//       title:`Key Properties of the CDF`,
+//       content:`
+// The cumulative distribution function obeys several fundamental properties that follow directly from the probability axioms.
+
+// - **Values between 0 and 1**  
+//   For every $x$, the CDF satisfies $0 \\le F_X(x) \\le 1$.
+
+// - **Non-decreasing**  
+//   As $x$ increases, $F_X(x)$ can only stay the same or increase. Accumulated probability never decreases.
+
+// - **Right-continuous**  
+//   The value of the CDF at a point includes the probability at that point, which ensures consistent behavior for jumps in discrete cases.
+
+// - **Limits at infinity**  
+//   As $x \\to -\\infty$, $F_X(x) \\to 0$.  
+//   As $x \\to +\\infty$, $F_X(x) \\to 1$.
+
+// These properties are what distinguish a valid CDF from an arbitrary function and guarantee that it represents a genuine probability distribution.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     discrete:{
+//       title:`Discrete Random Variables`,
+//       content:`
+// For a discrete random variable, probability is concentrated at specific values. The CDF reflects this by increasing only at those values and remaining flat everywhere else.
+
+// In this case, the CDF is a step function. Each jump corresponds to a value the random variable can take, and the size of the jump equals the probability assigned to that value.
+
+// This makes the connection to the probability mass function clear: the PMF determines the jump sizes, while the CDF accumulates those jumps as the value increases. Reading the CDF from left to right shows how probability builds up one possible value at a time.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     continuous:{
+//       title:`Continuous Random Variables`,
+//       content:`
+// For a continuous random variable, probability is spread smoothly over intervals rather than concentrated at individual points. As a result, the CDF increases continuously instead of jumping.
+
+// In this setting, the CDF describes how probability accumulates as the value grows along the real line. The slope of this accumulation is captured by the probability density function, which indicates how rapidly probability is building at each point.
+
+// A key consequence is that a continuous random variable assigns zero probability to any single exact value. Probabilities are obtained only by looking at intervals, and the CDF provides a direct way to compute them.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     mixed:{
+//       title:`Mixed Distributions`,
+//       content:`
+// Some random variables do not fit neatly into purely discrete or purely continuous categories. They may assign positive probability to certain specific values while also spreading probability continuously over intervals.
+
+// The CDF handles this naturally. It combines flat regions, smooth increases, and sudden jumps within a single function. Jumps represent discrete probability masses, while smooth segments represent continuously distributed probability.
+
+// This is one reason the CDF is more general than the PMF or PDF. Even when neither of those fully describes a distribution on its own, the CDF still provides a complete and consistent representation.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     using:{
+//       title:`Using the CDF to Compute Probabilities`,
+//       content:`
+// One of the main advantages of the cumulative distribution function is that it allows probabilities to be computed directly from differences of values.
+
+// For any two numbers $a < b$, the probability that the random variable lies between them is obtained by subtracting accumulated probabilities:
+
+// $P(a < X \\le b) = F_X(b) - F_X(a)$
+
+// This works uniformly for discrete, continuous, and mixed random variables. One-sided probabilities are handled just as easily by reading the CDF at a single point.
+
+// Because of this, the CDF often simplifies probability calculations by replacing sums or integrals with simple evaluations of a single function.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     vs:{
+//       title:`CDF vs PMF vs PDF`,
+//       content:`
+// The CDF, PMF, and PDF describe probability distributions from different perspectives, but they are not interchangeable.
+
+// The **CDF** tracks accumulated probability. It tells how much probability lies at or below a given value and always exists for any random variable.
+
+// The **PMF** applies only to discrete random variables. It assigns probabilities to individual values, and the CDF is obtained by summing these probabilities up to a point.
+
+// The **PDF** applies only to continuous random variables. It describes how densely probability is spread, and the CDF is obtained by accumulating this density over an interval.
+
+// Because the CDF works in all cases, it serves as the most general representation of a probability distribution, with the PMF and PDF appearing as special cases derived from it.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     visual:{
+//       title:`Visual Interpretation`,
+//       content:`
+// The cumulative distribution function can be understood visually as probability accumulating along the number line.
+
+// Starting from the far left, the CDF begins at zero and increases as more possible values are included. In discrete cases, this accumulation appears as upward jumps. In continuous cases, it appears as a smooth rising curve. Mixed distributions show both behaviors together.
+
+// Reading the CDF from left to right shows how probability builds up. At any point, the height of the curve represents how much of the total probability lies at or below that value.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     mistakes:{
+//       title:`Common Mistakes`,
+//       content:`
+// The cumulative distribution function is often misunderstood because it looks simple but encodes a lot of structure.
+
+// A common mistake is confusing the CDF with a density or mass function. The CDF does not describe how much probability sits *at* a point, but how much has accumulated *up to* that point.
+
+// Another frequent error is forgetting that the CDF is cumulative. Interpreting its value as a probability of an exact outcome leads to incorrect conclusions, especially in continuous cases.
+
+// In [discrete distributions](!/probability/distributions/discrete), jumps in the CDF are sometimes misread as arbitrary features. Each jump has a precise meaning: its size equals the probability assigned to that value.
+
+// Finally, it is easy to forget that every valid CDF must satisfy basic properties such as monotonicity and proper limits. Violating these properties means the function cannot represent a [probability distribution](!/probability/distributions).
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     matters:{
+//       title:`Why the CDF Matters`,
+//       content:`
+// The cumulative distribution function fully characterizes the distribution of a [random variable](!/probability/random-variables). Knowing the CDF is enough to recover all probability statements about the variable.
+
+// It provides a single framework that works for [discrete](!/probability/distributions/discrete), [continuous](!/probability/distributions/continuous), and mixed distributions. This makes it a central object in probability theory and a natural bridge between different types of models.
+
+// Many important concepts rely directly on the CDF, including quantiles, medians, percentiles, and probability intervals. In both theory and applications, the CDF is often the most convenient way to reason about probabilities.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     connections:{
+//       title:`Connections to Other Probability Concepts`,
+//       content:`
+// The CDF ties together several core ideas in probability.
+
+// • [Events](!/probability/events) appear as statements of the form $X \le x$.  
+// • [Random variables](!/probability/random-variables) provide the numerical structure the CDF describes.  
+// • [PMF](!/probability/probability-function#pmf) and [PDF](!/probability/probability-function#pdf) are specific ways probability is distributed, both derived from the CDF.  
+// • [Probability axioms](!/probability/axioms) guarantee the basic properties of the CDF.  
+// • **Quantiles and percentiles** are defined by inverting the CDF.  
+// • [Expectation](!/probability/expected-value) and [variance](!/probability/variance) can be expressed using the CDF.
+
+// Through these connections, the CDF serves as a unifying object that links foundational probability concepts with practical calculations.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     obj4:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+  
+//     },
+//     obj4:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+  
+//     },
+//     obj4:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+  
+//     },
+
+
+//     obj5:{
+  
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+  
+//     }
+  
+//   }
+
+
+//   const introContent = {
+//     id: "intro",
+//     title: "Accumulating Probability",
+//     content: `
+// When working with [random variables](!/probability/random-variables), we are often not interested in the probability of an exact value, but in how much probability lies **up to** a certain point. Questions like "How likely is the value to be below this threshold?" or "What fraction of outcomes fall to the left of this number?" appear naturally.
+
+// The cumulative distribution function captures this idea directly. Instead of focusing on individual outcomes, it tracks how probability accumulates as values increase along the number line. This single object provides a unified way to describe distributions, whether they are [discrete](!/probability/distributions/discrete), [continuous](!/probability/distributions/continuous), or a mixture of both.
+
+// The sections that follow explain how this accumulation works, how it is defined formally, and why the cumulative distribution function plays a central role in probability theory.
+// `
+//   }
+
+//   return {
+//     props: {
+//       sectionsContent,
+//       introContent,
+//       faqQuestions,
+//       schemas,
+//       seoData: {
+//         title: "CDF (Cumulative Distribution Function) | Learn Math Class",
+//         description: "Learn cumulative distribution function (CDF) in probability. Understand how probability accumulates, CDF properties, and calculating probabilities for random variables.",
+//         keywords: keyWords.join(", "),
+//         url: "/probability/cdf",
+//         name: "Cumulative Distribution Function (CDF)"
+//       }
+//     }
+//   }
+// }
+
+// export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+
+    
+//   const genericSections=[
+//      {
+//         id:'0',
+//         title:sectionsContent.obj0.title,
+//         link:sectionsContent.obj0.link,
+//         content:[
+//           sectionsContent.obj0.content,
+//           sectionsContent.obj0.after,
+//         ]
+//     },
+//     {
+//         id:'1',
+//         title:sectionsContent.from.title,
+//         link:'',
+//         content:[
+//             sectionsContent.from.content,
+//         ]
+//     },
+//     {
+//         id:'definition',
+//         title:sectionsContent.definition.title,
+//         link:'',
+//         content:[
+//             sectionsContent.definition.content,
+//         ]
+//     },
+//     {
+//         id:'mathematical',
+//         title:sectionsContent.mathematical.title,
+//         link:'',
+//         content:[
+//             sectionsContent.mathematical.content,
+//         ]
+//     },
+//     {
+//         id:'properties',
+//         title:sectionsContent.properties.title,
+//         link:'',
+//         content:[
+//             sectionsContent.properties.content,
+//         ]
+//     },
+//     {
+//         id:'discrete',
+//         title:sectionsContent.discrete.title,
+//         link:'',
+//         content:[
+//             sectionsContent.discrete.content,
+//         ]
+//     },
+//     {
+//         id:'continuous',
+//         title:sectionsContent.continuous.title,
+//         link:'',
+//         content:[
+//             sectionsContent.continuous.content,
+//         ]
+//     },
+//     {
+//         id:'mixed',
+//         title:sectionsContent.mixed.title,
+//         link:'',
+//         content:[
+//             sectionsContent.mixed.content,
+//         ]
+//     },
+//     {
+//         id:'using',
+//         title:sectionsContent.using.title,
+//         link:'',
+//         content:[
+//             sectionsContent.using.content,
+//         ]
+//     },
+//     {
+//         id:'vs',
+//         title:sectionsContent.vs.title,
+//         link:'',
+//         content:[
+//             sectionsContent.vs.content,
+//         ]
+//     },
+//     {
+//         id:'visual',
+//         title:sectionsContent.visual.title,
+//         link:'',
+//         content:[
+//             sectionsContent.visual.content,
+//         ]
+//     },
+//     {
+//         id:'mistakes',
+//         title:sectionsContent.mistakes.title,
+//         link:'',
+//         content:[
+//             sectionsContent.mistakes.content,
+//         ]
+//     },
+//     {
+//         id:'matters',
+//         title:sectionsContent.matters.title,
+//         link:'',
+//         content:[
+//             sectionsContent.matters.content,
+//         ]
+//     },
+//     {
+//         id:'connections',
+//         title:sectionsContent.connections.title,
+//         link:'',
+//         content:[
+//             sectionsContent.connections.content,
+//         ]
+//     },
+//     // {
+//     //     id:'',
+//     //     title:'',
+//     //     link:'',
+//     //     content:''
+//     // },
+//     // {
+//     //     id:'',
+//     //     title:'',
+//     //     link:'',
+//     //     content:''
+//     // },
+//     // {
+//     //     id:'',
+//     //     title:'',
+//     //     link:'',
+//     //     content:''
+//     // },
+// ]
+
+//   return (
+//    <>
+//    <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.faq)
+//     }}
+//   />
+// </Head>
+//    {/* <GenericNavbar/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <OperaSidebar 
+//            side='right'
+//            // topOffset='65px' 
+//            sidebarWidth='45px'
+//            panelWidth='200px'
+//            iconColor='white'
+//            panelBackgroundColor='#f2f2f2'
+//          /> 
+//    <Breadcrumb/>
+//    <br/>
+//    <br/>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cumulative Distribution Function (CDF)</h1>
+//    <br/>
+//    <br/>
+//    <SectionTableOfContents sections={genericSections}
+//     showSecondaryNav={true}
+//     secondaryNavMode="siblings"  // or "siblings"
+//     secondaryNavTitle="Other Pages in Probability Section" 
+   
+//    />
+//    <br/>
+//    <br/>
+//    <br/>
+//     <IntroSection 
+//           id={introContent.id}
+//           title={introContent.title}
+//           content={introContent.content}
+//            backgroundColor='#f9fafb'
+//           //  "#f2f2f2"
+//           textColor="#06357a"
+//         />
+//    <br/>
+//      <KeyTermsCard
+//      id="0"
+//      title={sectionsContent.obj0.title}
+//      content={sectionsContent.obj0.content}
+//      after={sectionsContent.obj0.after}
+//      variant="light"
+//    />
+//    <br/>
+//    <Sections sections={genericSections.slice(1)}
+   
+//    />
+//    <br/>
+//    <br/>
+//    <br/>
+//    {/* <ScrollUpButton/> */}
+//    </>
+//   )
+// }
+
+
+
+// tables-optimized: v4 | 2026-05-23 | 4 tables (properties aggregation, vs comparison, mistakes aggregation, overview summary capstone)
+
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -7,6 +660,7 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
 export async function getStaticProps(){
@@ -28,6 +682,143 @@ export async function getStaticProps(){
     'interval probability cdf',
     'cdf calculation'
   ]
+
+  const linkStyle = 'color: inherit; text-decoration: underline;'
+
+  // ---------- TABLES ----------
+
+  // properties — aggregation: the four defining properties of a CDF
+  const propertiesTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Property</th>
+      <th style="${tableHeaders.aggregation}">Statement</th>
+      <th style="${tableHeaders.aggregation}">What it ensures</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Bounded</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0 ≤ F<sub>X</sub>(x) ≤ 1 for every x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every value is a valid probability</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Non-decreasing</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">F<sub>X</sub>(x) stays the same or increases as x grows</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">accumulated probability never decreases</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Right-continuous</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the value at x includes the probability at x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">jumps in discrete and mixed cases behave consistently</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Limits at infinity</td>
+      <td style="padding: 12px 15px; color: #34495e;">F<sub>X</sub>(x) → 0 as x → −∞;   F<sub>X</sub>(x) → 1 as x → +∞</td>
+      <td style="padding: 12px 15px; color: #34495e;">the function spans the full probability scale</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // vs — comparison: CDF vs PMF vs PDF
+  const vsTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Function</th>
+      <th style="${tableHeaders.comparison}">Applies to</th>
+      <th style="${tableHeaders.comparison}">What it represents</th>
+      <th style="${tableHeaders.comparison}">Relation to CDF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">CDF — F<sub>X</sub>(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any random variable</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">accumulated probability up to x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the function itself</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/probability/probability-function#pmf" style="${linkStyle}">PMF</a> — p<sub>X</sub>(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">discrete variables only</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">probability at each individual value</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">CDF is the cumulative sum of PMF values</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/probability/probability-function#pdf" style="${linkStyle}">PDF</a> — f<sub>X</sub>(x)</td>
+      <td style="padding: 12px 15px; color: #34495e;">continuous variables only</td>
+      <td style="padding: 12px 15px; color: #34495e;">probability density at each point</td>
+      <td style="padding: 12px 15px; color: #34495e;">CDF is the integral of PDF from −∞ to x</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // mistakes — aggregation: misconception → correction
+  const mistakesTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Mistake</th>
+      <th style="${tableHeaders.aggregation}">Correction</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Confusing CDF with a density or mass function</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">F<sub>X</sub>(x) is probability accumulated <em>up to</em> x, not the probability <em>at</em> x</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Forgetting the CDF is cumulative</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reading F<sub>X</sub>(x) as a point probability misreads it, especially in continuous cases where P(X = x) = 0</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Misreading jumps in discrete CDFs</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each jump has a precise meaning — its size equals the probability assigned to that value</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Ignoring required properties</td>
+      <td style="padding: 12px 15px; color: #34495e;">a function that is not monotonic or lacks the correct limits cannot represent a probability distribution</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // overview — summary capstone: CDF across discrete / continuous / mixed
+  const overviewTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Variable type</th>
+      <th style="${tableHeaders.summary}">CDF shape</th>
+      <th style="${tableHeaders.summary}">How it changes</th>
+      <th style="${tableHeaders.summary}">Companion function</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/probability/distributions/discrete" style="${linkStyle}">Discrete</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">step function — flat between values, jumps at possible values</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">increases only at the possible values of X</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">PMF — jump size at x equals p<sub>X</sub>(x)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/probability/distributions/continuous" style="${linkStyle}">Continuous</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">smooth, continuously increasing curve, no jumps</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">increases continuously across the real line</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">PDF — slope of the CDF equals f<sub>X</sub>(x)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Mixed</td>
+      <td style="padding: 12px 15px; color: #34495e;">combines flat regions, smooth segments, and isolated jumps</td>
+      <td style="padding: 12px 15px; color: #34495e;">jumps at discrete masses and smooth growth over continuous parts</td>
+      <td style="padding: 12px 15px; color: #34495e;">partial PMF (at the masses) and partial PDF (over the continuous parts)</td>
+    </tr>
+  </tbody>
+</table>
+`
 
   const faqQuestions = {
     obj1: {
@@ -209,7 +1000,7 @@ The cumulative distribution function obeys several fundamental properties that f
   As $x \\to -\\infty$, $F_X(x) \\to 0$.  
   As $x \\to +\\infty$, $F_X(x) \\to 1$.
 
-These properties are what distinguish a valid CDF from an arbitrary function and guarantee that it represents a genuine probability distribution.
+These properties are what distinguish a valid CDF from an arbitrary function and guarantee that it represents a genuine probability distribution. The table below names each property, states it formally, and gives the structural guarantee it provides.
 `,
       before:``,
       after:``,
@@ -282,7 +1073,7 @@ The **PMF** applies only to discrete random variables. It assigns probabilities 
 
 The **PDF** applies only to continuous random variables. It describes how densely probability is spread, and the CDF is obtained by accumulating this density over an interval.
 
-Because the CDF works in all cases, it serves as the most general representation of a probability distribution, with the PMF and PDF appearing as special cases derived from it.
+Because the CDF works in all cases, it serves as the most general representation of a probability distribution, with the PMF and PDF appearing as special cases derived from it. The table below sets the three side by side across what each function applies to, what it represents, and how it relates to the CDF.
 `,
       before:``,
       after:``,
@@ -312,7 +1103,7 @@ Another frequent error is forgetting that the CDF is cumulative. Interpreting it
 
 In [discrete distributions](!/probability/distributions/discrete), jumps in the CDF are sometimes misread as arbitrary features. Each jump has a precise meaning: its size equals the probability assigned to that value.
 
-Finally, it is easy to forget that every valid CDF must satisfy basic properties such as monotonicity and proper limits. Violating these properties means the function cannot represent a [probability distribution](!/probability/distributions).
+Finally, it is easy to forget that every valid CDF must satisfy basic properties such as monotonicity and proper limits. Violating these properties means the function cannot represent a [probability distribution](!/probability/distributions). The table below pairs each common mistake with the correction that prevents it.
 `,
       before:``,
       after:``,
@@ -349,19 +1140,13 @@ Through these connections, the CDF serves as a unifying object that links founda
       after:``,
   
     },
-    obj4:{
-      title:``,
-      content:``,
+    overview:{
+      title:`CDF Across the Three Cases`,
+      content:`
+The cumulative distribution function applies uniformly to discrete, continuous, and mixed random variables, yet its visual and structural behavior differs in each setting. The table below collects these three cases — naming the CDF&apos;s shape, how it changes as x grows, and the companion function (PMF or PDF) that captures the local detail behind each pattern.
+`,
       before:``,
       after:``,
-  
-    },
-    obj4:{
-      title:``,
-      content:``,
-      before:``,
-      after:``,
-  
     },
     obj4:{
       title:``,
@@ -400,6 +1185,10 @@ The sections that follow explain how this accumulation works, how it is defined 
     props: {
       sectionsContent,
       introContent,
+      propertiesTable,
+      vsTable,
+      mistakesTable,
+      overviewTable,
       faqQuestions,
       schemas,
       seoData: {
@@ -413,9 +1202,20 @@ The sections that follow explain how this accumulation works, how it is defined 
   }
 }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function PageTemplate({
+  seoData,
+  sectionsContent,
+  introContent,
+  propertiesTable,
+  vsTable,
+  mistakesTable,
+  overviewTable,
+  faqQuestions,
+  schemas
+}) {
 
-    
+  const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
   const genericSections=[
      {
         id:'0',
@@ -456,6 +1256,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         link:'',
         content:[
             sectionsContent.properties.content,
+            <div key={'properties-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: propertiesTable}}/>,
         ]
     },
     {
@@ -496,6 +1297,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         link:'',
         content:[
             sectionsContent.vs.content,
+            <div key={'vs-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: vsTable}}/>,
         ]
     },
     {
@@ -512,6 +1314,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         link:'',
         content:[
             sectionsContent.mistakes.content,
+            <div key={'mistakes-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: mistakesTable}}/>,
         ]
     },
     {
@@ -528,6 +1331,15 @@ export default function PageTemplate({seoData, sectionsContent, introContent, fa
         link:'',
         content:[
             sectionsContent.connections.content,
+        ]
+    },
+    {
+        id:'overview',
+        title:sectionsContent.overview.title,
+        link:'',
+        content:[
+            sectionsContent.overview.content,
+            <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
         ]
     },
     // {

@@ -1,4 +1,608 @@
 
+// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+// import Sections from '@/app/components/page-components/section/Sections'
+// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// import React from 'react'
+// import '../../../pages/pages.css'
+// import Head from 'next/head'
+// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+
+// export async function getStaticProps(){
+  
+//   const keyWords = [
+//     'conditional probability',
+//     'conditional probability formula',
+//     'P(A|B)',
+//     'probability given event',
+//     'dependent events',
+//     'conditional probability examples',
+//     'restricted sample space',
+//     'updating probabilities',
+//     'conditional probability notation',
+//     'joint probability',
+//     'intersection of events',
+//     'Bayes theorem foundation',
+//     'conditional vs independence',
+//     'conditional probability rules'
+//   ]
+
+//   const faqQuestions = {
+//     obj1: {
+//       question: "What is conditional probability?",
+//       answer: "Conditional probability describes how likely an event is once we know that another event has occurred. It represents a reassessment of uncertainty after information is taken into account, where all reasoning is carried out under the assumption that the condition is true. It models how probabilities change when the frame of reference shifts to a restricted situation."
+//     },
+//     obj2: {
+//       question: "What is the conditional probability formula?",
+//       answer: "The conditional probability formula is P(A|B) = P(A ∩ B) / P(B), where P(A|B) is the probability of event A given that event B has occurred. The numerator represents the part of A that is compatible with condition B, while the denominator accounts for working only inside B. This formula expresses how probabilities behave once the situation has been restricted by known information."
+//     },
+//     obj3: {
+//       question: "How is conditional probability different from independence?",
+//       answer: "Conditional probability describes how probabilities update when information is known, usually changing the probability. Independence is the special case where this shift does not occur - knowing one event happened provides no information about the other, so conditioning leaves probabilities unchanged. Independence means the update is unnecessary, not that conditioning doesn't apply."
+//     },
+//     obj4: {
+//       question: "When do you use conditional probability?",
+//       answer: "Conditional probability appears in 'given that' reasoning where information is stated explicitly, filtering where attention is restricted to cases meeting a criterion, sequential processes where earlier outcomes affect later ones, and classification problems where probabilities are evaluated within specific groups. It's required whenever probabilities must be reassessed after a condition becomes known."
+//     },
+//     obj5: {
+//       question: "What are common mistakes with conditional probability?",
+//       answer: "Common mistakes include: forgetting to restrict the situation properly and reasoning as if all outcomes were still possible, dividing by the wrong probability leading to incorrect normalization, confusing P(A|B) with P(B|A) which reverses the statement's meaning, and assuming independence implicitly without justification. Being explicit about what is known and what space is being considered helps avoid these errors."
+//     }
+//   }
+
+//   const schemas = {
+//     learningResource: {
+//       "@context": "https://schema.org",
+//       "@type": "LearningResource",
+//       "name": "Conditional Probability",
+//       "description": "Learn conditional probability: how probabilities update with new information. Understand the P(A|B) formula, restricted sample spaces, and the difference between conditioning and independence.",
+//       "url": "https://www.learnmathclass.com/probability/conditional-probability",
+//       "inLanguage": "en-US",
+//       "learningResourceType": "Explanation",
+//       "educationalLevel": "High School, College",
+//       "educationalUse": "Learning",
+//       "audience": {
+//         "@type": "EducationalAudience",
+//         "educationalRole": "student"
+//       },
+//       "about": {
+//         "@type": "Thing",
+//         "name": "Conditional Probability"
+//       },
+//       "teaches": [
+//         "How conditioning restricts the situation to a smaller set of possibilities",
+//         "Conditional probability formula P(A|B) = P(A ∩ B) / P(B)",
+//         "Visual representations using Venn diagrams and tree diagrams",
+//         "Difference between conditional probability and independence",
+//         "Common patterns where conditioning appears: given that, filtering, sequential processes",
+//         "How conditional probability enables updating beliefs and inference",
+//         "Common mistakes and how to avoid confusing P(A|B) with P(B|A)"
+//       ],
+//       "keywords": keyWords.join(", "),
+//       "author": {
+//         "@type": "Organization",
+//         "name": "Learn Math Class"
+//       },
+//       "publisher": {
+//         "@type": "Organization",
+//         "name": "Learn Math Class"
+//       },
+//       "datePublished": "2024-01-15",
+//       "dateModified": new Date().toISOString()
+//     },
+
+//     breadcrumb: {
+//       "@context": "https://schema.org",
+//       "@type": "BreadcrumbList",
+//       "itemListElement": [
+//         {
+//           "@type": "ListItem",
+//           "position": 1,
+//           "name": "Home",
+//           "item": "https://www.learnmathclass.com"
+//         },
+//         {
+//           "@type": "ListItem",
+//           "position": 2,
+//           "name": "Probability",
+//           "item": "https://www.learnmathclass.com/probability"
+//         },
+//         {
+//           "@type": "ListItem",
+//           "position": 3,
+//           "name": "Conditional Probability",
+//           "item": "https://www.learnmathclass.com/probability/conditional-probability"
+//         }
+//       ]
+//     },
+
+//     faq: {
+//       "@context": "https://schema.org",
+//       "@type": "FAQPage",
+//       "mainEntity": Object.keys(faqQuestions).map(key => ({
+//         "@type": "Question",
+//         "name": faqQuestions[key].question,
+//         "acceptedAnswer": {
+//           "@type": "Answer",
+//           "text": faqQuestions[key].answer
+//         }
+//       }))
+//     }
+//   }
+
+//   const sectionsContent={
+//     obj0: {
+//   title: `Key Terms`,
+//   content: `
+// - [Conditional Probability](!/probability/definitions#conditional_probability) — $P(A \\mid B) = P(A \\cap B)/P(B)$
+// - [Conditional PMF](!/probability/definitions#conditional_pmf) — $p_{X|Y}(x \\mid y)$ for discrete random variables
+// - [Conditional PDF](!/probability/definitions#conditional_pdf) — $f_{X|Y}(x \\mid y)$ for continuous random variables
+// - [Independent Events](!/probability/definitions#independent_events) — the case where conditioning changes nothing
+// - [Intersection of Sets](!/probability/definitions#intersection_of_sets) — $A \\cap B$, the numerator of the conditional formula
+// - [Probability Measure](!/probability/definitions#probability_measure) — the function $P$ being conditioned`,
+//   before: ``,
+//   after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
+//   link: '',
+// },
+
+//     conditioning:{
+//       title:`Conditioning as Restricting the Situation`,
+//       content:`
+// When a condition is known, we no longer reason over all possible outcomes. The information tells us that only certain situations remain relevant, and everything outside that condition is discarded.
+
+// From this point on, probabilities are evaluated **within** the condition. We are not changing the event itself — we are changing the context in which it is viewed. The situation is the same, but the frame of reference is smaller.
+
+// This way of thinking explains why probabilities can change once information is known. Conditioning is not an extra rule added on top of probability; it is a shift in perspective caused by restricting attention to a specific part of what was originally possible.
+// `,
+//       before:``,
+//       after:``,
+  
+  
+//     },
+//     meaning:{
+//       title:`Formal Meaning of Conditional Probability `,
+//       content:`
+// Conditional probability describes how likely an event is once we know that another event has occurred. It represents a reassessment of uncertainty after information is taken into account.
+
+// The key idea is that the condition is treated as given. All reasoning is carried out under the assumption that this condition is true, and probabilities are evaluated relative to that restricted situation rather than the original one.
+
+// This verbal description captures the essence of conditional probability before any symbols or formulas are introduced.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+  
+//     notation:{
+  
+//       title:`Useful Notation`,
+//       content:`
+// Before introducing the formula, we fix the symbols used to describe conditional probability:
+
+// - $A$, $B$ — events  
+// - $P(A)$, $P(B)$ — unconditional probabilities  
+// - $P(A \\mid B)$ — probability of $A$ when $B$ is known to have occurred  
+// - $A \\cap B$ — the event that both $A$ and $B$ occur  
+
+// This notation allows us to express conditioning precisely and compactly in the next section.
+// `,
+//       before:``,
+//       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
+  
+//     },
+//     formula:{
+  
+//       title:`Conditional Probability Formula`,
+//       content:`
+// The idea of conditioning becomes precise through a simple normalization rule. When we restrict attention to situations where $B$ has occurred, probabilities must be rescaled so that they sum to one within that restricted context.
+
+// This leads to the formula:
+
+// $P(A \\mid B) = \\dfrac{P(A \\cap B)}{P(B)}$
+
+// The numerator represents the part of $A$ that is compatible with the condition $B$.  
+// The denominator accounts for the fact that we are now working only inside $B$.
+
+// This formula does not introduce a new probability law — it expresses how probabilities behave once the situation has been restricted by known information.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     visual:{
+  
+//       title:`Visual Representations`,
+//       content:`
+// Conditional probability becomes clearer when viewed geometrically or sequentially.
+
+// **Venn diagram view:**  
+// The condition $B$ restricts attention to a smaller region of the sample space. The probability of $A$ is then evaluated only within that region, as the proportion of the overlap $A \cap B$ relative to $B$ itself.
+
+// **Tree diagram view:**  
+// In a probability tree, conditioning corresponds to moving along a branch where a condition has already occurred. Probabilities along later branches are evaluated relative to that branch, not the entire tree.
+
+// These visual perspectives reinforce the idea that conditioning is a change of viewpoint, not a change in the underlying events.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     examples:{
+  
+//       title:`Examples`,
+//       content:`
+// **1. Information Changes the Probability**  
+// Suppose $A$ is "a randomly chosen person has a university degree" and $B$ is "the person is over 40."  
+// The probability of $A$ evaluated after knowing $B$ may differ from the overall probability of $A$, because the condition changes the relevant group.
+
+// **2. No Change Under Conditioning**  
+// If $A$ is "tomorrow is sunny" and $B$ is "a fair coin lands heads today," knowing $B$ has no effect on how we evaluate $A$. In this case, conditioning does not change the probability, illustrating a link to independence.
+
+// **3. Sequential Situations**  
+// Consider drawing two cards from a deck without replacement. Let $A$ be "the second card is an ace" and $B$ be "the first card is an ace."  
+// Knowing whether $B$ occurred changes how we evaluate $A$, because the situation after the first draw is different from the original one.
+
+// These examples show how conditional probability reflects the impact of information on how uncertainty is assessed.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     independence:{
+  
+//       title:`Conditional Probability vs Independence`,
+//       content:`
+// Conditioning usually changes probabilities, because new information restricts the situation we are considering. Once a condition is known, the frame of reference shifts, and probabilities are re-evaluated within that restricted context.
+
+// Independence is the special case where this shift does **not** occur. If events are independent, then knowing that one event happened provides no information about the other. In that case, conditioning leaves probabilities unchanged.
+
+// This contrast is crucial:  
+// - **Conditional probability** describes how probabilities *update* when information is known.  
+// - **Independence** describes when such an update is unnecessary.
+
+// Understanding this distinction prevents a common mistake — assuming probabilities should change just because a condition is mentioned, or assuming independence without justification.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     patterns:{
+  
+//       title:`Common Patterns Where Conditioning Appears`,
+//       content:`
+// Conditional probability shows up naturally in many recurring situations.
+
+// One common pattern is **"given that…"** reasoning, where information is stated explicitly and probabilities must be evaluated under that condition. Another is **filtering**, where attention is restricted to cases that meet a certain criterion before any assessment is made.
+
+// Conditioning also appears in **sequential processes**, where earlier outcomes affect how later ones are viewed, and in **classification problems**, where probabilities are evaluated within specific groups or categories.
+
+// Recognizing these patterns helps identify when conditional probability is required, even if the word "given" is not explicitly used.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     mistakes:{
+  
+//       title:`Common Mistakes`,
+//       content:`
+// Conditional probability is often misapplied, even in simple situations.
+
+// A frequent mistake is forgetting to restrict the situation properly and continuing to reason as if all outcomes were still possible. Another common error is dividing by the wrong probability, which leads to incorrect normalization.
+
+// Confusing $P(A \\mid B)$ with $P(B \\mid A)$ is especially widespread and can completely reverse the meaning of a statement. It is also common to assume independence implicitly, treating conditioning as irrelevant without justification.
+
+// Being explicit about what is known and what space is being considered helps avoid these errors.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     why:{
+  
+//       title:`Why Conditional Probability Matters`,
+//       content:`
+// Conditional probability is the mechanism by which probability responds to information. It models learning, observation, and the updating of beliefs as new facts become known.
+
+// This idea lies at the heart of inference, decision-making, and prediction. It underpins statistical reasoning, risk assessment, and data analysis, where conclusions must be drawn in the presence of partial information.
+
+// Without conditional probability, probability theory would be unable to describe how uncertainty evolves when knowledge changes.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+//     connections:{
+//       title:`Connections to Other Probability Concepts`,
+//       content:`
+// Conditional probability connects directly to many central ideas in probability.
+
+// - **Events** provide the objects being conditioned on.  
+// - **Independence** describes when conditioning has no effect.  
+// - **Total probability** combines conditional probabilities across cases.  
+// - **Chain rule** builds joint probabilities from conditional ones.  
+// - **Bayes theorem** inverts conditional probabilities to update beliefs.  
+// - **Random variables and distributions** extend conditioning to numerical outcomes.
+
+// Understanding conditional probability clarifies how these concepts fit together into a single coherent framework.
+// `,
+//       before:``,
+//       after:``,
+  
+//     },
+
+
+//     obj5:{
+  
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+  
+//     }
+  
+//   }
+
+
+//   const introContent = {
+//     id: "intro",
+//     title: "Probability When a Condition Is Known",
+//     content: `
+// In many situations, probabilities do not stay fixed. Once new information becomes available, how we assess a situation can change. Knowing that something has already happened often reshapes how we view what can happen next.
+
+// Conditional probability captures this shift in perspective. It reflects how uncertainty is evaluated **after** a condition is known, when attention is restricted to a smaller set of possibilities. This idea appears naturally whenever information arrives, observations are made, or situations unfold step by step.
+
+// The rest of the page explains how this change of viewpoint works, how it is expressed formally, and how it connects to other central ideas in probability.
+// `
+//   }
+
+//   return {
+//     props: {
+//       sectionsContent,
+//       introContent,
+//       faqQuestions,
+//       schemas,
+//       seoData: {
+//         title: "Conditional Probability: P(A|B) Formula and Examples | Learn Math Class",
+//         description: "Learn conditional probability: how probabilities update with new information. Understand the P(A|B) formula, restricted sample spaces, and the difference between conditioning and independence.",
+//         keywords: keyWords.join(", "),
+//         url: "/probability/conditional-probability",
+//         name: "Conditional Probability"
+//       }
+//     }
+//   }
+// }
+
+// export default function ConditionalProbabilityPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+
+    
+//   const genericSections=[
+//      {
+//         id:'0',
+//         title:sectionsContent.obj0.title,
+//         link:sectionsContent.obj0.link,
+//         content:[
+//           sectionsContent.obj0.content,
+//           sectionsContent.obj0.after,
+//         ]
+//     },
+//     {
+//         id:'conditioning',
+//         title:sectionsContent.conditioning.title,
+//         link:'',
+//         content:[
+//             sectionsContent.conditioning.content,
+//         ]
+//     },
+//     {
+//         id:'meaning',
+//         title:sectionsContent.meaning.title,
+//         link:'',
+//         content:[
+//             sectionsContent.meaning.content,
+//         ]
+//     },
+//     {
+//         id:'notation',
+//         title:sectionsContent.notation.title,
+//         link:'',
+//         content:[
+//             sectionsContent.notation.content,
+//             sectionsContent.notation.after,
+//         ]
+//     },
+//     {
+//         id:'formula',
+//         title:sectionsContent.formula.title,
+//         link:'',
+//         content:[
+//             sectionsContent.formula.content,
+//         ]
+//     },
+//     {
+//         id:'visual',
+//         title:sectionsContent.visual.title,
+//         link:'',
+//         content:[
+//             sectionsContent.visual.content,
+//         ]
+//     },
+//     {
+//         id:'examples',
+//         title:sectionsContent.examples.title,
+//         link:'',
+//         content:[
+//           sectionsContent.examples.content,
+//         ]
+//     },
+//     {
+//         id:'independence',
+//         title:sectionsContent.independence.title,
+//         link:'',
+//         content:[
+//           sectionsContent.independence.content,
+//         ]
+//     },
+//     {
+//         id:'patterns',
+//         title:sectionsContent.patterns.title,
+//         link:'',
+//         content:[
+//           sectionsContent.patterns.content,
+//         ]
+//     },
+//     {
+//         id:'mistakes',
+//         title:sectionsContent.mistakes.title,
+//         link:'',
+//         content:[
+//           sectionsContent.mistakes.content,
+//         ]
+//     },
+//     {
+//         id:'why',
+//         title:sectionsContent.why.title,
+//         link:'',
+//         content:[
+//           sectionsContent.why.content,
+//         ]
+//     },
+//     {
+//         id:'connections',
+//         title:sectionsContent.connections.title,
+//         link:'',
+//         content:[
+//           sectionsContent.connections.content,
+//         ]
+//     },
+//     // {
+//     //     id:'',
+//     //     title:'',
+//     //     link:'',
+//     //     content:''
+//     // },
+//     // {
+//     //     id:'',
+//     //     title:'',
+//     //     link:'',
+//     //     content:''
+//     // },
+//     // {
+//     //     id:'',
+//     //     title:'',
+//     //     link:'',
+//     //     content:''
+//     // },
+//     // {
+//     //     id:'',
+//     //     title:'',
+//     //     link:'',
+//     //     content:''
+//     // },
+// ]
+
+//   return (
+//    <>
+//    <Head>
+//   <title>{seoData.title}</title>
+//   <meta name="description" content={seoData.description} />
+//   <meta name="keywords" content={seoData.keywords} />
+//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+//   <meta property="og:title" content={seoData.title} />
+//   <meta property="og:description" content={seoData.description} />
+//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+//   <meta property="og:type" content="article" />
+//   <meta property="og:site_name" content="Learn Math Class" />
+  
+//   <meta name="twitter:card" content="summary" />
+//   <meta name="twitter:title" content={seoData.title} />
+//   <meta name="twitter:description" content={seoData.description} />
+  
+//   <meta name="robots" content="index, follow" />
+  
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.faq)
+//     }}
+//   />
+// </Head>
+//    {/* <GenericNavbar/> */}
+//    <br/>
+//    <br/>
+//    <br/>
+//    <br/>
+//     <OperaSidebar 
+//            side='right'
+//            // topOffset='65px' 
+//            sidebarWidth='45px'
+//            panelWidth='200px'
+//            iconColor='white'
+//            panelBackgroundColor='#f2f2f2'
+//          /> 
+//    <Breadcrumb/>
+//    <br/>
+//    <br/>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Conditional Probability</h1>
+//    <br/>
+//    <br/>
+//    <SectionTableOfContents sections={genericSections}
+//     showSecondaryNav={true}
+//     secondaryNavMode="siblings"  // or "siblings"
+//     secondaryNavTitle="Other Pages in Probability Section" 
+   
+//    />
+//    <br/>
+//    <br/>
+//    <br/>
+//     <IntroSection 
+//           id={introContent.id}
+//           title={introContent.title}
+//           content={introContent.content}
+//            backgroundColor='#f9fafb'
+//           //  "#f2f2f2"
+//           textColor="#06357a"
+//         />
+//    <br/>
+//      <KeyTermsCard
+//      id="0"
+//      title={sectionsContent.obj0.title}
+//      content={sectionsContent.obj0.content}
+//      after={sectionsContent.obj0.after}
+//      variant="light"
+//    />
+//    <br/>
+//    <Sections sections={genericSections.slice(1)}/>
+//    <br/>
+//    <br/>
+//    <br/>
+//    {/* <ScrollUpButton/> */}
+//    </>
+//   )
+// }
+
+
+
+// tables-optimized: v4 | 2026-05-23 | 4 tables (examples comparison, patterns aggregation, mistakes aggregation, overview summary capstone)
+
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -8,10 +612,11 @@ import React from 'react'
 import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
 export async function getStaticProps(){
-  
+
   const keyWords = [
     'conditional probability',
     'conditional probability formula',
@@ -28,6 +633,164 @@ export async function getStaticProps(){
     'conditional vs independence',
     'conditional probability rules'
   ]
+
+  const linkStyle = 'color: inherit; text-decoration: underline;'
+
+  // ---------- TABLES ----------
+
+  // examples — comparison: the three examples show three distinct behaviors
+  const examplesTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Setup (events A, B)</th>
+      <th style="${tableHeaders.comparison}">Effect of knowing B</th>
+      <th style="${tableHeaders.comparison}">Why</th>
+      <th style="${tableHeaders.comparison}">Behavior shown</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">A: has a degree; B: over 40</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">P(A|B) ≠ P(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">condition selects a different group with different proportions</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">information changes the probability</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">A: tomorrow is sunny; B: coin lands heads today</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">P(A|B) = P(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the events are unrelated; knowing B reveals nothing about A</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/probability/definitions#independent_events" style="${linkStyle}">independence</a></td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">A: second card is an ace; B: first card is an ace (no replacement)</td>
+      <td style="padding: 12px 15px; color: #34495e;">P(A|B) ≠ P(A)</td>
+      <td style="padding: 12px 15px; color: #34495e;">after B, the deck composition has changed</td>
+      <td style="padding: 12px 15px; color: #34495e;">sequential dependence</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // patterns — aggregation: when conditional probability appears
+  const patternsTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Pattern</th>
+      <th style="${tableHeaders.aggregation}">Recognition signal</th>
+      <th style="${tableHeaders.aggregation}">What gets restricted</th>
+      <th style="${tableHeaders.aggregation}">Example trigger</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">&quot;Given that&quot; reasoning</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">explicit words: &quot;given&quot;, &quot;knowing&quot;, &quot;assuming&quot;</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reasoning takes place inside the stated condition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&quot;given that the test is positive…&quot;</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Filtering</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a subgroup is selected before any assessment</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">attention to cases meeting a criterion</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&quot;among students who passed…&quot;</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sequential processes</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">step-by-step where earlier outcomes affect later ones</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the state after step k affects step k+1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">second card drawn after the first is removed</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Classification</td>
+      <td style="padding: 12px 15px; color: #34495e;">probabilities evaluated within a group or category</td>
+      <td style="padding: 12px 15px; color: #34495e;">the group of interest is the new sample space</td>
+      <td style="padding: 12px 15px; color: #34495e;">&quot;among customers in segment X…&quot;</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // mistakes — aggregation: common errors and corrections
+  const mistakesTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Mistake</th>
+      <th style="${tableHeaders.aggregation}">What goes wrong</th>
+      <th style="${tableHeaders.aggregation}">Correct approach</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Not restricting the situation</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reasoning continues as if all original outcomes were still possible</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">recompute everything inside B; outcomes outside B are discarded</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Dividing by the wrong probability</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">numerator is right but denominator uses P(A) or some other quantity</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">denominator is always P(B), the probability of the condition</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Confusing P(A|B) with P(B|A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the statement is reversed and its meaning changes entirely</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">identify which event sits after the bar (the condition) vs before it (the target)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Implicit <a href="/probability/definitions#independent_events" style="${linkStyle}">independence</a> assumption</td>
+      <td style="padding: 12px 15px; color: #34495e;">conditioning is treated as irrelevant without checking</td>
+      <td style="padding: 12px 15px; color: #34495e;">verify P(A|B) = P(A) before treating events as independent</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // overview — summary capstone: framework reference card
+  const overviewTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Aspect</th>
+      <th style="${tableHeaders.summary}">What it captures</th>
+      <th style="${tableHeaders.summary}">Key point</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Meaning</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reassessment of uncertainty when a condition is known</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the condition becomes the new frame of reference</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Formula</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">P(A|B) = P(A ∩ B) ⁄ P(B)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">renormalize so probabilities sum to 1 inside B</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Numerator</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the <a href="/probability/definitions#intersection_of_sets" style="${linkStyle}">intersection</a> A ∩ B</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">only the part of A compatible with B contributes</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Denominator</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">total probability mass of B</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires P(B) &gt; 0 for the expression to be defined</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/probability/definitions#independent_events" style="${linkStyle}">Independence</a> test</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">P(A|B) = P(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">conditioning produces no shift in probability</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Asymmetry</td>
+      <td style="padding: 12px 15px; color: #34495e;">P(A|B) ≠ P(B|A) in general</td>
+      <td style="padding: 12px 15px; color: #34495e;">which event is the condition matters for the meaning</td>
+    </tr>
+  </tbody>
+</table>
+`
 
   const faqQuestions = {
     obj1: {
@@ -245,7 +1008,7 @@ If $A$ is "tomorrow is sunny" and $B$ is "a fair coin lands heads today," knowin
 Consider drawing two cards from a deck without replacement. Let $A$ be "the second card is an ace" and $B$ be "the first card is an ace."  
 Knowing whether $B$ occurred changes how we evaluate $A$, because the situation after the first draw is different from the original one.
 
-These examples show how conditional probability reflects the impact of information on how uncertainty is assessed.
+These examples show how conditional probability reflects the impact of information on how uncertainty is assessed. The table below sets them side by side so the three distinct behaviors — change, no change, and sequential dependence — can be compared directly.
 `,
       before:``,
       after:``,
@@ -279,7 +1042,7 @@ One common pattern is **"given that…"** reasoning, where information is stated
 
 Conditioning also appears in **sequential processes**, where earlier outcomes affect how later ones are viewed, and in **classification problems**, where probabilities are evaluated within specific groups or categories.
 
-Recognizing these patterns helps identify when conditional probability is required, even if the word "given" is not explicitly used.
+Recognizing these patterns helps identify when conditional probability is required, even if the word "given" is not explicitly used. The table below lays out each pattern with the linguistic or structural signal that tends to flag it, what gets restricted, and a sample phrase that triggers it.
 `,
       before:``,
       after:``,
@@ -295,11 +1058,19 @@ A frequent mistake is forgetting to restrict the situation properly and continui
 
 Confusing $P(A \\mid B)$ with $P(B \\mid A)$ is especially widespread and can completely reverse the meaning of a statement. It is also common to assume independence implicitly, treating conditioning as irrelevant without justification.
 
-Being explicit about what is known and what space is being considered helps avoid these errors.
+Being explicit about what is known and what space is being considered helps avoid these errors. The table below names each pitfall, the specific way reasoning breaks down, and the corrective habit that prevents it.
 `,
       before:``,
       after:``,
   
+    },
+    overview:{
+      title:`Overview of Conditional Probability`,
+      content:`
+The sections above develop conditional probability piece by piece: as a shift in frame of reference, a normalization formula, a contrast with independence, and a set of recognizable patterns and pitfalls. The table below collects these threads into a single reference card — naming each essential aspect of conditioning and the key point to keep in mind when applying it.
+`,
+      before:``,
+      after:``,
     },
     why:{
   
@@ -363,6 +1134,10 @@ The rest of the page explains how this change of viewpoint works, how it is expr
     props: {
       sectionsContent,
       introContent,
+      examplesTable,
+      patternsTable,
+      mistakesTable,
+      overviewTable,
       faqQuestions,
       schemas,
       seoData: {
@@ -376,9 +1151,20 @@ The rest of the page explains how this change of viewpoint works, how it is expr
   }
 }
 
-export default function ConditionalProbabilityPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function ConditionalProbabilityPage({
+  seoData,
+  sectionsContent,
+  introContent,
+  examplesTable,
+  patternsTable,
+  mistakesTable,
+  overviewTable,
+  faqQuestions,
+  schemas
+}) {
 
-    
+  const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
   const genericSections=[
      {
         id:'0',
@@ -436,6 +1222,7 @@ export default function ConditionalProbabilityPage({seoData, sectionsContent, in
         link:'',
         content:[
           sectionsContent.examples.content,
+          <div key={'examples-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: examplesTable}}/>,
         ]
     },
     {
@@ -452,6 +1239,7 @@ export default function ConditionalProbabilityPage({seoData, sectionsContent, in
         link:'',
         content:[
           sectionsContent.patterns.content,
+          <div key={'patterns-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: patternsTable}}/>,
         ]
     },
     {
@@ -460,6 +1248,16 @@ export default function ConditionalProbabilityPage({seoData, sectionsContent, in
         link:'',
         content:[
           sectionsContent.mistakes.content,
+          <div key={'mistakes-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: mistakesTable}}/>,
+        ]
+    },
+    {
+        id:'overview',
+        title:sectionsContent.overview.title,
+        link:'',
+        content:[
+          sectionsContent.overview.content,
+          <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
         ]
     },
     {
