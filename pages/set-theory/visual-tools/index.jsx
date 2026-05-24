@@ -164,7 +164,7 @@ export async function getStaticProps(){
   // Auto-pull active tools from the filesystem.
   // Scans pages/linear-algebra/visual-tools/* for index files and [view].jsx
   // dynamic routes, extracts SEO + viewConfig metadata, returns { children: [...] }.
-  const toolsData = await buildToolIndexData('linear-algebra/visual-tools')
+  const toolsData = await buildToolIndexData('set-theory/visual-tools')
 
   const intro = {
     title: "Free interactive tools for learning linear algebra",
@@ -204,7 +204,7 @@ export async function getStaticProps(){
         title: "Free Linear Algebra Visual Tools | Learn Math Class",
         description: "Free linear algebra visualizers and calculators: matrix multiplication, Gaussian elimination, vector operations, and linear systems. Step-by-step and free.",
         keywords: keyWords.join(", "),
-        url: "/linear-algebra/visual-tools",
+        url: "/set-theory/visual-tools",
         name: "Linear Algebra Visual Tools"
       },
     }
@@ -286,17 +286,21 @@ export default function LinearAlgebraVisualToolsLanding({
 
    <VisualToolsPage
      tools={toolsData}
-     customItems={comingSoonItems}
-     pageTitle="Linear Algebra Visual Tools"
+    //  customItems={comingSoonItems}
+     pageTitle="Set Theory Visual Tools"
      intro={intro}
      icon="🧮"
      dropdownLabel="All Tools"
      theme="deepBlue"
      sidebar={true}
-     sidebarBrandName="Linear Algebra"
+     sidebarBrandName="Set Theory"
      sidebarBrandSub="Visual Tools"
    />
 
+   <br/>
+   <br/>
+   <br/>
+   <br/>
    <br/>
    <br/>
    <br/>

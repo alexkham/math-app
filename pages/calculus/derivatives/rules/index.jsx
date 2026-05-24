@@ -1,466 +1,4 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
-// import React from 'react'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents';
-// import Sections from '@/app/components/page-components/section/Sections';
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection';
-// import ExpandableTable from '@/app/components/generic-table/ExpandableTable';
-// import '../../../../pages/pages.css'
-
-
-
-// export async function getStaticProps(){
-
-//   const keyWords=['derivative rules','differentiation rules', 'rules of differentiation',
-//     'basic derivative rules','basic differentiation rules','derivation','calculus','derivative'
-//    ]
-
-   
-//    const derivativeRulesData = {
-//     "Basic Rules": [
-//       {
-//         id: 1,
-//         law: "Constant Rule",
-//         formula: "If $f(x) = c$, then $f'(x) = 0$",
-//         explanation: "The derivative of any constant is zero"
-//       },
-//       {
-//         id: 2,
-//         law: "Constant Multiple Rule",
-//         formula: "If $g(x) = c \\cdot f(x)$, then $g'(x) = c \\cdot f'(x)$",
-//         explanation: "Constants can be factored out of derivatives"
-//       },
-//       {
-//         id: 3,
-//         law: "Power Rule",
-//         formula: "If $f(x) = x^n$, then $f'(x) = nx^{n-1}$",
-//         explanation: "Bring down the exponent and reduce the power by one"
-//       },
-//       {
-//         id: 4,
-//         law: "Sum and Difference Rule",
-//         formula: "If $h(x) = f(x) \\pm g(x)$, then $h'(x) = f'(x) \\pm g'(x)$",
-//         explanation: "The derivative of a sum/difference is the sum/difference of derivatives"
-//       },
-//       {
-//         id: 5,
-//         law: "Product Rule",
-//         formula: "If $h(x) = f(x)g(x)$, then $h'(x) = f'(x)g(x) + f(x)g'(x)$",
-//         explanation: "Derivative of first times second plus first times derivative of second"
-//       },
-//       {
-//         id: 6,
-//         law: "Quotient Rule",
-//         formula: "If $h(x) = \\frac{f(x)}{g(x)}$, then $h'(x) = \\frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2}$",
-//         explanation: "Low d-high minus high d-low over low squared"
-//       },
-//       {
-//         id: 7,
-//         law: "Chain Rule",
-//         formula: "If $h(x) = f(g(x))$, then $h'(x) = f'(g(x))g'(x)$",
-//         explanation: "Derivative of outside function times derivative of inside function"
-//       }
-//     ],
-  
-//     "Trigonometric Derivatives": [
-//       {
-//         id: 8,
-//         law: "Sine Derivative",
-//         formula: "If $f(x) = \\sin(x)$, then $f'(x) = \\cos(x)$",
-//         explanation: "The derivative of sine is cosine"
-//       },
-//       {
-//         id: 9,
-//         law: "Cosine Derivative",
-//         formula: "If $f(x) = \\cos(x)$, then $f'(x) = -\\sin(x)$",
-//         explanation: "The derivative of cosine is negative sine"
-//       },
-//       {
-//         id: 10,
-//         law: "Tangent Derivative",
-//         formula: "If $f(x) = \\tan(x)$, then $f'(x) = \\sec^2(x)$",
-//         explanation: "The derivative of tangent is secant squared"
-//       },
-//       {
-//         id: 11,
-//         law: "Secant Derivative",
-//         formula: "If $f(x) = \\sec(x)$, then $f'(x) = \\sec(x)\\tan(x)$",
-//         explanation: "The derivative of secant is secant times tangent"
-//       },
-//       {
-//         id: 12,
-//         law: "Cotangent Derivative",
-//         formula: "If $f(x) = \\cot(x)$, then $f'(x) = -\\csc^2(x)$",
-//         explanation: "The derivative of cotangent is negative cosecant squared"
-//       },
-//       {
-//         id: 13,
-//         law: "Cosecant Derivative",
-//         formula: "If $f(x) = \\csc(x)$, then $f'(x) = -\\csc(x)\\cot(x)$",
-//         explanation: "The derivative of cosecant is negative cosecant times cotangent"
-//       }
-//     ],
-  
-//     "Exponential Derivatives": [
-//       {
-//         id: 14,
-//         law: "General Exponential",
-//         formula: "If $f(x) = a^x$, then $f'(x) = \\ln(a)a^x$",
-//         explanation: "Derivative of exponential includes natural log of the base"
-//       },
-//       {
-//         id: 15,
-//         law: "Natural Exponential",
-//         formula: "If $f(x) = e^x$, then $f'(x) = e^x$",
-//         explanation: "The derivative of e to the x is itself"
-//       },
-//       {
-//         id: 16,
-//         law: "Composite General Exponential",
-//         formula: "If $f(x) = a^{g(x)}$, then $f'(x) = \\ln(a)a^{g(x)}g'(x)$",
-//         explanation: "Use chain rule with general exponential derivative"
-//       },
-//       {
-//         id: 17,
-//         law: "Composite Natural Exponential",
-//         formula: "If $f(x) = e^{g(x)}$, then $f'(x) = e^{g(x)}g'(x)$",
-//         explanation: "Use chain rule with natural exponential derivative"
-//       }
-//     ],
-  
-//     "Logarithm Derivatives": [
-//       {
-//         id: 18,
-//         law: "General Logarithm",
-//         formula: "If $f(x) = \\log_a(x)$, then $f'(x) = \\frac{1}{\\ln(a)x}$",
-//         explanation: "Derivative of logarithm includes natural log of base in denominator"
-//       },
-//       {
-//         id: 19,
-//         law: "Natural Logarithm",
-//         formula: "If $f(x) = \\ln(x)$, then $f'(x) = \\frac{1}{x}$",
-//         explanation: "The derivative of natural log is one over x"
-//       },
-//       {
-//         id: 20,
-//         law: "Composite General Logarithm",
-//         formula: "If $f(x) = \\log_a(g(x))$, then $f'(x) = \\frac{g'(x)}{\\ln(a)g(x)}$",
-//         explanation: "Use chain rule with general logarithm derivative"
-//       },
-//       {
-//         id: 21,
-//         law: "Composite Natural Logarithm",
-//         formula: "If $f(x) = \\ln(g(x))$, then $f'(x) = \\frac{g'(x)}{g(x)}$",
-//         explanation: "Use chain rule with natural logarithm derivative"
-//       }
-//     ]
-//   };
-  
-//   const sectionsContent={
-
-//     basic:{
-//       title:`Basic Rules`,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-  
-//     },
-//     trigonometric:{
-//       title:`Trigonometric Derivatives`,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-//     },
-  
-//     exponential:{
-  
-//       title:`Exponential Derivatives`,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-//     },
-//     logarithm:{
-//       title:`Logarithm Derivatives`,
-//       content:``,
-//       before:``,
-//       after:``,
-  
-//     },
-
-
-//     // obj5:{
-  
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-  
-//     // }
-  
-//   }
-
-
-//   return {
-//     props:{
-//       sectionsContent,
-//       keyWords,
-//       derivativeRulesData
-
-      
-//     }
-//   }
-// }
-
-
-// export default function DerivativeRulesPage({sectionsContent,keyWords ,derivativeRulesData}) {
-   
-
-  
-//   const derivativeRulesSections=[
-//     {
-//         id:'basic',
-//         title:sectionsContent.basic.title,
-//         link:'',
-//         content:[
-//           <div key={1}>
-//           <ExpandableTable 
-//           data={derivativeRulesData[sectionsContent.basic.title]}
-//            displayColumns={ ["law", "formula", "explanation"]}
-//            copyableFields={["formula"]}
-//            includedFields={ ["law", "formula", "explanation"]} />
-//            </div> ,
-
-//         ]
-//     },
-//     {
-//         id:'trigonometric',
-//         title:sectionsContent.trigonometric.title,
-//         link:'',
-//         content:[
-
-//           <div key={2}>
-//           <ExpandableTable 
-//           data={derivativeRulesData[sectionsContent.trigonometric.title]}
-//            displayColumns={ ["law", "formula", "explanation"]}
-//            copyableFields={["formula"]}
-//            includedFields={ ["law", "formula", "explanation"]} />
-//            </div> ,
-
-
-//         ]
-//     },
-//     {
-//         id:'exponential',
-//         title:sectionsContent.exponential.title,
-//         link:'',
-//         content:[
-
-//           <div  key={3}>
-//           <ExpandableTable
-//           data={derivativeRulesData[sectionsContent.exponential.title]}
-//            displayColumns={ ["law", "formula", "explanation"]}
-//            copyableFields={["formula"]}
-//            includedFields={ ["law", "formula", "explanation"]} />
-//            </div> ,
-
-
-//         ]
-//     },
-//     {
-//       id:'logarithm',
-//       title:sectionsContent.logarithm.title,
-//       link:'',
-//       content:[
-
-//         <div  key={4}>
-//         <ExpandableTable 
-//         data={derivativeRulesData[sectionsContent.logarithm.title]}
-//          displayColumns={ ["law", "formula", "explanation"]}
-//          copyableFields={["formula"]}
-//          includedFields={ ["law", "formula", "explanation"]} />
-//          </div> ,
-
-
-//       ]
-//   }
-// ]
- 
-
-//     // const derivativeRulesData = {
-//     //     "Basic Rules": [
-//     //       {
-//     //         id: 1,
-//     //         law: "Constant Rule",
-//     //         formula: "If $f(x) = c$, then $f'(x) = 0$",
-//     //         explanation: "The derivative of any constant is zero"
-//     //       },
-//     //       {
-//     //         id: 2,
-//     //         law: "Constant Multiple Rule",
-//     //         formula: "If $g(x) = c \\cdot f(x)$, then $g'(x) = c \\cdot f'(x)$",
-//     //         explanation: "Constants can be factored out of derivatives"
-//     //       },
-//     //       {
-//     //         id: 3,
-//     //         law: "Power Rule",
-//     //         formula: "If $f(x) = x^n$, then $f'(x) = nx^{n-1}$",
-//     //         explanation: "Bring down the exponent and reduce the power by one"
-//     //       },
-//     //       {
-//     //         id: 4,
-//     //         law: "Sum and Difference Rule",
-//     //         formula: "If $h(x) = f(x) \\pm g(x)$, then $h'(x) = f'(x) \\pm g'(x)$",
-//     //         explanation: "The derivative of a sum/difference is the sum/difference of derivatives"
-//     //       },
-//     //       {
-//     //         id: 5,
-//     //         law: "Product Rule",
-//     //         formula: "If $h(x) = f(x)g(x)$, then $h'(x) = f'(x)g(x) + f(x)g'(x)$",
-//     //         explanation: "Derivative of first times second plus first times derivative of second"
-//     //       },
-//     //       {
-//     //         id: 6,
-//     //         law: "Quotient Rule",
-//     //         formula: "If $h(x) = \\frac{f(x)}{g(x)}$, then $h'(x) = \\frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2}$",
-//     //         explanation: "Low d-high minus high d-low over low squared"
-//     //       },
-//     //       {
-//     //         id: 7,
-//     //         law: "Chain Rule",
-//     //         formula: "If $h(x) = f(g(x))$, then $h'(x) = f'(g(x))g'(x)$",
-//     //         explanation: "Derivative of outside function times derivative of inside function"
-//     //       }
-//     //     ],
-      
-//     //     "Trigonometric Derivatives": [
-//     //       {
-//     //         id: 8,
-//     //         law: "Sine Derivative",
-//     //         formula: "If $f(x) = \\sin(x)$, then $f'(x) = \\cos(x)$",
-//     //         explanation: "The derivative of sine is cosine"
-//     //       },
-//     //       {
-//     //         id: 9,
-//     //         law: "Cosine Derivative",
-//     //         formula: "If $f(x) = \\cos(x)$, then $f'(x) = -\\sin(x)$",
-//     //         explanation: "The derivative of cosine is negative sine"
-//     //       },
-//     //       {
-//     //         id: 10,
-//     //         law: "Tangent Derivative",
-//     //         formula: "If $f(x) = \\tan(x)$, then $f'(x) = \\sec^2(x)$",
-//     //         explanation: "The derivative of tangent is secant squared"
-//     //       },
-//     //       {
-//     //         id: 11,
-//     //         law: "Secant Derivative",
-//     //         formula: "If $f(x) = \\sec(x)$, then $f'(x) = \\sec(x)\\tan(x)$",
-//     //         explanation: "The derivative of secant is secant times tangent"
-//     //       },
-//     //       {
-//     //         id: 12,
-//     //         law: "Cotangent Derivative",
-//     //         formula: "If $f(x) = \\cot(x)$, then $f'(x) = -\\csc^2(x)$",
-//     //         explanation: "The derivative of cotangent is negative cosecant squared"
-//     //       },
-//     //       {
-//     //         id: 13,
-//     //         law: "Cosecant Derivative",
-//     //         formula: "If $f(x) = \\csc(x)$, then $f'(x) = -\\csc(x)\\cot(x)$",
-//     //         explanation: "The derivative of cosecant is negative cosecant times cotangent"
-//     //       }
-//     //     ],
-      
-//     //     "Exponential Derivatives": [
-//     //       {
-//     //         id: 14,
-//     //         law: "General Exponential",
-//     //         formula: "If $f(x) = a^x$, then $f'(x) = \\ln(a)a^x$",
-//     //         explanation: "Derivative of exponential includes natural log of the base"
-//     //       },
-//     //       {
-//     //         id: 15,
-//     //         law: "Natural Exponential",
-//     //         formula: "If $f(x) = e^x$, then $f'(x) = e^x$",
-//     //         explanation: "The derivative of e to the x is itself"
-//     //       },
-//     //       {
-//     //         id: 16,
-//     //         law: "Composite General Exponential",
-//     //         formula: "If $f(x) = a^{g(x)}$, then $f'(x) = \\ln(a)a^{g(x)}g'(x)$",
-//     //         explanation: "Use chain rule with general exponential derivative"
-//     //       },
-//     //       {
-//     //         id: 17,
-//     //         law: "Composite Natural Exponential",
-//     //         formula: "If $f(x) = e^{g(x)}$, then $f'(x) = e^{g(x)}g'(x)$",
-//     //         explanation: "Use chain rule with natural exponential derivative"
-//     //       }
-//     //     ],
-      
-//     //     "Logarithm Derivatives": [
-//     //       {
-//     //         id: 18,
-//     //         law: "General Logarithm",
-//     //         formula: "If $f(x) = \\log_a(x)$, then $f'(x) = \\frac{1}{\\ln(a)x}$",
-//     //         explanation: "Derivative of logarithm includes natural log of base in denominator"
-//     //       },
-//     //       {
-//     //         id: 19,
-//     //         law: "Natural Logarithm",
-//     //         formula: "If $f(x) = \\ln(x)$, then $f'(x) = \\frac{1}{x}$",
-//     //         explanation: "The derivative of natural log is one over x"
-//     //       },
-//     //       {
-//     //         id: 20,
-//     //         law: "Composite General Logarithm",
-//     //         formula: "If $f(x) = \\log_a(g(x))$, then $f'(x) = \\frac{g'(x)}{\\ln(a)g(x)}$",
-//     //         explanation: "Use chain rule with general logarithm derivative"
-//     //       },
-//     //       {
-//     //         id: 21,
-//     //         law: "Composite Natural Logarithm",
-//     //         formula: "If $f(x) = \\ln(g(x))$, then $f'(x) = \\frac{g'(x)}{g(x)}$",
-//     //         explanation: "Use chain rule with natural logarithm derivative"
-//     //       }
-//     //     ]
-//     //   };
-//   return (
-//     <>
-//       {/* <GenericNavbar/> */}
-//       <br/>
-//       <br/>
-//       <br/>
-//       <br/>
-//       <OperaSidebar 
-//               side='right'
-//               // topOffset='65px' 
-//               sidebarWidth='45px'
-//               panelWidth='200px'
-//               iconColor='white'
-//               panelBackgroundColor='#f2f2f2'
-//             />
-//       <Breadcrumb/>
-//       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Derivative Rules</h1>
-//       <br/>
-//       <SectionTableOfContents sections={derivativeRulesSections}/>
-//       <br/>
-//       <br/>
-//       <IntroSection/>
-//       <br/>
-//       <Sections sections={derivativeRulesSections}/>
-//       <br/>
-//       <br/>
-//       <br/>
-//       <br/>
-//       <br/>
-//        {/* <ScrollUpButton/> */} 
-//     </>
-//   );
-// }
+// tables-optimized: v4 | 2026-05-24 | 2 tables (theorems comparison, overview summary capstone)
 
 
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
@@ -472,6 +10,7 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
 export async function getStaticProps(){
@@ -491,6 +30,110 @@ const keyWords = [
   "calculus differentiation",
   "basic derivative rules"
 ]
+
+  const linkStyle = 'color: inherit; text-decoration: underline;'
+
+  // ---------- TABLES ----------
+
+  // theoremsTable — comparison: MVT vs Rolle's vs L'Hôpital
+  const theoremsTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Theorem</th>
+      <th style="${tableHeaders.comparison}">Hypotheses</th>
+      <th style="${tableHeaders.comparison}">Conclusion</th>
+      <th style="${tableHeaders.comparison}">Primary use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Mean Value Theorem</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f continuous on [a, b]; f differentiable on (a, b)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">there is some c ∈ (a, b) with f&apos;(c) = (f(b) − f(a)) ⁄ (b − a)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">connecting instantaneous and average rates; foundation for many subsequent results</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rolle&apos;s Theorem</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f continuous on [a, b]; f differentiable on (a, b);&nbsp; f(a) = f(b)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">there is some c ∈ (a, b) with f&apos;(c) = 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">stepping stone in proofs (including MVT itself); counting roots via f&apos;</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">L&apos;Hôpital&apos;s Rule</td>
+      <td style="padding: 12px 15px; color: #34495e;">limit of f ⁄ g gives indeterminate form 0 ⁄ 0 or ∞ ⁄ ∞; limit of f&apos; ⁄ g&apos; exists (or is ±∞)</td>
+      <td style="padding: 12px 15px; color: #34495e;">lim f ⁄ g = lim f&apos; ⁄ g&apos;</td>
+      <td style="padding: 12px 15px; color: #34495e;">resolving indeterminate limits via differentiation</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // overviewTable — summary capstone: 10-row master reference
+  const overviewTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Rule or theorem</th>
+      <th style="${tableHeaders.summary}">Formula</th>
+      <th style="${tableHeaders.summary}">Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Constant rule</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">if f(x) = c then f&apos;(x) = 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">constant functions have zero slope everywhere</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Constant multiple rule</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(c · f(x))&apos; = c · f&apos;(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">constants factor straight through differentiation</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Power rule</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x<sup>n</sup>)&apos; = n · x<sup>n − 1</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">valid for any real exponent n</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sum &amp; difference rule</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(f ± g)&apos; = f&apos; ± g&apos;</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">extends to any finite number of terms; differentiate term by term</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Product rule</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(f · g)&apos; = f&apos; · g + f · g&apos;</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each factor takes a turn being differentiated; generalises to more than two factors</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quotient rule</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(f ⁄ g)&apos; = (f&apos; · g − f · g&apos;) ⁄ g<sup>2</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires g(x) ≠ 0; numerator order matters</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Chain rule</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(f(g(x)))&apos; = f&apos;(g(x)) · g&apos;(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">handles compositions; extends to any depth of nesting</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Mean Value Theorem</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f&apos;(c) = (f(b) − f(a)) ⁄ (b − a) for some c ∈ (a, b)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires continuity on [a, b] and differentiability on (a, b)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rolle&apos;s Theorem</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f&apos;(c) = 0 for some c ∈ (a, b)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">special case of MVT when f(a) = f(b)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">L&apos;Hôpital&apos;s Rule</td>
+      <td style="padding: 12px 15px; color: #34495e;">lim f ⁄ g = lim f&apos; ⁄ g&apos;</td>
+      <td style="padding: 12px 15px; color: #34495e;">applies to indeterminate forms 0 ⁄ 0 and ∞ ⁄ ∞; other forms must be converted first</td>
+    </tr>
+  </tbody>
+</table>
+`
+
   // •
 
 //   \u2022 First item
@@ -532,138 +175,7 @@ const keyWords = [
 //                     __html:   sectionContent.distributions.svg,
 //                   }} />
 
-  //   const sectionsContent={
-
-  //   obj1:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  
-  //   },
-  //   obj2:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  
-  //   obj3:{
-  
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj4:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj5:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj6:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj7:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj8:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj9:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj10:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj11:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj12:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   },
-  //   obj13:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  //     link:'',
-  
-  //   },
-  //   obj14:{
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  //     link:'',
-  
-  //   },
-
-
-  //   obj15:{
-  
-  //     title:``,
-  //     content:``,
-  //     before:``,
-  //     after:``,
-  //     link:'',
-  
-  //   }
-  
-  // }
+ 
 const derivativeRulesData = {
   "Differentiation Rules": [
     {
@@ -902,6 +414,17 @@ The rule replaces a difficult limit of functions with a (potentially simpler) li
 Critical requirements: the original limit must be an indeterminate form, and the limit of the derivative ratio must exist or be $\\pm\\infty$. If the derivative ratio produces another indeterminate form, L'Hôpital's rule may be applied again. If the derivative ratio oscillates or fails to exist, the rule gives no information—it does not say the original limit fails to exist, only that this method does not resolve it.
 
 Other indeterminate forms—$0 \\cdot \\infty$, $\\infty - \\infty$, $0^0$, $1^\\infty$, $\\infty^0$—can be converted to $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$ through algebraic rearrangement, then handled by L'Hôpital's rule. The conversion step varies by form: $0 \\cdot \\infty$ becomes a fraction by moving one factor to the denominator; exponential forms use the identity $f(x)^{g(x)} = e^{g(x) \\ln f(x)}$.
+
+The Mean Value Theorem, Rolle's Theorem, and L'Hôpital's rule are the three theorems on this page that govern derivative behavior on intervals. The table below sets them side by side across their hypotheses, conclusions, and the role each plays in practice.
+`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  overview: {
+    title: `All Rules and Theorems at a Glance`,
+    content: `
+The ten formulas above split naturally into seven algebraic rules — constant, constant multiple, power, sum/difference, product, quotient, chain — and three interval theorems — Mean Value, Rolle&apos;s, and L&apos;Hôpital&apos;s. The table below collects every formula introduced on this page as a single reference card, with the key condition or note that governs its use.
 `,
     before: ``,
     after: ``,
@@ -1040,25 +563,14 @@ const schemas = {
 
 
 
-  //  return {
-  //     props:{
-  //        sectionsContent,
-  //        introContent,
-  //         seoData: {
-  //       title: "Derivative Rules | Learn Math Class",
-  //       description: "Metadescription",
-  //       keywords: keyWords.join(", "),
-  //       url: "/calculus/derivatives",
-  //        name: "name"
-  //     },
-        
-  //      }
-  //   }
+ 
 
   return {
   props:{
     sectionsContent,
     introContent,
+    theoremsTable,
+    overviewTable,
     faqQuestions,
     schemas,
     seoData: {
@@ -1072,9 +584,18 @@ const schemas = {
 }
    }
 
-// export default function RulesPage({seoData,sectionsContent , introContent}) {
-export default function RulesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
+export default function RulesPage({
+  seoData,
+  sectionsContent,
+  introContent,
+  theoremsTable,
+  overviewTable,
+  faqQuestions,
+  schemas
+}) {
+
+  const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
   const genericSections=[
     {
         id:'1',
@@ -1154,6 +675,16 @@ export default function RulesPage({seoData, sectionsContent, introContent, faqQu
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <div key={'theorems-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: theoremsTable}}/>,
+        ]
+    },
+    {
+        id:'overview',
+        title:sectionsContent.overview.title,
+        link:sectionsContent.overview.link,
+        content:[
+          sectionsContent.overview.content,
+          <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
         ]
     },
     // {
@@ -1361,4 +892,3 @@ export default function RulesPage({seoData, sectionsContent, introContent, faqQu
    </>
   )
 }
-
