@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useInequality, sel, Xinv, G } from './logic.js';
-import { TYPES } from './inequality-types.js';
-import { Hero, Controls, SignChart, Explanation, Tooltip } from './panels.jsx';
+import { TYPES } from './Inequality-types.js';
+import { Hero, Controls, SignChart, Explanation, Tooltip } from './Panels.jsx';
 const STYLES = `
 :root{
   --bg:#f6f8fc; --panel:#fff; --ink:#0f172a; --muted:#64748b;
