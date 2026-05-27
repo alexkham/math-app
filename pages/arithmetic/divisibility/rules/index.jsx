@@ -977,7 +977,7 @@ const linkStyle = 'color: inherit; text-decoration: underline;'
 
 // obj11 — aggregation: composite-divisor tests via coprime factorization
 const obj11Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation} text-align: center;">n</th>
@@ -1022,7 +1022,7 @@ const obj11Table = `
 
 // obj13 — aggregation: modular mechanism families (groups 9 rules into 5 families)
 const obj13Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Key modular fact</th>
@@ -1062,7 +1062,7 @@ const obj13Table = `
 
 // obj14 — summary capstone: master 9-rule reference card
 const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.summary} text-align: center;">Divisor</th>

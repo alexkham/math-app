@@ -1,3 +1,4 @@
+// // tables-optimized: v4 | 2026-05-25 | 3 tables (obj6 comparison, obj10 aggregation, obj12 summary capstone)
 // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 // import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 // import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -7,6 +8,9 @@
 // import '../../../../pages/pages.css';
 // import Head from 'next/head'
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// import { tableHeaders } from '@/app/styles/theme'
+// import { renderMultiplesLine } from '../../../../app/utils/illustrations/arithmetic/divisibility/multiplesLine'
+
 
 
 // export async function getStaticProps(){
@@ -27,48 +31,155 @@
 //   "how to find factors",
 //   "factors vs multiples"
 // ]
-//   // •
 
-// //   \u2022 First item
-// // \u2022 Second item
+// const linkStyle = 'color: inherit; text-decoration: underline;'
 
-  
-// // <hr style="border-width:1px;"></hr>
+// // ─── TABLES ───────────────────────────────────────────────────────────────
 
-// // <hr style="color:blue;" />
+// // obj6 — comparison: factors vs multiples
+// const obj6Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 58%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.comparison}">Aspect</th>
+//       <th style="${tableHeaders.comparison}">Factors of n</th>
+//       <th style="${tableHeaders.comparison}">Multiples of n</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Definition</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">integers a such that a ∣ n</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">integers b such that n ∣ b</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Direction</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">downward — each is ≤ n</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">upward — each positive multiple is ≥ n</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cardinality</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">finite</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">infinite</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Example for n = 12</td>
+//       <td style="padding: 12px 15px; color: #34495e;">{1, 2, 3, 4, 6, 12}</td>
+//       <td style="padding: 12px 15px; color: #34495e;">12, 24, 36, 48, 60, …</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// // obj10 — aggregation: number classification by sum of divisors
+// const obj10Table = `
+// <table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.aggregation}">Classification</th>
+//       <th style="${tableHeaders.aggregation}">Sum-of-proper-divisors test</th>
+//       <th style="${tableHeaders.aggregation}">In σ-notation</th>
+//       <th style="${tableHeaders.aggregation}">Examples</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Perfect</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sum of proper divisors equals n</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">σ(n) = 2n</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">6, 28, 496, 8128 &nbsp;(extremely rare)</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Abundant</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sum of proper divisors exceeds n</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">σ(n) &gt; 2n</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">12 (proper-sum = 16), 18, 20, 24, …</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Deficient</td>
+//       <td style="padding: 12px 15px; color: #34495e;">sum of proper divisors falls short of n</td>
+//       <td style="padding: 12px 15px; color: #34495e;">σ(n) &lt; 2n</td>
+//       <td style="padding: 12px 15px; color: #34495e;">every prime; 10 (proper-sum = 8); most numbers</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+// // obj12 — summary capstone: page-tools synthesis
+// const summaryTable = `
+// <table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.summary}">Question about n</th>
+//       <th style="${tableHeaders.summary}">Tool or formula</th>
+//       <th style="${tableHeaders.summary}">Worked example</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Find every factor</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">pair-search from 1 to √n: each a with a ∣ n gives the pair (a, n / a)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n = 36: test 1–6 → pairs (1,36), (2,18), (3,12), (4,9), (6,6) → 9 factors</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Count the factors</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">factor n = p<sub>1</sub><sup>a<sub>1</sub></sup> · … · p<sub>k</sub><sup>a<sub>k</sub></sup>; the number of divisors is (a<sub>1</sub>+1)(a<sub>2</sub>+1)…(a<sub>k</sub>+1)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">72 = 2³ · 3² → (3+1)(2+1) = 12 factors</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Classify n (perfect / abundant / deficient)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sum the proper divisors and compare to n</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">6: 1 + 2 + 3 = 6 → perfect; 12: 1+2+3+4+6 = 16 &gt; 12 → abundant</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Find common factors with m</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">intersect the factor sets; the largest is <a href="/arithmetic/divisibility/gcd" style="${linkStyle}">gcd(m, n)</a></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">12 ∩ 18 in factors → {1, 2, 3, 6}; gcd = 6</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Find common multiples with m</td>
+//       <td style="padding: 12px 15px; color: #34495e;">the smallest is <a href="/arithmetic/divisibility/lcm" style="${linkStyle}">lcm(m, n)</a>; every common multiple is a multiple of it</td>
+//       <td style="padding: 12px 15px; color: #34495e;">4 and 6: lcm = 12; common multiples are 12, 24, 36, 48, …</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
 
 
+// // ─── ILLUSTRATIONS (multiples-line) ──────────────────────────────────────
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+// const obj5SvgMultiples = renderMultiplesLine({
+//   kind: 'single-track',
+//   range: [0, 56],
+//   step: 7,
+//   mode: 'list',
+//   infinite: true,
+//   info: { lines: [
+//     { kind: 'formula', text: 'multiples of 7', role: 'primary' },
+//     { kind: 'separator' },
+//     { kind: 'note', text: '7, 14, 21, 28, 35,' },
+//     { kind: 'note', text: '42, 49, 56, …' },
+//     { kind: 'note', text: 'Infinitely many.', italic: true },
+//   ]},
+// })
 
 
+// const obj6SvgSplit = renderMultiplesLine({
+//   kind: 'split-view',
+//   center: 24,
+//   factorsOf: 24,
+//   multiplesOf: 24,
+//   multiplesCount: 4,
+//   info: { lines: [
+//     { kind: 'formula', text: 'factors vs multiples', role: 'result' },
+//     { kind: 'separator' },
+//     { kind: 'list', label: 'factors of 24:', items: '1, 2, 3, 4, 6, 8, 12, 24', role: 'primary' },
+//     { kind: 'note', text: '8 values, finite', italic: true },
+//     { kind: 'list', label: 'multiples of 24:', items: '24, 48, 72, 96, …', role: 'secondary' },
+//     { kind: 'note', text: 'infinitely many', italic: true },
+//     { kind: 'note', text: '24 is the pivot — largest factor, smallest multiple.' },
+//   ]},
+// })
 
 // const sectionsContent = {
 //   obj0: {
@@ -159,21 +270,39 @@
 //     link: '',
 //   },
 
-//   obj6: {
-//     title: `Factors vs Multiples`,
-//     content: `The two concepts are inverses of each other, and mixing them up is one of the most common errors in elementary number theory.
+// //   obj6: {
+// //     title: `Factors vs Multiples`,
+// //     content: `The two concepts are inverses of each other, and mixing them up is one of the most common errors in elementary number theory.
+
+// // Factors go downward. The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$ — all less than or equal to $24$. There are finitely many of them.
+
+// // Multiples go upward. The multiples of $24$ are $24, 48, 72, 96, \\ldots$ — all greater than or equal to $24$ (excluding zero). There are infinitely many.
+
+// // The relationship is symmetric: $a$ is a factor of $b$ if and only if $b$ is a multiple of $a$. The number $3$ is a factor of $12$, and $12$ is a multiple of $3$. Same fact, opposite viewpoints.
+
+// // A useful mnemonic: factors fit into a number (they are smaller), multiples multiply out from a number (they are larger). The factor set is contained; the multiple set is unbounded.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
+
+
+// obj6: {
+//   title: `Factors vs Multiples`,
+//   content: `The two concepts are inverses of each other, and mixing them up is one of the most common errors in elementary number theory.
 
 // Factors go downward. The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$ — all less than or equal to $24$. There are finitely many of them.
 
 // Multiples go upward. The multiples of $24$ are $24, 48, 72, 96, \\ldots$ — all greater than or equal to $24$ (excluding zero). There are infinitely many.
 
-// The relationship is symmetric: $a$ is a factor of $b$ if and only if $b$ is a multiple of $a$. The number $3$ is a factor of $12$, and $12$ is a multiple of $3$. Same fact, opposite viewpoints.
+// The contrast is easiest to read on two adjacent number lines, with $24$ itself as the pivot between them:`,
+//   afterFigure: `The relationship is symmetric: $a$ is a factor of $b$ if and only if $b$ is a multiple of $a$. The number $3$ is a factor of $12$, and $12$ is a multiple of $3$. Same fact, opposite viewpoints.
 
 // A useful mnemonic: factors fit into a number (they are smaller), multiples multiply out from a number (they are larger). The factor set is contained; the multiple set is unbounded.`,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
 
 //   obj7: {
 //     title: `Common Factors`,
@@ -261,6 +390,14 @@
 //     link: '',
 //   },
 
+//   obj12: {
+//     title: `Summary: A Toolkit for Divisor Structure`,
+//     content: `Every question this page addresses about a number $n$ — what its factors are, how many it has, how it compares to similar numbers, what it shares with another integer — reduces to one of a small set of recurring tools. The table below collects those tools in one place, paired with a worked example so each row stands as both a reference and a reminder of how to apply it.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
 // }
 
 //   const introContent = {
@@ -324,93 +461,6 @@
 //   }
 // }
 
-// // const schemas = {
-// //   learningResource: {
-// //     "@context": "https://schema.org",
-// //     "@type": "LearningResource",
-// //     "name": "Factors and Multiples",
-// //     "description": "Master factors and multiples: find all factors, factor pairs, proper divisors, common factors/multiples, counting formulas. Learn about perfect, abundant, and deficient numbers.",
-// //     "url": "https://www.learnmathclass.com/arithmetic/divisibility/factors-and-multiples",
-// //     "inLanguage": "en-US",
-// //     "learningResourceType": "Explanation",
-// //     "educationalLevel": "High School, College",
-// //     "educationalUse": "Learning",
-// //     "audience": {
-// //       "@type": "EducationalAudience",
-// //       "educationalRole": "student"
-// //     },
-// //     "about": {
-// //       "@type": "Thing",
-// //       "name": "Factors and Multiples"
-// //     },
-// //     "teaches": [
-// //       "Definition and finding all factors",
-// //       "Factor pairs and the square root method",
-// //       "Proper divisors and perfect numbers",
-// //       "Multiples and their infinite nature",
-// //       "Common factors and common multiples",
-// //       "Counting factors using prime factorization",
-// //       "Sum of divisors and number classification"
-// //     ],
-// //     "keywords": keyWords.join(", "),
-// //     "author": {
-// //       "@type": "Organization",
-// //       "name": "Learn Math Class"
-// //     },
-// //     "publisher": {
-// //       "@type": "Organization",
-// //       "name": "Learn Math Class"
-// //     },
-// //     "datePublished": "2024-01-15",
-// //     "dateModified": new Date().toISOString()
-// //   },
-
-// //   breadcrumb: {
-// //     "@context": "https://schema.org",
-// //     "@type": "BreadcrumbList",
-// //     "itemListElement": [
-// //       {
-// //         "@type": "ListItem",
-// //         "position": 1,
-// //         "name": "Home",
-// //         "item": "https://www.learnmathclass.com"
-// //       },
-// //       {
-// //         "@type": "ListItem",
-// //         "position": 2,
-// //         "name": "Arithmetic",
-// //         "item": "https://www.learnmathclass.com/arithmetic"
-// //       },
-// //       {
-// //         "@type": "ListItem",
-// //         "position": 3,
-// //         "name": "Divisibility",
-// //         "item": "https://www.learnmathclass.com/arithmetic/divisibility"
-// //       },
-// //       {
-// //         "@type": "ListItem",
-// //         "position": 4,
-// //         "name": "Factors and Multiples",
-// //         "item": "https://www.learnmathclass.com/arithmetic/divisibility/factors-and-multiples"
-// //       }
-// //     ]
-// //   },
-
-// //   faq: {
-// //     "@context": "https://schema.org",
-// //     "@type": "FAQPage",
-// //     "mainEntity": Object.keys(faqQuestions).map(key => ({
-// //       "@type": "Question",
-// //       "name": faqQuestions[key].question,
-// //       "acceptedAnswer": {
-// //         "@type": "Answer",
-// //         "text": faqQuestions[key].answer
-// //       }
-// //     }))
-// //   }
-// // }
-
-
 
 // const schemas = {
 //   learningResource: {
@@ -438,7 +488,8 @@
 //       "Multiples and their infinite nature",
 //       "Common factors and common multiples",
 //       "Counting factors using prime factorization",
-//       "Sum of divisors and number classification"
+//       "Sum of divisors and number classification",
+//       "Master divisor-structure toolkit"
 //     ],
 //     "keywords": keyWords.join(", "),
 //     "author": {
@@ -503,8 +554,13 @@
 //   props:{
 //     sectionsContent,
 //     introContent,
+//     obj6Table,
+//     obj10Table,
+//     summaryTable,
 //     faqQuestions,
 //     schemas,
+//     obj5SvgMultiples,
+//     obj6SvgSplit,
 //     seoData: {
 //       title: "Factors and Multiples: Divisors, Pairs & Counting | Learn Math Class",
 //       description: "Master factors and multiples: find all factors, factor pairs, proper divisors, common factors/multiples, counting formulas. Learn about perfect, abundant, and deficient numbers.",
@@ -517,8 +573,12 @@
 //    }
 
 
-// export default function FactorsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
+// export default function FactorsPage({seoData, sectionsContent, 
+//   introContent, obj6Table, obj10Table, summaryTable, faqQuestions, 
+//   schemas,obj5SvgMultiples, obj6SvgSplit}) {
+
+//   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
 //   const genericSections=[
 //      {
 //         id:'0',
@@ -561,22 +621,79 @@
 //           sectionsContent.obj4.content,
 //         ]
 //     },
+//     // {
+//     //     id:'5',
+//     //     title:sectionsContent.obj5.title,
+//     //     link:sectionsContent.obj5.link,
+//     //     content:[
+//     //       sectionsContent.obj5.content,
+//     //     ]
+//     // },
+
 //     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
+//     id:'5',
+//     title:sectionsContent.obj5.title,
+//     link:sectionsContent.obj5.link,
+//     content:[
+//       sectionsContent.obj5.content,
+//       <p key={'obj5-preface'}
+//          style={{ maxWidth: '800px', margin: '16px auto 0', fontStyle: 'italic', color: '#666', fontSize: '14px' }}>
+//         The figure below traces the start of this infinite sequence on a number line.
+//       </p>,
+//       <div key={'obj5-svg'}
+//            style={{ maxWidth: '800px', margin: '20px auto' }}
+//            dangerouslySetInnerHTML={{ __html: obj5SvgMultiples }} />,
+//       <p key={'obj5-summary'}
+//          style={{ maxWidth: '800px', margin: '0 auto 16px', fontSize: '14px', color: '#555' }}>
+//         Each dot marks a multiple of 7. The arrow and ellipsis at the right indicate the sequence continues without end.
+//       </p>,
+//     ]
+// },
+//     // {
+//     //     id:'6',
+//     //     title:sectionsContent.obj6.title,
+//     //     link:sectionsContent.obj6.link,
+//     //     content:[
+//     //       sectionsContent.obj6.content,
+//     //       <div key={'obj6-table'} style={tableWrapStyle}
+//     //            dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+//     //     ]
+//     // },
+
+// //     {
+// //     id:'6',
+// //     title:sectionsContent.obj6.title,
+// //     link:sectionsContent.obj6.link,
+// //     content:[
+// //       sectionsContent.obj6.content,
+// //       <div key={'obj6-table'} style={tableWrapStyle}
+// //            dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+// //       <p key={'obj6-svg-preface'}
+// //          style={{ maxWidth: '800px', margin: '20px auto 0', fontStyle: 'italic', color: '#666', fontSize: '14px' }}>
+// //         The figure below shows both sets for the same number, 24 — its eight factors on top, its multiples extending below, with 24 itself as the pivot between them.
+// //       </p>,
+// //       <div key={'obj6-svg'}
+// //            style={{ maxWidth: '800px', margin: '20px auto' }}
+// //            dangerouslySetInnerHTML={{ __html: obj6SvgSplit }} />,
+// //     ]
+// // },
+
+
+
+// {
+//     id:'6',
+//     title:sectionsContent.obj6.title,
+//     link:sectionsContent.obj6.link,
+//     content:[
+//       sectionsContent.obj6.content,
+//       <div key={'obj6-svg'}
+//            style={{ maxWidth: '800px', margin: '20px auto' }}
+//            dangerouslySetInnerHTML={{ __html: obj6SvgSplit }} />,
+//       sectionsContent.obj6.afterFigure,
+//       <div key={'obj6-table'} style={tableWrapStyle}
+//            dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+//     ]
+// },
 //     {
 //         id:'7',
 //         title:sectionsContent.obj7.title,
@@ -610,6 +727,8 @@
 //         link:sectionsContent.obj10.link,
 //         content:[
 //           sectionsContent.obj10.content,
+//           <div key={'obj10-table'} style={tableWrapStyle}
+//                dangerouslySetInnerHTML={{ __html: obj10Table }} />,
 //         ]
 //     },
 //     {
@@ -620,63 +739,17 @@
 //           sectionsContent.obj11.content,
 //         ]
 //     },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
+//     {
+//         id:'12',
+//         title:sectionsContent.obj12.title,
+//         link:sectionsContent.obj12.link,
+//         content:[
+//           sectionsContent.obj12.content,
+//           <div key={'summary-table'} style={tableWrapStyle}
+//                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+//         ]
+//     },
+
 // ]
 
 //   return (
@@ -778,6 +851,7 @@
 
 
 // tables-optimized: v4 | 2026-05-25 | 3 tables (obj6 comparison, obj10 aggregation, obj12 summary capstone)
+// factor-set integrated: v1 | 7 scenes (obj1, obj2, obj3, obj4, obj7, obj9, obj10); obj5 inline-JSX violation fixed
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -788,6 +862,9 @@ import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import { renderMultiplesLine } from '../../../../app/utils/illustrations/arithmetic/divisibility/multiplesLine'
+import { renderFactorSet } from '../../../../app/utils/illustrations/arithmetic/divisibility/factorSet'
+
 
 
 export async function getStaticProps(){
@@ -815,7 +892,7 @@ const linkStyle = 'color: inherit; text-decoration: underline;'
 
 // obj6 — comparison: factors vs multiples
 const obj6Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 58%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.comparison}">Aspect</th>
@@ -850,7 +927,7 @@ const obj6Table = `
 
 // obj10 — aggregation: number classification by sum of divisors
 const obj10Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Classification</th>
@@ -884,7 +961,7 @@ const obj10Table = `
 
 // obj12 — summary capstone: page-tools synthesis
 const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.summary}">Question about n</th>
@@ -922,6 +999,138 @@ const summaryTable = `
 </table>
 `
 
+
+// ─── ILLUSTRATIONS (multiples-line) ──────────────────────────────────────
+
+const obj5SvgMultiples = renderMultiplesLine({
+  kind: 'single-track',
+  range: [0, 56],
+  step: 7,
+  mode: 'list',
+  infinite: true,
+  info: { lines: [
+    { kind: 'formula', text: 'multiples of 7', role: 'primary' },
+    { kind: 'separator' },
+    { kind: 'note', text: '7, 14, 21, 28, 35,' },
+    { kind: 'note', text: '42, 49, 56, …' },
+    { kind: 'note', text: 'Infinitely many.', italic: true },
+  ]},
+})
+
+
+const obj6SvgSplit = renderMultiplesLine({
+  kind: 'split-view',
+  center: 24,
+  factorsOf: 24,
+  multiplesOf: 24,
+  multiplesCount: 4,
+  info: { lines: [
+    { kind: 'formula', text: 'factors vs multiples', role: 'result' },
+    { kind: 'separator' },
+    { kind: 'list', label: 'factors of 24:', items: '1, 2, 3, 4, 6, 8, 12, 24', role: 'primary' },
+    { kind: 'note', text: '8 values, finite', italic: true },
+    { kind: 'list', label: 'multiples of 24:', items: '24, 48, 72, 96, …', role: 'secondary' },
+    { kind: 'note', text: 'infinitely many', italic: true },
+    { kind: 'note', text: '24 is the pivot — largest factor, smallest multiple.' },
+  ]},
+})
+
+
+// ─── ILLUSTRATIONS (factor-set) ──────────────────────────────────────────
+
+// obj1 — factors of 24 as a labeled chip set
+const fsFactorsObj1 = renderFactorSet({
+  kind: 'single-set',
+  of: 24,
+  info: { lines: [
+    { kind: 'formula', text: 'factors of 24', role: 'primary' },
+    { kind: 'separator' },
+    { kind: 'note', text: '{1, 2, 3, 4, 6, 8, 12, 24}' },
+    { kind: 'note', text: '8 factors total', italic: true },
+  ]},
+})
+
+// obj2 — pair-search up to √36
+const fsFactorsObj2 = renderFactorSet({
+  kind: 'pairs',
+  of: 36,
+  info: { lines: [
+    { kind: 'formula', text: 'pairs by testing 1 → √36', role: 'primary' },
+    { kind: 'separator' },
+    { kind: 'note', text: '(1, 36), (2, 18), (3, 12),' },
+    { kind: 'note', text: '(4, 9), (6, 6)' },
+    { kind: 'note', text: '6 tests → 9 factors', italic: true },
+  ]},
+})
+
+// obj3 — factor pairs of 24
+const fsFactorsObj3 = renderFactorSet({
+  kind: 'pairs',
+  of: 24,
+  info: { lines: [
+    { kind: 'formula', text: 'factor pairs of 24', role: 'primary' },
+    { kind: 'separator' },
+    { kind: 'note', text: '(1, 24), (2, 12),' },
+    { kind: 'note', text: '(3, 8), (4, 6)' },
+    { kind: 'note', text: 'each pair multiplies to 24', italic: true },
+  ]},
+})
+
+// obj4 — proper divisors of 12 (12 itself struck out)
+const fsFactorsObj4 = renderFactorSet({
+  kind: 'single-set',
+  of: 12,
+  exclude: [12],
+  caption: 'sum = 16 > 12 (abundant)',
+  info: { lines: [
+    { kind: 'formula', text: 'proper divisors of 12', role: 'primary' },
+    { kind: 'separator' },
+    { kind: 'note', text: '{1, 2, 3, 4, 6}' },
+    { kind: 'formula', text: '1+2+3+4+6 = 16', role: 'result' },
+    { kind: 'note', text: '16 > 12 → abundant', italic: true },
+  ]},
+})
+
+// obj7 — common factors of 12 and 18
+const fsFactorsObj7 = renderFactorSet({
+  kind: 'two-set',
+  setA: 12,
+  setB: 18,
+  info: { lines: [
+    { kind: 'formula', text: 'common factors', role: 'result' },
+    { kind: 'separator' },
+    { kind: 'note', text: '{1, 2, 3, 6}' },
+    { kind: 'formula', text: 'gcd(12, 18) = 6', role: 'result' },
+  ]},
+})
+
+// obj9 — counting factors of 72 via prime factorization
+const fsFactorsObj9 = renderFactorSet({
+  kind: 'single-set',
+  of: 72,
+  caption: '12 factors',
+  info: { lines: [
+    { kind: 'formula', text: '72 = 2³ · 3²', role: 'primary' },
+    { kind: 'separator' },
+    { kind: 'formula', text: '(3+1)(2+1) = 12', role: 'result' },
+    { kind: 'note', text: 'matches the chip count', italic: true },
+  ]},
+})
+
+// obj10 — σ(12) = 28
+const fsFactorsObj10 = renderFactorSet({
+  kind: 'single-set',
+  of: 12,
+  caption: 'σ(12) = 28',
+  info: { lines: [
+    { kind: 'formula', text: 'σ(12) — sum of all divisors', role: 'primary' },
+    { kind: 'separator' },
+    { kind: 'note', text: '1+2+3+4+6+12 = 28' },
+    { kind: 'note', text: '28 > 2·12 → abundant', italic: true },
+  ]},
+})
+
+
 const sectionsContent = {
   obj0: {
   title: `Key Terms`,
@@ -943,9 +1152,8 @@ const sectionsContent = {
 
 Every positive integer has at least two factors: $1$ and itself. The number $1$ divides everything, and every number divides itself. Most numbers have additional factors between these two extremes.
 
-The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$ — eight in total. The factors of $13$ are just $1$ and $13$ — making it prime.
-
-Unlike multiples, which extend infinitely, the factor set of any positive integer is finite. No factor of $n$ can exceed $n$ itself (in absolute value), so the search space is bounded from the start.`,
+The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$ — eight in total. The factors of $13$ are just $1$ and $13$ — making it prime.`,
+    afterFigure: `Unlike multiples, which extend infinitely, the factor set of any positive integer is finite. No factor of $n$ can exceed $n$ itself (in absolute value), so the search space is bounded from the start.`,
     before: ``,
     after: ``,
     link: '',
@@ -957,9 +1165,8 @@ Unlike multiples, which extend infinitely, the factor set of any positive intege
 
 For $n = 36$, test integers from $1$ to $6$ (since $\\sqrt{36} = 6$):
 
-$1 \\mid 36$: pair $(1, 36)$. $2 \\mid 36$: pair $(2, 18)$. $3 \\mid 36$: pair $(3, 12)$. $4 \\mid 36$: pair $(4, 9)$. $5 \\nmid 36$: skip. $6 \\mid 36$: pair $(6, 6)$.
-
-The complete factor set is $\\{1, 2, 3, 4, 6, 9, 12, 18, 36\\}$ — nine factors, all discovered by testing only six candidates.
+$1 \\mid 36$: pair $(1, 36)$. $2 \\mid 36$: pair $(2, 18)$. $3 \\mid 36$: pair $(3, 12)$. $4 \\mid 36$: pair $(4, 9)$. $5 \\nmid 36$: skip. $6 \\mid 36$: pair $(6, 6)$.`,
+    afterFigure: `The complete factor set is $\\{1, 2, 3, 4, 6, 9, 12, 18, 36\\}$ — nine factors, all discovered by testing only six candidates.
 
 For large numbers, [divisibility rules](!/arithmetic/divisibility/rules) speed up the testing. Checking whether $2$, $3$, or $5$ divide $n$ takes a glance at the digits, not a full division.`,
     before: ``,
@@ -973,9 +1180,8 @@ For large numbers, [divisibility rules](!/arithmetic/divisibility/rules) speed u
     title: `Factor Pairs`,
     content: `Every factor $a$ of $n$ has a partner: $\\frac{n}{a}$. Together they satisfy $a \\cdot \\frac{n}{a} = n$, and listing factor pairs ensures no divisor is overlooked.
 
-For $n = 24$, the pairs are: $(1, 24)$, $(2, 12)$, $(3, 8)$, $(4, 6)$. Each pair multiplies to $24$, and together they account for all eight factors.
-
-For perfect squares, one pair collapses into a repeated value. The number $36$ has the pair $(6, 6)$ — the square root paired with itself. This is why perfect squares have an odd number of factors: every other factor appears in a pair of two distinct values, but the square root stands alone.
+For $n = 24$, the pairs are: $(1, 24)$, $(2, 12)$, $(3, 8)$, $(4, 6)$. Each pair multiplies to $24$, and together they account for all eight factors.`,
+    afterFigure: `For perfect squares, one pair collapses into a repeated value. The number $36$ has the pair $(6, 6)$ — the square root paired with itself. This is why perfect squares have an odd number of factors: every other factor appears in a pair of two distinct values, but the square root stands alone.
 
 Organizing factors into pairs is more reliable than listing them individually. Starting from $(1, n)$ and working inward, each successful division test produces two factors at once — halving the work and providing a built-in completeness check.`,
     before: ``,
@@ -987,9 +1193,8 @@ Organizing factors into pairs is more reliable than listing them individually. S
     title: `Proper Divisors`,
     content: `The proper divisors of $n$ are all of its factors except $n$ itself. They are the numbers that divide $n$ without being equal to it.
 
-The proper divisors of $12$ are $\\{1, 2, 3, 4, 6\\}$. The number $12$ itself is excluded.
-
-Proper divisors define three classical categories. A number is perfect if the sum of its proper divisors equals the number: $6 = 1 + 2 + 3$, so $6$ is perfect. A number is abundant if the sum exceeds it: the proper divisors of $12$ sum to $1 + 2 + 3 + 4 + 6 = 16 > 12$. A number is deficient if the sum falls short: the proper divisors of $10$ sum to $1 + 2 + 5 = 8 < 10$.
+The proper divisors of $12$ are $\\{1, 2, 3, 4, 6\\}$. The number $12$ itself is excluded.`,
+    afterFigure: `Proper divisors define three classical categories. A number is perfect if the sum of its proper divisors equals the number: $6 = 1 + 2 + 3$, so $6$ is perfect. A number is abundant if the sum exceeds it: the proper divisors of $12$ sum to $1 + 2 + 3 + 4 + 6 = 16 > 12$. A number is deficient if the sum falls short: the proper divisors of $10$ sum to $1 + 2 + 5 = 8 < 10$.
 
 Perfect numbers are rare. The first four are $6, 28, 496$, and $8{,}128$. Every known perfect number is even, and whether an odd perfect number exists remains one of the oldest unsolved problems in mathematics.`,
     before: ``,
@@ -1001,9 +1206,8 @@ Perfect numbers are rare. The first four are $6, 28, 496$, and $8{,}128$. Every 
     title: `Multiples`,
     content: `A multiple of $a$ is any number $b$ such that $a \\mid b$ — meaning $b = a \\cdot k$ for some positive integer $k$. Where factors divide into a number, multiples are produced by multiplying out from it.
 
-The multiples of $7$ are $7, 14, 21, 28, 35, 42, \\ldots$ — an infinite sequence with no largest member. Every positive integer generates infinitely many multiples.
-
-Zero is a multiple of every number, since $0 = a \\cdot 0$ for any $a$. It sits at the start of every multiple sequence, though it is often omitted when listing "the multiples of $a$" in contexts where only positive values are relevant.
+The multiples of $7$ are $7, 14, 21, 28, 35, 42, \\ldots$ — an infinite sequence with no largest member. Every positive integer generates infinitely many multiples.`,
+    afterFigure: `Zero is a multiple of every number, since $0 = a \\cdot 0$ for any $a$. It sits at the start of every multiple sequence, though it is often omitted when listing "the multiples of $a$" in contexts where only positive values are relevant.
 
 The [modulo](!/arithmetic/modulo) operation identifies which multiple of $n$ is closest to a given number $a$ without exceeding it: $a = n \\cdot q + r$, where $n \\cdot q$ is that nearest multiple and $r$ is the gap between it and $a$.`,
     before: ``,
@@ -1011,29 +1215,46 @@ The [modulo](!/arithmetic/modulo) operation identifies which multiple of $n$ is 
     link: '',
   },
 
-  obj6: {
-    title: `Factors vs Multiples`,
-    content: `The two concepts are inverses of each other, and mixing them up is one of the most common errors in elementary number theory.
+//   obj6: {
+//     title: `Factors vs Multiples`,
+//     content: `The two concepts are inverses of each other, and mixing them up is one of the most common errors in elementary number theory.
+
+// Factors go downward. The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$ — all less than or equal to $24$. There are finitely many of them.
+
+// Multiples go upward. The multiples of $24$ are $24, 48, 72, 96, \\ldots$ — all greater than or equal to $24$ (excluding zero). There are infinitely many.
+
+// The relationship is symmetric: $a$ is a factor of $b$ if and only if $b$ is a multiple of $a$. The number $3$ is a factor of $12$, and $12$ is a multiple of $3$. Same fact, opposite viewpoints.
+
+// A useful mnemonic: factors fit into a number (they are smaller), multiples multiply out from a number (they are larger). The factor set is contained; the multiple set is unbounded.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+
+obj6: {
+  title: `Factors vs Multiples`,
+  content: `The two concepts are inverses of each other, and mixing them up is one of the most common errors in elementary number theory.
 
 Factors go downward. The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$ — all less than or equal to $24$. There are finitely many of them.
 
 Multiples go upward. The multiples of $24$ are $24, 48, 72, 96, \\ldots$ — all greater than or equal to $24$ (excluding zero). There are infinitely many.
 
-The relationship is symmetric: $a$ is a factor of $b$ if and only if $b$ is a multiple of $a$. The number $3$ is a factor of $12$, and $12$ is a multiple of $3$. Same fact, opposite viewpoints.
+The contrast is easiest to read on two adjacent number lines, with $24$ itself as the pivot between them:`,
+  afterFigure: `The relationship is symmetric: $a$ is a factor of $b$ if and only if $b$ is a multiple of $a$. The number $3$ is a factor of $12$, and $12$ is a multiple of $3$. Same fact, opposite viewpoints.
 
 A useful mnemonic: factors fit into a number (they are smaller), multiples multiply out from a number (they are larger). The factor set is contained; the multiple set is unbounded.`,
-    before: ``,
-    after: ``,
-    link: '',
-  },
+  before: ``,
+  after: ``,
+  link: '',
+},
 
   obj7: {
     title: `Common Factors`,
     content: `A common factor of two numbers $m$ and $n$ is a number that divides both. Finding common factors means intersecting the two factor sets.
 
-The factors of $12$ are $\\{1, 2, 3, 4, 6, 12\\}$. The factors of $18$ are $\\{1, 2, 3, 6, 9, 18\\}$. The common factors — numbers appearing in both sets — are $\\{1, 2, 3, 6\\}$.
-
-Every pair of positive integers shares at least one common factor: $1$ divides both, always. The question is whether they share anything larger.
+The factors of $12$ are $\\{1, 2, 3, 4, 6, 12\\}$. The factors of $18$ are $\\{1, 2, 3, 6, 9, 18\\}$. The common factors — numbers appearing in both sets — are $\\{1, 2, 3, 6\\}$.`,
+    afterFigure: `Every pair of positive integers shares at least one common factor: $1$ divides both, always. The question is whether they share anything larger.
 
 The greatest common factor is the largest member of the common factor set. For $12$ and $18$, it is $6$. This value — the [GCD](!/arithmetic/divisibility/gcd) — plays a central role in simplifying **fractions**, solving equations, and determining whether two numbers are coprime.`,
     before: ``,
@@ -1069,9 +1290,8 @@ $$(a_1 + 1)(a_2 + 1) \\cdots (a_k + 1)$$
 
 Each prime factor $p_i$ can appear in a divisor $0, 1, 2, \\ldots, a_i$ times — that is $a_i + 1$ independent choices. The total number of divisors is the product of all these choices.
 
-The number $72 = 2^3 \\cdot 3^2$ has $(3+1)(2+1) = 12$ factors. Listing them confirms: $1, 2, 3, 4, 6, 8, 9, 12, 18, 24, 36, 72$ — exactly twelve.
-
-The number $100 = 2^2 \\cdot 5^2$ has $(2+1)(2+1) = 9$ factors.
+The number $72 = 2^3 \\cdot 3^2$ has $(3+1)(2+1) = 12$ factors. Listing them confirms: $1, 2, 3, 4, 6, 8, 9, 12, 18, 24, 36, 72$ — exactly twelve.`,
+    afterFigure: `The number $100 = 2^2 \\cdot 5^2$ has $(2+1)(2+1) = 9$ factors.
 
 The formula reveals structure that raw listing obscures. A number with many small prime factors has more divisors than a number of similar size with fewer, larger prime factors. The number $60 = 2^2 \\cdot 3 \\cdot 5$ has $12$ factors, while $64 = 2^6$ has only $7$.`,
     before: ``,
@@ -1085,9 +1305,8 @@ The formula reveals structure that raw listing obscures. A number with many smal
     title: `Sum of Factors`,
     content: `The sum of all positive divisors of $n$ is denoted $\\sigma(n)$. Like the divisor count, it can be computed directly from the prime factorization.
 
-For $n = 12$: the divisors are $1, 2, 3, 4, 6, 12$, and $\\sigma(12) = 1 + 2 + 3 + 4 + 6 + 12 = 28$.
-
-For $n = 6$: the divisors are $1, 2, 3, 6$, and $\\sigma(6) = 1 + 2 + 3 + 6 = 12$. The sum of all divisors is twice the number — but more revealing is that the sum of the proper divisors is $1 + 2 + 3 = 6$, equal to $n$ itself. This makes $6$ a perfect number.
+For $n = 12$: the divisors are $1, 2, 3, 4, 6, 12$, and $\\sigma(12) = 1 + 2 + 3 + 4 + 6 + 12 = 28$.`,
+    afterFigure: `For $n = 6$: the divisors are $1, 2, 3, 6$, and $\\sigma(6) = 1 + 2 + 3 + 6 = 12$. The sum of all divisors is twice the number — but more revealing is that the sum of the proper divisors is $1 + 2 + 3 = 6$, equal to $n$ itself. This makes $6$ a perfect number.
 
 The relationship between $\\sigma(n)$ and $n$ classifies every positive integer. When $\\sigma(n) - n = n$, the number is perfect. When $\\sigma(n) - n > n$, it is abundant. When $\\sigma(n) - n < n$, it is deficient. Most numbers are deficient; abundance and perfection are the exceptions.`,
     before: ``,
@@ -1282,6 +1501,15 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    obj5SvgMultiples,
+    obj6SvgSplit,
+    fsFactorsObj1,
+    fsFactorsObj2,
+    fsFactorsObj3,
+    fsFactorsObj4,
+    fsFactorsObj7,
+    fsFactorsObj9,
+    fsFactorsObj10,
     seoData: {
       title: "Factors and Multiples: Divisors, Pairs & Counting | Learn Math Class",
       description: "Master factors and multiples: find all factors, factor pairs, proper divisors, common factors/multiples, counting formulas. Learn about perfect, abundant, and deficient numbers.",
@@ -1294,9 +1522,14 @@ return {
    }
 
 
-export default function FactorsPage({seoData, sectionsContent, introContent, obj6Table, obj10Table, summaryTable, faqQuestions, schemas}) {
+export default function FactorsPage({seoData, sectionsContent,
+  introContent, obj6Table, obj10Table, summaryTable, faqQuestions,
+  schemas, obj5SvgMultiples, obj6SvgSplit,
+  fsFactorsObj1, fsFactorsObj2, fsFactorsObj3, fsFactorsObj4,
+  fsFactorsObj7, fsFactorsObj9, fsFactorsObj10}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+  const figureWrapStyle = { maxWidth: '800px', margin: '20px auto' }
 
   const genericSections=[
      {
@@ -1313,6 +1546,9 @@ export default function FactorsPage({seoData, sectionsContent, introContent, obj
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'obj1-svg'} style={figureWrapStyle}
+               dangerouslySetInnerHTML={{ __html: fsFactorsObj1 }} />,
+          sectionsContent.obj1.afterFigure,
         ]
     },
     {
@@ -1321,6 +1557,9 @@ export default function FactorsPage({seoData, sectionsContent, introContent, obj
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'obj2-svg'} style={figureWrapStyle}
+               dangerouslySetInnerHTML={{ __html: fsFactorsObj2 }} />,
+          sectionsContent.obj2.afterFigure,
           // sectionsContent.obj2.after,
         ]
     },
@@ -1330,6 +1569,9 @@ export default function FactorsPage({seoData, sectionsContent, introContent, obj
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'obj3-svg'} style={figureWrapStyle}
+               dangerouslySetInnerHTML={{ __html: fsFactorsObj3 }} />,
+          sectionsContent.obj3.afterFigure,
         ]
     },
     {
@@ -1338,32 +1580,84 @@ export default function FactorsPage({seoData, sectionsContent, introContent, obj
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'obj4-svg'} style={figureWrapStyle}
+               dangerouslySetInnerHTML={{ __html: fsFactorsObj4 }} />,
+          sectionsContent.obj4.afterFigure,
         ]
     },
+    // {
+    //     id:'5',
+    //     title:sectionsContent.obj5.title,
+    //     link:sectionsContent.obj5.link,
+    //     content:[
+    //       sectionsContent.obj5.content,
+    //     ]
+    // },
+
     {
-        id:'5',
-        title:sectionsContent.obj5.title,
-        link:sectionsContent.obj5.link,
-        content:[
-          sectionsContent.obj5.content,
-        ]
-    },
-    {
-        id:'6',
-        title:sectionsContent.obj6.title,
-        link:sectionsContent.obj6.link,
-        content:[
-          sectionsContent.obj6.content,
-          <div key={'obj6-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj6Table }} />,
-        ]
-    },
+    id:'5',
+    title:sectionsContent.obj5.title,
+    link:sectionsContent.obj5.link,
+    content:[
+      sectionsContent.obj5.content,
+      <div key={'obj5-svg'} style={figureWrapStyle}
+           dangerouslySetInnerHTML={{ __html: obj5SvgMultiples }} />,
+      sectionsContent.obj5.afterFigure,
+    ]
+},
+    // {
+    //     id:'6',
+    //     title:sectionsContent.obj6.title,
+    //     link:sectionsContent.obj6.link,
+    //     content:[
+    //       sectionsContent.obj6.content,
+    //       <div key={'obj6-table'} style={tableWrapStyle}
+    //            dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+    //     ]
+    // },
+
+//     {
+//     id:'6',
+//     title:sectionsContent.obj6.title,
+//     link:sectionsContent.obj6.link,
+//     content:[
+//       sectionsContent.obj6.content,
+//       <div key={'obj6-table'} style={tableWrapStyle}
+//            dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+//       <p key={'obj6-svg-preface'}
+//          style={{ maxWidth: '800px', margin: '20px auto 0', fontStyle: 'italic', color: '#666', fontSize: '14px' }}>
+//         The figure below shows both sets for the same number, 24 — its eight factors on top, its multiples extending below, with 24 itself as the pivot between them.
+//       </p>,
+//       <div key={'obj6-svg'}
+//            style={{ maxWidth: '800px', margin: '20px auto' }}
+//            dangerouslySetInnerHTML={{ __html: obj6SvgSplit }} />,
+//     ]
+// },
+
+
+
+{
+    id:'6',
+    title:sectionsContent.obj6.title,
+    link:sectionsContent.obj6.link,
+    content:[
+      sectionsContent.obj6.content,
+      <div key={'obj6-svg'} style={figureWrapStyle}
+           dangerouslySetInnerHTML={{ __html: obj6SvgSplit }} />,
+      sectionsContent.obj6.afterFigure,
+      <div key={'obj6-table'} style={tableWrapStyle}
+           dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+    ]
+},
     {
         id:'7',
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'obj7-svg'} style={figureWrapStyle}
+               dangerouslySetInnerHTML={{ __html: fsFactorsObj7 }} />,
+          sectionsContent.obj7.afterFigure,
           // sectionsContent.obj7.after,
         ]
     },
@@ -1382,6 +1676,9 @@ export default function FactorsPage({seoData, sectionsContent, introContent, obj
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'obj9-svg'} style={figureWrapStyle}
+               dangerouslySetInnerHTML={{ __html: fsFactorsObj9 }} />,
+          sectionsContent.obj9.afterFigure,
           // sectionsContent.obj9.after,
         ]
     },
@@ -1391,6 +1688,9 @@ export default function FactorsPage({seoData, sectionsContent, introContent, obj
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <div key={'obj10-svg'} style={figureWrapStyle}
+               dangerouslySetInnerHTML={{ __html: fsFactorsObj10 }} />,
+          sectionsContent.obj10.afterFigure,
           <div key={'obj10-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj10Table }} />,
         ]
