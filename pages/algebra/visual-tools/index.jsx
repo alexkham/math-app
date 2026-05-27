@@ -8,6 +8,9 @@ import ModernCardsGroup from '@/app/components/cards/ModernCardsGroup'
 import QuickNav from '@/app/components/cards/QuickNav'
 import ScrollToTop from '@/app/components/scroll-up-button/ScrollToTop'
 import ToolsPageHeader from '@/app/components/cards/ToolsPageHeader'
+import VisualToolsPage from '../../../app/components/page-components/visual-tools-page/VisualToolsPage'
+import { buildToolIndexData } from '../../../app/components/page-components/visual-tools-page/buildToolsPageData'
+
 
 
 export async function getStaticProps(){
@@ -209,11 +212,44 @@ Each tool runs directly in your browser with no installation required. Use them 
     obj5: { title: ``, content: ``, before: ``, after: `` }
   }
 
-  const introContent = {
-    id: "intro",
-    title: "",
-    content: ``
-  }
+ const introContent = {
+  id: "intro",
+  title: "Algebra You Can See",
+  content: `Animated dissection proofs of identities like (a+b)², step-by-step explorers for equations and inequalities, cell-by-cell visualizers for matrix and vector operations, and a searchable powers reference — every tool turns symbolic manipulation into something you can drag, dissect, or step through. Pick one below to explore a concept geometrically.`
+}
+const intro = {
+  title: "Free interactive tools for learning algebra",
+  description: "Animated dissection proofs turn algebraic identities into geometry you can watch fall apart and snap back together. Step-by-step explorers solve equations and inequalities with a draggable marble and a live sign chart. Cell-by-cell visualizers walk through matrix and vector addition, scalar multiplication, and linear combinations, with curved arrows showing exactly which entries flow where. A searchable powers table rounds out the collection as a reference you can scan side by side.",
+  tip: "Start with the Algebraic Identities Visualizers to see why (a+b)² is geometry before it is algebra."
+}
+
+
+
+const toolsData = await buildToolIndexData('algebra/visual-tools')
+
+
+
+  //  const comingSoonItems = [
+  //   {
+  //     at: 'end',
+  //     title: 'Matrix Multiplication Visualizer',
+  //     description: 'Step-by-step animated matrix multiplication with full control over the calculation. Watch each dot product form element-by-element, with red highlighting on the specific pair of values currently being multiplied and yellow on the full row-and-column being combined. Step forward and back, pause, resume, or let it auto-play. Resize either matrix from 1×1 up to 10×10, generate random values within any range, or edit cells by hand — the result matrix dimensions update automatically, and incompatible dimensions are caught before computation starts. A running commentary below the grids spells out every multiplication and the accumulating sum, so the formula C[i][j] = Σ A[i][k]·B[k][j] becomes concrete arithmetic you can verify by hand.',
+  //     href: '/visual-tools/matrix-multiplication',
+  //     category: 'Matrices',
+  //     subCategory:'Matrix Operations',
+  //     icon: '',
+  //   },
+  //   {
+  //     at: 'end',
+  //     title: 'Gaussian Elimination Calculator',
+  //     description: 'Transform any matrix to row echelon form (REF) or reduced row echelon form (RREF) one row operation at a time. Choose a size from 2×3 up to 5×6, fill the cells by hand or generate random values, then pick which form to reduce to. Each stage shows the operation performed — row swap, scaling, or elimination — with the affected rows highlighted in the matrix and the row state before and after spelled out in textbook notation. Step manually with Previous and Next, or hit Play for automatic 1-second advance. RREF makes solutions immediately readable; REF stops earlier and leaves back-substitution to you.',
+  //     href: '/visual-tools/gauss-elimination',
+  //     category: 'Matrices',
+  //     subCategory:'Matrix Operations',
+  //     icon: '',
+  //   },
+  // ]
+
 
   return {
     props: {
@@ -223,12 +259,15 @@ Each tool runs directly in your browser with no installation required. Use them 
       faqQuestions,
       schemas,
       pageArticle,
-      seoData
+      seoData,
+      toolsData,
+      intro
     }
   }
 }
 
-export default function AlgebraVisualToolsPage({seoData, sectionsContent, introContent, cardsData, faqQuestions, schemas, pageArticle}) {
+export default function AlgebraVisualToolsPage({seoData, sectionsContent, introContent,
+   cardsData, faqQuestions, schemas, pageArticle ,toolsData,intro}) {
 
   const genericSections = [
     { id: '1', title: 'section1', link: '', content: '' },
@@ -299,19 +338,32 @@ export default function AlgebraVisualToolsPage({seoData, sectionsContent, introC
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Algebra Visual Tools</h1>
-      <QuickNav items={cardsData} dropdownLabel="All Tools"
+      {/* <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Algebra Visual Tools</h1> */}
+      {/* <QuickNav items={cardsData} dropdownLabel="All Tools"
       
       accentColor="#2c5d99"
   accentColorHover="#1e4170"
-      />
-      <br/>
-      <ScrollToTop
+      /> */}
+    
+      {/* <ScrollToTop
         top={'80px'}
         center={true}
-      />
-      <br/>
-      <ToolsPageHeader
+      /> */}
+     
+       <VisualToolsPage
+     tools={toolsData}
+    //  customItems={comingSoonItems}
+     pageTitle="Algebra Visual Tools"
+     intro={intro}
+     icon="🧮"
+     dropdownLabel="All Tools"
+     theme="deepBlue"
+     sidebar={true}
+     sidebarBrandName="Algebra"
+     sidebarBrandSub="Visual Tools"
+   />
+
+      {/* <ToolsPageHeader
        accentColor="#2c5d99"
   accentColorSecondary="#3a72b8"
         items={cardsData}
@@ -323,7 +375,7 @@ export default function AlgebraVisualToolsPage({seoData, sectionsContent, introC
         }}
         article={pageArticle}
         onFilteredItemsChange={(filtered) => setDisplayedItems(filtered)}
-      />
+      /> */}
       <br/>
       <br/>
       <br/>
@@ -348,7 +400,7 @@ export default function AlgebraVisualToolsPage({seoData, sectionsContent, introC
       <br/>
       <br/>
 
-      <ModernCardsGroup items={cardsData}/>
+      {/* <ModernCardsGroup items={cardsData}/> */}
       <br/>
       {/* <SectionTableOfContents sections={genericSections}/> */}
       <br/>
