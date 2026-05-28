@@ -12,6 +12,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import { renderFactorSet } from '../../../../app/utils/illustrations/arithmetic/divisibility/factorSet'
 import { renderEuclideanChain } from '../../../../app/utils/illustrations/arithmetic/divisibility/euclideanChain'
 import { renderPrimeFactorization } from '../../../../app/utils/illustrations/arithmetic/divisibility/primeFactorization'
+import { renderRectangleTile } from '../../../../app/utils/illustrations/arithmetic/divisibility/rectangleTile'
 
 
 export async function getStaticProps(){
@@ -226,6 +227,42 @@ const pfGcdObj4 = renderPrimeFactorization({
   ]},
 })
 
+
+
+const rtGcdObj10Ratio = renderRectangleTile({
+  kind: 'tiled-rectangle',
+  width: 48,
+  height: 80,
+  reading: 'ratio',
+  info: { lines: [
+    { kind: 'formula', text: 'aspect ratio 48 : 80', role: 'secondary' },
+    { kind: 'separator' },
+    { kind: 'note', text: 'divide both by gcd(48, 80) = 16' },
+    { kind: 'note', text: '48 / 16 = 3' },
+    { kind: 'note', text: '80 / 16 = 5' },
+    { kind: 'separator' },
+    { kind: 'formula', text: '48 : 80 = 3 : 5', role: 'result' },
+    { kind: 'note', text: '3 and 5 are coprime — lowest terms', italic: true },
+  ]},
+})
+
+const rtGcdObj10Tiles = renderRectangleTile({
+  kind: 'tiled-rectangle',
+  width: 48,
+  height: 80,
+  reading: 'tiles',
+  info: { lines: [
+    { kind: 'formula', text: 'largest square tile', role: 'primary' },
+    { kind: 'separator' },
+    { kind: 'note', text: 'side = gcd(48, 80) = 16' },
+    { kind: 'note', text: '48 / 16 = 3 tiles across' },
+    { kind: 'note', text: '80 / 16 = 5 tiles down' },
+    { kind: 'separator' },
+    { kind: 'formula', text: '3 × 5 = 15 tiles', role: 'result' },
+    { kind: 'note', text: 'no gaps, no overlaps', italic: true },
+  ]},
+})
+
     const sectionsContent={
 
 
@@ -293,26 +330,6 @@ One further property connects the GCD to all other common divisors: every common
   link: '',
 },
 
-// obj3: {
-//   title: `Method 1: Listing Factors`,
-//   content: `The most direct approach finds all factors of each number, identifies the overlap, and selects the largest.
-
-// For $\\gcd(24, 36)$:
-
-// Factors of $24$: $\\{1, 2, 3, 4, 6, 8, 12, 24\\}$.
-
-// Factors of $36$: $\\{1, 2, 3, 4, 6, 9, 12, 18, 36\\}$.
-
-// Common factors: $\\{1, 2, 3, 4, 6, 12\\}$.
-
-// The largest is $12$, so $\\gcd(24, 36) = 12$.
-
-// The method is transparent and reliable for small numbers. For large numbers it becomes impractical — finding all factors of a number like $1{,}764$ requires systematic testing up to $\\sqrt{1764} \\approx 42$, and doing this for two numbers is tedious. The methods that follow avoid listing factors entirely.`,
-//   before: ``,
-//   after: ``,
-//   link: '',
-// },
-
 
 obj3: {
   title: `Method 1: Listing Factors`,
@@ -333,27 +350,6 @@ The largest is $12$, so $\\gcd(24, 36) = 12$.`,
   link: '',
 },
 
-// obj4: {
-//   title: `Method 2: Prime Factorization`,
-//   content: `The prime factorization of each number reveals exactly which primes they share and in what quantities. The GCD takes the minimum exponent for each common prime.
-
-// For $\\gcd(48, 180)$:
-
-// $48 = 2^4 \\cdot 3^1$
-
-// $180 = 2^2 \\cdot 3^2 \\cdot 5^1$
-
-// The primes appearing in both factorizations are $2$ and $3$. The prime $5$ appears only in $180$ and contributes nothing to the GCD.
-
-// Take the smaller exponent for each shared prime: $\\min(4, 2) = 2$ for the prime $2$, and $\\min(1, 2) = 1$ for the prime $3$.
-
-// $$\\gcd(48, 180) = 2^2 \\cdot 3^1 = 4 \\cdot 3 = 12$$
-
-// This method is efficient when the factorizations are easy to find. For numbers whose prime factors are not immediately apparent, the Euclidean algorithm is faster.`,
-//   before: ``,
-//   after: ``,
-//   link: '',
-// },
 
 
 obj4: {
@@ -377,25 +373,7 @@ $$\\gcd(48, 180) = 2^2 \\cdot 3^1 = 4 \\cdot 3 = 12$$`,
   link: '',
 },
 
-// obj5: {
-//   title: `Method 3: Euclidean Algorithm`,
-//   content: `The Euclidean algorithm computes the GCD without factoring either number. It relies on a single property: $\\gcd(a, b) = \\gcd(b, \\; a \\bmod b)$. Replacing the larger number with the remainder of their division preserves the GCD while shrinking the problem.
 
-// For $\\gcd(252, 105)$:
-
-// $252 = 105 \\cdot 2 + 42$, so $\\gcd(252, 105) = \\gcd(105, 42)$.
-
-// $105 = 42 \\cdot 2 + 21$, so $\\gcd(105, 42) = \\gcd(42, 21)$.
-
-// $42 = 21 \\cdot 2 + 0$, so $\\gcd(42, 21) = 21$.
-
-// The last nonzero remainder is $21$, which is $\\gcd(252, 105)$.
-
-// The algorithm works because any common divisor of $a$ and $b$ is also a common divisor of $b$ and $a \\bmod b$. The [modulo](!/arithmetic/modulo) operation peels away multiples of $b$ from $a$, leaving a smaller number with the same common divisor structure. This is the most efficient of the three methods, particularly for large numbers where factorization is difficult.`,
-//   before: ``,
-//   after: ``,
-//   link: '',
-// },
 
 
 obj5: {
@@ -417,38 +395,6 @@ The last nonzero remainder is $21$, which is $\\gcd(252, 105)$.`,
   link: '',
 },
 
-// obj6: {
-//   title: `Euclidean Algorithm Step by Step`,
-//   content: `The procedure is mechanical. Start with two positive integers $a$ and $b$, with $a \\geq b$.
-
-// Compute $r = a \\bmod b$. Replace $a$ with $b$ and $b$ with $r$. Repeat until $b = 0$. The value of $a$ at that point is the GCD.
-
-// For $\\gcd(462, 198)$:
-
-// $462 = 198 \\cdot 2 + 66 \\quad \\to \\quad a = 198, \\; b = 66$
-
-// $198 = 66 \\cdot 3 + 0 \\quad \\to \\quad b = 0$
-
-// $\\gcd(462, 198) = 66$.
-
-// For $\\gcd(1{,}071, 462)$:
-
-// $1071 = 462 \\cdot 2 + 147 \\quad \\to \\quad a = 462, \\; b = 147$
-
-// $462 = 147 \\cdot 3 + 21 \\quad \\to \\quad a = 147, \\; b = 21$
-
-// $147 = 21 \\cdot 7 + 0 \\quad \\to \\quad b = 0$
-
-// $\\gcd(1071, 462) = 21$.
-
-// The algorithm always terminates because the remainder $r$ satisfies $0 \\leq r < b$, so $b$ strictly decreases at each step. A sequence of positive integers that strictly decreases must eventually reach zero.`,
-//   before: ``,
-//   after: `
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Try calculating Greatest Common Divisor with our GCF Calculator](!/arithmetic/calculators/gcf-calculator) →@`,
-
-//   link: '',
-// },
 
 
 
@@ -545,15 +491,27 @@ The order of pairing does not matter — the GCD is associative and commutative,
 },
 
 
+// obj10: {
+//   title: `Applications of GCD`,
+//   content: `The most immediate application is simplifying **fractions**. The fraction $\\frac{24}{36}$ reduces to $\\frac{2}{3}$ by dividing numerator and denominator by $\\gcd(24, 36) = 12$. A fraction is in lowest terms when the GCD of its numerator and denominator is $1$.
+
+// Ratios simplify the same way. A rectangle with dimensions $48 \\times 80$ has an aspect ratio of $48:80$. Dividing both by $\\gcd(48, 80) = 16$ gives $3:5$.
+
+// Tiling problems use the GCD geometrically. The largest square tile that fits perfectly into a $48 \\times 80$ rectangle has side length $\\gcd(48, 80) = 16$. The rectangle can be covered by $3 \\times 5 = 15$ such tiles with no gaps or overlaps.
+
+// The GCD also connects to the [LCM](!/arithmetic/divisibility/lcm) through a clean identity: $a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$. Knowing the GCD gives the LCM for free, and vice versa.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
 obj10: {
   title: `Applications of GCD`,
   content: `The most immediate application is simplifying **fractions**. The fraction $\\frac{24}{36}$ reduces to $\\frac{2}{3}$ by dividing numerator and denominator by $\\gcd(24, 36) = 12$. A fraction is in lowest terms when the GCD of its numerator and denominator is $1$.
 
-Ratios simplify the same way. A rectangle with dimensions $48 \\times 80$ has an aspect ratio of $48:80$. Dividing both by $\\gcd(48, 80) = 16$ gives $3:5$.
-
-Tiling problems use the GCD geometrically. The largest square tile that fits perfectly into a $48 \\times 80$ rectangle has side length $\\gcd(48, 80) = 16$. The rectangle can be covered by $3 \\times 5 = 15$ such tiles with no gaps or overlaps.
-
-The GCD also connects to the [LCM](!/arithmetic/divisibility/lcm) through a clean identity: $a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$. Knowing the GCD gives the LCM for free, and vice versa.`,
+Ratios simplify the same way. A rectangle with dimensions $48 \\times 80$ has an aspect ratio of $48:80$. Dividing both by $\\gcd(48, 80) = 16$ gives $3:5$, as the figure below shows.`,
+  afterFigure: `Tiling problems use the GCD geometrically. The largest square tile that fits perfectly into a $48 \\times 80$ rectangle has side length $\\gcd(48, 80) = 16$. The rectangle is then covered by $3 \\times 5 = 15$ such tiles with no gaps or overlaps, as shown below.`,
+  afterFigure2: `The GCD also connects to the [LCM](!/arithmetic/divisibility/lcm) through a clean identity: $a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$. Knowing the GCD gives the LCM for free, and vice versa.`,
   before: ``,
   after: ``,
   link: '',
@@ -777,6 +735,8 @@ ecGcdObj5,
 ecGcdObj6a,
 ecGcdObj6b,
 pfGcdObj4,
+rtGcdObj10Ratio,
+rtGcdObj10Tiles,
     seoData: {
       title: "GCD: Greatest Common Divisor & Euclidean Algorithm | Learn Math Class",
       description: "Learn to find the GCD using three methods: listing factors, prime factorization, and the Euclidean algorithm. Understand coprime numbers and applications like simplifying fractions.",
@@ -795,7 +755,9 @@ export default function GCDPage({seoData, sectionsContent, introContent,
   fsGcdObj1,
 fsGcdObj3,ecGcdObj5,
 ecGcdObj6a,
-ecGcdObj6b,pfGcdObj4,}) {
+ecGcdObj6b,pfGcdObj4,
+rtGcdObj10Ratio,
+rtGcdObj10Tiles,}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -953,14 +915,30 @@ ecGcdObj6b,pfGcdObj4,}) {
           sectionsContent.obj9.content,
         ]
     },
+    // {
+    //     id:'10',
+    //     title:sectionsContent.obj10.title,
+    //     link:sectionsContent.obj10.link,
+    //     content:[
+    //       sectionsContent.obj10.content,
+    //     ]
+    // },
+
+
     {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-        ]
-    },
+    id:'10',
+    title:sectionsContent.obj10.title,
+    link:sectionsContent.obj10.link,
+    content:[
+      sectionsContent.obj10.content,
+      <div key={'obj10-svg-ratio'} style={{ maxWidth: '800px', margin: '20px auto' }}
+           dangerouslySetInnerHTML={{ __html: rtGcdObj10Ratio }} />,
+      sectionsContent.obj10.afterFigure,
+      <div key={'obj10-svg-tiles'} style={{ maxWidth: '800px', margin: '20px auto' }}
+           dangerouslySetInnerHTML={{ __html: rtGcdObj10Tiles }} />,
+      sectionsContent.obj10.afterFigure2,
+    ]
+},
     {
         id:'11',
         title:sectionsContent.obj11.title,

@@ -726,7 +726,7 @@ function generateSVG(opts) {
 // ============================================================
 // COMPONENT: VisualizerCore
 // ============================================================
-const VisualizerCore = React.forwardRef((props, ref) => {
+export const VisualizerCore = React.forwardRef((props, ref) => {
   const {
     functions = [],
     xMin: initXMin, xMax: initXMax, yMin: initYMin, yMax: initYMax, zoom,
@@ -942,7 +942,7 @@ function ExportModal({ isOpen, onClose, pngDataUrl, svgContent }) {
 //   with onClick={e => e.stopPropagation()} so clicks on controls
 //   don't accidentally exit fullscreen.
 // ============================================================
-function VisualizerWithControls(props) {
+export function VisualizerWithControls(props) {
   const { defaultWidth = 700, defaultHeight = 550, minWidth = 400, minHeight = 300, ...rest } = props;
   const visualizerRef = useRef(null);
   const [isMax, setIsMax] = useState(false);

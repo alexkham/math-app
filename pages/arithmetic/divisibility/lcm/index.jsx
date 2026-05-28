@@ -12,6 +12,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 // import { renderMultiplesLine } from '../../../../app/utils/illustrations/multiplesLine'
 import {renderMultiplesLine} from '../../../../app/utils/illustrations/arithmetic/divisibility/multiplesLine'
+import { renderPrimeFactorization } from '../../../../app/utils/illustrations/arithmetic/divisibility/primeFactorization'
 
 
 
@@ -200,6 +201,26 @@ const obj10SvgBuses = renderMultiplesLine({
   ]},
 })
 
+
+
+const pfLcmObj4 = renderPrimeFactorization({
+  kind: 'paired-stacks',
+  a: 12,
+  b: 18,
+  highlight: 'max',
+  info: { lines: [
+    { kind: 'formula', text: 'lcm(12, 18) = 36', role: 'primary' },
+    { kind: 'separator' },
+    { kind: 'note', text: '12 = 2² · 3' },
+    { kind: 'note', text: '18 = 2 · 3²' },
+    { kind: 'note', text: 'Amber: full coverage at the' },
+    { kind: 'note', text: 'larger exponent per prime.' },
+    { kind: 'note', text: 'Every prime appears at its', italic: true },
+    { kind: 'note', text: 'max — nothing is missing.', italic: true },
+    { kind: 'note', text: '2² · 3² = 4 · 9 = 36' },
+  ]},
+})
+
     const sectionsContent={
 
    
@@ -298,6 +319,28 @@ The first number appearing in both lists is $24$, so $\\text{lcm}(6, 8) = 24$.`,
   link: '',
 },
 
+// obj4: {
+//   title: `Method 2: Prime Factorization`,
+//   content: `The prime factorization approach mirrors the GCD method, but takes the maximum exponent for each prime instead of the minimum.
+
+// For $\\text{lcm}(12, 18)$:
+
+// $12 = 2^2 \\cdot 3^1$
+
+// $18 = 2^1 \\cdot 3^2$
+
+// Every prime appearing in either factorization must appear in the LCM — otherwise the LCM would not be divisible by both. Take the larger exponent for each: $\\max(2, 1) = 2$ for the prime $2$, and $\\max(1, 2) = 2$ for the prime $3$.
+
+// $$\\text{lcm}(12, 18) = 2^2 \\cdot 3^2 = 4 \\cdot 9 = 36$$
+
+// The contrast with the [GCD](!/arithmetic/divisibility/gcd) is symmetric. The GCD takes the minimum exponent — the overlap. The LCM takes the maximum — the full coverage needed to accommodate both numbers.`,
+//   before: ``,
+//   after: ``,
+//   link: '',
+// },
+
+
+
 obj4: {
   title: `Method 2: Prime Factorization`,
   content: `The prime factorization approach mirrors the GCD method, but takes the maximum exponent for each prime instead of the minimum.
@@ -310,14 +353,12 @@ $18 = 2^1 \\cdot 3^2$
 
 Every prime appearing in either factorization must appear in the LCM — otherwise the LCM would not be divisible by both. Take the larger exponent for each: $\\max(2, 1) = 2$ for the prime $2$, and $\\max(1, 2) = 2$ for the prime $3$.
 
-$$\\text{lcm}(12, 18) = 2^2 \\cdot 3^2 = 4 \\cdot 9 = 36$$
-
-The contrast with the [GCD](!/arithmetic/divisibility/gcd) is symmetric. The GCD takes the minimum exponent — the overlap. The LCM takes the maximum — the full coverage needed to accommodate both numbers.`,
+$$\\text{lcm}(12, 18) = 2^2 \\cdot 3^2 = 4 \\cdot 9 = 36$$`,
+  afterFigure: `The contrast with the [GCD](!/arithmetic/divisibility/gcd) is symmetric. The GCD takes the minimum exponent — the overlap. The LCM takes the maximum — the full coverage needed to accommodate both numbers.`,
   before: ``,
   after: ``,
   link: '',
 },
-
 
 obj5: {
   title: `Method 3: Using GCD`,
@@ -662,6 +703,7 @@ return {
     obj1SvgCommon,
 obj3SvgListing,
 obj10SvgBuses,
+pfLcmObj4,
     seoData: {
       title: "LCM: Least Common Multiple & GCD Formula | Learn Math Class",
       description: "Learn to find the LCM using three methods: listing multiples, prime factorization, and the GCD formula. Understand the GCD-LCM relationship and applications like adding fractions.",
@@ -679,7 +721,7 @@ export default function LCMPage({seoData, sectionsContent,
    faqQuestions, schemas,
   obj1SvgCommon,
 obj3SvgListing,
-obj10SvgBuses,}) {
+obj10SvgBuses,pfLcmObj4,}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -787,14 +829,26 @@ obj10SvgBuses,}) {
       sectionsContent.obj3.afterFigure,
     ]
 },
+    // {
+    //     id:'4',
+    //     title:sectionsContent.obj4.title,
+    //     link:sectionsContent.obj4.link,
+    //     content:[
+    //       sectionsContent.obj4.content,
+    //     ]
+    // },
+
     {
-        id:'4',
-        title:sectionsContent.obj4.title,
-        link:sectionsContent.obj4.link,
-        content:[
-          sectionsContent.obj4.content,
-        ]
-    },
+    id:'4',
+    title:sectionsContent.obj4.title,
+    link:sectionsContent.obj4.link,
+    content:[
+      sectionsContent.obj4.content,
+      <div key={'obj4-svg'} style={{ maxWidth: '800px', margin: '20px auto' }}
+           dangerouslySetInnerHTML={{ __html: pfLcmObj4 }} />,
+      sectionsContent.obj4.afterFigure,
+    ]
+},
     {
         id:'5',
         title:sectionsContent.obj5.title,
