@@ -451,8 +451,8 @@ export default function PageTemplate({seoData,sectionsContent ,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'0px',marginBottom:'30px'}}>Functions Visual Tools</h1>
-   <br/>
+   {/* <h1 className='title' style={{marginTop:'0px',marginBottom:'30px'}}>Functions Visual Tools</h1> */}
+  
     <VisualToolsPage
      tools={toolsData}
     //  customItems={comingSoonItems}
