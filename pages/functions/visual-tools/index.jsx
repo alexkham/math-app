@@ -453,6 +453,19 @@ export default function PageTemplate({seoData,sectionsContent ,
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'30px'}}>Functions Visual Tools</h1>
    <br/>
+    <VisualToolsPage
+     tools={toolsData}
+    //  customItems={comingSoonItems}
+     pageTitle="Functions Visual Tools"
+    //  intro={intro}
+     icon="🧮"
+     dropdownLabel="All Tools"
+     theme="deepBlue"
+     sidebar={true}
+     sidebarBrandName="Functions"
+     sidebarBrandSub="Visual Tools"
+   />
+
    <br/>
    {/* <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}

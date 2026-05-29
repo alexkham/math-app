@@ -6,7 +6,7 @@
 // import Head from 'next/head'
 // import '@/pages/pages.css'
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-// import FunctionGallery from '../../../../app/components/functions/types/FunctionGallery'
+// import FunctionTransformations from '../../../../app/components/functions/transformations/FunctionsTransformations'
 
 
 // export async function getStaticProps(){
@@ -214,7 +214,7 @@
 //         title: "Title | Learn Math Class",
 //         description: "Metadescription",
 //         keywords: keyWords.join(", "),
-//         url: "/functions/visual-tools/types",
+//         url: "/functions/visual-tools/transformations",
 //          name: "name"
 //       },
         
@@ -443,9 +443,9 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'30px'}}>Functions Families</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Transformations of Functions</h1>
 //    <br/>
-//    <FunctionGallery/>
+//    <FunctionTransformations/>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -492,160 +492,155 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import FunctionGallery from '../../../../app/components/functions/types/FunctionGallery'
+import FunctionTransformations from '../../../../app/components/functions/transformations/FunctionsTransformations'
 
 
 export async function getStaticProps(){
 
   const keyWords = [
-    'function families',
-    'function types',
-    'function gallery',
-    'visualize functions',
-    'linear function visualizer',
-    'quadratic function visualizer',
-    'cubic function visualizer',
-    'exponential function visualizer',
-    'logarithmic function visualizer',
-    'trigonometric function visualizer',
-    'rational function visualizer',
-    'absolute value function',
-    'square root function',
-    'interactive function plotter',
-    'function parameters explorer',
+    'function transformations',
+    'transformations of functions',
+    'function shift and scale',
+    'horizontal shift',
+    'vertical shift',
+    'horizontal stretch',
+    'vertical stretch',
+    'function reflection',
+    'g(x) = a f(b(x-h)) + k',
+    'transformation visualizer',
+    'interactive function transformation',
+    'parent function transformation',
+    'translate stretch reflect function',
+    'function transformation rules',
+    'graph transformation tool',
   ]
 
   const sectionsContent = {
 
     obj1: {
-      title: `Getting Started with the Gallery`,
-      content: `Open the page and three panels appear side by side. On the left is the **family picker** — a vertical list of every function family the gallery covers. In the center is the **plot panel**, with the family name in the header, the current symbolic equation displayed as a badge, and an interactive graph of $y = f(x)$. On the right is the **info panel**, with tabs for an explanation of the active family and external resources.
+      title: `Getting Started with the Visualizer`,
+      content: `Open the page and three panels appear. On the left is the **base function picker** — every family the visualizer supports (linear, quadratic, cubic, reciprocal, exponential, logarithmic, sine, cosine, absolute value, square root). In the center is the **plot panel** with two curves: a dashed gray line showing the untransformed base $f(x)$, and a solid blue curve showing the transformed $g(x)$. On the right is the **info panel** with a contextual explanation of whatever transformation you are currently studying.
 
-The gallery launches on the linear family with default parameters $a = 1$, $b = 0$ — the line $y = x$. Click any family in the sidebar to switch to it. The plot, equation, sliders, and explanation all update at once. Parameters reset to their family-specific defaults on every switch, so you always start from a representative example.
+Below the plot sit two interactive strips. The **applied chip strip** shows the current values of all four transformation parameters ($a$, $k$, $b$, $h$), with active (non-default) parameters highlighted in blue. Below it, a **tab bar** lets you isolate one transformation at a time or jump to a Custom tab where all four work simultaneously.
 
-The plot supports zoom, crosshair readout, and curve tooltips by default. Mouse over the curve to see the corresponding $(x, f(x))$ values.`,
+The page launches with quadratic as the base and all parameters at defaults — $g(x)$ sits exactly on top of $f(x)$. Drag any slider and the blue curve separates from the gray.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj2: {
-      title: `Browsing the Family Picker`,
-      content: `The picker lists every family with a small glyph showing the characteristic shape of that family and the family's name. Twelve families are included, covering most of pre-calculus and the standard families seen through introductory calculus:
+      title: `Picking a Base Function`,
+      content: `The picker on the left lists ten base function families, with sine and cosine grouped together under "Trigonometric". Each entry shows a small glyph of the family's characteristic shape. Click to switch — the plot resets the transformed curve to match the base, and all four transformation parameters return to their defaults ($a = 1$, $b = 1$, $h = 0$, $k = 0$).
 
-• **Linear** — straight lines
-• **Quadratic** — parabolas
-• **Cubic** — odd-degree polynomials with an inflection point
-• **Power** — $ax^n$ for adjustable exponent $n$
-• **Rational** — reciprocal curves with vertical asymptotes
-• **Exponential** — multiplicative growth or decay
-• **Logarithmic** — the inverse of exponential
-• **Trigonometric** — sine, cosine, and tangent (grouped together)
-• **Absolute value** — sharp V shape
-• **Square root** — half-sideways parabola
+The base function controls only the *starting shape*. The four transformations work the same way for every family: $a$ scales vertically, $k$ shifts vertically, $b$ scales horizontally, $h$ shifts horizontally. What changes between families is how those transformations affect family-specific features — moving the vertex of a parabola, the asymptote of a reciprocal, the midline of a sinusoid, or the domain start of a square root.
 
-The currently selected family is highlighted in light blue with a darker glyph color, so the picker doubles as a status indicator.`,
+Switching base functions resets parameters but preserves the active tab, so you can compare the same transformation across different bases without losing your place.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj3: {
-      title: `The Trigonometric Group`,
-      content: `Three of the families — **sine**, **cosine**, and **tangent** — share a tinted, bordered box labeled "Trigonometric" inside the picker. The grouping reflects how they are usually taught and used together: same four-parameter form $f(x) = A \\cdot \\text{trig}(Bx + C) + D$, related by phase shifts, and bundled in every standard textbook chapter.
+      title: `The Four Tabs and the Custom Tab`,
+      content: `Five tabs sit below the plot, controlling which transformation you study:
 
-Sine and cosine differ only by a phase shift of $\\frac{\\pi}{2}$ — they have identical periodicity, amplitude, and offset behavior. Tangent is the odd one out: same parameter scheme but a different period ($\\pi$ rather than $2\\pi$), unbounded values, and vertical asymptotes where the cosine in its denominator vanishes.
+• **Vertical scale** — isolates $a$. Only the slider for $a$ appears; $k$, $b$, $h$ stay at their defaults
+• **Vertical shift** — isolates $k$
+• **Horizontal scale** — isolates $b$
+• **Horizontal shift** — isolates $h$
+• **Custom** — shows all four sliders at once for combined transformations
 
-Switching between the three families is the fastest way to see the structural family resemblances and the points where they diverge.`,
+When a single transformation has a non-default value, its tab badge shows that value in monospace. Switching tabs does not reset parameters — values you set in one tab persist when you move to another, so you can build up multiple transformations even from the single-parameter tabs.
+
+The Reset button inside each tab resets only that tab's parameter; the Custom tab's Reset resets all four.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj4: {
-      title: `Adjusting Parameters with the Sliders`,
-      content: `Below the family list sit the parameter sliders for the currently active family. Each family has its own set:
+      title: `Manual vs Auto Mode`,
+      content: `Each single-parameter tab (everything except Custom) has a **Manual / Auto** toggle at the top.
 
-• **Linear**: slope $a$, intercept $b$
-• **Quadratic**: coefficients $a$, $b$, $c$
-• **Cubic**: leading coefficient $a$, middle coefficient $b$
-• **Power**: coefficient $a$, exponent $n$ (including non-integer values)
-• **Rational**: numerator $a$, shift $h$
-• **Exponential**: coefficient $a$, base
-• **Logarithmic**: scale $a$, vertical shift $d$
-• **Sine / Cosine / Tangent**: amplitude $A$, frequency $B$, phase $C$, offset $D$
-• **Absolute / Square root**: coefficient $a$, shift $h$
+• **Manual** — the default. Drag the slider yourself. Every drag updates the plot, the equation, and the info panel.
+• **Auto** — the slider becomes a playback control. Three buttons appear: step backward, play/pause, and step forward. Pressing play animates the parameter back and forth across its full range, ping-ponging between min and max indefinitely. The plot updates frame by frame, so you see exactly what the transformation does as the parameter sweeps.
 
-Each slider shows the parameter name on the left and its current numeric value on the right in blue monospace. Dragging the slider updates the plot, the equation badge, and the explanation in real time — there is no apply step.`,
+Auto mode is the fastest way to build intuition for a single transformation. Set $a$ to auto and watch the parabola stretch, compress, and flip across the $x$-axis without your hands leaving the keyboard. Custom tab does not support Auto — combined transformations are designed for manual exploration.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj5: {
-      title: `Reading the Plot and Equation Badge`,
-      content: `The plot panel header has two elements. On the left, the **family name** identifies what is being graphed. On the right, the **equation badge** — in monospaced blue type — shows the current symbolic form with parameter values substituted. As you drag a slider, the equation rewrites character by character to match.
+      title: `Reading the Two Curves`,
+      content: `The plot always shows two curves at once:
 
-The plot itself is a coordinate system with axis labels, gridlines, and the curve $y = f(x)$ drawn in accent blue. A crosshair follows the mouse, and a small tooltip near the curve shows the value $f(x)$ at the cursor's $x$-coordinate. Functions with restricted domains — square root undefined for negative inputs, logarithm undefined at and below zero, tangent and rational families undefined at asymptotes — are simply not drawn outside their domains, leaving gaps in the curve that make the domain visible.
+• **Dashed gray curve** — the untransformed base function $f(x)$. Stays fixed regardless of parameter values, so you always have a reference for what the transformation is doing
+• **Solid blue curve** — the transformed function $g(x) = a \\cdot f(b(x - h)) + k$. Moves, stretches, and flips as you adjust parameters
 
-The plot starts zoomed to roughly $[-10, 10]$ on both axes. You can pan and zoom for closer inspection.`,
+Two equation badges in the plot header label the curves: the gray base equation (e.g., $f(x) = x^2$) and the blue transformed equation, which rewrites symbolically every time a parameter changes. When all four parameters are at their defaults, the equations are identical and the curves overlap exactly.
+
+Crosshair, axis labels, and curve tooltips work the same as in any other visualizer in the series — mouse over the blue curve to read off $g(x)$ at the cursor position.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj6: {
-      title: `Exploring the Info Panel`,
-      content: `The right-side info panel updates whenever you select a family. Two tabs are available:
+      title: `The Applied Chip Strip`,
+      content: `Just below the plot, a horizontal strip labeled "Applied" shows four chips: one each for $a$, $k$, $b$, and $h$. Each chip displays the parameter's current value in monospace.
 
-• **Explanation** — a short prose summary of the family. Covers the canonical equation, what each parameter does, the shape and behavior of the curve, and any defining features (asymptotes, periodicity, vertex, inflection point, domain restrictions). Mathematical notation renders inline.
-• **Resources** — external links to relevant Wikipedia articles for further reading. Each family includes at least one curated link.
+When a parameter is at its default ($a = 1$, $b = 1$, $h = 0$, $k = 0$), its chip is grayed out — indicating that no transformation is currently being applied in that direction. When a parameter is non-default, its chip lights up blue and bolds, making the active transformations scannable at a glance.
 
-The explanation is intentionally brief — it complements the visual rather than replacing dedicated theory pages. Once you have the shape in your head from the gallery, the linked resources can fill in any formal definitions or proofs.`,
+The chip strip is especially useful in Custom mode, where multiple transformations can compound. A glance at the chips tells you exactly which transformations are active and at what magnitude, without having to read off four sliders.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj7: {
-      title: `What is a Function Family?`,
-      content: `A **function family** is a parametrized class of functions sharing the same algebraic structure. The linear family $f(x) = ax + b$ contains every straight line; the quadratic family $f(x) = ax^2 + bx + c$ contains every parabola; the sine family $f(x) = A \\sin(Bx + C) + D$ contains every shifted, scaled sinusoid.
+      title: `The Side Info Panel`,
+      content: `The info panel on the right reads the current tab and the current base function and assembles a contextual explanation in two parts:
 
-Each member of a family is determined by a small set of numerical parameters, and members of the same family share qualitative features — number of roots, end behavior, symmetry, domain — regardless of specific parameter values. Two parabolas can look very different numerically, but both have a single vertex, both open in one direction, and both come from a degree-two polynomial.
+• **General** — what this transformation does, independent of the base function. The formula, the qualitative effects of positive and negative parameter values, the conditions for stretches versus compressions, and reflections
+• **Applied to [base]** — what this specific parameter value does to *this* specific function family. The vertex of the parabola moves to $(h, k)$, the amplitude of the sine becomes $|a|$, the vertical asymptote of the reciprocal moves to $x = h$, and so on
 
-Recognizing a function family at sight is one of the foundational skills of algebra and pre-calculus. The gallery is built to support that pattern recognition: see the same family across many parameter choices, and the invariant shape settles into memory.
-
-For deeper theory on function classification, see **functions theory**.`,
+When the parameter is at its default, the applied section reminds you that no transformation has been applied yet and prompts you to move the slider. Switch to the Custom tab and the info panel lists every non-default transformation in one place, each with its general formula and family-specific consequence.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj8: {
-      title: `Defining Features Across Families`,
-      content: `Different families are distinguished by which qualitative features they support. The gallery's families illustrate most of the patterns you encounter in elementary mathematics:
+      title: `The Four Transformations Mathematically`,
+      content: `The transformed function is
 
-• **End behavior** — linear and odd-degree polynomials go to $\\pm\\infty$ in opposite directions; even-degree polynomials head the same way at both ends; exponentials hit a horizontal asymptote on one side; trig functions oscillate forever.
-• **Roots** — linear has exactly one (when nonzero); quadratic has zero, one, or two; exponential and pure sine/cosine families have none in some configurations.
-• **Asymptotes** — rational, tangent, and logarithmic families have vertical asymptotes; exponential, rational, and logarithmic have horizontal ones in the appropriate limit.
-• **Periodicity** — only the trigonometric families repeat exactly.
-• **Domain restrictions** — square root requires $x \\geq h$; logarithm requires $x > 0$ after shifting; rational excludes $x = h$.
-• **Smoothness** — absolute value has a corner where it is not differentiable; every other family in the gallery is smooth wherever defined.`,
+$$g(x) = a \\cdot f(b(x - h)) + k$$
+
+Each parameter controls one type of transformation:
+
+• **$a$ — vertical scale and reflection**. Multiplies outputs by $a$. $|a| > 1$ stretches vertically; $|a| < 1$ compresses; $a < 0$ reflects across the $x$-axis.
+• **$k$ — vertical shift**. Adds $k$ to every output. Positive $k$ moves the curve up, negative moves it down. Shape is unchanged.
+• **$b$ — horizontal scale and reflection**. Multiplies inputs by $b$. $|b| > 1$ *compresses* horizontally (counterintuitive); $|b| < 1$ stretches; $b < 0$ reflects across the $y$-axis.
+• **$h$ — horizontal shift**. Subtracts $h$ from the input. Positive $h$ moves the curve *right* (the minus sign in $f(x - h)$ is the source of the inversion).
+
+The four transformations commute in pairs (vertical with horizontal) but not across axes. The order in $g(x) = a \\cdot f(b(x - h)) + k$ is the canonical convention.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj9: {
-      title: `How to Compare Families`,
-      content: `The gallery is designed to support side-by-side comparison even though only one family is plotted at a time. A few suggested workflows:
+      title: `Why Horizontal Transformations Are "Backwards"`,
+      content: `The most common stumbling block in function transformations is that horizontal operations behave opposite to what intuition suggests:
 
-• **Match the parameters when possible.** Setting amplitude $A = 1$, frequency $B = 1$, phase $C = 0$, offset $D = 0$ on sine, cosine, and tangent shows the canonical curves directly comparable to each other.
-• **Sweep a single parameter.** Hold all but one slider fixed and drag the remaining one across its range — the family's response to that single parameter becomes obvious without competing changes confusing the picture.
-• **Compare growth rates.** Switch between power ($n = 2$, then $n = 3$), exponential (base $2$), and logarithmic to see how quickly each family blows up or flattens for large $x$.
-• **Find an inverse pair.** Exponential and logarithmic are inverses of each other; setting matching parameters and mentally reflecting one across $y = x$ should yield the other.
+• Replacing $x$ with $x - h$ moves the graph **right** by $h$, not left
+• Replacing $x$ with $bx$ where $b > 1$ **compresses** the graph horizontally, not stretches it
 
-The plot's fixed default zoom makes these comparisons consistent — you are always looking at the same window, which makes shape comparison meaningful.`,
+The reason is that the substitution acts on the *input* axis, not the output. If you want $g$ to take value $f(0)$ at $x = h$ (i.e. move that feature right to $h$), you need $g(h) = f(0)$, which means the input to $f$ must equal $0$ when $x = h$ — hence $f(x - h)$. Similarly, if $b$ doubles, you reach the same input value of $f$ in half the distance, so the curve compresses.
+
+The visualizer makes this concrete: drag $h$ to $+3$ and watch the curve slide right by three units, in spite of the minus sign in the formula. Setting $b$ to auto and watching it sweep through the same effect is the quickest cure for the confusion.`,
       before: ``,
       after: ``,
       link: '',
@@ -653,21 +648,19 @@ The plot's fixed default zoom makes these comparisons consistent — you are alw
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Functions** — the general theory of functions: domain, range, composition, inverses, and classification.
+      content: `**Functions Families Gallery** — companion tool plotting twelve standard function families with parameter sliders; the natural prerequisite for this visualizer.
 
-**Function Transformations** — visualizers for vertical and horizontal shifts, stretches, and reflections applied to any base function.
+**Functions** — general theory of functions: domain, range, composition, inverses.
 
-**Polynomial Functions** — focused theory and tools for the polynomial subfamilies covered here (linear, quadratic, cubic, and higher).
+**Graphing Functions** — broader treatment of graph features (intercepts, asymptotes, end behavior) that transformations preserve or change.
 
-**Exponential and Logarithmic Functions** — paired study of inverse function families, growth and decay models, and natural log.
+**Parent Functions** — the canonical untransformed members of each family used as the starting point here.
 
-**Trigonometric Functions** — full coverage of sine, cosine, tangent, and their reciprocals beyond the gallery's brief introduction.
+**Composition of Functions** — how function composition relates to and generalizes the four affine transformations.
 
-**Rational Functions** — asymptote analysis, partial fractions, and behavior near poles.
+**Inverse Functions** — reflecting a graph across the line $y = x$, a transformation not covered here but built from the same conceptual toolkit.
 
-**Equations and Inequalities Visualizer** — companion tools for solving $f(x) = n$ and $f(x) > 0$ across all the same function families.
-
-**Function Graphs Reference** — printable reference sheets of canonical curves from each family.`,
+**Equation and Inequality Visualizers** — companion tools for solving $f(x) = n$ and $f(x) > 0$ across all the same function families.`,
       before: ``,
       after: ``,
       link: '',
@@ -690,24 +683,24 @@ The plot's fixed default zoom makes these comparisons consistent — you are alw
 
   const faqQuestions = {
     obj1: {
-      question: "What does the Functions Families gallery show?",
-      answer: "It plots twelve standard function families with adjustable parameters: linear, quadratic, cubic, power, rational, exponential, logarithmic, sine, cosine, tangent, absolute value, and square root. Each family has its own sliders for parameters like slope, amplitude, frequency, and shift. The plot, symbolic equation, and explanation panel all update in real time as you drag a slider."
+      question: "What does the Transformations of Functions visualizer do?",
+      answer: "It applies the four affine transformations — vertical scale, vertical shift, horizontal scale, and horizontal shift — to any of ten base function families. Two curves are plotted side by side: the dashed base function and the solid transformed function. Sliders let you isolate one transformation at a time or combine all four, and the info panel explains the effect on the chosen family in real time."
     },
     obj2: {
-      question: "What is a function family?",
-      answer: "A function family is a parametrized class of functions sharing the same algebraic structure. The linear family contains every straight line; the quadratic family contains every parabola; the sine family contains every shifted and scaled sinusoid. Members of the same family share qualitative features regardless of specific parameter values."
+      question: "What is the general transformation formula?",
+      answer: "Any combination of the four affine transformations can be written as g(x) equals a times f of b times (x minus h), plus k. Here a controls vertical scale and reflection, k is vertical shift, b is horizontal scale and reflection, and h is horizontal shift. The visualizer plots g(x) for any choice of these four parameters applied to any chosen base function."
     },
     obj3: {
-      question: "How are the trigonometric functions grouped?",
-      answer: "Sine, cosine, and tangent appear together inside a tinted bordered box labeled Trigonometric in the family picker. They share the same four-parameter form — amplitude A, frequency B, phase C, and offset D — and are usually taught together. Sine and cosine differ by a phase shift of pi over two; tangent has a different period and adds vertical asymptotes."
+      question: "Why does a positive h shift the graph to the right and not left?",
+      answer: "The transformation replaces x with x minus h in the function. For g to take the same value at x equals h that f took at x equals zero, the input to f must equal zero when x equals h — which requires subtracting h from x. The minus sign in the formula and the rightward motion of the graph are two sides of the same fact: the substitution acts on the input axis, opposite to how the output moves."
     },
     obj4: {
-      question: "What features can I see in the plot?",
-      answer: "The plot has axis labels, gridlines, a crosshair that follows the mouse, and a tooltip showing f(x) at the cursor's x-coordinate. Functions with restricted domains — square root, logarithm, tangent, rational — are drawn only where they are defined, so domain restrictions appear visually as gaps in the curve."
+      question: "What is the difference between the single-parameter tabs and the Custom tab?",
+      answer: "Each single-parameter tab — Vertical scale, Vertical shift, Horizontal scale, Horizontal shift — exposes one parameter at a time with a Manual/Auto toggle so you can animate that single transformation. The Custom tab shows all four sliders simultaneously without Auto mode, letting you build combined transformations and explore how multiple effects compound."
     },
     obj5: {
-      question: "How do I compare two function families?",
-      answer: "Switch between families using the picker and watch how the same parameter values produce different shapes, or set a base parameter set on one family and then change families to see how the structure changes. The default zoom is consistent across families, so shape comparisons are meaningful. Useful comparisons include exponential vs polynomial growth and exponential vs logarithmic as an inverse pair."
+      question: "How does Auto mode work?",
+      answer: "Auto mode replaces manual slider control with a playback animation. The parameter sweeps back and forth across its full range, ping-ponging between minimum and maximum indefinitely. Step-backward and step-forward buttons let you advance frame by frame; the play/pause button stops or resumes the animation. Available on every single-parameter tab but not on Custom."
     },
   }
 
@@ -716,9 +709,9 @@ The plot's fixed default zoom makes these comparisons consistent — you are alw
     webApplication: {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Functions Families Gallery",
-      "description": "Interactive gallery of twelve standard function families with adjustable parameter sliders, live plots, and per-family explanations.",
-      "url": "https://www.learnmathclass.com/functions/visual-tools/types",
+      "name": "Transformations of Functions Visualizer",
+      "description": "Interactive visualizer for the four affine transformations applied to any of ten base function families, with side-by-side base and transformed curves.",
+      "url": "https://www.learnmathclass.com/functions/visual-tools/transformations",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -727,13 +720,13 @@ The plot's fixed default zoom makes these comparisons consistent — you are alw
         "priceCurrency": "USD"
       },
       "featureList": [
-        "Twelve function families covered: linear, quadratic, cubic, power, rational, exponential, logarithmic, sine, cosine, tangent, absolute value, square root",
-        "Per-family parameter sliders with live plot updates",
-        "Symbolic equation badge that rewrites as parameters change",
-        "Trigonometric families grouped in their own panel for direct comparison",
-        "Interactive plot with crosshair, curve tooltip, and zoom",
-        "Side info panel with per-family explanation and external resource links",
-        "Domain restrictions rendered as visible gaps in the curve"
+        "Ten base function families: linear, quadratic, cubic, reciprocal, exponential, logarithmic, sine, cosine, absolute value, square root",
+        "Four affine transformations isolated in their own tabs plus a Custom tab combining all four",
+        "Dashed base curve and solid transformed curve plotted together for instant comparison",
+        "Auto mode that animates a single parameter back and forth across its range with play, pause, and step controls",
+        "Applied chip strip showing current parameter values with active transformations highlighted",
+        "Side info panel with general explanation plus family-specific consequences of the current transformation",
+        "Equation badges that rewrite symbolically as parameters change"
       ],
       "author": {
         "@type": "Organization",
@@ -773,8 +766,8 @@ The plot's fixed default zoom makes these comparisons consistent — you are alw
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Function Families",
-          "item": "https://www.learnmathclass.com/functions/visual-tools/types"
+          "name": "Transformations of Functions",
+          "item": "https://www.learnmathclass.com/functions/visual-tools/transformations"
         }
       ]
     },
@@ -801,12 +794,12 @@ The plot's fixed default zoom makes these comparisons consistent — you are alw
       faqQuestions,
       schemas,
       seoData: {
-        title: "Function Families Gallery | Interactive Function Visualizer",
-        description: "Explore 12 function families — linear, quadratic, cubic, power, rational, exponential, logarithmic, trig, absolute, sqrt — with live sliders and plots.",
+        title: "Function Transformations Visualizer | Shift, Scale, Reflect",
+        description: "Visualize the four affine transformations on ten base function families. Isolate vertical/horizontal shifts and scales or combine them, with live base + transformed plots.",
         keywords: keyWords.join(", "),
-        url: "/functions/visual-tools/types",
-        name: "Functions Families Gallery",
-        hubDescription: "Pick a function family from a sidebar of twelve standard families — linear, quadratic, cubic, power, rational, exponential, logarithmic, sine, cosine, tangent, absolute value, and square root — and adjust its parameters with live sliders. The plot, symbolic equation, and explanation panel update in real time, with the three trigonometric families grouped together for direct comparison.",
+        url: "/functions/visual-tools/transformations",
+        name: "Transformations of Functions Visualizer",
+        hubDescription: "Pick a base function — linear, quadratic, cubic, reciprocal, exponential, logarithmic, sine, cosine, absolute value, or square root — and apply the four affine transformations: g(x) = a · f(b(x − h)) + k. Isolate one transformation at a time with Auto-mode animation, or combine all four in the Custom tab. The dashed base curve stays visible alongside the transformed curve so every change reads at a glance.",
         category: "",
         subCategory: ""
       },
@@ -815,7 +808,7 @@ The plot's fixed default zoom makes these comparisons consistent — you are alw
 }
 
 
-export default function FunctionFamiliesGalleryPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function FunctionTransformationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
   const genericSections = [
     { id:'1',  title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
@@ -882,9 +875,9 @@ export default function FunctionFamiliesGalleryPage({seoData, sectionsContent, i
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Functions Families</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Transformations of Functions</h1>
       <br/>
-      <FunctionGallery/>
+      <FunctionTransformations/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}
