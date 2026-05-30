@@ -1,0 +1,4079 @@
+// // // /**
+// // //  * FunctionDomain — v1
+// // //  *
+// // //  * Domain Visualizer. Pick a function family, transform it with the
+// // //  * usual (a, k, b, h) sliders, and see the domain of g(x) drawn as a
+// // //  * green band on a 1D number line below the graph. Drag the test
+// // //  * point along the line to probe whether an x-value is in the domain;
+// // //  * the marker turns green or red and the result card shows g(x) or
+// // //  * "undefined."
+// // //  *
+// // //  * The pedagogical point: a and k do not change the domain. Only b
+// // //  * and h do. The tool exposes that by giving the student all four
+// // //  * sliders and letting them discover it.
+// // //  *
+// // //  * Built from the same primitives as TangentLine v3:
+// // //  * VisualizerWithControls + InfoPanel + family picker + left-column
+// // //  * sliders. The domain bar is a small custom SVG component below the
+// // //  * main graph.
+// // //  *
+// // //  * PROPS (all optional)
+// // //  *   initialFamily   : string
+// // //  *   families        : object        — override built-in FAMILIES
+// // //  *   visualizerProps : object        — forwarded to VisualizerWithControls
+// // //  *   infoPanelProps  : object        — forwarded to InfoPanel
+// // //  *   darkMode        : boolean
+// // //  *   showPicker      : boolean
+// // //  *   showSliders     : boolean
+// // //  *   showInfoPanel   : boolean
+// // //  *   maxWidth        : string|number — wrapper cap; default '80vw'
+// // //  *
+// // //  * RULES OBSERVED:
+// // //  *   - Never put $...$ inside **...**.
+// // //  *   - <style> blocks use dangerouslySetInnerHTML.
+// // //  *   - Modest canvas height; chip strips stay above the fold.
+// // //  */
+
+// // // import React, { useState, useMemo } from 'react';
+// // // import { VisualizerWithControls } from '../FunctionVisualizerCoreImproved';
+// // // import InfoPanel from '../InfoPanel';
+
+
+// // // /* ================================================================
+// // //    COLORS
+// // //    ================================================================ */
+
+// // // const COL = {
+// // //   f:        '#3b82f6', // function curve
+// // //   inDomain: '#10b981', // green — valid territory
+// // //   outside:  '#ef4444', // red — outside domain
+// // // };
+
+
+// // // /* ================================================================
+// // //    FORMATTING
+// // //    ================================================================ */
+
+// // // function fmt(v) {
+// // //   if (!Number.isFinite(v)) return '—';
+// // //   const r = Math.round(v * 100) / 100;
+// // //   return Math.abs(r - Math.round(r)) < 1e-4 ? String(Math.round(r)) : String(r);
+// // // }
+
+
+// // // /* ================================================================
+// // //    PARAMETERS
+// // //    ================================================================ */
+
+// // // const PARAM_DEFS = {
+// // //   a:  { label: 'vertical scale a',     min: -3,  max: 3,  step: 0.05, def: 1 },
+// // //   k:  { label: 'vertical shift k',     min: -6,  max: 6,  step: 0.1,  def: 0 },
+// // //   b:  { label: 'horizontal scale b',   min: -3,  max: 3,  step: 0.05, def: 1 },
+// // //   h:  { label: 'horizontal shift h',   min: -6,  max: 6,  step: 0.1,  def: 0 },
+// // //   tx: { label: 'test point x',         min: -10, max: 10, step: 0.05, def: 1 },
+// // // };
+
+// // // const DEFAULT_PARAMS = { a: 1, k: 0, b: 1, h: 0, tx: 1 };
+
+// // // /* Parameters that actually affect the domain. */
+// // // const DOMAIN_PARAMS = ['b', 'h'];
+
+
+// // // /* ================================================================
+// // //    FAMILIES
+// // //    ================================================================
+// // //    Grouped by domain interestingness so the picker reads as a
+// // //    teaching tool:
+// // //      - "Unrestricted" — domain is all of ℝ; sliders b, h still
+// // //        shift/scale a trivial domain. Mostly useful for the contrast.
+// // //      - "Restricted"   — base domain is a half-line or has a hole;
+// // //        transformations move that boundary.
+// // // */
+
+// // // export const FAMILIES = {
+// // //   identity: {
+// // //     name: 'Identity',
+// // //     group: 'Unrestricted (ℝ)',
+// // //     glyph: 'M2,22 L24,4',
+// // //     base: x => x,
+// // //     eqBase: 'x',
+// // //     bodyOf: i => i,
+// // //     baseDomain: { kind: 'R' },
+// // //   },
+// // //   linearScale: {
+// // //     name: 'Linear (2x)',
+// // //     group: 'Unrestricted (ℝ)',
+// // //     glyph: 'M2,24 L24,2',
+// // //     base: x => 2 * x,
+// // //     eqBase: '2x',
+// // //     bodyOf: i => `2·${i}`,
+// // //     baseDomain: { kind: 'R' },
+// // //   },
+// // //   quadratic: {
+// // //     name: 'Quadratic',
+// // //     group: 'Unrestricted (ℝ)',
+// // //     glyph: 'M2,4 Q13,30 24,4',
+// // //     base: x => x * x,
+// // //     eqBase: 'x²',
+// // //     bodyOf: i => `(${i})²`,
+// // //     baseDomain: { kind: 'R' },
+// // //   },
+// // //   cubic: {
+// // //     name: 'Cubic',
+// // //     group: 'Unrestricted (ℝ)',
+// // //     glyph: 'M2,22 C8,2 16,30 24,8',
+// // //     base: x => x * x * x,
+// // //     eqBase: 'x³',
+// // //     bodyOf: i => `(${i})³`,
+// // //     baseDomain: { kind: 'R' },
+// // //   },
+// // //   exponential: {
+// // //     name: 'Exponential',
+// // //     group: 'Unrestricted (ℝ)',
+// // //     glyph: 'M2,26 Q16,26 24,2',
+// // //     base: x => Math.exp(x),
+// // //     eqBase: 'eˣ',
+// // //     bodyOf: i => `e^(${i})`,
+// // //     baseDomain: { kind: 'R' },
+// // //   },
+// // //   sine: {
+// // //     name: 'Sine',
+// // //     group: 'Unrestricted (ℝ)',
+// // //     glyph: 'M2,14 Q7,2 12,14 Q17,26 22,14',
+// // //     base: x => Math.sin(x),
+// // //     eqBase: 'sin(x)',
+// // //     bodyOf: i => `sin(${i})`,
+// // //     baseDomain: { kind: 'R' },
+// // //   },
+// // //   cosine: {
+// // //     name: 'Cosine',
+// // //     group: 'Unrestricted (ℝ)',
+// // //     glyph: 'M2,4 Q7,16 12,4 Q17,-8 22,4',
+// // //     base: x => Math.cos(x),
+// // //     eqBase: 'cos(x)',
+// // //     bodyOf: i => `cos(${i})`,
+// // //     baseDomain: { kind: 'R' },
+// // //   },
+// // //   absolute: {
+// // //     name: 'Absolute',
+// // //     group: 'Unrestricted (ℝ)',
+// // //     glyph: 'M2,4 L13,24 L24,4',
+// // //     base: x => Math.abs(x),
+// // //     eqBase: '|x|',
+// // //     bodyOf: i => `|${i}|`,
+// // //     baseDomain: { kind: 'R' },
+// // //   },
+
+// // //   logarithmic: {
+// // //     name: 'Logarithmic',
+// // //     group: 'Restricted',
+// // //     glyph: 'M2,2 Q10,26 24,26',
+// // //     base: x => (x > 0 ? Math.log(x) : NaN),
+// // //     eqBase: 'ln(x)',
+// // //     bodyOf: i => `ln(${i})`,
+// // //     baseDomain: { kind: 'open-half', dir: 'gt', val: 0 },
+// // //   },
+// // //   sqrt: {
+// // //     name: 'Square root',
+// // //     group: 'Restricted',
+// // //     glyph: 'M2,24 Q4,8 24,4',
+// // //     base: x => (x >= 0 ? Math.sqrt(x) : NaN),
+// // //     eqBase: '√x',
+// // //     bodyOf: i => `√(${i})`,
+// // //     baseDomain: { kind: 'closed-half', dir: 'gte', val: 0 },
+// // //   },
+// // //   reciprocal: {
+// // //     name: 'Reciprocal',
+// // //     group: 'Restricted',
+// // //     glyph: 'M2,4 Q11,4 13,14 M15,14 Q17,26 24,26',
+// // //     base: x => (x === 0 ? NaN : 1 / x),
+// // //     eqBase: '1/x',
+// // //     bodyOf: i => `1/(${i})`,
+// // //     baseDomain: { kind: 'excluded', val: 0 },
+// // //   },
+// // // };
+
+// // // const DEFAULT_FAMILIES = FAMILIES;
+
+
+// // // /* ================================================================
+// // //    EQUATION BUILDER (same shape as Inverse / Transformations)
+// // //    ================================================================ */
+
+// // // function buildForwardEq(fam, p) {
+// // //   const { a, b, h, k } = p;
+// // //   let inner = 'x';
+// // //   if (h !== 0) inner = `x ${h >= 0 ? '−' : '+'} ${fmt(Math.abs(h))}`;
+// // //   if (b !== 1) inner = h !== 0 ? `${fmt(b)}(${inner})` : `${fmt(b)}x`;
+// // //   let body = fam.bodyOf(inner);
+// // //   let out;
+// // //   if (a === -1) out = `−${body}`;
+// // //   else if (a !== 1) out = `${fmt(a)}·${body}`;
+// // //   else out = body;
+// // //   if (k !== 0) out += ` ${k >= 0 ? '+' : '−'} ${fmt(Math.abs(k))}`;
+// // //   return out;
+// // // }
+
+
+// // // /* ================================================================
+// // //    DOMAIN TRANSFORM + STRING + MEMBERSHIP
+// // //    ================================================================ */
+
+// // // function transformDomain(base, b, h) {
+// // //   if (!base) return { kind: 'R' };
+// // //   if (b === 0) return { kind: 'point', val: h };
+// // //   if (base.kind === 'R') return { kind: 'R' };
+// // //   if (base.kind === 'open-half') {
+// // //     const dir = b > 0 ? base.dir : (base.dir === 'gt' ? 'lt' : 'gt');
+// // //     return { kind: 'open-half', dir, val: h + base.val / b };
+// // //   }
+// // //   if (base.kind === 'closed-half') {
+// // //     const dir = b > 0 ? base.dir : (base.dir === 'gte' ? 'lte' : 'gte');
+// // //     return { kind: 'closed-half', dir, val: h + base.val / b };
+// // //   }
+// // //   if (base.kind === 'excluded') {
+// // //     return { kind: 'excluded', val: h + base.val / b };
+// // //   }
+// // //   if (base.kind === 'closed') {
+// // //     const lo = h + base.lo / b;
+// // //     const hi = h + base.hi / b;
+// // //     return { kind: 'closed', lo: Math.min(lo, hi), hi: Math.max(lo, hi) };
+// // //   }
+// // //   return base;
+// // // }
+
+// // // function domainToString(d, v = 'x') {
+// // //   if (!d) return '—';
+// // //   if (d.kind === 'R') return `all real ${v}`;
+// // //   if (d.kind === 'point') return `${v} = ${fmt(d.val)}`;
+// // //   if (d.kind === 'open-half') {
+// // //     const sym = d.dir === 'gt' ? '>' : '<';
+// // //     return `${v} ${sym} ${fmt(d.val)}`;
+// // //   }
+// // //   if (d.kind === 'closed-half') {
+// // //     const sym = d.dir === 'gte' ? '≥' : '≤';
+// // //     return `${v} ${sym} ${fmt(d.val)}`;
+// // //   }
+// // //   if (d.kind === 'excluded') return `${v} ≠ ${fmt(d.val)}`;
+// // //   if (d.kind === 'closed') return `${fmt(d.lo)} ≤ ${v} ≤ ${fmt(d.hi)}`;
+// // //   return '?';
+// // // }
+
+// // // function inDomain(d, x) {
+// // //   if (!d) return true;
+// // //   switch (d.kind) {
+// // //     case 'R':            return true;
+// // //     case 'point':        return x === d.val;
+// // //     case 'open-half':    return d.dir === 'gt' ? x > d.val : x < d.val;
+// // //     case 'closed-half':  return d.dir === 'gte' ? x >= d.val : x <= d.val;
+// // //     case 'excluded':     return x !== d.val;
+// // //     case 'closed':       return x >= d.lo && x <= d.hi;
+// // //     default:             return true;
+// // //   }
+// // // }
+
+
+// // // /* ================================================================
+// // //    DOMAIN BAR — 1D number line showing the domain interval
+// // //    ================================================================ */
+
+// // // function DomainBar({ domain, testX, darkMode, xMin = -10, xMax = 10 }) {
+// // //   const W = 1000, H = 86;
+// // //   const cy = 36;                    // axis y
+// // //   const toX = v => ((v - xMin) / (xMax - xMin)) * W;
+// // //   const clampX = x => Math.max(0, Math.min(W, x));
+
+// // //   const inDom = inDomain(domain, testX);
+
+// // //   // Build fill segments + endpoint markers
+// // //   // Each segment: { x1, x2, leftBoundary, rightBoundary }
+// // //   //   boundary: { type: 'open' | 'closed' | 'arrow', x: pixel-x }
+// // //   const segments = [];
+
+// // //   switch (domain.kind) {
+// // //     case 'R':
+// // //       segments.push({
+// // //         x1: 0, x2: W,
+// // //         leftBoundary:  { type: 'arrow', x: 0 },
+// // //         rightBoundary: { type: 'arrow', x: W },
+// // //       });
+// // //       break;
+// // //     case 'open-half':
+// // //     case 'closed-half': {
+// // //       const valX = toX(domain.val);
+// // //       const isOpen = domain.kind === 'open-half';
+// // //       const isGreater = domain.dir === 'gt' || domain.dir === 'gte';
+// // //       if (isGreater) {
+// // //         if (valX < W) segments.push({
+// // //           x1: clampX(valX), x2: W,
+// // //           leftBoundary:  { type: isOpen ? 'open' : 'closed', x: valX, withinView: valX >= 0 && valX <= W },
+// // //           rightBoundary: { type: 'arrow', x: W },
+// // //         });
+// // //       } else {
+// // //         if (valX > 0) segments.push({
+// // //           x1: 0, x2: clampX(valX),
+// // //           leftBoundary:  { type: 'arrow', x: 0 },
+// // //           rightBoundary: { type: isOpen ? 'open' : 'closed', x: valX, withinView: valX >= 0 && valX <= W },
+// // //         });
+// // //       }
+// // //       break;
+// // //     }
+// // //     case 'excluded': {
+// // //       const valX = toX(domain.val);
+// // //       if (valX > 0) segments.push({
+// // //         x1: 0, x2: clampX(valX),
+// // //         leftBoundary:  { type: 'arrow', x: 0 },
+// // //         rightBoundary: { type: 'open',  x: valX, withinView: valX >= 0 && valX <= W },
+// // //       });
+// // //       if (valX < W) segments.push({
+// // //         x1: clampX(valX), x2: W,
+// // //         leftBoundary:  { type: 'open',  x: valX, withinView: valX >= 0 && valX <= W },
+// // //         rightBoundary: { type: 'arrow', x: W },
+// // //       });
+// // //       break;
+// // //     }
+// // //     case 'closed': {
+// // //       const x1 = toX(domain.lo), x2 = toX(domain.hi);
+// // //       segments.push({
+// // //         x1: clampX(x1), x2: clampX(x2),
+// // //         leftBoundary:  { type: 'closed', x: x1, withinView: x1 >= 0 && x1 <= W },
+// // //         rightBoundary: { type: 'closed', x: x2, withinView: x2 >= 0 && x2 <= W },
+// // //       });
+// // //       break;
+// // //     }
+// // //     case 'point':
+// // //     default:
+// // //       break;
+// // //   }
+
+// // //   const axisColor   = darkMode ? '#475569' : '#94a3b8';
+// // //   const tickColor   = darkMode ? '#64748b' : '#94a3b8';
+// // //   const labelColor  = darkMode ? '#cbd5e1' : '#475569';
+// // //   const fill        = COL.inDomain;
+// // //   const markerColor = inDom ? COL.inDomain : COL.outside;
+
+// // //   const renderEndpoint = (b, side) => {
+// // //     if (!b) return null;
+// // //     if (b.type === 'arrow') {
+// // //       // arrowhead pointing outward
+// // //       const dir = side === 'left' ? -1 : 1;
+// // //       const tipX = side === 'left' ? 2 : W - 2;
+// // //       const baseX = tipX - dir * 8;
+// // //       return (
+// // //         <polygon
+// // //           points={`${tipX},${cy} ${baseX},${cy - 6} ${baseX},${cy + 6}`}
+// // //           fill={fill}
+// // //           opacity={0.85}
+// // //         />
+// // //       );
+// // //     }
+// // //     if (!b.withinView) return null;
+// // //     if (b.type === 'closed') {
+// // //       return (
+// // //         <circle cx={b.x} cy={cy} r={6}
+// // //                 fill={fill} stroke={darkMode ? '#0f172a' : '#fff'} strokeWidth={2} />
+// // //       );
+// // //     }
+// // //     if (b.type === 'open') {
+// // //       return (
+// // //         <circle cx={b.x} cy={cy} r={6}
+// // //                 fill={darkMode ? '#0f172a' : '#fff'}
+// // //                 stroke={fill} strokeWidth={2} />
+// // //       );
+// // //     }
+// // //     return null;
+// // //   };
+
+// // //   const testInView = toX(testX) >= 0 && toX(testX) <= W;
+
+// // //   return (
+// // //     <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none"
+// // //          style={{ width: '100%', height: H, display: 'block' }}>
+// // //       {/* baseline */}
+// // //       <line x1={0} y1={cy} x2={W} y2={cy} stroke={axisColor} strokeWidth={1.5} />
+
+// // //       {/* tick marks + integer labels */}
+// // //       {Array.from({ length: xMax - xMin + 1 }, (_, i) => xMin + i).map(v => {
+// // //         const x = toX(v);
+// // //         const isMajor = v % 2 === 0;
+// // //         return (
+// // //           <g key={v}>
+// // //             <line
+// // //               x1={x} y1={cy - (isMajor ? 6 : 3)}
+// // //               x2={x} y2={cy + (isMajor ? 6 : 3)}
+// // //               stroke={tickColor} strokeWidth={1}
+// // //             />
+// // //             {isMajor && (
+// // //               <text x={x} y={H - 4} fontSize="11" fill={labelColor}
+// // //                     textAnchor="middle"
+// // //                     fontFamily='ui-monospace, "SF Mono", Menlo, monospace'>
+// // //                 {v}
+// // //               </text>
+// // //             )}
+// // //           </g>
+// // //         );
+// // //       })}
+
+// // //       {/* domain fill band (under the boundary markers) */}
+// // //       {segments.map((seg, i) => (
+// // //         <rect key={i}
+// // //               x={seg.x1} y={cy - 11}
+// // //               width={Math.max(0, seg.x2 - seg.x1)} height={22}
+// // //               fill={fill} fillOpacity={0.22} />
+// // //       ))}
+
+// // //       {/* boundary endpoints + arrows */}
+// // //       {segments.map((seg, i) => (
+// // //         <g key={`b-${i}`}>
+// // //           {renderEndpoint(seg.leftBoundary,  'left')}
+// // //           {renderEndpoint(seg.rightBoundary, 'right')}
+// // //         </g>
+// // //       ))}
+
+// // //       {/* excluded-point cross (when domain.kind === 'excluded') */}
+// // //       {domain.kind === 'excluded' && (() => {
+// // //         const xv = toX(domain.val);
+// // //         if (xv < 0 || xv > W) return null;
+// // //         return (
+// // //           <g>
+// // //             <line x1={xv - 5} y1={cy - 5} x2={xv + 5} y2={cy + 5}
+// // //                   stroke={COL.outside} strokeWidth={2} />
+// // //             <line x1={xv - 5} y1={cy + 5} x2={xv + 5} y2={cy - 5}
+// // //                   stroke={COL.outside} strokeWidth={2} />
+// // //           </g>
+// // //         );
+// // //       })()}
+
+// // //       {/* test point marker */}
+// // //       {testInView && (
+// // //         <g>
+// // //           <line x1={toX(testX)} y1={cy - 18} x2={toX(testX)} y2={cy + 18}
+// // //                 stroke={markerColor} strokeWidth={2} />
+// // //           <circle cx={toX(testX)} cy={cy} r={7}
+// // //                   fill={markerColor}
+// // //                   stroke={darkMode ? '#0f172a' : '#fff'} strokeWidth={2.5} />
+// // //         </g>
+// // //       )}
+// // //     </svg>
+// // //   );
+// // // }
+
+
+// // // /* ================================================================
+// // //    PICKER GROUPING
+// // //    ================================================================ */
+
+// // // function buildPickerEntries(families) {
+// // //   const out = [];
+// // //   let lastGroup;
+// // //   Object.entries(families).forEach(([key, f]) => {
+// // //     if (f.group && f.group !== lastGroup) {
+// // //       out.push({ type: 'header', label: f.group, key: `__hdr_${f.group}` });
+// // //       lastGroup = f.group;
+// // //     } else if (!f.group) {
+// // //       lastGroup = undefined;
+// // //     }
+// // //     out.push({ type: 'item', key, fam: f });
+// // //   });
+// // //   return out;
+// // // }
+
+
+// // // /* ================================================================
+// // //    GLYPH
+// // //    ================================================================ */
+
+// // // function FamilyGlyph({ d, active, darkMode }) {
+// // //   return (
+// // //     <svg width="22" height="22" viewBox="0 0 26 28" aria-hidden="true">
+// // //       <path d={d} fill="none"
+// // //             stroke={active ? COL.f : (darkMode ? '#64748b' : '#94a3b8')}
+// // //             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+// // //     </svg>
+// // //   );
+// // // }
+
+
+// // // /* ================================================================
+// // //    MAIN
+// // //    ================================================================ */
+
+// // // export default function FunctionDomain({
+// // //   initialFamily = 'logarithmic',
+// // //   families = DEFAULT_FAMILIES,
+// // //   visualizerProps = {},
+// // //   infoPanelProps = {},
+// // //   darkMode = false,
+// // //   showPicker = true,
+// // //   showSliders = true,
+// // //   showInfoPanel = true,
+// // //   maxWidth = '80vw',
+// // // }) {
+// // //   const familyKeys = Object.keys(families);
+// // //   const startKey = families[initialFamily] ? initialFamily : familyKeys[0];
+
+// // //   const [current, setCurrent] = useState(startKey);
+// // //   const [params, setParams] = useState({ ...DEFAULT_PARAMS });
+
+// // //   const fam = families[current] || families[familyKeys[0]];
+
+// // //   const { a, b, h, k, tx } = params;
+
+// // //   /* Parameterized function */
+// // //   const forwardFn = useMemo(() => {
+// // //     if (a === 0 || b === 0) return () => NaN;
+// // //     return x => a * fam.base(b * (x - h)) + k;
+// // //   }, [fam, a, b, h, k]);
+
+// // //   /* Domain of g under current parameters */
+// // //   const gDomain = useMemo(() => transformDomain(fam.baseDomain, b, h), [fam, b, h]);
+// // //   const domainStr = useMemo(() => domainToString(gDomain, 'x'), [gDomain]);
+// // //   const txInDomain = inDomain(gDomain, tx);
+// // //   const fAtTx = txInDomain ? forwardFn(tx) : NaN;
+
+// // //   const forwardEq = useMemo(() => buildForwardEq(fam, params), [fam, params]);
+
+// // //   const functions = useMemo(() => ([
+// // //     {
+// // //       fn: forwardFn,
+// // //       color: COL.f,
+// // //       label: 'g',
+// // //       formula: `g(x) = ${forwardEq}`,
+// // //       visible: true,
+// // //       stroke: 2.25,
+// // //     },
+// // //   ]), [forwardFn, forwardEq]);
+
+// // //   /* ---- InfoPanel content ---- */
+// // //   const explanationContent = useMemo(() => {
+// // //     return (
+// // //       `## ${fam.name} — domain\n\n` +
+// // //       `**Base function** · $f(x) = ${fam.eqBase}$\n\n` +
+// // //       `**Base domain** · ${domainToString(fam.baseDomain, 'x')}\n\n` +
+// // //       `**With parameters** · $g(x) = ${forwardEq}$\n\n` +
+// // //       `**Current domain** · ${domainStr}\n\n` +
+// // //       `### How parameters affect the domain\n\n` +
+// // //       `Only **b** and **h** can change the domain. They transform the input to the base function:\n\n` +
+// // //       `- $h$ — shifts the domain boundary along the x-axis by the same amount\n` +
+// // //       `- $b$ — scales the domain boundary by $1/b$; if $b < 0$, the inequality direction flips\n\n` +
+// // //       `**a** and **k** transform the output — they shift and scale what comes *out* of the function, not where it accepts input. Move them and the domain stays put.`
+// // //     );
+// // //   }, [fam, params, forwardEq, domainStr]);
+
+// // //   const conceptsContent =
+// // //     '## What is the domain?\n\n' +
+// // //     'The **domain** of a function is the set of inputs where it is defined. Some functions accept every real number (polynomials, sine, cosine, $e^x$). Others come with restrictions baked in:\n\n' +
+// // //     '- $\\ln(x)$ — only defined for $x > 0$\n' +
+// // //     '- $\\sqrt{x}$ — only defined for $x \\geq 0$\n' +
+// // //     '- $1/x$ — defined everywhere except $x = 0$\n\n' +
+// // //     'On the number line below the graph, the green band shows where the function accepts an input. Drag the test point to probe a specific value — green dot means **in domain**, red means **outside**.\n\n' +
+// // //     '### Half-line endpoints: open vs closed\n\n' +
+// // //     'A **closed** endpoint (filled circle) means the boundary value is included. $\\sqrt{x}$ at $x = 0$: yes, $\\sqrt{0} = 0$, so $x = 0$ is in the domain. Closed.\n\n' +
+// // //     'An **open** endpoint (hollow circle) means the boundary is excluded. $\\ln(x)$ at $x = 0$: $\\ln(0)$ is undefined (limit is $-\\infty$), so $x = 0$ is *not* in the domain. Open.\n\n' +
+// // //     '### Excluded points\n\n' +
+// // //     'Some functions are defined everywhere except a single value — like $1/x$ at $x = 0$. The bar is filled everywhere except for an open hole at the excluded point, marked with a small red ×.\n\n' +
+// // //     '### Why a and k don\'t matter\n\n' +
+// // //     'Think about the formula $g(x) = a \\cdot f(b(x - h)) + k$. The input that reaches the inner $f$ is $b(x - h)$ — only $b$ and $h$ appear there. After $f$ produces its output, $a$ and $k$ scale and shift it, but by that point the question "is this input legal?" has already been answered. Multiplying or shifting the *output* can\'t make a forbidden input suddenly legal.';
+
+// // //   const infoTabs = useMemo(() => ([
+// // //     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },
+// // //     { key: 'concepts',    label: 'Concepts',    order: 10, content: conceptsContent },
+// // //   ]), [explanationContent]);
+
+// // //   /* ---- Styling ---- */
+// // //   const fontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';
+// // //   const monoStack = 'ui-monospace, "SF Mono", Menlo, monospace';
+// // //   const panelShadow = '0 1px 3px rgba(15,23,42,0.05), 0 8px 24px rgba(15,23,42,0.05)';
+// // //   const card = {
+// // //     background: darkMode ? '#0f172a' : '#fff',
+// // //     border: `1px solid ${darkMode ? '#1e293b' : '#f1f5f9'}`,
+// // //     borderRadius: 12,
+// // //     boxShadow: panelShadow,
+// // //   };
+// // //   const c = {
+// // //     ink: darkMode ? '#e2e8f0' : '#0f172a',
+// // //     inkSoft: darkMode ? '#cbd5e1' : '#334155',
+// // //     muted: darkMode ? '#64748b' : '#94a3b8',
+// // //     soft: darkMode ? '#1e293b' : '#f8fafc',
+// // //     softer: darkMode ? '#0f172a' : '#f1f5f9',
+// // //     border: darkMode ? '#334155' : '#e2e8f0',
+// // //     borderSoft: darkMode ? '#1e293b' : '#f1f5f9',
+// // //     accentSoft: darkMode ? '#1e293b' : '#eff6ff',
+// // //     accentBorder: darkMode ? '#334155' : '#dbeafe',
+// // //     accentText: darkMode ? '#dbeafe' : '#1e3a8a',
+// // //     okSoft: darkMode ? '#064e3b' : '#d1fae5',
+// // //     okText: darkMode ? '#6ee7b7' : '#065f46',
+// // //     badSoft: darkMode ? '#7f1d1d' : '#fee2e2',
+// // //     badText: darkMode ? '#fca5a5' : '#991b1b',
+// // //   };
+
+// // //   const famBtn = active => ({
+// // //     display: 'flex', alignItems: 'center', gap: 10, width: '100%', textAlign: 'left',
+// // //     border: '1px solid transparent',
+// // //     background: active ? c.accentSoft : 'none',
+// // //     borderColor: active ? c.accentBorder : 'transparent',
+// // //     borderRadius: 8, padding: '9px 10px', cursor: 'pointer', fontFamily: 'inherit',
+// // //     fontSize: 13, fontWeight: active ? 600 : 400,
+// // //     color: active ? c.accentText : c.inkSoft,
+// // //     transition: 'background 0.12s, border-color 0.12s',
+// // //   });
+
+// // //   const sectionTitle = {
+// // //     fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.06em',
+// // //     color: c.muted, fontWeight: 600, margin: '10px 8px 4px',
+// // //   };
+
+// // //   const mergedVisualizerProps = {
+// // //     defaultWidth: 880,
+// // //     defaultHeight: 460,
+// // //     ...visualizerProps,
+// // //   };
+
+// // //   const pickerEntries = buildPickerEntries(families);
+
+// // //   const selectFamily = (key) => {
+// // //     setCurrent(key);
+// // //     setParams({ ...DEFAULT_PARAMS });
+// // //   };
+
+// // //   const setParam = (k, v) => setParams(prev => ({ ...prev, [k]: v }));
+// // //   const resetParams = () => setParams({ ...DEFAULT_PARAMS });
+// // //   const resetTestX  = () => setParam('tx', DEFAULT_PARAMS.tx);
+
+// // //   const Chip = ({ k, valueOverride, accent, dim }) => {
+// // //     const value = valueOverride !== undefined ? valueOverride : params[k];
+// // //     const def = PARAM_DEFS[k];
+// // //     const active = def ? value !== def.def : true;
+// // //     const isDomainParam = DOMAIN_PARAMS.includes(k);
+// // //     const tone = accent || (isDomainParam ? COL.inDomain : (active ? COL.f : c.muted));
+// // //     return (
+// // //       <span style={{
+// // //         fontFamily: monoStack, fontSize: 11,
+// // //         padding: '3px 9px', borderRadius: 5,
+// // //         display: 'inline-flex', alignItems: 'center', gap: 5,
+// // //         color: active ? c.accentText : c.muted,
+// // //         background: active ? c.accentSoft : 'transparent',
+// // //         border: `1px solid ${active ? c.accentBorder : c.borderSoft}`,
+// // //         fontWeight: active ? 600 : 400,
+// // //         opacity: dim && !isDomainParam ? 0.55 : 1,
+// // //       }}>
+// // //         <span style={{ fontWeight: 600, color: tone }}>{k}</span>
+// // //         <span>=</span>
+// // //         <span>{fmt(value)}</span>
+// // //       </span>
+// // //     );
+// // //   };
+
+// // //   const renderSlider = (key) => {
+// // //     const def = PARAM_DEFS[key];
+// // //     const isDomainParam = DOMAIN_PARAMS.includes(key);
+// // //     const accent = isDomainParam ? COL.inDomain : COL.f;
+// // //     return (
+// // //       <div key={key}>
+// // //         <label style={{
+// // //           display: 'flex', justifyContent: 'space-between', fontSize: 12,
+// // //           color: c.inkSoft, marginBottom: 4, fontVariantNumeric: 'tabular-nums',
+// // //         }}>
+// // //           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+// // //             {def.label}
+// // //             {isDomainParam && (
+// // //               <span style={{
+// // //                 fontSize: 9, fontWeight: 700,
+// // //                 color: COL.inDomain, background: c.okSoft,
+// // //                 padding: '1px 5px', borderRadius: 3,
+// // //                 textTransform: 'uppercase', letterSpacing: '0.05em',
+// // //               }}>affects domain</span>
+// // //             )}
+// // //           </span>
+// // //           <span style={{ fontFamily: monoStack, color: accent, fontWeight: 600 }}>
+// // //             {fmt(params[key])}
+// // //           </span>
+// // //         </label>
+// // //         <input
+// // //           type="range" min={def.min} max={def.max} step={def.step}
+// // //           value={params[key]}
+// // //           onChange={e => setParam(key, parseFloat(e.target.value))}
+// // //           style={{ width: '100%', accentColor: accent, cursor: 'pointer' }}
+// // //         />
+// // //       </div>
+// // //     );
+// // //   };
+
+// // //   return (
+// // //     <div style={{
+// // //       width: '100%',
+// // //       background: darkMode ? '#020617' : '#f6f7f9',
+// // //       minHeight: '100vh',
+// // //       fontFamily: fontStack,
+// // //       display: 'flex',
+// // //       justifyContent: 'center',
+// // //       padding: '20px 0',
+// // //       boxSizing: 'border-box',
+// // //     }}>
+// // //       <div style={{
+// // //         width: '100%',
+// // //         maxWidth,
+// // //         display: 'flex',
+// // //         gap: 16,
+// // //         padding: '0 16px',
+// // //         alignItems: 'flex-start',
+// // //         boxSizing: 'border-box',
+// // //       }}>
+
+// // //         {showPicker && (
+// // //           <nav style={{ ...card, width: 220, padding: 10, flexShrink: 0 }}>
+// // //             <div style={{ ...sectionTitle, margin: '6px 8px 10px' }}>Function</div>
+// // //             {pickerEntries.map(e =>
+// // //               e.type === 'header'
+// // //                 ? <div key={e.key} style={sectionTitle}>{e.label}</div>
+// // //                 : (
+// // //                   <button
+// // //                     key={e.key}
+// // //                     style={famBtn(e.key === current)}
+// // //                     onClick={() => selectFamily(e.key)}
+// // //                   >
+// // //                     <FamilyGlyph d={e.fam.glyph} active={e.key === current} darkMode={darkMode} />
+// // //                     <span>{e.fam.name}</span>
+// // //                   </button>
+// // //                 )
+// // //             )}
+
+// // //             {showSliders && (
+// // //               <div style={{
+// // //                 marginTop: 12,
+// // //                 paddingTop: 12,
+// // //                 borderTop: `1px solid ${c.borderSoft}`,
+// // //               }}>
+// // //                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '0 4px 8px' }}>
+// // //                   <div style={{
+// // //                     fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.06em',
+// // //                     color: c.muted, fontWeight: 600,
+// // //                   }}>Parameters</div>
+// // //                   <button onClick={resetParams} style={{
+// // //                     background: darkMode ? '#0f172a' : '#fff',
+// // //                     border: `1px solid ${c.border}`, color: c.inkSoft,
+// // //                     padding: '3px 8px', borderRadius: 5,
+// // //                     fontFamily: 'inherit', fontSize: 10.5, cursor: 'pointer',
+// // //                   }}>Reset</button>
+// // //                 </div>
+// // //                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: '0 4px' }}>
+// // //                   {['a', 'k', 'b', 'h'].map(renderSlider)}
+// // //                 </div>
+// // //               </div>
+// // //             )}
+// // //           </nav>
+// // //         )}
+
+// // //         <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
+// // //           <div style={{ ...card, padding: 16 }}>
+
+// // //             <div style={{
+// // //               display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+// // //               marginBottom: 12, flexWrap: 'wrap', gap: 8,
+// // //             }}>
+// // //               <span style={{ fontSize: 15, letterSpacing: '-0.01em', color: c.ink }}>
+// // //                 {fam.name}
+// // //               </span>
+// // //               <span style={{
+// // //                 fontFamily: monoStack, fontSize: 11.5,
+// // //                 padding: '3px 8px', borderRadius: 5,
+// // //                 color: COL.f, background: c.softer,
+// // //                 display: 'inline-flex', alignItems: 'center', gap: 6,
+// // //               }}>
+// // //                 <span style={{ width: 8, height: 8, borderRadius: '50%', background: COL.f }} />
+// // //                 g(x) = {forwardEq}
+// // //               </span>
+// // //             </div>
+
+// // //             <VisualizerWithControls
+// // //               functions={functions}
+// // //               zoom={10}
+// // //               showAxisLabels
+// // //               showCrosshair
+// // //               showCurveTooltip
+// // //               labelMode="legend"
+// // //               {...mergedVisualizerProps}
+// // //             />
+
+// // //             {/* ---- DOMAIN BAR + TEST POINT + RESULT — the centerpiece ---- */}
+// // //             <div style={{
+// // //               marginTop: 12,
+// // //               background: c.okSoft,
+// // //               border: `1px solid ${darkMode ? '#065f46' : '#a7f3d0'}`,
+// // //               borderLeft: `4px solid ${COL.inDomain}`,
+// // //               borderRadius: 8,
+// // //               padding: '14px 16px',
+// // //             }}>
+// // //               <div style={{
+// // //                 display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+// // //                 gap: 12, marginBottom: 10,
+// // //               }}>
+// // //                 <span style={{
+// // //                   fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.08em',
+// // //                   color: c.okText, fontWeight: 700,
+// // //                 }}>
+// // //                   Domain
+// // //                 </span>
+// // //                 <span style={{
+// // //                   fontFamily: monoStack, fontSize: 14,
+// // //                   color: c.ink, fontWeight: 700,
+// // //                 }}>
+// // //                   {domainStr}
+// // //                 </span>
+// // //               </div>
+
+// // //               <DomainBar domain={gDomain} testX={tx} darkMode={darkMode} />
+
+// // //               {/* Test point slider + result */}
+// // //               <div style={{
+// // //                 marginTop: 10,
+// // //                 padding: '10px 12px',
+// // //                 background: darkMode ? '#0f172a' : '#fff',
+// // //                 border: `1px solid ${darkMode ? '#1e293b' : '#d1fae5'}`,
+// // //                 borderRadius: 6,
+// // //               }}>
+// // //                 <div style={{
+// // //                   display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+// // //                   gap: 12, marginBottom: 6,
+// // //                 }}>
+// // //                   <span style={{
+// // //                     fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.06em',
+// // //                     color: c.muted, fontWeight: 600,
+// // //                   }}>Test point</span>
+// // //                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+// // //                     <span style={{
+// // //                       fontFamily: monoStack, fontSize: 14,
+// // //                       color: c.ink, fontWeight: 700,
+// // //                       fontVariantNumeric: 'tabular-nums',
+// // //                     }}>
+// // //                       x = {fmt(tx)}
+// // //                     </span>
+// // //                     <button onClick={resetTestX} style={{
+// // //                       background: darkMode ? '#0f172a' : '#fff',
+// // //                       border: `1px solid ${c.border}`, color: c.inkSoft,
+// // //                       padding: '2px 8px', borderRadius: 5,
+// // //                       fontFamily: 'inherit', fontSize: 10, cursor: 'pointer',
+// // //                     }}>Reset</button>
+// // //                   </div>
+// // //                 </div>
+// // //                 <input
+// // //                   type="range"
+// // //                   min={PARAM_DEFS.tx.min}
+// // //                   max={PARAM_DEFS.tx.max}
+// // //                   step={PARAM_DEFS.tx.step}
+// // //                   value={tx}
+// // //                   onChange={e => setParam('tx', parseFloat(e.target.value))}
+// // //                   style={{
+// // //                     width: '100%',
+// // //                     accentColor: txInDomain ? COL.inDomain : COL.outside,
+// // //                     cursor: 'pointer',
+// // //                   }}
+// // //                 />
+// // //                 <div style={{
+// // //                   marginTop: 8,
+// // //                   display: 'flex', alignItems: 'center', gap: 10,
+// // //                   fontFamily: monoStack, fontSize: 12,
+// // //                 }}>
+// // //                   <span style={{
+// // //                     padding: '3px 9px', borderRadius: 4,
+// // //                     fontWeight: 700, fontSize: 11,
+// // //                     color: txInDomain ? c.okText : c.badText,
+// // //                     background: txInDomain ? c.okSoft : c.badSoft,
+// // //                   }}>
+// // //                     {txInDomain ? '✓ in domain' : '✗ outside domain'}
+// // //                   </span>
+// // //                   <span style={{ color: c.inkSoft }}>
+// // //                     {txInDomain
+// // //                       ? `g(${fmt(tx)}) = ${fmt(fAtTx)}`
+// // //                       : `g(${fmt(tx)}) is undefined`}
+// // //                   </span>
+// // //                 </div>
+// // //               </div>
+// // //             </div>
+
+// // //             {/* ---- APPLIED CHIPS — domain-relevant ones highlighted ---- */}
+// // //             <div style={{
+// // //               display: 'flex', gap: 6, flexWrap: 'wrap',
+// // //               marginTop: 12, padding: '8px 10px',
+// // //               background: c.soft, border: `1px solid ${c.borderSoft}`,
+// // //               borderRadius: 8, alignItems: 'center',
+// // //             }}>
+// // //               <span style={{
+// // //                 fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.06em',
+// // //                 color: c.muted, fontWeight: 600, marginRight: 4,
+// // //               }}>Applied</span>
+// // //               {['a', 'k', 'b', 'h'].map(k => <Chip key={k} k={k} dim />)}
+// // //               <span style={{ width: 1, height: 16, background: c.border, margin: '0 2px' }} />
+// // //               <span style={{
+// // //                 fontSize: 9.5, textTransform: 'uppercase', letterSpacing: '0.05em',
+// // //                 color: COL.inDomain, fontWeight: 700,
+// // //                 background: c.okSoft, padding: '2px 6px', borderRadius: 3,
+// // //               }}>b, h affect domain</span>
+// // //             </div>
+// // //           </div>
+// // //         </div>
+
+// // //         {showInfoPanel && (
+// // //           <aside style={{ ...card, width: 360, padding: 16, flexShrink: 0 }}>
+// // //             <InfoPanel
+// // //               tabs={infoTabs}
+// // //               darkMode={darkMode}
+// // //               {...infoPanelProps}
+// // //             />
+// // //           </aside>
+// // //         )}
+// // //       </div>
+// // //     </div>
+// // //   );
+// // // }
+
+
+// // /**
+// //  * FunctionDomain — v3
+// //  *
+// //  * Changes from v2:
+// //  *   - Migrated from FunctionVisualizerCoreImproved to
+// //  *     FunctionVisualizerCorePro. The domain is now highlighted
+// //  *     directly on the x-axis itself via the new core's
+// //  *     `xAxisHighlights` prop. No more absolute-positioned overlay,
+// //  *     no more `plotPadding` prop — the highlight lives inside the
+// //  *     canvas coordinate system, so panning and zooming behave
+// //  *     correctly.
+// //  *   - The test point gets a dashed vertical reference line drawn
+// //  *     on the graph (green when in-domain, red when outside), via
+// //  *     the new `verticalLines` prop. The 1D DomainBar below the
+// //  *     graph still shows the test point too — that bar is the
+// //  *     canonical 1D representation and remains untouched.
+// //  *
+// //  * Everything else — FAMILIES, transformDomain, DomainBar, picker,
+// //  * sliders, info panel content, layout, styling — is unchanged
+// //  * from v2.
+// //  *
+// //  * PROPS (all optional)
+// //  *   initialFamily   : string
+// //  *   families        : object        — override built-in FAMILIES
+// //  *   visualizerProps : object        — forwarded to VisualizerWithControls
+// //  *   infoPanelProps  : object        — forwarded to InfoPanel
+// //  *   darkMode        : boolean
+// //  *   showPicker      : boolean
+// //  *   showSliders     : boolean
+// //  *   showInfoPanel   : boolean
+// //  *   maxWidth        : string|number — wrapper cap; default '80vw'
+// //  *
+// //  * RULES OBSERVED:
+// //  *   - Never put $...$ inside **...**.
+// //  *   - <style> blocks use dangerouslySetInnerHTML.
+// //  *   - Modest canvas height; chip strips stay above the fold.
+// //  */
+
+// // import React, { useState, useMemo } from 'react';
+// // import { VisualizerWithControls } from '../FunctionVisualizerCorePro';
+// // import InfoPanel from '../InfoPanel';
+
+
+// // /* ================================================================
+// //    COLORS
+// //    ================================================================ */
+
+// // const COL = {
+// //   f:        '#3b82f6', // function curve
+// //   inDomain: '#10b981', // green — valid territory
+// //   outside:  '#ef4444', // red — outside domain
+// // };
+
+
+// // /* ================================================================
+// //    FORMATTING
+// //    ================================================================ */
+
+// // function fmt(v) {
+// //   if (!Number.isFinite(v)) return '—';
+// //   const r = Math.round(v * 100) / 100;
+// //   return Math.abs(r - Math.round(r)) < 1e-4 ? String(Math.round(r)) : String(r);
+// // }
+
+
+// // /* ================================================================
+// //    PARAMETERS
+// //    ================================================================ */
+
+// // const PARAM_DEFS = {
+// //   a:  { label: 'vertical scale a',     min: -3,  max: 3,  step: 0.05, def: 1 },
+// //   k:  { label: 'vertical shift k',     min: -6,  max: 6,  step: 0.1,  def: 0 },
+// //   b:  { label: 'horizontal scale b',   min: -3,  max: 3,  step: 0.05, def: 1 },
+// //   h:  { label: 'horizontal shift h',   min: -6,  max: 6,  step: 0.1,  def: 0 },
+// //   tx: { label: 'test point x',         min: -10, max: 10, step: 0.05, def: 1 },
+// // };
+
+// // const DEFAULT_PARAMS = { a: 1, k: 0, b: 1, h: 0, tx: 1 };
+
+// // /* Parameters that actually affect the domain. */
+// // const DOMAIN_PARAMS = ['b', 'h'];
+
+
+// // /* ================================================================
+// //    FAMILIES
+// //    ================================================================
+// //    Grouped by domain interestingness so the picker reads as a
+// //    teaching tool:
+// //      - "Unrestricted" — domain is all of ℝ; sliders b, h still
+// //        shift/scale a trivial domain. Mostly useful for the contrast.
+// //      - "Restricted"   — base domain is a half-line or has a hole;
+// //        transformations move that boundary.
+// // */
+
+// // export const FAMILIES = {
+// //   identity: {
+// //     name: 'Identity',
+// //     group: 'Unrestricted (ℝ)',
+// //     glyph: 'M2,22 L24,4',
+// //     base: x => x,
+// //     eqBase: 'x',
+// //     bodyOf: i => i,
+// //     baseDomain: { kind: 'R' },
+// //   },
+// //   linearScale: {
+// //     name: 'Linear (2x)',
+// //     group: 'Unrestricted (ℝ)',
+// //     glyph: 'M2,24 L24,2',
+// //     base: x => 2 * x,
+// //     eqBase: '2x',
+// //     bodyOf: i => `2·${i}`,
+// //     baseDomain: { kind: 'R' },
+// //   },
+// //   quadratic: {
+// //     name: 'Quadratic',
+// //     group: 'Unrestricted (ℝ)',
+// //     glyph: 'M2,4 Q13,30 24,4',
+// //     base: x => x * x,
+// //     eqBase: 'x²',
+// //     bodyOf: i => `(${i})²`,
+// //     baseDomain: { kind: 'R' },
+// //   },
+// //   cubic: {
+// //     name: 'Cubic',
+// //     group: 'Unrestricted (ℝ)',
+// //     glyph: 'M2,22 C8,2 16,30 24,8',
+// //     base: x => x * x * x,
+// //     eqBase: 'x³',
+// //     bodyOf: i => `(${i})³`,
+// //     baseDomain: { kind: 'R' },
+// //   },
+// //   exponential: {
+// //     name: 'Exponential',
+// //     group: 'Unrestricted (ℝ)',
+// //     glyph: 'M2,26 Q16,26 24,2',
+// //     base: x => Math.exp(x),
+// //     eqBase: 'eˣ',
+// //     bodyOf: i => `e^(${i})`,
+// //     baseDomain: { kind: 'R' },
+// //   },
+// //   sine: {
+// //     name: 'Sine',
+// //     group: 'Unrestricted (ℝ)',
+// //     glyph: 'M2,14 Q7,2 12,14 Q17,26 22,14',
+// //     base: x => Math.sin(x),
+// //     eqBase: 'sin(x)',
+// //     bodyOf: i => `sin(${i})`,
+// //     baseDomain: { kind: 'R' },
+// //   },
+// //   cosine: {
+// //     name: 'Cosine',
+// //     group: 'Unrestricted (ℝ)',
+// //     glyph: 'M2,4 Q7,16 12,4 Q17,-8 22,4',
+// //     base: x => Math.cos(x),
+// //     eqBase: 'cos(x)',
+// //     bodyOf: i => `cos(${i})`,
+// //     baseDomain: { kind: 'R' },
+// //   },
+// //   absolute: {
+// //     name: 'Absolute',
+// //     group: 'Unrestricted (ℝ)',
+// //     glyph: 'M2,4 L13,24 L24,4',
+// //     base: x => Math.abs(x),
+// //     eqBase: '|x|',
+// //     bodyOf: i => `|${i}|`,
+// //     baseDomain: { kind: 'R' },
+// //   },
+
+// //   logarithmic: {
+// //     name: 'Logarithmic',
+// //     group: 'Restricted',
+// //     glyph: 'M2,2 Q10,26 24,26',
+// //     base: x => (x > 0 ? Math.log(x) : NaN),
+// //     eqBase: 'ln(x)',
+// //     bodyOf: i => `ln(${i})`,
+// //     baseDomain: { kind: 'open-half', dir: 'gt', val: 0 },
+// //   },
+// //   sqrt: {
+// //     name: 'Square root',
+// //     group: 'Restricted',
+// //     glyph: 'M2,24 Q4,8 24,4',
+// //     base: x => (x >= 0 ? Math.sqrt(x) : NaN),
+// //     eqBase: '√x',
+// //     bodyOf: i => `√(${i})`,
+// //     baseDomain: { kind: 'closed-half', dir: 'gte', val: 0 },
+// //   },
+// //   reciprocal: {
+// //     name: 'Reciprocal',
+// //     group: 'Restricted',
+// //     glyph: 'M2,4 Q11,4 13,14 M15,14 Q17,26 24,26',
+// //     base: x => (x === 0 ? NaN : 1 / x),
+// //     eqBase: '1/x',
+// //     bodyOf: i => `1/(${i})`,
+// //     baseDomain: { kind: 'excluded', val: 0 },
+// //   },
+// // };
+
+// // const DEFAULT_FAMILIES = FAMILIES;
+
+
+// // /* ================================================================
+// //    EQUATION BUILDER (same shape as Inverse / Transformations)
+// //    ================================================================ */
+
+// // function buildForwardEq(fam, p) {
+// //   const { a, b, h, k } = p;
+// //   let inner = 'x';
+// //   if (h !== 0) inner = `x ${h >= 0 ? '−' : '+'} ${fmt(Math.abs(h))}`;
+// //   if (b !== 1) inner = h !== 0 ? `${fmt(b)}(${inner})` : `${fmt(b)}x`;
+// //   let body = fam.bodyOf(inner);
+// //   let out;
+// //   if (a === -1) out = `−${body}`;
+// //   else if (a !== 1) out = `${fmt(a)}·${body}`;
+// //   else out = body;
+// //   if (k !== 0) out += ` ${k >= 0 ? '+' : '−'} ${fmt(Math.abs(k))}`;
+// //   return out;
+// // }
+
+
+// // /* ================================================================
+// //    DOMAIN TRANSFORM + STRING + MEMBERSHIP
+// //    ================================================================ */
+
+// // function transformDomain(base, b, h) {
+// //   if (!base) return { kind: 'R' };
+// //   if (b === 0) return { kind: 'point', val: h };
+// //   if (base.kind === 'R') return { kind: 'R' };
+// //   if (base.kind === 'open-half') {
+// //     const dir = b > 0 ? base.dir : (base.dir === 'gt' ? 'lt' : 'gt');
+// //     return { kind: 'open-half', dir, val: h + base.val / b };
+// //   }
+// //   if (base.kind === 'closed-half') {
+// //     const dir = b > 0 ? base.dir : (base.dir === 'gte' ? 'lte' : 'gte');
+// //     return { kind: 'closed-half', dir, val: h + base.val / b };
+// //   }
+// //   if (base.kind === 'excluded') {
+// //     return { kind: 'excluded', val: h + base.val / b };
+// //   }
+// //   if (base.kind === 'closed') {
+// //     const lo = h + base.lo / b;
+// //     const hi = h + base.hi / b;
+// //     return { kind: 'closed', lo: Math.min(lo, hi), hi: Math.max(lo, hi) };
+// //   }
+// //   return base;
+// // }
+
+// // function domainToString(d, v = 'x') {
+// //   if (!d) return '—';
+// //   if (d.kind === 'R') return `all real ${v}`;
+// //   if (d.kind === 'point') return `${v} = ${fmt(d.val)}`;
+// //   if (d.kind === 'open-half') {
+// //     const sym = d.dir === 'gt' ? '>' : '<';
+// //     return `${v} ${sym} ${fmt(d.val)}`;
+// //   }
+// //   if (d.kind === 'closed-half') {
+// //     const sym = d.dir === 'gte' ? '≥' : '≤';
+// //     return `${v} ${sym} ${fmt(d.val)}`;
+// //   }
+// //   if (d.kind === 'excluded') return `${v} ≠ ${fmt(d.val)}`;
+// //   if (d.kind === 'closed') return `${fmt(d.lo)} ≤ ${v} ≤ ${fmt(d.hi)}`;
+// //   return '?';
+// // }
+
+// // function inDomain(d, x) {
+// //   if (!d) return true;
+// //   switch (d.kind) {
+// //     case 'R':            return true;
+// //     case 'point':        return x === d.val;
+// //     case 'open-half':    return d.dir === 'gt' ? x > d.val : x < d.val;
+// //     case 'closed-half':  return d.dir === 'gte' ? x >= d.val : x <= d.val;
+// //     case 'excluded':     return x !== d.val;
+// //     case 'closed':       return x >= d.lo && x <= d.hi;
+// //     default:             return true;
+// //   }
+// // }
+
+
+// // /* ================================================================
+// //    DOMAIN  →  xAxisHighlights[]   (the v3 adapter)
+// //    ----------------------------------------------------------------
+// //    Convert the {kind, ...} domain shape into the core's
+// //    `xAxisHighlights` prop. Mostly a one-liner per case.
+// //    ================================================================ */
+
+// // function domainToHighlights(d, color) {
+// //   if (!d) return [];
+// //   const c = color;
+// //   switch (d.kind) {
+// //     case 'R':
+// //       return [{ from: -Infinity, to: Infinity, color: c, placement: 'on-axis' }];
+
+// //     case 'open-half': {
+// //       if (d.dir === 'gt') return [{ from: d.val, to:  Infinity, fromKind: 'open', color: c, placement: 'on-axis' }];
+// //       return                 [{ from: -Infinity, to: d.val,    toKind:   'open', color: c, placement: 'on-axis' }];
+// //     }
+
+// //     case 'closed-half': {
+// //       if (d.dir === 'gte') return [{ from: d.val, to:  Infinity, fromKind: 'closed', color: c, placement: 'on-axis' }];
+// //       return                   [{ from: -Infinity, to: d.val,    toKind:   'closed', color: c, placement: 'on-axis' }];
+// //     }
+
+// //     case 'excluded':
+// //       return [
+// //         { from: -Infinity, to: d.val,    toKind:   'open', color: c, placement: 'on-axis' },
+// //         { from: d.val,     to: Infinity, fromKind: 'open', color: c, placement: 'on-axis' },
+// //       ];
+
+// //     case 'closed':
+// //       return [{
+// //         from: d.lo, to: d.hi,
+// //         fromKind: 'closed', toKind: 'closed',
+// //         color: c, placement: 'on-axis',
+// //       }];
+
+// //     case 'point':
+// //       // Degenerate: zero-length highlight; two closed markers overlap → looks like one dot.
+// //       return [{
+// //         from: d.val, to: d.val,
+// //         fromKind: 'closed', toKind: 'closed',
+// //         color: c, placement: 'on-axis',
+// //       }];
+
+// //     default:
+// //       return [];
+// //   }
+// // }
+
+
+// // /* ================================================================
+// //    DOMAIN BAR — 1D number line showing the domain interval
+// //    (unchanged from v2)
+// //    ================================================================ */
+
+// // function DomainBar({ domain, testX, darkMode, xMin = -10, xMax = 10 }) {
+// //   const W = 1000, H = 86;
+// //   const cy = 36;                    // axis y
+// //   const toX = v => ((v - xMin) / (xMax - xMin)) * W;
+// //   const clampX = x => Math.max(0, Math.min(W, x));
+
+// //   const inDom = inDomain(domain, testX);
+
+// //   // Build fill segments + endpoint markers
+// //   // Each segment: { x1, x2, leftBoundary, rightBoundary }
+// //   //   boundary: { type: 'open' | 'closed' | 'arrow', x: pixel-x }
+// //   const segments = [];
+
+// //   switch (domain.kind) {
+// //     case 'R':
+// //       segments.push({
+// //         x1: 0, x2: W,
+// //         leftBoundary:  { type: 'arrow', x: 0 },
+// //         rightBoundary: { type: 'arrow', x: W },
+// //       });
+// //       break;
+// //     case 'open-half':
+// //     case 'closed-half': {
+// //       const valX = toX(domain.val);
+// //       const isOpen = domain.kind === 'open-half';
+// //       const isGreater = domain.dir === 'gt' || domain.dir === 'gte';
+// //       if (isGreater) {
+// //         if (valX < W) segments.push({
+// //           x1: clampX(valX), x2: W,
+// //           leftBoundary:  { type: isOpen ? 'open' : 'closed', x: valX, withinView: valX >= 0 && valX <= W },
+// //           rightBoundary: { type: 'arrow', x: W },
+// //         });
+// //       } else {
+// //         if (valX > 0) segments.push({
+// //           x1: 0, x2: clampX(valX),
+// //           leftBoundary:  { type: 'arrow', x: 0 },
+// //           rightBoundary: { type: isOpen ? 'open' : 'closed', x: valX, withinView: valX >= 0 && valX <= W },
+// //         });
+// //       }
+// //       break;
+// //     }
+// //     case 'excluded': {
+// //       const valX = toX(domain.val);
+// //       if (valX > 0) segments.push({
+// //         x1: 0, x2: clampX(valX),
+// //         leftBoundary:  { type: 'arrow', x: 0 },
+// //         rightBoundary: { type: 'open',  x: valX, withinView: valX >= 0 && valX <= W },
+// //       });
+// //       if (valX < W) segments.push({
+// //         x1: clampX(valX), x2: W,
+// //         leftBoundary:  { type: 'open',  x: valX, withinView: valX >= 0 && valX <= W },
+// //         rightBoundary: { type: 'arrow', x: W },
+// //       });
+// //       break;
+// //     }
+// //     case 'closed': {
+// //       const x1 = toX(domain.lo), x2 = toX(domain.hi);
+// //       segments.push({
+// //         x1: clampX(x1), x2: clampX(x2),
+// //         leftBoundary:  { type: 'closed', x: x1, withinView: x1 >= 0 && x1 <= W },
+// //         rightBoundary: { type: 'closed', x: x2, withinView: x2 >= 0 && x2 <= W },
+// //       });
+// //       break;
+// //     }
+// //     case 'point':
+// //     default:
+// //       break;
+// //   }
+
+// //   const axisColor   = darkMode ? '#475569' : '#94a3b8';
+// //   const tickColor   = darkMode ? '#64748b' : '#94a3b8';
+// //   const labelColor  = darkMode ? '#cbd5e1' : '#475569';
+// //   const fill        = COL.inDomain;
+// //   const markerColor = inDom ? COL.inDomain : COL.outside;
+
+// //   const renderEndpoint = (b, side) => {
+// //     if (!b) return null;
+// //     if (b.type === 'arrow') {
+// //       // arrowhead pointing outward
+// //       const dir = side === 'left' ? -1 : 1;
+// //       const tipX = side === 'left' ? 2 : W - 2;
+// //       const baseX = tipX - dir * 8;
+// //       return (
+// //         <polygon
+// //           points={`${tipX},${cy} ${baseX},${cy - 6} ${baseX},${cy + 6}`}
+// //           fill={fill}
+// //           opacity={0.85}
+// //         />
+// //       );
+// //     }
+// //     if (!b.withinView) return null;
+// //     if (b.type === 'closed') {
+// //       return (
+// //         <circle cx={b.x} cy={cy} r={6}
+// //                 fill={fill} stroke={darkMode ? '#0f172a' : '#fff'} strokeWidth={2} />
+// //       );
+// //     }
+// //     if (b.type === 'open') {
+// //       return (
+// //         <circle cx={b.x} cy={cy} r={6}
+// //                 fill={darkMode ? '#0f172a' : '#fff'}
+// //                 stroke={fill} strokeWidth={2} />
+// //       );
+// //     }
+// //     return null;
+// //   };
+
+// //   const testInView = toX(testX) >= 0 && toX(testX) <= W;
+
+// //   return (
+// //     <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none"
+// //          style={{ width: '100%', height: H, display: 'block' }}>
+// //       {/* baseline */}
+// //       <line x1={0} y1={cy} x2={W} y2={cy} stroke={axisColor} strokeWidth={1.5} />
+
+// //       {/* tick marks + integer labels */}
+// //       {Array.from({ length: xMax - xMin + 1 }, (_, i) => xMin + i).map(v => {
+// //         const x = toX(v);
+// //         const isMajor = v % 2 === 0;
+// //         return (
+// //           <g key={v}>
+// //             <line
+// //               x1={x} y1={cy - (isMajor ? 6 : 3)}
+// //               x2={x} y2={cy + (isMajor ? 6 : 3)}
+// //               stroke={tickColor} strokeWidth={1}
+// //             />
+// //             {isMajor && (
+// //               <text x={x} y={H - 4} fontSize="11" fill={labelColor}
+// //                     textAnchor="middle"
+// //                     fontFamily='ui-monospace, "SF Mono", Menlo, monospace'>
+// //                 {v}
+// //               </text>
+// //             )}
+// //           </g>
+// //         );
+// //       })}
+
+// //       {/* domain fill band (under the boundary markers) */}
+// //       {segments.map((seg, i) => (
+// //         <rect key={i}
+// //               x={seg.x1} y={cy - 11}
+// //               width={Math.max(0, seg.x2 - seg.x1)} height={22}
+// //               fill={fill} fillOpacity={0.22} />
+// //       ))}
+
+// //       {/* boundary endpoints + arrows */}
+// //       {segments.map((seg, i) => (
+// //         <g key={`b-${i}`}>
+// //           {renderEndpoint(seg.leftBoundary,  'left')}
+// //           {renderEndpoint(seg.rightBoundary, 'right')}
+// //         </g>
+// //       ))}
+
+// //       {/* excluded-point cross (when domain.kind === 'excluded') */}
+// //       {domain.kind === 'excluded' && (() => {
+// //         const xv = toX(domain.val);
+// //         if (xv < 0 || xv > W) return null;
+// //         return (
+// //           <g>
+// //             <line x1={xv - 5} y1={cy - 5} x2={xv + 5} y2={cy + 5}
+// //                   stroke={COL.outside} strokeWidth={2} />
+// //             <line x1={xv - 5} y1={cy + 5} x2={xv + 5} y2={cy - 5}
+// //                   stroke={COL.outside} strokeWidth={2} />
+// //           </g>
+// //         );
+// //       })()}
+
+// //       {/* test point marker */}
+// //       {testInView && (
+// //         <g>
+// //           <line x1={toX(testX)} y1={cy - 18} x2={toX(testX)} y2={cy + 18}
+// //                 stroke={markerColor} strokeWidth={2} />
+// //           <circle cx={toX(testX)} cy={cy} r={7}
+// //                   fill={markerColor}
+// //                   stroke={darkMode ? '#0f172a' : '#fff'} strokeWidth={2.5} />
+// //         </g>
+// //       )}
+// //     </svg>
+// //   );
+// // }
+
+
+// // /* ================================================================
+// //    PICKER GROUPING
+// //    ================================================================ */
+
+// // function buildPickerEntries(families) {
+// //   const out = [];
+// //   let lastGroup;
+// //   Object.entries(families).forEach(([key, f]) => {
+// //     if (f.group && f.group !== lastGroup) {
+// //       out.push({ type: 'header', label: f.group, key: `__hdr_${f.group}` });
+// //       lastGroup = f.group;
+// //     } else if (!f.group) {
+// //       lastGroup = undefined;
+// //     }
+// //     out.push({ type: 'item', key, fam: f });
+// //   });
+// //   return out;
+// // }
+
+
+// // /* ================================================================
+// //    GLYPH
+// //    ================================================================ */
+
+// // function FamilyGlyph({ d, active, darkMode }) {
+// //   return (
+// //     <svg width="22" height="22" viewBox="0 0 26 28" aria-hidden="true">
+// //       <path d={d} fill="none"
+// //             stroke={active ? COL.f : (darkMode ? '#64748b' : '#94a3b8')}
+// //             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+// //     </svg>
+// //   );
+// // }
+
+
+// // /* ================================================================
+// //    MAIN
+// //    ================================================================ */
+
+// // export default function FunctionDomain({
+// //   initialFamily = 'logarithmic',
+// //   families = DEFAULT_FAMILIES,
+// //   visualizerProps = {},
+// //   infoPanelProps = {},
+// //   darkMode = false,
+// //   showPicker = true,
+// //   showSliders = true,
+// //   showInfoPanel = true,
+// //   maxWidth = '80vw',
+// // }) {
+// //   const familyKeys = Object.keys(families);
+// //   const startKey = families[initialFamily] ? initialFamily : familyKeys[0];
+
+// //   const [current, setCurrent] = useState(startKey);
+// //   const [params, setParams] = useState({ ...DEFAULT_PARAMS });
+
+// //   const fam = families[current] || families[familyKeys[0]];
+
+// //   const { a, b, h, k, tx } = params;
+
+// //   /* Parameterized function */
+// //   const forwardFn = useMemo(() => {
+// //     if (a === 0 || b === 0) return () => NaN;
+// //     return x => a * fam.base(b * (x - h)) + k;
+// //   }, [fam, a, b, h, k]);
+
+// //   /* Domain of g under current parameters */
+// //   const gDomain = useMemo(() => transformDomain(fam.baseDomain, b, h), [fam, b, h]);
+// //   const domainStr = useMemo(() => domainToString(gDomain, 'x'), [gDomain]);
+// //   const txInDomain = inDomain(gDomain, tx);
+// //   const fAtTx = txInDomain ? forwardFn(tx) : NaN;
+
+// //   const forwardEq = useMemo(() => buildForwardEq(fam, params), [fam, params]);
+
+// //   const functions = useMemo(() => ([
+// //     {
+// //       fn: forwardFn,
+// //       color: COL.f,
+// //       label: 'g',
+// //       formula: `g(x) = ${forwardEq}`,
+// //       visible: true,
+// //       stroke: 2.25,
+// //     },
+// //   ]), [forwardFn, forwardEq]);
+
+// //   /* ---- NEW: derive axis highlights and test-point reference line ---- */
+
+// //   const xAxisHighlights = useMemo(
+// //     () => domainToHighlights(gDomain, COL.inDomain),
+// //     [gDomain]
+// //   );
+
+// //   const verticalLines = useMemo(() => ([{
+// //     x: tx,
+// //     color: txInDomain ? COL.inDomain : COL.outside,
+// //     stroke: 1.5,
+// //     pattern: [4, 4],
+// //   }]), [tx, txInDomain]);
+
+// //   /* ---- InfoPanel content ---- */
+// //   const explanationContent = useMemo(() => {
+// //     return (
+// //       `## ${fam.name} — domain\n\n` +
+// //       `**Base function** · $f(x) = ${fam.eqBase}$\n\n` +
+// //       `**Base domain** · ${domainToString(fam.baseDomain, 'x')}\n\n` +
+// //       `**With parameters** · $g(x) = ${forwardEq}$\n\n` +
+// //       `**Current domain** · ${domainStr}\n\n` +
+// //       `### How parameters affect the domain\n\n` +
+// //       `Only **b** and **h** can change the domain. They transform the input to the base function:\n\n` +
+// //       `- $h$ — shifts the domain boundary along the x-axis by the same amount\n` +
+// //       `- $b$ — scales the domain boundary by $1/b$; if $b < 0$, the inequality direction flips\n\n` +
+// //       `**a** and **k** transform the output — they shift and scale what comes *out* of the function, not where it accepts input. Move them and the domain stays put.`
+// //     );
+// //   }, [fam, params, forwardEq, domainStr]);
+
+// //   const conceptsContent =
+// //     '## What is the domain?\n\n' +
+// //     'The **domain** of a function is the set of inputs where it is defined. Some functions accept every real number (polynomials, sine, cosine, $e^x$). Others come with restrictions baked in:\n\n' +
+// //     '- $\\ln(x)$ — only defined for $x > 0$\n' +
+// //     '- $\\sqrt{x}$ — only defined for $x \\geq 0$\n' +
+// //     '- $1/x$ — defined everywhere except $x = 0$\n\n' +
+// //     'On the number line below the graph, the green band shows where the function accepts an input. Drag the test point to probe a specific value — green dot means **in domain**, red means **outside**.\n\n' +
+// //     '### Half-line endpoints: open vs closed\n\n' +
+// //     'A **closed** endpoint (filled circle) means the boundary value is included. $\\sqrt{x}$ at $x = 0$: yes, $\\sqrt{0} = 0$, so $x = 0$ is in the domain. Closed.\n\n' +
+// //     'An **open** endpoint (hollow circle) means the boundary is excluded. $\\ln(x)$ at $x = 0$: $\\ln(0)$ is undefined (limit is $-\\infty$), so $x = 0$ is *not* in the domain. Open.\n\n' +
+// //     '### Excluded points\n\n' +
+// //     'Some functions are defined everywhere except a single value — like $1/x$ at $x = 0$. The bar is filled everywhere except for an open hole at the excluded point, marked with a small red ×.\n\n' +
+// //     '### Why a and k don\'t matter\n\n' +
+// //     'Think about the formula $g(x) = a \\cdot f(b(x - h)) + k$. The input that reaches the inner $f$ is $b(x - h)$ — only $b$ and $h$ appear there. After $f$ produces its output, $a$ and $k$ scale and shift it, but by that point the question "is this input legal?" has already been answered. Multiplying or shifting the *output* can\'t make a forbidden input suddenly legal.';
+
+// //   const infoTabs = useMemo(() => ([
+// //     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },
+// //     { key: 'concepts',    label: 'Concepts',    order: 10, content: conceptsContent },
+// //   ]), [explanationContent]);
+
+// //   /* ---- Styling ---- */
+// //   const fontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';
+// //   const monoStack = 'ui-monospace, "SF Mono", Menlo, monospace';
+// //   const panelShadow = '0 1px 3px rgba(15,23,42,0.05), 0 8px 24px rgba(15,23,42,0.05)';
+// //   const card = {
+// //     background: darkMode ? '#0f172a' : '#fff',
+// //     border: `1px solid ${darkMode ? '#1e293b' : '#f1f5f9'}`,
+// //     borderRadius: 12,
+// //     boxShadow: panelShadow,
+// //   };
+// //   const c = {
+// //     ink: darkMode ? '#e2e8f0' : '#0f172a',
+// //     inkSoft: darkMode ? '#cbd5e1' : '#334155',
+// //     muted: darkMode ? '#64748b' : '#94a3b8',
+// //     soft: darkMode ? '#1e293b' : '#f8fafc',
+// //     softer: darkMode ? '#0f172a' : '#f1f5f9',
+// //     border: darkMode ? '#334155' : '#e2e8f0',
+// //     borderSoft: darkMode ? '#1e293b' : '#f1f5f9',
+// //     accentSoft: darkMode ? '#1e293b' : '#eff6ff',
+// //     accentBorder: darkMode ? '#334155' : '#dbeafe',
+// //     accentText: darkMode ? '#dbeafe' : '#1e3a8a',
+// //     okSoft: darkMode ? '#064e3b' : '#d1fae5',
+// //     okText: darkMode ? '#6ee7b7' : '#065f46',
+// //     badSoft: darkMode ? '#7f1d1d' : '#fee2e2',
+// //     badText: darkMode ? '#fca5a5' : '#991b1b',
+// //   };
+
+// //   const famBtn = active => ({
+// //     display: 'flex', alignItems: 'center', gap: 10, width: '100%', textAlign: 'left',
+// //     border: '1px solid transparent',
+// //     background: active ? c.accentSoft : 'none',
+// //     borderColor: active ? c.accentBorder : 'transparent',
+// //     borderRadius: 8, padding: '9px 10px', cursor: 'pointer', fontFamily: 'inherit',
+// //     fontSize: 13, fontWeight: active ? 600 : 400,
+// //     color: active ? c.accentText : c.inkSoft,
+// //     transition: 'background 0.12s, border-color 0.12s',
+// //   });
+
+// //   const sectionTitle = {
+// //     fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.06em',
+// //     color: c.muted, fontWeight: 600, margin: '10px 8px 4px',
+// //   };
+
+// //   const mergedVisualizerProps = {
+// //     defaultWidth: 880,
+// //     defaultHeight: 460,
+// //     ...visualizerProps,
+// //   };
+
+// //   const pickerEntries = buildPickerEntries(families);
+
+// //   const selectFamily = (key) => {
+// //     setCurrent(key);
+// //     setParams({ ...DEFAULT_PARAMS });
+// //   };
+
+// //   const setParam = (k, v) => setParams(prev => ({ ...prev, [k]: v }));
+// //   const resetParams = () => setParams({ ...DEFAULT_PARAMS });
+// //   const resetTestX  = () => setParam('tx', DEFAULT_PARAMS.tx);
+
+// //   const Chip = ({ k, valueOverride, accent, dim }) => {
+// //     const value = valueOverride !== undefined ? valueOverride : params[k];
+// //     const def = PARAM_DEFS[k];
+// //     const active = def ? value !== def.def : true;
+// //     const isDomainParam = DOMAIN_PARAMS.includes(k);
+// //     const tone = accent || (isDomainParam ? COL.inDomain : (active ? COL.f : c.muted));
+// //     return (
+// //       <span style={{
+// //         fontFamily: monoStack, fontSize: 11,
+// //         padding: '3px 9px', borderRadius: 5,
+// //         display: 'inline-flex', alignItems: 'center', gap: 5,
+// //         color: active ? c.accentText : c.muted,
+// //         background: active ? c.accentSoft : 'transparent',
+// //         border: `1px solid ${active ? c.accentBorder : c.borderSoft}`,
+// //         fontWeight: active ? 600 : 400,
+// //         opacity: dim && !isDomainParam ? 0.55 : 1,
+// //       }}>
+// //         <span style={{ fontWeight: 600, color: tone }}>{k}</span>
+// //         <span>=</span>
+// //         <span>{fmt(value)}</span>
+// //       </span>
+// //     );
+// //   };
+
+// //   const renderSlider = (key) => {
+// //     const def = PARAM_DEFS[key];
+// //     const isDomainParam = DOMAIN_PARAMS.includes(key);
+// //     const accent = isDomainParam ? COL.inDomain : COL.f;
+// //     return (
+// //       <div key={key}>
+// //         <label style={{
+// //           display: 'flex', justifyContent: 'space-between', fontSize: 12,
+// //           color: c.inkSoft, marginBottom: 4, fontVariantNumeric: 'tabular-nums',
+// //         }}>
+// //           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+// //             {def.label}
+// //             {isDomainParam && (
+// //               <span style={{
+// //                 fontSize: 9, fontWeight: 700,
+// //                 color: COL.inDomain, background: c.okSoft,
+// //                 padding: '1px 5px', borderRadius: 3,
+// //                 textTransform: 'uppercase', letterSpacing: '0.05em',
+// //               }}>affects domain</span>
+// //             )}
+// //           </span>
+// //           <span style={{ fontFamily: monoStack, color: accent, fontWeight: 600 }}>
+// //             {fmt(params[key])}
+// //           </span>
+// //         </label>
+// //         <input
+// //           type="range" min={def.min} max={def.max} step={def.step}
+// //           value={params[key]}
+// //           onChange={e => setParam(key, parseFloat(e.target.value))}
+// //           style={{ width: '100%', accentColor: accent, cursor: 'pointer' }}
+// //         />
+// //       </div>
+// //     );
+// //   };
+
+// //   return (
+// //     <div style={{
+// //       width: '100%',
+// //       background: darkMode ? '#020617' : '#f6f7f9',
+// //       minHeight: '100vh',
+// //       fontFamily: fontStack,
+// //       display: 'flex',
+// //       justifyContent: 'center',
+// //       padding: '20px 0',
+// //       boxSizing: 'border-box',
+// //     }}>
+// //       <div style={{
+// //         width: '100%',
+// //         maxWidth,
+// //         display: 'flex',
+// //         gap: 16,
+// //         padding: '0 16px',
+// //         alignItems: 'flex-start',
+// //         boxSizing: 'border-box',
+// //       }}>
+
+// //         {showPicker && (
+// //           <nav style={{ ...card, width: 220, padding: 10, flexShrink: 0 }}>
+// //             <div style={{ ...sectionTitle, margin: '6px 8px 10px' }}>Function</div>
+// //             {pickerEntries.map(e =>
+// //               e.type === 'header'
+// //                 ? <div key={e.key} style={sectionTitle}>{e.label}</div>
+// //                 : (
+// //                   <button
+// //                     key={e.key}
+// //                     style={famBtn(e.key === current)}
+// //                     onClick={() => selectFamily(e.key)}
+// //                   >
+// //                     <FamilyGlyph d={e.fam.glyph} active={e.key === current} darkMode={darkMode} />
+// //                     <span>{e.fam.name}</span>
+// //                   </button>
+// //                 )
+// //             )}
+
+// //             {showSliders && (
+// //               <div style={{
+// //                 marginTop: 12,
+// //                 paddingTop: 12,
+// //                 borderTop: `1px solid ${c.borderSoft}`,
+// //               }}>
+// //                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '0 4px 8px' }}>
+// //                   <div style={{
+// //                     fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.06em',
+// //                     color: c.muted, fontWeight: 600,
+// //                   }}>Parameters</div>
+// //                   <button onClick={resetParams} style={{
+// //                     background: darkMode ? '#0f172a' : '#fff',
+// //                     border: `1px solid ${c.border}`, color: c.inkSoft,
+// //                     padding: '3px 8px', borderRadius: 5,
+// //                     fontFamily: 'inherit', fontSize: 10.5, cursor: 'pointer',
+// //                   }}>Reset</button>
+// //                 </div>
+// //                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: '0 4px' }}>
+// //                   {['a', 'k', 'b', 'h'].map(renderSlider)}
+// //                 </div>
+// //               </div>
+// //             )}
+// //           </nav>
+// //         )}
+
+// //         <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
+// //           <div style={{ ...card, padding: 16 }}>
+
+// //             <div style={{
+// //               display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+// //               marginBottom: 12, flexWrap: 'wrap', gap: 8,
+// //             }}>
+// //               <span style={{ fontSize: 15, letterSpacing: '-0.01em', color: c.ink }}>
+// //                 {fam.name}
+// //               </span>
+// //               <span style={{
+// //                 fontFamily: monoStack, fontSize: 11.5,
+// //                 padding: '3px 8px', borderRadius: 5,
+// //                 color: COL.f, background: c.softer,
+// //                 display: 'inline-flex', alignItems: 'center', gap: 6,
+// //               }}>
+// //                 <span style={{ width: 8, height: 8, borderRadius: '50%', background: COL.f }} />
+// //                 g(x) = {forwardEq}
+// //               </span>
+// //             </div>
+
+// //             {/* The overlay is gone — the domain is now drawn directly on the
+// //                 x-axis inside the visualizer's coordinate system via xAxisHighlights. */}
+// //             <VisualizerWithControls
+// //               functions={functions}
+// //               zoom={10}
+// //               showAxisLabels
+// //               showCrosshair
+// //               showCurveTooltip
+// //               labelMode="legend"
+// //               xAxisHighlights={xAxisHighlights}
+// //               verticalLines={verticalLines}
+// //               {...mergedVisualizerProps}
+// //             />
+
+// //             {/* ---- DOMAIN BAR + TEST POINT + RESULT — the centerpiece ---- */}
+// //             <div style={{
+// //               marginTop: 12,
+// //               background: c.okSoft,
+// //               border: `1px solid ${darkMode ? '#065f46' : '#a7f3d0'}`,
+// //               borderLeft: `4px solid ${COL.inDomain}`,
+// //               borderRadius: 8,
+// //               padding: '14px 16px',
+// //             }}>
+// //               <div style={{
+// //                 display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+// //                 gap: 12, marginBottom: 10,
+// //               }}>
+// //                 <span style={{
+// //                   fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.08em',
+// //                   color: c.okText, fontWeight: 700,
+// //                 }}>
+// //                   Domain
+// //                 </span>
+// //                 <span style={{
+// //                   fontFamily: monoStack, fontSize: 14,
+// //                   color: c.ink, fontWeight: 700,
+// //                 }}>
+// //                   {domainStr}
+// //                 </span>
+// //               </div>
+
+// //               <DomainBar domain={gDomain} testX={tx} darkMode={darkMode} />
+
+// //               {/* Test point slider + result */}
+// //               <div style={{
+// //                 marginTop: 10,
+// //                 padding: '10px 12px',
+// //                 background: darkMode ? '#0f172a' : '#fff',
+// //                 border: `1px solid ${darkMode ? '#1e293b' : '#d1fae5'}`,
+// //                 borderRadius: 6,
+// //               }}>
+// //                 <div style={{
+// //                   display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+// //                   gap: 12, marginBottom: 6,
+// //                 }}>
+// //                   <span style={{
+// //                     fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.06em',
+// //                     color: c.muted, fontWeight: 600,
+// //                   }}>Test point</span>
+// //                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+// //                     <span style={{
+// //                       fontFamily: monoStack, fontSize: 14,
+// //                       color: c.ink, fontWeight: 700,
+// //                       fontVariantNumeric: 'tabular-nums',
+// //                     }}>
+// //                       x = {fmt(tx)}
+// //                     </span>
+// //                     <button onClick={resetTestX} style={{
+// //                       background: darkMode ? '#0f172a' : '#fff',
+// //                       border: `1px solid ${c.border}`, color: c.inkSoft,
+// //                       padding: '2px 8px', borderRadius: 5,
+// //                       fontFamily: 'inherit', fontSize: 10, cursor: 'pointer',
+// //                     }}>Reset</button>
+// //                   </div>
+// //                 </div>
+// //                 <input
+// //                   type="range"
+// //                   min={PARAM_DEFS.tx.min}
+// //                   max={PARAM_DEFS.tx.max}
+// //                   step={PARAM_DEFS.tx.step}
+// //                   value={tx}
+// //                   onChange={e => setParam('tx', parseFloat(e.target.value))}
+// //                   style={{
+// //                     width: '100%',
+// //                     accentColor: txInDomain ? COL.inDomain : COL.outside,
+// //                     cursor: 'pointer',
+// //                   }}
+// //                 />
+// //                 <div style={{
+// //                   marginTop: 8,
+// //                   display: 'flex', alignItems: 'center', gap: 10,
+// //                   fontFamily: monoStack, fontSize: 12,
+// //                 }}>
+// //                   <span style={{
+// //                     padding: '3px 9px', borderRadius: 4,
+// //                     fontWeight: 700, fontSize: 11,
+// //                     color: txInDomain ? c.okText : c.badText,
+// //                     background: txInDomain ? c.okSoft : c.badSoft,
+// //                   }}>
+// //                     {txInDomain ? '✓ in domain' : '✗ outside domain'}
+// //                   </span>
+// //                   <span style={{ color: c.inkSoft }}>
+// //                     {txInDomain
+// //                       ? `g(${fmt(tx)}) = ${fmt(fAtTx)}`
+// //                       : `g(${fmt(tx)}) is undefined`}
+// //                   </span>
+// //                 </div>
+// //               </div>
+// //             </div>
+
+// //             {/* ---- APPLIED CHIPS — domain-relevant ones highlighted ---- */}
+// //             <div style={{
+// //               display: 'flex', gap: 6, flexWrap: 'wrap',
+// //               marginTop: 12, padding: '8px 10px',
+// //               background: c.soft, border: `1px solid ${c.borderSoft}`,
+// //               borderRadius: 8, alignItems: 'center',
+// //             }}>
+// //               <span style={{
+// //                 fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.06em',
+// //                 color: c.muted, fontWeight: 600, marginRight: 4,
+// //               }}>Applied</span>
+// //               {['a', 'k', 'b', 'h'].map(k => <Chip key={k} k={k} dim />)}
+// //               <span style={{ width: 1, height: 16, background: c.border, margin: '0 2px' }} />
+// //               <span style={{
+// //                 fontSize: 9.5, textTransform: 'uppercase', letterSpacing: '0.05em',
+// //                 color: COL.inDomain, fontWeight: 700,
+// //                 background: c.okSoft, padding: '2px 6px', borderRadius: 3,
+// //               }}>b, h affect domain</span>
+// //             </div>
+// //           </div>
+// //         </div>
+
+// //         {showInfoPanel && (
+// //           <aside style={{ ...card, width: 360, padding: 16, flexShrink: 0 }}>
+// //             <InfoPanel
+// //               tabs={infoTabs}
+// //               darkMode={darkMode}
+// //               {...infoPanelProps}
+// //             />
+// //           </aside>
+// //         )}
+// //       </div>
+// //     </div>
+// //   );
+// // }
+
+
+// /**
+//  * FunctionDomain — v4
+//  *
+//  * Changes from v3:
+//  *   - Default axis-highlight color is now amber (#f59e0b) instead of
+//  *     green. The DomainBar below the graph and the "Domain" result
+//  *     card keep their semantic green — that's "valid territory"
+//  *     coloring, distinct from the graph's visual styling.
+//  *   - The highlight color is now picker-controlled: a small color
+//  *     input in the sidebar lets the user (or developer iterating)
+//  *     pick any hex. The dashed vertical test-point line follows
+//  *     the same color when the test point is in-domain.
+//  *   - New optional prop `defaultHighlightColor` sets the initial
+//  *     color from outside.
+//  *
+//  * Changes from v2:
+//  *   - Migrated from FunctionVisualizerCoreImproved to
+//  *     FunctionVisualizerCorePro. The domain is now highlighted
+//  *     directly on the x-axis itself via the new core's
+//  *     `xAxisHighlights` prop. No more absolute-positioned overlay,
+//  *     no more `plotPadding` prop — the highlight lives inside the
+//  *     canvas coordinate system, so panning and zooming behave
+//  *     correctly.
+//  *   - The test point gets a dashed vertical reference line drawn
+//  *     on the graph (in-domain → highlight color, outside → red),
+//  *     via the new `verticalLines` prop. The 1D DomainBar below
+//  *     the graph still shows the test point too — that bar is the
+//  *     canonical 1D representation and remains untouched.
+//  *
+//  * Everything else — FAMILIES, transformDomain, DomainBar, picker,
+//  * sliders, info panel content, layout, styling — is unchanged
+//  * from v2.
+//  *
+//  * PROPS (all optional)
+//  *   initialFamily         : string
+//  *   families              : object        — override built-in FAMILIES
+//  *   visualizerProps       : object        — forwarded to VisualizerWithControls
+//  *   infoPanelProps        : object        — forwarded to InfoPanel
+//  *   darkMode              : boolean
+//  *   showPicker            : boolean
+//  *   showSliders           : boolean
+//  *   showInfoPanel         : boolean
+//  *   showColorPicker       : boolean       — default true
+//  *   defaultHighlightColor : string        — default '#f59e0b'
+//  *   maxWidth              : string|number — wrapper cap; default '80vw'
+//  *
+//  * RULES OBSERVED:
+//  *   - Never put $...$ inside **...**.
+//  *   - <style> blocks use dangerouslySetInnerHTML.
+//  *   - Modest canvas height; chip strips stay above the fold.
+//  */
+
+// import React, { useState, useMemo } from 'react';
+// import { VisualizerWithControls } from '../FunctionVisualizerCorePro';
+// import InfoPanel from '../InfoPanel';
+
+
+// /* ================================================================
+//    COLORS
+//    ================================================================ */
+
+// const COL = {
+//   f:        '#3b82f6', // function curve
+//   inDomain: '#10b981', // green — valid territory
+//   outside:  '#ef4444', // red — outside domain
+// };
+
+
+// /* ================================================================
+//    FORMATTING
+//    ================================================================ */
+
+// function fmt(v) {
+//   if (!Number.isFinite(v)) return '—';
+//   const r = Math.round(v * 100) / 100;
+//   return Math.abs(r - Math.round(r)) < 1e-4 ? String(Math.round(r)) : String(r);
+// }
+
+
+// /* ================================================================
+//    PARAMETERS
+//    ================================================================ */
+
+// const PARAM_DEFS = {
+//   a:  { label: 'vertical scale a',     min: -3,  max: 3,  step: 0.05, def: 1 },
+//   k:  { label: 'vertical shift k',     min: -6,  max: 6,  step: 0.1,  def: 0 },
+//   b:  { label: 'horizontal scale b',   min: -3,  max: 3,  step: 0.05, def: 1 },
+//   h:  { label: 'horizontal shift h',   min: -6,  max: 6,  step: 0.1,  def: 0 },
+//   tx: { label: 'test point x',         min: -10, max: 10, step: 0.05, def: 1 },
+// };
+
+// const DEFAULT_PARAMS = { a: 1, k: 0, b: 1, h: 0, tx: 1 };
+
+// /* Parameters that actually affect the domain. */
+// const DOMAIN_PARAMS = ['b', 'h'];
+
+
+// /* ================================================================
+//    FAMILIES
+//    ================================================================
+//    Grouped by domain interestingness so the picker reads as a
+//    teaching tool:
+//      - "Unrestricted" — domain is all of ℝ; sliders b, h still
+//        shift/scale a trivial domain. Mostly useful for the contrast.
+//      - "Restricted"   — base domain is a half-line or has a hole;
+//        transformations move that boundary.
+// */
+
+// export const FAMILIES = {
+//   identity: {
+//     name: 'Identity',
+//     group: 'Unrestricted (ℝ)',
+//     glyph: 'M2,22 L24,4',
+//     base: x => x,
+//     eqBase: 'x',
+//     bodyOf: i => i,
+//     baseDomain: { kind: 'R' },
+//   },
+//   linearScale: {
+//     name: 'Linear (2x)',
+//     group: 'Unrestricted (ℝ)',
+//     glyph: 'M2,24 L24,2',
+//     base: x => 2 * x,
+//     eqBase: '2x',
+//     bodyOf: i => `2·${i}`,
+//     baseDomain: { kind: 'R' },
+//   },
+//   quadratic: {
+//     name: 'Quadratic',
+//     group: 'Unrestricted (ℝ)',
+//     glyph: 'M2,4 Q13,30 24,4',
+//     base: x => x * x,
+//     eqBase: 'x²',
+//     bodyOf: i => `(${i})²`,
+//     baseDomain: { kind: 'R' },
+//   },
+//   cubic: {
+//     name: 'Cubic',
+//     group: 'Unrestricted (ℝ)',
+//     glyph: 'M2,22 C8,2 16,30 24,8',
+//     base: x => x * x * x,
+//     eqBase: 'x³',
+//     bodyOf: i => `(${i})³`,
+//     baseDomain: { kind: 'R' },
+//   },
+//   exponential: {
+//     name: 'Exponential',
+//     group: 'Unrestricted (ℝ)',
+//     glyph: 'M2,26 Q16,26 24,2',
+//     base: x => Math.exp(x),
+//     eqBase: 'eˣ',
+//     bodyOf: i => `e^(${i})`,
+//     baseDomain: { kind: 'R' },
+//   },
+//   sine: {
+//     name: 'Sine',
+//     group: 'Unrestricted (ℝ)',
+//     glyph: 'M2,14 Q7,2 12,14 Q17,26 22,14',
+//     base: x => Math.sin(x),
+//     eqBase: 'sin(x)',
+//     bodyOf: i => `sin(${i})`,
+//     baseDomain: { kind: 'R' },
+//   },
+//   cosine: {
+//     name: 'Cosine',
+//     group: 'Unrestricted (ℝ)',
+//     glyph: 'M2,4 Q7,16 12,4 Q17,-8 22,4',
+//     base: x => Math.cos(x),
+//     eqBase: 'cos(x)',
+//     bodyOf: i => `cos(${i})`,
+//     baseDomain: { kind: 'R' },
+//   },
+//   absolute: {
+//     name: 'Absolute',
+//     group: 'Unrestricted (ℝ)',
+//     glyph: 'M2,4 L13,24 L24,4',
+//     base: x => Math.abs(x),
+//     eqBase: '|x|',
+//     bodyOf: i => `|${i}|`,
+//     baseDomain: { kind: 'R' },
+//   },
+
+//   logarithmic: {
+//     name: 'Logarithmic',
+//     group: 'Restricted',
+//     glyph: 'M2,2 Q10,26 24,26',
+//     base: x => (x > 0 ? Math.log(x) : NaN),
+//     eqBase: 'ln(x)',
+//     bodyOf: i => `ln(${i})`,
+//     baseDomain: { kind: 'open-half', dir: 'gt', val: 0 },
+//   },
+//   sqrt: {
+//     name: 'Square root',
+//     group: 'Restricted',
+//     glyph: 'M2,24 Q4,8 24,4',
+//     base: x => (x >= 0 ? Math.sqrt(x) : NaN),
+//     eqBase: '√x',
+//     bodyOf: i => `√(${i})`,
+//     baseDomain: { kind: 'closed-half', dir: 'gte', val: 0 },
+//   },
+//   reciprocal: {
+//     name: 'Reciprocal',
+//     group: 'Restricted',
+//     glyph: 'M2,4 Q11,4 13,14 M15,14 Q17,26 24,26',
+//     base: x => (x === 0 ? NaN : 1 / x),
+//     eqBase: '1/x',
+//     bodyOf: i => `1/(${i})`,
+//     baseDomain: { kind: 'excluded', val: 0 },
+//   },
+// };
+
+// const DEFAULT_FAMILIES = FAMILIES;
+
+
+// /* ================================================================
+//    EQUATION BUILDER (same shape as Inverse / Transformations)
+//    ================================================================ */
+
+// function buildForwardEq(fam, p) {
+//   const { a, b, h, k } = p;
+//   let inner = 'x';
+//   if (h !== 0) inner = `x ${h >= 0 ? '−' : '+'} ${fmt(Math.abs(h))}`;
+//   if (b !== 1) inner = h !== 0 ? `${fmt(b)}(${inner})` : `${fmt(b)}x`;
+//   let body = fam.bodyOf(inner);
+//   let out;
+//   if (a === -1) out = `−${body}`;
+//   else if (a !== 1) out = `${fmt(a)}·${body}`;
+//   else out = body;
+//   if (k !== 0) out += ` ${k >= 0 ? '+' : '−'} ${fmt(Math.abs(k))}`;
+//   return out;
+// }
+
+
+// /* ================================================================
+//    DOMAIN TRANSFORM + STRING + MEMBERSHIP
+//    ================================================================ */
+
+// function transformDomain(base, b, h) {
+//   if (!base) return { kind: 'R' };
+//   if (b === 0) return { kind: 'point', val: h };
+//   if (base.kind === 'R') return { kind: 'R' };
+//   if (base.kind === 'open-half') {
+//     const dir = b > 0 ? base.dir : (base.dir === 'gt' ? 'lt' : 'gt');
+//     return { kind: 'open-half', dir, val: h + base.val / b };
+//   }
+//   if (base.kind === 'closed-half') {
+//     const dir = b > 0 ? base.dir : (base.dir === 'gte' ? 'lte' : 'gte');
+//     return { kind: 'closed-half', dir, val: h + base.val / b };
+//   }
+//   if (base.kind === 'excluded') {
+//     return { kind: 'excluded', val: h + base.val / b };
+//   }
+//   if (base.kind === 'closed') {
+//     const lo = h + base.lo / b;
+//     const hi = h + base.hi / b;
+//     return { kind: 'closed', lo: Math.min(lo, hi), hi: Math.max(lo, hi) };
+//   }
+//   return base;
+// }
+
+// function domainToString(d, v = 'x') {
+//   if (!d) return '—';
+//   if (d.kind === 'R') return `all real ${v}`;
+//   if (d.kind === 'point') return `${v} = ${fmt(d.val)}`;
+//   if (d.kind === 'open-half') {
+//     const sym = d.dir === 'gt' ? '>' : '<';
+//     return `${v} ${sym} ${fmt(d.val)}`;
+//   }
+//   if (d.kind === 'closed-half') {
+//     const sym = d.dir === 'gte' ? '≥' : '≤';
+//     return `${v} ${sym} ${fmt(d.val)}`;
+//   }
+//   if (d.kind === 'excluded') return `${v} ≠ ${fmt(d.val)}`;
+//   if (d.kind === 'closed') return `${fmt(d.lo)} ≤ ${v} ≤ ${fmt(d.hi)}`;
+//   return '?';
+// }
+
+// function inDomain(d, x) {
+//   if (!d) return true;
+//   switch (d.kind) {
+//     case 'R':            return true;
+//     case 'point':        return x === d.val;
+//     case 'open-half':    return d.dir === 'gt' ? x > d.val : x < d.val;
+//     case 'closed-half':  return d.dir === 'gte' ? x >= d.val : x <= d.val;
+//     case 'excluded':     return x !== d.val;
+//     case 'closed':       return x >= d.lo && x <= d.hi;
+//     default:             return true;
+//   }
+// }
+
+
+// /* ================================================================
+//    DOMAIN  →  xAxisHighlights[]   (the v3 adapter)
+//    ----------------------------------------------------------------
+//    Convert the {kind, ...} domain shape into the core's
+//    `xAxisHighlights` prop. Mostly a one-liner per case.
+//    ================================================================ */
+
+// function domainToHighlights(d, color) {
+//   if (!d) return [];
+//   const c = color;
+//   switch (d.kind) {
+//     case 'R':
+//       return [{ from: -Infinity, to: Infinity, color: c, placement: 'on-axis' }];
+
+//     case 'open-half': {
+//       if (d.dir === 'gt') return [{ from: d.val, to:  Infinity, fromKind: 'open', color: c, placement: 'on-axis' }];
+//       return                 [{ from: -Infinity, to: d.val,    toKind:   'open', color: c, placement: 'on-axis' }];
+//     }
+
+//     case 'closed-half': {
+//       if (d.dir === 'gte') return [{ from: d.val, to:  Infinity, fromKind: 'closed', color: c, placement: 'on-axis' }];
+//       return                   [{ from: -Infinity, to: d.val,    toKind:   'closed', color: c, placement: 'on-axis' }];
+//     }
+
+//     case 'excluded':
+//       return [
+//         { from: -Infinity, to: d.val,    toKind:   'open', color: c, placement: 'on-axis' },
+//         { from: d.val,     to: Infinity, fromKind: 'open', color: c, placement: 'on-axis' },
+//       ];
+
+//     case 'closed':
+//       return [{
+//         from: d.lo, to: d.hi,
+//         fromKind: 'closed', toKind: 'closed',
+//         color: c, placement: 'on-axis',
+//       }];
+
+//     case 'point':
+//       // Degenerate: zero-length highlight; two closed markers overlap → looks like one dot.
+//       return [{
+//         from: d.val, to: d.val,
+//         fromKind: 'closed', toKind: 'closed',
+//         color: c, placement: 'on-axis',
+//       }];
+
+//     default:
+//       return [];
+//   }
+// }
+
+
+// /* ================================================================
+//    DOMAIN BAR — 1D number line showing the domain interval
+//    (unchanged from v2)
+//    ================================================================ */
+
+// function DomainBar({ domain, testX, darkMode, xMin = -10, xMax = 10 }) {
+//   const W = 1000, H = 86;
+//   const cy = 36;                    // axis y
+//   const toX = v => ((v - xMin) / (xMax - xMin)) * W;
+//   const clampX = x => Math.max(0, Math.min(W, x));
+
+//   const inDom = inDomain(domain, testX);
+
+//   // Build fill segments + endpoint markers
+//   // Each segment: { x1, x2, leftBoundary, rightBoundary }
+//   //   boundary: { type: 'open' | 'closed' | 'arrow', x: pixel-x }
+//   const segments = [];
+
+//   switch (domain.kind) {
+//     case 'R':
+//       segments.push({
+//         x1: 0, x2: W,
+//         leftBoundary:  { type: 'arrow', x: 0 },
+//         rightBoundary: { type: 'arrow', x: W },
+//       });
+//       break;
+//     case 'open-half':
+//     case 'closed-half': {
+//       const valX = toX(domain.val);
+//       const isOpen = domain.kind === 'open-half';
+//       const isGreater = domain.dir === 'gt' || domain.dir === 'gte';
+//       if (isGreater) {
+//         if (valX < W) segments.push({
+//           x1: clampX(valX), x2: W,
+//           leftBoundary:  { type: isOpen ? 'open' : 'closed', x: valX, withinView: valX >= 0 && valX <= W },
+//           rightBoundary: { type: 'arrow', x: W },
+//         });
+//       } else {
+//         if (valX > 0) segments.push({
+//           x1: 0, x2: clampX(valX),
+//           leftBoundary:  { type: 'arrow', x: 0 },
+//           rightBoundary: { type: isOpen ? 'open' : 'closed', x: valX, withinView: valX >= 0 && valX <= W },
+//         });
+//       }
+//       break;
+//     }
+//     case 'excluded': {
+//       const valX = toX(domain.val);
+//       if (valX > 0) segments.push({
+//         x1: 0, x2: clampX(valX),
+//         leftBoundary:  { type: 'arrow', x: 0 },
+//         rightBoundary: { type: 'open',  x: valX, withinView: valX >= 0 && valX <= W },
+//       });
+//       if (valX < W) segments.push({
+//         x1: clampX(valX), x2: W,
+//         leftBoundary:  { type: 'open',  x: valX, withinView: valX >= 0 && valX <= W },
+//         rightBoundary: { type: 'arrow', x: W },
+//       });
+//       break;
+//     }
+//     case 'closed': {
+//       const x1 = toX(domain.lo), x2 = toX(domain.hi);
+//       segments.push({
+//         x1: clampX(x1), x2: clampX(x2),
+//         leftBoundary:  { type: 'closed', x: x1, withinView: x1 >= 0 && x1 <= W },
+//         rightBoundary: { type: 'closed', x: x2, withinView: x2 >= 0 && x2 <= W },
+//       });
+//       break;
+//     }
+//     case 'point':
+//     default:
+//       break;
+//   }
+
+//   const axisColor   = darkMode ? '#475569' : '#94a3b8';
+//   const tickColor   = darkMode ? '#64748b' : '#94a3b8';
+//   const labelColor  = darkMode ? '#cbd5e1' : '#475569';
+//   const fill        = COL.inDomain;
+//   const markerColor = inDom ? COL.inDomain : COL.outside;
+
+//   const renderEndpoint = (b, side) => {
+//     if (!b) return null;
+//     if (b.type === 'arrow') {
+//       // arrowhead pointing outward
+//       const dir = side === 'left' ? -1 : 1;
+//       const tipX = side === 'left' ? 2 : W - 2;
+//       const baseX = tipX - dir * 8;
+//       return (
+//         <polygon
+//           points={`${tipX},${cy} ${baseX},${cy - 6} ${baseX},${cy + 6}`}
+//           fill={fill}
+//           opacity={0.85}
+//         />
+//       );
+//     }
+//     if (!b.withinView) return null;
+//     if (b.type === 'closed') {
+//       return (
+//         <circle cx={b.x} cy={cy} r={6}
+//                 fill={fill} stroke={darkMode ? '#0f172a' : '#fff'} strokeWidth={2} />
+//       );
+//     }
+//     if (b.type === 'open') {
+//       return (
+//         <circle cx={b.x} cy={cy} r={6}
+//                 fill={darkMode ? '#0f172a' : '#fff'}
+//                 stroke={fill} strokeWidth={2} />
+//       );
+//     }
+//     return null;
+//   };
+
+//   const testInView = toX(testX) >= 0 && toX(testX) <= W;
+
+//   return (
+//     <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none"
+//          style={{ width: '100%', height: H, display: 'block' }}>
+//       {/* baseline */}
+//       <line x1={0} y1={cy} x2={W} y2={cy} stroke={axisColor} strokeWidth={1.5} />
+
+//       {/* tick marks + integer labels */}
+//       {Array.from({ length: xMax - xMin + 1 }, (_, i) => xMin + i).map(v => {
+//         const x = toX(v);
+//         const isMajor = v % 2 === 0;
+//         return (
+//           <g key={v}>
+//             <line
+//               x1={x} y1={cy - (isMajor ? 6 : 3)}
+//               x2={x} y2={cy + (isMajor ? 6 : 3)}
+//               stroke={tickColor} strokeWidth={1}
+//             />
+//             {isMajor && (
+//               <text x={x} y={H - 4} fontSize="11" fill={labelColor}
+//                     textAnchor="middle"
+//                     fontFamily='ui-monospace, "SF Mono", Menlo, monospace'>
+//                 {v}
+//               </text>
+//             )}
+//           </g>
+//         );
+//       })}
+
+//       {/* domain fill band (under the boundary markers) */}
+//       {segments.map((seg, i) => (
+//         <rect key={i}
+//               x={seg.x1} y={cy - 11}
+//               width={Math.max(0, seg.x2 - seg.x1)} height={22}
+//               fill={fill} fillOpacity={0.22} />
+//       ))}
+
+//       {/* boundary endpoints + arrows */}
+//       {segments.map((seg, i) => (
+//         <g key={`b-${i}`}>
+//           {renderEndpoint(seg.leftBoundary,  'left')}
+//           {renderEndpoint(seg.rightBoundary, 'right')}
+//         </g>
+//       ))}
+
+//       {/* excluded-point cross (when domain.kind === 'excluded') */}
+//       {domain.kind === 'excluded' && (() => {
+//         const xv = toX(domain.val);
+//         if (xv < 0 || xv > W) return null;
+//         return (
+//           <g>
+//             <line x1={xv - 5} y1={cy - 5} x2={xv + 5} y2={cy + 5}
+//                   stroke={COL.outside} strokeWidth={2} />
+//             <line x1={xv - 5} y1={cy + 5} x2={xv + 5} y2={cy - 5}
+//                   stroke={COL.outside} strokeWidth={2} />
+//           </g>
+//         );
+//       })()}
+
+//       {/* test point marker */}
+//       {testInView && (
+//         <g>
+//           <line x1={toX(testX)} y1={cy - 18} x2={toX(testX)} y2={cy + 18}
+//                 stroke={markerColor} strokeWidth={2} />
+//           <circle cx={toX(testX)} cy={cy} r={7}
+//                   fill={markerColor}
+//                   stroke={darkMode ? '#0f172a' : '#fff'} strokeWidth={2.5} />
+//         </g>
+//       )}
+//     </svg>
+//   );
+// }
+
+
+// /* ================================================================
+//    PICKER GROUPING
+//    ================================================================ */
+
+// function buildPickerEntries(families) {
+//   const out = [];
+//   let lastGroup;
+//   Object.entries(families).forEach(([key, f]) => {
+//     if (f.group && f.group !== lastGroup) {
+//       out.push({ type: 'header', label: f.group, key: `__hdr_${f.group}` });
+//       lastGroup = f.group;
+//     } else if (!f.group) {
+//       lastGroup = undefined;
+//     }
+//     out.push({ type: 'item', key, fam: f });
+//   });
+//   return out;
+// }
+
+
+// /* ================================================================
+//    GLYPH
+//    ================================================================ */
+
+// function FamilyGlyph({ d, active, darkMode }) {
+//   return (
+//     <svg width="22" height="22" viewBox="0 0 26 28" aria-hidden="true">
+//       <path d={d} fill="none"
+//             stroke={active ? COL.f : (darkMode ? '#64748b' : '#94a3b8')}
+//             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+//     </svg>
+//   );
+// }
+
+
+// /* ================================================================
+//    MAIN
+//    ================================================================ */
+
+// export default function FunctionDomain({
+//   initialFamily = 'logarithmic',
+//   families = DEFAULT_FAMILIES,
+//   visualizerProps = {},
+//   infoPanelProps = {},
+//   darkMode = false,
+//   showPicker = true,
+//   showSliders = true,
+//   showInfoPanel = true,
+//   showColorPicker = true,
+//   defaultHighlightColor = '#f59e0b',
+//   maxWidth = '80vw',
+// }) {
+//   const familyKeys = Object.keys(families);
+//   const startKey = families[initialFamily] ? initialFamily : familyKeys[0];
+
+//   const [current, setCurrent] = useState(startKey);
+//   const [params, setParams] = useState({ ...DEFAULT_PARAMS });
+//   const [highlightColor, setHighlightColor] = useState(defaultHighlightColor);
+
+//   const fam = families[current] || families[familyKeys[0]];
+
+//   const { a, b, h, k, tx } = params;
+
+//   /* Parameterized function */
+//   const forwardFn = useMemo(() => {
+//     if (a === 0 || b === 0) return () => NaN;
+//     return x => a * fam.base(b * (x - h)) + k;
+//   }, [fam, a, b, h, k]);
+
+//   /* Domain of g under current parameters */
+//   const gDomain = useMemo(() => transformDomain(fam.baseDomain, b, h), [fam, b, h]);
+//   const domainStr = useMemo(() => domainToString(gDomain, 'x'), [gDomain]);
+//   const txInDomain = inDomain(gDomain, tx);
+//   const fAtTx = txInDomain ? forwardFn(tx) : NaN;
+
+//   const forwardEq = useMemo(() => buildForwardEq(fam, params), [fam, params]);
+
+//   const functions = useMemo(() => ([
+//     {
+//       fn: forwardFn,
+//       color: COL.f,
+//       label: 'g',
+//       formula: `g(x) = ${forwardEq}`,
+//       visible: true,
+//       stroke: 2.25,
+//     },
+//   ]), [forwardFn, forwardEq]);
+
+//   /* ---- NEW: derive axis highlights and test-point reference line ---- */
+
+//   const xAxisHighlights = useMemo(
+//     () => domainToHighlights(gDomain, highlightColor),
+//     [gDomain, highlightColor]
+//   );
+
+//   const verticalLines = useMemo(() => ([{
+//     x: tx,
+//     color: txInDomain ? highlightColor : COL.outside,
+//     stroke: 1.5,
+//     pattern: [4, 4],
+//   }]), [tx, txInDomain, highlightColor]);
+
+//   /* ---- InfoPanel content ---- */
+//   const explanationContent = useMemo(() => {
+//     return (
+//       `## ${fam.name} — domain\n\n` +
+//       `**Base function** · $f(x) = ${fam.eqBase}$\n\n` +
+//       `**Base domain** · ${domainToString(fam.baseDomain, 'x')}\n\n` +
+//       `**With parameters** · $g(x) = ${forwardEq}$\n\n` +
+//       `**Current domain** · ${domainStr}\n\n` +
+//       `### How parameters affect the domain\n\n` +
+//       `Only **b** and **h** can change the domain. They transform the input to the base function:\n\n` +
+//       `- $h$ — shifts the domain boundary along the x-axis by the same amount\n` +
+//       `- $b$ — scales the domain boundary by $1/b$; if $b < 0$, the inequality direction flips\n\n` +
+//       `**a** and **k** transform the output — they shift and scale what comes *out* of the function, not where it accepts input. Move them and the domain stays put.`
+//     );
+//   }, [fam, params, forwardEq, domainStr]);
+
+//   const conceptsContent =
+//     '## What is the domain?\n\n' +
+//     'The **domain** of a function is the set of inputs where it is defined. Some functions accept every real number (polynomials, sine, cosine, $e^x$). Others come with restrictions baked in:\n\n' +
+//     '- $\\ln(x)$ — only defined for $x > 0$\n' +
+//     '- $\\sqrt{x}$ — only defined for $x \\geq 0$\n' +
+//     '- $1/x$ — defined everywhere except $x = 0$\n\n' +
+//     'On the number line below the graph, the green band shows where the function accepts an input. Drag the test point to probe a specific value — green dot means **in domain**, red means **outside**.\n\n' +
+//     '### Half-line endpoints: open vs closed\n\n' +
+//     'A **closed** endpoint (filled circle) means the boundary value is included. $\\sqrt{x}$ at $x = 0$: yes, $\\sqrt{0} = 0$, so $x = 0$ is in the domain. Closed.\n\n' +
+//     'An **open** endpoint (hollow circle) means the boundary is excluded. $\\ln(x)$ at $x = 0$: $\\ln(0)$ is undefined (limit is $-\\infty$), so $x = 0$ is *not* in the domain. Open.\n\n' +
+//     '### Excluded points\n\n' +
+//     'Some functions are defined everywhere except a single value — like $1/x$ at $x = 0$. The bar is filled everywhere except for an open hole at the excluded point, marked with a small red ×.\n\n' +
+//     '### Why a and k don\'t matter\n\n' +
+//     'Think about the formula $g(x) = a \\cdot f(b(x - h)) + k$. The input that reaches the inner $f$ is $b(x - h)$ — only $b$ and $h$ appear there. After $f$ produces its output, $a$ and $k$ scale and shift it, but by that point the question "is this input legal?" has already been answered. Multiplying or shifting the *output* can\'t make a forbidden input suddenly legal.';
+
+//   const infoTabs = useMemo(() => ([
+//     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },
+//     { key: 'concepts',    label: 'Concepts',    order: 10, content: conceptsContent },
+//   ]), [explanationContent]);
+
+//   /* ---- Styling ---- */
+//   const fontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';
+//   const monoStack = 'ui-monospace, "SF Mono", Menlo, monospace';
+//   const panelShadow = '0 1px 3px rgba(15,23,42,0.05), 0 8px 24px rgba(15,23,42,0.05)';
+//   const card = {
+//     background: darkMode ? '#0f172a' : '#fff',
+//     border: `1px solid ${darkMode ? '#1e293b' : '#f1f5f9'}`,
+//     borderRadius: 12,
+//     boxShadow: panelShadow,
+//   };
+//   const c = {
+//     ink: darkMode ? '#e2e8f0' : '#0f172a',
+//     inkSoft: darkMode ? '#cbd5e1' : '#334155',
+//     muted: darkMode ? '#64748b' : '#94a3b8',
+//     soft: darkMode ? '#1e293b' : '#f8fafc',
+//     softer: darkMode ? '#0f172a' : '#f1f5f9',
+//     border: darkMode ? '#334155' : '#e2e8f0',
+//     borderSoft: darkMode ? '#1e293b' : '#f1f5f9',
+//     accentSoft: darkMode ? '#1e293b' : '#eff6ff',
+//     accentBorder: darkMode ? '#334155' : '#dbeafe',
+//     accentText: darkMode ? '#dbeafe' : '#1e3a8a',
+//     okSoft: darkMode ? '#064e3b' : '#d1fae5',
+//     okText: darkMode ? '#6ee7b7' : '#065f46',
+//     badSoft: darkMode ? '#7f1d1d' : '#fee2e2',
+//     badText: darkMode ? '#fca5a5' : '#991b1b',
+//   };
+
+//   const famBtn = active => ({
+//     display: 'flex', alignItems: 'center', gap: 10, width: '100%', textAlign: 'left',
+//     border: '1px solid transparent',
+//     background: active ? c.accentSoft : 'none',
+//     borderColor: active ? c.accentBorder : 'transparent',
+//     borderRadius: 8, padding: '9px 10px', cursor: 'pointer', fontFamily: 'inherit',
+//     fontSize: 13, fontWeight: active ? 600 : 400,
+//     color: active ? c.accentText : c.inkSoft,
+//     transition: 'background 0.12s, border-color 0.12s',
+//   });
+
+//   const sectionTitle = {
+//     fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.06em',
+//     color: c.muted, fontWeight: 600, margin: '10px 8px 4px',
+//   };
+
+//   const mergedVisualizerProps = {
+//     defaultWidth: 880,
+//     defaultHeight: 460,
+//     ...visualizerProps,
+//   };
+
+//   const pickerEntries = buildPickerEntries(families);
+
+//   const selectFamily = (key) => {
+//     setCurrent(key);
+//     setParams({ ...DEFAULT_PARAMS });
+//   };
+
+//   const setParam = (k, v) => setParams(prev => ({ ...prev, [k]: v }));
+//   const resetParams = () => setParams({ ...DEFAULT_PARAMS });
+//   const resetTestX  = () => setParam('tx', DEFAULT_PARAMS.tx);
+
+//   const Chip = ({ k, valueOverride, accent, dim }) => {
+//     const value = valueOverride !== undefined ? valueOverride : params[k];
+//     const def = PARAM_DEFS[k];
+//     const active = def ? value !== def.def : true;
+//     const isDomainParam = DOMAIN_PARAMS.includes(k);
+//     const tone = accent || (isDomainParam ? COL.inDomain : (active ? COL.f : c.muted));
+//     return (
+//       <span style={{
+//         fontFamily: monoStack, fontSize: 11,
+//         padding: '3px 9px', borderRadius: 5,
+//         display: 'inline-flex', alignItems: 'center', gap: 5,
+//         color: active ? c.accentText : c.muted,
+//         background: active ? c.accentSoft : 'transparent',
+//         border: `1px solid ${active ? c.accentBorder : c.borderSoft}`,
+//         fontWeight: active ? 600 : 400,
+//         opacity: dim && !isDomainParam ? 0.55 : 1,
+//       }}>
+//         <span style={{ fontWeight: 600, color: tone }}>{k}</span>
+//         <span>=</span>
+//         <span>{fmt(value)}</span>
+//       </span>
+//     );
+//   };
+
+//   const renderSlider = (key) => {
+//     const def = PARAM_DEFS[key];
+//     const isDomainParam = DOMAIN_PARAMS.includes(key);
+//     const accent = isDomainParam ? COL.inDomain : COL.f;
+//     return (
+//       <div key={key}>
+//         <label style={{
+//           display: 'flex', justifyContent: 'space-between', fontSize: 12,
+//           color: c.inkSoft, marginBottom: 4, fontVariantNumeric: 'tabular-nums',
+//         }}>
+//           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+//             {def.label}
+//             {isDomainParam && (
+//               <span style={{
+//                 fontSize: 9, fontWeight: 700,
+//                 color: COL.inDomain, background: c.okSoft,
+//                 padding: '1px 5px', borderRadius: 3,
+//                 textTransform: 'uppercase', letterSpacing: '0.05em',
+//               }}>affects domain</span>
+//             )}
+//           </span>
+//           <span style={{ fontFamily: monoStack, color: accent, fontWeight: 600 }}>
+//             {fmt(params[key])}
+//           </span>
+//         </label>
+//         <input
+//           type="range" min={def.min} max={def.max} step={def.step}
+//           value={params[key]}
+//           onChange={e => setParam(key, parseFloat(e.target.value))}
+//           style={{ width: '100%', accentColor: accent, cursor: 'pointer' }}
+//         />
+//       </div>
+//     );
+//   };
+
+//   return (
+//     <div style={{
+//       width: '100%',
+//       background: darkMode ? '#020617' : '#f6f7f9',
+//       minHeight: '100vh',
+//       fontFamily: fontStack,
+//       display: 'flex',
+//       justifyContent: 'center',
+//       padding: '20px 0',
+//       boxSizing: 'border-box',
+//     }}>
+//       <div style={{
+//         width: '100%',
+//         maxWidth,
+//         display: 'flex',
+//         gap: 16,
+//         padding: '0 16px',
+//         alignItems: 'flex-start',
+//         boxSizing: 'border-box',
+//       }}>
+
+//         {showPicker && (
+//           <nav style={{ ...card, width: 220, padding: 10, flexShrink: 0 }}>
+//             <div style={{ ...sectionTitle, margin: '6px 8px 10px' }}>Function</div>
+//             {pickerEntries.map(e =>
+//               e.type === 'header'
+//                 ? <div key={e.key} style={sectionTitle}>{e.label}</div>
+//                 : (
+//                   <button
+//                     key={e.key}
+//                     style={famBtn(e.key === current)}
+//                     onClick={() => selectFamily(e.key)}
+//                   >
+//                     <FamilyGlyph d={e.fam.glyph} active={e.key === current} darkMode={darkMode} />
+//                     <span>{e.fam.name}</span>
+//                   </button>
+//                 )
+//             )}
+
+//             {showSliders && (
+//               <div style={{
+//                 marginTop: 12,
+//                 paddingTop: 12,
+//                 borderTop: `1px solid ${c.borderSoft}`,
+//               }}>
+//                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '0 4px 8px' }}>
+//                   <div style={{
+//                     fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.06em',
+//                     color: c.muted, fontWeight: 600,
+//                   }}>Parameters</div>
+//                   <button onClick={resetParams} style={{
+//                     background: darkMode ? '#0f172a' : '#fff',
+//                     border: `1px solid ${c.border}`, color: c.inkSoft,
+//                     padding: '3px 8px', borderRadius: 5,
+//                     fontFamily: 'inherit', fontSize: 10.5, cursor: 'pointer',
+//                   }}>Reset</button>
+//                 </div>
+//                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: '0 4px' }}>
+//                   {['a', 'k', 'b', 'h'].map(renderSlider)}
+//                 </div>
+//               </div>
+//             )}
+
+//             {showColorPicker && (
+//               <div style={{
+//                 marginTop: 12,
+//                 paddingTop: 12,
+//                 borderTop: `1px solid ${c.borderSoft}`,
+//               }}>
+//                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '0 4px 8px' }}>
+//                   <div style={{
+//                     fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.06em',
+//                     color: c.muted, fontWeight: 600,
+//                   }}>Appearance</div>
+//                   <button onClick={() => setHighlightColor(defaultHighlightColor)} style={{
+//                     background: darkMode ? '#0f172a' : '#fff',
+//                     border: `1px solid ${c.border}`, color: c.inkSoft,
+//                     padding: '3px 8px', borderRadius: 5,
+//                     fontFamily: 'inherit', fontSize: 10.5, cursor: 'pointer',
+//                   }}>Reset</button>
+//                 </div>
+//                 <label style={{
+//                   display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+//                   gap: 10, padding: '0 4px',
+//                   fontSize: 12, color: c.inkSoft,
+//                 }}>
+//                   <span>Domain color</span>
+//                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+//                     <span style={{
+//                       fontFamily: monoStack, fontSize: 11,
+//                       color: c.inkSoft,
+//                       fontVariantNumeric: 'tabular-nums',
+//                     }}>{highlightColor}</span>
+//                     <input
+//                       type="color"
+//                       value={highlightColor}
+//                       onChange={e => setHighlightColor(e.target.value)}
+//                       style={{
+//                         width: 28, height: 24,
+//                         border: `1px solid ${c.border}`,
+//                         borderRadius: 4, background: 'none',
+//                         cursor: 'pointer', padding: 0,
+//                       }}
+//                     />
+//                   </span>
+//                 </label>
+//               </div>
+//             )}
+//           </nav>
+//         )}
+
+//         <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
+//           <div style={{ ...card, padding: 16 }}>
+
+//             <div style={{
+//               display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+//               marginBottom: 12, flexWrap: 'wrap', gap: 8,
+//             }}>
+//               <span style={{ fontSize: 15, letterSpacing: '-0.01em', color: c.ink }}>
+//                 {fam.name}
+//               </span>
+//               <span style={{
+//                 fontFamily: monoStack, fontSize: 11.5,
+//                 padding: '3px 8px', borderRadius: 5,
+//                 color: COL.f, background: c.softer,
+//                 display: 'inline-flex', alignItems: 'center', gap: 6,
+//               }}>
+//                 <span style={{ width: 8, height: 8, borderRadius: '50%', background: COL.f }} />
+//                 g(x) = {forwardEq}
+//               </span>
+//             </div>
+
+//             {/* The overlay is gone — the domain is now drawn directly on the
+//                 x-axis inside the visualizer's coordinate system via xAxisHighlights. */}
+//             <VisualizerWithControls
+//               functions={functions}
+//               zoom={10}
+//               showAxisLabels
+//               showCrosshair
+//               showCurveTooltip
+//               labelMode="legend"
+//               xAxisHighlights={xAxisHighlights}
+//               verticalLines={verticalLines}
+//               {...mergedVisualizerProps}
+//             />
+
+//             {/* ---- DOMAIN BAR + TEST POINT + RESULT — the centerpiece ---- */}
+//             <div style={{
+//               marginTop: 12,
+//               background: c.okSoft,
+//               border: `1px solid ${darkMode ? '#065f46' : '#a7f3d0'}`,
+//               borderLeft: `4px solid ${COL.inDomain}`,
+//               borderRadius: 8,
+//               padding: '14px 16px',
+//             }}>
+//               <div style={{
+//                 display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+//                 gap: 12, marginBottom: 10,
+//               }}>
+//                 <span style={{
+//                   fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.08em',
+//                   color: c.okText, fontWeight: 700,
+//                 }}>
+//                   Domain
+//                 </span>
+//                 <span style={{
+//                   fontFamily: monoStack, fontSize: 14,
+//                   color: c.ink, fontWeight: 700,
+//                 }}>
+//                   {domainStr}
+//                 </span>
+//               </div>
+
+//               <DomainBar domain={gDomain} testX={tx} darkMode={darkMode} />
+
+//               {/* Test point slider + result */}
+//               <div style={{
+//                 marginTop: 10,
+//                 padding: '10px 12px',
+//                 background: darkMode ? '#0f172a' : '#fff',
+//                 border: `1px solid ${darkMode ? '#1e293b' : '#d1fae5'}`,
+//                 borderRadius: 6,
+//               }}>
+//                 <div style={{
+//                   display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+//                   gap: 12, marginBottom: 6,
+//                 }}>
+//                   <span style={{
+//                     fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.06em',
+//                     color: c.muted, fontWeight: 600,
+//                   }}>Test point</span>
+//                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+//                     <span style={{
+//                       fontFamily: monoStack, fontSize: 14,
+//                       color: c.ink, fontWeight: 700,
+//                       fontVariantNumeric: 'tabular-nums',
+//                     }}>
+//                       x = {fmt(tx)}
+//                     </span>
+//                     <button onClick={resetTestX} style={{
+//                       background: darkMode ? '#0f172a' : '#fff',
+//                       border: `1px solid ${c.border}`, color: c.inkSoft,
+//                       padding: '2px 8px', borderRadius: 5,
+//                       fontFamily: 'inherit', fontSize: 10, cursor: 'pointer',
+//                     }}>Reset</button>
+//                   </div>
+//                 </div>
+//                 <input
+//                   type="range"
+//                   min={PARAM_DEFS.tx.min}
+//                   max={PARAM_DEFS.tx.max}
+//                   step={PARAM_DEFS.tx.step}
+//                   value={tx}
+//                   onChange={e => setParam('tx', parseFloat(e.target.value))}
+//                   style={{
+//                     width: '100%',
+//                     accentColor: txInDomain ? COL.inDomain : COL.outside,
+//                     cursor: 'pointer',
+//                   }}
+//                 />
+//                 <div style={{
+//                   marginTop: 8,
+//                   display: 'flex', alignItems: 'center', gap: 10,
+//                   fontFamily: monoStack, fontSize: 12,
+//                 }}>
+//                   <span style={{
+//                     padding: '3px 9px', borderRadius: 4,
+//                     fontWeight: 700, fontSize: 11,
+//                     color: txInDomain ? c.okText : c.badText,
+//                     background: txInDomain ? c.okSoft : c.badSoft,
+//                   }}>
+//                     {txInDomain ? '✓ in domain' : '✗ outside domain'}
+//                   </span>
+//                   <span style={{ color: c.inkSoft }}>
+//                     {txInDomain
+//                       ? `g(${fmt(tx)}) = ${fmt(fAtTx)}`
+//                       : `g(${fmt(tx)}) is undefined`}
+//                   </span>
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* ---- APPLIED CHIPS — domain-relevant ones highlighted ---- */}
+//             <div style={{
+//               display: 'flex', gap: 6, flexWrap: 'wrap',
+//               marginTop: 12, padding: '8px 10px',
+//               background: c.soft, border: `1px solid ${c.borderSoft}`,
+//               borderRadius: 8, alignItems: 'center',
+//             }}>
+//               <span style={{
+//                 fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.06em',
+//                 color: c.muted, fontWeight: 600, marginRight: 4,
+//               }}>Applied</span>
+//               {['a', 'k', 'b', 'h'].map(k => <Chip key={k} k={k} dim />)}
+//               <span style={{ width: 1, height: 16, background: c.border, margin: '0 2px' }} />
+//               <span style={{
+//                 fontSize: 9.5, textTransform: 'uppercase', letterSpacing: '0.05em',
+//                 color: COL.inDomain, fontWeight: 700,
+//                 background: c.okSoft, padding: '2px 6px', borderRadius: 3,
+//               }}>b, h affect domain</span>
+//             </div>
+//           </div>
+//         </div>
+
+//         {showInfoPanel && (
+//           <aside style={{ ...card, width: 360, padding: 16, flexShrink: 0 }}>
+//             <InfoPanel
+//               tabs={infoTabs}
+//               darkMode={darkMode}
+//               {...infoPanelProps}
+//             />
+//           </aside>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+
+/**
+ * FunctionDomain — v5
+ *
+ * Changes from v4:
+ *   - The Domain panel chrome (card bg/border, header text, status
+ *     pill, slider accents, "affects domain" badges, DomainBar fill
+ *     and markers, test-point dot) all now follow the highlight
+ *     color. Outside-domain red is unchanged. Pick amber → the
+ *     whole panel is amber-toned; pick teal → teal-toned. The
+ *     panel and the on-axis highlight read as one coordinated
+ *     visual.
+ *
+ * Changes from v3:
+ *   - Default axis-highlight color is amber (#f59e0b).
+ *   - Color picker in the sidebar.
+ *
+ * Changes from v2:
+ *   - Migrated from FunctionVisualizerCoreImproved to
+ *     FunctionVisualizerCorePro. The domain is now highlighted
+ *     directly on the x-axis itself via the new core's
+ *     `xAxisHighlights` prop. No more absolute-positioned overlay,
+ *     no more `plotPadding` prop — the highlight lives inside the
+ *     canvas coordinate system, so panning and zooming behave
+ *     correctly.
+ *   - The test point gets a dashed vertical reference line drawn
+ *     on the graph (in-domain → highlight color, outside → red),
+ *     via the new `verticalLines` prop. The 1D DomainBar below
+ *     the graph still shows the test point too — that bar is the
+ *     canonical 1D representation and remains untouched.
+ *
+ * Everything else — FAMILIES, transformDomain, DomainBar, picker,
+ * sliders, info panel content, layout, styling — is unchanged
+ * from v2.
+ *
+ * PROPS (all optional)
+ *   initialFamily         : string
+ *   families              : object        — override built-in FAMILIES
+ *   visualizerProps       : object        — forwarded to VisualizerWithControls
+ *   infoPanelProps        : object        — forwarded to InfoPanel
+ *   darkMode              : boolean
+ *   showPicker            : boolean
+ *   showSliders           : boolean
+ *   showInfoPanel         : boolean
+ *   showColorPicker       : boolean       — default true
+ *   defaultHighlightColor : string        — default '#f59e0b'
+ *   maxWidth              : string|number — wrapper cap; default '80vw'
+ *
+ * RULES OBSERVED:
+ *   - Never put $...$ inside **...**.
+ *   - <style> blocks use dangerouslySetInnerHTML.
+ *   - Modest canvas height; chip strips stay above the fold.
+ */
+
+import React, { useState, useMemo } from 'react';
+import { VisualizerWithControls } from '../FunctionVisualizerCorePro';
+import InfoPanel from '../InfoPanel';
+
+
+/* ================================================================
+   COLORS
+   ================================================================ */
+
+const COL = {
+  f:        '#3b82f6', // function curve
+  inDomain: '#10b981', // green — valid territory
+  outside:  '#ef4444', // red — outside domain
+};
+
+
+/* ================================================================
+   FORMATTING
+   ================================================================ */
+
+function fmt(v) {
+  if (!Number.isFinite(v)) return '—';
+  const r = Math.round(v * 100) / 100;
+  return Math.abs(r - Math.round(r)) < 1e-4 ? String(Math.round(r)) : String(r);
+}
+
+
+/* ================================================================
+   PARAMETERS
+   ================================================================ */
+
+const PARAM_DEFS = {
+  a:  { label: 'vertical scale a',     min: -3,  max: 3,  step: 0.05, def: 1 },
+  k:  { label: 'vertical shift k',     min: -6,  max: 6,  step: 0.1,  def: 0 },
+  b:  { label: 'horizontal scale b',   min: -3,  max: 3,  step: 0.05, def: 1 },
+  h:  { label: 'horizontal shift h',   min: -6,  max: 6,  step: 0.1,  def: 0 },
+  tx: { label: 'test point x',         min: -10, max: 10, step: 0.05, def: 1 },
+};
+
+const DEFAULT_PARAMS = { a: 1, k: 0, b: 1, h: 0, tx: 1 };
+
+/* Parameters that actually affect the domain. */
+const DOMAIN_PARAMS = ['b', 'h'];
+
+
+/* ================================================================
+   FAMILIES
+   ================================================================
+   Grouped by domain interestingness so the picker reads as a
+   teaching tool:
+     - "Unrestricted" — domain is all of ℝ; sliders b, h still
+       shift/scale a trivial domain. Mostly useful for the contrast.
+     - "Restricted"   — base domain is a half-line or has a hole;
+       transformations move that boundary.
+*/
+
+export const FAMILIES = {
+  identity: {
+    name: 'Identity',
+    group: 'Unrestricted (ℝ)',
+    glyph: 'M2,22 L24,4',
+    base: x => x,
+    eqBase: 'x',
+    bodyOf: i => i,
+    baseDomain: { kind: 'R' },
+  },
+  linearScale: {
+    name: 'Linear (2x)',
+    group: 'Unrestricted (ℝ)',
+    glyph: 'M2,24 L24,2',
+    base: x => 2 * x,
+    eqBase: '2x',
+    bodyOf: i => `2·${i}`,
+    baseDomain: { kind: 'R' },
+  },
+  quadratic: {
+    name: 'Quadratic',
+    group: 'Unrestricted (ℝ)',
+    glyph: 'M2,4 Q13,30 24,4',
+    base: x => x * x,
+    eqBase: 'x²',
+    bodyOf: i => `(${i})²`,
+    baseDomain: { kind: 'R' },
+  },
+  cubic: {
+    name: 'Cubic',
+    group: 'Unrestricted (ℝ)',
+    glyph: 'M2,22 C8,2 16,30 24,8',
+    base: x => x * x * x,
+    eqBase: 'x³',
+    bodyOf: i => `(${i})³`,
+    baseDomain: { kind: 'R' },
+  },
+  exponential: {
+    name: 'Exponential',
+    group: 'Unrestricted (ℝ)',
+    glyph: 'M2,26 Q16,26 24,2',
+    base: x => Math.exp(x),
+    eqBase: 'eˣ',
+    bodyOf: i => `e^(${i})`,
+    baseDomain: { kind: 'R' },
+  },
+  sine: {
+    name: 'Sine',
+    group: 'Unrestricted (ℝ)',
+    glyph: 'M2,14 Q7,2 12,14 Q17,26 22,14',
+    base: x => Math.sin(x),
+    eqBase: 'sin(x)',
+    bodyOf: i => `sin(${i})`,
+    baseDomain: { kind: 'R' },
+  },
+  cosine: {
+    name: 'Cosine',
+    group: 'Unrestricted (ℝ)',
+    glyph: 'M2,4 Q7,16 12,4 Q17,-8 22,4',
+    base: x => Math.cos(x),
+    eqBase: 'cos(x)',
+    bodyOf: i => `cos(${i})`,
+    baseDomain: { kind: 'R' },
+  },
+  absolute: {
+    name: 'Absolute',
+    group: 'Unrestricted (ℝ)',
+    glyph: 'M2,4 L13,24 L24,4',
+    base: x => Math.abs(x),
+    eqBase: '|x|',
+    bodyOf: i => `|${i}|`,
+    baseDomain: { kind: 'R' },
+  },
+
+  logarithmic: {
+    name: 'Logarithmic',
+    group: 'Restricted',
+    glyph: 'M2,2 Q10,26 24,26',
+    base: x => (x > 0 ? Math.log(x) : NaN),
+    eqBase: 'ln(x)',
+    bodyOf: i => `ln(${i})`,
+    baseDomain: { kind: 'open-half', dir: 'gt', val: 0 },
+  },
+  sqrt: {
+    name: 'Square root',
+    group: 'Restricted',
+    glyph: 'M2,24 Q4,8 24,4',
+    base: x => (x >= 0 ? Math.sqrt(x) : NaN),
+    eqBase: '√x',
+    bodyOf: i => `√(${i})`,
+    baseDomain: { kind: 'closed-half', dir: 'gte', val: 0 },
+  },
+  reciprocal: {
+    name: 'Reciprocal',
+    group: 'Restricted',
+    glyph: 'M2,4 Q11,4 13,14 M15,14 Q17,26 24,26',
+    base: x => (x === 0 ? NaN : 1 / x),
+    eqBase: '1/x',
+    bodyOf: i => `1/(${i})`,
+    baseDomain: { kind: 'excluded', val: 0 },
+  },
+};
+
+const DEFAULT_FAMILIES = FAMILIES;
+
+
+/* ================================================================
+   EQUATION BUILDER (same shape as Inverse / Transformations)
+   ================================================================ */
+
+function buildForwardEq(fam, p) {
+  const { a, b, h, k } = p;
+  let inner = 'x';
+  if (h !== 0) inner = `x ${h >= 0 ? '−' : '+'} ${fmt(Math.abs(h))}`;
+  if (b !== 1) inner = h !== 0 ? `${fmt(b)}(${inner})` : `${fmt(b)}x`;
+  let body = fam.bodyOf(inner);
+  let out;
+  if (a === -1) out = `−${body}`;
+  else if (a !== 1) out = `${fmt(a)}·${body}`;
+  else out = body;
+  if (k !== 0) out += ` ${k >= 0 ? '+' : '−'} ${fmt(Math.abs(k))}`;
+  return out;
+}
+
+
+/* ================================================================
+   DOMAIN TRANSFORM + STRING + MEMBERSHIP
+   ================================================================ */
+
+function transformDomain(base, b, h) {
+  if (!base) return { kind: 'R' };
+  if (b === 0) return { kind: 'point', val: h };
+  if (base.kind === 'R') return { kind: 'R' };
+  if (base.kind === 'open-half') {
+    const dir = b > 0 ? base.dir : (base.dir === 'gt' ? 'lt' : 'gt');
+    return { kind: 'open-half', dir, val: h + base.val / b };
+  }
+  if (base.kind === 'closed-half') {
+    const dir = b > 0 ? base.dir : (base.dir === 'gte' ? 'lte' : 'gte');
+    return { kind: 'closed-half', dir, val: h + base.val / b };
+  }
+  if (base.kind === 'excluded') {
+    return { kind: 'excluded', val: h + base.val / b };
+  }
+  if (base.kind === 'closed') {
+    const lo = h + base.lo / b;
+    const hi = h + base.hi / b;
+    return { kind: 'closed', lo: Math.min(lo, hi), hi: Math.max(lo, hi) };
+  }
+  return base;
+}
+
+function domainToString(d, v = 'x') {
+  if (!d) return '—';
+  if (d.kind === 'R') return `all real ${v}`;
+  if (d.kind === 'point') return `${v} = ${fmt(d.val)}`;
+  if (d.kind === 'open-half') {
+    const sym = d.dir === 'gt' ? '>' : '<';
+    return `${v} ${sym} ${fmt(d.val)}`;
+  }
+  if (d.kind === 'closed-half') {
+    const sym = d.dir === 'gte' ? '≥' : '≤';
+    return `${v} ${sym} ${fmt(d.val)}`;
+  }
+  if (d.kind === 'excluded') return `${v} ≠ ${fmt(d.val)}`;
+  if (d.kind === 'closed') return `${fmt(d.lo)} ≤ ${v} ≤ ${fmt(d.hi)}`;
+  return '?';
+}
+
+function inDomain(d, x) {
+  if (!d) return true;
+  switch (d.kind) {
+    case 'R':            return true;
+    case 'point':        return x === d.val;
+    case 'open-half':    return d.dir === 'gt' ? x > d.val : x < d.val;
+    case 'closed-half':  return d.dir === 'gte' ? x >= d.val : x <= d.val;
+    case 'excluded':     return x !== d.val;
+    case 'closed':       return x >= d.lo && x <= d.hi;
+    default:             return true;
+  }
+}
+
+
+/* ================================================================
+   DOMAIN  →  xAxisHighlights[]   (the v3 adapter)
+   ----------------------------------------------------------------
+   Convert the {kind, ...} domain shape into the core's
+   `xAxisHighlights` prop. Mostly a one-liner per case.
+   ================================================================ */
+
+function domainToHighlights(d, color) {
+  if (!d) return [];
+  const c = color;
+  switch (d.kind) {
+    case 'R':
+      return [{ from: -Infinity, to: Infinity, color: c, placement: 'on-axis' }];
+
+    case 'open-half': {
+      if (d.dir === 'gt') return [{ from: d.val, to:  Infinity, fromKind: 'open', color: c, placement: 'on-axis' }];
+      return                 [{ from: -Infinity, to: d.val,    toKind:   'open', color: c, placement: 'on-axis' }];
+    }
+
+    case 'closed-half': {
+      if (d.dir === 'gte') return [{ from: d.val, to:  Infinity, fromKind: 'closed', color: c, placement: 'on-axis' }];
+      return                   [{ from: -Infinity, to: d.val,    toKind:   'closed', color: c, placement: 'on-axis' }];
+    }
+
+    case 'excluded':
+      return [
+        { from: -Infinity, to: d.val,    toKind:   'open', color: c, placement: 'on-axis' },
+        { from: d.val,     to: Infinity, fromKind: 'open', color: c, placement: 'on-axis' },
+      ];
+
+    case 'closed':
+      return [{
+        from: d.lo, to: d.hi,
+        fromKind: 'closed', toKind: 'closed',
+        color: c, placement: 'on-axis',
+      }];
+
+    case 'point':
+      // Degenerate: zero-length highlight; two closed markers overlap → looks like one dot.
+      return [{
+        from: d.val, to: d.val,
+        fromKind: 'closed', toKind: 'closed',
+        color: c, placement: 'on-axis',
+      }];
+
+    default:
+      return [];
+  }
+}
+
+
+/* ================================================================
+   DOMAIN BAR — 1D number line showing the domain interval
+   (unchanged from v2)
+   ================================================================ */
+
+function DomainBar({ domain, testX, darkMode, color = COL.inDomain, xMin = -10, xMax = 10 }) {
+  const W = 1000, H = 86;
+  const cy = 36;                    // axis y
+  const toX = v => ((v - xMin) / (xMax - xMin)) * W;
+  const clampX = x => Math.max(0, Math.min(W, x));
+
+  const inDom = inDomain(domain, testX);
+
+  // Build fill segments + endpoint markers
+  // Each segment: { x1, x2, leftBoundary, rightBoundary }
+  //   boundary: { type: 'open' | 'closed' | 'arrow', x: pixel-x }
+  const segments = [];
+
+  switch (domain.kind) {
+    case 'R':
+      segments.push({
+        x1: 0, x2: W,
+        leftBoundary:  { type: 'arrow', x: 0 },
+        rightBoundary: { type: 'arrow', x: W },
+      });
+      break;
+    case 'open-half':
+    case 'closed-half': {
+      const valX = toX(domain.val);
+      const isOpen = domain.kind === 'open-half';
+      const isGreater = domain.dir === 'gt' || domain.dir === 'gte';
+      if (isGreater) {
+        if (valX < W) segments.push({
+          x1: clampX(valX), x2: W,
+          leftBoundary:  { type: isOpen ? 'open' : 'closed', x: valX, withinView: valX >= 0 && valX <= W },
+          rightBoundary: { type: 'arrow', x: W },
+        });
+      } else {
+        if (valX > 0) segments.push({
+          x1: 0, x2: clampX(valX),
+          leftBoundary:  { type: 'arrow', x: 0 },
+          rightBoundary: { type: isOpen ? 'open' : 'closed', x: valX, withinView: valX >= 0 && valX <= W },
+        });
+      }
+      break;
+    }
+    case 'excluded': {
+      const valX = toX(domain.val);
+      if (valX > 0) segments.push({
+        x1: 0, x2: clampX(valX),
+        leftBoundary:  { type: 'arrow', x: 0 },
+        rightBoundary: { type: 'open',  x: valX, withinView: valX >= 0 && valX <= W },
+      });
+      if (valX < W) segments.push({
+        x1: clampX(valX), x2: W,
+        leftBoundary:  { type: 'open',  x: valX, withinView: valX >= 0 && valX <= W },
+        rightBoundary: { type: 'arrow', x: W },
+      });
+      break;
+    }
+    case 'closed': {
+      const x1 = toX(domain.lo), x2 = toX(domain.hi);
+      segments.push({
+        x1: clampX(x1), x2: clampX(x2),
+        leftBoundary:  { type: 'closed', x: x1, withinView: x1 >= 0 && x1 <= W },
+        rightBoundary: { type: 'closed', x: x2, withinView: x2 >= 0 && x2 <= W },
+      });
+      break;
+    }
+    case 'point':
+    default:
+      break;
+  }
+
+  const axisColor   = darkMode ? '#475569' : '#94a3b8';
+  const tickColor   = darkMode ? '#64748b' : '#94a3b8';
+  const labelColor  = darkMode ? '#cbd5e1' : '#475569';
+  const fill        = color;
+  const markerColor = inDom ? color : COL.outside;
+
+  const renderEndpoint = (b, side) => {
+    if (!b) return null;
+    if (b.type === 'arrow') {
+      // arrowhead pointing outward
+      const dir = side === 'left' ? -1 : 1;
+      const tipX = side === 'left' ? 2 : W - 2;
+      const baseX = tipX - dir * 8;
+      return (
+        <polygon
+          points={`${tipX},${cy} ${baseX},${cy - 6} ${baseX},${cy + 6}`}
+          fill={fill}
+          opacity={0.85}
+        />
+      );
+    }
+    if (!b.withinView) return null;
+    if (b.type === 'closed') {
+      return (
+        <circle cx={b.x} cy={cy} r={6}
+                fill={fill} stroke={darkMode ? '#0f172a' : '#fff'} strokeWidth={2} />
+      );
+    }
+    if (b.type === 'open') {
+      return (
+        <circle cx={b.x} cy={cy} r={6}
+                fill={darkMode ? '#0f172a' : '#fff'}
+                stroke={fill} strokeWidth={2} />
+      );
+    }
+    return null;
+  };
+
+  const testInView = toX(testX) >= 0 && toX(testX) <= W;
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none"
+         style={{ width: '100%', height: H, display: 'block' }}>
+      {/* baseline */}
+      <line x1={0} y1={cy} x2={W} y2={cy} stroke={axisColor} strokeWidth={1.5} />
+
+      {/* tick marks + integer labels */}
+      {Array.from({ length: xMax - xMin + 1 }, (_, i) => xMin + i).map(v => {
+        const x = toX(v);
+        const isMajor = v % 2 === 0;
+        return (
+          <g key={v}>
+            <line
+              x1={x} y1={cy - (isMajor ? 6 : 3)}
+              x2={x} y2={cy + (isMajor ? 6 : 3)}
+              stroke={tickColor} strokeWidth={1}
+            />
+            {isMajor && (
+              <text x={x} y={H - 4} fontSize="11" fill={labelColor}
+                    textAnchor="middle"
+                    fontFamily='ui-monospace, "SF Mono", Menlo, monospace'>
+                {v}
+              </text>
+            )}
+          </g>
+        );
+      })}
+
+      {/* domain fill band (under the boundary markers) */}
+      {segments.map((seg, i) => (
+        <rect key={i}
+              x={seg.x1} y={cy - 11}
+              width={Math.max(0, seg.x2 - seg.x1)} height={22}
+              fill={fill} fillOpacity={0.22} />
+      ))}
+
+      {/* boundary endpoints + arrows */}
+      {segments.map((seg, i) => (
+        <g key={`b-${i}`}>
+          {renderEndpoint(seg.leftBoundary,  'left')}
+          {renderEndpoint(seg.rightBoundary, 'right')}
+        </g>
+      ))}
+
+      {/* excluded-point cross (when domain.kind === 'excluded') */}
+      {domain.kind === 'excluded' && (() => {
+        const xv = toX(domain.val);
+        if (xv < 0 || xv > W) return null;
+        return (
+          <g>
+            <line x1={xv - 5} y1={cy - 5} x2={xv + 5} y2={cy + 5}
+                  stroke={COL.outside} strokeWidth={2} />
+            <line x1={xv - 5} y1={cy + 5} x2={xv + 5} y2={cy - 5}
+                  stroke={COL.outside} strokeWidth={2} />
+          </g>
+        );
+      })()}
+
+      {/* test point marker */}
+      {testInView && (
+        <g>
+          <line x1={toX(testX)} y1={cy - 18} x2={toX(testX)} y2={cy + 18}
+                stroke={markerColor} strokeWidth={2} />
+          <circle cx={toX(testX)} cy={cy} r={7}
+                  fill={markerColor}
+                  stroke={darkMode ? '#0f172a' : '#fff'} strokeWidth={2.5} />
+        </g>
+      )}
+    </svg>
+  );
+}
+
+
+/* ================================================================
+   PICKER GROUPING
+   ================================================================ */
+
+function buildPickerEntries(families) {
+  const out = [];
+  let lastGroup;
+  Object.entries(families).forEach(([key, f]) => {
+    if (f.group && f.group !== lastGroup) {
+      out.push({ type: 'header', label: f.group, key: `__hdr_${f.group}` });
+      lastGroup = f.group;
+    } else if (!f.group) {
+      lastGroup = undefined;
+    }
+    out.push({ type: 'item', key, fam: f });
+  });
+  return out;
+}
+
+
+/* ================================================================
+   GLYPH
+   ================================================================ */
+
+function FamilyGlyph({ d, active, darkMode }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 26 28" aria-hidden="true">
+      <path d={d} fill="none"
+            stroke={active ? COL.f : (darkMode ? '#64748b' : '#94a3b8')}
+            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+
+/* ================================================================
+   MAIN
+   ================================================================ */
+
+export default function FunctionDomain({
+  initialFamily = 'logarithmic',
+  families = DEFAULT_FAMILIES,
+  visualizerProps = {},
+  infoPanelProps = {},
+  darkMode = false,
+  showPicker = true,
+  showSliders = true,
+  showInfoPanel = true,
+  showColorPicker = true,
+  defaultHighlightColor = '#3b82f6',
+  maxWidth = '80vw',
+}) {
+  const familyKeys = Object.keys(families);
+  const startKey = families[initialFamily] ? initialFamily : familyKeys[0];
+
+  const [current, setCurrent] = useState(startKey);
+  const [params, setParams] = useState({ ...DEFAULT_PARAMS });
+  const [highlightColor, setHighlightColor] = useState(defaultHighlightColor);
+
+  /* Derived tones from the picked highlight color — used to coordinate
+     the Domain panel chrome with the on-axis highlight. */
+  const panelTones = useMemo(() => {
+    const hex = (highlightColor || '#f59e0b').replace('#', '');
+    const r = parseInt(hex.slice(0, 2), 16) || 0;
+    const g = parseInt(hex.slice(2, 4), 16) || 0;
+    const b = parseInt(hex.slice(4, 6), 16) || 0;
+    const rgba = (a) => `rgba(${r}, ${g}, ${b}, ${a})`;
+    const hx = (n) => Math.max(0, Math.min(255, Math.round(n))).toString(16).padStart(2, '0');
+    const darken = (f) => `#${hx(r * f)}${hx(g * f)}${hx(b * f)}`;
+    return {
+      soft:   darkMode ? rgba(0.22) : rgba(0.14),
+      border: darkMode ? rgba(0.55) : rgba(0.45),
+      text:   darkMode ? rgba(0.95) : darken(0.4),
+      main:   highlightColor,
+    };
+  }, [highlightColor, darkMode]);
+
+  const fam = families[current] || families[familyKeys[0]];
+
+  const { a, b, h, k, tx } = params;
+
+  /* Parameterized function */
+  const forwardFn = useMemo(() => {
+    if (a === 0 || b === 0) return () => NaN;
+    return x => a * fam.base(b * (x - h)) + k;
+  }, [fam, a, b, h, k]);
+
+  /* Domain of g under current parameters */
+  const gDomain = useMemo(() => transformDomain(fam.baseDomain, b, h), [fam, b, h]);
+  const domainStr = useMemo(() => domainToString(gDomain, 'x'), [gDomain]);
+  const txInDomain = inDomain(gDomain, tx);
+  const fAtTx = txInDomain ? forwardFn(tx) : NaN;
+
+  const forwardEq = useMemo(() => buildForwardEq(fam, params), [fam, params]);
+
+  const functions = useMemo(() => ([
+    {
+      fn: forwardFn,
+      color: COL.f,
+      label: 'g',
+      formula: `g(x) = ${forwardEq}`,
+      visible: true,
+      stroke: 2.25,
+    },
+  ]), [forwardFn, forwardEq]);
+
+  /* ---- NEW: derive axis highlights and test-point reference line ---- */
+
+  const xAxisHighlights = useMemo(
+    () => domainToHighlights(gDomain, highlightColor),
+    [gDomain, highlightColor]
+  );
+
+  const verticalLines = useMemo(() => ([{
+    x: tx,
+    color: txInDomain ? highlightColor : COL.outside,
+    stroke: 1.5,
+    pattern: [4, 4],
+  }]), [tx, txInDomain, highlightColor]);
+
+  /* ---- InfoPanel content ---- */
+  const explanationContent = useMemo(() => {
+    return (
+      `## ${fam.name} — domain\n\n` +
+      `**Base function** · $f(x) = ${fam.eqBase}$\n\n` +
+      `**Base domain** · ${domainToString(fam.baseDomain, 'x')}\n\n` +
+      `**With parameters** · $g(x) = ${forwardEq}$\n\n` +
+      `**Current domain** · ${domainStr}\n\n` +
+      `### How parameters affect the domain\n\n` +
+      `Only **b** and **h** can change the domain. They transform the input to the base function:\n\n` +
+      `- $h$ — shifts the domain boundary along the x-axis by the same amount\n` +
+      `- $b$ — scales the domain boundary by $1/b$; if $b < 0$, the inequality direction flips\n\n` +
+      `**a** and **k** transform the output — they shift and scale what comes *out* of the function, not where it accepts input. Move them and the domain stays put.`
+    );
+  }, [fam, params, forwardEq, domainStr]);
+
+  const conceptsContent =
+    '## What is the domain?\n\n' +
+    'The **domain** of a function is the set of inputs where it is defined. Some functions accept every real number (polynomials, sine, cosine, $e^x$). Others come with restrictions baked in:\n\n' +
+    '- $\\ln(x)$ — only defined for $x > 0$\n' +
+    '- $\\sqrt{x}$ — only defined for $x \\geq 0$\n' +
+    '- $1/x$ — defined everywhere except $x = 0$\n\n' +
+    'On the number line below the graph, the colored band shows where the function accepts an input. Drag the test point to probe a specific value — a colored dot means **in domain**, red means **outside**.\n\n' +
+    '### Half-line endpoints: open vs closed\n\n' +
+    'A **closed** endpoint (filled circle) means the boundary value is included. $\\sqrt{x}$ at $x = 0$: yes, $\\sqrt{0} = 0$, so $x = 0$ is in the domain. Closed.\n\n' +
+    'An **open** endpoint (hollow circle) means the boundary is excluded. $\\ln(x)$ at $x = 0$: $\\ln(0)$ is undefined (limit is $-\\infty$), so $x = 0$ is *not* in the domain. Open.\n\n' +
+    '### Excluded points\n\n' +
+    'Some functions are defined everywhere except a single value — like $1/x$ at $x = 0$. The bar is filled everywhere except for an open hole at the excluded point, marked with a small red ×.\n\n' +
+    '### Why a and k don\'t matter\n\n' +
+    'Think about the formula $g(x) = a \\cdot f(b(x - h)) + k$. The input that reaches the inner $f$ is $b(x - h)$ — only $b$ and $h$ appear there. After $f$ produces its output, $a$ and $k$ scale and shift it, but by that point the question "is this input legal?" has already been answered. Multiplying or shifting the *output* can\'t make a forbidden input suddenly legal.';
+
+  const infoTabs = useMemo(() => ([
+    { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },
+    { key: 'concepts',    label: 'Concepts',    order: 10, content: conceptsContent },
+  ]), [explanationContent]);
+
+  /* ---- Styling ---- */
+  const fontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';
+  const monoStack = 'ui-monospace, "SF Mono", Menlo, monospace';
+  const panelShadow = '0 1px 3px rgba(15,23,42,0.05), 0 8px 24px rgba(15,23,42,0.05)';
+  const card = {
+    background: darkMode ? '#0f172a' : '#fff',
+    border: `1px solid ${darkMode ? '#1e293b' : '#f1f5f9'}`,
+    borderRadius: 12,
+    boxShadow: panelShadow,
+  };
+  const c = {
+    ink: darkMode ? '#e2e8f0' : '#0f172a',
+    inkSoft: darkMode ? '#cbd5e1' : '#334155',
+    muted: darkMode ? '#64748b' : '#94a3b8',
+    soft: darkMode ? '#1e293b' : '#f8fafc',
+    softer: darkMode ? '#0f172a' : '#f1f5f9',
+    border: darkMode ? '#334155' : '#e2e8f0',
+    borderSoft: darkMode ? '#1e293b' : '#f1f5f9',
+    accentSoft: darkMode ? '#1e293b' : '#eff6ff',
+    accentBorder: darkMode ? '#334155' : '#dbeafe',
+    accentText: darkMode ? '#dbeafe' : '#1e3a8a',
+    okSoft: darkMode ? '#064e3b' : '#d1fae5',
+    okText: darkMode ? '#6ee7b7' : '#065f46',
+    badSoft: darkMode ? '#7f1d1d' : '#fee2e2',
+    badText: darkMode ? '#fca5a5' : '#991b1b',
+  };
+
+  const famBtn = active => ({
+    display: 'flex', alignItems: 'center', gap: 10, width: '100%', textAlign: 'left',
+    border: '1px solid transparent',
+    background: active ? c.accentSoft : 'none',
+    borderColor: active ? c.accentBorder : 'transparent',
+    borderRadius: 8, padding: '9px 10px', cursor: 'pointer', fontFamily: 'inherit',
+    fontSize: 13, fontWeight: active ? 600 : 400,
+    color: active ? c.accentText : c.inkSoft,
+    transition: 'background 0.12s, border-color 0.12s',
+  });
+
+  const sectionTitle = {
+    fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.06em',
+    color: c.muted, fontWeight: 600, margin: '10px 8px 4px',
+  };
+
+  const mergedVisualizerProps = {
+    defaultWidth: 880,
+    defaultHeight: 460,
+    ...visualizerProps,
+  };
+
+  const pickerEntries = buildPickerEntries(families);
+
+  const selectFamily = (key) => {
+    setCurrent(key);
+    setParams({ ...DEFAULT_PARAMS });
+  };
+
+  const setParam = (k, v) => setParams(prev => ({ ...prev, [k]: v }));
+  const resetParams = () => setParams({ ...DEFAULT_PARAMS });
+  const resetTestX  = () => setParam('tx', DEFAULT_PARAMS.tx);
+
+  const Chip = ({ k, valueOverride, accent, dim }) => {
+    const value = valueOverride !== undefined ? valueOverride : params[k];
+    const def = PARAM_DEFS[k];
+    const active = def ? value !== def.def : true;
+    const isDomainParam = DOMAIN_PARAMS.includes(k);
+    const tone = accent || (isDomainParam ? highlightColor : (active ? COL.f : c.muted));
+    return (
+      <span style={{
+        fontFamily: monoStack, fontSize: 11,
+        padding: '3px 9px', borderRadius: 5,
+        display: 'inline-flex', alignItems: 'center', gap: 5,
+        color: active ? c.accentText : c.muted,
+        background: active ? c.accentSoft : 'transparent',
+        border: `1px solid ${active ? c.accentBorder : c.borderSoft}`,
+        fontWeight: active ? 600 : 400,
+        opacity: dim && !isDomainParam ? 0.55 : 1,
+      }}>
+        <span style={{ fontWeight: 600, color: tone }}>{k}</span>
+        <span>=</span>
+        <span>{fmt(value)}</span>
+      </span>
+    );
+  };
+
+  const renderSlider = (key) => {
+    const def = PARAM_DEFS[key];
+    const isDomainParam = DOMAIN_PARAMS.includes(key);
+    const accent = isDomainParam ? highlightColor : COL.f;
+    return (
+      <div key={key}>
+        <label style={{
+          display: 'flex', justifyContent: 'space-between', fontSize: 12,
+          color: c.inkSoft, marginBottom: 4, fontVariantNumeric: 'tabular-nums',
+        }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+            {def.label}
+            {isDomainParam && (
+              <span style={{
+                fontSize: 9, fontWeight: 700,
+                color: panelTones.text, background: panelTones.soft,
+                padding: '1px 5px', borderRadius: 3,
+                textTransform: 'uppercase', letterSpacing: '0.05em',
+              }}>affects domain</span>
+            )}
+          </span>
+          <span style={{ fontFamily: monoStack, color: accent, fontWeight: 600 }}>
+            {fmt(params[key])}
+          </span>
+        </label>
+        <input
+          type="range" min={def.min} max={def.max} step={def.step}
+          value={params[key]}
+          onChange={e => setParam(key, parseFloat(e.target.value))}
+          style={{ width: '100%', accentColor: accent, cursor: 'pointer' }}
+        />
+      </div>
+    );
+  };
+
+  return (
+    <div style={{
+      width: '100%',
+      background: darkMode ? '#020617' : '#f6f7f9',
+      minHeight: '100vh',
+      fontFamily: fontStack,
+      display: 'flex',
+      justifyContent: 'center',
+      padding: '20px 0',
+      boxSizing: 'border-box',
+    }}>
+      <div style={{
+        width: '100%',
+        maxWidth,
+        display: 'flex',
+        gap: 16,
+        padding: '0 16px',
+        alignItems: 'flex-start',
+        boxSizing: 'border-box',
+      }}>
+
+        {showPicker && (
+          <nav style={{ ...card, width: 220, padding: 10, flexShrink: 0 }}>
+            <div style={{ ...sectionTitle, margin: '6px 8px 10px' }}>Function</div>
+            {pickerEntries.map(e =>
+              e.type === 'header'
+                ? <div key={e.key} style={sectionTitle}>{e.label}</div>
+                : (
+                  <button
+                    key={e.key}
+                    style={famBtn(e.key === current)}
+                    onClick={() => selectFamily(e.key)}
+                  >
+                    <FamilyGlyph d={e.fam.glyph} active={e.key === current} darkMode={darkMode} />
+                    <span>{e.fam.name}</span>
+                  </button>
+                )
+            )}
+
+            {showSliders && (
+              <div style={{
+                marginTop: 12,
+                paddingTop: 12,
+                borderTop: `1px solid ${c.borderSoft}`,
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '0 4px 8px' }}>
+                  <div style={{
+                    fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.06em',
+                    color: c.muted, fontWeight: 600,
+                  }}>Parameters</div>
+                  <button onClick={resetParams} style={{
+                    background: darkMode ? '#0f172a' : '#fff',
+                    border: `1px solid ${c.border}`, color: c.inkSoft,
+                    padding: '3px 8px', borderRadius: 5,
+                    fontFamily: 'inherit', fontSize: 10.5, cursor: 'pointer',
+                  }}>Reset</button>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: '0 4px' }}>
+                  {['a', 'k', 'b', 'h'].map(renderSlider)}
+                </div>
+              </div>
+            )}
+
+            {showColorPicker && (
+              <div style={{
+                marginTop: 12,
+                paddingTop: 12,
+                borderTop: `1px solid ${c.borderSoft}`,
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '0 4px 8px' }}>
+                  <div style={{
+                    fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.06em',
+                    color: c.muted, fontWeight: 600,
+                  }}>Appearance</div>
+                  <button onClick={() => setHighlightColor(defaultHighlightColor)} style={{
+                    background: darkMode ? '#0f172a' : '#fff',
+                    border: `1px solid ${c.border}`, color: c.inkSoft,
+                    padding: '3px 8px', borderRadius: 5,
+                    fontFamily: 'inherit', fontSize: 10.5, cursor: 'pointer',
+                  }}>Reset</button>
+                </div>
+                <label style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  gap: 10, padding: '0 4px',
+                  fontSize: 12, color: c.inkSoft,
+                }}>
+                  <span>Domain color</span>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{
+                      fontFamily: monoStack, fontSize: 11,
+                      color: c.inkSoft,
+                      fontVariantNumeric: 'tabular-nums',
+                    }}>{highlightColor}</span>
+                    <input
+                      type="color"
+                      value={highlightColor}
+                      onChange={e => setHighlightColor(e.target.value)}
+                      style={{
+                        width: 28, height: 24,
+                        border: `1px solid ${c.border}`,
+                        borderRadius: 4, background: 'none',
+                        cursor: 'pointer', padding: 0,
+                      }}
+                    />
+                  </span>
+                </label>
+              </div>
+            )}
+          </nav>
+        )}
+
+        <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div style={{ ...card, padding: 16 }}>
+
+            <div style={{
+              display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+              marginBottom: 12, flexWrap: 'wrap', gap: 8,
+            }}>
+              <span style={{ fontSize: 15, letterSpacing: '-0.01em', color: c.ink }}>
+                {fam.name}
+              </span>
+              <span style={{
+                fontFamily: monoStack, fontSize: 11.5,
+                padding: '3px 8px', borderRadius: 5,
+                color: COL.f, background: c.softer,
+                display: 'inline-flex', alignItems: 'center', gap: 6,
+              }}>
+                <span style={{ width: 8, height: 8, borderRadius: '50%', background: COL.f }} />
+                g(x) = {forwardEq}
+              </span>
+            </div>
+
+            {/* The overlay is gone — the domain is now drawn directly on the
+                x-axis inside the visualizer's coordinate system via xAxisHighlights. */}
+            <VisualizerWithControls
+              functions={functions}
+              zoom={10}
+              showAxisLabels
+              showCrosshair
+              showCurveTooltip
+              labelMode="legend"
+              xAxisHighlights={xAxisHighlights}
+              verticalLines={verticalLines}
+              {...mergedVisualizerProps}
+            />
+
+            {/* ---- DOMAIN BAR + TEST POINT + RESULT — the centerpiece ---- */}
+            <div style={{
+              marginTop: 12,
+              background: panelTones.soft,
+              border: `1px solid ${panelTones.border}`,
+              borderLeft: `4px solid ${highlightColor}`,
+              borderRadius: 8,
+              padding: '14px 16px',
+            }}>
+              <div style={{
+                display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+                gap: 12, marginBottom: 10,
+              }}>
+                <span style={{
+                  fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.08em',
+                  color: panelTones.text, fontWeight: 700,
+                }}>
+                  Domain
+                </span>
+                <span style={{
+                  fontFamily: monoStack, fontSize: 14,
+                  color: c.ink, fontWeight: 700,
+                }}>
+                  {domainStr}
+                </span>
+              </div>
+
+              <DomainBar domain={gDomain} testX={tx} darkMode={darkMode} color={highlightColor} />
+
+              {/* Test point slider + result */}
+              <div style={{
+                marginTop: 10,
+                padding: '10px 12px',
+                background: darkMode ? '#0f172a' : '#fff',
+                border: `1px solid ${darkMode ? '#1e293b' : panelTones.border}`,
+                borderRadius: 6,
+              }}>
+                <div style={{
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+                  gap: 12, marginBottom: 6,
+                }}>
+                  <span style={{
+                    fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.06em',
+                    color: c.muted, fontWeight: 600,
+                  }}>Test point</span>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+                    <span style={{
+                      fontFamily: monoStack, fontSize: 14,
+                      color: c.ink, fontWeight: 700,
+                      fontVariantNumeric: 'tabular-nums',
+                    }}>
+                      x = {fmt(tx)}
+                    </span>
+                    <button onClick={resetTestX} style={{
+                      background: darkMode ? '#0f172a' : '#fff',
+                      border: `1px solid ${c.border}`, color: c.inkSoft,
+                      padding: '2px 8px', borderRadius: 5,
+                      fontFamily: 'inherit', fontSize: 10, cursor: 'pointer',
+                    }}>Reset</button>
+                  </div>
+                </div>
+                <input
+                  type="range"
+                  min={PARAM_DEFS.tx.min}
+                  max={PARAM_DEFS.tx.max}
+                  step={PARAM_DEFS.tx.step}
+                  value={tx}
+                  onChange={e => setParam('tx', parseFloat(e.target.value))}
+                  style={{
+                    width: '100%',
+                    accentColor: txInDomain ? highlightColor : COL.outside,
+                    cursor: 'pointer',
+                  }}
+                />
+                <div style={{
+                  marginTop: 8,
+                  display: 'flex', alignItems: 'center', gap: 10,
+                  fontFamily: monoStack, fontSize: 12,
+                }}>
+                  <span style={{
+                    padding: '3px 9px', borderRadius: 4,
+                    fontWeight: 700, fontSize: 11,
+                    color: txInDomain ? panelTones.text : c.badText,
+                    background: txInDomain ? panelTones.soft : c.badSoft,
+                  }}>
+                    {txInDomain ? '✓ in domain' : '✗ outside domain'}
+                  </span>
+                  <span style={{ color: c.inkSoft }}>
+                    {txInDomain
+                      ? `g(${fmt(tx)}) = ${fmt(fAtTx)}`
+                      : `g(${fmt(tx)}) is undefined`}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* ---- APPLIED CHIPS — domain-relevant ones highlighted ---- */}
+            <div style={{
+              display: 'flex', gap: 6, flexWrap: 'wrap',
+              marginTop: 12, padding: '8px 10px',
+              background: c.soft, border: `1px solid ${c.borderSoft}`,
+              borderRadius: 8, alignItems: 'center',
+            }}>
+              <span style={{
+                fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.06em',
+                color: c.muted, fontWeight: 600, marginRight: 4,
+              }}>Applied</span>
+              {['a', 'k', 'b', 'h'].map(k => <Chip key={k} k={k} dim />)}
+              <span style={{ width: 1, height: 16, background: c.border, margin: '0 2px' }} />
+              <span style={{
+                fontSize: 9.5, textTransform: 'uppercase', letterSpacing: '0.05em',
+                color: panelTones.text, fontWeight: 700,
+                background: panelTones.soft, padding: '2px 6px', borderRadius: 3,
+              }}>b, h affect domain</span>
+            </div>
+          </div>
+        </div>
+
+        {showInfoPanel && (
+          <aside style={{ ...card, width: 360, padding: 16, flexShrink: 0 }}>
+            <InfoPanel
+              tabs={infoTabs}
+              darkMode={darkMode}
+              {...infoPanelProps}
+            />
+          </aside>
+        )}
+      </div>
+    </div>
+  );
+}
