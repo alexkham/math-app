@@ -806,7 +806,7 @@ In all three cases the derivative does not exist at the affected point. Sliding 
         url: "/functions/visual-tools/tangent-line",
         name: "Tangent Line Visualizer",
         hubDescription: "Drag the x₀ slider and watch the tangent line follow the curve in real time. Pick a base function — linear, quadratic, cubic, reciprocal, exponential, logarithmic, square root, absolute, sine, cosine — apply affine transformations, and read both the point-slope and slope-intercept forms of the tangent equation alongside the slope m = f'(x₀). Critical points and undefined-tangent failures are flagged automatically.",
-        category: "",
+          category: "Function Properties",
         subCategory: ""
       },
     }

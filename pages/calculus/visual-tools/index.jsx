@@ -6,6 +6,10 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import VisualToolsPage from '../../../app/components/page-components/visual-tools-page/VisualToolsPage'
+import { buildToolIndexData } from '../../../app/components/page-components/visual-tools-page/buildToolsPageData'
+
+
 
 
 export async function getStaticProps(){
@@ -203,17 +207,24 @@ export async function getStaticProps(){
 }
 
 
+const toolsData = await buildToolIndexData('/calculus/visual-tools')
+
+
+
+
+
 
 
    return {
       props:{
          sectionsContent,
          introContent,
+         toolsData,
           seoData: {
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/calculus/visual-tools",
          name: "name"
       },
         
@@ -221,7 +232,7 @@ export async function getStaticProps(){
     }
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
+export default function PageTemplate({seoData,sectionsContent , introContent ,toolsData}) {
 
     
   const genericSections=[
@@ -443,8 +454,18 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <br/>
    <br/>
    {/* <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Page Title</h1> */}
-   <br/>
-   <br/>
+    <VisualToolsPage
+     tools={toolsData}
+    //  customItems={comingSoonItems}
+     pageTitle="Calculus Visual Tools"
+    //  intro={intro}
+     icon="🧮"
+     dropdownLabel="All Tools"
+     theme="deepBlue"
+     sidebar={true}
+     sidebarBrandName="Calculus"
+     sidebarBrandSub="Visual Tools"
+   />
    {/* <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
          secondaryNavMode="siblings"  // or "children"
