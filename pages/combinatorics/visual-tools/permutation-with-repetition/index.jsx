@@ -490,7 +490,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import PermutationWithRepetition from '../../../../app/components/combinatorics/new-visualizers/scenes/PermutationWithRepetition'
+import PermutationWithRepetition from '../../../../app/components/combinatorics/new-visualizers/scenes/PermutationsWithRepetition'
 
 
 export async function getStaticProps(){
