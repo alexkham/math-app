@@ -6,6 +6,10 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import VisualToolsPage from '../../../app/components/page-components/visual-tools-page/VisualToolsPage'
+import { buildToolIndexData } from '../../../app/components/page-components/visual-tools-page/buildToolsPageData'
+
+
 
 
 export async function getStaticProps(){
@@ -205,15 +209,20 @@ export async function getStaticProps(){
 
 
 
+const toolsData = await buildToolIndexData('/combinatorics/visual-tools')
+
+
+
    return {
       props:{
          sectionsContent,
          introContent,
+         toolsData,
           seoData: {
         title: "Title | Learn Math Class",
         description: "Metadescription",
         keywords: keyWords.join(", "),
-        url: "/url",
+        url: "/combinatorics/visual-tools",
          name: "name"
       },
         
@@ -221,7 +230,7 @@ export async function getStaticProps(){
     }
    }
 
-export default function PageTemplate({seoData,sectionsContent , introContent}) {
+export default function PageTemplate({seoData,sectionsContent , introContent ,toolsData}) {
 
     
   const genericSections=[
@@ -442,36 +451,49 @@ export default function PageTemplate({seoData,sectionsContent , introContent}) {
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Page Title</h1>
+
+   {/* <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Page Title</h1> */}
+    <VisualToolsPage
+     tools={toolsData}
+    //  customItems={comingSoonItems}
+     pageTitle="Combinatorics Visual Tools"
+    //  intro={intro}
+     icon="🧮"
+     dropdownLabel="All Tools"
+     theme="deepBlue"
+     sidebar={true}
+     sidebarBrandName="Combinatorics"
+     sidebarBrandSub="Visual Tools"
+   />
    <br/>
    <br/>
-   <SectionTableOfContents sections={genericSections}
+   {/* <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
          secondaryNavMode="siblings"  // or "children"
          secondaryNavTitle="More in this Section"
    
-   />
+   /> */}
    <br/>
    <br/>
    <br/>
-    <IntroSection 
+    {/* <IntroSection 
           id={introContent.id}
           title={introContent.title}
           content={introContent.content}
            backgroundColor='#f9fafb'
           //  "#f2f2f2"
           textColor="#06357a"
-        />
+        /> */}
    <br/>
-    <KeyTermsCard
+    {/* <KeyTermsCard
      id="0"
      title={sectionsContent.obj0.title}
      content={sectionsContent.obj0.content}
      after={sectionsContent.obj0.after}
      variant="light"
-   />
+   /> */}
    <br/>
-   <Sections sections={genericSections.slice(1)}/>
+   {/* <Sections sections={genericSections}/> */}
    <br/>
    <br/>
    <br/>
