@@ -1202,13 +1202,13 @@ export default function BinomialTheoremPage({seoData, sectionsContent, introCont
           textColor="#06357a"
         />
    <br/>
-    <KeyTermsCard
+    {/* <KeyTermsCard
      id="0"
      title={sectionsContent.obj0.title}
      content={sectionsContent.obj0.content}
      after={sectionsContent.obj0.after}
      variant="light"
-   />
+   /> */}
    <br/>
    <Sections sections={genericSections}/>
    <br/>
