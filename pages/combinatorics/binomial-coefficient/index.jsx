@@ -1105,23 +1105,23 @@ export default function BinomialCoefficientPage({seoData, sectionsContent, intro
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Binomial Coefficient</h1>
    <br/>
    <br/>
-   {/* <SectionTableOfContents sections={genericSections}
+   <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
          secondaryNavMode="siblings"  // or "children"
          secondaryNavTitle="More in this Section"
    
-   /> */}
+   />
    <br/>
    <br/>
    <br/>
-    {/* <IntroSection 
+    <IntroSection 
           id={introContent.id}
           title={introContent.title}
           content={introContent.content}
            backgroundColor='#f9fafb'
           //  "#f2f2f2"
           textColor="#06357a"
-        /> */}
+        />
    <br/>
     {/* <KeyTermsCard
      id="0"
@@ -1131,7 +1131,7 @@ export default function BinomialCoefficientPage({seoData, sectionsContent, intro
      variant="light"
    /> */}
    <br/>
-   {/* <Sections sections={genericSections}/> */}
+   <Sections sections={genericSections}/>
    <br/>
    <br/>
    <br/>

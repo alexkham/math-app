@@ -13,6 +13,7 @@ import { countingPrinciplesDiagramsData } from '@/app/api/db/diagrams/combinator
 import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
 import { scenariosData } from '@/app/api/db/diagrams/combinatorics/scenarios'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import Head from 'next/head'
 
 
 
