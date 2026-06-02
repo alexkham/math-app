@@ -12,10 +12,22 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
 export async function getStaticProps(){
-
-  const keyWords=['permutations','combinatorial','combinatorics','formula for permutations',
-    'example of permutation', 'permutation and combination'
-  ]
+const keyWords = [
+  'permutations',
+  'permutation formula',
+  'types of permutations',
+  'circular permutation',
+  'permutation with repetition',
+  'permutation without repetition',
+  'partial permutation',
+  'derangement formula',
+  'permutation examples',
+  'n factorial permutations',
+  'P(n,r) formula',
+  'permutation with identical items',
+  'ordered arrangements',
+  'combinatorics permutations'
+]
 
   const permutationsScenariosTableData = {
     tableTitle: "Permutation Scenarios",
@@ -578,7 +590,68 @@ Here is an example of simple permutation: creating 3 letter string.
 
       `,
   
-    }
+    },
+    // URL: /combinatorics/permutations
+// New section — slot after #circular, anchor id: 'derangement'
+
+  obj8: {
+    title: `Derangement`,
+    content: `
+A derangement is a permutation with an added constraint: no element appears in its original position. The other five permutation types vary the question of which arrangements to count — all items or a subset, with or without repetition, linear or circular. The derangement varies the constraint on the arrangement itself: same items, same order-matters property, same linear shape, with the extra requirement that every item must have moved.
+
+The classical motivation is the hat-check problem. $n$ guests check $n$ hats, and the attendant returns them in a random order. In how many of those orderings does no guest receive their own hat? Each such ordering is a derangement of the $n$ hats.
+
+## Notation
+
+Two notations are in common use:
+
+• $!n$ — the subfactorial, the modern standard. The exclamation precedes the operand, mirroring the factorial in reverse.
+• $D_n$ — an alternative notation, common in older texts.
+
+The two are interchangeable.
+
+## Formula
+
+The explicit formula is
+
+$$!n = n! \\sum_{k=0}^{n} \\frac{(-1)^k}{k!}.$$
+
+It is derived by applying the [inclusion–exclusion principle](!/combinatorics/inclusion-exclusion) to the set of all permutations: start with $n!$ total, subtract those that fix at least one specific position, add back those that fix at least two, and continue with alternating signs through all $n$ positions. The full derivation lives on the inclusion–exclusion page; the permutations page uses the result.
+
+A recursive form is also useful for computation:
+
+$$!n = (n-1)\\bigl(!(n-1) + !(n-2)\\bigr).$$
+
+The asymptotic behavior of the formula is striking. As $n \\to \\infty$,
+
+$$\\frac{!n}{n!} \\to \\frac{1}{e} \\approx 0.368.$$
+
+The proportion of permutations that are derangements approaches a fixed limit rather than vanishing or filling the space — for any sufficiently large $n$, roughly $36.8\\%$ of all permutations of $n$ items are derangements.
+
+## Small Values
+
+The first few subfactorials:
+
+• $!1 = 0$ — with one item, the only permutation leaves it in place
+• $!2 = 1$ — the swap
+• $!3 = 2$
+• $!4 = 9$
+• $!5 = 44$
+• $!6 = 265$
+
+## Example
+
+In the hat-check problem with 4 guests, the number of orderings in which no guest receives their own hat is
+
+$$!4 = 4! \\sum_{k=0}^{4} \\frac{(-1)^k}{k!} = 24 \\left(1 - 1 + \\tfrac{1}{2} - \\tfrac{1}{6} + \\tfrac{1}{24}\\right) = 9.$$
+
+Out of the $4! = 24$ possible orderings of the four hats, exactly 9 satisfy the no-fixed-point condition.
+`,
+    before: ``,
+    between: ``,
+    after: ``,
+    link: '',
+  },
   
   }
 
@@ -595,34 +668,140 @@ Each scenario has specific formulas and real-world applications. Ready to dive i
 Mastering these permutation types gives you the tools to solve ordering problems across mathematics, computer science, and everyday scenarios. The key is recognizing which type fits your specific situation.`
 }
 
-    return {
-      props:{
-         seoData: {
-      title: "Permutations in Combinatorics - Types, Formulas & Examples | Learn Math Class",
-      description: introContent.content.substring(0, 160),
-      keywords: keyWords.join(", "),
-      url: "/combinatorics/permutations"
+
+
+const faqQuestions = {
+  obj1: {
+    question: "What is a permutation?",
+    answer: "A permutation is an ordered arrangement of items where sequence matters. Different orderings of the same items count as distinct permutations. This contrasts with combinations, which count unordered selections."
+  },
+  obj2: {
+    question: "What is the formula for permutations?",
+    answer: "For arranging all n distinct items the count is n!. For arranging r items chosen from n distinct items it is P(n,r) = n!/(n-r)!. For arrangements with repetition allowed across r positions it is n^r, and for arrangements with identical items it uses the multinomial coefficient n!/(n_1!·n_2!·...·n_k!)."
+  },
+  obj3: {
+    question: "What is the difference between a permutation and a combination?",
+    answer: "Permutations count ordered arrangements: ABC and BCA are different. Combinations count unordered selections: ABC and BCA are the same. The structural question 'does order matter' determines which family applies."
+  },
+  obj4: {
+    question: "What is a circular permutation?",
+    answer: "A circular permutation arranges n distinct items around a circle, with rotations counted as identical. Fixing one item to break the rotational symmetry reduces the count to (n-1)! arrangements."
+  },
+  obj5: {
+    question: "What is a derangement?",
+    answer: "A derangement is a permutation in which no element appears in its original position. The count is denoted !n or D_n, given by !n = n!·sum from k=0 to n of (-1)^k/k!. As n grows, the proportion of permutations that are derangements approaches 1/e ≈ 0.368."
+  }
+}
+
+
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Permutations",
+    "description": "Permutations in combinatorics: full, partial, with repetition, with identical items, circular, and derangements. Formulas, notation, and worked examples.",
+    "url": "https://www.learnmathclass.com/combinatorics/permutations",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
     },
-        sectionsContent,
-        introContent,
-        permutationsTable,
-        permutationsDiagram,
-        fullPermutationTable,
-        identicalTable,
-        permutationsScenariosTableData,
-        partialWithoutTable,
-        permutationWithRepetitionTable,
-        circularTable
-        
+    "about": {
+      "@type": "Thing",
+      "name": "Permutations"
+    },
+    "teaches": [
+      "Logic behind permutations and the multiplication principle",
+      "Full permutations and the factorial formula n!",
+      "Permutations with identical items via the multinomial coefficient",
+      "Partial permutations with and without repetition",
+      "Circular permutations and rotational equivalence",
+      "Derangements and the subfactorial formula"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Combinatorics",
+        "item": "https://www.learnmathclass.com/combinatorics"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Permutations",
+        "item": "https://www.learnmathclass.com/combinatorics/permutations"
       }
-    }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+   return {
+  props:{
+    seoData: {
+      title: "Permutations: Types, Formulas, Examples | Learn Math Class",
+      description: "Permutations in combinatorics: full, partial, with repetition, with identical items, circular, and derangements. Formulas, notation, and worked examples.",
+      keywords: keyWords.join(", "),
+      url: "/combinatorics/permutations",
+      name: "Permutations"
+    },
+    sectionsContent,
+    introContent,
+    permutationsTable,
+    permutationsDiagram,
+    fullPermutationTable,
+    identicalTable,
+    permutationsScenariosTableData,
+    partialWithoutTable,
+    permutationWithRepetitionTable,
+    circularTable,
+    faqQuestions,
+    schemas
+  }
+}
   }
   
-
-export default function PermutationsPage({seoData,sectionsContent,introContent,permutationsDiagram,fullPermutationTable,
-  identicalTable,permutationsTable ,permutationsScenariosTableData,partialWithoutTable,
-  permutationWithRepetitionTable,circularTable}) {
-
+export default function PermutationsPage({seoData, sectionsContent, introContent, permutationsDiagram, fullPermutationTable,
+  identicalTable, permutationsTable, permutationsScenariosTableData, partialWithoutTable,
+  permutationWithRepetitionTable, circularTable, faqQuestions, schemas}) {
   
   const permutationsSections=[
     {
@@ -744,6 +923,15 @@ export default function PermutationsPage({seoData,sectionsContent,introContent,p
 
       ]
   },
+
+    {
+        id:'8',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
+        ]
+    },
 //   {
 //     id:'',
 //     title:'',
@@ -757,47 +945,36 @@ export default function PermutationsPage({seoData,sectionsContent,introContent,p
 
   return (
     <>
-    <Head>
+<Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
+
   <meta property="og:title" content={seoData.title} />
   <meta property="og:description" content={seoData.description} />
   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Learn Math Class" />
-  
+
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content={seoData.title} />
   <meta name="twitter:description" content={seoData.description} />
-  
+
   <meta name="robots" content="index, follow" />
-  
-  <script 
+
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.title,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": "Permutations",
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.learningResource) }}
+  />
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
+  />
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
   />
 </Head>
     {/* <GenericNavbar/> */}

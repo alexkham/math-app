@@ -14,11 +14,22 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export async function getStaticProps(){
 
-  const keyWords=[
-    'combinations','combination formula','permutation and combination','combinatorics',
-    'combinations vs permutations'
-  ]
-
+ const keyWords = [
+  'combinations',
+  'combination formula',
+  'n choose r',
+  'binomial coefficient',
+  'partition into groups',
+  'weak composition',
+  'strong composition',
+  'distribution into cells',
+  'stars and bars',
+  'combinations vs permutations',
+  'unordered selection',
+  'multinomial coefficient',
+  'combinatorics combinations',
+  'combination examples'
+]
     const combinationsScenariosTableData = {
         tableTitle: "Combination Scenarios",
         rows: [
@@ -475,32 +486,140 @@ Each type serves different counting needs, from team selection to resource alloc
 Mastering these combination types equips you to handle selection and distribution problems across various mathematical and practical contexts. The challenge is identifying which scenario matches your specific problem.`
 }
 
-    return {
-      props:{
-         seoData: {
-      title: `${sectionsContent.types.title} in Combinatorics | Learn Math Class`,
-      description: introContent.content.substring(0, 160),
-      keywords: keyWords.join(", "),
-      url: "/combinatorics/combinations"
+
+const faqQuestions = {
+  obj1: {
+    question: "What is a combination?",
+    answer: "A combination is an unordered selection of items, where only which items are chosen matters and not the order in which they appear. The standard count C(n,r) = n!/(r!(n-r)!) gives the number of r-element subsets of an n-element set."
+  },
+  obj2: {
+    question: "What is the difference between combinations and permutations?",
+    answer: "Combinations count unordered selections (ABC and CBA are the same), while permutations count ordered arrangements (ABC and CBA are different). The structural question 'does order matter' determines which family applies, and the two counts differ by a factor of r! for selecting r items."
+  },
+  obj3: {
+    question: "What is the formula for combinations?",
+    answer: "The simple combination count is C(n,r) = n!/(r!(n-r)!), read 'n choose r'. Other scenarios use different formulas: partition into groups uses n!/(n_1!·n_2!·...·n_k!), weak composition uses C(n+r-1, r-1), and strong composition uses C(n-1, r-1)."
+  },
+  obj4: {
+    question: "What is the difference between weak and strong composition?",
+    answer: "Both distribute n identical items into r labeled containers. Weak composition allows empty containers and counts C(n+r-1, r-1) arrangements. Strong composition requires every container to receive at least one item and counts C(n-1, r-1) arrangements."
+  },
+  obj5: {
+    question: "When do you use the partition-into-groups formula?",
+    answer: "The partition formula n!/(n_1!·n_2!·...·n_k!) applies when n distinct items are split into groups of specified sizes n_1, n_2, ..., n_k. It is the multinomial coefficient, and it counts unordered partitions where groups are distinguished by their contents, not by labels."
+  }
+}
+
+
+const schemas = {
+  learningResource: {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Combinations",
+    "description": "Combinations in combinatorics: simple combinations, partition into groups, weak and strong composition, and distribution into cells, with formulas and examples.",
+    "url": "https://www.learnmathclass.com/combinatorics/combinations",
+    "inLanguage": "en-US",
+    "learningResourceType": "Explanation",
+    "educationalLevel": "High School, College",
+    "educationalUse": "Learning",
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
     },
-        sectionsContent,
-        introContent,
-        simpleCombinationTable,
-        partitionTable,
-        weakCompositionTable,
-        strongCompositionTable,
-        distributionTable,
-        combinationsScenariosTableData
-        
+    "about": {
+      "@type": "Thing",
+      "name": "Combinations"
+    },
+    "teaches": [
+      "Simple combinations and the n choose r formula",
+      "Partition of distinct items into unlabeled groups",
+      "Weak composition: distributing identical items with empty cells allowed",
+      "Strong composition: distributing identical items with no empty cells",
+      "Distribution of distinct items into labeled cells",
+      "Combinations versus permutations and the role of order"
+    ],
+    "keywords": keyWords.join(", "),
+    "author": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Learn Math Class"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": new Date().toISOString()
+  },
+
+  breadcrumb: {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.learnmathclass.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Combinatorics",
+        "item": "https://www.learnmathclass.com/combinatorics"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Combinations",
+        "item": "https://www.learnmathclass.com/combinatorics/combinations"
       }
-    }
+    ]
+  },
+
+  faq: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": Object.keys(faqQuestions).map(key => ({
+      "@type": "Question",
+      "name": faqQuestions[key].question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faqQuestions[key].answer
+      }
+    }))
+  }
+}
+
+
+
+
+
+  return {
+  props:{
+    seoData: {
+      title: "Combinations: Formula, Types & Examples | Learn Math Class",
+      description: "Combinations in combinatorics: simple combinations, partition into groups, weak and strong composition, and distribution into cells, with formulas and examples.",
+      keywords: keyWords.join(", "),
+      url: "/combinatorics/combinations",
+      name: "Combinations"
+    },
+    sectionsContent,
+    introContent,
+    simpleCombinationTable,
+    partitionTable,
+    weakCompositionTable,
+    strongCompositionTable,
+    distributionTable,
+    combinationsScenariosTableData,
+    faqQuestions,
+    schemas
+  }
+}
   }
   
-
-export default function CombinationsPage({ seoData,sectionsContent,introContent,simpleCombinationTable,
-  partitionTable,weakCompositionTable ,strongCompositionTable,distributionTable,
-combinationsScenariosTableData}) {
-
+export default function CombinationsPage({seoData, sectionsContent, introContent, simpleCombinationTable,
+  partitionTable, weakCompositionTable, strongCompositionTable, distributionTable,
+  combinationsScenariosTableData, faqQuestions, schemas}) {
   
   const combinationsSections=[
     {
@@ -641,47 +760,36 @@ combinationsScenariosTableData}) {
 
   return (
     <>
-    <Head>
+ <Head>
   <title>{seoData.title}</title>
   <meta name="description" content={seoData.description} />
   <meta name="keywords" content={seoData.keywords} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
+
   <meta property="og:title" content={seoData.title} />
   <meta property="og:description" content={seoData.description} />
   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Learn Math Class" />
-  
+
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content={seoData.title} />
   <meta name="twitter:description" content={seoData.description} />
-  
+
   <meta name="robots" content="index, follow" />
-  
-  <script 
+
+  <script
     type="application/ld+json"
-    dangerouslySetInnerHTML={{ 
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": seoData.title,
-        "description": seoData.description,
-        "keywords": seoData.keywords,
-        "url": `https://www.learnmathclass.com${seoData.url}`,
-        "dateModified": new Date().toISOString(),
-        "inLanguage": "en-US",
-        "mainEntity": {
-          "@type": "Article",
-          "name": "Combinations",
-          "dateModified": new Date().toISOString(),
-          "author": {
-            "@type": "Organization",
-            "name": "Learn Math Class"
-          }
-        }
-      })
-    }}
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.learningResource) }}
+  />
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
+  />
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
   />
 </Head>
     {/* <GenericNavbar/> */}
