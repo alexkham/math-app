@@ -1,3 +1,4 @@
+
 // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 // import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 // import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -10,7 +11,22 @@
 
 // export async function getStaticProps(){
 
-//   const keyWords=['','','','','']
+//   const keyWords = [
+//     'binomial coefficient',
+//     'n choose k',
+//     'binomial coefficient formula',
+//     'binomial coefficient identities',
+//     'Pascal triangle',
+//     'Pascal rule',
+//     'combinations formula',
+//     'multinomial coefficient',
+//     'Vandermonde identity',
+//     'hockey stick identity',
+//     'binomial symmetry',
+//     'row sum binomial',
+//     'nCk formula',
+//     'combinatorial identities'
+//   ]
 
 //   // •
 
@@ -234,25 +250,128 @@
 // `,
 // };
 
+// const faqQuestions = {
+//   obj1: {
+//     question: "What is a binomial coefficient?",
+//     answer: "A binomial coefficient C(n,k), read 'n choose k', is defined as n! / (k!·(n-k)!) for non-negative integers n and k with k ≤ n. Combinatorially it counts the number of k-element subsets of an n-element set, but the same object also organizes polynomial expansions and probability distributions."
+//   },
+//   obj2: {
+//     question: "What is Pascal's rule?",
+//     answer: "Pascal's rule states C(n,k) = C(n-1, k-1) + C(n-1, k). Fixing one element of the n-set partitions the k-subsets into those that contain it and those that do not, and the two case counts sum to the total. This recursion is what generates Pascal's triangle."
+//   },
+//   obj3: {
+//     question: "What is the symmetry identity for binomial coefficients?",
+//     answer: "The symmetry identity is C(n,k) = C(n, n-k). Choosing which k items to include from an n-set is equivalent to choosing which n-k items to exclude, so both selections are counted by the same coefficient. The identity is visible in Pascal's triangle as left-right reflection within each row."
+//   },
+//   obj4: {
+//     question: "What is Vandermonde's identity?",
+//     answer: "Vandermonde's identity states C(m+n, r) = sum from k=0 to r of C(m,k)·C(n, r-k). Choosing r items from the union of an m-set and a disjoint n-set partitions according to how many come from each side, giving the convolution sum on the right."
+//   },
+//   obj5: {
+//     question: "What is the multinomial coefficient?",
+//     answer: "The multinomial coefficient C(n; k_1, k_2, ..., k_r) = n! / (k_1!·k_2!·...·k_r!) generalizes the binomial coefficient to more than two groups, with k_1 + k_2 + ... + k_r = n. It counts arrangements of n items where k_i are of type i, and appears in the multinomial theorem."
+//   }
+// }
+
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": "Binomial Coefficient",
+//     "description": "Binomial coefficient n choose k: formula, key identities including Pascal's rule and Vandermonde, Pascal's triangle, and the multinomial generalization.",
+//     "url": "https://www.learnmathclass.com/combinatorics/binomial-coefficient",
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "High School, College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Binomial Coefficient"
+//     },
+//     "teaches": [
+//       "Definition and notation of binomial coefficients",
+//       "Extension to real and complex upper index",
+//       "Core identities including symmetry, Pascal's rule, and absorption",
+//       "Pascal's triangle structure and its diagonal sequences",
+//       "Vandermonde's identity and the hockey stick identity",
+//       "Multinomial coefficient as the generalization to more than two groups"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Combinatorics",
+//         "item": "https://www.learnmathclass.com/combinatorics"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Binomial Coefficient",
+//         "item": "https://www.learnmathclass.com/combinatorics/binomial-coefficient"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
 
 
 //    return {
 //       props:{
 //          sectionsContent,
 //          introContent,
+//          faqQuestions,
+//          schemas,
 //           seoData: {
-//         title: "Title | Learn Math Class",
-//         description: "Metadescription",
+//         title: "Binomial Coefficient Formula & Identities | Learn Math Class",
+//         description: "Binomial coefficient n choose k: formula, key identities including Pascal's rule and Vandermonde, Pascal's triangle, and the multinomial generalization.",
 //         keywords: keyWords.join(", "),
 //         url: "/combinatorics/binomial-coefficient",
-//          name: "name"
+//          name: "Binomial Coefficient"
 //       },
         
 //        }
 //     }
 //    }
 
-// export default function PageTemplate({seoData,sectionsContent , introContent}) {
+// export default function BinomialCoefficientPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
     
 //   const genericSections=[
@@ -435,25 +554,21 @@
 //   <script 
 //     type="application/ld+json"
 //     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.faq)
 //     }}
 //   />
 // </Head>
@@ -476,23 +591,23 @@
 //    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Binomial Coefficient</h1>
 //    <br/>
 //    <br/>
-//    {/* <SectionTableOfContents sections={genericSections}
+//    <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
 //          secondaryNavMode="siblings"  // or "children"
 //          secondaryNavTitle="More in this Section"
    
-//    /> */}
+//    />
 //    <br/>
 //    <br/>
 //    <br/>
-//     {/* <IntroSection 
+//     <IntroSection 
 //           id={introContent.id}
 //           title={introContent.title}
 //           content={introContent.content}
 //            backgroundColor='#f9fafb'
 //           //  "#f2f2f2"
 //           textColor="#06357a"
-//         /> */}
+//         />
 //    <br/>
 //     {/* <KeyTermsCard
 //      id="0"
@@ -502,7 +617,7 @@
 //      variant="light"
 //    /> */}
 //    <br/>
-//    {/* <Sections sections={genericSections}/> */}
+//    <Sections sections={genericSections}/>
 //    <br/>
 //    <br/>
 //    <br/>
@@ -513,6 +628,7 @@
 
 
 
+// tables-optimized: v4 | 2026-05-26 | 3 tables (obj2 aggregation, obj3 aggregation, obj6 summary capstone)
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -521,6 +637,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
 export async function getStaticProps(){
@@ -585,6 +702,165 @@ export async function getStaticProps(){
 
 
 // URL: /combinatorics/binomial-coefficient
+
+  const linkStyle = 'color: inherit; text-decoration: underline;'
+
+  // ---------- TABLES ----------
+
+  // obj2 — aggregation: every named binomial-coefficient identity in one card
+  const obj2Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Identity</th>
+      <th style="${tableHeaders.aggregation}">Formula</th>
+      <th style="${tableHeaders.aggregation}">Combinatorial meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Symmetry</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(n, k) = C(n, n − k)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">choosing the k included items ↔ choosing the n − k excluded items</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Pascal&apos;s rule</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(n, k) = C(n−1, k−1) + C(n−1, k)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a fixed element is either in the subset or out of it</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Absorption</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">k · C(n, k) = n · C(n−1, k−1)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">choose a k-subset, then distinguish one of its members</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Row sum</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>k=0</sub><sup>n</sup> C(n, k) = 2<sup>n</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">total number of subsets of an n-set</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Alternating row sum</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>k=0</sub><sup>n</sup> (−1)<sup>k</sup> C(n, k) = 0 for n ≥ 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">even-sized subsets and odd-sized subsets are equally numerous</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Vandermonde&apos;s identity</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(m+n, r) = Σ<sub>k=0</sub><sup>r</sup> C(m, k) C(n, r−k)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">partition the chosen items between the two source sets</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Hockey stick</td>
+      <td style="padding: 12px 15px; color: #34495e;">Σ<sub>i=k</sub><sup>n</sup> C(i, k) = C(n+1, k+1)</td>
+      <td style="padding: 12px 15px; color: #34495e;">a diagonal sum in Pascal&apos;s triangle equals a single entry one row below</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj3 — aggregation: the named diagonal sequences in Pascal's triangle
+  const obj3Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Diagonal</th>
+      <th style="${tableHeaders.aggregation}">Sequence name</th>
+      <th style="${tableHeaders.aggregation}">First few values</th>
+      <th style="${tableHeaders.aggregation}">Closed form (n-th)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">1st (k = 0)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">constants</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1, 1, 1, 1, …</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">2nd (k = 1)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">natural numbers</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1, 2, 3, 4, …</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">3rd (k = 2)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">triangular numbers</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1, 3, 6, 10, 15, …</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n(n+1) ⁄ 2</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">4th (k = 3)</td>
+      <td style="padding: 12px 15px; color: #34495e;">tetrahedral numbers</td>
+      <td style="padding: 12px 15px; color: #34495e;">1, 4, 10, 20, 35, …</td>
+      <td style="padding: 12px 15px; color: #34495e;">n(n+1)(n+2) ⁄ 6</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj6 — summary capstone: formula, boundary values, generalizations
+  const capstoneTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Concept</th>
+      <th style="${tableHeaders.summary}">Statement</th>
+      <th style="${tableHeaders.summary}">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Standard formula</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(n, k) = n! ⁄ (k! · (n − k)!) for 0 ≤ k ≤ n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(5, 2) = 120 ⁄ (2 · 6) = 10</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Combinatorial meaning</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of k-element subsets of an n-element set</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2-subsets of {a, b, c, d, e}: 10</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Read aloud</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&quot;n choose k&quot;</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(5, 2) reads &quot;5 choose 2&quot;</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Edge values</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(n, 0) = C(n, n) = 1 for every n ≥ 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(7, 0) = C(7, 7) = 1</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear values</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(n, 1) = C(n, n − 1) = n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(7, 1) = 7</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Out of range</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(n, k) = 0 whenever k &gt; n or k &lt; 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(3, 5) = 0</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Real upper index</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(x, k) = x(x−1)(x−2)…(x−k+1) ⁄ k! — a polynomial of degree k in x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(½, 2) = (½ · −½) ⁄ 2 = −1⁄8</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Pascal&apos;s-triangle row</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">row n holds C(n, 0), C(n, 1), …, C(n, n)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">row 4: 1, 4, 6, 4, 1</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Multinomial generalization</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(n; k₁, …, k<sub>r</sub>) = n! ⁄ (k₁! · k₂! · … · k<sub>r</sub>!) with k₁+…+k<sub>r</sub> = n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(6; 2, 2, 2) = 720 ⁄ 8 = 90</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Where it appears</td>
+      <td style="padding: 12px 15px; color: #34495e;">subset counts, polynomial expansions (<a href="/combinatorics/binomial-theorem" style="${linkStyle}">binomial theorem</a>), discrete probability (binomial distribution), finite-difference calculus</td>
+      <td style="padding: 12px 15px; color: #34495e;">(x + y)<sup>n</sup> coefficients are C(n, k)</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 const sectionsContent = {
   obj1: {
@@ -749,6 +1025,17 @@ The multinomial coefficient is also the natural coefficient in the [multinomial 
     after: ``,
     link: '',
   },
+
+  obj6: {
+    title: `Binomial Coefficient at a Glance`,
+    content: `
+The page covered the formal definition and notation, the network of identities the coefficient satisfies, the Pascal&apos;s-triangle organization, and the multinomial generalization. The table below collects the formula, boundary values, and generalizations in one reference card.
+`,
+    before: ``,
+    between: ``,
+    after: ``,
+    link: '',
+  },
 };
 
 
@@ -871,6 +1158,9 @@ const schemas = {
       props:{
          sectionsContent,
          introContent,
+         obj2Table,
+         obj3Table,
+         capstoneTable,
          faqQuestions,
          schemas,
           seoData: {
@@ -885,9 +1175,10 @@ const schemas = {
     }
    }
 
-export default function BinomialCoefficientPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function BinomialCoefficientPage({seoData, sectionsContent, introContent, obj2Table, obj3Table, capstoneTable, faqQuestions, schemas}) {
 
-    
+  const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
   const genericSections=[
     // {
     //     id:'0',
@@ -911,6 +1202,8 @@ export default function BinomialCoefficientPage({seoData, sectionsContent, intro
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'obj2-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: obj2Table }} />,
         ]
     },
     {
@@ -919,6 +1212,8 @@ export default function BinomialCoefficientPage({seoData, sectionsContent, intro
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'obj3-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
         ]
     },
     {
@@ -937,14 +1232,16 @@ export default function BinomialCoefficientPage({seoData, sectionsContent, intro
           sectionsContent.obj5.content,
         ]
     },
-    // {
-    //     id:'6',
-    //     title:sectionsContent.obj6.title,
-    //     link:sectionsContent.obj6.link,
-    //     content:[
-    //       sectionsContent.obj6.content,
-    //     ]
-    // },
+    {
+        id:'6',
+        title:sectionsContent.obj6.title,
+        link:sectionsContent.obj6.link,
+        content:[
+          sectionsContent.obj6.content,
+          <div key={'capstone-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+        ]
+    },
     // {
     //     id:'7',
     //     title:sectionsContent.obj7.title,

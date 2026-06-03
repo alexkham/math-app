@@ -321,7 +321,7 @@ export default function ModPieWheel() {
     >
       {/* ---------- Header ---------- */}
       <header style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-        <h1
+        {/* <h1
           style={{
             fontSize: '1.5rem',
             fontWeight: 700,
@@ -330,7 +330,7 @@ export default function ModPieWheel() {
           }}
         >
           Modular Arithmetic Pie Wheel
-        </h1>
+        </h1> */}
         <p style={{ color: PALETTE.textDim, fontSize: '0.9rem' }}>
           Numbers grouped by their remainder when divided.
         </p>

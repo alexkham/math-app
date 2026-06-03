@@ -14,28 +14,86 @@ export const processContent = (content, styles = null) => {
   if (!content) return null;
   
   // Process academic blocks
+  // const academicBlocks = [];
+  // const contentWithAcademicPlaceholders = content.replace(/@academic\[[\s\S]*?\]@/g, (match) => {
+  //   const academicContent = match.slice(10, -2);
+  //   // const splitIndex = academicContent.indexOf(':');
+
+  //   // const splitIndex = academicContent.search(/(?<!width):/);
+
+  //   const splitIndex = academicContent.search(/(?<!width)(?<!align):/);
+
+  //   if (splitIndex > 0) {
+  //     const beforeColon = academicContent.substring(0, splitIndex);
+  //     const blockContent = academicContent.substring(splitIndex + 1);
+      
+  //     // let blockType = beforeColon;
+  //     // let customWidth = null;
+      
+  //     // if (beforeColon.includes(',width:')) {
+  //     //   const parts = beforeColon.split(',width:');
+  //     //   blockType = parts[0];
+  //     //   customWidth = parts[1];
+  //     // }
+      
+  //     // academicBlocks.push(renderAcademicBlockHTML(blockContent.trim(), blockType.trim(), customWidth));
+
+  //     let blockType = beforeColon;
+  //     let customWidth = null;
+  //     let customAlign = null;
+
+  //     const parts = beforeColon.split(',');
+  //     blockType = parts[0];
+  //     parts.slice(1).forEach(p => {
+  //       if (p.startsWith('width:')) customWidth = p.slice(6);
+  //       if (p.startsWith('align:')) customAlign = p.slice(6);
+  //     });
+
+  //     academicBlocks.push(renderAcademicBlockHTML(blockContent.trim(), blockType.trim(), customWidth, customAlign));
+  //     return `__ACADEMIC_PLACEHOLDER_${academicBlocks.length - 1}__`;
+  //   }
+  //   return match;
+  // });
+
+
   const academicBlocks = [];
-  const contentWithAcademicPlaceholders = content.replace(/@academic\[[\s\S]*?\]@/g, (match) => {
-    const academicContent = match.slice(10, -2);
-    const splitIndex = academicContent.indexOf(':');
-    if (splitIndex > 0) {
-      const beforeColon = academicContent.substring(0, splitIndex);
-      const blockContent = academicContent.substring(splitIndex + 1);
-      
-      let blockType = beforeColon;
-      let customWidth = null;
-      
-      if (beforeColon.includes(',width:')) {
-        const parts = beforeColon.split(',width:');
-        blockType = parts[0];
-        customWidth = parts[1];
-      }
-      
-      academicBlocks.push(renderAcademicBlockHTML(blockContent.trim(), blockType.trim(), customWidth));
-      return `__ACADEMIC_PLACEHOLDER_${academicBlocks.length - 1}__`;
-    }
-    return match;
-  });
+const contentWithAcademicPlaceholders = content.replace(/@academic\[[\s\S]*?\]@/g, (match) => {
+  const academicContent = match.slice(10, -2);
+  const splitIndex = academicContent.search(/(?<!width)(?<!align)(?<!cite)(?<!tags)(?<!number)(?<!linkto)(?<!collapsible)(?<!compact)(?<!aside):/);
+  if (splitIndex > 0) {
+    const beforeColon = academicContent.substring(0, splitIndex);
+    const blockContent = academicContent.substring(splitIndex + 1);
+
+    let blockType = beforeColon;
+    let customWidth = null;
+    let customAlign = null;
+    const customOpts = {};
+
+    const parts = beforeColon.split(',');
+    blockType = parts[0];
+    parts.slice(1).forEach((p) => {
+      const colonIdx = p.indexOf(':');
+      if (colonIdx === -1) return;
+      const key = p.slice(0, colonIdx).trim();
+      const val = p.slice(colonIdx + 1).trim();
+      if (key === 'width') customWidth = val;
+      else if (key === 'align') customAlign = val;
+      else if (key === 'cite') customOpts.cite = val;
+      else if (key === 'tags') customOpts.tags = val;
+      else if (key === 'number') customOpts.number = val;
+      else if (key === 'linkto') customOpts.linkto = val;
+      else if (key === 'collapsible') customOpts.collapsible = val === 'true';
+      else if (key === 'compact') customOpts.compact = val === 'true';
+      else if (key === 'aside') customOpts.aside = val === 'true';
+    });
+
+    academicBlocks.push(
+      renderAcademicBlockHTML(blockContent.trim(), blockType.trim(), customWidth, customAlign, customOpts)
+    );
+    return `__ACADEMIC_PLACEHOLDER_${academicBlocks.length - 1}__`;
+  }
+  return match;
+});
   
   // Process SVGs
   const svgs = [];

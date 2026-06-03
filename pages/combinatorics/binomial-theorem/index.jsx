@@ -10,7 +10,22 @@
 
 // export async function getStaticProps(){
 
-//   const keyWords=['','','','','']
+//   const keyWords = [
+//     'binomial theorem',
+//     'binomial expansion',
+//     'binomial theorem formula',
+//     '(a+b)^n expansion',
+//     'binomial coefficient',
+//     'binomial series',
+//     'general term binomial',
+//     'multinomial theorem',
+//     'binomial theorem proof',
+//     'Pascal triangle',
+//     'binomial identities',
+//     'binomial expansion examples',
+//     'middle term binomial',
+//     'multinomial expansion'
+//   ]
 
 //   // •
 
@@ -273,26 +288,128 @@
 // `,
 // };
 
+// const faqQuestions = {
+//   obj1: {
+//     question: "What is the binomial theorem?",
+//     answer: "The binomial theorem states that for any non-negative integer n, the expansion of (a+b)^n is the sum from k=0 to n of C(n,k)·a^(n-k)·b^k. The coefficients are the binomial coefficients, which are exactly the entries of row n of Pascal's triangle."
+//   },
+//   obj2: {
+//     question: "What is the general term in a binomial expansion?",
+//     answer: "The general term, also called the (k+1)-th term, is T_(k+1) = C(n,k)·a^(n-k)·b^k. Indexing starts at T_1 = a^n. The general term is used to find a specific coefficient, the middle term, or the term independent of a variable without expanding the full polynomial."
+//   },
+//   obj3: {
+//     question: "How many terms does (a+b)^n have?",
+//     answer: "The expansion of (a+b)^n has exactly n+1 terms, one for each value of k from 0 to n. When n is even, there is a unique middle term T_(n/2+1) with the maximum coefficient C(n, n/2)."
+//   },
+//   obj4: {
+//     question: "What is the multinomial theorem?",
+//     answer: "The multinomial theorem generalizes the binomial theorem to sums of more than two terms. It expands (x_1 + x_2 + ... + x_r)^n as a sum over all tuples (k_1, ..., k_r) of non-negative integers summing to n, with multinomial coefficients n!/(k_1!·k_2!·...·k_r!)."
+//   },
+//   obj5: {
+//     question: "How do you find the middle term of a binomial expansion?",
+//     answer: "When n is even, the middle term of (a+b)^n is the (n/2 + 1)-th term: T_(n/2+1) = C(n, n/2)·a^(n/2)·b^(n/2). Its coefficient C(n, n/2) is the largest in row n of Pascal's triangle. When n is odd, there are two middle terms with equal coefficients."
+//   }
+// }
 
+// const schemas = {
+//   learningResource: {
+//     "@context": "https://schema.org",
+//     "@type": "LearningResource",
+//     "name": "Binomial Theorem",
+//     "description": "Binomial theorem for expanding (a+b)^n: general term formula, special cases, multinomial generalization, combinatorial proof, and worked example expansions.",
+//     "url": "https://www.learnmathclass.com/combinatorics/binomial-theorem",
+//     "inLanguage": "en-US",
+//     "learningResourceType": "Explanation",
+//     "educationalLevel": "High School, College",
+//     "educationalUse": "Learning",
+//     "audience": {
+//       "@type": "EducationalAudience",
+//       "educationalRole": "student"
+//     },
+//     "about": {
+//       "@type": "Thing",
+//       "name": "Binomial Theorem"
+//     },
+//     "teaches": [
+//       "Binomial theorem statement for (a+b)^n",
+//       "Combinatorial and algebraic proofs of the binomial theorem",
+//       "General term formula for binomial expansions",
+//       "Special cases of the binomial theorem and derived identities",
+//       "Multinomial theorem as a generalization to multiple terms",
+//       "Finding specific coefficients, middle terms, and constant terms"
+//     ],
+//     "keywords": keyWords.join(", "),
+//     "author": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "publisher": {
+//       "@type": "Organization",
+//       "name": "Learn Math Class"
+//     },
+//     "datePublished": "2024-01-15",
+//     "dateModified": new Date().toISOString()
+//   },
+
+//   breadcrumb: {
+//     "@context": "https://schema.org",
+//     "@type": "BreadcrumbList",
+//     "itemListElement": [
+//       {
+//         "@type": "ListItem",
+//         "position": 1,
+//         "name": "Home",
+//         "item": "https://www.learnmathclass.com"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 2,
+//         "name": "Combinatorics",
+//         "item": "https://www.learnmathclass.com/combinatorics"
+//       },
+//       {
+//         "@type": "ListItem",
+//         "position": 3,
+//         "name": "Binomial Theorem",
+//         "item": "https://www.learnmathclass.com/combinatorics/binomial-theorem"
+//       }
+//     ]
+//   },
+
+//   faq: {
+//     "@context": "https://schema.org",
+//     "@type": "FAQPage",
+//     "mainEntity": Object.keys(faqQuestions).map(key => ({
+//       "@type": "Question",
+//       "name": faqQuestions[key].question,
+//       "acceptedAnswer": {
+//         "@type": "Answer",
+//         "text": faqQuestions[key].answer
+//       }
+//     }))
+//   }
+// }
 
 
 //    return {
 //       props:{
 //          sectionsContent,
 //          introContent,
+//          faqQuestions,
+//          schemas,
 //           seoData: {
-//         title: "Title | Learn Math Class",
-//         description: "Metadescription",
+//         title: "Binomial Theorem Formula, Proof, Examples | Learn Math Class",
+//         description: "Binomial theorem for expanding (a+b)^n: general term formula, special cases, multinomial generalization, combinatorial proof, and worked example expansions.",
 //         keywords: keyWords.join(", "),
 //         url: "/combinatorics/binomial-theorem",
-//          name: "name"
+//          name: "Binomial Theorem"
 //       },
         
 //        }
 //     }
 //    }
 
-// export default function PageTemplate({seoData,sectionsContent , introContent}) {
+// export default function BinomialTheoremPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
     
 //   const genericSections=[
@@ -475,25 +592,21 @@
 //   <script 
 //     type="application/ld+json"
 //     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
+//       __html: JSON.stringify(schemas.learningResource)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.breadcrumb)
+//     }}
+//   />
+
+//   <script 
+//     type="application/ld+json"
+//     dangerouslySetInnerHTML={{ 
+//       __html: JSON.stringify(schemas.faq)
 //     }}
 //   />
 // </Head>
@@ -513,7 +626,7 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Binomia Theorem</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Binomial Theorem</h1>
 //    <br/>
 //    <br/>
 //    <SectionTableOfContents sections={genericSections}
@@ -534,13 +647,13 @@
 //           textColor="#06357a"
 //         />
 //    <br/>
-//     <KeyTermsCard
+//     {/* <KeyTermsCard
 //      id="0"
 //      title={sectionsContent.obj0.title}
 //      content={sectionsContent.obj0.content}
 //      after={sectionsContent.obj0.after}
 //      variant="light"
-//    />
+//    /> */}
 //    <br/>
 //    <Sections sections={genericSections}/>
 //    <br/>
@@ -552,7 +665,7 @@
 // }
 
 
-
+// tables-optimized: v4 | 2026-05-26 | 3 tables (obj3 aggregation, obj5 aggregation, obj7 summary capstone)
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -561,6 +674,7 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
 export async function getStaticProps(){
@@ -624,6 +738,156 @@ export async function getStaticProps(){
 //                   }} />
 
   // URL: /combinatorics/binomial-theorem
+
+  const linkStyle = 'color: inherit; text-decoration: underline;'
+
+  // ---------- TABLES ----------
+
+  // obj3 — aggregation: substitutions into (a+b)^n and the identities they produce
+  const obj3Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Substitution</th>
+      <th style="${tableHeaders.aggregation}">Identity produced</th>
+      <th style="${tableHeaders.aggregation}">Combinatorial meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a = 1, b = 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>k=0</sub><sup>n</sup> C(n, k) = 2<sup>n</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">row sum = total number of subsets of an n-set</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a = 1, b = −1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>k=0</sub><sup>n</sup> (−1)<sup>k</sup> C(n, k) = 0 for n ≥ 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">even-sized subsets are as numerous as odd-sized ones</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a = 1, b = x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(1 + x)<sup>n</sup> = Σ<sub>k=0</sub><sup>n</sup> C(n, k) x<sup>k</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">generating function for row n of Pascal&apos;s triangle</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Differentiate, then x = 1</td>
+      <td style="padding: 12px 15px; color: #34495e;">Σ<sub>k=1</sub><sup>n</sup> k · C(n, k) = n · 2<sup>n−1</sup></td>
+      <td style="padding: 12px 15px; color: #34495e;">weighted row sum; combinatorial proofs by double counting also work</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj5 — aggregation: the five standard binomial-expansion problem types
+  const obj5Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Problem type</th>
+      <th style="${tableHeaders.aggregation}">Setup</th>
+      <th style="${tableHeaders.aggregation}">Key step</th>
+      <th style="${tableHeaders.aggregation}">Answer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Full expansion</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x + 2)<sup>4</sup>; row 4 = 1, 4, 6, 4, 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">substitute b = 2 into each term</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x<sup>4</sup> + 8x<sup>3</sup> + 24x<sup>2</sup> + 32x + 16</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Expansion with signs</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(2a − 3b)<sup>3</sup>; row 3 = 1, 3, 3, 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">track the sign of (−3b)<sup>k</sup> in each term</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">8a<sup>3</sup> − 36a<sup>2</sup>b + 54ab<sup>2</sup> − 27b<sup>3</sup></td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">One specific coefficient</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">coefficient of x<sup>5</sup> in (1 + x)<sup>8</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">general term gives k = 5; compute C(8, 5)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">56</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Term independent of x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x + 1⁄x)<sup>10</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">solve 10 − 2k = 0 → k = 5</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(10, 5) = 252</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Multinomial expansion</td>
+      <td style="padding: 12px 15px; color: #34495e;">(a + b + c)<sup>3</sup></td>
+      <td style="padding: 12px 15px; color: #34495e;">enumerate all (k₁, k₂, k₃) with k₁+k₂+k₃ = 3</td>
+      <td style="padding: 12px 15px; color: #34495e;">10 distinct monomials including 6abc</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj7 — summary capstone: theorem, structural facts, and generalizations in one card
+  const capstoneTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Concept</th>
+      <th style="${tableHeaders.summary}">Statement</th>
+      <th style="${tableHeaders.summary}">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">The theorem</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a + b)<sup>n</sup> = Σ<sub>k=0</sub><sup>n</sup> C(n, k) · a<sup>n−k</sup> · b<sup>k</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x + y)<sup>3</sup> = x<sup>3</sup> + 3x<sup>2</sup>y + 3xy<sup>2</sup> + y<sup>3</sup></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Number of terms</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exactly n + 1, one for each k from 0 to n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a + b)<sup>5</sup> has 6 terms</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">General term</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">T<sub>k+1</sub> = C(n, k) · a<sup>n−k</sup> · b<sup>k</sup>; indexing starts at T<sub>1</sub> = a<sup>n</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">T<sub>3</sub> in (a + b)<sup>4</sup> is C(4, 2) a<sup>2</sup>b<sup>2</sup> = 6a<sup>2</sup>b<sup>2</sup></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Coefficients = Pascal row</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the n+1 coefficients are row n of <a href="/combinatorics/binomial-coefficient" style="${linkStyle}">Pascal&apos;s triangle</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a + b)<sup>4</sup>: 1, 4, 6, 4, 1</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Coefficient symmetry</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">C(n, k) = C(n, n − k) — each row reads the same forwards and backwards</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1, 4, 6, 4, 1 is palindromic</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Middle term (n even)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one middle term T<sub>n/2 + 1</sub> with the largest coefficient C(n, n/2)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a + b)<sup>6</sup>: T<sub>4</sub> = 20 a<sup>3</sup>b<sup>3</sup></td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Middle terms (n odd)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two middle terms T<sub>(n+1)/2</sub> and T<sub>(n+3)/2</sub> with equal coefficients</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a + b)<sup>5</sup>: T<sub>3</sub> and T<sub>4</sub>, both coefficient 10</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Multinomial generalization</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x₁ + … + x<sub>r</sub>)<sup>n</sup> = Σ C(n; k₁, …, k<sub>r</sub>) · x₁<sup>k₁</sup>…x<sub>r</sub><sup>k<sub>r</sub></sup> with k₁ + … + k<sub>r</sub> = n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a + b + c)<sup>3</sup>: 10 distinct monomials</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Multinomial term count</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">distinct monomials = C(n + r − 1, r − 1) — a weak-composition count</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a+b+c)<sup>3</sup>: C(5, 2) = 10</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Where it appears</td>
+      <td style="padding: 12px 15px; color: #34495e;">polynomial expansions, binomial distribution (substitute a = p, b = 1−p), Newton&apos;s generalized binomial series for non-integer n</td>
+      <td style="padding: 12px 15px; color: #34495e;">(p + (1−p))<sup>n</sup> = 1 sums all binomial probabilities</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 const sectionsContent = {
   obj1: {
@@ -827,6 +1091,17 @@ The number of terms, $\\binom{3+3-1}{3-1} = \\binom{5}{2} = 10$, matches the cou
     after: ``,
     link: '',
   },
+
+  obj7: {
+    title: `Binomial Theorem at a Glance`,
+    content: `
+The page covered the theorem statement, the general-term formula, useful substitutions that yield combinatorial identities, the multinomial generalization, and the standard problem types. The table below collects the structural facts about (a+b)<sup>n</sup> in one reference card.
+`,
+    before: ``,
+    between: ``,
+    after: ``,
+    link: '',
+  },
 };
 
  // URL: /combinatorics/binomial-theorem
@@ -950,6 +1225,9 @@ const schemas = {
       props:{
          sectionsContent,
          introContent,
+         obj3Table,
+         obj5Table,
+         capstoneTable,
          faqQuestions,
          schemas,
           seoData: {
@@ -964,9 +1242,10 @@ const schemas = {
     }
    }
 
-export default function BinomialTheoremPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function BinomialTheoremPage({seoData, sectionsContent, introContent, obj3Table, obj5Table, capstoneTable, faqQuestions, schemas}) {
 
-    
+  const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
   const genericSections=[
     // {
     //     id:'0',
@@ -998,6 +1277,8 @@ export default function BinomialTheoremPage({seoData, sectionsContent, introCont
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'obj3-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
         ]
     },
     {
@@ -1014,6 +1295,8 @@ export default function BinomialTheoremPage({seoData, sectionsContent, introCont
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'obj5-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
         ]
     },
     {
@@ -1024,14 +1307,16 @@ export default function BinomialTheoremPage({seoData, sectionsContent, introCont
           sectionsContent.obj6.content,
         ]
     },
-    // {
-    //     id:'7',
-    //     title:sectionsContent.obj7.title,
-    //     link:sectionsContent.obj7.link,
-    //     content:[
-    //       sectionsContent.obj7.content,
-    //     ]
-    // },
+    {
+        id:'7',
+        title:sectionsContent.obj7.title,
+        link:sectionsContent.obj7.link,
+        content:[
+          sectionsContent.obj7.content,
+          <div key={'capstone-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+        ]
+    },
     // {
     //     id:'8',
     //     title:sectionsContent.obj8.title,
