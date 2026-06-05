@@ -26,7 +26,7 @@ export const mainMenuStructure = [
             { label: 'Trigonometry', href: '/trigonometry' },
             { label: 'Combinatorics', href: '/combinatorics' },
             { label: 'Set Theory', href: '/set-theory' },
-            { label: 'Sequences', href: '/sequences' },
+            // { label: 'Sequences', href: '/sequences' },
             { label: 'Linear Algebra', href: '/linear-algebra' },
             { label: 'Probability', href: '/probability' },
             { label: 'Mathematical Logic', href: '/logic' }

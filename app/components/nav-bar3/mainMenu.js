@@ -419,20 +419,20 @@ export const mainMenuStructure = [
           }
         ]
       },
-      {
-        "title": "Sequences",
-        "href": "/sequences",
-        "items": [
-          {
-            "label": "Fibonacci Numbers",
-            "href": "/sequences/fibonacci-numbers"
-          },
-          {
-            "label": "Prime Numbers",
-            "href": "/sequences/prime-numbers"
-          }
-        ]
-      },
+      // {
+      //   "title": "Sequences",
+      //   "href": "/sequences",
+      //   "items": [
+      //     {
+      //       "label": "Fibonacci Numbers",
+      //       "href": "/sequences/fibonacci-numbers"
+      //     },
+      //     {
+      //       "label": "Prime Numbers",
+      //       "href": "/sequences/prime-numbers"
+      //     }
+      //   ]
+      // },
       {
         "title": "Complex Numbers",
         "href": "/complex-numbers",
@@ -1026,10 +1026,10 @@ export const mainMenuStructure = [
             "label": "Inverse",
             "href": "/tables/trigonometry/inverse"
           },
-          {
-            "label": "Layout",
-            "href": "/tables/[category]/layout"
-          },
+          // {
+          //   "label": "Layout",
+          //   "href": "/tables/[category]/layout"
+          // },
           {
             "label": "Linear Algebra",
             "href": "/math-symbols/linear-algebra"

@@ -272,7 +272,11 @@ Geometric interpretation reinforces the meaning. On the [complex plane](!/comple
 
 Negative imaginary parts require careful handling. Consider $z = 5 - 3i$. Writing this in strict standard form yields $z = 5 + (-3)i$, revealing that the coefficient of $i$ is $-3$. Therefore $Re(z) = 5$ and $Im(z) = -3$. The negative sign belongs to the imaginary part; it does not float separately. Students who report $Im(5 - 3i) = 3$ have dropped the sign and produced an incorrect answer.
 
-Both $Re$ and $Im$ are functions from $\\mathbb{C}$ to $\\mathbb{R}$. They accept a complex number as input and return a real number as output. No complex number emerges from either function — even when applied to the most elaborate complex expression, the result always belongs to the real number line. This property makes $Re$ and $Im$ essential tools for decomposing complex problems into real-valued components that standard techniques can address.`,
+Both $Re$ and $Im$ are functions from $\\mathbb{C}$ to $\\mathbb{R}$. They accept a complex number as input and return a real number as output. No complex number emerges from either function — even when applied to the most elaborate complex expression, the result always belongs to the real number line. This property makes $Re$ and $Im$ essential tools for decomposing complex problems into real-valued components that standard techniques can address.
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Complex Nunbers Symbols and Notations](!/math-symbols/complex-numbers) →@
+
+`,
   after: ``,
   link: '',
 },
