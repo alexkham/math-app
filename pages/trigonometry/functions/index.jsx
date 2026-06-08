@@ -1,176 +1,365 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
+export async function getStaticProps(){
 
-//   const keyWords=[
-//     'trigonometric functions',
-//     'sine function',
-//     'cosine function',
-//     'tangent function',
-//     'cosecant function',
-//     'secant function',
-//     'cotangent function',
-//     'reciprocal trig identities',
-//     'quotient identities trigonometry',
-//     'domain and range trig functions',
-//     'evaluating trig functions',
-//     'unit circle trig values',
-//     'finding all six trig values',
-//     'odd even trig functions'
-//   ]
+  const keyWords=[
+    'trigonometric functions',
+    'sine function',
+    'cosine function',
+    'tangent function',
+    'cosecant function',
+    'secant function',
+    'cotangent function',
+    'reciprocal trig identities',
+    'quotient identities trigonometry',
+    'domain and range trig functions',
+    'evaluating trig functions',
+    'unit circle trig values',
+    'finding all six trig values',
+    'odd even trig functions'
+  ]
 
-//   const faqQuestions = {
-//     obj1: {
-//       question: "What are the six trigonometric functions?",
-//       answer: "The six trigonometric functions are sine, cosine, tangent, cosecant, secant, and cotangent. Sine and cosine are the fundamental pair, defined as the y-coordinate and x-coordinate of a point on the unit circle. Tangent is the ratio sin/cos. Cosecant, secant, and cotangent are the reciprocals of sine, cosine, and tangent respectively."
-//     },
-//     obj2: {
-//       question: "What is the domain and range of sine and cosine?",
-//       answer: "Both sine and cosine have a domain of all real numbers and a range of [-1, 1]. Every real number corresponds to a position on the unit circle, so both functions are defined everywhere. Their outputs are bounded because coordinates on a unit circle never exceed 1 or fall below -1."
-//     },
-//     obj3: {
-//       question: "How do you evaluate a trigonometric function at any angle?",
-//       answer: "Follow four steps: reduce the angle to a standard range using coterminal angles, identify which quadrant the angle is in, find the reference angle (the acute angle to the x-axis), then evaluate the function at the reference angle and apply the correct sign based on the quadrant."
-//     },
-//     obj4: {
-//       question: "What are the reciprocal and quotient relationships?",
-//       answer: "The reciprocal relationships are csc θ = 1/sin θ, sec θ = 1/cos θ, and cot θ = 1/tan θ. The quotient relationships are tan θ = sin θ/cos θ and cot θ = cos θ/sin θ. These allow any trigonometric expression to be rewritten in terms of sine and cosine alone."
-//     },
-//     obj5: {
-//       question: "How do you find all six trig values from one known value?",
-//       answer: "Given one trig function value and the quadrant, use the Pythagorean identity cos²θ + sin²θ = 1 to find the missing sine or cosine. The quadrant determines the sign. Once sine and cosine are known, the remaining four functions follow from the reciprocal and quotient relationships."
-//     }
-//   }
+  const faqQuestions = {
+    obj1: {
+      question: "What are the six trigonometric functions?",
+      answer: "The six trigonometric functions are sine, cosine, tangent, cosecant, secant, and cotangent. Sine and cosine are the fundamental pair, defined as the y-coordinate and x-coordinate of a point on the unit circle. Tangent is the ratio sin/cos. Cosecant, secant, and cotangent are the reciprocals of sine, cosine, and tangent respectively."
+    },
+    obj2: {
+      question: "What is the domain and range of sine and cosine?",
+      answer: "Both sine and cosine have a domain of all real numbers and a range of [-1, 1]. Every real number corresponds to a position on the unit circle, so both functions are defined everywhere. Their outputs are bounded because coordinates on a unit circle never exceed 1 or fall below -1."
+    },
+    obj3: {
+      question: "How do you evaluate a trigonometric function at any angle?",
+      answer: "Follow four steps: reduce the angle to a standard range using coterminal angles, identify which quadrant the angle is in, find the reference angle (the acute angle to the x-axis), then evaluate the function at the reference angle and apply the correct sign based on the quadrant."
+    },
+    obj4: {
+      question: "What are the reciprocal and quotient relationships?",
+      answer: "The reciprocal relationships are csc θ = 1/sin θ, sec θ = 1/cos θ, and cot θ = 1/tan θ. The quotient relationships are tan θ = sin θ/cos θ and cot θ = cos θ/sin θ. These allow any trigonometric expression to be rewritten in terms of sine and cosine alone."
+    },
+    obj5: {
+      question: "How do you find all six trig values from one known value?",
+      answer: "Given one trig function value and the quadrant, use the Pythagorean identity cos²θ + sin²θ = 1 to find the missing sine or cosine. The quadrant determines the sign. Once sine and cosine are known, the remaining four functions follow from the reciprocal and quotient relationships."
+    }
+  }
 
-//   const schemas = {
-//     learningResource: {
-//       "@context": "https://schema.org",
-//       "@type": "LearningResource",
-//       "name": "Trigonometric Functions",
-//       "description": "Learn all six trigonometric functions — sine, cosine, tangent, cosecant, secant, and cotangent — with domain, range, and methods for evaluating at any angle.",
-//       "url": "https://www.learnmathclass.com/trigonometry/functions",
-//       "inLanguage": "en-US",
-//       "learningResourceType": "Explanation",
-//       "educationalLevel": "High School, College",
-//       "educationalUse": "Learning",
-//       "audience": {
-//         "@type": "EducationalAudience",
-//         "educationalRole": "student"
-//       },
-//       "about": {
-//         "@type": "Thing",
-//         "name": "Trigonometric Functions"
-//       },
-//       "teaches": [
-//         "Sine and cosine as unit circle coordinates",
-//         "Tangent as the ratio of sine to cosine and as slope",
-//         "Cosecant, secant, and cotangent as reciprocal functions",
-//         "Reciprocal and quotient relationships connecting all six functions",
-//         "Domain and range of each trigonometric function",
-//         "Evaluating trigonometric functions at any angle using reference angles",
-//         "Finding all six function values from one known value and the quadrant"
-//       ],
-//       "keywords": keyWords.join(", "),
-//       "author": {
-//         "@type": "Organization",
-//         "name": "Learn Math Class"
-//       },
-//       "publisher": {
-//         "@type": "Organization",
-//         "name": "Learn Math Class"
-//       },
-//       "datePublished": "2024-01-15",
-//       "dateModified": new Date().toISOString()
-//     },
+  const schemas = {
+    learningResource: {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      "name": "Trigonometric Functions",
+      "description": "Learn all six trigonometric functions — sine, cosine, tangent, cosecant, secant, and cotangent — with domain, range, and methods for evaluating at any angle.",
+      "url": "https://www.learnmathclass.com/trigonometry/functions",
+      "inLanguage": "en-US",
+      "learningResourceType": "Explanation",
+      "educationalLevel": "High School, College",
+      "educationalUse": "Learning",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "Trigonometric Functions"
+      },
+      "teaches": [
+        "Sine and cosine as unit circle coordinates",
+        "Tangent as the ratio of sine to cosine and as slope",
+        "Cosecant, secant, and cotangent as reciprocal functions",
+        "Reciprocal and quotient relationships connecting all six functions",
+        "Domain and range of each trigonometric function",
+        "Evaluating trigonometric functions at any angle using reference angles",
+        "Finding all six function values from one known value and the quadrant"
+      ],
+      "keywords": keyWords.join(", "),
+      "author": {
+        "@type": "Organization",
+        "name": "Learn Math Class"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Learn Math Class"
+      },
+      "datePublished": "2024-01-15",
+      "dateModified": new Date().toISOString()
+    },
 
-//     breadcrumb: {
-//       "@context": "https://schema.org",
-//       "@type": "BreadcrumbList",
-//       "itemListElement": [
-//         {
-//           "@type": "ListItem",
-//           "position": 1,
-//           "name": "Home",
-//           "item": "https://www.learnmathclass.com"
-//         },
-//         {
-//           "@type": "ListItem",
-//           "position": 2,
-//           "name": "Trigonometry",
-//           "item": "https://www.learnmathclass.com/trigonometry"
-//         },
-//         {
-//           "@type": "ListItem",
-//           "position": 3,
-//           "name": "Trigonometric Functions",
-//           "item": "https://www.learnmathclass.com/trigonometry/functions"
-//         }
-//       ]
-//     },
+    breadcrumb: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.learnmathclass.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Trigonometry",
+          "item": "https://www.learnmathclass.com/trigonometry"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Trigonometric Functions",
+          "item": "https://www.learnmathclass.com/trigonometry/functions"
+        }
+      ]
+    },
 
-//     faq: {
-//       "@context": "https://schema.org",
-//       "@type": "FAQPage",
-//       "mainEntity": Object.keys(faqQuestions).map(key => ({
-//         "@type": "Question",
-//         "name": faqQuestions[key].question,
-//         "acceptedAnswer": {
-//           "@type": "Answer",
-//           "text": faqQuestions[key].answer
-//         }
-//       }))
-//     }
-//   }
+    faq: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": Object.keys(faqQuestions).map(key => ({
+        "@type": "Question",
+        "name": faqQuestions[key].question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faqQuestions[key].answer
+        }
+      }))
+    }
+  }
 
-//   // •
+  // •
 
-// //   • First item
-// // • Second item
-
-
-// // <hr style="border-width:1px;"></hr>
-
-// // <hr style="color:blue;" />
-
-// // <hr style="border-color:#3498db; border-width:1px;" />
+//   • First item
+// • Second item
 
 
+// <hr style="border-width:1px;"></hr>
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+// <hr style="color:blue;" />
 
-
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
+// <hr style="border-color:#3498db; border-width:1px;" />
 
 
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
 
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
 
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.notation)}
+        // </div>,
+
+
+//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+//     {processContent(sectionsContent.normal.parameters)}
+// </div>,
+
+//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+//                   {processContent(sectionsContent.obj4.content)}
+//                   </div>,
+
+
+//  <div key={'dist'} style={{
+//                     textAlign: 'center',
+//                     transform: 'scale(0.98)',
+//                     transformOrigin: 'center',
+//                     marginTop:'50px',
+//                     marginLeft:'-150px'
+//                   }} dangerouslySetInnerHTML={{
+//                     __html:   sectionContent.distributions.svg,
+//                   }} />
+
+  const linkStyle = 'color: inherit; text-decoration: underline;'
+
+  // ---------- TABLES ----------
+
+  // obj7 — aggregation: reciprocal and quotient identities connecting the six functions
+  const obj7Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Identity type</th>
+      <th style="${tableHeaders.aggregation}">Statement</th>
+      <th style="${tableHeaders.aggregation}">Pair / use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reciprocal</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">csc θ = 1 ⁄ sin θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sin θ · csc θ = 1</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reciprocal</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sec θ = 1 ⁄ cos θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cos θ · sec θ = 1</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reciprocal</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cot θ = 1 ⁄ tan θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">tan θ · cot θ = 1</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quotient</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">tan θ = sin θ ⁄ cos θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">base ratio defining tangent</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Quotient</td>
+      <td style="padding: 12px 15px; color: #34495e;">cot θ = cos θ ⁄ sin θ</td>
+      <td style="padding: 12px 15px; color: #34495e;">equivalent to 1 ⁄ tan θ</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj8 — aggregation: domain and range of all six functions
+  const obj8Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Function</th>
+      <th style="${tableHeaders.aggregation}">Domain &nbsp;(where defined)</th>
+      <th style="${tableHeaders.aggregation}">Range &nbsp;(possible outputs)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">sin θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all real θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−1, &nbsp;1]</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">cos θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all real θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−1, &nbsp;1]</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">tan θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">θ ≠ π ⁄ 2 + nπ &nbsp;(where cos θ = 0)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all real numbers</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">cot θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">θ ≠ nπ &nbsp;(where sin θ = 0)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all real numbers</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">sec θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">θ ≠ π ⁄ 2 + nπ &nbsp;(where cos θ = 0)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, &nbsp;−1] ∪ [1, &nbsp;∞)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">csc θ</td>
+      <td style="padding: 12px 15px; color: #34495e;">θ ≠ nπ &nbsp;(where sin θ = 0)</td>
+      <td style="padding: 12px 15px; color: #34495e;">(−∞, &nbsp;−1] ∪ [1, &nbsp;∞)</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj9 — aggregation: quadrant signs (paired reciprocals share signs)
+  const obj9Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 80%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation} text-align: center;">Quadrant</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">sin θ &amp; csc θ</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">cos θ &amp; sec θ</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">tan θ &amp; cot θ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">I &nbsp;(0 &lt; θ &lt; π ⁄ 2)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">+</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">+</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">+</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">II &nbsp;(π ⁄ 2 &lt; θ &lt; π)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">+</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">−</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">−</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">III &nbsp;(π &lt; θ &lt; 3π ⁄ 2)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">−</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">−</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">+</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">IV &nbsp;(3π ⁄ 2 &lt; θ &lt; 2π)</td>
+      <td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">−</td>
+      <td style="padding: 12px 15px; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">+</td>
+      <td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">−</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj11 — summary: capstone six-function character (definition, period, parity, zeros/asymptotes)
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Function</th>
+      <th style="${tableHeaders.summary}">Unit-circle definition</th>
+      <th style="${tableHeaders.summary}">Period</th>
+      <th style="${tableHeaders.summary}">Parity</th>
+      <th style="${tableHeaders.summary}">Zeros &nbsp;/ &nbsp;Vertical asymptotes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">sin θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">y-coordinate on the unit circle</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2π</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">odd</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zeros at θ = nπ; &nbsp;no asymptotes</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">cos θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x-coordinate on the unit circle</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2π</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">even</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zeros at θ = π ⁄ 2 + nπ; &nbsp;no asymptotes</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">tan θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sin θ ⁄ cos θ &nbsp;= slope of the terminal side</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">π</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">odd</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zeros at θ = nπ; &nbsp;asymptotes at θ = π ⁄ 2 + nπ</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">cot θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cos θ ⁄ sin θ &nbsp;= 1 ⁄ tan θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">π</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">odd</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zeros at θ = π ⁄ 2 + nπ; &nbsp;asymptotes at θ = nπ</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">sec θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 ⁄ cos θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2π</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">even</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no zeros; &nbsp;asymptotes at θ = π ⁄ 2 + nπ</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">csc θ</td>
+      <td style="padding: 12px 15px; color: #34495e;">1 ⁄ sin θ</td>
+      <td style="padding: 12px 15px; color: #34495e;">2π</td>
+      <td style="padding: 12px 15px; color: #34495e;">odd</td>
+      <td style="padding: 12px 15px; color: #34495e;">no zeros; &nbsp;asymptotes at θ = nπ</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 //     const sectionsContent={
 
@@ -425,8 +614,8 @@
 //     link: ``,
 //   },
 //     obj11:{
-//       title:``,
-//       content:``,
+//       title:`Summary: The Six Functions at a Glance`,
+//       content:`The six trigonometric functions share a common origin on the unit circle but differ in period, parity, and the locations where they vanish or diverge. The capstone table below collects these defining characteristics side-by-side, making the family resemblances and contrasts visible at one read — sine and cosine bounded and continuous; tangent and cotangent unbounded with the half-period $\\pi$; secant and cosecant unbounded outside $[-1, 1]$ and inheriting their asymptote locations from cosine and sine respectively.`,
 //       before:``,
 //       after:``,
 //       link:'',
@@ -473,656 +662,8 @@
 //   }
 
 
-//   const introContent = {
-//   id: "intro",
-//   title: `From Geometric Ratios to Functions of a Real Variable`,
-//   content: `In [right triangle trigonometry](!/trigonometry/right-triangle), sine and cosine are ratios — static numbers attached to a specific angle in a specific triangle. On the [unit circle](!/trigonometry/unit-circle), they become coordinates — values that change as the angle sweeps around the circle. The next conceptual step is to treat them as functions: machines that accept any real number as input and return a real number as output, subject to the same analysis applied to polynomial, rational, exponential, or any other class of function.
 
-// This shift in perspective opens up the full toolkit of function analysis. Each of the six trigonometric functions has a domain (where it is defined), a range (what values it can produce), intervals of increase and decrease, symmetry properties, and characteristic behavior near its points of discontinuity. Sine and cosine are defined everywhere and bounded between $-1$ and $1$. Tangent and cotangent are defined everywhere except at regularly spaced asymptotes, and their ranges span all real numbers. Cosecant and secant, as reciprocals of sine and cosine, inherit the zeros of their counterparts as points of undefinedness and are bounded away from zero but unbounded overall. These domains and ranges are not arbitrary — they follow inevitably from the [unit circle](!/trigonometry/unit-circle) definitions and govern every computation involving [graphs](!/trigonometry/graphs), [equations](!/trigonometry/equations), [inequalities](!/trigonometry/inequalities), and [inverse functions](!/trigonometry/inverse-functions).`,
-// };
-
-
-
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//          faqQuestions,
-//          schemas,
-//           seoData: {
-//         title: "Trigonometric Functions | Learn Math Class",
-//         description: "Learn all six trigonometric functions: sine, cosine, tangent, cosecant, secant, and cotangent with domain, range, and evaluation methods for any angle.",
-//         keywords: keyWords.join(", "),
-//         url: "/trigonometry/functions",
-//          name: "Trigonometric Functions"
-//       },
-
-//        }
-//     }
-//    }
-
-// export default function FunctionsPage({seoData,sectionsContent , introContent, faqQuestions, schemas}) {
-
-
-//   const genericSections=[
-//      {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//           sectionsContent.obj0.after,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-
-// ]
-
-//   return (
-//    <>
-//    <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-
-//   <meta name="robots" content="index, follow" />
-
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar
-//            side='right'
-//            // topOffset='65px'
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          />
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Trigonometric Functions</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//      <KeyTermsCard
-//      id="0"
-//      title={sectionsContent.obj0.title}
-//      content={sectionsContent.obj0.content}
-//      after={sectionsContent.obj0.after}
-//      variant="light"
-//    />
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-
-  const keyWords=[
-    'trigonometric functions',
-    'sine function',
-    'cosine function',
-    'tangent function',
-    'cosecant function',
-    'secant function',
-    'cotangent function',
-    'reciprocal trig identities',
-    'quotient identities trigonometry',
-    'domain and range trig functions',
-    'evaluating trig functions',
-    'unit circle trig values',
-    'finding all six trig values',
-    'odd even trig functions'
-  ]
-
-  const faqQuestions = {
-    obj1: {
-      question: "What are the six trigonometric functions?",
-      answer: "The six trigonometric functions are sine, cosine, tangent, cosecant, secant, and cotangent. Sine and cosine are the fundamental pair, defined as the y-coordinate and x-coordinate of a point on the unit circle. Tangent is the ratio sin/cos. Cosecant, secant, and cotangent are the reciprocals of sine, cosine, and tangent respectively."
-    },
-    obj2: {
-      question: "What is the domain and range of sine and cosine?",
-      answer: "Both sine and cosine have a domain of all real numbers and a range of [-1, 1]. Every real number corresponds to a position on the unit circle, so both functions are defined everywhere. Their outputs are bounded because coordinates on a unit circle never exceed 1 or fall below -1."
-    },
-    obj3: {
-      question: "How do you evaluate a trigonometric function at any angle?",
-      answer: "Follow four steps: reduce the angle to a standard range using coterminal angles, identify which quadrant the angle is in, find the reference angle (the acute angle to the x-axis), then evaluate the function at the reference angle and apply the correct sign based on the quadrant."
-    },
-    obj4: {
-      question: "What are the reciprocal and quotient relationships?",
-      answer: "The reciprocal relationships are csc θ = 1/sin θ, sec θ = 1/cos θ, and cot θ = 1/tan θ. The quotient relationships are tan θ = sin θ/cos θ and cot θ = cos θ/sin θ. These allow any trigonometric expression to be rewritten in terms of sine and cosine alone."
-    },
-    obj5: {
-      question: "How do you find all six trig values from one known value?",
-      answer: "Given one trig function value and the quadrant, use the Pythagorean identity cos²θ + sin²θ = 1 to find the missing sine or cosine. The quadrant determines the sign. Once sine and cosine are known, the remaining four functions follow from the reciprocal and quotient relationships."
-    }
-  }
-
-  const schemas = {
-    learningResource: {
-      "@context": "https://schema.org",
-      "@type": "LearningResource",
-      "name": "Trigonometric Functions",
-      "description": "Learn all six trigonometric functions — sine, cosine, tangent, cosecant, secant, and cotangent — with domain, range, and methods for evaluating at any angle.",
-      "url": "https://www.learnmathclass.com/trigonometry/functions",
-      "inLanguage": "en-US",
-      "learningResourceType": "Explanation",
-      "educationalLevel": "High School, College",
-      "educationalUse": "Learning",
-      "audience": {
-        "@type": "EducationalAudience",
-        "educationalRole": "student"
-      },
-      "about": {
-        "@type": "Thing",
-        "name": "Trigonometric Functions"
-      },
-      "teaches": [
-        "Sine and cosine as unit circle coordinates",
-        "Tangent as the ratio of sine to cosine and as slope",
-        "Cosecant, secant, and cotangent as reciprocal functions",
-        "Reciprocal and quotient relationships connecting all six functions",
-        "Domain and range of each trigonometric function",
-        "Evaluating trigonometric functions at any angle using reference angles",
-        "Finding all six function values from one known value and the quadrant"
-      ],
-      "keywords": keyWords.join(", "),
-      "author": {
-        "@type": "Organization",
-        "name": "Learn Math Class"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Learn Math Class"
-      },
-      "datePublished": "2024-01-15",
-      "dateModified": new Date().toISOString()
-    },
-
-    breadcrumb: {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://www.learnmathclass.com"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Trigonometry",
-          "item": "https://www.learnmathclass.com/trigonometry"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Trigonometric Functions",
-          "item": "https://www.learnmathclass.com/trigonometry/functions"
-        }
-      ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
-  }
-
-  // •
-
-//   • First item
-// • Second item
-
-
-// <hr style="border-width:1px;"></hr>
-
-// <hr style="color:blue;" />
-
-// <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
-
-// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-        //     {processContent(sectionsContent.normal.notation)}
-        // </div>,
-
-
-//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-//     {processContent(sectionsContent.normal.parameters)}
-// </div>,
-
-//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-//                   {processContent(sectionsContent.obj4.content)}
-//                   </div>,
-
-
-//  <div key={'dist'} style={{
-//                     textAlign: 'center',
-//                     transform: 'scale(0.98)',
-//                     transformOrigin: 'center',
-//                     marginTop:'50px',
-//                     marginLeft:'-150px'
-//                   }} dangerouslySetInnerHTML={{
-//                     __html:   sectionContent.distributions.svg,
-//                   }} />
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-
-  // ---------- TABLES ----------
-
-  // obj7 — aggregation: reciprocal and quotient identities connecting the six functions
-  const obj7Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 100%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Identity type</th>
-      <th style="${tableHeaders.aggregation}">Statement</th>
-      <th style="${tableHeaders.aggregation}">Pair / use</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reciprocal</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">csc θ = 1 ⁄ sin θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sin θ · csc θ = 1</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reciprocal</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sec θ = 1 ⁄ cos θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cos θ · sec θ = 1</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reciprocal</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cot θ = 1 ⁄ tan θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">tan θ · cot θ = 1</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quotient</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">tan θ = sin θ ⁄ cos θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">base ratio defining tangent</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Quotient</td>
-      <td style="padding: 12px 15px; color: #34495e;">cot θ = cos θ ⁄ sin θ</td>
-      <td style="padding: 12px 15px; color: #34495e;">equivalent to 1 ⁄ tan θ</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj8 — aggregation: domain and range of all six functions
-  const obj8Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 100%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Function</th>
-      <th style="${tableHeaders.aggregation}">Domain &nbsp;(where defined)</th>
-      <th style="${tableHeaders.aggregation}">Range &nbsp;(possible outputs)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">sin θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all real θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−1, &nbsp;1]</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">cos θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all real θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−1, &nbsp;1]</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">tan θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">θ ≠ π ⁄ 2 + nπ &nbsp;(where cos θ = 0)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all real numbers</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">cot θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">θ ≠ nπ &nbsp;(where sin θ = 0)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all real numbers</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">sec θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">θ ≠ π ⁄ 2 + nπ &nbsp;(where cos θ = 0)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, &nbsp;−1] ∪ [1, &nbsp;∞)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">csc θ</td>
-      <td style="padding: 12px 15px; color: #34495e;">θ ≠ nπ &nbsp;(where sin θ = 0)</td>
-      <td style="padding: 12px 15px; color: #34495e;">(−∞, &nbsp;−1] ∪ [1, &nbsp;∞)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj9 — aggregation: quadrant signs (paired reciprocals share signs)
-  const obj9Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 80%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation} text-align: center;">Quadrant</th>
-      <th style="${tableHeaders.aggregation} text-align: center;">sin θ &amp; csc θ</th>
-      <th style="${tableHeaders.aggregation} text-align: center;">cos θ &amp; sec θ</th>
-      <th style="${tableHeaders.aggregation} text-align: center;">tan θ &amp; cot θ</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">I &nbsp;(0 &lt; θ &lt; π ⁄ 2)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">+</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">+</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">+</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">II &nbsp;(π ⁄ 2 &lt; θ &lt; π)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">+</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">−</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">−</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">III &nbsp;(π &lt; θ &lt; 3π ⁄ 2)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">−</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">−</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">+</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">IV &nbsp;(3π ⁄ 2 &lt; θ &lt; 2π)</td>
-      <td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">−</td>
-      <td style="padding: 12px 15px; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">+</td>
-      <td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">−</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj11 — summary: capstone six-function character (definition, period, parity, zeros/asymptotes)
-  const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 100%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Function</th>
-      <th style="${tableHeaders.summary}">Unit-circle definition</th>
-      <th style="${tableHeaders.summary}">Period</th>
-      <th style="${tableHeaders.summary}">Parity</th>
-      <th style="${tableHeaders.summary}">Zeros &nbsp;/ &nbsp;Vertical asymptotes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">sin θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">y-coordinate on the unit circle</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2π</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">odd</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zeros at θ = nπ; &nbsp;no asymptotes</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">cos θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x-coordinate on the unit circle</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2π</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">even</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zeros at θ = π ⁄ 2 + nπ; &nbsp;no asymptotes</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">tan θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sin θ ⁄ cos θ &nbsp;= slope of the terminal side</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">π</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">odd</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zeros at θ = nπ; &nbsp;asymptotes at θ = π ⁄ 2 + nπ</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">cot θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cos θ ⁄ sin θ &nbsp;= 1 ⁄ tan θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">π</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">odd</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zeros at θ = π ⁄ 2 + nπ; &nbsp;asymptotes at θ = nπ</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">sec θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 ⁄ cos θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2π</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">even</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no zeros; &nbsp;asymptotes at θ = π ⁄ 2 + nπ</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">csc θ</td>
-      <td style="padding: 12px 15px; color: #34495e;">1 ⁄ sin θ</td>
-      <td style="padding: 12px 15px; color: #34495e;">2π</td>
-      <td style="padding: 12px 15px; color: #34495e;">odd</td>
-      <td style="padding: 12px 15px; color: #34495e;">no zeros; &nbsp;asymptotes at θ = nπ</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-    const sectionsContent={
+const sectionsContent={
 
   obj0: {
     title: `Key Terms`,
@@ -1162,30 +703,83 @@ export async function getStaticProps(){
     link: '',
   },
  
-     obj1: {
+//      obj1: {
+//     title: `The Sine Function`,
+//     content: `The sine function assigns to each real number $\\theta$ the $y$-coordinate of the corresponding point on the [unit circle](!/trigonometry/unit-circle):
+
+// $$\\sin(\\theta) = y\\text{-coordinate of the point at angle }\\theta$$
+
+// Its domain is the entire real line — every real number corresponds to a position on the unit circle, so $\\sin(\\theta)$ is defined for all $\\theta \\in (-\\infty, \\infty)$. Its range is the closed interval $[-1, 1]$, since the $y$-coordinate of a point on a unit circle can never exceed 1 or fall below $-1$.
+
+// The function equals zero whenever the terminal side of $\\theta$ lies on the $x$-axis — that is, at $\\theta = n\\pi$ for every integer $n$: $\\ldots, -2\\pi, -\\pi, 0, \\pi, 2\\pi, \\ldots$. It reaches its maximum value of $1$ at $\\theta = \\frac{\\pi}{2} + 2n\\pi$ (the top of the circle) and its minimum value of $-1$ at $\\theta = \\frac{3\\pi}{2} + 2n\\pi$ (the bottom of the circle).
+
+// Sine is periodic with period $2\\pi$: $\\sin(\\theta + 2\\pi) = \\sin(\\theta)$ for all $\\theta$. It is an odd function: $\\sin(-\\theta) = -\\sin(\\theta)$, which means its [graph](!/trigonometry/graphs) is symmetric about the origin. On the interval $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$, sine is strictly increasing — a fact that becomes essential when defining the [inverse sine function](!/trigonometry/inverse-functions).
+
+// Because the sine function is continuous, bounded, periodic, and smooth, it serves as the prototype for modeling any oscillating quantity. The general sinusoidal model $y = A\\sin(Bx - C) + D$ modifies amplitude, period, phase, and baseline, but the underlying behavior is always that of the sine function on the unit circle.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+
+
+
+obj1: {
     title: `The Sine Function`,
-    content: `The sine function assigns to each real number $\\theta$ the $y$-coordinate of the corresponding point on the [unit circle](!/trigonometry/unit-circle):
+    content: `In a right triangle, the sine of an acute angle $\\theta$ is the ratio of the side opposite to $\\theta$ to the hypotenuse:
 
-$$\\sin(\\theta) = y\\text{-coordinate of the point at angle }\\theta$$
+@academic[formula_callout:Sine Definition
+$$\\sin\\theta = \\frac{\\text{side opposite to }\\theta}{\\text{hypotenuse}}$$
+/trigonometry/formulas#sine_definition]@
 
-Its domain is the entire real line — every real number corresponds to a position on the unit circle, so $\\sin(\\theta)$ is defined for all $\\theta \\in (-\\infty, \\infty)$. Its range is the closed interval $[-1, 1]$, since the $y$-coordinate of a point on a unit circle can never exceed 1 or fall below $-1$.
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
 
-The function equals zero whenever the terminal side of $\\theta$ lies on the $x$-axis — that is, at $\\theta = n\\pi$ for every integer $n$: $\\ldots, -2\\pi, -\\pi, 0, \\pi, 2\\pi, \\ldots$. It reaches its maximum value of $1$ at $\\theta = \\frac{\\pi}{2} + 2n\\pi$ (the top of the circle) and its minimum value of $-1$ at $\\theta = \\frac{3\\pi}{2} + 2n\\pi$ (the bottom of the circle).
+This ratio is bounded above by 1 (the hypotenuse is always the longest side) and is positive for any acute angle. The right-triangle definition is restricted to $0 < \\theta < \\frac{\\pi}{2}$; the [unit circle](!/trigonometry/unit-circle) extends the function to every real number by reinterpreting $\\sin\\theta$ as the $y$-coordinate of the point on the circle at angle $\\theta$.
+
+Once extended, the domain of sine becomes the entire real line, and its range is the closed interval $[-1, 1]$. The function equals zero whenever the terminal side of $\\theta$ lies on the $x$-axis — at $\\theta = n\\pi$ for every integer $n$. It reaches its maximum of $1$ at $\\theta = \\frac{\\pi}{2} + 2n\\pi$ and its minimum of $-1$ at $\\theta = \\frac{3\\pi}{2} + 2n\\pi$.
 
 Sine is periodic with period $2\\pi$: $\\sin(\\theta + 2\\pi) = \\sin(\\theta)$ for all $\\theta$. It is an odd function: $\\sin(-\\theta) = -\\sin(\\theta)$, which means its [graph](!/trigonometry/graphs) is symmetric about the origin. On the interval $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$, sine is strictly increasing — a fact that becomes essential when defining the [inverse sine function](!/trigonometry/inverse-functions).
 
-Because the sine function is continuous, bounded, periodic, and smooth, it serves as the prototype for modeling any oscillating quantity. The general sinusoidal model $y = A\\sin(Bx - C) + D$ modifies amplitude, period, phase, and baseline, but the underlying behavior is always that of the sine function on the unit circle.`,
+Because the sine function is continuous, bounded, periodic, and smooth, it serves as the prototype for modeling any oscillating quantity. The general sinusoidal model $y = A\\sin(Bx - C) + D$ modifies amplitude, period, phase, and baseline, but the underlying behavior is always that of the sine function.`,
     before: ``,
     after: ``,
     link: ``,
   },
-  obj2: {
+
+
+
+//   obj2: {
+//     title: `The Cosine Function`,
+//     content: `The cosine function assigns to each real number $\\theta$ the $x$-coordinate of the corresponding point on the [unit circle](!/trigonometry/unit-circle):
+
+// $$\\cos(\\theta) = x\\text{-coordinate of the point at angle }\\theta$$
+
+// Its domain is the entire real line, and its range is $[-1, 1]$ — identical to sine in both respects. The function equals zero whenever the terminal side lies on the $y$-axis: at $\\theta = \\frac{\\pi}{2} + n\\pi$ for every integer $n$. It reaches its maximum of $1$ at $\\theta = 2n\\pi$ (the rightmost point of the circle) and its minimum of $-1$ at $\\theta = \\pi + 2n\\pi$ (the leftmost point).
+
+// Cosine is periodic with the same period as sine: $\\cos(\\theta + 2\\pi) = \\cos(\\theta)$. Unlike sine, cosine is an even function: $\\cos(-\\theta) = \\cos(\\theta)$. Geometrically, this follows from the unit circle — reflecting an angle across the $x$-axis negates the $y$-coordinate but preserves the $x$-coordinate. On the [graph](!/trigonometry/graphs), evenness manifests as symmetry about the $y$-axis.
+
+// On the interval $[0, \\pi]$, cosine is strictly decreasing — running from $\\cos(0) = 1$ down to $\\cos(\\pi) = -1$. This monotonic interval is the one used to define the [inverse cosine function](!/trigonometry/inverse-functions).
+
+// The relationship between sine and cosine is captured by a phase shift: $\\cos(\\theta) = \\sin\\left(\\theta + \\frac{\\pi}{2}\\right)$. The cosine wave is the sine wave translated $\\frac{\\pi}{2}$ units to the left. This is not a coincidence — it reflects the geometric fact that the $x$-coordinate at angle $\\theta$ equals the $y$-coordinate at angle $\\theta + \\frac{\\pi}{2}$ (a quarter rotation ahead on the circle). Equivalently, the cofunction identity $\\cos(\\theta) = \\sin\\left(\\frac{\\pi}{2} - \\theta\\right)$ from [right triangle trigonometry](!/trigonometry/right-triangle) extends to all angles through the unit circle.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+  
+obj2: {
     title: `The Cosine Function`,
-    content: `The cosine function assigns to each real number $\\theta$ the $x$-coordinate of the corresponding point on the [unit circle](!/trigonometry/unit-circle):
+    content: `In a right triangle, the cosine of an acute angle $\\theta$ is the ratio of the side adjacent to $\\theta$ to the hypotenuse:
 
-$$\\cos(\\theta) = x\\text{-coordinate of the point at angle }\\theta$$
+@academic[formula_callout:Cosine Definition
+$$\\cos\\theta = \\frac{\\text{side adjacent to }\\theta}{\\text{hypotenuse}}$$
+/trigonometry/formulas#cosine_definition]@
 
-Its domain is the entire real line, and its range is $[-1, 1]$ — identical to sine in both respects. The function equals zero whenever the terminal side lies on the $y$-axis: at $\\theta = \\frac{\\pi}{2} + n\\pi$ for every integer $n$. It reaches its maximum of $1$ at $\\theta = 2n\\pi$ (the rightmost point of the circle) and its minimum of $-1$ at $\\theta = \\pi + 2n\\pi$ (the leftmost point).
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+Like sine, this ratio is bounded above by 1 and positive for any acute angle. The right-triangle definition holds for $0 < \\theta < \\frac{\\pi}{2}$; the [unit circle](!/trigonometry/unit-circle) extends cosine to every real number by reinterpreting $\\cos\\theta$ as the $x$-coordinate of the point on the circle at angle $\\theta$.
+
+Once extended, the domain of cosine is the entire real line, and its range is $[-1, 1]$ — identical to sine in both respects. The function equals zero whenever the terminal side lies on the $y$-axis: at $\\theta = \\frac{\\pi}{2} + n\\pi$ for every integer $n$. It reaches its maximum of $1$ at $\\theta = 2n\\pi$ (the rightmost point of the circle) and its minimum of $-1$ at $\\theta = \\pi + 2n\\pi$ (the leftmost point).
 
 Cosine is periodic with the same period as sine: $\\cos(\\theta + 2\\pi) = \\cos(\\theta)$. Unlike sine, cosine is an even function: $\\cos(-\\theta) = \\cos(\\theta)$. Geometrically, this follows from the unit circle — reflecting an angle across the $x$-axis negates the $y$-coordinate but preserves the $x$-coordinate. On the [graph](!/trigonometry/graphs), evenness manifests as symmetry about the $y$-axis.
 
@@ -1196,13 +790,103 @@ The relationship between sine and cosine is captured by a phase shift: $\\cos(\\
     after: ``,
     link: ``,
   },
-  obj3: {
+
+
+// obj3: {
+//     title: `The Tangent Function`,
+//     content: `Tangent is defined as the ratio of sine to cosine:
+
+// $$\\tan(\\theta) = \\frac{\\sin(\\theta)}{\\cos(\\theta)} = \\frac{y}{x}$$
+
+// where $(x, y)$ is the point on the [unit circle](!/trigonometry/unit-circle) at angle $\\theta$. This ratio is undefined whenever $\\cos(\\theta) = 0$ — that is, at $\\theta = \\frac{\\pi}{2} + n\\pi$ for every integer $n$. These are precisely the angles where the terminal side is vertical (lying along the $y$-axis), and the $x$-coordinate is zero.
+
+// The domain of tangent is all real numbers except the odd multiples of $\\frac{\\pi}{2}$:
+
+// $$\\theta \\neq \\frac{\\pi}{2} + n\\pi, \\quad n \\in \\mathbb{Z}$$
+
+// The range, by contrast, is the entire real line $(-\\infty, \\infty)$. As $\\theta$ approaches an excluded value, $\\cos(\\theta)$ approaches zero while $\\sin(\\theta)$ approaches $\\pm 1$, driving the ratio toward $+\\infty$ or $-\\infty$. On the [graph](!/trigonometry/graphs), these excluded points correspond to vertical asymptotes.
+
+// Tangent is periodic with period $\\pi$ — half the period of sine and cosine. This shorter period arises because $\\tan(\\theta + \\pi) = \\frac{\\sin(\\theta + \\pi)}{\\cos(\\theta + \\pi)} = \\frac{-\\sin\\theta}{-\\cos\\theta} = \\frac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta$. A half rotation negates both coordinates, but their ratio is unchanged.
+
+// Tangent is an odd function: $\\tan(-\\theta) = -\\tan(\\theta)$. On the interval $\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$ — a single period — tangent is strictly increasing, running from $-\\infty$ to $+\\infty$. This is the interval used to define the [inverse tangent function](!/trigonometry/inverse-functions).
+
+// Geometrically, $\\tan(\\theta)$ measures the slope of the terminal side of $\\theta$. A line from the origin to $(\\cos\\theta, \\sin\\theta)$ has slope $\\frac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta$. This interpretation connects trigonometry to coordinate geometry and explains why tangent is undefined for vertical lines (slope is undefined when the run is zero).`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj4: {
+//     title: `The Cosecant Function`,
+//     content: `Cosecant is the reciprocal of sine:
+
+// $$\\csc(\\theta) = \\frac{1}{\\sin(\\theta)}$$
+
+// It is defined wherever $\\sin(\\theta) \\neq 0$ — that is, for all $\\theta$ except integer multiples of $\\pi$: $\\theta \\neq n\\pi$, $n \\in \\mathbb{Z}$. At these excluded points (where the terminal side lies on the $x$-axis and $\\sin\\theta = 0$), cosecant is undefined, and the [graph](!/trigonometry/graphs) has vertical asymptotes.
+
+// The range of cosecant is $(-\\infty, -1] \\cup [1, \\infty)$. Since $|\\sin\\theta| \\leq 1$, the reciprocal $|\\csc\\theta| = \\frac{1}{|\\sin\\theta|} \\geq 1$. Cosecant can never take a value between $-1$ and $1$. It equals $1$ when $\\sin\\theta = 1$ (at $\\theta = \\frac{\\pi}{2} + 2n\\pi$) and equals $-1$ when $\\sin\\theta = -1$ (at $\\theta = \\frac{3\\pi}{2} + 2n\\pi$).
+
+// Cosecant is an odd function, inheriting this property from sine: $\\csc(-\\theta) = \\frac{1}{\\sin(-\\theta)} = \\frac{1}{-\\sin\\theta} = -\\csc\\theta$. Its period is $2\\pi$, the same as sine.
+
+// In [right triangle trigonometry](!/trigonometry/right-triangle), cosecant equals hypotenuse over opposite — a ratio that is always greater than 1 for acute angles, since the hypotenuse exceeds every leg. The general function preserves this: the absolute value of cosecant is always at least 1.
+
+// Cosecant appears less frequently in elementary problems than sine, cosine, or tangent, but it plays a significant role in the Pythagorean identity $1 + \\cot^2\\theta = \\csc^2\\theta$, in certain [identities](!/trigonometry/identities) and [formula](!/trigonometry/formulas) derivations, and in calculus (as the derivative of $-\\cot\\theta$ and in various integrals).`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj5: {
+//     title: `The Secant Function`,
+//     content: `Secant is the reciprocal of cosine:
+
+// $$\\sec(\\theta) = \\frac{1}{\\cos(\\theta)}$$
+
+// It is defined wherever $\\cos(\\theta) \\neq 0$, which excludes $\\theta = \\frac{\\pi}{2} + n\\pi$ for every integer $n$ — the same points where tangent is undefined. At these angles, the terminal side is vertical, the $x$-coordinate is zero, and both $\\tan\\theta$ and $\\sec\\theta$ have vertical asymptotes on their [graphs](!/trigonometry/graphs).
+
+// The range of secant mirrors that of cosecant: $(-\\infty, -1] \\cup [1, \\infty)$. Since $|\\cos\\theta| \\leq 1$, the reciprocal satisfies $|\\sec\\theta| \\geq 1$, and secant can never produce a value strictly between $-1$ and $1$. It equals $1$ at $\\theta = 2n\\pi$ and $-1$ at $\\theta = \\pi + 2n\\pi$.
+
+// Secant is an even function: $\\sec(-\\theta) = \\frac{1}{\\cos(-\\theta)} = \\frac{1}{\\cos\\theta} = \\sec\\theta$, since cosine is even. Its period is $2\\pi$.
+
+// The Pythagorean identity $1 + \\tan^2\\theta = \\sec^2\\theta$ connects secant directly to tangent. This relationship is heavily used in the simplification of [identities](!/trigonometry/identities) and in calculus, where $\\sec^2\\theta$ appears as the derivative of $\\tan\\theta$ and in the integral of $\\sec\\theta\\tan\\theta$.
+
+// In the [right triangle](!/trigonometry/right-triangle) context, secant equals hypotenuse over adjacent — the reciprocal of the cosine ratio. Like cosecant, secant always has absolute value at least 1, reflecting the fact that the hypotenuse always exceeds any leg in a right triangle.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj6: {
+//     title: `The Cotangent Function`,
+//     content: `Cotangent is defined as the ratio of cosine to sine, or equivalently as the reciprocal of tangent:
+
+// $$\\cot(\\theta) = \\frac{\\cos(\\theta)}{\\sin(\\theta)} = \\frac{1}{\\tan(\\theta)}$$
+
+// It is undefined wherever $\\sin(\\theta) = 0$: at $\\theta = n\\pi$ for every integer $n$. These are the same points where cosecant is undefined — where the terminal side lies along the $x$-axis.
+
+// The range of cotangent is the entire real line $(-\\infty, \\infty)$, identical to tangent. As $\\theta$ approaches an excluded value, $\\sin\\theta$ approaches zero while $\\cos\\theta$ approaches $\\pm 1$, and the ratio diverges.
+
+// Cotangent is periodic with period $\\pi$, matching tangent. The derivation is analogous: $\\cot(\\theta + \\pi) = \\frac{\\cos(\\theta + \\pi)}{\\sin(\\theta + \\pi)} = \\frac{-\\cos\\theta}{-\\sin\\theta} = \\cot\\theta$. It is an odd function: $\\cot(-\\theta) = -\\cot\\theta$.
+
+// On the interval $(0, \\pi)$, cotangent is strictly decreasing — running from $+\\infty$ down to $-\\infty$. This contrasts with tangent, which is increasing on its principal interval. The [graph](!/trigonometry/graphs) of cotangent is a decreasing curve between consecutive asymptotes, while the graph of tangent is an increasing curve.
+
+// Cotangent equals zero where cosine equals zero: at $\\theta = \\frac{\\pi}{2} + n\\pi$. In the [right triangle](!/trigonometry/right-triangle), it equals adjacent over opposite — the reciprocal of the tangent ratio. The cofunction relationship $\\cot\\theta = \\tan\\left(\\frac{\\pi}{2} - \\theta\\right)$ ties cotangent to tangent through complementary angles, consistent with the cofunction pattern established for all six functions.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+
+obj3: {
     title: `The Tangent Function`,
-    content: `Tangent is defined as the ratio of sine to cosine:
+    content: `In a right triangle, the tangent of an acute angle $\\theta$ is the ratio of the side opposite to $\\theta$ to the side adjacent to $\\theta$:
 
-$$\\tan(\\theta) = \\frac{\\sin(\\theta)}{\\cos(\\theta)} = \\frac{y}{x}$$
+@academic[formula_callout:Tangent Definition
+$$\\tan\\theta = \\frac{\\text{side opposite to }\\theta}{\\text{side adjacent to }\\theta}$$
+/trigonometry/formulas#tangent_definition]@
 
-where $(x, y)$ is the point on the [unit circle](!/trigonometry/unit-circle) at angle $\\theta$. This ratio is undefined whenever $\\cos(\\theta) = 0$ — that is, at $\\theta = \\frac{\\pi}{2} + n\\pi$ for every integer $n$. These are precisely the angles where the terminal side is vertical (lying along the $y$-axis), and the $x$-coordinate is zero.
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+The right-triangle definition holds for $0 < \\theta < \\frac{\\pi}{2}$. Extended to all angles via the [unit circle](!/trigonometry/unit-circle), tangent equals $\\frac{y}{x}$ where $(x, y)$ is the point on the circle at angle $\\theta$ — equivalently, $\\frac{\\sin\\theta}{\\cos\\theta}$. Geometrically, this is the slope of the terminal side of $\\theta$.
+
+This ratio is undefined whenever $\\cos\\theta = 0$ — that is, at $\\theta = \\frac{\\pi}{2} + n\\pi$ for every integer $n$. These are precisely the angles where the terminal side is vertical (lying along the $y$-axis), and the $x$-coordinate is zero.
 
 The domain of tangent is all real numbers except the odd multiples of $\\frac{\\pi}{2}$:
 
@@ -1212,18 +896,24 @@ The range, by contrast, is the entire real line $(-\\infty, \\infty)$. As $\\the
 
 Tangent is periodic with period $\\pi$ — half the period of sine and cosine. This shorter period arises because $\\tan(\\theta + \\pi) = \\frac{\\sin(\\theta + \\pi)}{\\cos(\\theta + \\pi)} = \\frac{-\\sin\\theta}{-\\cos\\theta} = \\frac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta$. A half rotation negates both coordinates, but their ratio is unchanged.
 
-Tangent is an odd function: $\\tan(-\\theta) = -\\tan(\\theta)$. On the interval $\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$ — a single period — tangent is strictly increasing, running from $-\\infty$ to $+\\infty$. This is the interval used to define the [inverse tangent function](!/trigonometry/inverse-functions).
-
-Geometrically, $\\tan(\\theta)$ measures the slope of the terminal side of $\\theta$. A line from the origin to $(\\cos\\theta, \\sin\\theta)$ has slope $\\frac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta$. This interpretation connects trigonometry to coordinate geometry and explains why tangent is undefined for vertical lines (slope is undefined when the run is zero).`,
+Tangent is an odd function: $\\tan(-\\theta) = -\\tan(\\theta)$. On the interval $\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$ — a single period — tangent is strictly increasing, running from $-\\infty$ to $+\\infty$. This is the interval used to define the [inverse tangent function](!/trigonometry/inverse-functions).`,
     before: ``,
     after: ``,
     link: ``,
   },
+
   obj4: {
     title: `The Cosecant Function`,
-    content: `Cosecant is the reciprocal of sine:
+    content: `In a right triangle, the cosecant of an acute angle $\\theta$ is the ratio of the hypotenuse to the side opposite to $\\theta$:
 
-$$\\csc(\\theta) = \\frac{1}{\\sin(\\theta)}$$
+@academic[formula_callout:Cosecant Definition
+$$\\csc\\theta = \\frac{\\text{hypotenuse}}{\\text{side opposite to }\\theta}$$
+/trigonometry/formulas#cosecant_definition]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+The right-triangle definition holds for $0 < \\theta < \\frac{\\pi}{2}$. Extended through the [unit circle](!/trigonometry/unit-circle), cosecant is the reciprocal of sine: $\\csc\\theta = \\frac{1}{\\sin\\theta}$.
 
 It is defined wherever $\\sin(\\theta) \\neq 0$ — that is, for all $\\theta$ except integer multiples of $\\pi$: $\\theta \\neq n\\pi$, $n \\in \\mathbb{Z}$. At these excluded points (where the terminal side lies on the $x$-axis and $\\sin\\theta = 0$), cosecant is undefined, and the [graph](!/trigonometry/graphs) has vertical asymptotes.
 
@@ -1231,18 +921,27 @@ The range of cosecant is $(-\\infty, -1] \\cup [1, \\infty)$. Since $|\\sin\\the
 
 Cosecant is an odd function, inheriting this property from sine: $\\csc(-\\theta) = \\frac{1}{\\sin(-\\theta)} = \\frac{1}{-\\sin\\theta} = -\\csc\\theta$. Its period is $2\\pi$, the same as sine.
 
-In [right triangle trigonometry](!/trigonometry/right-triangle), cosecant equals hypotenuse over opposite — a ratio that is always greater than 1 for acute angles, since the hypotenuse exceeds every leg. The general function preserves this: the absolute value of cosecant is always at least 1.
+For acute angles, the right-triangle definition always gives a value greater than 1, since the hypotenuse exceeds every other side. The general function preserves this: the absolute value of cosecant is always at least 1.
 
 Cosecant appears less frequently in elementary problems than sine, cosine, or tangent, but it plays a significant role in the Pythagorean identity $1 + \\cot^2\\theta = \\csc^2\\theta$, in certain [identities](!/trigonometry/identities) and [formula](!/trigonometry/formulas) derivations, and in calculus (as the derivative of $-\\cot\\theta$ and in various integrals).`,
     before: ``,
     after: ``,
     link: ``,
   },
+
+
   obj5: {
     title: `The Secant Function`,
-    content: `Secant is the reciprocal of cosine:
+    content: `In a right triangle, the secant of an acute angle $\\theta$ is the ratio of the hypotenuse to the side adjacent to $\\theta$:
 
-$$\\sec(\\theta) = \\frac{1}{\\cos(\\theta)}$$
+@academic[formula_callout:Secant Definition
+$$\\sec\\theta = \\frac{\\text{hypotenuse}}{\\text{side adjacent to }\\theta}$$
+/trigonometry/formulas#secant_definition]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+The right-triangle definition holds for $0 < \\theta < \\frac{\\pi}{2}$. Extended through the [unit circle](!/trigonometry/unit-circle), secant is the reciprocal of cosine: $\\sec\\theta = \\frac{1}{\\cos\\theta}$.
 
 It is defined wherever $\\cos(\\theta) \\neq 0$, which excludes $\\theta = \\frac{\\pi}{2} + n\\pi$ for every integer $n$ — the same points where tangent is undefined. At these angles, the terminal side is vertical, the $x$-coordinate is zero, and both $\\tan\\theta$ and $\\sec\\theta$ have vertical asymptotes on their [graphs](!/trigonometry/graphs).
 
@@ -1252,16 +951,26 @@ Secant is an even function: $\\sec(-\\theta) = \\frac{1}{\\cos(-\\theta)} = \\fr
 
 The Pythagorean identity $1 + \\tan^2\\theta = \\sec^2\\theta$ connects secant directly to tangent. This relationship is heavily used in the simplification of [identities](!/trigonometry/identities) and in calculus, where $\\sec^2\\theta$ appears as the derivative of $\\tan\\theta$ and in the integral of $\\sec\\theta\\tan\\theta$.
 
-In the [right triangle](!/trigonometry/right-triangle) context, secant equals hypotenuse over adjacent — the reciprocal of the cosine ratio. Like cosecant, secant always has absolute value at least 1, reflecting the fact that the hypotenuse always exceeds any leg in a right triangle.`,
+For acute angles, the right-triangle definition always gives a value greater than 1, reflecting that the hypotenuse exceeds any other side. Like cosecant, secant always has absolute value at least 1.`,
     before: ``,
     after: ``,
     link: ``,
   },
+
+
+
   obj6: {
     title: `The Cotangent Function`,
-    content: `Cotangent is defined as the ratio of cosine to sine, or equivalently as the reciprocal of tangent:
+    content: `In a right triangle, the cotangent of an acute angle $\\theta$ is the ratio of the side adjacent to $\\theta$ to the side opposite to $\\theta$:
 
-$$\\cot(\\theta) = \\frac{\\cos(\\theta)}{\\sin(\\theta)} = \\frac{1}{\\tan(\\theta)}$$
+@academic[formula_callout:Cotangent Definition
+$$\\cot\\theta = \\frac{\\text{side adjacent to }\\theta}{\\text{side opposite to }\\theta}$$
+/trigonometry/formulas#cotangent_definition]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+The right-triangle definition holds for $0 < \\theta < \\frac{\\pi}{2}$. Extended through the [unit circle](!/trigonometry/unit-circle), cotangent equals $\\frac{x}{y}$ where $(x, y)$ is the point on the circle at angle $\\theta$ — equivalently, $\\frac{\\cos\\theta}{\\sin\\theta}$ or the reciprocal $\\frac{1}{\\tan\\theta}$.
 
 It is undefined wherever $\\sin(\\theta) = 0$: at $\\theta = n\\pi$ for every integer $n$. These are the same points where cosecant is undefined — where the terminal side lies along the $x$-axis.
 
@@ -1271,22 +980,56 @@ Cotangent is periodic with period $\\pi$, matching tangent. The derivation is an
 
 On the interval $(0, \\pi)$, cotangent is strictly decreasing — running from $+\\infty$ down to $-\\infty$. This contrasts with tangent, which is increasing on its principal interval. The [graph](!/trigonometry/graphs) of cotangent is a decreasing curve between consecutive asymptotes, while the graph of tangent is an increasing curve.
 
-Cotangent equals zero where cosine equals zero: at $\\theta = \\frac{\\pi}{2} + n\\pi$. In the [right triangle](!/trigonometry/right-triangle), it equals adjacent over opposite — the reciprocal of the tangent ratio. The cofunction relationship $\\cot\\theta = \\tan\\left(\\frac{\\pi}{2} - \\theta\\right)$ ties cotangent to tangent through complementary angles, consistent with the cofunction pattern established for all six functions.`,
+Cotangent equals zero where cosine equals zero: at $\\theta = \\frac{\\pi}{2} + n\\pi$. The cofunction relationship $\\cot\\theta = \\tan\\left(\\frac{\\pi}{2} - \\theta\\right)$ ties cotangent to tangent through complementary angles, consistent with the cofunction pattern established for all six functions.`,
     before: ``,
     after: ``,
     link: ``,
   },
+
+
+
   obj7: {
     title: `Reciprocal and Quotient Relationships`,
     content: `The six trigonometric functions are not independent — they are connected by a network of algebraic relationships that reduce all six to just two: sine and cosine. Every other function is expressible in terms of these two.
 
 The reciprocal relationships:
 
-$$\\csc\\theta = \\frac{1}{\\sin\\theta}, \\quad \\sec\\theta = \\frac{1}{\\cos\\theta}, \\quad \\cot\\theta = \\frac{1}{\\tan\\theta}$$
+@academic[formula_callout:Cosecant Reciprocal Identity
+$$\\csc\\theta = \\frac{1}{\\sin\\theta}$$
+/trigonometry/formulas#cosecant_reciprocal_identity]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+@academic[formula_callout:Secant Reciprocal Identity
+$$\\sec\\theta = \\frac{1}{\\cos\\theta}$$
+/trigonometry/formulas#secant_reciprocal_identity]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+@academic[formula_callout:Cotangent Reciprocal Identity
+$$\\cot\\theta = \\frac{1}{\\tan\\theta}$$
+/trigonometry/formulas#cotangent_reciprocal_identity]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
 
 The quotient relationships:
 
-$$\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta}, \\quad \\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta}$$
+@academic[formula_callout:Tangent Quotient Identity
+$$\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta}$$
+/trigonometry/formulas#tangent_quotient_identity]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+@academic[formula_callout:Cotangent Quotient Identity
+$$\\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta}$$
+/trigonometry/formulas#cotangent_quotient_identity]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
 
 Combining reciprocal and quotient relationships, any expression involving the six functions can be rewritten purely in terms of $\\sin\\theta$ and $\\cos\\theta$. For example, $\\sec\\theta\\tan\\theta = \\frac{1}{\\cos\\theta} \\cdot \\frac{\\sin\\theta}{\\cos\\theta} = \\frac{\\sin\\theta}{\\cos^2\\theta}$. This conversion strategy — "write everything in sine and cosine" — is one of the most reliable first steps when simplifying trigonometric expressions or proving [identities](!/trigonometry/identities).
 
@@ -1421,6 +1164,7 @@ The technique extends to starting from secant, cosecant, or cotangent — the Py
     }
 
   }
+
 
 
   const introContent = {

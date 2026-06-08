@@ -1,147 +1,236 @@
 
-
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-
-
-// export async function getStaticProps(){
-
-//   const keyWords=[
-//     'law of sines',
-//     'law of cosines',
-//     'solving oblique triangles',
-//     'ambiguous case SSA',
-//     'triangle area trigonometry',
-//     'Herons formula',
-//     'sine rule',
-//     'cosine rule',
-//     'ASA AAS triangle',
-//     'SAS triangle',
-//     'SSS triangle',
-//     'when to use law of sines',
-//     'when to use law of cosines',
-//     'triangle notation sides angles'
-//   ]
-
-//   const faqQuestions = {
-//     obj1: {
-//       question: "What is the Law of Sines?",
-//       answer: "The Law of Sines states that in any triangle, the ratio of each side to the sine of its opposite angle is constant: a/sinA = b/sinB = c/sinC. It is used to solve triangles when you know two angles and one side (ASA or AAS), or two sides and an angle opposite one of them (SSA, the ambiguous case)."
-//     },
-//     obj2: {
-//       question: "What is the Law of Cosines?",
-//       answer: "The Law of Cosines generalizes the Pythagorean theorem to all triangles: c² = a² + b² - 2ab·cos(C). It reduces to the Pythagorean theorem when C = 90°. It is used when you know two sides and the included angle (SAS) or all three sides (SSS) and need to find a missing side or angle."
-//     },
-//     obj3: {
-//       question: "What is the ambiguous case (SSA)?",
-//       answer: "The ambiguous case arises when two sides and a non-included angle are known (SSA). Depending on the measurements, this configuration can produce zero solutions (no triangle exists), exactly one solution, or two distinct triangles. The ambiguity occurs because the sine function gives the same value for supplementary angles, so two different angles may satisfy the equation."
-//     },
-//     obj4: {
-//       question: "How do you choose between the Law of Sines and the Law of Cosines?",
-//       answer: "Use the Law of Sines when you have a known angle-side opposite pair plus one additional piece (ASA, AAS, or SSA). Use the Law of Cosines when you have two sides and the included angle (SAS) or all three sides (SSS). The Law of Cosines is the only option when no angle-side opposite pair is available."
-//     },
-//     obj5: {
-//       question: "How do you find the area of a triangle using trigonometry?",
-//       answer: "When two sides and the included angle are known, the area is A = (1/2)ab·sin(C). This formula works for any triangle and reduces to the standard (1/2)·base·height formula when the angle is 90°. When all three sides are known, Heron's formula gives A = √(s(s-a)(s-b)(s-c)) where s = (a+b+c)/2 is the semi-perimeter."
-//     }
-//   }
-
-//   const schemas = {
-//     learningResource: {
-//       "@context": "https://schema.org",
-//       "@type": "LearningResource",
-//       "name": "Law of Sines and Law of Cosines",
-//       "description": "Master the Law of Sines and Law of Cosines for oblique triangles, the ambiguous case, triangle area formulas, and Heron's formula.",
-//       "url": "https://www.learnmathclass.com/trigonometry/sines-cosines-law",
-//       "inLanguage": "en-US",
-//       "learningResourceType": "Explanation",
-//       "educationalLevel": "High School, College",
-//       "educationalUse": "Learning",
-//       "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
-//       "about": { "@type": "Thing", "name": "Law of Sines and Law of Cosines" },
-//       "teaches": [
-//         "Standard triangle notation for sides and angles",
-//         "The Law of Sines and when to use it",
-//         "The ambiguous case (SSA) and its possible outcomes",
-//         "The Law of Cosines and when to use it",
-//         "Choosing between the two laws based on given information",
-//         "Triangle area using the formula A = (1/2)ab sin(C)",
-//         "Heron's formula for area from three sides",
-//         "Applications of triangle solving in real-world problems"
-//       ],
-//       "keywords": keyWords.join(", "),
-//       "author": { "@type": "Organization", "name": "Learn Math Class" },
-//       "publisher": { "@type": "Organization", "name": "Learn Math Class" },
-//       "datePublished": "2024-01-15",
-//       "dateModified": new Date().toISOString()
-//     },
-//     breadcrumb: {
-//       "@context": "https://schema.org",
-//       "@type": "BreadcrumbList",
-//       "itemListElement": [
-//         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
-//         { "@type": "ListItem", "position": 2, "name": "Trigonometry", "item": "https://www.learnmathclass.com/trigonometry" },
-//         { "@type": "ListItem", "position": 3, "name": "Law of Sines and Cosines", "item": "https://www.learnmathclass.com/trigonometry/sines-cosines-law" }
-//       ]
-//     },
-//     faq: {
-//       "@context": "https://schema.org",
-//       "@type": "FAQPage",
-//       "mainEntity": Object.keys(faqQuestions).map(key => ({
-//         "@type": "Question",
-//         "name": faqQuestions[key].question,
-//         "acceptedAnswer": { "@type": "Answer", "text": faqQuestions[key].answer }
-//       }))
-//     }
-//   }
-
-//   // •
-
-// //   • First item
-// // • Second item
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// // <hr style="border-width:1px;"></hr>
+export async function getStaticProps(){
 
-// // <hr style="color:blue;" />
+  const keyWords=[
+    'law of sines',
+    'law of cosines',
+    'solving oblique triangles',
+    'ambiguous case SSA',
+    'triangle area trigonometry',
+    'Herons formula',
+    'sine rule',
+    'cosine rule',
+    'ASA AAS triangle',
+    'SAS triangle',
+    'SSS triangle',
+    'when to use law of sines',
+    'when to use law of cosines',
+    'triangle notation sides angles'
+  ]
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+  const linkStyle = 'color: inherit; text-decoration: underline;'
 
+  // ---------- TABLES ----------
 
+  // obj4 — aggregation: ambiguous-case (SSA) subcases
+  const obj4Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Type of angle A</th>
+      <th style="${tableHeaders.aggregation}">Condition (with h = b·sin A)</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">Number of triangles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">A acute</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a &lt; h</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">0 (a too short to reach)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">A acute</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a = h</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1 (right triangle)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">A acute</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">h &lt; a &lt; b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2 (both acute and obtuse B valid)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">A acute</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a ≥ b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1 (only acute B valid)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">A obtuse</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a ≤ b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">0 (side opposite obtuse must be longest)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">A obtuse</td>
+      <td style="padding: 12px 15px; color: #34495e;">a &gt; b</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">1</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+  // obj9 — comparison: SAS area formula vs Heron's formula
+  const obj9Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Formula</th>
+      <th style="${tableHeaders.comparison}">Required input</th>
+      <th style="${tableHeaders.comparison}">Best for</th>
+      <th style="${tableHeaders.comparison}">Limitations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">A = ½ ab sin C</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two sides + included angle</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">SAS configuration; max at C = 90°</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires a known angle</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Heron&apos;s: √(s(s−a)(s−b)(s−c))</td>
+      <td style="padding: 12px 15px; color: #34495e;">three sides only (s = (a+b+c)/2)</td>
+      <td style="padding: 12px 15px; color: #34495e;">SSS when only area is sought, no angle computation needed</td>
+      <td style="padding: 12px 15px; color: #34495e;">yields no angle information</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+  // obj11 — summary capstone: configuration → law decision
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Configuration</th>
+      <th style="${tableHeaders.summary}">What is given</th>
+      <th style="${tableHeaders.summary}">Start with</th>
+      <th style="${tableHeaders.summary}">Then use</th>
+      <th style="${tableHeaders.summary}">Number of solutions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">AAS</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two angles and a non-included side</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A + B + C = 180° to get the third angle</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Law of Sines for remaining sides</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 (unique)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">ASA</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two angles and the included side</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A + B + C = 180° to get the third angle</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Law of Sines for remaining sides</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 (unique)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="#4" style="${linkStyle}">SSA</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two sides and an angle opposite one of them</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Law of Sines for the unknown sine</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">check both supplementary angle solutions</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0, 1, or 2 (ambiguous case)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">SAS</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two sides and the included angle</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Law of Cosines for the third side</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Law of Sines for remaining angles</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 (unique)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">SSS</td>
+      <td style="padding: 12px 15px; color: #34495e;">all three sides</td>
+      <td style="padding: 12px 15px; color: #34495e;">Law of Cosines for the largest angle</td>
+      <td style="padding: 12px 15px; color: #34495e;">Law of Sines for remaining angles</td>
+      <td style="padding: 12px 15px; color: #34495e;">1 if triangle inequality holds; 0 otherwise</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
+  const faqQuestions = {
+    obj1: {
+      question: "What is the Law of Sines?",
+      answer: "The Law of Sines states that in any triangle, the ratio of each side to the sine of its opposite angle is constant: a/sinA = b/sinB = c/sinC. It is used to solve triangles when you know two angles and one side (ASA or AAS), or two sides and an angle opposite one of them (SSA, the ambiguous case)."
+    },
+    obj2: {
+      question: "What is the Law of Cosines?",
+      answer: "The Law of Cosines generalizes the Pythagorean theorem to all triangles: c² = a² + b² - 2ab·cos(C). It reduces to the Pythagorean theorem when C = 90°. It is used when you know two sides and the included angle (SAS) or all three sides (SSS) and need to find a missing side or angle."
+    },
+    obj3: {
+      question: "What is the ambiguous case (SSA)?",
+      answer: "The ambiguous case arises when two sides and a non-included angle are known (SSA). Depending on the measurements, this configuration can produce zero solutions (no triangle exists), exactly one solution, or two distinct triangles. The ambiguity occurs because the sine function gives the same value for supplementary angles, so two different angles may satisfy the equation."
+    },
+    obj4: {
+      question: "How do you choose between the Law of Sines and the Law of Cosines?",
+      answer: "Use the Law of Sines when you have a known angle-side opposite pair plus one additional piece (ASA, AAS, or SSA). Use the Law of Cosines when you have two sides and the included angle (SAS) or all three sides (SSS). The Law of Cosines is the only option when no angle-side opposite pair is available."
+    },
+    obj5: {
+      question: "How do you find the area of a triangle using trigonometry?",
+      answer: "When two sides and the included angle are known, the area is A = (1/2)ab·sin(C). This formula works for any triangle and reduces to the standard (1/2)·base·height formula when the angle is 90°. When all three sides are known, Heron's formula gives A = √(s(s-a)(s-b)(s-c)) where s = (a+b+c)/2 is the semi-perimeter."
+    }
+  }
 
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+  const schemas = {
+    learningResource: {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      "name": "Law of Sines and Law of Cosines",
+      "description": "Master the Law of Sines and Law of Cosines for oblique triangles, the ambiguous case, triangle area formulas, and Heron's formula.",
+      "url": "https://www.learnmathclass.com/trigonometry/sines-cosines-law",
+      "inLanguage": "en-US",
+      "learningResourceType": "Explanation",
+      "educationalLevel": "High School, College",
+      "educationalUse": "Learning",
+      "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+      "about": { "@type": "Thing", "name": "Law of Sines and Law of Cosines" },
+      "teaches": [
+        "Standard triangle notation for sides and angles",
+        "The Law of Sines and when to use it",
+        "The ambiguous case (SSA) and its possible outcomes",
+        "The Law of Cosines and when to use it",
+        "Choosing between the two laws based on given information",
+        "Triangle area using the formula A = (1/2)ab sin(C)",
+        "Heron's formula for area from three sides",
+        "Applications of triangle solving in real-world problems",
+        "Mapping triangle configurations (AAS, ASA, SSA, SAS, SSS) to the appropriate solving strategy"
+      ],
+      "keywords": keyWords.join(", "),
+      "author": { "@type": "Organization", "name": "Learn Math Class" },
+      "publisher": { "@type": "Organization", "name": "Learn Math Class" },
+      "datePublished": "2024-01-15",
+      "dateModified": new Date().toISOString()
+    },
+    breadcrumb: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+        { "@type": "ListItem", "position": 2, "name": "Trigonometry", "item": "https://www.learnmathclass.com/trigonometry" },
+        { "@type": "ListItem", "position": 3, "name": "Law of Sines and Cosines", "item": "https://www.learnmathclass.com/trigonometry/sines-cosines-law" }
+      ]
+    },
+    faq: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": Object.keys(faqQuestions).map(key => ({
+        "@type": "Question",
+        "name": faqQuestions[key].question,
+        "acceptedAnswer": { "@type": "Answer", "text": faqQuestions[key].answer }
+      }))
+    }
+  }
 
 //     const sectionsContent={
 //    obj0: {
@@ -242,7 +331,9 @@
 // - If $a \\leq b$: no triangle (the side opposite the obtuse angle must be the longest).
 // - If $a > b$: exactly one triangle (the obtuse angle is at $A$, so $B$ must be acute).
 
-// In practice, the safest approach is computational: use the Law of Sines to find $\\sin B$, check whether the value is valid ($\\leq 1$), then check whether both the acute and obtuse solutions for $B$ produce a valid triangle (i.e., whether $A + B < 180°$ in each case).`,
+// In practice, the safest approach is computational: use the Law of Sines to find $\\sin B$, check whether the value is valid ($\\leq 1$), then check whether both the acute and obtuse solutions for $B$ produce a valid triangle (i.e., whether $A + B < 180°$ in each case).
+
+// The six geometric subcases — four for an acute $A$ and two for an obtuse $A$ — collect into the decision table below.`,
 //     before: ``,
 //     after: ``,
 //     link: ``,
@@ -371,7 +462,9 @@
 
 // The formula has the advantage of requiring only side lengths — no angles, no trigonometric function evaluations. It is useful when the sides are given numerically and the area is the only quantity sought. Its disadvantage is that it provides no angle information; if angles are also needed, the Law of Cosines is a more efficient starting point.
 
-// A validity check: $s - a$, $s - b$, and $s - c$ must all be positive. If any of them is zero or negative, the three given lengths do not form a valid triangle (they violate the triangle inequality).`,
+// A validity check: $s - a$, $s - b$, and $s - c$ must all be positive. If any of them is zero or negative, the three given lengths do not form a valid triangle (they violate the triangle inequality).
+
+// The two area formulas — the SAS form and Heron&apos;s formula — sit side by side on what input they require and where each is the right choice.`,
 //     before: ``,
 //     after: ``,
 //     link: ``,
@@ -393,9 +486,10 @@
 //     after: ``,
 //     link: ``,
 //   },
+//     // NEW capstone section: obj11
 //     obj11:{
-//       title:``,
-//       content:``,
+//       title:`Summary: Configuration to Solving Strategy`,
+//       content:`Solving an oblique triangle reduces to a single decision: identify the configuration of given information and apply the appropriate law (or sequence of laws). The table below maps every solvable three-piece configuration — AAS, ASA, SSA, SAS, SSS — to the law that opens the problem, the law that finishes it, and the number of triangles the data determines. The SSA row links to the ambiguous-case detail covered above.`,
 //       before:``,
 //       after:``,
 //       link:'',
@@ -441,530 +535,7 @@
 
 //   }
 
-
-//   const introContent = {
-//   id: "intro",
-//   title: `Solving Triangles Without a Right Angle`,
-//   content: `[Right triangle trigonometry](!/trigonometry/right-triangle) solves triangles that contain a $90°$ angle. Most triangles do not. A triangle formed by three survey markers, three cities on a map, or three forces acting on an object will almost never include a right angle. These oblique triangles — triangles with no right angle — require different tools.
-
-// The Law of Sines and the Law of Cosines are those tools. Together, they provide a complete framework for solving any triangle given sufficient information: finding unknown sides from known angles and sides, finding unknown angles from known sides, computing areas, and handling the geometric ambiguities that arise when the given data does not determine a unique triangle. The Law of Cosines generalizes the Pythagorean theorem — reducing to it exactly when one angle is $90°$ — while the Law of Sines provides a proportional relationship between sides and the sines of their opposite angles. Which law to apply depends entirely on what is known: the configuration of given sides and angles determines the starting point, and the two laws often work in sequence to complete the solution.
-
-// `,
-// }
-
-
-
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//          faqQuestions,
-//          schemas,
-//           seoData: {
-//         title: "Law of Sines and Cosines | Learn Math Class",
-//         description: "Master the Law of Sines and Law of Cosines for oblique triangles: the ambiguous case, choosing the right law, triangle area, and Heron's formula.",
-//         keywords: keyWords.join(", "),
-//         url: "/trigonometry/sines-cosines-law",
-//          name: "Law of Sines and Law of Cosines"
-//       },
-
-//        }
-//     }
-//    }
-
-// export default function SinesCosinesLawPage({seoData,sectionsContent , introContent, faqQuestions, schemas}) {
-
-
-//   const genericSections=[
-
-//      {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//           sectionsContent.obj0.after,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-
-// ]
-
-//   return (
-//    <>
-//    <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-
-//   <meta name="robots" content="index, follow" />
-
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar
-//            side='right'
-//            // topOffset='65px'
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          />
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Law of Sines and Cosines</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//      <KeyTermsCard
-//      id="0"
-//      title={sectionsContent.obj0.title}
-//      content={sectionsContent.obj0.content}
-//      after={sectionsContent.obj0.after}
-//      variant="light"
-//    />
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-
-  const keyWords=[
-    'law of sines',
-    'law of cosines',
-    'solving oblique triangles',
-    'ambiguous case SSA',
-    'triangle area trigonometry',
-    'Herons formula',
-    'sine rule',
-    'cosine rule',
-    'ASA AAS triangle',
-    'SAS triangle',
-    'SSS triangle',
-    'when to use law of sines',
-    'when to use law of cosines',
-    'triangle notation sides angles'
-  ]
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-
-  // ---------- TABLES ----------
-
-  // obj4 — aggregation: ambiguous-case (SSA) subcases
-  const obj4Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 90%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Type of angle A</th>
-      <th style="${tableHeaders.aggregation}">Condition (with h = b·sin A)</th>
-      <th style="${tableHeaders.aggregation} text-align: center;">Number of triangles</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">A acute</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a &lt; h</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">0 (a too short to reach)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">A acute</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a = h</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1 (right triangle)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">A acute</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">h &lt; a &lt; b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2 (both acute and obtuse B valid)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">A acute</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a ≥ b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1 (only acute B valid)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">A obtuse</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a ≤ b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">0 (side opposite obtuse must be longest)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">A obtuse</td>
-      <td style="padding: 12px 15px; color: #34495e;">a &gt; b</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">1</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj9 — comparison: SAS area formula vs Heron's formula
-  const obj9Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 90%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Formula</th>
-      <th style="${tableHeaders.comparison}">Required input</th>
-      <th style="${tableHeaders.comparison}">Best for</th>
-      <th style="${tableHeaders.comparison}">Limitations</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">A = ½ ab sin C</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two sides + included angle</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">SAS configuration; max at C = 90°</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires a known angle</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Heron&apos;s: √(s(s−a)(s−b)(s−c))</td>
-      <td style="padding: 12px 15px; color: #34495e;">three sides only (s = (a+b+c)/2)</td>
-      <td style="padding: 12px 15px; color: #34495e;">SSS when only area is sought, no angle computation needed</td>
-      <td style="padding: 12px 15px; color: #34495e;">yields no angle information</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj11 — summary capstone: configuration → law decision
-  const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Configuration</th>
-      <th style="${tableHeaders.summary}">What is given</th>
-      <th style="${tableHeaders.summary}">Start with</th>
-      <th style="${tableHeaders.summary}">Then use</th>
-      <th style="${tableHeaders.summary}">Number of solutions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">AAS</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two angles and a non-included side</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A + B + C = 180° to get the third angle</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Law of Sines for remaining sides</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 (unique)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">ASA</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two angles and the included side</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A + B + C = 180° to get the third angle</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Law of Sines for remaining sides</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 (unique)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="#4" style="${linkStyle}">SSA</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two sides and an angle opposite one of them</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Law of Sines for the unknown sine</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">check both supplementary angle solutions</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0, 1, or 2 (ambiguous case)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">SAS</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two sides and the included angle</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Law of Cosines for the third side</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Law of Sines for remaining angles</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 (unique)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">SSS</td>
-      <td style="padding: 12px 15px; color: #34495e;">all three sides</td>
-      <td style="padding: 12px 15px; color: #34495e;">Law of Cosines for the largest angle</td>
-      <td style="padding: 12px 15px; color: #34495e;">Law of Sines for remaining angles</td>
-      <td style="padding: 12px 15px; color: #34495e;">1 if triangle inequality holds; 0 otherwise</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  const faqQuestions = {
-    obj1: {
-      question: "What is the Law of Sines?",
-      answer: "The Law of Sines states that in any triangle, the ratio of each side to the sine of its opposite angle is constant: a/sinA = b/sinB = c/sinC. It is used to solve triangles when you know two angles and one side (ASA or AAS), or two sides and an angle opposite one of them (SSA, the ambiguous case)."
-    },
-    obj2: {
-      question: "What is the Law of Cosines?",
-      answer: "The Law of Cosines generalizes the Pythagorean theorem to all triangles: c² = a² + b² - 2ab·cos(C). It reduces to the Pythagorean theorem when C = 90°. It is used when you know two sides and the included angle (SAS) or all three sides (SSS) and need to find a missing side or angle."
-    },
-    obj3: {
-      question: "What is the ambiguous case (SSA)?",
-      answer: "The ambiguous case arises when two sides and a non-included angle are known (SSA). Depending on the measurements, this configuration can produce zero solutions (no triangle exists), exactly one solution, or two distinct triangles. The ambiguity occurs because the sine function gives the same value for supplementary angles, so two different angles may satisfy the equation."
-    },
-    obj4: {
-      question: "How do you choose between the Law of Sines and the Law of Cosines?",
-      answer: "Use the Law of Sines when you have a known angle-side opposite pair plus one additional piece (ASA, AAS, or SSA). Use the Law of Cosines when you have two sides and the included angle (SAS) or all three sides (SSS). The Law of Cosines is the only option when no angle-side opposite pair is available."
-    },
-    obj5: {
-      question: "How do you find the area of a triangle using trigonometry?",
-      answer: "When two sides and the included angle are known, the area is A = (1/2)ab·sin(C). This formula works for any triangle and reduces to the standard (1/2)·base·height formula when the angle is 90°. When all three sides are known, Heron's formula gives A = √(s(s-a)(s-b)(s-c)) where s = (a+b+c)/2 is the semi-perimeter."
-    }
-  }
-
-  const schemas = {
-    learningResource: {
-      "@context": "https://schema.org",
-      "@type": "LearningResource",
-      "name": "Law of Sines and Law of Cosines",
-      "description": "Master the Law of Sines and Law of Cosines for oblique triangles, the ambiguous case, triangle area formulas, and Heron's formula.",
-      "url": "https://www.learnmathclass.com/trigonometry/sines-cosines-law",
-      "inLanguage": "en-US",
-      "learningResourceType": "Explanation",
-      "educationalLevel": "High School, College",
-      "educationalUse": "Learning",
-      "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
-      "about": { "@type": "Thing", "name": "Law of Sines and Law of Cosines" },
-      "teaches": [
-        "Standard triangle notation for sides and angles",
-        "The Law of Sines and when to use it",
-        "The ambiguous case (SSA) and its possible outcomes",
-        "The Law of Cosines and when to use it",
-        "Choosing between the two laws based on given information",
-        "Triangle area using the formula A = (1/2)ab sin(C)",
-        "Heron's formula for area from three sides",
-        "Applications of triangle solving in real-world problems",
-        "Mapping triangle configurations (AAS, ASA, SSA, SAS, SSS) to the appropriate solving strategy"
-      ],
-      "keywords": keyWords.join(", "),
-      "author": { "@type": "Organization", "name": "Learn Math Class" },
-      "publisher": { "@type": "Organization", "name": "Learn Math Class" },
-      "datePublished": "2024-01-15",
-      "dateModified": new Date().toISOString()
-    },
-    breadcrumb: {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
-        { "@type": "ListItem", "position": 2, "name": "Trigonometry", "item": "https://www.learnmathclass.com/trigonometry" },
-        { "@type": "ListItem", "position": 3, "name": "Law of Sines and Cosines", "item": "https://www.learnmathclass.com/trigonometry/sines-cosines-law" }
-      ]
-    },
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": { "@type": "Answer", "text": faqQuestions[key].answer }
-      }))
-    }
-  }
-
-    const sectionsContent={
+const sectionsContent={
    obj0: {
     title: `Key Terms`,
     content: `
@@ -1007,7 +578,12 @@ This constraint means that knowing any two angles immediately gives the third. I
     title: `The Law of Sines`,
     content: `The Law of Sines states that in any triangle, the ratio of each side to the sine of its opposite angle is constant:
 
+@academic[formula_callout:Law of Sines
 $$\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C}$$
+/trigonometry/formulas#law_of_sines]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
 
 Equivalently, the sines are proportional to their opposite sides:
 
@@ -1074,7 +650,12 @@ The six geometric subcases — four for an acute $A$ and two for an obtuse $A$ �
     title: `The Law of Cosines`,
     content: `The Law of Cosines relates the three sides of a triangle to the cosine of one of its angles:
 
+@academic[formula_callout:Law of Cosines
 $$c^2 = a^2 + b^2 - 2ab\\cos C$$
+/trigonometry/formulas#law_of_cosines]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
 
 Equivalently:
 
@@ -1153,7 +734,12 @@ Any other combination of three pieces of information (out of three sides and thr
     title: `Area of a Triangle Using Trigonometry`,
     content: `The standard area formula $A = \\frac{1}{2} \\times \\text{base} \\times \\text{height}$ requires knowing the height, which is often not directly given. Trigonometry provides an alternative that uses two sides and the included angle:
 
+@academic[formula_callout:Triangle Area - SAS
 $$A = \\frac{1}{2}ab\\sin C$$
+/trigonometry/formulas#triangle_area_-_sas]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
 
 where $a$ and $b$ are two sides and $C$ is the angle between them.
 
@@ -1171,8 +757,8 @@ Note that $\\sin C > 0$ for all valid triangle angles ($0° < C < 180°$), so th
     link: ``,
   },
   obj9: {
-    title: `Heron's Formula`,
-    content: `When all three sides of a triangle are known but no angle has been computed, the area can be found directly using Heron's formula — without first finding any angle.
+    title: `Heron&apos;s Formula`,
+    content: `When all three sides of a triangle are known but no angle has been computed, the area can be found directly using Heron&apos;s formula — without first finding any angle.
 
 Compute the semi-perimeter:
 
@@ -1180,7 +766,12 @@ $$s = \\frac{a + b + c}{2}$$
 
 Then the area is:
 
+@academic[formula_callout:Herons Formula
 $$A = \\sqrt{s(s-a)(s-b)(s-c)}$$
+/trigonometry/formulas#herons_formula]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
 
 **Example:** A triangle with sides $a = 5$, $b = 7$, $c = 9$.
 
@@ -1190,7 +781,7 @@ $$A = \\sqrt{10.5 \\times 5.5 \\times 3.5 \\times 1.5} = \\sqrt{10.5 \\times 5.5
 
 $$= \\sqrt{303.1875} \\approx 17.41$$
 
-Heron's formula can be derived from the trigonometric area formula $\\frac{1}{2}ab\\sin C$ combined with the Law of Cosines. Express $\\cos C$ in terms of the sides, use $\\sin^2 C = 1 - \\cos^2 C$ to find $\\sin C$, substitute into the area formula, and simplify. The algebra is substantial but the result is elegant.
+Heron&apos;s formula can be derived from the trigonometric area formula $\\frac{1}{2}ab\\sin C$ combined with the Law of Cosines. Express $\\cos C$ in terms of the sides, use $\\sin^2 C = 1 - \\cos^2 C$ to find $\\sin C$, substitute into the area formula, and simplify. The algebra is substantial but the result is elegant.
 
 The formula has the advantage of requiring only side lengths — no angles, no trigonometric function evaluations. It is useful when the sides are given numerically and the area is the only quantity sought. Its disadvantage is that it provides no angle information; if angles are also needed, the Law of Cosines is a more efficient starting point.
 
@@ -1266,6 +857,7 @@ In every application, the first step is geometric: identify the triangle, label 
     }
 
   }
+
 
 
   const introContent = {

@@ -1,224 +1,274 @@
 
 
-
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import '../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-
-
-// export async function getStaticProps(){
-
-//   const keyWords=[
-//     'trigonometric equations',
-//     'solving trig equations',
-//     'general solution trig',
-//     'reference angle method',
-//     'quadratic trig equations',
-//     'multiple angle equations',
-//     'factoring trig equations',
-//     'trig equation solutions',
-//     'sin x equals value',
-//     'cos x equals value',
-//     'tan x equals value',
-//     'inverse trig to solve equations',
-//     'principal solution trigonometry',
-//     'periodic solutions trig'
-//   ]
-
-//   const faqQuestions = {
-//     obj1: {
-//       question: "How do you solve a basic trigonometric equation?",
-//       answer: "First isolate the trigonometric function on one side of the equation. Then determine whether the value is in the function's range — if not, there is no solution. If it is, use a reference angle to find the principal solutions within one period, then apply the quadrant analysis to identify all solutions in [0, 2π). Finally, add integer multiples of the period to express the general solution."
-//     },
-//     obj2: {
-//       question: "What is the general solution of a trigonometric equation?",
-//       answer: "The general solution accounts for the infinite repetitions caused by periodicity. For sine and cosine, solutions repeat every 2π, so the general form adds 2nπ to each solution within one period. For tangent and cotangent with period π, solutions repeat every π. The general solution captures every angle that satisfies the equation."
-//     },
-//     obj3: {
-//       question: "How do you solve quadratic trigonometric equations?",
-//       answer: "Treat the trigonometric function as a variable and factor or apply the quadratic formula. For example, 2sin²x - sinx - 1 = 0 factors as (2sinx + 1)(sinx - 1) = 0, giving sinx = -1/2 or sinx = 1. Then solve each resulting basic equation separately using reference angles and quadrant analysis."
-//     },
-//     obj4: {
-//       question: "How do you solve multiple-angle trigonometric equations?",
-//       answer: "For an equation like sin(2x) = 1/2, solve for the inner expression first: 2x = π/6 + 2nπ or 2x = 5π/6 + 2nπ. Then divide by the coefficient to find x. The division creates more solutions within each period, so check carefully which values fall in the desired interval."
-//     },
-//     obj5: {
-//       question: "When does a trigonometric equation have no solution?",
-//       answer: "A trigonometric equation has no solution when the equation requires a function to take a value outside its range. For example, sinx = 2 has no solution because sine is bounded between -1 and 1. Similarly, cscx = 0.5 has no solution because cosecant values satisfy |cscx| ≥ 1. Checking the range first prevents wasted effort."
-//     }
-//   }
-
-//   const schemas = {
-//     learningResource: {
-//       "@context": "https://schema.org",
-//       "@type": "LearningResource",
-//       "name": "Trigonometric Equations",
-//       "description": "Learn to solve trigonometric equations: reference angles, general solutions, quadratic and multiple-angle equations, factoring methods, and more.",
-//       "url": "https://www.learnmathclass.com/trigonometry/equations",
-//       "inLanguage": "en-US",
-//       "learningResourceType": "Explanation",
-//       "educationalLevel": "High School, College",
-//       "educationalUse": "Learning",
-//       "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
-//       "about": { "@type": "Thing", "name": "Trigonometric Equations" },
-//       "teaches": [
-//         "Solving basic trigonometric equations using reference angles",
-//         "Finding all solutions within a given interval",
-//         "Writing general solutions with periodic repetition",
-//         "Solving quadratic trigonometric equations by factoring",
-//         "Handling multiple-angle equations",
-//         "Using identities to transform equations before solving",
-//         "Recognizing equations with no solution based on range constraints"
-//       ],
-//       "keywords": keyWords.join(", "),
-//       "author": { "@type": "Organization", "name": "Learn Math Class" },
-//       "publisher": { "@type": "Organization", "name": "Learn Math Class" },
-//       "datePublished": "2024-01-15",
-//       "dateModified": new Date().toISOString()
-//     },
-//     breadcrumb: {
-//       "@context": "https://schema.org",
-//       "@type": "BreadcrumbList",
-//       "itemListElement": [
-//         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
-//         { "@type": "ListItem", "position": 2, "name": "Trigonometry", "item": "https://www.learnmathclass.com/trigonometry" },
-//         { "@type": "ListItem", "position": 3, "name": "Trigonometric Equations", "item": "https://www.learnmathclass.com/trigonometry/equations" }
-//       ]
-//     },
-//     faq: {
-//       "@context": "https://schema.org",
-//       "@type": "FAQPage",
-//       "mainEntity": Object.keys(faqQuestions).map(key => ({
-//         "@type": "Question",
-//         "name": faqQuestions[key].question,
-//         "acceptedAnswer": { "@type": "Answer", "text": faqQuestions[key].answer }
-//       }))
-//     }
-//   }
-
-//   // •
-
-// //   • First item
-// // • Second item
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import '../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// // <hr style="border-width:1px;"></hr>
+export async function getStaticProps(){
 
-// // <hr style="color:blue;" />
+  const keyWords=[
+    'trigonometric equations',
+    'solving trig equations',
+    'general solution trig',
+    'reference angle method',
+    'quadratic trig equations',
+    'multiple angle equations',
+    'factoring trig equations',
+    'trig equation solutions',
+    'sin x equals value',
+    'cos x equals value',
+    'tan x equals value',
+    'inverse trig to solve equations',
+    'principal solution trigonometry',
+    'periodic solutions trig'
+  ]
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+  const faqQuestions = {
+    obj1: {
+      question: "How do you solve a basic trigonometric equation?",
+      answer: "First isolate the trigonometric function on one side of the equation. Then determine whether the value is in the function's range — if not, there is no solution. If it is, use a reference angle to find the principal solutions within one period, then apply the quadrant analysis to identify all solutions in [0, 2π). Finally, add integer multiples of the period to express the general solution."
+    },
+    obj2: {
+      question: "What is the general solution of a trigonometric equation?",
+      answer: "The general solution accounts for the infinite repetitions caused by periodicity. For sine and cosine, solutions repeat every 2π, so the general form adds 2nπ to each solution within one period. For tangent and cotangent with period π, solutions repeat every π. The general solution captures every angle that satisfies the equation."
+    },
+    obj3: {
+      question: "How do you solve quadratic trigonometric equations?",
+      answer: "Treat the trigonometric function as a variable and factor or apply the quadratic formula. For example, 2sin²x - sinx - 1 = 0 factors as (2sinx + 1)(sinx - 1) = 0, giving sinx = -1/2 or sinx = 1. Then solve each resulting basic equation separately using reference angles and quadrant analysis."
+    },
+    obj4: {
+      question: "How do you solve multiple-angle trigonometric equations?",
+      answer: "For an equation like sin(2x) = 1/2, solve for the inner expression first: 2x = π/6 + 2nπ or 2x = 5π/6 + 2nπ. Then divide by the coefficient to find x. The division creates more solutions within each period, so check carefully which values fall in the desired interval."
+    },
+    obj5: {
+      question: "When does a trigonometric equation have no solution?",
+      answer: "A trigonometric equation has no solution when the equation requires a function to take a value outside its range. For example, sinx = 2 has no solution because sine is bounded between -1 and 1. Similarly, cscx = 0.5 has no solution because cosecant values satisfy |cscx| ≥ 1. Checking the range first prevents wasted effort."
+    }
+  }
+
+  const schemas = {
+    learningResource: {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      "name": "Trigonometric Equations",
+      "description": "Learn to solve trigonometric equations: reference angles, general solutions, quadratic and multiple-angle equations, factoring methods, and more.",
+      "url": "https://www.learnmathclass.com/trigonometry/equations",
+      "inLanguage": "en-US",
+      "learningResourceType": "Explanation",
+      "educationalLevel": "High School, College",
+      "educationalUse": "Learning",
+      "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+      "about": { "@type": "Thing", "name": "Trigonometric Equations" },
+      "teaches": [
+        "Solving basic trigonometric equations using reference angles",
+        "Finding all solutions within a given interval",
+        "Writing general solutions with periodic repetition",
+        "Solving quadratic trigonometric equations by factoring",
+        "Handling multiple-angle equations",
+        "Using identities to transform equations before solving",
+        "Recognizing equations with no solution based on range constraints"
+      ],
+      "keywords": keyWords.join(", "),
+      "author": { "@type": "Organization", "name": "Learn Math Class" },
+      "publisher": { "@type": "Organization", "name": "Learn Math Class" },
+      "datePublished": "2024-01-15",
+      "dateModified": new Date().toISOString()
+    },
+    breadcrumb: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+        { "@type": "ListItem", "position": 2, "name": "Trigonometry", "item": "https://www.learnmathclass.com/trigonometry" },
+        { "@type": "ListItem", "position": 3, "name": "Trigonometric Equations", "item": "https://www.learnmathclass.com/trigonometry/equations" }
+      ]
+    },
+    faq: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": Object.keys(faqQuestions).map(key => ({
+        "@type": "Question",
+        "name": faqQuestions[key].question,
+        "acceptedAnswer": { "@type": "Answer", "text": faqQuestions[key].answer }
+      }))
+    }
+  }
+
+  // •
+
+//   • First item
+// • Second item
+
+
+// <hr style="border-width:1px;"></hr>
+
+// <hr style="color:blue;" />
+
+// <hr style="border-color:#3498db; border-width:1px;" />
 
 
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
+// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.notation)}
+        // </div>,
 
 
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
+//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+//     {processContent(sectionsContent.normal.parameters)}
+// </div>,
 
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
+//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+//                   {processContent(sectionsContent.obj4.content)}
+//                   </div>,
 
 
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+//  <div key={'dist'} style={{
+//                     textAlign: 'center',
+//                     transform: 'scale(0.98)',
+//                     transformOrigin: 'center',
+//                     marginTop:'50px',
+//                     marginLeft:'-150px'
+//                   }} dangerouslySetInnerHTML={{
+//                     __html:   sectionContent.distributions.svg,
+//                   }} />
+
+  const linkStyle = 'color: inherit; text-decoration: underline;'
+
+  // ---------- TABLES ----------
+
+  // obj4 — comparison: basic equation procedure for sin, cos, tan (synthesizes obj2-obj4)
+  const obj4Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Equation</th>
+      <th style="${tableHeaders.comparison}">Range constraint on a</th>
+      <th style="${tableHeaders.comparison}">Reference / principal angle</th>
+      <th style="${tableHeaders.comparison}">Solutions on [0, 2π)</th>
+      <th style="${tableHeaders.comparison}">General solution</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">sin x = a</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|a| ≤ 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">α = arcsin|a|</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a &gt; 0: &nbsp;Q I, II &nbsp;→&nbsp; α, π − α<br>a &lt; 0: &nbsp;Q III, IV &nbsp;→&nbsp; π + α, 2π − α</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = α + 2nπ &nbsp;or&nbsp; x = π − α + 2nπ</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">cos x = a</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|a| ≤ 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">α = arccos|a|</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a &gt; 0: &nbsp;Q I, IV &nbsp;→&nbsp; α, 2π − α<br>a &lt; 0: &nbsp;Q II, III &nbsp;→&nbsp; π − α, π + α</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = ±α + 2nπ</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">tan x = a</td>
+      <td style="padding: 12px 15px; color: #34495e;">any real a</td>
+      <td style="padding: 12px 15px; color: #34495e;">α = arctan a &nbsp;(∈ (−π ⁄ 2, π ⁄ 2))</td>
+      <td style="padding: 12px 15px; color: #34495e;">α &nbsp;(mod π in [0, 2π)) &nbsp;and α + π &nbsp;— one per period</td>
+      <td style="padding: 12px 15px; color: #34495e;">x = α + nπ</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj9 — aggregation: operations that can create extraneous solutions
+  const obj9Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Operation</th>
+      <th style="${tableHeaders.aggregation}">Why it can introduce extraneous solutions</th>
+      <th style="${tableHeaders.aggregation}">How to handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Squaring both sides</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cannot distinguish a from −a &nbsp;(both square to a<sup>2</sup>)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">substitute every candidate back into the original equation</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Multiplying by a variable expression</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">adds solutions where that expression equals 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">discard any candidate that makes the multiplier 0</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Certain identity substitutions</td>
+      <td style="padding: 12px 15px; color: #34495e;">may broaden the domain or change the equation&apos;s effective form</td>
+      <td style="padding: 12px 15px; color: #34495e;">verify candidates in the original equation, not the transformed one</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj10 — summary: capstone equation-form → approach decision tree
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Equation form</th>
+      <th style="${tableHeaders.summary}">First move</th>
+      <th style="${tableHeaders.summary}">Result</th>
+      <th style="${tableHeaders.summary}">Then solve as</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Basic: &nbsp;sin/cos/tan x = a</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">check |a| against the function&apos;s range; find reference angle</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">principal angle α</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">apply the quadrant rule, then write the general solution</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Product equals 0 &nbsp;(factored)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">set each factor to 0 separately</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">several basic equations</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">solve each, then union the solution sets</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quadratic in a single function</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">substitute u = sin x &nbsp;(or cos x, tan x); factor or apply the quadratic formula</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">values of u</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reject u values outside the function&apos;s range, then solve each basic equation</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Two or more functions mixed</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">apply a Pythagorean, double-angle, or other <a href="/trigonometry/identities" style="${linkStyle}">identity</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">single-function equation</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">basic or quadratic in that function</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Multiple angle: &nbsp;sin/cos/tan(nx) = a</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">let u = nx and solve sin/cos/tan u = a first</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">general solution in u</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">divide by n, generate every x in the target interval &nbsp;(up to 2n solutions on [0, 2π))</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Equation requiring squaring</td>
+      <td style="padding: 12px 15px; color: #34495e;">square &nbsp;(only when needed), reduce to a basic or quadratic form</td>
+      <td style="padding: 12px 15px; color: #34495e;">candidate solutions</td>
+      <td style="padding: 12px 15px; color: #34495e;">substitute each candidate into the original to discard extraneous values</td>
+    </tr>
+  </tbody>
+</table>
+// `
 
 //     const sectionsContent={
 
-//     // obj1:{
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-
-
-//     // },
-//     // obj2:{
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-
-//     // },
-
-//     // obj3:{
-
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-
-//     // },
-//     // obj4:{
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-
-//     // },
-//     // obj5:{
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-
-//     // },
-//     // obj6:{
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-
-//     // },
-//     // obj7:{
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-
-//     // },
-//     // obj8:{
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-
-//     // },
-//     // obj9:{
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-
-//     // },
+   
 //     obj0: {
 //     title: `Key Terms`,
 //     content: `
@@ -506,8 +556,8 @@
 //     link: ``,
 //   },
 //     obj10:{
-//       title:``,
-//       content:``,
+//       title:`Summary: Approach by Equation Form`,
+//       content:`Every trigonometric equation eventually reduces to a basic equation $\\sin x = a$, $\\cos x = a$, or $\\tan x = a$ — what differs is the path. The capstone table below collects the equation forms encountered above, the first move that gets each one onto a productive track, and what to do once the reduction is complete.`,
 //       before:``,
 //       after:``,
 //       link:'',
@@ -562,558 +612,7 @@
 //   }
 
 
-//   const introContent = {
-//   id: "intro",
-//   title: `Solving for Unknown Angles`,
-//   content: `A trigonometric equation is an equation in which the unknown appears inside a trigonometric function: $\\sin(x) = \\frac{1}{2}$, $2\\cos^2(x) - 1 = 0$, $\\tan(3x) = -1$. Unlike [identities](!/trigonometry/identities), which hold for every angle, an equation is satisfied only by specific values — and the challenge is to find them all. The word "all" is critical, because periodicity guarantees that if one solution exists, infinitely many do. The angle $x = \\frac{\\pi}{6}$ satisfies $\\sin(x) = \\frac{1}{2}$, but so does $x = \\frac{5\\pi}{6}$, and so does $x = \\frac{\\pi}{6} + 2\\pi$, and $x = \\frac{5\\pi}{6} + 2\\pi$, and every other angle obtained by adding integer multiples of $2\\pi$ to either of these.
-
-// Managing this infinity is what distinguishes trigonometric equation solving from solving polynomial or rational equations. Two formats are standard: the general solution, which captures every solution using a parameter $n \\in \\mathbb{Z}$, and the restricted solution, which lists only those solutions within a specified interval — typically $[0, 2\\pi)$ or $[0°, 360°)$. The tools required include the [unit circle](!/trigonometry/unit-circle) (for reading solutions geometrically), [inverse trigonometric functions](!/trigonometry/inverse-functions) (for computing principal values), [identities](!/trigonometry/identities) (for rewriting multi-function equations), and [formulas](!/trigonometry/formulas) (for handling double angles, half angles, and other compound arguments). The [properties](!/trigonometry/properties) of the trigonometric functions — particularly periodicity and boundedness — govern when solutions exist and how many there are.`,
-// };
-
-
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//          faqQuestions,
-//          schemas,
-//           seoData: {
-//         title: "Trigonometric Equations | Learn Math Class",
-//         description: "Learn to solve trigonometric equations: isolate the function, find reference angles, generate all solutions, and handle quadratic and multiple-angle equations.",
-//         keywords: keyWords.join(", "),
-//         url: "/trigonometry/equations",
-//          name: "Trigonometric Equations"
-//       },
-
-//        }
-//     }
-//    }
-
-// export default function EquationsPage({seoData,sectionsContent , introContent, faqQuestions, schemas}) {
-
-
-//   const genericSections=[
-//      {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//           sectionsContent.obj0.after,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-
-// ]
-
-//   return (
-//    <>
-//    <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-
-//   <meta name="robots" content="index, follow" />
-
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar
-//            side='right'
-//            // topOffset='65px'
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          />
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Trigonometric Equations</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//      <KeyTermsCard
-//      id="0"
-//      title={sectionsContent.obj0.title}
-//      content={sectionsContent.obj0.content}
-//      after={sectionsContent.obj0.after}
-//      variant="light"
-//    />
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import '../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-
-  const keyWords=[
-    'trigonometric equations',
-    'solving trig equations',
-    'general solution trig',
-    'reference angle method',
-    'quadratic trig equations',
-    'multiple angle equations',
-    'factoring trig equations',
-    'trig equation solutions',
-    'sin x equals value',
-    'cos x equals value',
-    'tan x equals value',
-    'inverse trig to solve equations',
-    'principal solution trigonometry',
-    'periodic solutions trig'
-  ]
-
-  const faqQuestions = {
-    obj1: {
-      question: "How do you solve a basic trigonometric equation?",
-      answer: "First isolate the trigonometric function on one side of the equation. Then determine whether the value is in the function's range — if not, there is no solution. If it is, use a reference angle to find the principal solutions within one period, then apply the quadrant analysis to identify all solutions in [0, 2π). Finally, add integer multiples of the period to express the general solution."
-    },
-    obj2: {
-      question: "What is the general solution of a trigonometric equation?",
-      answer: "The general solution accounts for the infinite repetitions caused by periodicity. For sine and cosine, solutions repeat every 2π, so the general form adds 2nπ to each solution within one period. For tangent and cotangent with period π, solutions repeat every π. The general solution captures every angle that satisfies the equation."
-    },
-    obj3: {
-      question: "How do you solve quadratic trigonometric equations?",
-      answer: "Treat the trigonometric function as a variable and factor or apply the quadratic formula. For example, 2sin²x - sinx - 1 = 0 factors as (2sinx + 1)(sinx - 1) = 0, giving sinx = -1/2 or sinx = 1. Then solve each resulting basic equation separately using reference angles and quadrant analysis."
-    },
-    obj4: {
-      question: "How do you solve multiple-angle trigonometric equations?",
-      answer: "For an equation like sin(2x) = 1/2, solve for the inner expression first: 2x = π/6 + 2nπ or 2x = 5π/6 + 2nπ. Then divide by the coefficient to find x. The division creates more solutions within each period, so check carefully which values fall in the desired interval."
-    },
-    obj5: {
-      question: "When does a trigonometric equation have no solution?",
-      answer: "A trigonometric equation has no solution when the equation requires a function to take a value outside its range. For example, sinx = 2 has no solution because sine is bounded between -1 and 1. Similarly, cscx = 0.5 has no solution because cosecant values satisfy |cscx| ≥ 1. Checking the range first prevents wasted effort."
-    }
-  }
-
-  const schemas = {
-    learningResource: {
-      "@context": "https://schema.org",
-      "@type": "LearningResource",
-      "name": "Trigonometric Equations",
-      "description": "Learn to solve trigonometric equations: reference angles, general solutions, quadratic and multiple-angle equations, factoring methods, and more.",
-      "url": "https://www.learnmathclass.com/trigonometry/equations",
-      "inLanguage": "en-US",
-      "learningResourceType": "Explanation",
-      "educationalLevel": "High School, College",
-      "educationalUse": "Learning",
-      "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
-      "about": { "@type": "Thing", "name": "Trigonometric Equations" },
-      "teaches": [
-        "Solving basic trigonometric equations using reference angles",
-        "Finding all solutions within a given interval",
-        "Writing general solutions with periodic repetition",
-        "Solving quadratic trigonometric equations by factoring",
-        "Handling multiple-angle equations",
-        "Using identities to transform equations before solving",
-        "Recognizing equations with no solution based on range constraints"
-      ],
-      "keywords": keyWords.join(", "),
-      "author": { "@type": "Organization", "name": "Learn Math Class" },
-      "publisher": { "@type": "Organization", "name": "Learn Math Class" },
-      "datePublished": "2024-01-15",
-      "dateModified": new Date().toISOString()
-    },
-    breadcrumb: {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
-        { "@type": "ListItem", "position": 2, "name": "Trigonometry", "item": "https://www.learnmathclass.com/trigonometry" },
-        { "@type": "ListItem", "position": 3, "name": "Trigonometric Equations", "item": "https://www.learnmathclass.com/trigonometry/equations" }
-      ]
-    },
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": { "@type": "Answer", "text": faqQuestions[key].answer }
-      }))
-    }
-  }
-
-  // •
-
-//   • First item
-// • Second item
-
-
-// <hr style="border-width:1px;"></hr>
-
-// <hr style="color:blue;" />
-
-// <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
-
-// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-        //     {processContent(sectionsContent.normal.notation)}
-        // </div>,
-
-
-//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-//     {processContent(sectionsContent.normal.parameters)}
-// </div>,
-
-//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-//                   {processContent(sectionsContent.obj4.content)}
-//                   </div>,
-
-
-//  <div key={'dist'} style={{
-//                     textAlign: 'center',
-//                     transform: 'scale(0.98)',
-//                     transformOrigin: 'center',
-//                     marginTop:'50px',
-//                     marginLeft:'-150px'
-//                   }} dangerouslySetInnerHTML={{
-//                     __html:   sectionContent.distributions.svg,
-//                   }} />
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-
-  // ---------- TABLES ----------
-
-  // obj4 — comparison: basic equation procedure for sin, cos, tan (synthesizes obj2-obj4)
-  const obj4Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 100%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Equation</th>
-      <th style="${tableHeaders.comparison}">Range constraint on a</th>
-      <th style="${tableHeaders.comparison}">Reference / principal angle</th>
-      <th style="${tableHeaders.comparison}">Solutions on [0, 2π)</th>
-      <th style="${tableHeaders.comparison}">General solution</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">sin x = a</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|a| ≤ 1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">α = arcsin|a|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a &gt; 0: &nbsp;Q I, II &nbsp;→&nbsp; α, π − α<br>a &lt; 0: &nbsp;Q III, IV &nbsp;→&nbsp; π + α, 2π − α</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = α + 2nπ &nbsp;or&nbsp; x = π − α + 2nπ</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">cos x = a</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|a| ≤ 1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">α = arccos|a|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a &gt; 0: &nbsp;Q I, IV &nbsp;→&nbsp; α, 2π − α<br>a &lt; 0: &nbsp;Q II, III &nbsp;→&nbsp; π − α, π + α</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = ±α + 2nπ</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">tan x = a</td>
-      <td style="padding: 12px 15px; color: #34495e;">any real a</td>
-      <td style="padding: 12px 15px; color: #34495e;">α = arctan a &nbsp;(∈ (−π ⁄ 2, π ⁄ 2))</td>
-      <td style="padding: 12px 15px; color: #34495e;">α &nbsp;(mod π in [0, 2π)) &nbsp;and α + π &nbsp;— one per period</td>
-      <td style="padding: 12px 15px; color: #34495e;">x = α + nπ</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj9 — aggregation: operations that can create extraneous solutions
-  const obj9Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 100%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Operation</th>
-      <th style="${tableHeaders.aggregation}">Why it can introduce extraneous solutions</th>
-      <th style="${tableHeaders.aggregation}">How to handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Squaring both sides</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cannot distinguish a from −a &nbsp;(both square to a<sup>2</sup>)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">substitute every candidate back into the original equation</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Multiplying by a variable expression</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">adds solutions where that expression equals 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">discard any candidate that makes the multiplier 0</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Certain identity substitutions</td>
-      <td style="padding: 12px 15px; color: #34495e;">may broaden the domain or change the equation&apos;s effective form</td>
-      <td style="padding: 12px 15px; color: #34495e;">verify candidates in the original equation, not the transformed one</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj10 — summary: capstone equation-form → approach decision tree
-  const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 100%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Equation form</th>
-      <th style="${tableHeaders.summary}">First move</th>
-      <th style="${tableHeaders.summary}">Result</th>
-      <th style="${tableHeaders.summary}">Then solve as</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Basic: &nbsp;sin/cos/tan x = a</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">check |a| against the function&apos;s range; find reference angle</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">principal angle α</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">apply the quadrant rule, then write the general solution</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Product equals 0 &nbsp;(factored)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">set each factor to 0 separately</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">several basic equations</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">solve each, then union the solution sets</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quadratic in a single function</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">substitute u = sin x &nbsp;(or cos x, tan x); factor or apply the quadratic formula</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">values of u</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reject u values outside the function&apos;s range, then solve each basic equation</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Two or more functions mixed</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">apply a Pythagorean, double-angle, or other <a href="/trigonometry/identities" style="${linkStyle}">identity</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">single-function equation</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">basic or quadratic in that function</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Multiple angle: &nbsp;sin/cos/tan(nx) = a</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">let u = nx and solve sin/cos/tan u = a first</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">general solution in u</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">divide by n, generate every x in the target interval &nbsp;(up to 2n solutions on [0, 2π))</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Equation requiring squaring</td>
-      <td style="padding: 12px 15px; color: #34495e;">square &nbsp;(only when needed), reduce to a basic or quadratic form</td>
-      <td style="padding: 12px 15px; color: #34495e;">candidate solutions</td>
-      <td style="padding: 12px 15px; color: #34495e;">substitute each candidate into the original to discard extraneous values</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-    const sectionsContent={
+const sectionsContent={
 
     // obj1:{
     //   title:``,
@@ -1254,7 +753,14 @@ The number of solutions per period depends on the function and the value. Sine a
 
 Select the two quadrants from Step 2.
 
-**Step 4: Write the general solution.** Add $2n\\pi$ to each solution from Step 3.
+**Step 4: Write the general solution.** Add $2n\\pi$ to each solution from Step 3. Equivalently, both branches can be collapsed into a single expression using an alternating sign:
+
+@academic[formula_callout:General Solution - Sine Equation
+$$\\sin\\theta = k \\implies \\theta = (-1)^n \\arcsin k + n\\pi$$
+/trigonometry/formulas#general_solution_-_sine_equation]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
 
 **Example:** Solve $\\sin(x) = -\\frac{\\sqrt{3}}{2}$.
 
@@ -1286,7 +792,12 @@ General solution: $x = \\frac{4\\pi}{3} + 2n\\pi$ or $x = \\frac{5\\pi}{3} + 2n\
 
 A cleaner notation is available for cosine because of its even symmetry. The two solutions within one period can be written as $x = \\alpha$ and $x = 2\\pi - \\alpha = -\\alpha + 2\\pi$. In general solution form:
 
-$$x = \\pm\\alpha + 2n\\pi, \\quad n \\in \\mathbb{Z}$$
+@academic[formula_callout:General Solution - Cosine Equation
+$$\\cos\\theta = k \\implies \\theta = \\pm\\arccos k + 2n\\pi$$
+/trigonometry/formulas#general_solution_-_cosine_equation]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
 
 This compact form captures both solutions (the $+\\alpha$ branch and the $-\\alpha$ branch) in a single expression.
 
@@ -1307,7 +818,12 @@ $$x = \\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3} \\quad \\text{or} \\quad x = \\p
 
 **Step 2: General solution.** Because tangent has period $\\pi$ and is one-to-one on each period interval, there is exactly one solution per period:
 
-$$x = \\alpha + n\\pi, \\quad n \\in \\mathbb{Z}$$
+@academic[formula_callout:General Solution - Tangent Equation
+$$\\tan\\theta = k \\implies \\theta = \\arctan k + n\\pi$$
+/trigonometry/formulas#general_solution_-_tangent_equation]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
 
 No quadrant analysis is needed — the single principal value $\\alpha$, repeated at intervals of $\\pi$, captures every solution. This is more compact than the sine and cosine cases, where two solutions per period require two separate expressions.
 

@@ -344,7 +344,263 @@ export async function getStaticProps(){
 </table>
 `
 
-    const sectionsContent={
+//     const sectionsContent={
+//       obj0: {
+//     title: `Key Terms`,
+//     content: `
+// ## Units
+ 
+// - [Degree](!/trigonometry/definitions#degree) — $\\frac{1}{360}$ of a full rotation
+// - [Radian](!/trigonometry/definitions#radian) — the angle subtended by an arc equal in length to the radius
+ 
+// ## Angle Anatomy
+ 
+// - [Angle](!/trigonometry/definitions#angle) — rotation between two rays sharing a common endpoint
+// - [Initial Side](!/trigonometry/definitions#initial_side) — the fixed starting ray
+// - [Terminal Side](!/trigonometry/definitions#terminal_side) — the ray after rotation
+// - [Positive Angle](!/trigonometry/definitions#positive_angle) — counterclockwise rotation
+// - [Negative Angle](!/trigonometry/definitions#negative_angle) — clockwise rotation
+// - [Standard Position](!/trigonometry/definitions#angle_in_standard_position) — vertex at origin, initial side on positive $x$-axis
+ 
+// ## Circle Measurements
+ 
+// - [Arc Length](!/trigonometry/definitions#arc_length) — distance along a circular arc: $s = r\\theta$
+// - [Central Angle](!/trigonometry/definitions#central_angle) — an angle with vertex at the center of a circle
+// - [Sector](!/trigonometry/definitions#sector) — region between two radii and their arc
+ 
+// ## Angle Relationships
+ 
+// - [Coterminal Angles](!/trigonometry/definitions#coterminal_angles) — angles that share the same terminal side
+// - [Complementary Angles](!/trigonometry/definitions#complementary_angles) — two angles summing to $90°$
+// - [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — two angles summing to $180°$
+
+// ## Formulas Used
+
+// ## Measurement & Conversion
+ 
+// - [Degree-Radian Conversion](!/trigonometry/formulas#degree-radian_conversion) — $\\theta_{\\text{rad}} = \\theta_{\\text{deg}} \\times \\frac{\\pi}{180}$
+// - [Arc Length](!/trigonometry/formulas#arc_length) — $s = r\\theta$
+// - [Sector Area](!/trigonometry/formulas#sector_area) — $A = \\frac{1}{2}r^2\\theta$
+ 
+// ## Supplement & Shift Identities
+ 
+// - [Sine Supplement Identity](!/trigonometry/formulas#sine_supplement_identity) — $\\sin(\\pi - \\theta) = \\sin\\theta$
+// - [Cosine Supplement Identity](!/trigonometry/formulas#cosine_supplement_identity) — $\\cos(\\pi - \\theta) = -\\cos\\theta$
+// - [Tangent Supplement Identity](!/trigonometry/formulas#tangent_supplement_identity) — $\\tan(\\pi - \\theta) = -\\tan\\theta$
+
+
+// `,
+//     before: ``,
+//     after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Trigonometry Definitions](!/trigonometry/definitions) →@`,
+//     link: '',
+//   },
+
+   
+
+//      obj1: {
+//     title: `Degree Measurement`,
+//     content: `A degree is $\\frac{1}{360}$ of a full rotation. The number 360 has no deep geometric significance — it persists because it is highly divisible (by 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, and more), which makes it convenient for subdividing rotations into equal parts without fractions. A right angle is $90°$, a straight angle is $180°$, and a complete rotation returns to the starting position at $360°$.
+
+// For precision beyond whole degrees, two conventions exist. The older system uses minutes and seconds of arc: $1° = 60'$ (sixty minutes) and $1' = 60''$ (sixty seconds). A measurement like $41°24'36''$ is common in navigation, cartography, and astronomy. The modern alternative is decimal degrees — for example, $41.41°$ — which is simpler for computation. Converting between the two is arithmetic: divide the minutes by 60 and the seconds by 3600, then add.
+
+// Degrees are intuitive and widely understood outside of mathematics. Compass bearings, latitude and longitude, architectural plans, and most geometric software use degrees as the default. Within trigonometry, degrees remain useful for visualizing angles and for problems stated in everyday terms. Their limitation appears when formulas demand a unit tied to the geometry of the circle — which is precisely what radians provide.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj2: {
+//     title: `Radian Measurement`,
+//     content: `A radian is defined by a direct geometric relationship: it is the angle subtended at the center of a circle by an arc whose length equals the radius of that circle. If a circle has radius $r$ and an arc of length $s$ is marked along its circumference, the central angle $\\theta$ in radians is:
+
+// $$\\theta = \\frac{s}{r}$$
+
+// Because both $s$ and $r$ are lengths, their ratio is dimensionless — radians carry no physical unit. This is not a technicality; it is the reason radians integrate seamlessly into formulas where degrees would introduce unwanted conversion factors.
+
+// A full circumference has length $2\\pi r$, so a full rotation corresponds to $\\frac{2\\pi r}{r} = 2\\pi$ radians. A half rotation is $\\pi$ radians, a quarter rotation is $\\frac{\\pi}{2}$, and so on. One radian is approximately $57.296°$ — a fact occasionally useful for quick estimation, though exact values in terms of $\\pi$ are always preferred in mathematical work.
+
+// The radian is not an arbitrary alternative to degrees. It is the angle measure that makes the core formulas of trigonometry and calculus as clean as possible. Arc length becomes $s = r\\theta$ with no extra constants. Sector area becomes $A = \\frac{1}{2}r^2\\theta$. The Taylor series $\\sin(x) = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} - \\cdots$ holds only for $x$ in radians. The small-angle approximation $\\sin(\\theta) \\approx \\theta$ for $\\theta$ near zero — essential in physics and engineering — relies on radian measure. Every simplification that makes trigonometric calculus workable traces back to defining angle through the ratio of arc to radius.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj3: {
+//     title: `Converting Between Degrees and Radians`,
+//     content: `The two systems are linked by a single relationship: a half rotation is simultaneously $180°$ and $\\pi$ radians. Every conversion follows from this.
+
+// To convert degrees to radians, multiply by $\\frac{\\pi}{180}$:
+
+// $$\\theta_{\\text{rad}} = \\theta_{\\text{deg}} \\times \\frac{\\pi}{180}$$
+
+// To convert radians to degrees, multiply by $\\frac{180}{\\pi}$:
+
+// $$\\theta_{\\text{deg}} = \\theta_{\\text{rad}} \\times \\frac{180}{\\pi}$$
+
+// The standard angles that appear throughout trigonometry should be known in both units without computation:
+
+// - $30° = \\frac{\\pi}{6}$
+// - $45° = \\frac{\\pi}{4}$
+// - $60° = \\frac{\\pi}{3}$
+// - $90° = \\frac{\\pi}{2}$
+// - $120° = \\frac{2\\pi}{3}$
+// - $135° = \\frac{3\\pi}{4}$
+// - $150° = \\frac{5\\pi}{6}$
+// - $180° = \\pi$
+// - $210° = \\frac{7\\pi}{6}$
+// - $240° = \\frac{4\\pi}{3}$
+// - $270° = \\frac{3\\pi}{2}$
+// - $300° = \\frac{5\\pi}{3}$
+// - $315° = \\frac{7\\pi}{4}$
+// - $330° = \\frac{11\\pi}{6}$
+// - $360° = 2\\pi$
+
+// These values all follow a pattern: they are multiples of $\\frac{\\pi}{6}$ and $\\frac{\\pi}{4}$. Recognizing this pattern eliminates the need for memorization through brute force — the structure itself carries the information. These angles recur on the [unit circle](!/trigonometry/unit-circle), in the evaluation of [trigonometric functions](!/trigonometry/functions), and throughout the solving of [equations](!/trigonometry/equations) and [inequalities](!/trigonometry/inequalities).`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj4: {
+//     title: `Arc Length`,
+//     content: `When an angle $\\theta$ (in radians) is subtended at the center of a circle with radius $r$, the length of the intercepted arc is:
+
+// $$s = r\\theta$$
+
+// This formula is a direct consequence of the radian definition. Since $\\theta = \\frac{s}{r}$, multiplying both sides by $r$ gives $s = r\\theta$. No conversion constant is needed — the formula works cleanly because radians are a ratio, not an imposed unit.
+
+// If the angle is given in degrees, the formula requires adjustment:
+
+// $$s = \\frac{\\theta}{360} \\times 2\\pi r = \\frac{\\pi r \\theta}{180}$$
+
+// The additional factors are the price of using a unit not inherently tied to the circle. This is one of the clearest practical demonstrations of why radians simplify computation.
+
+// Arc length problems typically involve three quantities — $s$, $r$, and $\\theta$ — and any one of them can be found given the other two. A common variation asks for the angle subtended by a known arc on a known circle: $\\theta = \\frac{s}{r}$. Another asks for the radius of a circle given an arc length and central angle: $r = \\frac{s}{\\theta}$. In each case, the formula remains $s = r\\theta$ with $\\theta$ in radians.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj5: {
+//     title: `Sector Area`,
+//     content: `A sector is the region enclosed by two radii and the arc between them — a "pie slice" of the circle. Its area is a fraction of the full circle's area, proportional to the central angle:
+
+// $$A = \\frac{1}{2}r^2\\theta$$
+
+// where $\\theta$ is in radians. The derivation is straightforward: the sector represents $\\frac{\\theta}{2\\pi}$ of the full circle, and the full circle has area $\\pi r^2$, so:
+
+// $$A = \\frac{\\theta}{2\\pi} \\times \\pi r^2 = \\frac{1}{2}r^2\\theta$$
+
+// If the angle is given in degrees:
+
+// $$A = \\frac{\\theta}{360} \\times \\pi r^2$$
+
+// As with arc length, the radian version is simpler and is the standard in mathematical work. Problems involving sector area follow the same pattern as arc length: three quantities ($A$, $r$, $\\theta$), any one computable from the other two. A typical application is finding the area swept by a rotating object — a windshield wiper, a radar beam, a door opening through a measured angle.
+
+// The relationship between arc length and sector area is worth noting: $A = \\frac{1}{2}rs$, obtained by substituting $s = r\\theta$ into the sector area formula. This parallels the triangle area formula $A = \\frac{1}{2} \\times \\text{base} \\times \\text{height}$, with the arc length playing the role of the base and the radius playing the role of the height. For very small angles, the sector closely approximates a triangle, and this analogy becomes nearly exact.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj6: {
+//     title: `Standard Position of an Angle`,
+//     content: `In trigonometry, angles are placed on the coordinate plane in a standardized way. An angle is in standard position when its vertex is at the origin and its initial side lies along the positive $x$-axis. The terminal side is the ray that results from rotating the initial side through the given angle. This convention fixes a reference frame for all trigonometric evaluation: every angle, regardless of its measure, has a definite position on the plane and a definite intersection with the [unit circle](!/trigonometry/unit-circle).
+
+// The direction of rotation determines the sign of the angle. Counterclockwise rotation produces a positive angle; clockwise rotation produces a negative angle. The angle $90°$ is a quarter turn counterclockwise, while $-90°$ is a quarter turn clockwise. Both terminate at the same position on the coordinate plane — along the negative or positive $y$-axis respectively — but they are different angles with different trigonometric interpretations: $\\sin(90°) = 1$ while $\\sin(-90°) = -1$.
+
+// There is no restriction on the size of an angle. A rotation of $450°$ passes through a full rotation ($360°$) and continues another $90°$, terminating at the same position as $90°$. A rotation of $-270°$ goes $270°$ clockwise, also terminating at the $90°$ position. These are coterminal angles — different rotations that share the same terminal side.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj7: {
+//     title: `Coterminal Angles`,
+//     content: `Two angles are coterminal if their terminal sides coincide when both are placed in standard position. This happens whenever the angles differ by a full rotation — that is, by $360°$ or $2\\pi$ radians. More generally, angles $\\theta$ and $\\theta + 360°n$ (or $\\theta + 2\\pi n$) are coterminal for any integer $n$.
+
+// Every angle has infinitely many coterminal partners. The angle $50°$ is coterminal with $410°$, $770°$, $-310°$, $-670°$, and so on. In radian terms, $\\frac{\\pi}{3}$ is coterminal with $\\frac{\\pi}{3} + 2\\pi = \\frac{7\\pi}{3}$, with $\\frac{\\pi}{3} - 2\\pi = -\\frac{5\\pi}{3}$, and with any expression of the form $\\frac{\\pi}{3} + 2\\pi n$.
+
+// Coterminal angles produce identical trigonometric values. Since the terminal side determines the intersection point with the [unit circle](!/trigonometry/unit-circle), and the coordinates of that point define sine and cosine, all coterminal angles yield the same sine, cosine, tangent, and so on. This is the geometric source of periodicity: $\\sin(\\theta + 2\\pi) = \\sin(\\theta)$ because adding $2\\pi$ brings the terminal side back to where it started.
+
+// A standard task is finding the coterminal angle within $[0°, 360°)$ or $[0, 2\\pi)$. This amounts to dividing by $360°$ (or $2\\pi$) and taking the remainder. For example, $\\theta = 850°$: dividing $850$ by $360$ gives quotient 2 with remainder $130$, so the coterminal angle in $[0°, 360°)$ is $130°$. For negative angles, add full rotations until the result falls in the desired range: $\\theta = -200°$ becomes $-200° + 360° = 160°$.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj8: {
+//     title: `Complementary and Supplementary Angles`,
+//     content: `Two angles are complementary if they sum to $90°$ (or $\\frac{\\pi}{2}$ radians). Two angles are supplementary if they sum to $180°$ (or $\\pi$ radians). These relationships appear constantly in trigonometry, geometry, and the analysis of triangles.
+
+// In a right triangle, the two acute angles are always complementary — they must sum to $90°$ because the three angles of any triangle sum to $180°$ and one angle is already $90°$. This geometric fact is the origin of the cofunction relationships in [right triangle trigonometry](!/trigonometry/right-triangle): $\\sin(\\theta) = \\cos(90° - \\theta)$, $\\tan(\\theta) = \\cot(90° - \\theta)$, and $\\sec(\\theta) = \\csc(90° - \\theta)$. The complement of an angle swaps each trigonometric function with its cofunction — a pattern formalized in the cofunction [identities](!/trigonometry/identities).
+
+// Supplementary angles arise naturally in the context of the [unit circle](!/trigonometry/unit-circle). The angles $\\theta$ and $180° - \\theta$ are supplementary, and their reference angles are equal. This produces a useful relationship: $\\sin(\\theta) = \\sin(180° - \\theta)$ and $\\cos(\\theta) = -\\cos(180° - \\theta)$. In other words, supplementary angles have equal sines but opposite cosines — a fact that plays a direct role in solving [trigonometric equations](!/trigonometry/equations) and in analyzing the ambiguous case of the [Law of Sines](!/trigonometry/sines-cosines-law).
+
+// For example, the angles $40°$ and $50°$ are complementary ($40° + 50° = 90°$), while $40°$ and $140°$ are supplementary ($40° + 140° = 180°$). The complement of $\\frac{\\pi}{6}$ is $\\frac{\\pi}{2} - \\frac{\\pi}{6} = \\frac{\\pi}{3}$. The supplement of $\\frac{\\pi}{6}$ is $\\pi - \\frac{\\pi}{6} = \\frac{5\\pi}{6}$. Recognizing these pairs accelerates computation across the subject.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//     obj9:{
+//       title:`Summary: The Page's Key Formulas`,
+//       content:`Five formulas carry most of the practical weight on this page — two conversions, two area/length formulas keyed by radian measure, and one alternative form linking arc length to sector area. The capstone table below collects all five with the required unit for the angle and the derivation each rests on.`,
+//       before:``,
+//       after:``,
+//       link:'',
+
+//     },
+//     obj10:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+
+//     },
+//     obj11:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+
+//     },
+//     obj12:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+
+//     },
+//     obj13:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+//       link:'',
+
+//     },
+//     obj14:{
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+//       link:'',
+
+//     },
+
+
+//     obj15:{
+
+//       title:``,
+//       content:``,
+//       before:``,
+//       after:``,
+//       link:'',
+
+//     }
+
+//   }
+
+const sectionsContent={
       obj0: {
     title: `Key Terms`,
     content: `
@@ -430,7 +686,12 @@ The radian is not an arbitrary alternative to degrees. It is the angle measure t
 
 To convert degrees to radians, multiply by $\\frac{\\pi}{180}$:
 
+@academic[formula_callout:Degree-Radian Conversion
 $$\\theta_{\\text{rad}} = \\theta_{\\text{deg}} \\times \\frac{\\pi}{180}$$
+/trigonometry/formulas#degree-radian_conversion]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
 
 To convert radians to degrees, multiply by $\\frac{180}{\\pi}$:
 
@@ -463,7 +724,12 @@ These values all follow a pattern: they are multiples of $\\frac{\\pi}{6}$ and $
     title: `Arc Length`,
     content: `When an angle $\\theta$ (in radians) is subtended at the center of a circle with radius $r$, the length of the intercepted arc is:
 
+@academic[formula_callout:Arc Length
 $$s = r\\theta$$
+/trigonometry/formulas#arc_length]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
 
 This formula is a direct consequence of the radian definition. Since $\\theta = \\frac{s}{r}$, multiplying both sides by $r$ gives $s = r\\theta$. No conversion constant is needed — the formula works cleanly because radians are a ratio, not an imposed unit.
 
@@ -482,7 +748,12 @@ Arc length problems typically involve three quantities — $s$, $r$, and $\\thet
     title: `Sector Area`,
     content: `A sector is the region enclosed by two radii and the arc between them — a "pie slice" of the circle. Its area is a fraction of the full circle's area, proportional to the central angle:
 
+@academic[formula_callout:Sector Area
 $$A = \\frac{1}{2}r^2\\theta$$
+/trigonometry/formulas#sector_area]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
 
 where $\\theta$ is in radians. The derivation is straightforward: the sector represents $\\frac{\\theta}{2\\pi}$ of the full circle, and the full circle has area $\\pi r^2$, so:
 
@@ -529,7 +800,30 @@ A standard task is finding the coterminal angle within $[0°, 360°)$ or $[0, 2\
 
 In a right triangle, the two acute angles are always complementary — they must sum to $90°$ because the three angles of any triangle sum to $180°$ and one angle is already $90°$. This geometric fact is the origin of the cofunction relationships in [right triangle trigonometry](!/trigonometry/right-triangle): $\\sin(\\theta) = \\cos(90° - \\theta)$, $\\tan(\\theta) = \\cot(90° - \\theta)$, and $\\sec(\\theta) = \\csc(90° - \\theta)$. The complement of an angle swaps each trigonometric function with its cofunction — a pattern formalized in the cofunction [identities](!/trigonometry/identities).
 
-Supplementary angles arise naturally in the context of the [unit circle](!/trigonometry/unit-circle). The angles $\\theta$ and $180° - \\theta$ are supplementary, and their reference angles are equal. This produces a useful relationship: $\\sin(\\theta) = \\sin(180° - \\theta)$ and $\\cos(\\theta) = -\\cos(180° - \\theta)$. In other words, supplementary angles have equal sines but opposite cosines — a fact that plays a direct role in solving [trigonometric equations](!/trigonometry/equations) and in analyzing the ambiguous case of the [Law of Sines](!/trigonometry/sines-cosines-law).
+Supplementary angles arise naturally in the context of the [unit circle](!/trigonometry/unit-circle). The angles $\\theta$ and $\\pi - \\theta$ are supplementary, and their reference angles are equal. This produces three companion identities — supplementary angles have equal sines, opposite cosines, and opposite tangents:
+
+@academic[formula_callout:Sine Supplement Identity
+$$\\sin(\\pi - \\theta) = \\sin\\theta$$
+/trigonometry/formulas#sine_supplement_identity]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+@academic[formula_callout:Cosine Supplement Identity
+$$\\cos(\\pi - \\theta) = -\\cos\\theta$$
+/trigonometry/formulas#cosine_supplement_identity]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+@academic[formula_callout:Tangent Supplement Identity
+$$\\tan(\\pi - \\theta) = -\\tan\\theta$$
+/trigonometry/formulas#tangent_supplement_identity]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+These facts play a direct role in solving [trigonometric equations](!/trigonometry/equations) and in analyzing the ambiguous case of the [Law of Sines](!/trigonometry/sines-cosines-law).
 
 For example, the angles $40°$ and $50°$ are complementary ($40° + 50° = 90°$), while $40°$ and $140°$ are supplementary ($40° + 140° = 180°$). The complement of $\\frac{\\pi}{6}$ is $\\frac{\\pi}{2} - \\frac{\\pi}{6} = \\frac{\\pi}{3}$. The supplement of $\\frac{\\pi}{6}$ is $\\pi - \\frac{\\pi}{6} = \\frac{5\\pi}{6}$. Recognizing these pairs accelerates computation across the subject.`,
     before: ``,
@@ -599,6 +893,7 @@ For example, the angles $40°$ and $50°$ are complementary ($40° + 50° = 90°
     }
 
   }
+
 
 
   const introContent = {

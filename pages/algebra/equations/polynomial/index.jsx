@@ -1,88 +1,230 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import '../../../../pages/pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import '../../../../pages/pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-
-  
-// const keyWords = [
-//   "polynomial equations",
-//   "solving polynomial equations",
-//   "fundamental theorem of algebra",
-//   "rational root theorem",
-//   "factor theorem",
-//   "cubic equations",
-//   "quartic equations",
-//   "Cardano's formula",
-//   "Abel-Ruffini theorem",
-//   "root multiplicity",
-//   "Vieta's formulas",
-//   "polynomial roots",
-//   "synthetic division",
-//   "degree of polynomial"
-// ]
-//   // •
-
-// //   \u2022 First item
-// // \u2022 Second item
-
-  
-// // <hr style="border-width:1px;"></hr>
-
-// // <hr style="color:blue;" />
-
-// // <hr style="border-color:#3498db; border-width:1px;" />
+export async function getStaticProps(){
 
 
+const keyWords = [
+  "polynomial equations",
+  "solving polynomial equations",
+  "fundamental theorem of algebra",
+  "rational root theorem",
+  "factor theorem",
+  "cubic equations",
+  "quartic equations",
+  "Cardano's formula",
+  "Abel-Ruffini theorem",
+  "root multiplicity",
+  "Vieta's formulas",
+  "polynomial roots",
+  "synthetic division",
+  "degree of polynomial"
+]
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+const linkStyle = 'color: inherit; text-decoration: underline;'
 
 
+// ---------- TABLES ----------
+
+// obj7 — aggregation (process/toolkit): the general practical toolkit
+const obj7Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Tool</th>
+      <th style="${tableHeaders.aggregation}">Purpose</th>
+      <th style="${tableHeaders.aggregation}">When applicable</th>
+      <th style="${tableHeaders.aggregation}">Limit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rational Root Theorem</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">enumerate candidate rational roots</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">integer (or rational) coefficients</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">finds only rational roots</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Synthetic / polynomial division</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">factor out (x − r) and reduce degree by 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a confirmed root r is known</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires a root in advance</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/algebra/equations/quadratic" style="${linkStyle}">Quadratic formula</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">solve the quadratic quotient exactly</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">degree has been reduced to 2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">degree-2 only</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Numerical methods (Newton, bisection)</td>
+      <td style="padding: 12px 15px; color: #34495e;">approximate real roots to any precision</td>
+      <td style="padding: 12px 15px; color: #34495e;">algebraic tools have run out</td>
+      <td style="padding: 12px 15px; color: #34495e;">approximate, not exact</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+
+// obj8 — aggregation (taxonomy): multiplicity → graph behavior
+const obj8Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation} text-align: center;">Multiplicity</th>
+      <th style="${tableHeaders.aggregation}">Name</th>
+      <th style="${tableHeaders.aggregation}">Graph behavior at the root</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">simple root</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">crosses the x-axis cleanly</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">double root</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">touches the axis and turns back (local extremum)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">3</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">triple root</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">crosses with an inflection on the axis</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">even k ≥ 2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(general)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">touches and turns back; more flattening as k grows</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">odd k ≥ 3</td>
+      <td style="padding: 12px 15px; color: #34495e;">(general)</td>
+      <td style="padding: 12px 15px; color: #34495e;">crosses with flattening; more flattening as k grows</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+
+// obj9 — aggregation (reference): generalized Vieta's formulas
+const obj9Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Symmetric quantity</th>
+      <th style="${tableHeaders.aggregation}">In terms of roots</th>
+      <th style="${tableHeaders.aggregation}">In terms of coefficients</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sum of roots</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r₁ + r₂ + ⋯ + rₙ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−aₙ₋₁ ⁄ aₙ</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sum of pairwise products</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σᵢ&lt;ⱼ rᵢ rⱼ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">aₙ₋₂ ⁄ aₙ</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sum of triple products</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σᵢ&lt;ⱼ&lt;ₖ rᵢ rⱼ rₖ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−aₙ₋₃ ⁄ aₙ</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">⋮  (alternating signs)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">⋮</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">⋮</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Product of all roots</td>
+      <td style="padding: 12px 15px; color: #34495e;">r₁ · r₂ ⋯ rₙ</td>
+      <td style="padding: 12px 15px; color: #34495e;">(−1)ⁿ a₀ ⁄ aₙ</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+
+// obj10 — summary: solvability and primary technique by degree
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary} text-align: center;">Degree</th>
+      <th style="${tableHeaders.summary}">Name</th>
+      <th style="${tableHeaders.summary} text-align: center;">Closed-form formula?</th>
+      <th style="${tableHeaders.summary} text-align: center;">Max real roots</th>
+      <th style="${tableHeaders.summary}">Primary technique</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/algebra/equations/linear" style="${linkStyle}">Linear</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = −b ⁄ a</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/algebra/equations/quadratic" style="${linkStyle}">Quadratic</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">quadratic formula / discriminant</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">3</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Cubic</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓ (Cardano)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">3</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">RRT + division → quadratic in practice</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">4</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Quartic</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓ (Ferrari)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">4</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">bi-quadratic substitution, RRT, or factoring into two quadratics</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">≥ 5</td>
+      <td style="padding: 12px 15px; color: #34495e;">Quintic and higher</td>
+      <td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗ (Abel–Ruffini)</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">n</td>
+      <td style="padding: 12px 15px; color: #34495e;">RRT + repeated division; numerical methods when no rational roots</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+
+// ---------- SECTIONS ----------
 
 // const sectionsContent = {
 //   obj0: {
 //   title: `Key Terms`,
 //   content: `
 // ## Equation Structure
- 
+
 // - [Algebraic Equation](!/algebra/definitions#algebraic_equation) — built from variables, constants, and integer powers
 // - [Degree of an Equation](!/algebra/definitions#degree_of_an_equation) — determines the maximum number of solutions
 // - [Standard Form](!/algebra/definitions#standard_form) — $a_nx^n + \\cdots + a_1x + a_0 = 0$
 // - [Coefficient](!/algebra/definitions#coefficient) — the leading coefficient $a_n$ must be nonzero
- 
+
 // ## Solutions
- 
+
 // - [Solution](!/algebra/definitions#solution) — also called a root of the polynomial
 // - [Solution Set](!/algebra/definitions#solution_set) — at most $n$ roots in $\\mathbb{C}$ for degree $n$
 // - [Equivalent Equations](!/algebra/definitions#equivalent_equations) — polynomial division preserves equivalence when dividing by a confirmed factor
@@ -240,644 +382,21 @@
 //     after: ``,
 //     link: '',
 //   },
+
+//   obj10: {
+//     title: `Summary by Degree`,
+//     content: `The table below collects the picture by degree: what the polynomial is called, whether a closed-form formula in radicals exists, the maximum number of real roots, and the technique most commonly applied in practice. The Fundamental Theorem of Algebra guarantees that the roots exist over $\\mathbb{C}$ for every row; what changes across degrees is whether they can be reached by a finite formula in radicals.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
 // };
-
-
-// const introContent = {
-//   id: 'intro',
-//   title: `Higher-Degree Equations and the Limits of Exact Solutions`,
-//   content: `Beyond degree two, polynomial equations grow rapidly in complexity. A cubic can have three real roots, a quartic four, and the pattern continues — the degree sets the ceiling on the number of solutions. Closed-form solutions exist for cubics and quartics, but they are unwieldy, and at degree five a hard theoretical barrier appears: no general formula in radicals can solve every polynomial equation of degree five or higher. What remains universal is the Fundamental Theorem of Algebra, which guarantees that the roots exist even when no formula can produce them, and a collection of techniques — the factor theorem, the rational root theorem, synthetic division — that reduce the problem piece by piece.`,
-// };
-
-
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is a polynomial equation?",
-//     answer: "A polynomial equation has the form aₙxⁿ + aₙ₋₁xⁿ⁻¹ + ... + a₁x + a₀ = 0 where aₙ ≠ 0. The degree n determines the maximum number of roots. Linear (n=1) and quadratic (n=2) are special cases with complete solution formulas.",
-//     sectionId: "1"
-//   },
-//   obj2: {
-//     question: "What does the Fundamental Theorem of Algebra say?",
-//     answer: "Every polynomial of degree n ≥ 1 with complex coefficients has exactly n roots in ℂ (counted with multiplicity). This means every polynomial factors completely into linear factors over the complex numbers.",
-//     sectionId: "2"
-//   },
-//   obj3: {
-//     question: "What is the Factor Theorem?",
-//     answer: "If P(r) = 0, then (x - r) divides P(x) evenly. Finding roots and finding factors are equivalent. Once a root r is found, divide by (x - r) to reduce the degree by one and continue solving.",
-//     sectionId: "3"
-//   },
-//   obj4: {
-//     question: "How does the Rational Root Theorem work?",
-//     answer: "For a polynomial with integer coefficients, any rational root p/q in lowest terms has p dividing the constant term and q dividing the leading coefficient. This creates a finite list of candidates to test.",
-//     sectionId: "4"
-//   },
-//   obj5: {
-//     question: "Can cubic equations be solved exactly?",
-//     answer: "Yes, Cardano's formula provides exact solutions using radicals. However, the formula is complex and may require passing through complex numbers even when all roots are real. The rational root theorem often provides a simpler approach.",
-//     sectionId: "5"
-//   },
-//   obj6: {
-//     question: "Can quartic equations be solved exactly?",
-//     answer: "Yes, Ferrari's method reduces a quartic to a resolvent cubic, then to two quadratics. This is the highest degree with a general formula in radicals. In practice, special structures (bi-quadratic, factorable) often allow simpler methods.",
-//     sectionId: "6"
-//   },
-//   obj7: {
-//     question: "Why can't degree 5+ equations be solved by radicals?",
-//     answer: "The Abel-Ruffini theorem proves no formula using arithmetic and radicals can solve every polynomial of degree 5 or higher. Specific quintics may still factor or have rational roots, but no universal formula exists.",
-//     sectionId: "7"
-//   },
-//   obj8: {
-//     question: "What is root multiplicity?",
-//     answer: "A root r has multiplicity k if (x-r)^k divides P(x) but (x-r)^(k+1) does not. Odd multiplicity means the graph crosses the x-axis; even multiplicity means it touches and turns back. Higher multiplicity means greater flattening.",
-//     sectionId: "8"
-//   },
-//   obj9: {
-//     question: "What are Vieta's formulas for polynomials?",
-//     answer: "Vieta's formulas express coefficients as symmetric functions of roots: the sum of roots equals -aₙ₋₁/aₙ, the sum of pairwise products equals aₙ₋₂/aₙ, and so on. The product of all roots equals (-1)ⁿa₀/aₙ.",
-//     sectionId: "9"
-//   }
-// }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Polynomial Equations",
-//     "description": "Master polynomial equations: Fundamental Theorem of Algebra, Factor and Rational Root Theorems, solving cubics and quartics, Abel-Ruffini impossibility for degree 5+, root multiplicity, and Vieta's formulas.",
-//     "url": "https://www.learnmathclass.com/algebra/equations/polynomial",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Polynomial Equations"
-//     },
-//     "teaches": [
-//       "Polynomial degree and root count",
-//       "Fundamental Theorem of Algebra",
-//       "Factor Theorem and Remainder Theorem",
-//       "Rational Root Theorem",
-//       "Solving cubic and quartic equations",
-//       "Abel-Ruffini impossibility theorem",
-//       "Root multiplicity and graph behavior"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Algebra",
-//         "item": "https://www.learnmathclass.com/algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Equations",
-//         "item": "https://www.learnmathclass.com/algebra/equations"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Polynomial Equations",
-//         "item": "https://www.learnmathclass.com/algebra/equations/polynomial"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-//    return {
-//   props: {
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Polynomial Equations: Roots, Theorems & Methods | Learn Math Class",
-//       description: "Master polynomial equations: Fundamental Theorem of Algebra, Factor and Rational Root Theorems, solving cubics and quartics, Abel-Ruffini impossibility for degree 5+, root multiplicity, and Vieta's formulas.",
-//       keywords: keyWords.join(", "),
-//       url: "/algebra/equations/polynomial",
-//       name: "Polynomial Equations"
-//     },
-//   }
-// }
-//    }
-// export default function PolynomialEquationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-    
-//   {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//           sectionsContent.obj0.after,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//  <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Polynomial Equations</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//      <KeyTermsCard
-//   id="0"
-//   title={sectionsContent.obj0.title}
-//   content={sectionsContent.obj0.content}
-//   after={sectionsContent.obj0.after}
-//   variant="light"
-// />
-
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import '../../../../pages/pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-
-
-const keyWords = [
-  "polynomial equations",
-  "solving polynomial equations",
-  "fundamental theorem of algebra",
-  "rational root theorem",
-  "factor theorem",
-  "cubic equations",
-  "quartic equations",
-  "Cardano's formula",
-  "Abel-Ruffini theorem",
-  "root multiplicity",
-  "Vieta's formulas",
-  "polynomial roots",
-  "synthetic division",
-  "degree of polynomial"
-]
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-
-// ---------- TABLES ----------
-
-// obj7 — aggregation (process/toolkit): the general practical toolkit
-const obj7Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 90%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Tool</th>
-      <th style="${tableHeaders.aggregation}">Purpose</th>
-      <th style="${tableHeaders.aggregation}">When applicable</th>
-      <th style="${tableHeaders.aggregation}">Limit</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rational Root Theorem</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">enumerate candidate rational roots</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">integer (or rational) coefficients</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">finds only rational roots</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Synthetic / polynomial division</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">factor out (x − r) and reduce degree by 1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a confirmed root r is known</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires a root in advance</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/algebra/equations/quadratic" style="${linkStyle}">Quadratic formula</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">solve the quadratic quotient exactly</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">degree has been reduced to 2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">degree-2 only</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Numerical methods (Newton, bisection)</td>
-      <td style="padding: 12px 15px; color: #34495e;">approximate real roots to any precision</td>
-      <td style="padding: 12px 15px; color: #34495e;">algebraic tools have run out</td>
-      <td style="padding: 12px 15px; color: #34495e;">approximate, not exact</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-
-// obj8 — aggregation (taxonomy): multiplicity → graph behavior
-const obj8Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 85%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation} text-align: center;">Multiplicity</th>
-      <th style="${tableHeaders.aggregation}">Name</th>
-      <th style="${tableHeaders.aggregation}">Graph behavior at the root</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">simple root</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">crosses the x-axis cleanly</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">double root</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">touches the axis and turns back (local extremum)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">3</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">triple root</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">crosses with an inflection on the axis</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">even k ≥ 2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(general)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">touches and turns back; more flattening as k grows</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">odd k ≥ 3</td>
-      <td style="padding: 12px 15px; color: #34495e;">(general)</td>
-      <td style="padding: 12px 15px; color: #34495e;">crosses with flattening; more flattening as k grows</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-
-// obj9 — aggregation (reference): generalized Vieta's formulas
-const obj9Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 80%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Symmetric quantity</th>
-      <th style="${tableHeaders.aggregation}">In terms of roots</th>
-      <th style="${tableHeaders.aggregation}">In terms of coefficients</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sum of roots</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r₁ + r₂ + ⋯ + rₙ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−aₙ₋₁ ⁄ aₙ</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sum of pairwise products</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σᵢ&lt;ⱼ rᵢ rⱼ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">aₙ₋₂ ⁄ aₙ</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sum of triple products</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σᵢ&lt;ⱼ&lt;ₖ rᵢ rⱼ rₖ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−aₙ₋₃ ⁄ aₙ</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">⋮  (alternating signs)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">⋮</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">⋮</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Product of all roots</td>
-      <td style="padding: 12px 15px; color: #34495e;">r₁ · r₂ ⋯ rₙ</td>
-      <td style="padding: 12px 15px; color: #34495e;">(−1)ⁿ a₀ ⁄ aₙ</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-
-// obj10 — summary: solvability and primary technique by degree
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary} text-align: center;">Degree</th>
-      <th style="${tableHeaders.summary}">Name</th>
-      <th style="${tableHeaders.summary} text-align: center;">Closed-form formula?</th>
-      <th style="${tableHeaders.summary} text-align: center;">Max real roots</th>
-      <th style="${tableHeaders.summary}">Primary technique</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/algebra/equations/linear" style="${linkStyle}">Linear</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = −b ⁄ a</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/algebra/equations/quadratic" style="${linkStyle}">Quadratic</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">quadratic formula / discriminant</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">3</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Cubic</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓ (Cardano)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">3</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">RRT + division → quadratic in practice</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">4</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Quartic</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓ (Ferrari)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">4</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">bi-quadratic substitution, RRT, or factoring into two quadratics</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">≥ 5</td>
-      <td style="padding: 12px 15px; color: #34495e;">Quintic and higher</td>
-      <td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗ (Abel–Ruffini)</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">n</td>
-      <td style="padding: 12px 15px; color: #34495e;">RRT + repeated division; numerical methods when no rational roots</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-
-// ---------- SECTIONS ----------
 
 const sectionsContent = {
+
   obj0: {
-  title: `Key Terms`,
-  content: `
+    title: `Key Terms`,
+    content: `
 ## Equation Structure
 
 - [Algebraic Equation](!/algebra/definitions#algebraic_equation) — built from variables, constants, and integer powers
@@ -895,14 +414,15 @@ const sectionsContent = {
 
 - [Vieta's Formulas (General)](!/algebra/formulas#vietas_cubic) — $r_1 + r_2 + r_3 = -a_{n-1}$, $r_1 r_2 r_3 = (-1)^n a_0$
 `,
-  before: ``,
-  after: `
+    before: ``,
+    after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
 
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
 `,
-  link: '',
-},
+    link: '',
+  },
+
   obj1: {
     title: `Definition and Degree`,
     content: `A polynomial equation in one variable has the general form
@@ -1025,7 +545,16 @@ The general pattern is: odd multiplicity means the graph crosses the axis, even 
 
   obj9: {
     title: `Relationships Between Roots and Coefficients`,
-    content: `Vieta's formulas, introduced for the quadratic case on the [quadratic equations](!/algebra/equations/quadratic) page, extend to polynomials of any degree. For the monic polynomial $x^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$ with roots $r_1, r_2, \\dots, r_n$, the coefficients encode symmetric combinations of the roots:
+    content: `Vieta's formulas, introduced for the quadratic case on the [quadratic equations](!/algebra/equations/quadratic) page, extend to polynomials of any degree.
+
+@academic[formula_callout:Vieta's Formulas (General)
+$$r_1 + r_2 + r_3 = -a_{n-1} \\qquad r_1 r_2 r_3 = (-1)^n a_0$$
+/algebra/formulas#vietas_formulas_general]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
+
+For the monic polynomial $x^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$ with roots $r_1, r_2, \\dots, r_n$, the coefficients encode symmetric combinations of the roots:
 
 $$r_1 + r_2 + \\cdots + r_n = -a_{n-1}$$
 
@@ -1053,6 +582,7 @@ These relationships hold whether the roots are real or complex, rational or irra
     link: '',
   },
 };
+
 
 
 const introContent = {

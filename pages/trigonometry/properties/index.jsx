@@ -1,178 +1,255 @@
 
-
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-
-
-// export async function getStaticProps(){
-
-//   const keyWords=[
-//     'trigonometric properties',
-//     'periodicity trig functions',
-//     'even odd trig functions',
-//     'boundedness sine cosine',
-//     'zeros of trig functions',
-//     'trig function discontinuities',
-//     'vertical asymptotes trig',
-//     'monotonicity trig intervals',
-//     'extrema trig functions',
-//     'domain range trig functions',
-//     'continuity trigonometric functions',
-//     'period 2pi pi',
-//     'sine cosine range -1 to 1',
-//     'trig function behavior'
-//   ]
-
-//   const faqQuestions = {
-//     obj1: {
-//       question: "What does it mean for trigonometric functions to be periodic?",
-//       answer: "A periodic function repeats its values at regular intervals. Sine, cosine, cosecant, and secant have period 2π, meaning their values repeat every 2π radians. Tangent and cotangent have the shorter period π. Periodicity means every trigonometric graph is fully determined by one period, and equations produce infinite families of solutions spaced by the period."
-//     },
-//     obj2: {
-//       question: "Which trigonometric functions are even and which are odd?",
-//       answer: "Cosine and secant are even functions, meaning f(-θ) = f(θ) — their graphs are symmetric about the y-axis. Sine, tangent, cosecant, and cotangent are odd functions, meaning f(-θ) = -f(θ) — their graphs are symmetric about the origin. These symmetries follow from reflecting points across the x-axis on the unit circle."
-//     },
-//     obj3: {
-//       question: "Why are sine and cosine bounded between -1 and 1?",
-//       answer: "Sine and cosine represent the y-coordinate and x-coordinate of a point on the unit circle, which has radius 1. Since every point on the unit circle satisfies x² + y² = 1, both coordinates must satisfy |x| ≤ 1 and |y| ≤ 1. No rotation can produce a value outside [-1, 1], making sine and cosine the only bounded trigonometric functions."
-//     },
-//     obj4: {
-//       question: "Where are the trigonometric functions undefined?",
-//       answer: "Tangent and secant are undefined wherever cosine equals zero, which occurs at θ = π/2 + nπ for every integer n. Cotangent and cosecant are undefined wherever sine equals zero, at θ = nπ. At these points the functions have vertical asymptotes. Sine and cosine are continuous everywhere with no discontinuities."
-//     },
-//     obj5: {
-//       question: "What are the zeros of the trigonometric functions?",
-//       answer: "Sine has zeros at θ = nπ (integer multiples of π). Cosine has zeros at θ = π/2 + nπ (odd multiples of π/2). Tangent has the same zeros as sine, at θ = nπ. Cotangent has the same zeros as cosine, at θ = π/2 + nπ. Cosecant and secant have no zeros because the reciprocal of a real number can never equal zero."
-//     }
-//   }
-
-//   const schemas = {
-//     learningResource: {
-//       "@context": "https://schema.org",
-//       "@type": "LearningResource",
-//       "name": "Trigonometric Properties",
-//       "description": "Explore the structural properties of trigonometric functions: periodicity, even/odd symmetry, boundedness, zeros, continuity, monotonicity, and extrema.",
-//       "url": "https://www.learnmathclass.com/trigonometry/properties",
-//       "inLanguage": "en-US",
-//       "learningResourceType": "Explanation",
-//       "educationalLevel": "High School, College",
-//       "educationalUse": "Learning",
-//       "audience": {
-//         "@type": "EducationalAudience",
-//         "educationalRole": "student"
-//       },
-//       "about": {
-//         "@type": "Thing",
-//         "name": "Trigonometric Properties"
-//       },
-//       "teaches": [
-//         "Periodicity of all six trigonometric functions",
-//         "Even and odd symmetry classifications",
-//         "Boundedness of sine and cosine within [-1, 1]",
-//         "Zeros of each trigonometric function",
-//         "Continuity and vertical asymptote locations",
-//         "Monotonicity on principal intervals",
-//         "Maximum and minimum values (extrema)"
-//       ],
-//       "keywords": keyWords.join(", "),
-//       "author": {
-//         "@type": "Organization",
-//         "name": "Learn Math Class"
-//       },
-//       "publisher": {
-//         "@type": "Organization",
-//         "name": "Learn Math Class"
-//       },
-//       "datePublished": "2024-01-15",
-//       "dateModified": new Date().toISOString()
-//     },
-
-//     breadcrumb: {
-//       "@context": "https://schema.org",
-//       "@type": "BreadcrumbList",
-//       "itemListElement": [
-//         {
-//           "@type": "ListItem",
-//           "position": 1,
-//           "name": "Home",
-//           "item": "https://www.learnmathclass.com"
-//         },
-//         {
-//           "@type": "ListItem",
-//           "position": 2,
-//           "name": "Trigonometry",
-//           "item": "https://www.learnmathclass.com/trigonometry"
-//         },
-//         {
-//           "@type": "ListItem",
-//           "position": 3,
-//           "name": "Trigonometric Properties",
-//           "item": "https://www.learnmathclass.com/trigonometry/properties"
-//         }
-//       ]
-//     },
-
-//     faq: {
-//       "@context": "https://schema.org",
-//       "@type": "FAQPage",
-//       "mainEntity": Object.keys(faqQuestions).map(key => ({
-//         "@type": "Question",
-//         "name": faqQuestions[key].question,
-//         "acceptedAnswer": {
-//           "@type": "Answer",
-//           "text": faqQuestions[key].answer
-//         }
-//       }))
-//     }
-//   }
-
-//   // •
-
-// //   • First item
-// // • Second item
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// // <hr style="border-width:1px;"></hr>
+export async function getStaticProps(){
 
-// // <hr style="color:blue;" />
+  const keyWords=[
+    'trigonometric properties',
+    'periodicity trig functions',
+    'even odd trig functions',
+    'boundedness sine cosine',
+    'zeros of trig functions',
+    'trig function discontinuities',
+    'vertical asymptotes trig',
+    'monotonicity trig intervals',
+    'extrema trig functions',
+    'domain range trig functions',
+    'continuity trigonometric functions',
+    'period 2pi pi',
+    'sine cosine range -1 to 1',
+    'trig function behavior'
+  ]
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+  const linkStyle = 'color: inherit; text-decoration: underline;'
+  const defLink = (slug) => `/trigonometry/definitions#${slug}`
 
+  // ---------- TABLES ----------
 
+  // obj8 — aggregation: function identity (period, parity, range)
+  const obj8Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 85%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Function</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">Period</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">Parity</th>
+      <th style="${tableHeaders.aggregation}">Range</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('sine')}" style="${linkStyle}">sin</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2π</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">odd</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−1, 1]</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('cosine')}" style="${linkStyle}">cos</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2π</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">even</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−1, 1]</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('tangent')}" style="${linkStyle}">tan</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">π</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">odd</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, ∞)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('cosecant')}" style="${linkStyle}">csc</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2π</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">odd</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, −1] ∪ [1, ∞)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('secant')}" style="${linkStyle}">sec</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2π</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">even</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, −1] ∪ [1, ∞)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="${defLink('cotangent')}" style="${linkStyle}">cot</a></td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">π</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">odd</td>
+      <td style="padding: 12px 15px; color: #34495e;">(−∞, ∞)</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+  // obj9 — summary capstone: critical-point landscape
+  // Zeros, asymptotes, principal monotonic interval, extrema for each of the six functions.
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Function</th>
+      <th style="${tableHeaders.summary}">Zeros</th>
+      <th style="${tableHeaders.summary}">Asymptotes</th>
+      <th style="${tableHeaders.summary}">Principal monotonic interval</th>
+      <th style="${tableHeaders.summary}">Extrema</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('sine')}" style="${linkStyle}">sin</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nπ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">none</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−π/2, π/2] (increasing)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">max 1 at π/2 + 2nπ; min −1 at 3π/2 + 2nπ</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('cosine')}" style="${linkStyle}">cos</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">π/2 + nπ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">none</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, π] (decreasing)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">max 1 at 2nπ; min −1 at π + 2nπ</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('tangent')}" style="${linkStyle}">tan</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nπ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">π/2 + nπ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−π/2, π/2) (increasing)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">none (unbounded)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('cosecant')}" style="${linkStyle}">csc</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">none</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nπ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−π/2, 0) ∪ (0, π/2] (decreasing on each piece)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">local min 1 at π/2 + 2nπ; local max −1 at 3π/2 + 2nπ</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('secant')}" style="${linkStyle}">sec</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">none</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">π/2 + nπ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, π/2) ∪ (π/2, π] (increasing on each piece)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">local min 1 at 2nπ; local max −1 at π + 2nπ</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="${defLink('cotangent')}" style="${linkStyle}">cot</a></td>
+      <td style="padding: 12px 15px; color: #34495e;">π/2 + nπ</td>
+      <td style="padding: 12px 15px; color: #34495e;">nπ</td>
+      <td style="padding: 12px 15px; color: #34495e;">(0, π) (decreasing)</td>
+      <td style="padding: 12px 15px; color: #34495e;">none (unbounded)</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+  const faqQuestions = {
+    obj1: {
+      question: "What does it mean for trigonometric functions to be periodic?",
+      answer: "A periodic function repeats its values at regular intervals. Sine, cosine, cosecant, and secant have period 2π, meaning their values repeat every 2π radians. Tangent and cotangent have the shorter period π. Periodicity means every trigonometric graph is fully determined by one period, and equations produce infinite families of solutions spaced by the period."
+    },
+    obj2: {
+      question: "Which trigonometric functions are even and which are odd?",
+      answer: "Cosine and secant are even functions, meaning f(-θ) = f(θ) — their graphs are symmetric about the y-axis. Sine, tangent, cosecant, and cotangent are odd functions, meaning f(-θ) = -f(θ) — their graphs are symmetric about the origin. These symmetries follow from reflecting points across the x-axis on the unit circle."
+    },
+    obj3: {
+      question: "Why are sine and cosine bounded between -1 and 1?",
+      answer: "Sine and cosine represent the y-coordinate and x-coordinate of a point on the unit circle, which has radius 1. Since every point on the unit circle satisfies x² + y² = 1, both coordinates must satisfy |x| ≤ 1 and |y| ≤ 1. No rotation can produce a value outside [-1, 1], making sine and cosine the only bounded trigonometric functions."
+    },
+    obj4: {
+      question: "Where are the trigonometric functions undefined?",
+      answer: "Tangent and secant are undefined wherever cosine equals zero, which occurs at θ = π/2 + nπ for every integer n. Cotangent and cosecant are undefined wherever sine equals zero, at θ = nπ. At these points the functions have vertical asymptotes. Sine and cosine are continuous everywhere with no discontinuities."
+    },
+    obj5: {
+      question: "What are the zeros of the trigonometric functions?",
+      answer: "Sine has zeros at θ = nπ (integer multiples of π). Cosine has zeros at θ = π/2 + nπ (odd multiples of π/2). Tangent has the same zeros as sine, at θ = nπ. Cotangent has the same zeros as cosine, at θ = π/2 + nπ. Cosecant and secant have no zeros because the reciprocal of a real number can never equal zero."
+    }
+  }
 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
+  const schemas = {
+    learningResource: {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      "name": "Trigonometric Properties",
+      "description": "Explore the structural properties of trigonometric functions: periodicity, even/odd symmetry, boundedness, zeros, continuity, monotonicity, and extrema.",
+      "url": "https://www.learnmathclass.com/trigonometry/properties",
+      "inLanguage": "en-US",
+      "learningResourceType": "Explanation",
+      "educationalLevel": "High School, College",
+      "educationalUse": "Learning",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "Trigonometric Properties"
+      },
+      "teaches": [
+        "Periodicity of all six trigonometric functions",
+        "Even and odd symmetry classifications",
+        "Boundedness of sine and cosine within [-1, 1]",
+        "Zeros of each trigonometric function",
+        "Continuity and vertical asymptote locations",
+        "Monotonicity on principal intervals",
+        "Maximum and minimum values (extrema)",
+        "Side-by-side structural reference for all six functions across the seven core properties"
+      ],
+      "keywords": keyWords.join(", "),
+      "author": {
+        "@type": "Organization",
+        "name": "Learn Math Class"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Learn Math Class"
+      },
+      "datePublished": "2024-01-15",
+      "dateModified": new Date().toISOString()
+    },
 
+    breadcrumb: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.learnmathclass.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Trigonometry",
+          "item": "https://www.learnmathclass.com/trigonometry"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Trigonometric Properties",
+          "item": "https://www.learnmathclass.com/trigonometry/properties"
+        }
+      ]
+    },
 
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+    faq: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": Object.keys(faqQuestions).map(key => ({
+        "@type": "Question",
+        "name": faqQuestions[key].question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faqQuestions[key].answer
+        }
+      }))
+    }
+  }
 
 //     const sectionsContent={
 
@@ -386,17 +463,18 @@
 //     after: ``,
 //     link: ``,
 //   },
+//     // NEW capstone sections: obj8 (aggregation) + obj9 (summary)
 //     obj8:{
-//       title:``,
-//       content:``,
+//       title:`Identity of the Six Functions: Period, Parity, Range`,
+//       content:`The three properties that fix the structural identity of each trigonometric function — period, parity, and range — collect into a single reference card. Reading down a column shows how each property partitions the six functions; reading across a row gives the basic profile of one function.`,
 //       before:``,
 //       after:``,
 //       link:'',
 
 //     },
 //     obj9:{
-//       title:``,
-//       content:``,
+//       title:`Critical-Point Landscape: Where Each Function Vanishes, Explodes, and Turns Around`,
+//       content:`The remaining four properties — zeros, asymptotes, principal monotonic intervals, and extrema — together describe where each function does something structurally interesting on the real line. The table below pairs with the identity card above to give the complete property-by-function profile of the family.`,
 //       before:``,
 //       after:``,
 //       link:'',
@@ -459,546 +537,7 @@
 //   }
 
 
-//   const introContent = {
-//   id: "intro",
-//  title: `The Structural Behavior of Sine, Cosine, and Their Companions`,
-//   content: `Every trigonometric function carries a set of structural features — periodicity, symmetry, boundedness, monotonicity, continuity — that dictate how it behaves across the entire real line. These are not isolated facts to memorize but interconnected consequences of the [unit circle](!/trigonometry/unit-circle) geometry. Periodicity follows from the circle's finite circumference. Even/odd symmetry follows from how coordinates respond to reflecting an angle across the $x$-axis. Boundedness follows from the constraint $x^2 + y^2 = 1$. Monotonicity — where each function increases or decreases — determines the intervals on which [inverse trigonometric functions](!/trigonometry/inverse-functions) can be defined.
-
-// These properties govern every computation downstream. Periodicity is the reason trigonometric [equations](!/trigonometry/equations) produce infinitely many solutions. Boundedness is the reason $\\sin(x) = 2$ has no solution at all. Even/odd symmetry simplifies expressions involving negative angles and underlies several fundamental [identities](!/trigonometry/identities). The locations of zeros and asymptotes shape the [graphs](!/trigonometry/graphs) and constrain the domains of composite expressions. Understanding the properties as a coherent system — rather than as a list — is what separates mechanical calculation from genuine fluency with the trigonometric functions.`,
-// };
-
-
-
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//          faqQuestions,
-//          schemas,
-//           seoData: {
-//         title: "Trigonometric Properties | Learn Math Class",
-//         description: "Explore the key properties of trigonometric functions: periodicity, even/odd symmetry, boundedness, zeros, continuity, monotonicity, and extrema explained.",
-//         keywords: keyWords.join(", "),
-//         url: "/trigonometry/properties",
-//          name: "Trigonometric Properties"
-//       },
-
-//        }
-//     }
-//    }
-
-// export default function PropertiesPage({seoData,sectionsContent , introContent, faqQuestions, schemas}) {
-
-
-//   const genericSections=[
-//      {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//           sectionsContent.obj0.after,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     // {
-//     //     id:'8',
-//     //     title:sectionsContent.obj8.title,
-//     //     link:sectionsContent.obj8.link,
-//     //     content:[
-//     //       sectionsContent.obj8.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-
-// ]
-
-//   return (
-//    <>
-//    <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-
-//   <meta name="robots" content="index, follow" />
-
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar
-//            side='right'
-//            // topOffset='65px'
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          />
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Trigonometric Properties</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//      <KeyTermsCard
-//      id="0"
-//      title={sectionsContent.obj0.title}
-//      content={sectionsContent.obj0.content}
-//      after={sectionsContent.obj0.after}
-//      variant="light"
-//    />
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-
-  const keyWords=[
-    'trigonometric properties',
-    'periodicity trig functions',
-    'even odd trig functions',
-    'boundedness sine cosine',
-    'zeros of trig functions',
-    'trig function discontinuities',
-    'vertical asymptotes trig',
-    'monotonicity trig intervals',
-    'extrema trig functions',
-    'domain range trig functions',
-    'continuity trigonometric functions',
-    'period 2pi pi',
-    'sine cosine range -1 to 1',
-    'trig function behavior'
-  ]
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-  const defLink = (slug) => `/trigonometry/definitions#${slug}`
-
-  // ---------- TABLES ----------
-
-  // obj8 — aggregation: function identity (period, parity, range)
-  const obj8Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 85%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Function</th>
-      <th style="${tableHeaders.aggregation} text-align: center;">Period</th>
-      <th style="${tableHeaders.aggregation} text-align: center;">Parity</th>
-      <th style="${tableHeaders.aggregation}">Range</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('sine')}" style="${linkStyle}">sin</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2π</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">odd</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−1, 1]</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('cosine')}" style="${linkStyle}">cos</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2π</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">even</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−1, 1]</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('tangent')}" style="${linkStyle}">tan</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">π</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">odd</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, ∞)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('cosecant')}" style="${linkStyle}">csc</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2π</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">odd</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, −1] ∪ [1, ∞)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('secant')}" style="${linkStyle}">sec</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2π</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">even</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, −1] ∪ [1, ∞)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="${defLink('cotangent')}" style="${linkStyle}">cot</a></td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">π</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">odd</td>
-      <td style="padding: 12px 15px; color: #34495e;">(−∞, ∞)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj9 — summary capstone: critical-point landscape
-  // Zeros, asymptotes, principal monotonic interval, extrema for each of the six functions.
-  const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Function</th>
-      <th style="${tableHeaders.summary}">Zeros</th>
-      <th style="${tableHeaders.summary}">Asymptotes</th>
-      <th style="${tableHeaders.summary}">Principal monotonic interval</th>
-      <th style="${tableHeaders.summary}">Extrema</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('sine')}" style="${linkStyle}">sin</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nπ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">none</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−π/2, π/2] (increasing)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">max 1 at π/2 + 2nπ; min −1 at 3π/2 + 2nπ</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('cosine')}" style="${linkStyle}">cos</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">π/2 + nπ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">none</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, π] (decreasing)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">max 1 at 2nπ; min −1 at π + 2nπ</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('tangent')}" style="${linkStyle}">tan</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nπ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">π/2 + nπ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−π/2, π/2) (increasing)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">none (unbounded)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('cosecant')}" style="${linkStyle}">csc</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">none</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nπ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−π/2, 0) ∪ (0, π/2] (decreasing on each piece)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">local min 1 at π/2 + 2nπ; local max −1 at 3π/2 + 2nπ</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="${defLink('secant')}" style="${linkStyle}">sec</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">none</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">π/2 + nπ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, π/2) ∪ (π/2, π] (increasing on each piece)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">local min 1 at 2nπ; local max −1 at π + 2nπ</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="${defLink('cotangent')}" style="${linkStyle}">cot</a></td>
-      <td style="padding: 12px 15px; color: #34495e;">π/2 + nπ</td>
-      <td style="padding: 12px 15px; color: #34495e;">nπ</td>
-      <td style="padding: 12px 15px; color: #34495e;">(0, π) (decreasing)</td>
-      <td style="padding: 12px 15px; color: #34495e;">none (unbounded)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  const faqQuestions = {
-    obj1: {
-      question: "What does it mean for trigonometric functions to be periodic?",
-      answer: "A periodic function repeats its values at regular intervals. Sine, cosine, cosecant, and secant have period 2π, meaning their values repeat every 2π radians. Tangent and cotangent have the shorter period π. Periodicity means every trigonometric graph is fully determined by one period, and equations produce infinite families of solutions spaced by the period."
-    },
-    obj2: {
-      question: "Which trigonometric functions are even and which are odd?",
-      answer: "Cosine and secant are even functions, meaning f(-θ) = f(θ) — their graphs are symmetric about the y-axis. Sine, tangent, cosecant, and cotangent are odd functions, meaning f(-θ) = -f(θ) — their graphs are symmetric about the origin. These symmetries follow from reflecting points across the x-axis on the unit circle."
-    },
-    obj3: {
-      question: "Why are sine and cosine bounded between -1 and 1?",
-      answer: "Sine and cosine represent the y-coordinate and x-coordinate of a point on the unit circle, which has radius 1. Since every point on the unit circle satisfies x² + y² = 1, both coordinates must satisfy |x| ≤ 1 and |y| ≤ 1. No rotation can produce a value outside [-1, 1], making sine and cosine the only bounded trigonometric functions."
-    },
-    obj4: {
-      question: "Where are the trigonometric functions undefined?",
-      answer: "Tangent and secant are undefined wherever cosine equals zero, which occurs at θ = π/2 + nπ for every integer n. Cotangent and cosecant are undefined wherever sine equals zero, at θ = nπ. At these points the functions have vertical asymptotes. Sine and cosine are continuous everywhere with no discontinuities."
-    },
-    obj5: {
-      question: "What are the zeros of the trigonometric functions?",
-      answer: "Sine has zeros at θ = nπ (integer multiples of π). Cosine has zeros at θ = π/2 + nπ (odd multiples of π/2). Tangent has the same zeros as sine, at θ = nπ. Cotangent has the same zeros as cosine, at θ = π/2 + nπ. Cosecant and secant have no zeros because the reciprocal of a real number can never equal zero."
-    }
-  }
-
-  const schemas = {
-    learningResource: {
-      "@context": "https://schema.org",
-      "@type": "LearningResource",
-      "name": "Trigonometric Properties",
-      "description": "Explore the structural properties of trigonometric functions: periodicity, even/odd symmetry, boundedness, zeros, continuity, monotonicity, and extrema.",
-      "url": "https://www.learnmathclass.com/trigonometry/properties",
-      "inLanguage": "en-US",
-      "learningResourceType": "Explanation",
-      "educationalLevel": "High School, College",
-      "educationalUse": "Learning",
-      "audience": {
-        "@type": "EducationalAudience",
-        "educationalRole": "student"
-      },
-      "about": {
-        "@type": "Thing",
-        "name": "Trigonometric Properties"
-      },
-      "teaches": [
-        "Periodicity of all six trigonometric functions",
-        "Even and odd symmetry classifications",
-        "Boundedness of sine and cosine within [-1, 1]",
-        "Zeros of each trigonometric function",
-        "Continuity and vertical asymptote locations",
-        "Monotonicity on principal intervals",
-        "Maximum and minimum values (extrema)",
-        "Side-by-side structural reference for all six functions across the seven core properties"
-      ],
-      "keywords": keyWords.join(", "),
-      "author": {
-        "@type": "Organization",
-        "name": "Learn Math Class"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Learn Math Class"
-      },
-      "datePublished": "2024-01-15",
-      "dateModified": new Date().toISOString()
-    },
-
-    breadcrumb: {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://www.learnmathclass.com"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Trigonometry",
-          "item": "https://www.learnmathclass.com/trigonometry"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Trigonometric Properties",
-          "item": "https://www.learnmathclass.com/trigonometry/properties"
-        }
-      ]
-    },
-
-    faq: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": Object.keys(faqQuestions).map(key => ({
-        "@type": "Question",
-        "name": faqQuestions[key].question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faqQuestions[key].answer
-        }
-      }))
-    }
-  }
-
-    const sectionsContent={
+const sectionsContent={
 
    obj0: {
     title: `Key Terms`,
@@ -1044,7 +583,19 @@ export async function getStaticProps(){
 
 Sine and cosine have period $2\\pi$:
 
-$$\\sin(\\theta + 2\\pi) = \\sin(\\theta), \\quad \\cos(\\theta + 2\\pi) = \\cos(\\theta)$$
+@academic[formula_callout:Sine Periodicity
+$$\\sin(\\theta + 2\\pi) = \\sin\\theta$$
+/trigonometry/formulas#sine_periodicity]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+@academic[formula_callout:Cosine Periodicity
+$$\\cos(\\theta + 2\\pi) = \\cos\\theta$$
+/trigonometry/formulas#cosine_periodicity]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
 
 This is a geometric fact: after a full rotation of $2\\pi$ radians around the [unit circle](!/trigonometry/unit-circle), the point $(\\cos\\theta, \\sin\\theta)$ returns to its starting position. The coordinates — and therefore the function values — are unchanged. Adding any integer multiple of $2\\pi$ has no effect: $\\sin(\\theta + 2n\\pi) = \\sin(\\theta)$ for all integers $n$.
 
@@ -1052,7 +603,14 @@ Cosecant and secant inherit the periods of their reciprocals. Since $\\csc\\thet
 
 Tangent and cotangent have the shorter period $\\pi$:
 
-$$\\tan(\\theta + \\pi) = \\tan(\\theta), \\quad \\cot(\\theta + \\pi) = \\cot(\\theta)$$
+@academic[formula_callout:Tangent Periodicity
+$$\\tan(\\theta + \\pi) = \\tan\\theta$$
+/trigonometry/formulas#tangent_periodicity]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+Cotangent shares this period: $\\cot(\\theta + \\pi) = \\cot(\\theta)$.
 
 The algebraic reason: $\\tan(\\theta + \\pi) = \\frac{\\sin(\\theta + \\pi)}{\\cos(\\theta + \\pi)} = \\frac{-\\sin\\theta}{-\\cos\\theta} = \\frac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta$. A half rotation negates both coordinates, but the ratio is unaffected. Geometrically, the point diametrically opposite $(\\cos\\theta, \\sin\\theta)$ on the unit circle has both coordinates negated, producing the same value of $\\frac{y}{x}$.
 
@@ -1067,14 +625,34 @@ The practical consequence for [graphs](!/trigonometry/graphs): every trigonometr
     title: `Even and Odd Symmetry`,
     content: `A function is even if $f(-\\theta) = f(\\theta)$ for all $\\theta$ in its domain — its graph is symmetric about the $y$-axis. A function is odd if $f(-\\theta) = -f(\\theta)$ — its graph is symmetric about the origin.
 
-Among the six trigonometric functions, only two are even:
+Among the six trigonometric functions, only two are even — cosine and secant:
 
-$$\\cos(-\\theta) = \\cos(\\theta), \\quad \\sec(-\\theta) = \\sec(\\theta)$$
+@academic[formula_callout:Cosine Even Identity
+$$\\cos(-\\theta) = \\cos\\theta$$
+/trigonometry/formulas#cosine_even_identity]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+Secant inherits cosine&apos;s even symmetry: $\\sec(-\\theta) = \\sec(\\theta)$.
 
 The remaining four are odd:
 
-$$\\sin(-\\theta) = -\\sin(\\theta), \\quad \\tan(-\\theta) = -\\tan(\\theta)$$
-$$\\csc(-\\theta) = -\\csc(\\theta), \\quad \\cot(-\\theta) = -\\cot(\\theta)$$
+@academic[formula_callout:Sine Odd Identity
+$$\\sin(-\\theta) = -\\sin\\theta$$
+/trigonometry/formulas#sine_odd_identity]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+@academic[formula_callout:Tangent Odd Identity
+$$\\tan(-\\theta) = -\\tan\\theta$$
+/trigonometry/formulas#tangent_odd_identity]@
+
+@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@
+
+Cosecant and cotangent inherit the odd symmetry of sine and tangent: $\\csc(-\\theta) = -\\csc(\\theta)$ and $\\cot(-\\theta) = -\\cot(\\theta)$.
 
 The geometric explanation is clean. On the [unit circle](!/trigonometry/unit-circle), the angle $-\\theta$ corresponds to reflecting $\\theta$ across the $x$-axis. This reflection negates the $y$-coordinate but preserves the $x$-coordinate. Since cosine is the $x$-coordinate, it is unchanged — even. Since sine is the $y$-coordinate, it is negated — odd. Tangent, being $\\frac{y}{x}$, is the ratio of an odd quantity to an even one, which is odd. The reciprocal functions inherit the parity of their parent functions: the reciprocal of an even function is even, and the reciprocal of an odd function is odd.
 
@@ -1197,7 +775,7 @@ The principal intervals of monotonicity are precisely the domains used to constr
 
 **Cosecant** has local minima of $1$ (where $\\sin\\theta = 1$) and local maxima of $-1$ (where $\\sin\\theta = -1$). These labels may seem reversed, but they are correct: $\\csc\\theta = 1$ is the smallest positive value cosecant achieves (on the upward-opening branches), and $\\csc\\theta = -1$ is the largest negative value (on the downward-opening branches). Between asymptotes, each branch has exactly one extremum.
 
-**Secant** behaves analogously: local minima of $1$ at cosine's maxima, local maxima of $-1$ at cosine's minima.
+**Secant** behaves analogously: local minima of $1$ at cosine&apos;s maxima, local maxima of $-1$ at cosine&apos;s minima.
 
 **Tangent and cotangent have no extrema.** They are unbounded in both directions, with no maximum or minimum value. Within each period, they increase (tangent) or decrease (cotangent) monotonically from $-\\infty$ to $+\\infty$ or vice versa, never leveling off or turning around.
 
@@ -1282,7 +860,6 @@ These occur at the same relative positions within each period as for the standar
     }
 
   }
-
 
   const introContent = {
   id: "intro",

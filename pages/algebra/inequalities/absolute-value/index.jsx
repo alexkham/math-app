@@ -76,7 +76,7 @@ const linkStyle = 'color: inherit; text-decoration: underline;'
 
 // obj3 — aggregation (reference): k-edge-cases matrix consolidating obj2 + obj3 content
 const obj3Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation} text-align: center;">k value</th>
@@ -114,7 +114,7 @@ const obj3Table = `
 
 // obj6 — comparison: squaring method vs case-splitting
 const obj6Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.comparison}">Method</th>
@@ -142,7 +142,7 @@ const obj6Table = `
 
 // obj8 — summary: capstone of inequality structures covered on the page
 const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.summary}">Form</th>
@@ -181,36 +181,215 @@ const summaryTable = `
 `
 
 
- const sectionsContent = {
+//  const sectionsContent = {
+
+//   obj0: {
+//   title: `Key Terms`,
+//   content: `
+// ## Core Concepts
+ 
+// - [Absolute Value Inequality](!/algebra/definitions#absolute_value_inequality) — less-than gives a bounded interval, greater-than gives two rays
+// - [Compound Inequality](!/algebra/definitions#compound_inequality) — the conversion target: conjunction for $<$, disjunction for $>$
+// - [Interval Notation](!/algebra/definitions#interval_notation) — express conjunction as $(a, b)$ or $[a, b]$, disjunction as union
+ 
+// ## From Other Categories
+ 
+// - [Absolute Value](!/algebra/definitions#absolute_value) — distance from zero; always non-negative
+
+// ## Formulas Used on This Page
+
+// - [Absolute Value Inequalities](!/algebra/formulas#absolute_value_inequalities) — $|p| < b \\implies -b < p < b$; $|p| > b \\implies p < -b \\text{ or } p > b$
+// `,
+//   before: ``,
+//   after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
+
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
+// `,
+//   link: '',
+// },
+//   obj1: {
+//     title: `Two Fundamental Forms`,
+//     content: `Every absolute value inequality involving a single absolute value term and a constant reduces to one of two forms, each with its own conversion rule.
+
+// The "less than" form $|f(x)| < k$ states that the expression $f(x)$ is within $k$ units of zero. This converts to a conjunction — a double inequality:
+
+// $$-k < f(x) < k$$
+
+// Both conditions must hold simultaneously. The solution is the set of $x$ values for which $f(x)$ lies strictly between $-k$ and $k$.
+
+// The "greater than" form $|f(x)| > k$ states that $f(x)$ is more than $k$ units from zero. This converts to a disjunction — two separate inequalities:
+
+// $$f(x) < -k \\quad \\text{or} \\quad f(x) > k$$
+
+// At least one condition must hold. The solution is the set of $x$ values for which $f(x)$ falls outside the interval $[-k, k]$.
+
+// The non-strict versions $\\leq$ and $\\geq$ work identically, with the boundary values included rather than excluded. The conversions are the same; only the inequality symbols change from strict to non-strict throughout.
+
+// These two translations — less-than becomes a conjunction, greater-than becomes a disjunction — are the entire method. Everything that follows is the application of this principle to increasingly complex expressions inside the absolute value.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj2: {
+//     title: `Solving the Less-Than Form`,
+//     content: `The inequality $|f(x)| < k$ converts to $-k < f(x) < k$. The value of $k$ determines whether a solution exists before any algebra begins.
+
+// When $k > 0$, the double inequality defines a bounded region. The two inequalities $f(x) > -k$ and $f(x) < k$ are solved simultaneously, and the solution is their intersection — the set of $x$ values satisfying both.
+
+// When $k = 0$, the inequality $|f(x)| < 0$ asks for the [absolute value](!/algebra/equations/absolute-value) to be strictly negative, which is impossible. The solution set is empty. The non-strict version $|f(x)| \\leq 0$ has a solution only at the roots of $f(x) = 0$, because zero is the only non-negative value that satisfies $\\leq 0$.
+
+// When $k < 0$, both $|f(x)| < k$ and $|f(x)| \\leq k$ have empty solution sets. Absolute value is never negative, so it can never be less than a negative number.
+
+// For linear $f(x)$, the double inequality is a three-part chain solved by isolating $x$ in the middle. The inequality $|2x - 3| < 5$ becomes $-5 < 2x - 3 < 5$. Adding $3$ throughout: $-2 < 2x < 8$. Dividing by $2$: $-1 < x < 4$. The solution is the open interval $(-1, 4)$.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj3: {
+//     title: `Solving the Greater-Than Form`,
+//     content: `The inequality $|f(x)| > k$ converts to $f(x) < -k$ or $f(x) > k$. Each part is solved independently, and the solution is the union of the two individual solution sets.
+
+// When $k > 0$, each part contributes a separate region, and the union typically produces two rays — one extending to the left and one to the right.
+
+// When $k = 0$, the inequality $|f(x)| > 0$ asks where $f(x)$ is nonzero. The solution is all real numbers except the roots of $f(x) = 0$. The non-strict version $|f(x)| \\geq 0$ is satisfied by every real number, since absolute value is always non-negative.
+
+// When $k < 0$, the inequality $|f(x)| > k$ is satisfied by every real number — absolute value is always at least zero, which exceeds any negative number. The solution is $(-\\infty, \\infty)$.
+
+// For a linear example: $|4x + 1| \\geq 7$ becomes $4x + 1 \\leq -7$ or $4x + 1 \\geq 7$. From the first: $4x \\leq -8$, so $x \\leq -2$. From the second: $4x \\geq 6$, so $x \\geq \\frac{3}{2}$. The solution is $(-\\infty, -2] \\cup [\\frac{3}{2}, \\infty)$.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj4: {
+//     title: `Worked Examples with Linear Expressions`,
+//     content: `When the expression inside the absolute value is linear, the compound inequality after conversion is also linear, and the solution follows from the methods on the [linear inequalities](!/algebra/inequalities/linear) page.
+
+// Solve $|3x - 7| < 2$. Convert: $-2 < 3x - 7 < 2$. Add $7$: $5 < 3x < 9$. Divide by $3$: $\\frac{5}{3} < x < 3$. The solution is $\\left(\\frac{5}{3}, 3\\right)$.
+
+// Solve $|1 - 2x| \\geq 5$. Convert: $1 - 2x \\leq -5$ or $1 - 2x \\geq 5$. From the first: $-2x \\leq -6$, so $x \\geq 3$ (direction flips when dividing by $-2$). From the second: $-2x \\geq 4$, so $x \\leq -2$. The solution is $(-\\infty, -2] \\cup [3, \\infty)$.
+
+// Solve $|5x + 3| < -1$. No conversion needed — absolute value is never negative, so it is certainly never less than $-1$. The solution set is empty.
+
+// Solve $|x - 4| > 0$. Convert: $x - 4 < 0$ or $x - 4 > 0$, meaning $x < 4$ or $x > 4$. This is every real number except $x = 4$. The solution is $(-\\infty, 4) \\cup (4, \\infty)$, or equivalently $\\mathbb{R} \\setminus \\{4\\}$.
+
+// In every linear case, the less-than form produces a single bounded interval, and the greater-than form produces two rays. The center of symmetry is the root of $f(x) = 0$, and the radius is determined by $k$.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj5: {
+//     title: `Absolute Value Inequalities with Quadratic or Other Expressions`,
+//     content: `When the expression inside the absolute value is not linear, the compound inequality after conversion requires more powerful methods — typically the sign chart.
+
+// Solve $|x^2 - 4| < 5$. Convert to $-5 < x^2 - 4 < 5$. This is two simultaneous inequalities: $x^2 - 4 > -5$ and $x^2 - 4 < 5$.
+
+// From $x^2 - 4 > -5$: $x^2 > -1$. Since $x^2 \\geq 0$ for all real $x$, this holds everywhere. It imposes no restriction.
+
+// From $x^2 - 4 < 5$: $x^2 < 9$, which gives $-3 < x < 3$.
+
+// The intersection of "all real numbers" and "$-3 < x < 3$" is simply $(-3, 3)$.
+
+// Solve $|x^2 - 7x + 10| \\geq 2$. Convert to $x^2 - 7x + 10 \\leq -2$ or $x^2 - 7x + 10 \\geq 2$.
+
+// From the first: $x^2 - 7x + 12 \\leq 0$. Factor: $(x - 3)(x - 4) \\leq 0$. This is a [quadratic inequality](!/algebra/inequalities/quadratic) with roots $3$ and $4$, positive leading coefficient. The expression is non-positive between the roots: $[3, 4]$.
+
+// From the second: $x^2 - 7x + 8 \\geq 0$. The discriminant is $49 - 32 = 17 > 0$. The roots are $\\frac{7 \\pm \\sqrt{17}}{2}$, approximately $1.44$ and $5.56$. With positive leading coefficient, the expression is non-negative outside the roots: $\\left(-\\infty, \\frac{7 - \\sqrt{17}}{2}\\right] \\cup \\left[\\frac{7 + \\sqrt{17}}{2}, \\infty\\right)$.
+
+// The solution is the union of both parts: $\\left(-\\infty, \\frac{7 - \\sqrt{17}}{2}\\right] \\cup [3, 4] \\cup \\left[\\frac{7 + \\sqrt{17}}{2}, \\infty\\right)$.
+
+// The absolute value conversion reduces the problem to standard inequality types. The difficulty is determined by whatever sits inside the bars, not by the absolute value itself.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj6: {
+//     title: `Inequalities with Absolute Value on Both Sides`,
+//     content: `When absolute value appears on both sides — $|f(x)| < |g(x)|$ or $|f(x)| > |g(x)|$ — the standard less-than/greater-than conversion does not apply directly because the right-hand side is not a constant. Two alternative approaches handle these cases.
+
+// The squaring method exploits the fact that $|A| < |B|$ if and only if $A^2 < B^2$ (since both sides are non-negative). The inequality $|f(x)| < |g(x)|$ becomes $[f(x)]^2 < [g(x)]^2$, which rearranges to $[g(x)]^2 - [f(x)]^2 > 0$. Factoring the difference of squares:
+
+// $$(g(x) - f(x))(g(x) + f(x)) > 0$$
+
+// This is a [polynomial inequality](!/algebra/inequalities/polynomial) solvable by sign chart. The critical points are the roots of $g(x) - f(x) = 0$ and $g(x) + f(x) = 0$.
+
+// For $|2x - 1| < |x + 3|$, square both sides: $(2x - 1)^2 < (x + 3)^2$. Rearrange: $(x + 3)^2 - (2x - 1)^2 > 0$. Factor: $((x + 3) - (2x - 1))((x + 3) + (2x - 1)) > 0$, which gives $(4 - x)(3x + 2) > 0$. The roots are $x = 4$ and $x = -\\frac{2}{3}$. The sign chart yields the solution $\\left(-\\frac{2}{3}, 4\\right)$.
+
+// The case-splitting method is the alternative: consider the signs of $f(x)$ and $g(x)$ on each interval defined by their roots, remove the absolute value bars using the piecewise definition, and solve the resulting inequality on each interval. This approach is more laborious but avoids squaring and works for non-polynomial expressions as well.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj7: {
+//     title: `Geometric Interpretation`,
+//     content: `Absolute value measures distance on the number line, and this interpretation turns every absolute value inequality into a geometric statement about proximity or separation.
+
+// The inequality $|x - a| < d$ asks: which points lie within distance $d$ of $a$? The answer is the open interval $(a - d, a + d)$, centered at $a$ with radius $d$. The inequality $|x - 5| < 3$ describes all points within $3$ units of $5$: the interval $(2, 8)$.
+
+// The inequality $|x - a| > d$ asks: which points lie farther than distance $d$ from $a$? The answer is two rays: $(-\\infty, a - d) \\cup (a + d, \\infty)$. The inequality $|x - 5| > 3$ describes all points more than $3$ units from $5$: $(-\\infty, 2) \\cup (8, \\infty)$.
+
+// The inequality $|x - a| < |x - b|$ asks: which points are closer to $a$ than to $b$? On the number line, the set of points closer to $a$ is everything on $a$'s side of the midpoint $m = \\frac{a + b}{2}$. If $a < b$, the solution is $(-\\infty, m)$. This follows from the squaring method: $|x - a| < |x - b|$ becomes $(x - a)^2 < (x - b)^2$, which simplifies to a linear inequality whose solution is the ray ending at the midpoint.
+
+// These geometric readings provide instant answers for simple absolute value inequalities and serve as sanity checks for more complex ones. If the algebraic solution to $|x - 5| < 3$ produces something other than a symmetric interval centered at $5$ with radius $3$, the algebra contains an error.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj8: {
+//     title: `Summary of Absolute Value Inequality Forms`,
+//     content: `Every absolute value inequality is solved in two stages: first remove the absolute value bars by applying the appropriate conversion, then solve the resulting compound inequality using whatever method its internal structure demands. The table below collects the cases covered above, the conversion that removes the absolute value, and the kind of inequality that remains.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+// };
+
+
+const sectionsContent = {
 
   obj0: {
-  title: `Key Terms`,
-  content: `
+    title: `Key Terms`,
+    content: `
 ## Core Concepts
- 
+
 - [Absolute Value Inequality](!/algebra/definitions#absolute_value_inequality) — less-than gives a bounded interval, greater-than gives two rays
 - [Compound Inequality](!/algebra/definitions#compound_inequality) — the conversion target: conjunction for $<$, disjunction for $>$
 - [Interval Notation](!/algebra/definitions#interval_notation) — express conjunction as $(a, b)$ or $[a, b]$, disjunction as union
- 
+
 ## From Other Categories
- 
+
 - [Absolute Value](!/algebra/definitions#absolute_value) — distance from zero; always non-negative
 
 ## Formulas Used on This Page
 
 - [Absolute Value Inequalities](!/algebra/formulas#absolute_value_inequalities) — $|p| < b \\implies -b < p < b$; $|p| > b \\implies p < -b \\text{ or } p > b$
 `,
-  before: ``,
-  after: `
+    before: ``,
+    after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
 
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
 `,
-  link: '',
-},
+    link: '',
+  },
+
   obj1: {
     title: `Two Fundamental Forms`,
     content: `Every absolute value inequality involving a single absolute value term and a constant reduces to one of two forms, each with its own conversion rule.
+
+@academic[formula_callout:Absolute Value Inequalities
+$$|p| < b \\implies -b < p < b \\qquad |p| > b \\implies p < -b \\text{ or } p > b$$
+/algebra/formulas#absolute_value_inequalities]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The "less than" form $|f(x)| < k$ states that the expression $f(x)$ is within $k$ units of zero. This converts to a conjunction — a double inequality:
 

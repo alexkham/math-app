@@ -6,6 +6,110 @@ const trigonometryFormulaList = [
 // All section anchors verified against extract_sections output
 
 
+
+
+// ─── Category: Basic Trigonometric Functions (6 entries) ─────────────────────
+
+// ─── Category: Basic Trigonometric Functions (6 entries) ─────────────────────
+// v4 — formula uses "side opposite to θ" / "side adjacent to θ". Replaces v3.
+
+
+  {
+    name: 'Sine Definition',
+    entity: 'sine',
+    category: 'Basic Trigonometric Functions',
+    formula: `$$\\sin\\theta = \\frac{\\text{side opposite to }\\theta}{\\text{hypotenuse}}$$`,
+    link: { label: 'The Sine Function', url: '/trigonometry/functions#1' },
+    fields: {
+      explanation: `In a right triangle with acute angle $\\theta$, sine is the ratio of the side opposite to $\\theta$ to the hypotenuse.`,
+      notation: `side opposite to $\\theta$ = the side that does not touch the vertex of $\\theta$; hypotenuse = the side opposite to the right angle (the longest side).`,
+      conditions: `$0 < \\theta < \\frac{\\pi}{2}$ for the right-triangle definition. Extends to all real $\\theta$ via the unit circle.`,
+      variants: `On the unit circle: $\\sin\\theta = y$, where $(x, y)$ is the point on the circle at angle $\\theta$.\n\nGeneral coordinate form: $\\sin\\theta = \\dfrac{y}{r}$, for any point $P(x, y)$ on the terminal side with $r = \\sqrt{x^2 + y^2}$.`,
+      related_formulas: `- [Cosine Definition](!/trigonometry/formulas#cosine_definition)\n- [Cosecant Definition](!/trigonometry/formulas#cosecant_definition)\n- [Tangent Definition](!/trigonometry/formulas#tangent_definition)\n- [Pythagorean Identity - Sine Cosine](!/trigonometry/formulas#pythagorean_identity_-_sine_cosine)`,
+      related_definitions: `- [Sine](!/trigonometry/definitions#sine)\n- [Right Triangle](!/trigonometry/definitions#right_triangle)\n- [Unit Circle](!/trigonometry/definitions#unit_circle)`,
+    },
+  },
+
+  {
+    name: 'Cosine Definition',
+    entity: 'cosine',
+    category: 'Basic Trigonometric Functions',
+    formula: `$$\\cos\\theta = \\frac{\\text{side adjacent to }\\theta}{\\text{hypotenuse}}$$`,
+    link: { label: 'The Cosine Function', url: '/trigonometry/functions#2' },
+    fields: {
+      explanation: `In a right triangle with acute angle $\\theta$, cosine is the ratio of the side adjacent to $\\theta$ to the hypotenuse.`,
+      notation: `side adjacent to $\\theta$ = the side that touches the vertex of $\\theta$ and is not the hypotenuse; hypotenuse = the side opposite to the right angle.`,
+      conditions: `$0 < \\theta < \\frac{\\pi}{2}$ for the right-triangle definition. Extends to all real $\\theta$ via the unit circle.`,
+      variants: `On the unit circle: $\\cos\\theta = x$, where $(x, y)$ is the point on the circle at angle $\\theta$.\n\nGeneral coordinate form: $\\cos\\theta = \\dfrac{x}{r}$, for any point $P(x, y)$ on the terminal side with $r = \\sqrt{x^2 + y^2}$.`,
+      related_formulas: `- [Sine Definition](!/trigonometry/formulas#sine_definition)\n- [Secant Definition](!/trigonometry/formulas#secant_definition)\n- [Tangent Definition](!/trigonometry/formulas#tangent_definition)\n- [Pythagorean Identity - Sine Cosine](!/trigonometry/formulas#pythagorean_identity_-_sine_cosine)`,
+      related_definitions: `- [Cosine](!/trigonometry/definitions#cosine)\n- [Right Triangle](!/trigonometry/definitions#right_triangle)\n- [Unit Circle](!/trigonometry/definitions#unit_circle)`,
+    },
+  },
+
+  {
+    name: 'Tangent Definition',
+    entity: 'tangent',
+    category: 'Basic Trigonometric Functions',
+    formula: `$$\\tan\\theta = \\frac{\\text{side opposite to }\\theta}{\\text{side adjacent to }\\theta}$$`,
+    link: { label: 'The Tangent Function', url: '/trigonometry/functions#3' },
+    fields: {
+      explanation: `In a right triangle with acute angle $\\theta$, tangent is the ratio of the side opposite to $\\theta$ to the side adjacent to $\\theta$.`,
+      notation: `side opposite to $\\theta$ = the side that does not touch the vertex of $\\theta$; side adjacent to $\\theta$ = the side that touches the vertex of $\\theta$ and is not the hypotenuse.`,
+      conditions: `$0 < \\theta < \\frac{\\pi}{2}$ for the right-triangle definition. Undefined when the adjacent side has zero length — i.e. on the unit circle, when $\\cos\\theta = 0$.`,
+      variants: `Quotient form: $\\tan\\theta = \\dfrac{\\sin\\theta}{\\cos\\theta}$.\n\nGeneral coordinate form: $\\tan\\theta = \\dfrac{y}{x}$, for any point $P(x, y)$ on the terminal side. Geometrically, the slope of the terminal side.`,
+      related_formulas: `- [Sine Definition](!/trigonometry/formulas#sine_definition)\n- [Cosine Definition](!/trigonometry/formulas#cosine_definition)\n- [Cotangent Definition](!/trigonometry/formulas#cotangent_definition)\n- [Tangent Quotient Identity](!/trigonometry/formulas#tangent_quotient_identity)`,
+      related_definitions: `- [Tangent](!/trigonometry/definitions#tangent)\n- [Right Triangle](!/trigonometry/definitions#right_triangle)`,
+    },
+  },
+
+  {
+    name: 'Cosecant Definition',
+    entity: 'cosecant',
+    category: 'Basic Trigonometric Functions',
+    formula: `$$\\csc\\theta = \\frac{\\text{hypotenuse}}{\\text{side opposite to }\\theta}$$`,
+    link: { label: 'The Cosecant Function', url: '/trigonometry/functions#4' },
+    fields: {
+      explanation: `In a right triangle with acute angle $\\theta$, cosecant is the ratio of the hypotenuse to the side opposite to $\\theta$. Equivalently, the reciprocal of sine.`,
+      notation: `hypotenuse = the side opposite to the right angle; side opposite to $\\theta$ = the side that does not touch the vertex of $\\theta$.`,
+      conditions: `$0 < \\theta < \\frac{\\pi}{2}$ for the right-triangle definition. Undefined when the opposite side has zero length — i.e. on the unit circle, when $\\sin\\theta = 0$.`,
+      variants: `Reciprocal form: $\\csc\\theta = \\dfrac{1}{\\sin\\theta}$.\n\nGeneral coordinate form: $\\csc\\theta = \\dfrac{r}{y}$, for any point $P(x, y)$ on the terminal side with $r = \\sqrt{x^2 + y^2}$.`,
+      related_formulas: `- [Sine Definition](!/trigonometry/formulas#sine_definition)\n- [Secant Definition](!/trigonometry/formulas#secant_definition)\n- [Cosecant Reciprocal Identity](!/trigonometry/formulas#cosecant_reciprocal_identity)`,
+      related_definitions: `- [Cosecant](!/trigonometry/definitions#cosecant)\n- [Right Triangle](!/trigonometry/definitions#right_triangle)\n- [Sine](!/trigonometry/definitions#sine)`,
+    },
+  },
+
+  {
+    name: 'Secant Definition',
+    entity: 'secant',
+    category: 'Basic Trigonometric Functions',
+    formula: `$$\\sec\\theta = \\frac{\\text{hypotenuse}}{\\text{side adjacent to }\\theta}$$`,
+    link: { label: 'The Secant Function', url: '/trigonometry/functions#5' },
+    fields: {
+      explanation: `In a right triangle with acute angle $\\theta$, secant is the ratio of the hypotenuse to the side adjacent to $\\theta$. Equivalently, the reciprocal of cosine.`,
+      notation: `hypotenuse = the side opposite to the right angle; side adjacent to $\\theta$ = the side that touches the vertex of $\\theta$ and is not the hypotenuse.`,
+      conditions: `$0 < \\theta < \\frac{\\pi}{2}$ for the right-triangle definition. Undefined when the adjacent side has zero length — i.e. on the unit circle, when $\\cos\\theta = 0$.`,
+      variants: `Reciprocal form: $\\sec\\theta = \\dfrac{1}{\\cos\\theta}$.\n\nGeneral coordinate form: $\\sec\\theta = \\dfrac{r}{x}$, for any point $P(x, y)$ on the terminal side with $r = \\sqrt{x^2 + y^2}$.`,
+      related_formulas: `- [Cosine Definition](!/trigonometry/formulas#cosine_definition)\n- [Cosecant Definition](!/trigonometry/formulas#cosecant_definition)\n- [Secant Reciprocal Identity](!/trigonometry/formulas#secant_reciprocal_identity)\n- [Pythagorean Identity - Tangent Secant](!/trigonometry/formulas#pythagorean_identity_-_tangent_secant)`,
+      related_definitions: `- [Secant](!/trigonometry/definitions#secant)\n- [Right Triangle](!/trigonometry/definitions#right_triangle)\n- [Cosine](!/trigonometry/definitions#cosine)`,
+    },
+  },
+
+  {
+    name: 'Cotangent Definition',
+    entity: 'cotangent',
+    category: 'Basic Trigonometric Functions',
+    formula: `$$\\cot\\theta = \\frac{\\text{side adjacent to }\\theta}{\\text{side opposite to }\\theta}$$`,
+    link: { label: 'The Cotangent Function', url: '/trigonometry/functions#6' },
+    fields: {
+      explanation: `In a right triangle with acute angle $\\theta$, cotangent is the ratio of the side adjacent to $\\theta$ to the side opposite to $\\theta$. Equivalently, the reciprocal of tangent.`,
+      notation: `side adjacent to $\\theta$ = the side that touches the vertex of $\\theta$ and is not the hypotenuse; side opposite to $\\theta$ = the side that does not touch the vertex of $\\theta$.`,
+      conditions: `$0 < \\theta < \\frac{\\pi}{2}$ for the right-triangle definition. Undefined when the opposite side has zero length — i.e. on the unit circle, when $\\sin\\theta = 0$.`,
+      variants: `Reciprocal form: $\\cot\\theta = \\dfrac{1}{\\tan\\theta}$.\n\nQuotient form: $\\cot\\theta = \\dfrac{\\cos\\theta}{\\sin\\theta}$.\n\nGeneral coordinate form: $\\cot\\theta = \\dfrac{x}{y}$, for any point $P(x, y)$ on the terminal side.`,
+      related_formulas: `- [Tangent Definition](!/trigonometry/formulas#tangent_definition)\n- [Cotangent Reciprocal Identity](!/trigonometry/formulas#cotangent_reciprocal_identity)\n- [Cotangent Quotient Identity](!/trigonometry/formulas#cotangent_quotient_identity)`,
+      related_definitions: `- [Cotangent](!/trigonometry/definitions#cotangent)\n- [Right Triangle](!/trigonometry/definitions#right_triangle)\n- [Tangent](!/trigonometry/definitions#tangent)`,
+    },
+  },
+
 // ─── Category: Measurement & Conversion (3 entries) ──────────────────
 
 
