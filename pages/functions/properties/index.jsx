@@ -1,75 +1,308 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
+export async function getStaticProps(){
 
-//   const keyWords=[
-//     'properties of functions',
-//     'even odd functions',
-//     'function symmetry',
-//     'one-to-one function',
-//     'increasing decreasing functions',
-//     'function continuity',
-//     'asymptotes',
-//     'end behavior of functions',
-//     'local extrema',
-//     'function zeros',
-//     'monotonic functions',
-//     'concavity',
-//     'bounded functions',
-//     'periodic functions',
-//   ]
+  const keyWords=[
+    'properties of functions',
+    'even odd functions',
+    'function symmetry',
+    'one-to-one function',
+    'increasing decreasing functions',
+    'function continuity',
+    'asymptotes',
+    'end behavior of functions',
+    'local extrema',
+    'function zeros',
+    'monotonic functions',
+    'concavity',
+    'bounded functions',
+    'periodic functions',
+  ]
 
-//   // •
+  const linkStyle = 'color: inherit; text-decoration: underline;'
 
-// //   • First item
-// // • Second item
+  // ---------- TABLES ----------
 
+  // obj1 — comparison: even / odd / neither
+  const obj1Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Category</th>
+      <th style="${tableHeaders.comparison}">Algebraic test on f(−x)</th>
+      <th style="${tableHeaders.comparison}">Graphical symmetry</th>
+      <th style="${tableHeaders.comparison}">Examples</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Even</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(−x) = f(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">mirror symmetry about the y-axis</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x², x⁴, |x|, cos(x)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Odd</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(−x) = −f(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">point symmetry about the origin</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x, x³, x⁵, sin(x)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Neither</td>
+      <td style="padding: 12px 15px; color: #34495e;">result matches neither f(x) nor −f(x)</td>
+      <td style="padding: 12px 15px; color: #34495e;">no symmetry of either type</td>
+      <td style="padding: 12px 15px; color: #34495e;">x² + x, eˣ, ln(x)</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-width:1px;"></hr>
+  // obj5 — comparison: injective / surjective / bijective
+  const obj5Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Property</th>
+      <th style="${tableHeaders.comparison}">Definition</th>
+      <th style="${tableHeaders.comparison}">Graphical test</th>
+      <th style="${tableHeaders.comparison}">Example (from ℝ to ℝ)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">One-to-one (injective)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">distinct inputs always give distinct outputs</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">horizontal line test — every horizontal line meets the graph at most once</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) = 2x + 5</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Onto (surjective)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every element of the codomain is achieved as an output</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every horizontal line at a codomain height meets the graph at least once</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) = x³</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Bijective</td>
+      <td style="padding: 12px 15px; color: #34495e;">both injective and surjective — a perfect pairing</td>
+      <td style="padding: 12px 15px; color: #34495e;">every horizontal line at a codomain height meets the graph exactly once</td>
+      <td style="padding: 12px 15px; color: #34495e;">f(x) = 3x − 7</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="color:blue;" />
+  // obj10 — comparison: local vs absolute extrema
+  const obj10Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Type</th>
+      <th style="${tableHeaders.comparison}">Definition</th>
+      <th style="${tableHeaders.comparison}">Scope</th>
+      <th style="${tableHeaders.comparison}">Existence guarantee</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Local max / min</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(c) is the largest / smallest value among nearby points</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a neighborhood of c</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">none in general — depends on the function</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Absolute (global) max / min</td>
+      <td style="padding: 12px 15px; color: #34495e;">f(c) is the largest / smallest value the function ever takes</td>
+      <td style="padding: 12px 15px; color: #34495e;">the entire domain</td>
+      <td style="padding: 12px 15px; color: #34495e;">guaranteed for continuous f on a closed, bounded interval (Extreme Value Theorem)</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+  // obj12 — aggregation: four types of discontinuity
+  const obj12Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Type</th>
+      <th style="${tableHeaders.aggregation}">What happens at the point</th>
+      <th style="${tableHeaders.aggregation}">Recoverable?</th>
+      <th style="${tableHeaders.aggregation}">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Removable (hole)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">limit exists but the function is undefined or differently valued there</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">yes — redefine f at the point</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x² − 1) ⁄ (x − 1) at x = 1</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Jump</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">left and right limits both exist but differ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no — the gap is structural</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">step or piecewise functions at a boundary</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Infinite</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">function diverges to ±∞ near the point</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no — produces a vertical asymptote</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 ⁄ x at x = 0</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Oscillating</td>
+      <td style="padding: 12px 15px; color: #34495e;">function oscillates infinitely without settling to any limit</td>
+      <td style="padding: 12px 15px; color: #34495e;">no — no limit exists</td>
+      <td style="padding: 12px 15px; color: #34495e;">sin(1 ⁄ x) near x = 0</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+  // obj13 — aggregation: three types of asymptotes
+  const obj13Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Type</th>
+      <th style="${tableHeaders.aggregation}">Form of the line</th>
+      <th style="${tableHeaders.aggregation}">When it occurs</th>
+      <th style="${tableHeaders.aggregation}">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Vertical</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = a</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) → ±∞ as x → a; cannot be crossed</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) = 1 ⁄ (x − 2) at x = 2</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Horizontal</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">y = L</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) → L as x → ±∞; may be crossed</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) = 1 ⁄ x has y = 0</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Oblique (slant)</td>
+      <td style="padding: 12px 15px; color: #34495e;">y = mx + b</td>
+      <td style="padding: 12px 15px; color: #34495e;">rational with numerator degree exactly one above denominator</td>
+      <td style="padding: 12px 15px; color: #34495e;">f(x) = (x² + 1) ⁄ x has y = x</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+  // obj19 — summary capstone: all properties at a glance
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Property</th>
+      <th style="${tableHeaders.summary}">What it means</th>
+      <th style="${tableHeaders.summary}">Visual signature on the graph</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Even</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(−x) = f(x) for every x in the domain</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">mirror symmetry about the y-axis</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Odd</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(−x) = −f(x) for every x in the domain</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">point symmetry about the origin</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">One-to-one</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">distinct inputs always give distinct outputs</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">passes the horizontal line test</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Onto</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">range covers the entire codomain</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every horizontal line at a codomain height meets the graph</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Bijective</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">both one-to-one and onto</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every horizontal line at a codomain height meets the graph exactly once</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Increasing on (a, b)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">larger inputs yield larger outputs on that interval</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">curve rises from left to right on (a, b)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Decreasing on (a, b)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">larger inputs yield smaller outputs on that interval</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">curve falls from left to right on (a, b)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Monotonic</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">moves in only one direction over the whole domain</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">curve never reverses — always rising or always falling</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Bounded</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">outputs stay within a fixed interval [m, M]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">graph confined between two horizontal lines</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Local extremum</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a peak or valley relative to nearby points</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">turning point where curve switches direction</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Absolute extremum</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the overall highest or lowest output on the entire domain</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the highest peak or lowest valley anywhere on the curve</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Continuous</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no breaks anywhere on the domain</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">curve can be drawn without lifting the pencil</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Has an asymptote</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">approaches a line at extremes or near a singular point</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">curve gets arbitrarily close to a vertical, horizontal, or slanted line</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Periodic</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x + p) = f(x) for some smallest period p</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a single pattern repeats unchanged every p units</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Has a zero at c</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(c) = 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">curve crosses or touches the x-axis at x = c</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Concave up</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rate of change is increasing on the interval</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">curve bends upward — bowl-shaped</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Concave down</td>
+      <td style="padding: 12px 15px; color: #34495e;">rate of change is decreasing on the interval</td>
+      <td style="padding: 12px 15px; color: #34495e;">curve bends downward — arch-shaped</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
-
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
- 
 
 // const sectionsContent = {
 
@@ -115,7 +348,9 @@
 
 // Most functions fall into the third category. The function $f(x) = x^2 + x$ satisfies $f(-x) = x^2 - x$, which equals neither $f(x)$ nor $-f(x)$.
 
-// For a function to be even or odd, its domain must be symmetric about the origin — if $x$ is in the domain, so is $-x$.`,
+// For a function to be even or odd, its domain must be symmetric about the origin — if $x$ is in the domain, so is $-x$.
+
+// The table below collects the three possible outcomes with the algebraic test, the graphical symmetry it implies, and a few examples for each.`,
 //     before: ``,
 //     after: ``,
 //     link: '',
@@ -187,7 +422,9 @@
 
 // Bijective functions have [inverses](!/functions/inverse) that are also bijective. The inverse reverses the pairing: if $f(a) = b$, then $f^{-1}(b) = a$. Both functions establish the same one-to-one correspondence, just read in opposite directions.
 
-// Bijections are fundamental in counting arguments. Two sets have the same size if and only if there exists a bijection between them.`,
+// Bijections are fundamental in counting arguments. Two sets have the same size if and only if there exists a bijection between them.
+
+// The table below sets the three related properties — one-to-one, onto, and bijective — side by side, each compared against the others by definition, graphical test, and a typical example.`,
 //     before: ``,
 //     after: ``,
 //     link: '',
@@ -281,7 +518,9 @@
 
 // On a closed, bounded interval, a continuous function always achieves both an absolute maximum and an absolute minimum. This is the Extreme Value Theorem. The extrema occur either at local extrema within the interval or at the endpoints.
 
-// To find absolute extrema on $[a, b]$: identify all local extrema in $(a, b)$, evaluate the function at these points and at the endpoints $a$ and $b$, and compare to find the largest and smallest values.`,
+// To find absolute extrema on $[a, b]$: identify all local extrema in $(a, b)$, evaluate the function at these points and at the endpoints $a$ and $b$, and compare to find the largest and smallest values.
+
+// The table below contrasts the two notions of extremum — local relative to a neighborhood, absolute relative to the entire domain — and shows when each is guaranteed to exist.`,
 //     before: ``,
 //     after: ``,
 //     link: '',
@@ -317,7 +556,7 @@
 
 // An oscillating discontinuity occurs when the function oscillates infinitely often near a point without settling to any limit. The function $f(x) = \\sin(1/x)$ near $x = 0$ is the classic example.
 
-// Identifying the type of discontinuity guides how to handle it — removable discontinuities can be eliminated by redefining the function; others cannot.`,
+// Identifying the type of discontinuity guides how to handle it — removable discontinuities can be eliminated by redefining the function; others cannot. The table below collects the four standard discontinuity types with the behavior that defines each.`,
 //     before: ``,
 //     after: ``,
 //     link: '',
@@ -335,7 +574,7 @@
 
 // A function can cross a horizontal or oblique asymptote; it describes limiting behavior, not a barrier. A function never crosses a vertical asymptote — the function is undefined there.
 
-// Asymptotes shape the large-scale structure of a graph, providing guidelines the curve follows at its extremes.`,
+// Asymptotes shape the large-scale structure of a graph, providing guidelines the curve follows at its extremes. The table below collects the three asymptote types with the form of the line, the condition that produces them, and a worked example.`,
 //     before: ``,
 //     after: ``,
 //     link: '',
@@ -441,724 +680,16 @@
 //     link: '',
 //   },
 
+//   obj19: {
+//     title: `Properties at a Glance`,
+//     content: `The properties covered on this page describe distinct facets of a function's character — its symmetry, its monotonicity, its boundaries, its limits, its turning points, and the shape of its bending. The table below collects each property with a one-line summary of what it means and the visual signature that reveals it on a graph — useful as a reference card or as a checklist when analyzing an unfamiliar function.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
 // }
 
-
-//  const introContent = {
-//   id: "intro",
-//   title: "The Character of Functions",
-//   content: `Functions differ not just in their formulas but in their fundamental character. Some are symmetric, others lopsided. Some climb steadily upward, others oscillate endlessly. Some approach boundaries they never cross, others explode toward infinity.
-
-// These traits — symmetry, monotonicity, boundedness, continuity, and others — are the properties that classify functions and predict their behavior. Knowing that a function is one-to-one guarantees an [inverse](!/functions/inverse) exists. Knowing that a function is periodic reveals its repetitive structure. Each property answers a specific question about how the function behaves.`
-// }
-
-
-
-//   const faqQuestions = {
-//     q1: {
-//       question: "How do you determine if a function is even or odd?",
-//       answer: "To test algebraically, substitute -x for x and simplify. If the result equals f(x), the function is even and symmetric about the y-axis. If it equals -f(x), the function is odd and symmetric about the origin. If neither condition holds, the function is neither even nor odd."
-//     },
-//     q2: {
-//       question: "What is a one-to-one function and why does it matter?",
-//       answer: "A function is one-to-one (injective) if different inputs always produce different outputs — no two x-values share the same y-value. This property matters because one-to-one functions are precisely those that have inverse functions. The horizontal line test identifies them graphically: if every horizontal line intersects the graph at most once, the function is one-to-one."
-//     },
-//     q3: {
-//       question: "What is the difference between local and absolute extrema?",
-//       answer: "A local extremum is a peak or valley relative to nearby points — the function is higher or lower than its immediate neighbors, but may be exceeded elsewhere. An absolute extremum is the overall highest or lowest value across the entire domain. On a closed bounded interval, a continuous function always achieves both an absolute maximum and minimum by the Extreme Value Theorem."
-//     },
-//     q4: {
-//       question: "What are the different types of asymptotes?",
-//       answer: "Vertical asymptotes are vertical lines x = a where the function's outputs grow without bound. Horizontal asymptotes are horizontal lines y = L that the graph approaches as x tends to positive or negative infinity. Oblique (slant) asymptotes are non-horizontal lines the graph approaches at its extremes, occurring in rational functions when the numerator's degree exceeds the denominator's by exactly one."
-//     },
-//     q5: {
-//       question: "What does it mean for a function to be continuous?",
-//       answer: "A function is continuous at a point if its graph has no break there — no jump, hole, or explosion to infinity. Formally, f is continuous at x = c if f(c) is defined, the limit of f(x) as x approaches c exists, and the limit equals f(c). Polynomials are continuous everywhere, while rational functions are continuous wherever defined — at every point except where the denominator is zero."
-//     },
-//   }
-
-//   const seoData = {
-//     title: "Properties of Functions | Learn Math Class",
-//     description: "Learn properties of functions: even and odd symmetry, one-to-one, monotonicity, continuity, asymptotes, end behavior, extrema, zeros, concavity, and more.",
-//     keywords: keyWords.join(", "),
-//     url: "/functions/properties",
-//     name: "Properties of Functions",
-//   }
-
-//   const schemas = {
-//     learningResource: {
-//       "@context": "https://schema.org",
-//       "@type": "LearningResource",
-//       "name": seoData.name,
-//       "description": seoData.description,
-//       "url": `https://www.learnmathclass.com${seoData.url}`,
-//       "datePublished": "2024-01-15",
-//       "dateModified": new Date().toISOString(),
-//       "inLanguage": "en-US",
-//       "author": {
-//         "@type": "Organization",
-//         "name": "Learn Math Class",
-//         "url": "https://www.learnmathclass.com"
-//       },
-//       "teaches": [
-//         "Even and odd function symmetry",
-//         "One-to-one and onto functions",
-//         "Increasing, decreasing, and monotonic functions",
-//         "Continuity and types of discontinuities",
-//         "Asymptotes and end behavior",
-//         "Local and absolute extrema",
-//       ],
-//     },
-//     breadcrumb: {
-//       "@context": "https://schema.org",
-//       "@type": "BreadcrumbList",
-//       "itemListElement": [
-//         {
-//           "@type": "ListItem",
-//           "position": 1,
-//           "name": "Home",
-//           "item": "https://www.learnmathclass.com"
-//         },
-//         {
-//           "@type": "ListItem",
-//           "position": 2,
-//           "name": "Functions",
-//           "item": "https://www.learnmathclass.com/functions"
-//         },
-//         {
-//           "@type": "ListItem",
-//           "position": 3,
-//           "name": seoData.name,
-//           "item": `https://www.learnmathclass.com${seoData.url}`
-//         },
-//       ]
-//     },
-//     faq: {
-//       "@context": "https://schema.org",
-//       "@type": "FAQPage",
-//       "mainEntity": [
-//         {
-//           "@type": "Question",
-//           "name": faqQuestions.q1.question,
-//           "acceptedAnswer": { "@type": "Answer", "text": faqQuestions.q1.answer }
-//         },
-//         {
-//           "@type": "Question",
-//           "name": faqQuestions.q2.question,
-//           "acceptedAnswer": { "@type": "Answer", "text": faqQuestions.q2.answer }
-//         },
-//         {
-//           "@type": "Question",
-//           "name": faqQuestions.q3.question,
-//           "acceptedAnswer": { "@type": "Answer", "text": faqQuestions.q3.answer }
-//         },
-//         {
-//           "@type": "Question",
-//           "name": faqQuestions.q4.question,
-//           "acceptedAnswer": { "@type": "Answer", "text": faqQuestions.q4.answer }
-//         },
-//         {
-//           "@type": "Question",
-//           "name": faqQuestions.q5.question,
-//           "acceptedAnswer": { "@type": "Answer", "text": faqQuestions.q5.answer }
-//         },
-//       ]
-//     },
-//   }
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//          faqQuestions,
-//          schemas,
-//           seoData: {
-//         title: "Properties of Functions | Learn Math Class",
-//         description: "Learn properties of functions: even and odd symmetry, one-to-one, monotonicity, continuity, asymptotes, end behavior, extrema, zeros, concavity, and more.",
-//         keywords: keyWords.join(", "),
-//         url: "/functions/properties",
-//          name: "Properties of Functions"
-//       },
-//        }
-//     }
-//    }
-
-// export default function PropertiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-
-
-//   const genericSections=[
-//      {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     {
-//         id:'11',
-//         title:sectionsContent.obj11.title,
-//         link:sectionsContent.obj11.link,
-//         content:[
-//           sectionsContent.obj11.content,
-//         ]
-//     },
-//     {
-//         id:'12',
-//         title:sectionsContent.obj12.title,
-//         link:sectionsContent.obj12.link,
-//         content:[
-//           sectionsContent.obj12.content,
-//         ]
-//     },
-//     {
-//         id:'13',
-//         title:sectionsContent.obj13.title,
-//         link:sectionsContent.obj13.link,
-//         content:[
-//           sectionsContent.obj13.content,
-//         ]
-//     },
-//     {
-//         id:'14',
-//         title:sectionsContent.obj14.title,
-//         link:sectionsContent.obj14.link,
-//         content:[
-//           sectionsContent.obj14.content,
-//         ]
-//     },
-//     {
-//         id:'15',
-//         title:sectionsContent.obj15.title,
-//         link:sectionsContent.obj15.link,
-//         content:[
-//           sectionsContent.obj15.content,
-//         ]
-//     },
-//     {
-//         id:'16',
-//         title:sectionsContent.obj16.title,
-//         link:sectionsContent.obj16.link,
-//         content:[
-//           sectionsContent.obj16.content,
-//         ]
-//     },
-//     {
-//         id:'17',
-//         title:sectionsContent.obj17.title,
-//         link:sectionsContent.obj17.link,
-//         content:[
-//           sectionsContent.obj17.content,
-//         ]
-//     },
-//     {
-//         id:'18',
-//         title:sectionsContent.obj18.title,
-//         link:sectionsContent.obj18.link,
-//         content:[
-//           sectionsContent.obj18.content,
-//         ]
-//     },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-
-// ]
-
-//   return (
-//    <>
-//    <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-
-//   <meta name="robots" content="index, follow" />
-
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.learningResource) }}
-//   />
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
-//   />
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar
-//            side='right'
-//            // topOffset='65px'
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          />
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Properties of Functions</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//        <KeyTermsCard
-//      id="0"
-//      title={sectionsContent.obj0.title}
-//      content={sectionsContent.obj0.content}
-//      after={sectionsContent.obj0.after}
-//      variant="light"
-//    />
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-
-  const keyWords=[
-    'properties of functions',
-    'even odd functions',
-    'function symmetry',
-    'one-to-one function',
-    'increasing decreasing functions',
-    'function continuity',
-    'asymptotes',
-    'end behavior of functions',
-    'local extrema',
-    'function zeros',
-    'monotonic functions',
-    'concavity',
-    'bounded functions',
-    'periodic functions',
-  ]
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-
-  // ---------- TABLES ----------
-
-  // obj1 — comparison: even / odd / neither
-  const obj1Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Category</th>
-      <th style="${tableHeaders.comparison}">Algebraic test on f(−x)</th>
-      <th style="${tableHeaders.comparison}">Graphical symmetry</th>
-      <th style="${tableHeaders.comparison}">Examples</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Even</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(−x) = f(x)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">mirror symmetry about the y-axis</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x², x⁴, |x|, cos(x)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Odd</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(−x) = −f(x)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">point symmetry about the origin</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x, x³, x⁵, sin(x)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Neither</td>
-      <td style="padding: 12px 15px; color: #34495e;">result matches neither f(x) nor −f(x)</td>
-      <td style="padding: 12px 15px; color: #34495e;">no symmetry of either type</td>
-      <td style="padding: 12px 15px; color: #34495e;">x² + x, eˣ, ln(x)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj5 — comparison: injective / surjective / bijective
-  const obj5Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Property</th>
-      <th style="${tableHeaders.comparison}">Definition</th>
-      <th style="${tableHeaders.comparison}">Graphical test</th>
-      <th style="${tableHeaders.comparison}">Example (from ℝ to ℝ)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">One-to-one (injective)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">distinct inputs always give distinct outputs</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">horizontal line test — every horizontal line meets the graph at most once</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) = 2x + 5</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Onto (surjective)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every element of the codomain is achieved as an output</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every horizontal line at a codomain height meets the graph at least once</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) = x³</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Bijective</td>
-      <td style="padding: 12px 15px; color: #34495e;">both injective and surjective — a perfect pairing</td>
-      <td style="padding: 12px 15px; color: #34495e;">every horizontal line at a codomain height meets the graph exactly once</td>
-      <td style="padding: 12px 15px; color: #34495e;">f(x) = 3x − 7</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj10 — comparison: local vs absolute extrema
-  const obj10Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Type</th>
-      <th style="${tableHeaders.comparison}">Definition</th>
-      <th style="${tableHeaders.comparison}">Scope</th>
-      <th style="${tableHeaders.comparison}">Existence guarantee</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Local max / min</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(c) is the largest / smallest value among nearby points</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a neighborhood of c</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">none in general — depends on the function</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Absolute (global) max / min</td>
-      <td style="padding: 12px 15px; color: #34495e;">f(c) is the largest / smallest value the function ever takes</td>
-      <td style="padding: 12px 15px; color: #34495e;">the entire domain</td>
-      <td style="padding: 12px 15px; color: #34495e;">guaranteed for continuous f on a closed, bounded interval (Extreme Value Theorem)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj12 — aggregation: four types of discontinuity
-  const obj12Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Type</th>
-      <th style="${tableHeaders.aggregation}">What happens at the point</th>
-      <th style="${tableHeaders.aggregation}">Recoverable?</th>
-      <th style="${tableHeaders.aggregation}">Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Removable (hole)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">limit exists but the function is undefined or differently valued there</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">yes — redefine f at the point</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x² − 1) ⁄ (x − 1) at x = 1</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Jump</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">left and right limits both exist but differ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no — the gap is structural</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">step or piecewise functions at a boundary</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Infinite</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">function diverges to ±∞ near the point</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no — produces a vertical asymptote</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 ⁄ x at x = 0</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Oscillating</td>
-      <td style="padding: 12px 15px; color: #34495e;">function oscillates infinitely without settling to any limit</td>
-      <td style="padding: 12px 15px; color: #34495e;">no — no limit exists</td>
-      <td style="padding: 12px 15px; color: #34495e;">sin(1 ⁄ x) near x = 0</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj13 — aggregation: three types of asymptotes
-  const obj13Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Type</th>
-      <th style="${tableHeaders.aggregation}">Form of the line</th>
-      <th style="${tableHeaders.aggregation}">When it occurs</th>
-      <th style="${tableHeaders.aggregation}">Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Vertical</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = a</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) → ±∞ as x → a; cannot be crossed</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) = 1 ⁄ (x − 2) at x = 2</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Horizontal</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">y = L</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) → L as x → ±∞; may be crossed</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) = 1 ⁄ x has y = 0</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Oblique (slant)</td>
-      <td style="padding: 12px 15px; color: #34495e;">y = mx + b</td>
-      <td style="padding: 12px 15px; color: #34495e;">rational with numerator degree exactly one above denominator</td>
-      <td style="padding: 12px 15px; color: #34495e;">f(x) = (x² + 1) ⁄ x has y = x</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj19 — summary capstone: all properties at a glance
-  const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Property</th>
-      <th style="${tableHeaders.summary}">What it means</th>
-      <th style="${tableHeaders.summary}">Visual signature on the graph</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Even</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(−x) = f(x) for every x in the domain</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">mirror symmetry about the y-axis</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Odd</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(−x) = −f(x) for every x in the domain</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">point symmetry about the origin</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">One-to-one</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">distinct inputs always give distinct outputs</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">passes the horizontal line test</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Onto</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">range covers the entire codomain</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every horizontal line at a codomain height meets the graph</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Bijective</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">both one-to-one and onto</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every horizontal line at a codomain height meets the graph exactly once</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Increasing on (a, b)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">larger inputs yield larger outputs on that interval</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">curve rises from left to right on (a, b)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Decreasing on (a, b)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">larger inputs yield smaller outputs on that interval</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">curve falls from left to right on (a, b)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Monotonic</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">moves in only one direction over the whole domain</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">curve never reverses — always rising or always falling</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Bounded</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">outputs stay within a fixed interval [m, M]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">graph confined between two horizontal lines</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Local extremum</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a peak or valley relative to nearby points</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">turning point where curve switches direction</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Absolute extremum</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the overall highest or lowest output on the entire domain</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the highest peak or lowest valley anywhere on the curve</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Continuous</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no breaks anywhere on the domain</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">curve can be drawn without lifting the pencil</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Has an asymptote</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">approaches a line at extremes or near a singular point</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">curve gets arbitrarily close to a vertical, horizontal, or slanted line</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Periodic</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x + p) = f(x) for some smallest period p</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a single pattern repeats unchanged every p units</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Has a zero at c</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(c) = 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">curve crosses or touches the x-axis at x = c</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Concave up</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rate of change is increasing on the interval</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">curve bends upward — bowl-shaped</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Concave down</td>
-      <td style="padding: 12px 15px; color: #34495e;">rate of change is decreasing on the interval</td>
-      <td style="padding: 12px 15px; color: #34495e;">curve bends downward — arch-shaped</td>
-    </tr>
-  </tbody>
-</table>
-`
 
 
 const sectionsContent = {
@@ -1193,11 +724,29 @@ const sectionsContent = {
 
   obj1: {
     title: `Even and Odd Functions`,
-    content: `A function is even if $f(-x) = f(x)$ for every $x$ in its [domain](!/functions/domain). Replacing $x$ with $-x$ leaves the output unchanged. The [graph](!/functions/graphs) is symmetric about the $y$-axis — the left half mirrors the right.
+    content: `A function is even if its output is unchanged under negation of the input, for every $x$ in its [domain](!/functions/domain):
+
+@academic[formula_callout:Even Function Test
+$$f(-x) = f(x) \\quad \\text{for all } x \\in \\text{Dom}(f)$$
+/functions/formulas#even_function_test]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
+
+The [graph](!/functions/graphs) is symmetric about the $y$-axis — the left half mirrors the right.
 
 The function $f(x) = x^2$ is even: $f(-x) = (-x)^2 = x^2 = f(x)$. So are $f(x) = |x|$, $f(x) = x^4$, and $f(x) = \\cos(x)$.
 
-A function is odd if $f(-x) = -f(x)$ for every $x$ in its domain. Replacing $x$ with $-x$ negates the output. The graph is symmetric about the origin — rotating it $180°$ around the origin produces the same curve.
+A function is odd if its output is negated when the input is negated:
+
+@academic[formula_callout:Odd Function Test
+$$f(-x) = -f(x) \\quad \\text{for all } x \\in \\text{Dom}(f)$$
+/functions/formulas#odd_function_test]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
+
+The graph is symmetric about the origin — rotating it $180°$ around the origin produces the same curve.
 
 The function $f(x) = x^3$ is odd: $f(-x) = (-x)^3 = -x^3 = -f(x)$. So are $f(x) = x$, $f(x) = x^5$, and $f(x) = \\sin(x)$.
 
@@ -1497,7 +1046,12 @@ Zeros are fundamental in equation solving, factoring, and sign analysis. Knowing
     title: `Average Rate of Change`,
     content: `The average rate of change of a function over an interval $[a, b]$ measures how much the output changes per unit of input:
 
-$$\\text{Average rate of change} = \\frac{f(b) - f(a)}{b - a}$$
+@academic[formula_callout:Average Rate of Change
+$$\\frac{f(b) - f(a)}{b - a}$$
+/functions/formulas#average_rate_of_change]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
 
 This is the slope of the secant line connecting the points $(a, f(a))$ and $(b, f(b))$ on the [graph](!/functions/graphs).
 
@@ -1546,7 +1100,6 @@ Full analysis of concavity uses calculus — specifically, the second derivative
   },
 
 }
-
 
  const introContent = {
   id: "intro",

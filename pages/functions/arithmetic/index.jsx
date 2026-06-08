@@ -64,7 +64,7 @@ export async function getStaticProps(){
 
   // obj8 — aggregation: domain rule for each of the four operations
   const obj8Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Operation</th>
@@ -99,7 +99,7 @@ export async function getStaticProps(){
 
   // obj9 — comparison: sum vs product behavior across sign cases of f and g
   const obj9Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.comparison}">Sign case</th>
@@ -134,7 +134,7 @@ export async function getStaticProps(){
 
   // obj13 — summary capstone: the four operations side by side
   const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.summary}">Operation</th>
@@ -173,6 +173,302 @@ export async function getStaticProps(){
 `
 
   // ---------- SECTIONS ----------
+
+// const sectionsContent = {
+
+
+//   obj0 : {
+//   title: `Key Terms`,
+//   content: `
+// • [Function](!/functions/definitions#function) — the objects being combined through arithmetic operations
+// • [Domain](!/functions/definitions#domain) — the combined domain is the intersection of both component domains, minus denominator zeros for quotients
+// • [Composition of Functions](!/functions/definitions#composition_of_functions) — a different operation: chaining functions in sequence rather than combining outputs
+// • [Zero of a Function](!/functions/definitions#zero_of_a_function) — zeros of components determine zeros of products and sign changes of quotients
+// `,
+//   before: ``,
+//   after: `
+ 
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Function Definitions](!/functions/definitions) →@`,
+//   link: '',
+// },
+ 
+
+//   obj1: {
+//     title: `Combining Functions with Operations`,
+//     content: `Functions combine through arithmetic operations just as numbers do. Given two functions $f$ and $g$, their sum, difference, product, and quotient are new functions defined pointwise — by performing the operation on the outputs at each input.
+
+// The operations act on outputs, not on inputs. To find $(f + g)(3)$, evaluate $f(3)$ and $g(3)$ separately, then add the results. The input $3$ passes through both functions; their outputs combine.
+
+// This pointwise definition means that combining functions produces new functions. If $f(x) = x^2$ and $g(x) = 3x$, then $(f + g)(x) = x^2 + 3x$ is a single function with its own formula, [graph](!/functions/graphs), and [properties](!/functions/properties).
+
+// The four arithmetic operations — addition, subtraction, multiplication, and division — each have their own notation and rules. All share the principle: operate on outputs while the input remains the same.
+
+// These combinations differ from [composition](!/functions/composition), which chains functions together rather than combining their outputs. Arithmetic combines outputs at the same input; composition feeds the output of one function into the input of another.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj2: {
+//     title: `Sum of Functions`,
+//     content: `The sum of two functions $f$ and $g$ is the function $(f + g)$ defined by:
+
+// $$(f + g)(x) = f(x) + g(x)$$
+
+// At each input $x$, evaluate both functions and add their outputs.
+
+// If $f(x) = x^2$ and $g(x) = 5x - 3$, then:
+
+// $$(f + g)(x) = x^2 + 5x - 3$$
+
+// To evaluate at a specific point, say $x = 2$:
+
+// $$(f + g)(2) = f(2) + g(2) = 4 + 7 = 11$$
+
+// The same result comes from the combined formula: $4 + 10 - 3 = 11$.
+
+// Addition is commutative: $f + g = g + f$. It is also associative: $(f + g) + h = f + (g + h)$. These properties mirror the arithmetic of numbers.
+
+// Sums of functions appear throughout applications. Total cost is fixed cost plus variable cost. Combined revenue is revenue from product A plus revenue from product B. Net force is the sum of individual forces.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj3: {
+//     title: `Difference of Functions`,
+//     content: `The difference of two functions $f$ and $g$ is the function $(f - g)$ defined by:
+
+// $$(f - g)(x) = f(x) - g(x)$$
+
+// At each input $x$, evaluate both functions and subtract the second from the first.
+
+// If $f(x) = 3x + 7$ and $g(x) = x^2$, then:
+
+// $$(f - g)(x) = 3x + 7 - x^2 = -x^2 + 3x + 7$$
+
+// Order matters. The function $f - g$ is not the same as $g - f$. If $(f - g)(x) = -x^2 + 3x + 7$, then $(g - f)(x) = x^2 - 3x - 7$. The outputs are negatives of each other:
+
+// $$(g - f)(x) = -(f - g)(x)$$
+
+// Subtraction is neither commutative nor associative. Care with order and grouping is essential.
+
+// Differences of functions model comparisons. Profit is revenue minus cost. Net change is final value minus initial value. The gap between two quantities is the difference of the functions measuring them.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj4: {
+//     title: `Product of Functions`,
+//     content: `The product of two functions $f$ and $g$ is the function $(f \\cdot g)$ or $(fg)$ defined by:
+
+// $$(f \\cdot g)(x) = f(x) \\cdot g(x)$$
+
+// At each input $x$, evaluate both functions and multiply their outputs.
+
+// If $f(x) = x + 2$ and $g(x) = x - 3$, then:
+
+// $$(fg)(x) = (x + 2)(x - 3) = x^2 - x - 6$$
+
+// The product of two linear functions is a quadratic. The product of two polynomials is a polynomial whose degree is the sum of the degrees.
+
+// Multiplication is commutative: $fg = gf$. It is associative: $(fg)h = f(gh)$. It distributes over addition: $f(g + h) = fg + fh$.
+
+// Products of functions arise in area calculations (length times width), in physics (mass times acceleration), and in probability (independent probabilities multiply). When two quantities combine multiplicatively, their functions multiply.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj5: {
+//     title: `Quotient of Functions`,
+//     content: `The quotient of two functions $f$ and $g$ is the function $(f/g)$ defined by:
+
+// $$\\left(\\frac{f}{g}\\right)(x) = \\frac{f(x)}{g(x)}$$
+
+// At each input $x$, evaluate both functions and divide the first output by the second.
+
+// If $f(x) = x^2 - 1$ and $g(x) = x + 1$, then:
+
+// $$\\left(\\frac{f}{g}\\right)(x) = \\frac{x^2 - 1}{x + 1} = \\frac{(x-1)(x+1)}{x+1} = x - 1$$
+
+// provided $x \\neq -1$.
+
+// Division introduces a critical restriction: the denominator cannot be zero. Even if the simplified form appears to have no restriction, the original quotient is undefined where $g(x) = 0$. The function $(f/g)$ has a hole at $x = -1$, not a continuous extension.
+
+// Division is neither commutative nor associative. The quotient $f/g$ differs from $g/f$ unless both equal $1$.
+
+// Quotients of functions model rates and ratios. Average cost is total cost divided by quantity. Speed is distance divided by time. Efficiency is output divided by input.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj6: {
+//     title: `Notation and Evaluation at a Point`,
+//     content: `The notations $(f + g)(x)$ and $f(x) + g(x)$ mean the same thing. The first emphasizes that $f + g$ is itself a function; the second emphasizes the operation on outputs. Both describe the same value.
+
+// Evaluating a combined function at a specific input can proceed two ways.
+
+// Method 1: Evaluate each function separately, then combine.
+
+// For $(f - g)(4)$ where $f(x) = x^2$ and $g(x) = 2x + 1$:
+
+// $$f(4) = 16, \\quad g(4) = 9$$
+// $$(f - g)(4) = 16 - 9 = 7$$
+
+// Method 2: Find the combined formula first, then evaluate.
+
+// $$(f - g)(x) = x^2 - 2x - 1$$
+// $$(f - g)(4) = 16 - 8 - 1 = 7$$
+
+// Both methods yield the same result. The first is often faster for a single evaluation; the second is necessary when working with the combined function repeatedly.
+
+// When functions are given as tables or [graphs](!/functions/graphs), only Method 1 applies directly — look up each function value and combine.
+
+// The table below sets the two methods side by side and notes when each is most efficient.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj7: {
+//     title: `Domain of Combined Functions`,
+//     content: `The [domain](!/functions/domain) of a combined function is restricted to inputs that work for both component functions. An input must be in the domain of $f$ and in the domain of $g$ for the combination to be defined.
+
+// For sums, differences, and products:
+
+// $$\\text{Domain of } f + g, f - g, f \\cdot g = \\text{Domain of } f \\cap \\text{Domain of } g$$
+
+// The intersection ensures both functions can be evaluated.
+
+// If $f(x) = \\sqrt{x}$ with domain $[0, \\infty)$ and $g(x) = \\sqrt{4 - x}$ with domain $(-\\infty, 4]$, then:
+
+// $$\\text{Domain of } f + g = [0, \\infty) \\cap (-\\infty, 4] = [0, 4]$$
+
+// Only inputs from $0$ to $4$ lie in both domains.
+
+// Different component functions can shrink the combined domain dramatically. If $f$ is defined for $x > 0$ and $g$ is defined for $x < 0$, their intersection is empty — the combined function has no valid inputs.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj8: {
+//     title: `Additional Restrictions for Quotient`,
+//     content: `The quotient $f/g$ inherits all the restrictions of both $f$ and $g$, plus one more: the denominator $g(x)$ cannot equal zero.
+
+// $$\\text{Domain of } \\frac{f}{g} = (\\text{Domain of } f \\cap \\text{Domain of } g) \\setminus \\{x : g(x) = 0\\}$$
+
+// Start with the intersection of domains, then remove any points where $g$ equals zero.
+
+// If $f(x) = x + 3$ and $g(x) = x^2 - 4$, both have domain $(-\\infty, \\infty)$. The intersection is all real numbers. But $g(x) = 0$ when $x = 2$ or $x = -2$. So:
+
+// $$\\text{Domain of } \\frac{f}{g} = (-\\infty, -2) \\cup (-2, 2) \\cup (2, \\infty)$$
+
+// Even if the quotient simplifies algebraically to a function with no apparent restriction, the original domain exclusions remain. The quotient $\\dfrac{x^2 - 1}{x - 1} = x + 1$ simplifies, but the domain still excludes $x = 1$. The [graph](!/functions/graphs) has a hole at $(1, 2)$.
+
+// The table below collects the domain rule for each of the four operations, making the quotient's extra restriction visible at a glance.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj9: {
+//     title: `Graphical Interpretation`,
+//     content: `Combining functions graphically means combining their heights at each $x$-value.
+
+// For the sum $f + g$, the height of the combined graph at any $x$ equals the sum of the heights of $f$ and $g$ at that $x$. If $f(3) = 2$ and $g(3) = 5$, then $(f + g)(3) = 7$. The point $(3, 7)$ lies on the graph of $f + g$.
+
+// Where both functions are positive, the sum is higher than either. Where one is positive and one is negative, they partially cancel. Where both are negative, the sum is more negative than either.
+
+// For the product $fg$, the height at $x$ is $f(x) \\cdot g(x)$. Where both are positive or both are negative, the product is positive. Where they have opposite signs, the product is negative. Where either equals zero, the product equals zero — the [zeros](!/functions/properties) of $f$ and $g$ are zeros of $fg$.
+
+// Graphing combined functions by hand is labor-intensive — each point requires reading two values and computing. But the concept clarifies what the algebra produces: a new curve whose shape emerges from the interaction of two others.
+
+// The table below sets sum and product behaviors side by side across the possible sign cases of $f$ and $g$.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj10: {
+//     title: `Algebraic Simplification`,
+//     content: `Combined functions often simplify to cleaner forms. Simplification makes evaluation easier and reveals structure.
+
+// For sums and differences, combine like terms:
+
+// $$(3x^2 + 2x - 1) + (x^2 - 5x + 4) = 4x^2 - 3x + 3$$
+
+// For products, distribute and combine:
+
+// $$(x + 3)(x - 2) = x^2 + x - 6$$
+
+// For quotients, factor and reduce when possible:
+
+// $$\\frac{x^2 - 9}{x + 3} = \\frac{(x-3)(x+3)}{x+3} = x - 3 \\quad (x \\neq -3)$$
+
+// Simplification must respect domain restrictions. The reduced form $x - 3$ appears defined everywhere, but the original quotient excludes $x = -3$. The simplified function still has a hole at that point.
+
+// Simplified forms make further analysis easier — finding [zeros](!/functions/properties), identifying [end behavior](!/functions/properties), computing additional values. They also reveal when two apparently different expressions define the same function.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj11: {
+//     title: `Building Complex Functions`,
+//     content: `Simple functions combine to build complex ones. Understanding the components reveals the structure of the whole.
+
+// The function $h(x) = x^2 + 3x - 5$ can be viewed as the sum of $f(x) = x^2$, $g(x) = 3x$, and $k(x) = -5$. Each component contributes: the parabolic shape from $x^2$, the linear tilt from $3x$, the vertical shift from $-5$.
+
+// The function $h(x) = (x - 2)(x + 5)$ is a product of two linear functions. Its zeros come directly from its factors: $x = 2$ and $x = -5$. Its graph is a parabola opening upward.
+
+// Breaking a function into simpler pieces aids both analysis and construction. To model a situation, identify the contributing factors, express each as a function, and combine appropriately.
+
+// Revenue depends on price and quantity: $R = p \\cdot q$. If price is $p(x) = 50 - 2x$ and quantity is $q(x) = x$, then revenue is $R(x) = (50 - 2x) \\cdot x = 50x - 2x^2$. The combined function inherits meaning from its components.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj12: {
+//     title: `Applications in Context`,
+//     content: `Function arithmetic models real-world combinations of quantities.
+
+// Profit equals revenue minus cost. If $R(x)$ gives revenue from selling $x$ units and $C(x)$ gives the cost of producing them:
+
+// $$P(x) = R(x) - C(x)$$
+
+// Profit is positive when revenue exceeds cost, negative when cost exceeds revenue, and zero at break-even points where $R(x) = C(x)$.
+
+// Average cost is total cost divided by quantity:
+
+// $$\\bar{C}(x) = \\frac{C(x)}{x}$$
+
+// This quotient is undefined at $x = 0$ (no items produced) and describes cost per unit at each production level.
+
+// Combined distance from two moving objects involves sums or differences depending on direction. If $d_1(t)$ and $d_2(t)$ give positions at time $t$, the gap between them is $|d_1(t) - d_2(t)|$.
+
+// Population models might add birth rate function and subtract death rate function to model net growth. Economic models add multiple income streams or subtract expenses from revenue.
+
+// In each case, the arithmetic of functions translates the arithmetic of the situation. What combines additively in reality combines additively in the model.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj13: {
+//     title: `The Four Operations at a Glance`,
+//     content: `The four arithmetic operations on functions cover the same essential pattern — combine outputs pointwise — but each has its own properties, restrictions, and idiomatic forms. The table below collects all four side by side as a reference card: the pointwise definition, the key algebraic properties, and an example of the combined formula. Use it to check at a glance which operations are commutative, which need an extra domain caution, and what kind of expression to expect from each.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+// }
+
 
 const sectionsContent = {
 
@@ -213,7 +509,12 @@ These combinations differ from [composition](!/functions/composition), which cha
     title: `Sum of Functions`,
     content: `The sum of two functions $f$ and $g$ is the function $(f + g)$ defined by:
 
+@academic[formula_callout:Sum of Functions
 $$(f + g)(x) = f(x) + g(x)$$
+/functions/formulas#sum_of_functions]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
 
 At each input $x$, evaluate both functions and add their outputs.
 
@@ -239,7 +540,12 @@ Sums of functions appear throughout applications. Total cost is fixed cost plus 
     title: `Difference of Functions`,
     content: `The difference of two functions $f$ and $g$ is the function $(f - g)$ defined by:
 
+@academic[formula_callout:Difference of Functions
 $$(f - g)(x) = f(x) - g(x)$$
+/functions/formulas#difference_of_functions]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
 
 At each input $x$, evaluate both functions and subtract the second from the first.
 
@@ -263,7 +569,12 @@ Differences of functions model comparisons. Profit is revenue minus cost. Net ch
     title: `Product of Functions`,
     content: `The product of two functions $f$ and $g$ is the function $(f \\cdot g)$ or $(fg)$ defined by:
 
-$$(f \\cdot g)(x) = f(x) \\cdot g(x)$$
+@academic[formula_callout:Product of Functions
+$$(fg)(x) = f(x) \\cdot g(x)$$
+/functions/formulas#product_of_functions]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
 
 At each input $x$, evaluate both functions and multiply their outputs.
 
@@ -285,7 +596,12 @@ Products of functions arise in area calculations (length times width), in physic
     title: `Quotient of Functions`,
     content: `The quotient of two functions $f$ and $g$ is the function $(f/g)$ defined by:
 
+@academic[formula_callout:Quotient of Functions
 $$\\left(\\frac{f}{g}\\right)(x) = \\frac{f(x)}{g(x)}$$
+/functions/formulas#quotient_of_functions]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
 
 At each input $x$, evaluate both functions and divide the first output by the second.
 
@@ -339,7 +655,12 @@ The table below sets the two methods side by side and notes when each is most ef
 
 For sums, differences, and products:
 
-$$\\text{Domain of } f + g, f - g, f \\cdot g = \\text{Domain of } f \\cap \\text{Domain of } g$$
+@academic[formula_callout:Domain of a Combined Function
+$$\\text{Dom}(f + g) = \\text{Dom}(f - g) = \\text{Dom}(fg) = \\text{Dom}(f) \\cap \\text{Dom}(g)$$
+/functions/formulas#domain_of_a_combined_function]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
 
 The intersection ensures both functions can be evaluated.
 
@@ -359,7 +680,12 @@ Different component functions can shrink the combined domain dramatically. If $f
     title: `Additional Restrictions for Quotient`,
     content: `The quotient $f/g$ inherits all the restrictions of both $f$ and $g$, plus one more: the denominator $g(x)$ cannot equal zero.
 
-$$\\text{Domain of } \\frac{f}{g} = (\\text{Domain of } f \\cap \\text{Domain of } g) \\setminus \\{x : g(x) = 0\\}$$
+@academic[formula_callout:Domain of a Quotient
+$$\\text{Dom}\\!\\left(\\frac{f}{g}\\right) = \\bigl(\\text{Dom}(f) \\cap \\text{Dom}(g)\\bigr) \\setminus \\{x : g(x) = 0\\}$$
+/functions/formulas#domain_of_a_quotient]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
 
 Start with the intersection of domains, then remove any points where $g$ equals zero.
 
@@ -468,6 +794,9 @@ In each case, the arithmetic of functions translates the arithmetic of the situa
   },
 
 }
+
+
+
  const introContent = {
   id: "intro",
   title: "Building Functions from Functions",

@@ -36,7 +36,7 @@ export async function getStaticProps(){
 
   // obj4 — aggregation: sign analysis (positive, negative, zero)
   const obj4Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Sign condition</th>
@@ -70,7 +70,7 @@ export async function getStaticProps(){
 
   // obj8 — aggregation: four end-behavior possibilities
   const obj8Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Behavior</th>
@@ -110,7 +110,7 @@ export async function getStaticProps(){
 
   // obj9 — aggregation: graph feature mapped to typical real-world meaning
   const obj9Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Graph feature</th>
@@ -155,7 +155,7 @@ export async function getStaticProps(){
 
   // obj10 — comparison: equation vs table vs graph
   const obj10Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.comparison}">Representation</th>
@@ -189,7 +189,7 @@ export async function getStaticProps(){
 
   // obj11 — summary capstone: complete function-analysis workflow
   const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.summary}">Feature</th>
@@ -253,6 +253,25 @@ export async function getStaticProps(){
       <td style="padding: 12px 15px; color: #34495e;">examine the leading term, or the far ends of the graph</td>
       <td style="padding: 12px 15px; color: #34495e;">f(x) → ∞ at both ends</td>
     </tr>
+  </tbody>
+</table>
+`
+
+
+const obj10MiniTable = `
+<table style="border-collapse: collapse; margin: 16px auto; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; color: #34495e;">
+  <thead>
+    <tr style="background: #f5f7fa;">
+      <th style="padding: 6px 16px; border: 1px solid #e1e4e8; font-weight: 600; color: #06357a; text-align: center;">x</th>
+      <th style="padding: 6px 16px; border: 1px solid #e1e4e8; font-weight: 600; color: #06357a; text-align: center;">f(x)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">&minus;2</td><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">0</td></tr>
+    <tr><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">&minus;1</td><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">&minus;6</td></tr>
+    <tr><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">0</td><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">&minus;8</td></tr>
+    <tr><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">1</td><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">&minus;6</td></tr>
+    <tr><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">2</td><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">0</td></tr>
   </tbody>
 </table>
 `
@@ -471,23 +490,46 @@ The table below collects the principal graph features along with what they typic
     link: '',
   },
 
-  obj10: {
-    title: `Comparing Functions Across Representations`,
-    content: `The same function can appear as an equation, a table, or a graph. Each representation reveals different aspects most clearly.
+//   obj10: {
+//     title: `Comparing Functions Across Representations`,
+//     content: `The same function can appear as an equation, a table, or a graph. Each representation reveals different aspects most clearly.
+
+// The equation $f(x) = 2x^2 - 8$ shows algebraic structure. The coefficient $2$ indicates vertical stretch. The constant $-8$ shifts the vertex down. Solving $f(x) = 0$ gives the zeros exactly: $x = \\pm 2$.
+
+// A table of values shows specific input-output pairs:
+
+// | $x$ | $f(x)$ |
+// |-----|--------|
+// | $-2$ | $0$ |
+// | $-1$ | $-6$ |
+// | $0$ | $-8$ |
+// | $1$ | $-6$ |
+// | $2$ | $0$ |
+
+// The table confirms the zeros, shows the minimum at $x = 0$, and reveals the symmetry between negative and positive inputs.
+
+// The graph shows shape at a glance: a parabola opening upward, vertex at $(0, -8)$, crossing the axis at $\\pm 2$, symmetric about the $y$-axis.
+
+// Converting between representations tests understanding. Can you sketch the graph from the equation? Can you write the equation from the graph? Can you fill in missing table entries from either?
+
+// Different questions favor different representations. "What is $f(3)$?" is fastest from the equation. "Is the function increasing at $x = 1$?" is clearest from the graph. "What is the exact output when input is $-1$?" may be easiest from a table that includes that value.
+
+// Fluency means moving freely among all three, recognizing the same function in each form.
+
+// The table below collects the three representations side by side with what each reveals most clearly and the kind of question each answers best.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+obj10: {
+  title: `Comparing Functions Across Representations`,
+  content: `The same function can appear as an equation, a table, or a graph. Each representation reveals different aspects most clearly.
 
 The equation $f(x) = 2x^2 - 8$ shows algebraic structure. The coefficient $2$ indicates vertical stretch. The constant $-8$ shifts the vertex down. Solving $f(x) = 0$ gives the zeros exactly: $x = \\pm 2$.
 
-A table of values shows specific input-output pairs:
-
-| $x$ | $f(x)$ |
-|-----|--------|
-| $-2$ | $0$ |
-| $-1$ | $-6$ |
-| $0$ | $-8$ |
-| $1$ | $-6$ |
-| $2$ | $0$ |
-
-The table confirms the zeros, shows the minimum at $x = 0$, and reveals the symmetry between negative and positive inputs.
+A table of values shows specific input-output pairs:`,
+  contentAfter: `The table confirms the zeros, shows the minimum at $x = 0$, and reveals the symmetry between negative and positive inputs.
 
 The graph shows shape at a glance: a parabola opening upward, vertex at $(0, -8)$, crossing the axis at $\\pm 2$, symmetric about the $y$-axis.
 
@@ -498,12 +540,13 @@ Different questions favor different representations. "What is $f(3)$?" is fastes
 Fluency means moving freely among all three, recognizing the same function in each form.
 
 The table below collects the three representations side by side with what each reveals most clearly and the kind of question each answers best.`,
-    before: ``,
-    after: ``,
-    link: '',
-  },
+  before: ``,
+  after: ``,
+  link: '',
+}, 
 
-  obj11: {
+
+obj11: {
     title: `Complete Analysis at a Glance`,
     content: `Analyzing a function comes down to building a feature-by-feature profile. The table below collects every feature covered above into a workflow checklist — what question each feature answers, how to find it from a graph or equation, and how each plays out on a concrete example. Use it as a checklist when working through an unfamiliar function so no critical feature is overlooked.`,
     before: ``,
@@ -629,6 +672,7 @@ The tools for analysis come from both algebra and geometry. The equation reveals
          summaryTable,
          faqQuestions,
          schemas,
+         obj10MiniTable,
           seoData: {
         title: "Analyzing Functions: Behavior & Intervals | Learn Math Class",
         description: "Learn function analysis by identifying intervals of increase and decrease, local extrema, end behavior, symmetry, and positive and negative intervals from graphs.",
@@ -650,7 +694,8 @@ export default function AnalyzingFunctionsPage({
   obj10Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas,
+  obj10MiniTable
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -742,16 +787,31 @@ export default function AnalyzingFunctionsPage({
                dangerouslySetInnerHTML={{ __html: obj9Table }} />,
         ]
     },
+    // {
+    //     id:'10',
+    //     title:sectionsContent.obj10.title,
+    //     link:sectionsContent.obj10.link,
+    //     content:[
+    //       sectionsContent.obj10.content,
+    //       <div key={'obj10-table'} style={tableWrapStyle}
+    //            dangerouslySetInnerHTML={{ __html: obj10Table }} />,
+    //     ]
+    // },
+
+
     {
-        id:'10',
-        title:sectionsContent.obj10.title,
-        link:sectionsContent.obj10.link,
-        content:[
-          sectionsContent.obj10.content,
-          <div key={'obj10-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj10Table }} />,
-        ]
-    },
+    id:'10',
+    title:sectionsContent.obj10.title,
+    link:sectionsContent.obj10.link,
+    content:[
+      sectionsContent.obj10.content,
+      <div key={'obj10-mini-table'} style={tableWrapStyle}
+           dangerouslySetInnerHTML={{ __html: obj10MiniTable }} />,
+      sectionsContent.obj10.contentAfter,
+      <div key={'obj10-table'} style={tableWrapStyle}
+           dangerouslySetInnerHTML={{ __html: obj10Table }} />,
+    ]
+},
     {
         id:'11',
         title:sectionsContent.obj11.title,

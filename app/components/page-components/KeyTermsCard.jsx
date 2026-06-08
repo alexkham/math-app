@@ -1,6 +1,6 @@
-// // import processContent from wherever you keep it
-// import { processContent } from "../../utils/contentProcessor";
 
+
+// import { processContent } from "../../utils/contentProcessor";
 
 // const themes = {
 //   light: {
@@ -12,6 +12,8 @@
 //     termName: { color: '#2b6cb0', fontWeight: '500' },
 //     termDef: { color: '#4a5568' },
 //     mainTitle: { color: '#1a3a5c' },
+//     sectionDivider: '1px dashed #b0bec5',
+//     sectionLabel: { color: '#5a6f85', fontSize: '11px', fontWeight: '700', letterSpacing: '1.2px', textTransform: 'uppercase' },
 //   },
 //   dark: {
 //     background: '#1e293b',
@@ -22,6 +24,8 @@
 //     termName: { color: '#7dd3fc', fontWeight: '500' },
 //     termDef: { color: '#cbd5e1' },
 //     mainTitle: { color: '#e2e8f0' },
+//     sectionDivider: '1px dashed #475569',
+//     sectionLabel: { color: '#64748b', fontSize: '11px', fontWeight: '700', letterSpacing: '1.2px', textTransform: 'uppercase' },
 //   },
 // };
 
@@ -35,7 +39,11 @@
 //     if (trimmed.startsWith('## ')) {
 //       current = { heading: trimmed.replace('## ', ''), terms: [] };
 //       categories.push(current);
-//     } else if (trimmed.startsWith('- ') && current) {
+//     } else if (trimmed.startsWith('- ')) {
+//       if (!current) {
+//         current = { heading: null, terms: [] };
+//         categories.push(current);
+//       }
 //       const termMatch = trimmed.match(/^- \[(.+?)\]\((.+?)\)\s*—\s*(.+)$/);
 //       if (termMatch) {
 //         current.terms.push({
@@ -58,9 +66,67 @@
 //   return categories;
 // }
 
-// export default function KeyTermsCard({ title, content, after, variant = 'light', id }) {
+// function renderCategories(categories, theme) {
+//   return categories.map((cat, ci) => (
+//     <div key={ci} style={{ marginTop: ci === 0 ? '0' : '16px' }}>
+//       {cat.heading && (
+//         <h3
+//           style={{
+//             margin: '0 0 10px 0',
+//             paddingBottom: '6px',
+//             borderBottom: theme.categoryBorder,
+//             ...theme.categoryTitle,
+//           }}
+//         >
+//           {cat.heading}
+//         </h3>
+//       )}
+//       {cat.terms.map((term, ti) => (
+//         <div
+//           key={ti}
+//           style={{
+//             display: 'flex',
+//             gap: '8px',
+//             padding: '4px 0',
+//             fontSize: '14px',
+//             lineHeight: '1.4',
+//           }}
+//         >
+//           <span
+//             style={{
+//               whiteSpace: 'nowrap',
+//               minWidth: '160px',
+//               flexShrink: 0,
+//               ...theme.termName,
+//             }}
+//           >
+//             {term.link ? (
+//               <a
+//                 href={term.link.replace('!/', '/')}
+//                 style={{ color: 'inherit', textDecoration: 'none' }}
+//               >
+//                 {term.name}
+//               </a>
+//             ) : (
+//               term.name
+//             )}
+//           </span>
+//           <span style={{ ...theme.termDef }}>
+//             &mdash; {processContent(term.definition)}
+//           </span>
+//         </div>
+//       ))}
+//     </div>
+//   ));
+// }
+
+// export default function KeyTermsCard({ title, content, formulasContent, after, variant = 'light', id }) {
 //   const theme = themes[variant] || themes.light;
-//   const categories = parseKeyTermsMarkdown(content);
+//   const termsCategories = parseKeyTermsMarkdown(content);
+//   const formulasCategories = formulasContent ? parseKeyTermsMarkdown(formulasContent) : [];
+//   const hasFormulas = formulasCategories.length > 0;
+
+//   const displayTitle = title || (hasFormulas ? 'Key Terms & Formulas' : 'Key Terms');
 
 //   return (
 //     <div
@@ -74,7 +140,7 @@
 //         maxWidth: '900px',
 //       }}
 //     >
-//       {title && (
+//       {displayTitle && (
 //         <h2
 //           style={{
 //             fontSize: '24px',
@@ -83,59 +149,28 @@
 //             ...theme.mainTitle,
 //           }}
 //         >
-//           {title}
+//           {displayTitle}
 //         </h2>
 //       )}
 
-//       {categories.map((cat, ci) => (
-//         <div key={ci} style={{ marginTop: ci === 0 ? '0' : '16px' }}>
-//           <h3
+//       {renderCategories(termsCategories, theme)}
+
+//       {hasFormulas && (
+//         <>
+//           <div
 //             style={{
-//               margin: '0 0 10px 0',
-//               paddingBottom: '6px',
-//               borderBottom: theme.categoryBorder,
-//               ...theme.categoryTitle,
+//               borderTop: theme.sectionDivider,
+//               margin: '20px 0 16px 0',
+//               paddingTop: '12px',
 //             }}
 //           >
-//             {cat.heading}
-//           </h3>
-//           {cat.terms.map((term, ti) => (
-//             <div
-//               key={ti}
-//               style={{
-//                 display: 'flex',
-//                 gap: '8px',
-//                 padding: '4px 0',
-//                 fontSize: '14px',
-//                 lineHeight: '1.4',
-//               }}
-//             >
-//               <span
-//                 style={{
-//                   whiteSpace: 'nowrap',
-//                   minWidth: '160px',
-//                   flexShrink: 0,
-//                   ...theme.termName,
-//                 }}
-//               >
-//                 {term.link ? (
-//                   <a
-//                     href={term.link.replace('!/', '/')}
-//                     style={{ color: 'inherit', textDecoration: 'none' }}
-//                   >
-//                     {term.name}
-//                   </a>
-//                 ) : (
-//                   term.name
-//                 )}
-//               </span>
-//               <span style={{ ...theme.termDef }}>
-//                 &mdash; {processContent(term.definition)}
-//               </span>
-//             </div>
-//           ))}
-//         </div>
-//       ))}
+//             <span style={{ ...theme.sectionLabel }}>
+//               Formulas
+//             </span>
+//           </div>
+//           {renderCategories(formulasCategories, theme)}
+//         </>
+//       )}
 
 //       {after && (
 //         <div style={{ marginTop: '18px' }}>
@@ -187,12 +222,13 @@ function parseKeyTermsMarkdown(mdString) {
     if (trimmed.startsWith('## ')) {
       current = { heading: trimmed.replace('## ', ''), terms: [] };
       categories.push(current);
-    } else if (trimmed.startsWith('- ')) {
+    } else if (trimmed.startsWith('- ') || trimmed.startsWith('• ')) {
       if (!current) {
         current = { heading: null, terms: [] };
         categories.push(current);
       }
-      const termMatch = trimmed.match(/^- \[(.+?)\]\((.+?)\)\s*—\s*(.+)$/);
+      const body = trimmed.slice(2);
+      const termMatch = body.match(/^\[(.+?)\]\((.+?)\)\s*—\s*(.+)$/);
       if (termMatch) {
         current.terms.push({
           name: termMatch[1],
@@ -200,7 +236,7 @@ function parseKeyTermsMarkdown(mdString) {
           definition: termMatch[3],
         });
       } else {
-        const plainMatch = trimmed.match(/^- \*\*(.+?)\*\*\s*—\s*(.+)$/);
+        const plainMatch = body.match(/^\*\*(.+?)\*\*\s*—\s*(.+)$/);
         if (plainMatch) {
           current.terms.push({
             name: plainMatch[1],
@@ -218,41 +254,15 @@ function renderCategories(categories, theme) {
   return categories.map((cat, ci) => (
     <div key={ci} style={{ marginTop: ci === 0 ? '0' : '16px' }}>
       {cat.heading && (
-        <h3
-          style={{
-            margin: '0 0 10px 0',
-            paddingBottom: '6px',
-            borderBottom: theme.categoryBorder,
-            ...theme.categoryTitle,
-          }}
-        >
+        <h3 style={{ margin: '0 0 10px 0', paddingBottom: '6px', borderBottom: theme.categoryBorder, ...theme.categoryTitle }}>
           {cat.heading}
         </h3>
       )}
       {cat.terms.map((term, ti) => (
-        <div
-          key={ti}
-          style={{
-            display: 'flex',
-            gap: '8px',
-            padding: '4px 0',
-            fontSize: '14px',
-            lineHeight: '1.4',
-          }}
-        >
-          <span
-            style={{
-              whiteSpace: 'nowrap',
-              minWidth: '160px',
-              flexShrink: 0,
-              ...theme.termName,
-            }}
-          >
+        <div key={ti} style={{ display: 'flex', gap: '8px', padding: '4px 0', fontSize: '14px', lineHeight: '1.4' }}>
+          <span style={{ whiteSpace: 'nowrap', minWidth: '160px', flexShrink: 0, ...theme.termName }}>
             {term.link ? (
-              <a
-                href={term.link.replace('!/', '/')}
-                style={{ color: 'inherit', textDecoration: 'none' }}
-              >
+              <a href={term.link.replace('!/', '/')} style={{ color: 'inherit', textDecoration: 'none' }}>
                 {term.name}
               </a>
             ) : (
@@ -273,30 +283,12 @@ export default function KeyTermsCard({ title, content, formulasContent, after, v
   const termsCategories = parseKeyTermsMarkdown(content);
   const formulasCategories = formulasContent ? parseKeyTermsMarkdown(formulasContent) : [];
   const hasFormulas = formulasCategories.length > 0;
-
   const displayTitle = title || (hasFormulas ? 'Key Terms & Formulas' : 'Key Terms');
 
   return (
-    <div
-      id={id}
-      style={{
-        background: theme.background,
-        borderLeft: theme.borderLeft,
-        borderRadius: theme.borderRadius,
-        padding: '24px 28px',
-        margin: '0 auto',
-        maxWidth: '900px',
-      }}
-    >
+    <div id={id} style={{ background: theme.background, borderLeft: theme.borderLeft, borderRadius: theme.borderRadius, padding: '24px 28px', margin: '0 auto', maxWidth: '900px' }}>
       {displayTitle && (
-        <h2
-          style={{
-            fontSize: '24px',
-            fontWeight: '600',
-            margin: '0 0 18px 0',
-            ...theme.mainTitle,
-          }}
-        >
+        <h2 style={{ fontSize: '24px', fontWeight: '600', margin: '0 0 18px 0', ...theme.mainTitle }}>
           {displayTitle}
         </h2>
       )}
@@ -304,20 +296,12 @@ export default function KeyTermsCard({ title, content, formulasContent, after, v
       {renderCategories(termsCategories, theme)}
 
       {hasFormulas && (
-        <>
-          <div
-            style={{
-              borderTop: theme.sectionDivider,
-              margin: '20px 0 16px 0',
-              paddingTop: '12px',
-            }}
-          >
-            <span style={{ ...theme.sectionLabel }}>
-              Formulas
-            </span>
+        <div>
+          <div style={{ borderTop: theme.sectionDivider, margin: '20px 0 16px 0', paddingTop: '12px' }}>
+            <span style={{ ...theme.sectionLabel }}>Formulas</span>
           </div>
           {renderCategories(formulasCategories, theme)}
-        </>
+        </div>
       )}
 
       {after && (

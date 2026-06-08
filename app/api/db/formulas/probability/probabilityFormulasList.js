@@ -294,7 +294,7 @@ const probabilityFormulaList = [
     entity: 'moment_generating_function',
     category: 'Moment Generating Function',
     formula: `$$M_X(t) = E\\!\\left[e^{tX}\\right]$$`,
-    link: { label: '', url: '' },
+    link: { label: "Moment Generating Function", url: "/probability/expected-value#function" },
     fields: {
       explanation: `The moment generating function of $X$ is the expectation of $e^{tX}$ as a function of $t$, for those $t$ where the expectation exists. Encodes the distribution: if two random variables have MGFs that agree in a neighborhood of zero, their distributions agree.`,
       conditions: `Defined for $t$ in some open interval around zero. May not exist for distributions with heavy tails.`,
@@ -311,7 +311,7 @@ const probabilityFormulaList = [
     entity: 'moment_generating_function',
     category: 'Moment Generating Function',
     formula: `$$M_X^{(k)}(0) = E[X^k]$$`,
-    link: { label: '', url: '' },
+   link: { label: "MGF and Moments", url: "/probability/expected-value#function" },
     fields: {
       explanation: `The $k$-th derivative of the MGF at zero gives the $k$-th raw moment. Differentiating term-by-term in the Taylor series of $E[e^{tX}]$ extracts moments one at a time.`,
       derivation: `Differentiate $M_X(t) = E[e^{tX}]$ inside the expectation: $M_X^{(k)}(t) = E[X^k e^{tX}]$. Evaluate at $t=0$.`,
@@ -326,7 +326,7 @@ const probabilityFormulaList = [
     entity: 'moment_generating_function',
     category: 'Moment Generating Function',
     formula: `$$M_{X + Y}(t) = M_X(t) \\cdot M_Y(t)$$`,
-    link: { label: '', url: '' },
+    link: { label: "MGF of a Sum", url: "/probability/expected-value#function" },
     fields: {
       explanation: `MGF of a sum of independent random variables factors into the product of individual MGFs. This converts convolution of distributions into multiplication of functions, simplifying many sum-of-independent-variables calculations.`,
       conditions: `$X$ and $Y$ must be independent. Both MGFs must exist in a common neighborhood of zero.`,
@@ -1193,7 +1193,7 @@ const probabilityFormulaList = [
     entity: 'equally_likely_events',
     category: 'Classical Probability',
     formula: `$$P(A) = \\frac{|A|}{|\\Omega|}$$`,
-    link: { label: '', url: '' },
+    link: { label: "Classical Probability", url: "/probability/sample-space#properties" },
     fields: {
       explanation: `When the sample space is finite and every outcome is equally likely, the probability of an event reduces to counting: number of favorable outcomes divided by total outcomes.`,
       conditions: `Sample space $\\Omega$ must be finite with all outcomes equally likely.`,

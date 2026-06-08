@@ -1,75 +1,261 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
+export async function getStaticProps(){
 
-//   const keyWords=[
-//     'inverse functions',
-//     'finding inverse functions',
-//     'f inverse notation',
-//     'inverse function graph',
-//     'horizontal line test',
-//     'one-to-one functions',
-//     'verifying inverse functions',
-//     'domain range swap',
-//     'reflection over y equals x',
-//     'inverse function examples',
-//     'restricting domain',
-//     'composition of inverse functions',
-//     'inverse function algebraically',
-//     'common inverse function pairs',
-//   ]
+  const keyWords=[
+    'inverse functions',
+    'finding inverse functions',
+    'f inverse notation',
+    'inverse function graph',
+    'horizontal line test',
+    'one-to-one functions',
+    'verifying inverse functions',
+    'domain range swap',
+    'reflection over y equals x',
+    'inverse function examples',
+    'restricting domain',
+    'composition of inverse functions',
+    'inverse function algebraically',
+    'common inverse function pairs',
+  ]
 
-//   // •
+  const linkStyle = 'color: inherit; text-decoration: underline;'
 
-// //   • First item
-// // • Second item
+  // ---------- TABLES ----------
 
+  // obj2 — comparison: inverse function vs reciprocal
+  const obj2Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Notation</th>
+      <th style="${tableHeaders.comparison}">What it represents</th>
+      <th style="${tableHeaders.comparison}">For f(x) = 2x + 3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f⁻¹(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the inverse function — undoes f</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x − 3) ⁄ 2</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">1 ⁄ f(x), or (f(x))⁻¹</td>
+      <td style="padding: 12px 15px; color: #34495e;">the reciprocal — multiplicative inverse of the output value</td>
+      <td style="padding: 12px 15px; color: #34495e;">1 ⁄ (2x + 3)</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-width:1px;"></hr>
+  // obj9 — aggregation: restrictions for common non-one-to-one functions
+  const obj9Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Original function</th>
+      <th style="${tableHeaders.aggregation}">Why it fails on its natural domain</th>
+      <th style="${tableHeaders.aggregation}">Standard restriction</th>
+      <th style="${tableHeaders.aggregation}">Resulting inverse</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f(x) = x²</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">both x and −x give the same output</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f⁻¹(x) = √x</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f(x) = x² (alternative)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same reason — different valid choice</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, 0]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f⁻¹(x) = −√x</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f(x) = sin(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">oscillates — every value repeats infinitely often</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−π⁄2, π⁄2]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f⁻¹(x) = arcsin(x)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f(x) = cos(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">oscillates</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, π]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f⁻¹(x) = arccos(x)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">f(x) = tan(x)</td>
+      <td style="padding: 12px 15px; color: #34495e;">oscillates between asymptotes</td>
+      <td style="padding: 12px 15px; color: #34495e;">(−π⁄2, π⁄2)</td>
+      <td style="padding: 12px 15px; color: #34495e;">f⁻¹(x) = arctan(x)</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="color:blue;" />
+  // obj12 — aggregation (reference): common inverse pairs
+  const obj12Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Function f</th>
+      <th style="${tableHeaders.aggregation}">Inverse f⁻¹</th>
+      <th style="${tableHeaders.aggregation}">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear: f(x) = mx + b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x − b) ⁄ m</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires m ≠ 0</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quadratic: x² on [0, ∞)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires domain restriction</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cubic: x³</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∛x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no restriction needed — already one-to-one</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Power: xⁿ on appropriate domain</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x^(1⁄n)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">even n requires restriction; odd n does not</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Exponential: aˣ (a &gt; 0, a ≠ 1)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">logₐ(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">special case: eˣ ↔ ln(x)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reciprocal: 1 ⁄ x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 ⁄ x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">self-inverse — applying twice returns the input</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sine on [−π⁄2, π⁄2]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">arcsin(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires restriction; domain of arcsin is [−1, 1]</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cosine on [0, π]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">arccos(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires restriction; domain of arccos is [−1, 1]</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Tangent on (−π⁄2, π⁄2)</td>
+      <td style="padding: 12px 15px; color: #34495e;">arctan(x)</td>
+      <td style="padding: 12px 15px; color: #34495e;">requires restriction; domain of arctan is ℝ</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+  // obj14 — summary capstone: how each feature of f maps to f⁻¹
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Feature of f</th>
+      <th style="${tableHeaders.summary}">Corresponding feature of f⁻¹</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Point (a, b) on the graph</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Point (b, a) on the graph</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Domain D</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Range D</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Range R</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Domain R</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">y-intercept (0, c)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x-intercept (c, 0)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">x-intercept (c, 0)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">y-intercept (0, c)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Horizontal asymptote y = L</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Vertical asymptote x = L</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Vertical asymptote x = a</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Horizontal asymptote y = a</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Increasing</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Increasing (direction preserved)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Decreasing</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Decreasing (direction preserved)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Fixed point: f(a) = a (point on y = x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Same fixed point: f⁻¹(a) = a</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Composition f ∘ f⁻¹</td>
+      <td style="padding: 12px 15px; color: #34495e;">the identity: f(f⁻¹(x)) = x — and likewise f⁻¹(f(x)) = x</td>
+    </tr>
+  </tbody>
+</table>
+`
+const obj11OriginalTable = `
+<table style="border-collapse: collapse; margin: 16px auto; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; color: #34495e;">
+  <thead>
+    <tr style="background: #f5f7fa;">
+      <th style="padding: 6px 16px; border: 1px solid #e1e4e8; font-weight: 600; color: #06357a; text-align: center;">x</th>
+      <th style="padding: 6px 16px; border: 1px solid #e1e4e8; font-weight: 600; color: #06357a; text-align: center;">f(x)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">1</td><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">4</td></tr>
+    <tr><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">2</td><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">7</td></tr>
+    <tr><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">3</td><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">10</td></tr>
+    <tr><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">4</td><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">13</td></tr>
+  </tbody>
+</table>
+`
 
+const obj11InverseTable = `
+<table style="border-collapse: collapse; margin: 16px auto; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; color: #34495e;">
+  <thead>
+    <tr style="background: #f5f7fa;">
+      <th style="padding: 6px 16px; border: 1px solid #e1e4e8; font-weight: 600; color: #06357a; text-align: center;">x</th>
+      <th style="padding: 6px 16px; border: 1px solid #e1e4e8; font-weight: 600; color: #06357a; text-align: center;">f&#8315;&#185;(x)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">4</td><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">1</td></tr>
+    <tr><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">7</td><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">2</td></tr>
+    <tr><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">10</td><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">3</td></tr>
+    <tr><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">13</td><td style="padding: 5px 16px; border: 1px solid #e1e4e8; text-align: center;">4</td></tr>
+  </tbody>
+</table>
+`
 
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
-
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-  
 // const sectionsContent = {
 
 //   obj0 : {
@@ -126,7 +312,9 @@
 
 // When writing the reciprocal of a function, use $\\dfrac{1}{f(x)}$ or $(f(x))^{-1}$ with parentheses to clarify. Reserve $f^{-1}(x)$ exclusively for the inverse function.
 
-// For trigonometric functions, the same notational hazard exists. The inverse sine is $\\sin^{-1}(x)$ or $\\arcsin(x)$ — not the reciprocal $\\csc(x) = 1/\\sin(x)$.`,
+// For trigonometric functions, the same notational hazard exists. The inverse sine is $\\sin^{-1}(x)$ or $\\arcsin(x)$ — not the reciprocal $\\csc(x) = 1/\\sin(x)$.
+
+// The table below shows both notations side by side and what each one computes for the same example function.`,
 //     before: ``,
 //     after: ``,
 //     link: '',
@@ -288,7 +476,7 @@
 
 // Trigonometric functions require restriction for their inverses. The sine function oscillates forever, failing the horizontal line test. Restricted to $[-\\pi/2, \\pi/2]$, it is one-to-one, enabling $\\arcsin$. Similar restrictions define $\\arccos$ and $\\arctan$.
 
-// Restriction sacrifices part of the domain to gain invertibility. The trade-off is necessary whenever the original function is not one-to-one.`,
+// Restriction sacrifices part of the domain to gain invertibility. The trade-off is necessary whenever the original function is not one-to-one. The table below collects the standard restrictions for the most common non-one-to-one functions along with the inverse each restriction produces.`,
 //     before: ``,
 //     after: ``,
 //     link: '',
@@ -370,7 +558,7 @@
 
 // Trigonometric: $\\sin$ on $[-\\pi/2, \\pi/2]$ and $\\arcsin$; $\\cos$ on $[0, \\pi]$ and $\\arccos$; $\\tan$ on $(-\\pi/2, \\pi/2)$ and $\\arctan$.
 
-// Recognizing these pairs accelerates both finding inverses and verifying that two given functions are inverses.`,
+// Recognizing these pairs accelerates both finding inverses and verifying that two given functions are inverses. The table below catalogs each pair with brief notes on when restrictions apply.`,
 //     before: ``,
 //     after: ``,
 //     link: '',
@@ -396,602 +584,15 @@
 //     link: '',
 //   },
 
+//   obj14: {
+//     title: `How Features Swap Under Inversion`,
+//     content: `Inverting a function swaps the roles of input and output. That single fact propagates outward: every geometric and structural feature of $f$ transforms in a predictable way for $f^{-1}$. The table below collects how each feature of $f$ maps to its counterpart in $f^{-1}$ — useful both as a checklist when sketching an inverse from the original and as a quick reference for anticipating the behavior of an inverse before computing it.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
 // }
-
-
-//   const introContent = {
-//   id: "intro",
-//   title: "Undoing Functions",
-//   content: `Some processes can be reversed. Encryption can be decrypted. Compression can be decompressed. A temperature converted to Fahrenheit can be converted back to Celsius. The function that performs the reversal is the inverse — it undoes what the original function did.
-
-// Given a function $f$ that transforms input $a$ into output $b$, the inverse function $f^{-1}$ transforms $b$ back into $a$. The round trip leaves you where you started. Not every function has an inverse, but those that do reveal a symmetric relationship between input and output.`
-// }
-
-
-
-//   const faqQuestions = {
-//     q1: {
-//       question: "What is an inverse function?",
-//       answer: "An inverse function reverses the action of the original function. If f takes input a and produces output b, then f⁻¹ takes input b and produces output a. The two functions undo each other, so applying f then f⁻¹ — or f⁻¹ then f — returns you to the starting value."
-//     },
-//     q2: {
-//       question: "How do you find an inverse function algebraically?",
-//       answer: "To find an inverse algebraically, write y = f(x), swap x and y, solve for y, then write f⁻¹(x) equal to the result. For example, for f(x) = 3x − 7, swapping gives x = 3y − 7, solving gives y = (x + 7)/3, so f⁻¹(x) = (x + 7)/3."
-//     },
-//     q3: {
-//       question: "What is the horizontal line test?",
-//       answer: "The horizontal line test determines whether a function has an inverse. If every horizontal line intersects the graph at most once, the function is one-to-one and has an inverse. If any horizontal line crosses the graph more than once, the function is not one-to-one and no inverse exists on that domain."
-//     },
-//     q4: {
-//       question: "How do domain and range change for an inverse function?",
-//       answer: "The domain of f becomes the range of f⁻¹, and the range of f becomes the domain of f⁻¹. This swap is exact and complete — every input of f is an output of f⁻¹, and every output of f is an input of f⁻¹."
-//     },
-//     q5: {
-//       question: "How do you verify that two functions are inverses of each other?",
-//       answer: "Two functions are inverses if and only if both compositions yield the identity: f(f⁻¹(x)) = x and f⁻¹(f(x)) = x. Both conditions must hold. If either composition fails to simplify to x, the functions are not inverses."
-//     },
-//   }
-
-//   const seoData = {
-//     title: "Inverse Functions | Learn Math Class",
-//     description: "Learn inverse functions: how to find, graph, and verify them using algebraic steps, the horizontal line test, and domain-range swaps with clear examples.",
-//     keywords: keyWords.join(", "),
-//     url: "/functions/inverse",
-//     name: "Inverse Functions",
-//   }
-
-//   const schemas = {
-//     learningResource: {
-//       "@context": "https://schema.org",
-//       "@type": "LearningResource",
-//       "name": seoData.name,
-//       "description": seoData.description,
-//       "url": `https://www.learnmathclass.com${seoData.url}`,
-//       "inLanguage": "en-US",
-//       "datePublished": "2024-01-15",
-//       "dateModified": new Date().toISOString(),
-//       "author": {
-//         "@type": "Organization",
-//         "name": "Learn Math Class",
-//         "url": "https://www.learnmathclass.com"
-//       },
-//       "teaches": [
-//         "What an inverse function is and how it reverses the original function",
-//         "The difference between f⁻¹(x) inverse notation and 1/f(x) reciprocal notation",
-//         "How to find an inverse function algebraically by swapping and solving",
-//         "How to apply the horizontal line test to determine if an inverse exists",
-//         "How domain and range swap when finding an inverse function",
-//         "How to verify inverse functions using composition"
-//       ],
-//       "keywords": seoData.keywords,
-//     },
-//     breadcrumb: {
-//       "@context": "https://schema.org",
-//       "@type": "BreadcrumbList",
-//       "itemListElement": [
-//         {
-//           "@type": "ListItem",
-//           "position": 1,
-//           "name": "Home",
-//           "item": "https://www.learnmathclass.com"
-//         },
-//         {
-//           "@type": "ListItem",
-//           "position": 2,
-//           "name": "Functions",
-//           "item": "https://www.learnmathclass.com/functions"
-//         },
-//         {
-//           "@type": "ListItem",
-//           "position": 3,
-//           "name": seoData.name,
-//           "item": `https://www.learnmathclass.com${seoData.url}`
-//         }
-//       ]
-//     },
-//     faq: {
-//       "@context": "https://schema.org",
-//       "@type": "FAQPage",
-//       "mainEntity": Object.values(faqQuestions).map(({ question, answer }) => ({
-//         "@type": "Question",
-//         "name": question,
-//         "acceptedAnswer": {
-//           "@type": "Answer",
-//           "text": answer
-//         }
-//       }))
-//     },
-//   }
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//          faqQuestions,
-//          schemas,
-//           seoData: {
-//         title: "Inverse Functions | Learn Math Class",
-//         description: "Learn inverse functions: how to find, graph, and verify them using algebraic steps, the horizontal line test, and domain-range swaps with clear examples.",
-//         keywords: keyWords.join(", "),
-//         url: "/functions/inverse",
-//          name: "Inverse Functions"
-//       },
-//        }
-//     }
-//    }
-
-// export default function InversePage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-
-
-//   const genericSections=[
-//      {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     {
-//         id:'11',
-//         title:sectionsContent.obj11.title,
-//         link:sectionsContent.obj11.link,
-//         content:[
-//           sectionsContent.obj11.content,
-//         ]
-//     },
-//     {
-//         id:'12',
-//         title:sectionsContent.obj12.title,
-//         link:sectionsContent.obj12.link,
-//         content:[
-//           sectionsContent.obj12.content,
-//         ]
-//     },
-//     {
-//         id:'13',
-//         title:sectionsContent.obj13.title,
-//         link:sectionsContent.obj13.link,
-//         content:[
-//           sectionsContent.obj13.content,
-//         ]
-//     },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-
-// ]
-
-//   return (
-//    <>
-//    <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-
-//   <meta name="robots" content="index, follow" />
-
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.learningResource) }}
-//   />
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
-//   />
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar
-//            side='right'
-//            // topOffset='65px'
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          />
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Inverse Functions</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//        <KeyTermsCard
-//      id="0"
-//      title={sectionsContent.obj0.title}
-//      content={sectionsContent.obj0.content}
-//      after={sectionsContent.obj0.after}
-//      variant="light"
-//    />
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-
-  const keyWords=[
-    'inverse functions',
-    'finding inverse functions',
-    'f inverse notation',
-    'inverse function graph',
-    'horizontal line test',
-    'one-to-one functions',
-    'verifying inverse functions',
-    'domain range swap',
-    'reflection over y equals x',
-    'inverse function examples',
-    'restricting domain',
-    'composition of inverse functions',
-    'inverse function algebraically',
-    'common inverse function pairs',
-  ]
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-
-  // ---------- TABLES ----------
-
-  // obj2 — comparison: inverse function vs reciprocal
-  const obj2Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Notation</th>
-      <th style="${tableHeaders.comparison}">What it represents</th>
-      <th style="${tableHeaders.comparison}">For f(x) = 2x + 3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f⁻¹(x)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the inverse function — undoes f</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x − 3) ⁄ 2</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">1 ⁄ f(x), or (f(x))⁻¹</td>
-      <td style="padding: 12px 15px; color: #34495e;">the reciprocal — multiplicative inverse of the output value</td>
-      <td style="padding: 12px 15px; color: #34495e;">1 ⁄ (2x + 3)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj9 — aggregation: restrictions for common non-one-to-one functions
-  const obj9Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Original function</th>
-      <th style="${tableHeaders.aggregation}">Why it fails on its natural domain</th>
-      <th style="${tableHeaders.aggregation}">Standard restriction</th>
-      <th style="${tableHeaders.aggregation}">Resulting inverse</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f(x) = x²</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">both x and −x give the same output</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f⁻¹(x) = √x</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f(x) = x² (alternative)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same reason — different valid choice</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, 0]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f⁻¹(x) = −√x</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f(x) = sin(x)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">oscillates — every value repeats infinitely often</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−π⁄2, π⁄2]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f⁻¹(x) = arcsin(x)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f(x) = cos(x)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">oscillates</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, π]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f⁻¹(x) = arccos(x)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">f(x) = tan(x)</td>
-      <td style="padding: 12px 15px; color: #34495e;">oscillates between asymptotes</td>
-      <td style="padding: 12px 15px; color: #34495e;">(−π⁄2, π⁄2)</td>
-      <td style="padding: 12px 15px; color: #34495e;">f⁻¹(x) = arctan(x)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj12 — aggregation (reference): common inverse pairs
-  const obj12Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Function f</th>
-      <th style="${tableHeaders.aggregation}">Inverse f⁻¹</th>
-      <th style="${tableHeaders.aggregation}">Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear: f(x) = mx + b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x − b) ⁄ m</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires m ≠ 0</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quadratic: x² on [0, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires domain restriction</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cubic: x³</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∛x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no restriction needed — already one-to-one</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Power: xⁿ on appropriate domain</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x^(1⁄n)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">even n requires restriction; odd n does not</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Exponential: aˣ (a &gt; 0, a ≠ 1)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">logₐ(x)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">special case: eˣ ↔ ln(x)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reciprocal: 1 ⁄ x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 ⁄ x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">self-inverse — applying twice returns the input</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sine on [−π⁄2, π⁄2]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">arcsin(x)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires restriction; domain of arcsin is [−1, 1]</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cosine on [0, π]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">arccos(x)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requires restriction; domain of arccos is [−1, 1]</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Tangent on (−π⁄2, π⁄2)</td>
-      <td style="padding: 12px 15px; color: #34495e;">arctan(x)</td>
-      <td style="padding: 12px 15px; color: #34495e;">requires restriction; domain of arctan is ℝ</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj14 — summary capstone: how each feature of f maps to f⁻¹
-  const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Feature of f</th>
-      <th style="${tableHeaders.summary}">Corresponding feature of f⁻¹</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Point (a, b) on the graph</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Point (b, a) on the graph</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Domain D</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Range D</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Range R</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Domain R</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">y-intercept (0, c)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x-intercept (c, 0)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">x-intercept (c, 0)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">y-intercept (0, c)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Horizontal asymptote y = L</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Vertical asymptote x = L</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Vertical asymptote x = a</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Horizontal asymptote y = a</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Increasing</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Increasing (direction preserved)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Decreasing</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Decreasing (direction preserved)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Fixed point: f(a) = a (point on y = x)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Same fixed point: f⁻¹(a) = a</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Composition f ∘ f⁻¹</td>
-      <td style="padding: 12px 15px; color: #34495e;">the identity: f(f⁻¹(x)) = x — and likewise f⁻¹(f(x)) = x</td>
-    </tr>
-  </tbody>
-</table>
-`
-
 
 const sectionsContent = {
 
@@ -1021,7 +622,12 @@ const sectionsContent = {
     title: `What is an Inverse Function`,
     content: `An inverse function reverses the action of the original function. If $f$ takes input $a$ and produces output $b$, then $f^{-1}$ takes input $b$ and produces output $a$.
 
+@academic[formula_callout:Inverse Function Definition
 $$f(a) = b \\iff f^{-1}(b) = a$$
+/functions/formulas#inverse_function_definition]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
 
 The two functions undo each other. Applying $f$ then $f^{-1}$ returns to the starting point. Applying $f^{-1}$ then $f$ also returns to the starting point.
 
@@ -1113,7 +719,14 @@ Step 4: $f^{-1}(x) = \\dfrac{3x + 1}{x - 2}$`,
 
   obj5: {
     title: `Domain and Range Swap`,
-    content: `The [domain](!/functions/domain) of $f$ becomes the [range](!/functions/range) of $f^{-1}$. The range of $f$ becomes the domain of $f^{-1}$.
+    content: `The [domain](!/functions/domain) of $f$ becomes the [range](!/functions/range) of $f^{-1}$. The range of $f$ becomes the domain of $f^{-1}$. Formally:
+
+@academic[formula_callout:Domain Range Swap of Inverse
+$$\\text{Dom}(f^{-1}) = \\text{Ran}(f) \\quad \\text{and} \\quad \\text{Ran}(f^{-1}) = \\text{Dom}(f)$$
+/functions/formulas#domain_range_swap_of_inverse]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
 
 This swap is exact and complete. Every input of $f$ is an output of $f^{-1}$, and every output of $f$ is an input of $f^{-1}$.
 
@@ -1139,13 +752,16 @@ When finding an inverse, always verify that the domain and range correctly swap.
     title: `Verifying Inverses via Composition`,
     content: `Two functions are inverses if and only if their [compositions](!/functions/composition) yield the identity function — the function that returns its input unchanged.
 
-For $f$ and $f^{-1}$ to be inverses:
+For $f$ and $f^{-1}$ to be inverses, both compositions must reduce to $x$:
 
-$$(f \\circ f^{-1})(x) = f(f^{-1}(x)) = x \\quad \\text{for all } x \\text{ in the domain of } f^{-1}$$
+@academic[formula_callout:Inverse Composition Property
+$$f(f^{-1}(x)) = x \\quad \\text{and} \\quad f^{-1}(f(x)) = x$$
+/functions/formulas#inverse_composition_property]@
 
-$$(f^{-1} \\circ f)(x) = f^{-1}(f(x)) = x \\quad \\text{for all } x \\text{ in the domain of } f$$
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
 
-Both conditions must hold.
+The first equation holds for $x$ in the domain of $f^{-1}$; the second holds for $x$ in the domain of $f$. Both conditions must hold.
 
 Verify that $f(x) = 5x - 2$ and $g(x) = \\dfrac{x + 2}{5}$ are inverses.
 
@@ -1245,38 +861,23 @@ The graphs of $f$ and $f^{-1}$ intersect on the line $y = x$ — at points where
     link: '',
   },
 
-  obj11: {
-    title: `Inverse Function Tables`,
-    content: `When a function is given as a table of values, the inverse function table is obtained by swapping the input and output columns.
+// 
 
-Original function $f$:
+obj11: {
+  title: `Inverse Function Tables`,
+  content: `When a function is given as a table of values, the inverse function table is obtained by swapping the input and output columns.
 
-| $x$ | $f(x)$ |
-|-----|--------|
-| $1$ | $4$ |
-| $2$ | $7$ |
-| $3$ | $10$ |
-| $4$ | $13$ |
-
-Inverse function $f^{-1}$:
-
-| $x$ | $f^{-1}(x)$ |
-|-----|-------------|
-| $4$ | $1$ |
-| $7$ | $2$ |
-| $10$ | $3$ |
-| $13$ | $4$ |
-
-Each row flips: the output of $f$ becomes the input of $f^{-1}$, and the input of $f$ becomes the output of $f^{-1}$.
+Original function $f$:`,
+  contentBetween: `Inverse function $f^{-1}$:`,
+  contentAfter: `Each row flips: the output of $f$ becomes the input of $f^{-1}$, and the input of $f$ becomes the output of $f^{-1}$.
 
 The inverse table has the same number of entries. The [domain](!/functions/domain) and [range](!/functions/range) swap exactly as described earlier.
 
 If the original table has repeated outputs — the same $f(x)$ value appearing for different $x$ values — the function is not one-to-one, and no inverse table exists. The swapped table would have repeated inputs, violating the definition of a function.`,
-    before: ``,
-    after: ``,
-    link: '',
-  },
-
+  before: ``,
+  after: ``,
+  link: '',
+},
   obj12: {
     title: `Common Inverse Pairs`,
     content: `Certain function pairs arise repeatedly as inverses.
@@ -1447,6 +1048,8 @@ Given a function $f$ that transforms input $a$ into output $b$, the inverse func
          summaryTable,
          faqQuestions,
          schemas,
+         obj11InverseTable,
+         obj11OriginalTable,
           seoData: {
         title: "Inverse Functions | Learn Math Class",
         description: "Learn inverse functions: how to find, graph, and verify them using algebraic steps, the horizontal line test, and domain-range swaps with clear examples.",
@@ -1467,7 +1070,9 @@ export default function InversePage({
   obj12Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas,
+   obj11InverseTable,
+         obj11OriginalTable,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1571,14 +1176,30 @@ export default function InversePage({
           sectionsContent.obj10.content,
         ]
     },
+    // {
+    //     id:'11',
+    //     title:sectionsContent.obj11.title,
+    //     link:sectionsContent.obj11.link,
+    //     content:[
+    //       sectionsContent.obj11.content,
+    //     ]
+    // },
+
+
     {
-        id:'11',
-        title:sectionsContent.obj11.title,
-        link:sectionsContent.obj11.link,
-        content:[
-          sectionsContent.obj11.content,
-        ]
-    },
+    id:'11',
+    title:sectionsContent.obj11.title,
+    link:sectionsContent.obj11.link,
+    content:[
+      sectionsContent.obj11.content,
+      <div key={'obj11-orig-table'} style={tableWrapStyle}
+           dangerouslySetInnerHTML={{ __html: obj11OriginalTable }} />,
+      sectionsContent.obj11.contentBetween,
+      <div key={'obj11-inv-table'} style={tableWrapStyle}
+           dangerouslySetInnerHTML={{ __html: obj11InverseTable }} />,
+      sectionsContent.obj11.contentAfter,
+    ]
+},
     {
         id:'12',
         title:sectionsContent.obj12.title,

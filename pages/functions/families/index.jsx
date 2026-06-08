@@ -1,60 +1,252 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
+export async function getStaticProps(){
 
-//   const keyWords=['function families','parent functions','linear function','quadratic function','exponential function','polynomial functions','rational functions','absolute value function','square root function','types of functions','function classification','logarithmic function','cubic function','radical functions']
+  const keyWords=['function families','parent functions','linear function','quadratic function','exponential function','polynomial functions','rational functions','absolute value function','square root function','types of functions','function classification','logarithmic function','cubic function','radical functions']
 
-//   // •
+  const linkStyle = 'color: inherit; text-decoration: underline;'
 
-// //   • First item
-// // • Second item
+  // ---------- TABLES ----------
 
+  // obj2 — aggregation: identifying a family from each representation
+  const obj2Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Source</th>
+      <th style="${tableHeaders.aggregation}">What to look for</th>
+      <th style="${tableHeaders.aggregation}">Family-specific clues</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Equation</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the defining algebraic operation or structure</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x in the exponent → exponential; x under a radical → radical; ratio of polynomials → rational; highest power of x = n → polynomial of degree n</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Graph</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">overall shape and key features</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">straight line → linear; parabola → quadratic; S-curve → cubic; periodic wave → trigonometric; asymptotes → rational or exponential</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Table of values</td>
+      <td style="padding: 12px 15px; color: #34495e;">how outputs change as inputs step uniformly</td>
+      <td style="padding: 12px 15px; color: #34495e;">constant differences between outputs → linear; constant ratios → exponential; symmetric pattern around a center → quadratic</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-width:1px;"></hr>
+  // obj11 — comparison: nth root by parity
+  const obj11Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">n parity</th>
+      <th style="${tableHeaders.comparison}">Domain</th>
+      <th style="${tableHeaders.comparison}">Range</th>
+      <th style="${tableHeaders.comparison}">Symmetry</th>
+      <th style="${tableHeaders.comparison}">Shape</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Even n (4th, 6th, ...)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">none — only the right half exists</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">resembles √x: starts at origin, increasing, concave down; higher even roots flatter near 0</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Odd n (5th, 7th, ...)</td>
+      <td style="padding: 12px 15px; color: #34495e;">(−∞, ∞)</td>
+      <td style="padding: 12px 15px; color: #34495e;">(−∞, ∞)</td>
+      <td style="padding: 12px 15px; color: #34495e;">odd — point symmetry about the origin</td>
+      <td style="padding: 12px 15px; color: #34495e;">resembles ∛x: S-curve through origin; higher odd roots flatter</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="color:blue;" />
+  // obj17 — aggregation: growth rate hierarchy
+  const obj17Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Family</th>
+      <th style="${tableHeaders.aggregation}">Examples</th>
+      <th style="${tableHeaders.aggregation}">Growth speed for large x</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Logarithmic</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ln(x), log₁₀(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">slowest — unbounded but very gradual</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Root functions</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√x, ∛x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">slow — increases but below linear</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x, 2x − 3</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">constant rate of change</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Polynomial (degree ≥ 2)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x², x³, x⁴</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">accelerating — faster than linear</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Exponential</td>
+      <td style="padding: 12px 15px; color: #34495e;">2ˣ, eˣ</td>
+      <td style="padding: 12px 15px; color: #34495e;">fastest — eventually overtakes any polynomial</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
-
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
- 
+  // obj18 — summary capstone: all families at a glance
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Family</th>
+      <th style="${tableHeaders.summary}">Parent form</th>
+      <th style="${tableHeaders.summary}">Domain</th>
+      <th style="${tableHeaders.summary}">Range</th>
+      <th style="${tableHeaders.summary}">Defining feature</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Constant</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) = c</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{c}</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">horizontal line</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">mx + b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">constant slope, straight line</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quadratic</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ax² + bx + c</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[k, ∞) or (−∞, k]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">parabola with vertex (h, k)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cubic</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ax³ + …</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">S-curve; up to 2 turning points</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Higher polynomial (deg n)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">aₙxⁿ + … + a₀</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ (odd n) or bounded one side (even n)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">up to n zeros, n − 1 turning points; smooth everywhere</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rational</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">P(x) ⁄ Q(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ excluding zeros of Q</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">varies</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vertical and horizontal asymptotes; holes possible</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Square root</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">starts at origin, concave down, gradually rising</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cube root</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∛x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">S-curve through origin; odd symmetry</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">nth root, even n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x^(1⁄n)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">flatter generalization of √x</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">nth root, odd n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x^(1⁄n)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">flatter generalization of ∛x</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Absolute value</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|x|</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">V-shape with vertex at origin</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Step (floor / ceiling)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">⌊x⌋, ⌈x⌉</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℤ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">staircase — horizontal segments with jumps</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Exponential</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a · bˣ (b &gt; 0, b ≠ 1)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(0, ∞) or (−∞, 0)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rapid growth or decay; horizontal asymptote y = 0</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Logarithmic</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">logₐ(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(0, ∞)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">inverse of exp; vertical asymptote x = 0</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sine / cosine</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sin(x), cos(x)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−1, 1]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">periodic wave, period 2π</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Tangent</td>
+      <td style="padding: 12px 15px; color: #34495e;">tan(x)</td>
+      <td style="padding: 12px 15px; color: #34495e;">ℝ excl. π⁄2 + nπ</td>
+      <td style="padding: 12px 15px; color: #34495e;">ℝ</td>
+      <td style="padding: 12px 15px; color: #34495e;">period π; vertical asymptotes at excluded points</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 
 //   const sectionsContent = {
@@ -109,7 +301,9 @@
 
 // From a table: Look for patterns in how outputs change. Constant differences between successive outputs suggest linear. Constant ratios suggest exponential. Symmetric patterns around a central point suggest quadratic.
 
-// Some functions belong to multiple families depending on perspective. The function $f(x) = x^4$ is polynomial (degree four) and also a power function. Context determines which classification is most useful.`,
+// Some functions belong to multiple families depending on perspective. The function $f(x) = x^4$ is polynomial (degree four) and also a power function. Context determines which classification is most useful.
+
+// The table below collects the diagnostic clues by source — equation, graph, or table — alongside the family-specific signs that point to each common family.`,
 //     before: ``,
 //     after: ``,
 //     link: '',
@@ -313,7 +507,9 @@
 
 // All $n$th root functions are one-to-one. Each is the [inverse](!/functions/inverse) of the corresponding power function $x^n$ (with appropriate domain restriction for even $n$).
 
-// Radical functions with expressions under the root — like $f(x) = \\sqrt{x^2 + 1}$ or $f(x) = \\sqrt[3]{2x - 5}$ — combine radical behavior with [transformations](!/functions/transformations) and [compositions](!/functions/composition).`,
+// Radical functions with expressions under the root — like $f(x) = \\sqrt{x^2 + 1}$ or $f(x) = \\sqrt[3]{2x - 5}$ — combine radical behavior with [transformations](!/functions/transformations) and [compositions](!/functions/composition).
+
+// The table below sets the even-n and odd-n cases side by side with their domains, ranges, symmetry, and characteristic shape.`,
 //     before: ``,
 //     after: ``,
 //     link: '',
@@ -476,7 +672,17 @@
 // - Periodic: trigonometric functions
 // - Non-periodic: all polynomial, rational, exponential, logarithmic, radical functions
 
-// Each family has its natural applications. Linear for constant rates. Quadratic for projectile motion. Exponential for growth and decay. Trigonometric for cycles. Choosing the right family is the first step in mathematical modeling.`,
+// Each family has its natural applications. Linear for constant rates. Quadratic for projectile motion. Exponential for growth and decay. Trigonometric for cycles. Choosing the right family is the first step in mathematical modeling.
+
+// The table below puts the growth ranking in compact form with representative examples — handy when comparing how fast different families ultimately grow.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj18: {
+//     title: `Families at a Glance`,
+//     content: `The page covers more than a dozen function families, each with its own algebraic structure, characteristic graph, domain restrictions, and identifying features. The table below collects them all in one place — useful as a reference card when classifying an unfamiliar function or recalling a family's key properties at a glance.`,
 //     before: ``,
 //     after: ``,
 //     link: '',
@@ -484,662 +690,7 @@
 
 // }
 
-
-//  const introContent = {
-//   id: "intro",
-//   title: "The Shape of Functions",
-//   content: `Functions cluster into families. Linear functions form one family — all straight lines, differing only in slope and position. Quadratic functions form another — all parabolas, differing in width, direction, and location. Each family shares a common algebraic structure that produces a characteristic shape.
-
-// Recognizing a function's family reveals its behavior before any calculation begins. A quadratic has a vertex and opens up or down. An exponential grows without bound or decays toward zero. A rational function may have asymptotes. The family determines these broad features; the specific parameters determine the details.`
-// }
-
-
-
-
-//   const faqQuestions = {
-//     q1: {
-//       question: "What is a function family in math?",
-//       answer: "A function family is a collection of functions sharing the same fundamental structure, defined by a common formula type with parameters that vary from one member to another. Each family has a parent function — the simplest representative with parameters set to produce the most basic shape. Recognizing family membership enables prediction of behavior before any calculation begins."
-//     },
-//     q2: {
-//       question: "What are the most common function families?",
-//       answer: "The most common function families include linear, quadratic, cubic, polynomial, rational, exponential, logarithmic, radical (square root and cube root), absolute value, step, and trigonometric functions. Each family has a characteristic graph shape and algebraic structure that distinguishes it from the others."
-//     },
-//     q3: {
-//       question: "How do you identify which function family a function belongs to?",
-//       answer: "You can identify a function's family from its equation, graph, or a table of values. From an equation, look for the defining operation — a variable in the exponent signals exponential, a ratio of polynomials signals rational, and so on. From a graph, look for characteristic shapes such as a straight line for linear, a U-shape for quadratic, or asymptotes for rational and exponential functions."
-//     },
-//     q4: {
-//       question: "What is the parent function of the quadratic family?",
-//       answer: "The parent function of the quadratic family is f(x) = x², with its vertex at the origin and opening upward. All other quadratic functions arise through transformations of this parent — shifting, stretching, compressing, or reflecting. The vertex form f(x) = a(x - h)² + k makes these transformations explicit."
-//     },
-//     q5: {
-//       question: "How do exponential and logarithmic function families relate to each other?",
-//       answer: "Exponential and logarithmic functions are inverse function families — each undoes the other. The exponential function f(x) = bˣ has domain all real numbers and range (0, ∞), while the logarithmic function f(x) = log_b(x) has domain (0, ∞) and range all real numbers. This inverse relationship means their graphs are reflections of each other across the line y = x."
-//     }
-//   }
-
-//   const seoData = {
-//     title: "Function Families: Types, Graphs & Properties",
-//     description: "Learn all major function families including linear, quadratic, exponential, logarithmic, rational, and radical functions. Explore their graphs, properties, and how to identify each type.",
-//     keywords: keyWords.join(", "),
-//     url: "/functions/families",
-//     name: "Function Families"
-//   }
-
-//   const schemas = {
-//     learningResource: {
-//       "@context": "https://schema.org",
-//       "@type": "LearningResource",
-//       "name": seoData.name,
-//       "description": seoData.description,
-//       "url": `https://www.learnmathclass.com${seoData.url}`,
-//       "inLanguage": "en-US",
-//       "datePublished": "2024-01-15",
-//       "dateModified": new Date().toISOString(),
-//       "author": {
-//         "@type": "Organization",
-//         "name": "Learn Math Class",
-//         "url": "https://www.learnmathclass.com"
-//       },
-//       "teaches": [
-//         "What a function family is and how parent functions work",
-//         "How to identify function families from equations, graphs, and tables",
-//         "Properties and graphs of linear and quadratic functions",
-//         "Exponential growth and decay versus logarithmic functions",
-//         "Rational, radical, and absolute value function families",
-//         "Comparing growth rates and domains across all function families"
-//       ]
-//     },
-//     breadcrumb: {
-//       "@context": "https://schema.org",
-//       "@type": "BreadcrumbList",
-//       "itemListElement": [
-//         {
-//           "@type": "ListItem",
-//           "position": 1,
-//           "name": "Home",
-//           "item": "https://www.learnmathclass.com"
-//         },
-//         {
-//           "@type": "ListItem",
-//           "position": 2,
-//           "name": "Functions",
-//           "item": "https://www.learnmathclass.com/functions"
-//         },
-//         {
-//           "@type": "ListItem",
-//           "position": 3,
-//           "name": seoData.name,
-//           "item": `https://www.learnmathclass.com${seoData.url}`
-//         }
-//       ]
-//     },
-//     faq: {
-//       "@context": "https://schema.org",
-//       "@type": "FAQPage",
-//       "mainEntity": [
-//         {
-//           "@type": "Question",
-//           "name": faqQuestions.q1.question,
-//           "acceptedAnswer": { "@type": "Answer", "text": faqQuestions.q1.answer }
-//         },
-//         {
-//           "@type": "Question",
-//           "name": faqQuestions.q2.question,
-//           "acceptedAnswer": { "@type": "Answer", "text": faqQuestions.q2.answer }
-//         },
-//         {
-//           "@type": "Question",
-//           "name": faqQuestions.q3.question,
-//           "acceptedAnswer": { "@type": "Answer", "text": faqQuestions.q3.answer }
-//         },
-//         {
-//           "@type": "Question",
-//           "name": faqQuestions.q4.question,
-//           "acceptedAnswer": { "@type": "Answer", "text": faqQuestions.q4.answer }
-//         },
-//         {
-//           "@type": "Question",
-//           "name": faqQuestions.q5.question,
-//           "acceptedAnswer": { "@type": "Answer", "text": faqQuestions.q5.answer }
-//         }
-//       ]
-//     }
-//   }
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//          faqQuestions,
-//          schemas,
-//           seoData: {
-//         title: "Function Families: Types, Graphs & Properties",
-//         description: "Learn all major function families including linear, quadratic, exponential, logarithmic, rational, and radical functions. Explore their graphs, properties, and how to identify each type.",
-//         keywords: keyWords.join(", "),
-//         url: "/functions/families",
-//          name: "Function Families"
-//       },
-//        }
-//     }
-//    }
-
-// export default function FamiliesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-
-
-//   const genericSections=[
-//      {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     {
-//         id:'11',
-//         title:sectionsContent.obj11.title,
-//         link:sectionsContent.obj11.link,
-//         content:[
-//           sectionsContent.obj11.content,
-//         ]
-//     },
-//     {
-//         id:'12',
-//         title:sectionsContent.obj12.title,
-//         link:sectionsContent.obj12.link,
-//         content:[
-//           sectionsContent.obj12.content,
-//         ]
-//     },
-//     {
-//         id:'13',
-//         title:sectionsContent.obj13.title,
-//         link:sectionsContent.obj13.link,
-//         content:[
-//           sectionsContent.obj13.content,
-//         ]
-//     },
-//     {
-//         id:'14',
-//         title:sectionsContent.obj14.title,
-//         link:sectionsContent.obj14.link,
-//         content:[
-//           sectionsContent.obj14.content,
-//         ]
-//     },
-//     {
-//         id:'15',
-//         title:sectionsContent.obj15.title,
-//         link:sectionsContent.obj15.link,
-//         content:[
-//           sectionsContent.obj15.content,
-//         ]
-//     },
-//     {
-//         id:'16',
-//         title:sectionsContent.obj16.title,
-//         link:sectionsContent.obj16.link,
-//         content:[
-//           sectionsContent.obj16.content,
-//         ]
-//     },
-//     {
-//         id:'17',
-//         title:sectionsContent.obj17.title,
-//         link:sectionsContent.obj17.link,
-//         content:[
-//           sectionsContent.obj17.content,
-//         ]
-//     },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-
-// ]
-
-//   return (
-//    <>
-//    <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-
-//   <meta name="robots" content="index, follow" />
-
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.learningResource) }}
-//   />
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
-//   />
-//   <script
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar
-//            side='right'
-//            // topOffset='65px'
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          />
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Function Families</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//        <KeyTermsCard
-//      id="0"
-//      title={sectionsContent.obj0.title}
-//      content={sectionsContent.obj0.content}
-//      after={sectionsContent.obj0.after}
-//      variant="light"
-//    />
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-
-  const keyWords=['function families','parent functions','linear function','quadratic function','exponential function','polynomial functions','rational functions','absolute value function','square root function','types of functions','function classification','logarithmic function','cubic function','radical functions']
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-
-  // ---------- TABLES ----------
-
-  // obj2 — aggregation: identifying a family from each representation
-  const obj2Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Source</th>
-      <th style="${tableHeaders.aggregation}">What to look for</th>
-      <th style="${tableHeaders.aggregation}">Family-specific clues</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Equation</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the defining algebraic operation or structure</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x in the exponent → exponential; x under a radical → radical; ratio of polynomials → rational; highest power of x = n → polynomial of degree n</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Graph</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">overall shape and key features</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">straight line → linear; parabola → quadratic; S-curve → cubic; periodic wave → trigonometric; asymptotes → rational or exponential</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Table of values</td>
-      <td style="padding: 12px 15px; color: #34495e;">how outputs change as inputs step uniformly</td>
-      <td style="padding: 12px 15px; color: #34495e;">constant differences between outputs → linear; constant ratios → exponential; symmetric pattern around a center → quadratic</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj11 — comparison: nth root by parity
-  const obj11Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">n parity</th>
-      <th style="${tableHeaders.comparison}">Domain</th>
-      <th style="${tableHeaders.comparison}">Range</th>
-      <th style="${tableHeaders.comparison}">Symmetry</th>
-      <th style="${tableHeaders.comparison}">Shape</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Even n (4th, 6th, ...)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">none — only the right half exists</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">resembles √x: starts at origin, increasing, concave down; higher even roots flatter near 0</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Odd n (5th, 7th, ...)</td>
-      <td style="padding: 12px 15px; color: #34495e;">(−∞, ∞)</td>
-      <td style="padding: 12px 15px; color: #34495e;">(−∞, ∞)</td>
-      <td style="padding: 12px 15px; color: #34495e;">odd — point symmetry about the origin</td>
-      <td style="padding: 12px 15px; color: #34495e;">resembles ∛x: S-curve through origin; higher odd roots flatter</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj17 — aggregation: growth rate hierarchy
-  const obj17Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Family</th>
-      <th style="${tableHeaders.aggregation}">Examples</th>
-      <th style="${tableHeaders.aggregation}">Growth speed for large x</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Logarithmic</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ln(x), log₁₀(x)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">slowest — unbounded but very gradual</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Root functions</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√x, ∛x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">slow — increases but below linear</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x, 2x − 3</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">constant rate of change</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Polynomial (degree ≥ 2)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x², x³, x⁴</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">accelerating — faster than linear</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Exponential</td>
-      <td style="padding: 12px 15px; color: #34495e;">2ˣ, eˣ</td>
-      <td style="padding: 12px 15px; color: #34495e;">fastest — eventually overtakes any polynomial</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj18 — summary capstone: all families at a glance
-  const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Family</th>
-      <th style="${tableHeaders.summary}">Parent form</th>
-      <th style="${tableHeaders.summary}">Domain</th>
-      <th style="${tableHeaders.summary}">Range</th>
-      <th style="${tableHeaders.summary}">Defining feature</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Constant</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) = c</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{c}</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">horizontal line</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">mx + b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">constant slope, straight line</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quadratic</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ax² + bx + c</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[k, ∞) or (−∞, k]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">parabola with vertex (h, k)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cubic</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ax³ + …</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">S-curve; up to 2 turning points</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Higher polynomial (deg n)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">aₙxⁿ + … + a₀</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ (odd n) or bounded one side (even n)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">up to n zeros, n − 1 turning points; smooth everywhere</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rational</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">P(x) ⁄ Q(x)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ excluding zeros of Q</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">varies</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vertical and horizontal asymptotes; holes possible</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Square root</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">starts at origin, concave down, gradually rising</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cube root</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∛x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">S-curve through origin; odd symmetry</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">nth root, even n</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x^(1⁄n)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">flatter generalization of √x</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">nth root, odd n</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x^(1⁄n)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">flatter generalization of ∛x</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Absolute value</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|x|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">V-shape with vertex at origin</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Step (floor / ceiling)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">⌊x⌋, ⌈x⌉</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℤ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">staircase — horizontal segments with jumps</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Exponential</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a · bˣ (b &gt; 0, b ≠ 1)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(0, ∞) or (−∞, 0)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rapid growth or decay; horizontal asymptote y = 0</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Logarithmic</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">logₐ(x)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(0, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">inverse of exp; vertical asymptote x = 0</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sine / cosine</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sin(x), cos(x)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−1, 1]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">periodic wave, period 2π</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Tangent</td>
-      <td style="padding: 12px 15px; color: #34495e;">tan(x)</td>
-      <td style="padding: 12px 15px; color: #34495e;">ℝ excl. π⁄2 + nπ</td>
-      <td style="padding: 12px 15px; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; color: #34495e;">period π; vertical asymptotes at excluded points</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-
-  const sectionsContent = {
+const sectionsContent = {
 
     obj0 : {
   title: `Key Terms`,
@@ -1221,7 +772,16 @@ As limiting behavior, other functions may approach constant functions. A rationa
 
   obj4: {
     title: `Linear Functions`,
-    content: `A linear function has the form $f(x) = mx + b$ where $m$ is the slope and $b$ is the $y$-intercept. The [graph](!/functions/graphs) is a straight line.
+    content: `A linear function has the form:
+
+@academic[formula_callout:Slope Intercept Form
+$$f(x) = mx + b$$
+/functions/formulas#slope_intercept_form]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
+
+where $m$ is the slope and $b$ is the $y$-intercept. The [graph](!/functions/graphs) is a straight line.
 
 The slope $m$ determines direction and steepness. When $m > 0$, the line rises from left to right. When $m < 0$, it falls. When $m = 0$, the line is horizontal (a constant function). Larger $|m|$ means steeper slope.
 
@@ -1243,11 +803,45 @@ The parent linear function is $f(x) = x$ — slope $1$, passing through the orig
 
   obj5: {
     title: `Quadratic Functions`,
-    content: `A quadratic function has the form $f(x) = ax^2 + bx + c$ where $a \\neq 0$. The [graph](!/functions/graphs) is a parabola.
+    content: `A quadratic function has the form:
+
+@academic[formula_callout:Standard Form Quadratic
+$$f(x) = ax^2 + bx + c$$
+/functions/formulas#standard_form_quadratic]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
+
+where $a \\neq 0$. The [graph](!/functions/graphs) is a parabola.
 
 When $a > 0$, the parabola opens upward with a minimum at the vertex. When $a < 0$, it opens downward with a maximum at the vertex. Larger $|a|$ makes the parabola narrower; smaller $|a|$ makes it wider.
 
-The vertex occurs at $x = -\\dfrac{b}{2a}$. The vertex form $f(x) = a(x - h)^2 + k$ places the vertex at $(h, k)$ and shows transformations explicitly.
+The vertex sits on the axis of symmetry:
+
+@academic[formula_callout:Axis of Symmetry
+$$x = -\\frac{b}{2a}$$
+/functions/formulas#axis_of_symmetry]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
+
+The vertex form places the vertex at $(h, k)$ explicitly and shows transformations directly:
+
+@academic[formula_callout:Vertex Form Quadratic
+$$f(x) = a(x - h)^2 + k$$
+/functions/formulas#vertex_form_quadratic]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
+
+The vertex's coordinates can be recovered from the standard-form coefficients directly:
+
+@academic[formula_callout:Vertex from Coefficients
+$$h = -\\frac{b}{2a}, \\quad k = f(h)$$
+/functions/formulas#vertex_from_coefficients]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
 
 [Domain](!/functions/domain): all real numbers.
 
@@ -1319,14 +913,38 @@ $$f(x) = \\frac{P(x)}{Q(x)}$$
 
 The [domain](!/functions/domain) excludes values where $Q(x) = 0$. These exclusions create vertical asymptotes or holes.
 
-Vertical asymptotes occur where $Q(x) = 0$ and $P(x) \\neq 0$. The function approaches $\\pm\\infty$ near these values.
+Vertical asymptotes occur where the denominator vanishes but the numerator does not. Formally:
+
+@academic[formula_callout:Vertical Asymptote Rational
+$$x = a \\quad \\text{where } Q(a) = 0 \\text{ and } P(a) \\neq 0$$
+/functions/formulas#vertical_asymptote_rational]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
+
+The function approaches $\\pm\\infty$ near these values.
 
 Holes (removable discontinuities) occur where both $P(x) = 0$ and $Q(x) = 0$ share a common factor. The graph has a gap at that point.
 
-Horizontal asymptotes describe end behavior:
-- Degree of $P <$ degree of $Q$: horizontal asymptote at $y = 0$.
-- Degrees equal: horizontal asymptote at $y = \\dfrac{\\text{leading coefficient of } P}{\\text{leading coefficient of } Q}$.
-- Degree of $P >$ degree of $Q$: no horizontal asymptote (oblique asymptote if degree difference is $1$).
+Horizontal asymptotes describe end behavior. When the degrees of numerator and denominator are equal, the asymptote sits at the ratio of leading coefficients:
+
+@academic[formula_callout:Horizontal Asymptote Equal Degree
+$$y = \\frac{a_n}{b_m} \\quad \\text{when } \\deg P = \\deg Q$$
+/functions/formulas#horizontal_asymptote_equal_degree]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
+
+When the numerator's degree is lower than the denominator's, the asymptote is the $x$-axis itself:
+
+@academic[formula_callout:Horizontal Asymptote Numerator Lower
+$$y = 0 \\quad \\text{when } \\deg P < \\deg Q$$
+/functions/formulas#horizontal_asymptote_numerator_lower]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
+
+When the numerator's degree exceeds the denominator's, there is no horizontal asymptote — an oblique asymptote appears when the degree difference is exactly $1$.
 
 The simplest rational function is $f(x) = \\dfrac{1}{x}$, with vertical asymptote at $x = 0$, horizontal asymptote at $y = 0$, and hyperbolic shape with branches in quadrants I and III.`,
     before: ``,
@@ -1579,6 +1197,7 @@ The table below puts the growth ranking in compact form with representative exam
   },
 
 }
+
 
 
  const introContent = {

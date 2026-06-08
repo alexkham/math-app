@@ -235,54 +235,133 @@ const setTheoryFormulasList = [
     },
   },
 
-  {
+  // {
+  //   name: 'Double Complement Law',
+  //   entity: 'complement',
+  //   category: 'Complement Laws',
+  //   formula: `$$(A^c)^c = A$$`,
+  //   link: { label: 'Complement Laws', url: '/set-theory/rules#complement' },
+  //   fields: {
+  //     explanation: `Negating membership twice returns the original condition. The complement operation is its own inverse — an involution.`,
+  //     derivation: `$x \\in (A^c)^c$ iff $x \\notin A^c$ iff it is not the case that $x \\notin A$, which is $x \\in A$.`,
+  //     related_formulas: `- [Complement Law - Union](!/set-theory/formulas#complement_law_-_union)\n- [Complement Law - Intersection](!/set-theory/formulas#complement_law_-_intersection)`,
+  //     related_definitions: `- [Complement](!/set-theory/definitions#complement)`,
+  //   },
+  // },
+
+   {
     name: 'Double Complement Law',
     entity: 'complement',
     category: 'Complement Laws',
     formula: `$$(A^c)^c = A$$`,
     link: { label: 'Complement Laws', url: '/set-theory/rules#complement' },
     fields: {
-      explanation: `Negating membership twice returns the original condition. The complement operation is its own inverse — an involution.`,
+      explanation: [
+        `Negating membership twice returns the original condition. The complement operation is its own inverse — an involution.`,
+        {
+          component: 'FunctionMachineDiagram',
+          steps: [
+            { value: '$x \\in (A^c)^c$', operation: 'complement definition' },
+            { value: '$x \\notin A^c$', operation: 'complement definition' },
+            { value: '$x \\in A$' }
+          ]
+        }
+      ],
       derivation: `$x \\in (A^c)^c$ iff $x \\notin A^c$ iff it is not the case that $x \\notin A$, which is $x \\in A$.`,
       related_formulas: `- [Complement Law - Union](!/set-theory/formulas#complement_law_-_union)\n- [Complement Law - Intersection](!/set-theory/formulas#complement_law_-_intersection)`,
       related_definitions: `- [Complement](!/set-theory/definitions#complement)`,
     },
   },
+ 
 
 
 
 // ─── Category: De Morgan Laws (2 entries) ───────────────────────────
 
 
-  {
+  // {
+  //   name: 'De Morgan Law - Union',
+  //   entity: 'complement',
+  //   category: 'De Morgan Laws',
+  //   formula: `$$(A \\cup B)^c = A^c \\cap B^c$$`,
+  //   link: { label: 'De Morgan Laws', url: '/set-theory/rules#de_morgan' },
+  //   fields: {
+  //     explanation: `The complement of a union is the intersection of complements. To not belong to $A \\cup B$, an element must fail to belong to both $A$ and $B$ separately.`,
+  //     derivation: `$x \\in (A \\cup B)^c$ iff $x \\notin A \\cup B$ iff it is not the case that $x \\in A$ or $x \\in B$. By logical De Morgan, this is $x \\notin A$ and $x \\notin B$, i.e. $x \\in A^c \\cap B^c$.`,
+  //     variants: `Generalizes to arbitrary collections:\n\n$$\\left(\\bigcup_i A_i\\right)^c = \\bigcap_i A_i^c$$`,
+  //     related_formulas: `- [De Morgan Law - Intersection](!/set-theory/formulas#de_morgan_law_-_intersection)`,
+  //     related_definitions: `- [Complement](!/set-theory/definitions#complement)\n- [Union](!/set-theory/definitions#union)\n- [Intersection](!/set-theory/definitions#intersection)`,
+  //   },
+  // },
+
+
+   {
     name: 'De Morgan Law - Union',
     entity: 'complement',
     category: 'De Morgan Laws',
     formula: `$$(A \\cup B)^c = A^c \\cap B^c$$`,
     link: { label: 'De Morgan Laws', url: '/set-theory/rules#de_morgan' },
     fields: {
-      explanation: `The complement of a union is the intersection of complements. To not belong to $A \\cup B$, an element must fail to belong to both $A$ and $B$ separately.`,
+      explanation: [
+        `The complement of a union is the intersection of complements. To not belong to $A \\cup B$, an element must fail to belong to both $A$ and $B$ separately.`,
+        {
+          component: 'FunctionMachineDiagram',
+          steps: [
+            { value: '$x \\in (A \\cup B)^c$', operation: 'complement + logical De Morgan' },
+            { value: '$x \\notin A \\land x \\notin B$', operation: 'complement definition' },
+            { value: '$x \\in A^c \\cap B^c$' }
+          ]
+        }
+      ],
       derivation: `$x \\in (A \\cup B)^c$ iff $x \\notin A \\cup B$ iff it is not the case that $x \\in A$ or $x \\in B$. By logical De Morgan, this is $x \\notin A$ and $x \\notin B$, i.e. $x \\in A^c \\cap B^c$.`,
       variants: `Generalizes to arbitrary collections:\n\n$$\\left(\\bigcup_i A_i\\right)^c = \\bigcap_i A_i^c$$`,
       related_formulas: `- [De Morgan Law - Intersection](!/set-theory/formulas#de_morgan_law_-_intersection)`,
       related_definitions: `- [Complement](!/set-theory/definitions#complement)\n- [Union](!/set-theory/definitions#union)\n- [Intersection](!/set-theory/definitions#intersection)`,
     },
   },
+ 
 
-  {
+  // {
+  //   name: 'De Morgan Law - Intersection',
+  //   entity: 'complement',
+  //   category: 'De Morgan Laws',
+  //   formula: `$$(A \\cap B)^c = A^c \\cup B^c$$`,
+  //   link: { label: 'De Morgan Laws', url: '/set-theory/rules#de_morgan' },
+  //   fields: {
+  //     explanation: `The complement of an intersection is the union of complements. To not belong to $A \\cap B$, an element need only fail to belong to one of $A$ or $B$.`,
+  //     derivation: `$x \\in (A \\cap B)^c$ iff $x \\notin A \\cap B$ iff it is not the case that $x \\in A$ and $x \\in B$. By logical De Morgan, this is $x \\notin A$ or $x \\notin B$, i.e. $x \\in A^c \\cup B^c$.`,
+  //     variants: `Generalizes to arbitrary collections:\n\n$$\\left(\\bigcap_i A_i\\right)^c = \\bigcup_i A_i^c$$`,
+  //     related_formulas: `- [De Morgan Law - Union](!/set-theory/formulas#de_morgan_law_-_union)`,
+  //     related_definitions: `- [Complement](!/set-theory/definitions#complement)\n- [Union](!/set-theory/definitions#union)\n- [Intersection](!/set-theory/definitions#intersection)`,
+  //   },
+  // },
+
+
+   {
     name: 'De Morgan Law - Intersection',
     entity: 'complement',
     category: 'De Morgan Laws',
     formula: `$$(A \\cap B)^c = A^c \\cup B^c$$`,
     link: { label: 'De Morgan Laws', url: '/set-theory/rules#de_morgan' },
     fields: {
-      explanation: `The complement of an intersection is the union of complements. To not belong to $A \\cap B$, an element need only fail to belong to one of $A$ or $B$.`,
+      explanation: [
+        `The complement of an intersection is the union of complements. To not belong to $A \\cap B$, an element need only fail to belong to one of $A$ or $B$.`,
+        {
+          component: 'FunctionMachineDiagram',
+          steps: [
+            { value: '$x \\in (A \\cap B)^c$', operation: 'complement + logical De Morgan' },
+            { value: '$x \\notin A \\lor x \\notin B$', operation: 'complement definition' },
+            { value: '$x \\in A^c \\cup B^c$' }
+          ]
+        }
+      ],
       derivation: `$x \\in (A \\cap B)^c$ iff $x \\notin A \\cap B$ iff it is not the case that $x \\in A$ and $x \\in B$. By logical De Morgan, this is $x \\notin A$ or $x \\notin B$, i.e. $x \\in A^c \\cup B^c$.`,
       variants: `Generalizes to arbitrary collections:\n\n$$\\left(\\bigcap_i A_i\\right)^c = \\bigcup_i A_i^c$$`,
       related_formulas: `- [De Morgan Law - Union](!/set-theory/formulas#de_morgan_law_-_union)`,
       related_definitions: `- [Complement](!/set-theory/definitions#complement)\n- [Union](!/set-theory/definitions#union)\n- [Intersection](!/set-theory/definitions#intersection)`,
     },
   },
+ 
 
 
 
@@ -296,7 +375,7 @@ const setTheoryFormulasList = [
     category: 'Absorption Laws',
     formula: `$$A \\cup (A \\cap B) = A$$`,
     // TODO: link target /set-theory/rules#absorption — section does not yet exist
-    link: { label: '', url: '' },
+    link: { label: "Absorption Laws", url: "/set-theory/rules" },
     fields: {
       explanation: `Adding $A \\cap B$ to $A$ contributes nothing new — every element of $A \\cap B$ already lies in $A$. The inner intersection is "absorbed" by the outer union.`,
       derivation: `$A \\cap B \\subseteq A$, so $A \\cup (A \\cap B) \\subseteq A$. Conversely $A \\subseteq A \\cup (A \\cap B)$ trivially. By mutual containment the sets are equal.`,
@@ -311,7 +390,7 @@ const setTheoryFormulasList = [
     category: 'Absorption Laws',
     formula: `$$A \\cap (A \\cup B) = A$$`,
     // TODO: link target /set-theory/rules#absorption — section does not yet exist
-    link: { label: '', url: '' },
+    link: { label: "Absorption Laws", url: "/set-theory/rules" },
     fields: {
       explanation: `Restricting $A \\cup B$ to elements also in $A$ recovers exactly $A$. The inner union is "absorbed" by the outer intersection.`,
       derivation: `$A \\subseteq A \\cup B$, so $A \\cap (A \\cup B) = A$ since every element of $A$ already lies in $A \\cup B$. Formally: if $x \\in A$ then $x \\in A \\cup B$, hence $x \\in A \\cap (A \\cup B)$. The reverse inclusion is by definition of intersection.`,
@@ -355,7 +434,7 @@ const setTheoryFormulasList = [
     category: 'Cardinality Formulas',
     formula: `$$|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C| + |A \\cap B \\cap C|$$`,
     // TODO: link target /set-theory/cardinality#inclusion_exclusion — section does not yet exist
-    link: { label: '', url: '' },
+   link: { label: "Inclusion-Exclusion Principle", url: "/set-theory/cardinality#2" },
     fields: {
       explanation: `Extends the two-set formula. Pairwise intersections are subtracted to undo double-counting; the triple intersection is added back because it was subtracted three times after being added three times.`,
       conditions: `Requires $A$, $B$, $C$ finite.`,
@@ -371,7 +450,7 @@ const setTheoryFormulasList = [
     category: 'Cardinality Formulas',
     formula: `$$|A \\cup B| = |A| + |B| \\quad \\text{when } A \\cap B = \\emptyset$$`,
     // TODO: link target /set-theory/cardinality — could land on cardinality#2 once disjoint case is broken out
-    link: { label: '', url: '' },
+   link: { label: "Cardinality of Disjoint Union", url: "/set-theory/cardinality#2" },
     fields: {
       explanation: `When sets share no elements, the size of the union is simply the sum of the sizes. Special case of inclusion-exclusion with $|A \\cap B| = 0$.`,
       conditions: `$A$ and $B$ finite and disjoint.`,
@@ -428,14 +507,40 @@ const setTheoryFormulasList = [
 // ─── Category: Operation Identities (2 entries) ─────────────────────
 
 
-  {
+  // {
+  //   name: 'Difference as Intersection with Complement',
+  //   entity: 'set_difference',
+  //   category: 'Operation Identities',
+  //   formula: `$$A \\setminus B = A \\cap B^c$$`,
+  //   link: { label: 'Set Difference', url: '/set-theory/operations#4' },
+  //   fields: {
+  //     explanation: `Removing $B$ from $A$ is the same as intersecting $A$ with everything outside $B$. Lets set difference be expressed using only intersection and complement, which simplifies algebraic manipulation.`,
+  //     derivation: `$x \\in A \\setminus B$ iff $x \\in A$ and $x \\notin B$, i.e. $x \\in A$ and $x \\in B^c$, which is $x \\in A \\cap B^c$.`,
+  //     conditions: `Requires a fixed universal set $U$ for $B^c$ to be defined.`,
+  //     related_formulas: `- [Symmetric Difference - Union Minus Intersection](!/set-theory/formulas#symmetric_difference_-_union_minus_intersection)`,
+  //     related_definitions: `- [Set Difference](!/set-theory/definitions#set_difference)\n- [Complement](!/set-theory/definitions#complement)\n- [Intersection](!/set-theory/definitions#intersection)`,
+  //   },
+  // },
+
+
+    {
     name: 'Difference as Intersection with Complement',
     entity: 'set_difference',
     category: 'Operation Identities',
     formula: `$$A \\setminus B = A \\cap B^c$$`,
     link: { label: 'Set Difference', url: '/set-theory/operations#4' },
     fields: {
-      explanation: `Removing $B$ from $A$ is the same as intersecting $A$ with everything outside $B$. Lets set difference be expressed using only intersection and complement, which simplifies algebraic manipulation.`,
+      explanation: [
+        `Removing $B$ from $A$ is the same as intersecting $A$ with everything outside $B$. Lets set difference be expressed using only intersection and complement, which simplifies algebraic manipulation.`,
+        {
+          component: 'FunctionMachineDiagram',
+          steps: [
+            { value: '$x \\in A \\setminus B$', operation: 'definition of difference' },
+            { value: '$x \\in A \\land x \\notin B$', operation: 'complement + intersection' },
+            { value: '$x \\in A \\cap B^c$' }
+          ]
+        }
+      ],
       derivation: `$x \\in A \\setminus B$ iff $x \\in A$ and $x \\notin B$, i.e. $x \\in A$ and $x \\in B^c$, which is $x \\in A \\cap B^c$.`,
       conditions: `Requires a fixed universal set $U$ for $B^c$ to be defined.`,
       related_formulas: `- [Symmetric Difference - Union Minus Intersection](!/set-theory/formulas#symmetric_difference_-_union_minus_intersection)`,

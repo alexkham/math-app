@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
@@ -114,7 +115,6 @@ const SVGRender = {
       if (showLabels) s += `<text class="ki-ker-label" x="${ox}" y="${oy - 138}" text-anchor="middle">ker A = \u211D\u00B2</text>`;
       return s;
     }
-    // rank 2 — trivial
     const [ox, oy] = tx([0, 0]);
     let s = `<circle class="ki-trivial-ring" cx="${ox}" cy="${oy}" r="12"/>`;
     if (showLabels) s += `<text class="ki-trivial-label" x="${ox + 18}" y="${oy - 12}">ker A = {0}</text>`;
@@ -277,6 +277,10 @@ const SCENARIO_GROUPS = [
   { key: 'zero',  label: 'Image is origin', tag: 'rank 0',                  tagClass: 'zero' },
 ];
 
+// Which scenario groups appear on each side of the layout
+const LEFT_SCENARIO_GROUPS  = ['full', 'zero'];
+const RIGHT_SCENARIO_GROUPS = ['rank1'];
+
 const ROTATE_ANGLES = [30, 45, 60, 90, 120, 180, 270];
 
 const DEFAULT_LAYERS = {
@@ -373,7 +377,6 @@ function useSweep(A, options = {}) {
     setPlayingState(false);
   }, []);
 
-  // Reset on A change (preset switch, matrix edit)
   useEffect(() => {
     if (rafRef.current != null) {
       cancelAnimationFrame(rafRef.current);
@@ -389,7 +392,6 @@ function useSweep(A, options = {}) {
     setTrail([]);
   }, [A]);
 
-  // Cleanup on unmount
   useEffect(() => () => {
     if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
   }, []);
@@ -491,7 +493,6 @@ function useSweep(A, options = {}) {
     applyAngle(deg * Math.PI / 180, false);
   }, [ensureInit, cancel, applyAngle]);
 
-  // Manual drag: set v directly, reset sweep state
   const setV = useCallback((newV) => {
     cancel();
     sweepRef.current.initialized = false;
@@ -511,40 +512,57 @@ function useSweep(A, options = {}) {
 }
 
 // =====================================================================
-//  SECTION 5  ::  Component CSS
+//  SECTION 5  ::  Component CSS  (3-col, scenarios split)
 // =====================================================================
 const COMPONENT_CSS = `
 .ki-root{
-  --bg:#f0f6fc; --surface:#fff; --surface-2:#f8fafc; --surface-3:#eff6ff;
-  --border:#cbd5e1; --border-soft:#e2e8f0;
-  --text:#0f172a; --text-soft:#1e293b; --text-dim:#475569; --text-faint:#64748b;
-  --accent:#2563eb; --accent-hover:#1d4ed8; --accent-soft:#dbeafe; --accent-subtle:#eff6ff;
+  --bg:#f7f9fc;
+  --surface:#ffffff;
+  --surface-2:#f3f6fa;
+  --border:#dde3ec;
+  --border-strong:#c4cdda;
+
+  --text:#0f1729;
+  --text-soft:#243049;
+  --text-dim:#4a5673;
+  --text-faint:#7989a3;
+
+  --accent:#2b5bd7;
+  --accent-hover:#1e46b3;
+  --accent-soft:#eaf0fb;
+  --accent-line:#c8d6f1;
+
   --vColor:#ea580c; --avColor:#0891b2;
   --vSoft:rgba(234,88,12,.08); --vBorder:rgba(234,88,12,.25);
   --avSoft:rgba(8,145,178,.08); --avBorder:rgba(8,145,178,.25);
   --kernel:#dc2626; --image:#059669;
-  --grid:#e2e8f0; --grid-axis:#94a3b8; --unit:#6366f1;
+  --unit:#6366f1;
+
+  --grid:#e2e8f0; --grid-axis:#94a3b8;
+
   --font-display:'Fraunces',Georgia,serif;
-  --font-body:'IBM Plex Sans',-apple-system,sans-serif;
+  --font-body:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
   --font-mono:'JetBrains Mono',Menlo,monospace;
-  --shadow-card:0 1px 2px rgba(15,23,42,.04),0 1px 3px rgba(15,23,42,.06);
-  --shadow-canvas:0 1px 3px rgba(15,23,42,.05),0 4px 12px rgba(37,99,235,.06);
-  color:var(--text); font-family:var(--font-body); line-height:1.5;
+
+  --shadow-sm:0 1px 0 rgba(15,23,41,.03);
+  --shadow-card:0 1px 0 rgba(15,23,41,.04),0 1px 2px rgba(15,23,41,.04);
+  --radius:6px;
+
+  color:var(--text);font-family:var(--font-body);line-height:1.5;
   -webkit-font-smoothing:antialiased;
+  background:var(--bg);
 }
 .ki-root *{box-sizing:border-box}
 
 .ki-app{
-  height:100vh; display:grid; grid-template-rows:auto auto 1fr auto;
-  gap:8px; padding:10px 22px 12px; max-width:1500px; margin:0 auto;
+  display:grid;grid-template-rows:auto auto;
+  gap:10px;padding:14px 24px;max-width:1340px;margin:0 auto;
   background:var(--bg);
-  background-image:
-    radial-gradient(circle at 12% 8%,rgba(147,197,253,.25) 0%,transparent 35%),
-    radial-gradient(circle at 88% 92%,rgba(191,219,254,.22) 0%,transparent 40%);
 }
 
-.ki-lede{display:flex;align-items:baseline;gap:12px;font-size:12.5px;color:var(--text-dim);line-height:1.4}
-.ki-crumb{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint)}
+/* ---- Lede ---- */
+.ki-lede{display:flex;align-items:baseline;gap:14px;font-size:14px;color:var(--text-dim);line-height:1.45}
+.ki-crumb{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);white-space:nowrap}
 .ki-crumb .ki-dot{color:var(--accent);margin:0 6px}
 .ki-body{flex:1}
 .ki-lede strong{color:var(--text);font-weight:500}
@@ -553,53 +571,67 @@ const COMPONENT_CSS = `
 .ki-lede .ki-v{color:var(--vColor);font-weight:500}
 .ki-lede .ki-av{color:var(--avColor);font-weight:500}
 
-.ki-chips-strip{
-  display:flex;flex-wrap:wrap;gap:4px;padding:4px 8px;
-  background:var(--surface);border:1px solid var(--border-soft);
-  border-radius:6px;box-shadow:var(--shadow-card);
+/* ---- 3-col layout: domain | center (info + sweep) | codomain ---- */
+.ki-main{
+  display:grid;gap:14px;align-items:start;
+  grid-template-columns:minmax(0,1fr) minmax(380px,460px) minmax(0,1fr);
 }
-.ki-chip{
-  display:inline-flex;align-items:center;gap:5px;padding:4px 9px;
-  font-family:var(--font-mono);font-size:10px;letter-spacing:.04em;
-  color:var(--text-faint);background:transparent;border:1px solid transparent;
-  border-radius:4px;cursor:pointer;user-select:none;transition:all .12s;
+.ki-left-col,.ki-center-col,.ki-right-col{display:flex;flex-direction:column;gap:10px;min-width:0}
+
+@media (max-width:1100px){
+  .ki-main{grid-template-columns:1fr}
 }
-.ki-chip input{width:11px;height:11px;margin:0;accent-color:var(--accent);cursor:pointer}
-.ki-chip:hover,.ki-chip:has(input:checked){color:var(--text);background:var(--accent-subtle)}
-.ki-chip .ki-sw{display:inline-block;width:10px;height:3px;border-radius:1px}
 
-.ki-main{display:grid;grid-template-columns:minmax(0,1fr) 470px minmax(0,1fr);gap:14px;min-height:0;align-items:stretch}
-
-.ki-canvas-col{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0;align-items:center}
-.ki-canvas-caption{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);width:100%;max-width:520px}
+/* ---- Canvas cell ---- */
+.ki-canvas-cell{display:flex;flex-direction:column;gap:6px;min-width:0}
+.ki-canvas-caption{
+  display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--text-faint);
+}
 .ki-canvas-caption .ki-space{font-weight:500}
 .ki-canvas-caption.ki-domain .ki-space{color:var(--vColor)}
 .ki-canvas-caption.ki-codomain .ki-space{color:var(--avColor)}
-.ki-canvas-wrap{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;width:100%}
-.ki-canvas{height:100%;aspect-ratio:1/1;max-height:100%;max-width:100%;background:linear-gradient(135deg,#fff 0%,#f0f7fc 100%);border:1px solid var(--border-soft);border-radius:8px;box-shadow:var(--shadow-canvas);display:block}
-.ki-canvas-domain{cursor:crosshair;touch-action:none}
+.ki-canvas{
+  width:100%;aspect-ratio:1/1;
+  background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow-card);
+  display:block;touch-action:none;
+}
+.ki-canvas-domain{cursor:crosshair}
 
+/* ---- Readout ---- */
 .ki-canvas-readout{
+  background:var(--surface);border:1px solid var(--border);
+  border-left:3px solid currentColor;
+  padding:8px 12px;border-radius:5px;
   display:flex;align-items:baseline;gap:10px;
-  font-family:var(--font-mono);font-size:15px;font-weight:600;letter-spacing:.02em;
-  padding:6px 14px;border-radius:5px;border:1px solid transparent;
+  font-family:var(--font-mono);font-size:14px;font-weight:600;
+  min-width:0;
 }
-.ki-readout-label{font-family:var(--font-display);font-style:italic;font-size:18px;font-weight:500}
-.ki-canvas-readout .ki-eq{color:var(--text-faint);font-weight:400}
-.ki-canvas-readout .ki-val{font-variant-numeric:tabular-nums}
-.ki-canvas-readout.ki-domain{color:var(--vColor);background:var(--vSoft);border-color:var(--vBorder)}
-.ki-canvas-readout.ki-codomain{color:var(--avColor);background:var(--avSoft);border-color:var(--avBorder)}
+.ki-readout-label{font-family:var(--font-display);font-style:italic;font-size:18px;font-weight:500;flex-shrink:0}
+.ki-canvas-readout .ki-eq{color:var(--text-faint);font-weight:400;flex-shrink:0}
+.ki-canvas-readout .ki-val{color:var(--text);font-weight:500;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ki-canvas-readout.ki-domain{color:var(--vColor)}
+.ki-canvas-readout.ki-codomain{color:var(--avColor)}
 
+/* ---- Sweep playback (in center col) ---- */
 .ki-sweep-playback{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow-card);padding:10px 14px;
   display:flex;align-items:center;gap:8px;
-  background:var(--vSoft);border:1px solid var(--vBorder);
-  border-radius:6px;padding:5px 8px;
 }
+.ki-sweep-head{
+  font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text-faint);margin-right:4px;display:flex;align-items:center;
+}
+.ki-sweep-head .ki-badge{color:var(--accent);margin-right:6px}
 .ki-sw-btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:26px;height:26px;border:1px solid var(--vBorder);
-  background:#fff;border-radius:4px;cursor:pointer;
-  color:var(--vColor);transition:all .12s;padding:0;
+  width:28px;height:26px;border-radius:4px;
+  background:var(--surface-2);border:1px solid var(--border);
+  color:var(--vColor);display:inline-flex;align-items:center;justify-content:center;
+  cursor:pointer;padding:0;transition:all .12s;
 }
 .ki-sw-btn:hover{background:var(--vColor);color:#fff;border-color:var(--vColor)}
 .ki-sw-btn:active{transform:scale(.94)}
@@ -609,13 +641,13 @@ const COMPONENT_CSS = `
 .ki-sw-btn.ki-primary:hover{background:#c2410c;border-color:#c2410c}
 .ki-sw-slider{
   flex:1;-webkit-appearance:none;appearance:none;height:4px;
-  border-radius:2px;outline:none;cursor:pointer;min-width:80px;
+  border-radius:2px;outline:none;cursor:pointer;min-width:60px;
   background:linear-gradient(to right,var(--vColor) 0%,var(--vColor) var(--ki-fill,0%),var(--border) var(--ki-fill,0%),var(--border) 100%);
 }
 .ki-sw-slider::-webkit-slider-thumb{
   -webkit-appearance:none;width:14px;height:14px;border-radius:50%;
   background:var(--vColor);cursor:pointer;border:2px solid #fff;
-  box-shadow:0 0 0 1px var(--vColor),0 1px 2px rgba(15,23,42,.15);
+  box-shadow:0 0 0 1px var(--vColor),0 1px 2px rgba(15,23,41,.15);
 }
 .ki-sw-slider::-moz-range-thumb{
   width:12px;height:12px;border-radius:50%;background:var(--vColor);
@@ -627,109 +659,150 @@ const COMPONENT_CSS = `
   font-variant-numeric:tabular-nums;
 }
 
-.ki-center-col{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0}
-.ki-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:8px;box-shadow:var(--shadow-card);padding:12px 14px;min-height:0}
-.ki-card h2{font-family:var(--font-mono);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint);margin:0 0 10px;display:flex;align-items:center;justify-content:space-between}
-.ki-badge{color:var(--accent);margin-right:6px}
+/* ---- Card ---- */
+.ki-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow-card);padding:12px 14px;
+}
+.ki-card h2{
+  font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--text-faint);margin:0 0 10px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.ki-badge{color:var(--accent);margin-right:6px;font-weight:600}
+.ki-card h2 .ki-note{font-weight:500;letter-spacing:.04em;text-transform:none;font-size:11px;color:var(--text-dim)}
 
+/* ---- Explanation card ---- */
+.ki-ex-header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.ki-ex-header h3{font-family:var(--font-display);font-weight:500;font-size:19px;color:var(--text);margin:0;letter-spacing:-.01em;line-height:1.2}
+.ki-ex-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);white-space:nowrap}
+.ki-ex-body{color:var(--text-soft);font-size:13.5px;line-height:1.55;margin:0}
+.ki-ex-body .ki-ker{color:var(--kernel);font-weight:500}
+.ki-ex-body .ki-img{color:var(--image);font-weight:500}
+.ki-ex-body .ki-v{color:var(--vColor);font-weight:500}
+.ki-ex-body .ki-av{color:var(--avColor);font-weight:500}
+.ki-ex-body code{font-family:var(--font-mono);font-size:12px;background:var(--accent-soft);color:var(--accent-hover);padding:1px 5px;border-radius:3px}
+
+/* ---- Chips ---- */
+.ki-chips-strip{
+  display:flex;flex-wrap:wrap;gap:2px;padding:4px 8px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);box-shadow:var(--shadow-card);
+}
+.ki-chip{
+  display:inline-flex;align-items:center;gap:6px;padding:4px 10px;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;
+  color:var(--text-faint);background:transparent;border:1px solid transparent;
+  border-radius:4px;cursor:pointer;user-select:none;transition:all .12s;
+}
+.ki-chip input{width:12px;height:12px;margin:0;accent-color:var(--accent);cursor:pointer}
+.ki-chip:hover,.ki-chip:has(input:checked){color:var(--text);background:var(--accent-soft)}
+.ki-chip .ki-sw{display:inline-block;width:11px;height:3px;border-radius:1px}
+
+/* ---- Multiplication block ---- */
 .ki-mult-card{padding:14px 12px 12px}
-.ki-mult-eq{display:flex;align-items:center;justify-content:center;gap:7px;font-family:var(--font-mono);font-size:12px;color:var(--text);overflow-x:auto;padding:4px 0}
-.ki-av-lab{font-family:var(--font-display);font-style:italic;font-size:20px;font-weight:500;color:var(--text);margin-right:2px}
-.ki-opx{color:var(--text-faint);font-weight:500;padding:0 1px;font-size:14px}
-
-.ki-eq-mat{display:grid;gap:3px 10px;padding:8px 10px;position:relative;font-family:var(--font-mono);font-size:12px}
+.ki-mult-eq{display:flex;align-items:center;justify-content:center;gap:6px;font-family:var(--font-mono);font-size:12px;color:var(--text);overflow-x:auto;padding:4px 0;flex-wrap:wrap}
+.ki-av-lab{font-family:var(--font-display);font-style:italic;font-size:19px;font-weight:500;color:var(--text);margin-right:2px}
+.ki-opx{color:var(--text-faint);font-weight:500;padding:0 1px;font-size:13px}
+.ki-eq-mat{display:grid;gap:3px 10px;padding:7px 10px;position:relative;font-family:var(--font-mono);font-size:12px}
 .ki-eq-mat::before,.ki-eq-mat::after{content:'';position:absolute;top:3px;bottom:3px;width:5px;border:1.2px solid var(--text-dim)}
 .ki-eq-mat::before{left:0;border-right:none;border-radius:2px 0 0 2px}
 .ki-eq-mat::after{right:0;border-left:none;border-radius:0 2px 2px 0}
 .ki-eq-mat.ki-col-1{grid-template-columns:auto}
 .ki-eq-mat.ki-col-2{grid-template-columns:auto auto}
 .ki-eq-mat .ki-cell{text-align:center;min-width:30px}
-.ki-eq-mat input.ki-cell{width:38px;padding:3px 4px;background:var(--surface-2);border:1px solid var(--border);border-radius:3px;color:var(--text);font-family:var(--font-mono);font-size:12px;text-align:center;outline:none;-moz-appearance:textfield;transition:border-color .15s,background .15s}
+.ki-eq-mat input.ki-cell{
+  width:38px;padding:3px 4px;background:var(--surface-2);border:1px solid var(--border);
+  border-radius:3px;color:var(--text);font-family:var(--font-mono);font-size:12px;
+  text-align:center;outline:none;-moz-appearance:textfield;
+  transition:border-color .15s,background .15s;
+}
 .ki-eq-mat input.ki-cell::-webkit-outer-spin-button,.ki-eq-mat input.ki-cell::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-.ki-eq-mat input.ki-cell:focus{border-color:var(--accent);background:var(--accent-subtle)}
+.ki-eq-mat input.ki-cell:focus{border-color:var(--accent);background:var(--accent-soft)}
 .ki-eq-mat.ki-v-vec{background:var(--vSoft);border-radius:3px}
-.ki-eq-mat.ki-v-vec .ki-cell{color:var(--vColor);font-weight:600;min-width:36px}
+.ki-eq-mat.ki-v-vec .ki-cell{color:var(--vColor);font-weight:600;min-width:34px}
 .ki-eq-mat.ki-av-vec{background:var(--avSoft);border-radius:3px}
-.ki-eq-mat.ki-av-vec .ki-cell{color:var(--avColor);font-weight:600;min-width:42px}
+.ki-eq-mat.ki-av-vec .ki-cell{color:var(--avColor);font-weight:600;min-width:40px}
 .ki-eq-mat.ki-expansion .ki-cell{font-size:11px;letter-spacing:.01em;white-space:nowrap;min-width:96px;text-align:left;padding:1px 4px}
 .ki-eq-mat.ki-expansion .ki-aval{color:var(--text);font-weight:500}
 .ki-eq-mat.ki-expansion .ki-vval{color:var(--vColor);font-weight:600}
 .ki-eq-mat.ki-expansion .ki-op{color:var(--text-faint);margin:0 2px}
 
-.ki-mult-caption{font-family:var(--font-mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);text-align:center;margin-top:10px}
+.ki-mult-caption{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);text-align:center;margin-top:10px}
 .ki-mult-caption .ki-v{color:var(--vColor);font-weight:500}
 .ki-mult-caption .ki-av{color:var(--avColor);font-weight:500}
 
-.ki-ex-card{flex:1;overflow-y:auto;min-height:0}
-.ki-ex-header{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border-soft)}
-.ki-ex-header h3{font-family:var(--font-display);font-weight:500;font-size:17px;color:var(--text);margin:0;letter-spacing:-.01em;line-height:1.15}
-.ki-ex-tag{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);white-space:nowrap}
-.ki-ex-body{color:var(--text-soft);font-size:12.5px;line-height:1.55;margin:0}
-.ki-ex-body .ki-ker{color:var(--kernel);font-weight:500}
-.ki-ex-body .ki-img{color:var(--image);font-weight:500}
-.ki-ex-body .ki-v{color:var(--vColor);font-weight:500}
-.ki-ex-body .ki-av{color:var(--avColor);font-weight:500}
-.ki-ex-body code{font-family:var(--font-mono);font-size:11px;background:var(--accent-subtle);color:var(--accent-hover);padding:1px 4px;border-radius:3px}
-
-.ki-props-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;align-items:baseline}
-.ki-pkey{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint)}
-.ki-pval{font-family:var(--font-mono);font-size:12px;color:var(--text);font-weight:500;text-align:right}
+/* ---- Properties card ---- */
+.ki-props-grid{display:grid;grid-template-columns:1fr auto;gap:6px 16px;align-items:baseline}
+.ki-pkey{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint)}
+.ki-pval{font-family:var(--font-mono);font-size:12.5px;color:var(--text);font-weight:500;text-align:right}
 .ki-pval.ki-ker{color:var(--kernel)}
 .ki-pval.ki-img{color:var(--image)}
 .ki-pval.ki-collapsed{color:var(--kernel);font-weight:600}
-.ki-rank-nullity{font-family:var(--font-mono);font-size:10.5px;color:var(--text-faint);margin-top:8px;padding-top:8px;border-top:1px solid var(--border-soft);letter-spacing:.04em;text-align:center}
+.ki-rank-nullity{font-family:var(--font-mono);font-size:11px;color:var(--text-faint);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);letter-spacing:.04em;text-align:center}
 .ki-rank-nullity .ki-eq{color:var(--text)}
-.ki-rank-nullity .ki-num{color:var(--text);font-weight:500}
+.ki-rank-nullity .ki-num{color:var(--text);font-weight:600}
 
-.ki-scenarios-card{display:grid;grid-template-columns:1.4fr 2fr 1fr;gap:18px;align-items:start;padding:14px 18px}
-.ki-scenarios-card h2{grid-column:1/-1;margin-bottom:4px;display:block;font-size:10px}
+/* ---- Scenarios cards (under each canvas, single-column stack) ---- */
+.ki-scenarios-card{padding:11px 13px}
+.ki-scenarios-card h2{margin-bottom:7px}
+.ki-scen-sections{display:flex;flex-direction:column;gap:12px}
 .ki-scen-section{min-width:0}
-.ki-scen-section-label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px}
+.ki-scen-section-label{
+  display:flex;align-items:center;justify-content:space-between;gap:6px;
+  font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;
+}
 .ki-scen-section-label .ki-tag{
-  padding:3px 9px;border-radius:4px;font-size:10px;font-weight:700;
-  letter-spacing:.06em;text-transform:uppercase;
+  padding:2px 7px;border-radius:3px;font-size:9.5px;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;
   border:1px solid transparent;white-space:nowrap;
 }
 .ki-scen-section-label .ki-tag.full{background:rgba(99,102,241,.14);color:var(--unit);border-color:rgba(99,102,241,.35)}
 .ki-scen-section-label .ki-tag.rank1{background:rgba(5,150,105,.14);color:var(--image);border-color:rgba(5,150,105,.4)}
 .ki-scen-section-label .ki-tag.zero{background:rgba(220,38,38,.12);color:var(--kernel);border-color:rgba(220,38,38,.4)}
 
-.ki-presets-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.ki-preset-btn{display:block;background:var(--surface-2);border:1px solid var(--border-soft);color:var(--text-soft);padding:9px 12px;font-family:var(--font-body);font-size:13px;font-weight:500;cursor:pointer;border-radius:5px;text-align:left;transition:all .12s}
-.ki-preset-btn:hover{background:var(--accent-subtle);border-color:var(--accent);color:var(--accent)}
-.ki-preset-btn.ki-active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-hover);font-weight:600}
-.ki-preset-btn.rank1{border-left:3px solid var(--image)}
-.ki-preset-btn.rank1:hover{border-color:var(--image);color:var(--image);background:rgba(5,150,105,.06)}
-.ki-preset-btn.rank1.ki-active{background:rgba(5,150,105,.12);border-color:var(--image);color:var(--image)}
-.ki-preset-btn.zero{border-left:3px solid var(--kernel)}
-.ki-preset-btn.zero:hover{border-color:var(--kernel);color:var(--kernel);background:rgba(220,38,38,.06)}
-.ki-preset-btn.zero.ki-active{background:rgba(220,38,38,.10);border-color:var(--kernel);color:var(--kernel)}
+.ki-presets-grid{display:flex;flex-direction:column;gap:4px}
+.ki-preset-btn{
+  display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  background:var(--surface-2);border:1px solid var(--border);
+  border-left:3px solid var(--border-strong);
+  color:var(--text-soft);padding:6px 10px;
+  font-family:var(--font-body);font-size:12.5px;font-weight:500;
+  cursor:pointer;border-radius:4px;text-align:left;transition:all .12s;
+}
+.ki-preset-btn:hover{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent-hover)}
+.ki-preset-btn.ki-active{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent-hover);font-weight:600;border-left-color:var(--accent)}
+.ki-preset-btn.full{border-left-color:var(--unit)}
+.ki-preset-btn.rank1{border-left-color:var(--image)}
+.ki-preset-btn.zero{border-left-color:var(--kernel)}
 
 .ki-preset-rotate{
   display:flex;align-items:center;gap:8px;background:var(--surface-2);
-  border:1px solid var(--border-soft);color:var(--text-soft);
-  padding:8px 8px 8px 12px;font-family:var(--font-body);font-size:13px;font-weight:500;
-  cursor:pointer;border-radius:5px;transition:all .12s;justify-content:space-between;
+  border:1px solid var(--border);border-left:3px solid var(--unit);color:var(--text-soft);
+  padding:5px 6px 5px 10px;font-family:var(--font-body);font-size:12.5px;font-weight:500;
+  cursor:pointer;border-radius:4px;transition:all .12s;justify-content:space-between;
 }
-.ki-preset-rotate:hover{background:var(--accent-subtle);border-color:var(--accent);color:var(--accent)}
-.ki-preset-rotate.ki-active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-hover);font-weight:600}
+.ki-preset-rotate:hover{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent-hover)}
+.ki-preset-rotate.ki-active{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent-hover);font-weight:600;border-left-color:var(--accent)}
 .ki-angle-pill{
   display:inline-flex;align-items:center;gap:5px;
-  background:#fff;border:1px solid var(--border);border-radius:4px;
-  padding:3px 8px 3px 9px;color:var(--text);font-weight:600;font-size:13px;
+  background:#fff;border:1px solid var(--border);border-radius:3px;
+  padding:2px 7px 2px 8px;color:var(--text);font-weight:600;font-size:11.5px;
   transition:all .12s;
 }
-.ki-preset-rotate:hover .ki-angle-pill{border-color:var(--accent);color:var(--accent)}
-.ki-preset-rotate.ki-active .ki-angle-pill{border-color:var(--accent);color:var(--accent-hover);background:#fff}
-.ki-angle-pill::after{content:'\\25BE';font-size:10px;opacity:.7}
+.ki-preset-rotate:hover .ki-angle-pill{border-color:var(--accent-line);color:var(--accent-hover)}
+.ki-preset-rotate.ki-active .ki-angle-pill{border-color:var(--accent-line);color:var(--accent-hover);background:#fff}
+.ki-angle-pill::after{content:'\\25BE';font-size:9px;opacity:.7}
 .ki-preset-rotate select{
   background:transparent;border:none;color:inherit;font:inherit;
   font-weight:600;cursor:pointer;outline:none;padding:0;margin:0;
   -webkit-appearance:none;-moz-appearance:none;appearance:none;
 }
 
+/* ---- SVG primitives ---- */
 .ki-grid-line{stroke:var(--grid);stroke-width:1;fill:none}
-.ki-grid-axis{stroke:var(--grid-axis);stroke-width:1.4;fill:none}
+.ki-grid-axis{stroke:var(--grid-axis);stroke-width:1.2;fill:none}
 .ki-kernel-line{stroke:var(--kernel);stroke-width:2;stroke-dasharray:8 5;fill:none;opacity:.9}
 .ki-kernel-halo{stroke:var(--kernel);stroke-width:10;fill:none;opacity:.10}
 .ki-image-line{stroke:var(--image);stroke-width:2.2;fill:none;opacity:.95}
@@ -752,31 +825,12 @@ const COMPONENT_CSS = `
 .ki-av-label{fill:var(--avColor);font-family:var(--font-display);font-style:italic;font-size:16px;font-weight:600}
 .ki-origin-dot{fill:var(--text-soft)}
 .ki-collapsed-ring{fill:none;stroke:var(--kernel);stroke-width:2;stroke-dasharray:4 3}
-
-.ki-card::-webkit-scrollbar,.ki-ex-card::-webkit-scrollbar{width:6px}
-.ki-card::-webkit-scrollbar-thumb,.ki-ex-card::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-
-@media (max-height:820px){
-  .ki-app{padding:8px 18px;gap:7px}
-  .ki-card{padding:10px 12px}
-  .ki-mult-eq{font-size:11px;gap:5px}
-  .ki-eq-mat input.ki-cell{width:34px;font-size:11px}
-  .ki-eq-mat.ki-v-vec .ki-cell,.ki-eq-mat.ki-av-vec .ki-cell{min-width:32px;font-size:11px}
-  .ki-eq-mat.ki-expansion .ki-cell{font-size:10px;min-width:86px}
-  .ki-av-lab{font-size:17px}
-  .ki-ex-header h3{font-size:15px}
-  .ki-ex-body{font-size:12px}
-}
-@media (max-width:1200px){
-  .ki-main{grid-template-columns:1fr 410px 1fr}
-}
 `;
 
 // =====================================================================
 //  SECTION 6  ::  Sub-components
 // =====================================================================
 
-// ---- CellInput (safe mid-edit) ----
 function CellInput({ value, onCommit, step = 0.1 }) {
   const [str, setStr] = useState(String(value));
   useEffect(() => { setStr(String(value)); }, [value]);
@@ -802,7 +856,6 @@ function CellInput({ value, onCommit, step = 0.1 }) {
   );
 }
 
-// ---- DomainCanvas (draggable v) ----
 function DomainCanvas({
   A = [[1, 0], [0, 1]],
   v = [1.5, 1],
@@ -872,7 +925,6 @@ function DomainCanvas({
   );
 }
 
-// ---- CodomainCanvas (read-only) ----
 function CodomainCanvas({
   A = [[1, 0], [0, 1]],
   v = [1.5, 1],
@@ -908,7 +960,6 @@ function CodomainCanvas({
   );
 }
 
-// ---- LayerChips ----
 function LayerChips({ layers = {}, onChange = () => {}, enabledLayers, layerDefs = ALL_LAYER_DEFS }) {
   const defs = enabledLayers ? layerDefs.filter((d) => enabledLayers.includes(d.key)) : layerDefs;
   return (
@@ -928,7 +979,6 @@ function LayerChips({ layers = {}, onChange = () => {}, enabledLayers, layerDefs
   );
 }
 
-// ---- CanvasCaption ----
 function CanvasCaption({ kind = 'domain', title = 'Domain', suffix = '\u00B7 \u211D\u00B2', note }) {
   return (
     <div className={`ki-canvas-caption ki-${kind}`}>
@@ -938,7 +988,6 @@ function CanvasCaption({ kind = 'domain', title = 'Domain', suffix = '\u00B7 \u2
   );
 }
 
-// ---- CanvasReadout ----
 function CanvasReadout({ kind = 'domain', label = 'v', value = '(0, 0)' }) {
   return (
     <div className={`ki-canvas-readout ki-${kind}`}>
@@ -949,7 +998,6 @@ function CanvasReadout({ kind = 'domain', label = 'v', value = '(0, 0)' }) {
   );
 }
 
-// ---- MultiplicationBlock ----
 function MultiplicationBlock({
   A = [[1, 0], [0, 1]],
   v = [1.5, 1],
@@ -970,7 +1018,7 @@ function MultiplicationBlock({
   );
   return (
     <div className="ki-card ki-mult-card">
-      <h2><span><span className="ki-badge">A</span>Multiplication</span></h2>
+      <h2><span><span className="ki-badge">01</span>Multiplication</span><span className="ki-note">A &middot; v = Av</span></h2>
       <div className="ki-mult-eq">
         <span className="ki-av-lab">Av</span>
         <span className="ki-opx">=</span>
@@ -1010,7 +1058,6 @@ function MultiplicationBlock({
   );
 }
 
-// ---- ExplanationCard ----
 function ExplanationCard({
   A,
   preset = 'identity',
@@ -1035,7 +1082,6 @@ function ExplanationCard({
   );
 }
 
-// ---- PropertiesCard ----
 function PropertiesCard({ A = [[1, 0], [0, 1]], v = [1.5, 1] }) {
   const ki = Math2D.kerImg(A);
   const Av = Math2D.apply(A, v);
@@ -1063,80 +1109,87 @@ function PropertiesCard({ A = [[1, 0], [0, 1]], v = [1.5, 1] }) {
   );
 }
 
-// ---- ScenariosPanel ----
+// ScenariosPanel — now filters by a `groupKeys` list (so it can render
+// just the groups assigned to one side of the layout).
 function ScenariosPanel({
   scenarios = SCENARIOS,
   groups = SCENARIO_GROUPS,
+  groupKeys,
   rotateAngles = ROTATE_ANGLES,
   preset = null,
   rotateAngle = 45,
   onSelect = () => {},
   visibleScenarios,
+  badge = '03',
 }) {
   const visible = visibleScenarios
     ? Object.fromEntries(visibleScenarios.map((k) => [k, scenarios[k]]).filter(([, s]) => s))
     : scenarios;
+  const useGroups = groupKeys
+    ? groups.filter((g) => groupKeys.includes(g.key))
+    : groups;
   return (
     <div className="ki-card ki-scenarios-card">
-      <h2><span><span className="ki-badge">01</span>Scenarios</span></h2>
-      {groups.map((g) => {
-        const items = Object.entries(visible).filter(([, sc]) => sc.group === g.key);
-        if (!items.length) return null;
-        return (
-          <div className="ki-scen-section" key={g.key}>
-            <div className="ki-scen-section-label">
-              <span>{g.label}</span>
-              <span className={`ki-tag ${g.tagClass}`} dangerouslySetInnerHTML={{ __html: g.tag }} />
-            </div>
-            <div className="ki-presets-grid">
-              {items.map(([key, sc]) => {
-                if (sc.isAngular) {
+      <h2><span><span className="ki-badge">{badge}</span>Scenarios</span></h2>
+      <div className="ki-scen-sections">
+        {useGroups.map((g) => {
+          const items = Object.entries(visible).filter(([, sc]) => sc.group === g.key);
+          if (!items.length) return null;
+          return (
+            <div className="ki-scen-section" key={g.key}>
+              <div className="ki-scen-section-label">
+                <span>{g.label}</span>
+                <span className={`ki-tag ${g.tagClass}`} dangerouslySetInnerHTML={{ __html: g.tag }} />
+              </div>
+              <div className="ki-presets-grid">
+                {items.map(([key, sc]) => {
+                  if (sc.isAngular) {
+                    return (
+                      <label
+                        key={key}
+                        className={`ki-preset-rotate${preset === key ? ' ki-active' : ''}`}
+                        onClick={(e) => {
+                          if (e.target.tagName !== 'SELECT' && e.target.tagName !== 'OPTION') {
+                            onSelect(key, { angle: rotateAngle });
+                          }
+                        }}
+                      >
+                        <span>{sc.label}</span>
+                        <span className="ki-angle-pill">
+                          <select
+                            value={rotateAngle}
+                            onChange={(e) => {
+                              const angle = parseInt(e.target.value, 10);
+                              onSelect(key, { angle });
+                            }}
+                          >
+                            {rotateAngles.map((a) => (
+                              <option key={a} value={a}>{a}&deg;</option>
+                            ))}
+                          </select>
+                        </span>
+                      </label>
+                    );
+                  }
                   return (
-                    <label
+                    <button
                       key={key}
-                      className={`ki-preset-rotate${preset === key ? ' ki-active' : ''}`}
-                      onClick={(e) => {
-                        if (e.target.tagName !== 'SELECT' && e.target.tagName !== 'OPTION') {
-                          onSelect(key, { angle: rotateAngle });
-                        }
-                      }}
+                      className={`ki-preset-btn ${g.tagClass}${preset === key ? ' ki-active' : ''}`}
+                      onClick={() => onSelect(key)}
                     >
                       <span>{sc.label}</span>
-                      <span className="ki-angle-pill">
-                        <select
-                          value={rotateAngle}
-                          onChange={(e) => {
-                            const angle = parseInt(e.target.value, 10);
-                            onSelect(key, { angle });
-                          }}
-                        >
-                          {rotateAngles.map((a) => (
-                            <option key={a} value={a}>{a}&deg;</option>
-                          ))}
-                        </select>
-                      </span>
-                    </label>
+                    </button>
                   );
-                }
-                return (
-                  <button
-                    key={key}
-                    className={`ki-preset-btn ${g.tagClass}${preset === key ? ' ki-active' : ''}`}
-                    onClick={() => onSelect(key)}
-                  >
-                    {sc.label}
-                  </button>
-                );
-              })}
+                })}
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }
 
-// ---- SweepPlayback ----
 const ICON_RESET = <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" /></svg>;
 const ICON_BACK  = <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6V6zm3.5 6l8.5 6V6l-8.5 6z" /></svg>;
 const ICON_FWD   = <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6h2v12h-2V6z" /></svg>;
@@ -1153,8 +1206,9 @@ function SweepPlayback({
   const fill = ((deg / 360) * 100).toFixed(2) + '%';
   return (
     <div className="ki-sweep-playback">
+      <span className="ki-sweep-head"><span className="ki-badge">&#9656;</span>Sweep</span>
       <button className="ki-sw-btn" onClick={onReset} aria-label="Reset" title="Reset">{ICON_RESET}</button>
-      <button className="ki-sw-btn" onClick={onStepBack} disabled={deg <= 0} aria-label="Step back" title="Step back 30°">{ICON_BACK}</button>
+      <button className="ki-sw-btn" onClick={onStepBack} disabled={deg <= 0} aria-label="Step back" title="Step back 30&deg;">{ICON_BACK}</button>
       <button
         className="ki-sw-btn ki-primary"
         onClick={playing ? onPause : onPlay}
@@ -1163,7 +1217,7 @@ function SweepPlayback({
       >
         {playing ? ICON_PAUSE : ICON_PLAY}
       </button>
-      <button className="ki-sw-btn" onClick={onStepFwd} disabled={deg >= 360} aria-label="Step forward" title="Step forward 30°">{ICON_FWD}</button>
+      <button className="ki-sw-btn" onClick={onStepFwd} disabled={deg >= 360} aria-label="Step forward" title="Step forward 30&deg;">{ICON_FWD}</button>
       <input
         type="range" min={0} max={360} step={1} value={deg}
         className="ki-sw-slider"
@@ -1180,7 +1234,7 @@ function SweepPlayback({
 //  SECTION 7  ::  Core + Wrapper
 // =====================================================================
 const DEFAULT_LEDE = {
-  crumb: 'Linear Algebra<span class="ki-dot">&middot;</span>Demo',
+  crumb: 'Linear Algebra<span class="ki-dot">&middot;</span>Kernel &amp; image',
   body: 'The <span class="ki-ker">kernel</span> sits in the domain. The <span class="ki-img">image</span> sits in the codomain. Drag <span class="ki-v">v</span> on the left, watch <span class="ki-av">Av</span> move on the right.',
 };
 
@@ -1216,21 +1270,19 @@ export function KernelImageCore({
 }
 
 export default function KernelImage({
-  // header
   lede,
   ledeCrumb = DEFAULT_LEDE.crumb,
   ledeBody = DEFAULT_LEDE.body,
-  // core options
   initialA, initialPreset, initialRotateAngle, initialLayers, scenarios,
   initialV, step, duration, maxTrail,
-  // slot overrides (undefined = default, JSX = replace, null = hide)
   layerChips, domainCanvas, codomainCanvas,
-  multiplication, explanation, properties, scenariosPanel, playback,
-  // atomization helpers
+  multiplication, explanation, properties,
+  leftScenarios, rightScenarios,
+  playback,
   visibleScenarios, enabledLayers, explanationOverride,
-  // layout escape
+  leftScenarioGroups  = LEFT_SCENARIO_GROUPS,
+  rightScenarioGroups = RIGHT_SCENARIO_GROUPS,
   layout,
-  // outer
   className, style,
 }) {
   return (
@@ -1296,13 +1348,26 @@ export default function KernelImage({
         const slotProps = properties !== undefined ? properties : (
           <PropertiesCard A={ctx.A} v={ctx.v} />
         );
-        const slotScenarios = scenariosPanel !== undefined ? scenariosPanel : (
+        const slotLeftScen = leftScenarios !== undefined ? leftScenarios : (
           <ScenariosPanel
             scenarios={scenarios || SCENARIOS}
+            groupKeys={leftScenarioGroups}
             preset={ctx.preset}
             rotateAngle={ctx.rotateAngle}
             onSelect={ctx.selectScenario}
             visibleScenarios={visibleScenarios}
+            badge="03a"
+          />
+        );
+        const slotRightScen = rightScenarios !== undefined ? rightScenarios : (
+          <ScenariosPanel
+            scenarios={scenarios || SCENARIOS}
+            groupKeys={rightScenarioGroups}
+            preset={ctx.preset}
+            rotateAngle={ctx.rotateAngle}
+            onSelect={ctx.selectScenario}
+            visibleScenarios={visibleScenarios}
+            badge="03b"
           />
         );
         const slotPlayback = playback !== undefined ? playback : (
@@ -1332,26 +1397,31 @@ export default function KernelImage({
             <style dangerouslySetInnerHTML={{ __html: COMPONENT_CSS }} />
             <div className="ki-app">
               {renderLede()}
-              {slotChips}
               <main className="ki-main">
-                <section className="ki-canvas-col">
-                  <CanvasCaption kind="domain" title="Domain" note="input" />
-                  <div className="ki-canvas-wrap">{slotDomain}</div>
+                <section className="ki-left-col">
+                  <div className="ki-canvas-cell">
+                    <CanvasCaption kind="domain" title="Domain" note="input" />
+                    {slotDomain}
+                  </div>
                   <CanvasReadout kind="domain" label="v" value={Math2D.fmtPair(ctx.v)} />
-                  {slotPlayback}
+                  {slotLeftScen}
                 </section>
                 <section className="ki-center-col">
+                  {slotChips}
                   {slotMult}
                   {slotExp}
                   {slotProps}
+                  {slotPlayback}
                 </section>
-                <section className="ki-canvas-col">
-                  <CanvasCaption kind="codomain" title="Codomain" note="output" />
-                  <div className="ki-canvas-wrap">{slotCodomain}</div>
+                <section className="ki-right-col">
+                  <div className="ki-canvas-cell">
+                    <CanvasCaption kind="codomain" title="Codomain" note="output" />
+                    {slotCodomain}
+                  </div>
                   <CanvasReadout kind="codomain" label="Av" value={Math2D.fmtPair(Math2D.apply(ctx.A, ctx.v))} />
+                  {slotRightScen}
                 </section>
               </main>
-              {slotScenarios}
             </div>
           </div>
         );
@@ -1361,15 +1431,12 @@ export default function KernelImage({
 }
 
 export {
-  // Sub-components
   DomainCanvas, CodomainCanvas, LayerChips, MultiplicationBlock,
   ExplanationCard, PropertiesCard, ScenariosPanel, SweepPlayback,
   CanvasCaption, CanvasReadout, CellInput,
-  // Hooks
   useKernelImageState, useSweep,
-  // Helpers
   Math2D, SVGRender,
-  // Data
   SCENARIOS, SCENARIO_GROUPS, DEFAULT_LAYERS, DEFAULT_GEOM,
   ROTATE_ANGLES, SWARM_POINTS, ALL_LAYER_DEFS,
+  LEFT_SCENARIO_GROUPS, RIGHT_SCENARIO_GROUPS,
 };
