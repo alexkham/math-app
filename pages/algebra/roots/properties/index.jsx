@@ -1,73 +1,192 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../../pages/pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../../pages/pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "properties of radicals",
-//   "even index radicals",
-//   "odd index radicals",
-//   "principal root",
-//   "square root of x squared",
-//   "sqrt x^2 equals absolute value",
-//   "radical domain restrictions",
-//   "negative radicand",
-//   "cube root negative number",
-//   "radical sign behavior",
-//   "even and odd roots",
-//   "principal root convention",
-//   "radical properties",
-//   "nth root properties",
-//   "radical absolute value"
-// ]
-//   // •
+export async function getStaticProps(){
+const keyWords = [
+  "properties of radicals",
+  "even index radicals",
+  "odd index radicals",
+  "principal root",
+  "square root of x squared",
+  "sqrt x^2 equals absolute value",
+  "radical domain restrictions",
+  "negative radicand",
+  "cube root negative number",
+  "radical sign behavior",
+  "even and odd roots",
+  "principal root convention",
+  "radical properties",
+  "nth root properties",
+  "radical absolute value"
+]
+  // •
 
-// //   \u2022 First item
-// // \u2022 Second item
+//   \u2022 First item
+// \u2022 Second item
 
   
-// // <hr style="border-width:1px;"></hr>
+// <hr style="border-width:1px;"></hr>
 
-// // <hr style="color:blue;" />
+// <hr style="color:blue;" />
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// <hr style="border-color:#3498db; border-width:1px;" />
 
 
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
  
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
+// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.notation)}
+        // </div>,
 
 
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
+//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+//     {processContent(sectionsContent.normal.parameters)}
+// </div>,
         
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
+//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+//                   {processContent(sectionsContent.obj4.content)}
+//                   </div>,
 
 
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+//  <div key={'dist'} style={{
+//                     textAlign: 'center',
+//                     transform: 'scale(0.98)',
+//                     transformOrigin: 'center',
+//                     marginTop:'50px',
+//                     marginLeft:'-150px'
+//                   }} dangerouslySetInnerHTML={{ 
+//                     __html:   sectionContent.distributions.svg,
+//                   }} />
 
+const linkStyle = 'color: inherit; text-decoration: underline;'
+
+// ---------- TABLES ----------
+
+// obj6 — aggregation (reference): domain & range by function form
+const obj6Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Function form</th>
+      <th style="${tableHeaders.aggregation}">Domain</th>
+      <th style="${tableHeaders.aggregation}">Range</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><sup>n</sup>√x &nbsp; (n even)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><sup>n</sup>√x &nbsp; (n odd)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, ∞)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, ∞)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">√(x − 3)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[3, ∞)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">∛(x − 3)</td>
+      <td style="padding: 12px 15px; color: #34495e;">(−∞, ∞)</td>
+      <td style="padding: 12px 15px; color: #34495e;">(−∞, ∞)</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// obj7 — aggregation (case table): sign behavior by radicand and index parity
+const obj7Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Case</th>
+      <th style="${tableHeaders.aggregation}">Result of <sup>n</sup>√a</th>
+      <th style="${tableHeaders.aggregation}">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a &gt; 0, any n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">positive</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√16 = 4, &nbsp; ∛27 = 3</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a = 0, any n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zero</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√0 = 0, &nbsp; ∛0 = 0</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a &lt; 0, n odd</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">negative (preserves sign)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∛(−27) = −3</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">a &lt; 0, n even</td>
+      <td style="padding: 12px 15px; color: #34495e;">not a real number</td>
+      <td style="padding: 12px 15px; color: #34495e;">√(−9) requires <a href="/complex-numbers" style="${linkStyle}">complex numbers</a></td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// obj9 — summary: capstone even-vs-odd at a glance
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Property</th>
+      <th style="${tableHeaders.summary}">Even index (n = 2, 4, 6, …)</th>
+      <th style="${tableHeaders.summary}">Odd index (n = 3, 5, 7, …)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Allowed radicand (real values)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a ≥ 0 only</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any real a</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sign of result</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">always ≥ 0 (principal root)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">matches sign of a</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Domain of f(x) = <sup>n</sup>√x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, ∞)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Range of f(x) = <sup>n</sup>√x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, ∞)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Identity <sup>n</sup>√(x<sup>n</sup>)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|x|</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Negative radicand result</td>
+      <td style="padding: 12px 15px; color: #34495e;">not real — use <a href="/complex-numbers" style="${linkStyle}">complex numbers</a></td>
+      <td style="padding: 12px 15px; color: #34495e;">real, negative</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 // const sectionsContent = {
 //   obj0: {
@@ -314,635 +433,29 @@
 //     link: '',
 //   },
 
-// }
-
-// const introContent = {
-//   id: "intro",
-//   title: "Even and Odd",
-//   content: `The index of a radical determines its behavior. Even-index radicals accept only non-negative radicands and produce only non-negative outputs. Odd-index radicals accept any real number and preserve sign.
-
-// This distinction shapes everything — which inputs are valid, which outputs are possible, whether absolute values appear when simplifying, and how radical functions behave. Every property on this page traces back to whether the index is even or odd.`
-// }
-
-
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "Can you take the square root of a negative number?",
-//     answer: "Not in the real number system. Even-index radicals (square root, fourth root, etc.) require non-negative radicands. √(−9) has no real value. Complex numbers are needed for even roots of negative numbers.",
-//     sectionId: "1"
-//   },
-//   obj2: {
-//     question: "Can you take the cube root of a negative number?",
-//     answer: "Yes. Odd-index radicals accept any real number. ∛(−27) = −3 because (−3)³ = −27. Odd roots preserve sign: negative inputs yield negative outputs.",
-//     sectionId: "2"
-//   },
-//   obj3: {
-//     question: "What is the principal root?",
-//     answer: "For even-index radicals, both positive and negative values satisfy the equation (e.g., ±4 are square roots of 16). The principal root convention defines the radical symbol to return only the non-negative root: √16 = 4.",
-//     sectionId: "3"
-//   },
-//   obj4: {
-//     question: "Why does √(x²) equal |x| and not x?",
-//     answer: "The principal root is always non-negative. When x = −5: √((−5)²) = √25 = 5 = |−5|. If it equaled x, we'd get −5, but square roots can't be negative. The absolute value ensures correctness.",
-//     sectionId: "4"
-//   },
-//   obj5: {
-//     question: "Does ∛(x³) equal x or |x|?",
-//     answer: "For odd-index radicals, ∛(x³) = x with no absolute value. Odd roots preserve sign and every real number has exactly one real odd root. ∛(−8) = −2, not |−2|.",
-//     sectionId: "5"
-//   },
-//   obj6: {
-//     question: "What is the domain of f(x) = √x?",
-//     answer: "Domain is [0, ∞) — only non-negative inputs allowed. Range is also [0, ∞). For √(x−3), the radicand must be non-negative: x−3 ≥ 0, so x ≥ 3.",
-//     sectionId: "6"
-//   },
-//   obj7: {
-//     question: "What is the domain of f(x) = ∛x?",
-//     answer: "Domain is (−∞, ∞) — all real numbers. Odd-index radicals have no input restrictions. Any real number has a real cube root, fifth root, etc.",
-//     sectionId: "6"
-//   },
-//   obj8: {
-//     question: "When is √(x⁴) equal to x² vs |x²|?",
-//     answer: "√(x⁴) = x² with no absolute value needed because x² is always non-negative. Absolute value is only required when the resulting exponent is odd: √(x⁶) = |x³| = |x|³.",
-//     sectionId: "4"
-//   },
 //   obj9: {
-//     question: "What happens when you square both sides of a radical equation?",
-//     answer: "Squaring can introduce extraneous solutions because the principal root is always non-negative but squaring allows negative values. Always check solutions in the original equation.",
-//     sectionId: "7"
-//   },
-//   obj10: {
-//     question: "How do radical properties connect to rational exponents?",
-//     answer: "ⁿ√a = a^(1/n). All properties translate: domain restrictions, sign behavior, and absolute value rules apply equally to both notations. (x^n)^(1/n) = |x| for even n, = x for odd n.",
-//     sectionId: "8"
-//   }
-// }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Properties of Roots",
-//     "description": "Learn radical properties: even vs odd index behavior, principal root convention, domain restrictions, √(x²) = |x| identity, sign behavior, and connection to rational exponents.",
-//     "url": "https://www.learnmathclass.com/algebra/roots/properties",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Radical Properties"
-//     },
-//     "teaches": [
-//       "Even index radical restrictions",
-//       "Odd index radical behavior",
-//       "Principal root convention",
-//       "The identity √(x²) = |x|",
-//       "Odd root identity ∛(x³) = x",
-//       "Domain and range by index",
-//       "Sign behavior of radicals",
-//       "Connection to rational exponents"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
+//     title: `Even vs Odd at a Glance`,
+//     content: `The properties covered above all reduce to a single distinction: whether the index is even or odd. The table below collects every parity-driven property in one place — radicand restrictions, sign behavior, domain, range, the radical-of-a-power identity, and what happens when the radicand goes negative. It works as a study card and as a quick check when working through any expression involving radicals.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
 //   },
 
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Algebra",
-//         "item": "https://www.learnmathclass.com/algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Roots",
-//         "item": "https://www.learnmathclass.com/algebra/roots"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Properties of Roots",
-//         "item": "https://www.learnmathclass.com/algebra/roots/properties"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
 // }
-
-// return {
-//   props: {
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Properties of Radicals: Even & Odd Index, Principal Root | Learn Math Class",
-//       description: "Learn radical properties: even vs odd index behavior, principal root convention, domain restrictions, √(x²) = |x| identity, sign behavior, and connection to rational exponents.",
-//       keywords: keyWords.join(", "),
-//       url: "/algebra/roots/properties",
-//       name: "Properties of Roots"
-//     },
-//   }
-// }
-//    }
-
-// // export default function PropertiesPage({seoData,sectionsContent , introContent}) {
-// export default function PropertiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//      {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Properties of Roots</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//     <KeyTermsCard
-//         id="0"
-//         title={sectionsContent.obj0.title}
-//         content={sectionsContent.obj0.content}
-//         after={sectionsContent.obj0.after}
-//         variant="light"
-//       />
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../../pages/pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "properties of radicals",
-  "even index radicals",
-  "odd index radicals",
-  "principal root",
-  "square root of x squared",
-  "sqrt x^2 equals absolute value",
-  "radical domain restrictions",
-  "negative radicand",
-  "cube root negative number",
-  "radical sign behavior",
-  "even and odd roots",
-  "principal root convention",
-  "radical properties",
-  "nth root properties",
-  "radical absolute value"
-]
-  // •
-
-//   \u2022 First item
-// \u2022 Second item
-
-  
-// <hr style="border-width:1px;"></hr>
-
-// <hr style="color:blue;" />
-
-// <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-        //     {processContent(sectionsContent.normal.notation)}
-        // </div>,
-
-
-//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-//     {processContent(sectionsContent.normal.parameters)}
-// </div>,
-        
-//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-//                   {processContent(sectionsContent.obj4.content)}
-//                   </div>,
-
-
-//  <div key={'dist'} style={{
-//                     textAlign: 'center',
-//                     transform: 'scale(0.98)',
-//                     transformOrigin: 'center',
-//                     marginTop:'50px',
-//                     marginLeft:'-150px'
-//                   }} dangerouslySetInnerHTML={{ 
-//                     __html:   sectionContent.distributions.svg,
-//                   }} />
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj6 — aggregation (reference): domain & range by function form
-const obj6Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 90%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Function form</th>
-      <th style="${tableHeaders.aggregation}">Domain</th>
-      <th style="${tableHeaders.aggregation}">Range</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><sup>n</sup>√x &nbsp; (n even)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><sup>n</sup>√x &nbsp; (n odd)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, ∞)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">√(x − 3)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[3, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">∛(x − 3)</td>
-      <td style="padding: 12px 15px; color: #34495e;">(−∞, ∞)</td>
-      <td style="padding: 12px 15px; color: #34495e;">(−∞, ∞)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj7 — aggregation (case table): sign behavior by radicand and index parity
-const obj7Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 90%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Case</th>
-      <th style="${tableHeaders.aggregation}">Result of <sup>n</sup>√a</th>
-      <th style="${tableHeaders.aggregation}">Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a &gt; 0, any n</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">positive</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√16 = 4, &nbsp; ∛27 = 3</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a = 0, any n</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zero</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√0 = 0, &nbsp; ∛0 = 0</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a &lt; 0, n odd</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">negative (preserves sign)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∛(−27) = −3</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">a &lt; 0, n even</td>
-      <td style="padding: 12px 15px; color: #34495e;">not a real number</td>
-      <td style="padding: 12px 15px; color: #34495e;">√(−9) requires <a href="/complex-numbers" style="${linkStyle}">complex numbers</a></td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj9 — summary: capstone even-vs-odd at a glance
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Property</th>
-      <th style="${tableHeaders.summary}">Even index (n = 2, 4, 6, …)</th>
-      <th style="${tableHeaders.summary}">Odd index (n = 3, 5, 7, …)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Allowed radicand (real values)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a ≥ 0 only</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any real a</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sign of result</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">always ≥ 0 (principal root)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">matches sign of a</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Domain of f(x) = <sup>n</sup>√x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, ∞)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Range of f(x) = <sup>n</sup>√x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−∞, ∞)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Identity <sup>n</sup>√(x<sup>n</sup>)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|x|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Negative radicand result</td>
-      <td style="padding: 12px 15px; color: #34495e;">not real — use <a href="/complex-numbers" style="${linkStyle}">complex numbers</a></td>
-      <td style="padding: 12px 15px; color: #34495e;">real, negative</td>
-    </tr>
-  </tbody>
-</table>
-`
 
 const sectionsContent = {
+
   obj0: {
-  title: `Key Terms`,
-  content: `
+    title: `Key Terms`,
+    content: `
 ## Radical Components
- 
+
 - [Index](!/algebra/definitions#index) — determines whether the radical is even or odd, controlling domain and sign behavior
 - [Radicand](!/algebra/definitions#radicand) — the expression under the radical; must be non-negative for even indices
 - [Principal Root](!/algebra/definitions#principal_root) — the non-negative value returned by even-index radicals, ensuring the radical behaves as a function
- 
+
 ## Related Concepts
- 
+
 - [Radical Function](!/algebra/definitions#radical_function) — domain and range depend directly on index parity
 - [Rational Exponent](!/algebra/definitions#rational_exponent) — equivalent notation where domain restrictions carry over
 
@@ -951,14 +464,14 @@ const sectionsContent = {
 - [Even Root Identity](!/algebra/formulas#even_root_identity) — $\\sqrt[n]{a^n} = |a|$ ($n$ even)
 - [Odd Root Identity](!/algebra/formulas#odd_root_identity) — $\\sqrt[n]{a^n} = a$ ($n$ odd)
 `,
-  before: ``,
-  after: `
+    before: ``,
+    after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
 
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
 `,
-  link: '',
-},
+    link: '',
+  },
 
   obj1: {
     title: `Even Index Radicals`,
@@ -1038,7 +551,12 @@ If the identity were $\\sqrt{x^2} = x$, then $\\sqrt{(-5)^2}$ would equal $-5$. 
 
 The general form:
 
-$$\\sqrt[n]{x^n} = |x| \\quad \\text{when } n \\text{ is even}$$
+@academic[formula_callout:Even Root Identity
+$$\\sqrt[n]{a^n} = |a| \\quad (n \\text{ even})$$
+/algebra/formulas#even_root_identity]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 This absolute value appears when [simplifying radicals](!/algebra/roots/simplifying) with variables. Whenever an even root extracts a variable raised to an odd power, absolute value may be required.
 
@@ -1056,7 +574,12 @@ $$\\sqrt{x^4} = x^2 \\quad \\text{(no absolute value needed)}$$`,
     title: `The Identity for Odd Roots`,
     content: `Odd-index radicals behave more simply:
 
-$$\\sqrt[n]{x^n} = x \\quad \\text{when } n \\text{ is odd}$$
+@academic[formula_callout:Odd Root Identity
+$$\\sqrt[n]{a^n} = a \\quad (n \\text{ odd})$$
+/algebra/formulas#odd_root_identity]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 No absolute value appears. The odd root returns the original value, preserving sign.
 
@@ -1185,6 +708,7 @@ The properties established here — domain restrictions, sign behavior, absolute
   },
 
 }
+
 
 const introContent = {
   id: "intro",

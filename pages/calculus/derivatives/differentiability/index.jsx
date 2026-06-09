@@ -37,7 +37,7 @@ const linkStyle = 'color: inherit; text-decoration: underline;'
 
 // obj7 — aggregation: one-sided derivatives reference
 const obj7Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Derivative</th>
@@ -71,7 +71,7 @@ const obj7Table = `
 
 // obj8 — aggregation: differentiability on intervals
 const obj8Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Setting</th>
@@ -101,7 +101,7 @@ const obj8Table = `
 
 // obj10 — summary capstone: typology of differentiability failure modes
 const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.summary}">Failure mode</th>
@@ -144,6 +144,167 @@ const summaryTable = `
 </table>
 `
 
+// const sectionsContent = {
+//   // ─── /calculus/derivatives/differentiability ──────────────────────────────
+
+//   obj0: {
+//     title: `Key Terms`,
+//     content: `
+// - [Differentiability](!/calculus/definitions#differentiability) — the limit defining the derivative exists and is finite
+// - [Derivative](!/calculus/definitions#derivative) — the object whose existence differentiability governs
+// - [Continuity](!/calculus/definitions#continuity) — differentiability implies continuity, but not the reverse
+// - [Tangent Line](!/calculus/definitions#tangent_line) — exists at differentiable points; absent at corners, cusps, vertical tangents`,
+//     before: ``,
+//     after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+//     link: '',
+//   },
+
+//   obj1: {
+//     title: `The Definition of Differentiability`,
+//     content: `
+// A function $f$ is differentiable at $x = a$ if the limit
+
+// $$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$
+
+// exists and is finite. This is a two-sided [limit](!/calculus/limits/two-sided): the difference quotient must approach the same finite value whether $h \\to 0^+$ or $h \\to 0^-$.
+
+// Geometrically, differentiability at $a$ means the graph of $f$ has a well-defined, non-vertical tangent line at $(a, f(a))$. The secant lines through $(a, f(a))$ and nearby points converge to a single line regardless of the direction of approach.
+
+// If the limit does not exist, or if it equals $\\pm\\infty$, or if $f(a)$ itself is undefined, then $f$ is not differentiable at $a$.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj2: {
+//     title: `Differentiability Implies Continuity`,
+//     content: `
+// If $f$ is differentiable at $a$, then $f$ is continuous at $a$. The proof is direct.
+
+// Rewrite $f(x) - f(a)$ as
+
+// $$f(x) - f(a) = \\frac{f(x) - f(a)}{x - a} \\cdot (x - a)$$
+
+// As $x \\to a$, the first factor approaches $f'(a)$ (which exists by assumption) and the second factor approaches $0$. Their product approaches $f'(a) \\cdot 0 = 0$, so $\\lim_{x \\to a} f(x) = f(a)$.
+
+// This establishes a hierarchy: differentiability is a stronger condition than continuity. Every differentiable function is continuous, but the reverse implication fails. The functions that are continuous but not differentiable at a point form a significant and instructive class.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj3: {
+//     title: `Corners`,
+//     content: `
+// A corner occurs when the left-hand and right-hand derivatives both exist as finite numbers but disagree.
+
+// $$\\lim_{h \\to 0^-} \\frac{f(a + h) - f(a)}{h} \\neq \\lim_{h \\to 0^+} \\frac{f(a + h) - f(a)}{h}$$
+
+// The graph makes a sharp turn at $x = a$—two distinct tangent directions meeting at a single point. The function is continuous at $a$ (no break in the graph), but the two-sided limit of the difference quotient fails to exist because the one-sided limits differ.
+
+// The standard example is $f(x) = |x|$ at $x = 0$. The left-hand derivative is $-1$ and the right-hand derivative is $+1$. The graph forms a V-shape, and no single straight line can serve as a tangent. More generally, any piecewise linear function with a slope change at a junction has a corner there.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj4: {
+//     title: `Cusps`,
+//     content: `
+// A cusp occurs when both one-sided derivatives are infinite but with opposite signs. As $h \\to 0^+$, the difference quotient approaches $+\\infty$ (or $-\\infty$), and as $h \\to 0^-$, it approaches the opposite.
+
+// The graph comes to a sharp point where the curve doubles back on itself with vertical tangent directions from both sides. Unlike a corner, the slopes do not stay finite—they blow up.
+
+// The standard example is $f(x) = x^{2/3}$ at $x = 0$. The derivative $f'(x) = \\frac{2}{3}x^{-1/3}$ tends to $+\\infty$ from the right and $-\\infty$ from the left. The graph has a pointed tip at the origin, sharper than any corner. The function is continuous at $x = 0$, but the infinite and opposing slopes prevent differentiability.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj5: {
+//     title: `Vertical Tangents`,
+//     content: `
+// A vertical tangent occurs when the two-sided limit of the difference quotient exists but equals $+\\infty$ or $-\\infty$. Both sides agree on the direction—unlike a cusp—but the slope is infinite.
+
+// The standard example is $f(x) = x^{1/3}$ at $x = 0$. The derivative formula $f'(x) = \\frac{1}{3}x^{-2/3}$ gives $f'(x) \\to +\\infty$ as $x \\to 0$ from either side. The graph passes smoothly through the origin with no sharp point, but the tangent line there is the vertical line $x = 0$.
+
+// A vertical tangent line has undefined slope, so the derivative does not exist in the usual sense. The function is continuous and the graph is smooth, yet the rate of change is unbounded at that point. This is the mildest form of non-differentiability—the geometry is clean, but the numerical value of the derivative is not finite.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj6: {
+//     title: `Discontinuities`,
+//     content: `
+// If $f$ is not [continuous](!/calculus/limits/continuity) at $a$, then $f$ is not differentiable at $a$. Since differentiability implies continuity, any discontinuity automatically rules out differentiability.
+
+// At a jump discontinuity, the function leaps from one value to another. No tangent line can bridge the gap. At an infinite discontinuity (vertical asymptote), the function blows up—there is no point $(a, f(a))$ through which a tangent could pass. At a removable discontinuity, the limit exists but either $f(a)$ is undefined or differs from the limit; redefining $f(a)$ to equal the limit restores continuity and may restore differentiability.
+
+// Discontinuities are the most straightforward obstruction to differentiability. The other failure modes—corners, cusps, vertical tangents—are subtler because the function is continuous at the problematic point.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj7: {
+//     title: `One-Sided Derivatives`,
+//     content: `
+// The left-hand derivative of $f$ at $a$ is
+
+// $$f'_-(a) = \\lim_{h \\to 0^-} \\frac{f(a + h) - f(a)}{h}$$
+
+// and the right-hand derivative is
+
+// $$f'_+(a) = \\lim_{h \\to 0^+} \\frac{f(a + h) - f(a)}{h}$$
+
+// The two-sided derivative $f'(a)$ exists if and only if both one-sided derivatives exist, are finite, and are equal: $f'_-(a) = f'_+(a)$.
+
+// One-sided derivatives appear naturally at endpoints of closed intervals, where only one direction of approach is available. They also arise at boundaries of piecewise functions, where different formulas govern the left and right sides. Checking whether the one-sided derivatives match at a boundary is the standard test for differentiability of a piecewise-defined function.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj8: {
+//     title: `Differentiability on Intervals`,
+//     content: `
+// A function is differentiable on an open interval $(a, b)$ if it is differentiable at every point in $(a, b)$. No endpoint conditions are needed because open intervals exclude their endpoints.
+
+// On a closed interval $[a, b]$, the convention is: $f$ is differentiable on $(a, b)$ and possesses a right-hand derivative at $a$ and a left-hand derivative at $b$. This mirrors the definition of [continuity on a closed interval](!/calculus/limits/continuity) and ensures that derivative-based theorems—the Mean Value Theorem, Rolle's Theorem—apply on $[a, b]$.
+
+// For piecewise functions defined on adjacent intervals, differentiability at each interior boundary requires two conditions: continuity at the boundary (the pieces connect) and agreement of the one-sided derivatives (the pieces connect smoothly). Continuity alone is not sufficient—$f(x) = |x|$ is continuous at $x = 0$ but not differentiable there.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj9: {
+//     title: `Pathological Examples`,
+//     content: `
+// The gap between continuity and differentiability extends further than isolated points. The Weierstrass function, constructed in 1872, is continuous at every real number but differentiable at none. Its graph is an infinitely jagged curve with no smooth segments anywhere.
+
+// This is not an isolated curiosity. Entire families of continuous-but-nowhere-differentiable functions exist, and they arise naturally in fractal geometry and stochastic processes. Brownian motion paths, for instance, are almost surely continuous everywhere and differentiable nowhere.
+
+// These examples demonstrate that differentiability is a genuinely restrictive condition. Continuity guarantees an unbroken graph; differentiability demands a smooth one. Most "natural" functions in calculus—polynomials, trigonometric functions, exponentials—are differentiable on their entire domains, which can create the false impression that differentiability is routine. The pathological cases reveal that smooth behavior is special, not default.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj10: {
+//     title: `Summary: A Typology of Differentiability Failure`,
+//     content: `
+// The failure modes covered above—corners, cusps, vertical tangents, and discontinuities—each block differentiability through a different mechanism and leave a different signature on the graph. The table below collects them in parallel, organized by what the one-sided derivatives do, whether the function remains continuous at the problem point, and a canonical example for each. Reading across a row identifies the mode; reading down a column reveals what changes from one mode to the next.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+// };
+
+// formulas-optimized: v1 | 2026-06-09 | 2 callouts (obj2, obj7)
 const sectionsContent = {
   // ─── /calculus/derivatives/differentiability ──────────────────────────────
 
@@ -181,6 +342,13 @@ If the limit does not exist, or if it equals $\\pm\\infty$, or if $f(a)$ itself 
     title: `Differentiability Implies Continuity`,
     content: `
 If $f$ is differentiable at $a$, then $f$ is continuous at $a$. The proof is direct.
+
+@academic[formula_callout:Differentiability Implies Continuity
+$$f \\text{ differentiable at } a \\implies f \\text{ continuous at } a$$
+/calculus/derivatives/formulas#differentiability_implies_continuity]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 Rewrite $f(x) - f(a)$ as
 
@@ -259,6 +427,13 @@ and the right-hand derivative is
 
 $$f'_+(a) = \\lim_{h \\to 0^+} \\frac{f(a + h) - f(a)}{h}$$
 
+@academic[formula_callout:One-Sided Derivative
+$$f'_-(a) = \\lim_{h \\to 0^-} \\frac{f(a + h) - f(a)}{h} \\qquad f'_+(a) = \\lim_{h \\to 0^+} \\frac{f(a + h) - f(a)}{h}$$
+/calculus/derivatives/formulas#one_sided_derivative]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
+
 The two-sided derivative $f'(a)$ exists if and only if both one-sided derivatives exist, are finite, and are equal: $f'_-(a) = f'_+(a)$.
 
 One-sided derivatives appear naturally at endpoints of closed intervals, where only one direction of approach is available. They also arise at boundaries of piecewise functions, where different formulas govern the left and right sides. Checking whether the one-sided derivatives match at a boundary is the standard test for differentiability of a piecewise-defined function.
@@ -303,6 +478,7 @@ The failure modes covered above—corners, cusps, vertical tangents, and discont
     link: '',
   },
 };
+
 
 const introContent = {
   id: `intro`,

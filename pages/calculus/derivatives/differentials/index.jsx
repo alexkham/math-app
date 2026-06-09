@@ -35,7 +35,7 @@ const linkStyle = 'color: inherit; text-decoration: underline;'
 
 // obj3 — comparison: dy (tangent) vs Δy (curve)
 const obj3Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.comparison}">Aspect</th>
@@ -80,7 +80,7 @@ const obj3Table = `
 
 // obj7 — aggregation: Leibniz manipulations justified by differentials
 const obj7Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Operation</th>
@@ -110,7 +110,7 @@ const obj7Table = `
 
 // obj8 — aggregation/reference: second-order differential notation decoder
 const obj8Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Notation</th>
@@ -140,7 +140,7 @@ const obj8Table = `
 
 // obj9 — summary capstone: uses of differentials
 const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.summary}">Use</th>
@@ -190,7 +190,182 @@ const summaryTable = `
 </table>
 `
 
-  const sectionsContent = {
+//   const sectionsContent = {
+//   // ─── /calculus/derivatives/differentials ──────────────────────────────────
+
+//   obj0: {
+//     title: `Key Terms`,
+//     content: `
+// - [Differential](!/calculus/definitions#differential) — $dx$ is a free increment; $dy = f'(x) \\cdot dx$ is the tangent-line response
+// - [Derivative](!/calculus/definitions#derivative) — $dy/dx$ separated into two independent quantities
+// - [Partial Derivative](!/calculus/definitions#partial_derivative) — extends differentials to functions of several variables
+// - [Tangent Line](!/calculus/definitions#tangent_line) — the differential $dy$ follows the tangent line, not the curve`,
+//     before: ``,
+//     after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+//     link: '',
+//   },
+
+//   obj1: {
+//     title: `The Differential dx`,
+//     content: `
+// The differential $dx$ is an independent variable. It represents a change in $x$—an increment away from a given value. Unlike the $h$ or $\\Delta x$ in the limit definition, $dx$ is not required to approach zero. It is a finite quantity that can be positive, negative, or zero.
+
+// There is no formula for $dx$—it is chosen freely. Choosing $dx = 0.1$ means considering what happens when $x$ shifts by $0.1$. Choosing $dx = -2$ means shifting $x$ by $-2$. The differential $dx$ sets the scale for the approximation that follows.
+
+// The notation is consistent with Leibniz notation for the derivative. When $dy/dx$ is treated as a ratio of differentials rather than a limit symbol, the algebraic manipulations that make Leibniz notation powerful—cancellation in the chain rule, separation in differential equations—become formally valid rather than merely suggestive.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj2: {
+//     title: `The Differential dy`,
+//     content: `
+// Given $y = f(x)$ where $f$ is [differentiable](!/calculus/derivatives/differentiability), the differential of $y$ is defined as
+
+// $$dy = f'(x) \\cdot dx$$
+
+// The differential $dy$ depends on two things: the point $x$ (which determines the slope $f'(x)$) and the increment $dx$ (which determines the scale). For fixed $x$, $dy$ is a linear function of $dx$—doubling $dx$ doubles $dy$.
+
+// Geometrically, $dy$ is the vertical change along the tangent line at $x$ when the horizontal position shifts by $dx$. The tangent line rises (or falls) at rate $f'(x)$, so a horizontal shift of $dx$ produces a vertical shift of $f'(x) \\cdot dx$.
+
+// For a linear function $f(x) = mx + b$, the differential $dy = m \\cdot dx$ equals the actual change in $f$ exactly, because the tangent line to a linear function is the function itself. For nonlinear functions, $dy$ is an approximation—exact in the limit as $dx \\to 0$, and increasingly approximate as $dx$ grows.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj3: {
+//     title: `dy Versus Δy`,
+//     content: `
+// Two quantities measure the change in $y$ when $x$ changes by $dx$:
+
+// $$\\Delta y = f(x + dx) - f(x) \\qquad \\text{(actual change)}$$
+
+// $$dy = f'(x) \\cdot dx \\qquad \\text{(tangent line estimate)}$$
+
+// The actual change $\\Delta y$ follows the curve. The differential $dy$ follows the tangent line. The difference $\\Delta y - dy$ is the error introduced by the linear approximation.
+
+// For small $dx$, the error $\\Delta y - dy$ is much smaller than $dx$ itself. Precisely, $\\lim_{dx \\to 0} \\frac{\\Delta y - dy}{dx} = 0$—the error shrinks faster than the increment. This is what makes the tangent line a good approximation near the point of tangency.
+
+// For larger $dx$, the gap between $\\Delta y$ and $dy$ widens. The tangent line is a local tool: reliable near $x$, increasingly unreliable far from it. The curvature of $f$—governed by the [second derivative](!/calculus/derivatives/higher-order)—determines how quickly the approximation deteriorates.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj4: {
+//     title: `Linear Approximation`,
+//     content: `
+// The differential formula rearranges into an approximation for function values:
+
+// $$f(x + dx) \\approx f(x) + f'(x) \\cdot dx$$
+
+// This is the linearization of $f$ at $x$. Given a known value $f(x)$ and the slope $f'(x)$, the tangent line estimates $f$ at nearby points.
+
+// To approximate $\\sqrt{4.03}$: take $f(x) = \\sqrt{x}$, $x = 4$, $dx = 0.03$. Then $f(4) = 2$ and $f'(x) = \\frac{1}{2\\sqrt{x}}$, so $f'(4) = \\frac{1}{4}$. The estimate is $2 + \\frac{1}{4}(0.03) = 2.0075$. The actual value is $\\sqrt{4.03} \\approx 2.00749...$—the approximation is accurate to five decimal places.
+
+// The linearization can also be written as $L(x) = f(a) + f'(a)(x - a)$, the tangent line at $x = a$ used as a function. For $x$ near $a$, $L(x) \\approx f(x)$. The quality of the approximation depends on two factors: the size of $|x - a|$ and the magnitude of $f''$ near $a$, which controls how quickly the curve diverges from its tangent.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj5: {
+//     title: `Error Estimation`,
+//     content: `
+// If a quantity $x$ is measured with error $dx$, the computed value $f(x)$ inherits an error approximately equal to the differential:
+
+// $$\\text{absolute error in } f \\approx |dy| = |f'(x)| \\cdot |dx|$$
+
+// The derivative acts as an error amplification factor. Where $|f'(x)|$ is large, small measurement errors in $x$ produce large errors in $f(x)$. Where $|f'(x)|$ is small, errors are suppressed.
+
+// The relative error normalizes by the function value:
+
+// $$\\frac{|dy|}{|f(x)|} = \\frac{|f'(x)|}{|f(x)|} \\cdot |dx|$$
+
+// The ratio $\\frac{f'(x)}{f(x)} = \\frac{d}{dx}[\\ln|f(x)|]$ is the logarithmic derivative. Relative error in the output equals the logarithmic derivative times the absolute error in the input.
+
+// For $f(x) = x^n$: $\\frac{f'(x)}{f(x)} = \\frac{n}{x}$, so the relative error in $x^n$ is $n$ times the relative error in $x$. Squaring a measurement doubles its relative error. Cubing triples it. This scaling rule is a standard tool in experimental science for propagating uncertainties through power-law relationships.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj6: {
+//     title: `Differentials of Multiple Variables`,
+//     content: `
+// When a formula involves several measured quantities, each contributes to the total error. If $z = f(x, y)$, the total differential is
+
+// $$dz = \\frac{\\partial f}{\\partial x}\\,dx + \\frac{\\partial f}{\\partial y}\\,dy$$
+
+// Each partial derivative weights the contribution of the corresponding variable's error. The total differential estimates how $z$ responds to simultaneous small changes in all inputs.
+
+// For the area of a rectangle $A = lw$: $dA = w\\,dl + l\\,dw$. If $l = 10 \\pm 0.1$ and $w = 5 \\pm 0.05$, then $dA = 5(0.1) + 10(0.05) = 1.0$. The area is approximately $50 \\pm 1.0$.
+
+// For the volume of a cylinder $V = \\pi r^2 h$: $dV = 2\\pi r h\\,dr + \\pi r^2\\,dh$. The radius error is amplified by $2\\pi r h$ and the height error by $\\pi r^2$. Since $r$ enters as a square, its error contributes more heavily—consistent with the power-law scaling of relative error.
+
+// This extension uses partial derivatives, which generalize the single-variable derivative to functions of several variables. The total differential remains a linear approximation, now in multiple dimensions.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj7: {
+//     title: `Differentials and Leibniz Notation`,
+//     content: `
+// Differentials retroactively justify the algebraic behavior of Leibniz notation.
+
+// The chain rule states $\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$. In differential form: $dy = \\frac{dy}{du}\\,du$ and $du = \\frac{du}{dx}\\,dx$. Substituting the second into the first gives $dy = \\frac{dy}{du} \\cdot \\frac{du}{dx}\\,dx$, which is $dy = \\frac{dy}{dx}\\,dx$. The intermediate variable $du$ cancels as though these were fractions—and with differentials, they are.
+
+// Integration notation $\\int f(x)\\,dx$ also uses the differential $dx$ meaningfully. The substitution rule $u = g(x)$, $du = g'(x)\\,dx$ replaces $dx$ with an expression involving $du$—a literal change of variable in the differential. The notation is not merely symbolic; it reflects the algebraic structure of differentials.
+
+// Separation of variables in differential equations—writing $\\frac{dy}{dx} = g(x)h(y)$ as $\\frac{dy}{h(y)} = g(x)\\,dx$ and integrating both sides—depends on treating $dy$ and $dx$ as independent objects that can be rearranged. Differentials make this manipulation rigorous rather than heuristic.
+
+//  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Symbols and Notations](!/math-symbols/calculus) →@
+
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj8: {
+//     title: `Higher-Order Differentials`,
+//     content: `
+// If $dx$ is held constant (treated as a fixed increment), the second differential of $y$ is
+
+// $$d^2 y = f''(x) \\cdot (dx)^2$$
+
+// The notation $d^2 y / dx^2$ for the [second derivative](!/calculus/derivatives/higher-order) arises from dividing both sides by $(dx)^2$:
+
+// $$\\frac{d^2 y}{dx^2} = \\frac{d^2 y}{(dx)^2} = f''(x)$$
+
+// This explains the Leibniz notation for higher derivatives. The superscript on $d^2 y$ counts the number of times the differential operator $d$ has been applied. The square on $dx^2$ reflects that $dx$ appears as a factor twice—not that $dx$ is squared in a power sense.
+
+// Higher-order differentials extend the approximation. The second-order estimate of the change in $y$ is
+
+// $$\\Delta y \\approx f'(x)\\,dx + \\frac{1}{2}f''(x)(dx)^2$$
+
+// This is the beginning of the Taylor expansion written in differential notation: $f(x + dx) \\approx f(x) + f'(x)\\,dx + \\frac{1}{2}f''(x)(dx)^2 + \\cdots$. Each additional term uses a higher-order derivative and a higher power of $dx$, improving the approximation at the cost of more computation.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj9: {
+//     title: `Summary: What Differentials Are Good For`,
+//     content: `
+// The single formula $dy = f'(x)\\,dx$ underlies every application of differentials covered above. The table below collects those applications side by side, pairing each with the formula it specializes to, a worked example from the page, and the situation where it earns its place over alternatives. Together, these capture the practical payoff of treating $dx$ and $dy$ as independent quantities rather than parts of an unbreakable $dy/dx$ symbol.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+// };
+
+// formulas-optimized: v1 | 2026-06-09 | 4 callouts (obj2, obj4, obj5, obj6)
+const sectionsContent = {
   // ─── /calculus/derivatives/differentials ──────────────────────────────────
 
   obj0: {
@@ -224,7 +399,12 @@ The notation is consistent with Leibniz notation for the derivative. When $dy/dx
     content: `
 Given $y = f(x)$ where $f$ is [differentiable](!/calculus/derivatives/differentiability), the differential of $y$ is defined as
 
-$$dy = f'(x) \\cdot dx$$
+@academic[formula_callout:Differential
+$$dy = f'(x)\\, dx$$
+/calculus/derivatives/formulas#differential]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 The differential $dy$ depends on two things: the point $x$ (which determines the slope $f'(x)$) and the increment $dx$ (which determines the scale). For fixed $x$, $dy$ is a linear function of $dx$—doubling $dx$ doubles $dy$.
 
@@ -260,7 +440,12 @@ For larger $dx$, the gap between $\\Delta y$ and $dy$ widens. The tangent line i
     content: `
 The differential formula rearranges into an approximation for function values:
 
-$$f(x + dx) \\approx f(x) + f'(x) \\cdot dx$$
+@academic[formula_callout:Linear Approximation
+$$f(x) \\approx f(a) + f'(a)(x - a) \\qquad \\Delta y \\approx f'(a)\\, \\Delta x$$
+/calculus/derivatives/formulas#linear_approximation]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 This is the linearization of $f$ at $x$. Given a known value $f(x)$ and the slope $f'(x)$, the tangent line estimates $f$ at nearby points.
 
@@ -287,6 +472,13 @@ $$\\frac{|dy|}{|f(x)|} = \\frac{|f'(x)|}{|f(x)|} \\cdot |dx|$$
 
 The ratio $\\frac{f'(x)}{f(x)} = \\frac{d}{dx}[\\ln|f(x)|]$ is the logarithmic derivative. Relative error in the output equals the logarithmic derivative times the absolute error in the input.
 
+@academic[formula_callout:Logarithmic Derivative
+$$\\frac{d}{dx}[\\ln f(x)] = \\frac{f'(x)}{f(x)}$$
+/calculus/derivatives/formulas#logarithmic_derivative]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
+
 For $f(x) = x^n$: $\\frac{f'(x)}{f(x)} = \\frac{n}{x}$, so the relative error in $x^n$ is $n$ times the relative error in $x$. Squaring a measurement doubles its relative error. Cubing triples it. This scaling rule is a standard tool in experimental science for propagating uncertainties through power-law relationships.
 `,
     before: ``,
@@ -298,7 +490,12 @@ For $f(x) = x^n$: $\\frac{f'(x)}{f(x)} = \\frac{n}{x}$, so the relative error in
     content: `
 When a formula involves several measured quantities, each contributes to the total error. If $z = f(x, y)$, the total differential is
 
-$$dz = \\frac{\\partial f}{\\partial x}\\,dx + \\frac{\\partial f}{\\partial y}\\,dy$$
+@academic[formula_callout:Total Differential
+$$dz = \\frac{\\partial z}{\\partial x}\\, dx + \\frac{\\partial z}{\\partial y}\\, dy$$
+/calculus/derivatives/formulas#total_differential]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 Each partial derivative weights the contribution of the corresponding variable's error. The total differential estimates how $z$ responds to simultaneous small changes in all inputs.
 
@@ -363,6 +560,7 @@ The single formula $dy = f'(x)\\,dx$ underlies every application of differential
     link: '',
   },
 };
+
 
 const introContent = {
   id: `intro`,

@@ -1,70 +1,181 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import '../../../../pages/pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import '../../../../pages/pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   'radical rules',
-//   'product rule radicals',
-//   'quotient rule radicals',
-//   'power rule radicals',
-//   'nested radicals',
-//   'radical of a radical',
-//   'simplifying radicals rules',
-//   'radical exponent connection',
-//   'radical domain restrictions',
-//   'radical common errors',
-//   'combining radicals',
-//   'radical index rules',
-//   'radical properties algebra',
-//   'rational exponents and radicals'
-// ]
-//   // •
+export async function getStaticProps(){
+const keyWords = [
+  'radical rules',
+  'product rule radicals',
+  'quotient rule radicals',
+  'power rule radicals',
+  'nested radicals',
+  'radical of a radical',
+  'simplifying radicals rules',
+  'radical exponent connection',
+  'radical domain restrictions',
+  'radical common errors',
+  'combining radicals',
+  'radical index rules',
+  'radical properties algebra',
+  'rational exponents and radicals'
+]
+  // •
 
-// //   \u2022 First item
-// // \u2022 Second item
+//   \u2022 First item
+// \u2022 Second item
 
   
-// // <hr style="border-width:1px;"></hr>
+// <hr style="border-width:1px;"></hr>
 
-// // <hr style="color:blue;" />
+// <hr style="color:blue;" />
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// <hr style="border-color:#3498db; border-width:1px;" />
 
 
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
  
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
+// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.notation)}
+        // </div>,
 
 
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
+//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+//     {processContent(sectionsContent.normal.parameters)}
+// </div>,
         
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
+//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+//                   {processContent(sectionsContent.obj4.content)}
+//                   </div>,
 
 
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+//  <div key={'dist'} style={{
+//                     textAlign: 'center',
+//                     transform: 'scale(0.98)',
+//                     transformOrigin: 'center',
+//                     marginTop:'50px',
+//                     marginLeft:'-150px'
+//                   }} dangerouslySetInnerHTML={{ 
+//                     __html:   sectionContent.distributions.svg,
+//                   }} />
+
+const linkStyle = 'color: inherit; text-decoration: underline;'
+
+// ---------- TABLES ----------
+
+// obj5 — comparison: even vs odd index restrictions, by rule
+const obj5Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Rule</th>
+      <th style="${tableHeaders.comparison}">Even index — required for real values</th>
+      <th style="${tableHeaders.comparison}">Odd index — required for real values</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Product</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">both factors a, b ≥ 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a, b any real numbers</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quotient</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">numerator a ≥ 0, denominator b &gt; 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a any real; denominator b ≠ 0</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Power</td>
+      <td style="padding: 12px 15px; color: #34495e;">base a ≥ 0</td>
+      <td style="padding: 12px 15px; color: #34495e;">a any real number</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// obj6 — aggregation (cause-effect): common errors with correct approach
+const obj6Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Error</th>
+      <th style="${tableHeaders.aggregation}">Wrong</th>
+      <th style="${tableHeaders.aggregation}">Correct approach</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Distributing over a sum</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√(a + b) = √a + √b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no shortcut exists; evaluate the sum inside the radical first</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Treating different indices as same</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√2 · ∛2 = ⁵√4 (or similar)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">convert to <a href="/algebra/roots/rational-exponents" style="${linkStyle}">rational exponents</a>, find a common denominator</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Ignoring domain restrictions</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√(−3) · √(−3) = √9 = 3</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">product rule fails for negative radicands under even roots; use <a href="/algebra/roots/complex" style="${linkStyle}">complex numbers</a></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Dropping absolute values</td>
+      <td style="padding: 12px 15px; color: #34495e;">√(x²) = x</td>
+      <td style="padding: 12px 15px; color: #34495e;">√(x²) = |x| whenever x may be negative</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// obj8 — summary: capstone reference of the four radical rules
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Rule</th>
+      <th style="${tableHeaders.summary}">Formula</th>
+      <th style="${tableHeaders.summary}">Exponent-law origin</th>
+      <th style="${tableHeaders.summary}">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Product</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><sup>n</sup>√(ab) = <sup>n</sup>√a · <sup>n</sup>√b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(ab)<sup>1/n</sup> = a<sup>1/n</sup> · b<sup>1/n</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√12 = √4 · √3 = 2√3</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quotient</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><sup>n</sup>√(a ⁄ b) = <sup>n</sup>√a ⁄ <sup>n</sup>√b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a ⁄ b)<sup>1/n</sup> = a<sup>1/n</sup> ⁄ b<sup>1/n</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√(49 ⁄ 16) = 7 ⁄ 4</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Power</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><sup>n</sup>√(a<sup>m</sup>) = a<sup>m/n</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a<sup>m</sup>)<sup>1/n</sup> = a<sup>m/n</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∛(8²) = 8<sup>2/3</sup> = 4</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Nested</td>
+      <td style="padding: 12px 15px; color: #34495e;"><sup>m</sup>√(<sup>n</sup>√a) = <sup>mn</sup>√a</td>
+      <td style="padding: 12px 15px; color: #34495e;">(a<sup>1/n</sup>)<sup>1/m</sup> = a<sup>1/(mn)</sup></td>
+      <td style="padding: 12px 15px; color: #34495e;">√(√16) = <sup>4</sup>√16 = 2</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 //  const sectionsContent = {
 //   obj0: {
@@ -281,679 +392,30 @@
 //     link: '',
 //   },
 
-// }
-
-//   const introContent = {
-//   id: "intro",
-//   title: "Predictable Patterns",
-//   content: `Radicals follow rules. A product under a radical splits into a product of radicals. A quotient under a radical splits into a quotient of radicals. Nested radicals collapse into a single radical with a combined index.
-
-// These patterns are not arbitrary — they derive from the connection between radicals and exponents. Every radical rule corresponds to an exponent law. Understanding why the rules work prevents misapplication and reveals when restrictions apply.`
-// }
-
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What are the main rules for radicals?",
-//     answer: "The main radical rules are the product rule (√(ab) = √a · √b), the quotient rule (√(a/b) = √a / √b), the power rule (ⁿ√(aᵐ) = a^(m/n)), and the nested radical rule (ᵐ√(ⁿ√a) = ᵐⁿ√a). Each rule requires matching indices and derives from corresponding exponent laws.",
-//     sectionId: "1"
+//   obj8: {
+//     title: `Summary of Radical Rules`,
+//     content: `The four rules introduced in the sections above collect into a single reference card. Each row gives a rule, its general formula, the exponent law from which it derives, and a numerical example — useful for review at a glance and as a working reference when applying the rules to specific expressions.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
 //   },
-//   obj2: {
-//     question: "Can you distribute a radical over addition?",
-//     answer: "No. √(a + b) does not equal √a + √b. For example, √(9 + 16) = √25 = 5, but √9 + √16 = 3 + 4 = 7. The product and quotient rules apply to multiplication and division only, never to sums or differences.",
-//     sectionId: "6"
-//   },
-//   obj3: {
-//     question: "How do you simplify nested radicals?",
-//     answer: "When one radical contains another, multiply the indices. For example, √(√16) = ⁴√16 = 2. In exponent form, (a^(1/n))^(1/m) = a^(1/(mn)), which shows why the indices multiply.",
-//     sectionId: "4"
-//   },
-//   obj4: {
-//     question: "When do radical rules not apply?",
-//     answer: "Radical rules require matching indices for the product and quotient rules. For even indices, radicands must be non-negative in real numbers. Radicals with different indices cannot be directly combined — they must first be converted to rational exponents with a common denominator.",
-//     sectionId: "5"
-//   },
-//   obj5: {
-//     question: "How are radical rules connected to exponent laws?",
-//     answer: "Every radical rule corresponds to an exponent law. The product rule comes from (ab)^(1/n) = a^(1/n) · b^(1/n), the quotient rule from (a/b)^(1/n) = a^(1/n) / b^(1/n), and the nested radical rule from (a^(1/n))^(1/m) = a^(1/(mn)). Rational exponents unify all radical operations.",
-//     sectionId: "3"
-//   }
+
 // }
 
 
-// // const schemas = {
-// //   learningResource: {
-// //     "@context": "https://schema.org",
-// //     "@type": "LearningResource",
-// //     "name": seoData.name,
-// //     "description": seoData.description,
-// //     "url": `https://www.learnmathclass.com${seoData.url}`,
-// //     "inLanguage": "en-US",
-// //     "learningResourceType": "Explanation",
-// //     "educationalLevel": "High School, College",
-// //     "educationalUse": "Learning",
-// //     "audience": {
-// //       "@type": "EducationalAudience",
-// //       "educationalRole": "student"
-// //     },
-// //     "about": {
-// //       "@type": "Thing",
-// //       "name": "Radical Rules"
-// //     },
-// //     "teaches": [
-// //       "Product rule for radicals",
-// //       "Quotient rule for radicals",
-// //       "Power rule and rational exponent connection",
-// //       "Nested radical simplification",
-// //       "Domain restrictions for radical rules",
-// //       "Common errors when applying radical rules"
-// //     ],
-// //     "keywords": keyWords.join(", "),
-// //     "author": {
-// //       "@type": "Organization",
-// //       "name": "Learn Math Class"
-// //     },
-// //     "publisher": {
-// //       "@type": "Organization",
-// //       "name": "Learn Math Class"
-// //     },
-// //     "datePublished": "2024-01-15",
-// //     "dateModified": new Date().toISOString()
-// //   },
+const sectionsContent = {
 
-// //   breadcrumb: {
-// //     "@context": "https://schema.org",
-// //     "@type": "BreadcrumbList",
-// //     "itemListElement": [
-// //       {
-// //         "@type": "ListItem",
-// //         "position": 1,
-// //         "name": "Home",
-// //         "item": "https://www.learnmathclass.com"
-// //       },
-// //       {
-// //         "@type": "ListItem",
-// //         "position": 2,
-// //         "name": "Algebra",
-// //         "item": "https://www.learnmathclass.com/algebra"
-// //       },
-// //       {
-// //         "@type": "ListItem",
-// //         "position": 3,
-// //         "name": "Roots",
-// //         "item": "https://www.learnmathclass.com/algebra/roots"
-// //       },
-// //       {
-// //         "@type": "ListItem",
-// //         "position": 4,
-// //         "name": seoData.name,
-// //         "item": `https://www.learnmathclass.com${seoData.url}`
-// //       }
-// //     ]
-// //   },
-
-// //   faq: {
-// //     "@context": "https://schema.org",
-// //     "@type": "FAQPage",
-// //     "mainEntity": Object.keys(faqQuestions).map(key => ({
-// //       "@type": "Question",
-// //       "name": faqQuestions[key].question,
-// //       "acceptedAnswer": {
-// //         "@type": "Answer",
-// //         "text": faqQuestions[key].answer
-// //       }
-// //     }))
-// //   }
-// // }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Radical Rules",
-//     "description": "Learn radical rules: product rule, quotient rule, power rule, and nested radicals. Understand restrictions, common errors, and connections to exponent laws.",
-//     "url": "https://www.learnmathclass.com/algebra/roots/radical-rules",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Radical Rules"
-//     },
-//     "teaches": [
-//       "Product rule for radicals",
-//       "Quotient rule for radicals",
-//       "Power rule and rational exponent connection",
-//       "Nested radical simplification",
-//       "Domain restrictions for radical rules",
-//       "Common errors when applying radical rules"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Algebra",
-//         "item": "https://www.learnmathclass.com/algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Roots",
-//         "item": "https://www.learnmathclass.com/algebra/roots"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Radical Rules",
-//         "item": "https://www.learnmathclass.com/algebra/roots/radical-rules"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-//    return {
-//   props: {
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Radical Rules: Product, Quotient & Power | Learn Math Class",
-//       description: "Learn radical rules: product rule, quotient rule, power rule, and nested radicals. Understand restrictions, common errors, and connections to exponent laws.",
-//       keywords: keyWords.join(", "),
-//       url: "/algebra/roots/radical-rules",
-//       name: "Radical Rules"
-//     },
-//   }
-// }
-//    }
-
-// export default function RadicalRulesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//      {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     // {
-//     //     id:'8',
-//     //     title:sectionsContent.obj8.title,
-//     //     link:sectionsContent.obj8.link,
-//     //     content:[
-//     //       sectionsContent.obj8.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Radical Rules</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//     <KeyTermsCard
-//         id="0"
-//         title={sectionsContent.obj0.title}
-//         content={sectionsContent.obj0.content}
-//         after={sectionsContent.obj0.after}
-//         variant="light"
-//       />
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import '../../../../pages/pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  'radical rules',
-  'product rule radicals',
-  'quotient rule radicals',
-  'power rule radicals',
-  'nested radicals',
-  'radical of a radical',
-  'simplifying radicals rules',
-  'radical exponent connection',
-  'radical domain restrictions',
-  'radical common errors',
-  'combining radicals',
-  'radical index rules',
-  'radical properties algebra',
-  'rational exponents and radicals'
-]
-  // •
-
-//   \u2022 First item
-// \u2022 Second item
-
-  
-// <hr style="border-width:1px;"></hr>
-
-// <hr style="color:blue;" />
-
-// <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-        //     {processContent(sectionsContent.normal.notation)}
-        // </div>,
-
-
-//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-//     {processContent(sectionsContent.normal.parameters)}
-// </div>,
-        
-//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-//                   {processContent(sectionsContent.obj4.content)}
-//                   </div>,
-
-
-//  <div key={'dist'} style={{
-//                     textAlign: 'center',
-//                     transform: 'scale(0.98)',
-//                     transformOrigin: 'center',
-//                     marginTop:'50px',
-//                     marginLeft:'-150px'
-//                   }} dangerouslySetInnerHTML={{ 
-//                     __html:   sectionContent.distributions.svg,
-//                   }} />
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj5 — comparison: even vs odd index restrictions, by rule
-const obj5Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 90%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Rule</th>
-      <th style="${tableHeaders.comparison}">Even index — required for real values</th>
-      <th style="${tableHeaders.comparison}">Odd index — required for real values</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Product</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">both factors a, b ≥ 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a, b any real numbers</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quotient</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">numerator a ≥ 0, denominator b &gt; 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a any real; denominator b ≠ 0</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Power</td>
-      <td style="padding: 12px 15px; color: #34495e;">base a ≥ 0</td>
-      <td style="padding: 12px 15px; color: #34495e;">a any real number</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj6 — aggregation (cause-effect): common errors with correct approach
-const obj6Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Error</th>
-      <th style="${tableHeaders.aggregation}">Wrong</th>
-      <th style="${tableHeaders.aggregation}">Correct approach</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Distributing over a sum</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√(a + b) = √a + √b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no shortcut exists; evaluate the sum inside the radical first</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Treating different indices as same</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√2 · ∛2 = ⁵√4 (or similar)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">convert to <a href="/algebra/roots/rational-exponents" style="${linkStyle}">rational exponents</a>, find a common denominator</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Ignoring domain restrictions</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√(−3) · √(−3) = √9 = 3</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">product rule fails for negative radicands under even roots; use <a href="/algebra/roots/complex" style="${linkStyle}">complex numbers</a></td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Dropping absolute values</td>
-      <td style="padding: 12px 15px; color: #34495e;">√(x²) = x</td>
-      <td style="padding: 12px 15px; color: #34495e;">√(x²) = |x| whenever x may be negative</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj8 — summary: capstone reference of the four radical rules
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Rule</th>
-      <th style="${tableHeaders.summary}">Formula</th>
-      <th style="${tableHeaders.summary}">Exponent-law origin</th>
-      <th style="${tableHeaders.summary}">Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Product</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><sup>n</sup>√(ab) = <sup>n</sup>√a · <sup>n</sup>√b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(ab)<sup>1/n</sup> = a<sup>1/n</sup> · b<sup>1/n</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√12 = √4 · √3 = 2√3</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quotient</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><sup>n</sup>√(a ⁄ b) = <sup>n</sup>√a ⁄ <sup>n</sup>√b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a ⁄ b)<sup>1/n</sup> = a<sup>1/n</sup> ⁄ b<sup>1/n</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√(49 ⁄ 16) = 7 ⁄ 4</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Power</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><sup>n</sup>√(a<sup>m</sup>) = a<sup>m/n</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a<sup>m</sup>)<sup>1/n</sup> = a<sup>m/n</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∛(8²) = 8<sup>2/3</sup> = 4</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Nested</td>
-      <td style="padding: 12px 15px; color: #34495e;"><sup>m</sup>√(<sup>n</sup>√a) = <sup>mn</sup>√a</td>
-      <td style="padding: 12px 15px; color: #34495e;">(a<sup>1/n</sup>)<sup>1/m</sup> = a<sup>1/(mn)</sup></td>
-      <td style="padding: 12px 15px; color: #34495e;">√(√16) = <sup>4</sup>√16 = 2</td>
-    </tr>
-  </tbody>
-</table>
-`
-
- const sectionsContent = {
   obj0: {
-  title: `Key Terms`,
-  content: `
+    title: `Key Terms`,
+    content: `
 ## The Rules
- 
+
 - [Product Rule (Radicals)](!/algebra/definitions#product_rule_(radicals)) — $\\sqrt[n]{ab} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$, splitting or combining products under a radical
 - [Quotient Rule (Radicals)](!/algebra/definitions#quotient_rule_(radicals)) — $\\sqrt[n]{a/b} = \\sqrt[n]{a} / \\sqrt[n]{b}$, splitting or combining quotients
 - [Power Rule (Radicals)](!/algebra/definitions#power_rule_(radicals)) — $\\sqrt[n]{a^m} = a^{m/n}$, connecting radicals to rational exponents
- 
+
 ## Supporting Concepts
- 
+
 - [Index](!/algebra/definitions#index) — rules require matching indices; even indices impose non-negative radicand restrictions
 - [Radicand](!/algebra/definitions#radicand) — the expression under the radical to which the rules are applied
 - [Rational Exponent](!/algebra/definitions#rational_exponent) — every radical rule derives from an exponent law applied to fractional powers
@@ -966,20 +428,25 @@ const summaryTable = `
 - [Nested Radicals](!/algebra/formulas#nested_radicals) — $\\sqrt[m]{\\sqrt[n]{a}} = \\sqrt[mn]{a}$
 
 `,
-  before: ``,
-  after: `
+    before: ``,
+    after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Definitions](!/algebra/definitions) →@
 
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Algebra Formulas](!/algebra/formulas) →@
 `,
-  link: '',
-},
+    link: '',
+  },
 
   obj1: {
     title: `Product Rule`,
     content: `The radical of a product equals the product of the radicals, provided both radicals share the same index.
 
+@academic[formula_callout:Product Rule (Radicals)
 $$\\sqrt[n]{ab} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$$
+/algebra/formulas#product_rule_radicals]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 This rule works in both directions. A single radical can split:
 
@@ -1007,9 +474,14 @@ The product rule is essential for [simplifying radicals](!/algebra/roots/simplif
     title: `Quotient Rule`,
     content: `The radical of a quotient equals the quotient of the radicals.
 
-$$\\sqrt[n]{\\frac{a}{b}} = \\frac{\\sqrt[n]{a}}{\\sqrt[n]{b}}, \\quad b \\neq 0$$
+@academic[formula_callout:Quotient Rule (Radicals)
+$$\\sqrt[n]{\\frac{a}{b}} = \\frac{\\sqrt[n]{a}}{\\sqrt[n]{b}}$$
+/algebra/formulas#quotient_rule_radicals]@
 
-A fraction under a radical splits into a radical over a radical:
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
+
+The rule requires $b \\neq 0$. A fraction under a radical splits into a radical over a radical:
 
 $$\\sqrt{\\frac{49}{16}} = \\frac{\\sqrt{49}}{\\sqrt{16}} = \\frac{7}{4}$$
 
@@ -1035,7 +507,12 @@ For even indices, $a \\geq 0$ and $b > 0$ are required. The denominator must als
     title: `Power Rule`,
     content: `When a power sits under a radical, the exponent and index interact:
 
+@academic[formula_callout:Power Rule (Radicals)
 $$\\sqrt[n]{a^m} = a^{m/n}$$
+/algebra/formulas#power_rule_radicals]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The exponent $m$ becomes the numerator; the index $n$ becomes the denominator. This directly connects radicals to [rational exponents](!/algebra/roots/rational-exponents).
 
@@ -1065,7 +542,12 @@ For even indices with variables, absolute values may be needed. The [properties 
     title: `Radical of a Radical`,
     content: `When one radical contains another, the indices multiply:
 
+@academic[formula_callout:Nested Radicals
 $$\\sqrt[m]{\\sqrt[n]{a}} = \\sqrt[mn]{a}$$
+/algebra/formulas#nested_radicals]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The nested structure collapses into a single radical whose index is the product.
 
@@ -1089,7 +571,7 @@ Nested radicals sometimes appear in [simplifying](!/algebra/roots/simplifying) p
     link: '',
   },
 
- obj5: {
+  obj5: {
     title: `When Rules Apply`,
     content: `The radical rules have restrictions. Ignoring them leads to errors.
 
@@ -1166,6 +648,7 @@ Extracting perfect powers, rationalizing denominators, reducing indices, and com
   },
 
 }
+
 
   const introContent = {
   id: "intro",

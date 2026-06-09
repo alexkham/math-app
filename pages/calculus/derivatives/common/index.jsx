@@ -37,7 +37,7 @@ const linkStyle = 'color: inherit; text-decoration: underline;'
 
 // obj2 — aggregation: power rule across exponent types
 const obj2Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 90%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Exponent type</th>
@@ -77,7 +77,7 @@ const obj2Table = `
 
 // obj5 — aggregation: the six trigonometric derivatives
 const obj5Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Function</th>
@@ -129,7 +129,7 @@ const obj5Table = `
 
 // obj8 — summary capstone: master reference of common derivatives
 const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.summary}">Family</th>
@@ -202,6 +202,178 @@ const summaryTable = `
 </table>
 `
 
+// const sectionsContent = {
+//   // ─── /calculus/derivatives/common ─────────────────────────────────────────
+
+//   obj0: {
+//     title: `Key Terms`,
+//     content: `
+// - [Derivative](!/calculus/definitions#derivative) — the formulas on this page give $f'(x)$ for standard functions
+// - [Higher-Order Derivative](!/calculus/definitions#higher_order_derivative) — repeated differentiation of these standard forms`,
+//     before: ``,
+//     after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+//     link: '',
+//   },
+
+//   obj1: {
+//     title: `Constant Functions`,
+//     content: `
+// For any constant $c$:
+
+// $$\\frac{d}{dx}[c] = 0$$
+
+// The graph of a constant function is a horizontal line. Every secant line through two points on it has slope zero, so the tangent line at every point also has slope zero. From the limit definition, the difference quotient $\\frac{c - c}{h} = 0$ for all $h \\neq 0$, and the limit is $0$.
+
+// Under differentiation, constant terms vanish. In any sum $f(x) + c$, the constant contributes nothing to the derivative: $\\frac{d}{dx}[f(x) + c] = f'(x)$.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj2: {
+//     title: `Power Functions`,
+//     content: `
+// For any real exponent $n$:
+
+// $$\\frac{d}{dx}[x^n] = nx^{n-1}$$
+
+// The rule applies uniformly across exponent types. Positive integers: $\\frac{d}{dx}[x^5] = 5x^4$. Negative integers: $\\frac{d}{dx}[x^{-3}] = -3x^{-4}$. Fractions: $\\frac{d}{dx}[x^{1/2}] = \\frac{1}{2}x^{-1/2} = \\frac{1}{2\\sqrt{x}}$. Irrational exponents: $\\frac{d}{dx}[x^\\pi] = \\pi x^{\\pi - 1}$.
+
+// For positive integer $n$, the proof expands $(x+h)^n$ using the binomial theorem. The leading term after cancellation is $nx^{n-1}h$, and dividing by $h$ and taking the limit gives $nx^{n-1}$. All higher-order terms contain $h$ as a factor and vanish in the limit.
+
+// Extension to negative and fractional exponents uses the quotient rule and the chain rule respectively, or alternatively [logarithmic differentiation](!/calculus/derivatives/techniques): writing $x^n = e^{n \\ln x}$ and applying the chain rule gives $\\frac{d}{dx}[x^n] = e^{n \\ln x} \\cdot \\frac{n}{x} = x^n \\cdot \\frac{n}{x} = nx^{n-1}$.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj3: {
+//     title: `Polynomials`,
+//     content: `
+// A polynomial $p(x) = a_n x^n + a_{n-1}x^{n-1} + \\cdots + a_1 x + a_0$ is differentiated term by term using the power rule, constant multiple rule, and sum rule:
+
+// $$p'(x) = na_n x^{n-1} + (n-1)a_{n-1}x^{n-2} + \\cdots + a_1$$
+
+// Each term drops its degree by one. The constant term $a_0$ disappears. A polynomial of degree $n$ has a derivative of degree $n - 1$.
+
+// Polynomials are [differentiable](!/calculus/derivatives/differentiability) at every real number. Their derivatives are again polynomials, so the process can be repeated indefinitely. After $n$ differentiations, a degree-$n$ polynomial becomes a constant $n! \\cdot a_n$. One more differentiation yields zero, and all subsequent derivatives remain zero. This termination property distinguishes polynomials from transcendental functions, whose derivatives cycle or persist indefinitely.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj4: {
+//     title: `Trigonometric Functions — Sine and Cosine`,
+//     content: `
+// The two fundamental trigonometric derivatives are:
+
+// $$\\frac{d}{dx}[\\sin x] = \\cos x \\qquad \\qquad \\frac{d}{dx}[\\cos x] = -\\sin x$$
+
+// The sine derivative is proved from the limit definition. Expanding $\\sin(x + h)$ using the angle addition formula gives $\\sin x \\cos h + \\cos x \\sin h$. The difference quotient becomes
+
+// $$\\frac{\\sin x(\\cos h - 1) + \\cos x \\sin h}{h} = \\sin x \\cdot \\frac{\\cos h - 1}{h} + \\cos x \\cdot \\frac{\\sin h}{h}$$
+
+// The [special limits](!/calculus/limits/special) $\\lim_{h \\to 0} \\frac{\\sin h}{h} = 1$ and $\\lim_{h \\to 0} \\frac{\\cos h - 1}{h} = 0$ yield the result: $\\cos x$.
+
+// The cosine derivative follows similarly, or by differentiating $\\cos x = \\sin(\\pi/2 - x)$ using the chain rule. The negative sign in $(\\cos x)' = -\\sin x$ is essential and a frequent source of error.
+
+// Repeated differentiation cycles with period four: $\\sin x \\to \\cos x \\to -\\sin x \\to -\\cos x \\to \\sin x$. This periodicity extends to [higher-order derivatives](!/calculus/derivatives/higher-order): $\\frac{d^n}{dx^n}[\\sin x] = \\sin(x + n\\pi/2)$.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj5: {
+//     title: `Trigonometric Functions — Tangent, Cotangent, Secant, Cosecant`,
+//     content: `
+// The remaining four trigonometric derivatives follow from sine and cosine via the quotient rule or rewriting in terms of sine and cosine.
+
+// $$\\frac{d}{dx}[\\tan x] = \\sec^2 x \\qquad \\qquad \\frac{d}{dx}[\\cot x] = -\\csc^2 x$$
+
+// $$\\frac{d}{dx}[\\sec x] = \\sec x \\tan x \\qquad \\qquad \\frac{d}{dx}[\\csc x] = -\\csc x \\cot x$$
+
+// For $\\tan x = \\frac{\\sin x}{\\cos x}$, the quotient rule gives $\\frac{\\cos x \\cdot \\cos x - \\sin x \\cdot (-\\sin x)}{\\cos^2 x} = \\frac{\\cos^2 x + \\sin^2 x}{\\cos^2 x} = \\frac{1}{\\cos^2 x} = \\sec^2 x$.
+
+// A pattern runs through the six derivatives: the cofunctions—$\\cos$, $\\cot$, $\\csc$—each carry a negative sign in their derivatives, while $\\sin$, $\\tan$, $\\sec$ do not. This sign pattern is worth noting as a memory aid rather than a coincidence.
+
+// Each derivative is valid on the domain of the original function. The derivatives of $\\tan x$ and $\\sec x$ are undefined at $x = \\pi/2 + k\\pi$ (where $\\cos x = 0$). The derivatives of $\\cot x$ and $\\csc x$ are undefined at $x = k\\pi$ (where $\\sin x = 0$).
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj6: {
+//     title: `Exponential Functions`,
+//     content: `
+// The natural exponential function has the unique property of being its own derivative:
+
+// $$\\frac{d}{dx}[e^x] = e^x$$
+
+// No other function satisfies $f'(x) = f(x)$ except constant multiples $Ce^x$. This self-replicating property is what makes $e$ the natural base for exponential functions.
+
+// The proof from the limit definition uses the [special limit](!/calculus/limits/special) $\\lim_{h \\to 0} \\frac{e^h - 1}{h} = 1$. The difference quotient for $e^x$ factors as $e^x \\cdot \\frac{e^h - 1}{h}$, and the limit gives $e^x \\cdot 1 = e^x$.
+
+// For a general base $a > 0$, $a \\neq 1$:
+
+// $$\\frac{d}{dx}[a^x] = a^x \\ln a$$
+
+// This follows from rewriting $a^x = e^{x \\ln a}$ and applying the chain rule. The factor $\\ln a$ is constant—it scales the derivative. When $a = e$, $\\ln a = 1$ and the factor disappears, confirming the special role of base $e$.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj7: {
+//     title: `Logarithmic Functions`,
+//     content: `
+// The natural logarithm has derivative:
+
+// $$\\frac{d}{dx}[\\ln x] = \\frac{1}{x} \\qquad x > 0$$
+
+// This can be derived by [implicit differentiation](!/calculus/derivatives/techniques). If $y = \\ln x$, then $e^y = x$. Differentiating both sides: $e^y \\frac{dy}{dx} = 1$, so $\\frac{dy}{dx} = \\frac{1}{e^y} = \\frac{1}{x}$.
+
+// Alternatively, the limit definition gives $\\lim_{h \\to 0} \\frac{\\ln(x+h) - \\ln x}{h} = \\lim_{h \\to 0} \\frac{1}{h}\\ln\\left(\\frac{x+h}{x}\\right) = \\lim_{h \\to 0} \\frac{1}{h}\\ln\\left(1 + \\frac{h}{x}\\right)$, which evaluates to $\\frac{1}{x}$ using the limit definition of $e$.
+
+// For a general base $a > 0$, $a \\neq 1$:
+
+// $$\\frac{d}{dx}[\\log_a x] = \\frac{1}{x \\ln a}$$
+
+// This follows from the change of base formula $\\log_a x = \\frac{\\ln x}{\\ln a}$ and the constant multiple rule. The natural logarithm gives the simplest derivative—another reason $e$ is the preferred base.
+
+// The function $\\ln|x|$ extends the domain to all $x \\neq 0$, and its derivative is $\\frac{1}{x}$ for both positive and negative $x$. This extended form appears frequently in [integration](!/calculus/integrals).
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj8: {
+//     title: `Summary of Common Derivatives`,
+//     content: `
+// The complete set of common derivative formulas:
+
+// $$\\frac{d}{dx}[c] = 0 \\qquad \\frac{d}{dx}[x^n] = nx^{n-1}$$
+
+// $$\\frac{d}{dx}[\\sin x] = \\cos x \\qquad \\frac{d}{dx}[\\cos x] = -\\sin x$$
+
+// $$\\frac{d}{dx}[\\tan x] = \\sec^2 x \\qquad \\frac{d}{dx}[\\cot x] = -\\csc^2 x$$
+
+// $$\\frac{d}{dx}[\\sec x] = \\sec x \\tan x \\qquad \\frac{d}{dx}[\\csc x] = -\\csc x \\cot x$$
+
+// $$\\frac{d}{dx}[e^x] = e^x \\qquad \\frac{d}{dx}[a^x] = a^x \\ln a$$
+
+// $$\\frac{d}{dx}[\\ln x] = \\frac{1}{x} \\qquad \\frac{d}{dx}[\\log_a x] = \\frac{1}{x \\ln a}$$
+
+// These twelve formulas, combined with the [differentiation rules](!/calculus/derivatives/rules), handle every explicit function built from powers, trigonometric functions, exponentials, and logarithms. Functions involving inverse trigonometric, hyperbolic, or piecewise definitions require the additional formulas collected in [derivatives of special functions](!/calculus/derivatives/special). The master reference card below collects everything in one place, grouped by function family for quick lookup.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+// };
+
+
+// formulas-optimized: v1 | 2026-06-09 | 10 callouts (obj4, obj5, obj6, obj7)
 const sectionsContent = {
   // ─── /calculus/derivatives/common ─────────────────────────────────────────
 
@@ -268,7 +440,16 @@ Polynomials are [differentiable](!/calculus/derivatives/differentiability) at ev
     content: `
 The two fundamental trigonometric derivatives are:
 
-$$\\frac{d}{dx}[\\sin x] = \\cos x \\qquad \\qquad \\frac{d}{dx}[\\cos x] = -\\sin x$$
+@academic[formula_callout:Derivative of Sine
+$$\\frac{d}{dx}[\\sin x] = \\cos x$$
+/calculus/derivatives/formulas#derivative_of_sine]@
+
+@academic[formula_callout:Derivative of Cosine
+$$\\frac{d}{dx}[\\cos x] = -\\sin x$$
+/calculus/derivatives/formulas#derivative_of_cosine]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 The sine derivative is proved from the limit definition. Expanding $\\sin(x + h)$ using the angle addition formula gives $\\sin x \\cos h + \\cos x \\sin h$. The difference quotient becomes
 
@@ -289,9 +470,24 @@ Repeated differentiation cycles with period four: $\\sin x \\to \\cos x \\to -\\
     content: `
 The remaining four trigonometric derivatives follow from sine and cosine via the quotient rule or rewriting in terms of sine and cosine.
 
-$$\\frac{d}{dx}[\\tan x] = \\sec^2 x \\qquad \\qquad \\frac{d}{dx}[\\cot x] = -\\csc^2 x$$
+@academic[formula_callout:Derivative of Tangent
+$$\\frac{d}{dx}[\\tan x] = \\sec^2 x$$
+/calculus/derivatives/formulas#derivative_of_tangent]@
 
-$$\\frac{d}{dx}[\\sec x] = \\sec x \\tan x \\qquad \\qquad \\frac{d}{dx}[\\csc x] = -\\csc x \\cot x$$
+@academic[formula_callout:Derivative of Cotangent
+$$\\frac{d}{dx}[\\cot x] = -\\csc^2 x$$
+/calculus/derivatives/formulas#derivative_of_cotangent]@
+
+@academic[formula_callout:Derivative of Secant
+$$\\frac{d}{dx}[\\sec x] = \\sec x \\tan x$$
+/calculus/derivatives/formulas#derivative_of_secant]@
+
+@academic[formula_callout:Derivative of Cosecant
+$$\\frac{d}{dx}[\\csc x] = -\\csc x \\cot x$$
+/calculus/derivatives/formulas#derivative_of_cosecant]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 For $\\tan x = \\frac{\\sin x}{\\cos x}$, the quotient rule gives $\\frac{\\cos x \\cdot \\cos x - \\sin x \\cdot (-\\sin x)}{\\cos^2 x} = \\frac{\\cos^2 x + \\sin^2 x}{\\cos^2 x} = \\frac{1}{\\cos^2 x} = \\sec^2 x$.
 
@@ -308,7 +504,9 @@ Each derivative is valid on the domain of the original function. The derivatives
     content: `
 The natural exponential function has the unique property of being its own derivative:
 
+@academic[formula_callout:Derivative of Natural Exponential
 $$\\frac{d}{dx}[e^x] = e^x$$
+/calculus/derivatives/formulas#derivative_of_natural_exponential]@
 
 No other function satisfies $f'(x) = f(x)$ except constant multiples $Ce^x$. This self-replicating property is what makes $e$ the natural base for exponential functions.
 
@@ -316,7 +514,12 @@ The proof from the limit definition uses the [special limit](!/calculus/limits/s
 
 For a general base $a > 0$, $a \\neq 1$:
 
+@academic[formula_callout:Derivative of General Exponential
 $$\\frac{d}{dx}[a^x] = a^x \\ln a$$
+/calculus/derivatives/formulas#derivative_of_general_exponential]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 This follows from rewriting $a^x = e^{x \\ln a}$ and applying the chain rule. The factor $\\ln a$ is constant—it scales the derivative. When $a = e$, $\\ln a = 1$ and the factor disappears, confirming the special role of base $e$.
 `,
@@ -329,7 +532,9 @@ This follows from rewriting $a^x = e^{x \\ln a}$ and applying the chain rule. Th
     content: `
 The natural logarithm has derivative:
 
-$$\\frac{d}{dx}[\\ln x] = \\frac{1}{x} \\qquad x > 0$$
+@academic[formula_callout:Derivative of Natural Logarithm
+$$\\frac{d}{dx}[\\ln x] = \\frac{1}{x}$$
+/calculus/derivatives/formulas#derivative_of_natural_logarithm]@
 
 This can be derived by [implicit differentiation](!/calculus/derivatives/techniques). If $y = \\ln x$, then $e^y = x$. Differentiating both sides: $e^y \\frac{dy}{dx} = 1$, so $\\frac{dy}{dx} = \\frac{1}{e^y} = \\frac{1}{x}$.
 
@@ -337,7 +542,12 @@ Alternatively, the limit definition gives $\\lim_{h \\to 0} \\frac{\\ln(x+h) - \
 
 For a general base $a > 0$, $a \\neq 1$:
 
+@academic[formula_callout:Derivative of General Logarithm
 $$\\frac{d}{dx}[\\log_a x] = \\frac{1}{x \\ln a}$$
+/calculus/derivatives/formulas#derivative_of_general_logarithm]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 This follows from the change of base formula $\\log_a x = \\frac{\\ln x}{\\ln a}$ and the constant multiple rule. The natural logarithm gives the simplest derivative—another reason $e$ is the preferred base.
 
@@ -372,7 +582,8 @@ These twelve formulas, combined with the [differentiation rules](!/calculus/deri
   },
 };
 
- const introContent = {
+
+const introContent = {
   id: `intro`,
   title: `The Core Derivative Library`,
   content: `

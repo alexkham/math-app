@@ -69,12 +69,89 @@ export async function getStaticProps(){
 //                     __html:   sectionContent.distributions.svg,
 //                   }} />
 
-  const sectionsContent = {
+//   const sectionsContent = {
+//   obj1: {
+//     title: `Definition`,
+//     content: `The $n$-th triangular number $T_n$ is the sum of the first $n$ positive integers:
+
+// $$T_n = 1 + 2 + 3 + \\cdots + n = \\frac{n(n+1)}{2}$$
+
+// The name comes from a geometric construction: arrange dots in rows of increasing length to form an equilateral triangle. Row $1$ has $1$ dot, row $2$ has $2$, row $3$ has $3$, and the total count after $n$ rows is $T_n$.
+
+// The first triangular numbers are:
+
+// $$1, 3, 6, 10, 15, 21, 28, 36, 45, 55, \\ldots$$
+
+// The closed form $\\frac{n(n+1)}{2}$ follows from the [arithmetic series](!/algebra/sequences/arithmetic#5) formula with $a_1 = 1$ and $d = 1$. The Gauss pairing argument applies directly: $T_n = \\frac{n}{2}(1 + n)$.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj2: {
+//     title: `Recursive Form`,
+//     content: `Each triangular number is the previous one plus a new row of $n$ dots:
+
+// $$T_1 = 1, \\quad T_n = T_{n-1} + n$$
+
+// This recursive definition makes the growth pattern visible — the increments $1, 2, 3, 4, 5, \\ldots$ are themselves the natural numbers. The triangular numbers grow faster than a linear sequence (where increments are constant) but slower than an exponential one.
+
+// The increments form an [arithmetic sequence](!/algebra/sequences/arithmetic) with common difference $1$. The triangular numbers are therefore the partial sums of an arithmetic sequence — they accumulate linearly growing additions.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj3: {
+//     title: `Derivation of the Closed Form`,
+//     content: `The formula $T_n = \\frac{n(n+1)}{2}$ can be derived by the pairing method. Write the sum forwards and backwards:
+
+// $$S = 1 + 2 + 3 + \\cdots + n$$
+
+// $$S = n + (n-1) + (n-2) + \\cdots + 1$$
+
+// Adding term by term: each pair sums to $n + 1$, and there are $n$ pairs, giving $2S = n(n+1)$ and $S = \\frac{n(n+1)}{2}$.
+
+// An alternative perspective: $T_n = \\binom{n+1}{2}$, the number of ways to choose $2$ items from a set of $n+1$. The binomial coefficient $\\binom{n+1}{2} = \\frac{(n+1)!}{2!(n-1)!} = \\frac{(n+1)n}{2}$ yields the same formula. This connection places triangular numbers inside **combinatorics** — they count unordered pairs. For example, $T_4 = 10$ equals the number of handshakes among $5$ people.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj4: {
+//     title: `Properties`,
+//     content: `The parity of triangular numbers follows a repeating cycle. $T_n$ is odd when $n \\equiv 1$ or $2 \\pmod{4}$, and even when $n \\equiv 0$ or $3 \\pmod{4}$. The pattern of parities is odd, odd, even, even, odd, odd, even, even, $\\ldots$.
+
+// The sum of two consecutive triangular numbers is a perfect square:
+
+// $$T_n + T_{n-1} = \\frac{n(n+1)}{2} + \\frac{(n-1)n}{2} = n^2$$
+
+// Geometrically, two triangles of consecutive sizes fit together to form a [square](!/algebra/sequences/square-numbers). This identity connects the two simplest figurate number sequences.
+
+// A number $m$ is triangular if and only if $8m + 1$ is a perfect square. Solving $m = \\frac{n(n+1)}{2}$ for $n$ gives $n = \\frac{-1 + \\sqrt{1 + 8m}}{2}$, which is a positive integer precisely when $8m + 1$ is a perfect square. This provides a direct test: $m = 15$ gives $8(15) + 1 = 121 = 11^2$, so $15$ is triangular ($T_5 = 15$).
+
+// The sum of the first $n$ triangular numbers produces the tetrahedral numbers:
+
+// $$\\sum_{k=1}^{n} T_k = \\frac{n(n+1)(n+2)}{6}$$
+
+// This extends the figurate number idea from two dimensions (triangles) to three (tetrahedra).`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+// }
+
+// /algebra/sequences/triangular-numbers — sectionsContent v2
+// 5 callouts: obj1 (1), obj2 (1), obj3 (1), obj4 (2). All prose preserved exactly.
+
+const sectionsContent = {
   obj1: {
     title: `Definition`,
     content: `The $n$-th triangular number $T_n$ is the sum of the first $n$ positive integers:
 
+@academic[formula_callout:Triangular Number Formula
 $$T_n = 1 + 2 + 3 + \\cdots + n = \\frac{n(n+1)}{2}$$
+/algebra/formulas#triangular_number_formula]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The name comes from a geometric construction: arrange dots in rows of increasing length to form an equilateral triangle. Row $1$ has $1$ dot, row $2$ has $2$, row $3$ has $3$, and the total count after $n$ rows is $T_n$.
 
@@ -91,7 +168,12 @@ The closed form $\\frac{n(n+1)}{2}$ follows from the [arithmetic series](!/algeb
     title: `Recursive Form`,
     content: `Each triangular number is the previous one plus a new row of $n$ dots:
 
+@academic[formula_callout:Recursive Form (Triangular Numbers)
 $$T_1 = 1, \\quad T_n = T_{n-1} + n$$
+/algebra/formulas#recursive_form_triangular_numbers]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 This recursive definition makes the growth pattern visible — the increments $1, 2, 3, 4, 5, \\ldots$ are themselves the natural numbers. The triangular numbers grow faster than a linear sequence (where increments are constant) but slower than an exponential one.
 
@@ -110,7 +192,14 @@ $$S = n + (n-1) + (n-2) + \\cdots + 1$$
 
 Adding term by term: each pair sums to $n + 1$, and there are $n$ pairs, giving $2S = n(n+1)$ and $S = \\frac{n(n+1)}{2}$.
 
-An alternative perspective: $T_n = \\binom{n+1}{2}$, the number of ways to choose $2$ items from a set of $n+1$. The binomial coefficient $\\binom{n+1}{2} = \\frac{(n+1)!}{2!(n-1)!} = \\frac{(n+1)n}{2}$ yields the same formula. This connection places triangular numbers inside **combinatorics** — they count unordered pairs. For example, $T_4 = 10$ equals the number of handshakes among $5$ people.`,
+An alternative perspective: $T_n = \\binom{n+1}{2}$, the number of ways to choose $2$ items from a set of $n+1$. The binomial coefficient $\\binom{n+1}{2} = \\frac{(n+1)!}{2!(n-1)!} = \\frac{(n+1)n}{2}$ yields the same formula. This connection places triangular numbers inside **combinatorics** — they count unordered pairs. For example, $T_4 = 10$ equals the number of handshakes among $5$ people.
+
+@academic[formula_callout:Triangular Number as Binomial Coefficient
+$$T_n = \\binom{n+1}{2}$$
+/algebra/formulas#triangular_number_as_binomial_coefficient]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@`,
     before: ``,
     after: ``,
     link: '',
@@ -121,7 +210,9 @@ An alternative perspective: $T_n = \\binom{n+1}{2}$, the number of ways to choos
 
 The sum of two consecutive triangular numbers is a perfect square:
 
+@academic[formula_callout:Sum of Consecutive Triangular Numbers
 $$T_n + T_{n-1} = \\frac{n(n+1)}{2} + \\frac{(n-1)n}{2} = n^2$$
+/algebra/formulas#sum_of_consecutive_triangular_numbers]@
 
 Geometrically, two triangles of consecutive sizes fit together to form a [square](!/algebra/sequences/square-numbers). This identity connects the two simplest figurate number sequences.
 
@@ -129,7 +220,12 @@ A number $m$ is triangular if and only if $8m + 1$ is a perfect square. Solving 
 
 The sum of the first $n$ triangular numbers produces the tetrahedral numbers:
 
+@academic[formula_callout:Sum of Triangular Numbers
 $$\\sum_{k=1}^{n} T_k = \\frac{n(n+1)(n+2)}{6}$$
+/algebra/formulas#sum_of_triangular_numbers]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 This extends the figurate number idea from two dimensions (triangles) to three (tetrahedra).`,
     before: ``,
@@ -137,6 +233,7 @@ This extends the figurate number idea from two dimensions (triangles) to three (
     link: '',
   },
 }
+
 
 
  const introContent = {

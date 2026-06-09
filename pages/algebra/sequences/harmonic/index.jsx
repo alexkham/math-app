@@ -70,12 +70,104 @@ export async function getStaticProps(){
 //                   }} />
 
 
+// const sectionsContent = {
+//   obj1: {
+//     title: `Definition`,
+//     content: `A harmonic sequence is a sequence whose terms are the reciprocals of an [arithmetic sequence](!/algebra/sequences/arithmetic). If $b_1, b_2, b_3, \\ldots$ is arithmetic with first term $b_1 > 0$ and common difference $d > 0$, then the harmonic sequence is:
+
+// $$a_n = \\frac{1}{b_n} = \\frac{1}{b_1 + (n-1)d}$$
+
+// The simplest example takes $b_n = n$: the reciprocals $1, \\frac{1}{2}, \\frac{1}{3}, \\frac{1}{4}, \\ldots$ form the harmonic sequence of natural number reciprocals. The sequence $\\frac{1}{3}, \\frac{1}{5}, \\frac{1}{7}, \\frac{1}{9}, \\ldots$ is also harmonic — it comes from the arithmetic sequence $3, 5, 7, 9, \\ldots$ with $b_1 = 3$ and $d = 2$.
+
+// A harmonic sequence is neither arithmetic nor [geometric](!/algebra/sequences/geometric). The differences between consecutive terms are not constant (they decrease), and the ratios are not constant either (they approach $1$ from below). The defining property is that the reciprocals form an arithmetic progression — the structure lives one layer down.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj2: {
+//     title: `Properties`,
+//     content: `Assuming the underlying arithmetic sequence has positive terms and positive common difference, the harmonic sequence is strictly decreasing: each term is smaller than its predecessor because the denominators grow.
+
+// The terms approach zero as $n \\to \\infty$, since the denominators grow without bound. However, the rate of decrease slows — the gap between $\\frac{1}{n}$ and $\\frac{1}{n+1}$ is $\\frac{1}{n(n+1)}$, which itself shrinks as $n$ increases.
+
+// Unlike arithmetic and geometric sequences, harmonic sequences have no closed-form expression for their partial sums. The sum $\\sum_{k=1}^{n} \\frac{1}{k}$ cannot be written as a simple formula in $n$. This absence is not a gap in technique — it is a fundamental property. The partial sums, known as harmonic numbers $H_n$, grow roughly as $\\ln n$ but involve no elementary closed form.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj3: {
+//     title: `The Harmonic Series`,
+//     content: `The harmonic series is the infinite sum of reciprocals of the natural numbers:
+
+// $$\\sum_{n=1}^{\\infty} \\frac{1}{n} = 1 + \\frac{1}{2} + \\frac{1}{3} + \\frac{1}{4} + \\cdots$$
+
+// This series diverges — its partial sums grow without bound, even though the individual terms shrink to zero.
+
+// The proof by grouping (attributed to Oresme, 14th century) is among the most elegant in mathematics. Group the terms after the first as follows:
+
+// $$1 + \\frac{1}{2} + \\left(\\frac{1}{3} + \\frac{1}{4}\\right) + \\left(\\frac{1}{5} + \\frac{1}{6} + \\frac{1}{7} + \\frac{1}{8}\\right) + \\cdots$$
+
+// The first group contains $1$ term summing to at least $\\frac{1}{2}$. The next group contains $2$ terms, each at least $\\frac{1}{4}$, summing to at least $\\frac{1}{2}$. The next contains $4$ terms, each at least $\\frac{1}{8}$, again summing to at least $\\frac{1}{2}$. Each doubling block contributes at least $\\frac{1}{2}$, and there are infinitely many blocks.
+
+// The harmonic series grows slowly — its partial sums approximate $\\ln n + \\gamma$, where $\\gamma \\approx 0.5772$ is the Euler–Mascheroni constant. To reach a partial sum exceeding $10$, you need over $12{,}000$ terms. But slowly is not the same as bounded: the sum eventually surpasses any finite threshold.
+
+// This stands in contrast to the [geometric series](!/algebra/sequences/geometric#6) $\\sum \\frac{1}{2^n}$, which converges to $1$. Both series have terms approaching zero, but geometric terms shrink fast enough (by a constant factor) to keep the total finite. Harmonic terms shrink too slowly. The lesson: terms approaching zero is necessary for convergence but not sufficient.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj4: {
+//     title: `Harmonic Mean`,
+//     content: `The harmonic mean of $n$ positive numbers $a_1, a_2, \\ldots, a_n$ is:
+
+// $$H = \\frac{n}{\\frac{1}{a_1} + \\frac{1}{a_2} + \\cdots + \\frac{1}{a_n}}$$
+
+// For two numbers, this simplifies to:
+
+// $$H = \\frac{2ab}{a + b}$$
+
+// In a harmonic sequence, every term (except the first and last) is the harmonic mean of its two neighbors. This follows from the fact that the reciprocals form an arithmetic sequence: the reciprocal of each term is the [arithmetic mean](!/algebra/sequences/arithmetic#6) of the reciprocals of its neighbors, and taking reciprocals back gives the harmonic mean relationship.
+
+// Inserting $k$ harmonic means between two values $a$ and $b$ reduces to inserting $k$ arithmetic means between $\\frac{1}{a}$ and $\\frac{1}{b}$, then taking reciprocals of all inserted terms.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj5: {
+//     title: `The Mean Inequality`,
+//     content: `For any set of positive numbers, the three means satisfy:
+
+// $$H \\leq G \\leq A$$
+
+// The harmonic mean is never greater than the [geometric mean](!/algebra/sequences/geometric#7), which is never greater than the arithmetic mean. Equality throughout holds if and only if all numbers are identical.
+
+// For two positive numbers $a$ and $b$:
+
+// $$\\frac{2ab}{a+b} \\leq \\sqrt{ab} \\leq \\frac{a+b}{2}$$
+
+// This chain links the three types of sequences through their associated means. Each mean captures a different notion of "average": arithmetic for additive processes, geometric for multiplicative processes, and harmonic for rates and reciprocals.
+
+// The AM–GM portion of the inequality ($G \\leq A$) is used extensively throughout algebra, particularly in optimization and in proving [inequalities](!/algebra/inequalities). The full three-way chain places the harmonic mean as the lower bound of the trio.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+// }
+
+// /algebra/sequences/harmonic — sectionsContent v2
+// 3 callouts: obj1 (1), obj4 (1), obj5 (1). obj2/obj3 untouched.
+
 const sectionsContent = {
   obj1: {
     title: `Definition`,
     content: `A harmonic sequence is a sequence whose terms are the reciprocals of an [arithmetic sequence](!/algebra/sequences/arithmetic). If $b_1, b_2, b_3, \\ldots$ is arithmetic with first term $b_1 > 0$ and common difference $d > 0$, then the harmonic sequence is:
 
+@academic[formula_callout:General Term (Harmonic Sequence)
 $$a_n = \\frac{1}{b_n} = \\frac{1}{b_1 + (n-1)d}$$
+/algebra/formulas#general_term_harmonic_sequence]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The simplest example takes $b_n = n$: the reciprocals $1, \\frac{1}{2}, \\frac{1}{3}, \\frac{1}{4}, \\ldots$ form the harmonic sequence of natural number reciprocals. The sequence $\\frac{1}{3}, \\frac{1}{5}, \\frac{1}{7}, \\frac{1}{9}, \\ldots$ is also harmonic — it comes from the arithmetic sequence $3, 5, 7, 9, \\ldots$ with $b_1 = 3$ and $d = 2$.
 
@@ -120,7 +212,12 @@ This stands in contrast to the [geometric series](!/algebra/sequences/geometric#
     title: `Harmonic Mean`,
     content: `The harmonic mean of $n$ positive numbers $a_1, a_2, \\ldots, a_n$ is:
 
+@academic[formula_callout:Harmonic Mean
 $$H = \\frac{n}{\\frac{1}{a_1} + \\frac{1}{a_2} + \\cdots + \\frac{1}{a_n}}$$
+/algebra/formulas#harmonic_mean]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 For two numbers, this simplifies to:
 
@@ -137,7 +234,12 @@ Inserting $k$ harmonic means between two values $a$ and $b$ reduces to inserting
     title: `The Mean Inequality`,
     content: `For any set of positive numbers, the three means satisfy:
 
+@academic[formula_callout:AM-GM-HM Inequality
 $$H \\leq G \\leq A$$
+/algebra/formulas#am_gm_hm_inequality]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The harmonic mean is never greater than the [geometric mean](!/algebra/sequences/geometric#7), which is never greater than the arithmetic mean. Equality throughout holds if and only if all numbers are identical.
 
@@ -153,6 +255,7 @@ The AM–GM portion of the inequality ($G \\leq A$) is used extensively througho
     link: '',
   },
 }
+
 
 
 const introContent = {

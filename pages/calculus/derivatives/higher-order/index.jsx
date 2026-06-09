@@ -38,7 +38,7 @@ const keyWords = [
 
   // obj1 — aggregation/mapping: notation across orders
   const obj1Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation} text-align: center;">Order</th>
@@ -84,7 +84,7 @@ const keyWords = [
 
   // obj3 — aggregation: kinematic interpretation by order
   const obj3Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation} text-align: center;">Order</th>
@@ -136,7 +136,7 @@ const keyWords = [
 
   // obj9 — aggregation: smoothness classes
   const obj9Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Class</th>
@@ -171,7 +171,7 @@ const keyWords = [
 
   // overview — summary capstone: master reference of nth derivatives
   const overviewTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.summary}">Function</th>
@@ -277,7 +277,210 @@ const keyWords = [
 
   
 
-  const sectionsContent = {
+//   const sectionsContent = {
+//   // ─── /calculus/derivatives/higher-order ───────────────────────────────────
+
+//   obj0: {
+//     title: `Key Terms`,
+//     content: `
+// - [Higher-Order Derivative](!/calculus/definitions#higher_order_derivative) — $f^{(n)}(x)$, differentiating $f$ a total of $n$ times
+// - [Derivative](!/calculus/definitions#derivative) — the first-order case from which all higher orders follow
+// - [Concavity](!/calculus/definitions#concavity) — governed by the second derivative $f''$
+// - [Inflection Point](!/calculus/definitions#inflection_point) — where $f''$ changes sign`,
+//     before: ``,
+//     after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+//     link: '',
+//   },
+
+//   obj1: {
+//     title: `Definition and Notation`,
+//     content: `
+// The second derivative of $f$ is the derivative of $f'$:
+
+// $$f''(x) = \\frac{d}{dx}[f'(x)]$$
+
+// The third derivative is the derivative of $f''$, and so on. The $n$th derivative, denoted $f^{(n)}(x)$, is obtained by differentiating $f$ a total of $n$ times.
+
+// In Lagrange notation, the first few derivatives use primes: $f'$, $f''$, $f'''$. Beyond the third, parenthetical superscripts replace primes to avoid clutter: $f^{(4)}$, $f^{(5)}$, $f^{(n)}$. The parentheses distinguish the derivative order from an exponent—$f^{(4)}(x)$ is the fourth derivative, not $f$ raised to the fourth power.
+
+// In Leibniz notation, the $n$th derivative of $y$ with respect to $x$ is written
+
+// $$\\frac{d^n y}{dx^n}$$
+
+// The symbol $d^n y / dx^n$ is a single operator applied to $y$, not a fraction with $d^n y$ in the numerator and $dx^n$ in the denominator. For the second derivative specifically: $\\frac{d^2 y}{dx^2}$ reads "d-two-y, d-x-squared" and represents $\\frac{d}{dx}\\left(\\frac{dy}{dx}\\right)$. The table below lines up both notation systems alongside their spoken forms across orders one through n.
+
+//  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Symbols and Notations](!/math-symbols/calculus) →@
+
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj2: {
+//     title: `The Second Derivative`,
+//     content: `
+// The second derivative $f''(x)$ measures the rate of change of the slope. Where $f''(x) > 0$, the slope $f'(x)$ is increasing—the function bends upward (concave up). Where $f''(x) < 0$, the slope is decreasing—the function bends downward (concave down).
+
+// This information is independent of whether $f$ itself is increasing or decreasing. A function can rise while decelerating ($f' > 0$, $f'' < 0$) or fall while accelerating in the negative direction ($f' < 0$, $f'' < 0$). The first and second derivatives describe different aspects of behavior.
+
+// The second derivative also powers the [second derivative test](!/calculus/derivatives/graph-analysis) for classifying critical points. At a point where $f'(c) = 0$: if $f''(c) > 0$, the critical point is a local minimum; if $f''(c) < 0$, a local maximum; if $f''(c) = 0$, the test is inconclusive.
+
+// Inflection points—where concavity reverses—occur where $f''$ changes sign. The condition $f''(c) = 0$ is necessary but not sufficient; the sign of $f''$ must actually switch across $c$.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj3: {
+//     title: `Physical Interpretation`,
+//     content: `
+// In kinematics, the first three derivatives of position $s(t)$ have standard names.
+
+// The first derivative $s'(t)$ is velocity: the rate of change of position. It tells how fast an object moves and in which direction.
+
+// The second derivative $s''(t)$ is acceleration: the rate of change of velocity. Positive acceleration means speeding up (in the positive direction) or decelerating (in the negative direction). The sign of acceleration relative to the sign of velocity determines whether the object is speeding up or slowing down.
+
+// The third derivative $s'''(t)$ is jerk: the rate of change of acceleration. Jerk is felt physically as a sudden push or lurch—smooth motion has low jerk, while abrupt starts and stops produce high jerk. Elevator design, roller coaster engineering, and vehicle ride comfort all involve controlling jerk.
+
+// Beyond the third derivative, the terms snap ($s^{(4)}$), crackle ($s^{(5)}$), and pop ($s^{(6)}$) are used in specialized engineering contexts but rarely appear in standard calculus. The table below collects all six in order, with each name paired with what the derivative measures.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj4: {
+//     title: `Patterns in Repeated Differentiation — Polynomials`,
+//     content: `
+// Polynomials terminate under repeated differentiation. Each differentiation reduces the degree by one, so a polynomial of degree $n$ reaches a constant after $n$ differentiations and becomes zero after $n + 1$.
+
+// For $f(x) = x^5$:
+
+// $$f'(x) = 5x^4, \\quad f''(x) = 20x^3, \\quad f'''(x) = 60x^2, \\quad f^{(4)}(x) = 120x, \\quad f^{(5)}(x) = 120, \\quad f^{(6)}(x) = 0$$
+
+// The coefficient at the $n$th derivative of $x^n$ is $n! = n(n-1)(n-2) \\cdots 1$, accumulated from the [power rule](!/calculus/derivatives/rules) applied $n$ times. Specifically, $\\frac{d^n}{dx^n}[x^n] = n!$ and $\\frac{d^k}{dx^k}[x^n] = 0$ for all $k > n$.
+
+// For a general polynomial $p(x) = a_n x^n + \\cdots + a_1 x + a_0$, the $n$th derivative is $n! \\cdot a_n$, a constant. This relationship becomes central in Taylor series, where the coefficient $a_n$ is recovered as $\\frac{f^{(n)}(a)}{n!}$.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj5: {
+//     title: `Patterns in Repeated Differentiation — Exponentials`,
+//     content: `
+// The natural exponential $e^x$ is unchanged by differentiation:
+
+// $$\\frac{d^n}{dx^n}[e^x] = e^x \\quad \\text{for all } n \\geq 1$$
+
+// Every derivative of $e^x$ is $e^x$. No other elementary function has this property (aside from the trivial $f(x) = 0$).
+
+// For the general exponential $e^{ax}$, the chain rule introduces a factor of $a$ at each step:
+
+// $$\\frac{d^n}{dx^n}[e^{ax}] = a^n e^{ax}$$
+
+// Each differentiation multiplies by $a$. After $n$ differentiations, the accumulated constant is $a^n$. This pattern appears in solutions to differential equations, where $e^{ax}$ satisfies equations whose characteristic root is $a$.
+
+// For $a^x$ with arbitrary base: since $a^x = e^{x \\ln a}$, the $n$th derivative is $(\\ln a)^n \\cdot a^x$. The factor $\\ln a$ replaces $a$ in the exponential pattern.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj6: {
+//     title: `Patterns in Repeated Differentiation — Sine and Cosine`,
+//     content: `
+// The derivatives of $\\sin x$ cycle with period four:
+
+// $$\\sin x \\to \\cos x \\to -\\sin x \\to -\\cos x \\to \\sin x \\to \\cdots$$
+
+// The $n$th derivative of $\\sin x$ depends on $n \\mod 4$:
+
+// $$\\frac{d^n}{dx^n}[\\sin x] = \\begin{cases} \\sin x & n \\equiv 0 \\pmod{4} \\\\ \\cos x & n \\equiv 1 \\pmod{4} \\\\ -\\sin x & n \\equiv 2 \\pmod{4} \\\\ -\\cos x & n \\equiv 3 \\pmod{4} \\end{cases}$$
+
+// A compact formula captures all four cases: $\\frac{d^n}{dx^n}[\\sin x] = \\sin\\left(x + \\frac{n\\pi}{2}\\right)$. The same holds for cosine: $\\frac{d^n}{dx^n}[\\cos x] = \\cos\\left(x + \\frac{n\\pi}{2}\\right)$.
+
+// For $\\sin(ax)$, the chain rule introduces a factor of $a$ per differentiation: $\\frac{d^n}{dx^n}[\\sin(ax)] = a^n \\sin\\left(ax + \\frac{n\\pi}{2}\\right)$. The cycle in the trigonometric part persists; only the amplitude grows as $a^n$.
+
+// This four-fold periodicity distinguishes [trigonometric derivatives](!/calculus/derivatives/common) from polynomial derivatives (which terminate) and exponential derivatives (which replicate).
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj7: {
+//     title: `The nth Derivative of Specific Forms`,
+//     content: `
+// Several standard functions have known closed-form $n$th derivatives.
+
+// For $f(x) = \\frac{1}{x}$: rewriting as $x^{-1}$ and applying the power rule repeatedly gives
+
+// $$f^{(n)}(x) = \\frac{(-1)^n \\cdot n!}{x^{n+1}}$$
+
+// Each differentiation multiplies by one more negative integer, producing the factorial and the alternating sign.
+
+// For $f(x) = \\ln x$: since $f'(x) = x^{-1}$, the higher derivatives follow the pattern above shifted by one:
+
+// $$f^{(n)}(x) = \\frac{(-1)^{n-1} \\cdot (n-1)!}{x^n} \\qquad n \\geq 1$$
+
+// For $f(x) = x^m$ where $m$ is a positive integer and $n \\leq m$:
+
+// $$f^{(n)}(x) = \\frac{m!}{(m-n)!} \\cdot x^{m-n}$$
+
+// The coefficient $\\frac{m!}{(m-n)!}$ is the falling factorial, counting the multipliers accumulated over $n$ applications of the power rule.
+
+// These closed-form expressions are useful for computing specific high-order derivatives without performing each differentiation step individually.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj8: {
+//     title: `Higher-Order Derivatives and Taylor Series`,
+//     content: `
+// The Taylor series of $f$ centered at $x = a$ is
+
+// $$f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x - a)^n$$
+
+// Each coefficient depends on a higher-order derivative evaluated at the center point $a$. The zeroth derivative $f^{(0)}(a) = f(a)$ gives the constant term. The first derivative gives the linear term. The second derivative gives the quadratic correction. Each successive term captures finer detail about how $f$ deviates from the lower-order approximation.
+
+// The Taylor polynomial of degree $k$ truncates the series after $k + 1$ terms, providing a polynomial approximation to $f$ near $a$. The quality of the approximation improves with $k$—more derivatives mean a closer fit over a wider interval.
+
+// The connection between higher-order derivatives and Taylor series gives these derivatives their deepest significance: the complete collection $\\{f^{(n)}(a)\\}_{n=0}^{\\infty}$ determines $f$ locally (for analytic functions). Knowing all derivatives at a single point reconstructs the entire function in a neighborhood of that point.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj9: {
+//     title: `Existence and Smoothness Classes`,
+//     content: `
+// A function may be differentiable once but not twice. The function $f(x) = x|x|$ has $f'(x) = 2|x|$, which is continuous but not differentiable at $x = 0$. So $f$ is in class $C^1$ (continuously differentiable) but not $C^2$.
+
+// The smoothness classes organize functions by how many continuous derivatives they possess. A function belongs to $C^n$ if $f, f', f'', \\ldots, f^{(n)}$ all exist and are continuous. Class $C^0$ is simply continuous functions. Class $C^\\infty$ consists of infinitely differentiable functions—called smooth functions—where derivatives of all orders exist and are continuous.
+
+// Polynomials, $e^x$, $\\sin x$, $\\cos x$, and their compositions are all $C^\\infty$. [Piecewise functions](!/calculus/derivatives/special) typically belong to a finite $C^n$ class determined by how smoothly the pieces join at their boundaries: matching values gives $C^0$, matching first derivatives gives $C^1$, and so on.
+
+// There exist functions that are $C^\\infty$ but not analytic—their Taylor series converges but not to the function itself. The standard example is $f(x) = e^{-1/x^2}$ for $x \\neq 0$ and $f(0) = 0$: every derivative at $x = 0$ is zero, so the Taylor series is identically zero, yet the function is not zero away from the origin. Smooth does not automatically mean representable by a power series. The table below lays out the main tiers — C⁰, the general C&#8319;, C&#8734;, and the strictly stronger analytic class — alongside what each requires and characteristic examples.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   overview: {
+//     title: `nth Derivatives at a Glance`,
+//     content: `
+// Different function families behave very differently under repeated differentiation: polynomials terminate, exponentials replicate, and trigonometric functions cycle. The table below collects the closed-form nth derivative for each standard function discussed above into a single reference card, with a brief note on what drives the pattern.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+// };
+
+
+// formulas-optimized: v1 | 2026-06-09 | 8 callouts (obj5, obj6, obj7, obj8)
+const sectionsContent = {
   // ─── /calculus/derivatives/higher-order ───────────────────────────────────
 
   obj0: {
@@ -371,13 +574,20 @@ For a general polynomial $p(x) = a_n x^n + \\cdots + a_1 x + a_0$, the $n$th der
     content: `
 The natural exponential $e^x$ is unchanged by differentiation:
 
-$$\\frac{d^n}{dx^n}[e^x] = e^x \\quad \\text{for all } n \\geq 1$$
+@academic[formula_callout:nth Derivative of Natural Exponential
+$$\\frac{d^n}{dx^n}[e^x] = e^x$$
+/calculus/derivatives/formulas#nth_derivative_of_natural_exponential]@
 
 Every derivative of $e^x$ is $e^x$. No other elementary function has this property (aside from the trivial $f(x) = 0$).
 
 For the general exponential $e^{ax}$, the chain rule introduces a factor of $a$ at each step:
 
+@academic[formula_callout:nth Derivative of Scaled Exponential
 $$\\frac{d^n}{dx^n}[e^{ax}] = a^n e^{ax}$$
+/calculus/derivatives/formulas#nth_derivative_of_scaled_exponential]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 Each differentiation multiplies by $a$. After $n$ differentiations, the accumulated constant is $a^n$. This pattern appears in solutions to differential equations, where $e^{ax}$ satisfies equations whose characteristic root is $a$.
 
@@ -400,6 +610,17 @@ $$\\frac{d^n}{dx^n}[\\sin x] = \\begin{cases} \\sin x & n \\equiv 0 \\pmod{4} \\
 
 A compact formula captures all four cases: $\\frac{d^n}{dx^n}[\\sin x] = \\sin\\left(x + \\frac{n\\pi}{2}\\right)$. The same holds for cosine: $\\frac{d^n}{dx^n}[\\cos x] = \\cos\\left(x + \\frac{n\\pi}{2}\\right)$.
 
+@academic[formula_callout:nth Derivative of Sine
+$$\\frac{d^n}{dx^n}[\\sin x] = \\sin\\!\\left(x + \\frac{n\\pi}{2}\\right)$$
+/calculus/derivatives/formulas#nth_derivative_of_sine]@
+
+@academic[formula_callout:nth Derivative of Cosine
+$$\\frac{d^n}{dx^n}[\\cos x] = \\cos\\!\\left(x + \\frac{n\\pi}{2}\\right)$$
+/calculus/derivatives/formulas#nth_derivative_of_cosine]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
+
 For $\\sin(ax)$, the chain rule introduces a factor of $a$ per differentiation: $\\frac{d^n}{dx^n}[\\sin(ax)] = a^n \\sin\\left(ax + \\frac{n\\pi}{2}\\right)$. The cycle in the trigonometric part persists; only the amplitude grows as $a^n$.
 
 This four-fold periodicity distinguishes [trigonometric derivatives](!/calculus/derivatives/common) from polynomial derivatives (which terminate) and exponential derivatives (which replicate).
@@ -415,17 +636,26 @@ Several standard functions have known closed-form $n$th derivatives.
 
 For $f(x) = \\frac{1}{x}$: rewriting as $x^{-1}$ and applying the power rule repeatedly gives
 
-$$f^{(n)}(x) = \\frac{(-1)^n \\cdot n!}{x^{n+1}}$$
+@academic[formula_callout:nth Derivative of Reciprocal
+$$\\frac{d^n}{dx^n}\\!\\left[\\frac{1}{x}\\right] = \\frac{(-1)^n\\, n!}{x^{n+1}}$$
+/calculus/derivatives/formulas#nth_derivative_of_reciprocal]@
 
 Each differentiation multiplies by one more negative integer, producing the factorial and the alternating sign.
 
 For $f(x) = \\ln x$: since $f'(x) = x^{-1}$, the higher derivatives follow the pattern above shifted by one:
 
-$$f^{(n)}(x) = \\frac{(-1)^{n-1} \\cdot (n-1)!}{x^n} \\qquad n \\geq 1$$
+@academic[formula_callout:nth Derivative of Natural Logarithm
+$$\\frac{d^n}{dx^n}[\\ln x] = \\frac{(-1)^{n-1}\\, (n-1)!}{x^n}$$
+/calculus/derivatives/formulas#nth_derivative_of_natural_logarithm]@
 
 For $f(x) = x^m$ where $m$ is a positive integer and $n \\leq m$:
 
-$$f^{(n)}(x) = \\frac{m!}{(m-n)!} \\cdot x^{m-n}$$
+@academic[formula_callout:nth Derivative of Power
+$$\\frac{d^n}{dx^n}[x^m] = \\frac{m!}{(m-n)!}\\, x^{m-n} \\quad (n \\leq m)$$
+/calculus/derivatives/formulas#nth_derivative_of_power]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 The coefficient $\\frac{m!}{(m-n)!}$ is the falling factorial, counting the multipliers accumulated over $n$ applications of the power rule.
 
@@ -440,7 +670,12 @@ These closed-form expressions are useful for computing specific high-order deriv
     content: `
 The Taylor series of $f$ centered at $x = a$ is
 
-$$f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x - a)^n$$
+@academic[formula_callout:Taylor Series
+$$f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x - a)^n$$
+/calculus/derivatives/formulas#taylor_series]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 Each coefficient depends on a higher-order derivative evaluated at the center point $a$. The zeroth derivative $f^{(0)}(a) = f(a)$ gives the constant term. The first derivative gives the linear term. The second derivative gives the quadratic correction. Each successive term captures finer detail about how $f$ deviates from the lower-order approximation.
 
@@ -477,6 +712,7 @@ Different function families behave very differently under repeated differentiati
     link: '',
   },
 };
+
 
 const introContent = {
   id: `intro`,

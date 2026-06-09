@@ -37,7 +37,7 @@ const keyWords = [
 
   // theoremsTable — comparison: MVT vs Rolle's vs L'Hôpital
   const theoremsTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.comparison}">Theorem</th>
@@ -71,7 +71,7 @@ const keyWords = [
 
   // overviewTable — summary capstone: 10-row master reference
   const overviewTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.summary}">Rule or theorem</th>
@@ -241,6 +241,199 @@ const derivativeRulesData = {
   ]
 };
 
+// const sectionsContent = {
+//   // ─── /calculus/derivatives/rules ──────────────────────────────────────────
+
+//   obj0: {
+//     title: `Key Terms`,
+//     content: `
+// - [Derivative](!/calculus/definitions#derivative) — the object these rules compute
+// - [Differentiability](!/calculus/definitions#differentiability) — the hypothesis required for every rule to apply`,
+//     before: ``,
+//     after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+//     link: '',
+//   },
+
+//   obj1: {
+//     title: `Constant Rule`,
+//     content: `
+// If $f(x) = c$ for some constant $c$, then
+
+// $$f'(x) = 0$$
+
+// A constant function has a horizontal graph—its slope is zero everywhere. From the limit definition: the difference quotient $\\frac{c - c}{h} = 0$ for all $h$, so the limit is $0$.
+
+// This rule is simple but essential. It establishes the baseline: quantities that do not change have zero rate of change. It also appears implicitly in every application of the sum rule, where constant terms vanish under differentiation.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj2: {
+//     title: `Power Rule`,
+//     content: `
+// For any real exponent $n$:
+
+// $$\\frac{d}{dx}[x^n] = nx^{n-1}$$
+
+// The rule covers positive integers ($x^3 \\to 3x^2$), negative integers ($x^{-2} \\to -2x^{-3}$), fractions ($x^{1/2} \\to \\frac{1}{2}x^{-1/2}$), and irrational exponents ($x^\\pi \\to \\pi x^{\\pi - 1}$). For positive integer $n$, the proof uses the binomial expansion of $(x+h)^n$ in the limit definition. Extension to rational and real exponents requires [logarithmic differentiation](!/calculus/derivatives/techniques) or the generalized exponential $x^n = e^{n \\ln x}$.
+
+// The power rule is the most frequently applied differentiation formula. Combined with the constant multiple and sum rules, it handles all polynomials and many algebraic expressions directly.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj3: {
+//     title: `Constant Multiple Rule`,
+//     content: `
+// If $c$ is a constant and $f$ is differentiable, then
+
+// $$\\frac{d}{dx}[c \\cdot f(x)] = c \\cdot f'(x)$$
+
+// Constants factor out of derivatives. The proof is immediate from the limit definition: the constant $c$ factors out of the difference quotient and passes through the limit.
+
+// This rule is a special case of the product rule (one factor being constant), but it is worth stating separately. In practice, factoring constants out before differentiating simplifies every computation.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj4: {
+//     title: `Sum and Difference Rules`,
+//     content: `
+// If $f$ and $g$ are both differentiable, then
+
+// $$\\frac{d}{dx}[f(x) + g(x)] = f'(x) + g'(x)$$
+
+// $$\\frac{d}{dx}[f(x) - g(x)] = f'(x) - g'(x)$$
+
+// The derivative of a sum is the sum of the derivatives. This follows from the limit definition by splitting the difference quotient into two parts and applying the sum rule for [limits](!/calculus/limits/rules).
+
+// The rule extends to any finite number of terms: the derivative of $f_1 + f_2 + \\cdots + f_n$ is $f_1' + f_2' + \\cdots + f_n'$. Combined with the constant multiple rule, this handles all linear combinations. In particular, every polynomial is differentiated term by term.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj5: {
+//     title: `Product Rule`,
+//     content: `
+// If $f$ and $g$ are both differentiable, then
+
+// $$\\frac{d}{dx}[f(x) \\cdot g(x)] = f'(x) \\cdot g(x) + f(x) \\cdot g'(x)$$
+
+// The derivative of a product is not the product of the derivatives. Each factor takes a turn being differentiated while the other remains unchanged, and the two contributions are added.
+
+// The proof adds and subtracts $f(x+h)g(x)$ inside the difference quotient for $f(x)g(x)$, splitting it into a piece that isolates $g'$ and a piece that isolates $f'$. The fact that [differentiability implies continuity](!/calculus/derivatives/differentiability) ensures that $f(x+h) \\to f(x)$ as $h \\to 0$.
+
+// For three factors: $(fgh)' = f'gh + fg'h + fgh'$. The pattern generalizes—each factor is differentiated once while all others remain, and the results are summed.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj6: {
+//     title: `Quotient Rule`,
+//     content: `
+// If $f$ and $g$ are differentiable and $g(x) \\neq 0$, then
+
+// $$\\frac{d}{dx}\\left[\\frac{f(x)}{g(x)}\\right] = \\frac{f'(x) \\cdot g(x) - f(x) \\cdot g'(x)}{[g(x)]^2}$$
+
+// The numerator subtracts where the product rule adds, and the entire expression is divided by the square of the denominator. The order matters: $f'g - fg'$, not $fg' - f'g$.
+
+// The quotient rule can be derived from the product rule by writing $f/g = f \\cdot g^{-1}$ and applying the chain rule to $g^{-1}$. Both approaches yield the same formula. In practice, the quotient rule is applied directly when the function is naturally a fraction, and rewriting as a product is preferred when the denominator is a simple power.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj7: {
+//     title: `Chain Rule`,
+//     content: `
+// If $g$ is differentiable at $x$ and $f$ is differentiable at $g(x)$, then the composite function $f \\circ g$ is differentiable at $x$ and
+
+// $$\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)$$
+
+// Differentiate the outer function evaluated at the inner function, then multiply by the derivative of the inner function. In Leibniz notation, with $y = f(u)$ and $u = g(x)$:
+
+// $$\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$$
+
+// The notation suggests fraction cancellation, and while $dy/dx$ is not literally a fraction, the chain rule makes Leibniz notation behave as though it were.
+
+// The chain rule extends to deeper compositions. For $f(g(h(x)))$: differentiate the outermost function at its argument, multiply by the derivative of the next layer at its argument, and continue inward. Each layer contributes a multiplicative factor.
+
+// This is the most powerful of the basic rules. Without it, [composite functions](!/calculus/derivatives/common)—$\\sin(x^2)$, $e^{3x}$, $\\ln(\\cos x)$—cannot be differentiated. Most applications of differentiation involve the chain rule at some level.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj8: {
+//     title: `Mean Value Theorem`,
+//     content: `
+// If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, then there exists at least one point $c \\in (a, b)$ such that
+
+// $$f'(c) = \\frac{f(b) - f(a)}{b - a}$$
+
+// The instantaneous rate of change at $c$ equals the average rate of change over the entire interval. Geometrically, there is a point where the tangent line is parallel to the secant line connecting $(a, f(a))$ and $(b, f(b))$.
+
+// The Mean Value Theorem is primarily a theoretical tool. It proves that a function with positive derivative on an interval is increasing. It establishes that two functions with the same derivative differ by a constant. It justifies the connection between antiderivatives and definite integrals in the Fundamental Theorem of Calculus.
+
+// The hypotheses are essential. Continuity on the closed interval $[a, b]$ ensures no gaps at the endpoints. Differentiability on the open interval $(a, b)$ ensures the derivative exists at interior points. Functions that violate either condition may fail the conclusion.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj9: {
+//     title: `Rolle's Theorem`,
+//     content: `
+// Rolle's Theorem is the special case of the Mean Value Theorem where $f(a) = f(b)$.
+
+// If $f$ is continuous on $[a, b]$, differentiable on $(a, b)$, and $f(a) = f(b)$, then there exists at least one point $c \\in (a, b)$ with $f'(c) = 0$.
+
+// A function that starts and ends at the same value must have a horizontal tangent somewhere between. If the function rises above its starting value, it must turn around—creating a maximum with zero slope. If it drops below, it must turn upward—creating a minimum. If it stays constant, $f'(x) = 0$ everywhere on the interval.
+
+// Rolle's Theorem is often used as a stepping stone in proofs. The Mean Value Theorem itself is proven by applying Rolle's Theorem to an auxiliary function constructed to satisfy $g(a) = g(b)$. It also appears in arguments about the number of roots: between any two roots of $f$, there must be a root of $f'$.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj10: {
+//     title: `L'Hôpital's Rule`,
+//     content: `
+// If $\\lim_{x \\to a} \\frac{f(x)}{g(x)}$ produces the indeterminate form $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$, and if $\\lim_{x \\to a} \\frac{f'(x)}{g'(x)}$ exists (or equals $\\pm\\infty$), then
+
+// $$\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)}$$
+
+// The rule replaces a difficult limit of functions with a (potentially simpler) limit of their derivatives. It applies equally when $a$ is finite or $a = \\pm\\infty$.
+
+// Critical requirements: the original limit must be an indeterminate form, and the limit of the derivative ratio must exist or be $\\pm\\infty$. If the derivative ratio produces another indeterminate form, L'Hôpital's rule may be applied again. If the derivative ratio oscillates or fails to exist, the rule gives no information—it does not say the original limit fails to exist, only that this method does not resolve it.
+
+// Other indeterminate forms—$0 \\cdot \\infty$, $\\infty - \\infty$, $0^0$, $1^\\infty$, $\\infty^0$—can be converted to $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$ through algebraic rearrangement, then handled by L'Hôpital's rule. The conversion step varies by form: $0 \\cdot \\infty$ becomes a fraction by moving one factor to the denominator; exponential forms use the identity $f(x)^{g(x)} = e^{g(x) \\ln f(x)}$.
+
+// The Mean Value Theorem, Rolle's Theorem, and L'Hôpital's rule are the three theorems on this page that govern derivative behavior on intervals. The table below sets them side by side across their hypotheses, conclusions, and the role each plays in practice.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   overview: {
+//     title: `All Rules and Theorems at a Glance`,
+//     content: `
+// The ten formulas above split naturally into seven algebraic rules — constant, constant multiple, power, sum/difference, product, quotient, chain — and three interval theorems — Mean Value, Rolle&apos;s, and L&apos;Hôpital&apos;s. The table below collects every formula introduced on this page as a single reference card, with the key condition or note that governs its use.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+// };
+
+
+// formulas-optimized: v1 | 2026-06-09 | 10 callouts (obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8, obj9, obj10)
 const sectionsContent = {
   // ─── /calculus/derivatives/rules ──────────────────────────────────────────
 
@@ -260,7 +453,12 @@ const sectionsContent = {
     content: `
 If $f(x) = c$ for some constant $c$, then
 
-$$f'(x) = 0$$
+@academic[formula_callout:Constant Rule (Derivatives)
+$$\\frac{d}{dx}[c] = 0$$
+/calculus/derivatives/formulas#constant_rule_derivatives]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 A constant function has a horizontal graph—its slope is zero everywhere. From the limit definition: the difference quotient $\\frac{c - c}{h} = 0$ for all $h$, so the limit is $0$.
 
@@ -275,7 +473,12 @@ This rule is simple but essential. It establishes the baseline: quantities that 
     content: `
 For any real exponent $n$:
 
-$$\\frac{d}{dx}[x^n] = nx^{n-1}$$
+@academic[formula_callout:Power Rule (Derivatives)
+$$\\frac{d}{dx}[x^n] = n x^{n-1}$$
+/calculus/derivatives/formulas#power_rule_derivatives]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 The rule covers positive integers ($x^3 \\to 3x^2$), negative integers ($x^{-2} \\to -2x^{-3}$), fractions ($x^{1/2} \\to \\frac{1}{2}x^{-1/2}$), and irrational exponents ($x^\\pi \\to \\pi x^{\\pi - 1}$). For positive integer $n$, the proof uses the binomial expansion of $(x+h)^n$ in the limit definition. Extension to rational and real exponents requires [logarithmic differentiation](!/calculus/derivatives/techniques) or the generalized exponential $x^n = e^{n \\ln x}$.
 
@@ -290,7 +493,12 @@ The power rule is the most frequently applied differentiation formula. Combined 
     content: `
 If $c$ is a constant and $f$ is differentiable, then
 
+@academic[formula_callout:Constant Multiple Rule (Derivatives)
 $$\\frac{d}{dx}[c \\cdot f(x)] = c \\cdot f'(x)$$
+/calculus/derivatives/formulas#constant_multiple_rule_derivatives]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 Constants factor out of derivatives. The proof is immediate from the limit definition: the constant $c$ factors out of the difference quotient and passes through the limit.
 
@@ -305,9 +513,12 @@ This rule is a special case of the product rule (one factor being constant), but
     content: `
 If $f$ and $g$ are both differentiable, then
 
-$$\\frac{d}{dx}[f(x) + g(x)] = f'(x) + g'(x)$$
+@academic[formula_callout:Sum and Difference Rule (Derivatives)
+$$\\frac{d}{dx}[f(x) \\pm g(x)] = f'(x) \\pm g'(x)$$
+/calculus/derivatives/formulas#sum_and_difference_rule_derivatives]@
 
-$$\\frac{d}{dx}[f(x) - g(x)] = f'(x) - g'(x)$$
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 The derivative of a sum is the sum of the derivatives. This follows from the limit definition by splitting the difference quotient into two parts and applying the sum rule for [limits](!/calculus/limits/rules).
 
@@ -322,7 +533,12 @@ The rule extends to any finite number of terms: the derivative of $f_1 + f_2 + \
     content: `
 If $f$ and $g$ are both differentiable, then
 
+@academic[formula_callout:Product Rule (Derivatives)
 $$\\frac{d}{dx}[f(x) \\cdot g(x)] = f'(x) \\cdot g(x) + f(x) \\cdot g'(x)$$
+/calculus/derivatives/formulas#product_rule_derivatives]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 The derivative of a product is not the product of the derivatives. Each factor takes a turn being differentiated while the other remains unchanged, and the two contributions are added.
 
@@ -339,7 +555,12 @@ For three factors: $(fgh)' = f'gh + fg'h + fgh'$. The pattern generalizes—each
     content: `
 If $f$ and $g$ are differentiable and $g(x) \\neq 0$, then
 
+@academic[formula_callout:Quotient Rule (Derivatives)
 $$\\frac{d}{dx}\\left[\\frac{f(x)}{g(x)}\\right] = \\frac{f'(x) \\cdot g(x) - f(x) \\cdot g'(x)}{[g(x)]^2}$$
+/calculus/derivatives/formulas#quotient_rule_derivatives]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 The numerator subtracts where the product rule adds, and the entire expression is divided by the square of the denominator. The order matters: $f'g - fg'$, not $fg' - f'g$.
 
@@ -360,6 +581,13 @@ Differentiate the outer function evaluated at the inner function, then multiply 
 
 $$\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$$
 
+@academic[formula_callout:Chain Rule
+$$\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x) \\qquad \\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$$
+/calculus/derivatives/formulas#chain_rule]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
+
 The notation suggests fraction cancellation, and while $dy/dx$ is not literally a fraction, the chain rule makes Leibniz notation behave as though it were.
 
 The chain rule extends to deeper compositions. For $f(g(h(x)))$: differentiate the outermost function at its argument, multiply by the derivative of the next layer at its argument, and continue inward. Each layer contributes a multiplicative factor.
@@ -375,7 +603,12 @@ This is the most powerful of the basic rules. Without it, [composite functions](
     content: `
 If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, then there exists at least one point $c \\in (a, b)$ such that
 
-$$f'(c) = \\frac{f(b) - f(a)}{b - a}$$
+@academic[formula_callout:Mean Value Theorem
+$$f'(c) = \\frac{f(b) - f(a)}{b - a} \\qquad \\text{for some } c \\in (a, b)$$
+/calculus/derivatives/formulas#mean_value_theorem]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 The instantaneous rate of change at $c$ equals the average rate of change over the entire interval. Geometrically, there is a point where the tangent line is parallel to the secant line connecting $(a, f(a))$ and $(b, f(b))$.
 
@@ -394,6 +627,13 @@ Rolle's Theorem is the special case of the Mean Value Theorem where $f(a) = f(b)
 
 If $f$ is continuous on $[a, b]$, differentiable on $(a, b)$, and $f(a) = f(b)$, then there exists at least one point $c \\in (a, b)$ with $f'(c) = 0$.
 
+@academic[formula_callout:Rolle&apos;s Theorem
+$$\\text{If } f(a) = f(b), \\text{ then } f'(c) = 0 \\text{ for some } c \\in (a, b)$$
+/calculus/derivatives/formulas#rolles_theorem]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
+
 A function that starts and ends at the same value must have a horizontal tangent somewhere between. If the function rises above its starting value, it must turn around—creating a maximum with zero slope. If it drops below, it must turn upward—creating a minimum. If it stays constant, $f'(x) = 0$ everywhere on the interval.
 
 Rolle's Theorem is often used as a stepping stone in proofs. The Mean Value Theorem itself is proven by applying Rolle's Theorem to an auxiliary function constructed to satisfy $g(a) = g(b)$. It also appears in arguments about the number of roots: between any two roots of $f$, there must be a root of $f'$.
@@ -407,7 +647,12 @@ Rolle's Theorem is often used as a stepping stone in proofs. The Mean Value Theo
     content: `
 If $\\lim_{x \\to a} \\frac{f(x)}{g(x)}$ produces the indeterminate form $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$, and if $\\lim_{x \\to a} \\frac{f'(x)}{g'(x)}$ exists (or equals $\\pm\\infty$), then
 
-$$\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)}$$
+@academic[formula_callout:L&apos;Hôpital&apos;s Rule
+$$\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)} \\quad \\text{for indeterminate forms } \\tfrac{0}{0} \\text{ or } \\tfrac{\\infty}{\\infty}$$
+/calculus/derivatives/formulas#lhopitals_rule]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/derivatives/formulas]@
 
 The rule replaces a difficult limit of functions with a (potentially simpler) limit of their derivatives. It applies equally when $a$ is finite or $a = \\pm\\infty$.
 
