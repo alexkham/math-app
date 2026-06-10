@@ -37,7 +37,7 @@ const linkStyle = 'color: inherit; text-decoration: underline;'
 
 // obj1 — aggregation: choices of sample point for Riemann sums
 const obj1Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Sample point choice</th>
@@ -67,7 +67,7 @@ const obj1Table = `
 
 // obj8 — summary capstone: three conceptual lenses on the definite integral
 const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.summary}">Lens</th>
@@ -99,6 +99,178 @@ const summaryTable = `
 </table>
 `
 
+// const sectionsContent = {
+//   // ─── /calculus/integrals/definite ─────────────────────────────────────────
+
+//   obj0: {
+//     title: `Key Terms`,
+//     content: `
+// - [Definite Integral](!/calculus/definitions#definite_integral) — $\\int_a^b f(x)\\,dx$, a number representing accumulated quantity
+// - [Riemann Sum](!/calculus/definitions#riemann_sum) — the approximating sum whose limit is the integral
+// - [Bounds of Integration](!/calculus/definitions#bounds_of_integration) — where accumulation starts ($a$) and ends ($b$)
+// - [Signed Area](!/calculus/definitions#signed_area) — positive above the axis, negative below
+// - [Average Value of a Function](!/calculus/definitions#average_value_of_a_function) — $\\frac{1}{b-a}\\int_a^b f(x)\\,dx$
+// - [Integrand](!/calculus/definitions#integrand) — the function being accumulated`,
+//     before: ``,
+//     after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+//     link: '',
+//   },
+
+//   obj1: {
+//     title: `The Riemann Sum Construction`,
+//     content: `
+// The definite integral arises as a limit of approximating sums.
+
+// Partition the interval $[a, b]$ into $n$ subintervals of width $\\Delta x = (b - a)/n$. In each subinterval, choose a sample point $x_i^*$ and form the rectangle with height $f(x_i^*)$ and width $\\Delta x$. The total area of these rectangles is the Riemann sum:
+
+// $$S_n = \\sum_{i=1}^{n} f(x_i^*) \\Delta x$$
+
+// As $n \\to \\infty$ and the rectangles become infinitely thin, the Riemann sum approaches the definite integral:
+
+// $$\\int_a^b f(x)\\, dx = \\lim_{n \\to \\infty} \\sum_{i=1}^{n} f(x_i^*) \\Delta x$$
+
+// The choice of sample points—left endpoints, right endpoints, midpoints—affects individual Riemann sums but not the limit, provided $f$ is integrable.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   },
+//   obj2: {
+//     title: `Notation and Meaning`,
+//     content: `
+// The definite integral
+
+// $$\\int_a^b f(x)\\, dx$$
+
+// consists of several components. The lower limit $a$ and upper limit $b$ bound the interval of integration. The integrand $f(x)$ specifies what is being accumulated. The differential $dx$ indicates the variable of integration.
+
+// The result is a number, not a function. The variable $x$ is a dummy variable—a placeholder that disappears after integration. The expressions
+
+// $$\\int_0^1 t^2\\, dt \\qquad \\int_0^1 u^2\\, du \\qquad \\int_0^1 x^2\\, dx$$
+
+// all represent the same value: $1/3$.
+
+
+//  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Symbols and Notations](!/math-symbols/calculus) →@
+
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   },
+//   obj3: {
+//     title: `Signed Area Interpretation`,
+//     content: `
+// The definite integral computes area with sign.
+
+// Where $f(x) > 0$, the region between the curve and the $x$-axis lies above the axis and contributes positive area. Where $f(x) < 0$, the region lies below the axis and contributes negative area.
+
+// The integral sums these signed contributions:
+
+// $$\\int_a^b f(x)\\, dx = (\\text{area above}) - (\\text{area below})$$
+
+// This means the integral can be zero even when substantial area exists—positive and negative regions may cancel. It can also be negative when the curve lies predominantly below the axis.
+
+// To find total unsigned area, integrate the absolute value:
+
+// $$\\text{Total area} = \\int_a^b |f(x)|\\, dx$$
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   },
+//   obj4: {
+//     title: `Properties of Definite Integrals`,
+//     content: `
+// Definite integrals satisfy several fundamental properties.
+
+// **Additivity over intervals:**
+
+// $$\\int_a^b f(x)\\, dx + \\int_b^c f(x)\\, dx = \\int_a^c f(x)\\, dx$$
+
+// **Reversing limits negates the integral:**
+
+// $$\\int_a^b f(x)\\, dx = -\\int_b^a f(x)\\, dx$$
+
+// **Zero-width interval:**
+
+// $$\\int_a^a f(x)\\, dx = 0$$
+
+// **Comparison:** If $f(x) \\leq g(x)$ on $[a, b]$, then
+
+// $$\\int_a^b f(x)\\, dx \\leq \\int_a^b g(x)\\, dx$$
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   },
+//   obj5: {
+//     title: `Linearity`,
+//     content: `
+// Definite integrals respect addition and scalar multiplication.
+
+// **Sum rule:**
+
+// $$\\int_a^b [f(x) + g(x)]\\, dx = \\int_a^b f(x)\\, dx + \\int_a^b g(x)\\, dx$$
+
+// **Constant multiple rule:**
+
+// $$\\int_a^b c \\cdot f(x)\\, dx = c \\int_a^b f(x)\\, dx$$
+
+// These [rules](!/calculus/integrals/rules) allow complex integrands to be broken into simpler pieces, each integrated separately and then combined.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   },
+//   obj6: {
+//     title: `Computing Definite Integrals`,
+//     content: `
+// Direct computation via Riemann sums is tedious. The Fundamental Theorem of Calculus provides the shortcut.
+
+// If $F$ is any antiderivative of $f$—meaning $F'(x) = f(x)$—then:
+
+// $$\\int_a^b f(x)\\, dx = F(b) - F(a)$$
+
+// This result, detailed on the [rules](!/calculus/integrals/rules) page, transforms integration from a limiting process into a two-step procedure: find an antiderivative, then evaluate at the endpoints.
+
+// The notation $F(x) \\Big|_a^b$ or $[F(x)]_a^b$ denotes the evaluation $F(b) - F(a)$.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   },
+//   obj7: {
+//     title: `Average Value of a Function`,
+//     content: `
+// The average value of $f$ on the interval $[a, b]$ is:
+
+// $$f_{\\text{avg}} = \\frac{1}{b - a} \\int_a^b f(x)\\, dx$$
+
+// This generalizes the familiar average of discrete values. The integral computes the total, and division by the interval length yields the mean.
+
+// Geometrically, $f_{\\text{avg}}$ is the height of a rectangle with base $[a, b]$ whose area equals the area under the curve. The Mean Value Theorem for Integrals guarantees that a continuous function actually attains this average value at some point $c$ in $(a, b)$:
+
+// $$f(c) = f_{\\text{avg}}$$
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   },
+//   obj8: {
+//     title: `Summary: Three Lenses on the Definite Integral`,
+//     content: `
+// The sections above introduce the definite integral from three angles: as the limit of Riemann sums (the construction), as signed area between a curve and the x-axis (the geometric meaning), and as a way to define the average value of a function on an interval (a derived use). The table below collects these three lenses together — each is a valid perspective, and each is useful in a different setting. Computing a definite integral in practice usually relies on the Fundamental Theorem of Calculus, detailed on the [rules](!/calculus/integrals/rules) page.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   }
+// };
+
+
+// formulas-optimized: v1 | 2026-06-09 | 2 callouts (obj3, obj7)
 const sectionsContent = {
   // ─── /calculus/integrals/definite ─────────────────────────────────────────
 
@@ -174,7 +346,12 @@ This means the integral can be zero even when substantial area exists—positive
 
 To find total unsigned area, integrate the absolute value:
 
+@academic[formula_callout:Total Unsigned Area
 $$\\text{Total area} = \\int_a^b |f(x)|\\, dx$$
+/calculus/integrals/formulas#total_unsigned_area]@
+
+@academic[formulas_link:Browse all integral formulas
+/calculus/integrals/formulas]@
 `,
     before: ``,
     after: ``,
@@ -246,7 +423,12 @@ The notation $F(x) \\Big|_a^b$ or $[F(x)]_a^b$ denotes the evaluation $F(b) - F(
     content: `
 The average value of $f$ on the interval $[a, b]$ is:
 
+@academic[formula_callout:Average Value of a Function
 $$f_{\\text{avg}} = \\frac{1}{b - a} \\int_a^b f(x)\\, dx$$
+/calculus/integrals/formulas#average_value_of_a_function]@
+
+@academic[formulas_link:Browse all integral formulas
+/calculus/integrals/formulas]@
 
 This generalizes the familiar average of discrete values. The integral computes the total, and division by the interval length yields the mean.
 
@@ -268,6 +450,8 @@ The sections above introduce the definite integral from three angles: as the lim
     link: ``
   }
 };
+
+
 
 const introContent = {
   title: `From Sums to Areas`,

@@ -37,7 +37,7 @@ const linkStyle = 'color: inherit; text-decoration: underline;'
 
 // obj4 — aggregation: the page's own minimal antiderivative reference
 const obj4Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 85%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Integrand f(x)</th>
@@ -71,7 +71,7 @@ const obj4Table = `
 
 // obj8 — summary capstone: the indefinite-integration workflow
 const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.summary} text-align: center;">Step</th>
@@ -109,6 +109,174 @@ const summaryTable = `
 </table>
 `
 
+// const sectionsContent = {
+//   // ─── /calculus/integrals/indefinite ───────────────────────────────────────
+
+//   obj0: {
+//     title: `Key Terms`,
+//     content: `
+// - [Antiderivative](!/calculus/definitions#antiderivative) — a function whose derivative is $f$
+// - [Indefinite Integral](!/calculus/definitions#indefinite_integral) — $\\int f(x)\\,dx = F(x) + C$, the full family
+// - [Integrand](!/calculus/definitions#integrand) — the function $f(x)$ being integrated
+// - [Definite Integral](!/calculus/definitions#definite_integral) — connected by the Fundamental Theorem`,
+//     before: ``,
+//     after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Definitions](!/calculus/definitions) →@`,
+//     link: '',
+//   },
+
+//   obj1: {
+//     title: `Antiderivatives`,
+//     content: `
+// A function $F$ is an antiderivative of $f$ if:
+
+// $$F'(x) = f(x)$$
+
+// The antiderivative reverses differentiation. Given $f(x) = 2x$, the function $F(x) = x^2$ is an antiderivative because $(x^2)' = 2x$.
+
+// But $F(x) = x^2 + 5$ is also an antiderivative—its derivative is likewise $2x$. So is $x^2 - 17$, or $x^2 + \\pi$. Any function of the form $x^2 + C$ differentiates to $2x$.
+
+// Antiderivatives are not unique. They form a family of functions, all differing by constants.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   },
+//   obj2: {
+//     title: `The Constant of Integration`,
+//     content: `
+// If $F(x)$ is one antiderivative of $f(x)$, then every antiderivative has the form:
+
+// $$F(x) + C$$
+
+// where $C$ is an arbitrary constant. This follows from a basic fact: if two functions have the same derivative on an interval, they differ by a constant.
+
+// The "$+ C$" in indefinite integrals is not optional notation—it represents the complete answer. Omitting it gives only one member of the family when infinitely many exist.
+
+// Initial conditions pin down $C$. If you know that $F(0) = 3$, for instance, you can solve for the specific constant that satisfies this requirement.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   },
+//   obj3: {
+//     title: `Notation`,
+//     content: `
+// The indefinite integral is written:
+
+// $$\\int f(x)\\, dx = F(x) + C$$
+
+// The integral sign $\\int$ without limits indicates an indefinite integral. The integrand $f(x)$ is the function being integrated. The differential $dx$ specifies the variable.
+
+// The result is a function (or family of functions), not a number. This contrasts with the [definite integral](!/calculus/integrals/definite), which produces a numerical value.
+
+// The notation mirrors the definite integral deliberately. The Fundamental Theorem of Calculus connects them: indefinite integrals provide the antiderivatives that definite integrals evaluate.
+
+//  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Symbols and Notations](!/math-symbols/calculus) →@
+
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   },
+//   obj4: {
+//     title: `Basic Antiderivative Formulas`,
+//     content: `
+// Several antiderivatives appear constantly and should be memorized.
+
+// **Power rule** (for $n \\neq -1$):
+
+// $$\\int x^n\\, dx = \\frac{x^{n+1}}{n+1} + C$$
+
+// **Reciprocal:**
+
+// $$\\int \\frac{1}{x}\\, dx = \\ln|x| + C$$
+
+// **Exponential:**
+
+// $$\\int e^x\\, dx = e^x + C$$
+
+// **Trigonometric:**
+
+// $$\\int \\cos x\\, dx = \\sin x + C \\qquad \\int \\sin x\\, dx = -\\cos x + C$$
+
+// The [special integrals](!/calculus/integrals/special) page provides a more complete list.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   },
+//   obj5: {
+//     title: `Linearity of Indefinite Integrals`,
+//     content: `
+// Indefinite integrals obey the same [linearity rules](!/calculus/integrals/rules) as definite integrals.
+
+// **Sum rule:**
+
+// $$\\int [f(x) + g(x)]\\, dx = \\int f(x)\\, dx + \\int g(x)\\, dx$$
+
+// **Constant multiple rule:**
+
+// $$\\int c \\cdot f(x)\\, dx = c \\int f(x)\\, dx$$
+
+// These rules reduce complex integrands to combinations of simpler ones. For example:
+
+// $$\\int (3x^2 + 5x - 2)\\, dx = 3 \\cdot \\frac{x^3}{3} + 5 \\cdot \\frac{x^2}{2} - 2x + C = x^3 + \\frac{5x^2}{2} - 2x + C$$
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   },
+//   obj6: {
+//     title: `Verifying Antiderivatives`,
+//     content: `
+// Integration has a built-in check: differentiate your answer.
+
+// If $\\int f(x)\\, dx = F(x) + C$, then $F'(x)$ must equal $f(x)$. If it doesn't, an error occurred.
+
+// For example, suppose you compute:
+
+// $$\\int \\sec^2 x\\, dx = \\tan x + C$$
+
+// Verify: $(\\tan x)' = \\sec^2 x$. Correct.
+
+// This check catches sign errors, missing constants, and algebraic mistakes. It works because differentiation is mechanical—once you have a candidate antiderivative, verification is straightforward.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   },
+//   obj7: {
+//     title: `Connection to Definite Integrals`,
+//     content: `
+// Indefinite and definite integrals serve different purposes but are linked by the Fundamental Theorem of Calculus.
+
+// The indefinite integral finds antiderivatives:
+
+// $$\\int f(x)\\, dx = F(x) + C$$
+
+// The definite integral uses an antiderivative to compute accumulated quantity:
+
+// $$\\int_a^b f(x)\\, dx = F(b) - F(a)$$
+
+// The constant $C$ cancels when evaluating $F(b) - F(a)$, so any antiderivative works. This connection, detailed on the [rules](!/calculus/integrals/rules) page, is why mastering indefinite integration enables computation of definite integrals.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   },
+//   obj8: {
+//     title: `Summary: The Indefinite-Integration Workflow`,
+//     content: `
+// Every indefinite integral on this page follows the same five-step procedure, whether the integrand is a single power function or a complicated composition that requires a technique. The table below collects the workflow with a pointer to the sibling page where each step&apos;s detail lives — special integrals for the formula library, rules for linearity and the FTC, techniques for transformations. Use this as a reminder while working a problem: every step matters, and skipping the final verification is the single most common source of errors.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
+//   }
+// };
+
+// formulas-optimized: v1 | 2026-06-09 | 1 callout (obj2)
 const sectionsContent = {
   // ─── /calculus/integrals/indefinite ───────────────────────────────────────
 
@@ -147,7 +315,12 @@ Antiderivatives are not unique. They form a family of functions, all differing b
     content: `
 If $F(x)$ is one antiderivative of $f(x)$, then every antiderivative has the form:
 
-$$F(x) + C$$
+@academic[formula_callout:Antiderivative Family
+$$\\int f(x)\\, dx = F(x) + C \\quad \\text{where } F'(x) = f(x)$$
+/calculus/integrals/formulas#antiderivative_family]@
+
+@academic[formulas_link:Browse all integral formulas
+/calculus/integrals/formulas]@
 
 where $C$ is an arbitrary constant. This follows from a basic fact: if two functions have the same derivative on an interval, they differ by a constant.
 
@@ -275,6 +448,8 @@ Every indefinite integral on this page follows the same five-step procedure, whe
     link: ``
   }
 };
+
+
 
 const introContent = {
   title: `Reversing Differentiation`,

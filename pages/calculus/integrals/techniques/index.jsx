@@ -1,204 +1,149 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../../pages/pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// tables-optimized: v4 | 2026-05-24 | 3 tables (obj4 aggregation, obj5 aggregation, obj8 summary capstone)
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../../pages/pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "integration techniques",
-//   "u-substitution",
-//   "integration by parts",
-//   "trigonometric integrals",
-//   "trigonometric substitution",
-//   "partial fractions integration",
-//   "how to integrate",
-//   "substitution method calculus",
-//   "LIATE rule",
-//   "integration methods",
-//   "advanced integration",
-//   "integrate sin cos powers",
-//   "rational function integration",
-//   "choosing integration technique"
-// ]
-//   // •
+export async function getStaticProps(){
+const keyWords = [
+  "integration techniques",
+  "u-substitution",
+  "integration by parts",
+  "trigonometric integrals",
+  "trigonometric substitution",
+  "partial fractions integration",
+  "how to integrate",
+  "substitution method calculus",
+  "LIATE rule",
+  "integration methods",
+  "advanced integration",
+  "integrate sin cos powers",
+  "rational function integration",
+  "choosing integration technique"
+]
 
-// //   \u2022 First item
-// // \u2022 Second item
+const linkStyle = 'color: inherit; text-decoration: underline;'
 
-  
-// // <hr style="border-width:1px;"></hr>
+// ─── TABLES ───────────────────────────────────────────────────────────────
 
-// // <hr style="color:blue;" />
+// obj4 — aggregation: trig integral strategies by power pattern
+const obj4Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Power pattern</th>
+      <th style="${tableHeaders.aggregation}">Strategy</th>
+      <th style="${tableHeaders.aggregation}">Substitution</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Odd power of sin x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">save one sin x, rewrite the rest using sin²x = 1 − cos²x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">u = cos x, du = −sin x dx</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Odd power of cos x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">save one cos x, rewrite the rest using cos²x = 1 − sin²x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">u = sin x, du = cos x dx</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Both powers even</td>
+      <td style="padding: 12px 15px; color: #34495e;">apply half-angle identities to lower the powers</td>
+      <td style="padding: 12px 15px; color: #34495e;">none directly — reduce, then integrate term by term</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// obj5 — aggregation: trigonometric substitutions by radical form
+const obj5Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Radical in integrand</th>
+      <th style="${tableHeaders.aggregation}">Substitution</th>
+      <th style="${tableHeaders.aggregation}">Radical simplifies to</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">√(a² − x²)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = a sin θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a cos θ</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">√(a² + x²)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = a tan θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a sec θ</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">√(x² − a²)</td>
+      <td style="padding: 12px 15px; color: #34495e;">x = a sec θ</td>
+      <td style="padding: 12px 15px; color: #34495e;">a tan θ</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-//   //   const sectionsContent={
-
-//   //   obj1:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-  
-//   //   },
-//   //   obj2:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-  
-//   //   obj3:{
-  
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj4:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj5:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj6:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj7:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj8:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj9:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj10:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj11:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj12:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj13:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-//   //     link:'',
-  
-//   //   },
-//   //   obj14:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-//   //     link:'',
-  
-//   //   },
-
-
-//   //   obj15:{
-  
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   }
-  
-//   // }
+// obj8 — summary capstone: master technique reference with selection signal
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Technique</th>
+      <th style="${tableHeaders.summary}">What it reverses</th>
+      <th style="${tableHeaders.summary}">Recognize when…</th>
+      <th style="${tableHeaders.summary}">Setup</th>
+      <th style="${tableHeaders.summary}">Example trigger</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">u-substitution</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">chain rule</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">integrand contains a function and its derivative</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">u = g(x), du = g&apos;(x) dx; rewrite and integrate in u</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∫ 2x cos(x²) dx</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Integration by parts</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">product rule</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">product of unrelated factors (poly · exp, poly · trig, log · poly)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∫ u dv = uv − ∫ v du; LIATE picks u</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∫ x eˣ dx</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Trigonometric integrals</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Pythagorean &amp; half-angle identities</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">powers and products of sin x, cos x (and tan, sec variants)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">save a factor; convert via identity; substitute u = sin x or cos x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∫ sin³ x dx</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Trigonometric substitution</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Pythagorean identity</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">integrand contains √(a² − x²), √(a² + x²), or √(x² − a²)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = a sin θ, a tan θ, or a sec θ depending on the radical</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∫ 1 / √(1 − x²) dx</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Partial fractions</td>
+      <td style="padding: 12px 15px; color: #34495e;">addition of rational fractions</td>
+      <td style="padding: 12px 15px; color: #34495e;">rational function with a factorable denominator</td>
+      <td style="padding: 12px 15px; color: #34495e;">decompose into A/(x − r) + B/(x − s) + … and integrate each piece</td>
+      <td style="padding: 12px 15px; color: #34495e;">∫ 1 / (x² − 1) dx</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 // const sectionsContent = {
 //   // ─── /calculus/integrals/techniques ───────────────────────────────────────
@@ -363,619 +308,19 @@
 //     before: ``,
 //     after: ``,
 //     link: ``
+//   },
+//   obj8: {
+//     title: `Summary: The Techniques at a Glance`,
+//     content: `
+// The techniques covered above all share the same goal—reshape the integrand until it matches a [known formula](!/calculus/integrals/special)—but each one reverses a different differentiation rule and is triggered by a different signal in the integrand. The table below collects all five in one place, pairing each technique with what it reverses, the pattern that signals it, the standard setup, and a canonical example. Read the &quot;Recognize when…&quot; column first when scanning an unfamiliar integral; read across the row once a match is found.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
 //   }
 // };
 
-// const introContent = {
-//   id: `intro`,
-//   title: `Beyond Direct Formulas`,
-//   content: `
-// Most functions resist direct antidifferentiation. The integral of $e^{x^2}$ has no elementary formula. Even innocuous-looking expressions like $\\sqrt{1 + x^3}$ lack closed-form antiderivatives.
-
-// Integration techniques transform difficult integrals into tractable ones. Substitution reverses the chain rule. Integration by parts reverses the product rule. Partial fractions decompose rational functions. Trigonometric methods handle roots and powers.
-
-// No single algorithm covers all cases—unlike differentiation, which follows systematic rules. Success requires recognizing which technique applies and executing it correctly. This pattern-matching skill develops through practice.
-// `
-// };
-
-
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "Why are integration techniques needed?",
-//     answer: "Unlike differentiation, which follows mechanical rules, integration has no universal algorithm. Many functions have no elementary antiderivative or are difficult to find without insight. Techniques transform integrands into forms matching known formulas.",
-//     sectionId: "1"
-//   },
-//   obj2: {
-//     question: "How does u-substitution work?",
-//     answer: "Substitution reverses the chain rule. Let u = g(x), so du = g'(x) dx. Replace all x-expressions with u-expressions and integrate. For definite integrals, convert the limits: when x = a, u = g(a). Look for a function paired with its derivative.",
-//     sectionId: "2"
-//   },
-//   obj3: {
-//     question: "What is integration by parts?",
-//     answer: "Integration by parts reverses the product rule: ∫u dv = uv − ∫v du. Identify factors u and dv, differentiate u to get du, integrate dv to get v, then apply the formula. The LIATE rule (Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential) guides choosing u.",
-//     sectionId: "3"
-//   },
-//   obj4: {
-//     question: "How do you integrate powers of sine and cosine?",
-//     answer: "For odd power of sine: save one sin x, convert sin²x = 1 − cos²x, substitute u = cos x. For odd power of cosine: save one cos x, convert cos²x = 1 − sin²x, substitute u = sin x. For both even: use half-angle identities.",
-//     sectionId: "4"
-//   },
-//   obj5: {
-//     question: "When do you use trigonometric substitution?",
-//     answer: "Use trig substitution for square roots of quadratics. For √(a²−x²): let x = a sin θ. For √(a²+x²): let x = a tan θ. For √(x²−a²): let x = a sec θ. These substitutions eliminate the square root using Pythagorean identities.",
-//     sectionId: "5"
-//   },
-//   obj6: {
-//     question: "How does partial fractions work?",
-//     answer: "Partial fractions decompose rational functions into simpler fractions. Factor the denominator, write the fraction as a sum of terms with linear or irreducible quadratic denominators, solve for coefficients, then integrate each term using basic formulas.",
-//     sectionId: "6"
-//   },
-//   obj7: {
-//     question: "How do you choose the right integration technique?",
-//     answer: "Pattern recognition guides selection. Substitution: function paired with its derivative. Parts: products of different function types. Trigonometric integrals: powers of sin and cos. Trig substitution: square roots of a²±x² or x²−a². Partial fractions: rational functions with factorable denominators.",
-//     sectionId: "7"
-//   }
-// }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Integration Techniques",
-//     "description": "Master integration techniques: u-substitution, integration by parts (LIATE), trigonometric integrals, trig substitution, partial fractions, and how to choose the right method.",
-//     "url": "https://www.learnmathclass.com/calculus/integrals/techniques",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Integration Techniques"
-//     },
-//     "teaches": [
-//       "Why integration techniques are necessary",
-//       "U-substitution method",
-//       "Integration by parts with LIATE rule",
-//       "Trigonometric integrals with powers of sine and cosine",
-//       "Trigonometric substitution for square roots",
-//       "Partial fraction decomposition"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Calculus",
-//         "item": "https://www.learnmathclass.com/calculus"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Integrals",
-//         "item": "https://www.learnmathclass.com/calculus/integrals"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Integration Techniques",
-//         "item": "https://www.learnmathclass.com/calculus/integrals/techniques"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-
-
-//   //  return {
-//   //     props:{
-//   //        sectionsContent,
-//   //        introContent,
-//   //         seoData: {
-//   //       title: "Integration Techniques | Learn Math Class",
-//   //       description: "Metadescription",
-//   //       keywords: keyWords.join(", "),
-//   //       url: "/calculus/integrals/techniques",
-//   //        name: "name"
-//   //     },
-        
-//   //      }
-//   //   }
-
-//   return {
-//   props: {
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Integration Techniques: Substitution, Parts & More | Learn Math Class",
-//       description: "Master integration techniques: u-substitution, integration by parts (LIATE), trigonometric integrals, trig substitution, partial fractions, and how to choose the right method.",
-//       keywords: keyWords.join(", "),
-//       url: "/calculus/integrals/techniques",
-//       name: "Integration Techniques"
-//     },
-//   }
-// }
-//    }
-
-// // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-// export default function PageTemplate({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     // {
-//     //     id:'8',
-//     //     title:sectionsContent.obj8.title,
-//     //     link:sectionsContent.obj8.link,
-//     //     content:[
-//     //       sectionsContent.obj8.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    {/* <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head> */}
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Integration Techniques</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <KeyTermsCard
-//   id="0"
-//   title={sectionsContent.obj0.title}
-//   content={sectionsContent.obj0.content}
-//   after={sectionsContent.obj0.after}
-//   variant="light"
-// />
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-// tables-optimized: v4 | 2026-05-24 | 3 tables (obj4 aggregation, obj5 aggregation, obj8 summary capstone)
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../../pages/pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "integration techniques",
-  "u-substitution",
-  "integration by parts",
-  "trigonometric integrals",
-  "trigonometric substitution",
-  "partial fractions integration",
-  "how to integrate",
-  "substitution method calculus",
-  "LIATE rule",
-  "integration methods",
-  "advanced integration",
-  "integrate sin cos powers",
-  "rational function integration",
-  "choosing integration technique"
-]
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ─── TABLES ───────────────────────────────────────────────────────────────
-
-// obj4 — aggregation: trig integral strategies by power pattern
-const obj4Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Power pattern</th>
-      <th style="${tableHeaders.aggregation}">Strategy</th>
-      <th style="${tableHeaders.aggregation}">Substitution</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Odd power of sin x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">save one sin x, rewrite the rest using sin²x = 1 − cos²x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">u = cos x, du = −sin x dx</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Odd power of cos x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">save one cos x, rewrite the rest using cos²x = 1 − sin²x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">u = sin x, du = cos x dx</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Both powers even</td>
-      <td style="padding: 12px 15px; color: #34495e;">apply half-angle identities to lower the powers</td>
-      <td style="padding: 12px 15px; color: #34495e;">none directly — reduce, then integrate term by term</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj5 — aggregation: trigonometric substitutions by radical form
-const obj5Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 90%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Radical in integrand</th>
-      <th style="${tableHeaders.aggregation}">Substitution</th>
-      <th style="${tableHeaders.aggregation}">Radical simplifies to</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">√(a² − x²)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = a sin θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a cos θ</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">√(a² + x²)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = a tan θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a sec θ</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">√(x² − a²)</td>
-      <td style="padding: 12px 15px; color: #34495e;">x = a sec θ</td>
-      <td style="padding: 12px 15px; color: #34495e;">a tan θ</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj8 — summary capstone: master technique reference with selection signal
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Technique</th>
-      <th style="${tableHeaders.summary}">What it reverses</th>
-      <th style="${tableHeaders.summary}">Recognize when…</th>
-      <th style="${tableHeaders.summary}">Setup</th>
-      <th style="${tableHeaders.summary}">Example trigger</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">u-substitution</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">chain rule</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">integrand contains a function and its derivative</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">u = g(x), du = g&apos;(x) dx; rewrite and integrate in u</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∫ 2x cos(x²) dx</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Integration by parts</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">product rule</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">product of unrelated factors (poly · exp, poly · trig, log · poly)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∫ u dv = uv − ∫ v du; LIATE picks u</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∫ x eˣ dx</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Trigonometric integrals</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Pythagorean &amp; half-angle identities</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">powers and products of sin x, cos x (and tan, sec variants)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">save a factor; convert via identity; substitute u = sin x or cos x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∫ sin³ x dx</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Trigonometric substitution</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Pythagorean identity</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">integrand contains √(a² − x²), √(a² + x²), or √(x² − a²)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = a sin θ, a tan θ, or a sec θ depending on the radical</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∫ 1 / √(1 − x²) dx</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Partial fractions</td>
-      <td style="padding: 12px 15px; color: #34495e;">addition of rational fractions</td>
-      <td style="padding: 12px 15px; color: #34495e;">rational function with a factorable denominator</td>
-      <td style="padding: 12px 15px; color: #34495e;">decompose into A/(x − r) + B/(x − s) + … and integrate each piece</td>
-      <td style="padding: 12px 15px; color: #34495e;">∫ 1 / (x² − 1) dx</td>
-    </tr>
-  </tbody>
-</table>
-`
-
+// formulas-optimized: v1 | 2026-06-09 | 2 callouts (obj2, obj3)
 const sectionsContent = {
   // ─── /calculus/integrals/techniques ───────────────────────────────────────
 
@@ -1011,6 +356,13 @@ Substitution reverses the chain rule. If the integrand contains a function and i
 
 **Method:** Let $u = g(x)$, so $du = g'(x)\\, dx$. Replace all $x$-expressions with $u$-expressions and integrate.
 
+@academic[formula_callout:Substitution Rule
+$$\\int f(g(x))\\, g'(x)\\, dx = \\int f(u)\\, du \\quad \\text{with } u = g(x)$$
+/calculus/integrals/formulas#substitution_rule]@
+
+@academic[formulas_link:Browse all integral formulas
+/calculus/integrals/formulas]@
+
 **Example:**
 
 $$\\int 2x \\cos(x^2)\\, dx$$
@@ -1030,7 +382,12 @@ For definite integrals, convert the limits: when $x = a$, $u = g(a)$; when $x = 
     content: `
 Integration by parts reverses the product rule:
 
+@academic[formula_callout:Integration by Parts
 $$\\int u\\, dv = uv - \\int v\\, du$$
+/calculus/integrals/formulas#integration_by_parts]@
+
+@academic[formulas_link:Browse all integral formulas
+/calculus/integrals/formulas]@
 
 **Method:** Identify factors $u$ and $dv$ in the integrand. Differentiate $u$ to get $du$; integrate $dv$ to get $v$. Apply the formula.
 
@@ -1150,6 +507,7 @@ The techniques covered above all share the same goal—reshape the integrand unt
     link: ``
   }
 };
+
 
 const introContent = {
   id: `intro`,
