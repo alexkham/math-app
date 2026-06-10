@@ -1,204 +1,129 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../../pages/pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// tables-optimized: v4 | 2026-05-24 | 2 tables (obj3 comparison, obj11 summary capstone)
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../../pages/pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "one-sided limits",
-//   "left-hand limit",
-//   "right-hand limit",
-//   "limit from the left",
-//   "limit from the right",
-//   "x approaches a minus",
-//   "x approaches a plus",
-//   "one-sided limit notation",
-//   "piecewise function limits",
-//   "jump discontinuity",
-//   "one-sided limit examples",
-//   "evaluate one-sided limits",
-//   "vertical asymptote one-sided",
-//   "one-sided continuity"
-// ]
-//   // •
+export async function getStaticProps(){
+const keyWords = [
+  "one-sided limits",
+  "left-hand limit",
+  "right-hand limit",
+  "limit from the left",
+  "limit from the right",
+  "x approaches a minus",
+  "x approaches a plus",
+  "one-sided limit notation",
+  "piecewise function limits",
+  "jump discontinuity",
+  "one-sided limit examples",
+  "evaluate one-sided limits",
+  "vertical asymptote one-sided",
+  "one-sided continuity"
+]
 
-// //   \u2022 First item
-// // \u2022 Second item
+const linkStyle = 'color: inherit; text-decoration: underline;'
 
-  
-// // <hr style="border-width:1px;"></hr>
+// ─── TABLES ───────────────────────────────────────────────────────────────
 
-// // <hr style="color:blue;" />
+// obj3 — comparison (decision matrix): two-sided existence given LHL & RHL
+const obj3Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Left-hand limit at a</th>
+      <th style="${tableHeaders.comparison}">Right-hand limit at a</th>
+      <th style="${tableHeaders.comparison} text-align: center;">Match?</th>
+      <th style="${tableHeaders.comparison}">Two-sided limit at a</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">exists, = L</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exists, = L</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exists, equals L</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">exists, = L<sub>1</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exists, = L<sub>2</sub> ≠ L<sub>1</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">does not exist (jump-style failure)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">exists</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">does not exist</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">—</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">does not exist</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">does not exist</td>
+      <td style="padding: 12px 15px; color: #34495e;">exists or does not exist</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">—</td>
+      <td style="padding: 12px 15px; color: #34495e;">does not exist</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-// //     const sectionsContent={
-
-// //     obj1:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-  
-// //     },
-// //     obj2:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-  
-// //     obj3:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj4:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj5:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj6:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj7:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj8:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj9:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj10:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj11:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj12:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj13:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-// //     obj14:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-
-
-// //     obj15:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     }
-  
-// //   }
+// obj11 — summary capstone: situations requiring one-sided analysis
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Situation</th>
+      <th style="${tableHeaders.summary}">Why one-sided analysis is required</th>
+      <th style="${tableHeaders.summary}">Pattern of one-sided limits</th>
+      <th style="${tableHeaders.summary} text-align: center;">Section</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Piecewise function at a boundary</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a different formula applies on each side of the boundary</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">use the left-side formula for LHL, the right-side formula for RHL; check whether they agree</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj4</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Jump discontinuity</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">function jumps from one value to another at the point</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">LHL = L<sub>1</sub>, RHL = L<sub>2</sub>, with L<sub>1</sub> ≠ L<sub>2</sub>; both finite</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj5</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Vertical asymptote</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">function is unbounded near the point; signs may differ by direction</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">LHL = ±∞ and RHL = ±∞, possibly with opposite signs — see <a href="/calculus/limits/infinity" style="${linkStyle}">limits and infinity</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj6</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Domain boundary (radicals, etc.)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">function is only defined on one side of the boundary point</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">only one one-sided limit is meaningful; the other isn&apos;t defined</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj7</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Closed-interval endpoint</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">continuity at a or b on [a, b] can only be tested from inside the interval</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">continuous-from-right at a, continuous-from-left at b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj9</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Corner point (one-sided derivatives)</td>
+      <td style="padding: 12px 15px; color: #34495e;">instantaneous rate of change differs left vs right at a kink</td>
+      <td style="padding: 12px 15px; color: #34495e;">left-derivative ≠ right-derivative ⇒ function is not differentiable at the point</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">obj10</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 // const sectionsContent = {
 //   // ─── /calculus/limits/one-sided ───────────────────────────────────────────
@@ -403,613 +328,20 @@
 //     before: ``,
 //     after: ``,
 //     link: ``
+//   },
+//   obj11: {
+//     title: `Summary: Where One-Sided Limits Are Essential`,
+//     content: `
+// One-sided limits aren&apos;t just a finer-grained version of the two-sided limit — they&apos;re the right tool for a handful of specific situations where two-sided analysis either fails or doesn&apos;t apply. The table below collects six such situations, pairing each with its diagnostic pattern: what the LHL and RHL typically look like, and why the one-sided form is structurally required. Recognizing the situation often points directly at the right technique.
+// `,
+//     before: ``,
+//     after: ``,
+//     link: ``
 //   }
 // };
 
 
-//  const introContent = {
-//    id:"intro",
-
-//   title: `Approaching From One Direction`,
-
-//   content: `
-// Sometimes a function behaves differently depending on which side you approach from. A piecewise function may follow one formula for $x < a$ and a different formula for $x > a$. A rational function may blow up to $+\\infty$ on one side and $-\\infty$ on the other. In these situations, one-sided limits become essential.
-
-// The left-hand limit examines behavior as $x$ approaches $a$ through values less than $a$. The right-hand limit examines behavior through values greater than $a$. Each direction gets its own answer, and those answers need not agree.
-
-// One-sided limits serve as the building blocks for two-sided limits. The two-sided limit exists precisely when both one-sided limits exist and match. When they differ, the one-sided limits capture the full story that a single two-sided limit cannot tell.
-// `
-// };
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is a left-hand limit?",
-//     answer: "A left-hand limit, written lim(x→a⁻) f(x), examines function behavior as x approaches a through values strictly less than a. You move along the x-axis from the left, getting closer to a but never reaching it.",
-//     sectionId: "1"
-//   },
-//   obj2: {
-//     question: "What is a right-hand limit?",
-//     answer: "A right-hand limit, written lim(x→a⁺) f(x), examines function behavior as x approaches a through values strictly greater than a. You move along the x-axis from the right, getting closer to a but never reaching it.",
-//     sectionId: "2"
-//   },
-//   obj3: {
-//     question: "How do one-sided limits relate to two-sided limits?",
-//     answer: "The two-sided limit exists if and only if both one-sided limits exist and are equal. If the left-hand and right-hand limits differ, or if either fails to exist, the two-sided limit does not exist.",
-//     sectionId: "3"
-//   },
-//   obj4: {
-//     question: "How do you find limits of piecewise functions?",
-//     answer: "At boundaries between pieces, evaluate each one-sided limit using the formula that applies on that side. For example, at x = 2 where f(x) = x² for x < 2 and f(x) = 3x−2 for x ≥ 2, use x² for the left limit and 3x−2 for the right limit.",
-//     sectionId: "4"
-//   },
-//   obj5: {
-//     question: "What is a jump discontinuity?",
-//     answer: "A jump discontinuity occurs when both one-sided limits exist but differ. The function 'jumps' from one value to another at that point. The floor function ⌊x⌋ has jump discontinuities at every integer, jumping by 1 each time.",
-//     sectionId: "5"
-//   },
-//   obj6: {
-//     question: "How do one-sided limits behave at vertical asymptotes?",
-//     answer: "Near vertical asymptotes, one-sided limits typically equal +∞ or −∞, and the sign can differ by direction. For f(x) = 1/(x−2), the left limit at x = 2 is −∞ while the right limit is +∞.",
-//     sectionId: "6"
-//   },
-//   obj7: {
-//     question: "Why do square roots require one-sided limits?",
-//     answer: "Square root expressions have domain restrictions. For √(4−x), the domain requires x ≤ 4, so at x = 4 only the left-hand limit is meaningful. Domain boundaries naturally restrict limits to one side.",
-//     sectionId: "7"
-//   },
-//   obj8: {
-//     question: "How do you evaluate one-sided limits?",
-//     answer: "Use the same techniques as two-sided limits—direct substitution, factoring, rationalizing—but track which side you approach from. Sign analysis is critical: for |x|/x, the left limit at 0 is −1 while the right limit is +1.",
-//     sectionId: "8"
-//   },
-//   obj9: {
-//     question: "What is one-sided continuity?",
-//     answer: "A function is continuous from the left at a if lim(x→a⁻) f(x) = f(a), and continuous from the right if lim(x→a⁺) f(x) = f(a). Full continuity requires both. On closed intervals, endpoints use one-sided continuity.",
-//     sectionId: "9"
-//   }
-// }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "One-Sided Limits",
-//     "description": "Learn one-sided limits: left-hand and right-hand limit notation, piecewise functions, jump discontinuities, vertical asymptotes, and one-sided continuity.",
-//     "url": "https://www.learnmathclass.com/calculus/limits/one-sided",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "One-Sided Limits"
-//     },
-//     "teaches": [
-//       "Left-hand limit notation and meaning",
-//       "Right-hand limit notation and meaning",
-//       "Connection between one-sided and two-sided limits",
-//       "Evaluating limits of piecewise functions",
-//       "Jump discontinuities and vertical asymptotes",
-//       "One-sided continuity on closed intervals"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Calculus",
-//         "item": "https://www.learnmathclass.com/calculus"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Limits",
-//         "item": "https://www.learnmathclass.com/calculus/limits"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "One-Sided Limits",
-//         "item": "https://www.learnmathclass.com/calculus/limits/one-sided"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-
-// //    return {
-// //       props:{
-// //          sectionsContent,
-// //          introContent,
-// //           seoData: {
-// //         title: "One-Sided Limits | Learn Math Class",
-// //         description: "Metadescription",
-// //         keywords: keyWords.join(", "),
-// //         url: "/calculus/limits/one-sided",
-// //          name: "name"
-// //       },
-        
-// //        }
-// //     }
-
-// return {
-//   props: {
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "One-Sided Limits: Left & Right Approach | Learn Math Class",
-//       description: "Learn one-sided limits: left-hand and right-hand limit notation, piecewise functions, jump discontinuities, vertical asymptotes, and one-sided continuity.",
-//       keywords: keyWords.join(", "),
-//       url: "/calculus/limits/one-sided",
-//       name: "One-Sided Limits"
-//     },
-//   }
-// }
-//    }
-
-// // export default function OneSidedPage({seoData,sectionsContent , introContent}) {
-
-
-// export default function OneSidedPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    {/* <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head> */}
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>One-Sided Limits</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <KeyTermsCard
-//   id="0"
-//   title={sectionsContent.obj0.title}
-//   content={sectionsContent.obj0.content}
-//   after={sectionsContent.obj0.after}
-//   variant="light"
-// />
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-
-// tables-optimized: v4 | 2026-05-24 | 2 tables (obj3 comparison, obj11 summary capstone)
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../../pages/pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "one-sided limits",
-  "left-hand limit",
-  "right-hand limit",
-  "limit from the left",
-  "limit from the right",
-  "x approaches a minus",
-  "x approaches a plus",
-  "one-sided limit notation",
-  "piecewise function limits",
-  "jump discontinuity",
-  "one-sided limit examples",
-  "evaluate one-sided limits",
-  "vertical asymptote one-sided",
-  "one-sided continuity"
-]
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ─── TABLES ───────────────────────────────────────────────────────────────
-
-// obj3 — comparison (decision matrix): two-sided existence given LHL & RHL
-const obj3Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Left-hand limit at a</th>
-      <th style="${tableHeaders.comparison}">Right-hand limit at a</th>
-      <th style="${tableHeaders.comparison} text-align: center;">Match?</th>
-      <th style="${tableHeaders.comparison}">Two-sided limit at a</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">exists, = L</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exists, = L</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exists, equals L</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">exists, = L<sub>1</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exists, = L<sub>2</sub> ≠ L<sub>1</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">does not exist (jump-style failure)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">exists</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">does not exist</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">—</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">does not exist</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">does not exist</td>
-      <td style="padding: 12px 15px; color: #34495e;">exists or does not exist</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">—</td>
-      <td style="padding: 12px 15px; color: #34495e;">does not exist</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj11 — summary capstone: situations requiring one-sided analysis
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Situation</th>
-      <th style="${tableHeaders.summary}">Why one-sided analysis is required</th>
-      <th style="${tableHeaders.summary}">Pattern of one-sided limits</th>
-      <th style="${tableHeaders.summary} text-align: center;">Section</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Piecewise function at a boundary</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a different formula applies on each side of the boundary</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">use the left-side formula for LHL, the right-side formula for RHL; check whether they agree</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj4</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Jump discontinuity</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">function jumps from one value to another at the point</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">LHL = L<sub>1</sub>, RHL = L<sub>2</sub>, with L<sub>1</sub> ≠ L<sub>2</sub>; both finite</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj5</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Vertical asymptote</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">function is unbounded near the point; signs may differ by direction</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">LHL = ±∞ and RHL = ±∞, possibly with opposite signs — see <a href="/calculus/limits/infinity" style="${linkStyle}">limits and infinity</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj6</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Domain boundary (radicals, etc.)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">function is only defined on one side of the boundary point</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">only one one-sided limit is meaningful; the other isn&apos;t defined</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj7</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Closed-interval endpoint</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">continuity at a or b on [a, b] can only be tested from inside the interval</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">continuous-from-right at a, continuous-from-left at b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj9</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Corner point (one-sided derivatives)</td>
-      <td style="padding: 12px 15px; color: #34495e;">instantaneous rate of change differs left vs right at a kink</td>
-      <td style="padding: 12px 15px; color: #34495e;">left-derivative ≠ right-derivative ⇒ function is not differentiable at the point</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">obj10</td>
-    </tr>
-  </tbody>
-</table>
-`
-
+// formulas-optimized: v1 | 2026-06-09 | 1 callout (obj9)
 const sectionsContent = {
   // ─── /calculus/limits/one-sided ───────────────────────────────────────────
 
@@ -1183,6 +515,13 @@ Continuous from the right at $a$:
 
 $$\\lim_{x \\to a^+} f(x) = f(a)$$
 
+@academic[formula_callout:One-Sided Continuity
+$$f \\text{ right-continuous at } a \\iff \\lim_{x \\to a^+} f(x) = f(a); \\quad f \\text{ left-continuous at } a \\iff \\lim_{x \\to a^-} f(x) = f(a)$$
+/calculus/limits/formulas#one_sided_continuity]@
+
+@academic[formulas_link:Browse all limit formulas
+/calculus/limits/formulas]@
+
 Full continuity at $a$ requires both. On a closed interval $[a, b]$, continuity means: continuous on the open interval $(a, b)$, continuous from the right at $a$, and continuous from the left at $b$.
 `,
     before: ``,
@@ -1226,7 +565,8 @@ One-sided limits aren&apos;t just a finer-grained version of the two-sided limit
 };
 
 
- const introContent = {
+
+const introContent = {
    id:"intro",
 
   title: `Approaching From One Direction`,
