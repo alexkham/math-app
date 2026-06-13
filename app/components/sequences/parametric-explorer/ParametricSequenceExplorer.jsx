@@ -1,3 +1,4 @@
+
 'use client'
 import React, { useState, useEffect, useRef } from 'react';
 
@@ -789,7 +790,7 @@ function ParametricSequenceExplorer({ name = 'arithmetic' }) {
   if (!mounted) {
     return (
       <>
-        <style>{SE_STYLES}</style>
+        <style dangerouslySetInnerHTML={{ __html: SE_STYLES }} />
         <div className="se-placeholder" />
       </>
     );
@@ -813,7 +814,7 @@ function ParametricSequenceExplorer({ name = 'arithmetic' }) {
 
   return (
     <>
-      <style>{SE_STYLES}</style>
+      <style dangerouslySetInnerHTML={{ __html: SE_STYLES }} />
       <div className="se-grid">
 
         <div className="se-main">

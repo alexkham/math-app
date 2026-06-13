@@ -1,73 +1,171 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages/pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages/pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
+export async function getStaticProps(){
 
-//   const keyWords = [
-//   "complex number properties",
-//   "field axioms complex numbers",
-//   "complex numbers field",
-//   "complex conjugate properties",
-//   "modulus properties",
-//   "argument properties",
-//   "triangle inequality complex numbers",
-//   "algebraic closure",
-//   "fundamental theorem of algebra",
-//   "ordered field",
-//   "commutative property complex numbers",
-//   "associative property complex numbers",
-//   "distributive property",
-//   "multiplicative inverse complex number",
-//   "reverse triangle inequality"
-// ]
-//   // •
+  const keyWords = [
+  "complex number properties",
+  "field axioms complex numbers",
+  "complex numbers field",
+  "complex conjugate properties",
+  "modulus properties",
+  "argument properties",
+  "triangle inequality complex numbers",
+  "algebraic closure",
+  "fundamental theorem of algebra",
+  "ordered field",
+  "commutative property complex numbers",
+  "associative property complex numbers",
+  "distributive property",
+  "multiplicative inverse complex number",
+  "reverse triangle inequality"
+]
 
-// //   \u2022 First item
-// // \u2022 Second item
+  const linkStyle = 'color: inherit; text-decoration: underline;'
 
-  
-// // <hr style="border-width:1px;"></hr>
+  // ---------- TABLES ----------
 
-// // <hr style="color:blue;" />
+  // obj3 — aggregation: the 11 field axioms organized by + / · parallel
+  const obj3Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Axiom group</th>
+      <th style="${tableHeaders.aggregation}">Additive form (+)</th>
+      <th style="${tableHeaders.aggregation}">Multiplicative form (·)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Closure</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁ + z₂ ∈ ℂ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁ · z₂ ∈ ℂ</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Commutativity</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁ + z₂ = z₂ + z₁</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁ · z₂ = z₂ · z₁</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Associativity</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(z₁ + z₂) + z₃ = z₁ + (z₂ + z₃)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(z₁ · z₂) · z₃ = z₁ · (z₂ · z₃)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Identity</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z + 0 = z (additive identity 0)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z · 1 = z (multiplicative identity 1)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inverse</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−z exists; z + (−z) = 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z⁻¹ exists for z ≠ 0; z · z⁻¹ = 1<br/><span style="font-size: 13px;">(formula: z⁻¹ = z̄ / |z|²)</span></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Distributivity</td>
+      <td colspan="2" style="padding: 12px 15px; color: #34495e; text-align: center;">z₁ · (z₂ + z₃) = z₁ · z₂ + z₁ · z₃ &nbsp;&nbsp; <span style="font-size: 13px;">(multiplication distributes over addition)</span></td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+  // obj7 — comparison: algebraic closure, ℝ vs ℂ
+  const obj7Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Question</th>
+      <th style="${tableHeaders.comparison} text-align: center;">ℝ (real numbers)</th>
+      <th style="${tableHeaders.comparison} text-align: center;">ℂ (complex numbers)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Algebraically closed?</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold;">✗ No</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold;">✓ Yes</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Every non-constant polynomial has a root in the field?</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Not always — e.g., x² + 1 = 0 has no real root</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Always — guaranteed by the Fundamental Theorem of Algebra</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Degree-n polynomial factors completely into n linear factors?</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Not always (some factors remain irreducible quadratics)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Always: p(z) = aₙ(z − r₁)(z − r₂)⋯(z − rₙ)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Number of roots of a degree-n polynomial</td>
+      <td style="padding: 12px 15px; color: #34495e;">0 to n</td>
+      <td style="padding: 12px 15px; color: #34495e;">exactly n (counting multiplicity)</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+  // obj9 — summary capstone: operation × (conjugate, modulus, argument)
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Operation</th>
+      <th style="${tableHeaders.summary}">Conjugate behaves as…</th>
+      <th style="${tableHeaders.summary}">Modulus behaves as…</th>
+      <th style="${tableHeaders.summary}">Argument behaves as…</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sum&nbsp;&nbsp; z₁ + z₂</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z̄₁ + z̄₂</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z₁ + z₂| ≤ |z₁| + |z₂|<br/><span style="font-size: 13px;">(triangle inequality)</span></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no simple rule</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Difference&nbsp;&nbsp; z₁ − z₂</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z̄₁ − z̄₂</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z₁ − z₂| ≥ &#124;&thinsp;|z₁| − |z₂|&thinsp;&#124;<br/><span style="font-size: 13px;">(reverse triangle inequality)</span></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no simple rule</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Product&nbsp;&nbsp; z₁ · z₂</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z̄₁ · z̄₂</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z₁| · |z₂|</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">arg(z₁) + arg(z₂)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quotient&nbsp;&nbsp; z₁ / z₂</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z̄₁ / z̄₂</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z₁| / |z₂|</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">arg(z₁) − arg(z₂)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Power&nbsp;&nbsp; zⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(z̄)ⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z|ⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n · arg(z)<br/><span style="font-size: 13px;">(De Moivre)</span></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Conjugation&nbsp;&nbsp; z̄</td>
+      <td style="padding: 12px 15px; color: #34495e;">z (double conjugate)</td>
+      <td style="padding: 12px 15px; color: #34495e;">|z| (unchanged)</td>
+      <td style="padding: 12px 15px; color: #34495e;">−arg(z)</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+  // ---------- SECTIONS (original prose unchanged; obj9 added) ----------
 
 //     const sectionsContent={
 
@@ -101,14 +199,6 @@
 //   after: ``,
 //   link: '',
 // },
-//     // obj2:{
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-  
-//     // },
 
 //     obj2: {
 //   title: `Complex Numbers as a Field`,
@@ -137,16 +227,6 @@
 //   after: ``,
 //   link: '',
 // },
-  
-//     // obj3:{
-  
-//     //   title:``,
-//     //   content:``,
-//     //   before:``,
-//     //   after:``,
-//     //   link:'',
-  
-//     // },
 
 //     obj3: {
 //   title: `Arithmetic Properties (Field Axioms)`,
@@ -402,14 +482,15 @@
 //   after: ``,
 //   link: '',
 // },
-//     obj9:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
+
+//     obj9: {
+//       title: `Summary: Operation Effects on Conjugate, Modulus, and Argument`,
+//       content: `The conjugate, modulus, and argument each interact predictably with the same arithmetic operations. The table below collects how each of the three invariants behaves under sum, difference, product, quotient, power, and conjugation — exposing the parallel structure that the preceding sections established one at a time.`,
+//       before: ``,
+//       after: ``,
+//       link: '',
 //     },
+
 //     obj10:{
 //       title:``,
 //       content:``,
@@ -467,597 +548,8 @@
 //   }
 
 
-//   const introContent = {
-//   id: "intro",
-//   title: "The Rules Governing Complex Arithmetic",
-//   content: `Complex numbers obey specific rules that determine how they interact under arithmetic operations. Some of these properties arise from the algebraic structure shared with real numbers, while others are unique to the complex number system. Understanding these properties provides the foundation for manipulating complex expressions, simplifying calculations, and recognizing what complex numbers can and cannot do.`
-// }
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is a field in mathematics?",
-//     answer: "A field is a set equipped with two operations (addition and multiplication) that satisfy specific axioms: closure, commutativity, associativity, identity elements, inverse elements, and distributivity. Fields guarantee predictable arithmetic where you can add, subtract, multiply, and divide (except by zero)."
-//   },
-//   obj2: {
-//     question: "Are complex numbers a field?",
-//     answer: "Yes, the complex numbers ℂ form a field. They satisfy all eleven field axioms, which means algebraic techniques developed for real numbers work identically for complex numbers — factoring, expanding, simplifying, and solving equations all transfer seamlessly."
-//   },
-//   obj3: {
-//     question: "What is the multiplicative inverse of a complex number?",
-//     answer: "For a nonzero complex number z, the multiplicative inverse is z⁻¹ = z̄/|z|², where z̄ is the conjugate and |z| is the modulus. This formula uses the property that z · z̄ = |z|² to eliminate the imaginary part from the denominator."
-//   },
-//   obj4: {
-//     question: "What are the conjugate properties of complex numbers?",
-//     answer: "Key conjugate properties include: the conjugate of a conjugate returns the original (double conjugate), conjugate distributes over addition and multiplication, z · z̄ = |z|², and z + z̄ = 2Re(z). The conjugate of a quotient equals the quotient of conjugates."
-//   },
-//   obj5: {
-//     question: "What is the product of a complex number and its conjugate?",
-//     answer: "A complex number multiplied by its conjugate always yields the square of its modulus: z · z̄ = |z|² = a² + b² for z = a + bi. This result is always a non-negative real number and is essential for complex division."
-//   },
-//   obj6: {
-//     question: "What is the modulus of a product of complex numbers?",
-//     answer: "The modulus of a product equals the product of the moduli: |z₁ · z₂| = |z₁| · |z₂|. Similarly, the modulus of a quotient equals the quotient of moduli, and the modulus of a power equals the modulus raised to that power."
-//   },
-//   obj7: {
-//     question: "What is the triangle inequality for complex numbers?",
-//     answer: "The triangle inequality states |z₁ + z₂| ≤ |z₁| + |z₂|. Geometrically, the distance from the origin to z₁ + z₂ never exceeds the sum of the individual distances. This is equivalent to saying one side of a triangle cannot exceed the sum of the other two."
-//   },
-//   obj8: {
-//     question: "What is the reverse triangle inequality?",
-//     answer: "The reverse triangle inequality states ||z₁| - |z₂|| ≤ |z₁ - z₂|. The absolute difference of moduli never exceeds the modulus of the difference. This provides a lower bound complementing the upper bound from the standard triangle inequality."
-//   },
-//   obj9: {
-//     question: "How does the argument behave under multiplication?",
-//     answer: "The argument of a product equals the sum of arguments: arg(z₁ · z₂) = arg(z₁) + arg(z₂). Geometrically, multiplying complex numbers adds their angles. Similarly, division subtracts arguments, and raising to a power multiplies the argument by the exponent."
-//   },
-//   obj10: {
-//     question: "What is algebraic closure?",
-//     answer: "A field is algebraically closed if every non-constant polynomial with coefficients in that field has at least one root in that field. The complex numbers are algebraically closed, meaning every polynomial equation has solutions in ℂ. The real numbers are not algebraically closed."
-//   },
-//   obj11: {
-//     question: "What is the Fundamental Theorem of Algebra?",
-//     answer: "The Fundamental Theorem of Algebra states that every polynomial of degree n ≥ 1 with complex coefficients has exactly n roots in ℂ, counting multiplicity. This guarantees polynomial equations always have solutions without needing number systems beyond the complex numbers."
-//   },
-//   obj12: {
-//     question: "Why can't complex numbers be ordered?",
-//     answer: "Complex numbers cannot be ordered because no consistent definition of 'less than' exists. If i > 0, then i² > 0, meaning -1 > 0 — a contradiction. If i < 0, then -i > 0, so (-i)² > 0, again giving -1 > 0. Neither case works, so no ordering is possible."
-//   },
-//   obj13: {
-//     question: "Can you compare complex numbers at all?",
-//     answer: "While z₁ < z₂ is meaningless for complex numbers, you can compare their moduli. The statement |z₁| < |z₂| is well-defined because moduli are real numbers. We compare sizes (distances from origin), not positions."
-//   }
-// }
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Properties of Complex Numbers",
-//     "description": "Learn properties of complex numbers: field axioms, conjugate properties, modulus and argument rules, triangle inequality, algebraic closure, and why complex numbers cannot be ordered.",
-//     "url": "https://www.learnmathclass.com/complex-numbers/properties",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Properties of Complex Numbers"
-//     },
-//     "teaches": [
-//       "Complex numbers as a mathematical field",
-//       "The eleven field axioms and their verification",
-//       "Properties of the complex conjugate",
-//       "Properties of the modulus including triangle inequality",
-//       "Properties of the argument under arithmetic operations",
-//       "Algebraic closure and the Fundamental Theorem of Algebra",
-//       "Why complex numbers cannot be ordered"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Complex Numbers",
-//         "item": "https://www.learnmathclass.com/complex-numbers"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Properties",
-//         "item": "https://www.learnmathclass.com/complex-numbers/properties"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-
- 
-
-//   return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Properties of Complex Numbers: Field Axioms | Learn Math Class",
-//       description: "Learn properties of complex numbers: field axioms, conjugate properties, modulus and argument rules, triangle inequality, algebraic closure, and why complex numbers cannot be ordered.",
-//       keywords: keyWords.join(", "),
-//       url: "/complex-numbers/properties",
-//       name: "Properties of Complex Numbers"
-//     },
-//   }
-// }
-//    }
-
-
-// export default function PropertiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-
-//   const genericSections=[
-//      {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//           sectionsContent.obj0.after,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Compex Numbers Properties</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//    showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "siblings"
-//          secondaryNavTitle="More in Complex Numbers"
-   
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//     <KeyTermsCard
-//            id="0"
-//            title={sectionsContent.obj0.title}
-//            content={sectionsContent.obj0.content}
-//            after={sectionsContent.obj0.after}
-//            variant="light"
-//          />
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages/pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-
-  const keyWords = [
-  "complex number properties",
-  "field axioms complex numbers",
-  "complex numbers field",
-  "complex conjugate properties",
-  "modulus properties",
-  "argument properties",
-  "triangle inequality complex numbers",
-  "algebraic closure",
-  "fundamental theorem of algebra",
-  "ordered field",
-  "commutative property complex numbers",
-  "associative property complex numbers",
-  "distributive property",
-  "multiplicative inverse complex number",
-  "reverse triangle inequality"
-]
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-
-  // ---------- TABLES ----------
-
-  // obj3 — aggregation: the 11 field axioms organized by + / · parallel
-  const obj3Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Axiom group</th>
-      <th style="${tableHeaders.aggregation}">Additive form (+)</th>
-      <th style="${tableHeaders.aggregation}">Multiplicative form (·)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Closure</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁ + z₂ ∈ ℂ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁ · z₂ ∈ ℂ</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Commutativity</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁ + z₂ = z₂ + z₁</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁ · z₂ = z₂ · z₁</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Associativity</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(z₁ + z₂) + z₃ = z₁ + (z₂ + z₃)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(z₁ · z₂) · z₃ = z₁ · (z₂ · z₃)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Identity</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z + 0 = z (additive identity 0)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z · 1 = z (multiplicative identity 1)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inverse</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−z exists; z + (−z) = 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z⁻¹ exists for z ≠ 0; z · z⁻¹ = 1<br/><span style="font-size: 13px;">(formula: z⁻¹ = z̄ / |z|²)</span></td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Distributivity</td>
-      <td colspan="2" style="padding: 12px 15px; color: #34495e; text-align: center;">z₁ · (z₂ + z₃) = z₁ · z₂ + z₁ · z₃ &nbsp;&nbsp; <span style="font-size: 13px;">(multiplication distributes over addition)</span></td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj7 — comparison: algebraic closure, ℝ vs ℂ
-  const obj7Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Question</th>
-      <th style="${tableHeaders.comparison} text-align: center;">ℝ (real numbers)</th>
-      <th style="${tableHeaders.comparison} text-align: center;">ℂ (complex numbers)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Algebraically closed?</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold;">✗ No</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold;">✓ Yes</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Every non-constant polynomial has a root in the field?</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Not always — e.g., x² + 1 = 0 has no real root</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Always — guaranteed by the Fundamental Theorem of Algebra</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Degree-n polynomial factors completely into n linear factors?</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Not always (some factors remain irreducible quadratics)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Always: p(z) = aₙ(z − r₁)(z − r₂)⋯(z − rₙ)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Number of roots of a degree-n polynomial</td>
-      <td style="padding: 12px 15px; color: #34495e;">0 to n</td>
-      <td style="padding: 12px 15px; color: #34495e;">exactly n (counting multiplicity)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj9 — summary capstone: operation × (conjugate, modulus, argument)
-  const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Operation</th>
-      <th style="${tableHeaders.summary}">Conjugate behaves as…</th>
-      <th style="${tableHeaders.summary}">Modulus behaves as…</th>
-      <th style="${tableHeaders.summary}">Argument behaves as…</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sum&nbsp;&nbsp; z₁ + z₂</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z̄₁ + z̄₂</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z₁ + z₂| ≤ |z₁| + |z₂|<br/><span style="font-size: 13px;">(triangle inequality)</span></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no simple rule</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Difference&nbsp;&nbsp; z₁ − z₂</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z̄₁ − z̄₂</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z₁ − z₂| ≥ &#124;&thinsp;|z₁| − |z₂|&thinsp;&#124;<br/><span style="font-size: 13px;">(reverse triangle inequality)</span></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no simple rule</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Product&nbsp;&nbsp; z₁ · z₂</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z̄₁ · z̄₂</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z₁| · |z₂|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">arg(z₁) + arg(z₂)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quotient&nbsp;&nbsp; z₁ / z₂</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z̄₁ / z̄₂</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z₁| / |z₂|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">arg(z₁) − arg(z₂)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Power&nbsp;&nbsp; zⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(z̄)ⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z|ⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n · arg(z)<br/><span style="font-size: 13px;">(De Moivre)</span></td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Conjugation&nbsp;&nbsp; z̄</td>
-      <td style="padding: 12px 15px; color: #34495e;">z (double conjugate)</td>
-      <td style="padding: 12px 15px; color: #34495e;">|z| (unchanged)</td>
-      <td style="padding: 12px 15px; color: #34495e;">−arg(z)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // ---------- SECTIONS (original prose unchanged; obj9 added) ----------
-
-    const sectionsContent={
+// formulas-optimized: v1 | 2026-06-11 | 5 callouts (obj6 ×5)
+const sectionsContent={
 
     obj0: {
   title: `Key Terms`,
@@ -1273,31 +765,56 @@ The difference of moduli never exceeds the modulus of the difference.`,
 
 ## Argument of a Product
 
+@academic[formula_callout:Argument of a Product
 $$\\arg(z_1 \\cdot z_2) = \\arg(z_1) + \\arg(z_2)$$
+/complex-numbers/formulas#argument_of_a_product]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 Multiplying complex numbers adds their arguments. Geometrically, multiplication rotates by the sum of the angles.
 
 ## Argument of a Quotient
 
-$$\\arg\\left(\\frac{z_1}{z_2}\\right) = \\arg(z_1) - \\arg(z_2)$$
+@academic[formula_callout:Argument of a Quotient
+$$\\arg\\!\\left(\\frac{z_1}{z_2}\\right) = \\arg(z_1) - \\arg(z_2)$$
+/complex-numbers/formulas#argument_of_a_quotient]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 Dividing complex numbers subtracts arguments.
 
 ## Argument of a Power
 
+@academic[formula_callout:Argument of a Power
 $$\\arg(z^n) = n \\cdot \\arg(z)$$
+/complex-numbers/formulas#argument_of_a_power]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 Raising to the $n$th power multiplies the argument by $n$. This property underlies [De Moivre's theorem](!/complex-numbers/demoivre-theorem).
 
 ## Argument of a Conjugate
 
+@academic[formula_callout:Argument of Conjugate
 $$\\arg(\\overline{z}) = -\\arg(z)$$
+/complex-numbers/formulas#argument_of_conjugate]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 Conjugation reflects across the real axis, negating the angle.
 
 ## Argument of a Negative
 
+@academic[formula_callout:Argument of Negative
 $$\\arg(-z) = \\arg(z) + \\pi$$
+/complex-numbers/formulas#argument_of_negative]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 Negation rotates by $180°$.
 
@@ -1436,6 +953,7 @@ Although $z_1 < z_2$ is meaningless for complex numbers, we can compare their [m
     }
   
   }
+
 
 
   const introContent = {

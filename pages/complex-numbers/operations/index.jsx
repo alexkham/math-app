@@ -1,74 +1,196 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages/pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages/pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
+export async function getStaticProps(){
 
-//  const keyWords = [
-//   "complex number operations",
-//   "add complex numbers",
-//   "subtract complex numbers",
-//   "multiply complex numbers",
-//   "divide complex numbers",
-//   "complex number addition",
-//   "complex number multiplication",
-//   "complex number division",
-//   "FOIL method complex numbers",
-//   "complex conjugate division",
-//   "multiplicative inverse complex number",
-//   "i squared equals negative one",
-//   "complex arithmetic",
-//   "complex number calculator",
-//   "how to divide complex numbers"
-// ]
+ const keyWords = [
+  "complex number operations",
+  "add complex numbers",
+  "subtract complex numbers",
+  "multiply complex numbers",
+  "divide complex numbers",
+  "complex number addition",
+  "complex number multiplication",
+  "complex number division",
+  "FOIL method complex numbers",
+  "complex conjugate division",
+  "multiplicative inverse complex number",
+  "i squared equals negative one",
+  "complex arithmetic",
+  "complex number calculator",
+  "how to divide complex numbers"
+]
 
-//   // •
+  const linkStyle = 'color: inherit; text-decoration: underline;'
 
-// //   \u2022 First item
-// // \u2022 Second item
+  // ---------- TABLES ----------
 
-  
-// // <hr style="border-width:1px;"></hr>
+  // obj3 — process: multiplication step-by-step
+  const obj3Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation} text-align: center;">Step</th>
+      <th style="${tableHeaders.aggregation}">Action</th>
+      <th style="${tableHeaders.aggregation}">Worked example: (2 + 3i)(4 − i)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Expand using distributivity (FOIL)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">8 − 2i + 12i − 3i²</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Substitute i² = −1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">8 − 2i + 12i + 3</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">3</td>
+      <td style="padding: 12px 15px; color: #34495e;">Combine real and imaginary terms</td>
+      <td style="padding: 12px 15px; color: #34495e;">11 + 10i</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="color:blue;" />
+  // obj4 — process: division step-by-step
+  const obj4Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation} text-align: center;">Step</th>
+      <th style="${tableHeaders.aggregation}">Action</th>
+      <th style="${tableHeaders.aggregation}">Worked example: (3 + 2i) / (1 − 4i)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Identify the conjugate of the denominator</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 + 4i</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Multiply numerator and denominator by that conjugate</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(3 + 2i)(1 + 4i) / [(1 − 4i)(1 + 4i)]</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">3</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Simplify the denominator using z · z̄ = |z|²</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(3 + 2i)(1 + 4i) / 17</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">4</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Expand and simplify the numerator</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−5 + 14i) / 17</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">5</td>
+      <td style="padding: 12px 15px; color: #34495e;">Write in standard form a + bi</td>
+      <td style="padding: 12px 15px; color: #34495e;">−5⁄17 + (14⁄17)i</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+  // obj7 — aggregation: common pitfalls (pitfall × wrong × correct × why)
+  const obj7Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Pitfall</th>
+      <th style="${tableHeaders.aggregation}">Wrong</th>
+      <th style="${tableHeaders.aggregation}">Correct</th>
+      <th style="${tableHeaders.aggregation}">Why</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Forgetting i² = −1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(2i)(3i) = 6i² = 6</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(2i)(3i) = 6i² = −6</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every i² must be replaced with −1</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sign error in subtraction</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(5 + 3i) − (2 − 4i) = 3 − i</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(5 + 3i) − (2 − 4i) = 3 + 7i</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">distribute the minus across both real and imaginary parts</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Leaving a complex denominator</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(3 + 2i) ⁄ (1 + i) as final answer</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">multiply by conjugate → 5⁄2 − (1⁄2)i</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">standard form a + bi requires a real denominator</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Confusing conjugate with negative</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">conjugate of 3 + 2i is −3 − 2i</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">conjugate of 3 + 2i is 3 − 2i</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">conjugation flips the imaginary sign only; negation flips both</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Dividing by zero</td>
+      <td style="padding: 12px 15px; color: #34495e;">z ⁄ 0 treated as some value</td>
+      <td style="padding: 12px 15px; color: #34495e;">z ⁄ 0 is undefined</td>
+      <td style="padding: 12px 15px; color: #34495e;">0 has no multiplicative inverse in ℂ (or ℝ)</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+  // obj8 — summary capstone: four operations side by side
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Operation</th>
+      <th style="${tableHeaders.summary}">General formula</th>
+      <th style="${tableHeaders.summary}">Key technique</th>
+      <th style="${tableHeaders.summary}">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Addition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a + bi) + (c + di) = (a + c) + (b + d)i</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">combine like terms component-wise</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(3 + 2i) + (1 − 5i) = 4 − 3i</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Subtraction</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a + bi) − (c + di) = (a − c) + (b − d)i</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">distribute the minus, then combine</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(7 + 4i) − (2 + 6i) = 5 − 2i</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Multiplication</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a + bi)(c + di) = (ac − bd) + (ad + bc)i</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">FOIL, then apply i² = −1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(2 + 3i)(4 − i) = 11 + 10i</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Division</td>
+      <td style="padding: 12px 15px; color: #34495e;">(a + bi) ⁄ (c + di) = [(a + bi)(c − di)] ⁄ (c² + d²)</td>
+      <td style="padding: 12px 15px; color: #34495e;">multiply num and denom by conjugate of denom</td>
+      <td style="padding: 12px 15px; color: #34495e;">(3 + 2i) ⁄ (1 − 4i) = −5⁄17 + (14⁄17)i</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+  // ---------- SECTIONS (original prose unchanged; obj8 added) ----------
 
 //     const sectionsContent={
 // obj0: {
@@ -278,8 +400,8 @@
 //   link: '',
 // },
 //     obj8:{
-//       title:``,
-//       content:``,
+//       title:`Summary: The Four Operations Side by Side`,
+//       content:`The four operations on complex numbers share a common pattern — combine like terms for addition and subtraction, expand and apply $i^2 = -1$ for multiplication, and convert to real-denominator form via the [conjugate](!/complex-numbers/complex-conjugate) for division. The table below collects each operation's general formula, the key technique that makes it work, and a worked example side by side for quick reference.`,
 //       before:``,
 //       after:``,
 //       link:'',
@@ -350,619 +472,9 @@
 //   }
 
 
-//   const introContent = {
-//   id: "intro",
-//   title: "Computing with Two-Part Numbers",
-//   content: `Complex numbers combine real and imaginary components, and arithmetic must handle both parts systematically. Addition and subtraction operate component-wise, just like vector arithmetic. Multiplication requires the distributive property and the fundamental identity $i^2 = -1$. Division introduces the [conjugate](!/complex-numbers/complex-conjugate) as an essential tool for eliminating imaginary denominators. These four operations extend real arithmetic into the complex plane while preserving the algebraic structure that makes calculation predictable.`
-// }
 
-// const faqQuestions = {
-//   obj1: {
-//     question: "How do you add complex numbers?",
-//     answer: "To add complex numbers, combine like terms: add the real parts together and add the imaginary parts together. For z₁ = a + bi and z₂ = c + di, the sum is (a + c) + (b + d)i. The real and imaginary components are handled independently."
-//   },
-//   obj2: {
-//     question: "How do you subtract complex numbers?",
-//     answer: "To subtract complex numbers, subtract the real parts and subtract the imaginary parts separately. For z₁ = a + bi and z₂ = c + di, the difference is (a - c) + (b - d)i. Be careful to distribute the negative sign to both parts of the subtracted number."
-//   },
-//   obj3: {
-//     question: "How do you multiply complex numbers?",
-//     answer: "Multiply complex numbers using the FOIL method (distributive property), then use i² = -1 to simplify. For (a + bi)(c + di), expand to get ac + adi + bci + bdi², then substitute i² = -1 to get (ac - bd) + (ad + bc)i."
-//   },
-//   obj4: {
-//     question: "How do you divide complex numbers?",
-//     answer: "To divide complex numbers, multiply both numerator and denominator by the conjugate of the denominator. This converts the denominator to a real number since z · z̄ = |z|². Then divide each part of the numerator by this real number to get standard a + bi form."
-//   },
-//   obj5: {
-//     question: "Why do we multiply by the conjugate when dividing complex numbers?",
-//     answer: "Multiplying by the conjugate eliminates the imaginary part from the denominator. When you multiply (c + di) by its conjugate (c - di), you get c² + d², which is always a real number. This allows the result to be written in standard algebraic form."
-//   },
-//   obj6: {
-//     question: "What is i² equal to?",
-//     answer: "i² = -1 by definition. This is the fundamental property of the imaginary unit i. In any complex number calculation, whenever i² appears, it must be replaced with -1. This is the most common source of errors in complex multiplication."
-//   },
-//   obj7: {
-//     question: "What is the multiplicative inverse of a complex number?",
-//     answer: "The multiplicative inverse of z = a + bi is z⁻¹ = z̄/|z|² = (a - bi)/(a² + b²). This is the number that when multiplied by z gives 1. Every nonzero complex number has a multiplicative inverse; only zero has no inverse."
-//   },
-//   obj8: {
-//     question: "What is the geometric meaning of complex addition?",
-//     answer: "Complex addition corresponds to vector addition on the complex plane. Place two complex numbers as arrows from the origin, then position the second arrow's tail at the first arrow's head. The sum extends from the origin to the final head — the parallelogram or tip-to-tail rule."
-//   },
-//   obj9: {
-//     question: "What does multiplying by i do geometrically?",
-//     answer: "Multiplying a complex number by i rotates it 90° counterclockwise in the complex plane. For example, i(2 + 5i) = 2i + 5i² = -5 + 2i. The original point (2, 5) rotates to (-5, 2), a quarter turn around the origin."
-//   },
-//   obj10: {
-//     question: "What are common mistakes when working with complex numbers?",
-//     answer: "Common mistakes include: forgetting that i² = -1 in multiplication, not distributing the negative sign in subtraction, leaving complex numbers in the denominator, and confusing conjugate (flip imaginary sign only) with negative (flip both signs)."
-//   },
-//   obj11: {
-//     question: "Is complex number multiplication commutative?",
-//     answer: "Yes, complex multiplication is commutative: z₁ · z₂ = z₂ · z₁. It is also associative: (z₁ · z₂) · z₃ = z₁ · (z₂ · z₃). These properties, along with distributivity, make complex numbers a mathematical field."
-//   },
-//   obj12: {
-//     question: "What is |z₁ - z₂| in the complex plane?",
-//     answer: "The modulus |z₁ - z₂| represents the distance between points z₁ and z₂ in the complex plane. Subtraction z₁ - z₂ gives the vector from z₂ to z₁, and its modulus measures how far apart these two complex numbers are."
-//   }
-// }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Operations on Complex Numbers",
-//     "description": "Learn how to add, subtract, multiply, and divide complex numbers. Step-by-step examples, the conjugate method for division, multiplicative inverse, and common pitfalls to avoid.",
-//     "url": "https://www.learnmathclass.com/complex-numbers/operations",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Complex Number Arithmetic"
-//     },
-//     "teaches": [
-//       "Adding complex numbers by combining like terms",
-//       "Subtracting complex numbers with proper sign distribution",
-//       "Multiplying complex numbers using FOIL and i² = -1",
-//       "Dividing complex numbers using the conjugate",
-//       "Finding the multiplicative inverse of a complex number",
-//       "Geometric interpretation of complex operations",
-//       "Common pitfalls and how to avoid them"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Complex Numbers",
-//         "item": "https://www.learnmathclass.com/complex-numbers"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Operations",
-//         "item": "https://www.learnmathclass.com/complex-numbers/operations"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-
-
-
-//   return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Operations on Complex Numbers: Add, Multiply, Divide | Learn Math Class",
-//       description: "Learn how to add, subtract, multiply, and divide complex numbers. Step-by-step examples, the conjugate method for division, multiplicative inverse, and common pitfalls to avoid.",
-//       keywords: keyWords.join(", "),
-//       url: "/complex-numbers/operations",
-//       name: "Operations on Complex Numbers"
-//     },
-//   }
-// }
-//    }
-
-
-
-// export default function OperationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-
-//   const genericSections=[
-//      {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//           sectionsContent.obj0.after,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     // {
-//     //     id:'8',
-//     //     title:sectionsContent.obj8.title,
-//     //     link:sectionsContent.obj8.link,
-//     //     content:[
-//     //       sectionsContent.obj8.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-  
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Operations on Complex Numbers</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//    showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "siblings"
-//          secondaryNavTitle="More in Complex Numbers"
-   
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//     <KeyTermsCard
-//            id="0"
-//            title={sectionsContent.obj0.title}
-//            content={sectionsContent.obj0.content}
-//            after={sectionsContent.obj0.after}
-//            variant="light"
-//          />
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages/pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-
- const keyWords = [
-  "complex number operations",
-  "add complex numbers",
-  "subtract complex numbers",
-  "multiply complex numbers",
-  "divide complex numbers",
-  "complex number addition",
-  "complex number multiplication",
-  "complex number division",
-  "FOIL method complex numbers",
-  "complex conjugate division",
-  "multiplicative inverse complex number",
-  "i squared equals negative one",
-  "complex arithmetic",
-  "complex number calculator",
-  "how to divide complex numbers"
-]
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-
-  // ---------- TABLES ----------
-
-  // obj3 — process: multiplication step-by-step
-  const obj3Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation} text-align: center;">Step</th>
-      <th style="${tableHeaders.aggregation}">Action</th>
-      <th style="${tableHeaders.aggregation}">Worked example: (2 + 3i)(4 − i)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Expand using distributivity (FOIL)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">8 − 2i + 12i − 3i²</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Substitute i² = −1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">8 − 2i + 12i + 3</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">3</td>
-      <td style="padding: 12px 15px; color: #34495e;">Combine real and imaginary terms</td>
-      <td style="padding: 12px 15px; color: #34495e;">11 + 10i</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj4 — process: division step-by-step
-  const obj4Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation} text-align: center;">Step</th>
-      <th style="${tableHeaders.aggregation}">Action</th>
-      <th style="${tableHeaders.aggregation}">Worked example: (3 + 2i) / (1 − 4i)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Identify the conjugate of the denominator</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 + 4i</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Multiply numerator and denominator by that conjugate</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(3 + 2i)(1 + 4i) / [(1 − 4i)(1 + 4i)]</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">3</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Simplify the denominator using z · z̄ = |z|²</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(3 + 2i)(1 + 4i) / 17</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">4</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Expand and simplify the numerator</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−5 + 14i) / 17</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">5</td>
-      <td style="padding: 12px 15px; color: #34495e;">Write in standard form a + bi</td>
-      <td style="padding: 12px 15px; color: #34495e;">−5⁄17 + (14⁄17)i</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj7 — aggregation: common pitfalls (pitfall × wrong × correct × why)
-  const obj7Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Pitfall</th>
-      <th style="${tableHeaders.aggregation}">Wrong</th>
-      <th style="${tableHeaders.aggregation}">Correct</th>
-      <th style="${tableHeaders.aggregation}">Why</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Forgetting i² = −1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(2i)(3i) = 6i² = 6</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(2i)(3i) = 6i² = −6</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every i² must be replaced with −1</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sign error in subtraction</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(5 + 3i) − (2 − 4i) = 3 − i</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(5 + 3i) − (2 − 4i) = 3 + 7i</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">distribute the minus across both real and imaginary parts</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Leaving a complex denominator</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(3 + 2i) ⁄ (1 + i) as final answer</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">multiply by conjugate → 5⁄2 − (1⁄2)i</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">standard form a + bi requires a real denominator</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Confusing conjugate with negative</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">conjugate of 3 + 2i is −3 − 2i</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">conjugate of 3 + 2i is 3 − 2i</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">conjugation flips the imaginary sign only; negation flips both</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Dividing by zero</td>
-      <td style="padding: 12px 15px; color: #34495e;">z ⁄ 0 treated as some value</td>
-      <td style="padding: 12px 15px; color: #34495e;">z ⁄ 0 is undefined</td>
-      <td style="padding: 12px 15px; color: #34495e;">0 has no multiplicative inverse in ℂ (or ℝ)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj8 — summary capstone: four operations side by side
-  const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Operation</th>
-      <th style="${tableHeaders.summary}">General formula</th>
-      <th style="${tableHeaders.summary}">Key technique</th>
-      <th style="${tableHeaders.summary}">Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Addition</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a + bi) + (c + di) = (a + c) + (b + d)i</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">combine like terms component-wise</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(3 + 2i) + (1 − 5i) = 4 − 3i</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Subtraction</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a + bi) − (c + di) = (a − c) + (b − d)i</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">distribute the minus, then combine</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(7 + 4i) − (2 + 6i) = 5 − 2i</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Multiplication</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a + bi)(c + di) = (ac − bd) + (ad + bc)i</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">FOIL, then apply i² = −1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(2 + 3i)(4 − i) = 11 + 10i</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Division</td>
-      <td style="padding: 12px 15px; color: #34495e;">(a + bi) ⁄ (c + di) = [(a + bi)(c − di)] ⁄ (c² + d²)</td>
-      <td style="padding: 12px 15px; color: #34495e;">multiply num and denom by conjugate of denom</td>
-      <td style="padding: 12px 15px; color: #34495e;">(3 + 2i) ⁄ (1 − 4i) = −5⁄17 + (14⁄17)i</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // ---------- SECTIONS (original prose unchanged; obj8 added) ----------
-
-    const sectionsContent={
+// formulas-optimized: v1 | 2026-06-11 | 4 callouts (obj1, obj2, obj3, obj4)
+const sectionsContent={
 obj0: {
   title: `Key Terms`,
   content: `
@@ -983,7 +495,12 @@ obj0: {
 
 The formula states the rule precisely. For $z_1 = a + bi$ and $z_2 = c + di$:
 
+@academic[formula_callout:Addition
 $$(a + bi) + (c + di) = (a + c) + (b + d)i$$
+/complex-numbers/formulas#addition]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 The operation treats the real and imaginary components independently. No interaction occurs between them during addition — the real sum $a + c$ ignores the imaginary values, and the imaginary sum $b + d$ ignores the real values.
 
@@ -1008,7 +525,12 @@ Addition is both commutative ($z_1 + z_2 = z_2 + z_1$) and associative ($(z_1 + 
 
 The formula: for $z_1 = a + bi$ and $z_2 = c + di$:
 
+@academic[formula_callout:Subtraction
 $$(a + bi) - (c + di) = (a - c) + (b - d)i$$
+/complex-numbers/formulas#subtraction]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 Each component undergoes its own subtraction independently.
 
@@ -1042,7 +564,12 @@ $$(a + bi)(c + di) = ac + adi + bci + bdi^2$$
 
 The term $bdi^2$ contains $i^2 = -1$, so $bdi^2 = -bd$. Collecting real and imaginary parts:
 
+@academic[formula_callout:Multiplication
 $$(a + bi)(c + di) = (ac - bd) + (ad + bc)i$$
+/complex-numbers/formulas#multiplication]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 The real part of the product is $ac - bd$. The imaginary part is $ad + bc$. Both involve contributions from all four original values.
 
@@ -1067,7 +594,12 @@ Multiplying by a pure real number scales both components proportionally. The pro
 
 The technique: multiply both numerator and denominator by the conjugate of the denominator. For $z_1 = a + bi$ and $z_2 = c + di$ with $z_2 \\neq 0$:
 
-$$\\frac{a + bi}{c + di} = \\frac{(a + bi)(c - di)}{(c + di)(c - di)} = \\frac{(a + bi)(c - di)}{c^2 + d^2}$$
+@academic[formula_callout:Division
+$$\\frac{a + bi}{c + di} = \\frac{(ac + bd) + (bc - ad)i}{c^2 + d^2}$$
+/complex-numbers/formulas#division]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 The denominator becomes $c^2 + d^2$, a real number, because $z \\cdot \\bar{z} = |z|^2$ for any complex $z$. The numerator requires standard complex multiplication. Once the denominator is real, divide each component of the numerator by it.
 
@@ -1240,7 +772,6 @@ Geometrically, $z^{-1}$ lies on the same ray from the origin as $\\bar{z}$, but 
     }
   
   }
-
 
   const introContent = {
   id: "intro",

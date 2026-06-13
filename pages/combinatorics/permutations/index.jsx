@@ -352,7 +352,314 @@ const circularTable=`
 </html>
 `
     
-  const sectionsContent={
+//   const sectionsContent={
+
+//     full:{
+//       title:`Permutation (Full)`,
+//       content:``,
+//       before:`**Full Permutation** applies when you arrange all distinct items in a specific order with no repetitions allowed. 
+      
+//       `,
+//       after:`
+//       The intuition and logic we use for this kind of permutation has been explained pretty well in previous [section](!/combinatorics/permutations#logic) and it works basically for all [types](!/combinatorics/permutations#types) of permutations.
+//       Just in case of full permutations (unlike in other [types](!/combinatorics/permutations#types)) no further modifications needed and the calculation is simple. 
+//       \n**Notation**:
+// In combinatorics, we use specific notation to represent different types of permutations. 
+// For arranging $r$ objects selected from $n$ distinct objects, the standard notation is $P(n,r)$ or $_nP_r$.
+// When applied to full permutations, apparently $r=n$ (because we use all the items ), and the notation turns into :
+
+// \t\t\t\t\t\t$P(n,n)$\n\n\t\t\t\t\t\tor $_nP_n$\n\n\t\t\t\t\t\t or simply $P(n)$.
+
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
+
+// **Formula**:
+//       The number of possible results is calculated by the formula :      
+// @academic[example:&nbsp \t\t\t\t\t\t$P(n)=n!$]@
+//  Product of all integers from $n$ down to $1$.
+//        Where $n$ is the number of items to arrange. 
+
+//        @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=1) →@
+
+//       `,
+//       between:`
+//      **Full Permutation — Examples**:
+// Arranging all books on a shelf, deciding the lineup of all players in a team, organizing all photos in an album, setting the order of speakers in a presentation, ordering all tasks in a workflow, ranking all competitors in a contest, scheduling all meetings in a day, sorting all files in a folder.
+
+// `,
+// formula:`@academic[example:&nbsp \t\t\t\t\t\t$P(n)=n!$]@`
+  
+  
+//     },
+//     identical:{
+//       title:`Permutation with Identical Items`,
+//       content:``,
+//       before:`**Permutation with Identical Items** applies when arranging all items where some identical elements appear multiple times in your collection. Classic examples include arranging all letters in words like "MISSISSIPPI" or organizing all colored balls when you have multiple balls of the same color.
+      
+//       `,
+//       after:`
+//       **Notation:**
+      
+// \t\t\t\t\t\t $\\binom{n}{n_1, n_2, \\ldots, n_k}$\n\n\t\t\t\t or $P(n; n_1, n_2, n_3, \\ldots, n_k)$\n\n\t\t\t\t or $P_n^{n_1, n_2, n_3, \\ldots, n_k}$
+
+//       @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
+
+//       **Formula**:
+
+//        To calculate the number of possible arrangements 
+//       @academic[example:&nbsp\t\t\t\t\t\t$\\binom{n}{n_{1},n_{2},\\dots,n_{k}} = \\frac{n!}{n_{1}!n_{2}!\\dots n_{k}!}$]@ 
+//       Where multinomial coefficient: counts distinct arrangements of $n$ items split into groups of sizes $n_{1},n_{2},\\dots,n_{k}$.
+      
+//        @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=2) →@
+      
+      
+      
+//        `,
+//       between:`
+//       **Permutation with Identical Items — Examples**:
+// Rearranging letters in the word “BALLOON,” organizing colored balls where some colors repeat, sequencing identical files and unique ones in storage, arranging identical chairs and distinct tables in a layout, ordering repeated ingredients in a recipe list.`,
+  
+//     },
+  
+//    without:{
+  
+//       title:`Partial Permutation without Repetition`,
+//       content:``,
+//       before:`**Partial Permutation without Repetition** applies when selecting and arranging only some items from a larger collection, with all items being distinct. Classic examples include choosing and ordering contestants from a group or selecting and arranging books from a library shelf.
+      
+//       `,
+//       after:`
+//       **Notation**:
+
+// Most common:
+// \n\t\t\t\t\t\t$P(n,r)$
+
+//  Alternative notations:
+// \n\t\t\t\t\t\t$ {}^nP_r$
+
+// \t\t\t\t\t\t$A_n^r$
+
+// \t\t\t\t\t\t$\\text{nPr}$
+
+//  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
+     
+//  **Formula**:      
+//       The number of arrangements for Partial Permutation without Repetition is 
+//        @academic[example:&nbsp\t\t\t\t\t\t$P(n,r) = \\frac{n!}{(n-r)!}$]@ 
+//       Where $n!$ counts all arrangements, dividing by $(n-r)!$ removes the unused positions.
+      
+//        @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=3) →@
+      
+//       `,
+//       between:`
+//       **Partial Permutation (without repetition) — Examples**:
+// Selecting and ordering finalists from a group of contestants, arranging a subset of books on a display, picking and sequencing players for a relay team, choosing and ordering questions for an interview, organizing a limited set of tasks for a project phase.
+//       `,
+  
+//     },
+//     circular:{
+//       title:`Circular Permutation`,
+//       content:``,
+//       before:`**Circular Permutation** applies when arranging items around a circle where rotations are considered identical arrangements. Classic examples include seating people around a round table or arranging objects in a circular pattern.
+      
+//       `,
+//       after:`
+//       **Notation**:
+// Circular permutation
+// \n\t\t\t\t\t\t$P_{\\text{circ}}(n)$
+
+// Alternative notations
+// \n\t\t\t\t\t\t$C_n$
+// \n\t\t\t\t\t\t$P_{\\text{cyclic}}(n)$
+// \n\t\t\t\t\t\t$\\frac{n!}{n}$
+
+//        @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
+      
+//       **Formula**:
+
+//       The total number of possible circular arrangements is
+//       @academic[example:&nbsp\t\t\t\t\t\t$P_{\\text{circ}}(n) = (n-1)!$]@ 
+//       If $n$ is a total number of items to arrange then fixing one item reduces circular arrangements to $(n-1)!$ linear ones.
+      
+//        @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=5) →@
+    
+       
+//       `,
+//       between:`
+//       **Circular Permutation — Examples**:
+// Arranging guests around a round table, seating participants in a circular panel, ordering beads in a circular necklace, organizing tasks in a repeating cycle, setting positions for players in a circular game arrangement.`,
+  
+//     },
+
+
+//     with:{
+  
+//       title:`Permutation with Repetition`,
+//       content:``,
+//       before:`**Permutation with Repetition** applies when arranging items where you can reuse the same element multiple times during the arrangement process. Classic examples include creating PIN codes where digits can repeat, or forming passwords where letters can be used multiple times.
+      
+//       `,
+//       after:`
+//       **Notation**:
+
+// Permutation with repetition (positions)
+
+// \t\t\t\t\t\t$P_{\\text{rep}}(n,r)$
+
+// Alternative notations:
+// \n\t\t\t\t\t\t$\\overline{P}(n,r)$
+// \n\t\t\t\t\t\t$P^{(r)}(n)$
+// \n\t\t\t\t\t\t$ {}^nP^{(r)}_r$
+
+//  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
+
+// **Formula**:
+//       Total number of permutations with repetitions possible and all items used is:
+//      @academic[example:&nbsp\t\t\t\t\t\t$P_{\\text{rep}}(n,r)=n^{r}$]@
+//      Where each of the $r$ positions can be filled in $n$ ways.
+
+
+//  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=4) →@
+
+
+// `,
+// between:`
+// **Permutation with Repetition — Examples**:
+// Generating PIN codes from digits, creating letter sequences for passwords, arranging beads in a bracelet where colors can repeat, composing license plate numbers, assigning seats with multiple people allowed in the same category.
+// `,
+  
+//     },
+//     types:{
+  
+//       title:`Types of Permutations`,
+//       content:``,
+//       before:`Although in all types of permutations the order of arrangement matters, the key differences between them arise from other considerations: Can items be repeated? Are some items identical? Is the arrangement linear or circular? The table below summarizes these distinctions, showing how different scenarios lead to different counting formulas.
+
+// `,
+//       after:`
+
+// By addressing these additional questions, we can classify permutations into several types, each with its own counting method. Understanding these distinctions helps in correctly applying the appropriate formula for a given arrangement problem.
+// `,
+  
+//     },
+//     logic:{
+  
+//       title:`The Logic behind permutations`,
+//       content:``,
+//       before:`In combinatorics, we distinguish between several [types](!/combinatorics/permutations#types) of permutations based on different criteria, but they all share one key property: in every type, the order of arrangement matters ( and that is exactly what makes the difference between [permutations and variations](!/combinatorics#permutations_vs_combinations)).
+// In all different scenarios, the mechanism for creating a permutation is similar, and it is important to understand it.
+// When creating an arrangement, we must make two decisions:
+// 1. Which item to pick?
+// 2. Where to place it in the arrangement?
+
+// Let us examine the simplest case. Imagine we need to arrange $n$ different items (all distinct) in a row, without repetition. We can break it down into steps:
+
+//  **Step 1:** Choose an item for the first position. There are $n$ options.
+//  **Step 2:** Choose an item for the second position. Now there are $n-1$ options.
+//  **Step 3:** Choose an item for the third position. Now there are $n-2$ options.
+//  … and so on, until
+//  **Step** $n$: Only one item remains, so there is just 1 option.
+
+// Each step reduces the number of choices (since repetition is not allowed). Because we must make all these choices in sequence, we apply the [multiplication principle](!/combinatorics#multi).
+
+// Thus, to calculate the total number of permutations, we multiply:
+
+// $n \\times (n-1) \\times (n-2) \\times \\dots \\times 1,$
+
+// which is the definition of a factorial.
+
+// For $n$ distinct objects, the number of permutations is:
+// @academic[example:&nbsp\t\t\t\t\t\t$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$]@
+// **To summarize:**
+
+// * We start with $n$ options.
+// * Each choice reduces the number of remaining options by one.
+// * We multiply the number of choices at each step.
+
+// This gives us $n!$ total permutations.
+
+// Here is an example of simple permutation: creating 3 letter string.
+
+// `,
+//       after:``,
+//       between:`You can see how the principle explained before is applied here.
+//       First, one of 3 letters is picked and for each scenario there are 2 different choices to select the second letter.Once the choice is made, only one letter left.     
+      
+//       The result is:
+//       @academic[example:&nbsp\t\t\t\t\t\t$3\\times 2 \\times 1 = 6 (n!)$]@
+//       Where $n$ is total number of items.
+
+//       `,
+  
+//     },
+//     // URL: /combinatorics/permutations
+// // New section — slot after #circular, anchor id: 'derangement'
+
+//   obj8: {
+//     title: `Derangement`,
+//     content: `
+// A derangement is a permutation with an added constraint: no element appears in its original position. The other five permutation types vary the question of which arrangements to count — all items or a subset, with or without repetition, linear or circular. The derangement varies the constraint on the arrangement itself: same items, same order-matters property, same linear shape, with the extra requirement that every item must have moved.
+
+// The classical motivation is the hat-check problem. $n$ guests check $n$ hats, and the attendant returns them in a random order. In how many of those orderings does no guest receive their own hat? Each such ordering is a derangement of the $n$ hats.
+
+// ## Notation
+
+// Two notations are in common use:
+
+// • $!n$ — the subfactorial, the modern standard. The exclamation precedes the operand, mirroring the factorial in reverse.
+// • $D_n$ — an alternative notation, common in older texts.
+
+// The two are interchangeable.
+
+// ## Formula
+
+// The explicit formula is
+
+// $$!n = n! \\sum_{k=0}^{n} \\frac{(-1)^k}{k!}.$$
+
+// It is derived by applying the [inclusion–exclusion principle](!/combinatorics/inclusion-exclusion) to the set of all permutations: start with $n!$ total, subtract those that fix at least one specific position, add back those that fix at least two, and continue with alternating signs through all $n$ positions. The full derivation lives on the inclusion–exclusion page; the permutations page uses the result.
+
+// A recursive form is also useful for computation:
+
+// $$!n = (n-1)\\bigl(!(n-1) + !(n-2)\\bigr).$$
+
+// The asymptotic behavior of the formula is striking. As $n \\to \\infty$,
+
+// $$\\frac{!n}{n!} \\to \\frac{1}{e} \\approx 0.368.$$
+
+// The proportion of permutations that are derangements approaches a fixed limit rather than vanishing or filling the space — for any sufficiently large $n$, roughly $36.8\\%$ of all permutations of $n$ items are derangements.
+
+// ## Small Values
+
+// The first few subfactorials:
+
+// • $!1 = 0$ — with one item, the only permutation leaves it in place
+// • $!2 = 1$ — the swap
+// • $!3 = 2$
+// • $!4 = 9$
+// • $!5 = 44$
+// • $!6 = 265$
+
+// ## Example
+
+// In the hat-check problem with 4 guests, the number of orderings in which no guest receives their own hat is
+
+// $$!4 = 4! \\sum_{k=0}^{4} \\frac{(-1)^k}{k!} = 24 \\left(1 - 1 + \\tfrac{1}{2} - \\tfrac{1}{6} + \\tfrac{1}{24}\\right) = 9.$$
+
+// Out of the $4! = 24$ possible orderings of the four hats, exactly 9 satisfy the no-fixed-point condition.
+// `,
+//     before: ``,
+//     between: ``,
+//     after: ``,
+//     link: '',
+//   },
+  
+//   }
+
+
+// formulas-optimized: v1 | 2026-06-11 | 3 callouts (obj8 ×3); 6 skipped (inside @academic[example:...]@)
+// Skipped: Factorial (logic), Full Permutation (full), Permutation with Identical Items (identical),
+//          Partial Permutation (without), Permutation with Repetition (with), Circular Permutation (circular)
+const sectionsContent={
 
     full:{
       title:`Permutation (Full)`,
@@ -591,8 +898,6 @@ Here is an example of simple permutation: creating 3 letter string.
       `,
   
     },
-    // URL: /combinatorics/permutations
-// New section — slot after #circular, anchor id: 'derangement'
 
   obj8: {
     title: `Derangement`,
@@ -614,17 +919,32 @@ The two are interchangeable.
 
 The explicit formula is
 
+@academic[formula_callout:Derangement
 $$!n = n! \\sum_{k=0}^{n} \\frac{(-1)^k}{k!}.$$
+/combinatorics/formulas#derangement]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 It is derived by applying the [inclusion–exclusion principle](!/combinatorics/inclusion-exclusion) to the set of all permutations: start with $n!$ total, subtract those that fix at least one specific position, add back those that fix at least two, and continue with alternating signs through all $n$ positions. The full derivation lives on the inclusion–exclusion page; the permutations page uses the result.
 
 A recursive form is also useful for computation:
 
-$$!n = (n-1)\\bigl(!(n-1) + !(n-2)\\bigr).$$
+@academic[formula_callout:Derangement Recurrence
+$$!n = (n-1) \\bigl( !(n-1) + !(n-2) \\bigr), \\quad !0 = 1, \\quad !1 = 0.$$
+/combinatorics/formulas#derangement_recurrence]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 The asymptotic behavior of the formula is striking. As $n \\to \\infty$,
 
-$$\\frac{!n}{n!} \\to \\frac{1}{e} \\approx 0.368.$$
+@academic[formula_callout:Derangement Asymptotic Limit
+$$\\lim_{n \\to \\infty} \\frac{!n}{n!} = \\frac{1}{e} \\approx 0.367879.$$
+/combinatorics/formulas#derangement_asymptotic_limit]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 The proportion of permutations that are derangements approaches a fixed limit rather than vanishing or filling the space — for any sufficiently large $n$, roughly $36.8\\%$ of all permutations of $n$ items are derangements.
 
@@ -655,7 +975,9 @@ Out of the $4! = 24$ possible orderings of the four hats, exactly 9 satisfy the 
   
   }
 
-  
+
+
+
 const introContent = {
   id: "intro",
   title: "Permutations: Understanding Ordered Arrangements",

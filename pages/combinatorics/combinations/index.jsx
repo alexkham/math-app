@@ -278,7 +278,205 @@ const distributionTable=`<!DOCTYPE html>
 
 
     
-  const sectionsContent={
+//   const sectionsContent={
+
+//     combinations:{
+//       title:`Simple Combinations`,
+//       content:``,
+//       before:`**Simple Combination** works when selecting items from a collection where order doesn't matter and no repetitions are allowed. Classic examples include choosing team members from a group or selecting lottery numbers.
+      
+//       `,
+//       after:`      
+// **Common notations:**
+// \t\t\t•$\\binom{n}{r}$ - "n choose r" (most common in modern texts)
+// \t\t\t•$C(n,r)$ - C for "combinations"
+// \t\t\t•$C_n^r$ - alternative C notation
+// \t\t\t•$_nC_r$ - subscript/superscript form
+
+// The $\\binom{n}{r}$ notation is the most widely used in modern mathematics, but you'll often see $C(n,r)$ in introductory texts and $_nC_r$ on calculators.
+
+
+//       @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
+
+//       **Formula**:
+//       The total number of simple combinations is 
+// @academic[example:&nbsp\t\t\t\t\t\t$\\binom{n}{r} = \\frac{n!}{r!(n-r)!}$]@
+// If $n$ is the total number of distinct items and $r$ is the number of items to select, then order doesn't matter and repetition isn't allowed.
+
+//  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=6) →@
+
+// `,
+//       between:`
+//       **Simple Combination — Examples**:
+// Choosing committee members from a club, selecting lottery numbers, picking a set of books to borrow from a library, forming a group of students for a project, selecting ingredients for a recipe from available options.`,
+  
+  
+//     },
+//     partition:{
+//       title:`Partition into Groups`,
+//       content:``,
+//       before:`**Partition into Groups** applies when dividing distinct items into unlabeled subsets where only grouping matters, not the order within groups or names of the groups. Classic examples include dividing students into teams or splitting items into categories.
+      
+//       `,
+//       after:`
+//        **Notation**:
+//        Partition into Groups doesn't have a standard symbolic notation like $\\binom{n}{r}$ for [simple combinations](!/combinatorics/combinations#combinations).
+
+// Partitions are typically just described in words or with set notation like:
+
+// "Partition of set S into k parts"
+// {A₁, A₂, ..., Aₖ} where A₁ ∪ A₂ ∪ ... ∪ Aₖ = S
+
+// Unlike other combinations, permutations, etc., partitions don't have a universally recognized compact notation symbol.
+
+
+//       @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
+
+//       **Formula**:
+//       The total number of partitions into groups is 
+// @academic[example:&nbsp\t\t\t\t\t\t{A₁, A₂, ..., Aₖ}=$\\frac{n!}{n_1!n_2!\\dots n_k!}$]@ 
+// If $n$ is the total number of distinct items to partition into $k$ groups of sizes $n_1, n_2, \\ldots, n_k$ respectively, where the groups are unlabeled and only the grouping matters.
+     
+
+//  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=7) →@
+
+// `,
+//       between:  `
+//       **Partition into Groups — Examples**:
+// Dividing students into study groups, splitting employees into project teams, grouping tasks into phases of a project, dividing guests into tables at an event, forming clusters of data points in analysis.`,
+  
+//     },
+  
+//     distribution:{
+  
+//       title:`Distribution into Cells`,
+//       content:``,
+//       before:`**Distribution into Cells** works when assigning each distinct item to a specific labeled container, creating a mapping that shows which container each item goes to. Classic examples include assigning students to different classrooms or placing different files into labeled folders.
+      
+//       `,
+//       after:`
+//       **Notation**:
+    
+// **Distribution into Cells** doesn't have a standard symbolic notation like $\\binom{n}{r}$ for [simple combinations](!/combinatorics/combinations#combinations). It's typically just described as "functions from set A to set B" or "mappings" in mathematical notation, but there's no compact symbol specifically for this concept like there is for combinations or permutations.
+
+//       @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
+
+//       **Formula**:
+//       The total number of distributions into cells is 
+// @academic[example:&nbsp\t\t\t\t\t\t$r^n$]@
+// If $n$ is the total number of distinct items to assign and $r$ is the number of labeled containers, where each item can go into any container and containers can be empty.
+      
+
+//  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=10) →@
+
+
+// `,
+//       between:`
+//       **Distribution into Cells — Examples**:
+// Assigning students to classrooms, placing different files into labeled folders, allocating distinct products to specific storage bins, or assigning employees to designated offices. This setup focuses on mapping each unique item to a labeled container, making the outcome a clear one‑to‑one assignment.
+// `,
+  
+//     },
+//     weak:{
+//       title:`Weak Composition`,
+//       content:``,
+//       before:`**Weak Composition** occures when distributing identical units into labeled containers where some containers can remain empty and only the count in each container matters. Classic examples include distributing identical coins into numbered boxes or allocating identical resources to different departments.
+
+
+// `,
+//       after:`
+//        **Notation**:
+//        The notation for **Weak Composition** is:
+
+// \t\t\t$\\left(\\binom{n}{r}\\right)$** or **$\\left(\\left(\\binom{n}{r}\\right)\\right)$
+
+// This represents the number of ways to place n identical objects into r labeled bins, where empty bins are allowed. It's also written as $\\binom{n+r-1}{r-1}$ but the double parentheses notation specifically indicates weak compositions.
+
+//       @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
+
+//       **Formula**:
+//       The total number of weak compositions is 
+// @academic[example:&nbsp\t\t\t\t\t\t$\\left(\\binom{n}{r}\\right)=\\binom{n+r-1}{r-1}$]@   
+// If $n$ is the total number of identical items to distribute into $r$ labeled containers, where empty containers are allowed and only the count in each container matters.
+      
+
+//  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=8) →@
+
+
+// `,
+//       between:`
+//       **Weak Composition — Examples**:
+// Distributing identical coins into numbered boxes, allocating identical resources to different departments, assigning identical tasks across several workers. Since this type of experiment is highly specific — focusing only on counts in labeled containers, even allowing some to remain empty — it is largely self‑explanatory and not as easy to find in common real‑world situations.
+// `,
+  
+//     },
+
+
+//     strong:{
+  
+//       title:`Strong Composition`,
+//       content:``,
+//       before:`**Strong Composition** works when distributing identical units into labeled containers where every container must receive at least one unit and only the count in each container matters. Classic examples include distributing identical items to departments where each department must get something or allocating identical resources ensuring no group is left empty.
+      
+//       `,
+//       after:`
+//        **Notation**:
+//        The notation for **Strong Composition** is:
+
+// \t\t\t$\\left\\langle\\binom{n}{r}\\right\\rangle$ or $\\left\\langle\\left\\langle\\binom{n}{r}\\right\\rangle\\right\\rangle$
+
+// This represents the number of ways to place n identical objects into r labeled bins where each bin must contain at least one object. It's also written as $\\binom{n-1}{r-1}$ but the angle brackets notation specifically indicates strong compositions.
+
+
+//       @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
+
+//       **Formula**:
+//       The total number of strong compositions is 
+// @academic[example:&nbsp\t\t\t\t\t\t$\\left\\langle\\binom{n}{r}\\right\\rangle=\\binom{n-1}{r-1}$]@     
+// If $n$ is the total number of identical items to distribute into $r$ labeled containers, where each container must receive at least one item and only the count in each container matters.
+     
+
+//  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=9) →@
+
+
+// `,
+//       between:`
+//      **Strong Composition — Examples**:
+// Distributing identical items to departments where each department must receive at least one, allocating identical resources among teams ensuring none are left empty, dividing identical tasks across several workers with no one unassigned. Like weak composition, this type of experiment is quite specific — it focuses on counts in labeled containers with no empties allowed — making it largely self‑explanatory and less common in everyday situations.
+
+
+//       `,
+  
+//     },
+//     types:{
+  
+//         title:`Types of Combinations`,
+//         content:``,
+//         before:`In combinatorics, combinations represent ways to select or distribute items without considering order, in contrast to [permutations](!/combinatorics/permutations) where order matters. Building on our earlier comparison between combinations and [permutations](!/combinatorics/permutations), we now distinguish between different types of combinations using key questions: whether the objects are distinct or identical, whether we are selecting a subset or distributing all objects, and whether the containers (cells) are labeled or can remain empty.
+
+//         `,
+//         after:`
+//         **Conclusion**:
+// Understanding these different combination scenarios is essential because each situation leads to a different counting formula. Recognizing the correct type of combination ensures accurate problem-solving in probability, statistics, and many applied fields.
+//         `,
+//         between:``,
+    
+//       },
+//       obj5:{
+  
+//         title:``,
+//         content:``,
+//         before:``,
+//         after:``,
+    
+//       }
+  
+//   }
+
+
+
+// formulas-optimized: v1 | 2026-06-11 | 5 callouts via @academic[example:...]@ → formula_callout swap (override 2)
+const sectionsContent={
 
     combinations:{
       title:`Simple Combinations`,
@@ -300,7 +498,14 @@ The $\\binom{n}{r}$ notation is the most widely used in modern mathematics, but 
 
       **Formula**:
       The total number of simple combinations is 
-@academic[example:&nbsp\t\t\t\t\t\t$\\binom{n}{r} = \\frac{n!}{r!(n-r)!}$]@
+
+@academic[formula_callout:Combination
+$$\\binom{n}{r} = \\frac{n!}{r! \\, (n-r)!}.$$
+/combinatorics/formulas#combination]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
+
 If $n$ is the total number of distinct items and $r$ is the number of items to select, then order doesn't matter and repetition isn't allowed.
 
  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=6) →@
@@ -334,7 +539,14 @@ Unlike other combinations, permutations, etc., partitions don't have a universal
 
       **Formula**:
       The total number of partitions into groups is 
-@academic[example:&nbsp\t\t\t\t\t\t{A₁, A₂, ..., Aₖ}=$\\frac{n!}{n_1!n_2!\\dots n_k!}$]@ 
+
+@academic[formula_callout:Partition into Groups
+$$\\frac{n!}{n_1! \\, n_2! \\cdots n_k!}, \\quad n_1 + n_2 + \\cdots + n_k = n.$$
+/combinatorics/formulas#partition_into_groups]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
+
 If $n$ is the total number of distinct items to partition into $k$ groups of sizes $n_1, n_2, \\ldots, n_k$ respectively, where the groups are unlabeled and only the grouping matters.
      
 
@@ -363,7 +575,14 @@ Dividing students into study groups, splitting employees into project teams, gro
 
       **Formula**:
       The total number of distributions into cells is 
-@academic[example:&nbsp\t\t\t\t\t\t$r^n$]@
+
+@academic[formula_callout:Distribution into Cells
+$$r^n.$$
+/combinatorics/formulas#distribution_into_cells]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
+
 If $n$ is the total number of distinct items to assign and $r$ is the number of labeled containers, where each item can go into any container and containers can be empty.
       
 
@@ -396,7 +615,14 @@ This represents the number of ways to place n identical objects into r labeled b
 
       **Formula**:
       The total number of weak compositions is 
-@academic[example:&nbsp\t\t\t\t\t\t$\\left(\\binom{n}{r}\\right)=\\binom{n+r-1}{r-1}$]@   
+
+@academic[formula_callout:Weak Composition
+$$\\left(\\!\\!\\binom{n}{r}\\!\\!\\right) = \\binom{n + r - 1}{r - 1}.$$
+/combinatorics/formulas#weak_composition]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
+
 If $n$ is the total number of identical items to distribute into $r$ labeled containers, where empty containers are allowed and only the count in each container matters.
       
 
@@ -432,7 +658,14 @@ This represents the number of ways to place n identical objects into r labeled b
 
       **Formula**:
       The total number of strong compositions is 
-@academic[example:&nbsp\t\t\t\t\t\t$\\left\\langle\\binom{n}{r}\\right\\rangle=\\binom{n-1}{r-1}$]@     
+
+@academic[formula_callout:Strong Composition
+$$\\left\\langle \\binom{n}{r} \\right\\rangle = \\binom{n - 1}{r - 1}.$$
+/combinatorics/formulas#strong_composition]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
+
 If $n$ is the total number of identical items to distribute into $r$ labeled containers, where each container must receive at least one item and only the count in each container matters.
      
 
@@ -472,7 +705,6 @@ Understanding these different combination scenarios is essential because each si
       }
   
   }
-
   
 const introContent = {
   id: "intro",

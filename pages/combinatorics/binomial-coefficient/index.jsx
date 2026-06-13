@@ -233,13 +233,202 @@ export async function getStaticProps(){
 </table>
 `
 
+// const sectionsContent = {
+//   obj1: {
+//     title: `Definition and Notation`,
+//     content: `
+// For non-negative integers $n$ and $k$ with $0 \\le k \\le n$, the binomial coefficient is
+
+// $$\\binom{n}{k} = \\frac{n!}{k!\\,(n-k)!}.$$
+
+// Boundary cases follow directly: $\\binom{n}{0} = \\binom{n}{n} = 1$ for every $n \\ge 0$, and $\\binom{n}{k} = 0$ whenever $k > n$. The expression is read aloud as "$n$ choose $k$".
+
+// ## Notation Variants
+
+// Several notations are in use for the same object:
+
+// • $\\binom{n}{k}$ — the standard modern form, used throughout mathematics
+// • $C(n,k)$ — common in introductory texts
+// • $C_n^k$ or $C_k^n$ — used in some European traditions; the position of the subscript and superscript varies by source
+// • \${}_nC_k$ — the form most calculator displays use
+
+// ## Generalization to Real Upper Index
+
+// The definition extends beyond non-negative integers by rewriting the numerator as a descending product:
+
+// $$\\binom{x}{k} = \\frac{x(x-1)(x-2)\\cdots(x-k+1)}{k!}.$$
+
+// Here $x$ can be any real or complex number and $k$ remains a non-negative integer. The numerator is a polynomial of degree $k$ in $x$, so $\\binom{x}{k}$ is itself a polynomial in $x$. This is the form that appears in Newton's generalized binomial theorem, where the upper index is no longer required to be a non-negative integer.
+
+// The combinatorial interpretation — the number of [combinations](!/combinatorics/combinations) of $k$ items chosen from $n$ — remains the most intuitive entry point, but the algebraic definition is what extends to non-integer settings.
+
+//  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Combinatorics Symbols and Notations](!/math-symbols/combinatorics) →@
+
+// `,
+//     before: ``,
+//     between: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj2: {
+//     title: `Identities`,
+//     content: `
+// The binomial coefficient satisfies a network of identities, many of which are not visible from the counting interpretation alone.
+
+// ## Symmetry
+
+// $$\\binom{n}{k} = \\binom{n}{n-k}.$$
+
+// Choosing which $k$ items to include is equivalent to choosing which $n-k$ items to exclude.
+
+// ## Pascal's Rule
+
+// $$\\binom{n}{k} = \\binom{n-1}{k-1} + \\binom{n-1}{k}.$$
+
+// Fix a particular element of the $n$-set. A $k$-subset either contains that element — in which case the remaining $k-1$ items come from the other $n-1$ — or does not, in which case all $k$ items come from the other $n-1$. The two cases partition the $k$-subsets, and adding their counts gives the identity. This recursion is the foundation of Pascal's triangle.
+
+// ## Absorption Identity
+
+// $$k \\binom{n}{k} = n \\binom{n-1}{k-1}.$$
+
+// Both sides count the number of ways to choose a $k$-element subset and then designate one of its members as distinguished.
+
+// ## Row Sum
+
+// $$\\sum_{k=0}^{n} \\binom{n}{k} = 2^n.$$
+
+// The total number of subsets of an $n$-set, summed over all possible sizes, equals the size of the power set.
+
+// ## Alternating Row Sum
+
+// $$\\sum_{k=0}^{n} (-1)^k \\binom{n}{k} = 0 \\quad \\text{for } n \\ge 1.$$
+
+// The number of even-sized subsets of an $n$-set equals the number of odd-sized subsets.
+
+// ## Vandermonde's Identity
+
+// $$\\binom{m+n}{r} = \\sum_{k=0}^{r} \\binom{m}{k} \\binom{n}{r-k}.$$
+
+// Choosing $r$ items from the disjoint union of an $m$-set and an $n$-set partitions according to how many of the chosen items come from each side.
+
+// ## Hockey Stick Identity
+
+// $$\\sum_{i=k}^{n} \\binom{i}{k} = \\binom{n+1}{k+1}.$$
+
+// A sum running down a diagonal of Pascal's triangle equals a single entry one row below.
+
+// Most of these identities admit both algebraic and combinatorial proofs. The combinatorial proofs typically use [double counting](!/combinatorics/counting-principles#double): the same set is enumerated by two different strategies, and the two expressions for its size are equated.
+// `,
+//     before: ``,
+//     between: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj3: {
+//     title: `Pascal's Triangle`,
+//     content: `
+// Pascal's rule arranges all binomial coefficients into a triangular array. Row $n$, indexed starting from row $0$, contains the $n+1$ values
+
+// $$\\binom{n}{0}, \\binom{n}{1}, \\ldots, \\binom{n}{n}.$$
+
+// Each interior entry equals the sum of the two entries directly above it — the visual form of Pascal's rule.
+
+// ## What the Triangle Encodes
+
+// The symmetry identity $\\binom{n}{k} = \\binom{n}{n-k}$ is immediate from the array: each row reads the same forwards and backwards.
+
+// The diagonals of the triangle hold familiar sequences:
+
+// • The first diagonal contains the constants $1, 1, 1, \\ldots$
+// • The second contains the natural numbers $1, 2, 3, 4, \\ldots$
+// • The third contains the triangular numbers $1, 3, 6, 10, \\ldots$
+// • The fourth contains the tetrahedral numbers $1, 4, 10, 20, \\ldots$
+
+// Sums along the shallow diagonals — diagonals that move one step down and one step left at each entry — produce the Fibonacci numbers.
+
+// The row sums double at each step, since $\\sum_k \\binom{n}{k} = 2^n$.
+
+// ## Computing Coefficients
+
+// For computing individual binomial coefficients, Pascal's triangle is the most efficient route when the values needed are small. Beyond moderate size, the explicit formula or the absorption identity is faster.
+// `,
+//     before: ``,
+//     between: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj4: {
+//     title: `The Multinomial Coefficient`,
+//     content: `
+// The binomial coefficient counts ways to split $n$ items into two groups of sizes $k$ and $n-k$. The multinomial coefficient is the natural generalization to more than two groups.
+
+// ## Definition
+
+// For non-negative integers $k_1, k_2, \\ldots, k_r$ with $k_1 + k_2 + \\cdots + k_r = n$,
+
+// $$\\binom{n}{k_1, k_2, \\ldots, k_r} = \\frac{n!}{k_1! \\, k_2! \\, \\cdots \\, k_r!}.$$
+
+// The binomial coefficient is the case $r = 2$:
+
+// $$\\binom{n}{k} = \\binom{n}{k, \\, n-k}.$$
+
+// ## Combinatorial Interpretation
+
+// The multinomial coefficient counts the number of distinct arrangements of $n$ items in which $k_1$ are of type 1, $k_2$ are of type 2, and so on through $k_r$ items of type $r$. This is the same count that appears in [permutations with identical items](!/combinatorics/permutations#identical) — the two viewpoints (partitioning into groups versus arranging with repetition of types) refer to the same enumeration.
+
+// The multinomial coefficient is also the natural coefficient in the [multinomial theorem](!/combinatorics/binomial-theorem), which expands $(x_1 + x_2 + \\cdots + x_r)^n$.
+// `,
+//     before: ``,
+//     between: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj5: {
+//     title: `Related Concepts`,
+//     content: `
+// • [Probability](!/probability/distributions/discrete/binomial) — the binomial distribution and several related discrete distributions are built directly on the binomial coefficient.
+
+// • [Algebra](!/algebra) — polynomial identities, generating functions, and finite difference calculus all rely on binomial expansions and binomial-coefficient identities.
+// `,
+//     before: ``,
+//     between: ``,
+//     after: ``,
+//     link: '',
+//   },
+
+//   obj6: {
+//     title: `Binomial Coefficient at a Glance`,
+//     content: `
+// The page covered the formal definition and notation, the network of identities the coefficient satisfies, the Pascal&apos;s-triangle organization, and the multinomial generalization. The table below collects the formula, boundary values, and generalizations in one reference card.
+// `,
+//     before: ``,
+//     between: ``,
+//     after: ``,
+//     link: '',
+//   },
+// };
+
+
+// URL: /combinatorics/binomial-coefficient
+
+// formulas-optimized: v1 | 2026-06-11 | 10 callouts (obj1 ×2, obj2 ×7, obj4 ×1)
+// Skipped (empty link.url in data): Sum of Squares of Binomial Coefficients, Newton's Generalized Binomial Theorem
 const sectionsContent = {
   obj1: {
     title: `Definition and Notation`,
     content: `
 For non-negative integers $n$ and $k$ with $0 \\le k \\le n$, the binomial coefficient is
 
+@academic[formula_callout:Binomial Coefficient
 $$\\binom{n}{k} = \\frac{n!}{k!\\,(n-k)!}.$$
+/combinatorics/formulas#binomial_coefficient]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 Boundary cases follow directly: $\\binom{n}{0} = \\binom{n}{n} = 1$ for every $n \\ge 0$, and $\\binom{n}{k} = 0$ whenever $k > n$. The expression is read aloud as "$n$ choose $k$".
 
@@ -256,7 +445,12 @@ Several notations are in use for the same object:
 
 The definition extends beyond non-negative integers by rewriting the numerator as a descending product:
 
-$$\\binom{x}{k} = \\frac{x(x-1)(x-2)\\cdots(x-k+1)}{k!}.$$
+@academic[formula_callout:Generalized Binomial Coefficient
+$$\\binom{x}{k} = \\frac{x(x-1)(x-2) \\cdots (x-k+1)}{k!}, \\quad k \\in \\mathbb{Z}_{\\ge 0}, \\; x \\in \\mathbb{R} \\text{ (or } \\mathbb{C}\\text{)}.$$
+/combinatorics/formulas#generalized_binomial_coefficient]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 Here $x$ can be any real or complex number and $k$ remains a non-negative integer. The numerator is a polynomial of degree $k$ in $x$, so $\\binom{x}{k}$ is itself a polynomial in $x$. This is the form that appears in Newton's generalized binomial theorem, where the upper index is no longer required to be a non-negative integer.
 
@@ -278,43 +472,78 @@ The binomial coefficient satisfies a network of identities, many of which are no
 
 ## Symmetry
 
+@academic[formula_callout:Binomial Symmetry Identity
 $$\\binom{n}{k} = \\binom{n}{n-k}.$$
+/combinatorics/formulas#binomial_symmetry_identity]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 Choosing which $k$ items to include is equivalent to choosing which $n-k$ items to exclude.
 
 ## Pascal's Rule
 
+@academic[formula_callout:Pascal's Rule
 $$\\binom{n}{k} = \\binom{n-1}{k-1} + \\binom{n-1}{k}.$$
+/combinatorics/formulas#pascals_rule]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 Fix a particular element of the $n$-set. A $k$-subset either contains that element — in which case the remaining $k-1$ items come from the other $n-1$ — or does not, in which case all $k$ items come from the other $n-1$. The two cases partition the $k$-subsets, and adding their counts gives the identity. This recursion is the foundation of Pascal's triangle.
 
 ## Absorption Identity
 
+@academic[formula_callout:Absorption Identity
 $$k \\binom{n}{k} = n \\binom{n-1}{k-1}.$$
+/combinatorics/formulas#absorption_identity]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 Both sides count the number of ways to choose a $k$-element subset and then designate one of its members as distinguished.
 
 ## Row Sum
 
+@academic[formula_callout:Binomial Row Sum
 $$\\sum_{k=0}^{n} \\binom{n}{k} = 2^n.$$
+/combinatorics/formulas#binomial_row_sum]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 The total number of subsets of an $n$-set, summed over all possible sizes, equals the size of the power set.
 
 ## Alternating Row Sum
 
-$$\\sum_{k=0}^{n} (-1)^k \\binom{n}{k} = 0 \\quad \\text{for } n \\ge 1.$$
+@academic[formula_callout:Alternating Binomial Sum
+$$\\sum_{k=0}^{n} (-1)^k \\binom{n}{k} = 0, \\quad n \\ge 1.$$
+/combinatorics/formulas#alternating_binomial_sum]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 The number of even-sized subsets of an $n$-set equals the number of odd-sized subsets.
 
 ## Vandermonde's Identity
 
+@academic[formula_callout:Vandermonde's Identity
 $$\\binom{m+n}{r} = \\sum_{k=0}^{r} \\binom{m}{k} \\binom{n}{r-k}.$$
+/combinatorics/formulas#vandermondes_identity]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 Choosing $r$ items from the disjoint union of an $m$-set and an $n$-set partitions according to how many of the chosen items come from each side.
 
 ## Hockey Stick Identity
 
+@academic[formula_callout:Hockey Stick Identity
 $$\\sum_{i=k}^{n} \\binom{i}{k} = \\binom{n+1}{k+1}.$$
+/combinatorics/formulas#hockey_stick_identity]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 A sum running down a diagonal of Pascal's triangle equals a single entry one row below.
 
@@ -369,7 +598,12 @@ The binomial coefficient counts ways to split $n$ items into two groups of sizes
 
 For non-negative integers $k_1, k_2, \\ldots, k_r$ with $k_1 + k_2 + \\cdots + k_r = n$,
 
-$$\\binom{n}{k_1, k_2, \\ldots, k_r} = \\frac{n!}{k_1! \\, k_2! \\, \\cdots \\, k_r!}.$$
+@academic[formula_callout:Multinomial Coefficient
+$$\\binom{n}{k_1, k_2, \\ldots, k_r} = \\frac{n!}{k_1! \\, k_2! \\cdots k_r!}, \\quad k_1 + k_2 + \\cdots + k_r = n.$$
+/combinatorics/formulas#multinomial_coefficient]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 The binomial coefficient is the case $r = 2$:
 
@@ -411,9 +645,6 @@ The page covered the formal definition and notation, the network of identities t
     link: '',
   },
 };
-
-
-// URL: /combinatorics/binomial-coefficient
 
 const introContent = {
   id: 'intro',

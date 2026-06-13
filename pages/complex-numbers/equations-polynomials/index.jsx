@@ -1,74 +1,206 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages/pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages/pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
+export async function getStaticProps(){
 
-//  const keyWords = [
-//   "polynomial equations complex numbers",
-//   "fundamental theorem of algebra",
-//   "complex roots polynomial",
-//   "factor polynomial complex",
-//   "Vieta's formulas",
-//   "conjugate pairs roots",
-//   "solve z^n = w",
-//   "nth roots complex number",
-//   "algebraically closed field",
-//   "quadratic complex coefficients",
-//   "polynomial factorization",
-//   "complex solutions polynomial",
-//   "roots of unity polynomial",
-//   "real polynomial complex roots",
-//   "polynomial complex plane"
-// ]
+ const keyWords = [
+  "polynomial equations complex numbers",
+  "fundamental theorem of algebra",
+  "complex roots polynomial",
+  "factor polynomial complex",
+  "Vieta's formulas",
+  "conjugate pairs roots",
+  "solve z^n = w",
+  "nth roots complex number",
+  "algebraically closed field",
+  "quadratic complex coefficients",
+  "polynomial factorization",
+  "complex solutions polynomial",
+  "roots of unity polynomial",
+  "real polynomial complex roots",
+  "polynomial complex plane"
+]
 
-//   // •
+  const linkStyle = 'color: inherit; text-decoration: underline;'
 
-// //   \u2022 First item
-// // \u2022 Second item
+  // ---------- TABLES ----------
 
-  
-// // <hr style="border-width:1px;"></hr>
+  // obj4 — aggregation: Vieta's formulas across degrees
+  const obj4Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Degree</th>
+      <th style="${tableHeaders.aggregation}">Monic polynomial</th>
+      <th style="${tableHeaders.aggregation}">Sum of roots</th>
+      <th style="${tableHeaders.aggregation}">Product of roots</th>
+      <th style="${tableHeaders.aggregation}">Middle symmetric sums</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quadratic</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z² + bz + c</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁ + z₂ = −b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁ · z₂ = c</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">—</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cubic</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z³ + bz² + cz + d</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁ + z₂ + z₃ = −b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁z₂z₃ = −d</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁z₂ + z₁z₃ + z₂z₃ = c</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quartic</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z⁴ + bz³ + cz² + dz + e</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σz_i = −b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁z₂z₃z₄ = e</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ z_i z_j = c (pairs); Σ z_i z_j z_k = −d (triples)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">General n</td>
+      <td style="padding: 12px 15px; color: #34495e;">zⁿ + a&#x2099;₋₁zⁿ⁻¹ + … + a₀</td>
+      <td style="padding: 12px 15px; color: #34495e;">−a&#x2099;₋₁</td>
+      <td style="padding: 12px 15px; color: #34495e;">(−1)ⁿ · a₀</td>
+      <td style="padding: 12px 15px; color: #34495e;">k-th symmetric sum = (−1)ᵏ · a&#x2099;₋&#x2096;</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="color:blue;" />
+  // obj5 — aggregation: real-coefficient polynomial properties
+  const obj5Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Property</th>
+      <th style="${tableHeaders.aggregation}">Statement</th>
+      <th style="${tableHeaders.aggregation}">Consequence</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Conjugate pairing</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">if z₀ is a non-real root, so is z̄₀</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">non-real roots always come in pairs</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Real quadratic factor</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(z − z₀)(z − z̄₀) = z² − 2 Re(z₀) z + |z₀|²</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">real polynomials factor over ℝ into linear and irreducible-quadratic factors only</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Odd degree → real root</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">if n is odd, at least one root is real</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every real cubic, quintic, etc. crosses the real axis</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Non-real root count is even</td>
+      <td style="padding: 12px 15px; color: #34495e;">non-real roots, counted with multiplicity, total an even number</td>
+      <td style="padding: 12px 15px; color: #34495e;">(n − # real roots) is even</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+  // obj9 — aggregation: conjugate-equation loci
+  const obj9Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Equation</th>
+      <th style="${tableHeaders.aggregation}">Algebraic meaning (z = a + bi)</th>
+      <th style="${tableHeaders.aggregation}">Geometric locus</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">z + z̄ = k&nbsp;&nbsp;<span style="font-size: 13px;">(k real)</span></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2 Re(z) = k → a = k⁄2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vertical line at x = k⁄2</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">z − z̄ = ki&nbsp;&nbsp;<span style="font-size: 13px;">(k real)</span></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2bi = ki → b = k⁄2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">horizontal line at y = k⁄2</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">z · z̄ = k&nbsp;&nbsp;<span style="font-size: 13px;">(k > 0)</span></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z|² = k → |z| = √k</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">circle centered at origin, radius √k</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">z̄ = z</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−b = b → b = 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the real axis</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">z̄ = −z</td>
+      <td style="padding: 12px 15px; color: #34495e;">a = −a → a = 0</td>
+      <td style="padding: 12px 15px; color: #34495e;">the imaginary axis</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+  // obj11 — summary capstone: equation types × method × solution count
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Equation type</th>
+      <th style="${tableHeaders.summary}">Form</th>
+      <th style="${tableHeaders.summary}">Method</th>
+      <th style="${tableHeaders.summary}">Number of solutions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">General polynomial</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a&#x2099;zⁿ + … + a₀ = 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">factor over ℂ; or numeric methods</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exactly n (with multiplicity)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quadratic (any coefs)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">az² + bz + c = 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">quadratic formula z = (−b ± √Δ)⁄(2a); for complex Δ use trig/exponential form to find √Δ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2 (1 repeated if Δ = 0)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Pure n-th power</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zⁿ = w</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">trig/exponential form + De Moivre's root formula</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exactly n, evenly spaced on a circle (regular n-gon)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Power-equals-conjugate</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zⁿ = z̄</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">write z = re&#x2071;&#x1D52;; match moduli and arguments separately</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n + 2 (origin + n+1 on unit circle)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Conjugate-locus equations</td>
+      <td style="padding: 12px 15px; color: #34495e;">z + z̄ = k,&nbsp;z · z̄ = k, etc.</td>
+      <td style="padding: 12px 15px; color: #34495e;">translate to conditions on Re(z), Im(z), |z|; intersect loci for systems</td>
+      <td style="padding: 12px 15px; color: #34495e;">infinite (a line, circle, or axis) — or finite if intersected</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+  // ---------- SECTIONS (original prose unchanged; obj11 added) ----------
 
 //     const sectionsContent={
 
@@ -328,8 +460,8 @@
 //   link: '',
 // },
 //     obj11:{
-//       title:``,
-//       content:``,
+//       title:`Summary: Equation Types and Their Solution Methods`,
+//       content:`Polynomial and equation problems in $\\mathbb{C}$ fall into a handful of recognizable types, each with its own technique and a characteristic number of solutions. The table below collects them as a single decision reference: given an equation's form, locate the row, then read off the method and the expected solution count.`,
 //       before:``,
 //       after:``,
 //       link:'',
@@ -376,632 +508,8 @@
 //   }
 
 
-//   const introContent = {
-//   id: "intro",
-//   title: "Where Every Polynomial Finds Its Roots",
-//   content: `The real numbers leave many polynomial equations unsolved — $x^2 + 1 = 0$ has no real answer, and neither does $x^4 + 4 = 0$. Complex numbers fill this gap completely. The Fundamental Theorem of Algebra guarantees that every polynomial equation has solutions in $\\mathbb{C}$, and the number of solutions matches the polynomial's degree exactly. This completeness makes the complex field the natural setting for polynomial theory.`
-// }
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is the Fundamental Theorem of Algebra?",
-//     answer: "The Fundamental Theorem of Algebra states that every non-constant polynomial with complex coefficients has at least one complex root. This implies every polynomial of degree n has exactly n roots in ℂ (counting multiplicity) and can be factored completely into linear factors."
-//   },
-//   obj2: {
-//     question: "What does it mean that ℂ is algebraically closed?",
-//     answer: "A field is algebraically closed if every non-constant polynomial with coefficients from that field has a root in the field. The complex numbers ℂ are algebraically closed — every polynomial equation solvable anywhere is solvable in ℂ. No further extension is needed to find polynomial roots."
-//   },
-//   obj3: {
-//     question: "Do complex roots of real polynomials come in conjugate pairs?",
-//     answer: "Yes. For any polynomial with real coefficients, if z₀ is a non-real root, then its conjugate z̄₀ is also a root. This is because p(z̄) = p̄(z) when all coefficients are real, so p(z₀) = 0 implies p(z̄₀) = 0."
-//   },
-//   obj4: {
-//     question: "Why does every real polynomial of odd degree have at least one real root?",
-//     answer: "Complex roots of real polynomials come in conjugate pairs, consuming an even number of roots. With odd degree n, at least one root remains unpaired. An unpaired root of a real polynomial must be real, since otherwise its conjugate would also be a root."
-//   },
-//   obj5: {
-//     question: "What are Vieta's formulas?",
-//     answer: "Vieta's formulas relate a polynomial's coefficients to symmetric combinations of its roots. For a monic quadratic z² + bz + c = 0 with roots z₁, z₂: the sum z₁ + z₂ = -b and the product z₁·z₂ = c. Similar patterns extend to higher degrees."
-//   },
-//   obj6: {
-//     question: "How do you solve z^n = w for a complex number w?",
-//     answer: "Write w = R·cis(φ) in trigonometric form. The n solutions are z_k = R^(1/n)·cis((φ + 360°k)/n) for k = 0, 1, ..., n-1. All roots have the same modulus R^(1/n) and are evenly spaced around a circle, forming a regular n-gon."
-//   },
-//   obj7: {
-//     question: "How many solutions does z^n = z̄ have?",
-//     answer: "The equation z^n = z̄ has n + 2 solutions: one at the origin (z = 0) and n + 1 solutions on the unit circle with arguments θ = 360°k/(n+1) for k = 0, 1, ..., n. These unit circle solutions come from requiring r = 1 and (n+1)θ to be a multiple of 360°."
-//   },
-//   obj8: {
-//     question: "What does z + z̄ = k describe geometrically?",
-//     answer: "Since z + z̄ = 2·Re(z), the equation z + z̄ = k describes the vertical line where Re(z) = k/2. Every point on this line satisfies the equation. Similarly, z·z̄ = k describes a circle centered at the origin with radius √k."
-//   },
-//   obj9: {
-//     question: "Does the quadratic formula work for complex coefficients?",
-//     answer: "Yes, the quadratic formula z = (-b ± √(b² - 4ac))/(2a) works unchanged for complex coefficients. The discriminant b² - 4ac may be complex, requiring you to find the square root of a complex number using De Moivre's theorem or trigonometric form."
-//   },
-//   obj10: {
-//     question: "How do you factor a polynomial completely over ℂ?",
-//     answer: "By the Fundamental Theorem, every polynomial of degree n factors as p(z) = aₙ(z - z₁)(z - z₂)···(z - zₙ), where aₙ is the leading coefficient and z₁, ..., zₙ are the n roots (possibly repeated). This complete factorization into linear factors is always possible over ℂ."
-//   },
-//   obj11: {
-//     question: "What is root multiplicity?",
-//     answer: "A root has multiplicity m if the factor (z - r) appears m times in the polynomial's factorization. For example, in p(z) = (z - 2)³(z + i)(z - i), the root 2 has multiplicity 3 while i and -i are simple roots (multiplicity 1). The multiplicities sum to the degree."
-//   },
-//   obj12: {
-//     question: "Why are complex roots important in engineering?",
-//     answer: "In signal processing, filter behavior depends on polynomial root locations. In control theory, system stability requires all characteristic polynomial roots to have negative real parts. Root placement in the complex plane directly determines whether systems oscillate, decay, or grow unstably."
-//   },
-//   obj13: {
-//     question: "How are roots of unity related to regular polygons?",
-//     answer: "The n-th roots of unity (solutions to z^n = 1) form the vertices of a regular n-gon inscribed in the unit circle. More generally, roots of z^n = w form a regular n-gon of radius |w|^(1/n), rotated according to the argument of w."
-//   }
-// }
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Complex Polynomial Equations",
-//     "description": "Learn how complex numbers solve all polynomial equations. Covers the Fundamental Theorem of Algebra, factoring over ℂ, Vieta's formulas, conjugate pairs, and solving equations like z^n = w.",
-//     "url": "https://www.learnmathclass.com/complex-numbers/equations-polynomials",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Polynomial Equations with Complex Numbers"
-//     },
-//     "teaches": [
-//       "The Fundamental Theorem of Algebra",
-//       "Complete factorization of polynomials over ℂ",
-//       "Vieta's formulas relating roots and coefficients",
-//       "Conjugate pairs for real polynomial roots",
-//       "Solving z^n = w using De Moivre's theorem",
-//       "Equations involving conjugates and their geometric meaning",
-//       "Applications in signal processing and control theory"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Complex Numbers",
-//         "item": "https://www.learnmathclass.com/complex-numbers"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Equations and Polynomials",
-//         "item": "https://www.learnmathclass.com/complex-numbers/equations-polynomials"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-
-
-
-//   return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Polynomial Equations & Fundamental Theorem | Learn Math Class",
-//       description: "Learn how complex numbers solve all polynomial equations. Covers the Fundamental Theorem of Algebra, factoring over ℂ, Vieta's formulas, conjugate pairs, and solving equations like z^n = w.",
-//       keywords: keyWords.join(", "),
-//       url: "/complex-numbers/equations-polynomials",
-//       name: "Complex Polynomial Equations"
-//     },
-//   }
-// }
-//    }
-
-
-// export default function EquationsPolynomialsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) { 
-
-
-//   const genericSections=[
-//      {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//           sectionsContent.obj0.after,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
- 
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Equations and Polynomials </h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//    showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "siblings"
-//          secondaryNavTitle="More in Complex Numbers"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//     <KeyTermsCard
-//            id="0"
-//            title={sectionsContent.obj0.title}
-//            content={sectionsContent.obj0.content}
-//            after={sectionsContent.obj0.after}
-//            variant="light"
-//          />
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages/pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-
- const keyWords = [
-  "polynomial equations complex numbers",
-  "fundamental theorem of algebra",
-  "complex roots polynomial",
-  "factor polynomial complex",
-  "Vieta's formulas",
-  "conjugate pairs roots",
-  "solve z^n = w",
-  "nth roots complex number",
-  "algebraically closed field",
-  "quadratic complex coefficients",
-  "polynomial factorization",
-  "complex solutions polynomial",
-  "roots of unity polynomial",
-  "real polynomial complex roots",
-  "polynomial complex plane"
-]
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-
-  // ---------- TABLES ----------
-
-  // obj4 — aggregation: Vieta's formulas across degrees
-  const obj4Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Degree</th>
-      <th style="${tableHeaders.aggregation}">Monic polynomial</th>
-      <th style="${tableHeaders.aggregation}">Sum of roots</th>
-      <th style="${tableHeaders.aggregation}">Product of roots</th>
-      <th style="${tableHeaders.aggregation}">Middle symmetric sums</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quadratic</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z² + bz + c</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁ + z₂ = −b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁ · z₂ = c</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">—</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cubic</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z³ + bz² + cz + d</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁ + z₂ + z₃ = −b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁z₂z₃ = −d</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁z₂ + z₁z₃ + z₂z₃ = c</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quartic</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z⁴ + bz³ + cz² + dz + e</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σz_i = −b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z₁z₂z₃z₄ = e</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ z_i z_j = c (pairs); Σ z_i z_j z_k = −d (triples)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">General n</td>
-      <td style="padding: 12px 15px; color: #34495e;">zⁿ + a&#x2099;₋₁zⁿ⁻¹ + … + a₀</td>
-      <td style="padding: 12px 15px; color: #34495e;">−a&#x2099;₋₁</td>
-      <td style="padding: 12px 15px; color: #34495e;">(−1)ⁿ · a₀</td>
-      <td style="padding: 12px 15px; color: #34495e;">k-th symmetric sum = (−1)ᵏ · a&#x2099;₋&#x2096;</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj5 — aggregation: real-coefficient polynomial properties
-  const obj5Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Property</th>
-      <th style="${tableHeaders.aggregation}">Statement</th>
-      <th style="${tableHeaders.aggregation}">Consequence</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Conjugate pairing</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">if z₀ is a non-real root, so is z̄₀</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">non-real roots always come in pairs</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Real quadratic factor</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(z − z₀)(z − z̄₀) = z² − 2 Re(z₀) z + |z₀|²</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">real polynomials factor over ℝ into linear and irreducible-quadratic factors only</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Odd degree → real root</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">if n is odd, at least one root is real</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every real cubic, quintic, etc. crosses the real axis</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Non-real root count is even</td>
-      <td style="padding: 12px 15px; color: #34495e;">non-real roots, counted with multiplicity, total an even number</td>
-      <td style="padding: 12px 15px; color: #34495e;">(n − # real roots) is even</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj9 — aggregation: conjugate-equation loci
-  const obj9Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Equation</th>
-      <th style="${tableHeaders.aggregation}">Algebraic meaning (z = a + bi)</th>
-      <th style="${tableHeaders.aggregation}">Geometric locus</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">z + z̄ = k&nbsp;&nbsp;<span style="font-size: 13px;">(k real)</span></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2 Re(z) = k → a = k⁄2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vertical line at x = k⁄2</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">z − z̄ = ki&nbsp;&nbsp;<span style="font-size: 13px;">(k real)</span></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2bi = ki → b = k⁄2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">horizontal line at y = k⁄2</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">z · z̄ = k&nbsp;&nbsp;<span style="font-size: 13px;">(k > 0)</span></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|z|² = k → |z| = √k</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">circle centered at origin, radius √k</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">z̄ = z</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−b = b → b = 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the real axis</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">z̄ = −z</td>
-      <td style="padding: 12px 15px; color: #34495e;">a = −a → a = 0</td>
-      <td style="padding: 12px 15px; color: #34495e;">the imaginary axis</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj11 — summary capstone: equation types × method × solution count
-  const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Equation type</th>
-      <th style="${tableHeaders.summary}">Form</th>
-      <th style="${tableHeaders.summary}">Method</th>
-      <th style="${tableHeaders.summary}">Number of solutions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">General polynomial</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a&#x2099;zⁿ + … + a₀ = 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">factor over ℂ; or numeric methods</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exactly n (with multiplicity)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Quadratic (any coefs)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">az² + bz + c = 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">quadratic formula z = (−b ± √Δ)⁄(2a); for complex Δ use trig/exponential form to find √Δ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2 (1 repeated if Δ = 0)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Pure n-th power</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zⁿ = w</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">trig/exponential form + De Moivre's root formula</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exactly n, evenly spaced on a circle (regular n-gon)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Power-equals-conjugate</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zⁿ = z̄</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">write z = re&#x2071;&#x1D52;; match moduli and arguments separately</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n + 2 (origin + n+1 on unit circle)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Conjugate-locus equations</td>
-      <td style="padding: 12px 15px; color: #34495e;">z + z̄ = k,&nbsp;z · z̄ = k, etc.</td>
-      <td style="padding: 12px 15px; color: #34495e;">translate to conditions on Re(z), Im(z), |z|; intersect loci for systems</td>
-      <td style="padding: 12px 15px; color: #34495e;">infinite (a line, circle, or axis) — or finite if intersected</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // ---------- SECTIONS (original prose unchanged; obj11 added) ----------
-
-    const sectionsContent={
+// formulas-optimized: v1 | 2026-06-11 | 5 callouts (obj2, obj4 ×2, obj5, obj6)
+const sectionsContent={
 
     obj0: {
   title: `Key Terms`,
@@ -1040,7 +548,12 @@ The statement seems modest — just one root guaranteed. But its consequences ar
 
 The conclusion: every polynomial of degree $n$ factors completely as:
 
-$$p(z) = a_n(z - z_1)(z - z_2)\\cdots(z - z_n)$$
+@academic[formula_callout:Fundamental Theorem of Algebra
+$$p(z) = a_n(z - z_1)(z - z_2) \\cdots (z - z_n)$$
+/complex-numbers/formulas#fundamental_theorem_of_algebra]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 where $a_n$ is the leading coefficient and $z_1, z_2, \\ldots, z_n$ are the $n$ roots (possibly with repetitions). A polynomial of degree $n$ has exactly $n$ roots in $\\mathbb{C}$, counted with multiplicity.
 
@@ -1083,7 +596,12 @@ Every polynomial admits such complete factorization. Real polynomials may resist
 
 For a monic quadratic $z^2 + bz + c = 0$ with roots $z_1$ and $z_2$:
 
-$$z_1 + z_2 = -b \\qquad z_1 \\cdot z_2 = c$$
+@academic[formula_callout:Vieta's Quadratic
+$$z_1 + z_2 = -\\frac{b}{a}, \\qquad z_1 \\cdot z_2 = \\frac{c}{a}$$
+/complex-numbers/formulas#vietas_quadratic]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 The sum of roots equals the negative of the linear coefficient. The product of roots equals the constant term. Given roots $3$ and $-5$, the polynomial is $z^2 - (-2)z + (-15) = z^2 + 2z - 15$.
 
@@ -1093,7 +611,14 @@ $$z_1 + z_2 + z_3 = -b$$
 $$z_1z_2 + z_1z_3 + z_2z_3 = c$$
 $$z_1z_2z_3 = -d$$
 
-The pattern continues for higher degrees. The $k$-th symmetric sum of roots (all products of $k$ roots) equals $(-1)^k$ times the coefficient of $z^{n-k}$ in a monic polynomial of degree $n$.
+The pattern continues for higher degrees. The $k$-th symmetric sum of roots (all products of $k$ roots) equals $(-1)^k$ times the coefficient of $z^{n-k}$ in a monic polynomial of degree $n$. Formally:
+
+@academic[formula_callout:Vieta's General
+$$\\sum_{i} r_i = -\\frac{a_{n-1}}{a_n}, \\qquad \\prod_{i} r_i = (-1)^n \\frac{a_0}{a_n}$$
+/complex-numbers/formulas#vietas_general]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 These formulas prove useful in both directions. Given a polynomial, we can compute sums and products of roots without finding the roots explicitly. Given information about roots, we can reconstruct polynomial coefficients. Problems asking for the sum of squares of roots or similar expressions often yield to Vieta's formulas combined with algebraic identities like $(z_1 + z_2)^2 = z_1^2 + 2z_1z_2 + z_2^2$.`,
   after: ``,
@@ -1103,7 +628,14 @@ These formulas prove useful in both directions. Given a polynomial, we can compu
     obj5: {
   title: `Polynomials with Real Coefficients`,
   before: ``,
-  content: `Polynomials whose coefficients are all real numbers exhibit special structure: their non-real roots always come in [conjugate](!/complex-numbers/complex-conjugate) pairs. If $z_0$ is a root, so is $\\bar{z_0}$.
+  content: `Polynomials whose coefficients are all real numbers exhibit special structure: their non-real roots always come in [conjugate](!/complex-numbers/complex-conjugate) pairs. If $z_0$ is a root, so is $\\bar{z_0}$. Formally:
+
+@academic[formula_callout:Conjugate Root Theorem
+$$p(z_0) = 0 \\;\\Rightarrow\\; p(\\overline{z_0}) = 0 \\quad \\text{(real coefficients)}$$
+/complex-numbers/formulas#conjugate_root_theorem]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 The proof exploits how conjugation interacts with polynomial evaluation. Let $p(z) = a_nz^n + a_{n-1}z^{n-1} + \\cdots + a_0$ with all $a_k$ real. For any complex $z$:
 
@@ -1129,7 +661,12 @@ This explains why every real cubic crosses the real axis: it must have either th
   before: ``,
   content: `The quadratic formula extends unchanged into the complex domain. For the equation $az^2 + bz + c = 0$ with complex coefficients $a$, $b$, $c$ (and $a \\neq 0$):
 
+@academic[formula_callout:Quadratic Formula in Complex
 $$z = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$
+/complex-numbers/formulas#quadratic_formula_in_complex]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 The formula remains valid, but a new challenge emerges: the discriminant $\\Delta = b^2 - 4ac$ may itself be complex, requiring us to compute the square root of a complex number.
 
@@ -1305,6 +842,7 @@ The Fundamental Theorem of Algebra ensures that these applications never encount
     }
   
   }
+
 
 
   const introContent = {

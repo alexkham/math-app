@@ -1,72 +1,164 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import Head from 'next/head'
-// import '@/pages/pages.css'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// tables-optimized: v4 | 2026-06-03 | 2 tables (obj2 comparison, obj8 summary capstone)
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import Head from 'next/head'
+import '@/pages/pages.css'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
+export async function getStaticProps(){
 
-//   const keyWords = [
-//     'counting principles',
-//     'addition rule combinatorics',
-//     'multiplication rule combinatorics',
-//     'rule of sum',
-//     'rule of product',
-//     'complementary counting',
-//     'double counting',
-//     'pigeonhole principle',
-//     'fundamental counting principle',
-//     'combinatorics rules',
-//     'counting techniques',
-//     'counting methods',
-//     'basic counting principles',
-//     'combinatorial counting'
-//   ]
+  const keyWords = [
+    'counting principles',
+    'addition rule combinatorics',
+    'multiplication rule combinatorics',
+    'rule of sum',
+    'rule of product',
+    'complementary counting',
+    'double counting',
+    'pigeonhole principle',
+    'fundamental counting principle',
+    'combinatorics rules',
+    'counting techniques',
+    'counting methods',
+    'basic counting principles',
+    'combinatorial counting'
+  ]
 
-//   // •
+  // •
 
-// //   \u2022 First item
-// // \u2022 Second item
+//   \u2022 First item
+// \u2022 Second item
 
   
-// // <hr style="border-width:1px;"></hr>
+// <hr style="border-width:1px;"></hr>
 
-// // <hr style="color:blue;" />
+// <hr style="color:blue;" />
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// <hr style="border-color:#3498db; border-width:1px;" />
 
 
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
  
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
+// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.notation)}
+        // </div>,
 
 
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
+//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+//     {processContent(sectionsContent.normal.parameters)}
+// </div>,
         
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
+//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+//                   {processContent(sectionsContent.obj4.content)}
+//                   </div>,
 
 
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+//  <div key={'dist'} style={{
+//                     textAlign: 'center',
+//                     transform: 'scale(0.98)',
+//                     transformOrigin: 'center',
+//                     marginTop:'50px',
+//                     marginLeft:'-150px'
+//                   }} dangerouslySetInnerHTML={{ 
+//                     __html:   sectionContent.distributions.svg,
+//                   }} />
+
+  const linkStyle = 'color: inherit; text-decoration: underline;'
+
+  // ---------- TABLES ----------
+
+  // obj2 — comparison: addition rule vs multiplication rule (the AND/OR foundational pair)
+  const obj2Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Aspect</th>
+      <th style="${tableHeaders.comparison}">Addition rule</th>
+      <th style="${tableHeaders.comparison}">Multiplication rule</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linguistic marker</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&quot;or&quot; — method 1 OR method 2 OR …</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&quot;and&quot; — step 1 AND step 2 AND …</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Structural condition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cases are mutually exclusive (no outcome belongs to two methods)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">steps are independent (count per step does not depend on earlier choices)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Formula</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">m₁ + m₂ + … + m<sub>k</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">m₁ × m₂ × … × m<sub>k</sub></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/set-theory" style="${linkStyle}">Set-theory</a> identity</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|A ∪ B| = |A| + |B| for disjoint A, B</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|A × B| = |A| · |B| (Cartesian product)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Example</td>
+      <td style="padding: 12px 15px; color: #34495e;">2 bus + 3 train + 4 taxi routes → 9 total</td>
+      <td style="padding: 12px 15px; color: #34495e;">3 mains × 2 drinks × 4 desserts → 24 meals</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj8 — summary capstone: all five principles in one reference card
+  const capstoneTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Principle</th>
+      <th style="${tableHeaders.summary}">Marker / form</th>
+      <th style="${tableHeaders.summary}">What it does</th>
+      <th style="${tableHeaders.summary}">Canonical example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Addition rule</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&quot;or&quot; across mutually exclusive cases</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sum the counts of each case</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2 + 3 + 4 = 9 route choices</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Multiplication rule</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&quot;and&quot; across independent steps</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">multiply the step counts</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">3 × 2 × 4 = 24 lunch combos</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Complementary counting</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&quot;at least one&quot; → count its negation &quot;none&quot;</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|A| = |U| − |U ∖ A|; subtract the complement</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">900 − 648 = 252 three-digit integers with a repeated digit</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Double counting</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">count the same set two different ways</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">equate the two expressions → identity, not a number</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">handshake lemma: Σ deg(v) = 2|E|</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Pigeonhole principle</td>
+      <td style="padding: 12px 15px; color: #34495e;">items &gt; containers</td>
+      <td style="padding: 12px 15px; color: #34495e;">at least one container holds ≥ ⌈n⁄k⌉ items (existence, not location)</td>
+      <td style="padding: 12px 15px; color: #34495e;">13 people, 12 months → two share a birth month</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 //    const sectionsContent = {
 //   obj1: {
@@ -257,568 +349,32 @@
 //     after: ``,
 //     link: '',
 //   },
-// };
 
-
-
-// const introContent = {
-//   id: 'intro',
-//   title: `The Logic Beneath the Formulas`,
-//   content: `
-// Before any specific formula in combinatorics — before permutations, combinations, or the binomial theorem — there are a small number of logical rules that govern how counts combine. Every counting argument in the section, however elaborate, is a structured application of these rules.
- 
-// Two of them are foundational. The addition rule applies when a count splits into mutually exclusive cases; the multiplication rule applies when an outcome is built from a sequence of independent steps. Three further principles extend or vary these ideas: complementary counting (count what fails the condition and subtract), double counting (count the same set two ways and equate), and the pigeonhole principle (more items than containers forces a repeat).
- 
-// Each principle answers a structural question about a counting problem rather than computing a specific number. Recognizing which principle applies is the first step in any counting argument.
+//   obj8: {
+//     title: `Counting Principles at a Glance`,
+//     content: `
+// The page covered five logical rules behind every counting argument: the addition and multiplication rules for combining counts, complementary counting for &quot;at least one&quot; problems, double counting as a proof technique for identities, and the pigeonhole principle for existence guarantees. The table below collects each principle with its linguistic marker, its purpose, and a canonical example.
 // `,
+//     before: ``,
+//     between: ``,
+//     after: ``,
+//     link: '',
+//   },
 // };
 
-// const faqQuestions = {
-//   obj1: {
-//     question: "What are the basic counting principles in combinatorics?",
-//     answer: "The basic counting principles are the addition rule, the multiplication rule, complementary counting, double counting, and the pigeonhole principle. Together they form the logical foundation behind every counting formula, including permutations, combinations, and binomial identities."
-//   },
-//   obj2: {
-//     question: "What is the difference between the addition rule and the multiplication rule?",
-//     answer: "The addition rule applies when a count splits into mutually exclusive cases (the linguistic marker is 'or') and totals the case counts. The multiplication rule applies when an outcome is built from a sequence of independent steps (the marker is 'and') and multiplies the step counts."
-//   },
-//   obj3: {
-//     question: "What is complementary counting?",
-//     answer: "Complementary counting computes |A| as |U| - |Aᶜ|, counting the total and subtracting the complement. It is most useful when the condition has the form 'at least one', since its negation 'none' typically partitions into a single clean case rather than overlapping subcases."
-//   },
-//   obj4: {
-//     question: "What does the pigeonhole principle state?",
-//     answer: "If n items are distributed among k containers and n > k, at least one container holds at least two items. The generalized form states that at least one container holds at least ⌈n/k⌉ items. The principle proves existence — it does not identify which container holds the collision."
-//   },
-//   obj5: {
-//     question: "When do you use double counting?",
-//     answer: "Double counting is used to prove combinatorial identities. The same set is counted in two genuinely different ways, and the two resulting expressions are equated. This produces identities such as the handshake lemma and many binomial-coefficient identities including Vandermonde's identity."
-//   }
-// }
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Counting Principles in Combinatorics",
-//     "description": "Counting principles of combinatorics: addition rule, multiplication rule, complementary counting, double counting, and the pigeonhole principle explained.",
-//     "url": "https://www.learnmathclass.com/combinatorics/counting-principles",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Counting Principles"
-//     },
-//     "teaches": [
-//       "Addition rule for mutually exclusive cases",
-//       "Multiplication rule for sequential independent steps",
-//       "Complementary counting strategy for 'at least one' problems",
-//       "Double counting as a proof technique for combinatorial identities",
-//       "Pigeonhole principle in basic and generalized form",
-//       "Combining counting principles in multi-step problems"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Combinatorics",
-//         "item": "https://www.learnmathclass.com/combinatorics"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Counting Principles",
-//         "item": "https://www.learnmathclass.com/combinatorics/counting-principles"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//          faqQuestions,
-//          schemas,
-//           seoData: {
-//         title: "Counting Principles in Combinatorics | Learn Math Class",
-//         description: "Counting principles of combinatorics: addition rule, multiplication rule, complementary counting, double counting, and the pigeonhole principle explained.",
-//         keywords: keyWords.join(", "),
-//         url: "/combinatorics/counting-principles",
-//          name: "Counting Principles in Combinatorics"
-//       },
-        
-//        }
-//     }
-//    }
-
-// export default function CountingPrinciplesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-
-    
-//   const genericSections=[
-//     // {
-//     //     id:'0',
-//     //     title:sectionsContent.obj0.title,
-//     //     link:sectionsContent.obj0.link,
-//     //     content:[
-//     //       sectionsContent.obj0.content,
-//     //     ]
-//     // },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     // {
-//     //     id:'8',
-//     //     title:sectionsContent.obj8.title,
-//     //     link:sectionsContent.obj8.link,
-//     //     content:[
-//     //       sectionsContent.obj8.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <meta name="viewport" content="width=device-width, initial-scale=1" />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Counting Principles</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//     {/* <KeyTermsCard
-//      id="0"
-//      title={sectionsContent.obj0.title}
-//      content={sectionsContent.obj0.content}
-//      after={sectionsContent.obj0.after}
-//      variant="light"
-//    /> */}
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-// tables-optimized: v4 | 2026-06-03 | 2 tables (obj2 comparison, obj8 summary capstone)
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import Head from 'next/head'
-import '@/pages/pages.css'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-
-  const keyWords = [
-    'counting principles',
-    'addition rule combinatorics',
-    'multiplication rule combinatorics',
-    'rule of sum',
-    'rule of product',
-    'complementary counting',
-    'double counting',
-    'pigeonhole principle',
-    'fundamental counting principle',
-    'combinatorics rules',
-    'counting techniques',
-    'counting methods',
-    'basic counting principles',
-    'combinatorial counting'
-  ]
-
-  // •
-
-//   \u2022 First item
-// \u2022 Second item
-
-  
-// <hr style="border-width:1px;"></hr>
-
-// <hr style="color:blue;" />
-
-// <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-        //     {processContent(sectionsContent.normal.notation)}
-        // </div>,
-
-
-//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-//     {processContent(sectionsContent.normal.parameters)}
-// </div>,
-        
-//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-//                   {processContent(sectionsContent.obj4.content)}
-//                   </div>,
-
-
-//  <div key={'dist'} style={{
-//                     textAlign: 'center',
-//                     transform: 'scale(0.98)',
-//                     transformOrigin: 'center',
-//                     marginTop:'50px',
-//                     marginLeft:'-150px'
-//                   }} dangerouslySetInnerHTML={{ 
-//                     __html:   sectionContent.distributions.svg,
-//                   }} />
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-
-  // ---------- TABLES ----------
-
-  // obj2 — comparison: addition rule vs multiplication rule (the AND/OR foundational pair)
-  const obj2Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 80%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Aspect</th>
-      <th style="${tableHeaders.comparison}">Addition rule</th>
-      <th style="${tableHeaders.comparison}">Multiplication rule</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linguistic marker</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&quot;or&quot; — method 1 OR method 2 OR …</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&quot;and&quot; — step 1 AND step 2 AND …</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Structural condition</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cases are mutually exclusive (no outcome belongs to two methods)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">steps are independent (count per step does not depend on earlier choices)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Formula</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">m₁ + m₂ + … + m<sub>k</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">m₁ × m₂ × … × m<sub>k</sub></td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/set-theory" style="${linkStyle}">Set-theory</a> identity</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|A ∪ B| = |A| + |B| for disjoint A, B</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|A × B| = |A| · |B| (Cartesian product)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Example</td>
-      <td style="padding: 12px 15px; color: #34495e;">2 bus + 3 train + 4 taxi routes → 9 total</td>
-      <td style="padding: 12px 15px; color: #34495e;">3 mains × 2 drinks × 4 desserts → 24 meals</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj8 — summary capstone: all five principles in one reference card
-  const capstoneTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 80%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Principle</th>
-      <th style="${tableHeaders.summary}">Marker / form</th>
-      <th style="${tableHeaders.summary}">What it does</th>
-      <th style="${tableHeaders.summary}">Canonical example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Addition rule</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&quot;or&quot; across mutually exclusive cases</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sum the counts of each case</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2 + 3 + 4 = 9 route choices</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Multiplication rule</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&quot;and&quot; across independent steps</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">multiply the step counts</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">3 × 2 × 4 = 24 lunch combos</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Complementary counting</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&quot;at least one&quot; → count its negation &quot;none&quot;</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|A| = |U| − |U ∖ A|; subtract the complement</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">900 − 648 = 252 three-digit integers with a repeated digit</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Double counting</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">count the same set two different ways</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">equate the two expressions → identity, not a number</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">handshake lemma: Σ deg(v) = 2|E|</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Pigeonhole principle</td>
-      <td style="padding: 12px 15px; color: #34495e;">items &gt; containers</td>
-      <td style="padding: 12px 15px; color: #34495e;">at least one container holds ≥ ⌈n⁄k⌉ items (existence, not location)</td>
-      <td style="padding: 12px 15px; color: #34495e;">13 people, 12 months → two share a birth month</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-   const sectionsContent = {
+// formulas-optimized: v1 | 2026-06-11 | 6 callouts (obj1, obj2, obj3, obj4, obj5 ×2)
+const sectionsContent = {
   obj1: {
     title: `The Addition Rule`,
     content: `
 The addition rule applies when a count splits into cases that cannot occur simultaneously. If an outcome can be achieved by method 1 in $m_1$ ways, by method 2 in $m_2$ ways, and so on through method $k$ in $m_k$ ways, with no outcome belonging to more than one method, then the total number of outcomes is
  
-$$m_1 + m_2 + \\cdots + m_k.$$
+@academic[formula_callout:Addition Rule
+$$|A_1 \\cup A_2 \\cup \\cdots \\cup A_k| = |A_1| + |A_2| + \\cdots + |A_k|, \\quad A_i \\cap A_j = \\emptyset \\text{ for } i \\neq j.$$
+/combinatorics/formulas#addition_rule]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
  
 The linguistic marker for the addition rule is the word **or** — pick method 1 OR method 2 OR method 3. Each "or" between mutually exclusive cases contributes its own count to the sum.
  
@@ -845,7 +401,12 @@ The rule requires that the cases be mutually exclusive. When two methods share o
     content: `
 The multiplication rule applies when an outcome is built from a sequence of independent steps, each contributing its own number of options. If step 1 has $m_1$ outcomes, step 2 has $m_2$ outcomes, and so on through step $k$ with $m_k$ outcomes, and the steps are independent, then the combined sequence has
  
-$$m_1 \\times m_2 \\times \\cdots \\times m_k$$
+@academic[formula_callout:Multiplication Rule
+$$|A_1 \\times A_2 \\times \\cdots \\times A_k| = |A_1| \\cdot |A_2| \\cdots |A_k| = m_1 \\cdot m_2 \\cdots m_k.$$
+/combinatorics/formulas#multiplication_rule]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
  
 possible outcomes.
  
@@ -880,7 +441,12 @@ Some counting problems are easier to solve in reverse. Counting the cases that f
  
 If $U$ is the universe of all outcomes and $A \\subseteq U$ is the set of desired outcomes, then
  
-$$|A| = |U| - |U \\setminus A|.$$
+@academic[formula_callout:Complementary Counting
+$$|A| = |U| - |U \\setminus A| = |U| - |A^c|.$$
+/combinatorics/formulas#complementary_counting]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
  
 The strategy is to count the total, count the complement, and subtract.
  
@@ -905,7 +471,12 @@ Double counting is a proof technique rather than a counting formula. The set in 
  
 If $|S|$ can be expressed as $f(n)$ by one argument and as $g(n)$ by another argument, then
  
-$$f(n) = g(n).$$
+@academic[formula_callout:Double Counting
+$$|S| = f(n) = g(n) \\implies f(n) = g(n).$$
+/combinatorics/formulas#double_counting]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
  
 ## The Handshake Lemma
  
@@ -929,12 +500,30 @@ The pigeonhole principle does not count outcomes — it guarantees the existence
 ## Basic Form
  
 If $n$ items are distributed among $k$ containers and $n > k$, then at least one container holds at least two items.
+
+Formally:
+
+@academic[formula_callout:Pigeonhole Principle
+$$n > k \\implies \\exists \\text{ container with } \\ge 2 \\text{ items}.$$
+/combinatorics/formulas#pigeonhole_principle]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
  
 The reasoning is direct: if every container held at most one item, the total number of items would be at most $k$, contradicting $n > k$.
  
 ## Generalized Form
  
 If $n$ items are distributed among $k$ containers, then at least one container holds at least $\\lceil n/k \\rceil$ items, where $\\lceil \\cdot \\rceil$ denotes the ceiling function. The basic form is the case $n = k+1$, which forces $\\lceil n/k \\rceil = 2$.
+
+Formally:
+
+@academic[formula_callout:Pigeonhole Principle (Generalized)
+$$n \\text{ items into } k \\text{ containers} \\implies \\exists \\text{ container with } \\ge \\lceil n/k \\rceil \\text{ items}.$$
+/combinatorics/formulas#pigeonhole_principle_generalized]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
  
 ## Examples
  
@@ -1013,8 +602,6 @@ The page covered five logical rules behind every counting argument: the addition
     link: '',
   },
 };
-
-
 
 const introContent = {
   id: 'intro',

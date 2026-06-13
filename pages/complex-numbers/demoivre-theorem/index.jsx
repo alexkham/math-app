@@ -1,74 +1,221 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages/pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages/pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
+export async function getStaticProps(){
 
-//  const keyWords = [
-//   "De Moivre's theorem",
-//   "De Moivre's formula",
-//   "complex number powers",
-//   "nth roots complex numbers",
-//   "roots of unity",
-//   "cis theta power n",
-//   "(cos θ + i sin θ)^n",
-//   "find nth roots",
-//   "cube roots complex",
-//   "square roots complex number",
-//   "complex roots regular polygon",
-//   "primitive root of unity",
-//   "De Moivre proof",
-//   "trigonometric form powers",
-//   "complex number root formula"
-// ]
+ const keyWords = [
+  "De Moivre's theorem",
+  "De Moivre's formula",
+  "complex number powers",
+  "nth roots complex numbers",
+  "roots of unity",
+  "cis theta power n",
+  "(cos θ + i sin θ)^n",
+  "find nth roots",
+  "cube roots complex",
+  "square roots complex number",
+  "complex roots regular polygon",
+  "primitive root of unity",
+  "De Moivre proof",
+  "trigonometric form powers",
+  "complex number root formula"
+]
 
-//   // •
+  const linkStyle = 'color: inherit; text-decoration: underline;'
 
-// //   \u2022 First item
-// // \u2022 Second item
+  // ---------- TABLES ----------
 
-  
-// // <hr style="border-width:1px;"></hr>
+  // obj4 — aggregation: worked powers examples
+  const obj4Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">z</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">n</th>
+      <th style="${tableHeaders.aggregation}">r, θ</th>
+      <th style="${tableHeaders.aggregation}">r&#x207F; cis(nθ)</th>
+      <th style="${tableHeaders.aggregation}">Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">1 + i</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">10</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√2, &nbsp;45°</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(√2)¹⁰ cis(450°) = 32 cis(90°)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">32i</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">√3 − i</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">6</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2, &nbsp;−30°</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2⁶ cis(−180°) = 64 · (−1)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−64</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">2 cis(30°)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">6</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2, &nbsp;30°</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2⁶ cis(180°)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−64</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">3 cis(60°)</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">−2</td>
+      <td style="padding: 12px 15px; color: #34495e;">3, &nbsp;60°</td>
+      <td style="padding: 12px 15px; color: #34495e;">3⁻² cis(−120°) = (1⁄9) cis(−120°)</td>
+      <td style="padding: 12px 15px; color: #34495e;">−1⁄18 − (√3⁄18) i</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="color:blue;" />
+  // obj7 — aggregation: geometric structure of n-th roots
+  const obj7Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation} text-align: center;">n</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">Angular separation</th>
+      <th style="${tableHeaders.aggregation}">Polygon shape on the circle of radius R&#x141;ⁿ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">180°</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two diametrically opposite points (a line segment through the origin)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">3</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">120°</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">equilateral triangle</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">4</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">90°</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">5</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">72°</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">regular pentagon</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">6</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">60°</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">regular hexagon</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">general n</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">360°⁄n</td>
+      <td style="padding: 12px 15px; color: #34495e;">regular n-gon centered at origin</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+  // obj8 — aggregation: small-n roots of unity enumerated
+  const obj8Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation} text-align: center;">n</th>
+      <th style="${tableHeaders.aggregation}">n-th roots of unity (as cis)</th>
+      <th style="${tableHeaders.aggregation}">In algebraic form a + bi</th>
+      <th style="${tableHeaders.aggregation}">Polygon</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cis(0°), cis(180°)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1, &nbsp;−1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two points on the real axis</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">3</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cis(0°), cis(120°), cis(240°)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1, &nbsp;−1⁄2 + (√3⁄2)i, &nbsp;−1⁄2 − (√3⁄2)i</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">equilateral triangle</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">4</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cis(0°), cis(90°), cis(180°), cis(270°)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1, &nbsp;i, &nbsp;−1, &nbsp;−i</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">6</td>
+      <td style="padding: 12px 15px; color: #34495e;">cis(60°k), k = 0…5</td>
+      <td style="padding: 12px 15px; color: #34495e;">1, &nbsp;1⁄2 + (√3⁄2)i, &nbsp;−1⁄2 + (√3⁄2)i, &nbsp;−1, &nbsp;−1⁄2 − (√3⁄2)i, &nbsp;1⁄2 − (√3⁄2)i</td>
+      <td style="padding: 12px 15px; color: #34495e;">regular hexagon</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+  // obj11 — summary capstone: forward (powers) vs reverse (roots) De Moivre
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Aspect</th>
+      <th style="${tableHeaders.summary}">Forward direction&nbsp;&nbsp;<span style="font-weight: normal; font-size: 13px;">(powers)</span></th>
+      <th style="${tableHeaders.summary}">Reverse direction&nbsp;&nbsp;<span style="font-weight: normal; font-size: 13px;">(n-th roots)</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Question</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">given z, what is zⁿ ?</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">given w, what are the z with zⁿ = w ?</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Formula</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zⁿ = rⁿ cis(nθ)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z&#x2096; = R&#x141;ⁿ cis((φ + 360°k) ⁄ n), k = 0…n−1</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Modulus operation</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r → rⁿ&nbsp;&nbsp;<span style="font-size: 13px;">(raise to nth power)</span></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">R → R&#x141;ⁿ&nbsp;&nbsp;<span style="font-size: 13px;">(take positive nth root)</span></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Argument operation</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">θ → nθ&nbsp;&nbsp;<span style="font-size: 13px;">(multiply by n)</span></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">φ → (φ + 360°k) ⁄ n&nbsp;&nbsp;<span style="font-size: 13px;">(divide, then shift by k turns)</span></td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Number of results</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exactly 1 (a single value)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exactly n (distinct roots)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Geometric picture</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a single point at distance rⁿ from the origin</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vertices of a regular n-gon on the circle of radius R&#x141;ⁿ</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Worked example</td>
+      <td style="padding: 12px 15px; color: #34495e;">(1 + i)¹⁰ = 32i&nbsp;&nbsp;<span style="font-size: 13px;">(one answer)</span></td>
+      <td style="padding: 12px 15px; color: #34495e;">z⁴ = −16: four roots √2(±1 ± i)&nbsp;&nbsp;<span style="font-size: 13px;">(a square)</span></td>
+    </tr>
+  </tbody>
+</table>
+`
 
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+  // ---------- SECTIONS (original prose unchanged; obj11 added) ----------
 
 //     const sectionsContent={
 
@@ -349,8 +496,8 @@
 //   link: '',
 // },
 //     obj11:{
-//       title:``,
-//       content:``,
+//       title:`Summary: Forward and Reverse Directions of De Moivre's Theorem`,
+//       content:`De Moivre's theorem operates in two directions. Run forward, it turns a complex number into its $n$th power — a single answer obtained by raising the [modulus](!/complex-numbers/absolute-value) and multiplying the [argument](!/complex-numbers/trigonometric-form). Run in reverse, it produces every $n$th root of a given number — $n$ distinct values arranged as a regular polygon. The table below collects both directions side by side: formula, what happens to modulus and argument, how many results to expect, and the geometric picture each direction draws on the complex plane.`,
 //       before:``,
 //       after:``,
 //       link:'',
@@ -397,654 +544,8 @@
 //   }
 
 
-//   const introContent = {
-//   id: "intro",
-//   title: "Powers and Roots Made Simple",
-//   content: `
-//   Computing $(1 + i)^{100}$ through repeated multiplication would fill pages with tedious algebra. Yet the answer emerges in seconds using De Moivre's theorem — a formula that transforms exponentiation into elementary arithmetic on angles and lengths. This same principle runs in reverse to extract roots, revealing that every nonzero complex number has exactly $n$ distinct $n$-th roots, arranged in perfect geometric symmetry around the origin.
-//   `
-// }
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is De Moivre's theorem?",
-//     answer: "De Moivre's theorem states that (cos θ + i sin θ)^n = cos(nθ) + i sin(nθ) for any integer n. In compact notation, (cis θ)^n = cis(nθ). The angle simply multiplies by the exponent, making complex powers trivial to compute in trigonometric form."
-//   },
-//   obj2: {
-//     question: "How do you apply De Moivre's theorem to complex powers?",
-//     answer: "Convert the complex number to trigonometric form z = r·cis θ, then apply the formula: z^n = r^n·cis(nθ). The modulus raises to the nth power and the argument multiplies by n. Finally, convert back to algebraic form if needed."
-//   },
-//   obj3: {
-//     question: "Does De Moivre's theorem work for negative exponents?",
-//     answer: "Yes. For negative integers, z^(-n) = r^(-n)·cis(-nθ). The modulus inverts and the argument multiplies by the negative exponent. The same structural simplicity applies to all integer powers, positive or negative."
-//   },
-//   obj4: {
-//     question: "How do you prove De Moivre's theorem?",
-//     answer: "The proof uses mathematical induction. The base case n = 1 is trivial. For the inductive step, multiply (cis θ)^k by cis θ, which adds arguments to give cis((k+1)θ). Extension to negative integers follows from the reciprocal relationship z^(-n) = 1/z^n."
-//   },
-//   obj5: {
-//     question: "How many nth roots does a complex number have?",
-//     answer: "Every nonzero complex number has exactly n distinct nth roots. They all have the same modulus R^(1/n) and are evenly spaced around a circle, with arguments differing by 360°/n. The roots form vertices of a regular n-gon."
-//   },
-//   obj6: {
-//     question: "What is the formula for nth roots of a complex number?",
-//     answer: "For w = R·cis φ, the n roots are z_k = R^(1/n)·cis((φ + 360°k)/n) for k = 0, 1, ..., n-1. Each value of k gives a distinct root. Beyond k = n-1, the angles repeat and no new roots appear."
-//   },
-//   obj7: {
-//     question: "Why do nth roots form a regular polygon?",
-//     answer: "All n roots share the same modulus R^(1/n), placing them on a circle. Consecutive roots differ in argument by exactly 360°/n, spacing them evenly. This uniform distribution around the circle creates vertices of a regular n-gon."
-//   },
-//   obj8: {
-//     question: "What are the roots of unity?",
-//     answer: "The nth roots of unity are the n solutions to z^n = 1. They are z_k = cis(360°k/n) for k = 0, 1, ..., n-1. All lie on the unit circle and form a regular n-gon. The root ω = cis(360°/n) generates all others as powers: 1, ω, ω², ..., ω^(n-1)."
-//   },
-//   obj9: {
-//     question: "What is a primitive root of unity?",
-//     answer: "The primitive nth root of unity is ω = cis(2π/n) = cis(360°/n). It generates all other nth roots through its powers: the complete set is {1, ω, ω², ..., ω^(n-1)}. This generator connects roots of unity to group theory."
-//   },
-//   obj10: {
-//     question: "What is the sum of all nth roots of unity?",
-//     answer: "The sum of all nth roots of unity equals zero: 1 + ω + ω² + ... + ω^(n-1) = 0. Geometrically, the roots form a regular polygon centered at the origin, so their vector sum returns to zero. This is a geometric series with ratio ω ≠ 1."
-//   },
-//   obj11: {
-//     question: "What is the product of all nth roots of unity?",
-//     answer: "The product of all nth roots of unity is (-1)^(n+1). For odd n, the product is 1. For even n, the product is -1. This relates to the constant term of the polynomial z^n - 1."
-//   },
-//   obj12: {
-//     question: "What are the fourth roots of unity?",
-//     answer: "The fourth roots of unity are 1, i, -1, and -i. They sit at 0°, 90°, 180°, and 270° on the unit circle, forming a square. Each satisfies z⁴ = 1."
-//   },
-//   obj13: {
-//     question: "How do you find the cube roots of a negative number?",
-//     answer: "Write the negative number in trigonometric form with argument 180°. For -8 = 8·cis(180°), the cube roots are 2·cis((180° + 360°k)/3) for k = 0, 1, 2, giving 2·cis(60°), 2·cis(180°) = -2, and 2·cis(300°). One root is real (-2), and two are complex conjugates."
-//   },
-//   obj14: {
-//     question: "What are the square roots of i?",
-//     answer: "Write i = 1·cis(90°). The square roots are cis(45°) and cis(225°), which equal (√2/2)(1 + i) and (√2/2)(-1 - i). They are opposite each other on the unit circle, separated by 180°."
-//   }
-// }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "De Moivre's Theorem",
-//     "description": "Master De Moivre's theorem for complex powers and roots. Learn the formula (cis θ)^n = cis(nθ), find nth roots of any complex number, and explore roots of unity with geometric interpretations.",
-//     "url": "https://www.learnmathclass.com/complex-numbers/demoivre-theorem",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "De Moivre's Theorem"
-//     },
-//     "teaches": [
-//       "De Moivre's formula for complex powers",
-//       "Proof of De Moivre's theorem by induction",
-//       "Computing high powers of complex numbers",
-//       "Formula for nth roots of complex numbers",
-//       "Geometric interpretation of roots as regular polygons",
-//       "Roots of unity and their properties",
-//       "Primitive roots of unity and generation"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Complex Numbers",
-//         "item": "https://www.learnmathclass.com/complex-numbers"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "De Moivre's Theorem",
-//         "item": "https://www.learnmathclass.com/complex-numbers/demoivre-theorem"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-
- 
-
-//   return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "De Moivre's Theorem: Powers & Roots of ℂ | Learn Math Class",
-//       description: "Master De Moivre's theorem for complex powers and roots. Learn the formula (cis θ)^n = cis(nθ), find nth roots of any complex number, and explore roots of unity with geometric interpretations.",
-//       keywords: keyWords.join(", "),
-//       url: "/complex-numbers/demoivre-theorem",
-//       name: "De Moivre's Theorem"
-//     },
-//   }
-// }
-//    }
-
-
-
-// export default function DeMoivreTheoremPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-
-
-//   const genericSections=[
-//      {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//           sectionsContent.obj0.after,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
- 
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Demoivre Theorem</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//    showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "siblings"
-//          secondaryNavTitle="More in Complex Numbers"
-   
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//     <KeyTermsCard
-//            id="0"
-//            title={sectionsContent.obj0.title}
-//            content={sectionsContent.obj0.content}
-//            after={sectionsContent.obj0.after}
-//            variant="light"
-//          />
-//    <br/>
-//    <Sections sections={genericSections.slice(1)}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages/pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-
- const keyWords = [
-  "De Moivre's theorem",
-  "De Moivre's formula",
-  "complex number powers",
-  "nth roots complex numbers",
-  "roots of unity",
-  "cis theta power n",
-  "(cos θ + i sin θ)^n",
-  "find nth roots",
-  "cube roots complex",
-  "square roots complex number",
-  "complex roots regular polygon",
-  "primitive root of unity",
-  "De Moivre proof",
-  "trigonometric form powers",
-  "complex number root formula"
-]
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-
-  // ---------- TABLES ----------
-
-  // obj4 — aggregation: worked powers examples
-  const obj4Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">z</th>
-      <th style="${tableHeaders.aggregation} text-align: center;">n</th>
-      <th style="${tableHeaders.aggregation}">r, θ</th>
-      <th style="${tableHeaders.aggregation}">r&#x207F; cis(nθ)</th>
-      <th style="${tableHeaders.aggregation}">Result</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">1 + i</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">10</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√2, &nbsp;45°</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(√2)¹⁰ cis(450°) = 32 cis(90°)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">32i</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">√3 − i</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">6</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2, &nbsp;−30°</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2⁶ cis(−180°) = 64 · (−1)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−64</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">2 cis(30°)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">6</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2, &nbsp;30°</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2⁶ cis(180°)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−64</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">3 cis(60°)</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">−2</td>
-      <td style="padding: 12px 15px; color: #34495e;">3, &nbsp;60°</td>
-      <td style="padding: 12px 15px; color: #34495e;">3⁻² cis(−120°) = (1⁄9) cis(−120°)</td>
-      <td style="padding: 12px 15px; color: #34495e;">−1⁄18 − (√3⁄18) i</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj7 — aggregation: geometric structure of n-th roots
-  const obj7Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation} text-align: center;">n</th>
-      <th style="${tableHeaders.aggregation} text-align: center;">Angular separation</th>
-      <th style="${tableHeaders.aggregation}">Polygon shape on the circle of radius R&#x141;ⁿ</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">180°</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two diametrically opposite points (a line segment through the origin)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">3</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">120°</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">equilateral triangle</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">4</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">90°</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">5</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">72°</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">regular pentagon</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">6</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">60°</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">regular hexagon</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">general n</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">360°⁄n</td>
-      <td style="padding: 12px 15px; color: #34495e;">regular n-gon centered at origin</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj8 — aggregation: small-n roots of unity enumerated
-  const obj8Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation} text-align: center;">n</th>
-      <th style="${tableHeaders.aggregation}">n-th roots of unity (as cis)</th>
-      <th style="${tableHeaders.aggregation}">In algebraic form a + bi</th>
-      <th style="${tableHeaders.aggregation}">Polygon</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cis(0°), cis(180°)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1, &nbsp;−1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two points on the real axis</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">3</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cis(0°), cis(120°), cis(240°)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1, &nbsp;−1⁄2 + (√3⁄2)i, &nbsp;−1⁄2 − (√3⁄2)i</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">equilateral triangle</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">4</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cis(0°), cis(90°), cis(180°), cis(270°)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1, &nbsp;i, &nbsp;−1, &nbsp;−i</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">6</td>
-      <td style="padding: 12px 15px; color: #34495e;">cis(60°k), k = 0…5</td>
-      <td style="padding: 12px 15px; color: #34495e;">1, &nbsp;1⁄2 + (√3⁄2)i, &nbsp;−1⁄2 + (√3⁄2)i, &nbsp;−1, &nbsp;−1⁄2 − (√3⁄2)i, &nbsp;1⁄2 − (√3⁄2)i</td>
-      <td style="padding: 12px 15px; color: #34495e;">regular hexagon</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj11 — summary capstone: forward (powers) vs reverse (roots) De Moivre
-  const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Aspect</th>
-      <th style="${tableHeaders.summary}">Forward direction&nbsp;&nbsp;<span style="font-weight: normal; font-size: 13px;">(powers)</span></th>
-      <th style="${tableHeaders.summary}">Reverse direction&nbsp;&nbsp;<span style="font-weight: normal; font-size: 13px;">(n-th roots)</span></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Question</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">given z, what is zⁿ ?</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">given w, what are the z with zⁿ = w ?</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Formula</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zⁿ = rⁿ cis(nθ)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z&#x2096; = R&#x141;ⁿ cis((φ + 360°k) ⁄ n), k = 0…n−1</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Modulus operation</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r → rⁿ&nbsp;&nbsp;<span style="font-size: 13px;">(raise to nth power)</span></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">R → R&#x141;ⁿ&nbsp;&nbsp;<span style="font-size: 13px;">(take positive nth root)</span></td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Argument operation</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">θ → nθ&nbsp;&nbsp;<span style="font-size: 13px;">(multiply by n)</span></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">φ → (φ + 360°k) ⁄ n&nbsp;&nbsp;<span style="font-size: 13px;">(divide, then shift by k turns)</span></td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Number of results</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exactly 1 (a single value)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exactly n (distinct roots)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Geometric picture</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a single point at distance rⁿ from the origin</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vertices of a regular n-gon on the circle of radius R&#x141;ⁿ</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Worked example</td>
-      <td style="padding: 12px 15px; color: #34495e;">(1 + i)¹⁰ = 32i&nbsp;&nbsp;<span style="font-size: 13px;">(one answer)</span></td>
-      <td style="padding: 12px 15px; color: #34495e;">z⁴ = −16: four roots √2(±1 ± i)&nbsp;&nbsp;<span style="font-size: 13px;">(a square)</span></td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // ---------- SECTIONS (original prose unchanged; obj11 added) ----------
-
-    const sectionsContent={
+// formulas-optimized: v1 | 2026-06-11 | 4 callouts (obj2, obj6, obj8, obj9)
+const sectionsContent={
 
    obj0: {
   title: `Key Terms`,
@@ -1079,7 +580,12 @@ De Moivre's theorem stands among the most useful results in complex analysis. It
   before: ``,
   content: `The theorem states a precise relationship between powers and angles. For any integer $n$:
 
+@academic[formula_callout:De Moivre's Theorem
 $$(\\cos\\theta + i\\sin\\theta)^n = \\cos(n\\theta) + i\\sin(n\\theta)$$
+/complex-numbers/formulas#de_moivres_theorem]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 Raise $\\text{cis}\\theta$ to the $n$-th power, and the result is $\\text{cis}(n\\theta)$. The angle simply multiplies by $n$. No expansion, no collecting terms, no tracking powers of $i$ — just multiply the argument.
 
@@ -1188,7 +694,12 @@ Different values of $k$ yield different angles $\\alpha$. As $k$ runs from $0$ t
   before: ``,
   content: `Let $w = R\\text{cis}\\phi$ be any nonzero complex number. The $n$-th roots of $w$ — all solutions to $z^n = w$ — are given by:
 
-$$z_k = R^{1/n}\\text{cis}\\left(\\frac{\\phi + 2\\pi k}{n}\\right) \\quad \\text{for } k = 0, 1, 2, \\ldots, n-1$$
+@academic[formula_callout:Nth Roots Formula
+$$z_k = R^{1/n} \\bigl[\\cos\\!\\left(\\tfrac{\\phi + 2\\pi k}{n}\\right) + i\\sin\\!\\left(\\tfrac{\\phi + 2\\pi k}{n}\\right)\\bigr], \\quad k = 0, 1, \\ldots, n-1$$
+/complex-numbers/formulas#nth_roots_formula]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 In degree measure:
 
@@ -1237,7 +748,12 @@ The [conjugate](!/complex-numbers/complex-conjugate) relationship appears when t
   before: ``,
   content: `The $n$-th roots of unity — solutions to $z^n = 1$ — form a special case of fundamental importance. Since $1 = 1\\text{cis}(0°)$, the formula simplifies:
 
-$$z_k = \\text{cis}\\left(\\frac{360°k}{n}\\right) = \\text{cis}\\left(\\frac{2\\pi k}{n}\\right) \\quad \\text{for } k = 0, 1, 2, \\ldots, n-1$$
+@academic[formula_callout:Roots of Unity
+$$z_k = e^{i \\, 2\\pi k / n}, \\quad k = 0, 1, \\ldots, n-1$$
+/complex-numbers/formulas#roots_of_unity]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 All roots of unity have modulus $1$ — they lie on the unit circle. Their arguments are multiples of $\\frac{360°}{n}$, dividing the circle into $n$ equal arcs.
 
@@ -1259,7 +775,12 @@ The primitive $n$-th root of unity, denoted $\\omega = \\text{cis}\\left(\\frac{
 
 The sum of all $n$-th roots of unity equals zero:
 
-$$\\sum_{k=0}^{n-1} z_k = 1 + \\omega + \\omega^2 + \\cdots + \\omega^{n-1} = 0$$
+@academic[formula_callout:Sum of Roots of Unity
+$$\\sum_{k=0}^{n-1} e^{i \\, 2\\pi k / n} = 0 \\quad (n \\geq 2)$$
+/complex-numbers/formulas#sum_of_roots_of_unity]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 Geometrically, the roots form a regular polygon centered at the origin. Their vector sum — placing all arrows tip to tail — returns to the starting point, yielding zero. Algebraically, this is the sum of a geometric series with ratio $\\omega \\neq 1$: $\\frac{1 - \\omega^n}{1 - \\omega} = \\frac{1 - 1}{1 - \\omega} = 0$.
 
