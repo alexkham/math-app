@@ -1,205 +1,191 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+// tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 comparison, obj9 aggregation, obj11 summary capstone)
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "row echelon form",
-//   "reduced row echelon form",
-//   "REF RREF",
-//   "pivot position",
-//   "pivot column free column",
-//   "back substitution",
-//   "parametric vector form",
-//   "RREF uniqueness",
-//   "echelon form rank",
-//   "reading solutions echelon form",
-//   "inconsistent system echelon",
-//   "staircase pattern matrix",
-//   "Gauss-Jordan RREF",
-//   "free variables pivot variables"
-// ]
+export async function getStaticProps(){
+const keyWords = [
+  "row echelon form",
+  "reduced row echelon form",
+  "REF RREF",
+  "pivot position",
+  "pivot column free column",
+  "back substitution",
+  "parametric vector form",
+  "RREF uniqueness",
+  "echelon form rank",
+  "reading solutions echelon form",
+  "inconsistent system echelon",
+  "staircase pattern matrix",
+  "Gauss-Jordan RREF",
+  "free variables pivot variables"
+]
 
-//   // •
+const linkStyle = 'color: inherit; text-decoration: underline;'
 
-// //   \u2022 First item
-// // \u2022 Second item
+// ---------- TABLES ----------
 
-  
-// // <hr style="border-width:1px;"></hr>
+// obj3 — comparison: REF vs RREF on all the dimensions that distinguish them
+const obj3Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Aspect</th>
+      <th style="${tableHeaders.comparison}">Row Echelon Form (REF)</th>
+      <th style="${tableHeaders.comparison}">Reduced Row Echelon Form (RREF)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Defining conditions</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zero rows at the bottom; pivots staircase strictly right; entries below each pivot are 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all REF conditions + each pivot equals 1 + each pivot is the only nonzero entry in its column</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Pivot values</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any nonzero number</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">always 1</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Entries above pivots</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">anything (not constrained)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">always 0</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Uniqueness</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">not unique — different row-operation paths give different REFs (pivot positions stay the same)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">unique — every matrix has exactly one RREF, regardless of reduction path</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reached by</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">forward elimination only</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/linear-systems/gaussian-elimination" style="${linkStyle}">Gauss-Jordan</a> (forward + backward, plus pivot scaling)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Reading the solution</td>
+      <td style="padding: 12px 15px; color: #34495e;">by back substitution from the bottom row upward</td>
+      <td style="padding: 12px 15px; color: #34495e;">by direct inspection — each pivot variable is already isolated</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="color:blue;" />
+// obj9 — aggregation: echelon-form status of special matrix types
+const obj9Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Matrix type</th>
+      <th style="${tableHeaders.aggregation}">Echelon status</th>
+      <th style="${tableHeaders.aggregation}">Pivot structure</th>
+      <th style="${tableHeaders.aggregation}">Rank</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Identity I<sub>n</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">already in RREF</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n pivots, each equal to 1, each alone in its column</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Diagonal — all entries nonzero</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">in REF; reaches RREF after scaling each row</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one pivot per row, equal to the diagonal entry</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Diagonal — some entries zero</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">in REF (zero rows reorder to the bottom)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a pivot only where the diagonal entry is nonzero</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of nonzero diagonal entries</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Upper triangular</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">already in REF</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nonzero diagonal entries serve as pivots</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of nonzero diagonal entries</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Lower triangular</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">NOT in REF — the staircase goes the wrong direction</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">forward elimination converts it quickly; at most one elimination per column</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">depends on the matrix</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Zero matrix O</td>
+      <td style="padding: 12px 15px; color: #34495e;">already in both REF and RREF</td>
+      <td style="padding: 12px 15px; color: #34495e;">no pivots; every column is free</td>
+      <td style="padding: 12px 15px; color: #34495e;">0</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// obj11 — summary capstone: everything readable from RREF
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Property of A</th>
+      <th style="${tableHeaders.summary}">How to read it from RREF</th>
+      <th style="${tableHeaders.summary}">Why</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/matrix/rank" style="${linkStyle}">Rank</a> of A</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">count the pivots</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">pivots correspond to independent rows and to independent columns</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Nullity (dim of Null(A))</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n − (number of pivots) = number of free columns</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank-nullity theorem</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Basis for the column space</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the original columns of A at pivot positions</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">row operations preserve linear dependence among columns</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Basis for the row space</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the nonzero rows of the RREF</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">row operations preserve the row space</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Basis for the <a href="/linear-algebra/vector-spaces/fundamental-spaces" style="${linkStyle}">null space</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">parametric solution to A x = 0; one basis vector per free variable</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each free variable parametrizes one direction in Null(A)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Consistency of A x = b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no row of the form [0 ⋯ 0 | d] with d ≠ 0 in the reduced augmented matrix</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A) = rank([A | b]); b ∈ Col(A)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Uniqueness of solution</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every column of A has a pivot (no free variables)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A) = n; Null(A) = {0}</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Invertibility (square A)</td>
+      <td style="padding: 12px 15px; color: #34495e;">RREF of A equals I<sub>n</sub></td>
+      <td style="padding: 12px 15px; color: #34495e;">full rank n + square ⟺ invertible</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-// //     const sectionsContent={
-
-// //     obj1:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-  
-// //     },
-// //     obj2:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-  
-// //     obj3:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj4:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj5:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj6:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj7:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj8:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj9:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj10:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj11:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj12:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj13:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-// //     obj14:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-
-
-// //     obj15:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     }
-  
-// //   }
 
 // const sectionsContent = {
 //   obj1: {
@@ -358,642 +344,34 @@
 //     after: ``,
 //     link: ``,
 //   },
-// }
-
-//  const introContent = {
-//   title: `The Staircase That Reveals Everything`,
-//   content: `Row echelon form and reduced row echelon form are the standard targets of Gaussian elimination. The staircase pattern of pivots immediately exposes the rank, the free variables, and the solvability of the system. RREF goes one step further — it is unique for every matrix, making it a canonical form from which the solution can be read without any back substitution.`,
-// }
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is row echelon form?",
-//     answer: "A matrix is in row echelon form (REF) when zero rows are at the bottom, each pivot is to the right of the pivot above, and all entries below each pivot are zero. This creates a staircase pattern. The solution is obtained by back substitution from the bottom row upward.",
-//     sectionId: "1"
+//   obj11: {
+//     title: `Summary: Everything Readable from RREF`,
+//     content: `The RREF of A is a single canonical form, but it carries a remarkable amount of structural information about the matrix — the rank, the nullity, bases for the column, row, and null spaces, and the consistency, uniqueness, and invertibility verdicts for any system A·x = b. The table below collects each property that can be extracted directly from RREF alongside the rule for reading it and the underlying reason.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
 //   },
-//   obj2: {
-//     question: "What is reduced row echelon form?",
-//     answer: "Reduced row echelon form (RREF) adds two conditions to REF: each pivot equals 1 and is the only nonzero entry in its column. RREF is unique for every matrix, and solutions can be read directly without back substitution.",
-//     sectionId: "2"
-//   },
-//   obj3: {
-//     question: "What is the difference between pivot and free variables?",
-//     answer: "Pivot variables correspond to columns containing a pivot — their values are determined by the system. Free variables correspond to non-pivot columns and can take any real value. Free variables parametrize the solution set: each one adds a dimension to the solution space.",
-//     sectionId: "4"
-//   },
-//   obj4: {
-//     question: "How do you detect an inconsistent system from echelon form?",
-//     answer: "A system is inconsistent if the echelon form contains a row [0 0 ⋯ 0 | d] with d ≠ 0, representing the impossible equation 0 = d. This means rank([A | b]) > rank(A) and the right-hand side b is not in the column space of A.",
-//     sectionId: "8"
-//   },
-//   obj5: {
-//     question: "How does echelon form determine the rank?",
-//     answer: "The rank of a matrix equals the number of pivots in any echelon form. From the rank r, everything follows: column space dimension r, null space dimension n − r, consistency when rank(A) = rank([A | b]), and uniqueness when r = n.",
-//     sectionId: "10"
-//   }
-// }
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Row Echelon Form and Reduced Row Echelon Form",
-//     "description": "Row echelon form (REF) and reduced row echelon form (RREF): pivot positions, back substitution, parametric vector form, RREF uniqueness, inconsistency detection, and rank from pivots.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/linear-systems/echelon-form",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Row Echelon Form"
-//     },
-//     "teaches": [
-//       "Row echelon form definition and staircase pattern",
-//       "Reduced row echelon form and its uniqueness",
-//       "Pivot columns vs free columns",
-//       "Reading solutions from REF by back substitution",
-//       "Reading solutions from RREF by inspection",
-//       "Parametric vector form for infinite solutions",
-//       "Detecting inconsistency from echelon form",
-//       "Rank as the number of pivots"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Linear Systems",
-//         "item": "https://www.learnmathclass.com/linear-algebra/linear-systems"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Echelon Form",
-//         "item": "https://www.learnmathclass.com/linear-algebra/linear-systems/echelon-form"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
 // }
 
 
-
-
-// //    return {
-// //       props:{
-// //          sectionsContent,
-// //          introContent,
-// //           seoData: {
-// //         title: "Title | Learn Math Class",
-// //         description: "Metadescription",
-// //         keywords: keyWords.join(", "),
-// //         url: "/linear-algebra/linear-systems/echelon-form",
-// //          name: "name"
-// //       },
-        
-// //        }
-// //     }
-
-// return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Row Echelon Form (REF) & RREF | Learn Math Class",
-//       description: "Row echelon form (REF) and reduced row echelon form (RREF): pivot positions, back substitution, parametric vector form, RREF uniqueness, inconsistency detection, and rank from pivots.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/linear-systems/echelon-form",
-//       name: "Row Echelon Form and Reduced Row Echelon Form"
-//     },
-//   }
-// }
-//    }
-// export default function EchelonFormPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    {/* <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head> */}
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Reduced Row Echelon Form(REF)</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-// tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 comparison, obj9 aggregation, obj11 summary capstone)
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "row echelon form",
-  "reduced row echelon form",
-  "REF RREF",
-  "pivot position",
-  "pivot column free column",
-  "back substitution",
-  "parametric vector form",
-  "RREF uniqueness",
-  "echelon form rank",
-  "reading solutions echelon form",
-  "inconsistent system echelon",
-  "staircase pattern matrix",
-  "Gauss-Jordan RREF",
-  "free variables pivot variables"
-]
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj3 — comparison: REF vs RREF on all the dimensions that distinguish them
-const obj3Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Aspect</th>
-      <th style="${tableHeaders.comparison}">Row Echelon Form (REF)</th>
-      <th style="${tableHeaders.comparison}">Reduced Row Echelon Form (RREF)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Defining conditions</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zero rows at the bottom; pivots staircase strictly right; entries below each pivot are 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all REF conditions + each pivot equals 1 + each pivot is the only nonzero entry in its column</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Pivot values</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any nonzero number</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">always 1</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Entries above pivots</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">anything (not constrained)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">always 0</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Uniqueness</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">not unique — different row-operation paths give different REFs (pivot positions stay the same)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">unique — every matrix has exactly one RREF, regardless of reduction path</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reached by</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">forward elimination only</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/linear-systems/gaussian-elimination" style="${linkStyle}">Gauss-Jordan</a> (forward + backward, plus pivot scaling)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Reading the solution</td>
-      <td style="padding: 12px 15px; color: #34495e;">by back substitution from the bottom row upward</td>
-      <td style="padding: 12px 15px; color: #34495e;">by direct inspection — each pivot variable is already isolated</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj9 — aggregation: echelon-form status of special matrix types
-const obj9Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Matrix type</th>
-      <th style="${tableHeaders.aggregation}">Echelon status</th>
-      <th style="${tableHeaders.aggregation}">Pivot structure</th>
-      <th style="${tableHeaders.aggregation}">Rank</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Identity I<sub>n</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">already in RREF</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n pivots, each equal to 1, each alone in its column</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Diagonal — all entries nonzero</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">in REF; reaches RREF after scaling each row</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one pivot per row, equal to the diagonal entry</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Diagonal — some entries zero</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">in REF (zero rows reorder to the bottom)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a pivot only where the diagonal entry is nonzero</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of nonzero diagonal entries</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Upper triangular</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">already in REF</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nonzero diagonal entries serve as pivots</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of nonzero diagonal entries</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Lower triangular</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">NOT in REF — the staircase goes the wrong direction</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">forward elimination converts it quickly; at most one elimination per column</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">depends on the matrix</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Zero matrix O</td>
-      <td style="padding: 12px 15px; color: #34495e;">already in both REF and RREF</td>
-      <td style="padding: 12px 15px; color: #34495e;">no pivots; every column is free</td>
-      <td style="padding: 12px 15px; color: #34495e;">0</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj11 — summary capstone: everything readable from RREF
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Property of A</th>
-      <th style="${tableHeaders.summary}">How to read it from RREF</th>
-      <th style="${tableHeaders.summary}">Why</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/matrix/rank" style="${linkStyle}">Rank</a> of A</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">count the pivots</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">pivots correspond to independent rows and to independent columns</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Nullity (dim of Null(A))</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n − (number of pivots) = number of free columns</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank-nullity theorem</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Basis for the column space</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the original columns of A at pivot positions</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">row operations preserve linear dependence among columns</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Basis for the row space</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the nonzero rows of the RREF</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">row operations preserve the row space</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Basis for the <a href="/linear-algebra/vector-spaces/fundamental-spaces" style="${linkStyle}">null space</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">parametric solution to A x = 0; one basis vector per free variable</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each free variable parametrizes one direction in Null(A)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Consistency of A x = b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no row of the form [0 ⋯ 0 | d] with d ≠ 0 in the reduced augmented matrix</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A) = rank([A | b]); b ∈ Col(A)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Uniqueness of solution</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every column of A has a pivot (no free variables)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A) = n; Null(A) = {0}</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Invertibility (square A)</td>
-      <td style="padding: 12px 15px; color: #34495e;">RREF of A equals I<sub>n</sub></td>
-      <td style="padding: 12px 15px; color: #34495e;">full rank n + square ⟺ invertible</td>
-    </tr>
-  </tbody>
-</table>
-`
-
+// formulas-injected: v1 | 2026-06-16 | 5 callouts (obj1 pivot_definition prose-insert + row_echelon_form_definition direct, obj2 reduced_row_echelon_form_definition direct, obj3 rref_uniqueness prose-insert, obj4 free_variables_count inline-promote)
 
 const sectionsContent = {
   obj1: {
     title: `Row Echelon Form`,
     content: `A matrix is in row echelon form (REF) if it satisfies three conditions. Every zero row (a row of all zeros) sits at the bottom of the matrix. The leading entry of each nonzero row — called the pivot — is strictly to the right of the pivot in the row above. Every entry below a pivot is zero.
 
+@academic[formula_callout:pivot_definition|Pivot Definition|$$\\text{pivot} = \\text{leading nonzero entry of a row in echelon form}$$]@
+@academic[formulas_link:/linear-algebra/formulas#pivot_definition]@
+
 These conditions create a staircase pattern that descends from upper-left to lower-right:
 
 $$\\begin{pmatrix} \\boxed{2} & 3 & -1 & 4 & 7 \\\\ 0 & \\boxed{1} & 5 & 0 & 2 \\\\ 0 & 0 & 0 & \\boxed{4} & -3 \\\\ 0 & 0 & 0 & 0 & 0 \\end{pmatrix}$$
 
-The boxed entries are pivots. Each sits to the right of and below the previous one, with zeros filling in below and to the left. The bottom row is all zeros.
+The boxed entries are pivots. Each sits to the right of and below the previous one, with zeros filling in below and to the left. The bottom row is all zeros. In general schematic form, with $\\boxed{\\ast}$ marking pivots and $\\bullet$ any entry:
+
+@academic[formula_callout:row_echelon_form_definition|Row Echelon Form Definition|$$\\text{REF: } \\begin{pmatrix} \\boxed{\\ast} & \\bullet & \\bullet & \\bullet & \\bullet \\\\ 0 & \\boxed{\\ast} & \\bullet & \\bullet & \\bullet \\\\ 0 & 0 & 0 & \\boxed{\\ast} & \\bullet \\\\ 0 & 0 & 0 & 0 & 0 \\end{pmatrix}$$]@
+@academic[formulas_link:/linear-algebra/formulas#row_echelon_form_definition]@
 
 REF is not unique. Different sequences of row operations applied to the same matrix can produce different echelon forms — the pivots may have different values, and the non-pivot entries above the pivots may differ. What remains the same across all echelon forms of a given matrix is the set of pivot positions (which columns contain pivots).`,
     before: ``,
@@ -1008,7 +386,10 @@ Applying these conditions to the previous example:
 
 $$\\begin{pmatrix} 1 & 0 & -16 & 0 & \\frac{29}{4} \\\\ 0 & 1 & 5 & 0 & 2 \\\\ 0 & 0 & 0 & 1 & -\\frac{3}{4} \\\\ 0 & 0 & 0 & 0 & 0 \\end{pmatrix}$$
 
-Every pivot is $1$, and every other entry in a pivot column is $0$. The pivot columns are clean unit vectors within the matrix. The non-pivot columns (columns $3$ and $5$ in this example) can contain anything.
+Every pivot is $1$, and every other entry in a pivot column is $0$. The pivot columns are clean unit vectors within the matrix. The non-pivot columns (columns $3$ and $5$ in this example) can contain anything. In general schematic form:
+
+@academic[formula_callout:reduced_row_echelon_form_definition|Reduced Row Echelon Form Definition|$$\\text{RREF: } \\begin{pmatrix} \\boxed{1} & 0 & \\bullet & 0 & \\bullet \\\\ 0 & \\boxed{1} & \\bullet & 0 & \\bullet \\\\ 0 & 0 & 0 & \\boxed{1} & \\bullet \\\\ 0 & 0 & 0 & 0 & 0 \\end{pmatrix}$$]@
+@academic[formulas_link:/linear-algebra/formulas#reduced_row_echelon_form_definition]@
 
 RREF is achieved from REF by [Gauss-Jordan elimination](!/linear-algebra/linear-systems/gaussian-elimination): scale each pivot row so the pivot becomes $1$, then use row addition to eliminate all entries above each pivot.`,
     before: ``,
@@ -1017,9 +398,12 @@ RREF is achieved from REF by [Gauss-Jordan elimination](!/linear-algebra/linear-
   },
   obj3: {
     title: `Uniqueness of RREF`,
-    content: `Every matrix has exactly one RREF. No matter which sequence of row operations is used to reach it, the result is the same.
+    content: `Every matrix has exactly one RREF. No matter which sequence of row operations is used to reach it, the result is the same:
 
-This is not true of REF — different reduction paths can produce different row echelon forms of the same matrix, with different values in the non-pivot entries. But RREF is canonical: it is the unique representative of the matrix's row-equivalence class in reduced form.
+@academic[formula_callout:rref_uniqueness|RREF Uniqueness|$$\\text{RREF}(A) \\text{ is unique}$$]@
+@academic[formulas_link:/linear-algebra/formulas#rref_uniqueness]@
+
+This is not true of REF — different reduction paths can produce different row echelon forms of the same matrix, with different values in the non-pivot entries. But RREF is canonical: it is the unique representative of the matrix&apos;s row-equivalence class in reduced form.
 
 The uniqueness of RREF implies that the pivot positions are intrinsic to the matrix. They do not depend on how the reduction is carried out. This means the [rank](!/linear-algebra/matrix/rank) (the number of pivots), the free variables (the non-pivot columns), and the entire solution structure are determined by the matrix itself, not by any particular algorithm applied to it.`,
     before: ``,
@@ -1030,7 +414,10 @@ The uniqueness of RREF implies that the pivot positions are intrinsic to the mat
     title: `Pivot Columns and Free Columns`,
     content: `Pivot columns are the columns that contain a pivot position in the echelon form. Free columns are everything else.
 
-The number of pivot columns equals the rank of the matrix. The number of free columns in the coefficient matrix $A$ (not counting the augmented column) equals $n - \\text{rank}(A)$, which is the nullity — the dimension of the [null space](!/linear-algebra/vector-spaces/fundamental-spaces).
+The number of pivot columns equals the rank of the matrix. The number of free columns in the coefficient matrix $A$ (not counting the augmented column) is the nullity — the dimension of the [null space](!/linear-algebra/vector-spaces/fundamental-spaces):
+
+@academic[formula_callout:free_variables_count|Free Variables Count|$$\\text{(number of free variables)} = n - \\text{rank}(A)$$]@
+@academic[formulas_link:/linear-algebra/formulas#free_variables_count]@
 
 In the context of a linear system, each pivot column corresponds to a pivot variable: a variable whose value is determined once the free variables are assigned. Each free column corresponds to a free variable: a parameter that can take any real value, generating a family of solutions.
 
@@ -1149,6 +536,8 @@ The pivot positions also identify [bases](!/linear-algebra/vector-spaces) for th
     link: ``,
   },
 }
+
+
 
  const introContent = {
   title: `The Staircase That Reveals Everything`,

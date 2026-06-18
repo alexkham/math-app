@@ -494,13 +494,13 @@ return (
       panelBackgroundColor='#f2f2f2'
     />
     
-    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Exponent Calculator</h1>
-    <div style={{marginBottom:'20px'}}>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'-20px'}}>Exponent Calculator</h1>
+    {/* <div style={{marginBottom:'20px'}}>
       <ExplanationDetails 
         instructions={detailInstructions}
         title='How to use Exponent Calculator'
       />
-    </div>
+    </div> */}
     
     <div className="layout-container"> 
       <div>
@@ -508,20 +508,20 @@ return (
         <VerticalButtonGroup 
           items={navigationGroup}
           width="250px"       
-          theme='lightBlue'
+          theme='brilliantBlue'
           isSticky={true}
-          verticalOffset='200px'
+          verticalOffset='230px'
         />
       </div>
 
       <div>
-        <div style={{width:'100%',margin:'auto'}}>
-          <div style={{transform:'scale(0.95)'}}>
+        <div style={{width:'100%',marginLeft:'-100px'}}>
+          {/* <div style={{transform:'scale(0.9)'}}> */}
             <ExponentCalculator 
               explanations={explanations}
               detailInstructions={detailInstructions}
             />
-          </div> 
+          {/* </div>  */}
           <br/>
         </div>
       </div>

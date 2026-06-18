@@ -1,222 +1,458 @@
 
 
+// import React, { useState } from 'react';
+// import Link from 'next/link';
+
+// const ExplanationDetails = ({ title = "How to use", instructions, links, externalLinks }) => {
+//   const [isOpen, setIsOpen] = useState(false);
+  
+
+//   if (!instructions || !Array.isArray(instructions) || instructions.length === 0) {
+//     console.warn('ExplanationDetails: Missing or invalid instructions prop');
+//     return null;
+//   }
+
+//   return (
+//     <>
+//      <style>
+//       {`
+//         @media screen and (max-width: 768px) {
+//           details {
+//             width: 250px !important;
+//             padding: 8px 15px !important;
+//             font-size: 12px !important;
+//             height:50px;
+//             z-index:100 ; 
+                   
+//           }
+//         }
+//       `}
+//     </style>
+    
+//     <div style={{
+//       display: 'flex',
+//       flexDirection: 'column',
+//       alignItems: 'center',
+//       justifyContent: 'flex-start',
+//       alignSelf: 'center',
+//       position: 'relative',
+//       marginTop: '-10px',
+     
+      
+//     }}>
+//       <details 
+//         open={isOpen}
+//         onToggle={(e) => setIsOpen(e.target.open)}
+//         style={{
+//           backgroundColor: '#fff',
+//           padding: '10px 25px',
+//           borderRadius: '12px',
+//           width: '400px',
+//           boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+//           fontSize: '0.9rem',
+//           color: '#333',
+//           border: '1px solid #eaeaea',
+//           marginTop: '-5px',
+//           transition: 'all 0.3s ease',
+//           position: 'absolute',
+//           top: 0,
+//           left: '50%',
+//           transform: 'translateX(-50%)',
+//           zIndex: '100',
+          
+          
+//         }}>
+//         <summary style={{
+//           cursor: 'pointer',
+//           fontWeight: '600',
+//           color: '#2196f3',
+//           outline: 'none',
+//           listStyle: 'none',
+//           display: 'flex',
+//           alignItems: 'center',
+//           gap: '8px',
+//           height: '10px'
+//         }}>
+//           <span style={{
+//             backgroundColor: '#2196f3',
+//             color: 'white',
+//             width: '22px',
+//             height: '22px',
+//             borderRadius: '50%',
+//             display: 'inline-flex',
+//             alignItems: 'center',
+//             justifyContent: 'center',
+//             fontSize: '16px'
+//           }}>?</span>
+//           {title}
+//           <span style={{
+//             marginLeft: 'auto',
+//             fontSize: '18px',
+//             fontWeight: 'bold',
+//             backgroundColor: '#2196f3',
+//             color: 'white',
+//             width: '22px',
+//             height: '22px',
+//             borderRadius: '50%',
+//             display: 'inline-flex',
+//             alignItems: 'center',
+//             justifyContent: 'center',
+//             lineHeight: '22px',
+//             paddingTop: '1px'
+//           }}>
+//             {isOpen ? '-' : '+'}
+//           </span>
+//         </summary>
+
+//         {/* Instructions List */}
+//         <ul style={{
+//           listStyle: 'none',
+//           margin: '15px 0 0 0',
+//           padding: '0 0 0 30px'
+//         }}>
+//           {instructions.map((instruction, index) => (
+//             <li 
+//               key={index}
+//               style={{
+//                 marginBottom: index !== instructions.length - 1 ? '8px' : 0,
+//                 color: '#4b5563',
+//                 fontWeight: '600',
+//                 fontSize: '14px'
+//               }}
+//             >
+//               • {instruction}
+//             </li>
+//           ))}
+//         </ul>
+
+//         {/* Internal Links Section */}
+//         {links && links.length > 0 && (
+//           <div style={{
+//             backgroundColor: '#f0f9ff',
+//             padding: '15px',
+//             borderRadius: '6px',
+//             marginTop: '15px'
+//           }}>
+//             <h4 style={{
+//               color: '#1a1a1a',
+//               fontSize: '16px',
+//               margin: '0 0 12px 0',
+//               paddingBottom: '8px',
+//               borderBottom: '1px solid #e2e8f0'
+//             }}>
+//               Additional Resources
+//             </h4>
+//             {links.map((link, index) => (
+//               <Link 
+//                 key={index}
+//                 href={link.url}
+//                 style={{
+//                   display: 'block',
+//                   color: '#2196f3',
+//                   textDecoration: 'none',
+//                   fontSize: '14px',
+//                   padding: '8px',
+//                   margin: '4px 0',
+//                   borderRadius: '4px',
+//                   transition: 'background-color 0.2s'
+//                 }}
+//                 onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#e0f2fe'}
+//                 onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+//               >
+//                 {link.text}
+//               </Link>
+//             ))}
+//           </div>
+//         )}
+
+//         {/* External Links Section */}
+//         {externalLinks && externalLinks.length > 0 && (
+//           <div style={{
+//             backgroundColor: '#f0f9ff',
+//             padding: '15px',
+//             borderRadius: '6px',
+//             marginTop: '15px'
+//           }}>
+//             <h4 style={{
+//               color: '#1a1a1a',
+//               fontSize: '16px',
+//               margin: '0 0 12px 0',
+//               paddingBottom: '8px',
+//               borderBottom: '1px solid #e2e8f0'
+//             }}>
+//               External Links
+//             </h4>
+//             {externalLinks.map((link, index) => (
+//               <a 
+//                 key={index}
+//                 href={link.url}
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//                 style={{
+//                   display: 'block',
+//                   color: '#3b82f6',
+//                   textDecoration: 'none',
+//                   fontSize: '14px',
+//                   padding: '8px',
+//                   margin: '4px 0',
+//                   borderRadius: '4px',
+//                   transition: 'background-color 0.2s'
+//                 }}
+//                 onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#e0f2fe'}
+//                 onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+//               >
+//                 {link.text}
+//               </a>
+//             ))}
+//           </div>
+//         )}
+//       </details>
+//     </div>
+//     </>
+//   );
+// };
+
+// ExplanationDetails.defaultProps = {
+//   title: "How to use",
+//   instructions: [],
+//   links: [],
+//   externalLinks: []
+// };
+
+// export default ExplanationDetails;
+
+
+
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-const ExplanationDetails = ({ title = "How to use", instructions, links, externalLinks }) => {
+// #rgb or #rrggbb  ->  rgba(...) string
+const hexToRgba = (hex, alpha) => {
+  const h = String(hex).replace('#', '');
+  const full = h.length === 3 ? h.split('').map((c) => c + c).join('') : h;
+  const n = parseInt(full, 16);
+  const r = (n >> 16) & 255;
+  const g = (n >> 8) & 255;
+  const b = n & 255;
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
+
+const ExplanationDetails = ({
+  title = 'How to use',
+  instructions,
+  links,
+  externalLinks,
+  accent = '#2563eb',     // brilliant blue — single source of truth
+  cardBg = '#ffffff',
+  textColor = '#1f2937',
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  
 
   if (!instructions || !Array.isArray(instructions) || instructions.length === 0) {
     console.warn('ExplanationDetails: Missing or invalid instructions prop');
     return null;
   }
 
+  // Derived from `accent` — keep palette one-color simple
+  const sectionBg     = hexToRgba(accent, 0.07);
+  const sectionBorder = hexToRgba(accent, 0.18);
+  const hoverBg       = hexToRgba(accent, 0.14);
+  const cardBorder    = '#eaeaea';
+  const instructionText = '#4b5563';
+
   return (
     <>
-     <style>
-      {`
-        @media screen and (max-width: 768px) {
-          details {
-            width: 250px !important;
-            padding: 8px 15px !important;
-            font-size: 12px !important;
-            height:50px;
-            z-index:100 ; 
-                   
+      <style>
+        {`
+          @media screen and (max-width: 768px) {
+            details {
+              width: 250px !important;
+              padding: 8px 15px !important;
+              font-size: 12px !important;
+              height: 50px;
+              z-index: 100;
+            }
           }
-        }
-      `}
-    </style>
-    
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      alignSelf: 'center',
-      position: 'relative',
-      marginTop: '-10px',
-     
-      
-    }}>
-      <details 
-        open={isOpen}
-        onToggle={(e) => setIsOpen(e.target.open)}
-        style={{
-          backgroundColor: '#fff',
-          padding: '10px 25px',
-          borderRadius: '12px',
-          width: '400px',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-          fontSize: '0.9rem',
-          color: '#333',
-          border: '1px solid #eaeaea',
-          marginTop: '-5px',
-          transition: 'all 0.3s ease',
-          position: 'absolute',
-          top: 0,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: '100',
-          
-          
-        }}>
-        <summary style={{
-          cursor: 'pointer',
-          fontWeight: '600',
-          color: '#2196f3',
-          outline: 'none',
-          listStyle: 'none',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          height: '10px'
-        }}>
-          <span style={{
-            backgroundColor: '#2196f3',
-            color: 'white',
-            width: '22px',
-            height: '22px',
-            borderRadius: '50%',
-            display: 'inline-flex',
+        `}
+      </style>
+
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        alignSelf: 'center',
+        position: 'relative',
+        marginTop: '-10px',
+      }}>
+        <details
+          open={isOpen}
+          onToggle={(e) => setIsOpen(e.target.open)}
+          style={{
+            backgroundColor: cardBg,
+            padding: '10px 25px',
+            borderRadius: '12px',
+            width: '400px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            fontSize: '0.9rem',
+            color: textColor,
+            border: `1px solid ${cardBorder}`,
+            marginTop: '-5px',
+            transition: 'all 0.3s ease',
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: '100',
+          }}>
+          <summary style={{
+            cursor: 'pointer',
+            fontWeight: '600',
+            color: accent,
+            outline: 'none',
+            listStyle: 'none',
+            display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '16px'
-          }}>?</span>
-          {title}
-          <span style={{
-            marginLeft: 'auto',
-            fontSize: '18px',
-            fontWeight: 'bold',
-            backgroundColor: '#2196f3',
-            color: 'white',
-            width: '22px',
-            height: '22px',
-            borderRadius: '50%',
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            lineHeight: '22px',
-            paddingTop: '1px'
+            gap: '8px',
+            height: '10px',
           }}>
-            {isOpen ? '-' : '+'}
-          </span>
-        </summary>
-
-        {/* Instructions List */}
-        <ul style={{
-          listStyle: 'none',
-          margin: '15px 0 0 0',
-          padding: '0 0 0 30px'
-        }}>
-          {instructions.map((instruction, index) => (
-            <li 
-              key={index}
-              style={{
-                marginBottom: index !== instructions.length - 1 ? '8px' : 0,
-                color: '#4b5563',
-                fontWeight: '600',
-                fontSize: '14px'
-              }}
-            >
-              • {instruction}
-            </li>
-          ))}
-        </ul>
-
-        {/* Internal Links Section */}
-        {links && links.length > 0 && (
-          <div style={{
-            backgroundColor: '#f0f9ff',
-            padding: '15px',
-            borderRadius: '6px',
-            marginTop: '15px'
-          }}>
-            <h4 style={{
-              color: '#1a1a1a',
+            <span style={{
+              backgroundColor: accent,
+              color: 'white',
+              width: '22px',
+              height: '22px',
+              borderRadius: '50%',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               fontSize: '16px',
-              margin: '0 0 12px 0',
-              paddingBottom: '8px',
-              borderBottom: '1px solid #e2e8f0'
+            }}>?</span>
+            {title}
+            <span style={{
+              marginLeft: 'auto',
+              fontSize: '18px',
+              fontWeight: 'bold',
+              backgroundColor: accent,
+              color: 'white',
+              width: '22px',
+              height: '22px',
+              borderRadius: '50%',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              lineHeight: '22px',
+              paddingTop: '1px',
             }}>
-              Additional Resources
-            </h4>
-            {links.map((link, index) => (
-              <Link 
-                key={index}
-                href={link.url}
-                style={{
-                  display: 'block',
-                  color: '#2196f3',
-                  textDecoration: 'none',
-                  fontSize: '14px',
-                  padding: '8px',
-                  margin: '4px 0',
-                  borderRadius: '4px',
-                  transition: 'background-color 0.2s'
-                }}
-                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#e0f2fe'}
-                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-              >
-                {link.text}
-              </Link>
-            ))}
-          </div>
-        )}
+              {isOpen ? '-' : '+'}
+            </span>
+          </summary>
 
-        {/* External Links Section */}
-        {externalLinks && externalLinks.length > 0 && (
-          <div style={{
-            backgroundColor: '#f0f9ff',
-            padding: '15px',
-            borderRadius: '6px',
-            marginTop: '15px'
+          {/* Instructions List */}
+          <ul style={{
+            listStyle: 'none',
+            margin: '15px 0 0 0',
+            padding: '0 0 0 30px',
           }}>
-            <h4 style={{
-              color: '#1a1a1a',
-              fontSize: '16px',
-              margin: '0 0 12px 0',
-              paddingBottom: '8px',
-              borderBottom: '1px solid #e2e8f0'
-            }}>
-              External Links
-            </h4>
-            {externalLinks.map((link, index) => (
-              <a 
+            {instructions.map((instruction, index) => (
+              <li
                 key={index}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
                 style={{
-                  display: 'block',
-                  color: '#3b82f6',
-                  textDecoration: 'none',
+                  marginBottom: index !== instructions.length - 1 ? '8px' : 0,
+                  color: instructionText,
+                  fontWeight: '600',
                   fontSize: '14px',
-                  padding: '8px',
-                  margin: '4px 0',
-                  borderRadius: '4px',
-                  transition: 'background-color 0.2s'
                 }}
-                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#e0f2fe'}
-                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
               >
-                {link.text}
-              </a>
+                • {instruction}
+              </li>
             ))}
-          </div>
-        )}
-      </details>
-    </div>
+          </ul>
+
+          {/* Internal Links Section */}
+          {links && links.length > 0 && (
+            <div style={{
+              backgroundColor: sectionBg,
+              padding: '15px',
+              borderRadius: '6px',
+              marginTop: '15px',
+            }}>
+              <h4 style={{
+                color: '#1a1a1a',
+                fontSize: '16px',
+                margin: '0 0 12px 0',
+                paddingBottom: '8px',
+                borderBottom: `1px solid ${sectionBorder}`,
+              }}>
+                Additional Resources
+              </h4>
+              {links.map((link, index) => (
+                <Link
+                  key={index}
+                  href={link.url}
+                  style={{
+                    display: 'block',
+                    color: accent,
+                    textDecoration: 'none',
+                    fontSize: '14px',
+                    padding: '8px',
+                    margin: '4px 0',
+                    borderRadius: '4px',
+                    transition: 'background-color 0.2s',
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.backgroundColor = hoverBg)}
+                  onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+                >
+                  {link.text}
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* External Links Section */}
+          {externalLinks && externalLinks.length > 0 && (
+            <div style={{
+              backgroundColor: sectionBg,
+              padding: '15px',
+              borderRadius: '6px',
+              marginTop: '15px',
+            }}>
+              <h4 style={{
+                color: '#1a1a1a',
+                fontSize: '16px',
+                margin: '0 0 12px 0',
+                paddingBottom: '8px',
+                borderBottom: `1px solid ${sectionBorder}`,
+              }}>
+                External Links
+              </h4>
+              {externalLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'block',
+                    color: accent,
+                    textDecoration: 'none',
+                    fontSize: '14px',
+                    padding: '8px',
+                    margin: '4px 0',
+                    borderRadius: '4px',
+                    transition: 'background-color 0.2s',
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.backgroundColor = hoverBg)}
+                  onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+                >
+                  {link.text}
+                </a>
+              ))}
+            </div>
+          )}
+        </details>
+      </div>
     </>
   );
-};
-
-ExplanationDetails.defaultProps = {
-  title: "How to use",
-  instructions: [],
-  links: [],
-  externalLinks: []
 };
 
 export default ExplanationDetails;

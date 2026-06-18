@@ -1,204 +1,158 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// tables-optimized: v4 | 2026-05-18 | 3 tables (obj2 aggregation, obj10 aggregation, obj12 summary capstone)
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "Gaussian elimination",
-//   "row reduction",
-//   "forward elimination",
-//   "back substitution",
-//   "Gauss-Jordan elimination",
-//   "elementary row operations",
-//   "pivot position",
-//   "row echelon form",
-//   "reduced row echelon form",
-//   "augmented matrix reduction",
-//   "partial pivoting",
-//   "parametric vector form",
-//   "Gaussian elimination examples",
-//   "computational cost elimination"
-// ]
-//   // •
+export async function getStaticProps(){
+const keyWords = [
+  "Gaussian elimination",
+  "row reduction",
+  "forward elimination",
+  "back substitution",
+  "Gauss-Jordan elimination",
+  "elementary row operations",
+  "pivot position",
+  "row echelon form",
+  "reduced row echelon form",
+  "augmented matrix reduction",
+  "partial pivoting",
+  "parametric vector form",
+  "Gaussian elimination examples",
+  "computational cost elimination"
+]
 
-// //   \u2022 First item
-// // \u2022 Second item
+const linkStyle = 'color: inherit; text-decoration: underline;'
 
-  
-// // <hr style="border-width:1px;"></hr>
+// ---------- TABLES ----------
 
-// // <hr style="color:blue;" />
+// obj2 — aggregation: reference card for the three elementary row operations
+const obj2Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Operation</th>
+      <th style="${tableHeaders.aggregation}">Notation</th>
+      <th style="${tableHeaders.aggregation}">Effect on the system</th>
+      <th style="${tableHeaders.aggregation}">Reverse operation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Row swap</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">R<sub>i</sub> ↔ R<sub>j</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reorders two equations; used to place a nonzero entry into the pivot position</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the same swap R<sub>i</sub> ↔ R<sub>j</sub></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Row scaling</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">k · R<sub>i</sub> → R<sub>i</sub> &nbsp;(k ≠ 0)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rescales one equation; used to make pivots equal to 1 in RREF</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">scaling the same row by 1 / k</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Row addition</td>
+      <td style="padding: 12px 15px; color: #34495e;">R<sub>i</sub> + c · R<sub>j</sub> → R<sub>i</sub></td>
+      <td style="padding: 12px 15px; color: #34495e;">replaces one equation by a combination; this is the operation that actually eliminates entries</td>
+      <td style="padding: 12px 15px; color: #34495e;">R<sub>i</sub> − c · R<sub>j</sub> → R<sub>i</sub></td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// obj10 — aggregation: cost by phase and against alternatives
+const obj10Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Phase or method (n × n system)</th>
+      <th style="${tableHeaders.aggregation}">Approximate operation count</th>
+      <th style="${tableHeaders.aggregation}">Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Forward elimination (produces REF)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">~ (2/3) n³</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">dominant cost of Gaussian elimination</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Back substitution after REF</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">~ n²</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">negligible compared to forward elimination</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Gauss-Jordan (forward + backward to RREF)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">~ n³</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">backward pass roughly doubles the forward pass</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Computing <a href="/linear-algebra/matrix/inverse" style="${linkStyle}">A⁻¹</a> explicitly, then x = A⁻¹b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">~ 2 n³</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">roughly 3× the cost of direct elimination</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/determinants/applications" style="${linkStyle}">Cramer&apos;s rule</a></td>
+      <td style="padding: 12px 15px; color: #34495e;">(n + 1) determinants, each O(n³) via row reduction</td>
+      <td style="padding: 12px 15px; color: #34495e;">orders of magnitude slower than elimination for large n; cofactor-expansion routes are O(n!), astronomically slow</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-// //     const sectionsContent={
-
-// //     obj1:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-  
-// //     },
-// //     obj2:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-  
-// //     obj3:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj4:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj5:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj6:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj7:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj8:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj9:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj10:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj11:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj12:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj13:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-// //     obj14:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
+// obj12 — summary capstone: the algorithm's workflow at a glance
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Stage</th>
+      <th style="${tableHeaders.summary}">What happens</th>
+      <th style="${tableHeaders.summary}">Output / next step</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Input</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">augmented matrix [A | b] representing A x = b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ready for forward elimination</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Forward elimination</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sweep left-to-right; row swaps (with partial pivoting if numerical) and row additions zero entries below each pivot</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">row echelon form (REF)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Classify columns</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">identify pivot columns (determined variables) and free columns (parameters); check for a contradiction row [0 ⋯ 0 | d ≠ 0]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank, free variables, solvability verdict</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Read solution — option A</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">back substitution: solve each pivot variable from the bottom row upward</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">explicit values (or parametric expressions) for each variable</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Read solution — option B</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Gauss-Jordan: continue with row addition and scaling to zero entries above each pivot and make pivots = 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reduced row echelon form (RREF); solution by direct inspection</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Output</td>
+      <td style="padding: 12px 15px; color: #34495e;">single point (unique), parametric vector form x<sub>p</sub> + free directions (infinitely many), or &quot;no solution&quot; (inconsistent)</td>
+      <td style="padding: 12px 15px; color: #34495e;">the solution set of A x = b</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 
-// //     obj15:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     }
-  
-// //   }
 // const sectionsContent = {
 //   obj1: {
 //     title: `The Goal`,
@@ -363,602 +317,16 @@
 //     after: ``,
 //     link: ``,
 //   },
+//   obj12: {
+//     title: `Summary: The Algorithm at a Glance`,
+//     content: `Gaussian elimination splits cleanly into a small number of stages — preparing the augmented matrix, reducing it forward, classifying columns as pivot or free, and reading the solution by back substitution or Gauss-Jordan. The table below collects each stage alongside what happens in it and what the next step receives as input, providing a single-page workflow card for the procedure.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
 // }
 
-//  const introContent = {
-//   title: `The Workhorse Algorithm of Linear Algebra`,
-//   content: `Gaussian elimination transforms a linear system into a simpler equivalent form by systematically applying row operations. Forward elimination creates zeros below each pivot, producing row echelon form. Back substitution then solves from the bottom up. The algorithm handles every case — unique solutions, infinitely many solutions, and inconsistent systems — within a single unified framework.`,
-// }
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is Gaussian elimination?",
-//     answer: "Gaussian elimination transforms a linear system into row echelon form using three elementary row operations: row swaps, row scaling, and adding multiples of one row to another. Forward elimination creates zeros below each pivot, then back substitution solves from the bottom up.",
-//     sectionId: "1"
-//   },
-//   obj2: {
-//     question: "What is the difference between REF and RREF?",
-//     answer: "Row echelon form (REF) has a staircase of pivots with zeros below each one — the solution requires back substitution. Reduced row echelon form (RREF) additionally has each pivot equal to 1 and zeros above each pivot, so the solution is visible by direct inspection.",
-//     sectionId: "6"
-//   },
-//   obj3: {
-//     question: "How do you know if a system has no solution?",
-//     answer: "A system is inconsistent when row reduction produces a row of the form [0 0 ⋯ 0 | d] with d ≠ 0, representing the impossible equation 0 = d. This means rank([A | b]) > rank(A), and no solution exists.",
-//     sectionId: "9"
-//   },
-//   obj4: {
-//     question: "What are pivot and free variables?",
-//     answer: "Pivot variables correspond to columns containing a pivot in the echelon form — their values are determined by back substitution. Free variables correspond to non-pivot columns and can take any real value. If there are free variables and the system is consistent, infinitely many solutions exist.",
-//     sectionId: "4"
-//   },
-//   obj5: {
-//     question: "What is partial pivoting?",
-//     answer: "Partial pivoting selects the largest absolute value in the current pivot column and swaps it into the pivot position. This keeps multipliers small and limits rounding error accumulation in floating-point arithmetic. Every serious numerical implementation uses partial pivoting by default.",
-//     sectionId: "11"
-//   }
-// }
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Gaussian Elimination",
-//     "description": "Gaussian elimination: forward elimination, back substitution, Gauss-Jordan, row operations, pivots, worked examples for unique, infinite, and no-solution cases, partial pivoting, and cost.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/linear-systems/gaussian-eliminations",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Gaussian Elimination"
-//     },
-//     "teaches": [
-//       "Three elementary row operations",
-//       "Forward elimination to row echelon form",
-//       "Pivots, pivot columns, and free variables",
-//       "Back substitution procedure",
-//       "Gauss-Jordan elimination to RREF",
-//       "Worked examples: unique, infinite, and no solution",
-//       "Parametric vector form for infinite solutions",
-//       "Partial pivoting for numerical stability",
-//       "Computational cost: 2n³/3 operations"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Linear Systems",
-//         "item": "https://www.learnmathclass.com/linear-algebra/linear-systems"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Gaussian Elimination",
-//         "item": "https://www.learnmathclass.com/linear-algebra/linear-systems/gaussian-eliminations"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-
-// //    return {
-// //       props:{
-// //          sectionsContent,
-// //          introContent,
-// //           seoData: {
-// //         title: "Title | Learn Math Class",
-// //         description: "Metadescription",
-// //         keywords: keyWords.join(", "),
-// //         url: "/linear-algebra/linear-systems/gaussian-eliminations",
-// //          name: "name"
-// //       },
-        
-// //        }
-// //     }
-
-// return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Gaussian Elimination: Row Reduction | Learn Math Class",
-//       description: "Gaussian elimination: forward elimination, back substitution, Gauss-Jordan, row operations, pivots, worked examples for unique, infinite, and no-solution cases, partial pivoting, and cost.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/linear-systems/gaussian-eliminations",
-//       name: "Gaussian Elimination"
-//     },
-//   }
-// }
-//    }
-
-// // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-// export default function GaussianEliminationPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     {
-//         id:'11',
-//         title:sectionsContent.obj11.title,
-//         link:sectionsContent.obj11.link,
-//         content:[
-//           sectionsContent.obj11.content,
-//         ]
-//     },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    {/* <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head> */}
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Gaussian Elimination</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-
-// tables-optimized: v4 | 2026-05-18 | 3 tables (obj2 aggregation, obj10 aggregation, obj12 summary capstone)
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "Gaussian elimination",
-  "row reduction",
-  "forward elimination",
-  "back substitution",
-  "Gauss-Jordan elimination",
-  "elementary row operations",
-  "pivot position",
-  "row echelon form",
-  "reduced row echelon form",
-  "augmented matrix reduction",
-  "partial pivoting",
-  "parametric vector form",
-  "Gaussian elimination examples",
-  "computational cost elimination"
-]
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj2 — aggregation: reference card for the three elementary row operations
-const obj2Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Operation</th>
-      <th style="${tableHeaders.aggregation}">Notation</th>
-      <th style="${tableHeaders.aggregation}">Effect on the system</th>
-      <th style="${tableHeaders.aggregation}">Reverse operation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Row swap</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">R<sub>i</sub> ↔ R<sub>j</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reorders two equations; used to place a nonzero entry into the pivot position</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the same swap R<sub>i</sub> ↔ R<sub>j</sub></td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Row scaling</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">k · R<sub>i</sub> → R<sub>i</sub> &nbsp;(k ≠ 0)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rescales one equation; used to make pivots equal to 1 in RREF</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">scaling the same row by 1 / k</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Row addition</td>
-      <td style="padding: 12px 15px; color: #34495e;">R<sub>i</sub> + c · R<sub>j</sub> → R<sub>i</sub></td>
-      <td style="padding: 12px 15px; color: #34495e;">replaces one equation by a combination; this is the operation that actually eliminates entries</td>
-      <td style="padding: 12px 15px; color: #34495e;">R<sub>i</sub> − c · R<sub>j</sub> → R<sub>i</sub></td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj10 — aggregation: cost by phase and against alternatives
-const obj10Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Phase or method (n × n system)</th>
-      <th style="${tableHeaders.aggregation}">Approximate operation count</th>
-      <th style="${tableHeaders.aggregation}">Comment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Forward elimination (produces REF)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">~ (2/3) n³</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">dominant cost of Gaussian elimination</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Back substitution after REF</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">~ n²</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">negligible compared to forward elimination</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Gauss-Jordan (forward + backward to RREF)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">~ n³</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">backward pass roughly doubles the forward pass</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Computing <a href="/linear-algebra/matrix/inverse" style="${linkStyle}">A⁻¹</a> explicitly, then x = A⁻¹b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">~ 2 n³</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">roughly 3× the cost of direct elimination</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/determinants/applications" style="${linkStyle}">Cramer&apos;s rule</a></td>
-      <td style="padding: 12px 15px; color: #34495e;">(n + 1) determinants, each O(n³) via row reduction</td>
-      <td style="padding: 12px 15px; color: #34495e;">orders of magnitude slower than elimination for large n; cofactor-expansion routes are O(n!), astronomically slow</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj12 — summary capstone: the algorithm's workflow at a glance
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Stage</th>
-      <th style="${tableHeaders.summary}">What happens</th>
-      <th style="${tableHeaders.summary}">Output / next step</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Input</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">augmented matrix [A | b] representing A x = b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ready for forward elimination</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Forward elimination</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sweep left-to-right; row swaps (with partial pivoting if numerical) and row additions zero entries below each pivot</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">row echelon form (REF)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Classify columns</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">identify pivot columns (determined variables) and free columns (parameters); check for a contradiction row [0 ⋯ 0 | d ≠ 0]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank, free variables, solvability verdict</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Read solution — option A</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">back substitution: solve each pivot variable from the bottom row upward</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">explicit values (or parametric expressions) for each variable</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Read solution — option B</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Gauss-Jordan: continue with row addition and scaling to zero entries above each pivot and make pivots = 1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reduced row echelon form (RREF); solution by direct inspection</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Output</td>
-      <td style="padding: 12px 15px; color: #34495e;">single point (unique), parametric vector form x<sub>p</sub> + free directions (infinitely many), or &quot;no solution&quot; (inconsistent)</td>
-      <td style="padding: 12px 15px; color: #34495e;">the solution set of A x = b</td>
-    </tr>
-  </tbody>
-</table>
-`
-
+// formulas-injected: v1 | 2026-06-16 | 1 callout (obj2 elementary_row_operations prose-insert/aggregation)
 
 const sectionsContent = {
   obj1: {
@@ -974,7 +342,10 @@ Optionally, the reduction can continue to reduced row echelon form (RREF), where
   },
   obj2: {
     title: `The Three Elementary Row Operations`,
-    content: `Gaussian elimination uses three operations, each of which transforms the augmented matrix without changing the solution set.
+    content: `Gaussian elimination uses three operations, each of which transforms the augmented matrix without changing the solution set:
+
+@academic[formula_callout:elementary_row_operations|Elementary Row Operations|$$\\begin{aligned} R_i &\\leftrightarrow R_j \\quad \\text{(swap)} \\\\ kR_i &\\to R_i, \\quad k \\neq 0 \\quad \\text{(scaling)} \\\\ R_i + cR_j &\\to R_i \\quad \\text{(addition)} \\end{aligned}$$]@
+@academic[formulas_link:/linear-algebra/formulas#elementary_row_operations]@
 
 Row swap ($R_i \\leftrightarrow R_j$): interchange two rows. This reorders the equations — a cosmetic change that is sometimes necessary to place a nonzero entry in the pivot position.
 
@@ -1106,7 +477,7 @@ Inconsistency is always detectable in echelon form: a row $[0 \\; 0 \\; \\cdots 
 
 Back substitution requires roughly $n^2$ operations — a negligible addition compared to forward elimination. Gauss-Jordan elimination (continuing to RREF) raises the total to roughly $n^3$, because the backward pass does comparable work to the forward pass.
 
-These costs are dramatically better than the alternatives for large systems. [Cramer's rule](!/linear-algebra/determinants/applications) requires $n + 1$ [determinant](!/linear-algebra/determinants) evaluations, each costing $O(n^3)$ via row reduction or $O(n!)$ via cofactor expansion — orders of magnitude slower. Computing the [inverse](!/linear-algebra/matrix/inverse) explicitly costs roughly $2n^3$ operations. Gaussian elimination is the standard baseline against which all other direct methods are measured.`,
+These costs are dramatically better than the alternatives for large systems. [Cramer&apos;s rule](!/linear-algebra/determinants/applications) requires $n + 1$ [determinant](!/linear-algebra/determinants) evaluations, each costing $O(n^3)$ via row reduction or $O(n!)$ via cofactor expansion — orders of magnitude slower. Computing the [inverse](!/linear-algebra/matrix/inverse) explicitly costs roughly $2n^3$ operations. Gaussian elimination is the standard baseline against which all other direct methods are measured.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1132,6 +503,8 @@ Every serious numerical implementation of Gaussian elimination uses partial pivo
     link: ``,
   },
 }
+
+
 
  const introContent = {
   title: `The Workhorse Algorithm of Linear Algebra`,

@@ -1,113 +1,47 @@
 
-// // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// // import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// // import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
-// // import React from 'react'
-// // import '../../pages.css'
-// // import FactoringCalculator from '@/app/components/calculators/algebra/FactoringCalculator'
-// // import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
-// // import Head from 'next/head'
-
-// // export default function FactoringCalculatorPage() {
-// //   return (
-// //     <>
-// //       <Head>
-// //         <title>Factoring Calculator - Learn Math Class</title>
-// //         <meta name="description" content="Free online factoring calculator. Factor numbers, polynomials, and expressions step by step. Find prime factorization and complete factoring solutions instantly." />
-// //         <meta name="keywords" content="factoring calculator, number factoring, prime factoring, complete factoring, polynomial factoring, math calculator, algebra calculator" />
-// //         <meta name="robots" content="index, follow" />
-// //         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-// //         <meta name="language" content="English" />
-// //         <meta name="revisit-after" content="1 days" />
-// //         <meta name="author" content="Learn Math Class" />
-        
-// //         {/* Open Graph / Facebook */}
-// //         <meta property="og:type" content="website" />
-// //         <meta property="og:url" content="https://www.learnmathclass.com/calculators/factoring-calculator" />
-// //         <meta property="og:title" content="Free Online Factoring Calculator - Learn Math Class" />
-// //         <meta property="og:description" content="Free online factoring calculator. Factor numbers, polynomials, and expressions step by step. Find prime factorization and complete factoring solutions instantly." />
-// //         <meta property="og:image" content="https://www.learnmathclass.com/images/factoring-calculator.png" />
-
-// //         {/* Twitter */}
-// //         <meta property="twitter:card" content="summary_large_image" />
-// //         <meta property="twitter:url" content="https://www.learnmathclass.com/calculators/factoring-calculator" />
-// //         <meta property="twitter:title" content="Free Online Factoring Calculator - Learn Math Class" />
-// //         <meta property="twitter:description" content="Free online factoring calculator. Factor numbers, polynomials, and expressions step by step. Find prime factorization and complete factoring solutions instantly." />
-// //         <meta property="twitter:image" content="https://www.learnmathclass.com/images/factoring-calculator.png" />
-
-// //         {/* Mobile */}
-// //         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-// //         <meta name="theme-color" content="#ffffff" />
-// //         <meta name="apple-mobile-web-app-capable" content="yes" />
-// //         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-
-// //         {/* Links */}
-// //         <link rel="canonical" href="https://www.learnmathclass.com/calculators/factoring-calculator" />
-// //         <link rel="icon" href="/favicon.ico" />
-// //         <link rel="apple-touch-icon" href="/images/icon-192x192.png" />
-// //         <link rel="manifest" href="/manifest.json" />
-// //       </Head>
-
-// //       {/* <GenericNavbar/> */}
-// //       <br/>
-// //       <br/>
-// //       <br/>
-// //       <br/>
-// //       <Breadcrumb/>
-// //       <OperaSidebar
-// //         side='right'
-// //         // topOffset='65px'
-// //         sidebarWidth='45px'
-// //         panelWidth='300px'
-// //         iconColor='white'
-// //         panelBackgroundColor='#f2f2f2'
-// //       />
-      
-// //       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Factoring Calculator</h1>
-// //       <FactoringCalculator/>
-// //       <br/>
-// //       {/* <ScrollUpButton/> */}
-// //     </>
-// //   )
-// // }
-
-// // export async function getStaticProps() {
-// //   return {
-// //     props: {},
-// //   }
-// // }
-
 
 // import Head from 'next/head';
 // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 // import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
-// import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection';
 // import Sections from '@/app/components/page-components/section/Sections';
 // import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents';
-// import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 // import FactoringCalculator from '@/app/components/calculators/algebra/FactoringCalculator';
-// import '../../pages.css';
+// import '../../../pages.css';
 // import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
+// import ExplanationDetails from '@/app/components/ExplanationDetails';
 
 // export async function getStaticProps() {
 
-// const navigationGroup = [
-//   {
-//     title: 'Other Calculators',
-//     items: [
-//       {title: 'GCF Calculator', link: '/calculators/gcf-calculator'},
-//       {title: 'LCM Calculator', link: '/calculators/lcm-calculator'},
-//       {title: 'Prime Number Checker', link: '/calculators/prime-number-checker'},
-//       {title: 'Divisibility Calculator', link: '/calculators/divisibility-calculator'},
-//       {title: 'Exponent Calculator', link: '/calculators/exponent-calculator'},
-//       {title: 'Root Calculator', link: '/calculators/root-calculator'},
-//       {title: 'Fractions Calculator', link: '/calculators/fraction-calculator'},
-//       {title: 'Polynomial Calculator', link: '/calculators/polynomial-calculator'},
+// const navigationGroup=[
+//   {title:'Other Calculators',
+//     items:[
+//       {title:'Exponent Calculator',link:'/calculators/exponent-calculator'},
+//       {title:'Root Calculator',link:'/calculators/root-calculator'},
+//       {title:'Modulo Calculator',link:'/calculators/modulo-calculator'},
+//       {title:'Logarithm Calculator',link:'/calculators/log-calculator'},
+//       {title:'Percentage Calculator',link:'/calculators/percentage-calculator'},
+//       {title:'Factorial Calculator',link:'/calculators/factorial-calculator'},
+//       // {title:'Fractions Calculator',link:'/calculators/fraction-calculator'},
+//       {title:'Complex Numbers Calculator',link:'/calculators/complex-numbers'},
+//       {title:'Trigonometry Calculator',link:'/calculators/trigonometry-calculator'},
+//       {title:'Statistics Calculator',link:'/calculators/statistics-calculator'},
 //     ]
+//   },
+//   {
+//    title:'Visual Tools',
+//    items:[
+//     {title:'FractionsVisualizer',link:'/visual-tools/fractions-visualizer'}
+//    ]
 //   }
-// ];
+// ]
 
+// const detailInstructions = [
+//   "Enter any whole number (positive or negative) in the input field",
+//   "Select Prime Factoring to find prime factors only, or Complete Factoring to find all factors",
+//   "Click Calculate Factors to see the results",
+//   "View the factor list and factor pairs (for complete factoring)",
+//   "Click Reset to clear and try a different number"
+// ];
 // const keyWords = [
 //   'factoring calculator',
 //   'prime factorization calculator',
@@ -253,23 +187,23 @@
 //     link: '',
 //   },
 
-//   obj10: {
-//     title: `Related Calculators and Concepts`,
-//     content: `**Greatest Common Factor (GCF) Calculator** - Find the largest factor shared by two or more numbers. Use prime factorization from this calculator to help identify common factors. Essential for simplifying fractions and solving algebraic problems.
+// //   obj10: {
+// //     title: `Related Calculators and Concepts`,
+// //     content: `**Greatest Common Factor (GCF) Calculator** - Find the largest factor shared by two or more numbers. Use prime factorization from this calculator to help identify common factors. Essential for simplifying fractions and solving algebraic problems.
 
-// **Least Common Multiple (LCM) Calculator** - Find the smallest number that's a multiple of two or more numbers. Works hand-in-hand with factoring to solve fraction addition problems and pattern recognition.
+// // **Least Common Multiple (LCM) Calculator** - Find the smallest number that's a multiple of two or more numbers. Works hand-in-hand with factoring to solve fraction addition problems and pattern recognition.
 
-// **Prime Number Checker** - Quickly verify whether a number is prime or composite. Use this before factoring to understand if your number can be broken down or if it's already in simplest form.
+// // **Prime Number Checker** - Quickly verify whether a number is prime or composite. Use this before factoring to understand if your number can be broken down or if it's already in simplest form.
 
-// **Divisibility Calculator** - Test if one number divides evenly into another. Complements complete factoring by checking specific divisibility rules for numbers like $2, 3, 5, 9$, and $10$.
+// // **Divisibility Calculator** - Test if one number divides evenly into another. Complements complete factoring by checking specific divisibility rules for numbers like $2, 3, 5, 9$, and $10$.
 
-// **Polynomial Factoring Tools** - Extend factoring concepts to algebraic expressions. After mastering number factoring, apply similar techniques to expressions like $x^2 - 5x + 6$.
+// // **Polynomial Factoring Tools** - Extend factoring concepts to algebraic expressions. After mastering number factoring, apply similar techniques to expressions like $x^2 - 5x + 6$.
 
-// For theoretical background, explore **number theory fundamentals**, **divisibility rules**, **prime factorization applications**, and **factor trees** for visual factoring methods.`,
-//     before: ``,
-//     after: ``,
-//     link: '',
-//   },
+// // For theoretical background, explore **number theory fundamentals**, **divisibility rules**, **prime factorization applications**, and **factor trees** for visual factoring methods.`,
+// //     before: ``,
+// //     after: ``,
+// //     link: '',
+// //   },
 // };
 
 // const faqQuestions = {
@@ -383,11 +317,12 @@
 //     navigationGroup,
 //     faqQuestions,
 //     schemas,
+//     detailInstructions,
 //     seoData: {
 //       title: "Factoring Calculator | Find Prime & Complete Factors",
 //       description: "Free factoring calculator finds prime factors and complete factors of any number instantly. Calculate factor pairs and break down numbers step-by-step online.",
 //       keywords: keyWords.join(", "),
-//       url: "/calculators/factoring-calculator",
+//       url: "/algebra/calculators/factoring",
 //       name: "Factoring Calculator - Prime and Complete Factorization Tool"
 //     },
 //   },
@@ -395,7 +330,8 @@
 // };
 // }
 
-// export default function FactoringCalculatorPage({seoData, sectionsContent, introContent, navigationGroup, faqQuestions, schemas}) {
+// export default function FactoringCalculatorPage({seoData, sectionsContent, introContent, 
+//   navigationGroup, faqQuestions, schemas,detailInstructions}) {
 
 // const genericSections = Object.keys(sectionsContent).map((key, index) => ({
 //   id: `${index + 1}`,
@@ -410,7 +346,6 @@
 //       <title>{seoData.title}</title>
 //       <meta name="description" content={seoData.description} />
 //       <meta name="keywords" content={seoData.keywords} />
-//       <meta name="viewport" content="width=device-width, initial-scale=1" />
 //       <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
       
 //       <meta property="og:title" content={seoData.title} />
@@ -453,7 +388,7 @@
       
 //       .layout-container {
 //         display: grid;
-//         grid-template-columns: 20% 80%;
+//         grid-template-columns: 250px 1fr;
 //         gap: 20px;
 //         width: 100%;
 //       }
@@ -478,22 +413,28 @@
 //       panelBackgroundColor='#f2f2f2'
 //     />
     
-//     <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Factoring Calculator</h1>
-    
+//     <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Factoring Calculator</h1>
+//     <br/>
+//    {/* <div style={{marginBottom:'60px'}}>
+//       <ExplanationDetails 
+//         instructions={detailInstructions}
+//         title='How to use Factoring Calculator'
+//       />
+//     </div> */}
 //     <div className="layout-container"> 
-//       <div>
+//       <div style={{marginTop:'-30px',marginLeft:'5px'}}>
 //         <br/>
 //         <VerticalButtonGroup 
 //           items={navigationGroup}
 //           width="250px"       
-//           theme='lightBlue'
+//           theme='brilliantBlue'
 //           isSticky={true}
-//           verticalOffset='200px'
+//           verticalOffset='250px'
 //         />
 //       </div>
 
 //       <div>
-//         <div style={{width:'100%',margin:'auto'}}>
+//         <div style={{width:'95%',transform:'scale(0.95)'}}>
 //           <FactoringCalculator />
 //           <br/>
 //         </div>
@@ -539,13 +480,14 @@
 // }
 
 
+
 import Head from 'next/head';
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 import Sections from '@/app/components/page-components/section/Sections';
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents';
 import FactoringCalculator from '@/app/components/calculators/algebra/FactoringCalculator';
-import '../../pages.css';
+import '../../../pages.css';
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
 import ExplanationDetails from '@/app/components/ExplanationDetails';
 
@@ -774,7 +716,7 @@ const schemas = {
     "@type": "WebApplication",
     "name": "Factoring Calculator - Prime and Complete Factorization",
     "description": "Free online factoring calculator for finding prime factors and complete factors of any number. Instantly calculate all factors and factor pairs with step-by-step results.",
-    "url": "https://www.learnmathclass.com/calculators/factoring-calculator",
+    "url": "https://www.learnmathclass.com/algebra/calculators/factoring",
     "applicationCategory": "EducationalApplication",
     "operatingSystem": "Any",
     "offers": {
@@ -817,14 +759,20 @@ const schemas = {
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "Calculators",
-        "item": "https://www.learnmathclass.com/calculators"
+        "name": "Algebra",
+        "item": "https://www.learnmathclass.com/algebra"
       },
       {
         "@type": "ListItem",
         "position": 3,
+        "name": "Calculators",
+        "item": "https://www.learnmathclass.com/algebra/calculators"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
         "name": "Factoring Calculator",
-        "item": "https://www.learnmathclass.com/calculators/factoring-calculator"
+        "item": "https://www.learnmathclass.com/algebra/calculators/factoring"
       }
     ]
   },
@@ -861,7 +809,7 @@ return {
       title: "Factoring Calculator | Find Prime & Complete Factors",
       description: "Free factoring calculator finds prime factors and complete factors of any number instantly. Calculate factor pairs and break down numbers step-by-step online.",
       keywords: keyWords.join(", "),
-      url: "/calculators/factoring-calculator",
+      url: "/algebra/calculators/factoring",
       name: "Factoring Calculator - Prime and Complete Factorization Tool"
     },
   },
@@ -941,8 +889,7 @@ return (
 
     <br/>
     <br/>
-    <br/>
-    <br/>
+    
     <Breadcrumb/>
     <OperaSidebar
       side='right'
@@ -951,29 +898,30 @@ return (
       iconColor='white'
       panelBackgroundColor='#f2f2f2'
     />
-    
-    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Factoring Calculator</h1>
+   
     <br/>
-   <div style={{marginBottom:'60px'}}>
+    <h1 className='title' style={{marginTop:'0px',marginBottom:'-60px'}}>Factoring Calculator</h1>
+    <br/>
+   {/* <div style={{marginBottom:'60px'}}>
       <ExplanationDetails 
         instructions={detailInstructions}
         title='How to use Factoring Calculator'
       />
-    </div>
+    </div> */}
     <div className="layout-container"> 
-      <div style={{marginTop:'-30px',marginLeft:'5px'}}>
+      <div style={{marginTop:'30px',marginLeft:'5px'}}>
         <br/>
         <VerticalButtonGroup 
           items={navigationGroup}
           width="250px"       
-          theme='lightBlue'
+          theme='brilliantBlue'
           isSticky={true}
-          verticalOffset='150px'
+          verticalOffset='250px'
         />
       </div>
 
       <div>
-        <div style={{width:'100%', maxWidth:'900px'}}>
+        <div style={{width:'95%',transform:'scale(0.9)'}}>
           <FactoringCalculator />
           <br/>
         </div>

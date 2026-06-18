@@ -940,6 +940,37 @@ minimalistic: {
       borderWidth: '1px',
       borderColor: '#e5e7eb'
     }
+  },
+
+  brilliantBlue: {
+  container: {
+    background: '#1d4ed8',
+    padding: '20px',
+    borderRadius: '12px',
+    boxShadow: '0 4px 12px rgba(30, 58, 138, 0.2)'
+  },
+  button: {
+    padding: '16px 20px',
+    marginBottom: '8px',
+    border: '1px solid #2563eb',
+    borderRadius: '8px',
+    color: '#dbeafe',
+    background: '#1d4ed8',
+    fontSize: '15px',
+    fontWeight: '500'
+  },
+  buttonHover: {
+    background: '#2563eb',
+    borderColor: '#3b82f6',
+    boxShadow: '0 2px 8px rgba(59, 130, 246, 0.25)'
+  },
+  icon: {
+    color: '#93c5fd'
+  },
+  chevron: {
+    color: '#93c5fd',
+    hoverColor: '#dbeafe'
   }
+},
 
 };

@@ -1,205 +1,110 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "QR decomposition",
-//   "QR factorization",
-//   "Householder reflections",
-//   "Gram-Schmidt QR",
-//   "Givens rotations",
-//   "QR least squares",
-//   "thin QR full QR",
-//   "QR eigenvalue algorithm",
-//   "orthogonal triangular factorization",
-//   "QR numerical stability",
-//   "condition number QR",
-//   "modified Gram-Schmidt QR",
-//   "QR decomposition example",
-//   "orthonormal columns matrix"
-// ]
-//   // •
-
-// //   \u2022 First item
-// // \u2022 Second item
-
-  
-// // <hr style="border-width:1px;"></hr>
-
-// // <hr style="color:blue;" />
-
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// tables-optimized: v4 | 2026-05-18 | 2 tables (obj4 comparison, obj11 summary capstone)
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
+export async function getStaticProps(){
+const keyWords = [
+  "QR decomposition",
+  "QR factorization",
+  "Householder reflections",
+  "Gram-Schmidt QR",
+  "Givens rotations",
+  "QR least squares",
+  "thin QR full QR",
+  "QR eigenvalue algorithm",
+  "orthogonal triangular factorization",
+  "QR numerical stability",
+  "condition number QR",
+  "modified Gram-Schmidt QR",
+  "QR decomposition example",
+  "orthonormal columns matrix"
+]
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+  const linkStyle = 'color: inherit; text-decoration: underline;'
 
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
+  // ---------- TABLES ----------
 
+  // obj4 — comparison: thin QR vs full QR
+  const obj4Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Variant</th>
+      <th style="${tableHeaders.comparison} text-align: center;">Q dimensions</th>
+      <th style="${tableHeaders.comparison} text-align: center;">R dimensions</th>
+      <th style="${tableHeaders.comparison}">What is captured</th>
+      <th style="${tableHeaders.comparison}">When required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Thin (reduced) QR</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">m × n with orthonormal columns</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">n × n upper triangular</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">an orthonormal basis for Col(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">system solving, <a href="/linear-algebra/orthogonality/least-squares" style="${linkStyle}">least squares</a> — the usual default</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Full QR</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">m × m, fully orthogonal</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">m × n (n × n upper block, then m − n rows of zeros)</td>
+      <td style="padding: 12px 15px; color: #34495e;">orthonormal bases for both Col(A) and Col(A)<sup>⊥</sup></td>
+      <td style="padding: 12px 15px; color: #34495e;">extracting a basis for the <a href="/linear-algebra/vector-spaces/fundamental-spaces" style="${linkStyle}">left null space</a> of A</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-// //     const sectionsContent={
-
-// //     obj1:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-  
-// //     },
-// //     obj2:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-  
-// //     obj3:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj4:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj5:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj6:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj7:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj8:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj9:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj10:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj11:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj12:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj13:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-// //     obj14:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-
-
-// //     obj15:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     }
-  
-// //   }
-
+  // obj11 — summary capstone: four QR computation methods
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Method</th>
+      <th style="${tableHeaders.summary}">How it works</th>
+      <th style="${tableHeaders.summary}">Numerical stability</th>
+      <th style="${tableHeaders.summary}">Best for</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Classical <a href="/linear-algebra/orthogonality/gram-schmidt" style="${linkStyle}">Gram-Schmidt</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">orthogonalize each column against original earlier columns</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">poor when columns are nearly dependent; loses orthogonality</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">teaching the connection between QR and orthogonalization</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Modified Gram-Schmidt</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">update remaining columns in place after each projection subtraction</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">significantly better than classical; not backward stable</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cases where Q is needed explicitly column by column</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Householder reflections</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one orthogonal reflection per column zeros all entries below the pivot</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">backward stable — the gold standard</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">dense matrices; default in numerical libraries</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Givens rotations</td>
+      <td style="padding: 12px 15px; color: #34495e;">a plane rotation zeros one entry at a time</td>
+      <td style="padding: 12px 15px; color: #34495e;">backward stable, like Householder</td>
+      <td style="padding: 12px 15px; color: #34495e;">sparse matrices — preserves sparsity by acting locally</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 // const sectionsContent = {
 //   obj1: {
@@ -249,7 +154,9 @@
 
 // The full QR factorization extends $Q_1$ to a square $m \\times m$ orthogonal matrix $Q$ by appending $m - n$ columns forming an orthonormal basis for $\\text{Col}(A)^\\perp$. The factor $R$ is extended to $m \\times n$ by appending $m - n$ rows of zeros: $A = QR$.
 
-// The full version is needed when the [orthogonal complement](!/linear-algebra/orthogonality) of the column space is required — for instance, when extracting a basis for the [left null space](!/linear-algebra/vector-spaces/fundamental-spaces). The thin version is more economical for system solving and [least squares](!/linear-algebra/orthogonality/least-squares).`,
+// The full version is needed when the [orthogonal complement](!/linear-algebra/orthogonality) of the column space is required — for instance, when extracting a basis for the [left null space](!/linear-algebra/vector-spaces/fundamental-spaces). The thin version is more economical for system solving and [least squares](!/linear-algebra/orthogonality/least-squares).
+
+// The two variants compare cleanly on the dimensions of their factors and what each one captures.`,
 //     before: ``,
 //     after: ``,
 //     link: ``,
@@ -330,558 +237,33 @@
 //     after: ``,
 //     link: ``,
 //   },
-// }
-
-// const introContent = {
-//   title: `Orthogonal Times Triangular`,
-//   content: `The QR decomposition factors a matrix into an orthogonal factor Q and an upper triangular factor R. It is the matrix form of the Gram-Schmidt process, the standard method for least-squares computation, and the foundation of the most widely used eigenvalue algorithm. The orthogonal factor preserves lengths and condition numbers, making QR the numerically safest of the triangular factorizations.`,
-// }
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is the QR decomposition?",
-//     answer: "The QR decomposition factors an m×n matrix A (with independent columns) as A = QR, where Q has orthonormal columns and R is upper triangular with positive diagonal entries. Q spans the column space of A, and R stores the coefficients expressing A's columns in terms of Q's columns.",
-//     sectionId: "1"
+//   // NEW capstone section: obj11
+//   obj11: {
+//     title: `Summary: Four Routes to the Same Factorization`,
+//     content: `The QR factorization is unique (with the positive-diagonal convention), but the algorithms that produce it are not. Classical Gram-Schmidt, modified Gram-Schmidt, Householder reflections, and Givens rotations all yield the same $A = QR$ in exact arithmetic, but they differ sharply in numerical stability and in the kinds of matrices they handle most efficiently. The table below collects each method alongside how it operates, its stability behavior, and the setting in which it is the right choice.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
 //   },
-//   obj2: {
-//     question: "How is QR computed?",
-//     answer: "QR can be computed via Gram-Schmidt orthogonalization, Householder reflections, or Givens rotations. Householder is the default for dense matrices due to its backward stability. Modified Gram-Schmidt is used when Q is needed explicitly. Givens rotations are preferred for sparse matrices.",
-//     sectionId: "9"
-//   },
-//   obj3: {
-//     question: "Why is QR better than normal equations for least squares?",
-//     answer: "Forming AᵀA squares the condition number of A, amplifying rounding errors. QR reduces least squares to the triangular system Rx̂ = Qᵀb, preserving the original condition number. If A has condition number 10⁶, QR works at 10⁶ while normal equations work at 10¹².",
-//     sectionId: "6"
-//   },
-//   obj4: {
-//     question: "What is the difference between thin QR and full QR?",
-//     answer: "Thin (reduced) QR has Q of size m×n with orthonormal columns and R of size n×n. Full QR extends Q to a square m×m orthogonal matrix by adding columns spanning the orthogonal complement of Col(A). Thin QR suffices for system solving and least squares; full QR is needed when the left null space basis is required.",
-//     sectionId: "4"
-//   },
-//   obj5: {
-//     question: "How does the QR algorithm compute eigenvalues?",
-//     answer: "The QR algorithm iterates: factor Aₖ = QₖRₖ, then form Aₖ₊₁ = RₖQₖ. Each step is a similarity transformation preserving eigenvalues while driving sub-diagonal entries toward zero. With shifts, convergence is cubic for symmetric matrices. It avoids the numerical instability of finding roots of the characteristic polynomial.",
-//     sectionId: "7"
-//   }
-// }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "QR Decomposition",
-//     "description": "QR decomposition: Gram-Schmidt, Householder, and Givens methods. Thin vs full QR, least-squares solving, the QR eigenvalue algorithm, numerical stability, and factor properties.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/decompositions/qr",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "QR Decomposition"
-//     },
-//     "teaches": [
-//       "QR factorization A = QR definition and structure",
-//       "QR via Gram-Schmidt orthogonalization",
-//       "QR via Householder reflections",
-//       "Thin QR vs full QR decomposition",
-//       "Least-squares solving with QR",
-//       "The QR algorithm for eigenvalue computation",
-//       "Gram-Schmidt vs Householder vs Givens comparison"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Decompositions",
-//         "item": "https://www.learnmathclass.com/linear-algebra/decompositions"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "QR Decomposition",
-//         "item": "https://www.learnmathclass.com/linear-algebra/decompositions/qr"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-//   //  return {
-//   //     props:{
-//   //        sectionsContent,
-//   //        introContent,
-//   //         seoData: {
-//   //       title: "Title | Learn Math Class",
-//   //       description: "Metadescription",
-//   //       keywords: keyWords.join(", "),
-//   //       url: "/linear-algebra/.decompositions/qr",
-//   //        name: "name"
-//   //     },
-        
-//   //      }
-//   //   }
-
-//   return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "QR Decomposition: Methods & Applications | Learn Math Class",
-//       description: "QR decomposition: Gram-Schmidt, Householder, and Givens methods. Thin vs full QR, least-squares solving, the QR eigenvalue algorithm, numerical stability, and factor properties.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/decompositions/qr",
-//       name: "QR Decomposition"
-//     },
-//   }
-// }
-//    }
-
-// // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-// export default function QRDecompositionPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    {/* <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head> */}
-
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>QR Decompositions</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
 // }
 
 
 
-// tables-optimized: v4 | 2026-05-18 | 2 tables (obj4 comparison, obj11 summary capstone)
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "QR decomposition",
-  "QR factorization",
-  "Householder reflections",
-  "Gram-Schmidt QR",
-  "Givens rotations",
-  "QR least squares",
-  "thin QR full QR",
-  "QR eigenvalue algorithm",
-  "orthogonal triangular factorization",
-  "QR numerical stability",
-  "condition number QR",
-  "modified Gram-Schmidt QR",
-  "QR decomposition example",
-  "orthonormal columns matrix"
-]
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-
-  // ---------- TABLES ----------
-
-  // obj4 — comparison: thin QR vs full QR
-  const obj4Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Variant</th>
-      <th style="${tableHeaders.comparison} text-align: center;">Q dimensions</th>
-      <th style="${tableHeaders.comparison} text-align: center;">R dimensions</th>
-      <th style="${tableHeaders.comparison}">What is captured</th>
-      <th style="${tableHeaders.comparison}">When required</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Thin (reduced) QR</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">m × n with orthonormal columns</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">n × n upper triangular</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">an orthonormal basis for Col(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">system solving, <a href="/linear-algebra/orthogonality/least-squares" style="${linkStyle}">least squares</a> — the usual default</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Full QR</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">m × m, fully orthogonal</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">m × n (n × n upper block, then m − n rows of zeros)</td>
-      <td style="padding: 12px 15px; color: #34495e;">orthonormal bases for both Col(A) and Col(A)<sup>⊥</sup></td>
-      <td style="padding: 12px 15px; color: #34495e;">extracting a basis for the <a href="/linear-algebra/vector-spaces/fundamental-spaces" style="${linkStyle}">left null space</a> of A</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj11 — summary capstone: four QR computation methods
-  const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Method</th>
-      <th style="${tableHeaders.summary}">How it works</th>
-      <th style="${tableHeaders.summary}">Numerical stability</th>
-      <th style="${tableHeaders.summary}">Best for</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Classical <a href="/linear-algebra/orthogonality/gram-schmidt" style="${linkStyle}">Gram-Schmidt</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">orthogonalize each column against original earlier columns</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">poor when columns are nearly dependent; loses orthogonality</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">teaching the connection between QR and orthogonalization</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Modified Gram-Schmidt</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">update remaining columns in place after each projection subtraction</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">significantly better than classical; not backward stable</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cases where Q is needed explicitly column by column</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Householder reflections</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one orthogonal reflection per column zeros all entries below the pivot</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">backward stable — the gold standard</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">dense matrices; default in numerical libraries</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Givens rotations</td>
-      <td style="padding: 12px 15px; color: #34495e;">a plane rotation zeros one entry at a time</td>
-      <td style="padding: 12px 15px; color: #34495e;">backward stable, like Householder</td>
-      <td style="padding: 12px 15px; color: #34495e;">sparse matrices — preserves sparsity by acting locally</td>
-    </tr>
-  </tbody>
-</table>
-`
+// linear-algebra/decompositions/qr — sectionsContent with formula callouts (v1)
+// 3 callouts injected:
+//   obj1 (QR Decomposition) — direct $$ replacement
+//   obj2 (QR Gram-Schmidt R Entries) — inline-promote; dispersed inline R-entry forms consolidated
+//   obj7 (QR Algorithm for Eigenvalues) — inline-promote of the iteration step
+// obj6 R x̂ = Qᵀb display left intact — its data-file entry (Least-Squares via QR) targets the
+// least-squares page, not this one. Worked-example matrices in obj2 preserved.
 
 const sectionsContent = {
   obj1: {
     title: `What QR Decomposition Is`,
     content: `An $m \\times n$ [matrix](!/linear-algebra/matrix) $A$ with $m \\geq n$ and [linearly independent](!/linear-algebra/vector-spaces/linear-independence) columns factors as
 
-$$A = QR$$
+@academic[formula_callout:qr_decomposition|QR Decomposition|$$A = QR$$]@
+@academic[formulas_link:/linear-algebra/formulas#qr_decomposition]@
 
 where $Q$ is $m \\times n$ with [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) columns and $R$ is $n \\times n$ upper [triangular](!/linear-algebra/matrix/types) with positive diagonal entries.
 
@@ -894,11 +276,16 @@ The columns of $Q$ form an orthonormal [basis](!/linear-algebra/vector-spaces) f
     title: `QR via Gram-Schmidt`,
     content: `Applying the [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) to the columns $\\mathbf{a}_1, \\dots, \\mathbf{a}_n$ of $A$ produces orthonormal vectors $\\mathbf{q}_1, \\dots, \\mathbf{q}_n$. These become the columns of $Q$.
 
-The entries of $R$ are the dot products computed during Gram-Schmidt: $R_{ij} = \\mathbf{q}_i \\cdot \\mathbf{a}_j$ for $i \\leq j$, and $R_{ij} = 0$ for $i > j$. Each column of $A$ decomposes as
+The entries of $R$ are the dot products computed during Gram-Schmidt:
+
+@academic[formula_callout:qr_gram_schmidt_r_entries|QR Gram-Schmidt R Entries|$$R_{ij} = \\mathbf{q}_i \\cdot \\mathbf{a}_j \\;\\; (i \\leq j), \\qquad R_{ij} = 0 \\;\\; (i > j), \\qquad R_{jj} = \\|\\mathbf{u}_j\\|$$]@
+@academic[formulas_link:/linear-algebra/formulas#qr_gram_schmidt_r_entries]@
+
+Each column of $A$ decomposes as
 
 $$\\mathbf{a}_j = R_{1j}\\mathbf{q}_1 + R_{2j}\\mathbf{q}_2 + \\cdots + R_{jj}\\mathbf{q}_j$$
 
-The entry $R_{jj} = \\|\\mathbf{u}_j\\|$ (the norm of the $j$-th orthogonal vector before normalization) is always positive, which makes $R$ unique.
+The diagonal entry $R_{jj} = \\|\\mathbf{u}_j\\|$ — the norm of the $j$-th orthogonal vector before normalization — is always positive, which makes $R$ unique.
 
 ## Worked Example
 
@@ -955,9 +342,10 @@ The critical advantage over the normal equations is numerical. Forming $A^TA$ sq
   },
   obj7: {
     title: `The QR Algorithm for Eigenvalues`,
-    content: `The QR algorithm is the standard method for computing [eigenvalues](!/linear-algebra/eigen) of general (non-[symmetric](!/linear-algebra/matrix/types)) matrices. It proceeds iteratively:
+    content: `The QR algorithm is the standard method for computing [eigenvalues](!/linear-algebra/eigen) of general (non-[symmetric](!/linear-algebra/matrix/types)) matrices. It proceeds iteratively, starting from $A_0 = A$ and at each step factoring and reassembling the product in reversed order:
 
-Set $A_0 = A$. At each step, compute the QR factorization $A_k = Q_k R_k$, then form $A_{k+1} = R_k Q_k$.
+@academic[formula_callout:qr_algorithm_for_eigenvalues|QR Algorithm for Eigenvalues|$$A_k = Q_k R_k, \\qquad A_{k+1} = R_k Q_k$$]@
+@academic[formulas_link:/linear-algebra/formulas#qr_algorithm_for_eigenvalues]@
 
 Under mild conditions, $A_k$ converges to an upper triangular matrix with the eigenvalues on the diagonal. The convergence is driven by the fact that $A_{k+1} = Q_k^T A_k Q_k$ — each iteration is a [similarity](!/linear-algebra/transformations/basis-change) transformation that preserves the eigenvalues while driving the sub-diagonal entries toward zero.
 
@@ -1007,7 +395,6 @@ This duality means every theorem about QR has an interpretation in terms of Gram
     after: ``,
     link: ``,
   },
-  // NEW capstone section: obj11
   obj11: {
     title: `Summary: Four Routes to the Same Factorization`,
     content: `The QR factorization is unique (with the positive-diagonal convention), but the algorithms that produce it are not. Classical Gram-Schmidt, modified Gram-Schmidt, Householder reflections, and Givens rotations all yield the same $A = QR$ in exact arithmetic, but they differ sharply in numerical stability and in the kinds of matrices they handle most efficiently. The table below collects each method alongside how it operates, its stability behavior, and the setting in which it is the right choice.`,

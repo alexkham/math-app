@@ -1,78 +1,164 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+// tables-optimized: v4 | 2026-05-18 | 3 tables (obj1 aggregation, obj6 aggregation, obj7 summary capstone)
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "Cramer's rule",
-//   "adjugate inverse formula",
-//   "cross product determinant",
-//   "characteristic polynomial",
-//   "Wronskian",
-//   "Vandermonde determinant",
-//   "solve linear system determinant",
-//   "matrix inverse cofactors",
-//   "eigenvalue determinant",
-//   "function linear independence",
-//   "structured determinants",
-//   "2x2 inverse formula",
-//   "polynomial interpolation determinant",
-//   "determinant applications"
-// ]
-//   // •
+export async function getStaticProps(){
+const keyWords = [
+  "Cramer's rule",
+  "adjugate inverse formula",
+  "cross product determinant",
+  "characteristic polynomial",
+  "Wronskian",
+  "Vandermonde determinant",
+  "solve linear system determinant",
+  "matrix inverse cofactors",
+  "eigenvalue determinant",
+  "function linear independence",
+  "structured determinants",
+  "2x2 inverse formula",
+  "polynomial interpolation determinant",
+  "determinant applications"
+]
 
-// //   \u2022 First item
-// // \u2022 Second item
+const linkStyle = 'color: inherit; text-decoration: underline;'
 
-  
-// // <hr style="border-width:1px;"></hr>
+// ---------- TABLES ----------
 
-// // <hr style="color:blue;" />
+// obj1 — aggregation: Cramer's rule 3×3 worked example, three components side-by-side
+const obj1Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation} text-align: center;">Component</th>
+      <th style="${tableHeaders.aggregation}">Column replaced by b in A</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">det(A<sub>i</sub>)</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">x<sub>i</sub> = det(A<sub>i</sub>) / det(A)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">x<sub>1</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">column 1 → b = (5, 0, 3)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">−23</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">23 / 15</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">x<sub>2</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">column 2 → b = (5, 0, 3)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">−1 / 15</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">x<sub>3</sub></td>
+      <td style="padding: 12px 15px; color: #34495e;">column 3 → b = (5, 0, 3)</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">−26</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">26 / 15</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// obj6 — aggregation: structured-matrix families with closed-form determinant formulas
+const obj6Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Family</th>
+      <th style="${tableHeaders.aggregation}">Structure</th>
+      <th style="${tableHeaders.aggregation}">Determinant formula</th>
+      <th style="${tableHeaders.aggregation}">Key property / use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Vandermonde</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">entry V<sub>ij</sub> = x<sub>i</sub><sup>j−1</sup>; columns are 1, x, x², …, x<sup>n−1</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∏<sub>i &lt; j</sub> (x<sub>j</sub> − x<sub>i</sub>)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nonzero iff nodes are distinct → unique polynomial interpolation</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Circulant</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each row is a cyclic shift of the first row (c<sub>0</sub>, c<sub>1</sub>, …, c<sub>n−1</sub>)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∏<sub>k=0</sub><sup>n−1</sup> p(ω<sup>k</sup>), where p(x) = Σ c<sub>j</sub> x<sup>j</sup> and ω = e<sup>2πi/n</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">diagonalized by the discrete Fourier transform</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Hilbert</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">entry H<sub>ij</sub> = 1 / (i + j − 1)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">closed form involving products of factorials; shrinks rapidly with n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">notoriously ill-conditioned; benchmark for numerical sensitivity</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Tridiagonal</td>
+      <td style="padding: 12px 15px; color: #34495e;">nonzero entries only on the main diagonal and the two adjacent diagonals</td>
+      <td style="padding: 12px 15px; color: #34495e;">three-term recurrence D<sub>n</sub> = a<sub>n</sub> D<sub>n−1</sub> − b<sub>n</sub> c<sub>n</sub> D<sub>n−2</sub></td>
+      <td style="padding: 12px 15px; color: #34495e;">O(n) computation — much faster than general methods</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+// obj7 — summary capstone: each application at a glance
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Application</th>
+      <th style="${tableHeaders.summary}">What the determinant produces</th>
+      <th style="${tableHeaders.summary}">Key formula</th>
+      <th style="${tableHeaders.summary}">When to reach for it</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cramer&apos;s rule</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each solution component of Ax = b as a ratio of determinants</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x<sub>i</sub> = det(A<sub>i</sub>) / det(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">small systems; symbolic / sensitivity analysis</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Adjugate inverse</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">explicit formula for every entry of A<sup>−1</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A<sup>−1</sup> = adj(A) / det(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2×2 and 3×3 inverses; symbolic work</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cross product</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vector perpendicular to two given vectors in ℝ³</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a × b = det([î ĵ k̂; a; b]) via row-1 expansion</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">recalling the component formula; geometry / physics</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Characteristic polynomial</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">degree-n polynomial whose roots are the eigenvalues</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">p(λ) = det(A − λI); det(A) = ∏λ<sub>i</sub>, tr(A) = Σλ<sub>i</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">eigenvalue problems; spectral theory</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Wronskian</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">function-valued determinant testing linear independence of functions</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">W(x) = det of rows f<sub>k</sub>, f<sub>k</sub>′, …, f<sub>k</sub><sup>(n−1)</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">fundamental solution sets of linear ODEs</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Structured determinants</td>
+      <td style="padding: 12px 15px; color: #34495e;">closed-form values exploiting matrix structure</td>
+      <td style="padding: 12px 15px; color: #34495e;">Vandermonde: ∏(x<sub>j</sub> − x<sub>i</sub>); circulant via DFT; tridiagonal recurrence</td>
+      <td style="padding: 12px 15px; color: #34495e;">interpolation, signal processing, special matrix families</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-  
-
-// //   const introContent = {
-// //   id: "intro",
-// //   title: "",
-// //   content: ``
-// // }
 
 // const sectionsContent = {
 //   obj1: {
@@ -313,559 +399,31 @@
 //     after: ``,
 //     link: ``,
 //   },
+//   obj7: {
+//     title: `Summary: Determinant Applications at a Glance`,
+//     content: `The six applications above span linear systems, inverses, vector geometry, eigenvalue analysis, function-space independence, and structured matrix families. The table below collects each one alongside what the determinant produces, the key formula that drives it, and the situation in which it is the right tool to reach for.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
 // }
 
-// const introContent = {
-//   id: "intro",
-//   title: `Solving Problems with Determinants`,
-//   content: `Beyond characterizing invertibility, determinants provide explicit closed-form tools for solving systems, computing inverses, and testing function independence. Each formula trades computational efficiency for structural transparency — the expressions are exact, symbolic, and reveal how solutions depend on the entries of the matrix.`,
-// }
-
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is Cramer's rule?",
-//     answer: "Cramer's rule solves Ax = b by expressing each solution component as xᵢ = det(Aᵢ)/det(A), where Aᵢ replaces column i with b. It requires n+1 determinants, so it's slower than elimination for large systems but useful for symbolic work.",
-//     sectionId: "1"
-//   },
-//   obj2: {
-//     question: "How do you find the inverse using the adjugate?",
-//     answer: "A⁻¹ = adj(A)/det(A), where adj(A) is the transpose of the cofactor matrix. For 2×2: swap diagonal, negate off-diagonal, divide by det. This gives explicit formulas showing how each inverse entry depends on matrix entries.",
-//     sectionId: "2"
-//   },
-//   obj3: {
-//     question: "How is the cross product computed using a determinant?",
-//     answer: "a × b = det([î, ĵ, k̂; a₁, a₂, a₃; b₁, b₂, b₃]). Expand along row 1: each component is a 2×2 minor. This is a formal determinant (first row has vectors, not numbers) but cofactor expansion works mechanically.",
-//     sectionId: "3"
-//   },
-//   obj4: {
-//     question: "What is the characteristic polynomial?",
-//     answer: "p(λ) = det(A - λI) is a degree-n polynomial whose roots are the eigenvalues. Key facts: det(A) = product of eigenvalues (set λ=0); trace(A) = sum of eigenvalues (from the λⁿ⁻¹ coefficient).",
-//     sectionId: "4"
-//   },
-//   obj5: {
-//     question: "What is the Wronskian?",
-//     answer: "The Wronskian W(f₁,...,fₙ) is a determinant with functions in row 1, first derivatives in row 2, etc. If W ≠ 0 at some point, the functions are linearly independent. It's essential for testing solution sets of differential equations.",
-//     sectionId: "5"
-//   },
-//   obj6: {
-//     question: "What is the Vandermonde determinant?",
-//     answer: "For nodes x₁,...,xₙ, the Vandermonde matrix has entry xᵢʲ⁻¹. Its determinant is ∏(xⱼ - xᵢ) over i < j — nonzero iff all nodes are distinct. This guarantees unique polynomial interpolation through n points.",
-//     sectionId: "6"
-//   }
-// }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Applications of Determinants",
-//     "description": "Learn determinant applications: Cramer's rule for linear systems, adjugate inverse formula, cross product as determinant, characteristic polynomial for eigenvalues, Wronskian, and Vandermonde determinants.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/determinants/applications",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Determinant Applications"
-//     },
-//     "teaches": [
-//       "Cramer's rule for solving linear systems",
-//       "Matrix inverse via adjugate formula",
-//       "Cross product as symbolic determinant",
-//       "Characteristic polynomial and eigenvalues",
-//       "Wronskian for function independence",
-//       "Vandermonde and structured determinants"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Determinants",
-//         "item": "https://www.learnmathclass.com/linear-algebra/determinants"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Applications of Determinants",
-//         "item": "https://www.learnmathclass.com/linear-algebra/determinants/applications"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-//    return {
-//   props: {
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Determinant Applications: Cramer's Rule, Inverse & More | Learn Math Class",
-//       description: "Learn determinant applications: Cramer's rule for linear systems, adjugate inverse formula, cross product as determinant, characteristic polynomial for eigenvalues, Wronskian, and Vandermonde determinants.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/determinants/applications",
-//       name: "Applications of Determinants"
-//     },
-//   }
-// }
-//    }
-
-
-//    export default function DeterminantApplicationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     // {
-//     //     id:'7',
-//     //     title:sectionsContent.obj7.title,
-//     //     link:sectionsContent.obj7.link,
-//     //     content:[
-//     //       sectionsContent.obj7.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'8',
-//     //     title:sectionsContent.obj8.title,
-//     //     link:sectionsContent.obj8.link,
-//     //     content:[
-//     //       sectionsContent.obj8.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//  <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Applications of Determinants</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-// tables-optimized: v4 | 2026-05-18 | 3 tables (obj1 aggregation, obj6 aggregation, obj7 summary capstone)
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "Cramer's rule",
-  "adjugate inverse formula",
-  "cross product determinant",
-  "characteristic polynomial",
-  "Wronskian",
-  "Vandermonde determinant",
-  "solve linear system determinant",
-  "matrix inverse cofactors",
-  "eigenvalue determinant",
-  "function linear independence",
-  "structured determinants",
-  "2x2 inverse formula",
-  "polynomial interpolation determinant",
-  "determinant applications"
-]
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj1 — aggregation: Cramer's rule 3×3 worked example, three components side-by-side
-const obj1Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 90%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation} text-align: center;">Component</th>
-      <th style="${tableHeaders.aggregation}">Column replaced by b in A</th>
-      <th style="${tableHeaders.aggregation} text-align: center;">det(A<sub>i</sub>)</th>
-      <th style="${tableHeaders.aggregation} text-align: center;">x<sub>i</sub> = det(A<sub>i</sub>) / det(A)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">x<sub>1</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">column 1 → b = (5, 0, 3)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">−23</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">23 / 15</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">x<sub>2</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">column 2 → b = (5, 0, 3)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">−1 / 15</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">x<sub>3</sub></td>
-      <td style="padding: 12px 15px; color: #34495e;">column 3 → b = (5, 0, 3)</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">−26</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">26 / 15</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj6 — aggregation: structured-matrix families with closed-form determinant formulas
-const obj6Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Family</th>
-      <th style="${tableHeaders.aggregation}">Structure</th>
-      <th style="${tableHeaders.aggregation}">Determinant formula</th>
-      <th style="${tableHeaders.aggregation}">Key property / use</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Vandermonde</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">entry V<sub>ij</sub> = x<sub>i</sub><sup>j−1</sup>; columns are 1, x, x², …, x<sup>n−1</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∏<sub>i &lt; j</sub> (x<sub>j</sub> − x<sub>i</sub>)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nonzero iff nodes are distinct → unique polynomial interpolation</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Circulant</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each row is a cyclic shift of the first row (c<sub>0</sub>, c<sub>1</sub>, …, c<sub>n−1</sub>)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∏<sub>k=0</sub><sup>n−1</sup> p(ω<sup>k</sup>), where p(x) = Σ c<sub>j</sub> x<sup>j</sup> and ω = e<sup>2πi/n</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">diagonalized by the discrete Fourier transform</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Hilbert</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">entry H<sub>ij</sub> = 1 / (i + j − 1)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">closed form involving products of factorials; shrinks rapidly with n</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">notoriously ill-conditioned; benchmark for numerical sensitivity</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Tridiagonal</td>
-      <td style="padding: 12px 15px; color: #34495e;">nonzero entries only on the main diagonal and the two adjacent diagonals</td>
-      <td style="padding: 12px 15px; color: #34495e;">three-term recurrence D<sub>n</sub> = a<sub>n</sub> D<sub>n−1</sub> − b<sub>n</sub> c<sub>n</sub> D<sub>n−2</sub></td>
-      <td style="padding: 12px 15px; color: #34495e;">O(n) computation — much faster than general methods</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj7 — summary capstone: each application at a glance
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Application</th>
-      <th style="${tableHeaders.summary}">What the determinant produces</th>
-      <th style="${tableHeaders.summary}">Key formula</th>
-      <th style="${tableHeaders.summary}">When to reach for it</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cramer&apos;s rule</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each solution component of Ax = b as a ratio of determinants</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x<sub>i</sub> = det(A<sub>i</sub>) / det(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">small systems; symbolic / sensitivity analysis</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Adjugate inverse</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">explicit formula for every entry of A<sup>−1</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A<sup>−1</sup> = adj(A) / det(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2×2 and 3×3 inverses; symbolic work</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cross product</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vector perpendicular to two given vectors in ℝ³</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a × b = det([î ĵ k̂; a; b]) via row-1 expansion</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">recalling the component formula; geometry / physics</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Characteristic polynomial</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">degree-n polynomial whose roots are the eigenvalues</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">p(λ) = det(A − λI); det(A) = ∏λ<sub>i</sub>, tr(A) = Σλ<sub>i</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">eigenvalue problems; spectral theory</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Wronskian</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">function-valued determinant testing linear independence of functions</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">W(x) = det of rows f<sub>k</sub>, f<sub>k</sub>′, …, f<sub>k</sub><sup>(n−1)</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">fundamental solution sets of linear ODEs</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Structured determinants</td>
-      <td style="padding: 12px 15px; color: #34495e;">closed-form values exploiting matrix structure</td>
-      <td style="padding: 12px 15px; color: #34495e;">Vandermonde: ∏(x<sub>j</sub> − x<sub>i</sub>); circulant via DFT; tridiagonal recurrence</td>
-      <td style="padding: 12px 15px; color: #34495e;">interpolation, signal processing, special matrix families</td>
-    </tr>
-  </tbody>
-</table>
-`
-
+// linear-algebra/determinants/applications — sectionsContent with formula callouts (v1)
+// 3 callouts injected:
+//   obj1 (Cramers Rule) — direct $$ replacement
+//   obj4 (Determinant Product of Eigenvalues) — direct $$ replacement
+//   obj6 (Vandermonde Determinant) — direct $$ replacement
+// obj2 (adjugate inverse), obj3 (cross product det form), obj4 (char polynomial,
+// trace identity), obj5 (Wronskian) — matching data entries live on other pages.
+// All worked-example $$ displays preserved.
 
 const sectionsContent = {
   obj1: {
     title: `Cramer's Rule`,
     content: `Given a [linear system](!/linear-algebra/linear-systems) $Ax = \\mathbf{b}$ where $A$ is $n \\times n$ with $\\det(A) \\neq 0$, Cramer's rule expresses each component of the solution directly as a ratio of determinants:
 
-$$x_i = \\frac{\\det(A_i)}{\\det(A)}$$
+@academic[formula_callout:cramers_rule|Cramers Rule|$$x_i = \\frac{\\det(A_i)}{\\det(A)}$$]@
+@academic[formulas_link:/linear-algebra/formulas#cramers_rule]@
 
 where $A_i$ is the matrix formed by replacing column $i$ of $A$ with the right-hand side vector $\\mathbf{b}$. Every other column stays in place.
 
@@ -1012,7 +570,8 @@ The eigenvalues are $\\lambda = 1, 2, 3$ — they sit directly on the diagonal, 
 
 Setting $\\lambda = 0$ in the characteristic polynomial gives $p(0) = \\det(A)$, which means the constant term of the characteristic polynomial is the determinant. Since the roots of $p$ are the eigenvalues $\\lambda_1, \\dots, \\lambda_n$, this yields
 
-$$\\det(A) = \\lambda_1 \\lambda_2 \\cdots \\lambda_n$$
+@academic[formula_callout:determinant_product_of_eigenvalues|Determinant Product of Eigenvalues|$$\\det(A) = \\lambda_1 \\, \\lambda_2 \\cdots \\lambda_n$$]@
+@academic[formulas_link:/linear-algebra/formulas#determinant_product_of_eigenvalues]@
 
 The determinant equals the product of all eigenvalues, counted with algebraic multiplicity. A second identity connects the coefficient of $\\lambda^{n-1}$ to the [trace](!/linear-algebra/matrix/trace):
 
@@ -1068,7 +627,8 @@ $$V = \\begin{pmatrix} 1 & x_1 & x_1^2 & \\cdots & x_1^{n-1} \\\\ 1 & x_2 & x_2^
 
 Its determinant has the closed form
 
-$$\\det(V) = \\prod_{1 \\leq i < j \\leq n} (x_j - x_i)$$
+@academic[formula_callout:vandermonde_determinant|Vandermonde Determinant|$$\\det(V) = \\prod_{1 \\leq i < j \\leq n} (x_j - x_i)$$]@
+@academic[formulas_link:/linear-algebra/formulas#vandermonde_determinant]@
 
 The product runs over all pairs with $j > i$, so it contains $\\binom{n}{2}$ factors. Each factor is a difference between two nodes.
 
@@ -1107,6 +667,7 @@ Each of these families illustrates the same principle: when a matrix has special
     link: ``,
   },
 }
+
 
 const introContent = {
   id: "intro",

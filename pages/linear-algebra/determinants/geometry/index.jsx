@@ -1,81 +1,159 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+// tables-optimized: v4 | 2026-05-18 | 3 tables (obj4 aggregation, obj7 aggregation, obj8 summary capstone)
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
+export async function getStaticProps(){
 
-//   const keyWords = [
-//   "geometric interpretation determinant",
-//   "determinant area",
-//   "determinant volume",
-//   "signed area parallelogram",
-//   "signed volume parallelepiped",
-//   "scalar triple product determinant",
-//   "determinant orientation",
-//   "volume scaling factor",
-//   "Jacobian determinant",
-//   "change of variables formula",
-//   "triangle area determinant",
-//   "tetrahedron volume formula",
-//   "determinant handedness",
-//   "linear transformation volume"
-// ]
-//   // •
+  const keyWords = [
+  "geometric interpretation determinant",
+  "determinant area",
+  "determinant volume",
+  "signed area parallelogram",
+  "signed volume parallelepiped",
+  "scalar triple product determinant",
+  "determinant orientation",
+  "volume scaling factor",
+  "Jacobian determinant",
+  "change of variables formula",
+  "triangle area determinant",
+  "tetrahedron volume formula",
+  "determinant handedness",
+  "linear transformation volume"
+]
 
-// //   \u2022 First item
-// // \u2022 Second item
+const linkStyle = 'color: inherit; text-decoration: underline;'
 
-  
-// // <hr style="border-width:1px;"></hr>
+// ---------- TABLES ----------
 
-// // <hr style="color:blue;" />
+// obj4 — aggregation: standard transformations and their det signatures
+const obj4Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Transformation</th>
+      <th style="${tableHeaders.aggregation}">det(A)</th>
+      <th style="${tableHeaders.aggregation}">Volume effect</th>
+      <th style="${tableHeaders.aggregation}">Orientation effect</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rotation</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">+1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserved</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserved</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reflection (across line in ℝ², plane in ℝ³)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserved</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reversed</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Improper rotation (rotation ∘ reflection)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserved</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reversed</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Singular (e.g., projection)</td>
+      <td style="padding: 12px 15px; color: #34495e;">0</td>
+      <td style="padding: 12px 15px; color: #34495e;">collapsed to lower dimension</td>
+      <td style="padding: 12px 15px; color: #34495e;">undefined</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// obj7 — aggregation: area / volume formulas for common shapes
+const obj7Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Shape</th>
+      <th style="${tableHeaders.aggregation}">Formula</th>
+      <th style="${tableHeaders.aggregation}">Matrix columns</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Parallelogram (2D)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|det(A)|</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the two spanning vectors u, v</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Triangle (2D)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">½ · |det(A)|</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">edge vectors from one vertex to the other two</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Parallelepiped (3D)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|det(A)|</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the three spanning vectors a, b, c</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Tetrahedron (3D)</td>
+      <td style="padding: 12px 15px; color: #34495e;">⅙ · |det(A)|</td>
+      <td style="padding: 12px 15px; color: #34495e;">edge vectors from one vertex to the other three</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+// obj8 — summary capstone: what det(A) means dimension by dimension
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Dimension</th>
+      <th style="${tableHeaders.summary}">Geometric object</th>
+      <th style="${tableHeaders.summary}">|det(A)| measures</th>
+      <th style="${tableHeaders.summary}">sign(det) means</th>
+      <th style="${tableHeaders.summary}">det(A) = 0 means</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">n = 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">segment on a line</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">length scaling factor</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">direction preserved (+) or reversed (−)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">collapse to a point</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">n = 2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">parallelogram</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">area</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">counterclockwise (+) vs clockwise (−)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">columns parallel; collapse to a line</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">n = 3</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">parallelepiped</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">volume</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">right-handed (+) vs left-handed (−)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">columns coplanar; collapse to a plane (or lower)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">n ≥ 4</td>
+      <td style="padding: 12px 15px; color: #34495e;">n-parallelepiped</td>
+      <td style="padding: 12px 15px; color: #34495e;">n-dimensional volume (volume of the image of the unit hypercube)</td>
+      <td style="padding: 12px 15px; color: #34495e;">orientation preserved (+) or reversed (−)</td>
+      <td style="padding: 12px 15px; color: #34495e;">image lies in a proper subspace of ℝⁿ</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-
-
-
-
-// //   const introContent = {
-// //   id: "intro",
-// //   title: "",
-// //   content: ``
-// // }
 
 // const sectionsContent = {
 //   obj1: {
@@ -213,553 +291,17 @@
 //     after: ``,
 //     link: ``,
 //   },
-// }
-
-// const introContent = {
-//   id: "intro",
-//   title: `Area, Volume, and Orientation`,
-//   content: `The determinant measures how a linear transformation scales regions and whether it preserves or reverses their orientation. This geometric reading connects an algebraic formula to spatial intuition, turning abstract sign patterns and products into statements about parallelograms, parallelepipeds, and higher-dimensional volumes.`,
-// }
-
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is the geometric meaning of a 2×2 determinant?",
-//     answer: "The determinant of a 2×2 matrix equals the signed area of the parallelogram spanned by its column vectors. Positive means counterclockwise orientation, negative means clockwise, zero means the vectors are parallel (collapsed to a line).",
-//     sectionId: "1"
+//   obj8: {
+//     title: `Summary: Geometric Meaning by Dimension`,
+//     content: `The geometric content of the determinant takes a recognizable shape in each dimension, with the underlying picture — signed n-volume of an n-parallelepiped — running through them all. The table below collects what det(A) measures, what its sign indicates, and what its vanishing represents, dimension by dimension.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
 //   },
-//   obj2: {
-//     question: "What is the geometric meaning of a 3×3 determinant?",
-//     answer: "The determinant of a 3×3 matrix equals the signed volume of the parallelepiped spanned by its three column vectors. This equals the scalar triple product a·(b×c). Positive means right-handed, negative means left-handed, zero means coplanar.",
-//     sectionId: "2"
-//   },
-//   obj3: {
-//     question: "How does a matrix scale n-dimensional volume?",
-//     answer: "For an n×n matrix A, |det(A)| is the factor by which the linear map x ↦ Ax scales all n-dimensional volumes. If |det| > 1, volumes expand; if |det| < 1, volumes compress; if |det| = 1, volumes are preserved. If det = 0, all volumes collapse to zero.",
-//     sectionId: "3"
-//   },
-//   obj4: {
-//     question: "What does the sign of the determinant mean geometrically?",
-//     answer: "The sign indicates orientation. Positive preserves orientation (counterclockwise stays counterclockwise in 2D, right-handed stays right-handed in 3D). Negative reverses orientation. Rotations have det = +1; reflections have det = -1.",
-//     sectionId: "4"
-//   },
-//   obj5: {
-//     question: "How do determinants relate to linear transformations?",
-//     answer: "An invertible matrix defines a bijective linear transformation. Its determinant captures two facts: |det| is the volume scaling factor, and sign(det) indicates whether orientation is preserved or reversed. det(AB) = det(A)det(B) means scaling factors multiply.",
-//     sectionId: "5"
-//   },
-//   obj6: {
-//     question: "What is the Jacobian determinant in integration?",
-//     answer: "In the change-of-variables formula ∫f(y)dy = ∫f(T(x))|det(J)|dx, the Jacobian determinant |det(J)| measures local volume distortion at each point. For polar coordinates it's r; for spherical coordinates it's r²sin(φ).",
-//     sectionId: "6"
-//   },
-//   obj7: {
-//     question: "How do you calculate triangle and tetrahedron volume with determinants?",
-//     answer: "Triangle area = ½|det([edge vectors])|. Parallelogram area = |det|. Tetrahedron volume = ⅙|det([edge vectors])|. Parallelepiped volume = |det|. The fractions (½, ⅙) arise because triangles and tetrahedra are fractions of their enclosing parallelogram/parallelepiped.",
-//     sectionId: "7"
-//   }
 // }
 
 
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Geometric Interpretation of Determinants",
-//     "description": "Learn the geometric meaning of determinants: signed area in 2D, signed volume in 3D, orientation, volume scaling, Jacobian in change-of-variables, and formulas for triangle area and tetrahedron volume.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/determinants/geometry",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Geometric Interpretation of Determinants"
-//     },
-//     "teaches": [
-//       "Signed area of parallelograms in 2D",
-//       "Signed volume of parallelepipeds in 3D",
-//       "n-dimensional volume scaling",
-//       "Orientation and handedness",
-//       "Jacobian determinant and change of variables",
-//       "Triangle area and tetrahedron volume formulas"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Determinants",
-//         "item": "https://www.learnmathclass.com/linear-algebra/determinants"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Geometric Interpretation of Determinants",
-//         "item": "https://www.learnmathclass.com/linear-algebra/determinants/geometry"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-
-
-//    return {
-//   props: {
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Determinant Geometry: Area, Volume & Orientation | Learn Math Class",
-//       description: "Learn the geometric meaning of determinants: signed area in 2D, signed volume in 3D, orientation, volume scaling, Jacobian in change-of-variables, and formulas for triangle area and tetrahedron volume.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/determinants/geometry",
-//       name: "Geometric Interpretation of Determinants"
-//     },
-//   }
-// }
-//    }
-
-//  export default function DeterminantGeometryPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {  
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     // {
-//     //     id:'8',
-//     //     title:sectionsContent.obj8.title,
-//     //     link:sectionsContent.obj8.link,
-//     //     content:[
-//     //       sectionsContent.obj8.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//  <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Determinant as Area and Volume</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-// tables-optimized: v4 | 2026-05-18 | 3 tables (obj4 aggregation, obj7 aggregation, obj8 summary capstone)
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-
-  const keyWords = [
-  "geometric interpretation determinant",
-  "determinant area",
-  "determinant volume",
-  "signed area parallelogram",
-  "signed volume parallelepiped",
-  "scalar triple product determinant",
-  "determinant orientation",
-  "volume scaling factor",
-  "Jacobian determinant",
-  "change of variables formula",
-  "triangle area determinant",
-  "tetrahedron volume formula",
-  "determinant handedness",
-  "linear transformation volume"
-]
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj4 — aggregation: standard transformations and their det signatures
-const obj4Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 90%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Transformation</th>
-      <th style="${tableHeaders.aggregation}">det(A)</th>
-      <th style="${tableHeaders.aggregation}">Volume effect</th>
-      <th style="${tableHeaders.aggregation}">Orientation effect</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rotation</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">+1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserved</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserved</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reflection (across line in ℝ², plane in ℝ³)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserved</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reversed</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Improper rotation (rotation ∘ reflection)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserved</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reversed</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Singular (e.g., projection)</td>
-      <td style="padding: 12px 15px; color: #34495e;">0</td>
-      <td style="padding: 12px 15px; color: #34495e;">collapsed to lower dimension</td>
-      <td style="padding: 12px 15px; color: #34495e;">undefined</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj7 — aggregation: area / volume formulas for common shapes
-const obj7Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 90%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Shape</th>
-      <th style="${tableHeaders.aggregation}">Formula</th>
-      <th style="${tableHeaders.aggregation}">Matrix columns</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Parallelogram (2D)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|det(A)|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the two spanning vectors u, v</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Triangle (2D)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">½ · |det(A)|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">edge vectors from one vertex to the other two</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Parallelepiped (3D)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|det(A)|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the three spanning vectors a, b, c</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Tetrahedron (3D)</td>
-      <td style="padding: 12px 15px; color: #34495e;">⅙ · |det(A)|</td>
-      <td style="padding: 12px 15px; color: #34495e;">edge vectors from one vertex to the other three</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj8 — summary capstone: what det(A) means dimension by dimension
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Dimension</th>
-      <th style="${tableHeaders.summary}">Geometric object</th>
-      <th style="${tableHeaders.summary}">|det(A)| measures</th>
-      <th style="${tableHeaders.summary}">sign(det) means</th>
-      <th style="${tableHeaders.summary}">det(A) = 0 means</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">n = 1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">segment on a line</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">length scaling factor</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">direction preserved (+) or reversed (−)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">collapse to a point</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">n = 2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">parallelogram</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">area</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">counterclockwise (+) vs clockwise (−)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">columns parallel; collapse to a line</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">n = 3</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">parallelepiped</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">volume</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">right-handed (+) vs left-handed (−)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">columns coplanar; collapse to a plane (or lower)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">n ≥ 4</td>
-      <td style="padding: 12px 15px; color: #34495e;">n-parallelepiped</td>
-      <td style="padding: 12px 15px; color: #34495e;">n-dimensional volume (volume of the image of the unit hypercube)</td>
-      <td style="padding: 12px 15px; color: #34495e;">orientation preserved (+) or reversed (−)</td>
-      <td style="padding: 12px 15px; color: #34495e;">image lies in a proper subspace of ℝⁿ</td>
-    </tr>
-  </tbody>
-</table>
-`
-
+// formulas-injected: v1 | 2026-06-16 | 5 callouts (obj1 determinant_signed_area_2d direct, obj2 determinant_signed_volume_3d direct, obj3 determinant_volume_scaling_factor prose, obj7 triangle_area_via_determinant direct + tetrahedron_volume_via_determinant direct)
 
 const sectionsContent = {
   obj1: {
@@ -768,7 +310,10 @@ const sectionsContent = {
 
 For $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, the columns are $\\mathbf{u} = (a, c)$ and $\\mathbf{v} = (b, d)$. The unsigned area of the parallelogram they span can be computed from the [cross product](!/linear-algebra/vectors/cross-product) magnitude in three dimensions by embedding both vectors with a zero third component, but in two dimensions the formula reduces directly to
 
-$$\\text{signed area} = ad - bc = \\det(A)$$
+@academic[formula_callout:determinant_signed_area_2d|Determinant Signed Area 2D|$$\\text{signed area}(\\mathbf{u}, \\mathbf{v}) = \\det\\!\\begin{pmatrix} u_1 & v_1 \\\\ u_2 & v_2 \\end{pmatrix}$$]@
+@academic[formulas_link:/linear-algebra/formulas#determinant_signed_area_2d]@
+
+For the matrix above, this evaluates to $ad - bc = \\det(A)$.
 
 The sign encodes orientation. When $\\det(A) > 0$, the pair $(\\mathbf{u}, \\mathbf{v})$ follows the standard counterclockwise ordering — rotating from $\\mathbf{u}$ toward $\\mathbf{v}$ sweeps counterclockwise. When $\\det(A) < 0$, the pair is clockwise. When $\\det(A) = 0$, the two vectors are parallel and the parallelogram degenerates to a line segment with zero area.
 
@@ -787,7 +332,8 @@ For $A = \\begin{pmatrix} 1 & 3 \\\\ 4 & 0 \\end{pmatrix}$, the determinant is $
 
 This is identical to the scalar triple product. If the columns of $A$ are $\\mathbf{a}$, $\\mathbf{b}$, $\\mathbf{c}$, then
 
-$$\\det(A) = \\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})$$
+@academic[formula_callout:determinant_signed_volume_3d|Determinant Signed Volume 3D|$$\\text{signed volume}(\\mathbf{a}, \\mathbf{b}, \\mathbf{c}) = \\det\\!\\begin{pmatrix} \\mathbf{a} & \\mathbf{b} & \\mathbf{c} \\end{pmatrix} = \\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})$$]@
+@academic[formulas_link:/linear-algebra/formulas#determinant_signed_volume_3d]@
 
 The [dot product](!/linear-algebra/vectors/dot-product) projects $\\mathbf{a}$ onto the direction perpendicular to the base parallelogram spanned by $\\mathbf{b}$ and $\\mathbf{c}$, and $|\\mathbf{b} \\times \\mathbf{c}|$ gives the base area. Their product is the volume.
 
@@ -808,7 +354,10 @@ Swapping two columns — say placing $\\mathbf{b}$ first and $\\mathbf{a}$ secon
 
 More precisely, consider the unit hypercube in $\\mathbb{R}^n$ — the set of all vectors whose components lie between $0$ and $1$. Its $n$-dimensional volume is $1$. The image of this hypercube under the map $x \\mapsto Ax$ is a parallelepiped whose $n$-dimensional volume equals $|\\det(A)|$.
 
-This scaling factor applies uniformly to every region, not just the unit hypercube. If $S$ is any measurable subset of $\\mathbb{R}^n$ with volume $V$, then the image $A(S) = \\{Ax : x \\in S\\}$ has volume $|\\det(A)| \\cdot V$.
+This scaling factor applies uniformly to every region, not just the unit hypercube. If $S$ is any measurable subset of $\\mathbb{R}^n$ with volume $V$, then the image $A(S) = \\{Ax : x \\in S\\}$ has volume $|\\det(A)| \\cdot V$. Formally:
+
+@academic[formula_callout:determinant_volume_scaling_factor|Determinant Volume Scaling Factor|$$\\operatorname{vol}(A(S)) = |\\det(A)| \\cdot \\operatorname{vol}(S)$$]@
+@academic[formulas_link:/linear-algebra/formulas#determinant_volume_scaling_factor]@
 
 Three regimes emerge from this interpretation. When $|\\det(A)| > 1$, the map expands volumes. When $0 < |\\det(A)| < 1$, it compresses volumes. When $|\\det(A)| = 1$, volumes are preserved — the map is volume-preserving. Rotations and reflections both fall in this last category.
 
@@ -870,7 +419,8 @@ The most familiar instances are polar coordinates in $\\mathbb{R}^2$, where the 
 
 Given three vertices $(x_1, y_1)$, $(x_2, y_2)$, $(x_3, y_3)$ in the plane, the area of the triangle they form is
 
-$$\\text{Area} = \\frac{1}{2} \\left| \\det\\begin{pmatrix} x_2 - x_1 & x_3 - x_1 \\\\ y_2 - y_1 & y_3 - y_1 \\end{pmatrix} \\right|$$
+@academic[formula_callout:triangle_area_via_determinant|Triangle Area via Determinant|$$\\text{Area} = \\frac{1}{2} \\left| \\det\\!\\begin{pmatrix} x_2 - x_1 & x_3 - x_1 \\\\ y_2 - y_1 & y_3 - y_1 \\end{pmatrix} \\right|$$]@
+@academic[formulas_link:/linear-algebra/formulas#triangle_area_via_determinant]@
 
 The $2 \\times 2$ matrix has as its columns the edge vectors from vertex $1$ to the other two vertices. The determinant gives the signed area of the parallelogram spanned by these edges, and the triangle occupies exactly half of that parallelogram.
 
@@ -884,7 +434,8 @@ The parallelogram spanned by vectors $\\mathbf{u}$ and $\\mathbf{v}$ in $\\mathb
 
 Given four vertices in $\\mathbb{R}^3$, pick one as the origin and form the three edge vectors to the other three. The volume of the tetrahedron is
 
-$$\\text{Volume} = \\frac{1}{6} \\left| \\det\\begin{pmatrix} \\mathbf{e}_1 & \\mathbf{e}_2 & \\mathbf{e}_3 \\end{pmatrix} \\right|$$
+@academic[formula_callout:tetrahedron_volume_via_determinant|Tetrahedron Volume via Determinant|$$V = \\frac{1}{6} \\left| \\det\\!\\begin{pmatrix} \\mathbf{e}_1 & \\mathbf{e}_2 & \\mathbf{e}_3 \\end{pmatrix} \\right|$$]@
+@academic[formulas_link:/linear-algebra/formulas#tetrahedron_volume_via_determinant]@
 
 where $\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_3$ are the edge vectors arranged as columns. The factor $\\frac{1}{6}$ arises because a tetrahedron occupies one-sixth of the parallelepiped spanned by its three edges.
 
@@ -905,6 +456,7 @@ The parallelepiped spanned by three vectors in $\\mathbb{R}^3$ has volume equal 
     link: ``,
   },
 }
+
 
 const introContent = {
   id: "intro",

@@ -2,8 +2,9 @@ import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
-import MultiplicationTables from '@/app/components/tables/MultiplicationTables'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// import MultiplicationTablesPage from '../../../../app/components/tables/MultiplicationTablePage'
+import MultiplicationTablePage from '../../../../app/components/tables/MultiplicationTablePage'
 
 
 export async function getStaticProps(){
@@ -171,7 +172,8 @@ export default function MultiplicationTablesPage({seoData,sectionsContent , intr
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Multiplication Tables</h1>
    <br/>
-   <MultiplicationTables/>
+   {/* <MultiplicationTables/> */}
+  <MultiplicationTablePage/>
    <br/>
    <br/>
    {/* <SectionTableOfContents sections={genericSections}/> */}

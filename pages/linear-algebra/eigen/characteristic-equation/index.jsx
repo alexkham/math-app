@@ -1,71 +1,166 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 aggregation, obj5 aggregation, obj10 summary capstone)
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "characteristic equation",
-//   "characteristic polynomial",
-//   "eigenvalue equation",
-//   "det(A - λI) = 0",
-//   "find eigenvalues",
-//   "characteristic polynomial calculator",
-//   "algebraic multiplicity",
-//   "Cayley-Hamilton theorem",
-//   "eigenvalue polynomial",
-//   "2x2 characteristic polynomial",
-//   "3x3 characteristic polynomial",
-//   "similar matrices eigenvalues",
-//   "characteristic equation example",
-//   "matrix eigenvalue formula"
-// ]
-//   // •
+export async function getStaticProps(){
+const keyWords = [
+  "characteristic equation",
+  "characteristic polynomial",
+  "eigenvalue equation",
+  "det(A - λI) = 0",
+  "find eigenvalues",
+  "characteristic polynomial calculator",
+  "algebraic multiplicity",
+  "Cayley-Hamilton theorem",
+  "eigenvalue polynomial",
+  "2x2 characteristic polynomial",
+  "3x3 characteristic polynomial",
+  "similar matrices eigenvalues",
+  "characteristic equation example",
+  "matrix eigenvalue formula"
+]
 
-// //   \u2022 First item
-// // \u2022 Second item
+const linkStyle = 'color: inherit; text-decoration: underline;'
 
-  
-// // <hr style="border-width:1px;"></hr>
+// ---------- TABLES ----------
 
-// // <hr style="color:blue;" />
+// obj3 — aggregation: 2×2 discriminant trichotomy
+const obj3Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Discriminant Δ = tr(A)² − 4·det(A)</th>
+      <th style="${tableHeaders.aggregation}">Eigenvalue type</th>
+      <th style="${tableHeaders.aggregation}">Independent real eigenvectors</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Δ &gt; 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two distinct real eigenvalues</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2 — always <a href="/linear-algebra/eigen/diagonalization" style="${linkStyle}">diagonalizable</a></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Δ = 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one repeated real eigenvalue</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 or 2 — diagonalizable only when A = λ · I (otherwise defective)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Δ &lt; 0</td>
+      <td style="padding: 12px 15px; color: #34495e;"><a href="/linear-algebra/eigen/complex" style="${linkStyle}">complex</a> conjugate pair a ± bi</td>
+      <td style="padding: 12px 15px; color: #34495e;">0 real (one conjugate pair of complex eigenvectors over ℂ)</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// obj5 — aggregation: eigenvalue computation by matrix structure
+const obj5Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Matrix structure</th>
+      <th style="${tableHeaders.aggregation}">How to find the eigenvalues</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Diagonal</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">eigenvalues are the diagonal entries — read off by inspection</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Triangular (upper or lower)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">eigenvalues are the diagonal entries (det of a triangular matrix is the product of its diagonal)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Block triangular</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">multiply the characteristic polynomials of each diagonal block; eigenvalues are the union of block eigenvalues</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">General 2×2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">quadratic formula on λ² − tr(A)·λ + det(A) = 0</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">General 3×3 or 4×4</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">expand det(A − λI) and factor (rational-root testing, cubic/quartic formulas, or inspection)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">General n ≥ 5 (numerical)</td>
+      <td style="padding: 12px 15px; color: #34495e;">iterative algorithms such as <a href="/linear-algebra/decompositions/qr" style="${linkStyle}">QR iteration</a> — the polynomial is never formed explicitly</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+// obj10 — summary capstone: characteristic polynomial structure at a glance
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Aspect of p(λ) = det(A − λI), for n × n A</th>
+      <th style="${tableHeaders.summary}">Statement</th>
+      <th style="${tableHeaders.summary}">Connection</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Degree</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">deg p = n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">matches the matrix size</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Leading term</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−1)<sup>n</sup> λ<sup>n</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sign alternates with n; sometimes flipped to make it monic</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Coefficient of λ<sup>n−1</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−1)<sup>n−1</sup> · tr(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sum of eigenvalues equals tr(A)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Constant term p(0)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">det(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">product of eigenvalues equals det(A); A invertible ⟺ p(0) ≠ 0</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Roots</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the n eigenvalues with algebraic multiplicity</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">spectral characterization of A</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Similarity</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">similar matrices share p(λ)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">p is a basis-independent invariant of the transformation</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cayley-Hamilton</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">p(A) = O (zero matrix)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A<sup>−1</sup> and high powers A<sup>k</sup> become polynomials in A of degree ≤ n − 1</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">2×2 form</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">p(λ) = λ² − tr(A) · λ + det(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">discriminant Δ = tr² − 4·det classifies eigenvalue type</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">3×3 form</td>
+      <td style="padding: 12px 15px; color: #34495e;">p(λ) = −λ³ + tr(A) · λ² − M₂ · λ + det(A)</td>
+      <td style="padding: 12px 15px; color: #34495e;">M₂ is the sum of 2×2 principal minors</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
 
 //   const sectionsContent = {
 //   obj1: {
@@ -203,576 +298,25 @@
 //     after: ``,
 //     link: ``,
 //   },
-// }
-
-//  const introContent = {
-//    id: "intro",
-//   title: `The Polynomial Whose Roots Are the Eigenvalues`,
-//   content: `The eigenvalue problem Av = λv converts into a determinant condition: det(A − λI) = 0. This determinant is a polynomial in λ whose roots are the eigenvalues. Computing the characteristic polynomial and factoring it is the standard method for finding eigenvalues of small matrices — and the polynomial's coefficients encode the trace, determinant, and other invariants of the matrix.`,
-// }
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is the characteristic equation?",
-//     answer: "The characteristic equation is det(A - λI) = 0. It arises from the eigenvector equation Av = λv rewritten as (A - λI)v = 0. Nontrivial solutions exist only when A - λI is singular, which happens when its determinant is zero.",
-//     sectionId: "1"
+//   obj10: {
+//     title: `Summary: The Characteristic Polynomial at a Glance`,
+//     content: `The characteristic polynomial p(λ) = det(A − λI) carries every spectral fact about A — its degree, individual coefficients, roots, and behavior under similarity all encode information about the matrix. The table below collects each structural property of the polynomial alongside its statement and the connection it makes to A.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
 //   },
-//   obj2: {
-//     question: "What is the characteristic polynomial?",
-//     answer: "The characteristic polynomial is p(λ) = det(A - λI), a degree-n polynomial for an n×n matrix. Its roots are the eigenvalues. The constant term is det(A), and the coefficient of λⁿ⁻¹ involves the trace.",
-//     sectionId: "2"
-//   },
-//   obj3: {
-//     question: "How do you find the characteristic polynomial of a 2×2 matrix?",
-//     answer: "For A = [[a,b],[c,d]]: p(λ) = λ² - tr(A)λ + det(A) = λ² - (a+d)λ + (ad-bc). Use the quadratic formula: λ = (tr(A) ± √(tr(A)² - 4det(A)))/2.",
-//     sectionId: "3"
-//   },
-//   obj4: {
-//     question: "How do you find eigenvalues of a 3×3 matrix?",
-//     answer: "Expand det(A - λI) using cofactors to get a cubic polynomial. For triangular matrices, eigenvalues are the diagonal entries. Otherwise, factor the cubic by finding rational roots or using the cubic formula.",
-//     sectionId: "4"
-//   },
-//   obj5: {
-//     question: "How are eigenvalues found for large matrices?",
-//     answer: "For n ≥ 5, no closed-form root formula exists (Abel-Ruffini). Large matrices use iterative algorithms like QR iteration, which converge to eigenvalues without forming the characteristic polynomial—direct polynomial root-finding is numerically unstable.",
-//     sectionId: "5"
-//   },
-//   obj6: {
-//     question: "What is algebraic multiplicity?",
-//     answer: "Algebraic multiplicity is the power k such that (λ - λ₀)ᵏ divides the characteristic polynomial—the multiplicity of λ₀ as a root. It's an upper bound for geometric multiplicity. All algebraic multiplicities sum to n.",
-//     sectionId: "6"
-//   },
-//   obj7: {
-//     question: "How do you find eigenvectors after finding eigenvalues?",
-//     answer: "For each eigenvalue λᵢ, solve the homogeneous system (A - λᵢI)v = 0. Row reduce A - λᵢI and express the solution in parametric form. Free variables give basis vectors for the eigenspace.",
-//     sectionId: "7"
-//   },
-//   obj8: {
-//     question: "What is the Cayley-Hamilton theorem?",
-//     answer: "Every matrix satisfies its own characteristic polynomial: p(A) = 0 (zero matrix). This lets you express A⁻¹ as a polynomial in A and reduce high powers Aᵏ to polynomials of degree at most n-1.",
-//     sectionId: "8"
-//   },
-//   obj9: {
-//     question: "Do similar matrices have the same characteristic polynomial?",
-//     answer: "Yes. det(P⁻¹AP - λI) = det(A - λI) because det(P⁻¹)det(P) = 1. The characteristic polynomial is an invariant of the linear transformation, not the specific matrix representation. Similar matrices share eigenvalues with same multiplicities.",
-//     sectionId: "9"
-//   }
-// }
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Characteristic Equation",
-//     "description": "Learn the characteristic equation det(A - λI) = 0: characteristic polynomial, 2×2 and 3×3 examples, algebraic multiplicity, Cayley-Hamilton theorem, and similarity invariance.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/eigen/characteristic-equation",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Characteristic Equation"
-//     },
-//     "teaches": [
-//       "Characteristic equation det(A - λI) = 0",
-//       "Characteristic polynomial structure",
-//       "2×2 and 3×3 eigenvalue computation",
-//       "Algebraic multiplicity of eigenvalues",
-//       "Finding eigenvectors from eigenvalues",
-//       "Cayley-Hamilton theorem",
-//       "Similarity invariance of characteristic polynomial"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Eigenvalues & Eigenvectors",
-//         "item": "https://www.learnmathclass.com/linear-algebra/eigen"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Characteristic Equation",
-//         "item": "https://www.learnmathclass.com/linear-algebra/eigen/characteristic-equation"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
 // }
 
 
+// formulas-injected: v1 | 2026-06-16 | 4 callouts (obj1 characteristic_equation direct, obj2 characteristic_polynomial inline-promote, obj3 characteristic_polynomial_2x2 inline-promote, obj8 cayley_hamilton direct)
 
-//    return {
-//   props: {
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Characteristic Equation: Polynomial & Eigenvalues | Learn Math Class",
-//       description: "Learn the characteristic equation det(A - λI) = 0: characteristic polynomial, 2×2 and 3×3 examples, algebraic multiplicity, Cayley-Hamilton theorem, and similarity invariance.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/eigen/characteristic-equation",
-//       name: "Characteristic Equation"
-//     },
-//   }
-// }
-//    }
-// export default function CharacteristicEquationPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Characteristic Equation</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-// tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 aggregation, obj5 aggregation, obj10 summary capstone)
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "characteristic equation",
-  "characteristic polynomial",
-  "eigenvalue equation",
-  "det(A - λI) = 0",
-  "find eigenvalues",
-  "characteristic polynomial calculator",
-  "algebraic multiplicity",
-  "Cayley-Hamilton theorem",
-  "eigenvalue polynomial",
-  "2x2 characteristic polynomial",
-  "3x3 characteristic polynomial",
-  "similar matrices eigenvalues",
-  "characteristic equation example",
-  "matrix eigenvalue formula"
-]
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj3 — aggregation: 2×2 discriminant trichotomy
-const obj3Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Discriminant Δ = tr(A)² − 4·det(A)</th>
-      <th style="${tableHeaders.aggregation}">Eigenvalue type</th>
-      <th style="${tableHeaders.aggregation}">Independent real eigenvectors</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Δ &gt; 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">two distinct real eigenvalues</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2 — always <a href="/linear-algebra/eigen/diagonalization" style="${linkStyle}">diagonalizable</a></td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Δ = 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one repeated real eigenvalue</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 or 2 — diagonalizable only when A = λ · I (otherwise defective)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Δ &lt; 0</td>
-      <td style="padding: 12px 15px; color: #34495e;"><a href="/linear-algebra/eigen/complex" style="${linkStyle}">complex</a> conjugate pair a ± bi</td>
-      <td style="padding: 12px 15px; color: #34495e;">0 real (one conjugate pair of complex eigenvectors over ℂ)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj5 — aggregation: eigenvalue computation by matrix structure
-const obj5Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Matrix structure</th>
-      <th style="${tableHeaders.aggregation}">How to find the eigenvalues</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Diagonal</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">eigenvalues are the diagonal entries — read off by inspection</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Triangular (upper or lower)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">eigenvalues are the diagonal entries (det of a triangular matrix is the product of its diagonal)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Block triangular</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">multiply the characteristic polynomials of each diagonal block; eigenvalues are the union of block eigenvalues</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">General 2×2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">quadratic formula on λ² − tr(A)·λ + det(A) = 0</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">General 3×3 or 4×4</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">expand det(A − λI) and factor (rational-root testing, cubic/quartic formulas, or inspection)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">General n ≥ 5 (numerical)</td>
-      <td style="padding: 12px 15px; color: #34495e;">iterative algorithms such as <a href="/linear-algebra/decompositions/qr" style="${linkStyle}">QR iteration</a> — the polynomial is never formed explicitly</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj10 — summary capstone: characteristic polynomial structure at a glance
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Aspect of p(λ) = det(A − λI), for n × n A</th>
-      <th style="${tableHeaders.summary}">Statement</th>
-      <th style="${tableHeaders.summary}">Connection</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Degree</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">deg p = n</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">matches the matrix size</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Leading term</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−1)<sup>n</sup> λ<sup>n</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sign alternates with n; sometimes flipped to make it monic</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Coefficient of λ<sup>n−1</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−1)<sup>n−1</sup> · tr(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sum of eigenvalues equals tr(A)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Constant term p(0)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">det(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">product of eigenvalues equals det(A); A invertible ⟺ p(0) ≠ 0</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Roots</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the n eigenvalues with algebraic multiplicity</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">spectral characterization of A</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Similarity</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">similar matrices share p(λ)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">p is a basis-independent invariant of the transformation</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Cayley-Hamilton</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">p(A) = O (zero matrix)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A<sup>−1</sup> and high powers A<sup>k</sup> become polynomials in A of degree ≤ n − 1</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">2×2 form</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">p(λ) = λ² − tr(A) · λ + det(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">discriminant Δ = tr² − 4·det classifies eigenvalue type</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">3×3 form</td>
-      <td style="padding: 12px 15px; color: #34495e;">p(λ) = −λ³ + tr(A) · λ² − M₂ · λ + det(A)</td>
-      <td style="padding: 12px 15px; color: #34495e;">M₂ is the sum of 2×2 principal minors</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-
-  const sectionsContent = {
+const sectionsContent = {
   obj1: {
     title: `From Eigenvectors to the Determinant Condition`,
     content: `The equation $A\\mathbf{v} = \\lambda\\mathbf{v}$ rearranges to $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$. This is a [homogeneous system](!/linear-algebra/linear-systems/homogeneous), and eigenvectors are its nontrivial solutions. Nontrivial solutions exist if and only if the coefficient matrix $A - \\lambda I$ is singular:
 
-$$\\det(A - \\lambda I) = 0$$
+@academic[formula_callout:characteristic_equation|Characteristic Equation|$$\\det(A - \\lambda I) = 0$$]@
+@academic[formulas_link:/linear-algebra/formulas#characteristic_equation]@
 
 This is the characteristic equation. It holds for exactly those values of $\\lambda$ that are eigenvalues of $A$. Every other value of $\\lambda$ makes $A - \\lambda I$ [invertible](!/linear-algebra/matrix/inverse), the system has only the trivial solution, and no eigenvector exists for that $\\lambda$.
 
@@ -783,7 +327,12 @@ The characteristic equation transforms the geometric question "which directions 
   },
   obj2: {
     title: `The Characteristic Polynomial`,
-    content: `The expression $p(\\lambda) = \\det(A - \\lambda I)$ is a polynomial of degree $n$ in the variable $\\lambda$. It is called the characteristic polynomial of $A$.
+    content: `The characteristic polynomial of $A$ is the determinant of $A - \\lambda I$ viewed as a function of $\\lambda$:
+
+@academic[formula_callout:characteristic_polynomial|Characteristic Polynomial|$$p(\\lambda) = \\det(A - \\lambda I)$$]@
+@academic[formulas_link:/linear-algebra/formulas#characteristic_polynomial]@
+
+It is a polynomial of degree $n$ in the variable $\\lambda$.
 
 For an $n \\times n$ matrix, $p(\\lambda)$ has degree $n$ with leading term $(-1)^n \\lambda^n$. The constant term is $p(0) = \\det(A)$ — the determinant of the matrix itself. The coefficient of $\\lambda^{n-1}$ is $(-1)^{n-1}\\text{tr}(A)$, connecting the next-to-leading term to the [trace](!/linear-algebra/matrix/trace).
 
@@ -798,7 +347,12 @@ The eigenvalues are precisely the roots of $p(\\lambda) = 0$. Every root is an e
 
 $$p(\\lambda) = \\det\\begin{pmatrix} a - \\lambda & b \\\\ c & d - \\lambda \\end{pmatrix} = (a - \\lambda)(d - \\lambda) - bc = \\lambda^2 - (a + d)\\lambda + (ad - bc)$$
 
-This is $\\lambda^2 - \\text{tr}(A)\\lambda + \\det(A)$. The eigenvalues follow from the quadratic formula:
+Rewritten in terms of trace and determinant:
+
+@academic[formula_callout:characteristic_polynomial_2x2|Characteristic Polynomial 2x2|$$p(\\lambda) = \\lambda^2 - \\text{tr}(A)\\,\\lambda + \\det(A)$$]@
+@academic[formulas_link:/linear-algebra/formulas#characteristic_polynomial_2x2]@
+
+The eigenvalues follow from the quadratic formula:
 
 $$\\lambda = \\frac{\\text{tr}(A) \\pm \\sqrt{\\text{tr}(A)^2 - 4\\det(A)}}{2}$$
 
@@ -877,9 +431,10 @@ Verification: $A\\mathbf{v}_1 = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix} = 5\\m
     title: `The Cayley-Hamilton Theorem`,
     content: `Every square matrix satisfies its own characteristic polynomial. If $p(\\lambda) = \\det(A - \\lambda I)$ is the characteristic polynomial, then
 
-$$p(A) = 0$$
+@academic[formula_callout:cayley_hamilton|Cayley-Hamilton|$$p(A) = O$$]@
+@academic[formulas_link:/linear-algebra/formulas#cayley_hamilton]@
 
-where $0$ is the zero matrix and $\\lambda$ is replaced by $A$ (with constant terms multiplied by $I$).
+where $O$ is the zero matrix and $\\lambda$ is replaced by $A$ (with constant terms multiplied by $I$).
 
 For example, if $p(\\lambda) = \\lambda^2 - 5\\lambda + 6$, then $A^2 - 5A + 6I = O$. This can be rearranged to express $A^{-1}$ as a polynomial in $A$: $A^{-1} = \\frac{1}{6}(5I - A)$ (provided $\\det(A) = 6 \\neq 0$). More generally, the Cayley-Hamilton theorem guarantees that $A^{-1}$ can always be written as a polynomial in $A$ of degree at most $n - 1$.
 
@@ -911,6 +466,8 @@ The [trace](!/linear-algebra/matrix/trace) and [determinant](!/linear-algebra/de
     link: ``,
   },
 }
+
+
 
  const introContent = {
    id: "intro",

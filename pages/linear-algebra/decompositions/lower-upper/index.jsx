@@ -1,206 +1,145 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+// tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 aggregation, obj10 comparison, obj11 summary capstone)
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 
-// import React from 'react'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 
-
-// export async function getStaticProps(){
-// const keyWords = [
-//   "LU decomposition",
-//   "LU factorization",
-//   "Gaussian elimination matrix",
-//   "lower upper triangular",
-//   "PA = LU pivoting",
-//   "partial pivoting",
-//   "forward back substitution",
-//   "LU solve linear system",
-//   "LU determinant",
-//   "elimination multipliers",
-//   "triangular factorization",
-//   "LU computational cost",
-//   "matrix factorization",
-//   "LU vs Cholesky"
-// ]
-//   // •
-
-// //   \u2022 First item
-// // \u2022 Second item
-
-  
-// // <hr style="border-width:1px;"></hr>
-
-// // <hr style="color:blue;" />
-
-// // <hr style="border-color:#3498db; border-width:1px;" />
+import React from 'react'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
+export async function getStaticProps(){
+const keyWords = [
+  "LU decomposition",
+  "LU factorization",
+  "Gaussian elimination matrix",
+  "lower upper triangular",
+  "PA = LU pivoting",
+  "partial pivoting",
+  "forward back substitution",
+  "LU solve linear system",
+  "LU determinant",
+  "elimination multipliers",
+  "triangular factorization",
+  "LU computational cost",
+  "matrix factorization",
+  "LU vs Cholesky"
+]
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+  const linkStyle = 'color: inherit; text-decoration: underline;'
 
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
+  // ---------- TABLES ----------
 
+  // obj3 — aggregation: structure of L vs U
+  const obj3Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Factor</th>
+      <th style="${tableHeaders.aggregation}">Diagonal</th>
+      <th style="${tableHeaders.aggregation}">Below diagonal</th>
+      <th style="${tableHeaders.aggregation}">Above diagonal</th>
+      <th style="${tableHeaders.aggregation}">Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">L (unit lower triangular)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all ones (not stored)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">elimination multipliers l<sub>ij</sub> = m<sub>ij</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zeros</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">records how A was reduced</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">U (upper triangular)</td>
+      <td style="padding: 12px 15px; color: #34495e;">pivots (product = det A up to sign)</td>
+      <td style="padding: 12px 15px; color: #34495e;">zeros</td>
+      <td style="padding: 12px 15px; color: #34495e;">remaining echelon-form entries</td>
+      <td style="padding: 12px 15px; color: #34495e;">the row echelon form of A</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
+  // obj10 — comparison: cost of direct solver methods
+  const obj10Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Method</th>
+      <th style="${tableHeaders.comparison}">Cost for one system</th>
+      <th style="${tableHeaders.comparison}">Cost for k systems (same A)</th>
+      <th style="${tableHeaders.comparison}">Restrictions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">LU with partial pivoting</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">≈ 2n<sup>3</sup>/3 + O(n<sup>2</sup>)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2n<sup>3</sup>/3 + 2kn<sup>2</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A square and invertible</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/decompositions/cholesky" style="${linkStyle}">Cholesky</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">≈ n<sup>3</sup>/3 + O(n<sup>2</sup>)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n<sup>3</sup>/3 + 2kn<sup>2</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A symmetric positive definite</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Explicit <a href="/linear-algebra/matrix/inverse" style="${linkStyle}">inverse</a> A<sup>−1</sup>b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">≈ 8n<sup>3</sup>/3 to form A<sup>−1</sup>, then 2n<sup>2</sup> per multiply</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">8n<sup>3</sup>/3 + 2kn<sup>2</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">numerically less stable; rarely the right choice</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/determinants/applications" style="${linkStyle}">Cramer&apos;s rule</a></td>
+      <td style="padding: 12px 15px; color: #34495e;">O(n · n!) — impractical beyond n ≈ 4</td>
+      <td style="padding: 12px 15px; color: #34495e;">k × O(n · n!)</td>
+      <td style="padding: 12px 15px; color: #34495e;">theoretical only; not used in computation</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-//   //   const sectionsContent={
-
-//   //   obj1:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-  
-//   //   },
-//   //   obj2:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-  
-//   //   obj3:{
-  
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj4:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj5:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj6:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj7:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj8:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj9:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj10:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj11:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj12:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   },
-//   //   obj13:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-//   //     link:'',
-  
-//   //   },
-//   //   obj14:{
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-//   //     link:'',
-  
-//   //   },
-
-
-//   //   obj15:{
-  
-//   //     title:``,
-//   //     content:``,
-//   //     before:``,
-//   //     after:``,
-//   //     link:'',
-  
-//   //   }
-  
-//   // }
+  // obj11 — summary capstone: three tasks LU accelerates
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 78%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Task</th>
+      <th style="${tableHeaders.summary}">Procedure once PA = LU is in hand</th>
+      <th style="${tableHeaders.summary}">Cost given LU</th>
+      <th style="${tableHeaders.summary}">Cost without LU (per task)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="#6" style="${linkStyle}">Solve Ax = b</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">forward solve Ly = Pb, then back solve Ux = y</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2n<sup>2</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2n<sup>3</sup>/3 (a full Gaussian elimination)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="#7" style="${linkStyle}">Determinant det(A)</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−1)<sup>s</sup> · u<sub>11</sub>u<sub>22</sub>···u<sub>nn</sub> (s = number of row swaps)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">O(n) — multiply the diagonal of U</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2n<sup>3</sup>/3 by elimination; O(n!) by cofactor expansion</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="#8" style="${linkStyle}">Inverse A<sup>−1</sup></a></td>
+      <td style="padding: 12px 15px; color: #34495e;">solve Ax<sub>j</sub> = e<sub>j</sub> for j = 1, ..., n; columns assemble A<sup>−1</sup></td>
+      <td style="padding: 12px 15px; color: #34495e;">2n<sup>3</sup>/3 (factor) + 2n<sup>3</sup> (n solves) ≈ 8n<sup>3</sup>/3</td>
+      <td style="padding: 12px 15px; color: #34495e;">≈ 2n<sup>3</sup>/3 per column = 2n<sup>4</sup>/3 without re-use</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 // const sectionsContent = {
 //   obj1: {
@@ -247,7 +186,9 @@
 
 // The upper factor $U$ is the echelon form: pivots on the diagonal, zeros below, and the result of all elimination steps. The diagonal entries of $U$ are the pivots, and their product gives the [determinant](!/linear-algebra/determinants): $\\det(A) = \\det(L)\\det(U) = 1 \\cdot u_{11}u_{22}\\cdots u_{nn}$.
 
-// The factorization stores $L$ and $U$ compactly. Since $L$ has ones on the diagonal (which need not be stored) and $U$ has zeros below the diagonal (which need not be stored), both factors fit in a single $n \\times n$ array: the lower triangle holds the multipliers and the upper triangle holds $U$.`,
+// The factorization stores $L$ and $U$ compactly. Since $L$ has ones on the diagonal (which need not be stored) and $U$ has zeros below the diagonal (which need not be stored), both factors fit in a single $n \\times n$ array: the lower triangle holds the multipliers and the upper triangle holds $U$.
+
+// The two factors compare cleanly on the same set of attributes — diagonal, below diagonal, above diagonal, role — as the table below shows.`,
 //     before: ``,
 //     after: ``,
 //     link: ``,
@@ -338,7 +279,17 @@
 
 // For a single system $A\\mathbf{x} = \\mathbf{b}$, LU costs about the same as [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) applied directly. The advantage appears with multiple right-hand sides: $k$ systems sharing the same $A$ cost $\\frac{2}{3}n^3 + 2kn^2$, versus $\\frac{2}{3}kn^3$ for $k$ independent eliminations.
 
-// Compared to alternatives: [Cramer's rule](!/linear-algebra/determinants/applications) costs $O(n \\cdot n!)$ — absurdly expensive. Explicit [inverse](!/linear-algebra/matrix/inverse) computation costs roughly $2n^3$. The [Cholesky](!/linear-algebra/decompositions/cholesky) factorization costs $\\frac{1}{3}n^3$ but requires symmetry and positive definiteness. LU is the general-purpose baseline — the standard direct solver for dense [linear systems](!/linear-algebra/linear-systems) in scientific computing.`,
+// Compared to alternatives: [Cramer's rule](!/linear-algebra/determinants/applications) costs $O(n \\cdot n!)$ — absurdly expensive. Explicit [inverse](!/linear-algebra/matrix/inverse) computation costs roughly $2n^3$. The [Cholesky](!/linear-algebra/decompositions/cholesky) factorization costs $\\frac{1}{3}n^3$ but requires symmetry and positive definiteness. LU is the general-purpose baseline — the standard direct solver for dense [linear systems](!/linear-algebra/linear-systems) in scientific computing.
+
+// These options can be set side by side on cost per system, cost amortized over many systems, and the matrix conditions each requires.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   // NEW capstone section: obj11
+//   obj11: {
+//     title: `Summary: What LU Computes`,
+//     content: `Once $PA = LU$ is in hand, three of the most common matrix-level computations — solving a system, taking the determinant, and forming the inverse — collapse to cheap operations on the factors. The table below collects each task with the procedure it reduces to, the cost given the factorization, and the cost of doing the same task from scratch for comparison.`,
 //     before: ``,
 //     after: ``,
 //     link: ``,
@@ -346,577 +297,22 @@
 // }
 
 
-//  const introContent = {
-//   title: `Gaussian Elimination as a Matrix Factorization`,
-//   content: `The LU decomposition factors a square matrix into a lower triangular factor L and an upper triangular factor U. The upper factor is the row echelon form; the lower factor stores the multipliers used to get there. Once computed, the factorization converts every subsequent system solve into two cheap triangular substitutions — making LU the workhorse of direct linear system solvers.`,
-// }
 
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is LU decomposition?",
-//     answer: "LU decomposition writes a square matrix A as A = LU, where L is unit lower triangular (ones on the diagonal, multipliers below) and U is upper triangular (the row echelon form). It captures the entire Gaussian elimination process in reusable matrix form.",
-//     sectionId: "1"
-//   },
-//   obj2: {
-//     question: "When does LU decomposition exist without pivoting?",
-//     answer: "The factorization A = LU without row swaps exists if and only if every leading principal submatrix of A is nonsingular. When a zero pivot appears, row swaps are needed, giving the pivoted form PA = LU which exists for every invertible matrix.",
-//     sectionId: "4"
-//   },
-//   obj3: {
-//     question: "How do you solve a linear system using LU?",
-//     answer: "Given PA = LU, solve Ax = b in two steps: forward substitution to solve Ly = Pb, then back substitution to solve Ux = y. The factorization costs about 2n³/3 operations, but each subsequent solve costs only O(n²), making LU efficient for multiple right-hand sides.",
-//     sectionId: "6"
-//   },
-//   obj4: {
-//     question: "What is partial pivoting in LU decomposition?",
-//     answer: "Partial pivoting selects the largest entry in the current pivot column (at or below the pivot row) and swaps it into the pivot position. This keeps all multipliers in L bounded by 1 in absolute value, limiting rounding error accumulation. The result is PA = LU with P recording the row swaps.",
-//     sectionId: "5"
-//   },
-//   obj5: {
-//     question: "How does LU compute the determinant?",
-//     answer: "The determinant of A equals the product of the diagonal entries of U, times (−1)^s where s is the number of row swaps. Since det(L) = 1 for unit lower triangular L, det(A) = (−1)^s · u₁₁u₂₂···uₙₙ. This is essentially free once LU is available.",
-//     sectionId: "7"
-//   }
-// }
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "LU Decomposition",
-//     "description": "LU decomposition: factoring matrices into lower and upper triangular forms via Gaussian elimination. Partial pivoting, system solving, determinants, inverse computation, and cost analysis.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/decompositions/lower-upper",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "LU Decomposition"
-//     },
-//     "teaches": [
-//       "LU factorization from Gaussian elimination",
-//       "Structure of L (multipliers) and U (echelon form)",
-//       "Existence conditions and partial pivoting PA = LU",
-//       "Forward and back substitution for system solving",
-//       "Determinant and inverse via LU",
-//       "Computational cost comparison with alternatives"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Decompositions",
-//         "item": "https://www.learnmathclass.com/linear-algebra/decompositions"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "LU Decomposition",
-//         "item": "https://www.learnmathclass.com/linear-algebra/decompositions/lower-upper"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
- 
-
-//   return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "LU Decomposition: Factorization & Solving | Learn Math Class",
-//       description: "LU decomposition: factoring matrices into lower and upper triangular forms via Gaussian elimination. Partial pivoting, system solving, determinants, inverse computation, and cost analysis.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/decompositions/lower-upper",
-//       name: "LU Decomposition"
-//     },
-//   }
-// }
-//    }
-
-// // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-// export default function LUDecompositionPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    {/* <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head> */}
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Lower-Upper Decomposition</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-// tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 aggregation, obj10 comparison, obj11 summary capstone)
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-
-import React from 'react'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "LU decomposition",
-  "LU factorization",
-  "Gaussian elimination matrix",
-  "lower upper triangular",
-  "PA = LU pivoting",
-  "partial pivoting",
-  "forward back substitution",
-  "LU solve linear system",
-  "LU determinant",
-  "elimination multipliers",
-  "triangular factorization",
-  "LU computational cost",
-  "matrix factorization",
-  "LU vs Cholesky"
-]
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-
-  // ---------- TABLES ----------
-
-  // obj3 — aggregation: structure of L vs U
-  const obj3Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Factor</th>
-      <th style="${tableHeaders.aggregation}">Diagonal</th>
-      <th style="${tableHeaders.aggregation}">Below diagonal</th>
-      <th style="${tableHeaders.aggregation}">Above diagonal</th>
-      <th style="${tableHeaders.aggregation}">Role</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">L (unit lower triangular)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all ones (not stored)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">elimination multipliers l<sub>ij</sub> = m<sub>ij</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zeros</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">records how A was reduced</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">U (upper triangular)</td>
-      <td style="padding: 12px 15px; color: #34495e;">pivots (product = det A up to sign)</td>
-      <td style="padding: 12px 15px; color: #34495e;">zeros</td>
-      <td style="padding: 12px 15px; color: #34495e;">remaining echelon-form entries</td>
-      <td style="padding: 12px 15px; color: #34495e;">the row echelon form of A</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj10 — comparison: cost of direct solver methods
-  const obj10Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Method</th>
-      <th style="${tableHeaders.comparison}">Cost for one system</th>
-      <th style="${tableHeaders.comparison}">Cost for k systems (same A)</th>
-      <th style="${tableHeaders.comparison}">Restrictions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">LU with partial pivoting</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">≈ 2n<sup>3</sup>/3 + O(n<sup>2</sup>)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2n<sup>3</sup>/3 + 2kn<sup>2</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A square and invertible</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/decompositions/cholesky" style="${linkStyle}">Cholesky</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">≈ n<sup>3</sup>/3 + O(n<sup>2</sup>)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n<sup>3</sup>/3 + 2kn<sup>2</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A symmetric positive definite</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Explicit <a href="/linear-algebra/matrix/inverse" style="${linkStyle}">inverse</a> A<sup>−1</sup>b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">≈ 8n<sup>3</sup>/3 to form A<sup>−1</sup>, then 2n<sup>2</sup> per multiply</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">8n<sup>3</sup>/3 + 2kn<sup>2</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">numerically less stable; rarely the right choice</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/determinants/applications" style="${linkStyle}">Cramer&apos;s rule</a></td>
-      <td style="padding: 12px 15px; color: #34495e;">O(n · n!) — impractical beyond n ≈ 4</td>
-      <td style="padding: 12px 15px; color: #34495e;">k × O(n · n!)</td>
-      <td style="padding: 12px 15px; color: #34495e;">theoretical only; not used in computation</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj11 — summary capstone: three tasks LU accelerates
-  const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 98%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Task</th>
-      <th style="${tableHeaders.summary}">Procedure once PA = LU is in hand</th>
-      <th style="${tableHeaders.summary}">Cost given LU</th>
-      <th style="${tableHeaders.summary}">Cost without LU (per task)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="#6" style="${linkStyle}">Solve Ax = b</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">forward solve Ly = Pb, then back solve Ux = y</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2n<sup>2</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2n<sup>3</sup>/3 (a full Gaussian elimination)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="#7" style="${linkStyle}">Determinant det(A)</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−1)<sup>s</sup> · u<sub>11</sub>u<sub>22</sub>···u<sub>nn</sub> (s = number of row swaps)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">O(n) — multiply the diagonal of U</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2n<sup>3</sup>/3 by elimination; O(n!) by cofactor expansion</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="#8" style="${linkStyle}">Inverse A<sup>−1</sup></a></td>
-      <td style="padding: 12px 15px; color: #34495e;">solve Ax<sub>j</sub> = e<sub>j</sub> for j = 1, ..., n; columns assemble A<sup>−1</sup></td>
-      <td style="padding: 12px 15px; color: #34495e;">2n<sup>3</sup>/3 (factor) + 2n<sup>3</sup> (n solves) ≈ 8n<sup>3</sup>/3</td>
-      <td style="padding: 12px 15px; color: #34495e;">≈ 2n<sup>3</sup>/3 per column = 2n<sup>4</sup>/3 without re-use</td>
-    </tr>
-  </tbody>
-</table>
-`
+// linear-algebra/decompositions/lower-upper — sectionsContent with formula callouts (v1)
+// 4 callouts injected:
+//   obj1 (LU Decomposition) — direct $$ replacement
+//   obj5 (PA LU Partial Pivoting) — inline promote
+//   obj6 (LU Solve Steps) — prose-only insertion (cases-block formula not on page)
+//   obj7 (Determinant via LU) — direct $$ replacement (canonical general form)
+// obj2 worked-example matrix displays preserved (derivation steps)
 
 const sectionsContent = {
   obj1: {
     title: `What LU Decomposition Is`,
     content: `The LU decomposition writes an $n \\times n$ [matrix](!/linear-algebra/matrix) $A$ as
 
-$$A = LU$$
+@academic[formula_callout:lu_decomposition|LU Decomposition|$$A = LU$$]@
+@academic[formulas_link:/linear-algebra/formulas#lu_decomposition]@
 
 where $L$ is lower [triangular](!/linear-algebra/matrix/types) with ones on the diagonal (unit lower triangular) and $U$ is upper triangular. The matrix $U$ is the [row echelon form](!/linear-algebra/linear-systems/echelon-form) of $A$, and $L$ stores the multipliers that [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) used to produce it.
 
@@ -978,7 +374,12 @@ For example, $A = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ has no $LU$ 
     title: `Partial Pivoting: PA = LU`,
     content: `Partial pivoting modifies the elimination process: at each step, the row with the largest absolute value in the current pivot column (among rows at or below the pivot position) is swapped into the pivot position. All row swaps are recorded in a permutation matrix $P$.
 
-The factorization becomes $PA = LU$, where $P$ is the product of all row-swap [permutation matrices](!/linear-algebra/matrix/types). This factorization exists for every [invertible](!/linear-algebra/matrix/inverse) matrix — partial pivoting eliminates the restriction on leading principal submatrices.
+The factorization becomes:
+
+@academic[formula_callout:pa_lu_partial_pivoting|PA LU Partial Pivoting|$$PA = LU$$]@
+@academic[formulas_link:/linear-algebra/formulas#pa_lu_partial_pivoting]@
+
+where $P$ is the product of all row-swap [permutation matrices](!/linear-algebra/matrix/types). This factorization exists for every [invertible](!/linear-algebra/matrix/inverse) matrix — partial pivoting eliminates the restriction on leading principal submatrices.
 
 Partial pivoting also improves numerical stability. Small pivots amplify rounding errors (dividing by a number near zero magnifies imprecision), and selecting the largest available pivot keeps the multipliers in $L$ bounded by $1$ in absolute value, limiting error accumulation.
 
@@ -989,7 +390,10 @@ In numerical software, LU with partial pivoting is the default — the unpivoted
   },
   obj6: {
     title: `Solving Systems with LU`,
-    content: `Given $PA = LU$, the [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ is solved in two steps.
+    content: `Given $PA = LU$, the [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ is solved in two steps:
+
+@academic[formula_callout:lu_solve_steps|LU Solve Steps|$$A\\mathbf{x} = \\mathbf{b} \\;\\Longleftrightarrow\\; \\begin{cases} L\\mathbf{y} = P\\mathbf{b} & (\\text{forward sub}) \\\\ U\\mathbf{x} = \\mathbf{y} & (\\text{back sub}) \\end{cases}$$]@
+@academic[formulas_link:/linear-algebra/formulas#lu_solve_steps]@
 
 Forward substitution: solve $L\\mathbf{y} = P\\mathbf{b}$ for $\\mathbf{y}$. Since $L$ is lower triangular, this starts at the top and works downward — each equation involves one new unknown plus previously solved values. Cost: $O(n^2)$.
 
@@ -1002,11 +406,12 @@ The factorization itself costs $\\frac{2}{3}n^3$ operations. Each subsequent sol
   },
   obj7: {
     title: `LU and the Determinant`,
-    content: `The [determinant](!/linear-algebra/determinants) of $A$ is a free byproduct of the LU factorization. Since $\\det(L) = 1$ (the diagonal is all ones) and $\\det(U) = u_{11}u_{22}\\cdots u_{nn}$ (the product of the diagonal for a [triangular](!/linear-algebra/matrix/types) matrix):
+    content: `The [determinant](!/linear-algebra/determinants) of $A$ is a free byproduct of the LU factorization. Since $\\det(L) = 1$ (the diagonal is all ones) and $\\det(U) = u_{11}u_{22}\\cdots u_{nn}$ (the product of the diagonal for a [triangular](!/linear-algebra/matrix/types) matrix), with pivoting each row swap flips the sign:
 
-$$\\det(A) = \\det(L)\\det(U) = u_{11}u_{22}\\cdots u_{nn}$$
+@academic[formula_callout:determinant_via_lu|Determinant via LU|$$\\det(A) = (-1)^s \\prod_{i=1}^{n} u_{ii}$$]@
+@academic[formulas_link:/linear-algebra/formulas#determinant_via_lu]@
 
-With pivoting, each row swap flips the sign: $\\det(A) = (-1)^s u_{11}u_{22}\\cdots u_{nn}$, where $s$ is the number of row swaps recorded in $P$.
+where $s$ is the number of row swaps recorded in $P$. Without pivoting ($s = 0$), the sign factor drops and $\\det(A) = u_{11}u_{22}\\cdots u_{nn}$.
 
 This makes determinant computation essentially free once LU is available — just multiply the diagonal of $U$ and account for the sign. It is far more efficient than cofactor expansion, and it is the method every numerical library uses.`,
     before: ``,
@@ -1056,7 +461,6 @@ These options can be set side by side on cost per system, cost amortized over ma
     after: ``,
     link: ``,
   },
-  // NEW capstone section: obj11
   obj11: {
     title: `Summary: What LU Computes`,
     content: `Once $PA = LU$ is in hand, three of the most common matrix-level computations — solving a system, taking the determinant, and forming the inverse — collapse to cheap operations on the factors. The table below collects each task with the procedure it reduces to, the cost given the factorization, and the cost of doing the same task from scratch for comparison.`,
@@ -1065,6 +469,7 @@ These options can be set side by side on cost per system, cost amortized over ma
     link: ``,
   },
 }
+
 
 
  const introContent = {
