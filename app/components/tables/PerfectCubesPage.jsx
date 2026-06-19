@@ -1334,6 +1334,7 @@
 import { useState, useEffect, useRef } from 'react';
 import QuizWidget from '../examples/quiz/QuizWidget'
 import generatePerfectCubeQuestion from '../examples/quiz/questions/perfectCubesQuestions';
+import {processContent } from '../../utils/contentProcessor'
 
 // =========================================================
 //   PerfectCubesPage
