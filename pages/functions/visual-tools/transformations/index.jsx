@@ -317,7 +317,7 @@ The visualizer makes this concrete: drag $h$ to $+3$ and watch the curve slide r
         url: "/functions/visual-tools/transformations",
         name: "Transformations of Functions Visualizer",
         hubDescription: "Pick a base function — linear, quadratic, cubic, reciprocal, exponential, logarithmic, sine, cosine, absolute value, or square root — and apply the four affine transformations: g(x) = a · f(b(x − h)) + k. Isolate one transformation at a time with Auto-mode animation, or combine all four in the Custom tab. The dashed base curve stays visible alongside the transformed curve so every change reads at a glance.",
-        category: "",
+        category: "Transformations",
         subCategory: ""
       },
     }
@@ -392,9 +392,11 @@ export default function FunctionTransformationsPage({seoData, sectionsContent, i
       <Breadcrumb/>
       <br/>
       <br/>
-      <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Transformations of Functions</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'30px'}}>Transformations of Functions</h1>
       <br/>
+      <div style={{transform:'scale(1.1)'}}>
       <FunctionTransformations/>
+      </div>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

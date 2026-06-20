@@ -6,7 +6,7 @@
 // import Head from 'next/head'
 // import '@/pages/pages.css'
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-// import FunctionNewtonMethod from '../../../../app/components/calculus/visualizers/FunctionNewtonMethod'
+// import FunctionConcavity from '../../../../app/components/calculus/visualizers/FunctionConcavity'
 
 
 // export async function getStaticProps(){
@@ -214,7 +214,7 @@
 //         title: "Title | Learn Math Class",
 //         description: "Metadescription",
 //         keywords: keyWords.join(", "),
-//         url: "/calculus/visual-tools/newtons-method",
+//         url: "/calculus/visual-tools/inflection-points",
 //          name: "name"
 //       },
         
@@ -443,9 +443,9 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Newtons&apos;s Method</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Inflection Points</h1>
 //    <br/>
-//    <FunctionNewtonMethod/>
+//    <FunctionConcavity/>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -492,264 +492,251 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import FunctionNewtonMethod from '../../../../app/components/calculus/visualizers/FunctionNewtonMethod'
+import FunctionConcavity from '../../../../app/components/calculus/visualizers/FunctionConcavity'
 
 
 export async function getStaticProps(){
 
   const keyWords = [
-    "Newton's method visualizer",
-    'Newton-Raphson method',
-    "Newton's method calculator",
-    "Newton's method interactive",
-    "Newton's method step by step",
-    'root finding visualizer',
-    'tangent line root finding',
-    'quadratic convergence',
-    "Newton's method failure modes",
-    'Newton method critical point',
-    'iterative root finder',
-    "Newton's method examples",
-    'f over f prime iteration',
-    "Newton's method cubic",
-    'numerical root finding'
+    'inflection points',
+    'concavity calculus',
+    'inflection point calculator',
+    'concave up concave down',
+    'second derivative test',
+    "f'' inflection point",
+    'concavity visualizer',
+    'find inflection points',
+    'inflection point graph',
+    'interactive concavity tool',
+    'second derivative concavity',
+    'concavity test',
+    'inflection point sign change',
+    'visualize inflection points',
+    'concavity graphing tool'
   ]
+
 
   const sectionsContent = {
 
     obj0: {
       title: `Key Terms`,
-      content: `**Newton's method** (also called Newton-Raphson) — an iterative algorithm for approximating a root of a differentiable function by repeatedly following the tangent line down to the x-axis.
+      content: `**Concavity** — How a curve bends. A curve is concave up if it cups upward like a smile; concave down if it caps downward like a frown.
 
-**Iterate** — one of the values $x_0, x_1, x_2, \\ldots$ produced by repeatedly applying the Newton step.
+**Second derivative $f''(x)$** — The derivative of $f'$. Its sign measures concavity: positive means concave up, negative means concave down.
 
-**Newton step** — the update rule $x_{n+1} = x_n - f(x_n) / f'(x_n)$, the x-intercept of the tangent line at $(x_n, f(x_n))$.
+**Inflection point** — A point where concavity changes — the sign of $f''$ flips as $x$ passes through the point.
 
-**Initial guess** — the starting value $x_0$ from which the iteration begins. Its position relative to the root and to any critical points determines whether the method succeeds.
+**Tangent line** — The line through $P = (c, f(c))$ with slope $f'(c)$. For concave-up curves the tangent lies below the curve nearby; for concave-down, above.
 
-**Quadratic convergence** — near a simple root the error roughly squares at each step, so the number of correct digits roughly doubles per iteration.
+**Concavity gap** — The region between the curve and the tangent line at $P$. Its width and direction visualize how strongly the curve bends.
 
-**Critical point** — a point where $f'(x) = 0$. Starting near a critical point makes the tangent nearly horizontal and breaks Newton's method.`,
+This widget uses the cubic $f(x) = \\frac{1}{3}x^3 - x$, whose second derivative is $f''(x) = 2x$. The single inflection point sits exactly at $x = 0$.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj1: {
-      title: `Getting Started with the Visualizer`,
-      content: `The visualizer shows the cubic function $f(x) = x^3 - 2x - 5$ together with its single real root $\\alpha \\approx 2.0946$, marked by a small triangle below the x-axis.
+      title: `Getting Started`,
+      content: `The visualizer shows the cubic $f(x) = \\frac{1}{3}x^3 - x$ with a draggable point $c$ on the x-axis. $P = (c, f(c))$ lifts vertically from $c$ to the curve, and the tangent line at $P$ is drawn alongside it.
 
-The interface has two parts. The left panel holds the graph, three scenario buttons, the **Step** and **Reset** controls, and a row of numeric readouts. The right panel is a tabbed sidebar with three views: **Computation**, **Meaning**, and **Theory**.
+Drag $c$ left or right to move the point along the x-axis. The dashed drop line and the highlighted $P$ update in real time, along with the live readouts below the canvas: $c$, $f(c)$, $f'(c)$, and the key value $f''(c) = 2c$.
 
-There are three ways to drive the tool:
+For a guided walkthrough, click one of the three scenario buttons at the bottom: Concave up, Concave down, or Inflection. Each runs a seven-step animation explaining what the chosen value of $c$ reveals about the curve.
 
-- **Pick a scenario** to animate a preset starting point through a sequence of Newton iterations.
-- **Drag $x_0$** along the x-axis to place your own starting guess.
-- **Click Step** to advance one Newton iteration at a time from your custom $x_0$.
-
-The four readouts under the graph — current iteration index $n$, current iterate $x_n$, function value $f(x_n)$, and the absolute error $|x_n - \\alpha|$ — update live as the animation progresses.`,
+The Reset button clears the active scenario and returns the visualizer to a neutral state with $c$ restored to its default position.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj2: {
-      title: `Choosing a Preset Scenario`,
-      content: `Three buttons sit below the graph, each pinned to a starting value and a label describing what happens next.
+      title: `Drag Mode vs Scenario Mode`,
+      content: `Two interaction styles share the same canvas.
 
-- **Direct hit** ($x_0 = 3$) — starts on the right side of the root in the smooth basin. Each tangent step pulls the guess sharply toward $\\alpha$ and the error collapses within a few iterations.
-- **Crosses over** ($x_0 = -1$) — starts on the wrong side of the curve. The first tangent crosses zero and the iterate lands in positive territory, after which the method converges normally.
-- **Stalls** ($x_0 = 0.85$) — starts very close to a critical point at $x = \\sqrt{2/3} \\approx 0.816$ where $f'$ is tiny. The tangent comes out nearly horizontal, the correction $f / f'$ blows up, and $x_1$ flies off the chart.
+**Free drag** — Grab the $c$ marker on the x-axis and slide it anywhere in the visible range. The tangent line, point $P$, and the $f''(c)$ value all track your cursor. This is the fastest way to feel how concavity shifts: drag from negative $x$ into positive $x$ and watch the second derivative cross zero exactly at the inflection point.
 
-The third scenario is the failure mode worth studying carefully. Click **Reset** at any time to clear the current scenario and return $x_0$ to its default position for free dragging.`,
+**Scenario animation** — Click any of the three scenario buttons to lock $c$ to a specific value and play the seven-step explanation. The full color theme of the visualizer changes to match: blue for concave up, red for concave down, amber for inflection.
+
+Starting a scenario interrupts dragging. Once an animation completes, you can still drag $c$ again — doing so clears the scenario tint and returns the visualizer to neutral.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj3: {
-      title: `Stepping Manually from a Custom Start`,
-      content: `To run Newton's method from your own starting point, click **Reset** first if a preset scenario is active.
+      title: `Running the Three Scenarios`,
+      content: `**Concave up** sets $c = 1.3$, where $f''(1.3) = 2.6 > 0$. The curve cups upward around $P$, and the tangent line at $P$ sits beneath the curve in the surrounding window. The blue gap shading shows the curve curling away above the tangent.
 
-Then:
+**Concave down** sets $c = -1.3$, where $f''(-1.3) = -2.6 < 0$. The curve caps downward around $P$, and the tangent line lies above the curve. The red gap shading shows the curve falling below the tangent on both sides.
 
-- **Drag the blue dot on the x-axis** to move $x_0$ wherever you want it. The drop line shows the corresponding point $(x_0, f(x_0))$ on the curve.
-- **Click Step** to play one full Newton iteration. The animation marks the current point, draws the tangent, slides down to the new x-intercept, and lifts back to the curve.
-- **Click Step again** to run the next iteration from the updated guess. Each click advances exactly one step, so the convergence (or divergence) unfolds at your own pace.
+**Inflection** sets $c = 0$, where $f''(0) = 0$ and the sign of $f''$ flips from negative to positive as $x$ crosses zero. The tangent line at $P$ crosses the curve rather than staying on one side. The gap shading splits at $c$ — red on the concave-down left side, blue on the concave-up right side.
 
-After every step the History table in the Computation tab grows by one row and the live readouts update. The Step button is only available when no preset scenario is running.`,
+Each scenario takes a few seconds to play out across the seven animation phases.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj4: {
-      title: `Reading the Animation`,
-      content: `Every Newton iteration is broken into five visible phases. A banner at the top of the graph names the current phase, so the geometry on screen lines up with the algebra in the side panel.
+      title: `Following the 7-Step Animation`,
+      content: `Each scenario plays the same seven phases, labeled in a banner at the top of the canvas:
 
-- **Mark** — the current guess $P_n$ on the curve pulses briefly to draw attention.
-- **Tangent** — the blue tangent line at $P_n$ extends across the canvas.
-- **To axis** — a marker slides along the tangent down to where it meets the x-axis, locating the next iterate $x_{n+1}$.
-- **To curve** — a dashed line lifts from $x_{n+1}$ up to the curve, locating $P_{n+1}$.
-- **Settle** — a brief pause before the next iteration begins.
+Step 1 — Identify the region of interest. A shaded band highlights the interval around $c$ that the analysis covers.
 
-Past iterations fade so the latest step stays prominent. The triangle below the axis marks the true root $\\alpha$, giving you a visual target to compare each iterate against. If the animation halts with a red banner, the iteration has hit a failure mode and an arrow indicates where the off-chart iterate landed.`,
+Step 2 — Mark the point $c$ on the x-axis. The marker animates into position from wherever it was previously.
+
+Step 3 — Lift to $P = (c, f(c))$. A dashed drop line connects $c$ on the axis to $P$ on the curve.
+
+Step 4 — Draw the tangent at $P$. The tangent line expands outward from $P$ with slope $f'(c)$.
+
+Step 5 — Evaluate $f''(c) = 2c$. A floating badge appears near $P$ showing the computed value.
+
+Step 6 — Concavity gap: curve vs tangent. Color-coded shading fills the region between the curve and the tangent.
+
+Step 7 — Read off concave up, concave down, or inflection. The verdict pill summarizes the result.
+
+When the animation finishes, the right-side panel switches automatically to the Meaning tab.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj5: {
-      title: `Reading the Computation Tab`,
-      content: `The Computation tab is the numeric companion to the animation. It has three sections that update together with the geometry.
+      title: `Reading the Concavity Gap`,
+      content: `The colored shading between the curve and the tangent line is the **concavity gap**. Its meaning depends on the scenario.
 
-- **Iteration formula** — the Newton step $x_{n+1} = x_n - f(x_n) / f'(x_n)$, shown once as the algorithm's definition.
-- **Current step** — the live values for the running iteration: $f(x_n)$, $f'(x_n)$, the correction $f / f'$, and the resulting $x_{n+1}$. The two outputs are highlighted in blue.
-- **History** — a compact table with one row per iteration so far, showing $n$, $x_n$, $f(x_n)$, and $|x_n - \\alpha|$. The active row is highlighted; failed rows appear in red.
+For **concave up**, the gap fills the wedge with the curve forming the upper boundary and the tangent forming the lower boundary. The blue shading visualizes the inequality "curve above tangent" that defines concave up.
 
-The History table is where quadratic convergence becomes obvious: when the method succeeds, the error column drops by a factor that itself grows at every step.`,
+For **concave down**, the same geometry flips: the curve forms the lower boundary, the tangent the upper, and red shading fills the wedge. The curve sits below the tangent on both sides of $c$.
+
+For an **inflection point**, the gap splits at $c$ into two colors. To the left of $c$, the gap is red (concave down: curve below tangent). To the right, the gap is blue (curve above tangent). The visible color flip at $c$ is the geometric signature of the concavity change.
+
+The size of the gap also indicates the strength of bending — wider gap, sharper curvature.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj6: {
-      title: `Reading the Meaning and Theory Tabs`,
-      content: `The **Meaning** tab opens automatically once an iteration sequence finishes. It shows a colored verdict card explaining what happened.
+      title: `Using the Three Info Panel Tabs`,
+      content: `The right-side panel offers three views of the same scene.
 
-- **Converged** (blue) — the iteration reached the root. The card explains quadratic convergence and quotes the final error.
-- **Stalls** (red) — the iteration failed. The card identifies the value of $f'(x_0)$ as the culprit and shows where $x_1$ landed.
+**Computation** walks through the algebra step by step. It shows the current values of $c$, $f(c)$, and $f'(c)$, then computes $f''(c) = 2c$ with the numerical substitution, and finally reads off the verdict from the sign of $f''(c)$. The active step is highlighted with the scenario color.
 
-A second card underneath gives the underlying reason — for success, the asymptotic error formula; for failure, why a small derivative makes the correction blow up.
+**Meaning** explains what the verdict means geometrically. A colored verdict card summarizes the result with a badge, headline, and explanation. A "why" note clarifies the connection between $f''$ and concavity in plain language. The Meaning tab opens automatically when a scenario animation finishes.
 
-The **Theory** tab is always available and holds five reference blocks: the definition, the geometric derivation of the Newton step from the tangent equation, the quadratic-convergence statement near a simple root, three common failure modes (flat tangent, cycles, divergence), and a summary of what each statement looks like for the specific cubic on screen.`,
+**Theory** provides the formal background: the definition of concavity in terms of tangent lines, the second derivative test for concavity, the necessary-but-not-sufficient condition for inflection points, the second derivative test for extrema, and a worked breakdown of the specific function $f(x) = \\frac{1}{3}x^3 - x$.
+
+Switch tabs at any time without interrupting the canvas.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj7: {
-      title: `What is Newton's Method?`,
-      content: `**Newton's method**, also called the **Newton-Raphson method**, is an iterative algorithm for approximating a root of a differentiable function $f$. Starting from an initial guess $x_0$, each iteration replaces the current guess with the x-intercept of the tangent line at that point:
+      title: `What is Concavity?`,
+      content: `A function $f$ is **concave up** on an interval when its graph lies above every one of its tangent lines drawn from points in that interval. Visually, the curve cups upward like a smile, and the slope $f'$ is increasing as $x$ increases.
 
-$$x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}$$
+A function is **concave down** when the graph lies below all its tangent lines on the interval. The curve caps downward like a frown, and the slope $f'$ is decreasing as $x$ increases.
 
-Geometrically, the step is the algebraic version of "follow the tangent at $(x_n, f(x_n))$ down to where it crosses the x-axis." When $f$ is smooth and the starting guess is close enough to a simple root, this sequence converges very rapidly to that root.
+The connection to the second derivative is direct: if $f$ is twice differentiable, then $f''(x) > 0$ on an interval is equivalent to $f$ being concave up there, and $f''(x) < 0$ is equivalent to concave down. The sign of $f''$ determines concavity.
 
-For broader coverage of iterative root finders, see the **root finding overview page**, and for the underlying geometry, see the **tangent line page**.`,
+For a deeper treatment with proofs and worked examples, see the **concavity theory page**.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj8: {
-      title: `Why It Converges Quadratically`,
-      content: `Near a simple root $\\alpha$ — where $f(\\alpha) = 0$ and $f'(\\alpha) \\neq 0$ — let the error at step $n$ be $e_n = x_n - \\alpha$. A Taylor expansion of $f$ around $\\alpha$ gives:
+      title: `The Second Derivative Test`,
+      content: `The second derivative is the rate of change of the slope. Its sign tells us how the slope is itself changing, which is concavity.
 
-$$e_{n+1} \\approx \\frac{f''(\\alpha)}{2 f'(\\alpha)} \\, e_n^2$$
+**For concavity:** On any interval where $f''$ is strictly positive, $f$ is concave up; where $f''$ is strictly negative, $f$ is concave down. The boundary case $f''(x) = 0$ is where concavity can potentially change.
 
-The new error is proportional to the square of the previous error. In practical terms, the number of correct digits roughly doubles at each iteration. Bisection, by contrast, halves the error per step, so its correct-digit count grows only linearly.
+**For local extrema:** At a critical point $c$ where $f'(c) = 0$, the sign of $f''(c)$ classifies the critical point. Positive $f''(c)$ gives a local minimum (the curve cups up around $c$). Negative $f''(c)$ gives a local maximum (the curve caps down). When $f''(c) = 0$, the second derivative test is inconclusive and another method such as the first derivative test is needed.
 
-This explains the dramatic drop in the History table's error column when Newton succeeds, and why Newton's method is the workhorse for high-precision root finding. A handful of iterations from a good starting point routinely produces machine-precision accuracy.`,
+On this widget&apos;s example $f(x) = \\frac{1}{3}x^3 - x$, the critical points are at $x = \\pm 1$: $f''(-1) = -2$ marks a local maximum, $f''(1) = 2$ marks a local minimum.
+
+See the **first derivative test page** for an alternative classification method.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj9: {
-      title: `When Newton's Method Fails`,
-      content: `Newton's method can break down in three common ways.
+      title: `Inflection Points: Necessary vs Sufficient`,
+      content: `An inflection point is a point on the graph where concavity changes. The standard procedure to find them has two steps, and the second step is what most students skip.
 
-- **Flat tangent** — if $f'(x_n)$ is small relative to $f(x_n)$, the correction $f / f'$ blows up and the next iterate lands far from the root. The Stalls scenario shows this directly: at $x_0 = 0.85$ the derivative $f'(x_0) \\approx 0.165$ is too small, and $x_1$ is sent off the chart.
-- **Cycles** — for certain functions and starting points the iteration becomes periodic. A classic example is $f(x) = x^3 - 2x + 2$ with $x_0 = 0$, which oscillates between $0$ and $1$ forever.
-- **Divergence** — for slowly growing functions like $\\arctan(x)$, starting too far from the root makes $|x_n|$ grow without bound rather than converge.
+**Necessary condition** — At an inflection point $c$, either $f''(c) = 0$ or $f''(c)$ does not exist. So the candidates are exactly the zeros of $f''$ and the points where $f''$ is undefined.
 
-Production root finders defend against these failures by bracketing the root with bisection until the iterate enters a known basin of attraction, by capping the step size, and by falling back to a slower but more reliable method when Newton misbehaves.`,
+**Sufficient condition** — The sign of $f''$ must actually change across $c$. If $f''$ is negative on the left and positive on the right (or vice versa), $c$ is an inflection point. If the sign stays the same on both sides, it is not.
+
+The classic counterexample is $f(x) = x^4$. Here $f''(x) = 12x^2$, so $f''(0) = 0$ — the necessary condition holds. But $f''(x) \\geq 0$ for every $x$, so the sign never changes. There is no inflection point at $x = 0$; the curve is concave up everywhere.
+
+This is exactly why the visualizer&apos;s Inflection scenario emphasizes the sign flip in its gap shading.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj10: {
-      title: `Related Concepts and Tools`,
-      content: `**Related concepts:**
+      title: `Related Concepts`,
+      content: `**Concavity** — General theory of how curves bend, with worked examples across multiple function families.
 
-- **Tangent line** — the geometric object Newton's method follows at each step.
-- **Derivative** — required to compute the Newton step; the method breaks down where $f'$ vanishes.
-- **Quadratic convergence** — the rate at which Newton refines a simple root.
-- **Bisection method** — a slower but more robust root finder that always converges when given a sign-changing bracket.
-- **Secant method** — a derivative-free cousin of Newton's that replaces $f'(x_n)$ with a finite-difference estimate.
-- **Fixed-point iteration** — the abstract framework that contains Newton's method as a special case.
+**Second derivative** — Definition, computation rules, and geometric interpretation as the rate of change of slope.
 
-**Related tools:**
+**Critical points** — Points where $f'(x) = 0$ or is undefined; the starting set for finding maxima, minima, and inflection candidates.
 
-- **Bisection method visualizer** — watch a bracket shrink to a root one halving at a time.
-- **Secant method visualizer** — see how a secant line approximates the tangent.
-- **Tangent line visualizer** — explore the tangent on its own as the point of tangency moves.`,
+**First derivative test** — Sign analysis of $f'$ for classifying critical points as maxima, minima, or neither.
+
+**Local extrema** — Local maxima and minima, the second derivative test, and the relationship to concavity.
+
+**Curve sketching** — Combining intervals of increase/decrease, concavity, asymptotes, and intercepts to draw an accurate graph of any function.
+
+**Optimization problems** — Real-world applications where finding extrema and inflection points reveals optimal solutions.`,
       before: ``,
       after: ``,
       link: '',
     },
 
-    obj11: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-      link: '',
-    },
-    obj12: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-      link: '',
-    },
-    obj13: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-      link: '',
-    },
-    obj14: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-      link: '',
-    },
-    obj15: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-      link: '',
-    }
+    // obj11–obj15 left for future expansion
+    // obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    // obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    // obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    // obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    // obj15: { title: ``, content: ``, before: ``, after: ``, link: '' },
 
+  }
+
+
+  const introContent = {
+    id: "intro",
+    title: "",
+    content: ``
   }
 
 
   const faqQuestions = {
     obj1: {
-      question: "What is Newton's method?",
-      answer: "Newton's method, also called Newton-Raphson, is an iterative algorithm for approximating a root of a differentiable function f. Starting from an initial guess x_0, each iteration replaces the current value with the x-intercept of the tangent line to f at that point. The update rule is x_(n+1) = x_n - f(x_n) / f'(x_n)."
+      question: "What is an inflection point?",
+      answer: "An inflection point is a point on a curve where the concavity changes — the graph switches from concave up to concave down or vice versa. Equivalently, the sign of the second derivative f-double-prime flips as x passes through the point."
     },
     obj2: {
-      question: "How does Newton's method work geometrically?",
-      answer: "At the current guess x_n, draw the tangent line to the curve y = f(x). Where that tangent crosses the x-axis is the next guess x_(n+1). Repeating this process slides the iterates along tangent intercepts toward a point where the function value is zero, which is a root of f."
+      question: "How do you find inflection points using the second derivative?",
+      answer: "First find where f-double-prime of x equals zero or is undefined. Each such x is a candidate inflection point. Then check the sign of f-double-prime on either side: if the sign actually changes, that x is an inflection point. If the sign stays the same, it is not."
     },
     obj3: {
-      question: "How fast does Newton's method converge?",
-      answer: "Near a simple root, Newton's method converges quadratically. The error at the next step is roughly proportional to the square of the current error. In practical terms, the number of correct digits roughly doubles per iteration once the iterates are close enough to the root."
+      question: "What is the difference between concave up and concave down?",
+      answer: "A curve is concave up on an interval when its graph lies above every tangent line drawn from points in that interval; equivalently, the second derivative is positive there. Concave down means the graph lies below its tangents, with a negative second derivative."
     },
     obj4: {
-      question: "When does Newton's method fail?",
-      answer: "Newton's method can fail in three ways. First, if f'(x_n) is small, the correction f / f' becomes very large and the next iterate lands far from the root. Second, certain starting points produce periodic cycles rather than convergence. Third, for slowly growing functions like arctan, the iterates can diverge instead of converging."
+      question: "Does f-double-prime(c) = 0 always mean there is an inflection point?",
+      answer: "No. The condition f-double-prime of c equals zero is necessary but not sufficient. The standard counterexample is f of x equals x to the fourth: f-double-prime of zero equals zero, yet f-double-prime is greater than or equal to zero for all x, so concavity never changes and there is no inflection at the origin."
     },
     obj5: {
-      question: "How is Newton's method different from bisection?",
-      answer: "Bisection requires only a sign change on an interval and halves that interval at every step, giving linear convergence. Newton's method requires a differentiable function and a good starting guess, but converges quadratically when it works. Bisection is robust but slow; Newton is fast but can fail or diverge."
+      question: "How is concavity related to local maxima and minima?",
+      answer: "At a critical point where f-prime of c equals zero, the sign of f-double-prime of c classifies the extremum. If f-double-prime of c is positive, the curve cups upward and c is a local minimum. If f-double-prime of c is negative, the curve caps downward and c is a local maximum. If f-double-prime of c equals zero, the second derivative test is inconclusive."
     }
   }
 
@@ -758,9 +745,9 @@ Production root finders defend against these failures by bracketing the root wit
     webApplication: {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Newton's Method Visualizer",
-      "description": "Step through Newton's method on f(x) = x^3 - 2x - 5. Drag x0, run scenarios for fast convergence, crossover, or a stalling failure near a critical point.",
-      "url": "https://www.learnmathclass.com/calculus/visual-tools/newtons-method",
+      "name": "Inflection Points and Concavity Visualizer",
+      "description": "Drag c along f(x) = (1/3)x^3 - x to see how f''(c) decides concavity. Concave up, concave down, and inflection scenarios animate step by step with theory.",
+      "url": "https://www.learnmathclass.com/calculus/visual-tools/inflection-points",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -769,13 +756,13 @@ Production root finders defend against these failures by bracketing the root wit
         "priceCurrency": "USD"
       },
       "featureList": [
-        "Drag the initial guess x_0 along the x-axis to set any starting point for Newton's method",
-        "Step button advances exactly one Newton iteration so the user controls the pace",
-        "Three preset scenarios: a direct hit, a slow crossover, and a stalling failure caused by a near-horizontal tangent",
-        "Five-phase animation per iteration: mark the current guess, draw the tangent, slide to the x-axis, lift back to the curve, settle",
-        "Computation tab shows the live values of f, f-prime, the correction, and the next iterate, plus a growing history table with the error column",
-        "Meaning tab gives a verdict card explaining quadratic convergence on success or diagnosing the failure mode on failure",
-        "Theory tab presents the definition, the geometric derivation, quadratic convergence, common failure modes, and the specific cubic on screen"
+        "Draggable point c on the x-axis with live readouts of c, f(c), f-prime(c), and f-double-prime(c)",
+        "Three animated scenarios — Concave up, Concave down, and Inflection — each running a seven-step sequence from region selection to verdict",
+        "Color-coded concavity gap shading between the curve and the tangent line, with dual-color split at inflection points",
+        "Computation panel showing the step-by-step evaluation of f-double-prime(c) = 2c and the resulting sign verdict",
+        "Meaning panel with a scenario-specific verdict card, color-themed for concave up (blue), concave down (red), or inflection (amber)",
+        "Theory panel covering the definition of concavity, the second derivative test, the necessary-but-not-sufficient inflection condition, and the second derivative test for extrema",
+        "Built-in counterexample explaining why f(x) = x^4 has f-double-prime(0) = 0 but no inflection point at the origin"
       ],
       "author": {
         "@type": "Organization",
@@ -815,8 +802,8 @@ Production root finders defend against these failures by bracketing the root wit
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Newton's Method",
-          "item": "https://www.learnmathclass.com/calculus/visual-tools/newtons-method"
+          "name": "Inflection Points",
+          "item": "https://www.learnmathclass.com/calculus/visual-tools/inflection-points"
         }
       ]
     },
@@ -839,15 +826,16 @@ Production root finders defend against these failures by bracketing the root wit
    return {
       props:{
          sectionsContent,
+         introContent,
          faqQuestions,
          schemas,
          seoData: {
-           title: "Newton's Method Visualizer | Learn Math Class",
-           description: "Step through Newton's method on f(x) = x^3 - 2x - 5. Drag x0, run scenarios for fast convergence, crossover, or a stalling failure near a critical point.",
+           title: "Inflection Points & Concavity Visualizer | Learn Math Class",
+           description: "Drag c along f(x) = (1/3)x^3 - x to see how f''(c) decides concavity. Concave up, concave down, and inflection scenarios animate step by step with theory.",
            keywords: keyWords.join(", "),
-           url: "/calculus/visual-tools/newtons-method",
-           name: `Newtons Method Visualizer`,
-           hubDescription: "Drag a starting guess x₀ along the x-axis for f(x) = x³ − 2x − 5 and watch each Newton step draw its tangent, drop to the x-axis, and lift back to the curve. Three preset scenarios show a direct hit, a slow crossover, and a stalling failure when x₀ lands near a critical point where the tangent goes nearly horizontal.",
+           url: "/calculus/visual-tools/inflection-points",
+           name: "Inflection Points and Concavity Visualizer",
+           hubDescription: "Drag point c along the cubic f(x) = (1/3)x^3 - x to see how the sign of f''(c) decides whether the curve is concave up, concave down, or inflecting. Three pre-built scenarios animate the seven analysis steps from picking a region to evaluating f''(c) and shading the concavity gap between curve and tangent.",
            category: "Calculus",
            subCategory: "Derivatives"
          }
@@ -855,7 +843,7 @@ Production root finders defend against these failures by bracketing the root wit
     }
    }
 
-export default function NewtonsMethodVisualizer({seoData, sectionsContent, faqQuestions, schemas}) {
+export default function InflectionPointsVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
     
   const genericSections=[
@@ -947,6 +935,7 @@ export default function NewtonsMethodVisualizer({seoData, sectionsContent, faqQu
           sectionsContent.obj10.content,
         ]
     },
+    // obj11–obj15 slots reserved for future expansion
     // {
     //     id:'11',
     //     title:sectionsContent.obj11.title,
@@ -1048,17 +1037,16 @@ export default function NewtonsMethodVisualizer({seoData, sectionsContent, faqQu
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Newton&apos;s Method</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Inflection Points</h1>
    <br/>
-   <div style={{transform:'scale(0.9)',width:'80%',margin:'auto'}}>
-   <FunctionNewtonMethod/>
+  <div style={{transform:'scale(0.9)',width:'80%',margin:'auto'}}>
+   <FunctionConcavity/>
    </div>
    <br/>
    <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
          secondaryNavMode="siblings"
          secondaryNavTitle="More in this Section"
-   
    />
    <br/>
    <br/>

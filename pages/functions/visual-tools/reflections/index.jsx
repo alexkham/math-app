@@ -6,7 +6,7 @@
 // import Head from 'next/head'
 // import '@/pages/pages.css'
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-// import FunctionNewtonMethod from '../../../../app/components/calculus/visualizers/FunctionNewtonMethod'
+// import FunctionReflections from '../../../../app/components/functions/reflections/FunctionReflections'
 
 
 // export async function getStaticProps(){
@@ -214,7 +214,7 @@
 //         title: "Title | Learn Math Class",
 //         description: "Metadescription",
 //         keywords: keyWords.join(", "),
-//         url: "/calculus/visual-tools/newtons-method",
+//         url: "/functions/visual-tools/reflections",
 //          name: "name"
 //       },
         
@@ -443,9 +443,11 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Newtons&apos;s Method</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'30px'}}>Function Reflections</h1>
 //    <br/>
-//    <FunctionNewtonMethod/>
+//    <div style={{transform:'scale(1.1)'}}>
+//   <FunctionReflections/>
+//   </div>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -483,7 +485,6 @@
 // }
 
 
-
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -492,264 +493,246 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import FunctionNewtonMethod from '../../../../app/components/calculus/visualizers/FunctionNewtonMethod'
+import FunctionReflections from '../../../../app/components/functions/reflections/FunctionReflections'
 
 
 export async function getStaticProps(){
 
   const keyWords = [
-    "Newton's method visualizer",
-    'Newton-Raphson method',
-    "Newton's method calculator",
-    "Newton's method interactive",
-    "Newton's method step by step",
-    'root finding visualizer',
-    'tangent line root finding',
-    'quadratic convergence',
-    "Newton's method failure modes",
-    'Newton method critical point',
-    'iterative root finder',
-    "Newton's method examples",
-    'f over f prime iteration',
-    "Newton's method cubic",
-    'numerical root finding'
+    'function reflections',
+    'reflection of a function',
+    'reflect across x-axis',
+    'reflect across y-axis',
+    'reflect across y = x',
+    'inverse function reflection',
+    '|f(x)| graph',
+    'f(|x|) graph',
+    'function symmetry',
+    'even function',
+    'odd function',
+    'mirror function',
+    'graph transformation reflection',
+    'function reflection visualizer',
+    'interactive reflection tool',
   ]
+
 
   const sectionsContent = {
 
     obj0: {
       title: `Key Terms`,
-      content: `**Newton's method** (also called Newton-Raphson) — an iterative algorithm for approximating a root of a differentiable function by repeatedly following the tangent line down to the x-axis.
+      content: `**Reflection** — A geometric transformation that produces the mirror image of a curve across a chosen axis or line.
 
-**Iterate** — one of the values $x_0, x_1, x_2, \\ldots$ produced by repeatedly applying the Newton step.
+**Axis of reflection** — The line that acts as the mirror. Every point of the original is mapped to a partner the same perpendicular distance on the opposite side.
 
-**Newton step** — the update rule $x_{n+1} = x_n - f(x_n) / f'(x_n)$, the x-intercept of the tangent line at $(x_n, f(x_n))$.
+**Even function** — A function satisfying $f(-x) = f(x)$. Its graph is unchanged by the y-axis reflection.
 
-**Initial guess** — the starting value $x_0$ from which the iteration begins. Its position relative to the root and to any critical points determines whether the method succeeds.
+**Odd function** — A function satisfying $f(-x) = -f(x)$. Its graph is unchanged by a $180°$ rotation about the origin.
 
-**Quadratic convergence** — near a simple root the error roughly squares at each step, so the number of correct digits roughly doubles per iteration.
+**One-to-one** — A function where every output corresponds to exactly one input. Only one-to-one functions have inverses that are themselves functions.
 
-**Critical point** — a point where $f'(x) = 0$. Starting near a critical point makes the tangent nearly horizontal and breaks Newton's method.`,
+**Inverse function** — The reflection of $f$ across the line $y = x$. Written $f^{-1}$, it satisfies $f^{-1}(f(x)) = x$.
+
+**Fixed point** — A point that does not move under a transformation. For reflection across an axis, fixed points are those already sitting on the axis.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj1: {
-      title: `Getting Started with the Visualizer`,
-      content: `The visualizer shows the cubic function $f(x) = x^3 - 2x - 5$ together with its single real root $\\alpha \\approx 2.0946$, marked by a small triangle below the x-axis.
+      title: `Getting Started`,
+      content: `The visualizer has three columns. On the left is the **base function picker** with ten families. In the center sits the **plot** with the original curve $f$ in slate gray and the reflected curve $g$ in blue. On the right are the **explanation panel** and the **reflection tab strip** with seven tabs.
 
-The interface has two parts. The left panel holds the graph, three scenario buttons, the **Step** and **Reset** controls, and a row of numeric readouts. The right panel is a tabbed sidebar with three views: **Computation**, **Meaning**, and **Theory**.
+The page launches with the quadratic as base and the x-axis reflection active, so $g(x) = -x^2$ appears as the upside-down parabola.
 
-There are three ways to drive the tool:
-
-- **Pick a scenario** to animate a preset starting point through a sequence of Newton iterations.
-- **Drag $x_0$** along the x-axis to place your own starting guess.
-- **Click Step** to advance one Newton iteration at a time from your custom $x_0$.
-
-The four readouts under the graph — current iteration index $n$, current iterate $x_n$, function value $f(x_n)$, and the absolute error $|x_n - \\alpha|$ — update live as the animation progresses.`,
+To explore, click a different base in the left column or pick a different reflection tab on the right. Equation badges above the plot rewrite to match. Tabs whose reflection has no parameters apply instantly; the y = c and x = c tabs expose a slider for the line offset $c$, which you can drag, animate, or step through.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj2: {
-      title: `Choosing a Preset Scenario`,
-      content: `Three buttons sit below the graph, each pinned to a starting value and a label describing what happens next.
+      title: `Choosing a Base Function`,
+      content: `The left column lists ten common function families, with sine and cosine grouped under Trigonometric. Each entry shows a small glyph of the family&apos;s characteristic shape next to its name.
 
-- **Direct hit** ($x_0 = 3$) — starts on the right side of the root in the smooth basin. Each tangent step pulls the guess sharply toward $\\alpha$ and the error collapses within a few iterations.
-- **Crosses over** ($x_0 = -1$) — starts on the wrong side of the curve. The first tangent crosses zero and the iterate lands in positive territory, after which the method converges normally.
-- **Stalls** ($x_0 = 0.85$) — starts very close to a critical point at $x = \\sqrt{2/3} \\approx 0.816$ where $f'$ is tiny. The tangent comes out nearly horizontal, the correction $f / f'$ blows up, and $x_1$ flies off the chart.
+Click any family to load it as the new $f$. The plot redraws with the original curve and the reflected curve, the equation badges update, and the explanation panel rewrites its "Applied to" section to describe what the current reflection does to this specific family.
 
-The third scenario is the failure mode worth studying carefully. Click **Reset** at any time to clear the current scenario and return $x_0$ to its default position for free dragging.`,
+Some families have **symmetry properties** that make certain reflections trivial — reflecting an even function across the y-axis leaves it unchanged, for example, and the explanation panel calls this out explicitly. Other families have **restricted domains** — the square root and the logarithm only exist for positive inputs — and reflections that flip the input swap the domain to the other side of the y-axis.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj3: {
-      title: `Stepping Manually from a Custom Start`,
-      content: `To run Newton's method from your own starting point, click **Reset** first if a preset scenario is active.
+      title: `The Seven Reflection Tabs`,
+      content: `Seven tabs on the right control which reflection applies to the current base.
 
-Then:
+- **x-axis** ($g(x) = -f(x)$) — flips the curve upside down through the x-axis
+- **y-axis** ($g(x) = f(-x)$) — mirrors the curve left to right across the y-axis
+- **y = x** — swaps $x$ and $y$ coordinates; produces the inverse function, or all branches if $f$ is not one-to-one
+- **y = c** ($g(x) = 2c - f(x)$) — mirrors across a horizontal line; the slider controls $c$
+- **x = c** ($g(x) = f(2c - x)$) — mirrors across a vertical line; the slider controls $c$
+- **|f|** ($g(x) = |f(x)|$) — partial reflection: flips only the parts of $f$ below the x-axis
+- **f(|x|)** ($g(x) = f(|x|)$) — replaces the left half of $f$ with a mirror of the right half
 
-- **Drag the blue dot on the x-axis** to move $x_0$ wherever you want it. The drop line shows the corresponding point $(x_0, f(x_0))$ on the curve.
-- **Click Step** to play one full Newton iteration. The animation marks the current point, draws the tangent, slides down to the new x-intercept, and lifts back to the curve.
-- **Click Step again** to run the next iteration from the updated guess. Each click advances exactly one step, so the convergence (or divergence) unfolds at your own pace.
-
-After every step the History table in the Computation tab grows by one row and the live readouts update. The Step button is only available when no preset scenario is running.`,
+Hover any tab to see its formula and a one-line description in a tooltip.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj4: {
-      title: `Reading the Animation`,
-      content: `Every Newton iteration is broken into five visible phases. A banner at the top of the graph names the current phase, so the geometry on screen lines up with the algebra in the side panel.
+      title: `The Parameter Tabs: y = c and x = c`,
+      content: `The y = c and x = c tabs each expose a slider controlling the line offset $c$. Values range from $-6$ to $6$ in steps of $0.1$, with a default of $c = 1$.
 
-- **Mark** — the current guess $P_n$ on the curve pulses briefly to draw attention.
-- **Tangent** — the blue tangent line at $P_n$ extends across the canvas.
-- **To axis** — a marker slides along the tangent down to where it meets the x-axis, locating the next iterate $x_{n+1}$.
-- **To curve** — a dashed line lifts from $x_{n+1}$ up to the curve, locating $P_{n+1}$.
-- **Settle** — a brief pause before the next iteration begins.
+For **y = c**, the axis of reflection is the horizontal line $y = c$, drawn in orange on the plot. Each point $(x, y)$ of $f$ maps to $(x, 2c - y)$, the same vertical distance from the line but on the opposite side. When $c = 0$, the result coincides with the x-axis reflection.
 
-Past iterations fade so the latest step stays prominent. The triangle below the axis marks the true root $\\alpha$, giving you a visual target to compare each iterate against. If the animation halts with a red banner, the iteration has hit a failure mode and an arrow indicates where the off-chart iterate landed.`,
+For **x = c**, the axis is the vertical line $x = c$, marked by an orange band on the plot. Each point $(x, y)$ maps to $(2c - x, y)$ — same height, mirrored left-right. When $c = 0$, the result coincides with the y-axis reflection.
+
+Slider values appear in a small monospace badge on the tab. A Reset button restores the default $c = 1$ for the active tab without disturbing the other.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj5: {
-      title: `Reading the Computation Tab`,
-      content: `The Computation tab is the numeric companion to the animation. It has three sections that update together with the geometry.
+      title: `Manual vs Auto Mode`,
+      content: `The y = c and x = c tabs include a **Manual / Auto** toggle.
 
-- **Iteration formula** — the Newton step $x_{n+1} = x_n - f(x_n) / f'(x_n)$, shown once as the algorithm's definition.
-- **Current step** — the live values for the running iteration: $f(x_n)$, $f'(x_n)$, the correction $f / f'$, and the resulting $x_{n+1}$. The two outputs are highlighted in blue.
-- **History** — a compact table with one row per iteration so far, showing $n$, $x_n$, $f(x_n)$, and $|x_n - \\alpha|$. The active row is highlighted; failed rows appear in red.
+In **Manual** mode (default), drag the slider yourself. Each drag updates the reflection in real time.
 
-The History table is where quadratic convergence becomes obvious: when the method succeeds, the error column drops by a factor that itself grows at every step.`,
+In **Auto** mode, the slider becomes a playback target. A play/pause button starts the animation: $c$ sweeps from minimum to maximum and back, ping-ponging indefinitely. Step backward and step forward buttons let you advance one increment at a time.
+
+Below the play controls, a **Speed selector** offers four presets: $0.5\\times$, $1\\times$, $2\\times$, and $4\\times$. Slower speeds are best for inspecting how the reflected curve aligns with the axis at specific values of $c$; faster speeds let you sweep through the full range quickly to see the global pattern.
+
+Auto mode is the fastest way to watch the line of reflection slide and see exactly how the reflected curve tracks the change.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj6: {
-      title: `Reading the Meaning and Theory Tabs`,
-      content: `The **Meaning** tab opens automatically once an iteration sequence finishes. It shows a colored verdict card explaining what happened.
+      title: `The y = x Reflection and Multivalued Inverses`,
+      content: `The y = x tab swaps the roles of $x$ and $y$, mapping each point $(x, y)$ of $f$ to $(y, x)$.
 
-- **Converged** (blue) — the iteration reached the root. The card explains quadratic convergence and quotes the final error.
-- **Stalls** (red) — the iteration failed. The card identifies the value of $f'(x_0)$ as the culprit and shows where $x_1$ landed.
+For **one-to-one** functions — linear, cubic, reciprocal, exponential, logarithmic, and square root in this set — the reflection is itself a function: the **inverse** $f^{-1}$. The two curves form a perfect mirror image across the orange diagonal.
 
-A second card underneath gives the underlying reason — for success, the asymptotic error formula; for failure, why a small derivative makes the correction blow up.
+For functions that are **not one-to-one**, the reflection is **multivalued** — a single $x$ can correspond to multiple $y$ values. The visualizer plots **all branches** of the reflection:
 
-The **Theory** tab is always available and holds five reference blocks: the definition, the geometric derivation of the Newton step from the tangent equation, the quadratic-convergence statement near a simple root, three common failure modes (flat tangent, cycles, divergence), and a summary of what each statement looks like for the specific cubic on screen.`,
+- **Quadratic** $\\to \\pm\\sqrt{x}$ — two branches forming a sideways parabola
+- **Absolute value** $\\to \\pm x$ for $x \\geq 0$ — two rays forming a sideways V
+- **Sine** $\\to \\arcsin(x) + 2\\pi k$ and $\\pi - \\arcsin(x) + 2\\pi k$ — many periodic branches
+- **Cosine** $\\to \\pm\\arccos(x) + 2\\pi k$ — many periodic branches
+
+To get a single-valued inverse from one of these, you must restrict $f$ to a **principal branch** before reflecting.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj7: {
-      title: `What is Newton's Method?`,
-      content: `**Newton's method**, also called the **Newton-Raphson method**, is an iterative algorithm for approximating a root of a differentiable function $f$. Starting from an initial guess $x_0$, each iteration replaces the current guess with the x-intercept of the tangent line at that point:
+      title: `Partial Reflections: |f(x)| and f(|x|)`,
+      content: `Two tabs perform reflections that affect only part of the graph.
 
-$$x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}$$
+**|f(x)|** keeps the portion of $f$ that sits on or above the x-axis and flips the portion below up. The roots of $f$ become **corners** of $|f|$ — the curve touches the x-axis and bounces. Applied to the quadratic, $|f|$ has no effect (the parabola is already non-negative). Applied to the cubic or to sine, the negative arches flip into matching positive ones.
 
-Geometrically, the step is the algebraic version of "follow the tangent at $(x_n, f(x_n))$ down to where it crosses the x-axis." When $f$ is smooth and the starting guess is close enough to a simple root, this sequence converges very rapidly to that root.
+**f(|x|)** uses the right half of $f$ for both sides. For $x \\geq 0$, $g(x) = f(x)$ unchanged. For $x < 0$, $g(x) = f(-x)$ — the right half mirrored over. The result is **always even**, no matter what $f$ is.
 
-For broader coverage of iterative root finders, see the **root finding overview page**, and for the underlying geometry, see the **tangent line page**.`,
+The two are easy to confuse. The mnemonic: **outer absolute value** acts on outputs (flips below up); **inner absolute value** acts on inputs (mirrors the right onto the left).`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj8: {
-      title: `Why It Converges Quadratically`,
-      content: `Near a simple root $\\alpha$ — where $f(\\alpha) = 0$ and $f'(\\alpha) \\neq 0$ — let the error at step $n$ be $e_n = x_n - \\alpha$. A Taylor expansion of $f$ around $\\alpha$ gives:
+      title: `What is a Reflection?`,
+      content: `A **reflection** of a function $f$ across a chosen axis or line produces a new function $g$ whose graph is the mirror image of $f$ across that axis. The defining property is that every point of $f$ has a partner on $g$ at the same perpendicular distance from the axis, on the opposite side.
 
-$$e_{n+1} \\approx \\frac{f''(\\alpha)}{2 f'(\\alpha)} \\, e_n^2$$
+The standard reflections fall into three groups:
 
-The new error is proportional to the square of the previous error. In practical terms, the number of correct digits roughly doubles at each iteration. Bisection, by contrast, halves the error per step, so its correct-digit count grows only linearly.
+- **Axis reflections** — across the x-axis ($g(x) = -f(x)$) or the y-axis ($g(x) = f(-x)$)
+- **Line reflections** — across any horizontal line $y = c$, vertical line $x = c$, or the diagonal $y = x$
+- **Partial or piecewise reflections** — $|f(x)|$ and $f(|x|)$, which only affect part of the graph
 
-This explains the dramatic drop in the History table's error column when Newton succeeds, and why Newton's method is the workhorse for high-precision root finding. A handful of iterations from a good starting point routinely produces machine-precision accuracy.`,
+All reflections are **isometries** in the plane: they preserve distances, so the shape of $f$ is preserved and only its orientation changes. For a deeper treatment of reflections as rigid motions, see the **geometric transformations page**.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj9: {
-      title: `When Newton's Method Fails`,
-      content: `Newton's method can break down in three common ways.
+      title: `Reflections, Symmetry, and Function Types`,
+      content: `Reflections are tied to **symmetry properties** of functions.
 
-- **Flat tangent** — if $f'(x_n)$ is small relative to $f(x_n)$, the correction $f / f'$ blows up and the next iterate lands far from the root. The Stalls scenario shows this directly: at $x_0 = 0.85$ the derivative $f'(x_0) \\approx 0.165$ is too small, and $x_1$ is sent off the chart.
-- **Cycles** — for certain functions and starting points the iteration becomes periodic. A classic example is $f(x) = x^3 - 2x + 2$ with $x_0 = 0$, which oscillates between $0$ and $1$ forever.
-- **Divergence** — for slowly growing functions like $\\arctan(x)$, starting too far from the root makes $|x_n|$ grow without bound rather than converge.
+A function is **even** when $f(-x) = f(x)$ — its graph is symmetric about the y-axis. Equivalently, the y-axis reflection of an even function is identical to the function itself. Examples: $x^2$, $|x|$, $\\cos x$.
 
-Production root finders defend against these failures by bracketing the root with bisection until the iterate enters a known basin of attraction, by capping the step size, and by falling back to a slower but more reliable method when Newton misbehaves.`,
+A function is **odd** when $f(-x) = -f(x)$ — its graph has $180°$ rotational symmetry about the origin. The y-axis reflection of an odd function gives the same result as the x-axis reflection. Examples: $x$, $x^3$, $\\sin x$, $1/x$.
+
+A function is **one-to-one** when each output corresponds to exactly one input. The y = x reflection of a one-to-one function is itself a function — the **inverse**. Without one-to-one-ness, the reflection across $y = x$ is multivalued.
+
+These symmetries are encoded in the visualizer&apos;s explanation panel, which recognizes the active base&apos;s type and adapts the "applied" notes accordingly.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj10: {
-      title: `Related Concepts and Tools`,
-      content: `**Related concepts:**
+      title: `Related Concepts`,
+      content: `**Function Transformations** — the companion visualizer for shifts and scales: $g(x) = a \\cdot f(b(x - h)) + k$. Reflections are the special case where $a = -1$ or $b = -1$.
 
-- **Tangent line** — the geometric object Newton's method follows at each step.
-- **Derivative** — required to compute the Newton step; the method breaks down where $f'$ vanishes.
-- **Quadratic convergence** — the rate at which Newton refines a simple root.
-- **Bisection method** — a slower but more robust root finder that always converges when given a sign-changing bracket.
-- **Secant method** — a derivative-free cousin of Newton's that replaces $f'(x_n)$ with a finite-difference estimate.
-- **Fixed-point iteration** — the abstract framework that contains Newton's method as a special case.
+**Inverse Functions** — the formal theory of $f^{-1}$, when it exists, and how to compute it analytically.
 
-**Related tools:**
+**Even and Odd Functions** — full treatment of the two main symmetry types and their consequences for integration and Fourier series.
 
-- **Bisection method visualizer** — watch a bracket shrink to a root one halving at a time.
-- **Secant method visualizer** — see how a secant line approximates the tangent.
-- **Tangent line visualizer** — explore the tangent on its own as the point of tangency moves.`,
+**Composition of Functions** — how multiple reflections can be chained (two reflections in a row give a rotation or translation).
+
+**Parent Functions** — the canonical untransformed members of each family used as the base here.
+
+**Absolute Value Function** — the specific function $|x|$, whose graph appears in both the $|f(x)|$ and $f(|x|)$ partial reflections.
+
+**Symmetry in Geometry** — broader perspective on reflection as a geometric operation, beyond functions.`,
       before: ``,
       after: ``,
       link: '',
     },
 
-    obj11: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-      link: '',
-    },
-    obj12: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-      link: '',
-    },
-    obj13: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-      link: '',
-    },
-    obj14: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-      link: '',
-    },
-    obj15: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-      link: '',
-    }
+    // obj11–obj15 left for future expansion
+    // obj11: { title:``, content:``, before:``, after:``, link:'' },
+    // obj12: { title:``, content:``, before:``, after:``, link:'' },
+    // obj13: { title:``, content:``, before:``, after:``, link:'' },
+    // obj14: { title:``, content:``, before:``, after:``, link:'' },
+    // obj15: { title:``, content:``, before:``, after:``, link:'' },
 
+  }
+
+
+  const introContent = {
+    id: "intro",
+    title: "",
+    content: ``
   }
 
 
   const faqQuestions = {
     obj1: {
-      question: "What is Newton's method?",
-      answer: "Newton's method, also called Newton-Raphson, is an iterative algorithm for approximating a root of a differentiable function f. Starting from an initial guess x_0, each iteration replaces the current value with the x-intercept of the tangent line to f at that point. The update rule is x_(n+1) = x_n - f(x_n) / f'(x_n)."
+      question: "What is a function reflection?",
+      answer: "A reflection of a function f produces a new function g whose graph is the mirror image of f across a chosen axis or line. The axis can be the x-axis, the y-axis, the line y = x, a horizontal line y = c, or a vertical line x = c. The relationship between f and g depends on which axis is chosen."
     },
     obj2: {
-      question: "How does Newton's method work geometrically?",
-      answer: "At the current guess x_n, draw the tangent line to the curve y = f(x). Where that tangent crosses the x-axis is the next guess x_(n+1). Repeating this process slides the iterates along tangent intercepts toward a point where the function value is zero, which is a root of f."
+      question: "How do you reflect a function across the x-axis vs the y-axis?",
+      answer: "Reflecting across the x-axis negates every output: g(x) equals minus f(x), so each point (x, y) of f becomes (x, minus y). Reflecting across the y-axis negates every input: g(x) equals f of minus x, so each point (x, y) of f becomes (minus x, y). The first flips the graph vertically; the second flips it horizontally."
     },
     obj3: {
-      question: "How fast does Newton's method converge?",
-      answer: "Near a simple root, Newton's method converges quadratically. The error at the next step is roughly proportional to the square of the current error. In practical terms, the number of correct digits roughly doubles per iteration once the iterates are close enough to the root."
+      question: "What does reflecting across y = x produce?",
+      answer: "Reflecting across the line y = x swaps the roles of x and y, mapping each point (x, y) of f to (y, x). For one-to-one functions, the reflected curve is the graph of the inverse function f-inverse. For functions that are not one-to-one — like x squared, the absolute value, sine, or cosine — the reflection is multivalued and is not itself a function."
     },
     obj4: {
-      question: "When does Newton's method fail?",
-      answer: "Newton's method can fail in three ways. First, if f'(x_n) is small, the correction f / f' becomes very large and the next iterate lands far from the root. Second, certain starting points produce periodic cycles rather than convergence. Third, for slowly growing functions like arctan, the iterates can diverge instead of converging."
+      question: "How do |f(x)| and f(|x|) differ from a normal reflection?",
+      answer: "They are partial reflections, not full mirror images. The graph of the outer absolute value, written |f(x)|, keeps any portion of f that lies on or above the x-axis and reflects only the portions below. The graph of the inner absolute value, written f of |x|, keeps the right half of f and replaces the left half with a mirror copy of the right. Both produce continuous curves with possible corners."
     },
     obj5: {
-      question: "How is Newton's method different from bisection?",
-      answer: "Bisection requires only a sign change on an interval and halves that interval at every step, giving linear convergence. Newton's method requires a differentiable function and a good starting guess, but converges quadratically when it works. Bisection is robust but slow; Newton is fast but can fail or diverge."
+      question: "Which reflection corresponds to an even or odd function?",
+      answer: "An even function satisfies f of minus x equals f of x — its graph is unchanged by the y-axis reflection. An odd function satisfies f of minus x equals minus f of x — its graph is unchanged by a 180-degree rotation about the origin, which is the same as composing the x-axis and y-axis reflections."
     }
   }
 
@@ -758,9 +741,9 @@ Production root finders defend against these failures by bracketing the root wit
     webApplication: {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Newton's Method Visualizer",
-      "description": "Step through Newton's method on f(x) = x^3 - 2x - 5. Drag x0, run scenarios for fast convergence, crossover, or a stalling failure near a critical point.",
-      "url": "https://www.learnmathclass.com/calculus/visual-tools/newtons-method",
+      "name": "Function Reflections Visualizer",
+      "description": "Visualize 7 reflection types on 10 base function families: across x-axis, y-axis, y = x, y = c, x = c, plus the partial reflections |f(x)| and f(|x|).",
+      "url": "https://www.learnmathclass.com/functions/visual-tools/reflections",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -769,13 +752,13 @@ Production root finders defend against these failures by bracketing the root wit
         "priceCurrency": "USD"
       },
       "featureList": [
-        "Drag the initial guess x_0 along the x-axis to set any starting point for Newton's method",
-        "Step button advances exactly one Newton iteration so the user controls the pace",
-        "Three preset scenarios: a direct hit, a slow crossover, and a stalling failure caused by a near-horizontal tangent",
-        "Five-phase animation per iteration: mark the current guess, draw the tangent, slide to the x-axis, lift back to the curve, settle",
-        "Computation tab shows the live values of f, f-prime, the correction, and the next iterate, plus a growing history table with the error column",
-        "Meaning tab gives a verdict card explaining quadratic convergence on success or diagnosing the failure mode on failure",
-        "Theory tab presents the definition, the geometric derivation, quadratic convergence, common failure modes, and the specific cubic on screen"
+        "Ten base function families: linear, quadratic, cubic, reciprocal, exponential, logarithmic, sine, cosine, absolute value, and square root",
+        "Seven reflection types selectable as tabs: across the x-axis, y-axis, line y = x, line y = c, line x = c, and the partial reflections |f(x)| and f(|x|)",
+        "Sliders with Manual and Auto modes for the parameterized line reflections, with play, pause, step controls and four speed presets (0.5x, 1x, 2x, 4x)",
+        "Multivalued y = x reflection rendering all geometric branches for non-one-to-one functions such as quadratic, absolute value, sine, and cosine",
+        "Original curve and reflected curve drawn together in contrasting colors with floating equation badges that update as parameters change",
+        "Orange reference line marking the axis of reflection for y = x, y = c, and x = c",
+        "Explanation panel adapting in real time to the active reflection and base, with notes on even, odd, one-to-one, and one-sided function cases"
       ],
       "author": {
         "@type": "Organization",
@@ -803,20 +786,20 @@ Production root finders defend against these failures by bracketing the root wit
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Calculus",
-          "item": "https://www.learnmathclass.com/calculus"
+          "name": "Functions",
+          "item": "https://www.learnmathclass.com/functions"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Visual Tools",
-          "item": "https://www.learnmathclass.com/calculus/visual-tools"
+          "item": "https://www.learnmathclass.com/functions/visual-tools"
         },
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Newton's Method",
-          "item": "https://www.learnmathclass.com/calculus/visual-tools/newtons-method"
+          "name": "Function Reflections",
+          "item": "https://www.learnmathclass.com/functions/visual-tools/reflections"
         }
       ]
     },
@@ -839,23 +822,24 @@ Production root finders defend against these failures by bracketing the root wit
    return {
       props:{
          sectionsContent,
+         introContent,
          faqQuestions,
          schemas,
          seoData: {
-           title: "Newton's Method Visualizer | Learn Math Class",
-           description: "Step through Newton's method on f(x) = x^3 - 2x - 5. Drag x0, run scenarios for fast convergence, crossover, or a stalling failure near a critical point.",
+           title: "Function Reflections Across Axes & Lines | Learn Math Class",
+           description: "Visualize 7 reflection types: x-axis, y-axis, y = x, y = c, x = c, |f(x)|, and f(|x|). Apply each to 10 base function families with side-by-side plots.",
            keywords: keyWords.join(", "),
-           url: "/calculus/visual-tools/newtons-method",
-           name: `Newtons Method Visualizer`,
-           hubDescription: "Drag a starting guess x₀ along the x-axis for f(x) = x³ − 2x − 5 and watch each Newton step draw its tangent, drop to the x-axis, and lift back to the curve. Three preset scenarios show a direct hit, a slow crossover, and a stalling failure when x₀ lands near a critical point where the tangent goes nearly horizontal.",
-           category: "Calculus",
-           subCategory: "Derivatives"
+           url: "/functions/visual-tools/reflections",
+           name: "Function Reflections Visualizer",
+           hubDescription: "Pick a base function — linear, quadratic, cubic, reciprocal, exponential, logarithmic, sine, cosine, absolute value, or square root — and switch between seven reflection types: across the x-axis, y-axis, y = x, the horizontal y = c, the vertical x = c, plus |f(x)| and f(|x|). Both curves draw together, with the axis of reflection highlighted in orange.",
+           category: "Transformations",
+           subCategory: "Reflections"
          }
        }
     }
    }
 
-export default function NewtonsMethodVisualizer({seoData, sectionsContent, faqQuestions, schemas}) {
+export default function FunctionReflectionsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
     
   const genericSections=[
@@ -947,6 +931,7 @@ export default function NewtonsMethodVisualizer({seoData, sectionsContent, faqQu
           sectionsContent.obj10.content,
         ]
     },
+    // obj11–obj15 slots reserved for future expansion
     // {
     //     id:'11',
     //     title:sectionsContent.obj11.title,
@@ -1048,17 +1033,16 @@ export default function NewtonsMethodVisualizer({seoData, sectionsContent, faqQu
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Newton&apos;s Method</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'30px'}}>Function Reflections</h1>
    <br/>
-   <div style={{transform:'scale(0.9)',width:'80%',margin:'auto'}}>
-   <FunctionNewtonMethod/>
-   </div>
+   <div style={{transform:'scale(1.1)'}}>
+  <FunctionReflections/>
+  </div>
    <br/>
    <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
          secondaryNavMode="siblings"
          secondaryNavTitle="More in this Section"
-   
    />
    <br/>
    <br/>

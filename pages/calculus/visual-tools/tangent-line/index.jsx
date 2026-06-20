@@ -6,7 +6,7 @@
 // import Head from 'next/head'
 // import '@/pages/pages.css'
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-// import FunctionNewtonMethod from '../../../../app/components/calculus/visualizers/FunctionNewtonMethod'
+// import FunctionTangentLine from '../../../../app/components/calculus/visualizers/FunctionTangentLine'
 
 
 // export async function getStaticProps(){
@@ -214,7 +214,7 @@
 //         title: "Title | Learn Math Class",
 //         description: "Metadescription",
 //         keywords: keyWords.join(", "),
-//         url: "/calculus/visual-tools/newtons-method",
+//         url: "/calculus/visual-tools/tangent-line",
 //          name: "name"
 //       },
         
@@ -443,9 +443,9 @@
 //    <Breadcrumb/>
 //    <br/>
 //    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Newtons&apos;s Method</h1>
+//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Tangent Line</h1>
 //    <br/>
-//    <FunctionNewtonMethod/>
+//    <FunctionTangentLine/>
 //    <br/>
 //    {/* <SectionTableOfContents sections={genericSections}
 //     showSecondaryNav={true}
@@ -492,264 +492,259 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import FunctionNewtonMethod from '../../../../app/components/calculus/visualizers/FunctionNewtonMethod'
+import FunctionTangentLine from '../../../../app/components/calculus/visualizers/FunctionTangentLine'
 
 
 export async function getStaticProps(){
 
   const keyWords = [
-    "Newton's method visualizer",
-    'Newton-Raphson method',
-    "Newton's method calculator",
-    "Newton's method interactive",
-    "Newton's method step by step",
-    'root finding visualizer',
-    'tangent line root finding',
-    'quadratic convergence',
-    "Newton's method failure modes",
-    'Newton method critical point',
-    'iterative root finder',
-    "Newton's method examples",
-    'f over f prime iteration',
-    "Newton's method cubic",
-    'numerical root finding'
+    'tangent line',
+    'tangent line calculator',
+    'tangent line equation',
+    'derivative as slope',
+    'find tangent line',
+    'tangent line at a point',
+    'point-slope form',
+    'linearization',
+    'tangent line visualizer',
+    'slope of tangent',
+    'tangent to a curve',
+    'interactive tangent tool',
+    'tangent line formula',
+    'horizontal tangent',
+    'critical points'
   ]
+
 
   const sectionsContent = {
 
     obj0: {
       title: `Key Terms`,
-      content: `**Newton's method** (also called Newton-Raphson) — an iterative algorithm for approximating a root of a differentiable function by repeatedly following the tangent line down to the x-axis.
+      content: `**Tangent line** — The straight line that touches $f$ at the single point $P = (c, f(c))$ with the same slope as the curve at that point: slope $= f'(c)$.
 
-**Iterate** — one of the values $x_0, x_1, x_2, \\ldots$ produced by repeatedly applying the Newton step.
+**Slope of the tangent** — Equal to the derivative $f'(c)$. This is the geometric meaning of the derivative.
 
-**Newton step** — the update rule $x_{n+1} = x_n - f(x_n) / f'(x_n)$, the x-intercept of the tangent line at $(x_n, f(x_n))$.
+**Point-slope form** — The standard equation: $y - f(c) = f'(c)(x - c)$, or equivalently $y = f(c) + f'(c)(x - c)$.
 
-**Initial guess** — the starting value $x_0$ from which the iteration begins. Its position relative to the root and to any critical points determines whether the method succeeds.
+**Linearization** — Another name for the tangent line equation written as a function: $L(x) = f(c) + f'(c)(x - c)$. It is the best linear approximation of $f$ near $c$.
 
-**Quadratic convergence** — near a simple root the error roughly squares at each step, so the number of correct digits roughly doubles per iteration.
+**Critical point** — A point where $f'(c) = 0$ (horizontal tangent) or where $f'$ is undefined. Candidates for local maxima and minima.
 
-**Critical point** — a point where $f'(x) = 0$. Starting near a critical point makes the tangent nearly horizontal and breaks Newton's method.`,
+This widget uses the cubic $f(x) = \\frac{1}{3}x^3 - x$, whose derivative is $f'(x) = x^2 - 1$. Horizontal tangents sit at $x = \\pm 1$.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj1: {
-      title: `Getting Started with the Visualizer`,
-      content: `The visualizer shows the cubic function $f(x) = x^3 - 2x - 5$ together with its single real root $\\alpha \\approx 2.0946$, marked by a small triangle below the x-axis.
+      title: `Getting Started`,
+      content: `The visualizer shows the cubic $f(x) = \\frac{1}{3}x^3 - x$ with a draggable point $c$ on the x-axis. $P = (c, f(c))$ lifts vertically from $c$ to the curve, and the tangent line through $P$ extends in both directions with slope $f'(c)$.
 
-The interface has two parts. The left panel holds the graph, three scenario buttons, the **Step** and **Reset** controls, and a row of numeric readouts. The right panel is a tabbed sidebar with three views: **Computation**, **Meaning**, and **Theory**.
+Drag $c$ left or right to move the point along the x-axis. The dashed drop line, the highlighted $P$, and the tangent line all update in real time, along with the live readouts below the canvas: $c$, $f(c)$, $f'(c)$, and the tangent slope.
 
-There are three ways to drive the tool:
+For a guided walkthrough, click one of the four scenario buttons at the bottom: Positive slope, Negative slope, Local max, or Local min. Each runs a six-step animation explaining what the tangent at that $c$ tells you about the curve.
 
-- **Pick a scenario** to animate a preset starting point through a sequence of Newton iterations.
-- **Drag $x_0$** along the x-axis to place your own starting guess.
-- **Click Step** to advance one Newton iteration at a time from your custom $x_0$.
-
-The four readouts under the graph — current iteration index $n$, current iterate $x_n$, function value $f(x_n)$, and the absolute error $|x_n - \\alpha|$ — update live as the animation progresses.`,
+The Reset button clears the active scenario and returns $c$ to its default position.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj2: {
-      title: `Choosing a Preset Scenario`,
-      content: `Three buttons sit below the graph, each pinned to a starting value and a label describing what happens next.
+      title: `Drag Mode vs Scenario Mode`,
+      content: `Two interaction styles share the same canvas.
 
-- **Direct hit** ($x_0 = 3$) — starts on the right side of the root in the smooth basin. Each tangent step pulls the guess sharply toward $\\alpha$ and the error collapses within a few iterations.
-- **Crosses over** ($x_0 = -1$) — starts on the wrong side of the curve. The first tangent crosses zero and the iterate lands in positive territory, after which the method converges normally.
-- **Stalls** ($x_0 = 0.85$) — starts very close to a critical point at $x = \\sqrt{2/3} \\approx 0.816$ where $f'$ is tiny. The tangent comes out nearly horizontal, the correction $f / f'$ blows up, and $x_1$ flies off the chart.
+**Free drag** — Grab the $c$ marker on the x-axis and slide it anywhere in the visible range. The tangent line pivots in real time as the slope $f'(c) = c^2 - 1$ changes. This is the fastest way to feel how the tangent rotates: drag through $c = -1$ or $c = 1$ and watch the tangent flatten exactly at the critical points where $f' = 0$.
 
-The third scenario is the failure mode worth studying carefully. Click **Reset** at any time to clear the current scenario and return $x_0$ to its default position for free dragging.`,
+**Scenario animation** — Click any of the four scenario buttons to lock $c$ to a specific value and play the six-step explanation. The full color theme of the visualizer changes to match: blue for positive slope, red for negative slope, amber for the local max, teal for the local min.
+
+Starting a scenario interrupts dragging. Once an animation completes, you can still drag $c$ — doing so clears the scenario tint and returns the visualizer to neutral.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj3: {
-      title: `Stepping Manually from a Custom Start`,
-      content: `To run Newton's method from your own starting point, click **Reset** first if a preset scenario is active.
+      title: `Running the Four Scenarios`,
+      content: `**Positive slope** sets $c = -1.7$, where $f'(-1.7) = 1.89 > 0$. The tangent line tilts upward to the right, matching the curve&apos;s ascending behavior on the left wing of the cubic.
 
-Then:
+**Negative slope** sets $c = 0.4$, where $f'(0.4) = -0.84 < 0$. The tangent line tilts downward to the right, matching the curve&apos;s descending behavior across the middle interval between the local max and local min.
 
-- **Drag the blue dot on the x-axis** to move $x_0$ wherever you want it. The drop line shows the corresponding point $(x_0, f(x_0))$ on the curve.
-- **Click Step** to play one full Newton iteration. The animation marks the current point, draws the tangent, slides down to the new x-intercept, and lifts back to the curve.
-- **Click Step again** to run the next iteration from the updated guess. Each click advances exactly one step, so the convergence (or divergence) unfolds at your own pace.
+**Local max** sets $c = -1$, where $f'(-1) = 0$. The tangent line is horizontal, parallel to the x-axis. Chevron arrows on the curve show the slope flipping from positive on the left to negative on the right — the signature of a local maximum.
 
-After every step the History table in the Computation tab grows by one row and the live readouts update. The Step button is only available when no preset scenario is running.`,
+**Local min** sets $c = 1$, where $f'(1) = 0$. The tangent line is horizontal. Chevron arrows show the slope flipping from negative on the left to positive on the right — the signature of a local minimum.
+
+Each scenario takes a few seconds across the six animation phases.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj4: {
-      title: `Reading the Animation`,
-      content: `Every Newton iteration is broken into five visible phases. A banner at the top of the graph names the current phase, so the geometry on screen lines up with the algebra in the side panel.
+      title: `Following the 6-Step Animation`,
+      content: `Each scenario plays the same six phases, labeled in a banner at the top of the canvas:
 
-- **Mark** — the current guess $P_n$ on the curve pulses briefly to draw attention.
-- **Tangent** — the blue tangent line at $P_n$ extends across the canvas.
-- **To axis** — a marker slides along the tangent down to where it meets the x-axis, locating the next iterate $x_{n+1}$.
-- **To curve** — a dashed line lifts from $x_{n+1}$ up to the curve, locating $P_{n+1}$.
-- **Settle** — a brief pause before the next iteration begins.
+Step 1 — Identify the region near $c$. A shaded band highlights the interval the analysis covers.
 
-Past iterations fade so the latest step stays prominent. The triangle below the axis marks the true root $\\alpha$, giving you a visual target to compare each iterate against. If the animation halts with a red banner, the iteration has hit a failure mode and an arrow indicates where the off-chart iterate landed.`,
+Step 2 — Mark the point $c$ on the x-axis. The marker animates into position from wherever it was previously.
+
+Step 3 — Lift to the curve: $P = (c, f(c))$. A dashed drop line connects $c$ on the axis to $P$ on the curve.
+
+Step 4 — Evaluate the slope $f'(c)$. The Computation tab highlights the substitution $f'(c) = c^2 - 1$.
+
+Step 5 — Draw the tangent through $P$ with slope $f'(c)$. The tangent line extends outward from $P$, and a floating label shows the numerical slope value.
+
+Step 6 — Write the tangent equation: $y = f(c) + f'(c)(x - c)$. The Computation tab displays the equation with the numerical values substituted in.
+
+When the animation finishes, the right-side panel switches automatically to the Meaning tab.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj5: {
-      title: `Reading the Computation Tab`,
-      content: `The Computation tab is the numeric companion to the animation. It has three sections that update together with the geometry.
+      title: `Using the Computation Tab`,
+      content: `The Computation tab walks through the tangent line construction algebraically, with the active step highlighted in the scenario color.
 
-- **Iteration formula** — the Newton step $x_{n+1} = x_n - f(x_n) / f'(x_n)$, shown once as the algorithm's definition.
-- **Current step** — the live values for the running iteration: $f(x_n)$, $f'(x_n)$, the correction $f / f'$, and the resulting $x_{n+1}$. The two outputs are highlighted in blue.
-- **History** — a compact table with one row per iteration so far, showing $n$, $x_n$, $f(x_n)$, and $|x_n - \\alpha|$. The active row is highlighted; failed rows appear in red.
+**The point of tangency** — Shows the current values of $c$ and $f(c)$. These are the coordinates of $P$.
 
-The History table is where quadratic convergence becomes obvious: when the method succeeds, the error column drops by a factor that itself grows at every step.`,
+**Step 1 — Slope from the derivative** — Substitutes $c$ into $f'(x) = x^2 - 1$ to give the numerical slope $f'(c)$. The colored result is the slope of the tangent.
+
+**Step 2 — Point-slope form** — Plugs $c$, $f(c)$, and $f'(c)$ into the formula $y - f(c) = f'(c)(x - c)$. The expanded slope-intercept form $y = mx + b$ is shown directly below, with $b$ computed from $f(c) - f'(c) \\cdot c$.
+
+You can switch to Computation at any time during free drag — the displayed equation always reflects the current $c$, so it updates as you move the marker.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj6: {
-      title: `Reading the Meaning and Theory Tabs`,
-      content: `The **Meaning** tab opens automatically once an iteration sequence finishes. It shows a colored verdict card explaining what happened.
+      title: `Using the Meaning and Theory Tabs`,
+      content: `**Meaning** explains what the current tangent reveals about the curve, with a verdict card themed to the active scenario. Positive and negative slope cards describe the curve&apos;s direction at $c$; max and min cards highlight the horizontal tangent and the connection to Fermat&apos;s theorem. A "why" note adds context — for example, clarifying that a horizontal tangent alone is necessary but not sufficient for a maximum or minimum. The Meaning tab opens automatically when a scenario animation finishes.
 
-- **Converged** (blue) — the iteration reached the root. The card explains quadratic convergence and quotes the final error.
-- **Stalls** (red) — the iteration failed. The card identifies the value of $f'(x_0)$ as the culprit and shows where $x_1$ landed.
+**Theory** provides the formal background in five blocks: the definition of the tangent line and its point-slope equation, the derivative as the slope of the tangent, the tangent as the best linear approximation (linearization), horizontal tangents and critical points (including Fermat&apos;s theorem), and a worked breakdown of how the slope $f'(c) = c^2 - 1$ behaves across the specific cubic used in this widget.
 
-A second card underneath gives the underlying reason — for success, the asymptotic error formula; for failure, why a small derivative makes the correction blow up.
-
-The **Theory** tab is always available and holds five reference blocks: the definition, the geometric derivation of the Newton step from the tangent equation, the quadratic-convergence statement near a simple root, three common failure modes (flat tangent, cycles, divergence), and a summary of what each statement looks like for the specific cubic on screen.`,
+Switch tabs at any time without interrupting the canvas.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj7: {
-      title: `What is Newton's Method?`,
-      content: `**Newton's method**, also called the **Newton-Raphson method**, is an iterative algorithm for approximating a root of a differentiable function $f$. Starting from an initial guess $x_0$, each iteration replaces the current guess with the x-intercept of the tangent line at that point:
+      title: `What is a Tangent Line?`,
+      content: `A **tangent line** to a function $f$ at $x = c$ is the unique straight line that passes through $P = (c, f(c))$ and matches the curve&apos;s direction at $P$. "Matches the direction" is made precise by the slope: the tangent has slope equal to $f'(c)$, the derivative of $f$ evaluated at $c$.
 
-$$x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}$$
+The defining equation in point-slope form is:
 
-Geometrically, the step is the algebraic version of "follow the tangent at $(x_n, f(x_n))$ down to where it crosses the x-axis." When $f$ is smooth and the starting guess is close enough to a simple root, this sequence converges very rapidly to that root.
+$y - f(c) = f'(c)(x - c)$
 
-For broader coverage of iterative root finders, see the **root finding overview page**, and for the underlying geometry, see the **tangent line page**.`,
+Or equivalently:
+
+$y = f(c) + f'(c)(x - c)$
+
+This is the **best linear approximation** of $f$ near $c$. Any other line through $P$ would diverge from $f$ faster as $x$ moves away from $c$, because it would have the wrong slope. The tangent shares both the value and the first derivative of $f$ at $c$.
+
+For a deeper treatment with proofs and worked examples, see the **tangent line theory page**.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj8: {
-      title: `Why It Converges Quadratically`,
-      content: `Near a simple root $\\alpha$ — where $f(\\alpha) = 0$ and $f'(\\alpha) \\neq 0$ — let the error at step $n$ be $e_n = x_n - \\alpha$. A Taylor expansion of $f$ around $\\alpha$ gives:
+      title: `Derivative as Slope and the Point-Slope Form`,
+      content: `The derivative $f'(c)$ is **defined geometrically** as the slope of the tangent line at $c$. Algebraically, it is the limit of secant slopes:
 
-$$e_{n+1} \\approx \\frac{f''(\\alpha)}{2 f'(\\alpha)} \\, e_n^2$$
+$f'(c) = \\lim_{h \\to 0} \\frac{f(c+h) - f(c)}{h}$
 
-The new error is proportional to the square of the previous error. In practical terms, the number of correct digits roughly doubles at each iteration. Bisection, by contrast, halves the error per step, so its correct-digit count grows only linearly.
+Each secant is a chord of $f$ passing through $(c, f(c))$ and a nearby point $(c+h, f(c+h))$. As $h$ shrinks toward zero, those secants rotate toward a single limiting line — the tangent at $c$. Its slope is $f'(c)$.
 
-This explains the dramatic drop in the History table's error column when Newton succeeds, and why Newton's method is the workhorse for high-precision root finding. A handful of iterations from a good starting point routinely produces machine-precision accuracy.`,
+To **write the tangent equation**, you only need two pieces of information: a point on the line and its slope. The point is $(c, f(c))$, the slope is $f'(c)$, and point-slope form is the standard way to combine them:
+
+$y - f(c) = f'(c)(x - c)$
+
+The same line can also be written as the **linearization** $L(x) = f(c) + f'(c)(x - c)$ — a useful viewpoint for approximation and Taylor series.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj9: {
-      title: `When Newton's Method Fails`,
-      content: `Newton's method can break down in three common ways.
+      title: `Horizontal Tangents and Critical Points`,
+      content: `When $f'(c) = 0$, the tangent line at $c$ is **horizontal**. Such a point is called a **critical point** of $f$.
 
-- **Flat tangent** — if $f'(x_n)$ is small relative to $f(x_n)$, the correction $f / f'$ blows up and the next iterate lands far from the root. The Stalls scenario shows this directly: at $x_0 = 0.85$ the derivative $f'(x_0) \\approx 0.165$ is too small, and $x_1$ is sent off the chart.
-- **Cycles** — for certain functions and starting points the iteration becomes periodic. A classic example is $f(x) = x^3 - 2x + 2$ with $x_0 = 0$, which oscillates between $0$ and $1$ forever.
-- **Divergence** — for slowly growing functions like $\\arctan(x)$, starting too far from the root makes $|x_n|$ grow without bound rather than converge.
+Critical points are candidates for local maxima and local minima. **Fermat&apos;s theorem** guarantees the connection in the other direction: if $f$ has a local extremum at an interior point $c$ where $f'$ exists, then $f'(c) = 0$. So every smooth interior extremum has a horizontal tangent.
 
-Production root finders defend against these failures by bracketing the root with bisection until the iterate enters a known basin of attraction, by capping the step size, and by falling back to a slower but more reliable method when Newton misbehaves.`,
+The reverse is not automatic. A horizontal tangent alone only says that the curve is momentarily flat at $c$. It might be a local maximum, a local minimum, or an inflection point with a flat tangent. Examples:
+
+- $f(x) = -x^2$ has a horizontal tangent at $0$, and it is a local maximum
+- $f(x) = x^2$ has a horizontal tangent at $0$, and it is a local minimum
+- $f(x) = x^3$ has a horizontal tangent at $0$, but no extremum — $0$ is an inflection point with a flat tangent
+
+To classify a critical point, examine the sign change of $f'$ across $c$ or use the second derivative test. See the **critical points page** for the full procedure.`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj10: {
-      title: `Related Concepts and Tools`,
-      content: `**Related concepts:**
+      title: `Related Concepts`,
+      content: `**Derivative** — The fundamental operation: rate of change of $f$ at a point, defined as the limit of secant slopes.
 
-- **Tangent line** — the geometric object Newton's method follows at each step.
-- **Derivative** — required to compute the Newton step; the method breaks down where $f'$ vanishes.
-- **Quadratic convergence** — the rate at which Newton refines a simple root.
-- **Bisection method** — a slower but more robust root finder that always converges when given a sign-changing bracket.
-- **Secant method** — a derivative-free cousin of Newton's that replaces $f'(x_n)$ with a finite-difference estimate.
-- **Fixed-point iteration** — the abstract framework that contains Newton's method as a special case.
+**Average rate of change** — The slope of a secant line over an interval; the discrete cousin of $f'(c)$.
 
-**Related tools:**
+**Linearization** — The tangent line viewed as a function $L(x) = f(c) + f'(c)(x - c)$, used for approximation.
 
-- **Bisection method visualizer** — watch a bracket shrink to a root one halving at a time.
-- **Secant method visualizer** — see how a secant line approximates the tangent.
-- **Tangent line visualizer** — explore the tangent on its own as the point of tangency moves.`,
+**Critical points** — Where $f'(c) = 0$ or is undefined; the starting set for finding extrema.
+
+**First derivative test** — Sign analysis of $f'$ to classify critical points as maxima, minima, or neither.
+
+**Inflection points** — Points where the second derivative changes sign and the tangent crosses the curve.
+
+**Newton&apos;s method** — Numerical root-finding algorithm that iteratively follows tangent lines back to the x-axis.
+
+**Taylor series** — Higher-order generalization of linearization, using all derivatives at $c$.`,
       before: ``,
       after: ``,
       link: '',
     },
 
-    obj11: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-      link: '',
-    },
-    obj12: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-      link: '',
-    },
-    obj13: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-      link: '',
-    },
-    obj14: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-      link: '',
-    },
-    obj15: {
-      title: ``,
-      content: ``,
-      before: ``,
-      after: ``,
-      link: '',
-    }
+    // obj11–obj15 left for future expansion
+    // obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    // obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    // obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    // obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    // obj15: { title: ``, content: ``, before: ``, after: ``, link: '' },
 
+  }
+
+
+  const introContent = {
+    id: "intro",
+    title: "",
+    content: ``
   }
 
 
   const faqQuestions = {
     obj1: {
-      question: "What is Newton's method?",
-      answer: "Newton's method, also called Newton-Raphson, is an iterative algorithm for approximating a root of a differentiable function f. Starting from an initial guess x_0, each iteration replaces the current value with the x-intercept of the tangent line to f at that point. The update rule is x_(n+1) = x_n - f(x_n) / f'(x_n)."
+      question: "What is a tangent line?",
+      answer: "A tangent line to a function f at the point where x equals c is the unique line that passes through the point P with coordinates (c, f(c)) and has slope f-prime of c. It touches the curve at P and matches the curve's direction there, giving the best straight-line approximation of f near c."
     },
     obj2: {
-      question: "How does Newton's method work geometrically?",
-      answer: "At the current guess x_n, draw the tangent line to the curve y = f(x). Where that tangent crosses the x-axis is the next guess x_(n+1). Repeating this process slides the iterates along tangent intercepts toward a point where the function value is zero, which is a root of f."
+      question: "How do you find the equation of a tangent line?",
+      answer: "Compute f(c) for the y-coordinate of the point of tangency. Then compute the derivative f-prime of c for the slope. Plug both into point-slope form: y minus f(c) equals f-prime of c times the quantity x minus c. Rearrange to slope-intercept form if needed."
     },
     obj3: {
-      question: "How fast does Newton's method converge?",
-      answer: "Near a simple root, Newton's method converges quadratically. The error at the next step is roughly proportional to the square of the current error. In practical terms, the number of correct digits roughly doubles per iteration once the iterates are close enough to the root."
+      question: "What is the slope of the tangent line at a point?",
+      answer: "The slope of the tangent line at x equals c is exactly f-prime of c, the derivative of f evaluated at c. This is the geometric meaning of the derivative: the rate of change of f at the single point c, equal to the slope of the line that best fits the curve there."
     },
     obj4: {
-      question: "When does Newton's method fail?",
-      answer: "Newton's method can fail in three ways. First, if f'(x_n) is small, the correction f / f' becomes very large and the next iterate lands far from the root. Second, certain starting points produce periodic cycles rather than convergence. Third, for slowly growing functions like arctan, the iterates can diverge instead of converging."
+      question: "What does a horizontal tangent line mean?",
+      answer: "A horizontal tangent line means the slope is zero, which means f-prime of c equals zero. The point c is then called a critical point. It is a candidate for a local maximum, a local minimum, or an inflection point with a flat tangent. The first or second derivative test classifies which one."
     },
     obj5: {
-      question: "How is Newton's method different from bisection?",
-      answer: "Bisection requires only a sign change on an interval and halves that interval at every step, giving linear convergence. Newton's method requires a differentiable function and a good starting guess, but converges quadratically when it works. Bisection is robust but slow; Newton is fast but can fail or diverge."
+      question: "How is the tangent line related to the derivative?",
+      answer: "The derivative f-prime of c is defined as the limit of the slopes of secant lines as the second point slides into c. Geometrically, the secant lines rotate toward a single limiting line — that line is the tangent, and its slope is f-prime of c. So the derivative literally is the slope of the tangent."
     }
   }
 
@@ -758,9 +753,9 @@ Production root finders defend against these failures by bracketing the root wit
     webApplication: {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Newton's Method Visualizer",
-      "description": "Step through Newton's method on f(x) = x^3 - 2x - 5. Drag x0, run scenarios for fast convergence, crossover, or a stalling failure near a critical point.",
-      "url": "https://www.learnmathclass.com/calculus/visual-tools/newtons-method",
+      "name": "Tangent Line Visualizer at a Point",
+      "description": "Drag c on f(x) = (1/3)x^3 - x to see the tangent line and equation y = f(c) + f'(c)(x - c). Positive, negative, max, and min slopes animate step by step.",
+      "url": "https://www.learnmathclass.com/calculus/visual-tools/tangent-line",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -769,13 +764,13 @@ Production root finders defend against these failures by bracketing the root wit
         "priceCurrency": "USD"
       },
       "featureList": [
-        "Drag the initial guess x_0 along the x-axis to set any starting point for Newton's method",
-        "Step button advances exactly one Newton iteration so the user controls the pace",
-        "Three preset scenarios: a direct hit, a slow crossover, and a stalling failure caused by a near-horizontal tangent",
-        "Five-phase animation per iteration: mark the current guess, draw the tangent, slide to the x-axis, lift back to the curve, settle",
-        "Computation tab shows the live values of f, f-prime, the correction, and the next iterate, plus a growing history table with the error column",
-        "Meaning tab gives a verdict card explaining quadratic convergence on success or diagnosing the failure mode on failure",
-        "Theory tab presents the definition, the geometric derivation, quadratic convergence, common failure modes, and the specific cubic on screen"
+        "Draggable point c on the x-axis with live readouts of c, f(c), f-prime(c), and the tangent slope",
+        "Four animated scenarios — Positive slope, Negative slope, Local max, and Local min — each running a six-step sequence from region selection to the tangent equation",
+        "Color-coded tangent line and floating slope label that update in real time as c moves",
+        "Computation panel showing the step-by-step derivation of the tangent equation, from f-prime(c) = c^2 - 1 through point-slope form to slope-intercept form",
+        "Meaning panel with scenario-specific verdict cards, color-themed for positive (blue), negative (red), max (amber), and min (teal) slopes",
+        "Theory panel covering the formal definition, the derivative as slope, linearization, and Fermat's theorem on horizontal tangents at critical points",
+        "Direction-arrow overlay on max and min scenarios showing the slope sign change across the local extremum"
       ],
       "author": {
         "@type": "Organization",
@@ -815,8 +810,8 @@ Production root finders defend against these failures by bracketing the root wit
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Newton's Method",
-          "item": "https://www.learnmathclass.com/calculus/visual-tools/newtons-method"
+          "name": "Tangent Line",
+          "item": "https://www.learnmathclass.com/calculus/visual-tools/tangent-line"
         }
       ]
     },
@@ -839,15 +834,16 @@ Production root finders defend against these failures by bracketing the root wit
    return {
       props:{
          sectionsContent,
+         introContent,
          faqQuestions,
          schemas,
          seoData: {
-           title: "Newton's Method Visualizer | Learn Math Class",
-           description: "Step through Newton's method on f(x) = x^3 - 2x - 5. Drag x0, run scenarios for fast convergence, crossover, or a stalling failure near a critical point.",
+           title: "Tangent Line Visualizer & Equation | Learn Math Class",
+           description: "Drag c on f(x) = (1/3)x^3 - x to see the tangent line and equation y = f(c) + f'(c)(x - c). Positive, negative, max, and min slopes animate step by step.",
            keywords: keyWords.join(", "),
-           url: "/calculus/visual-tools/newtons-method",
-           name: `Newtons Method Visualizer`,
-           hubDescription: "Drag a starting guess x₀ along the x-axis for f(x) = x³ − 2x − 5 and watch each Newton step draw its tangent, drop to the x-axis, and lift back to the curve. Three preset scenarios show a direct hit, a slow crossover, and a stalling failure when x₀ lands near a critical point where the tangent goes nearly horizontal.",
+           url: "/calculus/visual-tools/tangent-line",
+           name: "Tangent Line Visualizer at a Point",
+           hubDescription: "Drag point c along the cubic f(x) = (1/3)x^3 - x to see the tangent line drawn through P = (c, f(c)) with slope f'(c). Four pre-built scenarios animate the six analysis steps for positive slopes, negative slopes, local maxima, and local minima, then write the tangent in point-slope form.",
            category: "Calculus",
            subCategory: "Derivatives"
          }
@@ -855,7 +851,7 @@ Production root finders defend against these failures by bracketing the root wit
     }
    }
 
-export default function NewtonsMethodVisualizer({seoData, sectionsContent, faqQuestions, schemas}) {
+export default function TangentLineVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
 
     
   const genericSections=[
@@ -947,6 +943,7 @@ export default function NewtonsMethodVisualizer({seoData, sectionsContent, faqQu
           sectionsContent.obj10.content,
         ]
     },
+    // obj11–obj15 slots reserved for future expansion
     // {
     //     id:'11',
     //     title:sectionsContent.obj11.title,
@@ -1048,17 +1045,16 @@ export default function NewtonsMethodVisualizer({seoData, sectionsContent, faqQu
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Newton&apos;s Method</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Tangent Line</h1>
    <br/>
-   <div style={{transform:'scale(0.9)',width:'80%',margin:'auto'}}>
-   <FunctionNewtonMethod/>
+  <div style={{transform:'scale(0.9)',width:'80%',margin:'auto'}}>
+   <FunctionTangentLine/>
    </div>
    <br/>
    <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
          secondaryNavMode="siblings"
          secondaryNavTitle="More in this Section"
-   
    />
    <br/>
    <br/>
