@@ -1,72 +1,203 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-
-
-// export async function getStaticProps(){
-// const keyWords = [
-//   'matrix rank',
-//   'rank of a matrix',
-//   'how to find matrix rank',
-//   'column rank row rank',
-//   'rank nullity theorem',
-//   'full rank matrix',
-//   'rank deficient matrix',
-//   'rank and linear systems',
-//   'rank row reduction',
-//   'matrix rank properties',
-//   'four fundamental subspaces',
-//   'rank and invertibility',
-//   'Sylvester rank inequality',
-//   'rank special matrices',
-//   'column space dimension'
-// ]
-//   // •
-
-// //   \u2022 First item
-// // \u2022 Second item
-
-  
-// // <hr style="border-width:1px;"></hr>
-
-// // <hr style="color:blue;" />
-
-// // <hr style="border-color:#3498db; border-width:1px;" />
 
 
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+// tables-optimized: v4 | 2026-05-20 | 4 tables (obj5 comparison, obj8 aggregation, obj9 aggregation, obj10 summary capstone)
 
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+export async function getStaticProps(){
+const keyWords = [
+  'matrix rank',
+  'rank of a matrix',
+  'how to find matrix rank',
+  'column rank row rank',
+  'rank nullity theorem',
+  'full rank matrix',
+  'rank deficient matrix',
+  'rank and linear systems',
+  'rank row reduction',
+  'matrix rank properties',
+  'four fundamental subspaces',
+  'rank and invertibility',
+  'Sylvester rank inequality',
+  'rank special matrices',
+  'column space dimension'
+]
 
+  const linkStyle = 'color: inherit; text-decoration: underline;'
+
+  // ---------- TABLES ----------
+
+  // obj5 — comparison/decision: three outcomes of Ax = b
+  const obj5Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Outcome</th>
+      <th style="${tableHeaders.comparison}">Rank condition</th>
+      <th style="${tableHeaders.comparison}">Number of solutions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inconsistent</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A) &lt; rank([A | b])</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0 (no solution)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Unique solution</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A) = rank([A | b]) = n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exactly 1</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Infinite solutions</td>
+      <td style="padding: 12px 15px; color: #34495e;">rank(A) = rank([A | b]) &lt; n; &nbsp;n − rank(A) free variables</td>
+      <td style="padding: 12px 15px; color: #34495e;">∞ (parametrized family)</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj8 — aggregation: rank of special matrices
+  const obj8Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Matrix</th>
+      <th style="${tableHeaders.aggregation}">Structure</th>
+      <th style="${tableHeaders.aggregation}">Rank</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Identity Iₙ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">columns are the standard basis of ℝⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n (full rank)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/matrix/types" style="${linkStyle}">Diagonal</a> diag(d₁,…,dₙ)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nonzero entries only on the main diagonal</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of nonzero diagonal entries</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rank-1 outer product</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A = uvᵀ with u, v nonzero</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Symmetric positive definite</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">xᵀAx &gt; 0 for every nonzero x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n (full rank)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Nilpotent (n &gt; 1)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Aᵏ = O for some k ≥ 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">strictly less than n</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Gram matrix AᵀA</td>
+      <td style="padding: 12px 15px; color: #34495e;">A is any m × n matrix</td>
+      <td style="padding: 12px 15px; color: #34495e;">rank(A)</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj9 — aggregation: four fundamental subspaces
+  const obj9Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Subspace</th>
+      <th style="${tableHeaders.aggregation}">Lives in</th>
+      <th style="${tableHeaders.aggregation}">Description</th>
+      <th style="${tableHeaders.aggregation}">Dimension</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Column space of A</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝᵐ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">span of the columns of A</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Row space of A</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">span of the rows of A</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Null space of A</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{x : Ax = 0}; <a href="/linear-algebra/orthogonality" style="${linkStyle}">orthogonal</a> complement of the row space</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n − rank(A)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Left null space of A</td>
+      <td style="padding: 12px 15px; color: #34495e;">ℝᵐ</td>
+      <td style="padding: 12px 15px; color: #34495e;">{y : Aᵀy = 0}; orthogonal complement of the column space</td>
+      <td style="padding: 12px 15px; color: #34495e;">m − rank(A)</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // obj10 — summary capstone: what rank governs
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Aspect of A</th>
+      <th style="${tableHeaders.summary}">What rank(A) = r determines</th>
+      <th style="${tableHeaders.summary}">Reference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Effective dimensionality</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r truly independent rows (= r independent columns); min(m, n) − r redundant directions</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">column rank = row rank</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Column &amp; row space dimension</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">dim(col(A)) = dim(row(A)) = r</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">four fundamental subspaces</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Null space dimension</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nullity(A) = n − r</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank-nullity theorem</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Solvability of Ax = b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">consistent iff rank(A) = rank([A | b]); unique iff r = n; infinite iff r &lt; n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">three outcomes</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/matrix/inverse" style="${linkStyle}">Invertibility</a> (square A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A invertible iff r = n; equivalently <a href="/linear-algebra/determinants" style="${linkStyle}">det</a>(A) ≠ 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">full rank condition</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/transformations" style="${linkStyle}">Linear transformation</a> T(x) = Ax</td>
+      <td style="padding: 12px 15px; color: #34495e;">dim(image(T)) = r; dim(kernel(T)) = n − r</td>
+      <td style="padding: 12px 15px; color: #34495e;">dimension theorem</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+  // ---------- SECTIONS (original prose preserved verbatim) ----------
 
 // const sectionsContent = {
 //   obj1: {
@@ -228,677 +359,25 @@
 //     after: ``,
 //     link: ``,
 //   },
-// }
-
-// const introContent = {
-//     id: "intro",
-//   title: `Measuring the Effective Size of a Matrix`,
-//   content: `A matrix may have many rows and columns, but some of them may carry redundant information — expressible as combinations of others. The rank strips away this redundancy and counts the number of truly independent directions the matrix uses, revealing its effective dimensionality and governing the solvability of every linear system it defines.`,
-// }
-
-
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is the rank of a matrix?",
-//     answer: "The rank of a matrix is the number of linearly independent rows, which always equals the number of linearly independent columns. It measures the effective dimensionality of the matrix and satisfies 0 ≤ rank(A) ≤ min(m, n) for an m × n matrix. A matrix with rank equal to min(m, n) is said to have full rank.",
-//     sectionId: "1"
+//   obj10: {
+//     title: `What Rank Governs`,
+//     content: `The rank shows up in nearly every structural fact about a matrix — solvability of systems, invertibility, the dimensions of the four fundamental subspaces, the image of the associated linear transformation. The table below collects these roles in one place: each row pairs an aspect of the matrix with what the single integer $r = \\text{rank}(A)$ pins down.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
 //   },
-//   obj2: {
-//     question: "How do you find the rank of a matrix?",
-//     answer: "Reduce the matrix to row echelon form using elementary row operations and count the number of pivot positions. Each pivot corresponds to one independent row and one independent column. The number of pivots is the rank.",
-//     sectionId: "3"
-//   },
-//   obj3: {
-//     question: "What is the rank-nullity theorem?",
-//     answer: "For an m × n matrix A, the rank plus the nullity equals n, the number of columns. The rank counts the pivot columns (dimensions in the column space) and the nullity counts the free columns (dimensions in the null space). Every column contributes to exactly one of these two counts.",
-//     sectionId: "6"
-//   },
-//   obj4: {
-//     question: "How does rank determine the solutions of a linear system?",
-//     answer: "A system Ax = b has a solution if and only if rank(A) equals rank([A|b]). When solutions exist, the system has a unique solution if rank(A) equals the number of unknowns, and infinitely many solutions if the rank is less. A linear system can never have exactly two or any other finite number greater than one.",
-//     sectionId: "5"
-//   },
-//   obj5: {
-//     question: "What are the four fundamental subspaces of a matrix?",
-//     answer: "Every m × n matrix defines four subspaces: the column space and left null space in Rᵐ, and the row space and null space in Rⁿ. The rank determines all four dimensions — the column space and row space both have dimension equal to the rank, while the null space has dimension n − rank and the left null space has dimension m − rank.",
-//     sectionId: "9"
-//   }
 // }
 
 
-// // const schemas = {
-// //   learningResource: {
-// //     "@context": "https://schema.org",
-// //     "@type": "LearningResource",
-// //     "name": seoData.name,
-// //     "description": seoData.description,
-// //     "url": "https://www.learnmathclass.com" + seoData.url,
-// //     "inLanguage": "en-US",
-// //     "learningResourceType": "Explanation",
-// //     "educationalLevel": "High School, College",
-// //     "educationalUse": "Learning",
-// //     "audience": {
-// //       "@type": "EducationalAudience",
-// //       "educationalRole": "student"
-// //     },
-// //     "about": {
-// //       "@type": "Thing",
-// //       "name": "Matrix Rank"
-// //     },
-// //     "teaches": [
-// //       "Definition of rank and the equality of column rank and row rank",
-// //       "Computing rank via row reduction and pivot counting",
-// //       "Full rank, rank deficiency, and their implications",
-// //       "The rank-nullity theorem and dimension counting",
-// //       "Rank conditions for solvability of linear systems",
-// //       "The four fundamental subspaces and their dimensions"
-// //     ],
-// //     "keywords": keyWords.join(", "),
-// //     "author": {
-// //       "@type": "Organization",
-// //       "name": "Learn Math Class"
-// //     },
-// //     "publisher": {
-// //       "@type": "Organization",
-// //       "name": "Learn Math Class"
-// //     },
-// //     "datePublished": "2024-01-15",
-// //     "dateModified": new Date().toISOString()
-// //   },
-
-// //   breadcrumb: {
-// //     "@context": "https://schema.org",
-// //     "@type": "BreadcrumbList",
-// //     "itemListElement": [
-// //       {
-// //         "@type": "ListItem",
-// //         "position": 1,
-// //         "name": "Home",
-// //         "item": "https://www.learnmathclass.com"
-// //       },
-// //       {
-// //         "@type": "ListItem",
-// //         "position": 2,
-// //         "name": "Linear Algebra",
-// //         "item": "https://www.learnmathclass.com/linear-algebra"
-// //       },
-// //       {
-// //         "@type": "ListItem",
-// //         "position": 3,
-// //         "name": "Matrices",
-// //         "item": "https://www.learnmathclass.com/linear-algebra/matrix"
-// //       },
-// //       {
-// //         "@type": "ListItem",
-// //         "position": 4,
-// //         "name": "Rank of a Matrix",
-// //         "item": "https://www.learnmathclass.com/linear-algebra/matrix/rank"
-// //       }
-// //     ]
-// //   },
-
-// //   faq: {
-// //     "@context": "https://schema.org",
-// //     "@type": "FAQPage",
-// //     "mainEntity": Object.keys(faqQuestions).map(key => ({
-// //       "@type": "Question",
-// //       "name": faqQuestions[key].question,
-// //       "acceptedAnswer": {
-// //         "@type": "Answer",
-// //         "text": faqQuestions[key].answer
-// //       }
-// //     }))
-// //   }
-// // }
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Rank of a Matrix",
-//     "description": "Learn matrix rank — how to compute it by row reduction, the rank-nullity theorem, rank conditions for linear systems, properties of rank, and the four fundamental subspaces.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/matrix/rank",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Matrix Rank"
-//     },
-//     "teaches": [
-//       "Definition of rank and the equality of column rank and row rank",
-//       "Computing rank via row reduction and pivot counting",
-//       "Full rank, rank deficiency, and their implications",
-//       "The rank-nullity theorem and dimension counting",
-//       "Rank conditions for solvability of linear systems",
-//       "The four fundamental subspaces and their dimensions"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Matrices",
-//         "item": "https://www.learnmathclass.com/linear-algebra/matrix"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Rank of a Matrix",
-//         "item": "https://www.learnmathclass.com/linear-algebra/matrix/rank"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-
-//    return {
-//   props: {
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Matrix Rank: Definition & Computation | Learn Math Class",
-//       description: "Learn matrix rank — how to compute it by row reduction, the rank-nullity theorem, rank conditions for linear systems, properties of rank, and the four fundamental subspaces.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/matrix/rank",
-//       name: "Rank of a Matrix"
-//     },
-//   }
-// }
-//    }
-
-// export default function MatrixRankPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {   
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Rank of a Matrix</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-// tables-optimized: v4 | 2026-05-20 | 4 tables (obj5 comparison, obj8 aggregation, obj9 aggregation, obj10 summary capstone)
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  'matrix rank',
-  'rank of a matrix',
-  'how to find matrix rank',
-  'column rank row rank',
-  'rank nullity theorem',
-  'full rank matrix',
-  'rank deficient matrix',
-  'rank and linear systems',
-  'rank row reduction',
-  'matrix rank properties',
-  'four fundamental subspaces',
-  'rank and invertibility',
-  'Sylvester rank inequality',
-  'rank special matrices',
-  'column space dimension'
-]
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-
-  // ---------- TABLES ----------
-
-  // obj5 — comparison/decision: three outcomes of Ax = b
-  const obj5Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Outcome</th>
-      <th style="${tableHeaders.comparison}">Rank condition</th>
-      <th style="${tableHeaders.comparison}">Number of solutions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inconsistent</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A) &lt; rank([A | b])</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0 (no solution)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Unique solution</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A) = rank([A | b]) = n</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exactly 1</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Infinite solutions</td>
-      <td style="padding: 12px 15px; color: #34495e;">rank(A) = rank([A | b]) &lt; n; &nbsp;n − rank(A) free variables</td>
-      <td style="padding: 12px 15px; color: #34495e;">∞ (parametrized family)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj8 — aggregation: rank of special matrices
-  const obj8Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Matrix</th>
-      <th style="${tableHeaders.aggregation}">Structure</th>
-      <th style="${tableHeaders.aggregation}">Rank</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Identity Iₙ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">columns are the standard basis of ℝⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n (full rank)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/matrix/types" style="${linkStyle}">Diagonal</a> diag(d₁,…,dₙ)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nonzero entries only on the main diagonal</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of nonzero diagonal entries</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rank-1 outer product</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A = uvᵀ with u, v nonzero</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Symmetric positive definite</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">xᵀAx &gt; 0 for every nonzero x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n (full rank)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Nilpotent (n &gt; 1)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Aᵏ = O for some k ≥ 1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">strictly less than n</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Gram matrix AᵀA</td>
-      <td style="padding: 12px 15px; color: #34495e;">A is any m × n matrix</td>
-      <td style="padding: 12px 15px; color: #34495e;">rank(A)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj9 — aggregation: four fundamental subspaces
-  const obj9Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Subspace</th>
-      <th style="${tableHeaders.aggregation}">Lives in</th>
-      <th style="${tableHeaders.aggregation}">Description</th>
-      <th style="${tableHeaders.aggregation}">Dimension</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Column space of A</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝᵐ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">span of the columns of A</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Row space of A</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">span of the rows of A</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Null space of A</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{x : Ax = 0}; <a href="/linear-algebra/orthogonality" style="${linkStyle}">orthogonal</a> complement of the row space</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n − rank(A)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Left null space of A</td>
-      <td style="padding: 12px 15px; color: #34495e;">ℝᵐ</td>
-      <td style="padding: 12px 15px; color: #34495e;">{y : Aᵀy = 0}; orthogonal complement of the column space</td>
-      <td style="padding: 12px 15px; color: #34495e;">m − rank(A)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj10 — summary capstone: what rank governs
-  const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Aspect of A</th>
-      <th style="${tableHeaders.summary}">What rank(A) = r determines</th>
-      <th style="${tableHeaders.summary}">Reference</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Effective dimensionality</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r truly independent rows (= r independent columns); min(m, n) − r redundant directions</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">column rank = row rank</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Column &amp; row space dimension</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">dim(col(A)) = dim(row(A)) = r</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">four fundamental subspaces</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Null space dimension</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nullity(A) = n − r</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank-nullity theorem</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Solvability of Ax = b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">consistent iff rank(A) = rank([A | b]); unique iff r = n; infinite iff r &lt; n</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">three outcomes</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/matrix/inverse" style="${linkStyle}">Invertibility</a> (square A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A invertible iff r = n; equivalently <a href="/linear-algebra/determinants" style="${linkStyle}">det</a>(A) ≠ 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">full rank condition</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/transformations" style="${linkStyle}">Linear transformation</a> T(x) = Ax</td>
-      <td style="padding: 12px 15px; color: #34495e;">dim(image(T)) = r; dim(kernel(T)) = n − r</td>
-      <td style="padding: 12px 15px; color: #34495e;">dimension theorem</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // ---------- SECTIONS (original prose preserved verbatim) ----------
+// formulas-injected: v1 | 2026-06-16 | 8 callouts (obj1 rank_bounds direct, obj7 rank_of_transpose inline-promote + rank_product_inequality direct + sylvester_rank_inequality direct + rank_sum_inequality inline-promote + rank_invariance_invertible inline-promote, obj8 gram_rank_identity prose-insert + rank_one_outer_product inline-promote)
 
 const sectionsContent = {
   obj1: {
     title: `What Rank Measures`,
     content: `The rank of an $m \\times n$ matrix $A$ is a single non-negative integer $r$ that captures how much of the matrix's potential dimensionality is actually used. It satisfies
 
-$$0 \\leq \\text{rank}(A) \\leq \\min(m, n)$$
+@academic[formula_callout:rank_bounds|Rank Bounds|$$0 \\leq \\text{rank}(A) \\leq \\min(m, n)$$]@
+@academic[formulas_link:/linear-algebra/formulas#rank_bounds]@
 
 When $\\text{rank}(A) = \\min(m, n)$, the matrix has full rank — every row and every column contributes something that no combination of the others can reproduce. When $\\text{rank}(A) < \\min(m, n)$, the matrix is rank-deficient, meaning at least one row or column is a [linear combination](!/linear-algebra/vectors/linear-combinations) of the others.
 
@@ -1004,21 +483,38 @@ The rank-nullity theorem is sometimes called the dimension theorem for linear ma
 
 The rank of the zero matrix is $0$, and this is the only matrix with rank zero. For any nonzero scalar $c$, $\\text{rank}(cA) = \\text{rank}(A)$ — scaling does not create or destroy independence.
 
-Transposition preserves rank: $\\text{rank}(A^T) = \\text{rank}(A)$. This is a restatement of the equality of row rank and column rank.
+Transposition preserves rank:
+
+@academic[formula_callout:rank_of_transpose|Rank of Transpose|$$\\text{rank}(A^T) = \\text{rank}(A)$$]@
+@academic[formulas_link:/linear-algebra/formulas#rank_of_transpose]@
+
+This is a restatement of the equality of row rank and column rank.
 
 The rank of a product can only decrease:
 
-$$\\text{rank}(AB) \\leq \\min(\\text{rank}(A), \\text{rank}(B))$$
+@academic[formula_callout:rank_product_inequality|Rank Product Inequality|$$\\text{rank}(AB) \\leq \\min(\\text{rank}(A), \\text{rank}(B))$$]@
+@academic[formulas_link:/linear-algebra/formulas#rank_product_inequality]@
 
 Multiplying by a matrix can collapse dimensions but cannot create new independent directions. There is also a lower bound due to Sylvester's inequality:
 
-$$\\text{rank}(A) + \\text{rank}(B) - n \\leq \\text{rank}(AB)$$
+@academic[formula_callout:sylvester_rank_inequality|Sylvester Rank Inequality|$$\\text{rank}(A) + \\text{rank}(B) - n \\leq \\text{rank}(AB)$$]@
+@academic[formulas_link:/linear-algebra/formulas#sylvester_rank_inequality]@
 
 for $A$ of size $m \\times n$ and $B$ of size $n \\times p$. This says the rank of the product cannot drop too far below the ranks of the factors.
 
-The rank of a sum satisfies $\\text{rank}(A + B) \\leq \\text{rank}(A) + \\text{rank}(B)$. Equality holds when the column spaces of $A$ and $B$ are disjoint (intersect only at $\\mathbf{0}$).
+The rank of a sum is bounded by the sum of the ranks:
 
-Multiplying by an invertible matrix preserves rank exactly: if $P$ and $Q$ are invertible, then $\\text{rank}(PAQ) = \\text{rank}(A)$. This is because invertible matrices neither collapse nor create dimensions.`,
+@academic[formula_callout:rank_sum_inequality|Rank Sum Inequality|$$\\text{rank}(A + B) \\leq \\text{rank}(A) + \\text{rank}(B)$$]@
+@academic[formulas_link:/linear-algebra/formulas#rank_sum_inequality]@
+
+Equality holds when the column spaces of $A$ and $B$ are disjoint (intersect only at $\\mathbf{0}$).
+
+Multiplying by an invertible matrix preserves rank exactly:
+
+@academic[formula_callout:rank_invariance_invertible|Rank Invariance Invertible|$$\\text{rank}(PAQ) = \\text{rank}(A)$$]@
+@academic[formulas_link:/linear-algebra/formulas#rank_invariance_invertible]@
+
+for invertible $P$ and $Q$. This is because invertible matrices neither collapse nor create dimensions.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1031,11 +527,21 @@ The identity matrix $I_n$ has rank $n$ — all columns are standard basis vector
 
 A [diagonal](!/linear-algebra/matrix/types) matrix has rank equal to the number of nonzero diagonal entries. The zero entries correspond to collapsed coordinate directions.
 
-A rank-$1$ matrix has the form $A = \\mathbf{u}\\mathbf{v}^T$, an outer product of two nonzero vectors. Every column of $A$ is a scalar multiple of $\\mathbf{u}$, so the column space is the one-dimensional line through $\\mathbf{u}$. Equivalently, every row is a scalar multiple of $\\mathbf{v}^T$. Rank-$1$ matrices are the building blocks of the outer product decomposition of matrix multiplication.
+A rank-$1$ matrix has the form of an outer product of two nonzero vectors:
+
+@academic[formula_callout:rank_one_outer_product|Rank-One Outer Product|$$A = \\mathbf{u}\\mathbf{v}^T, \\quad \\text{rank}(A) = 1$$]@
+@academic[formulas_link:/linear-algebra/formulas#rank_one_outer_product]@
+
+Every column of $A$ is a scalar multiple of $\\mathbf{u}$, so the column space is the one-dimensional line through $\\mathbf{u}$. Equivalently, every row is a scalar multiple of $\\mathbf{v}^T$. Rank-$1$ matrices are the building blocks of the outer product decomposition of matrix multiplication.
 
 A [symmetric](!/linear-algebra/matrix/types) positive definite matrix always has full rank — all its eigenvalues are strictly positive, so no dimension is collapsed. A [nilpotent](!/linear-algebra/matrix/types) matrix of order $n > 1$ always has rank strictly less than $n$, since its determinant is zero.
 
-The rank of $A^T A$ equals the rank of $A$. This follows from the fact that the null spaces of $A$ and $A^T A$ are identical: $A\\mathbf{x} = \\mathbf{0}$ implies $A^T A \\mathbf{x} = \\mathbf{0}$, and conversely $A^T A \\mathbf{x} = \\mathbf{0}$ implies $\\mathbf{x}^T A^T A \\mathbf{x} = \\|A\\mathbf{x}\\|^2 = 0$, so $A\\mathbf{x} = \\mathbf{0}$. By the rank-nullity theorem, equal nullities with the same $n$ give equal ranks.`,
+The rank of $A^T A$ equals the rank of $A$:
+
+@academic[formula_callout:gram_rank_identity|Gram Rank Identity|$$\\text{rank}(A^T A) = \\text{rank}(A)$$]@
+@academic[formulas_link:/linear-algebra/formulas#gram_rank_identity]@
+
+This follows from the fact that the null spaces of $A$ and $A^T A$ are identical: $A\\mathbf{x} = \\mathbf{0}$ implies $A^T A \\mathbf{x} = \\mathbf{0}$, and conversely $A^T A \\mathbf{x} = \\mathbf{0}$ implies $\\mathbf{x}^T A^T A \\mathbf{x} = \\|A\\mathbf{x}\\|^2 = 0$, so $A\\mathbf{x} = \\mathbf{0}$. By the rank-nullity theorem, equal nullities with the same $n$ give equal ranks.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1061,6 +567,7 @@ The four dimensions add up correctly on both sides: $\\text{rank}(A) + (n - \\te
     link: ``,
   },
 }
+
 
 const introContent = {
     id: "intro",

@@ -1,206 +1,155 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// tables-optimized: v4 | 2026-05-18 | 3 tables (obj2 aggregation, obj7 comparison, obj10 summary capstone)
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
+export async function getStaticProps(){
 
-//   const keyWords = [
-//   "homogeneous linear system",
-//   "Ax = 0",
-//   "trivial solution nontrivial",
-//   "null space solution set",
-//   "superposition principle",
-//   "homogeneous vs non-homogeneous",
-//   "nontrivial solutions rank",
-//   "null space basis",
-//   "parametric vector form homogeneous",
-//   "eigenvalue homogeneous system",
-//   "free variables nontrivial solutions",
-//   "more unknowns than equations",
-//   "nullity rank-nullity",
-//   "linear independence homogeneous"
-// ]
+  const keyWords = [
+  "homogeneous linear system",
+  "Ax = 0",
+  "trivial solution nontrivial",
+  "null space solution set",
+  "superposition principle",
+  "homogeneous vs non-homogeneous",
+  "nontrivial solutions rank",
+  "null space basis",
+  "parametric vector form homogeneous",
+  "eigenvalue homogeneous system",
+  "free variables nontrivial solutions",
+  "more unknowns than equations",
+  "nullity rank-nullity",
+  "linear independence homogeneous"
+]
 
-//   // •
+const linkStyle = 'color: inherit; text-decoration: underline;'
 
-// //   \u2022 First item
-// // \u2022 Second item
+// ---------- TABLES ----------
 
-  
-// // <hr style="border-width:1px;"></hr>
+// obj2 — aggregation: conditions for nontrivial solutions, by matrix shape
+const obj2Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Setting</th>
+      <th style="${tableHeaders.aggregation}">Condition for nontrivial solutions to A x = 0</th>
+      <th style="${tableHeaders.aggregation}">Equivalent statements</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">General m × n matrix</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A) &lt; n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nullity(A) &gt; 0; at least one free variable in the echelon form of A</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Square n × n matrix</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">det(A) = 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A is singular; A is not <a href="/linear-algebra/matrix/inverse" style="${linkStyle}">invertible</a>; columns are linearly dependent</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Wide matrix (n &gt; m)</td>
+      <td style="padding: 12px 15px; color: #34495e;">always — nontrivial solutions guaranteed</td>
+      <td style="padding: 12px 15px; color: #34495e;">rank(A) ≤ m &lt; n, so n − rank(A) ≥ n − m ≥ 1 free variables remain</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="color:blue;" />
+// obj7 — comparison: homogeneous vs non-homogeneous systems
+const obj7Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Aspect</th>
+      <th style="${tableHeaders.comparison}">Homogeneous: A x = 0</th>
+      <th style="${tableHeaders.comparison}">Non-homogeneous: A x = b, b ≠ 0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Always consistent?</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">yes — the trivial solution x = 0 always works</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no — depends on whether b ∈ Col(A)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Solution set</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Null(A) — a subspace passing through the origin</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x<sub>p</sub> + Null(A) — an affine flat shifted away from the origin</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Superposition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">closed: any linear combination of solutions is a solution</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">not closed: A(x<sub>1</sub> + x<sub>2</sub>) = 2b ≠ b</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">When uniquely solvable</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">always uniquely &quot;solvable&quot; — only the trivial solution when rank(A) = n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">when rank(A) = rank([A | b]) = n</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Number of solutions</td>
+      <td style="padding: 12px 15px; color: #34495e;">just the trivial one, or infinitely many (never zero, never finite &gt; 1)</td>
+      <td style="padding: 12px 15px; color: #34495e;">zero, one, or infinitely many</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-// //     const sectionsContent={
-
-// //     obj1:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-  
-// //     },
-// //     obj2:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-  
-// //     obj3:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj4:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj5:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj6:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj7:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj8:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj9:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj10:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj11:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj12:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj13:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-// //     obj14:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
+// obj10 — summary capstone: where homogeneous systems show up across linear algebra
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Where homogeneous systems appear</th>
+      <th style="${tableHeaders.summary}">The equation</th>
+      <th style="${tableHeaders.summary}">What its solutions represent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/vector-spaces/fundamental-spaces" style="${linkStyle}">Null space</a> of A</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A x = 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every vector in Null(A); basis vectors come from free variables</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/vector-spaces/linear-independence" style="${linkStyle}">Testing linear independence</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A c = 0, with A = [v<sub>1</sub> ⋯ v<sub>k</sub>]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">independent ⟺ only c = 0; nontrivial c gives an explicit dependence relation</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/eigen" style="${linkStyle}">Eigenvectors</a> for eigenvalue λ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(A − λI) x = 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">eigenvectors of A for λ; the eigenspace is Null(A − λI)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Kernel of a linear transformation</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">T(x) = 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">inputs mapped to zero; ker(T) measures how far T is from injective</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Free part of a <a href="/linear-algebra/linear-systems/solvability" style="${linkStyle}">non-homogeneous</a> system</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x<sub>h</sub> in x = x<sub>p</sub> + x<sub>h</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the freedom in A x = b; shape and dimension of its solution set</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Column dependence relations</td>
+      <td style="padding: 12px 15px; color: #34495e;">A c = 0 (nontrivial c)</td>
+      <td style="padding: 12px 15px; color: #34495e;">entries of c express one column of A as a combination of the others</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 
-// //     obj15:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     }
-  
-// //   }
 // const sectionsContent = {
 //   obj1: {
 //     title: `Definition`,
@@ -329,600 +278,17 @@
 //     after: ``,
 //     link: ``,
 //   },
-// }
-
-//  const introContent = {
-//   title: `Systems with Zero Right-Hand Side`,
-//   content: `A homogeneous system Ax = 0 always has the trivial solution x = 0. The real question is whether nontrivial solutions exist — and when they do, the solution set is a subspace of Rⁿ whose structure is governed entirely by the rank of the coefficient matrix.`,
-// }
-
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is a homogeneous linear system?",
-//     answer: "A homogeneous system has the form Ax = 0, where every equation has zero on the right-hand side. It is always consistent because x = 0 (the trivial solution) always works. The key question is whether nontrivial (nonzero) solutions exist.",
-//     sectionId: "1"
+//   obj10: {
+//     title: `Summary: Where Homogeneous Systems Appear`,
+//     content: `The homogeneous system A·x = 0 shows up far beyond its own statement: every test of linear independence, every eigenvector calculation, every analysis of a non-homogeneous solution set, and every kernel computation reduces to solving one. The table below collects each construction in which homogeneous systems play a role, alongside the specific equation involved and what its solutions represent in that context.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
 //   },
-//   obj2: {
-//     question: "When does a homogeneous system have nontrivial solutions?",
-//     answer: "Nontrivial solutions exist if and only if rank(A) < n (the number of unknowns). For square matrices, this is equivalent to det(A) = 0. If there are more unknowns than equations (n > m), nontrivial solutions are guaranteed because the rank cannot reach n.",
-//     sectionId: "2"
-//   },
-//   obj3: {
-//     question: "What is the superposition principle?",
-//     answer: "If x₁ and x₂ are solutions to Ax = 0, then any linear combination c₁x₁ + c₂x₂ is also a solution. This means the solution set is a subspace — the null space. Superposition holds only for homogeneous systems; for Ax = b with b ≠ 0, the sum of two solutions is generally not a solution.",
-//     sectionId: "6"
-//   },
-//   obj4: {
-//     question: "How are homogeneous and non-homogeneous systems related?",
-//     answer: "Every solution to Ax = b has the form x = xₚ + xₕ, where xₚ is one particular solution and xₕ is any solution to Ax = 0. The homogeneous system determines the shape and dimension of the solution set; the particular solution determines its position.",
-//     sectionId: "7"
-//   },
-//   obj5: {
-//     question: "How do homogeneous systems connect to eigenvalues?",
-//     answer: "The eigenvalue equation Ax = λx rewrites as (A − λI)x = 0, a homogeneous system. Eigenvectors are its nontrivial solutions. Eigenvalues are the values of λ for which det(A − λI) = 0, making the system have nontrivial solutions. The eigenspace is the null space of A − λI.",
-//     sectionId: "9"
-//   }
 // }
 
 
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Homogeneous Systems of Equations",
-//     "description": "Homogeneous linear systems Ax = 0: trivial and nontrivial solutions, null space as solution set, superposition principle, connection to non-homogeneous systems, independence, and eigenvalues.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/linear-systems/homogenous",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Homogeneous Linear Systems"
-//     },
-//     "teaches": [
-//       "Definition and always-consistent property",
-//       "Conditions for nontrivial solutions via rank",
-//       "Solution set equals the null space",
-//       "Finding null space basis by row reduction",
-//       "Parametric vector form of solutions",
-//       "Superposition principle for homogeneous systems",
-//       "Relationship to non-homogeneous systems via x = xₚ + xₕ",
-//       "Connection to linear independence testing",
-//       "Eigenvalue problems as homogeneous systems"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Linear Systems",
-//         "item": "https://www.learnmathclass.com/linear-algebra/linear-systems"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Homogeneous Systems",
-//         "item": "https://www.learnmathclass.com/linear-algebra/linear-systems/homogenous"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-// //    return {
-// //       props:{
-// //          sectionsContent,
-// //          introContent,
-// //           seoData: {
-// //         title: "Title | Learn Math Class",
-// //         description: "Metadescription",
-// //         keywords: keyWords.join(", "),
-// //         url: "/linear-algebra/linear-systems/homogenous",
-// //          name: "name"
-// //       },
-        
-// //        }
-// //     }
-
-// return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Homogeneous Systems: Ax = 0 & Null Space | Learn Math Class",
-//       description: "Homogeneous linear systems Ax = 0: trivial and nontrivial solutions, null space as solution set, superposition principle, connection to non-homogeneous systems, independence, and eigenvalues.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/linear-systems/homogenous",
-//       name: "Homogeneous Systems of Equations"
-//     },
-//   }
-// }
-//    }
-
-// // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
-// export default function HomogeneousSystemsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    {/* <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head> */}
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Homogeneous Systems of Equations</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-// tables-optimized: v4 | 2026-05-18 | 3 tables (obj2 aggregation, obj7 comparison, obj10 summary capstone)
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-
-  const keyWords = [
-  "homogeneous linear system",
-  "Ax = 0",
-  "trivial solution nontrivial",
-  "null space solution set",
-  "superposition principle",
-  "homogeneous vs non-homogeneous",
-  "nontrivial solutions rank",
-  "null space basis",
-  "parametric vector form homogeneous",
-  "eigenvalue homogeneous system",
-  "free variables nontrivial solutions",
-  "more unknowns than equations",
-  "nullity rank-nullity",
-  "linear independence homogeneous"
-]
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj2 — aggregation: conditions for nontrivial solutions, by matrix shape
-const obj2Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Setting</th>
-      <th style="${tableHeaders.aggregation}">Condition for nontrivial solutions to A x = 0</th>
-      <th style="${tableHeaders.aggregation}">Equivalent statements</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">General m × n matrix</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(A) &lt; n</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nullity(A) &gt; 0; at least one free variable in the echelon form of A</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Square n × n matrix</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">det(A) = 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A is singular; A is not <a href="/linear-algebra/matrix/inverse" style="${linkStyle}">invertible</a>; columns are linearly dependent</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Wide matrix (n &gt; m)</td>
-      <td style="padding: 12px 15px; color: #34495e;">always — nontrivial solutions guaranteed</td>
-      <td style="padding: 12px 15px; color: #34495e;">rank(A) ≤ m &lt; n, so n − rank(A) ≥ n − m ≥ 1 free variables remain</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj7 — comparison: homogeneous vs non-homogeneous systems
-const obj7Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Aspect</th>
-      <th style="${tableHeaders.comparison}">Homogeneous: A x = 0</th>
-      <th style="${tableHeaders.comparison}">Non-homogeneous: A x = b, b ≠ 0</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Always consistent?</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">yes — the trivial solution x = 0 always works</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no — depends on whether b ∈ Col(A)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Solution set</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Null(A) — a subspace passing through the origin</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x<sub>p</sub> + Null(A) — an affine flat shifted away from the origin</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Superposition</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">closed: any linear combination of solutions is a solution</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">not closed: A(x<sub>1</sub> + x<sub>2</sub>) = 2b ≠ b</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">When uniquely solvable</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">always uniquely &quot;solvable&quot; — only the trivial solution when rank(A) = n</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">when rank(A) = rank([A | b]) = n</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Number of solutions</td>
-      <td style="padding: 12px 15px; color: #34495e;">just the trivial one, or infinitely many (never zero, never finite &gt; 1)</td>
-      <td style="padding: 12px 15px; color: #34495e;">zero, one, or infinitely many</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj10 — summary capstone: where homogeneous systems show up across linear algebra
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Where homogeneous systems appear</th>
-      <th style="${tableHeaders.summary}">The equation</th>
-      <th style="${tableHeaders.summary}">What its solutions represent</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/vector-spaces/fundamental-spaces" style="${linkStyle}">Null space</a> of A</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A x = 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every vector in Null(A); basis vectors come from free variables</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/vector-spaces/linear-independence" style="${linkStyle}">Testing linear independence</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A c = 0, with A = [v<sub>1</sub> ⋯ v<sub>k</sub>]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">independent ⟺ only c = 0; nontrivial c gives an explicit dependence relation</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/eigen" style="${linkStyle}">Eigenvectors</a> for eigenvalue λ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(A − λI) x = 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">eigenvectors of A for λ; the eigenspace is Null(A − λI)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Kernel of a linear transformation</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">T(x) = 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">inputs mapped to zero; ker(T) measures how far T is from injective</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Free part of a <a href="/linear-algebra/linear-systems/solvability" style="${linkStyle}">non-homogeneous</a> system</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x<sub>h</sub> in x = x<sub>p</sub> + x<sub>h</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the freedom in A x = b; shape and dimension of its solution set</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Column dependence relations</td>
-      <td style="padding: 12px 15px; color: #34495e;">A c = 0 (nontrivial c)</td>
-      <td style="padding: 12px 15px; color: #34495e;">entries of c express one column of A as a combination of the others</td>
-    </tr>
-  </tbody>
-</table>
-`
-
+// formulas-injected: v1 | 2026-06-16 | 2 callouts (obj2 underdetermined_homogeneous_has_nontrivial prose-insert, obj3 homogeneous_solution_space_dimension inline-promote)
 
 const sectionsContent = {
   obj1: {
@@ -933,7 +299,7 @@ $$A\\mathbf{x} = \\mathbf{0}$$
 
 The augmented matrix is $[A \\mid \\mathbf{0}]$. Since the last column is all zeros, row operations on the augmented matrix never produce a contradictory row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$. A homogeneous system is always consistent.
 
-The vector $\\mathbf{x} = \\mathbf{0}$ satisfies every equation — this is the trivial solution. It always exists. The central question for a homogeneous system is never "does a solution exist?" but "does a nontrivial solution exist?"`,
+The vector $\\mathbf{x} = \\mathbf{0}$ satisfies every equation — this is the trivial solution. It always exists. The central question for a homogeneous system is never &quot;does a solution exist?&quot; but &quot;does a nontrivial solution exist?&quot;`,
     before: ``,
     after: ``,
     link: ``,
@@ -944,7 +310,12 @@ The vector $\\mathbf{x} = \\mathbf{0}$ satisfies every equation — this is the 
 
 For a square $n \\times n$ matrix, nontrivial solutions exist if and only if $\\det(A) = 0$. A nonzero [determinant](!/linear-algebra/determinants) means full rank, which means no free variables, which means only the trivial solution.
 
-One case is automatic: if the system has more unknowns than equations ($n > m$), nontrivial solutions always exist. The rank of an $m \\times n$ matrix cannot exceed $m$, and when $m < n$, the rank is strictly less than $n$. This guarantees at least $n - m$ free variables, producing an infinite family of nontrivial solutions. Fewer equations than unknowns always leaves room.`,
+One case is automatic: if the system has more unknowns than equations ($n > m$), nontrivial solutions always exist:
+
+@academic[formula_callout:underdetermined_homogeneous_has_nontrivial|Underdetermined Homogeneous Has Nontrivial|$$m < n \\Rightarrow A\\mathbf{x} = \\mathbf{0} \\text{ has nontrivial solutions}$$]@
+@academic[formulas_link:/linear-algebra/formulas#underdetermined_homogeneous_has_nontrivial]@
+
+The rank of an $m \\times n$ matrix cannot exceed $m$, and when $m < n$, the rank is strictly less than $n$. This guarantees at least $n - m$ free variables, producing an infinite family of nontrivial solutions. Fewer equations than unknowns always leaves room.`,
     before: ``,
     after: ``,
     link: ``,
@@ -957,7 +328,12 @@ $$\\text{Null}(A) = \\{\\mathbf{x} \\in \\mathbb{R}^n : A\\mathbf{x} = \\mathbf{
 
 The null space is a [subspace](!/linear-algebra/vector-spaces/subspaces) of $\\mathbb{R}^n$. It contains $\\mathbf{0}$, and it is closed under addition and scalar multiplication: if $A\\mathbf{u} = \\mathbf{0}$ and $A\\mathbf{v} = \\mathbf{0}$, then $A(\\mathbf{u} + \\mathbf{v}) = \\mathbf{0}$ and $A(c\\mathbf{u}) = \\mathbf{0}$.
 
-The [dimension](!/linear-algebra/vector-spaces/dimension) of the null space is the nullity: $\\text{nullity}(A) = n - \\text{rank}(A)$. When the nullity is $0$, the null space is $\\{\\mathbf{0}\\}$ and only the trivial solution exists. When the nullity is $k > 0$, the null space is a $k$-dimensional subspace, and the solution set contains infinitely many vectors forming a $k$-dimensional flat through the origin.`,
+The [dimension](!/linear-algebra/vector-spaces/dimension) of the null space is the nullity:
+
+@academic[formula_callout:homogeneous_solution_space_dimension|Homogeneous Solution Space Dimension|$$\\dim(\\text{Null}(A)) = n - \\text{rank}(A)$$]@
+@academic[formulas_link:/linear-algebra/formulas#homogeneous_solution_space_dimension]@
+
+When the nullity is $0$, the null space is $\\{\\mathbf{0}\\}$ and only the trivial solution exists. When the nullity is $k > 0$, the null space is a $k$-dimensional subspace, and the solution set contains infinitely many vectors forming a $k$-dimensional flat through the origin.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1060,6 +436,7 @@ This rewriting connects homogeneous systems directly to spectral theory. Every e
     link: ``,
   },
 }
+
 
  const introContent = {
   title: `Systems with Zero Right-Hand Side`,
