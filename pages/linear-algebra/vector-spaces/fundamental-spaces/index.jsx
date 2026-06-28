@@ -1,205 +1,204 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+// tables-optimized: v4 | 2026-05-22 | 3 tables (obj7 comparison, obj9 aggregation, obj10 summary capstone)
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "four fundamental subspaces",
-//   "column space",
-//   "row space",
-//   "null space",
-//   "left null space",
-//   "rank-nullity theorem",
-//   "orthogonal complements subspaces",
-//   "column space basis",
-//   "null space basis",
-//   "fundamental subspaces rank",
-//   "row space null space perpendicular",
-//   "dimension accounting matrix",
-//   "fundamental subspaces diagram",
-//   "matrix subspace structure"
-// ]
-//   // •
+export async function getStaticProps(){
+const keyWords = [
+  "four fundamental subspaces",
+  "column space",
+  "row space",
+  "null space",
+  "left null space",
+  "rank-nullity theorem",
+  "orthogonal complements subspaces",
+  "column space basis",
+  "null space basis",
+  "fundamental subspaces rank",
+  "row space null space perpendicular",
+  "dimension accounting matrix",
+  "fundamental subspaces diagram",
+  "matrix subspace structure"
+]
+  // •
 
-// //   \u2022 First item
-// // \u2022 Second item
+//   \u2022 First item
+// \u2022 Second item
 
   
-// // <hr style="border-width:1px;"></hr>
+// <hr style="border-width:1px;"></hr>
 
-// // <hr style="color:blue;" />
+// <hr style="color:blue;" />
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// <hr style="border-color:#3498db; border-width:1px;" />
 
 
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
  
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
+// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.notation)}
+        // </div>,
 
 
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
+//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+//     {processContent(sectionsContent.normal.parameters)}
+// </div>,
         
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
+//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+//                   {processContent(sectionsContent.obj4.content)}
+//                   </div>,
 
 
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-// //     const sectionsContent={
-
-// //     obj1:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-  
-// //     },
-// //     obj2:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-  
-// //     obj3:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj4:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj5:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj6:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj7:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj8:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj9:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj10:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj11:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj12:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj13:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-// //     obj14:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
+//  <div key={'dist'} style={{
+//                     textAlign: 'center',
+//                     transform: 'scale(0.98)',
+//                     transformOrigin: 'center',
+//                     marginTop:'50px',
+//                     marginLeft:'-150px'
+//                   }} dangerouslySetInnerHTML={{ 
+//                     __html:   sectionContent.distributions.svg,
+//                   }} />
 
 
-// //     obj15:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     }
-  
-// //   }
 
+const linkStyle = 'color: inherit; text-decoration: underline;'
+
+// ---------- TABLES ----------
+
+// obj7 — comparison: ambient-space accounting (dimension sum + orthogonality, merged)
+const obj7Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Ambient space</th>
+      <th style="${tableHeaders.comparison}">Complementary pair</th>
+      <th style="${tableHeaders.comparison}">Dimensions sum</th>
+      <th style="${tableHeaders.comparison}">Orthogonality</th>
+      <th style="${tableHeaders.comparison} text-align: center;">Running 3×4 example (r = 2)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">ℝⁿ (domain)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Row(A) &amp; Null(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r + (n − r) = n<br/><span style="font-size: 13px;">(rank-nullity theorem)</span></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Row(A) ⊥ Null(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2 + 2 = 4</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">ℝᵐ (codomain)</td>
+      <td style="padding: 12px 15px; color: #34495e;">Col(A) &amp; Null(Aᵀ)</td>
+      <td style="padding: 12px 15px; color: #34495e;">r + (m − r) = m<br/><span style="font-size: 13px;">(transpose analogue)</span></td>
+      <td style="padding: 12px 15px; color: #34495e;">Col(A) ⊥ Null(Aᵀ)</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">2 + 1 = 3</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// obj9 — aggregation: matrix types × four subspaces
+const obj9Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Matrix type</th>
+      <th style="${tableHeaders.aggregation}">Col(A)</th>
+      <th style="${tableHeaders.aggregation}">Row(A)</th>
+      <th style="${tableHeaders.aggregation}">Null(A)</th>
+      <th style="${tableHeaders.aggregation}">Null(Aᵀ)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Full-rank square, <a href="/linear-algebra/matrix/inverse" style="${linkStyle}">invertible</a> (r = n = m)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all of ℝⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all of ℝⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{<b>0</b>}</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{<b>0</b>}</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rank-1 m × n (r = 1)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a line in ℝᵐ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a line in ℝⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">hyperplane in ℝⁿ (dim n − 1)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">hyperplane in ℝᵐ (dim m − 1)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Symmetric <a href="/linear-algebra/orthogonality/projections" style="${linkStyle}">projection</a> (A² = A, A = Aᵀ)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a subspace S of ℝⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same as Col(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">orthogonal complement of S</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same as Null(A)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Zero matrix m × n (r = 0)</td>
+      <td style="padding: 12px 15px; color: #34495e;">{<b>0</b>} ⊂ ℝᵐ</td>
+      <td style="padding: 12px 15px; color: #34495e;">{<b>0</b>} ⊂ ℝⁿ</td>
+      <td style="padding: 12px 15px; color: #34495e;">all of ℝⁿ</td>
+      <td style="padding: 12px 15px; color: #34495e;">all of ℝᵐ</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// obj10 — summary capstone: the four-subspace structural reference card
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Subspace</th>
+      <th style="${tableHeaders.summary}">Lives in</th>
+      <th style="${tableHeaders.summary} text-align: center;">Dimension</th>
+      <th style="${tableHeaders.summary}">Definition</th>
+      <th style="${tableHeaders.summary}">How to find a basis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Column space Col(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝᵐ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">r</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/vector-spaces/span" style="${linkStyle}">span</a> of the columns; {A<b>x</b> : <b>x</b> ∈ ℝⁿ}</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">row-reduce A; take the pivot columns of the original A</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Row space Row(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">r</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">span of the rows; equivalently Col(Aᵀ)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">row-reduce A; take the nonzero rows of the echelon form</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Null space Null(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">n − r</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{<b>x</b> ∈ ℝⁿ : A<b>x</b> = <b>0</b>}</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reduce A to RREF; set each free variable to 1 in turn</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Left null space Null(Aᵀ)</td>
+      <td style="padding: 12px 15px; color: #34495e;">ℝᵐ</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">m − r</td>
+      <td style="padding: 12px 15px; color: #34495e;">{<b>y</b> ∈ ℝᵐ : Aᵀ<b>y</b> = <b>0</b>}, equivalently <b>y</b>ᵀA = <b>0</b>ᵀ</td>
+      <td style="padding: 12px 15px; color: #34495e;">row-reduce Aᵀ (or [Aᵀ | Iₘ])</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// ---------- SECTIONS ----------
 
 // const sectionsContent = {
 //   obj1: {
@@ -365,645 +364,16 @@
 //     after: ``,
 //     link: ``,
 //   },
-// }
-
-//   const introContent = {
-//   title: `The Complete Structural Portrait of a Matrix`,
-//   content: `Every matrix defines four subspaces — two in the domain and two in the codomain — whose dimensions and orthogonality relationships form a complete picture of the linear map. The rank governs all four dimensions, and the four subspaces together account for every vector in both spaces.`,
-// }
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What are the four fundamental subspaces of a matrix?",
-//     answer: "Every m×n matrix A defines four subspaces: the column space (dimension r, in Rᵐ), the row space (dimension r, in Rⁿ), the null space (dimension n−r, in Rⁿ), and the left null space (dimension m−r, in Rᵐ). The rank r controls all four dimensions.",
-//     sectionId: "1"
+//   obj10: {
+//     title: `Summary: The Four-Subspace Reference Card`,
+//     content: `The four subspaces are the structural fingerprint of a matrix — two living in the domain, two in the codomain, with all four dimensions controlled by the single rank $r$. Together with the dimension accounting and orthogonality structure above, this card describes everything about what the linear map $\\mathbf{x} \\mapsto A\\mathbf{x}$ does. The table below collects each subspace alongside its ambient space, its dimension in terms of $r$, $n$, and $m$, its defining set notation, and the row-reduction recipe for finding a basis.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
 //   },
-//   obj2: {
-//     question: "How do you find a basis for the column space?",
-//     answer: "Row reduce A and identify the pivot columns. The corresponding columns of the original matrix A (not the echelon form) form a basis for the column space. The number of pivot columns equals the rank.",
-//     sectionId: "2"
-//   },
-//   obj3: {
-//     question: "How do you find a basis for the null space?",
-//     answer: "Reduce A to RREF and identify the free variables. Set each free variable to 1 (others to 0) and solve for the pivot variables. Each free variable produces one basis vector for the null space. The null space dimension is n minus the rank.",
-//     sectionId: "4"
-//   },
-//   obj4: {
-//     question: "How are the four subspaces related by orthogonality?",
-//     answer: "The row space and null space are orthogonal complements in Rⁿ — every null space vector is perpendicular to every row. The column space and left null space are orthogonal complements in Rᵐ. Every vector in either ambient space decomposes uniquely into components from each complementary pair.",
-//     sectionId: "7"
-//   },
-//   obj5: {
-//     question: "What is the big picture of the four fundamental subspaces?",
-//     answer: "The matrix maps the row space bijectively onto the column space (the useful part) and sends the entire null space to zero (the destroyed part). On the codomain side, the column space is reachable and the left null space is unreachable. This decomposition completely describes the geometry of any linear map.",
-//     sectionId: "8"
-//   }
 // }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Four Fundamental Subspaces",
-//     "description": "The four fundamental subspaces of a matrix: column space, row space, null space, left null space. Dimension accounting, orthogonal complement pairs, bases, and the complete structural portrait.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-subspaces",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Four Fundamental Subspaces"
-//     },
-//     "teaches": [
-//       "Column space as the set of reachable outputs",
-//       "Row space and its preservation under row reduction",
-//       "Null space and the failure of injectivity",
-//       "Left null space and the failure of surjectivity",
-//       "Dimension accounting: rank controls all four",
-//       "Orthogonal complement pairing",
-//       "Row space maps bijectively onto column space",
-//       "Examples across invertible, rank-1, and projection matrices"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Vector Spaces",
-//         "item": "https://www.learnmathclass.com/linear-algebra/vector-spaces"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Fundamental Subspaces",
-//         "item": "https://www.learnmathclass.com/linear-algebra/vector-spaces/fundamental-subspaces"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-// //    return {
-// //       props:{
-// //          sectionsContent,
-// //          introContent,
-// //           seoData: {
-// //         title: "Title | Learn Math Class",
-// //         description: "Metadescription",
-// //         keywords: keyWords.join(", "),
-// //         url: "/linear-algebra/vector-spaces/fundamental-subspaces",
-// //          name: "name"
-// //       },
-        
-// //        }
-// //     }
-
-// return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Four Fundamental Subspaces of a Matrix | Learn Math Class",
-//       description: "The four fundamental subspaces of a matrix: column space, row space, null space, left null space. Dimension accounting, orthogonal complement pairs, bases, and the complete structural portrait.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/vector-spaces/fundamental-subspaces",
-//       name: "Four Fundamental Subspaces"
-//     },
-//   }
-// }
-//    }
-
-// // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-// export default function FundamentalSubspacesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    {/* <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head> */}
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Fundamental Subspaces</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj7 comparison, obj9 aggregation, obj10 summary capstone)
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "four fundamental subspaces",
-  "column space",
-  "row space",
-  "null space",
-  "left null space",
-  "rank-nullity theorem",
-  "orthogonal complements subspaces",
-  "column space basis",
-  "null space basis",
-  "fundamental subspaces rank",
-  "row space null space perpendicular",
-  "dimension accounting matrix",
-  "fundamental subspaces diagram",
-  "matrix subspace structure"
-]
-  // •
-
-//   \u2022 First item
-// \u2022 Second item
-
-  
-// <hr style="border-width:1px;"></hr>
-
-// <hr style="color:blue;" />
-
-// <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-        //     {processContent(sectionsContent.normal.notation)}
-        // </div>,
-
-
-//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-//     {processContent(sectionsContent.normal.parameters)}
-// </div>,
-        
-//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-//                   {processContent(sectionsContent.obj4.content)}
-//                   </div>,
-
-
-//  <div key={'dist'} style={{
-//                     textAlign: 'center',
-//                     transform: 'scale(0.98)',
-//                     transformOrigin: 'center',
-//                     marginTop:'50px',
-//                     marginLeft:'-150px'
-//                   }} dangerouslySetInnerHTML={{ 
-//                     __html:   sectionContent.distributions.svg,
-//                   }} />
-
-
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj7 — comparison: ambient-space accounting (dimension sum + orthogonality, merged)
-const obj7Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Ambient space</th>
-      <th style="${tableHeaders.comparison}">Complementary pair</th>
-      <th style="${tableHeaders.comparison}">Dimensions sum</th>
-      <th style="${tableHeaders.comparison}">Orthogonality</th>
-      <th style="${tableHeaders.comparison} text-align: center;">Running 3×4 example (r = 2)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">ℝⁿ (domain)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Row(A) &amp; Null(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r + (n − r) = n<br/><span style="font-size: 13px;">(rank-nullity theorem)</span></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Row(A) ⊥ Null(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2 + 2 = 4</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">ℝᵐ (codomain)</td>
-      <td style="padding: 12px 15px; color: #34495e;">Col(A) &amp; Null(Aᵀ)</td>
-      <td style="padding: 12px 15px; color: #34495e;">r + (m − r) = m<br/><span style="font-size: 13px;">(transpose analogue)</span></td>
-      <td style="padding: 12px 15px; color: #34495e;">Col(A) ⊥ Null(Aᵀ)</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">2 + 1 = 3</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj9 — aggregation: matrix types × four subspaces
-const obj9Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Matrix type</th>
-      <th style="${tableHeaders.aggregation}">Col(A)</th>
-      <th style="${tableHeaders.aggregation}">Row(A)</th>
-      <th style="${tableHeaders.aggregation}">Null(A)</th>
-      <th style="${tableHeaders.aggregation}">Null(Aᵀ)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Full-rank square, <a href="/linear-algebra/matrix/inverse" style="${linkStyle}">invertible</a> (r = n = m)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all of ℝⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all of ℝⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{<b>0</b>}</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{<b>0</b>}</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rank-1 m × n (r = 1)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a line in ℝᵐ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a line in ℝⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">hyperplane in ℝⁿ (dim n − 1)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">hyperplane in ℝᵐ (dim m − 1)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Symmetric <a href="/linear-algebra/orthogonality/projections" style="${linkStyle}">projection</a> (A² = A, A = Aᵀ)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a subspace S of ℝⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same as Col(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">orthogonal complement of S</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same as Null(A)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Zero matrix m × n (r = 0)</td>
-      <td style="padding: 12px 15px; color: #34495e;">{<b>0</b>} ⊂ ℝᵐ</td>
-      <td style="padding: 12px 15px; color: #34495e;">{<b>0</b>} ⊂ ℝⁿ</td>
-      <td style="padding: 12px 15px; color: #34495e;">all of ℝⁿ</td>
-      <td style="padding: 12px 15px; color: #34495e;">all of ℝᵐ</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj10 — summary capstone: the four-subspace structural reference card
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Subspace</th>
-      <th style="${tableHeaders.summary}">Lives in</th>
-      <th style="${tableHeaders.summary} text-align: center;">Dimension</th>
-      <th style="${tableHeaders.summary}">Definition</th>
-      <th style="${tableHeaders.summary}">How to find a basis</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Column space Col(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝᵐ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">r</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/vector-spaces/span" style="${linkStyle}">span</a> of the columns; {A<b>x</b> : <b>x</b> ∈ ℝⁿ}</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">row-reduce A; take the pivot columns of the original A</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Row space Row(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">r</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">span of the rows; equivalently Col(Aᵀ)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">row-reduce A; take the nonzero rows of the echelon form</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Null space Null(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">n − r</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{<b>x</b> ∈ ℝⁿ : A<b>x</b> = <b>0</b>}</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reduce A to RREF; set each free variable to 1 in turn</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Left null space Null(Aᵀ)</td>
-      <td style="padding: 12px 15px; color: #34495e;">ℝᵐ</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">m − r</td>
-      <td style="padding: 12px 15px; color: #34495e;">{<b>y</b> ∈ ℝᵐ : Aᵀ<b>y</b> = <b>0</b>}, equivalently <b>y</b>ᵀA = <b>0</b>ᵀ</td>
-      <td style="padding: 12px 15px; color: #34495e;">row-reduce Aᵀ (or [Aᵀ | Iₘ])</td>
-    </tr>
-  </tbody>
-</table>
-`
 
 // ---------- SECTIONS ----------
 
@@ -1016,7 +386,16 @@ The column space $\\text{Col}(A)$ and the left null space $\\text{Null}(A^T)$ li
 
 The row space $\\text{Row}(A)$ and the null space $\\text{Null}(A)$ live in $\\mathbb{R}^n$.
 
-A single integer — the [rank](!/linear-algebra/matrix/rank) $r$ — controls the [dimension](!/linear-algebra/vector-spaces/dimension) of all four. The column space and row space each have dimension $r$. The null space has dimension $n - r$. The left null space has dimension $m - r$. These four numbers add up correctly: $r + (n - r) = n$ in the domain, and $r + (m - r) = m$ in the codomain.
+A single integer — the [rank](!/linear-algebra/matrix/rank) $r$ — controls the [dimension](!/linear-algebra/vector-spaces/dimension) of all four. The column space and row space each have dimension $r$:
+
+@academic[formula_callout:Row Rank Equals Column Rank
+$$\\dim(\\text{Row}\\,A) = \\dim(\\text{Col}\\,A) = \\text{rank}(A)$$
+/linear-algebra/formulas#row_rank_equals_column_rank]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
+
+The null space has dimension $n - r$. The left null space has dimension $m - r$. These four numbers add up correctly: $r + (n - r) = n$ in the domain, and $r + (m - r) = m$ in the codomain.
 
 The four subspaces are not independent of each other. They pair off into [orthogonal](!/linear-algebra/orthogonality) complements — the row space and null space are perpendicular in $\\mathbb{R}^n$, while the column space and left null space are perpendicular in $\\mathbb{R}^m$. This structure is the definitive description of what the map $\\mathbf{x} \\mapsto A\\mathbf{x}$ does.`,
     before: ``,
@@ -1109,7 +488,14 @@ The matrix is $3 \\times 4$ with rank $2$, so the left null space has dimension 
   },
   obj6: {
     title: `Dimension Accounting`,
-    content: `The four dimensions are not independent — they are locked together by the rank.
+    content: `The four dimensions are not independent — they are locked together by the rank:
+
+@academic[formula_callout:Four Fundamental Subspaces Dimensions
+$$\\begin{aligned} \\dim(\\text{Col}\\,A) &= r & \\dim(\\text{Row}\\,A) &= r \\\\ \\dim(\\text{Null}\\,A) &= n - r & \\dim(\\text{Null}\\,A^T) &= m - r \\end{aligned}$$
+/linear-algebra/formulas#four_fundamental_subspaces_dimensions]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 In the domain $\\mathbb{R}^n$:
 
@@ -1179,6 +565,7 @@ For the zero matrix ($r = 0$): the column space and row space are both $\\{\\mat
     link: ``,
   },
 }
+
 
   const introContent = {
   title: `The Complete Structural Portrait of a Matrix`,

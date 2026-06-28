@@ -1,34 +1,4 @@
-/* components/Breadcrumb.module.css
-.breadcrumb {
-    display: flex;
-    list-style: none;
-    padding: 10px;
-    text-decoration: none;
-    margin-left: 20px;
-    color: blue;
-    font-size: medium;
-    border-bottom: solid gray 0.5px;
-    max-width: 30%;
-    margin-bottom: 20px;
-    margin-top: -20px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    text-decoration: none !important;
-  }
-  
-  .breadcrumb-item {
-    margin-right: 0.5rem;
-    text-decoration: none;
-  }
-  
-  .breadcrumb-item::after {
-    content: '/';
-    margin-left: 0.5rem;
-  }
-  
-  .breadcrumb-item:last-child::after {
-    content: '';
-  }
-   */
+
 
 
    /* components/Breadcrumb.module.css */

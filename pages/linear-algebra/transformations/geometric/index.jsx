@@ -1,204 +1,220 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// tables-optimized: v4 | 2026-05-22 | 4 tables (obj4 aggregation, obj5 aggregation, obj10 comparison, obj11 summary capstone)
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "geometric transformations linear algebra",
-//   "rotation matrix",
-//   "reflection matrix",
-//   "projection matrix geometric",
-//   "shear transformation",
-//   "scaling matrix",
-//   "rotation matrix R2 R3",
-//   "Householder reflection",
-//   "determinant area volume",
-//   "orthogonal transformation",
-//   "transformation matrix columns",
-//   "combining linear transformations",
-//   "rotation angle matrix formula",
-//   "geometric interpretation determinant"
-// ]
-//   // •
+export async function getStaticProps(){
+const keyWords = [
+  "geometric transformations linear algebra",
+  "rotation matrix",
+  "reflection matrix",
+  "projection matrix geometric",
+  "shear transformation",
+  "scaling matrix",
+  "rotation matrix R2 R3",
+  "Householder reflection",
+  "determinant area volume",
+  "orthogonal transformation",
+  "transformation matrix columns",
+  "combining linear transformations",
+  "rotation angle matrix formula",
+  "geometric interpretation determinant"
+]
 
-// //   \u2022 First item
-// // \u2022 Second item
+const linkStyle = 'color: inherit; text-decoration: underline;'
 
-  
-// // <hr style="border-width:1px;"></hr>
+// ---------- TABLES ----------
 
-// // <hr style="color:blue;" />
+// obj4 — aggregation: rotations about each coordinate axis in R³
+const obj4Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Axis of rotation</th>
+      <th style="${tableHeaders.aggregation}">Matrix</th>
+      <th style="${tableHeaders.aggregation}">Fixed direction</th>
+      <th style="${tableHeaders.aggregation}">Plane that rotates</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">x-axis: Rₓ(θ)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[1 &nbsp;0 &nbsp;0; 0 &nbsp;cosθ &nbsp;−sinθ; 0 &nbsp;sinθ &nbsp;cosθ]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x-coordinate unchanged</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">yz-plane</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">y-axis: R_y(θ)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[cosθ &nbsp;0 &nbsp;sinθ; 0 &nbsp;1 &nbsp;0; −sinθ &nbsp;0 &nbsp;cosθ]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">y-coordinate unchanged</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">xz-plane</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">z-axis: R_z(θ)</td>
+      <td style="padding: 12px 15px; color: #34495e;">[cosθ &nbsp;−sinθ &nbsp;0; sinθ &nbsp;cosθ &nbsp;0; 0 &nbsp;0 &nbsp;1]</td>
+      <td style="padding: 12px 15px; color: #34495e;">z-coordinate unchanged</td>
+      <td style="padding: 12px 15px; color: #34495e;">xy-plane</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// obj5 — aggregation: reflections in R² across common mirror lines
+const obj5Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Mirror line</th>
+      <th style="${tableHeaders.aggregation}">Matrix</th>
+      <th style="${tableHeaders.aggregation}">Coordinate effect</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">x-axis</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[1 &nbsp;0; 0 &nbsp;−1]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x, y) ↦ (x, −y)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">y-axis</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−1 &nbsp;0; 0 &nbsp;1]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x, y) ↦ (−x, y)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">line y = x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0 &nbsp;1; 1 &nbsp;0]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x, y) ↦ (y, x) — swaps coordinates</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">line through origin at angle α</td>
+      <td style="padding: 12px 15px; color: #34495e;">[cos 2α &nbsp;sin 2α; sin 2α &nbsp;−cos 2α]</td>
+      <td style="padding: 12px 15px; color: #34495e;">general formula; specializes to the rows above for α = 0°, 90°, 45°</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+// obj10 — comparison/decision: classifying transformations by det(A)
+const obj10Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">det(A)</th>
+      <th style="${tableHeaders.comparison}">Effect on area / volume</th>
+      <th style="${tableHeaders.comparison}">Effect on orientation</th>
+      <th style="${tableHeaders.comparison}">Typical transformations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">|det(A)| &gt; 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">expands by factor |det(A)|</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserves if det &gt; 0, reverses if det &lt; 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">uniform scaling with |c| &gt; 1</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">0 &lt; |det(A)| &lt; 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">shrinks by factor |det(A)|</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserves if det &gt; 0, reverses if det &lt; 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">uniform scaling with 0 &lt; |c| &lt; 1</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">det(A) = +1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserves area / volume</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserves orientation</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rotation, shear</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">det(A) = −1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserves area / volume</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reverses orientation (handedness flip)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reflection, improper rotation</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">det(A) = 0</td>
+      <td style="padding: 12px 15px; color: #34495e;">collapses at least one dimension (image is a proper subspace)</td>
+      <td style="padding: 12px 15px; color: #34495e;">undefined / degenerate</td>
+      <td style="padding: 12px 15px; color: #34495e;">projection onto a proper subspace, any singular matrix</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+// obj11 — summary capstone: algebraic signature of each transformation family
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Family</th>
+      <th style="${tableHeaders.summary} text-align: center;">Orthogonal?</th>
+      <th style="${tableHeaders.summary} text-align: center;">det(A)</th>
+      <th style="${tableHeaders.summary}">Eigenvalues</th>
+      <th style="${tableHeaders.summary}">Algebraic identity</th>
+      <th style="${tableHeaders.summary} text-align: center;">Preserves length?</th>
+      <th style="${tableHeaders.summary} text-align: center;">Preserves area/vol?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Scaling (uniform by c)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">only when c = ±1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">cⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c (n-fold)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A = cI (diagonal)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">only c = ±1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">only c = ±1</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rotation R_θ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">+1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">e^±iθ (complex pair; ℝ: 1 on rotation axis in ℝ³)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">RᵀR = I; R⁻¹ = Rᵀ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reflection H</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">−1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">+1 (on mirror) and −1 (perpendicular to mirror)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">H² = I (involutory); Hᵀ = H</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Projection P (orthogonal)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">only when P = I</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">0 (proper); 1 (= I)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0 (perpendicular component) and 1 (in-subspace component)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">P² = P (idempotent); Pᵀ = P</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Shear</td>
+      <td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">+1</td>
+      <td style="padding: 12px 15px; color: #34495e;">1 (repeated; defective — not diagonalizable)</td>
+      <td style="padding: 12px 15px; color: #34495e;">triangular with 1's on the diagonal</td>
+      <td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+      <td style="padding: 12px 15px; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+// ---------- SECTIONS ----------
 
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-// //     const sectionsContent={
-
-// //     obj1:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-  
-// //     },
-// //     obj2:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-  
-// //     obj3:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj4:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj5:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj6:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj7:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj8:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj9:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj10:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj11:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj12:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj13:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-// //     obj14:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-
-
-// //     obj15:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     }
-  
-// //   }
 // const sectionsContent = {
 //   obj1: {
 //     title: `How to Read a Transformation Matrix`,
@@ -352,661 +368,17 @@
 //     after: ``,
 //     link: ``,
 //   },
-// }
-
-//  const introContent = {
-//   title: `Rotations, Reflections, Projections, and More`,
-//   content: `In R² and R³, linear transformations have concrete geometric meanings. Each has an explicit matrix encoding its action: rotations spin, reflections mirror, projections flatten, shears skew, and scalings stretch or compress. The determinant of the matrix classifies the transformation by how it affects area, volume, and orientation.`,
-// }
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is the rotation matrix in R²?",
-//     answer: "The matrix for counterclockwise rotation by angle θ about the origin is [[cos θ, −sin θ], [sin θ, cos θ]]. It is orthogonal with determinant 1, preserving lengths, angles, and orientation. Rotations compose by adding angles: R_α · R_β = R_(α+β).",
-//     sectionId: "3"
+//   obj11: {
+//     title: `Summary: Algebraic Signature of Each Family`,
+//     content: `Each family of geometric transformations has been treated in its own section, with its own matrix templates and its own algebraic identities. The table below sets all five side by side across the diagnostic signatures that distinguish them — orthogonality, determinant, eigenvalues, the characteristic algebraic identity, and what each family does to length and to area. It is the recognition card to keep nearby when a matrix is in hand and the question is which geometric family it belongs to.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
 //   },
-//   obj2: {
-//     question: "What is a reflection matrix?",
-//     answer: "A reflection matrix mirrors vectors across a line (in R²) or plane (in R³). Reflection across a line at angle α has matrix [[cos 2α, sin 2α], [sin 2α, −cos 2α]]. All reflection matrices are orthogonal, have determinant −1, and satisfy H² = I — reflecting twice returns to the original.",
-//     sectionId: "5"
-//   },
-//   obj3: {
-//     question: "What is a shear transformation?",
-//     answer: "A shear displaces each point proportionally to its distance from a fixed line or plane. A horizontal shear in R² has matrix [[1, k], [0, 1]], shifting x-coordinates by k times the y-coordinate. Shears have determinant 1, so they preserve area despite distorting angles.",
-//     sectionId: "8"
-//   },
-//   obj4: {
-//     question: "How does the determinant classify geometric transformations?",
-//     answer: "The absolute value |det(A)| gives the area or volume scaling factor. Positive determinant means orientation is preserved, negative means reversed. Determinant ±1 means area/volume is preserved (rotations, reflections, shears). Determinant 0 means the transformation collapses at least one dimension.",
-//     sectionId: "10"
-//   },
-//   obj5: {
-//     question: "How do you combine geometric transformations?",
-//     answer: "Composing transformations corresponds to multiplying their matrices, applied right-to-left. Order matters: rotating then shearing differs from shearing then rotating. The SVD reveals that every linear transformation decomposes into a rotation, a coordinate-axis scaling, and another rotation.",
-//     sectionId: "9"
-//   }
 // }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Geometric Transformations",
-//     "description": "Geometric transformations in linear algebra: rotation, reflection, projection, shear, and scaling matrices in R² and R³. Determinant as geometric signature and SVD decomposition.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/transformations/geometric",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Geometric Transformations"
-//     },
-//     "teaches": [
-//       "Reading a transformation from its matrix columns",
-//       "Scaling matrices: uniform and non-uniform",
-//       "Rotation matrices in R² and R³",
-//       "Reflection matrices and Householder reflections",
-//       "Projection matrices as geometric operations",
-//       "Shear transformations and their properties",
-//       "Composing transformations via matrix multiplication",
-//       "Determinant as area/volume scaling and orientation indicator"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Transformations",
-//         "item": "https://www.learnmathclass.com/linear-algebra/transformations"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Geometric Transformations",
-//         "item": "https://www.learnmathclass.com/linear-algebra/transformations/geometric"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-// //    return {
-// //       props:{
-// //          sectionsContent,
-// //          introContent,
-// //           seoData: {
-// //         title: "Title | Learn Math Class",
-// //         description: "Metadescription",
-// //         keywords: keyWords.join(", "),
-// //         url: "/linear-algebra/transformations/geometric",
-// //          name: "name"
-// //       },
-        
-// //        }
-// //     }
-// return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Geometric Transformations: Matrices in R² & R³ | Learn Math Class",
-//       description: "Geometric transformations in linear algebra: rotation, reflection, projection, shear, and scaling matrices in R² and R³. Determinant as geometric signature and SVD decomposition.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/transformations/geometric",
-//       name: "Geometric Transformations"
-//     },
-//   }
-// }   
-
-// }
-
-
-// // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-// export default function GeometricTransformationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    {/* <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head> */}
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Geometric Transformations</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
 
 
 // tables-optimized: v4 | 2026-05-22 | 4 tables (obj4 aggregation, obj5 aggregation, obj10 comparison, obj11 summary capstone)
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "geometric transformations linear algebra",
-  "rotation matrix",
-  "reflection matrix",
-  "projection matrix geometric",
-  "shear transformation",
-  "scaling matrix",
-  "rotation matrix R2 R3",
-  "Householder reflection",
-  "determinant area volume",
-  "orthogonal transformation",
-  "transformation matrix columns",
-  "combining linear transformations",
-  "rotation angle matrix formula",
-  "geometric interpretation determinant"
-]
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj4 — aggregation: rotations about each coordinate axis in R³
-const obj4Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Axis of rotation</th>
-      <th style="${tableHeaders.aggregation}">Matrix</th>
-      <th style="${tableHeaders.aggregation}">Fixed direction</th>
-      <th style="${tableHeaders.aggregation}">Plane that rotates</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">x-axis: Rₓ(θ)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[1 &nbsp;0 &nbsp;0; 0 &nbsp;cosθ &nbsp;−sinθ; 0 &nbsp;sinθ &nbsp;cosθ]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x-coordinate unchanged</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">yz-plane</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">y-axis: R_y(θ)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[cosθ &nbsp;0 &nbsp;sinθ; 0 &nbsp;1 &nbsp;0; −sinθ &nbsp;0 &nbsp;cosθ]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">y-coordinate unchanged</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">xz-plane</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">z-axis: R_z(θ)</td>
-      <td style="padding: 12px 15px; color: #34495e;">[cosθ &nbsp;−sinθ &nbsp;0; sinθ &nbsp;cosθ &nbsp;0; 0 &nbsp;0 &nbsp;1]</td>
-      <td style="padding: 12px 15px; color: #34495e;">z-coordinate unchanged</td>
-      <td style="padding: 12px 15px; color: #34495e;">xy-plane</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj5 — aggregation: reflections in R² across common mirror lines
-const obj5Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Mirror line</th>
-      <th style="${tableHeaders.aggregation}">Matrix</th>
-      <th style="${tableHeaders.aggregation}">Coordinate effect</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">x-axis</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[1 &nbsp;0; 0 &nbsp;−1]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x, y) ↦ (x, −y)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">y-axis</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−1 &nbsp;0; 0 &nbsp;1]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x, y) ↦ (−x, y)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">line y = x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0 &nbsp;1; 1 &nbsp;0]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(x, y) ↦ (y, x) — swaps coordinates</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">line through origin at angle α</td>
-      <td style="padding: 12px 15px; color: #34495e;">[cos 2α &nbsp;sin 2α; sin 2α &nbsp;−cos 2α]</td>
-      <td style="padding: 12px 15px; color: #34495e;">general formula; specializes to the rows above for α = 0°, 90°, 45°</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj10 — comparison/decision: classifying transformations by det(A)
-const obj10Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">det(A)</th>
-      <th style="${tableHeaders.comparison}">Effect on area / volume</th>
-      <th style="${tableHeaders.comparison}">Effect on orientation</th>
-      <th style="${tableHeaders.comparison}">Typical transformations</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">|det(A)| &gt; 1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">expands by factor |det(A)|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserves if det &gt; 0, reverses if det &lt; 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">uniform scaling with |c| &gt; 1</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">0 &lt; |det(A)| &lt; 1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">shrinks by factor |det(A)|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserves if det &gt; 0, reverses if det &lt; 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">uniform scaling with 0 &lt; |c| &lt; 1</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">det(A) = +1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserves area / volume</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserves orientation</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rotation, shear</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">det(A) = −1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">preserves area / volume</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reverses orientation (handedness flip)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reflection, improper rotation</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">det(A) = 0</td>
-      <td style="padding: 12px 15px; color: #34495e;">collapses at least one dimension (image is a proper subspace)</td>
-      <td style="padding: 12px 15px; color: #34495e;">undefined / degenerate</td>
-      <td style="padding: 12px 15px; color: #34495e;">projection onto a proper subspace, any singular matrix</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj11 — summary capstone: algebraic signature of each transformation family
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Family</th>
-      <th style="${tableHeaders.summary} text-align: center;">Orthogonal?</th>
-      <th style="${tableHeaders.summary} text-align: center;">det(A)</th>
-      <th style="${tableHeaders.summary}">Eigenvalues</th>
-      <th style="${tableHeaders.summary}">Algebraic identity</th>
-      <th style="${tableHeaders.summary} text-align: center;">Preserves length?</th>
-      <th style="${tableHeaders.summary} text-align: center;">Preserves area/vol?</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Scaling (uniform by c)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">only when c = ±1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">cⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c (n-fold)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A = cI (diagonal)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">only c = ±1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">only c = ±1</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rotation R_θ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">+1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">e^±iθ (complex pair; ℝ: 1 on rotation axis in ℝ³)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">RᵀR = I; R⁻¹ = Rᵀ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reflection H</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">−1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">+1 (on mirror) and −1 (perpendicular to mirror)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">H² = I (involutory); Hᵀ = H</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Projection P (orthogonal)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">only when P = I</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">0 (proper); 1 (= I)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0 (perpendicular component) and 1 (in-subspace component)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">P² = P (idempotent); Pᵀ = P</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Shear</td>
-      <td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">+1</td>
-      <td style="padding: 12px 15px; color: #34495e;">1 (repeated; defective — not diagonalizable)</td>
-      <td style="padding: 12px 15px; color: #34495e;">triangular with 1's on the diagonal</td>
-      <td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
-      <td style="padding: 12px 15px; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-    </tr>
-  </tbody>
-</table>
-`
 
 // ---------- SECTIONS ----------
 
@@ -1039,7 +411,12 @@ In $\\mathbb{R}^3$, $\\text{diag}(c_1, c_2, c_3)$ scales each coordinate axis in
     title: `Rotations in R²`,
     content: `Rotation by angle $\\theta$ counterclockwise about the origin has matrix
 
+@academic[formula_callout:Rotation Matrix 2D
 $$R_\\theta = \\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}$$
+/linear-algebra/formulas#rotation_matrix_2d]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 The first column $R_\\theta \\mathbf{e}_1 = (\\cos\\theta, \\sin\\theta)$ is the image of $(1, 0)$ — the point on the unit circle at angle $\\theta$. The second column $R_\\theta \\mathbf{e}_2 = (-\\sin\\theta, \\cos\\theta)$ is the image of $(0, 1)$ — the point at angle $\\theta + 90°$.
 
@@ -1054,7 +431,16 @@ Common cases: $R_{90°} = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$, $R
   },
   obj4: {
     title: `Rotations in R³`,
-    content: `In three dimensions, a rotation is specified by an axis and an angle. Rotation by $\\theta$ about the $z$-axis leaves the $z$-coordinate unchanged and rotates the $xy$-plane:
+    content: `In three dimensions, a rotation is specified by an axis and an angle. The three coordinate-axis rotation matrices are:
+
+@academic[formula_callout:Rotation Matrices 3D
+$$R_x(\\theta) = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & \\cos\\theta & -\\sin\\theta \\\\ 0 & \\sin\\theta & \\cos\\theta \\end{pmatrix}, \\;\\; R_y(\\theta) = \\begin{pmatrix} \\cos\\theta & 0 & \\sin\\theta \\\\ 0 & 1 & 0 \\\\ -\\sin\\theta & 0 & \\cos\\theta \\end{pmatrix}, \\;\\; R_z(\\theta) = \\begin{pmatrix} \\cos\\theta & -\\sin\\theta & 0 \\\\ \\sin\\theta & \\cos\\theta & 0 \\\\ 0 & 0 & 1 \\end{pmatrix}$$
+/linear-algebra/formulas#rotation_matrices_3d]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
+
+Rotation by $\\theta$ about the $z$-axis leaves the $z$-coordinate unchanged and rotates the $xy$-plane:
 
 $$R_z(\\theta) = \\begin{pmatrix} \\cos\\theta & -\\sin\\theta & 0 \\\\ \\sin\\theta & \\cos\\theta & 0 \\\\ 0 & 0 & 1 \\end{pmatrix}$$
 
@@ -1077,7 +463,12 @@ Reflection across the line $y = x$ swaps coordinates: matrix $\\begin{pmatrix} 0
 
 Reflection across an arbitrary line through the origin at angle $\\alpha$ has matrix
 
+@academic[formula_callout:Reflection Across Line 2D
 $$H_\\alpha = \\begin{pmatrix} \\cos 2\\alpha & \\sin 2\\alpha \\\\ \\sin 2\\alpha & -\\cos 2\\alpha \\end{pmatrix}$$
+/linear-algebra/formulas#reflection_across_line_2d]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 All reflection matrices share the same properties: the determinant is $-1$ (orientation-reversing, area-preserving), the matrix is [orthogonal](!/linear-algebra/matrix/types) (lengths and angles preserved), and the matrix is [involutory](!/linear-algebra/matrix/types) ($H^2 = I$) — reflecting twice returns every vector to its starting point. The [eigenvalues](!/linear-algebra/eigen) are $+1$ (vectors on the mirror line) and $-1$ (vectors perpendicular to it).`,
     before: ``,
@@ -1090,7 +481,12 @@ All reflection matrices share the same properties: the determinant is $-1$ (orie
 
 Reflection across an arbitrary plane through the origin with unit normal $\\mathbf{n}$ is given by the Householder matrix:
 
-$$H = I - 2\\mathbf{n}\\mathbf{n}^T$$
+@academic[formula_callout:Householder Reflection
+$$H = I - 2\\,\\mathbf{n}\\mathbf{n}^T$$
+/linear-algebra/formulas#householder_reflection]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 This matrix subtracts twice the component of each vector in the direction of $\\mathbf{n}$, effectively mirroring across the plane perpendicular to $\\mathbf{n}$. Householder reflections are orthogonal, have determinant $-1$, and satisfy $H^2 = I$. They are the building blocks of the [QR decomposition](!/linear-algebra/decompositions/qr) and are widely used in numerical algorithms.`,
     before: ``,
@@ -1105,11 +501,21 @@ Projection onto the $x$-axis in $\\mathbb{R}^2$: $T(x, y) = (x, 0)$, with matrix
 
 Projection onto a line through the origin in direction $\\mathbf{u}$:
 
+@academic[formula_callout:Projection onto Line
 $$P = \\frac{\\mathbf{u}\\mathbf{u}^T}{\\mathbf{u}^T\\mathbf{u}}$$
+/linear-algebra/formulas#projection_onto_line]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 Projection onto a plane with unit normal $\\mathbf{n}$ in $\\mathbb{R}^3$:
 
+@academic[formula_callout:Projection onto Plane
 $$P = I - \\frac{\\mathbf{n}\\mathbf{n}^T}{\\mathbf{n}^T\\mathbf{n}}$$
+/linear-algebra/formulas#projection_onto_plane]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 All orthogonal projection matrices share the same algebraic signature: $P^2 = P$ ([idempotent](!/linear-algebra/matrix/types) — projecting twice is the same as projecting once), $P^T = P$ (symmetric), [eigenvalues](!/linear-algebra/eigen) are $0$ and $1$, and $\\text{rank}(P) = \\text{tr}(P)$. The determinant is $0$ unless the projection is onto the full space — projections always collapse at least one dimension.`,
     before: ``,
@@ -1118,7 +524,16 @@ All orthogonal projection matrices share the same algebraic signature: $P^2 = P$
   },
   obj8: {
     title: `Shears`,
-    content: `A shear displaces each point in proportion to its distance from a fixed line or plane. In $\\mathbb{R}^2$, a horizontal shear shifts the $x$-coordinate by $k$ times the $y$-coordinate:
+    content: `A shear displaces each point in proportion to its distance from a fixed line or plane. The two $2 \\times 2$ shear matrices are:
+
+@academic[formula_callout:Shear Matrix
+$$\\text{Shear}_x = \\begin{pmatrix} 1 & k \\\\ 0 & 1 \\end{pmatrix}, \\qquad \\text{Shear}_y = \\begin{pmatrix} 1 & 0 \\\\ k & 1 \\end{pmatrix}$$
+/linear-algebra/formulas#shear_matrix]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
+
+In $\\mathbb{R}^2$, a horizontal shear shifts the $x$-coordinate by $k$ times the $y$-coordinate:
 
 $$T(x, y) = (x + ky, \\; y), \\quad \\text{matrix } \\begin{pmatrix} 1 & k \\\\ 0 & 1 \\end{pmatrix}$$
 
@@ -1171,6 +586,8 @@ $|\\det(A)| = 1$: the transformation preserves area or volume. Rotations ($\\det
     link: ``,
   },
 }
+
+
 
  const introContent = {
   title: `Rotations, Reflections, Projections, and More`,

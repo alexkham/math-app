@@ -74,6 +74,174 @@ const keyWords = [
 // (The hub itself functions as the basis page — there is no separate /basis child page)
 
 
+// const sectionsContent = {
+//   obj1: {
+//     title: `What a Vector Space Is`,
+//     content: `Vectors in $\\mathbb{R}^n$ can be added and scaled. So can polynomials, [matrices](!/linear-algebra/matrix), and continuous functions. A vector space is the formal name for any collection of objects where these two operations — addition and scalar multiplication — satisfy ten algebraic [axioms](!/linear-algebra/vector-spaces/axioms): closure, commutativity, associativity, the existence of a zero element, additive inverses, and the expected distributive and identity laws for scalars.
+
+// The objects in a vector space are called vectors regardless of whether they look like arrows, columns of numbers, polynomials, or functions. The power of the abstraction is that every theorem proved from the axioms alone applies to every vector space simultaneously. [Linear independence](!/linear-algebra/vector-spaces/linear-independence), [span](!/linear-algebra/vector-spaces/span), basis, [dimension](!/linear-algebra/vector-spaces/dimension), and [subspaces](!/linear-algebra/vector-spaces/subspaces) are all defined from the axioms, and their properties carry over to any setting where the axioms hold.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj2: {
+//     title: `Basis: Definition`,
+//     content: `A basis for a vector space $V$ is a set of vectors $\\mathcal{B} = \\{\\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_n\\}$ that satisfies two conditions simultaneously.
+
+// The set is [linearly independent](!/linear-algebra/vector-spaces/linear-independence): no vector in the set can be written as a linear combination of the others. Equivalently, the only combination $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_n\\mathbf{v}_n = \\mathbf{0}$ is the trivial one with all scalars equal to zero.
+
+// The set [spans](!/linear-algebra/vector-spaces/span) $V$: every vector in $V$ can be expressed as some linear combination of $\\mathbf{v}_1, \\dots, \\mathbf{v}_n$.
+
+// Independence means no vector in the basis is wasted. Spanning means no vector in $V$ is out of reach. A basis is a minimal spanning set — remove any element and the span shrinks. It is also a maximal independent set — add any vector from $V$ and independence breaks. These two characterizations are equivalent and place the basis at the exact boundary between "too few" and "too many."`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj3: {
+//     title: `Unique Representation`,
+//     content: `If $\\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_n\\}$ is a basis for $V$, then every vector $\\mathbf{v} \\in V$ can be written as
+
+// $$\\mathbf{v} = c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_n\\mathbf{v}_n$$
+
+// in exactly one way. Existence is guaranteed by the spanning condition — every vector is reachable. Uniqueness is guaranteed by independence: if two different sets of scalars both produced $\\mathbf{v}$, subtracting one from the other would give a nontrivial combination equal to $\\mathbf{0}$, contradicting independence.
+
+// This uniqueness is what separates a basis from an arbitrary spanning set. A spanning set that is not independent can represent some vectors in multiple ways — the representation is ambiguous. A basis eliminates all ambiguity: every vector has exactly one set of coefficients.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj4: {
+//     title: `Coordinates`,
+//     content: `The scalars $c_1, c_2, \\dots, c_n$ in the unique representation $\\mathbf{v} = c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n$ are called the coordinates of $\\mathbf{v}$ relative to the basis $\\mathcal{B}$. They are collected into a coordinate vector:
+
+// $$[\\mathbf{v}]_\\mathcal{B} = \\begin{pmatrix} c_1 \\\\ c_2 \\\\ \\vdots \\\\ c_n \\end{pmatrix}$$
+
+// Coordinates depend entirely on the choice of basis. The same vector $\\mathbf{v}$ has different coordinates in different bases — the vector does not change, but its numerical description does.
+
+// To find the coordinates of $\\mathbf{v}$ relative to $\\mathcal{B}$, solve the [linear system](!/linear-algebra/linear-systems) $c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n = \\mathbf{v}$. If the basis vectors are columns of a [matrix](!/linear-algebra/matrix) $B$, this is the system $B\\mathbf{c} = \\mathbf{v}$, and the coordinate vector is $\\mathbf{c} = B^{-1}\\mathbf{v}$ when $B$ is invertible. For the standard basis, $B = I$, so the coordinates are simply the components of $\\mathbf{v}$ itself.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj5: {
+//     title: `The Standard Basis for Rⁿ`,
+//     content: `The most familiar basis for $\\mathbb{R}^n$ is the standard basis $\\{\\mathbf{e}_1, \\mathbf{e}_2, \\dots, \\mathbf{e}_n\\}$, where $\\mathbf{e}_i$ has a $1$ in position $i$ and zeros elsewhere:
+
+// $$\\mathbf{e}_1 = \\begin{pmatrix} 1 \\\\ 0 \\\\ \\vdots \\\\ 0 \\end{pmatrix}, \\quad \\mathbf{e}_2 = \\begin{pmatrix} 0 \\\\ 1 \\\\ \\vdots \\\\ 0 \\end{pmatrix}, \\quad \\dots, \\quad \\mathbf{e}_n = \\begin{pmatrix} 0 \\\\ 0 \\\\ \\vdots \\\\ 1 \\end{pmatrix}$$
+
+// Independence is immediate — each vector has a $1$ in a position where all others have $0$, so no vector is a combination of the rest. Spanning follows from the fact that any vector $(v_1, \\dots, v_n) = v_1\\mathbf{e}_1 + \\cdots + v_n\\mathbf{e}_n$.
+
+// The standard basis has a special property: coordinates relative to it are just the components of the vector. For any other basis, finding coordinates requires solving a system. This is why the standard basis is the default — but it is one choice among infinitely many, and other bases are often better suited to particular problems.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj6: {
+//     title: `Other Standard Bases`,
+//     content: `Every vector space encountered in practice comes with a natural default basis.
+
+// The polynomial space $\\mathcal{P}_n$ of polynomials with degree at most $n$ has the monomial basis $\\{1, x, x^2, \\dots, x^n\\}$, consisting of $n + 1$ elements. Every polynomial $a_0 + a_1 x + \\cdots + a_n x^n$ is a linear combination of these monomials, and the coefficients are unique (a polynomial is determined by its coefficients). The coordinates of a polynomial relative to the monomial basis are its coefficients.
+
+// The [matrix](!/linear-algebra/matrix) space $\\mathbb{R}^{m \\times n}$ has the matrix unit basis $\\{E_{ij}\\}$, where $E_{ij}$ has a $1$ in position $(i,j)$ and zeros elsewhere. There are $mn$ such matrices, and every $m \\times n$ matrix is a unique linear combination of them. The coordinates of a matrix are its entries.
+
+// These are all "standard" bases in the sense that they are the most natural first choice. But many problems benefit from non-standard bases: [eigenvector](!/linear-algebra/eigenvalues-vectors) bases simplify matrix powers and differential equations, [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) bases simplify projections and least squares, and Fourier bases decompose periodic signals into frequency components. Choosing the right basis is often the key step in solving a problem.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj7: {
+//     title: `Finding a Basis for a Subspace`,
+//     content: `The three [subspaces](!/linear-algebra/vector-spaces/subspaces) associated with a matrix each have a basis that can be extracted from row reduction.
+
+// For the column space of an $m \\times n$ matrix $A$: row reduce $A$ and identify the pivot columns. The corresponding columns of the original matrix $A$ — not the echelon form — are a basis for $\\text{Col}(A)$. The echelon form reveals which columns are independent, but the original columns are the actual vectors spanning the column space.
+
+// For the null space: solve $A\\mathbf{x} = \\mathbf{0}$ by reducing to [RREF](!/linear-algebra/linear-systems/rref) and expressing the general solution in terms of free variables. Each free variable contributes one basis vector.
+
+// For the row space: the nonzero rows of the echelon form are a basis. Unlike the column space, the echelon form's rows — not the original rows — are used, because row operations change individual rows but preserve their span.
+
+// ## Worked Example
+
+// For $A = \\begin{pmatrix} 1 & 2 & 0 & 1 \\\\ 2 & 4 & 1 & 3 \\\\ 3 & 6 & 1 & 4 \\end{pmatrix}$, row reduction gives $\\begin{pmatrix} 1 & 2 & 0 & 1 \\\\ 0 & 0 & 1 & 1 \\\\ 0 & 0 & 0 & 0 \\end{pmatrix}$. Pivots are in columns $1$ and $3$. The column space basis is $\\{(1, 2, 3), (0, 1, 1)\\}$ — the first and third columns of the original $A$. The row space basis is $\\{(1, 2, 0, 1), (0, 0, 1, 1)\\}$. The null space has two free variables (columns $2$ and $4$), and solving yields a two-dimensional null space.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj8: {
+//     title: `Extending and Reducing to a Basis`,
+//     content: `Two fundamental operations guarantee that bases always exist in finite-dimensional spaces.
+
+// Extension: any linearly independent set can be grown into a basis by adding vectors one at a time. At each step, pick any vector not in the current [span](!/linear-algebra/vector-spaces/span) and adjoin it. Independence is preserved because the new vector is not a combination of the existing ones. The process stops when the span reaches all of $V$.
+
+// Reduction: any spanning set can be trimmed into a basis by removing redundant vectors. A vector is redundant if it lies in the span of the remaining vectors. Remove redundant vectors one at a time until what remains is independent. The span does not shrink, because each removed vector was already expressible in terms of the others.
+
+// Both processes terminate because [dimension](!/linear-algebra/vector-spaces/dimension) is finite — the independent set cannot grow past $n$ vectors, and the spanning set cannot shrink below $n$ vectors, where $n = \\dim(V)$. This means every finite-dimensional vector space has a basis, and the choice of basis is highly flexible.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj9: {
+//     title: `Change of Basis`,
+//     content: `Different bases assign different coordinates to the same vector. The change-of-basis matrix converts between them.
+
+// If $\\mathcal{B}$ and $\\mathcal{C}$ are two bases for $V$, the change-of-basis matrix $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ satisfies
+
+// $$[\\mathbf{v}]_\\mathcal{C} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}} \\, [\\mathbf{v}]_\\mathcal{B}$$
+
+// for every vector $\\mathbf{v} \\in V$. The columns of $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ are the $\\mathcal{C}$-coordinate vectors of each $\\mathcal{B}$-basis vector. The reverse conversion uses the [inverse](!/linear-algebra/matrix/inverse): $P_{\\mathcal{B} \\leftarrow \\mathcal{C}} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}^{-1}$.
+
+// ## Worked Example
+
+// In $\\mathbb{R}^2$, let $\\mathcal{B} = \\{(1, 1), (1, -1)\\}$ and let $\\mathcal{C}$ be the standard basis. The $\\mathcal{C}$-coordinates of $(1, 1)$ are just $(1, 1)$, and the $\\mathcal{C}$-coordinates of $(1, -1)$ are $(1, -1)$. So $P_{\\mathcal{C} \\leftarrow \\mathcal{B}} = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (3, 1)$: solve $P\\mathbf{c} = (3, 1)$, giving $\\mathbf{c} = P^{-1}(3, 1) = \\frac{1}{-2}\\begin{pmatrix} -1 & -1 \\\\ -1 & 1 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = (2, 1)$. So $[\\mathbf{v}]_\\mathcal{B} = (2, 1)$, meaning $\\mathbf{v} = 2(1, 1) + 1(1, -1)$.
+
+// Change of basis connects to [similarity](!/linear-algebra/linear-transformations/change-of-basis): if a [linear transformation](!/linear-algebra/linear-transformations) has matrix $A$ in basis $\\mathcal{B}$, its matrix in basis $\\mathcal{C}$ is $P^{-1}AP$. Choosing a good basis — one that simplifies $A$ into diagonal or triangular form — is the central idea behind [diagonalization](!/linear-algebra/eigenvalues-vectors/diagonalization).`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj10: {
+//     title: `Coordinates and Isomorphism`,
+//     content: `Choosing a basis for an $n$-dimensional vector space $V$ creates a one-to-one correspondence between $V$ and $\\mathbb{R}^n$. Each vector $\\mathbf{v} \\in V$ maps to its coordinate vector $[\\mathbf{v}]_\\mathcal{B} \\in \\mathbb{R}^n$, and this mapping preserves addition and scalar multiplication:
+
+// $$[\\mathbf{u} + \\mathbf{v}]_\\mathcal{B} = [\\mathbf{u}]_\\mathcal{B} + [\\mathbf{v}]_\\mathcal{B}, \\qquad [c\\mathbf{v}]_\\mathcal{B} = c[\\mathbf{v}]_\\mathcal{B}$$
+
+// Such a structure-preserving bijection is called an isomorphism. Its existence means that every $n$-dimensional real vector space — $\\mathbb{R}^n$, $\\mathcal{P}_{n-1}$, $\\mathbb{R}^{m \\times k}$ with $mk = n$, solution spaces of ODEs — behaves identically to $\\mathbb{R}^n$ in all algebraic respects. The objects differ, but the linear algebra is the same.
+
+// [Dimension](!/linear-algebra/vector-spaces/dimension) is the single invariant that classifies finite-dimensional vector spaces up to isomorphism. Two spaces over the same field are isomorphic if and only if they have the same dimension. This is why dimension occupies such a central place in the theory.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj11: {
+//     title: `Independence and Span`,
+//     content: `The two concepts that a basis unifies — [linear independence](!/linear-algebra/vector-spaces/linear-independence) and [span](!/linear-algebra/vector-spaces/span) — each have their own rich theory.
+
+// Independence is tested by checking whether the homogeneous system $A\\mathbf{c} = \\mathbf{0}$ has only the trivial solution, where $A$ is the matrix whose columns are the vectors. For $n$ vectors in $\\mathbb{R}^n$, this reduces to checking whether the [determinant](!/linear-algebra/determinants) is nonzero. In $\\mathbb{R}^n$, at most $n$ vectors can be independent — any set of $n + 1$ or more is automatically dependent.
+
+// Span is tested by checking whether $A\\mathbf{c} = \\mathbf{b}$ is consistent for every $\\mathbf{b}$, or for a specific $\\mathbf{b}$ if the question is about membership. The span of a set is always a subspace, and its dimension equals the number of independent vectors in the set.
+
+// A set of exactly $n$ vectors in an $n$-dimensional space is a basis if and only if it is independent (spanning follows automatically), and if and only if it spans the space (independence follows automatically). At the magic count $n = \\dim(V)$, the two conditions become equivalent.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+//   obj12: {
+//     title: `Subspaces and the Fundamental Subspaces`,
+//     content: `A [subspace](!/linear-algebra/vector-spaces/subspaces) is a subset of a vector space that is itself a vector space under the same operations. The subspace test requires only two checks: closure under addition and closure under scalar multiplication. Lines and planes through the origin, null spaces, column spaces, and row spaces are all subspaces.
+
+// Every $m \\times n$ matrix $A$ defines four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-subspaces): the column space in $\\mathbb{R}^m$ (dimension $r$), the row space in $\\mathbb{R}^n$ (dimension $r$), the null space in $\\mathbb{R}^n$ (dimension $n - r$), and the left null space in $\\mathbb{R}^m$ (dimension $m - r$), where $r = \\text{rank}(A)$.
+
+// These four subspaces split into two pairs of [orthogonal](!/linear-algebra/orthogonality) complements: the row space and null space are perpendicular in $\\mathbb{R}^n$, while the column space and left null space are perpendicular in $\\mathbb{R}^m$. The [rank](!/linear-algebra/matrix/rank) governs all four dimensions and completely determines the geometry of the linear map $\\mathbf{x} \\mapsto A\\mathbf{x}$.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
+// };
+
+
+// URL: /linear-algebra/vector-spaces/
+// (The hub itself functions as the basis page — there is no separate /basis child page)
+
+
 const sectionsContent = {
   obj1: {
     title: `What a Vector Space Is`,
@@ -86,7 +254,14 @@ The objects in a vector space are called vectors regardless of whether they look
   },
   obj2: {
     title: `Basis: Definition`,
-    content: `A basis for a vector space $V$ is a set of vectors $\\mathcal{B} = \\{\\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_n\\}$ that satisfies two conditions simultaneously.
+    content: `A basis for a vector space $V$ is a set of vectors $\\mathcal{B} = \\{\\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_n\\}$ that satisfies two conditions simultaneously:
+
+@academic[formula_callout:Basis Definition
+$$\\mathcal{B} = \\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_n\\} \\text{ is a basis for } V \\iff \\begin{cases} \\mathcal{B} \\text{ is linearly independent} \\\\ \\text{Span}(\\mathcal{B}) = V \\end{cases}$$
+/linear-algebra/formulas#basis_definition]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 The set is [linearly independent](!/linear-algebra/vector-spaces/linear-independence): no vector in the set can be written as a linear combination of the others. Equivalently, the only combination $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_n\\mathbf{v}_n = \\mathbf{0}$ is the trivial one with all scalars equal to zero.
 
@@ -99,11 +274,16 @@ Independence means no vector in the basis is wasted. Spanning means no vector in
   },
   obj3: {
     title: `Unique Representation`,
-    content: `If $\\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_n\\}$ is a basis for $V$, then every vector $\\mathbf{v} \\in V$ can be written as
+    content: `If $\\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_n\\}$ is a basis for $V$, every vector $\\mathbf{v} \\in V$ has a unique representation as a linear combination of basis vectors:
 
-$$\\mathbf{v} = c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_n\\mathbf{v}_n$$
+@academic[formula_callout:Unique Basis Representation
+$$\\forall\\, \\mathbf{v} \\in V,\\ \\exists!\\, (c_1, \\ldots, c_n): \\mathbf{v} = c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_n\\mathbf{v}_n$$
+/linear-algebra/formulas#unique_basis_representation]@
 
-in exactly one way. Existence is guaranteed by the spanning condition — every vector is reachable. Uniqueness is guaranteed by independence: if two different sets of scalars both produced $\\mathbf{v}$, subtracting one from the other would give a nontrivial combination equal to $\\mathbf{0}$, contradicting independence.
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
+
+Existence is guaranteed by the spanning condition — every vector is reachable. Uniqueness is guaranteed by independence: if two different sets of scalars both produced $\\mathbf{v}$, subtracting one from the other would give a nontrivial combination equal to $\\mathbf{0}$, contradicting independence.
 
 This uniqueness is what separates a basis from an arbitrary spanning set. A spanning set that is not independent can represent some vectors in multiple ways — the representation is ambiguous. A basis eliminates all ambiguity: every vector has exactly one set of coefficients.`,
     before: ``,
@@ -114,7 +294,12 @@ This uniqueness is what separates a basis from an arbitrary spanning set. A span
     title: `Coordinates`,
     content: `The scalars $c_1, c_2, \\dots, c_n$ in the unique representation $\\mathbf{v} = c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n$ are called the coordinates of $\\mathbf{v}$ relative to the basis $\\mathcal{B}$. They are collected into a coordinate vector:
 
-$$[\\mathbf{v}]_\\mathcal{B} = \\begin{pmatrix} c_1 \\\\ c_2 \\\\ \\vdots \\\\ c_n \\end{pmatrix}$$
+@academic[formula_callout:Coordinate Vector
+$$[\\mathbf{v}]_\\mathcal{B} = \\begin{pmatrix} c_1 \\\\ c_2 \\\\ \\vdots \\\\ c_n \\end{pmatrix} \\quad \\text{where } \\mathbf{v} = c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n$$
+/linear-algebra/formulas#coordinate_vector]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 Coordinates depend entirely on the choice of basis. The same vector $\\mathbf{v}$ has different coordinates in different bases — the vector does not change, but its numerical description does.
 
@@ -127,7 +312,12 @@ To find the coordinates of $\\mathbf{v}$ relative to $\\mathcal{B}$, solve the [
     title: `The Standard Basis for Rⁿ`,
     content: `The most familiar basis for $\\mathbb{R}^n$ is the standard basis $\\{\\mathbf{e}_1, \\mathbf{e}_2, \\dots, \\mathbf{e}_n\\}$, where $\\mathbf{e}_i$ has a $1$ in position $i$ and zeros elsewhere:
 
-$$\\mathbf{e}_1 = \\begin{pmatrix} 1 \\\\ 0 \\\\ \\vdots \\\\ 0 \\end{pmatrix}, \\quad \\mathbf{e}_2 = \\begin{pmatrix} 0 \\\\ 1 \\\\ \\vdots \\\\ 0 \\end{pmatrix}, \\quad \\dots, \\quad \\mathbf{e}_n = \\begin{pmatrix} 0 \\\\ 0 \\\\ \\vdots \\\\ 1 \\end{pmatrix}$$
+@academic[formula_callout:Standard Basis (Rn)
+$$\\mathbf{e}_i = (0, \\ldots, 0, \\underset{i\\text{-th}}{1}, 0, \\ldots, 0), \\quad i = 1, \\ldots, n$$
+/linear-algebra/formulas#standard_basis_rn]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 Independence is immediate — each vector has a $1$ in a position where all others have $0$, so no vector is a combination of the rest. Spanning follows from the fact that any vector $(v_1, \\dots, v_n) = v_1\\mathbf{e}_1 + \\cdots + v_n\\mathbf{e}_n$.
 
@@ -185,9 +375,21 @@ Both processes terminate because [dimension](!/linear-algebra/vector-spaces/dime
 
 If $\\mathcal{B}$ and $\\mathcal{C}$ are two bases for $V$, the change-of-basis matrix $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ satisfies
 
-$$[\\mathbf{v}]_\\mathcal{C} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}} \\, [\\mathbf{v}]_\\mathcal{B}$$
+@academic[formula_callout:Change of Basis Formula
+$$[\\mathbf{v}]_\\mathcal{C} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}\\, [\\mathbf{v}]_\\mathcal{B}$$
+/linear-algebra/formulas#change_of_basis_formula]@
 
-for every vector $\\mathbf{v} \\in V$. The columns of $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ are the $\\mathcal{C}$-coordinate vectors of each $\\mathcal{B}$-basis vector. The reverse conversion uses the [inverse](!/linear-algebra/matrix/inverse): $P_{\\mathcal{B} \\leftarrow \\mathcal{C}} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}^{-1}$.
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
+
+for every vector $\\mathbf{v} \\in V$. The columns of $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ are the $\\mathcal{C}$-coordinate vectors of each $\\mathcal{B}$-basis vector. The reverse conversion uses the [inverse](!/linear-algebra/matrix/inverse):
+
+@academic[formula_callout:Change of Basis Inverse
+$$P_{\\mathcal{B} \\leftarrow \\mathcal{C}} = \\bigl(P_{\\mathcal{C} \\leftarrow \\mathcal{B}}\\bigr)^{-1}$$
+/linear-algebra/formulas#change_of_basis_inverse]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 ## Worked Example
 
@@ -202,7 +404,12 @@ Change of basis connects to [similarity](!/linear-algebra/linear-transformations
     title: `Coordinates and Isomorphism`,
     content: `Choosing a basis for an $n$-dimensional vector space $V$ creates a one-to-one correspondence between $V$ and $\\mathbb{R}^n$. Each vector $\\mathbf{v} \\in V$ maps to its coordinate vector $[\\mathbf{v}]_\\mathcal{B} \\in \\mathbb{R}^n$, and this mapping preserves addition and scalar multiplication:
 
-$$[\\mathbf{u} + \\mathbf{v}]_\\mathcal{B} = [\\mathbf{u}]_\\mathcal{B} + [\\mathbf{v}]_\\mathcal{B}, \\qquad [c\\mathbf{v}]_\\mathcal{B} = c[\\mathbf{v}]_\\mathcal{B}$$
+@academic[formula_callout:Coordinate Map Linearity
+$$[\\mathbf{u} + \\mathbf{v}]_\\mathcal{B} = [\\mathbf{u}]_\\mathcal{B} + [\\mathbf{v}]_\\mathcal{B}, \\qquad [c\\mathbf{v}]_\\mathcal{B} = c\\,[\\mathbf{v}]_\\mathcal{B}$$
+/linear-algebra/formulas#coordinate_map_linearity]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 Such a structure-preserving bijection is called an isomorphism. Its existence means that every $n$-dimensional real vector space — $\\mathbb{R}^n$, $\\mathcal{P}_{n-1}$, $\\mathbb{R}^{m \\times k}$ with $mk = n$, solution spaces of ODEs — behaves identically to $\\mathbb{R}^n$ in all algebraic respects. The objects differ, but the linear algebra is the same.
 
@@ -236,7 +443,6 @@ These four subspaces split into two pairs of [orthogonal](!/linear-algebra/ortho
     link: ``,
   },
 };
-
 
 const introContent = {
   title: `The Abstract Structure Behind Linear Algebra`,
@@ -361,7 +567,7 @@ const schemas = {
        title: "Basis of a Vector Space and Coordinates | Learn Math Class",
        description: "Learn the basis of a vector space: definition, unique representation, coordinates, standard basis, finding bases, change of basis, and isomorphism with R^n.",
        keywords: keyWords.join(", "),
-       url: "/linear-algebra/vector-spaces/",
+       url: "/linear-algebra/vector-spaces/basis",
        name: "Basis of a Vector Space"
      },
    }

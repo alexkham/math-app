@@ -1,204 +1,173 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// tables-optimized: v4 | 2026-05-18 | 3 tables (obj4 aggregation, obj5 aggregation, obj9 summary capstone)
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "orthogonal projection",
-//   "projection onto subspace",
-//   "projection matrix",
-//   "projection formula linear algebra",
-//   "proj vector formula",
-//   "orthogonal decomposition",
-//   "projection orthogonal basis",
-//   "projection matrix properties",
-//   "idempotent symmetric matrix",
-//   "closest point subspace",
-//   "projection least squares",
-//   "normal equations projection",
-//   "projection onto vector",
-//   "A(ATA)^-1 AT formula"
-// ]
-//   // •
+export async function getStaticProps(){
+const keyWords = [
+  "orthogonal projection",
+  "projection onto subspace",
+  "projection matrix",
+  "projection formula linear algebra",
+  "proj vector formula",
+  "orthogonal decomposition",
+  "projection orthogonal basis",
+  "projection matrix properties",
+  "idempotent symmetric matrix",
+  "closest point subspace",
+  "projection least squares",
+  "normal equations projection",
+  "projection onto vector",
+  "A(ATA)^-1 AT formula"
+]
 
-// //   \u2022 First item
-// // \u2022 Second item
+const linkStyle = 'color: inherit; text-decoration: underline;'
 
-  
-// // <hr style="border-width:1px;"></hr>
+// ---------- TABLES ----------
 
-// // <hr style="color:blue;" />
+// obj4 — aggregation: projection formulas by basis type (consolidates obj1, obj3, obj4)
+const obj4Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Project onto…</th>
+      <th style="${tableHeaders.aggregation}">Formula for the projection</th>
+      <th style="${tableHeaders.aggregation}">Requirements on the basis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a single nonzero vector a</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">proj<sub>a</sub>(b) = (a · b) / (a · a) · a</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a ≠ 0</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a subspace W with an <em>orthogonal</em> basis {u<sub>1</sub>, …, u<sub>k</sub>}</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">proj<sub>W</sub>(b) = Σᵢ (u<sub>i</sub> · b) / (u<sub>i</sub> · u<sub>i</sub>) · u<sub>i</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">basis pairwise orthogonal: u<sub>i</sub> · u<sub>j</sub> = 0 for i ≠ j</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a subspace W with an <em>orthonormal</em> basis {q<sub>1</sub>, …, q<sub>k</sub>}</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">proj<sub>W</sub>(b) = Σᵢ (q<sub>i</sub> · b) · q<sub>i</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">pairwise orthogonal + each ‖q<sub>i</sub>‖ = 1</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">a subspace W with an arbitrary basis (columns of A)</td>
+      <td style="padding: 12px 15px; color: #34495e;">proj<sub>W</sub>(b) = A (AᵀA)⁻¹ Aᵀ b</td>
+      <td style="padding: 12px 15px; color: #34495e;">columns of A linearly independent (so AᵀA is invertible)</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// obj5 — aggregation: properties of the projection matrix P = A(AᵀA)⁻¹Aᵀ
+const obj5Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Property of P</th>
+      <th style="${tableHeaders.aggregation}">Statement</th>
+      <th style="${tableHeaders.aggregation}">Why it holds / what it means</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Idempotent</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">P² = P</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">projecting a second time changes nothing; vectors already in W are fixed</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Symmetric</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Pᵀ = P</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">makes the projection orthogonal (residual ⊥ W); distinguishes from oblique projections, which satisfy P² = P but Pᵀ ≠ P</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Complementary projection</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I − P projects onto W<sup>⊥</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I − P is also symmetric and idempotent</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Decomposition of every b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">b = Pb + (I − P) b</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">unique split into a W-component and a W<sup>⊥</sup>-component</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/eigen" style="${linkStyle}">Eigenvalues</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">only 0 and 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vectors in W are eigenvectors for λ = 1; vectors in W<sup>⊥</sup> for λ = 0</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rank</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(P) = dim(W)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of independent directions preserved</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/matrix/trace" style="${linkStyle}">Trace</a></td>
+      <td style="padding: 12px 15px; color: #34495e;">tr(P) = dim(W)</td>
+      <td style="padding: 12px 15px; color: #34495e;">trace = sum of eigenvalues = number of eigenvalues equal to 1</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Orthonormal basis simplification</td>
+      <td style="padding: 12px 15px; color: #34495e;">P = QQᵀ when A = Q has Qᵀ Q = I</td>
+      <td style="padding: 12px 15px; color: #34495e;">the (AᵀA)⁻¹ factor disappears because QᵀQ = I</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+// obj9 — summary capstone: where projections appear across linear algebra
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Where projection appears</th>
+      <th style="${tableHeaders.summary}">What is being projected</th>
+      <th style="${tableHeaders.summary}">What the projection gives</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Component along an axis</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vector b onto a single direction q</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(q · b) q — the part of b along q</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Best approximation in a subspace</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vector b onto subspace W</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the w ∈ W minimizing ‖b − w‖</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Orthogonal decomposition of ℝⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every b onto W and onto W<sup>⊥</sup></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">unique b = Pb + (I − P) b</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/orthogonality/least-squares" style="${linkStyle}">Least squares</a></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">b onto Col(A) when A x = b is inconsistent</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A x̂ = Pb; residual ⊥ Col(A); normal equations AᵀA x̂ = Aᵀ b</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/orthogonality/gram-schmidt" style="${linkStyle}">Gram–Schmidt</a> orthogonalization</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each new basis vector onto the span of previous ones</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">perpendicular remainder becomes the next orthogonal basis vector</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/decompositions/qr" style="${linkStyle}">QR decomposition</a></td>
+      <td style="padding: 12px 15px; color: #34495e;">columns of A successively onto previous orthonormal q&apos;s</td>
+      <td style="padding: 12px 15px; color: #34495e;">A = QR with Q orthonormal columns and R upper triangular</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-// //     const sectionsContent={
-
-// //     obj1:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-  
-// //     },
-// //     obj2:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-  
-// //     obj3:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj4:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj5:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj6:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj7:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj8:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj9:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj10:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj11:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj12:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj13:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-// //     obj14:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-
-
-// //     obj15:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     }
-  
-// //   }
 
 // const sectionsContent = {
 //   obj1: {
@@ -339,613 +308,17 @@
 //     after: ``,
 //     link: ``,
 //   },
-// }
-
-// const introContent = {
-//   title: `The Closest Point in a Subspace`,
-//   content: `The orthogonal projection of a vector onto a subspace is the point in the subspace closest to the original vector. The residual — the difference between the vector and its projection — is perpendicular to the subspace. This orthogonal decomposition is the geometric engine behind least squares, the QR decomposition, and every approximation problem in linear algebra.`,
-// }
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is the formula for projecting a vector onto another vector?",
-//     answer: "The projection of b onto a nonzero vector a is proj_a(b) = (a·b / a·a) · a. The scalar a·b / a·a gives the component of b in the direction of a, and the residual b minus the projection is orthogonal to a.",
-//     sectionId: "1"
+//   obj9: {
+//     title: `Summary: Where Projections Appear`,
+//     content: `Projection is not a single isolated construction — it threads through least squares, Gram&ndash;Schmidt, QR decomposition, the orthogonal decomposition of ℝⁿ, and every &quot;closest point&quot; or &quot;best approximation&quot; problem in linear algebra. The table below collects each context in which projection plays a role, alongside what is being projected and what the projection produces.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
 //   },
-//   obj2: {
-//     question: "What is the orthogonal decomposition of a vector?",
-//     answer: "Every vector b in Rⁿ decomposes uniquely as b = b̂ + z, where b̂ is the orthogonal projection onto a subspace W and z is the perpendicular residual in W⊥. The projection b̂ is the closest point in W to b.",
-//     sectionId: "2"
-//   },
-//   obj3: {
-//     question: "How do you project onto a subspace with a non-orthogonal basis?",
-//     answer: "If the columns of matrix A form a basis for W, the projection of b onto W is b̂ = A(AᵀA)⁻¹Aᵀb. This formula comes from requiring the residual b − Ab̂ to be orthogonal to every column of A, which yields the normal equations AᵀAx̂ = Aᵀb.",
-//     sectionId: "4"
-//   },
-//   obj4: {
-//     question: "What are the properties of a projection matrix?",
-//     answer: "An orthogonal projection matrix P satisfies two conditions: it is symmetric (Pᵀ = P) and idempotent (P² = P). Symmetry ensures the projection is orthogonal rather than oblique. Idempotence means projecting twice gives the same result as projecting once.",
-//     sectionId: "5"
-//   },
-//   obj5: {
-//     question: "How is projection related to least squares?",
-//     answer: "When Ax = b has no exact solution, the least-squares solution x̂ produces the projection of b onto the column space of A. The residual b − Ax̂ is orthogonal to the column space, and x̂ satisfies the normal equations AᵀAx̂ = Aᵀb.",
-//     sectionId: "7"
-//   }
-// }
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Orthogonal Projections",
-//     "description": "Orthogonal projections in linear algebra: projection onto vectors and subspaces, projection matrix P = A(AᵀA)⁻¹Aᵀ, orthogonal decomposition, and connection to least squares.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/orthogonality/projections",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Orthogonal Projections"
-//     },
-//     "teaches": [
-//       "Projection of a vector onto another vector",
-//       "Orthogonal decomposition into subspace and complement",
-//       "Projection using orthogonal and orthonormal bases",
-//       "General projection formula A(AᵀA)⁻¹Aᵀ",
-//       "Projection matrix properties: symmetry and idempotence",
-//       "Connection between projection and least squares"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Orthogonality",
-//         "item": "https://www.learnmathclass.com/linear-algebra/orthogonality"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Projections",
-//         "item": "https://www.learnmathclass.com/linear-algebra/orthogonality/projections"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-// //    return {
-// //       props:{
-// //          sectionsContent,
-// //          introContent,
-// //           seoData: {
-// //         title: "Projections | Learn Math Class",
-// //         description: "Metadescription",
-// //         keywords: keyWords.join(", "),
-// //         url: "/linear-algebra/orthogonality/projections",
-// //          name: "name"
-// //       },
-        
-// //        }
-// //     }
-
-// return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Projections: Formulas & Matrix Properties | Learn Math Class",
-//       description: "Orthogonal projections in linear algebra: projection onto vectors and subspaces, projection matrix P = A(AᵀA)⁻¹Aᵀ, orthogonal decomposition, and connection to least squares.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/orthogonality/projections",
-//       name: "Orthogonal Projections"
-//     },
-//   }
-// }
-//    }
-
-// // export default function ProjectionsPage({seoData,sectionsContent , introContent}) {
-// export default function ProjectionsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    {/* <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head> */}
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Orthogonal Projections</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
 // }
 
 
-
-// tables-optimized: v4 | 2026-05-18 | 3 tables (obj4 aggregation, obj5 aggregation, obj9 summary capstone)
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "orthogonal projection",
-  "projection onto subspace",
-  "projection matrix",
-  "projection formula linear algebra",
-  "proj vector formula",
-  "orthogonal decomposition",
-  "projection orthogonal basis",
-  "projection matrix properties",
-  "idempotent symmetric matrix",
-  "closest point subspace",
-  "projection least squares",
-  "normal equations projection",
-  "projection onto vector",
-  "A(ATA)^-1 AT formula"
-]
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj4 — aggregation: projection formulas by basis type (consolidates obj1, obj3, obj4)
-const obj4Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Project onto…</th>
-      <th style="${tableHeaders.aggregation}">Formula for the projection</th>
-      <th style="${tableHeaders.aggregation}">Requirements on the basis</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a single nonzero vector a</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">proj<sub>a</sub>(b) = (a · b) / (a · a) · a</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a ≠ 0</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a subspace W with an <em>orthogonal</em> basis {u<sub>1</sub>, …, u<sub>k</sub>}</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">proj<sub>W</sub>(b) = Σᵢ (u<sub>i</sub> · b) / (u<sub>i</sub> · u<sub>i</sub>) · u<sub>i</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">basis pairwise orthogonal: u<sub>i</sub> · u<sub>j</sub> = 0 for i ≠ j</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">a subspace W with an <em>orthonormal</em> basis {q<sub>1</sub>, …, q<sub>k</sub>}</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">proj<sub>W</sub>(b) = Σᵢ (q<sub>i</sub> · b) · q<sub>i</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">pairwise orthogonal + each ‖q<sub>i</sub>‖ = 1</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">a subspace W with an arbitrary basis (columns of A)</td>
-      <td style="padding: 12px 15px; color: #34495e;">proj<sub>W</sub>(b) = A (AᵀA)⁻¹ Aᵀ b</td>
-      <td style="padding: 12px 15px; color: #34495e;">columns of A linearly independent (so AᵀA is invertible)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj5 — aggregation: properties of the projection matrix P = A(AᵀA)⁻¹Aᵀ
-const obj5Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Property of P</th>
-      <th style="${tableHeaders.aggregation}">Statement</th>
-      <th style="${tableHeaders.aggregation}">Why it holds / what it means</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Idempotent</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">P² = P</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">projecting a second time changes nothing; vectors already in W are fixed</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Symmetric</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Pᵀ = P</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">makes the projection orthogonal (residual ⊥ W); distinguishes from oblique projections, which satisfy P² = P but Pᵀ ≠ P</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Complementary projection</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I − P projects onto W<sup>⊥</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I − P is also symmetric and idempotent</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Decomposition of every b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">b = Pb + (I − P) b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">unique split into a W-component and a W<sup>⊥</sup>-component</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/eigen" style="${linkStyle}">Eigenvalues</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">only 0 and 1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vectors in W are eigenvectors for λ = 1; vectors in W<sup>⊥</sup> for λ = 0</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rank</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank(P) = dim(W)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of independent directions preserved</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/matrix/trace" style="${linkStyle}">Trace</a></td>
-      <td style="padding: 12px 15px; color: #34495e;">tr(P) = dim(W)</td>
-      <td style="padding: 12px 15px; color: #34495e;">trace = sum of eigenvalues = number of eigenvalues equal to 1</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Orthonormal basis simplification</td>
-      <td style="padding: 12px 15px; color: #34495e;">P = QQᵀ when A = Q has Qᵀ Q = I</td>
-      <td style="padding: 12px 15px; color: #34495e;">the (AᵀA)⁻¹ factor disappears because QᵀQ = I</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj9 — summary capstone: where projections appear across linear algebra
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Where projection appears</th>
-      <th style="${tableHeaders.summary}">What is being projected</th>
-      <th style="${tableHeaders.summary}">What the projection gives</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Component along an axis</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vector b onto a single direction q</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(q · b) q — the part of b along q</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Best approximation in a subspace</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vector b onto subspace W</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the w ∈ W minimizing ‖b − w‖</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Orthogonal decomposition of ℝⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every b onto W and onto W<sup>⊥</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">unique b = Pb + (I − P) b</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/orthogonality/least-squares" style="${linkStyle}">Least squares</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">b onto Col(A) when A x = b is inconsistent</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A x̂ = Pb; residual ⊥ Col(A); normal equations AᵀA x̂ = Aᵀ b</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/orthogonality/gram-schmidt" style="${linkStyle}">Gram–Schmidt</a> orthogonalization</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each new basis vector onto the span of previous ones</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">perpendicular remainder becomes the next orthogonal basis vector</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/decompositions/qr" style="${linkStyle}">QR decomposition</a></td>
-      <td style="padding: 12px 15px; color: #34495e;">columns of A successively onto previous orthonormal q&apos;s</td>
-      <td style="padding: 12px 15px; color: #34495e;">A = QR with Q orthonormal columns and R upper triangular</td>
-    </tr>
-  </tbody>
-</table>
-`
-
+// formulas-injected: v1 | 2026-06-16 | 6 callouts (obj2 orthogonal_decomposition direct, obj3 projection_onto_orthonormal_basis direct, obj4 projection_onto_subspace direct, obj5 orthonormal_columns_projection inline-promote + complementary_projection prose-insert, obj6 projection_matrix_properties prose-insert)
 
 const sectionsContent = {
   obj1: {
@@ -973,9 +346,10 @@ Residual: $\\mathbf{b} - \\text{proj}_{\\mathbf{a}}\\mathbf{b} = (\\frac{2}{3}, 
     title: `The Orthogonal Decomposition`,
     content: `Every vector $\\mathbf{b} \\in \\mathbb{R}^n$ decomposes uniquely with respect to a [subspace](!/linear-algebra/vector-spaces/subspaces) $W$ as
 
-$$\\mathbf{b} = \\hat{\\mathbf{b}} + \\mathbf{z}$$
+@academic[formula_callout:orthogonal_decomposition|Orthogonal Decomposition|$$\\mathbf{b} = \\hat{\\mathbf{b}} + \\mathbf{z}, \\quad \\hat{\\mathbf{b}} \\in W, \\ \\mathbf{z} \\in W^\\perp$$]@
+@academic[formulas_link:/linear-algebra/formulas#orthogonal_decomposition]@
 
-where $\\hat{\\mathbf{b}} \\in W$ and $\\mathbf{z} \\in W^\\perp$. The component $\\hat{\\mathbf{b}}$ is the orthogonal projection of $\\mathbf{b}$ onto $W$, and $\\mathbf{z} = \\mathbf{b} - \\hat{\\mathbf{b}}$ is the perpendicular residual.
+The component $\\hat{\\mathbf{b}}$ is the orthogonal projection of $\\mathbf{b}$ onto $W$, and $\\mathbf{z} = \\mathbf{b} - \\hat{\\mathbf{b}}$ is the perpendicular residual.
 
 The projection $\\hat{\\mathbf{b}}$ is the closest point in $W$ to $\\mathbf{b}$. For any other vector $\\mathbf{w} \\in W$:
 
@@ -996,7 +370,8 @@ Each term is the projection of $\\mathbf{b}$ onto one basis vector. Orthogonalit
 
 When the basis is [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets), the denominators are all $1$:
 
-$$\\text{proj}_W \\mathbf{b} = (\\mathbf{q}_1 \\cdot \\mathbf{b})\\,\\mathbf{q}_1 + (\\mathbf{q}_2 \\cdot \\mathbf{b})\\,\\mathbf{q}_2 + \\cdots + (\\mathbf{q}_k \\cdot \\mathbf{b})\\,\\mathbf{q}_k$$
+@academic[formula_callout:projection_onto_orthonormal_basis|Projection onto Orthonormal Basis|$$\\text{proj}_W \\mathbf{b} = \\sum_{i=1}^{k} (\\mathbf{q}_i \\cdot \\mathbf{b})\\,\\mathbf{q}_i$$]@
+@academic[formulas_link:/linear-algebra/formulas#projection_onto_orthonormal_basis]@
 
 This is the cleanest formula in all of linear algebra — $k$ dot products and $k$ scalar multiplications.`,
     before: ``,
@@ -1009,7 +384,8 @@ This is the cleanest formula in all of linear algebra — $k$ dot products and $
 
 If the columns of the $m \\times k$ [matrix](!/linear-algebra/matrix) $A$ form a basis for $W$, the projection of $\\mathbf{b}$ onto $W$ is
 
-$$\\hat{\\mathbf{b}} = A(A^TA)^{-1}A^T\\mathbf{b}$$
+@academic[formula_callout:projection_onto_subspace|Projection onto Subspace|$$\\hat{\\mathbf{b}} = A(A^TA)^{-1}A^T\\mathbf{b}$$]@
+@academic[formulas_link:/linear-algebra/formulas#projection_onto_subspace]@
 
 This formula requires $A^TA$ to be [invertible](!/linear-algebra/matrix/inverse), which holds whenever the columns of $A$ are [linearly independent](!/linear-algebra/vector-spaces/linear-independence).
 
@@ -1024,11 +400,19 @@ The alternative is to first orthogonalize the basis using [Gram-Schmidt](!/linea
     title: `The Projection Matrix`,
     content: `The matrix $P = A(A^TA)^{-1}A^T$ maps any vector $\\mathbf{b}$ to its projection onto $\\text{Col}(A)$: $\\hat{\\mathbf{b}} = P\\mathbf{b}$.
 
-When the basis is orthonormal ($A = Q$ with $Q^TQ = I$), the formula simplifies to $P = QQ^T$.
+When the basis is orthonormal ($A = Q$ with $Q^TQ = I$), the formula simplifies:
+
+@academic[formula_callout:orthonormal_columns_projection|Orthonormal Columns Projection|$$P = QQ^T$$]@
+@academic[formulas_link:/linear-algebra/formulas#orthonormal_columns_projection]@
 
 The projection matrix satisfies two algebraic conditions. It is [symmetric](!/linear-algebra/matrix/types): $P^T = P$. And it is [idempotent](!/linear-algebra/matrix/types): $P^2 = P$ — projecting twice gives the same result as projecting once, because vectors already in $W$ are fixed by $P$.
 
-The complementary matrix $I - P$ projects onto $W^\\perp$. It satisfies $(I - P)^T = I - P$ and $(I - P)^2 = I - P$, and for every $\\mathbf{b}$: $P\\mathbf{b} + (I - P)\\mathbf{b} = \\mathbf{b}$, decomposing $\\mathbf{b}$ into its $W$-component and its $W^\\perp$-component.
+The complementary matrix $I - P$ projects onto the orthogonal complement $W^\\perp$:
+
+@academic[formula_callout:complementary_projection|Complementary Projection|$$I - P \\text{ projects onto } W^\\perp$$]@
+@academic[formulas_link:/linear-algebra/formulas#complementary_projection]@
+
+It satisfies $(I - P)^T = I - P$ and $(I - P)^2 = I - P$, and for every $\\mathbf{b}$: $P\\mathbf{b} + (I - P)\\mathbf{b} = \\mathbf{b}$, decomposing $\\mathbf{b}$ into its $W$-component and its $W^\\perp$-component.
 
 The [eigenvalues](!/linear-algebra/eigen) of $P$ are $0$ and $1$: vectors in $W$ map to themselves (eigenvalue $1$) and vectors in $W^\\perp$ map to zero (eigenvalue $0$). The rank of $P$ equals the [trace](!/linear-algebra/matrix/trace) of $P$, which equals $\\dim(W)$.`,
     before: ``,
@@ -1037,7 +421,10 @@ The [eigenvalues](!/linear-algebra/eigen) of $P$ are $0$ and $1$: vectors in $W$
   },
   obj6: {
     title: `Properties of Orthogonal Projections`,
-    content: `Orthogonal projections are characterized by two properties acting together.
+    content: `Orthogonal projections are characterized by two properties acting together:
+
+@academic[formula_callout:projection_matrix_properties|Projection Matrix Properties|$$P^2 = P, \\quad P^T = P$$]@
+@academic[formulas_link:/linear-algebra/formulas#projection_matrix_properties]@
 
 Idempotence ($P^2 = P$): once a vector has been projected, projecting again changes nothing. Every vector in $W$ is a fixed point of $P$. This distinguishes projections from other [linear transformations](!/linear-algebra/transformations) — most transformations continue to change vectors on repeated application.
 
@@ -1094,6 +481,7 @@ The projection equals $\\mathbf{b}$ itself — meaning $\\mathbf{b}$ was already
     link: ``,
   },
 }
+
 
 const introContent = {
   title: `The Closest Point in a Subspace`,

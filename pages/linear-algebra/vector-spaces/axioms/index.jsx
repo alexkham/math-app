@@ -1,205 +1,268 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// tables-optimized: v4 | 2026-05-22 | 4 tables (obj2 aggregation, obj8 comparison, obj9 aggregation, obj11 summary capstone)
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "vector space axioms",
-//   "ten axioms vector space",
-//   "vector space definition",
-//   "closure addition scalar multiplication",
-//   "field of scalars",
-//   "polynomial vector space",
-//   "matrix vector space",
-//   "function space",
-//   "vector space non-examples",
-//   "consequences axioms",
-//   "real complex vector space",
-//   "Rn vector space axioms",
-//   "zero vector axiom",
-//   "additive inverse axiom"
-// ]
+export async function getStaticProps(){
+const keyWords = [
+  "vector space axioms",
+  "ten axioms vector space",
+  "vector space definition",
+  "closure addition scalar multiplication",
+  "field of scalars",
+  "polynomial vector space",
+  "matrix vector space",
+  "function space",
+  "vector space non-examples",
+  "consequences axioms",
+  "real complex vector space",
+  "Rn vector space axioms",
+  "zero vector axiom",
+  "additive inverse axiom"
+]
 
-//   // •
+  // •
 
-// //   \u2022 First item
-// // \u2022 Second item
+//   \u2022 First item
+// \u2022 Second item
 
   
-// // <hr style="border-width:1px;"></hr>
+// <hr style="border-width:1px;"></hr>
 
-// // <hr style="color:blue;" />
+// <hr style="color:blue;" />
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// <hr style="border-color:#3498db; border-width:1px;" />
 
 
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
  
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
+// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.notation)}
+        // </div>,
 
 
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
+//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+//     {processContent(sectionsContent.normal.parameters)}
+// </div>,
         
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
+//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+//                   {processContent(sectionsContent.obj4.content)}
+//                   </div>,
 
 
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-// //     const sectionsContent={
-
-// //     obj1:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-  
-// //     },
-// //     obj2:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-  
-// //     obj3:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj4:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj5:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj6:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj7:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj8:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj9:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj10:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj11:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj12:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj13:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-// //     obj14:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
+//  <div key={'dist'} style={{
+//                     textAlign: 'center',
+//                     transform: 'scale(0.98)',
+//                     transformOrigin: 'center',
+//                     marginTop:'50px',
+//                     marginLeft:'-150px'
+//                   }} dangerouslySetInnerHTML={{ 
+//                     __html:   sectionContent.distributions.svg,
+//                   }} />
 
 
-// //     obj15:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     }
-  
-// //   }
+const linkStyle = 'color: inherit; text-decoration: underline;'
+
+// ---------- TABLES ----------
+
+// obj2 — aggregation: the ten axioms (reference card)
+const obj2Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation} text-align: center;">#</th>
+      <th style="${tableHeaders.aggregation}">Axiom</th>
+      <th style="${tableHeaders.aggregation}">Statement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Closure under addition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><b>u</b> + <b>v</b> ∈ V</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Commutativity of addition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><b>u</b> + <b>v</b> = <b>v</b> + <b>u</b></td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">3</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Associativity of addition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(<b>u</b> + <b>v</b>) + <b>w</b> = <b>u</b> + (<b>v</b> + <b>w</b>)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">4</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Zero vector exists</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">there exists <b>0</b> ∈ V such that <b>v</b> + <b>0</b> = <b>v</b> for every <b>v</b></td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">5</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Additive inverse exists</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">for every <b>v</b>, there exists −<b>v</b> ∈ V such that <b>v</b> + (−<b>v</b>) = <b>0</b></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">6</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Closure under scalar multiplication</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<b>v</b> ∈ V</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">7</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Associativity of scalars</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c(d<b>v</b>) = (cd)<b>v</b></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">8</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Distributivity over vector addition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c(<b>u</b> + <b>v</b>) = c<b>u</b> + c<b>v</b></td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">9</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Distributivity over scalar addition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(c + d)<b>v</b> = c<b>v</b> + d<b>v</b></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">10</td>
+      <td style="padding: 12px 15px; color: #34495e;">Multiplicative identity</td>
+      <td style="padding: 12px 15px; color: #34495e;">1<b>v</b> = <b>v</b></td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// obj8 — comparison: non-examples and which axiom each one violates
+const obj8Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Candidate set &amp; operations</th>
+      <th style="${tableHeaders.comparison}">Axiom(s) that fail</th>
+      <th style="${tableHeaders.comparison}">Why</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Polynomials of degree exactly n; usual addition and scaling</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">closure under addition (axiom 1)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">leading terms can cancel: (x² + x) + (−x² + 3) = x + 3, which has degree 1</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Positive real numbers; ordinary addition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zero vector (axiom 4)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no positive z satisfies x + z = x for all positive x</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">ℝ² with (u₁, u₂) ⊕ (v₁, v₂) = (u₁ + v₁, 0)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">distributivity over vector addition (axiom 8)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the second component is always destroyed; c(<b>u</b> + <b>v</b>) ≠ c<b>u</b> + c<b>v</b> in general</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">A line in ℝ² that does not pass through the origin; usual operations</td>
+      <td style="padding: 12px 15px; color: #34495e;">zero vector (axiom 4) and closure under addition (axiom 1)</td>
+      <td style="padding: 12px 15px; color: #34495e;">the line excludes <b>0</b>, and the sum of two points on the line generally falls off the line</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// obj9 — aggregation: consequences provable from the axioms
+const obj9Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Consequence</th>
+      <th style="${tableHeaders.aggregation}">Statement</th>
+      <th style="${tableHeaders.aggregation}">Proof sketch</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Zero scalar annihilates</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0<b>v</b> = <b>0</b></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0<b>v</b> = (0 + 0)<b>v</b> = 0<b>v</b> + 0<b>v</b>; add −(0<b>v</b>) to both sides</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Zero vector annihilates</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<b>0</b> = <b>0</b></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<b>0</b> = c(<b>0</b> + <b>0</b>) = c<b>0</b> + c<b>0</b>; cancel one copy</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Negation by −1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−1)<b>v</b> = −<b>v</b></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><b>v</b> + (−1)<b>v</b> = 1<b>v</b> + (−1)<b>v</b> = (1 + (−1))<b>v</b> = 0<b>v</b> = <b>0</b></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">No zero divisors</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<b>v</b> = <b>0</b> ⟹ c = 0 or <b>v</b> = <b>0</b></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">if c ≠ 0, multiply both sides by 1/c to get <b>v</b> = <b>0</b></td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Uniqueness</td>
+      <td style="padding: 12px 15px; color: #34495e;">the zero vector and each additive inverse are unique</td>
+      <td style="padding: 12px 15px; color: #34495e;">assume two candidates exist; the axioms force them to coincide</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// obj11 — summary capstone: how the axioms instantiate in each canonical space
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Vector space</th>
+      <th style="${tableHeaders.summary}">What &quot;vectors&quot; are</th>
+      <th style="${tableHeaders.summary}">Operations</th>
+      <th style="${tableHeaders.summary}">Zero vector</th>
+      <th style="${tableHeaders.summary}">Additive inverse of <b>v</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">ℝⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ordered n-tuples (v₁, …, vₙ)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">entry-by-entry addition and scaling</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(0, 0, …, 0)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−v₁, …, −vₙ)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">𝒫ₙ (polynomials of degree ≤ n)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a₀ + a₁x + ⋯ + aₙxⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">combine like terms; scale every coefficient</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the zero polynomial (all coefficients 0)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">negate every coefficient</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">ℝᵐˣⁿ (real m × n matrices)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">m × n grids of real entries</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">entry-by-entry addition and scaling</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the zero matrix O (every entry 0)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">negate every entry</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">C[a, b] (continuous functions on [a, b])</td>
+      <td style="padding: 12px 15px; color: #34495e;">continuous functions f : [a, b] → ℝ</td>
+      <td style="padding: 12px 15px; color: #34495e;">pointwise: (f + g)(x) = f(x) + g(x), (cf)(x) = c · f(x)</td>
+      <td style="padding: 12px 15px; color: #34495e;">the function z(x) = 0 for all x</td>
+      <td style="padding: 12px 15px; color: #34495e;">(−f)(x) = −f(x)</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// ---------- SECTIONS ----------
+
 // const sectionsContent = {
 //   obj1: {
 //     title: `The Idea of Abstraction`,
@@ -359,708 +422,17 @@
 //     after: ``,
 //     link: ``,
 //   },
-// }
-
-//  const introContent = {
-//   title: `The Ten Rules That Define the Structure`,
-//   content: `A vector space is any set equipped with addition and scalar multiplication that satisfy ten axioms. These axioms capture the common algebraic behavior of Rⁿ, polynomial spaces, matrix spaces, and function spaces. By working from the axioms alone, every theorem applies to all of these settings at once.`,
-// }
-
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What are the ten axioms of a vector space?",
-//     answer: "The ten axioms split into five for addition (closure, commutativity, associativity, zero vector, additive inverse) and five for scalar multiplication (closure, scalar associativity, two distributive laws, multiplicative identity 1·v = v). Any set satisfying all ten with two operations is a vector space.",
-//     sectionId: "2"
+//   obj11: {
+//     title: `Summary: How the Axioms Instantiate`,
+//     content: `The ten axioms describe an abstract structure; the canonical examples make that structure concrete. The table below collects the four standard vector spaces side by side, naming what the role of "vector" is in each, the addition and scaling rules that satisfy the axioms, the specific element that serves as the zero vector, and the recipe for the additive inverse. Reading across each row instantiates the abstract axioms in a single specific space; reading down each column shows the same axiomatic ingredient taking different concrete forms.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
 //   },
-//   obj2: {
-//     question: "What are examples of vector spaces besides Rⁿ?",
-//     answer: "Polynomials of degree at most n (dimension n+1), the set of all m×n matrices (dimension mn), continuous functions on an interval (infinite-dimensional), and solution sets of homogeneous linear ODEs are all vector spaces. Each satisfies the ten axioms under its natural addition and scaling.",
-//     sectionId: "5"
-//   },
-//   obj3: {
-//     question: "What are common non-examples of vector spaces?",
-//     answer: "Polynomials of degree exactly n fail closure under addition (leading terms can cancel). Positive reals with ordinary addition lack a zero element. A line not through the origin in R² fails to contain the zero vector. Affine maps T(v) = Av + b with b ≠ 0 break the axioms.",
-//     sectionId: "8"
-//   },
-//   obj4: {
-//     question: "What follows automatically from the axioms?",
-//     answer: "Several facts are provable from the axioms alone: 0·v = 0, c·0 = 0, (−1)·v = −v, and if c·v = 0 then c = 0 or v = 0. The zero vector and each additive inverse are unique. These are theorems, not additional assumptions.",
-//     sectionId: "9"
-//   },
-//   obj5: {
-//     question: "Why do vector space axioms matter?",
-//     answer: "Working from axioms means every theorem proved abstractly — about independence, span, basis, dimension — applies simultaneously to Rⁿ, polynomial spaces, matrix spaces, and function spaces. The axioms are the minimal conditions supporting the entire framework of linear algebra.",
-//     sectionId: "10"
-//   }
 // }
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Vector Space Axioms",
-//     "description": "The ten vector space axioms: addition and scalar multiplication rules, Rⁿ and abstract examples, polynomial and matrix spaces, non-examples, consequences of axioms, and why abstraction matters.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/vector-spaces/axioms",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Vector Space Axioms"
-//     },
-//     "teaches": [
-//       "The ten axioms defining a vector space",
-//       "The field of scalars: real and complex",
-//       "Rⁿ as the standard vector space",
-//       "Polynomial, matrix, and function space examples",
-//       "Non-examples and axiom failures",
-//       "Consequences provable from axioms alone",
-//       "Why axiomatic abstraction powers linear algebra"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Vector Spaces",
-//         "item": "https://www.learnmathclass.com/linear-algebra/vector-spaces"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Axioms",
-//         "item": "https://www.learnmathclass.com/linear-algebra/vector-spaces/axioms"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-// //    return {
-// //       props:{
-// //          sectionsContent,
-// //          introContent,
-// //           seoData: {
-// //         title: "Title | Learn Math Class",
-// //         description: "Metadescription",
-// //         keywords: keyWords.join(", "),
-// //         url: "/linear-algebra/vector-spaces/axioms",
-// //          name: "name"
-// //       },
-        
-// //        }
-// //     }
-
-// return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Vector Space Axioms: The Ten Rules | Learn Math Class",
-//       description: "The ten vector space axioms: addition and scalar multiplication rules, Rⁿ and abstract examples, polynomial and matrix spaces, non-examples, consequences of axioms, and why abstraction matters.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/vector-spaces/axioms",
-//       name: "Vector Space Axioms"
-//     },
-//   }
-// }
-//    }
-
-// // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-// export default function VectorSpaceAxiomsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    {/* <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head> */}
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Axioms related to Vector Spaces</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
 
 
 // tables-optimized: v4 | 2026-05-22 | 4 tables (obj2 aggregation, obj8 comparison, obj9 aggregation, obj11 summary capstone)
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "vector space axioms",
-  "ten axioms vector space",
-  "vector space definition",
-  "closure addition scalar multiplication",
-  "field of scalars",
-  "polynomial vector space",
-  "matrix vector space",
-  "function space",
-  "vector space non-examples",
-  "consequences axioms",
-  "real complex vector space",
-  "Rn vector space axioms",
-  "zero vector axiom",
-  "additive inverse axiom"
-]
-
-  // •
-
-//   \u2022 First item
-// \u2022 Second item
-
-  
-// <hr style="border-width:1px;"></hr>
-
-// <hr style="color:blue;" />
-
-// <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-        //     {processContent(sectionsContent.normal.notation)}
-        // </div>,
-
-
-//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-//     {processContent(sectionsContent.normal.parameters)}
-// </div>,
-        
-//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-//                   {processContent(sectionsContent.obj4.content)}
-//                   </div>,
-
-
-//  <div key={'dist'} style={{
-//                     textAlign: 'center',
-//                     transform: 'scale(0.98)',
-//                     transformOrigin: 'center',
-//                     marginTop:'50px',
-//                     marginLeft:'-150px'
-//                   }} dangerouslySetInnerHTML={{ 
-//                     __html:   sectionContent.distributions.svg,
-//                   }} />
-
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj2 — aggregation: the ten axioms (reference card)
-const obj2Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation} text-align: center;">#</th>
-      <th style="${tableHeaders.aggregation}">Axiom</th>
-      <th style="${tableHeaders.aggregation}">Statement</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Closure under addition</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><b>u</b> + <b>v</b> ∈ V</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Commutativity of addition</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><b>u</b> + <b>v</b> = <b>v</b> + <b>u</b></td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">3</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Associativity of addition</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(<b>u</b> + <b>v</b>) + <b>w</b> = <b>u</b> + (<b>v</b> + <b>w</b>)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">4</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Zero vector exists</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">there exists <b>0</b> ∈ V such that <b>v</b> + <b>0</b> = <b>v</b> for every <b>v</b></td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">5</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Additive inverse exists</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">for every <b>v</b>, there exists −<b>v</b> ∈ V such that <b>v</b> + (−<b>v</b>) = <b>0</b></td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">6</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Closure under scalar multiplication</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<b>v</b> ∈ V</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">7</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Associativity of scalars</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c(d<b>v</b>) = (cd)<b>v</b></td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">8</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Distributivity over vector addition</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c(<b>u</b> + <b>v</b>) = c<b>u</b> + c<b>v</b></td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">9</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Distributivity over scalar addition</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(c + d)<b>v</b> = c<b>v</b> + d<b>v</b></td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">10</td>
-      <td style="padding: 12px 15px; color: #34495e;">Multiplicative identity</td>
-      <td style="padding: 12px 15px; color: #34495e;">1<b>v</b> = <b>v</b></td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj8 — comparison: non-examples and which axiom each one violates
-const obj8Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Candidate set &amp; operations</th>
-      <th style="${tableHeaders.comparison}">Axiom(s) that fail</th>
-      <th style="${tableHeaders.comparison}">Why</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Polynomials of degree exactly n; usual addition and scaling</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">closure under addition (axiom 1)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">leading terms can cancel: (x² + x) + (−x² + 3) = x + 3, which has degree 1</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Positive real numbers; ordinary addition</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zero vector (axiom 4)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no positive z satisfies x + z = x for all positive x</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">ℝ² with (u₁, u₂) ⊕ (v₁, v₂) = (u₁ + v₁, 0)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">distributivity over vector addition (axiom 8)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the second component is always destroyed; c(<b>u</b> + <b>v</b>) ≠ c<b>u</b> + c<b>v</b> in general</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">A line in ℝ² that does not pass through the origin; usual operations</td>
-      <td style="padding: 12px 15px; color: #34495e;">zero vector (axiom 4) and closure under addition (axiom 1)</td>
-      <td style="padding: 12px 15px; color: #34495e;">the line excludes <b>0</b>, and the sum of two points on the line generally falls off the line</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj9 — aggregation: consequences provable from the axioms
-const obj9Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Consequence</th>
-      <th style="${tableHeaders.aggregation}">Statement</th>
-      <th style="${tableHeaders.aggregation}">Proof sketch</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Zero scalar annihilates</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0<b>v</b> = <b>0</b></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0<b>v</b> = (0 + 0)<b>v</b> = 0<b>v</b> + 0<b>v</b>; add −(0<b>v</b>) to both sides</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Zero vector annihilates</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<b>0</b> = <b>0</b></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<b>0</b> = c(<b>0</b> + <b>0</b>) = c<b>0</b> + c<b>0</b>; cancel one copy</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Negation by −1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−1)<b>v</b> = −<b>v</b></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><b>v</b> + (−1)<b>v</b> = 1<b>v</b> + (−1)<b>v</b> = (1 + (−1))<b>v</b> = 0<b>v</b> = <b>0</b></td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">No zero divisors</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<b>v</b> = <b>0</b> ⟹ c = 0 or <b>v</b> = <b>0</b></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">if c ≠ 0, multiply both sides by 1/c to get <b>v</b> = <b>0</b></td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Uniqueness</td>
-      <td style="padding: 12px 15px; color: #34495e;">the zero vector and each additive inverse are unique</td>
-      <td style="padding: 12px 15px; color: #34495e;">assume two candidates exist; the axioms force them to coincide</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj11 — summary capstone: how the axioms instantiate in each canonical space
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Vector space</th>
-      <th style="${tableHeaders.summary}">What &quot;vectors&quot; are</th>
-      <th style="${tableHeaders.summary}">Operations</th>
-      <th style="${tableHeaders.summary}">Zero vector</th>
-      <th style="${tableHeaders.summary}">Additive inverse of <b>v</b></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">ℝⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ordered n-tuples (v₁, …, vₙ)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">entry-by-entry addition and scaling</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(0, 0, …, 0)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−v₁, …, −vₙ)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">𝒫ₙ (polynomials of degree ≤ n)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a₀ + a₁x + ⋯ + aₙxⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">combine like terms; scale every coefficient</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the zero polynomial (all coefficients 0)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">negate every coefficient</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">ℝᵐˣⁿ (real m × n matrices)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">m × n grids of real entries</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">entry-by-entry addition and scaling</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the zero matrix O (every entry 0)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">negate every entry</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">C[a, b] (continuous functions on [a, b])</td>
-      <td style="padding: 12px 15px; color: #34495e;">continuous functions f : [a, b] → ℝ</td>
-      <td style="padding: 12px 15px; color: #34495e;">pointwise: (f + g)(x) = f(x) + g(x), (cf)(x) = c · f(x)</td>
-      <td style="padding: 12px 15px; color: #34495e;">the function z(x) = 0 for all x</td>
-      <td style="padding: 12px 15px; color: #34495e;">(−f)(x) = −f(x)</td>
-    </tr>
-  </tbody>
-</table>
-`
 
 // ---------- SECTIONS ----------
 
@@ -1077,6 +449,22 @@ A vector space is the formal extraction of these patterns. Rather than proving r
   obj2: {
     title: `The Ten Axioms`,
     content: `A vector space over a field $\\mathbb{F}$ is a set $V$ together with two operations — vector addition ($\\mathbf{u} + \\mathbf{v}$) and scalar multiplication ($c\\mathbf{v}$) — satisfying the following ten axioms. For all $\\mathbf{u}, \\mathbf{v}, \\mathbf{w} \\in V$ and all scalars $c, d \\in \\mathbb{F}$:
+
+@academic[formula_callout:Vector Space Axioms
+$$\\begin{aligned}
+&\\text{For all } \\mathbf{u}, \\mathbf{v}, \\mathbf{w} \\in V \\text{ and all } c, d \\in \\mathbb{F}: \\\\
+&(1)\\ \\mathbf{u} + \\mathbf{v} \\in V \\quad (2)\\ \\mathbf{u} + \\mathbf{v} = \\mathbf{v} + \\mathbf{u} \\\\
+&(3)\\ (\\mathbf{u} + \\mathbf{v}) + \\mathbf{w} = \\mathbf{u} + (\\mathbf{v} + \\mathbf{w}) \\\\
+&(4)\\ \\exists\\, \\mathbf{0} \\in V: \\mathbf{v} + \\mathbf{0} = \\mathbf{v} \\\\
+&(5)\\ \\exists\\, -\\mathbf{v} \\in V: \\mathbf{v} + (-\\mathbf{v}) = \\mathbf{0} \\\\
+&(6)\\ c\\mathbf{v} \\in V \\quad (7)\\ c(d\\mathbf{v}) = (cd)\\mathbf{v} \\\\
+&(8)\\ c(\\mathbf{u} + \\mathbf{v}) = c\\mathbf{u} + c\\mathbf{v} \\\\
+&(9)\\ (c + d)\\mathbf{v} = c\\mathbf{v} + d\\mathbf{v} \\quad (10)\\ 1\\mathbf{v} = \\mathbf{v}
+\\end{aligned}$$
+/linear-algebra/formulas#vector_space_axioms]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 ## Addition Axioms
 
@@ -1197,11 +585,27 @@ A line in $\\mathbb{R}^2$ that does not pass through the origin is not a [subspa
     title: `Immediate Consequences of the Axioms`,
     content: `Several useful facts follow from the ten axioms alone. They are not additional assumptions but provable theorems.
 
-Scaling any vector by zero gives the zero vector: $0\\mathbf{v} = \\mathbf{0}$. The proof uses distributivity: $0\\mathbf{v} = (0 + 0)\\mathbf{v} = 0\\mathbf{v} + 0\\mathbf{v}$, and adding $-(0\\mathbf{v})$ to both sides gives $\\mathbf{0} = 0\\mathbf{v}$.
+The scalar zero and the zero vector both annihilate under scalar multiplication:
 
-Scaling the zero vector by any scalar gives the zero vector: $c\\mathbf{0} = \\mathbf{0}$. The argument is similar: $c\\mathbf{0} = c(\\mathbf{0} + \\mathbf{0}) = c\\mathbf{0} + c\\mathbf{0}$.
+@academic[formula_callout:Scalar-Zero Property
+$$0\\mathbf{v} = \\mathbf{0}, \\quad c\\mathbf{0} = \\mathbf{0}$$
+/linear-algebra/formulas#scalar_zero_property]@
 
-Scaling by $-1$ produces the additive inverse: $(-1)\\mathbf{v} = -\\mathbf{v}$. This follows from $\\mathbf{v} + (-1)\\mathbf{v} = 1\\mathbf{v} + (-1)\\mathbf{v} = (1 + (-1))\\mathbf{v} = 0\\mathbf{v} = \\mathbf{0}$.
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
+
+The proof of the first uses distributivity: $0\\mathbf{v} = (0 + 0)\\mathbf{v} = 0\\mathbf{v} + 0\\mathbf{v}$, and adding $-(0\\mathbf{v})$ to both sides gives $\\mathbf{0} = 0\\mathbf{v}$. The second is similar: $c\\mathbf{0} = c(\\mathbf{0} + \\mathbf{0}) = c\\mathbf{0} + c\\mathbf{0}$.
+
+Scaling by $-1$ produces the additive inverse:
+
+@academic[formula_callout:Negative One Scalar
+$$(-1)\\mathbf{v} = -\\mathbf{v}$$
+/linear-algebra/formulas#negative_one_scalar]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
+
+This follows from $\\mathbf{v} + (-1)\\mathbf{v} = 1\\mathbf{v} + (-1)\\mathbf{v} = (1 + (-1))\\mathbf{v} = 0\\mathbf{v} = \\mathbf{0}$.
 
 If $c\\mathbf{v} = \\mathbf{0}$, then $c = 0$ or $\\mathbf{v} = \\mathbf{0}$. A nonzero scalar cannot annihilate a nonzero vector — there are no zero divisors in a vector space.
 
@@ -1231,6 +635,8 @@ The ten axioms are not arbitrary — they are the minimal set of conditions that
     link: ``,
   },
 }
+
+
 
  const introContent = {
   title: `The Ten Rules That Define the Structure`,

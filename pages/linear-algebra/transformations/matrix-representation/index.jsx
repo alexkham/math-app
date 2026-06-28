@@ -1,204 +1,178 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// tables-optimized: v4 | 2026-05-22 | 3 tables (obj3 aggregation, obj8 aggregation, obj9 summary capstone)
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "matrix representation linear transformation",
-//   "standard matrix transformation",
-//   "linear map matrix",
-//   "transformation matrix columns",
-//   "composition matrix multiplication",
-//   "matrix for abstract vector spaces",
-//   "differentiation matrix polynomial",
-//   "standard matrix basis vectors",
-//   "linear transformation to matrix",
-//   "matrix encodes transformation",
-//   "coordinate representation linear map",
-//   "matrix representation basis",
-//   "invertible transformation matrix",
-//   "linear operator matrix"
-// ]
-//   // •
+export async function getStaticProps(){
+const keyWords = [
+  "matrix representation linear transformation",
+  "standard matrix transformation",
+  "linear map matrix",
+  "transformation matrix columns",
+  "composition matrix multiplication",
+  "matrix for abstract vector spaces",
+  "differentiation matrix polynomial",
+  "standard matrix basis vectors",
+  "linear transformation to matrix",
+  "matrix encodes transformation",
+  "coordinate representation linear map",
+  "matrix representation basis",
+  "invertible transformation matrix",
+  "linear operator matrix"
+]
 
-// //   \u2022 First item
-// // \u2022 Second item
+const linkStyle = 'color: inherit; text-decoration: underline;'
 
-  
-// // <hr style="border-width:1px;"></hr>
+// ---------- TABLES ----------
 
-// // <hr style="color:blue;" />
+// obj3 — aggregation: matrix shape ↔ transformation type
+const obj3Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Shape of A (m × n)</th>
+      <th style="${tableHeaders.aggregation}">Transformation type</th>
+      <th style="${tableHeaders.aggregation}">Geometric action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">m &gt; n (more rows than columns)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">T: ℝⁿ → ℝᵐ, embedding</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">embeds a smaller-dimensional space into a larger one (e.g. 3 × 2 lifts ℝ² into ℝ³)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">m = n (square)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">T: ℝⁿ → ℝⁿ, linear operator</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">maps a space to itself — only operators carry <a href="/linear-algebra/determinants" style="${linkStyle}">determinant</a>, <a href="/linear-algebra/eigen" style="${linkStyle}">eigenvalues</a>, and <a href="/linear-algebra/matrix/trace" style="${linkStyle}">trace</a></td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">m &lt; n (more columns than rows)</td>
+      <td style="padding: 12px 15px; color: #34495e;">T: ℝⁿ → ℝᵐ, compression</td>
+      <td style="padding: 12px 15px; color: #34495e;">compresses a larger-dimensional space into a smaller one (e.g. 2 × 3 flattens ℝ³ into ℝ²)</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// obj8 — aggregation: matrix invariants and what they reveal about T
+const obj8Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Matrix invariant</th>
+      <th style="${tableHeaders.aggregation}">What it reveals about T</th>
+      <th style="${tableHeaders.aggregation}">Requires</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/matrix/rank" style="${linkStyle}">rank</a>(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">dim of the <a href="/linear-algebra/transformations/image-kernel" style="${linkStyle}">image</a> of T (how many output directions T can reach)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any A</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">nullity(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">dim of the kernel of T (how many input directions T collapses to zero)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any A</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">det(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">invertibility (det ≠ 0); volume scaling factor |det(A)|; orientation by sign</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square A only</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">eigenvalues</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">scaling factors along the invariant directions (eigenvectors)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square A only</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">tr(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sum of the eigenvalues</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square A only</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/decompositions/svd" style="${linkStyle}">singular values</a></td>
+      <td style="padding: 12px 15px; color: #34495e;">maximum stretching along each orthogonal input direction</td>
+      <td style="padding: 12px 15px; color: #34495e;">any A</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+// obj9 — summary capstone: transformation ↔ matrix dictionary
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Transformation-side concept</th>
+      <th style="${tableHeaders.summary}">Matrix-side counterpart</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear T: ℝⁿ → ℝᵐ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">unique m × n matrix A</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">T(eⱼ) — image of j-th basis vector</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">j-th column of A</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">dim(domain) = n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of columns of A</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">dim(codomain) = m</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of rows of A</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear operator (V = W)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square matrix</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Identity transformation I</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/matrix/types" style="${linkStyle}">identity matrix</a> Iₙ</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Composition S ∘ T</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">matrix product BA</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inverse T⁻¹</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/matrix/inverse" style="${linkStyle}">inverse matrix</a> A⁻¹</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">T is invertible (bijective)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A is invertible (det(A) ≠ 0 for square A)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Image of T</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">column space of A</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Kernel of T</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">null space of A</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Isomorphism between V and W</td>
+      <td style="padding: 12px 15px; color: #34495e;">invertible square matrix relating the two coordinate systems</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+// ---------- SECTIONS ----------
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-// //     const sectionsContent={
-
-// //     obj1:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-  
-// //     },
-// //     obj2:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-  
-// //     obj3:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj4:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj5:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj6:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj7:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj8:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj9:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj10:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj11:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj12:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj13:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-// //     obj14:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-
-
-// //     obj15:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     }
-  
-// //   }
 // const sectionsContent = {
 //   obj1: {
 //     title: `Every Linear Map from Rⁿ to Rᵐ Is Matrix Multiplication`,
@@ -310,622 +284,17 @@
 //     after: ``,
 //     link: ``,
 //   },
-// }
-
-//   const introContent = {
-//   title: `Encoding a Transformation as a Matrix`,
-//   content: `Every linear transformation between finite-dimensional spaces can be represented by a matrix, and every matrix defines a linear transformation. The columns of the matrix are the images of the basis vectors — this single recipe converts an abstract function into a concrete array of numbers from which every property of the transformation can be extracted.`,
-// }
-
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "How do you find the matrix of a linear transformation?",
-//     answer: "Apply the transformation to each standard basis vector e₁, e₂, …, eₙ and arrange the results as columns. For abstract vector spaces, apply T to each basis vector of V and express the results as coordinate vectors in the basis of W. The resulting matrix satisfies T(x) = Ax for all x.",
-//     sectionId: "2"
+//   obj9: {
+//     title: `Summary: The Transformation ↔ Matrix Dictionary`,
+//     content: `The recipe and examples above all serve a single end: each linear transformation between finite-dimensional spaces corresponds to a unique matrix, and every concept on the transformation side has a matching object on the matrix side. The table below collects the dictionary in one place — what to look at on the matrix when you want to know something about the transformation, and vice versa. It is a recap of the whole page and a reference for moving between the two languages.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
 //   },
-//   obj2: {
-//     question: "Why does every linear transformation have a matrix?",
-//     answer: "Linearity forces T(x) = x₁T(e₁) + ⋯ + xₙT(eₙ) for any vector x. This is exactly the matrix-vector product Ax where column j of A is T(eⱼ). The correspondence is one-to-one: different matrices define different transformations, and vice versa.",
-//     sectionId: "1"
-//   },
-//   obj3: {
-//     question: "How does matrix multiplication relate to composition?",
-//     answer: "If T has matrix A and S has matrix B, then the composition S ∘ T has matrix BA. The left-to-right order of matrix multiplication matches the outer-to-inner order of composition. This is why matrix multiplication is defined by the row-times-column rule.",
-//     sectionId: "6"
-//   },
-//   obj4: {
-//     question: "What does the matrix of the differentiation operator look like?",
-//     answer: "For differentiation T: P₂ → P₁ with monomial bases, the matrix is [[0, 1, 0], [0, 0, 2]]. Column j records the coefficients of T applied to the j-th basis polynomial. The rank is 2 (differentiation maps onto all of P₁) and the kernel is the constant polynomials.",
-//     sectionId: "5"
-//   },
-//   obj5: {
-//     question: "Does the matrix of a transformation depend on the basis?",
-//     answer: "Yes. Different bases produce different matrices for the same transformation. The standard matrix uses the standard basis for both domain and codomain. For abstract spaces like polynomial spaces, every basis choice gives a different but equally valid matrix representation.",
-//     sectionId: "4"
-//   }
 // }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Matrix Representation of Linear Transformations",
-//     "description": "Matrix representation of linear transformations: standard matrix from basis vectors, abstract spaces, differentiation example, composition as multiplication, and invertibility.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/transformations/matrix-representations",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Matrix Representation of Linear Transformations"
-//     },
-//     "teaches": [
-//       "Every linear map Rⁿ → Rᵐ is matrix multiplication",
-//       "Constructing the standard matrix from basis images",
-//       "Reading transformation properties from the matrix",
-//       "Matrix representation in abstract vector spaces",
-//       "Differentiation as a matrix operation",
-//       "Composition corresponds to matrix multiplication",
-//       "Invertibility of transformations and matrices"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Transformations",
-//         "item": "https://www.learnmathclass.com/linear-algebra/transformations"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Matrix Representations",
-//         "item": "https://www.learnmathclass.com/linear-algebra/transformations/matrix-representations"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-
-
-
-// //    return {
-// //       props:{
-// //          sectionsContent,
-// //          introContent,
-// //           seoData: {
-// //         title: "Title | Learn Math Class",
-// //         description: "Metadescription",
-// //         keywords: keyWords.join(", "),
-// //         url: "/linear-algebra/transformations/matrix-representations",
-// //          name: "name"
-// //       },
-        
-// //        }
-// //     }
-
-// return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Matrix Representation of Transformations | Learn Math Class",
-//       description: "Matrix representation of linear transformations: standard matrix from basis vectors, abstract spaces, differentiation example, composition as multiplication, and invertibility.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/transformations/matrix-representations",
-//       name: "Matrix Representation of Linear Transformations"
-//     },
-//   }
-// }
-//    }
-
-// // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-// export default function MatrixRepresentationPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    {/* <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head> */}
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Matric Representation of Linear Transformation</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
 
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj3 aggregation, obj8 aggregation, obj9 summary capstone)
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "matrix representation linear transformation",
-  "standard matrix transformation",
-  "linear map matrix",
-  "transformation matrix columns",
-  "composition matrix multiplication",
-  "matrix for abstract vector spaces",
-  "differentiation matrix polynomial",
-  "standard matrix basis vectors",
-  "linear transformation to matrix",
-  "matrix encodes transformation",
-  "coordinate representation linear map",
-  "matrix representation basis",
-  "invertible transformation matrix",
-  "linear operator matrix"
-]
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj3 — aggregation: matrix shape ↔ transformation type
-const obj3Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Shape of A (m × n)</th>
-      <th style="${tableHeaders.aggregation}">Transformation type</th>
-      <th style="${tableHeaders.aggregation}">Geometric action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">m &gt; n (more rows than columns)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">T: ℝⁿ → ℝᵐ, embedding</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">embeds a smaller-dimensional space into a larger one (e.g. 3 × 2 lifts ℝ² into ℝ³)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">m = n (square)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">T: ℝⁿ → ℝⁿ, linear operator</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">maps a space to itself — only operators carry <a href="/linear-algebra/determinants" style="${linkStyle}">determinant</a>, <a href="/linear-algebra/eigen" style="${linkStyle}">eigenvalues</a>, and <a href="/linear-algebra/matrix/trace" style="${linkStyle}">trace</a></td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">m &lt; n (more columns than rows)</td>
-      <td style="padding: 12px 15px; color: #34495e;">T: ℝⁿ → ℝᵐ, compression</td>
-      <td style="padding: 12px 15px; color: #34495e;">compresses a larger-dimensional space into a smaller one (e.g. 2 × 3 flattens ℝ³ into ℝ²)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj8 — aggregation: matrix invariants and what they reveal about T
-const obj8Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Matrix invariant</th>
-      <th style="${tableHeaders.aggregation}">What it reveals about T</th>
-      <th style="${tableHeaders.aggregation}">Requires</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/matrix/rank" style="${linkStyle}">rank</a>(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">dim of the <a href="/linear-algebra/transformations/image-kernel" style="${linkStyle}">image</a> of T (how many output directions T can reach)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any A</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">nullity(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">dim of the kernel of T (how many input directions T collapses to zero)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any A</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">det(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">invertibility (det ≠ 0); volume scaling factor |det(A)|; orientation by sign</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square A only</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">eigenvalues</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">scaling factors along the invariant directions (eigenvectors)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square A only</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">tr(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sum of the eigenvalues</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square A only</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/decompositions/svd" style="${linkStyle}">singular values</a></td>
-      <td style="padding: 12px 15px; color: #34495e;">maximum stretching along each orthogonal input direction</td>
-      <td style="padding: 12px 15px; color: #34495e;">any A</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj9 — summary capstone: transformation ↔ matrix dictionary
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Transformation-side concept</th>
-      <th style="${tableHeaders.summary}">Matrix-side counterpart</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear T: ℝⁿ → ℝᵐ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">unique m × n matrix A</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">T(eⱼ) — image of j-th basis vector</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">j-th column of A</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">dim(domain) = n</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of columns of A</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">dim(codomain) = m</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of rows of A</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear operator (V = W)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square matrix</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Identity transformation I</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/matrix/types" style="${linkStyle}">identity matrix</a> Iₙ</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Composition S ∘ T</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">matrix product BA</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inverse T⁻¹</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><a href="/linear-algebra/matrix/inverse" style="${linkStyle}">inverse matrix</a> A⁻¹</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">T is invertible (bijective)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">A is invertible (det(A) ≠ 0 for square A)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Image of T</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">column space of A</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Kernel of T</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">null space of A</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Isomorphism between V and W</td>
-      <td style="padding: 12px 15px; color: #34495e;">invertible square matrix relating the two coordinate systems</td>
-    </tr>
-  </tbody>
-</table>
-`
 
 // ---------- SECTIONS ----------
 
@@ -934,7 +303,12 @@ const sectionsContent = {
     title: `Every Linear Map from Rⁿ to Rᵐ Is Matrix Multiplication`,
     content: `If $T: \\mathbb{R}^n \\to \\mathbb{R}^m$ is linear, there exists a unique $m \\times n$ [matrix](!/linear-algebra/matrix) $A$ such that
 
+@academic[formula_callout:Linear Map as Matrix Multiplication
 $$T(\\mathbf{x}) = A\\mathbf{x} \\quad \\text{for every } \\mathbf{x} \\in \\mathbb{R}^n$$
+/linear-algebra/formulas#linear_map_as_matrix_multiplication]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 This is not an optional representation — it is forced by linearity. Any vector $\\mathbf{x} = x_1\\mathbf{e}_1 + \\cdots + x_n\\mathbf{e}_n$ maps to $T(\\mathbf{x}) = x_1T(\\mathbf{e}_1) + \\cdots + x_nT(\\mathbf{e}_n)$, and this is exactly the matrix-vector product $A\\mathbf{x}$ with $A = [T(\\mathbf{e}_1) \\; T(\\mathbf{e}_2) \\; \\cdots \\; T(\\mathbf{e}_n)]$.
 
@@ -947,7 +321,12 @@ The converse is equally immediate: every $m \\times n$ matrix $A$ defines a line
     title: `Constructing the Standard Matrix`,
     content: `The recipe is direct: apply $T$ to each standard basis vector $\\mathbf{e}_1, \\mathbf{e}_2, \\dots, \\mathbf{e}_n$ and arrange the results as columns:
 
-$$A = \\begin{pmatrix} | & | & & | \\\\ T(\\mathbf{e}_1) & T(\\mathbf{e}_2) & \\cdots & T(\\mathbf{e}_n) \\\\ | & | & & | \\end{pmatrix}$$
+@academic[formula_callout:Standard Matrix
+$$A = \\bigl[\\,T(\\mathbf{e}_1) \\;\\; T(\\mathbf{e}_2) \\;\\; \\cdots \\;\\; T(\\mathbf{e}_n)\\,\\bigr]$$
+/linear-algebra/formulas#standard_matrix]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 ## Worked Example
 
@@ -983,7 +362,14 @@ A square matrix ($m = n$) represents a transformation from a space to itself —
     title: `Matrices for Abstract Vector Spaces`,
     content: `For a linear transformation $T: V \\to W$ between abstract [vector spaces](!/linear-algebra/vector-spaces), the matrix depends on a choice of [basis](!/linear-algebra/vector-spaces) for both $V$ and $W$.
 
-Fix a basis $\\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_n\\}$ for $V$ and a basis $\\mathcal{C} = \\{\\mathbf{w}_1, \\dots, \\mathbf{w}_m\\}$ for $W$. Column $j$ of the matrix $[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ is the $\\mathcal{C}$-coordinate vector of $T(\\mathbf{v}_j)$ — the scalars needed to express $T(\\mathbf{v}_j)$ as a linear combination of $\\mathbf{w}_1, \\dots, \\mathbf{w}_m$.
+Fix a basis $\\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_n\\}$ for $V$ and a basis $\\mathcal{C} = \\{\\mathbf{w}_1, \\dots, \\mathbf{w}_m\\}$ for $W$. Column $j$ of the matrix $[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ is the $\\mathcal{C}$-coordinate vector of $T(\\mathbf{v}_j)$ — the scalars needed to express $T(\\mathbf{v}_j)$ as a linear combination of $\\mathbf{w}_1, \\dots, \\mathbf{w}_m$. In compact form:
+
+@academic[formula_callout:Matrix Representation Abstract Bases
+$$[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}} = \\bigl[\\,[T(\\mathbf{v}_1)]_{\\mathcal{C}} \\;\\; \\cdots \\;\\; [T(\\mathbf{v}_n)]_{\\mathcal{C}}\\,\\bigr]$$
+/linear-algebra/formulas#matrix_representation_abstract_bases]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 Different bases give different matrices for the same transformation. The standard matrix for maps between $\\mathbb{R}^n$ and $\\mathbb{R}^m$ is the special case where both bases are standard. For abstract spaces like polynomial or function spaces, there is no "standard" basis in the same sense — every basis choice produces a different but equally valid matrix representation.`,
     before: ``,
@@ -1048,6 +434,7 @@ This is why matrices dominate computational linear algebra. Abstract transformat
     link: ``,
   },
 }
+
 
   const introContent = {
   title: `Encoding a Transformation as a Matrix`,

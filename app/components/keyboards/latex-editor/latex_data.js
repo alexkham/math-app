@@ -1,1521 +1,234 @@
-// // latex_data.js - Scalable data structure for LaTeX editor
-// // Each category contains button configurations with display, label, and LaTeX code
 
-// const latexData = {
-//   basic: [
-//     {
-//       display: 'x<sup>2</sup>',
-//       label: 'Superscript',
-//       latex: '^{}',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'x<sub>1</sub>',
-//       label: 'Subscript',
-//       latex: '_{}',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '<i>x̄</i>',
-//       label: 'Bar',
-//       latex: '\\bar{}',
-//       requiresSelection: true
-//     },
-//     {
-//       display: '<i>x̂</i>',
-//       label: 'Hat',
-//       latex: '\\hat{}',
-//       requiresSelection: true
-//     },
-//     {
-//       display: '<i>x⃗</i>',
-//       label: 'Vector',
-//       latex: '\\vec{}',
-//       requiresSelection: true
-//     },
-//     {
-//       display: '√',
-//       label: 'Square Root',
-//       latex: '\\sqrt{}',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '∛',
-//       label: 'Nth Root',
-//       latex: '\\sqrt[]{}',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'x/y',
-//       label: 'Fraction',
-//       latex: '\\frac{}{}',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '( )',
-//       label: 'Parentheses',
-//       latex: '\\left( \\right)',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '[ ]',
-//       label: 'Brackets',
-//       latex: '\\left[ \\right]',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '{ }',
-//       label: 'Braces',
-//       latex: '\\left\\{ \\right\\}',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '| |',
-//       label: 'Absolute',
-//       latex: '\\left| \\right|',
-//       requiresSelection: false
-//     },
-//   ],
-
-//   operators: [
-//     {
-//       display: '+',
-//       label: 'Plus',
-//       latex: '+',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '−',
-//       label: 'Minus',
-//       latex: '-',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '×',
-//       label: 'Times',
-//       latex: '\\times',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '÷',
-//       label: 'Divide',
-//       latex: '\\div',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '±',
-//       label: 'Plus-Minus',
-//       latex: '\\pm',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '∓',
-//       label: 'Minus-Plus',
-//       latex: '\\mp',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '⋅',
-//       label: 'Dot',
-//       latex: '\\cdot',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '∗',
-//       label: 'Asterisk',
-//       latex: '\\ast',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '=',
-//       label: 'Equals',
-//       latex: '=',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '≠',
-//       label: 'Not Equal',
-//       latex: '\\neq',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '<',
-//       label: 'Less Than',
-//       latex: '<',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '>',
-//       label: 'Greater Than',
-//       latex: '>',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '≤',
-//       label: 'Less Equal',
-//       latex: '\\leq',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '≥',
-//       label: 'Greater Equal',
-//       latex: '\\geq',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '≈',
-//       label: 'Approx',
-//       latex: '\\approx',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '≡',
-//       label: 'Equivalent',
-//       latex: '\\equiv',
-//       requiresSelection: false
-//     },
-//   ],
-
-//   calculus: [
-//     {
-//       display: '∫',
-//       label: 'Integral',
-//       latex: '\\int ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '∫<sub>a</sub><sup>b</sup>',
-//       label: 'Def Integral',
-//       latex: '\\int_{a}^{b} ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '∬',
-//       label: 'Double Integral',
-//       latex: '\\iint ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '∭',
-//       label: 'Triple Integral',
-//       latex: '\\iiint ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '∮',
-//       label: 'Contour',
-//       latex: '\\oint ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '∂',
-//       label: 'Partial',
-//       latex: '\\partial ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'lim',
-//       label: 'Limit',
-//       latex: '\\lim_{}',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'lim<sub>x→a</sub>',
-//       label: 'Limit To',
-//       latex: '\\lim_{x \\to a}',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '∑',
-//       label: 'Sum',
-//       latex: '\\sum ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '∑<sub>i=1</sub><sup>n</sup>',
-//       label: 'Sum Range',
-//       latex: '\\sum_{i=1}^{n} ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '∏',
-//       label: 'Product',
-//       latex: '\\prod ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '∏<sub>i=1</sub><sup>n</sup>',
-//       label: 'Product Range',
-//       latex: '\\prod_{i=1}^{n} ',
-//       requiresSelection: false
-//     },
-//   ],
-
-//   greek: [
-//     {
-//       display: 'α',
-//       label: 'alpha',
-//       latex: '\\alpha ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'β',
-//       label: 'beta',
-//       latex: '\\beta ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'γ',
-//       label: 'gamma',
-//       latex: '\\gamma ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'δ',
-//       label: 'delta',
-//       latex: '\\delta ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'ε',
-//       label: 'epsilon',
-//       latex: '\\epsilon ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'θ',
-//       label: 'theta',
-//       latex: '\\theta ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'λ',
-//       label: 'lambda',
-//       latex: '\\lambda ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'μ',
-//       label: 'mu',
-//       latex: '\\mu ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'π',
-//       label: 'pi',
-//       latex: '\\pi ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'σ',
-//       label: 'sigma',
-//       latex: '\\sigma ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'φ',
-//       label: 'phi',
-//       latex: '\\phi ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'ω',
-//       label: 'omega',
-//       latex: '\\omega ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'Δ',
-//       label: 'Delta',
-//       latex: '\\Delta ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'Σ',
-//       label: 'Sigma',
-//       latex: '\\Sigma ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'Π',
-//       label: 'Pi',
-//       latex: '\\Pi ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'Ω',
-//       label: 'Omega',
-//       latex: '\\Omega ',
-//       requiresSelection: false
-//     },
-//   ],
-
-//   matrices: [
-//     {
-//       display: '[ ]',
-//       label: '2×2 Matrix',
-//       latex: '\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '[ ]',
-//       label: '3×3 Matrix',
-//       latex: '\\begin{bmatrix} a & b & c \\\\ d & e & f \\\\ g & h & i \\end{bmatrix}',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '( )',
-//       label: '2×2 Paren',
-//       latex: '\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '| |',
-//       label: 'Determinant',
-//       latex: '\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix}',
-//       requiresSelection: false
-//     },
-//     {
-//       display: '{}',
-//       label: 'Cases',
-//       latex: '\\begin{cases} x & \\text{if } x > 0 \\\\ -x & \\text{if } x < 0 \\end{cases}',
-//       requiresSelection: false
-//     },
-//   ],
-
-//   functions: [
-//     {
-//       display: 'sin',
-//       label: 'Sine',
-//       latex: '\\sin ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'cos',
-//       label: 'Cosine',
-//       latex: '\\cos ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'tan',
-//       label: 'Tangent',
-//       latex: '\\tan ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'log',
-//       label: 'Log',
-//       latex: '\\log ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'ln',
-//       label: 'Natural Log',
-//       latex: '\\ln ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'exp',
-//       label: 'Exponential',
-//       latex: '\\exp ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'max',
-//       label: 'Maximum',
-//       latex: '\\max ',
-//       requiresSelection: false
-//     },
-//     {
-//       display: 'min',
-//       label: 'Minimum',
-//       latex: '\\min ',
-//       requiresSelection: false
-//     },
-//   ],
-// };
-
-// export default latexData;
 
 
 // latex_data.js - Comprehensive LaTeX editor data
+//
+// Schema:
+//   Each category is either an array of items, OR an object of sub-group name -> array of items.
+//   When a category is an object, the editor renders labeled sub-groups (e.g. greek: lower / upper).
+//
+// Item fields:
+//   display          - HTML shown on the button
+//   label            - small caption under the display
+//   latex            - LaTeX to insert
+//   tooltip          - short plain-text description shown on hover
+//   requiresSelection (bool) - if true and user has a selection, wrap it in the first {}
+//   cursorTarget     - 'bracket' to place the caret inside [...] instead of {...} (used for nth-root)
 
 const latexData = {
   basic: [
-    {
-      display: 'x<sup>2</sup>',
-      label: 'Superscript',
-      latex: '^{}',
-      requiresSelection: false
-    },
-    {
-      display: 'x<sub>1</sub>',
-      label: 'Subscript',
-      latex: '_{}',
-      requiresSelection: false
-    },
-    {
-      display: '<i>x̄</i>',
-      label: 'Bar',
-      latex: '\\bar{}',
-      requiresSelection: true
-    },
-    {
-      display: '<i>x̂</i>',
-      label: 'Hat',
-      latex: '\\hat{}',
-      requiresSelection: true
-    },
-    {
-      display: '<i>x⃗</i>',
-      label: 'Vector',
-      latex: '\\vec{}',
-      requiresSelection: true
-    },
-    {
-      display: '<i>x̃</i>',
-      label: 'Tilde',
-      latex: '\\tilde{}',
-      requiresSelection: true
-    },
-    {
-      display: '<i>ẋ</i>',
-      label: 'Dot',
-      latex: '\\dot{}',
-      requiresSelection: true
-    },
-    {
-      display: '√',
-      label: 'Square Root',
-      latex: '\\sqrt{}',
-      requiresSelection: false
-    },
-    {
-      display: '∛',
-      label: 'Nth Root',
-      latex: '\\sqrt[]{}',
-      requiresSelection: false
-    },
-    {
-      display: 'x/y',
-      label: 'Fraction',
-      latex: '\\frac{}{}',
-      requiresSelection: false
-    },
-    {
-      display: '( )',
-      label: 'Parentheses',
-      latex: '\\left( \\right)',
-      requiresSelection: false
-    },
-    {
-      display: '[ ]',
-      label: 'Brackets',
-      latex: '\\left[ \\right]',
-      requiresSelection: false
-    },
-    {
-      display: '{ }',
-      label: 'Braces',
-      latex: '\\left\\{ \\right\\}',
-      requiresSelection: false
-    },
-    {
-      display: '| |',
-      label: 'Absolute',
-      latex: '\\left| \\right|',
-      requiresSelection: false
-    },
+    { display: 'x<sup>2</sup>', label: 'Superscript', latex: '^{}', tooltip: 'Superscript (power). Type the exponent inside the box.', requiresSelection: false },
+    { display: 'x<sub>1</sub>', label: 'Subscript', latex: '_{}', tooltip: 'Subscript (index). Type the index inside the box.', requiresSelection: false },
+    { display: '<i>x&#772;</i>', label: 'Bar', latex: '\\bar{}', tooltip: 'Bar accent (e.g. mean, complex conjugate). Type the symbol inside.', requiresSelection: true },
+    { display: '<i>x&#770;</i>', label: 'Hat', latex: '\\hat{}', tooltip: 'Hat accent (estimator, unit vector). Type the symbol inside.', requiresSelection: true },
+    { display: '<i>x&#8407;</i>', label: 'Vector', latex: '\\vec{}', tooltip: 'Arrow over symbol (vector). Type the symbol inside.', requiresSelection: true },
+    { display: '<i>x&#771;</i>', label: 'Tilde', latex: '\\tilde{}', tooltip: 'Tilde accent (approximation, equivalence). Type the symbol inside.', requiresSelection: true },
+    { display: '<i>x&#775;</i>', label: 'Dot', latex: '\\dot{}', tooltip: 'Dot accent (time derivative). Type the symbol inside.', requiresSelection: true },
+    { display: '&radic;', label: 'Square Root', latex: '\\sqrt{}', tooltip: 'Square root. Type the radicand inside.', requiresSelection: false },
+    { display: '<sup>n</sup>&radic;', label: 'Nth Root', latex: '\\sqrt[]{}', tooltip: 'Nth root. Type the index in [ ], then the radicand in { }.', requiresSelection: false, cursorTarget: 'bracket' },
+    { display: 'x/y', label: 'Fraction', latex: '\\frac{}{}', tooltip: 'Fraction. Type the numerator first, then the denominator.', requiresSelection: false },
+    { display: '( )', label: 'Parentheses', latex: '\\left( \\right)', tooltip: 'Auto-sized parentheses. Grows with the content.', requiresSelection: false },
+    { display: '[ ]', label: 'Brackets', latex: '\\left[ \\right]', tooltip: 'Auto-sized square brackets.', requiresSelection: false },
+    { display: '{ }', label: 'Braces', latex: '\\left\\{ \\right\\}', tooltip: 'Auto-sized curly braces.', requiresSelection: false },
+    { display: '| |', label: 'Absolute', latex: '\\left| \\right|', tooltip: 'Absolute value (or magnitude).', requiresSelection: false },
   ],
 
   operators: [
-    {
-      display: '+',
-      label: 'Plus',
-      latex: '+',
-      requiresSelection: false
-    },
-    {
-      display: '−',
-      label: 'Minus',
-      latex: '-',
-      requiresSelection: false
-    },
-    {
-      display: '×',
-      label: 'Times',
-      latex: '\\times ',
-      requiresSelection: false
-    },
-    {
-      display: '÷',
-      label: 'Divide',
-      latex: '\\div ',
-      requiresSelection: false
-    },
-    {
-      display: '±',
-      label: 'Plus-Minus',
-      latex: '\\pm ',
-      requiresSelection: false
-    },
-    {
-      display: '∓',
-      label: 'Minus-Plus',
-      latex: '\\mp ',
-      requiresSelection: false
-    },
-    {
-      display: '⋅',
-      label: 'Dot',
-      latex: '\\cdot ',
-      requiresSelection: false
-    },
-    {
-      display: '∗',
-      label: 'Asterisk',
-      latex: '\\ast ',
-      requiresSelection: false
-    },
-    {
-      display: '=',
-      label: 'Equals',
-      latex: '=',
-      requiresSelection: false
-    },
-    {
-      display: '≠',
-      label: 'Not Equal',
-      latex: '\\neq ',
-      requiresSelection: false
-    },
-    {
-      display: '<',
-      label: 'Less Than',
-      latex: '<',
-      requiresSelection: false
-    },
-    {
-      display: '>',
-      label: 'Greater Than',
-      latex: '>',
-      requiresSelection: false
-    },
-    {
-      display: '≤',
-      label: 'Less Equal',
-      latex: '\\leq ',
-      requiresSelection: false
-    },
-    {
-      display: '≥',
-      label: 'Greater Equal',
-      latex: '\\geq ',
-      requiresSelection: false
-    },
-    {
-      display: '≈',
-      label: 'Approx',
-      latex: '\\approx ',
-      requiresSelection: false
-    },
-    {
-      display: '≡',
-      label: 'Equivalent',
-      latex: '\\equiv ',
-      requiresSelection: false
-    },
-    {
-      display: '≪',
-      label: 'Much Less',
-      latex: '\\ll ',
-      requiresSelection: false
-    },
-    {
-      display: '≫',
-      label: 'Much Greater',
-      latex: '\\gg ',
-      requiresSelection: false
-    },
-    {
-      display: '∝',
-      label: 'Proportional',
-      latex: '\\propto ',
-      requiresSelection: false
-    },
-    {
-      display: '∼',
-      label: 'Similar',
-      latex: '\\sim ',
-      requiresSelection: false
-    },
+    { display: '+', label: 'Plus', latex: '+', tooltip: 'Plus (addition).', requiresSelection: false },
+    { display: '&minus;', label: 'Minus', latex: '-', tooltip: 'Minus (subtraction).', requiresSelection: false },
+    { display: '&times;', label: 'Times', latex: '\\times ', tooltip: 'Multiplication cross.', requiresSelection: false },
+    { display: '&divide;', label: 'Divide', latex: '\\div ', tooltip: 'Division sign.', requiresSelection: false },
+    { display: '&plusmn;', label: 'Plus-Minus', latex: '\\pm ', tooltip: 'Plus-or-minus.', requiresSelection: false },
+    { display: '&#8723;', label: 'Minus-Plus', latex: '\\mp ', tooltip: 'Minus-or-plus.', requiresSelection: false },
+    { display: '&sdot;', label: 'Dot', latex: '\\cdot ', tooltip: 'Centered dot multiplication.', requiresSelection: false },
+    { display: '&lowast;', label: 'Asterisk', latex: '\\ast ', tooltip: 'Asterisk operator (convolution, free product).', requiresSelection: false },
+    { display: '=', label: 'Equals', latex: '=', tooltip: 'Equals.', requiresSelection: false },
+    { display: '&ne;', label: 'Not Equal', latex: '\\neq ', tooltip: 'Not equal.', requiresSelection: false },
+    { display: '&lt;', label: 'Less Than', latex: '<', tooltip: 'Less than.', requiresSelection: false },
+    { display: '&gt;', label: 'Greater Than', latex: '>', tooltip: 'Greater than.', requiresSelection: false },
+    { display: '&le;', label: 'Less Equal', latex: '\\leq ', tooltip: 'Less than or equal to.', requiresSelection: false },
+    { display: '&ge;', label: 'Greater Equal', latex: '\\geq ', tooltip: 'Greater than or equal to.', requiresSelection: false },
+    { display: '&asymp;', label: 'Approx', latex: '\\approx ', tooltip: 'Approximately equal.', requiresSelection: false },
+    { display: '&equiv;', label: 'Equivalent', latex: '\\equiv ', tooltip: 'Equivalent / identical.', requiresSelection: false },
+    { display: '&Lt;', label: 'Much Less', latex: '\\ll ', tooltip: 'Much less than.', requiresSelection: false },
+    { display: '&Gt;', label: 'Much Greater', latex: '\\gg ', tooltip: 'Much greater than.', requiresSelection: false },
+    { display: '&prop;', label: 'Proportional', latex: '\\propto ', tooltip: 'Proportional to.', requiresSelection: false },
+    { display: '&sim;', label: 'Similar', latex: '\\sim ', tooltip: 'Similar / asymptotic.', requiresSelection: false },
   ],
 
   calculus: [
-    {
-      display: '∫',
-      label: 'Integral',
-      latex: '\\int ',
-      requiresSelection: false
-    },
-    {
-      display: '∫<sub>a</sub><sup>b</sup>',
-      label: 'Def Integral',
-      latex: '\\int_{a}^{b} ',
-      requiresSelection: false
-    },
-    {
-      display: '∬',
-      label: 'Double Integral',
-      latex: '\\iint ',
-      requiresSelection: false
-    },
-    {
-      display: '∭',
-      label: 'Triple Integral',
-      latex: '\\iiint ',
-      requiresSelection: false
-    },
-    {
-      display: '∮',
-      label: 'Contour',
-      latex: '\\oint ',
-      requiresSelection: false
-    },
-    {
-      display: '∂',
-      label: 'Partial',
-      latex: '\\partial ',
-      requiresSelection: false
-    },
-    {
-      display: '∇',
-      label: 'Nabla',
-      latex: '\\nabla ',
-      requiresSelection: false
-    },
-    {
-      display: 'lim',
-      label: 'Limit',
-      latex: '\\lim_{}',
-      requiresSelection: false
-    },
-    {
-      display: 'lim<sub>x→a</sub>',
-      label: 'Limit To',
-      latex: '\\lim_{x \\to a}',
-      requiresSelection: false
-    },
-    {
-      display: '∑',
-      label: 'Sum',
-      latex: '\\sum ',
-      requiresSelection: false
-    },
-    {
-      display: '∑<sub>i=1</sub><sup>n</sup>',
-      label: 'Sum Range',
-      latex: '\\sum_{i=1}^{n} ',
-      requiresSelection: false
-    },
-    {
-      display: '∏',
-      label: 'Product',
-      latex: '\\prod ',
-      requiresSelection: false
-    },
-    {
-      display: '∏<sub>i=1</sub><sup>n</sup>',
-      label: 'Product Range',
-      latex: '\\prod_{i=1}^{n} ',
-      requiresSelection: false
-    },
-    {
-      display: 'd/dx',
-      label: 'Derivative',
-      latex: '\\frac{d}{dx}',
-      requiresSelection: false
-    },
-    {
-      display: 'dy/dx',
-      label: 'Derivative Of',
-      latex: '\\frac{dy}{dx}',
-      requiresSelection: false
-    },
-    {
-      display: '∞',
-      label: 'Infinity',
-      latex: '\\infty ',
-      requiresSelection: false
-    },
+    { display: '&int;', label: 'Integral', latex: '\\int ', tooltip: 'Indefinite integral.', requiresSelection: false },
+    { display: '&int;<sub>a</sub><sup>b</sup>', label: 'Def Integral', latex: '\\int_{a}^{b} ', tooltip: 'Definite integral with lower and upper limits.', requiresSelection: false },
+    { display: '&#8748;', label: 'Double Integral', latex: '\\iint ', tooltip: 'Double integral (area / surface).', requiresSelection: false },
+    { display: '&#8749;', label: 'Triple Integral', latex: '\\iiint ', tooltip: 'Triple integral (volume).', requiresSelection: false },
+    { display: '&#8750;', label: 'Contour', latex: '\\oint ', tooltip: 'Contour integral (closed curve).', requiresSelection: false },
+    { display: '&part;', label: 'Partial', latex: '\\partial ', tooltip: 'Partial derivative symbol.', requiresSelection: false },
+    { display: '&nabla;', label: 'Nabla', latex: '\\nabla ', tooltip: 'Nabla (gradient, divergence, curl).', requiresSelection: false },
+    { display: 'lim', label: 'Limit', latex: '\\lim_{}', tooltip: 'Limit. Type the variable approach in the subscript.', requiresSelection: false },
+    { display: 'lim<sub>x&rarr;a</sub>', label: 'Limit To', latex: '\\lim_{x \\to a}', tooltip: 'Limit as x approaches a (pre-filled template).', requiresSelection: false },
+    { display: '&sum;', label: 'Sum', latex: '\\sum ', tooltip: 'Summation.', requiresSelection: false },
+    { display: '&sum;<sub>i=1</sub><sup>n</sup>', label: 'Sum Range', latex: '\\sum_{i=1}^{n} ', tooltip: 'Sum from i=1 to n (pre-filled template).', requiresSelection: false },
+    { display: '&prod;', label: 'Product', latex: '\\prod ', tooltip: 'Product (capital pi).', requiresSelection: false },
+    { display: '&prod;<sub>i=1</sub><sup>n</sup>', label: 'Product Range', latex: '\\prod_{i=1}^{n} ', tooltip: 'Product from i=1 to n (pre-filled template).', requiresSelection: false },
+    { display: 'd/dx', label: 'Derivative', latex: '\\frac{d}{dx}', tooltip: 'Derivative with respect to x.', requiresSelection: false },
+    { display: 'dy/dx', label: 'Derivative Of', latex: '\\frac{dy}{dx}', tooltip: 'Derivative of y with respect to x.', requiresSelection: false },
+    { display: '&infin;', label: 'Infinity', latex: '\\infty ', tooltip: 'Infinity.', requiresSelection: false },
   ],
 
-  greek: [
-    {
-      display: 'α',
-      label: 'alpha',
-      latex: '\\alpha ',
-      requiresSelection: false
-    },
-    {
-      display: 'β',
-      label: 'beta',
-      latex: '\\beta ',
-      requiresSelection: false
-    },
-    {
-      display: 'γ',
-      label: 'gamma',
-      latex: '\\gamma ',
-      requiresSelection: false
-    },
-    {
-      display: 'δ',
-      label: 'delta',
-      latex: '\\delta ',
-      requiresSelection: false
-    },
-    {
-      display: 'ε',
-      label: 'epsilon',
-      latex: '\\epsilon ',
-      requiresSelection: false
-    },
-    {
-      display: 'ζ',
-      label: 'zeta',
-      latex: '\\zeta ',
-      requiresSelection: false
-    },
-    {
-      display: 'η',
-      label: 'eta',
-      latex: '\\eta ',
-      requiresSelection: false
-    },
-    {
-      display: 'θ',
-      label: 'theta',
-      latex: '\\theta ',
-      requiresSelection: false
-    },
-    {
-      display: 'ι',
-      label: 'iota',
-      latex: '\\iota ',
-      requiresSelection: false
-    },
-    {
-      display: 'κ',
-      label: 'kappa',
-      latex: '\\kappa ',
-      requiresSelection: false
-    },
-    {
-      display: 'λ',
-      label: 'lambda',
-      latex: '\\lambda ',
-      requiresSelection: false
-    },
-    {
-      display: 'μ',
-      label: 'mu',
-      latex: '\\mu ',
-      requiresSelection: false
-    },
-    {
-      display: 'ν',
-      label: 'nu',
-      latex: '\\nu ',
-      requiresSelection: false
-    },
-    {
-      display: 'ξ',
-      label: 'xi',
-      latex: '\\xi ',
-      requiresSelection: false
-    },
-    {
-      display: 'π',
-      label: 'pi',
-      latex: '\\pi ',
-      requiresSelection: false
-    },
-    {
-      display: 'ρ',
-      label: 'rho',
-      latex: '\\rho ',
-      requiresSelection: false
-    },
-    {
-      display: 'σ',
-      label: 'sigma',
-      latex: '\\sigma ',
-      requiresSelection: false
-    },
-    {
-      display: 'τ',
-      label: 'tau',
-      latex: '\\tau ',
-      requiresSelection: false
-    },
-    {
-      display: 'υ',
-      label: 'upsilon',
-      latex: '\\upsilon ',
-      requiresSelection: false
-    },
-    {
-      display: 'φ',
-      label: 'phi',
-      latex: '\\phi ',
-      requiresSelection: false
-    },
-    {
-      display: 'χ',
-      label: 'chi',
-      latex: '\\chi ',
-      requiresSelection: false
-    },
-    {
-      display: 'ψ',
-      label: 'psi',
-      latex: '\\psi ',
-      requiresSelection: false
-    },
-    {
-      display: 'ω',
-      label: 'omega',
-      latex: '\\omega ',
-      requiresSelection: false
-    },
-    {
-      display: 'Γ',
-      label: 'Gamma',
-      latex: '\\Gamma ',
-      requiresSelection: false
-    },
-    {
-      display: 'Δ',
-      label: 'Delta',
-      latex: '\\Delta ',
-      requiresSelection: false
-    },
-    {
-      display: 'Θ',
-      label: 'Theta',
-      latex: '\\Theta ',
-      requiresSelection: false
-    },
-    {
-      display: 'Λ',
-      label: 'Lambda',
-      latex: '\\Lambda ',
-      requiresSelection: false
-    },
-    {
-      display: 'Ξ',
-      label: 'Xi',
-      latex: '\\Xi ',
-      requiresSelection: false
-    },
-    {
-      display: 'Π',
-      label: 'Pi',
-      latex: '\\Pi ',
-      requiresSelection: false
-    },
-    {
-      display: 'Σ',
-      label: 'Sigma',
-      latex: '\\Sigma ',
-      requiresSelection: false
-    },
-    {
-      display: 'Φ',
-      label: 'Phi',
-      latex: '\\Phi ',
-      requiresSelection: false
-    },
-    {
-      display: 'Ψ',
-      label: 'Psi',
-      latex: '\\Psi ',
-      requiresSelection: false
-    },
-    {
-      display: 'Ω',
-      label: 'Omega',
-      latex: '\\Omega ',
-      requiresSelection: false
-    },
-  ],
+  greek: {
+    lowercase: [
+      { display: '&alpha;', label: 'alpha', latex: '\\alpha ', tooltip: 'Greek lowercase alpha.', requiresSelection: false },
+      { display: '&beta;', label: 'beta', latex: '\\beta ', tooltip: 'Greek lowercase beta.', requiresSelection: false },
+      { display: '&gamma;', label: 'gamma', latex: '\\gamma ', tooltip: 'Greek lowercase gamma.', requiresSelection: false },
+      { display: '&delta;', label: 'delta', latex: '\\delta ', tooltip: 'Greek lowercase delta.', requiresSelection: false },
+      { display: '&epsilon;', label: 'epsilon', latex: '\\epsilon ', tooltip: 'Greek lowercase epsilon.', requiresSelection: false },
+      { display: '&zeta;', label: 'zeta', latex: '\\zeta ', tooltip: 'Greek lowercase zeta.', requiresSelection: false },
+      { display: '&eta;', label: 'eta', latex: '\\eta ', tooltip: 'Greek lowercase eta.', requiresSelection: false },
+      { display: '&theta;', label: 'theta', latex: '\\theta ', tooltip: 'Greek lowercase theta.', requiresSelection: false },
+      { display: '&iota;', label: 'iota', latex: '\\iota ', tooltip: 'Greek lowercase iota.', requiresSelection: false },
+      { display: '&kappa;', label: 'kappa', latex: '\\kappa ', tooltip: 'Greek lowercase kappa.', requiresSelection: false },
+      { display: '&lambda;', label: 'lambda', latex: '\\lambda ', tooltip: 'Greek lowercase lambda.', requiresSelection: false },
+      { display: '&mu;', label: 'mu', latex: '\\mu ', tooltip: 'Greek lowercase mu.', requiresSelection: false },
+      { display: '&nu;', label: 'nu', latex: '\\nu ', tooltip: 'Greek lowercase nu.', requiresSelection: false },
+      { display: '&xi;', label: 'xi', latex: '\\xi ', tooltip: 'Greek lowercase xi.', requiresSelection: false },
+      { display: '&pi;', label: 'pi', latex: '\\pi ', tooltip: 'Greek lowercase pi.', requiresSelection: false },
+      { display: '&rho;', label: 'rho', latex: '\\rho ', tooltip: 'Greek lowercase rho.', requiresSelection: false },
+      { display: '&sigma;', label: 'sigma', latex: '\\sigma ', tooltip: 'Greek lowercase sigma.', requiresSelection: false },
+      { display: '&tau;', label: 'tau', latex: '\\tau ', tooltip: 'Greek lowercase tau.', requiresSelection: false },
+      { display: '&upsilon;', label: 'upsilon', latex: '\\upsilon ', tooltip: 'Greek lowercase upsilon.', requiresSelection: false },
+      { display: '&phi;', label: 'phi', latex: '\\phi ', tooltip: 'Greek lowercase phi.', requiresSelection: false },
+      { display: '&chi;', label: 'chi', latex: '\\chi ', tooltip: 'Greek lowercase chi.', requiresSelection: false },
+      { display: '&psi;', label: 'psi', latex: '\\psi ', tooltip: 'Greek lowercase psi.', requiresSelection: false },
+      { display: '&omega;', label: 'omega', latex: '\\omega ', tooltip: 'Greek lowercase omega.', requiresSelection: false },
+    ],
+    uppercase: [
+      { display: '&Gamma;', label: 'Gamma', latex: '\\Gamma ', tooltip: 'Greek uppercase Gamma.', requiresSelection: false },
+      { display: '&Delta;', label: 'Delta', latex: '\\Delta ', tooltip: 'Greek uppercase Delta.', requiresSelection: false },
+      { display: '&Theta;', label: 'Theta', latex: '\\Theta ', tooltip: 'Greek uppercase Theta.', requiresSelection: false },
+      { display: '&Lambda;', label: 'Lambda', latex: '\\Lambda ', tooltip: 'Greek uppercase Lambda.', requiresSelection: false },
+      { display: '&Xi;', label: 'Xi', latex: '\\Xi ', tooltip: 'Greek uppercase Xi.', requiresSelection: false },
+      { display: '&Pi;', label: 'Pi', latex: '\\Pi ', tooltip: 'Greek uppercase Pi.', requiresSelection: false },
+      { display: '&Sigma;', label: 'Sigma', latex: '\\Sigma ', tooltip: 'Greek uppercase Sigma.', requiresSelection: false },
+      { display: '&Phi;', label: 'Phi', latex: '\\Phi ', tooltip: 'Greek uppercase Phi.', requiresSelection: false },
+      { display: '&Psi;', label: 'Psi', latex: '\\Psi ', tooltip: 'Greek uppercase Psi.', requiresSelection: false },
+      { display: '&Omega;', label: 'Omega', latex: '\\Omega ', tooltip: 'Greek uppercase Omega.', requiresSelection: false },
+    ],
+  },
 
   set_theory: [
-    {
-      display: '∈',
-      label: 'Element',
-      latex: '\\in ',
-      requiresSelection: false
-    },
-    {
-      display: '∉',
-      label: 'Not Element',
-      latex: '\\notin ',
-      requiresSelection: false
-    },
-    {
-      display: '⊂',
-      label: 'Subset',
-      latex: '\\subset ',
-      requiresSelection: false
-    },
-    {
-      display: '⊆',
-      label: 'Subset Equal',
-      latex: '\\subseteq ',
-      requiresSelection: false
-    },
-    {
-      display: '⊃',
-      label: 'Superset',
-      latex: '\\supset ',
-      requiresSelection: false
-    },
-    {
-      display: '⊇',
-      label: 'Superset Equal',
-      latex: '\\supseteq ',
-      requiresSelection: false
-    },
-    {
-      display: '∪',
-      label: 'Union',
-      latex: '\\cup ',
-      requiresSelection: false
-    },
-    {
-      display: '∩',
-      label: 'Intersection',
-      latex: '\\cap ',
-      requiresSelection: false
-    },
-    {
-      display: '∅',
-      label: 'Empty Set',
-      latex: '\\emptyset ',
-      requiresSelection: false
-    },
-    {
-      display: '∖',
-      label: 'Set Minus',
-      latex: '\\setminus ',
-      requiresSelection: false
-    },
-    {
-      display: 'ℕ',
-      label: 'Naturals',
-      latex: '\\mathbb{N}',
-      requiresSelection: false
-    },
-    {
-      display: 'ℤ',
-      label: 'Integers',
-      latex: '\\mathbb{Z}',
-      requiresSelection: false
-    },
-    {
-      display: 'ℚ',
-      label: 'Rationals',
-      latex: '\\mathbb{Q}',
-      requiresSelection: false
-    },
-    {
-      display: 'ℝ',
-      label: 'Reals',
-      latex: '\\mathbb{R}',
-      requiresSelection: false
-    },
-    {
-      display: 'ℂ',
-      label: 'Complex',
-      latex: '\\mathbb{C}',
-      requiresSelection: false
-    },
-    {
-      display: '⋃',
-      label: 'Big Union',
-      latex: '\\bigcup ',
-      requiresSelection: false
-    },
-    {
-      display: '⋂',
-      label: 'Big Intersection',
-      latex: '\\bigcap ',
-      requiresSelection: false
-    },
+    { display: '&isin;', label: 'Element', latex: '\\in ', tooltip: 'Element of a set.', requiresSelection: false },
+    { display: '&notin;', label: 'Not Element', latex: '\\notin ', tooltip: 'Not an element of.', requiresSelection: false },
+    { display: '&sub;', label: 'Subset', latex: '\\subset ', tooltip: 'Proper subset.', requiresSelection: false },
+    { display: '&sube;', label: 'Subset Equal', latex: '\\subseteq ', tooltip: 'Subset or equal.', requiresSelection: false },
+    { display: '&sup;', label: 'Superset', latex: '\\supset ', tooltip: 'Proper superset.', requiresSelection: false },
+    { display: '&supe;', label: 'Superset Equal', latex: '\\supseteq ', tooltip: 'Superset or equal.', requiresSelection: false },
+    { display: '&cup;', label: 'Union', latex: '\\cup ', tooltip: 'Set union.', requiresSelection: false },
+    { display: '&cap;', label: 'Intersection', latex: '\\cap ', tooltip: 'Set intersection.', requiresSelection: false },
+    { display: '&empty;', label: 'Empty Set', latex: '\\emptyset ', tooltip: 'Empty set.', requiresSelection: false },
+    { display: '&#8726;', label: 'Set Minus', latex: '\\setminus ', tooltip: 'Set difference (A minus B).', requiresSelection: false },
+    { display: '&#8469;', label: 'Naturals', latex: '\\mathbb{N}', tooltip: 'Set of natural numbers.', requiresSelection: false },
+    { display: '&#8484;', label: 'Integers', latex: '\\mathbb{Z}', tooltip: 'Set of integers.', requiresSelection: false },
+    { display: '&#8474;', label: 'Rationals', latex: '\\mathbb{Q}', tooltip: 'Set of rational numbers.', requiresSelection: false },
+    { display: '&#8477;', label: 'Reals', latex: '\\mathbb{R}', tooltip: 'Set of real numbers.', requiresSelection: false },
+    { display: '&#8450;', label: 'Complex', latex: '\\mathbb{C}', tooltip: 'Set of complex numbers.', requiresSelection: false },
+    { display: '&#8899;', label: 'Big Union', latex: '\\bigcup ', tooltip: 'Large (indexed) union.', requiresSelection: false },
+    { display: '&#8898;', label: 'Big Intersection', latex: '\\bigcap ', tooltip: 'Large (indexed) intersection.', requiresSelection: false },
   ],
 
   logic: [
-    {
-      display: '∧',
-      label: 'And',
-      latex: '\\land ',
-      requiresSelection: false
-    },
-    {
-      display: '∨',
-      label: 'Or',
-      latex: '\\lor ',
-      requiresSelection: false
-    },
-    {
-      display: '¬',
-      label: 'Not',
-      latex: '\\neg ',
-      requiresSelection: false
-    },
-    {
-      display: '→',
-      label: 'Implies',
-      latex: '\\to ',
-      requiresSelection: false
-    },
-    {
-      display: '⇒',
-      label: 'Implies',
-      latex: '\\Rightarrow ',
-      requiresSelection: false
-    },
-    {
-      display: '↔',
-      label: 'Iff',
-      latex: '\\leftrightarrow ',
-      requiresSelection: false
-    },
-    {
-      display: '⇔',
-      label: 'Iff',
-      latex: '\\Leftrightarrow ',
-      requiresSelection: false
-    },
-    {
-      display: '∀',
-      label: 'For All',
-      latex: '\\forall ',
-      requiresSelection: false
-    },
-    {
-      display: '∃',
-      label: 'Exists',
-      latex: '\\exists ',
-      requiresSelection: false
-    },
-    {
-      display: '∄',
-      label: 'Not Exists',
-      latex: '\\nexists ',
-      requiresSelection: false
-    },
-    {
-      display: '⊤',
-      label: 'True',
-      latex: '\\top ',
-      requiresSelection: false
-    },
-    {
-      display: '⊥',
-      label: 'False',
-      latex: '\\bot ',
-      requiresSelection: false
-    },
-    {
-      display: '⊕',
-      label: 'XOR',
-      latex: '\\oplus ',
-      requiresSelection: false
-    },
-    {
-      display: '⊻',
-      label: 'XOR',
-      latex: '\\veebar ',
-      requiresSelection: false
-    },
+    { display: '&and;', label: 'And', latex: '\\land ', tooltip: 'Logical AND.', requiresSelection: false },
+    { display: '&or;', label: 'Or', latex: '\\lor ', tooltip: 'Logical OR.', requiresSelection: false },
+    { display: '&not;', label: 'Not', latex: '\\neg ', tooltip: 'Logical NOT (negation).', requiresSelection: false },
+    { display: '&forall;', label: 'For All', latex: '\\forall ', tooltip: 'Universal quantifier (for all).', requiresSelection: false },
+    { display: '&exist;', label: 'Exists', latex: '\\exists ', tooltip: 'Existential quantifier (there exists).', requiresSelection: false },
+    { display: '&#8708;', label: 'Not Exists', latex: '\\nexists ', tooltip: 'There does not exist.', requiresSelection: false },
+    { display: '&#8868;', label: 'True', latex: '\\top ', tooltip: 'Tautology / true.', requiresSelection: false },
+    { display: '&perp;', label: 'False', latex: '\\bot ', tooltip: 'Contradiction / false (bottom).', requiresSelection: false },
+    { display: '&oplus;', label: 'XOR', latex: '\\oplus ', tooltip: 'Exclusive OR / direct sum.', requiresSelection: false },
   ],
 
   arrows: [
-    {
-      display: '←',
-      label: 'Left',
-      latex: '\\leftarrow ',
-      requiresSelection: false
-    },
-    {
-      display: '→',
-      label: 'Right',
-      latex: '\\rightarrow ',
-      requiresSelection: false
-    },
-    {
-      display: '↑',
-      label: 'Up',
-      latex: '\\uparrow ',
-      requiresSelection: false
-    },
-    {
-      display: '↓',
-      label: 'Down',
-      latex: '\\downarrow ',
-      requiresSelection: false
-    },
-    {
-      display: '↔',
-      label: 'Left Right',
-      latex: '\\leftrightarrow ',
-      requiresSelection: false
-    },
-    {
-      display: '⇐',
-      label: 'Left Double',
-      latex: '\\Leftarrow ',
-      requiresSelection: false
-    },
-    {
-      display: '⇒',
-      label: 'Right Double',
-      latex: '\\Rightarrow ',
-      requiresSelection: false
-    },
-    {
-      display: '⇔',
-      label: 'Left Right Double',
-      latex: '\\Leftrightarrow ',
-      requiresSelection: false
-    },
-    {
-      display: '↦',
-      label: 'Maps To',
-      latex: '\\mapsto ',
-      requiresSelection: false
-    },
-    {
-      display: '⟶',
-      label: 'Long Right',
-      latex: '\\longrightarrow ',
-      requiresSelection: false
-    },
-    {
-      display: '⟵',
-      label: 'Long Left',
-      latex: '\\longleftarrow ',
-      requiresSelection: false
-    },
-    {
-      display: '⟷',
-      label: 'Long Left Right',
-      latex: '\\longleftrightarrow ',
-      requiresSelection: false
-    },
+    { display: '&larr;', label: 'Left', latex: '\\leftarrow ', tooltip: 'Left arrow.', requiresSelection: false },
+    { display: '&rarr;', label: 'Right', latex: '\\rightarrow ', tooltip: 'Right arrow (implies / maps to).', requiresSelection: false },
+    { display: '&uarr;', label: 'Up', latex: '\\uparrow ', tooltip: 'Up arrow.', requiresSelection: false },
+    { display: '&darr;', label: 'Down', latex: '\\downarrow ', tooltip: 'Down arrow.', requiresSelection: false },
+    { display: '&harr;', label: 'Left Right', latex: '\\leftrightarrow ', tooltip: 'Left-right arrow (iff).', requiresSelection: false },
+    { display: '&lArr;', label: 'Left Double', latex: '\\Leftarrow ', tooltip: 'Double left arrow (implied by).', requiresSelection: false },
+    { display: '&rArr;', label: 'Right Double', latex: '\\Rightarrow ', tooltip: 'Double right arrow (implies).', requiresSelection: false },
+    { display: '&hArr;', label: 'Left Right Double', latex: '\\Leftrightarrow ', tooltip: 'Double left-right arrow (if and only if).', requiresSelection: false },
+    { display: '&#8614;', label: 'Maps To', latex: '\\mapsto ', tooltip: 'Maps to (function arrow).', requiresSelection: false },
+    { display: '&#10230;', label: 'Long Right', latex: '\\longrightarrow ', tooltip: 'Long right arrow.', requiresSelection: false },
+    { display: '&#10229;', label: 'Long Left', latex: '\\longleftarrow ', tooltip: 'Long left arrow.', requiresSelection: false },
+    { display: '&#10231;', label: 'Long Left Right', latex: '\\longleftrightarrow ', tooltip: 'Long left-right arrow.', requiresSelection: false },
   ],
 
   matrices: [
-    {
-      display: '[ ]',
-      label: '2×2 Matrix',
-      latex: '\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}',
-      requiresSelection: false
-    },
-    {
-      display: '[ ]',
-      label: '3×3 Matrix',
-      latex: '\\begin{bmatrix} a & b & c \\\\ d & e & f \\\\ g & h & i \\end{bmatrix}',
-      requiresSelection: false
-    },
-    {
-      display: '( )',
-      label: '2×2 Paren',
-      latex: '\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}',
-      requiresSelection: false
-    },
-    {
-      display: '( )',
-      label: '3×3 Paren',
-      latex: '\\begin{pmatrix} a & b & c \\\\ d & e & f \\\\ g & h & i \\end{pmatrix}',
-      requiresSelection: false
-    },
-    {
-      display: '| |',
-      label: '2×2 Det',
-      latex: '\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix}',
-      requiresSelection: false
-    },
-    {
-      display: '| |',
-      label: '3×3 Det',
-      latex: '\\begin{vmatrix} a & b & c \\\\ d & e & f \\\\ g & h & i \\end{vmatrix}',
-      requiresSelection: false
-    },
-    {
-      display: '{}',
-      label: 'Cases',
-      latex: '\\begin{cases} x & \\text{if } x > 0 \\\\ -x & \\text{if } x < 0 \\end{cases}',
-      requiresSelection: false
-    },
+    { display: '[<sup>a&nbsp;b</sup><sub>c&nbsp;d</sub>]', label: '2&times;2 Matrix', latex: '\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}', tooltip: '2x2 matrix with square brackets.', requiresSelection: false },
+    { display: '[<sup>a&nbsp;b&nbsp;c</sup><sub>g&nbsp;h&nbsp;i</sub>]', label: '3&times;3 Matrix', latex: '\\begin{bmatrix} a & b & c \\\\ d & e & f \\\\ g & h & i \\end{bmatrix}', tooltip: '3x3 matrix with square brackets.', requiresSelection: false },
+    { display: '(<sup>a&nbsp;b</sup><sub>c&nbsp;d</sub>)', label: '2&times;2 Paren', latex: '\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}', tooltip: '2x2 matrix with parentheses.', requiresSelection: false },
+    { display: '(<sup>a&nbsp;b&nbsp;c</sup><sub>g&nbsp;h&nbsp;i</sub>)', label: '3&times;3 Paren', latex: '\\begin{pmatrix} a & b & c \\\\ d & e & f \\\\ g & h & i \\end{pmatrix}', tooltip: '3x3 matrix with parentheses.', requiresSelection: false },
+    { display: '|<sup>a&nbsp;b</sup><sub>c&nbsp;d</sub>|', label: '2&times;2 Det', latex: '\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix}', tooltip: '2x2 determinant.', requiresSelection: false },
+    { display: '|<sup>a&nbsp;b&nbsp;c</sup><sub>g&nbsp;h&nbsp;i</sub>|', label: '3&times;3 Det', latex: '\\begin{vmatrix} a & b & c \\\\ d & e & f \\\\ g & h & i \\end{vmatrix}', tooltip: '3x3 determinant.', requiresSelection: false },
+    { display: '{<sup>x</sup><sub>&minus;x</sub>', label: 'Cases', latex: '\\begin{cases} x & \\text{if } x > 0 \\\\ -x & \\text{if } x < 0 \\end{cases}', tooltip: 'Piecewise / cases block (template, edit values).', requiresSelection: false },
   ],
 
   functions: [
-    {
-      display: 'sin',
-      label: 'Sine',
-      latex: '\\sin ',
-      requiresSelection: false
-    },
-    {
-      display: 'cos',
-      label: 'Cosine',
-      latex: '\\cos ',
-      requiresSelection: false
-    },
-    {
-      display: 'tan',
-      label: 'Tangent',
-      latex: '\\tan ',
-      requiresSelection: false
-    },
-    {
-      display: 'cot',
-      label: 'Cotangent',
-      latex: '\\cot ',
-      requiresSelection: false
-    },
-    {
-      display: 'sec',
-      label: 'Secant',
-      latex: '\\sec ',
-      requiresSelection: false
-    },
-    {
-      display: 'csc',
-      label: 'Cosecant',
-      latex: '\\csc ',
-      requiresSelection: false
-    },
-    {
-      display: 'arcsin',
-      label: 'Arcsine',
-      latex: '\\arcsin ',
-      requiresSelection: false
-    },
-    {
-      display: 'arccos',
-      label: 'Arccosine',
-      latex: '\\arccos ',
-      requiresSelection: false
-    },
-    {
-      display: 'arctan',
-      label: 'Arctangent',
-      latex: '\\arctan ',
-      requiresSelection: false
-    },
-    {
-      display: 'sinh',
-      label: 'Hyperbolic Sine',
-      latex: '\\sinh ',
-      requiresSelection: false
-    },
-    {
-      display: 'cosh',
-      label: 'Hyperbolic Cosine',
-      latex: '\\cosh ',
-      requiresSelection: false
-    },
-    {
-      display: 'tanh',
-      label: 'Hyperbolic Tangent',
-      latex: '\\tanh ',
-      requiresSelection: false
-    },
-    {
-      display: 'log',
-      label: 'Log',
-      latex: '\\log ',
-      requiresSelection: false
-    },
-    {
-      display: 'ln',
-      label: 'Natural Log',
-      latex: '\\ln ',
-      requiresSelection: false
-    },
-    {
-      display: 'log<sub>b</sub>',
-      label: 'Log Base',
-      latex: '\\log_{} ',
-      requiresSelection: false
-    },
-    {
-      display: 'exp',
-      label: 'Exponential',
-      latex: '\\exp ',
-      requiresSelection: false
-    },
-    {
-      display: 'max',
-      label: 'Maximum',
-      latex: '\\max ',
-      requiresSelection: false
-    },
-    {
-      display: 'min',
-      label: 'Minimum',
-      latex: '\\min ',
-      requiresSelection: false
-    },
-    {
-      display: 'sup',
-      label: 'Supremum',
-      latex: '\\sup ',
-      requiresSelection: false
-    },
-    {
-      display: 'inf',
-      label: 'Infimum',
-      latex: '\\inf ',
-      requiresSelection: false
-    },
-    {
-      display: 'gcd',
-      label: 'GCD',
-      latex: '\\gcd ',
-      requiresSelection: false
-    },
-    {
-      display: 'lcm',
-      label: 'LCM',
-      latex: '\\text{lcm} ',
-      requiresSelection: false
-    },
+    { display: 'sin', label: 'Sine', latex: '\\sin ', tooltip: 'Sine function.', requiresSelection: false },
+    { display: 'cos', label: 'Cosine', latex: '\\cos ', tooltip: 'Cosine function.', requiresSelection: false },
+    { display: 'tan', label: 'Tangent', latex: '\\tan ', tooltip: 'Tangent function.', requiresSelection: false },
+    { display: 'cot', label: 'Cotangent', latex: '\\cot ', tooltip: 'Cotangent function.', requiresSelection: false },
+    { display: 'sec', label: 'Secant', latex: '\\sec ', tooltip: 'Secant function.', requiresSelection: false },
+    { display: 'csc', label: 'Cosecant', latex: '\\csc ', tooltip: 'Cosecant function.', requiresSelection: false },
+    { display: 'arcsin', label: 'Arcsine', latex: '\\arcsin ', tooltip: 'Inverse sine.', requiresSelection: false },
+    { display: 'arccos', label: 'Arccosine', latex: '\\arccos ', tooltip: 'Inverse cosine.', requiresSelection: false },
+    { display: 'arctan', label: 'Arctangent', latex: '\\arctan ', tooltip: 'Inverse tangent.', requiresSelection: false },
+    { display: 'sinh', label: 'Hyperbolic Sine', latex: '\\sinh ', tooltip: 'Hyperbolic sine.', requiresSelection: false },
+    { display: 'cosh', label: 'Hyperbolic Cosine', latex: '\\cosh ', tooltip: 'Hyperbolic cosine.', requiresSelection: false },
+    { display: 'tanh', label: 'Hyperbolic Tangent', latex: '\\tanh ', tooltip: 'Hyperbolic tangent.', requiresSelection: false },
+    { display: 'log', label: 'Log', latex: '\\log ', tooltip: 'Logarithm (base 10 by convention).', requiresSelection: false },
+    { display: 'ln', label: 'Natural Log', latex: '\\ln ', tooltip: 'Natural logarithm (base e).', requiresSelection: false },
+    { display: 'log<sub>b</sub>', label: 'Log Base', latex: '\\log_{} ', tooltip: 'Logarithm with custom base. Type the base in the subscript.', requiresSelection: false },
+    { display: 'exp', label: 'Exponential', latex: '\\exp ', tooltip: 'Exponential function.', requiresSelection: false },
+    { display: 'max', label: 'Maximum', latex: '\\max ', tooltip: 'Maximum.', requiresSelection: false },
+    { display: 'min', label: 'Minimum', latex: '\\min ', tooltip: 'Minimum.', requiresSelection: false },
+    { display: 'sup', label: 'Supremum', latex: '\\sup ', tooltip: 'Supremum (least upper bound).', requiresSelection: false },
+    { display: 'inf', label: 'Infimum', latex: '\\inf ', tooltip: 'Infimum (greatest lower bound).', requiresSelection: false },
+    { display: 'gcd', label: 'GCD', latex: '\\gcd ', tooltip: 'Greatest common divisor.', requiresSelection: false },
+    { display: 'lcm', label: 'LCM', latex: '\\text{lcm} ', tooltip: 'Least common multiple.', requiresSelection: false },
   ],
 
   geometry: [
-    {
-      display: '∠',
-      label: 'Angle',
-      latex: '\\angle ',
-      requiresSelection: false
-    },
-    {
-      display: '∡',
-      label: 'Measured Angle',
-      latex: '\\measuredangle ',
-      requiresSelection: false
-    },
-    {
-      display: '△',
-      label: 'Triangle',
-      latex: '\\triangle ',
-      requiresSelection: false
-    },
-    {
-      display: '□',
-      label: 'Square',
-      latex: '\\square ',
-      requiresSelection: false
-    },
-    {
-      display: '∥',
-      label: 'Parallel',
-      latex: '\\parallel ',
-      requiresSelection: false
-    },
-    {
-      display: '⊥',
-      label: 'Perpendicular',
-      latex: '\\perp ',
-      requiresSelection: false
-    },
-    {
-      display: '∦',
-      label: 'Not Parallel',
-      latex: '\\nparallel ',
-      requiresSelection: false
-    },
-    {
-      display: '≅',
-      label: 'Congruent',
-      latex: '\\cong ',
-      requiresSelection: false
-    },
-    {
-      display: '∼',
-      label: 'Similar',
-      latex: '\\sim ',
-      requiresSelection: false
-    },
-    {
-      display: '○',
-      label: 'Circle',
-      latex: '\\circ ',
-      requiresSelection: false
-    },
-    {
-      display: '°',
-      label: 'Degree',
-      latex: '^\\circ ',
-      requiresSelection: false
-    },
+    { display: '&ang;', label: 'Angle', latex: '\\angle ', tooltip: 'Angle.', requiresSelection: false },
+    { display: '&#8737;', label: 'Measured Angle', latex: '\\measuredangle ', tooltip: 'Measured angle.', requiresSelection: false },
+    { display: '&#9651;', label: 'Triangle', latex: '\\triangle ', tooltip: 'Triangle.', requiresSelection: false },
+    { display: '&#9633;', label: 'Square', latex: '\\square ', tooltip: 'Square symbol.', requiresSelection: false },
+    { display: '&#8741;', label: 'Parallel', latex: '\\parallel ', tooltip: 'Parallel to.', requiresSelection: false },
+    { display: '&perp;', label: 'Perpendicular', latex: '\\perp ', tooltip: 'Perpendicular to.', requiresSelection: false },
+    { display: '&#8742;', label: 'Not Parallel', latex: '\\nparallel ', tooltip: 'Not parallel.', requiresSelection: false },
+    { display: '&cong;', label: 'Congruent', latex: '\\cong ', tooltip: 'Congruent (geometry).', requiresSelection: false },
+    { display: '&#9675;', label: 'Circle', latex: '\\circ ', tooltip: 'Circle / composition.', requiresSelection: false },
+    { display: '&deg;', label: 'Degree', latex: '^\\circ ', tooltip: 'Degree symbol (e.g. 90 deg).', requiresSelection: false },
   ],
 
   brackets: [
-    {
-      display: '( )',
-      label: 'Parentheses',
-      latex: '\\left( \\right)',
-      requiresSelection: false
-    },
-    {
-      display: '[ ]',
-      label: 'Brackets',
-      latex: '\\left[ \\right]',
-      requiresSelection: false
-    },
-    {
-      display: '{ }',
-      label: 'Braces',
-      latex: '\\left\\{ \\right\\}',
-      requiresSelection: false
-    },
-    {
-      display: '⟨ ⟩',
-      label: 'Angle Brackets',
-      latex: '\\langle \\rangle',
-      requiresSelection: false
-    },
-    {
-      display: '| |',
-      label: 'Absolute',
-      latex: '\\left| \\right|',
-      requiresSelection: false
-    },
-    {
-      display: '∥ ∥',
-      label: 'Norm',
-      latex: '\\left\\| \\right\\|',
-      requiresSelection: false
-    },
-    {
-      display: '⌈ ⌉',
-      label: 'Ceiling',
-      latex: '\\lceil \\rceil',
-      requiresSelection: false
-    },
-    {
-      display: '⌊ ⌋',
-      label: 'Floor',
-      latex: '\\lfloor \\rfloor',
-      requiresSelection: false
-    },
+    { display: '( )', label: 'Parentheses', latex: '\\left( \\right)', tooltip: 'Auto-sized parentheses.', requiresSelection: false },
+    { display: '[ ]', label: 'Brackets', latex: '\\left[ \\right]', tooltip: 'Auto-sized square brackets.', requiresSelection: false },
+    { display: '{ }', label: 'Braces', latex: '\\left\\{ \\right\\}', tooltip: 'Auto-sized curly braces.', requiresSelection: false },
+    { display: '&lang; &rang;', label: 'Angle Brackets', latex: '\\langle \\rangle', tooltip: 'Angle brackets (inner product, ket / bra notation).', requiresSelection: false },
+    { display: '| |', label: 'Absolute', latex: '\\left| \\right|', tooltip: 'Absolute value bars.', requiresSelection: false },
+    { display: '&#8741; &#8741;', label: 'Norm', latex: '\\left\\| \\right\\|', tooltip: 'Norm (double bars).', requiresSelection: false },
+    { display: '&#8968; &#8969;', label: 'Ceiling', latex: '\\lceil \\rceil', tooltip: 'Ceiling (round up).', requiresSelection: false },
+    { display: '&#8970; &#8971;', label: 'Floor', latex: '\\lfloor \\rfloor', tooltip: 'Floor (round down).', requiresSelection: false },
+  ],
+
+  spaces: [
+    { display: '&#9251;', label: 'Space', latex: '\\ ', tooltip: 'Regular space.', requiresSelection: false },
+    { display: '&#9251;<sub>thin</sub>', label: 'Thin Space', latex: '\\, ', tooltip: 'Thin space (small gap).', requiresSelection: false },
+    { display: '&#9251;<sub>med</sub>', label: 'Medium Space', latex: '\\: ', tooltip: 'Medium space.', requiresSelection: false },
+    { display: '&#9251;<sub>thick</sub>', label: 'Thick Space', latex: '\\; ', tooltip: 'Thick space.', requiresSelection: false },
+    { display: '&#9251;<sub>quad</sub>', label: 'Quad Space', latex: '\\quad ', tooltip: 'Quad space (wide gap, ~1em).', requiresSelection: false },
+    { display: '&#9251;<sub>2quad</sub>', label: 'Double Quad', latex: '\\qquad ', tooltip: 'Double quad space (very wide gap, ~2em).', requiresSelection: false },
+    { display: '&#9251;<sub>neg</sub>', label: 'Negative Space', latex: '\\! ', tooltip: 'Negative thin space (pulls symbols closer).', requiresSelection: false },
   ],
 };
 

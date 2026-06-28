@@ -1,204 +1,183 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 comparison, obj7 comparison, obj9 summary capstone)
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "orthogonal sets",
-//   "orthonormal sets",
-//   "orthogonal basis",
-//   "orthonormal basis",
-//   "orthogonal matrix",
-//   "coordinates dot product",
-//   "Kronecker delta orthonormal",
-//   "orthogonal vectors independent",
-//   "Parseval's identity",
-//   "Bessel's inequality",
-//   "QR decomposition orthonormal columns",
-//   "orthogonal matrix properties",
-//   "unit vectors basis",
-//   "pairwise perpendicular vectors"
-// ]
-//   // •
+export async function getStaticProps(){
+const keyWords = [
+  "orthogonal sets",
+  "orthonormal sets",
+  "orthogonal basis",
+  "orthonormal basis",
+  "orthogonal matrix",
+  "coordinates dot product",
+  "Kronecker delta orthonormal",
+  "orthogonal vectors independent",
+  "Parseval's identity",
+  "Bessel's inequality",
+  "QR decomposition orthonormal columns",
+  "orthogonal matrix properties",
+  "unit vectors basis",
+  "pairwise perpendicular vectors"
+]
 
-// //   \u2022 First item
-// // \u2022 Second item
+const linkStyle = 'color: inherit; text-decoration: underline;'
 
-  
-// // <hr style="border-width:1px;"></hr>
+// ---------- TABLES ----------
 
-// // <hr style="color:blue;" />
+// obj3 — comparison: orthogonal set vs orthonormal set across the distinguishing features
+const obj3Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Aspect</th>
+      <th style="${tableHeaders.comparison}">Orthogonal set</th>
+      <th style="${tableHeaders.comparison}">Orthonormal set</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Pairwise dot products</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">v<sub>i</sub> · v<sub>j</sub> = 0 for i ≠ j</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">v<sub>i</sub> · v<sub>j</sub> = 0 for i ≠ j</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Vector lengths</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any nonzero value</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each ‖v<sub>i</sub>‖ = 1</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Compact condition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">v<sub>i</sub> · v<sub>j</sub> = 0 (i ≠ j) plus each v<sub>i</sub> ≠ 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">v<sub>i</sub> · v<sub>j</sub> = δ<sub>ij</sub> (the Kronecker delta)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Coordinate of x along v<sub>i</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<sub>i</sub> = (v<sub>i</sub> · x) / (v<sub>i</sub> · v<sub>i</sub>)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<sub>i</sub> = q<sub>i</sub> · x</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear independence</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">automatic (nonzero vectors)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">automatic (unit vectors are nonzero)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Going between the two</td>
+      <td style="padding: 12px 15px; color: #34495e;">divide each v<sub>i</sub> by ‖v<sub>i</sub>‖ → orthonormal</td>
+      <td style="padding: 12px 15px; color: #34495e;">already orthogonal as a special case</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// obj7 — comparison: square orthogonal matrix vs rectangular matrix with orthonormal columns
+const obj7Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Property</th>
+      <th style="${tableHeaders.comparison}">Square orthogonal matrix Q (n × n)</th>
+      <th style="${tableHeaders.comparison}">Rectangular Q with orthonormal columns (m × n, m &gt; n)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Qᵀ Q</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I<sub>n</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I<sub>n</sub></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Q Qᵀ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I<sub>n</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">NOT the identity; equals the <a href="/linear-algebra/orthogonality/projections" style="${linkStyle}">projection</a> matrix onto Col(Q)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inverse</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Q⁻¹ = Qᵀ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no two-sided inverse (Q is not square)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">det(Q)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">±1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">undefined (Q is not square)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rows</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">also form an orthonormal set</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rows are not orthonormal in general</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Preserves dot product?</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">yes for all u, v ∈ ℝⁿ — full isometry of ℝⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">yes from source to image: (Q u) · (Q v) = u · v for u, v ∈ ℝⁿ</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Geometric role</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rotation (det +1) or rotation composed with reflection (det −1)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">embedding ℝⁿ into ℝᵐ as an n-dimensional subspace</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Typical source</td>
+      <td style="padding: 12px 15px; color: #34495e;">stored basis change, rotation matrix, Householder/Givens factor</td>
+      <td style="padding: 12px 15px; color: #34495e;">output of <a href="/linear-algebra/orthogonality/gram-schmidt" style="${linkStyle}">Gram–Schmidt</a>; the Q in thin <a href="/linear-algebra/decompositions/qr" style="${linkStyle}">QR decomposition</a> A = Q R</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+// obj9 — summary capstone: operations made simple by an orthonormal basis
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Operation</th>
+      <th style="${tableHeaders.summary}">Formula in an orthonormal basis {q<sub>1</sub>, …, q<sub>k</sub>}</th>
+      <th style="${tableHeaders.summary}">Why it&apos;s simple</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Coordinate of x along q<sub>i</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<sub>i</sub> = q<sub>i</sub> · x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one dot product replaces solving a system</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reconstruction of x from its coordinates</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = Σ<sub>i</sub> (q<sub>i</sub> · x) q<sub>i</sub> &nbsp;(if {q<sub>i</sub>} spans the space)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sum of k dot-product-weighted basis vectors</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Squared length ‖x‖²</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x)² &nbsp;(Parseval, when {q<sub>i</sub>} spans)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">squared length = sum of squared coordinates</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inner product x · y</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x)(q<sub>i</sub> · y)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">inner product = ordinary dot product of coordinate vectors</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Projection onto Span{q<sub>1</sub>, …, q<sub>k</sub>}</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x) q<sub>i</sub></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no (AᵀA)⁻¹ needed; independent dot products</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Squared length of that projection</td>
+      <td style="padding: 12px 15px; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x)² ≤ ‖x‖² &nbsp;(Bessel; equality iff x ∈ span)</td>
+      <td style="padding: 12px 15px; color: #34495e;">truncated Parseval; deficit measures distance to span</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-// //     const sectionsContent={
-
-// //     obj1:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-  
-// //     },
-// //     obj2:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-  
-// //     obj3:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj4:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj5:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj6:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj7:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj8:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj9:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj10:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj11:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj12:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj13:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-// //     obj14:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-
-
-// //     obj15:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     }
-  
-// //   }
 
 // const sectionsContent = {
 //   obj1: {
@@ -321,628 +300,16 @@
 //     after: ``,
 //     link: ``,
 //   },
+//   obj9: {
+//     title: `Summary: Operations in an Orthonormal Basis`,
+//     content: `An orthonormal basis converts every routine vector operation into something that uses only dot products — no system solving, no matrix inversion, no (AᵀA)⁻¹ factor. The table below collects each operation alongside its formula in an orthonormal basis and a brief note on why orthonormality makes it simple, including Parseval&apos;s identity for length and Bessel&apos;s inequality for partial projections.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
+//   },
 // }
 
-
-
-// const introContent = {
-//   title: `Bases Where Coordinates Come Free`,
-//   content: `An orthogonal set consists of vectors that are pairwise perpendicular. An orthonormal set adds the requirement that each vector has unit length. These sets are automatically linearly independent, and when they form a basis, coordinates are computed by dot products alone — no system solving, no row reduction, no matrix inversion.`,
-// }
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is an orthogonal set of vectors?",
-//     answer: "An orthogonal set is a collection of nonzero vectors that are pairwise perpendicular — every pair has dot product zero. Orthogonal sets are automatically linearly independent, so no separate independence check is needed.",
-//     sectionId: "1"
-//   },
-//   obj2: {
-//     question: "What is the difference between orthogonal and orthonormal?",
-//     answer: "An orthogonal set requires all pairs to have dot product zero. An orthonormal set additionally requires each vector to have unit length. Any orthogonal set can be made orthonormal by dividing each vector by its length.",
-//     sectionId: "3"
-//   },
-//   obj3: {
-//     question: "How do you find coordinates with an orthonormal basis?",
-//     answer: "For an orthonormal basis, the coordinate of x along basis vector qᵢ is simply the dot product x · qᵢ. No system of equations or matrix inversion is needed — each coordinate is computed independently by a single dot product.",
-//     sectionId: "5"
-//   },
-//   obj4: {
-//     question: "What is an orthogonal matrix?",
-//     answer: "An orthogonal matrix Q has orthonormal columns, satisfying QᵀQ = I and Q⁻¹ = Qᵀ. It preserves dot products, lengths, angles, and distances. Its determinant is ±1, representing a rotation (det +1) or a rotation with reflection (det −1).",
-//     sectionId: "6"
-//   },
-//   obj5: {
-//     question: "What is Parseval's identity?",
-//     answer: "Parseval's identity states that for an orthonormal basis, the squared length of any vector equals the sum of the squares of its coordinates: ‖x‖² = Σ(x · qᵢ)². It is the Pythagorean theorem applied to the orthonormal decomposition.",
-//     sectionId: "8"
-//   }
-// }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Orthogonal and Orthonormal Sets",
-//     "description": "Orthogonal and orthonormal sets and bases in linear algebra. Coordinates via dot products, orthogonal matrices, Parseval's identity, Bessel's inequality, and QR decomposition.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/orthogonality/orthogonal-sets",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Orthogonal and Orthonormal Sets"
-//     },
-//     "teaches": [
-//       "Orthogonal sets and automatic linear independence",
-//       "Orthonormal sets and the Kronecker delta condition",
-//       "Orthogonal and orthonormal bases",
-//       "Computing coordinates via dot products",
-//       "Orthogonal matrices and length preservation",
-//       "Rectangular matrices with orthonormal columns",
-//       "Parseval's identity and Bessel's inequality"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Orthogonality",
-//         "item": "https://www.learnmathclass.com/linear-algebra/orthogonality"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Orthogonal Sets",
-//         "item": "https://www.learnmathclass.com/linear-algebra/orthogonality/orthogonal-sets"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-// //    return {
-// //       props:{
-// //          sectionsContent,
-// //          introContent,
-// //           seoData: {
-// //         title: "Orthogonal Sets | Learn Math Class",
-// //         description: "Metadescription",
-// //         keywords: keyWords.join(", "),
-// //         url: "/linear-algebra/orthogonality/orthogonal-sets",
-// //          name: "name"
-// //       },
-        
-// //        }
-// //     }
-
-// return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Orthogonal & Orthonormal Sets and Bases | Learn Math Class",
-//       description: "Orthogonal and orthonormal sets and bases in linear algebra. Coordinates via dot products, orthogonal matrices, Parseval's identity, Bessel's inequality, and QR decomposition.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/orthogonality/orthogonal-sets",
-//       name: "Orthogonal and Orthonormal Sets"
-//     },
-//   }
-// }
-//    }
-
-// // export default function OrthogonalSetsPage({seoData,sectionsContent , introContent}) {
-
-// export default function OrthogonalSetsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    {/* <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head> */}
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Orthogonal Sets</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
-
-// tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 comparison, obj7 comparison, obj9 summary capstone)
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "orthogonal sets",
-  "orthonormal sets",
-  "orthogonal basis",
-  "orthonormal basis",
-  "orthogonal matrix",
-  "coordinates dot product",
-  "Kronecker delta orthonormal",
-  "orthogonal vectors independent",
-  "Parseval's identity",
-  "Bessel's inequality",
-  "QR decomposition orthonormal columns",
-  "orthogonal matrix properties",
-  "unit vectors basis",
-  "pairwise perpendicular vectors"
-]
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj3 — comparison: orthogonal set vs orthonormal set across the distinguishing features
-const obj3Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Aspect</th>
-      <th style="${tableHeaders.comparison}">Orthogonal set</th>
-      <th style="${tableHeaders.comparison}">Orthonormal set</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Pairwise dot products</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">v<sub>i</sub> · v<sub>j</sub> = 0 for i ≠ j</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">v<sub>i</sub> · v<sub>j</sub> = 0 for i ≠ j</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Vector lengths</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any nonzero value</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">each ‖v<sub>i</sub>‖ = 1</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Compact condition</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">v<sub>i</sub> · v<sub>j</sub> = 0 (i ≠ j) plus each v<sub>i</sub> ≠ 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">v<sub>i</sub> · v<sub>j</sub> = δ<sub>ij</sub> (the Kronecker delta)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Coordinate of x along v<sub>i</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<sub>i</sub> = (v<sub>i</sub> · x) / (v<sub>i</sub> · v<sub>i</sub>)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<sub>i</sub> = q<sub>i</sub> · x</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Linear independence</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">automatic (nonzero vectors)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">automatic (unit vectors are nonzero)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Going between the two</td>
-      <td style="padding: 12px 15px; color: #34495e;">divide each v<sub>i</sub> by ‖v<sub>i</sub>‖ → orthonormal</td>
-      <td style="padding: 12px 15px; color: #34495e;">already orthogonal as a special case</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj7 — comparison: square orthogonal matrix vs rectangular matrix with orthonormal columns
-const obj7Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Property</th>
-      <th style="${tableHeaders.comparison}">Square orthogonal matrix Q (n × n)</th>
-      <th style="${tableHeaders.comparison}">Rectangular Q with orthonormal columns (m × n, m &gt; n)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Qᵀ Q</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I<sub>n</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I<sub>n</sub></td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Q Qᵀ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">I<sub>n</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">NOT the identity; equals the <a href="/linear-algebra/orthogonality/projections" style="${linkStyle}">projection</a> matrix onto Col(Q)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inverse</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Q⁻¹ = Qᵀ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no two-sided inverse (Q is not square)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">det(Q)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">±1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">undefined (Q is not square)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rows</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">also form an orthonormal set</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rows are not orthonormal in general</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Preserves dot product?</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">yes for all u, v ∈ ℝⁿ — full isometry of ℝⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">yes from source to image: (Q u) · (Q v) = u · v for u, v ∈ ℝⁿ</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Geometric role</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rotation (det +1) or rotation composed with reflection (det −1)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">embedding ℝⁿ into ℝᵐ as an n-dimensional subspace</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Typical source</td>
-      <td style="padding: 12px 15px; color: #34495e;">stored basis change, rotation matrix, Householder/Givens factor</td>
-      <td style="padding: 12px 15px; color: #34495e;">output of <a href="/linear-algebra/orthogonality/gram-schmidt" style="${linkStyle}">Gram–Schmidt</a>; the Q in thin <a href="/linear-algebra/decompositions/qr" style="${linkStyle}">QR decomposition</a> A = Q R</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj9 — summary capstone: operations made simple by an orthonormal basis
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Operation</th>
-      <th style="${tableHeaders.summary}">Formula in an orthonormal basis {q<sub>1</sub>, …, q<sub>k</sub>}</th>
-      <th style="${tableHeaders.summary}">Why it&apos;s simple</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Coordinate of x along q<sub>i</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c<sub>i</sub> = q<sub>i</sub> · x</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one dot product replaces solving a system</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reconstruction of x from its coordinates</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = Σ<sub>i</sub> (q<sub>i</sub> · x) q<sub>i</sub> &nbsp;(if {q<sub>i</sub>} spans the space)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sum of k dot-product-weighted basis vectors</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Squared length ‖x‖²</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x)² &nbsp;(Parseval, when {q<sub>i</sub>} spans)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">squared length = sum of squared coordinates</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Inner product x · y</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x)(q<sub>i</sub> · y)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">inner product = ordinary dot product of coordinate vectors</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Projection onto Span{q<sub>1</sub>, …, q<sub>k</sub>}</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x) q<sub>i</sub></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no (AᵀA)⁻¹ needed; independent dot products</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Squared length of that projection</td>
-      <td style="padding: 12px 15px; color: #34495e;">Σ<sub>i</sub> (q<sub>i</sub> · x)² ≤ ‖x‖² &nbsp;(Bessel; equality iff x ∈ span)</td>
-      <td style="padding: 12px 15px; color: #34495e;">truncated Parseval; deficit measures distance to span</td>
-    </tr>
-  </tbody>
-</table>
-`
-
+// formulas-injected: v1 | 2026-06-16 | 4 callouts (obj2 orthogonal_set_independence prose-insert, obj3 orthonormal_set direct, obj5 coordinates_via_orthonormal_basis direct, obj8 parseval_identity direct)
 
 const sectionsContent = {
   obj1: {
@@ -962,7 +329,12 @@ A less obvious example: $\\{(1, 1, 1), (1, -2, 1), (1, 0, -1)\\}$. Checking: $(1
   },
   obj2: {
     title: `Orthogonal Sets Are Independent`,
-    content: `Every orthogonal set of nonzero vectors is [linearly independent](!/linear-algebra/vector-spaces/linear-independence). The proof is short and reveals exactly why orthogonality is so powerful.
+    content: `Every orthogonal set of nonzero vectors is [linearly independent](!/linear-algebra/vector-spaces/linear-independence):
+
+@academic[formula_callout:orthogonal_set_independence|Orthogonal Set Independence|$$\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\} \\text{ orthogonal, all nonzero} \\implies \\text{linearly independent}$$]@
+@academic[formulas_link:/linear-algebra/formulas#orthogonal_set_independence]@
+
+The proof is short and reveals exactly why orthogonality is so powerful.
 
 Suppose $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$. Dot both sides with $\\mathbf{v}_j$:
 
@@ -979,7 +351,8 @@ The key mechanism is that orthogonality isolates each coefficient. Dotting with 
     title: `Orthonormal Sets`,
     content: `An orthonormal set is an orthogonal set where every vector additionally has unit length: $\\|\\mathbf{v}_i\\| = 1$ for all $i$. The two conditions together can be written compactly using the Kronecker delta:
 
-$$\\mathbf{v}_i \\cdot \\mathbf{v}_j = \\delta_{ij} = \\begin{cases} 1 & \\text{if } i = j \\\\ 0 & \\text{if } i \\neq j \\end{cases}$$
+@academic[formula_callout:orthonormal_set|Orthonormal Set|$$\\mathbf{v}_i \\cdot \\mathbf{v}_j = \\delta_{ij} = \\begin{cases} 1 & \\text{if } i = j \\\\ 0 & \\text{if } i \\neq j \\end{cases}$$]@
+@academic[formulas_link:/linear-algebra/formulas#orthonormal_set]@
 
 Any orthogonal set can be made orthonormal by normalizing each vector: $\\hat{\\mathbf{v}}_i = \\mathbf{v}_i / \\|\\mathbf{v}_i\\|$. The directions are preserved, only the lengths change to $1$.
 
@@ -1009,7 +382,8 @@ $$c_i = \\frac{\\mathbf{x} \\cdot \\mathbf{v}_i}{\\mathbf{v}_i \\cdot \\mathbf{v
 
 For an orthonormal basis $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_n\\}$, the denominator is $1$, and the formula simplifies to
 
-$$c_i = \\mathbf{x} \\cdot \\mathbf{q}_i$$
+@academic[formula_callout:coordinates_via_orthonormal_basis|Coordinates via Orthonormal Basis|$$c_i = \\mathbf{x} \\cdot \\mathbf{q}_i$$]@
+@academic[formulas_link:/linear-algebra/formulas#coordinates_via_orthonormal_basis]@
 
 No [linear system](!/linear-algebra/linear-systems) needs to be solved. No [matrix](!/linear-algebra/matrix) needs to be inverted. Each coordinate is computed independently by a single dot product.
 
@@ -1049,10 +423,11 @@ These rectangular matrices with orthonormal columns are the natural output of th
     link: ``,
   },
   obj8: {
-    title: `Parseval's Identity and Bessel's Inequality`,
-    content: `For an orthonormal basis $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_n\\}$ of $\\mathbb{R}^n$ and any vector $\\mathbf{x}$, the coordinates $c_i = \\mathbf{x} \\cdot \\mathbf{q}_i$ satisfy Parseval's identity:
+    title: `Parseval&apos;s Identity and Bessel&apos;s Inequality`,
+    content: `For an orthonormal basis $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_n\\}$ of $\\mathbb{R}^n$ and any vector $\\mathbf{x}$, the coordinates $c_i = \\mathbf{x} \\cdot \\mathbf{q}_i$ satisfy Parseval&apos;s identity:
 
-$$\\|\\mathbf{x}\\|^2 = c_1^2 + c_2^2 + \\cdots + c_n^2 = \\sum_{i=1}^{n} (\\mathbf{x} \\cdot \\mathbf{q}_i)^2$$
+@academic[formula_callout:parseval_identity|Parseval Identity|$$\\|\\mathbf{x}\\|^2 = \\sum_{i=1}^{n} (\\mathbf{x} \\cdot \\mathbf{q}_i)^2$$]@
+@academic[formulas_link:/linear-algebra/formulas#parseval_identity]@
 
 The squared length of $\\mathbf{x}$ equals the sum of the squares of its coordinates. This is the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product) applied to the orthonormal decomposition $\\mathbf{x} = c_1\\mathbf{q}_1 + \\cdots + c_n\\mathbf{q}_n$.
 
@@ -1060,7 +435,7 @@ When the orthonormal set does not span — when $k < n$ — the sum accounts for
 
 $$\\sum_{i=1}^{k} (\\mathbf{x} \\cdot \\mathbf{q}_i)^2 \\leq \\|\\mathbf{x}\\|^2$$
 
-This is Bessel's inequality. The left side is the squared length of the projection of $\\mathbf{x}$ onto $\\text{Span}\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_k\\}$. The deficit $\\|\\mathbf{x}\\|^2 - \\sum(\\mathbf{x} \\cdot \\mathbf{q}_i)^2$ is the squared length of the component orthogonal to the span. Equality holds if and only if $\\mathbf{x}$ is already in the span, leaving no perpendicular remainder.`,
+This is Bessel&apos;s inequality. The left side is the squared length of the projection of $\\mathbf{x}$ onto $\\text{Span}\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_k\\}$. The deficit $\\|\\mathbf{x}\\|^2 - \\sum(\\mathbf{x} \\cdot \\mathbf{q}_i)^2$ is the squared length of the component orthogonal to the span. Equality holds if and only if $\\mathbf{x}$ is already in the span, leaving no perpendicular remainder.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1073,8 +448,6 @@ This is Bessel's inequality. The left side is the squared length of the projecti
     link: ``,
   },
 }
-
-
 
 const introContent = {
   title: `Bases Where Coordinates Come Free`,
