@@ -160,7 +160,7 @@
 
 import dynamic from 'next/dynamic'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import '../../../pages.css'
+import '@/pages.css'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import Head from 'next/head'
 import Sections from '@/app/components/page-components/section/Sections'

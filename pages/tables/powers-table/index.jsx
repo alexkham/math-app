@@ -88,7 +88,7 @@
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import PowerTable from '@/app/components/tables/PowerTable'
-import '../../../pages.css'
+import '@/pages.css'
 import ExplanationDetails from '@/app/components/ExplanationDetails';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
@@ -158,7 +158,7 @@ export default function PowersTablePage({seoData, instructions, faqQuestions, sc
      title="About This Table"
      instructions={instructions}
      links={[
-        { text: "Exponents Calculator", url: "/calculators/exponent-calculator" },
+        // { text: "Exponents Calculator", url: "/calculators/exponent-calculator" },
         { text: "Natural Exponential Table", url: "/tables/arithmetics/exponential-table" }
       ]}/>
       </div>

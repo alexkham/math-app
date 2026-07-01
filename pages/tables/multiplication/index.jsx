@@ -309,7 +309,7 @@
 
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import '../../../../pages/pages.css'
+import '@/pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 // import MultiplicationTablesPage from '../../../../app/components/tables/MultiplicationTablePage'

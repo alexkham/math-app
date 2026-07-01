@@ -119,7 +119,7 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 import SquareRootsTable from '@/app/components/tables/SquareRootsTable';
 import ExplanationDetails from '@/app/components/ExplanationDetails';
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import '../../../pages.css';
+import '@/pages.css';
 import PerfectSquaresPage from '../../../app/components/tables/PerfectSquaresPage';
 
 export default function PerfectSquaresTablePage({ seoData, combinedInstructions, faqQuestions, schemas }) {
