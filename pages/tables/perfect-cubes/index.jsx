@@ -369,7 +369,7 @@ import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 
 import ExplanationDetails from '@/app/components/ExplanationDetails';
-import '@/pages.css';
+import '../../pages.css';
 import CubeRootsTable from '@/app/components/tables/CubeRootsTable';
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import PerfectCubesPage from '../../../app/components/tables/PerfectCubesPage';
