@@ -1,71 +1,179 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+// tables-optimized: v4 | 2026-05-22 | 4 tables (obj2 aggregation, obj4 aggregation, obj5 aggregation, obj7 summary capstone)
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
+export async function getStaticProps(){
 
-//  const keyWords = [
-//   "vector addition",
-//   "vector subtraction",
-//   "scalar multiplication",
-//   "add vectors",
-//   "vector operations",
-//   "tip to tail method",
-//   "parallelogram method",
-//   "vector properties",
-//   "commutative vector addition",
-//   "distributive property vectors",
-//   "zero vector",
-//   "additive inverse vector",
-//   "scale a vector",
-//   "vector algebra"
-// ]
-//   // •
+ const keyWords = [
+  "vector addition",
+  "vector subtraction",
+  "scalar multiplication",
+  "add vectors",
+  "vector operations",
+  "tip to tail method",
+  "parallelogram method",
+  "vector properties",
+  "commutative vector addition",
+  "distributive property vectors",
+  "zero vector",
+  "additive inverse vector",
+  "scale a vector",
+  "vector algebra"
+]
 
-// //   \u2022 First item
-// // \u2022 Second item
+  const linkStyle = 'color: inherit; text-decoration: underline;'
 
-  
-// // <hr style="border-width:1px;"></hr>
+  // ---------- TABLES ----------
 
-// // <hr style="color:blue;" />
+  // obj2 — aggregation: 4 properties of vector addition
+  const obj2Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Property</th>
+      <th style="${tableHeaders.aggregation}">Formula</th>
+      <th style="${tableHeaders.aggregation}">Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Commutativity</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a + b = b + a</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">order does not affect the sum</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Associativity</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a + b) + c = a + (b + c)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">grouping does not matter; parentheses become optional</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Additive identity</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a + 0 = a</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the zero vector leaves any vector unchanged</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Additive inverse</td>
+      <td style="padding: 12px 15px; color: #34495e;">a + (&minus;a) = 0</td>
+      <td style="padding: 12px 15px; color: #34495e;">every vector has a unique negation, same length, opposite direction</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+  // obj4 — aggregation (lookup): scalar sign cases
+  const obj4Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Case</th>
+      <th style="${tableHeaders.aggregation}">Effect on length</th>
+      <th style="${tableHeaders.aggregation}">Effect on direction</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">c &gt; 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">stretches by factor |c|</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same as a</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">0 &lt; c &lt; 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">compresses by factor |c|</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same as a</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">c &lt; 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">scales by factor |c|</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reversed (opposite to a)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">c = 0</td>
+      <td style="padding: 12px 15px; color: #34495e;">collapses to zero</td>
+      <td style="padding: 12px 15px; color: #34495e;">undefined &mdash; result is the zero vector</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+  // obj5 — aggregation: 4 properties of scalar multiplication
+  const obj5Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Property</th>
+      <th style="${tableHeaders.aggregation}">Formula</th>
+      <th style="${tableHeaders.aggregation}">Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Associativity with scalars</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c(da) = (cd)a</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">repeated scalings collapse to a single multiplication</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Distributivity over vector addition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c(a + b) = ca + cb</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a scalar spreads across each term of a vector sum</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Distributivity over scalar addition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(c + d)a = ca + da</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a sum of scalars splits into two separate scalings of the same vector</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Multiplicative identity</td>
+      <td style="padding: 12px 15px; color: #34495e;">1a = a</td>
+      <td style="padding: 12px 15px; color: #34495e;">scaling by 1 leaves any vector unchanged</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+  // obj7 — summary capstone: 3 operations × 3 modes
+  const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Operation</th>
+      <th style="${tableHeaders.summary}">Component formula</th>
+      <th style="${tableHeaders.summary}">Geometric picture</th>
+      <th style="${tableHeaders.summary}">Algebraic rules</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Addition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a + b = (a&#8321; + b&#8321;, &hellip;, a&#8345; + b&#8345;)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">tip-to-tail chain or parallelogram diagonal</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">commutative, associative; identity 0; inverse &minus;a</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Subtraction</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a &minus; b = (a&#8321; &minus; b&#8321;, &hellip;, a&#8345; &minus; b&#8345;)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">arrow from tip of b to tip of a (common tail)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">defined as a + (&minus;b); inherits all addition rules</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Scalar multiplication</td>
+      <td style="padding: 12px 15px; color: #34495e;">ca = (ca&#8321;, &hellip;, ca&#8345;)</td>
+      <td style="padding: 12px 15px; color: #34495e;">scales length by |c|; reverses direction if c &lt; 0</td>
+      <td style="padding: 12px 15px; color: #34495e;">associative with scalars; distributive (both ways); identity 1</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+  // ---------- SECTIONS ----------
 
 //  const sectionsContent = {
 //   obj1: {
@@ -184,572 +292,31 @@
 //     after: ``,
 //     link: '',
 //   },
+//   obj7: {
+//     title: `Operations at a Glance`,
+//     content: `The page treated addition, subtraction, and scalar multiplication one at a time, presenting each through three lenses — a component formula, a geometric picture, and a list of algebraic rules that the operation satisfies. The table below collects all three operations across those three views in a single place, making explicit the parallel structure that runs through the page and showing where each operation borrows from or extends the others.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
 // };
-
-
-//  const introContent = {
-//      id: `intro`,
-//   title: `The Three Operations That Define Vector Algebra`,
-//   content: `Addition, subtraction, and scalar multiplication are the operations that give vectors their algebraic structure. Each works component by component, each preserves the dimension of the input, and each carries a geometric interpretation that reinforces the computation. Together, they satisfy a precise set of rules — commutativity, associativity, distributivity — that make vector algebra predictable and consistent. Every other operation in this section, from the [dot product](!/linear-algebra/vectors/dot-product) to [linear combinations](!/linear-algebra/vectors/linear-combinations), is built on top of these three.`,
-// };
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "How do you add two vectors?",
-//     answer: "Add corresponding components: a + b = (a₁ + b₁, a₂ + b₂, ..., aₙ + bₙ). Both vectors must be in the same ℝⁿ. Geometrically, use tip-to-tail (place b's tail at a's head) or parallelogram method (sum is the diagonal).",
-//     sectionId: "1"
-//   },
-//   obj2: {
-//     question: "What are the properties of vector addition?",
-//     answer: "Vector addition is commutative (a + b = b + a), associative ((a + b) + c = a + (b + c)), has an identity (a + 0 = a), and every vector has an inverse (a + (-a) = 0). These mirror real number addition.",
-//     sectionId: "2"
-//   },
-//   obj3: {
-//     question: "How do you subtract vectors?",
-//     answer: "Subtraction is addition plus negation: a - b = a + (-b) = (a₁ - b₁, a₂ - b₂, ...). Geometrically, a - b points from the tip of b to the tip of a when both share a common tail. Its length gives the distance between the vectors.",
-//     sectionId: "3"
-//   },
-//   obj4: {
-//     question: "What is scalar multiplication of a vector?",
-//     answer: "Multiply each component by the scalar c: ca = (ca₁, ca₂, ..., caₙ). When c > 0, the vector stretches or compresses in the same direction. When c < 0, it also reverses direction. When c = 0, the result is the zero vector.",
-//     sectionId: "4"
-//   },
-//   obj5: {
-//     question: "What are the properties of scalar multiplication?",
-//     answer: "Scalar multiplication is associative with scalars (c(da) = (cd)a), distributes over vector addition (c(a + b) = ca + cb) and scalar addition ((c + d)a = ca + da), and has identity 1a = a. Setting c = 0 gives 0a = 0; c = -1 gives the additive inverse.",
-//     sectionId: "5"
-//   },
-//   obj6: {
-//     question: "Why are addition and scalar multiplication fundamental?",
-//     answer: "All other vector operations build from these two. The dot product uses component multiplication and addition. Linear combinations are repeated scalar multiplication and addition. The ten properties (4 for addition, 4 for scalar multiplication, 2 distributive) define vector spaces.",
-//     sectionId: "6"
-//   }
-// }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Basic Vector Operations",
-//     "description": "Master vector addition, subtraction, and scalar multiplication. Learn component-wise formulas, geometric methods (tip-to-tail, parallelogram), and algebraic properties that define vector spaces.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/vectors/basic-operations",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Basic Vector Operations"
-//     },
-//     "teaches": [
-//       "Vector addition and its properties",
-//       "Tip-to-tail and parallelogram methods",
-//       "Vector subtraction as addition of inverse",
-//       "Scalar multiplication",
-//       "Distributive and associative properties",
-//       "Foundation for vector space axioms"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Vectors",
-//         "item": "https://www.learnmathclass.com/linear-algebra/vectors"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Basic Vector Operations",
-//         "item": "https://www.learnmathclass.com/linear-algebra/vectors/basic-operations"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-//    return {
-//   props: {
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Vector Operations: Addition, Subtraction & Scaling | Learn Math Class",
-//       description: "Master vector addition, subtraction, and scalar multiplication. Learn component-wise formulas, geometric methods (tip-to-tail, parallelogram), and algebraic properties that define vector spaces.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/vectors/basic-operations",
-//       name: "Basic Vector Operations"
-//     },
-//   }
-// }
-//    }
-// export default function BasicVectorOperationsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     // {
-//     //     id:'7',
-//     //     title:sectionsContent.obj7.title,
-//     //     link:sectionsContent.obj7.link,
-//     //     content:[
-//     //       sectionsContent.obj7.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'8',
-//     //     title:sectionsContent.obj8.title,
-//     //     link:sectionsContent.obj8.link,
-//     //     content:[
-//     //       sectionsContent.obj8.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Basic Operations on Vectors</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
 
 
 // tables-optimized: v4 | 2026-05-22 | 4 tables (obj2 aggregation, obj4 aggregation, obj5 aggregation, obj7 summary capstone)
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
 
+// ---------- SECTIONS ----------
 
-export async function getStaticProps(){
-
- const keyWords = [
-  "vector addition",
-  "vector subtraction",
-  "scalar multiplication",
-  "add vectors",
-  "vector operations",
-  "tip to tail method",
-  "parallelogram method",
-  "vector properties",
-  "commutative vector addition",
-  "distributive property vectors",
-  "zero vector",
-  "additive inverse vector",
-  "scale a vector",
-  "vector algebra"
-]
-
-  const linkStyle = 'color: inherit; text-decoration: underline;'
-
-  // ---------- TABLES ----------
-
-  // obj2 — aggregation: 4 properties of vector addition
-  const obj2Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 90%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Property</th>
-      <th style="${tableHeaders.aggregation}">Formula</th>
-      <th style="${tableHeaders.aggregation}">Note</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Commutativity</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a + b = b + a</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">order does not affect the sum</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Associativity</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(a + b) + c = a + (b + c)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">grouping does not matter; parentheses become optional</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Additive identity</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a + 0 = a</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the zero vector leaves any vector unchanged</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Additive inverse</td>
-      <td style="padding: 12px 15px; color: #34495e;">a + (&minus;a) = 0</td>
-      <td style="padding: 12px 15px; color: #34495e;">every vector has a unique negation, same length, opposite direction</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj4 — aggregation (lookup): scalar sign cases
-  const obj4Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 90%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Case</th>
-      <th style="${tableHeaders.aggregation}">Effect on length</th>
-      <th style="${tableHeaders.aggregation}">Effect on direction</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">c &gt; 1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">stretches by factor |c|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same as a</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">0 &lt; c &lt; 1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">compresses by factor |c|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same as a</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">c &lt; 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">scales by factor |c|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reversed (opposite to a)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">c = 0</td>
-      <td style="padding: 12px 15px; color: #34495e;">collapses to zero</td>
-      <td style="padding: 12px 15px; color: #34495e;">undefined &mdash; result is the zero vector</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj5 — aggregation: 4 properties of scalar multiplication
-  const obj5Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Property</th>
-      <th style="${tableHeaders.aggregation}">Formula</th>
-      <th style="${tableHeaders.aggregation}">Note</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Associativity with scalars</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c(da) = (cd)a</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">repeated scalings collapse to a single multiplication</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Distributivity over vector addition</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">c(a + b) = ca + cb</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a scalar spreads across each term of a vector sum</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Distributivity over scalar addition</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(c + d)a = ca + da</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a sum of scalars splits into two separate scalings of the same vector</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Multiplicative identity</td>
-      <td style="padding: 12px 15px; color: #34495e;">1a = a</td>
-      <td style="padding: 12px 15px; color: #34495e;">scaling by 1 leaves any vector unchanged</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj7 — summary capstone: 3 operations × 3 modes
-  const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 100%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Operation</th>
-      <th style="${tableHeaders.summary}">Component formula</th>
-      <th style="${tableHeaders.summary}">Geometric picture</th>
-      <th style="${tableHeaders.summary}">Algebraic rules</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Addition</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a + b = (a&#8321; + b&#8321;, &hellip;, a&#8345; + b&#8345;)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">tip-to-tail chain or parallelogram diagonal</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">commutative, associative; identity 0; inverse &minus;a</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Subtraction</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a &minus; b = (a&#8321; &minus; b&#8321;, &hellip;, a&#8345; &minus; b&#8345;)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">arrow from tip of b to tip of a (common tail)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">defined as a + (&minus;b); inherits all addition rules</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Scalar multiplication</td>
-      <td style="padding: 12px 15px; color: #34495e;">ca = (ca&#8321;, &hellip;, ca&#8345;)</td>
-      <td style="padding: 12px 15px; color: #34495e;">scales length by |c|; reverses direction if c &lt; 0</td>
-      <td style="padding: 12px 15px; color: #34495e;">associative with scalars; distributive (both ways); identity 1</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // ---------- SECTIONS ----------
-
- const sectionsContent = {
+const sectionsContent = {
   obj1: {
     title: `Vector Addition`,
     content: `Adding two vectors means pairing up their components and summing each pair independently. For $\\mathbf{a} = (a_1, a_2, \\ldots, a_n)$ and $\\mathbf{b} = (b_1, b_2, \\ldots, b_n)$ in the same $\\mathbb{R}^n$:
 
+@academic[formula_callout:Vector Addition
 $$\\mathbf{a} + \\mathbf{b} = (a_1 + b_1,\\ a_2 + b_2,\\ \\ldots,\\ a_n + b_n)$$
+/linear-algebra/formulas#vector_addition]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 The result is again a vector in $\\mathbb{R}^n$ — addition does not change the dimension. Both inputs must belong to the same space; adding a vector in $\\mathbb{R}^2$ to a vector in $\\mathbb{R}^3$ is undefined because there is no way to match up the components.
 
@@ -793,7 +360,12 @@ Every vector $\\mathbf{a}$ has a corresponding vector $-\\mathbf{a} = (-a_1, -a_
     title: `Vector Subtraction`,
     content: `Subtraction is not an independent operation — it is addition combined with negation. The difference $\\mathbf{a} - \\mathbf{b}$ is defined as:
 
+@academic[formula_callout:Vector Subtraction
 $$\\mathbf{a} - \\mathbf{b} = \\mathbf{a} + (-\\mathbf{b}) = (a_1 - b_1,\\ a_2 - b_2,\\ \\ldots,\\ a_n - b_n)$$
+/linear-algebra/formulas#vector_subtraction]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 Reducing subtraction to addition and negation means that all four properties of addition — commutativity, associativity, identity, and inverse — carry over automatically. No separate set of rules is needed.
 
@@ -806,7 +378,12 @@ The geometric picture of subtraction is particularly useful. When $\\mathbf{a}$ 
     title: `Scalar Multiplication`,
     content: `Scalar multiplication takes a real number $c$ and a vector $\\mathbf{a}$ and scales every component by $c$:
 
+@academic[formula_callout:Scalar Multiplication of Vectors
 $$c\\mathbf{a} = (ca_1,\\ ca_2,\\ \\ldots,\\ ca_n)$$
+/linear-algebra/formulas#scalar_multiplication_of_vectors]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 The result is always a vector in the same $\\mathbb{R}^n$. Geometrically, scalar multiplication changes the length of the vector by a factor of $|c|$ while preserving or reversing its direction depending on the sign of $c$.
 
@@ -869,7 +446,6 @@ The ten properties listed on this page — four for addition, four for scalar mu
     link: '',
   },
 };
-
 
  const introContent = {
      id: `intro`,

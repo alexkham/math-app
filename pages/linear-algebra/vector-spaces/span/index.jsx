@@ -1,204 +1,200 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "span linear algebra",
-//   "span of vectors",
-//   "linear combination span",
-//   "spanning set",
-//   "vector in span test",
-//   "span and column space",
-//   "span geometric interpretation",
-//   "does set span Rn",
-//   "spanning set basis",
-//   "redundant vectors span",
-//   "span subspace",
-//   "span abstract vector space",
-//   "row reduction span",
-//   "minimal spanning set"
-// ]
-//   // •
 
-// //   \u2022 First item
-// // \u2022 Second item
+// tables-optimized: v4 | 2026-05-22 | 3 tables (obj2 aggregation, obj8 aggregation, obj9 summary capstone)
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
+
+
+export async function getStaticProps(){
+const keyWords = [
+  "span linear algebra",
+  "span of vectors",
+  "linear combination span",
+  "spanning set",
+  "vector in span test",
+  "span and column space",
+  "span geometric interpretation",
+  "does set span Rn",
+  "spanning set basis",
+  "redundant vectors span",
+  "span subspace",
+  "span abstract vector space",
+  "row reduction span",
+  "minimal spanning set"
+]
+  // •
+
+//   \u2022 First item
+// \u2022 Second item
 
   
-// // <hr style="border-width:1px;"></hr>
+// <hr style="border-width:1px;"></hr>
 
-// // <hr style="color:blue;" />
+// <hr style="color:blue;" />
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// <hr style="border-color:#3498db; border-width:1px;" />
 
 
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
  
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
+// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.notation)}
+        // </div>,
 
 
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
+//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+//     {processContent(sectionsContent.normal.parameters)}
+// </div>,
         
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
+//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+//                   {processContent(sectionsContent.obj4.content)}
+//                   </div>,
 
 
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-// //     const sectionsContent={
-
-// //     obj1:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-  
-// //     },
-// //     obj2:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-  
-// //     obj3:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj4:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj5:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj6:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj7:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj8:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj9:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj10:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj11:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj12:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj13:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-// //     obj14:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
+//  <div key={'dist'} style={{
+//                     textAlign: 'center',
+//                     transform: 'scale(0.98)',
+//                     transformOrigin: 'center',
+//                     marginTop:'50px',
+//                     marginLeft:'-150px'
+//                   }} dangerouslySetInnerHTML={{ 
+//                     __html:   sectionContent.distributions.svg,
+//                   }} />
 
 
-// //     obj15:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     }
-  
-// //   }
+
+const linkStyle = 'color: inherit; text-decoration: underline;'
+
+// ---------- TABLES ----------
+
+// obj2 — aggregation: # vectors and configuration → span dimension and geometric shape
+const obj2Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Set in ℝⁿ</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">Span dimension</th>
+      <th style="${tableHeaders.aggregation}">Geometric shape</th>
+      <th style="${tableHeaders.aggregation}">Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">1 nonzero vector</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">line through the origin</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">basis for the line</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">2 parallel vectors</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">line through the origin</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one is a scalar multiple of the other &mdash; the pair is redundant</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">2 non-parallel vectors</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">plane through the origin</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">basis for the plane</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">3 coplanar vectors in ℝ³</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">plane through the origin</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the third vector lies in the span of two &mdash; redundant</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">3 non-coplanar vectors in ℝ³</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">3</td>
+      <td style="padding: 12px 15px; color: #34495e;">all of ℝ³</td>
+      <td style="padding: 12px 15px; color: #34495e;">basis for ℝ³</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// obj8 — aggregation: span in abstract vector spaces, two contrasting cases
+const obj8Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Vector space</th>
+      <th style="${tableHeaders.aggregation}">Spanning set</th>
+      <th style="${tableHeaders.aggregation}">Result</th>
+      <th style="${tableHeaders.aggregation}">Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">𝒫₂ (polynomials of degree ≤ 2)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{1, x, x²}</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">spans all of 𝒫₂; dimension 3</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">three independent vectors &mdash; no relations among them; standard basis</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">C(ℝ) (continuous real-valued functions)</td>
+      <td style="padding: 12px 15px; color: #34495e;">{1, sin²x, cos²x}</td>
+      <td style="padding: 12px 15px; color: #34495e;">spans a 2-dimensional subspace</td>
+      <td style="padding: 12px 15px; color: #34495e;">the identity sin²x + cos²x = 1 forces 1 to be a combination of the others</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// obj9 — summary capstone: diagnostic span questions side by side
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Question</th>
+      <th style="${tableHeaders.summary}">Setup</th>
+      <th style="${tableHeaders.summary}">Reduce and check</th>
+      <th style="${tableHeaders.summary}">A &quot;yes&quot; means</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Is <b>b</b> in Span{<b>v</b>₁, …, <b>v</b>ₖ}?</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">augmented <a href="/linear-algebra/matrix" style="${linkStyle}">matrix</a> [A | <b>b</b>] with the <b>v</b>ᵢ as columns of A</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no contradiction row [0 ⋯ 0 | d ≠ 0] appears</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><b>b</b> is a linear combination of the <b>v</b>ᵢ; the solution gives the coefficients</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Does {<b>v</b>₁, …, <b>v</b>ₖ} span ℝⁿ?</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n × k matrix A with the <b>v</b>ᵢ as columns</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every row of the echelon form contains a pivot</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every vector in ℝⁿ is in the span (no unreachable directions)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Which <b>v</b>ᵢ are redundant?</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n × k matrix A with the <b>v</b>ᵢ as columns</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">identify non-pivot columns of the echelon form</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the non-pivot <b>v</b>ᵢ lie in the span of the pivot ones; removing them leaves a basis</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Is {<b>v</b>₁, …, <b>v</b>ₙ} a <a href="/linear-algebra/vector-spaces/basis" style="${linkStyle}">basis</a> of ℝⁿ?</td>
+      <td style="padding: 12px 15px; color: #34495e;">square n × n matrix A with the <b>v</b>ᵢ as columns (k = n)</td>
+      <td style="padding: 12px 15px; color: #34495e;">every row and every column has a pivot (equivalently, <a href="/linear-algebra/determinants" style="${linkStyle}">det</a> A ≠ 0)</td>
+      <td style="padding: 12px 15px; color: #34495e;">the set spans ℝⁿ with no redundancy &mdash; minimal spanning set</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// ---------- SECTIONS ----------
+
 // const sectionsContent = {
 //   obj1: {
 //     title: `Definition`,
@@ -324,769 +320,17 @@
 //     after: ``,
 //     link: ``,
 //   },
-// }
-
-//  const introContent = {
-//   title: `Everything Reachable by Linear Combinations`,
-//   content: `The span of a set of vectors is the collection of all their linear combinations — every vector that can be built by adding scaled copies of the given vectors. It is always a subspace, and it is the smallest subspace containing the original set. Span is the other half of what makes a basis: the half that guarantees complete coverage.`,
-// }
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is the span of a set of vectors?",
-//     answer: "The span is the set of all linear combinations of the given vectors — every vector reachable by adding scaled copies of them. It is always a subspace, and it is the smallest subspace containing all the original vectors. Its dimension equals the number of independent vectors in the set.",
-//     sectionId: "1"
+//   obj9: {
+//     title: `Summary: Diagnostic Questions about Span`,
+//     content: `Every span question — whether a given vector is reachable, whether a set covers $\\mathbb{R}^n$, which vectors are redundant, whether a set is a basis — reduces to building a matrix from the given vectors, row-reducing it, and inspecting the result. What changes between questions is which part of the reduced form to look at: the augmented column for membership, the rows for spanning, the columns for redundancy, both for a basis. The table below collects these questions side by side, showing what to set up, what to look for in the reduced form, and what a positive answer means in each case.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
 //   },
-//   obj2: {
-//     question: "How do you test if a vector is in a span?",
-//     answer: "Arrange the spanning vectors as columns of a matrix A, then check if the system Ac = b is consistent by row reducing the augmented matrix [A | b]. If no contradiction row appears (no [0 ⋯ 0 | d] with d ≠ 0), the vector is in the span and the solution gives the coefficients.",
-//     sectionId: "4"
-//   },
-//   obj3: {
-//     question: "How do you test if a set spans Rⁿ?",
-//     answer: "Arrange the vectors as columns and row reduce. The set spans Rⁿ if and only if every row contains a pivot. For exactly n vectors in Rⁿ, this is equivalent to the determinant being nonzero. Fewer than n vectors can never span Rⁿ.",
-//     sectionId: "5"
-//   },
-//   obj4: {
-//     question: "What is the relationship between span and column space?",
-//     answer: "The column space of a matrix A is exactly the span of its columns. The system Ax = b has a solution if and only if b is in the column space. The rank of A equals the dimension of the span, and pivot columns identify a basis for it.",
-//     sectionId: "6"
-//   },
-//   obj5: {
-//     question: "How do you remove redundant vectors from a spanning set?",
-//     answer: "Arrange the vectors as columns and row reduce to identify pivot columns. The original vectors corresponding to pivot positions form a basis for the span — a minimal spanning set with no redundancy. Non-pivot columns are the redundant vectors that lie in the span of the pivot columns.",
-//     sectionId: "7"
-//   }
 // }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Span of Vectors",
-//     "description": "Span in linear algebra: definition, geometric interpretation, testing membership and spanning, connection to column space, removing redundancy, and span in abstract vector spaces.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/vector-spaces/span",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Span"
-//     },
-//     "teaches": [
-//       "Span as the set of all linear combinations",
-//       "Geometric interpretation: lines, planes, and higher",
-//       "Testing whether a vector lies in a span",
-//       "Testing whether a set spans Rⁿ",
-//       "Span equals column space of the column matrix",
-//       "Removing redundancy to extract a basis",
-//       "Span in polynomial and function spaces"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Vector Spaces",
-//         "item": "https://www.learnmathclass.com/linear-algebra/vector-spaces"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Span",
-//         "item": "https://www.learnmathclass.com/linear-algebra/vector-spaces/span"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-
-// //    return {
-// //       props:{
-// //          sectionsContent,
-// //          introContent,
-// //           seoData: {
-// //         title: "Title | Learn Math Class",
-// //         description: "Metadescription",
-// //         keywords: keyWords.join(", "),
-// //         url: "/linear-algebra/vector-spaces/span",
-// //          name: "name"
-// //       },
-        
-// //        }
-// //     }
-
-// return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Span: Linear Combinations & Spanning Sets | Learn Math Class",
-//       description: "Span in linear algebra: definition, geometric interpretation, testing membership and spanning, connection to column space, removing redundancy, and span in abstract vector spaces.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/vector-spaces/span",
-//       name: "Span of Vectors"
-//     },
-//   }
-// }
-//    }
-
-// // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
-// export default function SpanPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    {/* <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head> */}
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Span</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
 
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj2 aggregation, obj8 aggregation, obj9 summary capstone)
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "span linear algebra",
-  "span of vectors",
-  "linear combination span",
-  "spanning set",
-  "vector in span test",
-  "span and column space",
-  "span geometric interpretation",
-  "does set span Rn",
-  "spanning set basis",
-  "redundant vectors span",
-  "span subspace",
-  "span abstract vector space",
-  "row reduction span",
-  "minimal spanning set"
-]
-  // •
-
-//   \u2022 First item
-// \u2022 Second item
-
-  
-// <hr style="border-width:1px;"></hr>
-
-// <hr style="color:blue;" />
-
-// <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-        //     {processContent(sectionsContent.normal.notation)}
-        // </div>,
-
-
-//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-//     {processContent(sectionsContent.normal.parameters)}
-// </div>,
-        
-//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-//                   {processContent(sectionsContent.obj4.content)}
-//                   </div>,
-
-
-//  <div key={'dist'} style={{
-//                     textAlign: 'center',
-//                     transform: 'scale(0.98)',
-//                     transformOrigin: 'center',
-//                     marginTop:'50px',
-//                     marginLeft:'-150px'
-//                   }} dangerouslySetInnerHTML={{ 
-//                     __html:   sectionContent.distributions.svg,
-//                   }} />
-
-//     const sectionsContent={
-
-//     obj1:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-  
-//     },
-//     obj2:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-  
-//     obj3:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj4:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj5:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj6:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj7:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj8:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj9:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj10:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj11:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj12:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj13:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-//     obj14:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-
-
-//     obj15:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     }
-  
-//   }
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj2 — aggregation: # vectors and configuration → span dimension and geometric shape
-const obj2Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 90%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Set in ℝⁿ</th>
-      <th style="${tableHeaders.aggregation} text-align: center;">Span dimension</th>
-      <th style="${tableHeaders.aggregation}">Geometric shape</th>
-      <th style="${tableHeaders.aggregation}">Note</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">1 nonzero vector</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">line through the origin</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">basis for the line</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">2 parallel vectors</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">line through the origin</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one is a scalar multiple of the other &mdash; the pair is redundant</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">2 non-parallel vectors</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">plane through the origin</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">basis for the plane</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">3 coplanar vectors in ℝ³</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">2</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">plane through the origin</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the third vector lies in the span of two &mdash; redundant</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">3 non-coplanar vectors in ℝ³</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">3</td>
-      <td style="padding: 12px 15px; color: #34495e;">all of ℝ³</td>
-      <td style="padding: 12px 15px; color: #34495e;">basis for ℝ³</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj8 — aggregation: span in abstract vector spaces, two contrasting cases
-const obj8Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 90%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Vector space</th>
-      <th style="${tableHeaders.aggregation}">Spanning set</th>
-      <th style="${tableHeaders.aggregation}">Result</th>
-      <th style="${tableHeaders.aggregation}">Reason</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">𝒫₂ (polynomials of degree ≤ 2)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{1, x, x²}</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">spans all of 𝒫₂; dimension 3</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">three independent vectors &mdash; no relations among them; standard basis</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">C(ℝ) (continuous real-valued functions)</td>
-      <td style="padding: 12px 15px; color: #34495e;">{1, sin²x, cos²x}</td>
-      <td style="padding: 12px 15px; color: #34495e;">spans a 2-dimensional subspace</td>
-      <td style="padding: 12px 15px; color: #34495e;">the identity sin²x + cos²x = 1 forces 1 to be a combination of the others</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj9 — summary capstone: diagnostic span questions side by side
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Question</th>
-      <th style="${tableHeaders.summary}">Setup</th>
-      <th style="${tableHeaders.summary}">Reduce and check</th>
-      <th style="${tableHeaders.summary}">A &quot;yes&quot; means</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Is <b>b</b> in Span{<b>v</b>₁, …, <b>v</b>ₖ}?</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">augmented <a href="/linear-algebra/matrix" style="${linkStyle}">matrix</a> [A | <b>b</b>] with the <b>v</b>ᵢ as columns of A</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no contradiction row [0 ⋯ 0 | d ≠ 0] appears</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><b>b</b> is a linear combination of the <b>v</b>ᵢ; the solution gives the coefficients</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Does {<b>v</b>₁, …, <b>v</b>ₖ} span ℝⁿ?</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n × k matrix A with the <b>v</b>ᵢ as columns</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every row of the echelon form contains a pivot</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">every vector in ℝⁿ is in the span (no unreachable directions)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Which <b>v</b>ᵢ are redundant?</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n × k matrix A with the <b>v</b>ᵢ as columns</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">identify non-pivot columns of the echelon form</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the non-pivot <b>v</b>ᵢ lie in the span of the pivot ones; removing them leaves a basis</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Is {<b>v</b>₁, …, <b>v</b>ₙ} a <a href="/linear-algebra/vector-spaces/basis" style="${linkStyle}">basis</a> of ℝⁿ?</td>
-      <td style="padding: 12px 15px; color: #34495e;">square n × n matrix A with the <b>v</b>ᵢ as columns (k = n)</td>
-      <td style="padding: 12px 15px; color: #34495e;">every row and every column has a pivot (equivalently, <a href="/linear-algebra/determinants" style="${linkStyle}">det</a> A ≠ 0)</td>
-      <td style="padding: 12px 15px; color: #34495e;">the set spans ℝⁿ with no redundancy &mdash; minimal spanning set</td>
-    </tr>
-  </tbody>
-</table>
-`
 
 // ---------- SECTIONS ----------
 
@@ -1095,11 +339,25 @@ const sectionsContent = {
     title: `Definition`,
     content: `Given vectors $\\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_k$ in a vector space $V$, their span is the set of all linear combinations:
 
-$$\\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\} = \\{c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k : c_1, \\dots, c_k \\in \\mathbb{R}\\}$$
+@academic[formula_callout:Span (Set Definition)
+$$\\text{Span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\} = \\left\\{c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k \\mid c_i \\in \\mathbb{F}\\right\\}$$
+/linear-algebra/formulas#span_set_definition]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 Every choice of scalars $c_1, \\dots, c_k$ produces one vector in the span. As the scalars range over all real numbers, the span sweeps out an entire [subspace](!/linear-algebra/vector-spaces/subspaces) of $V$.
 
-The span is always a subspace — the smallest subspace of $V$ that contains all of $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$. Adding two linear combinations of these vectors produces another linear combination, and scaling a linear combination by a scalar produces another, so both closure conditions hold automatically.
+The span is always a subspace — in fact, the smallest subspace of $V$ that contains all of $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$:
+
+@academic[formula_callout:Span Is Smallest Subspace
+$$\\text{Span}(K) = \\bigcap_{\\substack{W \\text{ subspace} \\\\ K \\subseteq W}} W$$
+/linear-algebra/formulas#span_is_smallest_subspace]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
+
+Adding two linear combinations of these vectors produces another linear combination, and scaling a linear combination by a scalar produces another, so both closure conditions hold automatically.
 
 By convention, the span of the empty set is $\\{\\mathbf{0}\\}$. With no vectors to combine, the only reachable point is the zero vector (the combination with no terms).`,
     before: ``,
@@ -1134,7 +392,14 @@ The standard basis $\\{\\mathbf{e}_1, \\dots, \\mathbf{e}_n\\}$ spans $\\mathbb{
   },
   obj4: {
     title: `Testing Whether a Vector Is in a Span`,
-    content: `The question "Is $\\mathbf{b}$ in $\\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\}$?" asks whether there exist scalars $c_1, \\dots, c_k$ such that $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{b}$. This is a [linear system](!/linear-algebra/linear-systems): arrange the vectors as columns of a [matrix](!/linear-algebra/matrix) $A = [\\mathbf{v}_1 \\; \\cdots \\; \\mathbf{v}_k]$ and check whether $A\\mathbf{c} = \\mathbf{b}$ is consistent.
+    content: `The question "Is $\\mathbf{b}$ in $\\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\}$?" asks whether there exist scalars $c_1, \\dots, c_k$ such that $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{b}$. This is a [linear system](!/linear-algebra/linear-systems): arrange the vectors as columns of a [matrix](!/linear-algebra/matrix) $A = [\\mathbf{v}_1 \\; \\cdots \\; \\mathbf{v}_k]$ and check whether $A\\mathbf{c} = \\mathbf{b}$ is consistent:
+
+@academic[formula_callout:Span Membership Criterion
+$$\\mathbf{b} \\in \\text{Span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\} \\iff A\\mathbf{c} = \\mathbf{b} \\text{ is consistent}$$
+/linear-algebra/formulas#span_membership_criterion]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 Row reduce the augmented matrix $[A \\mid \\mathbf{b}]$. If a row of the form $[0 \\; 0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ appears, the system is inconsistent and $\\mathbf{b}$ is not in the span.
 
@@ -1223,6 +488,9 @@ In abstract spaces, the column-matrix approach is unavailable. Testing whether a
     link: ``,
   },
 }
+
+
+
 
  const introContent = {
   title: `Everything Reachable by Linear Combinations`,

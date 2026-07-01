@@ -1,204 +1,192 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import React from 'react'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// tables-optimized: v4 | 2026-05-22 | 3 tables (obj7 comparison, obj8 aggregation, obj10 summary capstone)
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "subspaces linear algebra",
-//   "subspace test",
-//   "null space subspace",
-//   "column space subspace",
-//   "row space",
-//   "subspaces of R2 R3",
-//   "closure addition scalar multiplication",
-//   "trivial subspace",
-//   "intersection subspaces",
-//   "direct sum subspaces",
-//   "solution set subspace",
-//   "affine subspace coset",
-//   "subspace definition",
-//   "null space column space row space"
-// ]
-//   // •
+export async function getStaticProps(){
+const keyWords = [
+  "subspaces linear algebra",
+  "subspace test",
+  "null space subspace",
+  "column space subspace",
+  "row space",
+  "subspaces of R2 R3",
+  "closure addition scalar multiplication",
+  "trivial subspace",
+  "intersection subspaces",
+  "direct sum subspaces",
+  "solution set subspace",
+  "affine subspace coset",
+  "subspace definition",
+  "null space column space row space"
+]
 
-// //   \u2022 First item
-// // \u2022 Second item
+const linkStyle = 'color: inherit; text-decoration: underline;'
 
-  
-// // <hr style="border-width:1px;"></hr>
+// ---------- TABLES ----------
 
-// // <hr style="color:blue;" />
+// obj7 — comparison: null, column, row spaces side by side
+const obj7Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Aspect</th>
+      <th style="${tableHeaders.comparison}">Null space Null(A)</th>
+      <th style="${tableHeaders.comparison}">Column space Col(A)</th>
+      <th style="${tableHeaders.comparison}">Row space Row(A)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Definition</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{ x : Ax = 0 }</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{ Ax : x ∈ ℝⁿ } = Span of columns</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Span of rows = Col(Aᵀ)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Lives in</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝᵐ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝⁿ</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Dimension</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nullity = n − r</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank r</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank r (same as Col)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reader question it answers</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">what inputs does A annihilate? (information lost)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">is Ax = b solvable? (set of reachable outputs)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">what is the total reach of the rows? (also equals Col(A) dim)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Basis from row reduction</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">parametric form of Ax = 0; one vector per free variable</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">original columns of A at pivot positions (not RREF columns)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nonzero rows of the echelon form</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Orthogonal complement (in its ambient space)</td>
+      <td style="padding: 12px 15px; color: #34495e;">row space Row(A), in ℝⁿ</td>
+      <td style="padding: 12px 15px; color: #34495e;">left null space Null(Aᵀ), in ℝᵐ</td>
+      <td style="padding: 12px 15px; color: #34495e;">null space Null(A), in ℝⁿ</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// obj8 — aggregation: operations on subspaces
+const obj8Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Operation on W₁, W₂ ⊆ V</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">Always a subspace?</th>
+      <th style="${tableHeaders.aggregation}">Reason / formula</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Intersection W₁ ∩ W₂</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">closure inherits from both — anything in both stays in both under + and scaling</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Union W₁ ∪ W₂</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">in general not: u ∈ W₁ ∖ W₂ and v ∈ W₂ ∖ W₁ give u + v in neither (exception: one is contained in the other)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sum W₁ + W₂ = { w₁ + w₂ }</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">smallest subspace containing both; dim(W₁ + W₂) = dim(W₁) + dim(W₂) − dim(W₁ ∩ W₂)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Direct sum W₁ ⊕ W₂ (when W₁ ∩ W₂ = {0})</td>
+      <td style="padding: 12px 15px; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; color: #34495e;">special case of sum; every v ∈ W₁ ⊕ W₂ has a unique decomposition v = w₁ + w₂</td>
+    </tr>
+  </tbody>
+</table>
+`
 
+// obj10 — summary capstone: subspace verdict landscape
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Candidate set</th>
+      <th style="${tableHeaders.summary} text-align: center;">Subspace?</th>
+      <th style="${tableHeaders.summary}">Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">The whole space V</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">trivially closed; the largest subspace</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">The zero subspace {0}</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">closures hold trivially; the smallest subspace; dim 0</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Line through origin: { tv : t ∈ ℝ }, v ≠ 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">closed under + and scalar mult; dim 1</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Plane through origin in ℝ³: Span{u, v}</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">span of any set is a subspace; dim 2</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Line / plane NOT through origin</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">does not contain 0; affine, not linear</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Null space Null(A) = { x : Ax = 0 }</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">linearity of Ax forces closure: A(cu + dv) = 0 whenever Au = Av = 0</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Column space Col(A) = { Ax }</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">span of the columns of A</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Row space Row(A)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">span of the rows of A (= Col(Aᵀ))</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Solution set of Ax = b, b ≠ 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">does not contain 0 (A·0 = 0 ≠ b); affine subspace — Null(A) translated by any particular solution xₚ</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">First quadrant of ℝ²: { (x, y) : x ≥ 0, y ≥ 0 }</td>
+      <td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
+      <td style="padding: 12px 15px; color: #34495e;">contains 0 and is closed under + but not under scaling by negative scalars</td>
+    </tr>
+  </tbody>
+</table>
+`
 
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-// //     const sectionsContent={
-
-// //     obj1:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-  
-// //     },
-// //     obj2:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-  
-// //     obj3:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj4:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj5:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj6:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj7:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj8:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj9:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj10:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj11:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj12:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     },
-// //     obj13:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-// //     obj14:{
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-// //       link:'',
-  
-// //     },
-
-
-// //     obj15:{
-  
-// //       title:``,
-// //       content:``,
-// //       before:``,
-// //       after:``,
-// //       link:'',
-  
-// //     }
-  
-// //   }
+// ---------- SECTIONS ----------
 
 // const sectionsContent = {
 //   obj1: {
@@ -330,626 +318,17 @@
 //     after: ``,
 //     link: ``,
 //   },
-// }
-
-//  const introContent = {
-//   title: `Vector Spaces Inside Vector Spaces`,
-//   content: `A subspace is a subset of a vector space that is itself a vector space under the same operations. Lines and planes through the origin in R³, null spaces and column spaces of matrices, and solution sets of homogeneous systems are all subspaces. A simple two-condition test determines whether a given subset qualifies.`,
-// }
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is a subspace?",
-//     answer: "A subspace is a nonempty subset of a vector space that is itself a vector space under the same operations. It must be closed under addition and scalar multiplication. Every subspace contains the zero vector, and these two closure conditions are the only things that need checking.",
-//     sectionId: "1"
+//   obj10: {
+//     title: `Summary: Subspace Recognition`,
+//     content: `Every section of this page has answered a version of the same question — when is a given subset of a vector space a subspace? The two-condition test fixes the criterion, but in practice the answer follows almost mechanically from a small catalog of cases: the trivial subspaces; subspaces of ℝⁿ as flats through the origin; the matrix-derived null, column, and row spaces; affine sets that fail because they miss the origin; and asymmetric sets like the first quadrant that fail under negative scaling. The table below collects the recognition card across the candidates the page has discussed, with the verdict and a one-line reason.`,
+//     before: ``,
+//     after: ``,
+//     link: ``,
 //   },
-//   obj2: {
-//     question: "How do you test if a subset is a subspace?",
-//     answer: "Check two conditions: for all u, v in the subset, u + v is also in the subset (closure under addition), and for all scalars c and vectors v in the subset, cv is also in the subset (closure under scalar multiplication). If the zero vector is not in the subset, it fails immediately.",
-//     sectionId: "2"
-//   },
-//   obj3: {
-//     question: "What are the subspaces of R³?",
-//     answer: "The subspaces of R³ are: the zero vector alone (dimension 0), lines through the origin (dimension 1), planes through the origin (dimension 2), and R³ itself (dimension 3). A line or plane not passing through the origin is not a subspace.",
-//     sectionId: "4"
-//   },
-//   obj4: {
-//     question: "Why is the null space a subspace?",
-//     answer: "The null space of A is the set of all x satisfying Ax = 0. It contains the zero vector (A·0 = 0), and if Au = 0 and Av = 0, then A(u + v) = 0 and A(cv) = 0. Both closure conditions hold, so the null space is a subspace of Rⁿ.",
-//     sectionId: "5"
-//   },
-//   obj5: {
-//     question: "Is the solution set of Ax = b a subspace?",
-//     answer: "Only when b = 0 (the homogeneous case), giving the null space. When b ≠ 0, the solution set does not contain the zero vector and is not a subspace. It is an affine subspace — the null space translated by any particular solution xₚ, so every solution has the form x = xₚ + xₕ where xₕ is in the null space.",
-//     sectionId: "9"
-//   }
 // }
-
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Subspaces",
-//     "description": "Subspaces in linear algebra: definition, subspace test, null space, column space, row space, subspaces of R² and R³, intersections, direct sums, and solution sets as affine subspaces.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/subspaces",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Subspaces"
-//     },
-//     "teaches": [
-//       "Subspace definition and the two-condition test",
-//       "Trivial subspaces: zero vector and full space",
-//       "Classification of subspaces in R² and R³",
-//       "Null space, column space, and row space as subspaces",
-//       "Intersections, sums, and direct sums of subspaces",
-//       "Solution sets of Ax = b as affine subspaces"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Subspaces",
-//         "item": "https://www.learnmathclass.com/linear-algebra/subspaces"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-
-// //    return {
-// //       props:{
-// //          sectionsContent,
-// //          introContent,
-// //           seoData: {
-// //         title: "Title | Learn Math Class",
-// //         description: "Metadescription",
-// //         keywords: keyWords.join(", "),
-// //         url: "/linear-algebra/subspaces",
-// //          name: "name"
-// //       },
-        
-// //        }
-// //     }
-// return {
-//   props:{
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Subspaces: Definition, Test & Examples | Learn Math Class",
-//       description: "Subspaces in linear algebra: definition, subspace test, null space, column space, row space, subspaces of R² and R³, intersections, direct sums, and solution sets as affine subspaces.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/subspaces",
-//       name: "Subspaces"
-//     },
-//   }
-// }
-
-//    }
-
-// // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-// export default function SubspacesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    {/* <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head> */}
-
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Subspaces</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
 
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj7 comparison, obj8 aggregation, obj10 summary capstone)
-
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import React from 'react'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
-
-
-export async function getStaticProps(){
-const keyWords = [
-  "subspaces linear algebra",
-  "subspace test",
-  "null space subspace",
-  "column space subspace",
-  "row space",
-  "subspaces of R2 R3",
-  "closure addition scalar multiplication",
-  "trivial subspace",
-  "intersection subspaces",
-  "direct sum subspaces",
-  "solution set subspace",
-  "affine subspace coset",
-  "subspace definition",
-  "null space column space row space"
-]
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj7 — comparison: null, column, row spaces side by side
-const obj7Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Aspect</th>
-      <th style="${tableHeaders.comparison}">Null space Null(A)</th>
-      <th style="${tableHeaders.comparison}">Column space Col(A)</th>
-      <th style="${tableHeaders.comparison}">Row space Row(A)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Definition</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{ x : Ax = 0 }</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">{ Ax : x ∈ ℝⁿ } = Span of columns</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Span of rows = Col(Aᵀ)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Lives in</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝᵐ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝⁿ</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Dimension</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nullity = n − r</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank r</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rank r (same as Col)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Reader question it answers</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">what inputs does A annihilate? (information lost)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">is Ax = b solvable? (set of reachable outputs)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">what is the total reach of the rows? (also equals Col(A) dim)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Basis from row reduction</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">parametric form of Ax = 0; one vector per free variable</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">original columns of A at pivot positions (not RREF columns)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nonzero rows of the echelon form</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Orthogonal complement (in its ambient space)</td>
-      <td style="padding: 12px 15px; color: #34495e;">row space Row(A), in ℝⁿ</td>
-      <td style="padding: 12px 15px; color: #34495e;">left null space Null(Aᵀ), in ℝᵐ</td>
-      <td style="padding: 12px 15px; color: #34495e;">null space Null(A), in ℝⁿ</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj8 — aggregation: operations on subspaces
-const obj8Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Operation on W₁, W₂ ⊆ V</th>
-      <th style="${tableHeaders.aggregation} text-align: center;">Always a subspace?</th>
-      <th style="${tableHeaders.aggregation}">Reason / formula</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Intersection W₁ ∩ W₂</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">closure inherits from both — anything in both stays in both under + and scaling</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Union W₁ ∪ W₂</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">in general not: u ∈ W₁ ∖ W₂ and v ∈ W₂ ∖ W₁ give u + v in neither (exception: one is contained in the other)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sum W₁ + W₂ = { w₁ + w₂ }</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">smallest subspace containing both; dim(W₁ + W₂) = dim(W₁) + dim(W₂) − dim(W₁ ∩ W₂)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Direct sum W₁ ⊕ W₂ (when W₁ ∩ W₂ = {0})</td>
-      <td style="padding: 12px 15px; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; color: #34495e;">special case of sum; every v ∈ W₁ ⊕ W₂ has a unique decomposition v = w₁ + w₂</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj10 — summary capstone: subspace verdict landscape
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Candidate set</th>
-      <th style="${tableHeaders.summary} text-align: center;">Subspace?</th>
-      <th style="${tableHeaders.summary}">Reason</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">The whole space V</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">trivially closed; the largest subspace</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">The zero subspace {0}</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">closures hold trivially; the smallest subspace; dim 0</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Line through origin: { tv : t ∈ ℝ }, v ≠ 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">closed under + and scalar mult; dim 1</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Plane through origin in ℝ³: Span{u, v}</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">span of any set is a subspace; dim 2</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Line / plane NOT through origin</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">does not contain 0; affine, not linear</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Null space Null(A) = { x : Ax = 0 }</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">linearity of Ax forces closure: A(cu + dv) = 0 whenever Au = Av = 0</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Column space Col(A) = { Ax }</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">span of the columns of A</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Row space Row(A)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">span of the rows of A (= Col(Aᵀ))</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Solution set of Ax = b, b ≠ 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">does not contain 0 (A·0 = 0 ≠ b); affine subspace — Null(A) translated by any particular solution xₚ</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">First quadrant of ℝ²: { (x, y) : x ≥ 0, y ≥ 0 }</td>
-      <td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
-      <td style="padding: 12px 15px; color: #34495e;">contains 0 and is closed under + but not under scaling by negative scalars</td>
-    </tr>
-  </tbody>
-</table>
-`
 
 // ---------- SECTIONS ----------
 
@@ -965,13 +344,29 @@ Most of the ten axioms — commutativity, associativity, distributivity, the ide
   },
   obj2: {
     title: `The Subspace Test`,
-    content: `A nonempty subset $W \\subseteq V$ is a subspace if and only if it satisfies two conditions:
+    content: `A nonempty subset $W \\subseteq V$ is a subspace if and only if it satisfies two closure conditions:
+
+@academic[formula_callout:Subspace Test
+$$W \\subseteq V \\text{ is a subspace} \\iff \\begin{cases} W \\neq \\emptyset \\\\ \\mathbf{u}, \\mathbf{v} \\in W \\Rightarrow \\mathbf{u} + \\mathbf{v} \\in W \\\\ \\mathbf{v} \\in W,\\ c \\in \\mathbb{F} \\Rightarrow c\\mathbf{v} \\in W \\end{cases}$$
+/linear-algebra/formulas#subspace_test]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 Closure under addition: for all $\\mathbf{u}, \\mathbf{v} \\in W$, the sum $\\mathbf{u} + \\mathbf{v}$ is in $W$.
 
 Closure under scalar multiplication: for all $c \\in \\mathbb{R}$ and all $\\mathbf{v} \\in W$, the product $c\\mathbf{v}$ is in $W$.
 
-These two conditions can be compressed into one: $W$ is a subspace if and only if $c\\mathbf{u} + d\\mathbf{v} \\in W$ for all $\\mathbf{u}, \\mathbf{v} \\in W$ and all scalars $c, d$. This single condition captures both closure properties simultaneously.
+These two conditions can be compressed into a single closure-under-linear-combinations condition:
+
+@academic[formula_callout:Subspace Test Combined
+$$W \\subseteq V \\text{ is a subspace} \\iff W \\neq \\emptyset \\text{ and } c\\mathbf{u} + d\\mathbf{v} \\in W \\text{ for all } \\mathbf{u}, \\mathbf{v} \\in W,\\ c, d \\in \\mathbb{F}$$
+/linear-algebra/formulas#subspace_test_combined]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
+
+This single condition captures both closure properties simultaneously.
 
 The requirement that $W$ be nonempty is essential. Once at least one vector $\\mathbf{v}$ is known to lie in $W$, closure under scalar multiplication with $c = 0$ guarantees $\\mathbf{0} = 0\\mathbf{v} \\in W$. So the zero vector belongs to every subspace. Conversely, if $\\mathbf{0} \\notin W$, then $W$ cannot be a subspace — this is often the fastest way to disqualify a candidate.`,
     before: ``,
@@ -1091,6 +486,7 @@ This decomposition separates the particular and homogeneous contributions. The p
     link: ``,
   },
 }
+
 
  const introContent = {
   title: `Vector Spaces Inside Vector Spaces`,
@@ -1219,7 +615,7 @@ return {
       title: "Subspaces: Definition, Test & Examples | Learn Math Class",
       description: "Subspaces in linear algebra: definition, subspace test, null space, column space, row space, subspaces of R² and R³, intersections, direct sums, and solution sets as affine subspaces.",
       keywords: keyWords.join(", "),
-      url: "/linear-algebra/subspaces",
+      url: "/linear-algebra/vector-spaces/subspaces",
       name: "Subspaces"
     },
   }
