@@ -3299,6 +3299,26 @@ export default function CalculationCard({
   const view = viewProp !== undefined ? viewProp : internalView;
   const expanded = expandedProp !== undefined ? expandedProp : internalExpanded;
 
+  // Hooks must run on every render, so this stays above the `if (!data)` return.
+  const cardId = data ? (data.id || toId(data.name)) : null;
+
+  // #3 — When landing on a URL whose hash matches this card, auto-expand
+  // and scroll it into view. Also react to in-page hash changes.
+  useEffect(() => {
+    if (!cardId || typeof window === 'undefined') return;
+
+    const openIfMatch = () => {
+      if (window.location.hash.slice(1) !== cardId) return;
+      setInternalExpanded(true);
+      const el = document.getElementById(cardId);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    openIfMatch();
+    window.addEventListener('hashchange', openIfMatch);
+    return () => window.removeEventListener('hashchange', openIfMatch);
+  }, [cardId]);
+
   if (!data) return null;
 
   const {
@@ -3317,7 +3337,6 @@ export default function CalculationCard({
   const linkList = normalizeArray(links).filter((l) => l && (l.url || l.href));
   const hasFields = fields && typeof fields === 'object' && Object.keys(fields).length > 0;
   const hasBody = hasFields || when || formula || notation;
-  const cardId = id || toId(name);
   const mergedComponents = { ...DEFAULT_COMPONENTS, ...components };
 
   const handleViewChange = (next) => {
@@ -3335,23 +3354,6 @@ export default function CalculationCard({
       window.history.replaceState(null, '', '#' + cardId);
     }
   };
-
-  // #3 — When landing on a URL whose hash matches this card, auto-expand
-  // and scroll it into view. Also react to in-page hash changes.
-  useEffect(() => {
-    if (!cardId || typeof window === 'undefined') return;
-
-    const openIfMatch = () => {
-      if (window.location.hash.slice(1) !== cardId) return;
-      setInternalExpanded(true);
-      const el = document.getElementById(cardId);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
-
-    openIfMatch();
-    window.addEventListener('hashchange', openIfMatch);
-    return () => window.removeEventListener('hashchange', openIfMatch);
-  }, [cardId]);
 
   return (
     <>
