@@ -85,14 +85,8 @@ const TYPE_ORDER = {
   'calculators': 6,
 };
 
-// function getDataModulePath(parentSlug, type) {
-//   const capitalized = type.charAt(0).toUpperCase() + type.slice(1);
-//   return `@/app/api/db/${type}/${parentSlug}/${parentSlug}${capitalized}`;
-// }
-function getDataModulePath(parentSlug, type) {
-  const capitalized = type.charAt(0).toUpperCase() + type.slice(1);
-  const camelSlug = parentSlug.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
-  return `@/app/api/db/${type}/${parentSlug}/${camelSlug}${capitalized}`;
+function getCamelSlug(parentSlug) {
+  return parentSlug.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
 }
 
 /* ================================================================
@@ -578,13 +572,15 @@ function extractVisualProps(seo) {
    ================================================================ */
 
 async function processFormulas(parentSlug) {
-  const modulePath = getDataModulePath(parentSlug, 'formulas');
+  // The template literal must be inline in import() — webpack needs the
+  // static path prefix to build a module context; a fully dynamic
+  // variable path fails to resolve at runtime.
   let formulasList;
   try {
-    const mod = await import(modulePath);
+    const mod = await import(`../../../api/db/formulas/${parentSlug}/${getCamelSlug(parentSlug)}Formulas`);
     formulasList = mod.default;
   } catch (e) {
-    console.warn(`buildSectionData: could not import formulas module at ${modulePath}:`, e.message);
+    console.warn(`buildSectionData: could not import formulas module for ${parentSlug}:`, e.message);
     return { categories: [], items: [], totalCount: 0 };
   }
   const categoryMap = {};
@@ -600,13 +596,14 @@ async function processFormulas(parentSlug) {
 }
 
 async function processDefinitions(parentSlug) {
-  const modulePath = getDataModulePath(parentSlug, 'definitions');
+  // Inline template literal for the same webpack-context reason as
+  // processFormulas above.
   let defsList;
   try {
-    const mod = await import(modulePath);
+    const mod = await import(`../../../api/db/definitions/${parentSlug}/${getCamelSlug(parentSlug)}Definitions`);
     defsList = mod.default;
   } catch (e) {
-    console.warn(`buildSectionData: could not import definitions module at ${modulePath}:`, e.message);
+    console.warn(`buildSectionData: could not import definitions module for ${parentSlug}:`, e.message);
     return { categories: [], items: [], totalCount: 0 };
   }
   const categoryMap = {};

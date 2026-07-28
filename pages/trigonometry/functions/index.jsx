@@ -1193,7 +1193,22 @@ This shift in perspective opens up the full toolkit of function analysis. Each o
         description: "Learn all six trigonometric functions: sine, cosine, tangent, cosecant, secant, and cotangent with domain, range, and evaluation methods for any angle.",
         keywords: keyWords.join(", "),
         url: "/trigonometry/functions",
-         name: "Trigonometric Functions"
+         name: "Trigonometric Functions",
+        // Surfaced on the /trigonometry hub via buildSectionData extraction.
+        hubDescription: `Trigonometric functions lie at the heart of trigonometry, originally emerging from the study of right triangles and the unit circle. Today, they serve as indispensable tools in mathematics, especially in calculus, analysis, and mathematical modeling of periodic phenomena.
+
+The most fundamental functions are the **sine**, **cosine**, and **tangent**, along with their reciprocals **cosecant**, **secant**, and **cotangent**. These form the core set of **basic trigonometric functions**. Other function families — such as inverse, hyperbolic, and complex extensions — also exist and are important in advanced contexts, but this section focuses primarily on the classical real-valued functions and their mathematical behavior.
+
+This part of the trigonometry module is dedicated to exploring the **analytical structure** of trigonometric functions:
+
+* **Definitions**: from geometric constructions to analytic formulations via power series and differential equations
+* **Properties**: including periodicity, symmetry, continuity, and boundedness
+* **Identities**: such as angle sum/difference formulas, double-angle identities, and Pythagorean relations
+* **Graphs and Transformations**: visual behaviors and effects of shifts, stretches, and reflections
+* **Equations**: solving trigonometric equations and analyzing their solutions
+* **Mathematical Applications**: their roles in Fourier analysis, differential equations, and linear algebra
+
+Whether you are analyzing waveforms, studying rotations, or decomposing functions into periodic components, a strong grasp of trigonometric functions provides a powerful mathematical toolkit.`
       },
 
        }

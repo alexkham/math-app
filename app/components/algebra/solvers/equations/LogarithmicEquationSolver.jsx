@@ -905,7 +905,7 @@ export const LogarithmicSolverEngine = forwardRef(({
       if (e.key === '/') mapped = '\u00F7';
       insertAtCursor(mapped);
     }
-  }, [expression, cursorPos, undo, backspace, deleteForward, solve, clearAll, insertAtCursor]);
+  }, [expression, undo, backspace, deleteForward, solve, clearAll, insertAtCursor]);
 
   /* -------------------------------------------------
      DISPLAY RENDERER with clickable cursor placement

@@ -41,6 +41,26 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import InfoPanel from '../InfoPanel';
 
+const conceptsContent =
+  '## What it means for a sequence to converge\n\n' +
+  'A sequence is a list of numbers $a_1, a_2, a_3, \\dots$ indexed by positive integers. It **converges to L** if, no matter how tight a band you put around $L$, eventually every term falls inside.\n\n' +
+  '### The &epsilon;&ndash;N definition\n\n' +
+  '$\\lim_{n \\to \\infty} a_n = L$ means: for every $\\varepsilon &gt; 0$, there exists an $N_0$ such that for all $n \\ge N_0$,\n\n' +
+  '$$|a_n - L| &lt; \\varepsilon.$$\n\n' +
+  'Pick any \u03b5. The tool finds the smallest $N_0$ that works.\n\n' +
+  '### What can go wrong\n\n' +
+  '- **Diverges to $\\infty$** — terms grow without bound; no $L$.\n' +
+  '- **Oscillates** — terms bounce between two or more values forever (like $(-1)^n$).\n' +
+  '- **Wanders** — bounded but no settling (some chaotic sequences).\n\n' +
+  '### Famous limits to know\n\n' +
+  '- $1/n \\to 0$, $1/n^p \\to 0$ for any $p &gt; 0$.\n' +
+  '- $r^n \\to 0$ if $|r| &lt; 1$; diverges if $|r| &gt; 1$.\n' +
+  '- $(1 + 1/n)^n \\to e \\approx 2.718$.\n' +
+  '- $n^{1/n} \\to 1$ (slowly).\n' +
+  '- $(\\sin n)/n \\to 0$ — numerator bounded, denominator grows.\n\n' +
+  '### Why this matters\n\n' +
+  'Sequences are the building block of series, limits of functions, integrals as Riemann sums, and the construction of the real numbers themselves. The &epsilon;&ndash;N idea is the model for every other limit definition in analysis.';
+
 
 /* ================================================================
    COLORS  (all blue variants)
@@ -515,26 +535,6 @@ export default function FunctionSequence({
       `The shaded band is $[L - \\varepsilon, L + \\varepsilon]$. Shrink \u03b5 and the band tightens; the threshold $N_0$ grows. Converges means: for every \u03b5 &gt; 0, some finite $N_0$ works.`
     );
   }, [fam, N, eps, aN, N0]);
-
-  const conceptsContent =
-    '## What it means for a sequence to converge\n\n' +
-    'A sequence is a list of numbers $a_1, a_2, a_3, \\dots$ indexed by positive integers. It **converges to L** if, no matter how tight a band you put around $L$, eventually every term falls inside.\n\n' +
-    '### The &epsilon;&ndash;N definition\n\n' +
-    '$\\lim_{n \\to \\infty} a_n = L$ means: for every $\\varepsilon &gt; 0$, there exists an $N_0$ such that for all $n \\ge N_0$,\n\n' +
-    '$$|a_n - L| &lt; \\varepsilon.$$\n\n' +
-    'Pick any \u03b5. The tool finds the smallest $N_0$ that works.\n\n' +
-    '### What can go wrong\n\n' +
-    '- **Diverges to $\\infty$** — terms grow without bound; no $L$.\n' +
-    '- **Oscillates** — terms bounce between two or more values forever (like $(-1)^n$).\n' +
-    '- **Wanders** — bounded but no settling (some chaotic sequences).\n\n' +
-    '### Famous limits to know\n\n' +
-    '- $1/n \\to 0$, $1/n^p \\to 0$ for any $p &gt; 0$.\n' +
-    '- $r^n \\to 0$ if $|r| &lt; 1$; diverges if $|r| &gt; 1$.\n' +
-    '- $(1 + 1/n)^n \\to e \\approx 2.718$.\n' +
-    '- $n^{1/n} \\to 1$ (slowly).\n' +
-    '- $(\\sin n)/n \\to 0$ — numerator bounded, denominator grows.\n\n' +
-    '### Why this matters\n\n' +
-    'Sequences are the building block of series, limits of functions, integrals as Riemann sums, and the construction of the real numbers themselves. The &epsilon;&ndash;N idea is the model for every other limit definition in analysis.';
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

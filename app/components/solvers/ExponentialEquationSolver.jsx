@@ -3,6 +3,9 @@ import React, { useState, useRef, useEffect, useCallback, forwardRef, useImperat
 import SolutionPanel from './SolutionPanel';
 import THEME_CSS from './MathSolverThemes';
 
+const TYPEABLE = new Set('0123456789.xynXYNeE^+-=*/()×÷');
+const KEY_MAP = { '*': '×', '/': '÷' };
+
 /* =====================================================
    EXPONENTIAL EQUATION SOLVER
    
@@ -723,9 +726,6 @@ export const ExponentialSolverEngine = forwardRef(({
       if (onResultChange) onResultChange(null);
     }
   }, [expression, onResultChange]);
-
-  const TYPEABLE = new Set('0123456789.xynXYNeE^+-=*/()\u00D7\u00F7');
-  const KEY_MAP = { '*': '\u00D7', '/': '\u00F7' };
 
   const handleKeyDown = useCallback((e) => {
     if (e.ctrlKey || e.metaKey) {

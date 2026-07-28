@@ -45,6 +45,21 @@ import React, { useState, useMemo } from 'react';
 import { VisualizerWithControls } from '../FunctionVisualizerCorePro';
 import InfoPanel from '../InfoPanel';
 
+const conceptsContent =
+  '## The Mean Value Theorem\n\n' +
+  'If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, then there is at least one point $c \\in (a, b)$ where\n\n' +
+  '$$f\'(c) = \\frac{f(b) - f(a)}{b - a}.$$\n\n' +
+  'The left side is the slope of the curve at $c$. The right side is the slope of the secant line connecting the endpoints. They&apos;re equal at some interior point.\n\n' +
+  '### What it really says\n\n' +
+  'Pick the average rate of change of $f$ over $[a, b]$. That average is the secant slope. The theorem promises that the curve achieves that exact rate of change as an instantaneous slope somewhere in the middle.\n\n' +
+  'Drive 100 km in 1 hour. Your average speed was 100 km/h. The MVT says at some instant, your speedometer read exactly 100 km/h. You can&apos;t average 100 without hitting 100 at least once.\n\n' +
+  '### Why differentiability matters\n\n' +
+  'Without differentiability you can dodge the conclusion. A function with a sharp corner can have a secant slope it never matches as an instantaneous slope — at the corner the "slope" isn&apos;t a single number.\n\n' +
+  '### Rolle&apos;s theorem — a special case\n\n' +
+  'When $f(a) = f(b)$, the secant slope is zero. The MVT gives you $f\'(c) = 0$: a horizontal tangent somewhere between. That&apos;s Rolle&apos;s theorem.\n\n' +
+  '### What it powers\n\n' +
+  'The MVT is the engine behind a lot of calculus: if $f\' = 0$ on an interval, $f$ is constant there; if $f\' > 0$, $f$ is increasing; if two functions have the same derivative, they differ by a constant. Each of these comes from the MVT applied to a cleverly chosen interval.';
+
 
 /* ================================================================
    COLORS  (all blue variants)
@@ -389,21 +404,6 @@ export default function FunctionMVT({
 
     return intro + rightNow + howFound;
   }, [fam, aN, bN, m, cs, validInterval]);
-
-  const conceptsContent =
-    '## The Mean Value Theorem\n\n' +
-    'If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, then there is at least one point $c \\in (a, b)$ where\n\n' +
-    '$$f\'(c) = \\frac{f(b) - f(a)}{b - a}.$$\n\n' +
-    'The left side is the slope of the curve at $c$. The right side is the slope of the secant line connecting the endpoints. They&apos;re equal at some interior point.\n\n' +
-    '### What it really says\n\n' +
-    'Pick the average rate of change of $f$ over $[a, b]$. That average is the secant slope. The theorem promises that the curve achieves that exact rate of change as an instantaneous slope somewhere in the middle.\n\n' +
-    'Drive 100 km in 1 hour. Your average speed was 100 km/h. The MVT says at some instant, your speedometer read exactly 100 km/h. You can&apos;t average 100 without hitting 100 at least once.\n\n' +
-    '### Why differentiability matters\n\n' +
-    'Without differentiability you can dodge the conclusion. A function with a sharp corner can have a secant slope it never matches as an instantaneous slope — at the corner the "slope" isn&apos;t a single number.\n\n' +
-    '### Rolle&apos;s theorem — a special case\n\n' +
-    'When $f(a) = f(b)$, the secant slope is zero. The MVT gives you $f\'(c) = 0$: a horizontal tangent somewhere between. That&apos;s Rolle&apos;s theorem.\n\n' +
-    '### What it powers\n\n' +
-    'The MVT is the engine behind a lot of calculus: if $f\' = 0$ on an interval, $f$ is constant there; if $f\' > 0$, $f$ is increasing; if two functions have the same derivative, they differ by a constant. Each of these comes from the MVT applied to a cleverly chosen interval.';
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

@@ -865,6 +865,26 @@ import React, { useState, useMemo } from 'react';
 import { VisualizerWithControls } from '../FunctionVisualizerCoreImproved';
 import InfoPanel from '../InfoPanel';
 
+const conceptsContent =
+  '## What the tangent line means\n\n' +
+  'At any smooth point on a curve, the **tangent line** is the unique straight line that "kisses" the curve — touching it at that point and matching its direction. The slope of that line is the **instantaneous rate of change** of the function there, also known as the derivative.\n\n' +
+  '### From secants to tangents\n' +
+  'Pick two points on the curve, $(x_0, f(x_0))$ and $(x_0 + \\Delta x, f(x_0 + \\Delta x))$. The line through them is a **secant**, with slope:\n' +
+  '$$\\frac{f(x_0 + \\Delta x) - f(x_0)}{\\Delta x}$$\n\n' +
+  'As $\\Delta x \\to 0$ the secant rotates to become the **tangent**, and its slope becomes the derivative:\n' +
+  '$$f\'(x_0) = \\lim_{\\Delta x \\to 0} \\frac{f(x_0 + \\Delta x) - f(x_0)}{\\Delta x}$$\n\n' +
+  '### Two forms of the tangent equation\n' +
+  'Once you know the slope $m = f\'(x_0)$ and the point $(x_0, y_0)$ on the curve, the tangent line is:\n' +
+  '- Point-slope form: $y = m(x - x_0) + y_0$\n' +
+  '- Slope-intercept form: $y = m x + (y_0 - m x_0)$\n\n' +
+  'Same line, two ways to write it. Point-slope is what you derive; slope-intercept is the simplification.\n\n' +
+  '### When the tangent fails to exist\n' +
+  'Some places have no well-defined tangent:\n' +
+  '- **Corners** — like $|x|$ at $x = 0$: the slope jumps and no single line fits.\n' +
+  '- **Vertical tangents** — like $\\sqrt{x}$ at $x = 0$: the slope is infinite.\n' +
+  '- **Outside the domain** — like $\\ln(x)$ at $x \\le 0$: the function itself is undefined.\n\n' +
+  'In all three cases the derivative does not exist at that point.';
+
 
 /* ================================================================
    COLORS
@@ -1240,27 +1260,7 @@ export default function TangentLine({
           : '');
     }
     return body;
-  }, [fam, params, forwardEq, derivEq, x0, y0, m, yIntercept, tangentPS, tangentSI, tangentDefined, isCritical]);
-
-  const conceptsContent =
-    '## What the tangent line means\n\n' +
-    'At any smooth point on a curve, the **tangent line** is the unique straight line that "kisses" the curve — touching it at that point and matching its direction. The slope of that line is the **instantaneous rate of change** of the function there, also known as the derivative.\n\n' +
-    '### From secants to tangents\n' +
-    'Pick two points on the curve, $(x_0, f(x_0))$ and $(x_0 + \\Delta x, f(x_0 + \\Delta x))$. The line through them is a **secant**, with slope:\n' +
-    '$$\\frac{f(x_0 + \\Delta x) - f(x_0)}{\\Delta x}$$\n\n' +
-    'As $\\Delta x \\to 0$ the secant rotates to become the **tangent**, and its slope becomes the derivative:\n' +
-    '$$f\'(x_0) = \\lim_{\\Delta x \\to 0} \\frac{f(x_0 + \\Delta x) - f(x_0)}{\\Delta x}$$\n\n' +
-    '### Two forms of the tangent equation\n' +
-    'Once you know the slope $m = f\'(x_0)$ and the point $(x_0, y_0)$ on the curve, the tangent line is:\n' +
-    '- Point-slope form: $y = m(x - x_0) + y_0$\n' +
-    '- Slope-intercept form: $y = m x + (y_0 - m x_0)$\n\n' +
-    'Same line, two ways to write it. Point-slope is what you derive; slope-intercept is the simplification.\n\n' +
-    '### When the tangent fails to exist\n' +
-    'Some places have no well-defined tangent:\n' +
-    '- **Corners** — like $|x|$ at $x = 0$: the slope jumps and no single line fits.\n' +
-    '- **Vertical tangents** — like $\\sqrt{x}$ at $x = 0$: the slope is infinite.\n' +
-    '- **Outside the domain** — like $\\ln(x)$ at $x \\le 0$: the function itself is undefined.\n\n' +
-    'In all three cases the derivative does not exist at that point.';
+  }, [fam, forwardEq, derivEq, x0, y0, m, yIntercept, tangentPS, tangentSI, tangentDefined, isCritical]);
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

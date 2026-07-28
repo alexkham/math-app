@@ -40,6 +40,38 @@ import React, { useState, useMemo } from 'react';
 import { VisualizerWithControls } from '../FunctionVisualizerCorePro';
 import InfoPanel from '../InfoPanel';
 
+const conceptsContent =
+  '## What is an asymptote?\n\n' +
+  'An **asymptote** is a line that the graph of a function approaches arbitrarily closely without (usually) reaching it. There are three flavors.\n\n' +
+  '### Vertical asymptote\n\n' +
+  'A vertical line $x = c$ is a vertical asymptote if $f(x) \\to \\pm\\infty$ as $x \\to c$ from one or both sides.\n\n' +
+  'Typical sources:\n' +
+  '- Division by zero — like $1/x$ at $x = 0$ or $(x+1)/(x-1)$ at $x = 1$.\n' +
+  '- Domain edges where the function blows up — like $\\ln(x)$ at $x = 0$.\n' +
+  '- Periodic singularities — $\\tan(x)$ has VAs at $\\pi/2 + n\\pi$ for every integer $n$.\n\n' +
+  'A VA can be one-sided (e.g. $\\ln(x)$ only approaches from the right) or two-sided. The visual catch: the curve heads toward $+\\infty$ or $-\\infty$ as you approach the line, never crossing it.\n\n' +
+  '### Horizontal asymptote\n\n' +
+  'A horizontal line $y = L$ is a horizontal asymptote if $f(x) \\to L$ as $x \\to +\\infty$ or $x \\to -\\infty$.\n\n' +
+  'A function can have:\n' +
+  '- No HAs (most polynomials).\n' +
+  '- One HA covering both sides ($1/(1+x^2) \\to 0$ in both directions).\n' +
+  '- Two different HAs — $\\arctan(x) \\to \\pi/2$ on the right and $-\\pi/2$ on the left.\n' +
+  '- One-sided HAs — $e^{-x} \\to 0$ on the right but blows up on the left.\n\n' +
+  'A function *can* cross a horizontal asymptote — that\'s allowed. The asymptote is about behavior at infinity, not about staying away from the line.\n\n' +
+  '### Oblique (slant) asymptote\n\n' +
+  'A non-horizontal line $y = mx + b$ is an oblique asymptote if $f(x) - (mx + b) \\to 0$ as $x \\to \\pm\\infty$.\n\n' +
+  'Classic source: rational functions where the numerator\'s degree is exactly one more than the denominator\'s, like $(x^2 + 1)/x = x + 1/x$. Polynomial-divide and the quotient is the oblique asymptote; the remainder vanishes at infinity.\n\n' +
+  'A function has *either* a horizontal asymptote on a given side, *or* an oblique one, *or* neither — but not both (a non-zero slope rules out a finite limit).\n\n' +
+  '### How the detector works\n\n' +
+  '- **VAs**: sample densely; flag spots where the function jumps across infinity (one side big positive, the other big negative or undefined). Refine, then probe one-sided limits.\n' +
+  '- **HAs**: evaluate at $|x| = 10^2, 10^3, 10^4, 10^5$. If the values stabilize, that\'s the limit.\n' +
+  '- **OAs**: compute $f(x)/x$ at large $|x|$; if it converges to a non-zero slope $m$, compute $b = f(x) - mx$; if that also converges, we have $y = mx + b$.\n\n' +
+  '### What the sliders do to asymptotes\n\n' +
+  'For $g(x) = a \\cdot f(b(x - h)) + k$:\n' +
+  '- VA at $x = c$ on $f$ → VA at $x = c/b + h$ on $g$ (input transform).\n' +
+  '- HA at $y = L$ on $f$ → HA at $y = aL + k$ on $g$ (output transform).\n' +
+  '- An OA $y = mx + b$ on $f$ becomes $y = (a m b)x + (-amb h + ab\\,b + k)$ on $g$... or, more usefully: the slope and intercept update predictably. Slide them and watch.';
+
 
 /* ================================================================
    COLORS
@@ -535,38 +567,6 @@ export default function FunctionAsymptotes({
     }
     return parts.join('');
   }, [fam, forwardEq, vas, has, obs]);
-
-  const conceptsContent =
-    '## What is an asymptote?\n\n' +
-    'An **asymptote** is a line that the graph of a function approaches arbitrarily closely without (usually) reaching it. There are three flavors.\n\n' +
-    '### Vertical asymptote\n\n' +
-    'A vertical line $x = c$ is a vertical asymptote if $f(x) \\to \\pm\\infty$ as $x \\to c$ from one or both sides.\n\n' +
-    'Typical sources:\n' +
-    '- Division by zero — like $1/x$ at $x = 0$ or $(x+1)/(x-1)$ at $x = 1$.\n' +
-    '- Domain edges where the function blows up — like $\\ln(x)$ at $x = 0$.\n' +
-    '- Periodic singularities — $\\tan(x)$ has VAs at $\\pi/2 + n\\pi$ for every integer $n$.\n\n' +
-    'A VA can be one-sided (e.g. $\\ln(x)$ only approaches from the right) or two-sided. The visual catch: the curve heads toward $+\\infty$ or $-\\infty$ as you approach the line, never crossing it.\n\n' +
-    '### Horizontal asymptote\n\n' +
-    'A horizontal line $y = L$ is a horizontal asymptote if $f(x) \\to L$ as $x \\to +\\infty$ or $x \\to -\\infty$.\n\n' +
-    'A function can have:\n' +
-    '- No HAs (most polynomials).\n' +
-    '- One HA covering both sides ($1/(1+x^2) \\to 0$ in both directions).\n' +
-    '- Two different HAs — $\\arctan(x) \\to \\pi/2$ on the right and $-\\pi/2$ on the left.\n' +
-    '- One-sided HAs — $e^{-x} \\to 0$ on the right but blows up on the left.\n\n' +
-    'A function *can* cross a horizontal asymptote — that\'s allowed. The asymptote is about behavior at infinity, not about staying away from the line.\n\n' +
-    '### Oblique (slant) asymptote\n\n' +
-    'A non-horizontal line $y = mx + b$ is an oblique asymptote if $f(x) - (mx + b) \\to 0$ as $x \\to \\pm\\infty$.\n\n' +
-    'Classic source: rational functions where the numerator\'s degree is exactly one more than the denominator\'s, like $(x^2 + 1)/x = x + 1/x$. Polynomial-divide and the quotient is the oblique asymptote; the remainder vanishes at infinity.\n\n' +
-    'A function has *either* a horizontal asymptote on a given side, *or* an oblique one, *or* neither — but not both (a non-zero slope rules out a finite limit).\n\n' +
-    '### How the detector works\n\n' +
-    '- **VAs**: sample densely; flag spots where the function jumps across infinity (one side big positive, the other big negative or undefined). Refine, then probe one-sided limits.\n' +
-    '- **HAs**: evaluate at $|x| = 10^2, 10^3, 10^4, 10^5$. If the values stabilize, that\'s the limit.\n' +
-    '- **OAs**: compute $f(x)/x$ at large $|x|$; if it converges to a non-zero slope $m$, compute $b = f(x) - mx$; if that also converges, we have $y = mx + b$.\n\n' +
-    '### What the sliders do to asymptotes\n\n' +
-    'For $g(x) = a \\cdot f(b(x - h)) + k$:\n' +
-    '- VA at $x = c$ on $f$ → VA at $x = c/b + h$ on $g$ (input transform).\n' +
-    '- HA at $y = L$ on $f$ → HA at $y = aL + k$ on $g$ (output transform).\n' +
-    '- An OA $y = mx + b$ on $f$ becomes $y = (a m b)x + (-amb h + ab\\,b + k)$ on $g$... or, more usefully: the slope and intercept update predictably. Slide them and watch.';
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Detected', order: 0, content: explanationContent },

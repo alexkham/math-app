@@ -155,7 +155,9 @@ Each definition includes an intuitive explanation, key properties, worked exampl
         description: "Complete glossary of trigonometry terms with definitions and examples. Covers angles, trig functions, right triangles, unit circle, and graph properties.",
         keywords: keyWords.join(", "),
         url: "/trigonometry/definitions",
-        name: "Trigonometry Terms and Definitions"
+        name: "Trigonometry Terms and Definitions",
+        // Surfaced on the /trigonometry hub via buildSectionData extraction.
+        hubDescription: `The Trigonometry Terms and Definitions page offers a comprehensive glossary of key concepts in trigonometry, organized by categories such as Angles, Triangles, Trigonometric Functions, Identities, Graphs, and Equations. From foundational terms like sine and cosine to advanced concepts like amplitude modulation and inverse identities, each entry is clearly defined to support a deeper understanding of trigonometric principles and their mathematical applications.`
       }
     }
   }

@@ -53,6 +53,22 @@ import { VisualizerWithControls } from '../FunctionVisualizerCorePro';
 import InfoPanel from '../InfoPanel';
 
 
+const conceptsContent =
+  '## One-sided and two-sided limits\n\n' +
+  'The **limit** of $f$ at $x = c$ asks: as $x$ gets arbitrarily close to $c$, what value does $f(x)$ get arbitrarily close to?\n\n' +
+  'Split that into two questions:\n\n' +
+  '- **Left limit** $L^-$ — approach $c$ from values smaller than $c$.\n' +
+  '- **Right limit** $L^+$ — approach $c$ from values larger than $c$.\n\n' +
+  'The two-sided limit **exists** if and only if $L^- = L^+$. When they agree, that&apos;s the limit. When they disagree, the limit does not exist (DNE).\n\n' +
+  '### Types of discontinuity\n\n' +
+  '- **Removable** — $L^- = L^+$, but $f(c)$ is undefined or doesn&apos;t equal the limit. A single point is missing or wrong; everything else lines up.\n' +
+  '- **Jump** — $L^-$ and $L^+$ are both finite but different. The graph leaps from one height to another at $c$.\n' +
+  '- **Infinite** — at least one of $L^-$, $L^+$ is $\\pm\\infty$. A vertical asymptote at $c$.\n' +
+  '- **Oscillating** — neither one-sided limit exists because the function bounces around without settling. Classic example: $\\sin(1/x)$ near $0$.\n\n' +
+  '### Why $f(c)$ doesn&apos;t determine the limit\n\n' +
+  'The limit is about the *approach*, not the destination. The function&apos;s actual value at $c$ — if it has one — could be anything, and it wouldn&apos;t change $L^-$ or $L^+$. That&apos;s why **removable** is a category: the limit exists cleanly; only $f(c)$ is the problem, and you could just patch it.';
+
+
 /* ================================================================
    COLORS  (all blue variants)
    ================================================================ */
@@ -472,21 +488,6 @@ export default function FunctionLimit({
       `Slide ε to pick how far on each side of c we sample. As ε shrinks, $f(c - \u03b5)$ approaches $L^-$ and $f(c + \u03b5)$ approaches $L^+$. That&apos;s the definition of a limit: getting arbitrarily close.`
     );
   }, [fam, eps, fL, fR, v]);
-
-  const conceptsContent =
-    '## One-sided and two-sided limits\n\n' +
-    'The **limit** of $f$ at $x = c$ asks: as $x$ gets arbitrarily close to $c$, what value does $f(x)$ get arbitrarily close to?\n\n' +
-    'Split that into two questions:\n\n' +
-    '- **Left limit** $L^-$ — approach $c$ from values smaller than $c$.\n' +
-    '- **Right limit** $L^+$ — approach $c$ from values larger than $c$.\n\n' +
-    'The two-sided limit **exists** if and only if $L^- = L^+$. When they agree, that&apos;s the limit. When they disagree, the limit does not exist (DNE).\n\n' +
-    '### Types of discontinuity\n\n' +
-    '- **Removable** — $L^- = L^+$, but $f(c)$ is undefined or doesn&apos;t equal the limit. A single point is missing or wrong; everything else lines up.\n' +
-    '- **Jump** — $L^-$ and $L^+$ are both finite but different. The graph leaps from one height to another at $c$.\n' +
-    '- **Infinite** — at least one of $L^-$, $L^+$ is $\\pm\\infty$. A vertical asymptote at $c$.\n' +
-    '- **Oscillating** — neither one-sided limit exists because the function bounces around without settling. Classic example: $\\sin(1/x)$ near $0$.\n\n' +
-    '### Why $f(c)$ doesn&apos;t determine the limit\n\n' +
-    'The limit is about the *approach*, not the destination. The function&apos;s actual value at $c$ — if it has one — could be anything, and it wouldn&apos;t change $L^-$ or $L^+$. That&apos;s why **removable** is a category: the limit exists cleanly; only $f(c)$ is the problem, and you could just patch it.';
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

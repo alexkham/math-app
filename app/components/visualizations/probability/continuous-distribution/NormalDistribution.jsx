@@ -367,38 +367,37 @@ import { useState, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { processContent } from '@/app/utils/contentProcessor';
 
+const normalPDF = (x, mean, stdDev) => {
+  const coefficient = 1 / (stdDev * Math.sqrt(2 * Math.PI));
+  const exponent = -Math.pow(x - mean, 2) / (2 * Math.pow(stdDev, 2));
+  return coefficient * Math.exp(exponent);
+};
+
+const erf = (x) => {
+  const a1 = 0.254829592;
+  const a2 = -0.284496736;
+  const a3 = 1.421413741;
+  const a4 = -1.453152027;
+  const a5 = 1.061405429;
+  const p = 0.3275911;
+
+  const sign = x < 0 ? -1 : 1;
+  x = Math.abs(x);
+
+  const t = 1.0 / (1.0 + p * x);
+  const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+
+  return sign * y;
+};
+
+const normalCDF = (x, mean, stdDev) => {
+  return 0.5 * (1 + erf((x - mean) / (stdDev * Math.sqrt(2))));
+};
 
 export default function NormalDistribution({ explanation }) {
   const [normalMean, setNormalMean] = useState(0);
   const [normalStdDev, setNormalStdDev] = useState(1);
   const [viewType, setViewType] = useState('pdf');
-
-  const normalPDF = (x, mean, stdDev) => {
-    const coefficient = 1 / (stdDev * Math.sqrt(2 * Math.PI));
-    const exponent = -Math.pow(x - mean, 2) / (2 * Math.pow(stdDev, 2));
-    return coefficient * Math.exp(exponent);
-  };
-
-  const erf = (x) => {
-    const a1 = 0.254829592;
-    const a2 = -0.284496736;
-    const a3 = 1.421413741;
-    const a4 = -1.453152027;
-    const a5 = 1.061405429;
-    const p = 0.3275911;
-    
-    const sign = x < 0 ? -1 : 1;
-    x = Math.abs(x);
-    
-    const t = 1.0 / (1.0 + p * x);
-    const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
-    
-    return sign * y;
-  };
-
-  const normalCDF = (x, mean, stdDev) => {
-    return 0.5 * (1 + erf((x - mean) / (stdDev * Math.sqrt(2))));
-  };
 
   const normalData = useMemo(() => {
     const data = [];

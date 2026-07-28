@@ -2,6 +2,9 @@ import React, { useState, useRef, useCallback, forwardRef, useImperativeHandle }
 import SolutionPanel from '../SolutionPanel';
 import THEME_CSS from '../MathSolverThemes';
 
+const TYPEABLE = new Set('0123456789.xynXYN+-=*/()|×÷');
+const KEY_MAP = { '*': '×', '/': '÷' };
+
 /* =====================================================
    ABSOLUTE VALUE EQUATION SOLVER
    
@@ -667,9 +670,6 @@ export const AbsValueSolverEngine = forwardRef(({
       if (onResultChange) onResultChange(null);
     }
   }, [expression, onResultChange]);
-
-  const TYPEABLE = new Set('0123456789.xynXYN+-=*/()|\u00D7\u00F7');
-  const KEY_MAP = { '*': '\u00D7', '/': '\u00F7' };
 
   const handleKeyDown = useCallback((e) => {
     if (e.ctrlKey || e.metaKey) { if (e.key === 'z' || e.key === 'Z') { e.preventDefault(); undo(); } return; }

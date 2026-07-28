@@ -58,7 +58,9 @@ export async function getStaticProps() {
     description: "Complete trigonometry formulas reference with 50+ identities. Covers Pythagorean, double angle, half-angle, sum and difference, law of sines and cosines.",
     keywords: keyWords.join(", "),
     url: "/trigonometry/formulas",
-    name: "Trigonometry Formulas and Identities"
+    name: "Trigonometry Formulas and Identities",
+    // Surfaced on the /trigonometry hub via buildSectionData extraction.
+    hubDescription: `The Trigonometry Formulas page covers essential identities and relationships involving angles, ratios, and periodic functions. It includes fundamental formulas such as Pythagorean identities, angle sum and difference identities, double and half-angle formulas, product-to-sum transformations, and laws of sines and cosines. Each formula is presented with definitions, usage notes, and step-by-step examples for solving geometric and algebraic problems.`
   }
 
   const schemas = {

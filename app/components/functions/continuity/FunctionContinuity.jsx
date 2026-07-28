@@ -48,6 +48,21 @@ import React, { useState, useMemo } from 'react';
 import { VisualizerWithControls } from '../FunctionVisualizerCorePro';
 import InfoPanel from '../InfoPanel';
 
+const conceptsContent =
+  '## What it means to be continuous at c\n\n' +
+  'The definition has three parts that all have to hold:\n\n' +
+  '1. **f(c) is defined.** The function actually has a value at the point.\n' +
+  '2. **lim x \u2192 c f(x) exists.** Both one-sided limits exist and agree on a single finite value.\n' +
+  '3. **f(c) = lim x \u2192 c f(x).** The actual value matches the limit.\n\n' +
+  'If all three pass, $f$ is **continuous at c**. If any one fails, it&apos;s **discontinuous**, and the failure type names the discontinuity:\n\n' +
+  '- Condition 1 fails (but 2 still passes): **removable** — patch f(c) and it&apos;s fixed.\n' +
+  '- Condition 2 fails because $L^- \\ne L^+$ (both finite): **jump**.\n' +
+  '- Condition 2 fails because a one-sided limit is infinite: **infinite** — vertical asymptote.\n' +
+  '- Condition 3 fails (1 and 2 pass): **removable** — f has a value but the wrong one; patch f(c) and it&apos;s fixed.\n\n' +
+  'Removable discontinuities are special because a single targeted patch — redefining f(c) — would restore continuity. Jump and infinite are not patchable.\n\n' +
+  '### Continuous on an interval\n\n' +
+  'A function is continuous on an interval if it&apos;s continuous at every point in that interval. Polynomials, $\\sin$, $\\cos$, $e^x$, $\\sqrt{x}$ on its domain, $\\ln$ on its domain — all continuous on their entire domains. Most discontinuities you meet in practice live at isolated points: where you divide by zero, take a log of zero, or splice two pieces of a function together.';
+
 
 /* ================================================================
    COLORS  (all blue variants; red reserved for explicit fail state)
@@ -384,21 +399,6 @@ export default function FunctionContinuity({
       `Slide c to test the three conditions at any point. At most c the checklist passes — f is continuous almost everywhere. The interesting points are the few where at least one check fails. Use the jump-to buttons to land on them directly.`
     );
   }, [fam, c, v]);
-
-  const conceptsContent =
-    '## What it means to be continuous at c\n\n' +
-    'The definition has three parts that all have to hold:\n\n' +
-    '1. **f(c) is defined.** The function actually has a value at the point.\n' +
-    '2. **lim x \u2192 c f(x) exists.** Both one-sided limits exist and agree on a single finite value.\n' +
-    '3. **f(c) = lim x \u2192 c f(x).** The actual value matches the limit.\n\n' +
-    'If all three pass, $f$ is **continuous at c**. If any one fails, it&apos;s **discontinuous**, and the failure type names the discontinuity:\n\n' +
-    '- Condition 1 fails (but 2 still passes): **removable** — patch f(c) and it&apos;s fixed.\n' +
-    '- Condition 2 fails because $L^- \\ne L^+$ (both finite): **jump**.\n' +
-    '- Condition 2 fails because a one-sided limit is infinite: **infinite** — vertical asymptote.\n' +
-    '- Condition 3 fails (1 and 2 pass): **removable** — f has a value but the wrong one; patch f(c) and it&apos;s fixed.\n\n' +
-    'Removable discontinuities are special because a single targeted patch — redefining f(c) — would restore continuity. Jump and infinite are not patchable.\n\n' +
-    '### Continuous on an interval\n\n' +
-    'A function is continuous on an interval if it&apos;s continuous at every point in that interval. Polynomials, $\\sin$, $\\cos$, $e^x$, $\\sqrt{x}$ on its domain, $\\ln$ on its domain — all continuous on their entire domains. Most discontinuities you meet in practice live at isolated points: where you divide by zero, take a log of zero, or splice two pieces of a function together.';
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

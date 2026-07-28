@@ -39,6 +39,22 @@ import React, { useState, useMemo } from 'react';
 import { VisualizerWithControls } from '../FunctionVisualizerCorePro';
 import InfoPanel from '../InfoPanel';
 
+const conceptsContent =
+  '## What is the range?\n\n' +
+  'The **range** of a function is the set of outputs it can actually produce. Some functions reach every real number (linear, cubic, logarithmic). Others are stuck inside a smaller set:\n\n' +
+  '- $x^2$ — always $\\geq 0$; the range is $[0, \\infty)$\n' +
+  '- $e^x$ — always $> 0$; the range is $(0, \\infty)$\n' +
+  '- $\\sin(x)$, $\\cos(x)$ — always between $-1$ and $1$\n' +
+  '- $1/x$ — reaches everything except $0$\n\n' +
+  'On the number line below the graph, the colored band shows which y-values the function can produce. Drag the test point to probe a specific value — a colored dot means **achievable** (some x produces this y), red means **not achievable**.\n\n' +
+  '### Half-line endpoints: open vs closed\n\n' +
+  'A **closed** endpoint (filled circle) means the boundary value is reached. $\\sqrt{x}$ at $y = 0$: yes, $\\sqrt{0} = 0$, so $y = 0$ is in the range. Closed.\n\n' +
+  'An **open** endpoint (hollow circle) means the boundary is approached but never reached. $e^x$ at $y = 0$: $e^x$ gets arbitrarily close to $0$ as $x \\to -\\infty$, but never equals $0$. Open.\n\n' +
+  '### Excluded values\n\n' +
+  'Some functions hit every output except one. $1/x$ reaches every real number except $0$ — the function has a horizontal asymptote at $y = 0$. The range bar is filled everywhere except for an open hole at the excluded value, marked with a small red ×.\n\n' +
+  '### Why b and h don\'t matter\n\n' +
+  'Think about the formula $g(x) = a \\cdot f(b(x - h)) + k$. The transformations $b$ and $h$ act on the input *before* $f$ runs — they decide which x feeds into $f$. But the *outputs* $f$ produces are determined by $f$ alone; relabeling the inputs doesn\'t change which numbers can come out. Then $a$ scales those outputs and $k$ shifts them — and those are the only operations that move the range.';
+
 
 /* ================================================================
    COLORS
@@ -647,23 +663,7 @@ export default function FunctionRange({
       `- $a$ — scales every output by a factor of $a$; if $a < 0$, the range flips across the $k$ line\n\n` +
       `**b** and **h** transform the input — they change *which* x produces each output, but the *set* of outputs the function can reach stays the same. Move them and the range stays put.`
     );
-  }, [fam, params, forwardEq, rangeStr]);
-
-  const conceptsContent =
-    '## What is the range?\n\n' +
-    'The **range** of a function is the set of outputs it can actually produce. Some functions reach every real number (linear, cubic, logarithmic). Others are stuck inside a smaller set:\n\n' +
-    '- $x^2$ — always $\\geq 0$; the range is $[0, \\infty)$\n' +
-    '- $e^x$ — always $> 0$; the range is $(0, \\infty)$\n' +
-    '- $\\sin(x)$, $\\cos(x)$ — always between $-1$ and $1$\n' +
-    '- $1/x$ — reaches everything except $0$\n\n' +
-    'On the number line below the graph, the colored band shows which y-values the function can produce. Drag the test point to probe a specific value — a colored dot means **achievable** (some x produces this y), red means **not achievable**.\n\n' +
-    '### Half-line endpoints: open vs closed\n\n' +
-    'A **closed** endpoint (filled circle) means the boundary value is reached. $\\sqrt{x}$ at $y = 0$: yes, $\\sqrt{0} = 0$, so $y = 0$ is in the range. Closed.\n\n' +
-    'An **open** endpoint (hollow circle) means the boundary is approached but never reached. $e^x$ at $y = 0$: $e^x$ gets arbitrarily close to $0$ as $x \\to -\\infty$, but never equals $0$. Open.\n\n' +
-    '### Excluded values\n\n' +
-    'Some functions hit every output except one. $1/x$ reaches every real number except $0$ — the function has a horizontal asymptote at $y = 0$. The range bar is filled everywhere except for an open hole at the excluded value, marked with a small red ×.\n\n' +
-    '### Why b and h don\'t matter\n\n' +
-    'Think about the formula $g(x) = a \\cdot f(b(x - h)) + k$. The transformations $b$ and $h$ act on the input *before* $f$ runs — they decide which x feeds into $f$. But the *outputs* $f$ produces are determined by $f$ alone; relabeling the inputs doesn\'t change which numbers can come out. Then $a$ scales those outputs and $k$ shifts them — and those are the only operations that move the range.';
+  }, [fam, forwardEq, rangeStr]);
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

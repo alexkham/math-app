@@ -2,6 +2,9 @@ import React, { useState, useRef, useCallback, forwardRef, useImperativeHandle }
 import SolutionPanel from './SolutionPanel';
 import THEME_CSS from './MathSolverThemes';
 
+const TYPEABLE = new Set('0123456789.xynXYN^+-<>\u2264\u2265*/()×÷\u221A\u221B\u221C');
+const KEY_MAP = { '*': '\u00D7', '/': '\u00F7' };
+
 /* =====================================================
    RADICAL INEQUALITY SOLVER
    
@@ -1027,10 +1030,7 @@ export const RadicalInequalitySolverEngine = forwardRef(({
       if (onResultChange) onResultChange(null);
     }
   }, [expression, onResultChange]);
-
-  const TYPEABLE = new Set('0123456789.xynXYN^+-<>\u2264\u2265*/()×÷\u221A\u221B\u221C');
-  const KEY_MAP = { '*': '\u00D7', '/': '\u00F7' };
-
+
   const handleKeyDown = useCallback((e) => {
     if (e.ctrlKey || e.metaKey) {
       if (e.key === 'z' || e.key === 'Z') { e.preventDefault(); undo(); }

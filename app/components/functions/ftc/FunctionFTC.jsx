@@ -45,6 +45,26 @@ import React, { useState, useMemo } from 'react';
 import { VisualizerWithControls } from '../FunctionVisualizerCorePro';
 import InfoPanel from '../InfoPanel';
 
+const conceptsContent =
+  '## The Fundamental Theorem of Calculus\n\n' +
+  'Two operations — **differentiation** (slope of a curve) and **integration** (area under a curve) — look unrelated. The FTC says they are inverses of each other. That single fact is the bridge between everything in calculus.\n\n' +
+  '### The accumulator F\n\n' +
+  'Fix a starting point $a$. Define\n\n' +
+  '$$F(x) = \\int_a^x f(t)\\,dt.$$\n\n' +
+  'F takes an $x$ and gives back the signed area under f from $a$ to $x$. It&apos;s a brand-new function built out of f.\n\n' +
+  '### What F&apos;(x) is\n\n' +
+  'How fast does F grow as x moves? Push x a little further right by $\\Delta x$ and you pick up a thin sliver of area of width $\\Delta x$ and height roughly $f(x)$. So $\\Delta F \\approx f(x)\\cdot\\Delta x$, which means\n\n' +
+  '$$F\'(x) = f(x).$$\n\n' +
+  'Differentiating the accumulator gives back the integrand. **That&apos;s Part 1.**\n\n' +
+  '### Why this is huge\n\n' +
+  'It means you can compute $\\int_a^b f(t)\\,dt$ by finding *any* antiderivative G (a function with $G\' = f$) and evaluating $G(b) - G(a)$. No more summing 4000 trapezoids — just take the antiderivative and plug in. **That&apos;s Part 2.**\n\n' +
+  '### What the picture shows\n\n' +
+  '- Move x to see the shaded area change.\n' +
+  '- The height of the F curve at x equals that area.\n' +
+  '- The slope of F at x equals f at x (the height of the f curve at the same x).\n' +
+  '- When f crosses zero, F stops changing — flat spot, slope zero, local max or min.\n' +
+  '- Where f is large, F climbs fast. Where f is negative, F decreases.';
+
 
 /* ================================================================
    COLORS  (all blue variants)
@@ -326,26 +346,6 @@ export default function FunctionFTC({
     `**Part 1 (the link).** Define $F(x) = \\int_a^x f(t)\\,dt$ — the accumulated area. Then F is differentiable and $F'(x) = f(x)$. Differentiation undoes integration.\n\n` +
     `**Part 2 (evaluation).** If G is any antiderivative of f, then $\\int_a^b f(t)\\,dt = G(b) - G(a)$. That&apos;s how you compute definite integrals without summing rectangles forever.`
   ), [fam, a, x, fx, Fx, area]);
-
-  const conceptsContent =
-    '## The Fundamental Theorem of Calculus\n\n' +
-    'Two operations — **differentiation** (slope of a curve) and **integration** (area under a curve) — look unrelated. The FTC says they are inverses of each other. That single fact is the bridge between everything in calculus.\n\n' +
-    '### The accumulator F\n\n' +
-    'Fix a starting point $a$. Define\n\n' +
-    '$$F(x) = \\int_a^x f(t)\\,dt.$$\n\n' +
-    'F takes an $x$ and gives back the signed area under f from $a$ to $x$. It&apos;s a brand-new function built out of f.\n\n' +
-    '### What F&apos;(x) is\n\n' +
-    'How fast does F grow as x moves? Push x a little further right by $\\Delta x$ and you pick up a thin sliver of area of width $\\Delta x$ and height roughly $f(x)$. So $\\Delta F \\approx f(x)\\cdot\\Delta x$, which means\n\n' +
-    '$$F\'(x) = f(x).$$\n\n' +
-    'Differentiating the accumulator gives back the integrand. **That&apos;s Part 1.**\n\n' +
-    '### Why this is huge\n\n' +
-    'It means you can compute $\\int_a^b f(t)\\,dt$ by finding *any* antiderivative G (a function with $G\' = f$) and evaluating $G(b) - G(a)$. No more summing 4000 trapezoids — just take the antiderivative and plug in. **That&apos;s Part 2.**\n\n' +
-    '### What the picture shows\n\n' +
-    '- Move x to see the shaded area change.\n' +
-    '- The height of the F curve at x equals that area.\n' +
-    '- The slope of F at x equals f at x (the height of the f curve at the same x).\n' +
-    '- When f crosses zero, F stops changing — flat spot, slope zero, local max or min.\n' +
-    '- Where f is large, F climbs fast. Where f is negative, F decreases.';
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

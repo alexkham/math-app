@@ -2,6 +2,9 @@ import React, { useState, useRef, useCallback, forwardRef, useImperativeHandle }
 import SolutionPanel from './SolutionPanel';
 import THEME_CSS from './MathSolverThemes';
 
+const TYPEABLE = new Set('0123456789.xynXYN+-=*/()^\u00D7\u00F7\u00B2\u00B3\u2074');
+const KEY_MAP = { '*': '\u00D7', '/': '\u00F7' };
+
 /* =====================================================
    RATIONAL EQUATION SOLVER
 
@@ -594,10 +597,7 @@ export const RationalSolverEngine = forwardRef(({
     try { const exprString = expression.join(''); const tokens = tokenize(exprString); const ast = parse(tokens); const solveResult = solveRationalEquation(ast); setResult(solveResult); setError(null); if (onResultChange) onResultChange(solveResult); }
     catch (e) { setError(e.message); setResult(null); if (onResultChange) onResultChange(null); }
   }, [expression, onResultChange]);
-
-  const TYPEABLE = new Set('0123456789.xynXYN+-=*/()^\u00D7\u00F7\u00B2\u00B3\u2074');
-  const KEY_MAP = { '*': '\u00D7', '/': '\u00F7' };
-
+
   const handleKeyDown = useCallback((e) => {
     if (e.ctrlKey || e.metaKey) { if (e.key === 'z' || e.key === 'Z') { e.preventDefault(); undo(); } return; }
     if (e.altKey) return;

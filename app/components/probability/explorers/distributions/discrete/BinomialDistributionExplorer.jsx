@@ -1,7 +1,21 @@
 import React, { useState, useMemo } from 'react';
 import GenericDistributionExplorer from './GenericDistributionExplorer';
 
+const binomialCoefficient = (n, k) => {
+  if (k < 0 || k > n) return 0;
+  if (k === 0 || k === n) return 1;
 
+  let result = 1;
+  for (let i = 1; i <= k; i++) {
+    result *= (n - i + 1) / i;
+  }
+  return result;
+};
+
+const binomialPMF = (k, n, p) => {
+  if (k < 0 || k > n) return 0;
+  return binomialCoefficient(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k);
+};
 
 export default function BinomialDistributionExplorer({ 
   title = "Binomial Distribution",
@@ -23,22 +37,6 @@ export default function BinomialDistributionExplorer({
 }) {
   const [n, setN] = useState(initialN);
   const [p, setP] = useState(initialP);
-
-  const binomialCoefficient = (n, k) => {
-    if (k < 0 || k > n) return 0;
-    if (k === 0 || k === n) return 1;
-    
-    let result = 1;
-    for (let i = 1; i <= k; i++) {
-      result *= (n - i + 1) / i;
-    }
-    return result;
-  };
-
-  const binomialPMF = (k, n, p) => {
-    if (k < 0 || k > n) return 0;
-    return binomialCoefficient(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k);
-  };
 
   const pmfData = useMemo(() => {
     const result = [];

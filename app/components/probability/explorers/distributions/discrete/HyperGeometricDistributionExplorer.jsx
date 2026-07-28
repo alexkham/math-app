@@ -1,6 +1,29 @@
 import React, { useState, useMemo } from 'react';
 import GenericDistributionExplorer from './GenericDistributionExplorer';
 
+const binomialCoefficient = (n, k) => {
+  if (k < 0 || k > n) return 0;
+  if (k === 0 || k === n) return 1;
+
+  let result = 1;
+  for (let i = 1; i <= k; i++) {
+    result *= (n - i + 1) / i;
+  }
+  return result;
+};
+
+const hypergeometricPMF = (k, N, K, n) => {
+  const minK = Math.max(0, n - (N - K));
+  const maxK = Math.min(n, K);
+
+  if (k < minK || k > maxK) return 0;
+
+  const numerator = binomialCoefficient(K, k) * binomialCoefficient(N - K, n - k);
+  const denominator = binomialCoefficient(N, n);
+
+  return numerator / denominator;
+};
+
 export default function HypergeometricDistributionExplorer({ 
   title = "Hypergeometric Distribution",
   description = "Sampling without replacement from a finite population",
@@ -22,29 +45,6 @@ export default function HypergeometricDistributionExplorer({
   const [N, setN] = useState(initialN);
   const [K, setK] = useState(initialK);
   const [n, setn] = useState(initialn);
-
-  const binomialCoefficient = (n, k) => {
-    if (k < 0 || k > n) return 0;
-    if (k === 0 || k === n) return 1;
-    
-    let result = 1;
-    for (let i = 1; i <= k; i++) {
-      result *= (n - i + 1) / i;
-    }
-    return result;
-  };
-
-  const hypergeometricPMF = (k, N, K, n) => {
-    const minK = Math.max(0, n - (N - K));
-    const maxK = Math.min(n, K);
-    
-    if (k < minK || k > maxK) return 0;
-    
-    const numerator = binomialCoefficient(K, k) * binomialCoefficient(N - K, n - k);
-    const denominator = binomialCoefficient(N, n);
-    
-    return numerator / denominator;
-  };
 
   const pmfData = useMemo(() => {
     const result = [];

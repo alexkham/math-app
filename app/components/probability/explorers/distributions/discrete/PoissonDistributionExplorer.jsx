@@ -1,8 +1,21 @@
 import React, { useState, useMemo } from 'react';
 import GenericDistributionExplorer from './GenericDistributionExplorer';
 
+const factorial = (n) => {
+  if (n <= 1) return 1;
+  let result = 1;
+  for (let i = 2; i <= n; i++) {
+    result *= i;
+  }
+  return result;
+};
 
-export default function PoissonDistributionExplorer({ 
+const poissonPMF = (k, lambda) => {
+  if (k < 0) return 0;
+  return (Math.pow(lambda, k) * Math.exp(-lambda)) / factorial(k);
+};
+
+export default function PoissonDistributionExplorer({
   title = "Poisson Distribution",
   description = "Number of events in a fixed interval",
   examples = [
@@ -20,20 +33,6 @@ export default function PoissonDistributionExplorer({
   maxK = 30
 }) {
   const [lambda, setLambda] = useState(initialLambda);
-
-  const factorial = (n) => {
-    if (n <= 1) return 1;
-    let result = 1;
-    for (let i = 2; i <= n; i++) {
-      result *= i;
-    }
-    return result;
-  };
-
-  const poissonPMF = (k, lambda) => {
-    if (k < 0) return 0;
-    return (Math.pow(lambda, k) * Math.exp(-lambda)) / factorial(k);
-  };
 
   const pmfData = useMemo(() => {
     const result = [];

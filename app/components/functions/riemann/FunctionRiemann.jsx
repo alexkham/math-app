@@ -52,6 +52,25 @@ import React, { useState, useMemo } from 'react';
 import { VisualizerWithControls } from '../FunctionVisualizerCorePro';
 import InfoPanel from '../InfoPanel';
 
+const conceptsContent =
+  '## What is a Riemann sum?\n\n' +
+  'A **Riemann sum** estimates the area under a curve using simple shapes. Take the interval $[a, b]$, chop it into $n$ equal strips of width $\\Delta x = (b-a)/n$, and on each strip build a shape whose height is taken from the function. Sum the areas.\n\n' +
+  'As $n \\to \\infty$ the sum converges to the exact integral $\\int_a^b f(x)\\,dx$. The four classical rules differ in *where* on each strip the height is sampled.\n\n' +
+  '### The four rules\n\n' +
+  '- **Left** — sample at the left edge of each strip. On an increasing function every rectangle sits *below* the curve, so the sum undershoots. On a decreasing function it overshoots.\n' +
+  '- **Right** — sample at the right edge. The mirror image: overshoots on increasing, undershoots on decreasing.\n' +
+  '- **Midpoint** — sample at the center. The rectangle&apos;s flat top punches *above* the curve on one half of the strip and *below* on the other, so errors mostly cancel.\n' +
+  '- **Trapezoid** — connect the left and right endpoint heights with a straight line. Also has errors that mostly cancel, and tends to err the opposite way of midpoint.\n\n' +
+  '### Convergence order\n\n' +
+  'Not all rules converge equally fast. For smooth functions:\n\n' +
+  '- **Left and right**: error shrinks like $1/n$. Doubling $n$ halves the error.\n' +
+  '- **Midpoint and trapezoid**: error shrinks like $1/n^2$. Doubling $n$ shrinks the error by a factor of four.\n\n' +
+  'So a midpoint sum with $n = 20$ is typically more accurate than a left sum with $n = 200$. The picture on screen shows it directly — push the $n$ slider with each rule selected and watch how fast the error tag shrinks.\n\n' +
+  '### Signed areas\n\n' +
+  'When the curve dips below the x-axis, the strip heights become negative and the corresponding rectangles count as *negative area*. That matches the standard convention: $\\int_a^b f(x)\\,dx$ subtracts area below the axis. If you slide $b$ below $a$, $\\Delta x$ goes negative and the whole sum flips sign — also standard.\n\n' +
+  '### When there is no closed-form integral\n\n' +
+  'Some functions (the Gaussian bump $e^{-x^2/2}$, $\\sin(x)/x$, many others) have no elementary antiderivative. In those cases the "true" value comes from a *very fine* numerical method — here we use a 4000-strip trapezoid. That&apos;s exactly how numerical libraries do real-world integration: pick a high-order rule, crank $n$ up until further refinement stops changing the answer.';
+
 
 /* ================================================================
    COLORS
@@ -496,25 +515,6 @@ export default function FunctionRiemann({
       }.`
     );
   }, [fam, m, method, lo, hi, n, dx, sn, I, err]);
-
-  const conceptsContent =
-    '## What is a Riemann sum?\n\n' +
-    'A **Riemann sum** estimates the area under a curve using simple shapes. Take the interval $[a, b]$, chop it into $n$ equal strips of width $\\Delta x = (b-a)/n$, and on each strip build a shape whose height is taken from the function. Sum the areas.\n\n' +
-    'As $n \\to \\infty$ the sum converges to the exact integral $\\int_a^b f(x)\\,dx$. The four classical rules differ in *where* on each strip the height is sampled.\n\n' +
-    '### The four rules\n\n' +
-    '- **Left** — sample at the left edge of each strip. On an increasing function every rectangle sits *below* the curve, so the sum undershoots. On a decreasing function it overshoots.\n' +
-    '- **Right** — sample at the right edge. The mirror image: overshoots on increasing, undershoots on decreasing.\n' +
-    '- **Midpoint** — sample at the center. The rectangle&apos;s flat top punches *above* the curve on one half of the strip and *below* on the other, so errors mostly cancel.\n' +
-    '- **Trapezoid** — connect the left and right endpoint heights with a straight line. Also has errors that mostly cancel, and tends to err the opposite way of midpoint.\n\n' +
-    '### Convergence order\n\n' +
-    'Not all rules converge equally fast. For smooth functions:\n\n' +
-    '- **Left and right**: error shrinks like $1/n$. Doubling $n$ halves the error.\n' +
-    '- **Midpoint and trapezoid**: error shrinks like $1/n^2$. Doubling $n$ shrinks the error by a factor of four.\n\n' +
-    'So a midpoint sum with $n = 20$ is typically more accurate than a left sum with $n = 200$. The picture on screen shows it directly — push the $n$ slider with each rule selected and watch how fast the error tag shrinks.\n\n' +
-    '### Signed areas\n\n' +
-    'When the curve dips below the x-axis, the strip heights become negative and the corresponding rectangles count as *negative area*. That matches the standard convention: $\\int_a^b f(x)\\,dx$ subtracts area below the axis. If you slide $b$ below $a$, $\\Delta x$ goes negative and the whole sum flips sign — also standard.\n\n' +
-    '### When there is no closed-form integral\n\n' +
-    'Some functions (the Gaussian bump $e^{-x^2/2}$, $\\sin(x)/x$, many others) have no elementary antiderivative. In those cases the "true" value comes from a *very fine* numerical method — here we use a 4000-strip trapezoid. That&apos;s exactly how numerical libraries do real-world integration: pick a high-order rule, crank $n$ up until further refinement stops changing the answer.';
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

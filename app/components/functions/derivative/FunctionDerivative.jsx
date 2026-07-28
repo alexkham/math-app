@@ -49,6 +49,22 @@ import React, { useState, useMemo } from 'react';
 import { VisualizerWithControls } from '../FunctionVisualizerCorePro';
 import InfoPanel from '../InfoPanel';
 
+const conceptsContent =
+  '## What is a derivative?\n\n' +
+  'The **derivative** of $f$ at a point measures the *instantaneous rate of change* — how fast the output changes when the input changes a tiny bit. Geometrically it&apos;s the slope of the line that just barely touches the curve at that point (the **tangent line**).\n\n' +
+  '### Two ways to see it\n\n' +
+  '- **On the graph of f** — pick a point, draw the tangent. The tangent&apos;s slope is the derivative there.\n' +
+  '- **As its own function f&apos;** — plot the derivative value at every $x$. Now the derivative is a curve in its own right; the height of $f\'$ at any $x$ is the slope of $f$ at that same $x$.\n\n' +
+  'This tool shows both at once. Slide $x_0$ and watch them stay in sync.\n\n' +
+  '### What to look for\n\n' +
+  '- **Maxima and minima of $f$** land where $f\'$ *crosses zero*. At the top of a hill on $f$, the tangent is horizontal — slope 0 — so $f\'$ is at 0.\n' +
+  '- **Steep parts of $f$** push $f\'$ far from zero.\n' +
+  '- **Constant or near-constant parts of $f$** (e.g. near an extremum) keep $f\'$ near zero.\n' +
+  '- **Inflection points of $f$** (where the curve changes concavity) sit at maxima and minima *of $f\'$*.\n\n' +
+  'The Jump to bar below the graph lets you snap $x_0$ directly to these special locations.\n\n' +
+  '### Closed forms vs numerics\n\n' +
+  'For the families here the derivative has a clean closed form ($\\frac{d}{dx}[x^2] = 2x$, $\\frac{d}{dx}[\\sin x] = \\cos x$, …). For functions without one, the standard fallback is a central-difference estimate $\\frac{f(x+h) - f(x-h)}{2h}$ — exactly what a calculator does.';
+
 
 /* ================================================================
    COLORS  (all blue variants)
@@ -352,22 +368,6 @@ export default function FunctionDerivative({
       `The light-blue tangent line on $f$ has slope $f'(x_0)$. The deep-blue dot on $f'$ sits at the same height. Two pictures of the same number.`
     );
   }, [fam, x0, f0, fp0, f0Defined, fp0Defined]);
-
-  const conceptsContent =
-    '## What is a derivative?\n\n' +
-    'The **derivative** of $f$ at a point measures the *instantaneous rate of change* — how fast the output changes when the input changes a tiny bit. Geometrically it&apos;s the slope of the line that just barely touches the curve at that point (the **tangent line**).\n\n' +
-    '### Two ways to see it\n\n' +
-    '- **On the graph of f** — pick a point, draw the tangent. The tangent&apos;s slope is the derivative there.\n' +
-    '- **As its own function f&apos;** — plot the derivative value at every $x$. Now the derivative is a curve in its own right; the height of $f\'$ at any $x$ is the slope of $f$ at that same $x$.\n\n' +
-    'This tool shows both at once. Slide $x_0$ and watch them stay in sync.\n\n' +
-    '### What to look for\n\n' +
-    '- **Maxima and minima of $f$** land where $f\'$ *crosses zero*. At the top of a hill on $f$, the tangent is horizontal — slope 0 — so $f\'$ is at 0.\n' +
-    '- **Steep parts of $f$** push $f\'$ far from zero.\n' +
-    '- **Constant or near-constant parts of $f$** (e.g. near an extremum) keep $f\'$ near zero.\n' +
-    '- **Inflection points of $f$** (where the curve changes concavity) sit at maxima and minima *of $f\'$*.\n\n' +
-    'The Jump to bar below the graph lets you snap $x_0$ directly to these special locations.\n\n' +
-    '### Closed forms vs numerics\n\n' +
-    'For the families here the derivative has a clean closed form ($\\frac{d}{dx}[x^2] = 2x$, $\\frac{d}{dx}[\\sin x] = \\cos x$, …). For functions without one, the standard fallback is a central-difference estimate $\\frac{f(x+h) - f(x-h)}{2h}$ — exactly what a calculator does.';
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

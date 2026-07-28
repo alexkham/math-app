@@ -1,5 +1,27 @@
 import { useState, useMemo } from 'react';
 
+// Binomial coefficient: C(n, k)
+const binomialCoefficient = (n, k) => {
+  if (k < 0 || k > n) return 0;
+  if (k === 0 || k === n) return 1;
+
+  // Use symmetry property
+  if (k > n - k) k = n - k;
+
+  let result = 1;
+  for (let i = 1; i <= k; i++) {
+    result *= (n - k + i) / i;
+  }
+  return result;
+};
+
+// Hypergeometric PMF: P(X = x) = C(K,x) * C(N-K, n-x) / C(N, n)
+const hypergeometricPMF = (x, N, K, n) => {
+  const numerator = binomialCoefficient(K, x) * binomialCoefficient(N - K, n - x);
+  const denominator = binomialCoefficient(N, n);
+  return numerator / denominator;
+};
+
 const HypergeometricExpectedValueCalculator = () => {
   const [N, setN] = useState(50);
   const [K, setK] = useState(20);
@@ -51,28 +73,6 @@ const HypergeometricExpectedValueCalculator = () => {
         setNSmall(num);
       }
     }
-  };
-
-  // Binomial coefficient: C(n, k)
-  const binomialCoefficient = (n, k) => {
-    if (k < 0 || k > n) return 0;
-    if (k === 0 || k === n) return 1;
-    
-    // Use symmetry property
-    if (k > n - k) k = n - k;
-    
-    let result = 1;
-    for (let i = 1; i <= k; i++) {
-      result *= (n - k + i) / i;
-    }
-    return result;
-  };
-
-  // Hypergeometric PMF: P(X = x) = C(K,x) * C(N-K, n-x) / C(N, n)
-  const hypergeometricPMF = (x, N, K, n) => {
-    const numerator = binomialCoefficient(K, x) * binomialCoefficient(N - K, n - x);
-    const denominator = binomialCoefficient(N, n);
-    return numerator / denominator;
   };
 
   const calculations = useMemo(() => {

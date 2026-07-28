@@ -1007,6 +1007,10 @@ import { getTheme } from './sectionFrontPageThemes';
 import MindMapHero from './MindMapHero';
 
 const NAVBAR_HEIGHT = 55;
+// Height of the sticky TopicStrip — anchor scrolls must clear it too,
+// or targets land hidden behind the strip. The strip can wrap to two
+// rows on wide sections, hence the generous value.
+const STICKY_STRIP_H = 110;
 const SIDEBAR_COLLAPSED = 68;
 const SIDEBAR_EXPANDED = 290;
 
@@ -1333,7 +1337,7 @@ const SectionNav = ({ sections, currentIndex }) => {
     onMouseEnter: (e) => Object.assign(e.target.style, { borderColor: t.buttonBg, color: t.buttonBgHover, background: t.stripActiveBg }),
     onMouseLeave: (e) => Object.assign(e.target.style, { borderColor: '#e0e0e0', color: t.textSecondary, background: 'none' }),
   };
-  const scrollTo = (id) => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 10, behavior: 'smooth' }); };
+  const scrollTo = (id) => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - STICKY_STRIP_H - 10, behavior: 'smooth' }); };
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', marginTop: 10, borderTop: '1px solid #ebebeb' }}>
       {hasPrev ? <button style={btn} {...hover} onClick={() => scrollTo(sections[currentIndex - 1].id)}>&larr; Prev: {sections[currentIndex - 1].title}</button> : <span />}
@@ -1525,8 +1529,8 @@ const ArticleBlock = ({ article }) => {
    SECTION RENDERERS
    ================================================================ */
 
-const catGroup = { margin: '28px 0 20px', scrollMarginTop: `${NAVBAR_HEIGHT + 20}px` };
-const secStyle = { marginBottom: 48, scrollMarginTop: `${NAVBAR_HEIGHT + 10}px` };
+const catGroup = { margin: '28px 0 20px', scrollMarginTop: `${NAVBAR_HEIGHT + STICKY_STRIP_H + 20}px` };
+const secStyle = { marginBottom: 48, scrollMarginTop: `${NAVBAR_HEIGHT + STICKY_STRIP_H + 10}px` };
 
 const CatSubHeading = ({ children }) => {
   const t = useTheme();
@@ -1589,7 +1593,7 @@ const CalculatorsSection = ({ section, sections, currentIndex, data }) => {
 
 const FormulasSection = ({ section, sections, currentIndex, data, categoryExplanations }) => {
   const { categories, items, totalCount } = data;
-  const scrollCat = (key) => { const el = document.getElementById(`formula-cat-${key}`); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 20, behavior: 'smooth' }); };
+  const scrollCat = (key) => { const el = document.getElementById(`formula-cat-${key}`); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - STICKY_STRIP_H - 20, behavior: 'smooth' }); };
   return (
     <section id={section.id} style={secStyle}>
       <SectionHeader title={section.title} badge={`${totalCount} items`} link={section.link} linkText={`See All ${section.title}`} />
@@ -1621,7 +1625,7 @@ const FormulasSection = ({ section, sections, currentIndex, data, categoryExplan
 
 const DefinitionsSection = ({ section, sections, currentIndex, data, categoryExplanations }) => {
   const { categories, items, totalCount } = data;
-  const scrollCat = (key) => { const el = document.getElementById(`def-cat-${key}`); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 20, behavior: 'smooth' }); };
+  const scrollCat = (key) => { const el = document.getElementById(`def-cat-${key}`); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - STICKY_STRIP_H - 20, behavior: 'smooth' }); };
   return (
     <section id={section.id} style={secStyle}>
       <SectionHeader title={section.title} badge={`${totalCount} items`} link={section.link} linkText={`See All ${section.title}`} />
@@ -1784,7 +1788,7 @@ const Sidebar = ({ sections, subtopics, brandName, brandSub, open, onToggle, sid
     document.addEventListener('click', handler);
     return () => document.removeEventListener('click', handler);
   }, [open, onToggle]);
-  const scrollTo = (id) => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 10, behavior: 'smooth' }); onToggle(false); };
+  const scrollTo = (id) => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - STICKY_STRIP_H - 10, behavior: 'smooth' }); onToggle(false); };
   const heading = { fontSize: 12.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1.2, color: 'rgba(255,255,255,0.3)', padding: '12px 20px 8px' };
 
   return (
@@ -1840,7 +1844,7 @@ const StripLink = ({ id, icon, label, onClick }) => {
 };
 
 const TopicStrip = ({ sections }) => {
-  const scrollTo = (e, id) => { e.preventDefault(); const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 10, behavior: 'smooth' }); };
+  const scrollTo = (e, id) => { e.preventDefault(); const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - STICKY_STRIP_H - 10, behavior: 'smooth' }); };
   return (
     <nav style={{ background: '#fff', borderBottom: '1px solid #e0e0e0', padding: '0 48px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 0, position: 'sticky', top: NAVBAR_HEIGHT, zIndex: 50, boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
       {sections.map((sec) => <StripLink key={sec.id} id={sec.id} icon={sec.navIcon} label={sec.title} onClick={scrollTo} />)}

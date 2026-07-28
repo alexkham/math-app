@@ -4,7 +4,53 @@ import { processContent } from '@/app/utils/contentProcessor';
 import { useState, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
+const uniformPDF = (x, a, b) => {
+  if (x < a || x > b) return 0;
+  return 1 / (b - a);
+};
 
+const normalPDF = (x, mean, stdDev) => {
+  const coefficient = 1 / (stdDev * Math.sqrt(2 * Math.PI));
+  const exponent = -Math.pow(x - mean, 2) / (2 * Math.pow(stdDev, 2));
+  return coefficient * Math.exp(exponent);
+};
+
+const exponentialPDF = (x, lambda) => {
+  if (x < 0) return 0;
+  return lambda * Math.exp(-lambda * x);
+};
+
+const uniformCDF = (x, a, b) => {
+  if (x < a) return 0;
+  if (x > b) return 1;
+  return (x - a) / (b - a);
+};
+
+const normalCDF = (x, mean, stdDev) => {
+  return 0.5 * (1 + erf((x - mean) / (stdDev * Math.sqrt(2))));
+};
+
+const erf = (x) => {
+  const a1 = 0.254829592;
+  const a2 = -0.284496736;
+  const a3 = 1.421413741;
+  const a4 = -1.453152027;
+  const a5 = 1.061405429;
+  const p = 0.3275911;
+
+  const sign = x < 0 ? -1 : 1;
+  x = Math.abs(x);
+
+  const t = 1.0 / (1.0 + p * x);
+  const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+
+  return sign * y;
+};
+
+const exponentialCDF = (x, lambda) => {
+  if (x < 0) return 0;
+  return 1 - Math.exp(-lambda * x);
+};
 
 export default function ContinuousProbabilityDistributions({ explanationsOverride = {} }) {
   const [activeDistribution, setActiveDistribution] = useState('uniform');
@@ -16,54 +62,6 @@ export default function ContinuousProbabilityDistributions({ explanationsOverrid
   const [normalStdDev, setNormalStdDev] = useState(1);
   
   const [exponentialLambda, setExponentialLambda] = useState(1);
-
-  const uniformPDF = (x, a, b) => {
-    if (x < a || x > b) return 0;
-    return 1 / (b - a);
-  };
-
-  const normalPDF = (x, mean, stdDev) => {
-    const coefficient = 1 / (stdDev * Math.sqrt(2 * Math.PI));
-    const exponent = -Math.pow(x - mean, 2) / (2 * Math.pow(stdDev, 2));
-    return coefficient * Math.exp(exponent);
-  };
-
-  const exponentialPDF = (x, lambda) => {
-    if (x < 0) return 0;
-    return lambda * Math.exp(-lambda * x);
-  };
-
-  const uniformCDF = (x, a, b) => {
-    if (x < a) return 0;
-    if (x > b) return 1;
-    return (x - a) / (b - a);
-  };
-
-  const normalCDF = (x, mean, stdDev) => {
-    return 0.5 * (1 + erf((x - mean) / (stdDev * Math.sqrt(2))));
-  };
-
-  const erf = (x) => {
-    const a1 = 0.254829592;
-    const a2 = -0.284496736;
-    const a3 = 1.421413741;
-    const a4 = -1.453152027;
-    const a5 = 1.061405429;
-    const p = 0.3275911;
-    
-    const sign = x < 0 ? -1 : 1;
-    x = Math.abs(x);
-    
-    const t = 1.0 / (1.0 + p * x);
-    const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
-    
-    return sign * y;
-  };
-
-  const exponentialCDF = (x, lambda) => {
-    if (x < 0) return 0;
-    return 1 - Math.exp(-lambda * x);
-  };
 
   const uniformData = useMemo(() => {
     const data = [];

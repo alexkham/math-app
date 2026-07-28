@@ -1256,7 +1256,7 @@ const getSectionCount = (section, sectionData) => {
 };
 
 const getCountLabel = (section, count) => {
-  if (count == null) return null;
+  if (count == null || count === 0) return null;
   const isTool = section.type === 'visual-tools' || section.type === 'calculators';
   const isRef = section.type === 'formulas' || section.type === 'definitions';
   if (isTool) return `${count} ${count === 1 ? 'tool' : 'tools'}`;
@@ -1268,8 +1268,10 @@ const scrollToSection = (id) => {
   if (typeof document === 'undefined') return;
   const el = document.getElementById(id);
   if (!el) return;
+  // 110 clears the sticky TopicStrip below the navbar (matches
+  // STICKY_STRIP_H in SectionFrontPage).
   window.scrollTo({
-    top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 10,
+    top: el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 110 - 10,
     behavior: 'smooth',
   });
 };
@@ -1309,7 +1311,7 @@ const wrapText = (text, maxChars) => {
 
 // Char-width estimates by font size (serif bold). Conservative.
 const charsForWidth = (px, fontSize) => {
-  const perChar = fontSize * 0.52;  // empirical for Source Serif/Georgia bold
+  const perChar = fontSize * 0.6;  // empirical for Source Serif/Georgia bold
   return Math.max(4, Math.floor(px / perChar));
 };
 
@@ -1561,13 +1563,21 @@ const CardCompact = ({ section, x, y, w, palette, sectionData, hoverId, setHover
    HUB
    ================================================================ */
 
+// Shrink the hub title font until it fits the available width, using the
+// same bold-serif width estimate as charsForWidth.
+const fitTitleFont = (title, maxWidth, baseSize) => {
+  const len = String(title || '').length;
+  if (!len) return baseSize;
+  return Math.min(baseSize, maxWidth / (len * 0.6));
+};
+
 const HubRect = ({ x, y, w, h, meta, total, palette }) => (
   <>
     <rect x={x} y={y} width={w} height={h} rx="20" fill={palette.rootBg} />
     <text x={x + w / 2} y={y + 30} textAnchor="middle" fontSize="10" fontWeight="700"
           fill={palette.rootEyebrow} letterSpacing="1.8px"
           fontFamily="-apple-system, 'Segoe UI', system-ui, sans-serif">SECTION</text>
-    <text x={x + w / 2} y={y + 72} textAnchor="middle" fontSize="32" fontWeight="700"
+    <text x={x + w / 2} y={y + 72} textAnchor="middle" fontSize={fitTitleFont(meta?.title, w - 24, 32)} fontWeight="700"
           fill={palette.rootTitle} letterSpacing="-0.01em"
           fontFamily="'Source Serif 4', Georgia, serif">{meta?.title}</text>
     <text x={x + w / 2} y={y + 96} textAnchor="middle" fontSize="11" fontWeight="500"
@@ -1588,7 +1598,7 @@ const HubCircle = ({ cx, cy, r, meta, total, palette }) => (
     <text x={cx} y={cy - 22} textAnchor="middle" fontSize="10" fontWeight="700"
           fill={palette.rootEyebrow} letterSpacing="1.8px"
           fontFamily="-apple-system, 'Segoe UI', system-ui, sans-serif">SECTION</text>
-    <text x={cx} y={cy + 12} textAnchor="middle" fontSize="26" fontWeight="700"
+    <text x={cx} y={cy + 12} textAnchor="middle" fontSize={fitTitleFont(meta?.title, 2 * r - 40, 26)} fontWeight="700"
           fill={palette.rootTitle} letterSpacing="-0.01em"
           fontFamily="'Source Serif 4', Georgia, serif">{meta?.title}</text>
     <text x={cx} y={cy + 30} textAnchor="middle" fontSize="10.5" fontWeight="500"

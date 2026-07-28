@@ -11,6 +11,21 @@ import { tableHeaders } from '@/app/styles/theme'
 
 export async function getStaticProps(){
 
+  // Not rendered on this page — surfaced on the /trigonometry hub via
+  // buildSectionData extraction (first `name:` / `hubDescription:` match wins).
+  const hubMeta = {
+    name: `Trigonometric Identities`,
+    hubDescription: `Trigonometric identities form a rich and interconnected system rooted in geometric definitions and algebraic transformations. At the foundation lie the [reciprocal](!/trigonometry/identities#reciprocal) and quotient identities, such as $\tan(\theta) = \frac{\sin(\theta)}{\cos(\theta)}$, that emerge directly from the unit circle and right-triangle definitions of the trigonometric functions.
+
+Building upon this base are the symmetry-based identities — such as the [even-odd](!/trigonometry/identities#even-odd) and [co-function](!/trigonometry/identities#co-function) properties — which reflect the inherent symmetries of the unit circle. For instance, $\cos(-\theta) = \cos(\theta)$ showcases the evenness of cosine, while $\sin\left(\frac{\pi}{2} - \theta\right) = \cos(\theta)$ exemplifies co-function symmetry.
+
+The [Pythagorean](!/trigonometry/identities#pythagorean) identities, such as $\sin^2(\theta) + \cos^2(\theta) = 1$, are central to the structure. Angle [sum](!/trigonometry/identities#sum) and [difference](!/trigonometry/identities#difference) formulas — like $\sin(a + b) = \sin(a)\cos(b) + \cos(a)\sin(b)$ — enable the construction of [double-angle](!/trigonometry/identities#double), [half-angle](!/trigonometry/identities#half), and [triple-angle](!/trigonometry/identities#triple) identities, such as $\cos(2\theta) = 2\cos^2(\theta) - 1$.
+
+[Product-to-sum](!/trigonometry/identities#product-sum) identities reorganize these angle relationships for simplification, while [sum-to-product](!/trigonometry/identities#sum-product) identities transform sums and differences into products, enabling alternative approaches to complex expressions.
+
+Inverse trigonometric identities like $\sin^{-1}(x) + \cos^{-1}(x) = \frac{\pi}{2}$, along with hyperbolic analogs and the Euler identity $e^{i\theta} = \cos(\theta) + i\sin(\theta)$, extend trigonometry into broader mathematical contexts.`,
+  }
+
   const keyWords=[
     'trigonometric identities','trig identities','trigonometry','verifying trig identities','simplifying trig identities',
     'proving trigonometric identities'

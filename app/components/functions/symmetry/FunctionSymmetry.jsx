@@ -52,6 +52,30 @@ import React, { useState, useMemo } from 'react';
 import { VisualizerWithControls } from '../FunctionVisualizerCorePro';
 import InfoPanel from '../InfoPanel';
 
+const conceptsContent =
+  '## What does symmetry mean for a function?\n\n' +
+  'Two visual symmetries show up over and over:\n\n' +
+  '### Even — mirror across the y-axis\n\n' +
+  'A function is **even** when $f(-x) = f(x)$ for every $x$. Geometrically: fold the plane along the y-axis and the graph lands exactly on itself.\n\n' +
+  'Classic examples: $x^2$, $|x|$, $\\cos(x)$, any polynomial with only even powers.\n\n' +
+  '### Odd — rotation 180° about the origin\n\n' +
+  'A function is **odd** when $f(-x) = -f(x)$. Geometrically: rotate the graph 180° around the origin and it lands on itself. Equivalently, reflect across the y-axis *and* across the x-axis — the two flips cancel out.\n\n' +
+  'Classic examples: $x$, $x^3$, $\\sin(x)$, $1/x$. Note that every odd function defined at $0$ must satisfy $f(0) = -f(0)$, so $f(0) = 0$ — odd graphs pass through the origin.\n\n' +
+  '### Neither\n\n' +
+  'Most functions are neither even nor odd. $e^x$ grows in one direction, $\\sqrt{x}$ doesn\'t even reach negative inputs, $x^2 + x$ has a tilted parabola. The y-axis mirror lands somewhere else, the origin rotation lands somewhere else.\n\n' +
+  '### How the visual proof works\n\n' +
+  'The graph shows three curves:\n\n' +
+  '- $f(x)$ — solid blue\n' +
+  '- $f(-x)$ — dashed amber, the y-axis mirror\n' +
+  '- $-f(-x)$ — dotted teal, the 180° rotation\n\n' +
+  'When two curves coincide you see them as overlapping (dashes punching through the solid line). Even → blue and amber overlap. Odd → blue and teal overlap. Neither → none overlap.\n\n' +
+  'Purple dots mark where $f(x)$ and $f(-x)$ cross. For odd functions these are the zeros of $f$ (since $f(x) = f(-x)$ together with $f(-x) = -f(x)$ forces $f(x) = 0$). For even, the curves coincide everywhere and no dots appear. For neither, the crossings are wherever they happen.\n\n' +
+  '### Why transformations break symmetry\n\n' +
+  'Symmetry is fragile. Take $g(x) = a \\cdot f(b(x - h)) + k$:\n\n' +
+  '- $h \\ne 0$ shifts the input axis — the y-axis mirror is no longer at $x = 0$, breaking even symmetry.\n' +
+  '- $k \\ne 0$ shifts every output — the rotation center moves off the origin, breaking odd symmetry.\n' +
+  '- $a$ and $b$ rescale but don\'t move the axes, so on their own they preserve whatever symmetry the base function had (with the caveat that a negative $a$ flips an odd function to another odd function, and an even to another even).';
+
 
 /* ================================================================
    COLORS
@@ -456,30 +480,6 @@ export default function FunctionSymmetry({
         : `Try moving the sliders to see how shifts break the symmetry.`)
     );
   }, [fam, params, forwardEq, verdict, meta]);
-
-  const conceptsContent =
-    '## What does symmetry mean for a function?\n\n' +
-    'Two visual symmetries show up over and over:\n\n' +
-    '### Even — mirror across the y-axis\n\n' +
-    'A function is **even** when $f(-x) = f(x)$ for every $x$. Geometrically: fold the plane along the y-axis and the graph lands exactly on itself.\n\n' +
-    'Classic examples: $x^2$, $|x|$, $\\cos(x)$, any polynomial with only even powers.\n\n' +
-    '### Odd — rotation 180° about the origin\n\n' +
-    'A function is **odd** when $f(-x) = -f(x)$. Geometrically: rotate the graph 180° around the origin and it lands on itself. Equivalently, reflect across the y-axis *and* across the x-axis — the two flips cancel out.\n\n' +
-    'Classic examples: $x$, $x^3$, $\\sin(x)$, $1/x$. Note that every odd function defined at $0$ must satisfy $f(0) = -f(0)$, so $f(0) = 0$ — odd graphs pass through the origin.\n\n' +
-    '### Neither\n\n' +
-    'Most functions are neither even nor odd. $e^x$ grows in one direction, $\\sqrt{x}$ doesn\'t even reach negative inputs, $x^2 + x$ has a tilted parabola. The y-axis mirror lands somewhere else, the origin rotation lands somewhere else.\n\n' +
-    '### How the visual proof works\n\n' +
-    'The graph shows three curves:\n\n' +
-    '- $f(x)$ — solid blue\n' +
-    '- $f(-x)$ — dashed amber, the y-axis mirror\n' +
-    '- $-f(-x)$ — dotted teal, the 180° rotation\n\n' +
-    'When two curves coincide you see them as overlapping (dashes punching through the solid line). Even → blue and amber overlap. Odd → blue and teal overlap. Neither → none overlap.\n\n' +
-    'Purple dots mark where $f(x)$ and $f(-x)$ cross. For odd functions these are the zeros of $f$ (since $f(x) = f(-x)$ together with $f(-x) = -f(x)$ forces $f(x) = 0$). For even, the curves coincide everywhere and no dots appear. For neither, the crossings are wherever they happen.\n\n' +
-    '### Why transformations break symmetry\n\n' +
-    'Symmetry is fragile. Take $g(x) = a \\cdot f(b(x - h)) + k$:\n\n' +
-    '- $h \\ne 0$ shifts the input axis — the y-axis mirror is no longer at $x = 0$, breaking even symmetry.\n' +
-    '- $k \\ne 0$ shifts every output — the rotation center moves off the origin, breaking odd symmetry.\n' +
-    '- $a$ and $b$ rescale but don\'t move the axes, so on their own they preserve whatever symmetry the base function had (with the caveat that a negative $a$ flips an odd function to another odd function, and an even to another even).';
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

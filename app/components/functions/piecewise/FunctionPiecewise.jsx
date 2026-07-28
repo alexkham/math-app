@@ -38,6 +38,20 @@ import React, { useState, useMemo } from 'react';
 import { VisualizerWithControls } from '../FunctionVisualizerCorePro';
 import InfoPanel from '../InfoPanel';
 
+const conceptsContent =
+  '## What makes a piecewise function well-defined\n\n' +
+  'A piecewise function is a single function defined by gluing together several formulas, each on its own interval. Two things have to hold for it to be a function at all:\n\n' +
+  '1. **No overlaps.** No $x$ can be claimed by two different pieces — otherwise $f(x)$ wouldn&apos;t have a single value there.\n' +
+  '2. **No gaps on the intended domain.** Every $x$ in the function&apos;s domain must be covered by exactly one piece.\n\n' +
+  'Open vs closed endpoints are the bookkeeping. At a boundary $x = k$ between piece A (ending) and piece B (starting), exactly one of them should "own" the point $k$. That&apos;s why one side closes (filled circle) and the other opens (empty circle).\n\n' +
+  '### Continuity at a boundary\n\n' +
+  'Even when the pieces tile cleanly, the function might jump at the seam. At $x = k$:\n\n' +
+  '- If $f(k^-) = f(k^+) = f(k)$: **continuous**. The pieces glue smoothly.\n' +
+  '- If $f(k^-) = f(k^+) \\ne f(k)$: **removable**. The limit exists; only the assigned value is off.\n' +
+  '- If $f(k^-) \\ne f(k^+)$: **jump**. The limit doesn&apos;t exist.\n\n' +
+  '### How this tool builds them\n\n' +
+  'Each piece is a function (from a small catalog) restricted to an interval $[\\text{from}, \\text{to}]$ with open or closed endpoints. The visualizer&apos;s core supports per-function domains natively, including the open/closed endpoint markers — so the picture is technically faithful, not just suggestive.';
+
 
 /* ================================================================
    COLORS  (all blue variants)
@@ -447,20 +461,6 @@ export default function FunctionPiecewise({
       `- Use two pieces that don&apos;t agree at a boundary — jump discontinuity.`
     );
   }, [pieces, verdict]);
-
-  const conceptsContent =
-    '## What makes a piecewise function well-defined\n\n' +
-    'A piecewise function is a single function defined by gluing together several formulas, each on its own interval. Two things have to hold for it to be a function at all:\n\n' +
-    '1. **No overlaps.** No $x$ can be claimed by two different pieces — otherwise $f(x)$ wouldn&apos;t have a single value there.\n' +
-    '2. **No gaps on the intended domain.** Every $x$ in the function&apos;s domain must be covered by exactly one piece.\n\n' +
-    'Open vs closed endpoints are the bookkeeping. At a boundary $x = k$ between piece A (ending) and piece B (starting), exactly one of them should "own" the point $k$. That&apos;s why one side closes (filled circle) and the other opens (empty circle).\n\n' +
-    '### Continuity at a boundary\n\n' +
-    'Even when the pieces tile cleanly, the function might jump at the seam. At $x = k$:\n\n' +
-    '- If $f(k^-) = f(k^+) = f(k)$: **continuous**. The pieces glue smoothly.\n' +
-    '- If $f(k^-) = f(k^+) \\ne f(k)$: **removable**. The limit exists; only the assigned value is off.\n' +
-    '- If $f(k^-) \\ne f(k^+)$: **jump**. The limit doesn&apos;t exist.\n\n' +
-    '### How this tool builds them\n\n' +
-    'Each piece is a function (from a small catalog) restricted to an interval $[\\text{from}, \\text{to}]$ with open or closed endpoints. The visualizer&apos;s core supports per-function domains natively, including the open/closed endpoint markers — so the picture is technically faithful, not just suggestive.';
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

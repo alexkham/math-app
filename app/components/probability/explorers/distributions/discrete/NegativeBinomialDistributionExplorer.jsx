@@ -1,6 +1,22 @@
 import React, { useState, useMemo } from 'react';
 import GenericDistributionExplorer from './GenericDistributionExplorer';
 
+const binomialCoefficient = (n, k) => {
+  if (k < 0 || k > n) return 0;
+  if (k === 0 || k === n) return 1;
+
+  let result = 1;
+  for (let i = 1; i <= k; i++) {
+    result *= (n - i + 1) / i;
+  }
+  return result;
+};
+
+const negativeBinomialPMF = (k, r, p) => {
+  if (k < r) return 0;
+  return binomialCoefficient(k - 1, r - 1) * Math.pow(p, r) * Math.pow(1 - p, k - r);
+};
+
 export default function NegativeBinomialDistributionExplorer({ 
   title = "Negative Binomial Distribution",
   description = "Number of trials until r successes",
@@ -22,22 +38,6 @@ export default function NegativeBinomialDistributionExplorer({
 }) {
   const [r, setR] = useState(initialR);
   const [p, setP] = useState(initialP);
-
-  const binomialCoefficient = (n, k) => {
-    if (k < 0 || k > n) return 0;
-    if (k === 0 || k === n) return 1;
-    
-    let result = 1;
-    for (let i = 1; i <= k; i++) {
-      result *= (n - i + 1) / i;
-    }
-    return result;
-  };
-
-  const negativeBinomialPMF = (k, r, p) => {
-    if (k < r) return 0;
-    return binomialCoefficient(k - 1, r - 1) * Math.pow(p, r) * Math.pow(1 - p, k - r);
-  };
 
   const pmfData = useMemo(() => {
     const result = [];

@@ -3052,6 +3052,21 @@ import React, { useState, useMemo } from 'react';
 import { VisualizerWithControls } from '../FunctionVisualizerCorePro';
 import InfoPanel from '../InfoPanel';
 
+const conceptsContent =
+  '## What is the domain?\n\n' +
+  'The **domain** of a function is the set of inputs where it is defined. Some functions accept every real number (polynomials, sine, cosine, $e^x$). Others come with restrictions baked in:\n\n' +
+  '- $\\ln(x)$ — only defined for $x > 0$\n' +
+  '- $\\sqrt{x}$ — only defined for $x \\geq 0$\n' +
+  '- $1/x$ — defined everywhere except $x = 0$\n\n' +
+  'On the number line below the graph, the colored band shows where the function accepts an input. Drag the test point to probe a specific value — a colored dot means **in domain**, red means **outside**.\n\n' +
+  '### Half-line endpoints: open vs closed\n\n' +
+  'A **closed** endpoint (filled circle) means the boundary value is included. $\\sqrt{x}$ at $x = 0$: yes, $\\sqrt{0} = 0$, so $x = 0$ is in the domain. Closed.\n\n' +
+  'An **open** endpoint (hollow circle) means the boundary is excluded. $\\ln(x)$ at $x = 0$: $\\ln(0)$ is undefined (limit is $-\\infty$), so $x = 0$ is *not* in the domain. Open.\n\n' +
+  '### Excluded points\n\n' +
+  'Some functions are defined everywhere except a single value — like $1/x$ at $x = 0$. The bar is filled everywhere except for an open hole at the excluded point, marked with a small red ×.\n\n' +
+  '### Why a and k don\'t matter\n\n' +
+  'Think about the formula $g(x) = a \\cdot f(b(x - h)) + k$. The input that reaches the inner $f$ is $b(x - h)$ — only $b$ and $h$ appear there. After $f$ produces its output, $a$ and $k$ scale and shift it, but by that point the question "is this input legal?" has already been answered. Multiplying or shifting the *output* can\'t make a forbidden input suddenly legal.';
+
 
 /* ================================================================
    COLORS
@@ -3659,22 +3674,7 @@ export default function FunctionDomain({
       `- $b$ — scales the domain boundary by $1/b$; if $b < 0$, the inequality direction flips\n\n` +
       `**a** and **k** transform the output — they shift and scale what comes *out* of the function, not where it accepts input. Move them and the domain stays put.`
     );
-  }, [fam, params, forwardEq, domainStr]);
-
-  const conceptsContent =
-    '## What is the domain?\n\n' +
-    'The **domain** of a function is the set of inputs where it is defined. Some functions accept every real number (polynomials, sine, cosine, $e^x$). Others come with restrictions baked in:\n\n' +
-    '- $\\ln(x)$ — only defined for $x > 0$\n' +
-    '- $\\sqrt{x}$ — only defined for $x \\geq 0$\n' +
-    '- $1/x$ — defined everywhere except $x = 0$\n\n' +
-    'On the number line below the graph, the colored band shows where the function accepts an input. Drag the test point to probe a specific value — a colored dot means **in domain**, red means **outside**.\n\n' +
-    '### Half-line endpoints: open vs closed\n\n' +
-    'A **closed** endpoint (filled circle) means the boundary value is included. $\\sqrt{x}$ at $x = 0$: yes, $\\sqrt{0} = 0$, so $x = 0$ is in the domain. Closed.\n\n' +
-    'An **open** endpoint (hollow circle) means the boundary is excluded. $\\ln(x)$ at $x = 0$: $\\ln(0)$ is undefined (limit is $-\\infty$), so $x = 0$ is *not* in the domain. Open.\n\n' +
-    '### Excluded points\n\n' +
-    'Some functions are defined everywhere except a single value — like $1/x$ at $x = 0$. The bar is filled everywhere except for an open hole at the excluded point, marked with a small red ×.\n\n' +
-    '### Why a and k don\'t matter\n\n' +
-    'Think about the formula $g(x) = a \\cdot f(b(x - h)) + k$. The input that reaches the inner $f$ is $b(x - h)$ — only $b$ and $h$ appear there. After $f$ produces its output, $a$ and $k$ scale and shift it, but by that point the question "is this input legal?" has already been answered. Multiplying or shifting the *output* can\'t make a forbidden input suddenly legal.';
+  }, [fam, forwardEq, domainStr]);
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

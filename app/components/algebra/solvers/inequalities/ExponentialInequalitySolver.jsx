@@ -2,6 +2,9 @@ import React, { useState, useRef, useCallback, forwardRef, useImperativeHandle }
 import SolutionPanel from '../SolutionPanel';
 import THEME_CSS from '../MathSolverThemes';
 
+const TYPEABLE = new Set('0123456789.xynXYNeE^+-<>≤≥*/()×÷');
+const KEY_MAP = { '*': '×', '/': '÷' };
+
 /* =====================================================
    EXPONENTIAL INEQUALITY SOLVER
    
@@ -845,9 +848,6 @@ export const ExponentialInequalitySolverEngine = forwardRef(({
       if (onResultChange) onResultChange(null);
     }
   }, [expression, onResultChange]);
-
-  const TYPEABLE = new Set('0123456789.xynXYNeE^+-<>≤≥*/()×÷');
-  const KEY_MAP = { '*': '×', '/': '÷' };
 
   const handleKeyDown = useCallback((e) => {
     if (e.ctrlKey || e.metaKey) {

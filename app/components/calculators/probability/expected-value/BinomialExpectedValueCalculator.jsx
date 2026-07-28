@@ -1015,6 +1015,23 @@
 
 import { useState, useMemo } from 'react';
 
+// Binomial coefficient: n! / (k! * (n-k)!)
+const binomialCoefficient = (n, k) => {
+  if (k < 0 || k > n) return 0;
+  if (k === 0 || k === n) return 1;
+
+  let result = 1;
+  for (let i = 1; i <= k; i++) {
+    result *= (n - k + i) / i;
+  }
+  return result;
+};
+
+// Binomial PMF: P(X = k) = C(n,k) * p^k * (1-p)^(n-k)
+const binomialPMF = (n, k, p) => {
+  return binomialCoefficient(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k);
+};
+
 const BinomialExpectedValueCalculator = () => {
   const [n, setN] = useState(10);
   const [p, setP] = useState(0.5);
@@ -1052,23 +1069,6 @@ const BinomialExpectedValueCalculator = () => {
         setP(Math.max(0, Math.min(1, num)));
       }
     }
-  };
-
-  // Binomial coefficient: n! / (k! * (n-k)!)
-  const binomialCoefficient = (n, k) => {
-    if (k < 0 || k > n) return 0;
-    if (k === 0 || k === n) return 1;
-    
-    let result = 1;
-    for (let i = 1; i <= k; i++) {
-      result *= (n - k + i) / i;
-    }
-    return result;
-  };
-
-  // Binomial PMF: P(X = k) = C(n,k) * p^k * (1-p)^(n-k)
-  const binomialPMF = (n, k, p) => {
-    return binomialCoefficient(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k);
   };
 
   const calculations = useMemo(() => {

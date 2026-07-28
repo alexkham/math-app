@@ -2428,6 +2428,21 @@ import React, { useState, useMemo } from 'react';
 import { VisualizerWithControls } from '../FunctionVisualizerCoreImproved';
 import InfoPanel from '../InfoPanel';
 
+const conceptsContent =
+  '## How to read this\n\n' +
+  'The inverse $f^{-1}$ is the **reflection** of $f$ across the line $y = x$. Every point $(a, b)$ on $f$ becomes $(b, a)$ on $f^{-1}$ — input and output swap.\n\n' +
+  '### Horizontal line test\n' +
+  'A function has a single-valued inverse only if no horizontal line meets its graph more than once. If a line hits $f$ twice, two inputs share an output and the inverse would have to map one input to two values — impossible for a function.\n\n' +
+  '### Restricted branches\n' +
+  'Functions that fail the test can still be inverted on a piece where they are strictly monotonic:\n' +
+  '- $x^2$ on $[0, \\infty) \\to \\sqrt{x}$\n' +
+  '- $|x|$ on $[0, \\infty) \\to$ identity\n' +
+  '- $\\sin x$ on $[-\\pi/2, \\pi/2] \\to \\arcsin x$\n' +
+  '- $\\cos x$ on $[0, \\pi] \\to \\arccos x$\n\n' +
+  'When you transform $f$ with parameters, the restriction boundary moves too — the branch follows the transformation.\n\n' +
+  '### Mirror identity\n' +
+  'On the valid domain, $g \\circ g^{-1}$ and $g^{-1} \\circ g$ both collapse to the identity $y = x$. That\'s where the mirror line gets its meaning.';
+
 
 /* ================================================================
    COLORS
@@ -2968,21 +2983,6 @@ export default function FunctionInverse({
     }
     return body;
   }, [params]);
-
-  const conceptsContent =
-    '## How to read this\n\n' +
-    'The inverse $f^{-1}$ is the **reflection** of $f$ across the line $y = x$. Every point $(a, b)$ on $f$ becomes $(b, a)$ on $f^{-1}$ — input and output swap.\n\n' +
-    '### Horizontal line test\n' +
-    'A function has a single-valued inverse only if no horizontal line meets its graph more than once. If a line hits $f$ twice, two inputs share an output and the inverse would have to map one input to two values — impossible for a function.\n\n' +
-    '### Restricted branches\n' +
-    'Functions that fail the test can still be inverted on a piece where they are strictly monotonic:\n' +
-    '- $x^2$ on $[0, \\infty) \\to \\sqrt{x}$\n' +
-    '- $|x|$ on $[0, \\infty) \\to$ identity\n' +
-    '- $\\sin x$ on $[-\\pi/2, \\pi/2] \\to \\arcsin x$\n' +
-    '- $\\cos x$ on $[0, \\pi] \\to \\arccos x$\n\n' +
-    'When you transform $f$ with parameters, the restriction boundary moves too — the branch follows the transformation.\n\n' +
-    '### Mirror identity\n' +
-    'On the valid domain, $g \\circ g^{-1}$ and $g^{-1} \\circ g$ both collapse to the identity $y = x$. That\'s where the mirror line gets its meaning.';
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

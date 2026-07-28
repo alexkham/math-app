@@ -920,7 +920,21 @@ The unit circle reveals structure that [right triangle trigonometry](!/trigonome
         description: "Master the unit circle with exact trigonometric values for all standard angles. Learn reference angles, quadrant sign rules, the Pythagorean identity, and more.",
         keywords: keyWords.join(", "),
         url: "/trigonometry/unit-circle",
-         name: "Unit Circle"
+         name: "Unit Circle",
+        // Surfaced on the /trigonometry hub via buildSectionData extraction.
+        hubDescription: `The **unit circle** is one of the most powerful conceptual tools in trigonometry. It transforms the study of triangles into the study of circular motion, periodic behavior, and coordinate geometry — all within a single unified framework. By fixing a circle of radius 1 at the origin of the coordinate plane, we gain a clean, visual model that defines sine, cosine, and tangent not just for acute angles, but for **all real numbers** and even complex values.
+
+On the interactive [Unit Circle visual tool](!/visual-tools/unit-circle), we explore this model in detail with a visualizer that allows users to trace angles, visualize coordinate projections, and see how trigonometric functions behave dynamically across all four quadrants. The unit circle demystifies why certain angles produce clean values, explains sign changes through quadrants, and shows how right triangle ratios extend naturally into the full coordinate plane.
+
+Key topics include:
+
+* The definition and structure of the unit circle
+* Why the [radius](!/visual-tools/unit-circle#why) is set to 1 (and how that simplifies trigonometric ratios)
+* [Angle](!/visual-tools/unit-circle#angles) measurement systems (degrees vs. radians)
+* The role of [quadrants](!/visual-tools/unit-circle#quadrants) in determining function signs
+* The importance of [special](!/visual-tools/unit-circle#special) angles (like 30°, 45°, and 60°)
+
+More than just a diagram, the unit circle acts as a **conceptual bridge** between geometry, algebra, and analysis. It provides the foundation for defining trigonometric functions analytically, extending them to calculus, complex numbers, and Fourier theory. If you want to truly understand trigonometry — not just memorize formulas — the unit circle is the place to start.`
       },
 
        }

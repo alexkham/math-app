@@ -2,32 +2,32 @@ import { useState, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { processContent } from '@/app/utils/contentProcessor';
 
+const erf = (x) => {
+  const a1 = 0.254829592;
+  const a2 = -0.284496736;
+  const a3 = 1.421413741;
+  const a4 = -1.453152027;
+  const a5 = 1.061405429;
+  const p = 0.3275911;
+
+  const sign = x < 0 ? -1 : 1;
+  x = Math.abs(x);
+
+  const t = 1.0 / (1.0 + p * x);
+  const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+
+  return sign * y;
+};
+
+const normalCDF = (x, mean, stdDev) => {
+  return 0.5 * (1 + erf((x - mean) / (stdDev * Math.sqrt(2))));
+};
+
 export default function NormalDistributionCDF({ explanation }) {
   const [normalMean, setNormalMean] = useState(0);
   const [normalStdDev, setNormalStdDev] = useState(1);
 
   const defaultExplanation = 'The cumulative distribution function (CDF) of the normal distribution is $F(x) = \\frac{1}{2}\\left[1 + \\text{erf}\\left(\\frac{x-\\mu}{\\sigma\\sqrt{2}}\\right)\\right]$, where erf is the error function. The CDF gives the probability $P(X \\leq x)$ that a normally distributed random variable is less than or equal to $x$. The S-shaped curve is symmetric around the mean $\\mu$, where $F(\\mu) = 0.5$. The curve is steepest at the mean and flattens out in the tails. About 68% of values fall within one standard deviation of the mean ($F(\\mu + \\sigma) - F(\\mu - \\sigma) \\approx 0.68$), 95% within two standard deviations, and 99.7% within three standard deviations.';
-
-  const erf = (x) => {
-    const a1 = 0.254829592;
-    const a2 = -0.284496736;
-    const a3 = 1.421413741;
-    const a4 = -1.453152027;
-    const a5 = 1.061405429;
-    const p = 0.3275911;
-    
-    const sign = x < 0 ? -1 : 1;
-    x = Math.abs(x);
-    
-    const t = 1.0 / (1.0 + p * x);
-    const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
-    
-    return sign * y;
-  };
-
-  const normalCDF = (x, mean, stdDev) => {
-    return 0.5 * (1 + erf((x - mean) / (stdDev * Math.sqrt(2))));
-  };
 
   const normalData = useMemo(() => {
     const data = [];

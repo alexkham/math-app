@@ -2,6 +2,9 @@ import React, { useState, useRef, useCallback, forwardRef, useImperativeHandle }
 import SolutionPanel from '../SolutionPanel';
 import THEME_CSS from '../MathSolverThemes';
 
+const TYPEABLE = new Set('0123456789.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-=*/()^×÷²³⁴π');
+const KEY_MAP = { '*': '×', '/': '÷' };
+
 /* =====================================================
    LITERAL EQUATION SOLVER
 
@@ -507,9 +510,6 @@ export const LiteralSolverEngine = forwardRef(({
       if (onResultChange) onResultChange(solveResult);
     } catch (e) { setError(e.message); setResult(null); if (onResultChange) onResultChange(null); }
   }, [expression, targetVar, onResultChange]);
-
-  const TYPEABLE = new Set('0123456789.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-=*/()^\u00D7\u00F7\u00B2\u00B3\u2074\u03C0');
-  const KEY_MAP = { '*': '\u00D7', '/': '\u00F7' };
 
   const handleKeyDown = useCallback((e) => {
     if (e.ctrlKey || e.metaKey) { if (e.key === 'z' || e.key === 'Z') { e.preventDefault(); undo(); } return; }

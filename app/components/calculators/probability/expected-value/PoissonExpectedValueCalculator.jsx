@@ -1,5 +1,20 @@
 import { useState, useMemo } from 'react';
 
+// Factorial calculation
+const factorial = (n) => {
+  if (n === 0 || n === 1) return 1;
+  let result = 1;
+  for (let i = 2; i <= n; i++) {
+    result *= i;
+  }
+  return result;
+};
+
+// Poisson PMF: P(X = k) = (λ^k * e^(-λ)) / k!
+const poissonPMF = (k, lambda) => {
+  return (Math.pow(lambda, k) * Math.exp(-lambda)) / factorial(k);
+};
+
 const PoissonExpectedValueCalculator = () => {
   const [lambda, setLambda] = useState(3);
   const [activeTab, setActiveTab] = useState('visualization');
@@ -25,21 +40,6 @@ const PoissonExpectedValueCalculator = () => {
         setLambda(num);
       }
     }
-  };
-
-  // Factorial calculation
-  const factorial = (n) => {
-    if (n === 0 || n === 1) return 1;
-    let result = 1;
-    for (let i = 2; i <= n; i++) {
-      result *= i;
-    }
-    return result;
-  };
-
-  // Poisson PMF: P(X = k) = (λ^k * e^(-λ)) / k!
-  const poissonPMF = (k, lambda) => {
-    return (Math.pow(lambda, k) * Math.exp(-lambda)) / factorial(k);
   };
 
   const calculations = useMemo(() => {

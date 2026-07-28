@@ -1,5 +1,22 @@
 import { useState, useMemo } from 'react';
 
+// Binomial coefficient: C(n, k)
+const binomialCoefficient = (n, k) => {
+  if (k < 0 || k > n) return 0;
+  if (k === 0 || k === n) return 1;
+
+  let result = 1;
+  for (let i = 1; i <= k; i++) {
+    result *= (n - k + i) / i;
+  }
+  return result;
+};
+
+// Negative Binomial PMF: P(X = k) = C(k+r-1, k) * p^r * (1-p)^k
+const negativeBinomialPMF = (k, r, p) => {
+  return binomialCoefficient(k + r - 1, k) * Math.pow(p, r) * Math.pow(1 - p, k);
+};
+
 const NegativeBinomialExpectedValueCalculator = () => {
   const [r, setR] = useState(3);
   const [p, setP] = useState(0.3);
@@ -37,23 +54,6 @@ const NegativeBinomialExpectedValueCalculator = () => {
         setP(Math.max(0.0001, Math.min(1, num)));
       }
     }
-  };
-
-  // Binomial coefficient: C(n, k)
-  const binomialCoefficient = (n, k) => {
-    if (k < 0 || k > n) return 0;
-    if (k === 0 || k === n) return 1;
-    
-    let result = 1;
-    for (let i = 1; i <= k; i++) {
-      result *= (n - k + i) / i;
-    }
-    return result;
-  };
-
-  // Negative Binomial PMF: P(X = k) = C(k+r-1, k) * p^r * (1-p)^k
-  const negativeBinomialPMF = (k, r, p) => {
-    return binomialCoefficient(k + r - 1, k) * Math.pow(p, r) * Math.pow(1 - p, k);
   };
 
   const calculations = useMemo(() => {

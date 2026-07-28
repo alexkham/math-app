@@ -41,6 +41,26 @@ import React, { useState, useMemo } from 'react';
 import { VisualizerWithControls } from '../FunctionVisualizerCorePro';
 import InfoPanel from '../InfoPanel';
 
+const conceptsContent =
+  '## Optimization with derivatives\n\n' +
+  'The whole machinery of finding maxes and mins of a smooth function rests on two facts:\n\n' +
+  '- At a local extremum, the tangent line is horizontal — so $f\'(x) = 0$.\n' +
+  '- The concavity at that point tells you which kind of extremum.\n\n' +
+  '### The first-derivative test\n\n' +
+  'Find every $c$ where $f\'(c) = 0$ (or where $f\'$ doesn&apos;t exist). For each:\n\n' +
+  '- If $f\'$ changes from positive to negative at $c$: **local max**.\n' +
+  '- If $f\'$ changes from negative to positive: **local min**.\n' +
+  '- If $f\'$ doesn&apos;t change sign: **not an extremum** — usually an inflection with horizontal tangent (like $x^3$ at $0$).\n\n' +
+  '### The second-derivative test\n\n' +
+  'Often faster. At a point $c$ with $f\'(c) = 0$:\n\n' +
+  '- $f\'\'(c) > 0$ — concave up — **local min**.\n' +
+  '- $f\'\'(c) < 0$ — concave down — **local max**.\n' +
+  '- $f\'\'(c) = 0$ — **inconclusive**; fall back to the first-derivative test or check higher derivatives.\n\n' +
+  '### Inflection points\n\n' +
+  'Separate concept: $f\'\'$ changes sign. Concavity flips. The curve switches from cupping-up to cupping-down (or vice versa). An inflection point may or may not be a critical point.\n\n' +
+  '### Why this matters\n\n' +
+  'If you want the largest area enclosed by a fence, the cheapest box that holds a given volume, the fastest path through a medium — set up the quantity as a function and find its critical points. That&apos;s the whole reason Calc 1 spends so much time on this.';
+
 
 /* ================================================================
    COLORS  (all blue variants)
@@ -457,26 +477,6 @@ export default function FunctionOptimization({
       `The solid curve is $f$. The dashed curve is $f'$. At every critical point, $f'$ crosses (or touches) zero. If $f'$ goes from positive to negative there, you&apos;re at a local max of $f$. Touch-and-return (like $x^3$ at 0) means the second-derivative test is inconclusive — use the first-derivative test.`
     );
   }, [fam, aN, bN, cps, validInterval]);
-
-  const conceptsContent =
-    '## Optimization with derivatives\n\n' +
-    'The whole machinery of finding maxes and mins of a smooth function rests on two facts:\n\n' +
-    '- At a local extremum, the tangent line is horizontal — so $f\'(x) = 0$.\n' +
-    '- The concavity at that point tells you which kind of extremum.\n\n' +
-    '### The first-derivative test\n\n' +
-    'Find every $c$ where $f\'(c) = 0$ (or where $f\'$ doesn&apos;t exist). For each:\n\n' +
-    '- If $f\'$ changes from positive to negative at $c$: **local max**.\n' +
-    '- If $f\'$ changes from negative to positive: **local min**.\n' +
-    '- If $f\'$ doesn&apos;t change sign: **not an extremum** — usually an inflection with horizontal tangent (like $x^3$ at $0$).\n\n' +
-    '### The second-derivative test\n\n' +
-    'Often faster. At a point $c$ with $f\'(c) = 0$:\n\n' +
-    '- $f\'\'(c) > 0$ — concave up — **local min**.\n' +
-    '- $f\'\'(c) < 0$ — concave down — **local max**.\n' +
-    '- $f\'\'(c) = 0$ — **inconclusive**; fall back to the first-derivative test or check higher derivatives.\n\n' +
-    '### Inflection points\n\n' +
-    'Separate concept: $f\'\'$ changes sign. Concavity flips. The curve switches from cupping-up to cupping-down (or vice versa). An inflection point may or may not be a critical point.\n\n' +
-    '### Why this matters\n\n' +
-    'If you want the largest area enclosed by a fence, the cheapest box that holds a given volume, the fastest path through a medium — set up the quantity as a function and find its critical points. That&apos;s the whole reason Calc 1 spends so much time on this.';
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },

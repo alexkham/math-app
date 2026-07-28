@@ -2,6 +2,9 @@ import React, { useState, useRef, useCallback, forwardRef, useImperativeHandle }
 import SolutionPanel from '../SolutionPanel';
 import THEME_CSS from '../MathSolverThemes';
 
+const TYPEABLE = new Set('0123456789.xynXYNeE^+-<>≤≥*/()×÷_');
+const KEY_MAP = { '*': '×', '/': '÷' };
+
 /* =====================================================
    LOGARITHMIC INEQUALITY SOLVER
 
@@ -964,9 +967,6 @@ export const LogarithmicInequalitySolverEngine = forwardRef(({
       if (onResultChange) onResultChange(null);
     }
   }, [expression, onResultChange]);
-
-  const TYPEABLE = new Set('0123456789.xynXYNeE^+-<>\u2264\u2265*/()×÷_');
-  const KEY_MAP = { '*': '×', '/': '÷' };
 
   const handleKeyDown = useCallback((e) => {
     if (e.ctrlKey || e.metaKey) {
