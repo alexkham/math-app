@@ -1,5 +1,6 @@
 
 import React, { memo, useCallback, useMemo, useState, useEffect } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
 // Constants
 const FUNCTIONS = ['sin', 'cos', 'tan', 'csc', 'sec', 'cot'];
@@ -357,7 +358,7 @@ const CoordinateInfo = memo(({ quadrant, coordinates, angles }) => {
 });
 CoordinateInfo.displayName = 'CoordinateInfo';
 
-const ExplanationPanel = memo(({ selectedFunction, selectedQuadrant, currentQuadrantData, currentFunctionSign, showExplanation }) => {
+const ExplanationPanel = memo(({ selectedFunction, selectedQuadrant, currentQuadrantData, currentFunctionSign, showExplanation, explanations }) => {
   return (
     <div style={{ 
       border: '1px solid #ddd', 
@@ -395,7 +396,9 @@ const ExplanationPanel = memo(({ selectedFunction, selectedQuadrant, currentQuad
             lineHeight: '1.6'
           }}>
             <strong>Mathematical Reasoning:</strong><br/>
-            {getExplanation(selectedFunction, selectedQuadrant)}
+            {explanations && explanations[selectedFunction] && explanations[selectedFunction][selectedQuadrant]
+              ? processContent(explanations[selectedFunction][selectedQuadrant])
+              : getExplanation(selectedFunction, selectedQuadrant)}
           </div>
         )}
       </div>
@@ -488,7 +491,9 @@ const MemoryAid = memo(() => {
 MemoryAid.displayName = 'MemoryAid';
 
 // Main App Component
-const TrigonometryApp = ({ functions = FUNCTIONS }) => {
+// Legacy getExplanation() output above is kept as fallback only. Canonical
+// explanations live in getStaticProps of the page that renders this component.
+const TrigonometryApp = ({ functions = FUNCTIONS, explanations = null }) => {
   const {
     selectedQuadrant,
     selectedFunction,
@@ -625,6 +630,7 @@ const TrigonometryApp = ({ functions = FUNCTIONS }) => {
               currentQuadrantData={currentQuadrantData}
               currentFunctionSign={currentFunctionSign}
               showExplanation={showExplanation}
+              explanations={explanations}
             />
 
             <FunctionSummary
@@ -644,9 +650,9 @@ const TrigonometryApp = ({ functions = FUNCTIONS }) => {
 TrigonometryApp.displayName = 'TrigonometryApp';
 
 // Export with Error Boundary
-const Quadrants = ({ functions = FUNCTIONS }) => (
+const Quadrants = ({ functions = FUNCTIONS, explanations = null }) => (
   <ErrorBoundary>
-    <TrigonometryApp functions={functions} />
+    <TrigonometryApp functions={functions} explanations={explanations} />
   </ErrorBoundary>
 );
 Quadrants.displayName = 'Quadrants';

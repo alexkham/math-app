@@ -507,6 +507,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import DoubleAngleExplorer from '../../../../app/components/trigonometry/identities/double-angle/DoubleAngleExplorer'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandalone'
+import doubleAngleDiagrams from '../../../../app/components/trigonometry/identities/double-angle/doubleAngleDiagrams'
 
 
 
@@ -548,8 +549,8 @@ export async function getStaticProps(){
       content:`A row of six tabs at the top lets you select which double-angle identity to study: $\\sin(2\\theta)$, $\\cos(2\\theta)$, $\\tan(2\\theta)$, $\\csc(2\\theta)$, $\\sec(2\\theta)$, $\\cot(2\\theta)$.
 
 How selection changes the view:
-• $\\sin$ and $\\cos$ open the **geometric proof** scene with a step-by-step animation.
-• $\\tan$, $\\csc$, $\\sec$, and $\\cot$ open the **derived identity card** with the algebraic chain.
+• $\\sin$ and $\\cos$ open the [geometric proof](!#geometric-proofs-sin2-and-cos2) scene with a step-by-step animation.
+• $\\tan$, $\\csc$, $\\sec$, and $\\cot$ open the [derived identity card](!#derived-identities-tan2-csc2-sec2-cot2) with the algebraic chain.
 • The active tab is highlighted in deep blue.
 • The URL updates with $?fn=...$, so links you copy preserve the selected function.
 
@@ -574,7 +575,7 @@ Slow sweeps near $45°$ are useful for seeing how the relationships behave in th
     },
     obj3:{
       title:`Playing Through a Geometric Proof`,
-      content:`When $\\sin$ or $\\cos$ is active, an animated proof unfolds in six steps. A toolbar gives you control:
+      content:`When $\\sin$ or $\\cos$ is active, an animated proof unfolds in [six steps](!#sine-proof-step-1-setup). A toolbar gives you control:
 
 • **Reset** — return to step 0 with a blank scene.
 • **Prev** / **Next** — step through one stage at a time.
@@ -593,7 +594,7 @@ Each step adds one geometric element (radii, triangle fill, bisector, half-angle
 Elements that appear across the steps:
 • **Red arc** at $O$ — the apex angle, labeled $C = 2\\theta$.
 • **Indigo chord** $AB$ — the base of the isosceles triangle.
-• **Blue segment** $OM$ — the perpendicular bisector, equal to $\\cos\\theta$.
+• **Blue segment** $OM$ — the [perpendicular bisector](!#sine-proof-step-3-bisect), equal to $\\cos\\theta$.
 • **Half-angles** at $O$ — each labeled $\\theta$ once the bisector is drawn.
 • **Half-chord labels** — each labeled $\\sin\\theta$ on segments $MA$ and $MB$.
 
@@ -608,7 +609,7 @@ A small right-angle mark appears at $M$ when the perpendicular bisector becomes 
 
 Layout of the derived card:
 • A short intro explains which earlier identity the current one rests on.
-• **Jump buttons** link directly to the geometric proofs of the source identities.
+• **Jump buttons** link directly to the [geometric proofs](!#geometric-proofs-sin2-and-cos2) of the source identities.
 • A multi-line derivation block shows each manipulation with a brief side note.
 • Verification cards confirm both sides match numerically.
 
@@ -648,11 +649,11 @@ The two numbers always match (within rounding to three decimals). Sweeping the s
       title:`Geometric Proofs: sin(2θ) and cos(2θ)`,
       content:`The two foundational identities are proved by drawing an isosceles triangle with two unit radii.
 
-**sin(2θ) = 2 sin θ cos θ** — area is computed two ways:
+[sin(2θ) = 2 sin θ cos θ](!#the-sine-double-angle-identity) — area is computed two ways:
 $$\\text{area} = \\tfrac{1}{2}\\sin(2\\theta) = \\sin\\theta\\cos\\theta$$
 Multiplying by $2$ gives the identity.
 
-**cos(2θ) = 1 - 2 sin²θ** — the law of cosines gives $|AB|^2 = 2 - 2\\cos(2\\theta)$, while the half-chord computation gives $|AB|^2 = 4\\sin^2\\theta$. Equating the two yields the result.
+[cos(2θ) = 1 - 2 sin²θ](!#the-cosine-double-angle-identity) — the law of cosines gives $|AB|^2 = 2 - 2\\cos(2\\theta)$, while the half-chord computation gives $|AB|^2 = 4\\sin^2\\theta$. Equating the two yields the result.
 
 For full coverage of these proofs and equivalent forms, see the **double angle identities theory page**.`,
       before:``,
@@ -663,16 +664,16 @@ For full coverage of these proofs and equivalent forms, see the **double angle i
       title:`Derived Identities: tan(2θ), csc(2θ), sec(2θ), cot(2θ)`,
       content:`The four remaining identities follow directly from the first two:
 
-**tan(2θ)** — from $\\tan = \\sin / \\cos$:
+[tan(2θ)](!#the-tangent-double-angle-identity) — from $\\tan = \\sin / \\cos$:
 $$\\tan(2\\theta) = \\frac{2\\tan\\theta}{1 - \\tan^2\\theta}$$
 
-**csc(2θ)** — reciprocal of $\\sin(2\\theta)$:
+[csc(2θ)](!#the-cosecant-double-angle-identity) — reciprocal of $\\sin(2\\theta)$:
 $$\\csc(2\\theta) = \\frac{1}{2\\sin\\theta\\cos\\theta}$$
 
-**sec(2θ)** — reciprocal of $\\cos(2\\theta)$:
+[sec(2θ)](!#the-secant-double-angle-identity) — reciprocal of $\\cos(2\\theta)$:
 $$\\sec(2\\theta) = \\frac{1}{1 - 2\\sin^2\\theta}$$
 
-**cot(2θ)** — reciprocal of $\\tan(2\\theta)$:
+[cot(2θ)](!#the-cotangent-double-angle-identity) — reciprocal of $\\tan(2\\theta)$:
 $$\\cot(2\\theta) = \\frac{1 - \\tan^2\\theta}{2\\tan\\theta}$$
 
 For step-by-step derivations of each, see the **trigonometric identities page** and the **reciprocal identities page**.`,
@@ -704,6 +705,233 @@ For applications and worked examples, see the **trigonometric identities applica
 • **Unit Circle** — geometric setup for every identity in this tool.
 • **Trigonometric Functions Graphs** — see how $\\sin$, $\\cos$, $\\tan$ and their reciprocals evolve as $\\theta$ varies.
 • **Triangle Explorer** — interactive triangles with built-in law of sines and law of cosines.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+    obj12:{
+      title:`The Sine Double-Angle Identity`,
+      content:`The identity $\\sin(2\\theta) = 2\\sin\\theta\\cos\\theta$ is proved geometrically in the explorer by computing the area of one isosceles triangle two different ways.
+
+${doubleAngleDiagrams.sin.overview}
+
+The proof runs through six stages: [setup](!#sine-proof-step-1-setup), [area the first way](!#sine-proof-step-2-area-first-way), [bisect](!#sine-proof-step-3-bisect), [read off the legs](!#sine-proof-step-4-read-off-the-legs), [area the second way](!#sine-proof-step-5-area-second-way), and [equate](!#sine-proof-step-6-equate).
+
+This identity is the source of two others in the tool: [cosecant's](!#the-cosecant-double-angle-identity) formula is its reciprocal, and [tangent's](!#the-tangent-double-angle-identity) numerator comes from it.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj13:{
+      title:`The Cosine Double-Angle Identity`,
+      content:`The identity $\\cos(2\\theta) = 1 - 2\\sin^2\\theta$ falls out of measuring the chord $AB$ two ways — once by the law of cosines, once through the half-chords.
+
+${doubleAngleDiagrams.cos.overview}
+
+The proof's six stages: [setup](!#cosine-proof-step-1-setup), [law of cosines](!#cosine-proof-step-2-law-of-cosines-on-triangle-oab), [bisect](!#cosine-proof-step-3-bisect), [read off the half-chord](!#cosine-proof-step-4-read-off-the-half-chord), [square the chord](!#cosine-proof-step-5-square-the-chord), and [equate](!#cosine-proof-step-6-equate).
+
+Substituting $\\sin^2\\theta = 1 - \\cos^2\\theta$ gives the equivalent forms $2\\cos^2\\theta - 1$ and $\\cos^2\\theta - \\sin^2\\theta$. In the tool, [secant's](!#the-secant-double-angle-identity) identity is this one inverted, and [tangent's](!#the-tangent-double-angle-identity) denominator comes from it.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj14:{
+      title:`The Tangent Double-Angle Identity`,
+      content:`Tangent needs no new geometry: it is sine over cosine, so its double-angle formula follows algebraically from the two proved identities.
+
+${doubleAngleDiagrams.tan}
+
+$$\\tan(2\\theta) = \\frac{\\sin(2\\theta)}{\\cos(2\\theta)} = \\frac{2\\sin\\theta\\cos\\theta}{\\cos^2\\theta - \\sin^2\\theta} = \\frac{2\\tan\\theta}{1 - \\tan^2\\theta}$$
+
+The last step divides numerator and denominator by $\\cos^2\\theta$ — the move that turns a sine-and-cosine expression into a pure tangent one. The formula fails where $\\tan\\theta = \\pm 1$ ($\\theta = 45°$), exactly where $2\\theta = 90°$ makes $\\tan(2\\theta)$ undefined. Its own reciprocal gives [cotangent's](!#the-cotangent-double-angle-identity) formula; its ingredients come from [sine](!#the-sine-double-angle-identity) and [cosine](!#the-cosine-double-angle-identity).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj15:{
+      title:`The Cosecant Double-Angle Identity`,
+      content:`Cosecant is the reciprocal of sine, so its double-angle formula is one substitution away from the geometric result.
+
+${doubleAngleDiagrams.csc}
+
+$$\\csc(2\\theta) = \\frac{1}{\\sin(2\\theta)} = \\frac{1}{2\\sin\\theta\\cos\\theta}$$
+
+The formula is undefined wherever $\\sin(2\\theta) = 0$ — within the tool's $10°$–$80°$ slider range that never happens, so the verification cards always agree. The source identity is [sine's](!#the-sine-double-angle-identity), reachable from the card's jump button.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj16:{
+      title:`The Secant Double-Angle Identity`,
+      content:`Secant inverts cosine, so the double-angle version inverts the cosine identity.
+
+${doubleAngleDiagrams.sec}
+
+$$\\sec(2\\theta) = \\frac{1}{\\cos(2\\theta)} = \\frac{1}{1 - 2\\sin^2\\theta}$$
+
+It diverges where $\\cos(2\\theta) = 0$, i.e. at $\\theta = 45°$ — sweep the slider there and watch both verification cards blow up together, which is itself a check that the two sides agree. The source identity is [cosine's](!#the-cosine-double-angle-identity).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj17:{
+      title:`The Cotangent Double-Angle Identity`,
+      content:`Cotangent is the reciprocal of tangent, so its formula is the tangent identity flipped upside down.
+
+${doubleAngleDiagrams.cot}
+
+$$\\cot(2\\theta) = \\frac{1}{\\tan(2\\theta)} = \\frac{1 - \\tan^2\\theta}{2\\tan\\theta}$$
+
+Flipping exchanges the roles of the zeros and the poles: cotangent diverges where [tangent](!#the-tangent-double-angle-identity) is zero and vanishes where tangent diverges. Because tangent itself was derived, cotangent sits two steps from the geometry — resting ultimately on [sine](!#the-sine-double-angle-identity) and [cosine](!#the-cosine-double-angle-identity).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj18:{
+      title:`Sine Proof, Step 1: Setup`,
+      content:`The [sine proof](!#the-sine-double-angle-identity) opens with two radii $OA$ and $OB$ of length $1$ meeting at the center $O$ with angle $2\\theta$ between them. Together with the chord $AB$ they form an isosceles triangle.
+
+${doubleAngleDiagrams.sin.steps[0]}
+
+Everything the proof needs is already in this picture: a triangle whose apex angle is the double angle we want, built from sides whose length we know exactly.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj19:{
+      title:`Sine Proof, Step 2: Area, First Way`,
+      content:`The triangle's area comes from the standard formula: half the product of two sides times the sine of the included angle. With $OA = OB = 1$ meeting at $2\\theta$:
+
+${doubleAngleDiagrams.sin.steps[1]}
+
+$$\\text{area} = \\tfrac{1}{2} \\cdot 1 \\cdot 1 \\cdot \\sin(2\\theta) = \\tfrac{1}{2}\\sin(2\\theta)$$
+
+This is the left-hand side of the identity in disguise — one honest measurement of the shaded region.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj20:{
+      title:`Sine Proof, Step 3: Bisect`,
+      content:`Drop $OM$ perpendicular to the chord $AB$. Because the triangle is isosceles, $OM$ bisects the apex: two half-angles of $\\theta$ at $O$, and two congruent right triangles.
+
+${doubleAngleDiagrams.sin.steps[2]}
+
+The small square at $M$ marks the right angle — the key that unlocks the next step, since right triangles are where $\\sin\\theta$ and $\\cos\\theta$ live as plain side lengths.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj21:{
+      title:`Sine Proof, Step 4: Read Off the Legs`,
+      content:`In right triangle $OMA$ the hypotenuse is $OA = 1$ and the angle at $O$ is $\\theta$. Its legs are therefore exactly the basic ratios:
+
+${doubleAngleDiagrams.sin.steps[3]}
+
+$$MA = \\sin\\theta \\qquad OM = \\cos\\theta$$
+
+No approximation, no extra construction — with a unit hypotenuse, opposite and adjacent legs ARE sine and cosine.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj22:{
+      title:`Sine Proof, Step 5: Area, Second Way`,
+      content:`Each right triangle has legs $\\sin\\theta$ and $\\cos\\theta$, so each has area $\\tfrac{1}{2}\\sin\\theta\\cos\\theta$. The two congruent halves together give:
+
+${doubleAngleDiagrams.sin.steps[4]}
+
+$$\\text{area} = 2 \\cdot \\tfrac{1}{2}\\sin\\theta\\cos\\theta = \\sin\\theta\\cos\\theta$$
+
+The same shaded region as [step 2](!#sine-proof-step-2-area-first-way), measured a second, independent way.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj23:{
+      title:`Sine Proof, Step 6: Equate`,
+      content:`Two measurements of one area must agree:
+
+${doubleAngleDiagrams.sin.steps[5]}
+
+$$\\tfrac{1}{2}\\sin(2\\theta) = \\sin\\theta\\cos\\theta \\;\\;\\Longrightarrow\\;\\; \\sin(2\\theta) = 2\\sin\\theta\\cos\\theta$$
+
+The verification cards below the scene confirm it numerically at every slider position — both sides always match to three decimals.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj24:{
+      title:`Cosine Proof, Step 1: Setup`,
+      content:`The [cosine proof](!#the-cosine-double-angle-identity) starts from the same figure as sine's: radii $OA$ and $OB$ of length $1$ with apex angle $2\\theta$ at the center.
+
+${doubleAngleDiagrams.cos.steps[0]}
+
+This time the target of the measurement will not be the triangle's area but the length of the chord $AB$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj25:{
+      title:`Cosine Proof, Step 2: Law of Cosines on Triangle OAB`,
+      content:`Apply the law of cosines to the triangle, with the apex angle $2\\theta$ between the two unit sides:
+
+${doubleAngleDiagrams.cos.steps[1]}
+
+$$|AB|^2 = 1^2 + 1^2 - 2 \\cdot 1 \\cdot 1 \\cdot \\cos(2\\theta) = 2 - 2\\cos(2\\theta)$$
+
+The chord's squared length now contains $\\cos(2\\theta)$ — the quantity the proof is hunting.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj26:{
+      title:`Cosine Proof, Step 3: Bisect`,
+      content:`Drop the perpendicular bisector $OM$: it lands on the midpoint $M$ of the chord and splits the apex into two half-angles of $\\theta$.
+
+${doubleAngleDiagrams.cos.steps[2]}
+
+Same construction as in the [sine proof](!#sine-proof-step-3-bisect), used here for a different purpose — to measure the chord instead of the area.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj27:{
+      title:`Cosine Proof, Step 4: Read Off the Half-Chord`,
+      content:`Right triangle $OMA$ has hypotenuse $1$ and angle $\\theta$ at $O$, so the half-chord is $MA = \\sin\\theta$ — and the full chord is twice that:
+
+${doubleAngleDiagrams.cos.steps[3]}
+
+$$AB = 2\\sin\\theta$$
+
+A second, completely independent expression for the same chord the law of cosines measured.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj28:{
+      title:`Cosine Proof, Step 5: Square the Chord`,
+      content:`Square the half-chord result to match the form of step 2:
+
+${doubleAngleDiagrams.cos.steps[4]}
+
+$$|AB|^2 = (2\\sin\\theta)^2 = 4\\sin^2\\theta$$
+
+Both routes now express $|AB|^2$ — one through $\\cos(2\\theta)$, one through $\\sin^2\\theta$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj29:{
+      title:`Cosine Proof, Step 6: Equate`,
+      content:`Set the two expressions for $|AB|^2$ equal and solve:
+
+${doubleAngleDiagrams.cos.steps[5]}
+
+$$2 - 2\\cos(2\\theta) = 4\\sin^2\\theta \\;\\;\\Longrightarrow\\;\\; \\cos(2\\theta) = 1 - 2\\sin^2\\theta$$
+
+As with sine, the verification cards keep both sides in numerical agreement across the whole slider range.`,
       before:``,
       after:``,
       link:'',
@@ -828,12 +1056,37 @@ For applications and worked examples, see the **trigonometric identities applica
 
 
 
+  const explanations = {
+    sin: { steps: [
+      `Two radii OA and OB of length 1, meeting at center O with angle 2θ between them. With chord AB they form an isosceles triangle. [Full treatment](!#sine-proof-step-1-setup) · [The sine identity](!#the-sine-double-angle-identity)`,
+      `Area = ½ · side · side · sin(included angle). With OA = OB = 1 meeting at 2θ: area = ½ sin(2θ). [Full treatment](!#sine-proof-step-2-area-first-way) · [The sine identity](!#the-sine-double-angle-identity)`,
+      `Drop OM perpendicular to AB. It splits 2θ into two halves of θ and the triangle into two congruent right triangles. [Full treatment](!#sine-proof-step-3-bisect) · [The sine identity](!#the-sine-double-angle-identity)`,
+      `In right triangle OMA: hypotenuse OA = 1, angle at O is θ. So MA = sin θ and OM = cos θ. [Full treatment](!#sine-proof-step-4-read-off-the-legs) · [The sine identity](!#the-sine-double-angle-identity)`,
+      `Each right triangle has area ½ · sin θ · cos θ. Two of them sum to sin θ · cos θ. [Full treatment](!#sine-proof-step-5-area-second-way) · [The sine identity](!#the-sine-double-angle-identity)`,
+      `½ sin(2θ) = sin θ · cos θ, so sin(2θ) = 2 sin θ · cos θ. [Full treatment](!#sine-proof-step-6-equate) · [The sine identity](!#the-sine-double-angle-identity)`,
+    ] },
+    cos: { steps: [
+      `Two radii OA and OB of length 1, meeting at center O with angle 2θ between them. [Full treatment](!#cosine-proof-step-1-setup) · [The cosine identity](!#the-cosine-double-angle-identity)`,
+      `|AB|² = 1 + 1 − 2cos(2θ) = 2 − 2cos(2θ). [Full treatment](!#cosine-proof-step-2-law-of-cosines-on-triangle-oab) · [The cosine identity](!#the-cosine-double-angle-identity)`,
+      `Drop OM perpendicular to AB. M is the midpoint of AB. [Full treatment](!#cosine-proof-step-3-bisect) · [The cosine identity](!#the-cosine-double-angle-identity)`,
+      `In right triangle OMA: hypotenuse = 1, angle at O = θ. So MA = sin θ and AB = 2 sin θ. [Full treatment](!#cosine-proof-step-4-read-off-the-half-chord) · [The cosine identity](!#the-cosine-double-angle-identity)`,
+      `|AB|² = (2 sin θ)² = 4 sin²θ. [Full treatment](!#cosine-proof-step-5-square-the-chord) · [The cosine identity](!#the-cosine-double-angle-identity)`,
+      `2 − 2cos(2θ) = 4 sin²θ  ⟹  cos(2θ) = 1 − 2 sin²θ. [Full treatment](!#cosine-proof-step-6-equate) · [The cosine identity](!#the-cosine-double-angle-identity)`,
+    ] },
+    tan: { content: `Tangent is sine over cosine. So once we have sin(2θ) and cos(2θ), tan(2θ) follows directly. [Full treatment](!#the-tangent-double-angle-identity)` },
+    csc: { content: `Cosecant is the reciprocal of sine. So csc(2θ) = 1 / sin(2θ). [Full treatment](!#the-cosecant-double-angle-identity)` },
+    sec: { content: `Secant is the reciprocal of cosine. So sec(2θ) = 1 / cos(2θ). [Full treatment](!#the-secant-double-angle-identity)` },
+    cot: { content: `Cotangent is the reciprocal of tangent. So cot(2θ) = 1 / tan(2θ). [Full treatment](!#the-cotangent-double-angle-identity)` },
+  };
+
+
    return {
       props:{
          sectionsContent,
          introContent,
          faqQuestions,
          schemas,
+         explanations,
           seoData: {
         title: "Double Angle Identities: Interactive Proofs | Learn Math Class",
         description: "Explore all six double-angle identities: sin, cos, tan, csc, sec, cot. Animated geometric proofs, algebraic derivations, and live numeric verification.",
@@ -848,7 +1101,7 @@ For applications and worked examples, see the **trigonometric identities applica
     }
    }
 
-export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations}) {
 
 
   const genericSections=[
@@ -861,7 +1114,7 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
     //     ]
     // },
     {
-        id:'1',
+        id:'switching-between-functions',
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
@@ -869,7 +1122,7 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'2',
+        id:'adjusting-the-angle',
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
@@ -877,7 +1130,7 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'3',
+        id:'playing-through-a-geometric-proof',
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
@@ -885,7 +1138,7 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'4',
+        id:'reading-the-geometric-scene',
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
@@ -893,7 +1146,7 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'5',
+        id:'working-with-derived-identities',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
@@ -901,7 +1154,7 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'6',
+        id:'reading-the-formula-table',
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
@@ -909,7 +1162,7 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'7',
+        id:'verifying-identities-numerically',
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
@@ -917,7 +1170,7 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'8',
+        id:'geometric-proofs-sin2-and-cos2',
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
@@ -925,7 +1178,7 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'9',
+        id:'derived-identities-tan2-csc2-sec2-cot2',
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
         content:[
@@ -933,7 +1186,7 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'10',
+        id:'why-double-angle-identities-matter',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
         content:[
@@ -941,11 +1194,155 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         ]
     },
     {
-        id:'11',
+        id:'related-concepts-and-tools',
         title:sectionsContent.obj11.title,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+        ]
+    },
+    {
+        id:'the-sine-double-angle-identity',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+        ]
+    },
+    {
+        id:'the-cosine-double-angle-identity',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
+        ]
+    },
+    {
+        id:'the-tangent-double-angle-identity',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+        ]
+    },
+    {
+        id:'the-cosecant-double-angle-identity',
+        title:sectionsContent.obj15.title,
+        link:sectionsContent.obj15.link,
+        content:[
+          sectionsContent.obj15.content,
+        ]
+    },
+    {
+        id:'the-secant-double-angle-identity',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
+        ]
+    },
+    {
+        id:'the-cotangent-double-angle-identity',
+        title:sectionsContent.obj17.title,
+        link:sectionsContent.obj17.link,
+        content:[
+          sectionsContent.obj17.content,
+        ]
+    },
+    {
+        id:'sine-proof-step-1-setup',
+        title:sectionsContent.obj18.title,
+        link:sectionsContent.obj18.link,
+        content:[
+          sectionsContent.obj18.content,
+        ]
+    },
+    {
+        id:'sine-proof-step-2-area-first-way',
+        title:sectionsContent.obj19.title,
+        link:sectionsContent.obj19.link,
+        content:[
+          sectionsContent.obj19.content,
+        ]
+    },
+    {
+        id:'sine-proof-step-3-bisect',
+        title:sectionsContent.obj20.title,
+        link:sectionsContent.obj20.link,
+        content:[
+          sectionsContent.obj20.content,
+        ]
+    },
+    {
+        id:'sine-proof-step-4-read-off-the-legs',
+        title:sectionsContent.obj21.title,
+        link:sectionsContent.obj21.link,
+        content:[
+          sectionsContent.obj21.content,
+        ]
+    },
+    {
+        id:'sine-proof-step-5-area-second-way',
+        title:sectionsContent.obj22.title,
+        link:sectionsContent.obj22.link,
+        content:[
+          sectionsContent.obj22.content,
+        ]
+    },
+    {
+        id:'sine-proof-step-6-equate',
+        title:sectionsContent.obj23.title,
+        link:sectionsContent.obj23.link,
+        content:[
+          sectionsContent.obj23.content,
+        ]
+    },
+    {
+        id:'cosine-proof-step-1-setup',
+        title:sectionsContent.obj24.title,
+        link:sectionsContent.obj24.link,
+        content:[
+          sectionsContent.obj24.content,
+        ]
+    },
+    {
+        id:'cosine-proof-step-2-law-of-cosines-on-triangle-oab',
+        title:sectionsContent.obj25.title,
+        link:sectionsContent.obj25.link,
+        content:[
+          sectionsContent.obj25.content,
+        ]
+    },
+    {
+        id:'cosine-proof-step-3-bisect',
+        title:sectionsContent.obj26.title,
+        link:sectionsContent.obj26.link,
+        content:[
+          sectionsContent.obj26.content,
+        ]
+    },
+    {
+        id:'cosine-proof-step-4-read-off-the-half-chord',
+        title:sectionsContent.obj27.title,
+        link:sectionsContent.obj27.link,
+        content:[
+          sectionsContent.obj27.content,
+        ]
+    },
+    {
+        id:'cosine-proof-step-5-square-the-chord',
+        title:sectionsContent.obj28.title,
+        link:sectionsContent.obj28.link,
+        content:[
+          sectionsContent.obj28.content,
+        ]
+    },
+    {
+        id:'cosine-proof-step-6-equate',
+        title:sectionsContent.obj29.title,
+        link:sectionsContent.obj29.link,
+        content:[
+          sectionsContent.obj29.content,
         ]
     },
 
@@ -1029,7 +1426,7 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
   activeColor="#4F46E5"
   activeBg="#eef2ff"
   />
-  <DoubleAngleExplorer/>
+  <DoubleAngleExplorer explanations={explanations}/>
 </div>
    {/* <SiblingsNavStandalone
       bg="#fafaf7"

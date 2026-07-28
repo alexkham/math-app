@@ -1,70 +1,148 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+
+// tables-optimized: v4 | 2026-05-22 | 2 tables (obj3 aggregation, obj7 summary capstone)
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "vector magnitude",
-//   "magnitude of a vector",
-//   "vector norm",
-//   "Euclidean norm",
-//   "vector length formula",
-//   "unit vector",
-//   "normalize vector",
-//   "distance between vectors",
-//   "magnitude formula",
-//   "vector normalization",
-//   "triangle inequality vectors",
-//   "L2 norm",
-//   "vector distance formula",
-//   "standard basis vectors"
-// ]
-//   // •
+export async function getStaticProps(){
+const keyWords = [
+  "vector magnitude",
+  "magnitude of a vector",
+  "vector norm",
+  "Euclidean norm",
+  "vector length formula",
+  "unit vector",
+  "normalize vector",
+  "distance between vectors",
+  "magnitude formula",
+  "vector normalization",
+  "triangle inequality vectors",
+  "L2 norm",
+  "vector distance formula",
+  "standard basis vectors"
+]
+  // •
 
-// //   \u2022 First item
-// // \u2022 Second item
+//   \u2022 First item
+// \u2022 Second item
 
   
-// // <hr style="border-width:1px;"></hr>
+// <hr style="border-width:1px;"></hr>
 
-// // <hr style="color:blue;" />
+// <hr style="color:blue;" />
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// <hr style="border-color:#3498db; border-width:1px;" />
 
 
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
  
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
+// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.notation)}
+        // </div>,
 
 
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
+//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+//     {processContent(sectionsContent.normal.parameters)}
+// </div>,
         
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
+//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+//                   {processContent(sectionsContent.obj4.content)}
+//                   </div>,
 
 
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+//  <div key={'dist'} style={{
+//                     textAlign: 'center',
+//                     transform: 'scale(0.98)',
+//                     transformOrigin: 'center',
+//                     marginTop:'50px',
+//                     marginLeft:'-150px'
+//                   }} dangerouslySetInnerHTML={{ 
+//                     __html:   sectionContent.distributions.svg,
+//                   }} />
+
+const linkStyle = 'color: inherit; text-decoration: underline;'
+
+// ---------- TABLES ----------
+
+// obj3 — aggregation: the three structural properties of the Euclidean norm
+const obj3Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Property</th>
+      <th style="${tableHeaders.aggregation}">Formal statement</th>
+      <th style="${tableHeaders.aggregation}">What it means geometrically</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Non-negativity</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">‖<b>v</b>‖ ≥ 0, with equality if and only if <b>v</b> = <b>0</b></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">length is never negative; only the zero vector has zero length</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Scaling</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">‖c<b>v</b>‖ = |c|&middot;‖<b>v</b>‖</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">scalar multiplication by c multiplies length by |c|; direction is preserved when c &gt; 0 and reversed when c &lt; 0</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Triangle inequality</td>
+      <td style="padding: 12px 15px; color: #34495e;">‖<b>a</b> + <b>b</b>‖ ≤ ‖<b>a</b>‖ + ‖<b>b</b>‖</td>
+      <td style="padding: 12px 15px; color: #34495e;">the direct path from start to finish is never longer than the tip-to-tail path; equality only when <b>a</b> and <b>b</b> point the same way</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// obj7 — summary capstone: the four norm-derived concepts and how each builds on ‖v‖
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Concept</th>
+      <th style="${tableHeaders.summary}">Definition</th>
+      <th style="${tableHeaders.summary}">Formula</th>
+      <th style="${tableHeaders.summary}">Built from the norm by</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Norm ‖<b>v</b>‖</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">length of <b>v</b></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√(v₁² + v₂² + ⋯ + vₙ²)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(the base concept &mdash; everything below is derived from this)</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Distance d(<b>a</b>, <b>b</b>)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">straight-line distance between two vectors viewed as points</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">‖<b>a</b> − <b>b</b>‖ = √(Σ(aᵢ − bᵢ)²)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">applying the norm to the difference <b>a</b> − <b>b</b></td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Unit vector <b>û</b></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a vector that carries pure direction with no scale</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">‖<b>û</b>‖ = 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requiring the norm to equal exactly 1</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Normalization</td>
+      <td style="padding: 12px 15px; color: #34495e;">turn any nonzero vector into the unit vector pointing the same way</td>
+      <td style="padding: 12px 15px; color: #34495e;"><b>v̂</b> = <b>v</b> / ‖<b>v</b>‖</td>
+      <td style="padding: 12px 15px; color: #34495e;">dividing <b>v</b> by its own norm (undefined for <b>v</b> = <b>0</b>)</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 //   const sectionsContent = {
 //   obj1: {
@@ -175,534 +253,20 @@
 //     after: ``,
 //     link: '',
 //   },
+//   obj7: {
+//     title: `Summary: Norm and the Concepts Built from It`,
+//     content: `The norm is the foundation of three related concepts this page has developed: distance (the norm of a difference), unit vector (a vector with norm exactly 1), and normalization (rescaling any nonzero vector to unit length). The table below collects each alongside its definition, formula, and direct relationship to the norm ‖<b>v</b>‖ &mdash; showing the family tree of ideas that grow out of a single length measurement.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
 // };
-
-// const introContent = {
-//      id: `intro`,
-//   title: `Measuring Length and Extracting Direction`,
-//   content: `Every nonzero vector carries two pieces of information: how long it is and which way it points. The norm isolates the first piece — it assigns a single non-negative number to each vector, measuring its length in a way that is consistent across any dimension. Once the norm is defined, distance between vectors follows immediately, and normalization provides a way to strip away length entirely, leaving behind a unit vector that encodes pure direction. The concepts on this page underpin nearly everything that follows in the section, from the angle formula in the [dot product](!/linear-algebra/vectors/dot-product) to the area interpretation of the [cross product](!/linear-algebra/vectors/cross-product).`,
-// };
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "How do you find the magnitude of a vector in 2D and 3D?",
-//     answer: "In ℝ²: ‖v‖ = √(v₁² + v₂²). In ℝ³: ‖v‖ = √(v₁² + v₂² + v₃²). Both come from the Pythagorean theorem—the magnitude is the straight-line distance from the tail to the tip of the vector.",
-//     sectionId: "1"
-//   },
-//   obj2: {
-//     question: "What is the Euclidean norm formula?",
-//     answer: "For v = (v₁, v₂, ..., vₙ) in ℝⁿ: ‖v‖ = √(v₁² + v₂² + ... + vₙ²). This is the Euclidean or ℓ² norm. The double-bar notation ‖v‖ distinguishes it from absolute value |x| used for scalars.",
-//     sectionId: "2"
-//   },
-//   obj3: {
-//     question: "What are the properties of the vector norm?",
-//     answer: "Non-negativity: ‖v‖ ≥ 0 with equality iff v = 0. Scaling: ‖cv‖ = |c|‖v‖. Triangle inequality: ‖a + b‖ ≤ ‖a‖ + ‖b‖. These properties make the norm a reliable measure of vector size.",
-//     sectionId: "3"
-//   },
-//   obj4: {
-//     question: "How do you find the distance between two vectors?",
-//     answer: "d(a, b) = ‖a - b‖ = √((a₁-b₁)² + (a₂-b₂)² + ... + (aₙ-bₙ)²). This is the Euclidean distance—the straight-line distance between the endpoints when vectors represent positions.",
-//     sectionId: "4"
-//   },
-//   obj5: {
-//     question: "What is a unit vector?",
-//     answer: "A unit vector has magnitude exactly 1: ‖û‖ = 1. It carries direction without scale. The standard basis vectors e₁, e₂, e₃ are unit vectors along coordinate axes. All unit vectors in ℝ² form the unit circle; in ℝ³, the unit sphere.",
-//     sectionId: "5"
-//   },
-//   obj6: {
-//     question: "How do you normalize a vector?",
-//     answer: "Divide by its magnitude: v̂ = v/‖v‖. This scales every component by 1/‖v‖, producing a unit vector pointing in the same direction. The zero vector cannot be normalized since ‖0‖ = 0 and division by zero is undefined.",
-//     sectionId: "6"
-//   }
-// }
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Magnitude of a Vector",
-//     "description": "Learn vector magnitude: Euclidean norm formula, properties (scaling, triangle inequality), distance between vectors, unit vectors, and normalization with examples.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/vectors/magnitude",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Vector Magnitude"
-//     },
-//     "teaches": [
-//       "Magnitude formula in 2D and 3D",
-//       "Euclidean norm in ℝⁿ",
-//       "Norm properties and triangle inequality",
-//       "Distance between vectors",
-//       "Unit vectors and standard basis",
-//       "Vector normalization"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Vectors",
-//         "item": "https://www.learnmathclass.com/linear-algebra/vectors"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Magnitude of a Vector",
-//         "item": "https://www.learnmathclass.com/linear-algebra/vectors/magnitude"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-//    return {
-//   props: {
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Vector Magnitude: Norm, Distance & Unit Vectors | Learn Math Class",
-//       description: "Learn vector magnitude: Euclidean norm formula, properties (scaling, triangle inequality), distance between vectors, unit vectors, and normalization with examples.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/vectors/magnitude",
-//       name: "Magnitude of a Vector"
-//     },
-//   }
-// }
-//    }
-// export default function VectorMagnitudePage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     // {
-//     //     id:'7',
-//     //     title:sectionsContent.obj7.title,
-//     //     link:sectionsContent.obj7.link,
-//     //     content:[
-//     //       sectionsContent.obj7.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'8',
-//     //     title:sectionsContent.obj8.title,
-//     //     link:sectionsContent.obj8.link,
-//     //     content:[
-//     //       sectionsContent.obj8.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-// <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Magnitude of a Vector</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
-
 
 // tables-optimized: v4 | 2026-05-22 | 2 tables (obj3 aggregation, obj7 summary capstone)
 
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
+// ---------- SECTIONS ----------
 
-
-export async function getStaticProps(){
-const keyWords = [
-  "vector magnitude",
-  "magnitude of a vector",
-  "vector norm",
-  "Euclidean norm",
-  "vector length formula",
-  "unit vector",
-  "normalize vector",
-  "distance between vectors",
-  "magnitude formula",
-  "vector normalization",
-  "triangle inequality vectors",
-  "L2 norm",
-  "vector distance formula",
-  "standard basis vectors"
-]
-  // •
-
-//   \u2022 First item
-// \u2022 Second item
-
-  
-// <hr style="border-width:1px;"></hr>
-
-// <hr style="color:blue;" />
-
-// <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-        //     {processContent(sectionsContent.normal.notation)}
-        // </div>,
-
-
-//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-//     {processContent(sectionsContent.normal.parameters)}
-// </div>,
-        
-//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-//                   {processContent(sectionsContent.obj4.content)}
-//                   </div>,
-
-
-//  <div key={'dist'} style={{
-//                     textAlign: 'center',
-//                     transform: 'scale(0.98)',
-//                     transformOrigin: 'center',
-//                     marginTop:'50px',
-//                     marginLeft:'-150px'
-//                   }} dangerouslySetInnerHTML={{ 
-//                     __html:   sectionContent.distributions.svg,
-//                   }} />
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj3 — aggregation: the three structural properties of the Euclidean norm
-const obj3Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.aggregation}">Property</th>
-      <th style="${tableHeaders.aggregation}">Formal statement</th>
-      <th style="${tableHeaders.aggregation}">What it means geometrically</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Non-negativity</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">‖<b>v</b>‖ ≥ 0, with equality if and only if <b>v</b> = <b>0</b></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">length is never negative; only the zero vector has zero length</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Scaling</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">‖c<b>v</b>‖ = |c|&middot;‖<b>v</b>‖</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">scalar multiplication by c multiplies length by |c|; direction is preserved when c &gt; 0 and reversed when c &lt; 0</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Triangle inequality</td>
-      <td style="padding: 12px 15px; color: #34495e;">‖<b>a</b> + <b>b</b>‖ ≤ ‖<b>a</b>‖ + ‖<b>b</b>‖</td>
-      <td style="padding: 12px 15px; color: #34495e;">the direct path from start to finish is never longer than the tip-to-tail path; equality only when <b>a</b> and <b>b</b> point the same way</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj7 — summary capstone: the four norm-derived concepts and how each builds on ‖v‖
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Concept</th>
-      <th style="${tableHeaders.summary}">Definition</th>
-      <th style="${tableHeaders.summary}">Formula</th>
-      <th style="${tableHeaders.summary}">Built from the norm by</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Norm ‖<b>v</b>‖</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">length of <b>v</b></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√(v₁² + v₂² + ⋯ + vₙ²)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(the base concept &mdash; everything below is derived from this)</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Distance d(<b>a</b>, <b>b</b>)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">straight-line distance between two vectors viewed as points</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">‖<b>a</b> − <b>b</b>‖ = √(Σ(aᵢ − bᵢ)²)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">applying the norm to the difference <b>a</b> − <b>b</b></td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Unit vector <b>û</b></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a vector that carries pure direction with no scale</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">‖<b>û</b>‖ = 1</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">requiring the norm to equal exactly 1</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Normalization</td>
-      <td style="padding: 12px 15px; color: #34495e;">turn any nonzero vector into the unit vector pointing the same way</td>
-      <td style="padding: 12px 15px; color: #34495e;"><b>v̂</b> = <b>v</b> / ‖<b>v</b>‖</td>
-      <td style="padding: 12px 15px; color: #34495e;">dividing <b>v</b> by its own norm (undefined for <b>v</b> = <b>0</b>)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  const sectionsContent = {
+const sectionsContent = {
   obj1: {
     title: `Magnitude in Two and Three Dimensions`,
     content: `In $\\mathbb{R}^2$, the magnitude of a vector $\\mathbf{v} = (v_1, v_2)$ is the length of the hypotenuse of the right triangle formed by its components:
@@ -724,7 +288,12 @@ The geometric intuition is the same in both cases: the magnitude is the straight
     title: `The General Norm`,
     content: `The pattern from $\\mathbb{R}^2$ and $\\mathbb{R}^3$ extends without modification to any $\\mathbb{R}^n$. For a vector $\\mathbf{v} = (v_1, v_2, \\ldots, v_n)$:
 
+@academic[formula_callout:Vector Norm
 $$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2} = \\sqrt{\\sum_{i=1}^{n} v_i^2}$$
+/linear-algebra/formulas#vector_norm]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 This quantity is called the Euclidean norm, or equivalently the $\\ell^2$ norm. The subscript distinguishes it from other ways of measuring vector size — the $\\ell^1$ norm sums absolute values, the $\\ell^\\infty$ norm takes the largest absolute component — but when "norm" appears without qualification in this section, it always refers to the Euclidean norm.
 
@@ -764,7 +333,12 @@ The length of a sum never exceeds the sum of the individual lengths. Geometrical
     title: `Distance Between Vectors`,
     content: `The norm provides a natural way to measure how far apart two vectors are. The distance between $\\mathbf{a}$ and $\\mathbf{b}$ is defined as the norm of their difference:
 
+@academic[formula_callout:Distance Between Vectors
 $$d(\\mathbf{a}, \\mathbf{b}) = \\|\\mathbf{a} - \\mathbf{b}\\| = \\sqrt{(a_1 - b_1)^2 + (a_2 - b_2)^2 + \\cdots + (a_n - b_n)^2}$$
+/linear-algebra/formulas#distance_between_vectors]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 When $\\mathbf{a}$ and $\\mathbf{b}$ are interpreted as position vectors — arrows from the origin to points in space — this formula gives the straight-line distance between those points. In $\\mathbb{R}^2$, it reduces to the familiar distance formula from coordinate geometry. In $\\mathbb{R}^3$, it extends to three-dimensional Euclidean distance. In higher dimensions, the algebraic expression remains identical even though the geometry can no longer be drawn.
 
@@ -796,7 +370,12 @@ But unit vectors are not confined to the coordinate directions. Any direction in
     title: `Normalization`,
     content: `Normalization is the process of converting any nonzero vector into the unit vector that shares its direction. Given $\\mathbf{v} \\neq \\mathbf{0}$, the normalized form is:
 
+@academic[formula_callout:Normalization
 $$\\hat{\\mathbf{v}} = \\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|} = \\frac{1}{\\|\\mathbf{v}\\|}(v_1, v_2, \\ldots, v_n)$$
+/linear-algebra/formulas#normalization]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 This divides every component by the same positive scalar $\\|\\mathbf{v}\\|$, which is a special case of scalar multiplication by $\\frac{1}{\\|\\mathbf{v}\\|}$. The scaling property of the norm guarantees that the result has magnitude $1$:
 
@@ -819,6 +398,9 @@ Normalization appears throughout the rest of this section. The angle formula on 
     link: '',
   },
 };
+
+
+
 
 const introContent = {
      id: `intro`,

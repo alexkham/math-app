@@ -10,6 +10,7 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import TrigoAngleTypesExplorer from '../../../../app/components/trigonometry/angle/types/TrigoAngleTypesExplorer'
+import angleTypesDiagrams from '../../../../app/components/trigonometry/angle/types/trigoAngleTypesDiagrams'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandalone'
 
@@ -39,13 +40,13 @@ export async function getStaticProps(){
     obj0:{
       title:`Key Terms`,
       content:`• **Vertex** — the common endpoint where the two rays of an angle meet.
-• **Initial side** — the ray from which rotation is measured. In **standard position** it lies along the positive x-axis.
+• **Initial side** — the ray from which rotation is measured. In [standard position](!#standard-position) it lies along the positive x-axis.
 • **Terminal side** — the ray reached after rotating by the angle.
 • **Quadrant** — one of four regions $I$, $II$, $III$, $IV$ where the terminal side may land.
-• **Reference angle** — the acute angle between the terminal side and the nearest x-axis. Always between $0°$ and $90°$.
-• **Coterminal angles** — angles sharing the same terminal side, differing by full rotations ($360° n$).
-• **Special angles** — the $16$ unit-circle angles with exact $\\sin$, $\\cos$, $\\tan$ values.
-• **Directed angle** — an angle carrying a sign indicating rotation direction: positive for counterclockwise, negative for clockwise.`,
+• [Reference angle](!#reference-angles) — the acute angle between the terminal side and the nearest x-axis. Always between $0°$ and $90°$.
+• [Coterminal angles](!#coterminal-angles) — angles sharing the same terminal side, differing by full rotations ($360° n$).
+• [Special angles](!#special-angles-on-the-unit-circle) — the $16$ unit-circle angles with exact $\\sin$, $\\cos$, $\\tan$ values.
+• [Directed angle](!#directed-angles) — an angle carrying a sign indicating rotation direction: positive for counterclockwise, negative for clockwise.`,
       before:``,
       after:``,
       link:'',
@@ -54,9 +55,9 @@ export async function getStaticProps(){
       title:`Choosing a Concept`,
       content:`The tool bundles nine related angle topics. A sidebar (or horizontal scroll on narrow screens) lists them grouped into three categories:
 
-• **Classification** — Angle Types.
-• **Relationships** — Complementary & Supplementary, Vertical Angles, Adjacent Angles.
-• **Trigonometry** — Standard Position, Reference Angles, Coterminal Angles, Special Angles, Directed Angles.
+• **Classification** — [Angle Types](!#angle-classifications).
+• **Relationships** — [Complementary & Supplementary](!#complementary-and-supplementary-angles), [Vertical Angles](!#vertical-angles), [Adjacent Angles](!#adjacent-angles).
+• **Trigonometry** — [Standard Position](!#standard-position), [Reference Angles](!#reference-angles), [Coterminal Angles](!#coterminal-angles), [Special Angles](!#special-angles-on-the-unit-circle), [Directed Angles](!#directed-angles).
 
 Click any item to load that concept's interactive scene and explanation. The active item is highlighted in blue. The top bar shows both the tool name and the active concept's title.`,
       before:``,
@@ -143,13 +144,13 @@ Drag the scene and the explanation panel updates immediately. Everything is reco
       title:`Angle Classifications`,
       content:`The **Angle Types** concept classifies a single rotation by its measure:
 
-• **Zero** — $\\theta = 0°$, both rays overlap.
-• **Acute** — $0° < \\theta < 90°$.
-• **Right** — $\\theta = 90°$, marked with a square instead of an arc.
-• **Obtuse** — $90° < \\theta < 180°$.
-• **Straight** — $\\theta = 180°$, a straight line.
-• **Reflex** — $180° < \\theta < 360°$.
-• **Full** — $\\theta = 360°$, a complete rotation.
+• [Zero](!#zero-angles) — $\\theta = 0°$, both rays overlap.
+• [Acute](!#acute-angles) — $0° < \\theta < 90°$.
+• [Right](!#right-angles) — $\\theta = 90°$, marked with a square instead of an arc.
+• [Obtuse](!#obtuse-angles) — $90° < \\theta < 180°$.
+• [Straight](!#straight-angles) — $\\theta = 180°$, a straight line.
+• [Reflex](!#reflex-angles) — $180° < \\theta < 360°$.
+• [Full](!#full-angles) — $\\theta = 360°$, a complete rotation.
 
 Each type uses its own color and is documented in the side panel. For comprehensive coverage with proofs and examples, see the **angle types theory page**.`,
       before:``,
@@ -160,9 +161,9 @@ Each type uses its own color and is documented in the side panel. For comprehens
       title:`Angle Relationships`,
       content:`Three concepts cover how angles relate when they share a vertex or a transversal.
 
-• **Complementary & Supplementary** — pairs summing to $90°$ or $180°$. The side panel surfaces cofunction identities like $\\sin\\theta = \\cos(90° - \\theta)$.
-• **Vertical Angles** — two intersecting lines create two pairs of equal opposite angles. Drag to $90°$ to see all four become right angles.
-• **Adjacent Angles** — two angles share a vertex and a common arm (drawn in purple, dashed). Two independent drag handles let you set each angle separately. The angle addition identities sit right under the diagram.
+• [Complementary & Supplementary](!#complementary-and-supplementary-angles) — pairs summing to $90°$ or $180°$. The side panel surfaces cofunction identities like $\\sin\\theta = \\cos(90° - \\theta)$.
+• [Vertical Angles](!#vertical-angles) — two intersecting lines create two pairs of equal opposite angles. Drag to $90°$ to see all four become right angles.
+• [Adjacent Angles](!#adjacent-angles) — two angles share a vertex and a common arm (drawn in purple, dashed). Two independent drag handles let you set each angle separately. The angle addition identities sit right under the diagram.
 
 For full proofs, see the **angle relationships page**.`,
       before:``,
@@ -173,11 +174,11 @@ For full proofs, see the **angle relationships page**.`,
       title:`Trigonometry-Specific Angle Concepts`,
       content:`Five concepts cover angle ideas central to trigonometry.
 
-• **Standard Position** — angle with vertex at origin and initial side on the positive x-axis. The side panel shows the active quadrant and the signs of $\\sin$, $\\cos$, $\\tan$.
-• **Reference Angles** — the acute angle between the terminal side and the nearest x-axis. The panel shows the formula appropriate to the active quadrant ($\\theta$, $180° - \\theta$, $\\theta - 180°$, or $360° - \\theta$).
-• **Coterminal Angles** — same terminal side, different rotation count. Step through $n \\in \\{-3, ..., 3\\}$ and watch the spiral marker connect the base angle to its coterminal partner.
-• **Special Angles** — the $16$ unit-circle positions whose $\\sin$, $\\cos$, $\\tan$ values are exact. Click any point or row in the table to load it.
-• **Directed Angles** — positive (counterclockwise) vs. negative (clockwise) angles, with live verification that $\\sin(-\\theta) = -\\sin\\theta$ (odd) and $\\cos(-\\theta) = \\cos\\theta$ (even).`,
+• [Standard Position](!#standard-position) — angle with vertex at origin and initial side on the positive x-axis. The side panel shows the active quadrant and the signs of $\\sin$, $\\cos$, $\\tan$.
+• [Reference Angles](!#reference-angles) — the acute angle between the terminal side and the nearest x-axis. The panel shows the formula appropriate to the active quadrant ($\\theta$, $180° - \\theta$, $\\theta - 180°$, or $360° - \\theta$).
+• [Coterminal Angles](!#coterminal-angles) — same terminal side, different rotation count. Step through $n \\in \\{-3, ..., 3\\}$ and watch the spiral marker connect the base angle to its coterminal partner.
+• [Special Angles](!#special-angles-on-the-unit-circle) — the $16$ unit-circle positions whose $\\sin$, $\\cos$, $\\tan$ values are exact. Click any point or row in the table to load it.
+• [Directed Angles](!#directed-angles) — positive (counterclockwise) vs. negative (clockwise) angles, with live verification that $\\sin(-\\theta) = -\\sin\\theta$ (odd) and $\\cos(-\\theta) = \\cos\\theta$ (even).`,
       before:``,
       after:``,
       link:'',
@@ -187,10 +188,10 @@ For full proofs, see the **angle relationships page**.`,
       content:`Knowing the type of an angle determines almost every downstream calculation:
 
 • **Function signs** depend on quadrant, which depends on classification (acute, obtuse, reflex).
-• **Reference angles** reduce any trig evaluation to a first-quadrant computation.
-• **Coterminal equivalence** means $\\sin\\theta$, $\\cos\\theta$, $\\tan\\theta$ are periodic; this powers Fourier analysis, wave physics, and signal processing.
-• **Special angles** provide the exact values that appear in proofs, identities, and integrals.
-• **Directed angles** distinguish phase and rotation direction in physics, navigation, and complex numbers.
+• [Reference angles](!#reference-angles) reduce any trig evaluation to a first-quadrant computation.
+• [Coterminal equivalence](!#coterminal-angles) means $\\sin\\theta$, $\\cos\\theta$, $\\tan\\theta$ are periodic; this powers Fourier analysis, wave physics, and signal processing.
+• [Special angles](!#special-angles-on-the-unit-circle) provide the exact values that appear in proofs, identities, and integrals.
+• [Directed angles](!#directed-angles) distinguish phase and rotation direction in physics, navigation, and complex numbers.
 
 For applications and worked examples, see the **trigonometry foundations page**.`,
       before:``,
@@ -207,6 +208,566 @@ For applications and worked examples, see the **trigonometry foundations page**.
 • **Triangle Explorer** — angles inside triangles, with built-in law of sines and law of cosines.
 • **Unit Circle** — geometric setup for every special angle in this tool.
 • **Double Angle Identities** — formulas that combine angles into $2\\theta$ relationships.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+    obj12:{
+      title:`Complementary and Supplementary Angles`,
+      content:`Two angles are [complementary](!#complementary-angles) when their measures sum to $90°$ and [supplementary](!#supplementary-angles) when they sum to $180°$. The scene draws the pair as a blue sector $\\alpha$ and an amber sector $\\beta$ sharing one vertex, with a two-tab toggle switching the constraint.
+
+${angleTypesDiagrams.compSupp.overview}
+
+The complementary constraint fills a [right angle](!#right-angles), the supplementary one a [straight angle](!#straight-angles). Dragging the blue handle reallocates the total between $\\alpha$ and $\\beta$ while their sum stays fixed — the live sum line under the diagram never changes.
+
+The pair relationship powers the cofunction identities shown in the panel's formula card: $\\sin\\theta = \\cos(90° - \\theta)$, $\\cos\\theta = \\sin(90° - \\theta)$, and $\\tan\\theta = \\cot(90° - \\theta)$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj13:{
+      title:`Vertical Angles`,
+      content:`When two straight lines intersect, they create two pairs of **vertical angles** — opposite angles that are always equal. The blue pair and the amber pair in the scene stay matched no matter how you drag either line.
+
+${angleTypesDiagrams.vertical}
+
+Why they must be equal: each blue angle and its amber neighbor lie on one straight line, so they are [supplementary](!#supplementary-angles). Two angles supplementary to the same angle are equal — that is the whole proof, visible live as you drag.
+
+Drag to $90°$ and all four angles become equal [right angles](!#right-angles): the two lines are perpendicular, and the four sectors match exactly.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj14:{
+      title:`Adjacent Angles`,
+      content:`**Adjacent angles** share a vertex and one common arm — drawn dashed and purple in the scene — and lie on opposite sides of it without overlapping. Two independent handles set $\\alpha$ (blue) and $\\beta$ (amber) separately.
+
+${angleTypesDiagrams.adjacent}
+
+Unlike [complementary](!#complementary-angles) or [supplementary](!#supplementary-angles) pairs, adjacent angles have no fixed total: the combined angle is simply $\\alpha + \\beta$, updated live under the diagram.
+
+Adjacency is the geometric picture behind the **angle addition identities**: $\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta$ computes the sine of the combined angle from the two parts you dragged.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj15:{
+      title:`Standard Position`,
+      content:`An angle is in **standard position** when its vertex sits at the origin and its initial side lies along the positive x-axis. [Positive angles](!#positive-angles) rotate counterclockwise (blue); [negative angles](!#negative-angles) rotate clockwise (amber) — drag below the x-axis to produce them.
+
+${angleTypesDiagrams.standard.overview}
+
+The quadrant containing the terminal side fixes the signs of all six trigonometric functions: [Quadrant I](!#quadrant-i-function-signs) makes everything positive, [Quadrant II](!#quadrant-ii-function-signs) keeps only sine positive, [Quadrant III](!#quadrant-iii-function-signs) only tangent, and [Quadrant IV](!#quadrant-iv-function-signs) only cosine.
+
+Standard position is the convention that makes the rest of trigonometry work: [reference angles](!#reference-angles), [coterminal angles](!#coterminal-angles), and the unit-circle values all assume it.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj16:{
+      title:`Reference Angles`,
+      content:`The **reference angle** of $\\theta$ is the acute angle between its terminal side and the nearest x-axis — always between $0°$ and $90°$, always positive. In the scene it is the amber arc hugging the x-axis while the faint blue arc shows the full rotation.
+
+${angleTypesDiagrams.reference.overview}
+
+The formula depends on the quadrant: $\\theta$ itself in [Quadrant I](!#reference-angle-in-quadrant-i), $180° - \\theta$ in [Quadrant II](!#reference-angle-in-quadrant-ii), $\\theta - 180°$ in [Quadrant III](!#reference-angle-in-quadrant-iii), and $360° - \\theta$ in [Quadrant IV](!#reference-angle-in-quadrant-iv). The panel highlights the active row as you drag.
+
+Reference angles are the reduction machine of trigonometry: any function of any angle equals plus-or-minus the same function of its reference angle, with the sign taken from the quadrant.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj17:{
+      title:`Coterminal Angles`,
+      content:`**Coterminal angles** share the same terminal side while differing by whole rotations: $\\theta$ and $\\theta + 360°n$ point the same way for every integer $n$. The scene's stepper walks $n$ from $-3$ to $+3$ and draws the extra rotations as a dashed purple spiral.
+
+${angleTypesDiagrams.coterminal}
+
+Because the terminal side is identical, every trigonometric value is identical too: $\\sin\\theta = \\sin(\\theta + 360°)$ — the periodicity that underlies waves, oscillations, and signal processing.
+
+Coterminal reduction — bringing any angle into $[0°, 360°)$ — is the standard first step before applying [reference angles](!#reference-angles) or reading signs in [standard position](!#standard-position).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj18:{
+      title:`Special Angles on the Unit Circle`,
+      content:`Sixteen unit-circle positions have exact trigonometric values: [0°](!#special-angle-0), [30°](!#special-angle-30), [45°](!#special-angle-45), [60°](!#special-angle-60), [90°](!#special-angle-90), [120°](!#special-angle-120), [135°](!#special-angle-135), [150°](!#special-angle-150), [180°](!#special-angle-180), [210°](!#special-angle-210), [225°](!#special-angle-225), [240°](!#special-angle-240), [270°](!#special-angle-270), [300°](!#special-angle-300), [315°](!#special-angle-315), and [330°](!#special-angle-330). The scene shows them as a ring of clickable points.
+
+${angleTypesDiagrams.specialOverview}
+
+The exact values come from just two triangles — the 30-60-90 and the 45-45-90 — reflected into all four quadrants, plus the axis points read directly from the circle's coordinates. That is why the whole ring reduces to the values of $30°$, $45°$, and $60°$ with signs adjusted.
+
+These sixteen positions are also the snap targets in the other scenes: dragging near one locks the handle onto the exact value.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj19:{
+      title:`Directed Angles`,
+      content:`A **directed angle** carries a sign along with its magnitude: [positive](!#positive-angles) means counterclockwise rotation (blue), [negative](!#negative-angles) means clockwise (amber). Drag above or below the x-axis to switch direction.
+
+${angleTypesDiagrams.directed.overview}
+
+The panel verifies the two parity identities live as you drag: $\\sin(-\\theta) = -\\sin\\theta$ (sine is **odd**) while $\\cos(-\\theta) = \\cos\\theta$ (cosine is **even**).
+
+Direction matters wherever rotation is physical: phase in circuits and waves, bearings in navigation, and the argument of complex numbers all use signed angles.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj20:{
+      title:`Zero Angles`,
+      content:`A **zero angle** has measure $0°$: both arms overlap along the same ray and no rotation has occurred. It is the starting state of the Angle Types scene and of every rotation in the tool.
+
+${angleTypesDiagrams.types.zero}
+
+Its trigonometric values anchor the unit circle: $\\sin 0° = 0$, $\\cos 0° = 1$, $\\tan 0° = 0$.
+
+The zero angle is [coterminal](!#coterminal-angles) with every multiple of $360°$ — a [full angle](!#full-angles) returns to exactly this position.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj21:{
+      title:`Acute Angles`,
+      content:`An **acute angle** measures strictly between $0°$ and $90°$ — less than a quarter turn. The scene's Acute preset jumps to $45°$, drawn in blue.
+
+${angleTypesDiagrams.types.acute}
+
+Acute angles live entirely in Quadrant I, where every trigonometric function is positive, and they are the raw material of right-triangle trigonometry: both non-right angles of any right triangle are acute.
+
+[Reference angles](!#reference-angles) are acute by definition — which is why every other angle on the circle reduces to an acute one.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj22:{
+      title:`Right Angles`,
+      content:`A **right angle** measures exactly $90°$ — a quarter turn. The scene marks it with a small square at the vertex instead of the usual arc, the universal symbol for perpendicularity.
+
+${angleTypesDiagrams.types.right}
+
+At $90°$ the values hit their quarter-turn landmarks: $\\sin 90° = 1$, $\\cos 90° = 0$, and $\\tan 90°$ is undefined because the tangent ratio divides by zero.
+
+The right angle is the boundary between [acute](!#acute-angles) and [obtuse](!#obtuse-angles), and the total that defines [complementary](!#complementary-angles) pairs.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj23:{
+      title:`Obtuse Angles`,
+      content:`An **obtuse angle** measures strictly between $90°$ and $180°$ — more than a quarter turn, less than a half. The scene's preset lands on $130°$, drawn in amber.
+
+${angleTypesDiagrams.types.obtuse}
+
+An obtuse angle's terminal side points into Quadrant II, where sine stays positive while cosine and tangent turn negative. Its reference angle is $180° - \\theta$.
+
+Every obtuse angle is the [supplement](!#supplementary-angles) of an acute one: together they form a straight line, which is why a triangle can hold at most one obtuse angle.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj24:{
+      title:`Straight Angles`,
+      content:`A **straight angle** measures exactly $180°$ — a half turn. The two arms point in opposite directions and form a single straight line through the vertex, drawn in red by the scene.
+
+${angleTypesDiagrams.types.straight}
+
+Its values mark the halfway point of the circle: $\\sin 180° = 0$, $\\cos 180° = -1$, $\\tan 180° = 0$.
+
+The straight angle defines the [supplementary](!#supplementary-angles) relationship and separates ordinary angles from [reflex](!#reflex-angles) ones.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj25:{
+      title:`Reflex Angles`,
+      content:`A **reflex angle** measures strictly between $180°$ and $360°$ — more than a half turn but less than a full one. The scene's preset shows $270°$, swept in purple the long way around.
+
+${angleTypesDiagrams.types.reflex}
+
+Every arm position below the x-axis can be read two ways: as the reflex angle $\\theta$ or as its non-reflex partner $360° - \\theta$ on the other side. The tool always reports the counterclockwise sweep.
+
+Reflex measures matter wherever full rotational position matters — bearings, phase, and rotations that pass the [straight angle](!#straight-angles) on their way toward a [full angle](!#full-angles).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj26:{
+      title:`Full Angles`,
+      content:`A **full angle** measures exactly $360°$ — one complete rotation. The scene draws it as an entire circle around the vertex: the moving arm has returned to the initial side.
+
+${angleTypesDiagrams.types.full}
+
+Its values repeat the zero position exactly: $\\sin 360° = 0$, $\\cos 360° = 1$, $\\tan 360° = 0$ — the full angle is [coterminal](!#coterminal-angles) with the [zero angle](!#zero-angles).
+
+The full rotation is the period of sine and cosine: adding $360°$ to any angle changes nothing about its trigonometry.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj27:{
+      title:`Complementary Angles`,
+      content:`Two angles are **complementary** when their measures sum to $90°$: each is the other's complement, $90° - \\theta$. The scene's Complementary tab constrains the blue and amber sectors to fill a quarter turn, as in the frozen state below ($35° + 55° = 90°$).
+
+${angleTypesDiagrams.compSupp.complementary}
+
+Complements are the "co" in cosine: $\\cos\\theta$ literally means the sine of the complement, $\\sin(90° - \\theta)$. That is why sine and cosine swap values across a complementary pair, and why $45°$ — its own complement — has them equal.
+
+Geometrically, the two acute angles of every right triangle are complementary, filling the [right angle](!#right-angles)'s worth of turning that the triangle's third corner leaves over.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj28:{
+      title:`Supplementary Angles`,
+      content:`Two angles are **supplementary** when their measures sum to $180°$: each is the other's supplement, $180° - \\theta$. The scene's Supplementary tab stretches the constraint to a half turn — the frozen state shows $110° + 70° = 180°$.
+
+${angleTypesDiagrams.compSupp.supplementary}
+
+Supplements share their sine and negate their cosine: $\\sin(180° - \\theta) = \\sin\\theta$ while $\\cos(180° - \\theta) = -\\cos\\theta$.
+
+Supplementary pairs appear wherever a [straight angle](!#straight-angles) is split: linear pairs at any line intersection — including the adjacent pairs of [vertical angles](!#vertical-angles) — and co-interior angles between parallels.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj29:{
+      title:`Quadrant I: Function Signs`,
+      content:`**Quadrant I** holds angles between $0°$ and $90°$: both coordinates positive, so all six trigonometric functions are positive. The scene highlights the roman numeral I and shows the sign chart row for the current quadrant.
+
+${angleTypesDiagrams.standard[1]}
+
+The frozen state shows $50°$: $\\sin$, $\\cos$, and $\\tan$ all read $+$ in the panel's sign cards.
+
+First-quadrant values are the reference data for the entire circle — the [reference angle in Quadrant I](!#reference-angle-in-quadrant-i) is the angle itself, no reduction needed.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj30:{
+      title:`Quadrant II: Function Signs`,
+      content:`**Quadrant II** holds angles between $90°$ and $180°$: x negative, y positive. Only sine (and cosecant) stays positive; cosine and tangent go negative.
+
+${angleTypesDiagrams.standard[2]}
+
+The frozen state shows $140°$: the sign cards read $\\sin +$, $\\cos -$, $\\tan -$, and the sign-chart row for II is highlighted.
+
+To evaluate here, combine the sign rule with the [reference angle in Quadrant II](!#reference-angle-in-quadrant-ii): $\\sin 140° = \\sin 40°$ while $\\cos 140° = -\\cos 40°$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj31:{
+      title:`Quadrant III: Function Signs`,
+      content:`**Quadrant III** holds angles between $180°$ and $270°$: both coordinates negative. Sine and cosine are both negative, so their ratio — tangent (and cotangent) — is the survivor that stays positive.
+
+${angleTypesDiagrams.standard[3]}
+
+The frozen state shows $230°$: sign cards read $\\sin -$, $\\cos -$, $\\tan +$.
+
+Every Quadrant III angle is a Quadrant I angle shifted by $180°$ — see the [reference angle in Quadrant III](!#reference-angle-in-quadrant-iii) — which is exactly why tangent's period is $180°$ rather than $360°$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj32:{
+      title:`Quadrant IV: Function Signs`,
+      content:`**Quadrant IV** holds angles between $270°$ and $360°$: x positive again, y still negative. Cosine (and secant) are positive; sine and tangent are negative.
+
+${angleTypesDiagrams.standard[4]}
+
+The frozen state shows $320°$: sign cards read $\\sin -$, $\\cos +$, $\\tan -$.
+
+Quadrant IV angles mirror Quadrant I across the x-axis — the geometry behind cosine being even and sine odd, and the last stop before the rotation closes. Evaluate via the [reference angle in Quadrant IV](!#reference-angle-in-quadrant-iv).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj33:{
+      title:`Reference Angle in Quadrant I`,
+      content:`In **Quadrant I** the reference angle is the angle itself: $\\theta_{ref} = \\theta$. The terminal side already makes an acute angle with the positive x-axis, so no reduction is needed.
+
+${angleTypesDiagrams.reference[1]}
+
+The frozen state shows $50°$ with its amber reference arc coinciding with the full blue rotation arc — they are the same angle here.
+
+This identity case is what makes Quadrant I the reference data for the whole circle: all other quadrants' formulas fold their angles back onto this one. Signs are all positive here, per [Quadrant I's sign rule](!#quadrant-i-function-signs).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj34:{
+      title:`Reference Angle in Quadrant II`,
+      content:`In **Quadrant II** the terminal side is closest to the negative x-axis, so the reference angle measures back from $180°$: $\\theta_{ref} = 180° - \\theta$.
+
+${angleTypesDiagrams.reference[2]}
+
+The frozen state shows $140°$: the amber arc from the terminal side to the negative x-axis measures $180° - 140° = 40°$.
+
+Worked through: $\\sin 140° = \\sin 40°$ (sine positive in II) and $\\cos 140° = -\\cos 40°$ (cosine negative), matching [Quadrant II's sign rule](!#quadrant-ii-function-signs).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj35:{
+      title:`Reference Angle in Quadrant III`,
+      content:`In **Quadrant III** the terminal side has passed the negative x-axis, so the reference angle measures forward from $180°$: $\\theta_{ref} = \\theta - 180°$.
+
+${angleTypesDiagrams.reference[3]}
+
+The frozen state shows $230°$: the amber arc from the negative x-axis to the terminal side measures $230° - 180° = 50°$.
+
+Worked through: $\\tan 230° = \\tan 50°$ (tangent positive in III) while $\\sin 230° = -\\sin 50°$ and $\\cos 230° = -\\cos 50°$, per [Quadrant III's sign rule](!#quadrant-iii-function-signs).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj36:{
+      title:`Reference Angle in Quadrant IV`,
+      content:`In **Quadrant IV** the terminal side approaches the positive x-axis from below, so the reference angle measures up to the full turn: $\\theta_{ref} = 360° - \\theta$.
+
+${angleTypesDiagrams.reference[4]}
+
+The frozen state shows $320°$: the amber arc from the terminal side up to $360°$ measures $360° - 320° = 40°$.
+
+Worked through: $\\cos 320° = \\cos 40°$ (cosine positive in IV) while $\\sin 320° = -\\sin 40°$, per [Quadrant IV's sign rule](!#quadrant-iv-function-signs).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj37:{
+      title:`Special Angle: 0°`,
+      content:`$0°$ sits on the positive x-axis — the starting point of the special-angle ring, with terminal point $(1, 0)$.
+
+${angleTypesDiagrams.specials[0]}
+
+$$\\sin 0° = 0 \\qquad \\cos 0° = 1 \\qquad \\tan 0° = 0$$
+
+Cosine is at its maximum here and sine at zero. Every multiple of $360°$ lands back on this point, which is why the ring treats $0°$ and $360°$ as the same position.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj38:{
+      title:`Special Angle: 30°`,
+      content:`$30°$ is the smallest member of the 30-60-90 family, one-twelfth of a turn, $\\pi/6$ in radians.
+
+${angleTypesDiagrams.specials[30]}
+
+$$\\sin 30° = \\frac{1}{2} \\qquad \\cos 30° = \\frac{\\sqrt{3}}{2} \\qquad \\tan 30° = \\frac{\\sqrt{3}}{3}$$
+
+The half comes straight from the 30-60-90 triangle, where the side opposite $30°$ is half the hypotenuse. Its reflections at $150°$, $210°$, and $330°$ reuse these magnitudes with quadrant signs.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj39:{
+      title:`Special Angle: 45°`,
+      content:`$45°$ bisects the right angle along the diagonal $y = x$, $\\pi/4$ in radians. Its sine and cosine are equal.
+
+${angleTypesDiagrams.specials[45]}
+
+$$\\sin 45° = \\frac{\\sqrt{2}}{2} \\qquad \\cos 45° = \\frac{\\sqrt{2}}{2} \\qquad \\tan 45° = 1$$
+
+The values come from the isosceles 45-45-90 triangle with legs $1$ and hypotenuse $\\sqrt{2}$. Its reflections live at $135°$, $225°$, and $315°$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj40:{
+      title:`Special Angle: 60°`,
+      content:`$60°$ is the larger acute angle of the 30-60-90 triangle and the interior angle of the equilateral triangle, $\\pi/3$ in radians.
+
+${angleTypesDiagrams.specials[60]}
+
+$$\\sin 60° = \\frac{\\sqrt{3}}{2} \\qquad \\cos 60° = \\frac{1}{2} \\qquad \\tan 60° = \\sqrt{3}$$
+
+Sine and cosine swap compared to $30°$ because the two angles are complementary. Its reflections live at $120°$, $240°$, and $300°$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj41:{
+      title:`Special Angle: 90°`,
+      content:`$90°$ points straight up the positive y-axis — the quarter turn, $\\pi/2$ in radians, terminal point $(0, 1)$.
+
+${angleTypesDiagrams.specials[90]}
+
+$$\\sin 90° = 1 \\qquad \\cos 90° = 0 \\qquad \\tan 90° \\text{ undefined}$$
+
+Sine peaks at its maximum while cosine crosses zero, so the tangent ratio divides by zero — the first of the two undefined points on the ring.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj42:{
+      title:`Special Angle: 120°`,
+      content:`$120°$ lies in Quadrant II, $30°$ past vertical — the supplement of $60°$ and the hexagon's interior angle, $2\\pi/3$ in radians.
+
+${angleTypesDiagrams.specials[120]}
+
+$$\\sin 120° = \\frac{\\sqrt{3}}{2} \\qquad \\cos 120° = -\\frac{1}{2} \\qquad \\tan 120° = -\\sqrt{3}$$
+
+The magnitudes are exactly the $60°$ values; only the signs change to Quadrant II's pattern of sine positive, cosine and tangent negative.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj43:{
+      title:`Special Angle: 135°`,
+      content:`$135°$ is the Quadrant II diagonal along $y = -x$, supplement of $45°$, $3\\pi/4$ in radians.
+
+${angleTypesDiagrams.specials[135]}
+
+$$\\sin 135° = \\frac{\\sqrt{2}}{2} \\qquad \\cos 135° = -\\frac{\\sqrt{2}}{2} \\qquad \\tan 135° = -1$$
+
+With reference angle $45°$, sine and cosine share one magnitude and differ only in sign — forcing the tangent to exactly $-1$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj44:{
+      title:`Special Angle: 150°`,
+      content:`$150°$ sits $30°$ short of the straight line, in Quadrant II — the supplement of $30°$, $5\\pi/6$ in radians.
+
+${angleTypesDiagrams.specials[150]}
+
+$$\\sin 150° = \\frac{1}{2} \\qquad \\cos 150° = -\\frac{\\sqrt{3}}{2} \\qquad \\tan 150° = -\\frac{\\sqrt{3}}{3}$$
+
+The classic supplement demonstration: $\\sin 150° = \\sin 30°$ exactly, while the cosine flips sign.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj45:{
+      title:`Special Angle: 180°`,
+      content:`$180°$ points along the negative x-axis — the half turn, $\\pi$ radians, terminal point $(-1, 0)$.
+
+${angleTypesDiagrams.specials[180]}
+
+$$\\sin 180° = 0 \\qquad \\cos 180° = -1 \\qquad \\tan 180° = 0$$
+
+Cosine bottoms out at its minimum while sine returns to zero. This point is the pivot of the supplement relationship $\\theta \\mapsto 180° - \\theta$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj46:{
+      title:`Special Angle: 210°`,
+      content:`$210°$ lies $30°$ past the straight line, in Quadrant III — $7\\pi/6$ in radians, reference angle $30°$.
+
+${angleTypesDiagrams.specials[210]}
+
+$$\\sin 210° = -\\frac{1}{2} \\qquad \\cos 210° = -\\frac{\\sqrt{3}}{2} \\qquad \\tan 210° = \\frac{\\sqrt{3}}{3}$$
+
+Both coordinates go negative here, so their ratio — the tangent — turns positive again, matching $\\tan 30°$ exactly.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj47:{
+      title:`Special Angle: 225°`,
+      content:`$225°$ is the Quadrant III diagonal, opposite $45°$ through the origin — $5\\pi/4$ in radians.
+
+${angleTypesDiagrams.specials[225]}
+
+$$\\sin 225° = -\\frac{\\sqrt{2}}{2} \\qquad \\cos 225° = -\\frac{\\sqrt{2}}{2} \\qquad \\tan 225° = 1$$
+
+Equal negative coordinates give a tangent of exactly $1$ again: $225° = 45° + 180°$, tangent's period made visible.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj48:{
+      title:`Special Angle: 240°`,
+      content:`$240°$ lies $60°$ past the straight line in Quadrant III, diametrically opposite $60°$ — $4\\pi/3$ in radians.
+
+${angleTypesDiagrams.specials[240]}
+
+$$\\sin 240° = -\\frac{\\sqrt{3}}{2} \\qquad \\cos 240° = -\\frac{1}{2} \\qquad \\tan 240° = \\sqrt{3}$$
+
+The 30-60-90 magnitudes reappear with both signs flipped, leaving the tangent at a positive $\\sqrt{3}$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj49:{
+      title:`Special Angle: 270°`,
+      content:`$270°$ points straight down the negative y-axis — the three-quarter turn, $3\\pi/2$ radians, terminal point $(0, -1)$.
+
+${angleTypesDiagrams.specials[270]}
+
+$$\\sin 270° = -1 \\qquad \\cos 270° = 0 \\qquad \\tan 270° \\text{ undefined}$$
+
+Sine bottoms out at its minimum while cosine crosses zero again — the second and last undefined point for the tangent on the ring.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj50:{
+      title:`Special Angle: 300°`,
+      content:`$300°$ lies in Quadrant IV, $60°$ short of the full turn and coterminal with $-60°$ — $5\\pi/3$ in radians.
+
+${angleTypesDiagrams.specials[300]}
+
+$$\\sin 300° = -\\frac{\\sqrt{3}}{2} \\qquad \\cos 300° = \\frac{1}{2} \\qquad \\tan 300° = -\\sqrt{3}$$
+
+Cosine turns positive again in Quadrant IV while sine stays negative — the mirror image of $60°$ across the x-axis.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj51:{
+      title:`Special Angle: 315°`,
+      content:`$315°$ is the Quadrant IV diagonal, $45°$ short of the full turn and coterminal with $-45°$ — $7\\pi/4$ in radians.
+
+${angleTypesDiagrams.specials[315]}
+
+$$\\sin 315° = -\\frac{\\sqrt{2}}{2} \\qquad \\cos 315° = \\frac{\\sqrt{2}}{2} \\qquad \\tan 315° = -1$$
+
+The $45°$ magnitudes return with opposite signs on sine and cosine, making the tangent exactly $-1$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj52:{
+      title:`Special Angle: 330°`,
+      content:`$330°$ sits $30°$ short of closing the rotation, in Quadrant IV, coterminal with $-30°$ — $11\\pi/6$ in radians.
+
+${angleTypesDiagrams.specials[330]}
+
+$$\\sin 330° = -\\frac{1}{2} \\qquad \\cos 330° = \\frac{\\sqrt{3}}{2} \\qquad \\tan 330° = -\\frac{\\sqrt{3}}{3}$$
+
+The familiar $30°$ magnitudes make their final appearance before the ring closes, with sine negative below the axis.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj53:{
+      title:`Positive Angles`,
+      content:`A **positive angle** rotates counterclockwise from the initial side — the mathematical convention for the positive direction, drawn blue in the scene.
+
+${angleTypesDiagrams.directed.positive}
+
+All the standard machinery — quadrants, reference angles, special values — is defined for counterclockwise sweeps first; clockwise angles are handled by symmetry.
+
+Every positive angle has a [negative](!#negative-angles) twin pointing to the same terminal side: $+45°$ and $-315°$ are [coterminal](!#coterminal-angles).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj54:{
+      title:`Negative Angles`,
+      content:`A **negative angle** rotates clockwise from the initial side, drawn amber in the scene. Drag below the x-axis in the Directed Angles view to produce one.
+
+${angleTypesDiagrams.directed.negative}
+
+Negation is where the parity of the functions shows: $\\sin(-\\theta) = -\\sin\\theta$ makes sine an **odd** function, while $\\cos(-\\theta) = \\cos\\theta$ makes cosine **even** — both verified live in the panel.
+
+Adding $360°$ converts any negative angle to its [positive](!#positive-angles) coterminal twin: $-45°$ is the same terminal side as $315°$.`,
       before:``,
       after:``,
       link:'',
@@ -332,12 +893,61 @@ For applications and worked examples, see the **trigonometry foundations page**.
 
 
 
+  const explanations = {
+    basic: {
+      content: `An angle is formed by two rays sharing a common vertex. In trigonometry, the type determines which quadrant the terminal side lands in, and therefore the signs of sin, cos, and tan. [See all angle classifications](!#angle-classifications)`,
+      states: {
+        zero: `Both arms overlap. No rotation. [Full treatment of zero angles](!#zero-angles)`,
+        acute: `Less than a quarter turn. [Full treatment of acute angles](!#acute-angles)`,
+        right: `Exactly a quarter turn. [Full treatment of right angles](!#right-angles)`,
+        obtuse: `More than a quarter, less than a half turn. [Full treatment of obtuse angles](!#obtuse-angles)`,
+        straight: `Exactly a half turn. A straight line. [Full treatment of straight angles](!#straight-angles)`,
+        reflex: `More than a half turn. [Full treatment of reflex angles](!#reflex-angles)`,
+        full: `A complete rotation. [Full treatment of full angles](!#full-angles)`,
+      },
+    },
+    "comp-supp": {
+      content: `[Complementary](!#complementary-angles) angles sum to 90°. [Supplementary](!#supplementary-angles) angles sum to 180°.
+These appear in trig via co-function identities: sin(θ) = cos(90°−θ).`,
+    },
+    vertical: {
+      content: `When two lines intersect, opposite angles are equal. Adjacent pairs sum to 180°.
+Drag to 90° to make all four angles equal right angles. [Learn more about vertical angles](!#vertical-angles)`,
+    },
+    adjacent: {
+      content: `Adjacent angles share a common arm (dashed, purple) and vertex, lying on opposite sides without overlapping.
+Their sum has no fixed total. They appear in the angle addition identities. [Learn more about adjacent angles](!#adjacent-angles)`,
+    },
+    standard: {
+      content: `Vertex at origin, initial side on positive x-axis. Positive angles rotate CCW; negative rotate CW.
+The quadrant of the terminal side determines the signs of all six trig functions. [Learn more about standard position](!#standard-position)`,
+    },
+    reference: {
+      content: `The reference angle is the acute angle (0°–90°) between the terminal side and the nearest x-axis. Always positive.
+Trig functions of any angle equal ± the same function of its reference angle — sign depends on quadrant. [Learn more about reference angles](!#reference-angles)`,
+    },
+    coterminal: {
+      content: `Two angles are coterminal when they share the same terminal side — differing by full rotations (multiples of 360°).
+Coterminal angles produce identical trig values. sin(θ) = sin(θ+360°) because trig functions are periodic. [Learn more about coterminal angles](!#coterminal-angles)`,
+    },
+    special: {
+      content: `16 standard unit circle angles with exact trig values. Come from 30-60-90 and 45-45-90 triangles reflected across all four quadrants.
+Click any point to see its exact values. [Learn more about the special angles](!#special-angles-on-the-unit-circle)`,
+    },
+    directed: {
+      content: `A directed angle has magnitude and direction. [Positive](!#positive-angles) = CCW (blue). [Negative](!#negative-angles) = CW (amber).
+Drag above the x-axis for positive, below for negative.`,
+    },
+  };
+
+
    return {
       props:{
          sectionsContent,
          introContent,
          faqQuestions,
          schemas,
+         explanations,
           seoData: {
         title: "Angle Types Explorer: Interactive Visualizer | Learn Math Class",
         description: "Explore nine angle concepts: classification, complementary, supplementary, vertical, adjacent, standard position, reference, coterminal, special, and directed.",
@@ -352,12 +962,12 @@ For applications and worked examples, see the **trigonometry foundations page**.
     }
    }
 
-export default function AngleTypesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function AngleTypesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations}) {
 
 
   const genericSections=[
     {
-        id:'0',
+        id:'key-terms',
         title:sectionsContent.obj0.title,
         link:sectionsContent.obj0.link,
         content:[
@@ -365,7 +975,7 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
         ]
     },
     {
-        id:'1',
+        id:'choosing-a-concept',
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
@@ -373,7 +983,7 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
         ]
     },
     {
-        id:'2',
+        id:'switching-dark-and-light-modes',
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
@@ -381,7 +991,7 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
         ]
     },
     {
-        id:'3',
+        id:'dragging-to-set-angles',
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
@@ -389,7 +999,7 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
         ]
     },
     {
-        id:'4',
+        id:'using-preset-buttons-and-quick-angles',
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
@@ -397,7 +1007,7 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
         ]
     },
     {
-        id:'5',
+        id:'reading-the-scene-diagrams',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
@@ -405,7 +1015,7 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
         ]
     },
     {
-        id:'6',
+        id:'reading-the-explanation-panels',
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
@@ -413,7 +1023,7 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
         ]
     },
     {
-        id:'7',
+        id:'angle-classifications',
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
@@ -421,7 +1031,7 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
         ]
     },
     {
-        id:'8',
+        id:'angle-relationships',
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
@@ -429,7 +1039,7 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
         ]
     },
     {
-        id:'9',
+        id:'trigonometry-specific-angle-concepts',
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
         content:[
@@ -437,7 +1047,7 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
         ]
     },
     {
-        id:'10',
+        id:'why-angle-classification-matters-in-trigonometry',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
         content:[
@@ -445,11 +1055,355 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
         ]
     },
     {
-        id:'11',
+        id:'related-concepts-and-tools',
         title:sectionsContent.obj11.title,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+        ]
+    },
+    {
+        id:'complementary-and-supplementary-angles',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+        ]
+    },
+    {
+        id:'vertical-angles',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
+        ]
+    },
+    {
+        id:'adjacent-angles',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+        ]
+    },
+    {
+        id:'standard-position',
+        title:sectionsContent.obj15.title,
+        link:sectionsContent.obj15.link,
+        content:[
+          sectionsContent.obj15.content,
+        ]
+    },
+    {
+        id:'reference-angles',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
+        ]
+    },
+    {
+        id:'coterminal-angles',
+        title:sectionsContent.obj17.title,
+        link:sectionsContent.obj17.link,
+        content:[
+          sectionsContent.obj17.content,
+        ]
+    },
+    {
+        id:'special-angles-on-the-unit-circle',
+        title:sectionsContent.obj18.title,
+        link:sectionsContent.obj18.link,
+        content:[
+          sectionsContent.obj18.content,
+        ]
+    },
+    {
+        id:'directed-angles',
+        title:sectionsContent.obj19.title,
+        link:sectionsContent.obj19.link,
+        content:[
+          sectionsContent.obj19.content,
+        ]
+    },
+    {
+        id:'zero-angles',
+        title:sectionsContent.obj20.title,
+        link:sectionsContent.obj20.link,
+        content:[
+          sectionsContent.obj20.content,
+        ]
+    },
+    {
+        id:'acute-angles',
+        title:sectionsContent.obj21.title,
+        link:sectionsContent.obj21.link,
+        content:[
+          sectionsContent.obj21.content,
+        ]
+    },
+    {
+        id:'right-angles',
+        title:sectionsContent.obj22.title,
+        link:sectionsContent.obj22.link,
+        content:[
+          sectionsContent.obj22.content,
+        ]
+    },
+    {
+        id:'obtuse-angles',
+        title:sectionsContent.obj23.title,
+        link:sectionsContent.obj23.link,
+        content:[
+          sectionsContent.obj23.content,
+        ]
+    },
+    {
+        id:'straight-angles',
+        title:sectionsContent.obj24.title,
+        link:sectionsContent.obj24.link,
+        content:[
+          sectionsContent.obj24.content,
+        ]
+    },
+    {
+        id:'reflex-angles',
+        title:sectionsContent.obj25.title,
+        link:sectionsContent.obj25.link,
+        content:[
+          sectionsContent.obj25.content,
+        ]
+    },
+    {
+        id:'full-angles',
+        title:sectionsContent.obj26.title,
+        link:sectionsContent.obj26.link,
+        content:[
+          sectionsContent.obj26.content,
+        ]
+    },
+    {
+        id:'complementary-angles',
+        title:sectionsContent.obj27.title,
+        link:sectionsContent.obj27.link,
+        content:[
+          sectionsContent.obj27.content,
+        ]
+    },
+    {
+        id:'supplementary-angles',
+        title:sectionsContent.obj28.title,
+        link:sectionsContent.obj28.link,
+        content:[
+          sectionsContent.obj28.content,
+        ]
+    },
+    {
+        id:'quadrant-i-function-signs',
+        title:sectionsContent.obj29.title,
+        link:sectionsContent.obj29.link,
+        content:[
+          sectionsContent.obj29.content,
+        ]
+    },
+    {
+        id:'quadrant-ii-function-signs',
+        title:sectionsContent.obj30.title,
+        link:sectionsContent.obj30.link,
+        content:[
+          sectionsContent.obj30.content,
+        ]
+    },
+    {
+        id:'quadrant-iii-function-signs',
+        title:sectionsContent.obj31.title,
+        link:sectionsContent.obj31.link,
+        content:[
+          sectionsContent.obj31.content,
+        ]
+    },
+    {
+        id:'quadrant-iv-function-signs',
+        title:sectionsContent.obj32.title,
+        link:sectionsContent.obj32.link,
+        content:[
+          sectionsContent.obj32.content,
+        ]
+    },
+    {
+        id:'reference-angle-in-quadrant-i',
+        title:sectionsContent.obj33.title,
+        link:sectionsContent.obj33.link,
+        content:[
+          sectionsContent.obj33.content,
+        ]
+    },
+    {
+        id:'reference-angle-in-quadrant-ii',
+        title:sectionsContent.obj34.title,
+        link:sectionsContent.obj34.link,
+        content:[
+          sectionsContent.obj34.content,
+        ]
+    },
+    {
+        id:'reference-angle-in-quadrant-iii',
+        title:sectionsContent.obj35.title,
+        link:sectionsContent.obj35.link,
+        content:[
+          sectionsContent.obj35.content,
+        ]
+    },
+    {
+        id:'reference-angle-in-quadrant-iv',
+        title:sectionsContent.obj36.title,
+        link:sectionsContent.obj36.link,
+        content:[
+          sectionsContent.obj36.content,
+        ]
+    },
+    {
+        id:'special-angle-0',
+        title:sectionsContent.obj37.title,
+        link:sectionsContent.obj37.link,
+        content:[
+          sectionsContent.obj37.content,
+        ]
+    },
+    {
+        id:'special-angle-30',
+        title:sectionsContent.obj38.title,
+        link:sectionsContent.obj38.link,
+        content:[
+          sectionsContent.obj38.content,
+        ]
+    },
+    {
+        id:'special-angle-45',
+        title:sectionsContent.obj39.title,
+        link:sectionsContent.obj39.link,
+        content:[
+          sectionsContent.obj39.content,
+        ]
+    },
+    {
+        id:'special-angle-60',
+        title:sectionsContent.obj40.title,
+        link:sectionsContent.obj40.link,
+        content:[
+          sectionsContent.obj40.content,
+        ]
+    },
+    {
+        id:'special-angle-90',
+        title:sectionsContent.obj41.title,
+        link:sectionsContent.obj41.link,
+        content:[
+          sectionsContent.obj41.content,
+        ]
+    },
+    {
+        id:'special-angle-120',
+        title:sectionsContent.obj42.title,
+        link:sectionsContent.obj42.link,
+        content:[
+          sectionsContent.obj42.content,
+        ]
+    },
+    {
+        id:'special-angle-135',
+        title:sectionsContent.obj43.title,
+        link:sectionsContent.obj43.link,
+        content:[
+          sectionsContent.obj43.content,
+        ]
+    },
+    {
+        id:'special-angle-150',
+        title:sectionsContent.obj44.title,
+        link:sectionsContent.obj44.link,
+        content:[
+          sectionsContent.obj44.content,
+        ]
+    },
+    {
+        id:'special-angle-180',
+        title:sectionsContent.obj45.title,
+        link:sectionsContent.obj45.link,
+        content:[
+          sectionsContent.obj45.content,
+        ]
+    },
+    {
+        id:'special-angle-210',
+        title:sectionsContent.obj46.title,
+        link:sectionsContent.obj46.link,
+        content:[
+          sectionsContent.obj46.content,
+        ]
+    },
+    {
+        id:'special-angle-225',
+        title:sectionsContent.obj47.title,
+        link:sectionsContent.obj47.link,
+        content:[
+          sectionsContent.obj47.content,
+        ]
+    },
+    {
+        id:'special-angle-240',
+        title:sectionsContent.obj48.title,
+        link:sectionsContent.obj48.link,
+        content:[
+          sectionsContent.obj48.content,
+        ]
+    },
+    {
+        id:'special-angle-270',
+        title:sectionsContent.obj49.title,
+        link:sectionsContent.obj49.link,
+        content:[
+          sectionsContent.obj49.content,
+        ]
+    },
+    {
+        id:'special-angle-300',
+        title:sectionsContent.obj50.title,
+        link:sectionsContent.obj50.link,
+        content:[
+          sectionsContent.obj50.content,
+        ]
+    },
+    {
+        id:'special-angle-315',
+        title:sectionsContent.obj51.title,
+        link:sectionsContent.obj51.link,
+        content:[
+          sectionsContent.obj51.content,
+        ]
+    },
+    {
+        id:'special-angle-330',
+        title:sectionsContent.obj52.title,
+        link:sectionsContent.obj52.link,
+        content:[
+          sectionsContent.obj52.content,
+        ]
+    },
+    {
+        id:'positive-angles',
+        title:sectionsContent.obj53.title,
+        link:sectionsContent.obj53.link,
+        content:[
+          sectionsContent.obj53.content,
+        ]
+    },
+    {
+        id:'negative-angles',
+        title:sectionsContent.obj54.title,
+        link:sectionsContent.obj54.link,
+        content:[
+          sectionsContent.obj54.content,
         ]
     },
 
@@ -532,7 +1486,7 @@ export default function AngleTypesPage({seoData, sectionsContent, introContent, 
   activeColor="#143a66"
   activeBg="#dde9f7"
   />
-  <TrigoAngleTypesExplorer/>
+  <TrigoAngleTypesExplorer explanations={explanations}/>
 </div>
     {/* <SiblingsNavStandalone/>
    <TrigoAngleTypesExplorer/> */}

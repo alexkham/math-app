@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react';
 import { processContent } from '@/app/utils/contentProcessor';
+// Legacy default — kept as fallback only. Canonical explanations now live in getStaticProps
+// of each page that renders this component. Do not edit here; edit the page's explanations object.
 import angleExplanations from './angleExplanations';
 
 const AngleExplorer = ({ explanations = angleExplanations }) => {

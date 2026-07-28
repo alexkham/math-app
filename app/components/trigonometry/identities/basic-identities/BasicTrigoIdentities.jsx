@@ -347,9 +347,13 @@ function FormulaTable({ theta, active, onSelect }) {
   );
 }
 
+// Legacy scenario step descriptions above are kept as fallback only. Canonical
+// explanations now live in getStaticProps of the page that renders this
+// component; edit the page's explanations object, not the scenarios here.
 export default function BasicTrigIdentitiesExplorer({
   initialFn    = 'sin',
   initialTheta = 30,
+  explanations = null,
 }) {
   const [activeFn, setActiveFn] = useState(initialFn);
   const [theta, setTheta]       = useState(initialTheta);
@@ -365,13 +369,18 @@ export default function BasicTrigIdentitiesExplorer({
 
   const entry = REGISTRY[activeFn];
 
+  const ex = explanations && explanations[activeFn];
+  const scenario = (ex && Array.isArray(ex.steps))
+    ? { ...entry.scenario, steps: entry.scenario.steps.map((s, i) => (ex.steps[i] ? { ...s, description: ex.steps[i] } : s)) }
+    : entry.scenario;
+
   return (
     <div>
       <Instructions />
       <TabStrip active={activeFn} onChange={setActiveFn} />
       <CircleGraphDemo
         key={activeFn}
-        scenario={entry.scenario}
+        scenario={scenario}
         theta={theta}
         onThetaChange={setTheta}
       />

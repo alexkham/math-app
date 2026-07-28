@@ -2464,6 +2464,16 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import { processContent } from "@/app/utils/contentProcessor";
+
+// Renders the page-provided explanation (canonical copy lives in getStaticProps
+// of the page; see the legacy hardcoded strings in each scene for the fallback).
+function ExplanationText({ explanation, fallback, textSec }) {
+  if (explanation && explanation.content) {
+    return <div style={{ margin: 0, fontSize: "14px", lineHeight: "1.65", color: textSec }}>{processContent(explanation.content)}</div>;
+  }
+  return fallback;
+}
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // SHARED MATH
@@ -2639,7 +2649,7 @@ function snapBasic(r) {
   return Math.round(r);
 }
 
-function BasicAngles({ dark }) {
+function BasicAngles({ dark, explanation }) {
   const SZ=360, VX=180, VY=180, ARM=132, ARC=60;
   const [angle, setAngle] = useState(45);
   const svgRef = useRef(null);
@@ -2704,14 +2714,16 @@ function BasicAngles({ dark }) {
       explanation={(
         <>
           <div style={{ fontSize:"16px", fontWeight:"800", color:textPri }}>Angle Types</div>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>An angle is formed by two rays sharing a common vertex. In trigonometry, the type determines which quadrant the terminal side lands in, and therefore the signs of sin, cos, and tan.</p>
+          <ExplanationText explanation={explanation} textSec={textSec} fallback={(
+            <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>An angle is formed by two rays sharing a common vertex. In trigonometry, the type determines which quadrant the terminal side lands in, and therefore the signs of sin, cos, and tan.</p>
+          )} />
           <Divider border={border} />
           <div style={{ display:"flex", gap:"7px", flexWrap:"wrap" }}>
             <span style={{ padding:"4px 12px", borderRadius:"999px", fontSize:"12px", fontWeight:"700", letterSpacing:"0.07em", textTransform:"uppercase", color:c, background:bg, border:`1.8px solid ${c}` }}>{meta.name}</span>
             <span style={{ padding:"2px 11px", borderRadius:"7px", fontSize:"13px", fontWeight:"600", fontFamily:"monospace", color:c, background:bg }}>{meta.range}</span>
           </div>
           <div style={{ fontSize:"50px", fontWeight:"900", lineHeight:1, color:c, letterSpacing:"-0.04em" }}>{angle}<span style={{ fontSize:"22px" }}>°</span></div>
-          <p style={{ margin:0, fontSize:"14px", color:textSec, lineHeight:"1.6" }}>{meta.desc}</p>
+          <p style={{ margin:0, fontSize:"14px", color:textSec, lineHeight:"1.6" }}>{explanation && explanation.states && explanation.states[meta.name.toLowerCase()] ? processContent(explanation.states[meta.name.toLowerCase()]) : meta.desc}</p>
         </>
       )}
     />
@@ -2733,7 +2745,7 @@ function snapComp(r, lim) {
   return Math.round(Math.min(Math.max(r, 0), lim));
 }
 
-function CompSupp({ dark }) {
+function CompSupp({ dark, explanation }) {
   const SZ=360, VX=180, VY=180, ARM=130, ARCA=60, ARCB=84;
   const [mode, setMode]   = useState("complementary");
   const [alpha, setAlpha] = useState(35);
@@ -2797,8 +2809,12 @@ function CompSupp({ dark }) {
       explanation={(
         <>
           <div style={{ fontSize:"16px", fontWeight:"800", color:textPri }}>Comp. &amp; Supplementary</div>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Complementary angles sum to 90°. Supplementary angles sum to 180°.</p>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>These appear in trig via co-function identities: sin(θ) = cos(90°−θ).</p>
+          <ExplanationText explanation={explanation} textSec={textSec} fallback={(
+            <>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Complementary angles sum to 90°. Supplementary angles sum to 180°.</p>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>These appear in trig via co-function identities: sin(θ) = cos(90°−θ).</p>
+            </>
+          )} />
           <Divider border={border} />
           <div style={{ display:"flex", alignItems:"baseline", gap:"7px", fontSize:"20px", fontWeight:"700", justifyContent:"center", flexWrap:"wrap" }}>
             <span style={{ color:BLUE }}>{alpha}°</span><span style={{ color:textSec, opacity:0.4 }}>+</span><span style={{ color:AMBER }}>{beta}°</span><span style={{ color:textSec, opacity:0.4 }}>=</span><span style={{ color:textPri }}>{md.sum}</span>
@@ -2829,7 +2845,7 @@ function snapVert(r) {
   return Math.round(c);
 }
 
-function VertAngles({ dark }) {
+function VertAngles({ dark, explanation }) {
   const SZ=360, VX=180, VY=180, ARM=132, ARC=50;
   const [theta, setTheta] = useState(55);
   const svgRef = useRef(null);
@@ -2906,8 +2922,12 @@ function VertAngles({ dark }) {
       explanation={(
         <>
           <div style={{ fontSize:"16px", fontWeight:"800", color:textPri }}>Vertical Angles</div>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>When two lines intersect, opposite angles are equal. Adjacent pairs sum to 180°.</p>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Drag to 90° to make all four angles equal right angles.</p>
+          <ExplanationText explanation={explanation} textSec={textSec} fallback={(
+            <>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>When two lines intersect, opposite angles are equal. Adjacent pairs sum to 180°.</p>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Drag to 90° to make all four angles equal right angles.</p>
+            </>
+          )} />
           <Divider border={border} />
           <div style={{ display:"flex", gap:"10px" }}>
             <MiniCard label="α pair" sublabel="vertical" value={alpha} color={BLUE}  panelBg={panelBg} />
@@ -2940,7 +2960,7 @@ function snapAdj(r, mn, mx) {
   return Math.round(c);
 }
 
-function AdjacentAngles({ dark }) {
+function AdjacentAngles({ dark, explanation }) {
   const SZ=360, VX=180, VY=180, ARM=130, ARCA=58, ARCB=79;
   const [alpha, setAlpha] = useState(65);
   const [beta,  setBeta]  = useState(80);
@@ -3011,8 +3031,12 @@ function AdjacentAngles({ dark }) {
       explanation={(
         <>
           <div style={{ fontSize:"16px", fontWeight:"800", color:textPri }}>Adjacent Angles</div>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Adjacent angles share a common arm (dashed, purple) and vertex, lying on opposite sides without overlapping.</p>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Their sum has no fixed total. They appear in the angle addition identities.</p>
+          <ExplanationText explanation={explanation} textSec={textSec} fallback={(
+            <>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Adjacent angles share a common arm (dashed, purple) and vertex, lying on opposite sides without overlapping.</p>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Their sum has no fixed total. They appear in the angle addition identities.</p>
+            </>
+          )} />
           <Divider border={border} />
           <div style={{ display:"flex", alignItems:"baseline", gap:"6px", fontSize:"19px", fontWeight:"700", justifyContent:"center", flexWrap:"wrap" }}>
             <span style={{ color:BLUE }}>{alpha}°</span><span style={{ color:textSec, opacity:0.4 }}>+</span><span style={{ color:AMBER }}>{beta}°</span><span style={{ color:textSec, opacity:0.4 }}>=</span><span style={{ color:PURPLE }}>{total}°</span>
@@ -3055,7 +3079,7 @@ function getQInfo(angle) {
   return { label:"Quadrant IV", roman:"IV", sin:"−", cos:"+", tan:"−", color:RED };
 }
 
-function StandardPosition({ dark }) {
+function StandardPosition({ dark, explanation }) {
   const SZ=360, CX=180, CY=180, R=120, ARM=142, ARC=53;
   const [angle, setAngle] = useState(55);
   const svgRef  = useRef(null);
@@ -3126,8 +3150,12 @@ function StandardPosition({ dark }) {
       explanation={(
         <>
           <div style={{ fontSize:"16px", fontWeight:"800", color:textPri }}>Standard Position</div>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Vertex at origin, initial side on positive x-axis. Positive angles rotate CCW; negative rotate CW.</p>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>The quadrant of the terminal side determines the signs of all six trig functions.</p>
+          <ExplanationText explanation={explanation} textSec={textSec} fallback={(
+            <>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Vertex at origin, initial side on positive x-axis. Positive angles rotate CCW; negative rotate CW.</p>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>The quadrant of the terminal side determines the signs of all six trig functions.</p>
+            </>
+          )} />
           <Divider border={border} />
           <div style={{ fontSize:"48px", fontWeight:"900", lineHeight:1, color:arcCol, letterSpacing:"-0.04em" }}>{angle}<span style={{ fontSize:"19px" }}>°</span></div>
           <div style={{ display:"inline-block", padding:"4px 12px", borderRadius:"999px", fontSize:"13px", fontWeight:"700", color:qi.color, background:`${qi.color}18`, border:`1.8px solid ${qi.color}33`, alignSelf:"flex-start" }}>{qi.label}</div>
@@ -3169,7 +3197,7 @@ function getRefInfo(angle) {
   return { ref:360-n, roman:"IV", color:RED, formula:`ref = 360° − ${Math.round(n)}° = ${Math.round(360-n)}°`, refFrom:n, refTo:360, axisAngle:0 };
 }
 
-function ReferenceAngle({ dark }) {
+function ReferenceAngle({ dark, explanation }) {
   const SZ=360, CX=180, CY=180, R=120, ARM=142, ARCA=41, ARCB=62;
   const [angle, setAngle] = useState(130);
   const svgRef = useRef(null);
@@ -3235,8 +3263,12 @@ function ReferenceAngle({ dark }) {
       explanation={(
         <>
           <div style={{ fontSize:"16px", fontWeight:"800", color:textPri }}>Reference Angles</div>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>The reference angle is the acute angle (0°–90°) between the terminal side and the nearest x-axis. Always positive.</p>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Trig functions of any angle equal ± the same function of its reference angle — sign depends on quadrant.</p>
+          <ExplanationText explanation={explanation} textSec={textSec} fallback={(
+            <>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>The reference angle is the acute angle (0°–90°) between the terminal side and the nearest x-axis. Always positive.</p>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Trig functions of any angle equal ± the same function of its reference angle — sign depends on quadrant.</p>
+            </>
+          )} />
           <Divider border={border} />
           <div style={{ display:"flex", gap:"10px" }}>
             <MiniCard label="θ"   value={Math.round(norm)}   color={BLUE}  panelBg={panelBg} />
@@ -3262,7 +3294,7 @@ function snapCot(r) {
   return m <= 5 ? c : Math.round(n);
 }
 
-function CoterminalAngles({ dark }) {
+function CoterminalAngles({ dark, explanation }) {
   const SZ=360, CX=180, CY=180, ARM=142, ARCA=50, ARCB=74;
   const [base, setBase]     = useState(60);
   const [offset, setOffset] = useState(1);
@@ -3343,8 +3375,12 @@ function CoterminalAngles({ dark }) {
       explanation={(
         <>
           <div style={{ fontSize:"16px", fontWeight:"800", color:textPri }}>Coterminal Angles</div>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Two angles are coterminal when they share the same terminal side — differing by full rotations (multiples of 360°).</p>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Coterminal angles produce identical trig values. sin(θ) = sin(θ+360°) because trig functions are periodic.</p>
+          <ExplanationText explanation={explanation} textSec={textSec} fallback={(
+            <>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Two angles are coterminal when they share the same terminal side — differing by full rotations (multiples of 360°).</p>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Coterminal angles produce identical trig values. sin(θ) = sin(θ+360°) because trig functions are periodic.</p>
+            </>
+          )} />
           <Divider border={border} />
           <div style={{ display:"flex", gap:"10px" }}>
             <MiniCard label="Base"       value={base} color={BLUE}  panelBg={panelBg} />
@@ -3380,7 +3416,7 @@ const SPECIAL = [
 ];
 const QC = { 0:"#64748b", 1:BLUE, 2:GREEN, 3:AMBER, 4:RED };
 
-function SpecialAngles({ dark }) {
+function SpecialAngles({ dark, explanation }) {
   const SZ=360, CX=180, CY=180, R=125;
   const [sel, setSel]   = useState(2);
   const [mode, setMode] = useState("both");
@@ -3429,8 +3465,12 @@ function SpecialAngles({ dark }) {
       explanation={(
         <>
           <div style={{ fontSize:"16px", fontWeight:"800", color:textPri }}>Special Angles</div>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>16 standard unit circle angles with exact trig values. Come from 30-60-90 and 45-45-90 triangles reflected across all four quadrants.</p>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Click any point to see its exact values.</p>
+          <ExplanationText explanation={explanation} textSec={textSec} fallback={(
+            <>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>16 standard unit circle angles with exact trig values. Come from 30-60-90 and 45-45-90 triangles reflected across all four quadrants.</p>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Click any point to see its exact values.</p>
+            </>
+          )} />
           <Divider border={border} />
           <div style={{ display:"flex", gap:"10px" }}>
             <div style={{ flex:1, minWidth:0, background:panelBg, borderRadius:"12px", border:`1.8px solid ${col}22`, padding:"12px", textAlign:"center" }}><div style={{ fontSize:"12px", fontWeight:"600", color:col, textTransform:"uppercase", letterSpacing:"0.07em", marginBottom:"4px" }}>Degrees</div><div style={{ fontSize:"29px", fontWeight:"900", color:col, lineHeight:1 }}>{a.deg}°</div></div>
@@ -3461,7 +3501,7 @@ function SpecialAngles({ dark }) {
 const DIR_SNAPS = [0,30,45,60,90,120,135,150,180,210,225,240,270,300,315,330,360,-30,-45,-60,-90,-120,-135,-150,-180,-210,-225,-240,-270,-300,-315,-330,-360];
 function snapDir(r) { let c = r, m = Infinity; for (const t of DIR_SNAPS) { const d = Math.abs(r-t); if (d < m) { m = d; c = t; } } return m <= 5 ? c : Math.round(r); }
 
-function DirectedAngles({ dark }) {
+function DirectedAngles({ dark, explanation }) {
   const SZ=360, CX=180, CY=180, R=120, ARM=142, ARC=58;
   const [angle, setAngle] = useState(60);
   const svgRef  = useRef(null);
@@ -3548,8 +3588,12 @@ function DirectedAngles({ dark }) {
       explanation={(
         <>
           <div style={{ fontSize:"16px", fontWeight:"800", color:textPri }}>Directed Angles</div>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>A directed angle has magnitude and direction. Positive = CCW (blue). Negative = CW (amber).</p>
-          <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Drag above the x-axis for positive, below for negative.</p>
+          <ExplanationText explanation={explanation} textSec={textSec} fallback={(
+            <>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>A directed angle has magnitude and direction. Positive = CCW (blue). Negative = CW (amber).</p>
+              <p style={{ margin:0, fontSize:"14px", lineHeight:"1.65", color:textSec }}>Drag above the x-axis for positive, below for negative.</p>
+            </>
+          )} />
           <Divider border={border} />
           <div style={{ display:"flex", alignItems:"center", gap:"10px", flexWrap:"wrap" }}>
             <div style={{ fontSize:"48px", fontWeight:"900", lineHeight:1, color:col, letterSpacing:"-0.04em" }}>{angle}<span style={{ fontSize:"19px" }}>°</span></div>
@@ -3598,7 +3642,7 @@ const GROUPS = ["Classification", "Relationships", "Trigonometry"];
 // HUB — DEFAULT EXPORT
 // ═══════════════════════════════════════════════════════════════════════════════
 
-export default function TrigoAngleTypesExplorer({ defaultActive = "standard" } = {}) {
+export default function TrigoAngleTypesExplorer({ defaultActive = "standard", explanations = null } = {}) {
   const [active, setActive]  = useState(defaultActive);
   const [dark,   setDark]    = useState(false);
   const [hubRef, hubWidth]   = useContainerWidth();
@@ -3765,7 +3809,7 @@ export default function TrigoAngleTypesExplorer({ defaultActive = "standard" } =
 
           {/* Main panel */}
           <div style={{ flex: 1, background: surface, minWidth: 0 }}>
-            {current && <current.Component dark={dark} />}
+            {current && <current.Component dark={dark} explanation={explanations ? explanations[current.id] : null} />}
           </div>
 
         </div>

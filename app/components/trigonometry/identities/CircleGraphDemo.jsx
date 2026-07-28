@@ -935,6 +935,7 @@
 
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
 /* ============================================================
    CircleGraphDemo — v7
@@ -1567,7 +1568,7 @@ function MiniSolutionPanel({ steps, stepsTitle = 'Derivation', placeholder, onSt
                 fontSize: '0.9rem',
                 color: isActive ? COLORS.text : COLORS.textMuted,
                 lineHeight: 1.5, margin: 0, paddingLeft: '38px',
-              }}>{step.description}</p>
+              }}>{typeof step.description === 'string' ? processContent(step.description) : step.description}</p>
             </div>
           );
         })}

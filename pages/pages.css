@@ -47,3 +47,8 @@ video {
 .styled-table tbody tr:hover {
   background: #e8eef7 !important;
 }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}

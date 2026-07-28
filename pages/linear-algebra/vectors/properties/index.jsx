@@ -1,70 +1,157 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import '../../../pages.css'
-// import Head from 'next/head'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// tables-optimized: v4 | 2026-05-22 | 2 tables (obj6 comparison, obj8 summary capstone)
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import IntroSection from '@/app/components/page-components/section/IntroContentSection'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import '../../../pages.css'
+import Head from 'next/head'
+import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import { tableHeaders } from '@/app/styles/theme'
 
 
-// export async function getStaticProps(){
-// const keyWords = [
-//   "vector properties",
-//   "properties of vectors",
-//   "vector magnitude",
-//   "vector direction",
-//   "parallel vectors",
-//   "orthogonal vectors",
-//   "vector equality",
-//   "perpendicular vectors",
-//   "vector dimension",
-//   "parallel vectors definition",
-//   "orthogonal definition",
-//   "vector space axioms",
-//   "collinear vectors",
-//   "vector relationships"
-// ]
-//   // •
+export async function getStaticProps(){
+const keyWords = [
+  "vector properties",
+  "properties of vectors",
+  "vector magnitude",
+  "vector direction",
+  "parallel vectors",
+  "orthogonal vectors",
+  "vector equality",
+  "perpendicular vectors",
+  "vector dimension",
+  "parallel vectors definition",
+  "orthogonal definition",
+  "vector space axioms",
+  "collinear vectors",
+  "vector relationships"
+]
+  // •
 
-// //   \u2022 First item
-// // \u2022 Second item
+//   \u2022 First item
+// \u2022 Second item
 
   
-// // <hr style="border-width:1px;"></hr>
+// <hr style="border-width:1px;"></hr>
 
-// // <hr style="color:blue;" />
+// <hr style="color:blue;" />
 
-// // <hr style="border-color:#3498db; border-width:1px;" />
+// <hr style="border-color:#3498db; border-width:1px;" />
 
 
 
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
 
  
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
+// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
+        //     {processContent(sectionsContent.normal.notation)}
+        // </div>,
 
 
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
+//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
+//     {processContent(sectionsContent.normal.parameters)}
+// </div>,
         
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
+//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
+//                   {processContent(sectionsContent.obj4.content)}
+//                   </div>,
 
 
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
+//  <div key={'dist'} style={{
+//                     textAlign: 'center',
+//                     transform: 'scale(0.98)',
+//                     transformOrigin: 'center',
+//                     marginTop:'50px',
+//                     marginLeft:'-150px'
+//                   }} dangerouslySetInnerHTML={{ 
+//                     __html:   sectionContent.distributions.svg,
+//                   }} />
+
+const linkStyle = 'color: inherit; text-decoration: underline;'
+
+// ---------- TABLES ----------
+
+// obj6 — comparison: parallelism vs orthogonality, the two opposite extremes
+const obj6Table = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.comparison}">Relation</th>
+      <th style="${tableHeaders.comparison}">Algebraic condition</th>
+      <th style="${tableHeaders.comparison}">Geometric meaning</th>
+      <th style="${tableHeaders.comparison}">Computational test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Parallel <b>a</b> ∥ <b>b</b></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><b>a</b> = c<b>b</b> for some scalar c</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same direction (c &gt; 0) or opposite direction (c &lt; 0); both lie on the same line through the origin</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">check component ratios; in ℝ³, <a href="/linear-algebra/vectors/cross-product" style="${linkStyle}">cross product</a> <b>a</b> × <b>b</b> = <b>0</b></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Orthogonal <b>a</b> ⊥ <b>b</b></td>
+      <td style="padding: 12px 15px; color: #34495e;"><b>a</b> · <b>b</b> = 0</td>
+      <td style="padding: 12px 15px; color: #34495e;">meet at a right angle (90°); zero alignment between the vectors</td>
+      <td style="padding: 12px 15px; color: #34495e;">compute the <a href="/linear-algebra/vectors/dot-product" style="${linkStyle}">dot product</a> directly; works in any ℝⁿ</td>
+    </tr>
+  </tbody>
+</table>
+`
+
+// obj8 — summary capstone: all six vector properties side by side
+const summaryTable = `
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.summary}">Property</th>
+      <th style="${tableHeaders.summary}">Type</th>
+      <th style="${tableHeaders.summary}">Defining condition</th>
+      <th style="${tableHeaders.summary}">Key fact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Magnitude ‖<b>v</b>‖</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">intrinsic</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">‖<b>v</b>‖ = √(v₁² + v₂² + ⋯ + vₙ²)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">‖<b>v</b>‖ = 0 if and only if <b>v</b> = <b>0</b></td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Direction</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">intrinsic</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the unit vector <b>v</b> / ‖<b>v</b>‖</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">undefined for the zero vector (division by zero)</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Dimension</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">intrinsic</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the number of components n in ℝⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">fixed by the space; no operation changes the component count</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Equality <b>a</b> = <b>b</b></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">relational</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">aᵢ = bᵢ for every component i</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all-or-nothing: one differing component breaks equality</td>
+    </tr>
+    <tr style="background: #f8f9fa;">
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Parallelism <b>a</b> ∥ <b>b</b></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">relational</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><b>a</b> = c<b>b</b> for some scalar c</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the zero vector is parallel to every vector by convention</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Orthogonality <b>a</b> ⊥ <b>b</b></td>
+      <td style="padding: 12px 15px; color: #34495e;">relational</td>
+      <td style="padding: 12px 15px; color: #34495e;"><b>a</b> · <b>b</b> = 0</td>
+      <td style="padding: 12px 15px; color: #34495e;">the zero vector is orthogonal to every vector</td>
+    </tr>
+  </tbody>
+</table>
+`
 
 //  const sectionsContent = {
 //   obj1: {
@@ -162,552 +249,21 @@
 //     after: ``,
 //     link: '',
 //   },
+//   obj8: {
+//     title: `Summary: Properties at a Glance`,
+//     content: `This page has introduced six properties of vectors &mdash; three intrinsic to a single vector (magnitude, direction, dimension) and three relational between two vectors (equality, parallelism, orthogonality). The table below collects all six in a single reference, grouped by type, with each property's defining condition and one key fact to remember. The algebraic axioms in the previous section are properties of the operations rather than of vectors themselves, and are developed in full on the [vector space axioms](!/linear-algebra/vector-spaces/axioms) page.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
 // };
-
-
-//  const introContent = {
-//      id: `intro`,
-//   title: `What Vectors Have and How They Relate`,
-//   content: `Before diving into operations and products, it is worth stepping back to ask what a vector possesses simply by existing and how two vectors can be compared. Every vector in $\\mathbb{R}^n$ carries intrinsic attributes — magnitude, direction, and a fixed number of components — that belong to the vector itself, independent of any operation performed on it. Vectors also stand in structural relationships to one another: they may be equal, parallel, or orthogonal. This page collects both the intrinsic and relational properties in a single reference, with each developed fully on the page where it naturally belongs.`,
-// };
-
-
-// const faqQuestions = {
-//   obj1: {
-//     question: "What is the magnitude of a vector?",
-//     answer: "Magnitude is the length of a vector: ‖v‖ = √(v₁² + v₂² + ... + vₙ²). It's always non-negative, zero only for the zero vector. Under scalar multiplication: ‖cv‖ = |c|‖v‖. Under addition: ‖a + b‖ ≤ ‖a‖ + ‖b‖ (triangle inequality).",
-//     sectionId: "1"
-//   },
-//   obj2: {
-//     question: "What is the direction of a vector?",
-//     answer: "Direction is which way a vector points—its orientation in space. It's captured by the unit vector v/‖v‖. In ℝ² it can be an angle; in higher dimensions, use the unit vector. The zero vector has no direction since ‖0‖ = 0 makes normalization undefined.",
-//     sectionId: "2"
-//   },
-//   obj3: {
-//     question: "What is the dimension of a vector?",
-//     answer: "Dimension is the number of components n in a vector from ℝⁿ. Vectors in ℝ² have 2 components, in ℝ³ have 3, etc. Vectors from different dimensions cannot be added or compared—their component counts don't match.",
-//     sectionId: "3"
-//   },
-//   obj4: {
-//     question: "When are two vectors equal?",
-//     answer: "Vectors a and b are equal when every corresponding component matches: aᵢ = bᵢ for all i. There's no partial equality—if even one component differs, the vectors are unequal. Equal vectors have the same magnitude and direction.",
-//     sectionId: "4"
-//   },
-//   obj5: {
-//     question: "What does it mean for vectors to be parallel?",
-//     answer: "Vectors a and b are parallel when a = cb for some scalar c. If c > 0, same direction; if c < 0, opposite directions (anti-parallel). In ℝ³, a × b = 0 iff a ∥ b. The zero vector is parallel to everything by convention.",
-//     sectionId: "5"
-//   },
-//   obj6: {
-//     question: "What does it mean for vectors to be orthogonal?",
-//     answer: "Vectors are orthogonal (perpendicular) when their dot product equals zero: a · b = 0. This means 90° angle in ℝ² and ℝ³. The zero vector is orthogonal to every vector. Orthogonality means zero projection—no alignment.",
-//     sectionId: "6"
-//   },
-//   obj7: {
-//     question: "What are the algebraic properties of vectors?",
-//     answer: "Addition: commutative, associative, identity (0), inverses (-v). Scalar multiplication: associative, identity (1), two distributive laws. These ten properties are the vector space axioms—any structure satisfying them is a vector space.",
-//     sectionId: "7"
-//   }
-// }
-
-// const schemas = {
-//   learningResource: {
-//     "@context": "https://schema.org",
-//     "@type": "LearningResource",
-//     "name": "Properties of a Vector",
-//     "description": "Learn vector properties: magnitude, direction, dimension, equality, parallelism, orthogonality, and the algebraic axioms that define vector spaces.",
-//     "url": "https://www.learnmathclass.com/linear-algebra/vectors/properties",
-//     "inLanguage": "en-US",
-//     "learningResourceType": "Explanation",
-//     "educationalLevel": "High School, College",
-//     "educationalUse": "Learning",
-//     "audience": {
-//       "@type": "EducationalAudience",
-//       "educationalRole": "student"
-//     },
-//     "about": {
-//       "@type": "Thing",
-//       "name": "Vector Properties"
-//     },
-//     "teaches": [
-//       "Vector magnitude and norm",
-//       "Vector direction and unit vectors",
-//       "Dimension and component count",
-//       "Vector equality conditions",
-//       "Parallel and anti-parallel vectors",
-//       "Orthogonality and perpendicularity",
-//       "Vector space axioms"
-//     ],
-//     "keywords": keyWords.join(", "),
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Learn Math Class"
-//     },
-//     "datePublished": "2024-01-15",
-//     "dateModified": new Date().toISOString()
-//   },
-
-//   breadcrumb: {
-//     "@context": "https://schema.org",
-//     "@type": "BreadcrumbList",
-//     "itemListElement": [
-//       {
-//         "@type": "ListItem",
-//         "position": 1,
-//         "name": "Home",
-//         "item": "https://www.learnmathclass.com"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 2,
-//         "name": "Linear Algebra",
-//         "item": "https://www.learnmathclass.com/linear-algebra"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 3,
-//         "name": "Vectors",
-//         "item": "https://www.learnmathclass.com/linear-algebra/vectors"
-//       },
-//       {
-//         "@type": "ListItem",
-//         "position": 4,
-//         "name": "Properties of a Vector",
-//         "item": "https://www.learnmathclass.com/linear-algebra/vectors/properties"
-//       }
-//     ]
-//   },
-
-//   faq: {
-//     "@context": "https://schema.org",
-//     "@type": "FAQPage",
-//     "mainEntity": Object.keys(faqQuestions).map(key => ({
-//       "@type": "Question",
-//       "name": faqQuestions[key].question,
-//       "acceptedAnswer": {
-//         "@type": "Answer",
-//         "text": faqQuestions[key].answer
-//       }
-//     }))
-//   }
-// }
-
-//    return {
-//   props: {
-//     sectionsContent,
-//     introContent,
-//     faqQuestions,
-//     schemas,
-//     seoData: {
-//       title: "Vector Properties: Magnitude, Direction & Orthogonality | Learn Math Class",
-//       description: "Learn vector properties: magnitude, direction, dimension, equality, parallelism, orthogonality, and the algebraic axioms that define vector spaces.",
-//       keywords: keyWords.join(", "),
-//       url: "/linear-algebra/vectors/properties",
-//       name: "Properties of a Vector"
-//     },
-//   }
-// }
-//    }
-// export default function VectorPropertiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
-    
-//   const genericSections=[
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     // {
-//     //     id:'8',
-//     //     title:sectionsContent.obj8.title,
-//     //     link:sectionsContent.obj8.link,
-//     //     content:[
-//     //       sectionsContent.obj8.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'9',
-//     //     title:sectionsContent.obj9.title,
-//     //     link:sectionsContent.obj9.link,
-//     //     content:[
-//     //       sectionsContent.obj9.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'10',
-//     //     title:sectionsContent.obj10.title,
-//     //     link:sectionsContent.obj10.link,
-//     //     content:[
-//     //       sectionsContent.obj10.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'11',
-//     //     title:sectionsContent.obj11.title,
-//     //     link:sectionsContent.obj11.link,
-//     //     content:[
-//     //       sectionsContent.obj11.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'12',
-//     //     title:sectionsContent.obj12.title,
-//     //     link:sectionsContent.obj12.link,
-//     //     content:[
-//     //       sectionsContent.obj12.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'13',
-//     //     title:sectionsContent.obj13.title,
-//     //     link:sectionsContent.obj13.link,
-//     //     content:[
-//     //       sectionsContent.obj13.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'14',
-//     //     title:sectionsContent.obj14.title,
-//     //     link:sectionsContent.obj14.link,
-//     //     content:[
-//     //       sectionsContent.obj14.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'15',
-//     //     title:sectionsContent.obj15.title,
-//     //     link:sectionsContent.obj15.link,
-//     //     content:[
-//     //       sectionsContent.obj15.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//  <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.learningResource)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.breadcrumb)
-//     }}
-//   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Properties of a Vector</h1>
-//    <br/>
-//    <br/>
-//    <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    />
-//    <br/>
-//    <br/>
-//    <br/>
-//     <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         />
-//    <br/>
-//    <br/>
-//    <Sections sections={genericSections}/>
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
-
 
 
 // tables-optimized: v4 | 2026-05-22 | 2 tables (obj6 comparison, obj8 summary capstone)
 
-import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-import Sections from '@/app/components/page-components/section/Sections'
-import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import '../../../pages.css'
-import Head from 'next/head'
-import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-import { tableHeaders } from '@/app/styles/theme'
+// ---------- SECTIONS ----------
 
-
-export async function getStaticProps(){
-const keyWords = [
-  "vector properties",
-  "properties of vectors",
-  "vector magnitude",
-  "vector direction",
-  "parallel vectors",
-  "orthogonal vectors",
-  "vector equality",
-  "perpendicular vectors",
-  "vector dimension",
-  "parallel vectors definition",
-  "orthogonal definition",
-  "vector space axioms",
-  "collinear vectors",
-  "vector relationships"
-]
-  // •
-
-//   \u2022 First item
-// \u2022 Second item
-
-  
-// <hr style="border-width:1px;"></hr>
-
-// <hr style="color:blue;" />
-
-// <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-        //     {processContent(sectionsContent.normal.notation)}
-        // </div>,
-
-
-//   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-//     {processContent(sectionsContent.normal.parameters)}
-// </div>,
-        
-//  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-//                   {processContent(sectionsContent.obj4.content)}
-//                   </div>,
-
-
-//  <div key={'dist'} style={{
-//                     textAlign: 'center',
-//                     transform: 'scale(0.98)',
-//                     transformOrigin: 'center',
-//                     marginTop:'50px',
-//                     marginLeft:'-150px'
-//                   }} dangerouslySetInnerHTML={{ 
-//                     __html:   sectionContent.distributions.svg,
-//                   }} />
-
-const linkStyle = 'color: inherit; text-decoration: underline;'
-
-// ---------- TABLES ----------
-
-// obj6 — comparison: parallelism vs orthogonality, the two opposite extremes
-const obj6Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Relation</th>
-      <th style="${tableHeaders.comparison}">Algebraic condition</th>
-      <th style="${tableHeaders.comparison}">Geometric meaning</th>
-      <th style="${tableHeaders.comparison}">Computational test</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Parallel <b>a</b> ∥ <b>b</b></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><b>a</b> = c<b>b</b> for some scalar c</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">same direction (c &gt; 0) or opposite direction (c &lt; 0); both lie on the same line through the origin</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">check component ratios; in ℝ³, <a href="/linear-algebra/vectors/cross-product" style="${linkStyle}">cross product</a> <b>a</b> × <b>b</b> = <b>0</b></td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Orthogonal <b>a</b> ⊥ <b>b</b></td>
-      <td style="padding: 12px 15px; color: #34495e;"><b>a</b> · <b>b</b> = 0</td>
-      <td style="padding: 12px 15px; color: #34495e;">meet at a right angle (90°); zero alignment between the vectors</td>
-      <td style="padding: 12px 15px; color: #34495e;">compute the <a href="/linear-algebra/vectors/dot-product" style="${linkStyle}">dot product</a> directly; works in any ℝⁿ</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-// obj8 — summary capstone: all six vector properties side by side
-const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.summary}">Property</th>
-      <th style="${tableHeaders.summary}">Type</th>
-      <th style="${tableHeaders.summary}">Defining condition</th>
-      <th style="${tableHeaders.summary}">Key fact</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Magnitude ‖<b>v</b>‖</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">intrinsic</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">‖<b>v</b>‖ = √(v₁² + v₂² + ⋯ + vₙ²)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">‖<b>v</b>‖ = 0 if and only if <b>v</b> = <b>0</b></td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Direction</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">intrinsic</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the unit vector <b>v</b> / ‖<b>v</b>‖</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">undefined for the zero vector (division by zero)</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Dimension</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">intrinsic</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the number of components n in ℝⁿ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">fixed by the space; no operation changes the component count</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Equality <b>a</b> = <b>b</b></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">relational</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">aᵢ = bᵢ for every component i</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">all-or-nothing: one differing component breaks equality</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Parallelism <b>a</b> ∥ <b>b</b></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">relational</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;"><b>a</b> = c<b>b</b> for some scalar c</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the zero vector is parallel to every vector by convention</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Orthogonality <b>a</b> ⊥ <b>b</b></td>
-      <td style="padding: 12px 15px; color: #34495e;">relational</td>
-      <td style="padding: 12px 15px; color: #34495e;"><b>a</b> · <b>b</b> = 0</td>
-      <td style="padding: 12px 15px; color: #34495e;">the zero vector is orthogonal to every vector</td>
-    </tr>
-  </tbody>
-</table>
-`
-
- const sectionsContent = {
+const sectionsContent = {
   obj1: {
     title: `Magnitude`,
     content: `Every vector has a magnitude — a single non-negative number that measures its size. For a vector $\\mathbf{v} = (v_1, v_2, \\ldots, v_n)$ in $\\mathbb{R}^n$, the magnitude is given by the Euclidean norm:
@@ -749,7 +305,12 @@ Dimension is fixed by the space, not by the vector. Every vector in $\\mathbb{R}
     title: `Equality`,
     content: `Two vectors are equal when every one of their corresponding components matches. For $\\mathbf{a} = (a_1, a_2, \\ldots, a_n)$ and $\\mathbf{b} = (b_1, b_2, \\ldots, b_n)$:
 
-$$\\mathbf{a} = \\mathbf{b} \\quad \\Longleftrightarrow \\quad a_i = b_i \\text{ for every } i = 1, 2, \\ldots, n$$
+@academic[formula_callout:Vector Equality
+$$\\mathbf{a} = \\mathbf{b} \\iff a_i = b_i \\text{ for every } i = 1, 2, \\ldots, n$$
+/linear-algebra/formulas#vector_equality]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 There is no partial equality for vectors. If even a single component differs, the vectors are not equal. This all-or-nothing criterion is the algebraic version of the geometric requirement: equal vectors must have the same magnitude and the same direction.
 
@@ -762,7 +323,12 @@ For free vectors — vectors defined by magnitude and direction alone, without a
     title: `Parallelism`,
     content: `Two vectors are parallel when one is a scalar multiple of the other. For $\\mathbf{a}$ and $\\mathbf{b}$ with $\\mathbf{b} \\neq \\mathbf{0}$:
 
-$$\\mathbf{a} \\parallel \\mathbf{b} \\quad \\Longleftrightarrow \\quad \\mathbf{a} = c\\mathbf{b} \\text{ for some scalar } c$$
+@academic[formula_callout:Parallel Vectors
+$$\\mathbf{a} \\parallel \\mathbf{b} \\iff \\mathbf{a} = c\\mathbf{b} \\text{ for some } c \\in \\mathbb{R}$$
+/linear-algebra/formulas#parallel_vectors]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 When $c > 0$, the two vectors point in the same direction — they are parallel in the strict sense. When $c < 0$, they point in opposite directions — anti-parallel. Both cases fall under the umbrella of parallelism because the vectors lie along the same line through the origin, differing only in scale and possibly in sign.
 
@@ -811,6 +377,7 @@ These ten properties are not specific to vectors in $\\mathbb{R}^n$ — they are
     link: '',
   },
 };
+
 
 
  const introContent = {

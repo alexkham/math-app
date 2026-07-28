@@ -76,7 +76,7 @@ const linkStyle = 'color: inherit; text-decoration: underline;'
 
 // obj2 — comparison: the two equivalent definitions (algebraic and geometric)
 const obj2Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.comparison}">Definition</th>
@@ -101,7 +101,7 @@ const obj2Table = `
 
 // obj3 — aggregation: the four named properties of the dot product
 const obj3Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Property</th>
@@ -136,7 +136,7 @@ const obj3Table = `
 
 // obj6 — comparison: 3-way sign diagnostic for the dot product
 const obj6Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.comparison}">Sign of <b>a</b> · <b>b</b></th>
@@ -170,7 +170,7 @@ const obj6Table = `
 
 // obj9 — aggregation: the projection trio (scalar, vector, perpendicular component)
 const obj9Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Quantity</th>
@@ -200,7 +200,7 @@ const obj9Table = `
 
 // obj10 — summary capstone: every distinct use of the dot product on one card
 const summaryTable = `
-<table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.summary}">Question</th>
@@ -248,12 +248,208 @@ const summaryTable = `
 </table>
 `
 
+// const sectionsContent = {
+//   obj1: {
+//     title: `Algebraic Definition`,
+//     content: `The dot product of two vectors $\\mathbf{a} = (a_1, a_2, \\ldots, a_n)$ and $\\mathbf{b} = (b_1, b_2, \\ldots, b_n)$ in $\\mathbb{R}^n$ is the scalar obtained by multiplying corresponding components and summing the results:
+
+// $$\\mathbf{a} \\cdot \\mathbf{b} = a_1b_1 + a_2b_2 + \\cdots + a_nb_n = \\sum_{i=1}^{n} a_ib_i$$
+
+// The notation uses a centered dot between the two vectors. Other names for the same operation are the inner product and the scalar product — the latter emphasizing that the output is a scalar, not a vector.
+
+// This definition works in any dimension. In $\\mathbb{R}^2$, the dot product of $(3, 4)$ and $(1, -2)$ is $3(1) + 4(-2) = -5$. In $\\mathbb{R}^5$, the same rule applies with five terms instead of two. The computation is mechanical, but the meaning it carries — revealed by the geometric definition — is what makes the dot product central to the rest of linear algebra.
+
+// The dot product differs fundamentally from [vector addition](!/linear-algebra/vectors/basic-operations) and scalar multiplication. Those operations take vectors and produce vectors. The dot product takes two vectors and collapses them into a single number, discarding the directional structure in favor of a measurement of alignment.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj2: {
+//     title: `Geometric Definition`,
+//     content: `There is a second way to compute the dot product that bypasses components entirely and works directly with lengths and angles. If $\\mathbf{a}$ and $\\mathbf{b}$ are both nonzero and $\\theta$ denotes the angle they form when drawn from a common point, then:
+
+// $$\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$$
+
+// The right-hand side multiplies the [magnitudes](!/linear-algebra/vectors/magnitude) of both vectors and adjusts the product by $\\cos\\theta$. That cosine factor does all the interpretive work: it equals $1$ when $\\theta = 0$ (full alignment), drops to $0$ at $\\theta = \\frac{\\pi}{2}$ (no alignment at all), and reaches $-1$ at $\\theta = \\pi$ (complete opposition).
+
+// Why does this agree with the component-wise formula? Place $\\mathbf{a}$ and $\\mathbf{b}$ tail to tail and form the triangle completed by $\\mathbf{a} - \\mathbf{b}$. The law of cosines gives the squared length of the third side:
+
+// $$\\|\\mathbf{a} - \\mathbf{b}\\|^2 = \\|\\mathbf{a}\\|^2 + \\|\\mathbf{b}\\|^2 - 2\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$$
+
+// Now expand $\\|\\mathbf{a} - \\mathbf{b}\\|^2$ by writing it as $(\\mathbf{a} - \\mathbf{b}) \\cdot (\\mathbf{a} - \\mathbf{b})$ and distributing. The result is $\\|\\mathbf{a}\\|^2 - 2(\\mathbf{a} \\cdot \\mathbf{b}) + \\|\\mathbf{b}\\|^2$. Setting the two expressions equal and cancelling the squared norms leaves $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$. The component-based sum of products and the length-angle formula are two faces of a single quantity — one assembled from arithmetic on coordinates, the other encoding geometric information about orientation.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj3: {
+//     title: `Properties of the Dot Product`,
+//     content: `The dot product obeys a set of algebraic rules that make it behave predictably in calculations.
+
+// ## Commutativity
+
+// $$\\mathbf{a} \\cdot \\mathbf{b} = \\mathbf{b} \\cdot \\mathbf{a}$$
+
+// The order of the two vectors does not matter. This follows directly from commutativity of real number multiplication: $a_ib_i = b_ia_i$ for every component.
+
+// ## Distributivity
+
+// $$\\mathbf{a} \\cdot (\\mathbf{b} + \\mathbf{c}) = \\mathbf{a} \\cdot \\mathbf{b} + \\mathbf{a} \\cdot \\mathbf{c}$$
+
+// The dot product distributes over vector addition. This allows the dot product of a vector with a sum to be broken apart, a property used constantly when expanding expressions involving multiple vectors.
+
+// ## Scalar Factoring
+
+// $$(c\\mathbf{a}) \\cdot \\mathbf{b} = c(\\mathbf{a} \\cdot \\mathbf{b})$$
+
+// A scalar multiplied into one of the vectors can be pulled out of the dot product entirely. Combined with commutativity, this also gives $\\mathbf{a} \\cdot (c\\mathbf{b}) = c(\\mathbf{a} \\cdot \\mathbf{b})$.
+
+// ## Positive Definiteness
+
+// $$\\mathbf{a} \\cdot \\mathbf{a} = \\|\\mathbf{a}\\|^2 \\geq 0, \\quad \\text{with equality if and only if } \\mathbf{a} = \\mathbf{0}$$
+
+// The dot product of a vector with itself is the sum of squared components — always non-negative, and zero only for the zero vector. This property ties the dot product directly to the norm and ensures that the geometric notion of length is consistent with the algebraic framework.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj4: {
+//     title: `Connection to Magnitude`,
+//     content: `Positive definiteness reveals that the [norm](!/linear-algebra/vectors/magnitude) is hiding inside the dot product. When a vector is dotted with itself, the result is exactly the quantity that sits under the square root in the norm formula:
+
+// $$\\mathbf{v} \\cdot \\mathbf{v} = v_1^2 + v_2^2 + \\cdots + v_n^2 = \\|\\mathbf{v}\\|^2$$
+
+// Squared length, in other words, is not a separate concept — it is a dot product in which both slots are filled by the same vector. Flipping this around gives an alternative expression for the norm: $\\|\\mathbf{v}\\| = \\sqrt{\\mathbf{v} \\cdot \\mathbf{v}}$. Rather than defining magnitude independently and then discovering a coincidence, we can view the norm as something the dot product generates.
+
+// This observation has practical consequences. Several norm properties that would otherwise demand their own proofs fall out as corollaries of dot product rules. Scalar factoring implies $\\|c\\mathbf{v}\\| = |c|\\,\\|\\mathbf{v}\\|$ with no extra work. The triangle inequality $\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$ follows once we control the size of $\\mathbf{a} \\cdot \\mathbf{b}$ through Cauchy–Schwarz — again, a statement framed entirely in dot product language.
+
+// The dependence runs both ways. The geometric formula $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$ rebuilds the dot product from two norms and an angle. Neither concept stands alone: the dot product encodes magnitude, and magnitude participates in the dot product's geometric interpretation. Separating them into unrelated topics conceals the single algebraic mechanism they both rely on.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj5: {
+//     title: `The Angle Between Vectors`,
+//     content: `Rearranging the geometric formula isolates the angle:
+
+// $$\\cos\\theta = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|}$$
+
+// This formula is defined only when both vectors are nonzero, since division by zero is undefined. The angle $\\theta$ lies in the interval $[0, \\pi]$, covering all possibilities from vectors pointing in the same direction ($\\theta = 0$) to vectors pointing in exactly opposite directions ($\\theta = \\pi$).
+
+// The right-hand side is the dot product of the two normalized vectors $\\hat{\\mathbf{a}} \\cdot \\hat{\\mathbf{b}}$. Normalization strips away the magnitudes, leaving only the directional relationship. The cosine of the angle between two vectors depends solely on their directions, not on how long they are.
+
+// In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, this formula can be verified against the angle measured with a protractor. In higher dimensions, where geometric angles cannot be visualized, the formula serves as the definition of the angle between two vectors — extending a geometric concept into spaces where geometry alone cannot reach.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj6: {
+//     title: `Sign of the Dot Product`,
+//     content: `The sign of the dot product reveals the angular relationship between two vectors without requiring the angle itself to be computed. Since $\\|\\mathbf{a}\\|$ and $\\|\\mathbf{b}\\|$ are both positive for nonzero vectors, the sign of $\\mathbf{a} \\cdot \\mathbf{b}$ is determined entirely by $\\cos\\theta$.
+
+// When $\\mathbf{a} \\cdot \\mathbf{b} > 0$, the cosine is positive, which means $\\theta$ lies in the interval $(0, \\frac{\\pi}{2})$. The vectors form an acute angle — they point in broadly the same direction.
+
+// When $\\mathbf{a} \\cdot \\mathbf{b} = 0$, the cosine is zero, placing $\\theta$ at exactly $\\frac{\\pi}{2}$. The vectors are perpendicular — neither has any component in the direction of the other.
+
+// When $\\mathbf{a} \\cdot \\mathbf{b} < 0$, the cosine is negative, so $\\theta$ lies in $(\\frac{\\pi}{2}, \\pi)$. The vectors form an obtuse angle — they point in broadly opposite directions.
+
+// This three-way classification is a fast diagnostic tool. Checking whether a dot product is positive, zero, or negative is often all that is needed to determine the geometric relationship between two vectors — no square roots, no inverse cosines, just the sign of a sum of products.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj7: {
+//     title: `Orthogonality`,
+//     content: `Two vectors are orthogonal when their dot product is zero:
+
+// $$\\mathbf{a} \\cdot \\mathbf{b} = 0 \\quad \\Longleftrightarrow \\quad \\mathbf{a} \\perp \\mathbf{b}$$
+
+// In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, orthogonality corresponds to perpendicularity — the vectors meet at a right angle. In $\\mathbb{R}^n$ for $n > 3$, perpendicularity cannot be visualized, but the algebraic condition $\\mathbf{a} \\cdot \\mathbf{b} = 0$ still serves as its definition. Orthogonality is the generalization of "right angle" to any number of dimensions.
+
+// The zero vector occupies a special position: $\\mathbf{0} \\cdot \\mathbf{v} = 0$ for every vector $\\mathbf{v}$, so the zero vector is orthogonal to everything. This is a convention that simplifies many statements — without it, theorems about orthogonal sets would need to exclude the zero vector as a separate case.
+
+// Orthogonality is far more than a geometric curiosity. Orthogonal vectors are algebraically independent in a strong sense — projecting one onto the other yields zero, meaning neither contributes anything in the direction of the other. This idea scales up: orthogonal bases, orthogonal decompositions, and orthogonal complements form a central thread through the [orthogonality](!/linear-algebra/orthogonality) section of linear algebra.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj8: {
+//     title: `The Cauchy–Schwarz Inequality`,
+//     content: `The dot product of two vectors cannot grow arbitrarily large when their lengths are fixed. Cauchy–Schwarz makes this constraint precise:
+
+// $$|\\mathbf{a} \\cdot \\mathbf{b}| \\leq \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|$$
+
+// The geometric angle formula offers the most transparent explanation. Writing $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$ and noting that $|\\cos\\theta|$ never surpasses $1$, the absolute dot product is automatically bounded by the product of the norms. This ceiling is reached only when $\\cos\\theta$ hits $\\pm 1$ — at $\\theta = 0$ or $\\theta = \\pi$ — so equality corresponds to [parallel](!/linear-algebra/vectors/properties) vectors pointing along or against each other.
+
+// An entirely coordinate-based proof exists as well, requiring no notion of angle. Consider the expression $\\|\\mathbf{a} - t\\mathbf{b}\\|^2$ for a variable scalar $t$. Because a squared norm is never negative, this expression defines a quadratic in $t$ with no negative values. A real quadratic that stays non-negative must have a non-positive discriminant, and writing out that discriminant condition yields exactly the Cauchy–Schwarz bound. This argument extends to any setting where an inner product is defined, even when angles lack geometric substance.
+
+// The inequality plays a structural role beyond bounding computations. Without it, the angle formula would be ill-posed: feeding $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|}$ into $\\arccos$ requires the fraction to land in $[-1, 1]$, and Cauchy–Schwarz is what guarantees this. The norm's triangle inequality likewise depends on it — establishing $\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$ involves controlling the mixed term $\\mathbf{a} \\cdot \\mathbf{b}$, which is exactly the job Cauchy–Schwarz performs.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj9: {
+//     title: `Orthogonal Projection`,
+//     content: `It is frequently necessary to break a vector $\\mathbf{a}$ into two pieces relative to a nonzero vector $\\mathbf{b}$: one piece aligned with $\\mathbf{b}$ and another at a right angle to it. The dot product supplies the machinery for this decomposition.
+
+// ## Scalar Projection
+
+// The signed distance that $\\mathbf{a}$ covers in the direction of $\\mathbf{b}$ is captured by a single number:
+
+// $$\\text{comp}_{\\mathbf{b}}\\,\\mathbf{a} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{b}\\|}$$
+
+// When this quantity comes out positive, $\\mathbf{a}$ tilts toward $\\mathbf{b}$. A negative result means $\\mathbf{a}$ tilts away. Zero signals complete orthogonality — $\\mathbf{a}$ contributes nothing at all in the direction of $\\mathbf{b}$.
+
+// ## Vector Projection
+
+// To obtain an actual vector rather than a bare number, the scalar projection is re-embedded along $\\mathbf{b}$:
+
+// $$\\text{proj}_{\\mathbf{b}}\\,\\mathbf{a} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{b} \\cdot \\mathbf{b}}\\,\\mathbf{b} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{b}\\|^2}\\,\\mathbf{b}$$
+
+// The coefficient $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{b} \\cdot \\mathbf{b}}$ rescales $\\mathbf{b}$ so that the output has the appropriate length and orientation. What results is a vector parallel to $\\mathbf{b}$ whose norm equals $|\\text{comp}_{\\mathbf{b}}\\,\\mathbf{a}|$.
+
+// ## Orthogonal Decomposition
+
+// Removing the projected component from $\\mathbf{a}$ leaves behind the perpendicular part:
+
+// $$\\mathbf{a}_{\\perp} = \\mathbf{a} - \\text{proj}_{\\mathbf{b}}\\,\\mathbf{a}$$
+
+// Together, the two pieces reconstruct the original:
+
+// $$\\mathbf{a} = \\text{proj}_{\\mathbf{b}}\\,\\mathbf{a} + \\mathbf{a}_{\\perp}$$
+
+// The parallel component lies along $\\mathbf{b}$; the perpendicular component satisfies $\\mathbf{a}_{\\perp} \\cdot \\mathbf{b} = 0$, a fact that follows by substituting the formula and simplifying. These two constituents are geometrically independent — adjusting one leaves the other unchanged, and each accounts for information the other entirely misses.
+
+// This two-part split reappears in more sophisticated forms throughout linear algebra. Projection onto a line generalizes to projection onto multi-dimensional subspaces. The Gram–Schmidt procedure repeats the same splitting step iteratively, peeling off parallel components one vector at a time to produce an orthogonal collection. Least-squares fitting identifies the closest approximation inside a subspace by projecting onto it. Each of these techniques, covered in the [orthogonality](!/linear-algebra/orthogonality) section, traces back to the same principle at work here: partition a vector into what runs along a chosen direction and what runs across it.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj10: {
+//     title: `Summary: Every Use of the Dot Product`,
+//     content: `Across the sections above, the dot product appears in seven distinct roles &mdash; measuring length, computing angles, testing orthogonality, classifying the angular relationship by sign, bounding products of vectors, and producing two kinds of projection. The table below collects all of these in a single reference, organized around the question each role answers and the formula that does the work. Every entry below is built from the same operation <b>a</b> · <b>b</b> = Σ a<sub>i</sub>b<sub>i</sub> &mdash; the geometric variety on the page comes from how that one number is interpreted and combined with the norm.`,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+// };
+
+
+
+// tables-optimized: v4 | 2026-05-22 | 5 tables (obj2 comparison, obj3 aggregation, obj6 comparison, obj9 aggregation, obj10 summary capstone)
+
+// ---------- SECTIONS ----------
+
 const sectionsContent = {
   obj1: {
     title: `Algebraic Definition`,
     content: `The dot product of two vectors $\\mathbf{a} = (a_1, a_2, \\ldots, a_n)$ and $\\mathbf{b} = (b_1, b_2, \\ldots, b_n)$ in $\\mathbb{R}^n$ is the scalar obtained by multiplying corresponding components and summing the results:
 
+@academic[formula_callout:Dot Product (Algebraic Form)
 $$\\mathbf{a} \\cdot \\mathbf{b} = a_1b_1 + a_2b_2 + \\cdots + a_nb_n = \\sum_{i=1}^{n} a_ib_i$$
+/linear-algebra/formulas#dot_product_algebraic_form]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 The notation uses a centered dot between the two vectors. Other names for the same operation are the inner product and the scalar product — the latter emphasizing that the output is a scalar, not a vector.
 
@@ -268,7 +464,12 @@ The dot product differs fundamentally from [vector addition](!/linear-algebra/ve
     title: `Geometric Definition`,
     content: `There is a second way to compute the dot product that bypasses components entirely and works directly with lengths and angles. If $\\mathbf{a}$ and $\\mathbf{b}$ are both nonzero and $\\theta$ denotes the angle they form when drawn from a common point, then:
 
+@academic[formula_callout:Dot Product (Geometric Form)
 $$\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$$
+/linear-algebra/formulas#dot_product_geometric_form]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 The right-hand side multiplies the [magnitudes](!/linear-algebra/vectors/magnitude) of both vectors and adjusts the product by $\\cos\\theta$. That cosine factor does all the interpretive work: it equals $1$ when $\\theta = 0$ (full alignment), drops to $0$ at $\\theta = \\frac{\\pi}{2}$ (no alignment at all), and reaches $-1$ at $\\theta = \\pi$ (complete opposition).
 
@@ -316,9 +517,14 @@ The dot product of a vector with itself is the sum of squared components — alw
     title: `Connection to Magnitude`,
     content: `Positive definiteness reveals that the [norm](!/linear-algebra/vectors/magnitude) is hiding inside the dot product. When a vector is dotted with itself, the result is exactly the quantity that sits under the square root in the norm formula:
 
-$$\\mathbf{v} \\cdot \\mathbf{v} = v_1^2 + v_2^2 + \\cdots + v_n^2 = \\|\\mathbf{v}\\|^2$$
+@academic[formula_callout:Dot Product Magnitude Relation
+$$\\mathbf{v} \\cdot \\mathbf{v} = \\|\\mathbf{v}\\|^2$$
+/linear-algebra/formulas#dot_product_magnitude_relation]@
 
-Squared length, in other words, is not a separate concept — it is a dot product in which both slots are filled by the same vector. Flipping this around gives an alternative expression for the norm: $\\|\\mathbf{v}\\| = \\sqrt{\\mathbf{v} \\cdot \\mathbf{v}}$. Rather than defining magnitude independently and then discovering a coincidence, we can view the norm as something the dot product generates.
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
+
+Written out in components, this reads $\\mathbf{v} \\cdot \\mathbf{v} = v_1^2 + v_2^2 + \\cdots + v_n^2$ — a sum of squares. Squared length, in other words, is not a separate concept — it is a dot product in which both slots are filled by the same vector. Flipping this around gives an alternative expression for the norm: $\\|\\mathbf{v}\\| = \\sqrt{\\mathbf{v} \\cdot \\mathbf{v}}$. Rather than defining magnitude independently and then discovering a coincidence, we can view the norm as something the dot product generates.
 
 This observation has practical consequences. Several norm properties that would otherwise demand their own proofs fall out as corollaries of dot product rules. Scalar factoring implies $\\|c\\mathbf{v}\\| = |c|\\,\\|\\mathbf{v}\\|$ with no extra work. The triangle inequality $\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$ follows once we control the size of $\\mathbf{a} \\cdot \\mathbf{b}$ through Cauchy–Schwarz — again, a statement framed entirely in dot product language.
 
@@ -331,7 +537,12 @@ The dependence runs both ways. The geometric formula $\\mathbf{a} \\cdot \\mathb
     title: `The Angle Between Vectors`,
     content: `Rearranging the geometric formula isolates the angle:
 
+@academic[formula_callout:Angle Between Vectors
 $$\\cos\\theta = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|}$$
+/linear-algebra/formulas#angle_between_vectors]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 This formula is defined only when both vectors are nonzero, since division by zero is undefined. The angle $\\theta$ lies in the interval $[0, \\pi]$, covering all possibilities from vectors pointing in the same direction ($\\theta = 0$) to vectors pointing in exactly opposite directions ($\\theta = \\pi$).
 
@@ -361,7 +572,12 @@ This three-way classification is a fast diagnostic tool. Checking whether a dot 
     title: `Orthogonality`,
     content: `Two vectors are orthogonal when their dot product is zero:
 
-$$\\mathbf{a} \\cdot \\mathbf{b} = 0 \\quad \\Longleftrightarrow \\quad \\mathbf{a} \\perp \\mathbf{b}$$
+@academic[formula_callout:Orthogonality Test
+$$\\mathbf{a} \\cdot \\mathbf{b} = 0 \\iff \\mathbf{a} \\perp \\mathbf{b}$$
+/linear-algebra/formulas#orthogonality_test]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, orthogonality corresponds to perpendicularity — the vectors meet at a right angle. In $\\mathbb{R}^n$ for $n > 3$, perpendicularity cannot be visualized, but the algebraic condition $\\mathbf{a} \\cdot \\mathbf{b} = 0$ still serves as its definition. Orthogonality is the generalization of "right angle" to any number of dimensions.
 
@@ -376,7 +592,12 @@ Orthogonality is far more than a geometric curiosity. Orthogonal vectors are alg
     title: `The Cauchy–Schwarz Inequality`,
     content: `The dot product of two vectors cannot grow arbitrarily large when their lengths are fixed. Cauchy–Schwarz makes this constraint precise:
 
+@academic[formula_callout:Cauchy-Schwarz Inequality
 $$|\\mathbf{a} \\cdot \\mathbf{b}| \\leq \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|$$
+/linear-algebra/formulas#cauchy_schwarz_inequality]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 The geometric angle formula offers the most transparent explanation. Writing $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$ and noting that $|\\cos\\theta|$ never surpasses $1$, the absolute dot product is automatically bounded by the product of the norms. This ceiling is reached only when $\\cos\\theta$ hits $\\pm 1$ — at $\\theta = 0$ or $\\theta = \\pi$ — so equality corresponds to [parallel](!/linear-algebra/vectors/properties) vectors pointing along or against each other.
 
@@ -395,7 +616,12 @@ The inequality plays a structural role beyond bounding computations. Without it,
 
 The signed distance that $\\mathbf{a}$ covers in the direction of $\\mathbf{b}$ is captured by a single number:
 
+@academic[formula_callout:Scalar Projection
 $$\\text{comp}_{\\mathbf{b}}\\,\\mathbf{a} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{b}\\|}$$
+/linear-algebra/formulas#scalar_projection]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 When this quantity comes out positive, $\\mathbf{a}$ tilts toward $\\mathbf{b}$. A negative result means $\\mathbf{a}$ tilts away. Zero signals complete orthogonality — $\\mathbf{a}$ contributes nothing at all in the direction of $\\mathbf{b}$.
 
@@ -403,9 +629,14 @@ When this quantity comes out positive, $\\mathbf{a}$ tilts toward $\\mathbf{b}$.
 
 To obtain an actual vector rather than a bare number, the scalar projection is re-embedded along $\\mathbf{b}$:
 
-$$\\text{proj}_{\\mathbf{b}}\\,\\mathbf{a} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{b} \\cdot \\mathbf{b}}\\,\\mathbf{b} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{b}\\|^2}\\,\\mathbf{b}$$
+@academic[formula_callout:Vector Projection
+$$\\text{proj}_{\\mathbf{b}}\\,\\mathbf{a} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{b}\\|^2}\\,\\mathbf{b}$$
+/linear-algebra/formulas#vector_projection]@
 
-The coefficient $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{b} \\cdot \\mathbf{b}}$ rescales $\\mathbf{b}$ so that the output has the appropriate length and orientation. What results is a vector parallel to $\\mathbf{b}$ whose norm equals $|\\text{comp}_{\\mathbf{b}}\\,\\mathbf{a}|$.
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
+
+Equivalently, the denominator can be written $\\mathbf{b} \\cdot \\mathbf{b}$. The coefficient $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{b} \\cdot \\mathbf{b}}$ rescales $\\mathbf{b}$ so that the output has the appropriate length and orientation. What results is a vector parallel to $\\mathbf{b}$ whose norm equals $|\\text{comp}_{\\mathbf{b}}\\,\\mathbf{a}|$.
 
 ## Orthogonal Decomposition
 
@@ -432,7 +663,6 @@ This two-part split reappears in more sophisticated forms throughout linear alge
     link: '',
   },
 };
-
 
  const introContent = {
      id: `intro`,

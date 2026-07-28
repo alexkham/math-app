@@ -99,7 +99,7 @@ const SectionTableOfContents = ({
     };
 
     const setInitialThreshold = () => {
-      if (boxRef.current) {
+      if (boxRef.current && !isSticky) {
         const height = boxRef.current.offsetHeight;
         setTocHeight(height);
         setPrevHeight(height);
@@ -178,7 +178,7 @@ const SectionTableOfContents = ({
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      const offset = isSticky ? 100 : 320;
+      const offset = isSticky ? 100 : 120;
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
       window.scrollTo({
         top: elementPosition - offset,

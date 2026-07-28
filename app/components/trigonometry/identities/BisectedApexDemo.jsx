@@ -676,6 +676,7 @@
 
 
 import React, { useState, useEffect, useRef } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
 /* ============================================================
    BisectedApexDemo — v8
@@ -1111,7 +1112,7 @@ function MiniSolutionPanel({ steps, tabs = [], stepsTitle = 'Derivation', placeh
                 margin: 0,
                 paddingLeft: '42px',
                 transition: 'color 0.2s ease',
-              }}>{step.description}</p>
+              }}>{typeof step.description === 'string' ? processContent(step.description) : step.description}</p>
             </div>
           );
         })}

@@ -83,7 +83,7 @@ const Sections = ({ sections,leftMargin='220px' }) => {
    const element = document.getElementById(id);
    if (element) {
      window.scrollTo({
-       top: element.getBoundingClientRect().top + window.pageYOffset - 300,
+       top: element.getBoundingClientRect().top + window.pageYOffset - 100,
        behavior: 'smooth'
      });
    }

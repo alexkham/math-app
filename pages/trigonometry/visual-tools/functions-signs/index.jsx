@@ -494,6 +494,7 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import Quadrants from '../../../../app/components/trigonometry/Quadrants'
+import signsDiagrams from '../../../../app/components/trigonometry/quadrantSignsDiagrams'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 
 
@@ -533,7 +534,7 @@ export async function getStaticProps(){
     },
     obj1:{
       title:`Selecting a Quadrant`,
-      content:`Four large buttons at the top represent quadrants **I**, **II**, **III**, and **IV**. Each button shows the angle range in both degrees and radians.
+      content:`Four large buttons at the top represent quadrants [I](!#coordinate-signs-in-quadrant-i), [II](!#coordinate-signs-in-quadrant-ii), [III](!#coordinate-signs-in-quadrant-iii), and [IV](!#coordinate-signs-in-quadrant-iv). Each button shows the angle range in both degrees and radians.
 
 Two ways to select:
 • Click any quadrant button.
@@ -550,7 +551,7 @@ When you select a quadrant:
     },
     obj2:{
       title:`Choosing a Function`,
-      content:`Six buttons let you switch between the trigonometric functions: $\\sin$, $\\cos$, $\\tan$, $\\csc$, $\\sec$, and $\\cot$.
+      content:`Six buttons let you switch between the trigonometric functions — [sine](!#sine-in-quadrant-i), [cosine](!#cosine-in-quadrant-i), [tangent](!#tangent-in-quadrant-i), [cosecant](!#cosecant-in-quadrant-i), [secant](!#secant-in-quadrant-i), and [cotangent](!#cotangent-in-quadrant-i).
 
 What changes when you switch:
 • The header of the **Explanation Panel** updates to show $f(\\theta)$ in the selected quadrant.
@@ -637,10 +638,10 @@ For deeper coverage of these definitions, see the **trigonometric functions theo
       title:`The ASTC Mnemonic`,
       content:`The **ASTC rule** (also called **CAST**) summarizes which functions are positive in each quadrant:
 
-• **Q1** — **A**ll six functions are positive.
-• **Q2** — only **S**ine (and its reciprocal $\\csc$) are positive.
-• **Q3** — only **T**angent (and its reciprocal $\\cot$) are positive.
-• **Q4** — only **C**osine (and its reciprocal $\\sec$) are positive.
+• [Q1](!#coordinate-signs-in-quadrant-i) — **A**ll six functions are positive.
+• [Q2](!#coordinate-signs-in-quadrant-ii) — only **S**ine (and its reciprocal $\\csc$) are positive.
+• [Q3](!#coordinate-signs-in-quadrant-iii) — only **T**angent (and its reciprocal $\\cot$) are positive.
+• [Q4](!#coordinate-signs-in-quadrant-iv) — only **C**osine (and its reciprocal $\\sec$) are positive.
 
 Common phrase: **A**ll **S**tudents **T**ake **C**alculus. Walking quadrants counterclockwise from Q1, the first letter of each word names the positive function family.
 
@@ -673,6 +674,315 @@ This means you only need to memorize the signs of three functions ($\\sin$, $\\c
 • **Reference Angle Calculator** — reduce any angle to a first-quadrant equivalent.
 • **Trigonometric Identities** — Pythagorean, reciprocal, and quotient identities that interact with these signs.
 • **Special Angles Table** — exact values across all four quadrants.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+    obj11:{
+      title:`Coordinate Signs in Quadrant I`,
+      content:`**Quadrant I** spans $0°$–$90°$ ($0$ to $\\pi/2$ in radians): the x-coordinate is **positive**, the y-coordinate is **positive**, and the radius $r$ is always positive. Every function sign in this quadrant follows from those three facts. Its ASTC letter is **A** — all six functions positive.
+
+${signsDiagrams.quadrants[1]}
+
+Function by function here: [sine](!#sine-in-quadrant-i) +, [cosine](!#cosine-in-quadrant-i) +, [tangent](!#tangent-in-quadrant-i) +, [cosecant](!#cosecant-in-quadrant-i) +, [secant](!#secant-in-quadrant-i) +, [cotangent](!#cotangent-in-quadrant-i) +.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj12:{
+      title:`Coordinate Signs in Quadrant II`,
+      content:`**Quadrant II** spans $90°$–$180°$ ($\\pi/2$ to $\\pi$ in radians): the x-coordinate is **negative**, the y-coordinate is **positive**, and the radius $r$ is always positive. Every function sign in this quadrant follows from those three facts. Its ASTC letter is **S** — only sine and its reciprocal positive.
+
+${signsDiagrams.quadrants[2]}
+
+Function by function here: [sine](!#sine-in-quadrant-ii) +, [cosine](!#cosine-in-quadrant-ii) −, [tangent](!#tangent-in-quadrant-ii) −, [cosecant](!#cosecant-in-quadrant-ii) +, [secant](!#secant-in-quadrant-ii) −, [cotangent](!#cotangent-in-quadrant-ii) −.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj13:{
+      title:`Coordinate Signs in Quadrant III`,
+      content:`**Quadrant III** spans $180°$–$270°$ ($\\pi$ to $3\\pi/2$ in radians): the x-coordinate is **negative**, the y-coordinate is **negative**, and the radius $r$ is always positive. Every function sign in this quadrant follows from those three facts. Its ASTC letter is **T** — only tangent and its reciprocal positive.
+
+${signsDiagrams.quadrants[3]}
+
+Function by function here: [sine](!#sine-in-quadrant-iii) −, [cosine](!#cosine-in-quadrant-iii) −, [tangent](!#tangent-in-quadrant-iii) +, [cosecant](!#cosecant-in-quadrant-iii) −, [secant](!#secant-in-quadrant-iii) −, [cotangent](!#cotangent-in-quadrant-iii) +.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj14:{
+      title:`Coordinate Signs in Quadrant IV`,
+      content:`**Quadrant IV** spans $270°$–$360°$ ($3\\pi/2$ to $2\\pi$ in radians): the x-coordinate is **positive**, the y-coordinate is **negative**, and the radius $r$ is always positive. Every function sign in this quadrant follows from those three facts. Its ASTC letter is **C** — only cosine and its reciprocal positive.
+
+${signsDiagrams.quadrants[4]}
+
+Function by function here: [sine](!#sine-in-quadrant-iv) −, [cosine](!#cosine-in-quadrant-iv) +, [tangent](!#tangent-in-quadrant-iv) −, [cosecant](!#cosecant-in-quadrant-iv) −, [secant](!#secant-in-quadrant-iv) +, [cotangent](!#cotangent-in-quadrant-iv) −.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj15:{
+      title:`Sine in Quadrant I`,
+      content:`In **Quadrant I** ($0°$–$90°$), sine is **positive**: $\\sin\\theta = y/r$, and the y-coordinate is positive there while $r$ stays positive.
+
+${signsDiagrams.combos[1].sin}
+
+At the sample angle the diagram freezes, $\\sin 45° = \\frac{\\sqrt{2}}{2}$ (\\approx 0.707). Its reciprocal partner, [cosecant](!#cosecant-in-quadrant-i), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant I](!#coordinate-signs-in-quadrant-i).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj16:{
+      title:`Cosine in Quadrant I`,
+      content:`In **Quadrant I** ($0°$–$90°$), cosine is **positive**: $\\cos\\theta = x/r$, and the x-coordinate is positive there while $r$ stays positive.
+
+${signsDiagrams.combos[1].cos}
+
+At the sample angle the diagram freezes, $\\cos 45° = \\frac{\\sqrt{2}}{2}$ (\\approx 0.707). Its reciprocal partner, [secant](!#secant-in-quadrant-i), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant I](!#coordinate-signs-in-quadrant-i).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj17:{
+      title:`Tangent in Quadrant I`,
+      content:`In **Quadrant I** ($0°$–$90°$), tangent is **positive**: $\\tan\\theta = y/x$, and y is positive and x is positive, so their ratio is positive.
+
+${signsDiagrams.combos[1].tan}
+
+At the sample angle the diagram freezes, $\\tan 45° = 1$. Its reciprocal partner, [cotangent](!#cotangent-in-quadrant-i), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant I](!#coordinate-signs-in-quadrant-i).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj18:{
+      title:`Cosecant in Quadrant I`,
+      content:`In **Quadrant I** ($0°$–$90°$), cosecant is **positive**: $\\csc\\theta = r/y$, and it inherits sine's sign — y is positive, $r$ positive.
+
+${signsDiagrams.combos[1].csc}
+
+At the sample angle the diagram freezes, $\\csc 45° = \\sqrt{2}$ (\\approx 1.414). Its reciprocal partner, [sine](!#sine-in-quadrant-i), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant I](!#coordinate-signs-in-quadrant-i).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj19:{
+      title:`Secant in Quadrant I`,
+      content:`In **Quadrant I** ($0°$–$90°$), secant is **positive**: $\\sec\\theta = r/x$, and it inherits cosine's sign — x is positive, $r$ positive.
+
+${signsDiagrams.combos[1].sec}
+
+At the sample angle the diagram freezes, $\\sec 45° = \\sqrt{2}$ (\\approx 1.414). Its reciprocal partner, [cosine](!#cosine-in-quadrant-i), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant I](!#coordinate-signs-in-quadrant-i).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj20:{
+      title:`Cotangent in Quadrant I`,
+      content:`In **Quadrant I** ($0°$–$90°$), cotangent is **positive**: $\\cot\\theta = x/y$, and y is positive and x is positive, so their ratio is positive.
+
+${signsDiagrams.combos[1].cot}
+
+At the sample angle the diagram freezes, $\\cot 45° = 1$. Its reciprocal partner, [tangent](!#tangent-in-quadrant-i), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant I](!#coordinate-signs-in-quadrant-i).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj21:{
+      title:`Sine in Quadrant II`,
+      content:`In **Quadrant II** ($90°$–$180°$), sine is **positive**: $\\sin\\theta = y/r$, and the y-coordinate is positive there while $r$ stays positive.
+
+${signsDiagrams.combos[2].sin}
+
+At the sample angle the diagram freezes, $\\sin 135° = \\frac{\\sqrt{2}}{2}$ (\\approx 0.707). Its reciprocal partner, [cosecant](!#cosecant-in-quadrant-ii), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant II](!#coordinate-signs-in-quadrant-ii).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj22:{
+      title:`Cosine in Quadrant II`,
+      content:`In **Quadrant II** ($90°$–$180°$), cosine is **negative**: $\\cos\\theta = x/r$, and the x-coordinate is negative there while $r$ stays positive.
+
+${signsDiagrams.combos[2].cos}
+
+At the sample angle the diagram freezes, $\\cos 135° = -\\frac{\\sqrt{2}}{2}$ (\\approx -0.707). Its reciprocal partner, [secant](!#secant-in-quadrant-ii), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant II](!#coordinate-signs-in-quadrant-ii).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj23:{
+      title:`Tangent in Quadrant II`,
+      content:`In **Quadrant II** ($90°$–$180°$), tangent is **negative**: $\\tan\\theta = y/x$, and y is positive and x is negative, so their ratio is negative.
+
+${signsDiagrams.combos[2].tan}
+
+At the sample angle the diagram freezes, $\\tan 135° = -1$. Its reciprocal partner, [cotangent](!#cotangent-in-quadrant-ii), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant II](!#coordinate-signs-in-quadrant-ii).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj24:{
+      title:`Cosecant in Quadrant II`,
+      content:`In **Quadrant II** ($90°$–$180°$), cosecant is **positive**: $\\csc\\theta = r/y$, and it inherits sine's sign — y is positive, $r$ positive.
+
+${signsDiagrams.combos[2].csc}
+
+At the sample angle the diagram freezes, $\\csc 135° = \\sqrt{2}$ (\\approx 1.414). Its reciprocal partner, [sine](!#sine-in-quadrant-ii), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant II](!#coordinate-signs-in-quadrant-ii).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj25:{
+      title:`Secant in Quadrant II`,
+      content:`In **Quadrant II** ($90°$–$180°$), secant is **negative**: $\\sec\\theta = r/x$, and it inherits cosine's sign — x is negative, $r$ positive.
+
+${signsDiagrams.combos[2].sec}
+
+At the sample angle the diagram freezes, $\\sec 135° = -\\sqrt{2}$ (\\approx -1.414). Its reciprocal partner, [cosine](!#cosine-in-quadrant-ii), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant II](!#coordinate-signs-in-quadrant-ii).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj26:{
+      title:`Cotangent in Quadrant II`,
+      content:`In **Quadrant II** ($90°$–$180°$), cotangent is **negative**: $\\cot\\theta = x/y$, and y is positive and x is negative, so their ratio is negative.
+
+${signsDiagrams.combos[2].cot}
+
+At the sample angle the diagram freezes, $\\cot 135° = -1$. Its reciprocal partner, [tangent](!#tangent-in-quadrant-ii), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant II](!#coordinate-signs-in-quadrant-ii).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj27:{
+      title:`Sine in Quadrant III`,
+      content:`In **Quadrant III** ($180°$–$270°$), sine is **negative**: $\\sin\\theta = y/r$, and the y-coordinate is negative there while $r$ stays positive.
+
+${signsDiagrams.combos[3].sin}
+
+At the sample angle the diagram freezes, $\\sin 225° = -\\frac{\\sqrt{2}}{2}$ (\\approx -0.707). Its reciprocal partner, [cosecant](!#cosecant-in-quadrant-iii), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant III](!#coordinate-signs-in-quadrant-iii).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj28:{
+      title:`Cosine in Quadrant III`,
+      content:`In **Quadrant III** ($180°$–$270°$), cosine is **negative**: $\\cos\\theta = x/r$, and the x-coordinate is negative there while $r$ stays positive.
+
+${signsDiagrams.combos[3].cos}
+
+At the sample angle the diagram freezes, $\\cos 225° = -\\frac{\\sqrt{2}}{2}$ (\\approx -0.707). Its reciprocal partner, [secant](!#secant-in-quadrant-iii), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant III](!#coordinate-signs-in-quadrant-iii).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj29:{
+      title:`Tangent in Quadrant III`,
+      content:`In **Quadrant III** ($180°$–$270°$), tangent is **positive**: $\\tan\\theta = y/x$, and y is negative and x is negative, so their ratio is positive.
+
+${signsDiagrams.combos[3].tan}
+
+At the sample angle the diagram freezes, $\\tan 225° = 1$. Its reciprocal partner, [cotangent](!#cotangent-in-quadrant-iii), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant III](!#coordinate-signs-in-quadrant-iii).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj30:{
+      title:`Cosecant in Quadrant III`,
+      content:`In **Quadrant III** ($180°$–$270°$), cosecant is **negative**: $\\csc\\theta = r/y$, and it inherits sine's sign — y is negative, $r$ positive.
+
+${signsDiagrams.combos[3].csc}
+
+At the sample angle the diagram freezes, $\\csc 225° = -\\sqrt{2}$ (\\approx -1.414). Its reciprocal partner, [sine](!#sine-in-quadrant-iii), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant III](!#coordinate-signs-in-quadrant-iii).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj31:{
+      title:`Secant in Quadrant III`,
+      content:`In **Quadrant III** ($180°$–$270°$), secant is **negative**: $\\sec\\theta = r/x$, and it inherits cosine's sign — x is negative, $r$ positive.
+
+${signsDiagrams.combos[3].sec}
+
+At the sample angle the diagram freezes, $\\sec 225° = -\\sqrt{2}$ (\\approx -1.414). Its reciprocal partner, [cosine](!#cosine-in-quadrant-iii), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant III](!#coordinate-signs-in-quadrant-iii).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj32:{
+      title:`Cotangent in Quadrant III`,
+      content:`In **Quadrant III** ($180°$–$270°$), cotangent is **positive**: $\\cot\\theta = x/y$, and y is negative and x is negative, so their ratio is positive.
+
+${signsDiagrams.combos[3].cot}
+
+At the sample angle the diagram freezes, $\\cot 225° = 1$. Its reciprocal partner, [tangent](!#tangent-in-quadrant-iii), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant III](!#coordinate-signs-in-quadrant-iii).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj33:{
+      title:`Sine in Quadrant IV`,
+      content:`In **Quadrant IV** ($270°$–$360°$), sine is **negative**: $\\sin\\theta = y/r$, and the y-coordinate is negative there while $r$ stays positive.
+
+${signsDiagrams.combos[4].sin}
+
+At the sample angle the diagram freezes, $\\sin 315° = -\\frac{\\sqrt{2}}{2}$ (\\approx -0.707). Its reciprocal partner, [cosecant](!#cosecant-in-quadrant-iv), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant IV](!#coordinate-signs-in-quadrant-iv).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj34:{
+      title:`Cosine in Quadrant IV`,
+      content:`In **Quadrant IV** ($270°$–$360°$), cosine is **positive**: $\\cos\\theta = x/r$, and the x-coordinate is positive there while $r$ stays positive.
+
+${signsDiagrams.combos[4].cos}
+
+At the sample angle the diagram freezes, $\\cos 315° = \\frac{\\sqrt{2}}{2}$ (\\approx 0.707). Its reciprocal partner, [secant](!#secant-in-quadrant-iv), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant IV](!#coordinate-signs-in-quadrant-iv).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj35:{
+      title:`Tangent in Quadrant IV`,
+      content:`In **Quadrant IV** ($270°$–$360°$), tangent is **negative**: $\\tan\\theta = y/x$, and y is negative and x is positive, so their ratio is negative.
+
+${signsDiagrams.combos[4].tan}
+
+At the sample angle the diagram freezes, $\\tan 315° = -1$. Its reciprocal partner, [cotangent](!#cotangent-in-quadrant-iv), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant IV](!#coordinate-signs-in-quadrant-iv).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj36:{
+      title:`Cosecant in Quadrant IV`,
+      content:`In **Quadrant IV** ($270°$–$360°$), cosecant is **negative**: $\\csc\\theta = r/y$, and it inherits sine's sign — y is negative, $r$ positive.
+
+${signsDiagrams.combos[4].csc}
+
+At the sample angle the diagram freezes, $\\csc 315° = -\\sqrt{2}$ (\\approx -1.414). Its reciprocal partner, [sine](!#sine-in-quadrant-iv), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant IV](!#coordinate-signs-in-quadrant-iv).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj37:{
+      title:`Secant in Quadrant IV`,
+      content:`In **Quadrant IV** ($270°$–$360°$), secant is **positive**: $\\sec\\theta = r/x$, and it inherits cosine's sign — x is positive, $r$ positive.
+
+${signsDiagrams.combos[4].sec}
+
+At the sample angle the diagram freezes, $\\sec 315° = \\sqrt{2}$ (\\approx 1.414). Its reciprocal partner, [cosine](!#cosine-in-quadrant-iv), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant IV](!#coordinate-signs-in-quadrant-iv).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj38:{
+      title:`Cotangent in Quadrant IV`,
+      content:`In **Quadrant IV** ($270°$–$360°$), cotangent is **negative**: $\\cot\\theta = x/y$, and y is negative and x is positive, so their ratio is negative.
+
+${signsDiagrams.combos[4].cot}
+
+At the sample angle the diagram freezes, $\\cot 315° = -1$. Its reciprocal partner, [tangent](!#tangent-in-quadrant-iv), carries the same sign here; the underlying coordinate facts are in [coordinate signs in Quadrant IV](!#coordinate-signs-in-quadrant-iv).`,
       before:``,
       after:``,
       link:'',
@@ -797,12 +1107,55 @@ This means you only need to memorize the signs of three functions ($\\sin$, $\\c
 
 
 
+  // Canonical explanations (verbatim from the component templates, kept there
+  // as fallback) plus same-page anchors to each state’s full section.
+  const explanations = {
+    sin: {
+      1: `sin θ = y/r. Since y is positive and r is always positive, sin θ is positive. [Full treatment](!#sine-in-quadrant-i) · [Quadrant I coordinates](!#coordinate-signs-in-quadrant-i)`,
+      2: `sin θ = y/r. Since y is positive and r is always positive, sin θ is positive. [Full treatment](!#sine-in-quadrant-ii) · [Quadrant II coordinates](!#coordinate-signs-in-quadrant-ii)`,
+      3: `sin θ = y/r. Since y is negative and r is always positive, sin θ is negative. [Full treatment](!#sine-in-quadrant-iii) · [Quadrant III coordinates](!#coordinate-signs-in-quadrant-iii)`,
+      4: `sin θ = y/r. Since y is negative and r is always positive, sin θ is negative. [Full treatment](!#sine-in-quadrant-iv) · [Quadrant IV coordinates](!#coordinate-signs-in-quadrant-iv)`,
+    },
+    cos: {
+      1: `cos θ = x/r. Since x is positive and r is always positive, cos θ is positive. [Full treatment](!#cosine-in-quadrant-i) · [Quadrant I coordinates](!#coordinate-signs-in-quadrant-i)`,
+      2: `cos θ = x/r. Since x is negative and r is always positive, cos θ is negative. [Full treatment](!#cosine-in-quadrant-ii) · [Quadrant II coordinates](!#coordinate-signs-in-quadrant-ii)`,
+      3: `cos θ = x/r. Since x is negative and r is always positive, cos θ is negative. [Full treatment](!#cosine-in-quadrant-iii) · [Quadrant III coordinates](!#coordinate-signs-in-quadrant-iii)`,
+      4: `cos θ = x/r. Since x is positive and r is always positive, cos θ is positive. [Full treatment](!#cosine-in-quadrant-iv) · [Quadrant IV coordinates](!#coordinate-signs-in-quadrant-iv)`,
+    },
+    tan: {
+      1: `tan θ = y/x. Since y is positive and x is positive, tan θ is positive. [Full treatment](!#tangent-in-quadrant-i) · [Quadrant I coordinates](!#coordinate-signs-in-quadrant-i)`,
+      2: `tan θ = y/x. Since y is positive and x is negative, tan θ is negative. [Full treatment](!#tangent-in-quadrant-ii) · [Quadrant II coordinates](!#coordinate-signs-in-quadrant-ii)`,
+      3: `tan θ = y/x. Since y is negative and x is negative, tan θ is positive. [Full treatment](!#tangent-in-quadrant-iii) · [Quadrant III coordinates](!#coordinate-signs-in-quadrant-iii)`,
+      4: `tan θ = y/x. Since y is negative and x is positive, tan θ is negative. [Full treatment](!#tangent-in-quadrant-iv) · [Quadrant IV coordinates](!#coordinate-signs-in-quadrant-iv)`,
+    },
+    csc: {
+      1: `csc θ = r/y = 1/sin θ. Since r is always positive and y is positive, csc θ is positive. [Full treatment](!#cosecant-in-quadrant-i) · [Quadrant I coordinates](!#coordinate-signs-in-quadrant-i)`,
+      2: `csc θ = r/y = 1/sin θ. Since r is always positive and y is positive, csc θ is positive. [Full treatment](!#cosecant-in-quadrant-ii) · [Quadrant II coordinates](!#coordinate-signs-in-quadrant-ii)`,
+      3: `csc θ = r/y = 1/sin θ. Since r is always positive and y is negative, csc θ is negative. [Full treatment](!#cosecant-in-quadrant-iii) · [Quadrant III coordinates](!#coordinate-signs-in-quadrant-iii)`,
+      4: `csc θ = r/y = 1/sin θ. Since r is always positive and y is negative, csc θ is negative. [Full treatment](!#cosecant-in-quadrant-iv) · [Quadrant IV coordinates](!#coordinate-signs-in-quadrant-iv)`,
+    },
+    sec: {
+      1: `sec θ = r/x = 1/cos θ. Since r is always positive and x is positive, sec θ is positive. [Full treatment](!#secant-in-quadrant-i) · [Quadrant I coordinates](!#coordinate-signs-in-quadrant-i)`,
+      2: `sec θ = r/x = 1/cos θ. Since r is always positive and x is negative, sec θ is negative. [Full treatment](!#secant-in-quadrant-ii) · [Quadrant II coordinates](!#coordinate-signs-in-quadrant-ii)`,
+      3: `sec θ = r/x = 1/cos θ. Since r is always positive and x is negative, sec θ is negative. [Full treatment](!#secant-in-quadrant-iii) · [Quadrant III coordinates](!#coordinate-signs-in-quadrant-iii)`,
+      4: `sec θ = r/x = 1/cos θ. Since r is always positive and x is positive, sec θ is positive. [Full treatment](!#secant-in-quadrant-iv) · [Quadrant IV coordinates](!#coordinate-signs-in-quadrant-iv)`,
+    },
+    cot: {
+      1: `cot θ = x/y. Since x is positive and y is positive, cot θ is positive. [Full treatment](!#cotangent-in-quadrant-i) · [Quadrant I coordinates](!#coordinate-signs-in-quadrant-i)`,
+      2: `cot θ = x/y. Since x is negative and y is positive, cot θ is negative. [Full treatment](!#cotangent-in-quadrant-ii) · [Quadrant II coordinates](!#coordinate-signs-in-quadrant-ii)`,
+      3: `cot θ = x/y. Since x is negative and y is negative, cot θ is positive. [Full treatment](!#cotangent-in-quadrant-iii) · [Quadrant III coordinates](!#coordinate-signs-in-quadrant-iii)`,
+      4: `cot θ = x/y. Since x is positive and y is negative, cot θ is negative. [Full treatment](!#cotangent-in-quadrant-iv) · [Quadrant IV coordinates](!#coordinate-signs-in-quadrant-iv)`,
+    },
+  };
+
+
    return {
       props:{
          sectionsContent,
          introContent,
          faqQuestions,
          schemas,
+         explanations,
           seoData: {
         title: "Trig Function Signs by Quadrant: ASTC Visualizer | Learn Math Class",
         description: "Visualize how sin, cos, tan, csc, sec, and cot change sign across quadrants. Interactive unit circle with the ASTC rule and step-by-step reasoning.",
@@ -817,12 +1170,12 @@ This means you only need to memorize the signs of three functions ($\\sin$, $\\c
     }
    }
 
-export default function FunctionsSignsPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function FunctionsSignsPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations}) {
 
 
   const genericSections=[
     {
-        id:'0',
+        id:'key-terms',
         title:sectionsContent.obj0.title,
         link:sectionsContent.obj0.link,
         content:[
@@ -830,7 +1183,7 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
         ]
     },
     {
-        id:'1',
+        id:'selecting-a-quadrant',
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
@@ -838,7 +1191,7 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
         ]
     },
     {
-        id:'2',
+        id:'choosing-a-function',
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
@@ -846,7 +1199,7 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
         ]
     },
     {
-        id:'3',
+        id:'reading-the-unit-circle-diagram',
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
@@ -854,7 +1207,7 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
         ]
     },
     {
-        id:'4',
+        id:'reading-the-coordinate-panel',
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
@@ -862,7 +1215,7 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
         ]
     },
     {
-        id:'5',
+        id:'reading-the-explanation-panel',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
@@ -870,7 +1223,7 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
         ]
     },
     {
-        id:'6',
+        id:'using-the-function-summary-grid',
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
@@ -878,7 +1231,7 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
         ]
     },
     {
-        id:'7',
+        id:'why-function-signs-depend-on-quadrant',
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
@@ -886,7 +1239,7 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
         ]
     },
     {
-        id:'8',
+        id:'the-astc-mnemonic',
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
@@ -894,7 +1247,7 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
         ]
     },
     {
-        id:'9',
+        id:'reciprocal-functions-share-signs',
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
         content:[
@@ -902,11 +1255,235 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
         ]
     },
     {
-        id:'10',
+        id:'related-concepts-and-tools',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+        ]
+    },
+    {
+        id:'coordinate-signs-in-quadrant-i',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
+        ]
+    },
+    {
+        id:'coordinate-signs-in-quadrant-ii',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+        ]
+    },
+    {
+        id:'coordinate-signs-in-quadrant-iii',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
+        ]
+    },
+    {
+        id:'coordinate-signs-in-quadrant-iv',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+        ]
+    },
+    {
+        id:'sine-in-quadrant-i',
+        title:sectionsContent.obj15.title,
+        link:sectionsContent.obj15.link,
+        content:[
+          sectionsContent.obj15.content,
+        ]
+    },
+    {
+        id:'cosine-in-quadrant-i',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
+        ]
+    },
+    {
+        id:'tangent-in-quadrant-i',
+        title:sectionsContent.obj17.title,
+        link:sectionsContent.obj17.link,
+        content:[
+          sectionsContent.obj17.content,
+        ]
+    },
+    {
+        id:'cosecant-in-quadrant-i',
+        title:sectionsContent.obj18.title,
+        link:sectionsContent.obj18.link,
+        content:[
+          sectionsContent.obj18.content,
+        ]
+    },
+    {
+        id:'secant-in-quadrant-i',
+        title:sectionsContent.obj19.title,
+        link:sectionsContent.obj19.link,
+        content:[
+          sectionsContent.obj19.content,
+        ]
+    },
+    {
+        id:'cotangent-in-quadrant-i',
+        title:sectionsContent.obj20.title,
+        link:sectionsContent.obj20.link,
+        content:[
+          sectionsContent.obj20.content,
+        ]
+    },
+    {
+        id:'sine-in-quadrant-ii',
+        title:sectionsContent.obj21.title,
+        link:sectionsContent.obj21.link,
+        content:[
+          sectionsContent.obj21.content,
+        ]
+    },
+    {
+        id:'cosine-in-quadrant-ii',
+        title:sectionsContent.obj22.title,
+        link:sectionsContent.obj22.link,
+        content:[
+          sectionsContent.obj22.content,
+        ]
+    },
+    {
+        id:'tangent-in-quadrant-ii',
+        title:sectionsContent.obj23.title,
+        link:sectionsContent.obj23.link,
+        content:[
+          sectionsContent.obj23.content,
+        ]
+    },
+    {
+        id:'cosecant-in-quadrant-ii',
+        title:sectionsContent.obj24.title,
+        link:sectionsContent.obj24.link,
+        content:[
+          sectionsContent.obj24.content,
+        ]
+    },
+    {
+        id:'secant-in-quadrant-ii',
+        title:sectionsContent.obj25.title,
+        link:sectionsContent.obj25.link,
+        content:[
+          sectionsContent.obj25.content,
+        ]
+    },
+    {
+        id:'cotangent-in-quadrant-ii',
+        title:sectionsContent.obj26.title,
+        link:sectionsContent.obj26.link,
+        content:[
+          sectionsContent.obj26.content,
+        ]
+    },
+    {
+        id:'sine-in-quadrant-iii',
+        title:sectionsContent.obj27.title,
+        link:sectionsContent.obj27.link,
+        content:[
+          sectionsContent.obj27.content,
+        ]
+    },
+    {
+        id:'cosine-in-quadrant-iii',
+        title:sectionsContent.obj28.title,
+        link:sectionsContent.obj28.link,
+        content:[
+          sectionsContent.obj28.content,
+        ]
+    },
+    {
+        id:'tangent-in-quadrant-iii',
+        title:sectionsContent.obj29.title,
+        link:sectionsContent.obj29.link,
+        content:[
+          sectionsContent.obj29.content,
+        ]
+    },
+    {
+        id:'cosecant-in-quadrant-iii',
+        title:sectionsContent.obj30.title,
+        link:sectionsContent.obj30.link,
+        content:[
+          sectionsContent.obj30.content,
+        ]
+    },
+    {
+        id:'secant-in-quadrant-iii',
+        title:sectionsContent.obj31.title,
+        link:sectionsContent.obj31.link,
+        content:[
+          sectionsContent.obj31.content,
+        ]
+    },
+    {
+        id:'cotangent-in-quadrant-iii',
+        title:sectionsContent.obj32.title,
+        link:sectionsContent.obj32.link,
+        content:[
+          sectionsContent.obj32.content,
+        ]
+    },
+    {
+        id:'sine-in-quadrant-iv',
+        title:sectionsContent.obj33.title,
+        link:sectionsContent.obj33.link,
+        content:[
+          sectionsContent.obj33.content,
+        ]
+    },
+    {
+        id:'cosine-in-quadrant-iv',
+        title:sectionsContent.obj34.title,
+        link:sectionsContent.obj34.link,
+        content:[
+          sectionsContent.obj34.content,
+        ]
+    },
+    {
+        id:'tangent-in-quadrant-iv',
+        title:sectionsContent.obj35.title,
+        link:sectionsContent.obj35.link,
+        content:[
+          sectionsContent.obj35.content,
+        ]
+    },
+    {
+        id:'cosecant-in-quadrant-iv',
+        title:sectionsContent.obj36.title,
+        link:sectionsContent.obj36.link,
+        content:[
+          sectionsContent.obj36.content,
+        ]
+    },
+    {
+        id:'secant-in-quadrant-iv',
+        title:sectionsContent.obj37.title,
+        link:sectionsContent.obj37.link,
+        content:[
+          sectionsContent.obj37.content,
+        ]
+    },
+    {
+        id:'cotangent-in-quadrant-iv',
+        title:sectionsContent.obj38.title,
+        link:sectionsContent.obj38.link,
+        content:[
+          sectionsContent.obj38.content,
         ]
     },
 
@@ -980,16 +1557,16 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
   topOffset='200px'
    >
    <div style={{transform:'scale(0.9)'}}>
-   <Quadrants/>
+   <Quadrants explanations={explanations}/>
    </div>
    </SiblingsNav>
    <br/>
-   {/* <SectionTableOfContents sections={genericSections}
+   <SectionTableOfContents sections={genericSections}
     showSecondaryNav={true}
-         secondaryNavMode="siblings"  // or "children"
+         secondaryNavMode="siblings"
          secondaryNavTitle="More in this Section"
 
-   /> */}
+   />
    <br/>
    <br/>
    <br/>
@@ -1010,7 +1587,7 @@ export default function FunctionsSignsPage({seoData, sectionsContent, introConte
      variant="light"
    /> */}
    <br/>
-   {/* <Sections sections={genericSections.slice(1)}/> */}
+   <Sections sections={genericSections.slice(1)}/>
    <br/>
    <br/>
    <br/>
