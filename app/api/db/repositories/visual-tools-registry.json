@@ -1,174 +1,404 @@
 {
   "$meta": {
-    "version": "1.0.0",
-    "description": "Registry of visual tools across the site, with state enumeration and state-to-section mappings for the Line 1 anchor mesh. Intended location in the codebase: /app/api/db/repositories/visual-tools-registry.json",
-    "generated": "2026-07-27",
+    "version": "2.0.0",
+    "description": "Cross-page link ledger for the Line 2 (tier 2) mesh. Per tool: identity fields and the related-terms list — the primary artifact — with dispositions (linked with link records, or dropped with reason). Stores only cross-app linkage data not visible from any single file. Line 1 on-page anchors are intentionally NOT recorded here.",
+    "generated": "2026-07-28",
     "conventions": {
       "toolKey": "kebab-case tool slug, matches the URL segment under /visual-tools/",
-      "sectionSlug": "kebab-case slug derived from section title, matches the id attribute on the rendered <section> element on that tool's page",
-      "stateShape": "'flat' means states are keyed directly; 'nested' means states are grouped by category (e.g. angleTypes.acute)",
-      "sectionSlug_null": "Explicit gap — the tool has this state but no on-page section covers it yet. Line 1 Step 5 must address these before finalizing.",
-      "line1Status": "'pending' before Line 1 has processed the tool; 'in-progress' during; 'done' once anchors are wired and integrity check passes.",
-      "populationRule": "Line 1 agent updates states[*].sectionSlug during Step 5, flips line1Status to 'done' at Step 8, and adds new tool entries after processing each new tool."
+      "relatedTerms": "Built first, before any linking: page prose scanned against definitionsRepository + formulasRepository names (tool’s own section by default; cross-section matches only when topical), plus explicit \"see the X page\" gestures, plus each knowledge section’s central subject. Each term: entity (repo key or null), sections (occurrence slugs), status (linked | dropped | pending), links[] or reason.",
+      "completeness": "A tool is complete when no relatedTerms entry has status \"pending\" and a re-scan yields no term missing from the list.",
+      "populationRule": "The Line 2 agent writes the full dispositioned list in the same pass that plants the links, and adds new tool entries as tools are processed."
     }
   },
-
   "tools": {
-
     "angle-explorer": {
       "slug": "angle-explorer",
       "name": "Angle Explorer",
       "section": "trigonometry",
       "pagePath": "/trigonometry/visual-tools/angle-explorer",
-      "pageFile": "/pages/trigonometry/visual-tools/angle-explorer.jsx",
-      "componentName": "AngleExplorer",
-      "componentPath": "/app/components/trigonometry/angle/AngleExplorer",
-      "description": "Interactive angle visualizer: type an angle in degrees or radians, see its classification, quadrant, reference angle, related and coterminal angles, and live trig values including exact special-angle forms.",
-      "line1Status": "pending",
-      "sections": [
-        "setting-an-angle",
-        "choosing-degrees-or-radians",
-        "using-quick-preset-angles",
-        "display-toggle-options",
-        "reading-the-properties-panel",
-        "working-with-related-and-coterminal-angles",
-        "reading-the-trigonometric-values-table",
-        "what-is-an-angle",
-        "angle-types-and-classifications",
-        "complementary-supplementary-and-reference-angles",
-        "related-concepts-and-tools"
-      ],
-      "stateShape": "nested",
-      "states": {
-        "angleTypes": {
-          "acute":    { "sectionSlug": "angle-types-and-classifications" },
-          "right":    { "sectionSlug": "angle-types-and-classifications" },
-          "obtuse":   { "sectionSlug": "angle-types-and-classifications" },
-          "straight": { "sectionSlug": "angle-types-and-classifications" },
-          "reflex":   { "sectionSlug": "angle-types-and-classifications" }
+      "relatedTerms": [
+        {
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "what-is-an-angle"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "what-is-an-angle",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "angle"
+              },
+              "method": "repository",
+              "added": "2026-07-28"
+            }
+          ]
         },
-        "quadrants": {
-          "1": { "sectionSlug": null, "gap": "No dedicated quadrants section on page. Line 1 Step 5 should add one covering quadrant sign patterns and their role in trig evaluation." },
-          "2": { "sectionSlug": null, "gap": "See quadrant 1 gap." },
-          "3": { "sectionSlug": null, "gap": "See quadrant 1 gap." },
-          "4": { "sectionSlug": null, "gap": "See quadrant 1 gap." }
+        {
+          "term": "degree",
+          "entity": "degree",
+          "sections": [
+            "what-is-an-angle",
+            "choosing-degrees-or-radians"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "what-is-an-angle",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-07-28"
+            }
+          ]
         },
-        "specialAngles": {
-          "0":   { "sectionSlug": "using-quick-preset-angles" },
-          "30":  { "sectionSlug": "using-quick-preset-angles" },
-          "45":  { "sectionSlug": "using-quick-preset-angles" },
-          "60":  { "sectionSlug": "using-quick-preset-angles" },
-          "90":  { "sectionSlug": "using-quick-preset-angles" },
-          "120": { "sectionSlug": "using-quick-preset-angles" },
-          "135": { "sectionSlug": "using-quick-preset-angles" },
-          "150": { "sectionSlug": "using-quick-preset-angles" },
-          "180": { "sectionSlug": "using-quick-preset-angles" },
-          "210": { "sectionSlug": "using-quick-preset-angles" },
-          "225": { "sectionSlug": "using-quick-preset-angles" },
-          "240": { "sectionSlug": "using-quick-preset-angles" },
-          "270": { "sectionSlug": "using-quick-preset-angles" },
-          "300": { "sectionSlug": "using-quick-preset-angles" },
-          "315": { "sectionSlug": "using-quick-preset-angles" },
-          "330": { "sectionSlug": "using-quick-preset-angles" },
-          "360": { "sectionSlug": "using-quick-preset-angles" }
+        {
+          "term": "radian",
+          "entity": "radian",
+          "sections": [
+            "choosing-degrees-or-radians",
+            "what-is-an-angle"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "choosing-degrees-or-radians",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-07-28"
+            }
+          ]
         },
-        "concepts": {
-          "complementary": { "sectionSlug": "complementary-supplementary-and-reference-angles" },
-          "supplementary": { "sectionSlug": "complementary-supplementary-and-reference-angles" },
-          "reference":     { "sectionSlug": "complementary-supplementary-and-reference-angles" },
-          "coterminal":    { "sectionSlug": "working-with-related-and-coterminal-angles" },
-          "trigonometric": { "sectionSlug": "reading-the-trigonometric-values-table" }
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "choosing-degrees-or-radians",
+            "reading-the-trigonometric-values-table",
+            "special-angles-and-their-exact-values"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "choosing-degrees-or-radians",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-07-28"
+            },
+            {
+              "fromSection": "reading-the-trigonometric-values-table",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-07-28"
+            },
+            {
+              "fromSection": "special-angles-and-their-exact-values",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-07-28"
+            }
+          ]
         },
-        "general": { "sectionSlug": "what-is-an-angle" }
-      }
+        {
+          "term": "reference angle",
+          "entity": "reference_angle",
+          "sections": [
+            "complementary-supplementary-and-reference-angles",
+            "reference-angles"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "complementary-supplementary-and-reference-angles",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "reference_angle"
+              },
+              "method": "repository",
+              "added": "2026-07-28"
+            },
+            {
+              "fromSection": "reference-angles",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "reference_angle"
+              },
+              "method": "repository",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "complementary angles",
+          "entity": "complementary_angles",
+          "sections": [
+            "complementary-supplementary-and-reference-angles",
+            "complementary-angles"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "complementary-supplementary-and-reference-angles",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "complementary_angles"
+              },
+              "method": "repository",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "supplementary angles",
+          "entity": "supplementary_angles",
+          "sections": [
+            "complementary-supplementary-and-reference-angles",
+            "supplementary-angles"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "complementary-supplementary-and-reference-angles",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "supplementary_angles"
+              },
+              "method": "repository",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "quadrantal angles",
+          "entity": "quadrantal_angles",
+          "sections": [
+            "quadrants-and-trigonometric-signs"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "quadrants-and-trigonometric-signs",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "quadrantal_angles"
+              },
+              "method": "repository",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "coterminal angles",
+          "entity": "coterminal_angles",
+          "sections": [
+            "working-with-related-and-coterminal-angles",
+            "coterminal-angles"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "coterminal-angles",
+              "target": {
+                "path": "/trigonometry/definitions",
+                "section": "coterminal_angles"
+              },
+              "method": "repository",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "trigonometric identities",
+          "entity": null,
+          "sections": [
+            "reading-the-trigonometric-values-table"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "reading-the-trigonometric-values-table",
+              "target": {
+                "path": "/trigonometry/identities",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "six trigonometric functions",
+          "entity": null,
+          "sections": [
+            "the-six-trigonometric-functions",
+            "reading-the-trigonometric-values-table"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "the-six-trigonometric-functions",
+              "target": {
+                "path": "/trigonometry/functions",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-07-28"
+            }
+          ]
+        },
+        {
+          "term": "angle types",
+          "entity": null,
+          "sections": [
+            "angle-types-and-classifications"
+          ],
+          "status": "dropped",
+          "reason": "No theory page treats angle types; the only rich treatment is the angle-types visual-tool page (tool-to-tool, future tier). Backlog: angle-types theory page."
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "multiple"
+          ],
+          "status": "dropped",
+          "reason": "Symbol-level mentions throughout; the concept is linked once via the six-functions link. Per-function on-page treatment is Line 1 material."
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "multiple"
+          ],
+          "status": "dropped",
+          "reason": "Same as sine."
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "multiple"
+          ],
+          "status": "dropped",
+          "reason": "Same as sine."
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "the-six-trigonometric-functions"
+          ],
+          "status": "dropped",
+          "reason": "Same as sine."
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "the-six-trigonometric-functions"
+          ],
+          "status": "dropped",
+          "reason": "Same as sine."
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "the-six-trigonometric-functions"
+          ],
+          "status": "dropped",
+          "reason": "Same as sine."
+        },
+        {
+          "term": "terminal side",
+          "entity": "terminal_side",
+          "sections": [
+            "setting-an-angle"
+          ],
+          "status": "dropped",
+          "reason": "Page uses \"terminal ray\" phrasing; passing definitional mention inside other treatments."
+        },
+        {
+          "term": "arc length",
+          "entity": "arc_length",
+          "sections": [
+            "what-is-an-angle"
+          ],
+          "status": "dropped",
+          "reason": "Single passing mention in the radian-definition context."
+        },
+        {
+          "term": "angle in standard position",
+          "entity": "angle_in_standard_position",
+          "sections": [
+            "what-is-an-angle"
+          ],
+          "status": "dropped",
+          "reason": "Single mention; the standard-position treatment lives on the angle-types visual-tool page (tool-to-tool, future tier)."
+        },
+        {
+          "term": "hypotenuse",
+          "entity": "hypotenuse",
+          "sections": [
+            "special-angle-45",
+            "special-angle-30"
+          ],
+          "status": "dropped",
+          "reason": "Right-triangle side mentions inside special-angle derivations; not the subject of those sections."
+        },
+        {
+          "term": "opposite side",
+          "entity": "opposite_side",
+          "sections": [
+            "special-angle-30"
+          ],
+          "status": "dropped",
+          "reason": "Same as hypotenuse."
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "coterminal-angles",
+            "quadrant-iii"
+          ],
+          "status": "dropped",
+          "reason": "Passing mentions inside periodicity remarks; periodicity is served by the coterminal and six-functions links."
+        }
+      ]
     },
-
     "three-sets-basic-venn": {
       "slug": "three-sets-basic-venn",
       "name": "Three-Set Venn Diagram: Basic Identities",
       "section": "set-theory",
       "pagePath": "/set-theory/visual-tools/three-sets-basic-venn",
-      "pageFile": "/pages/set-theory/visual-tools/three-sets-basic-venn.jsx",
-      "componentName": "ThreeSetBasicIdentitiesExplorer",
-      "componentPath": "/app/components/venn-diagrams/3-sets/ThreeSetBasicIdentitiesExplorer",
-      "description": "Shade Venn diagram regions for 40 three-set identities across six categories: basic sets, complements, intersection and union, differences, compound expressions, and De Morgan's laws.",
-      "line1Status": "pending",
-      "sections": [
-        "key-terms",
-        "getting-started-with-the-explorer",
-        "navigating-category-tabs",
-        "selecting-an-identity",
-        "reading-the-shaded-venn-diagram",
-        "customizing-color-and-opacity",
-        "previous-and-next-navigation",
-        "what-is-a-three-set-venn-diagram",
-        "three-set-operations",
-        "de-morgans-laws-for-three-sets",
-        "counting-identities-unique-to-three-sets",
-        "related-concepts-and-tools"
-      ],
-      "stateShape": "flat",
-      "states": {
-        "set-a":        { "group": "Basic Sets",            "sectionSlug": "what-is-a-three-set-venn-diagram" },
-        "set-b":        { "group": "Basic Sets",            "sectionSlug": "what-is-a-three-set-venn-diagram" },
-        "set-c":        { "group": "Basic Sets",            "sectionSlug": "what-is-a-three-set-venn-diagram" },
-        "universe":     { "group": "Basic Sets",            "sectionSlug": "what-is-a-three-set-venn-diagram" },
-        "empty":        { "group": "Basic Sets",            "sectionSlug": "what-is-a-three-set-venn-diagram" },
-        "a-comp":       { "group": "Complements",           "sectionSlug": "three-set-operations" },
-        "b-comp":       { "group": "Complements",           "sectionSlug": "three-set-operations" },
-        "c-comp":       { "group": "Complements",           "sectionSlug": "three-set-operations" },
-        "inter-abc":    { "group": "Intersection & Union",  "sectionSlug": "three-set-operations" },
-        "inter-ab":     { "group": "Intersection & Union",  "sectionSlug": "three-set-operations" },
-        "inter-ac":     { "group": "Intersection & Union",  "sectionSlug": "three-set-operations" },
-        "inter-bc":     { "group": "Intersection & Union",  "sectionSlug": "three-set-operations" },
-        "union-abc":    { "group": "Intersection & Union",  "sectionSlug": "three-set-operations" },
-        "union-ab":     { "group": "Intersection & Union",  "sectionSlug": "three-set-operations" },
-        "union-ac":     { "group": "Intersection & Union",  "sectionSlug": "three-set-operations" },
-        "union-bc":     { "group": "Intersection & Union",  "sectionSlug": "three-set-operations" },
-        "a-minus-b":    { "group": "Differences",           "sectionSlug": "three-set-operations" },
-        "a-minus-c":    { "group": "Differences",           "sectionSlug": "three-set-operations" },
-        "b-minus-a":    { "group": "Differences",           "sectionSlug": "three-set-operations" },
-        "b-minus-c":    { "group": "Differences",           "sectionSlug": "three-set-operations" },
-        "c-minus-a":    { "group": "Differences",           "sectionSlug": "three-set-operations" },
-        "c-minus-b":    { "group": "Differences",           "sectionSlug": "three-set-operations" },
-        "a-only-only":  { "group": "Differences",           "sectionSlug": "three-set-operations" },
-        "b-only-only":  { "group": "Differences",           "sectionSlug": "three-set-operations" },
-        "c-only-only":  { "group": "Differences",           "sectionSlug": "three-set-operations" },
-        "ab-minus-c":   { "group": "Differences",           "sectionSlug": "three-set-operations" },
-        "symdiff-ab":   { "group": "Differences",           "sectionSlug": "three-set-operations" },
-        "symdiff-abc":  { "group": "Differences",           "sectionSlug": "three-set-operations" },
-        "ab-not-c":     { "group": "Compound",              "sectionSlug": "counting-identities-unique-to-three-sets" },
-        "ac-not-b":     { "group": "Compound",              "sectionSlug": "counting-identities-unique-to-three-sets" },
-        "bc-not-a":     { "group": "Compound",              "sectionSlug": "counting-identities-unique-to-three-sets" },
-        "a-and-bORc":   { "group": "Compound",              "sectionSlug": "counting-identities-unique-to-three-sets" },
-        "aORb-and-c":   { "group": "Compound",              "sectionSlug": "counting-identities-unique-to-three-sets" },
-        "a-or-bANDc":   { "group": "Compound",              "sectionSlug": "counting-identities-unique-to-three-sets" },
-        "exactly-one":  { "group": "Compound",              "sectionSlug": "counting-identities-unique-to-three-sets" },
-        "exactly-two":  { "group": "Compound",              "sectionSlug": "counting-identities-unique-to-three-sets" },
-        "at-least-two": { "group": "Compound",              "sectionSlug": "counting-identities-unique-to-three-sets" },
-        "at-most-one":  { "group": "Compound",              "sectionSlug": "counting-identities-unique-to-three-sets" },
-        "dm-union":     { "group": "De Morgan's Laws",      "sectionSlug": "de-morgans-laws-for-three-sets" },
-        "dm-inter":     { "group": "De Morgan's Laws",      "sectionSlug": "de-morgans-laws-for-three-sets" }
-      }
+      "relatedTerms": []
     }
-
   },
-
   "$stubTemplate": {
-    "description": "Copy this shape when adding a new tool entry under `tools`.",
+    "description": "Copy this shape when adding a new tool entry under tools.",
     "template": {
       "slug": "<kebab-slug-matching-url>",
       "name": "<Human-readable name>",
       "section": "<algebra | trigonometry | set-theory | ...>",
       "pagePath": "/<section>/visual-tools/<slug>",
-      "pageFile": "/pages/<section>/visual-tools/<slug>.jsx",
-      "componentName": "<ComponentName>",
-      "componentPath": "/app/components/<section>/.../<ComponentName>",
-      "description": "<one-sentence description>",
-      "line1Status": "pending",
-      "sections": ["<section-slug>", "..."],
-      "stateShape": "flat | nested",
-      "states": {}
+      "relatedTerms": []
     }
   }
 }

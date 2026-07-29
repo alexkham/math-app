@@ -58,9 +58,9 @@ The terminal ray on the diagram rotates counterclockwise for positive values and
 
 When to pick each unit:
 • **Degrees** are intuitive for geometry, navigation, and common reference angles like $30°$, $45°$, and $60°$.
-• **Radians** match the natural input for calculus, physics, and the [unit circle](!/trigonometry/unit-circle), where $\\pi/2$, $\\pi$, and $2\\pi$ are the key markers.
+• **Radians** match the natural input for calculus, physics, and the **unit circle**, where $\\pi/2$, $\\pi$, and $2\\pi$ are the key markers.
 
-The properties panel always reports both the degree value and the radian value, making the tool useful for verifying [degree–radian conversions](!/trigonometry/degrees-radians) in either direction.`,
+The properties panel always reports both the degree value and the radian value, making the tool useful for verifying conversions in either direction.`,
       before:``,
       after:``,
       link:'',
@@ -138,7 +138,7 @@ How values are displayed:
 • At other angles, values are rounded decimals.
 • Undefined points like $\\tan 90°$ display the infinity symbol.
 
-This makes the explorer a useful companion to [trigonometric identities](!/trigonometry/identities) and to the [unit circle](!/trigonometry/unit-circle) when checking exact values.`,
+This makes the explorer a useful companion to **trigonometric identities** and to the **unit circle** when checking exact values.`,
       before:``,
       after:``,
       link:'',
@@ -148,12 +148,12 @@ This makes the explorer a useful companion to [trigonometric identities](!/trigo
       content:`An angle measures the amount of rotation between two rays meeting at a common vertex. In the explorer, the initial ray points along the positive x-axis and the terminal ray rotates to the input position.
 
 Two units of measure dominate mathematics:
-• [Degrees](!/trigonometry/degrees-radians) divide a full rotation into $360$ equal parts.
+• **Degrees** divide a full rotation into $360$ equal parts.
 • **Radians** measure rotation by arc length on a unit circle, with $2\\pi$ radians equal to $360°$.
 
 The conversion formula is $\\theta_{rad} = \\theta_{deg} \\cdot \\frac{\\pi}{180}$.
 
-For a deeper treatment, see the [definition of an angle](!/trigonometry/definitions#angle).`,
+For a deeper treatment of the definition, see the **angles theory page**.`,
       before:``,
       after:``,
       link:'',
@@ -181,7 +181,7 @@ The explorer applies these rules automatically and updates the **Type** field as
 • [Supplementary](!#supplementary-angles): a pair summing to $180°$. Common in geometry and triangle angle sums.
 • [Reference angle](!#reference-angles): the acute angle between the terminal ray and the x-axis. Used to evaluate trigonometric functions in any quadrant by relating them to first-quadrant values.
 
-For full definitions, see [complementary angles](!/trigonometry/definitions#complementary_angles), [supplementary angles](!/trigonometry/definitions#supplementary_angles), and the [reference angle](!/trigonometry/definitions#reference_angle).`,
+For full theory and proofs, see the **complementary and supplementary angles page** and the **reference angle page**.`,
       before:``,
       after:``,
       link:'',
@@ -202,7 +202,7 @@ For full definitions, see [complementary angles](!/trigonometry/definitions#comp
     },
     obj12:{
       title:`Quadrants and Trigonometric Signs`,
-      content:`The coordinate axes divide the plane into four quadrants, labeled counterclockwise with Roman numerals. An angle in standard position belongs to the quadrant containing its terminal ray: [Quadrant I](!#quadrant-i) holds angles between $0°$ and $90°$, [Quadrant II](!#quadrant-ii) between $90°$ and $180°$, [Quadrant III](!#quadrant-iii) between $180°$ and $270°$, and [Quadrant IV](!#quadrant-iv) between $270°$ and $360°$. Angles landing exactly on an axis ($0°$, $90°$, $180°$, $270°$) are called [quadrantal angles](!/trigonometry/definitions#quadrantal_angles) and sit on the boundary rather than inside a quadrant.
+      content:`The coordinate axes divide the plane into four quadrants, labeled counterclockwise with Roman numerals. An angle in standard position belongs to the quadrant containing its terminal ray: [Quadrant I](!#quadrant-i) holds angles between $0°$ and $90°$, [Quadrant II](!#quadrant-ii) between $90°$ and $180°$, [Quadrant III](!#quadrant-iii) between $180°$ and $270°$, and [Quadrant IV](!#quadrant-iv) between $270°$ and $360°$. Angles landing exactly on an axis ($0°$, $90°$, $180°$, $270°$) are called quadrantal angles and sit on the boundary rather than inside a quadrant.
 
 The quadrant determines the sign of every trigonometric function, because $\\cos\\theta$ is the x-coordinate and $\\sin\\theta$ the y-coordinate of the point where the terminal ray meets the unit circle:
 • **Quadrant I** — all six functions positive.
@@ -217,7 +217,7 @@ A common mnemonic is **All Students Take Calculus** — one word per quadrant, n
     },
     obj13:{
       title:`Special Angles and Their Exact Values`,
-      content:`The special angles are the multiples of $30°$ and $45°$: sixteen positions around the [unit circle](!/trigonometry/unit-circle) — [0°](!#special-angle-0), [30°](!#special-angle-30), [45°](!#special-angle-45), [60°](!#special-angle-60), [90°](!#special-angle-90), [120°](!#special-angle-120), [135°](!#special-angle-135), [150°](!#special-angle-150), [180°](!#special-angle-180), [210°](!#special-angle-210), [225°](!#special-angle-225), [240°](!#special-angle-240), [270°](!#special-angle-270), [300°](!#special-angle-300), [315°](!#special-angle-315), [330°](!#special-angle-330) — plus [360°](!#special-angle-360), which completes the rotation. They matter because their trigonometric values are **exact** — expressible with fractions and square roots instead of rounded decimals.
+      content:`The special angles are the multiples of $30°$ and $45°$: sixteen positions around the circle — [0°](!#special-angle-0), [30°](!#special-angle-30), [45°](!#special-angle-45), [60°](!#special-angle-60), [90°](!#special-angle-90), [120°](!#special-angle-120), [135°](!#special-angle-135), [150°](!#special-angle-150), [180°](!#special-angle-180), [210°](!#special-angle-210), [225°](!#special-angle-225), [240°](!#special-angle-240), [270°](!#special-angle-270), [300°](!#special-angle-300), [315°](!#special-angle-315), [330°](!#special-angle-330) — plus [360°](!#special-angle-360), which completes the rotation. They matter because their trigonometric values are **exact** — expressible with fractions and square roots instead of rounded decimals.
 
 The exact values come from two classical triangles:
 • The **45-45-90 triangle** gives $\\sin 45° = \\cos 45° = \\frac{\\sqrt{2}}{2}$ and $\\tan 45° = 1$.
@@ -596,7 +596,7 @@ Supplementary pairs have equal sines and opposite cosines: $\\sin(180° - \\thet
     },
     obj42:{
       title:`Reference Angles`,
-      content:`The [reference angle](!/trigonometry/definitions#reference_angle) of $\\theta$ is the acute angle between its terminal ray and the x-axis — always between $0°$ and $90°$, whichever quadrant $\\theta$ lies in.
+      content:`The **reference angle** of $\\theta$ is the acute angle between its terminal ray and the x-axis — always between $0°$ and $90°$, whichever quadrant $\\theta$ lies in.
 
 ${angleDiagrams.concepts.reference}
 
@@ -611,7 +611,7 @@ Reference angles reduce every trigonometric evaluation to a first-quadrant one: 
     },
     obj43:{
       title:`Coterminal Angles`,
-      content:`[Coterminal angles](!/trigonometry/definitions#coterminal_angles) share the same terminal ray but differ by whole rotations: $\\theta$ and $\\theta + 360°n$ land in exactly the same position for every integer $n$.
+      content:`**Coterminal angles** share the same terminal ray but differ by whole rotations: $\\theta$ and $\\theta + 360°n$ land in exactly the same position for every integer $n$.
 
 ${angleDiagrams.concepts.coterminal}
 
@@ -630,7 +630,7 @@ ${angleDiagrams.concepts.trigonometric}
 
 The diagram freezes the explorer at $50°$: the green horizontal segment is $\\cos 50°$, the red dashed vertical segment is $\\sin 50°$, and the marked point is where the terminal ray crosses the unit circle.
 
-The remaining three functions are reciprocals: $\\csc\\theta = \\frac{1}{\\sin\\theta}$, $\\sec\\theta = \\frac{1}{\\cos\\theta}$, $\\cot\\theta = \\frac{1}{\\tan\\theta}$. Each is undefined wherever its partner is zero — that is why the [explorer's table](!#reading-the-trigonometric-values-table) shows $\\infty$ for $\\tan 90°$. Together the [six functions](!/trigonometry/functions) turn every question about angles into a question about coordinates.`,
+The remaining three functions are reciprocals: $\\csc\\theta = \\frac{1}{\\sin\\theta}$, $\\sec\\theta = \\frac{1}{\\cos\\theta}$, $\\cot\\theta = \\frac{1}{\\tan\\theta}$. Each is undefined wherever its partner is zero — that is why the [explorer's table](!#reading-the-trigonometric-values-table) shows $\\infty$ for $\\tan 90°$. Together the six functions turn every question about angles into a question about coordinates.`,
       before:``,
       after:``,
       link:'',
