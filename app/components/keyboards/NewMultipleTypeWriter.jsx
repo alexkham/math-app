@@ -3386,6 +3386,17 @@ const styles = {
     transition: 'all 0.2s',
     boxShadow: '0 4px 12px rgba(239,68,68,0.3)',
   },
+  toolLink: {
+    color: '#2563eb',
+    textDecoration: 'none',
+    fontWeight: '600',
+  },
+  contextLine: {
+    margin: '-6px 0 12px',
+    fontSize: '12px',
+    color: '#64748b',
+    lineHeight: '1.5',
+  },
 };
 
 const categoryTooltips = {
@@ -3408,7 +3419,7 @@ const categoryTooltips = {
   probability_symbols: "Probability: P(A), E(X), σ, μ",
 };
 
-export default function NewMultipleTypeWriter() {
+export default function NewMultipleTypeWriter({ toolLinks }) {
   const [input, setInput] = useState("");
   const [activeCategory, setActiveCategory] = useState('qwerty');
   const [mode, setMode] = useState('regular');
@@ -3562,8 +3573,18 @@ export default function NewMultipleTypeWriter() {
   return (
     <div style={styles.container}>
       <div style={styles.explanationBox}>
-        Type mathematical symbols, Greek letters, and special characters with ease. Select a category below to access specialized keyboards, 
+        Type mathematical symbols, Greek letters, and special characters with ease. Select a category below to access specialized keyboards,
         choose between regular, subscript, or superscript modes, and click symbols to insert them into your text.
+        {toolLinks && (
+          <>
+            {' '}Every symbol here is documented in the{' '}
+            <a href={toolLinks.main.mathSymbols.href} style={styles.toolLink}>{toolLinks.main.mathSymbols.label}</a>;
+            when you need complete typeset formulas, build them visually in the{' '}
+            <a href={toolLinks.main.latexEditor.href} style={styles.toolLink}>{toolLinks.main.latexEditor.label}</a>
+            {' '}or start from the{' '}
+            <a href={toolLinks.main.latex.href} style={styles.toolLink}>{toolLinks.main.latex.label}</a>.
+          </>
+        )}
       </div>
 
       <div style={styles.categoriesWrapper}>
@@ -3617,6 +3638,21 @@ export default function NewMultipleTypeWriter() {
           <h3 style={styles.keyboardTitle}>
             {getCategoryLabel(activeCategory)}
           </h3>
+          {toolLinks && (
+            toolLinks.categories[activeCategory] ? (
+              <p style={styles.contextLine}>
+                Every symbol on this keyboard is explained in the{' '}
+                <a href={toolLinks.categories[activeCategory].href} style={styles.toolLink}>
+                  {toolLinks.categories[activeCategory].label}
+                </a>.
+              </p>
+            ) : (
+              <p style={styles.contextLine}>
+                Look up any of these symbols in the{' '}
+                <a href={toolLinks.generic.href} style={styles.toolLink}>{toolLinks.generic.label}</a>.
+              </p>
+            )
+          )}
           {renderKeyboard()}
         </div>
 

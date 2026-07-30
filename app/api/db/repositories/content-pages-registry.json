@@ -1,0 +1,837 @@
+{
+  "$meta": {
+    "version": "1.0.0",
+    "description": "Registry for Operation A (content-pages mesh): per content page, identity, section inventory, and the related-terms list with dispositions toward visual tools. Stores only cross-app data invisible from any single file. Backlinks are earned by demonstration value; mechanical reciprocity with Line 2 is forbidden.",
+    "generated": "2026-07-29",
+    "conventions": {
+      "pageKey": "kebab-case page slug matching the route segment",
+      "template": "titled (sections have real slug ids) | untitled (empty section titles, structure investigation required before planting)",
+      "relatedTerms": "Built on first mapping: prose scanned against definitionsRepository + formulasRepository (own section), plus each section's central subject. Status: linked | dropped (reason) | deferred (no ready tool demonstrates it; re-query as tools mature) | pending (must not survive a pass).",
+      "units": "A linked term carries link records; unit is null for link-only plants (tool fits, visual does not - in-situ illustration later) or {diagrams, arrangement: single|sequence|adjacent-sections, newStates}. Visual form (2026-07-30): one attached frame - SVG left, tinted explanation panel right with divider, link inside the panel text. Built by app/components/demo-unit/demoUnitFrame.js inside getStaticProps, passed via props, rendered as a content-array item with dangerouslySetInnerHTML. Never interpolated into sectionsContent strings.",
+      "conceptToolMap": "Site-wide best-demonstrating-tool decisions, written the first time a concept is linked anywhere, obeyed by every later pass.",
+      "populationRule": "Universal registry rule: any pass touching a page updates its registry entry as a by-product, whatever the operation."
+    },
+    "$conceptToolMap": {
+      "reciprocal identities": {
+        "tool": "basic-identities",
+        "decided": "2026-07-29",
+        "runnersUp": []
+      },
+      "periodicity": {
+        "tool": "functions-graphs",
+        "decided": "2026-07-29",
+        "runnersUp": [
+          "basic-identities"
+        ]
+      },
+      "double angle identities": {
+        "tool": "double-angle-identities",
+        "decided": "2026-07-29",
+        "runnersUp": []
+      },
+      "half angle identities": {
+        "tool": "half-angle-identities",
+        "decided": "2026-07-29",
+        "runnersUp": []
+      },
+      "complementary angles": {
+        "tool": "angle-explorer",
+        "decided": "2026-07-29",
+        "runnersUp": []
+      },
+      "unit circle": {
+        "tool": "unit-circle",
+        "decided": "2026-07-29",
+        "runnersUp": [],
+        "note": "global tool at /visual-tools/unit-circle; pre-existing links on this concept predate Operation A"
+      },
+      "standard position": {
+        "tool": "angle-explorer",
+        "decided": "2026-07-29",
+        "runnersUp": []
+      },
+      "coterminal angles": {
+        "tool": "angle-explorer",
+        "decided": "2026-07-29",
+        "runnersUp": []
+      }
+    }
+  },
+  "pages": {
+    "identities": {
+      "slug": "identities",
+      "name": "Trigonometric Identities",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/identities/index.jsx",
+      "template": "titled",
+      "sections": [
+        "0",
+        "definition",
+        "reciprocal",
+        "pythagorean",
+        "triangle",
+        "even-odd",
+        "co-function",
+        "periodicity",
+        "shift",
+        "sum",
+        "difference",
+        "half",
+        "double",
+        "triple",
+        "power-reducing",
+        "product-sum",
+        "sum-product",
+        "summary"
+      ],
+      "relatedTerms": [
+        {
+          "term": "definition-based identities",
+          "entity": null,
+          "sections": [
+            "definition"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "definition",
+              "tool": "unit-circle",
+              "target": {
+                "path": "/visual-tools/unit-circle",
+                "section": null
+              },
+              "unit": null,
+              "added": "pre-2026-07-29",
+              "preExisting": true,
+              "note": "two pre-existing prose links (before+after) plus one in table data; flagged: violates one-link-per-term-per-section"
+            }
+          ]
+        },
+        {
+          "term": "reciprocal identities",
+          "entity": null,
+          "sections": [
+            "reciprocal"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "reciprocal",
+              "tool": "basic-identities",
+              "target": {
+                "path": "/trigonometry/visual-tools/basic-identities",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "basicIdentitiesDiagrams.csc.overview"
+                ],
+                "arrangement": "single",
+                "newStates": []
+              },
+              "added": "2026-07-29"
+            }
+          ]
+        },
+        {
+          "term": "pythagorean identities",
+          "entity": null,
+          "sections": [
+            "pythagorean"
+          ],
+          "status": "deferred",
+          "reason": "dedicated pythagorean-identities tool page exists but is not ready (no Line 1); section already carries a pre-existing unit-circle tool link"
+        },
+        {
+          "term": "triangle geometry identities",
+          "entity": null,
+          "sections": [
+            "triangle"
+          ],
+          "status": "deferred",
+          "reason": "triangle-explorer tool page not ready"
+        },
+        {
+          "term": "even-odd identities",
+          "entity": null,
+          "sections": [
+            "even-odd"
+          ],
+          "status": "deferred",
+          "reason": "negative-angle-identities tool page not ready"
+        },
+        {
+          "term": "co-function identities",
+          "entity": null,
+          "sections": [
+            "co-function"
+          ],
+          "status": "deferred",
+          "reason": "no tool demonstrates the identity itself; complementary-angles link-only planted instead; illustration via in-situ process later"
+        },
+        {
+          "term": "periodicity",
+          "entity": null,
+          "sections": [
+            "periodicity"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "periodicity",
+              "tool": "functions-graphs",
+              "target": {
+                "path": "/trigonometry/visual-tools/functions-graphs",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "trigFunctionsGraphDiagrams.sin",
+                  "trigFunctionsGraphDiagrams.tan"
+                ],
+                "arrangement": "sequence",
+                "newStates": []
+              },
+              "added": "2026-07-29"
+            }
+          ]
+        },
+        {
+          "term": "shift identities",
+          "entity": null,
+          "sections": [
+            "shift"
+          ],
+          "status": "deferred",
+          "reason": "supplementary-angle-identities tool not ready; functions-graphs shows curves but not the shift relation directly - doubt, skip"
+        },
+        {
+          "term": "angle sum identities",
+          "entity": null,
+          "sections": [
+            "sum"
+          ],
+          "status": "deferred",
+          "reason": "no tool demonstrates it"
+        },
+        {
+          "term": "angle difference identities",
+          "entity": null,
+          "sections": [
+            "difference"
+          ],
+          "status": "deferred",
+          "reason": "no tool demonstrates it"
+        },
+        {
+          "term": "double angle identities",
+          "entity": null,
+          "sections": [
+            "double"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "double",
+              "tool": "double-angle-identities",
+              "target": {
+                "path": "/trigonometry/visual-tools/double-angle-identities",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "doubleAngleDiagrams.sin.overview"
+                ],
+                "arrangement": "single",
+                "newStates": []
+              },
+              "added": "2026-07-29"
+            }
+          ]
+        },
+        {
+          "term": "half angle identities",
+          "entity": null,
+          "sections": [
+            "half"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "half",
+              "tool": "half-angle-identities",
+              "target": {
+                "path": "/trigonometry/visual-tools/half-angle-identities",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "halfAngleDiagrams.sin.overview"
+                ],
+                "arrangement": "single",
+                "newStates": []
+              },
+              "added": "2026-07-29"
+            }
+          ]
+        },
+        {
+          "term": "triple angle identities",
+          "entity": null,
+          "sections": [
+            "triple"
+          ],
+          "status": "deferred",
+          "reason": "no tool demonstrates it"
+        },
+        {
+          "term": "power-reducing identities",
+          "entity": null,
+          "sections": [
+            "power-reducing"
+          ],
+          "status": "dropped",
+          "reason": "double-angle tool touches derived identities but does not demonstrate power reduction; doubt - skip (in-situ illustration later)"
+        },
+        {
+          "term": "product-to-sum identities",
+          "entity": null,
+          "sections": [
+            "product-sum"
+          ],
+          "status": "deferred",
+          "reason": "no tool demonstrates it"
+        },
+        {
+          "term": "sum-to-product identities",
+          "entity": null,
+          "sections": [
+            "sum-product"
+          ],
+          "status": "deferred",
+          "reason": "no tool demonstrates it"
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "definition",
+            "pythagorean"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "definition",
+              "tool": "unit-circle",
+              "target": {
+                "path": "/visual-tools/unit-circle",
+                "section": null
+              },
+              "unit": null,
+              "added": "pre-2026-07-29",
+              "preExisting": true
+            },
+            {
+              "fromSection": "pythagorean",
+              "tool": "unit-circle",
+              "target": {
+                "path": "/visual-tools/unit-circle",
+                "section": null
+              },
+              "unit": null,
+              "added": "pre-2026-07-29",
+              "preExisting": true
+            }
+          ]
+        },
+        {
+          "term": "complementary angles",
+          "entity": "complementary_angles",
+          "sections": [
+            "co-function"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "co-function",
+              "tool": "angle-explorer",
+              "target": {
+                "path": "/trigonometry/visual-tools/angle-explorer",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-07-29",
+              "note": "link-only: tool shows live complementary pairs; a frozen state would not illustrate the co-function identity itself"
+            }
+          ]
+        },
+        {
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "definition",
+            "reciprocal",
+            "pythagorean",
+            "triangle",
+            "even-odd",
+            "co-function",
+            "periodicity",
+            "shift",
+            "sum",
+            "difference",
+            "double",
+            "half",
+            "triple",
+            "power-reducing",
+            "product-sum",
+            "sum-product"
+          ],
+          "status": "dropped",
+          "reason": "generic passing mentions throughout; definitional linking is not a demonstration candidate"
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "even-odd",
+            "co-function",
+            "shift",
+            "triple"
+          ],
+          "status": "dropped",
+          "reason": "symbol-level passing mentions"
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "even-odd",
+            "shift",
+            "triple"
+          ],
+          "status": "dropped",
+          "reason": "symbol-level passing mentions"
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "even-odd",
+            "periodicity"
+          ],
+          "status": "dropped",
+          "reason": "symbol-level passing mentions"
+        },
+        {
+          "term": "cotangent",
+          "entity": "cotangent",
+          "sections": [
+            "even-odd",
+            "periodicity"
+          ],
+          "status": "dropped",
+          "reason": "symbol-level passing mentions"
+        },
+        {
+          "term": "cosecant",
+          "entity": "cosecant",
+          "sections": [
+            "even-odd"
+          ],
+          "status": "dropped",
+          "reason": "symbol-level passing mention"
+        },
+        {
+          "term": "secant",
+          "entity": "secant",
+          "sections": [
+            "even-odd"
+          ],
+          "status": "dropped",
+          "reason": "symbol-level passing mention"
+        },
+        {
+          "term": "frequency",
+          "entity": "frequency",
+          "sections": [
+            "double",
+            "product-sum"
+          ],
+          "status": "dropped",
+          "reason": "application-context mentions (physics)"
+        },
+        {
+          "term": "amplitude",
+          "entity": "amplitude",
+          "sections": [
+            "sum-product"
+          ],
+          "status": "dropped",
+          "reason": "application-context mention"
+        },
+        {
+          "term": "adjacent side",
+          "entity": "adjacent_side",
+          "sections": [
+            "co-function"
+          ],
+          "status": "dropped",
+          "reason": "passing mention inside explanation"
+        },
+        {
+          "term": "opposite side",
+          "entity": "opposite_side",
+          "sections": [
+            "co-function"
+          ],
+          "status": "dropped",
+          "reason": "passing mention inside explanation"
+        },
+        {
+          "term": "law of sines",
+          "entity": null,
+          "sections": [
+            "triangle"
+          ],
+          "status": "deferred",
+          "reason": "triangle-explorer tool page not ready"
+        },
+        {
+          "term": "law of cosines",
+          "entity": null,
+          "sections": [
+            "triangle"
+          ],
+          "status": "deferred",
+          "reason": "triangle-explorer tool page not ready"
+        }
+      ]
+    },
+    "degrees-radians": {
+      "slug": "degrees-radians",
+      "name": "Degrees and Radians",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/degrees-radians/index.jsx",
+      "template": "titled",
+      "templateNote": "Reworked since the 'untitled template' flag (2026-07-28): sections now have real titles but NUMERIC ids ('0'-'9'). Slug migration pending - required only when something links INTO these sections. Large commented-out template head precedes the live sectionsContent block (live-code scoping needed).",
+      "sections": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "sectionTitles": [
+        "Key Terms",
+        "Degree Measurement",
+        "Radian Measurement",
+        "Converting Between Degrees and Radians",
+        "Arc Length",
+        "Sector Area",
+        "Standard Position of an Angle",
+        "Coterminal Angles",
+        "Complementary and Supplementary Angles",
+        "Summary: The Page's Key Formulas"
+      ],
+      "relatedTerms": [
+        {
+          "term": "standard position",
+          "entity": "angle_in_standard_position",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "angle-explorer",
+              "target": {
+                "path": "/trigonometry/visual-tools/angle-explorer",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "angleDiagrams.types.obtuse"
+                ],
+                "arrangement": "single",
+                "newStates": []
+              },
+              "added": "2026-07-29"
+            }
+          ]
+        },
+        {
+          "term": "coterminal angles",
+          "entity": "coterminal_angles",
+          "sections": [
+            "6",
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "angle-explorer",
+              "target": {
+                "path": "/trigonometry/visual-tools/angle-explorer",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "angleDiagrams.concepts.coterminal"
+                ],
+                "arrangement": "single",
+                "newStates": []
+              },
+              "added": "2026-07-29"
+            }
+          ]
+        },
+        {
+          "term": "complementary angles",
+          "entity": "complementary_angles",
+          "sections": [
+            "8"
+          ],
+          "status": "dropped",
+          "reason": "angle-explorer states exist (concepts.complementary) but section 8 is saturated: 5 in-prose content links + 3 formula callouts + table; density - skip, flag for in-situ illustration"
+        },
+        {
+          "term": "supplementary angles",
+          "entity": "supplementary_angles",
+          "sections": [
+            "8"
+          ],
+          "status": "dropped",
+          "reason": "same as complementary angles: section 8 density; concepts.supplementary state available for in-situ later"
+        },
+        {
+          "term": "degree-radian conversion",
+          "entity": "radian",
+          "sections": [
+            "3"
+          ],
+          "status": "dropped",
+          "reason": "angle-explorer reports both units but section 3 already carries 4 in-prose links (density cap); doubt - skip"
+        },
+        {
+          "term": "radian",
+          "entity": "radian",
+          "sections": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "status": "dropped",
+          "reason": "page already carries two angle-explorer demonstration units; a third link to the same tool is saturation"
+        },
+        {
+          "term": "degree",
+          "entity": "degree",
+          "sections": [
+            "1",
+            "2",
+            "3"
+          ],
+          "status": "dropped",
+          "reason": "same saturation rationale as radian; unit theory not directly demonstrated by any tool"
+        },
+        {
+          "term": "arc length",
+          "entity": "arc_length",
+          "sections": [
+            "2",
+            "4",
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "no tool demonstrates arc length"
+        },
+        {
+          "term": "sector",
+          "entity": "sector",
+          "sections": [
+            "5"
+          ],
+          "status": "deferred",
+          "reason": "no tool demonstrates sector area"
+        },
+        {
+          "term": "sector area",
+          "entity": "sector",
+          "sections": [
+            "5",
+            "9"
+          ],
+          "status": "deferred",
+          "reason": "no tool demonstrates sector area"
+        },
+        {
+          "term": "central angle",
+          "entity": "central_angle",
+          "sections": [
+            "2",
+            "4"
+          ],
+          "status": "deferred",
+          "reason": "no tool demonstrates central angle"
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit_circle",
+          "sections": [
+            "3",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "dropped",
+          "reason": "pre-existing content-to-content links to the /trigonometry/unit-circle theory page in 4 sections; a tool link on the same concept would duplicate destinations"
+        },
+        {
+          "term": "angle",
+          "entity": "angle",
+          "sections": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "dropped",
+          "reason": "generic passing mentions; covered by Key Terms block"
+        },
+        {
+          "term": "initial side",
+          "entity": "initial_side",
+          "sections": [
+            "6"
+          ],
+          "status": "dropped",
+          "reason": "passing mention; covered by Key Terms and the standard-position unit"
+        },
+        {
+          "term": "terminal side",
+          "entity": "terminal_side",
+          "sections": [
+            "6",
+            "7"
+          ],
+          "status": "dropped",
+          "reason": "passing mention; covered by Key Terms and the planted units"
+        },
+        {
+          "term": "positive angle",
+          "entity": "positive_angle",
+          "sections": [
+            "6"
+          ],
+          "status": "dropped",
+          "reason": "passing mention inside standard-position discussion"
+        },
+        {
+          "term": "negative angle",
+          "entity": "negative_angle",
+          "sections": [
+            "6"
+          ],
+          "status": "dropped",
+          "reason": "passing mention inside standard-position discussion"
+        },
+        {
+          "term": "sine",
+          "entity": "sine",
+          "sections": [
+            "6",
+            "7",
+            "8"
+          ],
+          "status": "dropped",
+          "reason": "symbol-level passing mentions"
+        },
+        {
+          "term": "cosine",
+          "entity": "cosine",
+          "sections": [
+            "7",
+            "8"
+          ],
+          "status": "dropped",
+          "reason": "symbol-level passing mentions"
+        },
+        {
+          "term": "tangent",
+          "entity": "tangent",
+          "sections": [
+            "8"
+          ],
+          "status": "dropped",
+          "reason": "symbol-level passing mention"
+        },
+        {
+          "term": "sine supplement identity",
+          "entity": "supplementary_angles",
+          "sections": [
+            "8"
+          ],
+          "status": "dropped",
+          "reason": "formula callouts already deep-link these to /trigonometry/formulas"
+        },
+        {
+          "term": "cosine supplement identity",
+          "entity": "supplementary_angles",
+          "sections": [
+            "8"
+          ],
+          "status": "dropped",
+          "reason": "formula callouts already deep-link these to /trigonometry/formulas"
+        },
+        {
+          "term": "tangent supplement identity",
+          "entity": "supplementary_angles",
+          "sections": [
+            "8"
+          ],
+          "status": "dropped",
+          "reason": "formula callouts already deep-link these to /trigonometry/formulas"
+        },
+        {
+          "term": "law of sines",
+          "entity": null,
+          "sections": [
+            "8"
+          ],
+          "status": "dropped",
+          "reason": "pre-existing content link to /trigonometry/sines-cosines-law in the same sentence"
+        },
+        {
+          "term": "complementary and supplementary angles",
+          "entity": null,
+          "sections": [
+            "8"
+          ],
+          "status": "dropped",
+          "reason": "section subject; see complementary/supplementary term records - density skip, in-situ later"
+        }
+      ]
+    }
+  },
+  "$stubTemplate": {
+    "slug": "",
+    "name": "",
+    "section": "",
+    "pagePath": "",
+    "template": "titled",
+    "sections": [],
+    "relatedTerms": []
+  }
+}

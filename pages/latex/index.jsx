@@ -74,7 +74,7 @@ These four mechanisms compose freely - a fraction whose numerator is a square ro
 
     obj4: {
       title: `Common structures`,
-      content: `Each structure below has a dedicated page with full syntax, variants, and worked examples.`,
+      content: `Each structure below links to a dedicated guide on LaTeXEdit, our companion site for LaTeX - full syntax, variants, and worked examples, with a live editor to try each one.`,
       before: ``,
       after: ``,
       link: '',
@@ -106,7 +106,7 @@ These four mechanisms compose freely - a fraction whose numerator is a square ro
 
     obj8: {
       title: `Related tools`,
-      content: `The [math symbols catalogs](!/math-symbols) map every symbol to its LaTeX command, organized by domain. The [tables section](!/tables) collects formula and identity references in compact LaTeX-rendered grids. The [interactive editor](!/latex/editor) sits at the heart of this section - click symbols, build expressions across multiple lines, and copy the source when ready.
+      content: `The [math symbols catalogs](!/math-symbols) map every symbol to its LaTeX command, organized by domain. The [tables section](!/tables) collects formula and identity references in compact LaTeX-rendered grids. The [interactive editor](!/latex/editor) sits at the heart of this section - click symbols, build expressions across multiple lines, and copy the source when ready. When you need the actual Unicode character rather than its LaTeX source - to paste into email, chat, or a plain document - the [mathematical keyboard](!/keyboard) types it directly, with subscript and superscript modes included.
 
 For deeper notation on specific topics, every domain section (probability, set theory, linear algebra, and others) includes pages whose notation blocks are written and rendered in LaTeX directly. Pair this hub with any of them when you need to write something you have only seen rendered, not coded.`,
       before: ``,
@@ -140,49 +140,49 @@ For deeper notation on specific topics, every domain section (probability, set t
       preview: `$\\dfrac{a}{b}$`,
       title: 'Fractions',
       caption: '\\frac{a}{b}',
-      link: { label: '', url: '/latex/fractions' },
+      link: { label: '', url: 'https://latexedit.com/how-to/write-fractions-in-latex' },
     },
     {
       preview: `$\\sqrt{x}$`,
       title: 'Roots',
       caption: '\\sqrt{x}',
-      link: { label: '', url: '/latex/roots' },
+      link: { label: '', url: 'https://latexedit.com/how-to/write-square-roots-in-latex' },
     },
     {
       preview: `$\\int_a^b f(x)\\,dx$`,
       title: 'Integrals',
       caption: '\\int f(x) dx',
-      link: { label: '', url: '/latex/integrals' },
+      link: { label: '', url: 'https://latexedit.com/how-to/write-integrals-in-latex' },
     },
     {
       preview: `$\\sum_{i=1}^{n} x_i$`,
       title: 'Sums',
       caption: '\\sum x_i',
-      link: { label: '', url: '/latex/sums-and-products' },
+      link: { label: '', url: 'https://latexedit.com/how-to/write-summations-in-latex' },
     },
     {
       preview: `$\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}$`,
       title: 'Matrices',
       caption: '\\begin{bmatrix}',
-      link: { label: '', url: '/latex/matrices' },
+      link: { label: '', url: 'https://latexedit.com/how-to/write-matrices-in-latex' },
     },
     {
       preview: `$\\alpha\\;\\beta\\;\\gamma$`,
       title: 'Greek letters',
       caption: '\\alpha \\beta \\gamma',
-      link: { label: '', url: '/latex/greek-letters' },
+      link: { label: '', url: 'https://latexedit.com/how-to/write-greek-letters-in-latex' },
     },
     {
       preview: `$\\left( \\dfrac{x}{y} \\right)$`,
       title: 'Delimiters',
       caption: '\\left( \\right)',
-      link: { label: '', url: '/latex/delimiters' },
+      link: { label: '', url: 'https://latexedit.com/symbols/brackets-delimiters' },
     },
     {
       preview: `$\\hat{x}\\;\\bar{x}\\;\\vec{x}$`,
       title: 'Accents',
       caption: '\\hat{x} \\bar{x}',
-      link: { label: '', url: '/latex/accents-and-decorations' },
+      link: { label: '', url: 'https://latexedit.com/symbols/accents' },
     },
   ]
 
@@ -191,7 +191,7 @@ For deeper notation on specific topics, every domain section (probability, set t
     {
       label: 'Algebra',
       content: `Variables, operators, equality, exponents, radicals, and absolute value notation.`,
-      link: { label: '', url: '/math-symbols/algebra' },
+      link: { label: '', url: '/math-symbols' },
       backgroundColor: '#F1EFE8',
       borderColor: '#5F5E5A',
       textColor: '#444441',
@@ -275,7 +275,7 @@ For deeper notation on specific topics, every domain section (probability, set t
   const notationCrossLinks = [
     {
       label: 'Probability',
-      content: `[Normal distribution notation](!/probability/normal-distribution) - [Binomial PMF](!/probability/binomial-distribution) - [Distribution symbols](!/probability/definitions)`,
+      content: `[Normal distribution notation](!/probability/distributions) - [Binomial PMF](!/probability/probability-function) - [Distribution symbols](!/probability/definitions)`,
       backgroundColor: '#E6F1FB',
       borderColor: '#185FA5',
       textColor: '#0C447C',
@@ -283,7 +283,7 @@ For deeper notation on specific topics, every domain section (probability, set t
     },
     {
       label: 'Set theory',
-      content: `[Set builder notation](!/set-theory/set-builder-notation) - [Cardinality](!/set-theory/cardinality) - [Set operations](!/set-theory/set-operations)`,
+      content: `[Set builder notation](!/set-theory/definitions) - [Cardinality](!/set-theory/cardinality) - [Set operations](!/set-theory/operations)`,
       backgroundColor: '#E1F5EE',
       borderColor: '#0F6E56',
       textColor: '#085041',
@@ -291,7 +291,7 @@ For deeper notation on specific topics, every domain section (probability, set t
     },
     {
       label: 'Linear algebra',
-      content: `[Matrix notation](!/linear-algebra/matrices) - [Vector notation](!/linear-algebra/vectors) - [Determinants](!/linear-algebra/determinants)`,
+      content: `[Matrix notation](!/linear-algebra/matrix) - [Vector notation](!/linear-algebra/vectors) - [Determinants](!/linear-algebra/determinants)`,
       backgroundColor: '#EEEDFE',
       borderColor: '#534AB7',
       textColor: '#3C3489',
@@ -307,7 +307,7 @@ For deeper notation on specific topics, every domain section (probability, set t
     },
     {
       label: 'Complex numbers',
-      content: `[Polar form](!/complex-numbers/polar-form) - [Modulus and argument](!/complex-numbers/modulus-argument) - [Complex notation](!/complex-numbers/definitions)`,
+      content: `[Polar form](!/complex-numbers/trigonometric-form) - [Modulus and argument](!/complex-numbers/absolute-value) - [Complex notation](!/complex-numbers/definitions)`,
       backgroundColor: '#FBEAF0',
       borderColor: '#993556',
       textColor: '#72243E',

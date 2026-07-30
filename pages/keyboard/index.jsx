@@ -274,6 +274,29 @@ The interface maintains consistent spacing and alignment across all categories. 
     }
   }
 
+  // Outbound links rendered inside the keyboard tool itself. Built here (not
+  // in the component) so they are part of the prerendered HTML: the `main`
+  // sentence renders unconditionally; `categories` drives the contextual
+  // reference line under the keyboard title, `generic` is its fallback.
+  const toolLinks = {
+    main: {
+      mathSymbols: { href: '/math-symbols', label: 'math symbols reference' },
+      latexEditor: { href: '/latex/editor', label: 'LaTeX editor' },
+      latex: { href: '/latex', label: 'LaTeX format guide' },
+    },
+    categories: {
+      set_theory_symbols: { href: '/math-symbols/set-theory', label: 'set theory symbols reference' },
+      trigonometry_symbols: { href: '/math-symbols/trigonometry', label: 'trigonometry symbols reference' },
+      combinatorics_symbols: { href: '/math-symbols/combinatorics', label: 'combinatorics symbols reference' },
+      probability_symbols: { href: '/math-symbols/probability', label: 'probability symbols reference' },
+      basic_binary_operators: { href: '/math-symbols/math-logic', label: 'logic and binary operators reference' },
+      advanced_binary_operators: { href: '/math-symbols/math-logic', label: 'logic and binary operators reference' },
+      basic_n_ary_operators: { href: '/math-symbols/calculus', label: 'calculus and n-ary operators reference' },
+      math_letter_like_symbols: { href: '/math-symbols/linear-algebra', label: 'linear algebra symbols reference' },
+    },
+    generic: { href: '/math-symbols', label: 'math symbols reference' },
+  }
+
   const introContent = {
     id: "intro",
     title: "Interactive Mathematical Keyboard",
@@ -290,6 +313,7 @@ The interface combines click-based symbol insertion with direct keyboard typing.
       introContent,
       faqQuestions,
       schemas,
+      toolLinks,
       seoData: {
         title: "Mathematical Keyboard | Type Math Symbols & Greek Letters",
         description: "Type mathematical symbols, Greek letters, and special characters instantly. 18 specialized keyboards with subscript/superscript modes. Free online tool for students and educators.",
@@ -301,7 +325,7 @@ The interface combines click-based symbol insertion with direct keyboard typing.
   }
 }
 
-export default function KeyboardPage({ seoData, sectionsContent, introContent, faqQuestions, schemas }) {
+export default function KeyboardPage({ seoData, sectionsContent, introContent, faqQuestions, schemas, toolLinks }) {
   
   const genericSections = Object.keys(sectionsContent).map((key, index) => ({
     id: `${index + 1}`,
@@ -369,7 +393,7 @@ export default function KeyboardPage({ seoData, sectionsContent, introContent, f
       
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Mathematical Keyboard</h1>
        <div style={{transform:'scale(0.95)',margin:'auto',width:'80%'}}>
-        <NewMultipleTypeWriter/>
+        <NewMultipleTypeWriter toolLinks={toolLinks}/>
       </div>
       <br/>
       

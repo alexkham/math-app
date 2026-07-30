@@ -11,8 +11,6 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
-import angleDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
-import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -898,26 +896,6 @@ For example, the angles $40°$ and $50°$ are complementary ($40° + 50° = 90°
 
 
 
-  // Operation A demonstration units: frozen tool state + attached explanation
-  // panel + tool link, one frame. Rendered as content-array items.
-  const demoUnits = {
-    standardPosition: demoUnitFrame({
-      svg: angleDiagrams.types.obtuse,
-      caption: 'Standard position',
-      text: 'Vertex at the origin, initial side fixed along the positive x-axis, terminal side rotated counterclockwise into the second quadrant. Set any angle &#8212; positive, negative, or beyond a full turn &#8212; and watch it take standard position live in the',
-      href: '/trigonometry/visual-tools/angle-explorer',
-      linkText: 'angle explorer',
-    }),
-    coterminal: demoUnitFrame({
-      svg: angleDiagrams.concepts.coterminal,
-      caption: 'Coterminal pair, frozen',
-      text: 'Two opposite sweeps ending on the same terminal ray: 45&#176; counterclockwise and &#8722;315&#176; clockwise &#8212; the picture behind every coterminal pair. The',
-      href: '/trigonometry/visual-tools/angle-explorer',
-      linkText: 'angle explorer',
-      textAfterLink: ' marks the coterminal partner for any angle you set, in degrees or radians alike.',
-    }),
-  };
-
   const introContent = {
   id: "intro",
   title: `Two Systems for Measuring Rotation`,
@@ -938,7 +916,6 @@ The distinction matters far beyond notation. [Arc length](!/trigonometry/degrees
          summaryTable,
          faqQuestions,
          schemas,
-         demoUnits,
           seoData: {
         title: "Degrees and Radians | Learn Math Class",
         description: "Learn degree and radian angle measurement, convert between the two systems, and apply radians to arc length and sector area formulas with clear explanations.",
@@ -951,7 +928,7 @@ The distinction matters far beyond notation. [Arc length](!/trigonometry/degrees
     }
    }
 
-export default function DegreesRadiansPage({seoData,sectionsContent , introContent, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function DegreesRadiansPage({seoData,sectionsContent , introContent, obj3Table, obj8Table, summaryTable, faqQuestions, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1018,8 +995,6 @@ export default function DegreesRadiansPage({seoData,sectionsContent , introConte
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'unit-standard-position'} dangerouslySetInnerHTML={{ __html: demoUnits.standardPosition }} />,
-          `This shared reference frame is what lets every angle — however large, however negative — be compared, classified, and evaluated on equal footing.`,
         ]
     },
     {
@@ -1028,8 +1003,6 @@ export default function DegreesRadiansPage({seoData,sectionsContent , introConte
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'unit-coterminal'} dangerouslySetInnerHTML={{ __html: demoUnits.coterminal }} />,
-          `Infinitely many names, one position: reducing an angle to its home cycle is the first simplification in nearly every trigonometric computation.`,
         ]
     },
 

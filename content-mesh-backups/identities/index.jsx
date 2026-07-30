@@ -8,11 +8,6 @@ import Sections from '@/app/components/page-components/section/Sections'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
-import basicIdentitiesDiagrams from '@/app/components/trigonometry/identities/basic-identities/basicIdentitiesDiagrams'
-import doubleAngleDiagrams from '@/app/components/trigonometry/identities/double-angle/doubleAngleDiagrams'
-import halfAngleDiagrams from '@/app/components/trigonometry/identities/half-angle/halfAngleDiagrams'
-import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
-import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 export async function getStaticProps(){
 
@@ -252,7 +247,7 @@ Inverse trigonometric identities like $\sin^{-1}(x) + \cos^{-1}(x) = \frac{\pi}{
       Reciprocal identities help simplify rational trigonometric expressions, especially in algebra-heavy problems or when combining functions.
       Knowing how to flip between functions is critical in isolating variables and solving identities.
       Reciprocal identities let you flip between familiar and less familiar functions, extend your solving toolbox, and reduce redundancy in learning.
-      `
+      `        
     },
     pythagorean:{
       title:'Pythagorean Identities',
@@ -290,8 +285,8 @@ Inverse trigonometric identities like $\sin^{-1}(x) + \cos^{-1}(x) = \frac{\pi}{
     
     co_function:{
       title:`Co-Function Identities`,
-      before:`Co-Function Identities express the relationship between trigonometric functions and their "co-functions" (complementary functions). They're special because they show how trig functions of complementary angles (angles that add to 90°) are related. For example, sine of an angle equals cosine of its complement. These identities exist because in a right triangle, the two acute angles are complementary, so one angle's opposite side becomes the other angle's adjacent side. An angle and its complement can be watched as a live pair — values and all — in the [angle explorer](!/trigonometry/visual-tools/angle-explorer).
-
+      before:`Co-Function Identities express the relationship between trigonometric functions and their "co-functions" (complementary functions). They're special because they show how trig functions of complementary angles (angles that add to 90°) are related. For example, sine of an angle equals cosine of its complement. These identities exist because in a right triangle, the two acute angles are complementary, so one angle's opposite side becomes the other angle's adjacent side.
+      
       `,
       after:`
       
@@ -331,7 +326,7 @@ Inverse trigonometric identities like $\sin^{-1}(x) + \cos^{-1}(x) = \frac{\pi}{
 
       These identities are fundamental for calculus, solving trigonometric equations, proving other identities, and applications in physics where multiple rotations or oscillations combine, such as in wave interference and vector analysis.
       `,
-      link:``,
+      link:`/tables/trigonometry/sum-angle`,
     },
 
      difference:{
@@ -342,7 +337,7 @@ Inverse trigonometric identities like $\sin^{-1}(x) + \cos^{-1}(x) = \frac{\pi}{
       after:`
       Angle Difference identities are essential for solving trigonometric equations, deriving other identities, and applications involving relative motion, phase differences, or when one oscillation opposes another in physics and engineering problems.
       `,
-      link:``,
+      link:`/tables/trigonometry/difference-angle`,
     },
 
     double:{
@@ -354,7 +349,7 @@ Inverse trigonometric identities like $\sin^{-1}(x) + \cos^{-1}(x) = \frac{\pi}{
       
       These identities are vital for integration in calculus, solving equations with multiple angle relationships, and analyzing phenomena with frequency doubling, such as harmonics in music, optical frequency conversion, and engineering systems with gear ratios.
       `,
-      link:``,
+      link:`/tables/trigonometry/double-angle`,
     },
 
     
@@ -367,7 +362,7 @@ Inverse trigonometric identities like $\sin^{-1}(x) + \cos^{-1}(x) = \frac{\pi}{
 
       These identities are indispensable for integration techniques, solving equations with fractional angles, and applications involving bisection problems, such as cutting angles in half for construction, optics with half-wave plates, and signal processing with subharmonics.
       `,
-      link:``,
+      link:`/tables/trigonometry/half-angle`,
     },
 
     triple:{
@@ -379,7 +374,7 @@ Inverse trigonometric identities like $\sin^{-1}(x) + \cos^{-1}(x) = \frac{\pi}{
       
       Those identities are valuable in advanced calculus, solving higher-order trigonometric equations, and specialized applications like three-phase electrical systems, crystallography with threefold symmetry, and acoustics where third harmonics play crucial roles in sound quality and instrument timbre.
       `,
-      link:``,
+      link:`/tables/trigonometry/triple-angle`,
     },
 
     
@@ -1000,40 +995,6 @@ Inverse trigonometric identities like $\sin^{-1}(x) + \cos^{-1}(x) = \frac{\pi}{
         searchableFields: ["law", "formula", "explanation"]  // Allow searching by name, formula, or explanation
       };
 
-      // Operation A demonstration units: frozen tool state + attached explanation
-      // panel + tool link, one frame. Rendered as content-array items.
-      const demoUnits = {
-        reciprocal: demoUnitFrame({
-          svg: basicIdentitiesDiagrams.csc.overview,
-          caption: 'Reciprocal pair, frozen',
-          text: 'On the unit circle the vertical leg is sin&#8202;&#952;, while the graph beside it tracks its reciprocal csc&#8202;&#952; = 1/sin&#8202;&#952; &#8212; growing without bound exactly where the sine leg shrinks toward zero. Step through this pairing live, function by function, on the',
-          href: '/trigonometry/visual-tools/basic-identities',
-          linkText: 'basic identities explorer',
-        }),
-        periodicity: demoUnitFrame({
-          svg: [trigFunctionsGraphDiagrams.sin, trigFunctionsGraphDiagrams.tan],
-          caption: 'Two periods, side by side',
-          text: 'The sine wave repeats its full shape every 2&#960;, while tangent restarts every &#960;, each cycle fenced by its asymptotes. Trace any of the six functions through several cycles yourself on the',
-          href: '/trigonometry/visual-tools/functions-graphs',
-          linkText: 'trigonometric functions graphs',
-          textAfterLink: ' tool.',
-        }),
-        double: demoUnitFrame({
-          svg: doubleAngleDiagrams.sin.overview,
-          caption: 'Geometric proof, final step',
-          text: 'The closing step of the geometric proof of sin(2&#952;) = 2&#8202;sin&#8202;&#952;&#8202;cos&#8202;&#952; on the unit circle. Play the whole proof through step by step &#8212; for sine and cosine alike &#8212; on the',
-          href: '/trigonometry/visual-tools/double-angle-identities',
-          linkText: 'double angle identities explorer',
-        }),
-        half: demoUnitFrame({
-          svg: halfAngleDiagrams.sin.overview,
-          caption: 'Half-angle derivation, final step',
-          text: 'The geometric derivation of the sine half-angle identity, frozen at its last step &#8212; the half-chord read straight off the unit circle. Play the full derivation, and its cosine counterpart, on the',
-          href: '/trigonometry/visual-tools/half-angle-identities',
-          linkText: 'half angle identities explorer',
-        }),
-      };
-
       const introContent={
         id:'intro',
         title:'Trigonometric Identities : Practical Guide',
@@ -1060,13 +1021,12 @@ Inverse trigonometric identities like $\sin^{-1}(x) + \cos^{-1}(x) = \frac{\pi}{
             introContent,
             keyWords,
             summaryTable,
-            demoUnits,
 
         }
     }
 }
 
-export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,sectionsContent,introContent, summaryTable, demoUnits}) {
+export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,sectionsContent,introContent, summaryTable}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1074,7 +1034,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
      {
         id:'0',
         title:sectionsContent.obj0.title,
-        link:'',
+        link:sectionsContent.obj0.link,
         content:[
           sectionsContent.obj0.content,
           sectionsContent.obj0.after,
@@ -1112,10 +1072,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
          copyableFields={["formula"]}
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
-        sectionsContent.reciprocal.after,
-        <div key={'unit-reciprocal'} dangerouslySetInnerHTML={{ __html: demoUnits.reciprocal }} />,
-        `With these six pairings internalized, every rational trigonometric expression becomes negotiable — whichever function a problem hands you, its reciprocal is one flip away.`,
-
+        sectionsContent.reciprocal.after
+        
       ]
     },
      {
@@ -1211,9 +1169,9 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
          sectionsContent.periodicity.after,
-         <div key={'unit-periodicity'} dangerouslySetInnerHTML={{ __html: demoUnits.periodicity }} />,
-         `However far an angle wanders, periodicity brings its values home — which is why no trigonometric computation ever truly needs an angle outside a single cycle.`,
 
+        
+        
       ]
     },
      {
@@ -1236,7 +1194,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       {
       id:'sum',
       title: sectionsContent.sum.title,
-      link:'',
+      link:sectionsContent.sum.link,
       content:[
 
           sectionsContent.sum.before,
@@ -1254,7 +1212,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       {
       id:'difference',
       title: sectionsContent.difference.title,
-      link:'',
+      link:sectionsContent.difference.link,
       content:[
         sectionsContent.difference.before,
         <div key={60} style={{marginLeft:'50px',marginRight:'50px'}}>
@@ -1272,7 +1230,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       {
       id:'half',
       title:sectionsContent.half.title,
-      link:'',
+      link:sectionsContent.half.link,
       content:[
         sectionsContent.half.before,
 
@@ -1284,15 +1242,13 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
          sectionsContent.half.after,
-         <div key={'unit-half'} dangerouslySetInnerHTML={{ __html: demoUnits.half }} />,
-         `With halves as with doubles, the lesson is the same: every fractional angle is reachable from whole ones — at the price of a square root and a careful sign check.`,
-
+        
       ]
     },
       {
       id:'double',
       title:sectionsContent.double.title,
-      link:'',
+      link:sectionsContent.double.link,
       content:[
             sectionsContent.double.before,
 
@@ -1305,8 +1261,6 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
          </div> ,
 
           sectionsContent.double.after,
-          <div key={'unit-double'} dangerouslySetInnerHTML={{ __html: demoUnits.double }} />,
-          `Compact as they look, these doubled forms are the hinge between single-angle values and the power-reducing, half-angle, and integration techniques that follow.`,
 
 
        
@@ -1319,7 +1273,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       {
       id:'triple',
       title:sectionsContent.triple.title,
-      link:'',
+      link:sectionsContent.triple.link,
       content:[
         sectionsContent.triple.before,
         <div key={63} style={{marginLeft:'50px',marginRight:'50px'}}>
@@ -1398,7 +1352,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
     {
       id:'summary',
       title: sectionsContent.summary.title,
-      link: '',
+      link: sectionsContent.summary.link,
       content:[
         sectionsContent.summary.before,
         <div key={'summary-table'} style={tableWrapStyle}
