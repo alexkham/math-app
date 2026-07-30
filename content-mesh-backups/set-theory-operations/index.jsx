@@ -9,8 +9,6 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
-import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
-import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -449,47 +447,6 @@ const schemas = {
  
 
 
-  // Operation A demonstration units: frozen tool state + attached explanation
-  // panel + tool link, one frame. Rendered as content-array items.
-  const VENN_TOOL = '/set-theory/visual-tools/two-sets-basic-venn';
-  const demoUnits = {
-    union: demoUnitFrame({
-      svg: twoSetsVennDiagrams.union,
-      caption: 'A &#8746; B, frozen',
-      text: 'Both circles shaded as one region: every element of A, of B, or of both &#8212; the inclusive &#8220;or&#8221; made visible. Watch the union highlight for sets you configure yourself on the',
-      href: VENN_TOOL,
-      linkText: 'two-set Venn explorer',
-    }),
-    intersection: demoUnitFrame({
-      svg: twoSetsVennDiagrams.intersection,
-      caption: 'A &#8745; B, frozen',
-      text: 'Only the lens where the circles overlap is shaded &#8212; the elements A and B share. Switch to disjoint sets and watch this region empty out on the',
-      href: VENN_TOOL,
-      linkText: 'two-set Venn explorer',
-    }),
-    complement: demoUnitFrame({
-      svg: twoSetsVennDiagrams.complementA,
-      caption: 'A&#8242;, frozen',
-      text: 'Everything inside the universe U except circle A is shaded &#8212; the complement drawn against its reference set. Flip between A&#8242;, B&#8242;, and the De Morgan combinations on the',
-      href: VENN_TOOL,
-      linkText: 'two-set Venn explorer',
-    }),
-    difference: demoUnitFrame({
-      svg: twoSetsVennDiagrams.differenceAB,
-      caption: 'A &#8726; B, frozen',
-      text: 'Only the crescent of A lying outside B is shaded: the elements of A that are not in B. Compare it with B &#8726; A &#8212; the opposite crescent &#8212; on the',
-      href: VENN_TOOL,
-      linkText: 'two-set Venn explorer',
-    }),
-    symmetricDifference: demoUnitFrame({
-      svg: twoSetsVennDiagrams.symmetricDifference,
-      caption: 'A &#9651; B, frozen',
-      text: 'Both crescents shaded with the shared lens carved out: the elements belonging to exactly one of the two sets. See how it equals (A &#8726; B) &#8746; (B &#8726; A) on the',
-      href: VENN_TOOL,
-      linkText: 'two-set Venn explorer',
-    }),
-  };
-
   return {
   props: {
     sectionsContent,
@@ -497,7 +454,6 @@ const schemas = {
     summaryTable,
     faqQuestions,
     schemas,
-    demoUnits,
     seoData: {
       title: "Set Operations: Union, Intersection, Complement & More | Learn Math Class",
       description: "Learn set operations: union, intersection, complement, set difference, and symmetric difference. Understand notation, properties, and how to combine sets.",
@@ -508,7 +464,7 @@ const schemas = {
   }
 }
    }
-export default function SetOperationsPage({seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function SetOperationsPage({seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -527,8 +483,6 @@ export default function SetOperationsPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
-          <div key={'unit-union'} dangerouslySetInnerHTML={{ __html: demoUnits.union }} />,
-          `Everything that follows in set algebra — distributive laws, De Morgan's laws, inclusion–exclusion — begins with this simplest act of pooling two collections into one.`,
         ]
     },
     {
@@ -537,8 +491,6 @@ export default function SetOperationsPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div key={'unit-intersection'} dangerouslySetInnerHTML={{ __html: demoUnits.intersection }} />,
-          `Intersection is union's natural counterpart, and the interplay between the two — each distributing over the other — drives most of the algebra ahead.`,
         ]
     },
     {
@@ -547,8 +499,6 @@ export default function SetOperationsPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'unit-complement'} dangerouslySetInnerHTML={{ __html: demoUnits.complement }} />,
-          `Complementation is the only unary operation of the five, and the bridge between set algebra and logic: it is negation, drawn as a region.`,
         ]
     },
     {
@@ -557,8 +507,6 @@ export default function SetOperationsPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'unit-difference'} dangerouslySetInnerHTML={{ __html: demoUnits.difference }} />,
-          `The identity $A \\setminus B = A \\cap B^c$ is worth internalizing — it turns every difference into an intersection, whose algebra you already know.`,
         ]
     },
     {
@@ -567,8 +515,6 @@ export default function SetOperationsPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'unit-symmetric-difference'} dangerouslySetInnerHTML={{ __html: demoUnits.symmetricDifference }} />,
-          `With symmetric difference the toolkit is complete: five operations, closed over sets, ready for the algebraic rules that organize them.`,
         ]
     },
 

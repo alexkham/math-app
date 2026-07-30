@@ -4,7 +4,7 @@
     "description": "Registry for Operation A (content-pages mesh): per content page, identity, section inventory, and the related-terms list with dispositions toward visual tools. Stores only cross-app data invisible from any single file. Backlinks are earned by demonstration value; mechanical reciprocity with Line 2 is forbidden.",
     "generated": "2026-07-29",
     "conventions": {
-      "pageKey": "route-qualified key '<section>/<slug>' (e.g. 'trigonometry/identities', 'set-theory/operations') - bare slugs collide across sections",
+      "pageKey": "kebab-case page slug matching the route segment",
       "template": "titled (sections have real slug ids) | untitled (empty section titles, structure investigation required before planting)",
       "relatedTerms": "Built on first mapping: prose scanned against definitionsRepository + formulasRepository (own section), plus each section's central subject. Status: linked | dropped (reason) | deferred (no ready tool demonstrates it; re-query as tools mature) | pending (must not survive a pass).",
       "units": "A linked term carries link records; unit is null for link-only plants (tool fits, visual does not - in-situ illustration later) or {diagrams, arrangement: single|sequence|adjacent-sections, newStates}. Visual form (2026-07-30): one attached frame - SVG left, tinted explanation panel right with divider, link inside the panel text. Built by app/components/demo-unit/demoUnitFrame.js inside getStaticProps, passed via props, rendered as a content-array item with dangerouslySetInnerHTML. Never interpolated into sectionsContent strings.",
@@ -54,46 +54,11 @@
         "tool": "angle-explorer",
         "decided": "2026-07-29",
         "runnersUp": []
-      },
-      "union": {
-        "tool": "two-sets-basic-venn",
-        "decided": "2026-07-30",
-        "runnersUp": [
-          "three-sets-basic-venn"
-        ]
-      },
-      "intersection": {
-        "tool": "two-sets-basic-venn",
-        "decided": "2026-07-30",
-        "runnersUp": [
-          "three-sets-basic-venn"
-        ]
-      },
-      "complement": {
-        "tool": "two-sets-basic-venn",
-        "decided": "2026-07-30",
-        "runnersUp": [
-          "three-sets-basic-venn"
-        ]
-      },
-      "set difference": {
-        "tool": "two-sets-basic-venn",
-        "decided": "2026-07-30",
-        "runnersUp": [
-          "three-sets-basic-venn"
-        ]
-      },
-      "symmetric difference": {
-        "tool": "two-sets-basic-venn",
-        "decided": "2026-07-30",
-        "runnersUp": [
-          "three-sets-basic-venn"
-        ]
       }
     }
   },
   "pages": {
-    "trigonometry/identities": {
+    "identities": {
       "slug": "identities",
       "name": "Trigonometric Identities",
       "section": "trigonometry",
@@ -542,7 +507,7 @@
         }
       ]
     },
-    "trigonometry/degrees-radians": {
+    "degrees-radians": {
       "slug": "degrees-radians",
       "name": "Degrees and Radians",
       "section": "trigonometry",
@@ -856,219 +821,6 @@
           ],
           "status": "dropped",
           "reason": "section subject; see complementary/supplementary term records - density skip, in-situ later"
-        }
-      ]
-    },
-    "set-theory/operations": {
-      "slug": "operations",
-      "name": "Set Operations",
-      "section": "set-theory",
-      "pagePath": "pages/set-theory/operations/index.jsx",
-      "template": "titled",
-      "templateNote": "Titled sections with numeric ids ('0'-'6'); slug migration pending, needed only when something links INTO these sections.",
-      "sections": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6"
-      ],
-      "sectionTitles": [
-        "Key Terms",
-        "Union",
-        "Intersection",
-        "Complement",
-        "Set Difference",
-        "Symmetric Difference",
-        "Summary: All Five Operations at a Glance"
-      ],
-      "relatedTerms": [
-        {
-          "term": "union",
-          "entity": "union",
-          "sections": [
-            "1"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "1",
-              "tool": "two-sets-basic-venn",
-              "target": {
-                "path": "/set-theory/visual-tools/two-sets-basic-venn",
-                "section": null
-              },
-              "unit": {
-                "diagrams": [
-                  "twoSetsVennDiagrams.union"
-                ],
-                "arrangement": "single",
-                "newStates": [
-                  "twoSetsVennDiagrams.union"
-                ]
-              },
-              "added": "2026-07-30"
-            }
-          ]
-        },
-        {
-          "term": "intersection",
-          "entity": "intersection",
-          "sections": [
-            "2"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "2",
-              "tool": "two-sets-basic-venn",
-              "target": {
-                "path": "/set-theory/visual-tools/two-sets-basic-venn",
-                "section": null
-              },
-              "unit": {
-                "diagrams": [
-                  "twoSetsVennDiagrams.intersection"
-                ],
-                "arrangement": "single",
-                "newStates": [
-                  "twoSetsVennDiagrams.intersection"
-                ]
-              },
-              "added": "2026-07-30"
-            }
-          ]
-        },
-        {
-          "term": "complement",
-          "entity": "complement",
-          "sections": [
-            "3"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "3",
-              "tool": "two-sets-basic-venn",
-              "target": {
-                "path": "/set-theory/visual-tools/two-sets-basic-venn",
-                "section": null
-              },
-              "unit": {
-                "diagrams": [
-                  "twoSetsVennDiagrams.complementA"
-                ],
-                "arrangement": "single",
-                "newStates": [
-                  "twoSetsVennDiagrams.complementA"
-                ]
-              },
-              "added": "2026-07-30"
-            }
-          ]
-        },
-        {
-          "term": "set difference",
-          "entity": "set_difference",
-          "sections": [
-            "4"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "4",
-              "tool": "two-sets-basic-venn",
-              "target": {
-                "path": "/set-theory/visual-tools/two-sets-basic-venn",
-                "section": null
-              },
-              "unit": {
-                "diagrams": [
-                  "twoSetsVennDiagrams.differenceAB"
-                ],
-                "arrangement": "single",
-                "newStates": [
-                  "twoSetsVennDiagrams.differenceAB"
-                ]
-              },
-              "added": "2026-07-30"
-            }
-          ]
-        },
-        {
-          "term": "symmetric difference",
-          "entity": "symmetric_difference",
-          "sections": [
-            "5"
-          ],
-          "status": "linked",
-          "links": [
-            {
-              "fromSection": "5",
-              "tool": "two-sets-basic-venn",
-              "target": {
-                "path": "/set-theory/visual-tools/two-sets-basic-venn",
-                "section": null
-              },
-              "unit": {
-                "diagrams": [
-                  "twoSetsVennDiagrams.symmetricDifference"
-                ],
-                "arrangement": "single",
-                "newStates": [
-                  "twoSetsVennDiagrams.symmetricDifference"
-                ]
-              },
-              "added": "2026-07-30"
-            }
-          ]
-        },
-        {
-          "term": "universal set",
-          "entity": "universal_set",
-          "sections": [
-            "3"
-          ],
-          "status": "dropped",
-          "reason": "supporting concept inside the complement section (already carries that unit); linked in the Key Terms block"
-        },
-        {
-          "term": "empty set",
-          "entity": "empty_set",
-          "sections": [
-            "2",
-            "5"
-          ],
-          "status": "dropped",
-          "reason": "passing mentions (disjoint case, identity element); linked in the Key Terms block"
-        },
-        {
-          "term": "set",
-          "entity": "set",
-          "sections": [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6"
-          ],
-          "status": "dropped",
-          "reason": "generic passing mentions"
-        },
-        {
-          "term": "element",
-          "entity": "element",
-          "sections": [
-            "1",
-            "2",
-            "3",
-            "5"
-          ],
-          "status": "dropped",
-          "reason": "generic passing mentions"
         }
       ]
     }
