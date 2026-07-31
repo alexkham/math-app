@@ -10,6 +10,14 @@ import { buildToolIndexData } from '../../../app/components/page-components/visu
 
 export async function getStaticProps(){
 
+  // Surfaced on the /set-theory hub via buildSectionData extraction.
+  // First-match-wins: placed before the page seoData/schemas, whose copy
+  // still carries linear-algebra text from the page it was templated from.
+  const hubMeta = {
+    name: 'Set Theory Visual Tools',
+    hubDescription: 'Interactive Venn diagram explorers for two and three sets: drag the circles between overlapping, disjoint and nested arrangements, toggle the shaded region for each operation, and watch the algebra of sets laws verify themselves visually in real time.',
+  }
+
   const keyWords = [
     'free linear algebra visual tools',
     'linear algebra calculator',

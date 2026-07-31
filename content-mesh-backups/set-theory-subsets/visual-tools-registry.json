@@ -388,44 +388,7 @@
       "name": "Three-Set Venn Diagram: Basic Identities",
       "section": "set-theory",
       "pagePath": "/set-theory/visual-tools/three-sets-basic-venn",
-      "relatedTerms": [
-        {
-          "term": "three-set venn diagram",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "intersection",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "union",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "region",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        },
-        {
-          "term": "truth table",
-          "entity": null,
-          "sections": [],
-          "status": "pending"
-        }
-      ],
-      "diagramsModule": "app/components/venn-diagrams/3-sets/threeSetsVennDiagrams.js",
-      "diagramStates": [
-        "plain",
-        "tripleIntersection",
-        "aUnionBintC"
-      ]
+      "relatedTerms": []
     },
     "basic-identities": {
       "slug": "basic-identities",
@@ -708,11 +671,7 @@
         "differenceAB",
         "symmetricDifference",
         "equalSets",
-        "disjoint",
-        "subsetAinB",
-        "plain",
-        "regions",
-        "complementUnion"
+        "disjoint"
       ]
     },
     "two-sets-laws-venn": {

@@ -13,6 +13,11 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 export async function getStaticProps(){
 
+    // Surfaced on the /set-theory hub via buildSectionData extraction.
+    const hubMeta = {
+      name: 'Set Theory Rules',
+      hubDescription: 'The laws of the algebra of sets collected in one reference: idempotent, associative, commutative, distributive, identity, domination, absorption, complement and De Morgan laws — each stated as a formula for both union and intersection, with a plain-language explanation of what the law permits.',
+    }
 
     const setAlgebraLawsData = {
         "Idempotent Laws": [

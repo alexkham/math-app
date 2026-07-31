@@ -6,6 +6,12 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 
+// Surfaced on the /set-theory hub via buildSectionData extraction.
+const hubMeta = {
+  name: 'Venn Diagram Generator',
+  hubDescription: 'An interactive generator for two-set Venn diagrams: label the sets, pick colors, and shade the region of the operation you are studying — a quick way to check answers or produce a clean diagram for notes and homework.',
+}
+
 const StandardContainer = ({ children }) => (
   <div style={{
     width: '100%',

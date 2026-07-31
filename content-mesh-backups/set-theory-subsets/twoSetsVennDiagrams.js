@@ -51,19 +51,6 @@ const dashedOutline = (c) =>
 const equalChrome = uRect + outline(EQ) + dashedOutline(EQ) + uText + setLabel(180, 100, 'A') + setLabel(340, 100, 'B');
 const disjointChrome = uRect + outline(DA) + outline(DB) + uText + setLabel(80, 320, 'A') + setLabel(440, 320, 'B');
 
-const SA = { cx: 280, cy: 210, r: 55 };                        // subset: A nested inside B
-const SB = { cx: 260, cy: 210, r: 130 };
-const subsetChrome = uRect + outline(SB) + outline(SA) + uText + setLabel(280, 280, 'A') + setLabel(130, 340, 'B');
-
-// Small in-region notation labels (for the anatomy/regions state).
-const regionLabel = (x, y, t) =>
-  `<text x="${x}" y="${y}" font-size="14" font-style="italic" fill="#334155" text-anchor="middle" font-family="${SERIF}">${t}</text>`;
-const regionLabels =
-  regionLabel(139, 215, 'A &#8726; B') +
-  regionLabel(260, 215, 'A &#8745; B') +
-  regionLabel(381, 215, 'B &#8726; A') +
-  regionLabel(95, 385, '(A &#8746; B)&#7580;');
-
 const twoSetsVennDiagrams = {
   union: wrap(disc(A, FILL) + disc(B, FILL)),
   intersection: wrap(lens(FILL, 'tsv-int')),
@@ -74,13 +61,6 @@ const twoSetsVennDiagrams = {
   symmetricDifference: wrap(disc(A, FILL) + disc(B, FILL) + lens('#fff', 'tsv-sym')),
   equalSets: wrap(disc(EQ, FILL), equalChrome),
   disjoint: wrap(disc(DA, FILL) + disc(DB, FILL), disjointChrome),
-  subsetAinB: wrap(disc(SA, FILL), subsetChrome),
-  plain: wrap(''),
-  regions: wrap('', chrome + regionLabels),
-  complementUnion: wrap(
-    `<rect x="${M}" y="${M}" width="${W - 2 * M}" height="${H - 2 * M}" fill="${FILL}"/>` +
-    disc(A, '#fff') + disc(B, '#fff')
-  ),
 };
 
 export default twoSetsVennDiagrams;

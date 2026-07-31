@@ -611,8 +611,6 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
-import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
-import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -990,33 +988,6 @@ const schemas = {
 
  
 
-  // Operation A demonstration units: frozen tool state + attached explanation
-  // panel + tool link, one frame. Rendered as content-array items.
-  const VENN_TOOL = '/set-theory/visual-tools/two-sets-basic-venn';
-  const demoUnits = {
-    equalSets: demoUnitFrame({
-      svg: twoSetsVennDiagrams.equalSets,
-      caption: 'A = B, frozen',
-      text: 'The two circles coincide completely &#8212; one drawn solid for A, one dashed for B &#8212; because equal sets occupy exactly the same region: every element of one is an element of the other. Compare this against every other relationship on the',
-      href: VENN_TOOL,
-      linkText: 'two-set Venn explorer',
-    }),
-    disjoint: demoUnitFrame({
-      svg: twoSetsVennDiagrams.disjoint,
-      caption: 'A &#8745; B = &#8709;, frozen',
-      text: 'The circles pull completely apart: no overlap region exists, because no element belongs to both sets. Slide between disjoint, overlapping, and nested configurations on the',
-      href: VENN_TOOL,
-      linkText: 'two-set Venn explorer',
-    }),
-    overlapping: demoUnitFrame({
-      svg: twoSetsVennDiagrams.intersection,
-      caption: 'Overlapping sets, frozen',
-      text: 'The shaded lens is non-empty &#8212; the shared elements &#8212; while both crescents keep elements of their own: the definition of overlap, drawn. Explore how the lens grows and shrinks as sets change on the',
-      href: VENN_TOOL,
-      linkText: 'two-set Venn explorer',
-    }),
-  };
-
   return {
   props: {
     sectionsContent,
@@ -1024,7 +995,6 @@ const schemas = {
     summaryTable,
     faqQuestions,
     schemas,
-    demoUnits,
     seoData: {
       title: "Set Relationships: Equal, Equivalent, Disjoint & Partitions | Learn Math Class",
       description: "Learn how sets relate: equal sets, equivalent sets, disjoint and overlapping sets, and partitions. Understand set equality proofs and pairwise disjoint collections.",
@@ -1039,7 +1009,7 @@ const schemas = {
 
  
 
-export default function SetRelationshipsPage({seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function SetRelationshipsPage({seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1058,8 +1028,6 @@ export default function SetRelationshipsPage({seoData, sectionsContent, introCon
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
-          <div key={'unit-equal-sets'} dangerouslySetInnerHTML={{ __html: demoUnits.equalSets }} />,
-          `Equality is the strictest of all set relationships — everything that follows on this page relaxes it in one direction or another.`,
         ]
     },
     {
@@ -1076,8 +1044,6 @@ export default function SetRelationshipsPage({seoData, sectionsContent, introCon
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'unit-disjoint'} dangerouslySetInnerHTML={{ __html: demoUnits.disjoint }} />,
-          `Disjointness is the opposite extreme from equality: no shared elements at all — a condition important enough that probability gives it its own name.`,
         ]
     },
     {
@@ -1086,8 +1052,6 @@ export default function SetRelationshipsPage({seoData, sectionsContent, introCon
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'unit-overlapping'} dangerouslySetInnerHTML={{ __html: demoUnits.overlapping }} />,
-          `Overlap is the general case between the two extremes — and the configuration where the set operations of union, intersection, and difference all produce genuinely distinct results.`,
         ]
     },
     {

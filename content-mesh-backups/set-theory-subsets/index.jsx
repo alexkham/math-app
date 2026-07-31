@@ -8,8 +8,6 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
-import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
-import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -639,19 +637,7 @@ const schemas = {
 }
 
 
-
-  // Operation A demonstration unit: frozen tool state + attached explanation
-  // panel + tool link, one frame. Rendered as a content-array item.
-  const demoUnits = {
-    subset: demoUnitFrame({
-      svg: twoSetsVennDiagrams.subsetAinB,
-      caption: 'A &#8838; B, frozen',
-      text: 'The whole of circle A sits inside circle B &#8212; shaded, because every element of A is already an element of B. Nudge the sets between nested, overlapping, and disjoint configurations on the',
-      href: '/set-theory/visual-tools/two-sets-basic-venn',
-      linkText: 'two-set Venn explorer',
-    }),
-  };
-
+ 
   return {
   props: {
     sectionsContent,
@@ -660,7 +646,6 @@ const schemas = {
     summaryTable,
     faqQuestions,
     schemas,
-    demoUnits,
     seoData: {
       title: "Subsets and Power Sets: Notation, Counting & Examples | Learn Math Class",
       description: "Learn about subsets, proper subsets, supersets, and power sets. Understand subset notation, count subsets with 2ⁿ, and explore the power set concept.",
@@ -673,7 +658,7 @@ const schemas = {
    }
 
 
-export default function SubsetsPage({seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function SubsetsPage({seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -692,8 +677,6 @@ export default function SubsetsPage({seoData, sectionsContent, introContent, obj
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
-          <div key={'unit-subset'} dangerouslySetInnerHTML={{ __html: demoUnits.subset }} />,
-          `Containment is the relation the rest of this page builds on — proper subsets sharpen it, supersets reverse it, and the power set collects every way it can happen.`,
         ]
     },
     {

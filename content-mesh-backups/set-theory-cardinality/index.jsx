@@ -8,8 +8,6 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
-import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
-import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -668,18 +666,7 @@ const schemas = {
 
 
 
-
-  // Operation A demonstration unit: frozen tool states + attached explanation
-  // panel + tool link, one frame. Rendered as a content-array item.
-  const demoUnits = {
-    inclusionExclusion: demoUnitFrame({
-      svg: [twoSetsVennDiagrams.union, twoSetsVennDiagrams.disjoint],
-      caption: 'Why the correction term exists',
-      text: 'Two frozen configurations tell the whole story: when the circles overlap (top), the lens lies inside both sets &#8212; summing |A| + |B| counts it twice, so |A &#8745; B| is subtracted once. When the sets are disjoint (bottom), there is no lens and the counts simply add. Slide between the two situations yourself on the',
-      href: '/set-theory/visual-tools/two-sets-basic-venn',
-      linkText: 'two-set Venn explorer',
-    }),
-  };
+  
 
   return {
   props: {
@@ -690,7 +677,6 @@ const schemas = {
     summaryTable,
     faqQuestions,
     schemas,
-    demoUnits,
     seoData: {
       title: "Cardinality of Sets: Finite, Countable & Uncountable | Learn Math Class",
       description: "Learn about cardinality: measuring set size, finite vs infinite sets, countable vs uncountable infinities, Cantor's diagonal argument, and comparing cardinalities.",
@@ -703,7 +689,7 @@ const schemas = {
    }
 
 
-export default function CardinalityPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function CardinalityPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -730,8 +716,6 @@ export default function CardinalityPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div key={'unit-inclusion-exclusion'} dangerouslySetInnerHTML={{ __html: demoUnits.inclusionExclusion }} />,
-          `Counting without double-counting is the entire craft of finite cardinality — inclusion-exclusion just states it as a formula, and it scales to any number of sets.`,
         ]
     },
     {

@@ -658,9 +658,6 @@ import '../../pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
-import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
-import threeSetsVennDiagrams from '@/app/components/venn-diagrams/3-sets/threeSetsVennDiagrams'
-import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -1125,47 +1122,7 @@ const schemas = {
   }
 }
 
-
-  // Operation A demonstration units: frozen tool state + attached explanation
-  // panel + tool link, one frame. Rendered as content-array items.
-  const demoUnits = {
-    anatomy: demoUnitFrame({
-      svg: twoSetsVennDiagrams.plain,
-      caption: 'The bare anatomy',
-      text: 'Two closed curves inside the rectangle U &#8212; nothing shaded yet, but every region a point could occupy is already there: inside one circle, inside both, or outside both. Bring this skeleton to life, scenario by scenario, on the',
-      href: '/set-theory/visual-tools/two-sets-basic-venn',
-      linkText: 'two-set Venn explorer',
-    }),
-    regions: demoUnitFrame({
-      svg: twoSetsVennDiagrams.regions,
-      caption: 'The four regions, labeled',
-      text: 'Each of the four regions carries its own notation: the lens A &#8745; B, the two crescents A &#8726; B and B &#8726; A, and the outside (A &#8746; B)&#7580;. Every two-set operation shades some combination of exactly these four. Walk through all of them on the',
-      href: '/set-theory/visual-tools/two-sets-basic-venn',
-      linkText: 'two-set Venn explorer',
-    }),
-    threeSets: demoUnitFrame({
-      svg: threeSetsVennDiagrams.tripleIntersection,
-      caption: 'A &#8745; B &#8745; C, frozen',
-      text: 'Three circles arranged so every overlap combination occurs; here the central region &#8212; elements in all three sets at once &#8212; is shaded. Explore each of the eight regions in turn on the',
-      href: '/set-theory/visual-tools/three-sets-basic-venn',
-      linkText: 'three-set Venn explorer',
-    }),
-    shading: demoUnitFrame({
-      svg: threeSetsVennDiagrams.aUnionBintC,
-      caption: 'A &#8746; (B &#8745; C), frozen',
-      text: 'The worked example from this section, shaded inside-out: first the B &#8745; C lens, then all of A, their union combined in one picture. Play compound shadings like this one step by step on the',
-      href: '/set-theory/visual-tools/three-sets-laws-venn',
-      linkText: 'three-set laws explorer',
-    }),
-    deMorgan: demoUnitFrame({
-      svg: twoSetsVennDiagrams.complementUnion,
-      caption: '(A &#8746; B)&#7580;, frozen',
-      text: 'De Morgan&#8217;s first law, verified by eye: the complement of the union is everything outside both circles &#8212; exactly the region A&#7580; &#8745; B&#7580; produces. Check both sides of this identity, and a dozen others, on the',
-      href: '/set-theory/visual-tools/two-sets-laws-venn',
-      linkText: 'two-set laws explorer',
-    }),
-  };
-
+ 
   return {
   props: {
     sectionsContent,
@@ -1174,7 +1131,6 @@ const schemas = {
     obj3Table,
     faqQuestions,
     schemas,
-    demoUnits,
     seoData: {
       title: "Venn Diagrams: Visualizing Sets and Operations | Learn Math Class",
       description: "Learn to use Venn diagrams: visualize sets, shade regions for union, intersection, and complement, and verify set identities like De Morgan's laws.",
@@ -1187,7 +1143,7 @@ const schemas = {
    }
 
 
-export default function VennDiagramsPage({seoData, sectionsContent, introContent, obj2Table, obj3Table, faqQuestions, schemas, demoUnits}) {
+export default function VennDiagramsPage({seoData, sectionsContent, introContent, obj2Table, obj3Table, faqQuestions, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -1206,8 +1162,6 @@ export default function VennDiagramsPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
-          <div key={'unit-anatomy'} dangerouslySetInnerHTML={{ __html: demoUnits.anatomy }} />,
-          `Everything a Venn diagram will ever say is said with these ingredients — curves, overlaps, and the rectangle that bounds them.`,
         ]
     },
 
@@ -1223,8 +1177,6 @@ export default function VennDiagramsPage({seoData, sectionsContent, introContent
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj2Table }}
           />,
-          <div key={'unit-regions'} dangerouslySetInnerHTML={{ __html: demoUnits.regions }} />,
-          `Four regions, four membership patterns — once you can name each one, reading any two-set shading becomes mechanical.`,
         ]
     },
 
@@ -1240,8 +1192,6 @@ export default function VennDiagramsPage({seoData, sectionsContent, introContent
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
-          <div key={'unit-three-sets'} dangerouslySetInnerHTML={{ __html: demoUnits.threeSets }} />,
-          `Eight regions for three sets, sixteen for four: the doubling is exactly why circles run out of room beyond three, and why the three-set diagram is the workhorse of the genre.`,
         ]
     },
     {
@@ -1250,8 +1200,6 @@ export default function VennDiagramsPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'unit-shading'} dangerouslySetInnerHTML={{ __html: demoUnits.shading }} />,
-          `Inside-out shading is an algorithm, not an art — master it on one compound expression and every other expression follows the same three steps.`,
         ]
     },
     {
@@ -1260,8 +1208,6 @@ export default function VennDiagramsPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'unit-de-morgan'} dangerouslySetInnerHTML={{ __html: demoUnits.deMorgan }} />,
-          `A matching pair of shaded diagrams is persuasive evidence, not a proof — but it is the fastest way to see why an identity deserves one.`,
         ]
     },
     // {

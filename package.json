@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-     "build": "next build && node generate-sitemap.mjs",
+    "build": "next build && node generate-sitemap.mjs",
     "start": "next start --port 3007 ",
     "generate-nav": "node generateNavFromSitemap.js",
     "lint": "next lint",
@@ -25,6 +25,7 @@
     "jstat": "^1.9.6",
     "katex": "^0.16.10",
     "lucide-react": "^0.436.0",
+    "mathjs": "^15.2.0",
     "mathlive": "^0.105.3",
     "mermaid": "^11.12.2",
     "next": "^15.3.3",

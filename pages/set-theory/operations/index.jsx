@@ -128,10 +128,187 @@ const keyWords = [
 </table>
 `
 
-  const sectionsContent = {
-    obj0: {
-  title: `Key Terms`,
-  content: `
+//   const sectionsContent = {
+//     obj0: {
+//   title: `Key Terms`,
+//   content: `
+// - [Union](!/set-theory/definitions#union) — elements in at least one of the sets
+// - [Intersection](!/set-theory/definitions#intersection) — elements common to both sets
+// - [Complement](!/set-theory/definitions#complement) — elements in the universal set but not in the given set
+// - [Set Difference](!/set-theory/definitions#set_difference) — elements in one set but not the other
+// - [Symmetric Difference](!/set-theory/definitions#symmetric_difference) — elements in exactly one of two sets
+// - [Universal Set](!/set-theory/definitions#universal_set) — reference set for the complement operation
+// - [Empty Set](!/set-theory/definitions#empty_set) — identity element for union, annihilator for intersection
+
+// `,
+//   before: ``,
+//   after: `
+// @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Set Theory Definitions](!/set-theory/definitions) →@`,
+//   link: '',
+// },
+//   obj1: {
+//     title: `Union`,
+//     content: `
+// The union of two sets $A$ and $B$ is the set of elements that belong to $A$ or $B$ or both:
+
+// $$A \\cup B = \\{x : x \\in A \\text{ or } x \\in B\\}$$
+
+// The word "or" here is inclusive — elements belonging to both sets are included. If $A = \\{1, 2, 3\\}$ and $B = \\{3, 4, 5\\}$, then:
+
+// $$A \\cup B = \\{1, 2, 3, 4, 5\\}$$
+
+// The element $3$ appears in both sets but is listed only once in the union.
+
+// Union is commutative and associative:
+
+// $$A \\cup B = B \\cup A$$
+
+// $$(A \\cup B) \\cup C = A \\cup (B \\cup C)$$
+
+// For multiple sets, the union extends naturally:
+
+// $$\\bigcup_{i=1}^{n} A_i = A_1 \\cup A_2 \\cup \\cdots \\cup A_n$$
+
+// This contains every element that appears in at least one of the sets $A_1, A_2, \\ldots, A_n$.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj2: {
+//     title: `Intersection`,
+//     content: `
+// The intersection of two sets $A$ and $B$ is the set of elements that belong to both $A$ and $B$:
+
+// $$A \\cap B = \\{x : x \\in A \\text{ and } x \\in B\\}$$
+
+// If $A = \\{1, 2, 3\\}$ and $B = \\{3, 4, 5\\}$, then:
+
+// $$A \\cap B = \\{3\\}$$
+
+// When two sets have no elements in common, their intersection is the empty set, and the sets are called disjoint:
+
+// $$A \\cap B = \\emptyset$$
+
+// Intersection is commutative and associative:
+
+// $$A \\cap B = B \\cap A$$
+
+// $$(A \\cap B) \\cap C = A \\cap (B \\cap C)$$
+
+// For multiple sets:
+
+// $$\\bigcap_{i=1}^{n} A_i = A_1 \\cap A_2 \\cap \\cdots \\cap A_n$$
+
+// This contains only elements that appear in every one of the sets $A_1, A_2, \\ldots, A_n$.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj3: {
+//     title: `Complement`,
+//     content: `
+// The complement of a set $A$ consists of all elements not in $A$. This operation requires a universal set $U$ that contains all elements under consideration:
+
+// $$A^c = \\{x \\in U : x \\notin A\\}$$
+
+// Alternative notations include $A'$ and $\\overline{A}$.
+
+// If the universal set is $U = \\{1, 2, 3, 4, 5\\}$ and $A = \\{1, 2\\}$, then:
+
+// $$A^c = \\{3, 4, 5\\}$$
+
+// The complement depends entirely on the choice of universal set. The same set $A$ has different complements relative to different universal sets.
+
+// Taking the complement twice returns the original set:
+
+// $$(A^c)^c = A$$
+
+// Two additional facts hold for any set $A$:
+
+// $$A \\cup A^c = U$$
+
+// $$A \\cap A^c = \\emptyset$$
+
+// Every element either belongs to $A$ or to its complement, but not to both.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj4: {
+//     title: `Set Difference`,
+//     content: `
+// The set difference $A \\setminus B$ (also written $A - B$) contains all elements that belong to $A$ but not to $B$:
+
+// $$A \\setminus B = \\{x : x \\in A \\text{ and } x \\notin B\\}$$
+
+// If $A = \\{1, 2, 3, 4\\}$ and $B = \\{3, 4, 5\\}$, then:
+
+// $$A \\setminus B = \\{1, 2\\}$$
+
+// $$B \\setminus A = \\{5\\}$$
+
+// Unlike union and intersection, set difference is not commutative — the order of $A$ and $B$ matters.
+
+// Set difference relates to complement: when $B \\subseteq U$, the complement $B^c$ equals $U \\setminus B$. More generally:
+
+// $$A \\setminus B = A \\cap B^c$$
+
+// This expresses difference as an intersection with a complement.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj5: {
+//     title: `Symmetric Difference`,
+//     content: `
+// The symmetric difference of $A$ and $B$ contains elements that belong to exactly one of the two sets:
+
+// $$A \\triangle B = (A \\setminus B) \\cup (B \\setminus A)$$
+
+// An equivalent definition uses union and intersection:
+
+// $$A \\triangle B = (A \\cup B) \\setminus (A \\cap B)$$
+
+// If $A = \\{1, 2, 3\\}$ and $B = \\{3, 4, 5\\}$, then:
+
+// $$A \\triangle B = \\{1, 2, 4, 5\\}$$
+
+// The element $3$ belongs to both sets, so it is excluded from the symmetric difference.
+
+// Symmetric difference is commutative and associative:
+
+// $$A \\triangle B = B \\triangle A$$
+
+// $$(A \\triangle B) \\triangle C = A \\triangle (B \\triangle C)$$
+
+// The symmetric difference with the empty set leaves a set unchanged: $A \\triangle \\emptyset = A$. The symmetric difference of a set with itself is empty: $A \\triangle A = \\emptyset$.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+//   obj6: {
+//     title: `Summary: All Five Operations at a Glance`,
+//     content: `
+// The five operations introduced above share a uniform structure: each consumes one or two sets and returns a new set, defined by a precise membership condition. The capstone table below collects them all in one place — every operation with its notation, its membership rule, the result on a single worked example ($A = \\{1, 2, 3\\}$, $B = \\{3, 4, 5\\}$, $U = \\{1, 2, 3, 4, 5\\}$), and its key algebraic properties.
+//     `,
+//     before: ``,
+//     after: ``,
+//     link: '',
+//   },
+// };
+
+
+// ---------- SECTIONS ----------
+
+const sectionsContent = {
+  obj0: {
+    title: `Key Terms`,
+    content: `
 - [Union](!/set-theory/definitions#union) — elements in at least one of the sets
 - [Intersection](!/set-theory/definitions#intersection) — elements common to both sets
 - [Complement](!/set-theory/definitions#complement) — elements in the universal set but not in the given set
@@ -141,11 +318,11 @@ const keyWords = [
 - [Empty Set](!/set-theory/definitions#empty_set) — identity element for union, annihilator for intersection
 
 `,
-  before: ``,
-  after: `
+    before: ``,
+    after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Set Theory Definitions](!/set-theory/definitions) →@`,
-  link: '',
-},
+    link: '',
+  },
   obj1: {
     title: `Union`,
     content: `
@@ -254,7 +431,12 @@ Unlike union and intersection, set difference is not commutative — the order o
 
 Set difference relates to complement: when $B \\subseteq U$, the complement $B^c$ equals $U \\setminus B$. More generally:
 
+@academic[formula_callout:Difference as Intersection with Complement
 $$A \\setminus B = A \\cap B^c$$
+/set-theory/formulas#difference_as_intersection_with_complement]@
+
+@academic[formulas_link:Browse all set theory formulas
+/set-theory/formulas]@
 
 This expresses difference as an intersection with a complement.
     `,
@@ -271,7 +453,12 @@ $$A \\triangle B = (A \\setminus B) \\cup (B \\setminus A)$$
 
 An equivalent definition uses union and intersection:
 
+@academic[formula_callout:Symmetric Difference - Union Minus Intersection
 $$A \\triangle B = (A \\cup B) \\setminus (A \\cap B)$$
+/set-theory/formulas#symmetric_difference_-_union_minus_intersection]@
+
+@academic[formulas_link:Browse all set theory formulas
+/set-theory/formulas]@
 
 If $A = \\{1, 2, 3\\}$ and $B = \\{3, 4, 5\\}$, then:
 
@@ -301,6 +488,7 @@ The five operations introduced above share a uniform structure: each consumes on
     link: '',
   },
 };
+
 
 const introContent = {
   id: "intro",
