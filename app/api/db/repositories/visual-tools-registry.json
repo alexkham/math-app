@@ -778,6 +778,360 @@
           "status": "pending"
         }
       ]
+    },
+    "functions-types": {
+      "slug": "types",
+      "name": "Functions Families Gallery",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/types/index.jsx",
+      "diagramsModule": "app/components/functions/types/functionTypesDiagrams.js",
+      "diagramStates": [
+        "linear",
+        "quadratic",
+        "cubic",
+        "power",
+        "rational",
+        "exponential",
+        "logarithmic",
+        "sine",
+        "cosine",
+        "tangent",
+        "absolute",
+        "sqrt"
+      ],
+      "line1": {
+        "done": "2026-07-31",
+        "states": 12,
+        "sections": 22,
+        "anchors": 83,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "function family",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "linear function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "quadratic function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cubic function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "power function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rational function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "exponential function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "logarithmic function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "sine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "cosine",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "tangent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "absolute value function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "square root function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertical asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "horizontal asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "periodicity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "domain",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inflection point",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertex",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "discriminant",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-asymptotes": {
+      "slug": "asymptotes",
+      "name": "Function Asymptotes Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/asymptotes/index.jsx",
+      "diagramsModule": "app/components/functions/asymptotes/functionAsymptotesDiagrams.js",
+      "diagramStates": [
+        "logarithmic",
+        "tangent",
+        "expDecay",
+        "bell",
+        "arctan",
+        "logistic",
+        "reciprocal",
+        "rationalShifted",
+        "xOverX2Minus1",
+        "obliqueClassic",
+        "obliqueRational"
+      ],
+      "line1": {
+        "done": "2026-07-31",
+        "states": 11,
+        "sections": 24,
+        "anchors": 62,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "vertical asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "horizontal asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "oblique asymptote",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "one-sided limit",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "limit at infinity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "rational function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "logarithmic function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "tangent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "arctangent",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "logistic function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "exponential decay",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "end behavior",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "domain",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "functions-composition": {
+      "slug": "composition",
+      "name": "Function Composition Visualizer",
+      "section": "functions",
+      "pagePath": "pages/functions/visual-tools/composition/index.jsx",
+      "diagramsModule": "app/components/functions/compositions/functionCompositionDiagrams.js",
+      "diagramStates": [
+        "identity",
+        "quadratic",
+        "cubic",
+        "reciprocal",
+        "exponential",
+        "logarithmic",
+        "sine",
+        "cosine",
+        "absolute",
+        "sqrt",
+        "inversePair",
+        "sqrtSquare",
+        "selfCompose"
+      ],
+      "line1": {
+        "done": "2026-07-31",
+        "states": 13,
+        "sections": 23,
+        "anchors": 46,
+        "orphans": 0
+      },
+      "relatedTerms": [
+        {
+          "term": "function composition",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "composition operator",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "inverse functions",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "identity function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "chain rule",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "domain",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "commutativity",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "iteration",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "even function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        },
+        {
+          "term": "odd function",
+          "entity": null,
+          "sections": [],
+          "status": "pending"
+        }
+      ]
     }
   },
   "$stubTemplate": {

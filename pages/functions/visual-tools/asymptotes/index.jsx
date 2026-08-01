@@ -1,486 +1,3 @@
-// import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
-// import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
-// import IntroSection from '@/app/components/page-components/section/IntroContentSection'
-// import Sections from '@/app/components/page-components/section/Sections'
-// import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-// import Head from 'next/head'
-// import '@/pages/pages.css'
-// import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
-// import FunctionAsymptotes from '../../../../app/components/functions/asymptotes/FunctionAsymptotes'
-
-
-// export async function getStaticProps(){
-
-//   const keyWords=['','','','','']
-
-//   // •
-
-// //   \u2022 First item
-// // \u2022 Second item
-
-  
-// // <hr style="border-width:1px;"></hr>
-
-// // <hr style="color:blue;" />
-
-// // <hr style="border-color:#3498db; border-width:1px;" />
-
-
-
-// // @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-
- 
-// // <div key={'notation-normal'} style={{background: 'linear-gradient(to right, #f1f5f9 0%, #e2e8f0 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #94a3b8',transform:'scale(0.9)'}}>
-//         //     {processContent(sectionsContent.normal.notation)}
-//         // </div>,
-
-
-// //   <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
-// //     {processContent(sectionsContent.normal.parameters)}
-// // </div>,
-        
-// //  <div key={'pmf-geometric'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
-// //                   {processContent(sectionsContent.obj4.content)}
-// //                   </div>,
-
-
-// //  <div key={'dist'} style={{
-// //                     textAlign: 'center',
-// //                     transform: 'scale(0.98)',
-// //                     transformOrigin: 'center',
-// //                     marginTop:'50px',
-// //                     marginLeft:'-150px'
-// //                   }} dangerouslySetInnerHTML={{ 
-// //                     __html:   sectionContent.distributions.svg,
-// //                   }} />
-
-//     const sectionsContent={
-
-//     obj0:{
-//       title:`Key Terms`,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-  
-//     },
-//     obj1:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-  
-//     },
-//     obj2:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-  
-//     obj3:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj4:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj5:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj6:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj7:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj8:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj9:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj10:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj11:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj12:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     },
-//     obj13:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-//     obj14:{
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-//       link:'',
-  
-//     },
-
-
-//     obj15:{
-  
-//       title:``,
-//       content:``,
-//       before:``,
-//       after:``,
-//       link:'',
-  
-//     }
-  
-//   }
-
-
-//   const introContent = {
-//   id: "intro",
-//   title: "",
-//   content: ``
-// }
-
-
-
-
-//    return {
-//       props:{
-//          sectionsContent,
-//          introContent,
-//           seoData: {
-//         title: "Title | Learn Math Class",
-//         description: "Metadescription",
-//         keywords: keyWords.join(", "),
-//         url: "/functions/visual-tools/asymptotes",
-//          name: "name"
-//       },
-        
-//        }
-//     }
-//    }
-
-// export default function PageTemplate({seoData,sectionsContent , introContent}) {
-
-    
-//   const genericSections=[
-//     {
-//         id:'0',
-//         title:sectionsContent.obj0.title,
-//         link:sectionsContent.obj0.link,
-//         content:[
-//           sectionsContent.obj0.content,
-//         ]
-//     },
-//     {
-//         id:'1',
-//         title:sectionsContent.obj1.title,
-//         link:sectionsContent.obj1.link,
-//         content:[
-//           sectionsContent.obj1.content,
-//         ]
-//     },
-//     {
-//         id:'2',
-//         title:sectionsContent.obj2.title,
-//         link:sectionsContent.obj2.link,
-//         content:[
-//           sectionsContent.obj2.content,
-//         ]
-//     },
-//     {
-//         id:'3',
-//         title:sectionsContent.obj3.title,
-//         link:sectionsContent.obj3.link,
-//         content:[
-//           sectionsContent.obj3.content,
-//         ]
-//     },
-//     {
-//         id:'4',
-//         title:sectionsContent.obj4.title,
-//         link:sectionsContent.obj4.link,
-//         content:[
-//           sectionsContent.obj4.content,
-//         ]
-//     },
-//     {
-//         id:'5',
-//         title:sectionsContent.obj5.title,
-//         link:sectionsContent.obj5.link,
-//         content:[
-//           sectionsContent.obj5.content,
-//         ]
-//     },
-//     {
-//         id:'6',
-//         title:sectionsContent.obj6.title,
-//         link:sectionsContent.obj6.link,
-//         content:[
-//           sectionsContent.obj6.content,
-//         ]
-//     },
-//     {
-//         id:'7',
-//         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
-//         content:[
-//           sectionsContent.obj7.content,
-//         ]
-//     },
-//     {
-//         id:'8',
-//         title:sectionsContent.obj8.title,
-//         link:sectionsContent.obj8.link,
-//         content:[
-//           sectionsContent.obj8.content,
-//         ]
-//     },
-//     {
-//         id:'9',
-//         title:sectionsContent.obj9.title,
-//         link:sectionsContent.obj9.link,
-//         content:[
-//           sectionsContent.obj9.content,
-//         ]
-//     },
-//     {
-//         id:'10',
-//         title:sectionsContent.obj10.title,
-//         link:sectionsContent.obj10.link,
-//         content:[
-//           sectionsContent.obj10.content,
-//         ]
-//     },
-//     {
-//         id:'11',
-//         title:sectionsContent.obj11.title,
-//         link:sectionsContent.obj11.link,
-//         content:[
-//           sectionsContent.obj11.content,
-//         ]
-//     },
-//     {
-//         id:'12',
-//         title:sectionsContent.obj12.title,
-//         link:sectionsContent.obj12.link,
-//         content:[
-//           sectionsContent.obj12.content,
-//         ]
-//     },
-//     {
-//         id:'13',
-//         title:sectionsContent.obj13.title,
-//         link:sectionsContent.obj13.link,
-//         content:[
-//           sectionsContent.obj13.content,
-//         ]
-//     },
-//     {
-//         id:'14',
-//         title:sectionsContent.obj14.title,
-//         link:sectionsContent.obj14.link,
-//         content:[
-//           sectionsContent.obj14.content,
-//         ]
-//     },
-//     {
-//         id:'15',
-//         title:sectionsContent.obj15.title,
-//         link:sectionsContent.obj15.link,
-//         content:[
-//           sectionsContent.obj15.content,
-//         ]
-//     },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-//     // {
-//     //     id:'1',
-//     //     title:sectionsContent.obj1.title,
-//     //     link:sectionsContent.obj1.link,
-//     //     content:[
-//     //       sectionsContent.obj1.content,
-//     //     ]
-//     // },
-    
-// ]
-
-//   return (
-//    <>
-//    <Head>
-//   <title>{seoData.title}</title>
-//   <meta name="description" content={seoData.description} />
-//   <meta name="keywords" content={seoData.keywords} />
-//   <meta name="viewport" content="width=device-width, initial-scale=1" />
-//   <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
-  
-//   <meta property="og:title" content={seoData.title} />
-//   <meta property="og:description" content={seoData.description} />
-//   <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
-//   <meta property="og:type" content="article" />
-//   <meta property="og:site_name" content="Learn Math Class" />
-  
-//   <meta name="twitter:card" content="summary" />
-//   <meta name="twitter:title" content={seoData.title} />
-//   <meta name="twitter:description" content={seoData.description} />
-  
-//   <meta name="robots" content="index, follow" />
-  
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify({
-//         "@context": "https://schema.org",
-//         "@type": "WebPage",
-//         "name": seoData.name,
-//         "description": seoData.description,
-//         "keywords": seoData.keywords,
-//         "url": `https://www.learnmathclass.com${seoData.url}`,
-//         "dateModified": new Date().toISOString(),
-//         "inLanguage": "en-US",
-//         "mainEntity": {
-//           "@type": "Article",
-//           "name": seoData.name,
-//           "dateModified": new Date().toISOString(),
-//           "author": {
-//             "@type": "Organization",
-//             "name": "Learn Math Class"
-//           }
-//         }
-//       })
-//     }}
-//   />
-// </Head>
-//    {/* <GenericNavbar/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    <br/>
-//     <OperaSidebar 
-//            side='right'
-//            // topOffset='65px' 
-//            sidebarWidth='45px'
-//            panelWidth='200px'
-//            iconColor='white'
-//            panelBackgroundColor='#f2f2f2'
-//          /> 
-//    <Breadcrumb/>
-//    <br/>
-//    <br/>
-//    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Asymptotes</h1>
-//    <br/>
-//    <FunctionAsymptotes/>
-//    <br/>
-//    {/* <SectionTableOfContents sections={genericSections}
-//     showSecondaryNav={true}
-//          secondaryNavMode="siblings"  // or "children"
-//          secondaryNavTitle="More in this Section"
-   
-//    /> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//     {/* <IntroSection 
-//           id={introContent.id}
-//           title={introContent.title}
-//           content={introContent.content}
-//            backgroundColor='#f9fafb'
-//           //  "#f2f2f2"
-//           textColor="#06357a"
-//         /> */}
-//    <br/>
-//     {/* <KeyTermsCard
-//      id="0"
-//      title={sectionsContent.obj0.title}
-//      content={sectionsContent.obj0.content}
-//      after={sectionsContent.obj0.after}
-//      variant="light"
-//    /> */}
-//    <br/>
-//    {/* <Sections sections={genericSections}/> */}
-//    <br/>
-//    <br/>
-//    <br/>
-//    {/* <ScrollUpButton/> */}
-//    </>
-//   )
-// }
 
 
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
@@ -491,7 +8,11 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// Canonical per-family explanations live in getStaticProps below (SSR/SEO-visible);
+// the component renders them as the info panel's "Family" tab.
 import FunctionAsymptotes from '../../../../app/components/functions/asymptotes/FunctionAsymptotes'
+import asymDiagrams from '../../../../app/components/functions/asymptotes/functionAsymptotesDiagrams'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -526,7 +47,7 @@ export async function getStaticProps(){
 
 Below the plot, a **detected asymptotes panel** lists each one as a colored pill with its equation. For vertical asymptotes it also shows the one-sided limits ($x \\to c^-$ and $x \\to c^+$, each tagged $+\\infty$ or $-\\infty$). On the right is the **info panel** with two tabs — Detected (state-specific) and Concepts (general theory).
 
-The page launches with the reciprocal function $1/x$. The plot shows the two-branch hyperbola, a red dashed vertical line at $x = 0$, and a green dashed horizontal at $y = 0$ — the canonical example of a function with both kinds of asymptote.`,
+The page launches with the [reciprocal function](!#the-reciprocal-function) $1/x$. The plot shows the two-branch hyperbola, a red dashed vertical line at $x = 0$, and a green dashed horizontal at $y = 0$ — the canonical example of a function with both kinds of asymptote.`,
       before: ``,
       after: ``,
       link: '',
@@ -536,10 +57,10 @@ The page launches with the reciprocal function $1/x$. The plot shows the two-bra
       title: `Picking a Function`,
       content: `The picker groups eleven functions by which asymptotes they have:
 
-• **Vertical only** — Logarithm $\\ln(x)$ (VA at $x = 0$), Tangent (VAs at $\\pi/2 + n\\pi$)
-• **Horizontal only** — Exponential decay $e^{-x}$, the bell $1/(1+x^2)$, Arctangent, Logistic
-• **Both V and H** — Reciprocal $1/x$, $(x+1)/(x-1)$, $x/(x^2-1)$
-• **Oblique** — $x + 1/x$, $(x^2 - 1)/x$
+• [Vertical only](!#families-with-vertical-asymptotes-only) — [Logarithm](!#the-logarithmic-family) $\\ln(x)$ (VA at $x = 0$), [Tangent](!#the-tangent-family) (VAs at $\\pi/2 + n\\pi$)
+• [Horizontal only](!#families-with-horizontal-asymptotes-only) — [Exponential decay](!#exponential-decay) $e^{-x}$, [the bell](!#the-bell-curve) $1/(1+x^2)$, [Arctangent](!#the-arctangent-function), [Logistic](!#the-logistic-curve)
+• [Both V and H](!#families-with-both-asymptote-types) — [Reciprocal](!#the-reciprocal-function) $1/x$, [the shifted rational](!#the-shifted-rational-function) $(x+1)/(x-1)$, [the three-branch rational](!#the-three-branch-rational-function) $x/(x^2-1)$
+• [Oblique](!#oblique-asymptotes) — [the classic](!#the-classic-oblique-function) $x + 1/x$, [the oblique rational](!#the-oblique-rational-function) $(x^2 - 1)/x$
 
 The grouping is a teaching tool. **Arctan** is the classic two-different-HA example — $\\pi/2$ on the right, $-\\pi/2$ on the left. **Exponential decay** is the classic one-sided HA — converges on the right, blows up on the left. **$x/(x^2-1)$** has two VAs ($x = \\pm 1$) and one HA ($y = 0$). **$(x^2-1)/x$** simplifies to $x - 1/x$, so its oblique asymptote is $y = x$.
 
@@ -604,10 +125,10 @@ Watching the symbols ($+\\infty$ vs $-\\infty$, present vs absent) gives you the
       title: `Transforming and Tracking Asymptotes`,
       content: `Four sliders apply the affine transformation $g(x) = a \\cdot f(b(x - h)) + k$:
 
-• **$a$ — vertical scale** rescales the output. Horizontal asymptotes move with $a$: a HA at $y = L$ becomes $y = aL + k$.
-• **$k$ — vertical shift** lifts the whole curve. HAs shift by $k$; verticals are unaffected.
-• **$b$ — horizontal scale** stretches the input. VAs move: $x = c$ becomes $x = c/b + h$.
-• **$h$ — horizontal shift** translates left/right. Verticals shift by $h$; HAs are unaffected.
+• $a$ — **vertical scale** rescales the output. Horizontal asymptotes move with $a$: a HA at $y = L$ becomes $y = aL + k$.
+• $k$ — **vertical shift** lifts the whole curve. HAs shift by $k$; verticals are unaffected.
+• $b$ — **horizontal scale** stretches the input. VAs move: $x = c$ becomes $x = c/b + h$.
+• $h$ — **horizontal shift** translates left/right. Verticals shift by $h$; HAs are unaffected.
 
 Concrete example: start on the reciprocal, default parameters — VA at $x = 0$, HA at $y = 0$. Drag $h$ to $+2$ — the VA tracks to $x = 2$. Drag $k$ to $+3$ — the HA tracks to $y = 3$. The dashed lines move in real time, and the detector's labels update accordingly.
 
@@ -621,8 +142,8 @@ The detection is purely numerical — no formula manipulation — so even fairly
       title: `Oblique Asymptotes`,
       content: `An **oblique** (or **slant**) asymptote is a non-horizontal line $y = mx + b$ that the curve approaches at infinity. Two functions in the picker demonstrate this:
 
-• **$x + 1/x$** — at large $|x|$, the $1/x$ term shrinks to zero, leaving $y = x$. The asymptote is the line $y = x$ through the origin.
-• **$(x^2 - 1)/x$** — polynomial-divide to get $x - 1/x$. Same oblique asymptote: $y = x$.
+• [The classic oblique](!#the-classic-oblique-function) $x + 1/x$ — at large $|x|$, the $1/x$ term shrinks to zero, leaving $y = x$. The asymptote is the line $y = x$ through the origin.
+• [The oblique rational](!#the-oblique-rational-function) $(x^2 - 1)/x$ — polynomial-divide to get $x - 1/x$. Same oblique asymptote: $y = x$.
 
 The detector finds it by computing $m = \\lim_{x \\to \\pm\\infty} g(x)/x$. If that limit is a finite non-zero number, compute $b = \\lim g(x) - mx$. If both limits converge, $y = mx + b$ is the asymptote.
 
@@ -686,11 +207,148 @@ The visualizer lets you build intuition by watching the dashed lines emerge from
       link: '',
     },
 
-    obj11: { title:``, content:``, before:``, after:``, link:'' },
-    obj12: { title:``, content:``, before:``, after:``, link:'' },
-    obj13: { title:``, content:``, before:``, after:``, link:'' },
-    obj14: { title:``, content:``, before:``, after:``, link:'' },
-    obj15: { title:``, content:``, before:``, after:``, link:'' },
+    obj11: {
+      title: `Families with Vertical Asymptotes Only`,
+      content: `Two functions in the picker have vertical asymptotes and nothing else: the [logarithm](!#the-logarithmic-family), whose single wall stands at its domain edge, and the [tangent](!#the-tangent-family), whose walls repeat forever at every half-period. They bracket the two ways a vertical asymptote arises — a domain boundary the function cannot cross, and a periodic division by zero.
+
+Neither function settles toward any height at infinity: the logarithm keeps climbing (ever more slowly), and tangent never stops cycling. That is what "vertical only" means — singular behavior without end-behavior flattening.`,
+      before: ``, after: ``, link: '',
+    },
+    obj12: {
+      title: `The Logarithmic Family`,
+      content: `The natural logarithm $\\ln(x)$ is the cleanest one-sided vertical asymptote in elementary mathematics: a single wall at $x = 0$, approached from the right only.`,
+      before: ``,
+      after: `The one-sidedness is the point: for $x < 0$ the function simply does not exist, so the [detected asymptotes panel](!#the-detected-asymptotes-panel) reports only the right-hand limit, $x \\to 0^+ : -\\infty$, and omits the left entry entirely — the pattern examined in [One-Sided Limits](!#one-sided-limits-at-vertical-asymptotes).
+
+There is no horizontal asymptote: $\\ln(x)$ grows without bound. It just does so at an ever-decreasing pace — a slow climb that is easy to mistake for flattening until you scroll the plot.
+
+Drag the horizontal shift $h$ and the wall tracks to $x = h$; the [transformation rules](!#transforming-and-tracking-asymptotes) apply verbatim.`,
+      link: '',
+    },
+    obj13: {
+      title: `The Tangent Family`,
+      content: `Tangent multiplies the vertical asymptote into a periodic family: one wall at every $x = \\pi/2 + n\\pi$, marching across the axis forever.`,
+      before: ``,
+      after: `Each wall is a sign-flip asymptote — the curve leaves through $+\\infty$ on one side and re-enters from $-\\infty$ on the other — and between consecutive walls the function sweeps the entire real line once.
+
+The walls come from $\\tan(x) = \\sin(x)/\\cos(x)$: wherever cosine vanishes, the ratio blows up. Because cosine has infinitely many zeros, no other elementary function in the picker matches tangent's asymptote count.
+
+The horizontal-scale slider $b$ compresses the spacing: at $b = 2$ the walls stand $\\pi/2$ apart instead of $\\pi$. Watching the red lines re-space themselves live is the fastest way to internalize the input-transform rule $x = c/b + h$.`,
+      link: '',
+    },
+    obj14: {
+      title: `Families with Horizontal Asymptotes Only`,
+      content: `Four picker functions flatten toward a height without ever blowing up: [exponential decay](!#exponential-decay), the [bell curve](!#the-bell-curve), the [arctangent](!#the-arctangent-function), and the [logistic curve](!#the-logistic-curve). Between them they cover every horizontal-asymptote pattern: one-sided (decay), one line serving both directions (bell), two different lines (arctan), and a pair of lines boxing the curve in (logistic).
+
+None of them has a vertical asymptote — each is defined and finite on the whole real line. Their interest lies entirely at infinity.`,
+      before: ``, after: ``, link: '',
+    },
+    obj15: {
+      title: `Exponential Decay`,
+      content: `The decay curve $e^{-x}$ is the textbook one-sided horizontal asymptote: it hugs $y = 0$ ever more tightly to the right, and explodes without bound to the left.`,
+      before: ``,
+      after: `The asymmetry is the lesson. A horizontal asymptote is a statement about one direction of travel: here $f(x) \\to 0$ as $x \\to +\\infty$, while the limit as $x \\to -\\infty$ does not exist at all. The detected panel tags the green pill accordingly — $x \\to +\\infty$ only.
+
+The curve never touches its asymptote: $e^{-x}$ is strictly positive. But that is a special feature of this function, not a law — the [bell curve](!#the-bell-curve) shares the same asymptote and also never touches it, while other functions cross their HA freely.
+
+Vertical shift $k$ moves the resting level: $y = k$ becomes the new floor, the model's steady state.`,
+      link: '',
+    },
+    obj16: {
+      title: `The Bell Curve`,
+      content: `The function $1/(1 + x^2)$ makes one symmetric hump at the origin and dies off to zero in both directions — one horizontal asymptote serving both ends of the axis.`,
+      before: ``,
+      after: `The denominator $1 + x^2$ is never zero, so there is no vertical asymptote anywhere: a rational function with poles nowhere on the real line. Peak value $1$ at $x = 0$, half-height at $x = \\pm 1$, and from there the long symmetric slide toward the green line.
+
+Because the function is even, both tails behave identically — the detected panel shows a single HA tagged $x \\to \\pm\\infty$, the both-sides case.
+
+Compare it with [exponential decay](!#exponential-decay): same asymptote, but the bell approaches it polynomially ($\\sim 1/x^2$) rather than exponentially — visibly slower once you look for it.`,
+      link: '',
+    },
+    obj17: {
+      title: `The Arctangent Function`,
+      content: `Arctangent is the canonical two-asymptote function: it rises from $y = -\\pi/2$ on the far left to $y = +\\pi/2$ on the far right, a different horizontal asymptote on each side.`,
+      before: ``,
+      after: `The two limits are genuinely different numbers — $\\lim_{x \\to -\\infty} = -\\pi/2$ and $\\lim_{x \\to +\\infty} = +\\pi/2$ — which is why the detected panel lists two separate green pills, each tagged with its own direction.
+
+The reason lives in the inverse relationship: arctangent undoes [tangent](!#the-tangent-family), so tangent's vertical walls at $\\pm\\pi/2$ become arctangent's horizontal ceilings. Inverting a function reflects its graph across $y = x$, and the reflection turns vertical asymptotes into horizontal ones.
+
+In applications this shape models saturation — a response that levels off at hard limits in both directions.`,
+      link: '',
+    },
+    obj18: {
+      title: `The Logistic Curve`,
+      content: `The logistic function $1/(1 + e^{-x})$ climbs its S-shape between two horizontal asymptotes: the floor $y = 0$ behind it and the ceiling $y = 1$ ahead.`,
+      before: ``,
+      after: `Like the [arctangent](!#the-arctangent-function) it has two HAs, but here they box the curve into a bounded band: every value lies strictly between $0$ and $1$. The midpoint crossing at $(0, \\tfrac{1}{2})$ is the curve's only inflection.
+
+The ceiling is the famous one: in population models $y = 1$ is the carrying capacity, in machine learning it is the probability limit of the sigmoid. Steady states in models are horizontal asymptotes wearing applied clothing — the point made in [Why Asymptotes Matter](!#why-asymptotes-matter).
+
+Vertical scale $a$ and shift $k$ move both bounds together: floor $k$, ceiling $a + k$.`,
+      link: '',
+    },
+    obj19: {
+      title: `Families with Both Asymptote Types`,
+      content: `Three rational functions in the picker carry vertical and horizontal asymptotes at once: the [reciprocal](!#the-reciprocal-function), the [shifted rational](!#the-shifted-rational-function) $(x+1)/(x-1)$, and the [three-branch rational](!#the-three-branch-rational-function) $x/(x^2 - 1)$. This is the classic rational-function situation — poles from the denominator's zeros, plus flattening at infinity because the degrees balance.
+
+Together the dashed lines form a scaffold: sketch the red walls and the green floor first, and the branches of the curve hang from that frame almost by themselves.`,
+      before: ``, after: ``, link: '',
+    },
+    obj20: {
+      title: `The Reciprocal Function`,
+      content: `The reciprocal $1/x$ is the archetype — one vertical asymptote, one horizontal, two branches, and the page's opening view.`,
+      before: ``,
+      after: `The vertical wall at $x = 0$ is a sign-flip: $x \\to 0^-$ dives to $-\\infty$, $x \\to 0^+$ soars to $+\\infty$ — the first pattern in [One-Sided Limits](!#one-sided-limits-at-vertical-asymptotes). The horizontal floor $y = 0$ catches both tails.
+
+Every transformed reciprocal $\\frac{a}{b(x-h)} + k$ keeps exactly this structure with the lines moved to $x = h$ and $y = k$ — which makes it the cleanest function for practicing the [tracking rules](!#transforming-and-tracking-asymptotes): two sliders, two dashed lines, one-to-one correspondence.
+
+The hyperbola never meets either line: the two asymptotes are genuine barriers here, though only the vertical one is a barrier by necessity.`,
+      link: '',
+    },
+    obj21: {
+      title: `The Shifted Rational Function`,
+      content: `The quotient $(x + 1)/(x - 1)$ moves both asymptotes away from the axes: the wall stands at $x = 1$, the floor at $y = 1$.`,
+      before: ``,
+      after: `Both locations are readable from the formula: the denominator vanishes at $x = 1$ (the pole), and the leading coefficients give $\\lim_{x \\to \\pm\\infty} = 1$ (the level). Equal degrees up and down always produce a horizontal asymptote at the ratio of leading coefficients.
+
+The one-sided limits at the wall flip signs — $-\\infty$ from the left, $+\\infty$ from the right — exactly like the [reciprocal](!#the-reciprocal-function), because near the pole the function behaves like $2/(x-1)$.
+
+Unlike the reciprocal, this curve **crosses** nothing it shouldn't but is allowed to cross its HA — and functions like it do; the green line is a limit, not a fence.`,
+      link: '',
+    },
+    obj22: {
+      title: `The Three-Branch Rational Function`,
+      content: `The function $x/(x^2 - 1)$ carries two vertical asymptotes at once — walls at $x = -1$ and $x = 1$ — cutting the curve into three branches over one horizontal floor.`,
+      before: ``,
+      after: `The denominator factors as $(x-1)(x+1)$: two simple zeros, two sign-flip walls. The middle branch lives entirely between the walls, passes through the origin, and — a favorite exam surprise — **crosses its horizontal asymptote** right there at $x = 0$. The green line is end behavior only; the middle of the plot owes it nothing.
+
+Degree one over degree two sends the tails to zero, so $y = 0$ catches both outer branches.
+
+The function is odd — symmetric through the origin — which the three-branch picture makes visible at a glance: the outer branches are $180°$ rotations of each other.`,
+      link: '',
+    },
+    obj23: {
+      title: `The Classic Oblique Function`,
+      content: `The sum $x + 1/x$ is the cleanest oblique-asymptote specimen: at large $|x|$ the $1/x$ term evaporates and the curve settles against the slanted line $y = x$.`,
+      before: ``,
+      after: `The formula IS the decomposition: line part $x$, vanishing part $1/x$. That is the oblique-asymptote pattern in its purest form — $f(x) - (mx + b) \\to 0$ with the difference written out explicitly.
+
+There is also a vertical asymptote at $x = 0$ from the $1/x$ term, so the two branches each cling to the purple line at their far end and to the red wall at their near end. The upper branch bottoms out at $(1, 2)$, the lower peaks at $(-1, -2)$.
+
+Its picker partner, the [oblique rational](!#the-oblique-rational-function), hides the same structure inside a quotient — polynomial division is what uncovers it.`,
+      link: '',
+    },
+    obj24: {
+      title: `The Oblique Rational Function`,
+      content: `The quotient $(x^2 - 1)/x$ looks different from $x + 1/x$ but divides out to $x - 1/x$: same slanted asymptote $y = x$, same wall at $x = 0$.`,
+      before: ``,
+      after: `This is the general recipe made visible: when the numerator's degree exceeds the denominator's by exactly one, polynomial division splits the function into a line plus a vanishing remainder. The line is the oblique asymptote.
+
+The sign difference in the remainder ($-1/x$ here versus $+1/x$ in the [classic oblique](!#the-classic-oblique-function)) flips which side of the purple line each branch approaches from — compare the two frozen scenes and the mirror-image approach is plain.
+
+Zeros at $x = \\pm 1$ anchor the two branches to the axis on their way between wall and slant — a curve fully determined by three dashed lines and two crossing points.`,
+      link: '',
+    },
   }
 
 
@@ -807,12 +465,101 @@ The visualizer lets you build intuition by watching the dashed lines emerge from
   }
 
 
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // plot with detected asymptotes + attached picture-reading panel, no link.
+  const stateUnits = {
+    logarithmic: demoUnitFrame({ svg: asymDiagrams.logarithmic, caption: 'ln(x), frozen',
+      text: 'One red wall at x = 0, approached from the right only &#8212; and no flattening anywhere: the climb never ends.' }),
+    tangent: demoUnitFrame({ svg: asymDiagrams.tangent, caption: 'tan(x), frozen',
+      text: 'Red walls at every &#960;/2 + n&#960;, each branch sweeping the full height between its two fences.' }),
+    expDecay: demoUnitFrame({ svg: asymDiagrams.expDecay, caption: 'e&#8315;&#739;, frozen',
+      text: 'The curve hugs the green line y = 0 ever more tightly to the right &#8212; and ignores it completely to the left.' }),
+    bell: demoUnitFrame({ svg: asymDiagrams.bell, caption: '1/(1 + x&#178;), frozen',
+      text: 'One symmetric hump, both tails sliding down to the same green floor &#8212; and no wall anywhere.' }),
+    arctan: demoUnitFrame({ svg: asymDiagrams.arctan, caption: 'arctan(x), frozen',
+      text: 'Two different green ceilings: &#8722;&#960;/2 catching the left tail, +&#960;/2 catching the right.' }),
+    logistic: demoUnitFrame({ svg: asymDiagrams.logistic, caption: '1/(1 + e&#8315;&#739;), frozen',
+      text: 'The S-curve boxed between its floor y = 0 and ceiling y = 1, crossing the midline at (0, &#189;).' }),
+    reciprocal: demoUnitFrame({ svg: asymDiagrams.reciprocal, caption: '1/x, frozen',
+      text: 'The archetype: red wall at x = 0, green floor at y = 0, two branches pinned between them.' }),
+    rationalShifted: demoUnitFrame({ svg: asymDiagrams.rationalShifted, caption: '(x + 1)/(x &#8722; 1), frozen',
+      text: 'The same hyperbola structure moved off the axes: wall at x = 1, level at y = 1.' }),
+    xOverX2Minus1: demoUnitFrame({ svg: asymDiagrams.xOverX2Minus1, caption: 'x/(x&#178; &#8722; 1), frozen',
+      text: 'Two red walls at x = &#177;1 cut the curve into three branches; the middle one crosses the green floor at the origin.' }),
+    obliqueClassic: demoUnitFrame({ svg: asymDiagrams.obliqueClassic, caption: 'x + 1/x, frozen',
+      text: 'The purple slant y = x catches both far ends while the red wall at x = 0 separates the branches.' }),
+    obliqueRational: demoUnitFrame({ svg: asymDiagrams.obliqueRational, caption: '(x&#178; &#8722; 1)/x, frozen',
+      text: 'Divided out, this is x &#8722; 1/x: the same purple slant, approached from the mirror side.' }),
+  };
+
+  // Canonical per-family explanations for the info panel's Family tab
+  // (SSR/SEO-visible; the component has no built-in per-family texts).
+  const explanations = {
+    logarithmic:
+      '## Logarithm\n' +
+      '$f(x) = \\ln(x)$ — defined only for $x > 0$, with a **one-sided vertical asymptote** at $x = 0$: ' +
+      'the curve dives to $-\\infty$ as $x \\to 0^+$. No horizontal asymptote — growth never stops, it only slows.\n\n' +
+      '[Learn more about the logarithmic family](!#the-logarithmic-family) · [Vertical-only families](!#families-with-vertical-asymptotes-only)',
+    tangent:
+      '## Tangent\n' +
+      '$f(x) = \\tan(x)$ — a **periodic family of vertical asymptotes** at $x = \\pi/2 + n\\pi$, wherever cosine vanishes. ' +
+      'Every branch runs from $-\\infty$ to $+\\infty$; there is no end behavior to flatten.\n\n' +
+      '[Learn more about the tangent family](!#the-tangent-family) · [Vertical-only families](!#families-with-vertical-asymptotes-only)',
+    expDecay:
+      '## Exponential decay\n' +
+      '$f(x) = e^{-x}$ — the classic **one-sided horizontal asymptote**: $f(x) \\to 0$ as $x \\to +\\infty$, ' +
+      'but the left side blows up without bound. Never touches its asymptote.\n\n' +
+      '[Learn more about exponential decay](!#exponential-decay) · [Horizontal-only families](!#families-with-horizontal-asymptotes-only)',
+    bell:
+      '## The bell\n' +
+      '$f(x) = 1/(1 + x^2)$ — one hump, one **horizontal asymptote at $y = 0$ serving both directions**, ' +
+      'and no vertical asymptote since the denominator is never zero.\n\n' +
+      '[Learn more about the bell curve](!#the-bell-curve) · [Horizontal-only families](!#families-with-horizontal-asymptotes-only)',
+    arctan:
+      '## Arctangent\n' +
+      '$f(x) = \\arctan(x)$ — the canonical **two-different-asymptotes** example: $y = -\\pi/2$ on the left, ' +
+      '$y = +\\pi/2$ on the right. The vertical walls of tangent, reflected into ceilings by inversion.\n\n' +
+      '[Learn more about the arctangent function](!#the-arctangent-function) · [Horizontal-only families](!#families-with-horizontal-asymptotes-only)',
+    logistic:
+      '## Logistic\n' +
+      '$f(x) = 1/(1 + e^{-x})$ — an S-curve **boxed between two horizontal asymptotes**, floor $y = 0$ and ceiling $y = 1$. ' +
+      'The ceiling is the carrying capacity of population models.\n\n' +
+      '[Learn more about the logistic curve](!#the-logistic-curve) · [Horizontal-only families](!#families-with-horizontal-asymptotes-only)',
+    reciprocal:
+      '## Reciprocal\n' +
+      '$f(x) = 1/x$ — the archetype with **both asymptote types**: a sign-flip vertical at $x = 0$ and a horizontal at $y = 0$. ' +
+      'Transformations move the pair to $x = h$, $y = k$ — nothing else changes.\n\n' +
+      '[Learn more about the reciprocal function](!#the-reciprocal-function) · [Families with both types](!#families-with-both-asymptote-types)',
+    rationalShifted:
+      '## Shifted rational\n' +
+      '$f(x) = (x+1)/(x-1)$ — the structure of the reciprocal, relocated: **wall at $x = 1$, level at $y = 1$** ' +
+      '(equal degrees → HA at the ratio of leading coefficients).\n\n' +
+      '[Learn more about the shifted rational](!#the-shifted-rational-function) · [Families with both types](!#families-with-both-asymptote-types)',
+    xOverX2Minus1:
+      '## Three-branch rational\n' +
+      '$f(x) = x/(x^2-1)$ — **two vertical asymptotes** at $x = \\pm 1$ and one horizontal at $y = 0$, ' +
+      'which the middle branch crosses at the origin: the HA is end behavior, not a fence.\n\n' +
+      '[Learn more about the three-branch rational](!#the-three-branch-rational-function) · [Families with both types](!#families-with-both-asymptote-types)',
+    obliqueClassic:
+      '## Classic oblique\n' +
+      '$f(x) = x + 1/x$ — the **oblique asymptote** $y = x$ written directly into the formula: ' +
+      'line part plus a vanishing $1/x$. A vertical asymptote at $x = 0$ completes the picture.\n\n' +
+      '[Learn more about the classic oblique](!#the-classic-oblique-function) · [Oblique asymptotes](!#oblique-asymptotes)',
+    obliqueRational:
+      '## Oblique rational\n' +
+      '$f(x) = (x^2-1)/x$ — numerator one degree above denominator: polynomial division yields $x - 1/x$, ' +
+      'so the **oblique asymptote is $y = x$**, approached from the mirror side of its classic partner.\n\n' +
+      '[Learn more about the oblique rational](!#the-oblique-rational-function) · [Oblique asymptotes](!#oblique-asymptotes)',
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      explanations,
+      stateUnits,
       seoData: {
         title: "Asymptotes Visualizer | Vertical, Horizontal & Oblique",
         description: "Detect and visualize vertical, horizontal, and oblique asymptotes of any function. Color-coded dashed lines, one-sided limits, and live transformation sliders.",
@@ -828,19 +575,35 @@ The visualizer lets you build intuition by watching the dashed lines emerge from
 }
 
 
-export default function FunctionAsymptotesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function FunctionAsymptotesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
-    { id:'1',  title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
-    { id:'2',  title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
-    { id:'3',  title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
-    { id:'4',  title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
-    { id:'5',  title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
-    { id:'6',  title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
-    { id:'7',  title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
-    { id:'8',  title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
-    { id:'9',  title:sectionsContent.obj9.title,  link:sectionsContent.obj9.link,  content:[sectionsContent.obj9.content] },
-    { id:'10', title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
+    { id:'getting-started-with-the-visualizer',        title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
+    { id:'picking-a-function',                         title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
+    { id:'reading-the-plot',                           title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
+    { id:'the-detected-asymptotes-panel',              title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
+    { id:'one-sided-limits-at-vertical-asymptotes',    title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
+    { id:'transforming-and-tracking-asymptotes',       title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
+    { id:'oblique-asymptotes',                         title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
+    { id:'what-is-an-asymptote',                       title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
+    { id:'why-asymptotes-matter',                      title:sectionsContent.obj9.title,  link:sectionsContent.obj9.link,  content:[sectionsContent.obj9.content] },
+    { id:'families-with-vertical-asymptotes-only',     title:sectionsContent.obj11.title, link:sectionsContent.obj11.link, content:[sectionsContent.obj11.content] },
+    { id:'the-logarithmic-family',                     title:sectionsContent.obj12.title, link:sectionsContent.obj12.link, content:[sectionsContent.obj12.content, unit('logarithmic'), sectionsContent.obj12.after] },
+    { id:'the-tangent-family',                         title:sectionsContent.obj13.title, link:sectionsContent.obj13.link, content:[sectionsContent.obj13.content, unit('tangent'), sectionsContent.obj13.after] },
+    { id:'families-with-horizontal-asymptotes-only',   title:sectionsContent.obj14.title, link:sectionsContent.obj14.link, content:[sectionsContent.obj14.content] },
+    { id:'exponential-decay',                          title:sectionsContent.obj15.title, link:sectionsContent.obj15.link, content:[sectionsContent.obj15.content, unit('expDecay'), sectionsContent.obj15.after] },
+    { id:'the-bell-curve',                             title:sectionsContent.obj16.title, link:sectionsContent.obj16.link, content:[sectionsContent.obj16.content, unit('bell'), sectionsContent.obj16.after] },
+    { id:'the-arctangent-function',                    title:sectionsContent.obj17.title, link:sectionsContent.obj17.link, content:[sectionsContent.obj17.content, unit('arctan'), sectionsContent.obj17.after] },
+    { id:'the-logistic-curve',                         title:sectionsContent.obj18.title, link:sectionsContent.obj18.link, content:[sectionsContent.obj18.content, unit('logistic'), sectionsContent.obj18.after] },
+    { id:'families-with-both-asymptote-types',         title:sectionsContent.obj19.title, link:sectionsContent.obj19.link, content:[sectionsContent.obj19.content] },
+    { id:'the-reciprocal-function',                    title:sectionsContent.obj20.title, link:sectionsContent.obj20.link, content:[sectionsContent.obj20.content, unit('reciprocal'), sectionsContent.obj20.after] },
+    { id:'the-shifted-rational-function',              title:sectionsContent.obj21.title, link:sectionsContent.obj21.link, content:[sectionsContent.obj21.content, unit('rationalShifted'), sectionsContent.obj21.after] },
+    { id:'the-three-branch-rational-function',         title:sectionsContent.obj22.title, link:sectionsContent.obj22.link, content:[sectionsContent.obj22.content, unit('xOverX2Minus1'), sectionsContent.obj22.after] },
+    { id:'the-classic-oblique-function',               title:sectionsContent.obj23.title, link:sectionsContent.obj23.link, content:[sectionsContent.obj23.content, unit('obliqueClassic'), sectionsContent.obj23.after] },
+    { id:'the-oblique-rational-function',              title:sectionsContent.obj24.title, link:sectionsContent.obj24.link, content:[sectionsContent.obj24.content, unit('obliqueRational'), sectionsContent.obj24.after] },
+    { id:'related-concepts-and-tools',                 title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
   ]
 
   return (
@@ -897,7 +660,7 @@ export default function FunctionAsymptotesPage({seoData, sectionsContent, introC
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Asymptotes</h1>
       <br/>
-      <FunctionAsymptotes/>
+      <FunctionAsymptotes explanations={explanations}/>
       <br/>
       <SectionTableOfContents sections={genericSections}
         showSecondaryNav={true}

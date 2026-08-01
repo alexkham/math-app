@@ -8,7 +8,6 @@ import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import BasicTrigIdentitiesExplorer from '../../../../app/components/trigonometry/identities/basic-identities/BasicTrigoIdentities'
 import identityDiagrams from '../../../../app/components/trigonometry/identities/basic-identities/basicIdentitiesDiagrams'
-import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -202,267 +201,411 @@ For deeper coverage, see **periodicity** and **reference angles**.`,
 
     obj12:{
       title:`Sine on the Unit Circle`,
-      content:`**Sine** is the y-coordinate of the terminal point P: as the red ray rotates through $\\theta$, $\\sin\\theta$ is the signed height of P above the x-axis, bounded between $-1$ and $1$.`,
-      before:``,
-      after:`The explorer derives it in five stages: [place the angle](!#sine-step-1-place-the-angle), [drop the vertical leg](!#sine-step-2-drop-the-vertical-leg), [trace on the graph](!#sine-step-3-trace-on-the-graph), [reference angle](!#sine-step-4-reference-angle), and [periodicity](!#sine-step-5-periodicity).
+      content:`**Sine** is the y-coordinate of the terminal point P: as the red ray rotates through $\\theta$, $\\sin\\theta$ is the signed height of P above the x-axis, bounded between $-1$ and $1$.
+
+${identityDiagrams.sin.overview}
+
+The explorer derives it in five stages: [place the angle](!#sine-step-1-place-the-angle), [drop the vertical leg](!#sine-step-2-drop-the-vertical-leg), [trace on the graph](!#sine-step-3-trace-on-the-graph), [reference angle](!#sine-step-4-reference-angle), and [periodicity](!#sine-step-5-periodicity).
 
 Sine is positive in Quadrants I–II (P above the axis), negative in III–IV, odd ($\\sin(-\\theta) = -\\sin\\theta$), and has period $360°$. Its reciprocal is [cosecant](!#cosecant-on-the-unit-circle), and it pairs with [cosine](!#cosine-on-the-unit-circle) to build every other function.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj13:{
       title:`Cosine on the Unit Circle`,
-      content:`**Cosine** is the x-coordinate of the terminal point P: the signed horizontal distance from the origin to the foot of P, bounded between $-1$ and $1$.`,
-      before:``,
-      after:`The five-stage derivation: [place the angle](!#cosine-step-1-place-the-angle), [project onto the x-axis](!#cosine-step-2-project-onto-the-x-axis), [trace on the graph](!#cosine-step-3-trace-on-the-graph), [reference angle](!#cosine-step-4-reference-angle), and [periodicity](!#cosine-step-5-periodicity).
+      content:`**Cosine** is the x-coordinate of the terminal point P: the signed horizontal distance from the origin to the foot of P, bounded between $-1$ and $1$.
+
+${identityDiagrams.cos.overview}
+
+The five-stage derivation: [place the angle](!#cosine-step-1-place-the-angle), [project onto the x-axis](!#cosine-step-2-project-onto-the-x-axis), [trace on the graph](!#cosine-step-3-trace-on-the-graph), [reference angle](!#cosine-step-4-reference-angle), and [periodicity](!#cosine-step-5-periodicity).
 
 Cosine is positive in Quadrants I and IV (P to the right of the y-axis), even ($\\cos(-\\theta) = \\cos\\theta$), and has period $360°$. Its reciprocal is [secant](!#secant-on-the-unit-circle); together with [sine](!#sine-on-the-unit-circle) it generates the four remaining functions.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj14:{
       title:`Tangent on the Unit Circle`,
-      content:`**Tangent** is the ratio of the two legs: $\\tan\\theta = \\sin\\theta / \\cos\\theta$ — the slope of the red ray.`,
-      before:``,
-      after:`The derivation: [place the angle](!#tangent-step-1-place-the-angle), [read both legs](!#tangent-step-2-read-both-legs), [form the ratio](!#tangent-step-3-form-the-ratio), [sign by quadrant](!#tangent-step-4-sign-by-quadrant), and [periodicity](!#tangent-step-5-periodicity).
+      content:`**Tangent** is the ratio of the two legs: $\\tan\\theta = \\sin\\theta / \\cos\\theta$ — the slope of the red ray.
+
+${identityDiagrams.tan.overview}
+
+The derivation: [place the angle](!#tangent-step-1-place-the-angle), [read both legs](!#tangent-step-2-read-both-legs), [form the ratio](!#tangent-step-3-form-the-ratio), [sign by quadrant](!#tangent-step-4-sign-by-quadrant), and [periodicity](!#tangent-step-5-periodicity).
 
 Tangent is unbounded, diverging at $90°$ and $270°$ where the [cosine](!#cosine-on-the-unit-circle) leg vanishes — the dashed asymptotes on the graph. Its reciprocal is [cotangent](!#cotangent-on-the-unit-circle), and its period is only $180°$.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj15:{
       title:`Cosecant on the Unit Circle`,
-      content:`**Cosecant** is the reciprocal of sine: $\\csc\\theta = 1 / \\sin\\theta$, read from the same vertical leg as [sine](!#sine-on-the-unit-circle) and then inverted.`,
-      before:``,
-      after:`The derivation: [place the angle](!#cosecant-step-1-place-the-angle), [identify the vertical leg](!#cosecant-step-2-identify-the-vertical-leg), [take the reciprocal](!#cosecant-step-3-take-the-reciprocal), [range and sign](!#cosecant-step-4-range-and-sign), and [periodicity](!#cosecant-step-5-periodicity).
+      content:`**Cosecant** is the reciprocal of sine: $\\csc\\theta = 1 / \\sin\\theta$, read from the same vertical leg as [sine](!#sine-on-the-unit-circle) and then inverted.
+
+${identityDiagrams.csc.overview}
+
+The derivation: [place the angle](!#cosecant-step-1-place-the-angle), [identify the vertical leg](!#cosecant-step-2-identify-the-vertical-leg), [take the reciprocal](!#cosecant-step-3-take-the-reciprocal), [range and sign](!#cosecant-step-4-range-and-sign), and [periodicity](!#cosecant-step-5-periodicity).
 
 Wherever it is defined, $|\\csc\\theta| \\ge 1$ — a small sine makes a large cosecant. It diverges at $0°$, $180°$, and $360°$, always matches sine's sign, and shares sine's $360°$ period.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj16:{
       title:`Secant on the Unit Circle`,
-      content:`**Secant** is the reciprocal of cosine: $\\sec\\theta = 1 / \\cos\\theta$, built from the horizontal leg of [cosine](!#cosine-on-the-unit-circle).`,
-      before:``,
-      after:`The derivation: [place the angle](!#secant-step-1-place-the-angle), [identify the horizontal leg](!#secant-step-2-identify-the-horizontal-leg), [take the reciprocal](!#secant-step-3-take-the-reciprocal), [range and sign](!#secant-step-4-range-and-sign), and [periodicity](!#secant-step-5-periodicity).
+      content:`**Secant** is the reciprocal of cosine: $\\sec\\theta = 1 / \\cos\\theta$, built from the horizontal leg of [cosine](!#cosine-on-the-unit-circle).
+
+${identityDiagrams.sec.overview}
+
+The derivation: [place the angle](!#secant-step-1-place-the-angle), [identify the horizontal leg](!#secant-step-2-identify-the-horizontal-leg), [take the reciprocal](!#secant-step-3-take-the-reciprocal), [range and sign](!#secant-step-4-range-and-sign), and [periodicity](!#secant-step-5-periodicity).
 
 Like its partner [cosecant](!#cosecant-on-the-unit-circle), secant satisfies $|\\sec\\theta| \\ge 1$ wherever defined. It diverges at $90°$ and $270°$, matches cosine's sign, and repeats every $360°$.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj17:{
       title:`Cotangent on the Unit Circle`,
-      content:`**Cotangent** is the inverted ratio: $\\cot\\theta = \\cos\\theta / \\sin\\theta = 1 / \\tan\\theta$ — the run over the rise of the red ray.`,
-      before:``,
-      after:`The derivation: [place the angle](!#cotangent-step-1-place-the-angle), [read both legs](!#cotangent-step-2-read-both-legs), [form the ratio](!#cotangent-step-3-form-the-ratio), [sign by quadrant](!#cotangent-step-4-sign-by-quadrant), and [periodicity](!#cotangent-step-5-periodicity).
+      content:`**Cotangent** is the inverted ratio: $\\cot\\theta = \\cos\\theta / \\sin\\theta = 1 / \\tan\\theta$ — the run over the rise of the red ray.
+
+${identityDiagrams.cot.overview}
+
+The derivation: [place the angle](!#cotangent-step-1-place-the-angle), [read both legs](!#cotangent-step-2-read-both-legs), [form the ratio](!#cotangent-step-3-form-the-ratio), [sign by quadrant](!#cotangent-step-4-sign-by-quadrant), and [periodicity](!#cotangent-step-5-periodicity).
 
 Cotangent diverges where the sine leg vanishes — $0°$, $180°$, $360°$ — exactly where [tangent](!#tangent-on-the-unit-circle) is zero, and shares tangent's $180°$ period and quadrant sign pattern.`,
+      before:``,
+      after:``,
       link:'',
     },
 
     obj18:{
       title:`Sine, Step 1: Place the Angle`,
-      content:`The derivation of [sine](!#sine-on-the-unit-circle) starts by rotating the red ray counterclockwise from the positive x-axis through $\\theta$. The terminal point P appears where the ray meets the unit circle.`,
+      content:`The derivation of [sine](!#sine-on-the-unit-circle) starts by rotating the red ray counterclockwise from the positive x-axis through $\\theta$. The terminal point P appears where the ray meets the unit circle.
+
+${identityDiagrams.sin.steps[0]}
+
+Everything that follows reads geometry off P — placing the angle in standard position is what turns "an angle" into "a point whose coordinates we can measure."`,
       before:``,
-      after:`Everything that follows reads geometry off P — placing the angle in standard position is what turns "an angle" into "a point whose coordinates we can measure."`,
+      after:``,
       link:'',
     },
     obj19:{
       title:`Sine, Step 2: Drop the Vertical Leg`,
-      content:`From P, a perpendicular drops to the x-axis. The signed length of that vertical leg **is** $\\sin\\theta$: positive when P is above the axis, negative below.`,
+      content:`From P, a perpendicular drops to the x-axis. The signed length of that vertical leg **is** $\\sin\\theta$: positive when P is above the axis, negative below.
+
+${identityDiagrams.sin.steps[1]}
+
+This is the geometric definition — sine is not a formula but a length with a sign, which is why it can never exceed the circle's radius of $1$.`,
       before:``,
-      after:`This is the geometric definition — sine is not a formula but a length with a sign, which is why it can never exceed the circle's radius of $1$.`,
+      after:``,
       link:'',
     },
     obj20:{
       title:`Sine, Step 3: Trace on the Graph`,
-      content:`Plot $\\theta$ horizontally and $\\sin\\theta$ vertically: the tracking dot on the curve sits at exactly the same height as P's y-coordinate on the circle.`,
+      content:`Plot $\\theta$ horizontally and $\\sin\\theta$ vertically: the tracking dot on the curve sits at exactly the same height as P's y-coordinate on the circle.
+
+${identityDiagrams.sin.steps[2]}
+
+Dragging the dot shows the circle and the wave are the same information in two pictures — the sine wave is the circle's height unrolled along the angle axis.`,
       before:``,
-      after:`Dragging the dot shows the circle and the wave are the same information in two pictures — the sine wave is the circle's height unrolled along the angle axis.`,
+      after:``,
       link:'',
     },
     obj21:{
       title:`Sine, Step 4: Reference Angle`,
-      content:`The green arc marks the **reference angle** — the acute angle between the ray and the nearest x-axis. Its sine matches $\\sin\\theta$ in magnitude; the quadrant fixes the sign.`,
+      content:`The green arc marks the **reference angle** — the acute angle between the ray and the nearest x-axis. Its sine matches $\\sin\\theta$ in magnitude; the quadrant fixes the sign.
+
+${identityDiagrams.sin.steps[3]}
+
+At the frozen $140°$ the reference angle is $40°$: $\\sin 140° = \\sin 40°$, positive because Quadrant II keeps the vertical leg above the axis.`,
       before:``,
-      after:`At the frozen $140°$ the reference angle is $40°$: $\\sin 140° = \\sin 40°$, positive because Quadrant II keeps the vertical leg above the axis.`,
+      after:``,
       link:'',
     },
     obj22:{
       title:`Sine, Step 5: Periodicity`,
-      content:`Past $360°$ the ray keeps rotating — the red arc spirals outward counting turns — but P returns to the same position, so $\\sin(\\theta + 360°) = \\sin\\theta$.`,
+      content:`Past $360°$ the ray keeps rotating — the red arc spirals outward counting turns — but P returns to the same position, so $\\sin(\\theta + 360°) = \\sin\\theta$.
+
+${identityDiagrams.sin.steps[4]}
+
+The ghost dots on the graph mark coterminal angles at the same height: the frozen $410°$ repeats the value of $50°$ exactly one turn earlier.`,
       before:``,
-      after:`The ghost dots on the graph mark coterminal angles at the same height: the frozen $410°$ repeats the value of $50°$ exactly one turn earlier.`,
+      after:``,
       link:'',
     },
     obj23:{
       title:`Cosine, Step 1: Place the Angle`,
-      content:`The derivation of [cosine](!#cosine-on-the-unit-circle) begins the same way every function does: rotate the red ray through $\\theta$ and mark the terminal point P on the unit circle.`,
+      content:`The derivation of [cosine](!#cosine-on-the-unit-circle) begins the same way every function does: rotate the red ray through $\\theta$ and mark the terminal point P on the unit circle.
+
+${identityDiagrams.cos.steps[0]}
+
+With P fixed, cosine will come from the horizontal direction — the complementary reading to sine's vertical one.`,
       before:``,
-      after:`With P fixed, cosine will come from the horizontal direction — the complementary reading to sine's vertical one.`,
+      after:``,
       link:'',
     },
     obj24:{
       title:`Cosine, Step 2: Project onto the X-Axis`,
-      content:`Project P straight down (or up) onto the x-axis. The signed distance from the origin to that foot **is** $\\cos\\theta$: positive to the right of the origin, negative to the left.`,
+      content:`Project P straight down (or up) onto the x-axis. The signed distance from the origin to that foot **is** $\\cos\\theta$: positive to the right of the origin, negative to the left.
+
+${identityDiagrams.cos.steps[1]}
+
+The amber horizontal leg is the whole definition — cosine measures how far around the circle the angle has carried P in the x-direction.`,
       before:``,
-      after:`The amber horizontal leg is the whole definition — cosine measures how far around the circle the angle has carried P in the x-direction.`,
+      after:``,
       link:'',
     },
     obj25:{
       title:`Cosine, Step 3: Trace on the Graph`,
-      content:`Plot $\\theta$ horizontally and $\\cos\\theta$ vertically. The tracking dot follows the length of the amber leg as the ray sweeps.`,
+      content:`Plot $\\theta$ horizontally and $\\cos\\theta$ vertically. The tracking dot follows the length of the amber leg as the ray sweeps.
+
+${identityDiagrams.cos.steps[2]}
+
+The result is the cosine wave — the same shape as sine but starting at its maximum of $1$, because at $\\theta = 0°$ the point P sits fully to the right.`,
       before:``,
-      after:`The result is the cosine wave — the same shape as sine but starting at its maximum of $1$, because at $\\theta = 0°$ the point P sits fully to the right.`,
+      after:``,
       link:'',
     },
     obj26:{
       title:`Cosine, Step 4: Reference Angle`,
-      content:`The reference angle — the acute angle between the ray and the nearest x-axis — carries cosine's magnitude; the quadrant decides the sign.`,
+      content:`The reference angle — the acute angle between the ray and the nearest x-axis — carries cosine's magnitude; the quadrant decides the sign.
+
+${identityDiagrams.cos.steps[3]}
+
+At the frozen $140°$: reference angle $40°$, so $\\cos 140° = -\\cos 40°$ — negative, because Quadrant II puts the foot of P left of the origin.`,
       before:``,
-      after:`At the frozen $140°$: reference angle $40°$, so $\\cos 140° = -\\cos 40°$ — negative, because Quadrant II puts the foot of P left of the origin.`,
+      after:``,
       link:'',
     },
     obj27:{
       title:`Cosine, Step 5: Periodicity`,
-      content:`One full turn brings P back exactly: $\\cos(\\theta + 360°) = \\cos\\theta$. The spiral arc counts rotations while the value cycles.`,
+      content:`One full turn brings P back exactly: $\\cos(\\theta + 360°) = \\cos\\theta$. The spiral arc counts rotations while the value cycles.
+
+${identityDiagrams.cos.steps[4]}
+
+Ghost dots on the curve mark the coterminal angles — at $410°$ the amber leg is identical to the one at $50°$.`,
       before:``,
-      after:`Ghost dots on the curve mark the coterminal angles — at $410°$ the amber leg is identical to the one at $50°$.`,
+      after:``,
       link:'',
     },
     obj28:{
       title:`Tangent, Step 1: Place the Angle`,
-      content:`The derivation of [tangent](!#tangent-on-the-unit-circle) starts from the same standard position: red ray through $\\theta$, terminal point P on the circle.`,
+      content:`The derivation of [tangent](!#tangent-on-the-unit-circle) starts from the same standard position: red ray through $\\theta$, terminal point P on the circle.
+
+${identityDiagrams.tan.steps[0]}
+
+Tangent will need both coordinates of P, so this single placement feeds two measurements at once.`,
       before:``,
-      after:`Tangent will need both coordinates of P, so this single placement feeds two measurements at once.`,
+      after:``,
       link:'',
     },
     obj29:{
       title:`Tangent, Step 2: Read Both Legs`,
-      content:`Both legs light up: the blue vertical leg is $\\sin\\theta$ and the amber horizontal leg is $\\cos\\theta$. Tangent uses the pair.`,
+      content:`Both legs light up: the blue vertical leg is $\\sin\\theta$ and the amber horizontal leg is $\\cos\\theta$. Tangent uses the pair.
+
+${identityDiagrams.tan.steps[1]}
+
+Seeing the two legs together is the point of this step — tangent is not a new measurement but a relationship between the two existing ones.`,
       before:``,
-      after:`Seeing the two legs together is the point of this step — tangent is not a new measurement but a relationship between the two existing ones.`,
+      after:``,
       link:'',
     },
     obj30:{
       title:`Tangent, Step 3: Form the Ratio`,
-      content:`Divide: $\\tan\\theta = \\sin\\theta / \\cos\\theta$ — rise over run, the slope of the red ray. The graph plots that ratio.`,
+      content:`Divide: $\\tan\\theta = \\sin\\theta / \\cos\\theta$ — rise over run, the slope of the red ray. The graph plots that ratio.
+
+${identityDiagrams.tan.steps[2]}
+
+Where the amber leg shrinks to zero — $90°$ and $270°$ — the division blows up: the dashed vertical asymptotes on the graph.`,
       before:``,
-      after:`Where the amber leg shrinks to zero — $90°$ and $270°$ — the division blows up: the dashed vertical asymptotes on the graph.`,
+      after:``,
       link:'',
     },
     obj31:{
       title:`Tangent, Step 4: Sign by Quadrant`,
-      content:`Tangent is positive where the legs agree in sign — Quadrants I and III — and negative where they differ — Quadrants II and IV.`,
+      content:`Tangent is positive where the legs agree in sign — Quadrants I and III — and negative where they differ — Quadrants II and IV.
+
+${identityDiagrams.tan.steps[3]}
+
+At the frozen $140°$ the blue leg is positive and the amber leg negative, so $\\tan 140°$ is negative: the tracking dot sits below the axis.`,
       before:``,
-      after:`At the frozen $140°$ the blue leg is positive and the amber leg negative, so $\\tan 140°$ is negative: the tracking dot sits below the axis.`,
+      after:``,
       link:'',
     },
     obj32:{
       title:`Tangent, Step 5: Periodicity`,
-      content:`Tangent repeats every $180°$ — twice as fast as sine and cosine — because a half turn flips both legs and the two sign changes cancel in the ratio: $\\tan(\\theta + 180°) = \\tan\\theta$.`,
+      content:`Tangent repeats every $180°$ — twice as fast as sine and cosine — because a half turn flips both legs and the two sign changes cancel in the ratio: $\\tan(\\theta + 180°) = \\tan\\theta$.
+
+${identityDiagrams.tan.steps[4]}
+
+The graph fits twice as many periods into the same span; the ghost dots mark repeats every half turn, not just every full one.`,
       before:``,
-      after:`The graph fits twice as many periods into the same span; the ghost dots mark repeats every half turn, not just every full one.`,
+      after:``,
       link:'',
     },
     obj33:{
       title:`Cosecant, Step 1: Place the Angle`,
-      content:`The derivation of [cosecant](!#cosecant-on-the-unit-circle) begins with the standard placement: red ray through $\\theta$, terminal point P on the unit circle.`,
+      content:`The derivation of [cosecant](!#cosecant-on-the-unit-circle) begins with the standard placement: red ray through $\\theta$, terminal point P on the unit circle.
+
+${identityDiagrams.csc.steps[0]}
+
+Cosecant is built on sine, so the vertical direction is where this derivation is headed.`,
       before:``,
-      after:`Cosecant is built on sine, so the vertical direction is where this derivation is headed.`,
+      after:``,
       link:'',
     },
     obj34:{
       title:`Cosecant, Step 2: Identify the Vertical Leg`,
-      content:`The blue vertical leg from P to the x-axis is $\\sin\\theta$ — the same leg the sine derivation uses.`,
+      content:`The blue vertical leg from P to the x-axis is $\\sin\\theta$ — the same leg the sine derivation uses.
+
+${identityDiagrams.csc.steps[1]}
+
+Cosecant adds nothing geometric at this stage; it borrows sine's measurement and prepares to invert it.`,
       before:``,
-      after:`Cosecant adds nothing geometric at this stage; it borrows sine's measurement and prepares to invert it.`,
+      after:``,
       link:'',
     },
     obj35:{
       title:`Cosecant, Step 3: Take the Reciprocal`,
-      content:`Invert the leg: $\\csc\\theta = 1 / \\sin\\theta$. The graph shows the consequence — where sine is small, cosecant is huge.`,
+      content:`Invert the leg: $\\csc\\theta = 1 / \\sin\\theta$. The graph shows the consequence — where sine is small, cosecant is huge.
+
+${identityDiagrams.csc.steps[2]}
+
+At $0°$, $180°$, and $360°$ the leg vanishes entirely and cosecant diverges: the dashed asymptotes sit exactly at sine's zeros.`,
       before:``,
-      after:`At $0°$, $180°$, and $360°$ the leg vanishes entirely and cosecant diverges: the dashed asymptotes sit exactly at sine's zeros.`,
+      after:``,
       link:'',
     },
     obj36:{
       title:`Cosecant, Step 4: Range and Sign`,
-      content:`Because $|\\sin\\theta| \\le 1$, its reciprocal satisfies $|\\csc\\theta| \\ge 1$ wherever defined — the curve never enters the band between $-1$ and $1$.`,
+      content:`Because $|\\sin\\theta| \\le 1$, its reciprocal satisfies $|\\csc\\theta| \\ge 1$ wherever defined — the curve never enters the band between $-1$ and $1$.
+
+${identityDiagrams.csc.steps[3]}
+
+The sign always matches sine's: positive in Quadrants I–II, negative in III–IV. The frozen $140°$ gives a positive cosecant just above $1.5$.`,
       before:``,
-      after:`The sign always matches sine's: positive in Quadrants I–II, negative in III–IV. The frozen $140°$ gives a positive cosecant just above $1.5$.`,
+      after:``,
       link:'',
     },
     obj37:{
       title:`Cosecant, Step 5: Periodicity`,
-      content:`Cosecant inherits its cycle from sine: $\\csc(\\theta + 360°) = \\csc\\theta$. The spiral counts turns while the value repeats.`,
+      content:`Cosecant inherits its cycle from sine: $\\csc(\\theta + 360°) = \\csc\\theta$. The spiral counts turns while the value repeats.
+
+${identityDiagrams.csc.steps[4]}
+
+Ghost dots mark the coterminal repeats — every branch of the curve returns identically after each full rotation.`,
       before:``,
-      after:`Ghost dots mark the coterminal repeats — every branch of the curve returns identically after each full rotation.`,
+      after:``,
       link:'',
     },
     obj38:{
       title:`Secant, Step 1: Place the Angle`,
-      content:`The derivation of [secant](!#secant-on-the-unit-circle) starts identically: red ray through $\\theta$, terminal point P on the circle.`,
+      content:`The derivation of [secant](!#secant-on-the-unit-circle) starts identically: red ray through $\\theta$, terminal point P on the circle.
+
+${identityDiagrams.sec.steps[0]}
+
+Secant builds on cosine, so the horizontal leg is the one to watch.`,
       before:``,
-      after:`Secant builds on cosine, so the horizontal leg is the one to watch.`,
+      after:``,
       link:'',
     },
     obj39:{
       title:`Secant, Step 2: Identify the Horizontal Leg`,
-      content:`The amber horizontal leg from the origin to the foot of P is $\\cos\\theta$ — the cosine measurement, reused.`,
+      content:`The amber horizontal leg from the origin to the foot of P is $\\cos\\theta$ — the cosine measurement, reused.
+
+${identityDiagrams.sec.steps[1]}
+
+As with cosecant, no new geometry appears: secant is an algebraic move performed on an existing leg.`,
       before:``,
-      after:`As with cosecant, no new geometry appears: secant is an algebraic move performed on an existing leg.`,
+      after:``,
       link:'',
     },
     obj40:{
       title:`Secant, Step 3: Take the Reciprocal`,
-      content:`Invert the leg: $\\sec\\theta = 1 / \\cos\\theta$. The graph diverges where the amber leg vanishes — at $90°$ and $270°$, cosine's zeros.`,
+      content:`Invert the leg: $\\sec\\theta = 1 / \\cos\\theta$. The graph diverges where the amber leg vanishes — at $90°$ and $270°$, cosine's zeros.
+
+${identityDiagrams.sec.steps[2]}
+
+Those are the same asymptote positions as tangent's, since both divide by $\\cos\\theta$.`,
       before:``,
-      after:`Those are the same asymptote positions as tangent's, since both divide by $\\cos\\theta$.`,
+      after:``,
       link:'',
     },
     obj41:{
       title:`Secant, Step 4: Range and Sign`,
-      content:`Since $|\\cos\\theta| \\le 1$, the reciprocal obeys $|\\sec\\theta| \\ge 1$ — the curve stays outside the unit band, touching it only at $\\theta = 0°$, $180°$, $360°$.`,
+      content:`Since $|\\cos\\theta| \\le 1$, the reciprocal obeys $|\\sec\\theta| \\ge 1$ — the curve stays outside the unit band, touching it only at $\\theta = 0°$, $180°$, $360°$.
+
+${identityDiagrams.sec.steps[3]}
+
+The sign follows cosine: positive in Quadrants I and IV, negative in II and III. At the frozen $140°$, secant is negative.`,
       before:``,
-      after:`The sign follows cosine: positive in Quadrants I and IV, negative in II and III. At the frozen $140°$, secant is negative.`,
+      after:``,
       link:'',
     },
     obj42:{
       title:`Secant, Step 5: Periodicity`,
-      content:`Secant repeats with cosine's full-turn cycle: $\\sec(\\theta + 360°) = \\sec\\theta$, spiral growing while the value loops.`,
+      content:`Secant repeats with cosine's full-turn cycle: $\\sec(\\theta + 360°) = \\sec\\theta$, spiral growing while the value loops.
+
+${identityDiagrams.sec.steps[4]}
+
+Ghost dots on the graph mark each coterminal angle where the branch pattern recurs.`,
       before:``,
-      after:`Ghost dots on the graph mark each coterminal angle where the branch pattern recurs.`,
+      after:``,
       link:'',
     },
     obj43:{
       title:`Cotangent, Step 1: Place the Angle`,
-      content:`The derivation of [cotangent](!#cotangent-on-the-unit-circle) opens with the shared first move: red ray through $\\theta$, terminal point P.`,
+      content:`The derivation of [cotangent](!#cotangent-on-the-unit-circle) opens with the shared first move: red ray through $\\theta$, terminal point P.
+
+${identityDiagrams.cot.steps[0]}
+
+Like tangent, cotangent will read both legs of P — just in the opposite order.`,
       before:``,
-      after:`Like tangent, cotangent will read both legs of P — just in the opposite order.`,
+      after:``,
       link:'',
     },
     obj44:{
       title:`Cotangent, Step 2: Read Both Legs`,
-      content:`Both legs appear: the blue vertical $\\sin\\theta$ and the amber horizontal $\\cos\\theta$.`,
+      content:`Both legs appear: the blue vertical $\\sin\\theta$ and the amber horizontal $\\cos\\theta$.
+
+${identityDiagrams.cot.steps[1]}
+
+The pair is the same as tangent's; the difference is entirely in which leg goes on top of the ratio.`,
       before:``,
-      after:`The pair is the same as tangent's; the difference is entirely in which leg goes on top of the ratio.`,
+      after:``,
       link:'',
     },
     obj45:{
       title:`Cotangent, Step 3: Form the Ratio`,
-      content:`Divide the other way: $\\cot\\theta = \\cos\\theta / \\sin\\theta = 1 / \\tan\\theta$ — run over rise. The graph diverges where the sine leg vanishes: $0°$, $180°$, $360°$.`,
+      content:`Divide the other way: $\\cot\\theta = \\cos\\theta / \\sin\\theta = 1 / \\tan\\theta$ — run over rise. The graph diverges where the sine leg vanishes: $0°$, $180°$, $360°$.
+
+${identityDiagrams.cot.steps[2]}
+
+Cotangent's asymptotes sit exactly where tangent crosses zero, and vice versa — the two curves interlock.`,
       before:``,
-      after:`Cotangent's asymptotes sit exactly where tangent crosses zero, and vice versa — the two curves interlock.`,
+      after:``,
       link:'',
     },
     obj46:{
       title:`Cotangent, Step 4: Sign by Quadrant`,
-      content:`Cotangent shares tangent's sign pattern: positive in Quadrants I and III where the legs agree, negative in II and IV where they differ.`,
+      content:`Cotangent shares tangent's sign pattern: positive in Quadrants I and III where the legs agree, negative in II and IV where they differ.
+
+${identityDiagrams.cot.steps[3]}
+
+At the frozen $140°$ the legs disagree in sign, so $\\cot 140°$ is negative — the dot sits below the axis.`,
       before:``,
-      after:`At the frozen $140°$ the legs disagree in sign, so $\\cot 140°$ is negative — the dot sits below the axis.`,
+      after:``,
       link:'',
     },
     obj47:{
       title:`Cotangent, Step 5: Periodicity`,
-      content:`Like tangent, cotangent repeats every half turn: $\\cot(\\theta + 180°) = \\cot\\theta$, because both legs flip sign together and the flips cancel in the ratio.`,
+      content:`Like tangent, cotangent repeats every half turn: $\\cot(\\theta + 180°) = \\cot\\theta$, because both legs flip sign together and the flips cancel in the ratio.
+
+${identityDiagrams.cot.steps[4]}
+
+The graph packs a full copy of the curve into each $180°$ span, with ghost dots marking every repeat.`,
       before:``,
-      after:`The graph packs a full copy of the curve into each $180°$ span, with ghost dots marking every repeat.`,
+      after:``,
       link:'',
     },
 
@@ -583,51 +726,6 @@ Cotangent diverges where the sine leg vanishes — $0°$, $180°$, $360°$ — e
 
 
 
-  // Framed illustration units for the per-state sections (Line 1 v5): frozen
-  // circle+graph scene + attached picture-reading panel. The 30 step units are
-  // systematic (6 functions x 5 shared stages), so they are built in a loop.
-  const FN_LABEL = { sin: 'Sine', cos: 'Cosine', tan: 'Tangent', csc: 'Cosecant', sec: 'Secant', cot: 'Cotangent' };
-  const OVERVIEW_TEXT = {
-    sin: 'The vertical leg of the unit-circle triangle IS the sine; the curve on the right tracks it as the ray turns.',
-    cos: 'The horizontal leg IS the cosine; the curve on the right follows the x-projection of the moving point.',
-    tan: 'Tangent is the ratio of the legs &#8212; vertical over horizontal &#8212; with asymptotes wherever the horizontal leg vanishes.',
-    csc: 'Cosecant flips the vertical leg into its reciprocal: U-branches blowing up wherever sine shrinks to zero.',
-    sec: 'Secant flips the horizontal leg: the same U-branch architecture, with poles at cosine&#8217;s zeros.',
-    cot: 'Cotangent is horizontal over vertical &#8212; tangent inverted, falling where tangent climbs.',
-  };
-  const STEP2_TEXT = {
-    sin: 'The vertical leg lights up on the circle &#8212; the geometric quantity that IS sin&#8202;&#952;.',
-    cos: 'The horizontal projection lights up &#8212; the geometric quantity that IS cos&#8202;&#952;.',
-    tan: 'Both legs light up: tangent will be their ratio, vertical over horizontal.',
-    csc: 'The vertical leg lights up &#8212; cosecant is about to flip it into a reciprocal.',
-    sec: 'The horizontal leg lights up &#8212; secant is its reciprocal.',
-    cot: 'Both legs light up: cotangent takes horizontal over vertical.',
-  };
-  const STEP_CAPTION = ['Step 1: the angle placed', 'Step 2: the leg highlighted', 'Step 3: pinned to the graph',
-    'Step 4: reference angle at 140&#176;', 'Step 5: one turn later'];
-  const STEP_TEXT_345 = [
-    'The tracking dot pins the graph at &#952; = 50&#176;, tying the circle reading to the curve.',
-    'At 140&#176; the reference-angle arc shows the same magnitude &#8212; the quadrant alone decides the sign.',
-    'At 410&#176; the spiral overlays the 50&#176; ghost: one full turn later, the value returns exactly.',
-  ];
-  const stateUnits = {};
-  for (const fn of ['sin', 'cos', 'tan', 'csc', 'sec', 'cot']) {
-    stateUnits[fn + '-overview'] = demoUnitFrame({
-      svg: identityDiagrams[fn].overview,
-      caption: FN_LABEL[fn] + ' paired with its curve, frozen at 50&#176;',
-      text: OVERVIEW_TEXT[fn],
-    });
-    for (let s = 0; s < 5; s++) {
-      stateUnits[fn + '-step' + (s + 1)] = demoUnitFrame({
-        svg: identityDiagrams[fn].steps[s],
-        caption: FN_LABEL[fn] + ' &#8212; ' + STEP_CAPTION[s],
-        text: s === 0
-          ? 'The ray parks at 50&#176;: circle on the left, the ' + FN_LABEL[fn].toLowerCase() + ' graph on the right, nothing highlighted yet.'
-          : s === 1 ? STEP2_TEXT[fn] : STEP_TEXT_345[s - 2],
-      });
-    }
-  }
-
   const explanations = {
     sin: { steps: [
       `Rotate the ray from the positive x-axis through θ counterclockwise. The terminal point P sits on the unit circle. [Full treatment](!#sine-step-1-place-the-angle) · [All about sine](!#sine-on-the-unit-circle)`,
@@ -681,7 +779,6 @@ Cotangent diverges where the sine leg vanishes — $0°$, $180°$, $360°$ — e
          faqQuestions,
          schemas,
          explanations,
-         stateUnits,
           seoData: {
         title: "Basic Trig Identities Explorer | Unit Circle Visualizer",
         description: "Explore all six trig functions on the unit circle. Drag the angle, step through derivations, and see reciprocal and quotient identities emerge visually.",
@@ -696,7 +793,7 @@ Cotangent diverges where the sine leg vanishes — $0°$, $180°$, $360°$ — e
     }
    }
 
-export default function BasicTrigIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function BasicTrigIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations}) {
 
     
   const genericSections=[
@@ -802,8 +899,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'u-sin-overview'} dangerouslySetInnerHTML={{ __html: stateUnits['sin-overview'] }} />,
-          sectionsContent.obj12.after,
         ]
     },
     {
@@ -812,8 +907,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div key={'u-cos-overview'} dangerouslySetInnerHTML={{ __html: stateUnits['cos-overview'] }} />,
-          sectionsContent.obj13.after,
         ]
     },
     {
@@ -822,8 +915,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
-          <div key={'u-tan-overview'} dangerouslySetInnerHTML={{ __html: stateUnits['tan-overview'] }} />,
-          sectionsContent.obj14.after,
         ]
     },
     {
@@ -832,8 +923,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj15.link,
         content:[
           sectionsContent.obj15.content,
-          <div key={'u-csc-overview'} dangerouslySetInnerHTML={{ __html: stateUnits['csc-overview'] }} />,
-          sectionsContent.obj15.after,
         ]
     },
     {
@@ -842,8 +931,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
-          <div key={'u-sec-overview'} dangerouslySetInnerHTML={{ __html: stateUnits['sec-overview'] }} />,
-          sectionsContent.obj16.after,
         ]
     },
     {
@@ -852,8 +939,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj17.link,
         content:[
           sectionsContent.obj17.content,
-          <div key={'u-cot-overview'} dangerouslySetInnerHTML={{ __html: stateUnits['cot-overview'] }} />,
-          sectionsContent.obj17.after,
         ]
     },
     {
@@ -862,8 +947,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj18.link,
         content:[
           sectionsContent.obj18.content,
-          <div key={'u-sin-step1'} dangerouslySetInnerHTML={{ __html: stateUnits['sin-step1'] }} />,
-          sectionsContent.obj18.after,
         ]
     },
     {
@@ -872,8 +955,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj19.link,
         content:[
           sectionsContent.obj19.content,
-          <div key={'u-sin-step2'} dangerouslySetInnerHTML={{ __html: stateUnits['sin-step2'] }} />,
-          sectionsContent.obj19.after,
         ]
     },
     {
@@ -882,8 +963,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj20.link,
         content:[
           sectionsContent.obj20.content,
-          <div key={'u-sin-step3'} dangerouslySetInnerHTML={{ __html: stateUnits['sin-step3'] }} />,
-          sectionsContent.obj20.after,
         ]
     },
     {
@@ -892,8 +971,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj21.link,
         content:[
           sectionsContent.obj21.content,
-          <div key={'u-sin-step4'} dangerouslySetInnerHTML={{ __html: stateUnits['sin-step4'] }} />,
-          sectionsContent.obj21.after,
         ]
     },
     {
@@ -902,8 +979,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj22.link,
         content:[
           sectionsContent.obj22.content,
-          <div key={'u-sin-step5'} dangerouslySetInnerHTML={{ __html: stateUnits['sin-step5'] }} />,
-          sectionsContent.obj22.after,
         ]
     },
     {
@@ -912,8 +987,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj23.link,
         content:[
           sectionsContent.obj23.content,
-          <div key={'u-cos-step1'} dangerouslySetInnerHTML={{ __html: stateUnits['cos-step1'] }} />,
-          sectionsContent.obj23.after,
         ]
     },
     {
@@ -922,8 +995,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj24.link,
         content:[
           sectionsContent.obj24.content,
-          <div key={'u-cos-step2'} dangerouslySetInnerHTML={{ __html: stateUnits['cos-step2'] }} />,
-          sectionsContent.obj24.after,
         ]
     },
     {
@@ -932,8 +1003,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj25.link,
         content:[
           sectionsContent.obj25.content,
-          <div key={'u-cos-step3'} dangerouslySetInnerHTML={{ __html: stateUnits['cos-step3'] }} />,
-          sectionsContent.obj25.after,
         ]
     },
     {
@@ -942,8 +1011,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj26.link,
         content:[
           sectionsContent.obj26.content,
-          <div key={'u-cos-step4'} dangerouslySetInnerHTML={{ __html: stateUnits['cos-step4'] }} />,
-          sectionsContent.obj26.after,
         ]
     },
     {
@@ -952,8 +1019,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj27.link,
         content:[
           sectionsContent.obj27.content,
-          <div key={'u-cos-step5'} dangerouslySetInnerHTML={{ __html: stateUnits['cos-step5'] }} />,
-          sectionsContent.obj27.after,
         ]
     },
     {
@@ -962,8 +1027,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj28.link,
         content:[
           sectionsContent.obj28.content,
-          <div key={'u-tan-step1'} dangerouslySetInnerHTML={{ __html: stateUnits['tan-step1'] }} />,
-          sectionsContent.obj28.after,
         ]
     },
     {
@@ -972,8 +1035,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj29.link,
         content:[
           sectionsContent.obj29.content,
-          <div key={'u-tan-step2'} dangerouslySetInnerHTML={{ __html: stateUnits['tan-step2'] }} />,
-          sectionsContent.obj29.after,
         ]
     },
     {
@@ -982,8 +1043,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj30.link,
         content:[
           sectionsContent.obj30.content,
-          <div key={'u-tan-step3'} dangerouslySetInnerHTML={{ __html: stateUnits['tan-step3'] }} />,
-          sectionsContent.obj30.after,
         ]
     },
     {
@@ -992,8 +1051,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj31.link,
         content:[
           sectionsContent.obj31.content,
-          <div key={'u-tan-step4'} dangerouslySetInnerHTML={{ __html: stateUnits['tan-step4'] }} />,
-          sectionsContent.obj31.after,
         ]
     },
     {
@@ -1002,8 +1059,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj32.link,
         content:[
           sectionsContent.obj32.content,
-          <div key={'u-tan-step5'} dangerouslySetInnerHTML={{ __html: stateUnits['tan-step5'] }} />,
-          sectionsContent.obj32.after,
         ]
     },
     {
@@ -1012,8 +1067,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj33.link,
         content:[
           sectionsContent.obj33.content,
-          <div key={'u-csc-step1'} dangerouslySetInnerHTML={{ __html: stateUnits['csc-step1'] }} />,
-          sectionsContent.obj33.after,
         ]
     },
     {
@@ -1022,8 +1075,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj34.link,
         content:[
           sectionsContent.obj34.content,
-          <div key={'u-csc-step2'} dangerouslySetInnerHTML={{ __html: stateUnits['csc-step2'] }} />,
-          sectionsContent.obj34.after,
         ]
     },
     {
@@ -1032,8 +1083,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj35.link,
         content:[
           sectionsContent.obj35.content,
-          <div key={'u-csc-step3'} dangerouslySetInnerHTML={{ __html: stateUnits['csc-step3'] }} />,
-          sectionsContent.obj35.after,
         ]
     },
     {
@@ -1042,8 +1091,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj36.link,
         content:[
           sectionsContent.obj36.content,
-          <div key={'u-csc-step4'} dangerouslySetInnerHTML={{ __html: stateUnits['csc-step4'] }} />,
-          sectionsContent.obj36.after,
         ]
     },
     {
@@ -1052,8 +1099,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj37.link,
         content:[
           sectionsContent.obj37.content,
-          <div key={'u-csc-step5'} dangerouslySetInnerHTML={{ __html: stateUnits['csc-step5'] }} />,
-          sectionsContent.obj37.after,
         ]
     },
     {
@@ -1062,8 +1107,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj38.link,
         content:[
           sectionsContent.obj38.content,
-          <div key={'u-sec-step1'} dangerouslySetInnerHTML={{ __html: stateUnits['sec-step1'] }} />,
-          sectionsContent.obj38.after,
         ]
     },
     {
@@ -1072,8 +1115,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj39.link,
         content:[
           sectionsContent.obj39.content,
-          <div key={'u-sec-step2'} dangerouslySetInnerHTML={{ __html: stateUnits['sec-step2'] }} />,
-          sectionsContent.obj39.after,
         ]
     },
     {
@@ -1082,8 +1123,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj40.link,
         content:[
           sectionsContent.obj40.content,
-          <div key={'u-sec-step3'} dangerouslySetInnerHTML={{ __html: stateUnits['sec-step3'] }} />,
-          sectionsContent.obj40.after,
         ]
     },
     {
@@ -1092,8 +1131,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj41.link,
         content:[
           sectionsContent.obj41.content,
-          <div key={'u-sec-step4'} dangerouslySetInnerHTML={{ __html: stateUnits['sec-step4'] }} />,
-          sectionsContent.obj41.after,
         ]
     },
     {
@@ -1102,8 +1139,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj42.link,
         content:[
           sectionsContent.obj42.content,
-          <div key={'u-sec-step5'} dangerouslySetInnerHTML={{ __html: stateUnits['sec-step5'] }} />,
-          sectionsContent.obj42.after,
         ]
     },
     {
@@ -1112,8 +1147,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj43.link,
         content:[
           sectionsContent.obj43.content,
-          <div key={'u-cot-step1'} dangerouslySetInnerHTML={{ __html: stateUnits['cot-step1'] }} />,
-          sectionsContent.obj43.after,
         ]
     },
     {
@@ -1122,8 +1155,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj44.link,
         content:[
           sectionsContent.obj44.content,
-          <div key={'u-cot-step2'} dangerouslySetInnerHTML={{ __html: stateUnits['cot-step2'] }} />,
-          sectionsContent.obj44.after,
         ]
     },
     {
@@ -1132,8 +1163,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj45.link,
         content:[
           sectionsContent.obj45.content,
-          <div key={'u-cot-step3'} dangerouslySetInnerHTML={{ __html: stateUnits['cot-step3'] }} />,
-          sectionsContent.obj45.after,
         ]
     },
     {
@@ -1142,8 +1171,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj46.link,
         content:[
           sectionsContent.obj46.content,
-          <div key={'u-cot-step4'} dangerouslySetInnerHTML={{ __html: stateUnits['cot-step4'] }} />,
-          sectionsContent.obj46.after,
         ]
     },
     {
@@ -1152,8 +1179,6 @@ export default function BasicTrigIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj47.link,
         content:[
           sectionsContent.obj47.content,
-          <div key={'u-cot-step5'} dangerouslySetInnerHTML={{ __html: stateUnits['cot-step5'] }} />,
-          sectionsContent.obj47.after,
         ]
     },
     

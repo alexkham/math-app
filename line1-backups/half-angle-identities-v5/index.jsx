@@ -11,7 +11,6 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import SiblingsNavStandalone  from '../../../../app/components/SiblingsNavStandalone'
 import HalfAngleExplorer from '../../../../app/components/trigonometry/identities/half-angle/HalfAngleExplorer'
 import halfDiagrams from '../../../../app/components/trigonometry/identities/half-angle/halfAngleDiagrams'
-import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 
 
 export async function getStaticProps(){
@@ -216,156 +215,228 @@ For applications and worked examples, see the **trigonometric identities applica
 
     obj12:{
       title:`The Sine Half-Angle Identity`,
-      content:`The identity $\\sin(\\alpha/2) = \\sqrt{(1 - \\cos\\alpha)/2}$ is proved geometrically by measuring the chord of an isosceles triangle two ways — the same figure as the double-angle proofs, read in the other direction.`,
-      before:``,
-      after:`The proof's six stages: [setup](!#sine-half-step-1-setup), [law of cosines](!#sine-half-step-2-law-of-cosines-on-triangle-oab), [bisect](!#sine-half-step-3-bisect), [read off the half-chord](!#sine-half-step-4-read-off-the-half-chord), [square the chord](!#sine-half-step-5-square-the-chord), and [equate and solve](!#sine-half-step-6-equate-and-solve).
+      content:`The identity $\\sin(\\alpha/2) = \\sqrt{(1 - \\cos\\alpha)/2}$ is proved geometrically by measuring the chord of an isosceles triangle two ways — the same figure as the double-angle proofs, read in the other direction.
+
+${halfDiagrams.sin.overview}
+
+The proof's six stages: [setup](!#sine-half-step-1-setup), [law of cosines](!#sine-half-step-2-law-of-cosines-on-triangle-oab), [bisect](!#sine-half-step-3-bisect), [read off the half-chord](!#sine-half-step-4-read-off-the-half-chord), [square the chord](!#sine-half-step-5-square-the-chord), and [equate and solve](!#sine-half-step-6-equate-and-solve).
 
 Within the tool's range ($\\alpha$ from $20°$ to $160°$) the half angle stays acute, so the positive square root is always the right choice. This identity feeds [cosecant's](!#the-cosecant-half-angle-identity) formula directly and supplies half of [tangent's](!#the-tangent-half-angle-identity).`,
+      before:``,
+      after:``,
       link:'',
     },
     obj13:{
       title:`The Cosine Half-Angle Identity`,
-      content:`The identity $\\cos(\\alpha/2) = \\sqrt{(1 + \\cos\\alpha)/2}$ needs no second measurement: it rests on the [sine half-angle identity](!#the-sine-half-angle-identity) plus one application of Pythagoras inside the right triangle the bisector creates.`,
-      before:``,
-      after:`Its six stages: [setup](!#cosine-half-step-1-setup), [bisect](!#cosine-half-step-2-bisect), [identify the legs](!#cosine-half-step-3-identify-the-legs), [apply Pythagoras](!#cosine-half-step-4-apply-pythagoras), [substitute the sin half-angle](!#cosine-half-step-5-substitute-the-sin-half-angle), and [take the root](!#cosine-half-step-6-take-the-root).
+      content:`The identity $\\cos(\\alpha/2) = \\sqrt{(1 + \\cos\\alpha)/2}$ needs no second measurement: it rests on the [sine half-angle identity](!#the-sine-half-angle-identity) plus one application of Pythagoras inside the right triangle the bisector creates.
+
+${halfDiagrams.cos.overview}
+
+Its six stages: [setup](!#cosine-half-step-1-setup), [bisect](!#cosine-half-step-2-bisect), [identify the legs](!#cosine-half-step-3-identify-the-legs), [apply Pythagoras](!#cosine-half-step-4-apply-pythagoras), [substitute the sin half-angle](!#cosine-half-step-5-substitute-the-sin-half-angle), and [take the root](!#cosine-half-step-6-take-the-root).
 
 The sign flip between the two formulas — $1 - \\cos\\alpha$ for sine, $1 + \\cos\\alpha$ for cosine — comes straight from that Pythagorean complement. [Secant's](!#the-secant-half-angle-identity) identity inverts this one.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj14:{
       title:`The Tangent Half-Angle Identity`,
-      content:`Tangent of the half angle divides the two geometric results:`,
-      before:``,
-      after:`$$\\tan(\\alpha/2) = \\frac{\\sin(\\alpha/2)}{\\cos(\\alpha/2)} = \\sqrt{\\frac{1 - \\cos\\alpha}{1 + \\cos\\alpha}}$$
+      content:`Tangent of the half angle divides the two geometric results:
+
+${halfDiagrams.tan}
+
+$$\\tan(\\alpha/2) = \\frac{\\sin(\\alpha/2)}{\\cos(\\alpha/2)} = \\sqrt{\\frac{1 - \\cos\\alpha}{1 + \\cos\\alpha}}$$
 
 Combining the two square roots into one is legitimate because both radicands are positive in the tool's range. Equivalent forms $\\sin\\alpha/(1 + \\cos\\alpha)$ and $(1 - \\cos\\alpha)/\\sin\\alpha$ avoid the root entirely — that last form is the heart of the Weierstrass substitution. Sources: [sine](!#the-sine-half-angle-identity) and [cosine](!#the-cosine-half-angle-identity); its own reciprocal gives [cotangent](!#the-cotangent-half-angle-identity).`,
+      before:``,
+      after:``,
       link:'',
     },
     obj15:{
       title:`The Cosecant Half-Angle Identity`,
-      content:`Cosecant inverts the sine result:`,
-      before:``,
-      after:`$$\\csc(\\alpha/2) = \\frac{1}{\\sin(\\alpha/2)} = \\sqrt{\\frac{2}{1 - \\cos\\alpha}}$$
+      content:`Cosecant inverts the sine result:
+
+${halfDiagrams.csc}
+
+$$\\csc(\\alpha/2) = \\frac{1}{\\sin(\\alpha/2)} = \\sqrt{\\frac{2}{1 - \\cos\\alpha}}$$
 
 Inverting under the root flips the fraction — the $2$ moves to the numerator. The formula diverges as $\\alpha \\to 0$, where the half angle's sine vanishes; inside the tool's $20°$–$160°$ range both verification cards stay finite and equal. Source: [the sine half-angle identity](!#the-sine-half-angle-identity).`,
+      before:``,
+      after:``,
       link:'',
     },
     obj16:{
       title:`The Secant Half-Angle Identity`,
-      content:`Secant inverts the cosine result:`,
-      before:``,
-      after:`$$\\sec(\\alpha/2) = \\frac{1}{\\cos(\\alpha/2)} = \\sqrt{\\frac{2}{1 + \\cos\\alpha}}$$
+      content:`Secant inverts the cosine result:
+
+${halfDiagrams.sec}
+
+$$\\sec(\\alpha/2) = \\frac{1}{\\cos(\\alpha/2)} = \\sqrt{\\frac{2}{1 + \\cos\\alpha}}$$
 
 Like its partner [cosecant](!#the-cosecant-half-angle-identity), it satisfies $|\\sec(\\alpha/2)| \\ge 1$ wherever defined. It would diverge only as $\\alpha \\to 360°$, far outside the slider's range. Source: [the cosine half-angle identity](!#the-cosine-half-angle-identity).`,
+      before:``,
+      after:``,
       link:'',
     },
     obj17:{
       title:`The Cotangent Half-Angle Identity`,
-      content:`Cotangent flips the tangent result upside down:`,
-      before:``,
-      after:`$$\\cot(\\alpha/2) = \\frac{1}{\\tan(\\alpha/2)} = \\sqrt{\\frac{1 + \\cos\\alpha}{1 - \\cos\\alpha}}$$
+      content:`Cotangent flips the tangent result upside down:
+
+${halfDiagrams.cot}
+
+$$\\cot(\\alpha/2) = \\frac{1}{\\tan(\\alpha/2)} = \\sqrt{\\frac{1 + \\cos\\alpha}{1 - \\cos\\alpha}}$$
 
 The inversion swaps numerator and denominator under the root. Because [tangent](!#the-tangent-half-angle-identity) was itself derived, cotangent stands two steps from the geometry, resting ultimately on [sine](!#the-sine-half-angle-identity) and [cosine](!#the-cosine-half-angle-identity).`,
+      before:``,
+      after:``,
       link:'',
     },
     obj18:{
       title:`Sine Half-Angle, Step 1: Setup`,
-      content:`The [sine half-angle proof](!#the-sine-half-angle-identity) opens with two unit radii $OA$ and $OB$ meeting at the center with apex angle $\\alpha$ — and a goal: express $\\sin(\\alpha/2)$ using only $\\alpha$.`,
+      content:`The [sine half-angle proof](!#the-sine-half-angle-identity) opens with two unit radii $OA$ and $OB$ meeting at the center with apex angle $\\alpha$ — and a goal: express $\\sin(\\alpha/2)$ using only $\\alpha$.
+
+${halfDiagrams.sin.steps[0]}
+
+The half angle does not exist in the figure yet; it will appear the moment the apex is bisected.`,
       before:``,
-      after:`The half angle does not exist in the figure yet; it will appear the moment the apex is bisected.`,
+      after:``,
       link:'',
     },
     obj19:{
       title:`Sine Half-Angle, Step 2: Law of Cosines on Triangle OAB`,
-      content:`Measure the chord first: the law of cosines with two unit sides and included angle $\\alpha$ gives`,
-      before:``,
-      after:`$$|AB|^2 = 1 + 1 - 2\\cos\\alpha = 2 - 2\\cos\\alpha$$
+      content:`Measure the chord first: the law of cosines with two unit sides and included angle $\\alpha$ gives
+
+${halfDiagrams.sin.steps[1]}
+
+$$|AB|^2 = 1 + 1 - 2\\cos\\alpha = 2 - 2\\cos\\alpha$$
 
 One expression for the squared chord, in terms of the full angle only.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj20:{
       title:`Sine Half-Angle, Step 3: Bisect`,
-      content:`Drop $OM$ perpendicular to $AB$: it splits the apex into two halves of $\\alpha/2$ and lands on the chord's midpoint $M$.`,
+      content:`Drop $OM$ perpendicular to $AB$: it splits the apex into two halves of $\\alpha/2$ and lands on the chord's midpoint $M$.
+
+${halfDiagrams.sin.steps[2]}
+
+This is where the half angle enters the picture — as a genuine geometric angle, not an algebraic trick.`,
       before:``,
-      after:`This is where the half angle enters the picture — as a genuine geometric angle, not an algebraic trick.`,
+      after:``,
       link:'',
     },
     obj21:{
       title:`Sine Half-Angle, Step 4: Read Off the Half-Chord`,
-      content:`Right triangle $OMA$ has hypotenuse $1$ and angle $\\alpha/2$ at $O$, so its opposite leg is exactly the half-chord:`,
-      before:``,
-      after:`$$MA = \\sin(\\alpha/2) \\qquad AB = 2\\sin(\\alpha/2)$$
+      content:`Right triangle $OMA$ has hypotenuse $1$ and angle $\\alpha/2$ at $O$, so its opposite leg is exactly the half-chord:
+
+${halfDiagrams.sin.steps[3]}
+
+$$MA = \\sin(\\alpha/2) \\qquad AB = 2\\sin(\\alpha/2)$$
 
 A second expression for the chord — this one in terms of the half angle.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj22:{
       title:`Sine Half-Angle, Step 5: Square the Chord`,
-      content:`Square the half-chord expression to match the law-of-cosines form:`,
-      before:``,
-      after:`$$|AB|^2 = (2\\sin(\\alpha/2))^2 = 4\\sin^2(\\alpha/2)$$
+      content:`Square the half-chord expression to match the law-of-cosines form:
+
+${halfDiagrams.sin.steps[4]}
+
+$$|AB|^2 = (2\\sin(\\alpha/2))^2 = 4\\sin^2(\\alpha/2)$$
 
 Both measurements of $|AB|^2$ are now on the table.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj23:{
       title:`Sine Half-Angle, Step 6: Equate and Solve`,
-      content:`Set the two chord measurements equal and solve for the half-angle sine:`,
-      before:``,
-      after:`$$2 - 2\\cos\\alpha = 4\\sin^2(\\alpha/2) \\;\\Longrightarrow\\; \\sin(\\alpha/2) = \\sqrt{\\frac{1 - \\cos\\alpha}{2}}$$
+      content:`Set the two chord measurements equal and solve for the half-angle sine:
+
+${halfDiagrams.sin.steps[5]}
+
+$$2 - 2\\cos\\alpha = 4\\sin^2(\\alpha/2) \\;\\Longrightarrow\\; \\sin(\\alpha/2) = \\sqrt{\\frac{1 - \\cos\\alpha}{2}}$$
 
 The verification cards keep both sides numerically equal across the whole slider range.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj24:{
       title:`Cosine Half-Angle, Step 1: Setup`,
-      content:`The [cosine half-angle proof](!#the-cosine-half-angle-identity) starts from the same figure: unit radii $OA$ and $OB$ with apex $\\alpha$, aiming for $\\cos(\\alpha/2)$ in terms of $\\alpha$.`,
+      content:`The [cosine half-angle proof](!#the-cosine-half-angle-identity) starts from the same figure: unit radii $OA$ and $OB$ with apex $\\alpha$, aiming for $\\cos(\\alpha/2)$ in terms of $\\alpha$.
+
+${halfDiagrams.cos.steps[0]}
+
+Unlike sine's proof, this one will finish without ever measuring the chord by law of cosines.`,
       before:``,
-      after:`Unlike sine's proof, this one will finish without ever measuring the chord by law of cosines.`,
+      after:``,
       link:'',
     },
     obj25:{
       title:`Cosine Half-Angle, Step 2: Bisect`,
-      content:`Drop the perpendicular bisector $OM$ immediately: two half-angles of $\\alpha/2$ at the center, and a right angle at $M$.`,
+      content:`Drop the perpendicular bisector $OM$ immediately: two half-angles of $\\alpha/2$ at the center, and a right angle at $M$.
+
+${halfDiagrams.cos.steps[1]}
+
+Right triangle $OMA$ is the whole stage for the rest of this proof.`,
       before:``,
-      after:`Right triangle $OMA$ is the whole stage for the rest of this proof.`,
+      after:``,
       link:'',
     },
     obj26:{
       title:`Cosine Half-Angle, Step 3: Identify the Legs`,
-      content:`In right triangle $OMA$, the hypotenuse is $1$ and the angle at $O$ is $\\alpha/2$, so both legs are the basic ratios:`,
-      before:``,
-      after:`$$MA = \\sin(\\alpha/2) \\qquad OM = \\cos(\\alpha/2)$$
+      content:`In right triangle $OMA$, the hypotenuse is $1$ and the angle at $O$ is $\\alpha/2$, so both legs are the basic ratios:
+
+${halfDiagrams.cos.steps[2]}
+
+$$MA = \\sin(\\alpha/2) \\qquad OM = \\cos(\\alpha/2)$$
 
 The bisector segment $OM$ is the quantity the proof is after.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj27:{
       title:`Cosine Half-Angle, Step 4: Apply Pythagoras`,
-      content:`The legs of a right triangle with unit hypotenuse obey the Pythagorean identity:`,
-      before:``,
-      after:`$$\\sin^2(\\alpha/2) + \\cos^2(\\alpha/2) = 1 \\;\\Longrightarrow\\; \\cos^2(\\alpha/2) = 1 - \\sin^2(\\alpha/2)$$
+      content:`The legs of a right triangle with unit hypotenuse obey the Pythagorean identity:
+
+${halfDiagrams.cos.steps[3]}
+
+$$\\sin^2(\\alpha/2) + \\cos^2(\\alpha/2) = 1 \\;\\Longrightarrow\\; \\cos^2(\\alpha/2) = 1 - \\sin^2(\\alpha/2)$$
 
 Cosine is now expressed through the half-angle sine, which step 5 already knows how to replace.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj28:{
       title:`Cosine Half-Angle, Step 5: Substitute the Sin Half-Angle`,
-      content:`Insert the result of the [sine proof](!#sine-half-step-6-equate-and-solve), $\\sin^2(\\alpha/2) = (1 - \\cos\\alpha)/2$:`,
-      before:``,
-      after:`$$\\cos^2(\\alpha/2) = 1 - \\frac{1 - \\cos\\alpha}{2} = \\frac{1 + \\cos\\alpha}{2}$$
+      content:`Insert the result of the [sine proof](!#sine-half-step-6-equate-and-solve), $\\sin^2(\\alpha/2) = (1 - \\cos\\alpha)/2$:
+
+${halfDiagrams.cos.steps[4]}
+
+$$\\cos^2(\\alpha/2) = 1 - \\frac{1 - \\cos\\alpha}{2} = \\frac{1 + \\cos\\alpha}{2}$$
 
 The sign inside flips from minus to plus — the fingerprint of the Pythagorean complement.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj29:{
       title:`Cosine Half-Angle, Step 6: Take the Root`,
-      content:`Take the positive square root (the half angle is acute throughout the tool's range):`,
-      before:``,
-      after:`$$\\cos(\\alpha/2) = \\sqrt{\\frac{1 + \\cos\\alpha}{2}}$$
+      content:`Take the positive square root (the half angle is acute throughout the tool's range):
+
+${halfDiagrams.cos.steps[5]}
+
+$$\\cos(\\alpha/2) = \\sqrt{\\frac{1 + \\cos\\alpha}{2}}$$
 
 Both verification cards agree at every slider position — the numerical seal on the proof.`,
+      before:``,
+      after:``,
       link:'',
     },
 
@@ -488,47 +559,6 @@ Both verification cards agree at every slider position — the numerical seal on
 
 
 
-  // Framed illustration units for the per-state sections (Line 1 v5): frozen
-  // scene + attached picture-reading panel, one frame, no link (own page).
-  const stateUnits = {
-    sinOverview: demoUnitFrame({ svg: halfDiagrams.sin.overview, caption: 'The complete sine derivation, frozen',
-      text: 'The chord of angle &#945; measured two ways &#8212; law of cosines against the half-chord &#8212; solved for sin(&#945;/2) = &#8730;((1 &#8722; cos&#8202;&#945;)/2).' }),
-    cosOverview: demoUnitFrame({ svg: halfDiagrams.cos.overview, caption: 'The complete cosine derivation, frozen',
-      text: 'Pythagoras inside the bisected triangle, with the sine result substituted, yields cos(&#945;/2) = &#8730;((1 + cos&#8202;&#945;)/2).' }),
-    tan: demoUnitFrame({ svg: halfDiagrams.tan, caption: 'tan(&#945;/2), derived',
-      text: 'Sine over cosine, both half-angle roots substituted, combined under a single radical.' }),
-    csc: demoUnitFrame({ svg: halfDiagrams.csc, caption: 'csc(&#945;/2), derived',
-      text: 'The sine half-angle identity inverted under its root.' }),
-    sec: demoUnitFrame({ svg: halfDiagrams.sec, caption: 'sec(&#945;/2), derived',
-      text: 'The cosine half-angle identity inverted under its root.' }),
-    cot: demoUnitFrame({ svg: halfDiagrams.cot, caption: 'cot(&#945;/2), derived',
-      text: 'The tangent formula flipped: the fraction under the radical turns upside down.' }),
-    sinStep1: demoUnitFrame({ svg: halfDiagrams.sin.steps[0], caption: 'Step 1: the setup',
-      text: 'Two unit radii meeting at the full angle &#945;, joined by the chord AB.' }),
-    sinStep2: demoUnitFrame({ svg: halfDiagrams.sin.steps[1], caption: 'Step 2: law of cosines',
-      text: '|AB|&#178; = 2 &#8722; 2&#8202;cos&#8202;&#945;, read straight off triangle OAB.' }),
-    sinStep3: demoUnitFrame({ svg: halfDiagrams.sin.steps[2], caption: 'Step 3: the bisector',
-      text: 'OM halves the apex into two &#945;/2 angles and lands on the chord midpoint.' }),
-    sinStep4: demoUnitFrame({ svg: halfDiagrams.sin.steps[3], caption: 'Step 4: the half-chord',
-      text: 'MA = sin(&#945;/2), so the full chord is 2&#8202;sin(&#945;/2).' }),
-    sinStep5: demoUnitFrame({ svg: halfDiagrams.sin.steps[4], caption: 'Step 5: square the chord',
-      text: '(2&#8202;sin(&#945;/2))&#178; = 4&#8202;sin&#178;(&#945;/2) &#8212; ready to meet the law-of-cosines expression.' }),
-    sinStep6: demoUnitFrame({ svg: halfDiagrams.sin.steps[5], caption: 'Step 6: equate and solve',
-      text: 'Setting the two chord expressions equal isolates sin(&#945;/2) under the root.' }),
-    cosStep1: demoUnitFrame({ svg: halfDiagrams.cos.steps[0], caption: 'Step 1: the setup',
-      text: 'The same unit triangle at angle &#945; &#8212; this time the target is the adjacent leg.' }),
-    cosStep2: demoUnitFrame({ svg: halfDiagrams.cos.steps[1], caption: 'Step 2: the bisector',
-      text: 'OM splits the apex; right triangle OMA now carries the half-angle &#945;/2.' }),
-    cosStep3: demoUnitFrame({ svg: halfDiagrams.cos.steps[2], caption: 'Step 3: the legs',
-      text: 'Against the unit hypotenuse, the legs are sin(&#945;/2) and cos(&#945;/2) themselves.' }),
-    cosStep4: demoUnitFrame({ svg: halfDiagrams.cos.steps[3], caption: 'Step 4: Pythagoras',
-      text: 'cos&#178;(&#945;/2) = 1 &#8722; sin&#178;(&#945;/2) inside the right triangle.' }),
-    cosStep5: demoUnitFrame({ svg: halfDiagrams.cos.steps[4], caption: 'Step 5: substitute',
-      text: 'The sine half-angle result replaces sin&#178;(&#945;/2), leaving only cos&#8202;&#945; inside.' }),
-    cosStep6: demoUnitFrame({ svg: halfDiagrams.cos.steps[5], caption: 'Step 6: take the root',
-      text: 'The square root delivers cos(&#945;/2) = &#8730;((1 + cos&#8202;&#945;)/2).' }),
-  };
-
   const explanations = {
     sin: { steps: [
       `Two radii OA and OB of length 1, meeting at center O with angle α between them. We want to express sin(α/2) in terms of α. [Full treatment](!#sine-half-step-1-setup) · [The sine half-angle identity](!#the-sine-half-angle-identity)`,
@@ -560,7 +590,6 @@ Both verification cards agree at every slider position — the numerical seal on
          faqQuestions,
          schemas,
          explanations,
-         stateUnits,
           seoData: {
         title: "Half Angle Identities: Interactive Proofs | Learn Math Class",
         description: "Explore all six half-angle identities: sin, cos, tan, csc, sec, cot. Animated geometric proofs, algebraic derivations, and live numeric verification.",
@@ -575,7 +604,7 @@ Both verification cards agree at every slider position — the numerical seal on
     }
    }
 
-export default function HalfAngleIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function HalfAngleIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations}) {
 
 
   const genericSections=[
@@ -681,8 +710,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'u-sinOverview'} dangerouslySetInnerHTML={{ __html: stateUnits['sinOverview'] }} />,
-          sectionsContent.obj12.after,
         ]
     },
     {
@@ -691,8 +718,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div key={'u-cosOverview'} dangerouslySetInnerHTML={{ __html: stateUnits['cosOverview'] }} />,
-          sectionsContent.obj13.after,
         ]
     },
     {
@@ -701,8 +726,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
-          <div key={'u-tan'} dangerouslySetInnerHTML={{ __html: stateUnits['tan'] }} />,
-          sectionsContent.obj14.after,
         ]
     },
     {
@@ -711,8 +734,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj15.link,
         content:[
           sectionsContent.obj15.content,
-          <div key={'u-csc'} dangerouslySetInnerHTML={{ __html: stateUnits['csc'] }} />,
-          sectionsContent.obj15.after,
         ]
     },
     {
@@ -721,8 +742,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
-          <div key={'u-sec'} dangerouslySetInnerHTML={{ __html: stateUnits['sec'] }} />,
-          sectionsContent.obj16.after,
         ]
     },
     {
@@ -731,8 +750,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj17.link,
         content:[
           sectionsContent.obj17.content,
-          <div key={'u-cot'} dangerouslySetInnerHTML={{ __html: stateUnits['cot'] }} />,
-          sectionsContent.obj17.after,
         ]
     },
     {
@@ -741,8 +758,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj18.link,
         content:[
           sectionsContent.obj18.content,
-          <div key={'u-sinStep1'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep1'] }} />,
-          sectionsContent.obj18.after,
         ]
     },
     {
@@ -751,8 +766,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj19.link,
         content:[
           sectionsContent.obj19.content,
-          <div key={'u-sinStep2'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep2'] }} />,
-          sectionsContent.obj19.after,
         ]
     },
     {
@@ -761,8 +774,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj20.link,
         content:[
           sectionsContent.obj20.content,
-          <div key={'u-sinStep3'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep3'] }} />,
-          sectionsContent.obj20.after,
         ]
     },
     {
@@ -771,8 +782,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj21.link,
         content:[
           sectionsContent.obj21.content,
-          <div key={'u-sinStep4'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep4'] }} />,
-          sectionsContent.obj21.after,
         ]
     },
     {
@@ -781,8 +790,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj22.link,
         content:[
           sectionsContent.obj22.content,
-          <div key={'u-sinStep5'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep5'] }} />,
-          sectionsContent.obj22.after,
         ]
     },
     {
@@ -791,8 +798,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj23.link,
         content:[
           sectionsContent.obj23.content,
-          <div key={'u-sinStep6'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep6'] }} />,
-          sectionsContent.obj23.after,
         ]
     },
     {
@@ -801,8 +806,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj24.link,
         content:[
           sectionsContent.obj24.content,
-          <div key={'u-cosStep1'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep1'] }} />,
-          sectionsContent.obj24.after,
         ]
     },
     {
@@ -811,8 +814,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj25.link,
         content:[
           sectionsContent.obj25.content,
-          <div key={'u-cosStep2'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep2'] }} />,
-          sectionsContent.obj25.after,
         ]
     },
     {
@@ -821,8 +822,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj26.link,
         content:[
           sectionsContent.obj26.content,
-          <div key={'u-cosStep3'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep3'] }} />,
-          sectionsContent.obj26.after,
         ]
     },
     {
@@ -831,8 +830,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj27.link,
         content:[
           sectionsContent.obj27.content,
-          <div key={'u-cosStep4'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep4'] }} />,
-          sectionsContent.obj27.after,
         ]
     },
     {
@@ -841,8 +838,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj28.link,
         content:[
           sectionsContent.obj28.content,
-          <div key={'u-cosStep5'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep5'] }} />,
-          sectionsContent.obj28.after,
         ]
     },
     {
@@ -851,8 +846,6 @@ export default function HalfAngleIdentitiesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj29.link,
         content:[
           sectionsContent.obj29.content,
-          <div key={'u-cosStep6'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep6'] }} />,
-          sectionsContent.obj29.after,
         ]
     },
 

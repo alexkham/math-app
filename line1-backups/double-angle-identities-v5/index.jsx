@@ -508,7 +508,6 @@ import DoubleAngleExplorer from '../../../../app/components/trigonometry/identit
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandalone'
 import doubleAngleDiagrams from '../../../../app/components/trigonometry/identities/double-angle/doubleAngleDiagrams'
-import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 
 
 
@@ -713,156 +712,228 @@ For applications and worked examples, see the **trigonometric identities applica
 
     obj12:{
       title:`The Sine Double-Angle Identity`,
-      content:`The identity $\\sin(2\\theta) = 2\\sin\\theta\\cos\\theta$ is proved geometrically in the explorer by computing the area of one isosceles triangle two different ways.`,
-      before:``,
-      after:`The proof runs through six stages: [setup](!#sine-proof-step-1-setup), [area the first way](!#sine-proof-step-2-area-first-way), [bisect](!#sine-proof-step-3-bisect), [read off the legs](!#sine-proof-step-4-read-off-the-legs), [area the second way](!#sine-proof-step-5-area-second-way), and [equate](!#sine-proof-step-6-equate).
+      content:`The identity $\\sin(2\\theta) = 2\\sin\\theta\\cos\\theta$ is proved geometrically in the explorer by computing the area of one isosceles triangle two different ways.
+
+${doubleAngleDiagrams.sin.overview}
+
+The proof runs through six stages: [setup](!#sine-proof-step-1-setup), [area the first way](!#sine-proof-step-2-area-first-way), [bisect](!#sine-proof-step-3-bisect), [read off the legs](!#sine-proof-step-4-read-off-the-legs), [area the second way](!#sine-proof-step-5-area-second-way), and [equate](!#sine-proof-step-6-equate).
 
 This identity is the source of two others in the tool: [cosecant's](!#the-cosecant-double-angle-identity) formula is its reciprocal, and [tangent's](!#the-tangent-double-angle-identity) numerator comes from it.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj13:{
       title:`The Cosine Double-Angle Identity`,
-      content:`The identity $\\cos(2\\theta) = 1 - 2\\sin^2\\theta$ falls out of measuring the chord $AB$ two ways — once by the law of cosines, once through the half-chords.`,
-      before:``,
-      after:`The proof's six stages: [setup](!#cosine-proof-step-1-setup), [law of cosines](!#cosine-proof-step-2-law-of-cosines-on-triangle-oab), [bisect](!#cosine-proof-step-3-bisect), [read off the half-chord](!#cosine-proof-step-4-read-off-the-half-chord), [square the chord](!#cosine-proof-step-5-square-the-chord), and [equate](!#cosine-proof-step-6-equate).
+      content:`The identity $\\cos(2\\theta) = 1 - 2\\sin^2\\theta$ falls out of measuring the chord $AB$ two ways — once by the law of cosines, once through the half-chords.
+
+${doubleAngleDiagrams.cos.overview}
+
+The proof's six stages: [setup](!#cosine-proof-step-1-setup), [law of cosines](!#cosine-proof-step-2-law-of-cosines-on-triangle-oab), [bisect](!#cosine-proof-step-3-bisect), [read off the half-chord](!#cosine-proof-step-4-read-off-the-half-chord), [square the chord](!#cosine-proof-step-5-square-the-chord), and [equate](!#cosine-proof-step-6-equate).
 
 Substituting $\\sin^2\\theta = 1 - \\cos^2\\theta$ gives the equivalent forms $2\\cos^2\\theta - 1$ and $\\cos^2\\theta - \\sin^2\\theta$. In the tool, [secant's](!#the-secant-double-angle-identity) identity is this one inverted, and [tangent's](!#the-tangent-double-angle-identity) denominator comes from it.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj14:{
       title:`The Tangent Double-Angle Identity`,
-      content:`Tangent needs no new geometry: it is sine over cosine, so its double-angle formula follows algebraically from the two proved identities.`,
-      before:``,
-      after:`$$\\tan(2\\theta) = \\frac{\\sin(2\\theta)}{\\cos(2\\theta)} = \\frac{2\\sin\\theta\\cos\\theta}{\\cos^2\\theta - \\sin^2\\theta} = \\frac{2\\tan\\theta}{1 - \\tan^2\\theta}$$
+      content:`Tangent needs no new geometry: it is sine over cosine, so its double-angle formula follows algebraically from the two proved identities.
+
+${doubleAngleDiagrams.tan}
+
+$$\\tan(2\\theta) = \\frac{\\sin(2\\theta)}{\\cos(2\\theta)} = \\frac{2\\sin\\theta\\cos\\theta}{\\cos^2\\theta - \\sin^2\\theta} = \\frac{2\\tan\\theta}{1 - \\tan^2\\theta}$$
 
 The last step divides numerator and denominator by $\\cos^2\\theta$ — the move that turns a sine-and-cosine expression into a pure tangent one. The formula fails where $\\tan\\theta = \\pm 1$ ($\\theta = 45°$), exactly where $2\\theta = 90°$ makes $\\tan(2\\theta)$ undefined. Its own reciprocal gives [cotangent's](!#the-cotangent-double-angle-identity) formula; its ingredients come from [sine](!#the-sine-double-angle-identity) and [cosine](!#the-cosine-double-angle-identity).`,
+      before:``,
+      after:``,
       link:'',
     },
     obj15:{
       title:`The Cosecant Double-Angle Identity`,
-      content:`Cosecant is the reciprocal of sine, so its double-angle formula is one substitution away from the geometric result.`,
-      before:``,
-      after:`$$\\csc(2\\theta) = \\frac{1}{\\sin(2\\theta)} = \\frac{1}{2\\sin\\theta\\cos\\theta}$$
+      content:`Cosecant is the reciprocal of sine, so its double-angle formula is one substitution away from the geometric result.
+
+${doubleAngleDiagrams.csc}
+
+$$\\csc(2\\theta) = \\frac{1}{\\sin(2\\theta)} = \\frac{1}{2\\sin\\theta\\cos\\theta}$$
 
 The formula is undefined wherever $\\sin(2\\theta) = 0$ — within the tool's $10°$–$80°$ slider range that never happens, so the verification cards always agree. The source identity is [sine's](!#the-sine-double-angle-identity), reachable from the card's jump button.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj16:{
       title:`The Secant Double-Angle Identity`,
-      content:`Secant inverts cosine, so the double-angle version inverts the cosine identity.`,
-      before:``,
-      after:`$$\\sec(2\\theta) = \\frac{1}{\\cos(2\\theta)} = \\frac{1}{1 - 2\\sin^2\\theta}$$
+      content:`Secant inverts cosine, so the double-angle version inverts the cosine identity.
+
+${doubleAngleDiagrams.sec}
+
+$$\\sec(2\\theta) = \\frac{1}{\\cos(2\\theta)} = \\frac{1}{1 - 2\\sin^2\\theta}$$
 
 It diverges where $\\cos(2\\theta) = 0$, i.e. at $\\theta = 45°$ — sweep the slider there and watch both verification cards blow up together, which is itself a check that the two sides agree. The source identity is [cosine's](!#the-cosine-double-angle-identity).`,
+      before:``,
+      after:``,
       link:'',
     },
     obj17:{
       title:`The Cotangent Double-Angle Identity`,
-      content:`Cotangent is the reciprocal of tangent, so its formula is the tangent identity flipped upside down.`,
-      before:``,
-      after:`$$\\cot(2\\theta) = \\frac{1}{\\tan(2\\theta)} = \\frac{1 - \\tan^2\\theta}{2\\tan\\theta}$$
+      content:`Cotangent is the reciprocal of tangent, so its formula is the tangent identity flipped upside down.
+
+${doubleAngleDiagrams.cot}
+
+$$\\cot(2\\theta) = \\frac{1}{\\tan(2\\theta)} = \\frac{1 - \\tan^2\\theta}{2\\tan\\theta}$$
 
 Flipping exchanges the roles of the zeros and the poles: cotangent diverges where [tangent](!#the-tangent-double-angle-identity) is zero and vanishes where tangent diverges. Because tangent itself was derived, cotangent sits two steps from the geometry — resting ultimately on [sine](!#the-sine-double-angle-identity) and [cosine](!#the-cosine-double-angle-identity).`,
+      before:``,
+      after:``,
       link:'',
     },
     obj18:{
       title:`Sine Proof, Step 1: Setup`,
-      content:`The [sine proof](!#the-sine-double-angle-identity) opens with two radii $OA$ and $OB$ of length $1$ meeting at the center $O$ with angle $2\\theta$ between them. Together with the chord $AB$ they form an isosceles triangle.`,
+      content:`The [sine proof](!#the-sine-double-angle-identity) opens with two radii $OA$ and $OB$ of length $1$ meeting at the center $O$ with angle $2\\theta$ between them. Together with the chord $AB$ they form an isosceles triangle.
+
+${doubleAngleDiagrams.sin.steps[0]}
+
+Everything the proof needs is already in this picture: a triangle whose apex angle is the double angle we want, built from sides whose length we know exactly.`,
       before:``,
-      after:`Everything the proof needs is already in this picture: a triangle whose apex angle is the double angle we want, built from sides whose length we know exactly.`,
+      after:``,
       link:'',
     },
     obj19:{
       title:`Sine Proof, Step 2: Area, First Way`,
-      content:`The triangle's area comes from the standard formula: half the product of two sides times the sine of the included angle. With $OA = OB = 1$ meeting at $2\\theta$:`,
-      before:``,
-      after:`$$\\text{area} = \\tfrac{1}{2} \\cdot 1 \\cdot 1 \\cdot \\sin(2\\theta) = \\tfrac{1}{2}\\sin(2\\theta)$$
+      content:`The triangle's area comes from the standard formula: half the product of two sides times the sine of the included angle. With $OA = OB = 1$ meeting at $2\\theta$:
+
+${doubleAngleDiagrams.sin.steps[1]}
+
+$$\\text{area} = \\tfrac{1}{2} \\cdot 1 \\cdot 1 \\cdot \\sin(2\\theta) = \\tfrac{1}{2}\\sin(2\\theta)$$
 
 This is the left-hand side of the identity in disguise — one honest measurement of the shaded region.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj20:{
       title:`Sine Proof, Step 3: Bisect`,
-      content:`Drop $OM$ perpendicular to the chord $AB$. Because the triangle is isosceles, $OM$ bisects the apex: two half-angles of $\\theta$ at $O$, and two congruent right triangles.`,
+      content:`Drop $OM$ perpendicular to the chord $AB$. Because the triangle is isosceles, $OM$ bisects the apex: two half-angles of $\\theta$ at $O$, and two congruent right triangles.
+
+${doubleAngleDiagrams.sin.steps[2]}
+
+The small square at $M$ marks the right angle — the key that unlocks the next step, since right triangles are where $\\sin\\theta$ and $\\cos\\theta$ live as plain side lengths.`,
       before:``,
-      after:`The small square at $M$ marks the right angle — the key that unlocks the next step, since right triangles are where $\\sin\\theta$ and $\\cos\\theta$ live as plain side lengths.`,
+      after:``,
       link:'',
     },
     obj21:{
       title:`Sine Proof, Step 4: Read Off the Legs`,
-      content:`In right triangle $OMA$ the hypotenuse is $OA = 1$ and the angle at $O$ is $\\theta$. Its legs are therefore exactly the basic ratios:`,
-      before:``,
-      after:`$$MA = \\sin\\theta \\qquad OM = \\cos\\theta$$
+      content:`In right triangle $OMA$ the hypotenuse is $OA = 1$ and the angle at $O$ is $\\theta$. Its legs are therefore exactly the basic ratios:
+
+${doubleAngleDiagrams.sin.steps[3]}
+
+$$MA = \\sin\\theta \\qquad OM = \\cos\\theta$$
 
 No approximation, no extra construction — with a unit hypotenuse, opposite and adjacent legs ARE sine and cosine.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj22:{
       title:`Sine Proof, Step 5: Area, Second Way`,
-      content:`Each right triangle has legs $\\sin\\theta$ and $\\cos\\theta$, so each has area $\\tfrac{1}{2}\\sin\\theta\\cos\\theta$. The two congruent halves together give:`,
-      before:``,
-      after:`$$\\text{area} = 2 \\cdot \\tfrac{1}{2}\\sin\\theta\\cos\\theta = \\sin\\theta\\cos\\theta$$
+      content:`Each right triangle has legs $\\sin\\theta$ and $\\cos\\theta$, so each has area $\\tfrac{1}{2}\\sin\\theta\\cos\\theta$. The two congruent halves together give:
+
+${doubleAngleDiagrams.sin.steps[4]}
+
+$$\\text{area} = 2 \\cdot \\tfrac{1}{2}\\sin\\theta\\cos\\theta = \\sin\\theta\\cos\\theta$$
 
 The same shaded region as [step 2](!#sine-proof-step-2-area-first-way), measured a second, independent way.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj23:{
       title:`Sine Proof, Step 6: Equate`,
-      content:`Two measurements of one area must agree:`,
-      before:``,
-      after:`$$\\tfrac{1}{2}\\sin(2\\theta) = \\sin\\theta\\cos\\theta \\;\\;\\Longrightarrow\\;\\; \\sin(2\\theta) = 2\\sin\\theta\\cos\\theta$$
+      content:`Two measurements of one area must agree:
+
+${doubleAngleDiagrams.sin.steps[5]}
+
+$$\\tfrac{1}{2}\\sin(2\\theta) = \\sin\\theta\\cos\\theta \\;\\;\\Longrightarrow\\;\\; \\sin(2\\theta) = 2\\sin\\theta\\cos\\theta$$
 
 The verification cards below the scene confirm it numerically at every slider position — both sides always match to three decimals.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj24:{
       title:`Cosine Proof, Step 1: Setup`,
-      content:`The [cosine proof](!#the-cosine-double-angle-identity) starts from the same figure as sine's: radii $OA$ and $OB$ of length $1$ with apex angle $2\\theta$ at the center.`,
+      content:`The [cosine proof](!#the-cosine-double-angle-identity) starts from the same figure as sine's: radii $OA$ and $OB$ of length $1$ with apex angle $2\\theta$ at the center.
+
+${doubleAngleDiagrams.cos.steps[0]}
+
+This time the target of the measurement will not be the triangle's area but the length of the chord $AB$.`,
       before:``,
-      after:`This time the target of the measurement will not be the triangle's area but the length of the chord $AB$.`,
+      after:``,
       link:'',
     },
     obj25:{
       title:`Cosine Proof, Step 2: Law of Cosines on Triangle OAB`,
-      content:`Apply the law of cosines to the triangle, with the apex angle $2\\theta$ between the two unit sides:`,
-      before:``,
-      after:`$$|AB|^2 = 1^2 + 1^2 - 2 \\cdot 1 \\cdot 1 \\cdot \\cos(2\\theta) = 2 - 2\\cos(2\\theta)$$
+      content:`Apply the law of cosines to the triangle, with the apex angle $2\\theta$ between the two unit sides:
+
+${doubleAngleDiagrams.cos.steps[1]}
+
+$$|AB|^2 = 1^2 + 1^2 - 2 \\cdot 1 \\cdot 1 \\cdot \\cos(2\\theta) = 2 - 2\\cos(2\\theta)$$
 
 The chord's squared length now contains $\\cos(2\\theta)$ — the quantity the proof is hunting.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj26:{
       title:`Cosine Proof, Step 3: Bisect`,
-      content:`Drop the perpendicular bisector $OM$: it lands on the midpoint $M$ of the chord and splits the apex into two half-angles of $\\theta$.`,
+      content:`Drop the perpendicular bisector $OM$: it lands on the midpoint $M$ of the chord and splits the apex into two half-angles of $\\theta$.
+
+${doubleAngleDiagrams.cos.steps[2]}
+
+Same construction as in the [sine proof](!#sine-proof-step-3-bisect), used here for a different purpose — to measure the chord instead of the area.`,
       before:``,
-      after:`Same construction as in the [sine proof](!#sine-proof-step-3-bisect), used here for a different purpose — to measure the chord instead of the area.`,
+      after:``,
       link:'',
     },
     obj27:{
       title:`Cosine Proof, Step 4: Read Off the Half-Chord`,
-      content:`Right triangle $OMA$ has hypotenuse $1$ and angle $\\theta$ at $O$, so the half-chord is $MA = \\sin\\theta$ — and the full chord is twice that:`,
-      before:``,
-      after:`$$AB = 2\\sin\\theta$$
+      content:`Right triangle $OMA$ has hypotenuse $1$ and angle $\\theta$ at $O$, so the half-chord is $MA = \\sin\\theta$ — and the full chord is twice that:
+
+${doubleAngleDiagrams.cos.steps[3]}
+
+$$AB = 2\\sin\\theta$$
 
 A second, completely independent expression for the same chord the law of cosines measured.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj28:{
       title:`Cosine Proof, Step 5: Square the Chord`,
-      content:`Square the half-chord result to match the form of step 2:`,
-      before:``,
-      after:`$$|AB|^2 = (2\\sin\\theta)^2 = 4\\sin^2\\theta$$
+      content:`Square the half-chord result to match the form of step 2:
+
+${doubleAngleDiagrams.cos.steps[4]}
+
+$$|AB|^2 = (2\\sin\\theta)^2 = 4\\sin^2\\theta$$
 
 Both routes now express $|AB|^2$ — one through $\\cos(2\\theta)$, one through $\\sin^2\\theta$.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj29:{
       title:`Cosine Proof, Step 6: Equate`,
-      content:`Set the two expressions for $|AB|^2$ equal and solve:`,
-      before:``,
-      after:`$$2 - 2\\cos(2\\theta) = 4\\sin^2\\theta \\;\\;\\Longrightarrow\\;\\; \\cos(2\\theta) = 1 - 2\\sin^2\\theta$$
+      content:`Set the two expressions for $|AB|^2$ equal and solve:
+
+${doubleAngleDiagrams.cos.steps[5]}
+
+$$2 - 2\\cos(2\\theta) = 4\\sin^2\\theta \\;\\;\\Longrightarrow\\;\\; \\cos(2\\theta) = 1 - 2\\sin^2\\theta$$
 
 As with sine, the verification cards keep both sides in numerical agreement across the whole slider range.`,
+      before:``,
+      after:``,
       link:'',
     },
 
@@ -985,47 +1056,6 @@ As with sine, the verification cards keep both sides in numerical agreement acro
 
 
 
-  // Framed illustration units for the per-state sections (Line 1 v5): frozen
-  // scene + attached picture-reading panel, one frame, no link (own page).
-  const stateUnits = {
-    sinOverview: demoUnitFrame({ svg: doubleAngleDiagrams.sin.overview, caption: 'The complete sine proof, frozen',
-      text: 'The area of one isosceles triangle computed two ways: &#189;&#8202;sin&#8202;2&#952; must equal sin&#8202;&#952;&#8202;cos&#8202;&#952;.' }),
-    cosOverview: demoUnitFrame({ svg: doubleAngleDiagrams.cos.overview, caption: 'The complete cosine proof, frozen',
-      text: 'The chord AB measured twice &#8212; law of cosines against half-chords &#8212; forcing cos&#8202;2&#952; = 1 &#8722; 2&#8202;sin&#178;&#952;.' }),
-    tan: demoUnitFrame({ svg: doubleAngleDiagrams.tan, caption: 'tan(2&#952;), derived',
-      text: 'Three algebraic lines: sine over cosine, substitute both proved identities, divide through by cos&#178;&#952;.' }),
-    csc: demoUnitFrame({ svg: doubleAngleDiagrams.csc, caption: 'csc(2&#952;), derived',
-      text: 'One substitution into the reciprocal: 1 over the sine identity.' }),
-    sec: demoUnitFrame({ svg: doubleAngleDiagrams.sec, caption: 'sec(2&#952;), derived',
-      text: 'The cosine identity inverted &#8212; with poles wherever cos&#8202;2&#952; = 0.' }),
-    cot: demoUnitFrame({ svg: doubleAngleDiagrams.cot, caption: 'cot(2&#952;), derived',
-      text: 'The tangent formula flipped upside down: zeros and poles exchange places.' }),
-    sinStep1: demoUnitFrame({ svg: doubleAngleDiagrams.sin.steps[0], caption: 'Step 1: the isosceles setup',
-      text: 'Two unit radii meeting at 2&#952;, joined by the chord AB.' }),
-    sinStep2: demoUnitFrame({ svg: doubleAngleDiagrams.sin.steps[1], caption: 'Step 2: area, first way',
-      text: 'Half the product of the unit sides times sin&#8202;2&#952; shades the whole triangle.' }),
-    sinStep3: demoUnitFrame({ svg: doubleAngleDiagrams.sin.steps[2], caption: 'Step 3: the bisector',
-      text: 'OM splits the apex into two &#952; halves and makes two congruent right triangles.' }),
-    sinStep4: demoUnitFrame({ svg: doubleAngleDiagrams.sin.steps[3], caption: 'Step 4: legs as ratios',
-      text: 'A unit hypotenuse means the legs are literally sin&#8202;&#952; and cos&#8202;&#952;.' }),
-    sinStep5: demoUnitFrame({ svg: doubleAngleDiagrams.sin.steps[4], caption: 'Step 5: area, second way',
-      text: 'Two congruent halves, each &#189;&#8202;sin&#8202;&#952;&#8202;cos&#8202;&#952; &#8212; together sin&#8202;&#952;&#8202;cos&#8202;&#952;.' }),
-    sinStep6: demoUnitFrame({ svg: doubleAngleDiagrams.sin.steps[5], caption: 'Step 6: equate',
-      text: 'The two area measurements meet: sin&#8202;2&#952; = 2&#8202;sin&#8202;&#952;&#8202;cos&#8202;&#952;.' }),
-    cosStep1: demoUnitFrame({ svg: doubleAngleDiagrams.cos.steps[0], caption: 'Step 1: same setup, new target',
-      text: 'The same unit triangle &#8212; but now the chord AB is the thing to measure.' }),
-    cosStep2: demoUnitFrame({ svg: doubleAngleDiagrams.cos.steps[1], caption: 'Step 2: law of cosines',
-      text: '|AB|&#178; = 2 &#8722; 2&#8202;cos&#8202;2&#952;, straight from the apex angle.' }),
-    cosStep3: demoUnitFrame({ svg: doubleAngleDiagrams.cos.steps[2], caption: 'Step 3: the bisector',
-      text: 'OM lands on the midpoint M, halving the apex into two &#952; angles.' }),
-    cosStep4: demoUnitFrame({ svg: doubleAngleDiagrams.cos.steps[3], caption: 'Step 4: the half-chord',
-      text: 'MA = sin&#8202;&#952;, so the whole chord is 2&#8202;sin&#8202;&#952;.' }),
-    cosStep5: demoUnitFrame({ svg: doubleAngleDiagrams.cos.steps[4], caption: 'Step 5: square it',
-      text: '(2&#8202;sin&#8202;&#952;)&#178; = 4&#8202;sin&#178;&#952; &#8212; the second expression for |AB|&#178;.' }),
-    cosStep6: demoUnitFrame({ svg: doubleAngleDiagrams.cos.steps[5], caption: 'Step 6: equate',
-      text: 'The two chord measurements force cos&#8202;2&#952; = 1 &#8722; 2&#8202;sin&#178;&#952;.' }),
-  };
-
   const explanations = {
     sin: { steps: [
       `Two radii OA and OB of length 1, meeting at center O with angle 2θ between them. With chord AB they form an isosceles triangle. [Full treatment](!#sine-proof-step-1-setup) · [The sine identity](!#the-sine-double-angle-identity)`,
@@ -1057,7 +1087,6 @@ As with sine, the verification cards keep both sides in numerical agreement acro
          faqQuestions,
          schemas,
          explanations,
-         stateUnits,
           seoData: {
         title: "Double Angle Identities: Interactive Proofs | Learn Math Class",
         description: "Explore all six double-angle identities: sin, cos, tan, csc, sec, cot. Animated geometric proofs, algebraic derivations, and live numeric verification.",
@@ -1072,7 +1101,7 @@ As with sine, the verification cards keep both sides in numerical agreement acro
     }
    }
 
-export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations}) {
 
 
   const genericSections=[
@@ -1178,8 +1207,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'u-sinOverview'} dangerouslySetInnerHTML={{ __html: stateUnits['sinOverview'] }} />,
-          sectionsContent.obj12.after,
         ]
     },
     {
@@ -1188,8 +1215,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div key={'u-cosOverview'} dangerouslySetInnerHTML={{ __html: stateUnits['cosOverview'] }} />,
-          sectionsContent.obj13.after,
         ]
     },
     {
@@ -1198,8 +1223,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
-          <div key={'u-tan'} dangerouslySetInnerHTML={{ __html: stateUnits['tan'] }} />,
-          sectionsContent.obj14.after,
         ]
     },
     {
@@ -1208,8 +1231,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj15.link,
         content:[
           sectionsContent.obj15.content,
-          <div key={'u-csc'} dangerouslySetInnerHTML={{ __html: stateUnits['csc'] }} />,
-          sectionsContent.obj15.after,
         ]
     },
     {
@@ -1218,8 +1239,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
-          <div key={'u-sec'} dangerouslySetInnerHTML={{ __html: stateUnits['sec'] }} />,
-          sectionsContent.obj16.after,
         ]
     },
     {
@@ -1228,8 +1247,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj17.link,
         content:[
           sectionsContent.obj17.content,
-          <div key={'u-cot'} dangerouslySetInnerHTML={{ __html: stateUnits['cot'] }} />,
-          sectionsContent.obj17.after,
         ]
     },
     {
@@ -1238,8 +1255,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj18.link,
         content:[
           sectionsContent.obj18.content,
-          <div key={'u-sinStep1'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep1'] }} />,
-          sectionsContent.obj18.after,
         ]
     },
     {
@@ -1248,8 +1263,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj19.link,
         content:[
           sectionsContent.obj19.content,
-          <div key={'u-sinStep2'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep2'] }} />,
-          sectionsContent.obj19.after,
         ]
     },
     {
@@ -1258,8 +1271,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj20.link,
         content:[
           sectionsContent.obj20.content,
-          <div key={'u-sinStep3'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep3'] }} />,
-          sectionsContent.obj20.after,
         ]
     },
     {
@@ -1268,8 +1279,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj21.link,
         content:[
           sectionsContent.obj21.content,
-          <div key={'u-sinStep4'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep4'] }} />,
-          sectionsContent.obj21.after,
         ]
     },
     {
@@ -1278,8 +1287,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj22.link,
         content:[
           sectionsContent.obj22.content,
-          <div key={'u-sinStep5'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep5'] }} />,
-          sectionsContent.obj22.after,
         ]
     },
     {
@@ -1288,8 +1295,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj23.link,
         content:[
           sectionsContent.obj23.content,
-          <div key={'u-sinStep6'} dangerouslySetInnerHTML={{ __html: stateUnits['sinStep6'] }} />,
-          sectionsContent.obj23.after,
         ]
     },
     {
@@ -1298,8 +1303,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj24.link,
         content:[
           sectionsContent.obj24.content,
-          <div key={'u-cosStep1'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep1'] }} />,
-          sectionsContent.obj24.after,
         ]
     },
     {
@@ -1308,8 +1311,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj25.link,
         content:[
           sectionsContent.obj25.content,
-          <div key={'u-cosStep2'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep2'] }} />,
-          sectionsContent.obj25.after,
         ]
     },
     {
@@ -1318,8 +1319,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj26.link,
         content:[
           sectionsContent.obj26.content,
-          <div key={'u-cosStep3'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep3'] }} />,
-          sectionsContent.obj26.after,
         ]
     },
     {
@@ -1328,8 +1327,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj27.link,
         content:[
           sectionsContent.obj27.content,
-          <div key={'u-cosStep4'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep4'] }} />,
-          sectionsContent.obj27.after,
         ]
     },
     {
@@ -1338,8 +1335,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj28.link,
         content:[
           sectionsContent.obj28.content,
-          <div key={'u-cosStep5'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep5'] }} />,
-          sectionsContent.obj28.after,
         ]
     },
     {
@@ -1348,8 +1343,6 @@ export default function DoubleAngleIdentitiesPage({seoData, sectionsContent, int
         link:sectionsContent.obj29.link,
         content:[
           sectionsContent.obj29.content,
-          <div key={'u-cosStep6'} dangerouslySetInnerHTML={{ __html: stateUnits['cosStep6'] }} />,
-          sectionsContent.obj29.after,
         ]
     },
 

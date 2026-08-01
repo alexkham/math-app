@@ -33,20 +33,23 @@ function normalizeSvg(svg) {
  * @param {object} o
  * @param {string|string[]} o.svg  frozen-state SVG string(s) from a tool's diagrams module (array = vertical sequence)
  * @param {string} o.caption    short muted label above the text (e.g. "Coterminal pair, frozen")
- * @param {string} o.text       explanation HTML (no closing period link; keep the link inside a sentence)
- * @param {string} o.href       tool route, e.g. "/trigonometry/visual-tools/angle-explorer"
- * @param {string} o.linkText   visible link text, e.g. "angle explorer"
+ * @param {string} o.text       explanation HTML (when linking: no closing period; keep the link inside a sentence)
+ * @param {string} [o.href]     tool route (omit for on-page Line 1 units - no link, text stands alone)
+ * @param {string} [o.linkText] visible link text, e.g. "angle explorer"
  * @param {string} [o.textAfterLink] optional sentence tail after the link (default ".")
  * @returns {string} HTML string for dangerouslySetInnerHTML
  */
 export default function demoUnitFrame({ svg, caption, text, href, linkText, textAfterLink = '.' }) {
   const svgs = (Array.isArray(svg) ? svg : [svg]).map(normalizeSvg).join('');
+  const body = href
+    ? `${text} <a href="${href}" style="${LINK}">${linkText}</a>${textAfterLink}`
+    : text;
   return (
     `<div style="${FRAME}">` +
     `<div style="${SVG_SIDE}">${svgs}</div>` +
     `<div style="${PANEL}">` +
     (caption ? `<div style="${CAPTION}">${caption}</div>` : '') +
-    `<p style="${TEXT}">${text} <a href="${href}" style="${LINK}">${linkText}</a>${textAfterLink}</p>` +
+    `<p style="${TEXT}">${body}</p>` +
     `</div></div>`
   );
 }

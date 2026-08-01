@@ -137,10 +137,10 @@ $$g(x) = a \\cdot f(b(x - h)) + k$$
 
 Each parameter controls one type of transformation:
 
-• **$a$ — vertical scale and reflection**. Multiplies outputs by $a$. $|a| > 1$ stretches vertically; $|a| < 1$ compresses; $a < 0$ reflects across the $x$-axis.
-• **$k$ — vertical shift**. Adds $k$ to every output. Positive $k$ moves the curve up, negative moves it down. Shape is unchanged.
-• **$b$ — horizontal scale and reflection**. Multiplies inputs by $b$. $|b| > 1$ *compresses* horizontally (counterintuitive); $|b| < 1$ stretches; $b < 0$ reflects across the $y$-axis.
-• **$h$ — horizontal shift**. Subtracts $h$ from the input. Positive $h$ moves the curve *right* (the minus sign in $f(x - h)$ is the source of the inversion).
+• $a$ — **vertical scale and reflection**. Multiplies outputs by $a$. $|a| > 1$ stretches vertically; $|a| < 1$ compresses; $a < 0$ reflects across the $x$-axis.
+• $k$ — **vertical shift**. Adds $k$ to every output. Positive $k$ moves the curve up, negative moves it down. Shape is unchanged.
+• $b$ — **horizontal scale and reflection**. Multiplies inputs by $b$. $|b| > 1$ *compresses* horizontally (counterintuitive); $|b| < 1$ stretches; $b < 0$ reflects across the $y$-axis.
+• $h$ — **horizontal shift**. Subtracts $h$ from the input. Positive $h$ moves the curve *right* (the minus sign in $f(x - h)$ is the source of the inversion).
 
 The four transformations commute in pairs (vertical with horizontal) but not across axes. The order in $g(x) = a \\cdot f(b(x - h)) + k$ is the canonical convention.`,
       before: ``,

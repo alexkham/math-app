@@ -157,19 +157,19 @@ function composeSymbolic(outer, inner) {
    (or have a notable simplification). Returns a markdown snippet or null. */
 function compositionNote(fKey, gKey) {
   if (fKey === gKey) {
-    return `Since f and g are the **same** function, $f \\circ g = g \\circ f$ trivially. [Learn more about self-composition](!#composing-a-function-with-itself)`;
+    return `Since f and g are the **same** function, $f \\circ g = g \\circ f$ trivially.`;
   }
   if (fKey === 'identity') {
-    return `With the identity as outer, $f(g(x)) = g(x)$ — the inner function passes through unchanged. [Learn more about the identity in composition](!#composing-with-the-identity)`;
+    return `With the identity as outer, $f(g(x)) = g(x)$ — the inner function passes through unchanged.`;
   }
   if (gKey === 'identity') {
-    return `With the identity as inner, $g(f(x)) = f(x)$ — the outer function passes through unchanged. [Learn more about the identity in composition](!#composing-with-the-identity)`;
+    return `With the identity as inner, $g(f(x)) = f(x)$ — the outer function passes through unchanged.`;
   }
   if ((fKey === 'sqrt' && gKey === 'quadratic') || (fKey === 'quadratic' && gKey === 'sqrt')) {
-    return `Notable: $\\sqrt{x^2} = |x|$, but $(\\sqrt{x})^2 = x$ only for $x \\geq 0$. The two compositions are **not** equal — this pair shows the asymmetry vividly. [Learn more about this pair](!#the-square-and-the-square-root)`;
+    return `Notable: $\\sqrt{x^2} = |x|$, but $(\\sqrt{x})^2 = x$ only for $x \\geq 0$. The two compositions are **not** equal — this pair shows the asymmetry vividly.`;
   }
   if ((fKey === 'exponential' && gKey === 'logarithmic') || (fKey === 'logarithmic' && gKey === 'exponential')) {
-    return `These are **inverses**: $e^{\\ln x} = x$ for $x > 0$, and $\\ln(e^x) = x$ for all $x$. Both compositions collapse to (a restriction of) the identity. [Learn more about the inverse pair](!#the-inverse-pair-exponential-and-logarithm)`;
+    return `These are **inverses**: $e^{\\ln x} = x$ for $x > 0$, and $\\ln(e^x) = x$ for all $x$. Both compositions collapse to (a restriction of) the identity.`;
   }
   return null;
 }
@@ -218,7 +218,6 @@ export default function FunctionComposition({
   initialF = 'quadratic',
   initialG = 'sine',
   families = DEFAULT_FAMILIES,
-  explanations = {},
   visualizerProps = {},
   infoPanelProps = {},
   darkMode = false,
@@ -263,18 +262,8 @@ export default function FunctionComposition({
     );
   }, [f, g, fogExpr, gofExpr, note]);
 
-  // Per-family explanations supplied by the page (canonical copies live in
-  // getStaticProps of each page that renders this component).
-  const familiesTabContent = useMemo(() => {
-    const parts = [];
-    if (explanations[fKey]) parts.push(`### Outer\n\n${explanations[fKey]}`);
-    if (gKey !== fKey && explanations[gKey]) parts.push(`### Inner\n\n${explanations[gKey]}`);
-    return parts.length ? parts.join('\n\n---\n\n') : null;
-  }, [explanations, fKey, gKey]);
-
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },
-    ...(familiesTabContent ? [{ key: 'families', label: 'Families', order: 5, content: familiesTabContent }] : []),
     {
       key: 'guide',
       label: 'Guide',
@@ -288,7 +277,7 @@ export default function FunctionComposition({
         'Click any chip in the legend to toggle a curve on or off. By default only the two compositions are shown, ' +
         'so the asymmetry between $f \\circ g$ and $g \\circ f$ is the main thing on screen.',
     },
-  ]), [explanationContent, familiesTabContent]);
+  ]), [explanationContent]);
 
   /* ---- Styling ---- */
   const fontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';

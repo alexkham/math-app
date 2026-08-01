@@ -10,7 +10,6 @@ import '@/pages/pages.css'
 import Head from 'next/head'
 import AngleExplorer from '../../../../app/components/trigonometry/angle/AngleExplorer'
 import angleDiagrams from '../../../../app/components/trigonometry/angle/angleExplorerDiagrams'
-import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandalone'
 
@@ -233,283 +232,407 @@ Every other special angle is one of these first-quadrant angles reflected into a
 
     obj14:{
       title:`Acute Angles`,
-      content:`An **acute angle** measures strictly between $0°$ and $90°$: its terminal ray has left the initial ray but has not yet reached the vertical. Every acute angle lies in [Quadrant I](!#quadrant-i), where all six trigonometric values are positive.`,
-      before:``,
-      after:`The diagram freezes the explorer at $35°$, a typical acute angle: the blue arc has swept just over a third of the way to the vertical axis. Acute angles are the building blocks of trigonometry — both non-right angles of every right triangle are acute, and [reference angles](!#reference-angles) are acute by definition.
+      content:`An **acute angle** measures strictly between $0°$ and $90°$: its terminal ray has left the initial ray but has not yet reached the vertical. Every acute angle lies in [Quadrant I](!#quadrant-i), where all six trigonometric values are positive.
+
+${angleDiagrams.types.acute}
+
+The diagram freezes the explorer at $35°$, a typical acute angle: the blue arc has swept just over a third of the way to the vertical axis. Acute angles are the building blocks of trigonometry — both non-right angles of every right triangle are acute, and [reference angles](!#reference-angles) are acute by definition.
 
 Familiar examples: each angle of an equilateral triangle ($60°$), the $30°$ and $45°$ angles of the classical special triangles, and most angles of elevation in applied problems. Any input with $0° < \\theta < 90°$ reports **Type: acute** in the explorer's properties panel.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj15:{
       title:`Right Angles`,
-      content:`A **right angle** measures exactly $90°$: the terminal ray points straight up the positive y-axis, perpendicular to the initial ray. It is the boundary between acute and obtuse, and is marked in diagrams with a small square at the vertex.`,
-      before:``,
-      after:`At $90°$ the trigonometric values hit their quarter-turn landmarks: $\\sin 90° = 1$, $\\cos 90° = 0$, and $\\tan 90°$ is **undefined**, because the ratio $\\frac{\\sin\\theta}{\\cos\\theta}$ divides by zero there. The explorer's [values table](!#reading-the-trigonometric-values-table) shows the infinity symbol for this case.
+      content:`A **right angle** measures exactly $90°$: the terminal ray points straight up the positive y-axis, perpendicular to the initial ray. It is the boundary between acute and obtuse, and is marked in diagrams with a small square at the vertex.
+
+${angleDiagrams.types.right}
+
+At $90°$ the trigonometric values hit their quarter-turn landmarks: $\\sin 90° = 1$, $\\cos 90° = 0$, and $\\tan 90°$ is **undefined**, because the ratio $\\frac{\\sin\\theta}{\\cos\\theta}$ divides by zero there. The explorer's [values table](!#reading-the-trigonometric-values-table) shows the infinity symbol for this case.
 
 Right angles are the backbone of coordinate geometry: perpendicular lines, the corners of squares and rectangles, and the defining angle of every right triangle. A $90°$ angle is also a **quadrantal angle** — it sits on the boundary between [Quadrant I](!#quadrant-i) and [Quadrant II](!#quadrant-ii) rather than inside either.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj16:{
       title:`Obtuse Angles`,
-      content:`An **obtuse angle** measures strictly between $90°$ and $180°$: past the vertical, but not yet a straight line. Its terminal ray points into [Quadrant II](!#quadrant-ii), where sine stays positive while cosine and tangent turn negative.`,
-      before:``,
-      after:`The diagram freezes the explorer at $110°$. Its [reference angle](!#reference-angles) is $180° - 110° = 70°$, so $\\sin 110° = \\sin 70°$ while $\\cos 110° = -\\cos 70°$ — the standard Quadrant II sign pattern.
+      content:`An **obtuse angle** measures strictly between $90°$ and $180°$: past the vertical, but not yet a straight line. Its terminal ray points into [Quadrant II](!#quadrant-ii), where sine stays positive while cosine and tangent turn negative.
+
+${angleDiagrams.types.obtuse}
+
+The diagram freezes the explorer at $110°$. Its [reference angle](!#reference-angles) is $180° - 110° = 70°$, so $\\sin 110° = \\sin 70°$ while $\\cos 110° = -\\cos 70°$ — the standard Quadrant II sign pattern.
 
 Obtuse angles appear in triangles (a triangle can contain at most one), in bearings and rotations, and as the [supplements](!#supplementary-angles) of acute angles: every obtuse angle pairs with the acute angle $180° - \\theta$ to form a straight line.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj17:{
       title:`Straight Angles`,
-      content:`A **straight angle** measures exactly $180°$: the two rays point in opposite directions and together form a straight line through the vertex. It is half of a full rotation.`,
-      before:``,
-      after:`At $180°$ the terminal ray lies along the negative x-axis, giving $\\sin 180° = 0$, $\\cos 180° = -1$, and $\\tan 180° = 0$. Like $90°$, it is a **quadrantal angle** — the boundary between [Quadrant II](!#quadrant-ii) and [Quadrant III](!#quadrant-iii).
+      content:`A **straight angle** measures exactly $180°$: the two rays point in opposite directions and together form a straight line through the vertex. It is half of a full rotation.
+
+${angleDiagrams.types.straight}
+
+At $180°$ the terminal ray lies along the negative x-axis, giving $\\sin 180° = 0$, $\\cos 180° = -1$, and $\\tan 180° = 0$. Like $90°$, it is a **quadrantal angle** — the boundary between [Quadrant II](!#quadrant-ii) and [Quadrant III](!#quadrant-iii).
 
 Straight angles anchor the idea of supplementary pairs: two angles are [supplementary](!#supplementary-angles) precisely when they compose a straight angle. The straight angle also marks the halfway point of the unit circle, where cosine reaches its minimum value of $-1$.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj18:{
       title:`Reflex Angles`,
-      content:`A **reflex angle** measures strictly between $180°$ and $360°$: more than half a rotation, but less than a full turn. Every terminal-ray position below the x-axis admits two readings — the reflex angle measured counterclockwise, and the smaller angle $360° - \\theta$ on the other side.`,
-      before:``,
-      after:`The diagram freezes the explorer at $250°$, deep in [Quadrant III](!#quadrant-iii). The blue arc bends back past the straight-angle line: that long sweep is what makes the angle reflex. Its non-reflex partner is $360° - 250° = 110°$.
+      content:`A **reflex angle** measures strictly between $180°$ and $360°$: more than half a rotation, but less than a full turn. Every terminal-ray position below the x-axis admits two readings — the reflex angle measured counterclockwise, and the smaller angle $360° - \\theta$ on the other side.
+
+${angleDiagrams.types.reflex}
+
+The diagram freezes the explorer at $250°$, deep in [Quadrant III](!#quadrant-iii). The blue arc bends back past the straight-angle line: that long sweep is what makes the angle reflex. Its non-reflex partner is $360° - 250° = 110°$.
 
 Reflex angles matter wherever full rotational position matters — compass bearings, phase angles, rotations in graphics — and the explorer's **Reflex** field in the Related Angles column always reports the partner angle on the opposite side of the rotation.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj19:{
       title:`Quadrant I`,
-      content:`**Quadrant I** spans $0°$ to $90°$: the region where both coordinates are positive. Any angle whose terminal ray lands here has every trigonometric value positive — sine, cosine, tangent, and all three reciprocals.`,
-      before:``,
-      after:`The diagram shades Quadrant I with the explorer frozen at $50°$. In this quadrant an angle **is** its own [reference angle](!#reference-angles): no reduction is needed, which is why first-quadrant values serve as the reference data for the whole circle.
+      content:`**Quadrant I** spans $0°$ to $90°$: the region where both coordinates are positive. Any angle whose terminal ray lands here has every trigonometric value positive — sine, cosine, tangent, and all three reciprocals.
+
+${angleDiagrams.quadrants[1]}
+
+The diagram shades Quadrant I with the explorer frozen at $50°$. In this quadrant an angle **is** its own [reference angle](!#reference-angles): no reduction is needed, which is why first-quadrant values serve as the reference data for the whole circle.
 
 Quadrant I is where the special-triangle values live in their pure positive form: $30°$, $45°$, and $60°$ with their exact sines and cosines. Every other quadrant's values are these same magnitudes with signs adjusted.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj20:{
       title:`Quadrant II`,
-      content:`**Quadrant II** spans $90°$ to $180°$: x negative, y positive. Only sine (and its reciprocal, cosecant) stays positive here; cosine and tangent are negative.`,
-      before:``,
-      after:`The diagram shades Quadrant II with the explorer frozen at $140°$; the orange arc marks its [reference angle](!#reference-angles) $180° - 140° = 40°$. The reduction rule for this quadrant is $\\theta_{ref} = 180° - \\theta$, so for example $\\sin 140° = \\sin 40°$ and $\\cos 140° = -\\cos 40°$.
+      content:`**Quadrant II** spans $90°$ to $180°$: x negative, y positive. Only sine (and its reciprocal, cosecant) stays positive here; cosine and tangent are negative.
+
+${angleDiagrams.quadrants[2]}
+
+The diagram shades Quadrant II with the explorer frozen at $140°$; the orange arc marks its [reference angle](!#reference-angles) $180° - 140° = 40°$. The reduction rule for this quadrant is $\\theta_{ref} = 180° - \\theta$, so for example $\\sin 140° = \\sin 40°$ and $\\cos 140° = -\\cos 40°$.
 
 The [supplementary](!#supplementary-angles) pairs live across Quadrants I and II: $30°/150°$, $45°/135°$, $60°/120°$ — equal sines, opposite cosines. That symmetry is easiest to see by sweeping the explorer from $40°$ to $140°$ and watching the values table.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj21:{
       title:`Quadrant III`,
-      content:`**Quadrant III** spans $180°$ to $270°$: both coordinates negative. Sine and cosine are both negative, which makes their ratio positive — tangent (and cotangent) are the functions that stay positive here.`,
-      before:``,
-      after:`The diagram shades Quadrant III with the explorer frozen at $230°$; the orange arc marks the [reference angle](!#reference-angles) $230° - 180° = 50°$. The rule for this quadrant is $\\theta_{ref} = \\theta - 180°$, giving $\\tan 230° = \\tan 50°$ while $\\sin 230° = -\\sin 50°$ and $\\cos 230° = -\\cos 50°$.
+      content:`**Quadrant III** spans $180°$ to $270°$: both coordinates negative. Sine and cosine are both negative, which makes their ratio positive — tangent (and cotangent) are the functions that stay positive here.
+
+${angleDiagrams.quadrants[3]}
+
+The diagram shades Quadrant III with the explorer frozen at $230°$; the orange arc marks the [reference angle](!#reference-angles) $230° - 180° = 50°$. The rule for this quadrant is $\\theta_{ref} = \\theta - 180°$, giving $\\tan 230° = \\tan 50°$ while $\\sin 230° = -\\sin 50°$ and $\\cos 230° = -\\cos 50°$.
 
 Every Quadrant III angle is the $180°$-shift of a [Quadrant I](!#quadrant-i) angle — which is exactly why tangent repeats with period $180°$ rather than $360°$.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj22:{
       title:`Quadrant IV`,
-      content:`**Quadrant IV** spans $270°$ to $360°$: x positive again, y still negative. Cosine (and secant) are positive; sine and tangent are negative.`,
-      before:``,
-      after:`The diagram shades Quadrant IV with the explorer frozen at $320°$; the orange arc marks the [reference angle](!#reference-angles) $360° - 320° = 40°$. The rule is $\\theta_{ref} = 360° - \\theta$, so $\\cos 320° = \\cos 40°$ while $\\sin 320° = -\\sin 40°$.
+      content:`**Quadrant IV** spans $270°$ to $360°$: x positive again, y still negative. Cosine (and secant) are positive; sine and tangent are negative.
+
+${angleDiagrams.quadrants[4]}
+
+The diagram shades Quadrant IV with the explorer frozen at $320°$; the orange arc marks the [reference angle](!#reference-angles) $360° - 320° = 40°$. The rule is $\\theta_{ref} = 360° - \\theta$, so $\\cos 320° = \\cos 40°$ while $\\sin 320° = -\\sin 40°$.
 
 Quadrant IV angles are the mirror images of [Quadrant I](!#quadrant-i) angles across the x-axis — the same geometry that makes cosine an even function ($\\cos(-\\theta) = \\cos\\theta$) and sine an odd one ($\\sin(-\\theta) = -\\sin\\theta$), since $-40°$ and $320°$ are [coterminal](!#coterminal-angles).`,
+      before:``,
+      after:``,
       link:'',
     },
     obj23:{
       title:`Special Angle: 0°`,
-      content:`$0°$ is the starting position: the terminal ray coincides with the initial ray along the positive x-axis, and no rotation has occurred. It is a **quadrantal angle**, sitting on a boundary rather than inside any quadrant.`,
-      before:``,
-      after:`$$\\sin 0° = 0 \\qquad \\cos 0° = 1 \\qquad \\tan 0° = 0$$
+      content:`$0°$ is the starting position: the terminal ray coincides with the initial ray along the positive x-axis, and no rotation has occurred. It is a **quadrantal angle**, sitting on a boundary rather than inside any quadrant.
+
+${angleDiagrams.specials[0]}
+
+$$\\sin 0° = 0 \\qquad \\cos 0° = 1 \\qquad \\tan 0° = 0$$
 
 On the unit circle the terminal point is $(1, 0)$ — cosine at its maximum, sine at zero. Every multiple of $360°$ is [coterminal](!#coterminal-angles) with $0°$ and shares these values, which is why the explorer treats $360°$ and $0°$ as the same position.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj24:{
       title:`Special Angle: 30°`,
-      content:`$30°$ is the smallest angle of the [30-60-90 triangle](!#special-angles-and-their-exact-values) family and one-twelfth of a full rotation. In radians it is $\\pi/6$.`,
-      before:``,
-      after:`$$\\sin 30° = \\frac{1}{2} \\qquad \\cos 30° = \\frac{\\sqrt{3}}{2} \\qquad \\tan 30° = \\frac{\\sqrt{3}}{3}$$
+      content:`$30°$ is the smallest angle of the [30-60-90 triangle](!#special-angles-and-their-exact-values) family and one-twelfth of a full rotation. In radians it is $\\pi/6$.
+
+${angleDiagrams.specials[30]}
+
+$$\\sin 30° = \\frac{1}{2} \\qquad \\cos 30° = \\frac{\\sqrt{3}}{2} \\qquad \\tan 30° = \\frac{\\sqrt{3}}{3}$$
 
 The value $\\sin 30° = \\frac{1}{2}$ comes straight from the 30-60-90 triangle, where the side opposite $30°$ is exactly half the hypotenuse. $30°$ is the [reference angle](!#reference-angles) for $150°$, $210°$, and $330°$ — their values differ from these only in sign.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj25:{
       title:`Special Angle: 45°`,
-      content:`$45°$ bisects the [right angle](!#right-angles): its terminal ray is the diagonal $y = x$, and its sine and cosine are equal. In radians it is $\\pi/4$.`,
-      before:``,
-      after:`$$\\sin 45° = \\frac{\\sqrt{2}}{2} \\qquad \\cos 45° = \\frac{\\sqrt{2}}{2} \\qquad \\tan 45° = 1$$
+      content:`$45°$ bisects the [right angle](!#right-angles): its terminal ray is the diagonal $y = x$, and its sine and cosine are equal. In radians it is $\\pi/4$.
+
+${angleDiagrams.specials[45]}
+
+$$\\sin 45° = \\frac{\\sqrt{2}}{2} \\qquad \\cos 45° = \\frac{\\sqrt{2}}{2} \\qquad \\tan 45° = 1$$
 
 The values come from the [45-45-90 triangle](!#special-angles-and-their-exact-values) — an isosceles right triangle with legs $1$ and hypotenuse $\\sqrt{2}$. Because the legs are equal, $\\tan 45° = 1$ exactly. $45°$ is the [reference angle](!#reference-angles) for $135°$, $225°$, and $315°$.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj26:{
       title:`Special Angle: 60°`,
-      content:`$60°$ is the larger acute angle of the [30-60-90 triangle](!#special-angles-and-their-exact-values) and the interior angle of the equilateral triangle. In radians it is $\\pi/3$.`,
-      before:``,
-      after:`$$\\sin 60° = \\frac{\\sqrt{3}}{2} \\qquad \\cos 60° = \\frac{1}{2} \\qquad \\tan 60° = \\sqrt{3}$$
+      content:`$60°$ is the larger acute angle of the [30-60-90 triangle](!#special-angles-and-their-exact-values) and the interior angle of the equilateral triangle. In radians it is $\\pi/3$.
+
+${angleDiagrams.specials[60]}
+
+$$\\sin 60° = \\frac{\\sqrt{3}}{2} \\qquad \\cos 60° = \\frac{1}{2} \\qquad \\tan 60° = \\sqrt{3}$$
 
 Note the swap with $30°$: sine and cosine trade values, because $30°$ and $60°$ are [complementary](!#complementary-angles) and $\\sin\\theta = \\cos(90° - \\theta)$. $60°$ is the [reference angle](!#reference-angles) for $120°$, $240°$, and $300°$.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj27:{
       title:`Special Angle: 90°`,
-      content:`$90°$ is the quarter turn: the terminal ray points straight up the positive y-axis. It is a **quadrantal angle** on the boundary between [Quadrant I](!#quadrant-i) and [Quadrant II](!#quadrant-ii), and equals $\\pi/2$ radians.`,
-      before:``,
-      after:`$$\\sin 90° = 1 \\qquad \\cos 90° = 0 \\qquad \\tan 90° \\text{ undefined}$$
+      content:`$90°$ is the quarter turn: the terminal ray points straight up the positive y-axis. It is a **quadrantal angle** on the boundary between [Quadrant I](!#quadrant-i) and [Quadrant II](!#quadrant-ii), and equals $\\pi/2$ radians.
+
+${angleDiagrams.specials[90]}
+
+$$\\sin 90° = 1 \\qquad \\cos 90° = 0 \\qquad \\tan 90° \\text{ undefined}$$
 
 The terminal point on the unit circle is $(0, 1)$: sine peaks at its maximum while cosine crosses zero, and the tangent ratio divides by zero — the explorer's table shows $\\infty$. Secant is likewise undefined here, while cotangent equals $0$.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj28:{
       title:`Special Angle: 120°`,
-      content:`$120°$ lies in [Quadrant II](!#quadrant-ii), $30°$ past the vertical. It is the [supplement](!#supplementary-angles) of $60°$ and equals $2\\pi/3$ radians.`,
-      before:``,
-      after:`$$\\sin 120° = \\frac{\\sqrt{3}}{2} \\qquad \\cos 120° = -\\frac{1}{2} \\qquad \\tan 120° = -\\sqrt{3}$$
+      content:`$120°$ lies in [Quadrant II](!#quadrant-ii), $30°$ past the vertical. It is the [supplement](!#supplementary-angles) of $60°$ and equals $2\\pi/3$ radians.
+
+${angleDiagrams.specials[120]}
+
+$$\\sin 120° = \\frac{\\sqrt{3}}{2} \\qquad \\cos 120° = -\\frac{1}{2} \\qquad \\tan 120° = -\\sqrt{3}$$
 
 Its [reference angle](!#reference-angles) is $180° - 120° = 60°$, so the magnitudes are exactly the $60°$ values with Quadrant II signs: sine positive, cosine and tangent negative. $120°$ is also the interior angle of a regular hexagon.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj29:{
       title:`Special Angle: 135°`,
-      content:`$135°$ is the [Quadrant II](!#quadrant-ii) diagonal — the [supplement](!#supplementary-angles) of $45°$, lying along the line $y = -x$. In radians it is $3\\pi/4$.`,
-      before:``,
-      after:`$$\\sin 135° = \\frac{\\sqrt{2}}{2} \\qquad \\cos 135° = -\\frac{\\sqrt{2}}{2} \\qquad \\tan 135° = -1$$
+      content:`$135°$ is the [Quadrant II](!#quadrant-ii) diagonal — the [supplement](!#supplementary-angles) of $45°$, lying along the line $y = -x$. In radians it is $3\\pi/4$.
+
+${angleDiagrams.specials[135]}
+
+$$\\sin 135° = \\frac{\\sqrt{2}}{2} \\qquad \\cos 135° = -\\frac{\\sqrt{2}}{2} \\qquad \\tan 135° = -1$$
 
 With [reference angle](!#reference-angles) $45°$, its sine and cosine share the same magnitude $\\frac{\\sqrt{2}}{2}$ and differ only in sign, forcing $\\tan 135° = -1$ exactly.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj30:{
       title:`Special Angle: 150°`,
-      content:`$150°$ sits $30°$ short of the [straight angle](!#straight-angles), in [Quadrant II](!#quadrant-ii). It is the [supplement](!#supplementary-angles) of $30°$ and equals $5\\pi/6$ radians.`,
-      before:``,
-      after:`$$\\sin 150° = \\frac{1}{2} \\qquad \\cos 150° = -\\frac{\\sqrt{3}}{2} \\qquad \\tan 150° = -\\frac{\\sqrt{3}}{3}$$
+      content:`$150°$ sits $30°$ short of the [straight angle](!#straight-angles), in [Quadrant II](!#quadrant-ii). It is the [supplement](!#supplementary-angles) of $30°$ and equals $5\\pi/6$ radians.
+
+${angleDiagrams.specials[150]}
+
+$$\\sin 150° = \\frac{1}{2} \\qquad \\cos 150° = -\\frac{\\sqrt{3}}{2} \\qquad \\tan 150° = -\\frac{\\sqrt{3}}{3}$$
 
 Its [reference angle](!#reference-angles) is $30°$, so $\\sin 150° = \\sin 30° = \\frac{1}{2}$ — the classic illustration that supplementary angles have equal sines while their cosines are opposite.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj31:{
       title:`Special Angle: 180°`,
-      content:`$180°$ is the half turn: the terminal ray points along the negative x-axis, forming a straight line with the initial ray. A **quadrantal angle**, it equals $\\pi$ radians.`,
-      before:``,
-      after:`$$\\sin 180° = 0 \\qquad \\cos 180° = -1 \\qquad \\tan 180° = 0$$
+      content:`$180°$ is the half turn: the terminal ray points along the negative x-axis, forming a straight line with the initial ray. A **quadrantal angle**, it equals $\\pi$ radians.
+
+${angleDiagrams.specials[180]}
+
+$$\\sin 180° = 0 \\qquad \\cos 180° = -1 \\qquad \\tan 180° = 0$$
 
 The terminal point is $(-1, 0)$: cosine reaches its minimum while sine returns to zero. $180°$ separates [Quadrant II](!#quadrant-ii) and [Quadrant III](!#quadrant-iii) and is the pivot of the [supplementary-angle relationship](!#supplementary-angles) $\\theta \\mapsto 180° - \\theta$.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj32:{
       title:`Special Angle: 210°`,
-      content:`$210°$ lies $30°$ past the [straight angle](!#straight-angles), in [Quadrant III](!#quadrant-iii). It equals $7\\pi/6$ radians.`,
-      before:``,
-      after:`$$\\sin 210° = -\\frac{1}{2} \\qquad \\cos 210° = -\\frac{\\sqrt{3}}{2} \\qquad \\tan 210° = \\frac{\\sqrt{3}}{3}$$
+      content:`$210°$ lies $30°$ past the [straight angle](!#straight-angles), in [Quadrant III](!#quadrant-iii). It equals $7\\pi/6$ radians.
+
+${angleDiagrams.specials[210]}
+
+$$\\sin 210° = -\\frac{1}{2} \\qquad \\cos 210° = -\\frac{\\sqrt{3}}{2} \\qquad \\tan 210° = \\frac{\\sqrt{3}}{3}$$
 
 Its [reference angle](!#reference-angles) is $210° - 180° = 30°$. Both sine and cosine go negative in Quadrant III, so their ratio — tangent — turns positive again, matching $\\tan 30°$ exactly.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj33:{
       title:`Special Angle: 225°`,
-      content:`$225°$ is the [Quadrant III](!#quadrant-iii) diagonal, pointing opposite to $45°$ along the extension of the line $y = x$. In radians it is $5\\pi/4$.`,
-      before:``,
-      after:`$$\\sin 225° = -\\frac{\\sqrt{2}}{2} \\qquad \\cos 225° = -\\frac{\\sqrt{2}}{2} \\qquad \\tan 225° = 1$$
+      content:`$225°$ is the [Quadrant III](!#quadrant-iii) diagonal, pointing opposite to $45°$ along the extension of the line $y = x$. In radians it is $5\\pi/4$.
+
+${angleDiagrams.specials[225]}
+
+$$\\sin 225° = -\\frac{\\sqrt{2}}{2} \\qquad \\cos 225° = -\\frac{\\sqrt{2}}{2} \\qquad \\tan 225° = 1$$
 
 With [reference angle](!#reference-angles) $45°$ and both coordinates negative, sine and cosine are equal — so tangent equals $1$, exactly as at $45°$. Tangent's period of $180°$ is visible here: $225° = 45° + 180°$.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj34:{
       title:`Special Angle: 240°`,
-      content:`$240°$ lies $60°$ past the [straight angle](!#straight-angles) in [Quadrant III](!#quadrant-iii), diametrically opposite $60°$. It equals $4\\pi/3$ radians.`,
-      before:``,
-      after:`$$\\sin 240° = -\\frac{\\sqrt{3}}{2} \\qquad \\cos 240° = -\\frac{1}{2} \\qquad \\tan 240° = \\sqrt{3}$$
+      content:`$240°$ lies $60°$ past the [straight angle](!#straight-angles) in [Quadrant III](!#quadrant-iii), diametrically opposite $60°$. It equals $4\\pi/3$ radians.
+
+${angleDiagrams.specials[240]}
+
+$$\\sin 240° = -\\frac{\\sqrt{3}}{2} \\qquad \\cos 240° = -\\frac{1}{2} \\qquad \\tan 240° = \\sqrt{3}$$
 
 Its [reference angle](!#reference-angles) is $60°$; the 30-60-90 magnitudes carry over with both coordinate signs flipped, leaving the tangent at a positive $\\sqrt{3}$.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj35:{
       title:`Special Angle: 270°`,
-      content:`$270°$ is the three-quarter turn: the terminal ray points straight down the negative y-axis. A **quadrantal angle** between [Quadrant III](!#quadrant-iii) and [Quadrant IV](!#quadrant-iv), it equals $3\\pi/2$ radians.`,
-      before:``,
-      after:`$$\\sin 270° = -1 \\qquad \\cos 270° = 0 \\qquad \\tan 270° \\text{ undefined}$$
+      content:`$270°$ is the three-quarter turn: the terminal ray points straight down the negative y-axis. A **quadrantal angle** between [Quadrant III](!#quadrant-iii) and [Quadrant IV](!#quadrant-iv), it equals $3\\pi/2$ radians.
+
+${angleDiagrams.specials[270]}
+
+$$\\sin 270° = -1 \\qquad \\cos 270° = 0 \\qquad \\tan 270° \\text{ undefined}$$
 
 The terminal point is $(0, -1)$: sine bottoms out at its minimum $-1$ while cosine crosses zero again, making tangent undefined — the second and last such point in a full rotation.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj36:{
       title:`Special Angle: 300°`,
-      content:`$300°$ lies in [Quadrant IV](!#quadrant-iv), $60°$ short of a full turn. It equals $5\\pi/3$ radians and is [coterminal](!#coterminal-angles) with $-60°$.`,
-      before:``,
-      after:`$$\\sin 300° = -\\frac{\\sqrt{3}}{2} \\qquad \\cos 300° = \\frac{1}{2} \\qquad \\tan 300° = -\\sqrt{3}$$
+      content:`$300°$ lies in [Quadrant IV](!#quadrant-iv), $60°$ short of a full turn. It equals $5\\pi/3$ radians and is [coterminal](!#coterminal-angles) with $-60°$.
+
+${angleDiagrams.specials[300]}
+
+$$\\sin 300° = -\\frac{\\sqrt{3}}{2} \\qquad \\cos 300° = \\frac{1}{2} \\qquad \\tan 300° = -\\sqrt{3}$$
 
 Its [reference angle](!#reference-angles) is $360° - 300° = 60°$. Cosine turns positive again in Quadrant IV while sine stays negative — the mirror image of $60°$ across the x-axis.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj37:{
       title:`Special Angle: 315°`,
-      content:`$315°$ is the [Quadrant IV](!#quadrant-iv) diagonal, $45°$ short of a full turn and [coterminal](!#coterminal-angles) with $-45°$. In radians it is $7\\pi/4$.`,
-      before:``,
-      after:`$$\\sin 315° = -\\frac{\\sqrt{2}}{2} \\qquad \\cos 315° = \\frac{\\sqrt{2}}{2} \\qquad \\tan 315° = -1$$
+      content:`$315°$ is the [Quadrant IV](!#quadrant-iv) diagonal, $45°$ short of a full turn and [coterminal](!#coterminal-angles) with $-45°$. In radians it is $7\\pi/4$.
+
+${angleDiagrams.specials[315]}
+
+$$\\sin 315° = -\\frac{\\sqrt{2}}{2} \\qquad \\cos 315° = \\frac{\\sqrt{2}}{2} \\qquad \\tan 315° = -1$$
 
 With [reference angle](!#reference-angles) $45°$, sine and cosine again share the magnitude $\\frac{\\sqrt{2}}{2}$ but now with opposite signs, giving $\\tan 315° = -1$.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj38:{
       title:`Special Angle: 330°`,
-      content:`$330°$ sits $30°$ short of completing the rotation, in [Quadrant IV](!#quadrant-iv), [coterminal](!#coterminal-angles) with $-30°$. It equals $11\\pi/6$ radians.`,
-      before:``,
-      after:`$$\\sin 330° = -\\frac{1}{2} \\qquad \\cos 330° = \\frac{\\sqrt{3}}{2} \\qquad \\tan 330° = -\\frac{\\sqrt{3}}{3}$$
+      content:`$330°$ sits $30°$ short of completing the rotation, in [Quadrant IV](!#quadrant-iv), [coterminal](!#coterminal-angles) with $-30°$. It equals $11\\pi/6$ radians.
+
+${angleDiagrams.specials[330]}
+
+$$\\sin 330° = -\\frac{1}{2} \\qquad \\cos 330° = \\frac{\\sqrt{3}}{2} \\qquad \\tan 330° = -\\frac{\\sqrt{3}}{3}$$
 
 Its [reference angle](!#reference-angles) is $30°$: the familiar $\\frac{1}{2}$ and $\\frac{\\sqrt{3}}{2}$ reappear one last time before the rotation closes, with sine negative below the x-axis.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj39:{
       title:`Special Angle: 360°`,
-      content:`$360°$ completes the full rotation: the terminal ray returns to the positive x-axis, [coterminal](!#coterminal-angles) with $0°$. In radians it is $2\\pi$.`,
-      before:``,
-      after:`$$\\sin 360° = 0 \\qquad \\cos 360° = 1 \\qquad \\tan 360° = 0$$
+      content:`$360°$ completes the full rotation: the terminal ray returns to the positive x-axis, [coterminal](!#coterminal-angles) with $0°$. In radians it is $2\\pi$.
+
+${angleDiagrams.specials[360]}
+
+$$\\sin 360° = 0 \\qquad \\cos 360° = 1 \\qquad \\tan 360° = 0$$
 
 Geometrically the position is identical to $0°$ — same terminal point $(1, 0)$, same values — but the full blue circle records that an entire turn has been swept. Every angle $\\theta$ shares its values with $\\theta + 360°n$: this is the **coterminal** relationship, and it is why the [trigonometric functions](!#the-six-trigonometric-functions) are periodic.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj40:{
       title:`Complementary Angles`,
-      content:`Two angles are **complementary** when their measures sum to $90°$. Each is the other's complement: the complement of $\\theta$ is $90° - \\theta$, defined for angles between $0°$ and $90°$.`,
-      before:``,
-      after:`The diagram freezes the explorer at $35°$ with the **Show Complementary Angle** overlay on: the green dashed arc measures the remaining $55°$ up to the vertical axis, and $35° + 55° = 90°$.
+      content:`Two angles are **complementary** when their measures sum to $90°$. Each is the other's complement: the complement of $\\theta$ is $90° - \\theta$, defined for angles between $0°$ and $90°$.
+
+${angleDiagrams.concepts.complementary}
+
+The diagram freezes the explorer at $35°$ with the **Show Complementary Angle** overlay on: the green dashed arc measures the remaining $55°$ up to the vertical axis, and $35° + 55° = 90°$.
 
 Complements drive the **cofunction identities**: $\\sin\\theta = \\cos(90° - \\theta)$ and $\\tan\\theta = \\cot(90° - \\theta)$ — "cosine" literally means *sine of the complement*. That is why sine and cosine swap values between $30°$ and $60°$, and coincide at $45°$, which is its own complement. Together with [supplementary](!#supplementary-angles) and [reference angles](!#reference-angles), complements make up the panel's [related angles](!#complementary-supplementary-and-reference-angles) column.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj41:{
       title:`Supplementary Angles`,
-      content:`Two angles are **supplementary** when their measures sum to $180°$ — together they form a [straight angle](!#straight-angles). The supplement of $\\theta$ is $180° - \\theta$, defined for angles between $0°$ and $180°$.`,
-      before:``,
-      after:`The diagram freezes the explorer at $110°$ with the **Show Supplementary Angle** overlay on: the red dashed arc measures the $70°$ remaining to the negative x-axis, and $110° + 70° = 180°$.
+      content:`Two angles are **supplementary** when their measures sum to $180°$ — together they form a [straight angle](!#straight-angles). The supplement of $\\theta$ is $180° - \\theta$, defined for angles between $0°$ and $180°$.
+
+${angleDiagrams.concepts.supplementary}
+
+The diagram freezes the explorer at $110°$ with the **Show Supplementary Angle** overlay on: the red dashed arc measures the $70°$ remaining to the negative x-axis, and $110° + 70° = 180°$.
 
 Supplementary pairs have equal sines and opposite cosines: $\\sin(180° - \\theta) = \\sin\\theta$ and $\\cos(180° - \\theta) = -\\cos\\theta$. Linear pairs formed by intersecting lines are always supplementary, and co-interior angles between parallel lines sum to $180°$ for the same reason.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj42:{
       title:`Reference Angles`,
-      content:`The [reference angle](!/trigonometry/definitions#reference_angle) of $\\theta$ is the acute angle between its terminal ray and the x-axis — always between $0°$ and $90°$, whichever quadrant $\\theta$ lies in.`,
-      before:``,
-      after:`The diagram freezes the explorer at $140°$: the orange arc against the negative x-axis is the reference angle $180° - 140° = 40°$. The rule depends on the quadrant:
+      content:`The [reference angle](!/trigonometry/definitions#reference_angle) of $\\theta$ is the acute angle between its terminal ray and the x-axis — always between $0°$ and $90°$, whichever quadrant $\\theta$ lies in.
+
+${angleDiagrams.concepts.reference}
+
+The diagram freezes the explorer at $140°$: the orange arc against the negative x-axis is the reference angle $180° - 140° = 40°$. The rule depends on the quadrant:
 
 $$\\theta_{ref} = \\begin{cases} \\theta & \\text{Quadrant I} \\\\ 180° - \\theta & \\text{Quadrant II} \\\\ \\theta - 180° & \\text{Quadrant III} \\\\ 360° - \\theta & \\text{Quadrant IV} \\end{cases}$$
 
 Reference angles reduce every trigonometric evaluation to a first-quadrant one: take the value at $\\theta_{ref}$, then apply the [quadrant's sign](!#quadrants-and-trigonometric-signs). This single idea is what makes the sixteen [special positions](!#special-angles-and-their-exact-values) around the circle follow from just three triangles.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj43:{
       title:`Coterminal Angles`,
-      content:`[Coterminal angles](!/trigonometry/definitions#coterminal_angles) share the same terminal ray but differ by whole rotations: $\\theta$ and $\\theta + 360°n$ land in exactly the same position for every integer $n$.`,
-      before:``,
-      after:`The diagram shows $45°$ (solid blue arc) and $-315°$ (dashed purple arc): one short counterclockwise sweep, one long clockwise sweep, the same terminal ray. The explorer's [Coterminal column](!#working-with-related-and-coterminal-angles) always lists $\\theta + 360°$ and $\\theta - 360°$, plus the general form $\\theta + 360°n$.
+      content:`[Coterminal angles](!/trigonometry/definitions#coterminal_angles) share the same terminal ray but differ by whole rotations: $\\theta$ and $\\theta + 360°n$ land in exactly the same position for every integer $n$.
+
+${angleDiagrams.concepts.coterminal}
+
+The diagram shows $45°$ (solid blue arc) and $-315°$ (dashed purple arc): one short counterclockwise sweep, one long clockwise sweep, the same terminal ray. The explorer's [Coterminal column](!#working-with-related-and-coterminal-angles) always lists $\\theta + 360°$ and $\\theta - 360°$, plus the general form $\\theta + 360°n$.
 
 Because trigonometric functions see only the position on the circle, coterminal angles have **identical** values for all six functions: $\\sin 405° = \\sin 45°$ and $\\cos(-315°) = \\cos 45°$. Reducing an angle to its coterminal representative between $0°$ and $360°$ is the standard first step of every evaluation.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj44:{
       title:`The Six Trigonometric Functions`,
-      content:`On the unit circle, the terminal point of angle $\\theta$ has coordinates $(\\cos\\theta, \\sin\\theta)$ — cosine **is** the x-coordinate and sine **is** the y-coordinate. Tangent is their ratio $\\frac{\\sin\\theta}{\\cos\\theta}$, the slope of the terminal ray.`,
-      before:``,
-      after:`The diagram freezes the explorer at $50°$: the green horizontal segment is $\\cos 50°$, the red dashed vertical segment is $\\sin 50°$, and the marked point is where the terminal ray crosses the unit circle.
+      content:`On the unit circle, the terminal point of angle $\\theta$ has coordinates $(\\cos\\theta, \\sin\\theta)$ — cosine **is** the x-coordinate and sine **is** the y-coordinate. Tangent is their ratio $\\frac{\\sin\\theta}{\\cos\\theta}$, the slope of the terminal ray.
+
+${angleDiagrams.concepts.trigonometric}
+
+The diagram freezes the explorer at $50°$: the green horizontal segment is $\\cos 50°$, the red dashed vertical segment is $\\sin 50°$, and the marked point is where the terminal ray crosses the unit circle.
 
 The remaining three functions are reciprocals: $\\csc\\theta = \\frac{1}{\\sin\\theta}$, $\\sec\\theta = \\frac{1}{\\cos\\theta}$, $\\cot\\theta = \\frac{1}{\\tan\\theta}$. Each is undefined wherever its partner is zero — that is why the [explorer's table](!#reading-the-trigonometric-values-table) shows $\\infty$ for $\\tan 90°$. Together the [six functions](!/trigonometry/functions) turn every question about angles into a question about coordinates.`,
+      before:``,
+      after:``,
       link:'',
     },
 
@@ -630,72 +753,6 @@ The remaining three functions are reciprocals: $\\csc\\theta = \\frac{1}{\\sin\\
 
 
 
-
-  // Framed illustration units for the per-state sections (Line 1 v5): frozen
-  // explorer scene + attached picture-reading panel, one frame, no link.
-  const SPECIALS = {
-    0:   ['0',                '1',                '0'],
-    30:  ['1/2',              '&#8730;3/2',       '1/&#8730;3'],
-    45:  ['&#8730;2/2',       '&#8730;2/2',       '1'],
-    60:  ['&#8730;3/2',       '1/2',              '&#8730;3'],
-    90:  ['1',                '0',                'undefined'],
-    120: ['&#8730;3/2',       '&#8722;1/2',       '&#8722;&#8730;3'],
-    135: ['&#8730;2/2',       '&#8722;&#8730;2/2','&#8722;1'],
-    150: ['1/2',              '&#8722;&#8730;3/2','&#8722;1/&#8730;3'],
-    180: ['0',                '&#8722;1',         '0'],
-    210: ['&#8722;1/2',       '&#8722;&#8730;3/2','1/&#8730;3'],
-    225: ['&#8722;&#8730;2/2','&#8722;&#8730;2/2','1'],
-    240: ['&#8722;&#8730;3/2','&#8722;1/2',       '&#8730;3'],
-    270: ['&#8722;1',         '0',                'undefined'],
-    300: ['&#8722;&#8730;3/2','1/2',              '&#8722;&#8730;3'],
-    315: ['&#8722;&#8730;2/2','&#8730;2/2',       '&#8722;1'],
-    330: ['&#8722;1/2',       '&#8730;3/2',       '&#8722;1/&#8730;3'],
-    360: ['0',                '1',                '0'],
-  };
-  const QUAD_TEXT = {
-    1: 'The shaded quarter holds angles between 0&#176; and 90&#176;; here terminal ray and reference angle coincide.',
-    2: 'Angles between 90&#176; and 180&#176;; the marked reference angle leans on the negative x-axis.',
-    3: 'Angles between 180&#176; and 270&#176;; the reference angle is measured up from the negative x-axis.',
-    4: 'Angles between 270&#176; and 360&#176;; the reference angle closes the gap to the positive x-axis.',
-  };
-  const stateUnits = {
-    acute: demoUnitFrame({ svg: angleDiagrams.types.acute, caption: 'Acute angle, frozen at 50&#176;',
-      text: 'The terminal ray inside the first quadrant, its arc stopping well short of the right-angle mark.' }),
-    right: demoUnitFrame({ svg: angleDiagrams.types.right, caption: 'Right angle, frozen at 90&#176;',
-      text: 'The terminal ray stands exactly perpendicular to the initial side &#8212; one quarter of a full turn.' }),
-    obtuse: demoUnitFrame({ svg: angleDiagrams.types.obtuse, caption: 'Obtuse angle, frozen',
-      text: 'A terminal ray leaning into the second quadrant: more than 90&#176;, less than 180&#176;.' }),
-    straight: demoUnitFrame({ svg: angleDiagrams.types.straight, caption: 'Straight angle, frozen at 180&#176;',
-      text: 'The two rays form one straight line &#8212; half of a complete rotation.' }),
-    reflex: demoUnitFrame({ svg: angleDiagrams.types.reflex, caption: 'Reflex angle, frozen',
-      text: 'Beyond 180&#176;: the arc sweeps the long way around toward a full turn.' }),
-    complementary: demoUnitFrame({ svg: angleDiagrams.concepts.complementary, caption: 'Complementary pair, frozen',
-      text: 'A 35&#176; angle with its green 55&#176; complement stacked on top &#8212; together exactly one right angle.' }),
-    supplementary: demoUnitFrame({ svg: angleDiagrams.concepts.supplementary, caption: 'Supplementary pair, frozen',
-      text: 'A 110&#176; angle and its red 70&#176; supplement completing the straight line.' }),
-    reference: demoUnitFrame({ svg: angleDiagrams.concepts.reference, caption: 'Reference angle, frozen at 140&#176;',
-      text: 'The acute gap between the terminal ray and the negative x-axis &#8212; 40&#176; &#8212; is the reference angle.' }),
-    coterminal: demoUnitFrame({ svg: angleDiagrams.concepts.coterminal, caption: 'Coterminal pair, frozen',
-      text: 'Two opposite sweeps, one terminal ray: 45&#176; and &#8722;315&#176; are the same position reached two ways.' }),
-    trigonometric: demoUnitFrame({ svg: angleDiagrams.concepts.trigonometric, caption: 'The six functions, frozen',
-      text: 'The terminal point&#8217;s coordinates ARE the functions: x is cosine, y is sine, and their ratio is tangent &#8212; the other three are reciprocals.' }),
-  };
-  for (let q = 1; q <= 4; q++) {
-    stateUnits['q' + q] = demoUnitFrame({
-      svg: angleDiagrams.quadrants[q],
-      caption: 'Quadrant ' + ['', 'I', 'II', 'III', 'IV'][q] + ', frozen',
-      text: QUAD_TEXT[q],
-    });
-  }
-  for (const deg of Object.keys(SPECIALS)) {
-    const [s, c, t] = SPECIALS[deg];
-    stateUnits['s' + deg] = demoUnitFrame({
-      svg: angleDiagrams.specials[deg],
-      caption: deg + '&#176;, frozen',
-      text: 'Read from the terminal point: sin = ' + s + ', cos = ' + c + ', tan = ' + t +
-        ' &#8212; the y-coordinate, the x-coordinate, and their ratio.',
-    });
-  }
 
   const explanations = {
     angleTypes: {
@@ -848,7 +905,6 @@ The remaining three functions are reciprocals: $\\csc\\theta = \\frac{1}{\\sin\\
          faqQuestions,
          schemas,
          explanations,
-         stateUnits,
           seoData: {
         title: "Angle Explorer: Visualize Trig Angles | Learn Math Class",
         description: "Visualize any angle interactively in degrees or radians. Explore complementary, supplementary, coterminal, reference angles and quadrants with live trig values.",
@@ -863,7 +919,7 @@ The remaining three functions are reciprocals: $\\csc\\theta = \\frac{1}{\\sin\\
     }
    }
 
-export default function AngleExplorerPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function AngleExplorerPage({seoData, sectionsContent, introContent, faqQuestions, schemas, explanations}) {
 
 
   const genericSections=[
@@ -977,8 +1033,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
-          <div key={'u-acute'} dangerouslySetInnerHTML={{ __html: stateUnits['acute'] }} />,
-          sectionsContent.obj14.after,
         ]
     },
     {
@@ -987,8 +1041,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj15.link,
         content:[
           sectionsContent.obj15.content,
-          <div key={'u-right'} dangerouslySetInnerHTML={{ __html: stateUnits['right'] }} />,
-          sectionsContent.obj15.after,
         ]
     },
     {
@@ -997,8 +1049,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
-          <div key={'u-obtuse'} dangerouslySetInnerHTML={{ __html: stateUnits['obtuse'] }} />,
-          sectionsContent.obj16.after,
         ]
     },
     {
@@ -1007,8 +1057,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj17.link,
         content:[
           sectionsContent.obj17.content,
-          <div key={'u-straight'} dangerouslySetInnerHTML={{ __html: stateUnits['straight'] }} />,
-          sectionsContent.obj17.after,
         ]
     },
     {
@@ -1017,8 +1065,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj18.link,
         content:[
           sectionsContent.obj18.content,
-          <div key={'u-reflex'} dangerouslySetInnerHTML={{ __html: stateUnits['reflex'] }} />,
-          sectionsContent.obj18.after,
         ]
     },
     {
@@ -1027,8 +1073,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj19.link,
         content:[
           sectionsContent.obj19.content,
-          <div key={'u-q1'} dangerouslySetInnerHTML={{ __html: stateUnits['q1'] }} />,
-          sectionsContent.obj19.after,
         ]
     },
     {
@@ -1037,8 +1081,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj20.link,
         content:[
           sectionsContent.obj20.content,
-          <div key={'u-q2'} dangerouslySetInnerHTML={{ __html: stateUnits['q2'] }} />,
-          sectionsContent.obj20.after,
         ]
     },
     {
@@ -1047,8 +1089,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj21.link,
         content:[
           sectionsContent.obj21.content,
-          <div key={'u-q3'} dangerouslySetInnerHTML={{ __html: stateUnits['q3'] }} />,
-          sectionsContent.obj21.after,
         ]
     },
     {
@@ -1057,8 +1097,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj22.link,
         content:[
           sectionsContent.obj22.content,
-          <div key={'u-q4'} dangerouslySetInnerHTML={{ __html: stateUnits['q4'] }} />,
-          sectionsContent.obj22.after,
         ]
     },
     {
@@ -1067,8 +1105,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj23.link,
         content:[
           sectionsContent.obj23.content,
-          <div key={'u-s0'} dangerouslySetInnerHTML={{ __html: stateUnits['s0'] }} />,
-          sectionsContent.obj23.after,
         ]
     },
     {
@@ -1077,8 +1113,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj24.link,
         content:[
           sectionsContent.obj24.content,
-          <div key={'u-s30'} dangerouslySetInnerHTML={{ __html: stateUnits['s30'] }} />,
-          sectionsContent.obj24.after,
         ]
     },
     {
@@ -1087,8 +1121,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj25.link,
         content:[
           sectionsContent.obj25.content,
-          <div key={'u-s45'} dangerouslySetInnerHTML={{ __html: stateUnits['s45'] }} />,
-          sectionsContent.obj25.after,
         ]
     },
     {
@@ -1097,8 +1129,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj26.link,
         content:[
           sectionsContent.obj26.content,
-          <div key={'u-s60'} dangerouslySetInnerHTML={{ __html: stateUnits['s60'] }} />,
-          sectionsContent.obj26.after,
         ]
     },
     {
@@ -1107,8 +1137,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj27.link,
         content:[
           sectionsContent.obj27.content,
-          <div key={'u-s90'} dangerouslySetInnerHTML={{ __html: stateUnits['s90'] }} />,
-          sectionsContent.obj27.after,
         ]
     },
     {
@@ -1117,8 +1145,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj28.link,
         content:[
           sectionsContent.obj28.content,
-          <div key={'u-s120'} dangerouslySetInnerHTML={{ __html: stateUnits['s120'] }} />,
-          sectionsContent.obj28.after,
         ]
     },
     {
@@ -1127,8 +1153,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj29.link,
         content:[
           sectionsContent.obj29.content,
-          <div key={'u-s135'} dangerouslySetInnerHTML={{ __html: stateUnits['s135'] }} />,
-          sectionsContent.obj29.after,
         ]
     },
     {
@@ -1137,8 +1161,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj30.link,
         content:[
           sectionsContent.obj30.content,
-          <div key={'u-s150'} dangerouslySetInnerHTML={{ __html: stateUnits['s150'] }} />,
-          sectionsContent.obj30.after,
         ]
     },
     {
@@ -1147,8 +1169,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj31.link,
         content:[
           sectionsContent.obj31.content,
-          <div key={'u-s180'} dangerouslySetInnerHTML={{ __html: stateUnits['s180'] }} />,
-          sectionsContent.obj31.after,
         ]
     },
     {
@@ -1157,8 +1177,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj32.link,
         content:[
           sectionsContent.obj32.content,
-          <div key={'u-s210'} dangerouslySetInnerHTML={{ __html: stateUnits['s210'] }} />,
-          sectionsContent.obj32.after,
         ]
     },
     {
@@ -1167,8 +1185,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj33.link,
         content:[
           sectionsContent.obj33.content,
-          <div key={'u-s225'} dangerouslySetInnerHTML={{ __html: stateUnits['s225'] }} />,
-          sectionsContent.obj33.after,
         ]
     },
     {
@@ -1177,8 +1193,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj34.link,
         content:[
           sectionsContent.obj34.content,
-          <div key={'u-s240'} dangerouslySetInnerHTML={{ __html: stateUnits['s240'] }} />,
-          sectionsContent.obj34.after,
         ]
     },
     {
@@ -1187,8 +1201,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj35.link,
         content:[
           sectionsContent.obj35.content,
-          <div key={'u-s270'} dangerouslySetInnerHTML={{ __html: stateUnits['s270'] }} />,
-          sectionsContent.obj35.after,
         ]
     },
     {
@@ -1197,8 +1209,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj36.link,
         content:[
           sectionsContent.obj36.content,
-          <div key={'u-s300'} dangerouslySetInnerHTML={{ __html: stateUnits['s300'] }} />,
-          sectionsContent.obj36.after,
         ]
     },
     {
@@ -1207,8 +1217,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj37.link,
         content:[
           sectionsContent.obj37.content,
-          <div key={'u-s315'} dangerouslySetInnerHTML={{ __html: stateUnits['s315'] }} />,
-          sectionsContent.obj37.after,
         ]
     },
     {
@@ -1217,8 +1225,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj38.link,
         content:[
           sectionsContent.obj38.content,
-          <div key={'u-s330'} dangerouslySetInnerHTML={{ __html: stateUnits['s330'] }} />,
-          sectionsContent.obj38.after,
         ]
     },
     {
@@ -1227,8 +1233,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj39.link,
         content:[
           sectionsContent.obj39.content,
-          <div key={'u-s360'} dangerouslySetInnerHTML={{ __html: stateUnits['s360'] }} />,
-          sectionsContent.obj39.after,
         ]
     },
     {
@@ -1237,8 +1241,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj40.link,
         content:[
           sectionsContent.obj40.content,
-          <div key={'u-complementary'} dangerouslySetInnerHTML={{ __html: stateUnits['complementary'] }} />,
-          sectionsContent.obj40.after,
         ]
     },
     {
@@ -1247,8 +1249,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj41.link,
         content:[
           sectionsContent.obj41.content,
-          <div key={'u-supplementary'} dangerouslySetInnerHTML={{ __html: stateUnits['supplementary'] }} />,
-          sectionsContent.obj41.after,
         ]
     },
     {
@@ -1257,8 +1257,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj42.link,
         content:[
           sectionsContent.obj42.content,
-          <div key={'u-reference'} dangerouslySetInnerHTML={{ __html: stateUnits['reference'] }} />,
-          sectionsContent.obj42.after,
         ]
     },
     {
@@ -1267,8 +1265,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj43.link,
         content:[
           sectionsContent.obj43.content,
-          <div key={'u-coterminal'} dangerouslySetInnerHTML={{ __html: stateUnits['coterminal'] }} />,
-          sectionsContent.obj43.after,
         ]
     },
     {
@@ -1277,8 +1273,6 @@ export default function AngleExplorerPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj44.link,
         content:[
           sectionsContent.obj44.content,
-          <div key={'u-trigonometric'} dangerouslySetInnerHTML={{ __html: stateUnits['trigonometric'] }} />,
-          sectionsContent.obj44.after,
         ]
     },
 
